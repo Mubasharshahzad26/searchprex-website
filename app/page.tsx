@@ -1,0 +1,98 @@
+import type { Metadata } from "next";
+import Nav from "@/components/Nav";
+import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import Specialists from "@/components/Specialists";
+import Services from "@/components/Services";
+import Results from "@/components/Results";
+import Process from "@/components/Process";
+import CEOMessage from "@/components/CEOMessage";
+import Pricing from "@/components/Pricing";
+import NicheSEOPro from "@/components/NicheSEOPro";
+import MultipleCTAs from "@/components/MultipleCTAs";
+import About from "@/components/About";
+import Reviews from "@/components/Reviews";
+import FAQ from "@/components/FAQ";
+import CTA from "@/components/CTA";
+import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
+
+export const metadata: Metadata = {
+  title: "SearchPrex — #1 USA SEO Agency for Law Firms, Ecommerce & Local Business",
+  description:
+    "SearchPrex is a USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving all 50 US states.",
+  alternates: {
+    canonical: "https://searchprex.com",
+  },
+};
+
+export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "SearchPrex - USA SEO Agency",
+    "description": "USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
+    "url": "https://searchprex.com",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "SearchPrex",
+      "description": "Senior-led SEO services for law firms, ecommerce stores, and local businesses across the USA.",
+      "priceRange": "$$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1250 Executive Place, Suite 450",
+        "addressLocality": "Geneva",
+        "addressRegion": "IL",
+        "postalCode": "60134",
+        "addressCountry": "US"
+      },
+      "telephone": "+1-800-555-1234",
+      "email": "hello@searchprex.com",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Mubashar Shahzad",
+        "sameAs": [
+          "https://linkedin.com/in/mubi00",
+          "https://researchgate.net/profile/Mubashar-Shahzad"
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "87"
+      }
+    }
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Nav />
+      <main id="main-content">
+        <Hero />
+        <TrustBar />
+        <Specialists />
+        <Services />
+        <Results />
+        <Process />
+        <CEOMessage />
+        <Pricing />
+        <NicheSEOPro />
+        <MultipleCTAs />
+        <About />
+        <Reviews />
+        <FAQ />
+        <CTA />
+      </main>
+      <Footer />
+      <ChatWidget />
+    </>
+  );
+}
