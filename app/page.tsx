@@ -16,6 +16,19 @@ import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import { client } from "@/sanity/lib/client";
+
+const query = `*[_type == "homePage"][0]{
+  heroHeadline,
+  heroSubheadline,
+  heroCtaText,
+  stat1Number,
+  stat1Label,
+  stat2Number,
+  stat2Label,
+  stat3Number,
+  stat3Label,
+}`;
 
 export const metadata: Metadata = {
   title: "SearchPrex — #1 USA SEO Agency for Law Firms, Ecommerce & Local Business",
@@ -26,7 +39,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const homeData = await client.fetch(query);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -76,7 +91,17 @@ export default function Home() {
       />
       <Nav />
       <main id="main-content">
-        <Hero />
+        <Hero
+          headline={homeData?.heroHeadline}
+          subheadline={homeData?.heroSubheadline}
+          ctaText={homeData?.heroCtaText}
+          stat1Number={homeData?.stat1Number}
+          stat1Label={homeData?.stat1Label}
+          stat2Number={homeData?.stat2Number}
+          stat2Label={homeData?.stat2Label}
+          stat3Number={homeData?.stat3Number}
+          stat3Label={homeData?.stat3Label}
+        />
         <TrustBar />
         <Specialists />
         <Services />

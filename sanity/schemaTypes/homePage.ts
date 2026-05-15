@@ -1,0 +1,19 @@
+export default {
+  name: 'homePage',
+  title: 'Homepage Content',
+  type: 'document',
+  fields: [
+    { name: 'heroHeadline', title: 'Hero Headline', type: 'string' },
+    { name: 'heroSubheadline', title: 'Hero Subheadline', type: 'text' },
+    { name: 'heroCtaText', title: 'Hero CTA Button Text', type: 'string' },
+    { name: 'stat1Number', title: 'Stat 1 Number (e.g. 200+)', type: 'string' },
+    { name: 'stat1Label', title: 'Stat 1 Label (e.g. US Clients)', type: 'string' },
+    { name: 'stat2Number', title: 'Stat 2 Number', type: 'string' },
+    { name: 'stat2Label', title: 'Stat 2 Label', type: 'string' },
+    { name: 'stat3Number', title: 'Stat 3 Number', type: 'string' },
+    { name: 'stat3Label', title: 'Stat 3 Label', type: 'string' },
+    { name: 'phoneNumber', title: 'Phone Number', type: 'string' },
+    { name: 'email', title: 'Email Address', type: 'string' },
+    { name: 'address', title: 'Office Address', type: 'text' },
+  ],
+}
