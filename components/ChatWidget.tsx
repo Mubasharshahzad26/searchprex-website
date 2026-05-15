@@ -138,7 +138,7 @@ export default function ChatWidget() {
                   <p className="font-semibold text-white">SearchPrex Support</p>
                   <p className="text-xs text-white/70">We typically reply within minutes</p>
                 </div>
-                
+                </div>
             </div>
 
             {/* Messages */}
