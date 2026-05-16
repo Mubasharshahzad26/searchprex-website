@@ -15,5 +15,6 @@ export default {
     { name: 'phoneNumber', title: 'Phone Number', type: 'string' },
     { name: 'email', title: 'Email Address', type: 'string' },
     { name: 'address', title: 'Office Address', type: 'text' },
+    { name: 'seo', title: 'SEO Settings', type: 'seo' },
   ],
 }

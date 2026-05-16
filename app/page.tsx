@@ -31,9 +31,9 @@ const query = `*[_type == "homePage"][0]{
 }`;
 
 export const metadata: Metadata = {
-  title: "SearchPrex — #1 USA SEO Agency for Law Firms, Ecommerce & Local Business",
+  title: "SEO Agency USA | Law Firm & Ecommerce SEO | SearchPrex",
   description:
-    "SearchPrex is a USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving all 50 US states.",
+    "SearchPrex is a USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
   alternates: {
     canonical: "https://searchprex.com",
   },

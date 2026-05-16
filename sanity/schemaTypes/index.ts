@@ -6,7 +6,7 @@ import caseStudy from './caseStudy'
 import pricingPlan from './pricingPlan'
 import review from './review'
 import teamMember from './teamMember'
-
+import seo from './seo'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     homePage,
@@ -15,5 +15,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pricingPlan,
     review,
     teamMember,
+    seo,
   ],
 }
