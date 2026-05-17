@@ -177,11 +177,11 @@ export default function Hero({
                     <p className="font-bold text-[#0a0f2e]">Mubashar Shahzad</p>
                     <div className="flex items-center gap-1 text-xs text-[#22c55e]">
                       <CheckCircle className="h-3 w-3" />
-                      <span className="font-medium uppercase">Verified Expert</span>
+                      <span className="font-medium uppercase">CEO & Founder</span>
                     </div>
                   </div>
                 </div>
-                <p className="mt-2 text-xs text-[#64748b]">5+ years SEO experience</p>
+                <p className="mt-2 text-xs text-[#64748b]">SearchPrex CEO & Founder</p>
               </motion.div>
 
               <motion.div
