@@ -167,7 +167,7 @@ export default function Hero({
                 <div className="flex items-center gap-3">
                   <div className="relative h-12 w-12 overflow-hidden rounded-full">
                     <Image
-                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face"
+                     src={heroImage ? urlFor(heroImage).width(100).height(100).url() : "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face"}
                       alt="Mubashar Shahzad"
                       fill
                       className="object-cover"
