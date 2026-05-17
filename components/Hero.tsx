@@ -8,7 +8,7 @@ import { urlFor } from "@/sanity/lib/image";
 
 const specialists = [
   {
-    name: "Sarah Jenkins",
+    name: "Mubashar Shahzad",
     role: "Lead SEO Strategist",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
     available: true,
@@ -168,20 +168,20 @@ export default function Hero({
                   <div className="relative h-12 w-12 overflow-hidden rounded-full">
                     <Image
                       src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face"
-                      alt="Sarah Jenkins"
+                      alt="Mubashar Shahzad"
                       fill
                       className="object-cover"
                     />
                   </div>
                   <div>
-                    <p className="font-bold text-[#0a0f2e]">Sarah Jenkins</p>
+                    <p className="font-bold text-[#0a0f2e]">Mubashar Shahzad</p>
                     <div className="flex items-center gap-1 text-xs text-[#22c55e]">
                       <CheckCircle className="h-3 w-3" />
                       <span className="font-medium uppercase">Verified Expert</span>
                     </div>
                   </div>
                 </div>
-                <p className="mt-2 text-xs text-[#64748b]">10+ years SEO experience</p>
+                <p className="mt-2 text-xs text-[#64748b]">5+ years SEO experience</p>
               </motion.div>
 
               <motion.div

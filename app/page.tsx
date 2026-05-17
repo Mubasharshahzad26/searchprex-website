@@ -28,7 +28,7 @@ const query = `*[_type == "homePage"][0]{
   stat2Label,
   stat3Number,
   stat3Label,
-  "heroImage",
+ heroImage { asset-> },
 }`;
 
 export const metadata: Metadata = {
