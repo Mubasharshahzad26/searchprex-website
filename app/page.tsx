@@ -28,6 +28,7 @@ const query = `*[_type == "homePage"][0]{
   stat2Label,
   stat3Number,
   stat3Label,
+  "heroImage",
 }`;
 
 export const metadata: Metadata = {
@@ -101,6 +102,7 @@ export default async function Home() {
           stat2Label={homeData?.stat2Label}
           stat3Number={homeData?.stat3Number}
           stat3Label={homeData?.stat3Label}
+          heroImage={homeData?.heroImage}
         />
         <TrustBar />
         <Specialists />

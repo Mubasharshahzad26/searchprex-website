@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle, Star, Shield, Award } from "lucide-react";
+import { urlFor } from "@/sanity/lib/image";
 
 const specialists = [
   {
@@ -48,6 +49,7 @@ interface HeroProps {
   stat2Label?: string;
   stat3Number?: string;
   stat3Label?: string;
+  heroImage?: any;
 }
 
 export default function Hero({
@@ -60,6 +62,7 @@ export default function Hero({
   stat2Label = "Avg. Traffic Growth",
   stat3Number = "50",
   stat3Label = "States Served",
+  heroImage,
 }: HeroProps) {
   return (
     <section className="relative min-h-screen overflow-hidden bg-white pt-20">
@@ -146,7 +149,7 @@ export default function Hero({
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#f7f8fc]">
                 <Image
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop"
+                  src={heroImage ? urlFor(heroImage).url() : "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop"}
                   alt="SearchPrex Senior SEO Strategist"
                   fill
                   className="object-cover"
