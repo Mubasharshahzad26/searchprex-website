@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 const inter = Inter({ 
@@ -44,6 +45,14 @@ export const metadata: Metadata = {
     canonical: siteUrl,
     languages: {
       'en-US': siteUrl,
+    },
+  },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
     },
   },
   openGraph: {
@@ -216,6 +225,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        <GoogleAnalytics gaId="G-B75WS7K8ZV" />
       </body>
     </html>
   )
