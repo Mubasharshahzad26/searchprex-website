@@ -17,6 +17,7 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { client } from "@/sanity/lib/client";
+import PersonaSelector from "@/components/PersonaSelector";
 
 const query = `*[_type == "homePage"][0]{
   heroHeadline,
@@ -104,6 +105,7 @@ export default async function Home() {
           stat3Label={homeData?.stat3Label}
           heroImage={homeData?.heroImage}
         />
+        <PersonaSelector />
         <TrustBar />
         <Specialists />
         <Services />
