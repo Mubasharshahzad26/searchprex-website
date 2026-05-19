@@ -1,6 +1,5 @@
 "use client";
- 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
  
@@ -97,7 +96,21 @@ export default function PersonaSelector() {
   const [activeTab, setActiveTab] = useState<TabId>("business");
   const [selectedBusiness, setSelectedBusiness] = useState<string | null>("law-firm");
   const [selectedNeed, setSelectedNeed] = useState<string | null>(null);
- 
+ useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
+
+  const openCalendly = () => {
+    if (typeof window !== "undefined" && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({
+        url: "https://calendly.com/contact-searchprex/30min",
+      });
+    }
+  };
   const currentItems = activeTab === "business" ? businessTypes : needTypes;
   const selectedId = activeTab === "business" ? selectedBusiness : selectedNeed;
   const setSelected = activeTab === "business" ? setSelectedBusiness : setSelectedNeed;
@@ -244,8 +257,8 @@ export default function PersonaSelector() {
  
             {/* CTA Button */}
             <div className="mt-4">
-              <Link
-                href={getCtaHref()}
+             <button
+             onClick={openCalendly}
                 className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-[#534AB7] px-6 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-[#3C3489] hover:shadow-lg hover:shadow-[#534AB7]/30 active:scale-[0.98]"
               >
                 <span className="text-white/70">{icons.sparkle}</span>
@@ -253,7 +266,7 @@ export default function PersonaSelector() {
                 <span className="transition-transform duration-200 group-hover:translate-x-1">
                   {icons.arrowRight}
                 </span>
-              </Link>
+              </button>
  
               {selectedItem && (
                 <motion.p
