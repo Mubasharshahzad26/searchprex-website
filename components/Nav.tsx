@@ -59,7 +59,7 @@ export default function Nav() {
             <span className="text-white/40">|</span>
             <span>Serving All 50 States</span>
             <span className="text-white/40">|</span>
-            <span>Google Partner Certified</span>
+            <span>Semrush Certified Agency</span>
           </div>
           <a
             href="tel:+18005551234"

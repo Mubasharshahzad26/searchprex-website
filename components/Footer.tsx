@@ -63,7 +63,7 @@ export default function Footer() {
               <span className="text-xl font-bold text-white">SearchPrex</span>
             </Link>
             <p className="mb-6 max-w-sm text-sm text-white/70">
-              USA&apos;s leading niche SEO agency specializing in law firm SEO, ecommerce SEO, and local SEO for small businesses. Senior-led execution with zero intermediaries.
+              USA&apos;s leadingFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. specializing in law firm SEO, ecommerce SEO, and local SEO for small businesses. Senior-led execution with zero intermediaries.
             </p>
             
             {/* Contact Info */}
