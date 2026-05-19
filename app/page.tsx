@@ -120,7 +120,7 @@ export default async function Home() {
         <Pricing />
         <NicheSEOPro />
         <MultipleCTAs />
-        <About />
+       {/* <About /> */}
         <Reviews />
         <FAQ />
         <CTA />
