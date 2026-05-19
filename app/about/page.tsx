@@ -8,14 +8,14 @@ import { MapPin, Phone, Mail, Clock, Building2 } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us - SearchPrex USA SEO Agency",
   description:
-    "Learn about SearchPrex, a USA-based SEO agency founded by Mubashar Shahzad. 10+ years of experience serving law firms, ecommerce stores, and local businesses across all 50 states.",
+    "Learn about SearchPrex, a US-Focused SEO agency founded by Mubashar Shahzad. 10+ years of experience serving law firms, ecommerce stores, and local businesses across all 50 states.",
   alternates: {
     canonical: "https://searchprex.com/about",
   },
   openGraph: {
     title: "About Us - SearchPrex USA SEO Agency",
     description:
-      "Learn about SearchPrex, a USA-based SEO agency founded by Mubashar Shahzad.",
+      "Learn about SearchPrex, a US-Focused SEO agency founded by Mubashar Shahzad.",
     url: "https://searchprex.com/about",
     type: "website",
   },
@@ -45,7 +45,7 @@ const values = [
       "No junior account managers or outsourced work. Every client works directly with experienced SEO strategists.",
   },
   {
-    title: "USA-Based Support",
+    title: "US-Focused Support",
     description:
       "Our entire team is based in the United States. When you call, you speak to someone who understands your market.",
   },
@@ -56,7 +56,7 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "About SearchPrex",
-    "description": "Learn about SearchPrex, a USA-based SEO agency.",
+    "description": "Learn about SearchPrex, a US-Focused SEO agency.",
     "url": "https://searchprex.com/about",
     "mainEntity": {
       "@type": "Organization",
@@ -91,7 +91,7 @@ export default function AboutPage() {
                 Your Growth is Our Mission
               </h1>
               <p className="mx-auto mt-6 max-w-3xl text-xl text-[#64748b]">
-                SearchPrex is a USA-based SEO agency dedicated to helping law firms, 
+                SearchPrex is a US-Focused SEO agency dedicated to helping law firms, 
                 ecommerce stores, and local businesses dominate search results and 
                 grow their revenue.
               </p>

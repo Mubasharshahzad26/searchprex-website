@@ -55,7 +55,7 @@ export default function Nav() {
       <div className="hidden border-b border-[#e5e7eb]/50 bg-[#0a0f2e] lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 text-xs text-white/80">
-            <span>USA-Based SEO Agency</span>
+            <span>US-Focused SEO Agency</span>
             <span className="text-white/40">|</span>
             <span>Serving All 50 States</span>
             <span className="text-white/40">|</span>

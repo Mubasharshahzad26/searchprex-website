@@ -252,7 +252,7 @@ export default function Services() {
             </div>
             <div className="text-center">
               <p className="mb-2 text-3xl font-black text-[#1a3c8f]">100%</p>
-              <p className="text-sm font-medium text-[#64748b]">USA-Based Team</p>
+              <p className="text-sm font-medium text-[#64748b]">US-Focused Team</p>
             </div>
           </div>
         </motion.div>

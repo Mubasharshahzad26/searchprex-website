@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: 'SearchPrex — #1 USA SEO Agency for Law Firms, Ecommerce & Local Business',
     template: '%s | SearchPrex'
   },
-  description: 'SearchPrex is a USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
+  description: 'SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
   keywords: [
     'SEO agency USA',
     'law firm SEO',
@@ -78,17 +78,6 @@ export const metadata: Metadata = {
     images: [`${siteUrl}/og-image.jpg`],
     creator: '@searchprex',
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
   verification: {
     google: 'your-google-verification-code',
   },
@@ -125,7 +114,7 @@ export default function RootLayout({
           "width": 200,
           "height": 200
         },
-        "description": "USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
+        "description": "US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "1250 Executive Place, Suite 450",

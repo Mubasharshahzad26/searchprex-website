@@ -204,7 +204,7 @@ export default function Footer() {
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-xs text-white/50">
-              © {currentYear} SearchPrex. All rights reserved. USA-Based SEO Agency.
+              © {currentYear} SearchPrex. All rights reserved. US-Focused SEO Agency.
             </p>
             <div className="flex items-center gap-4">
               <span className="text-xs text-white/50">

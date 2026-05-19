@@ -18,7 +18,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Why Call SearchPrex - USA SEO Agency Benefits",
   description:
-    "Discover why 500+ businesses trust SearchPrex for their SEO needs. USA-based team, senior-led execution, transparent pricing, and guaranteed results.",
+    "Discover why 500+ businesses trust SearchPrex for their SEO needs. US-Focused team, senior-led execution, transparent pricing, and guaranteed results.",
   alternates: {
     canonical: "https://searchprex.com/why-us",
   },
@@ -69,7 +69,7 @@ const reasons = [
   },
   {
     icon: MapPin,
-    title: "USA-Based Support",
+    title: "US-Focused Support",
     description:
       "Our entire team is based in the United States. When you call, you speak to someone who understands your market and timezone.",
     stats: "All 50 States",
@@ -80,7 +80,7 @@ const comparisons = [
   { feature: "Senior SEO Strategists", us: true, others: false },
   { feature: "90-Day Guarantee", us: true, others: false },
   { feature: "No Long-Term Contracts", us: true, others: false },
-  { feature: "USA-Based Team", us: true, others: false },
+  { feature: "US-Focused Team", us: true, others: false },
   { feature: "Niche Industry Expertise", us: true, others: false },
   { feature: "Transparent Reporting", us: true, others: "Sometimes" },
   { feature: "Direct Communication", us: true, others: false },
@@ -216,7 +216,7 @@ export default function WhyUsPage() {
               Ready to Talk?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-              Our USA-based team is standing by to answer your questions and 
+              Our US-Focused team is standing by to answer your questions and 
               discuss how we can help grow your business.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

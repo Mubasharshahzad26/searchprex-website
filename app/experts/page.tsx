@@ -8,7 +8,7 @@ import { Linkedin, Award, BadgeCheck } from "lucide-react";
 export const metadata: Metadata = {
   title: "Meet Our Experts - SearchPrex SEO Team",
   description:
-    "Meet the senior SEO strategists at SearchPrex. Our USA-based team has 10+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
+    "Meet the senior SEO strategists at SearchPrex. Our US-Focused team has 10+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
   alternates: {
     canonical: "https://searchprex.com/experts",
   },

@@ -37,7 +37,7 @@ const query = `*[_type == "homePage"][0]{
 export const metadata: Metadata = {
   title: "SEO Agency USA | Law Firm & Ecommerce SEO | SearchPrex",
   description:
-    "SearchPrex is a USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
+    "SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
   alternates: {
     canonical: "https://searchprex.com",
   },
@@ -50,7 +50,7 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "SearchPrex - USA SEO Agency",
-    "description": "USA-based SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
+    "description": "US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
     "url": "https://searchprex.com",
     "mainEntity": {
       "@type": "LocalBusiness",
