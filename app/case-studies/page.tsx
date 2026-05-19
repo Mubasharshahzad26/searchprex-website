@@ -17,7 +17,7 @@ const caseStudies = [
     subtitle: "Dallas, TX",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop",
     metrics: [
-      { icon: TrendingUp, value: "+380%", label: "Organic Visibility" },
+      { icon: TrendingUp, value: "+75%", label: "Organic Visibility" },
       { icon: Users, value: "47", label: "New Leads/Month" },
       { icon: Globe, value: "#1", label: "Dallas Family Law" },
     ],
@@ -40,7 +40,7 @@ const caseStudies = [
     subtitle: "Chicago, IL",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
     metrics: [
-      { icon: DollarSign, value: "+$124K", label: "Monthly Revenue" },
+      { icon: DollarSign, value: "+285%", label: "Monthly Revenue" },
       { icon: Users, value: "9,400", label: "Monthly Visitors" },
       { icon: TrendingUp, value: "+683%", label: "Traffic Growth" },
     ],
@@ -63,7 +63,7 @@ const caseStudies = [
     subtitle: "Nationwide Operations",
     image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
     metrics: [
-      { icon: Globe, value: "46K+", label: "Pages Optimized" },
+      { icon: Globe, value: "53", label: "Pages Optimized" },
       { icon: TrendingUp, value: "+290%", label: "Indexed Pages" },
       { icon: Users, value: "12", label: "States Covered" },
     ],
@@ -72,7 +72,7 @@ const caseStudies = [
     solution:
       "We developed custom scripts for schema deployment at scale, implemented proper canonical tags, and created a faceted navigation strategy that preserved crawl budget.",
     results: [
-      "46K+ product pages fully optimized with schema",
+      "53 product pages fully optimized with schema",
       "Indexation rate improved from 18% to 94%",
       "Custom scripting reduced page load times by 40%",
       "Organic traffic increased 290% across all markets",

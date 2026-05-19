@@ -9,7 +9,7 @@ export default {
     { name: 'bio', title: 'Short Bio', type: 'text' },
     { name: 'previousCompany', title: 'Previously At', type: 'string' },
     { name: 'specialty', title: 'Specialty Tags', type: 'array', of: [{ type: 'string' }] },
-    { name: 'stat', title: 'Key Stat (e.g. +380%)', type: 'string' },
+    { name: 'stat', title: 'Key Stat (e.g. +75%)', type: 'string' },
     { name: 'statLabel', title: 'Stat Label', type: 'string' },
     { name: 'available', title: 'Available?', type: 'boolean' },
     { name: 'order', title: 'Order', type: 'number' },

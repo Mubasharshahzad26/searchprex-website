@@ -34,7 +34,7 @@ export default function Hero({
   ctaText = "Get Free SEO Audit",
   stat1Number = "200+",
   stat1Label = "US Clients",
-  stat2Number = "+380%",
+  stat2Number = "+75%",
   stat2Label = "Avg. Traffic Growth",
   stat3Number = "50",
   stat3Label = "States Served",

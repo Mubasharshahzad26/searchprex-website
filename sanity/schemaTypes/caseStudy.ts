@@ -11,7 +11,7 @@ export default {
         list: ['Law Firm SEO', 'Shopify SEO', 'Local SEO', 'Enterprise SEO', 'Home Services SEO']
       }
     },
-    { name: 'result', title: 'Main Result (e.g. +380%)', type: 'string' },
+    { name: 'result', title: 'Main Result (e.g. +75%)', type: 'string' },
     { name: 'resultLabel', title: 'Result Label', type: 'string' },
     { name: 'coverImage', title: 'Cover Image', type: 'image', options: { hotspot: true } },
     { name: 'excerpt', title: 'Short Description', type: 'text' },

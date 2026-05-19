@@ -32,7 +32,7 @@ const reasons = [
 ];
 
 const stats = [
-  { value: "+380%", label: "Avg. Visibility Growth", icon: TrendingUp },
+  { value: "+75%", label: "Avg. Visibility Growth", icon: TrendingUp },
   { value: "200+", label: "US Clients Served", icon: Users },
   { value: "10+", label: "Years Combined Experience", icon: Award },
   { value: "100%", label: "US-Focused Team", icon: Shield, highlight: true },
