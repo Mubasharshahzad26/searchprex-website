@@ -1,5 +1,5 @@
 "use client";
-
+import Logo from "@/components/Logo";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
@@ -56,12 +56,9 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Logo & Description */}
           <div className="lg:col-span-2">
-            <Link href="/" className="mb-4 flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2563eb]">
-                <span className="text-xl font-bold text-white">S</span>
-              </div>
-              <span className="text-xl font-bold text-white">SearchPrex</span>
-            </Link>
+            <Link href="/" className="mb-4 inline-block">
+  <Logo />
+</Link>
             <p className="mb-6 max-w-sm text-sm text-white/70">
               USA&apos;s leadingFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. specializing in law firm SEO, ecommerce SEO, and local SEO for small businesses. Senior-led execution with zero intermediaries.
             </p>
