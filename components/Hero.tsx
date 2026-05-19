@@ -7,30 +7,6 @@ import { CheckCircle, Star, Shield, Award } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 
 const specialists = [
-  {
-    name: "Mubashar Shahzad",
-    role: "Lead SEO Strategist",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
-    available: true,
-  },
-  {
-    name: "Marcus Thorne",
-    role: "Technical SEO Architect",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    available: true,
-  },
-  {
-    name: "Elena Rodriguez",
-    role: "Local SEO Director",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
-    available: false,
-  },
-  {
-    name: "David Chen",
-    role: "Content Strategist",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-    available: true,
-  },
 ];
 
 const trustBadges = [
@@ -139,100 +115,38 @@ export default function Hero({
             </div>
           </motion.div>
 
-          {/* Right Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#f7f8fc]">
-                <Image
-                  src={heroImage ? urlFor(heroImage).url() : "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop"}
-                  alt="SearchPrex Senior SEO Strategist"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="absolute -left-4 top-8 rounded-xl bg-white p-4 shadow-xl sm:-left-8"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="relative h-12 w-12 overflow-hidden rounded-full">
-                    <Image
-                     src={heroImage ? urlFor(heroImage).width(100).height(100).url() : "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face"}
-                      alt="Mubashar Shahzad"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[#0a0f2e]">Mubashar Shahzad</p>
-                    <div className="flex items-center gap-1 text-xs text-[#22c55e]">
-                      <CheckCircle className="h-3 w-3" />
-                      <span className="font-medium uppercase">CEO & Founder</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-2 text-xs text-[#64748b]">SearchPrex CEO & Founder</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="absolute -right-2 top-4 rounded-lg bg-[#22c55e] px-3 py-2 text-white shadow-lg sm:-right-4"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-wider">March 2026 Ready</p>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Specialist Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16"
-        >
-          <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-widest text-[#64748b]">
-            Meet Our Senior SEO Specialists
-          </h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-6">
-            {specialists.map((specialist) => (
-              <article
-                key={specialist.name}
-                className="group relative overflow-hidden rounded-xl border border-[#e5e7eb] bg-white p-4 transition-all hover:shadow-lg"
-              >
-                <div className="relative mb-3 aspect-square overflow-hidden rounded-lg bg-[#f7f8fc]">
-                  <Image
-                    src={specialist.image}
-                    alt={`${specialist.name} - ${specialist.role}`}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-105"
-                    sizes="(max-width: 640px) 50vw, 25vw"
-                  />
-                  {specialist.available && (
-                    <span className="absolute left-2 top-2 rounded-full bg-[#22c55e] px-2 py-1 text-[10px] font-bold uppercase text-white">
-                      Available
-                    </span>
-                  )}
-                </div>
-                <p className="font-bold text-[#0a0f2e]">{specialist.name}</p>
-                <p className="text-sm text-[#64748b]">{specialist.role}</p>
-              </article>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+          {/* Right Content - Lead Gen Card */}
+<motion.div
+  initial={{ opacity: 0, x: 20 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="relative flex items-center justify-center"
+>
+  <div className="w-full max-w-md rounded-2xl border border-[#e5e7eb] bg-white p-8 shadow-2xl">
+    <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-4 py-2">
+      <span className="text-xs font-bold text-[#534AB7]">✦ Free Instant SEO Audit</span>
+    </div>
+    <h3 className="mb-2 text-2xl font-black text-[#0a0f2e]">See what's holding your site back</h3>
+    <p className="mb-6 text-sm text-[#64748b]">Free audit · SEO roadmap · Book strategy call</p>
+    <div className="mb-4 flex items-center gap-3 rounded-xl border-2 border-[#534AB7] px-4 py-3">
+      <span className="text-[#534AB7]">🌐</span>
+      <span className="text-sm text-[#94a3b8]">Enter your website URL</span>
+    </div>
+    <Link
+      href="#ai-tool"
+      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#534AB7] px-6 py-4 text-sm font-bold text-white transition-all hover:bg-[#3d35a0]"
+    >
+      Analyse Now →
+    </Link>
+    <div className="mt-4 flex justify-center gap-6">
+      <span className="text-xs text-[#64748b]">✓ Free 30-min call</span>
+      <span className="text-xs text-[#64748b]">✓ No commitment</span>
+      <span className="text-xs text-[#64748b]">✓ Reply in 24hrs</span>
+    </div>
+  </div>
+</motion.div>
+</div>
+</div>
     </section>
-  );
-}
+  );  
+  }      
