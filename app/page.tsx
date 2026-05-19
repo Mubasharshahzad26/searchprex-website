@@ -110,7 +110,7 @@ export default async function Home() {
         <PersonaSelector />
         <AITool />
         <TrustBar />
-        <Specialists />
+        {/* <Specialists /> */}
         <Services />
         <FounderSection />
 
