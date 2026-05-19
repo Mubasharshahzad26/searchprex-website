@@ -187,7 +187,7 @@ export default function AboutPage() {
                     href="tel:+18005551234"
                     className="text-[#374151] hover:text-[#2563eb]"
                   >
-                    (800) 555-1234
+                    +92 310 652 6316
                   </a>
                 </div>
                 <div className="flex items-center gap-4">

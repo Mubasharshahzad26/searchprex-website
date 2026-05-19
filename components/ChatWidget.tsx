@@ -22,11 +22,11 @@ const quickReplies = [
 ];
 
 const botResponses: Record<string, string> = {
-  "get free seo audit": "Great choice! Our free SEO audit includes a comprehensive analysis of your website's technical health, content quality, and backlink profile. To get started, please share your website URL and email address, or call us directly at (800) 555-1234.",
+  "get free seo audit": "Great choice! Our free SEO audit includes a comprehensive analysis of your website's technical health, content quality, and backlink profile. To get started, please share your website URL and email address, or call us directly at +92 310 652 6316.",
   "pricing information": "Our pricing is tailored to your specific needs:\n\n• Beginning: Starting at $1,500/mo\n• Agency Level: Starting at $3,500/mo\n• Enterprise: Custom pricing\n\nWould you like to schedule a call to discuss which plan is right for you?",
-  "talk to an expert": "I'd be happy to connect you with one of our SEO specialists! You can:\n\n1. Call us: (800) 555-1234\n2. Schedule a free consultation\n3. Email: hello@searchprex.com\n\nOur team is available Mon-Fri, 9 AM - 6 PM EST.",
-  "book a call": "Perfect! Let me help you schedule a call. Our SEO consultants are available for a free 30-minute strategy session. Call us at (800) 555-1234 or click the phone icon below to connect immediately.",
-  "default": "Thanks for reaching out! I'm here to help with any questions about our SEO services. You can ask about:\n\n• Free SEO Audit\n• Pricing & Plans\n• Our Process\n• Case Studies\n\nOr call us at (800) 555-1234 for immediate assistance.",
+  "talk to an expert": "I'd be happy to connect you with one of our SEO specialists! You can:\n\n1. Call us: +92 310 652 6316\n2. Schedule a free consultation\n3. Email: hello@searchprex.com\n\nOur team is available Mon-Fri, 9 AM - 6 PM EST.",
+  "book a call": "Perfect! Let me help you schedule a call. Our SEO consultants are available for a free 30-minute strategy session. Call us at +92 310 652 6316 or click the phone icon below to connect immediately.",
+  "default": "Thanks for reaching out! I'm here to help with any questions about our SEO services. You can ask about:\n\n• Free SEO Audit\n• Pricing & Plans\n• Our Process\n• Case Studies\n\nOr call us at +92 310 652 6316 for immediate assistance.",
 };
 
 export default function ChatWidget() {
@@ -195,7 +195,7 @@ export default function ChatWidget() {
               <a href="tel:+18005551234"
                 className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-[#f7f8fc] py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-[#e5e7eb]">
                 <Phone className="h-4 w-4" />
-                Or call us: (800) 555-1234
+                Or call us: +92 310 652 6316
               </a>
             </div>
           </motion.div>

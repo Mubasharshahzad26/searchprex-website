@@ -225,7 +225,7 @@ export default function WhyUsPage() {
                 className="flex items-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-bold text-[#0a0f2e] transition-all hover:bg-[#f7f8fc]"
               >
                 <Phone className="h-5 w-5" />
-                (800) 555-1234
+                +92 310 652 6316
               </a>
               <Link
                 href="#cta"

@@ -187,7 +187,7 @@ export default function CTA() {
               <span className="text-sm text-white/60">
                 Prefer to talk? Call us at{" "}
                 <a href="tel:+18005551234" className="font-medium text-white underline">
-                  (800) 555-1234
+                  +92 310 652 6316
                 </a>
               </span>
             </div>

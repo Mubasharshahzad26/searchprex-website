@@ -153,7 +153,7 @@ export default function PricingPage() {
                 className="flex items-center gap-2 rounded-xl border-2 border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:border-white hover:bg-white hover:text-[#0a0f2e]"
               >
                 <Phone className="h-4 w-4" />
-                (800) 555-1234
+                +92 310 652 6316
               </a>
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-white/50">

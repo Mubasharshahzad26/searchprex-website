@@ -113,7 +113,7 @@ export default function PrivacyPage() {
               <p>If you have questions about this Privacy Policy, please contact us:</p>
               <ul className="list-none pl-0">
                 <li><strong>Email:</strong> privacy@searchprex.com</li>
-                <li><strong>Phone:</strong> (800) 555-1234</li>
+                <li><strong>Phone:</strong> +92 310 652 6316</li>
                 <li>
                   <strong>Address:</strong> 1250 Executive Place, Suite 450, Geneva, IL 60134, USA
                 </li>

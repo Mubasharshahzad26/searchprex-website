@@ -122,7 +122,7 @@ export default function MultipleCTAs() {
             <p className="text-[#64748b]">
               Call us directly at{" "}
               <a href="tel:+18005551234" className="font-bold text-[#2563eb] hover:underline">
-                (800) 555-1234
+                +92 310 652 6316
               </a>{" "}
               — we&apos;re here Mon-Fri, 9 AM - 6 PM EST
             </p>

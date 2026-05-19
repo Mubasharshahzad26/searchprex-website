@@ -66,7 +66,7 @@ export default function Nav() {
             className="flex items-center gap-2 text-xs font-medium text-white hover:text-white/80 transition-colors"
           >
             <Phone className="h-3 w-3" />
-            (800) 555-1234
+            +92 310 652 6316
           </a>
         </div>
       </div>
@@ -203,7 +203,7 @@ export default function Nav() {
                   className="flex items-center gap-2 px-3 text-base font-medium text-[#374151]"
                 >
                   <Phone className="h-4 w-4" />
-                  (800) 555-1234
+                  +92 310 652 6316
                 </a>
  
                 {/* Mobile auth row */}
