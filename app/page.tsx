@@ -16,6 +16,7 @@ import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import FounderSection from "@/components/FounderSection";
 import { client } from "@/sanity/lib/client";
 import PersonaSelector from "@/components/PersonaSelector";
 
@@ -109,6 +110,8 @@ export default async function Home() {
         <TrustBar />
         <Specialists />
         <Services />
+        <FounderSection />
+
         <Results />
         <Process />
         <CEOMessage />
