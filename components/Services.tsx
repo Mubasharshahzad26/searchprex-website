@@ -1,9 +1,9 @@
 "use client";
-
+ 
 import { motion } from "framer-motion";
-import { Scale, ShoppingBag, MapPin, Building2, Home, Wrench, Check, ArrowRight } from "lucide-react";
+import { Scale, ShoppingBag, MapPin, Building2, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
+ 
 const services = [
   {
     icon: Scale,
@@ -75,52 +75,6 @@ const services = [
     cta: "Get Local SEO Audit",
   },
   {
-    icon: Home,
-    title: "Home Services SEO",
-    subtitle: "Contractors, Plumbers, HVAC, Electricians",
-    description:
-      "Specialized SEO for home service providers. Get found when homeowners search for your services in their area.",
-    tags: [
-      "Contractor SEO",
-      "Service Area Pages",
-      "Lead Generation",
-      "Google Guaranteed",
-      "Local Services Ads",
-      "Reviews",
-    ],
-    features: [
-      "Service area page creation and optimization",
-      "Google Local Services Ads setup assistance",
-      "Before/after portfolio optimization for image search",
-      "Emergency service keyword targeting",
-      "Seasonal campaign planning and execution",
-    ],
-    cta: "Get Home Services Audit",
-  },
-  {
-    icon: Wrench,
-    title: "Local Service Provider SEO",
-    subtitle: "Dentists, Auto Shops, Salons, Restaurants",
-    description:
-      "Help your local service business stand out. We optimize for the searches that bring customers through your door.",
-    tags: [
-      "Service Business SEO",
-      "Appointment Booking",
-      "Menu Optimization",
-      "Photo SEO",
-      "Local Pack",
-      "Voice Search",
-    ],
-    features: [
-      "Industry-specific keyword research and targeting",
-      "Google Business Profile category optimization",
-      "Photo and menu schema implementation",
-      "Voice search optimization for local queries",
-      "Competitor analysis and gap identification",
-    ],
-    cta: "Get Service Provider Audit",
-  },
-  {
     icon: Building2,
     title: "Enterprise SEO",
     subtitle: "Mid-Size & Enterprise Companies",
@@ -144,7 +98,7 @@ const services = [
     cta: "Get Enterprise SEO Audit",
   },
 ];
-
+ 
 export default function Services() {
   return (
     <section id="services" className="bg-[#f7f8fc] py-24">
@@ -167,9 +121,9 @@ export default function Services() {
             From local service providers to enterprise companies, we deliver SEO strategies tailored to your industry and goals.
           </p>
         </motion.div>
-
+ 
         {/* Services Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {services.map((service, index) => (
             <motion.article
               key={service.title}
@@ -183,7 +137,7 @@ export default function Services() {
               <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f7f8fc] transition-colors group-hover:bg-[#1a3c8f]">
                 <service.icon className="h-7 w-7 text-[#1a3c8f] transition-colors group-hover:text-white" />
               </div>
-
+ 
               {/* Title */}
               <h3 className="mb-1 text-xl font-bold text-[#0a0f2e]">
                 {service.title}
@@ -191,10 +145,10 @@ export default function Services() {
               <p className="mb-3 text-sm font-medium text-[#2563eb]">
                 {service.subtitle}
               </p>
-
+ 
               {/* Description */}
               <p className="mb-4 text-sm text-[#64748b]">{service.description}</p>
-
+ 
               {/* Tags */}
               <div className="mb-4 flex flex-wrap gap-1.5">
                 {service.tags.slice(0, 4).map((tag) => (
@@ -206,7 +160,7 @@ export default function Services() {
                   </span>
                 ))}
               </div>
-
+ 
               {/* Features */}
               <ul className="mb-6 flex-1 space-y-2">
                 {service.features.slice(0, 3).map((feature) => (
@@ -216,7 +170,7 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
-
+ 
               {/* CTA */}
               <Link
                 href="#cta"
@@ -228,7 +182,7 @@ export default function Services() {
             </motion.article>
           ))}
         </div>
-
+ 
         {/* EEAT Trust Signals */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -239,11 +193,11 @@ export default function Services() {
         >
           <div className="grid gap-8 md:grid-cols-4">
             <div className="text-center">
-              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">10+</p>
-              <p className="text-sm font-medium text-[#64748b]">Years Combined Experience</p>
+              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">5+</p>
+              <p className="text-sm font-medium text-[#64748b]">Years Hands-On Experience</p>
             </div>
             <div className="text-center">
-              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">200+</p>
+              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">20+</p>
               <p className="text-sm font-medium text-[#64748b]">US Businesses Served</p>
             </div>
             <div className="text-center">
@@ -252,7 +206,7 @@ export default function Services() {
             </div>
             <div className="text-center">
               <p className="mb-2 text-3xl font-black text-[#1a3c8f]">100%</p>
-              <p className="text-sm font-medium text-[#64748b]">US-Focused Team</p>
+              <p className="text-sm font-medium text-[#64748b]">Founder-Led Work</p>
             </div>
           </div>
         </motion.div>
@@ -260,3 +214,6 @@ export default function Services() {
     </section>
   );
 }
+ 
+
+
