@@ -116,7 +116,7 @@ export default async function Home() {
 
         <Results />
         <Process />
-        <CEOMessage />
+       
         <Pricing />
         <NicheSEOPro />
         <MultipleCTAs />
