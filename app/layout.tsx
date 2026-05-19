@@ -15,7 +15,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://searchprex.com'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'SearchPrex — #1 USA SEO Agency for Law Firms, Ecommerce & Local Business',
+    default: 'SearchPrex —FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. USA SEO Agency for Law Firms, Ecommerce & Local Business',
     template: '%s | SearchPrex'
   },
   description: 'SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'SearchPrex — #1 USA SEO Agency for Law Firms & Ecommerce',
+    title: 'SearchPrex —FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. USA SEO Agency for Law Firms & Ecommerce',
     description: 'Senior-led SEO services for law firms, Shopify stores, and local businesses across the USA. Free SEO audit in 48 hours.',
     url: siteUrl,
     siteName: 'SearchPrex',
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SearchPrex — #1 USA SEO Agency',
+    title: 'SearchPrex —FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. USA SEO Agency',
     description: 'Senior-led SEO for law firms, ecommerce & local businesses. Free audit in 48 hours.',
     images: [`${siteUrl}/og-image.jpg`],
     creator: '@searchprex',

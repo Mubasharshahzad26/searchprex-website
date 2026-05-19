@@ -58,7 +58,7 @@ export default function Hero({
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
               </span>
               <span className="text-xs font-bold uppercase tracking-widest text-[#1a3c8f]">
-                USA&apos;s #1FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.
+                USA&apos;sFOUNDER-LED SEO. NO JUNIORS. NO FLUFF.FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.
               </span>
             </div>
 

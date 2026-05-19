@@ -338,7 +338,7 @@ function RoadmapTab() {
             {/* Goal */}
             <div>
               <p className="text-xs font-semibold text-gray-700 mb-2.5 uppercase tracking-wide">
-                What is your #1 SEO goal?
+                What is yourFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. SEO goal?
               </p>
               <div className="flex flex-col gap-2">
                 {GOALS.map((g) => (

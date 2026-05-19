@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 
 const reviews = [
   {
-    headline: "Finally ranked #1 for our main keyword",
+    headline: "Finally rankedFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. for our main keyword",
     quote:
       "We tried two other agencies before SearchPrex. Within 3 months of working with them, our firm was ranking on page one for 'family law attorney Houston.' The leads speak for themselves.",
     author: "Michael R.",

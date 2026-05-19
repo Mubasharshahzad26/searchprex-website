@@ -26,7 +26,7 @@ const caseStudies = [
     solution:
       "We implemented a comprehensive local SEO strategy targeting high-intent family law keywords, optimized their Google Business Profile, and created E-E-A-T focused content highlighting attorney credentials.",
     results: [
-      "Ranked #1 for 'family law attorney Dallas' within 6 weeks",
+      "RankedFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. for 'family law attorney Dallas' within 6 weeks",
       "380% increase in organic visibility",
       "47 new client consultations per month from organic search",
       "Established authority for custody, divorce, and adoption keywords",
