@@ -33,6 +33,7 @@ const navLinks = [
   },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/blog",         label: "Blog" },
+  { href: "/tools",        label: "Tools" },
 ];
  
 export default function Nav() {
