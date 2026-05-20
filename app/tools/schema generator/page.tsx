@@ -593,16 +593,3 @@ export default function SchemaGeneratorPage() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
