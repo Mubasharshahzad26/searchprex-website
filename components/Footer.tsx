@@ -76,8 +76,7 @@ export default function Footer() {
               <p className="flex items-start gap-3 text-sm text-white/70">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>
-                  Remotely operating SEO Agency, across USA<br />
-                  Geneva, IL 60134, USA
+                  Remotely operating SEO Agency, across USA. Serving clients in all 50 states with a focus on CA, TX, FL, NY, IL.
                 </span>
               </p>
             </div>
