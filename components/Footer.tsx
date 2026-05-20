@@ -54,20 +54,20 @@ export default function Footer() {
       {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
-          {/* Logo & Description */}
+          {/* Favicon & Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-4 inline-block">
   <Favicon />
 </Link>
             <p className="mb-6 max-w-sm text-sm text-white/70">
-              USA&apos;s leadingFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. specializing in law firm SEO, ecommerce SEO, and local SEO for small businesses. Senior-led execution with zero intermediaries.
+              FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. Specializing in law firm SEO, ecommerce SEO, and local SEO for small businesses. Senior-led execution with zero intermediaries..
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3">
-              <a href="mailto:hello@searchprex.com" className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white">
+              <a href="mailto:contact@searchprex.com" className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white">
                 <Mail className="h-4 w-4" />
-                hello@searchprex.com
+                contact@searchprex.com
               </a>
               <a href="tel:+18005551234" className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white">
                 <Phone className="h-4 w-4" />
@@ -76,7 +76,7 @@ export default function Footer() {
               <p className="flex items-start gap-3 text-sm text-white/70">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>
-                  1250 Executive Place, Suite 450<br />
+                  Remotely operating SEO Agency, across USA<br />
                   Geneva, IL 60134, USA
                 </span>
               </p>
