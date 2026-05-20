@@ -78,7 +78,7 @@ export default function Nav() {
  
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <Logo size="md" />
+           <Logo size="md" variant="dark" />
           </Link>
  
           {/* Desktop links */}
