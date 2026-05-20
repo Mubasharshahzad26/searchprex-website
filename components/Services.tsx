@@ -1,219 +1,274 @@
 "use client";
  
-import { motion } from "framer-motion";
-import { Scale, ShoppingBag, MapPin, Building2, Check, ArrowRight } from "lucide-react";
+import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  Scale, ShoppingCart, MapPin, ClipboardCheck,
+  TrendingUp, CheckCircle, ArrowRight, Calendar
+} from "lucide-react";
  
 const services = [
   {
+    num: "01",
     icon: Scale,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    kpiBg: "#EEEDFE",
+    kpiBorder: "#AFA9EC",
+    kpiColor: "#3C3489",
+    kpi: "+320% leads",
     title: "Law Firm SEO",
-    subtitle: "Family Law, Personal Injury, Criminal Defense",
-    description:
-      "We help attorneys rank for high-intent searches in their practice area and city. More rankings, more consultations, more cases.",
-    tags: [
-      "Family Law SEO",
-      "Personal Injury",
-      "Criminal Defense",
-      "E-E-A-T",
-      "Legal Content",
-      "AEO",
-    ],
+    niche: "Family law · Personal injury · Criminal defense",
+    desc: "Rank for high-intent searches that bring qualified consultations — not just traffic. Attorney-specific E-E-A-T content strategy included.",
     features: [
-      "Practice area page optimization (custody, divorce, DUI)",
-      "Google Business Profile optimization for local maps",
-      "E-E-A-T content strategy highlighting attorney credentials",
-      "Local citation building (Avvo, Justia, FindLaw)",
-      "Monthly rank tracking + lead attribution reporting",
+      "Practice area page optimization",
+      "Google Business Profile management",
+      "Attorney credential E-E-A-T content",
     ],
-    cta: "Get Law Firm SEO Audit",
+    tags: ["Local SEO", "E-E-A-T", "Maps pack"],
+    href: "/services/law-firm-seo",
   },
   {
-    icon: ShoppingBag,
-    title: "Shopify & Ecommerce SEO",
-    subtitle: "DTC Brands & Online Retailers",
-    description:
-      "Technical and content SEO built for Shopify stores scaling in the US market. We fix what holds you back and build authority that drives organic sales.",
-    tags: [
-      "Shopify SEO",
-      "Collection Pages",
-      "Core Web Vitals",
-      "Product Schema",
-      "Technical Audit",
-      "Link Building",
-    ],
+    num: "02",
+    icon: ShoppingCart,
+    iconBg: "#E1F5EE",
+    iconColor: "#0F6E56",
+    accentColor: "#1D9E75",
+    kpiBg: "#E1F5EE",
+    kpiBorder: "#5DCAA5",
+    kpiColor: "#085041",
+    kpi: "+285% indexed",
+    title: "Shopify & E-commerce SEO",
+    niche: "DTC brands · Online retailers · Shopify stores",
+    desc: "Fix mass non-indexing, duplicate content, and Core Web Vitals holding your product pages back from ranking at scale.",
     features: [
-      "Full Shopify technical audit (indexation, speed, crawl)",
-      "Collection and product page keyword mapping",
-      "Core Web Vitals optimization for Shopify themes",
-      "Product, FAQ, and breadcrumb schema implementation",
-      "Niche-relevant link building for US ecommerce",
+      "Crawl budget optimization at scale",
+      "Product page content rewriting",
+      "Collection page keyword mapping",
     ],
-    cta: "Get Ecommerce SEO Audit",
+    tags: ["Shopify", "Core Web Vitals", "Schema"],
+    href: "/services/ecommerce-seo",
   },
   {
+    num: "03",
     icon: MapPin,
+    iconBg: "#E6F1FB",
+    iconColor: "#185FA5",
+    accentColor: "#185FA5",
+    kpiBg: "#E6F1FB",
+    kpiBorder: "#85B7EB",
+    kpiColor: "#0C447C",
+    kpi: "Top 3 maps",
     title: "Local SEO",
-    subtitle: "Small Business Owners & Service Providers",
-    description:
-      "Dominate local search results and Google Maps. We help local businesses become the go-to choice in their service area.",
-    tags: [
-      "Google Maps",
-      "GBP Optimization",
-      "Local Citations",
-      "Review Management",
-      "NAP Consistency",
-      "Local Links",
-    ],
+    niche: "HVAC · Plumbers · Restaurants · Clinics",
+    desc: "Dominate Google Maps and local packs in your city. Built for service businesses targeting specific geographic areas.",
     features: [
-      "Google Business Profile setup and optimization",
-      "Local keyword research and on-page optimization",
-      "Citation building across 50+ local directories",
-      "Review generation and reputation management",
-      "Local link building from community sources",
+      "GBP optimization & weekly posts",
+      "50+ local citation building",
+      "Review generation strategy",
     ],
-    cta: "Get Local SEO Audit",
+    tags: ["Maps pack", "Citations", "Near me"],
+    href: "/services/local-seo",
   },
   {
-    icon: Building2,
-    title: "Enterprise SEO",
-    subtitle: "Mid-Size & Enterprise Companies",
-    description:
-      "Scalable SEO strategies for growing companies. We handle complex sites, multiple locations, and enterprise-level reporting.",
-    tags: [
-      "Enterprise Strategy",
-      "Multi-Location",
-      "Technical SEO",
-      "Content at Scale",
-      "International SEO",
-      "Analytics",
-    ],
+    num: "04",
+    icon: ClipboardCheck,
+    iconBg: "#FAEEDA",
+    iconColor: "#854F0B",
+    accentColor: "#BA7517",
+    kpiBg: "#FAEEDA",
+    kpiBorder: "#EF9F27",
+    kpiColor: "#633806",
+    kpi: "5-day delivery",
+    title: "Technical SEO Audit",
+    niche: "Any website · One-time engagement",
+    desc: "Deep technical audit with a prioritized fix list — crawl budget, Core Web Vitals, indexation issues, and site architecture.",
     features: [
-      "Enterprise technical SEO audit and remediation",
-      "Multi-location SEO strategy and execution",
-      "Programmatic SEO for large-scale content",
-      "Advanced analytics and attribution modeling",
-      "Stakeholder reporting and executive dashboards",
+      "Screaming Frog + GSC deep analysis",
+      "Prioritized issue list (P1/P2/P3)",
+      "Video walkthrough included",
     ],
-    cta: "Get Enterprise SEO Audit",
+    tags: ["Crawl audit", "GSC", "CWV"],
+    href: "/services/technical-seo",
   },
 ];
  
 export default function Services() {
-  return (
-    <section id="services" className="bg-[#f7f8fc] py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <span className="mb-4 inline-block rounded-full bg-[#1a3c8f]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#1a3c8f]">
-            Our Services
-          </span>
-          <h2 className="mb-4 text-4xl font-black text-[#0a0f2e] sm:text-5xl">
-            <span className="text-balance">SEO Services for Every Business Type</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[#64748b]">
-            From local service providers to enterprise companies, we deliver SEO strategies tailored to your industry and goals.
-          </p>
-        </motion.div>
+  const [hovered, setHovered] = useState<number | null>(null);
  
-        {/* Services Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-          {services.map((service, index) => (
-            <motion.article
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+  return (
+    <section className="py-20 bg-white" id="services">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+ 
+        {/* ── Header ── */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 bg-[#EEEDFE] border border-[#AFA9EC] rounded-full px-4 py-2 mb-4">
+            <TrendingUp className="h-3.5 w-3.5 text-[#534AB7]" />
+            <span className="text-xs font-bold text-[#534AB7] uppercase tracking-widest">Our Services</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-[#0a0f2e] leading-tight mb-4">
+            SEO that actually <span className="text-[#534AB7]">moves the needle</span>
+          </h2>
+          <p className="text-[#64748b] text-lg max-w-2xl mx-auto">
+            Founder-led, senior-executed. No account managers. No templates. Just results.
+          </p>
+        </div>
+ 
+        {/* ── 4 Cards Grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+          {services.map((s, i) => (
+            <motion.div
+              key={s.num}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group flex flex-col rounded-2xl border border-[#e5e7eb] bg-white p-6 transition-all hover:shadow-xl"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              className="relative rounded-2xl border border-[#e5e7eb] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#534AB7]/40 flex flex-col"
             >
-              {/* Icon */}
-              <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f7f8fc] transition-colors group-hover:bg-[#1a3c8f]">
-                <service.icon className="h-7 w-7 text-[#1a3c8f] transition-colors group-hover:text-white" />
-              </div>
+              {/* Top accent bar */}
+              <div
+                className="h-1 w-full flex-shrink-0"
+                style={{ background: s.accentColor }}
+              />
  
-              {/* Title */}
-              <h3 className="mb-1 text-xl font-bold text-[#0a0f2e]">
-                {service.title}
-              </h3>
-              <p className="mb-3 text-sm font-medium text-[#2563eb]">
-                {service.subtitle}
-              </p>
+              {/* Card head */}
+              <div className="p-6 pb-4">
+                {/* Number */}
+                <p className="text-[10px] font-semibold text-[#94a3b8] tracking-widest mb-4 uppercase">
+                  {s.num} / 04
+                </p>
  
-              {/* Description */}
-              <p className="mb-4 text-sm text-[#64748b]">{service.description}</p>
- 
-              {/* Tags */}
-              <div className="mb-4 flex flex-wrap gap-1.5">
-                {service.tags.slice(0, 4).map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-[#e5e7eb] bg-white px-2 py-0.5 text-[10px] font-medium text-[#64748b]"
+                {/* Icon + KPI row */}
+                <div className="flex items-start justify-between mb-4">
+                  <div
+                    className="h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: s.iconBg }}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    <s.icon className="h-5 w-5" style={{ color: s.iconColor }} />
+                  </div>
+                  <div
+                    className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold border"
+                    style={{
+                      background: s.kpiBg,
+                      borderColor: s.kpiBorder,
+                      color: s.kpiColor,
+                    }}
+                  >
+                    <TrendingUp className="h-3 w-3" />
+                    {s.kpi}
+                  </div>
+                </div>
+ 
+                {/* Title + niche */}
+                <h3 className="text-lg font-black text-[#0a0f2e] mb-1">{s.title}</h3>
+                <p className="text-xs text-[#94a3b8] mb-3 font-medium">{s.niche}</p>
+ 
+                {/* Description */}
+                <p className="text-sm text-[#64748b] leading-relaxed">{s.desc}</p>
               </div>
  
               {/* Features */}
-              <ul className="mb-6 flex-1 space-y-2">
-                {service.features.slice(0, 3).map((feature) => (
-                  <li key={feature} className="flex items-start gap-2">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#22c55e]" />
-                    <span className="text-xs text-[#374151]">{feature}</span>
+              <div className="border-t border-[#f1f5f9] mx-6" />
+              <ul className="px-6 py-4 space-y-2 flex-1">
+                {s.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-xs text-[#64748b]">
+                    <CheckCircle className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                    {f}
                   </li>
                 ))}
               </ul>
  
-              {/* CTA */}
-              <Link
-                href="#cta"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#0a0f2e] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-[#0a0f2e] transition-all hover:bg-[#0a0f2e] hover:text-white"
-              >
-                {service.cta}
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </motion.article>
+              {/* Footer */}
+              <div className="border-t border-[#f1f5f9] px-6 py-4 flex items-center justify-between">
+                <div className="flex flex-wrap gap-1.5">
+                  {s.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-medium bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-md"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href={s.href}
+                  className="h-9 w-9 rounded-full flex items-center justify-center border border-[#e5e7eb] transition-all duration-200 flex-shrink-0 ml-2"
+                  style={
+                    hovered === i
+                      ? { background: s.accentColor, borderColor: s.accentColor }
+                      : {}
+                  }
+                >
+                  <ArrowRight
+                    className="h-4 w-4 transition-colors duration-200"
+                    style={{ color: hovered === i ? "#fff" : "#64748b" }}
+                  />
+                </Link>
+              </div>
+            </motion.div>
           ))}
         </div>
  
-        {/* EEAT Trust Signals */}
+        {/* ── Bottom CTA Strip ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 rounded-2xl border border-[#e5e7eb] bg-white p-8"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="rounded-2xl bg-[#0a0f2e] px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-5"
         >
-          <div className="grid gap-8 md:grid-cols-4">
-            <div className="text-center">
-              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">5+</p>
-              <p className="text-sm font-medium text-[#64748b]">Years Hands-On Experience</p>
+          <div className="flex items-center gap-4">
+            <div className="h-12 w-12 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0">
+              <span className="text-[#534AB7] font-black text-lg">M</span>
             </div>
-            <div className="text-center">
-              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">20+</p>
-              <p className="text-sm font-medium text-[#64748b]">US Businesses Served</p>
-            </div>
-            <div className="text-center">
-              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">50</p>
-              <p className="text-sm font-medium text-[#64748b]">States Covered</p>
-            </div>
-            <div className="text-center">
-              <p className="mb-2 text-3xl font-black text-[#1a3c8f]">100%</p>
-              <p className="text-sm font-medium text-[#64748b]">Founder-Led Work</p>
+            <div>
+              <p className="text-white font-bold text-sm sm:text-base">
+                Not sure which service fits your business?
+              </p>
+              <p className="text-blue-300 text-xs sm:text-sm mt-0.5">
+                Book a free 30-min call — Mubashar will tell you exactly what you need.
+              </p>
             </div>
           </div>
+          <div className="flex gap-3 w-full sm:w-auto">
+            <a
+              href="https://calendly.com/contact-searchprex/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3d35a0] text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm"
+            >
+              <Calendar className="h-4 w-4" />
+              Book free call
+            </a>
+            <Link
+              href="#results"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 border border-white/20 hover:border-white text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm"
+            >
+              View results
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </motion.div>
+ 
       </div>
     </section>
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
 
 
