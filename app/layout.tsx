@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -211,8 +213,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased">
+     <body className="font-sans antialiased">
+         <Nav />
         {children}
+        <Footer />
         {process.env.NODE_ENV === 'production' && <Analytics />}
         <GoogleAnalytics gaId="G-B75WS7K8ZV" />
       </body>
