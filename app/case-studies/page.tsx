@@ -1,13 +1,10 @@
 "use client";
-
+ 
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, TrendingUp, Users, DollarSign, Globe } from "lucide-react";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import CTA from "@/components/CTA";
-
+ 
 const caseStudies = [
   {
     id: 1,
@@ -26,7 +23,7 @@ const caseStudies = [
     solution:
       "We implemented a comprehensive local SEO strategy targeting high-intent family law keywords, optimized their Google Business Profile, and created E-E-A-T focused content highlighting attorney credentials.",
     results: [
-      "RankedFOUNDER-LED SEO. NO JUNIORS. NO FLUFF. for 'family law attorney Dallas' within 6 weeks",
+      "Ranked #1 for 'family law attorney Dallas' within 6 weeks",
       "380% increase in organic visibility",
       "47 new client consultations per month from organic search",
       "Established authority for custody, divorce, and adoption keywords",
@@ -79,12 +76,10 @@ const caseStudies = [
     ],
   },
 ];
-
+ 
 export default function CaseStudiesPage() {
   return (
     <main>
-      <Nav />
-
       {/* Hero */}
       <section className="bg-[#0a0f2e] pb-24 pt-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -111,7 +106,7 @@ export default function CaseStudiesPage() {
           </motion.div>
         </div>
       </section>
-
+ 
       {/* Case Studies */}
       <section className="bg-[#f7f8fc] py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -145,14 +140,14 @@ export default function CaseStudiesPage() {
                     </span>
                   </div>
                 </div>
-
+ 
                 {/* Content */}
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
                   <h2 className="mb-2 text-3xl font-black text-[#0a0f2e] sm:text-4xl">
                     {study.title}
                   </h2>
                   <p className="mb-8 text-lg text-[#64748b]">{study.subtitle}</p>
-
+ 
                   {/* Metrics */}
                   <div className="mb-8 grid grid-cols-3 gap-4">
                     {study.metrics.map((metric) => (
@@ -168,19 +163,19 @@ export default function CaseStudiesPage() {
                       </div>
                     ))}
                   </div>
-
+ 
                   {/* Challenge */}
                   <div className="mb-6">
                     <h3 className="mb-2 font-bold text-[#0a0f2e]">The Challenge</h3>
                     <p className="text-[#64748b]">{study.challenge}</p>
                   </div>
-
+ 
                   {/* Solution */}
                   <div className="mb-6">
                     <h3 className="mb-2 font-bold text-[#0a0f2e]">Our Solution</h3>
                     <p className="text-[#64748b]">{study.solution}</p>
                   </div>
-
+ 
                   {/* Results */}
                   <div>
                     <h3 className="mb-2 font-bold text-[#0a0f2e]">Key Results</h3>
@@ -202,9 +197,15 @@ export default function CaseStudiesPage() {
           </div>
         </div>
       </section>
-
-      <CTA />
-      <Footer />
     </main>
   );
 }
+ 
+
+
+
+
+
+
+
+
