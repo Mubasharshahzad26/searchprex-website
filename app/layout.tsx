@@ -1,19 +1,20 @@
+import Script from 'next/script'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-
+ 
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
-
+ 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://searchprex.com'
-
+ 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -49,6 +50,7 @@ export const metadata: Metadata = {
       'en-US': siteUrl,
     },
   },
+  // ⚠️ Under Development - Crawler Blocked Intentionally
   robots: {
     index: false,
     follow: false,
@@ -81,11 +83,11 @@ export const metadata: Metadata = {
     creator: '@searchprex',
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: 'your-google-verification-code', // ← Launch ke time GSC code daalna
   },
   category: 'SEO Services',
 }
-
+ 
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
@@ -96,7 +98,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
 }
-
+ 
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -132,8 +134,7 @@ export default function RootLayout({
           "name": "Mubashar Shahzad",
           "jobTitle": "CEO & Founder",
           "sameAs": [
-            "https://linkedin.com/in/mubi00",
-            "https://researchgate.net/profile/Mubashar-Shahzad"
+            "https://linkedin.com/in/mubashar-shahzad-seo"
           ]
         },
         "areaServed": [
@@ -199,7 +200,7 @@ export default function RootLayout({
       }
     ]
   }
-
+ 
   return (
     <html lang="en" dir="ltr" className={`${inter.variable} bg-background`}>
       <head>
@@ -213,12 +214,70 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-     <body className="font-sans antialiased">
-         <Nav />
+ 
+      <body className="font-sans antialiased">
+        <Nav />
         {children}
         <Footer />
+ 
+        {/* ✅ Vercel Analytics - Production Only */}
         {process.env.NODE_ENV === 'production' && <Analytics />}
-        <GoogleAnalytics gaId="G-B75WS7K8ZV" />
+ 
+        
+ 
+        {/* ✅ Google Tag Manager */}
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+ 
+        {/* ✅ Meta / Facebook Pixel */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+ 
+        {/* ✅ LinkedIn Insight Tag */}
+        <Script id="linkedin-insight" strategy="afterInteractive">
+          {`
+            _linkedin_partner_id = "${process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID}";
+            window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+            window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+            (function(l) {
+              if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+              window.lintrk.q=[]}
+              var s = document.getElementsByTagName("script")[0];
+              var b = document.createElement("script");
+              b.type = "text/javascript";b.async = true;
+              b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+              s.parentNode.insertBefore(b, s);
+            })(window.lintrk);
+          `}
+        </Script>
+ 
+        {/* ⏸️ Reddit Pixel - Activate when running Reddit Ads */}
+        {/*
+        <Script id="reddit-pixel" strategy="afterInteractive">
+          {`
+            !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?
+            p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};
+            p.callQueue=[];var t=d.createElement("script");
+            t.src="https://www.redditstatic.com/ads/v2.js",t.async=!0;
+            var s=d.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(t,s)}}(window,document);
+            rdt('init','${process.env.NEXT_PUBLIC_REDDIT_PIXEL_ID}');
+            rdt('track', 'PageView');
+          `}
+        </Script>
+        */}
+ 
       </body>
     </html>
   )
