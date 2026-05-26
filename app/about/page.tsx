@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+
 import CEOMessage from "@/components/CEOMessage";
 import ChatWidget from "@/components/ChatWidget";
 import { MapPin, Phone, Mail, Clock, Building2 } from "lucide-react";
@@ -217,7 +217,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      <Footer />
+     
       <ChatWidget />
     </>
   );
