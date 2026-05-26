@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+
 import ChatWidget from "@/components/ChatWidget";
 import Image from "next/image";
 import { Linkedin, Award, BadgeCheck } from "lucide-react";
@@ -232,7 +232,7 @@ export default function ExpertsPage() {
           </div>
         </section>
       </main>
-      <Footer />
+     
       <ChatWidget />
     </>
   );
