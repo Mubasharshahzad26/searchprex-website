@@ -15,7 +15,6 @@ import MultipleCTAs from "@/components/MultipleCTAs";
 import Reviews from "@/components/Reviews";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { client } from "@/sanity/lib/client";
  
@@ -156,7 +155,7 @@ export default async function Home() {
         <CTA />
  
       </main>
-      <Footer />
+     
       <ChatWidget />
     </>
   );
