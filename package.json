@@ -40,6 +40,8 @@
     "@radix-ui/react-tooltip": "1.2.8",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.25.1",
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.106.2",
     "@vercel/analytics": "1.6.1",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
