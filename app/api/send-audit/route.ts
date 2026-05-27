@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const { name, email, website, business } = await req.json();
 
   await resend.emails.send({
-    from: "SearchPrex <onboarding@resend.dev>",
+    from: "SearchPrex <noreply@searchprex.com>",
     to: "mubasharshahzad726@gmail.com",
     subject: `🔍 New SEO Audit Request — ${website}`,
     html: `
