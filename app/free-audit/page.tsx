@@ -1,13 +1,22 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 
 export default function FreeAuditPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", website: "", business: "" });
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setLoading(true);
+    await fetch("/api/send-audit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    setLoading(false);
     setSubmitted(true);
   }
 
@@ -15,14 +24,8 @@ export default function FreeAuditPage() {
     <div className="min-h-screen bg-[#08080f] flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-xl">
         <div className="text-center mb-10">
-          <Link href="/" className="inline-flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 rounded-lg bg-[#534AB7]/20 border border-[#534AB7]/40 flex items-center justify-center">
-              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                <circle cx="6.5" cy="6.5" r="4.5" stroke="#818cf8" strokeWidth="1.8"/>
-                <path d="M10 10L14 14" stroke="#818cf8" strokeWidth="1.8" strokeLinecap="round"/>
-              </svg>
-            </div>
-            <span className="text-white text-sm font-semibold">Search<strong className="text-[#818cf8]">prex</strong></span>
+          <Link href="/" className="inline-flex justify-center mb-8">
+            <Logo size="md" variant="dark" />
           </Link>
           <div className="inline-flex items-center gap-2 bg-[#534AB7]/10 border border-[#534AB7]/20 rounded-full px-4 py-1.5 text-xs font-medium text-[#818cf8] mb-4">
             🔍 Free Law Firm SEO Audit
@@ -85,15 +88,16 @@ export default function FreeAuditPage() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold rounded-xl py-3 text-sm transition-all hover:shadow-[0_0_28px_rgba(83,74,183,0.5)] mt-2"
+                disabled={loading}
+                className="w-full bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold rounded-xl py-3 text-sm transition-all hover:shadow-[0_0_28px_rgba(83,74,183,0.5)] disabled:opacity-50 mt-2"
               >
-                Get My Free Audit →
+                {loading ? "Sending..." : "Get My Free Audit →"}
               </button>
             </form>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-white/25">
-              <span className="flex items-center gap-1">✓ 24hr turnaround</span>
-              <span className="flex items-center gap-1">✓ No credit card</span>
-              <span className="flex items-center gap-1">✓ Real founder audit</span>
+              <span>✓ 24hr turnaround</span>
+              <span>✓ No credit card</span>
+              <span>✓ Real founder audit</span>
             </div>
           </div>
         ) : (
