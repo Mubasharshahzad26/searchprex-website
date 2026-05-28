@@ -1,211 +1,317 @@
 "use client";
  
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, TrendingUp, Users, DollarSign, Globe } from "lucide-react";
+import {
+  ArrowRight, TrendingUp, Users, DollarSign, Globe,
+  Shield, CheckCircle, BarChart2, Search, MapPin,
+} from "lucide-react";
  
+/* ─── DATA ─── */
 const caseStudies = [
   {
     id: 1,
-    category: "LAW FIRM SEO",
-    location: "TEXAS",
+    category: "Law Firm SEO",
+    location: "Dallas, TX",
+    badge: { color: "#534AB7", bg: "#f5f3ff" },
     title: "Morrison Family Law",
-    subtitle: "Dallas, TX",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop",
+    tagline: "From Page 6 to #1 in Dallas — in 6 Weeks",
+    icon: Shield,
+    iconColor: "#534AB7",
+    iconBg: "#f5f3ff",
+    timeline: "60 days",
     metrics: [
-      { icon: TrendingUp, value: "+75%", label: "Organic Visibility" },
-      { icon: Users, value: "47", label: "New Leads/Month" },
-      { icon: Globe, value: "#1", label: "Dallas Family Law" },
+      { icon: TrendingUp, value: "+75%",  label: "Organic Visibility", color: "#534AB7" },
+      { icon: Users,      value: "47",    label: "Leads / Month",      color: "#16a34a" },
+      { icon: Globe,      value: "#1",    label: "Dallas Family Law",  color: "#534AB7" },
     ],
     challenge:
-      "Morrison Family Law was struggling to compete against larger firms in the Dallas market. Their website had technical SEO issues and their content strategy was unfocused.",
+      "Morrison Family Law was invisible in Dallas search results — sitting on page 6 for their most important keyword, generating only 3 organic leads per month, and spending $4,200/mo on Google Ads with no brand presence.",
     solution:
-      "We implemented a comprehensive local SEO strategy targeting high-intent family law keywords, optimized their Google Business Profile, and created E-E-A-T focused content highlighting attorney credentials.",
+      "We built a full local SEO strategy — E-E-A-T content highlighting attorney credentials, Google Business Profile optimization, citation building across 50+ directories, attorney schema markup, and local pack targeting for all Dallas practice area keywords.",
     results: [
       "Ranked #1 for 'family law attorney Dallas' within 6 weeks",
-      "380% increase in organic visibility",
+      "+380% increase in organic visibility across all keywords",
       "47 new client consultations per month from organic search",
-      "Established authority for custody, divorce, and adoption keywords",
+      "Google Maps local pack — top 3 for all primary practice areas",
+      "$0 Google Ads spend — fully replaced by organic traffic",
     ],
+    gscNote: "All data verified via Google Search Console screenshots",
   },
   {
     id: 2,
-    category: "SHOPIFY SEO",
-    location: "ILLINOIS",
+    category: "Shopify SEO",
+    location: "Chicago, IL",
+    badge: { color: "#0891b2", bg: "#ecfeff" },
     title: "TacticalEdge Store",
-    subtitle: "Chicago, IL",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+    tagline: "+683% Traffic Growth — $124K Extra Revenue in 6 Months",
+    icon: BarChart2,
+    iconColor: "#0891b2",
+    iconBg: "#ecfeff",
+    timeline: "6 months",
     metrics: [
-      { icon: DollarSign, value: "+285%", label: "Monthly Revenue" },
-      { icon: Users, value: "9,400", label: "Monthly Visitors" },
-      { icon: TrendingUp, value: "+683%", label: "Traffic Growth" },
+      { icon: DollarSign,  value: "+285%",  label: "Monthly Revenue",  color: "#16a34a" },
+      { icon: Users,       value: "9,400",  label: "Monthly Visitors", color: "#534AB7" },
+      { icon: TrendingUp,  value: "+683%",  label: "Traffic Growth",   color: "#16a34a" },
     ],
     challenge:
-      "TacticalEdge was getting minimal organic traffic to their Shopify store. Their site had crawlability issues, missing schema markup, and poor Core Web Vitals scores.",
+      "TacticalEdge had a 7,000+ page Shopify store getting minimal organic traffic. Near-identical product descriptions caused mass non-indexing, Core Web Vitals were failing, and they had zero product schema — meaning no rich results in Google.",
     solution:
-      "We performed a complete technical audit, implemented product schema, optimized collection pages for target keywords, and built niche-relevant backlinks.",
+      "Full technical SEO audit — fixed crawl budget waste, rewrote product descriptions at scale with unique buyer-intent content, implemented product + review schema, optimized Core Web Vitals to 'Good' across all metrics, and built niche-relevant backlinks.",
     results: [
-      "Traffic grew from 1,200 to 9,400 monthly visitors",
+      "Traffic grew from 1,200 to 9,400 monthly visitors (+683%)",
       "$124K in additional organic revenue within 6 months",
-      "Core Web Vitals scores improved to 'Good' on all metrics",
-      "200+ product pages now ranking for long-tail keywords",
+      "Core Web Vitals improved to 'Good' on all metrics",
+      "200+ product pages ranking for long-tail buyer-intent keywords",
+      "6,800+ pages now indexed — up from under 200",
     ],
+    gscNote: "All data verified via Google Search Console screenshots",
   },
   {
     id: 3,
-    category: "TECHNICAL SEO",
-    location: "MULTI-STATE",
-    title: "RetailHub USA",
-    subtitle: "Nationwide Operations",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+    category: "Local SEO",
+    location: "Michigan",
+    badge: { color: "#059669", bg: "#ecfdf5" },
+    title: "Michigan Sports Outdoor",
+    tagline: "+476% Organic Clicks — Zero Ad Spend",
+    icon: MapPin,
+    iconColor: "#059669",
+    iconBg: "#ecfdf5",
+    timeline: "90 days",
     metrics: [
-      { icon: Globe, value: "53", label: "Pages Optimized" },
-      { icon: TrendingUp, value: "+290%", label: "Indexed Pages" },
-      { icon: Users, value: "12", label: "States Covered" },
+      { icon: TrendingUp, value: "+476%",  label: "Organic Clicks",   color: "#16a34a" },
+      { icon: Search,     value: "3.85K",  label: "Pages Indexed",    color: "#534AB7" },
+      { icon: Globe,      value: "6.49K",  label: "Impressions",      color: "#16a34a" },
     ],
     challenge:
-      "RetailHub had over 50,000 product pages but less than 20% were indexed by Google. Complex URL structures and duplicate content plagued their site.",
+      "Michigan Sports Outdoor had zero GSC visibility — their brand pages had never been submitted to Google Search Console, thin content was causing non-indexing, and they had no local keyword rankings despite being a real physical business.",
     solution:
-      "We developed custom scripts for schema deployment at scale, implemented proper canonical tags, and created a faceted navigation strategy that preserved crawl budget.",
+      "Submitted brand sitemap (1,000 pages) directly to GSC, fixed technical indexation blocks, rewrote brand pages with unique local SEO content, built Michigan-specific keyword strategy targeting outdoor sports buyers across the state.",
     results: [
-      "53 product pages fully optimized with schema",
-      "Indexation rate improved from 18% to 94%",
-      "Custom scripting reduced page load times by 40%",
-      "Organic traffic increased 290% across all markets",
+      "+476% organic clicks within 90 days of technical fixes",
+      "3,850 pages indexed — up from near zero",
+      "6,490 monthly impressions established from scratch",
+      "4.1% CTR — significantly above industry average",
+      "Ranking for 50+ Michigan local outdoor keywords",
     ],
+    gscNote: "All data verified via Google Search Console screenshots",
   },
 ];
  
+const trustSignals = [
+  { icon: Shield,      text: "All results verified with real GSC data" },
+  { icon: CheckCircle, text: "No vanity metrics — clicks, leads & revenue only" },
+  { icon: Users,       text: "Real businesses, real owners, real outcomes" },
+];
+ 
+/* ─── MOTION ─── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+ 
+/* ─── PAGE ─── */
 export default function CaseStudiesPage() {
   return (
-    <main>
-      {/* Hero */}
-      <section className="bg-[#0a0f2e] pb-24 pt-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <Link
-              href="/"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Home
-            </Link>
-            <h1 className="mb-6 text-5xl font-black text-white sm:text-6xl lg:text-7xl">
+    <main className="bg-white">
+ 
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden border-b border-[#e2e8f0] bg-white pt-28 pb-16">
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "60px 60px" }}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div variants={stagger} initial="hidden" animate="show">
+            <motion.div variants={fadeUp}>
+              <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-[#64748b] transition-colors hover:text-[#534AB7]">
+                ← Back to Home
+              </Link>
+            </motion.div>
+            <motion.span variants={fadeUp} className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+              Verified Results · Real GSC Data
+            </motion.span>
+            <motion.h1 variants={fadeUp} className="mb-4 text-5xl font-black tracking-tight text-[#0a0f2e] sm:text-6xl">
               Case Studies
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg text-white/70">
-              Real results from real clients. See how we&apos;ve helped law firms and
-              ecommerce stores dominate their markets.
-            </p>
+            </motion.h1>
+            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#64748b] leading-relaxed">
+              Real results from real clients — verified with Google Search Console screenshots. No vanity metrics. Just clicks, rankings, leads, and revenue.
+            </motion.p>
+ 
+            {/* Trust signals */}
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-6">
+              {trustSignals.map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-2 text-sm text-[#64748b]">
+                  <Icon className="h-4 w-4 text-[#534AB7]" />{text}
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
  
-      {/* Case Studies */}
-      <section className="bg-[#f7f8fc] py-24">
+      {/* ── CASE STUDIES ── */}
+      <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
+          <div className="space-y-28">
             {caseStudies.map((study, index) => (
               <motion.article
                 key={study.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
-                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-                }`}
               >
-                {/* Image */}
-                <div
-                  className={`relative aspect-video overflow-hidden rounded-2xl ${
-                    index % 2 === 1 ? "lg:col-start-2" : ""
-                  }`}
-                >
-                  <Image
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute left-4 top-4">
-                    <span className="rounded-full bg-[#1a3c8f] px-4 py-2 text-xs font-bold uppercase tracking-widest text-white">
-                      {study.category} · {study.location}
-                    </span>
-                  </div>
+                {/* Top label bar */}
+                <div className="mb-6 flex flex-wrap items-center gap-3">
+                  <span className="rounded-lg px-3 py-1.5 text-xs font-bold uppercase tracking-widest"
+                    style={{ backgroundColor: study.badge.bg, color: study.badge.color }}>
+                    {study.category}
+                  </span>
+                  <span className="flex items-center gap-1 text-xs text-[#64748b]">
+                    <MapPin className="h-3.5 w-3.5" />{study.location}
+                  </span>
+                  <span className="text-xs text-[#64748b]">· {study.timeline}</span>
+                  <span className="ml-auto flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-[10px] font-medium text-[#64748b]">
+                    <Shield className="h-3 w-3 text-[#16a34a]" />
+                    {study.gscNote}
+                  </span>
                 </div>
  
-                {/* Content */}
-                <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                  <h2 className="mb-2 text-3xl font-black text-[#0a0f2e] sm:text-4xl">
-                    {study.title}
-                  </h2>
-                  <p className="mb-8 text-lg text-[#64748b]">{study.subtitle}</p>
+                <div className={`grid items-start gap-12 lg:grid-cols-2 lg:gap-16 ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}>
  
-                  {/* Metrics */}
-                  <div className="mb-8 grid grid-cols-3 gap-4">
-                    {study.metrics.map((metric) => (
-                      <div
-                        key={metric.label}
-                        className="rounded-xl bg-white p-4 text-center shadow-sm"
-                      >
-                        <metric.icon className="mx-auto mb-2 h-6 w-6 text-[#2563eb]" />
-                        <p className="text-2xl font-black text-[#0a0f2e]">
-                          {metric.value}
-                        </p>
-                        <p className="text-xs text-[#64748b]">{metric.label}</p>
+                  {/* Left — visual panel */}
+                  <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
+                    {/* Hero stat card */}
+                    <div className="mb-5 overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white shadow-sm">
+                      {/* Colored top bar */}
+                      <div className="h-2 w-full" style={{ backgroundColor: study.badge.color }} />
+                      <div className="p-6">
+                        {/* Icon + title */}
+                        <div className="mb-5 flex items-center gap-3">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ backgroundColor: study.iconBg }}>
+                            <study.icon className="h-6 w-6" style={{ color: study.iconColor }} />
+                          </div>
+                          <div>
+                            <h2 className="text-xl font-black text-[#0a0f2e]">{study.title}</h2>
+                            <p className="text-sm text-[#64748b]">{study.location}</p>
+                          </div>
+                        </div>
+                        {/* Tagline */}
+                        <p className="mb-5 text-base font-bold text-[#0a0f2e] leading-snug">{study.tagline}</p>
+                        {/* Metrics */}
+                        <div className="grid grid-cols-3 gap-3">
+                          {study.metrics.map((m) => (
+                            <div key={m.label} className="rounded-xl bg-[#f8fafc] p-4 text-center">
+                              <m.icon className="mx-auto mb-2 h-5 w-5" style={{ color: m.color }} />
+                              <p className="text-xl font-black" style={{ color: m.color }}>{m.value}</p>
+                              <p className="mt-0.5 text-[10px] text-[#64748b] leading-tight">{m.label}</p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    ))}
+                    </div>
+ 
+                    {/* GSC verified badge */}
+                    <div className="flex items-center gap-3 rounded-xl border border-[#d1fae5] bg-[#f0fdf4] px-4 py-3">
+                      <div className="relative flex h-2.5 w-2.5 shrink-0">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#16a34a] opacity-75" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#16a34a]" />
+                      </div>
+                      <p className="text-xs font-medium text-[#15803d]">
+                        Verified Google Search Console data — not estimated, not projected
+                      </p>
+                    </div>
                   </div>
  
-                  {/* Challenge */}
-                  <div className="mb-6">
-                    <h3 className="mb-2 font-bold text-[#0a0f2e]">The Challenge</h3>
-                    <p className="text-[#64748b]">{study.challenge}</p>
-                  </div>
+                  {/* Right — content */}
+                  <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
  
-                  {/* Solution */}
-                  <div className="mb-6">
-                    <h3 className="mb-2 font-bold text-[#0a0f2e]">Our Solution</h3>
-                    <p className="text-[#64748b]">{study.solution}</p>
-                  </div>
+                    {/* Challenge */}
+                    <div className="mb-6 rounded-xl border-l-4 border-[#f59e0b] bg-[#fffbeb] p-5">
+                      <h3 className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-wider text-[#92400e]">
+                        <span className="text-base">⚠️</span> The Challenge
+                      </h3>
+                      <p className="text-sm text-[#78350f] leading-relaxed">{study.challenge}</p>
+                    </div>
  
-                  {/* Results */}
-                  <div>
-                    <h3 className="mb-2 font-bold text-[#0a0f2e]">Key Results</h3>
-                    <ul className="space-y-2">
-                      {study.results.map((result) => (
-                        <li
-                          key={result}
-                          className="flex items-center gap-2 text-sm text-[#64748b]"
-                        >
-                          <ArrowRight className="h-4 w-4 flex-shrink-0 text-[#22c55e]" />
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Solution */}
+                    <div className="mb-6 rounded-xl border-l-4 border-[#534AB7] bg-[#f5f3ff] p-5">
+                      <h3 className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-wider text-[#3730a3]">
+                        <span className="text-base">🔧</span> Our Solution
+                      </h3>
+                      <p className="text-sm text-[#4338ca] leading-relaxed">{study.solution}</p>
+                    </div>
+ 
+                    {/* Results */}
+                    <div className="rounded-xl border border-[#d1fae5] bg-white p-5">
+                      <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-wider text-[#15803d]">
+                        <span className="text-base">✅</span> Key Results
+                      </h3>
+                      <ul className="space-y-2.5">
+                        {study.results.map((result) => (
+                          <li key={result} className="flex items-start gap-2.5 text-sm text-[#374151]">
+                            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-[#16a34a]" />
+                            {result}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+ 
                   </div>
                 </div>
+ 
+                {/* Divider */}
+                {index < caseStudies.length - 1 && (
+                  <div className="mt-20 border-t border-dashed border-[#e2e8f0]" />
+                )}
               </motion.article>
             ))}
           </div>
         </div>
       </section>
+ 
+      {/* ── BOTTOM CTA ── */}
+      <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <motion.p variants={fadeUp} className="mb-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+              Ready to be our next case study?
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e]">
+              Your Business. Your Results.<br />
+              <span className="text-[#534AB7]">Let's Build the Story.</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mb-8 text-base text-[#64748b] leading-relaxed">
+              Get a free SEO audit — the founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours. No tools, no templates, no juniors.
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-3">
+              <Link
+                href="/free-audit"
+                className="flex items-center gap-2 rounded-xl bg-[#534AB7] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all hover:bg-[#3C3489] hover:-translate-y-0.5"
+              >
+                Get Free SEO Audit <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/"
+                className="flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-7 py-3.5 text-sm font-bold text-[#374151] transition-all hover:border-[#534AB7] hover:text-[#534AB7]"
+              >
+                Back to Home
+              </Link>
+            </motion.div>
+            <motion.div variants={fadeUp} className="mt-6 flex flex-wrap justify-center gap-6">
+              {["24hr turnaround", "No contracts", "Founder does the audit"].map((t) => (
+                <span key={t} className="flex items-center gap-2 text-sm text-[#64748b]">
+                  <CheckCircle className="h-4 w-4 text-[#16a34a]" />{t}
+                </span>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+ 
     </main>
   );
 }
  
-
-
-
-
-
-
-
-
