@@ -1,77 +1,74 @@
+
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
-
-import CEOMessage from "@/components/CEOMessage";
+import About from "@/components/About";
 import ChatWidget from "@/components/ChatWidget";
 import { MapPin, Phone, Mail, Clock, Building2 } from "lucide-react";
-
+ 
 export const metadata: Metadata = {
-  title: "About Us - SearchPrex USA SEO Agency",
+  title: "About Us — SearchPrex Founder-Led SEO Agency",
   description:
-    "Learn about SearchPrex, a US-Focused SEO agency founded by Mubashar Shahzad. 10+ years of experience serving law firms, ecommerce stores, and local businesses across all 50 states.",
+    "Meet Mubashar Shahzad — Founder & Lead SEO Strategist at SearchPrex. 5+ years of niche-focused SEO for law firms, ecommerce stores, and local businesses across all 50 US states.",
   alternates: {
     canonical: "https://searchprex.com/about",
   },
   openGraph: {
-    title: "About Us - SearchPrex USA SEO Agency",
+    title: "About Us — SearchPrex Founder-Led SEO Agency",
     description:
-      "Learn about SearchPrex, a US-Focused SEO agency founded by Mubashar Shahzad.",
+      "Meet Mubashar Shahzad — Founder & Lead SEO Strategist at SearchPrex. Revenue-focused SEO for law firms, ecommerce, and local businesses.",
     url: "https://searchprex.com/about",
     type: "website",
   },
 };
-
-const stats = [
-  { value: "10+", label: "Years Experience" },
-  { value: "500+", label: "Clients Served" },
-  { value: "87", label: "Five-Star Reviews" },
-  { value: "50", label: "States Covered" },
-];
-
+ 
 const values = [
   {
-    title: "Transparency",
+    title: "We Value Your Money",
     description:
-      "No black-box tactics. We show you exactly what we're doing and why. Monthly reports include every action taken on your behalf.",
+      "No bloated retainers, no vanity deliverables. Every dollar has a clear purpose and a clear expected outcome. We treat your budget like it's our own.",
   },
   {
-    title: "Results-Driven",
+    title: "Revenue Growth Focused",
     description:
-      "We measure success by your success. Revenue growth, qualified leads, and market share — not just rankings.",
+      "We measure success in leads, calls, and sales — not just rankings. Every campaign decision maps back to one question: does this grow revenue?",
   },
   {
-    title: "Senior-Led Execution",
+    title: "Niche-First Strategy",
     description:
-      "No junior account managers or outsourced work. Every client works directly with experienced SEO strategists.",
+      "We study your industry, your buyers' journey, and your competitors before planning a single piece of content. This niche understanding is our biggest competitive edge.",
   },
   {
-    title: "US-Focused Support",
+    title: "Full Transparency",
     description:
-      "Our entire team is based in the United States. When you call, you speak to someone who understands your market.",
+      "Weekly reports, direct GSC access, and plain-English explanations of everything we do. No black-box tactics — you see exactly what we're doing and why.",
   },
 ];
-
+ 
 export default function AboutPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "About SearchPrex",
-    "description": "Learn about SearchPrex, a US-Focused SEO agency.",
+    "description": "Founder-led SEO agency specializing in law firms, ecommerce, and local businesses across all 50 US states.",
     "url": "https://searchprex.com/about",
     "mainEntity": {
       "@type": "Organization",
       "name": "SearchPrex",
+      "url": "https://searchprex.com",
+      "email": "contact@searchprex.com",
+      "telephone": "+923106526316",
       "founder": {
         "@type": "Person",
         "name": "Mubashar Shahzad",
+        "jobTitle": "Founder & Lead SEO Strategist",
+        "email": "contact@searchprex.com",
         "sameAs": [
           "https://linkedin.com/in/mubi00",
-          "https://researchgate.net/profile/Mubashar-Shahzad"
         ]
       }
     }
   };
-
+ 
   return (
     <>
       <script
@@ -79,146 +76,107 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <main id="main-content" className="pt-32">
-        {/* Hero */}
-        <section className="bg-white pb-20">
+      <main id="main-content" className="bg-white pt-20">
+ 
+        {/* ── About component (CEO card + stats + reasons + EEAT) ── */}
+        <About />
+ 
+        {/* ── Our Values ── */}
+        <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
-                About SearchPrex
-              </span>
-              <h1 className="mt-4 text-4xl font-bold text-[#0a0f2e] sm:text-5xl lg:text-6xl">
-                Your Growth is Our Mission
-              </h1>
-              <p className="mx-auto mt-6 max-w-3xl text-xl text-[#64748b]">
-                SearchPrex is a US-Focused SEO agency dedicated to helping law firms, 
-                ecommerce stores, and local businesses dominate search results and 
-                grow their revenue.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="text-4xl font-bold text-[#2563eb] sm:text-5xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-2 text-[#64748b]">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CEO Message */}
-        <CEOMessage />
-
-        {/* Our Values */}
-        <section className="bg-white py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
+            <div className="mb-12 text-center">
+              <span className="mb-3 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
                 Our Values
               </span>
-              <h2 className="mt-4 text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
                 What We Stand For
               </h2>
             </div>
-
-            <div className="mt-12 grid gap-8 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2">
               {values.map((value, index) => (
                 <div
                   key={value.title}
-                  className="rounded-2xl border border-[#e5e7eb] bg-white p-8"
+                  className="rounded-2xl border border-[#e2e8f0] bg-white p-7 transition-all hover:border-[#534AB7]/30 hover:shadow-sm"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2563eb] text-xl font-bold text-white">
-                    {index + 1}
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#534AB7] text-sm font-black text-white">
+                    {String(index + 1).padStart(2, "0")}
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-[#0a0f2e]">
-                    {value.title}
-                  </h3>
-                  <p className="mt-3 text-[#64748b] leading-relaxed">
-                    {value.description}
-                  </p>
+                  <h3 className="mb-2 text-lg font-black text-[#0a0f2e]">{value.title}</h3>
+                  <p className="text-sm text-[#64748b] leading-relaxed">{value.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
-
-        {/* Office Location */}
-        <section className="bg-[#f7f8fc] py-20">
+ 
+        {/* ── Contact / Location ── */}
+        <section className="border-t border-[#e2e8f0] bg-white py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
+            <div className="mb-12 text-center">
+              <span className="mb-3 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
                 Contact Us
               </span>
-              <h2 className="mt-4 text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
-                Our USA Headquarters
+              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
+                Get in Touch
               </h2>
             </div>
-
-            <div className="mx-auto mt-12 max-w-2xl rounded-3xl bg-white p-8 shadow-lg sm:p-12">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#2563eb]">
+ 
+            <div className="mx-auto max-w-2xl rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm sm:p-10">
+              <div className="flex items-start gap-4 mb-8">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#534AB7]">
                   <Building2 className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#0a0f2e]">
-                    SearchPrex Headquarters
-                  </h3>
-                  <p className="mt-1 text-[#64748b]">USA Virtual Address</p>
+                  <h3 className="text-lg font-black text-[#0a0f2e]">SearchPrex</h3>
+                  <p className="text-sm text-[#64748b]">US-Focused SEO Agency · Serving All 50 States</p>
                 </div>
               </div>
-
-              <div className="mt-8 space-y-4">
+ 
+              <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <MapPin className="h-5 w-5 text-[#2563eb]" />
-                  <p className="text-[#374151]">
-                    1250 Executive Place, Suite 450
-                    <br />
-                    Geneva, IL 60134, USA
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
+                    <MapPin className="h-4 w-4 text-[#534AB7]" />
+                  </div>
+                  <p className="text-sm text-[#374151]">
+                    1250 Executive Place, Suite 450<br />Geneva, IL 60134, USA
                   </p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Phone className="h-5 w-5 text-[#2563eb]" />
-                  <a
-                    href="tel:+18005551234"
-                    className="text-[#374151] hover:text-[#2563eb]"
-                  >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
+                    <Phone className="h-4 w-4 text-[#534AB7]" />
+                  </div>
+                  <a href="tel:+923106526316" className="text-sm text-[#374151] hover:text-[#534AB7] transition-colors">
                     +92 310 652 6316
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Mail className="h-5 w-5 text-[#2563eb]" />
-                  <a
-                    href="mailto:hello@searchprex.com"
-                    className="text-[#374151] hover:text-[#2563eb]"
-                  >
-                    hello@searchprex.com
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
+                    <Mail className="h-4 w-4 text-[#534AB7]" />
+                  </div>
+                  <a href="mailto:contact@searchprex.com" className="text-sm text-[#374151] hover:text-[#534AB7] transition-colors">
+                    contact@searchprex.com
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Clock className="h-5 w-5 text-[#2563eb]" />
-                  <p className="text-[#374151]">
-                    Mon - Fri: 9:00 AM - 6:00 PM EST
-                  </p>
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
+                    <Clock className="h-4 w-4 text-[#534AB7]" />
+                  </div>
+                  <p className="text-sm text-[#374151]">Mon – Fri: 9:00 AM – 6:00 PM EST</p>
                 </div>
               </div>
-
-              <div className="mt-8 rounded-xl bg-[#f7f8fc] p-4 text-center">
-                <p className="text-sm text-[#64748b]">
-                  Serving clients in all{" "}
-                  <span className="font-bold text-[#0a0f2e]">50 US States</span>
+ 
+              <div className="mt-8 rounded-xl border border-[#534AB7]/20 bg-[#f5f3ff] px-5 py-4 text-center">
+                <p className="text-sm font-medium text-[#534AB7]">
+                  Proudly serving clients in all <strong>50 US States</strong>
                 </p>
               </div>
             </div>
           </div>
         </section>
+ 
       </main>
-     
       <ChatWidget />
     </>
   );
 }
+ 
