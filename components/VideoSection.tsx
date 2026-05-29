@@ -1,4 +1,3 @@
-
 "use client";
  
 import { useState, useEffect, useCallback } from "react";
@@ -15,36 +14,47 @@ interface Video {
  
 const videos: Video[] = [
   {
-    id: "Y5PxSECNGP0",          // ✅ live video
-    title: "How We Grew SMK Store from 0 to 285% More Indexed Pages",
-    description: "Full GSC screen recording — crawl budget fix, sitemap submission, and mass URL resubmission strategy that got 10,000+ product pages indexed.",
-    category: "Case Study",
+    id: "Y5PxSECNGP0",          // ✅ live video — Michigan performance
+    title: "Michigan Outdoor Sports — Real SEO Performance Walkthrough",
+    description: "Live GSC screen recording showing the real organic performance growth we delivered for Michigan Outdoor Sports — clicks, impressions, and indexed pages, unfiltered.",
+    category: "Client Results",
     duration: "0:14",
     stats: [
-      { label: "Pages Indexed", value: "+285%" },
+      { label: "Organic Clicks", value: "+476%" },
+      { label: "Pages Indexed", value: "12K+" },
+    ],
+  },
+  {
+    id: "cI3BwxqaJbw",          // ✅ live video — Michigan indexing case study
+    title: "Michigan Outdoor Sports — 0 to 285% Indexing Rate",
+    description: "Full GSC case study — crawl budget fix, sitemap submission, and mass URL resubmission strategy that took Michigan Outdoor Sports from near-zero to a 285% indexing rate.",
+    category: "Case Study",
+    duration: "12:10",
+    stats: [
+      { label: "Indexing Rate", value: "+285%" },
       { label: "Organic Traffic", value: "+180%" },
     ],
   },
   {
-    id: null,                    // coming soon — add ID later
-    title: "Local SEO for Law Firms — Real Client Results Walkthrough",
-    description: "Live Ahrefs + GSC screen recording showing how we took a Chicago law firm from page 5 to top 3 in 90 days.",
-    category: "Client Results",
-    duration: "12:10",
+    id: "g_1TfDU4YeA",          // ✅ live video — Local SEO + AI Overview
+    title: "Local Services — Top Rank + AI Overview Domination",
+    description: "Live walkthrough showing how we pushed a local service business to top map-pack rankings and captured Google's AI Overview placements for high-intent local searches.",
+    category: "Local SEO",
+    duration: "10:30",
     stats: [
-      { label: "Ranking Improved", value: "Pg 5 → Top 3" },
-      { label: "Leads Increased", value: "+320%" },
+      { label: "Local Ranking", value: "Top 3" },
+      { label: "AI Overview", value: "Featured" },
     ],
   },
   {
-    id: null,                    // coming soon — add ID later
-    title: "Founder's SEO Strategy — How SearchPrex Works",
-    description: "Mubashar walks through the exact SEO framework used for every client — no fluff, just the process that delivers results.",
-    category: "Our Process",
-    duration: "5:45",
+    id: "gFod-dTY-bg",          // ✅ live video — SMK Store revenue boost
+    title: "SMK Store — Revenue Boosted by 75% (United States)",
+    description: "Full case study on how organic SEO restructuring and product-page optimization boosted SMK Store's US revenue by 75% — real GSC and sales data, unfiltered.",
+    category: "Case Study",
+    duration: "9:15",
     stats: [
-      { label: "Clients Served", value: "20+" },
-      { label: "Avg. Result Time", value: "90 days" },
+      { label: "Revenue Growth", value: "+75%" },
+      { label: "Market", value: "USA" },
     ],
   },
 ];
@@ -53,6 +63,7 @@ const categoryColors: Record<string, string> = {
   "Case Study": "bg-[#EEEDFE] text-[#534AB7]",
   "Client Results": "bg-emerald-50 text-emerald-700",
   "Our Process": "bg-blue-50 text-blue-700",
+  "Local SEO": "bg-amber-50 text-amber-700",
 };
  
 /* ── VIDEO CARD ── */
@@ -218,7 +229,7 @@ export default function VideoSection() {
         </div>
  
         {/* Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {videos.map((video, i) => (
             <VideoCard key={i} video={video} onPlay={setActiveId} />
           ))}
@@ -281,3 +292,14 @@ export default function VideoSection() {
     </section>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
