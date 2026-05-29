@@ -2,14 +2,8 @@
  
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle, Star, Shield, Award, Calendar, Clock, Video } from "lucide-react";
+import { CheckCircle, Calendar, Clock, Video } from "lucide-react";
 import { useEffect } from "react";
- 
-const trustBadges = [
-  { icon: Shield, text: "Google Partner" },
-  { icon: Star, text: "5-Star Reviews" },
-  { icon: Award, text: "Top SEO Agency 2026" },
-];
  
 const meetingPerks = [
   { icon: Clock, text: "30-min free strategy call" },
@@ -200,19 +194,9 @@ export default function Hero({
                 <span className="text-[#1a3c8f]">Grow Revenue.</span>
               </h1>
  
-              <p className="mx-auto mb-6 max-w-xl text-lg text-[#64748b] lg:mx-0 lg:text-xl">
+              <p className="mx-auto mb-8 max-w-xl text-lg text-[#64748b] lg:mx-0 lg:text-xl">
                 {subheadline}
               </p>
- 
-              {/* Trust Badges row */}
-              <div className="mb-8 flex flex-wrap justify-center gap-4 lg:justify-start">
-                {trustBadges.map((badge) => (
-                  <div key={badge.text} className="flex items-center gap-2 rounded-full border border-[#e5e7eb] bg-white px-3 py-1.5">
-                    <badge.icon className="h-4 w-4 text-[#1a3c8f]" />
-                    <span className="text-xs font-medium text-[#374151]">{badge.text}</span>
-                  </div>
-                ))}
-              </div>
  
               {/* CTAs */}
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
@@ -357,6 +341,15 @@ export default function Hero({
   );
 }
  
+
+
+
+
+
+
+
+
+
 
 
 
