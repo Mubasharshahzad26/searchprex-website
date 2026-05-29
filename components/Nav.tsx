@@ -8,7 +8,7 @@ import { Logo } from "@/components/Logo";
  
 const navLinks = [
   {
-    href: "#services",
+    href: "/services",
     label: "Services",
     hasDropdown: true,
     dropdownItems: [
@@ -16,11 +16,8 @@ const navLinks = [
       { href: "/services/ecommerce-seo", label: "Ecommerce SEO" },
       { href: "/services/local-seo",     label: "Local SEO" },
       { href: "/services/technical-seo", label: "Technical SEO" },
-      { href: "/services/content-seo",   label: "Content SEO" },
     ],
   },
-  { href: "#pricing",      label: "Pricing" },
-  { href: "#results",      label: "Results" },
   {
     href: "/about",
     label: "About",
@@ -239,6 +236,10 @@ export default function Nav() {
   );
 }
  
+
+
+
+
 
 
 
