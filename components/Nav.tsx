@@ -115,9 +115,9 @@ export default function Nav() {
                 Log in
               </Link>
  
-              {/* 2. Try NicheSEO Pro — outline */}
+              {/* 2. Try NicheSEO Pro — outline → coming soon */}
               <Link
-                href="/tools"
+                href="/coming-soon"
                 className="flex items-center gap-1.5 rounded-lg border border-[#534AB7]/40 px-4 py-2 text-sm font-semibold text-[#534AB7] transition-all hover:border-[#534AB7] hover:bg-[#EEEDFE]"
               >
                 Try NicheSEO Pro
@@ -209,9 +209,9 @@ export default function Nav() {
                     Log in
                   </Link>
  
-                  {/* Try NicheSEO Pro — outline */}
+                  {/* Try NicheSEO Pro — outline → coming soon */}
                   <Link
-                    href="/tools"
+                    href="/coming-soon"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-center gap-1.5 rounded-lg border border-[#534AB7] py-2.5 text-center text-sm font-semibold text-[#534AB7] transition-colors hover:bg-[#EEEDFE]"
                   >
@@ -239,6 +239,17 @@ export default function Nav() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
 
 
 
