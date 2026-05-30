@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import ClientLogos from "@/components/ClientLogos";
 import VideoSection from "@/components/VideoSection";
 import PersonaSelector from "@/components/PersonaSelector";
 import AITool from "@/components/AITool";
@@ -106,6 +107,7 @@ export default async function Home() {
           stat3Label={homeData?.stat3Label}
           heroImage={homeData?.heroImage}
         />
+        <ClientLogos />
  
         {/* 02 — VIDEO PROOF */}
         <VideoSection />
