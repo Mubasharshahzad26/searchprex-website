@@ -1,19 +1,19 @@
 "use client";
-
+ 
 import { motion } from "framer-motion";
-import { 
-  Search, 
-  BarChart3, 
-  Link2, 
-  MapPin, 
-  FileSearch, 
+import {
+  Search,
+  BarChart3,
+  Link2,
+  MapPin,
+  FileSearch,
   TrendingUp,
   ArrowRight,
   Check,
   Sparkles
 } from "lucide-react";
 import Link from "next/link";
-
+ 
 const features = [
   {
     icon: FileSearch,
@@ -46,7 +46,7 @@ const features = [
     description: "See the direct impact of SEO on your leads and revenue.",
   },
 ];
-
+ 
 export default function NicheSEOPro() {
   return (
     <section className="relative overflow-hidden bg-[#0a0f2e] py-20">
@@ -54,7 +54,7 @@ export default function NicheSEOPro() {
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem]" />
       </div>
-
+ 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Content */}
@@ -69,18 +69,18 @@ export default function NicheSEOPro() {
                 Introducing NicheSEOPro
               </span>
             </div>
-
+ 
             <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
               The SEO Tool Built for{" "}
               <span className="text-[#2563eb]">Niche Businesses</span>
             </h2>
-
+ 
             <p className="mt-6 text-lg text-white/70 leading-relaxed">
-              NicheSEOPro is our proprietary SEO platform designed specifically for 
-              law firms, ecommerce stores, and local businesses. Unlike generic SEO tools, 
+              NicheSEOPro is our proprietary SEO platform designed specifically for
+              law firms, ecommerce stores, and local businesses. Unlike generic SEO tools,
               NicheSEOPro understands your industry and delivers actionable insights.
             </p>
-
+ 
             {/* Features Grid */}
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {features.map((feature, index) => (
@@ -104,24 +104,24 @@ export default function NicheSEOPro() {
                 </motion.div>
               ))}
             </div>
-
-            {/* CTA Buttons */}
+ 
+            {/* CTA Buttons — both → /coming-soon */}
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="/tool"
+                href="/coming-soon"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
               >
                 Start Free Trial
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="#cta"
+                href="/coming-soon"
                 className="inline-flex items-center gap-2 rounded-xl border-2 border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:border-white hover:bg-white hover:text-[#0a0f2e]"
               >
                 Get Free Demo
               </Link>
             </div>
-
+ 
             {/* Trial Info */}
             <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-white/50">
               <span className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function NicheSEOPro() {
               </span>
             </div>
           </motion.div>
-
+ 
           {/* Dashboard Preview */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -156,7 +156,7 @@ export default function NicheSEOPro() {
                   app.nicheseopro.com/dashboard
                 </div>
               </div>
-
+ 
               {/* Dashboard Content */}
               <div className="space-y-4">
                 {/* Stats Row */}
@@ -177,7 +177,7 @@ export default function NicheSEOPro() {
                     <p className="text-xs text-green-400">+4 points</p>
                   </div>
                 </div>
-
+ 
                 {/* Chart Placeholder */}
                 <div className="rounded-xl bg-[#0a0f2e] p-4">
                   <div className="mb-3 flex items-center justify-between">
@@ -196,7 +196,7 @@ export default function NicheSEOPro() {
                     )}
                   </div>
                 </div>
-
+ 
                 {/* Keyword Table */}
                 <div className="rounded-xl bg-[#0a0f2e] p-4">
                   <p className="mb-3 text-sm font-medium text-white">Top Keywords</p>
@@ -221,7 +221,7 @@ export default function NicheSEOPro() {
                 </div>
               </div>
             </div>
-
+ 
             {/* Floating Badge */}
             <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#2563eb] px-4 py-2 shadow-lg">
               <p className="text-xs font-bold text-white">Free 14-Day Trial</p>
@@ -232,3 +232,4 @@ export default function NicheSEOPro() {
     </section>
   );
 }
+ 
