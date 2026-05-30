@@ -257,21 +257,7 @@ export default function Hero({
                 </div>
               </div>
  
-              {/* Quick Stats */}
-              <div className="mt-2 grid grid-cols-3 gap-4 border-t border-[#e5e7eb] pt-8">
-                <div>
-                  <p className="text-2xl font-black text-[#0a0f2e] sm:text-3xl">{stat1Number}</p>
-                  <p className="text-xs font-medium uppercase tracking-wide text-[#64748b]">{stat1Label}</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-black text-[#0a0f2e] sm:text-3xl">{stat2Number}</p>
-                  <p className="text-xs font-medium uppercase tracking-wide text-[#64748b]">{stat2Label}</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-black text-[#0a0f2e] sm:text-3xl">{stat3Number}</p>
-                  <p className="text-xs font-medium uppercase tracking-wide text-[#64748b]">{stat3Label}</p>
-                </div>
-              </div>
+            
             </motion.div>
  
             {/* ── Right Content - Calendly Card ── */}
