@@ -165,7 +165,7 @@ export default function Hero({
   return (
     <>
       <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      <section className="relative min-h-screen overflow-hidden bg-white pt-20">
+      <section className="relative min-h-screen overflow-hidden bg-[#eeeef5] pt-20">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
  
@@ -188,7 +188,7 @@ export default function Hero({
               </div>
  
               {/* H1 */}
-              <h1 className="mb-6 text-5xl font-black leading-[1.0] tracking-tight text-[#0a0f2e] sm:text-6xl lg:text-7xl">
+              <h1 className="mb-6 text-4xl font-black leading-[1.0] tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl">
                 <span className="text-balance">{headline}</span>
                 <br />
                 <span className="text-[#1a3c8f]">Grow Revenue.</span>
