@@ -1,28 +1,36 @@
 "use client";
-
+ 
 interface LogoProps {
   variant?: "light" | "dark" | "icon-only";
   size?: "sm" | "md" | "lg";
   className?: string;
 }
-
-export function Logo({ variant = "light", size = "md", className = "" }: LogoProps) {
+ 
+/**
+ * variant meaning:
+ *  - "dark"  → for LIGHT backgrounds (dark text)   ← use on white pages
+ *  - "light" → for DARK backgrounds (light text)   ← use on dark sections/footer
+ *  - "icon-only" → just the mark, no wordmark
+ */
+export function Logo({ variant = "dark", size = "md", className = "" }: LogoProps) {
   const sizes = {
     sm: { icon: 24, text: 16 },
     md: { icon: 32, text: 20 },
     lg: { icon: 40, text: 24 },
   };
-
+ 
   const { icon, text } = sizes[size];
-
-  const isDark = variant === "dark";
+ 
+  const onDarkBg = variant === "light";     // light wordmark = sitting on a dark bg
   const iconOnly = variant === "icon-only";
-
-  // Colors based on variant
-  const backPieceColor = isDark ? "#3D65FF" : "#0E35D4";
-  const frontPieceColor = isDark ? "#5C82FF" : "#1847F5";
-  const textColor = isDark ? "#F0F4FF" : "#0D1B3E";
-
+ 
+  // Icon always uses vivid brand blues (visible on both light & dark)
+  const backPieceColor  = "#1847F5"; // bright brand blue
+  const frontPieceColor = "#3D65FF"; // lighter brand blue
+ 
+  // Wordmark color flips based on background
+  const textColor = onDarkBg ? "#F0F4FF" : "#0D1B3E";
+ 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       {/* Icon Mark */}
@@ -34,16 +42,16 @@ export function Logo({ variant = "light", size = "md", className = "" }: LogoPro
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        {/* Back piece - darker blue, lower-right */}
+        {/* Back piece - lower-right */}
         <polygon points="13,37 29,13 39,23 25,39" fill={backPieceColor} />
-        {/* Front piece - bright blue, upper-left */}
+        {/* Front piece - upper-left */}
         <polygon points="5,37 21,5 29,13 13,37" fill={frontPieceColor} />
       </svg>
-
+ 
       {/* Wordmark */}
       {!iconOnly && (
         <span
-          className="font-semibold tracking-tight leading-none"
+          className="font-bold leading-none"
           style={{
             fontSize: `${text}px`,
             color: textColor,
@@ -52,8 +60,8 @@ export function Logo({ variant = "light", size = "md", className = "" }: LogoPro
         >
           Searchprex
           <span
-            className="align-super opacity-70"
-            style={{ fontSize: `${text * 0.45}px`, marginLeft: "1px" }}
+            className="align-super"
+            style={{ fontSize: `${text * 0.45}px`, marginLeft: "1px", opacity: 0.6 }}
           >
             ®
           </span>
@@ -62,7 +70,7 @@ export function Logo({ variant = "light", size = "md", className = "" }: LogoPro
     </div>
   );
 }
-
+ 
 // Favicon component for generating favicon
 export function Favicon({ size = 32 }: { size?: number }) {
   return (
@@ -79,3 +87,22 @@ export function Favicon({ size = 32 }: { size?: number }) {
     </svg>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
