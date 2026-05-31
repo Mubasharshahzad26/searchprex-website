@@ -7,6 +7,10 @@ import {
   Settings, FileText, Zap, Star, Clock, Phone,
 } from "lucide-react";
  
+/* Toptal green accent */
+const GREEN = "#3eb489";
+const GREEN_DARK = "#2f9670";
+ 
 export const metadata: Metadata = {
   title: "SEO Services — SearchPrex | Law Firm, Ecommerce & Local SEO",
   description:
@@ -30,7 +34,7 @@ const services = [
     tagline: "Get More Cases From Google",
     desc: "We help attorneys rank #1 in their city — E-E-A-T content, local pack domination, attorney schema, and practice area pages that convert searchers into clients.",
     href: "/services/law-firm-seo",
-    stats: ["#1 rankings in 6 weeks", "+75% visibility avg", "47 leads/month"],
+    stats: ["#1 rankings in 6 weeks", "+380% visibility avg", "47 leads/month"],
     badge: "Most popular",
   },
   {
@@ -42,7 +46,7 @@ const services = [
     tagline: "Turn Your Store Into a Revenue Machine",
     desc: "Product page optimization at scale, crawl budget fixes, Core Web Vitals, category page SEO, and content that brings buyers — not just browsers.",
     href: "/services/ecommerce-seo",
-    stats: ["+683% traffic growth", "+285% revenue avg", "200+ keywords P1"],
+    stats: ["+75% revenue (SMK)", "+285% indexing", "12K+ pages indexed"],
   },
   {
     icon: MapPin,
@@ -53,7 +57,7 @@ const services = [
     tagline: "Own Every Corner of Your City",
     desc: "GBP optimization, citation building across 50+ directories, neighborhood-level content, and review velocity programs that put you in the local pack.",
     href: "/services/local-seo",
-    stats: ["3x local visibility", "#1 Google Maps pack", "+312% organic calls"],
+    stats: ["Top 3 Maps pack", "AI Overview featured", "+5.7x organic calls"],
   },
   {
     icon: Settings,
@@ -64,7 +68,7 @@ const services = [
     tagline: "Fix the Foundation. Make Google Love Your Site.",
     desc: "Full site crawl, Core Web Vitals (LCP/INP/CLS), schema markup, indexation recovery, redirect audits, and site architecture — all implemented, not just reported.",
     href: "/services/technical-seo",
-    stats: ["+476% impressions", "92 PageSpeed score", "48hr audit delivery"],
+    stats: ["+476% impressions", "+285% indexing rate", "48hr audit delivery"],
   },
   {
     icon: FileText,
@@ -102,31 +106,36 @@ export default function ServicesPage() {
   return (
     <>
       <Nav />
-      <main className="bg-white pt-20">
+      {/* GREY page bg */}
+      <main className="bg-[#eaecf3] pt-20">
  
-        {/* ── HERO ── */}
-        <section className="border-b border-[#e2e8f0] bg-white py-20 text-center">
+        {/* ── HERO — grey ── */}
+        <section className="border-b border-[#d4d8e3] bg-[#eaecf3] py-20 text-center">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <span className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+            <span
+              className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-sm"
+              style={{ color: GREEN_DARK }}
+            >
               Specialist SEO Services
             </span>
             <h1 className="mb-5 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl">
               Deep Expertise.<br />
-              <span className="text-[#534AB7]">Not a Menu of Options.</span>
+              <span style={{ color: GREEN }}>Not a Menu of Options.</span>
             </h1>
-            <p className="mb-8 text-lg text-[#64748b] leading-relaxed">
+            <p className="mb-8 text-lg text-[#475569] leading-relaxed">
               Every service connects to one outcome — growing your revenue organically. We go deep in your niche, not broad across every industry. Pick your service or get a free audit first.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/free-audit"
-                className="flex items-center gap-2 rounded-xl bg-[#534AB7] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all hover:bg-[#3C3489] hover:-translate-y-0.5"
+                className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
+                style={{ background: GREEN, boxShadow: "0 10px 25px -5px rgba(62,180,137,0.4)" }}
               >
                 Get Free Audit <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="tel:+923106526316"
-                className="flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-7 py-3.5 text-sm font-bold text-[#374151] transition-all hover:border-[#534AB7] hover:text-[#534AB7]"
+                className="flex items-center gap-2 rounded-xl border border-[#cbd0db] bg-white px-7 py-3.5 text-sm font-bold text-[#374151] transition-all hover:border-[#3eb489] hover:text-[#2f9670]"
               >
                 <Phone className="h-4 w-4" /> Talk to Founder
               </a>
@@ -134,7 +143,7 @@ export default function ServicesPage() {
           </div>
         </section>
  
-        {/* ── SERVICES GRID ── */}
+        {/* ── SERVICES GRID — grey ── */}
         <section className="py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-12 text-center">
@@ -142,7 +151,7 @@ export default function ServicesPage() {
                 Our Services
               </h2>
               <p className="mt-3 text-base text-[#64748b]">
-                Click any service to see full details, case studies, and pricing ranges.
+                Click any service to see full details, case studies, and our proven process.
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -150,8 +159,7 @@ export default function ServicesPage() {
                 <Link
                   key={svc.label}
                   href={svc.href}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl border-2 bg-white transition-all hover:-translate-y-1 hover:shadow-xl"
-                  style={{ borderColor: svc.border }}
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white transition-all hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-12px_rgba(10,15,46,0.18)]"
                 >
                   {/* Badge */}
                   {svc.badge && (
@@ -200,14 +208,14 @@ export default function ServicesPage() {
           </div>
         </section>
  
-        {/* ── WHY SEARCHPREX ── */}
-        <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-16">
+        {/* ── WHY SEARCHPREX — white ── */}
+        <section className="border-t border-[#d4d8e3] bg-white py-16">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {whyUs.map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-start gap-3 rounded-xl border border-[#e2e8f0] bg-white p-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
-                    <Icon className="h-4 w-4 text-[#534AB7]" />
+                <div key={text} className="flex items-start gap-3 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] p-4">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg" style={{ background: "rgba(62,180,137,0.12)" }}>
+                    <Icon className="h-4 w-4" style={{ color: GREEN_DARK }} />
                   </div>
                   <p className="text-sm font-medium text-[#374151]">{text}</p>
                 </div>
@@ -216,20 +224,21 @@ export default function ServicesPage() {
           </div>
         </section>
  
-        {/* ── FINAL CTA ── */}
-        <section className="bg-[#534AB7] py-20">
+        {/* ── FINAL CTA — dark navy + green ── */}
+        <section className="bg-[#0a0f2e] py-20">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#c4b5fd]">Not sure which service you need?</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Not sure which service you need?</p>
             <h2 className="mb-4 text-4xl font-black tracking-tight text-white">
-              Start With a Free Audit.<br />We'll Tell You Exactly What to Fix.
+              Start With a Free Audit.<br />We&apos;ll Tell You Exactly What to Fix.
             </h2>
-            <p className="mb-8 text-base text-[#c4b5fd] leading-relaxed">
+            <p className="mb-8 text-base text-white/70 leading-relaxed">
               The founder personally reviews your site and tells you exactly which service will move the needle most — with no obligation to hire us.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/free-audit"
-                className="flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-[#534AB7] shadow-lg transition-all hover:bg-[#f5f3ff] hover:-translate-y-0.5"
+                className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
+                style={{ background: GREEN }}
               >
                 Get Free Audit <ArrowRight className="h-4 w-4" />
               </Link>
@@ -249,6 +258,41 @@ export default function ServicesPage() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
