@@ -211,7 +211,7 @@ export default function BlogPage() {
     <main className="bg-white min-h-screen">
  
       {/* ── 01 HERO ── */}
-      <section className="bg-[#0a0f2e] relative overflow-hidden pt-28 pb-0">
+      <section className="bg-[#eeeef5] relative overflow-hidden pt-28 pb-0">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, #4a6cf7 1px, transparent 0)`, backgroundSize: "40px 40px" }} />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-0">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -317,7 +317,7 @@ export default function BlogPage() {
       </section>
  
       {/* ── 03 NEWSLETTER ── */}
-      <section className="bg-[#0a0f2e] py-14">
+      <section className="bg-[#eeeef5] py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <h2 className="text-3xl font-black text-white max-w-sm leading-tight">Expert SEO insights, delivered weekly.</h2>

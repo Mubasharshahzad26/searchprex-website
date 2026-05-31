@@ -134,7 +134,7 @@ export default function BlogPostPage() {
     <main className="bg-white min-h-screen">
  
       {/* ── 01 HERO BANNER ── */}
-      <section className="bg-[#0a0f2e] pt-28 pb-14 relative overflow-hidden">
+      <section className="bg-[#eeeef5] pt-28 pb-14 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, #4a6cf7 1px, transparent 0)`,
           backgroundSize: "40px 40px",
@@ -377,7 +377,7 @@ export default function BlogPostPage() {
       )}
  
       {/* ── 05 BOTTOM CTA ── */}
-      <section className="bg-[#0a0f2e] py-16">
+      <section className="bg-[#eeeef5] py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
             Ready to rank on Page 1?

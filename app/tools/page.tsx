@@ -100,7 +100,7 @@ export default function ToolsPage() {
     <main className="bg-white min-h-screen">
  
       {/* ── Hero ── */}
-      <section className="bg-[#0a0f2e] pt-28 pb-16 relative overflow-hidden">
+      <section className="bg-[#eeeef5] pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, #4a6cf7 1px, transparent 0)`,
           backgroundSize: "40px 40px",
