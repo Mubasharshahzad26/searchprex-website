@@ -5,8 +5,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Scale, ShoppingCart, MapPin, ClipboardCheck,
-  TrendingUp, CheckCircle, ArrowRight, Calendar
+  TrendingUp, CheckCircle, ArrowRight, Calendar, ArrowUpRight
 } from "lucide-react";
+ 
+/* Toptal green accent */
+const GREEN = "#3eb489";
+const GREEN_DARK = "#2f9670";
  
 const services = [
   {
@@ -20,12 +24,12 @@ const services = [
     kpiColor: "#3C3489",
     kpi: "+320% leads",
     title: "Law Firm SEO",
-    niche: "Family law · Personal injury · Criminal defense",
-    desc: "Rank for high-intent searches that bring qualified consultations — not just traffic. Attorney-specific E-E-A-T content strategy included.",
+    niche: "Dallas, TX · Family law · Personal injury · Criminal defense",
+    desc: "We rank Dallas and Texas law firms for high-intent searches like \"personal injury lawyer Dallas\" that bring qualified consultations — not just traffic. Attorney-specific E-E-A-T content built to Google's legal YMYL standards.",
     features: [
-      "Practice area page optimization",
-      "Google Business Profile management",
-      "Attorney credential E-E-A-T content",
+      "Practice-area & city landing page optimization",
+      "Google Business Profile & local map pack ranking",
+      "Attorney credential E-E-A-T & legal schema",
     ],
     tags: ["Local SEO", "E-E-A-T", "Maps pack"],
     href: "/services/law-firm-seo",
@@ -35,18 +39,18 @@ const services = [
     icon: ShoppingCart,
     iconBg: "#E1F5EE",
     iconColor: "#0F6E56",
-    accentColor: "#1D9E75",
+    accentColor: GREEN,
     kpiBg: "#E1F5EE",
     kpiBorder: "#5DCAA5",
     kpiColor: "#085041",
     kpi: "+285% indexed",
-    title: "Shopify & E-commerce SEO",
-    niche: "DTC brands · Online retailers · Shopify stores",
-    desc: "Fix mass non-indexing, duplicate content, and Core Web Vitals holding your product pages back from ranking at scale.",
+    title: "Ecommerce & Shopify SEO",
+    niche: "DTC brands · Online retailers · Shopify & WooCommerce stores",
+    desc: "We fix mass non-indexing, duplicate boilerplate content, and Core Web Vitals holding thousands of product pages back. Proven on 35,000+ SKU catalogs — real results, not theory.",
     features: [
-      "Crawl budget optimization at scale",
-      "Product page content rewriting",
-      "Collection page keyword mapping",
+      "Crawl budget optimization at scale (10K+ pages)",
+      "Unique product page content rewriting",
+      "Collection page keyword mapping & product schema",
     ],
     tags: ["Shopify", "Core Web Vitals", "Schema"],
     href: "/services/ecommerce-seo",
@@ -62,12 +66,12 @@ const services = [
     kpiColor: "#0C447C",
     kpi: "Top 3 maps",
     title: "Local SEO",
-    niche: "HVAC · Plumbers · Restaurants · Clinics",
-    desc: "Dominate Google Maps and local packs in your city. Built for service businesses targeting specific geographic areas.",
+    niche: "HVAC · Plumbers · Restaurants · Clinics · Contractors",
+    desc: "We dominate Google Maps and the local pack in your city — capturing \"near me\" and AI Overview placements. Built for US service businesses targeting specific geographic areas.",
     features: [
-      "GBP optimization & weekly posts",
-      "50+ local citation building",
-      "Review generation strategy",
+      "Google Business Profile optimization & weekly posts",
+      "50+ local citation building & NAP consistency",
+      "Review generation & local landing pages",
     ],
     tags: ["Maps pack", "Citations", "Near me"],
     href: "/services/local-seo",
@@ -84,11 +88,11 @@ const services = [
     kpi: "5-day delivery",
     title: "Technical SEO Audit",
     niche: "Any website · One-time engagement",
-    desc: "Deep technical audit with a prioritized fix list — crawl budget, Core Web Vitals, indexation issues, and site architecture.",
+    desc: "A deep technical audit with a prioritized fix list — crawl budget, Core Web Vitals, indexation issues, and site architecture. Includes a recorded video walkthrough so you know exactly what to fix first.",
     features: [
-      "Screaming Frog + GSC deep analysis",
-      "Prioritized issue list (P1/P2/P3)",
-      "Video walkthrough included",
+      "Screaming Frog + GSC + log-file deep analysis",
+      "Prioritized issue list (P1 / P2 / P3)",
+      "Recorded video walkthrough included",
     ],
     tags: ["Crawl audit", "GSC", "CWV"],
     href: "/services/technical-seo",
@@ -99,64 +103,69 @@ export default function Services() {
   const [hovered, setHovered] = useState<number | null>(null);
  
   return (
-    <section className="py-20 bg-white" id="services">
+    <section className="py-24 bg-[#eaecf3]" id="services">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
         {/* ── Header ── */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#EEEDFE] border border-[#AFA9EC] rounded-full px-4 py-2 mb-4">
-            <TrendingUp className="h-3.5 w-3.5 text-[#534AB7]" />
-            <span className="text-xs font-bold text-[#534AB7] uppercase tracking-widest">Our Services</span>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-white border border-[#e2e8f0] rounded-full px-4 py-2 mb-5 shadow-sm">
+            <TrendingUp className="h-3.5 w-3.5" style={{ color: GREEN }} />
+            <span className="text-xs font-bold text-[#0a0f2e] uppercase tracking-widest">SEO Services</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#0a0f2e] leading-tight mb-4">
-            SEO that actually <span className="text-[#534AB7]">moves the needle</span>
+          <h2 className="text-4xl sm:text-5xl font-black text-[#0a0f2e] leading-[1.05] mb-5 tracking-tight">
+            Specialized SEO that<br className="hidden sm:block" />
+            <span style={{ color: GREEN }}>moves the needle</span>
           </h2>
-          <p className="text-[#64748b] text-lg max-w-2xl mx-auto">
-            Founder-led, senior-executed. No account managers. No templates. Just results.
+          <p className="text-[#475569] text-lg max-w-2xl mx-auto leading-relaxed">
+            Founder-led, senior-executed SEO for US law firms, ecommerce stores, and local businesses.
+            No account managers. No templates. No outsourcing — just measurable growth.
           </p>
         </div>
  
         {/* ── 4 Cards Grid ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
           {services.map((s, i) => (
             <motion.div
               key={s.num}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
-              className="relative rounded-2xl border border-[#e5e7eb] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#534AB7]/40 flex flex-col"
+              className="group relative rounded-3xl border border-[#e2e8f0] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-12px_rgba(10,15,46,0.18)] flex flex-col"
             >
-              {/* Top accent bar */}
-              <div
-                className="h-1 w-full flex-shrink-0"
-                style={{ background: s.accentColor }}
-              />
- 
               {/* Card head */}
-              <div className="p-6 pb-4">
-                {/* Number */}
-                <p className="text-[10px] font-semibold text-[#94a3b8] tracking-widest mb-4 uppercase">
-                  {s.num} / 04
-                </p>
+              <div className="p-7 pb-5">
+                {/* Number + arrow */}
+                <div className="flex items-center justify-between mb-5">
+                  <p className="text-[11px] font-bold text-[#94a3b8] tracking-[0.2em] uppercase">
+                    {s.num} <span className="text-[#cbd5e1]">/ 04</span>
+                  </p>
+                  <Link
+                    href={s.href}
+                    className="h-9 w-9 rounded-full flex items-center justify-center border border-[#e2e8f0] transition-all duration-200 flex-shrink-0"
+                    style={hovered === i ? { background: s.accentColor, borderColor: s.accentColor } : {}}
+                    aria-label={`Learn more about ${s.title}`}
+                  >
+                    <ArrowUpRight
+                      className="h-4 w-4 transition-colors duration-200"
+                      style={{ color: hovered === i ? "#fff" : "#94a3b8" }}
+                    />
+                  </Link>
+                </div>
  
                 {/* Icon + KPI row */}
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-5">
                   <div
-                    className="h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    className="h-14 w-14 rounded-2xl flex items-center justify-center flex-shrink-0"
                     style={{ background: s.iconBg }}
                   >
-                    <s.icon className="h-5 w-5" style={{ color: s.iconColor }} />
+                    <s.icon className="h-6 w-6" style={{ color: s.iconColor }} />
                   </div>
                   <div
                     className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold border"
-                    style={{
-                      background: s.kpiBg,
-                      borderColor: s.kpiBorder,
-                      color: s.kpiColor,
-                    }}
+                    style={{ background: s.kpiBg, borderColor: s.kpiBorder, color: s.kpiColor }}
                   >
                     <TrendingUp className="h-3 w-3" />
                     {s.kpi}
@@ -164,31 +173,30 @@ export default function Services() {
                 </div>
  
                 {/* Title + niche */}
-                <h3 className="text-lg font-black text-[#0a0f2e] mb-1">{s.title}</h3>
-                <p className="text-xs text-[#94a3b8] mb-3 font-medium">{s.niche}</p>
+                <h3 className="text-xl font-black text-[#0a0f2e] mb-1.5 tracking-tight">{s.title}</h3>
+                <p className="text-xs text-[#94a3b8] mb-3.5 font-semibold uppercase tracking-wide">{s.niche}</p>
  
                 {/* Description */}
-                <p className="text-sm text-[#64748b] leading-relaxed">{s.desc}</p>
+                <p className="text-sm text-[#475569] leading-relaxed">{s.desc}</p>
               </div>
  
               {/* Features */}
-              <div className="border-t border-[#f1f5f9] mx-6" />
-              <ul className="px-6 py-4 space-y-2 flex-1">
+              <ul className="px-7 py-5 space-y-2.5 flex-1 border-t border-[#f1f5f9]">
                 {s.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2.5 text-xs text-[#64748b]">
-                    <CheckCircle className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-[#475569]">
+                    <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: GREEN }} />
                     {f}
                   </li>
                 ))}
               </ul>
  
               {/* Footer */}
-              <div className="border-t border-[#f1f5f9] px-6 py-4 flex items-center justify-between">
+              <div className="border-t border-[#f1f5f9] px-7 py-4 flex items-center justify-between">
                 <div className="flex flex-wrap gap-1.5">
                   {s.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-medium bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-md"
+                      className="text-[10px] font-semibold bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-md"
                     >
                       {tag}
                     </span>
@@ -196,17 +204,10 @@ export default function Services() {
                 </div>
                 <Link
                   href={s.href}
-                  className="h-9 w-9 rounded-full flex items-center justify-center border border-[#e5e7eb] transition-all duration-200 flex-shrink-0 ml-2"
-                  style={
-                    hovered === i
-                      ? { background: s.accentColor, borderColor: s.accentColor }
-                      : {}
-                  }
+                  className="text-xs font-bold flex items-center gap-1 transition-all hover:gap-1.5 flex-shrink-0 ml-2"
+                  style={{ color: s.accentColor }}
                 >
-                  <ArrowRight
-                    className="h-4 w-4 transition-colors duration-200"
-                    style={{ color: hovered === i ? "#fff" : "#64748b" }}
-                  />
+                  Learn more <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             </motion.div>
@@ -218,12 +219,12 @@ export default function Services() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="rounded-2xl bg-[#0a0f2e] px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-5"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="rounded-3xl bg-[#0a0f2e] px-8 py-7 flex flex-col sm:flex-row items-center justify-between gap-5"
         >
           <div className="flex items-center gap-4">
-            <div className="h-12 w-12 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0">
-              <span className="text-[#534AB7] font-black text-lg">M</span>
+            <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <span className="text-white font-black text-lg">M</span>
             </div>
             <div>
               <p className="text-white font-bold text-sm sm:text-base">
@@ -239,13 +240,16 @@ export default function Services() {
               href="https://calendly.com/contact-searchprex/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3d35a0] text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 font-bold px-6 py-3 rounded-xl transition-colors text-sm text-white"
+              style={{ background: GREEN }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = GREEN_DARK)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = GREEN)}
             >
               <Calendar className="h-4 w-4" />
               Book free call
             </a>
             <Link
-              href="#results"
+              href="/case-studies"
               className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 border border-white/20 hover:border-white text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm"
             >
               View results
@@ -259,6 +263,22 @@ export default function Services() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

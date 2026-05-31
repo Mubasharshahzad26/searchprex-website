@@ -3,7 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle, ExternalLink, Star, Users, Clock } from "lucide-react";
+import { CheckCircle, ExternalLink, Star, Users, Clock, TrendingUp, Award } from "lucide-react";
+ 
+/* Toptal green accent */
+const GREEN = "#3eb489";
  
 const credentials = [
   {
@@ -33,6 +36,28 @@ const credentials = [
     color: "#712B13",
     bg: "#FAECE7",
     href: "https://static.semrush.com/academy/certificates/0053423184/mubashar-shahzad_2.pdf",
+  },
+];
+ 
+/* Real, first-hand case results — E-E-A-T "Experience" signal */
+const caseResults = [
+  {
+    client: "Michigan Sports Outdoor",
+    tag: "Ecommerce · USA",
+    metric: "+285%",
+    label: "Indexed pages (7K → 27K in 6 weeks)",
+  },
+  {
+    client: "SMK Store",
+    tag: "Tactical Gear · USA",
+    metric: "+75%",
+    label: "Revenue growth in 2 months",
+  },
+  {
+    client: "Local HVAC Services",
+    tag: "Local SEO · USA",
+    metric: "Top 3",
+    label: "Map pack + AI Overview placement",
   },
 ];
  
@@ -102,7 +127,7 @@ const profileLinks = [
  
 export default function FounderSection() {
   return (
-    <section className="relative bg-[#f0f4ff] py-20">
+    <section className="relative bg-[#eaecf3] py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
@@ -121,15 +146,19 @@ export default function FounderSection() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#B5D4F4] bg-[#E6F1FB] px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#0C447C]">
+          <div
+            className="mb-3 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest shadow-sm"
+            style={{ borderColor: "#cbeadd", color: "#1D9E75" }}
+          >
             <CheckCircle className="h-3.5 w-3.5" />
             Founder-led agency · E-E-A-T verified
           </div>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-            Meet the founder
+            Hands-on experience, <span style={{ color: GREEN }}>not theory</span>
           </h2>
-          <p className="mt-3 text-[#64748b]">
-            You work directly with me — not a rotating team of juniors
+          <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
+            You work directly with me — not a rotating team of juniors. Every strategy comes from
+            real campaigns I&apos;ve personally executed for US ecommerce, law firm, and local clients.
           </p>
         </motion.div>
  
@@ -142,7 +171,7 @@ export default function FounderSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="rounded-2xl border border-[#B5D4F4] bg-white p-8 shadow-sm">
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm">
  
               {/* Avatar + name */}
               <div className="mb-6 flex items-center gap-4">
@@ -168,9 +197,12 @@ export default function FounderSection() {
                 </div>
               </div>
  
-              {/* Quote */}
-              <blockquote className="mb-6 border-l-4 border-[#534AB7] pl-4 text-sm leading-relaxed text-[#374151] italic">
-                "I started SearchPrex because too many law firms and local businesses get burned by generic agencies that assign junior staff and disappear after onboarding. Every strategy we run is built on real GSC data, first-hand testing, and transparent monthly reporting — no fluff, no AI-spun content, no excuses."
+              {/* Quote — first-hand experience narrative */}
+              <blockquote className="mb-6 border-l-4 pl-4 text-sm leading-relaxed text-[#374151] italic" style={{ borderColor: GREEN }}>
+                &quot;Over the last 5+ years I&apos;ve personally fixed mass non-indexing on a 35,000-product
+                ecommerce catalog, taken Michigan Sports Outdoor from 7K to 27K indexed pages, and grown
+                SMK Store&apos;s US revenue by 75% in two months. Every strategy I run is built on real GSC
+                data and first-hand testing — no AI-spun content, no excuses.&quot;
               </blockquote>
  
               {/* Semrush Certificates — clickable */}
@@ -228,15 +260,44 @@ export default function FounderSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-col gap-6"
           >
-            <div className="rounded-2xl border border-[#e5e7eb] bg-white p-6 shadow-sm">
+            {/* Real case results — Experience proof */}
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
+              <div className="mb-4 flex items-center gap-2">
+                <Award className="h-4 w-4" style={{ color: GREEN }} />
+                <h3 className="text-lg font-black text-[#0a0f2e]">Real results I&apos;ve delivered</h3>
+              </div>
+              <div className="flex flex-col gap-3">
+                {caseResults.map((c) => (
+                  <div key={c.client} className="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-3">
+                    <div className="flex flex-col items-center justify-center rounded-lg px-3 py-2 min-w-[72px]" style={{ background: "rgba(62,180,137,0.1)" }}>
+                      <span className="text-lg font-black leading-none" style={{ color: "#2f9670" }}>{c.metric}</span>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-[#0a0f2e] leading-tight">{c.client}</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-wide text-[#94a3b8]">{c.tag}</p>
+                      <p className="text-xs text-[#64748b] mt-0.5">{c.label}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href="/case-studies"
+                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold transition-all hover:gap-2"
+                style={{ color: "#2f9670" }}
+              >
+                <TrendingUp className="h-3.5 w-3.5" /> See full case studies <ExternalLink className="h-3 w-3" />
+              </Link>
+            </div>
+ 
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
               <h3 className="mb-4 text-lg font-black text-[#0a0f2e]">
                 Why work directly with the founder?
               </h3>
               <div className="flex flex-col gap-4">
                 {whyFounder.map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#EEEDFE]">
-                      <item.icon className="h-5 w-5 text-[#534AB7]" />
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl" style={{ background: "rgba(62,180,137,0.12)" }}>
+                      <item.icon className="h-5 w-5" style={{ color: "#2f9670" }} />
                     </div>
                     <div>
                       <p className="font-semibold text-[#0a0f2e]">{item.title}</p>
@@ -247,27 +308,14 @@ export default function FounderSection() {
               </div>
             </div>
  
-            {/* Stats row */}
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { num: "5+", label: "Years Experience" },
-                { num: "20+", label: "Clients Served" },
-                { num: "100%", label: "Founder-Led" },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-xl border border-[#e5e7eb] bg-white p-4 text-center shadow-sm">
-                  <p className="text-2xl font-black text-[#534AB7]">{stat.num}</p>
-                  <p className="mt-1 text-[10px] font-medium text-[#64748b]">{stat.label}</p>
-                </div>
-              ))}
-            </div>
- 
             {/* Mini CTA */}
             <div className="rounded-2xl bg-[#0a0f2e] p-6 text-white">
               <p className="mb-2 text-sm font-semibold text-white/60 uppercase tracking-widest">Ready to talk?</p>
               <p className="mb-4 text-lg font-black">Get a free 30-min strategy call</p>
               <Link
-                href="#ai-tool"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#534AB7] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#3C3489]"
+                href="/free-audit"
+                className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors"
+                style={{ background: GREEN }}
               >
                 Book Consultation
               </Link>
@@ -280,3 +328,32 @@ export default function FounderSection() {
     </section>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,6 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Check, ArrowRight, ArrowLeft, Shield, Clock, Star, Phone } from "lucide-react";
  
+/* Toptal green accent */
+const GREEN = "#3eb489";
+const GREEN_DARK = "#2f9670";
+ 
 type FormData = {
   businessType: string;
   name: string;
@@ -87,7 +91,6 @@ export default function CTA() {
  
   const selectedBusinessType = watch("businessType");
  
-  // ✅ UPDATED — saves to Supabase via API
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
@@ -136,20 +139,23 @@ export default function CTA() {
             transition={{ duration: 0.6 }}
             className="lg:sticky lg:top-24"
           >
-            <span className="mb-6 inline-block rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white">
+            <span
+              className="mb-6 inline-block rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest text-white"
+              style={{ background: "rgba(62,180,137,0.18)" }}
+            >
               Free SEO Audit
             </span>
             <h2 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl">
               <span className="text-balance">Dominate Your Market in 2026</span>
             </h2>
             <p className="mb-8 text-lg text-white/70">
-              Get a comprehensive SEO audit tailored to Google&apos;s March 2026 core update. We&apos;ll analyze your site&apos;s technical health, content quality, E-E-A-T signals, and competitor positions.
+              Get a comprehensive SEO audit tailored to Google&apos;s 2026 core updates. We&apos;ll analyze your site&apos;s technical health, content quality, E-E-A-T signals, and competitor positions.
             </p>
  
             <ul className="mb-8 space-y-3">
               {benefits.map((benefit) => (
                 <li key={benefit} className="flex items-center gap-3">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#22c55e]">
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full" style={{ background: GREEN }}>
                     <Check className="h-3 w-3 text-white" />
                   </div>
                   <span className="text-white/90">{benefit}</span>
@@ -160,20 +166,20 @@ export default function CTA() {
             <div className="mb-8 flex flex-wrap gap-4">
               {trustSignals.map((signal) => (
                 <div key={signal.text} className="flex items-center gap-2">
-                  <signal.icon className="h-4 w-4 text-[#2563eb]" />
+                  <signal.icon className="h-4 w-4" style={{ color: GREEN }} />
                   <span className="text-sm font-medium text-white/80">{signal.text}</span>
                 </div>
               ))}
             </div>
  
-            <div className="rounded-xl border border-[#22c55e]/30 bg-[#22c55e]/10 p-4">
+            <div className="rounded-xl border p-4" style={{ borderColor: "rgba(62,180,137,0.3)", background: "rgba(62,180,137,0.1)" }}>
               <div className="flex items-center gap-3">
                 <span className="relative flex h-3 w-3">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
-                  <span className="relative inline-flex h-3 w-3 rounded-full bg-[#22c55e]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: GREEN }} />
+                  <span className="relative inline-flex h-3 w-3 rounded-full" style={{ background: GREEN }} />
                 </span>
                 <div>
-                  <p className="text-sm font-bold text-[#22c55e]">Only 3 Audit Spots Remaining This Month</p>
+                  <p className="text-sm font-bold" style={{ color: GREEN }}>Only 3 Audit Spots Remaining This Month</p>
                   <p className="text-xs text-white/60">Due to high demand, we limit audits to ensure quality</p>
                 </div>
               </div>
@@ -202,9 +208,10 @@ export default function CTA() {
                 <span className="font-medium text-[#0a0f2e]">Step {step} of 3</span>
                 <span className="text-[#64748b]">{Math.round((step / 3) * 100)}% Complete</span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-[#f7f8fc]">
+              <div className="h-2 overflow-hidden rounded-full bg-[#f1f3f9]">
                 <motion.div
-                  className="h-full bg-[#2563eb]"
+                  className="h-full"
+                  style={{ background: GREEN }}
                   initial={{ width: 0 }}
                   animate={{ width: `${(step / 3) * 100}%` }}
                   transition={{ duration: 0.3 }}
@@ -220,7 +227,7 @@ export default function CTA() {
                   animate={{ opacity: 1, y: 0 }}
                   className="py-12 text-center"
                 >
-                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#22c55e]">
+                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full" style={{ background: GREEN }}>
                     <Check className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="mb-2 text-2xl font-bold text-[#0a0f2e]">Audit Request Received!</h3>
@@ -229,7 +236,7 @@ export default function CTA() {
                   </p>
                   <p className="text-sm text-[#64748b]">
                     Questions? Email us at{" "}
-                    <a href="mailto:hello@searchprex.com" className="text-[#2563eb] underline">hello@searchprex.com</a>
+                    <a href="mailto:hello@searchprex.com" className="underline" style={{ color: GREEN_DARK }}>hello@searchprex.com</a>
                   </p>
                 </motion.div>
               ) : (
@@ -244,11 +251,12 @@ export default function CTA() {
                         {businessTypes.map((type) => (
                           <label
                             key={type.value}
-                            className={`flex cursor-pointer flex-col rounded-xl border-2 p-4 transition-all ${
+                            className="flex cursor-pointer flex-col rounded-xl border-2 p-4 transition-all"
+                            style={
                               selectedBusinessType === type.value
-                                ? "border-[#2563eb] bg-[#2563eb]/5"
-                                : "border-[#e5e7eb] hover:border-[#2563eb]/50"
-                            }`}
+                                ? { borderColor: GREEN, background: "rgba(62,180,137,0.06)" }
+                                : { borderColor: "#e5e7eb" }
+                            }
                           >
                             <input type="radio" value={type.value} {...register("businessType", { required: "Please select a business type" })} className="sr-only" />
                             <span className="font-bold text-[#0a0f2e]">{type.label}</span>
@@ -269,7 +277,7 @@ export default function CTA() {
                       <div>
                         <label className="mb-1 block text-sm font-medium text-[#0a0f2e]">Full Name *</label>
                         <input {...register("name", { required: "Name is required" })} type="text" placeholder="John Smith"
-                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20" />
+                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20" />
                         {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
                       </div>
  
@@ -277,7 +285,7 @@ export default function CTA() {
                         <label className="mb-1 block text-sm font-medium text-[#0a0f2e]">Work Email *</label>
                         <input {...register("email", { required: "Email is required", pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Invalid email address" } })}
                           type="email" placeholder="john@company.com"
-                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20" />
+                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20" />
                         {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
                       </div>
  
@@ -285,14 +293,14 @@ export default function CTA() {
                         <label className="mb-1 block text-sm font-medium text-[#0a0f2e]">Phone Number *</label>
                         <input {...register("phone", { required: "Phone is required", pattern: { value: /^[\d\s\-\(\)\+]+$/, message: "Invalid phone number" } })}
                           type="tel" placeholder="(555) 123-4567"
-                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20" />
+                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20" />
                         {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>}
                       </div>
  
                       <div>
                         <label className="mb-1 block text-sm font-medium text-[#0a0f2e]">Website URL *</label>
                         <input {...register("website", { required: "Website URL is required" })} type="url" placeholder="https://yourwebsite.com"
-                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20" />
+                          className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] placeholder:text-[#94a3b8] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20" />
                         {errors.website && <p className="mt-1 text-sm text-red-500">{errors.website.message}</p>}
                       </div>
                     </motion.div>
@@ -306,7 +314,7 @@ export default function CTA() {
  
                       <div>
                         <label className="mb-2 block text-sm font-medium text-[#0a0f2e]">Monthly SEO Budget</label>
-                        <select {...register("monthlyBudget")} className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20">
+                        <select {...register("monthlyBudget")} className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20">
                           <option value="">Select a range</option>
                           {budgetOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                         </select>
@@ -314,7 +322,7 @@ export default function CTA() {
  
                       <div>
                         <label className="mb-2 block text-sm font-medium text-[#0a0f2e]">When do you want to start?</label>
-                        <select {...register("timeline")} className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20">
+                        <select {...register("timeline")} className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20">
                           <option value="">Select timeline</option>
                           {timelineOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                         </select>
@@ -324,8 +332,8 @@ export default function CTA() {
                         <label className="mb-2 block text-sm font-medium text-[#0a0f2e]">Current SEO Challenges (Select all that apply)</label>
                         <div className="grid grid-cols-2 gap-2">
                           {challengeOptions.map((option) => (
-                            <label key={option.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#e5e7eb] p-2 text-sm hover:border-[#2563eb]/50">
-                              <input type="checkbox" value={option.value} {...register("currentChallenges")} className="h-4 w-4 rounded border-[#e5e7eb] text-[#2563eb] focus:ring-[#2563eb]" />
+                            <label key={option.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#e5e7eb] p-2 text-sm hover:border-[#3eb489]/50">
+                              <input type="checkbox" value={option.value} {...register("currentChallenges")} className="h-4 w-4 rounded border-[#e5e7eb] text-[#3eb489] focus:ring-[#3eb489]" />
                               <span className="text-[#374151]">{option.label}</span>
                             </label>
                           ))}
@@ -334,7 +342,7 @@ export default function CTA() {
  
                       <div>
                         <label className="mb-2 block text-sm font-medium text-[#0a0f2e]">How did you hear about us?</label>
-                        <select {...register("heardAboutUs")} className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20">
+                        <select {...register("heardAboutUs")} className="w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-[#0a0f2e] focus:border-[#3eb489] focus:outline-none focus:ring-2 focus:ring-[#3eb489]/20">
                           <option value="">Select an option</option>
                           {sourceOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                         </select>
@@ -352,12 +360,18 @@ export default function CTA() {
                     )}
                     {step < 3 ? (
                       <button type="button" onClick={nextStep}
-                        className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]">
+                        className="flex flex-1 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all"
+                        style={{ background: GREEN }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = GREEN_DARK)}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = GREEN)}>
                         Continue <ArrowRight className="h-4 w-4" />
                       </button>
                     ) : (
                       <button type="submit" disabled={isSubmitting}
-                        className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#22c55e] px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#16a34a] disabled:cursor-not-allowed disabled:opacity-70">
+                        className="flex flex-1 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all disabled:cursor-not-allowed disabled:opacity-70"
+                        style={{ background: GREEN }}
+                        onMouseEnter={(e) => !isSubmitting && (e.currentTarget.style.background = GREEN_DARK)}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = GREEN)}>
                         {isSubmitting ? (
                           <><svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>Submitting...</>
                         ) : (
@@ -381,6 +395,29 @@ export default function CTA() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
