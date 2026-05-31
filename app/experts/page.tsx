@@ -28,7 +28,7 @@ interface TeamMember {
   linkedin: string;
   certifications: string[];
   specialties: string[];
-  joining?: boolean; // true = "Joining Soon" (not yet a real team member)
+  joining?: boolean;
 }
  
 const team: TeamMember[] = [
@@ -116,9 +116,10 @@ export default function ExpertsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <main id="main-content" className="pt-32">
-        {/* Hero */}
-        <section className="bg-white pb-16">
+      {/* GREY page background */}
+      <main id="main-content" className="bg-[#eaecf3] pt-32">
+        {/* Hero — grey */}
+        <section className="bg-[#eaecf3] pb-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
@@ -127,7 +128,7 @@ export default function ExpertsPage() {
               <h1 className="mt-4 text-4xl font-bold text-[#0a0f2e] sm:text-5xl lg:text-6xl">
                 Meet Our SEO Experts
               </h1>
-              <p className="mx-auto mt-6 max-w-3xl text-xl text-[#64748b]">
+              <p className="mx-auto mt-6 max-w-3xl text-xl text-[#475569]">
                 Every SearchPrex client works directly with the founder — a senior strategist
                 with 5+ years of hands-on experience. No junior account managers, no outsourced work.
               </p>
@@ -135,8 +136,8 @@ export default function ExpertsPage() {
           </div>
         </section>
  
-        {/* Team Grid */}
-        <section className="bg-[#f7f8fc] py-20">
+        {/* Team Grid — grey bg, white cards */}
+        <section className="bg-[#eaecf3] py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((member) => {
@@ -161,7 +162,7 @@ export default function ExpertsPage() {
                         }`}
                       />
  
-                      {/* Founder badge — only Mubashar */}
+                      {/* Founder badge — white text on blue is CORRECT, kept */}
                       {!isJoining && (
                         <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-[#2563eb] px-3 py-1.5 text-xs font-bold text-white shadow-lg">
                           <BadgeCheck className="h-4 w-4" />
@@ -169,7 +170,7 @@ export default function ExpertsPage() {
                         </div>
                       )}
  
-                      {/* Joining Soon overlay — fake/future members */}
+                      {/* Joining Soon overlay */}
                       {isJoining && (
                         <div className="absolute inset-0 flex items-center justify-center bg-[#0a0f2e]/40">
                           <div className="flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#2563eb] shadow-lg">
@@ -187,7 +188,6 @@ export default function ExpertsPage() {
                           <h2 className="text-xl font-bold text-[#0a0f2e]">{member.name}</h2>
                           <p className="text-sm text-[#2563eb]">{member.role}</p>
                         </div>
-                        {/* LinkedIn — only real member gets active link */}
                         {!isJoining ? (
                           <a
                             href={member.linkedin}
@@ -210,19 +210,17 @@ export default function ExpertsPage() {
  
                       <p className="mt-4 text-sm leading-relaxed text-[#64748b]">{member.bio}</p>
  
-                      {/* Specialties */}
                       <div className="mt-4 flex flex-wrap gap-2">
                         {member.specialties.map((specialty) => (
                           <span
                             key={specialty}
-                            className="rounded-full bg-[#f7f8fc] px-3 py-1 text-xs font-medium text-[#374151]"
+                            className="rounded-full bg-[#f1f3f9] px-3 py-1 text-xs font-medium text-[#374151]"
                           >
                             {specialty}
                           </span>
                         ))}
                       </div>
  
-                      {/* Certifications */}
                       <div className="mt-4 flex items-center gap-2 border-t border-[#e5e7eb] pt-4">
                         <Award className="h-4 w-4 text-[#f59e0b]" />
                         <p className="text-xs text-[#64748b]">{member.certifications.join(" • ")}</p>
@@ -235,8 +233,8 @@ export default function ExpertsPage() {
           </div>
         </section>
  
-        {/* CTA */}
-        <section className="bg-[#eeeef5] py-20">
+        {/* CTA — DARK navy so white text is visible & pops */}
+        <section className="bg-[#0a0f2e] py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Ready to Work With Our Experts?
@@ -268,6 +266,10 @@ export default function ExpertsPage() {
   );
 }
  
+
+
+
+
 
 
 

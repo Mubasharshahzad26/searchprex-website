@@ -112,7 +112,6 @@ const posts = [
   },
 ];
  
-// ── RELATED POSTS helper ───────────────────────────────────────────────
 function getRelated(currentSlug: string, category: string) {
   return posts.filter((p) => p.slug !== currentSlug && p.category === category).slice(0, 3);
 }
@@ -131,56 +130,57 @@ export default function BlogPostPage() {
   };
  
   return (
-    <main className="bg-white min-h-screen">
+    /* GREY page background */
+    <main className="bg-[#eaecf3] min-h-screen">
  
-      {/* ── 01 HERO BANNER ── */}
-      <section className="bg-[#eeeef5] pt-28 pb-14 relative overflow-hidden">
+      {/* ── 01 HERO BANNER — grey bg, DARK text (fixed) ── */}
+      <section className="bg-[#e1e4ee] pt-28 pb-14 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, #4a6cf7 1px, transparent 0)`,
           backgroundSize: "40px 40px",
         }} />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
  
-          {/* Breadcrumb */}
+          {/* Breadcrumb — darkened for visibility */}
           <div className="flex items-center gap-2 mb-6 flex-wrap">
-            <Link href="/blog" className="text-blue-300 text-sm hover:text-white transition-colors">Blog</Link>
-            <ChevronRight className="h-4 w-4 text-blue-400/50" />
-            <Link href={`/blog?category=${post.category}`} className="text-blue-300 text-sm hover:text-white transition-colors">{post.category}</Link>
-            <ChevronRight className="h-4 w-4 text-blue-400/50" />
+            <Link href="/blog" className="text-[#64748b] text-sm hover:text-[#534AB7] transition-colors">Blog</Link>
+            <ChevronRight className="h-4 w-4 text-[#94a3b8]" />
+            <Link href={`/blog?category=${post.category}`} className="text-[#64748b] text-sm hover:text-[#534AB7] transition-colors">{post.category}</Link>
+            <ChevronRight className="h-4 w-4 text-[#94a3b8]" />
             <span className="text-[#534AB7] text-sm font-semibold">{post.subcategory}</span>
           </div>
  
-          {/* Title */}
+          {/* Title — dark (fixed from white) */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0a0f2e] leading-tight mb-6"
           >
             {post.title}
           </motion.h1>
  
-          {/* Meta row */}
+          {/* Meta row — darkened */}
           <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-1.5 text-blue-200 text-sm">
+            <div className="flex items-center gap-1.5 text-[#475569] text-sm">
               <Clock className="h-4 w-4" />
               {post.readTime}
             </div>
-            <div className="flex items-center gap-1.5 text-blue-200 text-sm">
+            <div className="flex items-center gap-1.5 text-[#475569] text-sm">
               <Calendar className="h-4 w-4" />
               {post.date}
             </div>
             <button
               onClick={copyLink}
-              className="flex items-center gap-1.5 text-blue-200 text-sm hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-[#475569] text-sm hover:text-[#534AB7] transition-colors"
             >
-              {copied ? <CheckCircle className="h-4 w-4 text-emerald-400" /> : <Share2 className="h-4 w-4" />}
+              {copied ? <CheckCircle className="h-4 w-4 text-emerald-500" /> : <Share2 className="h-4 w-4" />}
               {copied ? "Copied!" : "Share"}
             </button>
           </div>
         </div>
       </section>
  
-      {/* ── 02 AUTHOR CARD ── */}
+      {/* ── 02 AUTHOR CARD — white band ── */}
       <section className="border-b border-[#e5e7eb] bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex items-center justify-between flex-wrap gap-4">
@@ -200,7 +200,7 @@ export default function BlogPostPage() {
               </div>
             </div>
             <a
-              href="https://www.linkedin.com/company/searchprex/"
+              href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 border border-[#e5e7eb] rounded-lg px-4 py-2 text-sm font-semibold text-[#0a66c2] hover:border-[#0a66c2] transition-colors"
@@ -212,30 +212,24 @@ export default function BlogPostPage() {
         </div>
       </section>
  
-      {/* ── 03 TWO COLUMN LAYOUT ── */}
+      {/* ── 03 TWO COLUMN LAYOUT — on grey ── */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14">
         <div className="flex gap-12 items-start">
  
-          {/* LEFT: Article content */}
-          <article className="flex-1 min-w-0">
+          {/* LEFT: Article content — white card for readability */}
+          <article className="flex-1 min-w-0 rounded-2xl bg-white p-6 sm:p-10 shadow-sm">
  
-            {/* Featured image placeholder */}
             <div className="w-full aspect-[16/7] rounded-2xl bg-gradient-to-br from-[#0a0f2e] to-[#1a3c8f] mb-10 flex items-center justify-center">
-              <span className="text-white/20 text-sm font-mono">{post.category} — {post.subcategory}</span>
+              <span className="text-white/30 text-sm font-mono">{post.category} — {post.subcategory}</span>
             </div>
  
-            {/* Excerpt */}
             <p className="text-xl text-[#374151] leading-relaxed mb-10 font-medium border-l-4 border-[#534AB7] pl-5">
               {post.excerpt}
             </p>
  
-            {/* Article body */}
             <div
               className="prose-custom"
-              style={{
-                lineHeight: "1.85",
-                color: "var(--color-text-primary, #1a1a2e)",
-              }}
+              style={{ lineHeight: "1.85", color: "#1a1a2e" }}
               dangerouslySetInnerHTML={{ __html: post.content
                 .replace(/<h2>/g, '<h2 style="font-size:1.5rem;font-weight:900;color:#0a0f2e;margin:2.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:2px solid #e5e7eb">')
                 .replace(/<p>/g, '<p style="font-size:1.0625rem;color:#374151;margin-bottom:1.25rem;line-height:1.85">')
@@ -244,7 +238,6 @@ export default function BlogPostPage() {
               }}
             />
  
-            {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[#e5e7eb]">
               {post.tags.map((tag) => (
                 <span key={tag} className="text-xs font-semibold bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-3 py-1.5 rounded-full">
@@ -253,8 +246,7 @@ export default function BlogPostPage() {
               ))}
             </div>
  
-            {/* Author bio box */}
-            <div className="mt-10 rounded-2xl border border-[#e5e7eb] p-6 flex gap-5 items-start">
+            <div className="mt-10 rounded-2xl border border-[#e5e7eb] p-6 flex gap-5 items-start bg-[#f8f9fc]">
               <div className="h-14 w-14 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0">
                 <span className="text-[#534AB7] font-black text-xl">M</span>
               </div>
@@ -268,7 +260,6 @@ export default function BlogPostPage() {
               </div>
             </div>
  
-            {/* Share row */}
             <div className="mt-8 flex items-center gap-3 flex-wrap">
               <span className="text-sm font-semibold text-[#0a0f2e]">Share this article:</span>
               <a
@@ -292,8 +283,7 @@ export default function BlogPostPage() {
           {/* RIGHT: Sticky Sidebar */}
           <aside className="w-72 flex-shrink-0 hidden lg:flex flex-col gap-5 sticky top-24">
  
-            {/* Table of Contents */}
-            <div className="border border-[#e5e7eb] rounded-2xl p-5">
+            <div className="border border-[#e5e7eb] rounded-2xl p-5 bg-white">
               <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-4">Table of contents</p>
               <nav className="flex flex-col gap-2">
                 {post.toc.map((item, i) => (
@@ -309,7 +299,7 @@ export default function BlogPostPage() {
               </nav>
             </div>
  
-            {/* Book Call CTA */}
+            {/* Book Call CTA — dark navy, white text CORRECT (kept) */}
             <div className="bg-[#0a0f2e] rounded-2xl p-5 text-center">
               <div className="h-10 w-10 rounded-full bg-[#EEEDFE] flex items-center justify-center mx-auto mb-3">
                 <span className="text-[#534AB7] font-black">M</span>
@@ -324,15 +314,14 @@ export default function BlogPostPage() {
                 Book Free Call →
               </a>
               <Link
-                href="#ai-tool"
+                href="/free-audit"
                 className="block w-full mt-2 border border-white/20 text-white/70 text-xs font-semibold py-2.5 rounded-xl hover:border-white/50 transition-colors text-center"
               >
                 Get Free SEO Audit
               </Link>
             </div>
  
-            {/* Tags */}
-            <div className="border border-[#e5e7eb] rounded-2xl p-5">
+            <div className="border border-[#e5e7eb] rounded-2xl p-5 bg-white">
               <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-3">Tags</p>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
@@ -347,9 +336,9 @@ export default function BlogPostPage() {
         </div>
       </section>
  
-      {/* ── 04 RELATED POSTS ── */}
+      {/* ── 04 RELATED POSTS — grey bg, white cards ── */}
       {related.length > 0 && (
-        <section className="bg-[#f8f9fc] border-t border-[#e5e7eb] py-16">
+        <section className="bg-[#eaecf3] border-t border-[#d4d8e3] py-16">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-black text-[#0a0f2e] mb-8">Related articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -376,8 +365,8 @@ export default function BlogPostPage() {
         </section>
       )}
  
-      {/* ── 05 BOTTOM CTA ── */}
-      <section className="bg-[#eeeef5] py-16">
+      {/* ── 05 BOTTOM CTA — DARK navy so white text visible (fixed) ── */}
+      <section className="bg-[#0a0f2e] py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
             Ready to rank on Page 1?
@@ -394,7 +383,7 @@ export default function BlogPostPage() {
               Book Free Strategy Call
             </a>
             <Link
-              href="/#ai-tool"
+              href="/free-audit"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/20 hover:border-white text-white font-bold px-8 py-4 rounded-xl transition-colors"
             >
               Get Free SEO Audit →
@@ -407,6 +396,25 @@ export default function BlogPostPage() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

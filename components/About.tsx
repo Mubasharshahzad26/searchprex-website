@@ -1,4 +1,3 @@
-
 "use client";
  
 import { motion } from "framer-motion";
@@ -40,7 +39,7 @@ const stats = [
 ];
  
 const certifications = [
-  "Google Partner",
+  "Google Analytics",
   "Semrush Certified",
   "Ahrefs Certified",
   "HubSpot Certified",
@@ -61,7 +60,8 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
 export default function About() {
   return (
-    <section id="about" className="bg-white py-24">
+    /* GREY background */
+    <section id="about" className="bg-[#eaecf3] py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
         {/* ── Section header ── */}
@@ -76,7 +76,7 @@ export default function About() {
             Founder-Led. Niche-Focused.<br />
             <span className="text-[#534AB7]">Revenue-Obsessed.</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#64748b]">
+          <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#475569]">
             Every account is handled personally by the founder — no juniors, no account managers, no templates. We understand your business niche better than any generalist agency ever could.
           </motion.p>
         </motion.div>
@@ -91,12 +91,9 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* CEO profile card */}
             <div className="mb-8 overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white shadow-lg">
-              {/* Top purple banner */}
               <div className="h-24 bg-gradient-to-r from-[#534AB7] to-[#7c3aed]" />
               <div className="px-6 pb-6">
-                {/* Avatar */}
                 <div className="relative -mt-12 mb-4 h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-md">
                   <Image
                     src="/images/mubashar-shahzad.jpg"
@@ -121,7 +118,7 @@ export default function About() {
                       <Mail className="h-4 w-4" />
                     </a>
                     <a
-                      href="https://linkedin.com/in/mubasharshahzad"
+                      href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#64748b] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
@@ -132,12 +129,10 @@ export default function About() {
                   </div>
                 </div>
  
-                {/* Quote */}
                 <blockquote className="mt-5 border-l-2 border-[#534AB7] pl-4 text-sm italic text-[#64748b] leading-relaxed">
-                  "I started SearchPrex because I was tired of watching business owners get burned — by bad agencies, expensive ads, and cookie-cutter strategies. Every client I take on, I treat their revenue like it's my own."
+                  &quot;I started SearchPrex because I was tired of watching business owners get burned — by bad agencies, expensive ads, and cookie-cutter strategies. Every client I take on, I treat their revenue like it&apos;s my own.&quot;
                 </blockquote>
  
-                {/* Certs */}
                 <div className="mt-5 flex flex-wrap gap-2">
                   {certifications.map((cert) => (
                     <span key={cert} className="flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-medium text-[#374151]">
@@ -146,7 +141,6 @@ export default function About() {
                   ))}
                 </div>
  
-                {/* Stars */}
                 <div className="mt-5 flex items-center gap-2">
                   <div className="flex gap-0.5">
                     {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-[#f59e0b] text-[#f59e0b]" />)}
@@ -168,7 +162,7 @@ export default function About() {
                   className={`rounded-2xl p-5 ${
                     stat.highlight
                       ? "bg-[#534AB7] text-white"
-                      : "bg-[#f8fafc] text-[#0a0f2e] border border-[#e2e8f0]"
+                      : "bg-white text-[#0a0f2e] border border-[#e2e8f0]"
                   }`}
                 >
                   <stat.icon className={`mb-3 h-5 w-5 ${stat.highlight ? "text-[#c4b5fd]" : "text-[#534AB7]"}`} />
@@ -197,7 +191,7 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-4 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] p-5 hover:border-[#534AB7]/30 transition-colors"
+                  className="flex gap-4 rounded-xl border border-[#e2e8f0] bg-white p-5 hover:border-[#534AB7]/30 transition-colors"
                 >
                   <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#534AB7] text-xs font-black text-white">
                     {reason.number}
@@ -244,3 +238,25 @@ export default function About() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
