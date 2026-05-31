@@ -1,3 +1,4 @@
+
 "use client";
  
 import Link from "next/link";
@@ -6,6 +7,10 @@ import {
   ArrowRight, TrendingUp, Users, DollarSign, Globe,
   Shield, CheckCircle, BarChart2, Search, MapPin,
 } from "lucide-react";
+ 
+/* Toptal green accent */
+const GREEN = "#3eb489";
+const GREEN_DARK = "#2f9670";
  
 /* ─── DATA ─── */
 const caseStudies = [
@@ -21,7 +26,7 @@ const caseStudies = [
     iconBg: "#f5f3ff",
     timeline: "60 days",
     metrics: [
-      { icon: TrendingUp, value: "+75%",  label: "Organic Visibility", color: "#534AB7" },
+      { icon: TrendingUp, value: "+380%", label: "Organic Visibility", color: "#534AB7" },
       { icon: Users,      value: "47",    label: "Leads / Month",      color: "#16a34a" },
       { icon: Globe,      value: "#1",    label: "Dallas Family Law",  color: "#534AB7" },
     ],
@@ -41,57 +46,86 @@ const caseStudies = [
   {
     id: 2,
     category: "Shopify SEO",
-    location: "Chicago, IL",
+    location: "United States",
     badge: { color: "#0891b2", bg: "#ecfeff" },
-    title: "TacticalEdge Store",
-    tagline: "+683% Traffic Growth — $124K Extra Revenue in 6 Months",
+    title: "SMK Store",
+    tagline: "+75% Revenue Growth — Tactical Gear, USA",
     icon: BarChart2,
     iconColor: "#0891b2",
     iconBg: "#ecfeff",
-    timeline: "6 months",
+    timeline: "2 months",
     metrics: [
-      { icon: DollarSign,  value: "+285%",  label: "Monthly Revenue",  color: "#16a34a" },
-      { icon: Users,       value: "9,400",  label: "Monthly Visitors", color: "#534AB7" },
-      { icon: TrendingUp,  value: "+683%",  label: "Traffic Growth",   color: "#16a34a" },
+      { icon: DollarSign,  value: "+75%",   label: "Revenue Growth",   color: "#16a34a" },
+      { icon: Search,      value: "12K+",   label: "Pages Indexed",    color: "#534AB7" },
+      { icon: TrendingUp,  value: "+285%",  label: "Indexing Rate",    color: "#16a34a" },
     ],
     challenge:
-      "TacticalEdge had a 7,000+ page Shopify store getting minimal organic traffic. Near-identical product descriptions caused mass non-indexing, Core Web Vitals were failing, and they had zero product schema — meaning no rich results in Google.",
+      "SMK Store had a 35,000+ product catalog suffering mass non-indexing — near-identical boilerplate descriptions across thousands of SKUs caused Google to skip indexing most product pages, and Core Web Vitals were failing.",
     solution:
-      "Full technical SEO audit — fixed crawl budget waste, rewrote product descriptions at scale with unique buyer-intent content, implemented product + review schema, optimized Core Web Vitals to 'Good' across all metrics, and built niche-relevant backlinks.",
+      "Brand-by-brand unique content rewriting at scale, crawl budget optimization, product schema implementation, batch GSC resubmission in waves, and Core Web Vitals fixes — all verified against real Google Search Console data.",
     results: [
-      "Traffic grew from 1,200 to 9,400 monthly visitors (+683%)",
-      "$124K in additional organic revenue within 6 months",
-      "Core Web Vitals improved to 'Good' on all metrics",
-      "200+ product pages ranking for long-tail buyer-intent keywords",
-      "6,800+ pages now indexed — up from under 200",
+      "+75% US revenue growth within 2 months",
+      "Indexing rate jumped +285% after content rewrites",
+      "12,000+ product pages now indexed and ranking",
+      "Core Web Vitals improved to 'Good' across the catalog",
+      "Buyer-intent product keywords ranking page one",
     ],
     gscNote: "All data verified via Google Search Console screenshots",
   },
   {
     id: 3,
     category: "Local SEO",
-    location: "Michigan",
+    location: "United States",
     badge: { color: "#059669", bg: "#ecfdf5" },
-    title: "Michigan Sports Outdoor",
-    tagline: "+476% Organic Clicks — Zero Ad Spend",
+    title: "Local HVAC Services",
+    tagline: "Top 3 Map Pack + AI Overview Placement",
     icon: MapPin,
     iconColor: "#059669",
     iconBg: "#ecfdf5",
+    timeline: "60 days",
+    metrics: [
+      { icon: Globe,      value: "Top 3",   label: "Local Map Pack",   color: "#16a34a" },
+      { icon: Search,     value: "Featured",label: "AI Overview",      color: "#534AB7" },
+      { icon: TrendingUp, value: "+5.7x",   label: "Clicks in 60 days",color: "#16a34a" },
+    ],
+    challenge:
+      "A local HVAC service business had zero local visibility — not appearing in the Google Maps local pack, no 'near me' rankings, and no presence in Google's new AI Overview results for high-intent emergency service searches.",
+    solution:
+      "Full local SEO build — Google Business Profile optimization, NAP citation consistency across 50+ directories, location landing pages, review generation, and structured content built to capture AI Overview placements for service keywords.",
+    results: [
+      "Top 3 Google Maps local pack for primary service keywords",
+      "Featured in Google AI Overview for high-intent searches",
+      "+5.7x organic clicks within 60 days",
+      "Ranking for 'near me' and emergency service queries",
+      "Consistent inbound calls from organic local search",
+    ],
+    gscNote: "All data verified via Google Search Console screenshots",
+  },
+  {
+    id: 4,
+    category: "Technical SEO",
+    location: "Michigan, USA",
+    badge: { color: "#185FA5", bg: "#E6F1FB" },
+    title: "Michigan Outdoor Sports",
+    tagline: "+476% Organic Clicks — Zero Ad Spend",
+    icon: Search,
+    iconColor: "#185FA5",
+    iconBg: "#E6F1FB",
     timeline: "90 days",
     metrics: [
       { icon: TrendingUp, value: "+476%",  label: "Organic Clicks",   color: "#16a34a" },
-      { icon: Search,     value: "3.85K",  label: "Pages Indexed",    color: "#534AB7" },
-      { icon: Globe,      value: "6.49K",  label: "Impressions",      color: "#16a34a" },
+      { icon: Search,     value: "+285%",  label: "Indexing Rate",    color: "#534AB7" },
+      { icon: Globe,      value: "12K+",   label: "Pages Indexed",    color: "#16a34a" },
     ],
     challenge:
-      "Michigan Sports Outdoor had zero GSC visibility — their brand pages had never been submitted to Google Search Console, thin content was causing non-indexing, and they had no local keyword rankings despite being a real physical business.",
+      "Michigan Outdoor Sports had zero GSC visibility — their brand pages had never been properly submitted to Google Search Console, thin content was causing non-indexing, and they had no local keyword rankings despite being a real physical business.",
     solution:
-      "Submitted brand sitemap (1,000 pages) directly to GSC, fixed technical indexation blocks, rewrote brand pages with unique local SEO content, built Michigan-specific keyword strategy targeting outdoor sports buyers across the state.",
+      "Submitted brand sitemap directly to GSC, fixed technical indexation blocks, resolved crawl budget waste, rewrote brand pages with unique content, and built a Michigan-specific keyword strategy targeting outdoor sports buyers statewide.",
     results: [
       "+476% organic clicks within 90 days of technical fixes",
-      "3,850 pages indexed — up from near zero",
-      "6,490 monthly impressions established from scratch",
-      "4.1% CTR — significantly above industry average",
+      "Indexing rate improved +285% (near-zero to 12K+ pages)",
+      "Monthly impressions established from scratch",
+      "CTR significantly above industry average",
       "Ranking for 50+ Michigan local outdoor keywords",
     ],
     gscNote: "All data verified via Google Search Console screenshots",
@@ -114,12 +148,12 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 /* ─── PAGE ─── */
 export default function CaseStudiesPage() {
   return (
-    <main className="bg-white">
+    <main className="bg-[#eaecf3]">
  
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden border-b border-[#e2e8f0] bg-white pt-28 pb-16">
+      {/* ── HERO — grey ── */}
+      <section className="relative overflow-hidden border-b border-[#d4d8e3] bg-[#eaecf3] pt-28 pb-16">
         <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "60px 60px" }}
         />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
@@ -129,21 +163,24 @@ export default function CaseStudiesPage() {
                 ← Back to Home
               </Link>
             </motion.div>
-            <motion.span variants={fadeUp} className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+            <motion.span
+              variants={fadeUp}
+              className="mb-4 inline-block rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest"
+              style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}
+            >
               Verified Results · Real GSC Data
             </motion.span>
             <motion.h1 variants={fadeUp} className="mb-4 text-5xl font-black tracking-tight text-[#0a0f2e] sm:text-6xl">
               Case Studies
             </motion.h1>
-            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#64748b] leading-relaxed">
+            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#475569] leading-relaxed">
               Real results from real clients — verified with Google Search Console screenshots. No vanity metrics. Just clicks, rankings, leads, and revenue.
             </motion.p>
  
-            {/* Trust signals */}
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-6">
               {trustSignals.map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-2 text-sm text-[#64748b]">
-                  <Icon className="h-4 w-4 text-[#534AB7]" />{text}
+                  <Icon className="h-4 w-4" style={{ color: GREEN_DARK }} />{text}
                 </div>
               ))}
             </motion.div>
@@ -163,7 +200,6 @@ export default function CaseStudiesPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                {/* Top label bar */}
                 <div className="mb-6 flex flex-wrap items-center gap-3">
                   <span className="rounded-lg px-3 py-1.5 text-xs font-bold uppercase tracking-widest"
                     style={{ backgroundColor: study.badge.bg, color: study.badge.color }}>
@@ -173,7 +209,7 @@ export default function CaseStudiesPage() {
                     <MapPin className="h-3.5 w-3.5" />{study.location}
                   </span>
                   <span className="text-xs text-[#64748b]">· {study.timeline}</span>
-                  <span className="ml-auto flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-[10px] font-medium text-[#64748b]">
+                  <span className="ml-auto flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-white px-3 py-1 text-[10px] font-medium text-[#64748b]">
                     <Shield className="h-3 w-3 text-[#16a34a]" />
                     {study.gscNote}
                   </span>
@@ -183,12 +219,9 @@ export default function CaseStudiesPage() {
  
                   {/* Left — visual panel */}
                   <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
-                    {/* Hero stat card */}
                     <div className="mb-5 overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white shadow-sm">
-                      {/* Colored top bar */}
                       <div className="h-2 w-full" style={{ backgroundColor: study.badge.color }} />
                       <div className="p-6">
-                        {/* Icon + title */}
                         <div className="mb-5 flex items-center gap-3">
                           <div className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ backgroundColor: study.iconBg }}>
                             <study.icon className="h-6 w-6" style={{ color: study.iconColor }} />
@@ -198,9 +231,7 @@ export default function CaseStudiesPage() {
                             <p className="text-sm text-[#64748b]">{study.location}</p>
                           </div>
                         </div>
-                        {/* Tagline */}
                         <p className="mb-5 text-base font-bold text-[#0a0f2e] leading-snug">{study.tagline}</p>
-                        {/* Metrics */}
                         <div className="grid grid-cols-3 gap-3">
                           {study.metrics.map((m) => (
                             <div key={m.label} className="rounded-xl bg-[#f8fafc] p-4 text-center">
@@ -213,7 +244,6 @@ export default function CaseStudiesPage() {
                       </div>
                     </div>
  
-                    {/* GSC verified badge */}
                     <div className="flex items-center gap-3 rounded-xl border border-[#d1fae5] bg-[#f0fdf4] px-4 py-3">
                       <div className="relative flex h-2.5 w-2.5 shrink-0">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#16a34a] opacity-75" />
@@ -227,8 +257,6 @@ export default function CaseStudiesPage() {
  
                   {/* Right — content */}
                   <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
- 
-                    {/* Challenge */}
                     <div className="mb-6 rounded-xl border-l-4 border-[#f59e0b] bg-[#fffbeb] p-5">
                       <h3 className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-wider text-[#92400e]">
                         <span className="text-base">⚠️</span> The Challenge
@@ -236,7 +264,6 @@ export default function CaseStudiesPage() {
                       <p className="text-sm text-[#78350f] leading-relaxed">{study.challenge}</p>
                     </div>
  
-                    {/* Solution */}
                     <div className="mb-6 rounded-xl border-l-4 border-[#534AB7] bg-[#f5f3ff] p-5">
                       <h3 className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-wider text-[#3730a3]">
                         <span className="text-base">🔧</span> Our Solution
@@ -244,7 +271,6 @@ export default function CaseStudiesPage() {
                       <p className="text-sm text-[#4338ca] leading-relaxed">{study.solution}</p>
                     </div>
  
-                    {/* Results */}
                     <div className="rounded-xl border border-[#d1fae5] bg-white p-5">
                       <h3 className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-wider text-[#15803d]">
                         <span className="text-base">✅</span> Key Results
@@ -258,13 +284,11 @@ export default function CaseStudiesPage() {
                         ))}
                       </ul>
                     </div>
- 
                   </div>
                 </div>
  
-                {/* Divider */}
                 {index < caseStudies.length - 1 && (
-                  <div className="mt-20 border-t border-dashed border-[#e2e8f0]" />
+                  <div className="mt-20 border-t border-dashed border-[#cbd0db]" />
                 )}
               </motion.article>
             ))}
@@ -272,16 +296,16 @@ export default function CaseStudiesPage() {
         </div>
       </section>
  
-      {/* ── BOTTOM CTA ── */}
-      <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-20">
+      {/* ── BOTTOM CTA — green ── */}
+      <section className="border-t border-[#d4d8e3] bg-white py-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <motion.p variants={fadeUp} className="mb-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+            <motion.p variants={fadeUp} className="mb-2 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN_DARK }}>
               Ready to be our next case study?
             </motion.p>
             <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e]">
               Your Business. Your Results.<br />
-              <span className="text-[#534AB7]">Let's Build the Story.</span>
+              <span style={{ color: GREEN }}>Let&apos;s Build the Story.</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="mb-8 text-base text-[#64748b] leading-relaxed">
               Get a free SEO audit — the founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours. No tools, no templates, no juniors.
@@ -289,13 +313,14 @@ export default function CaseStudiesPage() {
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/free-audit"
-                className="flex items-center gap-2 rounded-xl bg-[#534AB7] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all hover:bg-[#3C3489] hover:-translate-y-0.5"
+                className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
+                style={{ background: GREEN, boxShadow: "0 10px 25px -5px rgba(62,180,137,0.4)" }}
               >
                 Get Free SEO Audit <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/"
-                className="flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-7 py-3.5 text-sm font-bold text-[#374151] transition-all hover:border-[#534AB7] hover:text-[#534AB7]"
+                className="flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-7 py-3.5 text-sm font-bold text-[#374151] transition-all hover:border-[#3eb489] hover:text-[#2f9670]"
               >
                 Back to Home
               </Link>
