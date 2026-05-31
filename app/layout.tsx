@@ -215,7 +215,7 @@ export default function RootLayout({
         />
       </head>
  
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased bg-[#eeeef5]">
         <Nav />
         {children}
         <Footer />
