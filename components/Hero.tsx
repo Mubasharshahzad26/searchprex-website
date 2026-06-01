@@ -1,15 +1,19 @@
+
 "use client";
  
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Calendar, Clock, Video } from "lucide-react";
+
+import { CheckCircle, Calendar, BarChart3, MapPin, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
  
-const meetingPerks = [
-  { icon: Clock, text: "30-min free strategy call" },
-  { icon: Video, text: "Google Meet — no download needed" },
-  { icon: CheckCircle, text: "No commitment · Reply in 24hrs" },
-];
+/* ─── Toptal-like palette ─── */
+const CHARCOAL = "#1c1c24";   // Toptal heading charcoal (softer than navy)
+const BODY = "#5b6472";       // Toptal body grey
+const GREEN = "#3eb489";      // CTA green (matches site + Toptal)
+const GREEN_DARK = "#2f9670";
+const PURPLE = "#534AB7";     // brand accent for credential card
  
 // ── Service personas ──────────────────────────────────────────────────
 const personas = [
@@ -17,7 +21,7 @@ const personas = [
     id: "law-firm",
     label: "Law Firm SEO",
     headline: "Rank Your Firm.",
-    headlineBlue: "Win More Cases.",
+    emphasis: "Win More Cases.",
     sub: "We help law firms dominate local and national search results — more qualified leads, more signed clients, less wasted ad spend.",
     cta: "Get Law Firm SEO Audit",
   },
@@ -25,7 +29,7 @@ const personas = [
     id: "ecommerce",
     label: "eCommerce SEO",
     headline: "Rank Higher.",
-    headlineBlue: "Sell More. Grow Faster.",
+    emphasis: "Sell More. Grow Faster.",
     sub: "From product pages to category architecture — we build eCommerce SEO strategies that drive revenue, not just traffic.",
     cta: "Get eCommerce SEO Audit",
   },
@@ -33,7 +37,7 @@ const personas = [
     id: "local",
     label: "Local SEO",
     headline: "Own Your City.",
-    headlineBlue: "Get Found First.",
+    emphasis: "Get Found First.",
     sub: "Dominate Google Maps and local search in your area. We help local businesses get more calls, more visits, and more customers.",
     cta: "Get Local SEO Audit",
   },
@@ -60,7 +64,7 @@ const eeatLinks = [
 ];
  
 interface HeroProps {
-  heroImage?: any;
+  heroImage?: unknown;
 }
  
 export default function Hero({ heroImage }: HeroProps) {
@@ -87,14 +91,14 @@ export default function Hero({ heroImage }: HeroProps) {
   return (
     <>
       <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      <section className="relative min-h-screen overflow-hidden bg-[#eeeef5] pt-20">
+      <section className="relative overflow-hidden bg-[#e9ebf0] pt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
-          {/* ── "I'm looking for" Toggle — centered, Toptal style ── */}
+          {/* ── "I'm looking for" Toggle — Toptal style ── */}
           <div className="flex justify-center pt-8 pb-2">
             <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3 shadow-sm backdrop-blur-sm border border-white/80">
               <span className="text-xs font-medium text-[#64748b] whitespace-nowrap">
-                I'm looking for
+                I&apos;m looking for
               </span>
               <div className="flex items-center gap-1">
                 {personas.map((p, i) => (
@@ -103,8 +107,8 @@ export default function Hero({ heroImage }: HeroProps) {
                     onClick={() => setActivePersona(i)}
                     className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
                       activePersona === i
-                        ? "border-2 border-[#1a3c8f] bg-white text-[#1a3c8f] shadow-sm"
-                        : "border border-transparent text-[#64748b] hover:text-[#0a0f2e]"
+                        ? "border border-[#cdd2dd] bg-white text-[#1c1c24] shadow-sm"
+                        : "border border-transparent text-[#64748b] hover:text-[#1c1c24]"
                     }`}
                   >
                     {p.label}
@@ -115,7 +119,7 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-center gap-12 py-10 lg:grid-cols-2 lg:gap-16 lg:py-14">
+          <div className="grid items-center gap-12 py-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
  
             {/* ── Left Content ── */}
             <motion.div
@@ -130,12 +134,12 @@ export default function Hero({ heroImage }: HeroProps) {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
                 </span>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#1a3c8f]">
-                  FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.
+                <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN_DARK }}>
+                  Founder-Led SEO. No Juniors. No Fluff.
                 </span>
               </div>
  
-              {/* ── Dynamic H1 based on selected persona ── */}
+              {/* ── Dynamic H1 — Toptal charcoal + green underline accent ── */}
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={current.id}
@@ -143,11 +147,15 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.3 }}
-                  className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl"
+                  className="mb-5 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+                  style={{ color: CHARCOAL }}
                 >
                   {current.headline}
                   <br />
-                  <span className="text-[#1a3c8f]">{current.headlineBlue}</span>
+                  <span className="relative inline-block">
+                    {current.emphasis}
+                    <span className="absolute -bottom-1 left-0 h-[5px] w-full rounded-full" style={{ background: GREEN, opacity: 0.85 }} />
+                  </span>
                 </motion.h1>
               </AnimatePresence>
  
@@ -159,32 +167,35 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="mx-auto mb-7 max-w-xl text-lg text-[#64748b] lg:mx-0"
+                  className="mx-auto mb-7 max-w-xl text-lg leading-relaxed lg:mx-0"
+                  style={{ color: BODY }}
                 >
                   {current.sub}
                 </motion.p>
               </AnimatePresence>
  
-              {/* CTAs */}
+              {/* CTAs — booking moved here (green), + audit */}
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                <button
+                  onClick={openCalendly}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
+                  style={{ background: GREEN }}
+                >
+                  <Calendar className="h-4 w-4" /> Book Free Strategy Call
+                </button>
                 <Link
-                  href="#cta"
-                  className="inline-flex items-center justify-center rounded-lg bg-[#0a0f2e] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
+                  href="/free-audit"
+                  className="inline-flex items-center justify-center rounded-lg border-2 px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all hover:bg-white"
+                  style={{ borderColor: "#cdd2dd", color: CHARCOAL }}
                 >
                   {current.cta}
-                </Link>
-                <Link
-                  href="/services"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-[#0a0f2e]/20 bg-white/60 px-8 py-4 text-sm font-bold uppercase tracking-widest text-[#0a0f2e] backdrop-blur-sm transition-all hover:border-[#0a0f2e] hover:bg-white"
-                >
-                  View Services
                 </Link>
               </div>
  
               {/* Sub-note */}
               <div className="mt-4 mb-6 flex items-center justify-center gap-1.5 lg:justify-start">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-emerald-500" aria-hidden="true" />
-                <span className="text-sm text-[#64748b]">
+                <CheckCircle className="h-4 w-4 flex-shrink-0" style={{ color: GREEN }} aria-hidden="true" />
+                <span className="text-sm" style={{ color: BODY }}>
                   Free 30-min call · No commitment · Reply in 24hrs
                 </span>
               </div>
@@ -202,7 +213,7 @@ export default function Hero({ heroImage }: HeroProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       title={`SearchPrex on ${platform.label}`}
-                      className="group flex items-center gap-2 rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 shadow-sm transition-all hover:border-[#534AB7] hover:shadow-md"
+                      className="group flex items-center gap-2 rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
                     >
                       <span className="flex-shrink-0 transition-transform group-hover:scale-110">
                         {platform.icon}
@@ -217,54 +228,57 @@ export default function Hero({ heroImage }: HeroProps) {
               </div>
             </motion.div>
  
-            {/* ── Right: Calendly Card ── */}
+            {/* ── Right: Toptal-style photo + floating credential card ── */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex items-center justify-center"
+              className="relative flex items-end justify-center lg:justify-end"
             >
-              <div className="w-full max-w-md rounded-2xl border border-white/80 bg-white p-8 shadow-2xl">
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-4 py-2">
-                  <Calendar className="h-4 w-4 text-[#534AB7]" />
-                  <span className="text-xs font-bold text-[#534AB7]">Free 30-Min Strategy Call</span>
+              {/* Photo frame */}
+              <div className="relative w-full max-w-sm">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/80 bg-gradient-to-b from-[#dfe3ec] to-[#cfd5e3] shadow-2xl">
+                  <Image
+                    src="/images/mubashar-shahzad.jpg"
+                    alt="Mubashar Shahzad — Founder & Lead SEO Strategist at SearchPrex"
+                    fill
+                    priority
+                    className="object-cover object-top"
+                  />
                 </div>
-                <h3 className="mb-2 text-2xl font-black text-[#0a0f2e]">Talk directly with the founder</h3>
-                <p className="mb-6 text-sm text-[#64748b]">
-                  No sales reps. No junior staff. Just Mubashar — your SEO strategy, built around your goals.
-                </p>
-                <div className="mb-6 flex flex-col gap-3">
-                  {meetingPerks.map((perk) => (
-                    <div key={perk.text} className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#EEEDFE]">
-                        <perk.icon className="h-4 w-4 text-[#534AB7]" />
-                      </div>
-                      <span className="text-sm text-[#374151]">{perk.text}</span>
+ 
+                {/* Floating credential card — Toptal style, verifiable E-E-A-T */}
+                <a
+                  href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View Mubashar Shahzad's Semrush certificate"
+                  className="absolute -bottom-6 -left-4 block w-60 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl transition-all hover:-translate-y-0.5 hover:shadow-2xl sm:-left-8"
+                >
+                  {/* faint world-map dots */}
+                  <div className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0a0f2e 1px, transparent 0)", backgroundSize: "10px 10px" }} />
+                  <div className="relative">
+                    <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
+                    <div className="mt-1.5 flex items-center gap-1.5">
+                      <CheckCircle className="h-3.5 w-3.5" style={{ color: GREEN }} />
+                      <span className="text-xs font-semibold" style={{ color: GREEN_DARK }}>Semrush Certified</span>
                     </div>
-                  ))}
-                </div>
-                <button
-                  onClick={openCalendly}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#534AB7] px-6 py-4 text-sm font-bold text-white transition-all hover:bg-[#3d35a0]"
-                >
-                  <Calendar className="h-4 w-4" />
-                  Book Free Strategy Call
-                </button>
-                <Link
-                  href="#ai-tool"
-                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#e5e7eb] px-6 py-3 text-sm font-bold text-[#0a0f2e] transition-all hover:border-[#0a0f2e]"
-                >
-                  Get Free SEO Audit Instead →
-                </Link>
-                <div className="mt-4 flex items-center justify-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="h-6 w-6 rounded-full border-2 border-white bg-[#534AB7] flex items-center justify-center">
-                        <span className="text-[8px] font-bold text-white">{["L", "E", "M"][i]}</span>
-                      </div>
-                    ))}
+                    <div className="mt-1 flex items-center gap-1.5">
+                      <BarChart3 className="h-3.5 w-3.5 text-[#94a3b8]" />
+                      <span className="text-xs text-[#64748b]">Technical &amp; Local SEO</span>
+                    </div>
+                    <p className="mt-3 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Verified Result</p>
+                    <p className="text-sm font-black text-[#0a0f2e]">+476% organic clicks</p>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold" style={{ color: GREEN_DARK }}>
+                      View certificate <ExternalLink className="h-2.5 w-2.5" />
+                    </span>
                   </div>
-                  <span className="text-xs text-[#64748b]">20+ businesses served across the US</span>
+                </a>
+ 
+                {/* small floating stat chip — top right */}
+                <div className="absolute -right-3 top-6 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg sm:-right-5">
+                  <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>12K+</p>
+                  <p className="text-[9px] text-[#64748b]">pages indexed</p>
                 </div>
               </div>
             </motion.div>
@@ -276,7 +290,3 @@ export default function Hero({ heroImage }: HeroProps) {
   );
 }
  
-
-
-
-
