@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Calendar, ExternalLink } from "lucide-react";
+import { CheckCircle, Calendar, ExternalLink, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
  
 /* ─── Toptal-like palette ─── */
@@ -117,7 +117,7 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-center gap-10 py-8 lg:grid-cols-2 lg:gap-14 lg:py-10">
+          <div className="grid items-center gap-8 py-6 lg:grid-cols-2 lg:gap-12 lg:py-8">
  
             {/* ── Left Content ── */}
             <motion.div
@@ -127,7 +127,7 @@ export default function Hero({ heroImage }: HeroProps) {
               className="text-center lg:text-left"
             >
               {/* Live pill */}
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
@@ -145,7 +145,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.3 }}
-                  className="mb-4 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl"
+                  className="mb-3 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl"
                   style={{ color: CHARCOAL }}
                 >
                   {current.headline}
@@ -162,7 +162,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="mx-auto mb-5 max-w-xl text-base leading-relaxed lg:mx-0"
+                  className="mx-auto mb-4 max-w-xl text-base leading-relaxed lg:mx-0"
                   style={{ color: BODY }}
                 >
                   {current.sub}
@@ -230,67 +230,79 @@ export default function Hero({ heroImage }: HeroProps) {
               </div>
             </motion.div>
  
-            {/* ── Right: Toptal-style photo + floating credential card ── */}
+            {/* ── Right: Toptal-style photo + separate credential card ── */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative flex items-end justify-center lg:justify-end"
+              className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-center lg:gap-4"
             >
-              {/* Photo frame */}
-              <div className="relative w-full max-w-sm">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/80 bg-gradient-to-b from-[#dfe3ec] to-[#cfd5e3] shadow-2xl">
+              {/* Photo — transparent PNG, blends into bg (Toptal style) */}
+              <div className="relative shrink-0">
+                <div className="relative aspect-[3/4] w-[240px] sm:w-[270px]">
                   <Image
-                    src="/images/mubashar-shahzad.jpg"
+                    src="/images/mubashar-transparent.png"
                     alt="Mubashar Shahzad — Founder & Lead SEO Strategist at SearchPrex"
                     fill
                     priority
-                    className="object-cover object-top"
+                    className="object-contain object-bottom drop-shadow-xl"
                   />
                 </div>
+                {/* 5+ yrs chip — top-left corner */}
+                <div className="absolute -left-1 top-2 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg">
+                  <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>5+ yrs</p>
+                  <p className="text-[9px] text-[#64748b]">SEO experience</p>
+                </div>
+              </div>
  
-                {/* Floating credential card — verifiable E-E-A-T */}
-                <div className="absolute -bottom-6 -left-4 w-64 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl sm:-left-8">
-                  {/* faint world-map dots */}
-                  <div className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0a0f2e 1px, transparent 0)", backgroundSize: "10px 10px" }} />
-                  <div className="relative">
-                    <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
-                    <p className="text-[11px] font-medium text-[#475569]">Certified SEO Expert · Founder, SearchPrex</p>
+              {/* Credential card — separate panel, beside photo (Toptal style) */}
+              <div className="relative w-60 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl">
+                {/* faint world-map dots — Toptal style */}
+                <div className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.10]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #534AB7 1px, transparent 0)", backgroundSize: "9px 9px" }} />
+                <div className="relative">
+                  <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
+                  <p className="text-[11px] font-medium text-[#475569]">Certified SEO Expert · Founder, SearchPrex</p>
  
-                    {/* Semrush cert — green verified badge (Toptal style) */}
+                  {/* Verified badges row — Semrush cert + LinkedIn */}
+                  <div className="mt-2.5 flex items-center gap-2">
                     <a
                       href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 transition-all hover:opacity-80"
+                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 transition-all hover:opacity-80"
                       style={{ background: "rgba(62,180,137,0.12)" }}
                     >
                       <CheckCircle className="h-3 w-3" style={{ color: GREEN }} />
                       <span className="text-[11px] font-bold" style={{ color: GREEN_DARK }}>Semrush Certified</span>
                       <ExternalLink className="h-2.5 w-2.5" style={{ color: GREEN_DARK }} />
                     </a>
- 
-                    {/* Verified result — clickable → case studies */}
-                    <Link
-                      href="/case-studies"
-                      className="mt-3 block rounded-lg p-2.5 transition-all hover:-translate-y-0.5"
-                      style={{ background: "rgba(62,180,137,0.1)" }}
+                    <a
+                      href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Verify experience on LinkedIn"
+                      aria-label="LinkedIn profile"
+                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-all hover:opacity-80"
+                      style={{ background: "#0a66c2" }}
                     >
-                      <p className="text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Verified Result</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-black text-[#0a0f2e]">+476% organic clicks</span>
-                      </div>
-                      <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-semibold" style={{ color: GREEN_DARK }}>
-                        View case study <span aria-hidden="true">→</span>
-                      </span>
-                    </Link>
+                      <Linkedin className="h-3.5 w-3.5 text-white" />
+                    </a>
                   </div>
-                </div>
  
-                {/* small floating stat chip — top right */}
-                <div className="absolute -right-3 top-6 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg sm:-right-5">
-                  <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>5+ yrs</p>
-                  <p className="text-[9px] text-[#64748b]">SEO experience</p>
+                  {/* Verified result — clickable → case studies */}
+                  <Link
+                    href="/case-studies"
+                    className="mt-3 block rounded-lg p-2.5 transition-all hover:-translate-y-0.5"
+                    style={{ background: "rgba(62,180,137,0.1)" }}
+                  >
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Verified Result</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-black text-[#0a0f2e]">+476% organic clicks</span>
+                    </div>
+                    <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-semibold" style={{ color: GREEN_DARK }}>
+                      View case study <span aria-hidden="true">→</span>
+                    </span>
+                  </Link>
                 </div>
               </div>
             </motion.div>
