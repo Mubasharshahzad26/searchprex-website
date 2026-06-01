@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Certifications from "@/components/Certifications";
 import ClientLogos from "@/components/ClientLogos";
 import VideoSection from "@/components/VideoSection";
 import PersonaSelector from "@/components/PersonaSelector";
@@ -94,18 +95,8 @@ export default async function Home() {
       <main id="main-content">
  
         {/* 01 — HERO */}
-        <Hero
-          headline={homeData?.heroHeadline}
-          subheadline={homeData?.heroSubheadline}
-          ctaText={homeData?.heroCtaText}
-          stat1Number={homeData?.stat1Number}
-          stat1Label={homeData?.stat1Label}
-          stat2Number={homeData?.stat2Number}
-          stat2Label={homeData?.stat2Label}
-          stat3Number={homeData?.stat3Number}
-          stat3Label={homeData?.stat3Label}
-          heroImage={homeData?.heroImage}
-        />
+        <Hero />
+        <Certifications />
         <ClientLogos />
  
         {/* 02 — VIDEO PROOF */}
