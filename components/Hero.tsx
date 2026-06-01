@@ -1,11 +1,9 @@
-
 "use client";
  
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { CheckCircle, Calendar, BarChart3, MapPin, ExternalLink } from "lucide-react";
+import { CheckCircle, Calendar, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
  
 /* ─── Toptal-like palette ─── */
@@ -95,7 +93,7 @@ export default function Hero({ heroImage }: HeroProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
-          <div className="flex justify-center pt-8 pb-2">
+          <div className="flex justify-center pt-4 pb-1">
             <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3 shadow-sm backdrop-blur-sm border border-white/80">
               <span className="text-xs font-medium text-[#64748b] whitespace-nowrap">
                 I&apos;m looking for
@@ -119,7 +117,7 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-center gap-12 py-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
+          <div className="grid items-center gap-10 py-8 lg:grid-cols-2 lg:gap-14 lg:py-10">
  
             {/* ── Left Content ── */}
             <motion.div
@@ -129,7 +127,7 @@ export default function Hero({ heroImage }: HeroProps) {
               className="text-center lg:text-left"
             >
               {/* Live pill */}
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
@@ -139,7 +137,7 @@ export default function Hero({ heroImage }: HeroProps) {
                 </span>
               </div>
  
-              {/* ── Dynamic H1 — Toptal charcoal + green underline accent ── */}
+              {/* ── Dynamic H1 — simple charcoal (no underline) ── */}
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={current.id}
@@ -147,15 +145,12 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.3 }}
-                  className="mb-5 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+                  className="mb-4 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl"
                   style={{ color: CHARCOAL }}
                 >
                   {current.headline}
                   <br />
-                  <span className="relative inline-block">
-                    {current.emphasis}
-                    <span className="absolute -bottom-1 left-0 h-[5px] w-full rounded-full" style={{ background: GREEN, opacity: 0.85 }} />
-                  </span>
+                  <span>{current.emphasis}</span>
                 </motion.h1>
               </AnimatePresence>
  
@@ -167,7 +162,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="mx-auto mb-7 max-w-xl text-lg leading-relaxed lg:mx-0"
+                  className="mx-auto mb-5 max-w-xl text-base leading-relaxed lg:mx-0"
                   style={{ color: BODY }}
                 >
                   {current.sub}
@@ -192,8 +187,15 @@ export default function Hero({ heroImage }: HeroProps) {
                 </Link>
               </div>
  
+              {/* View case studies link */}
+              <div className="mt-3 flex justify-center lg:justify-start">
+                <Link href="/case-studies" className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5" style={{ color: GREEN_DARK }}>
+                  View our case studies <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+ 
               {/* Sub-note */}
-              <div className="mt-4 mb-6 flex items-center justify-center gap-1.5 lg:justify-start">
+              <div className="mt-3 mb-6 flex items-center justify-center gap-1.5 lg:justify-start">
                 <CheckCircle className="h-4 w-4 flex-shrink-0" style={{ color: GREEN }} aria-hidden="true" />
                 <span className="text-sm" style={{ color: BODY }}>
                   Free 30-min call · No commitment · Reply in 24hrs
@@ -201,11 +203,11 @@ export default function Hero({ heroImage }: HeroProps) {
               </div>
  
               {/* EEAT Badges */}
-              <div className="rounded-xl border border-white/60 bg-white/50 px-4 py-4 backdrop-blur-sm">
-                <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+              <div className="rounded-xl border border-white/60 bg-white/50 px-3 py-3 backdrop-blur-sm">
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
                   Verified &amp; Listed On
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {eeatLinks.map((platform) => (
                     <a
                       key={platform.label}
@@ -213,14 +215,14 @@ export default function Hero({ heroImage }: HeroProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       title={`SearchPrex on ${platform.label}`}
-                      className="group flex items-center gap-2 rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
+                      className="group flex items-center gap-1.5 rounded-lg border border-[#e5e7eb] bg-white px-2.5 py-1.5 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
                     >
                       <span className="flex-shrink-0 transition-transform group-hover:scale-110">
                         {platform.icon}
                       </span>
                       <div>
-                        <p className="text-[11px] font-semibold leading-none text-[#0a0f2e]">{platform.label}</p>
-                        <p className="text-[10px] font-medium leading-tight" style={{ color: platform.color }}>{platform.sub}</p>
+                        <p className="text-[10px] font-semibold leading-none text-[#0a0f2e]">{platform.label}</p>
+                        <p className="text-[9px] font-medium leading-tight" style={{ color: platform.color }}>{platform.sub}</p>
                       </div>
                     </a>
                   ))}
@@ -247,38 +249,48 @@ export default function Hero({ heroImage }: HeroProps) {
                   />
                 </div>
  
-                {/* Floating credential card — Toptal style, verifiable E-E-A-T */}
-                <a
-                  href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="View Mubashar Shahzad's Semrush certificate"
-                  className="absolute -bottom-6 -left-4 block w-60 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl transition-all hover:-translate-y-0.5 hover:shadow-2xl sm:-left-8"
-                >
+                {/* Floating credential card — verifiable E-E-A-T */}
+                <div className="absolute -bottom-6 -left-4 w-64 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl sm:-left-8">
                   {/* faint world-map dots */}
                   <div className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0a0f2e 1px, transparent 0)", backgroundSize: "10px 10px" }} />
                   <div className="relative">
                     <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
-                    <div className="mt-1.5 flex items-center gap-1.5">
-                      <CheckCircle className="h-3.5 w-3.5" style={{ color: GREEN }} />
-                      <span className="text-xs font-semibold" style={{ color: GREEN_DARK }}>Semrush Certified</span>
-                    </div>
-                    <div className="mt-1 flex items-center gap-1.5">
-                      <BarChart3 className="h-3.5 w-3.5 text-[#94a3b8]" />
-                      <span className="text-xs text-[#64748b]">Technical &amp; Local SEO</span>
-                    </div>
-                    <p className="mt-3 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Verified Result</p>
-                    <p className="text-sm font-black text-[#0a0f2e]">+476% organic clicks</p>
-                    <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold" style={{ color: GREEN_DARK }}>
-                      View certificate <ExternalLink className="h-2.5 w-2.5" />
-                    </span>
+                    <p className="text-[11px] font-medium text-[#475569]">Certified SEO Expert · Founder, SearchPrex</p>
+ 
+                    {/* Semrush cert — green verified badge (Toptal style) */}
+                    <a
+                      href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 transition-all hover:opacity-80"
+                      style={{ background: "rgba(62,180,137,0.12)" }}
+                    >
+                      <CheckCircle className="h-3 w-3" style={{ color: GREEN }} />
+                      <span className="text-[11px] font-bold" style={{ color: GREEN_DARK }}>Semrush Certified</span>
+                      <ExternalLink className="h-2.5 w-2.5" style={{ color: GREEN_DARK }} />
+                    </a>
+ 
+                    {/* Verified result — clickable → case studies */}
+                    <Link
+                      href="/case-studies"
+                      className="mt-3 block rounded-lg p-2.5 transition-all hover:-translate-y-0.5"
+                      style={{ background: "rgba(62,180,137,0.1)" }}
+                    >
+                      <p className="text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Verified Result</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-black text-[#0a0f2e]">+476% organic clicks</span>
+                      </div>
+                      <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-semibold" style={{ color: GREEN_DARK }}>
+                        View case study <span aria-hidden="true">→</span>
+                      </span>
+                    </Link>
                   </div>
-                </a>
+                </div>
  
                 {/* small floating stat chip — top right */}
                 <div className="absolute -right-3 top-6 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg sm:-right-5">
-                  <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>12K+</p>
-                  <p className="text-[9px] text-[#64748b]">pages indexed</p>
+                  <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>5+ yrs</p>
+                  <p className="text-[9px] text-[#64748b]">SEO experience</p>
                 </div>
               </div>
             </motion.div>
@@ -290,3 +302,64 @@ export default function Hero({ heroImage }: HeroProps) {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
