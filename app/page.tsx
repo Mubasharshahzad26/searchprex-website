@@ -13,7 +13,6 @@ import Process from "@/components/Process";
 import Pricing from "@/components/Pricing";
 import NicheSEOPro from "@/components/NicheSEOPro";
 import MultipleCTAs from "@/components/MultipleCTAs";
-import Reviews from "@/components/Reviews";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import ChatWidget from "@/components/ChatWidget";
@@ -142,8 +141,7 @@ export default async function Home() {
         {/* 12 — MULTIPLE CTAS */}
         <MultipleCTAs />
  
-        {/* 13 — REVIEWS */}
-        <Reviews />
+        
  
         {/* 14 — FAQ */}
         <FAQ />
