@@ -169,8 +169,8 @@ export default function Hero({ heroImage }: HeroProps) {
                 </motion.p>
               </AnimatePresence>
  
-              {/* CTAs — booking moved here (green), + audit */}
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+              {/* Single CTA — Toptal style */}
+              <div className="flex justify-center lg:justify-start">
                 <button
                   onClick={openCalendly}
                   className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
@@ -178,13 +178,6 @@ export default function Hero({ heroImage }: HeroProps) {
                 >
                   <Calendar className="h-4 w-4" /> Book Free Strategy Call
                 </button>
-                <Link
-                  href="/free-audit"
-                  className="inline-flex items-center justify-center rounded-lg border-2 px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all hover:bg-white"
-                  style={{ borderColor: "#cdd2dd", color: CHARCOAL }}
-                >
-                  {current.cta}
-                </Link>
               </div>
  
               {/* View case studies link */}
@@ -237,73 +230,67 @@ export default function Hero({ heroImage }: HeroProps) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-center lg:gap-4"
             >
-              {/* Photo — transparent PNG, blends into bg (Toptal style) */}
+              {/* Photo — transparent PNG, bottom fades into bg (Toptal style) */}
               <div className="relative shrink-0">
-                <div className="relative aspect-[3/4] w-[240px] sm:w-[270px]">
+                <div className="relative aspect-[3/4] w-[300px] sm:w-[340px]">
                   <Image
                     src="/images/mubashar-transparent.png"
-                    alt="Mubashar Shahzad — Founder & Lead SEO Strategist at SearchPrex"
+                    alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
                     fill
                     priority
-                    className="object-contain object-bottom drop-shadow-xl"
+                    className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
                   />
                 </div>
                 {/* 5+ yrs chip — top-left corner */}
-                <div className="absolute -left-1 top-2 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg">
+                <div className="absolute left-0 top-4 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg">
                   <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>5+ yrs</p>
                   <p className="text-[9px] text-[#64748b]">SEO experience</p>
                 </div>
               </div>
  
-              {/* Credential card — separate panel, beside photo (Toptal style) */}
-              <div className="relative w-60 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl">
-                {/* faint world-map dots — Toptal style */}
-                <div className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.10]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #534AB7 1px, transparent 0)", backgroundSize: "9px 9px" }} />
-                <div className="relative">
-                  <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
-                  <p className="text-[11px] font-medium text-[#475569]">Certified SEO Expert · Founder, SearchPrex</p>
- 
-                  {/* Verified badges row — Semrush cert + LinkedIn */}
-                  <div className="mt-2.5 flex items-center gap-2">
-                    <a
-                      href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 transition-all hover:opacity-80"
-                      style={{ background: "rgba(62,180,137,0.12)" }}
-                    >
-                      <CheckCircle className="h-3 w-3" style={{ color: GREEN }} />
-                      <span className="text-[11px] font-bold" style={{ color: GREEN_DARK }}>Semrush Certified</span>
-                      <ExternalLink className="h-2.5 w-2.5" style={{ color: GREEN_DARK }} />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="Verify experience on LinkedIn"
-                      aria-label="LinkedIn profile"
-                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-all hover:opacity-80"
-                      style={{ background: "#0a66c2" }}
-                    >
-                      <Linkedin className="h-3.5 w-3.5 text-white" />
-                    </a>
-                  </div>
- 
-                  {/* Verified result — clickable → case studies */}
-                  <Link
-                    href="/case-studies"
-                    className="mt-3 block rounded-lg p-2.5 transition-all hover:-translate-y-0.5"
-                    style={{ background: "rgba(62,180,137,0.1)" }}
-                  >
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Verified Result</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-black text-[#0a0f2e]">+476% organic clicks</span>
-                    </div>
-                    <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-semibold" style={{ color: GREEN_DARK }}>
-                      View case study <span aria-hidden="true">→</span>
-                    </span>
-                  </Link>
+              {/* Credential card — Toptal structure (map → name → verified → role → linkedin → previously at) */}
+              <div className="relative w-60 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-5 shadow-xl">
+                {/* World-map dots — Toptal style (top of card) */}
+                <div className="relative mb-4 h-16 w-full">
+                  <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "8px 8px" }} />
+                  {/* location pin dot */}
+                  <span className="absolute left-[22%] top-[35%] h-1.5 w-1.5 rounded-full" style={{ background: PURPLE }} />
                 </div>
+ 
+                {/* Name */}
+                <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
+ 
+                {/* Verified — Founder & Certified SEO Expert (clickable → Semrush cert) */}
+                <a
+                  href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1.5 flex items-start gap-1.5 transition-opacity hover:opacity-80"
+                >
+                  <CheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
+                  <span className="text-xs font-bold leading-snug" style={{ color: GREEN_DARK }}>
+                    Founder &amp; Certified SEO Expert
+                    <ExternalLink className="ml-1 inline h-2.5 w-2.5" />
+                  </span>
+                </a>
+ 
+                {/* LinkedIn — verify experience */}
+                <a
+                  href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 flex items-center gap-1.5 transition-opacity hover:opacity-80"
+                >
+                  <Linkedin className="h-3.5 w-3.5 shrink-0" style={{ color: "#0a66c2" }} />
+                  <span className="text-xs font-medium" style={{ color: "#0a66c2" }}>Verify on LinkedIn</span>
+                </a>
+ 
+                {/* Previously at */}
+                <p className="mt-4 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
+                <p className="text-sm font-black text-[#0a0f2e]">Time Technologies LLC</p>
+ 
+                {/* Toptal-style notch/fold at bottom-left */}
+                <div className="absolute -bottom-1.5 left-7 h-3 w-3 rotate-45 border-b border-r border-[#e8eaf0] bg-white" />
               </div>
             </motion.div>
  
