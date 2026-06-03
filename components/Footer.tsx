@@ -1,3 +1,4 @@
+
 "use client";
 import { Favicon } from "@/components/Logo";
 import Link from "next/link";
@@ -244,8 +245,24 @@ export default function Footer() {
               ))}
             </div>
  
-            <span className="text-center text-xs text-white/50 md:text-right">
-              Semrush Certified • Ahrefs Certified • Google Analytics Certified
+            <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-xs text-white/50 md:justify-end md:text-right">
+              <a
+                href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-[#3eb489] hover:underline"
+              >
+                Semrush Certified
+              </a>
+              <span aria-hidden="true">•</span>
+              <a
+                href="https://app-na2.hubspot.com/academy/achievements/REPLACE_HUBSPOT_ID"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-[#3eb489] hover:underline"
+              >
+                HubSpot Verified
+              </a>
             </span>
           </div>
         </div>
@@ -254,64 +271,3 @@ export default function Footer() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
