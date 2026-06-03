@@ -222,7 +222,7 @@ export default function Hero({ heroImage }: HeroProps) {
               className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
             >
               {/* Photo — transparent PNG, bottom fades into bg (Toptal style), BIGGER + pulled up */}
-              <div className="relative shrink-0 lg:-mt-10">
+              <div className="relative shrink-0 lg:-mt-24">
                 <div className="relative aspect-[3/4] w-[360px] sm:w-[430px]">
                   <Image
                     src="/images/mubashar-transparent.png"
@@ -235,7 +235,7 @@ export default function Hero({ heroImage }: HeroProps) {
               </div>
  
               {/* Credential card — Toptal structure + delivered stats (SMALLER) */}
-              <div className="relative w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl lg:mt-12">
+              <div className="relative w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl lg:mt-2">
                 {/* World-map dots — Toptal style (top of card) */}
                 <div className="relative mb-3 h-10 w-full">
                   <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "7px 7px" }} />
@@ -302,64 +302,3 @@ export default function Hero({ heroImage }: HeroProps) {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
