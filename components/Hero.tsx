@@ -219,23 +219,23 @@ export default function Hero({ heroImage }: HeroProps) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-center lg:gap-4"
+              className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
             >
-              {/* Photo — transparent PNG, bottom fades into bg (Toptal style), BIGGER */}
-              <div className="relative shrink-0">
-                <div className="relative aspect-[3/4] w-[330px] sm:w-[390px]">
+              {/* Photo — transparent PNG, bottom fades into bg (Toptal style), BIGGER + pulled up */}
+              <div className="relative shrink-0 lg:-mt-10">
+                <div className="relative aspect-[3/4] w-[360px] sm:w-[430px]">
                   <Image
                     src="/images/mubashar-transparent.png"
                     alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
                     fill
                     priority
-                    className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
+                    className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
                   />
                 </div>
               </div>
  
               {/* Credential card — Toptal structure + delivered stats (SMALLER) */}
-              <div className="relative w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl">
+              <div className="relative w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl lg:mt-12">
                 {/* World-map dots — Toptal style (top of card) */}
                 <div className="relative mb-3 h-10 w-full">
                   <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "7px 7px" }} />
