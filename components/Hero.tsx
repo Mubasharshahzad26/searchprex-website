@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Calendar, ExternalLink, Linkedin } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
  
 /* ─── Toptal-like palette ─── */
 const CHARCOAL = "#1c1c24";   // Toptal heading charcoal (softer than navy)
@@ -43,15 +43,15 @@ const personas = [
  
 // ── EEAT platform links ───────────────────────────────────────────────
 const eeatLinks = [
-  { label: "Trustpilot", sub: "Reviews",  href: "https://www.trustpilot.com/review/searchprex.com", color: "#00b67a",
+  { label: "Trustpilot", sub: "Registered",  href: "https://www.trustpilot.com/review/searchprex.com", color: "#00b67a",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#00b67a" aria-label="Trustpilot"><path d="M12 2l2.76 8.47H23l-7.12 5.17 2.76 8.47L12 19 3.36 24.11l2.76-8.47L-1 8.47h8.24z"/></svg> },
-  { label: "Clutch",     sub: "5.0 ★",   href: "https://clutch.co/profile/searchprex",              color: "#d97706",
+  { label: "Clutch",     sub: "Registered",   href: "https://clutch.co/profile/searchprex",              color: "#d97706",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#d97706" aria-label="Clutch"><path d="M12 2l2.39 4.84 5.34.78-3.87 3.77.91 5.32L12 14.27l-4.77 2.44.91-5.32L4.27 7.62l5.34-.78z"/></svg> },
-  { label: "BBB",        sub: "A+ Listed",href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
+  { label: "BBB",        sub: "Registered",href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="BBB"><circle cx="12" cy="12" r="10" stroke="#1d4ed8" strokeWidth="2"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#1d4ed8">A+</text></svg> },
-  { label: "G2",         sub: "Approved", href: "https://www.g2.com/sellers/searchprex",             color: "#ff492c",
+  { label: "G2",         sub: "Registered", href: "https://www.g2.com/sellers/searchprex",             color: "#ff492c",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="G2"><circle cx="12" cy="12" r="10" fill="#ff492c"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fff">G2</text></svg> },
-  { label: "GoodFirms",  sub: "Verified", href: "https://www.goodfirms.co/company/searchprex",       color: "#534AB7",
+  { label: "GoodFirms",  sub: "Registered", href: "https://www.goodfirms.co/company/searchprex",       color: "#534AB7",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#534AB7" aria-label="GoodFirms"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5l-4-4 1.41-1.41L11 13.67l6.59-6.58L19 8.5l-8 8z"/></svg> },
   { label: "Crunchbase", sub: "Listed",   href: "https://www.crunchbase.com/organization/searchprex", color: "#0288d1",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0288d1" aria-label="Crunchbase"><path d="M21 10.5A8.5 8.5 0 1 1 12.5 2H21v8.5z"/><circle cx="12.5" cy="12.5" r="4" fill="#fff"/></svg> },
@@ -68,27 +68,16 @@ interface HeroProps {
 export default function Hero({ heroImage }: HeroProps) {
   const [activePersona, setActivePersona] = useState(0);
  
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
-  }, []);
- 
-  const openCalendly = () => {
-    if (typeof window !== "undefined" && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: "https://calendly.com/contact-searchprex/30min",
-      });
-    }
-  };
+  // Direct Calendly link — opens instantly in a new tab (no slow popup iframe)
+  const CALENDLY_URL = "https://calendly.com/contact-searchprex/30min";
  
   const current = personas[activePersona];
  
   return (
     <>
-      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+      {/* Speed up Calendly load in the new tab */}
+      <link rel="preconnect" href="https://calendly.com" />
+      <link rel="preconnect" href="https://assets.calendly.com" />
       <section className="relative overflow-hidden bg-[#e9ebf0] pt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
@@ -169,15 +158,17 @@ export default function Hero({ heroImage }: HeroProps) {
                 </motion.p>
               </AnimatePresence>
  
-              {/* Single CTA — Toptal style */}
+              {/* Single CTA — Toptal style (instant link, no slow popup) */}
               <div className="flex justify-center lg:justify-start">
-                <button
-                  onClick={openCalendly}
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
                   style={{ background: GREEN }}
                 >
                   <Calendar className="h-4 w-4" /> Book Free Strategy Call
-                </button>
+                </a>
               </div>
  
               {/* View case studies link */}
@@ -230,9 +221,9 @@ export default function Hero({ heroImage }: HeroProps) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-center lg:gap-4"
             >
-              {/* Photo — transparent PNG, bottom fades into bg (Toptal style) */}
+              {/* Photo — transparent PNG, bottom fades into bg (Toptal style), BIGGER */}
               <div className="relative shrink-0">
-                <div className="relative aspect-[3/4] w-[300px] sm:w-[340px]">
+                <div className="relative aspect-[3/4] w-[330px] sm:w-[390px]">
                   <Image
                     src="/images/mubashar-transparent.png"
                     alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
@@ -241,19 +232,13 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
                   />
                 </div>
-                {/* 5+ yrs chip — top-left corner */}
-                <div className="absolute left-0 top-4 rounded-lg border border-[#e8eaf0] bg-white px-3 py-2 shadow-lg">
-                  <p className="text-base font-black tracking-tight" style={{ color: GREEN_DARK }}>5+ yrs</p>
-                  <p className="text-[9px] text-[#64748b]">SEO experience</p>
-                </div>
               </div>
  
-              {/* Credential card — Toptal structure (map → name → verified → role → linkedin → previously at) */}
-              <div className="relative w-60 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-5 shadow-xl">
+              {/* Credential card — Toptal structure + delivered stats (SMALLER) */}
+              <div className="relative w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl">
                 {/* World-map dots — Toptal style (top of card) */}
-                <div className="relative mb-4 h-16 w-full">
-                  <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "8px 8px" }} />
-                  {/* location pin dot */}
+                <div className="relative mb-3 h-10 w-full">
+                  <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "7px 7px" }} />
                   <span className="absolute left-[22%] top-[35%] h-1.5 w-1.5 rounded-full" style={{ background: PURPLE }} />
                 </div>
  
@@ -267,8 +252,8 @@ export default function Hero({ heroImage }: HeroProps) {
                   rel="noopener noreferrer"
                   className="mt-1.5 flex items-start gap-1.5 transition-opacity hover:opacity-80"
                 >
-                  <CheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
-                  <span className="text-xs font-bold leading-snug" style={{ color: GREEN_DARK }}>
+                  <CheckCircle className="mt-0.5 h-3 w-3 shrink-0" style={{ color: GREEN }} />
+                  <span className="text-[11px] font-bold leading-snug" style={{ color: GREEN_DARK }}>
                     Founder &amp; Certified SEO Expert
                     <ExternalLink className="ml-1 inline h-2.5 w-2.5" />
                   </span>
@@ -279,15 +264,31 @@ export default function Hero({ heroImage }: HeroProps) {
                   href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 flex items-center gap-1.5 transition-opacity hover:opacity-80"
+                  className="mt-1.5 flex items-center gap-1.5 transition-opacity hover:opacity-80"
                 >
-                  <Linkedin className="h-3.5 w-3.5 shrink-0" style={{ color: "#0a66c2" }} />
-                  <span className="text-xs font-medium" style={{ color: "#0a66c2" }}>Verify on LinkedIn</span>
+                  <Linkedin className="h-3 w-3 shrink-0" style={{ color: "#0a66c2" }} />
+                  <span className="text-[11px] font-medium" style={{ color: "#0a66c2" }}>Verify on LinkedIn</span>
                 </a>
  
+                {/* Delivered stats — what Mubashar has achieved */}
+                <div className="mt-3 grid grid-cols-3 gap-1 border-t border-[#eef0f5] pt-3">
+                  <div>
+                    <p className="text-sm font-black leading-none" style={{ color: GREEN_DARK }}>5+</p>
+                    <p className="mt-0.5 text-[8px] leading-tight text-[#94a3b8]">Years Exp.</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+476%</p>
+                    <p className="mt-0.5 text-[8px] leading-tight text-[#94a3b8]">Clicks</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+75%</p>
+                    <p className="mt-0.5 text-[8px] leading-tight text-[#94a3b8]">Revenue</p>
+                  </div>
+                </div>
+ 
                 {/* Previously at */}
-                <p className="mt-4 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
-                <p className="text-sm font-black text-[#0a0f2e]">Time Technologies LLC</p>
+                <p className="mt-3 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
+                <p className="text-xs font-black text-[#0a0f2e]">Time Technologies LLC</p>
  
                 {/* Toptal-style notch/fold at bottom-left */}
                 <div className="absolute -bottom-1.5 left-7 h-3 w-3 rotate-45 border-b border-r border-[#e8eaf0] bg-white" />
