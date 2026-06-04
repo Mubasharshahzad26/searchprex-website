@@ -50,7 +50,8 @@ export default function Certifications() {
   }, [next]);
  
   return (
-    <section className="border-t border-[#d4d8e3] bg-[#e9ebf0] py-10">
+    /* div (not section) — seamlessly continues the hero (no divider, Toptal style) */
+    <div className="bg-[#e9ebf0] pt-2 pb-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
         {/* Top row: tiny label + arrows (no big heading) */}
@@ -121,7 +122,7 @@ export default function Certifications() {
         </div>
  
       </div>
-    </section>
+    </div>
   );
 }
  
