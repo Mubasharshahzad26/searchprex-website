@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Certifications from "@/components/Certifications";
 import ClientLogos from "@/components/ClientLogos";
 import VideoSection from "@/components/VideoSection";
 import PersonaSelector from "@/components/PersonaSelector";
@@ -96,7 +95,7 @@ export default async function Home() {
  
         {/* 01 — HERO */}
         <Hero />
-        <Certifications />
+        
         <ClientLogos />
  
         {/* 02 — VIDEO PROOF */}
