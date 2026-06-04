@@ -4,57 +4,60 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, TrendingUp, BarChart2, MapPin } from "lucide-react";
  
+/* ─── Aligned with /case-studies (source of truth) + site design system ───
+   Colors: green #2f9670 · purple #534AB7 · navy #0a0f2e  (NO blue)
+*/
 const caseStudies = [
   {
     category: "eCommerce SEO",
     location: "United States",
     icon: TrendingUp,
-    iconColor: "#1a3c8f",
-    iconBg: "#e6eeff",
+    iconColor: "#2f9670",
+    iconBg: "#dcf2ea",
     metric: "+75%",
-    metricLabel: "Revenue Increase",
+    metricLabel: "US Revenue Growth",
     client: "SMK Store",
     industry: "Tactical Gear · eCommerce",
-    detail: "Monthly sales grew from $300 to $525 in just 2 months through product page optimization and technical SEO fixes.",
+    detail: "Fixed mass non-indexing across a 35,000-product catalog — thin boilerplate and failing Core Web Vitals — lifting US organic revenue, with no ad spend.",
     timeline: "2 months",
     href: "/case-studies",
-    accent: "#1a3c8f",
+    accent: "#2f9670",
   },
   {
     category: "Technical SEO",
     location: "Michigan, USA",
     icon: BarChart2,
-    iconColor: "#2563eb",
-    iconBg: "#dbeafe",
-    metric: "+285%",
-    metricLabel: "Indexed Pages Growth",
-    client: "Michigan Sports Outdoor",
+    iconColor: "#534AB7",
+    iconBg: "#EEEDFE",
+    metric: "+476%",
+    metricLabel: "Organic Clicks",
+    client: "Michigan Outdoor Sports",
     industry: "Sports & Outdoors · eCommerce",
-    detail: "Grew indexed pages from 7,000 to 27,000 in 1.5 months by resolving crawl budget and indexation issues.",
-    timeline: "1.5 months",
+    detail: "Recovered from near-zero GSC visibility — sitemaps submitted, indexation blocks and crawl waste fixed, brand pages rewritten. 12,000+ pages indexed within 90 days.",
+    timeline: "90 days",
     href: "/case-studies",
-    accent: "#2563eb",
+    accent: "#534AB7",
   },
   {
     category: "Local SEO",
-    location: "Simi Valley, CA",
+    location: "United States",
     icon: MapPin,
-    iconColor: "#534AB7",
-    iconBg: "#EEEDFE",
-    metric: "53",
-    metricLabel: "Daily Organic Users",
-    client: "HVAC Services Team",
+    iconColor: "#0a0f2e",
+    iconBg: "#e3e7f0",
+    metric: "+5.7x",
+    metricLabel: "Organic Calls",
+    client: "Local HVAC Services",
     industry: "HVAC · Local Business",
-    detail: "Scaled from zero to 1,500+ monthly impressions and secured an AI Overview appearance within 60 days.",
+    detail: "From no map pack presence and zero AI Overview visibility to a Top 3 Maps pack position and a Featured AI Overview for high-intent emergency searches.",
     timeline: "60 days",
     href: "/case-studies",
-    accent: "#534AB7",
+    accent: "#0a0f2e",
   },
 ];
  
 export default function Results() {
   return (
-    <section id="results" className="bg-[#eeeef5] py-24">
+    <section id="results" className="bg-[#eaecf3] py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
         {/* ── Header ── */}
@@ -72,13 +75,13 @@ export default function Results() {
             <h2 className="text-4xl font-black text-[#0a0f2e] sm:text-5xl">
               Real Numbers. Real Clients.
             </h2>
-            <p className="mt-3 text-lg text-[#64748b]">
-              We let our tracking data do the talking. No fluff, just results.
+            <p className="mt-3 text-lg text-[#5b6472]">
+              We let our Google Search Console data do the talking. No fluff, just results.
             </p>
           </div>
           <Link
             href="/case-studies"
-            className="group flex flex-shrink-0 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#2563eb] transition-colors hover:text-[#1a3c8f]"
+            className="group flex flex-shrink-0 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#2f9670] transition-colors hover:text-[#27500A]"
           >
             All Case Studies
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -125,7 +128,7 @@ export default function Results() {
                     {study.metric}
                   </p>
                 </div>
-                <p className="mb-6 text-sm font-semibold text-[#64748b]">
+                <p className="mb-6 text-sm font-semibold text-[#5b6472]">
                   {study.metricLabel}
                 </p>
  
@@ -147,7 +150,7 @@ export default function Results() {
                 </div>
  
                 {/* Detail */}
-                <p className="mb-5 flex-1 text-sm leading-relaxed text-[#64748b]">
+                <p className="mb-5 flex-1 text-sm leading-relaxed text-[#5b6472]">
                   {study.detail}
                 </p>
  
@@ -181,11 +184,12 @@ export default function Results() {
         >
           <div>
             <p className="font-black text-[#0a0f2e]">Want results like these?</p>
-            <p className="text-sm text-[#64748b]">Book a free 30-min strategy call — no commitment required.</p>
+            <p className="text-sm text-[#5b6472]">Book a free 30-min strategy call — no commitment required.</p>
           </div>
           <Link
-            href="#cta"
-            className="flex-shrink-0 rounded-xl bg-[#0a0f2e] px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
+            href="/free-audit"
+            className="flex-shrink-0 rounded-xl px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
+            style={{ backgroundColor: "#3eb489" }}
           >
             Get Free SEO Audit
           </Link>
@@ -196,6 +200,61 @@ export default function Results() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
