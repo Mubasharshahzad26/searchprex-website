@@ -137,14 +137,11 @@ export default function Hero({ heroImage }: HeroProps) {
  
   return (
     <>
-      {/* Speed up Calendly load in the new tab */}
-      <link rel="preconnect" href="https://calendly.com" />
-      <link rel="preconnect" href="https://assets.calendly.com" />
       <section className="relative overflow-hidden bg-[#e9ebf0] pt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
-          <div className="flex justify-center pt-4 pb-1">
+          <div className="relative z-20 flex justify-center pt-4 pb-1">
             <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3 shadow-sm backdrop-blur-sm border border-white/80">
               <span className="text-xs font-medium text-[#64748b] whitespace-nowrap">
                 I&apos;m looking for
@@ -313,7 +310,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
                     {/* Photo */}
-                    <div className="relative shrink-0 lg:-mt-32">
+                    <div className="relative shrink-0 lg:-mt-20">
                       <div className="relative aspect-[3/4] w-[360px] sm:w-[430px]">
                         <Image
                           src="/images/mubashar-transparent.png"
