@@ -1,9 +1,9 @@
 "use client";
-
+ 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
-
+ 
 const faqs = [
   {
     question: "How long does SEO take to show results?",
@@ -46,12 +46,34 @@ const faqs = [
       "You get a custom live dashboard. We focus on 'Money Metrics': rank improvements for high-intent terms, organic traffic, and lead attribution.",
   },
 ];
-
+ 
+/* FAQPage schema — built from the SAME array as the visible accordion,
+   so structured data always matches on-page content (Google's requirement).
+   Eligible for FAQ rich results + AI Overviews. */
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.answer,
+    },
+  })),
+};
+ 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
+ 
   return (
     <section className="bg-white py-24">
+      {/* FAQPage structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+ 
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -68,7 +90,7 @@ export default function FAQ() {
             Clear answers on how we deliver ROI.
           </p>
         </motion.div>
-
+ 
         {/* FAQ Accordion */}
         <div className="space-y-4">
           {faqs.map((faq, index) => (
@@ -88,7 +110,7 @@ export default function FAQ() {
                   {faq.question}
                 </span>
                 {openIndex === index ? (
-                  <Minus className="h-5 w-5 flex-shrink-0 text-[#2563eb]" />
+                  <Minus className="h-5 w-5 flex-shrink-0 text-[#3eb489]" />
                 ) : (
                   <Plus className="h-5 w-5 flex-shrink-0 text-[#64748b]" />
                 )}
@@ -114,3 +136,67 @@ export default function FAQ() {
     </section>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
