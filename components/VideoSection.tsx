@@ -14,6 +14,7 @@ interface Video {
   description: string;
   category: string;
   duration: string;
+  uploadDate: string; // ⚠️ real YouTube upload date (YYYY-MM-DD) — required by Google
   stats: { label: string; value: string }[];
 }
  
@@ -24,6 +25,7 @@ const videos: Video[] = [
     description: "Live GSC screen recording showing the real organic performance growth we delivered for Michigan Outdoor Sports — clicks, impressions, and indexed pages, unfiltered.",
     category: "Client Results",
     duration: "0:14",
+    uploadDate: "2026-05-10", // ⚠️ replace with real YouTube upload date
     stats: [
       { label: "Organic Clicks", value: "+476%" },
       { label: "Pages Indexed", value: "12K+" },
@@ -35,6 +37,7 @@ const videos: Video[] = [
     description: "Full GSC case study — crawl budget fix, sitemap submission, and mass URL resubmission strategy that took Michigan Outdoor Sports from near-zero to a 285% indexing rate.",
     category: "Case Study",
     duration: "12:10",
+    uploadDate: "2026-04-22", // ⚠️ replace with real YouTube upload date
     stats: [
       { label: "Indexing Rate", value: "+285%" },
       { label: "Organic Traffic", value: "+180%" },
@@ -46,6 +49,7 @@ const videos: Video[] = [
     description: "Live walkthrough showing how we pushed a local service business to top map-pack rankings and captured Google's AI Overview placements for high-intent local searches.",
     category: "Local SEO",
     duration: "10:30",
+    uploadDate: "2026-05-18", // ⚠️ replace with real YouTube upload date
     stats: [
       { label: "Local Ranking", value: "Top 3" },
       { label: "AI Overview", value: "Featured" },
@@ -57,12 +61,50 @@ const videos: Video[] = [
     description: "Full case study on how organic SEO restructuring and product-page optimization boosted SMK Store's US revenue by 75% — real GSC and sales data, unfiltered.",
     category: "Case Study",
     duration: "9:15",
+    uploadDate: "2026-03-15", // ⚠️ replace with real YouTube upload date
     stats: [
       { label: "Revenue Growth", value: "+75%" },
       { label: "Market", value: "USA" },
     ],
   },
 ];
+ 
+/* Convert "12:10" / "9:15" / "0:14" → ISO-8601 duration (PT12M10S) for schema */
+function toISODuration(d: string): string {
+  const p = d.split(":").map(Number);
+  let h = 0, m = 0, s = 0;
+  if (p.length === 3) [h, m, s] = p;
+  else if (p.length === 2) [m, s] = p;
+  else [s] = p;
+  const out = `PT${h ? h + "H" : ""}${m ? m + "M" : ""}${s ? s + "S" : ""}`;
+  return out === "PT" ? "PT0S" : out;
+}
+ 
+/* VideoObject schema — generated from the SAME array (one source of truth).
+   Makes case-study videos eligible for Google video rich results + AI Overviews. */
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@graph": videos
+    .filter((v) => v.id)
+    .map((v) => ({
+      "@type": "VideoObject",
+      name: v.title,
+      description: v.description,
+      thumbnailUrl: [`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`],
+      uploadDate: v.uploadDate,
+      duration: toISODuration(v.duration),
+      contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+      embedUrl: `https://www.youtube.com/embed/${v.id}`,
+      publisher: {
+        "@type": "Organization",
+        name: "SearchPrex",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://searchprex.com/logo.png", // ⚠️ ensure this exists in /public
+        },
+      },
+    })),
+};
  
 const categoryColors: Record<string, string> = {
   "Case Study": "bg-[#EEEDFE] text-[#534AB7]",
@@ -74,7 +116,7 @@ const categoryColors: Record<string, string> = {
 /* ── VIDEO CARD ── */
 function VideoCard({ video, onPlay }: { video: Video; onPlay: (id: string) => void }) {
   const isLive = !!video.id;
-  const thumb = video.id ? `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg` : null;
+  const thumb = video.id ? `https://img.youtube.com/vi/${video.id}/hqdefault.jpg` : null;
  
   const [hovering, setHovering] = useState(false);
   const [showCta, setShowCta] = useState(false);
@@ -258,7 +300,12 @@ export default function VideoSection() {
   }, [activeId, close]);
  
   return (
-    <section className="border-t border-[#e5e7eb] bg-[#f8f9fc] py-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
+      <section className="border-t border-[#e5e7eb] bg-[#f8f9fc] py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -329,9 +376,45 @@ export default function VideoSection() {
         </div>
       )}
     </section>
+    </>
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
