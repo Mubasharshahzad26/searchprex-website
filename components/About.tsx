@@ -1,7 +1,8 @@
+
 "use client";
  
 import { motion } from "framer-motion";
-import { Shield, Award, Users, TrendingUp, CheckCircle, Star, Mail, Linkedin } from "lucide-react";
+import { Shield, Award, Users, TrendingUp, CheckCircle, Mail, Linkedin } from "lucide-react";
 import Image from "next/image";
  
 const reasons = [
@@ -32,17 +33,16 @@ const reasons = [
 ];
  
 const stats = [
-  { value: "+75%",  label: "Avg. Visibility Growth",    icon: TrendingUp },
-  { value: "20+",   label: "US Clients Served",          icon: Users      },
-  { value: "5+",    label: "Years of Experience",        icon: Award      },
-  { value: "100%",  label: "Revenue Growth Focused",     icon: Shield, highlight: true },
+  { value: "+75%",  label: "Client Revenue Growth",   icon: TrendingUp },                       // documented (SMK Store)
+  { value: "20+",   label: "US Clients Served",        icon: Users      },                       // ⚠️ verify your real client count
+  { value: "5+",    label: "Years of Experience",      icon: Award      },                       // ⚠️ confirm (4+ vs 5+) — keep consistent site-wide
+  { value: "100%",  label: "Founder-Executed",         icon: Shield, highlight: true },
 ];
  
+/* Only the certifications Mubashar actually holds — clickable & verifiable (E-E-A-T). */
 const certifications = [
-  "Google Analytics",
-  "Semrush Certified",
-  "Ahrefs Certified",
-  "HubSpot Certified",
+  { label: "Semrush Certified", href: "https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf" },
+  { label: "HubSpot Certified", href: "#" }, // ⚠️ paste your real HubSpot certificate URL here
 ];
  
 const eeats = [
@@ -82,7 +82,7 @@ export default function About() {
         </motion.div>
  
         {/* ── CEO + Why Us ── */}
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 mb-20">
+        <div className="mb-20 grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
  
           {/* Left — CEO Card */}
           <motion.div
@@ -129,23 +129,29 @@ export default function About() {
                   </div>
                 </div>
  
-                <blockquote className="mt-5 border-l-2 border-[#534AB7] pl-4 text-sm italic text-[#64748b] leading-relaxed">
+                <blockquote className="mt-5 border-l-2 border-[#534AB7] pl-4 text-sm italic leading-relaxed text-[#64748b]">
                   &quot;I started SearchPrex because I was tired of watching business owners get burned — by bad agencies, expensive ads, and cookie-cutter strategies. Every client I take on, I treat their revenue like it&apos;s my own.&quot;
                 </blockquote>
  
+                {/* Certifications — only real, and clickable/verifiable */}
                 <div className="mt-5 flex flex-wrap gap-2">
                   {certifications.map((cert) => (
-                    <span key={cert} className="flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-medium text-[#374151]">
-                      <CheckCircle className="h-3 w-3 text-[#16a34a]" />{cert}
-                    </span>
+                    <a
+                      key={cert.label}
+                      href={cert.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-medium text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                    >
+                      <CheckCircle className="h-3 w-3 text-[#16a34a]" />{cert.label}
+                    </a>
                   ))}
                 </div>
  
+                {/* Honest trust signal (replaced fake star rating) */}
                 <div className="mt-5 flex items-center gap-2">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-[#f59e0b] text-[#f59e0b]" />)}
-                  </div>
-                  <span className="text-xs font-medium text-[#64748b]">5.0 · 24 client reviews</span>
+                  <CheckCircle className="h-4 w-4 text-[#16a34a]" />
+                  <span className="text-xs font-medium text-[#64748b]">Real GSC-verified results · Founder-led, no juniors</span>
                 </div>
               </div>
             </div>
@@ -162,7 +168,7 @@ export default function About() {
                   className={`rounded-2xl p-5 ${
                     stat.highlight
                       ? "bg-[#534AB7] text-white"
-                      : "bg-white text-[#0a0f2e] border border-[#e2e8f0]"
+                      : "border border-[#e2e8f0] bg-white text-[#0a0f2e]"
                   }`}
                 >
                   <stat.icon className={`mb-3 h-5 w-5 ${stat.highlight ? "text-[#c4b5fd]" : "text-[#534AB7]"}`} />
@@ -191,14 +197,14 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-4 rounded-xl border border-[#e2e8f0] bg-white p-5 hover:border-[#534AB7]/30 transition-colors"
+                  className="flex gap-4 rounded-xl border border-[#e2e8f0] bg-white p-5 transition-colors hover:border-[#534AB7]/30"
                 >
                   <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#534AB7] text-xs font-black text-white">
                     {reason.number}
                   </span>
                   <div>
                     <h3 className="mb-1.5 font-black text-[#0a0f2e]">{reason.title}</h3>
-                    <p className="text-sm text-[#64748b] leading-relaxed">{reason.description}</p>
+                    <p className="text-sm leading-relaxed text-[#64748b]">{reason.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -222,12 +228,12 @@ export default function About() {
           </motion.div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {eeats.map((e) => (
-              <motion.div key={e.label} variants={fadeUp} className="rounded-xl bg-white border border-[#AFA9EC]/40 p-4">
+              <motion.div key={e.label} variants={fadeUp} className="rounded-xl border border-[#AFA9EC]/40 bg-white p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#534AB7]" />
                   <span className="text-xs font-black uppercase tracking-wider text-[#534AB7]">{e.label}</span>
                 </div>
-                <p className="text-xs text-[#64748b] leading-relaxed">{e.desc}</p>
+                <p className="text-xs leading-relaxed text-[#64748b]">{e.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -238,25 +244,3 @@ export default function About() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
