@@ -8,6 +8,7 @@ import Services from "@/components/Services";
 import PersonaSelector from "@/components/PersonaSelector";
 import Results from "@/components/Results";
 import VideoSection from "@/components/VideoSection";
+import WhyUs from "@/components/WhyUs";
 import FounderSection from "@/components/FounderSection";
 import Process from "@/components/Process";
 import AITool from "@/components/AITool";
@@ -160,7 +161,9 @@ export default async function Home() {
  
         {/* 11 — NICHE SEO PRO: proprietary platform (differentiator) */}
         <NicheSEOPro />
- 
+        {/* 12 — WHY US: comparison vs alternatives */}
+        <WhyUs />
+       
         {/* ═══ CONVERT ═══ */}
         {/* 12 — PRICING */}
         <Pricing />
