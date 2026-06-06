@@ -19,6 +19,22 @@ const navLinks = [
     ],
   },
   {
+    href: "/locations/kansas",
+    label: "Locations",
+    hasDropdown: true,
+    dropdownItems: [
+      { href: "/locations/kansas",                label: "Kansas — All Cities" },
+      { href: "/locations/kansas/wichita",        label: "Wichita" },
+      { href: "/locations/kansas/overland-park",  label: "Overland Park" },
+      { href: "/locations/kansas/kansas-city",    label: "Kansas City" },
+      { href: "/locations/kansas/topeka",         label: "Topeka" },
+      { href: "/locations/kansas/lawrence",       label: "Lawrence" },
+      { href: "/locations/kansas/shawnee",        label: "Shawnee" },
+      { href: "/locations/kansas/lenexa",         label: "Lenexa" },
+      { href: "/locations/kansas/manhattan",      label: "Manhattan" },
+    ],
+  },
+  {
     href: "/about",
     label: "About",
     hasDropdown: true,
@@ -73,7 +89,7 @@ export default function Nav() {
                 >
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
                   >
                     {link.label}
                     {link.hasDropdown && <ChevronDown className="h-3 w-3" />}
@@ -90,7 +106,7 @@ export default function Nav() {
                         <Link
                           key={item.label}
                           href={item.href}
-                          className="block rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                          className="block rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                         >
                           {item.label}
                         </Link>
@@ -167,13 +183,13 @@ export default function Nav() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden bg-white shadow-lg lg:hidden"
             >
-              <div className="space-y-1 px-4 pb-6 pt-3">
+              <div className="max-h-[80vh] space-y-1 overflow-y-auto px-4 pb-6 pt-3">
                 {navLinks.map((link) => (
                   <div key={link.href}>
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                     >
                       {link.label}
                     </Link>
@@ -184,7 +200,7 @@ export default function Nav() {
                             key={item.label}
                             href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                            className="block py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
                           >
                             {item.label}
                           </Link>
@@ -236,6 +252,51 @@ export default function Nav() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
