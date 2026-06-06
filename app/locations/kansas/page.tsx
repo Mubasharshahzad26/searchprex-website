@@ -94,31 +94,31 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
  
       {/* ── HERO ── */}
-      <section className="px-4 pb-24 pt-16" style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #16213f 100%)` }}>
+      <section className="bg-[#eaecf3] px-4 pb-20 pt-16">
         <div className="mx-auto max-w-4xl text-center">
           {/* Breadcrumb */}
-          <nav className="mb-8 flex items-center justify-center gap-2 text-xs font-semibold text-blue-300">
-            <Link href="/" className="transition-colors hover:text-white">Home</Link>
+          <nav className="mb-8 flex items-center justify-center gap-2 text-xs font-semibold text-[#64748b]">
+            <Link href="/" className="transition-colors hover:text-[#0a0f2e]">Home</Link>
             <span>/</span>
-            <Link href="/locations/kansas" className="transition-colors hover:text-white">Kansas</Link>
+            <Link href="/locations/kansas" className="transition-colors hover:text-[#0a0f2e]">Kansas</Link>
             <span>/</span>
-            <span className="text-white">{city.name}</span>
+            <span className="text-[#0a0f2e]">{city.name}</span>
           </nav>
  
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-widest" style={{ borderColor: "rgba(62,180,137,0.35)", color: GREEN, background: "rgba(62,180,137,0.08)" }}>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-widest" style={{ borderColor: "rgba(62,180,137,0.35)", color: GREEN_DARK, background: "rgba(62,180,137,0.10)" }}>
             <MapPin className="h-3 w-3" /> {city.county}
           </div>
  
-          <h1 className="mb-6 text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mb-6 text-4xl font-black leading-[1.05] tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl">
             {city.heroHeadline}
           </h1>
-          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-blue-200 sm:text-xl">{city.heroSub}</p>
+          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-[#475569] sm:text-xl">{city.heroSub}</p>
  
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a href="https://calendly.com/contact-searchprex/30min" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#2f9670]">
               <Calendar className="h-4 w-4" /> Book a free strategy call
             </a>
-            <Link href="/case-studies" className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 px-8 py-3.5 text-sm font-bold text-white transition-colors hover:border-white">
+            <Link href="/case-studies" className="inline-flex items-center gap-1.5 rounded-xl border border-[#cbd5e1] px-8 py-3.5 text-sm font-bold text-[#0a0f2e] transition-colors hover:border-[#0a0f2e]">
               View results <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -152,6 +152,11 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
               SEO built for {city.name}, not &quot;Kansas&quot;
             </h2>
             <p className="text-[#475569] leading-relaxed">{city.overview}</p>
+            {city.localInsight && (
+              <div className="mt-5 rounded-xl border-l-4 border-[#3eb489] bg-[#f8f9fc] p-4">
+                <p className="text-sm leading-relaxed text-[#475569]">{city.localInsight}</p>
+              </div>
+            )}
           </div>
           <div className="overflow-hidden rounded-2xl border border-[#e2e8f0] shadow-[0_20px_50px_-20px_rgba(10,15,46,0.25)]">
             <iframe
@@ -242,6 +247,62 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
  
+      {/* ── PRACTICE AREAS + NEIGHBORHOODS (local demand + geo) ── */}
+      {city.practiceAreas && (
+        <section className="bg-[#eaecf3] px-4 py-24">
+          <div className="mx-auto max-w-5xl">
+            <div className="mb-12 text-center">
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Practice Areas</p>
+              <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">Where {city.name} Firms Win Clients</h2>
+              <p className="mx-auto max-w-2xl text-sm leading-relaxed text-[#475569]">
+                The practice areas with the strongest, most consistent search demand across {city.county}.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {city.practiceAreas.map((pa) => (
+                <div key={pa.name} className="rounded-2xl border border-[#e2e8f0] bg-white p-6">
+                  <h3 className="mb-1.5 text-base font-black text-[#0a0f2e]">{pa.name}</h3>
+                  <p className="text-sm leading-relaxed text-[#475569]">{pa.demand}</p>
+                </div>
+              ))}
+            </div>
+            {city.neighborhoods && (
+              <div className="mt-10 text-center">
+                <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">Neighborhoods we optimize for</p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {city.neighborhoods.map((n) => (
+                    <span key={n} className="rounded-full border border-[#e2e8f0] bg-white px-3 py-1 text-xs font-semibold text-[#475569]">{n}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+ 
+      {/* ── LOCAL GUIDANCE (people-first, helpful) ── */}
+      {city.localGuide && (
+        <section className="bg-white px-4 py-24">
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-12 text-center">
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Local Guidance</p>
+              <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">Hiring a Lawyer in {city.name}?</h2>
+              <p className="mx-auto max-w-2xl text-sm leading-relaxed text-[#475569]">
+                Straight, useful advice for anyone searching for legal help in {city.name} — whether or not you ever work with us.
+              </p>
+            </div>
+            <div className="space-y-5">
+              {city.localGuide.map((g) => (
+                <div key={g.heading} className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
+                  <h3 className="mb-2 text-base font-black text-[#0a0f2e]">{g.heading}</h3>
+                  <p className="text-sm leading-relaxed text-[#475569]">{g.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+ 
       {/* ── FAQ (native <details> — no JS, server-safe, FAQ schema above) ── */}
       <section className="bg-[#eaecf3] px-4 py-24">
         <div className="mx-auto max-w-3xl">
@@ -291,11 +352,11 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
       </section>
  
       {/* ── CTA STRIP ── */}
-      <section className="px-4 py-16" style={{ background: NAVY }}>
+      <section className="px-4 py-16" style={{ background: "#534AB7" }}>
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 sm:flex-row">
           <div>
             <p className="mb-1 text-lg font-bold text-white sm:text-xl">Ready to rank your {city.name} law firm?</p>
-            <p className="text-sm text-blue-300">Book a free 30-minute strategy call — no commitment, no sales pitch.</p>
+            <p className="text-sm text-white/70">Book a free 30-minute strategy call — no commitment, no sales pitch.</p>
           </div>
           <div className="flex flex-shrink-0 gap-3">
             <a href="https://calendly.com/contact-searchprex/30min" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#2f9670]">
