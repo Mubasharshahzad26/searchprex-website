@@ -1,4 +1,3 @@
-
 "use client";
  
 import { motion } from "framer-motion";
@@ -42,7 +41,7 @@ const stats = [
 /* Only the certifications Mubashar actually holds — clickable & verifiable (E-E-A-T). */
 const certifications = [
   { label: "Semrush Certified", href: "https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf" },
-  { label: "HubSpot Certified", href: "#" }, // ⚠️ paste your real HubSpot certificate URL here
+  { label: "HubSpot Certified", href: "https://app.hubspot.com/academy/achievements/tc8vffrw/en/1/mubashar-shahzad/seo-ii" },
 ];
  
 const eeats = [
@@ -244,3 +243,66 @@ export default function About() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

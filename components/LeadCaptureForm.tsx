@@ -1,4 +1,3 @@
-
 "use client";
  
 import { useState } from "react";
@@ -32,7 +31,7 @@ export default function LeadCaptureForm() {
       setStatus("success");
     } catch {
       setStatus("error");
-      setError("Something went wrong. Please try again or email hello@searchprex.com.");
+      setError("Something went wrong. Please try again or email contact@searchprex.com.");
     }
   };
  
@@ -140,3 +139,67 @@ export default function LeadCaptureForm() {
     </section>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

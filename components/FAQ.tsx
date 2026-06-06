@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "How much does it cost?",
     answer:
-      "Pricing is custom based on competition and site scale. Typically, Law Firm partners spend $2k-$5k/mo and Shopify stores $3k-$7k/mo.",
+      "Pricing is custom based on competition and site scale. Typically, local businesses run $800–$1,500/mo, law firms invest $1,200-$2,500/mo, and Shopify stores $1,500-$4,000/mo. Final pricing is set after your free audit.",
   },
   {
     question: "Will I work directly with a senior expert?",
@@ -47,19 +47,17 @@ const faqs = [
   },
 ];
  
-/* FAQPage schema — built from the SAME array as the visible accordion,
-   so structured data always matches on-page content (Google's requirement).
-   Eligible for FAQ rich results + AI Overviews. */
+/* FAQPage schema — generated from the SAME array, so it always matches what's
+   visible on the page (Google's requirement). Eligible for FAQ rich results
+   and AI Overviews. */
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": "https://searchprex.com/#faq",
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: f.answer,
-    },
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
   })),
 };
  
@@ -67,73 +65,75 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
  
   return (
-    <section className="bg-white py-24">
+    <>
       {/* FAQPage structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
  
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
-          <h2 className="mb-4 text-4xl font-black text-[#0a0f2e] sm:text-5xl">
-            Common Questions
-          </h2>
-          <p className="text-lg text-[#64748b]">
-            Clear answers on how we deliver ROI.
-          </p>
-        </motion.div>
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12 text-center"
+          >
+            <h2 className="mb-4 text-4xl font-black text-[#0a0f2e] sm:text-5xl">
+              Common Questions
+            </h2>
+            <p className="text-lg text-[#64748b]">
+              Clear answers on how we deliver ROI.
+            </p>
+          </motion.div>
  
-        {/* FAQ Accordion */}
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="overflow-hidden rounded-xl border border-[#e5e7eb] bg-white"
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex w-full items-center justify-between px-6 py-5 text-left"
+          {/* FAQ Accordion */}
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                className="overflow-hidden rounded-xl border border-[#e5e7eb] bg-white"
               >
-                <span className="pr-4 font-bold text-[#0a0f2e]">
-                  {faq.question}
-                </span>
-                {openIndex === index ? (
-                  <Minus className="h-5 w-5 flex-shrink-0 text-[#3eb489]" />
-                ) : (
-                  <Plus className="h-5 w-5 flex-shrink-0 text-[#64748b]" />
-                )}
-              </button>
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="border-t border-[#e5e7eb] px-6 py-5">
-                      <p className="text-[#64748b]">{faq.answer}</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                <button
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-[#f8fafc]"
+                >
+                  <span className="pr-4 font-bold text-[#0a0f2e]">
+                    {faq.question}
+                  </span>
+                  {openIndex === index ? (
+                    <Minus className="h-5 w-5 flex-shrink-0 text-[#534AB7]" />
+                  ) : (
+                    <Plus className="h-5 w-5 flex-shrink-0 text-[#64748b]" />
+                  )}
+                </button>
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="border-t border-[#e5e7eb] px-6 py-5">
+                        <p className="leading-relaxed text-[#64748b]">{faq.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
  

@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
@@ -8,7 +7,6 @@ import Services from "@/components/Services";
 import PersonaSelector from "@/components/PersonaSelector";
 import Results from "@/components/Results";
 import VideoSection from "@/components/VideoSection";
-import WhyUs from "@/components/WhyUs";
 import FounderSection from "@/components/FounderSection";
 import Process from "@/components/Process";
 import AITool from "@/components/AITool";
@@ -62,7 +60,7 @@ export default async function Home() {
         "url": "https://searchprex.com",
         "logo": "https://searchprex.com/logo.png", // ⚠️ ensure this file exists in /public
         "description": "US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
-        "email": "hello@searchprex.com", // ⚠️ verify this inbox is live
+        "email": "contact@searchprex.com",
         "founder": { "@id": "https://searchprex.com/#founder" },
         "areaServed": { "@type": "Country", "name": "United States" },
         "knowsAbout": [
@@ -161,9 +159,7 @@ export default async function Home() {
  
         {/* 11 — NICHE SEO PRO: proprietary platform (differentiator) */}
         <NicheSEOPro />
-        {/* 12 — WHY US: comparison vs alternatives */}
-        <WhyUs />
-       
+ 
         {/* ═══ CONVERT ═══ */}
         {/* 12 — PRICING */}
         <Pricing />
@@ -186,3 +182,67 @@ export default async function Home() {
     </>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
