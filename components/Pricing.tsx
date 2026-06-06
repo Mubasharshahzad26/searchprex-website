@@ -1,293 +1,193 @@
-import type { Metadata } from "next";
+"use client";
+ 
 import Link from "next/link";
-import Nav from "@/components/Nav";
-import ChatWidget from "@/components/ChatWidget";
-import {
-  Check, ArrowRight, Phone, Shield, Clock, Award,
-  Search, FileText, BarChart2, MessageSquare, Zap, Rocket,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Check, ArrowRight } from "lucide-react";
  
-export const metadata: Metadata = {
-  title: "SEO Pricing — SearchPrex | Custom Strategy First",
-  description:
-    "No generic packages. We audit your site first, understand your goals, then quote a custom plan. Get your free SEO audit today.",
-  alternates: { canonical: "https://searchprex.com/pricing" },
-  openGraph: {
-    title: "SEO Pricing — SearchPrex",
-    description: "Custom SEO pricing based on your actual needs — not cookie-cutter packages.",
-    url: "https://searchprex.com/pricing",
-    type: "website",
+const PURPLE = "#534AB7";
+const GREEN = "#3eb489";
+ 
+/* Ranges LOCKED to /pricing page (source of truth) */
+const plans = [
+  {
+    niche: "Local SEO",
+    range: "$800 – $1,500",
+    best: "Local service businesses",
+    includes: ["GBP & map pack", "Citations & NAP", "Local content"],
+    accent: "#0e7490",
+    bg: "#ecfeff",
   },
-};
+  {
+    niche: "Law Firm SEO",
+    range: "$1,200 – $2,500",
+    best: "Solo to multi-partner firms",
+    includes: ["Practice-area pages", "E-E-A-T content", "Local pack targeting"],
+    accent: PURPLE,
+    bg: "#f5f3ff",
+    featured: true,
+  },
+  {
+    niche: "Ecommerce SEO",
+    range: "$1,500 – $4,000",
+    best: "Shopify & WooCommerce stores",
+    includes: ["Technical SEO at scale", "Product page content", "Schema & indexing"],
+    accent: "#2f9670",
+    bg: "#dcf2ea",
+  },
+];
  
-/* Uniform, professional card interaction (CSS-only — keeps this a Server Component for SEO) */
-const cardBase =
-  "group relative overflow-hidden rounded-2xl border border-[#e6e8ef] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-transparent hover:bg-[#0a0f2e] hover:shadow-[0_26px_60px_-18px_rgba(10,15,46,0.4)]";
- 
-export default function PricingPage() {
+export default function Pricing() {
   return (
-    <>
-      <Nav />
-      <main className="bg-white pt-20">
+    <section id="pricing" className="bg-[#eaecf3] py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
  
-        {/* ── HERO ── */}
-        <section className="border-b border-[#e2e8f0] bg-white py-20 text-center">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <span className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
-              Transparent Pricing
-            </span>
-            <h1 className="mb-5 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl">
-              No Cookie-Cutter Packages.<br />
-              <span className="text-[#534AB7]">Just What You Actually Need.</span>
-            </h1>
-            <p className="mb-8 text-lg leading-relaxed text-[#64748b]">
-              Every business is different. A law firm has different SEO needs than a Shopify store. We audit your site first — then build a custom plan with transparent pricing based on your actual goals.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
+        {/* Header — meaningful, specific */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center"
+        >
+          <span className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+            Pricing
+          </span>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
+            Custom pricing, <span style={{ color: PURPLE }}>built around your goals</span>
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#475569]">
+            No fixed tiers. We set your exact plan after a free audit — here&apos;s a realistic monthly ballpark by service.
+          </p>
+        </motion.div>
+ 
+        {/* 3 concise range cards */}
+        <div className="grid gap-6 sm:grid-cols-3">
+          {plans.map((p, i) => (
+            <motion.div
+              key={p.niche}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={`relative rounded-2xl border-2 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+                p.featured ? "border-[#534AB7] shadow-lg shadow-[#534AB7]/10" : "border-[#e2e8f0]"
+              }`}
+            >
+              {p.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="rounded-full bg-[#534AB7] px-4 py-1 text-[10px] font-black uppercase tracking-widest text-white">
+                    Most popular
+                  </span>
+                </div>
+              )}
+              <span className="rounded-lg px-3 py-1 text-xs font-bold" style={{ backgroundColor: p.bg, color: p.accent }}>
+                {p.niche}
+              </span>
+              <div className="mt-4 text-2xl font-black text-[#0a0f2e]">
+                {p.range}<span className="text-sm font-bold text-[#94a3b8]"> / mo</span>
+              </div>
+              <p className="mb-5 mt-1 text-xs text-[#64748b]">Best for: {p.best}</p>
+              <ul className="mb-6 space-y-2">
+                {p.includes.map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-[#374151]">
+                    <Check className="h-4 w-4 shrink-0" style={{ color: p.accent }} />{item}
+                  </li>
+                ))}
+              </ul>
               <Link
                 href="/free-audit"
-                className="flex items-center gap-2 rounded-xl bg-[#534AB7] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all hover:-translate-y-0.5 hover:bg-[#3C3489]"
+                className="flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5"
+                style={p.featured ? { backgroundColor: PURPLE, color: "#fff" } : { backgroundColor: p.bg, color: p.accent }}
               >
-                Get Free Audit First <ArrowRight className="h-4 w-4" />
+                Get custom quote <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href="tel:+923106526316"
-                className="flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-7 py-3.5 text-sm font-bold text-[#374151] transition-all hover:border-[#534AB7] hover:text-[#534AB7]"
-              >
-                <Phone className="h-4 w-4" /> Talk to Founder
-              </a>
-            </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-6">
-              {["Free audit — no obligation", "24hr turnaround", "Founder does the audit"].map((t) => (
-                <span key={t} className="flex items-center gap-2 text-sm text-[#64748b]">
-                  <Check className="h-4 w-4 text-[#16a34a]" />{t}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+            </motion.div>
+          ))}
+        </div>
  
-        {/* ── WHY CUSTOM PRICING ── */}
-        <section className="bg-[#f8fafc] py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-                Why We Don&apos;t Do Fixed Packages
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#64748b]">
-                Most agencies sell you the same $1,500/mo package whether you have 10 pages or 10,000. We think that&apos;s wrong. Here&apos;s why custom pricing works better for you.
-              </p>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                { icon: Search,        title: "Audit reveals the real problem",  body: "We find your actual issues first — crawl budget waste, thin content, GBP problems — then price based on what it actually takes to fix them. No guessing." },
-                { icon: BarChart2,     title: "You only pay for what you need",   body: "A local plumber doesn't need the same SEO as a 10,000-product ecommerce store. Custom pricing means you're not paying for services that don't apply to you." },
-                { icon: FileText,      title: "Tied to your revenue goals",       body: "We size every engagement based on your revenue target, not an arbitrary package tier. The plan is built around what it takes to hit your number." },
-                { icon: Shield,        title: "Full transparency always",         body: "You see exactly what's included, what it costs, and what outcome to expect. No hidden fees, no auto-renewals, no surprise charges." },
-                { icon: Zap,           title: "No long-term contracts",           body: "We earn your business every month with results. Stay because it works — not because you're locked in. Cancel anytime with 30 days notice." },
-                { icon: MessageSquare, title: "Direct founder communication",     body: "You talk to the person doing the work. Not an account manager. Not a junior. The founder — who understands your niche and treats your revenue like their own." },
-              ].map((item) => (
-                <div key={item.title} className={`${cardBase} flex gap-4 p-6`}>
-                  <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#534AB7] transition-transform duration-300 group-hover:scale-x-100" />
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f5f3ff] transition-all duration-300 group-hover:scale-110 group-hover:bg-white/10">
-                    <item.icon className="h-5 w-5 text-[#534AB7] transition-colors duration-300 group-hover:text-white" />
-                  </div>
-                  <div>
-                    <h3 className="mb-1.5 font-black text-[#0a0f2e] transition-colors duration-300 group-hover:text-white">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-[#64748b] transition-colors duration-300 group-hover:text-white/70">{item.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Link to full pricing page — keeps homepage concise */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-10 text-center"
+        >
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
+            style={{ color: PURPLE }}
+          >
+            See what&apos;s included, our process &amp; FAQs <ArrowRight className="h-4 w-4" />
+          </Link>
+          <p className="mt-2 text-xs text-[#94a3b8]">Final pricing is set after your free audit · no contracts</p>
+        </motion.div>
  
-        {/* ── HOW PRICING WORKS ── */}
-        <section className="py-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
-                Our Process
-              </span>
-              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-                How Custom Pricing Works
-              </h2>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                { step: "01", title: "Free Audit",      body: "Submit your URL. The founder personally audits your site — technical issues, content gaps, competitor analysis.", icon: Search },
-                { step: "02", title: "Strategy Call",   body: "We walk through findings together and discuss your revenue goals, timeline, and what it actually takes to get there.", icon: Phone },
-                { step: "03", title: "Custom Proposal", body: "You receive a detailed proposal — scope, deliverables, timeline, and transparent monthly cost. No surprises.", icon: FileText },
-                { step: "04", title: "Start & Report",  body: "We start work immediately. Weekly reports, direct access, and real results — measured in revenue, not just rankings.", icon: Rocket },
-              ].map((s) => (
-                <div key={s.step} className={`${cardBase} p-6 text-center`}>
-                  <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#534AB7] transition-transform duration-300 group-hover:scale-x-100" />
-                  <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#534AB7] text-sm font-black text-white transition-colors duration-300 group-hover:bg-white/15">{s.step}</div>
-                  <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5f3ff] transition-all duration-300 group-hover:scale-110 group-hover:bg-white/10">
-                    <s.icon className="h-5 w-5 text-[#534AB7] transition-colors duration-300 group-hover:text-white" />
-                  </div>
-                  <h3 className="mb-2 font-black text-[#0a0f2e] transition-colors duration-300 group-hover:text-white">{s.title}</h3>
-                  <p className="text-sm leading-relaxed text-[#64748b] transition-colors duration-300 group-hover:text-white/70">{s.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
- 
-        {/* ── WHAT'S ALWAYS INCLUDED ── */}
-        <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-10 text-center">
-              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-                What&apos;s Always Included
-              </h2>
-              <p className="mt-3 text-base text-[#64748b]">Regardless of scope, every SearchPrex engagement includes these non-negotiables.</p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                "Founder works your account personally — zero juniors",
-                "Weekly SEO reports — plain English, every Monday",
-                "Direct GSC + GA4 access — your data, always live",
-                "No contracts — cancel anytime with 30 days notice",
-                "Revenue-focused KPIs — leads, calls & sales tracked",
-                "E-E-A-T content strategy aligned to your niche",
-                "Competitor gap analysis — updated monthly",
-                "Priority email & call access to the founder directly",
-                "Transparent change log — every action documented",
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-xl border border-[#e2e8f0] bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#534AB7] hover:shadow-sm">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#16a34a]" />
-                  <span className="text-sm text-[#374151]">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
- 
-        {/* ── TYPICAL RANGES (transparency) ── */}
-        <section className="py-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-10 text-center">
-              <span className="mb-3 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
-                Ballpark Ranges
-              </span>
-              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-                Typical Investment Ranges
-              </h2>
-              <p className="mx-auto mt-3 max-w-xl text-base text-[#64748b]">
-                Exact pricing depends on your audit findings. These ranges give you a realistic idea of what to expect.
-              </p>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-3">
-              {[
-                {
-                  niche: "Local SEO",
-                  range: "$800 – $1,500 / mo",
-                  color: "#059669", bg: "#ecfdf5",
-                  includes: ["GBP optimization", "Citation building", "Local content", "Review strategy", "Weekly reports"],
-                  best: "Local service businesses, single-location",
-                },
-                {
-                  niche: "Law Firm SEO",
-                  range: "$1,200 – $2,500 / mo",
-                  color: "#534AB7", bg: "#f5f3ff",
-                  includes: ["Practice area pages", "Local pack targeting", "E-E-A-T content", "Attorney schema", "Link building"],
-                  best: "Solo attorneys to multi-partner firms",
-                  featured: true,
-                },
-                {
-                  niche: "Ecommerce SEO",
-                  range: "$1,500 – $4,000 / mo",
-                  color: "#0891b2", bg: "#ecfeff",
-                  includes: ["Product page optimization", "Technical SEO at scale", "Category page content", "Schema markup", "GSC resubmission"],
-                  best: "Shopify & WooCommerce stores",
-                },
-              ].map((plan) => (
-                <div
-                  key={plan.niche}
-                  className={`relative rounded-2xl border-2 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${plan.featured ? "border-[#534AB7] shadow-lg shadow-[#534AB7]/10" : "border-[#e2e8f0]"}`}
-                >
-                  {plan.featured && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="rounded-full bg-[#534AB7] px-4 py-1 text-[10px] font-black uppercase tracking-widest text-white">Most popular</span>
-                    </div>
-                  )}
-                  <div className="mb-4 flex items-center gap-2">
-                    <span className="rounded-lg px-3 py-1 text-xs font-bold" style={{ backgroundColor: plan.bg, color: plan.color }}>{plan.niche}</span>
-                  </div>
-                  <div className="mb-1 text-2xl font-black text-[#0a0f2e]">{plan.range}</div>
-                  <p className="mb-5 text-xs text-[#64748b]">Best for: {plan.best}</p>
-                  <ul className="mb-6 space-y-2">
-                    {plan.includes.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-[#374151]">
-                        <Check className="h-4 w-4 shrink-0" style={{ color: plan.color }} />{item}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href="/free-audit"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5"
-                    style={plan.featured
-                      ? { backgroundColor: "#534AB7", color: "#fff" }
-                      : { backgroundColor: plan.bg, color: plan.color }}
-                  >
-                    Get Custom Quote <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 text-center text-xs text-[#64748b]">
-              * All prices are starting ranges. Final pricing is determined after your free audit.
-            </p>
-          </div>
-        </section>
- 
-        {/* ── TRUST ── */}
-        <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-12">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-center gap-8">
-              {[
-                { icon: Shield, text: "No contracts · Cancel anytime" },
-                { icon: Clock,  text: "24hr audit turnaround" },
-                { icon: Award,  text: "Semrush Certified · Founder-led" },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-2 text-sm text-[#64748b]">
-                  <Icon className="h-4 w-4 text-[#534AB7]" />{text}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
- 
-        {/* ── FINAL CTA ── */}
-        <section className="bg-[#534AB7] py-20">
-          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#c4b5fd]">Ready to get started?</p>
-            <h2 className="mb-4 text-4xl font-black tracking-tight text-white">
-              Start With a Free Audit.<br />Pay Only If It Makes Sense.
-            </h2>
-            <p className="mb-8 text-base leading-relaxed text-[#c4b5fd]">
-              No commitment, no credit card, no sales pressure. Get a real audit by the founder — then decide if we&apos;re the right fit.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link
-                href="/free-audit"
-                className="flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-[#534AB7] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-[#f5f3ff]"
-              >
-                Claim Free Audit <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a
-                href="tel:+923106526316"
-                className="flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-white/10"
-              >
-                <Phone className="h-4 w-4" /> +92 310 652 6316
-              </a>
-            </div>
-          </div>
-        </section>
- 
-      </main>
-      <ChatWidget />
-    </>
+      </div>
+    </section>
   );
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
