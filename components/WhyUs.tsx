@@ -71,7 +71,7 @@ export default function WhyUs() {
             <span className="text-xs font-bold uppercase tracking-widest text-[#0a0f2e]">Why SearchPrex</span>
           </div>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
-            The difference is <span style={{ color: GREEN }}>who does the work</span>
+            The difference is <span>who does the work</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#475569]">
             Most agencies sell you a senior pitch, then hand your account to a junior. Here&apos;s how a founder-led approach actually compares.

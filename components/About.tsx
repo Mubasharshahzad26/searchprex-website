@@ -73,7 +73,7 @@ export default function About() {
           </motion.span>
           <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black leading-tight tracking-tight text-[#0a0f2e] sm:text-5xl">
             Founder-Led. Niche-Focused.<br />
-            <span className="text-[#534AB7]">Revenue-Obsessed.</span>
+            <span>Revenue-Obsessed.</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#475569]">
             Every account is handled personally by the founder — no juniors, no account managers, no templates. We understand your business niche better than any generalist agency ever could.
@@ -243,66 +243,3 @@ export default function About() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

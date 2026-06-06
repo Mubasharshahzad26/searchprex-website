@@ -122,7 +122,7 @@ export default function Services() {
           </div>
           <h2 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-[#0a0f2e] sm:text-5xl">
             Specialized SEO that<br className="hidden sm:block" />
-            <span style={{ color: GREEN }}>moves the needle</span>
+            <span>moves the needle</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#475569]">
             Founder-led, senior-executed SEO for US law firms, ecommerce stores, and local businesses.
