@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-
+ 
 @custom-variant dark (&:is(.dark *));
-
+ 
 :root {
   --background: #ffffff;
   --foreground: #0a0f2e;
@@ -10,13 +10,13 @@
   --card-foreground: #0a0f2e;
   --popover: #ffffff;
   --popover-foreground: #0a0f2e;
-  --primary:FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.a3c8f;
+  --primary: #1a3c8f;            /* ⚠️ was corrupted — restored. NOTE: this is BLUE; your brand is purple #534AB7 — see note below */
   --primary-foreground: #ffffff;
   --secondary: #f7f8fc;
   --secondary-foreground: #0a0f2e;
   --muted: #f7f8fc;
   --muted-foreground: #64748b;
-  --accent: #2563eb;
+  --accent: #2563eb;             /* also BLUE — see note */
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
@@ -25,29 +25,29 @@
   --ring: #2563eb;
   --radius: 0.75rem;
 }
-
+ 
 .dark {
   --background: #0a0f2e;
   --foreground: #ffffff;
-  --card:FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.a3c8f;
+  --card: #1a3c8f;               /* restored */
   --card-foreground: #ffffff;
   --popover: #0a0f2e;
   --popover-foreground: #ffffff;
   --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --secondary:FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.a3c8f;
+  --secondary: #1a3c8f;          /* restored */
   --secondary-foreground: #ffffff;
-  --muted:FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.a3c8f;
+  --muted: #1a3c8f;              /* restored */
   --muted-foreground: #94a3b8;
   --accent: #2563eb;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border:FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.a3c8f;
-  --input:FOUNDER-LED SEO. NO JUNIORS. NO FLUFF.a3c8f;
+  --border: #1a3c8f;             /* restored */
+  --input: #1a3c8f;              /* restored */
   --ring: #2563eb;
 }
-
+ 
 @theme inline {
   --font-sans: var(--font-inter), 'Inter', sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
@@ -75,7 +75,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
-
+ 
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -86,8 +86,15 @@
   html {
     scroll-behavior: smooth;
   }
+ 
+  /* ── Unified headings across the WHOLE site (one place, all pages) ── */
+  h1, h2, h3, h4, h5, h6 {
+    color: #0a0f2e;          /* solid dark — Toptal-style, no colored accents */
+    letter-spacing: -0.02em; /* = tracking-tight */
+  }
+  /* White headings on dark sections (CTA, Footer) still work — `text-white` overrides this. */
 }
-
+ 
 /* Custom animations */
 @keyframes scroll {
   0% {
@@ -97,7 +104,71 @@
     transform: translateX(-50%);
   }
 }
-
+ 
 .animate-scroll {
   animation: scroll 30s linear infinite;
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
