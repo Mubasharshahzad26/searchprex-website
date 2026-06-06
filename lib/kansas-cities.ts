@@ -5,6 +5,16 @@ export interface CityFaq {
   a: string;
 }
  
+export interface PracticeArea {
+  name: string;
+  demand: string;
+}
+ 
+export interface LocalGuideBlock {
+  heading: string;
+  body: string;
+}
+ 
 export interface KansasCity {
   slug: string;
   name: string;
@@ -21,6 +31,11 @@ export interface KansasCity {
   barAssociation: string;
   nearbyAreas: string[];
   faqs: CityFaq[];
+  // ── Enhanced (optional) — localized expert content ──
+  neighborhoods?: string[];
+  localInsight?: string;
+  practiceAreas?: PracticeArea[];
+  localGuide?: LocalGuideBlock[];
 }
  
 export const kansasCities: KansasCity[] = [
@@ -68,37 +83,56 @@ export const kansasCities: KansasCity[] = [
     name: "Wichita",
     county: "Sedgwick County",
     population: "397,532",
-    metaTitle: "Law Firm SEO Wichita, KS | Searchprex",
+    metaTitle: "Law Firm SEO Wichita, KS | Family Law & Attorney SEO | SearchPrex",
     metaDescription:
-      "Rank your Wichita law firm #1 on Google. Searchprex delivers proven law firm SEO and family law SEO for Sedgwick County attorneys.",
+      "Founder-led law firm SEO for Wichita attorneys. We rank personal injury, family law, and criminal defense firms across Sedgwick County and the 18th Judicial District.",
     heroHeadline: "Law Firm SEO in Wichita, KS",
     heroSub:
-      "Dominate Google for family law, personal injury, and criminal defense searches across Wichita and Sedgwick County.",
+      "Get found by Wichita clients the moment they search. We rank family law, personal injury, and criminal defense firms across Sedgwick County — and turn local searches into signed cases.",
     overview:
-      "As the largest city in Kansas, Wichita presents the biggest opportunity — and the stiffest competition — for law firms in the state. Sedgwick County District Court is one of the busiest in Kansas, and attorneys who rank on page one capture the overwhelming majority of high-value cases.",
+      "As Kansas's largest city, Wichita is also its most competitive legal market. The Sedgwick County District Court (18th Judicial District) is one of the busiest in the state, and the firms that own page one capture the overwhelming majority of high-value cases. For everyone else, the cost isn't lost rankings — it's lost clients calling a competitor instead.",
+    localInsight:
+      "Wichita's legal demand is shaped by its economy. As the 'Air Capital of the World,' the city's aviation workforce — Spirit AeroSystems, Textron Aviation, Cessna — and the nearby McConnell Air Force Base drive unusually high demand for personal injury, workers' compensation, and military-family law matters. Most high-intent searches here resolve in the Google Map Pack tied to the downtown Sedgwick County Courthouse, which is exactly where local visibility is won or lost.",
     lawFirmDesc:
-      "We run full-service law firm SEO for Wichita attorneys, targeting searches like 'personal injury attorney Wichita KS' and 'criminal defense lawyer Sedgwick County'. Our approach combines technical site health, E-E-A-T content, and local citation building to push your firm above the competition.",
+      "We run full-service law firm SEO for Wichita attorneys, targeting searches like 'personal injury attorney Wichita KS' and 'criminal defense lawyer Sedgwick County'. Our approach pairs technical site health, attorney E-E-A-T content, and Google Business Profile optimization to put your firm in front of clients with real intent — not just traffic.",
     familyLawDesc:
-      "Wichita's family law market is one of the most competitive in Kansas. We create dedicated landing pages for divorce, child custody, alimony, and paternity searches — each optimized for Wichita's local keywords and structured with attorney-credential schema to meet Google's YMYL standards.",
+      "Wichita's family law market is one of the most competitive in Kansas. We build dedicated pages for divorce, child custody, alimony, and paternity — each optimized for Wichita's local search terms and structured with attorney-credential schema to meet Google's YMYL standards for legal content.",
+    practiceAreas: [
+      { name: "Personal Injury", demand: "High — aviation-industry claims and highway accidents along I-135 and US-54." },
+      { name: "Family Law & Divorce", demand: "Consistently strong, including military-family cases tied to McConnell AFB." },
+      { name: "Criminal Defense & DUI", demand: "Steady year-round volume across the 18th Judicial District." },
+      { name: "Workers' Compensation", demand: "Elevated by Wichita's large aviation and manufacturing workforce." },
+    ],
     courts: [
       "Sedgwick County District Court",
       "Wichita Municipal Court",
       "18th Judicial District Court",
     ],
     barAssociation: "Wichita Bar Association",
+    neighborhoods: ["Old Town", "Delano", "College Hill", "Riverside", "Crown Heights", "East Wichita", "Eastborough"],
     nearbyAreas: ["Derby", "Haysville", "Andover", "Bel Aire", "Valley Center"],
+    localGuide: [
+      {
+        heading: "How to choose a law firm in Wichita",
+        body: "Look for an attorney who regularly practices in the Sedgwick County District Court and knows the local judges and procedures. Verify their Kansas Bar standing, read recent Google reviews, and ask specifically about experience with cases like yours — general practice isn't the same as focused experience.",
+      },
+      {
+        heading: "What Wichita searchers actually do",
+        body: "Most people searching for a Wichita attorney are ready to act within days. They tap the Map Pack first, scan reviews, and call the top one to three firms. If your firm isn't visible there, you never enter the conversation — no matter how good your representation is.",
+      },
+    ],
     faqs: [
       {
         q: "Why is SEO important for Wichita law firms?",
-        a: "Over 70% of people searching for a Wichita attorney begin on Google. If your firm is not on page one, you are invisible to the majority of potential clients actively looking for help.",
+        a: "Most people searching for a Wichita attorney begin on Google and call a firm from the first page of results. If your firm isn't ranking, you're invisible to the clients actively looking for help right now.",
       },
       {
         q: "Do you work with both solo practitioners and large Wichita firms?",
-        a: "Yes. We tailor our SEO strategy to your firm's size, practice areas, and growth goals — whether you are a solo family law attorney or a multi-practice firm with several attorneys.",
+        a: "Yes. We tailor strategy to your firm's size, practice areas, and goals — whether you're a solo family law attorney or a multi-practice firm in downtown Wichita.",
       },
       {
         q: "How do you handle Family Law SEO differently in Wichita?",
-        a: "We research the exact terms Wichita residents use when facing divorce or custody matters, then build landing pages, blog content, and schema around those high-intent queries.",
+        a: "We research the exact terms Wichita residents use when facing divorce or custody — including military-family situations near McConnell AFB — then build pages, content, and schema around those high-intent queries.",
       },
     ],
   },
@@ -107,37 +141,56 @@ export const kansasCities: KansasCity[] = [
     name: "Overland Park",
     county: "Johnson County",
     population: "199,067",
-    metaTitle: "Law Firm SEO Overland Park, KS | Searchprex",
+    metaTitle: "Law Firm SEO Overland Park, KS | High-Asset Family Law SEO | SearchPrex",
     metaDescription:
-      "Searchprex helps Overland Park law firms rank #1 on Google. Expert law firm SEO and family law SEO for Johnson County attorneys.",
+      "Founder-led law firm SEO for Overland Park attorneys. We rank high-asset family law, estate, and business firms across Johnson County's most competitive legal market.",
     heroHeadline: "Law Firm SEO in Overland Park, KS",
     heroSub:
-      "Rank at the top of Google for family law, divorce, and personal injury searches across Overland Park and Johnson County.",
+      "Win Johnson County's highest-value clients. We rank family law, estate, and business firms in Kansas's most affluent — and most competitive — legal market.",
     overview:
-      "Overland Park is the second-largest city in Kansas and one of the wealthiest communities in the Midwest. The city's high median income drives significant demand for family law services — divorce, asset division, and child custody — making it one of the highest-value markets for law firm SEO in the state.",
+      "Overland Park is the second-largest city in Kansas and one of the wealthiest communities in the Midwest. That affluence drives demand for complex, high-stakes legal work — contested divorces, asset division, estate planning, and business disputes. It also makes this the single most competitive legal SEO market in the state, where large, established firms spend heavily to stay visible.",
+    localInsight:
+      "Johnson County's high median household income changes the type of legal work that's searched here. Family law isn't just divorce — it's high-asset divorce involving businesses, real estate, and retirement accounts. Searchers are sophisticated and mobile-first: they compare multiple firms, read reviews carefully, and rarely call the first result blindly. Cases run through the 10th Judicial District (Johnson County District Court in Olathe), and ranking takes genuine local authority — geo-targeted pages, real reviews, and depth — not templated content.",
     lawFirmDesc:
-      "We help Overland Park law firms rank for searches like 'divorce attorney Overland Park' and 'personal injury lawyer Johnson County'. Our localized content strategy and map pack optimization targets the high-intent, high-value clients that make Overland Park's legal market so competitive.",
+      "We help Overland Park firms rank for searches like 'divorce attorney Overland Park' and 'business litigation lawyer Johnson County'. Our localized content and Map Pack optimization target the high-intent, high-value clients that make this market so competitive — and so worth winning.",
     familyLawDesc:
-      "Overland Park's affluent demographics mean higher-stakes family law cases — complex divorces, business asset division, and high-conflict custody matters. We position your family law practice to capture these premium clients with search-optimized landing pages and authority content tailored to the Johnson County market.",
+      "Overland Park's affluent demographics mean higher-stakes family law: complex divorces, business asset division, and high-conflict custody. We position your practice to capture these premium clients with search-optimized pages and authority content built specifically for the Johnson County market.",
+    practiceAreas: [
+      { name: "High-Asset Family Law", demand: "Very high — divorces involving business, investment, and real estate assets." },
+      { name: "Estate Planning & Probate", demand: "Strong, driven by Johnson County's affluent, aging population." },
+      { name: "Business & Civil Litigation", demand: "Steady, anchored by the Corporate Woods business district." },
+      { name: "Personal Injury", demand: "Consistent along the I-435 and US-69 corridors." },
+    ],
     courts: [
       "Johnson County District Court",
       "Overland Park Municipal Court",
       "10th Judicial District Court",
     ],
     barAssociation: "Kansas City Metropolitan Bar Association",
+    neighborhoods: ["Blue Valley", "Indian Creek", "Corporate Woods", "Deer Creek", "Nottingham", "Brookwood"],
     nearbyAreas: ["Leawood", "Prairie Village", "Olathe", "Lenexa", "Blue Valley"],
+    localGuide: [
+      {
+        heading: "Choosing a high-asset divorce attorney in Overland Park",
+        body: "For complex divorces, look for an attorney experienced with business valuation and asset division who regularly appears in the Johnson County District Court in Olathe. Verify Kansas Bar standing, ask about similar high-net-worth cases, and confirm who will actually handle your file — not just who pitches you.",
+      },
+      {
+        heading: "Why visibility is harder in Overland Park",
+        body: "Johnson County is one of the most saturated legal markets in the Midwest. Large firms spend aggressively to stay on page one, so winning here takes a precise, local-first strategy — neighborhood-level pages, genuine reviews, and authority content — rather than a generic, templated site.",
+      },
+    ],
     faqs: [
       {
         q: "Is the Overland Park legal market competitive for SEO?",
-        a: "Yes — Johnson County is one of the most competitive legal SEO markets in Kansas. However, our technical SEO approach and local content strategy consistently rank clients above larger, established firms.",
+        a: "Yes — Johnson County is one of the most competitive legal SEO markets in Kansas. A technical, local-first strategy is what consistently ranks firms above larger, established competitors.",
       },
       {
         q: "Do you create separate pages for each family law service?",
-        a: "Absolutely. We build individual, keyword-optimized pages for divorce, child custody, alimony, property division, and other practice areas — each targeting specific Overland Park search queries.",
+        a: "Absolutely. We build individual, keyword-optimized pages for divorce, child custody, alimony, and property division — each targeting specific Overland Park search queries.",
       },
       {
-        q: "Can you target specific ZIP codes or neighborhoods in Overland Park?",
-        a: "Yes. Our hyper-local SEO targets specific Overland Park ZIP codes and neighborhoods like Blue Valley and Indian Creek to capture searches from your precise service area.",
+        q: "Can you target specific neighborhoods in Overland Park?",
+        a: "Yes. We target areas like Blue Valley and Indian Creek with hyper-local content so your firm shows up for searchers in your exact service area.",
       },
     ],
   },
@@ -347,3 +400,66 @@ export function getAllCitySlugs() {
   return kansasCities.map((c) => ({ city: c.slug }));
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
