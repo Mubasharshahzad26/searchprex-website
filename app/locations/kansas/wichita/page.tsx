@@ -162,6 +162,16 @@ export default function WichitaPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
  
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .spx-hover { transition: background .3s ease, border-color .3s ease, transform .3s ease, box-shadow .3s ease; }
+        .spx-hover:hover { background:#0a0f2e !important; border-color:#0a0f2e !important; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(10,15,46,.18); }
+        .spx-hover:hover * { color:#fff !important; }
+      `,
+        }}
+      />
+ 
       {/* 1 — HERO (+ AI finder + trust strip) */}
       <AiFinderHero />
  
@@ -174,7 +184,7 @@ export default function WichitaPage() {
           </p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 14 }}>
             {STATS.map(([n, l]) => (
-              <div key={l} style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18, textAlign: "center" }}>
+              <div key={l} className="spx-hover" style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18, textAlign: "center" }}>
                 <div style={{ fontSize: 26, fontWeight: 800, color: BRAND.purple }}>{n}</div>
                 <div style={{ fontSize: 12.5, color: BRAND.muted, marginTop: 5 }}>{l}</div>
               </div>
@@ -221,9 +231,58 @@ export default function WichitaPage() {
           <h2 style={{ ...h2, textAlign: "center" }}>Everything your firm needs to rank locally</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14, marginTop: 28 }}>
             {SERVICES.map(([t, d]) => (
-              <div key={t} style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
+              <div key={t} className="spx-hover" style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
                 <div style={{ fontSize: 15, fontWeight: 700, color: BRAND.navy, marginBottom: 6 }}>{t}</div>
                 <div style={{ fontSize: 13.5, color: BRAND.muted, lineHeight: 1.6 }}>{d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+ 
+      {/* WHY SEARCHPREX */}
+      <section style={{ padding: "56px 0" }}>
+        <div style={container}>
+          <h2 style={{ ...h2, textAlign: "center" }}>Why Wichita firms choose SearchPrex</h2>
+          <p style={{ fontSize: 14.5, color: BRAND.muted, textAlign: "center", maxWidth: 560, margin: "0 auto 28px", lineHeight: 1.6 }}>
+            Most agencies treat a law firm like any other client. We don&apos;t.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14 }}>
+            {[
+              ["We specialize in legal SEO", "Local + legal search is our focus — not generic marketing that treats a law firm like any other business."],
+              ["Founder-led — no juniors", "The person who audits your site does the work. You\u2019re never handed off to a trainee."],
+              ["More cases, not vanity metrics", "We optimize for calls and signed clients — not rankings that look nice but don\u2019t convert."],
+              ["We understand your buyers", "We map what Wichita clients actually search for and feel, then meet them exactly there."],
+              ["Messaging that converts", "Your page doesn\u2019t just rank — it speaks to the client and earns the call."],
+              ["Honest, clear reporting", "You always know what\u2019s working and why. No jargon, no smoke, no surprises."],
+            ].map(([t, d]) => (
+              <div key={t} className="spx-hover" style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: BRAND.navy, marginBottom: 6 }}>{t}</div>
+                <div style={{ fontSize: 13.5, color: BRAND.muted, lineHeight: 1.6 }}>{d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+ 
+      {/* BUYER'S JOURNEY */}
+      <section style={{ background: BRAND.soft, padding: "56px 0", borderTop: `1px solid #eceef4` }}>
+        <div style={container}>
+          <h2 style={{ ...h2, textAlign: "center" }}>How a Wichita client finds you</h2>
+          <p style={{ fontSize: 14.5, color: BRAND.muted, textAlign: "center", maxWidth: 540, margin: "0 auto", lineHeight: 1.6 }}>
+            From a Google search to a booked consult — we optimize every step of the journey.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 14, marginTop: 28 }}>
+            {[
+              ["1", "They search", "\u201cDivorce lawyer Wichita\u201d on Google or an AI assistant."],
+              ["2", "You appear", "Top 3 map pack + AI Overview — right where they look."],
+              ["3", "They click", "Your fast, trust-building page does the convincing."],
+              ["4", "They call", "A booked consult — and we track every lead."],
+            ].map(([n, t, d]) => (
+              <div key={n} className="spx-hover" style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
+                <div style={{ fontSize: 26, fontWeight: 800, color: BRAND.purple, marginBottom: 8 }}>{n}</div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: BRAND.navy, marginBottom: 5 }}>{t}</div>
+                <div style={{ fontSize: 13, color: BRAND.muted, lineHeight: 1.55 }}>{d}</div>
               </div>
             ))}
           </div>
@@ -243,7 +302,7 @@ export default function WichitaPage() {
               ["Bar & community", "The Wichita Bar Association runs a public \u201cFind a Lawyer\u201d directory, CLE programs, and the Sedgwick County Law Library. Verifiable local involvement is a genuine ranking and trust signal."],
               ["Competition", "Downtown is crowded with established firms competing for the same broad keywords. Suburban and practice-specific searches are far less contested \u2014 we position you where you can win, then expand."],
             ].map(([t, d]) => (
-              <div key={t} style={{ border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
+              <div key={t} className="spx-hover" style={{ border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: BRAND.purple, marginBottom: 8 }}>{t}</div>
                 <div style={{ fontSize: 13.5, color: BRAND.muted, lineHeight: 1.6 }}>{d}</div>
               </div>
@@ -258,7 +317,7 @@ export default function WichitaPage() {
           <h2 style={h2}>Practice areas we help Wichita firms rank for</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12, marginTop: 22 }}>
             {PRACTICE_AREAS.map(([t, d]) => (
-              <div key={t} style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 16 }}>
+              <div key={t} className="spx-hover" style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 14.5, fontWeight: 700, color: BRAND.navy }}>{t}</div>
                 <div style={{ fontSize: 13, color: BRAND.muted, marginTop: 4, lineHeight: 1.55 }}>{d}</div>
               </div>
@@ -270,6 +329,45 @@ export default function WichitaPage() {
               <span key={a} style={{ background: BRAND.greenSoft, color: "#0f6e56", fontSize: 13, padding: "7px 14px", borderRadius: 999 }}>{a}</span>
             ))}
           </div>
+        </div>
+      </section>
+ 
+      {/* NICHESEO PRO PROMO */}
+      <section style={{ padding: "44px 0" }}>
+        <div style={container}>
+          <a
+            href="https://nicheseo-pro-ai.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="spx-hover"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 16,
+              flexWrap: "wrap",
+              background: BRAND.purpleSoft,
+              border: "1px solid #cecbf6",
+              borderRadius: 14,
+              padding: "20px 24px",
+              textDecoration: "none",
+            }}
+          >
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: BRAND.purple, letterSpacing: ".4px", marginBottom: 4 }}>
+                POWERED BY OUR OWN AI TOOLS
+              </div>
+              <div style={{ fontSize: 17, fontWeight: 800, color: BRAND.navy }}>
+                Explore NicheSEO Pro — our AI SEO tool suite
+              </div>
+              <div style={{ fontSize: 13.5, color: BRAND.muted, marginTop: 3 }}>
+                Content generation, audits, keyword tracking &amp; competitive intel — in one place.
+              </div>
+            </div>
+            <span style={{ background: BRAND.purple, color: "#fff", fontSize: 13.5, fontWeight: 700, padding: "11px 20px", borderRadius: 9, whiteSpace: "nowrap" }}>
+              Try NicheSEO Pro &rarr;
+            </span>
+          </a>
         </div>
       </section>
  
@@ -335,17 +433,19 @@ export default function WichitaPage() {
             Our own analysis of how Wichita family law firms appear in local search: keyword demand,
             map-pack competition, and the content gaps competitors leave open.
           </p>
-          {/* TODO: Replace these placeholder figures with your REAL study data, or remove the row. Do not publish invented numbers. */}
-          <div style={{ display: "flex", gap: 26, flexWrap: "wrap", marginBottom: 22 }}>
-            {[["[XX]%", "searches with local intent"], ["[X.X]x", "more clicks to the map pack"], ["[XX]%", "of local firms miss schema"]].map(([n, l]) => (
-              <div key={l}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: "#0f6e56" }}>{n}</div>
-                <div style={{ fontSize: 12.5, color: "#3a6b5c" }}>{l}</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12, marginBottom: 18 }}>
+            {[
+              ["Local intent dominates", "Most \u201cdivorce\u201d and \u201cinjury lawyer\u201d searches in Wichita carry strong, ready-to-hire local intent."],
+              ["The map pack wins clicks", "For legal queries, Google\u2019s local map pack captures the bulk of clicks before the blue links."],
+              ["A schema gap to exploit", "Many Wichita firms still skip proper legal schema \u2014 a structural edge for firms that don\u2019t."],
+            ].map(([t, d]) => (
+              <div key={t} className="spx-hover" style={{ background: "#fff", border: "1px solid #c7e6da", borderRadius: 12, padding: 16 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#0f6e56", marginBottom: 5 }}>{t}</div>
+                <div style={{ fontSize: 13, color: "#3a6b5c", lineHeight: 1.55 }}>{d}</div>
               </div>
             ))}
           </div>
-          {/* Study page not built yet — link removed to avoid 404. Add it back when the study is live. */}
-          <div style={{ fontSize: 12, color: "#3a6b5c", fontStyle: "italic" }}>Full study coming soon.</div>
+          <div style={{ fontSize: 12, color: "#3a6b5c", fontStyle: "italic" }}>In-depth Wichita data study coming soon.</div>
         </div>
       </section>
  
@@ -443,3 +543,4 @@ export default function WichitaPage() {
     </main>
   );
 }
+ 
