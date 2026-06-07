@@ -1,4 +1,3 @@
-
 "use client";
  
 // components/wichita/AiFinderHero.tsx
@@ -157,7 +156,7 @@ export default function AiFinderHero() {
         style={{
           maxWidth: 1080,
           margin: "0 auto",
-          padding: "44px 26px 52px",
+          padding: "80px 26px 56px",
           position: "relative",
         }}
       >
@@ -797,3 +796,13 @@ export default function AiFinderHero() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+

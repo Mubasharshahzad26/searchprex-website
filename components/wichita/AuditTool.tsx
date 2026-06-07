@@ -1,14 +1,10 @@
-
 "use client";
  
 // components/wichita/AuditTool.tsx
 //
-// Honest lead-capture: captures website + email, then your team sends a full audit.
-// (No fake "instant" results — that protects trust and E-E-A-T.)
-//
-// IMPORTANT: This posts to /api/seo-audit. You already have that route — just make sure
-// it accepts { website, email, source }. If your route expects a different shape,
-// change the body below to match it (or point to /api/leads instead).
+// Lead-capture that posts to your existing /api/seo-audit route (Resend-powered).
+// Sends the exact shape that route expects:
+//   { businessType, fullName, email, websiteUrl, phone, problems }
  
 import React, { useState } from "react";
 import { Search, CheckCircle2, AlertCircle } from "lucide-react";
@@ -24,7 +20,8 @@ const BRAND = {
 };
  
 export default function AuditTool() {
-  const [website, setWebsite] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
@@ -33,7 +30,8 @@ export default function AuditTool() {
  
   async function submit() {
     if (status === "loading") return;
-    if (!website.trim()) return setError("Please enter your website.");
+    if (!fullName.trim()) return setError("Please enter your name.");
+    if (!websiteUrl.trim()) return setError("Please enter your website.");
     if (!/^\S+@\S+\.\S+$/.test(email)) return setError("Please enter a valid email.");
     setError("");
     setStatus("loading");
@@ -42,18 +40,35 @@ export default function AuditTool() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          website: website.trim(),
+          businessType: "Law Firm",
+          fullName: fullName.trim(),
           email: email.trim(),
-          source: "wichita-law-firm-page",
+          websiteUrl: websiteUrl.trim(),
+          phone: "",
+          problems: ["Requested via Wichita law firm SEO page"],
         }),
       });
-      if (!res.ok) throw new Error();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Failed");
+      }
       setStatus("done");
     } catch {
       setStatus("error");
-      setError("Something went wrong. Please try again or email us directly.");
+      setError("Something went wrong. Please try again or email contact@searchprex.com.");
     }
   }
+ 
+  const inputStyle = {
+    border: `1px solid ${BRAND.line}`,
+    borderRadius: 9,
+    padding: "11px 13px",
+    fontSize: 14,
+    color: BRAND.ink,
+    fontFamily: "inherit",
+    width: "100%",
+    boxSizing: "border-box" as const,
+  };
  
   return (
     <section
@@ -89,8 +104,9 @@ export default function AuditTool() {
           Check your firm&apos;s SEO health
         </h2>
         <p style={{ fontSize: 14.5, color: BRAND.muted, margin: "0 0 24px" }}>
-          Enter your site and we&apos;ll send a full breakdown — speed, mobile,
-          schema, indexing, and your Google Business Profile — within 24 hours.
+          Enter your details and the founder will personally send a full breakdown
+          — speed, mobile, schema, indexing, and your Google Business Profile —
+          within 24 hours.
         </p>
  
         {status !== "done" ? (
@@ -106,18 +122,18 @@ export default function AuditTool() {
           >
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <input
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Your name"
+                aria-label="Your name"
+                style={inputStyle}
+              />
+              <input
+                value={websiteUrl}
+                onChange={(e) => setWebsiteUrl(e.target.value)}
                 placeholder="yourlawfirm.com"
                 aria-label="Your website"
-                style={{
-                  border: `1px solid ${BRAND.line}`,
-                  borderRadius: 9,
-                  padding: "11px 13px",
-                  fontSize: 14,
-                  color: BRAND.ink,
-                  fontFamily: "inherit",
-                }}
+                style={inputStyle}
               />
               <input
                 value={email}
@@ -125,14 +141,7 @@ export default function AuditTool() {
                 placeholder="you@firm.com"
                 aria-label="Your email"
                 type="email"
-                style={{
-                  border: `1px solid ${BRAND.line}`,
-                  borderRadius: 9,
-                  padding: "11px 13px",
-                  fontSize: 14,
-                  color: BRAND.ink,
-                  fontFamily: "inherit",
-                }}
+                style={inputStyle}
               />
               <button
                 onClick={submit}
@@ -200,8 +209,8 @@ export default function AuditTool() {
               You&apos;re all set!
             </div>
             <div style={{ fontSize: 14, color: "#1a4a3c", lineHeight: 1.5 }}>
-              We&apos;ll review {website.trim()} and send your full audit within 24
-              hours.
+              We&apos;ll review {websiteUrl.trim()} and send your full audit within
+              24 hours. Check your inbox for a confirmation.
             </div>
           </div>
         )}
@@ -209,3 +218,4 @@ export default function AuditTool() {
     </section>
   );
 }
+ 

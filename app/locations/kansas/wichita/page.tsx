@@ -172,7 +172,7 @@ export default function WichitaPage() {
             Wichita isn&apos;t a generic &ldquo;local SEO&rdquo; market &mdash; it&apos;s the largest legal
             market in Kansas, and ranking here takes a strategy built around it.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 14 }}>
             {STATS.map(([n, l]) => (
               <div key={l} style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18, textAlign: "center" }}>
                 <div style={{ fontSize: 26, fontWeight: 800, color: BRAND.purple }}>{n}</div>
@@ -219,7 +219,7 @@ export default function WichitaPage() {
       <section style={{ background: BRAND.soft, padding: "56px 0", borderTop: `1px solid #eceef4` }}>
         <div style={container}>
           <h2 style={{ ...h2, textAlign: "center" }}>Everything your firm needs to rank locally</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14, marginTop: 28 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14, marginTop: 28 }}>
             {SERVICES.map(([t, d]) => (
               <div key={t} style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 18 }}>
                 <div style={{ fontSize: 15, fontWeight: 700, color: BRAND.navy, marginBottom: 6 }}>{t}</div>
@@ -237,7 +237,7 @@ export default function WichitaPage() {
       <section style={{ padding: "56px 0" }}>
         <div style={container}>
           <h2 style={h2}>We know where your clients &mdash; and your cases &mdash; come from</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14, marginTop: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 14, marginTop: 24 }}>
             {[
               ["Courts", "Most local matters are filed in the 18th Judicial District Court of Kansas, in the Sedgwick County Courthouse at 525 N. Main Street, downtown Wichita \u2014 covering criminal, civil, family, and probate cases."],
               ["Bar & community", "The Wichita Bar Association runs a public \u201cFind a Lawyer\u201d directory, CLE programs, and the Sedgwick County Law Library. Verifiable local involvement is a genuine ranking and trust signal."],
@@ -256,7 +256,7 @@ export default function WichitaPage() {
       <section style={{ background: BRAND.soft, padding: "56px 0", borderTop: `1px solid #eceef4` }}>
         <div style={container}>
           <h2 style={h2}>Practice areas we help Wichita firms rank for</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, marginTop: 22 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12, marginTop: 22 }}>
             {PRACTICE_AREAS.map(([t, d]) => (
               <div key={t} style={{ background: "#fff", border: `1px solid ${BRAND.line}`, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 14.5, fontWeight: 700, color: BRAND.navy }}>{t}</div>
@@ -285,19 +285,32 @@ export default function WichitaPage() {
             results. Here&apos;s one:
           </p>
  
-          {/* Replace this block with your real video embed (YouTube/Vimeo iframe). */}
-          <div style={{ position: "relative", paddingTop: "56.25%", background: "#dfe9ea", borderRadius: 12, overflow: "hidden" }}>
-            {/*
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="HVAC Services Team case study"
-              allowFullScreen style={{ position:"absolute", inset:0, width:"100%", height:"100%", border:0 }} />
-            */}
-            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#5b7d7a", fontSize: 13 }}>
-              ▶ Insert HVAC case study video embed here
-            </div>
+          {/* Real HVAC case study video (same one used on /case-studies) */}
+          <div style={{ position: "relative", paddingTop: "56.25%", background: "#0a0f2e", borderRadius: 12, overflow: "hidden" }}>
+            <iframe
+              src="https://www.youtube.com/embed/g_1TfDU4YeA?rel=0&modestbranding=1"
+              title="How HVAC Services Team reached the Google Map Pack Top 3"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+            />
           </div>
           <p style={{ fontSize: 15, fontWeight: 700, color: BRAND.navy, textAlign: "center", margin: "16px 0 0", lineHeight: 1.4 }}>
-            How HVAC Services Team reached the Google Map Pack Top 3 and earned an AI Overview citation
+            How HVAC Services Team reached the Google Map Pack Top 3 and earned an AI Overview placement
           </p>
+ 
+          {/* Real metrics from this case study */}
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
+            {[["Top 3", "Maps pack"], ["Featured", "AI Overview"], ["+5.7x", "organic calls"]].map(([v, l]) => (
+              <span key={l} style={{ display: "inline-flex", alignItems: "baseline", gap: 6, border: `1px solid rgba(62,180,137,0.3)`, background: "rgba(62,180,137,0.08)", borderRadius: 9, padding: "8px 14px", fontSize: 12.5, color: "#0f6e56", fontWeight: 600 }}>
+                <span style={{ fontSize: 15, fontWeight: 800 }}>{v}</span> {l}
+              </span>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 16 }}>
+            <a href="/case-studies" style={{ color: BRAND.purple, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>View all case studies &rarr;</a>
+          </div>
  
           <div style={{ fontSize: 11, letterSpacing: ".5px", color: "#9499b5", fontWeight: 700, textAlign: "center", margin: "30px 0 12px" }}>
             TRUSTED BY CLIENTS LIKE
@@ -331,7 +344,8 @@ export default function WichitaPage() {
               </div>
             ))}
           </div>
-          <a href="/research/family-law-seo-kansas" style={{ display: "inline-block", background: "#0f6e56", color: "#fff", textDecoration: "none", fontSize: 14, fontWeight: 700, padding: "11px 20px", borderRadius: 9 }}>Read the study &rarr;</a>
+          {/* Study page not built yet — link removed to avoid 404. Add it back when the study is live. */}
+          <div style={{ fontSize: 12, color: "#3a6b5c", fontStyle: "italic" }}>Full study coming soon.</div>
         </div>
       </section>
  
@@ -372,14 +386,30 @@ export default function WichitaPage() {
       <section style={{ background: BRAND.navy, padding: "44px 0" }}>
         <div style={{ ...container, maxWidth: 760 }}>
           <div style={{ display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap" }}>
-            {/* Replace src with Mubashar's real photo in /public */}
-            <img
-              src="/mubashar-shahzad.jpg"
-              alt="Mubashar Shahzad, Founder of SearchPrex"
-              width={72}
-              height={72}
-              style={{ width: 72, height: 72, borderRadius: "50%", objectFit: "cover", border: `3px solid ${BRAND.green}`, background: BRAND.purple, flexShrink: 0 }}
-            />
+            {/* Default = clean initials avatar (never breaks). To use the real photo:
+                drop it in /public (e.g. mubashar-shahzad.jpg), then replace this <div>
+                with: <img src="/mubashar-shahzad.jpg" alt="Mubashar Shahzad, Founder of SearchPrex"
+                width={72} height={72} style={{ width:72, height:72, borderRadius:"50%",
+                objectFit:"cover", border:`3px solid ${BRAND.green}`, flexShrink:0 }} /> */}
+            <div
+              aria-hidden="true"
+              style={{
+                width: 72,
+                height: 72,
+                borderRadius: "50%",
+                background: BRAND.purple,
+                border: `3px solid ${BRAND.green}`,
+                color: "#fff",
+                fontSize: 22,
+                fontWeight: 800,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              MS
+            </div>
             <div style={{ flex: 1, minWidth: 240 }}>
               <span style={{ display: "inline-block", background: "#1c2547", color: "#3eb489", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 999, marginBottom: 7, letterSpacing: ".3px" }}>✓ CERTIFIED SEO EXPERT</span>
               <div style={{ fontSize: 17, fontWeight: 700, color: "#fff" }}>Mubashar Shahzad</div>
@@ -413,4 +443,3 @@ export default function WichitaPage() {
     </main>
   );
 }
- 
