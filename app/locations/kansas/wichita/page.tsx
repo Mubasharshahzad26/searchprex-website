@@ -13,6 +13,7 @@ import BuyersJourneyInteractive from "@/components/wichita/BuyersJourneyInteract
 import LeadsCollectionForm from "@/components/wichita/LeadsCollectionForm";
 import LegalNewsWidget from "@/components/wichita/LegalNewsWidget";
 import RealityCheck from "@/components/wichita/RealityCheck";
+import DeviceMockups from "@/components/wichita/DeviceMockups";
  
 export const dynamic = "force-dynamic";
  
@@ -82,6 +83,7 @@ const GUIDE = [
   ["Make reviews part of your SEO.", "Steady, recent Google reviews that mention practice areas and locations influence both rankings and the decision to call. A simple post-matter request system compounds over time."],
   ["Use proper legal schema.", "LegalService / Attorney schema, correct categories, and accurate hours help Google display your firm correctly \u2014 and most local firms still skip it."],
 ];
+<DeviceMockups />
  
 const FAQS = [
   ["How long until my Wichita firm starts ranking?", "Local SEO is a build, not a switch. Most firms see meaningful map-pack and ranking movement in 3\u20136 months, with momentum compounding after that. Anyone promising page one in two weeks is selling something we won't."],
