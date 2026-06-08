@@ -12,6 +12,7 @@ import AuditTool from "@/components/wichita/AuditTool";
 import BuyersJourneyInteractive from "@/components/wichita/BuyersJourneyInteractive";
 import LeadsCollectionForm from "@/components/wichita/LeadsCollectionForm";
 import LegalNewsWidget from "@/components/wichita/LegalNewsWidget";
+import RealityCheck from "@/components/wichita/RealityCheck";
  
 export const dynamic = "force-dynamic";
  
@@ -50,6 +51,7 @@ const STATS = [
   ["18th", "Judicial District"],
   ["1M+", "people within 100 miles"],
 ];
+<RealityCheck />
  
 const SERVICES = [
   ["Local SEO & map pack", "Get your firm into the top 3 Google Map results for your practice area in Wichita."],
