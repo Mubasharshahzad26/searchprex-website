@@ -1,3 +1,4 @@
+
 // app/case-studies/data.ts
 // Single source of truth for case studies. The hub page (page.tsx),
 // the filter bar, and the future detail pages all read from here.
@@ -112,7 +113,7 @@ export const caseStudies: CaseStudy[] = [
     headline: "Ranked #1 local for core cleaning keywords with 106K impressions.",
     badgeColor: "#7c3aed",
     badgeBg: "#f3e8ff",
-    image: "/images/dolls-cleaning.jpg",
+    image: "/images/dolls-cleaning-ranking.JPG",
     featured: false,
     slug: { industry: "cleaning", client: "dolls-cleaning" },
     metrics: [
@@ -130,7 +131,7 @@ export const caseStudies: CaseStudy[] = [
     headline: "+210 monthly clicks and top-6 positions for competitive roofing terms.",
     badgeColor: "#ea580c",
     badgeBg: "#fef3c7",
-    image: "/images/mammoth-roofing.jpg",
+    image: "/images/mammoth-roofing-gsc.JPG",
     featured: false,
     slug: { industry: "roofing", client: "mammoth-roofing" },
     metrics: [
@@ -148,7 +149,7 @@ export const caseStudies: CaseStudy[] = [
     headline: "Ranked #1 local with a +95% jump in search visibility.",
     badgeColor: "#0369a1",
     badgeBg: "#e0f2fe",
-    image: "/images/carpet-cleaning.jpg",
+    image: "/images/carpet-cleaning-service.JPG",
     featured: false,
     slug: { industry: "cleaning", client: "carpet-cleaning" },
     metrics: [
@@ -166,7 +167,7 @@ export const caseStudies: CaseStudy[] = [
     headline: "490+ monthly profile interactions and +78% more profile views.",
     badgeColor: "#059669",
     badgeBg: "#ecfdf5",
-    image: "/images/door-doctor.jpg",
+    image: "/images/door-doctor-google-my-business.JPG",
     featured: false,
     slug: { industry: "home-services", client: "door-doctor" },
     metrics: [
@@ -202,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
     headline: "Jumped 40 positions to page one for primary service keywords.",
     badgeColor: "#dc2626",
     badgeBg: "#fee2e2",
-    image: "/images/hvac-team.jpg",
+    image: "/images/hvac-ranking.JPG",
     featured: false,
     slug: { industry: "hvac", client: "hvac-team" },
     metrics: [
