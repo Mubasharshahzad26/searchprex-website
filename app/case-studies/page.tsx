@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight, Shield, CheckCircle, Users, MapPin,
-  Play, Youtube, X, Phone,
+  Play, Youtube, X, Phone, LayoutGrid,
 } from "lucide-react";
  
 /* ─── THEME ─── */
@@ -161,9 +161,6 @@ export default function CaseStudiesPage() {
                           <Shield className="mx-auto mb-4 h-12 w-12 text-white/80" />
                           <p className="text-2xl font-black text-white">{cs.client}</p>
                           <p className="mt-1 text-sm text-white/70">{cs.location}</p>
-                          <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs font-bold text-white">
-                            <CheckCircle className="h-3.5 w-3.5" /> #1 Dallas Family Law
-                          </div>
                         </div>
                       </div>
                     )}
@@ -220,6 +217,28 @@ export default function CaseStudiesPage() {
               );
             })}
           </div>
+ 
+          {/* ── NEW: VIEW ALL CASE STUDIES CTA (after the 3 studies) ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-14 flex flex-col items-center gap-4 text-center"
+          >
+            <p className="text-sm text-[#64748b]">
+              Want to see every result — filtered by industry and SEO type?
+            </p>
+            <Link
+              href="/all-case-studies"
+              className="group inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
+              style={{ background: GREEN }}
+            >
+              <LayoutGrid className="h-5 w-5" />
+              View All Case Studies
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
         </div>
       </section>
  
@@ -293,3 +312,10 @@ export default function CaseStudiesPage() {
     </main>
   );
 }
+ 
+
+
+
+
+
+
