@@ -5,8 +5,8 @@
  
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import CaseStudiesClient, { FAQS } from "./CaseStudiesClient";
-import { caseStudies, detailUrl } from "./data";
+import CaseStudiesClient from "./CaseStudiesClient";
+import { caseStudies, detailUrl, FAQS } from "./data";
  
 const SITE = "https://www.searchprex.com";
 // TODO: replace with Mubashar's exact LinkedIn profile URL before launch.

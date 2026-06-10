@@ -232,3 +232,26 @@ export const findBySlug = (industry: string, client: string) =>
     (c) => c.slug.industry === industry && c.slug.client === client
   );
  
+// ── FAQ content ──────────────────────────────────────────────────────────
+// Lives here (server-safe) so both page.tsx (FAQPage schema) and
+// CaseStudiesClient.tsx (FAQ accordion) can import it. It must NOT live in
+// a "use client" file, or server imports of it break at build time.
+export const FAQS = [
+  {
+    q: "How long does it take to see SEO results?",
+    a: "It depends on the starting point, but across these case studies indexing and visibility recovery typically lands in 60–90 days, with compounding growth after that. We share progress against real Google Search Console data every month.",
+  },
+  {
+    q: "Is the data in these case studies real?",
+    a: "Yes. Every result is verified with Google Search Console — clicks, impressions, indexing and rankings. Several featured studies include live screen recordings of the GSC data, not edited screenshots.",
+  },
+  {
+    q: "Which industries and SEO types do you cover?",
+    a: "Ecommerce, local services, technical and law firm SEO across both US and international markets. Use the filters above to see results for a specific SEO type or industry.",
+  },
+  {
+    q: "Who actually works on my account?",
+    a: "The founder leads every account — no juniors, no outsourced fluff. You work directly with the person who built the strategies behind these results.",
+  },
+];
+ 
