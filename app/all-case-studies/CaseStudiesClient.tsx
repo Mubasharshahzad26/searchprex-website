@@ -595,7 +595,3 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
  
-
-
-
-
