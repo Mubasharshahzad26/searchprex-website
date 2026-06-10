@@ -7,11 +7,11 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowRight, CheckCircle, Play, X, Phone, Sparkles, ShieldCheck,
   Linkedin, BadgeCheck, Filter, MapPin, ChevronDown, BarChart3, Bot,
-  Globe, Youtube, Star, RotateCcw,
+  Youtube, RotateCcw,
 } from "lucide-react";
 import {
   caseStudies, featuredStudies, seoTypeOptions, industryOptions,
-  detailUrl, type CaseStudy,
+  detailUrl, FAQS, type CaseStudy,
 } from "./data";
  
 /* ── Brand ── */
@@ -23,34 +23,18 @@ const NAVY = "#0a0f2e";
 const PHONE = "+923106526316";
 const PHONE_DISPLAY = "+92 310 652 6316";
  
-/* ── Positive proof stats (hero ke neeche, centered) ── */
-const stats = [
-  { v: "20+", l: "Clients worldwide", icon: Globe },
-  { v: "AI Overview", l: "Ranked & cited", icon: Sparkles },
-  { v: "LLMs · AEO", l: "Built to be cited", icon: Bot },
-  { v: "AI chatbot", l: "Developer", icon: BarChart3 },
-  { v: "+476%", l: "Organic clicks", icon: Star, highlight: true },
-  { v: "+285%", l: "Indexing rate", icon: CheckCircle, highlight: true },
+/* ── Proof band: 4 big numbers + capability pills (agency-style) ── */
+const bigStats = [
+  { v: "20+", l: "Clients worldwide" },
+  { v: "+476%", l: "Organic clicks" },
+  { v: "+285%", l: "Indexing rate" },
+  { v: "12K+", l: "Pages indexed" },
 ];
  
-/* ── FAQ — exported so page.tsx can build FAQPage schema from the same source ── */
-export const FAQS = [
-  {
-    q: "How long does it take to see SEO results?",
-    a: "It depends on the starting point, but across these case studies indexing and visibility recovery typically lands in 60–90 days, with compounding growth after that. We share progress against real Google Search Console data every month.",
-  },
-  {
-    q: "Is the data in these case studies real?",
-    a: "Yes. Every result is verified with Google Search Console — clicks, impressions, indexing and rankings. Several featured studies include live screen recordings of the GSC data, not edited screenshots.",
-  },
-  {
-    q: "Which industries and SEO types do you cover?",
-    a: "Ecommerce, local services, technical and law firm SEO across both US and international markets. Use the filters above to see results for a specific SEO type or industry.",
-  },
-  {
-    q: "Who actually works on my account?",
-    a: "The founder leads every account — no juniors, no outsourced fluff. You work directly with the person who built the strategies behind these results.",
-  },
+const capabilities = [
+  { label: "Ranked in Google AI Overviews", icon: Sparkles },
+  { label: "Cited by LLMs · AEO optimized", icon: Bot },
+  { label: "AI chatbot developer", icon: BarChart3 },
 ];
  
 /* ── Motion ── */
@@ -173,28 +157,40 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
         </motion.div>
       </section>
  
-      {/* ━━━ 2 · POSITIVE STATS STRIP (centered) ━━━ */}
+      {/* ━━━ 2 · PROOF BAND (dark navy, big numbers + capability pills) ━━━ */}
       <section className="pb-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {stats.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <motion.div key={i} variants={fadeUp}
-                  className="rounded-2xl border border-[#e2e8f0] bg-white p-5 text-center transition-all hover:border-green-200">
-                  <Icon className="mx-auto mb-2 h-6 w-6"
-                    style={{ color: s.highlight ? GREEN : PURPLE }} />
-                  <p className="text-2xl font-black"
-                    style={{ color: s.highlight ? GREEN : NAVY }}>{s.v}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-wide text-[#64748b]">{s.l}</p>
-                </motion.div>
-              );
-            })}
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 md:py-12"
+            style={{ background: NAVY }}>
+            <div className="absolute inset-0 opacity-10 pointer-events-none"
+              style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
+ 
+            {/* Big numbers row */}
+            <div className="relative grid grid-cols-2 gap-x-6 gap-y-8 text-center md:grid-cols-4">
+              {bigStats.map((s, i) => (
+                <div key={i} className={i > 0 ? "md:border-l md:border-white/10" : ""}>
+                  <p className="text-4xl font-black md:text-5xl" style={{ color: GREEN }}>{s.v}</p>
+                  <p className="mt-2 text-xs uppercase tracking-widest text-white/60">{s.l}</p>
+                </div>
+              ))}
+            </div>
+ 
+            {/* Capability pills */}
+            <div className="relative mt-9 flex flex-wrap items-center justify-center gap-3">
+              {capabilities.map(({ label, icon: Icon }) => (
+                <span key={label}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/90">
+                  <Icon className="h-3.5 w-3.5" style={{ color: GREEN }} />
+                  {label}
+                </span>
+              ))}
+            </div>
+ 
+            <p className="relative mt-7 text-center text-sm text-white/50">
+              Recovered from near-zero GSC visibility — every number verified in Google Search Console.
+            </p>
           </motion.div>
-          <p className="mt-5 text-center text-sm text-[#64748b]">
-            Recovered from <span className="font-semibold text-[#0a0f2e]">near-zero GSC visibility</span> — all verified in Search Console.
-          </p>
         </div>
       </section>
  
@@ -368,14 +364,27 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                           <MapPin className="h-3 w-3" />{cs.location}
                         </p>
                         <h3 className="mb-4 text-base font-bold leading-snug text-[#0a0f2e]">{cs.headline}</h3>
-                        <div className="mt-auto flex flex-wrap gap-2">
-                          {cs.metrics.slice(0, 3).map((m) => (
-                            <span key={m.l} className="rounded-md px-2 py-1 text-[11px] font-semibold"
-                              style={{ background: "rgba(62,180,137,0.1)", color: GREEN_DARK }}>
-                              <span className="font-black">{m.v}</span> {m.l}
+ 
+                        {/* Hero metric (big) + secondary chips — agency style */}
+                        <div className="mt-auto">
+                          <div className="flex items-baseline gap-2 border-t border-[#f1f5f9] pt-4">
+                            <span className="text-3xl font-black leading-none" style={{ color: GREEN }}>
+                              {cs.metrics[0].v}
                             </span>
-                          ))}
+                            <span className="text-xs font-semibold uppercase tracking-wide text-[#64748b]">
+                              {cs.metrics[0].l}
+                            </span>
+                          </div>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {cs.metrics.slice(1, 3).map((m) => (
+                              <span key={m.l} className="rounded-md px-2 py-1 text-[11px] font-semibold"
+                                style={{ background: "rgba(62,180,137,0.1)", color: GREEN_DARK }}>
+                                <span className="font-black">{m.v}</span> {m.l}
+                              </span>
+                            ))}
+                          </div>
                         </div>
+ 
                         <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold transition-colors"
                           style={{ color: GREEN_DARK }}>
                           View case study
@@ -595,3 +604,9 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
  
+
+
+
+
+
+
