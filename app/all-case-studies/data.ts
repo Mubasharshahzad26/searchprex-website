@@ -1,4 +1,3 @@
-
 // app/case-studies/data.ts
 // Single source of truth for case studies. The hub page (page.tsx),
 // the filter bar, and the future detail pages all read from here.
@@ -116,6 +115,12 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/dolls-cleaning-ranking.JPG",
     featured: false,
     slug: { industry: "cleaning", client: "dolls-cleaning" },
+    challenge:
+      "A local cleaning company in Chesterfield, MI was invisible for high-intent searches like 'house cleaning near me' — no map pack presence, an underused Google Business Profile, and a website with no service-area targeting.",
+    solution:
+      "We fully optimized the Google Business Profile, built dedicated service-area pages, fixed on-page local SEO signals, cleaned up citations, and set up a steady review-generation cadence.",
+    outcome:
+      "The business reached #1 local rankings for its core cleaning keywords, generating 106K impressions and +264 clicks — driving consistent inbound calls. All verified in Google Search Console.",
     metrics: [
       { v: "#1", l: "Local ranking" },
       { v: "+264", l: "Clicks" },
@@ -134,6 +139,12 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/mammoth-roofing-gsc.JPG",
     featured: false,
     slug: { industry: "roofing", client: "mammoth-roofing" },
+    challenge:
+      "In Texas's hyper-competitive roofing market, Mammoth Roofing was stuck beyond page one for every revenue keyword, with thin service pages and weak local signals.",
+    solution:
+      "We mapped keywords across roofing services, built location-targeted landing pages, fixed technical SEO issues, and published content aligned with what Texas homeowners actually search for.",
+    outcome:
+      "Top-6 positions for competitive roofing terms, +210 monthly clicks and 45K impressions — measurable lead growth without ad spend. Verified in Google Search Console.",
     metrics: [
       { v: "+210", l: "Monthly clicks" },
       { v: "45K", l: "Impressions" },
@@ -152,6 +163,12 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/carpet-cleaning-service.JPG",
     featured: false,
     slug: { industry: "cleaning", client: "carpet-cleaning" },
+    challenge:
+      "A Clawson, MI carpet cleaning service had near-zero visibility, losing local customers to national directories that dominated every search result.",
+    solution:
+      "We rebuilt on-page local SEO, optimized the Google Business Profile, fixed citations, and created content targeting Clawson and surrounding areas.",
+    outcome:
+      "#1 local position for primary keywords and a +95% jump in search visibility — putting the business ahead of the directories. Verified in Google Search Console.",
     metrics: [
       { v: "#1", l: "Position" },
       { v: "+95%", l: "Visibility" },
@@ -170,6 +187,12 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/door-doctor-google-my-business.JPG",
     featured: false,
     slug: { industry: "home-services", client: "door-doctor" },
+    challenge:
+      "A multi-location door repair business had inconsistent Google Business Profiles across locations — mismatched info, no posting cadence, and stagnant profile engagement.",
+    solution:
+      "We standardized NAP data across every location, optimized each Google Business Profile, and set up a posting and review strategy to keep profiles active.",
+    outcome:
+      "490+ monthly profile interactions and +78% more profile views across locations — turning dormant profiles into a steady lead source.",
     metrics: [
       { v: "490", l: "Interactions" },
       { v: "+78%", l: "Profile views" },
@@ -188,6 +211,12 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/kitchen-ranking.jpg",
     featured: false,
     slug: { industry: "remodeling", client: "kitchen-cabinets" },
+    challenge:
+      "A kitchen remodeling business in Glendora, CA had no rankings for remodel and cabinet keywords, relying entirely on referrals in a market full of established competitors.",
+    solution:
+      "We ran keyword research focused on high-intent local remodel terms, rebuilt on-page SEO, and created locally-targeted content for Glendora and nearby cities.",
+    outcome:
+      "Top-10 rankings for 5+ high-intent kitchen remodel keywords — the business now appears where homeowners are actively searching.",
     metrics: [
       { v: "Top 10", l: "Rankings" },
       { v: "+5", l: "Keywords" },
@@ -206,6 +235,12 @@ export const caseStudies: CaseStudy[] = [
     image: "/images/hvac-ranking.JPG",
     featured: false,
     slug: { industry: "hvac", client: "hvac-team" },
+    challenge:
+      "An HVAC company in Simi Valley, CA was buried on pages 4–5 for its primary service keywords — effectively invisible to local customers.",
+    solution:
+      "We cleaned up technical SEO issues, rebuilt the core service pages, and strengthened local relevance signals for Simi Valley searches.",
+    outcome:
+      "A +40 position jump to page one for primary keywords, with CTR improving as rankings climbed. Verified in Google Search Console.",
     metrics: [
       { v: "+40", l: "Position jump" },
       { v: "Page 1", l: "Ranking" },
@@ -256,3 +291,9 @@ export const FAQS = [
   },
 ];
  
+
+
+
+
+
+

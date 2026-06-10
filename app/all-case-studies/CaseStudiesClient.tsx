@@ -358,6 +358,14 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                         )}
                         <span className="absolute left-3 top-3 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide"
                           style={{ backgroundColor: cs.badgeBg, color: cs.badgeColor }}>{cs.seoType}</span>
+ 
+                        {/* Hover overlay CTA (CRO) */}
+                        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent pb-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <span className="inline-flex translate-y-3 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 group-hover:translate-y-0"
+                            style={{ background: GREEN }}>
+                            View Full Case Study <ArrowRight className="h-4 w-4" />
+                          </span>
+                        </div>
                       </div>
                       <div className="flex flex-1 flex-col p-5">
                         <p className="mb-1 flex items-center gap-1 text-xs text-[#64748b]">
@@ -603,10 +611,3 @@ function FAQItem({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
- 
-
-
-
-
-
-
