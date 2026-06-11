@@ -19,6 +19,11 @@ import CTA from "@/components/CTA";
 import ChatWidget from "@/components/ChatWidget";
 import { client } from "@/sanity/lib/client";
  
+// Single source of truth for the canonical origin.
+// www is the PRIMARY domain (non-www 307/308-redirects to www on Vercel),
+// so every canonical / schema URL must use www — never the bare domain.
+const SITE = "https://www.searchprex.com";
+ 
 const query = `*[_type == "homePage"][0]{
   heroHeadline,
   heroSubheadline,
@@ -37,7 +42,21 @@ export const metadata: Metadata = {
   description:
     "SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
   alternates: {
-    canonical: "https://searchprex.com",
+    canonical: SITE,
+  },
+  openGraph: {
+    title: "SEO Agency USA | Law Firm & Ecommerce SEO | SearchPrex",
+    description:
+      "US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Verified GSC results.",
+    url: SITE,
+    siteName: "SearchPrex",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SEO Agency USA | Law Firm & Ecommerce SEO | SearchPrex",
+    description:
+      "US-Focused SEO agency — law firm, ecommerce & local SEO. Verified GSC results.",
   },
 };
  
@@ -47,6 +66,7 @@ export default async function Home() {
   /* ── Advanced SEO: interlinked entity @graph ──
      Organization + Person (founder) + WebSite + WebPage + Service catalog.
      knowsAbout = topical-authority signal · sameAs = real verified profiles.
+     All URLs use the www origin (SITE) to match the primary domain + canonicals.
      NOTE: LocalBusiness with a US address was REMOVED until you have a real
      virtual address + US phone (fake NAP risks a Google penalty). Add it back
      as a separate node once those are live. */
@@ -55,13 +75,13 @@ export default async function Home() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://searchprex.com/#organization",
+        "@id": `${SITE}/#organization`,
         "name": "SearchPrex",
-        "url": "https://searchprex.com",
-        "logo": "https://searchprex.com/logo.png", // ⚠️ ensure this file exists in /public
+        "url": SITE,
+        "logo": `${SITE}/logo.png`, // ⚠️ ensure this file exists in /public
         "description": "US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
         "email": "contact@searchprex.com",
-        "founder": { "@id": "https://searchprex.com/#founder" },
+        "founder": { "@id": `${SITE}/#founder` },
         "areaServed": { "@type": "Country", "name": "United States" },
         "knowsAbout": [
           "Law Firm SEO", "Ecommerce SEO", "Shopify SEO", "Local SEO",
@@ -75,19 +95,19 @@ export default async function Home() {
           "@type": "OfferCatalog",
           "name": "SEO Services",
           "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Law Firm SEO", "url": "https://searchprex.com/services/law-firm-seo" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ecommerce & Shopify SEO", "url": "https://searchprex.com/services/ecommerce-seo" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO", "url": "https://searchprex.com/services/local-seo" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical SEO Audit", "url": "https://searchprex.com/services/technical-seo" } }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Law Firm SEO", "url": `${SITE}/services/law-firm-seo` } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ecommerce & Shopify SEO", "url": `${SITE}/services/ecommerce-seo` } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO", "url": `${SITE}/services/local-seo` } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical SEO Audit", "url": `${SITE}/services/technical-seo` } }
           ]
         }
       },
       {
         "@type": "Person",
-        "@id": "https://searchprex.com/#founder",
+        "@id": `${SITE}/#founder`,
         "name": "Mubashar Shahzad",
         "jobTitle": "Founder & SEO Strategist",
-        "worksFor": { "@id": "https://searchprex.com/#organization" },
+        "worksFor": { "@id": `${SITE}/#organization` },
         "knowsAbout": ["Technical SEO", "Ecommerce SEO", "Local SEO", "AEO/GEO/AIO"],
         "sameAs": [
           "https://www.linkedin.com/in/mubashar-shahzad-seo/",
@@ -97,18 +117,18 @@ export default async function Home() {
       },
       {
         "@type": "WebSite",
-        "@id": "https://searchprex.com/#website",
-        "url": "https://searchprex.com",
+        "@id": `${SITE}/#website`,
+        "url": SITE,
         "name": "SearchPrex",
-        "publisher": { "@id": "https://searchprex.com/#organization" }
+        "publisher": { "@id": `${SITE}/#organization` }
       },
       {
         "@type": "WebPage",
-        "@id": "https://searchprex.com/#webpage",
-        "url": "https://searchprex.com",
+        "@id": `${SITE}/#webpage`,
+        "url": SITE,
         "name": "SEO Agency USA | Law Firm & Ecommerce SEO | SearchPrex",
-        "isPartOf": { "@id": "https://searchprex.com/#website" },
-        "about": { "@id": "https://searchprex.com/#organization" }
+        "isPartOf": { "@id": `${SITE}/#website` },
+        "about": { "@id": `${SITE}/#organization` }
       }
     ]
   };
@@ -183,66 +203,3 @@ export default async function Home() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
