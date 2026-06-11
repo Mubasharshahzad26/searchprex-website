@@ -10,7 +10,7 @@ import { caseStudies, detailUrl, FAQS } from "./data";
  
 const SITE = "https://www.searchprex.com";
 // TODO: replace with Mubashar's exact LinkedIn profile URL before launch.
-const LINKEDIN_URL = "https://www.linkedin.com/";
+const LINKEDIN_URL = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
  
 export const metadata: Metadata = {
   title: "All SEO Case Studies — Verified GSC Results | SearchPrex",

@@ -208,7 +208,7 @@ export const caseStudies: CaseStudy[] = [
     headline: "Top-10 rankings for high-intent kitchen remodel keywords.",
     badgeColor: "#7c3aed",
     badgeBg: "#f3e8ff",
-    image: "/images/kitchen-ranking.jpg",
+    video: "zRcTc2HqDwU",
     featured: false,
     slug: { industry: "remodeling", client: "kitchen-cabinets" },
     challenge:
@@ -290,10 +290,3 @@ export const FAQS = [
     a: "The founder leads every account — no juniors, no outsourced fluff. You work directly with the person who built the strategies behind these results.",
   },
 ];
- 
-
-
-
-
-
-
