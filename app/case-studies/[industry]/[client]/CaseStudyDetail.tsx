@@ -70,8 +70,8 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
             {/* Hero metrics — big, proof-first (CRO) */}
             <motion.div variants={fadeUp} className="mb-8 grid max-w-2xl grid-cols-3 gap-4">
               {cs.metrics.map((m) => (
-                <div key={m.l} className="rounded-2xl border border-[#d4d8e3] bg-white p-4 text-center">
-                  <p className="text-2xl font-black sm:text-3xl" style={{ color: GREEN }}>{m.v}</p>
+                <div key={m.l} className="rounded-2xl border border-[#d4d8e3] bg-white p-3 text-center sm:p-4">
+                  <p className="text-xl font-black sm:text-2xl md:text-3xl" style={{ color: GREEN }}>{m.v}</p>
                   <p className="mt-1 text-[11px] uppercase tracking-wide text-[#64748b]">{m.l}</p>
                 </div>
               ))}
@@ -302,7 +302,7 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
  
       {/* ── FLOATING STICKY CTA (CRO) ── */}
       <Link href="/free-audit"
-        className="fixed bottom-5 right-5 z-30 inline-flex items-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105"
+        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
         style={{ background: GREEN }}>
         <BarChart3 className="h-4 w-4" /> Reality Check
       </Link>
@@ -347,9 +347,3 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
   );
 }
  
-
-
-
-
-
-

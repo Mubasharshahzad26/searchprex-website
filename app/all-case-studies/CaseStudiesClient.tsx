@@ -144,7 +144,7 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
             </span>
           </motion.div>
           <motion.h1 variants={fadeUp}
-            className="mb-5 text-5xl font-black leading-tight text-[#0a0f2e] md:text-6xl">
+            className="mb-5 text-4xl font-black leading-tight text-[#0a0f2e] sm:text-5xl md:text-6xl">
             SEO Case Studies That Drive <span style={{ color: GREEN }}>Real Revenue</span>
           </motion.h1>
           <motion.p variants={fadeUp} className="mb-8 text-lg leading-relaxed text-[#475569]">
@@ -170,7 +170,7 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
             <div className="relative grid grid-cols-2 gap-x-6 gap-y-8 text-center md:grid-cols-4">
               {bigStats.map((s, i) => (
                 <div key={i} className={i > 0 ? "md:border-l md:border-white/10" : ""}>
-                  <p className="text-4xl font-black md:text-5xl" style={{ color: GREEN }}>{s.v}</p>
+                  <p className="text-3xl font-black sm:text-4xl md:text-5xl" style={{ color: GREEN }}>{s.v}</p>
                   <p className="mt-2 text-xs uppercase tracking-widest text-white/60">{s.l}</p>
                 </div>
               ))}
@@ -359,9 +359,9 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                         <span className="absolute left-3 top-3 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide"
                           style={{ backgroundColor: cs.badgeBg, color: cs.badgeColor }}>{cs.seoType}</span>
  
-                        {/* Hover overlay CTA (CRO) */}
-                        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent pb-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          <span className="inline-flex translate-y-3 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 group-hover:translate-y-0"
+                        {/* Overlay CTA — always visible on mobile (no hover on touch), hover-reveal on desktop */}
+                        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent pb-5 opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100">
+                          <span className="inline-flex translate-y-0 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 sm:translate-y-3 sm:group-hover:translate-y-0"
                             style={{ background: GREEN }}>
                             View Full Case Study <ArrowRight className="h-4 w-4" />
                           </span>
@@ -485,7 +485,7 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
  
       {/* ━━━ FLOATING STICKY CTA ━━━ */}
       <button onClick={openModal}
-        className="fixed bottom-5 right-5 z-30 inline-flex items-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105"
+        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
         style={{ background: GREEN }}>
         <BarChart3 className="h-4 w-4" /> Reality Check
       </button>
@@ -611,3 +611,4 @@ function FAQItem({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+ 
