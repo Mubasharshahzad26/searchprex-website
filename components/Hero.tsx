@@ -165,9 +165,9 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-center gap-8 py-6 lg:grid-cols-2 lg:gap-12 lg:py-8">
+          <div className="grid items-center gap-8 py-6 lg:grid-cols-2 lg:gap-12 lg:py-10">
  
-            {/* ── Left Content ── */}
+            {/* ── Left Content — Toptal-minimal: headline, paragraph, one button ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -175,7 +175,7 @@ export default function Hero({ heroImage }: HeroProps) {
               className="text-center lg:text-left"
             >
               {/* Live pill */}
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
@@ -185,7 +185,7 @@ export default function Hero({ heroImage }: HeroProps) {
                 </span>
               </div>
  
-              {/* ── Dynamic H1 — simple charcoal (no underline) ── */}
+              {/* ── Dynamic H1 — Toptal-style thick underline on the emphasis line ── */}
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={current.id}
@@ -193,12 +193,17 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.3 }}
-                  className="mb-3 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl"
+                  className="mb-5 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
                   style={{ color: CHARCOAL }}
                 >
                   {current.headline}
                   <br />
-                  <span>{current.emphasis}</span>
+                  <span
+                    className="inline-block border-b-[5px] pb-1"
+                    style={{ borderColor: CHARCOAL }}
+                  >
+                    {current.emphasis}
+                  </span>
                 </motion.h1>
               </AnimatePresence>
  
@@ -210,7 +215,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="mx-auto mb-4 max-w-xl text-base leading-relaxed lg:mx-0"
+                  className="mx-auto mb-7 max-w-xl text-base leading-relaxed lg:mx-0 lg:text-lg"
                   style={{ color: BODY }}
                 >
                   {current.sub}
@@ -240,54 +245,26 @@ export default function Hero({ heroImage }: HeroProps) {
                 )}
               </div>
  
-              {/* Secondary link — only on Law Firm (photo) persona to avoid duplicate */}
+              {/* Secondary link + trust note — one quiet line each (Toptal whitespace) */}
               {current.media === "photo" ? (
-                <div className="mt-3 flex justify-center lg:justify-start">
+                <div className="mt-4 flex justify-center lg:justify-start">
                   <Link href="/case-studies" className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5" style={{ color: GREEN_DARK }}>
                     View our case studies <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               ) : (
-                <div className="mt-3 flex justify-center lg:justify-start">
+                <div className="mt-4 flex justify-center lg:justify-start">
                   <Link href="/services" className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5" style={{ color: GREEN_DARK }}>
                     Explore our services <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               )}
  
-              {/* Sub-note */}
-              <div className="mt-3 mb-6 flex items-center justify-center gap-1.5 lg:justify-start">
+              <div className="mt-3 flex items-center justify-center gap-1.5 lg:justify-start">
                 <CheckCircle className="h-4 w-4 flex-shrink-0" style={{ color: GREEN }} aria-hidden="true" />
                 <span className="text-sm" style={{ color: BODY }}>
                   Free 30-min call · No commitment · Reply in 24hrs
                 </span>
-              </div>
- 
-              {/* EEAT Badges */}
-              <div className="rounded-xl border border-white/60 bg-white/50 px-3 py-3 backdrop-blur-sm">
-                <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
-                  Verified &amp; Listed On
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {eeatLinks.map((platform) => (
-                    <a
-                      key={platform.label}
-                      href={platform.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={`SearchPrex on ${platform.label}`}
-                      className="group flex items-center gap-1.5 rounded-lg border border-[#e5e7eb] bg-white px-2.5 py-1.5 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
-                    >
-                      <span className="flex-shrink-0 transition-transform group-hover:scale-110">
-                        {platform.icon}
-                      </span>
-                      <div>
-                        <p className="text-[10px] font-semibold leading-none text-[#0a0f2e]">{platform.label}</p>
-                        <p className="text-[9px] font-medium leading-tight" style={{ color: platform.color }}>{platform.sub}</p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
               </div>
             </motion.div>
  
@@ -408,6 +385,33 @@ export default function Hero({ heroImage }: HeroProps) {
             </motion.div>
  
           </div>
+ 
+          {/* ── EEAT strip — moved OUT of the hero column (Toptal keeps the hero clean) ── */}
+          <div className="pb-8">
+            <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#94a3b8] lg:text-left">
+              Verified &amp; Listed On
+            </p>
+            <div className="flex flex-wrap justify-center gap-1.5 lg:justify-start">
+              {eeatLinks.map((platform) => (
+                <a
+                  key={platform.label}
+                  href={platform.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`SearchPrex on ${platform.label}`}
+                  className="group flex items-center gap-1.5 rounded-lg border border-[#e5e7eb] bg-white px-2.5 py-1.5 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
+                >
+                  <span className="flex-shrink-0 transition-transform group-hover:scale-110">
+                    {platform.icon}
+                  </span>
+                  <div>
+                    <p className="text-[10px] font-semibold leading-none text-[#0a0f2e]">{platform.label}</p>
+                    <p className="text-[9px] font-medium leading-tight" style={{ color: platform.color }}>{platform.sub}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
  
         {/* Credentials strip — directly below hero (Toptal-style) */}
@@ -417,66 +421,3 @@ export default function Hero({ heroImage }: HeroProps) {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
