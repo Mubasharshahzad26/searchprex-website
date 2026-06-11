@@ -1,11 +1,23 @@
 "use client";
  
+// app/tools/ToolsClient.tsx
+// Tools page UI. Improvements over the old version:
+// 1. Cards sorted live → pro → soon (dead cards no longer sit mid-grid)
+// 2. Stats reframed (no more "1 live now" underselling)
+// 3. Founder E-E-A-T strip with case-study link
+// 4. Mid-page audit CTA — converts tool users (hot leads) into audits
+// 5. FAQ (matches FAQPage schema in page.tsx) + floating Reality Check CTA
+ 
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Code2, Search, FileText, Bot, TrendingUp,
-  CheckCircle, ArrowRight, Sparkles, Zap, Lock
+  Code2, Search, FileText, Bot, TrendingUp, CheckCircle, ArrowRight,
+  Sparkles, Zap, Lock, Linkedin, BadgeCheck, BarChart3, ChevronDown,
 } from "lucide-react";
+ 
+const GREEN = "#3eb489";
+const GREEN_DARK = "#2f9670";
+const PURPLE = "#534AB7";
  
 const tools = [
   {
@@ -20,6 +32,19 @@ const tools = [
     status: "live",
     href: "/tools/schema-generator",
     stats: "6 schema types",
+  },
+  {
+    id: "content-generator",
+    icon: Sparkles,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    label: "SEO Content Generator",
+    desc: "Generate SEO-optimized product descriptions, meta tags, and blog outlines — powered by AI.",
+    tags: ["AI Content", "Product Descriptions", "Meta Tags"],
+    status: "pro",
+    href: "/nicheseopro",
+    stats: "NicheSEO Pro",
   },
   {
     id: "serp-simulator",
@@ -73,29 +98,19 @@ const tools = [
     href: "/tools/keyword-difficulty",
     stats: "Any keyword",
   },
-  {
-    id: "content-generator",
-    icon: Sparkles,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
-    label: "SEO Content Generator",
-    desc: "Generate SEO-optimized product descriptions, meta tags, and blog outlines — powered by AI.",
-    tags: ["AI Content", "Product Descriptions", "Meta Tags"],
-    status: "pro",
-    href: "/nicheseopro",
-    stats: "NicheSEO Pro",
-  },
 ];
  
+// Reframed: leads with strengths instead of "1 live now"
 const stats = [
-  { num: "6", label: "Tools planned" },
-  { num: "1", label: "Live now" },
   { num: "100%", label: "Free to use" },
   { num: "0", label: "Signup required" },
+  { num: "Daily", label: "Used on client work" },
+  { num: "GSC", label: "Verified workflows" },
 ];
  
-export default function ToolsPage() {
+type Faq = { q: string; a: string };
+ 
+export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
   return (
     <main className="bg-transparent min-h-screen">
  
@@ -138,7 +153,7 @@ export default function ToolsPage() {
         </div>
       </section>
  
-      {/* ── Tools Grid ── */}
+      {/* ── Tools Grid (sorted: live → pro → soon) ── */}
       <section className="py-16 bg-[#eeeef5]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -218,6 +233,74 @@ export default function ToolsPage() {
               </motion.div>
             ))}
           </div>
+ 
+          {/* ── Mid CTA — converts tool users into audit leads (CRO) ── */}
+          <div className="mt-12 flex flex-col items-center gap-3 rounded-2xl border border-[#e5e7eb] bg-white p-8 text-center">
+            <p className="text-xl font-black text-[#0a0f2e]">Tools find the problem. The audit fixes it.</p>
+            <p className="max-w-xl text-sm text-[#64748b]">
+              If a tool just surfaced an issue on your site, get the founder to review the whole picture —
+              free, with a 90-day roadmap, within 24 hours.
+            </p>
+            <Link href="/free-audit"
+              className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
+              style={{ background: GREEN }}>
+              <BarChart3 className="h-4 w-4" /> Get Free SEO Audit
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+ 
+      {/* ── Founder E-E-A-T strip ── */}
+      <section className="pb-16 bg-[#eeeef5]">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-5 rounded-2xl border border-[#e5e7eb] bg-white p-7 text-center md:flex-row md:text-left">
+            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full text-xl font-black text-white"
+              style={{ background: `linear-gradient(135deg, ${PURPLE}, ${GREEN})` }}>MS</div>
+            <div className="flex-1">
+              <div className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
+                <p className="font-black text-[#0a0f2e]">Built by Mubashar Shahzad — the analyst behind +476% organic growth</p>
+                <a href="https://www.linkedin.com/in/mubashar-shahzad-seo/" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold transition-all hover:scale-105"
+                  style={{ borderColor: "#0a66c2", color: "#0a66c2" }}>
+                  <Linkedin className="h-3.5 w-3.5" /> LinkedIn
+                </a>
+              </div>
+              <p className="mt-1.5 text-sm text-[#64748b]">
+                These are the same utilities used on real client projects — see the{" "}
+                <Link href="/all-case-studies" className="font-bold underline-offset-2 hover:underline" style={{ color: GREEN_DARK }}>
+                  verified case studies
+                </Link>{" "}
+                they helped produce.
+              </p>
+              <div className="mt-2.5 flex flex-wrap justify-center gap-2 md:justify-start">
+                <span className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold"
+                  style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
+                  <BadgeCheck className="h-3.5 w-3.5" /> Verified SEO Expert
+                </span>
+                <span className="rounded-lg border border-[#e2e8f0] px-2.5 py-1 text-xs font-semibold text-[#475569]">Semrush certified</span>
+                <span className="rounded-lg border border-[#e2e8f0] px-2.5 py-1 text-xs font-semibold text-[#475569]">HubSpot certified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+ 
+      {/* ── FAQ (matches FAQPage schema) ── */}
+      <section className="pb-16 bg-[#eeeef5]">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-center text-2xl font-black text-[#0a0f2e]">Quick Answers</h2>
+          <div className="space-y-3">
+            {faqs.map((f) => (
+              <details key={f.q} className="group rounded-2xl border border-[#e5e7eb] bg-white p-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-[#0a0f2e]">
+                  {f.q}
+                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-[#64748b] transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{f.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
  
@@ -252,13 +335,13 @@ export default function ToolsPage() {
         </div>
       </section>
  
+      {/* ── Floating CTA ── */}
+      <Link href="/free-audit"
+        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
+        style={{ background: GREEN }}>
+        <BarChart3 className="h-4 w-4" /> Reality Check
+      </Link>
+ 
     </main>
   );
 }
- 
-
-
-
-
-
-
