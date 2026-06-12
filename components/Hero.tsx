@@ -287,8 +287,8 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
                     {/* Photo */}
-                    <div className="relative z-0 shrink-0 lg:-mt-20">
-                      <div className="relative aspect-[3/4] w-[360px] sm:w-[430px]">
+                    <div className="relative z-0 shrink-0 lg:-mt-24">
+                      <div className="relative aspect-[3/4] w-[400px] sm:w-[480px] lg:w-[540px]">
                         <Image
                           src="/images/mubashar-transparent.png"
                           alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
@@ -391,7 +391,7 @@ export default function Hero({ heroImage }: HeroProps) {
         {/* ── Credentials carousel — overlaps the photo bottom, exactly like
             Toptal's expert cards. Overlap only on the photo persona; the video
             personas keep normal flow so client logos aren't covered. ── */}
-        <div className={`relative z-10 ${current.media === "photo" ? "-mt-6 sm:-mt-10 lg:-mt-24" : "mt-0"}`}>
+        <div className={`relative z-10 ${current.media === "photo" ? "-mt-10 sm:-mt-16 lg:-mt-32" : "mt-0"}`}>
           <Certifications />
         </div>
  
@@ -425,3 +425,4 @@ export default function Hero({ heroImage }: HeroProps) {
     </>
   );
 }
+ 
