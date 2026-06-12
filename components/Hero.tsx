@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase } from "lucide-react";
-import { useState } from "react";
-import Certifications from "@/components/Certifications";
+import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase, PenLine, TrendingUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import Certifications, { credentials } from "@/components/Certifications";
  
 /* ─── Toptal-like palette ─── */
 const CHARCOAL = "#1c1c24";   // Toptal heading charcoal (softer than navy)
@@ -129,6 +129,16 @@ function VideoCard({ id, caption }: { id: string; caption: string }) {
  
 export default function Hero({ heroImage }: HeroProps) {
   const [activePersona, setActivePersona] = useState(0);
+ 
+  // Toptal-style sync: hero card + credentials carousel rotate together
+  const [credIndex, setCredIndex] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setCredIndex((i) => (i + 1) % credentials.length);
+    }, 3500);
+    return () => clearInterval(t);
+  }, []);
+  const activeCred = credentials[credIndex];
  
   // Direct Calendly link — opens instantly in a new tab (no slow popup iframe)
   const CALENDLY_URL = "https://calendly.com/contact-searchprex/30min";
@@ -286,7 +296,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
-                    {/* Photo */}
+                    {/* Photo + floating GSC-proof chips (CRO: verified numbers in first viewport) */}
                     <div className="relative z-0 shrink-0 lg:-mt-28">
                       <div className="relative aspect-[3/4] w-[330px] sm:w-[390px] lg:w-[460px]">
                         <Image
@@ -296,30 +306,87 @@ export default function Hero({ heroImage }: HeroProps) {
                           priority
                           className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
                         />
+ 
+                        {/* Chip 1 — clicks (top-left of portrait) */}
+                        <motion.div
+                          animate={{ y: [0, -7, 0] }}
+                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute left-0 top-[26%] z-10 hidden -translate-x-1/3 lg:block"
+                        >
+                          <Link
+                            href="/case-studies/ecommerce/michigan-outdoor-sports"
+                            className="flex items-center gap-2 rounded-xl border border-[#e8eaf0] bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5"
+                            title="Michigan Outdoor Sports case study"
+                          >
+                            <TrendingUp className="h-4 w-4 shrink-0" style={{ color: GREEN_DARK }} />
+                            <span>
+                              <span className="block text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+476%</span>
+                              <span className="mt-0.5 block text-[9px] leading-tight text-[#94a3b8]">Organic clicks · GSC verified</span>
+                            </span>
+                          </Link>
+                        </motion.div>
+ 
+                        {/* Chip 2 — revenue (lower-left of portrait) */}
+                        <motion.div
+                          animate={{ y: [0, -7, 0] }}
+                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
+                          className="absolute bottom-[22%] left-0 z-10 hidden -translate-x-1/4 lg:block"
+                        >
+                          <Link
+                            href="/case-studies/ecommerce/smk-store"
+                            className="flex items-center gap-2 rounded-xl border border-[#e8eaf0] bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5"
+                            title="SMK Store case study"
+                          >
+                            <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
+                            <span>
+                              <span className="block text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+75%</span>
+                              <span className="mt-0.5 block text-[9px] leading-tight text-[#94a3b8]">US revenue · 2 months</span>
+                            </span>
+                          </Link>
+                        </motion.div>
                       </div>
                     </div>
  
                     {/* Credential card — Toptal anatomy: map · name · verified · role · previously-at */}
-                    <div className="relative z-10 w-56 shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:-ml-12 lg:mt-2">
+                    <div className="relative z-10 w-64 shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:-ml-12 lg:mt-2">
                       {/* Dotted world-map area (tall, like Toptal) */}
-                      <div className="relative mb-4 h-16 w-full">
+                      <div className="relative mb-4 h-24 w-full">
                         <div className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0)", backgroundSize: "6px 6px" }} />
                         <span className="absolute left-[30%] top-[42%] h-2 w-2 rounded-full" style={{ background: "#2f6fed" }} />
                       </div>
  
                       <p className="text-[15px] font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
  
-                      <a
-                        href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-1.5 flex items-center gap-1.5 transition-opacity hover:opacity-80"
-                      >
-                        <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
-                        <span className="text-[11px] font-bold" style={{ color: GREEN_DARK }}>
-                          Verified Expert <span className="font-medium" style={{ color: BODY }}>in SEO</span>
-                        </span>
-                      </a>
+                      {/* Rotating credential line — synced with the carousel below (Toptal effect) */}
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={credIndex}
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{ duration: 0.25 }}
+                        >
+                          <a
+                            href={activeCred.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-1.5 flex items-center gap-1.5 transition-opacity hover:opacity-80"
+                          >
+                            {activeCred.isArticle ? (
+                              <PenLine className="h-4 w-4 shrink-0" style={{ color: PURPLE }} />
+                            ) : (
+                              <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
+                            )}
+                            <span className="text-[11px] font-bold" style={{ color: activeCred.isArticle ? PURPLE : GREEN_DARK }}>
+                              {activeCred.isArticle ? (
+                                <>Published Author <span className="font-medium" style={{ color: BODY }}>on {activeCred.source}</span></>
+                              ) : (
+                                <>Verified Expert <span className="font-medium" style={{ color: BODY }}>in {activeCred.specialty}</span></>
+                              )}
+                            </span>
+                          </a>
+                        </motion.div>
+                      </AnimatePresence>
  
                       <a
                         href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
@@ -381,7 +448,7 @@ export default function Hero({ heroImage }: HeroProps) {
             Toptal's expert cards. Overlap only on the photo persona; the video
             personas keep normal flow so client logos aren't covered. ── */}
         <div className={`relative z-10 ${current.media === "photo" ? "-mt-4 sm:-mt-10 lg:-mt-24" : "mt-0"}`}>
-          <Certifications />
+          <Certifications index={credIndex} onIndexChange={setCredIndex} />
         </div>
  
         {/* ── EEAT strip — quiet row below the carousel ── */}
