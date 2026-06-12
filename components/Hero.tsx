@@ -287,8 +287,8 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
                     {/* Photo */}
-                    <div className="relative z-0 shrink-0 lg:-mt-24">
-                      <div className="relative aspect-[3/4] w-[400px] sm:w-[480px] lg:w-[540px]">
+                    <div className="relative z-0 shrink-0 lg:-mt-8">
+                      <div className="relative aspect-[3/4] w-[330px] sm:w-[390px] lg:w-[460px]">
                         <Image
                           src="/images/mubashar-transparent.png"
                           alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
@@ -300,7 +300,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     </div>
  
                     {/* Credential card */}
-                    <div className="relative w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl lg:mt-2">
+                    <div className="relative z-10 w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl lg:-ml-16 lg:mt-16">
                       <div className="relative mb-3 h-10 w-full">
                         <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "7px 7px" }} />
                         <span className="absolute left-[22%] top-[35%] h-1.5 w-1.5 rounded-full" style={{ background: PURPLE }} />
@@ -391,7 +391,7 @@ export default function Hero({ heroImage }: HeroProps) {
         {/* ── Credentials carousel — overlaps the photo bottom, exactly like
             Toptal's expert cards. Overlap only on the photo persona; the video
             personas keep normal flow so client logos aren't covered. ── */}
-        <div className={`relative z-10 ${current.media === "photo" ? "-mt-10 sm:-mt-16 lg:-mt-32" : "mt-0"}`}>
+        <div className={`relative z-10 ${current.media === "photo" ? "-mt-4 sm:-mt-8 lg:-mt-14" : "mt-0"}`}>
           <Certifications />
         </div>
  
