@@ -141,7 +141,7 @@ export default function Hero({ heroImage }: HeroProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
-          <div className="relative z-20 flex justify-center pt-3 pb-0">
+          <div className="relative z-20 flex justify-center pt-2 pb-0">
             <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3 shadow-sm backdrop-blur-sm border border-white/80">
               <span className="text-xs font-medium text-[#64748b] whitespace-nowrap">
                 I&apos;m looking for
@@ -165,17 +165,17 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-start gap-8 pt-3 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-5">
+          <div className="grid items-start gap-8 pt-2 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-2">
  
             {/* ── Left Content — Toptal-minimal: headline, paragraph, one button ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center lg:pt-8 lg:text-left"
+              className="text-center lg:pt-3 lg:text-left"
             >
               {/* Live pill */}
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
@@ -425,4 +425,3 @@ export default function Hero({ heroImage }: HeroProps) {
     </>
   );
 }
- 
