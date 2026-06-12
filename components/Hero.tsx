@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Calendar, ExternalLink, Linkedin, Play } from "lucide-react";
+import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase } from "lucide-react";
 import { useState } from "react";
 import Certifications from "@/components/Certifications";
  
@@ -287,7 +287,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
                     {/* Photo */}
-                    <div className="relative z-0 shrink-0 lg:-mt-16">
+                    <div className="relative z-0 shrink-0 lg:-mt-28">
                       <div className="relative aspect-[3/4] w-[330px] sm:w-[390px] lg:w-[460px]">
                         <Image
                           src="/images/mubashar-transparent.png"
@@ -299,58 +299,47 @@ export default function Hero({ heroImage }: HeroProps) {
                       </div>
                     </div>
  
-                    {/* Credential card */}
-                    <div className="relative z-10 w-52 shrink-0 rounded-xl border border-[#e8eaf0] bg-white p-4 shadow-xl lg:-ml-16 lg:mt-16">
-                      <div className="relative mb-3 h-10 w-full">
-                        <div className="absolute inset-0 opacity-[0.18]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #64748b 1px, transparent 0)", backgroundSize: "7px 7px" }} />
-                        <span className="absolute left-[22%] top-[35%] h-1.5 w-1.5 rounded-full" style={{ background: PURPLE }} />
+                    {/* Credential card — Toptal anatomy: map · name · verified · role · previously-at */}
+                    <div className="relative z-10 w-56 shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:-ml-12 lg:mt-2">
+                      {/* Dotted world-map area (tall, like Toptal) */}
+                      <div className="relative mb-4 h-16 w-full">
+                        <div className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0)", backgroundSize: "6px 6px" }} />
+                        <span className="absolute left-[30%] top-[42%] h-2 w-2 rounded-full" style={{ background: "#2f6fed" }} />
                       </div>
-                      <p className="text-sm font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
+ 
+                      <p className="text-[15px] font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
+ 
                       <a
                         href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-1.5 flex items-start gap-1.5 transition-opacity hover:opacity-80"
+                        className="mt-1.5 flex items-center gap-1.5 transition-opacity hover:opacity-80"
                       >
-                        <CheckCircle className="mt-0.5 h-3 w-3 shrink-0" style={{ color: GREEN }} />
-                        <span className="text-[11px] font-bold leading-snug" style={{ color: GREEN_DARK }}>
-                          Founder &amp; Certified SEO Expert
-                          <ExternalLink className="ml-1 inline h-2.5 w-2.5" />
+                        <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
+                        <span className="text-[11px] font-bold" style={{ color: GREEN_DARK }}>
+                          Verified Expert <span className="font-medium" style={{ color: BODY }}>in SEO</span>
                         </span>
                       </a>
+ 
                       <a
                         href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-1.5 flex items-center gap-1.5 transition-opacity hover:opacity-80"
+                        className="mt-1 flex items-center gap-1.5 transition-opacity hover:opacity-80"
                       >
-                        <Linkedin className="h-3 w-3 shrink-0" style={{ color: "#0a66c2" }} />
-                        <span className="text-[11px] font-medium" style={{ color: "#0a66c2" }}>Verify on LinkedIn</span>
+                        <Briefcase className="h-3.5 w-3.5 shrink-0 text-[#94a3b8]" />
+                        <span className="text-[11px] font-medium" style={{ color: BODY }}>Founder &amp; SEO Strategist</span>
                       </a>
-                      <div className="mt-3 grid grid-cols-3 gap-1 border-t border-[#eef0f5] pt-3">
-                        <Link href="/case-studies" className="group transition-opacity hover:opacity-70" title="View case studies">
-                          <p className="text-sm font-black leading-none" style={{ color: GREEN_DARK }}>5+</p>
-                          <p className="mt-0.5 text-[8px] leading-tight text-[#94a3b8] group-hover:underline">Years Exp.</p>
-                        </Link>
-                        <Link href="/case-studies" className="group transition-opacity hover:opacity-70" title="Michigan Sports Outdoor case study">
-                          <p className="text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+476%</p>
-                          <p className="mt-0.5 text-[8px] leading-tight text-[#94a3b8] group-hover:underline">Clicks</p>
-                        </Link>
-                        <Link href="/case-studies" className="group transition-opacity hover:opacity-70" title="SMK Store ecommerce case study">
-                          <p className="text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+75%</p>
-                          <p className="mt-0.5 text-[8px] leading-tight text-[#94a3b8] group-hover:underline">Revenue</p>
-                        </Link>
-                      </div>
-                      <p className="mt-3 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
+ 
+                      <p className="mt-4 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
                       <a
                         href="https://www.timetechnologiesllc.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-black text-[#0a0f2e] transition-colors hover:text-[#534AB7] hover:underline"
+                        className="text-base font-black tracking-tight text-[#1c1c24] transition-colors hover:text-[#534AB7]"
                       >
                         Time Technologies LLC
                       </a>
-                      <div className="absolute -bottom-1.5 left-7 h-3 w-3 rotate-45 border-b border-r border-[#e8eaf0] bg-white" />
                     </div>
                   </motion.div>
                 ) : (
