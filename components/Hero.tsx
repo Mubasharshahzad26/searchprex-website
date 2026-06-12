@@ -165,7 +165,7 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-center gap-8 py-6 lg:grid-cols-2 lg:gap-12 lg:py-10">
+          <div className="grid items-center gap-8 pt-6 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-10">
  
             {/* ── Left Content — Toptal-minimal: headline, paragraph, one button ── */}
             <motion.div
@@ -287,7 +287,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
                     {/* Photo */}
-                    <div className="relative shrink-0 lg:-mt-20">
+                    <div className="relative z-0 shrink-0 lg:-mt-20">
                       <div className="relative aspect-[3/4] w-[360px] sm:w-[430px]">
                         <Image
                           src="/images/mubashar-transparent.png"
@@ -386,38 +386,42 @@ export default function Hero({ heroImage }: HeroProps) {
  
           </div>
  
-          {/* ── EEAT strip — moved OUT of the hero column (Toptal keeps the hero clean) ── */}
-          <div className="pb-8">
-            <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#94a3b8] lg:text-left">
-              Verified &amp; Listed On
-            </p>
-            <div className="flex flex-wrap justify-center gap-1.5 lg:justify-start">
-              {eeatLinks.map((platform) => (
-                <a
-                  key={platform.label}
-                  href={platform.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={`SearchPrex on ${platform.label}`}
-                  className="group flex items-center gap-1.5 rounded-lg border border-[#e5e7eb] bg-white px-2.5 py-1.5 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
-                >
-                  <span className="flex-shrink-0 transition-transform group-hover:scale-110">
-                    {platform.icon}
-                  </span>
-                  <div>
-                    <p className="text-[10px] font-semibold leading-none text-[#0a0f2e]">{platform.label}</p>
-                    <p className="text-[9px] font-medium leading-tight" style={{ color: platform.color }}>{platform.sub}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
  
-        {/* Credentials strip — directly below hero (Toptal-style) */}
-        <Certifications />
+        {/* ── Credentials carousel — overlaps the photo bottom, exactly like
+            Toptal's expert cards. Overlap only on the photo persona; the video
+            personas keep normal flow so client logos aren't covered. ── */}
+        <div className={`relative z-10 ${current.media === "photo" ? "-mt-6 sm:-mt-10 lg:-mt-24" : "mt-0"}`}>
+          <Certifications />
+        </div>
+ 
+        {/* ── EEAT strip — quiet row below the carousel ── */}
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-8 sm:px-6 lg:px-8">
+          <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+            Verified &amp; Listed On
+          </p>
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {eeatLinks.map((platform) => (
+              <a
+                key={platform.label}
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`SearchPrex on ${platform.label}`}
+                className="group flex items-center gap-1.5 rounded-lg border border-[#e5e7eb] bg-white px-2.5 py-1.5 shadow-sm transition-all hover:border-[#3eb489] hover:shadow-md"
+              >
+                <span className="flex-shrink-0 transition-transform group-hover:scale-110">
+                  {platform.icon}
+                </span>
+                <div>
+                  <p className="text-[10px] font-semibold leading-none text-[#0a0f2e]">{platform.label}</p>
+                  <p className="text-[9px] font-medium leading-tight" style={{ color: platform.color }}>{platform.sub}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
       </section>
     </>
   );
 }
- 
