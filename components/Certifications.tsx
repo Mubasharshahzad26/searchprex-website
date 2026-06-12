@@ -13,7 +13,7 @@ const SEMRUSH = "#ff642d";
   ⚠️ EDIT CERT NAMES (specialty) ⚠️
   Har Semrush PDF khol ke uska EXACT naam daalo. Links 100% real.
 */
-const credentials = [
+export const credentials = [
   { specialty: "SEO Fundamentals",       credType: "Certified by", source: "Semrush",            isArticle: false, href: "https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf" },
   { specialty: "On-Page & Technical SEO", credType: "Certified by", source: "Semrush",            isArticle: false, href: "https://static.semrush.com/academy/certificates/0053423184/mubashar-shahzad_2.pdf" },
   { specialty: "Content Strategy · SEO",  credType: "Published on", source: "HVAC Services Team", isArticle: true,  href: "https://www.hvacservicesteam.com/blog/best-time-to-install-a-new-ac-near-me-california-2026" },
@@ -39,17 +39,35 @@ function Mark({ isArticle }: { isArticle: boolean }) {
   );
 }
  
-export default function Certifications() {
-  const [index, setIndex] = useState(0);
+export default function Certifications({
+  index: extIndex,
+  onIndexChange,
+}: {
+  index?: number;
+  onIndexChange?: (i: number) => void;
+} = {}) {
+  const [intIndex, setIntIndex] = useState(0);
   const total = credentials.length;
+  const controlled = extIndex !== undefined;
+  const index = controlled ? (extIndex as number) : intIndex;
  
-  const next = useCallback(() => setIndex((i) => (i + 1) % total), [total]);
-  const prev = useCallback(() => setIndex((i) => (i - 1 + total) % total), [total]);
+  const setIndex = useCallback(
+    (v: number) => {
+      if (controlled) onIndexChange?.(v);
+      else setIntIndex(v);
+    },
+    [controlled, onIndexChange]
+  );
  
+  const next = useCallback(() => setIndex((index + 1) % total), [index, total, setIndex]);
+  const prev = useCallback(() => setIndex((index - 1 + total) % total), [index, total, setIndex]);
+ 
+  // Auto-rotate only when uncontrolled — when Hero controls us, Hero owns the timer
   useEffect(() => {
+    if (controlled) return;
     const t = setInterval(next, 3500);
     return () => clearInterval(t);
-  }, [next]);
+  }, [next, controlled]);
  
   return (
     /* div (not section) — seamlessly continues the hero (no divider, Toptal style).
