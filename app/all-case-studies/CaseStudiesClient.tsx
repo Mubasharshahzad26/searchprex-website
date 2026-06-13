@@ -591,7 +591,7 @@ function FSO({ label, color, text }: { label: string; color: string; text?: stri
   );
 }
  
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a }: { q: string; a?: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="overflow-hidden rounded-xl border border-[#e2e8f0] bg-white">

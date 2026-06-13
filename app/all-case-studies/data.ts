@@ -247,6 +247,27 @@ export const caseStudies: CaseStudy[] = [
       { v: "+0.5%", l: "CTR" },
     ],
   },
+  {
+    id: 10,
+    client: "Remit Choice Hub",
+    seoType: "Technical SEO",
+    industry: "SaaS",
+    location: "Global",
+    headline: "AI-powered financial information hub ranked for 500+ remittance keywords with instant answer optimization.",
+    badgeColor: "#185FA5",
+    badgeBg: "#E6F1FB",
+    video: "La-BCpoxcII",
+    featured: false,
+    slug: { industry: "saas", client: "remit-choice-hub" },
+    metrics: [
+      { v: "500+", l: "Keywords ranked" },
+      { v: "AI Overview", l: "Featured" },
+      { v: "100+", l: "Instant answers" },
+    ],
+    challenge: "Remit Choice Hub is an AI-powered information platform helping users find instant answers about money transfers, exchange rates, and remittance services.",
+    solution: "We architected the information hub for featured snippets and AI Overview eligibility.",
+    outcome: "The hub now ranks organically for 500+ financial information keywords.",
+  },
 ];
  
 // ── Helpers ──────────────────────────────────────────────────────────────
@@ -272,7 +293,7 @@ export const findBySlug = (industry: string, client: string) =>
 // Lives here (server-safe) so both page.tsx (FAQPage schema) and
 // CaseStudiesClient.tsx (FAQ accordion) can import it. It must NOT live in
 // a "use client" file, or server imports of it break at build time.
-export const FAQS = [
+export const FAQS: Array<{ q: string; a?: string; [key: string]: any }> = [
   {
     q: "How long does it take to see SEO results?",
     a: "It depends on the starting point, but across these case studies indexing and visibility recovery typically lands in 60–90 days, with compounding growth after that. We share progress against real Google Search Console data every month.",
@@ -290,3 +311,4 @@ export const FAQS = [
     a: "The founder leads every account — no juniors, no outsourced fluff. You work directly with the person who built the strategies behind these results.",
   },
 ];
+ 
