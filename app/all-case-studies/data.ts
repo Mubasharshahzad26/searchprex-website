@@ -247,13 +247,13 @@ export const caseStudies: CaseStudy[] = [
       { v: "+0.5%", l: "CTR" },
     ],
   },
-  {
+{
     id: 10,
     client: "Remit Choice Hub",
     seoType: "Technical SEO",
     industry: "SaaS",
     location: "Global",
-    headline: "AI-powered financial information hub ranked for 500+ remittance keywords with instant answer optimization.",
+    headline: "AI-powered financial information hub with 500+ intent-matched keywords and Google AI Overview featured placement.",
     badgeColor: "#185FA5",
     badgeBg: "#E6F1FB",
     video: "La-BCpoxcII",
@@ -262,14 +262,13 @@ export const caseStudies: CaseStudy[] = [
     metrics: [
       { v: "500+", l: "Keywords ranked" },
       { v: "AI Overview", l: "Featured" },
-      { v: "100+", l: "Instant answers" },
+      { v: "Live Demo", l: "Gemini-powered" },
     ],
-    challenge: "Remit Choice Hub is an AI-powered information platform helping users find instant answers about money transfers, exchange rates, and remittance services.",
-    solution: "We architected the information hub for featured snippets and AI Overview eligibility.",
-    outcome: "The hub now ranks organically for 500+ financial information keywords.",
+    challenge: "Remit Choice learned from leading Fintech Giants that users searching for remittance info need instant, intent-matched answers — not buried FAQ pages. Competitors offered basic FAQs; none provided AI-powered instant answers.",
+    solution: "Launched AI-powered information hub (January 2026) using Google Gemini API — structured for featured snippets, optimized for AI Overview citations, with intelligent search and spell-check.",
+    outcome: "Live demo ranks for 500+ financial keywords, featured in Google AI Overviews. Deployed at https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
   },
-];
- 
+  ]; 
 // ── Helpers ──────────────────────────────────────────────────────────────
  
 export const detailUrl = (cs: CaseStudy) =>
