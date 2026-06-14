@@ -288,19 +288,18 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                       <h3 className="mb-6 text-xl font-black leading-snug text-[#0a0f2e]">{cs.headline}</h3>
                       
                       {/* ━━━ DEMO LINK CTA BUTTON ━━━ */}
-                   
-{cs.demoLink && (
-  <a 
-    href={cs.demoLink} 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="mb-10 inline-flex items-center justify-center gap-3 rounded-xl px-7 py-4 text-base font-bold text-white transition-all hover:scale-[1.06] hover:shadow-2xl"
-    style={{ background: GREEN }}>
-    <Play className="h-6 w-6 fill-white" />
-    View Live Demo & Interact                  ← ✅ NAYA TEXT
-    <ExternalLink className="h-5 w-5" />
-  </a>
-)}
+                      {cs.demoLink && (
+                        <a 
+                          href={cs.demoLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="mb-10 inline-flex items-center justify-center gap-3 rounded-xl px-7 py-4 text-base font-bold text-white transition-all hover:scale-[1.06] hover:shadow-2xl"
+                          style={{ background: GREEN }}>
+                          <Play className="h-6 w-6 fill-white" />
+                          Find Live Demo of Our SaaS Solution
+                          <ExternalLink className="h-5 w-5" />
+                        </a>
+                      )}
  
                       <div className="space-y-4">
                         <FSO label="Challenge" color="#ef4444" text={cs.challenge} />
@@ -627,3 +626,7 @@ function FAQItem({ q, a }: { q: string; a?: string }) {
   );
 }
  
+
+
+
+
