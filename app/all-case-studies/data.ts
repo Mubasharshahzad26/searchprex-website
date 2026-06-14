@@ -1,6 +1,5 @@
 // app/case-studies/data.ts
-// Single source of truth for case studies. The hub page (page.tsx),
-// the filter bar, and the future detail pages all read from here.
+// Single source of truth for case studies.
  
 export type SeoType = "Ecommerce SEO" | "Local SEO" | "Technical SEO" | "Law Firm SEO";
  
@@ -17,14 +16,12 @@ export interface CaseStudy {
   location: string;
   headline: string;
   metrics: Metric[];
-  video?: string; // YouTube id
+  video?: string;
   image?: string;
   featured: boolean;
   badgeColor: string;
   badgeBg: string;
-  // Detail page URL parts -> /case-studies/[industry]/[client]
   slug: { industry: string; client: string };
-  // Full story (used on featured cards + detail page)
   challenge?: string;
   solution?: string;
   outcome?: string;
@@ -247,9 +244,9 @@ export const caseStudies: CaseStudy[] = [
       { v: "+0.5%", l: "CTR" },
     ],
   },
-{
+  {
     id: 10,
-    client: "Remit Choice Hub",
+    client: "Remit Choice",
     seoType: "Technical SEO",
     industry: "SaaS",
     location: "Global",
@@ -258,7 +255,7 @@ export const caseStudies: CaseStudy[] = [
     badgeBg: "#E6F1FB",
     video: "La-BCpoxcII",
     featured: false,
-    slug: { industry: "saas", client: "remit-choice-hub" },
+    slug: { industry: "saas", client: "remit-choice" },
     metrics: [
       { v: "500+", l: "Keywords ranked" },
       { v: "AI Overview", l: "Featured" },
@@ -266,15 +263,15 @@ export const caseStudies: CaseStudy[] = [
     ],
     challenge: "Remit Choice learned from leading Fintech Giants that users searching for remittance info need instant, intent-matched answers — not buried FAQ pages. Competitors offered basic FAQs; none provided AI-powered instant answers.",
     solution: "Launched AI-powered information hub (January 2026) using Google Gemini API — structured for featured snippets, optimized for AI Overview citations, with intelligent search and spell-check.",
-    outcome: "Live demo ranks for 500+ financial keywords, featured in Google AI Overviews. Deployed at https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
+    outcome: "Live demo ranks for 500+ financial keywords, featured in Google AI Overviews. View Live Demo: https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
   },
-  ]; 
+];
+ 
 // ── Helpers ──────────────────────────────────────────────────────────────
  
 export const detailUrl = (cs: CaseStudy) =>
   `/case-studies/${cs.slug.industry}/${cs.slug.client}`;
  
-// Filter options are DERIVED from the data, so a category never shows up empty.
 export const seoTypeOptions = (): SeoType[] =>
   Array.from(new Set(caseStudies.map((c) => c.seoType)));
  
@@ -289,9 +286,7 @@ export const findBySlug = (industry: string, client: string) =>
   );
  
 // ── FAQ content ──────────────────────────────────────────────────────────
-// Lives here (server-safe) so both page.tsx (FAQPage schema) and
-// CaseStudiesClient.tsx (FAQ accordion) can import it. It must NOT live in
-// a "use client" file, or server imports of it break at build time.
+ 
 export const FAQS: Array<{ q: string; a?: string; [key: string]: any }> = [
   {
     q: "How long does it take to see SEO results?",
@@ -310,4 +305,3 @@ export const FAQS: Array<{ q: string; a?: string; [key: string]: any }> = [
     a: "The founder leads every account — no juniors, no outsourced fluff. You work directly with the person who built the strategies behind these results.",
   },
 ];
- 
