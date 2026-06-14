@@ -296,7 +296,7 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                           className="mb-10 inline-flex items-center justify-center gap-3 rounded-xl px-7 py-4 text-base font-bold text-white transition-all hover:scale-[1.06] hover:shadow-2xl"
                           style={{ background: GREEN }}>
                           <Play className="h-6 w-6 fill-white" />
-                          View our SaaS Solution
+                          Find Live Demo of Our SaaS Solution
                           <ExternalLink className="h-5 w-5" />
                         </a>
                       )}

@@ -246,27 +246,30 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-  id: 10,
-  client: "Remit Choice",
-  seoType: "Technical SEO",
-  industry: "SaaS",
-  location: "Global",
-  demoLink: "https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",  // ← TOP MEIN!
-  headline: "From zero to 500+ ranked keywords — AI-powered remittance hub featured in Google AI Overviews.",
-  badgeColor: "#185FA5",
-  badgeBg: "#E6F1FB",
-  video: "La-BCpoxcII",
-  featured: false,
-  slug: { industry: "saas", client: "remit-choice" },
-  metrics: [
-    { v: "500+", l: "Keywords ranked" },
-    { v: "Google AI", l: "Overview featured" },
-    { v: "Instant", l: "Answers powered" },
-  ],
-  challenge: "Remit Choice users were searching for instant remittance answers but found only buried FAQ pages and scattered documentation. Competitors offered basic information; none provided AI-powered instant solutions.",
-  solution: "Built AI-powered information hub (January 2026) using Google Gemini API with intelligent search, featured snippet optimization, AI Overview eligibility architecture, real-time currency conversion, and spell-check integration.",
-  outcome: "Ranked organically for 500+ financial keywords. Featured in Google AI Overviews. Users get instant answers in seconds instead of searching through pages of documentation.",
- },
+    id: 10,
+    client: "Remit Choice",
+    seoType: "Technical SEO",
+    industry: "Fintech",
+    location: "Global",
+    demoLink: "https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
+    headline: "AI-powered remittance search: 500+ keywords ranked, Google AI Overview featured.",
+    badgeColor: "#185FA5",
+    badgeBg: "#E6F1FB",
+    video: "La-BCpoxcII",
+    featured: false,
+    slug: { industry: "fintech", client: "remit-choice" },
+    metrics: [
+      { v: "500+", l: "Keywords ranked" },
+      { v: "Google AI", l: "Overview featured" },
+      { v: "Instant", l: "Answers powered" },
+    ],
+    challenge:
+      "Remit Choice users were searching for instant remittance answers but found only buried FAQ pages and scattered documentation. Competitors offered basic information; none provided AI-powered instant solutions.",
+    solution:
+      "Built AI-powered information hub (January 2026) using Google Gemini API with intelligent search, featured snippet optimization, AI Overview eligibility architecture, real-time currency conversion, and spell-check integration.",
+    outcome:
+      "Ranked organically for 500+ financial keywords. Featured in Google AI Overviews. Users get instant answers in seconds instead of searching through pages of documentation.",
+  },
 ];
  
 // ── Helpers ──────────────────────────────────────────────────────────────
@@ -300,10 +303,11 @@ export const FAQS: Array<{ q: string; a?: string; [key: string]: any }> = [
   },
   {
     q: "Which industries and SEO types do you cover?",
-    a: "Ecommerce, local services, technical and law firm SEO across both US and international markets. Use the filters above to see results for a specific SEO type or industry.",
+    a: "Ecommerce, local services, technical, fintech and law firm SEO across both US and international markets. Use the filters above to see results for a specific SEO type or industry.",
   },
   {
     q: "Who actually works on my account?",
     a: "The founder leads every account — no juniors, no outsourced fluff. You work directly with the person who built the strategies behind these results.",
   },
 ];
+ 
