@@ -25,6 +25,7 @@ export interface CaseStudy {
   challenge?: string;
   solution?: string;
   outcome?: string;
+  demoLink?: string;
 }
  
 export const caseStudies: CaseStudy[] = [
@@ -265,6 +266,28 @@ export const caseStudies: CaseStudy[] = [
     solution: "Launched AI-powered information hub (January 2026) using Google Gemini API — structured for featured snippets, optimized for AI Overview citations, with intelligent search and spell-check.",
     outcome: "Live demo ranks for 500+ financial keywords, featured in Google AI Overviews. View Live Demo: https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
   },
+  {
+  id: 10,
+  client: "Remit Choice",
+  seoType: "Technical SEO",
+  industry: "SaaS",
+  location: "Global",
+  headline: "Ranked 500+ financial keywords with Google AI Overview placement — AI-powered instant remittance answers.",
+  badgeColor: "#185FA5",
+  badgeBg: "#E6F1FB",
+  video: "La-BCpoxcII",
+  featured: false,
+  slug: { industry: "saas", client: "remit-choice" },
+  metrics: [
+    { v: "500+", l: "Keywords ranked" },
+    { v: "AI Overview", l: "Featured" },
+    { v: "Live Demo", l: "Gemini-powered" },
+  ],
+  challenge: "Remit Choice learned from leading Fintech Giants that users searching for remittance info need instant, intent-matched answers — not buried FAQ pages. Competitors offered basic FAQs; none provided AI-powered instant solutions.",
+  solution: "Launched AI-powered information hub (January 2026) using Google Gemini API — structured for featured snippets, optimized for AI Overview citations, built intelligent search with popular query suggestions, integrated spell-check and currency conversion.",
+  outcome: "Live demo now ranks organically for 500+ financial keywords and gets cited in Google AI Overviews. Users get instant answers instead of manually searching.",
+  demoLink: "https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
+},
 ];
  
 // ── Helpers ──────────────────────────────────────────────────────────────

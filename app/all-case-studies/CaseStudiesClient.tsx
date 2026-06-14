@@ -7,7 +7,7 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowRight, CheckCircle, Play, X, Phone, Sparkles, ShieldCheck,
   Linkedin, BadgeCheck, Filter, MapPin, ChevronDown, BarChart3, Bot,
-  Youtube, RotateCcw,
+  Youtube, RotateCcw, ExternalLink,
 } from "lucide-react";
 import {
   caseStudies, featuredStudies, seoTypeOptions, industryOptions,
