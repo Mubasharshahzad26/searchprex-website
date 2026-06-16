@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import NicheSEOPro from "@/components/NicheSEOPro";
+import BulkContentGen from "@/components/BulkContentGen";
+import KeywordMagicTool from "@/components/KeywordMagicTool";
 import ChatWidget from "@/components/ChatWidget";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
+ 
 export const metadata: Metadata = {
   title: "NicheSEOPro - SEO Tool for Law Firms & Ecommerce | Free Trial",
   description:
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
+ 
 const features = [
   {
     title: "Industry-Specific Audits",
@@ -54,7 +56,7 @@ const features = [
       "Generate beautiful, branded reports for your clients or stakeholders with one click.",
   },
 ];
-
+ 
 export default function ToolPage() {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -71,7 +73,7 @@ export default function ToolPage() {
     "description": "SEO tool built for law firms, ecommerce stores, and local businesses.",
     "url": "https://searchprex.com/tool"
   };
-
+ 
   return (
     <>
       <script
@@ -128,10 +130,52 @@ export default function ToolPage() {
             </div>
           </div>
         </section>
-
+ 
         {/* NicheSEOPro Component */}
         <NicheSEOPro />
-
+ 
+        {/* Keyword Magic Tool Section */}
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl bg-gradient-to-br from-[#2563eb]/5 to-[#534AB7]/5 p-8 sm:p-12 border border-[#2563eb]/10">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+                  Keyword Magic Tool
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-[#64748b]">
+                  Discover keyword opportunities with real search volume, CPC, and competition data. 
+                  Perfect for finding high-value keywords for law firms and ecommerce stores.
+                </p>
+              </div>
+ 
+              <div className="bg-white rounded-xl p-8 border border-[#e5e7eb]">
+                <KeywordMagicTool />
+              </div>
+            </div>
+          </div>
+        </section>
+ 
+        {/* Bulk Content Generator Section */}
+        <section className="bg-[#f8f9fa] py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl bg-white p-8 sm:p-12">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+                  Generate Content at Scale
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-[#64748b]">
+                  Use AI to generate bulk SEO content for your websites. Perfect for law firms, 
+                  ecommerce stores, and local service businesses that need content fast.
+                </p>
+              </div>
+ 
+              <div className="mt-12">
+                <BulkContentGen />
+              </div>
+            </div>
+          </div>
+        </section>
+ 
         {/* Features Grid */}
         <section id="features" className="bg-white py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -144,7 +188,7 @@ export default function ToolPage() {
                 intelligence to give you an unfair advantage.
               </p>
             </div>
-
+ 
             <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {features.map((feature) => (
                 <div key={feature.title} className="rounded-2xl border border-[#e5e7eb] p-8">
@@ -157,7 +201,7 @@ export default function ToolPage() {
             </div>
           </div>
         </section>
-
+ 
         {/* CTA */}
         <section className="bg-[#2563eb] py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
@@ -182,3 +226,4 @@ export default function ToolPage() {
     </>
   );
 }
+ 
