@@ -3,10 +3,23 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import NicheSEOPro from "@/components/NicheSEOPro";
 import BulkContentGen from "@/components/BulkContentGen";
-import KeywordMagicTool from "@/components/KeywordMagicTool";
+import KeywordMagicTool from "@/components/keyword/keyword-tool";
 import ChatWidget from "@/components/ChatWidget";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
+ 
+const initialKeywordData = {
+  seed: '',
+  location: 'United States',
+  source: 'estimated' as const,
+  total: 0,
+  summary: {
+    totalVolume: 0,
+    avgDifficulty: 0,
+    avgCpc: 0,
+  },
+  keywords: [],
+};
  
 export const metadata: Metadata = {
   title: "NicheSEOPro - SEO Tool for Law Firms & Ecommerce | Free Trial",
@@ -149,7 +162,7 @@ export default function ToolPage() {
               </div>
  
               <div className="bg-white rounded-xl p-8 border border-[#e5e7eb]">
-                <KeywordMagicTool />
+                <KeywordMagicTool initial={initialKeywordData} />
               </div>
             </div>
           </div>
