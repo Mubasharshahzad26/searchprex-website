@@ -1,5 +1,5 @@
-import { Shell } from '@/components/dashboard/shell'
-import { BulkGenerator } from '@/components/bulk/bulk-generator'
+import { Shell } from "../../../components/dashboard/shell";
+import { BulkGenerator } from "../../../components/bulk/bulk-generator";
 
 export const metadata = {
   title: 'Bulk Content Generator — Rankforge',
