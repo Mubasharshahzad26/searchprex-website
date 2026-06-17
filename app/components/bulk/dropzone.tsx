@@ -1,12 +1,12 @@
 'use client'
-
+ 
 import { useRef, useState } from 'react'
-import { CSV_TEMPLATE, parseCsv, type ProductInput } from '@/lib/content'
+import { CSV_TEMPLATE, parseCSV, type ProductInput } from '@/lib/content'
 import { UploadCloud, FileSpreadsheet, Download, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
+ 
 const MAX_PRODUCTS = 500
-
+ 
 export function Dropzone({
   onLoaded,
 }: {
@@ -15,7 +15,7 @@ export function Dropzone({
   const inputRef = useRef<HTMLInputElement>(null)
   const [dragging, setDragging] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
+ 
   async function handleFile(file: File) {
     setError(null)
     if (!file.name.toLowerCase().endsWith('.csv')) {
@@ -23,7 +23,7 @@ export function Dropzone({
       return
     }
     const text = await file.text()
-    const products = parseCsv(text)
+    const products = parseCSV(text)
     if (products.length === 0) {
       setError('No valid rows found. Ensure your CSV has a "name" column.')
       return
@@ -36,7 +36,7 @@ export function Dropzone({
     }
     onLoaded(products, file.name)
   }
-
+ 
   function downloadTemplate() {
     const blob = new Blob([CSV_TEMPLATE], { type: 'text/csv' })
     const url = URL.createObjectURL(blob)
@@ -46,11 +46,11 @@ export function Dropzone({
     a.click()
     URL.revokeObjectURL(url)
   }
-
+ 
   function loadSample() {
-    onLoaded(parseCsv(CSV_TEMPLATE), 'sample-products.csv')
+    onLoaded(parseCSV(CSV_TEMPLATE), 'sample-products.csv')
   }
-
+ 
   return (
     <div className="flex flex-col gap-3">
       <div
@@ -114,7 +114,7 @@ export function Dropzone({
           }}
         />
       </div>
-
+ 
       {error && (
         <div className="flex items-center justify-between rounded-lg border border-destructive/30 bg-destructive/5 px-3 py-2 text-sm text-destructive">
           <span>{error}</span>
@@ -123,7 +123,7 @@ export function Dropzone({
           </button>
         </div>
       )}
-
+ 
       <div className="flex flex-wrap items-center gap-2">
         <button
           type="button"
@@ -145,3 +145,4 @@ export function Dropzone({
     </div>
   )
 }
+ 
