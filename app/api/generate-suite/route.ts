@@ -7,7 +7,7 @@ export const maxDuration = 60
  
 // Keep the model your NicheSEO app already uses. If it ever 404s on this key,
 // switch to 'gemini-2.0-flash' or 'gemini-1.5-flash'.
-const MODEL = 'gemini-2.5-flash'
+const MODEL = 'gemini-3-flash-preview'
  
 // 13 layout templates — picked at random per item so bulk output never feels cookie-cutter.
 const LAYOUT_TEMPLATES: Record<string, string> = {
@@ -49,6 +49,79 @@ const TECH_VARIETY = [
   'environmental degradation resistance',
 ]
  
+// Vertical-aware profiles — keep depth where it matters, adapt per business type.
+export type Vertical = 'ecommerce' | 'local' | 'lawfirm' | 'digital'
+ 
+const VERTICAL_PROFILES: Record<
+  Vertical,
+  {
+    role: string
+    depthLabel: string
+    depthAngles: string[]
+    focus: string
+    schema: string
+    cautions: string
+  }
+> = {
+  ecommerce: {
+    role: 'Expert E-commerce SEO Content Architect',
+    depthLabel: 'product / technical audit',
+    depthAngles: TECH_VARIETY,
+    focus:
+      'Emphasize product specs, build quality, brand comparisons, buying guidance, and conversion. Mention relevant brands and link to category/product pages.',
+    schema: 'Use Product / ItemList / FAQPage JSON-LD where relevant.',
+    cautions: '',
+  },
+  local: {
+    role: 'Local SEO Content Strategist',
+    depthLabel: 'local-market & service-area depth',
+    depthAngles: [
+      'service-area coverage and "near me" search intent',
+      'local trust signals (reviews, licensing, insurance, years serving the area)',
+      'neighborhood / landmark-level relevance',
+      'response time, availability and emergency service',
+      'transparent local pricing and what affects cost',
+    ],
+    focus:
+      'Emphasize service areas, "near me" intent, NAP consistency, local trust signals (reviews, licensing, insurance, years in business), clear service descriptions, and strong contact/booking CTAs. Reference local landmarks/neighborhoods naturally.',
+    schema:
+      'Use LocalBusiness JSON-LD (with areaServed, address, openingHours, aggregateRating) and FAQPage.',
+    cautions: '',
+  },
+  lawfirm: {
+    role: 'Legal Content Strategist specializing in attorney & law-firm SEO',
+    depthLabel: 'legal practice-area & jurisdiction depth',
+    depthAngles: [
+      'practice-area scope and case types handled',
+      'jurisdiction-relevant process and what to expect (general, non-advisory)',
+      'attorney credentials, bar admissions and experience',
+      'typical case timeline and client journey',
+      'client trust, confidentiality and consultation process',
+    ],
+    focus:
+      'Emphasize practice areas, case types, jurisdiction relevance, attorney credentials and experience, what clients can expect, and consultation CTAs. Build authority and trust — E-E-A-T is critical here.',
+    schema: 'Use LegalService / Attorney JSON-LD with areaServed and FAQPage.',
+    cautions:
+      'YMYL — LEGAL: Be accurate and authoritative but NEVER guarantee outcomes, promise specific results, state settlement/verdict amounts as promises, or give individualized legal advice. Use compliant language ("may", "can", "in many cases") and direct readers to consult the firm.',
+  },
+  digital: {
+    role: 'Digital Product & SaaS SEO Content Strategist',
+    depthLabel: 'feature, compatibility & service-quality depth',
+    depthAngles: [
+      'feature set and capability breakdown',
+      'device / platform compatibility',
+      'content / channel coverage and quality',
+      'setup and onboarding experience',
+      'pricing tiers and value comparison',
+      'reliability, uptime and support',
+    ],
+    focus:
+      'Emphasize features, device/platform compatibility, content or channel coverage, setup guidance, pricing tiers, reliability, and support. Compare value clearly and drive sign-ups / free trials.',
+    schema: 'Use Service / Product / FAQPage JSON-LD where relevant.',
+    cautions: '',
+  },
+}
+ 
 export interface SEOContent {
   pageUrl: string
   focusKeyword: string
@@ -76,6 +149,7 @@ export interface ProjectData {
   industry: string
   brands: string[]
   techFocus?: Record<string, string>
+  vertical?: Vertical
 }
  
 interface GenInput {
@@ -97,51 +171,66 @@ function buildPrompt(input: GenInput): string {
     contentType = 'Main Page',
     tone = 'Expert + Trustworthy',
     depth = '1000-1500 words (Standard)',
-    audience = 'general shoppers in this category',
+    audience = 'the core audience for this business',
     eeatSettings = {},
     fieldNotes = '',
     inventoryData = '',
     projectData,
   } = input
  
+  const vertical: Vertical = projectData.vertical || 'ecommerce'
+  const profile = VERTICAL_PROFILES[vertical]
+ 
   const activeEeat = Object.keys(eeatSettings)
     .filter((k) => eeatSettings[k])
     .join(', ')
  
-  // Random layout + technical focus = variety across a bulk run
+  // Random layout = variety across a bulk run
   const templateKeys = Object.keys(LAYOUT_TEMPLATES)
   const selectedTemplate =
     LAYOUT_TEMPLATES[templateKeys[Math.floor(Math.random() * templateKeys.length)]]
-  const randomTechFocus =
-    TECH_VARIETY[Math.floor(Math.random() * TECH_VARIETY.length)]
  
+  // Depth focus: physical ecommerce uses category-specific techFocus when available;
+  // every other vertical uses its own specialist angle pool.
   const techFocus = projectData.techFocus || {}
   const categoryMatch = Object.keys(techFocus).find((cat) =>
     item.toLowerCase().includes(cat.toLowerCase()),
   )
-  const technicalAudit = categoryMatch
-    ? techFocus[categoryMatch]
-    : `${projectData.industry} ${randomTechFocus}`
+  const randomAngle =
+    profile.depthAngles[Math.floor(Math.random() * profile.depthAngles.length)]
+  const depthFocus =
+    vertical === 'ecommerce' && categoryMatch
+      ? techFocus[categoryMatch]
+      : `${profile.depthLabel} — ${randomAngle}`
+ 
+  const brandsLine =
+    projectData.brands.length > 0
+      ? `Brands / entities to reference where relevant: ${projectData.brands.join(', ')}`
+      : ''
  
   return `
-    You are an Expert SEO Content Architect at ${projectData.label} (${projectData.domain}).
+    You are a ${profile.role} working for ${projectData.label} (${projectData.domain}).
+    Business type: ${vertical.toUpperCase()} | Industry: ${projectData.industry}
     Target Context: "${item}" (Type: ${contentType})
-    Industry: ${projectData.industry}
     Tone: ${tone} | Depth: ${depth} | Audience: ${audience}
  
+    VERTICAL FOCUS (${vertical}): ${profile.focus}
+    ${profile.cautions ? `IMPORTANT GUARDRAILS: ${profile.cautions}` : ''}
+ 
     CRITICAL INSTRUCTIONS FOR VARIETY & QUALITY:
-    1. LAYOUT TEMPLATE: Apply the logic of "${selectedTemplate}".
-    2. AUTONOMOUS FOCUS KEYWORD: Analyze "${item}" and select the single BEST focus keyword with high commercial or search intent. Do not just repeat the input; optimize it for SEO.
-    3. CUSTOM HEADING HIERARCHY: Based on the structural requirement of "${selectedTemplate}", design a UNIQUE, logical heading hierarchy (H1, 4+ H2s, and specific H3s). Do NOT follow a standard cookie-cutter pattern. Every article must feel bespoke.
-    4. CLUSTER STRATEGY: Ensure the headings address user intent (problem/solution), specific features, and technical ${technicalAudit}.
-    5. E-E-A-T INTEGRATION: Blend in ${activeEeat} naturally.
-    6. TECHNICAL DEPTH: Specifically provide an audit of ${technicalAudit} that fits the "${selectedTemplate}" tone.
+    1. LAYOUT TEMPLATE: Apply the logic of "${selectedTemplate}", adapted naturally to a ${vertical} context.
+    2. AUTONOMOUS FOCUS KEYWORD: Analyze "${item}" and select the single BEST focus keyword with high search/commercial intent for this vertical. Do not just repeat the input; optimize it for SEO.
+    3. CUSTOM HEADING HIERARCHY: Design a UNIQUE, logical heading hierarchy (H1, 4+ H2s, and specific H3s). No cookie-cutter pattern — every page must feel bespoke.
+    4. INTENT & DEPTH: Address real user intent (problem/solution), specifics, and ${profile.depthLabel}.
+    5. E-E-A-T INTEGRATION: Blend in ${activeEeat || 'first-hand expertise and trust signals'} naturally.
+    6. SPECIALIST DEPTH: Provide genuine ${profile.depthLabel} focusing on "${depthFocus}", fitting the "${selectedTemplate}" angle.
  
     ${fieldNotes ? `EXPERT FIELD NOTES (Inject as authentic first-hand experience): ${fieldNotes}` : ''}
-    ${inventoryData ? `DYNAMIC STORE DATA (Use for inventory/trend transparency): ${inventoryData}` : ''}
+    ${inventoryData ? `DYNAMIC DATA (Use for transparency / freshness): ${inventoryData}` : ''}
  
-    Brands to mention if relevant: ${projectData.brands.join(', ')}
-    Authority internal domains: ${projectData.domain}
+    ${brandsLine}
+    Authority internal domain: ${projectData.domain}
+    RECOMMENDED SCHEMA: ${profile.schema}
  
     STRICT JSON RESPONSE FORMAT:
     {
@@ -157,7 +246,7 @@ function buildPrompt(input: GenInput): string {
       "faqs": [{"question":"string", "answer":"string"}],
       "imageSuggestions": [{"alt":"string", "description":"string", "placement":"string"}],
       "schemaMarkup": "string (JSON-LD)",
-      "technicalAudit": "Detailed breakdown focusing on ${technicalAudit}.",
+      "technicalAudit": "Detailed ${profile.depthLabel} focusing on ${depthFocus}.",
       "qualityChecklist": {"wordCount": number, "eeatScore": "string", "hcuCompliant": true}
     }
   `

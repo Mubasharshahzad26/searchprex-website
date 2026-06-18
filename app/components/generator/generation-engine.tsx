@@ -1,6 +1,6 @@
 'use client'
  
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   Layers,
   Star,
@@ -17,16 +17,28 @@ import {
   TriangleAlert,
   ListChecks,
   Download,
+  Plus,
+  Trash2,
 } from 'lucide-react'
  
 /* ------------------------------------------------------------------ */
 /* Data ported from NicheSEO Pro                                       */
 /* ------------------------------------------------------------------ */
  
+type Vertical = 'ecommerce' | 'local' | 'lawfirm' | 'digital'
+ 
+const VERTICALS: { id: Vertical; label: string }[] = [
+  { id: 'ecommerce', label: 'Ecommerce (physical products)' },
+  { id: 'local', label: 'Local Business' },
+  { id: 'lawfirm', label: 'Law Firm / Legal' },
+  { id: 'digital', label: 'Digital / SaaS / Streaming' },
+]
+ 
 type Project = {
   label: string
   domain: string
   industry: string
+  vertical: Vertical
   audience: string[]
   brands: string[]
   cats: string[]
@@ -39,6 +51,7 @@ const PROJECTS: Record<string, Project> = {
     label: 'Michigan Outdoor Sports',
     domain: 'michigansportsoutdoor.com',
     industry: 'Ecommerce — Outdoor Sports',
+    vertical: 'ecommerce',
     audience: ['Hunters', 'Anglers', 'Hikers', 'Campers', 'Survivalists'],
     brands: ['Browning', 'Mossy Oak', 'Realtree', 'Sitka', 'First Lite', 'YETI', 'Garmin', 'Bushnell', 'Leupold', 'Vortex'],
     cats: ['Hunting', 'Fishing', 'Camping', 'Archery', 'Optics', 'Footwear', 'Apparel', 'Firearms Acc.'],
@@ -48,6 +61,7 @@ const PROJECTS: Record<string, Project> = {
     label: 'SMK Store — Tactical Gear',
     domain: 'smkstore.com',
     industry: 'Ecommerce — Tactical & Knives',
+    vertical: 'ecommerce',
     audience: ['EDC Enthusiasts', 'Knife Collectors', 'Outdoor/Camping', 'Law Enforcement'],
     brands: ['Microtech', 'Benchmade', 'Spyderco', 'Zero Tolerance', 'Kershaw', 'CRKT', 'Cold Steel', 'SOG', 'Gerber', 'Buck'],
     cats: ['Fixed Blade', 'Folding', 'OTF', 'Tactical', 'Hunting', 'Survival', 'Kitchen', 'Multi-Tools', 'Axes', 'Accessories'],
@@ -63,6 +77,7 @@ const PROJECTS: Record<string, Project> = {
     label: '4KLiveHD IPTV',
     domain: '4klivehdiptv.com',
     industry: 'Streaming / Digital Media',
+    vertical: 'digital',
     audience: ['Cord-Cutters', 'Sports Fans', 'Expats', 'Movie Buffs', 'Families'],
     brands: [],
     cats: ['Live TV', 'Sports', 'Movies', 'PPV', 'International', 'VOD', 'Kids'],
@@ -193,8 +208,31 @@ function exportAllDoc(rows: ResultRow[]) {
 /* ------------------------------------------------------------------ */
  
 export default function GenerationEngine() {
-  const [projectKey, setProjectKey] = useState<keyof typeof PROJECTS>('mich')
-  const project = PROJECTS[projectKey]
+  const [projectKey, setProjectKey] = useState<string>('mich')
+  const [customProjects, setCustomProjects] = useState<Record<string, Project>>({})
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [draft, setDraft] = useState({
+    label: '',
+    domain: '',
+    industry: '',
+    vertical: 'ecommerce' as Vertical,
+    audience: '',
+    brands: '',
+    cats: '',
+    pages: '',
+  })
+ 
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('sp_custom_projects')
+      if (raw) setCustomProjects(JSON.parse(raw))
+    } catch {
+      /* ignore */
+    }
+  }, [])
+ 
+  const allProjects: Record<string, Project> = { ...PROJECTS, ...customProjects }
+  const project = allProjects[projectKey] ?? PROJECTS.mich
  
   const [domainId, setDomainId] = useState<(typeof DOMAINS)[number]['id']>('pages')
   const domain = DOMAINS.find((d) => d.id === domainId)!
@@ -243,6 +281,54 @@ export default function GenerationEngine() {
  
   const itemsToGenerate = domain.id === 'bulk' ? bulkItems : Array.from(selected)
  
+  function saveCustomProject() {
+    const label = draft.label.trim()
+    const domainName = draft.domain.trim()
+    if (!label || !domainName) return
+    const key = 'custom_' + domainName.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+    const splitList = (s: string) =>
+      s
+        .split(',')
+        .map((x) => x.trim())
+        .filter(Boolean)
+    const newProject: Project = {
+      label,
+      domain: domainName,
+      industry: draft.industry.trim() || 'General',
+      vertical: draft.vertical,
+      audience: splitList(draft.audience).length ? splitList(draft.audience) : ['general audience'],
+      brands: splitList(draft.brands),
+      cats: splitList(draft.cats).length ? splitList(draft.cats) : ['General'],
+      pages: splitList(draft.pages).length ? splitList(draft.pages) : ['Homepage', 'About', 'Contact'],
+    }
+    const updated = { ...customProjects, [key]: newProject }
+    setCustomProjects(updated)
+    try {
+      localStorage.setItem('sp_custom_projects', JSON.stringify(updated))
+    } catch {
+      /* ignore */
+    }
+    setProjectKey(key)
+    setSelected(new Set())
+    setDraft({ label: '', domain: '', industry: '', vertical: 'ecommerce', audience: '', brands: '', cats: '', pages: '' })
+    setShowAddForm(false)
+  }
+ 
+  function deleteCustomProject(key: string) {
+    const updated = { ...customProjects }
+    delete updated[key]
+    setCustomProjects(updated)
+    try {
+      localStorage.setItem('sp_custom_projects', JSON.stringify(updated))
+    } catch {
+      /* ignore */
+    }
+    if (projectKey === key) {
+      setProjectKey('mich')
+      setSelected(new Set())
+    }
+  }
+ 
   async function generate() {
     if (!itemsToGenerate.length || generating) return
     setGenerating(true)
@@ -271,6 +357,7 @@ export default function GenerationEngine() {
               label: project.label,
               domain: project.domain,
               industry: project.industry,
+              vertical: project.vertical,
               brands: project.brands,
               techFocus: project.techFocus,
             },
@@ -324,20 +411,126 @@ export default function GenerationEngine() {
         <div className="flex flex-col gap-5 p-4">
           {/* Project */}
           <Field label="Project">
-            <select
-              value={projectKey}
-              onChange={(e) => {
-                setProjectKey(e.target.value as keyof typeof PROJECTS)
-                setSelected(new Set())
-              }}
-              className="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm font-medium outline-none focus:border-primary"
-            >
-              {Object.entries(PROJECTS).map(([k, p]) => (
-                <option key={k} value={k}>
-                  {p.label}
-                </option>
-              ))}
-            </select>
+            <div className="flex gap-2">
+              <select
+                value={projectKey}
+                onChange={(e) => {
+                  setProjectKey(e.target.value)
+                  setSelected(new Set())
+                }}
+                className="h-10 flex-1 rounded-lg border border-border bg-background px-3 text-sm font-medium outline-none focus:border-primary"
+              >
+                {Object.entries(allProjects).map(([k, p]) => (
+                  <option key={k} value={k}>
+                    {customProjects[k] ? '★ ' : ''}
+                    {p.label}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={() => setShowAddForm((v) => !v)}
+                className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-border bg-background px-3 text-xs font-semibold transition-colors hover:bg-muted"
+              >
+                <Plus className="size-4" />
+                Add Project
+              </button>
+              {customProjects[projectKey] && (
+                <button
+                  type="button"
+                  onClick={() => deleteCustomProject(projectKey)}
+                  className="inline-flex h-10 items-center justify-center rounded-lg border border-destructive/30 bg-destructive/5 px-2.5 text-destructive transition-colors hover:bg-destructive/10"
+                  title="Delete this custom project"
+                >
+                  <Trash2 className="size-4" />
+                </button>
+              )}
+            </div>
+ 
+            {showAddForm && (
+              <div className="mt-2 flex flex-col gap-2 rounded-lg border border-border bg-muted/30 p-3">
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <input
+                    value={draft.label}
+                    onChange={(e) => setDraft({ ...draft, label: e.target.value })}
+                    placeholder="Project label * (e.g. Acme Tools)"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary"
+                  />
+                  <input
+                    value={draft.domain}
+                    onChange={(e) => setDraft({ ...draft, domain: e.target.value })}
+                    placeholder="Domain * (e.g. acmetools.com)"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary"
+                  />
+                  <input
+                    value={draft.industry}
+                    onChange={(e) => setDraft({ ...draft, industry: e.target.value })}
+                    placeholder="Industry (e.g. Ecommerce — Tools)"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary sm:col-span-2"
+                  />
+                  <div className="sm:col-span-2">
+                    <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      Business Type — tunes the content engine
+                    </label>
+                    <select
+                      value={draft.vertical}
+                      onChange={(e) => setDraft({ ...draft, vertical: e.target.value as Vertical })}
+                      className="h-9 w-full rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary"
+                    >
+                      {VERTICALS.map((v) => (
+                        <option key={v.id} value={v.id}>
+                          {v.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <input
+                    value={draft.audience}
+                    onChange={(e) => setDraft({ ...draft, audience: e.target.value })}
+                    placeholder="Audience, comma-separated"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary sm:col-span-2"
+                  />
+                  <input
+                    value={draft.brands}
+                    onChange={(e) => setDraft({ ...draft, brands: e.target.value })}
+                    placeholder="Brands, comma-separated"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary"
+                  />
+                  <input
+                    value={draft.cats}
+                    onChange={(e) => setDraft({ ...draft, cats: e.target.value })}
+                    placeholder="Collections / Categories, comma-separated"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary"
+                  />
+                  <input
+                    value={draft.pages}
+                    onChange={(e) => setDraft({ ...draft, pages: e.target.value })}
+                    placeholder="Main Pages, comma-separated (e.g. Homepage, About, Contact)"
+                    className="h-9 rounded-md border border-border bg-background px-2.5 text-sm outline-none focus:border-primary sm:col-span-2"
+                  />
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={saveCustomProject}
+                    disabled={!draft.label.trim() || !draft.domain.trim()}
+                    className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+                  >
+                    <Plus className="size-3.5" /> Save Project
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowAddForm(false)}
+                    className="rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
+                  >
+                    Cancel
+                  </button>
+                  <span className="text-[11px] text-muted-foreground">
+                    * required. Saved in this browser.
+                  </span>
+                </div>
+              </div>
+            )}
           </Field>
  
           {/* Content domain tabs */}
@@ -815,3 +1008,6 @@ function LinkList({
   )
 }
  
+
+
+
