@@ -281,14 +281,20 @@ export async function POST(req: Request) {
     const response = await ai.models.generateContent({
       model: MODEL,
       contents: buildPrompt(input),
-      config: {
-        responseMimeType: 'application/json',
-        tools: input.enableWebSearch ? ([{ googleSearch: {} }] as any) : undefined,
-      },
+      // Gemini can't combine googleSearch grounding with JSON response mode.
+      // Grounding ON -> plain text (we parse the JSON out below); OFF -> strict JSON mode.
+      config: input.enableWebSearch
+        ? { tools: [{ googleSearch: {} }] as any }
+        : { responseMimeType: 'application/json' },
     })
  
-    const text = response.text || '{}'
-    const content = JSON.parse(text) as SEOContent
+    // Strip any markdown code fences (grounding mode may wrap the JSON in ```json).
+    const raw = (response.text || '{}').trim()
+    const cleaned = raw
+      .replace(/^```(?:json)?/i, '')
+      .replace(/```$/, '')
+      .trim()
+    const content = JSON.parse(cleaned) as SEOContent
     return NextResponse.json({ content })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Generation failed.'
