@@ -7,7 +7,7 @@ export const maxDuration = 60
  
 // Keep the model your NicheSEO app already uses. If it ever 404s on this key,
 // switch to 'gemini-2.0-flash' or 'gemini-1.5-flash'.
-const MODEL = 'gemini-1.5-flash'
+const MODEL = 'gemini-2.5-flash'
  
 // 13 layout templates — picked at random per item so bulk output never feels cookie-cutter.
 const LAYOUT_TEMPLATES: Record<string, string> = {
