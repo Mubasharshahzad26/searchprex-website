@@ -16,6 +16,7 @@ import {
   CheckCheck,
   TriangleAlert,
   ListChecks,
+  Download,
 } from 'lucide-react'
  
 /* ------------------------------------------------------------------ */
@@ -122,6 +123,70 @@ type SEOContent = {
 }
  
 type ResultRow = { item: string; content?: SEOContent; error?: string }
+ 
+/* ---- Export helpers (Phase 3) ---- */
+function downloadBlob(content: string, filename: string, type: string) {
+  const blob = new Blob([content], { type })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+ 
+function csvCell(v: unknown): string {
+  return `"${String(v ?? '').replace(/"/g, '""')}"`
+}
+ 
+function exportAllCsv(rows: ResultRow[]) {
+  const ok = rows.map((r) => r.content).filter(Boolean) as SEOContent[]
+  if (!ok.length) return
+  const headers = [
+    'Item', 'Focus Keyword', 'Meta Title', 'Meta Description', 'URL Slug', 'H1',
+    'Content HTML', 'FAQs', 'Schema JSON-LD', 'Internal Links', 'External Links',
+    'Word Count', 'EEAT Score',
+  ]
+  const lines = [headers.map(csvCell).join(',')]
+  for (const c of ok) {
+    const faqs = (c.faqs || []).map((f) => `Q: ${f.question} | A: ${f.answer}`).join(' || ')
+    const internal = (c.internalLinks || []).map((l) => `${l.anchor} -> ${l.url}`).join(' || ')
+    const external = (c.externalLinks || []).map((l) => `${l.anchor} -> ${l.url}`).join(' || ')
+    lines.push([
+      c.pageUrl, c.focusKeyword, c.metaTitle, c.metaDescription, c.urlSlug, c.h1Title,
+      c.contentBody, faqs, c.schemaMarkup, internal, external,
+      c.qualityChecklist?.wordCount, c.qualityChecklist?.eeatScore,
+    ].map(csvCell).join(','))
+  }
+  downloadBlob('\uFEFF' + lines.join('\r\n'), `content-suite-${Date.now()}.csv`, 'text/csv;charset=utf-8')
+}
+ 
+function exportAllJson(rows: ResultRow[]) {
+  const ok = rows.map((r) => r.content).filter(Boolean)
+  if (!ok.length) return
+  downloadBlob(JSON.stringify(ok, null, 2), `content-suite-${Date.now()}.json`, 'application/json')
+}
+ 
+function exportAllDoc(rows: ResultRow[]) {
+  const ok = rows.map((r) => r.content).filter(Boolean) as SEOContent[]
+  if (!ok.length) return
+  const sections = ok
+    .map(
+      (c) => `
+    <h1>${c.h1Title}</h1>
+    <p><b>Focus Keyword:</b> ${c.focusKeyword}<br/>
+    <b>Meta Title:</b> ${c.metaTitle}<br/>
+    <b>Meta Description:</b> ${c.metaDescription}<br/>
+    <b>URL Slug:</b> ${c.urlSlug}</p>
+    ${c.contentBody}
+    <h2>FAQs</h2>
+    ${(c.faqs || []).map((f) => `<p><b>${f.question}</b><br/>${f.answer}</p>`).join('')}
+    <hr/>`,
+    )
+    .join('')
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head><body>${sections}</body></html>`
+  downloadBlob(html, `content-suite-${Date.now()}.doc`, 'application/msword')
+}
  
 /* ------------------------------------------------------------------ */
 /* Component                                                           */
@@ -552,6 +617,44 @@ export default function GenerationEngine() {
           </div>
         </div>
       </div>
+ 
+      {/* ---- Export All bar ---- */}
+      {results.length > 0 && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-3 shadow-sm">
+          <div className="text-sm">
+            <span className="font-semibold text-foreground">{results.filter((r) => r.content).length}</span> generated
+            {results.some((r) => r.error) && (
+              <span className="text-destructive"> · {results.filter((r) => r.error).length} failed</span>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              type="button"
+              onClick={() => exportAllCsv(results)}
+              className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <Download className="size-3.5" />
+              CSV (WP / Shopify)
+            </button>
+            <button
+              type="button"
+              onClick={() => exportAllDoc(results)}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
+            >
+              <Download className="size-3.5" />
+              Word (.doc)
+            </button>
+            <button
+              type="button"
+              onClick={() => exportAllJson(results)}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
+            >
+              <Download className="size-3.5" />
+              JSON
+            </button>
+          </div>
+        </div>
+      )}
  
       {/* ---- Results ---- */}
       {results.map((r, i) => (
