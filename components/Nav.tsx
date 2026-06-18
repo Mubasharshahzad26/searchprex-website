@@ -35,6 +35,7 @@ const navLinks = [
     label: "Tools",
     hasDropdown: true,
     dropdownItems: [
+      { href: "/ai-search",         label: "AI Search" },
       { href: "/content-generator", label: "AI Content Suite" },
       { href: "/nicheseopro",       label: "Keyword Magic Tool" },
       { href: "/tools",             label: "All Tools" },
@@ -244,3 +245,4 @@ export default function Nav() {
     </>
   );
 }
+ 
