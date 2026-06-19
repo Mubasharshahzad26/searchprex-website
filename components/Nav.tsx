@@ -38,6 +38,7 @@ const navLinks = [
       { href: "/ai-search",         label: "AI Search" },
       { href: "/content-generator", label: "AI Content Suite" },
       { href: "/nicheseopro",       label: "Keyword Magic Tool" },
+      { href: "/case-calculator",   label: "Lost Case Calculator" },
       { href: "/tools",             label: "All Tools" },
     ],
   },
