@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase, PenLine, TrendingUp } from "lucide-react";
+import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase, PenLine } from "lucide-react";
 import { useState, useEffect } from "react";
 import Certifications, { credentials } from "@/components/Certifications";
  
@@ -151,9 +151,9 @@ export default function Hero({ heroImage }: HeroProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
-          <div className="relative z-20 flex justify-center pt-2 pb-0">
-            <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3 shadow-sm backdrop-blur-sm border border-white/80">
-              <span className="text-xs font-medium text-[#64748b] whitespace-nowrap">
+          <div className="relative z-20 flex justify-center pt-4 pb-3">
+            <div className="inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-full bg-white/70 px-4 py-2.5 shadow-sm backdrop-blur-sm border border-white/80 sm:gap-3 sm:px-5 sm:py-3">
+              <span className="hidden text-xs font-medium text-[#64748b] whitespace-nowrap sm:inline">
                 I&apos;m looking for
               </span>
               <div className="flex items-center gap-1">
@@ -161,7 +161,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   <button
                     key={p.id}
                     onClick={() => setActivePersona(i)}
-                    className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                    className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all sm:px-4 ${
                       activePersona === i
                         ? "border border-[#cdd2dd] bg-white text-[#1c1c24] shadow-sm"
                         : "border border-transparent text-[#64748b] hover:text-[#1c1c24]"
@@ -175,7 +175,7 @@ export default function Hero({ heroImage }: HeroProps) {
           </div>
  
           {/* ── 2-Column Grid ── */}
-          <div className="grid items-start gap-8 pt-2 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-2">
+          <div className="grid items-start gap-12 pt-6 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-6">
  
             {/* ── Left Content — Toptal-minimal: headline, paragraph, one button ── */}
             <motion.div
@@ -190,7 +190,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
                 </span>
-                <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN_DARK }}>
+                <span className="text-[10px] font-bold uppercase tracking-widest sm:text-xs" style={{ color: GREEN_DARK }}>
                   Founder-Led SEO. No Juniors. No Fluff.
                 </span>
               </div>
@@ -287,7 +287,7 @@ export default function Hero({ heroImage }: HeroProps) {
             >
               <AnimatePresence mode="wait">
                 {current.media === "photo" ? (
-                  /* ── Law Firm: Mubashar photo + credential card ── */
+                  /* ── Law Firm: Mubashar photo + credential card (clean, no floating chips) ── */
                   <motion.div
                     key="photo-block"
                     initial={{ opacity: 0 }}
@@ -296,9 +296,9 @@ export default function Hero({ heroImage }: HeroProps) {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:gap-4"
                   >
-                    {/* Photo + floating GSC-proof chips (CRO: verified numbers in first viewport) */}
-                    <div className="relative z-0 shrink-0 lg:-mt-28">
-                      <div className="relative aspect-[3/4] w-[330px] sm:w-[390px] lg:w-[460px]">
+                    {/* Clean portrait — Toptal-style, proof now lives inside the card */}
+                    <div className="relative z-0 shrink-0 lg:-mt-20">
+                      <div className="relative aspect-[3/4] w-[270px] sm:w-[340px] lg:w-[440px]">
                         <Image
                           src="/images/mubashar-transparent.png"
                           alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
@@ -306,49 +306,11 @@ export default function Hero({ heroImage }: HeroProps) {
                           priority
                           className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
                         />
- 
-                        {/* Chip 1 — clicks (top-left of portrait) */}
-                        <motion.div
-                          animate={{ y: [0, -7, 0] }}
-                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute left-0 top-[26%] z-10 hidden -translate-x-1/3 lg:block"
-                        >
-                          <Link
-                            href="/case-studies/ecommerce/michigan-outdoor-sports"
-                            className="flex items-center gap-2 rounded-xl border border-[#e8eaf0] bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5"
-                            title="Michigan Outdoor Sports case study"
-                          >
-                            <TrendingUp className="h-4 w-4 shrink-0" style={{ color: GREEN_DARK }} />
-                            <span>
-                              <span className="block text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+476%</span>
-                              <span className="mt-0.5 block text-[9px] leading-tight text-[#94a3b8]">Organic clicks · GSC verified</span>
-                            </span>
-                          </Link>
-                        </motion.div>
- 
-                        {/* Chip 2 — revenue (lower-left of portrait) */}
-                        <motion.div
-                          animate={{ y: [0, -7, 0] }}
-                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
-                          className="absolute bottom-[22%] left-0 z-10 hidden -translate-x-1/4 lg:block"
-                        >
-                          <Link
-                            href="/case-studies/ecommerce/smk-store"
-                            className="flex items-center gap-2 rounded-xl border border-[#e8eaf0] bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5"
-                            title="SMK Store case study"
-                          >
-                            <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
-                            <span>
-                              <span className="block text-sm font-black leading-none" style={{ color: GREEN_DARK }}>+75%</span>
-                              <span className="mt-0.5 block text-[9px] leading-tight text-[#94a3b8]">US revenue · 2 months</span>
-                            </span>
-                          </Link>
-                        </motion.div>
                       </div>
                     </div>
  
-                    {/* Credential card — Toptal anatomy: map · name · verified · role · previously-at */}
-                    <div className="relative z-10 w-64 shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:-ml-12 lg:mt-2">
+                    {/* Credential card — Toptal anatomy: map · name · verified · role · previously-at · proof */}
+                    <div className="relative z-10 w-full max-w-[300px] shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:w-64 lg:-ml-12 lg:mt-2">
                       {/* Dotted world-map area (tall, like Toptal) */}
                       <div className="relative mb-4 h-24 w-full">
                         <div className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0)", backgroundSize: "6px 6px" }} />
@@ -407,6 +369,27 @@ export default function Hero({ heroImage }: HeroProps) {
                       >
                         Time Technologies LLC
                       </a>
+ 
+                      {/* ── Verified case-study proof (moved here from the floating chips) ── */}
+                      <div className="mt-4 flex items-stretch gap-3 border-t border-[#eef0f4] pt-3">
+                        <Link
+                          href="/case-studies/ecommerce/michigan-outdoor-sports"
+                          className="flex-1 transition-opacity hover:opacity-80"
+                          title="Michigan Outdoor Sports case study"
+                        >
+                          <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+476%</span>
+                          <span className="mt-1 block text-[9px] leading-tight text-[#94a3b8]">Organic clicks · GSC verified</span>
+                        </Link>
+                        <span className="w-px shrink-0 bg-[#eef0f4]" />
+                        <Link
+                          href="/case-studies/ecommerce/smk-store"
+                          className="flex-1 transition-opacity hover:opacity-80"
+                          title="SMK Store case study"
+                        >
+                          <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+75%</span>
+                          <span className="mt-1 block text-[9px] leading-tight text-[#94a3b8]">US revenue · 2 months</span>
+                        </Link>
+                      </div>
                     </div>
                   </motion.div>
                 ) : (
@@ -444,15 +427,15 @@ export default function Hero({ heroImage }: HeroProps) {
  
         </div>
  
-        {/* ── Credentials carousel — overlaps the photo bottom, exactly like
-            Toptal's expert cards. Overlap only on the photo persona; the video
-            personas keep normal flow so client logos aren't covered. ── */}
-        <div className={`relative z-10 ${current.media === "photo" ? "-mt-4 sm:-mt-10 lg:-mt-24" : "mt-0"}`}>
+        {/* ── Credentials carousel — sits cleanly below the hero. Gentle overlap on
+            desktop (photo persona); positive margin on mobile so it never crashes
+            into the credential card. ── */}
+        <div className={`relative z-10 ${current.media === "photo" ? "mt-10 sm:mt-6 lg:-mt-12" : "mt-0"}`}>
           <Certifications index={credIndex} onIndexChange={setCredIndex} />
         </div>
  
         {/* ── EEAT strip — quiet row below the carousel ── */}
-        <div className="mx-auto max-w-7xl px-4 pt-6 pb-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pt-10 pb-12 sm:px-6 lg:px-8">
           <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
             Verified &amp; Listed On
           </p>
