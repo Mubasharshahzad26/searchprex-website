@@ -7,6 +7,8 @@ import {
   Sparkles,
   ArrowRight,
   ExternalLink,
+  FileText,
+  CheckCircle2,
   Scale,
   ShoppingCart,
   MapPin,
@@ -22,6 +24,25 @@ const VERTICAL_META: Record<Vertical, { label: string; icon: typeof Globe }> = {
   general: { label: 'SEO', icon: Globe },
 }
  
+const CTA_COPY: Record<Vertical, { title: string; sub: string }> = {
+  lawfirm: {
+    title: 'Get more cases from search',
+    sub: 'Free 30-day SEO roadmap for your firm — practice-area targeting, local visibility, and a higher-converting intake funnel.',
+  },
+  ecommerce: {
+    title: 'Turn organic traffic into revenue',
+    sub: 'Free 30-day SEO roadmap for your store — indexation, product & category optimization, and scalable organic growth.',
+  },
+  local: {
+    title: 'Get found by nearby customers',
+    sub: 'Free 30-day local SEO roadmap — Google Business Profile, citations, and "near me" visibility.',
+  },
+  general: {
+    title: 'Want a plan built for your business?',
+    sub: 'Get a free 30-day SEO roadmap from SearchPrex — tailored to your site, niche, and goals.',
+  },
+}
+ 
 const EXAMPLES = [
   'Best SEO strategy for a personal injury law firm in Texas',
   'How can my Shopify store grow organic traffic?',
@@ -29,17 +50,30 @@ const EXAMPLES = [
   'How to rank law firm practice-area pages',
 ]
  
+type RelatedPage = { title: string; url: string; snippet: string }
+ 
 type SearchResult = {
   answer: string
   sources: { title: string; url: string }[]
   vertical: Vertical
+  relatedPages: RelatedPage[]
 }
+ 
+type LeadStatus = 'idle' | 'submitting' | 'success' | 'error'
  
 export default function AiSearch() {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<SearchResult | null>(null)
+ 
+  const [lead, setLead] = useState({ name: '', email: '', website: '' })
+  const [leadStatus, setLeadStatus] = useState<LeadStatus>('idle')
+ 
+  function resetLead() {
+    setLead({ name: '', email: '', website: '' })
+    setLeadStatus('idle')
+  }
  
   async function run(q?: string) {
     const text = (q ?? query).trim()
@@ -48,6 +82,7 @@ export default function AiSearch() {
     setLoading(true)
     setError(null)
     setResult(null)
+    resetLead()
     try {
       const res = await fetch('/api/seo-search', {
         method: 'POST',
@@ -64,8 +99,35 @@ export default function AiSearch() {
     }
   }
  
+  async function submitLead() {
+    if (!lead.name.trim() || !lead.email.trim()) {
+      setLeadStatus('error')
+      return
+    }
+    setLeadStatus('submitting')
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: lead.name,
+          email: lead.email,
+          website: lead.website,
+          source: 'ai-search',
+          query,
+          vertical: result?.vertical,
+        }),
+      })
+      if (!res.ok) throw new Error()
+      setLeadStatus('success')
+    } catch {
+      setLeadStatus('error')
+    }
+  }
+ 
   const vm = result ? VERTICAL_META[result.vertical] : null
   const VIcon = vm?.icon
+  const cta = result ? CTA_COPY[result.vertical] : CTA_COPY.general
  
   return (
     <div className="flex flex-col gap-6 px-4 py-6 md:px-6">
@@ -153,7 +215,29 @@ export default function AiSearch() {
             />
           </div>
  
-          {/* Sources */}
+          {/* Related SearchPrex resources */}
+          {result.relatedPages?.length > 0 && (
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Related from SearchPrex
+              </div>
+              <ul className="flex flex-col gap-2">
+                {result.relatedPages.map((p, i) => (
+                  <li key={i}>
+                    <a href={p.url} className="group flex items-start gap-2.5 rounded-lg p-2 transition-colors hover:bg-muted/50">
+                      <FileText className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <span>
+                        <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{p.title}</span>
+                        <span className="block text-xs text-muted-foreground">{p.snippet}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+ 
+          {/* Web sources */}
           {result.sources.length > 0 && (
             <div className="rounded-xl border border-border bg-card p-4">
               <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -177,18 +261,65 @@ export default function AiSearch() {
             </div>
           )}
  
-          {/* CTA — free roadmap */}
+          {/* CTA + inline lead form */}
           <div className="overflow-hidden rounded-xl border border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10 p-5">
-            <h3 className="text-base font-bold">Want a plan built for your business?</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Get a free 30-day SEO roadmap from SearchPrex — tailored to your site, niche, and goals.
-            </p>
-            <a
-              href="/free-audit"
-              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Book your free 30-day roadmap <ArrowRight className="size-4" />
-            </a>
+            {leadStatus === 'success' ? (
+              <div className="flex flex-col items-center py-2 text-center">
+                <CheckCircle2 className="size-9 text-primary" />
+                <h3 className="mt-2 text-base font-bold">You&apos;re in! 🎉</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  We&apos;ll review your site and send your free 30-day SEO roadmap shortly.
+                </p>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-base font-bold">{cta.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{cta.sub}</p>
+ 
+                <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                  <input
+                    value={lead.name}
+                    onChange={(e) => setLead({ ...lead, name: e.target.value })}
+                    placeholder="Your name *"
+                    className="h-11 rounded-lg border border-border bg-card px-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
+                  />
+                  <input
+                    value={lead.email}
+                    onChange={(e) => setLead({ ...lead, email: e.target.value })}
+                    type="email"
+                    placeholder="Work email *"
+                    className="h-11 rounded-lg border border-border bg-card px-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
+                  />
+                  <input
+                    value={lead.website}
+                    onChange={(e) => setLead({ ...lead, website: e.target.value })}
+                    placeholder="Website (optional)"
+                    className="h-11 rounded-lg border border-border bg-card px-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30 sm:col-span-2"
+                  />
+                </div>
+ 
+                {leadStatus === 'error' && (
+                  <p className="mt-2 text-xs text-destructive">
+                    Please enter your name and a valid email — or{' '}
+                    <a href="/free-audit" className="underline">use the full audit form</a>.
+                  </p>
+                )}
+ 
+                <button
+                  onClick={submitLead}
+                  disabled={leadStatus === 'submitting'}
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60 sm:w-auto"
+                >
+                  {leadStatus === 'submitting' ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <>
+                      Book your free 30-day roadmap <ArrowRight className="size-4" />
+                    </>
+                  )}
+                </button>
+              </>
+            )}
           </div>
  
           {/* Search again */}
@@ -197,6 +328,7 @@ export default function AiSearch() {
               onClick={() => {
                 setResult(null)
                 setQuery('')
+                resetLead()
               }}
               className="text-sm font-medium text-muted-foreground hover:text-primary"
             >
