@@ -9,6 +9,7 @@ import SEOAuditStrip from "../components/SEOAuditStrip";
 import Services from "../components/Services";
 import WhyUs from "../components/WhyUs";
 import PersonaSelector from "../components/PersonaSelector";
+import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
@@ -150,6 +151,7 @@ export default async function Home() {
  
         {/* 04 — SERVICES */}
         <Reveal><Services /></Reveal>
+       
  
         {/* 05 — WHY US (comparison table — self-animated, no wrapper) */}
         <WhyUs />
@@ -176,7 +178,10 @@ export default async function Home() {
         <ToolsShowcase />
  
         {/* 13 — PRICING */}
-        <Reveal><Pricing /></Reveal>
+<AuroraBackground variant="light">
+  <Reveal><Pricing /></Reveal>
+</AuroraBackground>
+
  
         {/* 14 — LEAD CAPTURE FORM */}
         <Reveal><LeadCaptureForm /></Reveal>
