@@ -12,11 +12,13 @@ import ToolsShowcase from "@/components/ToolsShowcase";
 import VideoSection from "../components/VideoSection";
 import FounderSection from "../components/FounderSection";
 import Process from "../components/Process";
+import Comparison from "../components/Comparison";
 import Pricing from "../components/Pricing";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import MultipleCTAs from "../components/MultipleCTAs";
 import FAQ from "../components/FAQ";
 import CTA from "../components/CTA";
+import BlogTeaser from "../components/BlogTeaser";
 import ChatWidget from "../components/ChatWidget";
 import Reveal from "@/components/Reveal";
 import { client } from "@/sanity/lib/client";
@@ -165,19 +167,25 @@ export default async function Home() {
         {/* 10 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
  
-        {/* 11 — PRICING */}
+        {/* 11 — WHY US (comparison table — self-animated, no wrapper) */}
+        <Comparison />
+ 
+        {/* 12 — PRICING */}
         <Reveal><Pricing /></Reveal>
  
-        {/* 12 — LEAD CAPTURE FORM */}
+        {/* 13 — LEAD CAPTURE FORM */}
         <Reveal><LeadCaptureForm /></Reveal>
  
-        {/* 13 — MULTIPLE CTAS */}
+        {/* 14 — MULTIPLE CTAS */}
         <Reveal><MultipleCTAs /></Reveal>
  
-        {/* 14 — FAQ */}
+        {/* 15 — FAQ */}
         <Reveal><FAQ /></Reveal>
  
-        {/* 15 — FINAL CTA */}
+        {/* 16 — FROM THE BLOG (Toptal publications style) */}
+        <Reveal><BlogTeaser /></Reveal>
+ 
+        {/* 17 — FINAL CTA */}
         <Reveal><CTA /></Reveal>
  
       </main>
