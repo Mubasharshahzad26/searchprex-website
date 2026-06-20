@@ -8,6 +8,7 @@ import TrustBar from "../components/TrustBar";
 import Services from "../components/Services";
 import PersonaSelector from "../components/PersonaSelector";
 import Results from "../components/Results";
+import ToolsShowcase from "@/components/ToolsShowcase";
 import VideoSection from "../components/VideoSection";
 import FounderSection from "../components/FounderSection";
 import Process from "../components/Process";
@@ -163,11 +164,14 @@ export default async function Home() {
         {/* 09 — PROCESS */}
         <Process />
 
-        {/* 10 — AI TOOL */}
-        <AITool />
+        {/* 09 — PROCESS */}
+        <Process />
 
-        {/* 11 — NICHE SEO PRO */}
-        <NicheSEOPro />
+        {/* 10 — FREE TOOLS (bento) */}
+        <ToolsShowcase />
+
+        {/* 11 — PRICING */}
+        <Pricing />
 
         {/* 12 — PRICING */}
         <Pricing />
