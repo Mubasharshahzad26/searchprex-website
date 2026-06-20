@@ -45,7 +45,7 @@ const VIABILITY_META: Record<
 const inputCls =
   'h-11 w-full rounded-lg border border-border bg-card px-3 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-ring/30'
  
-export default function IntakeAssistant() {
+export default function IntakeAssistant({ embedded = false }: { embedded?: boolean }) {
   const [firm, setFirm] = useState('')
   const [started, setStarted] = useState(false)
   const [messages, setMessages] = useState<Msg[]>([])
@@ -120,17 +120,19 @@ export default function IntakeAssistant() {
   }
  
   return (
-    <div className="flex flex-col gap-6 px-4 py-6 md:px-6">
+    <div className={embedded ? 'flex flex-col gap-6' : 'flex flex-col gap-6 px-4 py-6 md:px-6'}>
       {/* Hero */}
-      <div className="text-center">
-        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
-          <Sparkles className="size-3.5" /> SearchPrex · Law Firm Tool
+      {!embedded && (
+        <div className="text-center">
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
+            <Sparkles className="size-3.5" /> SearchPrex · Law Firm Tool
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight md:text-3xl">24/7 AI Intake Assistant</h1>
+          <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
+            See how an AI assistant captures and qualifies every lead — even at 2&nbsp;a.m. — so your firm never loses a case to a missed call.
+          </p>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">24/7 AI Intake Assistant</h1>
-        <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
-          See how an AI assistant captures and qualifies every lead — even at 2&nbsp;a.m. — so your firm never loses a case to a missed call.
-        </p>
-      </div>
+      )}
  
       <div className="mx-auto w-full max-w-2xl">
         {!started ? (

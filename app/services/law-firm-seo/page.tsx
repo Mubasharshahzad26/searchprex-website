@@ -9,6 +9,7 @@ import {
   TrendingUp, MapPin, FileText, Link2, BarChart2, Award,
   Settings, ChevronDown, ChevronUp, Scale, Sparkles, Linkedin, BadgeCheck, Gavel, Search,
 } from "lucide-react";
+import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
  
 /* ─── THEME ─── */
 const GREEN = "#3eb489";
@@ -313,6 +314,27 @@ export default function LawFirmSEO() {
         </div>
       </section>
  
+      {/* ── LIVE INTAKE ASSISTANT DEMO — bridges SEO → intake ── */}
+      <section className="bg-[#f8fafc] py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+            className="mb-10 text-center"
+          >
+            <span className="mb-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
+              <Sparkles className="h-3.5 w-3.5" /> Live demo · AI Intake Assistant
+            </span>
+            <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
+              Getting Found Is Half the Battle.<br />Capturing Every Lead Is the Other Half.
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-base text-[#475569] leading-relaxed">
+              Ranking #1 means nothing if a 2&nbsp;a.m. call goes to voicemail. Try our 24/7 AI intake assistant below — play a potential client and watch it qualify the lead and hand your firm a clean summary in seconds.
+            </p>
+          </motion.div>
+          <IntakeAssistant embedded />
+        </div>
+      </section>
+ 
       {/* ── BE OUR FIRST LAW FIRM CASE STUDY (honest, no fake data) ── */}
       <section className="bg-[#eaecf3] py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -500,53 +522,3 @@ export default function LawFirmSEO() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
