@@ -5,6 +5,7 @@ import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import TrustBar from "../components/TrustBar";
+import SEOAuditStrip from "../components/SEOAuditStrip";
 import Services from "../components/Services";
 import WhyUs from "../components/WhyUs";
 import PersonaSelector from "../components/PersonaSelector";
@@ -144,6 +145,7 @@ export default async function Home() {
  
         {/* 03 — TRUST BAR */}
         <Reveal><TrustBar /></Reveal>
+        <SEOAuditStrip />
  
         {/* 04 — SERVICES */}
         <Reveal><Services /></Reveal>
