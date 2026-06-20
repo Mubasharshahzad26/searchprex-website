@@ -14,15 +14,15 @@ import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
-import NicheSEOProPromo from "../components/NicheSEOProPromo";
 import ToolsShowcase from "@/components/ToolsShowcase";
+import NicheSEOProPromo from "../components/NicheSEOProPromo";
 import FounderSection from "../components/FounderSection";
 // import Process from "../components/Process";                  // removed from homepage
 // import Pricing from "../components/Pricing";                  // removed from homepage
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
 import BlogTeaser from "../components/BlogTeaser";
-import CTA from "../components/CTA";
+// import CTA from "../components/CTA";                          // "Dominate Your Market 2026" form — removed (no end CTA)
 import ChatWidget from "../components/ChatWidget";
 import Reveal from "@/components/Reveal";
 import { client } from "@/sanity/lib/client";
@@ -185,9 +185,9 @@ export default async function Home() {
         {/* 12 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
  
- {/* 12.5 — NICHESEOPRO SAAS PROMO (self-animated, no wrapper) */}
-<NicheSEOProPromo />
-        
+        {/* 12.5 — NICHESEOPRO SAAS PROMO (self-animated, no wrapper) */}
+        <NicheSEOProPromo />
+ 
         {/* 13 — PRICING removed from homepage — uncomment to restore
         <AuroraBackground variant="light">
           <Reveal><Pricing /></Reveal>
@@ -200,11 +200,13 @@ export default async function Home() {
         {/* 15 — FAQ */}
         <Reveal><FAQ /></Reveal>
  
-        {/* 16 — BLOG TEASER */}
+        {/* 16 — BLOG TEASER (page ends here — no end CTA per request) */}
         <Reveal><BlogTeaser /></Reveal>
  
-        {/* 17 — FINAL CTA */}
+        {/* 17 — FINAL CTA removed (no end CTA). "Dominate Your Market 2026" form
+            lives in components/CTA.tsx — uncomment import + this to restore:
         <Reveal><CTA /></Reveal>
+        */}
  
       </main>
  
