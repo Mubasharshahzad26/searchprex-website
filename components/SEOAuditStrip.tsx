@@ -10,6 +10,7 @@ import {
   useTransform,
   useMotionTemplate,
 } from "framer-motion";
+import { Search, MapPin, Scale, ShoppingCart, Bot, Calculator } from "lucide-react";
  
 /* ─── gradient orb ─── */
 function Orb({ cx, cy, r, color }: { cx: string; cy: string; r: string; color: string }) {
@@ -17,6 +18,16 @@ function Orb({ cx, cy, r, color }: { cx: string; cy: string; r: string; color: s
     <circle cx={cx} cy={cy} r={r} fill={color} style={{ filter: "blur(70px)", opacity: 0.22 }} />
   );
 }
+ 
+/* ─── bottom solution pills ─── */
+const PILLS = [
+  { icon: Search, label: "AI SEO Audit", href: "/free-audit" },
+  { icon: MapPin, label: "Map Pack Rankings", href: "/services/local-seo" },
+  { icon: Scale, label: "Law Firm SEO", href: "/services/law-firm-seo" },
+  { icon: ShoppingCart, label: "eCommerce SEO", href: "/services/ecommerce-seo" },
+  { icon: Bot, label: "AI Intake Assistant", href: "/tools/ai-intake" },
+  { icon: Calculator, label: "Lost Case Calculator", href: "/case-calculator" },
+];
  
 export default function SEOAuditStrip() {
   const [url, setUrl] = useState("");
@@ -77,7 +88,7 @@ export default function SEOAuditStrip() {
       {/* ── main card ── */}
       <div className="relative z-10 mx-auto max-w-3xl text-center">
  
-        {/* ── eyebrow pill (replaces old tab switcher) ── */}
+        {/* ── eyebrow pill ── */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -201,35 +212,31 @@ export default function SEOAuditStrip() {
         </motion.div>
       </div>
  
-      {/* ── bottom solutions pills ── */}
+      {/* ── bottom solutions pills (professional lucide icons) ── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8, duration: 0.5 }}
         className="relative z-10 mx-auto mt-16 flex max-w-4xl flex-wrap justify-center gap-3"
       >
-        {[
-          { icon: "🔍", label: "AI SEO Audit", href: "/free-audit" },
-          { icon: "🗺️", label: "Map Pack Rankings", href: "/services/local-seo" },
-          { icon: "⚖️", label: "Law Firm SEO", href: "/services/law-firm-seo" },
-          { icon: "🛒", label: "eCommerce SEO", href: "/services/ecommerce-seo" },
-          { icon: "🤖", label: "AI Intake Assistant", href: "/tools/ai-intake" },
-          { icon: "📊", label: "Lost Case Calculator", href: "/case-calculator" },
-        ].map((pill, i) => (
-          <motion.a
-            key={pill.label}
-            href={pill.href}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.85 + i * 0.06 }}
-            whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(83,74,183,0.18)" }}
-            className="flex items-center gap-2 rounded-full border border-white/70 bg-white/60 px-4 py-2.5 text-sm font-semibold text-[#374151] backdrop-blur-sm transition-colors hover:border-[#534AB7]/40 hover:text-[#534AB7]"
-            style={{ textDecoration: "none" }}
-          >
-            <span>{pill.icon}</span>
-            {pill.label}
-          </motion.a>
-        ))}
+        {PILLS.map((pill, i) => {
+          const Icon = pill.icon;
+          return (
+            <motion.a
+              key={pill.label}
+              href={pill.href}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.85 + i * 0.06 }}
+              whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(83,74,183,0.18)" }}
+              className="flex items-center gap-2 rounded-full border border-white/70 bg-white/60 px-4 py-2.5 text-sm font-semibold text-[#374151] backdrop-blur-sm transition-colors hover:border-[#534AB7]/40 hover:text-[#534AB7]"
+              style={{ textDecoration: "none" }}
+            >
+              <Icon className="h-4 w-4" strokeWidth={2} />
+              {pill.label}
+            </motion.a>
+          );
+        })}
       </motion.div>
     </section>
   );
