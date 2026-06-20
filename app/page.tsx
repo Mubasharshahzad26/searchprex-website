@@ -7,7 +7,8 @@ import ClientLogos from "../components/ClientLogos";
 import TrustBar from "../components/TrustBar";
 import SEOAuditStrip from "../components/SEOAuditStrip";
 import Services from "../components/Services";
-import WhyUs from "../components/WhyUs";
+// import WhyUs from "../components/WhyUs";                       // removed — replaced by AdvantageBand
+import AdvantageBand from "../components/AdvantageBand";
 import PersonaSelector from "../components/PersonaSelector";
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
@@ -15,8 +16,8 @@ import VideoSection from "../components/VideoSection";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import ToolsShowcase from "@/components/ToolsShowcase";
 import FounderSection from "../components/FounderSection";
-import Process from "../components/Process";
-import Pricing from "../components/Pricing";
+// import Process from "../components/Process";                  // removed from homepage
+// import Pricing from "../components/Pricing";                  // removed from homepage
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
 import BlogTeaser from "../components/BlogTeaser";
@@ -145,16 +146,20 @@ export default async function Home() {
         {/* 02 — CLIENT LOGOS */}
         <Reveal><ClientLogos /></Reveal>
  
-        {/* 03 — TRUST BAR */}
+        {/* 03 — TRUST BAR + SEO AUDIT STRIP */}
         <Reveal><TrustBar /></Reveal>
         <SEOAuditStrip />
  
-        {/* 04 — SERVICES */}
-        <Reveal><Services /></Reveal>
-       
+        {/* 04 — SERVICES (wrapped in aurora gradient) */}
+        <AuroraBackground variant="light">
+          <Reveal><Services /></Reveal>
+        </AuroraBackground>
  
-        {/* 05 — WHY US (comparison table — self-animated, no wrapper) */}
+        {/* 05 — WHY US / ADVANTAGE (Semrush-style — self-animated, no wrapper) */}
+        {/* WhyUs comparison removed — uncomment to restore
         <WhyUs />
+        */}
+        <AdvantageBand />
  
         {/* 06 — PERSONA SELECTOR (lead game-plan tool) */}
         <Reveal><PersonaSelector /></Reveal>
@@ -168,8 +173,9 @@ export default async function Home() {
         {/* 09 — FOUNDER */}
         <Reveal><FounderSection /></Reveal>
  
-        {/* 10 — PROCESS */}
+        {/* 10 — PROCESS removed from homepage — uncomment to restore
         <Reveal><Process /></Reveal>
+        */}
  
         {/* 11 — AI VISIBILITY (AEO dashboard — self-animated, no wrapper) */}
         <AIVisibilityShowcase />
@@ -177,11 +183,11 @@ export default async function Home() {
         {/* 12 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
  
-        {/* 13 — PRICING */}
-<AuroraBackground variant="light">
-  <Reveal><Pricing /></Reveal>
-</AuroraBackground>
-
+        {/* 13 — PRICING removed from homepage — uncomment to restore
+        <AuroraBackground variant="light">
+          <Reveal><Pricing /></Reveal>
+        </AuroraBackground>
+        */}
  
         {/* 14 — LEAD CAPTURE FORM */}
         <Reveal><LeadCaptureForm /></Reveal>
