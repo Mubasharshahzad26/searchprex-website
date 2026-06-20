@@ -9,7 +9,7 @@ import SEOAuditStrip from "../components/SEOAuditStrip";
 import Services from "../components/Services";
 // import WhyUs from "../components/WhyUs";                       // removed — replaced by AdvantageBand
 import AdvantageBand from "../components/AdvantageBand";
-import PersonaSelector from "../components/PersonaSelector";
+// import PersonaSelector from "../components/PersonaSelector";   // removed from homepage
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
@@ -161,8 +161,9 @@ export default async function Home() {
         */}
         <AdvantageBand />
  
-        {/* 06 — PERSONA SELECTOR (lead game-plan tool) */}
+        {/* 06 — PERSONA SELECTOR removed from homepage — uncomment to restore
         <Reveal><PersonaSelector /></Reveal>
+        */}
  
         {/* 07 — RESULTS */}
         <Reveal><Results /></Reveal>
