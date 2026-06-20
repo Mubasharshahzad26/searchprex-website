@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+ 
+// Homepage section components (root /components folder)
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
@@ -9,7 +11,8 @@ import ToolsShowcase from "@/components/ToolsShowcase";
 import VideoSection from "../components/VideoSection";
 import FounderSection from "../components/FounderSection";
 import Process from "../components/Process";
-import Comparison from "../components/Comparison";
+// COMMENTED OUT: Comparison uses usePersona hook which requires PersonaProvider context
+// import Comparison from "../components/Comparison";
 import Pricing from "../components/Pricing";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
@@ -122,33 +125,64 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Nav />
       <main id="main-content">
+ 
+        {/* 01 — HERO (above the fold — no reveal) */}
         <Hero />
+ 
+        {/* 02 — CLIENT LOGOS */}
         <Reveal><ClientLogos /></Reveal>
+ 
+        {/* 03 — TRUST BAR */}
         <Reveal><TrustBar /></Reveal>
+ 
+        {/* 04 — SERVICES */}
         <Reveal><Services /></Reveal>
+ 
+        {/* 05 — PERSONA SELECTOR (Tell us about yourself) */}
         <Reveal><PersonaSelector /></Reveal>
+ 
+        {/* 06 — RESULTS */}
         <Reveal><Results /></Reveal>
+ 
+        {/* 07 — VIDEO PROOF */}
         <Reveal><VideoSection /></Reveal>
+ 
+        {/* 08 — FOUNDER */}
         <Reveal><FounderSection /></Reveal>
+ 
+        {/* 09 — PROCESS */}
         <Reveal><Process /></Reveal>
+ 
+        {/* 10 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
-        <Comparison />
+ 
+        {/* 
+          11 — WHY US (comparison table — COMMENTED OUT)
+          REASON: Uses usePersona hook which requires PersonaProvider context
+          STATUS: Temporarily disabled for production deployment
+          TODO: Will be re-enabled after fixing PersonaContext setup
+        */}
+        {/* <Comparison /> */}
+ 
+        {/* 12 — PRICING */}
         <Reveal><Pricing /></Reveal>
+ 
+        {/* 13 — LEAD CAPTURE FORM */}
         <Reveal><LeadCaptureForm /></Reveal>
+ 
+        {/* 14 — FAQ */}
         <Reveal><FAQ /></Reveal>
+ 
+        {/* 15 — FROM THE BLOG */}
         <Reveal><BlogTeaser /></Reveal>
+ 
+        {/* 16 — FINAL CTA */}
         <Reveal><CTA /></Reveal>
+ 
       </main>
+ 
       <ChatWidget />
     </>
   );
 }
  
-
-
-
-
-
-
-
-
