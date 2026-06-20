@@ -6,7 +6,10 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
  
-const navLinks = [
+type DropItem = { href: string; label: string; badge?: string };
+type NavLink = { href: string; label: string; hasDropdown?: boolean; dropdownItems?: DropItem[] };
+ 
+const navLinks: NavLink[] = [
   {
     href: "/services",
     label: "Services",
@@ -35,10 +38,11 @@ const navLinks = [
     label: "Tools",
     hasDropdown: true,
     dropdownItems: [
+      { href: "/intake-assistant",  label: "AI Intake Assistant", badge: "New" },
+      { href: "/case-calculator",   label: "Lost Case Calculator" },
       { href: "/ai-search",         label: "AI Search" },
       { href: "/content-generator", label: "AI Content Suite" },
       { href: "/nicheseopro",       label: "Keyword Magic Tool" },
-      { href: "/case-calculator",   label: "Lost Case Calculator" },
       { href: "/tools",             label: "All Tools" },
     ],
   },
@@ -95,15 +99,20 @@ export default function Nav() {
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
-                      className="absolute left-0 top-full z-50 mt-2 w-52 rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl"
+                      className="absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl"
                     >
                       {link.dropdownItems?.map((item) => (
                         <Link
                           key={item.label}
                           href={item.href}
-                          className="block rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
                         >
-                          {item.label}
+                          <span>{item.label}</span>
+                          {item.badge && (
+                            <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                              {item.badge}
+                            </span>
+                          )}
                         </Link>
                       ))}
                     </motion.div>
@@ -195,9 +204,14 @@ export default function Nav() {
                             key={item.label}
                             href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                            className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
                           >
                             {item.label}
+                            {item.badge && (
+                              <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                                {item.badge}
+                              </span>
+                            )}
                           </Link>
                         ))}
                       </div>
