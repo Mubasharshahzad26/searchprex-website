@@ -1,18 +1,11 @@
 // components/Services.tsx
-// Homepage services section — Toptal "Leverage World-class Talent" style:
-// centered heading, thin-bordered 3x2 grid of cells (icon + title + short
-// description), a gray filler cell (CRO: routes unsure visitors to the audit),
-// and a small divider link below — exactly the Toptal pattern.
-// Pure server-safe component: no hooks, no client JS.
-// Entrance animation is handled by the <Reveal> wrapper in app/page.tsx.
+// Premium Semrush-style services section. Transparent background so the
+// AuroraBackground wrapper's gradient shows through; separate rounded-2xl cards
+// with hover lift + gradient accent bar; gradient "not sure?" card.
+// Server component (no hooks). Entrance handled by <Reveal> in app/page.tsx.
  
 import Link from "next/link";
-import {
-  Scale, ShoppingCart, MapPin, Wrench, Sparkles, ArrowRight,
-} from "lucide-react";
- 
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
+import { Scale, ShoppingCart, MapPin, Wrench, Sparkles, ArrowRight } from "lucide-react";
  
 const services = [
   {
@@ -49,76 +42,75 @@ const services = [
  
 export default function Services() {
   return (
-    <section className="bg-white py-20" id="services">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 sm:py-28" id="services">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
  
-        {/* Centered heading — Toptal style */}
+        {/* heading */}
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-            Four Core Services. <span style={{ color: GREEN }}>Zero Fluff.</span>
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#534AB7]/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#534AB7] shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" /> What we do
+          </p>
+          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+            Core services.{" "}
+            <span className="bg-gradient-to-r from-[#534AB7] to-[#3eb489] bg-clip-text text-transparent">
+              Zero fluff.
+            </span>
           </h2>
-          <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#64748b]">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#475569]">
             No bloated menus or vanity packages — every service is tied to a verified,
             Google Search Console-backed result you can inspect.
           </p>
         </div>
  
-        {/* Bordered grid — thin borders, Toptal "talent" pattern */}
-        <div className="grid grid-cols-1 overflow-hidden rounded-xl border border-[#e5e7eb] sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => {
+        {/* premium cards */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s) => {
             const Icon = s.icon;
             return (
-              <Link key={s.title} href={s.href}
-                className={`group flex flex-col bg-white p-8 transition-colors duration-300 hover:bg-[#f8f9fc]
-                  border-[#e5e7eb]
-                  ${i % 3 !== 2 ? "lg:border-r" : ""}
-                  ${i % 2 === 0 ? "sm:border-r lg:border-r" : "sm:border-r-0"}
-                  ${i % 3 === 2 ? "lg:border-r-0" : ""}
-                  border-b lg:[&:nth-child(n+4)]:border-b-0 sm:[&:nth-child(n+5)]:border-b-0
-                `}>
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#e5e7eb] bg-white transition-all duration-300 group-hover:border-[#3eb489] group-hover:bg-[#3eb489] group-hover:shadow-sm">
-                    <Icon className="h-5 w-5 text-[#64748b] transition-all duration-300 group-hover:scale-110 group-hover:text-white" />
-                  </span>
-                  <h3 className="text-base font-black text-[#0a0f2e]">{s.title}</h3>
-                </div>
-                <p className="text-sm leading-relaxed text-[#64748b]">{s.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold opacity-0 transition-all duration-300 group-hover:gap-2 group-hover:opacity-100"
-                  style={{ color: GREEN_DARK }}>
+              <Link
+                key={s.title}
+                href={s.href}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#e9ecf5] bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-transparent hover:shadow-xl"
+              >
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#534AB7] to-[#3eb489] transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#534AB7]/8 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#534AB7] group-hover:to-[#3eb489]">
+                  <Icon className="h-6 w-6 text-[#534AB7] transition-colors duration-300 group-hover:text-white" />
+                </span>
+                <h3 className="text-base font-black text-[#0a0f2e]">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#64748b]">{s.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#2f9670] transition-all group-hover:gap-2">
                   Explore <ArrowRight className="h-4 w-4" />
                 </span>
               </Link>
             );
           })}
  
-          {/* Gray filler cell — Toptal's "Plus Thousands More Skills" pattern, CRO version */}
-          <Link href="/free-audit"
-            className="group flex flex-col justify-center bg-[#f8f9fc] p-8 transition-colors duration-300 hover:bg-[#f1f5f9] border-[#e5e7eb] border-b sm:border-b-0">
-            <h3 className="mb-2 text-base font-black text-[#0a0f2e]">Not sure which one you need?</h3>
-            <p className="text-sm leading-relaxed text-[#64748b]">
-              Get a free, founder-reviewed audit — the 90-day roadmap tells you exactly
-              which service (if any) will move the needle.
+          {/* gradient "not sure?" card */}
+          <Link
+            href="/free-audit"
+            className="group relative flex flex-col justify-center overflow-hidden rounded-2xl p-7 text-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+            style={{ background: "linear-gradient(135deg, #534AB7 0%, #3C3489 50%, #2f9670 100%)" }}
+          >
+            <h3 className="mb-2 text-base font-black">Not sure which you need?</h3>
+            <p className="text-sm leading-relaxed text-white/85">
+              Get a free, founder-reviewed audit — the 90-day roadmap tells you exactly which
+              service will move the needle.
             </p>
-            <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold"
-              style={{ color: GREEN_DARK }}>
-              Get Free Audit <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold">
+              Get free audit <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </Link>
         </div>
  
-        {/* Divider link — Toptal "GET EVEN MORE" pattern */}
+        {/* divider link */}
         <div className="mt-12 text-center">
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-[#e5e7eb]" /></div>
-            <div className="relative flex justify-center">
-              <span className="bg-white px-4 text-[11px] font-bold uppercase tracking-widest text-[#94a3b8]">
-                See the proof behind every service
-              </span>
-            </div>
-          </div>
-          <Link href="/all-case-studies"
-            className="inline-flex items-center gap-1.5 text-sm font-bold transition-colors hover:opacity-80"
-            style={{ color: "#534AB7" }}>
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#94a3b8]">
+            See the proof behind every service
+          </p>
+          <Link
+            href="/all-case-studies"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#534AB7] transition-colors hover:opacity-80"
+          >
             Browse verified case studies <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

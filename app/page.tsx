@@ -6,6 +6,7 @@ import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import TrustBar from "../components/TrustBar";
 import SEOAuditStrip from "../components/SEOAuditStrip";
+import LeadWizard from "../components/LeadWizard";
 import Services from "../components/Services";
 // import WhyUs from "../components/WhyUs";                       // removed — replaced by AdvantageBand
 import AdvantageBand from "../components/AdvantageBand";
@@ -162,9 +163,8 @@ export default async function Home() {
         */}
         <AdvantageBand />
  
-        {/* 06 — PERSONA SELECTOR removed from homepage — uncomment to restore
-        <Reveal><PersonaSelector /></Reveal>
-        */}
+        {/* 06 — LEAD WIZARD (Semrush-style lead capture — self-animated) */}
+<LeadWizard />
  
         {/* 07 — RESULTS */}
         <Reveal><Results /></Reveal>
