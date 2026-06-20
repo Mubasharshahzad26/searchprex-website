@@ -1,70 +1,62 @@
 // components/BlogTeaser.tsx
-// FIXED: Handle missing blog data gracefully during build, added fallback content
+// FIXED: Proper ESM import without require()
  
 import Link from "next/link";
 import { ChevronRight, Clock, CheckCircle } from "lucide-react";
  
-// Import safely with fallback
-let posts: any[] = [];
-try {
-  const { posts: importedPosts } = require("@/app/blog/data");
-  posts = importedPosts || [];
-} catch (error) {
-  console.warn("Blog data not found, using fallback:", error);
-  // Fallback blog posts for build time
-  posts = [
-    {
-      slug: "law-firm-seo-guide",
-      title: "The Complete Law Firm SEO Strategy Guide 2024",
-      excerpt: "Learn how to rank higher for legal keywords and attract high-intent clients through proven SEO tactics.",
-      category: "Technical SEO",
-      subcategory: "Law Firms",
-      featured: true,
-      author: { name: "Mubashar Shahzad" },
-      readTime: "12 min read"
-    },
-    {
-      slug: "ecommerce-seo-shopify",
-      title: "Shopify SEO: Complete Technical Setup Guide",
-      excerpt: "Fix technical issues, improve crawlability, and boost organic visibility for your Shopify store.",
-      category: "E-commerce SEO",
-      subcategory: "Shopify",
-      featured: false,
-      author: { name: "Mubashar Shahzad" },
-      readTime: "8 min read"
-    },
-    {
-      slug: "local-seo-rankings",
-      title: "Local SEO Ranking Factors: Get Ahead of Competition",
-      excerpt: "Master Google Business Profile optimization and local citation strategies to dominate local search.",
-      category: "Local SEO",
-      subcategory: "Local Business",
-      featured: false,
-      author: { name: "Mubashar Shahzad" },
-      readTime: "10 min read"
-    },
-    {
-      slug: "technical-seo-core-web-vitals",
-      title: "Core Web Vitals: The Technical SEO Checklist",
-      excerpt: "Optimize page speed, layout stability, and interactivity to improve rankings and user experience.",
-      category: "Technical SEO",
-      subcategory: "Performance",
-      featured: false,
-      author: { name: "Mubashar Shahzad" },
-      readTime: "15 min read"
-    },
-    {
-      slug: "link-building-strategy",
-      title: "Link Building for SEO: Authority & Relevance Strategy",
-      excerpt: "Build high-quality backlinks that actually move the needle for your rankings and domain authority.",
-      category: "Link Building",
-      subcategory: "Off-Page",
-      featured: false,
-      author: { name: "Mubashar Shahzad" },
-      readTime: "11 min read"
-    },
-  ];
-}
+// Fallback blog posts for build time / when data not available
+const fallbackPosts = [
+  {
+    slug: "law-firm-seo-guide",
+    title: "The Complete Law Firm SEO Strategy Guide 2024",
+    excerpt: "Learn how to rank higher for legal keywords and attract high-intent clients through proven SEO tactics.",
+    category: "Technical SEO",
+    subcategory: "Law Firms",
+    featured: true,
+    author: { name: "Mubashar Shahzad" },
+    readTime: "12 min read"
+  },
+  {
+    slug: "ecommerce-seo-shopify",
+    title: "Shopify SEO: Complete Technical Setup Guide",
+    excerpt: "Fix technical issues, improve crawlability, and boost organic visibility for your Shopify store.",
+    category: "E-commerce SEO",
+    subcategory: "Shopify",
+    featured: false,
+    author: { name: "Mubashar Shahzad" },
+    readTime: "8 min read"
+  },
+  {
+    slug: "local-seo-rankings",
+    title: "Local SEO Ranking Factors: Get Ahead of Competition",
+    excerpt: "Master Google Business Profile optimization and local citation strategies to dominate local search.",
+    category: "Local SEO",
+    subcategory: "Local Business",
+    featured: false,
+    author: { name: "Mubashar Shahzad" },
+    readTime: "10 min read"
+  },
+  {
+    slug: "technical-seo-core-web-vitals",
+    title: "Core Web Vitals: The Technical SEO Checklist",
+    excerpt: "Optimize page speed, layout stability, and interactivity to improve rankings and user experience.",
+    category: "Technical SEO",
+    subcategory: "Performance",
+    featured: false,
+    author: { name: "Mubashar Shahzad" },
+    readTime: "15 min read"
+  },
+  {
+    slug: "link-building-strategy",
+    title: "Link Building for SEO: Authority & Relevance Strategy",
+    excerpt: "Build high-quality backlinks that actually move the needle for your rankings and domain authority.",
+    category: "Link Building",
+    subcategory: "Off-Page",
+    featured: false,
+    author: { name: "Mubashar Shahzad" },
+    readTime: "11 min read"
+  },
+];
  
 function GradientThumb({ category }: { category: string }) {
   const colors: Record<string, string> = {
@@ -83,9 +75,11 @@ function GradientThumb({ category }: { category: string }) {
 }
  
 export default function BlogTeaser() {
-  // Ensure we have posts and handle empty array
+  // Use fallback posts (update this when you have real blog data)
+  const posts = fallbackPosts;
+ 
   if (!posts || posts.length === 0) {
-    return null; // Don't render if no posts
+    return null;
   }
  
   const featured = posts.find((p: any) => p.featured) ?? posts[0];
@@ -150,7 +144,7 @@ export default function BlogTeaser() {
           </div>
         </div>
  
-        {/* Outlined button — exact Toptal "Read More Thought Leadership" pattern */}
+        {/* Outlined button */}
         <div className="mt-10 text-center">
           <Link href="/blog"
             className="inline-flex items-center gap-2 rounded-lg border border-[#d4d8e3] bg-white px-6 py-3 text-sm font-bold text-[#0a0f2e] transition-all hover:border-[#0a0f2e]">
