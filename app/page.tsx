@@ -14,6 +14,7 @@ import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
+import NicheSEOProPromo from "../components/NicheSEOProPromo";
 import ToolsShowcase from "@/components/ToolsShowcase";
 import FounderSection from "../components/FounderSection";
 // import Process from "../components/Process";                  // removed from homepage
@@ -184,6 +185,9 @@ export default async function Home() {
         {/* 12 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
  
+ {/* 12.5 — NICHESEOPRO SAAS PROMO (self-animated, no wrapper) */}
+<NicheSEOProPromo />
+        
         {/* 13 — PRICING removed from homepage — uncomment to restore
         <AuroraBackground variant="light">
           <Reveal><Pricing /></Reveal>
