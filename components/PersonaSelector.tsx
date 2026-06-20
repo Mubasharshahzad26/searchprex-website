@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
  
@@ -92,38 +92,73 @@ const needTypes = [
  
 type TabId = "business" | "need";
  
-export default function PersonaSelector() {
-  const [activeTab, setActiveTab] = useState<TabId>("business");
-  const [selectedBusiness, setSelectedBusiness] = useState<string | null>("law-firm");
-  const [selectedNeed, setSelectedNeed] = useState<string | null>(null);
- useEffect(() => {
+// Load Calendly script globally once
+const loadCalendlyScript = () => {
+  if (typeof window !== "undefined") {
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
+    return () => {
+      // Cleanup if needed
+      try {
+        document.body.removeChild(script);
+      } catch (e) {
+        // Already removed
+      }
+    };
+  }
+};
+ 
+const openCalendlyPopup = () => {
+  if (typeof window !== "undefined" && (window as any).Calendly) {
+    (window as any).Calendly.initPopupWidget({
+      url: "https://calendly.com/contact-searchprex/30min",
+      prefill: {}
+    });
+  } else {
+    console.warn("Calendly not loaded yet, retrying...");
+    // Retry after a short delay
+    setTimeout(() => {
+      if ((window as any).Calendly) {
+        (window as any).Calendly.initPopupWidget({
+          url: "https://calendly.com/contact-searchprex/30min",
+        });
+      }
+    }, 500);
+  }
+};
+ 
+export default function PersonaSelector() {
+  const [activeTab, setActiveTab] = useState<TabId>("business");
+  const [selectedBusiness, setSelectedBusiness] = useState<string | null>("law-firm");
+  const [selectedNeed, setSelectedNeed] = useState<string | null>(null);
+  const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
+ 
+  // Load Calendly script on mount
+  useEffect(() => {
+    loadCalendlyScript();
+    
+    // Check if Calendly is loaded
+    const checkCalendly = setInterval(() => {
+      if ((window as any).Calendly) {
+        setIsCalendlyLoaded(true);
+        clearInterval(checkCalendly);
+      }
+    }, 100);
+ 
+    return () => clearInterval(checkCalendly);
   }, []);
-
-  const openCalendly = () => {
-    if (typeof window !== "undefined" && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: "https://calendly.com/contact-searchprex/30min",
-      });
-    }
-  };
+ 
+  const handleScheduleCall = useCallback(() => {
+    openCalendlyPopup();
+  }, []);
+ 
   const currentItems = activeTab === "business" ? businessTypes : needTypes;
   const selectedId = activeTab === "business" ? selectedBusiness : selectedNeed;
   const setSelected = activeTab === "business" ? setSelectedBusiness : setSelectedNeed;
  
   const selectedItem = currentItems.find((i) => i.id === selectedId);
- 
-  const getCtaHref = () => {
-    if (activeTab === "business" && selectedBusiness) {
-      const item = businessTypes.find((b) => b.id === selectedBusiness);
-      return item?.href ?? "#cta";
-    }
-    return "#cta";
-  };
  
   return (
     <section className="relative w-full overflow-hidden bg-[#0D1B54] py-20">
@@ -257,12 +292,13 @@ export default function PersonaSelector() {
  
             {/* CTA Button */}
             <div className="mt-4">
-             <button
-             onClick={openCalendly}
-                className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-[#534AB7] px-6 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-[#3C3489] hover:shadow-lg hover:shadow-[#534AB7]/30 active:scale-[0.98]"
+              <button
+                onClick={handleScheduleCall}
+                disabled={!isCalendlyLoaded}
+                className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-[#534AB7] px-6 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-[#3C3489] hover:shadow-lg hover:shadow-[#534AB7]/30 active:scale-[0.98] disabled:opacity-75 disabled:cursor-not-allowed"
               >
                 <span className="text-white/70">{icons.sparkle}</span>
-                Get My Free SEO Strategy
+                {isCalendlyLoaded ? "Get My Free SEO Strategy" : "Loading..."}
                 <span className="transition-transform duration-200 group-hover:translate-x-1">
                   {icons.arrowRight}
                 </span>
@@ -289,7 +325,7 @@ export default function PersonaSelector() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-6 flex items-center justify-center gap-6"
+          className="mt-6 flex items-center justify-center gap-6 flex-wrap"
         >
           {["Free 30-min call", "No commitment", "Reply in 24hrs"].map((t) => (
             <div key={t} className="flex items-center gap-1.5">
@@ -303,16 +339,3 @@ export default function PersonaSelector() {
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-

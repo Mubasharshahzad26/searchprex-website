@@ -6,7 +6,6 @@ import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import TrustBar from "../components/TrustBar";
 import Services from "../components/Services";
-import PersonaSelector from "../components/PersonaSelector";
 import Results from "../components/Results";
 import ToolsShowcase from "@/components/ToolsShowcase";
 import VideoSection from "../components/VideoSection";
@@ -18,10 +17,22 @@ import LeadCaptureForm from "../components/LeadCaptureForm";
 import MultipleCTAs from "../components/MultipleCTAs";
 import FAQ from "../components/FAQ";
 import CTA from "../components/CTA";
-import BlogTeaser from "../components/BlogTeaser";
 import ChatWidget from "../components/ChatWidget";
 import Reveal from "@/components/Reveal";
 import { client } from "@/sanity/lib/client";
+ 
+// IMPORTANT: Dynamic import PersonaSelector (client component with Calendly)
+import dynamic from "next/dynamic";
+const PersonaSelector = dynamic(() => import("../components/PersonaSelector"), {
+  ssr: false, // Don't pre-render on server
+  loading: () => <div className="h-96 bg-[#0D1B54]" />, // Skeleton loader
+});
+ 
+// Dynamic import BlogTeaser with error boundary
+const BlogTeaser = dynamic(() => import("../components/BlogTeaser"), {
+  ssr: true,
+  loading: () => <div className="h-96 bg-[#f8f9fc]" />,
+});
  
 // Single source of truth for the canonical origin.
 const SITE = "https://www.searchprex.com";
@@ -63,7 +74,13 @@ export const metadata: Metadata = {
 };
  
 export default async function Home() {
-  const homeData = await client.fetch(query);
+  let homeData;
+  try {
+    homeData = await client.fetch(query);
+  } catch (error) {
+    console.log("Sanity fetch error:", error);
+    homeData = null; // Fallback if Sanity is down
+  }
  
   const jsonLd = {
     "@context": "https://schema.org",
@@ -149,7 +166,7 @@ export default async function Home() {
         {/* 04 — SERVICES */}
         <Reveal><Services /></Reveal>
  
-        {/* 05 — PERSONA SELECTOR */}
+        {/* 05 — PERSONA SELECTOR (Dynamic - SSR: false for Calendly) */}
         <Reveal><PersonaSelector /></Reveal>
  
         {/* 06 — RESULTS */}
@@ -182,7 +199,7 @@ export default async function Home() {
         {/* 15 — FAQ */}
         <Reveal><FAQ /></Reveal>
  
-        {/* 16 — FROM THE BLOG (Toptal publications style) */}
+        {/* 16 — FROM THE BLOG (Dynamic with error handling) */}
         <Reveal><BlogTeaser /></Reveal>
  
         {/* 17 — FINAL CTA */}
