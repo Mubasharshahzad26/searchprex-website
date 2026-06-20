@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-
-// Sab ke sath '../components' likh diya hai kyunki folder baahir chala gaya hai
+ 
+// Homepage section components (root /components folder)
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
@@ -12,20 +12,18 @@ import ToolsShowcase from "@/components/ToolsShowcase";
 import VideoSection from "../components/VideoSection";
 import FounderSection from "../components/FounderSection";
 import Process from "../components/Process";
-import AITool from "../components/AITool";
-import NicheSEOPro from "../components/NicheSEOPro";
 import Pricing from "../components/Pricing";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import MultipleCTAs from "../components/MultipleCTAs";
 import FAQ from "../components/FAQ";
 import CTA from "../components/CTA";
-import BlogTeaser from "../components/BlogTeaser";
 import ChatWidget from "../components/ChatWidget";
+import Reveal from "@/components/Reveal";
 import { client } from "@/sanity/lib/client";
-
+ 
 // Single source of truth for the canonical origin.
 const SITE = "https://www.searchprex.com";
-
+ 
 const query = `*[_type == "homePage"][0]{
   heroHeadline,
   heroSubheadline,
@@ -38,7 +36,7 @@ const query = `*[_type == "homePage"][0]{
   stat3Label,
   heroImage { asset-> },
 }`;
-
+ 
 export const metadata: Metadata = {
   title: "SEO Agency USA | Law Firm & Ecommerce SEO and Local SEO | SearchPrex",
   description:
@@ -61,10 +59,10 @@ export const metadata: Metadata = {
       "US-Focused SEO agency — law firm, ecommerce & local SEO. Verified GSC results.",
   },
 };
-
+ 
 export default async function Home() {
   const homeData = await client.fetch(query);
-
+ 
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -127,7 +125,7 @@ export default async function Home() {
       }
     ]
   };
-
+ 
   return (
     <>
       <script
@@ -136,61 +134,56 @@ export default async function Home() {
       />
       <Nav />
       <main id="main-content">
-
-        {/* 01 — HERO */}
+ 
+        {/* 01 — HERO (above the fold — no reveal) */}
         <Hero />
-
+ 
         {/* 02 — CLIENT LOGOS */}
-        <ClientLogos />
-
+        <Reveal><ClientLogos /></Reveal>
+ 
         {/* 03 — TRUST BAR */}
-        <TrustBar />
-
+        <Reveal><TrustBar /></Reveal>
+ 
         {/* 04 — SERVICES */}
-        <Services />
-
+        <Reveal><Services /></Reveal>
+ 
         {/* 05 — PERSONA SELECTOR */}
-        <PersonaSelector />
-
+        <Reveal><PersonaSelector /></Reveal>
+ 
         {/* 06 — RESULTS */}
-        <Results />
-
+        <Reveal><Results /></Reveal>
+ 
         {/* 07 — VIDEO PROOF */}
-        <VideoSection />
-
+        <Reveal><VideoSection /></Reveal>
+ 
         {/* 08 — FOUNDER */}
-        <FounderSection />
-
+        <Reveal><FounderSection /></Reveal>
+ 
         {/* 09 — PROCESS */}
-        <Process />
-
-        {/* 09 — PROCESS */}
-        <Process />
-
-        {/* 10 — FREE TOOLS (bento) */}
+        <Reveal><Process /></Reveal>
+ 
+        {/* 10 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
-
+ 
         {/* 11 — PRICING */}
-        <Pricing />
-
-        {/* 12 — PRICING */}
-        <Pricing />
-
-        {/* 13 — LEAD CAPTURE FORM */}
-        <LeadCaptureForm />
-
-        {/* 14 — MULTIPLE CTAS */}
-        <MultipleCTAs />
-
-        {/* 15 — FAQ */}
-        <FAQ />
-
-        {/* 16 — FINAL CTA */}
-        <CTA />
-
+        <Reveal><Pricing /></Reveal>
+ 
+        {/* 12 — LEAD CAPTURE FORM */}
+        <Reveal><LeadCaptureForm /></Reveal>
+ 
+        {/* 13 — MULTIPLE CTAS */}
+        <Reveal><MultipleCTAs /></Reveal>
+ 
+        {/* 14 — FAQ */}
+        <Reveal><FAQ /></Reveal>
+ 
+        {/* 15 — FINAL CTA */}
+        <Reveal><CTA /></Reveal>
+ 
       </main>
-
+ 
       <ChatWidget />
     </>
   );
 }
+ 

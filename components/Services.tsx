@@ -4,6 +4,7 @@
 // description), a gray filler cell (CRO: routes unsure visitors to the audit),
 // and a small divider link below — exactly the Toptal pattern.
 // Pure server-safe component: no hooks, no client JS.
+// Entrance animation is handled by the <Reveal> wrapper in app/page.tsx.
  
 import Link from "next/link";
 import {
@@ -68,7 +69,7 @@ export default function Services() {
             const Icon = s.icon;
             return (
               <Link key={s.title} href={s.href}
-                className={`group flex flex-col bg-white p-8 transition-colors hover:bg-[#f8f9fc]
+                className={`group flex flex-col bg-white p-8 transition-colors duration-300 hover:bg-[#f8f9fc]
                   border-[#e5e7eb]
                   ${i % 3 !== 2 ? "lg:border-r" : ""}
                   ${i % 2 === 0 ? "sm:border-r lg:border-r" : "sm:border-r-0"}
@@ -76,13 +77,13 @@ export default function Services() {
                   border-b lg:[&:nth-child(n+4)]:border-b-0 sm:[&:nth-child(n+5)]:border-b-0
                 `}>
                 <div className="mb-4 flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#e5e7eb] transition-colors group-hover:border-[#3eb489]">
-                    <Icon className="h-5 w-5 text-[#64748b] transition-colors group-hover:text-[#2f9670]" />
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#e5e7eb] bg-white transition-all duration-300 group-hover:border-[#3eb489] group-hover:bg-[#3eb489] group-hover:shadow-sm">
+                    <Icon className="h-5 w-5 text-[#64748b] transition-all duration-300 group-hover:scale-110 group-hover:text-white" />
                   </span>
                   <h3 className="text-base font-black text-[#0a0f2e]">{s.title}</h3>
                 </div>
                 <p className="text-sm leading-relaxed text-[#64748b]">{s.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold opacity-0 transition-opacity group-hover:opacity-100"
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold opacity-0 transition-all duration-300 group-hover:gap-2 group-hover:opacity-100"
                   style={{ color: GREEN_DARK }}>
                   Explore <ArrowRight className="h-4 w-4" />
                 </span>
@@ -92,7 +93,7 @@ export default function Services() {
  
           {/* Gray filler cell — Toptal's "Plus Thousands More Skills" pattern, CRO version */}
           <Link href="/free-audit"
-            className="group flex flex-col justify-center bg-[#f8f9fc] p-8 transition-colors hover:bg-[#f1f5f9] border-[#e5e7eb] border-b sm:border-b-0">
+            className="group flex flex-col justify-center bg-[#f8f9fc] p-8 transition-colors duration-300 hover:bg-[#f1f5f9] border-[#e5e7eb] border-b sm:border-b-0">
             <h3 className="mb-2 text-base font-black text-[#0a0f2e]">Not sure which one you need?</h3>
             <p className="text-sm leading-relaxed text-[#64748b]">
               Get a free, founder-reviewed audit — the 90-day roadmap tells you exactly

@@ -1,13 +1,21 @@
 // components/Results.tsx
-// Toptal "Collaborations With Leading Brands" pattern (minimal white cards,
-// small label, bold title, quiet footer) — applied to verified results.
-// Server component, zero JS. Cards link to the case study detail pages.
+// Verified results — animated gradient stat strip (CountUp) on top of the
+// Toptal-style case study cards. Server component; CountUp is a client child
+// that animates the numbers as they scroll into view.
  
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import CountUp from "@/components/CountUp";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
+ 
+// Headline numbers — all straight from Google Search Console.
+const stats = [
+  { to: 476, prefix: "+", suffix: "%", label: "Organic clicks recovered" },
+  { to: 75, prefix: "+", suffix: "%", label: "US revenue growth" },
+  { to: 285, prefix: "+", suffix: "%", label: "Product pages indexed" },
+];
  
 const results = [
   {
@@ -45,11 +53,23 @@ export default function Results() {
           </p>
         </div>
  
+        {/* Animated gradient stat strip — counts up on scroll */}
+        <div className="mb-14 grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <div className="bg-gradient-to-r from-[#534AB7] to-[#3eb489] bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl">
+                <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
+              </div>
+              <div className="mt-2 text-sm font-semibold text-[#64748b]">{s.label}</div>
+            </div>
+          ))}
+        </div>
+ 
         {/* Minimal Toptal-style cards */}
         <div className="grid gap-6 md:grid-cols-3">
           {results.map((r) => (
             <Link key={r.href} href={r.href}
-              className="group flex flex-col rounded-xl border border-[#e5e7eb] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-lg">
+              className="group flex flex-col rounded-xl border border-[#e5e7eb] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               <p className="mb-3 text-[11px] font-bold uppercase tracking-widest" style={{ color: "#534AB7" }}>
                 {r.label}
               </p>
@@ -78,3 +98,4 @@ export default function Results() {
     </section>
   );
 }
+ 
