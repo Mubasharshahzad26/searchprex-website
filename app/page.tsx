@@ -11,6 +11,7 @@ import WhyUs from "../components/WhyUs";
 import PersonaSelector from "../components/PersonaSelector";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
+import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import ToolsShowcase from "@/components/ToolsShowcase";
 import FounderSection from "../components/FounderSection";
 import Process from "../components/Process";
@@ -168,22 +169,25 @@ export default async function Home() {
         {/* 10 — PROCESS */}
         <Reveal><Process /></Reveal>
  
-        {/* 11 — FREE TOOLS (bento — self-animated, no wrapper) */}
+        {/* 11 — AI VISIBILITY (AEO dashboard — self-animated, no wrapper) */}
+        <AIVisibilityShowcase />
+ 
+        {/* 12 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <ToolsShowcase />
  
-        {/* 12 — PRICING */}
+        {/* 13 — PRICING */}
         <Reveal><Pricing /></Reveal>
  
-        {/* 13 — LEAD CAPTURE FORM */}
+        {/* 14 — LEAD CAPTURE FORM */}
         <Reveal><LeadCaptureForm /></Reveal>
  
-        {/* 14 — FAQ */}
+        {/* 15 — FAQ */}
         <Reveal><FAQ /></Reveal>
  
-        {/* 15 — BLOG TEASER */}
+        {/* 16 — BLOG TEASER */}
         <Reveal><BlogTeaser /></Reveal>
  
-        {/* 16 — FINAL CTA */}
+        {/* 17 — FINAL CTA */}
         <Reveal><CTA /></Reveal>
  
       </main>
@@ -192,3 +196,4 @@ export default async function Home() {
     </>
   );
 }
+ 
