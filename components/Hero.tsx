@@ -148,7 +148,20 @@ export default function Hero({ heroImage }: HeroProps) {
   return (
     <>
       <section className="relative overflow-hidden bg-[#e9ebf0] pt-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ── Semrush-style aurora background ── */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <span className="hero-aurora hero-aurora-1" />
+          <span className="hero-aurora hero-aurora-2" />
+          <style>{`
+            .hero-aurora { position:absolute; border-radius:9999px; filter:blur(100px); will-change:transform; }
+            .hero-aurora-1 { width:50%; height:70%; left:-12%; top:-10%; background:#534AB7; opacity:0.14; animation: hero-d1 22s ease-in-out infinite alternate; }
+            .hero-aurora-2 { width:45%; height:65%; right:-12%; top:5%; background:#3eb489; opacity:0.12; animation: hero-d2 26s ease-in-out infinite alternate; }
+            @keyframes hero-d1 { from{transform:translate(0,0) scale(1);} to{transform:translate(12%,8%) scale(1.15);} }
+            @keyframes hero-d2 { from{transform:translate(0,0) scale(1);} to{transform:translate(-10%,6%) scale(1.12);} }
+            @media (prefers-reduced-motion: reduce){ .hero-aurora{animation:none;} }
+          `}</style>
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 pb-12 sm:px-6 lg:px-8">
  
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
           <div className="relative z-20 flex justify-center pt-4 pb-3">
