@@ -1,6 +1,5 @@
-
 "use client";
-import { Favicon } from "@/components/Logo";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
  
@@ -75,10 +74,10 @@ export default function Footer() {
       {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
-          {/* Favicon & Description */}
+          {/* Logo & Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-4 inline-block">
-              <Favicon />
+              <Logo size="lg" variant="light" />
             </Link>
             <p className="mb-6 max-w-sm text-sm text-white/70">
               Founder-led SEO. No juniors. No fluff. Specializing in law firm SEO, ecommerce SEO, and local SEO for US businesses — senior-led execution with zero intermediaries.
