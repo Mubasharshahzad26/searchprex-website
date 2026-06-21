@@ -34,7 +34,7 @@ export default function RefundPolicyPage() {
           <section>
             <h2 className="font-bold text-[#0a0f2e] mb-2">How to Request a Refund</h2>
             <p>
-              Email us at <a href="mailto:support@searchprex.com" className="text-[#3eb489] font-semibold">support@searchprex.com</a> with
+              Email us at <a href="mailto:contact@searchprex.com" className="text-[#3eb489] font-semibold">support@searchprex.com</a> with
               your order email and reason for the request. Approved refunds are processed within
               5–10 business days to your original payment method.
             </p>
