@@ -14,8 +14,9 @@ import AdvantageBand from "../components/AdvantageBand";
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
+
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
-import ToolsShowcase from "@/components/ToolsShowcase";
+import SolutionsCarousel from "../components/SolutionsCarousel";
 import NicheSEOProPromo from "../components/NicheSEOProPromo";
 import FounderSection from "../components/FounderSection";
 // import Process from "../components/Process";                  // removed from homepage
@@ -183,7 +184,7 @@ export default async function Home() {
         <AIVisibilityShowcase />
  
         {/* 12 — FREE TOOLS (bento — self-animated, no wrapper) */}
-        <ToolsShowcase />
+        <SolutionsCarousel />
  
         {/* 12.5 — NICHESEOPRO SAAS PROMO (self-animated, no wrapper) */}
         <NicheSEOProPromo />
