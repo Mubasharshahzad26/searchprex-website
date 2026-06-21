@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle, ExternalLink, Star, Users, Clock, TrendingUp, Award } from "lucide-react";
+import { CheckCircle, ExternalLink, Star, Users, Clock, TrendingUp, Award, ArrowRight } from "lucide-react";
  
 /* Toptal green accent */
 const GREEN = "#3eb489";
@@ -127,7 +127,10 @@ const profileLinks = [
  
 export default function FounderSection() {
   return (
-    <section className="relative bg-[#eaecf3] py-24">
+    <section className="relative overflow-hidden bg-[#eaecf3] py-24">
+      {/* soft gradient accent at top */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-[#ece9f7] to-transparent" />
+ 
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
@@ -146,15 +149,15 @@ export default function FounderSection() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <div
-            className="mb-3 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest shadow-sm"
-            style={{ borderColor: "#cbeadd", color: "#1D9E75" }}
-          >
-            <CheckCircle className="h-3.5 w-3.5" />
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#534AB7]/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#534AB7] shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" />
             Founder-led agency · E-E-A-T verified
           </div>
-          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-            Hands-on experience, <span style={{ color: GREEN }}>not theory</span>
+          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+            Hands-on experience,{" "}
+            <span className="bg-gradient-to-r from-[#534AB7] to-[#3eb489] bg-clip-text text-transparent">
+              not theory
+            </span>
           </h2>
           <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
             You work directly with me — not a rotating team of juniors. Every strategy comes from
@@ -171,7 +174,8 @@ export default function FounderSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm">
+            <div className="relative overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-xl">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#534AB7] to-[#3eb489]" />
  
               {/* Avatar + name */}
               <div className="mb-6 flex items-center gap-4">
@@ -216,7 +220,7 @@ export default function FounderSection() {
                     href={c.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-lg border border-[#e5e7eb] px-3 py-2 transition-opacity hover:opacity-75"
+                    className="flex items-center gap-2 rounded-lg border border-[#e5e7eb] px-3 py-2 transition-all hover:-translate-y-0.5 hover:shadow-sm"
                     style={{ background: c.bg }}
                   >
                     <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: c.color }} />
@@ -239,7 +243,7 @@ export default function FounderSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-opacity hover:opacity-75"
+                    className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all hover:-translate-y-0.5 hover:shadow-sm"
                     style={{ background: link.bg, color: link.textColor }}
                   >
                     {link.icon}
@@ -261,14 +265,15 @@ export default function FounderSection() {
             className="flex flex-col gap-6"
           >
             {/* Real case results — Experience proof */}
-            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
+            <div className="relative overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#534AB7] to-[#3eb489]" />
               <div className="mb-4 flex items-center gap-2">
                 <Award className="h-4 w-4" style={{ color: GREEN }} />
                 <h3 className="text-lg font-black text-[#0a0f2e]">Real results I&apos;ve delivered</h3>
               </div>
               <div className="flex flex-col gap-3">
                 {caseResults.map((c) => (
-                  <div key={c.client} className="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-3">
+                  <div key={c.client} className="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-3 transition-colors hover:bg-[#f1f5f9]">
                     <div className="flex flex-col items-center justify-center rounded-lg px-3 py-2 min-w-[72px]" style={{ background: "rgba(62,180,137,0.1)" }}>
                       <span className="text-lg font-black leading-none" style={{ color: "#2f9670" }}>{c.metric}</span>
                     </div>
@@ -309,51 +314,33 @@ export default function FounderSection() {
             </div>
  
             {/* Mini CTA */}
-            <div className="rounded-2xl bg-[#0a0f2e] p-6 text-white">
-              <p className="mb-2 text-sm font-semibold text-white/60 uppercase tracking-widest">Ready to talk?</p>
-              <p className="mb-4 text-lg font-black">Get a free 30-min strategy call</p>
-              <Link
-                href="/free-audit"
-                className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors"
-                style={{ background: GREEN }}
-              >
-                Book Consultation
-              </Link>
-              <p className="mt-3 text-xs text-white/40">No commitment · Reply within 24hrs</p>
+            <div className="relative overflow-hidden rounded-2xl bg-[#0a0f2e] p-6 text-white">
+              <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+                <span className="fs-blob" />
+              </div>
+              <div className="relative">
+                <p className="mb-2 text-sm font-semibold text-white/60 uppercase tracking-widest">Ready to talk?</p>
+                <p className="mb-4 text-lg font-black">Get a free 30-min strategy call</p>
+                <Link
+                  href="/free-audit"
+                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#3eb489] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                  Book Consultation <ArrowRight className="h-4 w-4" />
+                </Link>
+                <p className="mt-3 text-xs text-white/40">No commitment · Reply within 24hrs</p>
+              </div>
             </div>
           </motion.div>
  
         </div>
       </div>
+ 
+      <style>{`
+        .fs-blob { position: absolute; top: -40%; right: -20%; width: 60%; height: 160%; border-radius: 9999px; background: #534AB7; opacity: 0.22; filter: blur(80px); animation: fs-drift 22s ease-in-out infinite alternate; }
+        @keyframes fs-drift { from { transform: translate(0,0) scale(1); } to { transform: translate(-12%,8%) scale(1.15); } }
+        @media (prefers-reduced-motion: reduce) { .fs-blob { animation: none; } }
+      `}</style>
     </section>
   );
 }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
