@@ -520,16 +520,6 @@ export default function ScorecardClient() {
       `}</style>
  
       <div style={{ maxWidth: 960, margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "clamp(16px, 4vw, 22px)", flexWrap: "wrap", gap: "clamp(12px, 3vw, 16px)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "clamp(6px, 2vw, 9px)", fontWeight: 900, fontSize: "clamp(14px, 4vw, 18px)", letterSpacing: "-0.01em" }}>
-            <span style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg, ${PURPLE}, ${GREEN})`, display: "grid", placeItems: "center", color: "#fff" }}>
-              <Scale size={15} />
-            </span>
-            <span style={{ color: INK }}>Search<span style={{ color: PURPLE }}>Prex</span></span>
-          </div>
-          <span style={{ fontSize: "clamp(10px, 2.5vw, 12px)", fontWeight: 700, color: MUTE, letterSpacing: "0.04em" }}>LAW FIRM SEO SCORECARD</span>
-        </div>
- 
         {stage === "input" && <InputForm form={form} setForm={setForm} onRun={runAudit} onSample={showSample} error={error} />}
         {stage === "loading" && <Loading firm={form.website} />}
         {stage === "results" && data && <Results data={data} form={lastForm.current} onReset={reset} />}
