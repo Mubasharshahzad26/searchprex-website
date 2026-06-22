@@ -1,10 +1,11 @@
 // components/BlogTeaser.tsx
-// FIXED: Proper ESM import without require()
+// TOPTAL STYLE: Real images, author avatars, better visual hierarchy
  
+import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Clock, CheckCircle } from "lucide-react";
+import { ChevronRight, Clock } from "lucide-react";
  
-// Fallback blog posts for build time / when data not available
+// Enhanced blog posts with real images & author avatars
 const fallbackPosts = [
   {
     slug: "law-firm-seo-guide",
@@ -13,8 +14,12 @@ const fallbackPosts = [
     category: "Technical SEO",
     subcategory: "Law Firms",
     featured: true,
-    author: { name: "Mubashar Shahzad" },
-    readTime: "12 min read"
+    author: { 
+      name: "Mubashar Shahzad",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEzUPWNlHQXZA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1695208707098?e=1728518400&v=beta&t=YOUR_AVATAR_URL" // Replace with real avatar
+    },
+    readTime: "12 min read",
+    image: "https://images.unsplash.com/photo-1589519160732-57fc498494f8?w=800&q=80" // Law firm SEO banner
   },
   {
     slug: "ecommerce-seo-shopify",
@@ -23,8 +28,12 @@ const fallbackPosts = [
     category: "E-commerce SEO",
     subcategory: "Shopify",
     featured: false,
-    author: { name: "Mubashar Shahzad" },
-    readTime: "8 min read"
+    author: { 
+      name: "Mubashar Shahzad",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEzUPWNlHQXZA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1695208707098?e=1728518400&v=beta&t=YOUR_AVATAR_URL"
+    },
+    readTime: "8 min read",
+    image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&q=80" // Shopify ecommerce
   },
   {
     slug: "local-seo-rankings",
@@ -33,8 +42,12 @@ const fallbackPosts = [
     category: "Local SEO",
     subcategory: "Local Business",
     featured: false,
-    author: { name: "Mubashar Shahzad" },
-    readTime: "10 min read"
+    author: { 
+      name: "Mubashar Shahzad",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEzUPWNlHQXZA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1695208707098?e=1728518400&v=beta&t=YOUR_AVATAR_URL"
+    },
+    readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1553531889-e6cf89d45394?w=800&q=80" // Local map
   },
   {
     slug: "technical-seo-core-web-vitals",
@@ -43,8 +56,12 @@ const fallbackPosts = [
     category: "Technical SEO",
     subcategory: "Performance",
     featured: false,
-    author: { name: "Mubashar Shahzad" },
-    readTime: "15 min read"
+    author: { 
+      name: "Mubashar Shahzad",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEzUPWNlHQXZA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1695208707098?e=1728518400&v=beta&t=YOUR_AVATAR_URL"
+    },
+    readTime: "15 min read",
+    image: "https://images.unsplash.com/photo-1555949519-51caa142c052?w=800&q=80" // Performance metrics
   },
   {
     slug: "link-building-strategy",
@@ -53,29 +70,16 @@ const fallbackPosts = [
     category: "Link Building",
     subcategory: "Off-Page",
     featured: false,
-    author: { name: "Mubashar Shahzad" },
-    readTime: "11 min read"
+    author: { 
+      name: "Mubashar Shahzad",
+      avatar: "https://media.licdn.com/dms/image/v2/D4D03AQEzUPWNlHQXZA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1695208707098?e=1728518400&v=beta&t=YOUR_AVATAR_URL"
+    },
+    readTime: "11 min read",
+    image: "https://images.unsplash.com/photo-1527427337751-dacf14ef9033?w=800&q=80" // Link chains
   },
 ];
  
-function GradientThumb({ category }: { category: string }) {
-  const colors: Record<string, string> = {
-    "Technical SEO": "from-[#0a0f2e] to-[#1a3c8f]",
-    "E-commerce SEO": "from-[#0f2027] to-[#203a43]",
-    "Local SEO": "from-[#1a1a2e] to-[#16213e]",
-    "Content Strategy": "from-[#0d1b2a] to-[#1b263b]",
-    "On-Page SEO": "from-[#1a0533] to-[#341070]",
-    "Link Building": "from-[#0b3d2e] to-[#1a6b4e]",
-  };
-  return (
-    <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${colors[category] || "from-[#0a0f2e] to-[#1a3c8f]"}`}>
-      <span className="text-4xl opacity-30">📊</span>
-    </div>
-  );
-}
- 
 export default function BlogTeaser() {
-  // Use fallback posts (update this when you have real blog data)
   const posts = fallbackPosts;
  
   if (!posts || posts.length === 0) {
@@ -97,58 +101,119 @@ export default function BlogTeaser() {
  
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
  
-          {/* Featured — large card (Toptal left column) */}
-          <Link href={`/blog/${featured.slug}`}
-            className="group flex flex-col overflow-hidden rounded-xl border border-[#e5e7eb] bg-white transition-all hover:-translate-y-1 hover:shadow-lg lg:row-span-2">
-            <div className="aspect-[16/10] overflow-hidden">
-              <GradientThumb category={featured.category} />
+          {/* Featured — Large Card (Left, spans 2 rows) */}
+          <Link 
+            href={`/blog/${featured.slug}`}
+            className="group flex flex-col overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-xl lg:row-span-2"
+          >
+            {/* Thumbnail Image */}
+            <div className="relative aspect-[16/10] overflow-hidden bg-[#f0f0f0]">
+              <Image
+                src={featured.image}
+                alt={featured.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 300px"
+              />
+              {/* Category Badge — Overlay */}
+              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">
+                {featured.category}
+              </div>
             </div>
+ 
+            {/* Content */}
             <div className="flex flex-1 flex-col p-7">
-              <p className="mb-3 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">
-                {featured.category} <ChevronRight className="h-3 w-3 text-[#94a3b8]" /> {featured.subcategory}
+              <p className="mb-3 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+                {featured.subcategory} <ChevronRight className="h-3 w-3" />
               </p>
-              <h3 className="mb-3 text-xl font-black leading-snug text-[#0a0f2e] group-hover:text-[#1a3c8f] transition-colors">
+ 
+              <h3 className="mb-4 text-xl font-black leading-snug text-[#0a0f2e] group-hover:text-[#1a3c8f] transition-colors">
                 {featured.title}
               </h3>
-              <p className="mb-5 text-sm leading-relaxed text-[#64748b]">{featured.excerpt}</p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-xs font-bold text-[#0a0f2e]">
-                  By {featured.author.name} <CheckCircle className="h-3.5 w-3.5 text-[#534AB7]" />
-                </span>
-                <span className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[#94a3b8]">
+ 
+              <p className="mb-6 text-sm leading-relaxed text-[#64748b]">
+                {featured.excerpt}
+              </p>
+ 
+              {/* Author + Read Time */}
+              <div className="mt-auto flex items-center justify-between border-t border-[#e5e7eb] pt-5">
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={featured.author.avatar}
+                    alt={featured.author.name}
+                    width={28}
+                    height={28}
+                    className="rounded-full object-cover w-7 h-7"
+                  />
+                  <span className="text-xs font-semibold text-[#0a0f2e]">
+                    {featured.author.name}
+                  </span>
+                </div>
+                <span className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-[#94a3b8]">
                   <Clock className="h-3.5 w-3.5" /> {featured.readTime}
                 </span>
               </div>
             </div>
           </Link>
  
-          {/* Compact cards — 2x2 (Toptal right side) */}
+          {/* Compact Cards — 2x2 Grid (Right side) */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2">
             {compact.map((p: any) => (
-              <Link key={p.slug} href={`/blog/${p.slug}`}
-                className="group flex flex-col overflow-hidden rounded-xl border border-[#e5e7eb] bg-white transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div className="aspect-[16/7] overflow-hidden">
-                  <GradientThumb category={p.category} />
+              <Link 
+                key={p.slug} 
+                href={`/blog/${p.slug}`}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              >
+                {/* Thumbnail Image */}
+                <div className="relative aspect-[16/9] overflow-hidden bg-[#f0f0f0]">
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 250px"
+                  />
+                  {/* Category Badge — Overlay */}
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#534AB7]">
+                    {p.category}
+                  </div>
                 </div>
+ 
+                {/* Content */}
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-2 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#534AB7]">
-                    {p.category} <ChevronRight className="h-3 w-3 text-[#94a3b8]" /> {p.subcategory}
+                  <p className="mb-2 flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">
+                    {p.subcategory} <ChevronRight className="h-2.5 w-2.5" />
                   </p>
-                  <h3 className="mb-3 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#1a3c8f] transition-colors">
+ 
+                  <h3 className="mb-4 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#1a3c8f] transition-colors">
                     {p.title}
                   </h3>
-                  <span className="mt-auto text-xs font-semibold text-[#64748b]">By {p.author.name}</span>
+ 
+                  {/* Author */}
+                  <div className="mt-auto flex items-center gap-2 border-t border-[#e5e7eb] pt-4">
+                    <Image
+                      src={p.author.avatar}
+                      alt={p.author.name}
+                      width={24}
+                      height={24}
+                      className="rounded-full object-cover w-6 h-6"
+                    />
+                    <span className="text-xs font-semibold text-[#0a0f2e]">
+                      {p.author.name}
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
           </div>
         </div>
  
-        {/* Outlined button */}
-        <div className="mt-10 text-center">
+        {/* CTA Button */}
+        <div className="mt-12 text-center">
           <Link href="/blog"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#d4d8e3] bg-white px-6 py-3 text-sm font-bold text-[#0a0f2e] transition-all hover:border-[#0a0f2e]">
+            className="inline-flex items-center gap-2 rounded-lg border border-[#d4d8e3] bg-white px-6 py-3 text-sm font-bold text-[#0a0f2e] transition-all hover:border-[#0a0f2e] hover:bg-[#f0f0f0]">
             Read More SEO Guides
+            <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
  
