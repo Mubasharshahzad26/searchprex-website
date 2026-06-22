@@ -10,7 +10,7 @@ import {
   useTransform,
   useMotionTemplate,
 } from "framer-motion";
-import { Search, MapPin, Scale, ShoppingCart, Bot, Calculator } from "lucide-react";
+import { Search, MapPin, Scale, ShoppingCart, Bot, Calculator, Check } from "lucide-react";
  
 /* ─── gradient orb ─── */
 function Orb({ cx, cy, r, color }: { cx: string; cy: string; r: string; color: string }) {
@@ -29,6 +29,46 @@ const PILLS = [
   { icon: Calculator, label: "Lost Case Calculator", href: "/case-calculator" },
 ];
  
+/* ─── countries list ─── */
+const COUNTRIES = [
+  { code: "US", name: "United States, Google", flag: "🇺🇸" },
+  { code: "GB", name: "United Kingdom", flag: "🇬🇧" },
+  { code: "CA", name: "Canada", flag: "🇨🇦" },
+  { code: "AU", name: "Australia", flag: "🇦🇺" },
+  { code: "DE", name: "Germany", flag: "🇩🇪" },
+  { code: "FR", name: "France", flag: "🇫🇷" },
+  { code: "IN", name: "India", flag: "🇮🇳" },
+  { code: "PK", name: "Pakistan", flag: "🇵🇰" },
+  { code: "AE", name: "UAE", flag: "🇦🇪" },
+  { code: "SA", name: "Saudi Arabia", flag: "🇸🇦" },
+  { code: "SG", name: "Singapore", flag: "🇸🇬" },
+  { code: "ZA", name: "South Africa", flag: "🇿🇦" },
+  { code: "BR", name: "Brazil", flag: "🇧🇷" },
+  { code: "MX", name: "Mexico", flag: "🇲🇽" },
+  { code: "NL", name: "Netherlands", flag: "🇳🇱" },
+  { code: "IT", name: "Italy", flag: "🇮🇹" },
+  { code: "ES", name: "Spain", flag: "🇪🇸" },
+  { code: "PL", name: "Poland", flag: "🇵🇱" },
+  { code: "SE", name: "Sweden", flag: "🇸🇪" },
+  { code: "NO", name: "Norway", flag: "🇳🇴" },
+  { code: "DK", name: "Denmark", flag: "🇩🇰" },
+  { code: "FI", name: "Finland", flag: "🇫🇮" },
+  { code: "NZ", name: "New Zealand", flag: "🇳🇿" },
+  { code: "JP", name: "Japan", flag: "🇯🇵" },
+  { code: "AF", name: "Afghanistan", flag: "🇦🇫" },
+  { code: "AL", name: "Albania", flag: "🇦🇱" },
+  { code: "DZ", name: "Algeria", flag: "🇩🇿" },
+  { code: "AR", name: "Argentina", flag: "🇦🇷" },
+  { code: "AT", name: "Austria", flag: "🇦🇹" },
+  { code: "BD", name: "Bangladesh", flag: "🇧🇩" },
+  { code: "BE", name: "Belgium", flag: "🇧🇪" },
+  { code: "NG", name: "Nigeria", flag: "🇳🇬" },
+  { code: "KE", name: "Kenya", flag: "🇰🇪" },
+  { code: "PH", name: "Philippines", flag: "🇵🇭" },
+  { code: "MY", name: "Malaysia", flag: "🇲🇾" },
+  { code: "ID", name: "Indonesia", flag: "🇮🇩" },
+];
+ 
 export default function SEOAuditStrip() {
   const [url, setUrl] = useState("");
   const [focused, setFocused] = useState(false);
@@ -36,7 +76,39 @@ export default function SEOAuditStrip() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
  
-  /* mouse-tracking spotlight gradient (reactive via useMotionTemplate) */
+  /* ─── country dropdown state ─── */
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
+  const [countryOpen, setCountryOpen] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const countryRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+ 
+  /* close dropdown on outside click */
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (countryRef.current && !countryRef.current.contains(e.target as Node)) {
+        setCountryOpen(false);
+        setCountrySearch("");
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+ 
+  /* focus search input when dropdown opens */
+  useEffect(() => {
+    if (countryOpen && searchInputRef.current) {
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+    }
+  }, [countryOpen]);
+ 
+  /* filtered countries */
+  const filteredCountries = COUNTRIES.filter((c) =>
+    c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+    c.code.toLowerCase().includes(countrySearch.toLowerCase())
+  );
+ 
+  /* mouse-tracking spotlight */
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
   const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
@@ -60,7 +132,7 @@ export default function SEOAuditStrip() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const dest = url.trim()
-      ? `/ai-visibility?url=${encodeURIComponent(url)}`
+      ? `/ai-visibility?url=${encodeURIComponent(url)}&country=${selectedCountry.code}`
       : "/ai-visibility";
     router.push(dest);
   };
@@ -74,7 +146,7 @@ export default function SEOAuditStrip() {
         padding: "96px 24px",
       }}
     >
-      {/* ── mouse-reactive spotlight ── */}
+      {/* mouse-reactive spotlight */}
       <motion.div
         className="pointer-events-none absolute inset-0"
         style={{ background: spotlight }}
@@ -85,10 +157,10 @@ export default function SEOAuditStrip() {
         <Orb cx="55%" cy="10%" r="180" color="#7c3aed" />
       </svg>
  
-      {/* ── main card ── */}
+      {/* main card */}
       <div className="relative z-10 mx-auto max-w-3xl text-center">
  
-        {/* ── eyebrow pill ── */}
+        {/* eyebrow pill */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -99,7 +171,7 @@ export default function SEOAuditStrip() {
           Free AI Visibility Check
         </motion.div>
  
-        {/* ── headline ── */}
+        {/* headline */}
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -116,7 +188,7 @@ export default function SEOAuditStrip() {
           </span>
         </motion.h2>
  
-        {/* ── sub ── */}
+        {/* sub */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -127,7 +199,7 @@ export default function SEOAuditStrip() {
           clients, recovered carts, and booked appointments.
         </motion.p>
  
-        {/* ── URL input — Semrush style ── */}
+        {/* URL input — Semrush style */}
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 16 }}
@@ -135,7 +207,7 @@ export default function SEOAuditStrip() {
           transition={{ delay: 0.4, duration: 0.5 }}
           className="relative mx-auto flex max-w-xl items-center rounded-full bg-white shadow-xl"
           style={{
-            border: focused ? "2px solid #534AB7" : "2px solid transparent",
+            border: focused || countryOpen ? "2px solid #534AB7" : "2px solid transparent",
             transition: "border-color .2s",
           }}
         >
@@ -157,13 +229,80 @@ export default function SEOAuditStrip() {
             className="flex-1 bg-transparent py-4 pl-3 pr-2 text-sm text-[#0a0f2e] outline-none placeholder:text-[#94a3b8]"
           />
  
-          {/* country selector stub */}
-          <div className="flex items-center gap-1.5 border-l border-[#e5e7eb] px-4 py-4 text-sm font-medium text-[#374151]">
-            <span>🇺🇸</span>
-            <span className="hidden sm:inline">US</span>
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#94a3b8" strokeWidth="1.5">
-              <path d="M2 4l3 3 3-3" />
-            </svg>
+          {/* ─── country selector (functional) ─── */}
+          <div ref={countryRef} className="relative">
+            <button
+              type="button"
+              onClick={() => {
+                setCountryOpen((prev) => !prev);
+                setCountrySearch("");
+              }}
+              className="flex items-center gap-1.5 border-l border-[#e5e7eb] px-4 py-4 text-sm font-medium text-[#374151] hover:bg-gray-50 transition-colors cursor-pointer select-none"
+              style={{ borderRadius: 0 }}
+            >
+              <span>{selectedCountry.flag}</span>
+              <span className="hidden sm:inline">{selectedCountry.code}</span>
+              <svg
+                width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#94a3b8" strokeWidth="1.5"
+                style={{ transform: countryOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+              >
+                <path d="M2 4l3 3 3-3" />
+              </svg>
+            </button>
+ 
+            {/* dropdown */}
+            {countryOpen && (
+              <div
+                className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-[#e5e7eb] bg-white shadow-2xl"
+                style={{ zIndex: 9999 }}
+              >
+                {/* search input */}
+                <div className="border-b border-[#f1f5f9] p-2">
+                  <div className="flex items-center gap-2 rounded-lg bg-[#f8fafc] px-3 py-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
+                      <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      placeholder="Enter country"
+                      value={countrySearch}
+                      onChange={(e) => setCountrySearch(e.target.value)}
+                      className="flex-1 bg-transparent text-sm text-[#0a0f2e] outline-none placeholder:text-[#94a3b8]"
+                    />
+                  </div>
+                </div>
+ 
+                {/* country list */}
+                <ul className="max-h-52 overflow-y-auto py-1">
+                  {filteredCountries.length > 0 ? (
+                    filteredCountries.map((country) => (
+                      <li key={country.code}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedCountry(country);
+                            setCountryOpen(false);
+                            setCountrySearch("");
+                          }}
+                          className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-[#374151] hover:bg-[#f5f3ff] transition-colors"
+                        >
+                          <span className="text-base">{country.flag}</span>
+                          <span className="flex-1 text-left">{country.name}</span>
+                          {selectedCountry.code === country.code && (
+                            <Check className="h-3.5 w-3.5 text-[#534AB7]" strokeWidth={2.5} />
+                          )}
+                        </button>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="px-4 py-3 text-sm text-[#94a3b8] text-center">
+                      No countries found
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
  
           <button
@@ -178,7 +317,7 @@ export default function SEOAuditStrip() {
           </button>
         </motion.form>
  
-        {/* ── trust micro-line ── */}
+        {/* trust micro-line */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -188,7 +327,7 @@ export default function SEOAuditStrip() {
           Free · No credit card · Results in 30 seconds
         </motion.p>
  
-        {/* ── social proof avatars ── */}
+        {/* social proof avatars */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -212,7 +351,7 @@ export default function SEOAuditStrip() {
         </motion.div>
       </div>
  
-      {/* ── bottom solutions pills (professional lucide icons) ── */}
+      {/* bottom solutions pills */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
