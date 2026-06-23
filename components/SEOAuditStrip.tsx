@@ -103,9 +103,10 @@ export default function SEOAuditStrip() {
   }, [countryOpen]);
  
   /* filtered countries */
-  const filteredCountries = COUNTRIES.filter((c) =>
-    c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
-    c.code.toLowerCase().includes(countrySearch.toLowerCase())
+  const filteredCountries = COUNTRIES.filter(
+    (c) =>
+      c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+      c.code.toLowerCase().includes(countrySearch.toLowerCase())
   );
  
   /* mouse-tracking spotlight */
@@ -140,7 +141,7 @@ export default function SEOAuditStrip() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden"
+      className="relative"
       style={{
         background: "linear-gradient(135deg, #e8eaf6 0%, #d4f5e9 55%, #e0e8ff 100%)",
         padding: "96px 24px",
@@ -199,7 +200,7 @@ export default function SEOAuditStrip() {
           clients, recovered carts, and booked appointments.
         </motion.p>
  
-        {/* URL input — Semrush style */}
+        {/* URL input */}
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 16 }}
@@ -229,7 +230,7 @@ export default function SEOAuditStrip() {
             className="flex-1 bg-transparent py-4 pl-3 pr-2 text-sm text-[#0a0f2e] outline-none placeholder:text-[#94a3b8]"
           />
  
-          {/* ─── country selector (functional) ─── */}
+          {/* ─── country selector ─── */}
           <div ref={countryRef} className="relative">
             <button
               type="button"
@@ -243,24 +244,33 @@ export default function SEOAuditStrip() {
               <span>{selectedCountry.flag}</span>
               <span className="hidden sm:inline">{selectedCountry.code}</span>
               <svg
-                width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#94a3b8" strokeWidth="1.5"
-                style={{ transform: countryOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                stroke="#94a3b8"
+                strokeWidth="1.5"
+                style={{
+                  transform: countryOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.2s",
+                }}
               >
                 <path d="M2 4l3 3 3-3" />
               </svg>
             </button>
  
-            {/* dropdown */}
+            {/* ✅ FIXED: bottom-full mb-2 — upar khulega, pills cover nahi honge */}
             {countryOpen && (
               <div
-                className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-[#e5e7eb] bg-white shadow-2xl"
+                className="absolute right-0 bottom-full mb-2 w-64 rounded-xl border border-[#e5e7eb] bg-white shadow-2xl"
                 style={{ zIndex: 9999 }}
               >
-                {/* search input */}
+                {/* search */}
                 <div className="border-b border-[#f1f5f9] p-2">
                   <div className="flex items-center gap-2 rounded-lg bg-[#f8fafc] px-3 py-2">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
-                      <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="M21 21l-4.35-4.35" />
                     </svg>
                     <input
                       ref={searchInputRef}
@@ -273,7 +283,7 @@ export default function SEOAuditStrip() {
                   </div>
                 </div>
  
-                {/* country list */}
+                {/* list */}
                 <ul className="max-h-52 overflow-y-auto py-1">
                   {filteredCountries.length > 0 ? (
                     filteredCountries.map((country) => (
@@ -296,7 +306,7 @@ export default function SEOAuditStrip() {
                       </li>
                     ))
                   ) : (
-                    <li className="px-4 py-3 text-sm text-[#94a3b8] text-center">
+                    <li className="px-4 py-3 text-center text-sm text-[#94a3b8]">
                       No countries found
                     </li>
                   )}
@@ -305,6 +315,7 @@ export default function SEOAuditStrip() {
             )}
           </div>
  
+          {/* submit */}
           <button
             type="submit"
             className="m-1.5 flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-px hover:shadow-lg"
