@@ -1,13 +1,7 @@
 "use client";
  
 // app/blog/BlogClient.tsx
-// Toptal-style blog listing:
-// - One large FEATURED card + compact cards grid (like Toptal's "Trending
-//   Publications" — big card left, light cards right)
-// - Compact bylines ("By Mubashar Shahzad ✓") instead of a heavy bio block
-//   on every card; full bio only on the featured card
-// - Search + voice search, category filter, newsletter — all preserved
-// - Fake pagination removed (6 posts don't need it); audit CTA added (CRO)
+// Toptal-style blog listing with real Unsplash covers + publish dates.
  
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -20,6 +14,9 @@ import { categories as categoryData, posts, mostRead, type Post } from "./data";
  
 const GREEN = "#3eb489";
  
+const fmtDate = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+ 
 const categoryIcons: Record<string, any> = {
   "Technical SEO": Settings,
   "On-Page SEO": FileText,
@@ -31,7 +28,7 @@ const categoryIcons: Record<string, any> = {
  
 function BlogImage({ rank, category }: { rank?: number; category: string }) {
   const [imgError, setImgError] = useState(false);
-
+ 
   const gradients: Record<string, string> = {
     "Technical SEO": "from-[#0a0f2e] to-[#1a3c8f]",
     "E-commerce SEO": "from-[#0f2027] to-[#203a43]",
@@ -40,7 +37,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
     "On-Page SEO": "from-[#1a0533] to-[#341070]",
     "Link Building": "from-[#0b3d2e] to-[#1a6b4e]",
   };
-
+ 
   const covers: Record<string, string> = {
     "Technical SEO":   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
     "On-Page SEO":     "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=800&q=80",
@@ -49,10 +46,10 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
     "Link Building":   "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
     "Content Strategy":"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
   };
-
+ 
   const cover = covers[category] ||
     "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80";
-
+ 
   return (
     <div className="relative w-full h-full overflow-hidden">
       {/* Branded gradient fallback — shows only if the image fails to load */}
@@ -62,7 +59,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
           <div className="text-white text-xs font-mono">{category}</div>
         </div>
       </div>
-
+ 
       {/* Real Unsplash cover */}
       {!imgError && (
         // eslint-disable-next-line @next/next/no-img-element
@@ -74,7 +71,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
         />
       )}
-
+ 
       {rank && (
         <div className="absolute top-3 left-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[#534AB7] shadow-md">
           <span className="text-white text-xs font-bold">{rank}</span>
@@ -216,7 +213,7 @@ export default function BlogClient() {
         </div>
       </section>
  
-      {/* ── 02 CATEGORIES (Toptal skillsets-style bordered grid) ── */}
+      {/* ── 02 CATEGORIES ── */}
       <section className="bg-[#eeeef5] border-b border-[#e5e7eb]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border border-[#e5e7eb] rounded-xl overflow-hidden">
@@ -267,7 +264,7 @@ export default function BlogClient() {
         </div>
       </section>
  
-      {/* ── 04 POSTS — Toptal trending layout: featured + compact grid ── */}
+      {/* ── 04 POSTS — featured + compact grid ── */}
       <section ref={postsRef} id="posts-grid" className="py-20 bg-[#eeeef5] scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {isFiltering && (
@@ -295,7 +292,7 @@ export default function BlogClient() {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
  
-              {/* FEATURED (large, Toptal-style — only when not filtering) */}
+              {/* FEATURED (large) */}
               {!isFiltering && featuredPost && (
                 <motion.article initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                   className="lg:row-span-2 flex flex-col bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden hover:shadow-lg transition-all">
@@ -312,8 +309,10 @@ export default function BlogClient() {
                       <h2 className="text-[#0a0f2e] font-black text-2xl leading-snug mb-4 hover:text-[#1a3c8f] transition-colors">{featuredPost.title}</h2>
                     </Link>
                     <p className="text-[#64748b] text-sm leading-relaxed mb-5">{featuredPost.excerpt}</p>
-                    <div className="flex items-center gap-1.5 text-[#94a3b8] text-xs font-semibold uppercase tracking-wide mb-6">
-                      <Clock className="h-3.5 w-3.5" />{featuredPost.readTime}
+                    <div className="flex items-center gap-2 text-[#94a3b8] text-xs font-semibold uppercase tracking-wide mb-6">
+                      <span>{fmtDate(featuredPost.date)}</span>
+                      <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />
+                      <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{featuredPost.readTime}</span>
                     </div>
                     {/* Full author bio — featured card only (E-E-A-T) */}
                     <div className="mt-auto border-t border-[#e5e7eb] pt-5">
@@ -340,7 +339,7 @@ export default function BlogClient() {
                 </motion.article>
               )}
  
-              {/* COMPACT CARDS (light, Toptal-style) */}
+              {/* COMPACT CARDS */}
               <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${!isFiltering && featuredPost ? "lg:col-span-2" : "lg:col-span-3 lg:grid-cols-3"}`}>
                 {compactPosts.map((post, i) => (
                   <motion.article key={post.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -358,11 +357,13 @@ export default function BlogClient() {
                       <Link href={`/blog/${post.slug}`}>
                         <h2 className="text-[#0a0f2e] font-black text-base leading-snug mb-3 hover:text-[#1a3c8f] transition-colors">{post.title}</h2>
                       </Link>
-                      <div className="mt-auto flex items-center justify-between gap-3 pt-3">
+                      <div className="flex items-center gap-2 text-[#94a3b8] text-[11px] font-medium mb-3">
+                        <span>{fmtDate(post.date)}</span>
+                        <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />
+                        <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{post.readTime}</span>
+                      </div>
+                      <div className="mt-auto pt-3 border-t border-[#f1f5f9]">
                         <Byline post={post} />
-                        <div className="flex items-center gap-1.5 text-[#94a3b8] text-[11px] font-semibold uppercase tracking-wide whitespace-nowrap">
-                          <Clock className="h-3.5 w-3.5" />{post.readTime}
-                        </div>
                       </div>
                     </div>
                   </motion.article>
@@ -371,7 +372,7 @@ export default function BlogClient() {
             </div>
           )}
  
-          {/* ── Audit CTA (CRO) — reader is a hand-raiser ── */}
+          {/* ── Audit CTA (CRO) ── */}
           <div className="mt-14 flex flex-col items-center gap-3 rounded-2xl border border-[#e5e7eb] bg-white p-8 text-center">
             <p className="text-xl font-black text-[#0a0f2e]">Reading about the problem? We fix it for a living.</p>
             <p className="max-w-xl text-sm text-[#64748b]">
@@ -403,8 +404,10 @@ export default function BlogClient() {
                   <span className="text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">{post.subcategory}</span>
                 </div>
                 <h3 className="text-[#0a0f2e] font-black text-lg leading-snug mb-2 group-hover:text-[#1a3c8f] transition-colors">{post.title}</h3>
-                <div className="flex items-center gap-1.5 text-[#94a3b8] text-xs font-semibold uppercase tracking-wide">
-                  <Clock className="h-3.5 w-3.5" />{post.readTime}
+                <div className="flex items-center gap-2 text-[#94a3b8] text-xs font-semibold uppercase tracking-wide">
+                  <span>{fmtDate(post.date)}</span>
+                  <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />
+                  <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{post.readTime}</span>
                 </div>
               </Link>
             ))}
