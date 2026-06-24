@@ -40,7 +40,16 @@ const navLinks: NavLink[] = [
       { href: "/all-case-studies", label: "All Case Studies" },
     ],
   },
-  { href: "/blog",         label: "Blog" },
+  {
+    href: "/resources",
+    label: "Resources",
+    hasDropdown: true,
+    dropdownItems: [
+      { href: "/resources",      label: "All Resources" },
+      { href: "/blog",           label: "Blog" },
+      { href: "/resources/news", label: "News" },
+    ],
+  },
   {
     href: "/tools",
     label: "Tools",
