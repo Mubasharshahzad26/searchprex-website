@@ -30,7 +30,9 @@ const categoryIcons: Record<string, any> = {
 };
  
 function BlogImage({ rank, category }: { rank?: number; category: string }) {
-  const colors: Record<string, string> = {
+  const [imgError, setImgError] = useState(false);
+
+  const gradients: Record<string, string> = {
     "Technical SEO": "from-[#0a0f2e] to-[#1a3c8f]",
     "E-commerce SEO": "from-[#0f2027] to-[#203a43]",
     "Local SEO": "from-[#1a1a2e] to-[#16213e]",
@@ -38,17 +40,46 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
     "On-Page SEO": "from-[#1a0533] to-[#341070]",
     "Link Building": "from-[#0b3d2e] to-[#1a6b4e]",
   };
+
+  const covers: Record<string, string> = {
+    "Technical SEO":   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    "On-Page SEO":     "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=800&q=80",
+    "Local SEO":       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    "E-commerce SEO":  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    "Link Building":   "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+    "Content Strategy":"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
+  };
+
+  const cover = covers[category] ||
+    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80";
+
   return (
-    <div className={`relative w-full h-full bg-gradient-to-br ${colors[category] || "from-[#0a0f2e] to-[#1a3c8f]"} flex items-center justify-center`}>
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Branded gradient fallback — shows only if the image fails to load */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradients[category] || "from-[#0a0f2e] to-[#1a3c8f]"} flex items-center justify-center`}>
+        <div className="text-center opacity-30">
+          <div className="text-5xl mb-2">📊</div>
+          <div className="text-white text-xs font-mono">{category}</div>
+        </div>
+      </div>
+
+      {/* Real Unsplash cover */}
+      {!imgError && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={cover}
+          alt={`${category} — SearchPrex blog`}
+          loading="lazy"
+          onError={() => setImgError(true)}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      )}
+
       {rank && (
-        <div className="absolute top-3 left-3 w-7 h-7 rounded-full bg-[#534AB7] flex items-center justify-center">
+        <div className="absolute top-3 left-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[#534AB7] shadow-md">
           <span className="text-white text-xs font-bold">{rank}</span>
         </div>
       )}
-      <div className="text-center opacity-30">
-        <div className="text-5xl mb-2">📊</div>
-        <div className="text-white text-xs font-mono">{category}</div>
-      </div>
     </div>
   );
 }
