@@ -105,17 +105,21 @@ export default function NicheSEOPro() {
               ))}
             </div>
  
-            {/* CTA Buttons — both → /coming-soon */}
+            {/* CTA Buttons */}
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="/coming-soon"
+                href="https://nicheseopro.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
               >
                 Start Free Trial
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/coming-soon"
+                href="https://nicheseopro.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl border-2 border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:border-white hover:bg-white hover:text-[#0a0f2e]"
               >
                 Get Free Demo
@@ -232,4 +236,3 @@ export default function NicheSEOPro() {
     </section>
   );
 }
- 
