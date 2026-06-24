@@ -31,7 +31,15 @@ const navLinks: NavLink[] = [
       { href: "/why-us",  label: "Why SearchPrex" },
     ],
   },
-  { href: "/case-studies", label: "Case Studies" },
+  {
+    href: "/case-studies",
+    label: "Case Studies",
+    hasDropdown: true,
+    dropdownItems: [
+      { href: "/case-studies",     label: "Featured Case Studies" },
+      { href: "/all-case-studies", label: "All Case Studies" },
+    ],
+  },
   { href: "/blog",         label: "Blog" },
   {
     href: "/tools",
@@ -69,7 +77,7 @@ export default function Nav() {
             : "bg-transparent"
         }`}
       >
-        {/* ── Main nav ── */}
+        {/* Main nav */}
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
  
@@ -122,10 +130,9 @@ export default function Nav() {
               ))}
             </div>
  
-            {/* Desktop right — Login | Try Tool | Get Audit */}
+            {/* Desktop right */}
             <div className="hidden items-center gap-2 lg:flex">
  
-              {/* 1. Log in — ghost */}
               <Link
                 href="/login"
                 className="rounded-lg px-4 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
@@ -133,18 +140,20 @@ export default function Nav() {
                 Log in
               </Link>
  
-              {/* 2. Try NicheSEO Pro — now LIVE → content suite */}
-              <Link
-                href="/content-generator"
+              {/* Try NicheSEO Pro — external app */}
+              <a
+                href="https://nicheseopro.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-1.5 rounded-lg border border-[#534AB7]/40 px-4 py-2 text-sm font-semibold text-[#534AB7] transition-all hover:border-[#534AB7] hover:bg-[#EEEDFE]"
               >
                 Try NicheSEO Pro
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
                   <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </Link>
+              </a>
  
-              {/* 3. Get Free Audit — primary */}
+              {/* Get Free Audit — primary */}
               <Link
                 href="/free-audit"
                 className="relative flex items-center gap-2 overflow-hidden rounded-lg bg-[#534AB7] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#3C3489] hover:shadow-[0_0_28px_rgba(83,74,183,0.5)] hover:-translate-y-px"
@@ -179,7 +188,7 @@ export default function Nav() {
           </div>
         </nav>
  
-        {/* ── Mobile menu ── */}
+        {/* Mobile menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -223,7 +232,6 @@ export default function Nav() {
                 {/* Mobile: auth + CTA */}
                 <div className="mt-4 flex flex-col gap-3 border-t border-[#e5e7eb] pt-4">
  
-                  {/* Log in */}
                   <Link
                     href="/login"
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -232,9 +240,11 @@ export default function Nav() {
                     Log in
                   </Link>
  
-                  {/* Try NicheSEO Pro — now LIVE → content suite */}
-                  <Link
-                    href="/content-generator"
+                  {/* Try NicheSEO Pro — external app */}
+                  <a
+                    href="https://nicheseopro.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-center gap-1.5 rounded-lg border border-[#534AB7] py-2.5 text-center text-sm font-semibold text-[#534AB7] transition-colors hover:bg-[#EEEDFE]"
                   >
@@ -242,9 +252,8 @@ export default function Nav() {
                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
                       <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                  </Link>
+                  </a>
  
-                  {/* Get Free Audit — primary */}
                   <Link
                     href="/free-audit"
                     onClick={() => setIsMobileMenuOpen(false)}
