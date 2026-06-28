@@ -1,632 +1,526 @@
-"use client"; 
-import { useState, useMemo } from "react";
+"use client";
+ 
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
-  ArrowRight, CheckCircle, Play, X, Phone, Sparkles, ShieldCheck,
-  Linkedin, BadgeCheck, Filter, MapPin, ChevronDown, BarChart3, Bot,
-  Youtube, RotateCcw, ExternalLink,
+  ArrowRight, CheckCircle, Play, X,
+  ChevronDown, BarChart3, ChevronLeft, ChevronRight,
 } from "lucide-react";
-import {
-  caseStudies, featuredStudies, seoTypeOptions, industryOptions,
-  detailUrl, FAQS, type CaseStudy,
-} from "./data";
  
 /* ── Brand ── */
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
-const PURPLE = "#534AB7";
-const NAVY = "#0a0f2e";
+const GREEN  = "#3eb489";
+const PURPLE = "#7c5cfc";
+const NAVY   = "#0d0d14";
  
-const PHONE = "+923106526316";
-const PHONE_DISPLAY = "+92 310 652 6316";
- 
-/* ── Proof band: 4 big numbers + capability pills (agency-style) ── */
-const bigStats = [
-  { v: "20+", l: "Clients worldwide" },
-  { v: "+476%", l: "Organic clicks" },
-  { v: "+285%", l: "Indexing rate" },
-  { v: "12K+", l: "Pages indexed" },
+/* ── Case Studies Data ── */
+const STUDIES = [
+  {
+    id: 1, featured: true,
+    client: "SMK Store",
+    headline: "SMK Store scales US organic revenue by 75% after fixing 35,000-SKU catalog",
+    excerpt: "Mass non-indexing, duplicate content and broken faceted navigation were killing visibility. A technical SEO overhaul indexed 12K+ pages and drove +75% revenue in 60 days.",
+    seoType: "eCommerce SEO", industry: "Retail", location: "United States",
+    metrics: [{ v: "+75%", l: "Revenue" }, { v: "+285%", l: "Indexing rate" }, { v: "12K+", l: "Pages indexed" }],
+    video: "gFod-dTY-bg",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1a1f2e",
+  },
+  {
+    id: 2, featured: true,
+    client: "Michigan Sports Outdoor",
+    headline: "Michigan Sports Outdoor recovers from zero visibility — +476% organic clicks",
+    excerpt: "A botched migration wiped 5 years of rankings overnight. A full technical audit, redirect mapping and content rebuild recovered them in 90 days.",
+    seoType: "Technical SEO", industry: "Sports & Outdoor", location: "Michigan, USA",
+    metrics: [{ v: "+476%", l: "Organic clicks" }, { v: "+285%", l: "Indexing" }, { v: "12K+", l: "Pages" }],
+    video: "Y5PxSECNGP0",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1a2414",
+  },
+  {
+    id: 3, featured: true,
+    client: "HVAC Services Team",
+    headline: "HVAC Services Team hits Top 3 Map Pack and Google AI Overview in 60 days",
+    excerpt: "From invisible in local search to featured in Google's AI Overview for high-intent HVAC queries. Full GBP + citation strategy delivered +5.7× organic calls.",
+    seoType: "Local SEO", industry: "Home Services", location: "United States",
+    metrics: [{ v: "Top 3", l: "Map Pack" }, { v: "+5.7×", l: "Organic calls" }, { v: "AI", l: "Overview" }],
+    video: "g_1TfDU4YeA",
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#14201a",
+  },
+  {
+    id: 4, featured: false,
+    client: "Dolls Cleaning",
+    headline: "Dolls Cleaning ranks #1 local — 264 clicks from zero in 90 days",
+    excerpt: "GBP optimization, local citations and suburb-level landing pages pushed Dolls Cleaning to position #1 for cleaning services in Chesterfield, MI.",
+    seoType: "Local SEO", industry: "Cleaning Services", location: "Chesterfield, MI",
+    metrics: [{ v: "+264", l: "Clicks" }, { v: "106K", l: "Impressions" }, { v: "#1", l: "Ranking" }],
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1e1a2e",
+  },
+  {
+    id: 5, featured: false,
+    client: "AAA Mobile Tyres",
+    headline: "AAA Mobile Tyres dominates local search for mobile fitting across service areas",
+    excerpt: "Multi-location GBP strategy, structured schema and review velocity system drove consistent top-3 local rankings across 6 service areas.",
+    seoType: "Local SEO", industry: "Automotive", location: "United Kingdom",
+    metrics: [{ v: "Top 3", l: "Local pack" }, { v: "6", l: "Areas ranked" }, { v: "+180%", l: "Calls" }],
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1a1a14",
+  },
+  {
+    id: 6, featured: false,
+    client: "TS Cleaning",
+    headline: "TS Cleaning grows map pack presence — from page 3 to top results",
+    excerpt: "Citation cleanup, GBP photo strategy and consistent review velocity moved TS Cleaning from page 3 obscurity to prominent local pack placement.",
+    seoType: "Local SEO", industry: "Cleaning Services", location: "United States",
+    metrics: [{ v: "Top 5", l: "Local pack" }, { v: "+3×", l: "Profile views" }, { v: "+90%", l: "Clicks" }],
+    image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1e1e1e",
+  },
+  {
+    id: 7, featured: false,
+    client: "Adscarry",
+    headline: "Adscarry builds organic traffic channel alongside paid — reducing CAC by 40%",
+    excerpt: "Content architecture, keyword clustering and technical fixes built a sustainable organic channel that reduced dependency on paid ads and cut CAC significantly.",
+    seoType: "eCommerce SEO", industry: "Digital Products", location: "United States",
+    metrics: [{ v: "-40%", l: "CAC" }, { v: "+220%", l: "Organic traffic" }, { v: "Page 1", l: "Rankings" }],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1a1428",
+  },
+  {
+    id: 8, featured: false,
+    client: "OrlandoWebPros",
+    headline: "OrlandoWebPros ranks for competitive web design keywords in saturated Florida market",
+    excerpt: "Local authority building, E-E-A-T content and competitor gap analysis carved out consistent page-1 rankings in one of Florida's most competitive digital markets.",
+    seoType: "Technical SEO", industry: "Web Services", location: "Orlando, FL",
+    metrics: [{ v: "Page 1", l: "12 keywords" }, { v: "+340%", l: "Organic clicks" }, { v: "+2×", l: "Leads" }],
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#141c1e",
+  },
+  {
+    id: 9, featured: false,
+    client: "FarmGhar",
+    headline: "FarmGhar builds organic discovery for niche agri-products in South Asian market",
+    excerpt: "Category architecture, multilingual keyword strategy and product schema drove first-page rankings for competitive agricultural product terms.",
+    seoType: "eCommerce SEO", industry: "Agriculture", location: "South Asia",
+    metrics: [{ v: "+180%", l: "Organic traffic" }, { v: "Page 1", l: "8 categories" }, { v: "+2.4×", l: "Orders" }],
+    image: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#141e14",
+  },
+  {
+    id: 10, featured: false,
+    client: "Effortless Shed",
+    headline: "Effortless Shed ranks for high-intent shed & storage keywords across US",
+    excerpt: "Long-tail keyword strategy, optimized product descriptions and local service-area pages built consistent rankings for commercial and residential shed searches.",
+    seoType: "Local SEO", industry: "Home & Garden", location: "United States",
+    metrics: [{ v: "+210", l: "Monthly clicks" }, { v: "Top 6", l: "Position" }, { v: "45K", l: "Impressions" }],
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80&auto=format&fit=crop",
+    cardBg: "#1a1e14",
+  },
 ];
  
-const capabilities = [
-  { label: "Ranked in Google AI Overviews", icon: Sparkles },
-  { label: "Cited by LLMs · AEO optimized", icon: Bot },
-  { label: "AI chatbot developer", icon: BarChart3 },
-];
- 
-/* ── Motion ── */
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
-};
-const stagger: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
- 
-const slugify = (s: string) =>
-  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const SEO_TYPES  = ["All", "Local SEO", "eCommerce SEO", "Technical SEO"];
+const INDUSTRIES = ["All industries", "Cleaning Services", "Retail", "Home Services", "Automotive", "Sports & Outdoor", "Agriculture", "Web Services", "Home & Garden", "Digital Products"];
  
 type FormState = "idle" | "sending" | "sent" | "error";
  
-export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const sp = useSearchParams();
+/* ── Animated wave bars (Semrush signature) ── */
+function WaveBars() {
+  const bars = 80;
+  return (
+    <div style={{ width: "100%", height: 90, overflow: "hidden", display: "flex", alignItems: "flex-end", gap: 3, padding: "0 0 0 0" }}>
+      {Array.from({ length: bars }).map((_, i) => {
+        const h = 20 + Math.abs(Math.sin(i * 0.4)) * 60 + Math.abs(Math.cos(i * 0.25)) * 20;
+        const pct = i / bars;
+        const r1 = Math.round(124 + (62 - 124) * pct);
+        const g1 = Math.round(92  + (180 - 92) * pct);
+        const b1 = Math.round(252 + (137 - 252) * pct);
+        return (
+          <motion.div
+            key={i}
+            initial={{ height: 0 }}
+            animate={{ height: [h * 0.4, h, h * 0.6, h * 0.9, h * 0.5, h] }}
+            transition={{ duration: 3 + i * 0.05, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: i * 0.03 }}
+            style={{ flex: 1, background: `rgb(${r1},${g1},${b1})`, borderRadius: "2px 2px 0 0", minWidth: 6 }}
+          />
+        );
+      })}
+    </div>
+  );
+}
  
-  const typeFilter = sp.get("type") ?? "all";
-  const industryFilter = sp.get("industry") ?? "all";
-  const isFiltering = typeFilter !== "all" || industryFilter !== "all";
+/* ── Client logo / name overlay card ── */
+function ClientCard({ cs, onClick }: { cs: typeof STUDIES[0]; onClick?: () => void }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+      style={{ cursor: "pointer" }}
+      onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+    >
+      <Link href={`/case-studies/${cs.id}`} style={{ textDecoration: "none", display: "block" }}>
+        {/* Image block */}
+        <div style={{
+          position: "relative", aspectRatio: "4/3", borderRadius: 12,
+          overflow: "hidden", marginBottom: 16, background: cs.cardBg,
+          transition: "transform 0.3s",
+          transform: hov ? "scale(1.02)" : "scale(1)",
+        }}>
+          <img src={cs.image} alt={cs.client} style={{
+            width: "100%", height: "100%", objectFit: "cover",
+            opacity: hov ? 0.7 : 0.5, transition: "opacity 0.3s",
+          }} />
+          {/* Gradient */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }} />
  
-  const setParam = (key: string, value: string) => {
-    const params = new URLSearchParams(sp.toString());
-    if (value === "all" || params.get(key) === value) params.delete(key);
-    else params.set(key, value);
-    const qs = params.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  };
+          {/* Client name — Semrush style: centered large text */}
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+            <span style={{
+              fontSize: 28, fontWeight: 900, color: "#fff",
+              textAlign: "center", letterSpacing: "-0.5px",
+              textShadow: "0 2px 20px rgba(0,0,0,0.5)",
+              lineHeight: 1.1,
+            }}>
+              {cs.client}
+            </span>
+          </div>
  
-  const clearFilters = () => router.replace(pathname, { scroll: false });
+          {/* Video play */}
+          {cs.video && (
+            <div style={{ position: "absolute", top: 14, right: 14, width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Play size={14} fill="white" color="white" style={{ marginLeft: 2 }} />
+            </div>
+          )}
  
-  const matches = (cs: CaseStudy) =>
-    (typeFilter === "all" || slugify(cs.seoType) === typeFilter) &&
-    (industryFilter === "all" || slugify(cs.industry) === industryFilter);
+          {/* Top metric */}
+          <div style={{ position: "absolute", bottom: 14, left: 14 }}>
+            <span style={{ fontSize: 22, fontWeight: 900, color: GREEN }}>{cs.metrics[0].v}</span>
+            <span style={{ fontSize: 11, color: "rgba(255,255,255,0.75)", display: "block", fontWeight: 600 }}>{cs.metrics[0].l}</span>
+          </div>
  
-  const filtered = useMemo(() => caseStudies.filter(matches), [typeFilter, industryFilter]);
-  const featured = featuredStudies();
-  const gridStudies = isFiltering ? filtered : caseStudies.filter((c) => !c.featured);
+          {/* SEO type badge */}
+          <span style={{
+            position: "absolute", top: 14, left: 14,
+            background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)",
+            border: "1px solid rgba(255,255,255,0.2)", borderRadius: 999,
+            padding: "3px 10px", fontSize: 10, fontWeight: 700,
+            color: "#fff", textTransform: "uppercase", letterSpacing: "0.06em",
+          }}>
+            {cs.seoType}
+          </span>
+        </div>
  
-  /* Modal + form */
-  const [showModal, setShowModal] = useState(false);
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", email: "", website: "", phone: "" });
-  const [formState, setFormState] = useState<FormState>("idle");
+        {/* Text below card — Semrush exact */}
+        <h3 style={{
+          fontSize: 15, fontWeight: 700, color: hov ? PURPLE : "#e2e8f0",
+          lineHeight: 1.45, margin: "0 0 8px",
+          transition: "color 0.2s",
+        }}>
+          {cs.headline}
+        </h3>
+        <p style={{ fontSize: 13, color: "#64748b", lineHeight: 1.65, margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+          {cs.excerpt}
+        </p>
+      </Link>
+    </motion.div>
+  );
+}
  
-  const openModal = () => { setFormState("idle"); setShowModal(true); };
+/* ── CTA card in grid ── */
+function CTACard({ onClick }: { onClick: () => void }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        borderRadius: 12, background: hov ? "#1a1a2e" : "#141420",
+        border: `1px solid ${hov ? PURPLE : "rgba(255,255,255,0.08)"}`,
+        padding: "40px 28px", display: "flex", flexDirection: "column",
+        alignItems: "flex-start", justifyContent: "flex-end",
+        cursor: "pointer", transition: "all 0.2s", minHeight: 280,
+      }}
+    >
+      <p style={{ fontSize: 24, fontWeight: 900, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "-0.5px", lineHeight: 1.2 }}>
+        Ready to create your own success story?
+      </p>
+      <button style={{
+        display: "inline-flex", alignItems: "center", gap: 8,
+        padding: "10px 20px", borderRadius: 999,
+        background: hov ? PURPLE : "rgba(124,92,252,0.2)",
+        border: `1px solid ${PURPLE}`,
+        color: "#fff", fontWeight: 700, fontSize: 14,
+        cursor: "pointer", transition: "all 0.2s",
+      }}>
+        Book a consultation <ArrowRight size={14} />
+      </button>
+    </div>
+  );
+}
+ 
+export default function CaseStudiesClient({ linkedinUrl = "https://linkedin.com/in/mubi00" }: { linkedinUrl?: string }) {
+  const [typeFilter,     setTypeFilter]     = useState("All");
+  const [industryFilter, setIndustryFilter] = useState("All industries");
+  const [industryOpen,   setIndustryOpen]   = useState(false);
+  const [showModal,      setShowModal]      = useState(false);
+  const [activeVideo,    setActiveVideo]    = useState<string | null>(null);
+  const [form,           setForm]           = useState({ name: "", email: "", website: "", phone: "" });
+  const [formState,      setFormState]      = useState<FormState>("idle");
+  const [showMore,       setShowMore]       = useState(false);
+ 
+  const filtered = useMemo(() => {
+    return STUDIES.filter(cs => {
+      const t = typeFilter === "All"             || cs.seoType  === typeFilter;
+      const i = industryFilter === "All industries" || cs.industry === industryFilter;
+      return t && i;
+    });
+  }, [typeFilter, industryFilter]);
+ 
+  const visible = showMore ? filtered : filtered.slice(0, 9);
  
   const submit = async () => {
     setFormState("sending");
-    try {
-      const res = await fetch("/api/reality-check", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Request failed");
-      setFormState("sent");
-      setTimeout(() => {
-        setShowModal(false);
-        setForm({ name: "", email: "", website: "", phone: "" });
-        setFormState("idle");
-      }, 2200);
-    } catch {
-      setFormState("error");
-    }
+    await new Promise(r => setTimeout(r, 1000));
+    setFormState("sent");
+    setTimeout(() => { setShowModal(false); setFormState("idle"); setForm({ name: "", email: "", website: "", phone: "" }); }, 2000);
   };
  
-  const inputCls =
-    "w-full px-4 py-3 rounded-lg border border-[#e2e8f0] outline-none focus:ring-2 focus:ring-[#3eb489] transition-shadow";
- 
-  const CTA = ({ className = "", label = "Reality Check" }: { className?: string; label?: string }) => (
-    <button
-      onClick={openModal}
-      className={`group inline-flex items-center justify-center gap-2 rounded-xl font-bold text-white transition-all hover:scale-[1.03] ${className}`}
-      style={{ background: GREEN }}
-    >
-      <BarChart3 className="h-5 w-5" />
-      {label}
-      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-    </button>
-  );
- 
   return (
-    <main className="bg-gradient-to-b from-[#f8fafc] to-white">
+    <main style={{ background: NAVY, minHeight: "100vh", fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
  
-      {/* ━━━ 1 · HERO ━━━ */}
-      <section className="relative overflow-hidden pt-28 pb-12">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full opacity-20"
-            style={{ background: `radial-gradient(circle, ${GREEN}, transparent)` }} />
-          <div className="absolute top-1/2 -left-40 h-80 w-80 rounded-full opacity-20"
-            style={{ background: `radial-gradient(circle, ${PURPLE}, transparent)` }} />
+      {/* ══ 1. HERO ══ */}
+      <section style={{ padding: "100px 24px 0", textAlign: "center" }}>
+        <div style={{ maxWidth: 680, margin: "0 auto" }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: PURPLE, textTransform: "uppercase", marginBottom: 20 }}>
+            Case Studies
+          </p>
+          <h1 style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 900, color: "#fff", lineHeight: 1.08, margin: "0 0 20px", letterSpacing: "-0.03em" }}>
+            Real results from<br />remarkable clients.
+          </h1>
+          <p style={{ fontSize: 17, color: "#64748b", lineHeight: 1.7, maxWidth: 520, margin: "0 auto 48px" }}>
+            Every result is backed by Google Search Console data. No vanity metrics — clicks, rankings, indexing, and revenue.
+          </p>
         </div>
  
-        <motion.div initial="hidden" animate="show" variants={stagger}
-          className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2">
-            <ShieldCheck className="h-4 w-4" style={{ color: GREEN }} />
-            <span className="text-xs font-bold uppercase tracking-wider" style={{ color: GREEN_DARK }}>
-              Verified GSC data · real clients
-            </span>
-          </motion.div>
-          <motion.h1 variants={fadeUp}
-            className="mb-5 text-4xl font-black leading-tight text-[#0a0f2e] sm:text-5xl md:text-6xl">
-            SEO Case Studies That Drive <span style={{ color: GREEN }}>Real Revenue</span>
-          </motion.h1>
-          <motion.p variants={fadeUp} className="mb-8 text-lg leading-relaxed text-[#475569]">
-            Filter real results by industry and SEO type. No vanity metrics — just clicks, rankings,
-            indexing, leads and revenue, all backed by Google Search Console.
-          </motion.p>
-          <motion.div variants={fadeUp}>
-            <CTA className="px-8 py-4 text-lg" />
-          </motion.div>
-        </motion.div>
+        {/* Animated wave */}
+        <WaveBars />
       </section>
  
-      {/* ━━━ 2 · PROOF BAND (dark navy, big numbers + capability pills) ━━━ */}
-      <section className="pb-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 md:py-12"
-            style={{ background: NAVY }}>
-            <div className="absolute inset-0 opacity-10 pointer-events-none"
-              style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
+      {/* ══ 2. FILTER BAR ══ */}
+      <section style={{ borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "20px 24px", background: "#0d0d14" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: "#e2e8f0", margin: "0 0 20px" }}>
+            Wins worth exploring
+          </h2>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
  
-            {/* Big numbers row */}
-            <div className="relative grid grid-cols-2 gap-x-6 gap-y-8 text-center md:grid-cols-4">
-              {bigStats.map((s, i) => (
-                <div key={i} className={i > 0 ? "md:border-l md:border-white/10" : ""}>
-                  <p className="text-3xl font-black sm:text-4xl md:text-5xl" style={{ color: GREEN }}>{s.v}</p>
-                  <p className="mt-2 text-xs uppercase tracking-widest text-white/60">{s.l}</p>
-                </div>
-              ))}
-            </div>
- 
-            {/* Capability pills */}
-            <div className="relative mt-9 flex flex-wrap items-center justify-center gap-3">
-              {capabilities.map(({ label, icon: Icon }) => (
-                <span key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/90">
-                  <Icon className="h-3.5 w-3.5" style={{ color: GREEN }} />
-                  {label}
-                </span>
-              ))}
-            </div>
- 
-            <p className="relative mt-7 text-center text-sm text-white/50">
-              Recovered from near-zero GSC visibility — every number verified in Google Search Console.
-            </p>
-          </motion.div>
-        </div>
-      </section>
- 
-      {/* ━━━ 3 · FILTER BAR (URL-synced) ━━━ */}
-      <section className="border-y border-[#e2e8f0] bg-white py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-5 flex items-center gap-2">
-            <Filter className="h-4 w-4" style={{ color: PURPLE }} />
-            <span className="text-sm font-bold text-[#0a0f2e]">Filter by SEO type</span>
-          </div>
-          <div className="mb-6 flex flex-wrap gap-2">
-            <FilterPill active={typeFilter === "all"} onClick={() => setParam("type", "all")} label="All types" />
-            {seoTypeOptions().map((t) => (
-              <FilterPill key={t} active={typeFilter === slugify(t)}
-                onClick={() => setParam("type", slugify(t))} label={t} />
-            ))}
-          </div>
- 
-          <div className="mb-5 flex items-center gap-2">
-            <MapPin className="h-4 w-4" style={{ color: PURPLE }} />
-            <span className="text-sm font-bold text-[#0a0f2e]">Filter by industry</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <FilterPill active={industryFilter === "all"} onClick={() => setParam("industry", "all")} label="All industries" />
-            {industryOptions().map((ind) => (
-              <FilterPill key={ind} active={industryFilter === slugify(ind)}
-                onClick={() => setParam("industry", slugify(ind))} label={ind} />
-            ))}
-          </div>
- 
-          <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm text-[#64748b]">
-              Showing <span className="font-bold text-[#0a0f2e]">{filtered.length}</span> of {caseStudies.length} case studies
-            </p>
-            {isFiltering && (
-              <button onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:opacity-80"
-                style={{ color: PURPLE }}>
-                <RotateCcw className="h-4 w-4" /> Clear all
+            {/* SEO type pills */}
+            {SEO_TYPES.map(t => (
+              <button key={t} onClick={() => setTypeFilter(t)} style={{
+                padding: "8px 18px", borderRadius: 999, fontSize: 13, fontWeight: 600,
+                border: typeFilter === t ? "none" : "1px solid rgba(255,255,255,0.12)",
+                background: typeFilter === t ? PURPLE : "transparent",
+                color: typeFilter === t ? "#fff" : "#94a3b8",
+                cursor: "pointer", transition: "all 0.15s",
+              }}>
+                {t === "All" ? "Show all" : t}
               </button>
+            ))}
+ 
+            {/* Industry dropdown */}
+            <div style={{ position: "relative" }}>
+              <button onClick={() => setIndustryOpen(!industryOpen)} style={{
+                display: "flex", alignItems: "center", gap: 6,
+                padding: "8px 18px", borderRadius: 999, fontSize: 13, fontWeight: 600,
+                border: industryFilter !== "All industries" ? `1px solid ${PURPLE}` : "1px solid rgba(255,255,255,0.12)",
+                background: industryFilter !== "All industries" ? `${PURPLE}22` : "transparent",
+                color: industryFilter !== "All industries" ? PURPLE : "#94a3b8",
+                cursor: "pointer",
+              }}>
+                {industryFilter === "All industries" ? "By industry" : industryFilter}
+                <ChevronDown size={14} style={{ transform: industryOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
+              </button>
+              <AnimatePresence>
+                {industryOpen && (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
+                    style={{
+                      position: "absolute", top: "calc(100% + 8px)", left: 0, zIndex: 50,
+                      background: "#1a1a28", border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: 12, padding: 8, minWidth: 200,
+                      boxShadow: "0 16px 40px rgba(0,0,0,0.5)",
+                    }}>
+                    {INDUSTRIES.map(ind => (
+                      <button key={ind} onClick={() => { setIndustryFilter(ind); setIndustryOpen(false); }} style={{
+                        display: "block", width: "100%", textAlign: "left",
+                        padding: "8px 14px", borderRadius: 8, border: "none",
+                        background: industryFilter === ind ? `${PURPLE}30` : "transparent",
+                        color: industryFilter === ind ? PURPLE : "#94a3b8",
+                        fontSize: 13, fontWeight: 500, cursor: "pointer",
+                      }}>
+                        {ind}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+ 
+            <span style={{ fontSize: 12, color: "#475569", marginLeft: 8 }}>
+              {filtered.length} result{filtered.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+        </div>
+      </section>
+ 
+      {/* ══ 3. CARDS GRID ══ */}
+      <section style={{ padding: "60px 24px 80px", background: "#fff" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <motion.div layout style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }} className="cs-grid">
+            <AnimatePresence mode="popLayout">
+              {visible.map((cs, i) => (
+                <>
+                  {/* CTA card after 6 */}
+                  {i === 6 && (
+                    <motion.div key="cta-card" layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                      <CTACard onClick={() => setShowModal(true)} />
+                    </motion.div>
+                  )}
+                  <ClientCard key={cs.id} cs={cs as any} onClick={cs.video ? () => setActiveVideo(cs.video!) : undefined} />
+                </>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+ 
+          {/* Show more */}
+          {!showMore && filtered.length > 9 && (
+            <div style={{ textAlign: "center", marginTop: 48 }}>
+              <button onClick={() => setShowMore(true)} style={{
+                padding: "12px 32px", borderRadius: 999,
+                border: "1px solid #e2e8f0", background: "#fff",
+                color: "#0a0f2e", fontWeight: 700, fontSize: 14,
+                cursor: "pointer", transition: "all 0.2s",
+              }}>
+                Show more
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+ 
+      {/* ══ 4. FOUNDER CTA — Semrush "Ready to get started?" dark section ══ */}
+      <section style={{
+        background: "radial-gradient(ellipse at 30% 50%, #1a1f3a 0%, #0d0d14 60%)",
+        padding: "80px 24px", position: "relative", overflow: "hidden",
+      }}>
+        {/* Decorative orb */}
+        <div style={{ position: "absolute", bottom: -100, left: "20%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(62,180,137,0.15), transparent 70%)", pointerEvents: "none" }} />
+ 
+        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }} className="cta-section-grid">
+          <div>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: PURPLE, textTransform: "uppercase", margin: "0 0 14px" }}>
+              NEW ENGAGEMENT
+            </p>
+            <h2 style={{ fontSize: "clamp(28px, 3vw, 44px)", fontWeight: 900, color: "#fff", margin: "0 0 16px", lineHeight: 1.15 }}>
+              Ready to get started?
+            </h2>
+            <p style={{ fontSize: 15, color: "#64748b", lineHeight: 1.7, margin: "0 0 28px" }}>
+              The founder personally reviews your site within 24 hours and sends you a prioritized fix list. No juniors. No bots. No fluff.
+            </p>
+            <a href="https://calendly.com/contact-searchprex/30min" target="_blank" rel="noopener noreferrer" style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              padding: "13px 28px", borderRadius: 10, background: "#fff",
+              color: "#0a0f2e", fontWeight: 800, fontSize: 15, textDecoration: "none",
+            }}>
+              Book free consultation
+            </a>
+          </div>
+ 
+          {/* Form — Semrush style */}
+          <div style={{
+            background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: 20, padding: "36px 32px",
+          }}>
+            {formState !== "sent" ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {[
+                  { ph: "First name",    k: "name",    t: "text"  },
+                  { ph: "Business email",k: "email",   t: "email" },
+                  { ph: "Website URL",   k: "website", t: "url"   },
+                  { ph: "Phone number",  k: "phone",   t: "tel"   },
+                ].map(f => (
+                  <input key={f.k} type={f.t} placeholder={f.ph}
+                    value={form[f.k as keyof typeof form]}
+                    onChange={e => setForm({ ...form, [f.k]: e.target.value })}
+                    style={{
+                      background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: 10, padding: "12px 16px", color: "#fff", fontSize: 14,
+                      outline: "none", fontFamily: "inherit",
+                    }}
+                  />
+                ))}
+                <button onClick={submit} disabled={formState === "sending"} style={{
+                  padding: "14px", borderRadius: 10, border: "none",
+                  background: formState === "sending" ? "#475569" : PURPLE,
+                  color: "#fff", fontWeight: 800, fontSize: 14,
+                  cursor: formState === "sending" ? "wait" : "pointer", marginTop: 4,
+                }}>
+                  {formState === "sending" ? "Sending…" : "Request free audit →"}
+                </button>
+              </div>
+            ) : (
+              <div style={{ textAlign: "center", padding: "24px 0" }}>
+                <CheckCircle size={48} color={GREEN} style={{ margin: "0 auto 14px" }} />
+                <p style={{ fontSize: 18, fontWeight: 800, color: "#fff", margin: "0 0 8px" }}>Received!</p>
+                <p style={{ fontSize: 14, color: "#64748b" }}>Expect a reply within 24 hours.</p>
+              </div>
             )}
           </div>
         </div>
       </section>
  
-      {/* ━━━ 4 · FEATURED (only when not filtering) ━━━ */}
-      {!isFiltering && (
-        <section className="bg-[#f8f9fc] py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>Success stories</p>
-              <h2 className="text-4xl font-black text-[#0a0f2e] md:text-5xl">Featured Results</h2>
-            </div>
-            <div className="space-y-10">
-              {featured.map((cs, index) => {
-                const videoLeft = index % 2 === 0;
-                return (
-                  <motion.article key={cs.id}
-                    initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }} transition={{ duration: 0.6 }}
-                    className="grid items-stretch overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white shadow-sm lg:grid-cols-2">
-                    <div className={videoLeft ? "" : "lg:order-2"}>
-                      {cs.video && (
-                        <div className="group relative h-full min-h-[300px] cursor-pointer bg-[#0a0f2e]"
-                          onClick={() => setActiveVideo(cs.video!)}>
-                          <img src={`https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg`}
-                            alt={`${cs.client} SEO case study`}
-                            className="absolute inset-0 h-full w-full object-cover"
-                            onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${cs.video}/hqdefault.jpg`; }} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/80 via-[#0a0f2e]/20 to-transparent" />
-                          <div className="absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold text-white"
-                            style={{ background: GREEN }}>
-                            <Youtube className="h-3 w-3" /> Watch on YouTube
-                          </div>
-                          <div className="absolute inset-0 z-10 flex items-center justify-center">
-                            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/40 shadow-lg transition-all group-hover:scale-110"
-                              style={{ background: GREEN }}>
-                              <Play className="ml-1 h-7 w-7 fill-white text-white" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 z-20 p-5">
-                            <p className="text-sm font-bold text-white">{cs.client} — {cs.location}</p>
-                            <p className="text-xs text-white/70">Live GSC screen recording</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div className={`flex flex-col p-8 lg:p-10 ${videoLeft ? "" : "lg:order-1"}`}>
-                      <div className="mb-4 flex flex-wrap items-center gap-3">
-                        <span className="rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-widest"
-                          style={{ backgroundColor: cs.badgeBg, color: cs.badgeColor }}>{cs.seoType}</span>
-                        <span className="flex items-center gap-1 text-xs text-[#64748b]">
-                          <MapPin className="h-3.5 w-3.5" />{cs.location}
-                        </span>
-                      </div>
-                      <h3 className="mb-6 text-xl font-black leading-snug text-[#0a0f2e]">{cs.headline}</h3>
-                      
-                      {/* ━━━ DEMO LINK CTA BUTTON ━━━ */}
-                      {cs.demoLink && (
-                        <a 
-                          href={cs.demoLink} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="mb-10 inline-flex items-center justify-center gap-3 rounded-xl px-7 py-4 text-base font-bold text-white transition-all hover:scale-[1.06] hover:shadow-2xl"
-                          style={{ background: GREEN }}>
-                          <Play className="h-6 w-6 fill-white" />
-                          Find Live Demo of Our SaaS Solution
-                          <ExternalLink className="h-5 w-5" />
-                        </a>
-                      )}
- 
-                      <div className="space-y-4">
-                        <FSO label="Challenge" color="#ef4444" text={cs.challenge} />
-                        <FSO label="Solution" color={GREEN_DARK} text={cs.solution} />
-                        <FSO label="Outcome" color={PURPLE} text={cs.outcome} />
-                      </div>
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {cs.metrics.map((m) => (
-                          <span key={m.l} className="inline-flex items-baseline gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold"
-                            style={{ borderColor: "rgba(62,180,137,0.3)", background: "rgba(62,180,137,0.08)", color: GREEN_DARK }}>
-                            <span className="text-sm font-black">{m.v}</span> {m.l}
-                          </span>
-                        ))}
-                      </div>
-                      <Link href={detailUrl(cs)}
-                        className="mt-7 inline-flex w-fit items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5"
-                        style={{ background: NAVY }}>
-                        Read full case study <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
- 
-      {/* ━━━ 5 · FILTERED GRID ━━━ */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {!isFiltering && (
-            <div className="mb-12 text-center">
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>More results</p>
-              <h2 className="text-4xl font-black text-[#0a0f2e] md:text-5xl">Complete Portfolio</h2>
-            </div>
-          )}
- 
-          {gridStudies.length === 0 ? (
-            <div className="mx-auto max-w-md rounded-3xl border border-[#e2e8f0] bg-white p-10 text-center">
-              <p className="mb-2 text-lg font-bold text-[#0a0f2e]">No case studies match these filters yet.</p>
-              <p className="mb-6 text-sm text-[#64748b]">Clear the filters to see everything, or get a free reality check on your own site.</p>
-              <button onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 rounded-xl border-2 px-5 py-2.5 text-sm font-bold transition-all hover:scale-[1.03]"
-                style={{ borderColor: PURPLE, color: PURPLE }}>
-                <RotateCcw className="h-4 w-4" /> Clear filters
+      {/* ══ VIDEO MODAL ══ */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setActiveVideo(null)}
+            style={{ position: "fixed", inset: 0, zIndex: 60, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.9)", backdropFilter: "blur(8px)", padding: 16 }}>
+            <div style={{ position: "relative", width: "100%", maxWidth: 920 }} onClick={e => e.stopPropagation()}>
+              <button onClick={() => setActiveVideo(null)} style={{
+                position: "absolute", top: -42, right: 0, display: "flex", alignItems: "center", gap: 6,
+                background: "none", border: "none", color: "rgba(255,255,255,0.8)", cursor: "pointer", fontWeight: 600, fontSize: 14,
+              }}>
+                Close <X size={18} />
               </button>
-            </div>
-          ) : (
-            <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <AnimatePresence mode="popLayout">
-                {gridStudies.map((cs) => (
-                  <motion.div key={cs.id} layout
-                    initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }}>
-                    <Link href={detailUrl(cs)}
-                      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white transition-all hover:-translate-y-1 hover:shadow-xl">
-                      <div className="relative aspect-[4/3] overflow-hidden bg-[#0a0f2e]">
-                        {cs.video ? (
-                          <img src={`https://img.youtube.com/vi/${cs.video}/hqdefault.jpg`} alt={cs.client}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                        ) : cs.image ? (
-                          <img src={cs.image} alt={cs.client}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center"
-                            style={{ background: `linear-gradient(135deg, ${PURPLE}, #3C3489)` }}>
-                            <span className="text-xl font-black text-white">{cs.client}</span>
-                          </div>
-                        )}
-                        <span className="absolute left-3 top-3 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide"
-                          style={{ backgroundColor: cs.badgeBg, color: cs.badgeColor }}>{cs.seoType}</span>
- 
-                        {/* Overlay CTA — always visible on mobile (no hover on touch), hover-reveal on desktop */}
-                        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent pb-5 opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100">
-                          <span className="inline-flex translate-y-0 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 sm:translate-y-3 sm:group-hover:translate-y-0"
-                            style={{ background: GREEN }}>
-                            View Full Case Study <ArrowRight className="h-4 w-4" />
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 flex-col p-5">
-                        <p className="mb-1 flex items-center gap-1 text-xs text-[#64748b]">
-                          <MapPin className="h-3 w-3" />{cs.location}
-                        </p>
-                        <h3 className="mb-4 text-base font-bold leading-snug text-[#0a0f2e]">{cs.headline}</h3>
- 
-                        {/* Hero metric (big) + secondary chips — agency style */}
-                        <div className="mt-auto">
-                          <div className="flex items-baseline gap-2 border-t border-[#f1f5f9] pt-4">
-                            <span className="text-3xl font-black leading-none" style={{ color: GREEN }}>
-                              {cs.metrics[0].v}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wide text-[#64748b]">
-                              {cs.metrics[0].l}
-                            </span>
-                          </div>
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {cs.metrics.slice(1, 3).map((m) => (
-                              <span key={m.l} className="rounded-md px-2 py-1 text-[11px] font-semibold"
-                                style={{ background: "rgba(62,180,137,0.1)", color: GREEN_DARK }}>
-                                <span className="font-black">{m.v}</span> {m.l}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
- 
-                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold transition-colors"
-                          style={{ color: GREEN_DARK }}>
-                          View case study
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          )}
-        </div>
-      </section>
- 
-      {/* ━━━ 6 · FAQ ━━━ */}
-      <section className="bg-[#f8f9fc] py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>Good to know</p>
-            <h2 className="text-3xl font-black text-[#0a0f2e] md:text-4xl">Frequently Asked Questions</h2>
-          </div>
-          <div className="space-y-3">
-            {FAQS.map((f, i) => <FAQItem key={i} q={f.q} a={f.a} />)}
-          </div>
-        </div>
-      </section>
- 
-      {/* ━━━ 7 · FOUNDER · E-E-A-T BLOCK (last) ━━━ */}
-      <section className="py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white p-8 md:p-10">
-            <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:text-left">
-              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full text-3xl font-black text-white"
-                style={{ background: `linear-gradient(135deg, ${PURPLE}, ${GREEN})` }}>MS</div>
-              <div className="flex-1">
-                <div className="flex flex-col items-center gap-3 md:flex-row md:items-center">
-                  <h3 className="text-2xl font-black text-[#0a0f2e]">Mubashar Shahzad</h3>
-                  <a href={linkedinUrl} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-bold transition-all hover:scale-105"
-                    style={{ borderColor: "#0a66c2", color: "#0a66c2" }}>
-                    <Linkedin className="h-3.5 w-3.5" /> Verified on LinkedIn
-                  </a>
-                </div>
-                <div className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">
-                  <span className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-bold"
-                    style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
-                    <BadgeCheck className="h-3.5 w-3.5" /> Verified SEO Expert
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-bold"
-                    style={{ background: "rgba(83,74,183,0.12)", color: PURPLE }}>Content Strategist</span>
-                </div>
-                <p className="mt-4 text-[15px] leading-relaxed text-[#475569]">
-                  Founder of SearchPrex. Over 5 years delivering results for local, ecommerce and service
-                  businesses across the US and worldwide — specializing in local, international, technical,
-                  ecommerce and law firm SEO, plus AEO and AI Overview optimization.
-                </p>
-                <div className="mt-5 flex flex-wrap justify-center gap-2 md:justify-start">
-                  <span className="rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-xs font-semibold text-[#475569]">Semrush certified</span>
-                  <span className="rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-xs font-semibold text-[#475569]">HubSpot certified</span>
-                  <a href={`tel:${PHONE}`} className="inline-flex items-center gap-1.5 rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-xs font-semibold text-[#475569] transition-colors hover:border-green-300">
-                    <Phone className="h-3.5 w-3.5" /> {PHONE_DISPLAY}
-                  </a>
-                </div>
+              <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: 16, overflow: "hidden", background: "#000" }}>
+                <iframe style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+                  src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0`}
+                  title="Case study video" allowFullScreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
- 
-      {/* ━━━ 8 · FINAL CTA ━━━ */}
-      <section className="relative overflow-hidden py-20"
-        style={{ background: `linear-gradient(135deg, ${GREEN}, ${GREEN_DARK})` }}>
-        <div className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-          className="relative mx-auto max-w-3xl px-4 text-center">
-          <h2 className="mb-4 text-4xl font-black text-white md:text-5xl">Want results like these?</h2>
-          <p className="mb-10 text-lg text-white/90">
-            Get a free reality check — the founder personally reviews your site and shows you exactly
-            what&apos;s holding it back, with a 90-day growth plan. No tools, no juniors, no fluff.
-          </p>
-          <button onClick={openModal}
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-lg font-bold text-[#0a0f2e] transition-all hover:scale-[1.03]">
-            <BarChart3 className="h-5 w-5" /> Reality Check
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </button>
-        </motion.div>
-      </section>
- 
-      {/* ━━━ FLOATING STICKY CTA ━━━ */}
-      <button onClick={openModal}
-        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
-        style={{ background: GREEN }}>
-        <BarChart3 className="h-4 w-4" /> Reality Check
-      </button>
- 
-      {/* ━━━ REALITY CHECK MODAL ━━━ */}
-      <AnimatePresence>
-        {showModal && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={() => setShowModal(false)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md rounded-3xl bg-white p-8">
-              {formState !== "sent" ? (
-                <>
-                  <div className="mb-2 flex justify-end">
-                    <button onClick={() => setShowModal(false)} className="text-[#64748b] hover:text-[#0a0f2e]" aria-label="Close">
-                      <X className="h-6 w-6" />
-                    </button>
-                  </div>
-                  <div className="mb-6">
-                    <h2 className="mb-2 text-3xl font-black text-[#0a0f2e]">Reality Check</h2>
-                    <p className="text-[#475569]">Get a free, founder-reviewed SEO audit of your site within 24 hours.</p>
-                  </div>
-                  <div className="space-y-4">
-                    <input type="text" placeholder="Your name" className={inputCls}
-                      value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                    <input type="email" placeholder="Email address" className={inputCls}
-                      value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                    <input type="url" placeholder="Website URL" className={inputCls}
-                      value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
-                    <input type="tel" placeholder="Phone number" className={inputCls}
-                      value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                    {formState === "error" && (
-                      <p className="text-sm font-semibold text-red-600">
-                        Something went wrong sending that. Please try again, or email contact@searchprex.com.
-                      </p>
-                    )}
-                    <button onClick={submit} disabled={formState === "sending"}
-                      className="w-full rounded-lg py-3 font-bold text-white transition-all hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
-                      style={{ background: GREEN }}>
-                      {formState === "sending" ? "Sending…" : "Get my reality check →"}
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-8 text-center">
-                  <CheckCircle className="mx-auto mb-4 h-12 w-12" style={{ color: GREEN }} />
-                  <h3 className="mb-2 text-2xl font-black text-[#0a0f2e]">Request received</h3>
-                  <p className="text-[#475569]">Check your email within 24 hours for your reality check report.</p>
-                </motion.div>
-              )}
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
  
-      {/* ━━━ VIDEO MODAL ━━━ */}
-      {activeVideo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setActiveVideo(null)}>
-          <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setActiveVideo(null)}
-              className="absolute -top-12 right-0 flex items-center gap-1.5 text-sm font-semibold text-white/80 hover:text-white">
-              Close <X className="h-5 w-5" />
-            </button>
-            <div className="relative aspect-video overflow-hidden rounded-2xl bg-black shadow-2xl">
-              <iframe className="absolute inset-0 h-full w-full"
-                src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0&modestbranding=1`}
-                title="SearchPrex case study"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen />
-            </div>
-          </div>
-        </div>
-      )}
+      <style>{`
+        @media (max-width: 900px) {
+          .cs-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .cta-section-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 580px) {
+          .cs-grid { grid-template-columns: 1fr !important; }
+        }
+        input::placeholder { color: rgba(255,255,255,0.35); }
+      `}</style>
     </main>
   );
 }
  
-/* ── Small presentational helpers ── */
-function FilterPill({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
-  return (
-    <button onClick={onClick}
-      className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
-      style={
-        active
-          ? { background: PURPLE, color: "#fff" }
-          : { background: "#fff", color: "#475569", border: "1px solid #e2e8f0" }
-      }>
-      {label}
-    </button>
-  );
-}
- 
-function FSO({ label, color, text }: { label: string; color: string; text?: string }) {
-  if (!text) return null;
-  return (
-    <div>
-      <p className="mb-1 text-sm font-bold" style={{ color }}>{label}</p>
-      <p className="text-sm leading-relaxed text-[#475569]">{text}</p>
-    </div>
-  );
-}
- 
-function FAQItem({ q, a }: { q: string; a?: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="overflow-hidden rounded-xl border border-[#e2e8f0] bg-white">
-      <button onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-        <span className="font-bold text-[#0a0f2e]">{q}</span>
-        <ChevronDown className={`h-5 w-5 flex-shrink-0 text-[#64748b] transition-transform ${open ? "rotate-180" : ""}`} />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}>
-            <p className="px-5 pb-5 text-sm leading-relaxed text-[#475569]">{a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
- 
-
-
-
-
