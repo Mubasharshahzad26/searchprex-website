@@ -50,9 +50,9 @@ const navLinks: NavLink[] = [
       { href: "/resources/news", label: "News" },
     ],
   },
-  {
+    {
     href: "/tools",
-    label: "Tools",
+    label: "Solutions",
     hasDropdown: true,
     dropdownItems: [
       { href: "/intake-assistant",      label: "AI Intake Assistant", badge: "New" },
