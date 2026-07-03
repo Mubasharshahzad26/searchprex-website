@@ -1,14 +1,14 @@
 "use client";
-
-import { useState, useEffect, useRef } from "react";
+ 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
-
+ 
 type DropItem = { href: string; label: string; badge?: string };
 type NavLink = { href: string; label: string; hasDropdown?: boolean; dropdownItems?: DropItem[] };
-
+ 
 const navLinks: NavLink[] = [
   {
     href: "/services",
@@ -65,38 +65,18 @@ const navLinks: NavLink[] = [
     ],
   },
 ];
-
+ 
 export default function Nav() {
   const [isScrolled,       setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown,   setActiveDropdown]   = useState<string | null>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+ 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const openDropdown = (label: string) => {
-    if (closeTimer.current) {
-      clearTimeout(closeTimer.current);
-      closeTimer.current = null;
-    }
-    setActiveDropdown(label);
-  };
-
-  const scheduleClose = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setActiveDropdown(null), 200);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
-  }, []);
-
+ 
   return (
     <>
       <header
@@ -109,76 +89,68 @@ export default function Nav() {
         {/* Main nav */}
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
-
+ 
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <Logo size="md" variant="dark" />
             </Link>
-
+ 
             {/* Desktop links */}
             <div className="hidden items-center gap-6 lg:flex">
               {navLinks.map((link) => (
                 <div
                   key={link.href}
                   className="relative"
-                  onMouseEnter={() => link.hasDropdown && openDropdown(link.label)}
-                  onMouseLeave={() => link.hasDropdown && scheduleClose()}
+                  onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.label)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 py-3 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
                   >
                     {link.label}
                     {link.hasDropdown && <ChevronDown className="h-3 w-3" />}
                   </Link>
-
-                  <AnimatePresence>
-                    {link.hasDropdown && activeDropdown === link.label && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.15 }}
-                        onMouseEnter={() => openDropdown(link.label)}
-                        onMouseLeave={() => scheduleClose()}
-                        className="absolute left-0 top-full z-50 w-56 pt-2"
-                      >
-                        <div className="rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl">
-                          {link.dropdownItems?.map((item) => (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              onClick={() => setActiveDropdown(null)}
-                              className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
-                            >
-                              <span>{item.label}</span>
-                              {item.badge && (
-                                <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
-                                  {item.badge}
-                                </span>
-                              )}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+ 
+                  {link.hasDropdown && activeDropdown === link.label && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      className="absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl"
+                    >
+                      {link.dropdownItems?.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                        >
+                          <span>{item.label}</span>
+                          {item.badge && (
+                            <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                              {item.badge}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
                 </div>
               ))}
             </div>
-
+ 
             {/* Desktop right */}
             <div className="hidden items-center gap-2 lg:flex">
-
+ 
               <Link
                 href="/login"
                 className="rounded-lg px-4 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
               >
                 Log in
               </Link>
-
+ 
               {/* Try NicheSEO Pro — external app */}
-              
+              <a
                 href="https://nicheseopro.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -189,7 +161,7 @@ export default function Nav() {
                   <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
-
+ 
               {/* Get Free Audit — primary */}
               <Link
                 href="/free-audit"
@@ -211,7 +183,7 @@ export default function Nav() {
                 </svg>
               </Link>
             </div>
-
+ 
             {/* Mobile hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -224,7 +196,7 @@ export default function Nav() {
             </button>
           </div>
         </nav>
-
+ 
         {/* Mobile menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
@@ -265,10 +237,10 @@ export default function Nav() {
                     )}
                   </div>
                 ))}
-
+ 
                 {/* Mobile: auth + CTA */}
                 <div className="mt-4 flex flex-col gap-3 border-t border-[#e5e7eb] pt-4">
-
+ 
                   <Link
                     href="/login"
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -276,9 +248,9 @@ export default function Nav() {
                   >
                     Log in
                   </Link>
-
+ 
                   {/* Try NicheSEO Pro — external app */}
-                  
+                  <a
                     href="https://nicheseopro.com/"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -290,7 +262,7 @@ export default function Nav() {
                       <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </a>
-
+ 
                   <Link
                     href="/free-audit"
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -307,3 +279,4 @@ export default function Nav() {
     </>
   );
 }
+ 
