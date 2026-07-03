@@ -1,65 +1,79 @@
-"use client"; 
+"use client";
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
-  ArrowRight, CheckCircle, Play, X, Phone, Sparkles, ShieldCheck,
-  Linkedin, BadgeCheck, Filter, MapPin, ChevronDown, BarChart3, Bot,
+  ArrowRight, CheckCircle, Play, X, Phone, ShieldCheck,
+  Linkedin, BadgeCheck, Filter, MapPin, ChevronDown, BarChart3,
   Youtube, RotateCcw, ExternalLink,
 } from "lucide-react";
 import {
   caseStudies, featuredStudies, seoTypeOptions, industryOptions,
   detailUrl, FAQS, type CaseStudy,
 } from "./data";
- 
-/* ── Brand ── */
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
-const PURPLE = "#534AB7";
-const NAVY = "#0a0f2e";
- 
+
+/* ── Brand (Semrush-style: neutral base, green as single accent) ── */
+const ACCENT = "#3eb489";
+const ACCENT_DARK = "#2f9670";
+const INK = "#191a1f";       // near-black text
+const SLATE = "#65676e";     // secondary text
+const LINE = "#e6e7eb";      // hairline borders
+const PAPER = "#f7f7f8";     // section backgrounds
+
 const PHONE = "+923106526316";
 const PHONE_DISPLAY = "+92 310 652 6316";
- 
-/* ── Proof band: 4 big numbers + capability pills (agency-style) ── */
+
+/* Fallback stock images (Unsplash) for case studies without cs.image */
+const FALLBACK_IMAGES = [
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80",
+  "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
+  "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80",
+];
+const fallbackFor = (seed: string | number) => {
+  const s = String(seed);
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return FALLBACK_IMAGES[h % FALLBACK_IMAGES.length];
+};
+const cardImage = (cs: CaseStudy) =>
+  cs.video
+    ? `https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg`
+    : cs.image ?? fallbackFor(cs.id);
+
 const bigStats = [
   { v: "20+", l: "Clients worldwide" },
   { v: "+476%", l: "Organic clicks" },
   { v: "+285%", l: "Indexing rate" },
   { v: "12K+", l: "Pages indexed" },
 ];
- 
-const capabilities = [
-  { label: "Ranked in Google AI Overviews", icon: Sparkles },
-  { label: "Cited by LLMs · AEO optimized", icon: Bot },
-  { label: "AI chatbot developer", icon: BarChart3 },
-];
- 
-/* ── Motion ── */
+
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 const stagger: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.07, delayChildren: 0.08 } },
 };
- 
+
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
- 
+
 type FormState = "idle" | "sending" | "sent" | "error";
- 
+
 export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();
- 
+
   const typeFilter = sp.get("type") ?? "all";
   const industryFilter = sp.get("industry") ?? "all";
   const isFiltering = typeFilter !== "all" || industryFilter !== "all";
- 
+
   const setParam = (key: string, value: string) => {
     const params = new URLSearchParams(sp.toString());
     if (value === "all" || params.get(key) === value) params.delete(key);
@@ -67,25 +81,24 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
     const qs = params.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
- 
+
   const clearFilters = () => router.replace(pathname, { scroll: false });
- 
+
   const matches = (cs: CaseStudy) =>
     (typeFilter === "all" || slugify(cs.seoType) === typeFilter) &&
     (industryFilter === "all" || slugify(cs.industry) === industryFilter);
- 
+
   const filtered = useMemo(() => caseStudies.filter(matches), [typeFilter, industryFilter]);
   const featured = featuredStudies();
   const gridStudies = isFiltering ? filtered : caseStudies.filter((c) => !c.featured);
- 
-  /* Modal + form */
+
   const [showModal, setShowModal] = useState(false);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", website: "", phone: "" });
   const [formState, setFormState] = useState<FormState>("idle");
- 
+
   const openModal = () => { setFormState("idle"); setShowModal(true); };
- 
+
   const submit = async () => {
     setFormState("sending");
     try {
@@ -105,100 +118,66 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
       setFormState("error");
     }
   };
- 
+
   const inputCls =
-    "w-full px-4 py-3 rounded-lg border border-[#e2e8f0] outline-none focus:ring-2 focus:ring-[#3eb489] transition-shadow";
- 
-  const CTA = ({ className = "", label = "Reality Check" }: { className?: string; label?: string }) => (
+    "w-full px-4 py-3 rounded-md border border-[#e6e7eb] outline-none focus:ring-2 focus:ring-[#3eb489] transition-shadow text-sm";
+
+  const CTA = ({ className = "", label = "Get a reality check" }: { className?: string; label?: string }) => (
     <button
       onClick={openModal}
-      className={`group inline-flex items-center justify-center gap-2 rounded-xl font-bold text-white transition-all hover:scale-[1.03] ${className}`}
-      style={{ background: GREEN }}
+      className={`group inline-flex items-center justify-center gap-2 rounded-full font-semibold text-white transition-all hover:opacity-90 ${className}`}
+      style={{ background: INK }}
     >
-      <BarChart3 className="h-5 w-5" />
       {label}
-      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
     </button>
   );
- 
+
   return (
-    <main className="bg-gradient-to-b from-[#f8fafc] to-white">
- 
-      {/* ━━━ 1 · HERO ━━━ */}
-      <section className="relative overflow-hidden pt-28 pb-12">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full opacity-20"
-            style={{ background: `radial-gradient(circle, ${GREEN}, transparent)` }} />
-          <div className="absolute top-1/2 -left-40 h-80 w-80 rounded-full opacity-20"
-            style={{ background: `radial-gradient(circle, ${PURPLE}, transparent)` }} />
-        </div>
- 
+    <main className="bg-white">
+
+      {/* ━━━ 1 · HERO (minimal, Semrush-style) ━━━ */}
+      <section className="border-b border-[#e6e7eb] pt-24 pb-16 sm:pt-28">
         <motion.div initial="hidden" animate="show" variants={stagger}
-          className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+          className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <motion.div variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2">
-            <ShieldCheck className="h-4 w-4" style={{ color: GREEN }} />
-            <span className="text-xs font-bold uppercase tracking-wider" style={{ color: GREEN_DARK }}>
-              Verified GSC data · real clients
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#e6e7eb] px-4 py-1.5">
+            <ShieldCheck className="h-3.5 w-3.5" style={{ color: ACCENT }} />
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#65676e]">
+              Verified Google Search Console data
             </span>
           </motion.div>
           <motion.h1 variants={fadeUp}
-            className="mb-5 text-4xl font-black leading-tight text-[#0a0f2e] sm:text-5xl md:text-6xl">
-            SEO Case Studies That Drive <span style={{ color: GREEN }}>Real Revenue</span>
+            className="mb-5 text-4xl font-bold leading-[1.1] tracking-tight text-[#191a1f] sm:text-5xl md:text-[56px]">
+            Customer stories worth exploring
           </motion.h1>
-          <motion.p variants={fadeUp} className="mb-8 text-lg leading-relaxed text-[#475569]">
-            Filter real results by industry and SEO type. No vanity metrics — just clicks, rankings,
-            indexing, leads and revenue, all backed by Google Search Console.
+          <motion.p variants={fadeUp} className="mx-auto mb-9 max-w-xl text-lg leading-relaxed text-[#65676e]">
+            Real clients, real clicks, real revenue — filter by industry and SEO
+            type to see exactly how we do it.
           </motion.p>
           <motion.div variants={fadeUp}>
-            <CTA className="px-8 py-4 text-lg" />
+            <CTA className="px-7 py-3.5 text-[15px]" />
           </motion.div>
         </motion.div>
-      </section>
- 
-      {/* ━━━ 2 · PROOF BAND (dark navy, big numbers + capability pills) ━━━ */}
-      <section className="pb-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 md:py-12"
-            style={{ background: NAVY }}>
-            <div className="absolute inset-0 opacity-10 pointer-events-none"
-              style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
- 
-            {/* Big numbers row */}
-            <div className="relative grid grid-cols-2 gap-x-6 gap-y-8 text-center md:grid-cols-4">
-              {bigStats.map((s, i) => (
-                <div key={i} className={i > 0 ? "md:border-l md:border-white/10" : ""}>
-                  <p className="text-3xl font-black sm:text-4xl md:text-5xl" style={{ color: GREEN }}>{s.v}</p>
-                  <p className="mt-2 text-xs uppercase tracking-widest text-white/60">{s.l}</p>
-                </div>
-              ))}
+
+        {/* Stat strip */}
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+          className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-8 px-4 text-center sm:px-6 md:grid-cols-4 lg:px-8">
+          {bigStats.map((s, i) => (
+            <div key={i} className={i > 0 ? "sm:border-l sm:border-[#e6e7eb]" : ""}>
+              <p className="text-3xl font-bold text-[#191a1f] sm:text-4xl">{s.v}</p>
+              <p className="mt-1.5 text-xs font-medium uppercase tracking-wide text-[#65676e]">{s.l}</p>
             </div>
- 
-            {/* Capability pills */}
-            <div className="relative mt-9 flex flex-wrap items-center justify-center gap-3">
-              {capabilities.map(({ label, icon: Icon }) => (
-                <span key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/90">
-                  <Icon className="h-3.5 w-3.5" style={{ color: GREEN }} />
-                  {label}
-                </span>
-              ))}
-            </div>
- 
-            <p className="relative mt-7 text-center text-sm text-white/50">
-              Recovered from near-zero GSC visibility — every number verified in Google Search Console.
-            </p>
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
       </section>
- 
-      {/* ━━━ 3 · FILTER BAR (URL-synced) ━━━ */}
-      <section className="border-y border-[#e2e8f0] bg-white py-8">
+
+      {/* ━━━ 2 · FILTER BAR ━━━ */}
+      <section className="border-b border-[#e6e7eb] py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-5 flex items-center gap-2">
-            <Filter className="h-4 w-4" style={{ color: PURPLE }} />
-            <span className="text-sm font-bold text-[#0a0f2e]">Filter by SEO type</span>
+          <div className="mb-4 flex items-center gap-2">
+            <Filter className="h-3.5 w-3.5 text-[#65676e]" />
+            <span className="text-xs font-semibold uppercase tracking-wide text-[#65676e]">SEO type</span>
           </div>
           <div className="mb-6 flex flex-wrap gap-2">
             <FilterPill active={typeFilter === "all"} onClick={() => setParam("type", "all")} label="All types" />
@@ -207,10 +186,10 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                 onClick={() => setParam("type", slugify(t))} label={t} />
             ))}
           </div>
- 
-          <div className="mb-5 flex items-center gap-2">
-            <MapPin className="h-4 w-4" style={{ color: PURPLE }} />
-            <span className="text-sm font-bold text-[#0a0f2e]">Filter by industry</span>
+
+          <div className="mb-4 flex items-center gap-2">
+            <MapPin className="h-3.5 w-3.5 text-[#65676e]" />
+            <span className="text-xs font-semibold uppercase tracking-wide text-[#65676e]">Industry</span>
           </div>
           <div className="flex flex-wrap gap-2">
             <FilterPill active={industryFilter === "all"} onClick={() => setParam("industry", "all")} label="All industries" />
@@ -219,201 +198,64 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                 onClick={() => setParam("industry", slugify(ind))} label={ind} />
             ))}
           </div>
- 
+
           <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm text-[#64748b]">
-              Showing <span className="font-bold text-[#0a0f2e]">{filtered.length}</span> of {caseStudies.length} case studies
+            <p className="text-sm text-[#65676e]">
+              Showing <span className="font-semibold text-[#191a1f]">{filtered.length}</span> of {caseStudies.length}
             </p>
             {isFiltering && (
               <button onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:opacity-80"
-                style={{ color: PURPLE }}>
-                <RotateCcw className="h-4 w-4" /> Clear all
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#191a1f] transition-opacity hover:opacity-70">
+                <RotateCcw className="h-3.5 w-3.5" /> Clear all
               </button>
             )}
           </div>
         </div>
       </section>
- 
-      {/* ━━━ 4 · FEATURED (only when not filtering) ━━━ */}
+
+      {/* ━━━ 3 · FEATURED — large image cards (Semrush hero-card style) ━━━ */}
       {!isFiltering && (
-        <section className="bg-[#f8f9fc] py-20">
+        <section className="py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>Success stories</p>
-              <h2 className="text-4xl font-black text-[#0a0f2e] md:text-5xl">Featured Results</h2>
-            </div>
-            <div className="space-y-10">
-              {featured.map((cs, index) => {
-                const videoLeft = index % 2 === 0;
-                return (
-                  <motion.article key={cs.id}
-                    initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }} transition={{ duration: 0.6 }}
-                    className="grid items-stretch overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white shadow-sm lg:grid-cols-2">
-                    <div className={videoLeft ? "" : "lg:order-2"}>
-                      {cs.video && (
-                        <div className="group relative h-full min-h-[300px] cursor-pointer bg-[#0a0f2e]"
-                          onClick={() => setActiveVideo(cs.video!)}>
-                          <img src={`https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg`}
-                            alt={`${cs.client} SEO case study`}
-                            className="absolute inset-0 h-full w-full object-cover"
-                            onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${cs.video}/hqdefault.jpg`; }} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/80 via-[#0a0f2e]/20 to-transparent" />
-                          <div className="absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold text-white"
-                            style={{ background: GREEN }}>
-                            <Youtube className="h-3 w-3" /> Watch on YouTube
-                          </div>
-                          <div className="absolute inset-0 z-10 flex items-center justify-center">
-                            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/40 shadow-lg transition-all group-hover:scale-110"
-                              style={{ background: GREEN }}>
-                              <Play className="ml-1 h-7 w-7 fill-white text-white" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 z-20 p-5">
-                            <p className="text-sm font-bold text-white">{cs.client} — {cs.location}</p>
-                            <p className="text-xs text-white/70">Live GSC screen recording</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div className={`flex flex-col p-8 lg:p-10 ${videoLeft ? "" : "lg:order-1"}`}>
-                      <div className="mb-4 flex flex-wrap items-center gap-3">
-                        <span className="rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-widest"
-                          style={{ backgroundColor: cs.badgeBg, color: cs.badgeColor }}>{cs.seoType}</span>
-                        <span className="flex items-center gap-1 text-xs text-[#64748b]">
-                          <MapPin className="h-3.5 w-3.5" />{cs.location}
-                        </span>
-                      </div>
-                      <h3 className="mb-6 text-xl font-black leading-snug text-[#0a0f2e]">{cs.headline}</h3>
-                      
-                      {/* ━━━ DEMO LINK CTA BUTTON ━━━ */}
-                      {cs.demoLink && (
-                        <a 
-                          href={cs.demoLink} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="mb-10 inline-flex items-center justify-center gap-3 rounded-xl px-7 py-4 text-base font-bold text-white transition-all hover:scale-[1.06] hover:shadow-2xl"
-                          style={{ background: GREEN }}>
-                          <Play className="h-6 w-6 fill-white" />
-                          Find Live Demo of Our SaaS Solution
-                          <ExternalLink className="h-5 w-5" />
-                        </a>
-                      )}
- 
-                      <div className="space-y-4">
-                        <FSO label="Challenge" color="#ef4444" text={cs.challenge} />
-                        <FSO label="Solution" color={GREEN_DARK} text={cs.solution} />
-                        <FSO label="Outcome" color={PURPLE} text={cs.outcome} />
-                      </div>
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {cs.metrics.map((m) => (
-                          <span key={m.l} className="inline-flex items-baseline gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold"
-                            style={{ borderColor: "rgba(62,180,137,0.3)", background: "rgba(62,180,137,0.08)", color: GREEN_DARK }}>
-                            <span className="text-sm font-black">{m.v}</span> {m.l}
-                          </span>
-                        ))}
-                      </div>
-                      <Link href={detailUrl(cs)}
-                        className="mt-7 inline-flex w-fit items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5"
-                        style={{ background: NAVY }}>
-                        Read full case study <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </motion.article>
-                );
-              })}
+            <h2 className="mb-10 text-2xl font-bold text-[#191a1f] sm:text-3xl">Featured results</h2>
+            <div className="grid gap-6 lg:grid-cols-3">
+              {featured.map((cs, i) => (
+                <motion.div key={cs.id}
+                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }}
+                  className={i === 0 ? "lg:col-span-2 lg:row-span-2" : ""}>
+                  <FeaturedCard cs={cs} tall={i === 0} onPlay={() => cs.video && setActiveVideo(cs.video)} />
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
       )}
- 
-      {/* ━━━ 5 · FILTERED GRID ━━━ */}
-      <section className="py-20">
+
+      {/* ━━━ 4 · GRID — full portfolio ━━━ */}
+      <section className="py-20" style={{ background: PAPER }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {!isFiltering && (
-            <div className="mb-12 text-center">
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>More results</p>
-              <h2 className="text-4xl font-black text-[#0a0f2e] md:text-5xl">Complete Portfolio</h2>
-            </div>
+            <h2 className="mb-10 text-2xl font-bold text-[#191a1f] sm:text-3xl">More wins worth exploring</h2>
           )}
- 
+
           {gridStudies.length === 0 ? (
-            <div className="mx-auto max-w-md rounded-3xl border border-[#e2e8f0] bg-white p-10 text-center">
-              <p className="mb-2 text-lg font-bold text-[#0a0f2e]">No case studies match these filters yet.</p>
-              <p className="mb-6 text-sm text-[#64748b]">Clear the filters to see everything, or get a free reality check on your own site.</p>
+            <div className="mx-auto max-w-md rounded-2xl border border-[#e6e7eb] bg-white p-10 text-center">
+              <p className="mb-2 text-lg font-bold text-[#191a1f]">No case studies match these filters yet.</p>
+              <p className="mb-6 text-sm text-[#65676e]">Clear the filters to see everything, or get a free reality check on your own site.</p>
               <button onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 rounded-xl border-2 px-5 py-2.5 text-sm font-bold transition-all hover:scale-[1.03]"
-                style={{ borderColor: PURPLE, color: PURPLE }}>
+                className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#191a1f] px-5 py-2.5 text-sm font-bold text-[#191a1f] transition-all hover:opacity-80">
                 <RotateCcw className="h-4 w-4" /> Clear filters
               </button>
             </div>
           ) : (
-            <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <motion.div layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               <AnimatePresence mode="popLayout">
                 {gridStudies.map((cs) => (
                   <motion.div key={cs.id} layout
-                    initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }}>
-                    <Link href={detailUrl(cs)}
-                      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white transition-all hover:-translate-y-1 hover:shadow-xl">
-                      <div className="relative aspect-[4/3] overflow-hidden bg-[#0a0f2e]">
-                        {cs.video ? (
-                          <img src={`https://img.youtube.com/vi/${cs.video}/hqdefault.jpg`} alt={cs.client}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                        ) : cs.image ? (
-                          <img src={cs.image} alt={cs.client}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center"
-                            style={{ background: `linear-gradient(135deg, ${PURPLE}, #3C3489)` }}>
-                            <span className="text-xl font-black text-white">{cs.client}</span>
-                          </div>
-                        )}
-                        <span className="absolute left-3 top-3 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide"
-                          style={{ backgroundColor: cs.badgeBg, color: cs.badgeColor }}>{cs.seoType}</span>
- 
-                        {/* Overlay CTA — always visible on mobile (no hover on touch), hover-reveal on desktop */}
-                        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent pb-5 opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100">
-                          <span className="inline-flex translate-y-0 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 sm:translate-y-3 sm:group-hover:translate-y-0"
-                            style={{ background: GREEN }}>
-                            View Full Case Study <ArrowRight className="h-4 w-4" />
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 flex-col p-5">
-                        <p className="mb-1 flex items-center gap-1 text-xs text-[#64748b]">
-                          <MapPin className="h-3 w-3" />{cs.location}
-                        </p>
-                        <h3 className="mb-4 text-base font-bold leading-snug text-[#0a0f2e]">{cs.headline}</h3>
- 
-                        {/* Hero metric (big) + secondary chips — agency style */}
-                        <div className="mt-auto">
-                          <div className="flex items-baseline gap-2 border-t border-[#f1f5f9] pt-4">
-                            <span className="text-3xl font-black leading-none" style={{ color: GREEN }}>
-                              {cs.metrics[0].v}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wide text-[#64748b]">
-                              {cs.metrics[0].l}
-                            </span>
-                          </div>
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {cs.metrics.slice(1, 3).map((m) => (
-                              <span key={m.l} className="rounded-md px-2 py-1 text-[11px] font-semibold"
-                                style={{ background: "rgba(62,180,137,0.1)", color: GREEN_DARK }}>
-                                <span className="font-black">{m.v}</span> {m.l}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
- 
-                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold transition-colors"
-                          style={{ color: GREEN_DARK }}>
-                          View case study
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </div>
-                    </Link>
+                    initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.25 }}>
+                    <GridCard cs={cs} />
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -421,53 +263,48 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
           )}
         </div>
       </section>
- 
-      {/* ━━━ 6 · FAQ ━━━ */}
-      <section className="bg-[#f8f9fc] py-20">
+
+      {/* ━━━ 5 · FAQ ━━━ */}
+      <section className="py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>Good to know</p>
-            <h2 className="text-3xl font-black text-[#0a0f2e] md:text-4xl">Frequently Asked Questions</h2>
-          </div>
+          <h2 className="mb-10 text-center text-2xl font-bold text-[#191a1f] sm:text-3xl">Frequently asked questions</h2>
           <div className="space-y-3">
             {FAQS.map((f, i) => <FAQItem key={i} q={f.q} a={f.a} />)}
           </div>
         </div>
       </section>
- 
-      {/* ━━━ 7 · FOUNDER · E-E-A-T BLOCK (last) ━━━ */}
-      <section className="py-20">
+
+      {/* ━━━ 6 · FOUNDER ━━━ */}
+      <section className="border-t border-[#e6e7eb] py-20" style={{ background: PAPER }}>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white p-8 md:p-10">
+          <div className="rounded-2xl border border-[#e6e7eb] bg-white p-8 md:p-10">
             <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:text-left">
-              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full text-3xl font-black text-white"
-                style={{ background: `linear-gradient(135deg, ${PURPLE}, ${GREEN})` }}>MS</div>
+              <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full text-2xl font-bold text-white"
+                style={{ background: INK }}>MS</div>
               <div className="flex-1">
                 <div className="flex flex-col items-center gap-3 md:flex-row md:items-center">
-                  <h3 className="text-2xl font-black text-[#0a0f2e]">Mubashar Shahzad</h3>
+                  <h3 className="text-xl font-bold text-[#191a1f]">Mubashar Shahzad</h3>
                   <a href={linkedinUrl} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-bold transition-all hover:scale-105"
-                    style={{ borderColor: "#0a66c2", color: "#0a66c2" }}>
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#e6e7eb] px-3 py-1 text-xs font-semibold text-[#0a66c2] transition-all hover:bg-[#f0f6fc]">
                     <Linkedin className="h-3.5 w-3.5" /> Verified on LinkedIn
                   </a>
                 </div>
                 <div className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">
-                  <span className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-bold"
-                    style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
+                  <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
+                    style={{ background: "rgba(62,180,137,0.12)", color: ACCENT_DARK }}>
                     <BadgeCheck className="h-3.5 w-3.5" /> Verified SEO Expert
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-bold"
-                    style={{ background: "rgba(83,74,183,0.12)", color: PURPLE }}>Content Strategist</span>
+                  <span className="rounded-full border border-[#e6e7eb] px-3 py-1 text-xs font-semibold text-[#65676e]">Content Strategist</span>
                 </div>
-                <p className="mt-4 text-[15px] leading-relaxed text-[#475569]">
+                <p className="mt-4 text-[15px] leading-relaxed text-[#65676e]">
                   Founder of SearchPrex. Over 5 years delivering results for local, ecommerce and service
                   businesses across the US and worldwide — specializing in local, international, technical,
                   ecommerce and law firm SEO, plus AEO and AI Overview optimization.
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2 md:justify-start">
-                  <span className="rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-xs font-semibold text-[#475569]">Semrush certified</span>
-                  <span className="rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-xs font-semibold text-[#475569]">HubSpot certified</span>
-                  <a href={`tel:${PHONE}`} className="inline-flex items-center gap-1.5 rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-xs font-semibold text-[#475569] transition-colors hover:border-green-300">
+                  <span className="rounded-full border border-[#e6e7eb] px-3 py-1.5 text-xs font-semibold text-[#65676e]">Semrush certified</span>
+                  <span className="rounded-full border border-[#e6e7eb] px-3 py-1.5 text-xs font-semibold text-[#65676e]">HubSpot certified</span>
+                  <a href={`tel:${PHONE}`} className="inline-flex items-center gap-1.5 rounded-full border border-[#e6e7eb] px-3 py-1.5 text-xs font-semibold text-[#65676e] transition-colors hover:border-[#3eb489]">
                     <Phone className="h-3.5 w-3.5" /> {PHONE_DISPLAY}
                   </a>
                 </div>
@@ -476,53 +313,49 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
           </div>
         </div>
       </section>
- 
-      {/* ━━━ 8 · FINAL CTA ━━━ */}
-      <section className="relative overflow-hidden py-20"
-        style={{ background: `linear-gradient(135deg, ${GREEN}, ${GREEN_DARK})` }}>
-        <div className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
+
+      {/* ━━━ 7 · FINAL CTA (minimal, black band) ━━━ */}
+      <section className="py-24" style={{ background: INK }}>
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-          className="relative mx-auto max-w-3xl px-4 text-center">
-          <h2 className="mb-4 text-4xl font-black text-white md:text-5xl">Want results like these?</h2>
-          <p className="mb-10 text-lg text-white/90">
+          className="mx-auto max-w-2xl px-4 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">Want results like these?</h2>
+          <p className="mb-9 text-[17px] leading-relaxed text-white/70">
             Get a free reality check — the founder personally reviews your site and shows you exactly
-            what&apos;s holding it back, with a 90-day growth plan. No tools, no juniors, no fluff.
+            what&apos;s holding it back, with a 90-day growth plan.
           </p>
           <button onClick={openModal}
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-lg font-bold text-[#0a0f2e] transition-all hover:scale-[1.03]">
-            <BarChart3 className="h-5 w-5" /> Reality Check
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-[#191a1f] transition-all hover:opacity-90">
+            Reality Check <ArrowRight className="h-4 w-4" />
           </button>
         </motion.div>
       </section>
- 
+
       {/* ━━━ FLOATING STICKY CTA ━━━ */}
       <button onClick={openModal}
-        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
-        style={{ background: GREEN }}>
+        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white shadow-xl transition-all hover:opacity-90 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
+        style={{ background: INK }}>
         <BarChart3 className="h-4 w-4" /> Reality Check
       </button>
- 
+
       {/* ━━━ REALITY CHECK MODAL ━━━ */}
       <AnimatePresence>
         {showModal && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setShowModal(false)}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+            <motion.div initial={{ scale: 0.95, y: 16 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 16 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md rounded-3xl bg-white p-8">
+              className="w-full max-w-md rounded-2xl bg-white p-8">
               {formState !== "sent" ? (
                 <>
                   <div className="mb-2 flex justify-end">
-                    <button onClick={() => setShowModal(false)} className="text-[#64748b] hover:text-[#0a0f2e]" aria-label="Close">
+                    <button onClick={() => setShowModal(false)} className="text-[#65676e] hover:text-[#191a1f]" aria-label="Close">
                       <X className="h-6 w-6" />
                     </button>
                   </div>
                   <div className="mb-6">
-                    <h2 className="mb-2 text-3xl font-black text-[#0a0f2e]">Reality Check</h2>
-                    <p className="text-[#475569]">Get a free, founder-reviewed SEO audit of your site within 24 hours.</p>
+                    <h2 className="mb-2 text-2xl font-bold text-[#191a1f]">Reality Check</h2>
+                    <p className="text-[#65676e]">Get a free, founder-reviewed SEO audit of your site within 24 hours.</p>
                   </div>
                   <div className="space-y-4">
                     <input type="text" placeholder="Your name" className={inputCls}
@@ -539,24 +372,24 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
                       </p>
                     )}
                     <button onClick={submit} disabled={formState === "sending"}
-                      className="w-full rounded-lg py-3 font-bold text-white transition-all hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
-                      style={{ background: GREEN }}>
+                      className="w-full rounded-full py-3 font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
+                      style={{ background: INK }}>
                       {formState === "sending" ? "Sending…" : "Get my reality check →"}
                     </button>
                   </div>
                 </>
               ) : (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-8 text-center">
-                  <CheckCircle className="mx-auto mb-4 h-12 w-12" style={{ color: GREEN }} />
-                  <h3 className="mb-2 text-2xl font-black text-[#0a0f2e]">Request received</h3>
-                  <p className="text-[#475569]">Check your email within 24 hours for your reality check report.</p>
+                  <CheckCircle className="mx-auto mb-4 h-12 w-12" style={{ color: ACCENT }} />
+                  <h3 className="mb-2 text-2xl font-bold text-[#191a1f]">Request received</h3>
+                  <p className="text-[#65676e]">Check your email within 24 hours for your reality check report.</p>
                 </motion.div>
               )}
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
- 
+
       {/* ━━━ VIDEO MODAL ━━━ */}
       {activeVideo && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
@@ -579,50 +412,130 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl: string
     </main>
   );
 }
- 
+
+/* ── Featured card (large, image-first, stat overlay — Semrush style) ── */
+function FeaturedCard({ cs, tall, onPlay }: { cs: CaseStudy; tall: boolean; onPlay: () => void }) {
+  const img = cardImage(cs);
+  const CardInner = (
+    <div className={`group relative w-full overflow-hidden rounded-2xl bg-[#191a1f] ${tall ? "aspect-square lg:aspect-auto lg:h-full" : "aspect-[4/3]"}`}>
+      <img src={img} alt={cs.client}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        onError={(e) => { (e.target as HTMLImageElement).src = fallbackFor(cs.id); }} />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+      {cs.video && (
+        <button onClick={(e) => { e.preventDefault(); onPlay(); }}
+          className="absolute left-5 top-5 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 backdrop-blur transition-all hover:scale-110">
+          <Play className="ml-0.5 h-4 w-4 fill-[#191a1f] text-[#191a1f]" />
+        </button>
+      )}
+
+      <span className="absolute right-5 top-5 z-20 rounded-full bg-white/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[#191a1f] backdrop-blur">
+        {cs.seoType}
+      </span>
+
+      <div className="absolute inset-x-0 bottom-0 z-20 p-6">
+        <p className="mb-2 flex items-center gap-1 text-xs text-white/70">
+          <MapPin className="h-3 w-3" />{cs.location}
+        </p>
+        <h3 className="mb-4 text-xl font-bold leading-snug text-white sm:text-2xl">{cs.headline}</h3>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {cs.metrics.slice(0, 3).map((m) => (
+            <span key={m.l} className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+              <span className="font-bold" style={{ color: ACCENT }}>{m.v}</span> {m.l}
+            </span>
+          ))}
+        </div>
+        {cs.demoLink && (
+          <a href={cs.demoLink} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
+            className="mb-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
+            Live demo <ExternalLink className="h-3 w-3" />
+          </a>
+        )}
+        <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
+          Read full case study <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </span>
+      </div>
+    </div>
+  );
+
+  return <Link href={detailUrl(cs)}>{CardInner}</Link>;
+}
+
+/* ── Grid card (compact, image-first) ── */
+function GridCard({ cs }: { cs: CaseStudy }) {
+  const img = cardImage(cs);
+  return (
+    <Link href={detailUrl(cs)}
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-[#e6e7eb] bg-white transition-all hover:-translate-y-0.5 hover:shadow-lg">
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#191a1f]">
+        <img src={img} alt={cs.client}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => { (e.target as HTMLImageElement).src = fallbackFor(cs.id); }} />
+        {cs.video && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/90">
+              <Play className="ml-0.5 h-4 w-4 fill-[#191a1f] text-[#191a1f]" />
+            </div>
+          </div>
+        )}
+        <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#191a1f]">
+          {cs.seoType}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <p className="mb-1 flex items-center gap-1 text-xs text-[#65676e]">
+          <MapPin className="h-3 w-3" />{cs.location}
+        </p>
+        <h3 className="mb-4 text-[15px] font-bold leading-snug text-[#191a1f]">{cs.headline}</h3>
+        <div className="mt-auto flex items-baseline gap-2 border-t border-[#f1f1f2] pt-4">
+          <span className="text-2xl font-bold leading-none" style={{ color: ACCENT_DARK }}>
+            {cs.metrics[0].v}
+          </span>
+          <span className="text-xs font-medium uppercase tracking-wide text-[#65676e]">
+            {cs.metrics[0].l}
+          </span>
+        </div>
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#191a1f] transition-opacity group-hover:opacity-70">
+          View case study <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 /* ── Small presentational helpers ── */
 function FilterPill({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
   return (
     <button onClick={onClick}
-      className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
+      className="rounded-full px-4 py-2 text-sm font-semibold transition-all"
       style={
         active
-          ? { background: PURPLE, color: "#fff" }
-          : { background: "#fff", color: "#475569", border: "1px solid #e2e8f0" }
+          ? { background: "#191a1f", color: "#fff" }
+          : { background: "#fff", color: "#65676e", border: "1px solid #e6e7eb" }
       }>
       {label}
     </button>
   );
 }
- 
-function FSO({ label, color, text }: { label: string; color: string; text?: string }) {
-  if (!text) return null;
-  return (
-    <div>
-      <p className="mb-1 text-sm font-bold" style={{ color }}>{label}</p>
-      <p className="text-sm leading-relaxed text-[#475569]">{text}</p>
-    </div>
-  );
-}
- 
+
 function FAQItem({ q, a }: { q: string; a?: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="overflow-hidden rounded-xl border border-[#e2e8f0] bg-white">
+    <div className="overflow-hidden rounded-xl border border-[#e6e7eb] bg-white">
       <button onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-        <span className="font-bold text-[#0a0f2e]">{q}</span>
-        <ChevronDown className={`h-5 w-5 flex-shrink-0 text-[#64748b] transition-transform ${open ? "rotate-180" : ""}`} />
+        <span className="font-semibold text-[#191a1f]">{q}</span>
+        <ChevronDown className={`h-5 w-5 flex-shrink-0 text-[#65676e] transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       <AnimatePresence>
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}>
-            <p className="px-5 pb-5 text-sm leading-relaxed text-[#475569]">{a}</p>
+            <p className="px-5 pb-5 text-sm leading-relaxed text-[#65676e]">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
 }
- 
