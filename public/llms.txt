@@ -1,95 +1,49 @@
-# SearchPrex - USA SEO Agency
-
-> SearchPrex is a premier US-Focused SEO agency specializing in search engine optimization services for law firms, ecommerce stores, local businesses, and enterprise clients across all 50 states.
-
-## Company Overview
-
-SearchPrex provides expert SEO services with a focus on:
-- Law Firm SEO (Family Law, Personal Injury, Criminal Defense)
-- Ecommerce & Shopify SEO
-- Local SEO for Small Businesses
-- Home Services SEO (HVAC, Plumbing, Electrical)
-- Enterprise SEO Solutions
-
-## Contact Information
-
-- Website: https://searchprex.com
-- Email: hello@searchprex.com
-- Phone: +92 310 652 6316
-- Address: 1250 Executive Place, Suite 450, Geneva, IL 60134, USA
-
-## Leadership
-
-**CEO & Founder: Mubashar Shahzad**
-- LinkedIn: https://linkedin.com/in/mubi00
-- ResearchGate: https://researchgate.net/profile/Mubashar-Shahzad
-
+# SearchPrex
+ 
+> Founder-led SEO agency helping local, ecommerce, technical, and law firm
+> businesses recover and grow organic search visibility. Every result is
+> backed by verified Google Search Console data — no vanity metrics.
+ 
+SearchPrex is run directly by its founder, Mubashar Shahzad, a 5+ year SEO
+analyst. Clients work with the person who built the strategy, not a rotating
+team of juniors. The agency also builds NicheSEOPro AI, a companion SEO
+SaaS tool.
+ 
 ## Services
-
-### Law Firm SEO
-Specialized SEO strategies for attorneys and law firms. We help family law attorneys, personal injury lawyers, and criminal defense attorneys dominate local search results and attract high-value clients.
-
-### Ecommerce SEO
-Technical and content-driven SEO for Shopify stores and ecommerce platforms. We optimize product pages, category structures, and technical performance for maximum organic visibility.
-
-### Local SEO
-Google Business Profile optimization, local citation building, and geo-targeted content strategies for small businesses looking to dominate their local market.
-
-### Enterprise SEO
-Scalable SEO solutions for mid-size to enterprise organizations with complex websites and multi-location needs.
-
-## NicheSEOPro Tool
-
-Our proprietary SEO tool offers:
-- Comprehensive site audits
-- Keyword research and tracking
-- Competitor analysis
-- Backlink monitoring
-- Local SEO tracking
-
-Free trial available at: https://searchprex.com/tool
-
-## Pricing Tiers
-
-1. **Beginning** - For startups and small businesses starting their SEO journey
-2. **Agency Level** - For growing businesses requiring comprehensive SEO management
-3. **Enterprise** - Custom solutions for large organizations with complex needs
-
-## Trust & Credentials
-
-- Semrush Certified Agency
-- Semrush Agency Partner
-- Ahrefs Certified
-- 10+ Years Experience
-- 500+ Clients Served
-- 87+ Five-Star Reviews
-
-## Content Guidelines (EEAT Compliance)
-
-All content on SearchPrex follows Google's E-E-A-T guidelines:
-- **Experience**: Real case studies with verified results
-- **Expertise**: Content created by SEO professionals with 10+ years experience
-- **Authoritativeness**: Industry certifications and recognized partnerships
-- **Trustworthiness**: Transparent pricing, clear contact information, verified reviews
-
-## Sitemap
-
-- Home: /
-- About Us: /about
-- Meet Our Experts: /experts
-- Services: /services
-- Pricing: /pricing
-- Case Studies: /case-studies
-- NicheSEOPro Tool: /tool
-- Why Call Us: /why-us
-- Privacy Policy: /privacy
-- Terms & Conditions: /terms
-- Contact: /contact
-
-## API Endpoints
-
-This website does not expose public APIs. For partnership inquiries, contact hello@searchprex.com.
-
-## Last Updated
-
-2026
+ 
+- [Local SEO](https://www.searchprex.com/services/local-seo): Google Business
+  Profile optimization, citation building, and map pack ranking for local
+  and multi-location service businesses.
+- [Ecommerce SEO](https://www.searchprex.com/services/ecommerce-seo): Technical
+  audits, faceted navigation fixes, indexing recovery, and content strategy
+  for large product catalogs.
+- [Technical SEO](https://www.searchprex.com/services/technical-seo): Site
+  migrations, indexing recovery, Core Web Vitals, and crawl budget
+  optimization.
+- [Law Firm SEO](https://www.searchprex.com/services/law-firm-seo): Local
+  authority building, E-E-A-T content, and lead-focused SEO for law firms.
+ 
+## Case Studies
+ 
+- [All Case Studies](https://www.searchprex.com/all-case-studies): Verified,
+  Google Search Console-backed results across ecommerce, local, technical,
+  and law firm SEO clients, filterable by industry and SEO type.
+ 
+## Tools
+ 
+- [NicheSEOPro AI](https://nicheseopro.com): AI-powered SEO content and
+  keyword research tool, built by the SearchPrex team.
+- [Free SEO Audit](https://www.searchprex.com/free-audit): Founder-reviewed
+  audit request, delivered within 24-48 hours.
+ 
+## About
+ 
+- [About SearchPrex](https://www.searchprex.com/about)
+- [Meet the Founder](https://www.searchprex.com/experts): Mubashar Shahzad,
+  SEO Analyst and founder, https://www.linkedin.com/in/mubashar-shahzad-seo
+ 
+## Contact
+ 
+- Book a consultation: https://calendly.com/contact-searchprex/30min
+- Phone: +92 310 652 6316
+- Email: contact@searchprex.com
