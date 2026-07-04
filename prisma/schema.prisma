@@ -1,0 +1,122 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Client {
+  id          String   @id @default(cuid())
+  companyName String
+  email       String   @unique
+  domain      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  gscConnections  GSCConnection[]
+  cmsConnections  CMSConnection[]
+  autopilotConfig AutopilotConfig?
+  autopilotRuns   AutopilotRun[]
+  costLogs        CostLog[]
+}
+
+model GSCConnection {
+  id                 String    @id @default(cuid())
+  clientId           String
+  client             Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  siteUrl            String
+  serviceAccountJson String
+  connectedAt        DateTime  @default(now())
+  lastSyncedAt       DateTime?
+  syncStatus         String    @default("pending")
+
+  @@unique([clientId, siteUrl])
+  @@index([clientId])
+}
+
+model CMSConnection {
+  id          String   @id @default(cuid())
+  clientId    String
+  client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  cmsType     String
+  baseUrl     String
+  credentials Json
+  testStatus  String   @default("pending")
+  connectedAt DateTime @default(now())
+
+  @@unique([clientId, cmsType])
+  @@index([clientId])
+}
+
+model AutopilotConfig {
+  id                String   @id @default(cuid())
+  clientId          String   @unique
+  client            Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  enabled           Boolean  @default(false)
+  automationScore   String
+  maxPagesPerRun    Int      @default(5)
+  contentTier       String
+  scheduleFrequency String
+  dryRunMode        Boolean  @default(true)
+  requiresApproval  Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  runs AutopilotRun[]
+}
+
+model AutopilotRun {
+  id             String          @id @default(cuid())
+  clientId       String
+  client         Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  configId       String
+  config         AutopilotConfig @relation(fields: [configId], references: [id], onDelete: Cascade)
+  status         String
+  pagesTargeted  Int
+  pagesGenerated Int             @default(0)
+  pagesPublished Int             @default(0)
+  dryRun         Boolean         @default(false)
+  startedAt      DateTime        @default(now())
+  completedAt    DateTime?
+  errorMessage   String?
+  results        Json?
+
+  pages   AutopilotPage[]
+  costLog CostLog?
+
+  @@index([clientId])
+}
+
+model AutopilotPage {
+  id               String       @id @default(cuid())
+  runId            String
+  run              AutopilotRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  pageUrl          String
+  gscImpressions   Int
+  gscClicks        Int
+  gscPosition      Float?
+  status           String
+  generatedContent Json?
+  publishedAt      DateTime?
+  errorMessage     String?
+  createdAt        DateTime     @default(now())
+
+  @@unique([runId, pageUrl])
+  @@index([runId])
+}
+
+model CostLog {
+  id             String        @id @default(cuid())
+  clientId       String
+  client         Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  runId          String?       @unique
+  run            AutopilotRun? @relation(fields: [runId], references: [id], onDelete: SetNull)
+  service        String
+  pagesProcessed Int
+  costPerPage    Float
+  totalCost      Float
+  createdAt      DateTime      @default(now())
+
+  @@index([clientId])
+}
