@@ -5,6 +5,14 @@ export async function middleware(request: NextRequest) {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     return NextResponse.next();
   }
+
+  const { pathname } = request.nextUrl;
+
+  // ✅ Autopilot dashboard = public internal tool (no auth required)
+  if (pathname.startsWith("/dashboard/autopilot")) {
+    return NextResponse.next();
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -24,7 +32,6 @@ export async function middleware(request: NextRequest) {
   );
 
   const { data: { user } } = await supabase.auth.getUser();
-  const { pathname } = request.nextUrl;
 
   // Not logged in → redirect to login
   if (!user && pathname.startsWith("/dashboard")) {
