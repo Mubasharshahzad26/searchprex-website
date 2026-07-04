@@ -27,23 +27,11 @@ import BlogTeaser from "../components/BlogTeaser";
 // import CTA from "../components/CTA";                          // "Dominate Your Market 2026" form — removed (no end CTA)
 import ChatWidget from "../components/ChatWidget";
 import Reveal from "@/components/Reveal";
-import { client } from "@/sanity/lib/client";
+
  
 // Single source of truth for the canonical origin.
 const SITE = "https://www.searchprex.com";
  
-const query = `*[_type == "homePage"][0]{
-  heroHeadline,
-  heroSubheadline,
-  heroCtaText,
-  stat1Number,
-  stat1Label,
-  stat2Number,
-  stat2Label,
-  stat3Number,
-  stat3Label,
-  heroImage { asset-> },
-}`;
  
 export const metadata: Metadata = {
   title: "SEO Agency USA | Law Firm & Ecommerce SEO and Local SEO | SearchPrex",
@@ -68,8 +56,7 @@ export const metadata: Metadata = {
   },
 };
  
-export default async function Home() {
-  const homeData = await client.fetch(query);
+export default function Home() {
  
   const jsonLd = {
     "@context": "https://schema.org",
