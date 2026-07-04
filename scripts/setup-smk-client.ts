@@ -1,3 +1,5 @@
+import { config } from 'dotenv'
+config({ path: '.env.local' })
 import { db } from '../lib/db'
 import fs from 'fs'
 
@@ -19,17 +21,17 @@ async function setupSMK() {
   })
   console.log(`Client created: ${client.id}`)
 
-  await db.gscConnection.create({
+  await db.gSCConnection.create({
     data: {
       clientId: client.id,
-      siteUrl: 'sc-domain:smkstore.com',
+      siteUrl: 'https://www.smkstore.com/',
       serviceAccountJson: JSON.stringify(serviceAccount),
       syncStatus: 'connected',
     },
   })
   console.log('GSC connected')
 
-  await db.cmsConnection.create({
+  await db.cMSConnection.create({
     data: {
       clientId: client.id,
       cmsType: 'wordpress',
