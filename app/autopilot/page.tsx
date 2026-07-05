@@ -27,7 +27,7 @@ export default function AutopilotDashboard() {
   if (loading) return <div className="p-8 text-white">Loading...</div>
 
   return (
-    <div className="min-h-screen bg-[#08080f] p-8">
+    <div className="min-h-screen bg-[#08080f] px-4 sm:px-8 pt-28 pb-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-white mb-6">SEO Autopilot Dashboard</h1>
 
@@ -65,40 +65,42 @@ export default function AutopilotDashboard() {
               No runs yet. Database setup pending or no autopilot runs triggered.
             </p>
           ) : (
-            <table className="w-full">
-              <thead className="border-b border-white/[0.06]">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Client</th>
-                  <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Status</th>
-                  <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Pages</th>
-                  <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Started</th>
-                </tr>
-              </thead>
-              <tbody>
-                {runs.slice(0, 10).map((run) => (
-                  <tr key={run.id} className="border-b border-white/[0.04]">
-                    <td className="px-6 py-4 text-sm text-white/70">{run.clientId}</td>
-                    <td className="px-6 py-4 text-sm">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold ${
-                          run.status === 'success'
-                            ? 'bg-green-500/10 text-green-400'
-                            : run.status === 'running'
-                              ? 'bg-blue-500/10 text-blue-400'
-                              : 'bg-red-500/10 text-red-400'
-                        }`}
-                      >
-                        {run.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-white/70">{run.pagesGenerated || 0}</td>
-                    <td className="px-6 py-4 text-sm text-white/40">
-                      {new Date(run.startedAt).toLocaleDateString()}
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[600px]">
+                <thead className="border-b border-white/[0.06]">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Client</th>
+                    <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Pages</th>
+                    <th className="px-6 py-3 text-left text-xs text-white/40 uppercase">Started</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {runs.slice(0, 10).map((run) => (
+                    <tr key={run.id} className="border-b border-white/[0.04]">
+                      <td className="px-6 py-4 text-sm text-white/70">{run.clientId}</td>
+                      <td className="px-6 py-4 text-sm">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            run.status === 'success'
+                              ? 'bg-green-500/10 text-green-400'
+                              : run.status === 'running'
+                                ? 'bg-blue-500/10 text-blue-400'
+                                : 'bg-red-500/10 text-red-400'
+                          }`}
+                        >
+                          {run.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-white/70">{run.pagesGenerated || 0}</td>
+                      <td className="px-6 py-4 text-sm text-white/40">
+                        {new Date(run.startedAt).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
 
