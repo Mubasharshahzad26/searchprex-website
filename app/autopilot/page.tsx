@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import PendingReview from '@/components/autopilot/PendingReview'
 
 export default function AutopilotDashboard() {
   const [runs, setRuns] = useState<any[]>([])
@@ -100,6 +101,8 @@ export default function AutopilotDashboard() {
             </table>
           )}
         </div>
+
+        <PendingReview />
       </div>
     </div>
   )

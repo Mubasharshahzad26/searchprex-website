@@ -40,7 +40,7 @@ async function testRun() {
     },
     'https://www.searchprex.com/api/generate-suite',
   )
-  const result = await autopilot.run()
+  const result = await autopilot.run(run.id)
   console.log('   Result:', JSON.stringify(result, null, 2))
 
   console.log('5. Run record update...')
