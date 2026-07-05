@@ -38,15 +38,23 @@ export class SEOAutopilot {
       )
       results.pagesFound = pages.length
 
-      const targets = pages.slice(0, this.config.maxPagesPerRun)
+      // FILTER: junk/scraper GSC queries skip karo (e.g. "-site:reddit.com" wali)
+      const cleanPages = pages.filter(
+        (p: any) =>
+          p.keyword &&
+          !p.keyword.includes('-site:') &&
+          !p.keyword.includes('site:') &&
+          p.keyword.length < 80,
+      )
+
+      const targets = cleanPages.slice(0, this.config.maxPagesPerRun)
 
       for (const page of targets) {
         try {
           const genRes = await fetch(this.generationEndpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            // FIX: body ab exactly wo hai jo /api/generate-suite expect karta hai
-            // (item + projectData required; keyword/GSC data fieldNotes ke zariye prompt mein jata hai)
+            // Body exactly wo hai jo /api/generate-suite expect karta hai
             body: JSON.stringify({
               item: page.url,
               contentType: 'Product/Category Page',
@@ -63,7 +71,9 @@ export class SEOAutopilot {
           })
 
           if (!genRes.ok) throw new Error(`Generation failed: ${genRes.status}`)
-          const content = await genRes.json()
+          const genJson = await genRes.json()
+          // generate-suite { content: {...} } return karta hai — dono cases safe
+          const content = genJson?.content ?? genJson
           results.pagesGenerated++
 
           if (!this.config.dryRun) {
@@ -78,6 +88,7 @@ export class SEOAutopilot {
             impressions: page.impressions,
             clicks: page.clicks,
             status: this.config.dryRun ? 'generated (dry-run)' : 'published',
+            content, // ← FIX: Gemini ka poora suite ab database mein store hoga (review ke liye)
           })
         } catch (err) {
           results.errors.push(
