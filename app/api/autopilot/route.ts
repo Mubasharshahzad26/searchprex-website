@@ -18,8 +18,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Config not found' }, { status: 404 })
     }
 
-    const gsc = await db.gscConnection.findFirst({ where: { clientId } })
-    const cms = await db.cmsConnection.findFirst({ where: { clientId } })
+    const gsc = await db.gSCConnection.findFirst({ where: { clientId } })
+    const cms = await db.cMSConnection.findFirst({ where: { clientId } })
 
     if (!gsc || !cms) {
       return NextResponse.json({ error: 'Missing GSC or CMS connection' }, { status: 400 })
