@@ -20,6 +20,24 @@ export class SEOAutopilot {
     this.generationEndpoint = generationEndpoint
   }
 
+  // Generation call with 1 retry (transient Gemini/parse failures ke liye)
+  private async generateWithRetry(body: string, retries = 1): Promise<any> {
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      const genRes = await fetch(this.generationEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+      })
+      if (genRes.ok) return genRes.json()
+      if (attempt < retries) {
+        // 3 second ruk kar dubara try
+        await new Promise((r) => setTimeout(r, 3000))
+        continue
+      }
+      throw new Error(`Generation failed: ${genRes.status}`)
+    }
+  }
+
   async run() {
     const results = {
       status: 'success' as string,
@@ -38,7 +56,7 @@ export class SEOAutopilot {
       )
       results.pagesFound = pages.length
 
-      // FILTER: junk/scraper GSC queries skip karo (e.g. "-site:reddit.com" wali)
+      // FILTER: junk/scraper GSC queries skip
       const cleanPages = pages.filter(
         (p: any) =>
           p.keyword &&
@@ -51,28 +69,21 @@ export class SEOAutopilot {
 
       for (const page of targets) {
         try {
-          const genRes = await fetch(this.generationEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            // Body exactly wo hai jo /api/generate-suite expect karta hai
-            body: JSON.stringify({
-              item: page.url,
-              contentType: 'Product/Category Page',
-              depth: '1000-1500 words (Standard)',
-              fieldNotes: `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
-              projectData: {
-                label: 'SMK Store',
-                domain: 'smkstore.com',
-                industry: 'Knives & Tactical Gear',
-                brands: [],
-                vertical: 'ecommerce',
-              },
-            }),
+          const body = JSON.stringify({
+            item: page.url,
+            contentType: 'Product/Category Page',
+            depth: '1000-1500 words (Standard)',
+            fieldNotes: `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
+            projectData: {
+              label: 'SMK Store',
+              domain: 'smkstore.com',
+              industry: 'Knives & Tactical Gear',
+              brands: [],
+              vertical: 'ecommerce',
+            },
           })
 
-          if (!genRes.ok) throw new Error(`Generation failed: ${genRes.status}`)
-          const genJson = await genRes.json()
-          // generate-suite { content: {...} } return karta hai — dono cases safe
+          const genJson = await this.generateWithRetry(body)
           const content = genJson?.content ?? genJson
           results.pagesGenerated++
 
@@ -88,7 +99,7 @@ export class SEOAutopilot {
             impressions: page.impressions,
             clicks: page.clicks,
             status: this.config.dryRun ? 'generated (dry-run)' : 'published',
-            content, // ← FIX: Gemini ka poora suite ab database mein store hoga (review ke liye)
+            content,
           })
         } catch (err) {
           results.errors.push(

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
+import { SMK_VERIFIED_LINKS } from '@/lib/verified-links'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -230,6 +231,15 @@ function buildPrompt(input: GenInput): string {
  
     ${brandsLine}
     Authority internal domain: ${projectData.domain}
+
+    VERIFIED INTERNAL LINKS (MANDATORY — use ONLY these URLs for internalLinks, 3-5 most relevant. NEVER invent or guess URLs):
+    ${SMK_VERIFIED_LINKS.join('\n    ')}
+
+    INTEGRITY RULES (MANDATORY):
+    - NEVER claim first-hand testing, lab measurements, or phrases like "our audit measured", "in our testing", "we observed". You have not tested anything.
+    - Attribute all specs and claims to manufacturers or known standards ("According to Zippo...", "Gerber rates this at...", "Industry standard is...").
+    - NEVER invent statistics, test results, or percentages.
+    - If the focus keyword has an obvious spelling error (e.g. "baterry"), correct it in your selected focusKeyword.
     RECOMMENDED SCHEMA: ${profile.schema}
  
     STRICT JSON RESPONSE FORMAT:
