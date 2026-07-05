@@ -45,10 +45,20 @@ export class SEOAutopilot {
           const genRes = await fetch(this.generationEndpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            // FIX: body ab exactly wo hai jo /api/generate-suite expect karta hai
+            // (item + projectData required; keyword/GSC data fieldNotes ke zariye prompt mein jata hai)
             body: JSON.stringify({
-              url: page.url,
-              keyword: page.keyword,
-              tier: this.config.contentTier,
+              item: page.url,
+              contentType: 'Product/Category Page',
+              depth: '1000-1500 words (Standard)',
+              fieldNotes: `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
+              projectData: {
+                label: 'SMK Store',
+                domain: 'smkstore.com',
+                industry: 'Knives & Tactical Gear',
+                brands: [],
+                vertical: 'ecommerce',
+              },
             }),
           })
 
