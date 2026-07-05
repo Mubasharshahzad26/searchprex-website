@@ -3,7 +3,7 @@ import { db } from '@/lib/db'
 import { SEOAutopilot } from '@/lib/seo-autopilot'
 
 export const dynamic = 'force-dynamic'
-export const maxDuration = 120
+export const maxDuration = 300
 
 export async function POST(req: Request) {
   try {
@@ -69,3 +69,4 @@ export async function POST(req: Request) {
     )
   }
 }
+
