@@ -1,5 +1,6 @@
 import { fetchUnderperformingPagesFromGSC } from './gsc-client'
 import { getCMSAdapter } from './cms-adapters'
+import { db } from './db'
 
 export interface AutopilotConfigInput {
   clientId: string
@@ -38,7 +39,43 @@ export class SEOAutopilot {
     }
   }
 
-  async run() {
+  // Approval workflow: har page AutopilotPage table mein save
+  private async savePage(
+    runId: string,
+    page: any,
+    status: string,
+    content: any = null,
+    errorMessage: string | null = null,
+  ) {
+    try {
+      await db.autopilotPage.upsert({
+        where: { runId_pageUrl: { runId, pageUrl: page.url } },
+        update: {
+          status,
+          generatedContent: content ?? undefined,
+          gscImpressions: page.impressions ?? 0,
+          gscClicks: page.clicks ?? 0,
+          gscPosition: page.position ?? null,
+          errorMessage,
+        },
+        create: {
+          runId,
+          pageUrl: page.url,
+          gscImpressions: page.impressions ?? 0,
+          gscClicks: page.clicks ?? 0,
+          gscPosition: page.position ?? null,
+          status,
+          generatedContent: content ?? undefined,
+          errorMessage,
+        },
+      })
+    } catch (dbErr) {
+      // DB save fail ho to run crash na ho — sirf log
+      console.error('AutopilotPage save failed:', page.url, dbErr)
+    }
+  }
+
+  async run(runId?: string) {
     const results = {
       status: 'success' as string,
       pagesFound: 0,
@@ -93,6 +130,16 @@ export class SEOAutopilot {
             results.pagesPublished++
           }
 
+          // ✅ Save for approval workflow (pending = review ka intezar)
+          if (runId) {
+            await this.savePage(
+              runId,
+              page,
+              this.config.dryRun ? 'pending' : 'published',
+              content,
+            )
+          }
+
           results.pages.push({
             url: page.url,
             keyword: page.keyword,
@@ -102,9 +149,13 @@ export class SEOAutopilot {
             content,
           })
         } catch (err) {
-          results.errors.push(
-            `${page.url}: ${err instanceof Error ? err.message : 'error'}`,
-          )
+          const msg = err instanceof Error ? err.message : 'error'
+          results.errors.push(`${page.url}: ${msg}`)
+
+          // ❌ Failed page bhi save — dashboard pe visible rahe
+          if (runId) {
+            await this.savePage(runId, page, 'failed', null, msg)
+          }
         }
       }
 

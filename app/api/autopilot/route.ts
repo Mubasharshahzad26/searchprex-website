@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       `${process.env.NEXT_PUBLIC_API_BASE || 'https://www.searchprex.com'}/api/generate-suite`,
     )
 
-    const result = await autopilot.run()
+    const result = await autopilot.run(run.id)
 
     await db.autopilotRun.update({
       where: { id: run.id },
