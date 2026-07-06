@@ -1,5 +1,6 @@
 import { db } from './db'
 import { getCMSAdapter } from './cms-adapters'
+import { submitUrl } from './indexing'
 
 export async function publishPage(pageId: string) {
   const page = await db.autopilotPage.findUnique({
@@ -27,7 +28,24 @@ export async function publishPage(pageId: string) {
       where: { id: pageId },
       data: { status: 'published', publishedAt: new Date(), errorMessage: null },
     })
-    return { pageUrl: page.pageUrl, status: 'published', postId: result.postId }
+
+    // 🚀 Auto-submit to Google Indexing API (fail ho to publish phir bhi success)
+    let indexing: any = { success: false, message: 'skipped' }
+    try {
+      indexing = await submitUrl(page.pageUrl, 'new')
+    } catch (idxErr) {
+      indexing = {
+        success: false,
+        message: idxErr instanceof Error ? idxErr.message : 'indexing error',
+      }
+    }
+
+    return {
+      pageUrl: page.pageUrl,
+      status: 'published',
+      postId: result.postId,
+      indexing,
+    }
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Publish failed'
     await db.autopilotPage.update({
