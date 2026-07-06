@@ -143,8 +143,15 @@ export class SEOAutopilot {
             },
           })
 
-          const genJson = await this.generateWithRetry(body)
+         const genJson = await this.generateWithRetry(body)
           const content = genJson?.content ?? genJson
+          // Keyword pack ko content ke saath store karo (dashboard display ke liye)
+          if (content && keywordPack?.primary) {
+            content._keywordPack = {
+              primary: keywordPack.primary,
+              secondary: keywordPack.secondary,
+            }
+          }
           results.pagesGenerated++
 
           if (!this.config.dryRun) {
