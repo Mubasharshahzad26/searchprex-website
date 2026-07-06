@@ -19,6 +19,7 @@ model Client {
   autopilotConfig AutopilotConfig?
   autopilotRuns   AutopilotRun[]
   costLogs        CostLog[]
+  reportConfig    ReportConfig?
 }
 
 model GSCConnection {
@@ -98,12 +99,14 @@ model AutopilotPage {
   gscPosition      Float?
   status           String
   generatedContent Json?
+  publishAt        DateTime?
   publishedAt      DateTime?
   errorMessage     String?
   createdAt        DateTime     @default(now())
 
   @@unique([runId, pageUrl])
   @@index([runId])
+  @@index([status, publishAt])
 }
 
 model CostLog {
@@ -119,4 +122,19 @@ model CostLog {
   createdAt      DateTime      @default(now())
 
   @@index([clientId])
+}
+
+model ReportConfig {
+  id             String    @id @default(cuid())
+  clientId       String    @unique
+  client         Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  recipientEmail String
+  ccEmails       String?
+  frequency      String    @default("weekly")
+  sendDay        Int       @default(1)
+  sendHourUTC    Int       @default(9)
+  enabled        Boolean   @default(true)
+  lastSentAt     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }

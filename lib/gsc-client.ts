@@ -75,3 +75,94 @@ export async function testGSCConnection(siteUrl: string, serviceAccountJson: str
     }
   }
 }
+
+// ─── SITE-WIDE KPIs FOR CLIENT REPORTS ───────────────────────────
+// Current period vs previous period comparison (clicks, impressions, CTR, position)
+
+export interface PeriodKPIs {
+  clicks: number
+  impressions: number
+  ctr: number
+  position: number
+  topPages: { url: string; clicks: number; impressions: number }[]
+  topQueries: { query: string; clicks: number; impressions: number }[]
+}
+
+async function queryPeriod(
+  siteUrl: string,
+  serviceAccountJson: string,
+  startDate: string,
+  endDate: string,
+): Promise<PeriodKPIs> {
+  const auth = new GoogleAuth({
+    credentials: JSON.parse(serviceAccountJson),
+    scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
+  })
+  const searchconsole = google.searchconsole('v1')
+  const client = await auth.getClient()
+
+  const totals = await searchconsole.searchanalytics.query({
+    auth: client as any,
+    siteUrl,
+    requestBody: { startDate, endDate, searchType: 'web' },
+  })
+  const t: any = totals.data.rows?.[0] || {}
+
+  const pagesRes = await searchconsole.searchanalytics.query({
+    auth: client as any,
+    siteUrl,
+    requestBody: {
+      startDate, endDate, dimensions: ['page'], rowLimit: 5, searchType: 'web',
+    },
+  })
+
+  const queriesRes = await searchconsole.searchanalytics.query({
+    auth: client as any,
+    siteUrl,
+    requestBody: {
+      startDate, endDate, dimensions: ['query'], rowLimit: 10, searchType: 'web',
+    },
+  })
+
+  return {
+    clicks: t.clicks || 0,
+    impressions: t.impressions || 0,
+    ctr: t.ctr || 0,
+    position: t.position || 0,
+    topPages: (pagesRes.data.rows || []).map((r: any) => ({
+      url: r.keys[0], clicks: r.clicks || 0, impressions: r.impressions || 0,
+    })),
+    topQueries: (queriesRes.data.rows || [])
+      .filter((r: any) => r.keys[0] && !r.keys[0].includes('site:') && r.keys[0].length < 80)
+      .slice(0, 5)
+      .map((r: any) => ({
+        query: r.keys[0], clicks: r.clicks || 0, impressions: r.impressions || 0,
+      })),
+  }
+}
+
+export async function fetchSiteKPIs(
+  siteUrl: string,
+  serviceAccountJson: string,
+  periodDays: number, // 7 for weekly, 30 for monthly
+) {
+  // GSC data lags ~3 days — end the window 3 days ago
+  const day = 24 * 60 * 60 * 1000
+  const fmt = (d: Date) => d.toISOString().split('T')[0]
+  const end = new Date(Date.now() - 3 * day)
+  const start = new Date(end.getTime() - (periodDays - 1) * day)
+  const prevEnd = new Date(start.getTime() - day)
+  const prevStart = new Date(prevEnd.getTime() - (periodDays - 1) * day)
+
+  const [current, previous] = await Promise.all([
+    queryPeriod(siteUrl, serviceAccountJson, fmt(start), fmt(end)),
+    queryPeriod(siteUrl, serviceAccountJson, fmt(prevStart), fmt(prevEnd)),
+  ])
+
+  return {
+    current,
+    previous,
+    dateRange: { start: fmt(start), end: fmt(end) },
+    prevDateRange: { start: fmt(prevStart), end: fmt(prevEnd) },
+  }
+}
