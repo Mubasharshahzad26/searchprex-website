@@ -1,6 +1,7 @@
 import { fetchUnderperformingPagesFromGSC } from './gsc-client'
 import { getCMSAdapter } from './cms-adapters'
 import { db } from './db'
+import { getKeywordPackForPage } from './keyword-intelligence'
 
 export interface AutopilotConfigInput {
   clientId: string
@@ -102,15 +103,37 @@ export class SEOAutopilot {
           p.keyword.length < 80,
       )
 
-      const targets = cleanPages.slice(0, this.config.maxPagesPerRun)
+      // Duplicate guard: jo pages pehle se pending/approved hain unhe dubara na uthao
+      const existingPages = await db.autopilotPage.findMany({
+        where: { status: { in: ['pending', 'approved'] } },
+        select: { pageUrl: true },
+      })
+      const existingUrls = new Set(existingPages.map((p) => p.pageUrl))
+      const freshPages = cleanPages.filter((p: any) => !existingUrls.has(p.url))
+
+      const targets = freshPages.slice(0, this.config.maxPagesPerRun)
 
       for (const page of targets) {
         try {
+          // Keyword Intelligence: is page ki saari GSC queries + categorization
+          let keywordPack = null
+          try {
+            keywordPack = await getKeywordPackForPage(
+              this.config.siteUrl,
+              this.config.serviceAccountJson,
+              page.url,
+            )
+          } catch (kwErr) {
+            console.error('Keyword pack failed for', page.url, kwErr)
+          }
+
           const body = JSON.stringify({
             item: page.url,
             contentType: 'Product/Category Page',
             depth: '1000-1500 words (Standard)',
-            fieldNotes: `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
+            fieldNotes: keywordPack?.primary
+              ? `KEYWORD INTELLIGENCE (GSC 90-day real data): ${keywordPack.summary} Use the PRIMARY keyword as your focusKeyword (fix typos only). Weave SECONDARY keywords naturally into H2/H3 headings and body. Match content angle to the PRIMARY keyword's intent type. GSC page stats: ${page.impressions} impressions, ${page.clicks} clicks — underperforming; optimize for CTR and rankings.`
+              : `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
             projectData: {
               label: 'SMK Store',
               domain: 'smkstore.com',
@@ -142,7 +165,7 @@ export class SEOAutopilot {
 
           results.pages.push({
             url: page.url,
-            keyword: page.keyword,
+            keyword: keywordPack?.primary?.query ?? page.keyword,
             impressions: page.impressions,
             clicks: page.clicks,
             status: this.config.dryRun ? 'generated (dry-run)' : 'published',
