@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import PendingReview from '@/components/autopilot/PendingReview'
+import IndexingStats from '@/components/autopilot/IndexingStats'
 
 export default function AutopilotDashboard() {
   const [runs, setRuns] = useState<any[]>([])
@@ -105,6 +106,7 @@ export default function AutopilotDashboard() {
         </div>
 
         <PendingReview />
+        <IndexingStats />
       </div>
     </div>
   )
