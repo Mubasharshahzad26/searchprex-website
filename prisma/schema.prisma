@@ -177,3 +177,61 @@ model IndexingQueue {
   @@index([status, priority])
   @@index([clientId])
 }
+model AuditRun {
+  id           String    @id @default(cuid())
+  clientId     String?
+  siteUrl      String
+  sitemapUrl   String
+  status       String    @default("running")
+  totalPages   Int       @default(0)
+  sampledPages Int       @default(0)
+  startedAt    DateTime  @default(now())
+  completedAt  DateTime?
+  errorMessage String?
+
+  pages    AuditPage[]
+  insights AuditInsight[]
+
+  @@index([clientId])
+  @@index([startedAt])
+}
+
+model AuditPage {
+  id                  String   @id @default(cuid())
+  runId               String
+  run                 AuditRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  url                 String
+  statusCode          Int?
+  title               String?
+  titleLength         Int?
+  metaDescription     String?
+  metaLength          Int?
+  h1Count             Int?
+  h1Text              String?
+  wordCount           Int?
+  internalLinksCount  Int?
+  externalLinksCount  Int?
+  imageCount          Int?
+  imagesMissingAlt    Int?
+  canonical           String?
+  hasSchema           Boolean  @default(false)
+  issues              Json?
+  crawledAt           DateTime @default(now())
+
+  @@unique([runId, url])
+  @@index([runId])
+}
+
+model AuditInsight {
+  id          String    @id @default(cuid())
+  runId       String
+  run         AuditRun  @relation(fields: [runId], references: [id], onDelete: Cascade)
+  pageUrl     String
+  category    String
+  priority    Int       @default(2)
+  reason      String
+  actionTaken String?
+  createdAt   DateTime  @default(now())
+
+  @@index([runId, category])
+}
