@@ -235,3 +235,21 @@ model AuditInsight {
 
   @@index([runId, category])
 }
+model RoadmapPlan {
+  id                String   @id @default(cuid())
+  clientId          String?
+  siteUrl           String
+  auditRunId        String?
+  industry          String   @default("general")
+  healthScore       Int?
+  executiveSummary  String?  @db.Text
+  plan              Json
+  expectedMetrics   Json?
+  status            String   @default("generated")
+  generatedAt       DateTime @default(now())
+  errorMessage      String?
+
+  @@index([clientId])
+  @@index([auditRunId])
+  @@index([generatedAt])
+}
