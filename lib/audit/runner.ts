@@ -1,5 +1,6 @@
 import { db } from '../db'
 import { fetchSitemapUrls, crawlBatch, CrawlResult } from './crawler'
+import { categorizeAuditRun } from './categorize'
 
 const SAMPLE_SIZE = 500
 
@@ -19,7 +20,6 @@ function pickSample(urls: string[], size: number): string[] {
       rest.push(u)
     }
   }
-  // Priority pehle, phir products se random sample
   const shuffledRest = rest.sort(() => Math.random() - 0.5)
   return [...priority, ...shuffledRest].slice(0, size)
 }
@@ -32,28 +32,27 @@ export async function runAudit(params: {
 }) {
   const { siteUrl, sitemapUrl, clientId, sampleSize = SAMPLE_SIZE } = params
 
-  // 1. Run record banao
   const run = await db.auditRun.create({
     data: { siteUrl, sitemapUrl, clientId, status: 'running' },
   })
 
   try {
-    // 2. Sitemap fetch
+    // 1. Sitemap fetch
     const allUrls = await fetchSitemapUrls(sitemapUrl)
     if (allUrls.length === 0) throw new Error('No URLs in sitemap')
 
-    // 3. Sample select (priority + random)
+    // 2. Sample select
     const sample = pickSample(allUrls, sampleSize)
     await db.auditRun.update({
       where: { id: run.id },
       data: { totalPages: allUrls.length, sampledPages: sample.length },
     })
 
-    // 4. Crawl
+    // 3. Crawl
     const siteHost = new URL(siteUrl).host
     const results = await crawlBatch(sample, siteHost, 5, 500)
 
-    // 5. DB mein save (bulk)
+    // 4. DB mein save (bulk chunks)
     const pagesData = results.map((r: CrawlResult) => ({
       runId: run.id,
       url: r.url,
@@ -73,13 +72,33 @@ export async function runAudit(params: {
       hasSchema: r.hasSchema,
       issues: r.issues,
     }))
-    // createMany chunks (Neon connection limit ke liye safe)
     const chunkSize = 100
     for (let i = 0; i < pagesData.length; i += chunkSize) {
       await db.auditPage.createMany({
         data: pagesData.slice(i, i + chunkSize),
         skipDuplicates: true,
       })
+    }
+
+    // 5. GSC cross-reference + 3 lists categorization (crawl + save ke BAAD)
+    let insightCounts = {
+      content_needs_improvement: 0,
+      indexed_underperformer: 0,
+      not_indexed: 0,
+      total: 0,
+    }
+    if (clientId) {
+      try {
+        const gsc = await db.gSCConnection.findFirst({ where: { clientId } })
+        if (gsc) {
+          insightCounts = await categorizeAuditRun(run.id, {
+            siteUrl: gsc.siteUrl,
+            serviceAccountJson: gsc.serviceAccountJson,
+          })
+        }
+      } catch (err) {
+        console.error('Categorization failed:', err)
+      }
     }
 
     // 6. Complete
@@ -95,15 +114,14 @@ export async function runAudit(params: {
       crawled: results.length,
       issues: {
         thin_content: results.filter((r) => r.issues.includes('thin_content')).length,
-        title_issues: results.filter((r) =>
-          r.issues.some((i) => i.startsWith('title_')),
-        ).length,
+        title_issues: results.filter((r) => r.issues.some((i) => i.startsWith('title_'))).length,
         meta_issues: results.filter((r) => r.issues.some((i) => i.startsWith('meta_'))).length,
         h1_issues: results.filter((r) => r.issues.some((i) => i.startsWith('h1_'))).length,
         no_schema: results.filter((r) => r.issues.includes('schema_missing')).length,
         no_canonical: results.filter((r) => r.issues.includes('canonical_missing')).length,
         fetch_errors: results.filter((r) => r.issues.includes('fetch_error')).length,
       },
+      insights: insightCounts,
     }
   } catch (err) {
     await db.auditRun.update({
