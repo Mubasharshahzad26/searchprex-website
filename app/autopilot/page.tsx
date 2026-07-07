@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import PendingReview from '@/components/autopilot/PendingReview'
 import IndexingStats from '@/components/autopilot/IndexingStats'
 import AuditStats from '@/components/autopilot/AuditStats'
+import RoadmapWidget from '@/components/autopilot/RoadmapWidget'
 
 export default function AutopilotDashboard() {
   const [runs, setRuns] = useState<any[]>([])
@@ -109,6 +110,7 @@ export default function AutopilotDashboard() {
         <PendingReview />
         <IndexingStats />
         <AuditStats />
+        <RoadmapWidget />
       </div>
     </div>
   )
