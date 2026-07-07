@@ -37,6 +37,7 @@ async function testRun() {
       maxPagesPerRun: 2, // test: sirf 2 pages
       contentTier: cfg.contentTier,
       dryRun: true,
+      backlogPagesPerRun: 3,
     },
     'https://www.searchprex.com/api/generate-suite',
   )

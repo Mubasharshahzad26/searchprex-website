@@ -44,6 +44,7 @@ export async function POST(req: Request) {
         maxPagesPerRun: config.maxPagesPerRun,
         contentTier: config.contentTier,
         dryRun: dryRun ?? config.dryRunMode,
+        backlogPagesPerRun: 3,
       },
       `${process.env.NEXT_PUBLIC_API_BASE || 'https://www.searchprex.com'}/api/generate-suite`,
     )
@@ -69,4 +70,3 @@ export async function POST(req: Request) {
     )
   }
 }
-

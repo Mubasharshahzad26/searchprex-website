@@ -11,6 +11,7 @@ export interface AutopilotConfigInput {
   maxPagesPerRun: number
   contentTier: string
   dryRun: boolean
+  backlogPagesPerRun?: number
 }
 
 export class SEOAutopilot {
@@ -111,7 +112,31 @@ export class SEOAutopilot {
       const existingUrls = new Set(existingPages.map((p) => p.pageUrl))
       const freshPages = cleanPages.filter((p: any) => !existingUrls.has(p.url))
 
-      const targets = freshPages.slice(0, this.config.maxPagesPerRun)
+      const targets: any[] = freshPages.slice(0, this.config.maxPagesPerRun)
+
+      // ── PIPELINE 2: Backlog content (crawled-not-indexed) ──
+      const backlogBudget = this.config.backlogPagesPerRun ?? 0
+      if (backlogBudget > 0) {
+        const backlogItems = await db.indexingQueue.findMany({
+          where: {
+            status: { in: ['queued', 'submitted'] },
+            url: { notIn: [...existingUrls] },
+          },
+          orderBy: [{ priority: 'asc' }, { createdAt: 'asc' }],
+          take: backlogBudget,
+        })
+        for (const b of backlogItems) {
+          targets.push({
+            url: b.url,
+            keyword: '',
+            impressions: 0,
+            clicks: 0,
+            position: 0,
+            _source: 'backlog',
+            _queueId: b.id,
+          } as any)
+        }
+      }
 
       for (const page of targets) {
         try {
@@ -133,7 +158,9 @@ export class SEOAutopilot {
             depth: '1000-1500 words (Standard)',
             fieldNotes: keywordPack?.primary
               ? `KEYWORD INTELLIGENCE (GSC 90-day real data): ${keywordPack.summary} Use the PRIMARY keyword as your focusKeyword (fix typos only). Weave SECONDARY keywords naturally into H2/H3 headings and body. Match content angle to the PRIMARY keyword's intent type. GSC page stats: ${page.impressions} impressions, ${page.clicks} clicks — underperforming; optimize for CTR and rankings.`
-              : `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
+              : page._source === 'backlog'
+                ? `INDEXING RECOVERY PAGE: This page is stuck in Google's "Crawled - currently not indexed" due to thin/boilerplate content. Your mission: create genuinely unique, substantive content that gives Google a clear reason to index it. Focus on unique product/category value, specific technical details, and real user questions. Avoid any generic filler.`
+                : `Target focus keyword: ${page.keyword}. GSC data: ${page.impressions} impressions, ${page.clicks} clicks — page is underperforming; optimize for CTR and rankings.`,
             projectData: {
               label: 'SMK Store',
               domain: 'smkstore.com',
@@ -143,7 +170,7 @@ export class SEOAutopilot {
             },
           })
 
-         const genJson = await this.generateWithRetry(body)
+          const genJson = await this.generateWithRetry(body)
           const content = genJson?.content ?? genJson
           // Keyword pack ko content ke saath store karo (dashboard display ke liye)
           if (content && keywordPack?.primary) {
@@ -170,12 +197,21 @@ export class SEOAutopilot {
             )
           }
 
+          // Backlog page tha to queue mein mark karo (double resubmission na ho)
+          if (page._source === 'backlog' && page._queueId) {
+            await db.indexingQueue.update({
+              where: { id: page._queueId },
+              data: { status: 'content_generated' },
+            }).catch(() => {})
+          }
+
           results.pages.push({
             url: page.url,
             keyword: keywordPack?.primary?.query ?? page.keyword,
             impressions: page.impressions,
             clicks: page.clicks,
             status: this.config.dryRun ? 'generated (dry-run)' : 'published',
+            source: page._source ?? 'underperformer',
             content,
           })
         } catch (err) {
