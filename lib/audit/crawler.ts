@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio'
-
+ 
 export interface CrawlResult {
   url: string
   statusCode: number | null
@@ -19,15 +19,21 @@ export interface CrawlResult {
   issues: string[]
   error?: string
 }
-
+ 
+// Common headers — Ngrok tunnel warning bypass ke liye + user-agent
+const COMMON_HEADERS = {
+  'User-Agent': 'SearchPrex Audit Bot/1.0',
+  'ngrok-skip-browser-warning': 'true',
+}
+ 
 // Sitemap XML se URLs nikaalo (nested sitemap_index bhi handle karta hai)
 export async function fetchSitemapUrls(sitemapUrl: string): Promise<string[]> {
   const res = await fetch(sitemapUrl, {
-    headers: { 'User-Agent': 'SearchPrex Audit Bot/1.0' },
+    headers: COMMON_HEADERS,
   })
   if (!res.ok) throw new Error(`Sitemap fetch failed: ${res.status}`)
   const xml = await res.text()
-
+ 
   // Sub-sitemaps? (index file)
   const subSitemapMatches = [...xml.matchAll(/<sitemap>\s*<loc>(.*?)<\/loc>/g)]
   if (subSitemapMatches.length > 0) {
@@ -44,12 +50,12 @@ export async function fetchSitemapUrls(sitemapUrl: string): Promise<string[]> {
     }
     return all
   }
-
+ 
   // Regular sitemap — URLs nikaalo
   const urlMatches = [...xml.matchAll(/<url>\s*<loc>(.*?)<\/loc>/g)]
   return urlMatches.map((m) => m[1])
 }
-
+ 
 // Ek page fetch + parse
 export async function crawlPage(url: string, siteHost: string): Promise<CrawlResult> {
   const result: CrawlResult = {
@@ -70,10 +76,10 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
     hasSchema: false,
     issues: [],
   }
-
+ 
   try {
     const res = await fetch(url, {
-      headers: { 'User-Agent': 'SearchPrex Audit Bot/1.0' },
+      headers: COMMON_HEADERS,
       redirect: 'follow',
     })
     result.statusCode = res.status
@@ -83,7 +89,7 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
     }
     const html = await res.text()
     const $ = cheerio.load(html)
-
+ 
     // Title
     const title = $('head title').first().text().trim()
     result.title = title || null
@@ -91,7 +97,7 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
     if (!title) result.issues.push('title_missing')
     else if (title.length < 30) result.issues.push('title_too_short')
     else if (title.length > 60) result.issues.push('title_too_long')
-
+ 
     // Meta description
     const meta = $('meta[name="description"]').attr('content')?.trim() || ''
     result.metaDescription = meta || null
@@ -99,20 +105,20 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
     if (!meta) result.issues.push('meta_missing')
     else if (meta.length < 120) result.issues.push('meta_too_short')
     else if (meta.length > 160) result.issues.push('meta_too_long')
-
+ 
     // H1
     const h1s = $('h1')
     result.h1Count = h1s.length
     result.h1Text = h1s.first().text().trim() || null
     if (result.h1Count === 0) result.issues.push('h1_missing')
     else if (result.h1Count > 1) result.issues.push('h1_multiple')
-
+ 
     // Word count (main content — remove nav/footer/script)
     $('script, style, nav, footer, header').remove()
     const bodyText = $('body').text().replace(/\s+/g, ' ').trim()
     result.wordCount = bodyText.split(' ').filter(Boolean).length
     if (result.wordCount < 300) result.issues.push('thin_content')
-
+ 
     // Links
     const links = $('a[href]')
     links.each((_, el) => {
@@ -128,7 +134,7 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
       }
     })
     if (result.internalLinksCount < 3) result.issues.push('low_internal_links')
-
+ 
     // Images
     const imgs = $('img')
     result.imageCount = imgs.length
@@ -137,11 +143,11 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
       if (!alt || !alt.trim()) result.imagesMissingAlt++
     })
     if (result.imagesMissingAlt > 0) result.issues.push('images_missing_alt')
-
+ 
     // Canonical
     result.canonical = $('link[rel="canonical"]').attr('href') || null
     if (!result.canonical) result.issues.push('canonical_missing')
-
+ 
     // Schema
     result.hasSchema = $('script[type="application/ld+json"]').length > 0
     if (!result.hasSchema) result.issues.push('schema_missing')
@@ -149,10 +155,10 @@ export async function crawlPage(url: string, siteHost: string): Promise<CrawlRes
     result.error = err instanceof Error ? err.message : 'crawl error'
     result.issues.push('fetch_error')
   }
-
+ 
   return result
 }
-
+ 
 // Concurrent crawler with rate limit (respectful — server ki jaan bachao)
 export async function crawlBatch(
   urls: string[],
@@ -175,3 +181,4 @@ export async function crawlBatch(
   }
   return results
 }
+ 
