@@ -1,4 +1,5 @@
 import { db } from '../db'
+import { withRetry } from '../db-retry'
 import { fetchSitemapUrls, crawlBatch, CrawlResult } from './crawler'
 import { categorizeAuditRun } from './categorize'
 
@@ -32,9 +33,11 @@ export async function runAudit(params: {
 }) {
   const { siteUrl, sitemapUrl, clientId, sampleSize = SAMPLE_SIZE } = params
 
-  const run = await db.auditRun.create({
-    data: { siteUrl, sitemapUrl, clientId, status: 'running' },
-  })
+  const run = await withRetry(() =>
+    db.auditRun.create({
+      data: { siteUrl, sitemapUrl, clientId, status: 'running' },
+    })
+  )
 
   try {
     // 1. Sitemap fetch
@@ -43,10 +46,12 @@ export async function runAudit(params: {
 
     // 2. Sample select
     const sample = pickSample(allUrls, sampleSize)
-    await db.auditRun.update({
-      where: { id: run.id },
-      data: { totalPages: allUrls.length, sampledPages: sample.length },
-    })
+    await withRetry(() =>
+      db.auditRun.update({
+        where: { id: run.id },
+        data: { totalPages: allUrls.length, sampledPages: sample.length },
+      })
+    )
 
     // 3. Crawl
     const siteHost = new URL(siteUrl).host
@@ -74,10 +79,12 @@ export async function runAudit(params: {
     }))
     const chunkSize = 100
     for (let i = 0; i < pagesData.length; i += chunkSize) {
-      await db.auditPage.createMany({
-        data: pagesData.slice(i, i + chunkSize),
-        skipDuplicates: true,
-      })
+      await withRetry(() =>
+        db.auditPage.createMany({
+          data: pagesData.slice(i, i + chunkSize),
+          skipDuplicates: true,
+        })
+      )
     }
 
     // 5. GSC cross-reference + 3 lists categorization (crawl + save ke BAAD)
@@ -89,7 +96,9 @@ export async function runAudit(params: {
     }
     if (clientId) {
       try {
-        const gsc = await db.gSCConnection.findFirst({ where: { clientId } })
+        const gsc = await withRetry(() =>
+          db.gSCConnection.findFirst({ where: { clientId } })
+        )
         if (gsc) {
           insightCounts = await categorizeAuditRun(run.id, {
             siteUrl: gsc.siteUrl,
@@ -102,10 +111,12 @@ export async function runAudit(params: {
     }
 
     // 6. Complete
-    await db.auditRun.update({
-      where: { id: run.id },
-      data: { status: 'success', completedAt: new Date() },
-    })
+    await withRetry(() =>
+      db.auditRun.update({
+        where: { id: run.id },
+        data: { status: 'success', completedAt: new Date() },
+      })
+    )
 
     return {
       runId: run.id,
@@ -124,14 +135,16 @@ export async function runAudit(params: {
       insights: insightCounts,
     }
   } catch (err) {
-    await db.auditRun.update({
-      where: { id: run.id },
-      data: {
-        status: 'error',
-        errorMessage: err instanceof Error ? err.message : 'Unknown',
-        completedAt: new Date(),
-      },
-    })
+    await withRetry(() =>
+      db.auditRun.update({
+        where: { id: run.id },
+        data: {
+          status: 'error',
+          errorMessage: err instanceof Error ? err.message : 'Unknown',
+          completedAt: new Date(),
+        },
+      })
+    )
     throw err
   }
 }

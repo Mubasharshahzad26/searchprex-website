@@ -1,4 +1,5 @@
 import { db } from '../db'
+import { withRetry } from '../db-retry'
 import { fetchGSCDataForUrls, fetchQueueStatusForUrls } from './gsc-cross-reference'
 
 export async function categorizeAuditRun(runId: string, opts: {
@@ -6,10 +7,12 @@ export async function categorizeAuditRun(runId: string, opts: {
   serviceAccountJson: string
 }) {
   // 1. Sab audit pages nikaalo
-  const pages = await db.auditPage.findMany({
-    where: { runId },
-    select: { url: true, issues: true, wordCount: true, hasSchema: true, titleLength: true, metaLength: true, h1Count: true },
-  })
+  const pages = await withRetry(() =>
+    db.auditPage.findMany({
+      where: { runId },
+      select: { url: true, issues: true, wordCount: true, hasSchema: true, titleLength: true, metaLength: true, h1Count: true },
+    })
+  )
   const urls = pages.map((p) => p.url)
 
   // 2. GSC + Backlog queue enrichment
@@ -19,7 +22,9 @@ export async function categorizeAuditRun(runId: string, opts: {
   ])
 
   // 3. Purane insights delete karo (idempotent)
-  await db.auditInsight.deleteMany({ where: { runId } })
+  await withRetry(() =>
+    db.auditInsight.deleteMany({ where: { runId } })
+  )
 
   const insights: any[] = []
 
@@ -74,7 +79,9 @@ export async function categorizeAuditRun(runId: string, opts: {
 
   // Bulk insert
   if (insights.length > 0) {
-    await db.auditInsight.createMany({ data: insights })
+    await withRetry(() =>
+      db.auditInsight.createMany({ data: insights })
+    )
   }
 
   // Counts return

@@ -1,13 +1,18 @@
 import { db } from '../db'
+import { withRetry } from '../db-retry'
 
 export async function collectRoadmapData(auditRunId: string, clientId?: string) {
-  const auditRun = await db.auditRun.findUnique({ where: { id: auditRunId } })
+  const auditRun = await withRetry(() =>
+    db.auditRun.findUnique({ where: { id: auditRunId } })
+  )
   if (!auditRun) throw new Error('Audit run not found')
 
-  const pages = await db.auditPage.findMany({
-    where: { runId: auditRunId },
-    select: { url: true, issues: true, wordCount: true, hasSchema: true, statusCode: true },
-  })
+  const pages = await withRetry(() =>
+    db.auditPage.findMany({
+      where: { runId: auditRunId },
+      select: { url: true, issues: true, wordCount: true, hasSchema: true, statusCode: true },
+    })
+  )
 
   const issueCounts: Record<string, number> = {}
   for (const p of pages) {
@@ -18,7 +23,9 @@ export async function collectRoadmapData(auditRunId: string, clientId?: string) 
   const sampledPages = pages.length || 1
   const pct = (n: number) => Math.round((n / sampledPages) * 100)
 
-  const insights = await db.auditInsight.findMany({ where: { runId: auditRunId } })
+  const insights = await withRetry(() =>
+    db.auditInsight.findMany({ where: { runId: auditRunId } })
+  )
   const insightCounts = {
     content_needs_improvement: insights.filter((i) => i.category === 'content_needs_improvement').length,
     indexed_underperformer: insights.filter((i) => i.category === 'indexed_underperformer').length,
@@ -29,11 +36,13 @@ export async function collectRoadmapData(auditRunId: string, clientId?: string) 
   let backlogCounts = { queued: 0, submitted: 0, total: 0 }
   let indexingAccounts = 0
   if (clientId) {
-    const [queued, submitted, accounts] = await Promise.all([
-      db.indexingQueue.count({ where: { clientId, status: 'queued' } }),
-      db.indexingQueue.count({ where: { clientId, status: 'submitted' } }),
-      db.indexingAccount.count({ where: { active: true } }),
-    ])
+    const [queued, submitted, accounts] = await withRetry(() =>
+      Promise.all([
+        db.indexingQueue.count({ where: { clientId, status: 'queued' } }),
+        db.indexingQueue.count({ where: { clientId, status: 'submitted' } }),
+        db.indexingAccount.count({ where: { active: true } }),
+      ])
+    )
     backlogCounts = { queued, submitted, total: queued + submitted }
     indexingAccounts = accounts
   }

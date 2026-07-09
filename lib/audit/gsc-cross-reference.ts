@@ -1,6 +1,7 @@
 import { google } from 'googleapis'
 import { GoogleAuth } from 'google-auth-library'
 import { db } from '../db'
+import { withRetry } from '../db-retry'
 
 interface GSCPageData {
   clicks: number
@@ -55,9 +56,11 @@ export async function fetchGSCDataForUrls(
 
 // Ek run ke pages ke liye "in-backlog-queue" status batao
 export async function fetchQueueStatusForUrls(urls: string[]): Promise<Set<string>> {
-  const items = await db.indexingQueue.findMany({
-    where: { url: { in: urls } },
-    select: { url: true },
-  })
+  const items = await withRetry(() =>
+    db.indexingQueue.findMany({
+      where: { url: { in: urls } },
+      select: { url: true },
+    })
+  )
   return new Set(items.map((i) => i.url))
 }

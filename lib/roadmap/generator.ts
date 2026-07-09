@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { collectRoadmapData } from './data-collector'
 import { db } from '../db'
+import { withRetry } from '../db-retry'
 
 const AUTOPILOT_CAPABILITIES = `
 AUTOPILOT HANDLES (automated via SearchPrex platform):
@@ -179,16 +180,18 @@ export async function generateRoadmap(params: {
 }) {
   const { auditRunId, clientId, industry = 'general' } = params
 
-  const record = await db.roadmapPlan.create({
-    data: {
-      clientId,
-      siteUrl: 'pending',
-      auditRunId,
-      industry,
-      plan: {},
-      status: 'generating',
-    },
-  })
+  const record = await withRetry(() =>
+    db.roadmapPlan.create({
+      data: {
+        clientId,
+        siteUrl: 'pending',
+        auditRunId,
+        industry,
+        plan: {},
+        status: 'generating',
+      },
+    })
+  )
 
   try {
     const data = await collectRoadmapData(auditRunId, clientId)
@@ -212,25 +215,29 @@ export async function generateRoadmap(params: {
       throw new Error('Roadmap missing required 3-month structure')
     }
 
-    await db.roadmapPlan.update({
-      where: { id: record.id },
-      data: {
-        siteUrl: data.siteUrl,
-        healthScore: plan.healthScore ?? null,
-        executiveSummary: plan.executiveSummary ?? null,
-        plan,
-        expectedMetrics: plan.expectedMetrics ?? undefined,
-        status: 'success',
-      },
-    })
+    await withRetry(() =>
+      db.roadmapPlan.update({
+        where: { id: record.id },
+        data: {
+          siteUrl: data.siteUrl,
+          healthScore: plan.healthScore ?? null,
+          executiveSummary: plan.executiveSummary ?? null,
+          plan,
+          expectedMetrics: plan.expectedMetrics ?? undefined,
+          status: 'success',
+        },
+      })
+    )
 
     return { id: record.id, plan, auditData: data }
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Roadmap generation failed'
-    await db.roadmapPlan.update({
-      where: { id: record.id },
-      data: { status: 'error', errorMessage: msg },
-    })
+    await withRetry(() =>
+      db.roadmapPlan.update({
+        where: { id: record.id },
+        data: { status: 'error', errorMessage: msg },
+      })
+    )
     throw err
   }
 }

@@ -14,7 +14,7 @@ model Client {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  gscConnections  GSCConnection[]
+  gscConnections    GSCConnection[]
   cmsConnections  CMSConnection[]
   autopilotConfig AutopilotConfig?
   autopilotRuns   AutopilotRun[]
