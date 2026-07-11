@@ -50,7 +50,7 @@ const navLinks: NavLink[] = [
       { href: "/resources/news", label: "News" },
     ],
   },
-    {
+  {
     href: "/tools",
     label: "Solutions",
     hasDropdown: true,
@@ -59,9 +59,12 @@ const navLinks: NavLink[] = [
       { href: "/case-calculator",       label: "Lost Case Calculator" },
       { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
       { href: "/ai-search",             label: "AI Search" },
-      { href: "/nicheseopro",           label: "Keyword Magic Tool" },
       { href: "/tools",                 label: "All Tools" },
     ],
+  },
+  {
+    href: "/locations",
+    label: "Locations",
   },
 ];
  
@@ -141,19 +144,6 @@ export default function Nav() {
             {/* Desktop right */}
             <div className="hidden items-center gap-2 lg:flex">
  
-              {/* Try NicheSEO Pro — external app */}
-              <a
-                href="https://nicheseopro.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-lg border border-[#534AB7]/40 px-4 py-2 text-sm font-semibold text-[#534AB7] transition-all hover:border-[#534AB7] hover:bg-[#EEEDFE]"
-              >
-                Try NicheSEO Pro
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-                  <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
- 
               {/* Get My Growth Plan — primary CTA (CRO-optimized) */}
               <Link
                 href="/free-audit"
@@ -232,21 +222,6 @@ export default function Nav() {
  
                 {/* Mobile: CTAs */}
                 <div className="mt-4 flex flex-col gap-3 border-t border-[#e5e7eb] pt-4">
- 
-                  {/* Try NicheSEO Pro — external app */}
-                  <a
-                    href="https://nicheseopro.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg border border-[#534AB7] py-2.5 text-center text-sm font-semibold text-[#534AB7] transition-colors hover:bg-[#EEEDFE]"
-                  >
-                    Try NicheSEO Pro
-                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-                      <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
- 
                   <Link
                     href="/free-audit"
                     onClick={() => setIsMobileMenuOpen(false)}
