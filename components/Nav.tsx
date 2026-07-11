@@ -1,13 +1,20 @@
 "use client";
  
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
  
 type DropItem = { href: string; label: string; badge?: string };
-type NavLink = { href: string; label: string; hasDropdown?: boolean; dropdownItems?: DropItem[] };
+type NavLink = {
+  href: string;
+  label: string;
+  hasDropdown?: boolean;
+  dropdownItems?: DropItem[];
+  /** false = label is a dropdown trigger only, doesn't navigate anywhere on its own */
+  linkable?: boolean;
+};
  
 const navLinks: NavLink[] = [
   {
@@ -32,12 +39,8 @@ const navLinks: NavLink[] = [
     ],
   },
   {
-    href: "/case-studies",
+    href: "/all-case-studies",
     label: "Case Studies",
-    hasDropdown: true,
-    dropdownItems: [
-      { href: "/all-case-studies", label: "All Case Studies" },
-    ],
   },
   {
     href: "/resources",
@@ -65,6 +68,7 @@ const navLinks: NavLink[] = [
     href: "/locations",
     label: "Locations",
     hasDropdown: true,
+    linkable: false,
     dropdownItems: [
       { href: "/locations/kansas/wichita", label: "Wichita, KS" },
     ],
@@ -75,12 +79,34 @@ export default function Nav() {
   const [isScrolled,       setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown,   setActiveDropdown]   = useState<string | null>(null);
+  const desktopNavRef = useRef<HTMLDivElement>(null);
  
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+ 
+  // Close an open dropdown on outside click / tap, and on Escape.
+  useEffect(() => {
+    if (!activeDropdown) return;
+ 
+    const handleClickOutside = (e: MouseEvent) => {
+      if (desktopNavRef.current && !desktopNavRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveDropdown(null);
+    };
+ 
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [activeDropdown]);
  
   return (
     <>
@@ -101,47 +127,74 @@ export default function Nav() {
             </Link>
  
             {/* Desktop links */}
-            <div className="hidden items-center gap-6 lg:flex">
-              {navLinks.map((link) => (
-                <div
-                  key={link.href}
-                  className="relative"
-                  onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.label)}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  <Link
-                    href={link.href}
-                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+            <div ref={desktopNavRef} className="hidden items-center gap-6 lg:flex">
+              {navLinks.map((link) => {
+                const isOpen = activeDropdown === link.label;
+                return (
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.label)}
+                    onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    {link.label}
-                    {link.hasDropdown && <ChevronDown className="h-3 w-3" />}
-                  </Link>
+                    {link.linkable === false ? (
+                      <button
+                        type="button"
+                        aria-haspopup="true"
+                        aria-expanded={isOpen}
+                        onClick={() => setActiveDropdown(isOpen ? null : link.label)}
+                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                      >
+                        {link.label}
+                        {link.hasDropdown && (
+                          <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                        )}
+                      </button>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setActiveDropdown(null)}
+                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                      >
+                        {link.label}
+                        {link.hasDropdown && (
+                          <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                        )}
+                      </Link>
+                    )}
  
-                  {link.hasDropdown && activeDropdown === link.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      className="absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl"
-                    >
-                      {link.dropdownItems?.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
-                        >
-                          <span>{item.label}</span>
-                          {item.badge && (
-                            <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
-                              {item.badge}
-                            </span>
-                          )}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </div>
-              ))}
+                    {link.hasDropdown && isOpen && (
+                      // Wrapper sits flush against the trigger (top-full, no margin) and uses
+                      // padding — not margin — for the visual gap, so the hoverable area is
+                      // continuous and the dropdown no longer closes before you reach it.
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        className="absolute left-0 top-full z-50 w-56 pt-2"
+                      >
+                        <div className="rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl">
+                          {link.dropdownItems?.map((item) => (
+                            <Link
+                              key={item.label}
+                              href={item.href}
+                              onClick={() => setActiveDropdown(null)}
+                              className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                            >
+                              <span>{item.label}</span>
+                              {item.badge && (
+                                <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
  
             {/* Desktop right */}
@@ -194,13 +247,19 @@ export default function Nav() {
               <div className="space-y-1 px-4 pb-6 pt-3">
                 {navLinks.map((link) => (
                   <div key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.linkable === false ? (
+                      <span className="block px-3 py-2.5 text-base font-medium text-[#374151]">
+                        {link.label}
+                      </span>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                     {link.hasDropdown && (
                       <div className="ml-4 mt-1 space-y-1 border-l border-[#e5e7eb] pl-3">
                         {link.dropdownItems?.map((item) => (
