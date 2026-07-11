@@ -32,13 +32,10 @@ const navLinks: NavLink[] = [
     ],
   },
   {
+    // Case Studies simplified to a direct link (Semrush/Ahrefs pattern).
+    // No dropdown. Featured page acts as hub with in-page CTA to /all-case-studies.
     href: "/case-studies",
     label: "Case Studies",
-    hasDropdown: true,
-    dropdownItems: [
-      { href: "/case-studies", label: "Featured Case Studies" },
-      { href: "/all-case-studies", label: "All Case Studies" },
-    ],
   },
   {
     href: "/locations",
@@ -70,7 +67,6 @@ const navLinks: NavLink[] = [
       { href: "/law-firm-scorecard", label: "Law Firm Scorecard" },
       { href: "/ai-search", label: "AI Search" },
       { href: "/content-generator", label: "AI Content Suite" },
-      { href: "/nicheseopro", label: "Keyword Magic Tool" },
       { href: "/tools", label: "All Tools" },
     ],
   },
@@ -179,25 +175,6 @@ export default function Nav() {
               Log in
             </Link>
  
-            {/* Try NicheSEO Pro — external app */}
-            <a
-              href="https://nicheseopro.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-lg border border-[#534AB7]/40 px-4 py-2 text-sm font-semibold text-[#534AB7] transition-all hover:border-[#534AB7] hover:bg-[#EEEDFE]"
-            >
-              Try NicheSEO Pro
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-                <path
-                  d="M2 9L9 2M9 2H4M9 2v5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
- 
             {/* Get Free Audit — primary */}
             <Link
               href="/free-audit"
@@ -282,26 +259,6 @@ export default function Nav() {
                 >
                   Log in
                 </Link>
- 
-                {/* Try NicheSEO Pro — external app */}
-                <a
-                  href="https://nicheseopro.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-1.5 rounded-lg border border-[#534AB7] py-2.5 text-center text-sm font-semibold text-[#534AB7] transition-colors hover:bg-[#EEEDFE]"
-                >
-                  Try NicheSEO Pro
-                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-                    <path
-                      d="M2 9L9 2M9 2H4M9 2v5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
  
                 <Link
                   href="/free-audit"
