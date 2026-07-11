@@ -31,10 +31,6 @@ const botResponses: Record<string, string> = {
   "default": "Thanks for reaching out! I can help with:\n\n• Free SEO Audit\n• Pricing & Plans\n• Our Process\n• Case Studies\n\nOr call +92 310 652 6316 for immediate help.",
 };
  
-// ── CRO-based auto popup message (shown after 4s) ──
-const CRO_POPUP_MESSAGE =
-  "🔥 We're accepting only 3 new clients this month — 2 spots already taken.\n\nGet your FREE SEO audit today and see exactly why competitors are outranking you. Takes 30 seconds, zero commitment.";
- 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -47,49 +43,12 @@ export default function ChatWidget() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [showTeaser, setShowTeaser] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
  
   // ── Auto-scroll to latest message ──
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
- 
-  // ── Auto popup after 4 seconds (once per session) ──
-  useEffect(() => {
-    const alreadyShown = sessionStorage.getItem("chatPopupShown");
-    if (alreadyShown) return;
- 
-    // Step 1: show teaser notification at 3s
-    const teaserTimer = setTimeout(() => {
-      setShowTeaser(true);
-    }, 3000);
- 
-    // Step 2: open full chat at 4s with CRO message
-    const popupTimer = setTimeout(() => {
-      setShowTeaser(false);
-      setIsOpen(true);
-      sessionStorage.setItem("chatPopupShown", "true");
- 
-      // Add CRO message after a short delay
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: prev.length + 1,
-            text: CRO_POPUP_MESSAGE,
-            isBot: true,
-            timestamp: new Date(),
-          },
-        ]);
-      }, 600);
-    }, 4000);
- 
-    return () => {
-      clearTimeout(teaserTimer);
-      clearTimeout(popupTimer);
-    };
-  }, []);
  
   const handleSend = (text: string) => {
     if (!text.trim()) return;
@@ -131,7 +90,6 @@ export default function ChatWidget() {
  
   const handleClose = () => {
     setIsOpen(false);
-    setShowTeaser(false);
   };
  
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -153,30 +111,9 @@ export default function ChatWidget() {
         </svg>
       </motion.a>
  
-      {/* ── Teaser Notification Bubble (shown at 3s, before chat opens) ── */}
-      <AnimatePresence>
-        {showTeaser && !isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="fixed bottom-24 right-20 z-50 max-w-[220px] rounded-2xl rounded-br-sm bg-[#0a0f2e] px-4 py-3 shadow-xl"
-          >
-            <p className="text-xs font-medium leading-snug text-white">
-              🔥 Only <span className="font-bold text-[#3eb489]">3 spots left</span> this month — want a free SEO audit?
-            </p>
-            {/* triangle pointer */}
-            <div className="absolute -bottom-2 right-4 h-0 w-0 border-l-8 border-r-0 border-t-8 border-l-transparent border-t-[#0a0f2e]" />
-          </motion.div>
-        )}
-      </AnimatePresence>
- 
       {/* Ask Mubashar — floating pill button */}
       <motion.button
-        onClick={() => {
-          setIsOpen(!isOpen);
-          setShowTeaser(false);
-        }}
+        onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-full bg-[#0a0f2e] py-2 pl-2 pr-4 text-white shadow-lg"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
