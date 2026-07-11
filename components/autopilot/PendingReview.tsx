@@ -1,289 +1,333 @@
 'use client'
-
-import { useState } from 'react'
-
-type PendingPage = {
+ 
+import { useState, useMemo } from 'react'
+import {
+  FileText,
+  Search,
+  CheckCircle2,
+  Clock,
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  X,
+} from 'lucide-react'
+ 
+interface Page {
   id: string
   pageUrl: string
+  status: string
   gscImpressions: number
   gscClicks: number
   gscPosition: number | null
-  status: string
   generatedContent: any
-  createdAt: string
-  run: { id: string; clientId: string; startedAt: string; dryRun: boolean }
+  publishAt?: string | null
+  run: {
+    id: string
+    clientId: string
+    startedAt: string
+    dryRun: boolean
+  }
 }
-
+ 
+const PUBLISH_OPTIONS = [
+  { value: 'approve_only', label: 'Approve only' },
+  { value: 'now', label: 'Publish now' },
+  { value: 'in_1_day', label: 'Publish in 1 day' },
+  { value: 'in_3_days', label: 'Publish in 3 days' },
+  { value: 'in_7_days', label: 'Publish in 7 days' },
+]
+ 
+function fmtNum(n: number | null | undefined) {
+  return n == null ? '-' : n.toLocaleString()
+}
+ 
+function fmtPos(p: number | null) {
+  return p == null ? '-' : p.toFixed(1)
+}
+ 
 export default function PendingReview() {
   const [key, setKey] = useState('')
-  const [pages, setPages] = useState<PendingPage[]>([])
+  const [pages, setPages] = useState<Page[]>([])
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [loaded, setLoaded] = useState(false)
-  const [openId, setOpenId] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
   const [acting, setActing] = useState<string | null>(null)
-
+  const [openId, setOpenId] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
+  const [pubDropdown, setPubDropdown] = useState<string | null>(null)
+ 
   const load = async () => {
+    if (!key) return
     setLoading(true)
-    setError('')
+    setError(null)
     try {
       const res = await fetch('/api/autopilot/approve?status=pending', {
         headers: { Authorization: `Bearer ${key}` },
       })
       if (res.status === 401) throw new Error('Wrong review key')
+      if (!res.ok) throw new Error('Failed to load')
       const data = await res.json()
       setPages(data.pages || [])
-      setLoaded(true)
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Load failed')
+      setError(e instanceof Error ? e.message : 'error')
     } finally {
       setLoading(false)
     }
   }
-
-  const act = async (
-    pageId: string,
-    action: 'approve' | 'reject',
-    publishAt?: string,
-  ) => {
+ 
+  const act = async (pageId: string, publishAction: string) => {
+    if (acting) return
     setActing(pageId)
+    setPubDropdown(null)
     try {
+      const body: any = {
+        pageId,
+        action: publishAction === 'reject' ? 'reject' : 'approve',
+      }
+      if (publishAction === 'now') body.publishNow = true
+      else if (publishAction === 'in_1_day') body.publishInDays = 1
+      else if (publishAction === 'in_3_days') body.publishInDays = 3
+      else if (publishAction === 'in_7_days') body.publishInDays = 7
+ 
       const res = await fetch('/api/autopilot/approve', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${key}`,
-        },
-        body: JSON.stringify({ pageId, action, ...(publishAt ? { publishAt } : {}) }),
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
+        body: JSON.stringify(body),
       })
-      if (!res.ok) throw new Error('Action failed')
-      setPages((p) => p.filter((x) => x.id !== pageId))
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Action failed')
+      if (!res.ok) throw new Error('Failed')
+      setPages((prev) => prev.filter((p) => p.id !== pageId))
+    } catch {
+      setError('Action failed')
     } finally {
       setActing(null)
     }
   }
-
-  const scheduleOptions = [
-    { label: 'Approve only', value: '' },
-    { label: 'Publish now', value: 'now' },
-    { label: 'Publish in 1 day', value: '1' },
-    { label: 'Publish in 3 days', value: '3' },
-    { label: 'Publish in 7 days', value: '7' },
-  ]
-
-  const approveWith = (pageId: string, choice: string) => {
-    if (choice === '') return act(pageId, 'approve')
-    const publishAt =
-      choice === 'now'
-        ? new Date().toISOString()
-        : new Date(Date.now() + parseInt(choice) * 24 * 60 * 60 * 1000).toISOString()
-    return act(pageId, 'approve', publishAt)
-  }
-
+ 
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase()
+    if (!q) return pages
+    return pages.filter((p) => p.pageUrl.toLowerCase().includes(q))
+  }, [pages, search])
+ 
   const renderContent = (c: any) => {
-    if (!c) return <p className="text-white/30 text-sm">No content stored</p>
+    if (!c) return <p className="text-sm text-neutral-400">No content</p>
     return (
-      <div className="text-sm leading-relaxed text-white/70">
-        {c.title && (
-          <p className="mb-1">
-            <span className="text-white/40">Title:</span>{' '}
-            <span className="text-white">{c.title}</span>
-          </p>
-        )}
-        {c._keywordPack?.primary && (
-          <div className="border border-[#818cf8]/30 bg-[#818cf8]/5 rounded-xl p-4 my-3">
-            <p className="text-xs font-bold text-[#a5b4fc] mb-2">
-              🎯 KEYWORD TARGETS (GSC 90-day data)
-            </p>
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="px-2 py-1 rounded-md bg-[#818cf8]/20 text-[#c7d2fe] text-xs font-bold">
-                PRIMARY: {c._keywordPack.primary.query}
-              </span>
-              <span
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                  c._keywordPack.primary.category === 'striking_distance'
-                    ? 'bg-green-500/15 text-green-400'
-                    : c._keywordPack.primary.category === 'ctr_gap'
-                      ? 'bg-amber-500/15 text-amber-400'
-                      : 'bg-blue-500/15 text-blue-400'
-                }`}
-              >
-                {c._keywordPack.primary.category.replace('_', ' ')}
-              </span>
-              <span className="text-[10px] text-white/40">
-                pos {c._keywordPack.primary.position.toFixed(1)} ·{' '}
-                {c._keywordPack.primary.impressions} imp ·{' '}
-                {c._keywordPack.primary.intent}
-              </span>
-            </div>
-            {c._keywordPack.secondary?.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {c._keywordPack.secondary.map((s: any, i: number) => (
-                  <span
-                    key={i}
-                    className="px-2 py-0.5 rounded-md bg-white/[0.05] text-white/60 text-[11px]"
-                    title={`pos ${s.position.toFixed(1)} · ${s.impressions} imp · ${s.category} · ${s.intent}`}
-                  >
-                    {s.query}
-                  </span>
-                ))}
-              </div>
-            )}
+      <div className="space-y-4 text-sm">
+        {c.metaTitle && (
+          <div>
+            <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-1">Meta Title</p>
+            <p className="text-neutral-900">{c.metaTitle}</p>
           </div>
         )}
         {c.metaDescription && (
-          <p className="mb-2">
-            <span className="text-white/40">Meta:</span> {c.metaDescription}
-          </p>
-        )}
-        <div className="flex flex-wrap gap-4 my-2 text-xs text-white/50">
-          {c.wordCount && <span>📝 {c.wordCount} words</span>}
-          {c.eeatScore && <span>⭐ E-E-A-T: {c.eeatScore}</span>}
-          {c.hcuCompliant !== undefined && (
-            <span>{c.hcuCompliant ? '✅ HCU Compliant' : '⚠️ HCU Check'}</span>
-          )}
-        </div>
-        {c.description && (
-          <div className="border border-white/[0.08] bg-white/[0.02] rounded-xl p-4 max-h-72 overflow-auto whitespace-pre-wrap">
-            {c.description}
+          <div>
+            <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-1">Meta Description</p>
+            <p className="text-neutral-700">{c.metaDescription}</p>
           </div>
         )}
-        {Array.isArray(c.imageSuggestions) && c.imageSuggestions.length > 0 && (
-          <details className="mt-3">
-            <summary className="cursor-pointer font-semibold text-white/60">
-              🖼️ Image Suggestions ({c.imageSuggestions.length})
-            </summary>
-            <ul className="pl-5 mt-2 list-disc space-y-1">
-              {c.imageSuggestions.map((img: any, i: number) => (
-                <li key={i}>
-                  <span className="text-white">{img.alt}</span>
-                  <span className="text-white/40"> — {img.placement}</span>
-                </li>
-              ))}
-            </ul>
-          </details>
+        {c.h1Title && (
+          <div>
+            <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-1">H1</p>
+            <p className="text-neutral-900 font-semibold">{c.h1Title}</p>
+          </div>
         )}
-        <details className="mt-3">
-          <summary className="cursor-pointer text-white/30">Raw JSON</summary>
-          <pre className="bg-black/40 border border-white/[0.06] rounded-xl p-4 max-h-72 overflow-auto whitespace-pre-wrap text-xs mt-2">
-            {JSON.stringify(c, null, 2)}
-          </pre>
-        </details>
+        {c.contentBody && (
+          <div>
+            <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-1">Content Preview</p>
+            <div
+              className="text-neutral-700 line-clamp-6 prose prose-sm max-w-none"
+              dangerouslySetInnerHTML={{ __html: c.contentBody.slice(0, 800) + '\u2026' }}
+            />
+          </div>
+        )}
+        {c.faqs?.length > 0 && (
+          <div>
+            <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-2">FAQs ({c.faqs.length})</p>
+            <div className="space-y-2">
+              {c.faqs.slice(0, 3).map((f: any, i: number) => (
+                <div key={i} className="bg-neutral-50 rounded-lg p-3 border border-neutral-200">
+                  <p className="text-neutral-900 font-medium mb-1">Q: {f.question}</p>
+                  <p className="text-neutral-600 text-xs">A: {f.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     )
   }
-
+ 
   return (
-    <div className="mt-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden">
-      <div className="px-6 py-4 border-b border-white/[0.06] flex items-center justify-between flex-wrap gap-3">
-        <h2 className="text-lg font-bold text-white">
-          📝 Pending Review{' '}
-          {pages.length > 0 && (
-            <span className="text-[#818cf8]">({pages.length})</span>
-          )}
-        </h2>
-        <div className="flex gap-2">
+    <div className="bg-white border border-neutral-200 rounded-2xl overflow-hidden mb-8">
+      <div className="px-6 py-5 border-b border-neutral-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-neutral-100 flex items-center justify-center">
+            <FileText className="w-4 h-4 text-neutral-700" />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold text-neutral-900">Pending Review</h2>
+            {pages.length > 0 && (
+              <p className="text-xs text-neutral-500">{pages.length} pages awaiting your approval</p>
+            )}
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
           <input
             type="password"
             placeholder="Review key"
             value={key}
             onChange={(e) => setKey(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1] text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#818cf8] w-52"
+            className="bg-white border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-100 w-44"
           />
           <button
             onClick={load}
             disabled={!key || loading}
-            className="px-4 py-2 rounded-lg bg-[#818cf8] text-white text-sm font-semibold disabled:opacity-40 hover:bg-[#6b76e8] transition"
+            className="px-4 py-2 rounded-lg bg-neutral-900 text-white text-sm font-semibold hover:bg-neutral-800 disabled:opacity-40 transition-colors"
           >
             {loading ? 'Loading...' : 'Load Pending'}
           </button>
         </div>
       </div>
-
+ 
       <div className="p-6">
-        {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
-        {!loading && loaded && pages.length === 0 && !error && (
-          <p className="text-white/30 text-sm">
-            No pending pages. Agla run wait karo.
-          </p>
+        {error && (
+          <div className="mb-4 px-4 py-3 rounded-lg bg-red-50 border border-red-200">
+            <p className="text-sm text-red-700 font-medium">{error}</p>
+          </div>
         )}
-        {!loaded && !error && (
-          <p className="text-white/30 text-sm">
-            Review key daal kar Load Pending dabao.
-          </p>
+ 
+        {!pages.length && !error && (
+          <div className="text-center py-8">
+            <p className="text-sm text-neutral-500">
+              Enter your review key and click Load Pending to see pages awaiting approval.
+            </p>
+          </div>
         )}
-
-        {pages.map((p) => (
-          <div
-            key={p.id}
-            className="border border-white/[0.08] bg-white/[0.02] rounded-xl p-5 mb-4"
-          >
-            <div className="flex justify-between flex-wrap gap-3">
-              <div className="min-w-0">
-                
-                  <a
-                
-                    href={p.pageUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-semibold text-[#818cf8] hover:underline break-all"
-                >
-                  {p.pageUrl}
-                </a>
-                <p className="text-xs text-white/40 mt-1">
-                  {p.gscImpressions} impressions · {p.gscClicks} clicks
-                  {p.gscPosition ? ` · pos ${p.gscPosition.toFixed(1)}` : ''}
-                  {p.run?.dryRun ? ' · DRY RUN' : ''}
-                </p>
-              </div>
-              <div className="flex gap-2 shrink-0">
-                <button
-                  onClick={() => setOpenId(openId === p.id ? null : p.id)}
-                  className="px-4 py-1.5 rounded-lg border border-white/[0.15] text-white/70 text-sm hover:bg-white/[0.05] transition"
-                >
-                  {openId === p.id ? 'Hide' : 'Preview'}
-                </button>
-                <select
-                  onChange={(e) => {
-                    if (e.target.value !== '_') approveWith(p.id, e.target.value)
-                    e.target.value = '_'
-                  }}
-                  disabled={acting === p.id}
-                  defaultValue="_"
-                  className="px-3 py-1.5 rounded-lg bg-green-500/15 text-green-400 text-sm font-semibold border-0 cursor-pointer hover:bg-green-500/25 disabled:opacity-40"
-                >
-                  <option value="_" disabled>
-                    ✓ Approve...
-                  </option>
-                  {scheduleOptions.map((o) => (
-                    <option
-                      key={o.value}
-                      value={o.value}
-                      style={{ background: '#1a1a2e', color: '#fff' }}
-                    >
-                      {o.label}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  onClick={() => act(p.id, 'reject')}
-                  disabled={acting === p.id}
-                  className="px-4 py-1.5 rounded-lg bg-red-500/15 text-red-400 text-sm font-semibold hover:bg-red-500/25 disabled:opacity-40 transition"
-                >
-                  ✕ Reject
-                </button>
-              </div>
+ 
+        {pages.length > 0 && (
+          <>
+            <div className="relative mb-4">
+              <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search by URL..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-white border border-neutral-200 rounded-lg pl-10 pr-4 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-100"
+              />
             </div>
-            {openId === p.id && (
-              <div className="mt-4 pt-4 border-t border-white/[0.06]">
-                {renderContent(p.generatedContent)}
-              </div>
+ 
+            {filtered.length === 0 && (
+              <p className="text-sm text-neutral-500 text-center py-6">No results for &quot;{search}&quot;</p>
             )}
-          </div>
-        ))}
-          </div>
+ 
+            <div className="space-y-3">
+              {filtered.map((p) => {
+                const c = p.generatedContent
+                const isOpen = openId === p.id
+                const isPubOpen = pubDropdown === p.id
+                const scheduled = p.publishAt ? new Date(p.publishAt) : null
+                const isFuture = scheduled && scheduled.getTime() > Date.now()
+ 
+                return (
+                  <div key={p.id} className="border border-neutral-200 rounded-xl p-4 bg-white hover:border-neutral-300 transition-colors">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <a
+                          href={p.pageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-semibold text-neutral-900 hover:text-orange-600 break-all inline-flex items-center gap-1.5 transition-colors"
+                        >
+                          {p.pageUrl}
+                          <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                        </a>
+                        <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-neutral-500">
+                          <span className="tabular-nums">{fmtNum(p.gscImpressions)} impressions</span>
+                          <span>&middot;</span>
+                          <span className="tabular-nums">{fmtNum(p.gscClicks)} clicks</span>
+                          <span>&middot;</span>
+                          <span className="tabular-nums">pos {fmtPos(p.gscPosition)}</span>
+                          {p.run.dryRun && (
+                            <>
+                              <span>&middot;</span>
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-semibold uppercase tracking-wider">Dry Run</span>
+                            </>
+                          )}
+                          {isFuture && scheduled && (
+                            <>
+                              <span>&middot;</span>
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-semibold">
+                                <Clock className="w-3 h-3" />
+                                Publishes {scheduled.toLocaleDateString()}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+ 
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <button
+                          onClick={() => setOpenId(isOpen ? null : p.id)}
+                          className="p-2 rounded-lg border border-neutral-200 hover:bg-neutral-50 text-neutral-600 transition-colors"
+                          title={isOpen ? 'Hide' : 'Preview'}
+                        >
+                          {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        </button>
+ 
+                        <div className="relative">
+                          <button
+                            onClick={() => setPubDropdown(isPubOpen ? null : p.id)}
+                            disabled={acting === p.id}
+                            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-neutral-900 text-white text-sm font-semibold hover:bg-neutral-800 disabled:opacity-40 transition-colors"
+                          >
+                            <CheckCircle2 className="w-4 h-4" />
+                            Approve
+                            <ChevronDown className="w-3.5 h-3.5" />
+                          </button>
+                          {isPubOpen && (
+                            <div className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 rounded-xl shadow-lg z-10 overflow-hidden">
+                              {PUBLISH_OPTIONS.map((opt) => (
+                                <button
+                                  key={opt.value}
+                                  onClick={() => act(p.id, opt.value)}
+                                  className="w-full text-left px-4 py-2.5 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 transition-colors"
+                                >
+                                  {opt.label}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+ 
+                        <button
+                          onClick={() => act(p.id, 'reject')}
+                          disabled={acting === p.id}
+                          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm font-semibold hover:bg-red-100 disabled:opacity-40 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                          Reject
+                        </button>
+                      </div>
+                    </div>
+ 
+                    {c?.metaDescription && !isOpen && (
+                      <p className="mt-3 text-sm text-neutral-500 line-clamp-1">
+                        <span className="font-medium text-neutral-600">Meta:</span> {c.metaDescription}
+                      </p>
+                    )}
+ 
+                    {isOpen && (
+                      <div className="mt-4 pt-4 border-t border-neutral-200">
+                        {renderContent(c)}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }

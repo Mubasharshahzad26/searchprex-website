@@ -1,7 +1,19 @@
 'use client'
-
+ 
 import { useState } from 'react'
-
+import {
+  Target,
+  Sparkles,
+  User,
+  Globe,
+  Rocket,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
+  TrendingUp,
+  DollarSign,
+} from 'lucide-react'
+ 
 type Task = {
   title: string
   description: string
@@ -25,20 +37,40 @@ type Plan = {
   risksAndAssumptions?: string[]
 }
 type Roadmap = { id: string; plan: Plan; auditData?: any }
-
+ 
 const CATEGORY = {
-  autopilot: { emoji: '✨', label: 'Autopilot', color: 'text-[#818cf8]', bg: 'bg-[#818cf8]/10' },
-  manual_dev: { emoji: '👤', label: 'Dev', color: 'text-amber-400', bg: 'bg-amber-500/10' },
-  manual_seo: { emoji: '🌐', label: 'SEO', color: 'text-blue-400', bg: 'bg-blue-500/10' },
-  growth: { emoji: '🚀', label: 'Growth', color: 'text-green-400', bg: 'bg-green-500/10' },
+  autopilot: {
+    icon: Sparkles,
+    label: 'Autopilot',
+    badge: 'bg-violet-50 text-violet-700 border-violet-200',
+    iconClass: 'text-violet-600',
+  },
+  manual_dev: {
+    icon: User,
+    label: 'Dev',
+    badge: 'bg-amber-50 text-amber-700 border-amber-200',
+    iconClass: 'text-amber-600',
+  },
+  manual_seo: {
+    icon: Globe,
+    label: 'SEO',
+    badge: 'bg-blue-50 text-blue-700 border-blue-200',
+    iconClass: 'text-blue-600',
+  },
+  growth: {
+    icon: Rocket,
+    label: 'Growth',
+    badge: 'bg-green-50 text-green-700 border-green-200',
+    iconClass: 'text-green-600',
+  },
 } as const
-
-const PRIORITY_COLOR: Record<string, string> = {
-  P0: 'bg-red-500/20 text-red-400',
-  P1: 'bg-amber-500/20 text-amber-400',
-  P2: 'bg-white/10 text-white/60',
+ 
+const PRIORITY_BADGE: Record<string, string> = {
+  P0: 'bg-red-50 text-red-700 border-red-200',
+  P1: 'bg-amber-50 text-amber-700 border-amber-200',
+  P2: 'bg-neutral-100 text-neutral-600 border-neutral-200',
 }
-
+ 
 const INDUSTRIES = [
   'ecommerce_woocommerce',
   'ecommerce_shopify',
@@ -54,7 +86,27 @@ const INDUSTRIES = [
   'content_publisher',
   'general',
 ]
-
+ 
+function StatBox({
+  label,
+  value,
+  hint,
+}: {
+  label: string
+  value: number | string
+  hint?: string
+}) {
+  return (
+    <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+      <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-1.5">
+        {label}
+      </p>
+      <p className="text-2xl font-bold text-neutral-900 tabular-nums tracking-tight">{value}</p>
+      {hint && <p className="text-xs text-neutral-500 mt-1">{hint}</p>}
+    </div>
+  )
+}
+ 
 export default function RoadmapWidget() {
   const [key, setKey] = useState('')
   const [auditRunId, setAuditRunId] = useState('cmr9y0e7n0000g0ur39vkua8r')
@@ -63,7 +115,7 @@ export default function RoadmapWidget() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [expandedMonth, setExpandedMonth] = useState<number | null>(1)
-
+ 
   const loadLatest = async () => {
     setLoading(true)
     setError('')
@@ -84,7 +136,7 @@ export default function RoadmapWidget() {
       setLoading(false)
     }
   }
-
+ 
   const generate = async () => {
     if (!confirm('Generate a new AI roadmap? Takes ~45 seconds.')) return
     setLoading(true)
@@ -108,26 +160,32 @@ export default function RoadmapWidget() {
       setLoading(false)
     }
   }
-
+ 
   return (
-    <div className="mt-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden">
-      <div className="px-6 py-4 border-b border-white/[0.06] flex items-center justify-between flex-wrap gap-3">
-        <h2 className="text-lg font-bold text-white">
-          🎯 AI SEO Roadmap
-          {roadmap && (
-            <span className="text-[#818cf8] ml-2 text-sm">
-              (Score: {roadmap.plan.healthScore}/100)
-            </span>
-          )}
-        </h2>
-        <div className="flex gap-2 flex-wrap">
+    <div className="bg-white border border-neutral-200 rounded-2xl overflow-hidden mb-8">
+      {/* Header */}
+      <div className="px-6 py-5 border-b border-neutral-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-neutral-100 flex items-center justify-center">
+            <Target className="w-4 h-4 text-neutral-700" />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold text-neutral-900">AI SEO Roadmap</h2>
+            {roadmap && (
+              <p className="text-xs text-neutral-500">
+                Health Score: {roadmap.plan.healthScore}/100
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
           <select
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1] text-white text-xs focus:outline-none focus:border-[#818cf8]"
+            className="bg-white border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-100"
           >
             {INDUSTRIES.map((i) => (
-              <option key={i} value={i} className="bg-[#0a0f2e]">
+              <option key={i} value={i}>
                 {i}
               </option>
             ))}
@@ -137,184 +195,247 @@ export default function RoadmapWidget() {
             placeholder="Audit runId"
             value={auditRunId}
             onChange={(e) => setAuditRunId(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1] text-white text-xs placeholder-white/30 focus:outline-none focus:border-[#818cf8] w-56 font-mono"
+            className="bg-white border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-100 w-52 font-mono"
           />
           <input
             type="password"
             placeholder="Key"
             value={key}
             onChange={(e) => setKey(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1] text-white text-xs placeholder-white/30 focus:outline-none focus:border-[#818cf8] w-32"
+            className="bg-white border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-100 w-32"
           />
           <button
             onClick={loadLatest}
             disabled={!key || loading}
-            className="px-3 py-2 rounded-lg bg-white/[0.08] hover:bg-white/[0.14] text-white text-xs font-semibold disabled:opacity-40"
+            className="px-3 py-2 rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-900 text-sm font-semibold disabled:opacity-40 transition-colors"
           >
             Load Latest
           </button>
           <button
             onClick={generate}
             disabled={!key || loading}
-            className="px-4 py-2 rounded-lg bg-[#818cf8] hover:bg-[#6b76e8] text-white text-xs font-bold disabled:opacity-40"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-neutral-900 text-white text-sm font-semibold hover:bg-neutral-800 disabled:opacity-40 transition-colors"
           >
-            {loading ? '⏳ Generating...' : '🎯 Generate'}
+            <Sparkles className="w-3.5 h-3.5" />
+            {loading ? 'Generating...' : 'Generate'}
           </button>
         </div>
       </div>
-
-      {error && <p className="text-red-400 text-sm px-6 py-4">{error}</p>}
-
-      {roadmap && (
-        <div className="p-6 space-y-6">
-          {/* Health Score */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-            <div className="p-4 bg-[#818cf8]/10 border border-[#818cf8]/20 rounded-xl">
-              <p className="text-[10px] font-bold text-[#818cf8]/80 tracking-wide">HEALTH</p>
-              <p className="text-3xl font-black text-[#818cf8] mt-1">
-                {roadmap.plan.healthScore}
-              </p>
-              <p className="text-[10px] text-white/50 mt-0.5">/ 100</p>
+ 
+      {/* Body */}
+      <div className="p-6">
+        {error && (
+          <div className="mb-4 px-4 py-3 rounded-lg bg-red-50 border border-red-200">
+            <p className="text-sm text-red-700 font-medium">{error}</p>
+          </div>
+        )}
+ 
+        {!roadmap && !error && (
+          <p className="text-sm text-neutral-500 text-center py-6">
+            Enter details and click Load Latest to view roadmap, or Generate to create a new one.
+          </p>
+        )}
+ 
+        {roadmap && (
+          <div className="space-y-6">
+            {/* Health Score Row */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <StatBox
+                label="Health"
+                value={`${roadmap.plan.healthScore}/100`}
+                hint="Overall score"
+              />
+              {(['technical', 'onPage', 'content', 'indexing'] as const).map((k) => {
+                const val = roadmap.plan.healthBreakdown?.[k] ?? 0
+                return (
+                  <div key={k} className="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+                    <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-1.5">
+                      {k}
+                    </p>
+                    <p className="text-2xl font-bold text-neutral-900 tabular-nums tracking-tight">
+                      {val}
+                    </p>
+                    <div className="mt-2 h-1.5 bg-neutral-200 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full transition-all ${
+                          val >= 70 ? 'bg-green-500' : val >= 40 ? 'bg-amber-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${val}%` }}
+                      />
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-            {(['technical', 'onPage', 'content', 'indexing'] as const).map((k) => (
-              <div key={k} className="p-4 bg-white/[0.03] border border-white/[0.08] rounded-xl">
-                <p className="text-[10px] font-bold text-white/50 tracking-wide uppercase">{k}</p>
-                <p className="text-2xl font-bold text-white mt-1">
-                  {roadmap.plan.healthBreakdown?.[k] ?? '-'}
-                </p>
-                <div className="mt-2 h-1 bg-white/[0.06] rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-white/40 rounded-full"
-                    style={{ width: `${roadmap.plan.healthBreakdown?.[k] ?? 0}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Executive Summary */}
-          <div className="p-4 bg-white/[0.02] border border-white/[0.06] rounded-xl">
-            <p className="text-[10px] font-bold text-white/40 tracking-wide mb-2">
-              EXECUTIVE SUMMARY
-            </p>
-            <p className="text-sm text-white/80 leading-relaxed">
-              {roadmap.plan.executiveSummary}
-            </p>
-          </div>
-
-          {/* Months */}
-          <div className="space-y-3">
-            {roadmap.plan.months.map((m) => {
-              const isOpen = expandedMonth === m.month
-              const catCounts = {
-                autopilot: m.tasks.filter((t) => t.category === 'autopilot').length,
-                manual_dev: m.tasks.filter((t) => t.category === 'manual_dev').length,
-                manual_seo: m.tasks.filter((t) => t.category === 'manual_seo').length,
-                growth: m.tasks.filter((t) => t.category === 'growth').length,
-              }
-              return (
-                <div
-                  key={m.month}
-                  className="border border-white/[0.08] rounded-xl overflow-hidden"
-                >
-                  <button
-                    onClick={() => setExpandedMonth(isOpen ? null : m.month)}
-                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/[0.02] text-left"
-                  >
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-bold text-white">
-                        📅 Month {m.month}: {m.theme}
-                      </p>
-                      <p className="text-xs text-white/50 mt-0.5">{m.focus}</p>
-                    </div>
-                    <div className="flex gap-1 shrink-0 ml-3">
-                      {catCounts.autopilot > 0 && (
-                        <span className="text-xs">✨{catCounts.autopilot}</span>
-                      )}
-                      {catCounts.manual_dev > 0 && (
-                        <span className="text-xs">👤{catCounts.manual_dev}</span>
-                      )}
-                      {catCounts.manual_seo > 0 && (
-                        <span className="text-xs">🌐{catCounts.manual_seo}</span>
-                      )}
-                      {catCounts.growth > 0 && (
-                        <span className="text-xs">🚀{catCounts.growth}</span>
-                      )}
-                      <span className="text-white/30 ml-2">{isOpen ? '▲' : '▼'}</span>
-                    </div>
-                  </button>
-                  {isOpen && (
-                    <div className="border-t border-white/[0.06] divide-y divide-white/[0.04]">
-                      {m.tasks.map((t, i) => {
-                        const cat = CATEGORY[t.category] || CATEGORY.growth
-                        return (
-                          <div key={i} className="px-4 py-3">
-                            <div className="flex items-start gap-3 mb-1.5 flex-wrap">
-                              <span className="text-lg leading-none">{cat.emoji}</span>
-                              <div className="min-w-0 flex-1">
-                                <div className="flex items-center gap-2 flex-wrap mb-1">
-                                  <span
-                                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${PRIORITY_COLOR[t.priority]}`}
-                                  >
-                                    {t.priority}
-                                  </span>
-                                  <span
-                                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${cat.bg} ${cat.color}`}
-                                  >
-                                    {cat.label}
-                                  </span>
-                                  <span className="text-[10px] text-white/40">
-                                    {t.effort}/{t.impact} · {t.affectedPages} pages
-                                  </span>
-                                </div>
-                                <p className="text-sm text-white font-semibold">{t.title}</p>
-                                <p className="text-xs text-white/50 mt-1">{t.description}</p>
-                                <p className="text-xs text-green-400/80 mt-1.5">
-                                  → {t.expectedOutcome}
-                                </p>
-                              </div>
-                            </div>
+ 
+            {/* Executive Summary */}
+            <div className="border border-neutral-200 rounded-xl p-4 bg-neutral-50">
+              <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-2">
+                Executive Summary
+              </p>
+              <p className="text-sm text-neutral-700 leading-relaxed">
+                {roadmap.plan.executiveSummary}
+              </p>
+            </div>
+ 
+            {/* Months */}
+            <div>
+              <p className="text-xs uppercase tracking-wider font-medium text-neutral-500 mb-3">
+                Monthly Roadmap
+              </p>
+              <div className="space-y-3">
+                {roadmap.plan.months.map((m) => {
+                  const isOpen = expandedMonth === m.month
+                  const catCounts = {
+                    autopilot: m.tasks.filter((t) => t.category === 'autopilot').length,
+                    manual_dev: m.tasks.filter((t) => t.category === 'manual_dev').length,
+                    manual_seo: m.tasks.filter((t) => t.category === 'manual_seo').length,
+                    growth: m.tasks.filter((t) => t.category === 'growth').length,
+                  }
+                  return (
+                    <div
+                      key={m.month}
+                      className="border border-neutral-200 rounded-xl overflow-hidden bg-white hover:border-neutral-300 transition-colors"
+                    >
+                      <button
+                        onClick={() => setExpandedMonth(isOpen ? null : m.month)}
+                        className="w-full px-4 py-3 flex items-center justify-between hover:bg-neutral-50 text-left transition-colors"
+                      >
+                        <div className="flex items-center gap-3 min-w-0 flex-1">
+                          <div className="w-9 h-9 rounded-lg bg-neutral-100 flex items-center justify-center flex-shrink-0">
+                            <Calendar className="w-4 h-4 text-neutral-700" />
                           </div>
-                        )
-                      })}
+                          <div className="min-w-0">
+                            <p className="text-sm font-bold text-neutral-900">
+                              Month {m.month}: {m.theme}
+                            </p>
+                            <p className="text-xs text-neutral-500 mt-0.5 truncate">{m.focus}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+                          {catCounts.autopilot > 0 && (
+                            <span className="inline-flex items-center gap-1 text-xs text-neutral-600">
+                              <Sparkles className="w-3 h-3 text-violet-600" />
+                              {catCounts.autopilot}
+                            </span>
+                          )}
+                          {catCounts.manual_dev > 0 && (
+                            <span className="inline-flex items-center gap-1 text-xs text-neutral-600">
+                              <User className="w-3 h-3 text-amber-600" />
+                              {catCounts.manual_dev}
+                            </span>
+                          )}
+                          {catCounts.manual_seo > 0 && (
+                            <span className="inline-flex items-center gap-1 text-xs text-neutral-600">
+                              <Globe className="w-3 h-3 text-blue-600" />
+                              {catCounts.manual_seo}
+                            </span>
+                          )}
+                          {catCounts.growth > 0 && (
+                            <span className="inline-flex items-center gap-1 text-xs text-neutral-600">
+                              <Rocket className="w-3 h-3 text-green-600" />
+                              {catCounts.growth}
+                            </span>
+                          )}
+                          {isOpen ? (
+                            <ChevronUp className="w-4 h-4 text-neutral-400 ml-1" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-neutral-400 ml-1" />
+                          )}
+                        </div>
+                      </button>
+                      {isOpen && (
+                        <div className="border-t border-neutral-200 divide-y divide-neutral-100">
+                          {m.tasks.map((t, i) => {
+                            const cat = CATEGORY[t.category] || CATEGORY.growth
+                            const CatIcon = cat.icon
+                            return (
+                              <div key={i} className="px-4 py-3">
+                                <div className="flex items-start gap-3">
+                                  <div className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-200 flex items-center justify-center flex-shrink-0">
+                                    <CatIcon className={`w-4 h-4 ${cat.iconClass}`} />
+                                  </div>
+                                  <div className="min-w-0 flex-1">
+                                    <div className="flex items-center gap-2 flex-wrap mb-1.5">
+                                      <span
+                                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider border ${PRIORITY_BADGE[t.priority]}`}
+                                      >
+                                        {t.priority}
+                                      </span>
+                                      <span
+                                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider border ${cat.badge}`}
+                                      >
+                                        {cat.label}
+                                      </span>
+                                      <span className="text-[11px] text-neutral-500">
+                                        {t.effort}/{t.impact} · {t.affectedPages} pages
+                                      </span>
+                                    </div>
+                                    <p className="text-sm text-neutral-900 font-semibold">
+                                      {t.title}
+                                    </p>
+                                    <p className="text-xs text-neutral-600 mt-1 leading-relaxed">
+                                      {t.description}
+                                    </p>
+                                    <p className="text-xs text-green-700 mt-1.5 font-medium">
+                                      → {t.expectedOutcome}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )}
                     </div>
-                  )}
+                  )
+                })}
+              </div>
+            </div>
+ 
+            {/* Metrics + Investment */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {roadmap.plan.expectedMetrics && (
+                <div className="border border-green-200 bg-green-50 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <TrendingUp className="w-4 h-4 text-green-700" />
+                    <p className="text-xs uppercase tracking-wider font-medium text-green-800">
+                      Expected Metrics
+                    </p>
+                  </div>
+                  <div className="space-y-1.5">
+                    {Object.entries(roadmap.plan.expectedMetrics).map(([k, v]) => (
+                      <div key={k} className="flex justify-between text-xs">
+                        <span className="text-neutral-600">{k}</span>
+                        <span className="text-green-800 font-semibold">{String(v)}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              )
-            })}
-          </div>
-
-          {/* Investment + Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {roadmap.plan.expectedMetrics && (
-              <div className="p-4 bg-green-500/5 border border-green-500/20 rounded-xl">
-                <p className="text-[10px] font-bold text-green-400/80 tracking-wide mb-2">
-                  EXPECTED METRICS
-                </p>
-                {Object.entries(roadmap.plan.expectedMetrics).map(([k, v]) => (
-                  <div key={k} className="flex justify-between text-xs py-1">
-                    <span className="text-white/50">{k}</span>
-                    <span className="text-green-400 font-semibold">{String(v)}</span>
+              )}
+              {roadmap.plan.investmentEstimation && (
+                <div className="border border-neutral-200 bg-neutral-50 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <DollarSign className="w-4 h-4 text-neutral-700" />
+                    <p className="text-xs uppercase tracking-wider font-medium text-neutral-600">
+                      Investment
+                    </p>
                   </div>
-                ))}
-              </div>
-            )}
-            {roadmap.plan.investmentEstimation && (
-              <div className="p-4 bg-[#818cf8]/5 border border-[#818cf8]/20 rounded-xl">
-                <p className="text-[10px] font-bold text-[#818cf8]/80 tracking-wide mb-2">
-                  INVESTMENT
-                </p>
-                {Object.entries(roadmap.plan.investmentEstimation).map(([k, v]) => (
-                  <div key={k} className="flex justify-between text-xs py-1">
-                    <span className="text-white/50">{k}</span>
-                    <span className="text-[#818cf8] font-semibold">{String(v)}</span>
+                  <div className="space-y-1.5">
+                    {Object.entries(roadmap.plan.investmentEstimation).map(([k, v]) => (
+                      <div key={k} className="flex justify-between text-xs">
+                        <span className="text-neutral-600">{k}</span>
+                        <span className="text-neutral-900 font-semibold">{String(v)}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
+ 
