@@ -36,7 +36,6 @@ const navLinks: NavLink[] = [
     label: "Case Studies",
     hasDropdown: true,
     dropdownItems: [
-      { href: "/case-studies",     label: "Featured Case Studies" },
       { href: "/all-case-studies", label: "All Case Studies" },
     ],
   },
@@ -65,6 +64,10 @@ const navLinks: NavLink[] = [
   {
     href: "/locations",
     label: "Locations",
+    hasDropdown: true,
+    dropdownItems: [
+      { href: "/locations/kansas/wichita", label: "Wichita, KS" },
+    ],
   },
 ];
  
