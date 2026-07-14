@@ -61,9 +61,9 @@ export default function IndexingStats() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/autopilot/indexing/stats', {
-        headers: { Authorization: `Bearer ${key}` },
-      })
+      const res = await fetch('/api/indexing/submit', {
+  headers: { Authorization: `Bearer ${key}` },
+})
       if (res.status === 401) throw new Error('Wrong key')
       if (!res.ok) throw new Error('Failed')
       setData(await res.json())
