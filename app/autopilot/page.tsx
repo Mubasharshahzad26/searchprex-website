@@ -12,6 +12,7 @@ import PendingReview from '@/components/autopilot/PendingReview'
 import IndexingStats from '@/components/autopilot/IndexingStats'
 import AuditStats from '@/components/autopilot/AuditStats'
 import RoadmapWidget from '@/components/autopilot/RoadmapWidget'
+import ReportsWidget from '@/components/autopilot/ReportsWidget'
 
 interface Client {
   id: string
@@ -263,6 +264,7 @@ export default function AutopilotDashboard() {
         <IndexingStats />
         <AuditStats />
         <RoadmapWidget />
+        <ReportsWidget />
       </div>
     </div>
   )
