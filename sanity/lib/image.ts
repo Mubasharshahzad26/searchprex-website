@@ -8,4 +8,3 @@ const builder = createImageUrlBuilder({ projectId, dataset })
 export const urlFor = (source: SanityImageSource) => {
   return builder.image(source)
 }
-c:\Users\New Select Com\Downloads\mubashar-shahzad.jpg
