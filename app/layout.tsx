@@ -7,15 +7,15 @@ import './globals.css'
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-
+ 
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
-
+ 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://searchprex.com'
-
+ 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -51,13 +51,13 @@ export const metadata: Metadata = {
       'en-US': siteUrl,
     },
   },
-  // ⚠️ Under Development - Crawler Blocked Intentionally
+  // ✅ SITE IS LIVE — Indexing ENABLED for Google to crawl and rank
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
     },
   },
   openGraph: {
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   },
   category: 'SEO Services',
 }
-
+ 
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
@@ -99,7 +99,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
 }
-
+ 
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -201,7 +201,7 @@ export default function RootLayout({
       }
     ]
   }
-
+ 
   return (
     <html lang="en" dir="ltr" className={`${inter.variable} bg-background`}>
       <head>
@@ -215,19 +215,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-
+ 
       <body className="font-sans antialiased bg-[#eeeef5]">
         <Nav />
         {children}
         <Footer />
         <CookieConsent />
-
+ 
         {/* ✅ Vercel Analytics - Production Only */}
         {process.env.NODE_ENV === 'production' && <Analytics />}
-
+ 
         {/* ✅ Google Tag Manager */}
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
-
+ 
         {/* ✅ Meta / Facebook Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
@@ -243,7 +243,7 @@ export default function RootLayout({
             fbq('track', 'PageView');
           `}
         </Script>
-
+ 
         {/* ✅ LinkedIn Insight Tag */}
         <Script id="linkedin-insight" strategy="afterInteractive">
           {`
@@ -261,7 +261,7 @@ export default function RootLayout({
             })(window.lintrk);
           `}
         </Script>
-
+ 
         {/* ⏸️ Reddit Pixel - Activate when running Reddit Ads */}
         {/*
         <Script id="reddit-pixel" strategy="afterInteractive">
@@ -277,8 +277,9 @@ export default function RootLayout({
           `}
         </Script>
         */}
-
+ 
       </body>
     </html>
   )
 }
+ 
