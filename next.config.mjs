@@ -38,13 +38,10 @@ const nextConfig = {
         // Applies to every route on the site
         source: '/(.*)',
         headers: [
-          {
-            key: 'X-Robots-Tag',
-            // ⚠️ LAUNCH-CRITICAL: this blocks Google site-wide (noindex).
-            //    REMOVE this entire headers() block when you go live —
-            //    otherwise the site will NEVER appear in search.
-            value: 'noindex, nofollow',
-          },
+          // ✅ SITE IS LIVE — X-Robots-Tag noindex REMOVED so Google can index.
+          //    Individual pages that should NOT be indexed (dashboard, login,
+          //    admin, studio) can set their own `robots: { index: false }` in
+          //    their page-level metadata export.
 
           // ── SECURITY HEADERS ──────────────────────────────────────────
           {
@@ -78,7 +75,7 @@ const nextConfig = {
             // Forces browsers to only ever talk to your site over HTTPS
             // for the next year, even if someone types http:// or an old
             // link points there. Vercel already serves HTTPS, this just
-            // locks it in. (Safe to keep even pre-launch.)
+            // locks it in.
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains',
           },
