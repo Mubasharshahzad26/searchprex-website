@@ -7,6 +7,7 @@ import './globals.css'
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+
  
 const inter = Inter({ 
   subsets: ["latin"],
@@ -14,7 +15,7 @@ const inter = Inter({
   display: "swap",
 });
  
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://searchprex.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https:www.//searchprex.com'
  
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     template: '%s | SearchPrex'
   },
   description: 'SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5", 
   keywords: [
     'SEO agency USA',
     'law firm SEO',
