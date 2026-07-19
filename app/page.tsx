@@ -8,28 +8,24 @@ import TrustBar from "../components/TrustBar";
 import SEOAuditStrip from "../components/SEOAuditStrip";
 import LeadWizard from "../components/LeadWizard";
 import Services from "../components/Services";
-// import WhyUs from "../components/WhyUs";                       // removed — replaced by AdvantageBand
 import AdvantageBand from "../components/AdvantageBand";
-// import PersonaSelector from "../components/PersonaSelector";   // removed from homepage
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
-
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import SolutionsCarousel from "../components/SolutionsCarousel";
+import ReviewsSection from "@/components/ReviewsSection";
+import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";  // ← NEW
+import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";  // ← NEW
 import NicheSEOProPromo from "../components/NicheSEOProPromo";
 import FounderSection from "../components/FounderSection";
-// import Process from "../components/Process";                  // removed from homepage
-// import Pricing from "../components/Pricing";                  // removed from homepage
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
 import BlogTeaser from "../components/BlogTeaser";
-// import CTA from "../components/CTA";                          // "Dominate Your Market 2026" form — removed (no end CTA)
 import ChatWidget from "../components/ChatWidget";
 import Reveal from "@/components/Reveal";
 
  
-// Single source of truth for the canonical origin.
 const SITE = "https://www.searchprex.com";
  
  
@@ -57,6 +53,7 @@ export const metadata: Metadata = {
 };
  
 export default function Home() {
+  
  
   const jsonLd = {
     "@context": "https://schema.org",
@@ -117,7 +114,8 @@ export default function Home() {
         "name": "SEO Agency USA | Law Firm & Ecommerce SEO | SearchPrex",
         "isPartOf": { "@id": `${SITE}/#website` },
         "about": { "@id": `${SITE}/#organization` }
-      }
+      },
+      trustpilotReviewSchema  // ← ADDED
     ]
   };
  
@@ -130,71 +128,30 @@ export default function Home() {
       <Nav />
       <main id="main-content">
  
-        {/* 01 — HERO (above the fold — no reveal) */}
         <Hero />
- 
-        {/* 02 — CLIENT LOGOS */}
         <Reveal><ClientLogos /></Reveal>
- 
-        {/* 03 — TRUST BAR + SEO AUDIT STRIP */}
         <Reveal><TrustBar /></Reveal>
         <SEOAuditStrip />
  
-        {/* 04 — SERVICES (wrapped in aurora gradient) */}
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>
         </AuroraBackground>
  
-        {/* 05 — WHY US / ADVANTAGE (Semrush-style — self-animated, no wrapper) */}
-        {/* WhyUs comparison removed — uncomment to restore
-        <WhyUs />
-        */}
         <AdvantageBand />
- 
-        {/* 06 — LEAD WIZARD (Semrush-style lead capture — self-animated) */}
-<LeadWizard />
- 
-        {/* 07 — RESULTS */}
+        <LeadWizard />
         <Reveal><Results /></Reveal>
- 
-        {/* 08 — VIDEO PROOF (Toptal-style grid + modal) */}
         <Reveal><VideoSection /></Reveal>
- 
-        {/* 09 — FOUNDER */}
         <Reveal><FounderSection /></Reveal>
- 
-        {/* 10 — PROCESS removed from homepage — uncomment to restore
-        <Reveal><Process /></Reveal>
-        */}
- 
-        {/* 11 — AI VISIBILITY (AEO dashboard — self-animated, no wrapper) */}
         <AIVisibilityShowcase />
  
-        {/* 12 — FREE TOOLS (bento — self-animated, no wrapper) */}
         <SolutionsCarousel />
+        <ReviewsSection />
+        <TrustpilotReviewSection />  {/* ← ADDED HERE */}
  
-        {/* 12.5 — NICHESEOPRO SAAS PROMO (self-animated, no wrapper) */}
         <NicheSEOProPromo />
- 
-        {/* 13 — PRICING removed from homepage — uncomment to restore
-        <AuroraBackground variant="light">
-          <Reveal><Pricing /></Reveal>
-        </AuroraBackground>
-        */}
- 
-        {/* 14 — LEAD CAPTURE FORM */}
         <Reveal><LeadCaptureForm /></Reveal>
- 
-        {/* 15 — FAQ */}
         <Reveal><FAQ /></Reveal>
- 
-        {/* 16 — BLOG TEASER (page ends here — no end CTA per request) */}
         <Reveal><BlogTeaser /></Reveal>
- 
-        {/* 17 — FINAL CTA removed (no end CTA). "Dominate Your Market 2026" form
-            lives in components/CTA.tsx — uncomment import + this to restore:
-        <Reveal><CTA /></Reveal>
-        */}
  
       </main>
  
@@ -202,4 +159,3 @@ export default function Home() {
     </>
   );
 }
- 
