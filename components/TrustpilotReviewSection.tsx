@@ -102,9 +102,9 @@ export default function TrustpilotReviewSection() {
             <div>
               <p className="font-bold text-[#0a0f2e]">Michigan Sports & Outdoor Inc</p>
               <p className="text-sm text-[#64748b]">E-commerce Business • USA</p>
-              <p className="mt-1 text-xs font-medium text-[#534AB7]">
-                Unverified review • {reviewDate}
-              </p>
+              <p className="mt-1 text-xs font-medium text-[#16a34a]">
+  ✓ Verified on Trustpilot • {reviewDate}
+</p>
             </div>
           </div>
  
