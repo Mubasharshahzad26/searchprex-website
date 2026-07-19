@@ -14,7 +14,6 @@ import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import SolutionsCarousel from "../components/SolutionsCarousel";
-import ReviewsSection from "@/components/ReviewsSection";
 import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";  // ← NEW
 import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";  // ← NEW
 import NicheSEOProPromo from "../components/NicheSEOProPromo";
@@ -145,7 +144,6 @@ export default function Home() {
         <AIVisibilityShowcase />
  
         <SolutionsCarousel />
-        <ReviewsSection />
         <TrustpilotReviewSection />  {/* ← ADDED HERE */}
  
         <NicheSEOProPromo />
