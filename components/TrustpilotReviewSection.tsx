@@ -79,7 +79,7 @@ export default function TrustpilotReviewSection() {
                 className="h-5 w-5 fill-[#fbbf24] text-[#fbbf24]"
               />
             ))}
-            <span className="ml-2 text-sm font-bold text-[#0a0f2e]">5 out of 5</span>
+         <span className="ml-2 text-sm font-bold text-[#0a0f2e]">3.7 out of 5 (1 verified review)</span>
           </div>
  
           {/* Review Title */}
