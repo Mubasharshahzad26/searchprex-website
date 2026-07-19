@@ -57,15 +57,21 @@ export default function TrustpilotReviewSection() {
           viewport={{ once: true }}
           className="rounded-2xl border-2 border-[#534AB7]/20 bg-[#f9f9ff] p-8 shadow-lg"
         >
-          {/* Trustpilot Badge */}
+          {/* Trustpilot Badge - WITH ACTUAL LOGO */}
           <div className="mb-6 flex items-center gap-3">
             <a
               href={trustpilotUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-[#534AB7]/30 bg-white px-4 py-2 transition-all hover:border-[#534AB7]"
+              className="flex items-center gap-2 rounded-lg border border-[#00A651]/30 bg-white px-4 py-2 transition-all hover:border-[#00A651] hover:shadow-md"
             >
-              <span className="text-lg">⭐</span>
+              <Image 
+                src="/images/588-588560_adding-trustpilot-image-text-logo-on-supply.png" 
+                alt="Trustpilot Verified" 
+                width={24} 
+                height={24}
+                className="object-contain"
+              />
               <span className="text-xs font-bold text-[#0a0f2e]">Verified on Trustpilot</span>
               <ExternalLink className="h-3 w-3 text-[#64748b]" />
             </a>
@@ -79,7 +85,7 @@ export default function TrustpilotReviewSection() {
                 className="h-5 w-5 fill-[#fbbf24] text-[#fbbf24]"
               />
             ))}
-         <span className="ml-2 text-sm font-bold text-[#0a0f2e]">3.7 out of 5 (1 verified review)</span>
+            <span className="ml-2 text-sm font-bold text-[#0a0f2e]">3.7 out of 5 (1 verified review)</span>
           </div>
  
           {/* Review Title */}
@@ -103,8 +109,8 @@ export default function TrustpilotReviewSection() {
               <p className="font-bold text-[#0a0f2e]">Michigan Sports & Outdoor Inc</p>
               <p className="text-sm text-[#64748b]">E-commerce Business • USA</p>
               <p className="mt-1 text-xs font-medium text-[#16a34a]">
-  ✓ Verified on Trustpilot • {reviewDate}
-</p>
+                ✓ Verified on Trustpilot • {reviewDate}
+              </p>
             </div>
           </div>
  
