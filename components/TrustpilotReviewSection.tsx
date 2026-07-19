@@ -2,7 +2,6 @@
  
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
-import Image from "next/image";
  
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -13,6 +12,19 @@ const stagger = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1 } },
 };
+ 
+// Trustpilot Green Checkmark SVG Badge
+const TrustpilotBadge = () => (
+  <div className="flex items-center gap-2 rounded-lg border border-[#00A651]/30 bg-white px-4 py-2 transition-all hover:border-[#00A651] hover:shadow-md">
+    {/* Green Trustpilot Checkmark SVG */}
+    <svg className="h-5 w-5 text-[#00A651]" fill="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" strokeWidth="2" />
+      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor" />
+    </svg>
+    <span className="text-xs font-bold text-[#0a0f2e]">Verified on Trustpilot</span>
+    <ExternalLink className="h-3 w-3 text-[#64748b]" />
+  </div>
+);
  
 export default function TrustpilotReviewSection() {
   const trustpilotUrl = "https://www.trustpilot.com/review/searchprex.com";
@@ -57,23 +69,15 @@ export default function TrustpilotReviewSection() {
           viewport={{ once: true }}
           className="rounded-2xl border-2 border-[#534AB7]/20 bg-[#f9f9ff] p-8 shadow-lg"
         >
-          {/* Trustpilot Badge - WITH ACTUAL LOGO */}
+          {/* Trustpilot Badge - SVG Solution */}
           <div className="mb-6 flex items-center gap-3">
             <a
               href={trustpilotUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-[#00A651]/30 bg-white px-4 py-2 transition-all hover:border-[#00A651] hover:shadow-md"
+              className="inline-block"
             >
-              <Image 
-                src="/images/588-588560_adding-trustpilot-image-text-logo-on-supply.png" 
-                alt="Trustpilot Verified" 
-                width={24} 
-                height={24}
-                className="object-contain"
-              />
-              <span className="text-xs font-bold text-[#0a0f2e]">Verified on Trustpilot</span>
-              <ExternalLink className="h-3 w-3 text-[#64748b]" />
+              <TrustpilotBadge />
             </a>
           </div>
  
