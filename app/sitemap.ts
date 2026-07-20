@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE}/locations/kansas/wichita`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE}/refund`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE}/ai-search`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
   ];
  
   // ── 2. Dynamic case study pages (pulled from your data.ts, so new
@@ -52,4 +53,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
  
   return [...staticRoutes, ...caseStudyRoutes];
 }
+
  
