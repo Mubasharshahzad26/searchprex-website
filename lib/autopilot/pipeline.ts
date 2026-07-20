@@ -39,7 +39,7 @@ export async function runAutopilotBatch(clientId: string) {
 
   const wpConn = client.cmsConnections.find(c => c.cmsType === 'wordpress');
   if (!wpConn) {
-    throw new Error(`No WordPress CMS connection for client ${clientId}`);
+    throw new Error(`No WordPress CMS connection for client ${clientId} — required even for dry run (product data fetch)`);
   }
 
   const wpCreds: WpCreds = {
@@ -100,7 +100,9 @@ export async function runAutopilotBatch(clientId: string) {
           },
         });
 
-        const result = await model.generateContent(
+        // NEW: retry-wrapped Gemini call — handles 503/429 transient errors
+        const result = await generateWithRetry(
+          model,
           buildPrompt({
             productData,
             siteDomain: client.domain,
@@ -247,6 +249,38 @@ export async function runAutopilotBatch(clientId: string) {
 }
 
 // ---------- Helpers ----------
+
+async function generateWithRetry(
+  model: any,
+  prompt: string,
+  maxRetries = 3
+): Promise<any> {
+  let lastErr: any;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await model.generateContent(prompt);
+    } catch (err: any) {
+      lastErr = err;
+      const msg = String(err?.message ?? err);
+      const isRetryable =
+        msg.includes('503') ||
+        msg.includes('429') ||
+        msg.includes('Service Unavailable') ||
+        msg.includes('high demand') ||
+        msg.includes('rate limit');
+
+      if (!isRetryable || attempt === maxRetries) throw err;
+
+      // Exponential backoff: 5s, 15s (Hobby 60s limit — 3 attempts fit)
+      const delayMs = Math.min(5000 * Math.pow(3, attempt - 1), 45000);
+      console.warn(
+        `[gemini-retry] Attempt ${attempt}/${maxRetries} failed: ${msg.slice(0, 80)}. Waiting ${delayMs}ms...`
+      );
+      await new Promise(r => setTimeout(r, delayMs));
+    }
+  }
+  throw lastErr;
+}
 
 function parseGeneratedOutput(raw: string): GeneratedOutput {
   // Strip markdown code fences if present
