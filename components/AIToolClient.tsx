@@ -453,7 +453,7 @@ const TABS: { id: Tab; label: string; sub: string; Icon: React.ElementType }[] =
   { id: "consult", label: "Book Consultation",  sub: "Talk to an expert",       Icon: Calendar },
 ];
  
-export default function AITool() {
+export default function AIToolClient() {
   const [active, setActive] = useState<Tab>("audit");
  
   return (
