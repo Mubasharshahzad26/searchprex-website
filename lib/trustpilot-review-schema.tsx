@@ -1,5 +1,5 @@
 // Schema.org - Real Trustpilot Review Markup
-// This shows Google that the review is verified on Trustpilot
+// This shows Google that the reviews are verified on Trustpilot
 // Add this to your app/page.tsx schemas array
  
 export const trustpilotReviewSchema = {
@@ -27,12 +27,31 @@ export const trustpilotReviewSchema = {
       "datePublished": "2026-07-17",
       "isUnVerifiedClaim": false,
       "url": "https://www.trustpilot.com/review/searchprex.com"
+    },
+    {
+      "@type": "Review",
+      "@id": "https://www.trustpilot.com/review/searchprex.com#review-2",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Orlando Web Pros"
+      },
+      "reviewBody": "Great experience working with Searchprex. Their team is professional, responsive, and knowledgeable about SEO and digital marketing. We've seen solid improvements since partnering with them and would definitely recommend their services to other businesses.",
+      "name": "Great experience working with Searchprex",
+      "datePublished": "2026-04-06",
+      "isUnVerifiedClaim": false,
+      "url": "https://www.trustpilot.com/review/searchprex.com"
     }
   ],
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "ratingCount": 1,
+    "ratingValue": "3.8",
+    "ratingCount": 2,
     "bestRating": "5",
     "worstRating": "1",
     "url": "https://www.trustpilot.com/review/searchprex.com"

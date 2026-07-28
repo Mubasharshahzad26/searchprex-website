@@ -6,7 +6,7 @@ import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const MODEL = 'gemini-2.0-flash';
+const MODEL = 'gemini-flash-latest';
 
 type WpCreds = {
   baseUrl: string;
@@ -100,7 +100,7 @@ export async function runAutopilotBatch(clientId: string) {
           },
         });
 
-        // NEW: retry-wrapped Gemini call — handles 503/429 transient errors
+        // Retry-wrapped Gemini call — handles 503/429 transient errors
         const result = await generateWithRetry(
           model,
           buildPrompt({
@@ -225,10 +225,10 @@ export async function runAutopilotBatch(clientId: string) {
         data: {
           clientId,
           runId: run.id,
-          service: 'gemini-2.5-flash',
+          service: 'gemini-flash-latest',
           pagesProcessed: processed,
-          costPerPage: 0.002,
-          totalCost: processed * 0.002,
+          costPerPage: 0.0035,
+          totalCost: processed * 0.0035,
         },
       });
     }
