@@ -12,6 +12,17 @@ function extractHostname(url: string): string {
   }
 }
 
+// Maps site hostname to the label prefix used in IndexingAccount rows.
+// Allows multiple indexing accounts (rotator) per site, decoupled from GSC service account email.
+function hostToLabelPrefix(hostname: string): string {
+  const map: Record<string, string> = {
+    'michigansportsoutdoor.com': 'Michigan Indexing',
+    'smkstore.com': 'SMK Indexing',
+    '4klivehdiptv.com': '4KLive Indexing',
+  }
+  return map[hostname] ?? ''
+}
+
 async function resetQuotasIfNeeded(accounts: any[]) {
   const now = new Date()
   for (const acc of accounts) {
@@ -50,17 +61,24 @@ async function pickAccountForUrl(url: string) {
     throw new Error(`No GSC connection for hostname: ${hostname}`)
   }
 
-  const parsed = JSON.parse(gsc.serviceAccountJson)
-  const propertyServiceEmail = parsed.client_email
-  if (!propertyServiceEmail) throw new Error('GSC JSON missing client_email')
+  // NEW: pick accounts by label prefix (site-scoped), not by GSC service email.
+  // This supports the pattern where 1 GSC service account reads data,
+  // but multiple separate service accounts (e.g. 5 per site) submit URLs to Indexing API.
+  const labelPrefix = hostToLabelPrefix(hostname)
+  if (!labelPrefix) {
+    throw new Error(`No indexing account label mapping for hostname: ${hostname}`)
+  }
 
   const accounts = await withRetry(() =>
     db.indexingAccount.findMany({
-      where: { active: true, clientEmail: propertyServiceEmail },
+      where: {
+        active: true,
+        label: { startsWith: labelPrefix },
+      },
     })
   )
   if (accounts.length === 0) {
-    throw new Error(`No indexing account for ${propertyServiceEmail}`)
+    throw new Error(`No active indexing accounts with label prefix "${labelPrefix}"`)
   }
 
   await resetQuotasIfNeeded(accounts)
@@ -69,7 +87,7 @@ async function pickAccountForUrl(url: string) {
     .filter((a) => a.usedToday < a.dailyQuota)
     .sort((a, b) => a.usedToday - b.usedToday)
   if (available.length === 0) {
-    throw new Error(`Quota exhausted for ${propertyServiceEmail}`)
+    throw new Error(`Quota exhausted for all "${labelPrefix}" accounts`)
   }
   return available[0]
 }
