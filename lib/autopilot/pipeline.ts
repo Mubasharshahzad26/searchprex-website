@@ -18,6 +18,7 @@ type GeneratedOutput = {
   metaTitle: string;
   metaDescription: string;
   contentHtml: string;
+  faqs: { question: string; answer: string }[];
 };
 
 export async function runAutopilotBatch(clientId: string) {
@@ -100,7 +101,6 @@ export async function runAutopilotBatch(clientId: string) {
           },
         });
 
-        // Retry-wrapped Gemini call — handles 503/429 transient errors
         const result = await generateWithRetry(
           model,
           buildPrompt({
@@ -150,7 +150,7 @@ export async function runAutopilotBatch(clientId: string) {
         const published = await publishToWordPress({
           siteUrl: wpCreds.baseUrl,
           postId: productData.id,
-          content: generated.contentHtml,
+          content: generated.contentHtml + buildFaqSchema(generated.faqs),
           metaTitle: generated.metaTitle,
           metaDescription: generated.metaDescription,
           username: wpCreds.username,
@@ -271,7 +271,6 @@ async function generateWithRetry(
 
       if (!isRetryable || attempt === maxRetries) throw err;
 
-      // Exponential backoff: 5s, 15s (Hobby 60s limit — 3 attempts fit)
       const delayMs = Math.min(5000 * Math.pow(3, attempt - 1), 45000);
       console.warn(
         `[gemini-retry] Attempt ${attempt}/${maxRetries} failed: ${msg.slice(0, 80)}. Waiting ${delayMs}ms...`
@@ -283,7 +282,6 @@ async function generateWithRetry(
 }
 
 function parseGeneratedOutput(raw: string): GeneratedOutput {
-  // Strip markdown code fences if present
   const cleaned = raw
     .replace(/^```json\s*/i, '')
     .replace(/^```\s*/i, '')
@@ -292,11 +290,16 @@ function parseGeneratedOutput(raw: string): GeneratedOutput {
 
   const parsed = JSON.parse(cleaned);
 
-  if (!parsed.metaTitle || !parsed.metaDescription || !parsed.contentHtml) {
+  if (
+    !parsed.metaTitle ||
+    !parsed.metaDescription ||
+    !parsed.contentHtml ||
+    !Array.isArray(parsed.faqs) ||
+    parsed.faqs.length < 2
+  ) {
     throw new Error(`Missing required fields in Gemini output: ${JSON.stringify(Object.keys(parsed))}`);
   }
 
-  // Fluff check on meta fields (Gemini sometimes ignores prompt rules for title/desc)
   const fluffPhrases = [
     'premium', 'pinnacle', 'discerning', 'best-in-class',
     'cutting-edge', 'state-of-the-art', 'top-tier', 'unparalleled',
@@ -312,6 +315,12 @@ function parseGeneratedOutput(raw: string): GeneratedOutput {
     metaTitle: String(parsed.metaTitle).slice(0, 60),
     metaDescription: String(parsed.metaDescription).slice(0, 160),
     contentHtml: String(parsed.contentHtml),
+    faqs: parsed.faqs
+      .filter((f: any) => f?.question && f?.answer)
+      .map((f: any) => ({
+        question: String(f.question).trim(),
+        answer: String(f.answer).trim(),
+      })),
   };
 }
 
@@ -400,9 +409,36 @@ OUTPUT FORMAT — RETURN VALID JSON ONLY:
 {
   "metaTitle": "...",
   "metaDescription": "...",
-  "contentHtml": "<p>...</p><h2>Frequently Asked Questions</h2><h3>Q1?</h3><p>A1</p>..."
+  "contentHtml": "<p>...</p><h2>Frequently Asked Questions</h2><h3>Q1?</h3><p>A1</p>...",
+  "faqs": [
+    { "question": "Question 1 text (no Q: prefix)", "answer": "Plain text answer without HTML" },
+    { "question": "Question 2 text", "answer": "Plain text answer" },
+    { "question": "Question 3 text", "answer": "Plain text answer" }
+  ]
 }
 
 - contentHtml: inner HTML fragment ONLY — no <!DOCTYPE>, <html>, <head>, <body>
+- faqs: MUST match the FAQ questions in contentHtml (same questions, plain text answers, no HTML)
 - No markdown code fences anywhere in the JSON`;
+}
+
+function buildFaqSchema(
+  faqs: { question: string; answer: string }[]
+): string {
+  if (!faqs || faqs.length === 0) return '';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  };
+
+  return `\n<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 }
