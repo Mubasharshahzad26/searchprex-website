@@ -6,7 +6,7 @@ import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const MODEL = 'gemini-flash-latest';
+const MODEL = 'gemini-flash-lite-latest';
 
 type WpCreds = {
   baseUrl: string;
@@ -97,8 +97,10 @@ export async function runAutopilotBatch(clientId: string) {
         const model = gemini.getGenerativeModel({
           model: MODEL,
           generationConfig: {
-            responseMimeType: 'application/json',
-          },
+  responseMimeType: 'application/json',
+  maxOutputTokens: 1500,   // 500-word content + FAQs fit karna chahiye
+  temperature: 0.7,
+},
         });
 
         const result = await generateWithRetry(
