@@ -13,12 +13,25 @@ export async function GET(req: NextRequest) {
   }
   
   const clientId = req.nextUrl.searchParams.get('clientId') ?? MSO_CLIENT_ID;
+  const categoryOverride = req.nextUrl.searchParams.get('category') as
+    | 'comparison'
+    | 'buying-guide'
+    | 'educational'
+    | 'roundup'
+    | null;
+  const dryRun = req.nextUrl.searchParams.get('dryRun') === 'true';
   
   try {
-    const result = await runBlogPipeline(clientId);
-    return NextResponse.json({ success: true, result });
+    const result = await runBlogPipeline(clientId, {
+      categoryOverride: categoryOverride ?? undefined,
+      dryRun,
+    });
+    return NextResponse.json({ success: true, ...result });
   } catch (err) {
     console.error('[blog-cron] Error:', err);
-    return NextResponse.json({ error: (err as Error).message }, { status: 500 });
+    return NextResponse.json({ 
+      error: (err as Error).message,
+      stack: (err as Error).stack?.slice(0, 500),
+    }, { status: 500 });
   }
 }
