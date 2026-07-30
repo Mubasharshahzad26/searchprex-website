@@ -229,8 +229,8 @@ export async function runAutopilotBatch(clientId: string) {
           runId: run.id,
           service: 'gemini-flash-latest',
           pagesProcessed: processed,
-          costPerPage: 0.0035,
-          totalCost: processed * 0.0035,
+          costPerPage: 0.0012,
+          totalCost: processed * 0.0012,
         },
       });
     }
