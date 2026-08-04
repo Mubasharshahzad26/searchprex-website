@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
 import { getVerifiedLinksForSite } from '@/lib/verified-links'
 
@@ -6,7 +6,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
-const MODEL = 'gemini-2.5-flash'
+const MODEL = 'gemini-2.0-flash'
 
 const LAYOUT_TEMPLATES: Record<string, string> = {
   REVIEW: 'Hands-on Review Style: Comparison with competitors, pros/cons list, and detailed performance breakdown.',
@@ -17,7 +17,7 @@ const LAYOUT_TEMPLATES: Record<string, string> = {
   COMPARISON: 'Versus Head-to-Head: Direct comparison between two specific products/brands, highlighting distinct trade-offs.',
   TROUBLESHOOT: "Maintenance & Troubleshooting: Technical 'how-to' focus, solving common pain points with expert precision.",
   STORY: 'Narrative Case Study: Following a specific user through a task, weaving product specs into a real-life outcome.',
-  LUXURY_CRAFT: "Luxury Craftsmanship Journey: Focus on heritage, artisan detail, and the 'soul' of the product—ideal for high-ticket exclusives.",
+  LUXURY_CRAFT: "Luxury Craftsmanship Journey: Focus on heritage, artisan detail, and the 'soul' of the productâ€”ideal for high-ticket exclusives.",
   LAB_REPORT: 'Scientific Material Audit: Lab-testing style breakdown focusing on metallurgy, chemical resistance, and stress-test data.',
   MARKET_WATCH: "Collector's Market Analysis: Trends, rarity, resale value, and investment-grade insights for enthusiasts.",
   MYTH_BUSTER: "Industry Myth-Buster: Taking common misconceptions (e.g., 'more expensive is always better') and debunking them with raw data.",
@@ -76,9 +76,9 @@ const VERTICAL_PROFILES: Record<Vertical, {
       'typical case timeline and client journey',
       'client trust, confidentiality and consultation process',
     ],
-    focus: 'Emphasize practice areas, case types, jurisdiction relevance, attorney credentials and experience, what clients can expect, and consultation CTAs. Build authority and trust — E-E-A-T is critical here.',
+    focus: 'Emphasize practice areas, case types, jurisdiction relevance, attorney credentials and experience, what clients can expect, and consultation CTAs. Build authority and trust â€” E-E-A-T is critical here.',
     schema: 'Use LegalService / Attorney JSON-LD with areaServed and FAQPage.',
-    cautions: 'YMYL — LEGAL: Be accurate and authoritative but NEVER guarantee outcomes, promise specific results, state settlement/verdict amounts as promises, or give individualized legal advice. Use compliant language ("may", "can", "in many cases") and direct readers to consult the firm.',
+    cautions: 'YMYL â€” LEGAL: Be accurate and authoritative but NEVER guarantee outcomes, promise specific results, state settlement/verdict amounts as promises, or give individualized legal advice. Use compliant language ("may", "can", "in many cases") and direct readers to consult the firm.',
   },
   digital: {
     role: 'Digital Product & SaaS SEO Content Strategist',
@@ -170,7 +170,7 @@ function buildPrompt(input: GenInput): string {
   const randomAngle = profile.depthAngles[Math.floor(Math.random() * profile.depthAngles.length)]
   const depthFocus = vertical === 'ecommerce' && categoryMatch
     ? techFocus[categoryMatch]
-    : `${profile.depthLabel} — ${randomAngle}`
+    : `${profile.depthLabel} â€” ${randomAngle}`
 
   const brandsLine = projectData.brands.length > 0
     ? `Brands / entities to reference where relevant: ${projectData.brands.join(', ')}`
@@ -179,7 +179,7 @@ function buildPrompt(input: GenInput): string {
   // Site-aware verified links: hostname se automatically correct pool
   const verifiedLinks = getVerifiedLinksForSite(item)
   const verifiedLinksBlock = verifiedLinks.length > 0
-    ? `VERIFIED INTERNAL LINKS (MANDATORY — use ONLY these URLs for internalLinks, 3-5 most relevant. NEVER invent or guess URLs):
+    ? `VERIFIED INTERNAL LINKS (MANDATORY â€” use ONLY these URLs for internalLinks, 3-5 most relevant. NEVER invent or guess URLs):
     ${verifiedLinks.join('\n    ')}`
     : `INTERNAL LINKS RULE: No verified pool available for this domain. Use ONLY the exact page URL "${item}" itself, or omit internalLinks entirely. NEVER invent, guess, or fabricate URLs.`
 
@@ -195,7 +195,7 @@ function buildPrompt(input: GenInput): string {
     CRITICAL INSTRUCTIONS FOR VARIETY & QUALITY:
     1. LAYOUT TEMPLATE: Apply the logic of "${selectedTemplate}", adapted naturally to a ${vertical} context.
     2. AUTONOMOUS FOCUS KEYWORD: Analyze "${item}" and select the single BEST focus keyword with high search/commercial intent for this vertical. Do not just repeat the input; optimize it for SEO.
-    3. CUSTOM HEADING HIERARCHY: Design a UNIQUE, logical heading hierarchy (H1, 4+ H2s, and specific H3s). No cookie-cutter pattern — every page must feel bespoke.
+    3. CUSTOM HEADING HIERARCHY: Design a UNIQUE, logical heading hierarchy (H1, 4+ H2s, and specific H3s). No cookie-cutter pattern â€” every page must feel bespoke.
     4. INTENT & DEPTH: Address real user intent (problem/solution), specifics, and ${profile.depthLabel}.
     5. E-E-A-T INTEGRATION: Blend in ${activeEeat || 'first-hand expertise and trust signals'} naturally.
     6. SPECIALIST DEPTH: Provide genuine ${profile.depthLabel} focusing on "${depthFocus}", fitting the "${selectedTemplate}" angle.

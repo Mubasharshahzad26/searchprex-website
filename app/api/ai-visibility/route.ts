@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
  
-const MODEL = 'gemini-2.5-flash'
+const MODEL = 'gemini-2.0-flash'
  
 function norm(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim()
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
   const query = `Who are the best ${practiceArea} lawyers or law firms in ${city}? Name the specific firms a potential client should consider.`
  
   try {
-    // ── Call 1: grounded answer (what an AI actually recommends for this query) ──
+    // â”€â”€ Call 1: grounded answer (what an AI actually recommends for this query) â”€â”€
     const g = await ai.models.generateContent({
       model: MODEL,
       contents: [{ parts: [{ text: query }] }],
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
       }
     }
  
-    // ── Firm detection ──
+    // â”€â”€ Firm detection â”€â”€
     const nFirm = norm(firmName)
     const firmMentioned = nFirm.length > 2 && norm(answer).includes(nFirm)
     const dom = website ? domainOf(website) : ''
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
       ? 'in-sources'
       : 'not-visible'
  
-    // ── Call 2: structured analysis (JSON, no grounding) ──
+    // â”€â”€ Call 2: structured analysis (JSON, no grounding) â”€â”€
     let firmsCited: string[] = []
     let whyVisible = ''
     let recommendations: string[] = []

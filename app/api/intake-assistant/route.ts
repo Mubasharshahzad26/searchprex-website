@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
  
-const MODEL = 'gemini-2.5-flash'
+const MODEL = 'gemini-2.0-flash'
  
 type Msg = { role: 'user' | 'assistant'; content: string }
  
@@ -14,26 +14,26 @@ function systemPrompt(firm: string, practiceAreas: string): string {
   const areas = practiceAreas ? ` Its focus areas: ${practiceAreas}.` : ''
   return `You are a warm, professional CLIENT INTAKE ASSISTANT for ${who}.${areas} You are available 24/7. Your job: make a potential client feel heard, gather the key facts the attorney needs to evaluate the matter, and hand off a clean, qualified summary.
  
-A greeting has ALREADY been shown to the person — do NOT greet again or reintroduce yourself. Respond directly to their latest message and continue the intake.
+A greeting has ALREADY been shown to the person â€” do NOT greet again or reintroduce yourself. Respond directly to their latest message and continue the intake.
  
 HOW TO BEHAVE:
 - Be empathetic and human. Ask ONE clear, short question at a time. Never dump a list of questions or interrogate.
-- Over a natural conversation (about 5–8 questions, adapting to answers), gather: what happened (incident type), when it happened (date), injuries sustained, medical treatment received or ongoing, who was at fault and how, any insurance involved, whether a police/incident report exists, whether they have already hired another attorney, and their location (state/city).
+- Over a natural conversation (about 5â€“8 questions, adapting to answers), gather: what happened (incident type), when it happened (date), injuries sustained, medical treatment received or ongoing, who was at fault and how, any insurance involved, whether a police/incident report exists, whether they have already hired another attorney, and their location (state/city).
 - Follow the person's lead and keep it conversational.
  
-HARD RULES (legal safety — never break these):
+HARD RULES (legal safety â€” never break these):
 - You are NOT a lawyer and you do NOT give legal advice, opinions on the law, filing deadlines, or case-value/settlement estimates. If asked, warmly say the attorney will review and advise.
 - Never promise outcomes or guarantees, and never tell the person they "have a case."
-- The viability signal you produce is an INTERNAL screening signal to help the firm prioritize — it is explicitly NOT a legal judgment.
+- The viability signal you produce is an INTERNAL screening signal to help the firm prioritize â€” it is explicitly NOT a legal judgment.
  
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown, no code fences, no text outside the JSON):
+OUTPUT FORMAT â€” respond with ONLY a JSON object (no markdown, no code fences, no text outside the JSON):
 {
-  "reply": "your next message to the person — a single question, or a warm closing message when complete",
+  "reply": "your next message to the person â€” a single question, or a warm closing message when complete",
   "phase": "intake" | "complete",
   "summary": null OR {
     "caseType": "short label, e.g. Auto Accident",
     "incidentDate": "as stated, or 'Not provided'",
-    "overview": "2–3 sentence plain-English summary of what happened and the injuries",
+    "overview": "2â€“3 sentence plain-English summary of what happened and the injuries",
     "keyFacts": ["concise fact", "concise fact"],
     "viability": "qualified" | "needs-review" | "likely-not-viable",
     "viabilityReason": "one sentence screening rationale (not legal advice)",
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
   const apiKey = process.env.GEMINI_API_KEY
   if (!apiKey) return NextResponse.json({ error: 'GEMINI_API_KEY is not configured.' }, { status: 500 })
  
-  // Gemini requires the conversation to start with a user turn — drop any
+  // Gemini requires the conversation to start with a user turn â€” drop any
   // leading assistant (greeting) messages.
   const startIdx = messages.findIndex((m) => m.role === 'user')
   const convo = startIdx >= 0 ? messages.slice(startIdx) : messages

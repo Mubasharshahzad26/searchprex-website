@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
  
-const MODEL = 'gemini-2.5-flash'
+const MODEL = 'gemini-2.0-flash'
  
 export async function POST(req: Request) {
   let body: { website?: string; city?: string; practiceArea?: string }
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   const ai = new GoogleGenAI({ apiKey })
  
   try {
-    // ── Call 1: grounded research across the 5 pillars (googleSearch) ──
+    // â”€â”€ Call 1: grounded research across the 5 pillars (googleSearch) â”€â”€
     const researchPrompt = `You are a senior law-firm SEO auditor. Research the law firm at "${website}" - they practice ${practiceArea} law in ${city}. Use Google Search to investigate their real online presence, and assess each of these five areas with specific findings:
  
 1) Map Pack / Google Business Profile presence and review signals for "${practiceArea} lawyer ${city}".
@@ -46,7 +46,7 @@ Also identify the firm's real name. Write a concise, specific assessment of each
     })
     const research = (g.text || '').trim()
  
-    // ── Call 2: structured scorecard JSON (no grounding — JSON mode) ──
+    // â”€â”€ Call 2: structured scorecard JSON (no grounding â€” JSON mode) â”€â”€
     const jsonPrompt = `Based on this research assessment of a ${practiceArea} law firm in ${city} (website ${website}):
  
 ${research}
