@@ -10,14 +10,13 @@ export type BlogTopic = {
   topic: string;
   category: BlogTopicCategory;
   keywords: string[];
-  contextProducts: string[]; // Product URLs referenced in the topic (for internal linking)
+  contextProducts: string[];
 };
 
-// Weekly schedule — day of week (0=Sun, 1=Mon, ..., 6=Sat) → category
 export const WEEKLY_SCHEDULE: Record<number, BlogTopicCategory> = {
-  1: 'comparison',    // Monday
-  3: 'buying-guide',  // Wednesday
-  5: 'educational',   // Friday
+  1: 'comparison',
+  3: 'buying-guide',
+  5: 'educational',
 };
 
 const CATEGORY_PROMPT_HINTS: Record<BlogTopicCategory, string> = {
@@ -39,27 +38,42 @@ Focus on 4-6 recent additions to catalog. Buyer intent: browsing.`,
 };
 
 /**
- * Fetches 20 diverse products from the client's IndexingQueue for grounding.
- * These are used as context so Gemini generates topics tied to real inventory.
+ * Fetches RANDOM 20 products from the client's IndexingQueue for grounding.
+ * Random selection ensures topic variety across runs.
  */
 async function fetchProductContext(clientId: string): Promise<string[]> {
-  const products = await db.indexingQueue.findMany({
-    where: {
-      clientId,
-      url: { contains: '/product/' },
-      status: { in: ['submitted', 'queued'] },
-    },
-    take: 20,
-    orderBy: { createdAt: 'desc' },
-    select: { url: true },
-  });
+  const products = await db.$queryRaw<Array<{ url: string }>>`
+    SELECT url FROM "IndexingQueue"
+    WHERE "clientId" = ${clientId}
+      AND url LIKE '%/product/%'
+      AND status IN ('submitted', 'queued', 'published_not_submitted')
+    ORDER BY RANDOM()
+    LIMIT 20
+  `;
   return products.map(p => p.url);
 }
 
 /**
- * Extracts a product name from a URL slug (crude but works for context).
- * e.g. https://www.michigansportsoutdoor.com/product/microtech-msi-mini-ram/ → "microtech msi mini ram"
+ * Fetches topics from the last 30 days to exclude from new generation.
+ * Prevents duplicate topics like "Mag Lite comparison" being generated repeatedly.
  */
+async function getRecentTopics(clientId: string): Promise<string[]> {
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  const recent = await db.blogPost.findMany({
+    where: {
+      clientId,
+      createdAt: { gte: thirtyDaysAgo },
+      status: { in: ['published', 'dry_run', 'generating'] },
+    },
+    select: { topic: true },
+    orderBy: { createdAt: 'desc' },
+    take: 30,
+  });
+  return recent
+    .map(r => r.topic)
+    .filter(t => t && t !== '(generating...)');
+}
+
 function urlToProductName(url: string): string {
   const match = url.match(/\/product\/([^/]+)\/?$/);
   if (!match) return '';
@@ -68,7 +82,8 @@ function urlToProductName(url: string): string {
 
 function buildTopicPrompt(
   category: BlogTopicCategory,
-  productUrls: string[]
+  productUrls: string[],
+  recentTopics: string[]
 ): string {
   const productList = productUrls
     .slice(0, 15)
@@ -76,6 +91,14 @@ function buildTopicPrompt(
     .join('\n');
 
   const hint = CATEGORY_PROMPT_HINTS[category];
+
+  const exclusionSection = recentTopics.length > 0
+    ? `\nRECENT TOPICS TO AVOID (do NOT generate anything similar to these — user has seen these already):
+${recentTopics.map((t, i) => `${i + 1}. ${t}`).join('\n')}
+
+CRITICAL: Your new topic must cover DIFFERENT products, DIFFERENT product categories, or a DIFFERENT angle than every topic listed above.
+`
+    : '';
 
   return `You are a senior SEO strategist for Michigan Sports Outdoor (michigansportsoutdoor.com), a knife and outdoor gear retailer based in Michigan.
 
@@ -86,13 +109,15 @@ ${hint}
 
 REAL PRODUCTS AVAILABLE ON THE SITE (use for grounding — do not invent products):
 ${productList}
-
+${exclusionSection}
 TASK: Generate ONE specific, SEO-optimized blog topic that:
 1. Fits the ${category} category exactly
 2. References 2-5 REAL products from the list above (use product URLs verbatim)
-3. Targets realistic search intent for knife/outdoor buyers
-4. Avoids marketing fluff (no "ultimate", "premium", "best-in-class" phrasing)
-5. Has a clear buyer question or need at its core
+3. Uses products from AT LEAST 2 DIFFERENT product categories or brands (avoid picking multiple items from same product line — e.g. don't pick 3 Mag Lite variants)
+4. Targets realistic search intent for knife/outdoor buyers
+5. Is DIFFERENT from all recent topics listed above (if any)
+6. Avoids marketing fluff (no "ultimate", "premium", "best-in-class" phrasing)
+7. Has a clear buyer question or need at its core
 
 OUTPUT — RETURN VALID JSON ONLY (no code fences, no preamble):
 {
@@ -103,17 +128,18 @@ OUTPUT — RETURN VALID JSON ONLY (no code fences, no preamble):
 
 - topic: Real user-focused title, not clickbait
 - keywords: SEO-relevant, no branded/marketing fluff
-- contextProducts: Real URLs copied EXACTLY from the list above (2-5 URLs)`;
+- contextProducts: Real URLs copied EXACTLY from the list above (2-5 URLs, from DIFFERENT brands/categories where possible)`;
 }
 
-/**
- * Generates a blog topic for the given category using Gemini + real product context.
- */
 export async function generateBlogTopic(
   clientId: string,
   category: BlogTopicCategory
 ): Promise<BlogTopic> {
-  const productUrls = await fetchProductContext(clientId);
+  const [productUrls, recentTopics] = await Promise.all([
+    fetchProductContext(clientId),
+    getRecentTopics(clientId),
+  ]);
+
   if (productUrls.length === 0) {
     throw new Error(`No products in IndexingQueue for client ${clientId} — cannot generate topic`);
   }
@@ -123,11 +149,11 @@ export async function generateBlogTopic(
     generationConfig: {
       responseMimeType: 'application/json',
       maxOutputTokens: 500,
-      temperature: 0.8, // Slightly higher for creativity in topics
+      temperature: 0.9, // Higher creativity for topic diversity
     },
   });
 
-  const prompt = buildTopicPrompt(category, productUrls);
+  const prompt = buildTopicPrompt(category, productUrls, recentTopics);
   const result = await model.generateContent(prompt);
   const raw = result.response.text();
 
