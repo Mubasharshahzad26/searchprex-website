@@ -15,7 +15,7 @@ const inter = Inter({
   display: "swap",
 });
  
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https:www.//searchprex.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.searchprex.com'
  
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     template: '%s | SearchPrex'
   },
   description: 'SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5", 
   keywords: [
     'SEO agency USA',
     'law firm SEO',
@@ -85,10 +84,26 @@ export const metadata: Metadata = {
     images: [`${siteUrl}/og-image.jpg`],
     creator: '@searchprex',
   },
-  verification: {
-    google: 'your-google-verification-code', // ← Launch ke time GSC code daalna
-  },
+  // Only emitted when the env var is set — a placeholder value would publish a
+  // meta tag that fails verification in Search Console.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
   category: 'SEO Services',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-icon-180x180.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'mask-icon', url: '/icon.svg', color: '#000000' },
+    ],
+  },
 }
  
 export const viewport: Viewport = {
@@ -98,7 +113,7 @@ export const viewport: Viewport = {
   ],
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
+  // No maximumScale: capping zoom fails WCAG 1.4.4 (Resize Text).
   userScalable: true,
 }
  

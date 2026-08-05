@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80">
+  <g transform="translate(6,10)">
+    <path d="M31 4 L55 16 H7 Z" fill="#ffffff"></path>
+    <polygon points="31,7 32.5,10.4 36.2,10.7 33.4,13 34.3,16.6 31,14.7 27.7,16.6 28.6,13 25.8,10.7 29.5,10.4" fill="#5ae0af"></polygon>
+    <rect x="5" y="16" width="52" height="5" fill="#ffffff"></rect>
+    <rect x="9" y="21" width="7" height="26" fill="#ffffff"></rect>
+    <rect x="20" y="21" width="7" height="26" fill="#ffffff"></rect>
+    <rect x="31" y="21" width="7" height="26" fill="#ffffff"></rect>
+    <rect x="42" y="21" width="7" height="26" fill="#ffffff"></rect>
+    <rect x="5" y="47" width="52" height="3" fill="#ffffff"></rect>
+    <rect x="5" y="52" width="52" height="2" fill="#5ae0af"></rect>
+    <rect x="5" y="56" width="52" height="2" fill="#ffffff"></rect>
+  </g>
+  <text x="86" y="55" font-family="Inter, ui-sans-serif, system-ui, -apple-system, sans-serif" font-weight="800" font-size="46" letter-spacing="-1.6" fill="#ffffff">Searchprex</text>
+</svg>
