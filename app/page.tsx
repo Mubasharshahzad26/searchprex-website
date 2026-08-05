@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPageSEO } from "@/lib/admin-seo";
+// import { getPageSEO } from "@/lib/admin-seo";
 // Homepage section components (root /components folder)
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
@@ -48,7 +48,7 @@ const baseMetadata: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageSEO("/", baseMetadata);
+  return baseMetadata;
 }
 
 export default async function Home() {
