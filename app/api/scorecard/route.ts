@@ -5,7 +5,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
  
-const MODEL = 'gemini-2.5-flash-lite'
+const MODEL = 'gemini-3.6-flash'
  
 export async function POST(req: Request) {
   let body: { website?: string; city?: string; practiceArea?: string }

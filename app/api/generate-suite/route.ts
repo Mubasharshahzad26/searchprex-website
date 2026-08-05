@@ -6,7 +6,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
-const MODEL = 'gemini-2.5-flash-lite'
+const MODEL = 'gemini-3.6-flash'
 
 const LAYOUT_TEMPLATES: Record<string, string> = {
   REVIEW: 'Hands-on Review Style: Comparison with competitors, pros/cons list, and detailed performance breakdown.',

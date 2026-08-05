@@ -5,7 +5,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
  
-const MODEL = 'gemini-2.5-flash-lite'
+const MODEL = 'gemini-3.6-flash'
  
 type Vertical = 'lawfirm' | 'ecommerce' | 'local' | 'general'
  
