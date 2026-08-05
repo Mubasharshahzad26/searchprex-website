@@ -1,3 +1,4 @@
+// Rotator v2 - label-prefix filter | deploy verify 2026-08-05
 import { google } from 'googleapis'
 import { GoogleAuth } from 'google-auth-library'
 import { db } from './db'
