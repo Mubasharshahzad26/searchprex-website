@@ -44,7 +44,19 @@ const KD_FILTERS = [
   { key: 'vhard', label: '85–100 Very Hard', min: 85, max: 100 },
 ] as const
  
-export default function KeywordTool({ initial }: { initial: KeywordResponse }) {
+/**
+ * `headingLevel` exists because this widget is mounted in two different roles.
+ * On /nicheseopro it IS the page, so its title is the h1. On /tool it is one
+ * section of a larger page that already has an h1, and a second h1 there gives
+ * the page two competing titles. Defaults to the embedded case.
+ */
+export default function KeywordTool({
+  initial,
+  headingLevel: Heading = 'h2',
+}: {
+  initial: KeywordResponse
+  headingLevel?: 'h1' | 'h2'
+}) {
   const [data, setData] = useState<KeywordResponse>(initial)
   const [seed, setSeed] = useState(initial.seed)
   const [country, setCountry] = useState(COUNTRIES[0])
@@ -132,7 +144,7 @@ export default function KeywordTool({ initial }: { initial: KeywordResponse }) {
       {/* Page heading */}
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold tracking-tight">Keyword Magic Tool</h1>
+          <Heading className="text-xl font-bold tracking-tight">Keyword Magic Tool</Heading>
           <span className="rounded bg-primary/10 px-2 py-0.5 text-[11px] font-bold text-primary">
             SEO
           </span>

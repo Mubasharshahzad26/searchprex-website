@@ -10,7 +10,8 @@ export default async function Page() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-20">
         <div className="max-w-7xl mx-auto">
-          <KeywordTool initial={initial} />
+          {/* The tool is the whole page here, so its title is the page's h1. */}
+          <KeywordTool initial={initial} headingLevel="h1" />
         </div>
       </div>
     )

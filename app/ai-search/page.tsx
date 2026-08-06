@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import AIToolClient from "./AIToolClient";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/ai-search";
 const OG_IMAGE = "https://www.searchprex.com/og/ai-search.jpg";
  
-export const metadata: Metadata = {
-  title: "Free AI SEO Audit Tool | Instant Website Analysis for US Businesses | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Free AI SEO Audit Tool | Instant Website Analysis for US Businesses",
   description:
     "Free AI-powered SEO audit tool for US businesses. Get an instant website analysis, a personalized 90-day SEO roadmap, or book a free consultation — no login, no credit card, results in seconds.",
   keywords: [
@@ -63,6 +64,12 @@ export const metadata: Metadata = {
     "geo.placename": "United States",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/ai-search", baseMetadata);
+}
  
 export default function AISearchPage() {
   const jsonLd = {

@@ -1,23 +1,36 @@
 "use client";
- // app/tools/ToolsClient.tsx
-// Tools page UI. Improvements over the old version:
-// 1. Cards sorted live → pro → soon (dead cards no longer sit mid-grid)
-// 2. Stats reframed (no more "1 live now" underselling)
-// 3. Founder E-E-A-T strip with case-study link
-// 4. Mid-page audit CTA — converts tool users (hot leads) into audits
-// 5. FAQ (matches FAQPage schema in page.tsx) + floating Reality Check CTA
- 
+
+// app/tools/ToolsClient.tsx
+// Tools page UI, assembled from components/layout primitives.
+//
+// Card order is live → pro → soon so dead cards don't sit mid-grid, the stats
+// read as strengths rather than "1 live now", and the mid-page audit CTA
+// converts tool users (hot leads) into audits.
+//
+// The per-tool accent colours below are categorical — they identify a tool at a
+// glance, the way a chart palette identifies a series. They never appear on
+// headings, links or buttons, which all come from the design tokens.
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Code2, Search, FileText, Bot, TrendingUp, CheckCircle, ArrowRight,
-  Sparkles, Zap, Lock, Linkedin, BadgeCheck, BarChart3, ChevronDown,
+  Sparkles, Zap, Lock, BarChart3, Target,
 } from "lucide-react";
- 
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
-const PURPLE = "#534AB7";
- 
+
+import {
+  AuthorCard,
+  Breadcrumb,
+  CtaButton,
+  FaqList,
+  PageHero,
+  Section,
+  SectionHeading,
+  Accent,
+  type Faq,
+} from "@/components/layout";
+import { color, heading, radius, text } from "@/lib/design-tokens";
+
 const tools = [
   {
     id: "schema-generator",
@@ -31,6 +44,19 @@ const tools = [
     status: "live",
     href: "/tools/schema-generator",
     stats: "6 schema types",
+  },
+  {
+    id: "serp-checker",
+    icon: Target,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    label: "SERP Checker",
+    desc: "Check where your site ranks on Google for any keyword — and see exactly who's ranking above you.",
+    tags: ["Rank Tracking", "SERP Analysis", "Competitors"],
+    status: "live",
+    href: "/tools/serp-checker",
+    stats: "Up to 5 keywords",
   },
   {
     id: "content-generator",
@@ -98,249 +124,279 @@ const tools = [
     stats: "Any keyword",
   },
 ];
- 
-// Reframed: leads with strengths instead of "1 live now"
+
 const stats = [
   { num: "100%", label: "Free to use" },
   { num: "0", label: "Signup required" },
   { num: "Daily", label: "Used on client work" },
   { num: "GSC", label: "Verified workflows" },
 ];
- 
-type Faq = { q: string; a: string };
- 
+
+const proFeatures = [
+  "Bulk schema for 1,000+ pages",
+  "AI content rewriting at scale",
+  "GSC + Indexing API automation",
+  "White-label SEO reports",
+];
+
 export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
   return (
-    <main className="bg-transparent min-h-screen">
- 
-      {/* ── Hero ── */}
-      <section className="bg-[#eeeef5] pt-28 pb-16 relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
- 
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 mb-6">
-            <Link href="/" className="text-[#64748b] text-sm hover:text-[#0a0f2e] transition-colors">Home</Link>
-            <span className="text-[#94a3b8]">›</span>
-            <span className="text-[#534AB7] text-sm font-semibold">Free SEO Tools</span>
-          </div>
- 
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-[#EEEDFE] border border-[#534AB7]/30 rounded-full px-4 py-2 mb-5">
-                <Zap className="h-3.5 w-3.5 text-[#534AB7]" />
-                <span className="text-xs font-bold text-[#534AB7] uppercase tracking-widest">Free SEO Toolkit</span>
+    <main>
+      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Free SEO Tools" }]} />
+
+      <PageHero
+        compactTop
+        eyebrow="Free SEO Toolkit"
+        title={<>Free SEO Tools <br /><Accent>Built for Practitioners</Accent></>}
+        subtitle="No signup. No paywalls. Just fast, accurate SEO tools built by an analyst who uses them daily. Schema generators, SERP simulators, meta analyzers — all free."
+        aside={<HeroStats />}
+      />
+
+      {/* ── TOOLS GRID (live → pro → soon) ── */}
+      <Section tone="surface">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {tools.map((tool, i) => (
+            <motion.div
+              key={tool.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              className="relative"
+            >
+              <div className="absolute right-4 top-4 z-10">
+                <StatusBadge status={tool.status} />
               </div>
-              <h1 className="text-4xl sm:text-5xl font-black text-[#0a0f2e] mb-4 leading-tight">
-                Free SEO Tools <br />
-                <span className="text-[#534AB7]">Built for Practitioners</span>
-              </h1>
-              <p className="text-[#64748b] text-lg max-w-2xl leading-relaxed">
-                No signup. No paywalls. Just fast, accurate SEO tools built by an analyst who uses them daily. Schema generators, SERP simulators, meta analyzers — all free.
-              </p>
-            </div>
- 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-3 flex-shrink-0">
-              {stats.map((stat) => (
-                <div key={stat.label} className="bg-white border border-[#e5e7eb] rounded-xl px-5 py-4 text-center shadow-sm">
-                  <p className="text-2xl font-black text-[#0a0f2e]">{stat.num}</p>
-                  <p className="text-[#64748b] text-xs mt-1">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
- 
-      {/* ── Tools Grid (sorted: live → pro → soon) ── */}
-      <section className="py-16 bg-[#eeeef5]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tools.map((tool, i) => (
-              <motion.div
-                key={tool.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className="relative"
+
+              <div
+                className={`flex h-full flex-col overflow-hidden ${radius.card} border bg-white transition-all duration-200 ${
+                  tool.status === "soon"
+                    ? "opacity-70"
+                    : "hover:-translate-y-1 hover:shadow-lg"
+                }`}
+                style={{
+                  borderColor: tool.status === "soon" ? color.border : `${color.primary}4d`,
+                }}
               >
-                {/* Status badge */}
-                <div className="absolute top-4 right-4 z-10">
-                  {tool.status === "live" && (
-                    <span className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Live
+                <div className="h-1 w-full" style={{ background: tool.accentColor }} aria-hidden />
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-4 flex items-start justify-between">
+                    <span
+                      className={`flex h-12 w-12 items-center justify-center ${radius.chip}`}
+                      style={{ background: tool.iconBg }}
+                    >
+                      <tool.icon className="h-5 w-5" style={{ color: tool.iconColor }} aria-hidden />
                     </span>
-                  )}
-                  {tool.status === "soon" && (
-                    <span className="bg-[#f1f5f9] border border-[#e5e7eb] text-[#64748b] text-[10px] font-bold px-2.5 py-1 rounded-full">
-                      Coming Soon
+                    <span
+                      className="rounded-full border px-2.5 py-1 text-[10px] font-semibold"
+                      style={{ background: tool.iconBg, borderColor: tool.iconBg, color: tool.iconColor }}
+                    >
+                      {tool.stats}
                     </span>
-                  )}
-                  {tool.status === "pro" && (
-                    <span className="flex items-center gap-1 bg-[#EEEDFE] border border-[#AFA9EC] text-[#534AB7] text-[10px] font-bold px-2.5 py-1 rounded-full">
-                      <Lock className="h-2.5 w-2.5" />
-                      Pro
-                    </span>
-                  )}
-                </div>
- 
-                {/* Card */}
-                <div className={`bg-white rounded-2xl border overflow-hidden flex flex-col h-full transition-all duration-200
-                    ${tool.status === "live"
-                      ? "border-[#534AB7]/30 hover:border-[#534AB7] hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-                      : tool.status === "pro"
-                      ? "border-[#534AB7]/30 hover:border-[#534AB7] hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-                      : "border-[#e5e7eb] opacity-70"
-                    }`}
-                >
-                  <div className="h-1 w-full" style={{ background: tool.accentColor }} />
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="h-12 w-12 rounded-xl flex items-center justify-center" style={{ background: tool.iconBg }}>
-                        <tool.icon className="h-5 w-5" style={{ color: tool.iconColor }} />
-                      </div>
-                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full border"
-                        style={{ background: tool.iconBg, borderColor: tool.iconBg, color: tool.iconColor }}>
-                        {tool.stats}
-                      </span>
-                    </div>
-                    <h2 className="text-base font-black text-[#0a0f2e] mb-2 pr-16">{tool.label}</h2>
-                    <p className="text-sm text-[#64748b] leading-relaxed mb-4 flex-1">{tool.desc}</p>
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {tool.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] font-medium bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-md">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    {tool.status === "live" ? (
-                      <Link href={tool.href} className="flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3d35a0] text-white font-bold py-3 rounded-xl transition-colors text-sm">
-                        Use Tool Free <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    ) : tool.status === "pro" ? (
-                      <Link href={tool.href} className="flex items-center justify-center gap-2 bg-[#EEEDFE] hover:bg-[#534AB7] text-[#534AB7] hover:text-white font-bold py-3 rounded-xl transition-colors text-sm border border-[#AFA9EC]">
-                        <Sparkles className="h-4 w-4" /> Get NicheSEO Pro
-                      </Link>
-                    ) : (
-                      <div className="flex items-center justify-center gap-2 bg-[#f8f9fc] text-[#94a3b8] font-bold py-3 rounded-xl text-sm border border-[#e5e7eb] cursor-not-allowed">
-                        Coming Soon
-                      </div>
-                    )}
                   </div>
+
+                  <h2 className={`${heading.h4} mb-2 pr-16`} style={{ color: color.ink }}>
+                    {tool.label}
+                  </h2>
+                  <p className={`${text.small} mb-4 flex-1`} style={{ color: color.muted }}>
+                    {tool.desc}
+                  </p>
+
+                  <ul className="mb-5 flex flex-wrap gap-1.5">
+                    {tool.tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className={`${radius.chip} border px-2.5 py-1 text-[10px] font-medium`}
+                        style={{ background: color.surface, borderColor: color.border, color: color.muted }}
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <ToolAction status={tool.status} href={tool.href} />
                 </div>
-              </motion.div>
-            ))}
-          </div>
- 
-          {/* ── Mid CTA — converts tool users into audit leads (CRO) ── */}
-          <div className="mt-12 flex flex-col items-center gap-3 rounded-2xl border border-[#e5e7eb] bg-white p-8 text-center">
-            <p className="text-xl font-black text-[#0a0f2e]">Tools find the problem. The audit fixes it.</p>
-            <p className="max-w-xl text-sm text-[#64748b]">
-              If a tool just surfaced an issue on your site, get the founder to review the whole picture —
-              free, with a 90-day roadmap, within 24 hours.
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Mid-page CTA — tool users are hot leads. */}
+        <div
+          className={`mt-12 flex flex-col items-center gap-3 ${radius.card} border bg-white p-8 text-center`}
+          style={{ borderColor: color.border }}
+        >
+          <p className={heading.h3} style={{ color: color.ink }}>
+            Tools find the problem. The audit fixes it.
+          </p>
+          <p className={`${text.small} max-w-xl`} style={{ color: color.muted }}>
+            If a tool just surfaced an issue on your site, get the founder to review the whole
+            picture — free, with a 90-day roadmap, within 24 hours.
+          </p>
+          <CtaButton
+            href="/free-audit"
+            className="mt-2"
+            icon={<ArrowRight className="h-4 w-4" aria-hidden />}
+          >
+            <BarChart3 className="h-4 w-4" aria-hidden /> Get Free SEO Audit
+          </CtaButton>
+        </div>
+      </Section>
+
+      {/* ── FOUNDER E-E-A-T ── */}
+      <Section tone="surface" width="narrow" tight>
+        <AuthorCard
+          name="Mubashar Shahzad"
+          role="Founder & Lead SEO Strategist · 5+ years"
+          quote="These are the same utilities I use on real client projects — the ones behind the verified case studies on this site. Nothing here is a lead-capture gimmick."
+          imageSrc="/images/mubashar-shahzad.jpg"
+          imageAlt="Mubashar Shahzad — Founder & Lead SEO Strategist"
+          linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+          badges={["Semrush certified", "HubSpot certified"]}
+        />
+      </Section>
+
+      {/* ── FAQ ── */}
+      <Section tone="surface" width="reading">
+        <SectionHeading variant="center" eyebrow="FAQ" title="Quick Answers" />
+        <FaqList faqs={faqs} name="tools-faq" />
+      </Section>
+
+      {/* ── NICHESEO PRO ── */}
+      <Section bordered={false}>
+        <div
+          className={`${radius.card} px-8 py-10 lg:flex lg:items-center lg:justify-between lg:gap-8`}
+          style={{ background: color.ink }}
+        >
+          <div className="text-center lg:text-left">
+            <span
+              className={`${heading.eyebrow} mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-2`}
+              style={{ borderColor: `${color.primary}66`, color: "#A79FED" }}
+            >
+              <Sparkles className="h-3.5 w-3.5" aria-hidden /> NicheSEO Pro
+            </span>
+            <h2 className={`${heading.h2} mb-3 text-white`}>Need these tools at scale?</h2>
+            <p className={`${text.lead} max-w-xl text-white/60`}>
+              NicheSEO Pro automates everything — bulk schema generation, content rewriting, GSC
+              integration, and indexing API — for 10,000+ pages at once.
             </p>
-            <Link href="/free-audit"
-              className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-              style={{ background: GREEN }}>
-              <BarChart3 className="h-4 w-4" /> Get Free SEO Audit
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
           </div>
-        </div>
-      </section>
- 
-      {/* ── Founder E-E-A-T strip ── */}
-      <section className="pb-16 bg-[#eeeef5]">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-5 rounded-2xl border border-[#e5e7eb] bg-white p-7 text-center md:flex-row md:text-left">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full text-xl font-black text-white"
-              style={{ background: `linear-gradient(135deg, ${PURPLE}, ${GREEN})` }}>MS</div>
-            <div className="flex-1">
-              <div className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
-                <p className="font-black text-[#0a0f2e]">Built by Mubashar Shahzad — the analyst behind +476% organic growth</p>
-                <a href="https://www.linkedin.com/in/mubashar-shahzad-seo/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold transition-all hover:scale-105"
-                  style={{ borderColor: "#0a66c2", color: "#0a66c2" }}>
-                  <Linkedin className="h-3.5 w-3.5" /> LinkedIn
-                </a>
-              </div>
-              <p className="mt-1.5 text-sm text-[#64748b]">
-                These are the same utilities used on real client projects — see the{" "}
-                <Link href="/all-case-studies" className="font-bold underline-offset-2 hover:underline" style={{ color: GREEN_DARK }}>
-                  verified case studies
-                </Link>{" "}
-                they helped produce.
+
+          <div className="mt-8 w-full shrink-0 space-y-3 lg:mt-0 lg:w-auto">
+            {proFeatures.map((f) => (
+              <p key={f} className={`flex items-center gap-2 ${text.small} text-white/70`}>
+                <CheckCircle className="h-4 w-4 shrink-0" style={{ color: color.success }} aria-hidden />
+                {f}
               </p>
-              <div className="mt-2.5 flex flex-wrap justify-center gap-2 md:justify-start">
-                <span className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold"
-                  style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
-                  <BadgeCheck className="h-3.5 w-3.5" /> Verified SEO Expert
-                </span>
-                <span className="rounded-lg border border-[#e2e8f0] px-2.5 py-1 text-xs font-semibold text-[#475569]">Semrush certified</span>
-                <span className="rounded-lg border border-[#e2e8f0] px-2.5 py-1 text-xs font-semibold text-[#475569]">HubSpot certified</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
- 
-      {/* ── FAQ (matches FAQPage schema) ── */}
-      <section className="pb-16 bg-[#eeeef5]">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-center text-2xl font-black text-[#0a0f2e]">Quick Answers</h2>
-          <div className="space-y-3">
-            {faqs.map((f) => (
-              <details key={f.q} className="group rounded-2xl border border-[#e5e7eb] bg-white p-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-[#0a0f2e]">
-                  {f.q}
-                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-[#64748b] transition-transform group-open:rotate-180" />
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{f.a}</p>
-              </details>
             ))}
+            <CtaButton
+              href="/nicheseopro"
+              className="mt-4 w-full justify-center lg:w-auto"
+              icon={<ArrowRight className="h-4 w-4" aria-hidden />}
+            >
+              <Sparkles className="h-4 w-4" aria-hidden /> Try NicheSEO Pro Free
+            </CtaButton>
           </div>
         </div>
-      </section>
- 
-      {/* ── NicheSEO Pro Banner ── */}
-      <section className="py-16 bg-[#eeeef5] border-t border-[#e5e7eb]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#0a0f2e] rounded-2xl px-8 py-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-[#EEEDFE]/20 border border-[#534AB7]/40 rounded-full px-4 py-2 mb-4">
-                <Sparkles className="h-3.5 w-3.5 text-[#534AB7]" />
-                <span className="text-xs font-bold text-[#534AB7] uppercase tracking-widest">NicheSEO Pro</span>
-              </div>
-              <h2 className="text-3xl font-black text-white mb-3">Need these tools at scale?</h2>
-              <p className="text-blue-200 text-lg max-w-xl">
-                NicheSEO Pro automates everything — bulk schema generation, content rewriting, GSC integration, and indexing API — for 10,000+ pages at once.
-              </p>
-            </div>
-            <div className="flex-shrink-0 space-y-3 w-full lg:w-auto">
-              {["Bulk schema for 1,000+ pages", "AI content rewriting at scale", "GSC + Indexing API automation", "White-label SEO reports"].map((f) => (
-                <div key={f} className="flex items-center gap-2 text-sm text-blue-200">
-                  <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
-                  {f}
-                </div>
-              ))}
-              <Link href="/nicheseopro" className="flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3d35a0] text-white font-bold px-8 py-4 rounded-xl transition-colors text-sm mt-4 w-full lg:w-auto">
-                <Sparkles className="h-4 w-4" />
-                Try NicheSEO Pro Free
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
- 
-      {/* ── Floating CTA ── */}
-      <Link href="/free-audit"
-        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
-        style={{ background: GREEN }}>
-        <BarChart3 className="h-4 w-4" /> Reality Check
+      </Section>
+
+      {/* ── FLOATING CTA ── */}
+      <Link
+        href="/free-audit"
+        className={`fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 ${text.small} font-semibold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5`}
+        style={{ background: color.primary }}
+      >
+        <BarChart3 className="h-4 w-4" aria-hidden /> Reality Check
       </Link>
- 
     </main>
+  );
+}
+
+/* ─── Pieces ─── */
+
+function HeroStats() {
+  return (
+    <dl className="grid grid-cols-2 gap-3">
+      {stats.map((stat) => (
+        <div
+          key={stat.label}
+          className={`${radius.control} border bg-white px-5 py-4 text-center shadow-sm`}
+          style={{ borderColor: color.border }}
+        >
+          <dd className="text-2xl font-bold" style={{ color: color.ink }}>{stat.num}</dd>
+          <dt className={`${text.caption} mt-1`} style={{ color: color.muted }}>{stat.label}</dt>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function StatusBadge({ status }: { status: string }) {
+  if (status === "live") {
+    return (
+      <span
+        className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold"
+        style={{ borderColor: "#a7e8cf", background: "#eafaf3", color: color.successDark }}
+      >
+        <span
+          className="h-1.5 w-1.5 animate-pulse rounded-full"
+          style={{ background: color.success }}
+          aria-hidden
+        />
+        Live
+      </span>
+    );
+  }
+
+  if (status === "pro") {
+    return (
+      <span
+        className="flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold"
+        style={{ borderColor: "#AFA9EC", background: color.primarySoft, color: color.primary }}
+      >
+        <Lock className="h-2.5 w-2.5" aria-hidden /> Pro
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className="rounded-full border px-2.5 py-1 text-[10px] font-semibold"
+      style={{ borderColor: color.border, background: color.surface, color: color.muted }}
+    >
+      Coming Soon
+    </span>
+  );
+}
+
+function ToolAction({ status, href }: { status: string; href: string }) {
+  if (status === "live") {
+    return (
+      <CtaButton href={href} compact className="w-full justify-center" icon={<ArrowRight className="h-4 w-4" aria-hidden />}>
+        Use Tool Free
+      </CtaButton>
+    );
+  }
+
+  if (status === "pro") {
+    return (
+      <Link
+        href={href}
+        className={`flex w-full items-center justify-center gap-2 ${radius.control} border px-5 py-3 text-sm font-semibold transition-colors hover:bg-[#534AB7] hover:text-white`}
+        style={{ borderColor: "#AFA9EC", background: color.primarySoft, color: color.primary }}
+      >
+        <Sparkles className="h-4 w-4" aria-hidden /> Get NicheSEO Pro
+      </Link>
+    );
+  }
+
+  return (
+    <p
+      className={`flex w-full cursor-not-allowed items-center justify-center gap-2 ${radius.control} border px-5 py-3 text-sm font-semibold`}
+      style={{ borderColor: color.border, background: color.surface, color: color.subtle }}
+      aria-disabled="true"
+    >
+      Coming Soon
+    </p>
   );
 }

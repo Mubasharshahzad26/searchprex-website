@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import Nav from "@/components/Nav";
 import ScorecardClient from "./ScorecardClient";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/law-firm-scorecard`;
 const OG_IMAGE = `${SITE}/og/law-firm-scorecard.jpg`;
@@ -31,8 +31,8 @@ const OG_IMAGE = `${SITE}/og/law-firm-scorecard.jpg`;
      - Organization schema + founder E-E-A-T signals
    ───────────────────────────────────────────────────────────── */
  
-export const metadata: Metadata = {
-  title: "Free Law Firm SEO Scorecard | Grade Your Firm's Google & AI Visibility | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Free Law Firm SEO Scorecard | Grade Your Firm's Google & AI Visibility",
   description:
     "Free law firm SEO scorecard — grade your Map Pack ranking, organic visibility, AI Overview citations (AEO), legal E-E-A-T, schema, and practice-area content in seconds. Prioritized 90-day fix plan included. Built for US attorneys.",
   keywords: [
@@ -106,6 +106,12 @@ export const metadata: Metadata = {
     "audience": "US law firms, attorneys, legal marketing directors, personal injury lawyers, family law attorneys, criminal defense lawyers",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/law-firm-scorecard", baseMetadata);
+}
  
 const jsonLd = {
   "@context": "https://schema.org",
@@ -372,7 +378,6 @@ export default function LawFirmScorecardPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       <main id="main-content">
         <ScorecardClient />
       </main>

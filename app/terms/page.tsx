@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 
-export const metadata: Metadata = {
+import { getPageSEO } from "@/lib/admin-seo";
+const baseMetadata: Metadata = {
   title: "Terms and Conditions - SearchPrex",
   description:
     "SearchPrex terms and conditions. Read our service agreement, payment terms, and policies.",
@@ -18,10 +17,15 @@ export const metadata: Metadata = {
   },
 };
 
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/terms", baseMetadata);
+}
+
 export default function TermsPage() {
   return (
     <>
-      <Nav />
       <main id="main-content" className="pt-32">
         <section className="bg-white py-16">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -147,7 +151,6 @@ export default function TermsPage() {
           </div>
         </section>
       </main>
-      <Footer />
       <ChatWidget />
     </>
   );

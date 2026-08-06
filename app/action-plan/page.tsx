@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
 import CTA from "@/components/CTA";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
  
-export const metadata: Metadata = {
-  title: "Free SEO Audit — Get Your 90-Day Roadmap | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Free SEO Audit — Get Your 90-Day Roadmap",
   description:
     "Get a free, founder-reviewed SEO audit tailored to Google's 2026 updates. We analyze your technical health, content quality, E-E-A-T signals and competitor gaps — delivered in 48 hours, no obligation.",
   alternates: { canonical: `${SITE}/free-audit` },
@@ -24,6 +24,12 @@ export const metadata: Metadata = {
       "Founder-reviewed SEO audit — technical, content, E-E-A-T & competitor gaps. Delivered in 48 hours.",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/action-plan", baseMetadata);
+}
  
 const jsonLd = {
   "@context": "https://schema.org",
@@ -56,7 +62,6 @@ export default function FreeAuditPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       <main id="main-content">
         <CTA />
       </main>

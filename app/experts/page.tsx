@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
 import ChatWidget from "@/components/ChatWidget";
 import Image from "next/image";
 import { Linkedin, Award, BadgeCheck, Clock } from "lucide-react";
  
-export const metadata: Metadata = {
+import { getPageSEO } from "@/lib/admin-seo";
+const baseMetadata: Metadata = {
   title: "Meet Our Experts - SearchPrex SEO Team",
   description:
     "Meet Mubashar Shahzad, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
@@ -19,6 +19,12 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/experts", baseMetadata);
+}
  
 interface TeamMember {
   name: string;
@@ -115,7 +121,6 @@ export default function ExpertsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       {/* GREY page background */}
       <main id="main-content" className="bg-[#eaecf3] pt-32">
         {/* Hero — grey */}

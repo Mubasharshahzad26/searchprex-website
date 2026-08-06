@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
 import About from "@/components/About";
 import ChatWidget from "@/components/ChatWidget";
 import { MapPin, Phone, Mail, Clock, Building2 } from "lucide-react";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.searchprex.com'
 const aboutUrl = `${siteUrl}/about`
  
-export const metadata: Metadata = {
-  title: 'About SearchPrex — Founder-Led USA SEO Agency | Niche-Focused Strategies',
+const baseMetadata: Metadata = {
+  title: 'About Us — Founder-Led USA SEO Agency | Niche-Focused Strategies',
   description: 'Meet Mubashar Shahzad, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff.',
   keywords: [
     'SearchPrex founder',
@@ -66,6 +66,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/about", baseMetadata);
+}
  
 const values = [
   {
@@ -174,7 +180,6 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       <main id="main-content" className="bg-white pt-20">
  
         {/* ── About component (CEO card + stats + reasons + EEAT) ── */}

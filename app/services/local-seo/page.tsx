@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import LocalSEOClient from "./LocalSEOClient";
 
+import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/local-seo";
 const OG_IMAGE = "https://www.searchprex.com/og/local-seo.jpg";
 
-export const metadata: Metadata = {
-  title: "Local SEO Services | Own the Map Pack & AI Overviews | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Local SEO Services | Own the Map Pack & AI Overviews",
   description:
     "Founder-led local SEO that puts your business in the top 3 Google Maps pack and 2026 AI Overviews. GBP optimization, citations, review velocity, and city-level landing pages.",
   keywords: [
@@ -31,6 +32,12 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/services/local-seo", baseMetadata);
+}
 
 export default function LocalSEOPage() {
   const jsonLd = {

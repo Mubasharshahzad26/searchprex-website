@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import LawFirmSEOClient from "./LawFirmSEOClient";
 
+import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/law-firm-seo";
 const OG_IMAGE = "https://www.searchprex.com/og/law-firm-seo.jpg";
 
-export const metadata: Metadata = {
-  title: "Law Firm SEO Services | Rank in Local Pack & AI Overviews | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Law Firm SEO Services | Rank in Local Pack & AI Overviews",
   description:
     "Founder-led SEO for law firms. Attorney E-E-A-T content, practice area pages, local pack rankings, and AI Overview citations — replace expensive Google Ads with organic cases.",
   keywords: [
@@ -31,6 +32,12 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/services/law-firm-seo", baseMetadata);
+}
 
 export default function LawFirmSEOPage() {
   const jsonLd = {

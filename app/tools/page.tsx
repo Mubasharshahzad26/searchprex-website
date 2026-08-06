@@ -6,6 +6,7 @@
 import type { Metadata } from "next";
 import ToolsClient from "./ToolsClient";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
  
 // FAQ lives HERE (server file) — never export arrays from a "use client" file
@@ -25,8 +26,8 @@ export const FAQS = [
   },
 ];
  
-export const metadata: Metadata = {
-  title: "Free SEO Tools — Schema Generator, SERP Simulator & More | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Free SEO Tools — Schema Generator, SERP Simulator & More",
   description:
     "Free SEO tools built by a practicing SEO analyst: JSON-LD schema markup generator, SERP simulator, meta tag analyzer, robots.txt tester and more. No signup, no paywalls.",
   alternates: { canonical: `${SITE}/tools` },
@@ -38,9 +39,16 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/tools", baseMetadata);
+}
  
 const toolSchemaList = [
   { name: "Schema Markup Generator", url: `${SITE}/tools/schema-generator`, desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review." },
+  { name: "SERP Checker", url: `${SITE}/tools/serp-checker`, desc: "Check your Google ranking position for any keyword and country, and see who outranks you." },
   { name: "SERP Simulator", url: `${SITE}/tools/serp-simulator`, desc: "Preview how your page looks in Google search results." },
   { name: "Meta Tag Analyzer", url: `${SITE}/tools/meta-tag-analyzer`, desc: "Audit any URL's title, meta description, Open Graph and Twitter Card tags." },
   { name: "Robots.txt Tester", url: `${SITE}/tools/robots-txt-tester`, desc: "Test if Googlebot can crawl any URL on your site." },

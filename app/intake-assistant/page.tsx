@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/intake-assistant";
 const OG_IMAGE = "https://www.searchprex.com/og/intake-assistant.jpg";
  
-export const metadata: Metadata = {
-  title: "24/7 AI Intake Assistant for Law Firms | Never Miss a Lead | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "24/7 AI Intake Assistant for Law Firms | Never Miss a Lead",
   description:
     "AI intake assistant that captures and qualifies every law firm lead 24/7 — no missed calls, no lost cases. Try the free live demo built for US law firms.",
   keywords: [
@@ -64,6 +65,12 @@ export const metadata: Metadata = {
     "geo.placename": "United States",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/intake-assistant", baseMetadata);
+}
  
 export default function IntakeAssistantPage() {
   const jsonLd = {

@@ -15,7 +15,7 @@ const CASE_STUDIES_URL = `${SITE}/all-case-studies`;
 const LINKEDIN_URL = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
  
 const baseMetadata: Metadata = {
-  title: "SEO Case Studies — Verified Results | SearchPrex",
+  title: "SEO Case Studies — Verified Results",
   description:
     "Browse SearchPrex SEO case studies with real GSC data. Law firm, ecommerce, local & technical SEO results. Filter by niche. Founder-led, transparent results.",
   keywords: [

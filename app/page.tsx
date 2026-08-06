@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 // import { getPageSEO } from "@/lib/admin-seo";
 // Homepage section components (root /components folder)
-import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import TrustBar from "../components/TrustBar";
@@ -222,7 +221,6 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       <main id="main-content">
         <Hero />
         <Reveal><ClientLogos /></Reveal>

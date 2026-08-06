@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import Pricing from "@/components/Pricing";
 import ChatWidget from "@/components/ChatWidget";
 import { Check, Phone } from "lucide-react";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+import { getPageSEO } from "@/lib/admin-seo";
+const baseMetadata: Metadata = {
   title: "SEO Pricing Plans - SearchPrex USA SEO Agency",
   description:
     "Transparent SEO pricing for law firms, ecommerce stores, and local businesses. Starting at $1,500/month. No long-term contracts. 90-day money-back guarantee.",
@@ -21,6 +20,12 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/pricing", baseMetadata);
+}
 
 export default function PricingPage() {
   const jsonLd = {
@@ -73,7 +78,6 @@ export default function PricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       <main id="main-content" className="pt-32">
         {/* Hero */}
         <section className="bg-white pb-8">
@@ -173,7 +177,6 @@ export default function PricingPage() {
           </div>
         </section>
       </main>
-      <Footer />
       <ChatWidget />
     </>
   );

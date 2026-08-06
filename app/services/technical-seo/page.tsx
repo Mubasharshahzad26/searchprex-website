@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import TechnicalSEOClient from "./TechnicalSEOClient";
 
+import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/technical-seo";
 const OG_IMAGE = "https://www.searchprex.com/og/technical-seo.jpg";
 
-export const metadata: Metadata = {
-  title: "Technical SEO Services | Indexation, Core Web Vitals, Schema | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Technical SEO Services | Indexation, Core Web Vitals, Schema",
   description:
     "Founder-led technical SEO for large sites. Crawl budget recovery, indexation fixes, Core Web Vitals (LCP/INP/CLS), schema markup, and site architecture — proven at 12K+ page scale.",
   keywords: [
@@ -31,6 +32,12 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/services/technical-seo", baseMetadata);
+}
 
 export default function TechnicalSEOPage() {
   const jsonLd = {

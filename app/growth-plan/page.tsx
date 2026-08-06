@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import GrowthPlanClient from "./GrowthPlanClient";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/growth-plan";
 const OG_IMAGE = "https://www.searchprex.com/og/growth-plan.jpg";
  
-export const metadata: Metadata = {
-  title: "Get Your SEO Growth Plan | Free 90-Day Roadmap | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Get Your SEO Growth Plan | Free 90-Day Roadmap",
   description:
     "Get a founder-reviewed SEO growth plan in 5 minutes. Site audit, competitor benchmark, and 90-day action roadmap — delivered within 24 hours. No commitment, no credit card.",
   keywords: [
@@ -47,6 +48,12 @@ export const metadata: Metadata = {
     },
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/growth-plan", baseMetadata);
+}
  
 const serviceSchema = {
   "@context": "https://schema.org",

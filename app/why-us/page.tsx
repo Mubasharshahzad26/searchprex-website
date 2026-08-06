@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import {
   Phone,
@@ -15,7 +13,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
  
-export const metadata: Metadata = {
+import { getPageSEO } from "@/lib/admin-seo";
+const baseMetadata: Metadata = {
   title: "Why Choose SearchPrex - USA SEO Agency Benefits",
   description:
     "Discover why 20+ businesses trust SearchPrex for their SEO needs. Founder-led execution, senior strategy, transparent pricing, and real results.",
@@ -29,6 +28,12 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/why-us", baseMetadata);
+}
  
 const reasons = [
   {
@@ -101,7 +106,6 @@ export default function WhyUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       {/* GREY page background */}
       <main id="main-content" className="bg-[#eaecf3] pt-32">
         {/* Hero — grey */}
@@ -253,7 +257,6 @@ export default function WhyUsPage() {
           </div>
         </section>
       </main>
-      <Footer />
       <ChatWidget />
     </>
   );

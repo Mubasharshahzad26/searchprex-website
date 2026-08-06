@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import NicheSEOPro from "@/components/NicheSEOPro";
 import BulkContentGen from "@/components/BulkContentGen";
 import KeywordMagicTool from "@/components/keyword/keyword-tool";
@@ -8,6 +6,7 @@ import ChatWidget from "@/components/ChatWidget";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const initialKeywordData = {
   seed: '',
   location: 'United States',
@@ -21,7 +20,7 @@ const initialKeywordData = {
   keywords: [],
 };
  
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "NicheSEOPro - SEO Tool for Law Firms & Ecommerce | Free Trial",
   description:
     "NicheSEOPro is the SEO tool built specifically for law firms, ecommerce stores, and local businesses. Get a 14-day free trial with no credit card required.",
@@ -36,6 +35,12 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/tool", baseMetadata);
+}
  
 const features = [
   {
@@ -93,7 +98,6 @@ export default function ToolPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
       <main id="main-content" className="pt-32">
         {/* Hero */}
         <section className="bg-white pb-16">
@@ -234,7 +238,6 @@ export default function ToolPage() {
           </div>
         </section>
       </main>
-      <Footer />
       <ChatWidget />
     </>
   );

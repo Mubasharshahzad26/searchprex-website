@@ -15,6 +15,7 @@ import LegalNewsWidget from "@/components/wichita/LegalNewsWidget";
 import RealityCheck from "@/components/wichita/RealityCheck";
 import DeviceMockups from "@/components/wichita/DeviceMockups";
  
+import { getPageSEO } from "@/lib/admin-seo";
 export const dynamic = "force-dynamic";
  
 const SITE = "https://www.searchprex.com";
@@ -22,8 +23,8 @@ const PAGE_URL = `${SITE}/locations/kansas/wichita`;
 const CALENDLY = "https://calendly.com/contact-searchprex/30min";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
  
-export const metadata: Metadata = {
-  title: "Wichita Law Firm SEO Services | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Wichita Law Firm SEO Services",
   description:
     "Local SEO for Wichita law firms. Rank in the Google map pack for your practice area in Sedgwick County. Free audit, no commitment, reply in 24 hrs.",
   alternates: { canonical: PAGE_URL },
@@ -34,6 +35,12 @@ export const metadata: Metadata = {
     url: PAGE_URL, siteName: "SearchPrex", type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/locations/kansas/wichita", baseMetadata);
+}
  
 // ---- shared styles ----
 const BRAND = {

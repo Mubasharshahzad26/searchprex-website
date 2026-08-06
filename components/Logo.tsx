@@ -21,12 +21,17 @@ const GREEN = "#3eb489";
  *
  * `variant="dark"` uses black text/mark on light backgrounds.
  * `variant="light"` uses white text/mark on dark backgrounds (green accents preserved).
+ *
+ * The logo renders as plain markup by default. Every call site already wraps it
+ * in its own <Link> for layout reasons, so linking here too produced a nested
+ * <a> inside an <a> — invalid HTML that React reported as a hydration failure on
+ * every page of the site. Pass `asLink` only when the logo stands alone.
  */
 export function Logo({
   size = "md",
   variant = "dark",
   href = "/",
-  asLink = true,
+  asLink = false,
 }: LogoProps) {
   const { height, fontSize, gap } = sizes[size];
   const isLight = variant === "light";

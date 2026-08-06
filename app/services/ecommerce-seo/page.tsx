@@ -6,12 +6,13 @@
 import type { Metadata } from "next";
 import EcommerceSEOClient from "./EcommerceSEOClient";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/services/ecommerce-seo`;
 const OG_IMAGE = `${SITE}/images/og-ecommerce-seo.jpg`; // TODO: add this image to /public/images if it doesn't exist yet
  
-export const metadata: Metadata = {
-  title: "Ecommerce SEO Services — Fix Indexing & Grow Revenue | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "Ecommerce SEO Services — Fix Indexing & Grow Revenue",
   description:
     "Founder-led ecommerce SEO for Shopify and WooCommerce stores. We fix mass non-indexing, thin content, and Core Web Vitals — then build organic revenue that compounds. See how we grew SMK Store's US revenue by 75% in 2 months.",
   alternates: {
@@ -41,6 +42,12 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/services/ecommerce-seo", baseMetadata);
+}
  
 export default function Page() {
   const serviceSchema = {

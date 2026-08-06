@@ -7,10 +7,11 @@ import type { Metadata } from "next";
 import BlogClient from "./BlogClient";
 import { posts } from "./data";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
  
-export const metadata: Metadata = {
-  title: "SEO Blog — Technical, Ecommerce & Local SEO Guides | SearchPrex",
+const baseMetadata: Metadata = {
+  title: "SEO Blog — Technical, Ecommerce & Local SEO Guides",
   description:
     "Founder-written SEO guides on technical SEO, e-commerce SEO, local SEO and content strategy — crawl budget, indexing recovery, Core Web Vitals, AI Overviews and more. Built for practitioners.",
   alternates: { canonical: `${SITE}/blog` },
@@ -22,6 +23,12 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/blog", baseMetadata);
+}
  
 export default function Page() {
   const breadcrumbSchema = {

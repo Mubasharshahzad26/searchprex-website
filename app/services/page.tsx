@@ -7,19 +7,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight, Scale, ShoppingCart, MapPin, Wrench, ShieldCheck,
-  CheckCircle, BarChart3, Phone, Linkedin, BadgeCheck, ChevronDown,
+  ArrowRight, Scale, ShoppingCart, MapPin, Wrench,
+  CheckCircle, BarChart3, Phone,
 } from "lucide-react";
+
+import {
+  AuthorCard,
+  Breadcrumb,
+  CardGrid,
+  CtaBand,
+  FaqList,
+  PageHero,
+  Section,
+  SectionHeading,
+  StatStrip,
+  Accent,
+} from "@/components/layout";
+import { color, heading, radius, text } from "@/lib/design-tokens";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
-const PURPLE = "#534AB7";
-const NAVY = "#0a0f2e";
 
 const baseMetadata: Metadata = {
-  title: "SEO Services USA — Law Firm, Ecommerce, Local & Technical | SearchPrex",
+  title: "SEO Services USA — Law Firm, Ecommerce, Local & Technical",
   description:
     "Four SEO services with GSC-verified results: law firm SEO, ecommerce & Shopify SEO, local SEO, technical SEO. Founder-led. Free audit + 90-day roadmap.",
   alternates: { canonical: `${SITE}/services` },
@@ -220,222 +230,141 @@ export default function ServicesPage() {
   };
 
   return (
-    <main className="bg-[#eaecf3]">
+    <main>
       {[breadcrumbSchema, itemListSchema, professionalServiceSchema, faqSchema].map((schema, i) => (
         <script key={i} type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
 
-      {/* ── VISIBLE BREADCRUMB ── */}
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-6xl px-4 pt-24 sm:px-6 lg:px-8">
-        <ol className="flex items-center gap-2 text-xs text-[#64748b]">
-          <li>
-            <Link href="/" className="hover:text-[#534AB7] transition-colors">Home</Link>
-          </li>
-          <li aria-hidden="true">›</li>
-          <li className="font-semibold text-[#0a0f2e]" aria-current="page">Services</li>
-        </ol>
-      </nav>
+      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Services" }]} />
 
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden border-b border-[#d4d8e3] pt-8 pb-14">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
-        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest"
-            style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
-            <ShieldCheck className="h-3.5 w-3.5" /> Every claim backed by GSC data
-          </span>
-          <h1 className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl">
-            SEO Services That <span style={{ color: GREEN }}>Show Their Receipts</span>
-          </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-[#475569]">
-            Four core services. No bloated menus, no vanity packages — each one is tied to a
-            real, verified result you can inspect before you spend a dollar.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/free-audit"
-              className="group inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-              style={{ background: GREEN }}>
-              <BarChart3 className="h-4 w-4" /> Get Free SEO Audit
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link href="/all-case-studies"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-[#0a0f2e] px-7 py-3.5 text-sm font-bold text-[#0a0f2e] transition-all hover:-translate-y-0.5">
-              See All Case Studies
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        compactTop
+        centered
+        eyebrow="Every claim backed by GSC data"
+        title={<>SEO Services That <Accent>Show Their Receipts</Accent></>}
+        subtitle="Four core services. No bloated menus, no vanity packages — each one is tied to a real, verified result you can inspect before you spend a dollar."
+        primaryCta={{
+          href: "/free-audit",
+          label: "Get Free SEO Audit",
+          icon: <ArrowRight className="h-4 w-4" aria-hidden />,
+        }}
+        secondaryCta={{ href: "/all-case-studies", label: "See All Case Studies" }}
+      />
 
-      {/* ── PROOF BAND ── */}
-      <section className="py-12">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl px-6 py-9 md:px-12" style={{ background: NAVY }}>
-            <div className="absolute inset-0 opacity-10 pointer-events-none"
-              style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
-            <div className="relative grid grid-cols-2 gap-x-6 gap-y-7 text-center md:grid-cols-4">
-              {bigStats.map((s, i) => (
-                <div key={i} className={i > 0 ? "md:border-l md:border-white/10" : ""}>
-                  <p className="text-3xl font-black sm:text-4xl" style={{ color: GREEN }}>{s.v}</p>
-                  <p className="mt-2 text-[11px] uppercase tracking-widest text-white/60">{s.l}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <StatStrip tone="ink" stats={bigStats.map((s) => ({ value: s.v, label: s.l }))} />
 
       {/* ── 4 CORE SERVICES ── */}
-      <section className="pb-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: GREEN }}>What we do</p>
-            <h2 className="text-3xl font-black text-[#0a0f2e] sm:text-4xl">Four Services. Real Proof for Each.</h2>
-          </div>
+      <Section>
+        <SectionHeading
+          variant="center"
+          eyebrow="What we do"
+          title="Four Services. Real Proof for Each."
+        />
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {services.map((s) => {
-              const Icon = s.icon;
-              return (
-                <article key={s.name}
-                  className="group flex flex-col rounded-3xl border border-[#d4d8e3] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl md:p-8">
-                  <div className="mb-5 flex items-center gap-4">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl"
-                      style={{ background: s.bg }}>
-                      <Icon className="h-6 w-6" style={{ color: s.color }} />
-                    </span>
-                    <h3 className="text-xl font-black text-[#0a0f2e]">{s.name}</h3>
+        <CardGrid variant="cards" columns={2}>
+          {services.map((s) => {
+            const Icon = s.icon;
+            return (
+              <article
+                key={s.name}
+                className={`group flex flex-col ${radius.card} border bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl md:p-8`}
+                style={{ borderColor: color.border }}
+              >
+                <div className="mb-5 flex items-center gap-4">
+                  {/* Per-service tints are categorical, like a chart palette —
+                      they identify which service a card is, and never appear on
+                      headings, links or buttons. */}
+                  <span
+                    className={`inline-flex h-12 w-12 items-center justify-center ${radius.chip}`}
+                    style={{ background: s.bg }}
+                  >
+                    <Icon className="h-6 w-6" style={{ color: s.color }} aria-hidden />
+                  </span>
+                  <h3 className={heading.h3} style={{ color: color.ink }}>{s.name}</h3>
+                </div>
+
+                <p className={`${text.small} mb-5 font-semibold`} style={{ color: color.muted }}>
+                  {s.forWho}
+                </p>
+
+                <ul className="mb-6 space-y-2.5">
+                  {s.includes.map((item) => (
+                    <li key={item} className={`flex items-start gap-2.5 ${text.small}`} style={{ color: color.muted }}>
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: color.success }} aria-hidden />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div
+                  className={`mt-auto ${radius.chip} border p-4`}
+                  style={{ borderColor: color.border, background: color.surface }}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-bold" style={{ color: color.success }}>{s.proof.v}</span>
+                    <span className={heading.eyebrow} style={{ color: color.muted }}>{s.proof.l}</span>
                   </div>
-
-                  <p className="mb-5 text-sm font-semibold text-[#475569]">{s.forWho}</p>
-
-                  <ul className="mb-6 space-y-2.5">
-                    {s.includes.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-[#475569]">
-                        <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: GREEN }} />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto rounded-2xl border border-[#e6f4ee] p-4"
-                    style={{ background: "rgba(62,180,137,0.06)" }}>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-black" style={{ color: GREEN }}>{s.proof.v}</span>
-                      <span className="text-xs font-semibold uppercase tracking-wide text-[#64748b]">{s.proof.l}</span>
-                    </div>
-                    <Link href={s.proofLink}
-                      className="mt-2 inline-flex items-center gap-1 text-sm font-bold transition-colors hover:opacity-80"
-                      style={{ color: GREEN_DARK }}>
-                      {s.proofLabel} <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-
-                  <Link href={s.slug}
-                    className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-bold transition-colors hover:opacity-80"
-                    style={{ color: PURPLE }}>
-                    Explore {s.name} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <Link
+                    href={s.proofLink}
+                    className={`mt-2 inline-flex items-center gap-1 ${text.small} font-semibold transition-colors hover:opacity-80`}
+                    style={{ color: color.successDark }}
+                  >
+                    {s.proofLabel} <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                </div>
 
-      {/* ── FOUNDER E-E-A-T STRIP ── */}
-      <section className="pb-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-6 rounded-3xl border border-[#d4d8e3] bg-white p-8 text-center md:flex-row md:text-left">
-            <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full text-2xl font-black text-white"
-              style={{ background: `linear-gradient(135deg, ${PURPLE}, ${GREEN})` }}>MS</div>
-            <div className="flex-1">
-              <div className="flex flex-col items-center gap-2 md:flex-row md:items-center md:gap-3">
-                <p className="text-lg font-black text-[#0a0f2e]">Every service is led by Mubashar Shahzad</p>
-                <a href="https://www.linkedin.com/in/mubashar-shahzad-seo/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold transition-all hover:scale-105"
-                  style={{ borderColor: "#0a66c2", color: "#0a66c2" }}>
-                  <Linkedin className="h-3.5 w-3.5" /> Verified on LinkedIn
-                </a>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-[#64748b]">
-                5+ years across local, international, technical, ecommerce and law firm SEO.
-                No juniors, no outsourcing — the person behind these case studies works on your site.
-              </p>
-              <div className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">
-                <span className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold"
-                  style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
-                  <BadgeCheck className="h-3.5 w-3.5" /> Verified SEO Expert
-                </span>
-                <span className="rounded-lg border border-[#e2e8f0] px-2.5 py-1 text-xs font-semibold text-[#475569]">Semrush certified</span>
-                <span className="rounded-lg border border-[#e2e8f0] px-2.5 py-1 text-xs font-semibold text-[#475569]">HubSpot certified</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                <Link
+                  href={s.slug}
+                  className={`mt-5 inline-flex w-fit items-center gap-1.5 ${text.small} font-semibold transition-colors hover:opacity-80`}
+                  style={{ color: color.primary }}
+                >
+                  Explore {s.name}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                </Link>
+              </article>
+            );
+          })}
+        </CardGrid>
+      </Section>
+
+      {/* ── FOUNDER E-E-A-T ── */}
+      <Section tone="surface" width="narrow" tight>
+        <AuthorCard
+          name="Mubashar Shahzad"
+          role="Founder & Lead SEO Strategist · 5+ years"
+          quote="Every service on this page is led by me personally. 5+ years across local, international, technical, ecommerce and law firm SEO — no juniors, no outsourcing. The person behind these case studies works on your site."
+          imageSrc="/images/mubashar-shahzad.jpg"
+          imageAlt="Mubashar Shahzad — Founder & Lead SEO Strategist"
+          linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+          badges={["Semrush certified", "HubSpot certified"]}
+        />
+      </Section>
 
       {/* ── FAQ ── */}
-      <section className="pb-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-black text-[#0a0f2e]">Before You Ask</h2>
-          </div>
-          <div className="space-y-3">
-            {faqs.map((f) => (
-              <details key={f.q} className="group rounded-2xl border border-[#d4d8e3] bg-white p-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-[#0a0f2e]">
-                  {f.q}
-                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-[#64748b] transition-transform group-open:rotate-180" />
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Section width="reading">
+        <SectionHeading variant="center" eyebrow="FAQ" title="Before You Ask" />
+        <FaqList faqs={faqs} name="services-faq" />
+      </Section>
 
-      {/* ── FINAL CTA ── */}
-      <section className="bg-[#0a0f2e] py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>
-            Not sure which service fits?
-          </p>
-          <h2 className="mb-4 text-4xl font-black tracking-tight text-white">
-            Start With the Free Audit.<br />
-            <span style={{ color: GREEN }}>The Roadmap Tells You.</span>
-          </h2>
-          <p className="mb-8 text-base leading-relaxed text-white/70">
-            The founder personally reviews your site and delivers a 90-day growth roadmap within
-            24 hours — including exactly which service (if any) you actually need.
-          </p>
-          <div className="mb-6 flex flex-wrap justify-center gap-3">
-            <Link href="/free-audit"
-              className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-              style={{ background: GREEN }}>
-              Get Free SEO Audit <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a href="tel:+923106526316"
-              className="flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-white/10">
-              <Phone className="h-4 w-4" /> +92 310 652 6316
-            </a>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6">
-            {["24hr turnaround", "No contracts", "Founder does the audit"].map((t) => (
-              <span key={t} className="flex items-center gap-2 text-sm text-white/60">
-                <CheckCircle className="h-4 w-4" style={{ color: GREEN }} />{t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        eyebrow="Not sure which service fits?"
+        title={<>Start With the Free Audit.<br />The Roadmap Tells You.</>}
+        body="The founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours — including exactly which service (if any) you actually need."
+        actions={[
+          { href: "/free-audit", label: "Get Free SEO Audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
+          { href: "tel:+923106526316", label: "+92 310 652 6316", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
+        ]}
+        trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
+      />
 
       {/* ── FLOATING CTA ── */}
-      <Link href="/free-audit"
-        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
-        style={{ background: GREEN }}>
-        <BarChart3 className="h-4 w-4" /> Reality Check
+      <Link
+        href="/free-audit"
+        className={`fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 ${text.small} font-semibold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5`}
+        style={{ background: color.primary }}
+      >
+        <BarChart3 className="h-4 w-4" aria-hidden /> Reality Check
       </Link>
     </main>
   );
