@@ -15,7 +15,6 @@ import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import SolutionsCarousel from "../components/SolutionsCarousel";
 import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
 import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";
-import NicheSEOProPromo from "../components/NicheSEOProPromo";
 import FounderSection from "../components/FounderSection";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
@@ -244,7 +243,7 @@ export default async function Home() {
         <SolutionsCarousel />
         <TrustpilotReviewSection />
 
-        <NicheSEOProPromo />
+        
         <Reveal><LeadCaptureForm /></Reveal>
         <Reveal><FAQ /></Reveal>
         <Reveal><BlogTeaser /></Reveal>
