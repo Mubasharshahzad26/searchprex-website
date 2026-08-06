@@ -7,6 +7,7 @@ import TrustBar from "../components/TrustBar";
 import SEOAuditStrip from "../components/SEOAuditStrip";
 import LeadWizard from "../components/LeadWizard";
 import Services from "../components/Services";
+import LawFirmStack from "../components/LawFirmStack";
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
@@ -229,6 +230,7 @@ export default async function Home() {
 
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>
+  
         </AuroraBackground>
 
     
@@ -237,6 +239,7 @@ export default async function Home() {
         <Reveal><VideoSection /></Reveal>
         <Reveal><FounderSection /></Reveal>
         <AIVisibilityShowcase />
+        <LawFirmStack />   {/* ← Complete stack after AI positioning */}
 
         <SolutionsCarousel />
         <TrustpilotReviewSection />
