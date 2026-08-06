@@ -2,10 +2,12 @@
 import { useState, useEffect } from "react";
 import { Cookie, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const CONSENT_KEY = "searchprex_cookie_consent";
 
 export default function CookieConsent() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function CookieConsent() {
     setVisible(false);
   };
 
+  if (pathname?.startsWith("/admin")) return null;
   if (!visible) return null;
 
   return (

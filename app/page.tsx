@@ -8,7 +8,6 @@ import TrustBar from "../components/TrustBar";
 import SEOAuditStrip from "../components/SEOAuditStrip";
 import LeadWizard from "../components/LeadWizard";
 import Services from "../components/Services";
-import AdvantageBand from "../components/AdvantageBand";
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import VideoSection from "../components/VideoSection";
@@ -235,7 +234,7 @@ export default async function Home() {
           <Reveal><Services /></Reveal>
         </AuroraBackground>
 
-        <AdvantageBand />
+    
         <LeadWizard />
         <Reveal><Results /></Reveal>
         <Reveal><VideoSection /></Reveal>

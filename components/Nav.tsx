@@ -2,6 +2,7 @@
  
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
@@ -62,6 +63,7 @@ const navLinks: NavLink[] = [
       { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
       { href: "/ai-search",             label: "AI Search" },
       { href: "/tools",                 label: "All Tools" },
+      { href: "/tools/serp-checker",    label: "SERP Checker", badge: "New" },
     ],
   },
   {
@@ -76,6 +78,7 @@ const navLinks: NavLink[] = [
 ];
  
 export default function Nav() {
+  const pathname = usePathname();
   const [isScrolled,       setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown,   setActiveDropdown]   = useState<string | null>(null);
@@ -107,7 +110,10 @@ export default function Nav() {
       document.removeEventListener("keydown", handleEscape);
     };
   }, [activeDropdown]);
- 
+
+  // Hide nav on admin pages
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <>
       <header
@@ -122,9 +128,9 @@ export default function Nav() {
           <div className="flex h-20 items-center justify-between">
  
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <div className="flex-shrink-0">
               <Logo size="md" variant="dark" />
-            </Link>
+            </div>
  
             {/* Desktop links */}
             <div ref={desktopNavRef} className="hidden items-center gap-6 lg:flex">

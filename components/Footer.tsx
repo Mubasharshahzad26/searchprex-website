@@ -1,6 +1,7 @@
 "use client";
 import { Logo } from "@/components/Logo";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, Phone, MapPin } from "lucide-react";
  
 /* Toptal green accent */
@@ -67,8 +68,11 @@ const socials = [
  
  
 export default function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
- 
+
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <footer className="bg-[#0a0f2e] text-white">
       {/* Main Footer */}
