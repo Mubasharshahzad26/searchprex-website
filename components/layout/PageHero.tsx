@@ -24,6 +24,11 @@ export interface PageHeroProps {
   subtitle?: React.ReactNode;
   primaryCta?: HeroCta;
   secondaryCta?: HeroCta;
+  /**
+   * Custom action row, for heroes whose CTA isn't a link — a modal trigger, a
+   * form, a tool launcher. Replaces primaryCta/secondaryCta when provided.
+   */
+  actions?: React.ReactNode;
   /** Short reassurance items shown under the CTAs. */
   trustPoints?: string[];
   /** Optional right-hand panel — a checklist card, form, or screenshot. */
@@ -49,6 +54,7 @@ export default function PageHero({
   subtitle,
   primaryCta,
   secondaryCta,
+  actions,
   trustPoints,
   aside,
   centered = false,
@@ -81,7 +87,9 @@ export default function PageHero({
         </p>
       ) : null}
 
-      {primaryCta || secondaryCta ? (
+      {actions ? (
+        <div className={`mb-8 flex flex-wrap gap-3 ${centered ? "justify-center" : ""}`}>{actions}</div>
+      ) : primaryCta || secondaryCta ? (
         <div className={`mb-8 flex flex-wrap gap-3 ${centered ? "justify-center" : ""}`}>
           {primaryCta ? (
             <CtaButton href={primaryCta.href} icon={primaryCta.icon}>

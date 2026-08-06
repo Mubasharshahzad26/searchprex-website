@@ -1,22 +1,47 @@
-"use client";
- 
-import { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  ChevronDown, ChevronUp, ArrowRight, Phone, Search,
-  Sparkles, Shield, HelpCircle,
-} from "lucide-react";
- 
-/* ─── THEME ─── */
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
- 
+// app/faq/page.tsx
+// Server Component. Owns metadata and FAQPage JSON-LD; the interactive UI lives
+// in FaqClient.
+//
+// This file used to be "use client", which meant it could not export metadata at
+// all — the route inherited the root layout's default and served the homepage
+// title and description to Google on a page that ranks for its own queries.
+
+import type { Metadata } from "next";
+import { getPageSEO } from "@/lib/admin-seo";
+import FaqClient, { type FaqGroup } from "./FaqClient";
+
+const SITE = "https://www.searchprex.com";
+const PAGE_URL = `${SITE}/faq`;
+
+const baseMetadata: Metadata = {
+  title: "SEO Questions, Answered — Core Updates, E-E-A-T & AI",
+  description:
+    "Answers on Google's March and May 2026 core updates, E-E-A-T, AI Overviews, and GEO — plus how SearchPrex works. Written by a founder who does the work.",
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: "SEO Questions, Answered | SearchPrex",
+    description:
+      "Google 2026 core updates, E-E-A-T, AI Overviews and GEO — answered plainly.",
+    url: PAGE_URL,
+    siteName: "SearchPrex",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SEO Questions, Answered | SearchPrex",
+    description: "Google 2026 core updates, E-E-A-T, AI Overviews and GEO — answered plainly.",
+  },
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/faq", baseMetadata);
+}
+
 /* ─── FAQ DATA — grouped, 2026 core-update aware ─── */
-const faqGroups = [
+const faqGroups: FaqGroup[] = [
   {
     category: "Google 2026 Core Updates",
-    icon: Sparkles,
+    icon: "sparkles",
     faqs: [
       {
         q: "How do the March and May 2026 Google core updates affect my rankings?",
@@ -38,7 +63,7 @@ const faqGroups = [
   },
   {
     category: "AI Search, AI Overviews & GEO",
-    icon: Search,
+    icon: "search",
     faqs: [
       {
         q: "What is AI Overview optimization (GEO / AIO)?",
@@ -56,7 +81,7 @@ const faqGroups = [
   },
   {
     category: "Working With SearchPrex",
-    icon: Shield,
+    icon: "shield",
     faqs: [
       {
         q: "What makes SearchPrex different from other SEO agencies?",
@@ -81,192 +106,41 @@ const faqGroups = [
     ],
   },
 ];
- 
-/* ─── MOTION ─── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
- 
-/* ─── PAGE ─── */
+
 export default function FAQPage() {
-  const [open, setOpen] = useState<string | null>("0-0");
- 
+  // FAQPage schema is what makes these answers eligible to be lifted into an AI
+  // Overview, so it has to carry every question the page renders.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqGroups.flatMap((g) =>
+      g.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      }))
+    ),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+      { "@type": "ListItem", position: 2, name: "FAQ", item: PAGE_URL },
+    ],
+  };
+
   return (
-    <main className="bg-[#eaecf3]">
- 
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden border-b border-[#d4d8e3] bg-[#eaecf3] pt-28 pb-14">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
-        <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-[#64748b] transition-colors hover:text-[#534AB7]">
-            ← Back to Home
-          </Link>
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
-            <HelpCircle className="h-3.5 w-3.5" /> Frequently Asked Questions
-          </span>
-          <h1 className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
-            SEO Questions, Answered
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-[#475569] leading-relaxed">
-            Everything you need to know about SEO in the AI-search era — built around Google&apos;s March &amp; May 2026 core updates, E-E-A-T, and AI Overviews.
-          </p>
-        </div>
-      </section>
- 
-      {/* ── FAQ GROUPS ── */}
-      <section className="py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          {faqGroups.map((group, gi) => {
-            const Icon = group.icon;
-            return (
-              <motion.div
-                key={group.category}
-                variants={stagger}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="mb-10"
-              >
-                {/* Group header */}
-                <motion.div variants={fadeUp} className="mb-4 flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl" style={{ background: "rgba(62,180,137,0.12)" }}>
-                    <Icon className="h-4 w-4" style={{ color: GREEN_DARK }} />
-                  </div>
-                  <h2 className="text-lg font-black tracking-tight text-[#0a0f2e]">{group.category}</h2>
-                </motion.div>
- 
-                {/* FAQ items */}
-                <motion.div variants={fadeUp} className="divide-y divide-[#e2e8f0] overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white">
-                  {group.faqs.map((f, fi) => {
-                    const id = `${gi}-${fi}`;
-                    const isOpen = open === id;
-                    return (
-                      <div key={id}>
-                        <button
-                          onClick={() => setOpen(isOpen ? null : id)}
-                          className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-[#f8fafc]"
-                        >
-                          <span className="font-bold text-[#0a0f2e]">{f.q}</span>
-                          {isOpen
-                            ? <ChevronUp className="h-4 w-4 shrink-0" style={{ color: GREEN_DARK }} />
-                            : <ChevronDown className="h-4 w-4 shrink-0 text-[#64748b]" />}
-                        </button>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            transition={{ duration: 0.25 }}
-                            className="overflow-hidden"
-                          >
-                            <p className="px-6 pb-5 text-sm leading-relaxed text-[#64748b]">{f.a}</p>
-                          </motion.div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
- 
-      {/* ── BOTTOM CTA ── */}
-      <section className="bg-[#0a0f2e] py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <motion.p variants={fadeUp} className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>
-              Still have questions?
-            </motion.p>
-            <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black tracking-tight text-white">
-              Let&apos;s Talk About Your SEO.
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mb-8 text-base text-white/70 leading-relaxed">
-              Get a free SEO audit — the founder personally reviews your site against the latest 2026 core updates and delivers a clear growth roadmap within 24 hours.
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-3">
-              <Link
-                href="/free-audit"
-                className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-                style={{ background: GREEN }}
-              >
-                Get Free SEO Audit <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a
-                href="tel:+923106526316"
-                className="flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-white/10"
-              >
-                <Phone className="h-4 w-4" /> +92 310 652 6316
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
- 
-    </main>
+    <>
+      {[faqSchema, breadcrumbSchema].map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      <FaqClient groups={faqGroups} />
+    </>
   );
 }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
