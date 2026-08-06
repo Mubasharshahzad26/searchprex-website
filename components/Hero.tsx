@@ -1,19 +1,19 @@
 "use client";
- 
+
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase, PenLine } from "lucide-react";
 import { useState, useEffect } from "react";
 import Certifications, { credentials } from "@/components/Certifications";
- 
+
 /* ─── Toptal-like palette ─── */
-const CHARCOAL = "#1c1c24";   // Toptal heading charcoal (softer than navy)
-const BODY = "#5b6472";       // Toptal body grey
-const GREEN = "#3eb489";      // CTA green (matches site + Toptal)
+const CHARCOAL = "#1c1c24";
+const BODY = "#5b6472";
+const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
-const PURPLE = "#534AB7";     // brand accent for credential card
- 
+const PURPLE = "#534AB7";
+
 // ── Service personas ──────────────────────────────────────────────────
 type Persona = {
   id: string;
@@ -26,7 +26,7 @@ type Persona = {
   video?: { id: string; caption: string };
   clients?: string[];
 };
- 
+
 const personas: Persona[] = [
   {
     id: "law-firm",
@@ -60,7 +60,7 @@ const personas: Persona[] = [
     clients: ["AAA Mobile Tyres", "Door Doctor", "HVAC Services Team"],
   },
 ];
- 
+
 // ── EEAT platform links ───────────────────────────────────────────────
 const eeatLinks = [
   { label: "Trustpilot", sub: "Registered",  href: "https://www.trustpilot.com/review/searchprex.com", color: "#00b67a",
@@ -80,11 +80,11 @@ const eeatLinks = [
   { label: "LinkedIn",   sub: "Company",  href: "https://www.linkedin.com/company/searchprex/",      color: "#0a66c2",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0a66c2" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
 ];
- 
+
 interface HeroProps {
   heroImage?: unknown;
 }
- 
+
 /* ── Video case study card (thumbnail → embeds on click, performance-safe) ── */
 function VideoCard({ id, caption }: { id: string; caption: string }) {
   const [play, setPlay] = useState(false);
@@ -95,20 +95,20 @@ function VideoCard({ id, caption }: { id: string; caption: string }) {
           <iframe
             className="absolute inset-0 h-full w-full"
             src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
-            title="SearchPrex case study video"
+            title="SearchPrex SEO case study video"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
           />
         ) : (
           <button
             onClick={() => setPlay(true)}
-            aria-label="Play case study video"
+            aria-label="Play SEO case study video"
             className="group absolute inset-0 h-full w-full"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
-              alt=""
+              alt={`Case study video thumbnail: ${caption}`}
               className="h-full w-full object-cover"
             />
             <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/10" />
@@ -126,10 +126,10 @@ function VideoCard({ id, caption }: { id: string; caption: string }) {
     </div>
   );
 }
- 
+
 export default function Hero({ heroImage }: HeroProps) {
   const [activePersona, setActivePersona] = useState(0);
- 
+
   // Toptal-style sync: hero card + credentials carousel rotate together
   const [credIndex, setCredIndex] = useState(0);
   useEffect(() => {
@@ -139,14 +139,19 @@ export default function Hero({ heroImage }: HeroProps) {
     return () => clearInterval(t);
   }, []);
   const activeCred = credentials[credIndex];
- 
+
   // Direct Calendly link — opens instantly in a new tab (no slow popup iframe)
   const CALENDLY_URL = "https://calendly.com/contact-searchprex/30min";
- 
+
   const current = personas[activePersona];
- 
+
   return (
     <>
+      {/* ── SEO-OPTIMIZED H1 — visually hidden but crawlable by Google & LLMs ── */}
+      <h1 className="sr-only">
+        SEO Agency USA — Law Firm SEO, Ecommerce SEO & Local SEO Services for Businesses Across All 50 States
+      </h1>
+
       <section className="relative overflow-hidden bg-[#e9ebf0] pt-20">
         {/* ── Semrush-style aurora background ── */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -162,7 +167,7 @@ export default function Hero({ heroImage }: HeroProps) {
           `}</style>
         </div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 pb-12 sm:px-6 lg:px-8">
- 
+
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
           <div className="relative z-20 flex justify-center pt-4 pb-3">
             <div className="inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-full bg-white/70 px-4 py-2.5 shadow-sm backdrop-blur-sm border border-white/80 sm:gap-3 sm:px-5 sm:py-3">
@@ -174,6 +179,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   <button
                     key={p.id}
                     onClick={() => setActivePersona(i)}
+                    aria-label={`Show ${p.label} services`}
                     className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all sm:px-4 ${
                       activePersona === i
                         ? "border border-[#cdd2dd] bg-white text-[#1c1c24] shadow-sm"
@@ -186,10 +192,10 @@ export default function Hero({ heroImage }: HeroProps) {
               </div>
             </div>
           </div>
- 
+
           {/* ── 2-Column Grid ── */}
           <div className="grid items-start gap-12 pt-6 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-6">
- 
+
             {/* ── Left Content — Toptal-minimal: headline, paragraph, one button ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -207,10 +213,10 @@ export default function Hero({ heroImage }: HeroProps) {
                   Founder-Led SEO. No Juniors. No Fluff.
                 </span>
               </div>
- 
-              {/* ── Dynamic H1 — Toptal-style thick underline on the emphasis line ── */}
+
+              {/* ── Dynamic H2 headline (was H1 — now H2 to preserve visual design + SEO structure) ── */}
               <AnimatePresence mode="wait">
-                <motion.h1
+                <motion.h2
                   key={current.id}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -227,9 +233,9 @@ export default function Hero({ heroImage }: HeroProps) {
                   >
                     {current.emphasis}
                   </span>
-                </motion.h1>
+                </motion.h2>
               </AnimatePresence>
- 
+
               {/* ── Dynamic subtext ── */}
               <AnimatePresence mode="wait">
                 <motion.p
@@ -244,14 +250,15 @@ export default function Hero({ heroImage }: HeroProps) {
                   {current.sub}
                 </motion.p>
               </AnimatePresence>
- 
+
               {/* Single CTA — persona-driven (Toptal style, instant) */}
               <div className="flex justify-center lg:justify-start">
                 {current.media === "photo" ? (
-                  <a
+                  
                     href={CALENDLY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Book a free 30-minute SEO strategy call"
                     className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
                     style={{ background: GREEN }}
                   >
@@ -260,6 +267,7 @@ export default function Hero({ heroImage }: HeroProps) {
                 ) : (
                   <Link
                     href="/case-studies"
+                    aria-label="View SEO case studies and verified results"
                     className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
                     style={{ background: GREEN }}
                   >
@@ -267,7 +275,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   </Link>
                 )}
               </div>
- 
+
               {/* Secondary link + trust note — one quiet line each (Toptal whitespace) */}
               {current.media === "photo" ? (
                 <div className="mt-4 flex justify-center lg:justify-start">
@@ -282,7 +290,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   </Link>
                 </div>
               )}
- 
+
               <div className="mt-3 flex items-center justify-center gap-1.5 lg:justify-start">
                 <CheckCircle className="h-4 w-4 flex-shrink-0" style={{ color: GREEN }} aria-hidden="true" />
                 <span className="text-sm" style={{ color: BODY }}>
@@ -290,7 +298,7 @@ export default function Hero({ heroImage }: HeroProps) {
                 </span>
               </div>
             </motion.div>
- 
+
             {/* ── Right: persona-driven — photo+card (Law Firm) OR video+clients (eCommerce/Local) ── */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -314,14 +322,14 @@ export default function Hero({ heroImage }: HeroProps) {
                       <div className="relative aspect-[3/4] w-[270px] sm:w-[340px] lg:w-[440px]">
                         <Image
                           src="/images/mubashar-transparent.png"
-                          alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
+                          alt="Mubashar Shahzad — Founder and Certified SEO Expert at SearchPrex SEO Agency"
                           fill
                           priority
                           className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
                         />
                       </div>
                     </div>
- 
+
                     {/* Credential card — Toptal anatomy: map · name · verified · role · previously-at · proof */}
                     <div className="relative z-10 w-full max-w-[300px] shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:w-64 lg:-ml-12 lg:mt-2">
                       {/* Dotted world-map area (tall, like Toptal) */}
@@ -329,9 +337,9 @@ export default function Hero({ heroImage }: HeroProps) {
                         <div className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0)", backgroundSize: "6px 6px" }} />
                         <span className="absolute left-[30%] top-[42%] h-2 w-2 rounded-full" style={{ background: "#2f6fed" }} />
                       </div>
- 
+
                       <p className="text-[15px] font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
- 
+
                       {/* Rotating credential line — synced with the carousel below (Toptal effect) */}
                       <AnimatePresence mode="wait">
                         <motion.div
@@ -341,7 +349,7 @@ export default function Hero({ heroImage }: HeroProps) {
                           exit={{ opacity: 0, y: -6 }}
                           transition={{ duration: 0.25 }}
                         >
-                          <a
+                          
                             href={activeCred.href}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -362,8 +370,8 @@ export default function Hero({ heroImage }: HeroProps) {
                           </a>
                         </motion.div>
                       </AnimatePresence>
- 
-                      <a
+
+                      
                         href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -372,9 +380,9 @@ export default function Hero({ heroImage }: HeroProps) {
                         <Briefcase className="h-3.5 w-3.5 shrink-0 text-[#94a3b8]" />
                         <span className="text-[11px] font-medium" style={{ color: BODY }}>Founder &amp; SEO Strategist</span>
                       </a>
- 
+
                       <p className="mt-4 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
-                      <a
+                      
                         href="https://www.timetechnologiesllc.com/"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -382,13 +390,13 @@ export default function Hero({ heroImage }: HeroProps) {
                       >
                         Time Technologies LLC
                       </a>
- 
+
                       {/* ── Verified case-study proof (moved here from the floating chips) ── */}
                       <div className="mt-4 flex items-stretch gap-3 border-t border-[#eef0f4] pt-3">
                         <Link
                           href="/case-studies/ecommerce/michigan-outdoor-sports"
                           className="flex-1 transition-opacity hover:opacity-80"
-                          title="Michigan Outdoor Sports case study"
+                          title="Michigan Outdoor Sports SEO case study: +476% organic clicks"
                         >
                           <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+476%</span>
                           <span className="mt-1 block text-[9px] leading-tight text-[#94a3b8]">Organic clicks · GSC verified</span>
@@ -397,7 +405,7 @@ export default function Hero({ heroImage }: HeroProps) {
                         <Link
                           href="/case-studies/ecommerce/smk-store"
                           className="flex-1 transition-opacity hover:opacity-80"
-                          title="SMK Store case study"
+                          title="SMK Store SEO case study: +75% US revenue in 2 months"
                         >
                           <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+75%</span>
                           <span className="mt-1 block text-[9px] leading-tight text-[#94a3b8]">US revenue · 2 months</span>
@@ -416,7 +424,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     className="mx-auto w-full max-w-md"
                   >
                     <VideoCard key={current.video?.id} id={current.video?.id ?? ""} caption={current.video?.caption ?? ""} />
- 
+
                     {/* Client logos */}
                     <p className="mt-4 mb-2 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
                       Trusted by clients like
@@ -435,18 +443,18 @@ export default function Hero({ heroImage }: HeroProps) {
                 )}
               </AnimatePresence>
             </motion.div>
- 
+
           </div>
- 
+
         </div>
- 
+
         {/* ── Credentials carousel — sits cleanly below the hero. Gentle overlap on
             desktop (photo persona); positive margin on mobile so it never crashes
             into the credential card. ── */}
         <div className={`relative z-10 ${current.media === "photo" ? "mt-10 sm:mt-6 lg:-mt-12" : "mt-0"}`}>
           <Certifications index={credIndex} onIndexChange={setCredIndex} />
         </div>
- 
+
         {/* ── EEAT strip — quiet row below the carousel ── */}
         <div className="mx-auto max-w-7xl px-4 pt-10 pb-12 sm:px-6 lg:px-8">
           <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
@@ -454,7 +462,7 @@ export default function Hero({ heroImage }: HeroProps) {
           </p>
           <div className="flex flex-wrap justify-center gap-1.5">
             {eeatLinks.map((platform) => (
-              <a
+              
                 key={platform.label}
                 href={platform.href}
                 target="_blank"
@@ -477,4 +485,3 @@ export default function Hero({ heroImage }: HeroProps) {
     </>
   );
 }
- 
