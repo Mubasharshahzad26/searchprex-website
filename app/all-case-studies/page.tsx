@@ -8,12 +8,13 @@ import type { Metadata } from "next";
 import CaseStudiesClient from "./CaseStudiesClient";
 import { caseStudies, detailUrl, FAQS } from "./data";
  
+import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
 const CASE_STUDIES_URL = `${SITE}/all-case-studies`;
 // TODO: replace with Mubashar's exact LinkedIn profile URL before launch.
 const LINKEDIN_URL = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
  
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "SEO Case Studies — Verified Results | SearchPrex",
   description:
     "Browse SearchPrex SEO case studies with real GSC data. Law firm, ecommerce, local & technical SEO results. Filter by niche. Founder-led, transparent results.",
@@ -73,6 +74,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/all-case-studies", baseMetadata);
+}
  
 export default function Page() {
   // ── CollectionPage Schema (for case studies listing) ──
