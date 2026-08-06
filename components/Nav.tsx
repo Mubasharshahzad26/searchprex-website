@@ -35,7 +35,7 @@ const navLinks: NavLink[] = [
     hasDropdown: true,
     dropdownItems: [
       { href: "/about",   label: "About Us" },
-      { href: "/experts", label: "Meet the Founder" },
+      { href: "/experts", label: "Meet Our SEO Experts" },
       { href: "/why-us",  label: "Why SearchPrex" },
     ],
   },
