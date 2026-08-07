@@ -16,11 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
  
 export default function AiVisibilityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-20">
-      <div className="mx-auto max-w-4xl">
+    <main id="main-content" className="min-h-screen bg-[#f8f9fc] pt-20">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <AiVisibility />
       </div>
-    </div>
+    </main>
   );
 }
  
