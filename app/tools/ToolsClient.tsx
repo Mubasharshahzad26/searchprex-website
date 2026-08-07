@@ -41,7 +41,10 @@ const tools = [
     label: "Schema Markup Generator",
     desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
     tags: ["JSON-LD", "Rich Results", "Structured Data"],
-    status: "live",
+    // "soon", not "live". /tools/schema-generator returns 200 but the page is a
+    // stub that says "Coming soon." — the card was promising a working tool and
+    // "6 schema types" to anyone who clicked. Flip back once the page is built.
+    status: "soon",
     href: "/tools/schema-generator",
     stats: "6 schema types",
   },
@@ -54,7 +57,12 @@ const tools = [
     label: "SERP Checker",
     desc: "Check where your site ranks on Google for any keyword — and see exactly who's ranking above you.",
     tags: ["Rank Tracking", "SERP Analysis", "Competitors"],
-    status: "live",
+    // "soon", not "live", on purpose. The page at /tools/serp-checker is not
+    // deployed (404 in production), and until DATAFORSEO_LOGIN /
+    // DATAFORSEO_PASSWORD exist the API returns invented positions — see
+    // .env.example. Flip back to "live" only once
+    // `npx tsx scripts/verify-dataforseo.ts` passes AND the page is committed.
+    status: "soon",
     href: "/tools/serp-checker",
     stats: "Up to 5 keywords",
   },
