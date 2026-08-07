@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import About from "@/components/About";
 import ChatWidget from "@/components/ChatWidget";
+import { CardGrid, Section, SectionHeading } from "@/components/layout";
 import { MapPin, Phone, Mail, Clock, Building2 } from "lucide-react";
  
 import { getPageSEO } from "@/lib/admin-seo";
@@ -186,46 +187,28 @@ export default function AboutPage() {
         <About />
  
         {/* ── Our Values ── */}
-        <section className="border-t border-[#e2e8f0] bg-[#f8fafc] py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
-                Our Values
-              </span>
-              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-                What We Stand For
-              </h2>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2">
-              {values.map((value, index) => (
-                <div
-                  key={value.title}
-                  className="rounded-2xl border border-[#e2e8f0] bg-white p-7 transition-all hover:border-[#534AB7]/30 hover:shadow-sm"
-                >
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#534AB7] text-sm font-black text-white">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-                  <h3 className="mb-2 text-lg font-black text-[#0a0f2e]">{value.title}</h3>
-                  <p className="text-sm text-[#64748b] leading-relaxed">{value.description}</p>
+        <Section tone="surface">
+          <SectionHeading variant="center" eyebrow="Our Values" title="What We Stand For" />
+          <CardGrid variant="cards" columns={2}>
+            {values.map((value, index) => (
+              <div
+                key={value.title}
+                className="rounded-2xl border border-[#e5e7eb] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#534AB7] text-sm font-bold text-white">
+                  {String(index + 1).padStart(2, "0")}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                <h3 className="mb-2 text-lg font-semibold text-[#0a0f2e]">{value.title}</h3>
+                <p className="text-sm leading-relaxed text-[#64748b]">{value.description}</p>
+              </div>
+            ))}
+          </CardGrid>
+        </Section>
  
         {/* ── Contact / Location ── */}
-        <section className="border-t border-[#e2e8f0] bg-white py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full bg-[#f5f3ff] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
-                Contact Us
-              </span>
-              <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-                Get in Touch
-              </h2>
-            </div>
- 
-            <div className="mx-auto max-w-2xl rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm sm:p-10">
+        <Section bordered={false}>
+          <SectionHeading variant="center" eyebrow="Contact Us" title="Get in Touch" />
+          <div className="mx-auto max-w-2xl rounded-2xl border border-[#e5e7eb] bg-white p-8 shadow-sm sm:p-10">
               <div className="flex items-start gap-4 mb-8">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#534AB7]">
                   <Building2 className="h-6 w-6 text-white" />
@@ -282,9 +265,8 @@ export default function AboutPage() {
                   Proudly serving clients in all <strong>50 US States</strong>
                 </p>
               </div>
-            </div>
           </div>
-        </section>
+        </Section>
  
       </main>
       <ChatWidget />

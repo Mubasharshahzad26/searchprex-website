@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ChatWidget from "@/components/ChatWidget";
+import { PageHero, Prose, Section } from "@/components/layout";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
@@ -26,16 +27,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function TermsPage() {
   return (
     <>
-      <main id="main-content" className="pt-32">
-        <section className="bg-white py-16">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-[#0a0f2e]">
-              Terms and Conditions
-            </h1>
-            <p className="mt-4 text-[#64748b]">Last updated: January 2026</p>
+      <main id="main-content">
+      <PageHero
+        centered
+        eyebrow="Legal"
+        title="Terms and Conditions"
+        subtitle="The terms that govern your use of SearchPrex services."
+      />
 
-            <div className="prose prose-lg mt-12 max-w-none text-[#374151]">
-              <h2 className="text-2xl font-bold text-[#0a0f2e]">
+      <Section width="reading" bordered={false}>
+        <Prose meta="Last updated: January 2026">
+              <h2>
                 1. Agreement to Terms
               </h2>
               <p>
@@ -44,14 +46,14 @@ export default function TermsPage() {
                 these terms, you may not access our services.
               </p>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 2. Services Description
               </h2>
               <p>
                 SearchPrex provides search engine optimization (SEO) services including 
                 but not limited to:
               </p>
-              <ul className="list-disc pl-6">
+              <ul>
                 <li>Technical SEO audits and implementation</li>
                 <li>On-page and off-page optimization</li>
                 <li>Content strategy and creation</li>
@@ -60,10 +62,10 @@ export default function TermsPage() {
                 <li>SEO consulting and strategy</li>
               </ul>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 3. Payment Terms
               </h2>
-              <h3 className="mt-6 text-xl font-semibold text-[#0a0f2e]">
+              <h3>
                 3.1 Pricing
               </h3>
               <p>
@@ -71,7 +73,7 @@ export default function TermsPage() {
                 services agreed upon in the proposal or service agreement.
               </p>
 
-              <h3 className="mt-6 text-xl font-semibold text-[#0a0f2e]">
+              <h3>
                 3.2 Payment Schedule
               </h3>
               <p>
@@ -79,7 +81,7 @@ export default function TermsPage() {
                 one-time charges are due upon signing of the service agreement.
               </p>
 
-              <h3 className="mt-6 text-xl font-semibold text-[#0a0f2e]">
+              <h3>
                 3.3 Late Payments
               </h3>
               <p>
@@ -87,7 +89,7 @@ export default function TermsPage() {
                 A late fee of 1.5% per month may be applied to overdue balances.
               </p>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 4. 90-Day Money-Back Guarantee
               </h2>
               <p>
@@ -95,12 +97,12 @@ export default function TermsPage() {
                 don&apos;t see measurable progress (defined as improvement in rankings, traffic, 
                 or leads) within 90 days of campaign launch, we will either:
               </p>
-              <ul className="list-disc pl-6">
+              <ul>
                 <li>Continue working at no charge until results are achieved, or</li>
                 <li>Provide a full refund of fees paid during the guarantee period</li>
               </ul>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 5. Contract Term and Cancellation
               </h2>
               <p>
@@ -108,18 +110,18 @@ export default function TermsPage() {
                 specified in writing. Either party may cancel services with 30 days written notice.
               </p>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 6. Client Responsibilities
               </h2>
               <p>To ensure optimal results, clients agree to:</p>
-              <ul className="list-disc pl-6">
+              <ul>
                 <li>Provide timely access to website, analytics, and other required tools</li>
                 <li>Review and approve content within 5 business days</li>
                 <li>Implement technical recommendations in a timely manner</li>
                 <li>Provide accurate business information</li>
               </ul>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 7. Results Disclaimer
               </h2>
               <p>
@@ -128,7 +130,7 @@ export default function TermsPage() {
                 do not guarantee specific rankings, traffic levels, or revenue outcomes.
               </p>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 8. Governing Law
               </h2>
               <p>
@@ -136,20 +138,19 @@ export default function TermsPage() {
                 United States, without regard to conflict of law provisions.
               </p>
 
-              <h2 className="mt-8 text-2xl font-bold text-[#0a0f2e]">
+              <h2>
                 9. Contact Information
               </h2>
               <p>For questions about these Terms, please contact us:</p>
-              <ul className="list-none pl-0">
+              <ul>
                 <li><strong>Email:</strong> legal@searchprex.com</li>
                 <li><strong>Phone:</strong> +92 310 652 6316</li>
                 <li>
                   <strong>Address:</strong> 1250 Executive Place, Suite 450, Geneva, IL 60134, USA
                 </li>
               </ul>
-            </div>
-          </div>
-        </section>
+        </Prose>
+      </Section>
       </main>
       <ChatWidget />
     </>

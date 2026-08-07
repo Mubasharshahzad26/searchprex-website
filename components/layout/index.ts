@@ -12,6 +12,9 @@ export type { SectionProps, SectionTone, SectionWidth } from "./Section";
 export { default as Breadcrumb } from "./Breadcrumb";
 export type { Crumb } from "./Breadcrumb";
 
+export { default as Prose } from "./Prose";
+export type { ProseProps } from "./Prose";
+
 export { default as SectionHeading } from "./SectionHeading";
 export type { SectionHeadingProps } from "./SectionHeading";
 
