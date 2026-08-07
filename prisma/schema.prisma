@@ -284,3 +284,83 @@ model BlogPost {
   @@index([clientId, status])
   @@index([scheduledAt])
 }
+
+model Page {
+  id               String   @id @default(cuid())
+  slug             String   @unique // e.g., "/" for home, "/about" for about
+  title            String
+  metaDescription  String
+  canonicalUrl     String?
+
+  // Open Graph
+  ogTitle          String?
+  ogDescription    String?
+  ogImage          String?
+  ogType           String?  @default("website") // website, article, product, etc.
+
+  // Twitter Card
+  twitterCard      String?  @default("summary_large_image")
+  twitterTitle     String?
+  twitterDescription String?
+  twitterImage     String?
+
+  // Robots & Indexing
+  robots           String?  @default("index, follow") // index/noindex, follow/nofollow
+  metaKeywords     String[] // SEO keywords array
+
+  // Schema.org JSON-LD
+  schemaType       String?  // Organization, WebPage, FAQPage, VideoObject, Product, etc.
+  schemaData       Json?    // Full JSON-LD structured data
+
+  // Content
+  contentBlocks    Json?    // Stores text, links, and media for the page
+
+  // Status
+  status           String   @default("published") // published, draft, archived
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+/// Cached SERP results for the free SERP Checker.
+///
+/// DataForSEO bills per keyword checked, and the tool is public and
+/// unauthenticated. Without this, one scripted client could run the account
+/// down — and most traffic is repeat queries anyway ("personal injury lawyer
+/// detroit" is the same SERP for every visitor who asks that hour).
+///
+/// `cacheKey` is keyword|location|device, lowercased and whitespace-collapsed.
+model SerpCache {
+  id        String   @id @default(cuid())
+  cacheKey  String   @unique
+  keyword   String
+  location  String
+  /// A serialised SerpKeywordResult from lib/serp-types.
+  payload   Json
+  /// Incremented on every cache hit — shows which queries are worth pre-warming.
+  hits      Int      @default(0)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+/// Durable per-visitor quota for the SERP Checker.
+///
+/// The route's original limiter was a module-level Map. On Vercel every lambda
+/// instance holds its own copy and instances churn constantly, so the limit was
+/// effectively unenforced in production. This survives across instances.
+///
+/// `visitorHash` is a salted SHA-256 of the IP, never the IP itself — the raw
+/// address is personal data and there is no reason to store it.
+model SerpUsage {
+  id          String   @id @default(cuid())
+  visitorHash String
+  /// UTC calendar day, YYYY-MM-DD.
+  day         String
+  count       Int      @default(0)
+  updatedAt   DateTime @updatedAt
+
+  @@unique([visitorHash, day])
+  @@index([day])
+}
