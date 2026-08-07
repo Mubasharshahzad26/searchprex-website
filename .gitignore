@@ -15,3 +15,6 @@ node_modules
 .DS_Store
 .vercel
 .env*
+
+# ...but the documented template of required variable NAMES must be committed.
+!.env.example
