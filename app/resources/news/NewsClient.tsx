@@ -66,10 +66,10 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
 export default function NewsClient() {
   return (
-    <main className="bg-[#eaecf3]">
+    <main className="bg-[#f8f9fc]">
  
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden border-b border-[#d4d8e3] bg-[#eaecf3] pt-28 pb-14">
+      <section className="relative overflow-hidden border-b border-[#e5e7eb] bg-[#f8f9fc] pt-28 pb-14">
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
         <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <Link href="/resources" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-[#64748b] transition-colors hover:text-[#534AB7]">
@@ -78,10 +78,10 @@ export default function NewsClient() {
           <span className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
             <Newspaper className="h-3.5 w-3.5" /> Latest SEO News
           </span>
-          <h1 className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-[#0a0f2e] sm:text-5xl">
             SEO &amp; Google Update News
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-[#475569] leading-relaxed">
+          <p className="mx-auto max-w-2xl text-lg text-[#64748b] leading-relaxed">
             Plain-English breakdowns of the algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated and explained.
           </p>
         </div>
@@ -95,7 +95,7 @@ export default function NewsClient() {
               <motion.article
                 key={item.title}
                 variants={fadeUp}
-                className="rounded-2xl border border-[#e2e8f0] bg-white p-6 transition-all hover:shadow-md"
+                className="rounded-2xl border border-[#e5e7eb] bg-white p-6 transition-all hover:shadow-md"
               >
                 <div className="mb-3 flex items-center gap-3">
                   <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider" style={{ background: `${item.tagColor}1a`, color: item.tagColor }}>
@@ -105,7 +105,7 @@ export default function NewsClient() {
                     <Calendar className="h-3 w-3" /> {item.date}
                   </span>
                 </div>
-                <h2 className="mb-2 text-xl font-black text-[#0a0f2e]">{item.title}</h2>
+                <h2 className="mb-2 text-xl font-bold text-[#0a0f2e]">{item.title}</h2>
                 <p className="mb-4 text-sm leading-relaxed text-[#64748b]">{item.summary}</p>
                 <a
                   href={item.sourceHref}
@@ -135,7 +135,7 @@ export default function NewsClient() {
       <section className="bg-[#0a0f2e] py-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <motion.h2 variants={fadeUp} className="mb-4 text-3xl font-black tracking-tight text-white sm:text-4xl">
+            <motion.h2 variants={fadeUp} className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Worried a core update hit your site?
             </motion.h2>
             <motion.p variants={fadeUp} className="mb-8 text-base text-white/70">

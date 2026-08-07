@@ -30,7 +30,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
   const [imgError, setImgError] = useState(false);
  
   const gradients: Record<string, string> = {
-    "Technical SEO": "from-[#0a0f2e] to-[#1a3c8f]",
+    "Technical SEO": "from-[#0a0f2e] to-[#3C3489]",
     "E-commerce SEO": "from-[#0f2027] to-[#203a43]",
     "Local SEO": "from-[#1a1a2e] to-[#16213e]",
     "Content Strategy": "from-[#0d1b2a] to-[#1b263b]",
@@ -53,7 +53,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
   return (
     <div className="relative w-full h-full overflow-hidden">
       {/* Branded gradient fallback — shows only if the image fails to load */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradients[category] || "from-[#0a0f2e] to-[#1a3c8f]"} flex items-center justify-center`}>
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradients[category] || "from-[#0a0f2e] to-[#3C3489]"} flex items-center justify-center`}>
         <div className="text-center opacity-30">
           <div className="text-5xl mb-2">📊</div>
           <div className="text-white text-xs font-mono">{category}</div>
@@ -167,10 +167,16 @@ export default function BlogClient() {
     <main className="bg-transparent min-h-screen">
  
       {/* ── 01 HERO ── */}
-      <section className="bg-[#eeeef5] relative overflow-hidden pt-28 pb-0">
+      <section className="bg-[#f8f9fc] relative overflow-hidden pt-28 pb-0">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-0">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0a0f2e] mb-5 leading-tight">SearchPrex Blog</h1>
+            {/* Matches heading.h1 from design-tokens. The hero keeps its own
+                markup rather than using PageHero because the search bar below
+                is deliberately flush to the section edge (pb-0 + rounded-t-xl),
+                which PageHero's padding would break. */}
+            <h1 className="mb-5 text-4xl font-bold leading-[1.1] tracking-tight text-[#0a0f2e] sm:text-5xl lg:text-6xl">
+              SearchPrex Blog
+            </h1>
             <p className="text-lg text-[#64748b] max-w-2xl mb-8 leading-relaxed">
               Founder-written SEO guides on Technical SEO, E-commerce, Local SEO, and Content Strategy — built for practitioners, not beginners.
             </p>
@@ -199,7 +205,7 @@ export default function BlogClient() {
               <div className="w-px h-6 bg-[#e5e7eb] mx-1" />
               {voiceSupported && (
                 <button onClick={handleVoiceSearch} title={isListening ? "Stop listening" : "Search by voice"}
-                  className={`px-4 py-5 transition-all flex items-center gap-1.5 text-sm font-medium ${isListening ? "text-red-500 animate-pulse" : "text-[#534AB7] hover:text-[#3d35a0]"}`}>
+                  className={`px-4 py-5 transition-all flex items-center gap-1.5 text-sm font-medium ${isListening ? "text-red-500 animate-pulse" : "text-[#534AB7] hover:text-[#3C3489]"}`}>
                   {isListening ? <><MicOff className="h-5 w-5" /><span className="text-xs hidden sm:inline">Stop</span></> : <><Mic className="h-5 w-5" /><span className="text-xs hidden sm:inline">Voice</span></>}
                 </button>
               )}
@@ -214,17 +220,23 @@ export default function BlogClient() {
       </section>
  
       {/* ── 02 CATEGORIES ── */}
-      <section className="bg-[#eeeef5] border-b border-[#e5e7eb]">
+      <section className="bg-[#f8f9fc] border-b border-[#e5e7eb]" aria-labelledby="blog-categories">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+          {/* The category tiles are h3s. Without this the outline jumped h1 → h3,
+              which reads to a screen reader (and to Google) as a missing level.
+              Visually hidden because the tiles are self-explanatory on screen. */}
+          <h2 id="blog-categories" className="sr-only">
+            Browse articles by category
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border border-[#e5e7eb] rounded-xl overflow-hidden">
             {categoryData.map((cat, i) => {
               const Icon = categoryIcons[cat.label] || Settings;
               return (
                 <button key={cat.slug}
                   onClick={() => { setActiveCategory(activeCategory === cat.label ? "All" : cat.label); setTimeout(() => postsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 200); }}
-                  className={`text-left p-8 border-[#e5e7eb] transition-all hover:bg-white group ${i % 3 !== 2 ? "lg:border-r" : ""} ${i % 2 === 0 ? "sm:border-r lg:border-r-0" : ""} ${i < 4 ? "border-b" : ""} ${i % 3 !== 2 && i < 3 ? "lg:border-r" : ""} ${activeCategory === cat.label ? "bg-white shadow-inner" : "bg-[#eeeef5]"}`}
+                  className={`text-left p-8 border-[#e5e7eb] transition-all hover:bg-white group ${i % 3 !== 2 ? "lg:border-r" : ""} ${i % 2 === 0 ? "sm:border-r lg:border-r-0" : ""} ${i < 4 ? "border-b" : ""} ${i % 3 !== 2 && i < 3 ? "lg:border-r" : ""} ${activeCategory === cat.label ? "bg-white shadow-inner" : "bg-[#f8f9fc]"}`}
                 >
-                  <Icon className={`h-7 w-7 mb-4 transition-colors ${activeCategory === cat.label ? "text-[#534AB7]" : "text-[#94a3b8] group-hover:text-[#1a3c8f]"}`} />
+                  <Icon className={`h-7 w-7 mb-4 transition-colors ${activeCategory === cat.label ? "text-[#534AB7]" : "text-[#94a3b8] group-hover:text-[#3C3489]"}`} />
                   <h3 className={`text-xl font-bold mb-2 transition-colors ${activeCategory === cat.label ? "text-[#534AB7]" : "text-[#0a0f2e]"}`}>{cat.label}</h3>
                   <p className="text-sm text-[#64748b] leading-relaxed">{cat.desc}</p>
                 </button>
@@ -235,10 +247,10 @@ export default function BlogClient() {
       </section>
  
       {/* ── 03 NEWSLETTER ── */}
-      <section className="bg-[#eeeef5] py-14 border-b border-[#e5e7eb]">
+      <section className="bg-[#f8f9fc] py-14 border-b border-[#e5e7eb]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <h2 className="text-3xl font-black text-[#0a0f2e] max-w-sm leading-tight">Expert SEO insights, delivered weekly.</h2>
+            <h2 className="text-3xl font-bold text-[#0a0f2e] max-w-sm leading-tight">Expert SEO insights, delivered weekly.</h2>
             {subscribed ? (
               <div className="flex items-center gap-2 text-emerald-600 font-semibold text-lg">
                 <CheckCircle className="h-6 w-6" />
@@ -265,7 +277,7 @@ export default function BlogClient() {
       </section>
  
       {/* ── 04 POSTS — featured + compact grid ── */}
-      <section ref={postsRef} id="posts-grid" className="py-20 bg-[#eeeef5] scroll-mt-20">
+      <section ref={postsRef} id="posts-grid" className="py-20 bg-[#f8f9fc] scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {isFiltering && (
             <div className="flex items-center gap-3 mb-10 flex-wrap">
@@ -306,7 +318,7 @@ export default function BlogClient() {
                       <span className="text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">{featuredPost.subcategory}</span>
                     </div>
                     <Link href={`/blog/${featuredPost.slug}`}>
-                      <h2 className="text-[#0a0f2e] font-black text-2xl leading-snug mb-4 hover:text-[#1a3c8f] transition-colors">{featuredPost.title}</h2>
+                      <h2 className="text-[#0a0f2e] font-bold text-2xl leading-snug mb-4 hover:text-[#3C3489] transition-colors">{featuredPost.title}</h2>
                     </Link>
                     <p className="text-[#64748b] text-sm leading-relaxed mb-5">{featuredPost.excerpt}</p>
                     <div className="flex items-center gap-2 text-[#94a3b8] text-xs font-semibold uppercase tracking-wide mb-6">
@@ -332,7 +344,7 @@ export default function BlogClient() {
                       </div>
                     </div>
                     <Link href={`/blog/${featuredPost.slug}`}
-                      className="mt-5 inline-flex items-center gap-1 text-[#1a3c8f] text-sm font-bold uppercase tracking-wide hover:gap-2 transition-all">
+                      className="mt-5 inline-flex items-center gap-1 text-[#3C3489] text-sm font-bold uppercase tracking-wide hover:gap-2 transition-all">
                       Continue Reading <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
@@ -355,7 +367,7 @@ export default function BlogClient() {
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#534AB7]">{post.subcategory}</span>
                       </div>
                       <Link href={`/blog/${post.slug}`}>
-                        <h2 className="text-[#0a0f2e] font-black text-base leading-snug mb-3 hover:text-[#1a3c8f] transition-colors">{post.title}</h2>
+                        <h2 className="text-[#0a0f2e] font-bold text-base leading-snug mb-3 hover:text-[#3C3489] transition-colors">{post.title}</h2>
                       </Link>
                       <div className="flex items-center gap-2 text-[#94a3b8] text-[11px] font-medium mb-3">
                         <span>{fmtDate(post.date)}</span>
@@ -374,7 +386,7 @@ export default function BlogClient() {
  
           {/* ── Audit CTA (CRO) ── */}
           <div className="mt-14 flex flex-col items-center gap-3 rounded-2xl border border-[#e5e7eb] bg-white p-8 text-center">
-            <p className="text-xl font-black text-[#0a0f2e]">Reading about the problem? We fix it for a living.</p>
+            <p className="text-xl font-bold text-[#0a0f2e]">Reading about the problem? We fix it for a living.</p>
             <p className="max-w-xl text-sm text-[#64748b]">
               Get a free, founder-reviewed SEO audit of your site — with a 90-day roadmap, within 24 hours.
             </p>
@@ -389,9 +401,9 @@ export default function BlogClient() {
       </section>
  
       {/* ── 05 MOST READ ── */}
-      <section className="py-20 bg-[#eeeef5] border-t border-[#e5e7eb]">
+      <section className="py-20 bg-[#f8f9fc] border-t border-[#e5e7eb]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-black text-[#0a0f2e] mb-10">Most-read Articles</h2>
+          <h2 className="text-2xl font-bold text-[#0a0f2e] mb-10">Most-read Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {mostRead.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group block bg-white rounded-2xl border border-[#e5e7eb] p-5 hover:shadow-lg transition-all">
@@ -403,7 +415,7 @@ export default function BlogClient() {
                   <ChevronRight className="h-3 w-3 text-[#94a3b8]" />
                   <span className="text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">{post.subcategory}</span>
                 </div>
-                <h3 className="text-[#0a0f2e] font-black text-lg leading-snug mb-2 group-hover:text-[#1a3c8f] transition-colors">{post.title}</h3>
+                <h3 className="text-[#0a0f2e] font-bold text-lg leading-snug mb-2 group-hover:text-[#3C3489] transition-colors">{post.title}</h3>
                 <div className="flex items-center gap-2 text-[#94a3b8] text-xs font-semibold uppercase tracking-wide">
                   <span>{fmtDate(post.date)}</span>
                   <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />

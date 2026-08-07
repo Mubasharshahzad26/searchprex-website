@@ -76,10 +76,10 @@ export default function CaseStudiesPageClient() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
  
   return (
-    <main className="bg-[#eaecf3]">
+    <main className="bg-[#f8f9fc]">
  
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden border-b border-[#d4d8e3] bg-[#eaecf3] pt-28 pb-16">
+      <section className="relative overflow-hidden border-b border-[#e5e7eb] bg-[#f8f9fc] pt-28 pb-16">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "60px 60px" }}
@@ -94,10 +94,10 @@ export default function CaseStudiesPageClient() {
             <motion.span variants={fadeUp} className="mb-4 inline-block rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(62,180,137,0.12)", color: GREEN_DARK }}>
               Verified Results · Real GSC Data
             </motion.span>
-            <motion.h1 variants={fadeUp} className="mb-4 text-5xl font-black tracking-tight text-[#0a0f2e] sm:text-6xl">
+            <motion.h1 variants={fadeUp} className="mb-4 text-5xl font-bold tracking-tight text-[#0a0f2e] sm:text-6xl">
               Case Studies
             </motion.h1>
-            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#475569] leading-relaxed">
+            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#64748b] leading-relaxed">
               Real results from real clients — most backed by live Google Search Console screen recordings. No vanity metrics. Just clicks, rankings, leads, and revenue.
             </motion.p>
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-6">
@@ -124,7 +124,7 @@ export default function CaseStudiesPageClient() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="grid items-stretch gap-0 overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white shadow-sm lg:grid-cols-2"
+                  className="grid items-stretch gap-0 overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white shadow-sm lg:grid-cols-2"
                 >
                   {/* VISUAL (video or gradient) */}
                   <div className={`${videoLeft ? "" : "lg:order-2"}`}>
@@ -159,7 +159,7 @@ export default function CaseStudiesPageClient() {
                         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)", backgroundSize: "28px 28px" }} />
                         <div className="relative text-center">
                           <Shield className="mx-auto mb-4 h-12 w-12 text-white/80" />
-                          <p className="text-2xl font-black text-white">{cs.client}</p>
+                          <p className="text-2xl font-bold text-white">{cs.client}</p>
                           <p className="mt-1 text-sm text-white/70">{cs.location}</p>
                         </div>
                       </div>
@@ -177,20 +177,20 @@ export default function CaseStudiesPageClient() {
                       </span>
                     </div>
  
-                    <h2 className="mb-6 text-xl font-black leading-snug text-[#0a0f2e]">{cs.headline}</h2>
+                    <h2 className="mb-6 text-xl font-bold leading-snug text-[#0a0f2e]">{cs.headline}</h2>
  
                     <div className="space-y-4">
                       <div>
                         <p className="mb-1 text-sm font-bold" style={{ color: "#ef4444" }}>Challenge</p>
-                        <p className="text-sm text-[#475569] leading-relaxed">{cs.challenge}</p>
+                        <p className="text-sm text-[#64748b] leading-relaxed">{cs.challenge}</p>
                       </div>
                       <div>
                         <p className="mb-1 text-sm font-bold" style={{ color: GREEN_DARK }}>Solution</p>
-                        <p className="text-sm text-[#475569] leading-relaxed">{cs.solution}</p>
+                        <p className="text-sm text-[#64748b] leading-relaxed">{cs.solution}</p>
                       </div>
                       <div>
                         <p className="mb-1 text-sm font-bold" style={{ color: "#534AB7" }}>Outcome</p>
-                        <p className="text-sm text-[#475569] leading-relaxed">{cs.outcome}</p>
+                        <p className="text-sm text-[#64748b] leading-relaxed">{cs.outcome}</p>
                       </div>
                     </div>
  
@@ -198,7 +198,7 @@ export default function CaseStudiesPageClient() {
                     <div className="mt-6 flex flex-wrap gap-2">
                       {cs.metrics.map((m) => (
                         <span key={m.l} className="inline-flex items-baseline gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold" style={{ borderColor: "rgba(62,180,137,0.3)", background: "rgba(62,180,137,0.08)", color: GREEN_DARK }}>
-                          <span className="text-sm font-black">{m.v}</span> {m.l}
+                          <span className="text-sm font-bold">{m.v}</span> {m.l}
                         </span>
                       ))}
                     </div>
@@ -249,7 +249,7 @@ export default function CaseStudiesPageClient() {
             <motion.p variants={fadeUp} className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>
               Ready to be our next case study?
             </motion.p>
-            <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black tracking-tight text-white">
+            <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-bold tracking-tight text-white">
               Your Business. Your Results.<br />
               <span style={{ color: GREEN }}>Let&apos;s Build the Story.</span>
             </motion.h2>
