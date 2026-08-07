@@ -25,13 +25,13 @@ const baseMetadata: Metadata = {
   description:
     "NicheSEOPro is the SEO tool built specifically for law firms, ecommerce stores, and local businesses. Get a 14-day free trial with no credit card required.",
   alternates: {
-    canonical: "https://searchprex.com/tool",
+    canonical: "https://www.searchprex.com/tool",
   },
   openGraph: {
     title: "NicheSEOPro - SEO Tool for Niche Businesses",
     description:
       "The SEO tool built for law firms and ecommerce. 14-day free trial.",
-    url: "https://searchprex.com/tool",
+    url: "https://www.searchprex.com/tool",
     type: "website",
   },
 };
@@ -89,7 +89,7 @@ export default function ToolPage() {
       "description": "14-day free trial"
     },
     "description": "SEO tool built for law firms, ecommerce stores, and local businesses.",
-    "url": "https://searchprex.com/tool"
+    "url": "https://www.searchprex.com/tool"
   };
  
   return (

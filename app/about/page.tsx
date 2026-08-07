@@ -118,7 +118,7 @@ export default function AboutPage() {
         "name": "SearchPrex",
         "url": siteUrl,
         "email": "contact@searchprex.com",
-        "telephone": "+1-800-555-1234",
+        "telephone": "+92-310-652-6316",
         "founder": {
           "@type": "Person",
           "@id": "#founder",
@@ -232,12 +232,12 @@ export default function AboutPage() {
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
                     <Phone className="h-4 w-4 text-[#534AB7]" />
                   </div>
-                  <a 
-                    href="tel:+1-800-555-1234" 
-                    className="text-sm text-[#374151] hover:text-[#534AB7] transition-colors"
+                  <a
+                    href="tel:+923106526316"
+                    className="text-sm text-[#475569] transition-colors hover:text-[#534AB7]"
                     title="Call SearchPrex"
                   >
-                    +1-800-555-1234
+                    +92 310 652 6316
                   </a>
                 </div>
                 <div className="flex items-center gap-4">

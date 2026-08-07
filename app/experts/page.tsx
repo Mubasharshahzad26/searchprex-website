@@ -5,17 +5,17 @@ import { Linkedin, Award, BadgeCheck, Clock } from "lucide-react";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
-  title: "Meet Our Experts - SearchPrex SEO Team",
+  title: "Meet Our SEO Experts",
   description:
     "Meet Mubashar Shahzad, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
   alternates: {
-    canonical: "https://searchprex.com/experts",
+    canonical: "https://www.searchprex.com/experts",
   },
   openGraph: {
     title: "Meet Our Experts - SearchPrex SEO Team",
     description:
       "Meet Mubashar Shahzad, founder of SearchPrex — senior-led SEO with proven results.",
-    url: "https://searchprex.com/experts",
+    url: "https://www.searchprex.com/experts",
     type: "website",
   },
 };
@@ -105,7 +105,7 @@ export default function ExpertsPage() {
     "@type": "WebPage",
     "name": "Meet Our Experts",
     "description": "Meet Mubashar Shahzad, founder of SearchPrex.",
-    "url": "https://searchprex.com/experts",
+    "url": "https://www.searchprex.com/experts",
     "mainEntity": {
       "@type": "Person",
       "name": "Mubashar Shahzad",

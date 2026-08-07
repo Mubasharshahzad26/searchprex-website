@@ -17,12 +17,12 @@ const baseMetadata: Metadata = {
   title: "Law Firm SEO Kansas | Family Law & Attorney SEO",
   description:
     "Founder-led law firm SEO for Kansas attorneys. We help family law, personal injury, and criminal defense firms rank across Wichita, Overland Park, Kansas City, Topeka, Lawrence, Shawnee, Lenexa, and Manhattan.",
-  alternates: { canonical: "https://searchprex.com/locations/kansas" },
+  alternates: { canonical: "https://www.searchprex.com/locations/kansas" },
   openGraph: {
     title: "Law Firm SEO Across Kansas | SearchPrex",
     description:
       "Founder-led, senior-executed SEO for Kansas law firms. Real local strategy for every market we serve.",
-    url: "https://searchprex.com/locations/kansas",
+    url: "https://www.searchprex.com/locations/kansas",
     type: "website",
   },
 };
@@ -39,9 +39,9 @@ const schema = {
   "@graph": [
     {
       "@type": "ProfessionalService",
-      "@id": "https://searchprex.com/locations/kansas#service",
+      "@id": "https://www.searchprex.com/locations/kansas#service",
       name: "SearchPrex — Law Firm SEO Kansas",
-      url: "https://searchprex.com/locations/kansas",
+      url: "https://www.searchprex.com/locations/kansas",
       description:
         "Founder-led SEO services for law firms and family law attorneys across Kansas.",
       areaServed: { "@type": "State", name: "Kansas" },
@@ -49,14 +49,14 @@ const schema = {
         "Law Firm SEO", "Family Law SEO", "Local SEO",
         "Google Business Profile optimization", "Attorney E-E-A-T", "Legal YMYL content",
       ],
-      founder: { "@id": "https://searchprex.com/#founder" },
+      founder: { "@id": "https://www.searchprex.com/#founder" },
     },
     {
       "@type": "Person",
-      "@id": "https://searchprex.com/#founder",
+      "@id": "https://www.searchprex.com/#founder",
       name: "Mubashar Shahzad",
       jobTitle: "Founder & Senior SEO Strategist",
-      worksFor: { "@id": "https://searchprex.com/locations/kansas#service" },
+      worksFor: { "@id": "https://www.searchprex.com/locations/kansas#service" },
       sameAs: [
         "https://www.linkedin.com/in/mubashar-shahzad-seo/",
         "https://www.upwork.com/freelancers/~01400266ea842005be",
@@ -65,18 +65,18 @@ const schema = {
     },
     {
       "@type": "WebPage",
-      "@id": "https://searchprex.com/locations/kansas#webpage",
-      url: "https://searchprex.com/locations/kansas",
+      "@id": "https://www.searchprex.com/locations/kansas#webpage",
+      url: "https://www.searchprex.com/locations/kansas",
       name: "Law Firm SEO Kansas",
-      breadcrumb: { "@id": "https://searchprex.com/locations/kansas#breadcrumb" },
+      breadcrumb: { "@id": "https://www.searchprex.com/locations/kansas#breadcrumb" },
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://searchprex.com/locations/kansas#breadcrumb",
+      "@id": "https://www.searchprex.com/locations/kansas#breadcrumb",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://searchprex.com" },
-        { "@type": "ListItem", position: 2, name: "Locations", item: "https://searchprex.com/locations" },
-        { "@type": "ListItem", position: 3, name: "Kansas", item: "https://searchprex.com/locations/kansas" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.searchprex.com" },
+        { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.searchprex.com/locations" },
+        { "@type": "ListItem", position: 3, name: "Kansas", item: "https://www.searchprex.com/locations/kansas" },
       ],
     },
   ],

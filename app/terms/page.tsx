@@ -4,16 +4,16 @@ import { PageHero, Prose, Section } from "@/components/layout";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
-  title: "Terms and Conditions - SearchPrex",
+  title: "Terms and Conditions",
   description:
     "SearchPrex terms and conditions. Read our service agreement, payment terms, and policies.",
   alternates: {
-    canonical: "https://searchprex.com/terms",
+    canonical: "https://www.searchprex.com/terms",
   },
   openGraph: {
     title: "Terms and Conditions - SearchPrex",
     description: "SearchPrex terms of service and conditions of use.",
-    url: "https://searchprex.com/terms",
+    url: "https://www.searchprex.com/terms",
     type: "website",
   },
 };

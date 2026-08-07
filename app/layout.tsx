@@ -145,7 +145,7 @@ export default function RootLayout({
           "postalCode": "60134",
           "addressCountry": "US"
         },
-        "telephone": "+1-800-555-1234",
+        "telephone": "+92-310-652-6316",
         "email": "hello@searchprex.com",
         "founder": {
           "@type": "Person",

@@ -4,16 +4,16 @@ import { PageHero, Prose, Section } from "@/components/layout";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
-  title: "Privacy Policy - SearchPrex",
+  title: "Privacy Policy",
   description:
     "SearchPrex privacy policy. Learn how we collect, use, and protect your personal information.",
   alternates: {
-    canonical: "https://searchprex.com/privacy",
+    canonical: "https://www.searchprex.com/privacy",
   },
   openGraph: {
     title: "Privacy Policy - SearchPrex",
     description: "SearchPrex privacy policy and data protection practices.",
-    url: "https://searchprex.com/privacy",
+    url: "https://www.searchprex.com/privacy",
     type: "website",
   },
 };

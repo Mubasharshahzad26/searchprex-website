@@ -72,7 +72,7 @@ const allFaqs = faqCategories.flatMap((cat) => cat.faqs);
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "@id": "https://searchprex.com/#faq",
+  "@id": "https://www.searchprex.com/#faq",
   mainEntity: allFaqs.map((f) => ({
     "@type": "Question",
     name: f.question,

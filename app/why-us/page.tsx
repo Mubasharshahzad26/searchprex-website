@@ -15,16 +15,16 @@ import Link from "next/link";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
-  title: "Why Choose SearchPrex - USA SEO Agency Benefits",
+  title: "Why Choose Us — Founder-Led USA SEO Agency",
   description:
     "Discover why 20+ businesses trust SearchPrex for their SEO needs. Founder-led execution, senior strategy, transparent pricing, and real results.",
   alternates: {
-    canonical: "https://searchprex.com/why-us",
+    canonical: "https://www.searchprex.com/why-us",
   },
   openGraph: {
     title: "Why Choose SearchPrex - USA SEO Agency Benefits",
     description: "Discover why 20+ businesses trust SearchPrex for their SEO needs.",
-    url: "https://searchprex.com/why-us",
+    url: "https://www.searchprex.com/why-us",
     type: "website",
   },
 };
@@ -97,7 +97,7 @@ export default function WhyUsPage() {
     "@type": "WebPage",
     "name": "Why Choose SearchPrex",
     "description": "Discover why 20+ businesses trust SearchPrex for their SEO needs.",
-    "url": "https://searchprex.com/why-us",
+    "url": "https://www.searchprex.com/why-us",
   };
  
   return (

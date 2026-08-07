@@ -14,17 +14,17 @@ import {
 
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
-  title: "SEO Pricing Plans - SearchPrex USA SEO Agency",
+  title: "SEO Pricing Plans — USA SEO Agency",
   description:
     "Transparent SEO pricing for law firms, ecommerce stores, and local businesses. Starting at $1,500/month. No long-term contracts. 90-day money-back guarantee.",
   alternates: {
-    canonical: "https://searchprex.com/pricing",
+    canonical: "https://www.searchprex.com/pricing",
   },
   openGraph: {
     title: "SEO Pricing Plans - SearchPrex USA SEO Agency",
     description:
       "Transparent SEO pricing starting at $1,500/month. No contracts, 90-day guarantee.",
-    url: "https://searchprex.com/pricing",
+    url: "https://www.searchprex.com/pricing",
     type: "website",
   },
 };
@@ -60,7 +60,7 @@ export default function PricingPage() {
     "@type": "WebPage",
     "name": "SEO Pricing Plans",
     "description": "Transparent SEO pricing for businesses of all sizes.",
-    "url": "https://searchprex.com/pricing",
+    "url": "https://www.searchprex.com/pricing",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": [
