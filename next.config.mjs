@@ -32,6 +32,20 @@ const nextConfig = {
     // ],
   },
 
+  async redirects() {
+    return [
+      {
+        // /nicheseopro is renamed to /tools/keyword-research. Permanent (301)
+        // so Search Console transfers the old URL's history rather than
+        // treating the new one as an unrelated page — it already had
+        // impressions at around position 12.
+        source: '/nicheseopro',
+        destination: '/tools/keyword-research',
+        permanent: true,
+      },
+    ]
+  },
+
   async headers() {
     return [
       {

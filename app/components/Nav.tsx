@@ -60,7 +60,7 @@ const navLinks: NavLink[] = [
       { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
       { href: "/ai-search",             label: "AI Search" },
       { href: "/content-generator",     label: "AI Content Suite" },
-      { href: "/nicheseopro",           label: "Keyword Magic Tool" },
+      { href: "/tools/keyword-research",           label: "AI Keyword Research" },
       { href: "/tools",                 label: "All Tools" },
     ],
   },

@@ -67,17 +67,21 @@ const tools = [
     stats: "Up to 5 keywords",
   },
   {
-    id: "content-generator",
+    id: "keyword-research",
     icon: Sparkles,
     iconBg: "#EEEDFE",
     iconColor: "#534AB7",
     accentColor: "#534AB7",
-    label: "SEO Content Generator",
-    desc: "Generate SEO-optimized product descriptions, meta tags, and blog outlines — powered by AI.",
-    tags: ["AI Content", "Product Descriptions", "Meta Tags"],
-    status: "pro",
-    href: "/nicheseopro",
-    stats: "NicheSEO Pro",
+    label: "AI Keyword Research",
+    desc: "Enter a topic and get keywords grouped by theme, the search intent behind each, and the page to build for it.",
+    tags: ["Keyword Ideas", "Search Intent", "Content Angles"],
+    // Genuinely live: /tools/keyword-research is deployed and its API returns
+    // real model output. It shows no search volume or difficulty, because those
+    // require a paid data provider and inventing them is what the SERP Checker
+    // used to do.
+    status: "live",
+    href: "/tools/keyword-research",
+    stats: "No signup",
   },
   {
     id: "serp-simulator",
@@ -298,7 +302,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
               </p>
             ))}
             <CtaButton
-              href="/nicheseopro"
+              href="/tools/keyword-research"
               className="mt-4 w-full justify-center lg:w-auto"
               icon={<ArrowRight className="h-4 w-4" aria-hidden />}
             >

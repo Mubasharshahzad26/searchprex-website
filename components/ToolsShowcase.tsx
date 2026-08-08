@@ -43,7 +43,9 @@ const TOOLS: Tool[] = [
     accent: GREEN,
   },
   { name: "AI Content Suite", href: "/content-generator", desc: "Generate people-first, E-E-A-T content at scale.", icon: FileText, accent: PURPLE },
-  { name: "Keyword Magic Tool", href: "/nicheseopro", desc: "Real keyword volume & difficulty from live data.", icon: Search, accent: GREEN },
+  // Was "Real keyword volume & difficulty from live data" — the tool shows
+  // neither, and never did from live data. It now describes what it does do.
+  { name: "AI Keyword Research", href: "/tools/keyword-research", desc: "Keywords grouped by theme, with intent and the page to build.", icon: Search, accent: PURPLE },
 ];
  
 const fadeUp = {
