@@ -385,19 +385,16 @@ function SourceBanner({ source }: { source: KeywordResponse['source'] }) {
       </div>
     )
   }
+  // Written for visitors, not for us. This banner used to print
+  // "add DATAFORSEO_LOGIN and DATAFORSEO_PASSWORD" — an instruction to the
+  // developer, shown to prospects on a public marketing page. It still has to
+  // say the numbers aren't live, because they aren't.
   return (
     <div className="flex items-center gap-2 rounded-lg border border-[#ffe2a8] bg-[#fff7e6] px-4 py-2 text-sm text-[#92660a]">
       <TriangleAlert className="size-4 shrink-0" />
       <span>
-        <strong>Estimated data</strong> — add{' '}
-        <code className="rounded bg-black/5 px-1 py-0.5 text-[12px]">
-          DATAFORSEO_LOGIN
-        </code>{' '}
-        and{' '}
-        <code className="rounded bg-black/5 px-1 py-0.5 text-[12px]">
-          DATAFORSEO_PASSWORD
-        </code>{' '}
-        to unlock live, 100%-accurate metrics.
+        <strong>Sample data</strong> — these figures are illustrative, not live
+        search volumes. Live metrics are coming shortly.
       </span>
     </div>
   )
