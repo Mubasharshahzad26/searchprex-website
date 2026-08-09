@@ -1,9 +1,8 @@
-// Rotator v2 - label-prefix filter | deploy verify 2026-08-05
+// Rotator v2 - label-prefix filter | quota-error auto-blacklist | deploy 2026-08-06
 import { google } from 'googleapis'
 import { GoogleAuth } from 'google-auth-library'
 import { db } from './db'
 import { withRetry } from './db-retry'
-
 
 function extractHostname(url: string): string {
   try {
@@ -22,6 +21,21 @@ function hostToLabelPrefix(hostname: string): string {
     '4klivehdiptv.com': '4KLive Indexing',
   }
   return map[hostname] ?? ''
+}
+
+// Detects Google Indexing API quota/rate-limit errors so we can mark the
+// account as exhausted for the day and let the rotator skip it.
+// Without this, a quota-hit account with usedToday=3 keeps getting picked
+// (lowest usedToday first) and fails every single attempt in an infinite loop.
+function isQuotaError(msg: string): boolean {
+  const lower = msg.toLowerCase()
+  return (
+    lower.includes('quota exceeded') ||
+    lower.includes('resource_exhausted') ||
+    lower.includes('rate_limit_exceeded') ||
+    lower.includes('too many requests') ||
+    lower.includes('quota metric')
+  )
 }
 
 async function resetQuotasIfNeeded(accounts: any[]) {
@@ -62,7 +76,7 @@ async function pickAccountForUrl(url: string) {
     throw new Error(`No GSC connection for hostname: ${hostname}`)
   }
 
-  // NEW: pick accounts by label prefix (site-scoped), not by GSC service email.
+  // Pick accounts by label prefix (site-scoped), not by GSC service email.
   // This supports the pattern where 1 GSC service account reads data,
   // but multiple separate service accounts (e.g. 5 per site) submit URLs to Indexing API.
   const labelPrefix = hostToLabelPrefix(hostname)
@@ -135,6 +149,19 @@ export async function submitUrl(
     return { success: true, account: account.label }
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Unknown indexing error'
+
+    // If Google says the account's quota is exhausted, mark it as fully used
+    // in DB so the rotator stops picking it for the rest of the day.
+    // resetQuotasIfNeeded() will auto-clear this at UTC midnight.
+    if (isQuotaError(msg)) {
+      await withRetry(() =>
+        db.indexingAccount.update({
+          where: { id: account.id },
+          data: { usedToday: account.dailyQuota },
+        })
+      )
+    }
+
     await withRetry(() =>
       db.indexingLog.create({
         data: {
