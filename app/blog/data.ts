@@ -2,6 +2,8 @@
 // Single source of truth for blog listing data — imported by BOTH page.tsx
 // (for schema) and BlogClient.tsx (for UI). Lives here (server-safe), never
 // inside a "use client" file.
+
+import { posts as publishedPosts } from "./[slug]/posts";
  
 export const categories = [
   { label: "Technical SEO", slug: "technical-seo", desc: "Crawl budget, Core Web Vitals, indexation fixes, site architecture, and everything under the hood." },
@@ -25,7 +27,7 @@ export interface Post {
   featured: boolean;
 }
  
-export const posts: Post[] = [
+const ALL_POSTS: Post[] = [
   { slug: "crawl-budget-optimization-guide", category: "Technical SEO", subcategory: "Crawl Optimization", title: "Crawl Budget Optimization: The Complete 2026 Guide for Large E-commerce Sites", excerpt: "If Google isn't crawling your most important pages, they won't rank. Here's exactly how to audit and fix crawl budget issues at scale.", readTime: "12-minute read", date: "2026-06-18", author: { name: "Mubashar Shahzad", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO. He has managed 40,000+ page sites and solved mass non-indexing issues for multiple brands.", featured: true },
   { slug: "google-indexing-api-python", category: "Technical SEO", subcategory: "Indexing", title: "Google Indexing API: How to Submit 1,000 URLs/Day with Python", excerpt: "The standard GSC submission is slow. This step-by-step guide shows you how to build a 5-account rotator system for mass URL submission.", readTime: "18-minute read", date: "2026-06-09", author: { name: "Mubashar Shahzad", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO.", featured: false },
   { slug: "ecommerce-product-page-seo", category: "E-commerce SEO", subcategory: "Product Pages", title: "Product Page SEO at Scale: How to Write Unique Content for 10,000+ SKUs", excerpt: "Duplicate boilerplate content is the #1 reason e-commerce product pages fail to index. Here's the brand-by-brand rewriting strategy that works.", readTime: "15-minute read", date: "2026-05-28", author: { name: "Mubashar Shahzad", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO.", featured: false },
@@ -34,9 +36,28 @@ export const posts: Post[] = [
   { slug: "topical-authority-content-clusters", category: "Content Strategy", subcategory: "Topical Authority", title: "How to Build Topical Authority with Content Clusters (Step-by-Step)", excerpt: "Google rewards sites that prove deep expertise on a subject. Here's how to map, build, and interlink content clusters that establish true topical authority.", readTime: "16-minute read", date: "2026-04-16", author: { name: "Mubashar Shahzad", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO.", featured: false },
 ];
  
-export const mostRead = [
+const ALL_MOST_READ = [
   { slug: "non-indexing-fix-ecommerce", category: "Technical SEO", subcategory: "Indexing", title: "Why 80% of Your E-commerce Pages Aren't Indexed (And How to Fix It)", readTime: "10-minute read", date: "2026-06-12", rank: 1 },
   { slug: "schema-markup-ecommerce", category: "On-Page SEO", subcategory: "Schema", title: "Product Schema Markup: The Complete JSON-LD Guide for E-commerce", readTime: "8-minute read", date: "2026-05-21", rank: 2 },
   { slug: "google-ai-overviews-seo", category: "Content Strategy", subcategory: "AIO", title: "How to Appear in Google AI Overviews: GEO Strategy for 2026", readTime: "11-minute read", date: "2026-06-02", rank: 3 },
 ];
  
+/**
+ * Only posts that actually have a detail page are listed.
+ *
+ * app/blog/[slug]/posts.ts is the source of truth for what is publishable — it
+ * holds the article bodies. This file carries listing metadata for more posts
+ * than have been written, so /blog was rendering nine cards of which six led
+ * nowhere. Before the [slug] route was made to call notFound(), those six
+ * silently served the FIRST article instead, which was worse: six URLs of
+ * duplicate content. "Most-read Articles" was the sharpest case — all three of
+ * its links were dead.
+ *
+ * Filtering here means adding an article to posts.ts is the single action that
+ * makes it appear on the blog. No second list to remember.
+ */
+
+const PUBLISHABLE = new Set(publishedPosts.map((p) => p.slug));
+
+export const posts: Post[] = ALL_POSTS.filter((p) => PUBLISHABLE.has(p.slug));
+export const mostRead = ALL_MOST_READ.filter((p) => PUBLISHABLE.has(p.slug));
