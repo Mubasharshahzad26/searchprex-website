@@ -13,29 +13,31 @@ const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/tools/keyword-research`;
 
 const baseMetadata: Metadata = {
-  title: "Free AI Keyword Research Tool — Intent & Content Angles",
+  title: "Free Law Firm Keyword Tool — Volume & CPC by US State",
   description:
-    "Free keyword research for law firms, ecommerce and local business. Get keywords grouped by topic, the search intent behind each, and the exact page to build. No signup.",
+    "Pick your practice area and state. See the keywords clients search, what each click costs on Google Ads, and how hard it is to rank. Built for personal injury, family law, criminal defense and more.",
   keywords: [
-    "free keyword research tool",
-    "keyword research for law firms",
-    "search intent tool",
-    "keyword clustering tool",
-    "AI keyword research",
+    "law firm keyword research",
+    "attorney keyword tool",
+    "personal injury keyword volume",
+    "law firm SEO keywords by state",
+    "lawyer CPC by state",
+    "free keyword tool for attorneys",
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "Free AI Keyword Research Tool | SearchPrex",
+    title: "Free Law Firm Keyword Tool — Volume & CPC by US State | SearchPrex",
     description:
-      "Keywords grouped by topic, with search intent and the page to build for each. No signup, no paywall.",
+      "Practice area × state keyword data for attorneys: real search volume, keyword difficulty and Google Ads CPC. No signup.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free AI Keyword Research Tool | SearchPrex",
-    description: "Keywords grouped by topic, with search intent and the page to build for each.",
+    title: "Free Law Firm Keyword Tool | SearchPrex",
+    description:
+      "Practice area × state keyword data for attorneys: real volume, difficulty and CPC.",
   },
 };
 
@@ -47,12 +49,16 @@ export default function Page() {
   const appSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "SearchPrex Keyword Research Tool",
+    name: "SearchPrex Law Firm Keyword Tool",
     url: PAGE_URL,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Any",
     description:
-      "Free AI keyword research: keyword ideas grouped into topic clusters, with search intent and a content angle for each.",
+      "Free keyword research for US law firms: pick a practice area and state to see search volume, keyword difficulty and Google Ads CPC for the keywords clients actually search.",
+    audience: {
+      "@type": "Audience",
+      audienceType: "Law firms and attorneys in the United States",
+    },
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     provider: { "@type": "Organization", name: "SearchPrex", url: SITE },
   };
@@ -63,7 +69,12 @@ export default function Page() {
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
       { "@type": "ListItem", position: 2, name: "Free SEO Tools", item: `${SITE}/tools` },
-      { "@type": "ListItem", position: 3, name: "Keyword Research", item: PAGE_URL },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Law Firm Keyword Research",
+        item: PAGE_URL,
+      },
     ],
   };
 

@@ -86,6 +86,63 @@ async function main() {
   });
 
   console.log("\nThe SERP Checker will now return source:'dataforseo' instead of 'estimated'.");
+
+  await checkStateLevelKeywords(auth);
+}
+
+/**
+ * The law firm keyword tool asks for STATE-level volume ("Michigan,United
+ * States"), not national. DataForSEO's docs don't state whether that granularity
+ * is available, and the whole tool design assumes it is — so this proves it
+ * before the page is trusted. If state-level fails but national works, the tool
+ * must fall back to national rather than silently mislabel national data as
+ * state data.
+ */
+async function checkStateLevelKeywords(auth: string) {
+  const endpoint = "https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_overview/live";
+  const keywords = ["car accident lawyer michigan", "divorce lawyer michigan"];
+
+  console.log("\n─────────────────────────────────────────────");
+  console.log("Checking STATE-level keyword data (Michigan)…\n");
+
+  for (const location of ["Michigan,United States", "United States"]) {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { Authorization: `Basic ${auth}`, "Content-Type": "application/json" },
+      body: JSON.stringify([{ keywords, location_name: location, language_code: "en" }]),
+    });
+
+    const json = await res.json().catch(() => ({}));
+    const task = json?.tasks?.[0];
+
+    if (!res.ok || !task || task.status_code !== 20000) {
+      console.log(`  ✗ "${location}" — ${task?.status_code ?? res.status}: ${task?.status_message ?? "failed"}`);
+      continue;
+    }
+
+    const items = task.result?.[0]?.items ?? [];
+    const withVolume = items.filter(
+      (i: { keyword_info?: { search_volume?: number | null } }) =>
+        typeof i?.keyword_info?.search_volume === "number"
+    );
+
+    console.log(`  ✓ "${location}" — cost $${task.cost ?? "?"}, ${withVolume.length}/${keywords.length} keywords returned volume`);
+
+    for (const item of withVolume) {
+      const info = item.keyword_info;
+      const kd = item.keyword_properties?.keyword_difficulty;
+      console.log(
+        `      ${item.keyword}: volume ${info.search_volume}, CPC $${info.cpc ?? "?"}, KD ${kd ?? "?"}`
+      );
+    }
+  }
+
+  console.log(
+    "\nIf the Michigan numbers differ from the United States ones, state-level targeting works\n" +
+      "and the law firm keyword tool is accurate as designed. If they are identical, the API is\n" +
+      "silently falling back to national data and locationNameFor() in\n" +
+      "app/api/law-firm-keywords/route.ts must be changed."
+  );
 }
 
 main().catch((err) => {
