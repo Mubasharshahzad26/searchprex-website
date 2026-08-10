@@ -1,4 +1,4 @@
-// Rotator v2 - label-prefix filter | quota-error auto-blacklist | deploy 2026-08-06
+// Rotator v2 - label-prefix filter | quota-error auto-blacklist | deploy 2026-08-10
 import { google } from 'googleapis'
 import { GoogleAuth } from 'google-auth-library'
 import { db } from './db'
@@ -13,7 +13,6 @@ function extractHostname(url: string): string {
 }
 
 // Maps site hostname to the label prefix used in IndexingAccount rows.
-// Allows multiple indexing accounts (rotator) per site, decoupled from GSC service account email.
 function hostToLabelPrefix(hostname: string): string {
   const map: Record<string, string> = {
     'michigansportsoutdoor.com': 'Michigan Indexing',
@@ -76,9 +75,6 @@ async function pickAccountForUrl(url: string) {
     throw new Error(`No GSC connection for hostname: ${hostname}`)
   }
 
-  // Pick accounts by label prefix (site-scoped), not by GSC service email.
-  // This supports the pattern where 1 GSC service account reads data,
-  // but multiple separate service accounts (e.g. 5 per site) submit URLs to Indexing API.
   const labelPrefix = hostToLabelPrefix(hostname)
   if (!labelPrefix) {
     throw new Error(`No indexing account label mapping for hostname: ${hostname}`)
