@@ -97,10 +97,10 @@ export async function runAutopilotBatch(clientId: string) {
         const model = gemini.getGenerativeModel({
           model: MODEL,
           generationConfig: {
-  responseMimeType: 'application/json',
-  maxOutputTokens: 1500,   // 500-word content + FAQs fit karna chahiye
-  temperature: 0.7,
-},
+            responseMimeType: 'application/json',
+            maxOutputTokens: 1800,
+            temperature: 0.7,
+          },
         });
 
         const result = await generateWithRetry(
@@ -348,7 +348,7 @@ function buildPrompt(p: {
     ? `- Wikipedia article on the material/technology (e.g. https://en.wikipedia.org/wiki/M390_steel)\n- Official brand website (search: "${pd.brand} official")\n- Bladeforums.com (industry community reference)`
     : `- Wikipedia article on the material/technology\n- Industry authority sites (Bladeforums.com, KnifeCenter blog)`;
 
-  return `You are writing SEO product page copy for ${p.siteDomain}, an outdoor/knife retailer.
+  return `You are writing SEO product page copy for ${p.siteDomain}, a Michigan-based outdoor and knife retailer serving hunters, anglers, and outdoor enthusiasts across the United States.
 
 REAL PRODUCT DATA (ground truth — do not contradict or invent):
 
@@ -389,8 +389,41 @@ ${validInternalLinks}
 6. External authoritative links: Include 1-2 external links to authoritative reference sites where genuinely helpful:
 ${brandAuthoritySites}
    Only link to real, well-known reference sites. Do NOT invent URLs.
-7. Word count: 350-500 words in contentHtml. Hit at least 350.
+7. Word count: 400-550 words in contentHtml. Hit at least 400.
 8. Include 3 FAQ questions a real buyer would ask (use case, care, comparison), NOT marketing-style.
+
+FIRST PARAGRAPH RULE (CRITICAL for AI Overviews, featured snippets, and LLM citations):
+- The first paragraph MUST directly answer "What is this product and who is it for?" in 2-3 clear sentences.
+- Include: product name, primary use case, and 1-2 key characteristics from the real data.
+- Start with a definitive statement (NOT with marketing hook or question).
+- Example structure: "The [Product Name] is a [category] designed for [specific use case]. [Key feature or characteristic from real data]. It [what problem it solves or task it enables]."
+- Do NOT use openings like: "Looking for...", "Are you...", "Discover the...", "Introducing..."
+
+MICHIGAN OUTDOOR VOICE (regional grounding):
+- Reference Michigan and US outdoor context naturally where relevant:
+  - Great Lakes region, Upper Peninsula, deer season, ice fishing, whitetail hunting
+  - Michigan DNR seasons, Northern Michigan wilderness, hunting camp use
+  - US-based scenarios (backcountry hiking, tailgating, home defense, EDC carry)
+- Use US measurement units: inches, pounds, ounces, feet — NOT metric.
+- Reference real American use cases: hunting, fishing, camping, tactical/EDC, kitchen use.
+- Do NOT force Michigan references into every product — only where genuinely relevant.
+- Naturalness > forced regionality.
+
+SEMANTIC ENRICHMENT (for topical authority):
+- Include 2-3 semantically related terms from the product's domain (e.g. for knives: edge retention, tang construction, sheath material, blade geometry, grind type).
+- Mention 1-2 comparable product categories or alternatives when contextually relevant.
+- Use question-based structures in body copy (e.g. "What sets this apart is...", "Where this excels is...").
+- Include entity references: steel types (D2, 1095, S30V), lock mechanisms (liner lock, frame lock), blade shapes (drop point, tanto, clip point) — ONLY if the product data supports it.
+
+E-E-A-T GROUNDING (Experience, Expertise, Authority, Trust):
+- Include ONE natural retailer perspective statement per product (not per paragraph). Examples:
+  - "In our experience stocking [category], [specific insight]..."
+  - "Customers looking at this typically also consider..."
+  - "For Michigan hunters we speak with, this fits [use case] because..."
+  - "What we've seen with this [product type] is..."
+- Do NOT invent customer quotes or reviews.
+- Do NOT claim experience the retailer doesn't have (e.g. "we've tested this in the field for 5 years").
+- Ground authority in retailer expertise (product knowledge, customer patterns), NOT personal ownership claims.
 
 META TITLE RULES:
 - 50-60 characters max
