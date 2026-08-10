@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { getPageSEO } from "@/lib/admin-seo";
 import ResourcesPageComponent from "./ResourcesComponent"; // Your existing component
  
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.searchprex.com'
 const resourcesUrl = `${siteUrl}/resources`
  
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'SEO Resources & Guides — White Papers, Research, News | SearchPrex',
   description: 'Free SEO resources from SearchPrex: white papers, original research, real-world learnings, and curated industry news. Founded on real client work, not generic theory.',
   keywords: [
@@ -63,6 +64,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
 };
+
+// Metadata comes from the CMS row for this route; the object above is the
+// fallback when that row is missing, unpublished, or the database is down.
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/resources", baseMetadata);
+}
  
 export default function ResourcesPage() {
   const jsonLd = {
@@ -74,9 +81,12 @@ export default function ResourcesPage() {
         "url": resourcesUrl,
         "name": "SEO Resources & Guides",
         "description": "Free SEO resources from SearchPrex: white papers, original research, real-world learnings, and curated industry news.",
-        "isPartOf": { "@id": `${siteUrl}#website` },
+        // Slash before the # is required: app/layout.tsx defines these nodes as
+        // `${siteUrl}/#website` and `${siteUrl}/#organization`. Without it these
+        // are different @ids and the references dangle.
+        "isPartOf": { "@id": `${siteUrl}/#website` },
         "inLanguage": "en-US",
-        "mainEntity": { "@id": `${siteUrl}#organization` }
+        "mainEntity": { "@id": `${siteUrl}/#organization` }
       },
       {
         "@type": "BreadcrumbList",
@@ -123,27 +133,11 @@ export default function ResourcesPage() {
             }
           }
         ]
-      },
-      {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        "name": "SearchPrex",
-        "url": siteUrl,
-        "email": "contact@searchprex.com",
-        "sameAs": [
-          "https://twitter.com/searchprex",
-          "https://linkedin.com/company/searchprex"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        "url": siteUrl,
-        "name": "SearchPrex",
-        "description": "Founder-led USA SEO agency for law firms, ecommerce, and local businesses",
-        "publisher": { "@id": `${siteUrl}#organization` },
-        "inLanguage": "en-US"
       }
+      // Organization (#organization) and WebSite (#website) are deliberately NOT
+      // redefined here: app/layout.tsx already emits both on every page. Repeating
+      // them would ship two competing definitions of one real-world entity.
+      // The `isPartOf` / `mainEntity` references above resolve against those nodes.
     ]
   };
  

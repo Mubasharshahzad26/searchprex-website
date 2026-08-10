@@ -71,10 +71,10 @@ export default function About() {
           <motion.span variants={fadeUp} className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
             Why SearchPrex
           </motion.span>
-          <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black leading-tight tracking-tight text-[#0a0f2e] sm:text-5xl">
+          <motion.h1 variants={fadeUp} className="mb-4 text-4xl font-black leading-tight tracking-tight text-[#0a0f2e] sm:text-5xl">
             Founder-Led. Niche-Focused.<br />
             <span>Revenue-Obsessed.</span>
-          </motion.h2>
+          </motion.h1>
           <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#475569]">
             Every account is handled personally by the founder — no juniors, no account managers, no templates. We understand your business niche better than any generalist agency ever could.
           </motion.p>

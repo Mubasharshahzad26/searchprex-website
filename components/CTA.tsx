@@ -145,9 +145,9 @@ export default function CTA() {
             >
               Free SEO Audit
             </span>
-            <h2 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl">
+            <h1 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl">
               <span className="text-balance">Dominate Your Market in 2026</span>
-            </h2>
+            </h1>
             <p className="mb-8 text-lg text-white/70">
               Get a comprehensive SEO audit tailored to Google&apos;s 2026 core updates. We&apos;ll analyze your site&apos;s technical health, content quality, E-E-A-T signals, and competitor positions.
             </p>

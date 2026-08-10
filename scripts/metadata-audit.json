@@ -1,0 +1,298 @@
+[
+ {
+  "route": "/",
+  "isClient": false,
+  "hasStatic": false,
+  "hasGenerate": true,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/about",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "About SearchPrex — Founder-Led USA SEO Agency | Niche-Focused Strategies",
+  "description": "Meet Mubashar Shahzad, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff."
+ },
+ {
+  "route": "/action-plan",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Free SEO Audit — Get Your 90-Day Roadmap | SearchPrex",
+  "description": "Get a free, founder-reviewed SEO audit tailored to Google's 2026 updates. We analyze your technical health, content quality, E-E-A-T signals and competitor gaps — delivered in 48 hours, no obligation."
+ },
+ {
+  "route": "/ai-search",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Free AI SEO Audit Tool | Instant Website Analysis for US Businesses | SearchPrex",
+  "description": "Free AI-powered SEO audit tool for US businesses. Get an instant website analysis, a personalized 90-day SEO roadmap, or book a free consultation — no login, no credit card, results in seconds."
+ },
+ {
+  "route": "/ai-visibility",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "AI Visibility Checker for Law Firms — SearchPrex",
+  "description": "See if your law firm shows up when potential clients ask AI (ChatGPT, Perplexity, Google AI Overviews) for the best lawyers in your city. Free instant check."
+ },
+ {
+  "route": "/all-case-studies",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "SEO Case Studies — Verified Results | SearchPrex",
+  "description": "Browse SearchPrex SEO case studies with real GSC data. Law firm, ecommerce, local & technical SEO results. Filter by niche. Founder-led, transparent results."
+ },
+ {
+  "route": "/autopilot",
+  "isClient": true,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/blog",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "SEO Blog — Technical, Ecommerce & Local SEO Guides | SearchPrex",
+  "description": "Founder-written SEO guides on technical SEO, e-commerce SEO, local SEO and content strategy — crawl budget, indexing recovery, Core Web Vitals, AI Overviews and more. Built for practitioners."
+ },
+ {
+  "route": "/bulk-generation",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Bulk Content Generator — Searchprex",
+  "description": null
+ },
+ {
+  "route": "/case-calculator",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Personal Injury Lost Case Calculator — SearchPrex",
+  "description": "See how much revenue your personal injury firm is leaking from SEO visibility gaps and slow client intake. Free, instant estimate based on real local search demand."
+ },
+ {
+  "route": "/case-studies",
+  "isClient": true,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/coming-soon",
+  "isClient": true,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/content-generator",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "AI Content Suite — Searchprex",
+  "description": "Generate original, E-E-A-T-driven, HCU-compliant SEO content at scale — meta, headings, full HTML body, FAQs, links, and JSON-LD schema."
+ },
+ {
+  "route": "/experts",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Meet Our Experts - SearchPrex SEO Team",
+  "description": "Meet Mubashar Shahzad, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search."
+ },
+ {
+  "route": "/faq",
+  "isClient": true,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/free-audit",
+  "isClient": true,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/growth-plan",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Get Your SEO Growth Plan | Free 90-Day Roadmap | SearchPrex",
+  "description": "Get a founder-reviewed SEO growth plan in 5 minutes. Site audit, competitor benchmark, and 90-day action roadmap — delivered within 24 hours. No commitment, no credit card."
+ },
+ {
+  "route": "/intake-assistant",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "24/7 AI Intake Assistant for Law Firms | Never Miss a Lead | SearchPrex",
+  "description": "AI intake assistant that captures and qualifies every law firm lead 24/7 — no missed calls, no lost cases. Try the free live demo built for US law firms."
+ },
+ {
+  "route": "/law-firm-scorecard",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Free Law Firm SEO Scorecard | Grade Your Firm's Google & AI Visibility | SearchPrex",
+  "description": "Free law firm SEO scorecard — grade your Map Pack ranking, organic visibility, AI Overview citations (AEO), legal E-E-A-T, schema, and practice-area content in seconds. Prioritized 90-day fix plan included. Built for US attorneys."
+ },
+ {
+  "route": "/locations/kansas",
+  "isClient": false,
+  "hasStatic": false,
+  "hasGenerate": true,
+  "title": "Location Not Found | SearchPrex",
+  "description": null
+ },
+ {
+  "route": "/locations/kansas/wichita",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Wichita Law Firm SEO Services | SearchPrex",
+  "description": "Local SEO for Wichita law firms. Rank in the Google map pack for your practice area in Sedgwick County. Free audit, no commitment, reply in 24 hrs."
+ },
+ {
+  "route": "/nicheseopro",
+  "isClient": false,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/pricing",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "SEO Pricing Plans - SearchPrex USA SEO Agency",
+  "description": "Transparent SEO pricing for law firms, ecommerce stores, and local businesses. Starting at $1,500/month. No long-term contracts. 90-day money-back guarantee."
+ },
+ {
+  "route": "/pricing-plan",
+  "isClient": false,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/privacy",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Privacy Policy - SearchPrex",
+  "description": "SearchPrex privacy policy. Learn how we collect, use, and protect your personal information."
+ },
+ {
+  "route": "/refund",
+  "isClient": false,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/resources/news",
+  "isClient": true,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/services",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "SEO Services — Law Firm, Ecommerce, Local & Technical SEO | SearchPrex",
+  "description": "Four core SEO services backed by verified Google Search Console results: law firm SEO, ecommerce & Shopify SEO, local SEO, and technical SEO. Founder-led, proof-first."
+ },
+ {
+  "route": "/services/ecommerce-seo",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Ecommerce SEO Services — Fix Indexing & Grow Revenue | SearchPrex",
+  "description": "Founder-led ecommerce SEO for Shopify and WooCommerce stores. We fix mass non-indexing, thin content, and Core Web Vitals — then build organic revenue that compounds. See how we grew SMK Store's US revenue by 75% in 2 months."
+ },
+ {
+  "route": "/services/law-firm-seo",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Law Firm SEO Services | Rank in Local Pack & AI Overviews | SearchPrex",
+  "description": "Founder-led SEO for law firms. Attorney E-E-A-T content, practice area pages, local pack rankings, and AI Overview citations — replace expensive Google Ads with organic cases."
+ },
+ {
+  "route": "/services/local-seo",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Local SEO Services | Own the Map Pack & AI Overviews | SearchPrex",
+  "description": "Founder-led local SEO that puts your business in the top 3 Google Maps pack and 2026 AI Overviews. GBP optimization, citations, review velocity, and city-level landing pages."
+ },
+ {
+  "route": "/services/technical-seo",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Technical SEO Services | Indexation, Core Web Vitals, Schema | SearchPrex",
+  "description": "Founder-led technical SEO for large sites. Crawl budget recovery, indexation fixes, Core Web Vitals (LCP/INP/CLS), schema markup, and site architecture — proven at 12K+ page scale."
+ },
+ {
+  "route": "/terms",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Terms and Conditions - SearchPrex",
+  "description": "SearchPrex terms and conditions. Read our service agreement, payment terms, and policies."
+ },
+ {
+  "route": "/tool",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "NicheSEOPro - SEO Tool for Law Firms & Ecommerce | Free Trial",
+  "description": "NicheSEOPro is the SEO tool built specifically for law firms, ecommerce stores, and local businesses. Get a 14-day free trial with no credit card required."
+ },
+ {
+  "route": "/tools",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Free SEO Tools — Schema Generator, SERP Simulator & More | SearchPrex",
+  "description": "Free SEO tools built by a practicing SEO analyst: JSON-LD schema markup generator, SERP simulator, meta tag analyzer, robots.txt tester and more. No signup, no paywalls."
+ },
+ {
+  "route": "/tools/schema-generator",
+  "isClient": false,
+  "hasStatic": false,
+  "hasGenerate": false,
+  "title": null,
+  "description": null
+ },
+ {
+  "route": "/why-us",
+  "isClient": false,
+  "hasStatic": true,
+  "hasGenerate": false,
+  "title": "Why Choose SearchPrex - USA SEO Agency Benefits",
+  "description": "Discover why 20+ businesses trust SearchPrex for their SEO needs. Founder-led execution, senior strategy, transparent pricing, and real results."
+ }
+]

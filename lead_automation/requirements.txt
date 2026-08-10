@@ -1,0 +1,5 @@
+resend==0.8.0
+google-generativeai
+imap-tools
+python-dotenv
+requests

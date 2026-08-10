@@ -176,23 +176,76 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
         </div>
       </section>
  
-      {/* ── CHALLENGE / SOLUTION / OUTCOME ── */}
+      {/* ── CHALLENGE / STRATEGY / OUTCOME ──
+          Told as a numbered narrative rather than three unlabelled cards, so a
+          reader (and a crawler) can follow the engagement start to finish. The
+          outcome step carries the metrics inline as its own proof. */}
       <section className="pb-14">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="space-y-6">
+          <header className="mb-8">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#64748b]">
+              The engagement
+            </span>
+            <h2 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-[#0a0f2e] sm:text-4xl">
+              How we took {cs.client} from stuck to ranking
+            </h2>
+          </header>
+
+          <div className="space-y-5">
             {[
-              { label: "The Challenge", color: "#ef4444", text: cs.challenge },
-              { label: "The Solution", color: GREEN_DARK, text: cs.solution },
-              { label: "The Outcome", color: PURPLE, text: cs.outcome },
-            ].map(({ label, color, text }) =>
+              {
+                step: "01",
+                label: "The challenge",
+                color: "#ef4444",
+                text: cs.challenge,
+                aside: `${cs.industry} · ${cs.location}`,
+              },
+              {
+                step: "02",
+                label: "The strategy",
+                color: GREEN_DARK,
+                text: cs.solution,
+                aside: cs.seoType,
+              },
+              {
+                step: "03",
+                label: "The outcome",
+                color: PURPLE,
+                text: cs.outcome,
+                aside: "Verified in Google Search Console",
+              },
+            ].map(({ step, label, color, text, aside }) =>
               text ? (
                 <motion.article key={label}
                   initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
                   className="rounded-3xl border border-[#d4d8e3] bg-white p-7 md:p-9"
                   style={{ borderLeft: `4px solid ${color}` }}>
-                  <h2 className="mb-3 text-lg font-black" style={{ color }}>{label}</h2>
+                  <div className="mb-3 flex flex-wrap items-baseline gap-3">
+                    <span aria-hidden className="text-sm font-bold tabular-nums" style={{ color }}>
+                      {step}
+                    </span>
+                    <h3 className="text-xl font-bold text-[#0a0f2e]">{label}</h3>
+                    <span className="text-xs uppercase tracking-widest text-[#94a3b8]">{aside}</span>
+                  </div>
                   <p className="leading-relaxed text-[#475569]">{text}</p>
+
+                  {/* Outcome step restates the numbers so the proof sits with the claim. */}
+                  {label === "The outcome" && cs.metrics.length > 0 && (
+                    <dl className="mt-6 grid gap-4 border-t border-[#f1f5f9] pt-6 sm:grid-cols-3">
+                      {cs.metrics.map((m) => (
+                        <div key={m.l}>
+                          <dt className="sr-only">{m.l}</dt>
+                          <dd>
+                            <span className="block text-2xl font-bold" style={{ color: GREEN }}>{m.v}</span>
+                            <span className="mt-0.5 block text-[11px] uppercase tracking-wide text-[#64748b]">
+                              {m.l}
+                            </span>
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
                 </motion.article>
               ) : null
             )}

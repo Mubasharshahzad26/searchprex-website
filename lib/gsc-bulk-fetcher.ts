@@ -2,12 +2,21 @@ import { google } from 'googleapis'
 import { GoogleAuth } from 'google-auth-library'
 import { fetchSitemapUrls } from './audit/crawler'
 
-// GSC Search Analytics se saare URLs jinke impressions >= 1 hain (last 90 days)
-async function fetchGSCVisibleUrls(
+// Page-level metrics from GSC Search Analytics
+export interface PageMetric {
+  url: string
+  impressions: number
+  clicks: number
+  position: number
+  ctr: number
+}
+
+// GSC Search Analytics se URLs with full metrics (impressions, clicks, position, ctr)
+export async function fetchGSCPageMetrics(
   siteUrl: string,
   serviceAccountJson: string,
   daysBack = 90,
-): Promise<Set<string>> {
+): Promise<PageMetric[]> {
   const auth = new GoogleAuth({
     credentials: JSON.parse(serviceAccountJson),
     scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
@@ -22,7 +31,7 @@ async function fetchGSCVisibleUrls(
   startDate.setDate(startDate.getDate() - daysBack)
   const fmt = (d: Date) => d.toISOString().split('T')[0]
 
-  const visibleUrls = new Set<string>()
+  const metrics: PageMetric[] = []
   let startRow = 0
   const rowLimit = 25000
 
@@ -42,15 +51,35 @@ async function fetchGSCVisibleUrls(
     const rows = res.data.rows || []
     for (const row of rows) {
       const page = row.keys?.[0]
-      if (page) visibleUrls.add(page)
+      if (page) {
+        metrics.push({
+          url: page,
+          impressions: row.impressions || 0,
+          clicks: row.clicks || 0,
+          position: row.position || 0,
+          ctr: row.ctr || 0,
+        })
+      }
     }
+
+    console.log(`[fetcher] Fetched ${metrics.length} URLs so far...`)
 
     if (rows.length < rowLimit) break // aakhri page tha
     startRow += rowLimit
     if (startRow > 100000) break // safety cap
   }
 
-  return visibleUrls
+  return metrics
+}
+
+// GSC Search Analytics se saare URLs (backward compat — sirf URL set return)
+async function fetchGSCVisibleUrls(
+  siteUrl: string,
+  serviceAccountJson: string,
+  daysBack = 90,
+): Promise<Set<string>> {
+  const metrics = await fetchGSCPageMetrics(siteUrl, serviceAccountJson, daysBack)
+  return new Set(metrics.map(m => m.url))
 }
 
 // URL Inspection API se ek URL ka indexing status
