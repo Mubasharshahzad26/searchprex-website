@@ -24,6 +24,7 @@ import {
   Accent,
 } from "@/components/layout";
 import { color, heading, radius, text } from "@/lib/design-tokens";
+import { CITY_PAGES } from "@/lib/city-pages";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
@@ -326,6 +327,74 @@ export default function ServicesPage() {
             );
           })}
         </CardGrid>
+      </Section>
+
+      {/* ── LAW FIRM SEO BY CITY ──
+          This page carries 374 impressions at position 63.84 because Google
+          serves it for "[city] law firm seo" queries it cannot possibly win —
+          one page cannot rank for Philadelphia, Cleveland, Sugar Land and
+          Albuquerque at once. The fix is not to optimise this page harder; it
+          is to send those searches to the page that answers them. Hub, not
+          competitor. */}
+      <Section>
+        <SectionHeading
+          eyebrow="Law Firm SEO by city"
+          title="Which city do you practise in?"
+          intro="Local search is decided city by city, so each of these is a page in its own right — the courts you appear in, the practice areas with demand there, and what your state's law changes about the content you need."
+        />
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {CITY_PAGES.map((c) => (
+            <Link
+              key={`${c.stateSlug}-${c.citySlug}`}
+              href={`/locations/${c.stateSlug}/${c.citySlug}`}
+              className={`group flex items-start gap-3 ${radius.card} border bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-md`}
+              style={{ borderColor: color.border }}
+            >
+              <MapPin
+                className="mt-0.5 h-4 w-4 shrink-0"
+                style={{ color: color.primary }}
+                aria-hidden
+              />
+              <span>
+                <span className="block font-semibold" style={{ color: color.ink }}>
+                  {c.city}, {c.stateAbbr}
+                </span>
+                <span className={text.caption} style={{ color: color.muted }}>
+                  {c.county}
+                </span>
+              </span>
+            </Link>
+          ))}
+
+          <Link
+            href="/locations/kansas"
+            className={`group flex items-start gap-3 ${radius.card} border bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-md`}
+            style={{ borderColor: color.border }}
+          >
+            <MapPin
+              className="mt-0.5 h-4 w-4 shrink-0"
+              style={{ color: color.primary }}
+              aria-hidden
+            />
+            <span>
+              <span className="block font-semibold" style={{ color: color.ink }}>
+                Kansas
+              </span>
+              <span className={text.caption} style={{ color: color.muted }}>
+                Wichita, Topeka, Overland Park &amp; more
+              </span>
+            </span>
+          </Link>
+        </div>
+
+        <p className={`${text.small} mt-6`} style={{ color: color.muted }}>
+          Practising somewhere not listed?{" "}
+          <Link href="/free-audit" className="font-semibold underline" style={{ color: color.primary }}>
+            Ask for the free audit
+          </Link>{" "}
+          — we build the page for your city as part of the engagement.
+        </p>
       </Section>
 
       {/* ── FOUNDER E-E-A-T ── */}

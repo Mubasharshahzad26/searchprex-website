@@ -11,7 +11,8 @@
 // Copy is unchanged from the previous version. Content revisions are a separate,
 // separately-approved pass.
 
-import { ArrowRight, Check, Phone, Scale, BadgeCheck } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Check, MapPin, Phone, Scale, BadgeCheck } from "lucide-react";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
 import {
   AuthorCard,
@@ -30,6 +31,7 @@ import {
   type Faq,
 } from "@/components/layout";
 import { color, heading, radius, text } from "@/lib/design-tokens";
+import { CITY_PAGES } from "@/lib/city-pages";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
 
@@ -273,6 +275,43 @@ export default function LawFirmSEOClient() {
             />
           ))}
         </CardGrid>
+      </Section>
+
+      {/* CITY PAGES ──
+          The city pages name this page as their breadcrumb parent, so the link
+          should run both ways. It is also the honest answer to the question this
+          page raises: local search is decided city by city, and a national page
+          cannot rank for "law firm seo detroit" no matter how well it is written. */}
+      <Section>
+        <SectionHeading
+          eyebrow="By city"
+          title="Where does your firm practise?"
+          intro="Every local market has its own competition, its own courts, and its own state law shaping what your pages need to say. These are the cities we have built for."
+        />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {CITY_PAGES.map((c) => (
+            <Link
+              key={`${c.stateSlug}-${c.citySlug}`}
+              href={`/locations/${c.stateSlug}/${c.citySlug}`}
+              className={`flex items-start gap-3 ${radius.card} border bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-md`}
+              style={{ borderColor: color.border }}
+            >
+              <MapPin
+                className="mt-0.5 h-4 w-4 shrink-0"
+                style={{ color: color.primary }}
+                aria-hidden
+              />
+              <span>
+                <span className="block font-semibold" style={{ color: color.ink }}>
+                  {c.city}, {c.stateAbbr}
+                </span>
+                <span className={text.caption} style={{ color: color.muted }}>
+                  {c.county}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </Section>
 
       {/* AUTHOR — E-E-A-T */}
