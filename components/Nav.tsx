@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
+import { CITY_PAGES } from "@/lib/city-pages";
  
 type DropItem = { href: string; label: string; badge?: string };
 type NavLink = {
@@ -71,8 +72,16 @@ const navLinks: NavLink[] = [
     label: "Locations",
     hasDropdown: true,
     linkable: false,
+    // Built from lib/city-pages so adding a city updates the nav automatically.
+    // The dropdown previously listed Wichita alone while eight Kansas pages and
+    // twelve state pages sat live and unlinked from the header — internal links
+    // are how Google finds and weights them, and how a visitor knows they exist.
     dropdownItems: [
-      { href: "/locations/kansas/wichita", label: "Wichita, KS" },
+      ...CITY_PAGES.map((c) => ({
+        href: `/locations/${c.stateSlug}/${c.citySlug}`,
+        label: `${c.city}, ${c.stateAbbr}`,
+      })),
+      { href: "/locations/kansas", label: "Kansas — all cities" },
     ],
   },
 ];

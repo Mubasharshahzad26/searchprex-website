@@ -1,6 +1,7 @@
 "use client";
 import { Logo } from "@/components/Logo";
 import Link from "next/link";
+import { CITY_PAGES } from "@/lib/city-pages";
 import { usePathname } from "next/navigation";
 import { Mail, Phone, MapPin } from "lucide-react";
  
@@ -47,10 +48,19 @@ const industries = [
   { label: "Salons & Spas",             href: "/services/local-seo" },
 ];
  
-const states = [
-  "California", "Texas", "Florida", "New York", "Illinois",
-  "Pennsylvania", "Ohio", "Georgia", "North Carolina", "Michigan"
-];
+/**
+ * City pages, linked from the footer so they appear in the served HTML of every
+ * page.
+ *
+ * These were previously ten decorative <span> elements naming states we do not
+ * have pages for — no link, no destination, no value beyond looking broad. The
+ * nav's Locations dropdown is not a substitute: it only renders on hover, so a
+ * crawler never sees those links at all.
+ */
+const cityLinks = CITY_PAGES.map((c) => ({
+  href: `/locations/${c.stateSlug}/${c.citySlug}`,
+  label: `${c.city}, ${c.stateAbbr}`,
+}));
  
 /*
   ─── SOCIAL LINKS ───
@@ -201,20 +211,24 @@ export default function Footer() {
             {/* States Served */}
             <div>
               <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
-                Top States Served
+                Law Firm SEO by City
               </h4>
               <div className="flex flex-wrap gap-2">
-                {states.map((state) => (
-                  <span
-                    key={state}
-                    className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/60"
+                {cityLinks.map((city) => (
+                  <Link
+                    key={city.href}
+                    href={city.href}
+                    className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/60 transition-colors hover:border-white/50 hover:text-white"
                   >
-                    {state}
-                  </span>
+                    {city.label}
+                  </Link>
                 ))}
-                <span className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/60">
-                  + 40 more states
-                </span>
+                <Link
+                  href="/locations/kansas"
+                  className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/60 transition-colors hover:border-white/50 hover:text-white"
+                >
+                  Kansas
+                </Link>
               </div>
             </div>
           </div>

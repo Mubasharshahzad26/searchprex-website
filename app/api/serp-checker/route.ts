@@ -27,11 +27,9 @@ import {
 } from '@/lib/serp-types'
 import {
   DAILY_KEYWORD_QUOTA,
-  readCache,
   recordUsage,
   usageToday,
   visitorHashFor,
-  writeCache,
 } from '@/lib/serp-cache'
 
 export const runtime = 'nodejs'
@@ -142,69 +140,49 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // 4. Serve from cache where possible. Cached keywords cost nothing, so they
-  //    are always served and never counted against the caller's quota.
-  const cached = await Promise.all(
-    unique.map(async (keyword) => ({
-      keyword,
-      hit: await readCache(keyword, country.name),
-    })),
-  )
-
-  const misses = cached.filter((c) => !c.hit).map((c) => c.keyword)
-
-  // 5. Spend remaining quota on the misses only.
+  // 4. Spend the caller's remaining daily quota.
+  //
+  //    The 24-hour result cache that used to sit in front of this is gone with
+  //    the SerpCache table. It should return before this endpoint is exposed
+  //    publicly with live credentials: repeat queries are most of the traffic
+  //    on a free tool, and without a cache every one of them is billed again.
   const spent = await usageToday(visitor)
   const remaining = Math.max(0, DAILY_KEYWORD_QUOTA - spent)
 
-  if (misses.length > 0 && remaining === 0) {
-    // Everything they asked for is a miss and they are out of budget. Only
-    // refuse outright when we have nothing at all to show them.
-    if (cached.every((c) => !c.hit)) {
-      return NextResponse.json(
-        {
-          error: `You've used today's ${DAILY_KEYWORD_QUOTA} free checks. They reset at midnight UTC — or get a free founder-reviewed audit instead.`,
-        },
-        { status: 429 },
-      )
-    }
+  if (remaining === 0) {
+    return NextResponse.json(
+      {
+        error: `You've used today's ${DAILY_KEYWORD_QUOTA} free checks. They reset at midnight UTC — or get a free founder-reviewed audit instead.`,
+      },
+      { status: 429 },
+    )
   }
 
-  const toFetch = misses.slice(0, remaining)
+  const toFetch = unique.slice(0, remaining)
   const fetched = new Map<string, SerpKeywordResult>()
 
-  if (toFetch.length > 0) {
-    const live = await Promise.all(
-      toFetch.map((keyword) =>
-        fetchLiveResult(login, password, domain, keyword, country.name),
-      ),
-    )
+  const live = await Promise.all(
+    toFetch.map((keyword) =>
+      fetchLiveResult(login, password, domain, keyword, country.name),
+    ),
+  )
 
-    // Only bill the caller for calls that actually reached DataForSEO, and only
-    // cache real data — caching an estimate would serve fiction for 24 hours.
-    let billable = 0
-    await Promise.all(
-      live.map(async (result, i) => {
-        fetched.set(toFetch[i], result)
-        if (result.source === 'dataforseo') {
-          billable += 1
-          await writeCache(toFetch[i], country.name, result)
-        }
-      }),
-    )
-    await recordUsage(visitor, billable)
-  }
-
-  const results = unique.map((keyword) => {
-    const hit = cached.find((c) => c.keyword === keyword)?.hit
-    if (hit) return hit
-    return (
-      fetched.get(keyword) ??
-      // Over quota for this keyword: an honest estimate beats a hard failure
-      // when we already have real data for the caller's other keywords.
-      estimateSerpKeyword(domain, keyword, country.name)
-    )
+  // Only bill the caller for calls that actually reached DataForSEO. A keyword
+  // that fell back to an estimate cost nothing and must not consume quota.
+  let billable = 0
+  live.forEach((result, i) => {
+    fetched.set(toFetch[i], result)
+    if (result.source === 'dataforseo') billable += 1
   })
+  await recordUsage(visitor, billable)
+
+  const results = unique.map(
+    (keyword) =>
+      fetched.get(keyword) ??
+      // Beyond today's quota: an honest estimate beats a hard failure when the
+      // caller already has real data for their other keywords.
+      estimateSerpKeyword(domain, keyword, country.name),
+  )
 
   return NextResponse.json({
     domain,
