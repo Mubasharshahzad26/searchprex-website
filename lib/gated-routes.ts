@@ -16,7 +16,11 @@
 export const GATED_TOOLS = [
   "/autopilot",
   "/content-generator",
-  "/ai-search",
+  // /ai-search is deliberately NOT here. It is titled "Free AI SEO Audit Tool",
+  // ranks at position 20 for its own queries and sits at sitemap priority 0.9 —
+  // gating the page would drop it from the index and end that traffic, which is
+  // the opposite of what a lead magnet is for. The ACTION is gated instead, in
+  // app/api/seo-search/route.ts via lib/require-auth. Page public, tool gated.
 ] as const;
 
 /** True when `pathname` is a gated tool or sits underneath one. */

@@ -101,7 +101,9 @@ export const config = {
     "/autopilot",
     "/content-generator/:path*",
     "/content-generator",
-    "/ai-search/:path*",
-    "/ai-search",
+    // /ai-search is absent on purpose. The page is public so it can rank; only
+    // the action behind it needs an account, and that is enforced in
+    // app/api/seo-search/route.ts. Running middleware here would cost a
+    // Supabase round trip on a page that never needs one.
   ],
 };

@@ -65,6 +65,8 @@ export default function AiSearch() {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  /** Set when the API returns 401 — the visitor needs an account to run a search. */
+  const [needsAuth, setNeedsAuth] = useState(false)
   const [result, setResult] = useState<SearchResult | null>(null)
  
   const [lead, setLead] = useState({ name: '', email: '', website: '' })
@@ -81,6 +83,7 @@ export default function AiSearch() {
     setQuery(text)
     setLoading(true)
     setError(null)
+    setNeedsAuth(false)
     setResult(null)
     resetLead()
     try {
@@ -90,6 +93,14 @@ export default function AiSearch() {
         body: JSON.stringify({ query: text }),
       })
       const json = await res.json()
+      // The page is public so it can rank; running a search needs an account.
+      // Handled separately from a generic failure so the UI can offer a way in
+      // rather than only reporting that something went wrong.
+      if (res.status === 401) {
+        setNeedsAuth(true)
+        setError(json.error || 'Sign in to run a free audit.')
+        return
+      }
       if (!res.ok) throw new Error(json.error || 'Search failed')
       setResult(json as SearchResult)
     } catch (e) {
@@ -192,8 +203,34 @@ export default function AiSearch() {
         </div>
       )}
  
+      {/* Sign-in required — not an error, so it gets its own treatment with a
+          way forward rather than a red box telling them something broke. */}
+      {needsAuth && (
+        <div className="mx-auto w-full max-w-2xl rounded-xl border border-primary/30 bg-primary/5 p-5 text-center">
+          <p className="text-sm font-semibold">{error}</p>
+          <p className="mx-auto mt-1 max-w-md text-xs text-muted-foreground">
+            Free to create, and it keeps your previous answers. Or skip the account and get a
+            founder-reviewed audit instead.
+          </p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <a
+              href="/register?next=/ai-search"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Create a free account <ArrowRight className="size-4" />
+            </a>
+            <a
+              href="/login?next=/ai-search"
+              className="inline-flex items-center rounded-xl border border-border px-5 py-2.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+            >
+              Sign in
+            </a>
+          </div>
+        </div>
+      )}
+
       {/* Error */}
-      {error && (
+      {error && !needsAuth && (
         <div className="mx-auto w-full max-w-2xl rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive">
           {error}
         </div>
