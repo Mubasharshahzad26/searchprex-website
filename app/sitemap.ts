@@ -61,7 +61,10 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/bulk-generation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/tools/keyword-research", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tool", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/autopilot", priority: 0.7, changeFrequency: "monthly" },
+  // /autopilot is deliberately absent: it is an internal dashboard rendering
+  // client names and run history, and now carries robots noindex. Listing a
+  // noindex page here is the contradictory signal this file's own header warns
+  // about, and it shows up as an error in Search Console.
   { path: "/free-audit", priority: 0.9, changeFrequency: "monthly" },
   { path: "/growth-plan", priority: 0.8, changeFrequency: "monthly" },
   { path: "/action-plan", priority: 0.8, changeFrequency: "monthly" },

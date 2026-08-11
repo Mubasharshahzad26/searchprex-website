@@ -151,7 +151,10 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <EcommerceSEOClient />
+      {/* Required prop that was never passed, so the AuthorCard rendered without
+          its LinkedIn link — a missing E-E-A-T signal on a page whose whole
+          argument is verifiable, founder-led work. */}
+      <EcommerceSEOClient linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/" />
     </>
   );
 }
