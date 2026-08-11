@@ -13,6 +13,26 @@ const GREEN_DARK = "#2f9670";
 export default function LoginPage() {
   const router   = useRouter();
   const supabase = createClient();
+
+  /**
+   * Where to send them after signing in.
+   *
+   * middleware.ts sets ?next= when it turns someone away from a gated tool, so
+   * they land back on the page they wanted rather than on /dashboard.
+   *
+   * Read from window at submit time rather than with useSearchParams(), which
+   * would require wrapping this page in a Suspense boundary. This only ever
+   * runs from a click, so there is no server render to worry about.
+   *
+   * Only same-site paths are honoured. Accepting an arbitrary value would turn
+   * the login page into an open redirect that a phishing link could point
+   * anywhere, and "//evil.com" is a protocol-relative URL, not a local path.
+   */
+  function destinationAfterLogin(): string {
+    if (typeof window === "undefined") return "/dashboard";
+    const next = new URLSearchParams(window.location.search).get("next");
+    return next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
+  }
  
   const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +50,7 @@ export default function LoginPage() {
       setError(error.message);
       setLoading(false);
     } else {
-      router.push("/dashboard");
+      router.push(destinationAfterLogin());
       router.refresh();
     }
   }

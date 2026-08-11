@@ -1,17 +1,19 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { isGatedRoute } from "@/lib/gated-routes";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ✅ Autopilot dashboard = public internal tool (no auth required)
-  if (pathname.startsWith("/dashboard/autopilot")) {
-    return NextResponse.next();
-  }
+  // The previous carve-out here waved through "/dashboard/autopilot", a route
+  // that does not exist — the dashboard lives at /autopilot, which the matcher
+  // never covered. So the rule protected nothing and the real page was open.
 
   // Admin routes protection
   const isAdminRoute = pathname.startsWith("/admin");
-  const isProtectedRoute = isAdminRoute || pathname.startsWith("/dashboard");
+  const isGatedTool = isGatedRoute(pathname);
+  const isProtectedRoute =
+    isAdminRoute || pathname.startsWith("/dashboard") || isGatedTool;
 
   // Fail CLOSED, not open. Without Supabase credentials we cannot authenticate
   // anyone, so protected routes must be refused rather than waved through.
@@ -46,9 +48,12 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Not logged in → redirect to login
-  if (!user && (pathname.startsWith("/dashboard") || isAdminRoute)) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  // Not logged in → redirect to login, remembering where they were headed so
+  // the login page can send them back rather than dumping them on /dashboard.
+  if (!user && isProtectedRoute) {
+    const login = new URL("/login", request.url);
+    login.searchParams.set("next", pathname);
+    return NextResponse.redirect(login);
   }
 
   // Logged in → fetch role and redirect correctly
@@ -84,5 +89,19 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/login", "/register"],
+  // A route not listed here never reaches the middleware at all, whatever the
+  // logic above says. That is why /autopilot was open: it was protected in
+  // spirit and absent from this list.
+  matcher: [
+    "/dashboard/:path*",
+    "/admin/:path*",
+    "/login",
+    "/register",
+    "/autopilot/:path*",
+    "/autopilot",
+    "/content-generator/:path*",
+    "/content-generator",
+    "/ai-search/:path*",
+    "/ai-search",
+  ],
 };

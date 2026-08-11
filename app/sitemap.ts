@@ -9,6 +9,7 @@ import { caseStudies, detailUrl } from "./all-case-studies/data";
 import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
 import { getAllCityParams } from "@/lib/city-pages";
+import { isGatedRoute } from "@/lib/gated-routes";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
@@ -55,9 +56,11 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
   { path: "/case-calculator", priority: 0.7, changeFrequency: "monthly" },
   { path: "/law-firm-scorecard", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/ai-search", priority: 0.9, changeFrequency: "weekly" },
+  // /ai-search and /content-generator are deliberately absent: both now sit
+  // behind sign-in (middleware.ts, GATED_TOOLS). A crawler gets redirected to
+  // /login, so the page cannot be indexed and listing it here would only
+  // produce Search Console errors.
   { path: "/ai-visibility", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/content-generator", priority: 0.7, changeFrequency: "monthly" },
   { path: "/bulk-generation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/tools/keyword-research", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tool", priority: 0.7, changeFrequency: "monthly" },
@@ -105,6 +108,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries = new Map<string, Entry>();
 
   const add = (entry: Entry) => {
+    // A gated route can never be indexed — a crawler is redirected to /login
+    // before it sees the page — so it must not appear here whatever its source.
+    // This guard lives in `add` rather than beside the static list because the
+    // CMS loop below adds pages too: /ai-search and /content-generator both
+    // have published CMS rows and came straight back after being removed from
+    // STATIC_ROUTES.
+    if (isGatedRoute(new URL(entry.url).pathname)) return;
+
     const existing = entries.get(entry.url);
     // Higher priority wins, so a CMS row can't silently demote the homepage.
     if (!existing || (entry.priority ?? 0) > (existing.priority ?? 0)) {
