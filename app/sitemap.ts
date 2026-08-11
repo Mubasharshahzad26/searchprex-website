@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import { caseStudies, detailUrl } from "./all-case-studies/data";
 import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
+import { getAllCityParams } from "@/lib/city-pages";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
@@ -173,6 +174,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.65,
+    });
+  }
+
+  // The /locations/[state]/[city] pages. Priority sits above the Kansas set
+  // because every one of these targets a query Search Console or Semrush has
+  // already shown demand for, rather than a city we happened to write first.
+  for (const { state, city } of getAllCityParams()) {
+    add({
+      url: absolute(`/locations/${state}/${city}`),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.75,
     });
   }
 
