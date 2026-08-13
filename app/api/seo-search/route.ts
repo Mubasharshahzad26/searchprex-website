@@ -1,6 +1,5 @@
 ﻿import { NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
-import { requireUser } from '@/lib/require-auth'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -140,16 +139,6 @@ SEARCHPREX (soft, honest funnel):
 }
  
 export async function POST(req: Request) {
-  // The /ai-search PAGE is public on purpose — it ranks, and a lead magnet that
-  // search engines cannot see is not a lead magnet. Running it is what costs a
-  // model call, so that is what requires an account. Checked here rather than
-  // in the UI because anything the browser enforces can be skipped by calling
-  // this endpoint directly.
-  const auth = await requireUser()
-  if (!auth.ok) {
-    return NextResponse.json({ error: auth.reason, requiresAuth: true }, { status: 401 })
-  }
-
   let body: { query?: string }
   try {
     body = await req.json()

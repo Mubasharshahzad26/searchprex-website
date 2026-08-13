@@ -14,13 +14,14 @@
 // contradictory signal that shows up as a Search Console error.
 
 export const GATED_TOOLS = [
+  // /autopilot only. It renders a client selector and run history — real client
+  // names — so it is the one route here with a genuine reason to be private.
+  //
+  // /ai-search and /content-generator were briefly gated and are not any more.
+  // Both are public marketing tools: /ai-search is titled "Free AI SEO Audit
+  // Tool" and already ranks, and a sign-up wall in front of a free tool costs
+  // more traffic than the accounts it earns.
   "/autopilot",
-  "/content-generator",
-  // /ai-search is deliberately NOT here. It is titled "Free AI SEO Audit Tool",
-  // ranks at position 20 for its own queries and sits at sitemap priority 0.9 —
-  // gating the page would drop it from the index and end that traffic, which is
-  // the opposite of what a lead magnet is for. The ACTION is gated instead, in
-  // app/api/seo-search/route.ts via lib/require-auth. Page public, tool gated.
 ] as const;
 
 /** True when `pathname` is a gated tool or sits underneath one. */

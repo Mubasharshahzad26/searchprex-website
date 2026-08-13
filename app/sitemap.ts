@@ -56,14 +56,9 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
   { path: "/case-calculator", priority: 0.7, changeFrequency: "monthly" },
   { path: "/law-firm-scorecard", priority: 0.7, changeFrequency: "monthly" },
-  // /ai-search stays listed. The PAGE is public — it ranks at position 20 for
-  // its own queries and a lead magnet crawlers cannot see is not a lead magnet.
-  // Only the action behind it requires an account (app/api/seo-search).
   { path: "/ai-search", priority: 0.9, changeFrequency: "weekly" },
-  // /content-generator is absent: it sits behind sign-in (lib/gated-routes), so
-  // a crawler is redirected to /login and the page cannot be indexed. Listing
-  // it would only produce Search Console errors.
   { path: "/ai-visibility", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/content-generator", priority: 0.7, changeFrequency: "monthly" },
   { path: "/bulk-generation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/tools/keyword-research", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tool", priority: 0.7, changeFrequency: "monthly" },

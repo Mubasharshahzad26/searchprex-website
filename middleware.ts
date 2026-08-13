@@ -97,13 +97,11 @@ export const config = {
     "/admin/:path*",
     "/login",
     "/register",
+    // Only /autopilot: it renders client names. /ai-search and
+    // /content-generator are public marketing tools and are deliberately absent
+    // — a route the middleware has no decision to make about should not cost a
+    // Supabase round trip on every request.
     "/autopilot/:path*",
     "/autopilot",
-    "/content-generator/:path*",
-    "/content-generator",
-    // /ai-search is absent on purpose. The page is public so it can rank; only
-    // the action behind it needs an account, and that is enforced in
-    // app/api/seo-search/route.ts. Running middleware here would cost a
-    // Supabase round trip on a page that never needs one.
   ],
 };
