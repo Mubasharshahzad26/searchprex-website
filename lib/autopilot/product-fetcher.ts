@@ -325,4 +325,27 @@ export async function fetchProductById(
     return null;
   }
 }
- 
+
+import { getProductIdFromUrl } from './csv-loader';
+
+export async function fetchProductDataFromCsv(
+  productUrl: string,
+  credentials: WPCredentials
+): Promise<ProductData | null> {
+  try {
+    console.log(`[fetchProductDataFromCsv] Fetching: ${productUrl}`);
+    
+    const postId = await getProductIdFromUrl(productUrl);
+    if (!postId) {
+      console.error(`[fetchProductDataFromCsv] URL not found in CSV:`, productUrl);
+      return null;
+    }
+
+    console.log(`[fetchProductDataFromCsv] Found post_id: ${postId}`);
+    return await fetchProductById(postId, credentials);
+    
+  } catch (error) {
+    console.error(`[fetchProductDataFromCsv] Error:`, error);
+    return null;
+  }
+}

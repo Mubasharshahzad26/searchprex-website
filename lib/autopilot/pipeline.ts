@@ -4,6 +4,7 @@ import { scoreContent } from './scoring';
 import { publishToWordPress } from './publisher';
 import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
+import { fetchProductDataFromCsv } from './product-fetcher';
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const MODEL = 'gemini-flash-lite-latest';
@@ -89,7 +90,7 @@ export async function runAutopilotBatch(clientId: string) {
       });
 
       try {
-        const productData = await fetchProductData(queued.url, wpCreds);
+        const productData = await fetchProductDataFromCsv(queued.url, wpCreds);
         if (!productData) {
           throw new Error(`Product not found in WP: ${queued.url}`);
         }
@@ -326,26 +327,60 @@ function parseGeneratedOutput(raw: string): GeneratedOutput {
   };
 }
 
+type PromptProductData = ProductData & {
+  attributes?: Record<string, string | number | boolean | null | undefined>;
+  categorySlugs?: string[];
+  brand?: string;
+  existingContent?: string;
+  shortDescription?: string;
+  excerpt?: string;
+  currentMetaTitle?: string;
+  currentMetaDescription?: string;
+};
+
 function buildPrompt(p: {
   productData: ProductData;
   siteDomain: string;
 }) {
-  const pd = p.productData;
+  const pd = p.productData as PromptProductData;
 
-  const attributesText = Object.entries(pd.attributes).length > 0
-    ? Object.entries(pd.attributes).map(([k, v]) => `- ${k}: ${v}`).join('\n')
+  const attributes = pd.attributes ?? {};
+  const attributesText = Object.keys(attributes).length > 0
+    ? Object.entries(attributes).map(([k, v]) => `- ${k}: ${String(v ?? 'n/a')}`).join('\n')
     : '(none provided)';
 
-  const categoryList = pd.categories.length > 0
-    ? pd.categories.join(', ')
+  const categoryNames = Array.isArray((pd as any).categories)
+    ? (pd as any).categories
+        .map((item: any) => typeof item === 'string' ? item : (item?.name ?? item?.slug ?? ''))
+        .filter(Boolean)
+    : [];
+  const categoryList = categoryNames.length > 0
+    ? categoryNames.join(', ')
     : '(none)';
 
-  const validInternalLinks = pd.categorySlugs.length > 0
-    ? pd.categorySlugs.map(slug => `https://${p.siteDomain}/product-category/${slug}/`).join('\n')
+  const categorySlugs = Array.isArray(pd.categorySlugs)
+    ? pd.categorySlugs
+    : Array.isArray((pd as any).categories)
+      ? (pd as any).categories
+          .map((item: any) => typeof item === 'string'
+            ? item
+            : (item?.slug ?? String(item?.name ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')))
+          .filter(Boolean)
+      : [];
+
+  const validInternalLinks = categorySlugs.length > 0
+    ? categorySlugs.map((slug: string) => `https://${p.siteDomain}/product-category/${slug}/`).join('\n')
     : `https://${p.siteDomain}/shop/`;
 
-  const brandAuthoritySites = pd.brand
-    ? `- Wikipedia article on the material/technology (e.g. https://en.wikipedia.org/wiki/M390_steel)\n- Official brand website (search: "${pd.brand} official")\n- Bladeforums.com (industry community reference)`
+  const brand = pd.brand ?? (pd as any).brandName ?? (pd as any).vendor ?? '';
+  const existingContent = pd.existingContent ?? (pd as any).description ?? '';
+  const shortDescription = pd.shortDescription ?? (pd as any).short_description ?? '';
+  const excerpt = pd.excerpt ?? (pd as any).excerpt ?? '';
+  const currentMetaTitle = pd.currentMetaTitle ?? (pd as any).meta_title ?? '';
+  const currentMetaDescription = pd.currentMetaDescription ?? (pd as any).meta_description ?? '';
+
+  const brandAuthoritySites = brand
+    ? `- Wikipedia article on the material/technology (e.g. https://en.wikipedia.org/wiki/M390_steel)\n- Official brand website (search: "${brand} official")\n- Bladeforums.com (industry community reference)`
     : `- Wikipedia article on the material/technology\n- Industry authority sites (Bladeforums.com, KnifeCenter blog)`;
 
   return `You are writing SEO product page copy for ${p.siteDomain}, a Michigan-based outdoor and knife retailer serving hunters, anglers, and outdoor enthusiasts across the United States.
@@ -353,7 +388,7 @@ function buildPrompt(p: {
 REAL PRODUCT DATA (ground truth — do not contradict or invent):
 
 Product Title: ${pd.title}
-${pd.brand ? `Brand: ${pd.brand}` : ''}
+${brand ? `Brand: ${brand}` : ''}
 ${pd.sku ? `SKU: ${pd.sku}` : ''}
 Categories: ${categoryList}
 ${pd.price ? `Price: ${pd.price}` : ''}
@@ -362,16 +397,16 @@ Product Attributes:
 ${attributesText}
 
 Existing Content:
-${pd.existingContent.slice(0, 1500) || '(none)'}
+${existingContent.slice(0, 1500) || '(none)'}
 
 Short Description:
-${pd.shortDescription.slice(0, 500) || '(none)'}
+${shortDescription.slice(0, 500) || '(none)'}
 
 Existing Excerpt:
-${pd.excerpt.slice(0, 300) || '(none)'}
+${excerpt.slice(0, 300) || '(none)'}
 
-Current Meta Title: ${pd.currentMetaTitle ?? '(none)'}
-Current Meta Description: ${pd.currentMetaDescription ?? '(none)'}
+Current Meta Title: ${currentMetaTitle || '(none)'}
+Current Meta Description: ${currentMetaDescription || '(none)'}
 
 STRICT RULES:
 1. DO NOT invent specifications (dimensions, weight, steel type, blade length) not in the data above.
