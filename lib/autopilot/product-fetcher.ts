@@ -34,6 +34,14 @@ export interface ProductData {
   permalink: string;
   type: string;
   status: string;
+  // ✅ MISSING FIELDS ADDED
+  attributes?: Record<string, string>;
+  categorySlugs?: string[];
+  brand?: string;
+  existingContent?: string;
+  excerpt?: string;
+  currentMetaTitle?: string;
+  currentMetaDescription?: string;
 }
  
 /**
@@ -159,9 +167,23 @@ export async function fetchProductData(
             console.warn(`[${runId}] No products found with slug:`, slug);
             return null;
           }
+ 
+          const product = products[0];
           
-          console.log(`[${runId}] ✅ Product found: ID ${products[0].id}`);
-          return products[0];
+          // Enrich with additional fields
+          const enrichedProduct: ProductData = {
+            ...product,
+            categorySlugs: product.categories?.map(c => c.name?.toLowerCase().replace(/\s+/g, '-')) || [],
+            brand: product.brand || extractBrandFromTitle(product.title),
+            existingContent: product.description || '',
+            excerpt: product.short_description || '',
+            currentMetaTitle: product.title,
+            currentMetaDescription: product.short_description?.slice(0, 160) || '',
+            attributes: extractAttributesFromProduct(product),
+          };
+          
+          console.log(`[${runId}] ✅ Product found: ID ${product.id}`);
+          return enrichedProduct;
           
         } catch (parseError) {
           console.error(`[${runId}] Failed to parse JSON response:`, parseError);
@@ -192,6 +214,37 @@ export async function fetchProductData(
     console.error(`[${runId}] Fatal error in fetchProductData:`, error);
     return null;
   }
+}
+ 
+/**
+ * Extract brand from product title (heuristic)
+ * Example: "Kershaw Leek Assisted" → "Kershaw"
+ */
+function extractBrandFromTitle(title: string): string | undefined {
+  const knownBrands = ['Kershaw', 'Benchmade', 'Spyderco', 'Cold Steel', 'Boker', 'CRKT', 'SOG', 'Mora', 'Opinel'];
+  for (const brand of knownBrands) {
+    if (title.toLowerCase().includes(brand.toLowerCase())) {
+      return brand;
+    }
+  }
+  return undefined;
+}
+ 
+/**
+ * Extract attributes from WooCommerce product
+ */
+function extractAttributesFromProduct(product: any): Record<string, string> {
+  const attributes: Record<string, string> = {};
+  
+  if (Array.isArray(product.attributes)) {
+    for (const attr of product.attributes) {
+      if (attr.name && attr.options) {
+        attributes[attr.name] = Array.isArray(attr.options) ? attr.options.join(', ') : String(attr.options);
+      }
+    }
+  }
+  
+  return attributes;
 }
  
 /**
@@ -251,8 +304,21 @@ export async function fetchProductById(
     }
  
     const product = await response.json();
+    
+    // Enrich with additional fields
+    const enrichedProduct: ProductData = {
+      ...product,
+      categorySlugs: product.categories?.map((c: any) => c.name?.toLowerCase().replace(/\s+/g, '-')) || [],
+      brand: product.brand || extractBrandFromTitle(product.title),
+      existingContent: product.description || '',
+      excerpt: product.short_description || '',
+      currentMetaTitle: product.title,
+      currentMetaDescription: product.short_description?.slice(0, 160) || '',
+      attributes: extractAttributesFromProduct(product),
+    };
+    
     console.log(`[${runId}] ✅ Product fetched: ${product.name}`);
-    return product;
+    return enrichedProduct;
  
   } catch (error) {
     console.error(`[${runId}] Error fetching product by ID:`, error);
