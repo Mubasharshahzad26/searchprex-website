@@ -1,5 +1,5 @@
 // File: app/api/debug-credentials/route.ts
-// See what's ACTUALLY stored in database
+// Better version - handles credentials as both object and string
  
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
@@ -20,50 +20,52 @@ export async function GET() {
       }, { status: 404 });
     }
  
-    console.log('[DEBUG] Raw credentials value:', cms.credentials);
-    console.log('[DEBUG] Credentials type:', typeof cms.credentials);
-    console.log('[DEBUG] Credentials length:', (cms.credentials as string).length);
+    console.log('[DEBUG] Raw credentials:', cms.credentials);
+    console.log('[DEBUG] Type of credentials:', typeof cms.credentials);
  
-    // Show first 500 chars
-    const credentialsStr = (cms.credentials as string).substring(0, 500);
-    
+    // credentials might be stored as object or string
+    let credentialsObj: any = null;
+    let credentialsStr: string | null = null;
+    let isAlreadyObject = false;
+ 
+    if (typeof cms.credentials === 'string') {
+      // It's a string - try to parse
+      credentialsStr = cms.credentials;
+      try {
+        credentialsObj = JSON.parse(credentialsStr);
+      } catch (e) {
+        credentialsObj = null;
+      }
+    } else if (typeof cms.credentials === 'object') {
+      // It's already an object
+      isAlreadyObject = true;
+      credentialsObj = cms.credentials;
+      credentialsStr = JSON.stringify(credentialsObj);
+    }
+ 
     return NextResponse.json({
       success: true,
       baseUrl: cms.baseUrl,
       clientId: cms.clientId,
-      credentialsRawValue: credentialsStr,
-      credentialsFullLength: (cms.credentials as string).length,
       credentialsType: typeof cms.credentials,
-      isValidJSON: isValidJSON(cms.credentials as string),
-      suggestion: generateSuggestion(cms.credentials as string)
+      isAlreadyObject,
+      credentialsRawValue: credentialsStr ? credentialsStr.substring(0, 200) : 'N/A',
+      credentialsObject: credentialsObj,
+      analysis: {
+        hasUsername: credentialsObj?.username ? true : false,
+        hasAppPassword: credentialsObj?.appPassword ? true : false,
+        username: credentialsObj?.username || 'MISSING',
+        appPasswordLength: credentialsObj?.appPassword ? credentialsObj.appPassword.length : 0,
+      },
+      status: credentialsObj && credentialsObj.username && credentialsObj.appPassword ? '✅ VALID' : '❌ INVALID'
     }, { status: 200 });
  
   } catch (error) {
+    console.error('[DEBUG] Error:', error);
     return NextResponse.json({
-      error: error instanceof Error ? error.message : 'Unknown error'
+      error: error instanceof Error ? error.message : 'Unknown error',
+      errorType: error?.constructor.name
     }, { status: 500 });
   }
-}
- 
-function isValidJSON(str: string): boolean {
-  try {
-    JSON.parse(str);
-    return true;
-  } catch {
-    return false;
-  }
-}
- 
-function generateSuggestion(str: string): string {
-  if (str.includes('[object Object]')) {
-    return 'Credentials are stored as [object Object] - this is invalid. Need to update database with valid JSON like {"username":"xxx","appPassword":"yyy"}';
-  }
-  if (str.startsWith('{') && str.endsWith('}')) {
-    return 'Looks like JSON but not parseable - check for special characters or quotes';
-  }
-  if (!str) {
-    return 'Credentials column is empty!';
-  }
-  return 'Unknown format - check the raw value above';
 }
  
