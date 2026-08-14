@@ -68,9 +68,13 @@ export async function runAutopilotBatch(clientId: string) {
       attempts++;
 
       const queued = await db.indexingQueue.findFirst({
-        where: { clientId, status: 'queued' },
-        orderBy: [{ priority: 'asc' }, { createdAt: 'asc' }],
-      });
+  where: { 
+    clientId, 
+    status: 'queued',
+    url: { contains: '/product/' }  // ← ONLY PRODUCTS
+  },
+  orderBy: [{ priority: 'asc' }, { createdAt: 'asc' }],
+});
 
       if (!queued) break;
 
