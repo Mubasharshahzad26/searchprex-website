@@ -1,87 +1,134 @@
 // File: app/api/test-product-fetch/route.ts
-// STEP 2: Add database query with logging
+// FIXED - Handles credentials as object (not string)
  
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+ 
+interface WPCredentials {
+  baseUrl: string;
+  username: string;
+  appPassword: string;
+}
  
 export async function GET() {
   const runId = `prod-test-${Date.now()}`;
   
   try {
-    console.log(`[${runId}] Endpoint called`);
-    
-    // STEP 1: Test basic response (WORKING ✅)
-    console.log(`[${runId}] Step 1: Basic test - OK`);
-    
-    // STEP 2: Try database query
-    console.log(`[${runId}] Step 2: Querying database for CMS connection...`);
-    
-    const clientId = 'cmrcl8frg0000p8uruwv7j5qd';
-    console.log(`[${runId}] Looking for clientId: ${clientId}`);
+    console.log(`[${runId}] Starting product fetch test...`);
+ 
+    // STEP 1: Get CMS credentials from DB
+    console.log(`[${runId}] Step 1: Fetching CMS connection...`);
     
     const cms = await db.cMSConnection.findFirst({
-      where: { clientId }
+      where: { clientId: 'cmrcl8frg0000p8uruwv7j5qd' }
     });
  
     if (!cms) {
-      console.warn(`[${runId}] ⚠️  CMS not found for clientId: ${clientId}`);
-      return NextResponse.json({
+      console.error(`[${runId}] CMS not found`);
+      return NextResponse.json({ 
         success: false,
-        step: 'db_query_cms_lookup',
         error: 'No CMS connection found',
-        details: {
-          searchedFor: clientId,
-          clientIdExists: false,
-        }
+        step: 'db_lookup'
       }, { status: 404 });
     }
  
     console.log(`[${runId}] ✅ CMS found: ${cms.baseUrl}`);
  
-    // STEP 3: Parse credentials
-    console.log(`[${runId}] Step 3: Parsing credentials...`);
+    // STEP 2: Handle credentials (might be object or string)
+    console.log(`[${runId}] Step 2: Processing credentials...`);
     
-    let credentials;
-    try {
-      credentials = JSON.parse(cms.credentials as string);
-      console.log(`[${runId}] ✅ Credentials parsed successfully`);
-      console.log(`[${runId}] Keys in credentials:`, Object.keys(credentials));
-    } catch (parseError) {
-      console.error(`[${runId}] ❌ Failed to parse credentials:`, parseError);
-      return NextResponse.json({
-        success: false,
-        step: 'credentials_parse',
-        error: parseError instanceof Error ? parseError.message : 'Failed to parse credentials',
-      }, { status: 500 });
+    let credentialsObj: any = cms.credentials;
+    
+    // If it's a string, parse it
+    if (typeof cms.credentials === 'string') {
+      try {
+        credentialsObj = JSON.parse(cms.credentials);
+      } catch (e) {
+        console.error(`[${runId}] Failed to parse credentials:`, e);
+        return NextResponse.json({
+          success: false,
+          error: 'Invalid credentials format',
+          step: 'credentials_parse'
+        }, { status: 500 });
+      }
     }
  
-    // STEP 4: Return success
-    console.log(`[${runId}] ✅ All database queries successful`);
+    const creds: WPCredentials = {
+      baseUrl: cms.baseUrl,
+      username: credentialsObj.username,
+      appPassword: credentialsObj.appPassword,
+    };
+ 
+    if (!creds.username || !creds.appPassword) {
+      console.error(`[${runId}] Missing username or appPassword`);
+      return NextResponse.json({
+        success: false,
+        error: 'Missing username or appPassword in credentials',
+        step: 'credentials_validation'
+      }, { status: 400 });
+    }
+ 
+    console.log(`[${runId}] ✅ Credentials loaded: ${creds.username}`);
+ 
+    // STEP 3: Test WooCommerce API connection
+    console.log(`[${runId}] Step 3: Testing WooCommerce API...`);
     
+    const auth = Buffer.from(`${creds.username}:${creds.appPassword}`).toString('base64');
+    const testUrl = `${creds.baseUrl}/wp-json/wc/v3/products?per_page=1`;
+    
+    console.log(`[${runId}] Requesting: ${testUrl}`);
+ 
+    const response = await fetch(testUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Basic ${auth}`,
+        'Content-Type': 'application/json',
+      },
+    });
+ 
+    console.log(`[${runId}] Response status: ${response.status}`);
+ 
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`[${runId}] API error: ${response.status} - ${errorText.substring(0, 200)}`);
+      
+      return NextResponse.json({
+        success: false,
+        error: `WordPress API returned ${response.status}`,
+        step: 'woocommerce_api_test',
+        details: {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorText.substring(0, 300)
+        }
+      }, { status: response.status >= 500 ? 502 : 400 });
+    }
+ 
+    const products = await response.json();
+    console.log(`[${runId}] ✅ API working, found ${Array.isArray(products) ? products.length : 0} products`);
+ 
+    // STEP 4: Success!
     return NextResponse.json({
       success: true,
       runId,
-      step: 'database_ok',
-      message: 'Database connection working',
+      message: 'All tests passed!',
       details: {
         cmsFound: true,
-        baseUrl: cms.baseUrl,
-        credentialKeys: Object.keys(credentials),
-        credentialsHasUsername: 'username' in credentials,
-        credentialsHasAppPassword: 'appPassword' in credentials,
+        baseUrl: creds.baseUrl,
+        username: creds.username,
+        apiAccessible: true,
+        productsCount: Array.isArray(products) ? products.length : 0,
       }
     }, { status: 200 });
  
   } catch (error) {
-    console.error(`[${runId}] ❌ Unhandled error:`, error);
+    console.error(`[${runId}] ❌ Error:`, error);
     
     return NextResponse.json({
       success: false,
-      runId,
-      step: 'unhandled_exception',
       error: error instanceof Error ? error.message : 'Unknown error',
+      step: 'unhandled_exception',
       errorType: error?.constructor.name,
-      stack: error instanceof Error ? error.stack?.substring(0, 300) : undefined,
     }, { status: 500 });
   }
 }
