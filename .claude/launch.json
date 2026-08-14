@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "3005"],
       "port": 3005
+    },
+    {
+      "name": "nicheseo-dev",
+      "runtimeExecutable": "C:/Users/MUBASH~1/AppData/Local/Temp/claude/C--Users-Mubashar-Shahzad-Desktop-searchprex-website/cca9b71d-dd84-44c7-91a2-f13133a906fb/scratchpad/nicheseo-dev.cmd",
+      "runtimeArgs": [],
+      "port": 5173
     }
   ]
 }

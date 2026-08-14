@@ -13,14 +13,14 @@ model Client {
   domain      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  blogPosts BlogPost[]
 
-  gscConnections  GSCConnection[]
+  gscConnections    GSCConnection[]
   cmsConnections  CMSConnection[]
   autopilotConfig AutopilotConfig?
   autopilotRuns   AutopilotRun[]
   costLogs        CostLog[]
   reportConfig    ReportConfig?
-  blogPosts       BlogPost[]
 }
 
 model GSCConnection {
@@ -139,7 +139,6 @@ model ReportConfig {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 }
-
 model IndexingAccount {
   id              String   @id @default(cuid())
   label           String
@@ -167,7 +166,6 @@ model IndexingLog {
   @@index([accountId])
   @@index([submittedAt])
 }
-
 model IndexingQueue {
   id          String    @id @default(cuid())
   url         String    @unique
@@ -180,7 +178,6 @@ model IndexingQueue {
   @@index([status, priority])
   @@index([clientId])
 }
-
 model AuditRun {
   id           String    @id @default(cuid())
   clientId     String?
@@ -201,165 +198,143 @@ model AuditRun {
 }
 
 model AuditPage {
-  id                 String   @id @default(cuid())
-  runId              String
-  run                AuditRun @relation(fields: [runId], references: [id], onDelete: Cascade)
-  url                String
-  statusCode         Int?
-  title              String?
-  titleLength        Int?
-  metaDescription    String?
-  metaLength         Int?
-  h1Count            Int?
-  h1Text             String?
-  wordCount          Int?
-  internalLinksCount Int?
-  externalLinksCount Int?
-  imageCount         Int?
-  imagesMissingAlt   Int?
-  canonical          String?
-  hasSchema          Boolean  @default(false)
-  issues             Json?
-  crawledAt          DateTime @default(now())
+  id                  String   @id @default(cuid())
+  runId               String
+  run                 AuditRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  url                 String
+  statusCode          Int?
+  title               String?
+  titleLength         Int?
+  metaDescription     String?
+  metaLength          Int?
+  h1Count             Int?
+  h1Text              String?
+  wordCount           Int?
+  internalLinksCount  Int?
+  externalLinksCount  Int?
+  imageCount          Int?
+  imagesMissingAlt    Int?
+  canonical           String?
+  hasSchema           Boolean  @default(false)
+  issues              Json?
+  crawledAt           DateTime @default(now())
 
   @@unique([runId, url])
   @@index([runId])
 }
 
 model AuditInsight {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   runId       String
-  run         AuditRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  run         AuditRun  @relation(fields: [runId], references: [id], onDelete: Cascade)
   pageUrl     String
   category    String
-  priority    Int      @default(2)
+  priority    Int       @default(2)
   reason      String
   actionTaken String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
 
   @@index([runId, category])
 }
-
 model RoadmapPlan {
-  id               String   @id @default(cuid())
-  clientId         String?
-  siteUrl          String
-  auditRunId       String?
-  industry         String   @default("general")
-  healthScore      Int?
-  executiveSummary String?  @db.Text
-  plan             Json
-  expectedMetrics  Json?
-  status           String   @default("generated")
-  generatedAt      DateTime @default(now())
-  errorMessage     String?
+  id                String   @id @default(cuid())
+  clientId          String?
+  siteUrl           String
+  auditRunId        String?
+  industry          String   @default("general")
+  healthScore       Int?
+  executiveSummary  String?  @db.Text
+  plan              Json
+  expectedMetrics   Json?
+  status            String   @default("generated")
+  generatedAt       DateTime @default(now())
+  errorMessage      String?
 
   @@index([clientId])
   @@index([auditRunId])
   @@index([generatedAt])
 }
-
 model BlogPost {
-  id       String @id @default(cuid())
-  clientId String
-  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
-
-  topic    String
-  category String // "comparison" | "buying-guide" | "educational" | "roundup"
-  keywords String[] // primary + LSI keywords
-
-  status      String    @default("queued") // queued, generating, published, error
+  id          String    @id @default(cuid())
+  clientId    String
+  client      Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  topic       String
+  category    String    // "comparison" | "buying-guide" | "educational" | "roundup"
+  keywords    String[]  // primary + LSI keywords
+  
+  status      String    @default("queued")  // queued, generating, published, error
   scheduledAt DateTime?
   publishedAt DateTime?
-
-  wpPostId Int?
-  liveUrl  String?
-
-  generatedContent Json? // { metaTitle, metaDescription, contentHtml, faqs, quality }
+  
+  wpPostId    Int?
+  liveUrl     String?
+  
+  generatedContent Json?    // { metaTitle, metaDescription, contentHtml, faqs, quality }
   errorMessage     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
   @@index([clientId, status])
   @@index([scheduledAt])
 }
+model PageMetric {
+  id           String   @id @default(cuid())
+  url          String   @unique
+  clientId     String
+  impressions  Int      @default(0)
+  clicks       Int      @default(0)
+  avgPosition  Float?
+  ctr          Float?
+  indexed      Boolean  @default(false)
+  lastFetched  DateTime @default(now())
+  createdAt    DateTime @default(now())
+
+  @@index([clientId])
+  @@index([avgPosition])
+  @@index([impressions])
+}
 
 model Page {
-  id               String   @id @default(cuid())
-  slug             String   @unique // e.g., "/" for home, "/about" for about
-  title            String
-  metaDescription  String
-  canonicalUrl     String?
+  id                  String    @id
+  slug                String    @unique
+  title               String
+  metaDescription     String
+  canonicalUrl        String?
+  contentBlocks       Json?
+  metaKeywords        String[]
+  ogDescription       String?
+  ogImage             String?
+  ogTitle             String?
+  ogType              String?
+  robots              String?
+  schemaData          Json?
+  schemaType          String?
+  status              String
+  twitterCard         String?
+  twitterDescription  String?
+  twitterImage        String?
+  twitterTitle        String?
+  createdAt           DateTime
+  updatedAt           DateTime
 
-  // Open Graph
-  ogTitle          String?
-  ogDescription    String?
-  ogImage          String?
-  ogType           String?  @default("website") // website, article, product, etc.
-
-  // Twitter Card
-  twitterCard      String?  @default("summary_large_image")
-  twitterTitle     String?
-  twitterDescription String?
-  twitterImage     String?
-
-  // Robots & Indexing
-  robots           String?  @default("index, follow") // index/noindex, follow/nofollow
-  metaKeywords     String[] // SEO keywords array
-
-  // Schema.org JSON-LD
-  schemaType       String?  // Organization, WebPage, FAQPage, VideoObject, Product, etc.
-  schemaData       Json?    // Full JSON-LD structured data
-
-  // Content
-  contentBlocks    Json?    // Stores text, links, and media for the page
-
-  // Status
-  status           String   @default("published") // published, draft, archived
-
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  @@index([slug])
+  @@index([status])
 }
 
-/// Cached SERP results for the free SERP Checker.
-///
-/// DataForSEO bills per keyword checked, and the tool is public and
-/// unauthenticated. Without this, one scripted client could run the account
-/// down — and most traffic is repeat queries anyway ("personal injury lawyer
-/// detroit" is the same SERP for every visitor who asks that hour).
-///
-/// `cacheKey` is keyword|location|device, lowercased and whitespace-collapsed.
-model SerpCache {
-  id        String   @id @default(cuid())
-  cacheKey  String   @unique
-  keyword   String
-  location  String
-  /// A serialised SerpKeywordResult from lib/serp-types.
-  payload   Json
-  /// Incremented on every cache hit — shows which queries are worth pre-warming.
-  hits      Int      @default(0)
-  createdAt DateTime @default(now())
-  expiresAt DateTime
-
-  @@index([expiresAt])
-}
-
-/// Durable per-visitor quota for the SERP Checker.
-///
-/// The route's original limiter was a module-level Map. On Vercel every lambda
-/// instance holds its own copy and instances churn constantly, so the limit was
-/// effectively unenforced in production. This survives across instances.
-///
-/// `visitorHash` is a salted SHA-256 of the IP, never the IP itself — the raw
-/// address is personal data and there is no reason to store it.
 model SerpUsage {
-  id          String   @id @default(cuid())
-  visitorHash String
-  /// UTC calendar day, YYYY-MM-DD.
-  day         String
-  count       Int      @default(0)
-  updatedAt   DateTime @updatedAt
+  /// @default(cuid()) and @updatedAt are Prisma-client behaviours, not database
+  /// columns — they were lost when the schema was regenerated by introspection,
+  /// which only sees what Postgres stores. Without them every quota write fails
+  /// (id and updatedAt have nothing to fall back on), and lib/serp-cache.ts
+  /// swallows the error, so the daily limit on the free keyword tool silently
+  /// stopped applying. Restoring them needs no migration.
+  id           String   @id @default(cuid())
+  visitorHash  String
+  day          String
+  count        Int      @default(0)
+  updatedAt    DateTime @updatedAt
 
   @@unique([visitorHash, day])
   @@index([day])

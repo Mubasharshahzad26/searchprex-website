@@ -340,14 +340,64 @@ function FactPanel({
 }
 
 /**
- * Service + FAQPage + BreadcrumbList.
+ * ProfessionalService + Service + FAQPage + BreadcrumbList.
+ *
+ * ProfessionalService is a LocalBusiness subtype, which is what gives these
+ * pages a local-business signal Google understands.
+ *
+ * What it deliberately does NOT carry is a street address in this city.
+ * LocalBusiness markup is meant to describe a place a customer can physically
+ * visit, and SearchPrex is remote — there is no Detroit office, no Cleveland
+ * office. Publishing one would be a fabricated NAP, which is both dishonest and
+ * a documented way to get local markup ignored or penalised. `areaServed`
+ * carries the geography instead, which is the accurate claim: we serve this
+ * city, we are not located in it.
  *
  * FAQPage carries every question the page renders, because that markup is what
- * makes these answers eligible to be quoted in an AI Overview. areaServed names
- * the city and county explicitly — it is the machine-readable version of the
- * local relevance the copy argues for.
+ * makes these answers eligible to be quoted in an AI Overview.
  */
 function Schema({ page, url }: { page: CityPage; url: string }) {
+  const areaServed = [
+    {
+      "@type": "City",
+      name: page.city,
+      containedInPlace: { "@type": "State", name: page.state },
+    },
+    { "@type": "AdministrativeArea", name: page.county },
+  ];
+
+  const professionalService = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${url}#localbusiness`,
+    name: `SearchPrex — Law Firm SEO, ${page.city}`,
+    description: page.metaDescription,
+    url,
+    // No `address` on purpose — see the note above. `areaServed` is the honest
+    // geographic claim for a remote agency.
+    areaServed,
+    priceRange: "$$",
+    email: "contact@searchprex.com",
+    telephone: "+92-310-652-6316",
+    knowsAbout: [
+      "Law firm SEO",
+      "Local SEO",
+      "Google Business Profile optimisation",
+      ...page.practiceDemand.map((p) => p.area),
+    ],
+    parentOrganization: {
+      "@type": "Organization",
+      name: "SearchPrex",
+      url: SITE,
+    },
+    founder: {
+      "@type": "Person",
+      name: "Mubashar Shahzad",
+      jobTitle: "Founder & Lead SEO Strategist",
+      sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
+    },
+  };
+
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -400,7 +450,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
 
   return (
     <>
-      {[service, faq, breadcrumb].map((s, i) => (
+      {[professionalService, service, faq, breadcrumb].map((s, i) => (
         <script
           key={i}
           type="application/ld+json"
