@@ -10,7 +10,7 @@ export async function GET() {
     
     if (!cms) return NextResponse.json({ error: 'No CMS' });
     
-    const creds = JSON.parse(cms.credentials as string);
+    const creds = cms.credentials as any;
     
     // 2. Direct fetch from Vercel production
     const auth = Buffer.from(`${creds.username}:${creds.appPassword}`).toString('base64');
