@@ -97,11 +97,10 @@ export const config = {
     "/admin/:path*",
     "/login",
     "/register",
-    // Only /autopilot: it renders client names. /ai-search and
-    // /content-generator are public marketing tools and are deliberately absent
-    // — a route the middleware has no decision to make about should not cost a
-    // Supabase round trip on every request.
-    "/autopilot/:path*",
-    "/autopilot",
+    // No public tool routes are listed. GATED_TOOLS in lib/gated-routes is
+    // empty, and a route the middleware has no decision to make about should
+    // not cost a Supabase round trip on every request. When the SaaS work
+    // reintroduces gating, a path has to be added in BOTH places — this list
+    // and GATED_TOOLS — or the check silently never runs.
   ],
 };
