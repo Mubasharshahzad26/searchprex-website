@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 
 export async function GET() {
   try {
-    const cms = await db.cmsConnection.findFirst({
+    const cms = await db.cMSConnection.findFirst({
       where: { clientId: 'cmrcl8frg0000p8uruwv7j5qd' }
     });
     
