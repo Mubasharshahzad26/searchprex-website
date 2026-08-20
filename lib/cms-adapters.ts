@@ -1,150 +1,136 @@
+import { Prisma } from '@prisma/client'
+
+export type JsonValue = string | number | boolean | null | { [key: string]: JsonValue } | JsonValue[]
+
 export interface CMSAdapter {
-  name: string
-  publish(pageUrl: string, content: any): Promise<{ success: boolean; postId: string; onPage: string[] }>
+  publish(pageUrl: string, content: JsonValue): Promise<void>
 }
- 
-export class WordPressAdapter implements CMSAdapter {
-  name = 'WordPress'
-  private baseUrl: string
+
+class WordPressAdapter implements CMSAdapter {
+  private siteUrl: string
   private username: string
-  private appPassword: string
- 
-  constructor(baseUrl: string, username: string, appPassword: string) {
-    this.baseUrl = baseUrl
-    this.username = username
-    this.appPassword = appPassword
-  }
- 
-  private async fetch(endpoint: string, options: RequestInit = {}) {
-    const auth = Buffer.from(`${this.username}:${this.appPassword}`).toString('base64')
-    const response = await fetch(`${this.baseUrl}/wp-json/wp/v2${endpoint}`, {
-      ...options,
-      headers: {
-        ...options.headers,
-        Authorization: `Basic ${auth}`,
-        'Content-Type': 'application/json',
-      },
-    })
-    if (!response.ok) {
-      const body = await response.text().catch(() => '')
-      throw new Error(`WordPress API ${response.status} ${response.statusText}: ${body.slice(0, 200)}`)
+  private password: string
+
+  constructor(config: { siteUrl: string; wpUser?: string; wpPassword?: string }) {
+    this.siteUrl = config.siteUrl
+    this.username = config.wpUser || process.env.WP_USERNAME || ''
+    this.password = config.wpPassword || process.env.WP_PASSWORD || ''
+
+    if (!this.username || !this.password) {
+      console.warn('⚠️  WordPress credentials not configured')
     }
-    return response.json()
   }
- 
-  // Slug ko pehle pages mein, phir posts mein, phir WooCommerce product mein dhoondte hain
-  private async findContent(
-    slug: string,
-  ): Promise<{ id: number; type: 'pages' | 'posts' | 'product' }> {
-    // 1. Standard pages check
-    const pages = await this.fetch(`/pages?slug=${slug}&_fields=id`)
-    if (pages.length > 0) return { id: pages[0].id, type: 'pages' }
- 
-    // 2. Standard posts check
-    const posts = await this.fetch(`/posts?slug=${slug}&_fields=id`)
-    if (posts.length > 0) return { id: posts[0].id, type: 'posts' }
- 
-    // 3. WooCommerce product check — /wp/v2/product endpoint
-    // Ye endpoint tab expose hota hai jab WooCommerce product post_type mein
-    // show_in_rest: true ho (modern WooCommerce v3.5+ mein default hai)
+
+  // Helper: Create Basic Auth header
+  private getAuthHeader(): string {
+    const credentials = `${this.username}:${this.password}`
+    return `Basic ${Buffer.from(credentials).toString('base64')}`
+  }
+
+  // ⭐ SIMPLIFIED PUBLISH: No product verification
+  async publish(pageUrl: string, content: JsonValue): Promise<void> {
     try {
-      const products = await this.fetch(`/product?slug=${slug}&_fields=id`)
-      if (products.length > 0) return { id: products[0].id, type: 'product' }
-    } catch (err) {
-      // Product endpoint site pe enabled nahi hai — silently skip aur error message
-      // se user ko pata chal jayega
-    }
- 
-    throw new Error(`Content not found in pages, posts, or products: ${slug}`)
-  }
- 
-  async publish(
-    pageUrl: string,
-    content: any,
-  ): Promise<{ success: boolean; postId: string; onPage: string[] }> {
-    const slug = pageUrl.split('/').filter(Boolean).pop()
-    if (!slug) throw new Error(`Invalid pageUrl: ${pageUrl}`)
- 
-    // Internal metadata publish nahi hota
-    const { _keywordPack, ...c } = content
- 
-    const target = await this.findContent(slug)
-    const onPage: string[] = []
- 
-    // ── 1. CONTENT BODY (naya heading structure included) ──
-    let body = c.contentBody || c.htmlContent || c.html || c.description || ''
-    if (!body) throw new Error(`No publishable content body found for ${slug}`)
-    onPage.push('content+headings')
- 
-    // ── 2. FAQ section (visible HTML) ──
-    const faqs = Array.isArray(c.faqs) ? c.faqs : []
-    if (faqs.length > 0) {
-      const faqHtml = faqs
-        .map((f: any) => `<h3>${f.question}</h3><p>${f.answer}</p>`)
-        .join('\n')
-      body = `${body}\n\n<h2>Frequently Asked Questions</h2>\n${faqHtml}`
-      onPage.push('faq-section')
-    }
- 
-    // ── 3. SCHEMA MARKUP (JSON-LD script inject — FAQPage + jo bhi engine ne banaya) ──
-    const schemas: string[] = []
-    if (c.schemaMarkup && typeof c.schemaMarkup === 'string' && c.schemaMarkup.trim().startsWith('{')) {
-      schemas.push(c.schemaMarkup.trim())
-    }
-    if (faqs.length > 0) {
-      const faqSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((f: any) => ({
-          '@type': 'Question',
-          name: f.question,
-          acceptedAnswer: { '@type': 'Answer', text: f.answer },
-        })),
+      // Extract slug from URL
+      const slug = this.extractSlug(pageUrl)
+      if (!slug) {
+        throw new Error(`Invalid URL format: ${pageUrl}`)
       }
-      schemas.push(JSON.stringify(faqSchema))
+
+      console.log(`📝 Publishing to WP: ${slug}`)
+
+      // Prepare post data
+      const postData = {
+        title: this.getTitle(content),
+        content: this.getContent(content),
+        slug: slug,
+        status: 'publish',
+        post_type: 'post',
+      }
+
+      // Create/Update post via WordPress REST API
+      const response = await fetch(`${this.siteUrl}/wp-json/wp/v2/posts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': this.getAuthHeader(),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(`WP API error (${response.status}): ${errorText}`)
+      }
+
+      const result = await response.json()
+      console.log(`✅ Published successfully: ${result.id}`)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error'
+      console.error(`❌ Publish failed for ${pageUrl}: ${message}`)
+      throw error
     }
-    if (schemas.length > 0) {
-      const schemaBlock = schemas
-        .map((s) => `<script type="application/ld+json">${s}</script>`)
-        .join('\n')
-      body = `${body}\n\n${schemaBlock}`
-      onPage.push(`schema-jsonld(${schemas.length})`)
+  }
+
+  // Helper: Extract product slug from URL
+  private extractSlug(pageUrl: string): string {
+    try {
+      const url = new URL(pageUrl)
+      const parts = url.pathname.split('/').filter(p => p)
+      
+      // Look for /product/slug-name format
+      if (parts.includes('product') && parts.length > parts.indexOf('product') + 1) {
+        return parts[parts.indexOf('product') + 1]
+      }
+      
+      // Fallback: use last non-empty part
+      return parts[parts.length - 1] || ''
+    } catch {
+      return ''
     }
- 
-    // ── 4. CORE UPDATE: content + H1 title ──
-    const updatePayload: any = { content: body }
-    const title = c.h1Title || c.title
-    if (title) updatePayload.title = title
- 
-    // ── 5. RANK MATH META (title, description, focus keyword) ──
-    // Rank Math REST API se meta expose karta hai. Agar site pe field register
-    // nahi hai to WP unknown meta ko silently ignore karta hai — publish nahi tootega.
-    const meta: any = {}
-    if (c.metaTitle) meta.rank_math_title = c.metaTitle
-    if (c.metaDescription) meta.rank_math_description = c.metaDescription
-    if (c.focusKeyword) meta.rank_math_focus_keyword = c.focusKeyword
-    if (Object.keys(meta).length > 0) {
-      updatePayload.meta = meta
-      onPage.push('rankmath-meta')
+  }
+
+  // Helper: Extract title from content
+  private getTitle(content: JsonValue): string {
+    if (typeof content === 'object' && content !== null && !Array.isArray(content)) {
+      if ('title' in content && typeof content.title === 'string') {
+        return content.title
+      }
+      if ('heading' in content && typeof content.heading === 'string') {
+        return content.heading
+      }
     }
- 
-    // POST endpoint dynamically build hota hai:
-    //   /pages/{id}     — pages ke liye
-    //   /posts/{id}     — blog posts ke liye
-    //   /product/{id}   — WooCommerce products ke liye (NEW)
-    await this.fetch(`/${target.type}/${target.id}`, {
-      method: 'POST',
-      body: JSON.stringify(updatePayload),
-    })
- 
-    return { success: true, postId: String(target.id), onPage }
+    return 'Auto-Generated Content'
+  }
+
+  // Helper: Extract content/body
+  private getContent(content: JsonValue): string {
+    if (typeof content === 'string') {
+      return content
+    }
+    
+    if (typeof content === 'object' && content !== null && !Array.isArray(content)) {
+      if ('content' in content && typeof content.content === 'string') {
+        return content.content
+      }
+      if ('body' in content && typeof content.body === 'string') {
+        return content.body
+      }
+      if ('text' in content && typeof content.text === 'string') {
+        return content.text
+      }
+    }
+    
+    // Fallback: convert object to JSON string
+    return JSON.stringify(content, null, 2)
   }
 }
- 
+
 export function getCMSAdapter(config: any): CMSAdapter {
-  if (config.type === 'wordpress' || config.cmsType === 'wordpress') {
-    return new WordPressAdapter(config.baseUrl, config.username, config.appPassword)
+  const type = config?.type?.toLowerCase() || 'wordpress'
+
+  if (type === 'wordpress') {
+    return new WordPressAdapter(config)
   }
-  throw new Error(`Unknown CMS type: ${config.type || config.cmsType}`)
+
+  throw new Error(`Unknown CMS type: ${type}`)
 }
- 
