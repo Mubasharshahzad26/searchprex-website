@@ -204,6 +204,12 @@ export class SEOAutopilot {
 
       for (const page of targets) {
         try {
+          // ⭐⭐⭐ GUARD CLAUSE: Skip invalid URLs ⭐⭐⭐
+          if (!page.url || !page.url.includes('/product/')) {
+            console.log('⏭️  Skipping invalid URL:', page.url)
+            continue
+          }
+
           let keywordPack = null
           try {
             keywordPack = await getKeywordPackForPage(
