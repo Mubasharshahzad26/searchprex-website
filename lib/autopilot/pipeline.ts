@@ -4,7 +4,7 @@ import { scoreContent } from './scoring';
 import { publishToWordPress } from './publisher';
 import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
-import { fetchProductDataFromCsv } from './product-fetcher';
+import { fetchProductDataFromCsv, ProductFetchError } from './product-fetcher';
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const MODEL = 'gemini-flash-lite-latest';
@@ -63,15 +63,24 @@ export async function runAutopilotBatch(clientId: string) {
   const MAX_ATTEMPTS = batchSize * 3;
   let attempts = 0;
 
+  //  URLs put back in the queue after the origin failed on them. Skipped
+  //  for the rest of this run so the batch moves on to other products
+  //  instead of retrying one unlucky URL until it runs out of attempts.
+  const deferredThisRun = new Set<string>();
+
   try {
     while (stats.published < batchSize && attempts < MAX_ATTEMPTS) {
       attempts++;
 
       const queued = await db.indexingQueue.findFirst({
-  where: { 
-    clientId, 
+  where: {
+    clientId,
     status: 'queued',
-    url: { contains: '/product/' }  // ← ONLY PRODUCTS
+    url: { contains: '/product/' },  // ← ONLY PRODUCTS
+    //  A URL put back after a transient failure is still 'queued', and
+    //  this query is ordered oldest-first, so without this the run would
+    //  pick the same one straight back up and spend every attempt on it.
+    ...(deferredThisRun.size > 0 ? { NOT: { url: { in: [...deferredThisRun] } } } : {}),
   },
   orderBy: [{ priority: 'asc' }, { createdAt: 'asc' }],
 });
@@ -94,9 +103,17 @@ export async function runAutopilotBatch(clientId: string) {
       });
 
       try {
+        //  fetchProductDataFromCsv now throws a ProductFetchError when the
+        //  shop failed to answer, and returns null only when the URL is
+        //  genuinely absent from the CSV. Letting the throw through is the
+        //  point: "Product not found in WP" was printed for both, and for
+        //  five weeks it sent us looking for products that were published
+        //  and fine while the origin was returning 521 under batch load.
         const productData = await fetchProductDataFromCsv(queued.url, wpCreds);
         if (!productData) {
-          throw new Error(`Product not found in WP: ${queued.url}`);
+          throw new Error(
+            `URL is not in the product export, so there is nothing to rewrite: ${queued.url}`
+          );
         }
 
         const model = gemini.getGenerativeModel({
@@ -203,16 +220,39 @@ export async function runAutopilotBatch(clientId: string) {
 
       } catch (err) {
         const errMsg = (err as Error).message.slice(0, 500);
+
+        //  The shop failing to answer says nothing about this product, so
+        //  the URL goes back in the queue instead of being burned. Marking
+        //  it 'error' is permanent — nothing ever picks those rows up again
+        //  — and a bad five minutes at the origin was quietly retiring
+        //  hundreds of perfectly good products every run. 5,811 sat in that
+        //  state before this was found. A real 404, a bad credential, or a
+        //  generation failure still ends the URL, because those will not
+        //  come out differently tomorrow.
+        const transient =
+          err instanceof ProductFetchError && err.status !== 404 && err.status !== 401 && err.status !== 403;
+
         await db.autopilotPage.update({
           where: { id: page.id },
-          data: { status: 'error', errorMessage: errMsg },
+          data: { status: transient ? 'deferred' : 'error', errorMessage: errMsg },
         });
         await db.indexingQueue.update({
           where: { id: queued.id },
-          data: { status: 'error' },
+          data: { status: transient ? 'queued' : 'error' },
         });
+        if (transient) deferredThisRun.add(queued.url);
         stats.errors++;
+
+        //  Back off when the origin is struggling rather than sending the
+        //  next request straight into it — that is what turns one slow
+        //  moment into a whole failed run.
+        if (transient) await new Promise((r) => setTimeout(r, 3000));
       }
+
+      //  A gap between products. The batch used to fire requests back to
+      //  back and the origin started returning 521 under its own autopilot;
+      //  every one of those was recorded as a missing product.
+      await new Promise((r) => setTimeout(r, 400));
     }
 
     await db.autopilotRun.update({

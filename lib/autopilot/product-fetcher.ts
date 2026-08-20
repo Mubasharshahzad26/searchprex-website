@@ -170,18 +170,25 @@ export async function fetchProductData(
  
           const product = products[0];
           
-          // Enrich with additional fields
+          //  Same field mismatch as the by-ID path: WooCommerce sends
+          //  `name`, not `title`. Fixed in both so the two callers cannot
+          //  disagree about what a product is called.
+          const name: string = (product as any).name ?? product.title ?? '';
+
           const enrichedProduct: ProductData = {
             ...product,
-            categorySlugs: product.categories?.map(c => c.name?.toLowerCase().replace(/\s+/g, '-')) || [],
-            brand: product.brand || extractBrandFromTitle(product.title),
+            title: name,
+            name,
+            categorySlugs:
+              product.categories?.map((c: any) => c.slug ?? c.name?.toLowerCase().replace(/\s+/g, '-')).filter(Boolean) || [],
+            brand: product.brand || extractBrandFromTitle(name),
             existingContent: product.description || '',
             excerpt: product.short_description || '',
-            currentMetaTitle: product.title,
+            currentMetaTitle: name,
             currentMetaDescription: product.short_description?.slice(0, 160) || '',
             attributes: extractAttributesFromProduct(product),
           };
-          
+
           console.log(`[${runId}] ✅ Product found: ID ${product.id}`);
           return enrichedProduct;
           
@@ -220,7 +227,13 @@ export async function fetchProductData(
  * Extract brand from product title (heuristic)
  * Example: "Kershaw Leek Assisted" → "Kershaw"
  */
-function extractBrandFromTitle(title: string): string | undefined {
+function extractBrandFromTitle(title: string | undefined | null): string | undefined {
+  //  Guarded because it was not, and the caller passed product.title, which
+  //  WooCommerce does not send — the field is `name`. Every product threw
+  //  here, the enclosing catch turned the throw into null, and the pipeline
+  //  reported "Product not found in WP" for a catalogue that was entirely
+  //  present. A missing title is a missing brand, not a crash.
+  if (!title) return undefined;
   const knownBrands = ['Kershaw', 'Benchmade', 'Spyderco', 'Cold Steel', 'Boker', 'CRKT', 'SOG', 'Mora', 'Opinel'];
   for (const brand of knownBrands) {
     if (title.toLowerCase().includes(brand.toLowerCase())) {
@@ -275,7 +288,29 @@ export async function fetchMultipleProducts(
  
 /**
  * Fetch product by ID directly (faster, no slug extraction needed)
+ *
+ * Retries transient failures. This function used to accept `timeout` and
+ * `retries` and then use neither: one fetch, no AbortController, and
+ * `if (!response.ok) return null`. The origin returns 521 and 502 under the
+ * batch's request rate — intermittently, not because anything is wrong with
+ * the product — and a single blip killed that product for good. 7,112 pages
+ * failed that way between 17 July and 20 August while WooCommerce had every
+ * one of them at status=publish.
+ *
+ * The status is kept on the way out for the same reason. `null` told the
+ * caller "no such product", which is what it reported to the operator, and
+ * five weeks went into looking for missing products that were never missing.
  */
+export class ProductFetchError extends Error {
+  constructor(message: string, readonly status: number, readonly productId: number) {
+    super(message);
+    this.name = 'ProductFetchError';
+  }
+}
+
+/** 404 means gone. Everything else here means "ask again in a moment". */
+const TRANSIENT = new Set([408, 425, 429, 500, 502, 503, 504, 520, 521, 522, 523, 524]);
+
 export async function fetchProductById(
   productId: number,
   credentials: WPCredentials,
@@ -283,69 +318,124 @@ export async function fetchProductById(
 ): Promise<ProductData | null> {
   const runId = `fetch-id-${Date.now()}`;
   const { timeout = 10000, retries = 2 } = options || {};
- 
-  try {
+
+  let product: any;
+
+  for (let attempt = 0; ; attempt++) {
     const endpoint = `${credentials.baseUrl}/wp-json/wc/v3/products/${productId}`;
-    console.log(`[${runId}] Fetching product ${productId}...`);
- 
-    const auth = getBasicAuth(credentials.username, credentials.appPassword);
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Basic ${auth}`,
-        'Content-Type': 'application/json',
-        'User-Agent': 'MSO-Autopilot/1.0',
-      },
-    });
- 
-    if (!response.ok) {
-      console.error(`[${runId}] Product fetch failed: ${response.status}`);
-      return null;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      if (attempt > 0) {
+        //  1s, then 2s. Long enough for an overloaded origin to catch up,
+        //  short enough that a batch does not stall on one product.
+        await new Promise((r) => setTimeout(r, 1000 * attempt));
+        console.log(`[${runId}] Retry ${attempt}/${retries} for product ${productId}...`);
+      } else {
+        console.log(`[${runId}] Fetching product ${productId}...`);
+      }
+
+      const auth = getBasicAuth(credentials.username, credentials.appPassword);
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Basic ${auth}`,
+          'Content-Type': 'application/json',
+          'User-Agent': 'MSO-Autopilot/1.0',
+        },
+        signal: controller.signal,
+      });
+
+      if (response.ok) {
+        product = await response.json();
+        break;
+      }
+
+      //  404 is the only status that actually means the product is not
+      //  there. 401 and 403 are our credentials and will not improve on
+      //  a second try either. Both are final, and both say which it was.
+      if (!TRANSIENT.has(response.status) || attempt >= retries) {
+        const detail = await response.text().catch(() => '');
+        console.error(`[${runId}] Product ${productId} failed: HTTP ${response.status}`);
+        throw new ProductFetchError(
+          response.status === 404
+            ? `Product ${productId} does not exist in WooCommerce`
+            : `WooCommerce returned ${response.status} for product ${productId}` +
+              (detail ? `: ${detail.slice(0, 120).replace(/\s+/g, ' ')}` : ''),
+          response.status,
+          productId
+        );
+      }
+    } catch (error: any) {
+      if (error instanceof ProductFetchError) throw error;
+
+      //  A timeout or a dropped connection is the same kind of problem as
+      //  a 521 and gets the same treatment.
+      const reason = error?.name === 'AbortError' ? `timed out after ${timeout}ms` : error?.message;
+      if (attempt >= retries) {
+        console.error(`[${runId}] Product ${productId} unreachable: ${reason}`);
+        throw new ProductFetchError(
+          `Could not reach WooCommerce for product ${productId} (${reason})`,
+          0,
+          productId
+        );
+      }
+      console.warn(`[${runId}] Product ${productId} attempt ${attempt + 1} failed: ${reason}`);
+    } finally {
+      clearTimeout(timer);
     }
- 
-    const product = await response.json();
-    
-    // Enrich with additional fields
+  }
+
+    //  WooCommerce calls it `name`; `title` is a WP-posts field and is not
+    //  in this payload at all. ProductData declares both, so `title` is
+    //  filled from `name` here rather than left undefined for every
+    //  downstream reader — the prompt builder is one of them, and a product
+    //  with no title generates copy about nothing.
+    const name: string = product.name ?? product.title ?? '';
+
     const enrichedProduct: ProductData = {
       ...product,
-      categorySlugs: product.categories?.map((c: any) => c.name?.toLowerCase().replace(/\s+/g, '-')) || [],
-      brand: product.brand || extractBrandFromTitle(product.title),
+      title: name,
+      name,
+      categorySlugs:
+        product.categories?.map((c: any) => c.slug ?? c.name?.toLowerCase().replace(/\s+/g, '-')).filter(Boolean) || [],
+      brand: product.brand || extractBrandFromTitle(name),
       existingContent: product.description || '',
       excerpt: product.short_description || '',
-      currentMetaTitle: product.title,
+      currentMetaTitle: name,
       currentMetaDescription: product.short_description?.slice(0, 160) || '',
       attributes: extractAttributesFromProduct(product),
     };
-    
-    console.log(`[${runId}] ✅ Product fetched: ${product.name}`);
+
+    console.log(`[${runId}] ✅ Product fetched: ${name}`);
     return enrichedProduct;
- 
-  } catch (error) {
-    console.error(`[${runId}] Error fetching product by ID:`, error);
-    return null;
-  }
 }
 
 import { getProductIdFromUrl } from './csv-loader';
 
+/**
+ * Look the product up by URL via the CSV export, then fetch it.
+ *
+ * Two failures live here and they are not the same. A URL missing from the
+ * CSV is a lookup miss — the CSV is a snapshot, and blog posts and category
+ * pages are not in it at all. A ProductFetchError is the shop failing to
+ * answer. Both used to come back as `null` and be reported as "Product not
+ * found in WP", which is why an unhealthy origin looked like a missing
+ * catalogue for five weeks. The fetch error is rethrown so it survives.
+ */
 export async function fetchProductDataFromCsv(
   productUrl: string,
   credentials: WPCredentials
 ): Promise<ProductData | null> {
-  try {
-    console.log(`[fetchProductDataFromCsv] Fetching: ${productUrl}`);
-    
-    const postId = await getProductIdFromUrl(productUrl);
-    if (!postId) {
-      console.error(`[fetchProductDataFromCsv] URL not found in CSV:`, productUrl);
-      return null;
-    }
+  console.log(`[fetchProductDataFromCsv] Fetching: ${productUrl}`);
 
-    console.log(`[fetchProductDataFromCsv] Found post_id: ${postId}`);
-    return await fetchProductById(postId, credentials);
-    
-  } catch (error) {
-    console.error(`[fetchProductDataFromCsv] Error:`, error);
+  const postId = await getProductIdFromUrl(productUrl);
+  if (!postId) {
+    console.error(`[fetchProductDataFromCsv] URL not found in CSV:`, productUrl);
     return null;
   }
+
+  console.log(`[fetchProductDataFromCsv] Found post_id: ${postId}`);
+  return await fetchProductById(postId, credentials);
 }
