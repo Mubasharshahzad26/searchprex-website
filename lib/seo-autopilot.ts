@@ -93,67 +93,6 @@ export class SEOAutopilot {
     }
   }
 
-  // ⭐⭐⭐ NEW: Verify product exists in WordPress before processing
-  private async verifyProductExists(pageUrl: string): Promise<boolean> {
-    try {
-      // Extract product slug from URL
-      const urlParts = pageUrl.split('/product/')
-      if (urlParts.length < 2) {
-        console.log('⏭️  Invalid URL format:', pageUrl)
-        return false
-      }
-
-      const productSlug = urlParts[1].replace(/\/$/, '')
-      if (!productSlug) {
-        console.log('⏭️  No slug found:', pageUrl)
-        return false
-      }
-
-      // Get WP credentials from cmsConfig
-      const wpUser = this.config.cmsConfig.wpUser || process.env.WP_USERNAME
-      const wpPass = this.config.cmsConfig.wpPassword || process.env.WP_PASSWORD
-
-      if (!wpUser || !wpPass) {
-        console.warn('⚠️  WP credentials not found, skipping verification')
-        return true // Allow if no credentials (fallback)
-      }
-
-      // Create Basic Auth header
-      const auth = Buffer.from(`${wpUser}:${wpPass}`).toString('base64')
-
-      // Query WooCommerce API for product
-      const response = await fetch(
-        `${this.config.siteUrl}/wp-json/wc/v3/products?slug=${productSlug}`,
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Basic ${auth}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-
-      if (!response.ok) {
-        console.error(`❌ WP API error for ${productSlug}:`, response.status)
-        return false
-      }
-
-      const products = await response.json()
-
-      // Check if product found
-      if (!Array.isArray(products) || products.length === 0) {
-        console.log('⏭️  Product not found in WP:', productSlug)
-        return false
-      }
-
-      console.log('✅ Product verified:', productSlug)
-      return true
-    } catch (err) {
-      console.error('Product verification error:', pageUrl, err)
-      return false // Skip on error
-    }
-  }
-
   private async savePage(
     runId: string,
     page: any,
@@ -266,17 +205,16 @@ export class SEOAutopilot {
 
       for (const page of targets) {
         try {
-          // ⭐⭐⭐ PRODUCT VERIFICATION: Check if product exists ⭐⭐⭐
-          const productExists = await this.verifyProductExists(page.url)
-          if (!productExists) {
+          // ⭐ SIMPLE VALIDATION: Just check URL format
+          if (!page.url) {
+            console.log('⏭️  Skipping: Empty URL')
             results.pagesSkipped++
-            await this.savePage(
-              runId || 'unknown',
-              page,
-              'skipped',
-              null,
-              `Product not found in WordPress`
-            )
+            continue
+          }
+
+          if (!page.url.includes('/product/')) {
+            console.log('⏭️  Skipping non-product URL:', page.url)
+            results.pagesSkipped++
             continue
           }
 
@@ -315,6 +253,9 @@ export class SEOAutopilot {
 
           if (!this.config.dryRun) {
             const adapter = getCMSAdapter(this.config.cmsConfig)
+            // ⭐ Let adapter handle publish + product lookup
+            // If product doesn't exist, adapter will throw error
+            // We catch and log it below
             await adapter.publish(page.url, content)
             results.pagesPublished++
           }
@@ -347,12 +288,15 @@ export class SEOAutopilot {
             content,
           })
         } catch (err) {
-          const msg = err instanceof Error ? err.message : 'error'
+          // ⭐ GRACEFUL ERROR HANDLING: Log but continue
+          const msg = err instanceof Error ? err.message : 'Unknown error'
+          console.error(`❌ Page error: ${page.url}`, msg)
           results.errors.push(`${page.url}: ${msg}`)
 
           if (runId) {
             await this.savePage(runId, page, 'failed', null, msg)
           }
+          // Continue to next page - don't break
         }
       }
 
