@@ -12,14 +12,44 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { posts } from "./posts";
+import { posts as hardcodedPosts } from "./posts";
 import PostClient from "./PostClient";
+import { db } from "@/lib/db";
 
 const SITE = "https://www.searchprex.com";
 
-/** Pre-renders every known post at build time. */
+// Helper to get post from DB or fallback
+async function getPostData(slug: string) {
+  try {
+    const dbPost = await db.marketingBlog.findUnique({ where: { slug } });
+    if (dbPost) {
+      return {
+        slug: dbPost.slug,
+        category: dbPost.category || "General",
+        subcategory: "",
+        title: dbPost.title,
+        excerpt: dbPost.excerpt || dbPost.metaDescription || "",
+        readTime: dbPost.readTime || "5-minute read",
+        date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split('T')[0] : dbPost.createdAt.toISOString().split('T')[0],
+        author: { name: dbPost.author || "SearchPrex Team", role: "Verified SEO Expert" },
+        authorBio: "",
+        featured: false,
+        heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+        tags: [],
+        stat: { value: "", label: "" },
+        toc: [],
+        content: dbPost.content || ""
+      };
+    }
+  } catch (err) {
+    console.error("Failed to fetch DB post for slug:", slug, err);
+  }
+  return hardcodedPosts.find((p) => p.slug === slug);
+}
+
+/** Pre-renders every known hardcoded post at build time (DB posts will be dynamic). */
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return hardcodedPosts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +58,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = await getPostData(slug);
 
   if (!post) {
     return { title: "Post not found", robots: { index: false, follow: true } };
@@ -67,7 +97,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = await getPostData(slug);
 
   if (!post) notFound();
 

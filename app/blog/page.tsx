@@ -5,7 +5,8 @@
  
 import type { Metadata } from "next";
 import BlogClient from "./BlogClient";
-import { posts } from "./data";
+import { posts as hardcodedPosts, mostRead as hardcodedMostRead } from "./data";
+import { db } from "@/lib/db";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
@@ -23,14 +24,53 @@ const baseMetadata: Metadata = {
     type: "website",
   },
 };
-
+ 
 // Metadata comes from the CMS row for this route; the object above is the
 // fallback when that row is missing, unpublished, or the database is down.
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/blog", baseMetadata);
 }
  
-export default function Page() {
+export default async function Page() {
+  let initialPosts: any[] = [];
+  let initialMostRead: any[] = [];
+
+  try {
+    const dbBlogs = await db.marketingBlog.findMany({ 
+      where: { published: true }, 
+      orderBy: { publishedAt: "desc" } 
+    });
+
+    if (dbBlogs && dbBlogs.length > 0) {
+      initialPosts = dbBlogs.map(b => ({
+        slug: b.slug,
+        category: b.category || "General",
+        subcategory: "",
+        title: b.title,
+        excerpt: b.excerpt || b.metaDescription || "",
+        readTime: b.readTime || "5-minute read",
+        date: b.publishedAt ? b.publishedAt.toISOString().split('T')[0] : b.createdAt.toISOString().split('T')[0],
+        author: { name: b.author || "SearchPrex Team", role: "Verified SEO Expert" },
+        authorBio: "",
+        featured: false,
+        heroImage: b.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+        tags: [],
+        stat: { value: "", label: "" },
+        toc: [],
+        content: b.content || ""
+      }));
+
+      // Make the first post featured just in case
+      if (initialPosts.length > 0) initialPosts[0].featured = true;
+      initialMostRead = initialPosts.slice(0, 3).map((p, i) => ({ ...p, rank: i + 1 }));
+    }
+  } catch (err) {
+    console.error("Failed to load DB blogs for blog index", err);
+  }
+
+  // Fallback to hardcoded if no DB posts
+  const schemaPosts = initialPosts.length > 0 ? initialPosts : hardcodedPosts;
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -48,7 +88,7 @@ export default function Page() {
     url: `${SITE}/blog`,
     description: "Founder-written SEO guides for practitioners.",
     publisher: { "@type": "Organization", name: "SearchPrex", url: SITE },
-    blogPost: posts.map((p) => ({
+    blogPost: schemaPosts.map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
       url: `${SITE}/blog/${p.slug}`,
@@ -63,8 +103,7 @@ export default function Page() {
         <script key={i} type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
-      <BlogClient />
+      <BlogClient initialPosts={initialPosts} initialMostRead={initialMostRead} />
     </>
   );
 }
- 

@@ -339,3 +339,50 @@ model SerpUsage {
   @@unique([visitorHash, day])
   @@index([day])
 }
+// --- NEW MARKETING CMS MODELS --- //
+
+model MarketingPage {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  content         String?  @db.Text
+  published       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model MarketingBlog {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  content         String?  @db.Text
+  coverImage      String?
+  author          String?
+  excerpt         String?  @db.Text
+  category        String?
+  readTime        String?
+  published       Boolean  @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model MarketingCaseStudy {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  clientName      String
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  challenge       String?  @db.Text
+  solution        String?  @db.Text
+  results         String?  @db.Text
+  coverImage      String?
+  published       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

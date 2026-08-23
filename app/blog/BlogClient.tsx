@@ -95,7 +95,10 @@ function Byline({ post }: { post: Post }) {
   );
 }
  
-export default function BlogClient() {
+export default function BlogClient({ initialPosts, initialMostRead }: { initialPosts?: Post[], initialMostRead?: any[] }) {
+  const activePosts = initialPosts && initialPosts.length > 0 ? initialPosts : posts;
+  const activeMostRead = initialMostRead && initialMostRead.length > 0 ? initialMostRead : mostRead;
+
   const [query, setQuery] = useState("");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -141,15 +144,15 @@ export default function BlogClient() {
     }
   };
  
-  const filtered = posts.filter((p) => {
+  const filtered = activePosts.filter((p) => {
     const matchQ = query === "" || p.title.toLowerCase().includes(query.toLowerCase()) || p.category.toLowerCase().includes(query.toLowerCase()) || p.excerpt.toLowerCase().includes(query.toLowerCase());
     const matchC = activeCategory === "All" || p.category === activeCategory;
     return matchQ && matchC;
   });
  
   const isFiltering = activeCategory !== "All" || query !== "";
-  const featuredPost = posts.find((p) => p.featured);
-  const compactPosts = isFiltering ? filtered : posts.filter((p) => !p.featured);
+  const featuredPost = activePosts.find((p) => p.featured) || activePosts[0];
+  const compactPosts = isFiltering ? filtered : activePosts.filter((p) => p.slug !== featuredPost?.slug);
  
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -405,7 +408,7 @@ export default function BlogClient() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-[#0a0f2e] mb-10">Most-read Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {mostRead.map((post) => (
+            {activeMostRead.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group block bg-white rounded-2xl border border-[#e5e7eb] p-5 hover:shadow-lg transition-all">
                 <div className="aspect-[16/9] rounded-xl overflow-hidden mb-4 relative">
                   <BlogImage rank={post.rank} category={post.category} />
