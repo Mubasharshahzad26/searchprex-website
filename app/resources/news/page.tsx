@@ -37,7 +37,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 import { db } from "@/lib/db";
 
-export default async function Page() {
+export default async function Page({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+  const { category } = await searchParams;
+  
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -53,8 +55,10 @@ export default async function Page() {
     orderBy: { newsDate: "desc" },
   });
 
+  // If a subcategory is selected, filter by it. Otherwise, match anything with "SEO News"
+  const filterCat = category ? category : "SEO News";
   const dbSpokes = await db.marketingBlog.findMany({
-    where: { published: true, category: { contains: "SEO News", mode: "insensitive" } },
+    where: { published: true, category: { contains: filterCat, mode: "insensitive" } },
     orderBy: { publishedAt: "desc" },
   });
 

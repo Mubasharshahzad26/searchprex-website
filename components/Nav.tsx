@@ -51,7 +51,19 @@ const navLinks: NavLink[] = [
     dropdownItems: [
       { href: "/resources",      label: "All Resources" },
       { href: "/blog",           label: "Blog" },
-      { href: "/resources/news", label: "News" },
+    ],
+  },
+  {
+    href: "/resources/news",
+    label: "SEO News",
+    hasDropdown: true,
+    dropdownItems: [
+      { href: "/resources/news?category=AI+SEO",        label: "AI SEO News" },
+      { href: "/resources/news?category=LLMs",          label: "LLMs SEO News" },
+      { href: "/resources/news?category=Tools",         label: "SEO Tools News" },
+      { href: "/resources/news?category=Ecommerce",     label: "Ecommerce SEO News" },
+      { href: "/resources/news?category=Technical",     label: "Technical SEO News" },
+      { href: "/resources/news",                        label: "All Latest News" },
     ],
   },
   {
