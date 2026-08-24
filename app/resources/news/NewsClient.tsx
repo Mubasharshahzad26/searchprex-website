@@ -64,7 +64,7 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
-export default function NewsClient({ initialNews = [] }: { initialNews?: any[] }) {
+export default function NewsClient({ initialNews = [], initialSpokes = [] }: { initialNews?: any[], initialSpokes?: any[] }) {
   const dbNewsFormatted = initialNews.map((n: any) => ({
     id: n.id,
     date: new Date(n.newsDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
@@ -99,9 +99,34 @@ export default function NewsClient({ initialNews = [] }: { initialNews?: any[] }
         </div>
       </section>
  
+      {/* ── DEEP DIVES (SPOKES) ── */}
+      {initialSpokes.length > 0 && (
+        <section className="py-16 border-b border-[#e5e7eb] bg-white">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-8 text-2xl font-bold text-[#0a0f2e] text-center">Comprehensive SEO News Deep-Dives</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {initialSpokes.map((spoke) => (
+                <Link key={spoke.slug} href={`/resources/news/${spoke.slug}`} className="group block rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-6 transition-all hover:shadow-lg hover:border-[#534AB7]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[#534AB7] text-white">
+                      {spoke.category}
+                    </span>
+                    <span className="text-xs font-semibold text-[#64748b]">{new Date(spoke.publishedAt || spoke.createdAt).toLocaleDateString()}</span>
+                  </div>
+                  <h3 className="mb-2 text-xl font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">{spoke.title}</h3>
+                  <p className="text-sm leading-relaxed text-[#64748b] mb-4">{spoke.excerpt || spoke.metaDescription || "Read the full analysis and what it means for your rankings."}</p>
+                  <span className="inline-flex items-center gap-1 font-bold text-sm text-[#534AB7] group-hover:gap-2 transition-all">Read Full Article <ArrowRight className="w-4 h-4" /></span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── NEWS FEED ── */}
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-bold text-[#0a0f2e] text-center">Live Algorithm Tracker & Quick Updates</h2>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-5">
             {news.map((item) => (
               <motion.article

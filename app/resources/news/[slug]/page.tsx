@@ -1,41 +1,27 @@
-// app/blog/[slug]/page.tsx
-// Server Component. Owns per-post metadata and Article/Breadcrumb JSON-LD.
-//
-// This route used to be "use client", which meant it could not export metadata
-// at all — so EVERY blog post served the root layout's default title and
-// description. Google saw every article as the homepage, which is fatal for a
-// blog: identical titles across URLs give it no reason to rank any of them.
-//
-// It also resolved the post with `posts.find(...) ?? posts[0]`, so any unknown
-// slug returned HTTP 200 rendering the first article. That is an unbounded
-// source of duplicate content. Unknown slugs now 404.
-
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { posts as hardcodedPosts } from "./posts";
-import PostClient from "./PostClient";
+import PostClient from "@/app/blog/[slug]/PostClient";
 import { db } from "@/lib/db";
 
 const SITE = "https://www.searchprex.com";
 
-// Helper to get post from DB or fallback
+// Helper to get post from DB
 async function getPostData(rawSlug: string) {
   const slug = decodeURIComponent(rawSlug);
-  console.log("SLUG REQUESTED:", rawSlug, "DECODED:", slug);
   try {
+    // Only fetch blogs that are under the SEO News category
     const dbPost = await db.marketingBlog.findUnique({ where: { slug } });
-    if (dbPost) {
-      console.log("Found in DB:", dbPost.slug);
+    if (dbPost && dbPost.category && dbPost.category.toLowerCase().includes("seo news")) {
       return {
         slug: dbPost.slug,
-        category: dbPost.category || "General",
+        category: dbPost.category || "SEO News",
         subcategory: "",
         title: dbPost.title,
         excerpt: dbPost.excerpt || dbPost.metaDescription || "",
-        readTime: dbPost.readTime || "5-minute read",
-        date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split('T')[0] : dbPost.createdAt.toISOString().split('T')[0],
+        readTime: dbPost.readTime || "7-minute read",
+        date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split("T")[0] : dbPost.createdAt.toISOString().split("T")[0],
         author: { name: dbPost.author || "SearchPrex Team", role: "Verified SEO Expert" },
-        authorBio: "",
+        authorBio: "Dedicated to tracking and decoding the latest Google algorithm updates and SEO trends.",
         featured: false,
         heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
@@ -45,29 +31,20 @@ async function getPostData(rawSlug: string) {
       };
     }
   } catch (err) {
-    console.error("Failed to fetch DB post for slug:", slug, err);
+    console.error("Failed to fetch DB post for news spoke:", slug, err);
   }
-  return hardcodedPosts.find((p) => p.slug === slug);
+  return null;
 }
 
-/** Pre-renders every known hardcoded post at build time (DB posts will be dynamic). */
-export function generateStaticParams() {
-  return hardcodedPosts.map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostData(slug);
 
   if (!post) {
-    return { title: "Post not found", robots: { index: false, follow: true } };
+    return { title: "News not found", robots: { index: false, follow: true } };
   }
 
-  const url = `${SITE}/blog/${post.slug}`;
+  const url = `${SITE}/resources/news/${post.slug}`;
 
   return {
     title: post.title,
@@ -94,26 +71,17 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function NewsSpokePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPostData(slug);
 
   if (!post) notFound();
 
-  if (post.category && post.category.toLowerCase().includes("seo news")) {
-    const { redirect } = await import("next/navigation");
-    redirect(`/resources/news/${post.slug}`);
-  }
-
-  const url = `${SITE}/blog/${post.slug}`;
+  const url = `${SITE}/resources/news/${post.slug}`;
 
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "NewsArticle",
     headline: post.title,
     description: post.excerpt,
     image: post.heroImage,
@@ -125,7 +93,6 @@ export default async function BlogPostPage({
       "@type": "Person",
       name: post.author.name,
       jobTitle: post.author.role,
-      description: post.author.bio,
       url: `${SITE}/experts`,
     },
     publisher: {
@@ -141,19 +108,16 @@ export default async function BlogPostPage({
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title, item: url },
+      { "@type": "ListItem", position: 2, name: "Resources", item: `${SITE}/resources` },
+      { "@type": "ListItem", position: 3, name: "SEO News", item: `${SITE}/resources/news` },
+      { "@type": "ListItem", position: 4, name: post.title, item: url },
     ],
   };
 
   return (
     <>
       {[articleSchema, breadcrumbSchema].map((schema, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
       <PostClient post={post} />
     </>

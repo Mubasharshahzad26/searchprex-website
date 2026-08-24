@@ -12,22 +12,22 @@ const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/resources/news`;
 
 const baseMetadata: Metadata = {
-  title: "SEO & Google Update News — Core Updates Explained",
+  title: "SEO News Today: Latest Google Algorithm Updates & Trends (2026)",
   description:
-    "Plain-English breakdowns of Google core updates, AI Overviews, and algorithm changes — what actually changed, who it hit, and what to do about it.",
+    "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and local SEO changes. See what actually changed.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "SEO & Google Update News — Core Updates Explained | SearchPrex",
+    title: "SEO News Today: Latest Google Algorithm Updates & Trends (2026)",
     description:
-      "What changed in Google's latest core updates, who it hit, and what to do about it.",
+      "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and local SEO changes.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SEO & Google Update News | SearchPrex",
-    description: "Plain-English breakdowns of Google core updates and AI Overviews.",
+    title: "SEO News Today | SearchPrex",
+    description: "Breakdowns of Google core algorithm updates and AI Overviews.",
   },
 };
 
@@ -53,13 +53,18 @@ export default async function Page() {
     orderBy: { newsDate: "desc" },
   });
 
+  const dbSpokes = await db.marketingBlog.findMany({
+    where: { published: true, category: { contains: "SEO News", mode: "insensitive" } },
+    orderBy: { publishedAt: "desc" },
+  });
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <NewsClient initialNews={dbNews} />
+      <NewsClient initialNews={dbNews} initialSpokes={dbSpokes} />
     </>
   );
 }

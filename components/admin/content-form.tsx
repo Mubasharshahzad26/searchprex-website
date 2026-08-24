@@ -109,10 +109,16 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
       )}
 
       {type === "blog" && (
-        <div className="space-y-2">
-          <Label>Author</Label>
-          <Input name="author" value={formData.author || ""} onChange={handleChange} />
-        </div>
+        <>
+          <div className="space-y-2">
+            <Label>Category</Label>
+            <Input name="category" value={formData.category || ""} onChange={handleChange} placeholder="e.g. SEO News, Technical SEO" />
+          </div>
+          <div className="space-y-2">
+            <Label>Author</Label>
+            <Input name="author" value={formData.author || ""} onChange={handleChange} />
+          </div>
+        </>
       )}
 
       {(type === "blog" || type === "case-study") && (

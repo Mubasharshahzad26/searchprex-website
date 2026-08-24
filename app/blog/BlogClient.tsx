@@ -26,7 +26,7 @@ const categoryIcons: Record<string, any> = {
   "Content Strategy": TrendingUp,
 };
  
-function BlogImage({ rank, category }: { rank?: number; category: string }) {
+function BlogImage({ rank, category, imgUrl }: { rank?: number; category: string, imgUrl?: string }) {
   const [imgError, setImgError] = useState(false);
  
   const gradients: Record<string, string> = {
@@ -47,7 +47,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
     "Content Strategy":"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
   };
  
-  const cover = covers[category] ||
+  const cover = imgUrl || covers[category] ||
     "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80";
  
   return (
@@ -60,7 +60,7 @@ function BlogImage({ rank, category }: { rank?: number; category: string }) {
         </div>
       </div>
  
-      {/* Real Unsplash cover */}
+      {/* Real cover */}
       {!imgError && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -311,8 +311,8 @@ export default function BlogClient({ initialPosts, initialMostRead }: { initialP
               {!isFiltering && featuredPost && (
                 <motion.article initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                   className="lg:row-span-2 flex flex-col bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden hover:shadow-lg transition-all">
-                  <Link href={`/blog/${featuredPost.slug}`} className="block aspect-[16/10] overflow-hidden hover:opacity-90 transition-opacity">
-                    <BlogImage category={featuredPost.category} />
+                  <Link href={featuredPost.category?.toLowerCase().includes("seo news") ? `/resources/news/${featuredPost.slug}` : `/blog/${featuredPost.slug}`} className="block aspect-[16/10] overflow-hidden hover:opacity-90 transition-opacity">
+                    <BlogImage category={featuredPost.category} imgUrl={featuredPost.heroImage} />
                   </Link>
                   <div className="flex flex-col flex-1 p-7">
                     <div className="flex items-center gap-1.5 mb-3">
@@ -320,7 +320,7 @@ export default function BlogClient({ initialPosts, initialMostRead }: { initialP
                       <ChevronRight className="h-3 w-3 text-[#94a3b8]" />
                       <span className="text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">{featuredPost.subcategory}</span>
                     </div>
-                    <Link href={`/blog/${featuredPost.slug}`}>
+                    <Link href={featuredPost.category?.toLowerCase().includes("seo news") ? `/resources/news/${featuredPost.slug}` : `/blog/${featuredPost.slug}`}>
                       <h2 className="text-[#0a0f2e] font-bold text-2xl leading-snug mb-4 hover:text-[#3C3489] transition-colors">{featuredPost.title}</h2>
                     </Link>
                     <p className="text-[#64748b] text-sm leading-relaxed mb-5">{featuredPost.excerpt}</p>
@@ -346,7 +346,7 @@ export default function BlogClient({ initialPosts, initialMostRead }: { initialP
                         </div>
                       </div>
                     </div>
-                    <Link href={`/blog/${featuredPost.slug}`}
+                    <Link href={featuredPost.category?.toLowerCase().includes("seo news") ? `/resources/news/${featuredPost.slug}` : `/blog/${featuredPost.slug}`}
                       className="mt-5 inline-flex items-center gap-1 text-[#3C3489] text-sm font-bold uppercase tracking-wide hover:gap-2 transition-all">
                       Continue Reading <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -360,8 +360,8 @@ export default function BlogClient({ initialPosts, initialMostRead }: { initialP
                   <motion.article key={post.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.06 }}
                     className="flex flex-col bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden hover:shadow-lg transition-all">
-                    <Link href={`/blog/${post.slug}`} className="block aspect-[16/9] overflow-hidden hover:opacity-90 transition-opacity">
-                      <BlogImage category={post.category} />
+                    <Link href={post.category?.toLowerCase().includes("seo news") ? `/resources/news/${post.slug}` : `/blog/${post.slug}`} className="block aspect-[16/9] overflow-hidden hover:opacity-90 transition-opacity">
+                      <BlogImage category={post.category} imgUrl={post.heroImage} />
                     </Link>
                     <div className="flex flex-col flex-1 p-5">
                       <div className="flex items-center gap-1.5 mb-2">
@@ -369,7 +369,7 @@ export default function BlogClient({ initialPosts, initialMostRead }: { initialP
                         <ChevronRight className="h-3 w-3 text-[#94a3b8]" />
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#534AB7]">{post.subcategory}</span>
                       </div>
-                      <Link href={`/blog/${post.slug}`}>
+                      <Link href={post.category?.toLowerCase().includes("seo news") ? `/resources/news/${post.slug}` : `/blog/${post.slug}`}>
                         <h2 className="text-[#0a0f2e] font-bold text-base leading-snug mb-3 hover:text-[#3C3489] transition-colors">{post.title}</h2>
                       </Link>
                       <div className="flex items-center gap-2 text-[#94a3b8] text-[11px] font-medium mb-3">
@@ -409,9 +409,9 @@ export default function BlogClient({ initialPosts, initialMostRead }: { initialP
           <h2 className="text-2xl font-bold text-[#0a0f2e] mb-10">Most-read Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {activeMostRead.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group block bg-white rounded-2xl border border-[#e5e7eb] p-5 hover:shadow-lg transition-all">
+              <Link key={post.slug} href={post.category?.toLowerCase().includes("seo news") ? `/resources/news/${post.slug}` : `/blog/${post.slug}`} className="group block bg-white rounded-2xl border border-[#e5e7eb] p-5 hover:shadow-lg transition-all">
                 <div className="aspect-[16/9] rounded-xl overflow-hidden mb-4 relative">
-                  <BlogImage rank={post.rank} category={post.category} />
+                  <BlogImage rank={post.rank} category={post.category} imgUrl={post.heroImage} />
                 </div>
                 <div className="flex items-center gap-1.5 mb-2">
                   <span className="text-[11px] font-bold uppercase tracking-widest text-[#64748b]">{post.category}</span>

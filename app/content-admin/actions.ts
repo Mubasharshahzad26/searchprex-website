@@ -31,6 +31,7 @@ export async function getMarketingBlogs() {
 }
 
 export async function createMarketingBlog(data: any) {
+  if (data.published && !data.publishedAt) data.publishedAt = new Date();
   const blog = await db.marketingBlog.create({ data });
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
@@ -38,6 +39,10 @@ export async function createMarketingBlog(data: any) {
 }
 
 export async function updateMarketingBlog(id: string, data: any) {
+  if (data.published && !data.publishedAt) {
+    const existing = await db.marketingBlog.findUnique({ where: { id } });
+    if (!existing?.publishedAt) data.publishedAt = new Date();
+  }
   const blog = await db.marketingBlog.update({ where: { id }, data });
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");

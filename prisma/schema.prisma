@@ -28,7 +28,14 @@ model GSCConnection {
   clientId           String
   client             Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
   siteUrl            String
-  serviceAccountJson String
+  serviceAccountJson String?
+  
+  // OAuth Fields for standard Google Sign-In
+  isOAuth            Boolean   @default(false)
+  accessToken        String?   @db.Text
+  refreshToken       String?   @db.Text
+  tokenExpiry        DateTime?
+
   connectedAt        DateTime  @default(now())
   lastSyncedAt       DateTime?
   syncStatus         String    @default("pending")
