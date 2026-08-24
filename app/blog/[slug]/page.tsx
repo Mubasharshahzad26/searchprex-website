@@ -41,13 +41,35 @@ async function getPostData(rawSlug: string) {
         tags: [],
         stat: { value: "", label: "" },
         toc: [],
-        content: dbPost.content || ""
+        content: dbPost.content || "",
+        
+        // Advanced SEO Fields
+        canonicalUrl: dbPost.canonicalUrl || "",
+        schemaType: dbPost.schemaType || "BlogPosting",
+        ogTitle: dbPost.ogTitle || "",
+        ogDescription: dbPost.ogDescription || "",
+        twitterTitle: dbPost.twitterTitle || "",
+        twitterDescription: dbPost.twitterDescription || ""
       };
     }
   } catch (err) {
     console.error("Failed to fetch DB post for slug:", slug, err);
   }
-  return hardcodedPosts.find((p) => p.slug === slug);
+  
+  // Fallback to hardcoded posts
+  const fallback = hardcodedPosts.find((p) => p.slug === slug);
+  if (fallback) {
+    return {
+      ...fallback,
+      canonicalUrl: "",
+      schemaType: "BlogPosting",
+      ogTitle: "",
+      ogDescription: "",
+      twitterTitle: "",
+      twitterDescription: ""
+    };
+  }
+  return null;
 }
 
 /** Pre-renders every known hardcoded post at build time (DB posts will be dynamic). */
@@ -68,17 +90,22 @@ export async function generateMetadata({
   }
 
   const url = `${SITE}/blog/${post.slug}`;
+  const canonical = post.canonicalUrl || url;
+  const ogTitle = post.ogTitle || post.title;
+  const ogDesc = post.ogDescription || post.excerpt;
+  const twTitle = post.twitterTitle || ogTitle;
+  const twDesc = post.twitterDescription || ogDesc;
 
   return {
     title: post.title,
     description: post.excerpt,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
-    alternates: { canonical: url },
+    alternates: { canonical },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      url,
+      title: ogTitle,
+      description: ogDesc,
+      url: canonical,
       siteName: "SearchPrex",
       type: "article",
       publishedTime: post.date,
@@ -87,8 +114,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title: twTitle,
+      description: twDesc,
       images: [post.heroImage],
     },
   };
@@ -110,17 +137,18 @@ export default async function BlogPostPage({
   }
 
   const url = `${SITE}/blog/${post.slug}`;
+  const canonical = post.canonicalUrl || url;
 
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": post.schemaType || "BlogPosting",
     headline: post.title,
     description: post.excerpt,
     image: post.heroImage,
     datePublished: post.date,
     keywords: post.tags.join(", "),
     articleSection: post.category,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
     author: {
       "@type": "Person",
       name: post.author.name,
@@ -142,7 +170,7 @@ export default async function BlogPostPage({
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title, item: url },
+      { "@type": "ListItem", position: 3, name: post.title, item: canonical },
     ],
   };
 
