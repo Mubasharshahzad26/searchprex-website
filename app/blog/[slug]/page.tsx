@@ -19,10 +19,13 @@ import { db } from "@/lib/db";
 const SITE = "https://www.searchprex.com";
 
 // Helper to get post from DB or fallback
-async function getPostData(slug: string) {
+async function getPostData(rawSlug: string) {
+  const slug = decodeURIComponent(rawSlug);
+  console.log("SLUG REQUESTED:", rawSlug, "DECODED:", slug);
   try {
     const dbPost = await db.marketingBlog.findUnique({ where: { slug } });
     if (dbPost) {
+      console.log("Found in DB:", dbPost.slug);
       return {
         slug: dbPost.slug,
         category: dbPost.category || "General",

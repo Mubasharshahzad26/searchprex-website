@@ -386,3 +386,30 @@ model MarketingCaseStudy {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+model MarketingNews {
+  id              String   @id @default(cuid())
+  title           String
+  summary         String   @db.Text
+  tag             String?
+  sourceLabel     String?
+  sourceHref      String?
+  newsDate        DateTime @default(now())
+  published       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model MarketingResource {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  description     String?  @db.Text
+  icon            String?  
+  category        String?
+  fileUrl         String?
+  status          String   @default("active")
+  published       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

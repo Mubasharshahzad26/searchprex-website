@@ -71,7 +71,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/resources", baseMetadata);
 }
  
-export default function ResourcesPage() {
+import { db } from "@/lib/db";
+
+export default async function ResourcesPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -81,9 +83,6 @@ export default function ResourcesPage() {
         "url": resourcesUrl,
         "name": "SEO Resources & Guides",
         "description": "Free SEO resources from SearchPrex: white papers, original research, real-world learnings, and curated industry news.",
-        // Slash before the # is required: app/layout.tsx defines these nodes as
-        // `${siteUrl}/#website` and `${siteUrl}/#organization`. Without it these
-        // are different @ids and the references dangle.
         "isPartOf": { "@id": `${siteUrl}/#website` },
         "inLanguage": "en-US",
         "mainEntity": { "@id": `${siteUrl}/#organization` }
@@ -91,18 +90,8 @@ export default function ResourcesPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": siteUrl
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Resources",
-            "item": resourcesUrl
-          }
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+          { "@type": "ListItem", position: 2, name: "Resources", item: resourcesUrl }
         ]
       },
       {
@@ -134,21 +123,21 @@ export default function ResourcesPage() {
           }
         ]
       }
-      // Organization (#organization) and WebSite (#website) are deliberately NOT
-      // redefined here: app/layout.tsx already emits both on every page. Repeating
-      // them would ship two competing definitions of one real-world entity.
-      // The `isPartOf` / `mainEntity` references above resolve against those nodes.
     ]
   };
- 
+
+  const dbResources = await db.marketingResource.findMany({
+    where: { published: true },
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ResourcesPageComponent />
+      <ResourcesPageComponent initialResources={dbResources} />
     </>
   );
 }
- 

@@ -23,8 +23,9 @@ import {
 import { color, heading, radius, text } from "@/lib/design-tokens";
 
 /* ─── RESOURCE CATEGORIES ─── */
-const categories = [
+const hardcodedCategories = [
   {
+    id: "hc-1",
     icon: FileText,
     title: "White Papers",
     desc: "In-depth, data-backed reports on SEO strategy, technical audits, and ranking systems — built from real client work.",
@@ -32,6 +33,7 @@ const categories = [
     href: null,
   },
   {
+    id: "hc-2",
     icon: BookOpen,
     title: "Research & Guides",
     desc: "Original research, step-by-step guides, and frameworks covering technical SEO, E-E-A-T, AI Overviews, and GEO.",
@@ -39,6 +41,7 @@ const categories = [
     href: null,
   },
   {
+    id: "hc-3",
     icon: GraduationCap,
     title: "What I'm Learning",
     desc: "First-hand experiments, test results, and lessons from optimizing real sites — what actually moves rankings in 2026.",
@@ -46,6 +49,7 @@ const categories = [
     href: null,
   },
   {
+    id: "hc-4",
     icon: Newspaper,
     title: "Latest SEO News",
     desc: "Curated, plain-English breakdowns of Google core updates, algorithm shifts, and AI-search changes that affect your site.",
@@ -54,7 +58,7 @@ const categories = [
   },
 ];
 
-/* ─── FEATURED (real, published) ─── */
+/* 🔮 FEATURED (real, published) 🔮 */
 const featured = {
   title: "Best Time to Install a New AC Near Me — California 2026",
   type: "Published Article",
@@ -68,7 +72,25 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
-export default function ResourcesPage() {
+const iconMap: Record<string, any> = {
+  FileText: FileText,
+  BookOpen: BookOpen,
+  GraduationCap: GraduationCap,
+  Newspaper: Newspaper,
+};
+
+export default function ResourcesPageComponent({ initialResources = [] }: { initialResources?: any[] }) {
+  const dbResourcesFormatted = initialResources.map((r: any) => ({
+    id: r.id,
+    icon: iconMap[r.icon] || FileText,
+    title: r.title,
+    desc: r.description,
+    status: r.status,
+    href: r.fileUrl || (r.slug ? `/resources/${r.slug}` : null),
+  }));
+
+  const categories = [...dbResourcesFormatted, ...hardcodedCategories];
+
   return (
     <main>
       <PageHero

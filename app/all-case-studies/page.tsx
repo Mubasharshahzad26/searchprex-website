@@ -81,7 +81,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/all-case-studies", baseMetadata);
 }
  
-export default function Page() {
+import { db } from "@/lib/db";
+
+export default async function Page() {
+  const dbCaseStudies = await db.marketingCaseStudy.findMany({
+    where: { published: true },
+    orderBy: { createdAt: 'desc' }
+  });
+
   // ── CollectionPage Schema (for case studies listing) ──
   const collectionPageSchema = {
     "@context": "https://schema.org",
@@ -230,7 +237,7 @@ export default function Page() {
       ))}
  
       <Suspense fallback={null}>
-        <CaseStudiesClient linkedinUrl={LINKEDIN_URL} />
+        <CaseStudiesClient linkedinUrl={LINKEDIN_URL} initialCaseStudies={dbCaseStudies} />
       </Suspense>
     </>
   );

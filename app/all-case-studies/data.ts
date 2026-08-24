@@ -274,8 +274,12 @@ export const caseStudies: CaseStudy[] = [
  
 // ── Helpers ──────────────────────────────────────────────────────────────
  
-export const detailUrl = (cs: CaseStudy) =>
-  `/case-studies/${cs.slug.industry}/${cs.slug.client}`;
+export const detailUrl = (cs: any) => {
+  if (typeof cs.slug === 'string') {
+    return `/case-studies/${cs.slug}`;
+  }
+  return `/case-studies/${cs.slug.industry}/${cs.slug.client}`;
+};
  
 export const seoTypeOptions = (): SeoType[] =>
   Array.from(new Set(caseStudies.map((c) => c.seoType)));

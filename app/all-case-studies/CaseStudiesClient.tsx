@@ -56,7 +56,7 @@ const isFilterKey = (v: string | null): v is FilterKey =>
 // ─────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────
-export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl?: string }) {
+export default function CaseStudiesClient({ linkedinUrl, initialCaseStudies = [] }: { linkedinUrl?: string, initialCaseStudies?: any[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -65,6 +65,20 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl?: strin
   const initialVertical: FilterKey = isFilterKey(rawVertical) ? rawVertical : "all";
   const [activeVertical, setActiveVertical] = useState<FilterKey>(initialVertical);
   const deferredVertical = useDeferredValue(activeVertical);
+
+  const dbCaseStudiesFormatted = initialCaseStudies.map((cs) => ({
+    id: cs.id,
+    client: cs.clientName,
+    seoType: "Custom SEO",
+    slug: cs.slug,
+    headline: cs.title,
+    description: cs.metaDescription || "Read how we improved SEO performance.",
+    metrics: [],
+    image: cs.coverImage || "/images/case-studies/default.jpg",
+    featured: false,
+    video: null
+  }));
+  const allCaseStudies = [...dbCaseStudiesFormatted, ...caseStudies];
 
   // Sync filter to URL
   useEffect(() => {
@@ -83,10 +97,10 @@ export default function CaseStudiesClient({ linkedinUrl }: { linkedinUrl?: strin
   const filteredStudies = useMemo(() => {
     const list =
       deferredVertical === "all"
-        ? caseStudies
-        : caseStudies.filter((cs) => cs.seoType === SEO_TYPE_BY_FILTER.get(deferredVertical));
+        ? allCaseStudies
+        : allCaseStudies.filter((cs) => cs.seoType === SEO_TYPE_BY_FILTER.get(deferredVertical));
     return [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
-  }, [deferredVertical]);
+  }, [deferredVertical, allCaseStudies]);
 
   const handleFilterChange = useCallback((vertical: FilterKey) => {
     setActiveVertical(vertical);

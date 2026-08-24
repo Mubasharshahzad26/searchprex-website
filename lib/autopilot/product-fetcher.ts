@@ -302,7 +302,13 @@ export async function fetchMultipleProducts(
  * five weeks went into looking for missing products that were never missing.
  */
 export class ProductFetchError extends Error {
-  constructor(message: string, readonly status: number, readonly productId: number) {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly productId: number,
+    /** True when a firewall stopped us, not the shop. See isChallenge. */
+    readonly blockedByWaf = false
+  ) {
     super(message);
     this.name = 'ProductFetchError';
   }
@@ -310,6 +316,59 @@ export class ProductFetchError extends Error {
 
 /** 404 means gone. Everything else here means "ask again in a moment". */
 const TRANSIENT = new Set([408, 425, 429, 500, 502, 503, 504, 520, 521, 522, 523, 524]);
+
+/**
+ * A Cloudflare challenge wearing a 403.
+ *
+ * WooCommerce refuses a bad credential with JSON — code
+ * woocommerce_rest_cannot_view — and Cloudflare refuses a suspicious client
+ * with an HTML interstitial titled "Just a moment...". Same status, opposite
+ * meanings: one will never work until somebody changes a password, the other
+ * is about where the request came from and can succeed from another address.
+ * Treating the challenge as an auth failure retires every product it
+ * touches, which is how a WAF rule quietly ate a catalogue.
+ */
+function isChallenge(status: number, body: string): boolean {
+  if (status !== 403 && status !== 503) return false;
+  return /Just a moment|cf-browser-verification|challenge-platform|Attention Required/i.test(body);
+}
+
+/**
+ * Header sets to try, plainest first.
+ *
+ * A bot filter scores the shape of a request, and `User-Agent:
+ * MSO-Autopilot/1.0` with no Accept-Language and no client hints is about
+ * as obviously automated as a request can look. This is our own client
+ * asking for our own data with our own credentials, so presenting it the
+ * way a browser would is not a disguise. Measured against this customer's
+ * firewall it changed nothing — the filter is scoring the source address —
+ * but it costs one request to find that out and the answer differs per
+ * customer.
+ */
+const HEADER_SETS: Array<Record<string, string>> = [
+  {
+    'User-Agent': 'MSO-Autopilot/1.0',
+    'Content-Type': 'application/json',
+  },
+  {
+    'User-Agent':
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    Accept: 'application/json, text/plain, */*',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'Sec-Ch-Ua': '"Chromium";v="131", "Not_A Brand";v="24"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Platform': '"Windows"',
+  },
+];
+
+//  Set once per process by whichever header set the firewall accepted, so a
+//  batch pays the discovery cost on its first product rather than all of
+//  them. Resets on cold start, which is right: the answer changes when the
+//  customer's firewall settings do.
+let preferredHeaderSet = 0;
 
 export async function fetchProductById(
   productId: number,
@@ -320,6 +379,10 @@ export async function fetchProductById(
   const { timeout = 10000, retries = 2 } = options || {};
 
   let product: any;
+
+  //  Which header set to send. Moves to the browser-like one the first time
+  //  a challenge comes back, then stays there for the rest of the process.
+  let headerSet = preferredHeaderSet;
 
   for (let attempt = 0; ; attempt++) {
     const endpoint = `${credentials.baseUrl}/wp-json/wc/v3/products/${productId}`;
@@ -340,31 +403,55 @@ export async function fetchProductById(
       const response = await fetch(endpoint, {
         method: 'GET',
         headers: {
+          ...HEADER_SETS[headerSet],
           'Authorization': `Basic ${auth}`,
-          'Content-Type': 'application/json',
-          'User-Agent': 'MSO-Autopilot/1.0',
         },
         signal: controller.signal,
       });
 
       if (response.ok) {
+        //  Remember what worked, so the rest of the batch starts there.
+        if (headerSet !== preferredHeaderSet) {
+          console.log(`[${runId}] Header set ${headerSet} got through; using it from now on.`);
+          preferredHeaderSet = headerSet;
+        }
         product = await response.json();
         break;
       }
 
       //  404 is the only status that actually means the product is not
-      //  there. 401 and 403 are our credentials and will not improve on
-      //  a second try either. Both are final, and both say which it was.
-      if (!TRANSIENT.has(response.status) || attempt >= retries) {
-        const detail = await response.text().catch(() => '');
-        console.error(`[${runId}] Product ${productId} failed: HTTP ${response.status}`);
+      //  there. A genuine 401/403 from WooCommerce is our credentials and
+      //  will not improve on a second try. A 403 carrying a Cloudflare
+      //  challenge is neither, and has to be read before it can be judged.
+      const detail = await response.text().catch(() => '');
+      const challenged = isChallenge(response.status, detail);
+
+      //  Challenged on the plain headers: try the browser-shaped ones before
+      //  spending an attempt on a repeat of the same request. Not charged as
+      //  a retry — it is a different request, not a repeat of a failed one —
+      //  and bounded, because headerSet only climbs and there are two sets.
+      if (challenged && headerSet < HEADER_SETS.length - 1) {
+        headerSet++;
+        attempt--;
+        console.warn(`[${runId}] Challenged; retrying product ${productId} with header set ${headerSet}.`);
+        continue;
+      }
+
+      if ((!TRANSIENT.has(response.status) && !challenged) || attempt >= retries) {
+        console.error(
+          `[${runId}] Product ${productId} failed: HTTP ${response.status}${challenged ? ' (WAF challenge)' : ''}`
+        );
         throw new ProductFetchError(
           response.status === 404
             ? `Product ${productId} does not exist in WooCommerce`
-            : `WooCommerce returned ${response.status} for product ${productId}` +
-              (detail ? `: ${detail.slice(0, 120).replace(/\s+/g, ' ')}` : ''),
+            : challenged
+              ? `Cloudflare challenged this request (HTTP ${response.status}) before it reached ` +
+                `WooCommerce. The product is not the problem — allow this server through the WAF.`
+              : `WooCommerce returned ${response.status} for product ${productId}` +
+                (detail ? `: ${detail.slice(0, 120).replace(/\s+/g, ' ')}` : ''),
           response.status,
-          productId
+          productId,
+          challenged
         );
       }
     } catch (error: any) {

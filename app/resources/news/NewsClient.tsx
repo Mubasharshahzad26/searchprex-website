@@ -14,7 +14,7 @@ const PURPLE = "#534AB7";
   Add new items at the TOP. Keep summaries in your own words.
   Always link to the original authoritative source.
 */
-const news = [
+const hardcodedNews = [
   {
     date: "May 21, 2026",
     tag: "Core Update",
@@ -41,7 +41,7 @@ const news = [
     tagColor: PURPLE,
     title: "March 2026 Core Update Finishes — Originality Rewarded",
     summary:
-      "The March 2026 core update (March 27–April 8) consistently rewarded sites where the content creator is also the primary source — first-hand experience, proprietary data, and real case studies. Aggregators and sites that merely summarize others lost ground. E-E-A-T with verifiable author credentials was a clear winner.",
+      "The March 2026 core update (March 27—April 8) consistently rewarded sites where the content creator is also the primary source — first-hand experience, proprietary data, and real case studies. Aggregators and sites that merely summarize others lost ground. E-E-A-T with verifiable author credentials was a clear winner.",
     sourceLabel: "Search Engine Roundtable",
     sourceHref: "https://www.seroundtable.com/",
   },
@@ -57,14 +57,26 @@ const news = [
   },
 ];
  
-/* ─── MOTION ─── */
+/* 🔮 MOTION 🔮 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
-export default function NewsClient() {
+export default function NewsClient({ initialNews = [] }: { initialNews?: any[] }) {
+  const dbNewsFormatted = initialNews.map((n: any) => ({
+    id: n.id,
+    date: new Date(n.newsDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    tag: n.tag || "SEO News",
+    tagColor: PURPLE,
+    title: n.title,
+    summary: n.summary,
+    sourceLabel: n.sourceLabel || "Source",
+    sourceHref: n.sourceHref || "#",
+  }));
+  const news = [...dbNewsFormatted, ...hardcodedNews];
+ 
   return (
     <main className="bg-[#f8f9fc]">
  

@@ -35,7 +35,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/resources/news", baseMetadata);
 }
 
-export default function Page() {
+import { db } from "@/lib/db";
+
+export default async function Page() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -46,13 +48,18 @@ export default function Page() {
     ],
   };
 
+  const dbNews = await db.marketingNews.findMany({
+    where: { published: true },
+    orderBy: { newsDate: "desc" },
+  });
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <NewsClient />
+      <NewsClient initialNews={dbNews} />
     </>
   );
 }

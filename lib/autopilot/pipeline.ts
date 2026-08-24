@@ -68,6 +68,11 @@ export async function runAutopilotBatch(clientId: string) {
   //  instead of retrying one unlucky URL until it runs out of attempts.
   const deferredThisRun = new Set<string>();
 
+  //  Consecutive firewall refusals. Three in a row is the firewall, not
+  //  three unlucky products, and the rest of the batch will go the same way.
+  let wafBlocks = 0;
+  let wafHalted = false;
+
   try {
     while (stats.published < batchSize && attempts < MAX_ATTEMPTS) {
       attempts++;
@@ -230,7 +235,13 @@ export async function runAutopilotBatch(clientId: string) {
         //  generation failure still ends the URL, because those will not
         //  come out differently tomorrow.
         const transient =
-          err instanceof ProductFetchError && err.status !== 404 && err.status !== 401 && err.status !== 403;
+          err instanceof ProductFetchError &&
+          //  A WAF challenge arrives as 403 and is not a credential problem,
+          //  so it must not be lumped in with one. It is about which address
+          //  asked, and the same URL succeeds from a machine the firewall
+          //  trusts. Burning it repeats the mistake this whole change exists
+          //  to undo, one status code along.
+          (err.blockedByWaf || (err.status !== 404 && err.status !== 401 && err.status !== 403));
 
         await db.autopilotPage.update({
           where: { id: page.id },
@@ -242,6 +253,17 @@ export async function runAutopilotBatch(clientId: string) {
         });
         if (transient) deferredThisRun.add(queued.url);
         stats.errors++;
+
+        //  If the firewall is turning us away there is nothing to be gained
+        //  by working through the rest of the batch — every product fails
+        //  the same way. Stop and say so once, rather than filling the log
+        //  with nine copies of one message.
+        if (err instanceof ProductFetchError && err.blockedByWaf) {
+          wafBlocks++;
+          if (wafBlocks >= 3) { wafHalted = true; break; }
+        } else {
+          wafBlocks = 0;
+        }
 
         //  Back off when the origin is struggling rather than sending the
         //  next request straight into it — that is what turns one slow
@@ -255,10 +277,24 @@ export async function runAutopilotBatch(clientId: string) {
       await new Promise((r) => setTimeout(r, 400));
     }
 
+    if (wafHalted) {
+      console.error(
+        `[autopilot] Halted: Cloudflare is challenging requests to ${wpCreds.baseUrl} from this server. ` +
+          `Allow it through the WAF, or run scripts/run-autopilot-local.ts from a machine it accepts.`
+      );
+    }
+
     await db.autopilotRun.update({
       where: { id: run.id },
       data: {
-        status: 'completed',
+        //  A run that published nothing because a firewall stopped it did
+        //  not "complete". Recording it as completed is how eight days of
+        //  zero-output runs looked healthy on the dashboard.
+        status: wafHalted ? 'blocked' : 'completed',
+        errorMessage: wafHalted
+          ? `Cloudflare challenged this server before requests reached WooCommerce. ` +
+            `Allow it through the WAF, or run the pipeline locally. No products were changed.`
+          : undefined,
         pagesGenerated: stats.published + stats.skipped,
         pagesPublished: stats.published,
         completedAt: new Date(),
