@@ -41,6 +41,11 @@ export interface PageHeroProps {
    * and stacking both leaves a dead band of whitespace.
    */
   compactTop?: boolean;
+  /**
+   * Optional strict semantic H1 for SEO. If provided, this is rendered visually hidden,
+   * and the `title` prop is rendered as an H2.
+   */
+  seoH1?: string;
 }
 
 /** Accented run inside a hero or section title. */
@@ -59,11 +64,14 @@ export default function PageHero({
   aside,
   centered = false,
   compactTop = false,
+  seoH1,
 }: PageHeroProps) {
   const hasAside = Boolean(aside) && !centered;
 
   const body = (
     <div className={centered ? "mx-auto max-w-3xl text-center" : undefined}>
+      {seoH1 && <h1 className="sr-only">{seoH1}</h1>}
+      
       {eyebrow ? (
         <span
           className={`${heading.eyebrow} mb-5 inline-flex items-center gap-2`}
@@ -74,9 +82,15 @@ export default function PageHero({
         </span>
       ) : null}
 
-      <h1 className={`${heading.h1} mb-6`} style={{ color: color.ink }}>
-        {title}
-      </h1>
+      {seoH1 ? (
+        <h2 className={`${heading.h1} mb-6`} style={{ color: color.ink }}>
+          {title}
+        </h2>
+      ) : (
+        <h1 className={`${heading.h1} mb-6`} style={{ color: color.ink }}>
+          {title}
+        </h1>
+      )}
 
       {subtitle ? (
         <p

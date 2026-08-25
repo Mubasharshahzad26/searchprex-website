@@ -96,6 +96,7 @@ export default function LocalSEOClient() {
   return (
     <main>
       <PageHero
+        seoH1="Local SEO Services | Rank in Google Maps & AI Overviews"
         eyebrow="Local SEO"
         title={<>Own the map pack.<br />Get cited in <Accent>AI Overviews.</Accent></>}
         subtitle="Your customers search 'near me' and call whoever shows up in the top 3. We get local service businesses into the Google Maps pack — and cited in Google's 2026 AI Overviews."

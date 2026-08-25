@@ -101,6 +101,7 @@ export default function TechnicalSEOClient() {
   return (
     <main>
       <PageHero
+        seoH1="Technical SEO Audit & Services | Core Web Vitals & Indexing Recovery"
         eyebrow="Technical SEO"
         title={<>Fix the foundation.<br /><Accent>Make Google index</Accent> everything.</>}
         subtitle="Crawl budget waste, indexation blocks, slow Core Web Vitals, and broken architecture are silently killing your rankings. We find every issue and fix it — systematically, at scale, aligned with Google's 2026 algorithm."

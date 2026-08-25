@@ -109,6 +109,7 @@ export default function LawFirmSEOClient() {
   return (
     <main>
       <PageHero
+        seoH1="Law Firm SEO Services | Rank in Local Pack & AI Overviews"
         eyebrow="Law Firm SEO"
         title={
           <>

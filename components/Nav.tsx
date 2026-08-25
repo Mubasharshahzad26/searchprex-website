@@ -71,7 +71,7 @@ const navLinks: NavLink[] = [
     label: "Solutions",
     hasDropdown: true,
     dropdownItems: [
-      { href: "http://localhost:3000",      label: "LexisIntake AI (Free App)", badge: "Free" },
+      { href: "http://localhost:3005",      label: "LexisIntake AI (Free App)", badge: "Free" },
       { href: "/case-calculator",       label: "Lost Case Calculator" },
       { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
       { href: "/ai-search",             label: "AI Search" },
@@ -201,21 +201,45 @@ export default function Nav() {
                         className="absolute left-0 top-full z-50 w-56 pt-2"
                       >
                         <div className="rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl">
-                          {link.dropdownItems?.map((item) => (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              onClick={() => setActiveDropdown(null)}
-                              className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
-                            >
-                              <span>{item.label}</span>
-                              {item.badge && (
-                                <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
-                                  {item.badge}
-                                </span>
-                              )}
-                            </Link>
-                          ))}
+                          {link.dropdownItems?.map((item) => {
+                            const isExternal = item.href.startsWith("http");
+                            
+                            const content = (
+                              <>
+                                <span>{item.label}</span>
+                                {item.badge && (
+                                  <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </>
+                            );
+
+                            if (isExternal) {
+                              return (
+                                <a
+                                  key={item.label}
+                                  href={item.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                                >
+                                  {content}
+                                </a>
+                              );
+                            }
+
+                            return (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setActiveDropdown(null)}
+                                className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                              >
+                                {content}
+                              </Link>
+                            );
+                          })}
                         </div>
                       </motion.div>
                     )}
@@ -289,21 +313,45 @@ export default function Nav() {
                     )}
                     {link.hasDropdown && (
                       <div className="ml-4 mt-1 space-y-1 border-l border-[#e5e7eb] pl-3">
-                        {link.dropdownItems?.map((item) => (
-                          <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
-                          >
-                            {item.label}
-                            {item.badge && (
-                              <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
-                                {item.badge}
-                              </span>
-                            )}
-                          </Link>
-                        ))}
+                        {link.dropdownItems?.map((item) => {
+                          const isExternal = item.href.startsWith("http");
+                          
+                          const content = (
+                            <>
+                              {item.label}
+                              {item.badge && (
+                                <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </>
+                          );
+
+                          if (isExternal) {
+                            return (
+                              <a
+                                key={item.label}
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                              >
+                                {content}
+                              </a>
+                            );
+                          }
+
+                          return (
+                            <Link
+                              key={item.label}
+                              href={item.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                            >
+                              {content}
+                            </Link>
+                          );
+                        })}
                       </div>
                     )}
                   </div>

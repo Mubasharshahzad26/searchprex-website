@@ -12,6 +12,7 @@ import {
   CheckCircle, Share2, Copy, Linkedin, TrendingUp,
 } from "lucide-react";
 import { useState } from "react";
+import parse, { Element } from 'html-react-parser';
 import { getRelated, styledContent, type Post } from "./posts";
 
 export default function PostClient({ post }: { post: Post }) {
@@ -130,11 +131,28 @@ export default function PostClient({ post }: { post: Post }) {
               {post.excerpt}
             </p>
  
-            {/* Content */}
-            <div
-              dangerouslySetInnerHTML={{ __html: styledContent(post.content) }}
-              style={{ lineHeight: "1.85", color: "#1a1a2e" }}
-            />
+            {/* Content with Image Optimization */}
+            <div style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
+              {parse(styledContent(post.content), {
+                replace: (domNode) => {
+                  if (domNode instanceof Element && domNode.tagName === 'img') {
+                    const { src, alt, width, height } = domNode.attribs;
+                    return (
+                      <div className="my-8 relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] flex justify-center bg-[#f8f9fc]">
+                        <Image
+                          src={src || ''}
+                          alt={alt || "Blog image"}
+                          width={width ? parseInt(width, 10) : 800}
+                          height={height ? parseInt(height, 10) : 450}
+                          className="w-full h-auto object-cover"
+                          unoptimized={src?.startsWith('http')}
+                        />
+                      </div>
+                    );
+                  }
+                }
+              })}
+            </div>
  
             {/* Tags */}
             <div className="mt-12 flex flex-wrap gap-2 border-t border-[#e5e7eb] pt-8">
