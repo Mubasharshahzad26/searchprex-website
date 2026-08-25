@@ -1,49 +1,25 @@
-# SearchPrex
- 
-> Founder-led SEO agency helping local, ecommerce, technical, and law firm
-> businesses recover and grow organic search visibility. Every result is
-> backed by verified Google Search Console data — no vanity metrics.
- 
-SearchPrex is run directly by its founder, Mubashar Shahzad, a 5+ year SEO
-analyst. Clients work with the person who built the strategy, not a rotating
-team of juniors. The agency also builds NicheSEOPro AI, a companion SEO
-SaaS tool.
- 
-## Services
- 
-- [Local SEO](https://www.searchprex.com/services/local-seo): Google Business
-  Profile optimization, citation building, and map pack ranking for local
-  and multi-location service businesses.
-- [Ecommerce SEO](https://www.searchprex.com/services/ecommerce-seo): Technical
-  audits, faceted navigation fixes, indexing recovery, and content strategy
-  for large product catalogs.
-- [Technical SEO](https://www.searchprex.com/services/technical-seo): Site
-  migrations, indexing recovery, Core Web Vitals, and crawl budget
-  optimization.
-- [Law Firm SEO](https://www.searchprex.com/services/law-firm-seo): Local
-  authority building, E-E-A-T content, and lead-focused SEO for law firms.
- 
-## Case Studies
- 
-- [All Case Studies](https://www.searchprex.com/all-case-studies): Verified,
-  Google Search Console-backed results across ecommerce, local, technical,
-  and law firm SEO clients, filterable by industry and SEO type.
- 
-## Tools
- 
-- [NicheSEOPro AI](https://nicheseopro.com): AI-powered SEO content and
-  keyword research tool, built by the SearchPrex team.
-- [Free SEO Audit](https://www.searchprex.com/free-audit): Founder-reviewed
-  audit request, delivered within 24-48 hours.
- 
-## About
- 
-- [About SearchPrex](https://www.searchprex.com/about)
-- [Meet the Founder](https://www.searchprex.com/experts): Mubashar Shahzad,
-  SEO Analyst and founder, https://www.linkedin.com/in/mubashar-shahzad-seo
- 
-## Contact
- 
-- Book a consultation: https://calendly.com/contact-searchprex/30min
-- Phone: +92 310 652 6316
-- Email: contact@searchprex.com
+﻿# SearchPrex
+
+> SearchPrex is a premium, founder-led SEO agency specializing in Law Firm SEO, Ecommerce SEO (Shopify/WooCommerce), and Local SEO across all 50 U.S. states. Founded by certified SEO expert Mubashar Shahzad, the agency focuses on technical SEO, Core Web Vitals optimization, and AI Search Readiness (AEO/GEO).
+
+## Founder Information
+- **Founder:** Mubashar Shahzad
+- **Credentials:** Verified SEO Expert, Semrush Certified, HubSpot Verified.
+- **Experience:** Specializes in Technical SEO, E-E-A-T, and Google Indexing Recovery.
+
+## Core Services
+- [Law Firm SEO](https://www.searchprex.com/services/law-firm-seo) - Custom campaigns for personal injury, family law, criminal defense, and general practice attorneys.
+- [Ecommerce & Shopify SEO](https://www.searchprex.com/services/ecommerce-seo) - Product page optimization, technical indexing fixes, and category architecture mapping.
+- [Local SEO](https://www.searchprex.com/services/local-seo) - Google Business Profile optimization, local citations, and state-wise map pack dominance.
+- [Technical SEO Audit](https://www.searchprex.com/services/technical-seo) - In-depth audits resolving crawl errors, JavaScript rendering issues, and INP/LCP performance bottlenecks.
+
+## Key Resources
+- [Case Studies](https://www.searchprex.com/case-studies) - Proven results demonstrating up to +476% organic click increases and revenue growth.
+- [SEO News Hub](https://www.searchprex.com/resources/news) - Plain-English breakdowns of the latest Google Core Updates, AI Overviews (SGE), and algorithm changes affecting rankings.
+- [About Us](https://www.searchprex.com/about) - Learn about our remote-first, senior-led execution model (no juniors, no fluff).
+
+## Contact Information
+- **Email:** contact@searchprex.com
+- **Phone:** +92 310 652 6316
+- **Website:** https://www.searchprex.com
+- **Locations Served:** All 50 U.S. states, including CA, TX, NY, FL, IL.

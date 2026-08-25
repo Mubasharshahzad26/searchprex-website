@@ -208,9 +208,12 @@ export default function Hero({ heroImage }: HeroProps) {
                 </span>
               </div>
  
-              {/* ── Dynamic H1 — Toptal-style thick underline on the emphasis line ── */}
+              {/* ── Semantic H1 for SEO (Hidden visually) ── */}
+              <h1 className="sr-only">SearchPrex: Top US SEO Agency for Law Firms, Local Businesses, and Ecommerce</h1>
+
+              {/* ── Dynamic H2 — Toptal-style thick underline on the emphasis line ── */}
               <AnimatePresence mode="wait">
-                <motion.h1
+                <motion.h2
                   key={current.id}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -227,7 +230,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   >
                     {current.emphasis}
                   </span>
-                </motion.h1>
+                </motion.h2>
               </AnimatePresence>
  
               {/* ── Dynamic subtext ── */}

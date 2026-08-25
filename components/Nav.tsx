@@ -71,7 +71,7 @@ const navLinks: NavLink[] = [
     label: "Solutions",
     hasDropdown: true,
     dropdownItems: [
-      { href: "/intake-assistant",      label: "AI Intake Assistant", badge: "New" },
+      { href: "http://localhost:3000",      label: "LexisIntake AI (Free App)", badge: "Free" },
       { href: "/case-calculator",       label: "Lost Case Calculator" },
       { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
       { href: "/ai-search",             label: "AI Search" },

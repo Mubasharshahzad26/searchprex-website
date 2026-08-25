@@ -204,6 +204,8 @@ export default async function Home() {
         "url": SITE,
         "logo": `${SITE}/logo.png`,
         "priceRange": "$$",
+        "telephone": "+923106526316",
+        "email": "contact@searchprex.com",
         "areaServed": { "@type": "Country", "name": "United States" },
         "serviceType": [
           "Law Firm SEO",
