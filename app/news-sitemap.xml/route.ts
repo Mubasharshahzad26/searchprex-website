@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
