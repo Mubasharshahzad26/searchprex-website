@@ -19,8 +19,10 @@ import FounderSection from "../components/FounderSection";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
 import BlogTeaser from "../components/BlogTeaser";
-import ChatWidget from "../components/ChatWidget";
 import Reveal from "@/components/Reveal";
+import dynamic from "next/dynamic";
+
+const ChatWidget = dynamic(() => import("../components/ChatWidget"), { ssr: false });
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 

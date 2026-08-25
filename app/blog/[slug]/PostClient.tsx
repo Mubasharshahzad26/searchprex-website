@@ -213,9 +213,30 @@ export default function PostClient({ post }: { post: Post }) {
                   </a>
                 ))}
               </nav>
-            </div>
- 
-            {/* CTA card */}
+              </div>
+   
+              {/* Automated Internal Linking (Related Services) */}
+              <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-4">
+                  Explore Services
+                </p>
+                <div className="flex flex-col gap-4">
+                  <Link href="/services/law-firm-seo" className="group block">
+                    <p className="text-sm font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-0.5">Law Firm SEO</p>
+                    <p className="text-xs text-[#64748b] leading-relaxed">Dominate the local pack and AI Overviews for your practice areas.</p>
+                  </Link>
+                  <Link href="/services/ecommerce-seo" className="group block border-t border-[#e5e7eb] pt-4">
+                    <p className="text-sm font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-0.5">Ecommerce SEO</p>
+                    <p className="text-xs text-[#64748b] leading-relaxed">Scale product-page content and indexing across thousands of SKUs.</p>
+                  </Link>
+                  <Link href="/services/local-seo" className="group block border-t border-[#e5e7eb] pt-4">
+                    <p className="text-sm font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-0.5">Local SEO Services</p>
+                    <p className="text-xs text-[#64748b] leading-relaxed">Rank in the Google Maps top 3 and capture 'near me' search intent.</p>
+                  </Link>
+                </div>
+              </div>
+   
+              {/* CTA card */}
             <div className="rounded-2xl bg-[#0a0f2e] p-6 text-center overflow-hidden relative">
               <div className="pointer-events-none absolute inset-0 opacity-10"
                 style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #534AB7 1px, transparent 0)", backgroundSize: "12px 12px" }} />
