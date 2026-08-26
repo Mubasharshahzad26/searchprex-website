@@ -18,3 +18,8 @@ node_modules
 
 # ...but the documented template of required variable NAMES must be committed.
 !.env.example
+
+# Build logs and TypeScript incremental cache — never belong in git.
+# tsconfig.tsbuildinfo and t.log were committed in 1582d75 by accident.
+*.log
+tsconfig.tsbuildinfo

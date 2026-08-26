@@ -92,7 +92,7 @@ export default function RecoveryStory() {
             className="text-3xl font-black tracking-tight sm:text-4xl"
             style={{ color: color.ink }}
           >
-            We hit +476%, lost it to a de-indexing, and rebuilt it.
+            Ecommerce SEO Recovery: +476%, a De-Indexing, and the Rebuild
           </h2>
           <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
             Most agencies would publish the March peak and stop there. Here is the whole
@@ -172,8 +172,8 @@ export default function RecoveryStory() {
                 <ProofImage
                   src={r.src}
                   alt={`Michigan Outdoor Sports WooCommerce net sales panel on ${r.date}, showing ${r.figure} net sales this month.`}
-                  width={562}
-                  height={160}
+                  width={1366}
+                  height={611}
                   stage={r.stage}
                   stageTone={r.tone}
                   caption={`${r.figure} — ${r.date}`}
@@ -200,10 +200,10 @@ export default function RecoveryStory() {
             </p>
             <div className="mt-5 max-w-3xl">
               <ProofImage
-                src="/images/proof/mso-indexing-growth.png"
+                src="/images/proof/mso-gsc-indexing-full.png"
                 alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
-                width={745}
-                height={236}
+                width={1366}
+                height={606}
                 stage="Google Search Console"
                 stageTone={color.primary}
                 caption="≈3,000 → 11,549 indexed pages — 18 May to 25 July 2026"
@@ -270,8 +270,8 @@ export default function RecoveryStory() {
             <ProofImage
               src="/images/proof/smk-revenue-before.png"
               alt="SMK Store WooCommerce status panel before the indexing recovery, showing $5,832.02 net sales for the month, top seller at 200 units and 9 orders awaiting processing."
-              width={562}
-              height={208}
+              width={1366}
+              height={607}
               stage="Before"
               stageTone="#8a5b08"
               caption="$5,832.02 net sales"
@@ -281,8 +281,8 @@ export default function RecoveryStory() {
             <ProofImage
               src="/images/proof/smk-revenue-after.png"
               alt="SMK Store WooCommerce status panel after the indexing recovery, showing $19,100.71 net sales for the month, top seller at 300 units and 17 orders awaiting processing."
-              width={562}
-              height={211}
+              width={863}
+              height={350}
               stage="After"
               stageTone="#196b4d"
               caption="$19,100.71 net sales"

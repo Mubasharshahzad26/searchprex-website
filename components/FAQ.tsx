@@ -109,7 +109,7 @@ export default function FAQ() {
             className="mb-12 sm:mb-16 lg:mb-20 text-center"
           >
             <h2 className="mb-4 text-3xl sm:text-4xl lg:text-5xl font-black text-[#0a0f2e]">
-              Frequently asked
+              SEO FAQs for US Law Firms, Stores &amp; Local Businesses
             </h2>
             <p className="text-base sm:text-lg text-[#566070] max-w-2xl mx-auto">
               Everything you need to know about how we deliver ROI and why we're different from other SEO agencies.

@@ -79,7 +79,7 @@ export default function Results() {
               className="text-3xl font-black tracking-tight sm:text-4xl"
               style={{ color: color.ink }}
             >
-              Every number here has a screen recording.
+              US SEO Results With Verified Search Console Proof
             </h2>
             <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
               Not edited screenshots. Live Google Search Console sessions, recorded on the

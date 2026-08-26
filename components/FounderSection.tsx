@@ -67,9 +67,9 @@ const caseResults = [
 ];
  
 const whyFounder = [
-  { icon: Users, title: "Direct founder access", sub: "Talk to me — not a junior exec or account manager" },
-  { icon: Star, title: "100% transparent", sub: "Real GSC + GA4 data every month, no fluff" },
-  { icon: Clock, title: "24hr reply guarantee", sub: "Your success is my reputation on the line" },
+  { icon: Users, title: "You talk to me, not an account manager", sub: "Direct line to the person doing the work — no juniors, no hand-offs" },
+  { icon: Clock, title: "Weekly reporting, not monthly", sub: "Every week: what I did, what moved, what is next — from real GSC and GA4 data" },
+  { icon: TrendingUp, title: "Measured on revenue, not rankings", sub: "SMK Store went $5,832 → $19,100 monthly. That is the number that counts" },
 ];
  
 const profileLinks = [
@@ -159,7 +159,7 @@ export default function FounderSection() {
             Founder-led agency · E-E-A-T verified
           </div>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Hands-on experience, not theory
+            Founder-Led SEO for US Businesses — Hands-On, Not Theory
           </h2>
           <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
             You work directly with me — not a rotating team of juniors. Every strategy comes from

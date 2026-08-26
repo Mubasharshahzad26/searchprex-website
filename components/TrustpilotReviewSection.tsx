@@ -118,7 +118,7 @@ export default function TrustpilotReviewSection() {
             variants={fadeUp}
             className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e]"
           >
-            Real Client Results
+            Verified Reviews From US Clients
           </motion.h2>
           <motion.p variants={fadeUp} className="text-base text-[#566070]">
             {AGGREGATE_COUNT} verified {AGGREGATE_COUNT === 1 ? "review" : "reviews"} from real
