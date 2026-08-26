@@ -6,11 +6,11 @@ const states = ["CALIFORNIA", "TEXAS", "FLORIDA", "NEW YORK", "ILLINOIS"];
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-[#e5e7eb] bg-[#f7f8fc] py-4">
+    <section className="border-y border-[#e5e7eb] bg-[#f8f9fc] py-4">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           {/* Left Text */}
-          <p className="text-xs font-bold uppercase tracking-widest text-[#64748b]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#566070]">
             Serving Law Firms & Stores in:
           </p>
 
@@ -19,7 +19,11 @@ export default function TrustBar() {
             <motion.div
               className="flex items-center gap-4"
               initial={{ x: 0 }}
-              animate={{ x: "-100%" }}
+              // -50%, not -100%. The row below renders the states list twice,
+              // so translating by half its width lands the second copy exactly
+              // where the first started — a seamless loop. -100% scrolled both
+              // copies off screen and snapped back with a visible jump.
+              animate={{ x: "-50%" }}
               transition={{
                 duration: 20,
                 repeat: Infinity,
@@ -38,14 +42,17 @@ export default function TrustBar() {
             </motion.div>
           </div>
 
-          {/* Availability */}
+          {/* Availability.
+              This used to read "2 Spots Remaining This Month" — a hardcoded
+              string with a live-looking pulse animation that never changed. A
+              returning visitor sees the same "2" forever, which teaches them
+              that our urgency signals are theatre. Replaced with the exclusivity
+              policy we already state in the FAQ: true without maintenance, and
+              genuinely differentiating. Static dot, because nothing is live. */}
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
-            </span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#22c55e]">
-              2 Spots Remaining This Month
+            <span className="h-2 w-2 rounded-full bg-[#15803d]" />
+            <span className="text-xs font-bold uppercase tracking-widest text-[#15803d]">
+              One Client Per City, Per Practice Area
             </span>
           </div>
         </div>

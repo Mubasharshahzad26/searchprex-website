@@ -1,12 +1,22 @@
 "use client";
  
 // components/LeadWizard.tsx
-// Premium Semrush-style lead-capture wizard. Dark gradient + baked-in aurora,
-// value-prop copy on the left, a 2-step wizard card on the right (business type
-// -> contact details). POSTs to /api/leads. Self-animated.
+// THE lead form. Singular, deliberately.
+//
+// The homepage used to run two of these: this wizard at ~35% scroll asking for
+// a "custom SEO game plan", and LeadCaptureForm at ~85% asking for a "free SEO
+// audit". Same three fields, same /api/leads endpoint, two different names for
+// one offer. That is a decision the visitor should never have been asked to
+// make, so the two are merged here and LeadCaptureForm is gone.
+//
+// Keeps the wizard's two-step micro-commitment pattern (pick a business type
+// before being asked for an email) and the dark treatment, with the stronger
+// value-prop copy from the old capture form. Offer name and promise come from
+// lib/offer.ts so they cannot drift from the rest of the site again.
  
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { OFFER_PROMISE } from "@/lib/offer";
 import {
   Scale,
   ShoppingCart,
@@ -48,7 +58,7 @@ export default function LeadWizard() {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, website, source: `lead-wizard:${business}` }),
+        body: JSON.stringify({ name, email, website, source: `homepage-free-audit:${business}` }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("done");
@@ -58,7 +68,7 @@ export default function LeadWizard() {
   };
  
   return (
-    <section className="relative overflow-hidden bg-[#0a0f2e] py-20 sm:py-28" id="get-started">
+    <section className="relative overflow-hidden bg-[#0a0f2e] py-20 sm:py-28" id="free-audit-form">
       {/* baked-in aurora */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <span className="lw-blob lw-blob-1" />
@@ -74,25 +84,24 @@ export default function LeadWizard() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#8b86e0]">
-            Free · 60 seconds
+            Free SEO Audit · 60 seconds
           </div>
           <h2 className="mt-4 text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Get your custom{" "}
+            See exactly why you&apos;re{" "}
             <span className="bg-gradient-to-r from-[#7F77DD] to-[#3eb489] bg-clip-text text-transparent">
-              SEO game plan.
+              not ranking yet.
             </span>
           </h2>
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-slate-300">
-            Tell us about your business and we&apos;ll send a tailored, founder-reviewed
-            roadmap — no obligation, no sales pitch.
+          <p className="mt-5 max-w-md text-lg leading-relaxed text-slate-200">
+            {OFFER_PROMISE} No obligation, no sales pitch.
           </p>
           <ul className="mt-8 space-y-3">
             {[
-              "Tailored to your exact business type",
-              "Verified GSC strategies, not generic advice",
-              "Delivered free within 48 hours",
+              "Technical issues, content gaps & competitor analysis",
+              "A prioritized P1 / P2 / P3 fix list — not a generic PDF",
+              "Reviewed by the founder, not a junior or a bot",
             ].map((t) => (
-              <li key={t} className="flex items-center gap-2.5 text-sm text-slate-300">
+              <li key={t} className="flex items-center gap-2.5 text-sm text-slate-200">
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#3eb489]/15">
                   <Check className="h-3 w-3 text-[#3eb489]" />
                 </span>
@@ -116,8 +125,8 @@ export default function LeadWizard() {
                 <Check className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-[#0a0f2e]">You&apos;re all set!</h3>
-              <p className="mt-2 text-[#64748b]">
-                Your custom game plan is on its way — check your inbox within 48 hours.
+              <p className="mt-2 text-[#566070]">
+                Your free audit is on its way — check your inbox within 24 hours.
               </p>
             </div>
           ) : (
@@ -126,7 +135,7 @@ export default function LeadWizard() {
               <div className="mb-6">
                 <div className="mb-2 flex items-center justify-between text-sm">
                   <span className="font-semibold text-[#0a0f2e]">Step {step} of 2</span>
-                  <span className="text-[#64748b]">{step === 1 ? "50" : "100"}% complete</span>
+                  <span className="text-[#566070]">{step === 1 ? "50" : "100"}% complete</span>
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-[#f1f3f9]">
                   <motion.div
@@ -150,7 +159,7 @@ export default function LeadWizard() {
                     <h3 className="mb-1 text-lg font-bold text-[#0a0f2e]">
                       What type of business are you?
                     </h3>
-                    <p className="mb-5 text-sm text-[#64748b]">Pick the closest match.</p>
+                    <p className="mb-5 text-sm text-[#566070]">Pick the closest match.</p>
                     <div className="grid gap-2.5 sm:grid-cols-2">
                       {BUSINESS_TYPES.map((b) => {
                         const Icon = b.icon;
@@ -168,14 +177,14 @@ export default function LeadWizard() {
                           >
                             <span
                               className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                                active ? "bg-[#534AB7] text-white" : "bg-[#f1f3f9] text-[#64748b]"
+                                active ? "bg-[#534AB7] text-white" : "bg-[#f1f3f9] text-[#566070]"
                               }`}
                             >
                               <Icon className="h-4 w-4" />
                             </span>
                             <span>
                               <span className="block text-sm font-bold text-[#0a0f2e]">{b.label}</span>
-                              <span className="block text-[11px] text-[#94a3b8]">{b.desc}</span>
+                              <span className="block text-[11px] text-[#6b7280]">{b.desc}</span>
                             </span>
                           </button>
                         );
@@ -192,8 +201,8 @@ export default function LeadWizard() {
                     className="space-y-4"
                   >
                     <h3 className="mb-1 text-lg font-bold text-[#0a0f2e]">Where should we send it?</h3>
-                    <p className="mb-3 text-sm text-[#64748b]">
-                      Your free roadmap arrives within 48 hours.
+                    <p className="mb-3 text-sm text-[#566070]">
+                      Your founder-reviewed audit arrives within 24 hours.
                     </p>
                     <input
                       value={name}
@@ -238,7 +247,7 @@ export default function LeadWizard() {
                     type="button"
                     disabled={!business}
                     onClick={() => setStep(2)}
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#3eb489] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#1a7d59] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                   >
                     Continue <ArrowRight className="h-4 w-4" />
                   </button>
@@ -247,7 +256,7 @@ export default function LeadWizard() {
                     type="button"
                     disabled={!canSubmit || status === "loading"}
                     onClick={submit}
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#3eb489] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#1a7d59] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                   >
                     {status === "loading" ? (
                       <>
@@ -255,14 +264,14 @@ export default function LeadWizard() {
                       </>
                     ) : (
                       <>
-                        Get my game plan <ArrowRight className="h-4 w-4" />
+                        Get my free SEO audit <ArrowRight className="h-4 w-4" />
                       </>
                     )}
                   </button>
                 )}
               </div>
  
-              <p className="mt-4 text-center text-xs text-[#94a3b8]">
+              <p className="mt-4 text-center text-xs text-[#6b7280]">
                 No spam. No obligation. Unsubscribe anytime.
               </p>
             </>
@@ -271,12 +280,14 @@ export default function LeadWizard() {
       </div>
  
       <style>{`
-        .lw-blob { position: absolute; border-radius: 9999px; filter: blur(90px); will-change: transform; }
-        .lw-blob-1 { width: 45%; height: 60%; left: -12%; top: -20%; background: #534AB7; opacity: 0.28; animation: lw-d1 21s ease-in-out infinite alternate; }
-        .lw-blob-2 { width: 42%; height: 55%; right: -10%; bottom: -22%; background: #3eb489; opacity: 0.20; animation: lw-d2 25s ease-in-out infinite alternate; }
-        @keyframes lw-d1 { from { transform: translate(0,0) scale(1); } to { transform: translate(14%,10%) scale(1.18); } }
-        @keyframes lw-d2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-12%,-8%) scale(1.15); } }
-        @media (prefers-reduced-motion: reduce) { .lw-blob { animation: none; } }
+/* Static, not animated. These were two continuously-transforming
+           blur(90px) layers; large-radius blur under transform is one of the
+           most expensive things you can hand a GPU, and it ran the whole time
+           the user was reading the page. The hero keeps the one ambient
+           effect; this section gets the same look for free. */
+        .lw-blob { position: absolute; border-radius: 9999px; filter: blur(90px); }
+        .lw-blob-1 { width: 45%; height: 60%; left: -12%; top: -20%; background: #534AB7; opacity: 0.28; }
+        .lw-blob-2 { width: 42%; height: 55%; right: -10%; bottom: -22%; background: #3eb489; opacity: 0.20; }
       `}</style>
     </section>
   );

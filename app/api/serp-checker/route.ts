@@ -18,7 +18,7 @@ import {
   SERP_COUNTRIES,
   domainFromUrl,
   domainMatches,
-  estimateSerpKeyword,
+  previewSerpKeyword,
   normalizeDomain,
   type SerpFeature,
   type SerpItem,
@@ -131,12 +131,14 @@ export async function POST(req: NextRequest) {
 
   const checkedAt = new Date().toISOString()
 
-  // 3. No creds → honest demo data
+  // 3. No creds → preview mode. Returns an example SERP and says nothing about
+  //    the caller's own ranking; see lib/serp-types.ts for why guessing here was
+  //    worse than admitting we don't know.
   const login = process.env.DATAFORSEO_LOGIN
   const password = process.env.DATAFORSEO_PASSWORD
   if (!login || !password) {
     return NextResponse.json(
-      buildEstimated(domain, unique, country.name, checkedAt),
+      buildPreview(domain, unique, country.name, checkedAt),
     )
   }
 
@@ -179,23 +181,23 @@ export async function POST(req: NextRequest) {
   const results = unique.map(
     (keyword) =>
       fetched.get(keyword) ??
-      // Beyond today's quota: an honest estimate beats a hard failure when the
-      // caller already has real data for their other keywords.
-      estimateSerpKeyword(domain, keyword, country.name),
+      // Beyond today's quota: fall back to preview rather than failing the whole
+      // request, so the keywords that did get a live reading still come back.
+      previewSerpKeyword(domain, keyword, country.name),
   )
 
   return NextResponse.json({
     domain,
     location: country.name,
-    source: results.every((r) => r.source === 'estimated')
-      ? 'estimated'
+    source: results.every((r) => r.source === 'preview')
+      ? 'preview'
       : ('dataforseo' as const),
     results,
     checkedAt,
   } satisfies SerpResponse)
 }
 
-function buildEstimated(
+function buildPreview(
   domain: string,
   keywords: string[],
   location: string,
@@ -204,8 +206,8 @@ function buildEstimated(
   return {
     domain,
     location,
-    source: 'estimated',
-    results: keywords.map((k) => estimateSerpKeyword(domain, k, location)),
+    source: 'preview',
+    results: keywords.map((k) => previewSerpKeyword(domain, k, location)),
     checkedAt,
   }
 }
@@ -261,7 +263,7 @@ async function fetchLiveResult(
   }
 
   function fallback(): SerpKeywordResult {
-    return estimateSerpKeyword(domain, keyword, location)
+    return previewSerpKeyword(domain, keyword, location)
   }
 }
 

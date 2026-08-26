@@ -45,18 +45,21 @@ export default function AuroraBackground({
         .sp-aurora .sp-blob-1 {
           width: 42%; height: 65%; left: -8%; top: -25%;
           background: #534AB7; opacity: ${blobOpacity};
-          animation: sp-drift-1 19s ease-in-out infinite alternate;
         }
         .sp-aurora .sp-blob-2 {
           width: 46%; height: 60%; right: -10%; top: 5%;
           background: #3eb489; opacity: ${blobOpacity * 0.7};
-          animation: sp-drift-2 23s ease-in-out infinite alternate;
         }
         .sp-aurora .sp-blob-3 {
           width: 38%; height: 55%; left: 28%; bottom: -25%;
           background: #7F77DD; opacity: ${blobOpacity * 0.85};
-          animation: sp-drift-3 27s ease-in-out infinite alternate;
         }
+        /* Animation removed. Three continuously-transforming blur(90px)
+           layers ran the whole time the user was on the page; large-radius
+           blur under transform is one of the most expensive things you can
+           hand a GPU. The hero keeps the single ambient effect. The
+           keyframes below are left in place, unused, so the motion can be
+           restored by re-adding one animation: line if wanted. */
         @keyframes sp-drift-1 { from { transform: translate(0,0) scale(1); } to { transform: translate(16%,12%) scale(1.18); } }
         @keyframes sp-drift-2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-13%,9%) scale(1.12); } }
         @keyframes sp-drift-3 { from { transform: translate(0,0) scale(1); } to { transform: translate(9%,-11%) scale(1.22); } }

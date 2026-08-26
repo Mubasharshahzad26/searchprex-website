@@ -111,7 +111,7 @@ export default function FAQ() {
             <h2 className="mb-4 text-3xl sm:text-4xl lg:text-5xl font-black text-[#0a0f2e]">
               Frequently asked
             </h2>
-            <p className="text-base sm:text-lg text-[#64748b] max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-[#566070] max-w-2xl mx-auto">
               Everything you need to know about how we deliver ROI and why we're different from other SEO agencies.
             </p>
           </motion.div>
@@ -165,7 +165,7 @@ export default function FAQ() {
                                 <Minus className="h-5 w-5 text-[#534AB7] flex-shrink-0" />
                               </motion.div>
                             ) : (
-                              <Plus className="h-5 w-5 text-[#94a3b8] group-hover:text-[#534AB7] transition-colors" />
+                              <Plus className="h-5 w-5 text-[#6b7280] group-hover:text-[#534AB7] transition-colors" />
                             )}
                           </div>
                         </button>

@@ -120,7 +120,7 @@ export default function Certifications({
                           {c.isArticle ? "Published article" : "Verified credential"}
                         </span>
                       </div>
-                      <p className="mt-2.5 text-[9px] font-semibold uppercase tracking-widest text-[#94a3b8]">
+                      <p className="mt-2.5 text-[9px] font-semibold uppercase tracking-widest text-[#566070]">
                         {c.credType}
                       </p>
                       <p className="truncate text-[13px] font-black tracking-tight text-[#1c1c24]">

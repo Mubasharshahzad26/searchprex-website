@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle, ExternalLink, Star, Users, Clock, TrendingUp, Award, ArrowRight } from "lucide-react";
+import { OFFER_HREF, OFFER_CTA, OFFER_MICROCOPY } from "@/lib/offer";
  
 /* Toptal green accent */
 const GREEN = "#3eb489";
@@ -19,7 +20,7 @@ const credentials = [
   {
     label: "AI-Powered Marketer",
     sub: "Expires Oct 2026",
-    color: "#1D9E75",
+    color: "#196b4d",
     bg: "#E1F5EE",
     href: "https://static.semrush.com/academy/certificates/e2cb11d7cb/mubashar-shahzad_26.pdf",
   },
@@ -154,10 +155,7 @@ export default function FounderSection() {
             Founder-led agency · E-E-A-T verified
           </div>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Hands-on experience,{" "}
-            <span className="bg-gradient-to-r from-[#534AB7] to-[#3eb489] bg-clip-text text-transparent">
-              not theory
-            </span>
+            Hands-on experience, not theory
           </h2>
           <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
             You work directly with me — not a rotating team of juniors. Every strategy comes from
@@ -180,23 +178,27 @@ export default function FounderSection() {
               {/* Avatar + name */}
               <div className="mb-6 flex items-center gap-4">
                 <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-[#534AB7] shadow-md">
+                  {/* No `priority` here. This is an 80x80 avatar most of the
+                      way down the page — preloading it made it compete with
+                      the hero for LCP. `sizes` keeps the optimizer from
+                      serving a full-width variant for a 5rem box. */}
                   <Image
                     src="/images/mubashar-shahzad.jpg"
                     alt="Mubashar Shahzad - Founder & CEO SearchPrex"
                     fill
+                    sizes="80px"
                     className="object-cover object-top"
-                    priority
                   />
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-[#0a0f2e]">Mubashar Shahzad</h3>
                   <p className="text-sm font-semibold text-[#185FA5]">Founder &amp; CEO · SearchPrex</p>
-                  <p className="text-xs text-[#64748b]">SEO Analyst · 5+ years experience</p>
+                  <p className="text-xs text-[#566070]">SEO Analyst · 5+ years experience</p>
                   <div className="mt-1 flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="h-3 w-3 fill-[#EF9F27] text-[#EF9F27]" />
                     ))}
-                    <span className="ml-1 text-[10px] text-[#64748b]">Upwork Top Rated</span>
+                    <span className="ml-1 text-[10px] text-[#566070]">Upwork Top Rated</span>
                   </div>
                 </div>
               </div>
@@ -210,7 +212,7 @@ export default function FounderSection() {
               </blockquote>
  
               {/* Semrush Certificates — clickable */}
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#64748b]">
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#566070]">
                 Semrush Certified — Click to Verify ↗
               </p>
               <div className="mb-6 flex flex-wrap gap-2">
@@ -226,14 +228,14 @@ export default function FounderSection() {
                     <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: c.color }} />
                     <div>
                       <div className="text-xs font-semibold" style={{ color: c.color }}>{c.label}</div>
-                      <div className="text-[10px] text-[#64748b]">{c.sub} · View ↗</div>
+                      <div className="text-[10px] text-[#566070]">{c.sub} · View ↗</div>
                     </div>
                   </Link>
                 ))}
               </div>
  
               {/* Profile Links */}
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#64748b]">
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#566070]">
                 Find me online
               </p>
               <div className="flex flex-wrap gap-2">
@@ -275,12 +277,12 @@ export default function FounderSection() {
                 {caseResults.map((c) => (
                   <div key={c.client} className="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-3 transition-colors hover:bg-[#f1f5f9]">
                     <div className="flex flex-col items-center justify-center rounded-lg px-3 py-2 min-w-[72px]" style={{ background: "rgba(62,180,137,0.1)" }}>
-                      <span className="text-lg font-black leading-none" style={{ color: "#2f9670" }}>{c.metric}</span>
+                      <span className="text-lg font-black leading-none" style={{ color: "#196b4d" }}>{c.metric}</span>
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-bold text-[#0a0f2e] leading-tight">{c.client}</p>
-                      <p className="text-[10px] font-semibold uppercase tracking-wide text-[#94a3b8]">{c.tag}</p>
-                      <p className="text-xs text-[#64748b] mt-0.5">{c.label}</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-wide text-[#6b7280]">{c.tag}</p>
+                      <p className="text-xs text-[#566070] mt-0.5">{c.label}</p>
                     </div>
                   </div>
                 ))}
@@ -288,7 +290,7 @@ export default function FounderSection() {
               <Link
                 href="/case-studies"
                 className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold transition-all hover:gap-2"
-                style={{ color: "#2f9670" }}
+                style={{ color: "#196b4d" }}
               >
                 <TrendingUp className="h-3.5 w-3.5" /> See full case studies <ExternalLink className="h-3 w-3" />
               </Link>
@@ -302,11 +304,11 @@ export default function FounderSection() {
                 {whyFounder.map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl" style={{ background: "rgba(62,180,137,0.12)" }}>
-                      <item.icon className="h-5 w-5" style={{ color: "#2f9670" }} />
+                      <item.icon className="h-5 w-5" style={{ color: "#196b4d" }} />
                     </div>
                     <div>
                       <p className="font-semibold text-[#0a0f2e]">{item.title}</p>
-                      <p className="text-sm text-[#64748b]">{item.sub}</p>
+                      <p className="text-sm text-[#566070]">{item.sub}</p>
                     </div>
                   </div>
                 ))}
@@ -319,15 +321,18 @@ export default function FounderSection() {
                 <span className="fs-blob" />
               </div>
               <div className="relative">
-                <p className="mb-2 text-sm font-semibold text-white/60 uppercase tracking-widest">Ready to talk?</p>
-                <p className="mb-4 text-lg font-black">Get a free 30-min strategy call</p>
+                {/* This card said "Get a free 30-min strategy call" and
+                    "Book Consultation" while linking to /free-audit — three
+                    different promises in one card. Now it matches the offer. */}
+                <p className="mb-2 text-sm font-semibold text-white/85 uppercase tracking-widest">Want me to look at your site?</p>
+                <p className="mb-4 text-lg font-black">I&apos;ll audit it myself and send the fix list</p>
                 <Link
-                  href="/free-audit"
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#3eb489] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  href={OFFER_HREF}
+                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#1a7d59] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:shadow-lg"
                 >
-                  Book Consultation <ArrowRight className="h-4 w-4" />
+                  {OFFER_CTA} <ArrowRight className="h-4 w-4" />
                 </Link>
-                <p className="mt-3 text-xs text-white/40">No commitment · Reply within 24hrs</p>
+                <p className="mt-3 text-xs text-white/85">{OFFER_MICROCOPY}</p>
               </div>
             </div>
           </motion.div>
@@ -336,7 +341,7 @@ export default function FounderSection() {
       </div>
  
       <style>{`
-        .fs-blob { position: absolute; top: -40%; right: -20%; width: 60%; height: 160%; border-radius: 9999px; background: #534AB7; opacity: 0.22; filter: blur(80px); animation: fs-drift 22s ease-in-out infinite alternate; }
+        .fs-blob { position: absolute; top: -40%; right: -20%; width: 60%; height: 160%; border-radius: 9999px; background: #534AB7; opacity: 0.22; filter: blur(80px); }
         @keyframes fs-drift { from { transform: translate(0,0) scale(1); } to { transform: translate(-12%,8%) scale(1.15); } }
         @media (prefers-reduced-motion: reduce) { .fs-blob { animation: none; } }
       `}</style>

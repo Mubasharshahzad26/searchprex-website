@@ -48,14 +48,12 @@ export const trustpilotReviewSchema = {
       "url": "https://www.trustpilot.com/review/searchprex.com"
     }
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "3.8",
-    "ratingCount": 2,
-    "bestRating": "5",
-    "worstRating": "1",
-    "url": "https://www.trustpilot.com/review/searchprex.com"
-  },
+  // NOTE: no aggregateRating. The value that used to sit here was 3.8 across
+  // ratingCount 2 — while both Review nodes above are rated 5, which cannot be
+  // true at the same time. Self-serving aggregate ratings on your own
+  // Organization are also against Google's review-snippet guidelines. If you
+  // ever re-add one, it must match the live Trustpilot profile exactly AND
+  // match what components/TrustpilotReviewSection.tsx renders.
   "sameAs": ["https://www.trustpilot.com/review/searchprex.com"]
 };
  

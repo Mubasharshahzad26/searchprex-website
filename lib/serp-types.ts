@@ -29,7 +29,15 @@ export interface SerpItem {
 export interface SerpKeywordResult {
   keyword: string
   location: string
-  source: 'dataforseo' | 'estimated'
+  /**
+   * 'dataforseo' = a real reading of Google.
+   * 'preview'    = no live provider is connected, so we report NOTHING about
+   *                the caller's own domain and show an illustrative SERP layout
+   *                instead. This used to be 'estimated', which invented a
+   *                position for the user's real domain — on an SEO agency's own
+   *                site, a fabricated rank is the worst possible thing to ship.
+   */
+  source: 'dataforseo' | 'preview'
   /** Organic position in the top 100, or null when the domain never appears. */
   position: number | null
   found: boolean
@@ -51,7 +59,7 @@ export interface SerpKeywordResult {
 export interface SerpResponse {
   domain: string
   location: string
-  source: 'dataforseo' | 'estimated'
+  source: 'dataforseo' | 'preview'
   results: SerpKeywordResult[]
   checkedAt: string
 }
@@ -182,9 +190,25 @@ export function domainMatches(candidate: string, target: string): boolean {
   return candidate === target || candidate.endsWith(`.${target}`)
 }
 
-/* --------------------- Deterministic estimated fallback -------------------- */
-// Same FNV-1a approach as lib/keyword-service.ts: identical input always yields
-// identical output, so the demo never "re-rolls" a user's ranking on refresh.
+/* ----------------------- Preview mode (no live provider) ------------------- */
+//
+// When DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD are absent the tool cannot know
+// where anyone ranks, so the honest answer is to say so rather than guess.
+//
+// What this block used to do: invent a position (`seed % 97`), decide the caller
+// "ranks" two times out of three, and place their real domain inside a
+// fabricated top-10. A visitor saw "#47" next to their own domain with no way to
+// tell it was fiction. On an SEO agency's own site a fabricated rank is the most
+// damaging thing it is possible to publish, and it was reaching real visitors —
+// the page is live and already earning impressions.
+//
+// What it does now: reports nothing whatsoever about the caller's domain
+// (position: null, found: false, yourResult: null, isAiOverview: false) and
+// returns a clearly-labelled example SERP so the page can still show what the
+// tool does. The caller's own domain never appears in that example.
+//
+// Deterministic FNV-1a, same approach as lib/keyword-service.ts: identical input
+// always yields identical output, so the example never re-rolls on refresh.
 
 function hash(str: string): number {
   let h = 2166136261
@@ -195,6 +219,7 @@ function hash(str: string): number {
   return Math.abs(h)
 }
 
+/** Stand-in domains for the example SERP. Never includes the caller's domain. */
 const FILLER_DOMAINS = [
   'wikipedia.org',
   'linkedin.com',
@@ -244,54 +269,36 @@ const ALL_FEATURES: SerpFeature[] = [
   'relatedSearches',
 ]
 
-function estimateOne(
+function previewOne(
   domain: string,
   keyword: string,
   location: string,
 ): SerpKeywordResult {
   const seed = hash(`${domain}::${keyword}::${location}`)
-
-  // Roughly two-thirds of demo checks "rank" somewhere in the top 100.
-  const found = seed % 3 !== 0
-  const position = found ? (seed % 97) + 1 : null
-  const isAiOverview = found && seed % 11 === 0
-
-  const features: SerpFeature[] = ALL_FEATURES.filter(
-    (_, i) => (seed >> i) % 4 === 0,
-  )
-  if (features.length === 0) features.push('relatedSearches')
-  if (isAiOverview && !features.includes('aiOverview')) features.unshift('aiOverview')
-
   const kwSlug = slug(keyword) || 'page'
 
+  // An illustrative set of features, so the explainer chips have something to
+  // describe. Labelled in the UI as "typical for this kind of query" — never as
+  // a reading of the caller's actual SERP.
+  const features: SerpFeature[] = ALL_FEATURES.filter((_, i) => (seed >> i) % 4 === 0)
+  if (features.length === 0) features.push('relatedSearches')
+
+  // Filler domains only. The caller's domain is deliberately absent: showing it
+  // here is what made the old output read as a real ranking.
   const top10: SerpItem[] = Array.from({ length: 10 }, (_, i) => {
-    const rank = i + 1
-    // Place the user's own domain in the top 10 when that's where it landed.
-    const isYou = found && position === rank
-    const filler = FILLER_DOMAINS[(seed + i * 7) % FILLER_DOMAINS.length]
-    const d = isYou ? domain : filler
+    const d = FILLER_DOMAINS[(seed + i * 7) % FILLER_DOMAINS.length]
     const shape = TITLE_SHAPES[(seed + i) % TITLE_SHAPES.length]
     return {
-      rank,
+      rank: i + 1,
       url: `https://www.${d}/${kwSlug}`,
       domain: d,
       title: shape(keyword, d),
-      snippet: `A representative result for "${keyword}" — connect DataForSEO to replace this with the live Google SERP for ${location}.`,
+      // No developer instructions in visitor-facing copy. This string used to
+      // read "connect DataForSEO to replace this with the live Google SERP",
+      // which shipped a to-do note straight onto a public page.
+      snippet: `Example result showing how a top-10 listing for "${keyword}" is laid out in ${location}.`,
     }
   })
-
-  const yourResult =
-    found && position !== null && position <= 10
-      ? (top10.find((r) => domainMatches(r.domain, domain)) ?? null)
-      : found && position !== null
-        ? {
-            rank: position,
-            url: `https://www.${domain}/${kwSlug}`,
-            domain,
-            title: TITLE_SHAPES[seed % TITLE_SHAPES.length](keyword, domain),
-            snippet: `Your page for "${keyword}" — estimated placement, not a live Google reading.`,
-          }
-        : null
 
   const tally = new Map<string, number>()
   for (const r of top10) tally.set(r.domain, (tally.get(r.domain) ?? 0) + 1)
@@ -302,45 +309,31 @@ function estimateOne(
   return {
     keyword,
     location,
-    source: 'estimated',
-    position,
-    found,
-    isAiOverview,
+    source: 'preview',
+    // Everything below is what we genuinely know without a live provider: nothing.
+    position: null,
+    found: false,
+    isAiOverview: false,
     yourDomain: domain,
-    yourResult,
+    yourResult: null,
     features,
     top10,
     competitors,
-    totalResults: 100,
+    totalResults: 0,
   }
 }
 
 /**
- * Deterministic stand-in used when DataForSEO credentials are absent or the
- * live call fails. The UI labels this clearly — it is illustrative, not real.
+ * Single-keyword preview, used when no provider credentials are configured or a
+ * live call fails. Says nothing about the caller's real ranking — see the block
+ * comment above for why that matters.
  */
-export function estimateSerpResults(
-  domain: string,
-  keywords: string[],
-  location: string,
-  checkedAt: string,
-): SerpResponse {
-  return {
-    domain,
-    location,
-    source: 'estimated',
-    results: keywords.map((k) => estimateOne(domain, k, location)),
-    checkedAt,
-  }
-}
-
-/** Single-keyword estimate, used when one live call fails inside a larger run. */
-export function estimateSerpKeyword(
+export function previewSerpKeyword(
   domain: string,
   keyword: string,
   location: string,
 ): SerpKeywordResult {
-  return estimateOne(domain, keyword, location)
+  return previewOne(domain, keyword, location)
 }
 
 /* ------------------------------ UI helpers -------------------------------- */

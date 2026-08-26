@@ -31,6 +31,20 @@ const resourceLinks = [
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Service" },
 ];
+
+/**
+ * Free tools, linked site-wide so they appear in the served HTML of every page.
+ *
+ * Same reasoning as cityLinks below: the nav's Solutions dropdown only renders
+ * its items on hover, so a crawler never sees them. /tools/serp-checker had no
+ * crawlable internal link anywhere on the site despite being live and already
+ * earning impressions in Search Console.
+ */
+const toolLinks = [
+  { href: "/tools", label: "All Free SEO Tools" },
+  { href: "/tools/serp-checker", label: "SERP Checker" },
+  { href: "/tools/keyword-research", label: "AI Keyword Research" },
+];
  
 /* Each industry → its relevant service page (SEO-safe, no duplicate pages) */
 const industries = [
@@ -142,6 +156,21 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <h3 className="mb-4 mt-6 text-sm font-bold uppercase tracking-widest text-white">
+              Free Tools
+            </h3>
+            <ul className="space-y-2">
+              {toolLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}

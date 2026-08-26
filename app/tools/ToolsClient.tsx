@@ -30,42 +30,9 @@ import {
   type Faq,
 } from "@/components/layout";
 import { color, heading, radius, text } from "@/lib/design-tokens";
+import SolutionsCarousel from "@/components/SolutionsCarousel";
 
 const tools = [
-  {
-    id: "schema-generator",
-    icon: Code2,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
-    label: "Schema Markup Generator",
-    desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
-    tags: ["JSON-LD", "Rich Results", "Structured Data"],
-    // "soon", not "live". /tools/schema-generator returns 200 but the page is a
-    // stub that says "Coming soon." — the card was promising a working tool and
-    // "6 schema types" to anyone who clicked. Flip back once the page is built.
-    status: "soon",
-    href: "/tools/schema-generator",
-    stats: "6 schema types",
-  },
-  {
-    id: "serp-checker",
-    icon: Target,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
-    label: "SERP Checker",
-    desc: "Check where your site ranks on Google for any keyword — and see exactly who's ranking above you.",
-    tags: ["Rank Tracking", "SERP Analysis", "Competitors"],
-    // "soon", not "live", on purpose. The page at /tools/serp-checker is not
-    // deployed (404 in production), and until DATAFORSEO_LOGIN /
-    // DATAFORSEO_PASSWORD exist the API returns invented positions — see
-    // .env.example. Flip back to "live" only once
-    // `npx tsx scripts/verify-dataforseo.ts` passes AND the page is committed.
-    status: "soon",
-    href: "/tools/serp-checker",
-    stats: "Up to 5 keywords",
-  },
   {
     id: "keyword-research",
     icon: Sparkles,
@@ -82,6 +49,45 @@ const tools = [
     status: "live",
     href: "/tools/keyword-research",
     stats: "No signup",
+  },
+  {
+    id: "serp-checker",
+    icon: Target,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    label: "SERP Checker",
+    desc: "See which SERP features own a query and what the top 10 looks like. Live position tracking arrives when the data provider is connected.",
+    tags: ["Rank Tracking", "SERP Analysis", "Competitors"],
+    // "preview", not "soon" and not "live".
+    //
+    // "soon" was wrong: the page IS deployed (200 in production) and rendered a
+    // dead "Coming Soon" button, so the tool hub gave Google no crawlable link
+    // to a page that is already earning impressions.
+    //
+    // "live" would also be wrong: without DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD
+    // the API cannot read Google, so the page runs in preview mode and reports
+    // no position at all. Promote this to "live" once
+    // `npx tsx scripts/verify-dataforseo.ts` passes.
+    status: "preview",
+    href: "/tools/serp-checker",
+    stats: "Up to 5 keywords",
+  },
+  {
+    id: "schema-generator",
+    icon: Code2,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    label: "Schema Markup Generator",
+    desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
+    tags: ["JSON-LD", "Rich Results", "Structured Data"],
+    // "soon", not "live". /tools/schema-generator returns 200 but the page is a
+    // stub that says "Coming soon." — the card was promising a working tool and
+    // "6 schema types" to anyone who clicked. Flip back once the page is built.
+    status: "soon",
+    href: "/tools/schema-generator",
+    stats: "6 schema types",
   },
   {
     id: "serp-simulator",
@@ -268,6 +274,15 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         />
       </Section>
 
+      {/* ── SOLUTIONS ──
+          Moved here from the homepage. These six are products in their own
+          right (AI visibility, AI search, case calculator, intake assistant,
+          content suite, keyword data) and they complement the seven utilities
+          above rather than duplicating them. On the homepage they were a
+          seventh "here is another thing we do" section interrupting the sales
+          narrative; here they are what the visitor came for. */}
+      <SolutionsCarousel />
+
       {/* ── FAQ ── */}
       <Section tone="surface" width="reading">
         <SectionHeading variant="center" eyebrow="FAQ" title="Quick Answers" />
@@ -371,6 +386,19 @@ function StatusBadge({ status }: { status: string }) {
     );
   }
 
+  // Usable now, but not yet doing the headline job. Deliberately distinct from
+  // "Live" so the badge never overstates what the visitor is about to get.
+  if (status === "preview") {
+    return (
+      <span
+        className="flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold"
+        style={{ borderColor: "#f5d9a8", background: "#fdf6e8", color: "#8a5a0b" }}
+      >
+        Preview
+      </span>
+    );
+  }
+
   return (
     <span
       className="rounded-full border px-2.5 py-1 text-[10px] font-semibold"
@@ -399,6 +427,16 @@ function ToolAction({ status, href }: { status: string; href: string }) {
       >
         <Sparkles className="h-4 w-4" aria-hidden /> Get NicheSEO Pro
       </Link>
+    );
+  }
+
+  // A real, crawlable link — the whole point of the "preview" status. The wording
+  // sets the expectation the page then meets.
+  if (status === "preview") {
+    return (
+      <CtaButton href={href} compact className="w-full justify-center" icon={<ArrowRight className="h-4 w-4" aria-hidden />}>
+        Open Preview
+      </CtaButton>
     );
   }
 

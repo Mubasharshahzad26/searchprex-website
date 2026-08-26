@@ -108,7 +108,6 @@ export default function LawFirmStack() {
                         alt="Codeloci"
                         fill
                         className="object-contain object-left"
-                        unoptimized
                       />
                     </div>
                   </div>

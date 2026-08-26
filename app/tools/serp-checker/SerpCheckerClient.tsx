@@ -8,7 +8,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Search, Loader2, TriangleAlert, ChevronDown, X, Plus, ArrowRight,
-  BarChart3, Trophy, Sparkles, Globe, Database, ExternalLink, Target,
+  BarChart3, Trophy, Sparkles, Globe, Database, ExternalLink, Target, Lock,
 } from "lucide-react";
 import {
   MAX_KEYWORDS,
@@ -93,7 +93,19 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
     }
   }
 
-  const missing = data?.results.filter((r) => !r.found).length ?? 0;
+  const isPreview = data?.source === "preview";
+  // Only meaningful when we actually looked. In preview mode every result has
+  // found === false, which would have printed "5 of your keywords aren't in the
+  // top 100" — a claim the tool has no basis for making.
+  const missing = data && !isPreview ? data.results.filter((r) => !r.found).length : 0;
+
+  // Carries the visitor's work across to the audit form instead of making them
+  // retype it. See the useEffect in app/free-audit/FreeAuditClient.tsx.
+  const auditHref = data
+    ? `/free-audit?website=${encodeURIComponent(data.domain)}&keywords=${encodeURIComponent(
+        data.results.map((r) => r.keyword).join(", "),
+      )}`
+    : "/free-audit";
 
   return (
     <main className="bg-[#eeeef5] min-h-screen">
@@ -120,9 +132,14 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
             <span className="text-[#534AB7]">rank on Google?</span>
           </h1>
           <p className="text-[#64748b] text-lg max-w-2xl leading-relaxed mb-8">
-            Your own searches are personalised — they flatter you. This checks a clean SERP for
-            the country you pick and gives you the real position, the pages beating you, and the
-            SERP features in play.
+            Your own searches are personalised — they flatter you. Enter a domain and up to{" "}
+            {MAX_KEYWORDS} keywords to see which SERP features own each query and what the top 10
+            looks like in the country you pick. Live position tracking is in preview; for your real
+            numbers,{" "}
+            <Link href="/free-audit" className="font-semibold text-[#534AB7] underline underline-offset-2">
+              the founder checks them by hand, free, within 24 hours
+            </Link>
+            .
           </p>
 
           {/* Form */}
@@ -266,7 +283,33 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
               ))}
             </div>
 
-            {/* Conversion hook — matches the /tools mid-page CTA */}
+            {/* Conversion hook — matches the /tools mid-page CTA.
+                Preview mode gets its own version: the tool can't tell the visitor
+                where they rank, so the offer becomes "a human will". That is a
+                stronger promise than the automated number anyway. */}
+            {isPreview && (
+              <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border-2 border-[#AFA9EC] bg-white p-8 text-center">
+                <p className="text-xl font-black text-[#0a0f2e]">
+                  Want the real position for {data.domain}?
+                </p>
+                <p className="max-w-xl text-sm text-[#64748b]">
+                  Automated position tracking isn&apos;t switched on yet — but the founder will run
+                  {data.results.length === 1 ? " your keyword " : ` all ${data.results.length} of your keywords `}
+                  by hand and send back the actual numbers, who&apos;s outranking you, and a 90-day
+                  plan. Free, within 24 hours.
+                </p>
+                <Link href={auditHref}
+                  className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
+                  style={{ background: GREEN }}>
+                  <BarChart3 className="h-4 w-4" /> Get My Real Rankings
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <p className="text-xs text-[#94a3b8]">
+                  No credit card. Your domain and keywords carry over.
+                </p>
+              </div>
+            )}
+
             {missing > 0 && (
               <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-[#e5e7eb] bg-white p-8 text-center">
                 <p className="text-xl font-black text-[#0a0f2e]">
@@ -276,7 +319,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
                   A missing ranking is a symptom, not the problem. Get the founder to review the whole
                   picture — free, with a 90-day roadmap, within 24 hours.
                 </p>
-                <Link href="/free-audit"
+                <Link href={auditHref}
                   className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
                   style={{ background: GREEN }}>
                   <BarChart3 className="h-4 w-4" /> Get Free SEO Audit
@@ -287,6 +330,108 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
           </div>
         </section>
       )}
+
+      {/* ── How to read the results ──
+          The page was previously a form, a results area and an FAQ — nothing for
+          Google to rank when the visitor hasn't run a check yet, which is the
+          state every crawler and most first-time visitors see. These three
+          sections are the body copy that state was missing. */}
+      <section className="pb-4">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-2xl font-black text-[#0a0f2e]">How to read your results</h2>
+          <div className="space-y-4">
+            {[
+              {
+                n: "1",
+                t: "Your position is a range, not a fact",
+                d: "Google returns slightly different results by city, device and time of day. A keyword sitting at #8 today and #11 tomorrow hasn't moved in any meaningful sense — it's one position, wobbling. Treat anything inside ±3 as noise and watch the trend over weeks.",
+              },
+              {
+                n: "2",
+                t: "The URL that ranks matters more than the number",
+                d: "If Google is ranking your homepage for a service keyword, that's usually a content problem, not a rankings problem — you don't have a page that deserves the query yet. Building the right page often beats trying to push the wrong one up.",
+              },
+              {
+                n: "3",
+                t: "Position #1 isn't the top of the page any more",
+                d: "AI Overviews, featured snippets, local packs and People Also Ask boxes all sit above the first organic result. Ranking #1 underneath three SERP features can earn fewer clicks than ranking #4 on a clean results page. Read the features list before you celebrate the number.",
+              },
+              {
+                n: "4",
+                t: "Who's above you tells you what to build",
+                d: "If the top 10 is directories and listicles, you need a comparison page. If it's all local businesses, your Google Business Profile is the lever. If it's Reddit and forums, Google has decided this query wants opinion, not marketing copy.",
+              },
+            ].map((s) => (
+              <div key={s.n} className="flex gap-4 rounded-2xl border border-[#e5e7eb] bg-white p-5">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#EEEDFE] text-sm font-black text-[#534AB7]">
+                  {s.n}
+                </span>
+                <div>
+                  <h3 className="font-bold text-[#0a0f2e]">{s.t}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-[#475569]">{s.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERP feature glossary — reuses the hints already written for the chips ── */}
+      <section className="py-12">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-2 text-2xl font-black text-[#0a0f2e]">
+            What each SERP feature means
+          </h2>
+          <p className="mb-6 text-sm leading-relaxed text-[#64748b]">
+            A SERP feature is anything Google puts on the results page that isn&apos;t a plain blue
+            link. Each one takes clicks away from the organic results — and each one is its own
+            opportunity to appear.
+          </p>
+          <dl className="grid gap-3 sm:grid-cols-2">
+            {(Object.keys(SERP_FEATURE_META) as Array<keyof typeof SERP_FEATURE_META>).map((key) => {
+              const meta = SERP_FEATURE_META[key];
+              return (
+                <div key={key} className="rounded-2xl border border-[#e5e7eb] bg-white p-4">
+                  <dt>
+                    <span
+                      className="inline-block rounded-lg px-2.5 py-1 text-[11px] font-bold"
+                      style={{ background: meta.bg, color: meta.color }}
+                    >
+                      {meta.label}
+                    </span>
+                  </dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-[#475569]">{meta.hint}</dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+      </section>
+
+      {/* ── Why your own searches lie to you ── */}
+      <section className="pb-12">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-2xl font-black text-[#0a0f2e]">
+            Why your position looks different when you search
+          </h2>
+          <div className="space-y-3">
+            {[
+              ["Search history", "Google knows you've visited your own site hundreds of times. It ranks what you engage with higher — for you, and only for you."],
+              ["Location", "Results shift between countries, cities and even neighbourhoods. Checking from your office is checking one very specific SERP."],
+              ["Device and account", "Desktop and mobile return different results, and being signed in changes them again. An incognito window helps but does not fully strip personalisation."],
+            ].map(([t, d]) => (
+              <div key={t} className="rounded-2xl border border-[#e5e7eb] bg-white p-5">
+                <h3 className="font-bold text-[#0a0f2e]">{t}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-[#475569]">{d}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-sm leading-relaxed text-[#64748b]">
+            This is why an un-personalised check is the number worth tracking — and why the
+            position you see in your own browser is almost always flattering.
+          </p>
+        </div>
+      </section>
 
       {/* ── FAQ (matches FAQPage schema) ── */}
       <section className="pb-16">
@@ -338,7 +483,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
 
 /* ------------------------------- Sub-components ---------------------------- */
 
-function SourceBanner({ source }: { source: "dataforseo" | "estimated" }) {
+function SourceBanner({ source }: { source: "dataforseo" | "preview" }) {
   if (source === "dataforseo") {
     return (
       <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
@@ -347,21 +492,27 @@ function SourceBanner({ source }: { source: "dataforseo" | "estimated" }) {
       </div>
     );
   }
+  // Preview mode. This banner used to say "Sample data — these positions are
+  // illustrative", underneath a card that still printed a confident "#47" beside
+  // the visitor's own domain. The disclaimer never had a chance against the
+  // number. Now the card reports no position at all, and this explains why.
   return (
     <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900">
-      <TriangleAlert className="h-4 w-4 shrink-0 mt-0.5" />
-      {/* Written for visitors, not for us. This used to print "add
-          DATAFORSEO_LOGIN and DATAFORSEO_PASSWORD" — a developer instruction
-          shown to prospects on a public page. */}
+      <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
       <span>
-        <strong>Sample data</strong> — these positions are illustrative, not a live reading of
-        Google. Live rankings are coming shortly.
+        <strong>Preview mode.</strong> Live position tracking isn&apos;t switched on yet, so we
+        won&apos;t guess where you rank — the results below show what a SERP looks like and which
+        features are in play, with no position attached. Want your real numbers?{" "}
+        <Link href="/free-audit" className="font-bold underline underline-offset-2">
+          Get a founder-run check, free, within 24 hours.
+        </Link>
       </span>
     </div>
   );
 }
 
 function ResultCard({ result: r }: { result: SerpKeywordResult }) {
+  const isPreview = r.source === "preview";
   const band = positionBand(r.position);
 
   return (
@@ -376,15 +527,27 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
             <h3 className="mt-1 text-lg font-black text-[#0a0f2e] break-words">{r.keyword}</h3>
           </div>
           <div className="flex items-center gap-3">
-            <div className="text-right">
-              <p className="text-3xl font-black leading-none" style={{ color: band.color }}>
-                {r.position !== null ? `#${r.position}` : "—"}
-              </p>
-              <span className="mt-1.5 inline-block rounded-full px-2.5 py-1 text-[10px] font-bold"
-                style={{ background: band.bg, color: band.color }}>
-                {band.label}
-              </span>
-            </div>
+            {/* In preview mode there is no position to show. Printing "—" with a red
+                "Not in top 100" badge would be its own kind of lie: we haven't
+                looked, which is not the same as "you don't rank". */}
+            {isPreview ? (
+              <div className="text-right">
+                <Lock className="ml-auto h-6 w-6 text-[#94a3b8]" aria-hidden />
+                <span className="mt-1.5 inline-block rounded-full bg-[#f1f5f9] px-2.5 py-1 text-[10px] font-bold text-[#475569]">
+                  Not measured
+                </span>
+              </div>
+            ) : (
+              <div className="text-right">
+                <p className="text-3xl font-black leading-none" style={{ color: band.color }}>
+                  {r.position !== null ? `#${r.position}` : "—"}
+                </p>
+                <span className="mt-1.5 inline-block rounded-full px-2.5 py-1 text-[10px] font-bold"
+                  style={{ background: band.bg, color: band.color }}>
+                  {band.label}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -412,15 +575,27 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
 
         {!r.found && (
           <div className="mt-4 rounded-xl border border-[#e5e7eb] bg-[#f8f9fc] px-4 py-3 text-sm text-[#64748b]">
-            <strong className="text-[#0a0f2e]">{r.yourDomain}</strong> doesn&apos;t appear in the top 100
-            for this keyword in {r.location}.
+            {isPreview ? (
+              <>
+                We haven&apos;t checked where{" "}
+                <strong className="text-[#0a0f2e]">{r.yourDomain}</strong> ranks for this keyword —
+                that needs a live reading of Google, which isn&apos;t switched on yet.
+              </>
+            ) : (
+              <>
+                <strong className="text-[#0a0f2e]">{r.yourDomain}</strong> doesn&apos;t appear in the
+                top 100 for this keyword in {r.location}.
+              </>
+            )}
           </div>
         )}
 
         {/* SERP features */}
         {r.features.length > 0 && (
           <div className="mt-5">
-            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">SERP features</p>
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
+              {isPreview ? "SERP features to watch on this query type" : "SERP features"}
+            </p>
             <div className="flex flex-wrap gap-2">
               {r.features.map((f) => {
                 const meta = SERP_FEATURE_META[f];
@@ -440,7 +615,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
         {r.top10.length > 0 && (
           <div className="mt-6">
             <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
-              Top {r.top10.length} results
+              {isPreview ? `Example top ${r.top10.length} — layout only` : `Top ${r.top10.length} results`}
             </p>
             <ol className="space-y-1.5">
               {r.top10.map((item) => {
@@ -472,7 +647,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
         {r.competitors.length > 0 && (
           <div className="mt-6">
             <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
-              Domains owning this SERP
+              {isPreview ? "Example competitor set" : "Domains owning this SERP"}
             </p>
             <div className="flex flex-wrap gap-2">
               {r.competitors.map((c) => (

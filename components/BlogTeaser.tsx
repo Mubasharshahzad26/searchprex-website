@@ -3,80 +3,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Clock } from "lucide-react";
+import { posts as publishedPosts } from "@/app/blog/[slug]/posts";
  
-// ─── Avatar: apni site pe jo founder photo hai uska path daalo ───
-// Agar /public/mubashar.jpg hai → "/mubashar.jpg"
-// Agar /public/images/founder.jpg hai → "/images/founder.jpg"
-const AVATAR = "/mubashar.jpg"; // ← sirf yeh path apne hisaab se change karo
+// Founder avatar shown as the post author on every card.
+const AVATAR = "/images/mubashar-shahzad.jpg";
  
-const fallbackPosts = [
-  {
-    slug: "law-firm-seo-guide",
-    title: "The Complete Law Firm SEO Strategy Guide 2024",
-    excerpt: "Learn how to rank higher for legal keywords and attract high-intent clients through proven SEO tactics.",
-    category: "Technical SEO",
-    subcategory: "Law Firms",
-    featured: true,
-    author: { name: "Mubashar Shahzad", avatar: AVATAR },
-    readTime: "12 min read",
-    // ✅ Verified working — law books & gavel
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop",
-  },
-  {
-    slug: "ecommerce-seo-shopify",
-    title: "Shopify SEO: Complete Technical Setup Guide",
-    excerpt: "Fix technical issues, improve crawlability, and boost organic visibility for your Shopify store.",
-    category: "E-commerce SEO",
-    subcategory: "Shopify",
-    featured: false,
-    author: { name: "Mubashar Shahzad", avatar: AVATAR },
-    readTime: "8 min read",
-    // ✅ Verified working — online shopping / ecommerce
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80&auto=format&fit=crop",
-  },
-  {
-    slug: "local-seo-rankings",
-    title: "Local SEO Ranking Factors: Get Ahead of Competition",
-    excerpt: "Master Google Business Profile optimization and local citation strategies to dominate local search.",
-    category: "Local SEO",
-    subcategory: "Local Business",
-    featured: false,
-    author: { name: "Mubashar Shahzad", avatar: AVATAR },
-    readTime: "10 min read",
-    // ✅ Verified working — local storefront / map pins
-    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80&auto=format&fit=crop",
-  },
-  {
-    slug: "technical-seo-core-web-vitals",
-    title: "Core Web Vitals: The Technical SEO Checklist",
-    excerpt: "Optimize page speed, layout stability, and interactivity to improve rankings and user experience.",
-    category: "Technical SEO",
-    subcategory: "Performance",
-    featured: false,
-    author: { name: "Mubashar Shahzad", avatar: AVATAR },
-    readTime: "15 min read",
-    // ✅ Verified working — analytics dashboard
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop",
-  },
-  {
-    slug: "link-building-strategy",
-    title: "Link Building for SEO: Authority & Relevance Strategy",
-    excerpt: "Build high-quality backlinks that actually move the needle for your rankings and domain authority.",
-    category: "Link Building",
-    subcategory: "Off-Page",
-    featured: false,
-    author: { name: "Mubashar Shahzad", avatar: AVATAR },
-    readTime: "11 min read",
-    // ✅ Verified working — network / connections
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
-  },
-];
+// Render ONLY posts that actually exist in app/blog/[slug]/posts.ts. That file
+// is the source of truth — app/blog/[slug]/page.tsx calls notFound() for
+// anything missing from it, so a hardcoded list here silently ships 404s.
+const teaserPosts = publishedPosts.slice(0, 5).map((p) => ({
+  slug:        p.slug,
+  title:       p.title,
+  excerpt:     p.excerpt,
+  category:    p.category,
+  subcategory: p.subcategory,
+  readTime:    p.readTime,
+  image:       p.heroImage,
+  author:      { name: p.author.name, avatar: AVATAR },
+}));
  
 export default function BlogTeaser() {
-  const posts = fallbackPosts;
+  const posts = teaserPosts;
   if (!posts || posts.length === 0) return null;
  
-  const featured = posts.find((p) => p.featured) ?? posts[0];
+  const featured = posts[0];
   const compact = posts.filter((p) => p.slug !== featured.slug).slice(0, 4);
  
   return (
@@ -103,7 +53,6 @@ export default function BlogTeaser() {
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 300px"
-                unoptimized
               />
               <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">
                 {featured.category}
@@ -111,13 +60,13 @@ export default function BlogTeaser() {
             </div>
  
             <div className="flex flex-1 flex-col p-7">
-              <p className="mb-3 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+              <p className="mb-3 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#6b7280]">
                 {featured.subcategory} <ChevronRight className="h-3 w-3" />
               </p>
               <h3 className="mb-4 text-xl font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
                 {featured.title}
               </h3>
-              <p className="mb-6 text-sm leading-relaxed text-[#64748b]">
+              <p className="mb-6 text-sm leading-relaxed text-[#566070]">
                 {featured.excerpt}
               </p>
               <div className="mt-auto flex items-center justify-between border-t border-[#e5e7eb] pt-5">
@@ -128,13 +77,12 @@ export default function BlogTeaser() {
                     width={28}
                     height={28}
                     className="rounded-full object-cover w-7 h-7"
-                    unoptimized
                   />
                   <span className="text-xs font-semibold text-[#0a0f2e]">
                     {featured.author.name}
                   </span>
                 </div>
-                <span className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-[#94a3b8]">
+                <span className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-[#6b7280]">
                   <Clock className="h-3.5 w-3.5" /> {featured.readTime}
                 </span>
               </div>
@@ -142,7 +90,7 @@ export default function BlogTeaser() {
           </Link>
  
           {/* Compact Cards — 2×2 */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:row-span-2 lg:auto-rows-fr">
             {compact.map((p) => (
               <Link
                 key={p.slug}
@@ -156,7 +104,6 @@ export default function BlogTeaser() {
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 250px"
-                    unoptimized
                   />
                   <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#534AB7]">
                     {p.category}
@@ -164,7 +111,7 @@ export default function BlogTeaser() {
                 </div>
  
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-2 flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">
+                  <p className="mb-2 flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#6b7280]">
                     {p.subcategory} <ChevronRight className="h-2.5 w-2.5" />
                   </p>
                   <h3 className="mb-4 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
@@ -177,7 +124,6 @@ export default function BlogTeaser() {
                       width={24}
                       height={24}
                       className="rounded-full object-cover w-6 h-6"
-                      unoptimized
                     />
                     <span className="text-xs font-semibold text-[#0a0f2e]">
                       {p.author.name}

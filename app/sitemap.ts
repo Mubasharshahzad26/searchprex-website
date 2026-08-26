@@ -50,9 +50,10 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/resources/news", priority: 0.6, changeFrequency: "weekly" },
   { path: "/tools", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tools/schema-generator", priority: 0.6, changeFrequency: "monthly" },
-  // /tools/serp-checker is deliberately absent: the page directory was never
-  // committed, so it 404s in production. Listing a 404 in the sitemap is an
-  // error in Search Console. Re-add it the same day the page ships.
+  // The page shipped — it is committed and returns 200. The note that used to
+  // sit here ("the directory was never committed, so it 404s") outlived the
+  // problem it described, and kept a live, indexable page out of the sitemap.
+  { path: "/tools/serp-checker", priority: 0.8, changeFrequency: "weekly" },
   { path: "/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
   { path: "/case-calculator", priority: 0.7, changeFrequency: "monthly" },
   { path: "/law-firm-scorecard", priority: 0.7, changeFrequency: "monthly" },

@@ -38,8 +38,14 @@ const REVIEWS = [
   },
 ];
  
-// Aggregate figures — keep these synced with the live Trustpilot profile
-const AGGREGATE_RATING = 3.8;
+// Number of reviews shown below. Deliberately derived, never hardcoded.
+//
+// There is no AGGREGATE_RATING constant any more. The old one claimed 3.8 out
+// of 5 while the two reviews rendered directly beneath it were both rated 5 —
+// visibly contradictory, and 3.8 is below the level where showing an average
+// helps rather than hurts. If you want to display an average again, read the
+// real number off the live Trustpilot profile and keep it in sync with
+// lib/trustpilot-review-schema.tsx.
 const AGGREGATE_COUNT = REVIEWS.length;
  
 // Trustpilot Green Checkmark SVG Badge
@@ -50,7 +56,7 @@ const TrustpilotBadge = () => (
       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor" />
     </svg>
     <span className="text-xs font-bold text-[#0a0f2e]">Verified on Trustpilot</span>
-    <ExternalLink className="h-3 w-3 text-[#64748b]" />
+    <ExternalLink className="h-3 w-3 text-[#566070]" />
   </div>
 );
  
@@ -69,13 +75,20 @@ export default function TrustpilotReviewSection() {
   const next = () => goTo(index + 1);
   const prev = () => goTo(index - 1);
  
-  // Auto-rotate every 7s, pauses are unnecessary for a 2-item slider but
-  // this scales cleanly if more reviews get added later.
+  // Auto-rotate, pausable. WCAG 2.2.2 requires a pause mechanism for content
+  // that auto-moves for more than five seconds; there was none. Stops on
+  // hover, on keyboard focus, and under prefers-reduced-motion.
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    if (total <= 1) return;
-    const t = setInterval(next, 7000);
+    if (total <= 1 || paused) return;
+    if (typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => {
+      setDirection(1);
+      setIndex((i) => (i + 1) % total);
+    }, 7000);
     return () => clearInterval(t);
-  }, [index]);
+  }, [total, paused]);
  
   const variants = {
     enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 40 : -40 }),
@@ -84,7 +97,13 @@ export default function TrustpilotReviewSection() {
   };
  
   return (
-    <section className="bg-white py-20 border-t border-[#e2e8f0]">
+    <section
+      className="bg-white py-20 border-t border-[#e2e8f0]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* ── Header ── */}
         <motion.div
@@ -106,8 +125,9 @@ export default function TrustpilotReviewSection() {
           >
             Real Client Results
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-base text-[#64748b]">
-            {AGGREGATE_RATING} out of 5 · {AGGREGATE_COUNT} verified reviews on Trustpilot
+          <motion.p variants={fadeUp} className="text-base text-[#566070]">
+            {AGGREGATE_COUNT} verified {AGGREGATE_COUNT === 1 ? "review" : "reviews"} from real
+            clients — published on Trustpilot, not on this site
           </motion.p>
         </motion.div>
  
@@ -127,7 +147,7 @@ export default function TrustpilotReviewSection() {
  
             {/* Slide position indicator */}
             {total > 1 && (
-              <span className="text-xs font-semibold text-[#64748b]">
+              <span className="text-xs font-semibold text-[#566070]">
                 {index + 1} / {total}
               </span>
             )}
@@ -174,8 +194,8 @@ export default function TrustpilotReviewSection() {
                   </div>
                   <div>
                     <p className="font-bold text-[#0a0f2e]">{review.author}</p>
-                    <p className="text-sm text-[#64748b]">{review.role}</p>
-                    <p className="mt-1 text-xs font-medium text-[#16a34a]">
+                    <p className="text-sm text-[#566070]">{review.role}</p>
+                    <p className="mt-1 text-xs font-medium text-[#196b4d]">
                       ✓ Verified on Trustpilot • {review.date}
                     </p>
                   </div>

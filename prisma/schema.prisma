@@ -426,3 +426,31 @@ model MarketingResource {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+// --- NEW AI SDR MODELS --- //
+
+model AiSdrLead {
+  id              String   @id @default(cuid())
+  websiteUrl      String   @unique
+  companyName     String?
+  niche           String?
+  location        String?
+  contactEmail    String?
+  score           Int?
+  analysis        String?  @db.Text
+  status          String   @default("new") // new, qualified, emailed, responded, rejected
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  emailLogs       AiSdrEmailLog[]
+}
+
+model AiSdrEmailLog {
+  id              String   @id @default(cuid())
+  leadId          String
+  lead            AiSdrLead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  subject         String
+  body            String   @db.Text
+  sentAt          DateTime @default(now())
+  status          String   @default("sent") // sent, bounced, opened, replied
+}

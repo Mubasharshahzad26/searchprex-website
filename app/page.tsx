@@ -3,26 +3,24 @@ import type { Metadata } from "next";
 // Homepage section components (root /components folder)
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
+import ProofStrip from "../components/ProofStrip";
 import TrustBar from "../components/TrustBar";
 import SEOAuditStrip from "../components/SEOAuditStrip";
 import LeadWizard from "../components/LeadWizard";
+import Process from "../components/Process";
+import Pricing from "../components/Pricing";
+import StickyMobileCTA from "../components/StickyMobileCTA";
 import Services from "../components/Services";
-import LawFirmStack from "../components/LawFirmStack";
 import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
-import VideoSection from "../components/VideoSection";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
-import SolutionsCarousel from "../components/SolutionsCarousel";
 import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
 import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";
 import FounderSection from "../components/FounderSection";
-import LeadCaptureForm from "../components/LeadCaptureForm";
 import FAQ from "../components/FAQ";
 import BlogTeaser from "../components/BlogTeaser";
 import Reveal from "@/components/Reveal";
-import dynamic from "next/dynamic";
-
-const ChatWidget = dynamic(() => import("../components/ChatWidget"), { ssr: false });
+import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
@@ -95,13 +93,11 @@ export default async function Home() {
           "https://www.linkedin.com/company/searchprex/",
           "https://www.youtube.com/@SearchPrex"
         ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "3.8",
-          "reviewCount": "1",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
+        // NOTE: no aggregateRating here on purpose. Google's review-snippet
+        // guidelines disallow self-serving aggregate ratings on your own
+        // Organization, and the value that used to sit here (3.8 from 1
+        // review) contradicted both the Trustpilot section and the individual
+        // Review nodes. The real reviews live in trustpilotReviewSchema below.
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "SEO Services",
@@ -227,34 +223,55 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="main-content">
+        {/* Claim -> proof -> offer, alternating. Never three of the same kind
+            in a row, and nothing links off-site before the form.
+            Moved off this page in Phase 2:
+              LawFirmStack     -> /services/law-firm-seo (1 of 3 personas, and
+                                  it sent visitors to codeloci.com mid-funnel)
+              SolutionsCarousel -> /tools (six more "things we do", after three
+                                  proof sections had already run long) */}
         <Hero />
         <Reveal><ClientLogos /></Reveal>
         <Reveal><TrustBar /></Reveal>
+
+        {/* The three verified numbers, one scroll in. These were buried in the
+            middle of Results, roughly four screens down. */}
+        <Reveal><ProofStrip /></Reveal>
+
         <SEOAuditStrip />
 
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>
-  
         </AuroraBackground>
 
-    
-        <LeadWizard />
-        <Reveal><Results /></Reveal>
-        <Reveal><VideoSection /></Reveal>
-        <Reveal><FounderSection /></Reveal>
-        <AIVisibilityShowcase />
-        <LawFirmStack />   {/* ← Complete stack after AI positioning */}
+        {/* "What happens after you hit send" — the offer is explained before
+            it is evidenced. The lead form used to sit here, at ~35% scroll,
+            asking for an email before any proof had been shown. */}
+        <Reveal><Process /></Reveal>
 
-        <SolutionsCarousel />
+        {/* Results and the GSC recordings that back them, merged into one
+            section. They used to be two consecutive proof blocks. */}
+        <Reveal><Results /></Reveal>
+
+        <Reveal><FounderSection /></Reveal>
         <TrustpilotReviewSection />
 
-        
-        <Reveal><LeadCaptureForm /></Reveal>
+        <AIVisibilityShowcase />
+
+        {/* Price bands before the ask. These ranges already existed, buried
+            as item 5 of 8 in the FAQ — published pricing is one of the
+            strongest lead-qualifiers an agency has. */}
+        <Reveal><Pricing /></Reveal>
+
+        {/* THE lead form. One of them. */}
+        <LeadWizard />
+
         <Reveal><FAQ /></Reveal>
         <Reveal><BlogTeaser /></Reveal>
       </main>
 
-      <ChatWidget />
+      <StickyMobileCTA />
+      <ChatWidgetLazy />
     </>
   );
 }

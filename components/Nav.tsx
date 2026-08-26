@@ -71,7 +71,10 @@ const navLinks: NavLink[] = [
     label: "Solutions",
     hasDropdown: true,
     dropdownItems: [
-      { href: "http://localhost:3005",      label: "LexisIntake AI (Free App)", badge: "Free" },
+      // Was http://localhost:3005 — a developer machine address shipped to
+      // production, so the entry was dead for every real visitor. /intake-assistant
+      // is the deployed page for the same product.
+      { href: "/intake-assistant",      label: "AI Intake Assistant", badge: "Free" },
       { href: "/case-calculator",       label: "Lost Case Calculator" },
       { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
       { href: "/ai-search",             label: "AI Search" },
@@ -266,7 +269,7 @@ export default function Nav() {
                     50%     { opacity:1; transform:scale(1.35); }
                   }
                 `}</style>
-                Get My Growth Plan
+                Get My Free Audit
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
                   <path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

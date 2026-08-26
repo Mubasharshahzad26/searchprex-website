@@ -10,22 +10,39 @@ import SerpCheckerClient from "./SerpCheckerClient";
 import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
 
+// These are rendered on the page AND emitted as FAQPage schema, so they have to
+// describe the tool as it actually behaves right now. The previous set opened
+// with "It pulls the live Google results page for your keyword" — untrue while
+// the tool runs in preview mode, and untrue in structured data is a worse
+// problem than untrue in body copy.
 export const SERP_FAQS = [
   {
-    q: "How does the SERP checker find my ranking?",
-    a: "It pulls the live Google results page for your keyword and location, then scans the top 100 organic positions for your domain — subdomains included. You get the exact position, the URL that ranks, and the competitors sitting above you.",
+    q: "Is the SERP Checker live yet?",
+    a: "It runs in preview mode today. That means it shows you which SERP features are in play for a query and what a top-10 layout looks like, but it will not tell you your position — because it cannot measure it yet. Live position tracking switches on once the data provider is connected. Until then, the founder will check your keywords by hand and send you the real numbers free within 24 hours.",
+  },
+  {
+    q: "Why won't the tool just estimate my ranking?",
+    a: "Because an estimate dressed up as a position is worse than no answer. An invented '#47' next to your domain looks exactly like a real measurement, and you would make decisions on it. When we don't know, the tool says so.",
+  },
+  {
+    q: "How will the SERP checker find my ranking once it's live?",
+    a: "It pulls the Google results page for your keyword and location, then scans the top 100 organic positions for your domain — subdomains included. You get the exact position, the URL that ranks, and the competitors sitting above you.",
   },
   {
     q: "Why does my position differ from what I see in Google?",
-    a: "Your own searches are personalised by location, search history and device, and they often show your site higher than it really ranks. This tool checks a clean, un-personalised SERP for the country you pick, which is why it's the number worth tracking.",
+    a: "Your own searches are personalised by location, search history and device, and they often show your site higher than it really ranks. A clean, un-personalised check for the country you pick is the number worth tracking.",
+  },
+  {
+    q: "What is a SERP feature?",
+    a: "Anything on a Google results page that isn't a plain blue link — AI Overviews, featured snippets, People Also Ask boxes, local packs, image rows, top stories, shopping listings and knowledge panels. They push organic results down the page, so ranking #1 beneath three of them can earn fewer clicks than ranking #4 on a clean SERP.",
   },
   {
     q: "What does the AI Overview row mean?",
-    a: "Google increasingly answers queries with an AI Overview above the classic results. When your domain is cited there, it matters more than position #1 — so the tool flags it separately from your organic rank.",
+    a: "Google increasingly answers queries with an AI Overview above the classic results. When your domain is cited there it matters more than position #1, so the tool flags it separately from your organic rank.",
   },
   {
     q: "Is it really free, and is there a limit?",
-    a: "Free, no signup and no email gate. You can check up to 5 keywords per run, rate-limited to a few runs per minute so the tool stays fast for everyone. For continuous tracking across hundreds of keywords, that's what NicheSEO Pro is for.",
+    a: "Free, no signup and no email gate. You can check up to 5 keywords per run. For continuous tracking across hundreds of keywords, that's what NicheSEO Pro is for.",
   },
 ];
 
@@ -33,13 +50,16 @@ const baseMetadata: Metadata = {
   // No "| SearchPrex" suffix here — app/layout.tsx applies
   // title.template = "%s | SearchPrex" and would double it.
   title: "Free SERP Checker — Check Your Google Ranking Position",
+  // Describes what a visitor actually gets today. Promising "your exact position
+  // in the top 100" while the tool runs in preview mode buys a click and loses
+  // the trust it was bought with.
   description:
-    "Check where your site ranks on Google for any keyword, in any country. See your exact position in the top 100, who outranks you, and which SERP features (AI Overview, local pack, PAA) are in play. Free, no signup.",
+    "See which SERP features (AI Overview, local pack, People Also Ask) own any Google query and what the top 10 looks like. Free, no signup — plus a founder-run check of your real ranking within 24 hours.",
   alternates: { canonical: `${SITE}/tools/serp-checker` },
   openGraph: {
     title: "Free SERP Checker — Check Your Google Ranking Position | SearchPrex",
     description:
-      "See your exact Google position for any keyword, who outranks you, and which SERP features are in play. Free, no signup.",
+      "See which SERP features own any Google query, what the top 10 looks like, and get your real ranking checked free within 24 hours.",
     url: `${SITE}/tools/serp-checker`,
     type: "website",
   },
@@ -68,7 +88,7 @@ export default function Page() {
     name: "SERP Checker",
     url: `${SITE}/tools/serp-checker`,
     description:
-      "Check your Google ranking position for any keyword and country. Shows your position in the top 100, the competing URLs above you, and the SERP features present.",
+      "Check which SERP features are in play for any keyword and country, and what the top 10 looks like. Live position tracking in preview.",
     applicationCategory: "SEO Tool",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

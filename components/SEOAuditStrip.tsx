@@ -1,15 +1,9 @@
 "use client";
  
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  motion,
-  useInView,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useMotionTemplate,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Search, MapPin, Scale, ShoppingCart, Bot, Calculator, Check } from "lucide-react";
  
 /* ─── gradient orb ─── */
@@ -109,26 +103,6 @@ export default function SEOAuditStrip() {
       c.code.toLowerCase().includes(countrySearch.toLowerCase())
   );
  
-  /* mouse-tracking spotlight */
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
-  const xPct = useTransform(springX, (v) => v * 100);
-  const yPct = useTransform(springY, (v) => v * 100);
-  const spotlight = useMotionTemplate`radial-gradient(ellipse 60% 50% at ${xPct}% ${yPct}%, rgba(83,74,183,0.18) 0%, transparent 70%)`;
- 
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const move = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      mouseX.set((e.clientX - rect.left) / rect.width);
-      mouseY.set((e.clientY - rect.top) / rect.height);
-    };
-    el.addEventListener("mousemove", move);
-    return () => el.removeEventListener("mousemove", move);
-  }, [mouseX, mouseY]);
  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,14 +118,9 @@ export default function SEOAuditStrip() {
       className="relative"
       style={{
         background: "linear-gradient(135deg, #e8eaf6 0%, #d4f5e9 55%, #e0e8ff 100%)",
-        padding: "96px 24px",
+        padding: "56px 24px",
       }}
     >
-      {/* mouse-reactive spotlight */}
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: spotlight }}
-      />
       <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
         <Orb cx="20%" cy="30%" r="260" color="#534AB7" />
         <Orb cx="80%" cy="70%" r="220" color="#3eb489" />
@@ -166,7 +135,7 @@ export default function SEOAuditStrip() {
           initial={{ opacity: 0, y: -12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-4 py-1.5 text-xs font-semibold text-[#534AB7] shadow-sm backdrop-blur-sm"
+          className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-4 py-1.5 text-xs font-semibold text-[#534AB7] shadow-sm backdrop-blur-sm"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" />
           Free AI Visibility Check
@@ -177,16 +146,13 @@ export default function SEOAuditStrip() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
-          className="mb-6 text-5xl font-black leading-[1.08] tracking-tight text-[#0a0f2e] sm:text-6xl lg:text-7xl"
+          // Capped below the hero h1 (60px). This was text-7xl — 72px — which
+          // made the section under the hero the largest type on the page, so
+          // the eye landed here instead of on the headline. Phase 2 compresses
+          // this whole section into a slim bar; this is the hierarchy fix.
+          className="mb-6 text-3xl font-black leading-[1.12] tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl"
         >
-          See where you rank.
-          <br />
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "linear-gradient(90deg, #534AB7 0%, #3eb489 100%)" }}
-          >
-            Win more clients.
-          </span>
+          See where you rank in AI search.
         </motion.h2>
  
         {/* sub */}
@@ -194,10 +160,10 @@ export default function SEOAuditStrip() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-[#475569]"
+          className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-[#475569]"
         >
-          The founder-led SEO platform that turns search visibility into signed
-          clients, recovered carts, and booked appointments.
+          Check whether ChatGPT, Perplexity and Google&apos;s AI Overviews mention you —
+          free, no signup.
         </motion.p>
  
         {/* URL input */}
@@ -214,7 +180,7 @@ export default function SEOAuditStrip() {
         >
           {/* domain icon */}
           <span className="pl-5">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="1.8">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="1.8">
               <circle cx="12" cy="12" r="10" />
               <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
             </svg>
@@ -227,18 +193,28 @@ export default function SEOAuditStrip() {
             onChange={(e) => setUrl(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            className="flex-1 bg-transparent py-4 pl-3 pr-2 text-sm text-[#0a0f2e] outline-none placeholder:text-[#94a3b8]"
+            className="flex-1 bg-transparent py-4 pl-3 pr-2 text-sm text-[#0a0f2e] outline-none placeholder:text-[#6b7280]"
           />
  
           {/* ─── country selector ─── */}
           <div ref={countryRef} className="relative">
             <button
               type="button"
+              aria-haspopup="listbox"
+              aria-expanded={countryOpen}
+              aria-label={`Search country: ${selectedCountry.name}. Change`}
               onClick={() => {
                 setCountryOpen((prev) => !prev);
                 setCountrySearch("");
               }}
-              className="flex items-center gap-1.5 border-l border-[#e5e7eb] px-4 py-4 text-sm font-medium text-[#374151] hover:bg-gray-50 transition-colors cursor-pointer select-none"
+              onKeyDown={(e) => {
+                if (e.key === "Escape" && countryOpen) {
+                  e.preventDefault();
+                  setCountryOpen(false);
+                  setCountrySearch("");
+                }
+              }}
+              className="flex items-center gap-1.5 border-l border-[#e5e7eb] px-4 py-4 text-sm font-medium text-[#374151] transition-colors hover:bg-gray-50 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#534AB7]"
               style={{ borderRadius: 0 }}
             >
               <span>{selectedCountry.flag}</span>
@@ -248,7 +224,7 @@ export default function SEOAuditStrip() {
                 height="10"
                 viewBox="0 0 10 10"
                 fill="none"
-                stroke="#94a3b8"
+                stroke="#6b7280"
                 strokeWidth="1.5"
                 style={{
                   transform: countryOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -268,7 +244,7 @@ export default function SEOAuditStrip() {
                 {/* search */}
                 <div className="border-b border-[#f1f5f9] p-2">
                   <div className="flex items-center gap-2 rounded-lg bg-[#f8fafc] px-3 py-2">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2">
                       <circle cx="11" cy="11" r="8" />
                       <path d="M21 21l-4.35-4.35" />
                     </svg>
@@ -278,16 +254,23 @@ export default function SEOAuditStrip() {
                       placeholder="Enter country"
                       value={countrySearch}
                       onChange={(e) => setCountrySearch(e.target.value)}
-                      className="flex-1 bg-transparent text-sm text-[#0a0f2e] outline-none placeholder:text-[#94a3b8]"
+                      onKeyDown={(e) => {
+                        if (e.key === "Escape") {
+                          e.preventDefault();
+                          setCountryOpen(false);
+                          setCountrySearch("");
+                        }
+                      }}
+                      className="flex-1 bg-transparent text-sm text-[#0a0f2e] outline-none placeholder:text-[#6b7280]"
                     />
                   </div>
                 </div>
  
                 {/* list */}
-                <ul className="max-h-52 overflow-y-auto py-1">
+                <ul role="listbox" aria-label="Country" className="max-h-52 overflow-y-auto py-1">
                   {filteredCountries.length > 0 ? (
                     filteredCountries.map((country) => (
-                      <li key={country.code}>
+                      <li key={country.code} role="option" aria-selected={selectedCountry.code === country.code}>
                         <button
                           type="button"
                           onClick={() => {
@@ -306,7 +289,7 @@ export default function SEOAuditStrip() {
                       </li>
                     ))
                   ) : (
-                    <li className="px-4 py-3 text-center text-sm text-[#94a3b8]">
+                    <li className="px-4 py-3 text-center text-sm text-[#6b7280]">
                       No countries found
                     </li>
                   )}
@@ -319,7 +302,7 @@ export default function SEOAuditStrip() {
           <button
             type="submit"
             className="m-1.5 flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-px hover:shadow-lg"
-            style={{ background: "linear-gradient(135deg, #534AB7 0%, #3eb489 100%)" }}
+            style={{ background: "linear-gradient(135deg, #534AB7 0%, #1a7d59 100%)" }}
           >
             Get Insights
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -333,32 +316,35 @@ export default function SEOAuditStrip() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6 }}
-          className="mt-4 text-xs text-[#64748b]"
+          className="mt-4 text-xs text-[#566070]"
         >
           Free · No credit card · Results in 30 seconds
         </motion.p>
  
-        {/* social proof avatars */}
+        {/* social proof — real, named clients only.
+            This used to be four coloured circles reading JD / SM / RK / AL:
+            placeholder initials for people who do not exist, sitting next to
+            an unverifiable "20+ firms this month". Fabricated proof next to
+            real proof discredits the real proof, so it is gone. These names
+            are all clients listed elsewhere on the site with case studies. */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.7 }}
-          className="mt-6 flex items-center justify-center gap-3"
+          className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
         >
-          <div className="flex -space-x-2">
-            {["#534AB7", "#3eb489", "#d97706", "#ef4444"].map((c, i) => (
-              <div
-                key={i}
-                className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-xs font-bold text-white"
-                style={{ background: c }}
-              >
-                {["JD", "SM", "RK", "AL"][i]}
-              </div>
-            ))}
-          </div>
-          <span className="text-sm font-medium text-[#475569]">
-            Joined by <span className="font-bold text-[#0a0f2e]">20+ firms</span> this month
-          </span>
+          <span className="text-sm font-medium text-[#475569]">Trusted by</span>
+          {["SMK Store", "Michigan Outdoor Sports", "HVAC Services Team"].map((name) => (
+            <span
+              key={name}
+              className="rounded-full border border-white/70 bg-white/70 px-3 py-1 text-xs font-bold text-[#0a0f2e] backdrop-blur-sm"
+            >
+              {name}
+            </span>
+          ))}
+          <Link href="/all-case-studies" className="text-sm font-bold text-[#534AB7] hover:underline">
+            + see the results →
+          </Link>
         </motion.div>
       </div>
  
@@ -367,7 +353,7 @@ export default function SEOAuditStrip() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8, duration: 0.5 }}
-        className="relative z-10 mx-auto mt-16 flex max-w-4xl flex-wrap justify-center gap-3"
+        className="relative z-10 mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3"
       >
         {PILLS.map((pill, i) => {
           const Icon = pill.icon;

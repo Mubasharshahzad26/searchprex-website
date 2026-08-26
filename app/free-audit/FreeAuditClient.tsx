@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
  
@@ -11,7 +11,24 @@ export default function FreeAuditClient() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", website: "", business: "" });
- 
+  const [fromTool, setFromTool] = useState<string | null>(null);
+
+  // Prefill the domain when the visitor arrives from a tool (currently the SERP
+  // Checker's preview mode, which sends ?website=). Read from window rather than
+  // useSearchParams so this client component doesn't need a Suspense boundary.
+  //
+  // Only `website` is carried across: /api/send-audit destructures exactly
+  // name/email/website/business into the Supabase `audit_requests` row, so the
+  // keywords the visitor typed have nowhere to land until that table gains a
+  // column. They're shown back to them below instead of being silently dropped.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const website = params.get("website");
+    const keywords = params.get("keywords");
+    if (website) setForm((f) => ({ ...f, website }));
+    if (keywords) setFromTool(keywords);
+  }, []);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -48,7 +65,15 @@ export default function FreeAuditClient() {
             Real audit by the founder — not a tool report. 24hr turnaround guaranteed.
           </p>
         </div>
- 
+
+        {fromTool && (
+          <div className="mb-6 rounded-xl border border-[#e5e7eb] bg-white px-4 py-3 text-sm text-[#64748b]">
+            <span className="font-semibold text-[#0a0f2e]">From the SERP Checker:</span>{" "}
+            we&apos;ll include your live position for{" "}
+            <span className="font-semibold text-[#0a0f2e]">{fromTool}</span> in the audit.
+          </div>
+        )}
+
         {!submitted ? (
           <div className="bg-white border border-[#e5e7eb] rounded-2xl p-8 shadow-sm">
             <form onSubmit={handleSubmit} className="space-y-4">

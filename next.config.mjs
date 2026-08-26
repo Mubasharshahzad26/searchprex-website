@@ -17,19 +17,22 @@ const nextConfig = {
   },
 
   images: {
-    // ⚠️ PERF: image optimization is currently DISABLED (no lazy-resize, no WebP).
-    //    This is the single biggest LCP/Core-Web-Vitals win once enabled.
-    //    To ENABLE: delete the line below and uncomment `remotePatterns`.
-    //    IMPORTANT: list EVERY external image domain you use, or those images
-    //    will throw a 500. Test locally (npm run dev) right after switching.
-    unoptimized: true,
+    // Image optimization is ON. It was previously disabled site-wide
+    // (`unoptimized: true`), which meant every next/image served the original
+    // file at its original size — no WebP/AVIF, no responsive variants. The
+    // founder photo alone was a 1.5 MB JPG rendered at 80x80.
+    //
+    // Every external image host must be listed here or those images 500.
+    // Verified against the codebase — these are the only hosts used as an
+    // image src (maps.google.com is an iframe, static.semrush.com is PDFs).
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.sanity.io' },        // Sanity CMS images
+      { protocol: 'https', hostname: 'img.youtube.com' },      // YouTube thumbnails
+      { protocol: 'https', hostname: 'i.ytimg.com' },          // YouTube thumbnails (alt)
+      { protocol: 'https', hostname: 'images.unsplash.com' },  // blog hero images
+    ],
 
-    // remotePatterns: [
-    //   { protocol: 'https', hostname: 'cdn.sanity.io' },   // Sanity CMS images
-    //   { protocol: 'https', hostname: 'img.youtube.com' }, // YouTube thumbnails
-    //   { protocol: 'https', hostname: 'i.ytimg.com' },     // YouTube thumbnails (alt)
-    //   // add any other external image host you use here...
-    // ],
+    formats: ['image/avif', 'image/webp'],
   },
 
   async redirects() {

@@ -46,13 +46,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/tools", baseMetadata);
 }
  
+// Only URLs that actually resolve belong here. This list previously advertised
+// /tools/serp-simulator, /tools/meta-tag-analyzer, /tools/robots-txt-tester and
+// /tools/keyword-difficulty — all four return 404. Structured data pointing at
+// missing pages is a Search Console error, and it was the main way Google was
+// discovering this section, so the bad entries cost real crawl budget.
+// Re-add each one on the day its page ships.
 const toolSchemaList = [
   { name: "Schema Markup Generator", url: `${SITE}/tools/schema-generator`, desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review." },
   { name: "SERP Checker", url: `${SITE}/tools/serp-checker`, desc: "Check your Google ranking position for any keyword and country, and see who outranks you." },
-  { name: "SERP Simulator", url: `${SITE}/tools/serp-simulator`, desc: "Preview how your page looks in Google search results." },
-  { name: "Meta Tag Analyzer", url: `${SITE}/tools/meta-tag-analyzer`, desc: "Audit any URL's title, meta description, Open Graph and Twitter Card tags." },
-  { name: "Robots.txt Tester", url: `${SITE}/tools/robots-txt-tester`, desc: "Test if Googlebot can crawl any URL on your site." },
-  { name: "Keyword Difficulty Checker", url: `${SITE}/tools/keyword-difficulty`, desc: "Estimate ranking difficulty for any keyword." },
+  { name: "AI Keyword Research", url: `${SITE}/tools/keyword-research`, desc: "Get keywords grouped by theme, the intent behind each, and the page to build for it." },
 ];
  
 export default function Page() {

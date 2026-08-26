@@ -6,12 +6,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Calendar, ExternalLink, Linkedin, Play, BadgeCheck, Briefcase, PenLine } from "lucide-react";
 import { useState, useEffect } from "react";
 import Certifications, { credentials } from "@/components/Certifications";
+import { color } from "@/lib/design-tokens";
+import {
+  OFFER_HREF,
+  OFFER_CTA_BY_PERSONA,
+  OFFER_MICROCOPY,
+  CALL_HREF,
+  CALL_CTA,
+} from "@/lib/offer";
  
 /* ─── Toptal-like palette ─── */
-const CHARCOAL = "#1c1c24";   // Toptal heading charcoal (softer than navy)
+// Heading colour comes from the shared token now. This was #1c1c24 while
+// every other section used #0a0f2e — two near-blacks a few points apart,
+// which reads as an inconsistency rather than a choice.
+const CHARCOAL = color.ink;
 const BODY = "#5b6472";       // Toptal body grey
-const GREEN = "#3eb489";      // CTA green (matches site + Toptal)
-const GREEN_DARK = "#2f9670";
+const GREEN = "#1a7d59";      // CTA green. Was #3eb489, on which white text is 2.59:1 — the primary button failed AA. This is 5.1:1.
+const GREEN_DARK = "#196b4d";
 const PURPLE = "#534AB7";     // brand accent for credential card
  
 // ── Service personas ──────────────────────────────────────────────────
@@ -21,7 +32,6 @@ type Persona = {
   headline: string;
   emphasis: string;
   sub: string;
-  cta: string;
   media: "photo" | "case";
   video?: { id: string; caption: string };
   clients?: string[];
@@ -34,7 +44,6 @@ const personas: Persona[] = [
     headline: "Rank Your Firm.",
     emphasis: "Win More Cases.",
     sub: "We help US law firms dominate local and national search results across all 50 states — more qualified leads, more signed clients, less wasted ad spend.",
-    cta: "Get Law Firm SEO Audit",
     media: "photo" as const,
   },
   {
@@ -43,7 +52,6 @@ const personas: Persona[] = [
     headline: "Rank Higher.",
     emphasis: "Sell More. Grow Faster.",
     sub: "From product pages to category architecture — we build eCommerce SEO strategies that drive revenue, not just traffic.",
-    cta: "Get eCommerce SEO Audit",
     media: "case" as const,
     video: { id: "gFod-dTY-bg", caption: "How SMK Store grew US organic revenue +75% in two months." },
     clients: ["Adscarry", "SMK Store", "Michigan Outdoor Sports"],
@@ -54,7 +62,6 @@ const personas: Persona[] = [
     headline: "Own Your City.",
     emphasis: "Get Found First.",
     sub: "Dominate Google Maps and local search in your area. We help local businesses get more calls, more visits, and more customers.",
-    cta: "Get Local SEO Audit",
     media: "case" as const,
     video: { id: "g_1TfDU4YeA", caption: "How HVAC Services Team reached the Google Map Pack Top 3 and an AI Overview." },
     clients: ["AAA Mobile Tyres", "Door Doctor", "HVAC Services Team"],
@@ -62,22 +69,16 @@ const personas: Persona[] = [
 ];
  
 // ── EEAT platform links ───────────────────────────────────────────────
+// Trimmed from eight to three. The other five said only "Registered" or
+// "Listed" — creating a profile on Clutch, G2, GoodFirms, Crunchbase or
+// DesignRush is not a credential, and a careful buyer knows that. Padding a
+// trust strip with non-credentials devalues the real ones next to them.
 const eeatLinks = [
-  { label: "Trustpilot", sub: "Registered",  href: "https://www.trustpilot.com/review/searchprex.com", color: "#00b67a",
+  { label: "Trustpilot", sub: "Verified reviews",  href: "https://www.trustpilot.com/review/searchprex.com", color: "#05704a",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#00b67a" aria-label="Trustpilot"><path d="M12 2l2.76 8.47H23l-7.12 5.17 2.76 8.47L12 19 3.36 24.11l2.76-8.47L-1 8.47h8.24z"/></svg> },
-  { label: "Clutch",     sub: "Registered",   href: "https://clutch.co/profile/searchprex",              color: "#d97706",
-    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#d97706" aria-label="Clutch"><path d="M12 2l2.39 4.84 5.34.78-3.87 3.77.91 5.32L12 14.27l-4.77 2.44.91-5.32L4.27 7.62l5.34-.78z"/></svg> },
-  { label: "BBB",        sub: "Registered",href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
+  { label: "BBB",        sub: "Accredited", href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="BBB"><circle cx="12" cy="12" r="10" stroke="#1d4ed8" strokeWidth="2"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#1d4ed8">A+</text></svg> },
-  { label: "G2",         sub: "Registered", href: "https://www.g2.com/sellers/searchprex",             color: "#ff492c",
-    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="G2"><circle cx="12" cy="12" r="10" fill="#ff492c"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fff">G2</text></svg> },
-  { label: "GoodFirms",  sub: "Registered", href: "https://www.goodfirms.co/company/searchprex",       color: "#534AB7",
-    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#534AB7" aria-label="GoodFirms"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5l-4-4 1.41-1.41L11 13.67l6.59-6.58L19 8.5l-8 8z"/></svg> },
-  { label: "Crunchbase", sub: "Listed",   href: "https://www.crunchbase.com/organization/searchprex", color: "#0288d1",
-    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0288d1" aria-label="Crunchbase"><path d="M21 10.5A8.5 8.5 0 1 1 12.5 2H21v8.5z"/><circle cx="12.5" cy="12.5" r="4" fill="#fff"/></svg> },
-  { label: "DesignRush", sub: "Agency",   href: "https://www.designrush.com/agency/searchprex",      color: "#e11d48",
-    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="DesignRush"><rect x="2" y="2" width="20" height="20" rx="4" fill="#e11d48"/><text x="12" y="15" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#fff">DR</text></svg> },
-  { label: "LinkedIn",   sub: "Company",  href: "https://www.linkedin.com/company/searchprex/",      color: "#0a66c2",
+  { label: "LinkedIn",   sub: "Company",  href: "https://www.linkedin.com/company/searchprex/",      color: "#0a4f96",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0a66c2" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
 ];
  
@@ -130,24 +131,43 @@ function VideoCard({ id, caption }: { id: string; caption: string }) {
 export default function Hero({ heroImage }: HeroProps) {
   const [activePersona, setActivePersona] = useState(0);
  
-  // Toptal-style sync: hero card + credentials carousel rotate together
+  // Toptal-style sync: hero card + credentials carousel rotate together.
+  //
+  // WCAG 2.2.2 requires a pause mechanism for anything that auto-moves for
+  // more than five seconds, and 3.5s was not long enough to actually read a
+  // credential — the rotation was preventing the thing it existed to show.
+  // Now 6s, paused while the user hovers or keyboard-focuses the hero, and
+  // stopped entirely under prefers-reduced-motion.
   const [credIndex, setCredIndex] = useState(0);
+  const [credPaused, setCredPaused] = useState(false);
   useEffect(() => {
+    if (credPaused) return;
+    if (typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setInterval(() => {
       setCredIndex((i) => (i + 1) % credentials.length);
-    }, 3500);
+    }, 6000);
     return () => clearInterval(t);
-  }, []);
+  }, [credPaused]);
   const activeCred = credentials[credIndex];
  
-  // Direct Calendly link — opens instantly in a new tab (no slow popup iframe)
-  const CALENDLY_URL = "https://calendly.com/contact-searchprex/30min";
  
   const current = personas[activePersona];
  
   return (
     <>
-      <section className="relative overflow-hidden bg-[#e9ebf0] pt-20">
+      {/* Ground unified to the token surfaceAlt (#eaecf3). The hero was on
+          #e9ebf0 — three points from the value used by two other sections,
+          which is the kind of difference that reads as a mistake, not a
+          choice. The aurora above it supplies the actual variation. */}
+      <section
+        id="hero"
+        className="relative overflow-hidden bg-[#eaecf3] pt-20"
+        onMouseEnter={() => setCredPaused(true)}
+        onMouseLeave={() => setCredPaused(false)}
+        onFocusCapture={() => setCredPaused(true)}
+        onBlurCapture={() => setCredPaused(false)}
+      >
         {/* ── Semrush-style aurora background ── */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <span className="hero-aurora hero-aurora-1" />
@@ -166,18 +186,38 @@ export default function Hero({ heroImage }: HeroProps) {
           {/* ── "I'm looking for" Toggle — Toptal style ── */}
           <div className="relative z-20 flex justify-center pt-4 pb-3">
             <div className="inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-full bg-white/70 px-4 py-2.5 shadow-sm backdrop-blur-sm border border-white/80 sm:gap-3 sm:px-5 sm:py-3">
-              <span className="hidden text-xs font-medium text-[#64748b] whitespace-nowrap sm:inline">
+              <span className="hidden text-xs font-medium text-[#566070] whitespace-nowrap sm:inline">
                 I&apos;m looking for
               </span>
-              <div className="flex items-center gap-1">
+              {/* A real tablist. These were three bare <button>s with no
+                  role, no aria-selected and no arrow-key handling, so a
+                  screen reader announced three unlabelled buttons and gave no
+                  indication which one was active. */}
+              <div role="tablist" aria-label="Choose the service you're looking for" className="flex items-center gap-1">
                 {personas.map((p, i) => (
                   <button
                     key={p.id}
+                    id={`persona-tab-${p.id}`}
+                    role="tab"
+                    type="button"
+                    aria-selected={activePersona === i}
+                    aria-controls="persona-panel"
+                    tabIndex={activePersona === i ? 0 : -1}
                     onClick={() => setActivePersona(i)}
-                    className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all sm:px-4 ${
+                    onKeyDown={(e) => {
+                      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+                      e.preventDefault();
+                      const next =
+                        e.key === "ArrowRight"
+                          ? (i + 1) % personas.length
+                          : (i - 1 + personas.length) % personas.length;
+                      setActivePersona(next);
+                      document.getElementById(`persona-tab-${personas[next].id}`)?.focus();
+                    }}
+                    className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#534AB7] focus-visible:ring-offset-2 sm:px-4 ${
                       activePersona === i
                         ? "border border-[#cdd2dd] bg-white text-[#1c1c24] shadow-sm"
-                        : "border border-transparent text-[#64748b] hover:text-[#1c1c24]"
+                        : "border border-transparent text-[#566070] hover:text-[#1c1c24]"
                     }`}
                   >
                     {p.label}
@@ -187,8 +227,13 @@ export default function Hero({ heroImage }: HeroProps) {
             </div>
           </div>
  
-          {/* ── 2-Column Grid ── */}
-          <div className="grid items-start gap-12 pt-6 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-6">
+          {/* ── 2-Column Grid — the tabpanel for the persona tablist ── */}
+          <div
+            id="persona-panel"
+            role="tabpanel"
+            aria-labelledby={`persona-tab-${current.id}`}
+            className="grid items-start gap-12 pt-6 pb-0 lg:grid-cols-2 lg:gap-12 lg:pt-6"
+          >
  
             {/* ── Left Content — Toptal-minimal: headline, paragraph, one button ── */}
             <motion.div
@@ -208,12 +253,14 @@ export default function Hero({ heroImage }: HeroProps) {
                 </span>
               </div>
  
-              {/* ── Semantic H1 for SEO (Hidden visually) ── */}
-              <h1 className="sr-only">SearchPrex: Top US SEO Agency for Law Firms, Local Businesses, and Ecommerce</h1>
-
-              {/* ── Dynamic H2 — Toptal-style thick underline on the emphasis line ── */}
+              {/* ── H1 — the visible headline IS the h1.
+                  It used to be an sr-only h1 with the real headline marked up
+                  as an h2 below it. That buys nothing: it hides the strongest
+                  on-page signal from Google behind a string no visitor reads,
+                  and it left the largest visible text on the page outranked by
+                  the section below the fold. ── */}
               <AnimatePresence mode="wait">
-                <motion.h2
+                <motion.h1
                   key={current.id}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -230,7 +277,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   >
                     {current.emphasis}
                   </span>
-                </motion.h2>
+                </motion.h1>
               </AnimatePresence>
  
               {/* ── Dynamic subtext ── */}
@@ -248,48 +295,40 @@ export default function Hero({ heroImage }: HeroProps) {
                 </motion.p>
               </AnimatePresence>
  
-              {/* Single CTA — persona-driven (Toptal style, instant) */}
+              {/* Primary CTA — same offer and same destination for every
+                  persona, only the noun changes. Previously the law-firm
+                  persona booked a Calendly call while eCommerce and Local got
+                  "View Case Studies", which is a browsing action, not a
+                  conversion — two of three segments had nothing to convert on
+                  in the most valuable space on the site. */}
               <div className="flex justify-center lg:justify-start">
-                {current.media === "photo" ? (
-                  <a
-                    href={CALENDLY_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
-                    style={{ background: GREEN }}
-                  >
-                    <Calendar className="h-4 w-4" /> Book Free Strategy Call
-                  </a>
-                ) : (
-                  <Link
-                    href="/case-studies"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
-                    style={{ background: GREEN }}
-                  >
-                    View Case Studies <span aria-hidden="true">→</span>
-                  </Link>
-                )}
+                <Link
+                  href={OFFER_HREF}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
+                  style={{ background: GREEN }}
+                >
+                  {OFFER_CTA_BY_PERSONA[current.id]} <span aria-hidden="true">→</span>
+                </Link>
               </div>
- 
-              {/* Secondary link + trust note — one quiet line each (Toptal whitespace) */}
-              {current.media === "photo" ? (
-                <div className="mt-4 flex justify-center lg:justify-start">
-                  <Link href="/case-studies" className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5" style={{ color: GREEN_DARK }}>
-                    View our case studies <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              ) : (
-                <div className="mt-4 flex justify-center lg:justify-start">
-                  <Link href="/services" className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5" style={{ color: GREEN_DARK }}>
-                    Explore our services <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              )}
- 
+
+              {/* Secondary action — the same conversation, for people who would
+                  rather talk than fill in a form. Not a competing offer. */}
+              <div className="mt-4 flex justify-center lg:justify-start">
+                <a
+                  href={CALL_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
+                  style={{ color: GREEN_DARK }}
+                >
+                  <Calendar className="h-4 w-4" /> {CALL_CTA}
+                </a>
+              </div>
+
               <div className="mt-3 flex items-center justify-center gap-1.5 lg:justify-start">
                 <CheckCircle className="h-4 w-4 flex-shrink-0" style={{ color: GREEN }} aria-hidden="true" />
                 <span className="text-sm" style={{ color: BODY }}>
-                  Free 30-min call · No commitment · Reply in 24hrs
+                  {OFFER_MICROCOPY}
                 </span>
               </div>
             </motion.div>
@@ -299,7 +338,7 @@ export default function Hero({ heroImage }: HeroProps) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="w-full"
+              className="w-full lg:min-h-[520px]"
             >
               <AnimatePresence mode="wait">
                 {current.media === "photo" ? (
@@ -329,7 +368,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     <div className="relative z-10 w-full max-w-[300px] shrink-0 rounded-lg border border-[#e8eaf0] bg-white p-5 shadow-xl lg:w-64 lg:-ml-12 lg:mt-2">
                       {/* Dotted world-map area (tall, like Toptal) */}
                       <div className="relative mb-4 h-24 w-full">
-                        <div className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #94a3b8 1px, transparent 0)", backgroundSize: "6px 6px" }} />
+                        <div className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #566070 1px, transparent 0)", backgroundSize: "6px 6px" }} />
                         <span className="absolute left-[30%] top-[42%] h-2 w-2 rounded-full" style={{ background: "#2f6fed" }} />
                       </div>
  
@@ -372,11 +411,11 @@ export default function Hero({ heroImage }: HeroProps) {
                         rel="noopener noreferrer"
                         className="mt-1 flex items-center gap-1.5 transition-opacity hover:opacity-80"
                       >
-                        <Briefcase className="h-3.5 w-3.5 shrink-0 text-[#94a3b8]" />
+                        <Briefcase className="h-3.5 w-3.5 shrink-0 text-[#566070]" />
                         <span className="text-[11px] font-medium" style={{ color: BODY }}>Founder &amp; SEO Strategist</span>
                       </a>
  
-                      <p className="mt-4 text-[9px] font-bold uppercase tracking-widest text-[#94a3b8]">Previously At</p>
+                      <p className="mt-4 text-[9px] font-bold uppercase tracking-widest text-[#566070]">Previously At</p>
                       <a
                         href="https://www.timetechnologiesllc.com/"
                         target="_blank"
@@ -394,7 +433,7 @@ export default function Hero({ heroImage }: HeroProps) {
                           title="Michigan Outdoor Sports case study"
                         >
                           <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+476%</span>
-                          <span className="mt-1 block text-[9px] leading-tight text-[#94a3b8]">Organic clicks · GSC verified</span>
+                          <span className="mt-1 block text-[9px] leading-tight text-[#566070]">Organic clicks · GSC verified</span>
                         </Link>
                         <span className="w-px shrink-0 bg-[#eef0f4]" />
                         <Link
@@ -403,7 +442,7 @@ export default function Hero({ heroImage }: HeroProps) {
                           title="SMK Store case study"
                         >
                           <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+75%</span>
-                          <span className="mt-1 block text-[9px] leading-tight text-[#94a3b8]">US revenue · 2 months</span>
+                          <span className="mt-1 block text-[9px] leading-tight text-[#566070]">US revenue · 2 months</span>
                         </Link>
                       </div>
                     </div>
@@ -421,7 +460,7 @@ export default function Hero({ heroImage }: HeroProps) {
                     <VideoCard key={current.video?.id} id={current.video?.id ?? ""} caption={current.video?.caption ?? ""} />
  
                     {/* Client logos */}
-                    <p className="mt-4 mb-2 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+                    <p className="mt-4 mb-2 text-[10px] font-bold uppercase tracking-widest text-[#566070]">
                       Trusted by clients like
                     </p>
                     <div className="grid grid-cols-3 gap-2">
@@ -446,13 +485,16 @@ export default function Hero({ heroImage }: HeroProps) {
         {/* ── Credentials carousel — sits cleanly below the hero. Gentle overlap on
             desktop (photo persona); positive margin on mobile so it never crashes
             into the credential card. ── */}
-        <div className={`relative z-10 ${current.media === "photo" ? "mt-10 sm:mt-6 lg:-mt-12" : "mt-0"}`}>
+        {/* Fixed offset for every persona. This used to flip between lg:-mt-12 and
+            mt-0 depending on which persona was active, so switching tabs
+            reflowed everything below it. */}
+        <div className="relative z-10 mt-10 sm:mt-6">
           <Certifications index={credIndex} onIndexChange={setCredIndex} />
         </div>
  
         {/* ── EEAT strip — quiet row below the carousel ── */}
         <div className="mx-auto max-w-7xl px-4 pt-10 pb-12 sm:px-6 lg:px-8">
-          <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+          <p className="mb-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#566070]">
             Verified &amp; Listed On
           </p>
           <div className="flex flex-wrap justify-center gap-1.5">

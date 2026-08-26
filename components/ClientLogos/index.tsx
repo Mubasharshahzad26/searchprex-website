@@ -20,12 +20,12 @@ const clients = [
  
 export default function ClientLogos() {
   return (
-    <section className="bg-[#eeeef5] border-t border-[#e2e2ec] py-8">
+    <section className="border-t border-[#e5e7eb] bg-[#f8f9fc] py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:gap-12">
  
           {/* Left label — exactly like Toptal */}
-          <p className="flex-shrink-0 text-[10px] font-bold uppercase leading-relaxed tracking-widest text-[#94a3b8]">
+          <p className="flex-shrink-0 text-[10px] font-bold uppercase leading-relaxed tracking-widest text-[#566070]">
             Trusted By<br />Growing Businesses
           </p>
  
@@ -35,15 +35,15 @@ export default function ClientLogos() {
           {/* Scrollable logos row */}
           <div className="relative flex-1 overflow-hidden">
             {/* Left fade */}
-            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-[#eeeef5] to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-[#f8f9fc] to-transparent" />
             {/* Right fade */}
-            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-[#eeeef5] to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-[#f8f9fc] to-transparent" />
  
             <div className="flex items-center gap-10 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
               {clients.map((client, i) => (
                 <span
                   key={i}
-                  className={`flex-shrink-0 text-sm text-[#9ca3af] transition-colors hover:text-[#6b7280] ${client.style}`}
+                  className={`flex-shrink-0 text-sm text-[#566070] transition-colors hover:text-[#3f4854] ${client.style}`}
                 >
                   {client.name}
                 </span>

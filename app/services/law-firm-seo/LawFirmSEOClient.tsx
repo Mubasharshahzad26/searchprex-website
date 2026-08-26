@@ -32,6 +32,7 @@ import {
 } from "@/components/layout";
 import { color, heading, radius, text } from "@/lib/design-tokens";
 import { CITY_PAGES } from "@/lib/city-pages";
+import LawFirmStack from "@/components/LawFirmStack";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
 
@@ -332,6 +333,14 @@ export default function LawFirmSEOClient() {
         <SectionHeading eyebrow="FAQ" title="Law firm SEO questions, answered" />
         <FaqList faqs={faqs} name="law-firm-seo-faq" />
       </Section>
+
+      {/* ── THE COMPLETE STACK (SearchPrex x Codeloci) ──
+          Moved here from the homepage. The partnership is relevant to exactly
+          one of the three homepage personas, and it linked visitors off-site
+          to codeloci.com from the middle of the funnel. On this page the
+          audience is already law firms and the outbound link is a genuine
+          next step rather than a leak. */}
+      <LawFirmStack />
 
       <CtaBand
         eyebrow="Ready to get more cases?"

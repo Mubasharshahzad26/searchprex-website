@@ -23,15 +23,32 @@ export const color = {
 
   /** Headings and high-contrast body text. Also the dark section background. */
   ink: "#0a0f2e",
-  /** Secondary body text, labels, captions. */
-  muted: "#64748b",
-  /** Tertiary text — timestamps, fine print, disabled. */
-  subtle: "#94a3b8",
+  /** Secondary body text, labels, captions.
+   *  Was #64748b: 4.76:1 on white but only 4.03:1 on the tinted section
+   *  grounds (#eaecf3), so it failed AA everywhere except pure white.
+   *  #566070 measures 6.36 / 6.04 / 5.39 across the three grounds. */
+  muted: "#566070",
+  /** Tertiary text — timestamps, fine print, captions.
+   *  Was #94a3b8, which measures 2.5:1 on white. WCAG AA needs 4.5:1 for
+   *  body text and it was used at 9-11px throughout, so it failed twice over.
+   *  #5f6a78 measures 5.5:1 on white and 4.66:1 on the tinted ground. */
+  subtle: "#5f6a78",
+
+  /** #94a3b8 kept ONLY for non-text use — decorative icons, dividers,
+   *  placeholder glyphs. Never put copy in this colour: it is 2.5:1. */
+  subtleNonText: "#94a3b8",
 
   /** Verified metrics, checkmarks, positive deltas. */
   success: "#3eb489",
-  /** Hover / text-on-light variant of success. */
-  successDark: "#2f9670",
+  /** Green for TEXT and for solid buttons carrying white text.
+   *  Was #2f9670: 3.67:1 on white, 3.11:1 on tinted — failed as text.
+   *  #196b4d measures 6.46 / 5.47. Use color.success (#3eb489) only for
+   *  decorative fills and icons, never for copy. */
+  successDark: "#196b4d",
+
+  /** Solid green button background. White text on #3eb489 is 2.59:1 — the
+   *  primary CTA failed AA. This measures 5.1:1. */
+  successButton: "#1a7d59",
   /** Problems, "the challenge", negative deltas. */
   danger: "#ef4444",
 

@@ -51,10 +51,7 @@ export default function Services() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" /> What we do
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Core services.{" "}
-            <span className="bg-gradient-to-r from-[#534AB7] to-[#3eb489] bg-clip-text text-transparent">
-              Zero fluff.
-            </span>
+            Core services. Zero fluff.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#475569]">
             No bloated menus or vanity packages — every service is tied to a verified,
@@ -77,8 +74,8 @@ export default function Services() {
                   <Icon className="h-6 w-6 text-[#534AB7] transition-colors duration-300 group-hover:text-white" />
                 </span>
                 <h3 className="text-base font-black text-[#0a0f2e]">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#64748b]">{s.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#2f9670] transition-all group-hover:gap-2">
+                <p className="mt-2 text-sm leading-relaxed text-[#566070]">{s.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#196b4d] transition-all group-hover:gap-2">
                   Explore <ArrowRight className="h-4 w-4" />
                 </span>
               </Link>
@@ -89,7 +86,7 @@ export default function Services() {
           <Link
             href="/free-audit"
             className="group relative flex flex-col justify-center overflow-hidden rounded-2xl p-7 text-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
-            style={{ background: "linear-gradient(135deg, #534AB7 0%, #3C3489 50%, #2f9670 100%)" }}
+            style={{ background: "linear-gradient(135deg, #534AB7 0%, #3C3489 50%, #196b4d 100%)" }}
           >
             <h3 className="mb-2 text-base font-black">Not sure which you need?</h3>
             <p className="text-sm leading-relaxed text-white/85">
@@ -97,14 +94,14 @@ export default function Services() {
               service will move the needle.
             </p>
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold">
-              Get free audit <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Get my free SEO audit <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </Link>
         </div>
  
         {/* divider link */}
         <div className="mt-12 text-center">
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#94a3b8]">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#566070]">
             See the proof behind every service
           </p>
           <Link

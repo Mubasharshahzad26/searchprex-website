@@ -1,100 +1,141 @@
 "use client";
 
+// components/Process.tsx
+// "What happens after you submit."
+//
+// The homepage asked for an email three times without ever explaining the
+// engagement. This section answers the first question every buyer holds —
+// what actually happens next — and it sits between the services and the proof,
+// so the offer is understood before it is evidenced.
+//
+// The numbering here is real: these are sequential stages, and the order is
+// information the reader needs. Previously this component used an off-brand
+// blue palette, promised 48 hours where the rest of the site promises 24, and
+// linked to an anchor (#cta) that does not exist on any page.
+
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Search, Target, BarChart3 } from "lucide-react";
+import { Search, Map, LineChart, ArrowRight } from "lucide-react";
+import { OFFER_HREF, OFFER_CTA, OFFER_MICROCOPY } from "@/lib/offer";
+
+const PURPLE = "#534AB7";
 
 const steps = [
   {
     number: "01",
     icon: Search,
-    title: "Free SEO Audit",
+    title: "You send your site",
+    timing: "Takes 60 seconds",
     description:
-      "Full technical + keyword analysis delivered in 48 hours, completely free.",
+      "One form, three fields. No call required, no discovery questionnaire, nothing to install.",
   },
   {
     number: "02",
-    icon: Target,
-    title: "Custom Strategy",
+    icon: Map,
+    title: "The founder audits it personally",
+    timing: "Back within 24 hours",
     description:
-      "City targets, competitor gaps, content roadmaps built for your niche.",
+      "Technical issues, content gaps and competitor positions — returned as a prioritized P1 / P2 / P3 fix list with a 90-day roadmap. Not a generic PDF, and not written by a junior.",
   },
   {
     number: "03",
-    icon: BarChart3,
-    title: "Execute & Report",
+    icon: LineChart,
+    title: "You decide what happens next",
+    timing: "No contract, month to month",
     description:
-      "We handle everything. Monthly reports tied to leads and revenue metrics.",
+      "Take the roadmap and run it yourself, or have us execute it. Either way the audit is yours to keep, and pricing is only set once you have seen the work.",
   },
 ];
 
 export default function Process() {
   return (
-    <section id="process" className="bg-[#f7f8fc] py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="process" className="border-y border-[#e9ecf5] bg-white py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Header — left-aligned on purpose. Almost every other section on this
+            page is centered; the variety is what tells a reader they've moved. */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl"
         >
-          <h2 className="mb-4 text-4xl font-black text-[#0a0f2e] sm:text-5xl">
-            SEO Made Simple.
+          <p className="mb-4 text-xs font-bold uppercase tracking-widest" style={{ color: PURPLE }}>
+            How it works
+          </p>
+          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
+            What happens after you hit send.
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[#64748b]">
-            Results built for your specific business goals.
+          <p className="mt-4 text-base leading-relaxed text-[#5b6472]">
+            Three steps, no surprises. You will know exactly what is wrong with your site
+            before anyone asks you for a budget.
           </p>
         </motion.div>
 
         {/* Steps */}
-        <div className="mb-12 grid gap-8 md:grid-cols-3">
+        <ol className="mt-14 grid gap-8 md:grid-cols-3">
           {steps.map((step, index) => (
-            <motion.div
+            <motion.li
               key={step.number}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="relative text-center"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative"
             >
-              {/* Connector Line */}
+              {/* Connector — sits behind the icon, stops before the last item */}
               {index < steps.length - 1 && (
-                <div className="absolute left-1/2 top-12 hidden h-0.5 w-full bg-[#e5e7eb] md:block" />
+                <div
+                  className="absolute left-14 top-6 hidden h-px w-full bg-[#e9ecf5] md:block"
+                  aria-hidden="true"
+                />
               )}
 
-              {/* Icon */}
-              <div className="relative mx-auto mb-6 inline-flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-lg">
-                <span className="absolute -right-1 -top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#1a3c8f] text-sm font-bold text-white">
+              <div className="relative mb-5 flex items-center gap-3">
+                <span
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                  style={{ background: `${PURPLE}14` }}
+                >
+                  <step.icon className="h-5 w-5" style={{ color: PURPLE }} />
+                </span>
+                <span
+                  className="text-sm font-black tabular-nums"
+                  style={{ color: PURPLE }}
+                >
                   {step.number}
                 </span>
-                <step.icon className="h-10 w-10 text-[#1a3c8f]" />
               </div>
 
-              {/* Content */}
-              <h3 className="mb-3 text-xl font-bold text-[#0a0f2e]">
-                {step.title}
-              </h3>
-              <p className="text-[#64748b]">{step.description}</p>
-            </motion.div>
+              <h3 className="text-lg font-black text-[#0a0f2e]">{step.title}</h3>
+              <p className="mt-1 text-xs font-bold uppercase tracking-widest text-[#196b4d]">
+                {step.timing}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-[#5b6472]">{step.description}</p>
+            </motion.li>
           ))}
-        </div>
+        </ol>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-14 flex flex-col items-start gap-3 border-t border-[#e9ecf5] pt-8 sm:flex-row sm:items-center sm:justify-between"
         >
-          <Link
-            href="#cta"
-            className="inline-block rounded-lg bg-[#2563eb] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
-          >
-            Start With a Free Audit →
-          </Link>
+          <p className="text-sm font-semibold text-[#5b6472]">
+            Step one takes about a minute.
+          </p>
+          <div className="flex flex-col items-start gap-2 sm:items-end">
+            <Link
+              href={OFFER_HREF}
+              className="inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5"
+              style={{ background: PURPLE }}
+            >
+              {OFFER_CTA} <ArrowRight className="h-4 w-4" />
+            </Link>
+            <span className="text-xs text-[#5b6472]">{OFFER_MICROCOPY}</span>
+          </div>
         </motion.div>
       </div>
     </section>

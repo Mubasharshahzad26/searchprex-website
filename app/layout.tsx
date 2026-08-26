@@ -222,6 +222,11 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr" className={`${inter.variable} bg-background`}>
       <head>
+        {/* YouTube thumbnails are cross-origin and appear above the fold on
+            several pages. Preconnecting saves the DNS + TLS round trip before
+            the first thumbnail request rather than after it. */}
+        <link rel="preconnect" href="https://img.youtube.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="alternate" hrefLang="en-US" href={siteUrl} />
         <link rel="alternate" hrefLang="x-default" href={siteUrl} />
         <meta name="geo.region" content="US" />

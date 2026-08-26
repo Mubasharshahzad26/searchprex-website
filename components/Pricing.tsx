@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
+import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
  
 const PURPLE = "#534AB7";
 const GREEN = "#3eb489";
@@ -31,7 +32,7 @@ const plans = [
     range: "$1,500 – $4,000",
     best: "Shopify & WooCommerce stores",
     includes: ["Technical SEO at scale", "Product page content", "Schema & indexing"],
-    accent: "#2f9670",
+    accent: "#196b4d",
     bg: "#dcf2ea",
   },
 ];
@@ -84,9 +85,9 @@ export default function Pricing() {
                 {p.niche}
               </span>
               <div className="mt-4 text-2xl font-black text-[#0a0f2e]">
-                {p.range}<span className="text-sm font-bold text-[#94a3b8]"> / mo</span>
+                {p.range}<span className="text-sm font-bold text-[#6b7280]"> / mo</span>
               </div>
-              <p className="mb-5 mt-1 text-xs text-[#64748b]">Best for: {p.best}</p>
+              <p className="mb-5 mt-1 text-xs text-[#566070]">Best for: {p.best}</p>
               <ul className="mb-6 space-y-2">
                 {p.includes.map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-[#374151]">
@@ -95,11 +96,11 @@ export default function Pricing() {
                 ))}
               </ul>
               <Link
-                href="/free-audit"
+                href={OFFER_HREF}
                 className="flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5"
                 style={p.featured ? { backgroundColor: PURPLE, color: "#fff" } : { backgroundColor: p.bg, color: p.accent }}
               >
-                Get custom quote <ArrowRight className="h-4 w-4" />
+                Start with a free audit <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
           ))}
@@ -111,8 +112,18 @@ export default function Pricing() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 text-center"
+          className="mt-10 flex flex-col items-center gap-4"
         >
+          <Link
+            href={OFFER_HREF}
+            className="inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5"
+            style={{ background: PURPLE }}
+          >
+            {OFFER_CTA} <ArrowRight className="h-4 w-4" />
+          </Link>
+          <p className="text-xs text-[#5b6472]">
+            Final pricing is set after your free audit · no contracts
+          </p>
           <Link
             href="/pricing"
             className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
@@ -120,74 +131,9 @@ export default function Pricing() {
           >
             See what&apos;s included, our process &amp; FAQs <ArrowRight className="h-4 w-4" />
           </Link>
-          <p className="mt-2 text-xs text-[#94a3b8]">Final pricing is set after your free audit · no contracts</p>
         </motion.div>
  
       </div>
     </section>
   );
 }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

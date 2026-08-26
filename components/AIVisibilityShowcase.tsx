@@ -51,7 +51,7 @@ function Gauge({ value }: { value: number }) {
       </svg>
       <div className="absolute inset-x-0 bottom-1 text-center">
         <span className="text-3xl font-black text-[#0a0f2e]">{value}</span>
-        <span className="text-sm font-bold text-[#94a3b8]">/100</span>
+        <span className="text-sm font-bold text-[#6b7280]">/100</span>
       </div>
     </div>
   );
@@ -60,10 +60,10 @@ function Gauge({ value }: { value: number }) {
 function Metric({ label, to, delta }: { label: string; to: number; delta: string }) {
   return (
     <div className="rounded-xl border border-[#eef0f4] bg-[#fafbff] p-3">
-      <p className="text-[11px] font-semibold text-[#64748b]">{label}</p>
+      <p className="text-[11px] font-semibold text-[#566070]">{label}</p>
       <div className="mt-0.5 flex items-baseline gap-2">
         <span className="text-xl font-black text-[#0a0f2e]"><CountUp to={to} /></span>
-        <span className="text-[11px] font-bold text-[#1D9E75]">{delta}</span>
+        <span className="text-[11px] font-bold text-[#196b4d]">{delta}</span>
       </div>
     </div>
   );
@@ -80,14 +80,14 @@ export default function AIVisibilityShowcase() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mx-auto mb-12 max-w-2xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white/70">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white/85">
             <Sparkles className="h-3.5 w-3.5" /> AEO · AI Search Visibility
           </div>
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
             Your customers are asking AI.<br />
             <span className="bg-gradient-to-r from-[#7F77DD] to-[#3eb489] bg-clip-text text-transparent">Are you the answer?</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/60">
+          <p className="mt-4 text-base leading-relaxed text-white/85">
             AI Overviews now appear across nearly half of all industries — and a growing share of buyers act
             on what the AI tells them. If ChatGPT, Gemini &amp; Google&apos;s AI don&apos;t mention you, you&apos;re invisible to them.
           </p>
@@ -113,7 +113,7 @@ export default function AIVisibilityShowcase() {
               <Link href="/ai-visibility" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-bold text-[#0a0f2e] transition-transform hover:-translate-y-0.5">
                 Check your AI visibility — free <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/services/law-firm-seo" className="inline-flex items-center gap-1.5 text-sm font-bold text-white/70 transition-colors hover:text-white">
+              <Link href="/services/law-firm-seo" className="inline-flex items-center gap-1.5 text-sm font-bold text-white/85 transition-colors hover:text-white">
                 How AEO works <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -122,9 +122,16 @@ export default function AIVisibilityShowcase() {
           {/* Right dashboard mockup */}
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
             <div className="rounded-2xl border border-white/10 bg-white p-5 shadow-2xl sm:p-6">
+              {/* Disclosure FIRST, at readable size. It used to sit at the
+                  bottom in 10px #6b7280 — technically disclosed, practically
+                  invisible, which is the worst of both. */}
+              <p className="mb-4 rounded-lg bg-[#fff7ed] px-3 py-2 text-xs font-semibold text-[#9a3412]">
+                Sample dashboard — illustrative figures, not a real client account.
+              </p>
+
               {/* query bar */}
               <div className="mb-5 flex items-center gap-2 rounded-lg border border-[#e5e7eb] bg-[#f8f9fc] px-3 py-2">
-                <Search className="h-4 w-4 shrink-0 text-[#94a3b8]" />
+                <Search className="h-4 w-4 shrink-0 text-[#6b7280]" />
                 <span className="truncate text-xs font-medium text-[#475569]">&ldquo;best personal injury lawyer in Chicago&rdquo;</span>
                 <span className="ml-auto shrink-0 rounded-full bg-[#EEEDFE] px-2 py-0.5 text-[10px] font-bold text-[#534AB7]">4 AI engines</span>
               </div>
@@ -134,7 +141,7 @@ export default function AIVisibilityShowcase() {
                 <div className="flex flex-col items-center justify-center rounded-xl border border-[#eef0f4] bg-[#fafbff] p-4">
                   <Gauge value={72} />
                   <p className="mt-1 text-xs font-bold text-[#0a0f2e]">AI Visibility Score</p>
-                  <p className="text-[11px] text-[#64748b]">Strong — and climbing</p>
+                  <p className="text-[11px] text-[#566070]">Strong — and climbing</p>
                 </div>
  
                 {/* metric tiles */}
@@ -147,7 +154,7 @@ export default function AIVisibilityShowcase() {
  
               {/* distribution */}
               <div className="mt-5">
-                <p className="mb-2.5 text-[11px] font-bold uppercase tracking-wide text-[#94a3b8]">Where you&apos;re cited, by engine</p>
+                <p className="mb-2.5 text-[11px] font-bold uppercase tracking-wide text-[#6b7280]">Where you&apos;re cited, by engine</p>
                 <div className="space-y-2.5">
                   {engines.map((e, i) => (
                     <div key={e.name} className="flex items-center gap-3">
@@ -168,8 +175,8 @@ export default function AIVisibilityShowcase() {
                 </div>
               </div>
  
-              <p className="mt-4 text-center text-[10px] text-[#94a3b8]">
-                Illustrative preview — your real dashboard reflects your own brand &amp; queries.
+              <p className="mt-4 text-center text-xs text-[#5b6472]">
+                Your real dashboard reflects your own brand &amp; queries.
               </p>
             </div>
           </motion.div>
