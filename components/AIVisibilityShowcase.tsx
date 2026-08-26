@@ -9,7 +9,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Check, Search } from "lucide-react";
-import CountUp from "@/components/CountUp";
  
 const GREEN = "#3eb489";
  
@@ -62,7 +61,7 @@ function Metric({ label, to, delta }: { label: string; to: number; delta: string
     <div className="rounded-xl border border-[#eef0f4] bg-[#fafbff] p-3">
       <p className="text-[11px] font-semibold text-[#566070]">{label}</p>
       <div className="mt-0.5 flex items-baseline gap-2">
-        <span className="text-xl font-black text-[#0a0f2e]"><CountUp to={to} /></span>
+        <span className="text-xl font-black tabular-nums text-[#0a0f2e]">{to.toLocaleString()}</span>
         <span className="text-[11px] font-bold text-[#196b4d]">{delta}</span>
       </div>
     </div>

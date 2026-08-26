@@ -19,13 +19,32 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
 
   const handleAddLead = async () => {
     if (!urlInput) return;
+    
+    // Auto-format URL if missing http
+    let formattedUrl = urlInput;
+    if (!formattedUrl.startsWith("http://") && !formattedUrl.startsWith("https://")) {
+      formattedUrl = "https://" + formattedUrl;
+    }
+
     setIsAnalyzing(true);
-    // TODO: Wire up actual API to ingest and score the lead
-    setTimeout(() => {
-      alert("Lead ingestion simulation complete. (Phase 2 will integrate Gemini scoring)");
-      setIsAnalyzing(false);
+    try {
+      const res = await fetch("/api/sdr/ingest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: formattedUrl })
+      });
+      
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to analyze");
+      
+      // Add the new lead to the top of the table
+      setLeads([data.lead, ...leads]);
       setUrlInput("");
-    }, 1500);
+    } catch (e: any) {
+      alert("Error: " + e.message);
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const getStatusColor = (status: string) => {
@@ -134,6 +153,11 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
                         <td className="px-4 py-3">
                           <div className="font-medium text-foreground">{lead.companyName || new URL(lead.websiteUrl).hostname}</div>
                           <div className="text-xs text-muted-foreground truncate max-w-[200px]">{lead.websiteUrl}</div>
+                          {lead.analysis && (
+                            <div className="mt-1 text-xs text-purple-700 bg-purple-50 p-1 rounded italic max-w-sm">
+                              {lead.analysis}
+                            </div>
+                          )}
                         </td>
                         <td className="px-4 py-3">
                           {lead.score ? (
