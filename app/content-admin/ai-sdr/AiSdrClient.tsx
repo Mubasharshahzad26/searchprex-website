@@ -125,7 +125,23 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
               <CardTitle>Lead Pipeline</CardTitle>
               <CardDescription>Real-time view of your AI SDR operations.</CardDescription>
             </div>
-            <Button size="sm" variant="outline" onClick={() => alert("Will trigger the cron job manually.")}>
+            <Button size="sm" variant="outline" onClick={async (e) => {
+              const btn = e.currentTarget;
+              btn.disabled = true;
+              btn.innerText = "Running...";
+              try {
+                // In production, you would pass an Authorization header here if CRON_SECRET is set
+                const res = await fetch("/api/cron/process-leads");
+                const data = await res.json();
+                alert(JSON.stringify(data, null, 2));
+                window.location.reload();
+              } catch(err) {
+                alert("Failed to run cron");
+              } finally {
+                btn.disabled = false;
+                btn.innerText = "Run Cron Now";
+              }
+            }}>
               <Play className="w-4 h-4 mr-2" /> Run Cron Now
             </Button>
           </CardHeader>

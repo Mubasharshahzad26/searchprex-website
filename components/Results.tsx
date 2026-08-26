@@ -35,7 +35,7 @@ const results = [
     label: "Technical SEO · Michigan, USA",
     title:
       "+285% pages indexed and +83% US organic clicks — roughly 3,000 to 11,549 indexed pages between May and July 2026.",
-    metric: "+285% indexed"
+    metric: "+285% indexed",
     href: "/case-studies/ecommerce/michigan-outdoor-sports",
   },
   {
