@@ -133,6 +133,10 @@ export default function ProofStrip() {
                 width={745}
                 height={236}
                 sizes="(max-width: 1024px) 100vw, 560px"
+                // Eager: this is the page's primary evidence, it sits in the
+                // second section, and it is ~6KB as AVIF. Not `priority` —
+                // it should not compete with the hero for LCP.
+                loading="eager"
                 className="h-auto w-full"
               />
             </div>

@@ -153,8 +153,8 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
                 <p className="text-sm">Use the Market Finder or ingest a lead manually to start.</p>
               </div>
             ) : (
-              <div className="rounded-md border">
-                <table className="w-full text-sm text-left">
+              <div className="rounded-md border overflow-x-auto w-full">
+                <table className="w-full text-sm text-left min-w-[800px]">
                   <thead className="bg-muted text-muted-foreground">
                     <tr>
                       <th className="px-4 py-3 font-medium">Website / Company</th>
