@@ -53,7 +53,7 @@ const personas: Persona[] = [
     emphasis: "Sell More. Grow Faster.",
     sub: "From product pages to category architecture — we build eCommerce SEO strategies that drive revenue, not just traffic.",
     media: "case" as const,
-    video: { id: "gFod-dTY-bg", caption: "How SMK Store grew US organic revenue +75% in two months." },
+    video: { id: "gFod-dTY-bg", caption: "How SMK Store's mass non-indexing was diagnosed and recovered." },
     clients: ["Adscarry", "SMK Store", "Michigan Outdoor Sports"],
   },
   {
@@ -432,8 +432,8 @@ export default function Hero({ heroImage }: HeroProps) {
                           className="flex-1 transition-opacity hover:opacity-80"
                           title="Michigan Outdoor Sports case study"
                         >
-                          <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+476%</span>
-                          <span className="mt-1 block text-[9px] leading-tight text-[#566070]">Organic clicks · GSC verified</span>
+                          <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+285%</span>
+                          <span className="mt-1 block text-[11px] leading-tight text-[#566070]">Pages indexed · GSC verified</span>
                         </Link>
                         <span className="w-px shrink-0 bg-[#eef0f4]" />
                         <Link
@@ -441,8 +441,8 @@ export default function Hero({ heroImage }: HeroProps) {
                           className="flex-1 transition-opacity hover:opacity-80"
                           title="SMK Store case study"
                         >
-                          <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+75%</span>
-                          <span className="mt-1 block text-[9px] leading-tight text-[#566070]">US revenue · 2 months</span>
+                          <span className="block text-base font-black leading-none" style={{ color: GREEN_DARK }}>+83%</span>
+                          <span className="mt-1 block text-[11px] leading-tight text-[#566070]">US organic clicks · GSC</span>
                         </Link>
                       </div>
                     </div>

@@ -17,7 +17,7 @@ const services = [
   {
     icon: ShoppingCart,
     title: "Ecommerce & Shopify SEO",
-    desc: "Mass non-indexing recovery, product content at scale, schema and Core Web Vitals — verified +75% revenue growth.",
+    desc: "Mass non-indexing recovery, product content at scale, schema and Core Web Vitals — diagnosed and fixed at 35,000-product scale.",
     href: "/services/ecommerce-seo",
   },
   {
@@ -29,7 +29,7 @@ const services = [
   {
     icon: Wrench,
     title: "Technical SEO",
-    desc: "Crawl, indexation and Core Web Vitals fixes that recovered +476% organic clicks from near-zero visibility.",
+    desc: "Crawl, indexation and Core Web Vitals fixes that took one catalog from ~3,000 to 11,549 indexed pages in ten weeks.",
     href: "/services/technical-seo",
   },
   {

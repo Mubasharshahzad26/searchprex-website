@@ -46,13 +46,17 @@ const caseResults = [
     client: "Michigan Sports Outdoor",
     tag: "Ecommerce · USA",
     metric: "+285%",
-    label: "Indexed pages (7K → 27K in 6 weeks)",
+    label: "Indexed pages (≈3K → 11.5K, May–Jul 2026)",
   },
   {
+    // Was "+75% revenue growth in 2 months". No export supports that figure —
+    // the only revenue screenshots on file are Michigan Outdoor Sports, not
+    // SMK. What IS documented for SMK is the indexing diagnosis, so that is
+    // what this now claims.
     client: "SMK Store",
     tag: "Tactical Gear · USA",
-    metric: "+75%",
-    label: "Revenue growth in 2 months",
+    metric: "12,581",
+    label: "Crawled-but-unindexed pages diagnosed",
   },
   {
     client: "Local HVAC Services",
@@ -206,9 +210,9 @@ export default function FounderSection() {
               {/* Quote — first-hand experience narrative */}
               <blockquote className="mb-6 border-l-4 pl-4 text-sm leading-relaxed text-[#374151] italic" style={{ borderColor: GREEN }}>
                 &quot;Over the last 5+ years I&apos;ve personally fixed mass non-indexing on a 35,000-product
-                ecommerce catalog, taken Michigan Sports Outdoor from 7K to 27K indexed pages, and grown
-                SMK Store&apos;s US revenue by 75% in two months. Every strategy I run is built on real GSC
-                data and first-hand testing — no AI-spun content, no excuses.&quot;
+                ecommerce catalog and taken Michigan Outdoor Sports from roughly 3,000 to 11,549 indexed
+                pages between May and July 2026 — a 285% increase, with US organic clicks up 83% over the
+                same period. Every number I publish comes from a Search Console export I can show you.&quot;
               </blockquote>
  
               {/* Semrush Certificates — clickable */}

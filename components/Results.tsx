@@ -27,15 +27,15 @@ const results = [
   {
     label: "Ecommerce SEO · United States",
     title:
-      "+75% US revenue in 2 months by fixing mass non-indexing across a 35,000-product catalog.",
-    metric: "+75% revenue",
+      "Mass non-indexing recovered across a 35,000-product catalog — 12,581 crawled-but-unindexed pages diagnosed in Search Console.",
+    metric: "Indexing recovered",
     href: "/case-studies/ecommerce/smk-store",
   },
   {
     label: "Technical SEO · Michigan, USA",
     title:
-      "+476% organic clicks and +285% indexing rate — recovered from near-zero GSC visibility.",
-    metric: "+476% clicks",
+      "+285% pages indexed and +83% US organic clicks — roughly 3,000 to 11,549 indexed pages between May and July 2026.",
+    metric: "+285% indexed"
     href: "/case-studies/ecommerce/michigan-outdoor-sports",
   },
   {
@@ -48,8 +48,8 @@ const results = [
 ];
 
 const videos = [
-  { id: "gFod-dTY-bg", client: "SMK Store", note: "Ecommerce · +75% US revenue" },
-  { id: "Y5PxSECNGP0", client: "Michigan Outdoor Sports", note: "Technical · +476% clicks" },
+  { id: "gFod-dTY-bg", client: "SMK Store", note: "Ecommerce · indexing recovery" },
+  { id: "Y5PxSECNGP0", client: "Michigan Outdoor Sports", note: "Technical · +285% indexed" },
   { id: "g_1TfDU4YeA", client: "Local HVAC Services", note: "Local · Top 3 map pack" },
   { id: "zRcTc2HqDwU", client: "Glendora Kitchens", note: "Local · Top 10 rankings" },
 ];

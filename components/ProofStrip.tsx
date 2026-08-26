@@ -1,59 +1,57 @@
 // components/ProofStrip.tsx
-// Three verified numbers, immediately under the client logos.
+// Three verified numbers plus the Search Console chart behind them.
 //
-// These stat cards used to live in the middle of the Results section, roughly
-// four screens down. They are the strongest thing on the site and the only
-// claims that are independently checkable, so a visitor should meet them
-// within one scroll — not after passing a second hero, a services grid and a
-// process explainer.
+// STATIC BY DESIGN. These figures previously animated up from zero on scroll
+// (CountUp). A number that spins into place reads as decoration; one that is
+// simply stated reads as a record. A buyer scrolling fast also saw a
+// half-finished number, which is worse than no animation at all.
 //
-// STATIC BY DESIGN. The numbers previously animated up from zero on scroll
-// (CountUp). Counting animations read as marketing decoration; a figure that
-// spins into place invites less trust than one that is simply stated, and a
-// buyer scrolling fast sees a half-finished number. A verified metric should
-// behave like a figure in a report, not like a slot machine.
+// EVERY FIGURE HERE IS TRACEABLE. Each is Michigan Outdoor Sports, measured in
+// Google Search Console, over stated windows, and the indexing chart below is
+// the unedited GSC screenshot the first figure comes from. Figures that could
+// not be traced to a source were removed rather than restated:
 //
-// Each column carries the client, the measurement window and the source, so
-// the number is attributable rather than floating. That is the difference
-// between a statistic and a claim.
+//   - "+476% organic clicks" was replaced with +83%, which is what the two
+//     comparable GSC Performance exports actually show (84 clicks for
+//     1 May-11 Jun, 154 clicks for 12 Jun-26 Jul, both Web / United States).
+//   - "+75% US revenue growth (SMK Store)" was removed. The only revenue
+//     screenshots available are Michigan Outdoor Sports, not SMK, and they
+//     show $0.00 -> $206.63 -> $311.05 monthly net sales, which does not
+//     support the claim and is not a figure worth publishing.
+//
+// If better source data exists for either, restore the figure WITH the export
+// it came from — not from memory.
 
+import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, ArrowUpRight } from "lucide-react";
-import { color } from "@/lib/design-tokens";
+import { color, radius } from "@/lib/design-tokens";
 
 type Stat = {
   value: string;
   label: string;
-  client: string;
+  detail: string;
   window: string;
-  source: string;
-  href: string;
 };
 
 const stats: Stat[] = [
   {
-    value: "+476%",
-    label: "Organic clicks recovered",
-    client: "Michigan Outdoor Sports",
-    window: "From near-zero visibility",
-    source: "Google Search Console",
-    href: "/case-studies/ecommerce/michigan-outdoor-sports",
-  },
-  {
-    value: "+75%",
-    label: "US revenue growth",
-    client: "SMK Store",
-    window: "Two months",
-    source: "Client store analytics",
-    href: "/case-studies/ecommerce/smk-store",
-  },
-  {
     value: "+285%",
-    label: "Product pages indexed",
-    client: "35,000-product catalog",
-    window: "Six weeks",
-    source: "Google Search Console",
-    href: "/case-studies/ecommerce/smk-store",
+    label: "Pages indexed",
+    detail: "≈3,000 → 11,549 indexed pages",
+    window: "18 May – 25 Jul 2026",
+  },
+  {
+    value: "+83%",
+    label: "US organic clicks",
+    detail: "84 → 154 clicks, like-for-like windows",
+    window: "1 May – 26 Jul 2026",
+  },
+  {
+    value: "3.5% → 5.2%",
+    label: "US click-through rate",
+    detail: "Same queries, same country filter",
+    window: "1 May – 26 Jul 2026",
   },
 ];
 
@@ -65,7 +63,7 @@ export default function ProofStrip() {
       aria-labelledby="proof-strip-heading"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end">
+        <div className="mb-9 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end">
           <div>
             <p
               id="proof-strip-heading"
@@ -73,77 +71,77 @@ export default function ProofStrip() {
               style={{ color: color.successDark }}
             >
               <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-              Verified client results
+              One account · Google Search Console
             </p>
-            <p className="mt-2 text-sm" style={{ color: color.muted }}>
-              Each figure is attributable to a named account and a stated source.
+            <h2 className="mt-2 text-2xl font-black tracking-tight" style={{ color: color.ink }}>
+              Michigan Outdoor Sports, May to July 2026.
+            </h2>
+            <p className="mt-1 text-sm" style={{ color: color.muted }}>
+              One client, one reporting period, one source — not a highlight reel.
             </p>
           </div>
           <Link
-            href="/all-case-studies"
-            className="inline-flex items-center gap-1.5 text-sm font-bold"
+            href="/case-studies/ecommerce/michigan-outdoor-sports"
+            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-bold"
             style={{ color: color.primary }}
           >
-            How each was measured <ArrowUpRight className="h-4 w-4" />
+            Read the full case study <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* A data table rendered as three columns, not three "cards": hairline
-            rules instead of shadows, tabular figures, aligned baselines. */}
-        <dl
-          className="grid grid-cols-1 gap-px border sm:grid-cols-3"
-          style={{ background: color.border, borderColor: color.border }}
-        >
-          {stats.map((s) => (
-            <div key={s.label} className="group" style={{ background: color.white }}>
-              <Link href={s.href} className="block h-full px-6 py-7">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+          {/* Figures — a definition list, not cards. Hairline rules, tabular
+              figures, aligned baselines. */}
+          <dl className="border-t" style={{ borderColor: color.border }}>
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="flex items-baseline justify-between gap-4 border-b py-4"
+                style={{ borderColor: color.border }}
+              >
+                <div className="min-w-0">
+                  <dt className="text-sm font-bold" style={{ color: color.ink }}>
+                    {s.label}
+                  </dt>
+                  <p className="mt-0.5 text-xs" style={{ color: color.muted }}>
+                    {s.detail}
+                  </p>
+                  <p className="text-xs tabular-nums" style={{ color: color.muted }}>
+                    {s.window}
+                  </p>
+                </div>
                 <dd
-                  className="text-5xl font-black leading-none tracking-tight tabular-nums"
+                  className="shrink-0 text-3xl font-black leading-none tracking-tight tabular-nums sm:text-4xl"
                   style={{ color: color.primary }}
                 >
                   {s.value}
                 </dd>
-                <dt
-                  className="mt-3 text-sm font-bold"
-                  style={{ color: color.ink }}
-                >
-                  {s.label}
-                </dt>
+              </div>
+            ))}
+          </dl>
 
-                <div
-                  className="mt-4 space-y-1 border-t pt-3 text-xs"
-                  style={{ borderColor: color.border, color: color.muted }}
-                >
-                  <p>
-                    <span className="font-semibold" style={{ color: color.ink }}>
-                      Account:
-                    </span>{" "}
-                    {s.client}
-                  </p>
-                  <p>
-                    <span className="font-semibold" style={{ color: color.ink }}>
-                      Window:
-                    </span>{" "}
-                    {s.window}
-                  </p>
-                  <p>
-                    <span className="font-semibold" style={{ color: color.ink }}>
-                      Source:
-                    </span>{" "}
-                    {s.source}
-                  </p>
-                </div>
-
-                <span
-                  className="mt-4 inline-flex items-center gap-1 text-xs font-bold underline-offset-4 group-hover:underline"
-                  style={{ color: color.successDark }}
-                >
-                  Read the case study <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
+          {/* The chart the first figure comes from. Unedited apart from a crop
+              that removes the account avatar, the site URL and the left nav. */}
+          <figure className="m-0">
+            <div
+              className={`overflow-hidden border ${radius.card}`}
+              style={{ borderColor: color.border, background: color.white }}
+            >
+              <Image
+                src="/images/proof/mso-indexing-growth.png"
+                alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
+                width={745}
+                height={236}
+                sizes="(max-width: 1024px) 100vw, 560px"
+                className="h-auto w-full"
+              />
             </div>
-          ))}
-        </dl>
+            <figcaption className="mt-3 text-xs leading-relaxed" style={{ color: color.muted }}>
+              Unedited Google Search Console screenshot — Page indexing, all known pages.
+              Cropped only to remove the account avatar and site URL.
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
   );

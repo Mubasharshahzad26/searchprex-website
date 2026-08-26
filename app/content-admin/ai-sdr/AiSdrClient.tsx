@@ -176,9 +176,42 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
                           </span>
                         </td>
                         <td className="px-4 py-3">
-                          <Button size="sm" variant="ghost" className="h-8 px-2 text-purple-600">
-                            View <ArrowRight className="w-4 h-4 ml-1" />
-                          </Button>
+                          <div className="flex gap-2">
+                            <Button size="sm" variant="ghost" className="h-8 px-2 text-purple-600">
+                              View <ArrowRight className="w-4 h-4 ml-1" />
+                            </Button>
+                            {lead.status === "qualified" && (
+                              <Button 
+                                size="sm" 
+                                variant="outline" 
+                                className="h-8 px-2 border-purple-200 hover:bg-purple-50 text-purple-700"
+                                onClick={async (e) => {
+                                  const btn = e.currentTarget;
+                                  btn.disabled = true;
+                                  btn.innerText = "Sending...";
+                                  try {
+                                    const res = await fetch("/api/sdr/outreach", {
+                                      method: "POST",
+                                      headers: { "Content-Type": "application/json" },
+                                      body: JSON.stringify({ leadId: lead.id })
+                                    });
+                                    const data = await res.json();
+                                    if(!res.ok) throw new Error(data.error);
+                                    
+                                    // Update lead in state
+                                    setLeads(leads.map(l => l.id === data.lead.id ? data.lead : l));
+                                    alert("Email generated and sent via Resend!");
+                                  } catch (err: any) {
+                                    alert("Error: " + err.message);
+                                    btn.disabled = false;
+                                    btn.innerText = "Generate & Send";
+                                  }
+                                }}
+                              >
+                                <Mail className="w-4 h-4 mr-1" /> Send AI Email
+                              </Button>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}
