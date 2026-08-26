@@ -87,7 +87,18 @@ export async function GET(req: Request) {
             Company: ${analysisData.companyName}
             Niche: ${analysisData.niche}
             Flaws: ${analysisData.analysis}
-            Output JSON with 'subject' and 'body' (HTML allowed).`,
+            
+            CRITICAL INSTRUCTIONS BASED ON NICHE:
+            - If they are a **Law Firm**, pitch Local SEO Map Pack rankings AND our new "AI Intake Efficiency Software" that qualifies their legal leads 24/7.
+            - If they are an **Ecommerce Store**, pitch Technical SEO, Product Schema, and organic revenue growth.
+            - If they are **Local/Home Services**, pitch Google Business Profile dominance.
+            
+            Format:
+            - Keep it short, punchy, and conversational (under 100 words).
+            - Do not sound like a robot. No corporate jargon.
+            - Mention their specific website flaw naturally.
+            - End with a soft call-to-action (e.g., "Open to a quick audit video?").
+            - Output JSON with 'subject' and 'body' (HTML allowed).`,
             config: {
               responseMimeType: "application/json",
               responseSchema: {

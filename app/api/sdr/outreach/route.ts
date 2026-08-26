@@ -37,6 +37,9 @@ export async function POST(req: Request) {
       - Flaws found by our AI: ${lead.analysis}
       
       Requirements:
+      - If they are a **Law Firm**, pitch Local SEO Map Pack rankings AND our new "AI Intake Efficiency Software" that qualifies their legal leads 24/7.
+      - If they are an **Ecommerce Store**, pitch Technical SEO, Product Schema, and organic revenue growth.
+      - If they are **Local/Home Services**, pitch Google Business Profile dominance.
       - Keep it short, punchy, and conversational (under 100 words).
       - Do not sound like a robot. Do not use corporate jargon.
       - Mention their specific website flaw naturally.
