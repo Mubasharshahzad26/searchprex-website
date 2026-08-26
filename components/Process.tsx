@@ -24,26 +24,26 @@ const steps = [
   {
     number: "01",
     icon: Search,
-    title: "You send your site",
+    title: "Share your URL",
     timing: "Takes 60 seconds",
     description:
-      "One form, three fields. No call required, no discovery questionnaire, nothing to install.",
+      "One field. No call required, no discovery questionnaire, nothing to install.",
   },
   {
     number: "02",
     icon: Map,
-    title: "The founder audits it personally",
+    title: "Quick reality check report",
     timing: "Back within 24 hours",
     description:
-      "Technical issues, content gaps and competitor positions — returned as a prioritized P1 / P2 / P3 fix list with a 90-day roadmap. Not a generic PDF, and not written by a junior.",
+      "I audit the site myself and send a reality check report — indexing, technical issues, content gaps and where your US competitors are beating you, as a prioritized P1 / P2 / P3 list. Not a generic PDF, and not written by a junior.",
   },
   {
     number: "03",
     icon: LineChart,
-    title: "You decide what happens next",
+    title: "Roadmap, then I start work",
     timing: "No contract, month to month",
     description:
-      "Take the roadmap and run it yourself, or have us execute it. Either way the audit is yours to keep, and pricing is only set once you have seen the work.",
+      "You get the 90-day roadmap either way — run it yourself or I execute it personally, with weekly reporting on revenue, not vanity rankings. Pricing is set only after you have seen the work.",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function Process() {
             How it works
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-            What happens after you hit send.
+            Our SEO Process — From Your URL to Revenue Growth
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#5b6472]">
             Three steps, no surprises. You will know exactly what is wrong with your site

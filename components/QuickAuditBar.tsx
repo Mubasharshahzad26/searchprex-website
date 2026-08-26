@@ -75,7 +75,7 @@ export default function QuickAuditBar() {
               className="text-2xl font-black tracking-tight sm:text-3xl"
               style={{ color: color.ink }}
             >
-              Want the same read on your site?
+              Free SEO Audit for Your US Business
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm" style={{ color: color.muted }}>
               One field. The founder audits it himself and sends a prioritized fix list.

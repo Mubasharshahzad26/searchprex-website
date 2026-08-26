@@ -35,22 +35,26 @@ type Persona = {
   media: "photo" | "case";
   video?: { id: string; caption: string };
   clients?: string[];
+  aside?: { label: string; href: string };
 };
  
 const personas: Persona[] = [
   {
     id: "law-firm",
     label: "Law Firm SEO",
-    headline: "One SEO expert.",
-    emphasis: "Your firm, not a queue.",
+    headline: "Law Firm SEO",
+    emphasis: "for US Practices.",
     sub: "I'm Mubashar. I personally run every law-firm account at SearchPrex — no juniors, no outsourcing. You get the strategy, the execution, and the Search Console export behind every number I claim.",
+    // Law firms only: the AI intake assistant is a separate product, so it
+    // gets one quiet line here rather than a competing section.
+    aside: { label: "Also for law firms: AI Intake Assistant — qualify every case 24/7", href: "/intake-assistant" },
     media: "photo" as const,
   },
   {
     id: "ecommerce",
     label: "eCommerce SEO",
-    headline: "One SEO expert.",
-    emphasis: "Your store, not a queue.",
+    headline: "Ecommerce SEO",
+    emphasis: "for US Online Stores.",
     sub: "I'm Mubashar. I recovered a 35,000-product catalog from mass non-indexing and watched monthly store revenue go from $5,832 to $19,100 — and I'll show you the dashboard it came from.",
     media: "case" as const,
     video: { id: "gFod-dTY-bg", caption: "How SMK Store's mass non-indexing was diagnosed and recovered." },
@@ -59,8 +63,8 @@ const personas: Persona[] = [
   {
     id: "local",
     label: "Local SEO",
-    headline: "One SEO expert.",
-    emphasis: "Your city, not a queue.",
+    headline: "Local SEO",
+    emphasis: "for US Service Businesses.",
     sub: "I'm Mubashar. I work your Google Business Profile, citations and service-area pages personally — and report on calls and visits, not vanity rankings.",
     media: "case" as const,
     video: { id: "g_1TfDU4YeA", caption: "How HVAC Services Team reached the Google Map Pack Top 3 and an AI Overview." },
@@ -325,6 +329,18 @@ export default function Hero({ heroImage }: HeroProps) {
                   {OFFER_MICROCOPY}
                 </span>
               </div>
+
+              {current.aside && (
+                <div className="mt-4 flex justify-center lg:justify-start">
+                  <Link
+                    href={current.aside.href}
+                    className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors hover:bg-white"
+                    style={{ borderColor: "#d4d8e3", color: PURPLE }}
+                  >
+                    {current.aside.label} <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              )}
             </motion.div>
  
             {/* ── Right: persona-driven — photo+card (Law Firm) OR video+clients (eCommerce/Local) ── */}
