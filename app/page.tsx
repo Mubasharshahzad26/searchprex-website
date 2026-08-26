@@ -6,6 +6,8 @@ import ClientLogos from "../components/ClientLogos";
 import ProofStrip from "../components/ProofStrip";
 import QuickAuditBar from "../components/QuickAuditBar";
 import RecoveryStory from "../components/RecoveryStory";
+import CaseStudyShowcase from "../components/CaseStudyShowcase";
+import AuditWalkthrough from "../components/AuditWalkthrough";
 import TrustBar from "../components/TrustBar";
 import LeadWizard from "../components/LeadWizard";
 import Process from "../components/Process";
@@ -221,7 +223,7 @@ export default async function Home() {
       {
         "@type": "ImageObject",
         "@id": `${SITE}/#proof-indexing`,
-        "contentUrl": `${SITE}/images/proof/mso-indexing-growth.png`,
+        "contentUrl": `${SITE}/images/proof/mso-gsc-indexing-full.png`,
         "caption":
           "Google Search Console page indexing for Michigan Outdoor Sports: approximately 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026.",
         "description":
@@ -305,6 +307,15 @@ export default async function Home() {
         {/* Results and the GSC recordings that back them, merged into one
             section. They used to be two consecutive proof blocks. */}
         <Reveal><Results /></Reveal>
+
+        {/* The method, not just the outcome — a full recorded audit. Sits right
+            after the process explainer so "what happens after you hit send" is
+            immediately shown rather than only described. */}
+        <Reveal><AuditWalkthrough /></Reveal>
+
+        {/* Six US case studies, each linking to its full write-up. A grid, not
+            a slider — everything visible and in the HTML for crawling. */}
+        <Reveal><CaseStudyShowcase /></Reveal>
 
         {/* The one account, in full — peak, de-indexing, and recovery, with the
             revenue that followed. Published with the client's permission. */}
