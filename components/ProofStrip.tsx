@@ -74,7 +74,7 @@ export default function ProofStrip() {
               One account · Google Search Console
             </p>
             <h2 className="mt-2 text-2xl font-black tracking-tight" style={{ color: color.ink }}>
-              Michigan Outdoor Sports, May to July 2026.
+              Verified Ecommerce SEO Results — Michigan Outdoor Sports, May–July 2026
             </h2>
             <p className="mt-1 text-sm" style={{ color: color.muted }}>
               One client, one reporting period, one source — not a highlight reel.
@@ -128,10 +128,10 @@ export default function ProofStrip() {
               style={{ borderColor: color.border, background: color.white }}
             >
               <Image
-                src="/images/proof/mso-indexing-growth.png"
+                src="/images/proof/mso-gsc-indexing-full.png"
                 alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
-                width={745}
-                height={236}
+                width={1366}
+                height={606}
                 sizes="(max-width: 1024px) 100vw, 560px"
                 // Eager: this is the page's primary evidence, it sits in the
                 // second section, and it is ~6KB as AVIF. Not `priority` —
