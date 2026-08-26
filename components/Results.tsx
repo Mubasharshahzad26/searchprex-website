@@ -27,8 +27,8 @@ const results = [
   {
     label: "Ecommerce SEO · United States",
     title:
-      "Mass non-indexing recovered across a 35,000-product catalog — 12,581 crawled-but-unindexed pages diagnosed in Search Console.",
-    metric: "Indexing recovered",
+      "+227% monthly store revenue after recovering a 35,000-product catalog from mass non-indexing — $5,832 to $19,100.",
+    metric: "+227% revenue",
     href: "/case-studies/ecommerce/smk-store",
   },
   {
@@ -48,7 +48,7 @@ const results = [
 ];
 
 const videos = [
-  { id: "gFod-dTY-bg", client: "SMK Store", note: "Ecommerce · indexing recovery" },
+  { id: "gFod-dTY-bg", client: "SMK Store", note: "Ecommerce · +227% store revenue" },
   { id: "Y5PxSECNGP0", client: "Michigan Outdoor Sports", note: "Technical · +285% indexed" },
   { id: "g_1TfDU4YeA", client: "Local HVAC Services", note: "Local · Top 3 map pack" },
   { id: "zRcTc2HqDwU", client: "Glendora Kitchens", note: "Local · Top 10 rankings" },

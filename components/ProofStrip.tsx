@@ -15,10 +15,12 @@
 // number as though it were today's position would overstate it. The peak, the
 // setback and the rebuild are told in full in components/RecoveryStory.tsx.
 //
-// The old "+75% US revenue growth (SMK Store)" claim is gone: the revenue
-// screenshots on file are Michigan Outdoor Sports, not SMK. MSO's actual
-// revenue recovery is shown, with dates and the client's permission, in
-// RecoveryStory.
+// The old "+75% US revenue growth (SMK Store)" figure was never supported by
+// any export. SMK's real revenue evidence has since surfaced — the client's
+// own WooCommerce captures show $5,832.02 -> $19,100.71 monthly net sales,
+// i.e. +227%, and that (with both screenshots) now lives in RecoveryStory.
+// Note it is TOTAL store revenue, not US-only: the dashboard does not
+// segment by country, so it must not be described as a US figure.
 
 import Image from "next/image";
 import Link from "next/link";

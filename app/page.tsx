@@ -213,6 +213,54 @@ export default async function Home() {
           "Technical SEO"
         ]
       },
+      // ── Proof images ──
+      // ImageObject nodes so the evidence is machine-readable, not just a
+      // picture. Each carries the capture date, what it shows, and the page it
+      // lives on, which is what lets Google associate the claim with the
+      // artefact rather than treating the number as an unsupported assertion.
+      {
+        "@type": "ImageObject",
+        "@id": `${SITE}/#proof-indexing`,
+        "contentUrl": `${SITE}/images/proof/mso-indexing-growth.png`,
+        "caption":
+          "Google Search Console page indexing for Michigan Outdoor Sports: approximately 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026.",
+        "description":
+          "Unedited Google Search Console screenshot showing a 285% increase in indexed pages following technical SEO indexing recovery work.",
+        "creator": { "@id": `${SITE}/#founder` },
+        "creditText": "SearchPrex — Mubashar Shahzad",
+        "datePublished": "2026-08-07",
+        "representativeOfPage": false
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${SITE}/#proof-revenue-before`,
+        "contentUrl": `${SITE}/images/proof/mso-revenue-1-jul20.png`,
+        "caption":
+          "Michigan Outdoor Sports WooCommerce net sales, 20 July 2026: $0.00 for the month.",
+        "creator": { "@id": `${SITE}/#founder` },
+        "creditText": "SearchPrex — Mubashar Shahzad",
+        "datePublished": "2026-07-20"
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${SITE}/#proof-revenue-mid`,
+        "contentUrl": `${SITE}/images/proof/mso-revenue-2-aug06.png`,
+        "caption":
+          "Michigan Outdoor Sports WooCommerce net sales, 6 August 2026: $206.63 for the month.",
+        "creator": { "@id": `${SITE}/#founder` },
+        "creditText": "SearchPrex — Mubashar Shahzad",
+        "datePublished": "2026-08-06"
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${SITE}/#proof-revenue-after`,
+        "contentUrl": `${SITE}/images/proof/mso-revenue-3-aug17.png`,
+        "caption":
+          "Michigan Outdoor Sports WooCommerce net sales, 17 August 2026: $311.05 month to date.",
+        "creator": { "@id": `${SITE}/#founder` },
+        "creditText": "SearchPrex — Mubashar Shahzad",
+        "datePublished": "2026-08-17"
+      },
       trustpilotReviewSchema
     ]
   };

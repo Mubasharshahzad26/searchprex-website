@@ -41,17 +41,17 @@ const personas: Persona[] = [
   {
     id: "law-firm",
     label: "Law Firm SEO",
-    headline: "Rank Your Firm.",
-    emphasis: "Win More Cases.",
-    sub: "We help US law firms dominate local and national search results across all 50 states — more qualified leads, more signed clients, less wasted ad spend.",
+    headline: "One SEO expert.",
+    emphasis: "Your firm, not a queue.",
+    sub: "I'm Mubashar. I personally run every law-firm account at SearchPrex — no juniors, no outsourcing. You get the strategy, the execution, and the Search Console export behind every number I claim.",
     media: "photo" as const,
   },
   {
     id: "ecommerce",
     label: "eCommerce SEO",
-    headline: "Rank Higher.",
-    emphasis: "Sell More. Grow Faster.",
-    sub: "From product pages to category architecture — we build eCommerce SEO strategies that drive revenue, not just traffic.",
+    headline: "One SEO expert.",
+    emphasis: "Your store, not a queue.",
+    sub: "I'm Mubashar. I recovered a 35,000-product catalog from mass non-indexing and watched monthly store revenue go from $5,832 to $19,100 — and I'll show you the dashboard it came from.",
     media: "case" as const,
     video: { id: "gFod-dTY-bg", caption: "How SMK Store's mass non-indexing was diagnosed and recovered." },
     clients: ["Adscarry", "SMK Store", "Michigan Outdoor Sports"],
@@ -59,9 +59,9 @@ const personas: Persona[] = [
   {
     id: "local",
     label: "Local SEO",
-    headline: "Own Your City.",
-    emphasis: "Get Found First.",
-    sub: "Dominate Google Maps and local search in your area. We help local businesses get more calls, more visits, and more customers.",
+    headline: "One SEO expert.",
+    emphasis: "Your city, not a queue.",
+    sub: "I'm Mubashar. I work your Google Business Profile, citations and service-area pages personally — and report on calls and visits, not vanity rankings.",
     media: "case" as const,
     video: { id: "g_1TfDU4YeA", caption: "How HVAC Services Team reached the Google Map Pack Top 3 and an AI Overview." },
     clients: ["AAA Mobile Tyres", "Door Doctor", "HVAC Services Team"],
@@ -90,7 +90,8 @@ const eeatLinks = [
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="DesignRush"><rect x="2" y="2" width="20" height="20" rx="4" fill="#e11d48"/><text x="12" y="15" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#fff">DR</text></svg> },
   { label: "LinkedIn", sub: "Company", href: "https://www.linkedin.com/company/searchprex/", color: "#0a4f96",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0a66c2" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
-]; 
+];
+
 interface HeroProps {
   heroImage?: unknown;
 }
@@ -242,7 +243,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-widest sm:text-xs" style={{ color: GREEN_DARK }}>
-                  Founder-Led SEO. No Juniors. No Fluff.
+                  Founder-Led SEO · Every Number Has a Screenshot
                 </span>
               </div>
  

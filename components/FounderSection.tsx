@@ -49,14 +49,14 @@ const caseResults = [
     label: "Indexed pages (≈3K → 11.5K, May–Jul 2026)",
   },
   {
-    // Was "+75% revenue growth in 2 months". No export supports that figure —
-    // the only revenue screenshots on file are Michigan Outdoor Sports, not
-    // SMK. What IS documented for SMK is the indexing diagnosis, so that is
-    // what this now claims.
+    // Was "+75% revenue growth in 2 months", which no export supported. The
+    // client's own WooCommerce captures show $5,832.02 -> $19,100.71 monthly
+    // net sales, so the real figure is +227%. Note this is TOTAL store
+    // revenue, not US-only — the dashboard does not segment by country.
     client: "SMK Store",
     tag: "Tactical Gear · USA",
-    metric: "12,581",
-    label: "Crawled-but-unindexed pages diagnosed",
+    metric: "+227%",
+    label: "Monthly store revenue ($5,832 → $19,100)",
   },
   {
     client: "Local HVAC Services",
