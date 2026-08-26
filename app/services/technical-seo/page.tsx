@@ -18,7 +18,7 @@ const baseMetadata: Metadata = {
   openGraph: {
     title: "Technical SEO Services | SearchPrex",
     description:
-      "Recover mass non-indexing, fix Core Web Vitals, and structure your site for Google's 2026 algorithm. +476% clicks, +285% indexing on Michigan Outdoor Sports.",
+      "Recover mass non-indexing, fix Core Web Vitals, and structure your site for Google's 2026 algorithm. +285% pages indexed and +83% US clicks on Michigan Outdoor Sports, rebuilt after a de-indexing.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",

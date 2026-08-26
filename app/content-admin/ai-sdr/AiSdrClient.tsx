@@ -58,6 +58,31 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
     }
   };
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isHunting, setIsHunting] = useState(false);
+
+  const handleHuntMarkets = async () => {
+    if (!searchQuery) return;
+    setIsHunting(true);
+    try {
+      const res = await fetch("/api/sdr/hunter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: searchQuery })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      
+      alert(data.message);
+      // Reload page to show new leads in the table
+      window.location.reload();
+    } catch (e: any) {
+      alert("Error: " + e.message);
+    } finally {
+      setIsHunting(false);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       
@@ -66,16 +91,26 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <BrainCircuit className="w-5 h-5 text-purple-600" />
-              Market Finder
+              <Search className="w-5 h-5 text-purple-600" />
+              Lead Hunter
             </CardTitle>
             <CardDescription>
-              Let Gemini analyze your services and find low-competition markets.
+              Scrape Google Maps for local businesses automatically.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <Button className="w-full bg-purple-600 hover:bg-purple-700" onClick={() => alert("Market Analysis Module (Phase 2) initializing...")}>
-              <Search className="w-4 h-4 mr-2" /> Find Markets
+          <CardContent className="space-y-4">
+            <Input 
+              placeholder="e.g. Lawyers in Austin TX" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button 
+              className="w-full bg-purple-600 hover:bg-purple-700" 
+              onClick={handleHuntMarkets}
+              disabled={isHunting}
+            >
+              {isHunting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Search className="w-4 h-4 mr-2" />}
+              {isHunting ? "Hunting..." : "Find Leads"}
             </Button>
           </CardContent>
         </Card>

@@ -54,7 +54,7 @@ const fadeUp: Variants = {
 /* ── Page data ── */
 
 const HERO_STATS = [
-  { value: "+476%", label: "Organic clicks" },
+  { value: "+285%", label: "Pages indexed" },
   { value: "+285%", label: "Indexing rate" },
   { value: "12K+", label: "Product pages indexed" },
   { value: "40+", label: "Ecommerce sites scaled" },

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 
 const states = ["CALIFORNIA", "TEXAS", "FLORIDA", "NEW YORK", "ILLINOIS"];
 
@@ -14,32 +13,19 @@ export default function TrustBar() {
             Serving Law Firms & Stores in:
           </p>
 
-          {/* States Ticker */}
-          <div className="flex items-center gap-4 overflow-hidden">
-            <motion.div
-              className="flex items-center gap-4"
-              initial={{ x: 0 }}
-              // -50%, not -100%. The row below renders the states list twice,
-              // so translating by half its width lands the second copy exactly
-              // where the first started — a seamless loop. -100% scrolled both
-              // copies off screen and snapped back with a visible jump.
-              animate={{ x: "-50%" }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              {[...states, ...states].map((state, index) => (
-                <span
-                  key={`${state}-${index}`}
-                  className="flex items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#0a0f2e]"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#1a3c8f]" />
-                  {state}
-                </span>
-              ))}
-            </motion.div>
+          {/* States — static. This was a marquee that translated on a 20s
+              loop; it moved for its own sake, cost a continuous animation,
+              and was harder to read than the plain list it contained. */}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            {states.map((state) => (
+              <span
+                key={state}
+                className="flex items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#0a0f2e]"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-[#534AB7]" />
+                {state}
+              </span>
+            ))}
           </div>
 
           {/* Availability.

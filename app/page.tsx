@@ -4,8 +4,9 @@ import type { Metadata } from "next";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import ProofStrip from "../components/ProofStrip";
+import QuickAuditBar from "../components/QuickAuditBar";
+import RecoveryStory from "../components/RecoveryStory";
 import TrustBar from "../components/TrustBar";
-import SEOAuditStrip from "../components/SEOAuditStrip";
 import LeadWizard from "../components/LeadWizard";
 import Process from "../components/Process";
 import Pricing from "../components/Pricing";
@@ -238,7 +239,11 @@ export default async function Home() {
             middle of Results, roughly four screens down. */}
         <Reveal><ProofStrip /></Reveal>
 
-        <SEOAuditStrip />
+        {/* One-field capture, high up. Replaces the AI-visibility strip that
+            used to sit here and pitched a different product three sections
+            before the AI section pitched the same one again. Same offer, same
+            name, same endpoint as the full form below — not a second ask. */}
+        <Reveal><QuickAuditBar /></Reveal>
 
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>
@@ -252,6 +257,10 @@ export default async function Home() {
         {/* Results and the GSC recordings that back them, merged into one
             section. They used to be two consecutive proof blocks. */}
         <Reveal><Results /></Reveal>
+
+        {/* The one account, in full — peak, de-indexing, and recovery, with the
+            revenue that followed. Published with the client's permission. */}
+        <Reveal><RecoveryStory /></Reveal>
 
         <Reveal><FounderSection /></Reveal>
         <TrustpilotReviewSection />

@@ -119,7 +119,7 @@ const services = [
       "Core Web Vitals & site speed fixes",
       "Structured data / schema implementation",
     ],
-    proof: { v: "+476%", l: "organic clicks in 90 days" },
+    proof: { v: "+285%", l: "pages indexed, May–Jul 2026" },
     proofLink: "/case-studies/ecommerce/michigan-outdoor-sports",
     proofLabel: "Read the Michigan case study",
   },
@@ -127,7 +127,7 @@ const services = [
 
 const bigStats = [
   { v: "20+", l: "Clients worldwide" },
-  { v: "+476%", l: "Organic clicks" },
+  { v: "+285%", l: "Pages indexed" },
   { v: "+285%", l: "Indexing rate" },
   { v: "12K+", l: "Pages indexed" },
 ];

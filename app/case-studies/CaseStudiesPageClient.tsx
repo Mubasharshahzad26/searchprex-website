@@ -49,12 +49,12 @@ const caseStudies = [
     badgeColor: "#185FA5",
     badgeBg: "#E6F1FB",
     client: "Michigan Outdoor Sports",
-    headline: "+476% organic clicks and +285% indexing rate — recovered from near-zero GSC visibility.",
+    headline: "+285% pages indexed and +83% US organic clicks — rebuilt after a de-indexing event.",
     video: "Y5PxSECNGP0",
     challenge: "Brand pages were never properly submitted to GSC, thin content caused mass non-indexing, and crawl budget was being wasted — leaving thousands of pages invisible despite being a real physical business.",
     solution: "We submitted sitemaps directly to GSC, fixed indexation blocks and crawl waste, rewrote brand pages with unique content, and resubmitted in batches — backed by a Michigan-specific local keyword strategy.",
-    outcome: "+476% organic clicks and a +285% indexing rate within 90 days — 12,000+ pages indexed from near-zero, CTR well above industry average, with no ad spend.",
-    metrics: [{ v: "+476%", l: "Organic clicks" }, { v: "+285%", l: "Indexing rate" }, { v: "12K+", l: "Pages indexed" }],
+    outcome: "Peaked at +476% organic clicks in March 2026, lost ground to a gradual de-indexing, then rebuilt: ~3,000 to 11,549 indexed pages (+285%) and +83% US organic clicks by July, with no ad spend.",
+    metrics: [{ v: "+285%", l: "Pages indexed" }, { v: "+285%", l: "Indexing rate" }, { v: "12K+", l: "Pages indexed" }],
   },
 ];
  

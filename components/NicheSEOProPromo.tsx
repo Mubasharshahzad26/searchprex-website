@@ -113,7 +113,7 @@ export default function NicheSEOProPromo() {
                   <div className="text-[11px] text-slate-400">Pages generated</div>
                 </div>
                 <div className="rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/5">
-                  <div className="text-2xl font-black text-[#3eb489]">+476%</div>
+                  <div className="text-2xl font-black text-[#196b4d]">+285%</div>
                   <div className="text-[11px] text-slate-400">Organic clicks</div>
                 </div>
               </div>

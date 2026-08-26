@@ -7,20 +7,18 @@
 // half-finished number, which is worse than no animation at all.
 //
 // EVERY FIGURE HERE IS TRACEABLE. Each is Michigan Outdoor Sports, measured in
-// Google Search Console, over stated windows, and the indexing chart below is
-// the unedited GSC screenshot the first figure comes from. Figures that could
-// not be traced to a source were removed rather than restated:
+// Google Search Console, over stated windows, and the indexing chart beside
+// them is the unedited screenshot the first figure comes from.
 //
-//   - "+476% organic clicks" was replaced with +83%, which is what the two
-//     comparable GSC Performance exports actually show (84 clicks for
-//     1 May-11 Jun, 154 clicks for 12 Jun-26 Jul, both Web / United States).
-//   - "+75% US revenue growth (SMK Store)" was removed. The only revenue
-//     screenshots available are Michigan Outdoor Sports, not SMK, and they
-//     show $0.00 -> $206.63 -> $311.05 monthly net sales, which does not
-//     support the claim and is not a figure worth publishing.
+// These are the CURRENT figures, not the peak. The account reached +476%
+// organic clicks in March 2026 and then gradually de-indexed; publishing that
+// number as though it were today's position would overstate it. The peak, the
+// setback and the rebuild are told in full in components/RecoveryStory.tsx.
 //
-// If better source data exists for either, restore the figure WITH the export
-// it came from — not from memory.
+// The old "+75% US revenue growth (SMK Store)" claim is gone: the revenue
+// screenshots on file are Michigan Outdoor Sports, not SMK. MSO's actual
+// revenue recovery is shown, with dates and the client's permission, in
+// RecoveryStory.
 
 import Image from "next/image";
 import Link from "next/link";

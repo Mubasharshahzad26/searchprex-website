@@ -33,19 +33,19 @@ const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
 /* ─── DATA ─── */
 
 const VIDEOS: GalleryVideo[] = [
-  { id: "Y5PxSECNGP0", title: "Performance walkthrough", sub: "Live GSC recording · +476% organic clicks" },
+  { id: "Y5PxSECNGP0", title: "Performance walkthrough", sub: "Live GSC recording · +285% pages indexed" },
   { id: "cI3BwxqaJbw", title: "0 to 285% indexing rate", sub: "Full case study · crawl + indexation fix" },
 ];
 
 const heroStats = [
-  { value: "+476%", label: "Organic clicks" },
+  { value: "+285%", label: "Pages indexed" },
   { value: "+285%", label: "Indexing rate" },
   { value: "12K+", label: "Pages indexed" },
   { value: "48hr", label: "Audit turnaround" },
 ];
 
 const proofStats = [
-  { value: "+476%", label: "Organic clicks" },
+  { value: "+285%", label: "Pages indexed" },
   { value: "+285%", label: "Indexing rate" },
   { value: "12K+", label: "Pages indexed" },
   { value: "48hr", label: "Audit turnaround" },
@@ -169,12 +169,12 @@ export default function TechnicalSEOClient() {
       <Section id="case-studies" tone="surface">
         <SectionHeading
           eyebrow="Case study · Michigan Outdoor Sports"
-          title="+476% clicks. +285% indexing rate."
+          title="Peak, de-indexing, and a 285% rebuild."
         />
         <NarrativeCard
           challenge="Brand pages never properly submitted to GSC, thin content caused mass non-indexing, and crawl budget was being wasted — thousands of pages invisible."
           strategy="Sitemaps submitted directly to GSC, indexation blocks and crawl waste fixed, brand pages rewritten with unique content, resubmitted in batches."
-          outcome="+476% organic clicks and +285% indexing rate within 90 days — 12,000+ pages indexed from near-zero, with no ad spend."
+          outcome="Peaked at +476% organic clicks in March 2026, then rebuilt after a de-indexing: ~3,000 to 11,549 indexed pages (+285%) and +83% US organic clicks by July, with no ad spend."
         />
         <VideoGallery videos={VIDEOS} />
       </Section>
@@ -203,7 +203,7 @@ export default function TechnicalSEOClient() {
         <AuthorCard
           name="Mubashar Shahzad"
           role="Founder & Lead Technical SEO Strategist · 5+ years"
-          quote="&ldquo;Technical SEO is where I&apos;ve done my deepest work — crawl budget, indexation recovery, Core Web Vitals, schema. I personally took Michigan Outdoor Sports from near-zero indexing to 12K+ pages and +476% clicks, all verified in GSC.&rdquo;"
+          quote="&ldquo;Technical SEO is where I&apos;ve done my deepest work — crawl budget, indexation recovery, Core Web Vitals, schema. I personally took Michigan Outdoor Sports to a +476% clicks peak in March 2026, watched it de-index, and rebuilt it to 11,549 indexed pages and +83% US clicks — all verified in GSC.&rdquo;"
           imageSrc="/images/mubashar-shahzad.jpg"
           imageAlt="Mubashar Shahzad — Founder & Lead Technical SEO Strategist"
           linkedinUrl={LINKEDIN}

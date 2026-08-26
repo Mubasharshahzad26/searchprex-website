@@ -126,7 +126,7 @@ export default function FAQ() {
                 transition={{ duration: 0.7, delay: categoryIndex * 0.1 }}
               >
                 <div className="mb-6">
-                  <span className="inline-block px-4 py-2 bg-[#534AB7] bg-opacity-10 text-[#534AB7] text-sm font-semibold rounded-full">
+                  <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-2 text-sm font-semibold text-[#534AB7]">
                     {categoryGroup.category}
                   </span>
                 </div>

@@ -85,7 +85,7 @@ const faqGroups: FaqGroup[] = [
     faqs: [
       {
         q: "What makes SearchPrex different from other SEO agencies?",
-        a: "Founder-led execution — no juniors, no outsourcing. The founder personally works on your account, with verifiable Semrush certifications and real, GSC-backed client results (like +476% organic clicks and +75% revenue growth). In a post-2026 world where Google rewards proven expertise over generic agencies, that hands-on, credentialed approach is exactly what moves rankings.",
+        a: "Founder-led execution — no juniors, no outsourcing. The founder personally works on your account, with verifiable Semrush certifications and real, GSC-backed client results (like +285% pages indexed and +83% US organic clicks, rebuilt after a de-indexing event). In a post-2026 world where Google rewards proven expertise over generic agencies, that hands-on, credentialed approach is exactly what moves rankings.",
       },
       {
         q: "How long before I see SEO results?",

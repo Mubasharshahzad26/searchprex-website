@@ -69,19 +69,28 @@ const personas: Persona[] = [
 ];
  
 // ── EEAT platform links ───────────────────────────────────────────────
-// Trimmed from eight to three. The other five said only "Registered" or
-// "Listed" — creating a profile on Clutch, G2, GoodFirms, Crunchbase or
-// DesignRush is not a credential, and a careful buyer knows that. Padding a
-// trust strip with non-credentials devalues the real ones next to them.
+// Full list. These were trimmed to three during the design pass on the
+// grounds that "Registered" is not a credential. That was the wrong call for
+// this site: the breadth of verified, checkable listings is itself an E-E-A-T
+// signal, and every entry here is a real profile a visitor can open.
 const eeatLinks = [
-  { label: "Trustpilot", sub: "Verified reviews",  href: "https://www.trustpilot.com/review/searchprex.com", color: "#05704a",
+  { label: "Trustpilot", sub: "Verified reviews", href: "https://www.trustpilot.com/review/searchprex.com", color: "#05704a",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#00b67a" aria-label="Trustpilot"><path d="M12 2l2.76 8.47H23l-7.12 5.17 2.76 8.47L12 19 3.36 24.11l2.76-8.47L-1 8.47h8.24z"/></svg> },
-  { label: "BBB",        sub: "Accredited", href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
+  { label: "Clutch", sub: "Registered", href: "https://clutch.co/profile/searchprex", color: "#8a5b08",
+    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#d97706" aria-label="Clutch"><path d="M12 2l2.39 4.84 5.34.78-3.87 3.77.91 5.32L12 14.27l-4.77 2.44.91-5.32L4.27 7.62l5.34-.78z"/></svg> },
+  { label: "BBB", sub: "Accredited", href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="BBB"><circle cx="12" cy="12" r="10" stroke="#1d4ed8" strokeWidth="2"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#1d4ed8">A+</text></svg> },
-  { label: "LinkedIn",   sub: "Company",  href: "https://www.linkedin.com/company/searchprex/",      color: "#0a4f96",
+  { label: "G2", sub: "Registered", href: "https://www.g2.com/sellers/searchprex", color: "#b23219",
+    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="G2"><circle cx="12" cy="12" r="10" fill="#ff492c"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fff">G2</text></svg> },
+  { label: "GoodFirms", sub: "Registered", href: "https://www.goodfirms.co/company/searchprex", color: "#534AB7",
+    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#534AB7" aria-label="GoodFirms"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5l-4-4 1.41-1.41L11 13.67l6.59-6.58L19 8.5l-8 8z"/></svg> },
+  { label: "Crunchbase", sub: "Listed", href: "https://www.crunchbase.com/organization/searchprex", color: "#01699c",
+    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0288d1" aria-label="Crunchbase"><path d="M21 10.5A8.5 8.5 0 1 1 12.5 2H21v8.5z"/><circle cx="12.5" cy="12.5" r="4" fill="#fff"/></svg> },
+  { label: "DesignRush", sub: "Agency", href: "https://www.designrush.com/agency/searchprex", color: "#b8123a",
+    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="DesignRush"><rect x="2" y="2" width="20" height="20" rx="4" fill="#e11d48"/><text x="12" y="15" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#fff">DR</text></svg> },
+  { label: "LinkedIn", sub: "Company", href: "https://www.linkedin.com/company/searchprex/", color: "#0a4f96",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#0a66c2" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
-];
- 
+]; 
 interface HeroProps {
   heroImage?: unknown;
 }
@@ -131,24 +140,12 @@ function VideoCard({ id, caption }: { id: string; caption: string }) {
 export default function Hero({ heroImage }: HeroProps) {
   const [activePersona, setActivePersona] = useState(0);
  
-  // Toptal-style sync: hero card + credentials carousel rotate together.
-  //
-  // WCAG 2.2.2 requires a pause mechanism for anything that auto-moves for
-  // more than five seconds, and 3.5s was not long enough to actually read a
-  // credential — the rotation was preventing the thing it existed to show.
-  // Now 6s, paused while the user hovers or keyboard-focuses the hero, and
-  // stopped entirely under prefers-reduced-motion.
+  // No rotation. The credential line in the hero card and the carousel below
+  // used to advance on a timer; a credential that slides away before it can be
+  // read communicates less than one that stays put. The carousel keeps its
+  // manual prev/next controls, so nothing is unreachable — it simply no longer
+  // moves on its own.
   const [credIndex, setCredIndex] = useState(0);
-  const [credPaused, setCredPaused] = useState(false);
-  useEffect(() => {
-    if (credPaused) return;
-    if (typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => {
-      setCredIndex((i) => (i + 1) % credentials.length);
-    }, 6000);
-    return () => clearInterval(t);
-  }, [credPaused]);
   const activeCred = credentials[credIndex];
  
  
@@ -163,10 +160,6 @@ export default function Hero({ heroImage }: HeroProps) {
       <section
         id="hero"
         className="relative overflow-hidden bg-[#eaecf3] pt-20"
-        onMouseEnter={() => setCredPaused(true)}
-        onMouseLeave={() => setCredPaused(false)}
-        onFocusCapture={() => setCredPaused(true)}
-        onBlurCapture={() => setCredPaused(false)}
       >
         {/* ── Semrush-style aurora background ── */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">

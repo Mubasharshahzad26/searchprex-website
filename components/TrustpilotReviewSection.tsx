@@ -16,7 +16,11 @@ const stagger = {
  
 const TRUSTPILOT_URL = "https://www.trustpilot.com/review/searchprex.com";
  
-// ── All verified reviews — add new ones here as they come in on Trustpilot ──
+// ── Verified reviews ──
+// ONLY reviews that are actually live on the Trustpilot profile belong here.
+// The Orlando Web Pros entry was removed because it is not published there —
+// a testimonial under a "Verified on Trustpilot" badge has to be verifiable on
+// Trustpilot, or the badge is doing the opposite of its job.
 const REVIEWS = [
   {
     rating: 5,
@@ -26,15 +30,6 @@ const REVIEWS = [
     role: "E-commerce Business • USA",
     date: "July 17, 2026",
     initial: "M",
-  },
-  {
-    rating: 5,
-    title: "Great experience working with Searchprex",
-    body: "Great experience working with Searchprex. Their team is professional, responsive, and knowledgeable about SEO and digital marketing. We've seen solid improvements since partnering with them and would definitely recommend their services to other businesses.",
-    author: "Orlando Web Pros",
-    role: "Web Services • USA",
-    date: "April 6, 2026",
-    initial: "O",
   },
 ];
  
