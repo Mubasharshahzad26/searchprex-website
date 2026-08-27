@@ -33,6 +33,7 @@ import {
 import { color, heading, radius, text } from "@/lib/design-tokens";
 import { CITY_PAGES } from "@/lib/city-pages";
 import LawFirmStack from "@/components/LawFirmStack";
+import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
 
@@ -108,6 +109,25 @@ const partnershipPoints = [
 
 export default function LawFirmSEOClient() {
   return (
+    <>
+      <div className="border-b bg-slate-50 overflow-x-auto pt-24" style={{ borderColor: color.border }}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <nav className="flex space-x-6 text-sm font-medium" aria-label="Practice Areas">
+            <span className="text-blue-700 border-b-2 border-blue-700 pb-3 -mb-3 whitespace-nowrap">
+              Overview
+            </span>
+            {INDUSTRY_PAGES.map((ind) => (
+              <Link 
+                key={ind.slug} 
+                href={`/services/law-firm-seo/${ind.slug}`} 
+                className="whitespace-nowrap transition-colors text-slate-500 hover:text-slate-900"
+              >
+                {ind.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
     <main>
       <PageHero
         seoH1="Law Firm SEO Services | Rank in Local Pack & AI Overviews"
@@ -368,6 +388,7 @@ export default function LawFirmSEOClient() {
         trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
       />
     </main>
+    </>
   );
 }
 

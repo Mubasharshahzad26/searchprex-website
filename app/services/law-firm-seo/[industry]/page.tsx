@@ -77,6 +77,30 @@ export default async function IndustryPage({
         ]}
       />
 
+      {/* ── PRACTICE AREAS SUB-HEADER ── */}
+      <div className="border-b bg-slate-50 overflow-x-auto" style={{ borderColor: color.border }}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <nav className="flex space-x-6 text-sm font-medium" aria-label="Practice Areas">
+            <Link href="/services/law-firm-seo" className="text-slate-500 hover:text-slate-900 whitespace-nowrap">
+              Overview
+            </Link>
+            {INDUSTRY_PAGES.map((ind) => (
+              <Link 
+                key={ind.slug} 
+                href={`/services/law-firm-seo/${ind.slug}`} 
+                className={`whitespace-nowrap transition-colors ${
+                  ind.slug === industry 
+                    ? 'text-blue-700 border-b-2 border-blue-700 pb-3 -mb-3' 
+                    : 'text-slate-500 hover:text-slate-900'
+                }`}
+              >
+                {ind.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
       <main>
         <PageHero
           compactTop
