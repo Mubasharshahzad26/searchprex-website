@@ -113,10 +113,11 @@ export async function GET(req: Request) {
           const recipientEmail = lead.contactEmail || "mubasharshahzad726@gmail.com";
 
           const { error } = await resend.emails.send({
-            from: "SearchPrex SDR <onboarding@resend.dev>",
+            from: "SearchPrex SDR <contact@searchprex.com>",
             to: [recipientEmail],
             subject: emailData.subject,
             html: emailData.body,
+            tags: [{ name: 'lead_id', value: lead.id }]
           });
 
           if (!error) {

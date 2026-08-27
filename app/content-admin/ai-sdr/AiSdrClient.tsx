@@ -50,12 +50,14 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
   };
 
   const getStatusColor = (status: string) => {
-    switch(status) {
+    switch (status) {
       case "new": return "bg-blue-100 text-blue-800";
       case "qualified": return "bg-yellow-100 text-yellow-800";
       case "emailed": return "bg-purple-100 text-purple-800";
+      case "opened": return "bg-green-100 text-green-800 ring-2 ring-green-400 font-bold";
+      case "clicked": return "bg-emerald-100 text-emerald-900 ring-2 ring-emerald-500 font-bold";
       case "responded": return "bg-green-100 text-green-800";
-      case "rejected": return "bg-gray-100 text-gray-800";
+      case "rejected": return "bg-red-100 text-red-800";
       default: return "bg-gray-100 text-gray-800";
     }
   };

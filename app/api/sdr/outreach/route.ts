@@ -68,10 +68,16 @@ export async function POST(req: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     
     const { data: emailData, error } = await resend.emails.send({
-      from: "SearchPrex SDR <onboarding@resend.dev>", // MUST USE onboarding@resend.dev IF NOT VERIFIED DOMAIN
+      from: "SearchPrex SDR <contact@searchprex.com>",
       to: [recipientEmail],
       subject: data.subject,
       html: data.body,
+      tags: [
+        {
+          name: 'lead_id',
+          value: lead.id
+        }
+      ]
     });
 
     if (error) {
