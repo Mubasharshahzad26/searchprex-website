@@ -132,19 +132,11 @@ const profileLinks = [
  
 export default function FounderSection() {
   return (
-    <section className="relative overflow-hidden bg-[#eaecf3] py-24">
-      {/* soft gradient accent at top */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-[#ece9f7] to-transparent" />
- 
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
- 
+    <section className="bg-[#eaecf3] py-24">
+      {/* No decorative layers. This was the only light section on the page
+          with a gradient wash and a grid texture; every other light section
+          is a flat token colour, so the decoration read as leftover rather
+          than intent. A credibility section also earns nothing from texture. */}
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
  
         {/* Section label */}

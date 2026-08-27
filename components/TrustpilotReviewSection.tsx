@@ -148,7 +148,7 @@ export default function TrustpilotReviewSection() {
             )}
           </div>
  
-          <div className="relative min-h-[280px] overflow-hidden sm:min-h-[240px]">
+          <div className={`relative overflow-hidden ${total > 1 ? "min-h-[280px] sm:min-h-[240px]" : ""}`}>
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={index}
@@ -172,27 +172,30 @@ export default function TrustpilotReviewSection() {
                   <span className="ml-2 text-sm font-bold text-[#0a0f2e]">{review.rating}.0 out of 5</span>
                 </div>
  
-                {/* Review Title */}
-                <h3 className="mb-4 text-xl font-black text-[#0a0f2e]">{review.title}</h3>
- 
-                {/* Review Body */}
-                <blockquote className="mb-6 border-l-4 border-[#534AB7] pl-6 text-base leading-relaxed text-[#475569]">
-                  &quot;{review.body}&quot;
-                </blockquote>
- 
-                {/* Reviewer Info */}
-                <div className="mb-2 flex items-start gap-4 border-t border-[#e2e8f0] pt-6">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#534AB7] text-white font-bold">
-                      {review.initial}
-                    </div>
-                  </div>
+                <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-start">
                   <div>
-                    <p className="font-bold text-[#0a0f2e]">{review.author}</p>
-                    <p className="text-sm text-[#566070]">{review.role}</p>
-                    <p className="mt-1 text-xs font-medium text-[#196b4d]">
-                      ✓ Verified on Trustpilot • {review.date}
+                    <h3 className="mb-3 text-xl font-black text-[#0a0f2e] sm:text-2xl">
+                      {review.title}
+                    </h3>
+                    <blockquote className="text-lg leading-relaxed text-[#374151]">
+                      &ldquo;{review.body}&rdquo;
+                    </blockquote>
+                  </div>
+
+                  <div className="border-t border-[#e2e8f0] pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#534AB7] font-bold text-white">
+                        {review.initial}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-bold leading-tight text-[#0a0f2e]">{review.author}</p>
+                        <p className="text-sm text-[#566070]">{review.role}</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-xs font-semibold text-[#196b4d]">
+                      ✓ Verified on Trustpilot
                     </p>
+                    <p className="text-xs text-[#566070]">{review.date}</p>
                   </div>
                 </div>
               </motion.div>
