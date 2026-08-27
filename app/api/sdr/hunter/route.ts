@@ -46,14 +46,15 @@ export async function POST(req: Request) {
     } 
     // --- OPTION B: SerpApi (Free Fallback) ---
     else if (process.env.SERPAPI_API_KEY) {
-      const response = await fetch(`https://serpapi.com/search.json?engine=google_local&q=${encodeURIComponent(query)}&api_key=${process.env.SERPAPI_API_KEY}`);
+      // We use engine=google instead of google_local to get real organic URLs instead of masked google.com/goto URLs
+      const response = await fetch(`https://serpapi.com/search.json?engine=google&q=${encodeURIComponent(query)}&api_key=${process.env.SERPAPI_API_KEY}`);
       if (response.ok) {
         const data = await response.json();
-        const localResults = data.local_results || [];
-        placesToProcess = localResults.map((p: any) => ({
-          websiteUri: p.links?.website || p.website,
+        const results = data.organic_results || [];
+        placesToProcess = results.map((p: any) => ({
+          websiteUri: p.link, // direct URL
           displayName: p.title,
-          address: p.address
+          address: p.snippet || "Location hidden"
         }));
       } else {
         console.error("SerpApi Error:", await response.text());
