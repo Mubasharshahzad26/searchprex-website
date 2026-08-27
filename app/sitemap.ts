@@ -9,6 +9,7 @@ import { caseStudies, detailUrl } from "./all-case-studies/data";
 import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
 import { getAllCityParams } from "@/lib/city-pages";
+import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { isGatedRoute } from "@/lib/gated-routes";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
@@ -181,6 +182,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   });
 
+  const newsCategories = ["AI SEO", "LLMs", "Tools", "Ecommerce", "Technical"];
+  for (const cat of newsCategories) {
+    add({
+      url: absolute(`/resources/news?category=${encodeURIComponent(cat)}`),
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.8,
+    });
+  }
+
   for (const { city } of getAllCitySlugs()) {
     add({
       url: absolute(`/locations/kansas/${city}`),
@@ -193,6 +204,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // The /locations/[state]/[city] pages. Priority sits above the Kansas set
   // because every one of these targets a query Search Console or Semrush has
   // already shown demand for, rather than a city we happened to write first.
+  for (const page of INDUSTRY_PAGES) {
+    add({
+      url: absolute(`/services/law-firm-seo/${page.slug}`),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    });
+  }
+
   for (const { state, city } of getAllCityParams()) {
     add({
       url: absolute(`/locations/${state}/${city}`),

@@ -3,8 +3,12 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
+  
+  const { searchParams } = new URL(request.url);
+  const categoryParam = searchParams.get("category");
+  const filterCat = categoryParam ? categoryParam : "News";
 
   // Google News Sitemaps strictly require only articles published in the last 48 hours.
   const twoDaysAgo = new Date();
@@ -14,7 +18,7 @@ export async function GET() {
   const posts = await db.marketingBlog.findMany({
     where: { 
       published: true, 
-      category: { contains: "News", mode: "insensitive" },
+      category: { contains: filterCat, mode: "insensitive" },
       // publishedAt: { gte: twoDaysAgo } // Commented out for now so the sitemap isn't empty on launch
     },
     orderBy: { publishedAt: "desc" },

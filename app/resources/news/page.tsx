@@ -31,7 +31,54 @@ const baseMetadata: Metadata = {
   },
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+const CATEGORY_META: Record<string, { title: string, desc: string }> = {
+  "AI SEO": {
+    title: "AI SEO News: ChatGPT, Generative Engine Optimization (GEO)",
+    desc: "The latest AI SEO news, covering Generative Engine Optimization (GEO), ChatGPT search integration, and how LLMs are changing the SEO landscape in 2026.",
+  },
+  "LLMs": {
+    title: "LLMs in SEO: News & Updates on Answer Engine Optimization (AEO)",
+    desc: "How Large Language Models (LLMs) are redefining search. News on AI Overviews, Answer Engine Optimization (AEO), and LLM ranking algorithms.",
+  },
+  "Tools": {
+    title: "SEO Tools News: Latest Updates, Features & Reviews (2026)",
+    desc: "Stay updated on the newest SEO tools, feature releases, and technical marketing software updates. Find out what works best for technical and local SEO.",
+  },
+  "Ecommerce": {
+    title: "Ecommerce SEO News: Retail Search Updates & Algorithm Changes",
+    desc: "Latest Ecommerce SEO news, merchant center updates, shopping graph changes, and retail algorithm shifts that impact online stores in 2026.",
+  },
+  "Technical": {
+    title: "Technical SEO News: Crawling, Indexing & Architecture Updates",
+    desc: "Core Web Vitals, rendering, crawling, and indexing news. Stay ahead of Google's technical SEO requirements and algorithm shifts.",
+  },
+};
+
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ category?: string }> }): Promise<Metadata> {
+  const { category } = await searchParams;
+  
+  if (category && CATEGORY_META[category]) {
+    const metaInfo = CATEGORY_META[category];
+    const catUrl = `${PAGE_URL}?category=${encodeURIComponent(category)}`;
+    return {
+      title: metaInfo.title,
+      description: metaInfo.desc,
+      alternates: { canonical: catUrl },
+      openGraph: {
+        title: metaInfo.title,
+        description: metaInfo.desc,
+        url: catUrl,
+        siteName: "SearchPrex",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: metaInfo.title,
+        description: metaInfo.desc,
+      },
+    };
+  }
+
   return getPageSEO("/resources/news", baseMetadata);
 }
 
