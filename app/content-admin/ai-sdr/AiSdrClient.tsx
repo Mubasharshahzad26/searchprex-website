@@ -7,8 +7,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Plus, Play, BrainCircuit, Mail, Activity, ArrowRight, Loader2 } from "lucide-react";
+import { Search, Plus, Play, BrainCircuit, Mail, Activity, ArrowRight, Loader2, Upload } from "lucide-react";
 import { AiSdrLead, AiSdrEmailLog } from "@prisma/client";
+import Papa from "papaparse";
 
 type LeadWithLogs = AiSdrLead & { emailLogs: AiSdrEmailLog[] };
 
@@ -16,6 +17,7 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
   const [leads, setLeads] = useState<LeadWithLogs[]>(initialLeads);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [urlInput, setUrlInput] = useState("");
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleAddLead = async () => {
     if (!urlInput) return;
@@ -83,6 +85,52 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
     }
   };
 
+  const [isUploading, setIsUploading] = useState(false);
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: async (results) => {
+        try {
+          // Normalize headers: look for something that contains 'url' or 'website'
+          const rows = results.data as any[];
+          const leadsToImport = rows.map(row => {
+            const urlKey = Object.keys(row).find(k => k.toLowerCase().includes('url') || k.toLowerCase().includes('website'));
+            const companyKey = Object.keys(row).find(k => k.toLowerCase().includes('company') || k.toLowerCase().includes('name'));
+            return {
+              url: urlKey ? row[urlKey] : row[Object.keys(row)[0]], // Fallback to first column
+              companyName: companyKey ? row[companyKey] : "Unknown"
+            };
+          }).filter(l => l.url && l.url.trim().length > 3);
+
+          if (leadsToImport.length === 0) {
+            throw new Error("Could not find any URLs in the CSV.");
+          }
+
+          const res = await fetch("/api/sdr/upload-bulk", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ leads: leadsToImport })
+          });
+          const data = await res.json();
+          if(!res.ok) throw new Error(data.error);
+
+          alert(`Successfully uploaded ${data.added} new leads!`);
+          window.location.reload();
+        } catch (err: any) {
+          alert("Upload failed: " + err.message);
+        } finally {
+          setIsUploading(false);
+          if (fileInputRef.current) fileInputRef.current.value = "";
+        }
+      }
+    });
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       
@@ -117,7 +165,10 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
 
         <Card>
           <CardHeader>
-            <CardTitle>Ingest Lead</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Plus className="w-5 h-5 text-purple-600" />
+              Ingest Lead
+            </CardTitle>
             <CardDescription>Manually add a lead for AI scoring & outreach.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -129,6 +180,34 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
             <Button className="w-full" variant="secondary" onClick={handleAddLead} disabled={isAnalyzing}>
               {isAnalyzing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2" />}
               {isAnalyzing ? "Analyzing..." : "Add & Score"}
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Upload className="w-5 h-5 text-purple-600" />
+              Bulk Import (CSV)
+            </CardTitle>
+            <CardDescription>Upload a list from Apollo, ZoomInfo, etc.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <input 
+              type="file" 
+              accept=".csv" 
+              className="hidden" 
+              ref={fileInputRef} 
+              onChange={handleFileUpload} 
+            />
+            <Button 
+              className="w-full" 
+              variant="outline" 
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploading}
+            >
+              {isUploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
+              {isUploading ? "Uploading..." : "Upload CSV"}
             </Button>
           </CardContent>
         </Card>
