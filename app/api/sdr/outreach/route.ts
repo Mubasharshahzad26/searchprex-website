@@ -96,7 +96,11 @@ export async function POST(req: Request) {
 
     const updatedLead = await db.aiSdrLead.update({
       where: { id: lead.id },
-      data: { status: "emailed" },
+      data: { 
+        status: "emailed",
+        emailCount: { increment: 1 },
+        lastEmailedAt: new Date()
+      },
       include: { emailLogs: true }
     });
 

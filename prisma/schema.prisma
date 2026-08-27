@@ -438,7 +438,9 @@ model AiSdrLead {
   contactEmail    String?
   score           Int?
   analysis        String?  @db.Text
-  status          String   @default("new") // new, qualified, emailed, responded, rejected
+  status          String   @default("new") // new, qualified, emailed, responded, rejected, opened, clicked
+  emailCount      Int      @default(0)
+  lastEmailedAt   DateTime?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   

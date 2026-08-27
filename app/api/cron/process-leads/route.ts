@@ -127,7 +127,12 @@ export async function GET(req: Request) {
 
             await db.aiSdrLead.update({
               where: { id: lead.id },
-              data: { ...analysisData, status: "emailed" }
+              data: { 
+                ...analysisData, 
+                status: "emailed",
+                emailCount: 1,
+                lastEmailedAt: new Date()
+              }
             });
           }
         } else {
@@ -152,8 +157,75 @@ export async function GET(req: Request) {
       } catch (err: any) {
         console.error(`Failed processing lead ${lead.websiteUrl}:`, err);
         results.push({ url: lead.websiteUrl, status: "error", error: err.message });
-        // Mark as rejected so we don't infinitely retry broken URLs
         await db.aiSdrLead.update({ where: { id: lead.id }, data: { status: "rejected" } });
+      }
+    }
+
+    // 4. Follow-up Logic (Drip Campaign)
+    const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+    const followupLeads = await db.aiSdrLead.findMany({
+      where: {
+        status: { in: ["emailed", "opened", "clicked"] },
+        emailCount: { lt: 3, gt: 0 },
+        lastEmailedAt: { lt: threeDaysAgo }
+      },
+      take: 2, // process 2 follow-ups per cron tick
+      include: { emailLogs: { orderBy: { sentAt: 'desc' }, take: 1 } }
+    });
+
+    for (const fLead of followupLeads) {
+      try {
+        const lastEmail = fLead.emailLogs[0];
+        if (!lastEmail || !ai || !resend) continue;
+
+        const followupResponse = await ai.models.generateContent({
+          model: "gemini-2.5-flash",
+          contents: `You are an expert SEO Sales Rep for "SearchPrex".
+          3 days ago, you sent this cold email to ${fLead.companyName || 'this company'}:
+          
+          SUBJECT: ${lastEmail.subject}
+          BODY: ${lastEmail.body}
+          
+          They did not reply. Write a short, casual 2-sentence follow-up email bumping the thread.
+          No corporate jargon. Keep it incredibly brief and human.
+          
+          Output JSON with 'subject' (e.g. "Re: " + previous subject) and 'body' (HTML allowed).`,
+          config: {
+            responseMimeType: "application/json",
+            responseSchema: {
+              type: Type.OBJECT,
+              properties: { subject: { type: Type.STRING }, body: { type: Type.STRING } },
+              required: ["subject", "body"]
+            }
+          }
+        });
+
+        const emailData = JSON.parse(followupResponse.text || "{}");
+        const recipientEmail = fLead.contactEmail || "mubasharshahzad726@gmail.com";
+
+        const { error } = await resend.emails.send({
+          from: "SearchPrex SDR <contact@searchprex.com>",
+          to: [recipientEmail],
+          subject: emailData.subject,
+          html: emailData.body,
+          tags: [{ name: 'lead_id', value: fLead.id }]
+        });
+
+        if (!error) {
+          await db.aiSdrEmailLog.create({
+            data: { leadId: fLead.id, subject: emailData.subject, body: emailData.body, status: "sent" }
+          });
+          await db.aiSdrLead.update({
+            where: { id: fLead.id },
+            data: { 
+              emailCount: { increment: 1 },
+              lastEmailedAt: new Date()
+            }
+          });
+          results.push({ url: fLead.websiteUrl, action: "Follow-up Sent" });
+        }
+      } catch (err: any) {
+        console.error("Failed follow-up", err);
       }
     }
 
