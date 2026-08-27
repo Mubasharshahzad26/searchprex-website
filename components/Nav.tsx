@@ -31,6 +31,16 @@ const navLinks: NavLink[] = [
     ],
   },
   {
+    href: "/services/law-firm-seo",
+    label: "Practice Areas",
+    hasDropdown: true,
+    dropdownItems: [
+      { href: "/services/law-firm-seo/personal-injury", label: "Personal Injury SEO" },
+      { href: "/services/law-firm-seo/family-law", label: "Family Law SEO" },
+      { href: "/services/law-firm-seo/criminal-defense", label: "Criminal Defense SEO" },
+    ],
+  },
+  {
     href: "/about",
     label: "About",
     hasDropdown: true,

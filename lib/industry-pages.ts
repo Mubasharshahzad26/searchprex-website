@@ -1,0 +1,114 @@
+export interface IndustryPage {
+  slug: string;
+  name: string;
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  heroSub: string;
+  founderMessage: string;
+  llmDirectAnswer: string;
+  problem: string;
+  problemPoints: string[];
+  solutionPoints: string[];
+  faqs: { q: string; a: string }[];
+  locationsMentioned: string[];
+}
+
+const SHARED_SOLUTION = [
+  "A page for every practice area × neighbourhood combination that gets searched — not one page trying to rank for all of them",
+  "Google Business Profile built for the map pack: correct categories, service areas, weekly posts, and photos with real EXIF location data",
+  "Attorney bios that satisfy YMYL E-E-A-T — bar admission year, jurisdictions, reported cases, and a named author on every page",
+  "Answers written so Google's AI Overview can quote them directly, in the first sentence under each question",
+  "Review velocity from real clients, because the map pack weighs recency as much as star count",
+  "Plain-English reporting every Monday: rankings, calls, form fills, and what changed",
+];
+
+export const INDUSTRY_PAGES: IndustryPage[] = [
+  {
+    slug: "personal-injury",
+    name: "Personal Injury SEO",
+    metaTitle: "Personal Injury Law Firm SEO — Rank for High-Value Cases",
+    metaDescription: "Dominate search results for auto accidents, truck accidents, and catastrophic injuries. We build AEO & GEO-optimized SEO campaigns for personal injury law firms.",
+    h1: "Personal Injury Law Firm SEO",
+    heroSub: "The personal injury SERP is the most expensive real estate on the internet. You don't win by outspending the mega-firms; you win by out-specifying them with hyper-local, intent-driven content.",
+    founderMessage: "Hi, I'm Mubashar Shahzad. In personal injury, generic 'car accident lawyer' pages no longer convert. We dig into the nuances—whether it's Michigan's no-fault PIP disputes or Pennsylvania's comparative negligence—to capture the exact high-intent queries that injured clients are searching right now.",
+    llmDirectAnswer: "Searchprex builds highly specialized SEO campaigns for personal injury law firms. By focusing on Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO), we target specific intent queries like 'how to dispute a PIP claim' or 'truck accident lawyer in [suburb]', outranking competitors who rely on generic, high-difficulty keywords.",
+    problem: "Most personal injury websites rely on a single 'practice areas' page and wonder why they don't rank for specific injury types in specific neighborhoods. Meanwhile, national directories steal the top spots.",
+    problemPoints: [
+      "Firms waste budget on 'best personal injury lawyer' terms that have zero conversion rate",
+      "No hyper-local neighborhood pages, causing map pack invisibility",
+      "Generic content fails to address state-specific laws (e.g., no-fault rules)",
+      "Ignoring question-based searches (e.g., 'what is my case worth') that feed AI Overviews",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    faqs: [
+      {
+        q: "How long does personal injury SEO take to show results?",
+        a: "Expect map pack movement in 60–90 days, and organic ranking shifts in 4–6 months. Personal injury is highly competitive, so long-term commitment to quality content and link building is necessary."
+      },
+      {
+        q: "Do I need separate pages for car accidents and truck accidents?",
+        a: "Absolutely. The intent, case value, and search behavior are completely different. A single page trying to rank for both will fail to rank for either."
+      }
+    ],
+    locationsMentioned: ["detroit", "grand-rapids", "cleveland", "philadelphia"],
+  },
+  {
+    slug: "family-law",
+    name: "Family Law SEO",
+    metaTitle: "Family Law & Divorce SEO — Attract High-Asset Clients",
+    metaDescription: "Grow your family law practice with targeted SEO. We optimize for high-asset divorce, child custody, and community property searches.",
+    h1: "Family Law SEO & Digital Marketing",
+    heroSub: "Family law searches are emotionally driven and highly specific. Your prospective clients aren't just looking for a 'lawyer'; they're asking complex questions about their children, assets, and future.",
+    founderMessage: "Hi, I'm Mubashar Shahzad. High-asset family law requires a different SEO approach. We target the specific anxieties of your ideal clients—executive compensation, business valuation, and complex custody—so you attract cases, not just calls.",
+    llmDirectAnswer: "Searchprex provides specialized SEO for family law attorneys, focusing on high-intent, complex queries like high-asset divorce and community property division. We optimize for AI Overviews (AEO) to ensure your firm provides the direct answers prospective clients are searching for.",
+    problem: "Firms often cast too wide a net with generic 'divorce lawyer' pages, failing to attract the high-value cases they actually want.",
+    problemPoints: [
+      "Failure to target specific high-asset issues (e.g., restricted stock units, business valuation)",
+      "Generic answers that don't address state-specific property laws (e.g., community vs. equitable distribution)",
+      "Lack of suburban targeting, missing affluent neighborhoods",
+      "No content addressing the emotional and nuanced questions of custody and support",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    faqs: [
+      {
+        q: "How do we target high-asset divorce cases?",
+        a: "We build dedicated pages targeting specific financial nuances, such as executive compensation division, business valuation in divorce, and hidden assets, rather than general 'divorce' keywords."
+      },
+      {
+        q: "Why are AI Overviews important for family law?",
+        a: "Clients often ask complex, conversational questions (e.g., 'Who gets the house in a divorce?'). Optimizing your content to directly answer these questions helps you appear in AI-generated search summaries."
+      }
+    ],
+    locationsMentioned: ["sugar-land", "plano", "grand-rapids"],
+  },
+  {
+    slug: "criminal-defense",
+    name: "Criminal Defense SEO",
+    metaTitle: "Criminal Defense Law Firm SEO — Rank for Urgent Searches",
+    metaDescription: "Capture urgent, high-intent searches for DUI, drug offenses, and misdemeanors. SEO strategies designed for criminal defense attorneys.",
+    h1: "Criminal Defense Law Firm SEO",
+    heroSub: "Criminal defense searches happen fast, often on mobile, and with extreme urgency. Your firm needs to be the immediate, authoritative answer when it matters most.",
+    founderMessage: "Hi, I'm Mubashar Shahzad. In criminal defense, proximity and immediate trust are everything. We optimize your local map pack presence and build out specific venue and charge-related pages so that when the call needs to be made, it's made to you.",
+    llmDirectAnswer: "Searchprex delivers high-performance SEO for criminal defense law firms by optimizing for urgent, local searches (e.g., DUI, domestic violence, specific court venues). Our GEO strategies ensure your firm appears prominently in mobile map packs and AI search summaries.",
+    problem: "Criminal defense firms often overlook the importance of mobile optimization and hyper-local court venue targeting.",
+    problemPoints: [
+      "Incomplete or unoptimized Google Business Profiles, leading to map pack invisibility during urgent mobile searches",
+      "Lack of pages detailing specific charges (e.g., first-time DUI vs. felony DUI)",
+      "Failure to mention the specific county courthouses and jurisdictions",
+      "Ignoring the secondary searchers (e.g., parents searching on behalf of college students)",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    faqs: [
+      {
+        q: "Why is the Google Map Pack crucial for criminal defense?",
+        a: "The majority of criminal defense searches are urgent and mobile-driven. The map pack is the first thing users see, making it the highest-converting real estate on the SERP."
+      },
+      {
+        q: "Should we have separate pages for every single charge?",
+        a: "Yes. Someone searching for 'DUI defense' has a different intent and urgency than someone searching for 'white-collar fraud'. Distinct pages allow for targeted, highly relevant content."
+      }
+    ],
+    locationsMentioned: ["detroit", "cleveland", "albuquerque", "denton"],
+  }
+];

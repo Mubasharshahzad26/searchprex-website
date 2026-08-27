@@ -38,6 +38,7 @@ import {
   getSiblingCities,
   type CityPage,
 } from "@/lib/city-pages";
+import { ChatWidgetLazy } from "@/components/ChatWidgetLazy";
 
 const SITE = "https://www.searchprex.com";
 
@@ -128,6 +129,28 @@ export default async function CityPage({
           secondaryCta={{ href: "/tools/keyword-research", label: "See keyword data for your practice area" }}
           trustPoints={["No contracts", "Founder works your account", "24-hour audit turnaround"]}
         />
+
+        {/* ── FOUNDER MESSAGE & AI ── */}
+        {(page.founderMessage || page.llmDirectAnswer) && (
+          <Section width="reading" tight>
+            <div className={`p-6 md:p-8 ${radius.card} border bg-white shadow-sm mb-12`} style={{ borderColor: color.border }}>
+              <div className="flex flex-col gap-6">
+                {page.founderMessage && (
+                  <div>
+                    <h2 className={`${heading.h4} mb-3`} style={{ color: color.ink }}>A message from Mubashar Shahzad, Founder</h2>
+                    <p className={text.body} style={{ color: color.muted }}>{page.founderMessage}</p>
+                  </div>
+                )}
+                {page.llmDirectAnswer && (
+                  <div className="rounded-lg bg-blue-50/50 p-4 border border-blue-100">
+                    <p className={`${text.small} font-semibold mb-1`} style={{ color: color.primary }}>AI Overview & Direct Answer</p>
+                    <p className={text.small} style={{ color: color.muted }}>{page.llmDirectAnswer}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Section>
+        )}
 
         {/* ── PROBLEM ── */}
         <Section tone="surface">
@@ -303,6 +326,8 @@ export default async function CityPage({
           ]}
           trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
         />
+
+        <ChatWidgetLazy />
       </main>
     </>
   );
@@ -427,15 +452,34 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
     },
   };
 
+  const faqsToUse = [...page.faqs];
+  if (page.llmDirectAnswer) {
+    faqsToUse.unshift({
+      q: `What is the best law firm SEO strategy in ${page.city}, ${page.state}?`,
+      a: page.llmDirectAnswer
+    });
+  }
+
   const faq = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${url}#faq`,
-    mainEntity: page.faqs.map((f) => ({
+    mainEntity: faqsToUse.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
+  };
+
+  const webPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: `Law Firm SEO in ${page.city}, ${page.state}`,
+    description: page.metaDescription,
+    abstract: page.llmDirectAnswer || page.metaDescription, // GEO signal
+    inLanguage: "en-US",
   };
 
   const breadcrumb = {
@@ -450,7 +494,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
 
   return (
     <>
-      {[professionalService, service, faq, breadcrumb].map((s, i) => (
+      {[professionalService, service, faq, breadcrumb, webPage].map((s, i) => (
         <script
           key={i}
           type="application/ld+json"
