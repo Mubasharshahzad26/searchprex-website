@@ -247,7 +247,7 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
               btn.innerText = "Running...";
               try {
                 // In production, you would pass an Authorization header here if CRON_SECRET is set
-                const res = await fetch("/api/cron/process-leads");
+                const res = await fetch("/api/sdr/trigger-cron", { method: 'POST' });
                 const data = await res.json();
                 alert(JSON.stringify(data, null, 2));
                 window.location.reload();
