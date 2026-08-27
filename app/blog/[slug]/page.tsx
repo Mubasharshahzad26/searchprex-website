@@ -34,12 +34,17 @@ async function getPostData(rawSlug: string) {
         excerpt: dbPost.excerpt || dbPost.metaDescription || "",
         readTime: dbPost.readTime || "5-minute read",
         date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split('T')[0] : dbPost.createdAt.toISOString().split('T')[0],
-        author: { name: dbPost.author || "SearchPrex Team", role: "Verified SEO Expert" },
-        authorBio: "",
+        // `bio` belongs inside `author`: that is where PostClient and the
+        // schema.org block both read it. The old top-level `authorBio` was read
+        // by nothing, and its absence here made `post.author` a union without
+        // `bio`, which is what the articleSchema below failed to type against.
+        author: { name: dbPost.author || "SearchPrex Team", role: "Verified SEO Expert", bio: "" },
         featured: false,
         heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
-        stat: { value: "", label: "" },
+        // null rather than an empty object, so the headline stat badge is
+        // skipped instead of rendering blank.
+        stat: null,
         toc: [],
         content: dbPost.content || "",
         
@@ -153,7 +158,8 @@ export default async function BlogPostPage({
       "@type": "Person",
       name: post.author.name,
       jobTitle: post.author.role,
-      description: post.author.bio,
+      // Omitted rather than emitted empty for DB-sourced posts, which carry no bio.
+      description: post.author.bio || undefined,
       url: `${SITE}/experts`,
     },
     publisher: {

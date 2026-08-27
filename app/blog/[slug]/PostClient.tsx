@@ -13,18 +13,95 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import parse, { Element } from 'html-react-parser';
-import { getRelated, styledContent, type Post } from "./posts";
+import { getRelated } from "./posts";
+import { renderArticle } from "@/lib/render-article";
 
-export default function PostClient({ post }: { post: Post }) {
-  const related = getRelated(post.slug, post.category);
+/**
+ * Which section of the site the post belongs to. This component is shared by
+ * /blog and /resources/news; it used to hardcode "/blog" everywhere, so news
+ * articles showed a "Blog" breadcrumb and their share and copy-link buttons
+ * handed out /blog/<slug> URLs that 404.
+ */
+export type PostSection = { label: string; href: string };
+
+const BLOG_SECTION: PostSection = { label: "Blog", href: "/blog" };
+
+/**
+ * Blog posts store a display date ("May 15, 2026"); news spokes store an ISO
+ * date, because page.tsx feeds the same field to schema.org's datePublished.
+ * Rendering the raw value showed "2026-08-27" on every news article.
+ *
+ * Only ISO values are reformatted. Passing an already-formatted date through
+ * `new Date()` interprets it as local midnight, which then renders a day early
+ * once the output is pinned to UTC -- "May 15, 2026" became "May 14, 2026".
+ * Pinning is still required for the ISO branch: an unpinned toLocaleDateString
+ * disagrees between server and browser and throws a hydration error.
+ */
+function formatPostDate(value: string): string {
+  const iso = /^\d{4}-\d{2}-\d{2}$/.test(value.trim());
+  if (!iso) return value;
+
+  const parsed = new Date(`${value.trim()}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime())) return value;
+
+  return parsed.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+/**
+ * What this component actually needs, declared structurally.
+ *
+ * It previously typed the prop as `Post` -- the shape inferred from the three
+ * hardcoded posts in ./posts. Neither route passes one of those: both build an
+ * object from the database, so both call sites were type errors. The optional
+ * fields are the ones only file-based blog posts carry; news spokes have no
+ * table of contents, tags or headline stat.
+ */
+export type ArticlePost = {
+  slug: string;
+  title: string;
+  category: string;
+  subcategory?: string;
+  excerpt: string;
+  content: string;
+  readTime: string;
+  date: string;
+  heroImage: string;
+  author: { name: string; role: string; bio?: string };
+  tags?: string[];
+  toc?: string[];
+  stat?: { value: string; label: string } | null;
+};
+
+export default function PostClient({
+  post,
+  section = BLOG_SECTION,
+  related: relatedOverride,
+}: {
+  post: ArticlePost;
+  section?: PostSection;
+  /** Server-supplied siblings. Falls back to the file-based blog posts. */
+  related?: Array<Record<string, any>>;
+}) {
+  const tags = post.tags ?? [];
+  const toc = post.toc ?? [];
+  const displayDate = formatPostDate(post.date);
+  const related: Array<Record<string, any>> =
+    relatedOverride ?? getRelated(post.slug, post.category);
   const [copied, setCopied] = useState(false);
- 
+
+  const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
+
   const copyLink = () => {
-    navigator.clipboard.writeText(`https://www.searchprex.com/blog/${post.slug}`);
+    navigator.clipboard.writeText(postUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
- 
+
   return (
     <main className="bg-white min-h-screen">
  
@@ -49,9 +126,15 @@ export default function PostClient({ post }: { post: Post }) {
  
             {/* Breadcrumb */}
             <div className="mb-5 flex items-center gap-2 text-white/60">
-              <Link href="/blog" className="text-sm hover:text-white transition-colors">Blog</Link>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <span className="text-sm text-[#3eb489] font-semibold">{post.category}</span>
+              <Link href={section.href} className="text-sm hover:text-white transition-colors">{section.label}</Link>
+              {/* A news spoke in the plain "SEO News" category would otherwise
+                  render "SEO News > SEO News". */}
+              {post.category !== section.label && (
+                <>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                  <span className="text-sm text-[#3eb489] font-semibold">{post.category}</span>
+                </>
+              )}
             </div>
  
             {/* Stat badge */}
@@ -79,7 +162,7 @@ export default function PostClient({ post }: { post: Post }) {
                 <Clock className="h-4 w-4" /> {post.readTime}
               </div>
               <div className="flex items-center gap-1.5 text-white/60 text-sm">
-                <Calendar className="h-4 w-4" /> {post.date}
+                <Calendar className="h-4 w-4" /> {displayDate}
               </div>
               <button onClick={copyLink}
                 className="flex items-center gap-1.5 text-white/60 text-sm hover:text-white transition-colors">
@@ -109,7 +192,7 @@ export default function PostClient({ post }: { post: Post }) {
                     <span className="text-[9px] font-bold text-[#534AB7]">Verified SEO Expert</span>
                   </span>
                 </div>
-                <p className="text-xs text-[#64748b]">{post.author.role} · {post.date}</p>
+                <p className="text-xs text-[#64748b]">{post.author.role} · {displayDate}</p>
               </div>
             </div>
             <a href="https://www.linkedin.com/in/mubashar-shahzad-seo/" target="_blank" rel="noopener noreferrer"
@@ -133,7 +216,7 @@ export default function PostClient({ post }: { post: Post }) {
  
             {/* Content with Image Optimization */}
             <div style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
-              {parse(styledContent(post.content), {
+              {parse(renderArticle(post.content), {
                 replace: (domNode) => {
                   if (domNode instanceof Element && domNode.tagName === 'img') {
                     const { src, alt, width, height } = domNode.attribs;
@@ -155,13 +238,15 @@ export default function PostClient({ post }: { post: Post }) {
             </div>
  
             {/* Tags */}
-            <div className="mt-12 flex flex-wrap gap-2 border-t border-[#e5e7eb] pt-8">
-              {post.tags.map((t) => (
-                <span key={t} className="text-xs font-semibold bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-3 py-1.5 rounded-full">
-                  #{t}
-                </span>
-              ))}
-            </div>
+            {tags.length > 0 && (
+              <div className="mt-12 flex flex-wrap gap-2 border-t border-[#e5e7eb] pt-8">
+                {tags.map((t) => (
+                  <span key={t} className="text-xs font-semibold bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-3 py-1.5 rounded-full">
+                    #{t}
+                  </span>
+                ))}
+              </div>
+            )}
  
             {/* Author bio */}
             <div className="mt-10 flex gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-7">
@@ -174,14 +259,16 @@ export default function PostClient({ post }: { post: Post }) {
                   <CheckCircle className="h-3.5 w-3.5 text-[#534AB7]" />
                   <span className="text-xs font-bold text-[#534AB7]">{post.author.role}</span>
                 </div>
-                <p className="text-sm text-[#64748b] leading-relaxed">{post.author.bio}</p>
+                {post.author.bio && (
+                  <p className="text-sm text-[#64748b] leading-relaxed">{post.author.bio}</p>
+                )}
               </div>
             </div>
  
             {/* Share */}
             <div className="mt-8 flex items-center gap-3 flex-wrap">
               <span className="text-sm font-semibold text-[#0a0f2e]">Share:</span>
-              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.searchprex.com/blog/${post.slug}`}
+              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
                 target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-[#0a66c2] text-white text-sm font-bold px-4 py-2.5 rounded-xl hover:bg-[#084e96] transition-colors">
                 <Linkedin className="h-4 w-4" /> LinkedIn
@@ -197,13 +284,15 @@ export default function PostClient({ post }: { post: Post }) {
           {/* Sidebar */}
           <aside className="w-72 flex-shrink-0 hidden lg:flex flex-col gap-5 sticky top-24">
  
-            {/* TOC */}
+            {/* TOC — omitted entirely when empty, otherwise news spokes (which
+                carry no TOC) render an empty titled box. */}
+            {toc.length > 0 && (
             <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5">
               <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-4">
                 Table of Contents
               </p>
               <nav className="flex flex-col gap-2">
-                {post.toc.map((item, i) => (
+                {toc.map((item, i) => (
                   <a key={i} href={`#section-${i}`}
                     className="group flex items-start gap-2 text-sm text-[#64748b] hover:text-[#534AB7] transition-colors">
                     <span className="text-[#534AB7] font-bold text-xs mt-0.5 flex-shrink-0 w-5">
@@ -214,7 +303,8 @@ export default function PostClient({ post }: { post: Post }) {
                 ))}
               </nav>
               </div>
-   
+            )}
+
               {/* Automated Internal Linking (Related Services) */}
               <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-4">
@@ -274,16 +364,18 @@ export default function PostClient({ post }: { post: Post }) {
             )}
  
             {/* Tags */}
-            <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-3">Tags</p>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((t) => (
-                  <span key={t} className="text-xs bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-full">
-                    #{t}
-                  </span>
-                ))}
+            {tags.length > 0 && (
+              <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-3">Tags</p>
+                <div className="flex flex-wrap gap-2">
+                  {tags.map((t) => (
+                    <span key={t} className="text-xs bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-full">
+                      #{t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </aside>
         </div>
       </section>
@@ -295,7 +387,7 @@ export default function PostClient({ post }: { post: Post }) {
             <h2 className="text-2xl font-black text-[#0a0f2e] mb-8">Related articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((p) => (
-                <Link key={p.slug} href={`/blog/${p.slug}`}
+                <Link key={p.slug} href={`${section.href}/${p.slug}`}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white hover:border-[#534AB7] hover:shadow-lg transition-all">
                   <div className="relative h-44 overflow-hidden bg-[#0a0f2e]">
                     {(p as any).heroImage && (
@@ -313,7 +405,12 @@ export default function PostClient({ post }: { post: Post }) {
                   </div>
                   <div className="flex flex-1 flex-col p-5">
                     <div className="mb-2 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
-                      {p.category} <ChevronRight className="h-2.5 w-2.5" /> {p.subcategory}
+                      {p.category}
+                      {p.subcategory && (
+                        <>
+                          <ChevronRight className="h-2.5 w-2.5" /> {p.subcategory}
+                        </>
+                      )}
                     </div>
                     <h3 className="flex-1 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors line-clamp-2">
                       {p.title}

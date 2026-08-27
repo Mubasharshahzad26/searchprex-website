@@ -13,16 +13,39 @@ function MarkdownToolbar({ onInsert }: { onInsert: (prefix: string, suffix?: str
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("**", "**")}>Bold</Button>
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("*", "*")}>Italic</Button>
       <div className="w-px h-4 bg-gray-300 mx-1" />
-      <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("\n# ", "\n")}>H1</Button>
+      {/* No H1 button: the page template already renders the title as the
+          page's only h1, so an h1 in the body is a duplicate. H2 is the
+          correct top level for body headings. */}
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("\n## ", "\n")}>H2</Button>
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("\n### ", "\n")}>H3</Button>
       <div className="w-px h-4 bg-gray-300 mx-1" />
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("[", "](https://)")}>Link</Button>
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("![Alt text](", ")")}>Image</Button>
       <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("\n- ")}>Bullet List</Button>
+      <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("\n1. ")}>Numbered</Button>
+      <div className="w-px h-4 bg-gray-300 mx-1" />
+      <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert("\n| Column | Column |\n| --- | --- |\n| Cell | Cell |\n")}>Table</Button>
+      <Button type="button" variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onInsert('\n<div class="callout"><strong>Note:</strong> ', "</div>\n")}>Callout</Button>
     </div>
   );
 }
+
+/**
+ * Spoke categories drive both the SEO News hub and its subnav. The hub matches
+ * `contains "SEO News"`; each subnav item matches `contains "AI SEO"`, "LLMs",
+ * "Tools", "Ecommerce" or "Technical". A combined "SEO News — Tools" satisfies
+ * both, so the article appears on the hub AND on its subcategory page. A bare
+ * "SEO News" shows on the hub only -- which is how the subnav pages ended up
+ * with no articles on them.
+ */
+const CATEGORY_SUGGESTIONS = [
+  "SEO News",
+  "SEO News — AI SEO",
+  "SEO News — LLMs",
+  "SEO News — Tools",
+  "SEO News — Ecommerce",
+  "SEO News — Technical",
+];
 
 export function ContentForm({ initialData, onSubmit, type }: { initialData?: any, onSubmit: (data: any) => void, type: "page" | "blog" | "case-study" | "news" | "resource" }) {
   const [formData, setFormData] = useState(initialData || {});
@@ -129,7 +152,23 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label>Category</Label>
-            <Input name="category" value={formData.category || ""} onChange={handleChange} placeholder="e.g. SEO News, Technical SEO" />
+            <Input
+              name="category"
+              value={formData.category || ""}
+              onChange={handleChange}
+              list="category-suggestions"
+              placeholder="e.g. SEO News — Tools"
+            />
+            <datalist id="category-suggestions">
+              {CATEGORY_SUGGESTIONS.map((c) => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
+            <p className="text-xs text-muted-foreground">
+              For SEO News, use <code className="font-mono">SEO News — Subcategory</code> so the
+              article shows on the hub <em>and</em> its subnav page. Plain{" "}
+              <code className="font-mono">SEO News</code> shows on the hub only.
+            </p>
           </div>
           <div className="space-y-2">
             <Label>Author</Label>
@@ -222,6 +261,12 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
             className="font-mono text-sm rounded-t-none border-t-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="Write your content here in Markdown..."
           />
+          <p className="text-xs text-muted-foreground mt-2">
+            Markdown, rendered on the live page. Start headings at{" "}
+            <code className="font-mono">##</code>{" "}— the article title is already the
+            page&apos;s h1. Raw HTML is allowed for anything Markdown can&apos;t express (the
+            Callout button inserts some).
+          </p>
         </div>
       )}
       

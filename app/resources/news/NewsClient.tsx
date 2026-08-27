@@ -10,53 +10,50 @@ const GREEN_DARK = "#2f9670";
 const PURPLE = "#534AB7";
  
 /*
-  ─── CURATED SEO NEWS (manual update) ───
-  Add new items at the TOP. Keep summaries in your own words.
-  Always link to the original authoritative source.
+  ─── NEWS ITEM STYLING ───
+  The items themselves live in the MarketingNews table and are edited at
+  /content-admin/news. Nothing is hardcoded here on purpose: a hardcoded card
+  cannot be corrected once the story moves on, and this page previously served a
+  "core update rolling out" item for three months after that rollout finished.
 */
-const hardcodedNews = [
-  {
-    date: "May 21, 2026",
-    tag: "Core Update",
-    tagColor: PURPLE,
-    title: "Google May 2026 Core Update Rolling Out",
-    summary:
-      "Google began its second broad core update of the year on May 21, with the rollout expected to complete in early June. As with March, expect ranking volatility for up to two weeks — don't make drastic changes until it finishes. The same quality signals apply: original, people-first content from verifiable experts wins.",
-    sourceLabel: "Google Search Status Dashboard",
-    sourceHref: "https://status.search.google.com/",
-  },
-  {
-    date: "May 19, 2026",
-    tag: "AI Search",
-    tagColor: GREEN_DARK,
-    title: "AI Overviews Cross 2.5 Billion Monthly Users",
-    summary:
-      "At Google I/O 2026, Google announced AI Overviews now reaches 2.5 billion monthly users and AI Mode has hit 1 billion. For businesses, being cited inside AI answers is becoming as important as ranking in classic search — making structured data, clear entities, and verifiable authorship essential.",
-    sourceLabel: "Google I/O 2026",
-    sourceHref: "https://io.google/",
-  },
-  {
-    date: "Apr 8, 2026",
-    tag: "Core Update",
-    tagColor: PURPLE,
-    title: "March 2026 Core Update Finishes — Originality Rewarded",
-    summary:
-      "The March 2026 core update (March 27—April 8) consistently rewarded sites where the content creator is also the primary source — first-hand experience, proprietary data, and real case studies. Aggregators and sites that merely summarize others lost ground. E-E-A-T with verifiable author credentials was a clear winner.",
-    sourceLabel: "Search Engine Roundtable",
-    sourceHref: "https://www.seroundtable.com/",
-  },
-  {
-    date: "Mar 27, 2026",
-    tag: "E-E-A-T",
-    tagColor: GREEN_DARK,
-    title: "Why Verifiable Authorship Now Decides Rankings",
-    summary:
-      "A key takeaway from 2026's updates: Google is less confident ranking content it can't attribute to a credible, named source. Anonymous or generic-profile content is losing regardless of quality. Attributing content to a real, credentialed author with a consistent track record is now a ranking essential, not a nice-to-have.",
-    sourceLabel: "Google Search Central",
-    sourceHref: "https://developers.google.com/search/blog",
-  },
-];
- 
+const TAG_COLORS: Record<string, string> = {
+  "Core Update": PURPLE,
+  "Spam Update": "#b91c1c",
+  "AI Search": GREEN_DARK,
+  "Search Console": "#0369a1",
+  "Structured Data": "#b45309",
+  "Discover": "#7c3aed",
+  "Ecommerce": "#be185d",
+  "Technical": "#0f766e",
+};
+const tagColor = (tag: string) => TAG_COLORS[tag] || PURPLE;
+
+/*
+  Spoke categories are stored as "SEO News — AI SEO" so that the hub query
+  (contains "SEO News") and each subnav query (contains "AI SEO") both match the
+  same row. Only the subcategory half belongs on the card badge.
+*/
+const shortCategory = (category?: string) => {
+  if (!category) return "SEO News";
+  const parts = category.split("—");
+  return (parts.length > 1 ? parts[parts.length - 1] : parts[0]).trim();
+};
+
+/*
+ * Locale and time zone are both pinned. Bare toLocaleDateString() resolves
+ * against the host's locale, so the server rendered "27/08/2026" while the
+ * browser rendered "8/27/2026" -- a hydration mismatch that threw on every
+ * visit. Pinning the time zone additionally stops a UTC server and a
+ * west-of-UTC visitor disagreeing about which calendar day a timestamp is.
+ */
+const formatDate = (value: string | Date) =>
+  new Date(value).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
 /* 🔮 MOTION 🔮 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -67,15 +64,15 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 export default function NewsClient({ initialNews = [], initialSpokes = [] }: { initialNews?: any[], initialSpokes?: any[] }) {
   const dbNewsFormatted = initialNews.map((n: any) => ({
     id: n.id,
-    date: new Date(n.newsDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    date: formatDate(n.newsDate),
     tag: n.tag || "SEO News",
-    tagColor: PURPLE,
+    tagColor: tagColor(n.tag || ""),
     title: n.title,
     summary: n.summary,
     sourceLabel: n.sourceLabel || "Source",
     sourceHref: n.sourceHref || "#",
   }));
-  const news = [...dbNewsFormatted, ...hardcodedNews];
+  const news = dbNewsFormatted;
  
   return (
     <main className="bg-[#f8f9fc]">
@@ -109,9 +106,9 @@ export default function NewsClient({ initialNews = [], initialSpokes = [] }: { i
                 <Link key={spoke.slug} href={`/resources/news/${spoke.slug}`} className="group block rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-6 transition-all hover:shadow-lg hover:border-[#534AB7]">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[#534AB7] text-white">
-                      {spoke.category}
+                      {shortCategory(spoke.category)}
                     </span>
-                    <span className="text-xs font-semibold text-[#64748b]">{new Date(spoke.publishedAt || spoke.createdAt).toLocaleDateString()}</span>
+                    <span className="text-xs font-semibold text-[#64748b]">{formatDate(spoke.publishedAt || spoke.createdAt)}</span>
                   </div>
                   <h3 className="mb-2 text-xl font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">{spoke.title}</h3>
                   <p className="text-sm leading-relaxed text-[#64748b] mb-4">{spoke.excerpt || spoke.metaDescription || "Read the full analysis and what it means for your rankings."}</p>

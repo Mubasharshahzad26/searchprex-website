@@ -192,6 +192,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
+  // ── SEO News deep-dives (the spokes) ─────────────────────────────────────
+  // These were reachable only through news-sitemap.xml, which exists for Google
+  // News and is scoped to a short freshness window -- so the articles the hub
+  // is built around were absent from the main sitemap entirely. They live in
+  // `MarketingBlog` under a "SEO News*" category, the same rows the hub and the
+  // subcategory pages query.
+  try {
+    const newsSpokes = await db.marketingBlog.findMany({
+      where: { published: true, category: { contains: "SEO News", mode: "insensitive" } },
+      select: { slug: true, canonicalUrl: true, updatedAt: true },
+    });
+
+    for (const spoke of newsSpokes) {
+      add({
+        url: spoke.canonicalUrl || absolute(`/resources/news/${spoke.slug}`),
+        lastModified: spoke.updatedAt,
+        changeFrequency: "weekly",
+        priority: 0.7,
+      });
+    }
+  } catch (error) {
+    console.error("[sitemap] SEO News spokes unavailable:", error);
+  }
+
   for (const { city } of getAllCitySlugs()) {
     add({
       url: absolute(`/locations/kansas/${city}`),

@@ -93,11 +93,7 @@ export function getRelated(currentSlug: string, category: string) {
   return posts.filter((p) => p.slug !== currentSlug && p.category === category).slice(0, 3);
 }
  
-export const styledContent = (html: string) =>
-  html
-    .replace(/<h2>/g, `<h2 style="font-size:1.5rem;font-weight:900;color:#0a0f2e;margin:2.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:2px solid #e5e7eb">`)
-    .replace(/<p>/g, `<p style="font-size:1.0625rem;color:#374151;margin-bottom:1.25rem;line-height:1.85">`)
-    .replace(/<div class="callout">/g, `<div style="background:#EEEDFE;border-left:4px solid #534AB7;border-radius:8px;padding:1rem 1.25rem;margin:1.5rem 0;font-size:0.9375rem;color:#3C3489">`)
-    .replace(/<code>/g, `<code style="background:#f1f5f9;border-radius:4px;padding:2px 6px;font-size:0.875rem;color:#0a0f2e">`);
+// Article body rendering (Markdown -> styled HTML) lives in lib/render-article
+// so the news routes can share it without importing this file's post data.
 
 export type Post = (typeof posts)[number];

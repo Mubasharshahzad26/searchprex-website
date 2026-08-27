@@ -14,18 +14,30 @@ async function getPostData(rawSlug: string) {
     if (dbPost && dbPost.category && dbPost.category.toLowerCase().includes("seo news")) {
       return {
         slug: dbPost.slug,
-        category: dbPost.category || "SEO News",
+        // The stored category is "SEO News — Technical" so that the hub and the
+        // subnav queries both match it. Only the tail belongs in the breadcrumb,
+        // which already shows "SEO News" as the section.
+        category: (dbPost.category?.split("—").pop() ?? "SEO News").trim(),
         subcategory: "",
         title: dbPost.title,
         excerpt: dbPost.excerpt || dbPost.metaDescription || "",
         readTime: dbPost.readTime || "7-minute read",
         date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split("T")[0] : dbPost.createdAt.toISOString().split("T")[0],
-        author: { name: dbPost.author || "SearchPrex Team", role: "Verified SEO Expert" },
-        authorBio: "Dedicated to tracking and decoding the latest Google algorithm updates and SEO trends.",
+        author: {
+          name: dbPost.author || "SearchPrex Team",
+          role: "Verified SEO Expert",
+          // PostClient reads author.bio. This used to sit in a top-level
+          // `authorBio` the component never looked at, so the bio panel on every
+          // news article rendered blank.
+          bio: "Dedicated to tracking and decoding the latest Google algorithm updates and SEO trends.",
+        },
         featured: false,
         heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
-        stat: { value: "", label: "" },
+        // null, not an empty object: PostClient renders the headline stat badge
+        // on any truthy value, so `{ value: "", label: "" }` produced an empty
+        // badge on every news article.
+        stat: null,
         toc: [],
         content: dbPost.content || "",
         
@@ -84,11 +96,48 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+/**
+ * Sibling spokes for the "Related articles" strip. The shared PostClient
+ * otherwise falls back to `getRelated`, which only searches the file-based blog
+ * posts -- so news spokes, whose categories are all "SEO News*", matched nothing
+ * and the section never rendered. Cross-linking the spokes is the point of a
+ * hub-and-spoke, so it is worth supplying them explicitly.
+ */
+async function getRelatedSpokes(currentSlug: string) {
+  try {
+    const siblings = await db.marketingBlog.findMany({
+      where: {
+        published: true,
+        slug: { not: currentSlug },
+        category: { contains: "SEO News", mode: "insensitive" },
+      },
+      orderBy: { publishedAt: "desc" },
+      take: 3,
+      select: { slug: true, title: true, category: true, coverImage: true, excerpt: true },
+    });
+
+    return siblings.map((s) => ({
+      slug: s.slug,
+      title: s.title,
+      // "SEO News — AI SEO" is too long for the card's eyebrow; the hub badge
+      // shows the same shortened form.
+      category: (s.category?.split("—").pop() ?? "SEO News").trim(),
+      subcategory: "",
+      heroImage: s.coverImage || undefined,
+    }));
+  } catch (err) {
+    console.error("Failed to load related news spokes for", currentSlug, err);
+    return [];
+  }
+}
+
 export default async function NewsSpokePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPostData(slug);
 
   if (!post) notFound();
+
+  const related = await getRelatedSpokes(post.slug);
 
   const url = `${SITE}/resources/news/${post.slug}`;
   const canonical = post.canonicalUrl || url;
@@ -133,7 +182,11 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
       {[articleSchema, breadcrumbSchema].map((schema, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
-      <PostClient post={post} />
+      <PostClient
+        post={post}
+        section={{ label: "SEO News", href: "/resources/news" }}
+        related={related}
+      />
     </>
   );
 }
