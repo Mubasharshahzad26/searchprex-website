@@ -35,7 +35,7 @@ export default function AIVisibilityShowcase() {
             <Sparkles className="h-3.5 w-3.5" /> AEO · AI Search Visibility
           </div>
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
-            AI Search Visibility (AEO) for US Businesses.<br />
+            Your customers are asking AI.<br />
             <span className="bg-gradient-to-r from-[#7F77DD] to-[#3eb489] bg-clip-text text-transparent">Are you the answer?</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/85">
@@ -131,11 +131,46 @@ export default function AIVisibilityShowcase() {
               Remit Choice: 113K clicks and 5.76M impressions across 2024
             </h3>
             <p className="mt-3 text-base leading-relaxed text-white/85">
-              A fintech account at real scale, with average CTR at 2.0% and average
-              position 43.4 for the year. The walkthrough below runs through the
-              Search Console account month by month.
+              A fintech account at real scale. Here are both Search Console exports —
+              the quarter before the work, and the full year after it. Average CTR went
+              from 1.8% to 2.0% and average position from 47.1 to 43.4.
             </p>
           </div>
+
+          {/* Restored. These were removed once on the assumption the AI Overview
+              citation was enough on its own; they are the scale evidence and they
+              belong here. The windows are different lengths, so the caption says so
+              plainly rather than inviting a percentage nobody can defend. */}
+          <div className="mt-8 grid gap-8 lg:grid-cols-2">
+            <ProofImage
+              src="/images/proof/remit-gsc-2023.png"
+              alt="Google Search Console performance for remitchoice.com from 29 September to 19 December 2023: 36K clicks, 1.97M impressions, 1.8% average CTR, 47.1 average position."
+              width={563}
+              height={296}
+              stage="Before · late 2023"
+              stageTone="#8a5b08"
+              caption="1.8% CTR · average position 47.1"
+              note="36K clicks and 1.97M impressions across roughly twelve weeks."
+              sizes="(max-width: 1024px) 100vw, 520px"
+            />
+            <ProofImage
+              src="/images/proof/remit-gsc-2024.png"
+              alt="Google Search Console performance for remitchoice.com from 1 January to 9 December 2024: 113K clicks, 5.76M impressions, 2% average CTR, 43.4 average position."
+              width={536}
+              height={267}
+              stage="After · full year 2024"
+              stageTone="#7F77DD"
+              caption="2.0% CTR · average position 43.4"
+              note="113K clicks and 5.76M impressions across the year."
+              sizes="(max-width: 1024px) 100vw, 520px"
+            />
+          </div>
+
+          <p className="mt-4 text-xs leading-relaxed text-white/70">
+            The two windows cover different lengths of time, so compare the rates — CTR and
+            average position — rather than the totals. Both are unedited exports from the
+            client&apos;s own property.
+          </p>
 
           {/* 2024 walkthrough — self-hosted, 1.8 MB, no third-party embed */}
           <figure className="m-0 mt-10">
