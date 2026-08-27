@@ -50,7 +50,7 @@ export async function GET(req: Request) {
 
         // Step B: AI Scoring
         const analysisResponse = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-1.5-flash",
           contents: `Analyze this business website content.
           Extract:
           1. Company Name.
@@ -81,7 +81,7 @@ export async function GET(req: Request) {
         // Step C: If qualified (> 70), send email
         if (score >= 70 && resend) {
           const emailResponse = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
+            model: "gemini-1.5-flash",
             contents: `You are an expert SEO Sales Representative for "SearchPrex".
             Write a short, highly personalized cold email to:
             Company: ${analysisData.companyName}
@@ -179,7 +179,7 @@ export async function GET(req: Request) {
         if (!lastEmail || !ai || !resend) continue;
 
         const followupResponse = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-1.5-flash",
           contents: `You are an expert SEO Sales Rep for "SearchPrex".
           3 days ago, you sent this cold email to ${fLead.companyName || 'this company'}:
           
