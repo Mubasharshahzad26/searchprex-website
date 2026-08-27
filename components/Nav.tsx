@@ -94,23 +94,6 @@ const navLinks: NavLink[] = [
       { href: "/tools/serp-checker",    label: "SERP Checker", badge: "New" },
     ],
   },
-  {
-    href: "/locations",
-    label: "Locations",
-    hasDropdown: true,
-    linkable: false,
-    // Built from lib/city-pages so adding a city updates the nav automatically.
-    // The dropdown previously listed Wichita alone while eight Kansas pages and
-    // twelve state pages sat live and unlinked from the header — internal links
-    // are how Google finds and weights them, and how a visitor knows they exist.
-    dropdownItems: [
-      ...CITY_PAGES.map((c) => ({
-        href: `/locations/${c.stateSlug}/${c.citySlug}`,
-        label: `${c.city}, ${c.stateAbbr}`,
-      })),
-      { href: "/locations/kansas", label: "Kansas — all cities" },
-    ],
-  },
 ];
  
 export default function Nav() {

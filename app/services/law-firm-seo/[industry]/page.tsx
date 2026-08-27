@@ -97,6 +97,9 @@ export default async function IndustryPage({
                 {ind.name}
               </Link>
             ))}
+            <Link href="/locations" className="text-slate-500 hover:text-slate-900 whitespace-nowrap">
+              Locations
+            </Link>
           </nav>
         </div>
       </div>
