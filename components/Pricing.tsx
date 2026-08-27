@@ -54,7 +54,7 @@ export default function Pricing() {
             Pricing
           </span>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
-            SEO Pricing for US Law Firms, Stores &amp; Local Businesses
+            What working with me costs
           </h2>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#475569]">
             No fixed tiers. We set your exact plan after a free audit — here&apos;s a realistic monthly ballpark by service.

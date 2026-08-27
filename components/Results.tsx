@@ -23,27 +23,35 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { color, radius } from "@/lib/design-tokens";
 import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
 
+// Written answer-first so an AI summariser can lift a complete, attributable
+// fact out of any single entry: who, what changed, by how much, over what
+// period. Each links to the service page that explains the work, not just to
+// the case study — contextual internal linking rather than a repeated
+// "learn more" pointing at one destination.
 const results = [
   {
-    label: "Ecommerce SEO · United States",
+    label: "Ecommerce · United States",
     title:
-      "+227% monthly store revenue after recovering a 35,000-product catalog from mass non-indexing — $5,832 to $19,100.",
+      "SMK Store's monthly revenue went from $5,832 to $19,100 between April and June 2026, after I recovered a 35,000-product catalog from mass non-indexing.",
     metric: "+227% revenue",
     href: "/case-studies/ecommerce/smk-store",
+    service: { label: "How I do ecommerce SEO", href: "/services/ecommerce-seo" },
   },
   {
-    label: "Technical SEO · Michigan, USA",
+    label: "Technical · Michigan, United States",
     title:
-      "+285% pages indexed and +83% US organic clicks — roughly 3,000 to 11,549 indexed pages between May and July 2026.",
+      "Michigan Outdoor Sports went from roughly 3,000 indexed pages to 11,549 between May and July 2026 — and US organic clicks rose 83% over the same period.",
     metric: "+285% indexed",
     href: "/case-studies/ecommerce/michigan-outdoor-sports",
+    service: { label: "How I fix indexing", href: "/services/technical-seo" },
   },
   {
-    label: "Local SEO · United States",
+    label: "Local · United States",
     title:
-      "Top 3 map pack and a Google AI Overview placement — from zero local visibility in 60 days.",
+      "HVAC Services Team reached the Google map pack top 3 and earned an AI Overview placement in 60 days, starting from no local visibility at all.",
     metric: "Top 3 maps",
     href: "/case-studies/hvac/local-hvac-services",
+    service: { label: "How I do local SEO", href: "/services/local-seo" },
   },
 ];
 
@@ -73,18 +81,24 @@ export default function Results() {
               className="mb-3 text-xs font-bold uppercase tracking-widest"
               style={{ color: color.primary }}
             >
-              Results &amp; the recordings behind them
+              Three clients, three problems
             </p>
             <h2
               className="text-3xl font-black tracking-tight sm:text-4xl"
               style={{ color: color.ink }}
             >
-              US SEO Results With Verified Search Console Proof
+              Every number below has a recording behind it.
             </h2>
             <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
-              Not edited screenshots. Live Google Search Console sessions, recorded on the
-              client&apos;s own property, so you can see the date range and the account they
-              came from.
+              You can watch me scroll through the client&apos;s own Search Console — the date
+              range, the property, the account it came from. I record these because a
+              screenshot can be cropped and a number in a slide deck can be anything. If you
+              want the longer version of any of them, the{" "}
+              <Link href="/all-case-studies" className="font-semibold underline underline-offset-2"
+                    style={{ color: color.primary }}>
+                full case studies
+              </Link>{" "}
+              walk through what was broken and what I changed.
             </p>
           </div>
           <Link
@@ -99,8 +113,8 @@ export default function Results() {
         {/* Case cards */}
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {results.map((r) => (
+            <div key={r.href} className="flex flex-col">
             <Link
-              key={r.href}
               href={r.href}
               className={`group relative flex flex-col overflow-hidden border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${radius.card}`}
               style={{ background: color.white, borderColor: color.border }}
@@ -133,6 +147,16 @@ export default function Results() {
                 />
               </div>
             </Link>
+            <p className="mt-3 text-xs">
+              <Link
+                href={r.service.href}
+                className="font-semibold underline underline-offset-2"
+                style={{ color: color.primary }}
+              >
+                {r.service.label}
+              </Link>
+            </p>
+            </div>
           ))}
         </div>
 

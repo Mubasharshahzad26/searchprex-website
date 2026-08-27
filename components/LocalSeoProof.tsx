@@ -106,7 +106,7 @@ export default function LocalSeoProof() {
             className="text-3xl font-black tracking-tight sm:text-4xl"
             style={{ color: color.ink }}
           >
-            Local SEO Results for US Service Businesses
+            What local SEO looks like when it lands
           </h2>
           <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
             Real searches, named American cities, and the client visible in the result. Every

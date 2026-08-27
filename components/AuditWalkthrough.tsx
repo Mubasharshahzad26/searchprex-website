@@ -52,7 +52,7 @@ export default function AuditWalkthrough() {
             id="audit-walkthrough-heading"
             className="text-3xl font-black tracking-tight text-white sm:text-4xl"
           >
-            See How I Audit a US Website — Full Walkthrough
+            Watch me audit a site, start to finish
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/85">
             This is a complete audit recording, start to finish. Not a highlight reel and not a

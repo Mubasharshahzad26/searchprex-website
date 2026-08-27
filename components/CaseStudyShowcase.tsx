@@ -102,11 +102,12 @@ export default function CaseStudyShowcase() {
               className="text-3xl font-black tracking-tight sm:text-4xl"
               style={{ color: color.ink }}
             >
-              SEO Case Studies for US Law Firms, Ecommerce Stores &amp; Local Businesses
+              Case studies from real US clients
             </h2>
             <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
-              Named American clients, real reporting periods, and a full write-up behind every
-              card — including what went wrong before it went right.
+              Every card is a named American business with a real reporting period behind
+              it. The write-ups include what went wrong before it went right, because the
+              recovery is usually the part worth reading.
             </p>
           </div>
 

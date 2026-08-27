@@ -151,7 +151,7 @@ export default function FounderSection() {
             Founder-led agency · E-E-A-T verified
           </div>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Founder-Led SEO for US Businesses — Hands-On, Not Theory
+            You&apos;ll be working with me, not a team
           </h2>
           <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
             You work directly with me — not a rotating team of juniors. Every strategy comes from

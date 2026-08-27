@@ -51,7 +51,7 @@ export default function Services() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" /> What we do
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            SEO Services for US Law Firms, Ecommerce Stores &amp; Local Businesses
+            What I do, and what I turn down
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#475569]">
             No bloated menus or vanity packages — every service is tied to a verified,
