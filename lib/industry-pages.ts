@@ -28,10 +28,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     metaDescription: "Dominate the highest-CPC keywords in your market. We help personal injury law firms rank for car accident and catastrophic injury terms locally.",
     h1: "Stop Losing Six-Figure Car Accident Cases to Billboard Lawyers",
     heroSub: "You know you're a better trial lawyer. Let's make sure injured plaintiffs find you first when they search. Advanced Personal Injury SEO with semantic clustering and local authority building.",
-    semanticKeywords: ["Car Accident Attorney SEO", "Catastrophic Injury Lawyer Marketing", "MVA Law Firm SEO", "Workers Comp SEO Strategy", "Wrongful Death Attorney Marketing"],
+    semanticKeywords: ["Car Accident Attorney SEO", "Catastrophic Injury Lawyer Marketing", "MVA Law Firm SEO", "Workers Comp SEO Strategy", "Wrongful Death Attorney Marketing", "TBI Lawyer Near Me", "Rideshare Accident Lawyer SEO"],
     caseStudy: {
       title: "Taking over the Dallas PI Market",
-      description: "We helped a boutique personal injury firm in Dallas capture top 3 rankings for 'truck accident lawyer dallas' within 7 months, leading to a 300% increase in qualified case leads. Become our next first-page success story in your city.",
+      description: "We helped a boutique personal injury firm in Dallas capture top 3 rankings for 'truck accident lawyer dallas' within 7 months, leading to a 300% increase in qualified case leads. You can be our next local SEO case study.",
       mapQuery: "Dallas, TX",
     },
     aiIntakeOffer: "Bonus: Get 30 Days of our AI Intake Efficiency SaaS for FREE when you sign up for any Personal Injury SEO package. Qualify leads instantly while you're in court.",
@@ -49,6 +49,14 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       {
         heading: "Local Map Pack Domination",
         body: "Proximity matters for injured clients. We optimize your Google Business Profile with localized schema, driving directions, and local link building to ensure you dominate the Local 3-Pack in your zip code.",
+      },
+      {
+        heading: "Geo-Fenced Content Silos",
+        body: "We map out the exact hospital zones and major highways in your jurisdiction. By writing highly specific content about local accident hotspots and emergency rooms, we send massive local relevancy signals to Google."
+      },
+      {
+        heading: "Authoritative Case Result Schema",
+        body: "Personal injury clients want to see winning verdicts. We implement specific Legal Service and Case Result schema markup so your multi-million dollar settlements appear as rich snippets directly in the search results, instantly building trust."
       }
     ],
     locationsMentioned: ["dallas", "fort-worth", "sugar-land"],
@@ -60,10 +68,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     metaDescription: "Connect with high-net-worth clients during their most vulnerable times. Specialized family law and divorce SEO strategies.",
     h1: "Connect With Clients When They Need You Most: Family Law SEO",
     heroSub: "Divorce and custody clients don't want a salesman, they want an advocate. We position your firm as the most trusted, authoritative voice in your county.",
-    semanticKeywords: ["Divorce Lawyer SEO", "High Net Worth Divorce Marketing", "Child Custody Attorney SEO", "Alimony Lawyer SEO", "Family Law Marketing Agency"],
+    semanticKeywords: ["Divorce Lawyer SEO", "High Net Worth Divorce Marketing", "Child Custody Attorney SEO", "Alimony Lawyer SEO", "Family Law Marketing Agency", "Mediation Attorney SEO", "Prenuptial Agreement Lawyer SEO"],
     caseStudy: {
       title: "Owning the Local Market in Grand Rapids",
-      description: "A mid-sized family law practice struggled against massive ad budgets. By focusing on Answer Engine Optimization (AEO) for complex custody questions, we bypassed ads and ranked them organically. Become our next major case study.",
+      description: "A mid-sized family law practice struggled against massive ad budgets. By focusing on Answer Engine Optimization (AEO) for complex custody questions, we bypassed ads and ranked them organically. You can be our next local SEO case study.",
       mapQuery: "Grand Rapids, MI",
     },
     aiIntakeOffer: "Bonus: Get 30 Days of our AI Intake Efficiency SaaS for FREE with your Family Law SEO package. Automate sensitive initial client consultations 24/7.",
@@ -80,7 +88,15 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       },
       {
         heading: "Targeting High-Net-Worth Divorces",
-        body: "We don't just drive traffic; we drive the right traffic. By targeting long-tail, semantic keywords around business valuations and hidden assets, we attract clients with substantial estates.",
+        body: "We don't just drive traffic; we drive the right traffic. By targeting long-tail, semantic keywords around business valuations, 401(k) divisions, and hidden assets, we attract clients with substantial estates.",
+      },
+      {
+        heading: "Answering the Unasked Questions (AEO)",
+        body: "Family law clients turn to AI and Google to ask deeply personal questions late at night. We structure your FAQ pages with Answer Engine Optimization (AEO) so your firm is cited as the source in AI Overviews for questions like 'Can I move out of state with my child?'."
+      },
+      {
+        heading: "Hyper-Local Court Venue Targeting",
+        body: "People search for lawyers familiar with their specific judge and courthouse. We create localized pages detailing your experience in specific county family courts, establishing you as the local insider."
       }
     ],
     locationsMentioned: ["grand-rapids", "detroit"],
@@ -92,10 +108,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     metaDescription: "Urgent cases require instant visibility. We help criminal defense attorneys dominate local search for DUI, felonies, and federal charges.",
     h1: "When They Get One Phone Call, Make Sure It's To Your Firm",
     heroSub: "Criminal defense is the most urgent search in the legal industry. If you aren't in the top 3 on Google Maps, you don't exist. Let's fix that.",
-    semanticKeywords: ["DUI Attorney SEO", "Federal Criminal Defense Marketing", "Misdemeanor Lawyer SEO", "Domestic Violence Attorney SEO", "Criminal Law Firm Marketing"],
+    semanticKeywords: ["DUI Attorney SEO", "Federal Criminal Defense Marketing", "Misdemeanor Lawyer SEO", "Domestic Violence Attorney SEO", "Criminal Law Firm Marketing", "White Collar Crime SEO", "Drug Possession Lawyer Marketing"],
     caseStudy: {
       title: "Dominating the Denton University Market",
-      description: "By targeting specific university-related charges (underage drinking, possession), we helped a Denton firm capture the student demographic, bypassing generic DFW competitors. Let us make you our next success story.",
+      description: "By targeting specific university-related charges (underage drinking, possession), we helped a Denton firm capture the student demographic, bypassing generic DFW competitors. You can be our next local SEO case study.",
       mapQuery: "Denton, TX",
     },
     aiIntakeOffer: "Bonus: Include our AI Intake Efficiency SaaS FREE for 30 Days. Let the AI handle 2AM jail calls and qualify urgency while you sleep.",
@@ -108,11 +124,19 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     uniqueSections: [
       {
         heading: "Urgency and Mobile Optimization",
-        body: "Over 80% of criminal defense searches happen on mobile devices in moments of panic. We ensure your site is lightning-fast, mobile-first, and optimized for 'near me' searches.",
+        body: "Over 80% of criminal defense searches happen on mobile devices in moments of panic. We ensure your site is lightning-fast, mobile-first, and optimized for 'near me' searches with click-to-call functionality front and center.",
       },
       {
         heading: "Granular Charge-Specific Pages",
         body: "Generic 'criminal lawyer' pages don't convert. We build dedicated, highly optimized pages for every specific charge you defend—from federal wire fraud to local DWIs—matching the exact intent of the searcher.",
+      },
+      {
+        heading: "County Jail and Bail Bond Integrations",
+        body: "We target secondary searchers: family members trying to get a loved one out of jail. By creating content around local booking processes and bail bonds, we capture high-intent leads who need immediate representation."
+      },
+      {
+        heading: "Reputation Management & Review Funnels",
+        body: "In criminal defense, bad reviews from angry opposing parties or stressed clients can tank your rankings. We implement automated review generation strategies that filter positive outcomes to your Google Business Profile, proving your reliability."
       }
     ],
     locationsMentioned: ["denton", "cleveland"],
@@ -124,7 +148,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     metaDescription: "Build long-term trust and attract high-value clients with specialized Estate Planning and Probate SEO strategies.",
     h1: "Become the Most Trusted Estate Planning Authority in Your City",
     heroSub: "Estate planning clients are searching for peace of mind, not just a lawyer. We use semantic SEO and E-E-A-T principles to position you as the definitive local expert.",
-    semanticKeywords: ["Probate Lawyer SEO", "Wills and Trusts Marketing", "Elder Law Attorney SEO", "Asset Protection Lawyer SEO", "Estate Administration Marketing"],
+    semanticKeywords: ["Probate Lawyer SEO", "Wills and Trusts Marketing", "Elder Law Attorney SEO", "Asset Protection Lawyer SEO", "Estate Administration Marketing", "Business Succession SEO", "Special Needs Trust Attorney Marketing"],
     caseStudy: {
       title: "Capturing High-Value Estates in Philadelphia",
       description: "We optimized a local firm's content for complex probate and irrevocable trust queries, generating consistent leads from high-net-worth families. You can be our next local SEO case study.",
@@ -145,6 +169,14 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       {
         heading: "Educational Content that Converts",
         body: "Estate planning is a long sales cycle. We create comprehensive guides on probate processes, tax implications, and trust structures that capture top-of-funnel traffic and nurture them into clients.",
+      },
+      {
+        heading: "Targeting the 'Sandwich Generation'",
+        body: "Often, it's the adult children searching for elder law or probate attorneys on behalf of their aging parents. Our semantic keyword strategy targets the specific anxieties of this demographic, driving multi-generational client relationships."
+      },
+      {
+        heading: "Video SEO & Trust Building",
+        body: "Estate planning requires immense personal trust. We help you optimize your YouTube and embedded website videos explaining complex trusts. Video snippets often rank at the top of Google for 'how-to' queries, putting your face directly in front of the client."
       }
     ],
     locationsMentioned: ["philadelphia", "albuquerque"],
@@ -156,10 +188,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     metaDescription: "Compete nationally for high-value mass tort leads. Advanced SEO for class actions, dangerous drugs, and defective products.",
     h1: "National Reach, Local Authority: Advanced Mass Torts SEO",
     heroSub: "Stop relying solely on expensive TV buys and paid lead gen. Build a sustainable organic pipeline for the most competitive dockets in the country.",
-    semanticKeywords: ["Camp Lejeune SEO", "Class Action Lawyer Marketing", "Defective Product Attorney SEO", "Dangerous Drug Law Firm SEO", "Mass Tort Lead Generation"],
+    semanticKeywords: ["Camp Lejeune SEO", "Class Action Lawyer Marketing", "Defective Product Attorney SEO", "Dangerous Drug Law Firm SEO", "Mass Tort Lead Generation", "Paraquat Parkinson's SEO", "Talcum Powder Lawsuit Marketing"],
     caseStudy: {
       title: "Breaking into the National Top 10",
-      description: "We utilized advanced Generative Engine Optimization (GEO) and rapid content deployment to rank a mid-sized firm nationally for a newly announced defective medical device docket. Partner with us and become our next major case study.",
+      description: "We utilized advanced Generative Engine Optimization (GEO) and rapid content deployment to rank a mid-sized firm nationally for a newly announced defective medical device docket. You can be our next local SEO case study.",
       mapQuery: "United States",
     },
     aiIntakeOffer: "Bonus: Mass torts mean massive volume. Get 30 Days of our AI Intake Efficiency SaaS FREE to automatically filter out unqualified claimants and fast-track the best cases.",
@@ -177,6 +209,14 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       {
         heading: "National Authority Building",
         body: "Ranking for national mass torts requires immense domain authority. We execute high-tier digital PR and contextual link building to ensure your firm can compete with the mega-firms.",
+      },
+      {
+        heading: "Symptom-to-Lawsuit Mapping",
+        body: "Plaintiffs rarely search for the name of a complex litigation. They search for their symptoms and the drug they took. We build informational silos connecting these medical queries directly to your legal representation."
+      },
+      {
+        heading: "Compliance-First Content Architecture",
+        body: "Mass tort advertising is heavily scrutinized by state bars. We ensure all SEO content ranks aggressively while strictly adhering to advertising rules regarding guarantees and medical advice."
       }
     ],
     locationsMentioned: ["plano", "dallas"],
