@@ -67,7 +67,7 @@ export default function AuditWalkthrough() {
               controls
               preload="none"
               playsInline
-              poster="/images/proof/mso-gsc-indexing-full.png"
+              poster="/images/proof/poster-audit-walkthrough.png"
               className={`w-full border border-white/10 ${radius.card}`}
               style={{ background: "#000" }}
             >

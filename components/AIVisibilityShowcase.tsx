@@ -10,6 +10,7 @@ import Link from "next/link";
 import ProofImage from "@/components/ProofImage";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Check } from "lucide-react";
+import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
  
 const GREEN = "#3eb489";
 
@@ -60,8 +61,11 @@ export default function AIVisibilityShowcase() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/ai-visibility" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-bold text-[#0a0f2e] transition-transform hover:-translate-y-0.5">
-                Check your AI visibility — free <ArrowRight className="h-4 w-4" />
+              {/* Was a separate "Check your AI visibility — free" CTA pointing at
+                  /ai-visibility. That was a second ask competing with the audit;
+                  AI visibility is now part of the one offer, not a rival to it. */}
+              <Link href={OFFER_HREF} className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-bold text-[#0a0f2e] transition-transform hover:-translate-y-0.5">
+                {OFFER_CTA} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/services/law-firm-seo" className="inline-flex items-center gap-1.5 text-sm font-bold text-white/85 transition-colors hover:text-white">
                 How AEO works <ArrowRight className="h-4 w-4" />
@@ -124,52 +128,14 @@ export default function AIVisibilityShowcase() {
         <div className="mt-16 border-t border-white/10 pt-12">
           <div className="max-w-2xl">
             <h3 className="text-2xl font-black text-white">
-              Remit Choice: 113K clicks and 5.76M impressions in 2024
+              Remit Choice: 113K clicks and 5.76M impressions across 2024
             </h3>
             <p className="mt-3 text-base leading-relaxed text-white/85">
-              A fintech account at real scale. Comparing the two Search Console
-              exports below, average CTR moved from 1.8% to 2.0% and average position
-              improved from 47.1 to 43.4 across a much longer reporting window.
+              A fintech account at real scale, with average CTR at 2.0% and average
+              position 43.4 for the year. The walkthrough below runs through the
+              Search Console account month by month.
             </p>
           </div>
-
-          <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            <ProofImage
-              src="/images/proof/remit-gsc-2023.png"
-              alt="Google Search Console performance for remitchoice.com from 29 September to 19 December 2023: 36K clicks, 1.97M impressions, 1.8% average CTR, 47.1 average position."
-              width={563}
-              height={296}
-              stage="Sept – Dec 2023"
-              stageTone="#8a5b08"
-              caption="1.8% CTR · position 47.1"
-              note="36K clicks, 1.97M impressions over roughly 82 days."
-              sizes="(max-width: 1024px) 100vw, 520px"
-            />
-            <ProofImage
-              src="/images/proof/remit-gsc-2024.png"
-              alt="Google Search Console performance for remitchoice.com from 1 January to 9 December 2024: 113K clicks, 5.76M impressions, 2% average CTR, 43.4 average position."
-              width={536}
-              height={267}
-              stage="Full year 2024"
-              stageTone="#7F77DD"
-              caption="2.0% CTR · position 43.4"
-              note="113K clicks, 5.76M impressions over roughly 343 days."
-              sizes="(max-width: 1024px) 100vw, 520px"
-            />
-          </div>
-
-          <p className="mt-4 text-xs leading-relaxed text-white/70">
-            The two windows are different lengths, so the click and impression totals
-            are not directly comparable — CTR and average position are. Both captures
-            are unedited Search Console exports from the client&apos;s own property.
-          </p>
-
-          <Link
-            href="/case-studies/fintech/remit-choice"
-            className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-white/85 transition-colors hover:text-white"
-          >
-            Read the Remit Choice case study <ArrowRight className="h-4 w-4" />
-          </Link>
 
           {/* 2024 walkthrough — self-hosted, 1.8 MB, no third-party embed */}
           <figure className="m-0 mt-10">
@@ -180,7 +146,7 @@ export default function AIVisibilityShowcase() {
               controls
               preload="none"
               playsInline
-              poster="/images/proof/remit-gsc-2024.png"
+              poster="/images/proof/poster-remit-2024.png"
               className="w-full max-w-3xl rounded-2xl border border-white/10"
             >
               <source src="/video/remit-choice-2024-performance.mp4" type="video/mp4" />

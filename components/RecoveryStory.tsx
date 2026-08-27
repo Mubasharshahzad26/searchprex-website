@@ -192,32 +192,10 @@ export default function RecoveryStory() {
 
           <p className="mt-4 text-xs leading-relaxed" style={{ color: color.muted }}>
             Screenshots cropped to the WooCommerce Status panel only — account names, admin
-            usernames and unrelated store data removed. Click any panel to read it full size.
+            usernames and unrelated store data removed. Click any panel to read it full
+            size. The Search Console chart behind this recovery is shown above, next to the
+            revenue it produced.
           </p>
-
-          {/* The indexing chart that caused the revenue change, same treatment */}
-          <div className="mt-12">
-            <h3 className="text-lg font-black" style={{ color: color.ink }}>
-              And the indexing curve that caused it
-            </h3>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed" style={{ color: color.muted }}>
-              Sales did not restart because of a pricing change or an ad campaign. They
-              restarted because the catalog went back into Google&apos;s index.
-            </p>
-            <div className="mt-5 max-w-3xl">
-              <ProofImage
-                src="/images/proof/mso-gsc-indexing-full.png"
-                alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
-                width={1366}
-                height={606}
-                stage="Google Search Console"
-                stageTone={color.primary}
-                caption="≈3,000 → 11,549 indexed pages — 18 May to 25 July 2026"
-                note="Page indexing, all known pages. Unedited apart from a crop removing the account avatar and site URL."
-                sizes="(max-width: 1024px) 100vw, 720px"
-              />
-            </div>
-          </div>
         </div>
 
         <div
