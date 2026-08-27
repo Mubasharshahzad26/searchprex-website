@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
+      model: "gemini-3.7-flash",
       contents: `You are an expert SEO Sales Development Representative. Analyze this business website content.
       
       Extract the following information:

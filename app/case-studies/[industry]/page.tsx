@@ -17,7 +17,8 @@ export async function generateMetadata(
 
   if (!dbCs || !dbCs.published) return {};
 
-  const title = dbCs.metaTitle || `${dbCs.title} | SearchPrex Case Study`;
+  // No brand suffix here — the root layout's title template appends "| SearchPrex".
+  const title = dbCs.metaTitle || `${dbCs.title} — Case Study`;
   const description = dbCs.metaDescription || `Read how we improved SEO performance for ${dbCs.clientName}.`;
 
   return {

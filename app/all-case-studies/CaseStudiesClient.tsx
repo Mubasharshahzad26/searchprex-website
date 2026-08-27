@@ -13,7 +13,7 @@
 
 import { useMemo, useState, useEffect, useCallback, useDeferredValue } from "react";
 import Link from "next/link";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowRight, TrendingUp, Filter } from "lucide-react";
 
@@ -57,13 +57,20 @@ const isFilterKey = (v: string | null): v is FilterKey =>
 // Component
 // ─────────────────────────────────────────────────────────────
 export default function CaseStudiesClient({ linkedinUrl, initialCaseStudies = [] }: { linkedinUrl?: string, initialCaseStudies?: any[] }) {
-  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const rawVertical = searchParams.get("vertical");
-  const initialVertical: FilterKey = isFilterKey(rawVertical) ? rawVertical : "all";
-  const [activeVertical, setActiveVertical] = useState<FilterKey>(initialVertical);
+  // Start on "all" — the state the canonical, param-free URL represents.
+  //
+  // A ?vertical= deep link is read after mount instead of via useSearchParams().
+  // That hook is deliberately avoided: this route is prerendered, and search
+  // params are unknowable at build time, so useSearchParams() makes Next.js emit
+  // the enclosing Suspense fallback into the static HTML. The whole page — H1,
+  // hero copy, every case study card and its internal links — was therefore
+  // absent for crawlers. Reading window.location after hydration keeps the route
+  // prerenderable and the markup complete.
+  const [activeVertical, setActiveVertical] = useState<FilterKey>("all");
+  const [hydrated, setHydrated] = useState(false);
   const deferredVertical = useDeferredValue(activeVertical);
 
   const dbCaseStudiesFormatted = initialCaseStudies.map((cs) => ({
@@ -80,18 +87,27 @@ export default function CaseStudiesClient({ linkedinUrl, initialCaseStudies = []
   }));
   const allCaseStudies = [...dbCaseStudiesFormatted, ...caseStudies];
 
-  // Sync filter to URL
+  // Apply a ?vertical= deep link once, on mount.
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const raw = new URLSearchParams(window.location.search).get("vertical");
+    if (isFilterKey(raw)) setActiveVertical(raw);
+    setHydrated(true);
+  }, []);
+
+  // Sync filter to URL. Skipped until the deep link above has been read, so the
+  // mount pass can't strip the incoming param before it is applied.
+  useEffect(() => {
+    if (!hydrated) return;
+    const params = new URLSearchParams(window.location.search);
     if (activeVertical === "all") {
       params.delete("vertical");
     } else {
       params.set("vertical", activeVertical);
     }
     const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+    if (newUrl === `${window.location.pathname}${window.location.search}`) return;
     router.replace(newUrl, { scroll: false });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeVertical]);
+  }, [activeVertical, hydrated, pathname, router]);
 
   // Filter case studies by seoType, featured studies first so the hero card is a strong one.
   const filteredStudies = useMemo(() => {

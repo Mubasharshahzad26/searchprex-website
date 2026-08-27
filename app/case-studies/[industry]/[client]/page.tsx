@@ -29,7 +29,8 @@ export async function generateMetadata(
   const cs = findBySlug(industry, client);
   if (!cs) return {};
  
-  const title = `${cs.client} ${cs.seoType} Case Study — ${cs.metrics[0].v} ${cs.metrics[0].l} | SearchPrex`;
+  // No "| SearchPrex" suffix here — the root layout's title template appends it.
+  const title = `${cs.client} ${cs.seoType} Case Study — ${cs.metrics[0].v} ${cs.metrics[0].l}`;
   const description = `${cs.headline} See the full ${cs.seoType.toLowerCase()} strategy, verified Google Search Console results, and how we did it.`;
  
   return {

@@ -61,7 +61,7 @@ const SOLUTIONS: Solution[] = [
     category: "Keyword Magic",
     title: "Real keyword data, live",
     desc: "Real keyword volume and difficulty pulled from live data — not stale estimates.",
-    href: "/keyword",
+    href: "/tools/keyword-research",
     mockup: "keyword",
   },
 ];

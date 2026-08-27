@@ -1,9 +1,10 @@
 // app/all-case-studies/page.tsx
 // Server Component. Owns metadata + JSON-LD (ItemList, FAQPage, BreadcrumbList,
-// Person, CollectionPage). The interactive UI lives in CaseStudiesClient (a client island),
-// wrapped in Suspense because it reads useSearchParams for URL-synced filters.
- 
-import { Suspense } from "react";
+// Person, CollectionPage). The interactive UI lives in CaseStudiesClient (a client island).
+// It is NOT wrapped in Suspense: the client island reads its ?vertical= deep link from
+// window.location after mount rather than via useSearchParams, so nothing suspends and
+// the full page prerenders into the static HTML.
+
 import type { Metadata } from "next";
 import CaseStudiesClient from "./CaseStudiesClient";
 import { caseStudies, detailUrl, FAQS } from "./data";
@@ -236,9 +237,7 @@ export default async function Page() {
         />
       ))}
  
-      <Suspense fallback={null}>
-        <CaseStudiesClient linkedinUrl={LINKEDIN_URL} initialCaseStudies={dbCaseStudies} />
-      </Suspense>
+      <CaseStudiesClient linkedinUrl={LINKEDIN_URL} initialCaseStudies={dbCaseStudies} />
     </>
   );
 }
