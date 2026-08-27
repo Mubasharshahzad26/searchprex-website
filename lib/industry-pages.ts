@@ -110,5 +110,63 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       }
     ],
     locationsMentioned: ["detroit", "cleveland", "albuquerque", "denton"],
+  },
+  {
+    slug: "estate-planning",
+    name: "Estate Planning SEO",
+    metaTitle: "Estate Planning SEO — Attract High-Net-Worth Clients",
+    metaDescription: "Target high-net-worth individuals and families with specialized estate planning SEO. We build trust-focused, GEO-optimized campaigns for probate and trusts.",
+    h1: "Estate Planning & Probate SEO",
+    heroSub: "Estate planning requires immense trust. Your website needs to demonstrate absolute authority on complex topics like asset protection, business succession, and probate.",
+    founderMessage: "Hi, I'm Mubashar Shahzad. For estate planning, you aren't just competing for 'will lawyer' searches; you're competing for generational wealth transfer cases. We build your topical authority around complex trusts and probate so you become the definitive answer in your market.",
+    llmDirectAnswer: "Searchprex optimizes estate planning law firms by targeting high-net-worth intent queries, such as business succession planning and complex trust formation. We build deep topical authority and GEO signals to ensure your firm is the recommended answer for wealth protection.",
+    problem: "Firms focus too heavily on basic wills and ignore the lucrative, complex trust and business succession searches.",
+    problemPoints: [
+      "Missing dedicated pages for specific trusts (e.g., Special Needs Trusts, Irrevocable Trusts)",
+      "Lack of content addressing business succession for local business owners",
+      "Failing to explain the state-specific probate process clearly",
+      "Poor E-E-A-T signals, which are critical for YMYL (Your Money or Your Life) topics",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    faqs: [
+      {
+        q: "How do we attract high-net-worth estate planning clients?",
+        a: "By demonstrating expertise in the exact problems they face. We build comprehensive content around asset protection, tax minimization, and business succession rather than just basic wills."
+      },
+      {
+        q: "Why is E-E-A-T so important for estate planning?",
+        a: "Because estate planning is a core YMYL topic, Google applies strict scrutiny. We ensure your author bios, credentials, and content depth prove your unquestionable authority."
+      }
+    ],
+    locationsMentioned: ["grand-rapids", "sugar-land", "plano"],
+  },
+  {
+    slug: "mass-torts",
+    name: "Mass Torts SEO",
+    metaTitle: "Mass Torts SEO — Compete Nationally & Locally",
+    metaDescription: "Dominate mass tort searches like defective drugs and product liability. We build aggressive, high-authority SEO campaigns to capture class action leads.",
+    h1: "Mass Torts Law Firm SEO",
+    heroSub: "Mass torts SEO is a battle of giants. But while mega-firms buy national terms, we help you capture high-intent plaintiffs through specific localized and symptom-based searches.",
+    founderMessage: "Hi, I'm Mubashar Shahzad. Mass torts is the most fiercely competitive space in legal SEO. We don't try to outspend the national giants; we outmaneuver them by targeting localized venue intent and highly specific symptom-to-lawsuit queries.",
+    llmDirectAnswer: "Searchprex provides aggressive mass torts SEO by targeting specific drug/product liabilities, symptom-based queries, and local venue searches (like Philadelphia's Complex Litigation Center). This GEO approach captures plaintiffs before they reach the generic national aggregators.",
+    problem: "Local and mid-size firms get completely buried by national ad budgets and lead aggregators for mass tort cases.",
+    problemPoints: [
+      "Trying to rank for broad terms like 'Camp Lejeune lawyer' without massive domain authority",
+      "Ignoring the specific medical symptoms plaintiffs search for *before* they know there is a lawsuit",
+      "Failing to leverage local venues (like specific MDL courts) to capture localized search intent",
+      "Content that reads like a generic template rather than authoritative medical-legal analysis",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    faqs: [
+      {
+        q: "Can a mid-size firm compete in mass torts SEO?",
+        a: "Yes, but not head-on for national vanity keywords. We target long-tail, symptom-specific queries and localized searches around major litigation centers."
+      },
+      {
+        q: "How does AEO help with mass torts?",
+        a: "Plaintiffs often ask AI engines, 'Is my [symptom] caused by [drug]?' By providing direct, medically and legally accurate answers, your firm can be cited directly in AI Overviews."
+      }
+    ],
+    locationsMentioned: ["philadelphia", "detroit"],
   }
 ];

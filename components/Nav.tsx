@@ -38,6 +38,8 @@ const navLinks: NavLink[] = [
       { href: "/services/law-firm-seo/personal-injury", label: "Personal Injury SEO" },
       { href: "/services/law-firm-seo/family-law", label: "Family Law SEO" },
       { href: "/services/law-firm-seo/criminal-defense", label: "Criminal Defense SEO" },
+      { href: "/services/law-firm-seo/estate-planning", label: "Estate Planning SEO" },
+      { href: "/services/law-firm-seo/mass-torts", label: "Mass Torts SEO" },
     ],
   },
   {

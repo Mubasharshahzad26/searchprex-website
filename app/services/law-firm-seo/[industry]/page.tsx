@@ -15,7 +15,7 @@ import {
 import { color, heading, radius, text } from "@/lib/design-tokens";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { CITY_PAGES } from "@/lib/city-pages";
-import { ChatWidgetLazy } from "@/components/ChatWidgetLazy";
+import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 
 const SITE = "https://www.searchprex.com";
 

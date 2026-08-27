@@ -38,7 +38,7 @@ import {
   getSiblingCities,
   type CityPage,
 } from "@/lib/city-pages";
-import { ChatWidgetLazy } from "@/components/ChatWidgetLazy";
+import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 
 const SITE = "https://www.searchprex.com";
 
