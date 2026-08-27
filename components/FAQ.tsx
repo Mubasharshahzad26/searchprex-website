@@ -61,7 +61,7 @@ const faqCategories = [
       {
         question: "Do you offer guarantees?",
         answer:
-          "We guarantee professional excellence and industry-leading strategy. Since search algorithms vary, we don't fix-guarantee rankings, but we do guarantee a path to ROI.",
+          "Not on rankings — nobody can honestly guarantee a position, and any agency that does is telling you what you want to hear. What I do guarantee is process: your reality check report lands within 24 hours, or I tell you why not before the deadline rather than after it. You also get one client per city per practice area, so I am never optimising your competitor at the same time.",
       },
     ],
   },

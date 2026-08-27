@@ -20,7 +20,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Loader2, Check } from "lucide-react";
 import { color, radius } from "@/lib/design-tokens";
-import { OFFER_MICROCOPY, OFFER_HREF } from "@/lib/offer";
+import { OFFER_MICROCOPY, OFFER_HREF, OFFER_HOOK } from "@/lib/offer";
 
 export default function QuickAuditBar() {
   const [email, setEmail] = useState("");
@@ -75,10 +75,11 @@ export default function QuickAuditBar() {
               className="text-2xl font-black tracking-tight sm:text-3xl"
               style={{ color: color.ink }}
             >
-              Free SEO Audit for Your US Business
+              Free SEO + AI Visibility Audit
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm" style={{ color: color.muted }}>
-              One field. The founder audits it himself and sends a prioritized fix list.
+              {OFFER_HOOK} Two of my clients are named inside Google&apos;s AI Overview
+              right now — I&apos;ll show you whether you are, and what is stopping it.
             </p>
 
             <form

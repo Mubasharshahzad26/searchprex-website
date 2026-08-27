@@ -16,7 +16,7 @@
  
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { OFFER_PROMISE } from "@/lib/offer";
+import { OFFER_PROMISE, OFFER_GUARANTEE } from "@/lib/offer";
 import {
   Scale,
   ShoppingCart,
@@ -271,7 +271,10 @@ export default function LeadWizard() {
                 )}
               </div>
  
-              <p className="mt-4 text-center text-xs text-[#6b7280]">
+              <p className="mt-4 text-center text-xs leading-relaxed text-[#566070]">
+                {OFFER_GUARANTEE}
+              </p>
+              <p className="mt-2 text-center text-xs text-[#6b7280]">
                 No spam. No obligation. Unsubscribe anytime.
               </p>
             </>
