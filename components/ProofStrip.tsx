@@ -71,13 +71,13 @@ export default function ProofStrip() {
               style={{ color: color.successDark }}
             >
               <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-              One account · Google Search Console
+              How that revenue moved · Google Search Console
             </p>
             <h2 className="mt-2 text-2xl font-black tracking-tight" style={{ color: color.ink }}>
-              Verified Ecommerce SEO Results — Michigan Outdoor Sports, May–July 2026
+              Revenue follows indexing. Here is the mechanism.
             </h2>
             <p className="mt-1 text-sm" style={{ color: color.muted }}>
-              One client, one reporting period, one source — not a highlight reel.
+              Michigan Outdoor Sports, May–July 2026 — the same technical work that moved SMK, measured in Search Console.
             </p>
           </div>
           <Link
