@@ -4,9 +4,11 @@ import type { Metadata } from "next";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import ProofStrip from "../components/ProofStrip";
+import RevenueProof from "../components/RevenueProof";
 import QuickAuditBar from "../components/QuickAuditBar";
 import RecoveryStory from "../components/RecoveryStory";
 import CaseStudyShowcase from "../components/CaseStudyShowcase";
+import LocalSeoProof from "../components/LocalSeoProof";
 import AuditWalkthrough from "../components/AuditWalkthrough";
 import TrustBar from "../components/TrustBar";
 import LeadWizard from "../components/LeadWizard";
@@ -235,6 +237,26 @@ export default async function Home() {
       },
       {
         "@type": "ImageObject",
+        "@id": `${SITE}/#proof-smk-revenue-before`,
+        "contentUrl": `${SITE}/images/proof/smk-revenue-before.png`,
+        "caption":
+          "SMK Store WooCommerce net sales for April 2026: $5,832.02 for the month, top seller at 200 units.",
+        "creator": { "@id": `${SITE}/#founder` },
+        "creditText": "SearchPrex — Mubashar Shahzad",
+        "datePublished": "2026-04-30"
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${SITE}/#proof-smk-revenue-after`,
+        "contentUrl": `${SITE}/images/proof/smk-revenue-after.png`,
+        "caption":
+          "SMK Store WooCommerce net sales for June 2026: $19,100.71 for the month, top seller at 300 units — a 227% increase over April.",
+        "creator": { "@id": `${SITE}/#founder` },
+        "creditText": "SearchPrex — Mubashar Shahzad",
+        "datePublished": "2026-06-30"
+      },
+      {
+        "@type": "ImageObject",
         "@id": `${SITE}/#proof-revenue-before`,
         "contentUrl": `${SITE}/images/proof/mso-revenue-1-jul20.png`,
         "caption":
@@ -285,6 +307,11 @@ export default async function Home() {
         <Reveal><ClientLogos /></Reveal>
         <Reveal><TrustBar /></Reveal>
 
+        {/* Revenue first. The strongest business outcome on the site was at
+            position 11 of 19, behind "+285% pages indexed" — a mechanism, not
+            an outcome. Outcome leads; mechanism follows immediately below. */}
+        <Reveal><RevenueProof /></Reveal>
+
         {/* The three verified numbers, one scroll in. These were buried in the
             middle of Results, roughly four screens down. */}
         <Reveal><ProofStrip /></Reveal>
@@ -320,6 +347,11 @@ export default async function Home() {
         {/* The one account, in full — peak, de-indexing, and recovery, with the
             revenue that followed. Published with the client's permission. */}
         <Reveal><RecoveryStory /></Reveal>
+
+        {/* Local SEO evidence. The page claims "Local SEO for US Service
+            Businesses" in an H1 but every other proof block is ecommerce or
+            fintech — this closes that gap with SERPs from three states. */}
+        <Reveal><LocalSeoProof /></Reveal>
 
         <Reveal><FounderSection /></Reveal>
         <TrustpilotReviewSection />
