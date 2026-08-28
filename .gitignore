@@ -24,3 +24,10 @@ node_modules
 *.log
 tsconfig.tsbuildinfo
 live.html
+
+# Design reference recordings — screen captures used to agree the look of the
+# home page, not assets the site serves. semrush-like-dashbaord... is Semrush's
+# own product UI; committing it would publish a competitor's dashboard from
+# searchprex.com and add ~6MB of permanently unused weight to the repo.
+public/video/semrush-inspired-ending.mp4
+public/video/semrush-like-dashbaord-wanted-on-home-page.mp4
