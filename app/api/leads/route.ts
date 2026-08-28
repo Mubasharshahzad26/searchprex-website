@@ -18,7 +18,7 @@ import { createClient } from "@supabase/supabase-js";
  
 export async function POST(req: Request) {
   try {
-    const { name, email, website, source, industry } = await req.json();
+    const { name, email, website, source, industry, message } = await req.json();
  
     // Basic server-side validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -32,15 +32,43 @@ export async function POST(req: Request) {
     }
  
     const supabase = createClient(url, key);
-    const { error } = await supabase.from("leads").insert({
+
+    const base = {
       name: name || null,
       email,
       website: website || null,
       source: source || "homepage-lead-form",
       industry: industry || null,
-    });
- 
+    };
+
+    // `message` is the free-text "tell me what is happening to your business"
+    // field from the homepage form. It is the most valuable thing a lead sends
+    // and it must never be the reason a lead is dropped, so:
+    //   1. try the insert with a dedicated `message` column;
+    //   2. if the table has no such column, retry without it and carry the text
+    //      in `source` instead — degraded, but the lead and its context survive.
+    // Add `message text` to the `leads` table and step 2 stops being reachable.
+    const text = typeof message === "string" ? message.trim() : "";
+
+    // Built as one object with an explicit type rather than a ternary. A
+    // ternary produces a union of two row shapes, which the Supabase client's
+    // excess-property check rejects outright.
+    type LeadRow = typeof base & { message?: string };
+    const payload: LeadRow = { ...base };
+    if (text) payload.message = text;
+
+    let { error } = await supabase.from("leads").insert(payload);
+
+    if (error && text) {
+      const retry = await supabase.from("leads").insert({
+        ...base,
+        source: `${base.source} | issue: ${text}`.slice(0, 1000),
+      });
+      error = retry.error;
+    }
+
     if (error) {
+      console.error("leads insert failed:", error);
       return NextResponse.json({ error: "Could not save lead" }, { status: 500 });
     }
  
