@@ -46,12 +46,22 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  alternates: {
-    canonical: siteUrl,
-    languages: {
-      'en-US': siteUrl,
-    },
-  },
+  // No `alternates` here on purpose.
+  //
+  // Root metadata is inherited by every route that does not override it, so a
+  // canonical set at this level does not mean "the site lives at siteUrl" — it
+  // means "every page that forgets to set its own is a duplicate of the
+  // homepage". That is what it was doing: /pricing-plan and
+  // /tools/schema-generator both shipped `<link rel="canonical"
+  // href="https://www.searchprex.com">`, which asks Google to drop them and
+  // fold their signals into `/`. The `languages` entry pointed every page's
+  // en-US alternate at the homepage for the same reason.
+  //
+  // With no canonical here, a page that sets none emits none, and Google
+  // self-canonicalises to the requested URL — the safe default. Pages should
+  // still declare their own: either `alternates.canonical` directly, or
+  // getPageSEO(), which fills in `${siteUrl}${slug}`. scripts/check-canonicals.mjs
+  // fails the build if a public route does neither.
   // ✅ SITE IS LIVE — Indexing ENABLED for Google to crawl and rank
   robots: {
     index: true,

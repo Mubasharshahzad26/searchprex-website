@@ -70,7 +70,6 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   // about, and it shows up as an error in Search Console.
   { path: "/free-audit", priority: 0.9, changeFrequency: "monthly" },
   { path: "/growth-plan", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/action-plan", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/pricing", priority: 0.8, changeFrequency: "monthly" },
   { path: "/pricing-plan", priority: 0.7, changeFrequency: "monthly" },
@@ -97,6 +96,34 @@ function absolute(path: string): string {
 }
 
 /** Depth-based guess for pages the CMS knows about but the fallback list doesn't. */
+/**
+ * Routes that resolve, but are not their own canonical URL.
+ *
+ * A sitemap should list canonical, 200-status URLs only — listing a redirect or
+ * a page that points its canonical elsewhere asks Google to crawl a URL it is
+ * then told to ignore, and shows up in Search Console as "Alternate page with
+ * proper canonical tag".
+ *
+ *   /nicheseopro  308s to /tools/keyword-research (next.config redirect)
+ *   /action-plan  declares canonical /free-audit (app/action-plan/page.tsx)
+ *
+ * Both have published CMS rows, so removing them from STATIC_ROUTES is not
+ * enough — the CMS loop re-adds them. Same reason the gated-route guard lives
+ * inside `add`.
+ */
+const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/action-plan"]);
+
+/**
+ * Routes whose page sets `robots: noindex` in its own `metadata` export.
+ *
+ * The CMS loop below drops a page when its *CMS row* says noindex, but a route
+ * noindexed in code leaves that row still saying "index, follow" — and listing a
+ * noindexed URL in the sitemap sends Google two contradictory instructions about
+ * the same page. Add a route here whenever you noindex it in code, and remove it
+ * when the robots block goes.
+ */
+const NOINDEX_ROUTES = new Set<string>([]);
+
 function derivePriority(path: string): number {
   if (path === "/") return 1.0;
   const depth = path.split("/").filter(Boolean).length;
@@ -114,7 +141,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // CMS loop below adds pages too: /ai-search and /content-generator both
     // have published CMS rows and came straight back after being removed from
     // STATIC_ROUTES.
-    if (isGatedRoute(new URL(entry.url).pathname)) return;
+    const pathname = new URL(entry.url).pathname;
+    if (isGatedRoute(pathname)) return;
+    if (NON_CANONICAL_ROUTES.has(pathname)) return;
+    if (NOINDEX_ROUTES.has(pathname)) return;
 
     const existing = entries.get(entry.url);
     // Higher priority wins, so a CMS row can't silently demote the homepage.

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
  
 import { useState } from "react";
 import Link from "next/link";
@@ -280,7 +280,7 @@ function generateSchema(type: string, data: Record<string, string>): string {
   }
 }
  
-export default function SchemaGeneratorPage() {
+export default function SchemaGeneratorClient() {
   const [selectedType, setSelectedType] = useState("local-business");
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [output, setOutput] = useState("");

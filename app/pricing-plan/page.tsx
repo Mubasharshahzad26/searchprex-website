@@ -1,7 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { getPageSEO } from "@/lib/admin-seo";
 import { Logo } from "@/components/Logo";
 
 const GREEN = "#3eb489";
+
+// This page had no metadata at all, so it inherited the root layout's title and
+// canonical and shipped as a duplicate of the homepage.
+const baseMetadata: Metadata = {
+  title: "SEO Pricing Plans",
+  description:
+    "Transparent SEO pricing from SearchPrex — a $2 founder-reviewed SEO Growth Roadmap, and monthly plans for law firms, ecommerce stores and local businesses. No contracts, no hidden fees.",
+  alternates: { canonical: "https://www.searchprex.com/pricing-plan" },
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSEO("/pricing-plan", baseMetadata);
+}
 
 export default function PricingPage() {
   return (
