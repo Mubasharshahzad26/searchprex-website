@@ -44,7 +44,7 @@ const personas: Persona[] = [
     label: "Law Firm SEO",
     headline: "Law Firm SEO",
     emphasis: "for US Practices.",
-    sub: "I'm Mubashar. I personally run every law-firm account at SearchPrex — no juniors, no outsourcing. You get the strategy, the execution, and the Search Console export behind every number I claim.",
+    sub: "It's me doing the work. Not a junior, not an account manager you've never met. I take one firm per city, so I'm never working for the practice across town at the same time, and when I tell you something moved I'll send you the Search Console export that shows it.",
     // Law firms only: the AI intake assistant is a separate product, so it
     // gets one quiet line here rather than a competing section.
     aside: { label: "Also for law firms: AI Intake Assistant — qualify every case 24/7", href: "/intake-assistant" },
@@ -55,7 +55,7 @@ const personas: Persona[] = [
     label: "Ecommerce SEO",
     headline: "Ecommerce SEO",
     emphasis: "for US Online Stores.",
-    sub: "I'm Mubashar. I recovered a 35,000-product catalog from mass non-indexing and watched monthly store revenue go from $5,832 to $19,100 — and I'll show you the dashboard it came from.",
+    sub: "A client's 35,000-product catalog fell out of Google. Getting it back in took months of unglamorous technical work, and their monthly revenue went from $5,832 to $19,100. I kept every dashboard. Ask me and I'll walk you through what actually moved.",
     aside: { label: "Read how I scale Ecommerce", href: "/services/ecommerce-seo" },
     media: "case" as const,
     video: {
@@ -69,7 +69,7 @@ const personas: Persona[] = [
     label: "Local SEO",
     headline: "Local SEO",
     emphasis: "for US Service Businesses.",
-    sub: "I'm Mubashar. I work your Google Business Profile, citations and service-area pages personally — and report on calls and visits, not vanity rankings.",
+    sub: "Ranking first is worth nothing if the phone stays quiet. I handle your Google Business Profile, your citations and your service-area pages myself, and I report on calls and direction requests. Those are the numbers you actually get paid on.",
     aside: { label: "Read how I rank Local Businesses", href: "/services/local-seo" },
     media: "case" as const,
     video: { id: "g_1TfDU4YeA", caption: "Watch how I pushed HVAC Services Team to the Map Pack Top 3." },
