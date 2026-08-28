@@ -30,7 +30,13 @@ const baseMetadata: Metadata = {
   title: "Free SEO Tools — Schema Generator, SERP Simulator & More",
   description:
     "Free SEO tools built by a practicing SEO analyst: JSON-LD schema markup generator, SERP simulator, meta tag analyzer, robots.txt tester and more. No signup, no paywalls.",
-  alternates: { canonical: `${SITE}/tools` },
+  alternates: { 
+    canonical: `${SITE}/tools`,
+    languages: {
+      "en-US": `${SITE}/tools`,
+      "x-default": `${SITE}/tools`,
+    }
+  },
   openGraph: {
     title: "Free SEO Tools — Schema Generator, SERP Simulator & More | SearchPrex",
     description:
@@ -76,7 +82,7 @@ export default function Page() {
       "@type": "ListItem",
       position: i + 1,
       item: {
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         name: t.name,
         url: t.url,
         description: t.desc,

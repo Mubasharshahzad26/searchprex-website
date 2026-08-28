@@ -33,7 +33,13 @@ const baseMetadata: Metadata = {
   title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
   description:
     "US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
-  alternates: { canonical: SITE },
+  alternates: { 
+    canonical: SITE,
+    languages: {
+      "en-US": SITE,
+      "x-default": SITE,
+    }
+  },
   openGraph: {
     title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
     description:
@@ -210,12 +216,14 @@ export default async function Home() {
         "telephone": "+923106526316",
         "email": "contact@searchprex.com",
         "areaServed": { "@type": "Country", "name": "United States" },
-        "serviceType": [
-          "Law Firm SEO",
-          "Ecommerce SEO",
-          "Local SEO",
-          "Technical SEO"
-        ]
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1250 Executive Place, Suite 450",
+          "addressLocality": "Geneva",
+          "addressRegion": "IL",
+          "postalCode": "60134",
+          "addressCountry": "US"
+        }
       },
       // ── Proof images ──
       // ImageObject nodes so the evidence is machine-readable, not just a

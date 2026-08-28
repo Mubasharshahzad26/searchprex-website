@@ -55,7 +55,13 @@ const baseMetadata: Metadata = {
   // the trust it was bought with.
   description:
     "See which SERP features (AI Overview, local pack, People Also Ask) own any Google query and what the top 10 looks like. Free, no signup — plus a founder-run check of your real ranking within 24 hours.",
-  alternates: { canonical: `${SITE}/tools/serp-checker` },
+  alternates: { 
+    canonical: `${SITE}/tools/serp-checker`,
+    languages: {
+      "en-US": `${SITE}/tools/serp-checker`,
+      "x-default": `${SITE}/tools/serp-checker`,
+    }
+  },
   openGraph: {
     title: "Free SERP Checker — Check Your Google Ranking Position | SearchPrex",
     description:
@@ -84,7 +90,7 @@ export default function Page() {
 
   const appSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     name: "SERP Checker",
     url: `${SITE}/tools/serp-checker`,
     description:

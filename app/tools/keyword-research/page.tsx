@@ -24,7 +24,13 @@ const baseMetadata: Metadata = {
     "lawyer CPC by state",
     "free keyword tool for attorneys",
   ],
-  alternates: { canonical: PAGE_URL },
+  alternates: { 
+    canonical: PAGE_URL,
+    languages: {
+      "en-US": PAGE_URL,
+      "x-default": PAGE_URL,
+    }
+  },
   openGraph: {
     title: "Free Law Firm Keyword Tool — Volume & CPC by US State | SearchPrex",
     description:

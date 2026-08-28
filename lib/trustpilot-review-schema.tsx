@@ -30,7 +30,6 @@ export const trustpilotReviewSchema = {
       "reviewBody": "Highly recommend for any e-commerce business looking to scale. They are an expert at optimizing for competitive retail niches and have helped Michigan Sports Outdoor substantially increase our online visibility. Very professional, results-oriented, and easy to work with.",
       "name": "Highly recommend for any e-commerce business looking to scale",
       "datePublished": "2026-07-17",
-      "isUnVerifiedClaim": false,
       "url": "https://www.trustpilot.com/review/searchprex.com"
     }
   ],

@@ -95,7 +95,7 @@ export default function AISearchPage() {
         },
       },
       {
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "@id": `${PAGE_URL}#tool`,
         name: "SearchPrex AI SEO Audit Tool",
         applicationCategory: "SEOApplication",

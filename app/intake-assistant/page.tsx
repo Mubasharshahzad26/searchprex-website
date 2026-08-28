@@ -96,7 +96,7 @@ export default function IntakeAssistantPage() {
         },
       },
       {
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "@id": `${PAGE_URL}#tool`,
         name: "SearchPrex AI Intake Assistant",
         applicationCategory: "BusinessApplication",

@@ -78,7 +78,7 @@ const features = [
 export default function ToolPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": "NicheSEOPro",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",

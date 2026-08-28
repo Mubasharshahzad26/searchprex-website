@@ -56,6 +56,10 @@ export async function getPageSEO(slug: string, base: Metadata): Promise<Metadata
       alternates: {
         ...base.alternates,
         canonical,
+        languages: {
+          "en-US": canonical,
+          "x-default": canonical,
+        },
       },
       robots: {
         index: !directives.includes("noindex"),

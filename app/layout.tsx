@@ -189,8 +189,14 @@ export default function RootLayout({
         "@type": "ProfessionalService",
         "@id": `${siteUrl}/#service`,
         "name": "SearchPrex SEO Services",
-        "provider": { "@id": `${siteUrl}/#organization` },
-        "serviceType": ["SEO Services", "Digital Marketing", "Local SEO", "Ecommerce SEO"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1250 Executive Place, Suite 450",
+          "addressLocality": "Geneva",
+          "addressRegion": "IL",
+          "postalCode": "60134",
+          "addressCountry": "US"
+        },
         "areaServed": {
           "@type": "Country",
           "name": "United States"
@@ -237,8 +243,6 @@ export default function RootLayout({
             the first thumbnail request rather than after it. */}
         <link rel="preconnect" href="https://img.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
-        <link rel="alternate" hrefLang="en-US" href={siteUrl} />
-        <link rel="alternate" hrefLang="x-default" href={siteUrl} />
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="ICBM" content="37.0902, -95.7129" />
