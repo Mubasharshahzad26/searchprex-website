@@ -165,7 +165,7 @@ export const CITY_PAGES: CityPage[] = [
     heroSub:
       "Grand Rapids is competitive enough to matter and small enough to win. Firms here still rank on genuine local relevance rather than raw link budget — which means the window is open, and it will not stay open.",
     problem:
-      "West Michigan firms often assume Detroit-level competition applies to them and either overspend or give up. Kent County keyword difficulty is materially lower, and the firms that recognise that now will hold those positions for years.",
+      "West Michigan firms often assume Detroit-level competition applies to them and either overspend or give up. Kent County is materially less contested, and the firms that recognise that now will hold those positions for years.",
     problemPoints: [
       "Most Grand Rapids firms have no city page at all — they rely on a homepage that mentions 'West Michigan' once",
       "Family law searches here skew toward high-asset division because of the region's manufacturing and furniture wealth, and generic divorce pages miss that intent entirely",
@@ -227,11 +227,11 @@ export const CITY_PAGES: CityPage[] = [
       "SEO for Cleveland law firms. Rank in the Cuyahoga County map pack for injury, workers' comp and criminal defence searches. Founder-led, no contracts.",
     h1: "Law Firm SEO in Cleveland, Ohio",
     heroSub:
-      "Search Console shows firms competing for Cleveland attorney searches at keyword difficulty in the low single digits. That is not a competitive market. That is an open one — and it is open because almost nobody local has published anything worth ranking.",
+      "Search page one for most Cleveland attorney terms and you will find national directories, not Cleveland firms. That is not a competitive market. That is an open one — and it is open because almost nobody local has published anything worth ranking.",
     problem:
       "Cleveland legal searches return national directories and firms from other cities. Local firms are absent not because they are outranked, but because they have nothing on the page that says they practise here.",
     problemPoints: [
-      "Keyword difficulty for Cleveland attorney searches sits at KD 2–5 — genuinely low, and rare in a metro this size",
+      "Cleveland attorney searches are far less contested than a metro this size suggests — page one is held largely by national directories, not local firms",
       "The first page is directories: Avvo, FindLaw, Justia, Super Lawyers, and Yelp before any firm appears",
       "Firms list a Downtown or Beachwood address but never build pages for Parma, Lakewood, Euclid or Westlake",
       "Ohio workers' compensation is a state-run monopoly system with its own procedures, and almost no site explains it",
@@ -369,7 +369,7 @@ export const CITY_PAGES: CityPage[] = [
     problem:
       "Albuquerque firms compete against out-of-state directories and a handful of local practices with strong brands. Beneath those, the search results are thin — which means the questions New Mexicans actually ask are going unanswered.",
     problemPoints: [
-      "Statewide attorney searches show meaningful volume at keyword difficulty under 10 — unusual for a market this size",
+      "Statewide attorney searches carry meaningful volume while page one is held by national directories rather than New Mexico firms",
       "The first page is national directories, not Albuquerque firms",
       "New Mexico's DWI framework is among the strictest in the country and generates constant search demand that local sites barely address",
       "Firms target 'Albuquerque' alone and miss Rio Rancho, Santa Fe and Las Cruces entirely",
@@ -408,7 +408,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         q: "How competitive is attorney SEO in Albuquerque?",
-        a: "Lower than the market size suggests. Statewide attorney searches show real volume at keyword difficulty under 10, because the first page is held by national directories rather than local firms. That combination — meaningful volume, low difficulty — usually does not last long once local firms start publishing.",
+        a: "Lower than the market size suggests. Statewide attorney searches carry real volume, and the first page is held by national directories rather than local firms — which is a far softer thing to displace than an established local competitor. That combination does not usually last long once local firms start publishing. Pull current difficulty figures for your own practice area before committing a budget; they move.",
       },
       {
         q: "Should an Albuquerque firm target Santa Fe and Rio Rancho too?",
@@ -438,7 +438,7 @@ export const CITY_PAGES: CityPage[] = [
     problem:
       "Fort Bend County residents do not search for 'Houston lawyer'. They search for Sugar Land, Missouri City, Katy and Richmond — and the firms ranking for those terms are usually Houston practices with no local page at all.",
     problemPoints: [
-      "Sugar Land attorney searches show real volume at keyword difficulty around 4 — low for a market this affluent",
+      "Sugar Land attorney searches carry real volume, yet page one is mostly directories and Houston firms rather than Fort Bend County practices",
       "Houston firms dominate by domain strength while having no Fort Bend-specific content",
       "Fort Bend is among the most ethnically diverse counties in the United States, and firms ignore the multilingual search demand entirely",
       "High household income makes this a high-asset family law market, but pages are written for standard divorce",
@@ -562,12 +562,12 @@ export const CITY_PAGES: CityPage[] = [
       "SEO for Denton law firms. Rank in Denton County for criminal defence, family law and injury searches. Founder-led, GSC-verified, no long-term contracts.",
     h1: "Law Firm SEO in Denton, Texas",
     heroSub:
-      "Two universities, a fast-growing county, and keyword difficulty around 4. Denton is the kind of market where a firm that publishes properly for six months is still holding position three years later.",
+      "Two universities, a fast-growing county, and a first page held by Dallas-Fort Worth firms with no Denton County content. Denton is the kind of market where a firm that publishes properly for six months is still holding position three years later.",
     problem:
       "Denton firms are squeezed between Dallas-Fort Worth domain authority above them and directories beside them. Neither has anything specific to say about practising in Denton County.",
     problemPoints: [
-      "Denton attorney searches show volume at keyword difficulty around 4 — low even for a county this size",
-      "A student population of roughly 50,000 across UNT and TWU drives constant criminal defence and landlord-tenant demand",
+      "Denton attorney searches carry real volume, but page one is DFW firms ranking on domain strength with no Denton County content",
+      "A student population near 60,000 across UNT and TWU drives constant criminal defence and landlord-tenant demand",
       "DFW firms rank on domain strength with no Denton County content whatsoever",
       "Lewisville, Flower Mound, Frisco and Little Elm are separate searches nobody is serving",
       "Rapid county growth means new residents searching without any existing firm relationship",
@@ -594,18 +594,18 @@ export const CITY_PAGES: CityPage[] = [
     neighborhoods: ["Downtown Denton", "Southridge", "Robson Ranch", "Lewisville", "Flower Mound", "Little Elm"],
     nearbyCities: ["Dallas", "Fort Worth", "Plano", "Frisco"],
     legalContext: {
-      heading: "What 50,000 students do to a legal market",
+      heading: "What 60,000 students do to a legal market",
       body:
-        "The University of North Texas and Texas Woman's University together bring roughly 50,000 students into Denton, and that changes the search profile of the entire county. Criminal defence demand skews toward alcohol offences, possession and misdemeanours, and crucially the person searching is frequently a parent rather than the defendant — which means the query, the tone and the reassurance required are all different. Landlord–tenant disputes over deposits, habitability and eviction run continuously through a rental market built for short tenancies. Neither pattern appears in content written for Dallas-Fort Worth generally, and a Denton firm that writes for the actual searcher — often an anxious parent three hours away — is answering a question nobody else has addressed.",
+        "The University of North Texas and Texas Woman's University together bring close to 60,000 students into Denton, and that changes the search profile of the entire county. Criminal defence demand skews toward alcohol offences, possession and misdemeanours, and crucially the person searching is frequently a parent rather than the defendant — which means the query, the tone and the reassurance required are all different. Landlord–tenant disputes over deposits, habitability and eviction run continuously through a rental market built for short tenancies. Neither pattern appears in content written for Dallas-Fort Worth generally, and a Denton firm that writes for the actual searcher — often an anxious parent three hours away — is answering a question nobody else has addressed.",
     },
     faqs: [
       {
         q: "How competitive is law firm SEO in Denton?",
-        a: "Genuinely low. Denton attorney searches show real volume at keyword difficulty around 4, because DFW firms rank on domain strength without any Denton County content. That is a position a local firm can take and hold.",
+        a: "Less contested than the county’s size suggests. Denton attorney searches carry real volume, but page one is DFW firms ranking on domain strength without a line of Denton County content between them. That is a position a local firm can take and hold. Check current difficulty for your own practice area before you budget — these figures move.",
       },
       {
         q: "Does the student population change what a Denton firm should publish?",
-        a: "Substantially. Roughly 50,000 students across UNT and TWU drive alcohol, possession and misdemeanour defence demand — and the person searching is often a parent, not the defendant. Content written for a worried parent converts very differently from content written for the accused.",
+        a: "Substantially. Close to 60,000 students across UNT and TWU drive alcohol, possession and misdemeanour defence demand — and the person searching is often a parent, not the defendant. Content written for a worried parent converts very differently from content written for the accused.",
       },
       {
         q: "Should a Denton firm target Lewisville and Flower Mound?",
