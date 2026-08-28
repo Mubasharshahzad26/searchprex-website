@@ -67,31 +67,29 @@ export default function Results() {
 
   return (
     <section
-      className="py-24 sm:py-32 relative overflow-hidden bg-[#0a0f2e]"
+      className="py-24 sm:py-32 relative overflow-hidden border-y border-[#e6e8f0] bg-[#f8f9fc]"
       id="results"
     >
       {/* Background glow effects */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#3eb489]/50 to-transparent" />
-      <div className="absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#534AB7] opacity-20 blur-[100px]" />
-      <div className="absolute -right-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#3eb489] opacity-10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
-        <div className="grid gap-6 border-b border-white/10 pb-12 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-6 border-b border-[#e6e8f0] pb-12 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-3xl">
-            <p className="mb-4 text-xs font-black uppercase tracking-widest text-[#3eb489]">
+            <p className="mb-4 text-xs font-black uppercase tracking-widest text-[#196b4d]">
               Undeniable Proof
             </p>
-            <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+            <h2 className="text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
               Every number below has a live recording behind it.
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-slate-400">
+            <p className="mt-5 text-lg leading-relaxed text-[#566070]">
               Screenshots can be faked. Slide decks can be manipulated. That's why I record live video walkthroughs of my clients' actual Google Search Console accounts. See the exact dates, properties, and revenue growth. Nothing is hidden.
             </p>
           </div>
           <Link
             href="/all-case-studies"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white/5 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 ring-1 ring-white/10"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#0a0f2e] transition-colors hover:bg-[#f8f9fc] ring-1 ring-[#e6e8f0]"
           >
             Browse all case studies <ArrowRight className="h-4 w-4" />
           </Link>
@@ -103,22 +101,21 @@ export default function Results() {
             <div key={r.href} className="flex flex-col">
               <Link
                 href={r.href}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]/50 p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#534AB7]/50 hover:bg-[#0f172a] hover:shadow-2xl hover:shadow-[#534AB7]/20"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#e6e8f0] bg-white p-8 shadow-[0_2px_12px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#534AB7]/40 hover:shadow-lg"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 
                 <p className="mb-4 text-[10px] font-bold uppercase tracking-widest text-[#534AB7]">
                   {r.label}
                 </p>
-                <h3 className="relative z-10 mb-8 text-lg font-bold leading-snug text-slate-200 group-hover:text-white transition-colors">
+                <h3 className="relative z-10 mb-8 text-lg font-bold leading-snug text-[#0a0f2e] transition-colors">
                   {r.title}
                 </h3>
                 
-                <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-5">
-                  <span className="inline-flex items-center gap-2 rounded-lg bg-[#3eb489]/10 px-3.5 py-1.5 text-sm font-black text-[#3eb489] ring-1 ring-[#3eb489]/20">
+                <div className="mt-auto flex items-center justify-between border-t border-[#eef0f6] pt-5">
+                  <span className="inline-flex items-center gap-2 rounded-lg bg-[#3eb489]/10 px-3.5 py-1.5 text-sm font-black text-[#196b4d] ring-1 ring-[#3eb489]/30">
                     <ShieldCheck className="h-4 w-4" /> {r.metric}
                   </span>
-                  <ArrowRight className="h-5 w-5 text-slate-500 transition-transform group-hover:translate-x-1 group-hover:text-white" />
+                  <ArrowRight className="h-5 w-5 text-[#94a3b8] transition-transform group-hover:translate-x-1 group-hover:text-[#534AB7]" />
                 </div>
               </Link>
             </div>
@@ -166,14 +163,14 @@ export default function Results() {
 
         {/* One CTA, the same offer as everywhere else */}
         <div
-          className="mt-16 flex flex-col items-center justify-center gap-5 border-t border-white/10 pt-12 sm:flex-row"
+          className="mt-16 flex flex-col items-center justify-center gap-5 border-t border-[#e6e8f0] pt-12 sm:flex-row"
         >
-          <span className="text-sm font-semibold text-slate-400">
+          <span className="text-sm font-semibold text-[#566070]">
             Ready to be the next result?
           </span>
           <Link
             href={OFFER_HREF}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#3eb489]/20 transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#1a7d59] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#1a7d59]/20 transition-all hover:-translate-y-0.5"
           >
             {OFFER_CTA} <ArrowRight className="h-4 w-4" />
           </Link>

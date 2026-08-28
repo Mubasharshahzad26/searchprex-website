@@ -38,7 +38,7 @@ export default function AuditWalkthrough() {
   return (
     <section
       id="audit-walkthrough"
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24 border-y border-[#e6e8f0] bg-[#f8f9fc]"
       aria-labelledby="audit-walkthrough-heading"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

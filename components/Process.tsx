@@ -49,7 +49,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="border-y border-[#e9ecf5] bg-white py-20 sm:py-24">
+    <section id="process" className="border-y border-[#e9ecf5] bg-[#f8f9fc] py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header — left-aligned on purpose. Almost every other section on this
             page is centered; the variety is what tells a reader they've moved. */}

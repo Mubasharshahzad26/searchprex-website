@@ -132,216 +132,232 @@ const profileLinks = [
  
 export default function FounderSection() {
   return (
-    <section className="bg-[#eaecf3] py-24">
-      {/* No decorative layers. This was the only light section on the page
-          with a gradient wash and a grid texture; every other light section
-          is a flat token colour, so the decoration read as leftover rather
-          than intent. A credibility section also earns nothing from texture. */}
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- 
-        {/* Section label */}
+    // Reworked into the same language as the rest of the page: flat token
+    // ground, hairline-bordered white cards at 12px with the soft
+    // 0 2px 12px shadow, and one accent instead of five.
+    //
+    // What went, and why:
+    //   - two gradient top-bars (purple -> green) and a gradient CTA button.
+    //     Semrush uses flat solid fills; a gradient reads as dated chrome next
+    //     to everything else here.
+    //   - the blurred blob behind the CTA card. Decoration on a credibility
+    //     block buys nothing.
+    //   - four pastel certificate chips and five pastel profile chips, each in
+    //     its own hue. Nine background colours in one section made a list of
+    //     verifiable credentials look like a sticker sheet; they are neutral
+    //     rows now, which reads as a record.
+    <section className="border-y border-[#e6e8f0] bg-[#f8f9fc] py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="mb-10 max-w-3xl"
         >
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#534AB7]/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#534AB7] shadow-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" />
-            Founder-led agency · E-E-A-T verified
-          </div>
-          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+            Founder-led &middot; E-E-A-T verified
+          </p>
+          <h2 className="mt-3 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
             You&apos;ll be working with me, not a team
           </h2>
-          <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
-            You work directly with me — not a rotating team of juniors. Every strategy comes from
-            real campaigns I&apos;ve personally executed for US ecommerce, law firm, and local clients.
+          <p className="mt-4 text-lg leading-relaxed text-[#566070]">
+            Every strategy here comes from campaigns I ran myself for US ecommerce, law firm
+            and local clients &mdash; and every credential below opens the certificate that
+            proves it.
           </p>
         </motion.div>
- 
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
- 
-          {/* LEFT — CEO card */}
+
+        <div className="grid gap-6 lg:grid-cols-[1.05fr_1fr]">
+          {/* Profile */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="rounded-xl border border-[#e6e8f0] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.05)]"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-xl">
-              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#534AB7] to-[#3eb489]" />
- 
-              {/* Avatar + name */}
-              <div className="mb-6 flex items-center gap-4">
-                <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-[#534AB7] shadow-md">
-                  {/* No `priority` here. This is an 80x80 avatar most of the
-                      way down the page — preloading it made it compete with
-                      the hero for LCP. `sizes` keeps the optimizer from
-                      serving a full-width variant for a 5rem box. */}
+            <div className="border-b border-[#eef0f6] p-6 sm:p-7">
+              <div className="flex items-center gap-4">
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
                   <Image
                     src="/images/mubashar-shahzad.jpg"
-                    alt="Mubashar Shahzad - Founder & CEO SearchPrex"
+                    alt="Mubashar Shahzad, Founder and CEO of SearchPrex"
                     fill
-                    sizes="80px"
+                    sizes="64px"
                     className="object-cover object-top"
                   />
                 </div>
-                <div>
-                  <h3 className="text-xl font-black text-[#0a0f2e]">Mubashar Shahzad</h3>
-                  <p className="text-sm font-semibold text-[#185FA5]">Founder &amp; CEO · SearchPrex</p>
-                  <p className="text-xs text-[#566070]">SEO Analyst · 5+ years experience</p>
-                  <div className="mt-1 flex items-center gap-1">
+                <div className="min-w-0">
+                  <h3 className="text-xl font-bold text-[#0a0f2e]">Mubashar Shahzad</h3>
+                  <p className="text-sm text-[#566070]">
+                    Founder &amp; CEO &middot; SearchPrex &mdash; SEO Analyst, 5+ years
+                  </p>
+                  <div className="mt-1.5 flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="h-3 w-3 fill-[#EF9F27] text-[#EF9F27]" />
                     ))}
-                    <span className="ml-1 text-[10px] text-[#566070]">Upwork Top Rated</span>
+                    <span className="ml-1 text-xs text-[#566070]">Upwork Top Rated</span>
                   </div>
                 </div>
               </div>
- 
-              {/* Quote — first-hand experience narrative */}
-              <blockquote className="mb-6 border-l-4 pl-4 text-sm leading-relaxed text-[#374151] italic" style={{ borderColor: GREEN }}>
-                &quot;Over the last 5+ years I&apos;ve personally fixed mass non-indexing on a 35,000-product
-                ecommerce catalog and taken Michigan Outdoor Sports from roughly 3,000 to 11,549 indexed
-                pages between May and July 2026 — a 285% increase, with US organic clicks up 83% over the
-                same period. Every number I publish comes from a Search Console export I can show you.&quot;
+
+              <blockquote
+                className="mt-6 border-l-2 pl-4 text-sm leading-relaxed text-[#566070]"
+                style={{ borderColor: GREEN }}
+              >
+                &ldquo;Over the last 5+ years I&apos;ve personally fixed mass non-indexing on a
+                35,000-product ecommerce catalog and taken Michigan Outdoor Sports from roughly
+                3,000 to 11,549 indexed pages between May and July 2026 &mdash; a 285% increase,
+                with US organic clicks up 83% over the same period. Every number I publish comes
+                from a Search Console export I can show you.&rdquo;
               </blockquote>
- 
-              {/* Semrush Certificates — clickable */}
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#566070]">
-                Semrush Certified — Click to Verify ↗
+            </div>
+
+            {/* Certificates: a checkable list, not a sticker sheet */}
+            <div className="border-b border-[#eef0f6] p-6 sm:p-7">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#5f6a78]">
+                Semrush certified &mdash; click to verify
               </p>
-              <div className="mb-6 flex flex-wrap gap-2">
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 {credentials.map((c) => (
                   <Link
                     key={c.label}
                     href={c.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-lg border border-[#e5e7eb] px-3 py-2 transition-all hover:-translate-y-0.5 hover:shadow-sm"
-                    style={{ background: c.bg }}
+                    className="group flex items-start gap-2.5 rounded-lg border border-[#e6e8f0] bg-white px-3 py-2.5 transition-colors hover:border-[#534AB7]/40 hover:bg-[#fafbfd]"
                   >
-                    <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: c.color }} />
-                    <div>
-                      <div className="text-xs font-semibold" style={{ color: c.color }}>{c.label}</div>
-                      <div className="text-[10px] text-[#566070]">{c.sub} · View ↗</div>
-                    </div>
+                    <CheckCircle
+                      className="mt-0.5 h-4 w-4 shrink-0"
+                      style={{ color: c.color }}
+                      aria-hidden="true"
+                    />
+                    <span className="min-w-0">
+                      <span className="block text-sm font-bold leading-snug text-[#0a0f2e]">
+                        {c.label}
+                      </span>
+                      <span className="mt-0.5 flex items-center gap-1 text-xs text-[#566070]">
+                        {c.sub}
+                        <ExternalLink className="h-3 w-3 opacity-60 transition-opacity group-hover:opacity-100" />
+                      </span>
+                    </span>
                   </Link>
                 ))}
               </div>
- 
-              {/* Profile Links */}
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#566070]">
+            </div>
+
+            <div className="p-6 sm:p-7">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#5f6a78]">
                 Find me online
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {profileLinks.map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all hover:-translate-y-0.5 hover:shadow-sm"
-                    style={{ background: link.bg, color: link.textColor }}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-[#e6e8f0] px-3 py-2 text-xs font-bold text-[#0a0f2e] transition-colors hover:border-[#534AB7]/40 hover:bg-[#fafbfd]"
                   >
-                    {link.icon}
+                    <span style={{ color: link.textColor }}>{link.icon}</span>
                     {link.label}
-                    <ExternalLink className="h-3 w-3 opacity-60" />
+                    <ExternalLink className="h-3 w-3 opacity-50" />
                   </Link>
                 ))}
               </div>
- 
             </div>
           </motion.div>
- 
-          {/* RIGHT */}
+
+          {/* Results, reasons, offer */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.08 }}
             className="flex flex-col gap-6"
           >
-            {/* Real case results — Experience proof */}
-            <div className="relative overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
-              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#534AB7] to-[#3eb489]" />
-              <div className="mb-4 flex items-center gap-2">
-                <Award className="h-4 w-4" style={{ color: GREEN }} />
-                <h3 className="text-lg font-black text-[#0a0f2e]">Real results I&apos;ve delivered</h3>
+            <div className="overflow-hidden rounded-xl border border-[#e6e8f0] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
+              <div className="flex items-center gap-2 border-b border-[#eef0f6] px-6 py-4">
+                <Award className="h-4 w-4" style={{ color: "#196b4d" }} aria-hidden="true" />
+                <h3 className="text-xl font-bold text-[#0a0f2e]">
+                  Real results I&apos;ve delivered
+                </h3>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="divide-y divide-[#eef0f6]">
                 {caseResults.map((c) => (
-                  <div key={c.client} className="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-3 transition-colors hover:bg-[#f1f5f9]">
-                    <div className="flex flex-col items-center justify-center rounded-lg px-3 py-2 min-w-[72px]" style={{ background: "rgba(62,180,137,0.1)" }}>
-                      <span className="text-lg font-black leading-none" style={{ color: "#196b4d" }}>{c.metric}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-bold text-[#0a0f2e] leading-tight">{c.client}</p>
-                      <p className="text-[10px] font-semibold uppercase tracking-wide text-[#6b7280]">{c.tag}</p>
-                      <p className="text-xs text-[#566070] mt-0.5">{c.label}</p>
-                    </div>
+                  <div key={c.client} className="flex items-center gap-4 px-6 py-4">
+                    <span
+                      className="w-[76px] shrink-0 text-2xl font-black tabular-nums tracking-tight"
+                      style={{ color: "#196b4d" }}
+                    >
+                      {c.metric}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-bold text-[#0a0f2e]">{c.client}</span>
+                      <span className="mt-0.5 block text-xs font-bold uppercase tracking-widest text-[#5f6a78]">
+                        {c.tag}
+                      </span>
+                      <span className="mt-1 block text-xs text-[#566070]">{c.label}</span>
+                    </span>
                   </div>
                 ))}
               </div>
-              <Link
-                href="/case-studies"
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold transition-all hover:gap-2"
-                style={{ color: "#196b4d" }}
-              >
-                <TrendingUp className="h-3.5 w-3.5" /> See full case studies <ExternalLink className="h-3 w-3" />
-              </Link>
+              <div className="border-t border-[#eef0f6] bg-[#fafbfd] px-6 py-3.5">
+                <Link
+                  href="/case-studies"
+                  className="group inline-flex items-center gap-1.5 text-sm font-bold"
+                  style={{ color: "#196b4d" }}
+                >
+                  See full case studies
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              </div>
             </div>
- 
-            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-lg font-black text-[#0a0f2e]">
+
+            <div className="rounded-xl border border-[#e6e8f0] bg-white p-6 shadow-[0_2px_12px_rgba(0,0,0,0.05)] sm:p-7">
+              <h3 className="text-xl font-bold text-[#0a0f2e]">
                 Why work directly with the founder?
               </h3>
-              <div className="flex flex-col gap-4">
+              <div className="mt-5 flex flex-col gap-5">
                 {whyFounder.map((item) => (
-                  <div key={item.title} className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl" style={{ background: "rgba(62,180,137,0.12)" }}>
-                      <item.icon className="h-5 w-5" style={{ color: "#196b4d" }} />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-[#0a0f2e]">{item.title}</p>
-                      <p className="text-sm text-[#566070]">{item.sub}</p>
-                    </div>
+                  <div key={item.title} className="flex items-start gap-3.5">
+                    <span
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+                      style={{ background: "rgba(62,180,137,0.12)" }}
+                    >
+                      <item.icon className="h-[18px] w-[18px]" style={{ color: "#196b4d" }} />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-bold text-[#0a0f2e]">{item.title}</span>
+                      <span className="mt-0.5 block text-sm leading-relaxed text-[#566070]">
+                        {item.sub}
+                      </span>
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
- 
-            {/* Mini CTA */}
-            <div className="relative overflow-hidden rounded-2xl bg-[#0a0f2e] p-6 text-white">
-              <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-                <span className="fs-blob" />
-              </div>
-              <div className="relative">
-                {/* This card said "Get a free 30-min strategy call" and
-                    "Book Consultation" while linking to /free-audit — three
-                    different promises in one card. Now it matches the offer. */}
-                <p className="mb-2 text-sm font-semibold text-white/85 uppercase tracking-widest">Want me to look at your site?</p>
-                <p className="mb-4 text-lg font-black">I&apos;ll audit it myself and send the fix list</p>
-                <Link
-                  href={OFFER_HREF}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#534AB7] to-[#1a7d59] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  {OFFER_CTA} <ArrowRight className="h-4 w-4" />
-                </Link>
-                <p className="mt-3 text-xs text-white/85">{OFFER_MICROCOPY}</p>
-              </div>
+
+            {/* Offer: flat ink panel, solid button */}
+            <div className="rounded-xl bg-[#0a0f2e] p-6 sm:p-7">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/70">
+                Want me to look at your site?
+              </p>
+              <p className="mt-2 text-xl font-bold text-white">
+                I&apos;ll audit it myself and send the fix list
+              </p>
+              <Link
+                href={OFFER_HREF}
+                className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-[#1a7d59] px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-[#196b4d]"
+              >
+                {OFFER_CTA}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <p className="mt-3 text-xs leading-relaxed text-white/70">{OFFER_MICROCOPY}</p>
             </div>
           </motion.div>
- 
         </div>
       </div>
- 
-      <style>{`
-        .fs-blob { position: absolute; top: -40%; right: -20%; width: 60%; height: 160%; border-radius: 9999px; background: #534AB7; opacity: 0.22; filter: blur(80px); }
-        @keyframes fs-drift { from { transform: translate(0,0) scale(1); } to { transform: translate(-12%,8%) scale(1.15); } }
-        @media (prefers-reduced-motion: reduce) { .fs-blob { animation: none; } }
-      `}</style>
     </section>
   );
 }
- 
