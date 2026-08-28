@@ -7,7 +7,6 @@ import ProofStrip from "../components/ProofStrip";
 import RevenueProof from "../components/RevenueProof";
 import QuickAuditBar from "../components/QuickAuditBar";
 import RecoveryStory from "../components/RecoveryStory";
-import CaseStudyShowcase from "../components/CaseStudyShowcase";
 import LocalSeoProof from "../components/LocalSeoProof";
 import AuditWalkthrough from "../components/AuditWalkthrough";
 import TrustBar from "../components/TrustBar";
@@ -23,6 +22,11 @@ import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
 import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";
 import FounderSection from "../components/FounderSection";
 import FAQ from "../components/FAQ";
+import TroubleshootingAEO from "../components/TroubleshootingAEO";
+import PersonaProblemHeader from "../components/PersonaProblemHeader";
+import SectionBridge from "../components/SectionBridge";
+import { Store, MapPin, Scale } from "lucide-react";
+import EmotionalLeadForm from "../components/EmotionalLeadForm";
 import BlogTeaser from "../components/BlogTeaser";
 import Reveal from "@/components/Reveal";
 import ChatWidgetLazy from "@/components/ChatWidgetLazy";
@@ -314,64 +318,113 @@ export default async function Home() {
         <Hero />
         <Reveal><ClientLogos /></Reveal>
         <Reveal><TrustBar /></Reveal>
-
-        {/* The exclusive qualification form - placed after Promise & Proof */}
         <Reveal><QuickAuditBar /></Reveal>
 
-        {/* Revenue first. The strongest business outcome on the site was at
-            position 11 of 19, behind "+285% pages indexed" — a mechanism, not
-            an outcome. Outcome leads; mechanism follows immediately below. */}
-        <Reveal><RevenueProof /></Reveal>
-
-        {/* The three verified numbers, one scroll in. These were buried in the
-            middle of Results, roughly four screens down. */}
-        <Reveal><ProofStrip /></Reveal>
-
+        {/* 2. Services */}
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>
         </AuroraBackground>
 
-        {/* "What happens after you hit send" — the offer is explained before
-            it is evidenced. The lead form used to sit here, at ~35% scroll,
-            asking for an email before any proof had been shown. */}
-        <Reveal><Process /></Reveal>
+        {/* 3. Ecommerce Store issue and Solution */}
+        <SectionBridge 
+          title="How We Increase USA Based Business Revenue" 
+          subtitle="We serve all 50 US states—from New York to California—specializing in turning failing marketing campaigns into highly profitable assets." 
+        />
+        <Reveal>
+          <PersonaProblemHeader 
+            audience="We Serve All 50 States"
+            painPoint="Worried for your Ecommerce Store in the USA?"
+            iconName="Store"
+            accentColor="#3eb489"
+          >
+            <p>When a large catalog drops out of Google, running expensive PPC to cover the gap destroys your margins. I fix faceted navigation traps, rebuild canonical architecture, and force Google to re-index your revenue-driving URLs using the Indexing API. See the results below.</p>
+          </PersonaProblemHeader>
+        </Reveal>
+        <Reveal><RevenueProof /></Reveal>
 
-        {/* Results and the GSC recordings that back them, merged into one
-            section. They used to be two consecutive proof blocks. */}
-        <Reveal><Results /></Reveal>
-
-        {/* The method, not just the outcome — a full recorded audit. Sits right
-            after the process explainer so "what happens after you hit send" is
-            immediately shown rather than only described. */}
-        <Reveal><AuditWalkthrough /></Reveal>
-
-        {/* Six US case studies, each linking to its full write-up. A grid, not
-            a slider — everything visible and in the HTML for crawling. */}
-        <Reveal><CaseStudyShowcase /></Reveal>
-
-        {/* The one account, in full — peak, de-indexing, and recovery, with the
-            revenue that followed. Published with the client's permission. */}
-        <Reveal><RecoveryStory /></Reveal>
-
-        {/* Local SEO evidence. The page claims "Local SEO for US Service
-            Businesses" in an H1 but every other proof block is ecommerce or
-            fintech — this closes that gap with SERPs from three states. */}
+        {/* 4. Local SEO Issue and Solution */}
+        <Reveal>
+          <PersonaProblemHeader 
+            audience="Local SEO Solutions"
+            painPoint="Looking to Scale Your Small Local Business?"
+            iconName="MapPin"
+            accentColor="#7F77DD"
+          >
+            <p>Traditional local SEO is dead. If directories like Yelp and Angi are stealing your leads, I restructure your site and GBP profile so Google explicitly recommends your business as the single best local entity for the job in your specific city.</p>
+          </PersonaProblemHeader>
+        </Reveal>
         <Reveal><LocalSeoProof /></Reveal>
 
-        <Reveal><FounderSection /></Reveal>
+        {/* 5 & 6. Technical SEO issue & Solution as Mass non indexing recovery Ecommerce Store */}
+        <Reveal>
+          <PersonaProblemHeader 
+            audience="Mass De-Indexing Recovery"
+            painPoint="Stuck with your website's online visibility?"
+            iconName="AlertTriangle"
+            accentColor="#eab308"
+          >
+            <p>I don't just talk about fixing indexing issues; I publish the full recovery curve. Here is exactly how I restored indexation and revenue for a client that vanished from Google overnight.</p>
+          </PersonaProblemHeader>
+        </Reveal>
+        <Reveal><RecoveryStory /></Reveal>
+        
+        {/* Client testimonial moved after Recovery Story */}
+        <SectionBridge title="Client Verification" subtitle="What happens when these solutions land?" />
         <TrustpilotReviewSection />
 
+        {/* 7 & 8. Law Firm SEO Issue & Free SaaS Solutions subscription */}
+        <Reveal>
+          <PersonaProblemHeader 
+            audience="See we came with a solution for you"
+            painPoint="Burst with PPC campaigns for your Law Firm?"
+            iconName="Scale"
+            accentColor="#185FA5"
+          >
+            <p className="mb-4">Ranking organically for semantic keywords like &apos;Family Law Attorney&apos; and &apos;Personal Injury Lawyer&apos; is the only sustainable way to replace $150+ PPC clicks with highly qualified, free traffic.</p>
+            <div className="bg-[#185FA5]/10 border border-[#185FA5]/20 rounded-xl p-6 mt-6 inline-block">
+              <p className="text-[#185FA5] font-bold text-xs mb-2 uppercase tracking-widest">My Solution Offer:</p>
+              <p className="text-[#0a0f2e] font-bold">I provide a FREE 30-day SaaS Solution subscription for an AI Intake Assistant to test your efficiency first, before you even contact us for the SEO plan.</p>
+            </div>
+          </PersonaProblemHeader>
+        </Reveal>
+
+        {/* 9. Also benefit working directly with Founder */}
+        <SectionBridge title="Under My Reservation" subtitle="What edge will you get working directly with the Founder?" />
+        <Reveal><FounderSection /></Reveal>
+
+        {/* 10. Emotional Lead Form */}
+        <Reveal><EmotionalLeadForm /></Reveal>
+
+        {/* 12. Process */}
+        <SectionBridge title="My Process" subtitle="How we achieve this step-by-step" />
+        <Reveal><Process /></Reveal>
+        
+        {/* 13. All results verified with video recording */}
+        <SectionBridge title="Absolute Transparency" subtitle="All results verified with live video recordings" />
+        <Reveal><ProofStrip /></Reveal>
+        <Reveal><Results /></Reveal>
+
+        {/* 14. Worried for Ai visibility section */}
+        <SectionBridge title="Future-Proofing" subtitle="Worried about AI Visibility?" />
         <AIVisibilityShowcase />
 
-        {/* Price bands before the ask. These ranges already existed, buried
-            as item 5 of 8 in the FAQ — published pricing is one of the
-            strongest lead-qualifiers an agency has. */}
+        {/* 15. How Audit of a Website */}
+        <SectionBridge title="The Methodology" subtitle="How I audit a website to find these gaps" />
+        <Reveal><AuditWalkthrough /></Reveal>
+
+        {/* 16. Pricing */}
         <Reveal><Pricing /></Reveal>
 
-        {/* THE lead form. One of them. */}
+        {/* 17. 2nd Lead form already presented on site */}
         <LeadWizard />
 
+        {/* 18. AI overview related content */}
+        <Reveal><TroubleshootingAEO /></Reveal>
+
+        {/* 19. Faqs */}
         <Reveal><FAQ /></Reveal>
+        
+        {/* 20. Blogs */}
         <Reveal><BlogTeaser /></Reveal>
       </main>
 

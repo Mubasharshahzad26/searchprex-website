@@ -20,6 +20,7 @@
 // sitting at position 11 of 19. This section keeps what it is actually about:
 // one account's peak, de-indexing and rebuild.
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, TrendingDown, Wrench, TrendingUp } from "lucide-react";
 import ProofImage from "@/components/ProofImage";
@@ -80,32 +81,58 @@ const phases = [
 ];
 
 export default function RecoveryStory() {
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Recover from a Google De-Indexing Event for Ecommerce",
+    "description": "A step-by-step technical SEO methodology used to recover an ecommerce catalog that lost 75% of its indexed pages, scaling back up to 11,549 indexed URLs.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Reclaim Crawl Budget",
+        "text": "Identify and block faceted navigation and parameter URLs from consuming Googlebot's crawl budget using robots.txt and URL parameter settings."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Correct Canonical Tags",
+        "text": "Audit the canonical tag structure to ensure all product variations point to the primary URL, eliminating duplicate content confusion."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Rewrite Thin Content",
+        "text": "Identify product pages with thin or manufacturer-supplied descriptions and rewrite them with unique, structured copy."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Force Re-Indexing",
+        "text": "Use the Google Indexing API to push high-value URLs back into the index in prioritized batches, rather than waiting for natural recrawls."
+      }
+    ]
+  };
+
   return (
     <section
       id="recovery"
       className="border-y py-20 sm:py-24"
       style={{ background: color.surfaceAlt, borderColor: color.border }}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p
-            className="mb-3 text-xs font-bold uppercase tracking-widest"
-            style={{ color: color.primary }}
-          >
-            Michigan Outdoor Sports · the full picture
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 max-w-3xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#7F77DD]">
+            Michigan Outdoor Sports · The full picture
           </p>
-          <h2
-            className="text-3xl font-black tracking-tight sm:text-4xl"
-            style={{ color: color.ink }}
-          >
-            Ecommerce SEO Recovery: +476%, a De-Indexing, and the Rebuild
+          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+            We Recover De Indexing issue and achieved Revenue growth recently
           </h2>
-          <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
+          <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
             Most agencies would publish the March peak and stop there. I publish the whole
             curve — including the part that went backwards — because the recovery is the
             part that is actually hard, and it is the part you are hiring me for.
           </p>
-
           <p
             className="mt-5 border-l-4 pl-4 text-base italic leading-relaxed"
             style={{ borderColor: color.primary, color: color.ink }}
@@ -117,6 +144,29 @@ export default function RecoveryStory() {
               — Mubashar Shahzad, Founder
             </span>
           </p>
+        </div>
+
+        {/* Indexing Recovery Evidence Chart */}
+        <div className="mb-16">
+          <figure className="m-0">
+            <div
+              className={`overflow-hidden border ${radius.card}`}
+              style={{ borderColor: color.border, background: color.white }}
+            >
+              <Image
+                src="/images/proof/mso-gsc-indexing-full.png"
+                alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
+                width={1366}
+                height={606}
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="h-auto w-full"
+              />
+            </div>
+            <figcaption className="mt-3 text-xs leading-relaxed text-center" style={{ color: color.muted }}>
+              Unedited Google Search Console screenshot — Page indexing, all known pages.
+              Cropped only to remove the account avatar and site URL.
+            </figcaption>
+          </figure>
         </div>
 
         {/* Three phases. Numbered because the order is the information. */}

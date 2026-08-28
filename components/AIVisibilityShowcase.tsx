@@ -30,17 +30,23 @@ export default function AIVisibilityShowcase() {
  
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mx-auto mb-12 max-w-2xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white/85">
-            <Sparkles className="h-3.5 w-3.5" /> AEO · AI Search Visibility
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mx-auto mb-16 max-w-3xl text-center">
+          <div className="mb-6 flex flex-wrap justify-center gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#10a37f]/20 px-3 py-1 text-sm font-bold text-[#10a37f] ring-1 ring-[#10a37f]/30">
+              <Sparkles className="h-4 w-4" /> ChatGPT
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1b61d1]/20 px-3 py-1 text-sm font-bold text-[#4285f4] ring-1 ring-[#4285f4]/30">
+              <Sparkles className="h-4 w-4" /> Gemini
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#7F77DD]/20 to-[#3eb489]/20 px-3 py-1 text-sm font-bold text-white ring-1 ring-white/20">
+              <Sparkles className="h-4 w-4" /> Google AI Overviews
+            </span>
           </div>
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Your customers are asking AI.<br />
-            <span className="bg-gradient-to-r from-[#7F77DD] to-[#3eb489] bg-clip-text text-transparent">Are you the answer?</span>
+            Are you concerned your business is not ranking on <span className="bg-gradient-to-r from-[#7F77DD] to-[#3eb489] bg-clip-text text-transparent">AI Overviews or LLMs?</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/85">
-            AI Overviews now appear across nearly half of all industries — and a growing share of buyers act
-            on what the AI tells them. If ChatGPT, Gemini &amp; Google&apos;s AI don&apos;t mention you, you&apos;re invisible to them.
+          <p className="mt-6 text-lg leading-relaxed text-white/85">
+            Over the years, I have presented solutions and ranked diverse business websites inside Google AI Overviews, ChatGPT, Gemini, and other LLMs. Here is exactly how I do it.
           </p>
         </motion.div>
  

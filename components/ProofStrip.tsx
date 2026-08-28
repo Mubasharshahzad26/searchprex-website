@@ -120,31 +120,7 @@ export default function ProofStrip() {
             ))}
           </dl>
 
-          {/* The chart the first figure comes from. Unedited apart from a crop
-              that removes the account avatar, the site URL and the left nav. */}
-          <figure className="m-0">
-            <div
-              className={`overflow-hidden border ${radius.card}`}
-              style={{ borderColor: color.border, background: color.white }}
-            >
-              <Image
-                src="/images/proof/mso-gsc-indexing-full.png"
-                alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
-                width={1366}
-                height={606}
-                sizes="(max-width: 1024px) 100vw, 560px"
-                // Eager: this is the page's primary evidence, it sits in the
-                // second section, and it is ~6KB as AVIF. Not `priority` —
-                // it should not compete with the hero for LCP.
-                loading="eager"
-                className="h-auto w-full"
-              />
-            </div>
-            <figcaption className="mt-3 text-xs leading-relaxed" style={{ color: color.muted }}>
-              Unedited Google Search Console screenshot — Page indexing, all known pages.
-              Cropped only to remove the account avatar and site URL.
-            </figcaption>
-          </figure>
+          {/* The chart has been moved to RecoveryStory.tsx where it fits the narrative context perfectly */}
         </div>
       </div>
     </section>

@@ -92,26 +92,18 @@ export default function LocalSeoProof() {
       style={{ background: color.surface, borderColor: color.border }}
       aria-labelledby="local-seo-proof-heading"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p
-            className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest"
-            style={{ color: color.primary }}
-          >
-            <MapPin className="h-4 w-4" aria-hidden="true" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 max-w-3xl">
+          <div className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7F77DD]">
+            <MapPin className="h-4 w-4" />
             Local SEO · Michigan, California, Texas
-          </p>
-          <h2
-            id="local-seo-proof-heading"
-            className="text-3xl font-black tracking-tight sm:text-4xl"
-            style={{ color: color.ink }}
-          >
-            What local SEO looks like when it lands
+          </div>
+          <h2 id="local-seo-proof-heading" className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+            Searchprex has already produced results for USA Small businesses with Local SEO
           </h2>
-          <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
-            Real searches, named American cities, and the client visible in the result. Every
-            screenshot below is a live SERP — click any of them to read the query and the
-            positions for yourself.
+          <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
+            Real searches, named American cities, and the client visible in the result. Every screenshot below is a
+            live SERP — click any of them to read the query and the positions for yourself.
           </p>
         </div>
 
