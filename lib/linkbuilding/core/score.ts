@@ -13,7 +13,7 @@
 //  written is the expensive order to do it in.
 // ═══════════════════════════════════════════════════════════
 
-import type { PageSignals } from './verify.js';
+import type { PageSignals } from './verify';
 
 export interface ProspectSignals {
   url: string;

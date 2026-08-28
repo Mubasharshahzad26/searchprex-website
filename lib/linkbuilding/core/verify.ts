@@ -16,7 +16,7 @@
 
 import * as cheerio from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
-import { canonicalizeUrl, resolveHref, sameSite, urlsEqual } from './normalize.js';
+import { canonicalizeUrl, resolveHref, sameSite, urlsEqual } from './normalize';
 
 export type LinkType = 'dofollow' | 'nofollow' | 'ugc' | 'sponsored';
 
