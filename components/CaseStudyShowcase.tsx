@@ -102,11 +102,11 @@ export default function CaseStudyShowcase() {
               className="text-3xl font-black tracking-tight sm:text-4xl"
               style={{ color: color.ink }}
             >
-              Case studies from real US clients
+              My case studies from real US clients
             </h2>
             <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
               Every card is a named American business with a real reporting period behind
-              it. The write-ups include what went wrong before it went right, because the
+              it. My write-ups include what went wrong before I fixed it, because the
               recovery is usually the part worth reading.
             </p>
           </div>

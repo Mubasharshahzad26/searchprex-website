@@ -101,9 +101,9 @@ export default function RecoveryStory() {
             Ecommerce SEO Recovery: +476%, a De-Indexing, and the Rebuild
           </h2>
           <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
-            Most agencies would publish the March peak and stop there. Here is the whole
+            Most agencies would publish the March peak and stop there. I publish the whole
             curve — including the part that went backwards — because the recovery is the
-            part that is actually hard, and it is the part you are hiring for.
+            part that is actually hard, and it is the part you are hiring me for.
           </p>
 
           <p

@@ -14,6 +14,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, MapPin, Phone, Scale, BadgeCheck } from "lucide-react";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
+import VideoTestimonials from "@/components/VideoTestimonials";
 import {
   AuthorCard,
   CardGrid,
@@ -99,6 +100,7 @@ const faqs: Faq[] = [
 ];
 
 const partnershipPoints = [
+  "Market Exclusivity: We only work with one firm per city and practice area",
   "Proven local pack + AI Overview methodology",
   "Founder-led — not handed to a junior",
   "Transparent GSC reporting from day one",
@@ -143,7 +145,7 @@ export default function LawFirmSEOClient() {
         subtitle="While you pay $80 per click on Google Ads, competitors get free organic traffic. We help law firms rank #1 in their city and get cited in Google's 2026 AI Overviews — so qualified clients call you first."
         primaryCta={{
           href: "/free-audit",
-          label: "Claim free law firm audit",
+          label: "Claim free competitor tear-down",
           icon: <ArrowRight className="h-4 w-4" aria-hidden />,
         }}
         secondaryCta={{ href: "#approach", label: "See our approach" }}
@@ -337,6 +339,8 @@ export default function LawFirmSEOClient() {
         </div>
       </Section>
 
+      {/* <VideoTestimonials /> */}
+
       {/* AUTHOR — E-E-A-T */}
       <Section width="narrow" tight>
         <AuthorCard
@@ -376,7 +380,7 @@ export default function LawFirmSEOClient() {
         actions={[
           {
             href: "/free-audit",
-            label: "Claim free law firm audit",
+            label: "Claim free competitor tear-down",
             icon: <ArrowRight className="h-4 w-4" aria-hidden />,
           },
           {

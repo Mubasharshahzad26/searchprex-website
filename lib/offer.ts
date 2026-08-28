@@ -16,18 +16,18 @@
 export const OFFER_HREF = "/free-audit";
 
 /** The default primary CTA label. Persona variants live in OFFER_CTA_BY_PERSONA. */
-export const OFFER_CTA = "Get my free SEO + AI visibility audit";
+export const OFFER_CTA = "Get my free Competitor SEO & AI Tear-Down";
 
 /** Short form, for tight spaces (nav, sticky mobile bar). */
-export const OFFER_CTA_SHORT = "Free SEO + AI audit";
+export const OFFER_CTA_SHORT = "Free Competitor Tear-Down";
 
 /** The offer, in one sentence. Use verbatim in section copy. */
 export const OFFER_PROMISE =
-  "I run your site the same way I ran the audits on this page: a prioritized P1 / P2 / P3 fix list, a 90-day roadmap, and whether Google's AI names you or your competitor.";
+  "I tear down exactly what your top 3 competitors are doing right, where your content gaps are, and whether Google's AI names you or them.";
 
 /** Reassurance line that sits under a CTA. */
 export const OFFER_MICROCOPY =
-  "Free · No obligation · Reply within 24 hours · One client per city";
+  "Free · No obligation · Reply within 24 hours · Market Exclusivity (One client per city)";
 
 /**
  * Secondary action. Deliberately NOT a second offer — it is the same
@@ -42,9 +42,9 @@ export const CALL_CTA = "Prefer to talk? Book a 30-min call";
  * funnel. Keys match the persona ids in components/Hero.tsx.
  */
 export const OFFER_CTA_BY_PERSONA: Record<string, string> = {
-  "law-firm": "Get my free law firm SEO + AI audit",
-  ecommerce: "Get my free ecommerce SEO + AI audit",
-  local: "Get my free local SEO + AI audit",
+  "law-firm": "Get my free Law Firm Competitor Tear-Down",
+  ecommerce: "Get my free Ecommerce Competitor Tear-Down",
+  local: "Get my free Local SEO Competitor Tear-Down",
 };
 
 /**

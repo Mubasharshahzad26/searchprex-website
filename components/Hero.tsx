@@ -52,13 +52,17 @@ const personas: Persona[] = [
   },
   {
     id: "ecommerce",
-    label: "eCommerce SEO",
+    label: "Ecommerce SEO",
     headline: "Ecommerce SEO",
     emphasis: "for US Online Stores.",
     sub: "I'm Mubashar. I recovered a 35,000-product catalog from mass non-indexing and watched monthly store revenue go from $5,832 to $19,100 — and I'll show you the dashboard it came from.",
+    aside: { label: "Read how I scale Ecommerce", href: "/services/ecommerce-seo" },
     media: "case" as const,
-    video: { id: "gFod-dTY-bg", caption: "How SMK Store's mass non-indexing was diagnosed and recovered." },
-    clients: ["Adscarry", "SMK Store", "Michigan Outdoor Sports"],
+    video: {
+      id: "gFod-dTY-bg",
+      caption: "Watch me pull the exact GSC data behind a 227% revenue increase.",
+    },
+    clients: ["SMK Store", "Michigan Outdoor", "Global Brands"],
   },
   {
     id: "local",
@@ -66,8 +70,9 @@ const personas: Persona[] = [
     headline: "Local SEO",
     emphasis: "for US Service Businesses.",
     sub: "I'm Mubashar. I work your Google Business Profile, citations and service-area pages personally — and report on calls and visits, not vanity rankings.",
+    aside: { label: "Read how I rank Local Businesses", href: "/services/local-seo" },
     media: "case" as const,
-    video: { id: "g_1TfDU4YeA", caption: "How HVAC Services Team reached the Google Map Pack Top 3 and an AI Overview." },
+    video: { id: "g_1TfDU4YeA", caption: "Watch how I pushed HVAC Services Team to the Map Pack Top 3." },
     clients: ["AAA Mobile Tyres", "Door Doctor", "HVAC Services Team"],
   },
 ];

@@ -280,7 +280,7 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
               Facing the same problem as {cs.client}?
             </p>
             <p className="max-w-xl text-sm text-[#64748b]">
-              The founder personally reviews your site and shows you exactly what&apos;s holding it back — free, within 24 hours.
+              The founder personally reviews your site vs your top competitors and shows you exactly what&apos;s holding it back — free, within 24 hours.
             </p>
             <Link href="/free-audit"
               className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
@@ -350,13 +350,13 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
               <span style={{ color: GREEN }}>Let&apos;s Build the Story.</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="mb-8 text-base text-white/70 leading-relaxed">
-              Get a free SEO audit — the founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours. No tools, no templates, no juniors.
+              Get a free Competitor SEO & AI Tear-Down — the founder personally reviews your top 3 competitors and delivers a 90-day growth roadmap within 24 hours. Market exclusivity guaranteed.
             </motion.p>
             <motion.div variants={fadeUp} className="mb-6 flex flex-wrap justify-center gap-3">
               <Link href="/free-audit"
                 className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
                 style={{ background: GREEN }}>
-                Get Free SEO Audit <ArrowRight className="h-4 w-4" />
+                Claim Free Competitor Tear-Down <ArrowRight className="h-4 w-4" />
               </Link>
               <a href="tel:+923106526316"
                 className="flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-white/10">

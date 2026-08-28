@@ -252,7 +252,7 @@ export default function RootLayout({
         />
       </head>
  
-      <body className="font-sans antialiased bg-[#eeeef5]">
+      <body className="font-sans antialiased bg-background">
         <Nav />
         {children}
         <Footer />

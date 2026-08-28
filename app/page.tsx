@@ -315,6 +315,9 @@ export default async function Home() {
         <Reveal><ClientLogos /></Reveal>
         <Reveal><TrustBar /></Reveal>
 
+        {/* The exclusive qualification form - placed after Promise & Proof */}
+        <Reveal><QuickAuditBar /></Reveal>
+
         {/* Revenue first. The strongest business outcome on the site was at
             position 11 of 19, behind "+285% pages indexed" — a mechanism, not
             an outcome. Outcome leads; mechanism follows immediately below. */}
@@ -323,12 +326,6 @@ export default async function Home() {
         {/* The three verified numbers, one scroll in. These were buried in the
             middle of Results, roughly four screens down. */}
         <Reveal><ProofStrip /></Reveal>
-
-        {/* One-field capture, high up. Replaces the AI-visibility strip that
-            used to sit here and pitched a different product three sections
-            before the AI section pitched the same one again. Same offer, same
-            name, same endpoint as the full form below — not a second ask. */}
-        <Reveal><QuickAuditBar /></Reveal>
 
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>

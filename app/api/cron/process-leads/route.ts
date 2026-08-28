@@ -48,15 +48,30 @@ export async function GET(req: Request) {
         $("script, style, img, svg, iframe, noscript").remove();
         const cleanText = $("body").text().replace(/\s+/g, " ").trim().substring(0, 15000);
 
-        // Step B: AI Scoring
+        // Step B: Fetch Lighthouse Score
+        let lighthouseScore = null;
+        try {
+          // Use Google PageSpeed Insights API
+          const psRes = await fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(lead.websiteUrl)}&strategy=mobile`);
+          if (psRes.ok) {
+            const psData = await psRes.json();
+            // Score is a fraction 0-1, so multiply by 100
+            lighthouseScore = Math.round((psData.lighthouseResult?.categories?.performance?.score || 0) * 100);
+          }
+        } catch (err) {
+          console.error("Lighthouse fetch failed:", err);
+        }
+
+        // Step C: AI Scoring
         const analysisResponse = await ai.models.generateContent({
           model: "gemini-3.7-flash",
           contents: `Analyze this business website content.
+          ${lighthouseScore !== null ? `I also ran a Google Lighthouse mobile performance test on this site and it scored a ${lighthouseScore}/100. If this score is below 75, highlight their slow mobile load times and poor Core Web Vitals as a critical flaw.` : ""}
           Extract:
           1. Company Name.
           2. Primary niche.
           3. Primary location.
-          4. 2-sentence 'analysis' of SEO/content flaws.
+          4. 2-sentence 'analysis' of SEO/content flaws (incorporating the Lighthouse score if provided and low).
           5. Score (1-100) indicating need for SEO services.
           Content: ${cleanText}`,
           config: {
@@ -129,6 +144,7 @@ export async function GET(req: Request) {
               where: { id: lead.id },
               data: { 
                 ...analysisData, 
+                lighthouseScore,
                 status: "emailed",
                 emailCount: 1,
                 lastEmailedAt: new Date()
@@ -139,7 +155,7 @@ export async function GET(req: Request) {
           // Score too low or no resend key -> just mark qualified or rejected
           await db.aiSdrLead.update({
             where: { id: lead.id },
-            data: { ...analysisData, status: score >= 70 ? "qualified" : "rejected" }
+            data: { ...analysisData, lighthouseScore, status: score >= 70 ? "qualified" : "rejected" }
           });
         }
 

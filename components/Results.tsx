@@ -67,113 +67,76 @@ export default function Results() {
 
   return (
     <section
-      className="py-20 sm:py-24"
-      style={{ background: color.surface }}
+      className="py-24 sm:py-32 relative overflow-hidden bg-[#0a0f2e]"
       id="results"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Header — left-aligned, split. Variety is how a reader knows they
-            have moved to a new section. */}
-        <div className="grid gap-6 border-b pb-10 lg:grid-cols-[1fr_auto] lg:items-end"
-             style={{ borderColor: color.border }}>
-          <div className="max-w-2xl">
-            <p
-              className="mb-3 text-xs font-bold uppercase tracking-widest"
-              style={{ color: color.primary }}
-            >
-              Three clients, three problems
+      {/* Background glow effects */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#3eb489]/50 to-transparent" />
+      <div className="absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#534AB7] opacity-20 blur-[100px]" />
+      <div className="absolute -right-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#3eb489] opacity-10 blur-[100px]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
+        {/* Header */}
+        <div className="grid gap-6 border-b border-white/10 pb-12 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-xs font-black uppercase tracking-widest text-[#3eb489]">
+              Undeniable Proof
             </p>
-            <h2
-              className="text-3xl font-black tracking-tight sm:text-4xl"
-              style={{ color: color.ink }}
-            >
-              Every number below has a recording behind it.
+            <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+              Every number below has a live recording behind it.
             </h2>
-            <p className="mt-4 text-base leading-relaxed" style={{ color: color.muted }}>
-              You can watch me scroll through the client&apos;s own Search Console — the date
-              range, the property, the account it came from. I record these because a
-              screenshot can be cropped and a number in a slide deck can be anything. If you
-              want the longer version of any of them, the{" "}
-              <Link href="/all-case-studies" className="font-semibold underline underline-offset-2"
-                    style={{ color: color.primary }}>
-                full case studies
-              </Link>{" "}
-              walk through what was broken and what I changed.
+            <p className="mt-5 text-lg leading-relaxed text-slate-400">
+              Screenshots can be faked. Slide decks can be manipulated. That's why I record live video walkthroughs of my clients' actual Google Search Console accounts. See the exact dates, properties, and revenue growth. Nothing is hidden.
             </p>
           </div>
           <Link
             href="/all-case-studies"
-            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-bold"
-            style={{ color: color.primary }}
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white/5 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 ring-1 ring-white/10"
           >
             Browse all case studies <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
         {/* Case cards */}
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
           {results.map((r) => (
             <div key={r.href} className="flex flex-col">
-            <Link
-              href={r.href}
-              className={`group relative flex flex-col overflow-hidden border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${radius.card}`}
-              style={{ background: color.white, borderColor: color.border }}
-            >
-              <p
-                className="mb-3 text-[11px] font-bold uppercase tracking-widest"
-                style={{ color: color.primary }}
-              >
-                {r.label}
-              </p>
-              <h3
-                className="mb-6 text-lg font-black leading-snug"
-                style={{ color: color.ink }}
-              >
-                {r.title}
-              </h3>
-              <div
-                className="mt-auto flex items-center justify-between border-t pt-4"
-                style={{ borderColor: color.border }}
-              >
-                <span
-                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-black"
-                  style={{ background: `${color.success}1a`, color: color.successDark }}
-                >
-                  <ShieldCheck className="h-4 w-4" /> {r.metric}
-                </span>
-                <ArrowRight
-                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                  style={{ color: color.muted }}
-                />
-              </div>
-            </Link>
-            <p className="mt-3 text-xs">
               <Link
-                href={r.service.href}
-                className="font-semibold underline underline-offset-2"
-                style={{ color: color.primary }}
+                href={r.href}
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]/50 p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#534AB7]/50 hover:bg-[#0f172a] hover:shadow-2xl hover:shadow-[#534AB7]/20"
               >
-                {r.service.label}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                
+                <p className="mb-4 text-[10px] font-bold uppercase tracking-widest text-[#534AB7]">
+                  {r.label}
+                </p>
+                <h3 className="relative z-10 mb-8 text-lg font-bold leading-snug text-slate-200 group-hover:text-white transition-colors">
+                  {r.title}
+                </h3>
+                
+                <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-5">
+                  <span className="inline-flex items-center gap-2 rounded-lg bg-[#3eb489]/10 px-3.5 py-1.5 text-sm font-black text-[#3eb489] ring-1 ring-[#3eb489]/20">
+                    <ShieldCheck className="h-4 w-4" /> {r.metric}
+                  </span>
+                  <ArrowRight className="h-5 w-5 text-slate-500 transition-transform group-hover:translate-x-1 group-hover:text-white" />
+                </div>
               </Link>
-            </p>
             </div>
           ))}
         </div>
 
         {/* The recordings — same section, directly under the claims */}
         <p
-          className="mb-4 mt-12 text-xs font-bold uppercase tracking-widest"
-          style={{ color: color.muted }}
+          className="mb-6 mt-16 text-xs font-black uppercase tracking-widest text-[#534AB7]"
         >
-          Watch the Search Console sessions
+          Watch the Live Search Console Sessions
         </p>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {videos.map((v) => (
             <button
               key={v.id}
               onClick={() => setActiveVideo(v.id)}
-              className={`group relative aspect-[4/3] overflow-hidden text-left shadow-md ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${radius.card}`}
-              style={{ background: color.ink }}
+              className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#0f172a] text-left shadow-lg ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:ring-[#534AB7]/50"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -183,20 +146,19 @@ export default function Results() {
                 height={360}
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/95 via-[#0a0f2e]/35 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/40 to-transparent" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <span
-                  className="flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: color.primary }}
+                  className="flex h-14 w-14 items-center justify-center rounded-full bg-[#3eb489] shadow-xl shadow-[#3eb489]/20 transition-transform duration-300 group-hover:scale-110"
                 >
                   <Play className="ml-0.5 h-6 w-6 fill-white text-white" />
                 </span>
               </div>
-              <div className="absolute inset-x-0 bottom-0 p-4">
-                <p className="text-sm font-bold text-white">{v.client}</p>
-                <p className="mt-0.5 text-[11px] text-white/80">{v.note}</p>
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <p className="text-base font-bold text-white">{v.client}</p>
+                <p className="mt-1 text-xs font-medium text-[#3eb489]">{v.note}</p>
               </div>
             </button>
           ))}
@@ -204,16 +166,14 @@ export default function Results() {
 
         {/* One CTA, the same offer as everywhere else */}
         <div
-          className="mt-12 flex flex-col items-center justify-center gap-4 border-t pt-10 sm:flex-row"
-          style={{ borderColor: color.border }}
+          className="mt-16 flex flex-col items-center justify-center gap-5 border-t border-white/10 pt-12 sm:flex-row"
         >
-          <span className="text-sm font-semibold" style={{ color: color.muted }}>
+          <span className="text-sm font-semibold text-slate-400">
             Ready to be the next result?
           </span>
           <Link
             href={OFFER_HREF}
-            className="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-            style={{ background: color.primary }}
+            className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#3eb489]/20 transition-all hover:-translate-y-0.5"
           >
             {OFFER_CTA} <ArrowRight className="h-4 w-4" />
           </Link>

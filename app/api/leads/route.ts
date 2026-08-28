@@ -18,7 +18,7 @@ import { createClient } from "@supabase/supabase-js";
  
 export async function POST(req: Request) {
   try {
-    const { name, email, website, source } = await req.json();
+    const { name, email, website, source, industry } = await req.json();
  
     // Basic server-side validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -37,6 +37,7 @@ export async function POST(req: Request) {
       email,
       website: website || null,
       source: source || "homepage-lead-form",
+      industry: industry || null,
     });
  
     if (error) {

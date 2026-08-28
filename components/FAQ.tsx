@@ -16,7 +16,7 @@ const faqCategories = [
       {
         question: "Will I work directly with a senior expert?",
         answer:
-          "Yes. SearchPrex is 100% senior-led. You communicate directly with the person doing the work.",
+          "Yes. You communicate directly with me, the person doing the actual work. No account managers.",
       },
     ],
   },
@@ -26,12 +26,12 @@ const faqCategories = [
       {
         question: "Do you only work with family law firms?",
         answer:
-          "While Family Law is our specialty, we work with various legal practices. However, we only take on one client per city per practice area to avoid conflicts of interest.",
+          "While Family Law is my specialty, I work with various legal practices and eCommerce brands. However, I only take on one client per city per practice area to avoid conflicts of interest.",
       },
       {
         question: "What makes SearchPrex different?",
         answer:
-          "We are niche-specialists, not generalists. Every client works directly with a senior SEO strategist. No junior account managers, no outsourced fluff.",
+          "I am a niche-specialist, not a generalist agency. You work directly with me. No junior account managers, no outsourced fluff, and no vanity metrics.",
       },
     ],
   },
@@ -46,7 +46,7 @@ const faqCategories = [
       {
         question: "Do you require long-term contracts?",
         answer:
-          "No. We work on a monthly basis. Our results are the contract. Most of our clients have been with us since 2022 because of the ROI.",
+          "No. I work on a monthly basis. My results are the contract. Most of my clients have been with me since 2022 because of the ROI.",
       },
     ],
   },
@@ -56,7 +56,7 @@ const faqCategories = [
       {
         question: "How do you report results?",
         answer:
-          "You get a custom live dashboard. We focus on 'Money Metrics': rank improvements for high-intent terms, organic traffic, and lead attribution.",
+          "I build you a custom live dashboard. I focus purely on 'Money Metrics': rank improvements for high-intent terms, organic traffic, and lead attribution.",
       },
       {
         question: "Do you offer guarantees?",
@@ -112,7 +112,7 @@ export default function FAQ() {
               Questions I get asked before we start
             </h2>
             <p className="text-base sm:text-lg text-[#566070] max-w-2xl mx-auto">
-              Everything you need to know about how we deliver ROI and why we're different from other SEO agencies.
+              Everything you need to know about how I deliver ROI and why I'm different from traditional SEO agencies.
             </p>
           </motion.div>
 

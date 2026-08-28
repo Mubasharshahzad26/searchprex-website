@@ -38,23 +38,22 @@ export default function AuditWalkthrough() {
   return (
     <section
       id="audit-walkthrough"
-      className="py-20 sm:py-24"
-      style={{ background: color.ink }}
+      className="py-20 sm:py-24 bg-white"
       aria-labelledby="audit-walkthrough-heading"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#8b86e0]">
+          <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
             <PlayCircle className="h-4 w-4" aria-hidden="true" />
             Watch the actual work
           </p>
           <h2
             id="audit-walkthrough-heading"
-            className="text-3xl font-black tracking-tight text-white sm:text-4xl"
+            className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl"
           >
             Watch me audit a site, start to finish
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/85">
+          <p className="mt-4 text-base leading-relaxed text-[#475569]">
             This is a complete audit recording, start to finish. Not a highlight reel and not a
             sales demo — the same review I run before quoting any US law firm, store or local
             business. Judge the method before you judge the numbers.
@@ -68,14 +67,14 @@ export default function AuditWalkthrough() {
               preload="none"
               playsInline
               poster="/images/proof/poster-audit-walkthrough.png"
-              className={`w-full border border-white/10 ${radius.card}`}
+              className={`w-full border border-slate-200 shadow-xl ${radius.card}`}
               style={{ background: "#000" }}
             >
               <source src="/video/seo-audit-walkthrough.mp4" type="video/mp4" />
               Your browser does not support embedded video. You can
               <a href="/video/seo-audit-walkthrough.mp4"> open the recording directly</a>.
             </video>
-            <figcaption className="mt-3 text-xs leading-relaxed text-white/70">
+            <figcaption className="mt-3 text-xs leading-relaxed text-slate-500">
               Full audit walkthrough · 14 MB · nothing downloads until you press play.
             </figcaption>
           </figure>
@@ -87,32 +86,30 @@ export default function AuditWalkthrough() {
                 return (
                   <li key={c.title} className="flex gap-4">
                     <span
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
-                      style={{ background: "rgba(139,134,224,0.16)" }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f5f3ff]"
                     >
-                      <Icon className="h-5 w-5 text-[#8b86e0]" aria-hidden="true" />
+                      <Icon className="h-5 w-5 text-[#534AB7]" aria-hidden="true" />
                     </span>
                     <div>
-                      <h3 className="text-base font-black text-white">{c.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-white/85">{c.body}</p>
+                      <h3 className="text-base font-black text-[#0a0f2e]">{c.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600">{c.body}</p>
                     </div>
                   </li>
                 );
               })}
             </ul>
 
-            <div className="mt-8 border-t border-white/10 pt-6">
-              <p className="text-sm font-semibold text-white/85">
+            <div className="mt-8 border-t border-slate-200 pt-6">
+              <p className="text-sm font-semibold text-[#0a0f2e]">
                 Want this run on your site?
               </p>
               <Link
                 href={OFFER_HREF}
-                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold transition-transform hover:-translate-y-0.5"
-                style={{ color: color.ink }}
+                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-[#3C3489] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 {OFFER_CTA} <ArrowRight className="h-4 w-4" />
               </Link>
-              <p className="mt-2 text-xs text-white/70">{OFFER_MICROCOPY}</p>
+              <p className="mt-2 text-xs text-slate-500">{OFFER_MICROCOPY}</p>
             </div>
           </div>
         </div>

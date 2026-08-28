@@ -281,32 +281,44 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
                   <thead className="bg-muted text-muted-foreground">
                     <tr>
                       <th className="px-4 py-3 font-medium">Website / Company</th>
-                      <th className="px-4 py-3 font-medium">AI Score</th>
+                      <th className="px-4 py-3 font-medium text-center">AI Score</th>
+                      <th className="px-4 py-3 font-medium text-center">Lighthouse</th>
                       <th className="px-4 py-3 font-medium">Status</th>
                       <th className="px-4 py-3 font-medium">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {leads.map(lead => (
+                    {leads.map((lead: any) => (
                       <tr key={lead.id} className="border-t hover:bg-muted/50 transition-colors">
                         <td className="px-4 py-3">
                           <div className="font-medium text-foreground">{lead.companyName || new URL(lead.websiteUrl).hostname}</div>
                           <div className="text-xs text-muted-foreground truncate max-w-[200px]">{lead.websiteUrl}</div>
                           {lead.analysis && (
-                            <div className="mt-1 text-xs text-purple-700 bg-purple-50 p-1 rounded italic max-w-sm">
+                            <p className="text-xs text-purple-600 mt-2 max-w-[300px] italic">
                               {lead.analysis}
-                            </div>
+                            </p>
                           )}
                         </td>
                         <td className="px-4 py-3">
                           {lead.score ? (
-                            <div className="flex items-center gap-2">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${lead.score > 70 ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
+                            <div className="flex items-center justify-center">
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${lead.score >= 70 ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
                                 {lead.score}
                               </div>
                             </div>
                           ) : (
-                            <span className="text-muted-foreground italic">Pending</span>
+                            <div className="text-center"><span className="text-muted-foreground italic">Pending</span></div>
+                          )}
+                        </td>
+                        <td className="px-4 py-3">
+                          {lead.lighthouseScore ? (
+                            <div className="flex items-center justify-center">
+                              <div className={`w-8 h-8 flex items-center justify-center font-bold text-xs rounded shadow-sm ${lead.lighthouseScore >= 90 ? 'bg-green-100 text-green-700 border border-green-200' : lead.lighthouseScore >= 50 ? 'bg-yellow-100 text-yellow-700 border border-yellow-200' : 'bg-red-100 text-red-700 border border-red-200'}`}>
+                                {lead.lighthouseScore}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="text-center"><span className="text-muted-foreground italic text-xs">-</span></div>
                           )}
                         </td>
                         <td className="px-4 py-3">

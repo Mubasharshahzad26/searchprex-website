@@ -57,7 +57,7 @@ export default function Pricing() {
             What working with me costs
           </h2>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#475569]">
-            No fixed tiers. We set your exact plan after a free audit — here&apos;s a realistic monthly ballpark by service.
+            No fixed tiers. I set your exact plan after a free audit — here&apos;s a realistic monthly ballpark by service.
           </p>
         </motion.div>
  
@@ -129,7 +129,7 @@ export default function Pricing() {
             className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
             style={{ color: PURPLE }}
           >
-            See what&apos;s included, our process &amp; FAQs <ArrowRight className="h-4 w-4" />
+            See what&apos;s included, my process &amp; FAQs <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
  

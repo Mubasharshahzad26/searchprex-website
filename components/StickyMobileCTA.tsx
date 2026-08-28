@@ -84,8 +84,8 @@ export default function StickyMobileCTA() {
     >
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-black text-[#0a0f2e]">Free SEO audit</p>
-          <p className="truncate text-xs text-[#5b6472]">Founder-reviewed, back in 24 hours</p>
+          <p className="truncate text-sm font-black text-[#0a0f2e]">Free Competitor Tear-Down</p>
+          <p className="truncate text-xs text-[#5b6472]">Market exclusivity in your city</p>
         </div>
         <Link
           href={OFFER_HREF}

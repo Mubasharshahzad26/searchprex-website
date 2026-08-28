@@ -11,31 +11,31 @@ const services = [
   {
     icon: Scale,
     title: "Law Firm SEO",
-    desc: "Practice-area pages, local pack domination, and E-E-A-T content that turns legal searches into signed cases.",
+    desc: "I build practice-area pages, dominate local packs, and write E-E-A-T content that turns legal searches into signed cases for your firm.",
     href: "/services/law-firm-seo",
   },
   {
     icon: ShoppingCart,
     title: "Ecommerce & Shopify SEO",
-    desc: "Mass non-indexing recovery, product content at scale, schema and Core Web Vitals — diagnosed and fixed at 35,000-product scale.",
+    desc: "I recover mass non-indexing, automate product content at scale, and fix schema — just like I did for a 35,000-product catalog.",
     href: "/services/ecommerce-seo",
   },
   {
     icon: MapPin,
     title: "Local SEO",
-    desc: "Google Business Profile, citations, reviews and service-area pages — top-3 map pack results in 60 days.",
+    desc: "I personally optimize your Google Business Profile and citations to force Google to put you in the top-3 map pack within 60 days.",
     href: "/services/local-seo",
   },
   {
     icon: Wrench,
     title: "Technical SEO",
-    desc: "Crawl, indexation and Core Web Vitals fixes that took one catalog from ~3,000 to 11,549 indexed pages in ten weeks.",
+    desc: "I fix the crawl and indexation errors bleeding your traffic — taking one client from ~3,000 to 11,549 indexed pages in ten weeks.",
     href: "/services/technical-seo",
   },
   {
     icon: Sparkles,
     title: "AI Overviews & AEO",
-    desc: "Built into every service: content structured to get cited by Google AI Overviews and LLMs — not just ranked.",
+    desc: "I structure your content to get cited directly by Google AI Overviews and LLMs — so your business is the only answer they see.",
     href: "/services",
   },
 ];
@@ -48,14 +48,14 @@ export default function Services() {
         {/* heading */}
         <div className="mb-12 text-center">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#534AB7]/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#534AB7] shadow-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" /> What we do
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" /> My Expertise
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
             What I do, and what I turn down
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#475569]">
-            No bloated menus or vanity packages — every service is tied to a verified,
-            Google Search Console-backed result you can inspect.
+            No bloated menus or vanity packages — every service I offer is tied to a verified,
+            Google Search Console-backed result you can inspect yourself.
           </p>
         </div>
  
