@@ -26,12 +26,26 @@ export interface CaseStudy {
   solution?: string;
   outcome?: string;
   demoLink?: string;
+  /**
+   * The window the figures were measured over, and where they can be checked.
+   *
+   * A result with no timeframe is not verifiable: "+285% pages indexed" could be
+   * two months or two years, and a reader has no way to judge it. Both fields
+   * are optional and render only when set, because they are populated strictly
+   * from what each study already states — nothing here is inferred. Most studies
+   * are missing one or both, and those need the real dates adding before they
+   * count as evidence.
+   */
+  period?: string;
+  verifiedVia?: string;
 }
  
 export const caseStudies: CaseStudy[] = [
   {
     id: 1,
     client: "SMK Store",
+    period: "2 months",
+    verifiedVia: "Google Search Console",
     seoType: "Ecommerce SEO",
     industry: "Ecommerce",
     location: "United States",
@@ -56,6 +70,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 2,
     client: "Local HVAC Services",
+    period: "60 days",
     seoType: "Local SEO",
     industry: "HVAC",
     location: "United States",
@@ -80,6 +95,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 3,
     client: "Michigan Outdoor Sports",
+    period: "March – July 2026",
     seoType: "Technical SEO",
     industry: "Ecommerce",
     location: "Michigan, USA",
@@ -89,10 +105,14 @@ export const caseStudies: CaseStudy[] = [
     video: "Y5PxSECNGP0",
     featured: true,
     slug: { industry: "ecommerce", client: "michigan-outdoor-sports" },
+    // These three were partly copied from SMK Store: "Pages indexed" appeared
+    // twice with different values (+285% and 12K+), and the +83% organic clicks
+    // in this study's own headline and outcome was missing entirely. Restored
+    // from the figures this study actually reports.
     metrics: [
       { v: "+285%", l: "Pages indexed" },
-      { v: "+285%", l: "Indexing rate" },
-      { v: "12K+", l: "Pages indexed" },
+      { v: "11,549", l: "Pages now indexed" },
+      { v: "+83%", l: "US organic clicks" },
     ],
     challenge:
       "Brand pages were never properly submitted to GSC, thin content caused mass non-indexing, and crawl budget was being wasted — leaving thousands of pages invisible despite being a real physical business.",
@@ -104,6 +124,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 4,
     client: "Doll's Cleaning",
+    verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Cleaning",
     location: "Chesterfield, MI",
@@ -128,6 +149,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 5,
     client: "Mammoth Roofing",
+    verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Roofing",
     location: "Texas",
@@ -152,6 +174,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 6,
     client: "Carpet Cleaning",
+    verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Cleaning",
     location: "Clawson, MI",
@@ -224,6 +247,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 9,
     client: "HVAC Team",
+    verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "HVAC",
     location: "Simi Valley, CA",
@@ -248,6 +272,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 10,
     client: "Remit Choice",
+    period: "From January 2026",
     seoType: "Technical SEO",
     industry: "Fintech",
     location: "Global",

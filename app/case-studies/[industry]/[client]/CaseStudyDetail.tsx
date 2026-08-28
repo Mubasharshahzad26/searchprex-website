@@ -76,7 +76,28 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
                 </div>
               ))}
             </motion.div>
- 
+
+            {/*
+              Provenance for the figures above. A percentage with no measurement
+              window is not checkable, and this line is what turns the numbers
+              into evidence. Rendered only when the study actually records it —
+              an invented window would be worse than an absent one.
+            */}
+            {(cs.period || cs.verifiedVia) && (
+              <motion.p
+                variants={fadeUp}
+                className="-mt-4 mb-8 max-w-2xl text-xs text-[#64748b]"
+              >
+                {cs.period && (
+                  <>Measured over <strong className="font-semibold text-[#0a0f2e]">{cs.period}</strong></>
+                )}
+                {cs.period && cs.verifiedVia && " · "}
+                {cs.verifiedVia && (
+                  <>Verified in <strong className="font-semibold text-[#0a0f2e]">{cs.verifiedVia}</strong></>
+                )}
+              </motion.p>
+            )}
+
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
               <Link href="/free-audit"
                 className="group inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"

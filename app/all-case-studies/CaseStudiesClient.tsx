@@ -73,18 +73,41 @@ export default function CaseStudiesClient({ linkedinUrl, initialCaseStudies = []
   const [hydrated, setHydrated] = useState(false);
   const deferredVertical = useDeferredValue(activeVertical);
 
-  const dbCaseStudiesFormatted = initialCaseStudies.map((cs) => ({
-    id: cs.id,
-    client: cs.clientName,
-    seoType: "Custom SEO",
-    slug: cs.slug,
-    headline: cs.title,
-    description: cs.metaDescription || "Read how we improved SEO performance.",
-    metrics: [],
-    image: cs.coverImage || "/images/case-studies/default.jpg",
-    featured: false,
-    video: null
-  }));
+  /**
+   * A CMS row is admitted only once it can actually fill a card.
+   *
+   * MarketingCaseStudy has no industry, location or badge columns, and its
+   * `slug` is a single string — so a row mapped straight into this list became
+   * a card with no metrics, no vertical to filter on, and a one-segment link
+   * that 404s against the two-segment /case-studies/[industry]/[client] route.
+   * A published test row (client "ABC", slug "rrrrrrrrrrrrrrr") was rendering
+   * exactly that on the live page, and the mapped object never satisfied
+   * CaseStudy, which is the type error this had been throwing.
+   *
+   * Give the model an `industry/client` slug plus industry and location and
+   * these start appearing again on their own. Until then, filling the missing
+   * fields with placeholders would only put invented detail on the one page
+   * whose job is to be verifiable.
+   */
+  const dbCaseStudiesFormatted: CaseStudy[] = initialCaseStudies.flatMap((cs) => {
+    const [industry, client] = String(cs.slug ?? "").split("/");
+    if (!industry || !client || !cs.clientName || !cs.title) return [];
+
+    return [{
+      id: cs.id,
+      client: cs.clientName,
+      seoType: "Technical SEO" as SeoType,
+      industry,
+      location: cs.location ?? "—",
+      headline: cs.title,
+      metrics: [] as Metric[],
+      image: cs.coverImage || "/images/case-studies/default.jpg",
+      featured: false,
+      badgeColor: "#534AB7",
+      badgeBg: "#EEEDFE",
+      slug: { industry, client },
+    }];
+  });
   const allCaseStudies = [...dbCaseStudiesFormatted, ...caseStudies];
 
   // Apply a ?vertical= deep link once, on mount.
