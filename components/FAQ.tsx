@@ -69,6 +69,13 @@ const faqCategories = [
 
 const allFaqs = faqCategories.flatMap((cat) => cat.faqs);
 
+// ONE FAQPage for the whole URL.
+//
+// It briefly also carried the three troubleshooting Q&As from
+// components/TroubleshootingAEO.tsx, back when that section rendered on this
+// page. That section has since been removed, and the questions came straight
+// back out: a FAQPage may only describe Q&A the visitor can actually see, so
+// leaving them here would have declared content that is not on the page.
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
