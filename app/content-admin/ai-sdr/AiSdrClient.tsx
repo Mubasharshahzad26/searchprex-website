@@ -248,11 +248,18 @@ export default function AiSdrClient({ initialLeads }: { initialLeads: LeadWithLo
               try {
                 // In production, you would pass an Authorization header here if CRON_SECRET is set
                 const res = await fetch("/api/sdr/trigger-cron", { method: 'POST' });
-                const data = await res.json();
-                alert(JSON.stringify(data, null, 2));
+                const text = await res.text();
+                try {
+                  const data = JSON.parse(text);
+                  if (data.error) throw new Error(data.error);
+                  alert(JSON.stringify(data, null, 2));
+                } catch (parseErr) {
+                  console.error("Raw response:", text);
+                  alert("Cron finished, but returned a non-JSON response (possibly a timeout). Check Vercel logs.");
+                }
                 window.location.reload();
-              } catch(err) {
-                alert("Failed to run cron");
+              } catch(err: any) {
+                alert("Failed to run cron: " + err.message);
               } finally {
                 btn.disabled = false;
                 btn.innerText = "Run Cron Now";

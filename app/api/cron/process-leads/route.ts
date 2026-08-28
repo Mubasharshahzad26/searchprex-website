@@ -16,10 +16,10 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // 2. Fetch a small batch of unprocessed leads (e.g., 3 at a time to avoid timeouts)
+    // 2. Fetch a small batch of unprocessed leads (e.g., 1 at a time to avoid timeouts)
     const leads = await db.aiSdrLead.findMany({
       where: { status: "new" },
-      take: 3,
+      take: 1,
       orderBy: { createdAt: "asc" }
     });
 
@@ -169,7 +169,7 @@ export async function GET(req: Request) {
         emailCount: { lt: 3, gt: 0 },
         lastEmailedAt: { lt: threeDaysAgo }
       },
-      take: 2, // process 2 follow-ups per cron tick
+      take: 1, // process 1 follow-up per cron tick to avoid timeouts
       include: { emailLogs: { orderBy: { sentAt: 'desc' }, take: 1 } }
     });
 

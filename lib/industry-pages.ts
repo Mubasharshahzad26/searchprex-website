@@ -24,7 +24,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Personal Injury",
     slug: "personal-injury",
-    metaTitle: "Personal Injury SEO Services | SearchPrex",
+    metaTitle: "Personal Injury SEO Services",
     metaDescription: "Dominate the highest-CPC keywords in your market. We help personal injury law firms rank for car accident and catastrophic injury terms locally.",
     h1: "Stop Losing Six-Figure Car Accident Cases to Billboard Lawyers",
     heroSub: "You know you're a better trial lawyer. Let's make sure injured plaintiffs find you first when they search. Advanced Personal Injury SEO with semantic clustering and local authority building.",
@@ -64,7 +64,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Family Law",
     slug: "family-law",
-    metaTitle: "Family Law SEO | Divorce Attorney Marketing by SearchPrex",
+    metaTitle: "Family Law SEO | Divorce Attorney Marketing",
     metaDescription: "Connect with high-net-worth clients during their most vulnerable times. Specialized family law and divorce SEO strategies.",
     h1: "Connect With Clients When They Need You Most: Family Law SEO",
     heroSub: "Divorce and custody clients don't want a salesman, they want an advocate. We position your firm as the most trusted, authoritative voice in your county.",
@@ -104,7 +104,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Criminal Defense",
     slug: "criminal-defense",
-    metaTitle: "Criminal Defense SEO Agency | SearchPrex",
+    metaTitle: "Criminal Defense SEO Agency",
     metaDescription: "Urgent cases require instant visibility. We help criminal defense attorneys dominate local search for DUI, felonies, and federal charges.",
     h1: "When They Get One Phone Call, Make Sure It's To Your Firm",
     heroSub: "Criminal defense is the most urgent search in the legal industry. If you aren't in the top 3 on Google Maps, you don't exist. Let's fix that.",
@@ -144,7 +144,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Estate Planning",
     slug: "estate-planning",
-    metaTitle: "Estate Planning SEO Services | SearchPrex",
+    metaTitle: "Estate Planning SEO Services",
     metaDescription: "Build long-term trust and attract high-value clients with specialized Estate Planning and Probate SEO strategies.",
     h1: "Become the Most Trusted Estate Planning Authority in Your City",
     heroSub: "Estate planning clients are searching for peace of mind, not just a lawyer. We use semantic SEO and E-E-A-T principles to position you as the definitive local expert.",
@@ -184,7 +184,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Mass Torts",
     slug: "mass-torts",
-    metaTitle: "Mass Torts SEO & Law Firm Marketing | SearchPrex",
+    metaTitle: "Mass Torts SEO & Law Firm Marketing",
     metaDescription: "Compete nationally for high-value mass tort leads. Advanced SEO for class actions, dangerous drugs, and defective products.",
     h1: "National Reach, Local Authority: Advanced Mass Torts SEO",
     heroSub: "Stop relying solely on expensive TV buys and paid lead gen. Build a sustainable organic pipeline for the most competitive dockets in the country.",
