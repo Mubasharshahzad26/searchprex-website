@@ -36,9 +36,22 @@ export default async function Page() {
   let initialMostRead: any[] = [];
 
   try {
-    const dbBlogs = await db.marketingBlog.findMany({ 
-      where: { published: true }, 
-      orderBy: { publishedAt: "desc" } 
+    /*
+     * SEO News lives at /resources/news and is excluded here.
+     *
+     * This query used to take every published MarketingBlog row. Once the SEO
+     * News hub was populated, those were the *only* rows in the table — so the
+     * blog index listed eight news articles and linked to none of the actual
+     * blog posts, which were left orphaned with no internal links anywhere on
+     * the site. BlogClient falls back to the file-based posts only when this
+     * array is empty, so a non-empty list of the wrong posts hid them.
+     */
+    const dbBlogs = await db.marketingBlog.findMany({
+      where: {
+        published: true,
+        NOT: { category: { contains: "SEO News", mode: "insensitive" } },
+      },
+      orderBy: { publishedAt: "desc" },
     });
 
     if (dbBlogs && dbBlogs.length > 0) {
@@ -60,16 +73,25 @@ export default async function Page() {
         content: b.content || ""
       }));
 
-      // Make the first post featured just in case
-      if (initialPosts.length > 0) initialPosts[0].featured = true;
-      initialMostRead = initialPosts.slice(0, 3).map((p, i) => ({ ...p, rank: i + 1 }));
     }
   } catch (err) {
     console.error("Failed to load DB blogs for blog index", err);
   }
 
-  // Fallback to hardcoded if no DB posts
-  const schemaPosts = initialPosts.length > 0 ? initialPosts : hardcodedPosts;
+  /*
+   * The CMS and the file-based posts are both real sources for this index, so
+   * they are merged rather than one replacing the other. A CMS row wins on slug
+   * collision, since that is the one an editor can actually update.
+   */
+  const dbSlugs = new Set(initialPosts.map((p) => p.slug));
+  initialPosts = [...initialPosts, ...hardcodedPosts.filter((p) => !dbSlugs.has(p.slug))].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  if (initialPosts.length > 0) initialPosts[0].featured = true;
+  initialMostRead = initialPosts.slice(0, 3).map((p, i) => ({ ...p, rank: i + 1 }));
+
+  const schemaPosts = initialPosts;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
