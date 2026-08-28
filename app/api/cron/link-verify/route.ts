@@ -6,15 +6,13 @@ export const maxDuration = 300;
 /**
  * Weekly re-check of every tracked link placement.
  *
- * Scheduled from cron-job.org like the other routes in this directory, NOT
- * from vercel.json — that file is `{}` deliberately. Add a job hitting
- * https://www.searchprex.com/api/cron/link-verify weekly with the header
- * `Authorization: Bearer <CRON_SECRET>`.
+ * Schedule in vercel.json (currently `{}` — this is the first entry):
  *
- * The budget is set below Vercel's 300s ceiling so the run stops on its own
- * terms and writes what it has, rather than being killed mid-batch. A weekly
- * cadence matches the default verifyIntervalDays on LinkCampaign; running it
- * more often is harmless, since placements that are not yet due are skipped.
+ *   { "crons": [{ "path": "/api/cron/link-verify", "schedule": "0 6 * * 1" }] }
+ *
+ * Vercel sends CRON_SECRET as a bearer token, matching the other cron routes.
+ * The budget is set below Vercel's 300s ceiling so the run finishes on its own
+ * terms and writes its results, rather than being killed mid-batch.
  */
 export async function GET(req: NextRequest) {
   const auth = req.headers.get('authorization');

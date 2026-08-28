@@ -92,38 +92,6 @@ export interface VerifyResult {
   matches: FoundLink[];
 }
 
-/**
- * Page signals from raw HTML, for callers that are assessing a page rather than
- * checking a placement on it — qualification, chiefly.
- *
- * Same reader the verifier uses, so a prospect is judged on exactly the
- * directives that will later decide whether a link there is worth anything.
- */
-export function readPageSignalsFromHtml(html: string, fetchedUrl: string): PageSignals {
-  return readPageSignals(cheerio.load(html), fetchedUrl);
-}
-
-/**
- * Every external link on a page, as absolute URLs.
- *
- * The free half of discovery: resource pages, roundups and industry hubs are
- * lists of exactly the sites worth approaching, and mining their outbound links
- * costs nothing but a fetch.
- */
-export function extractOutboundLinks(html: string, fetchedUrl: string): string[] {
-  const $ = cheerio.load(html);
-  const found = new Set<string>();
-
-  $('a[href]').each((_, el) => {
-    const resolved = resolveHref((el as Element).attribs?.href ?? '', fetchedUrl);
-    if (!resolved) return;
-    if (sameSite(resolved, fetchedUrl)) return;
-    found.add(resolved);
-  });
-
-  return [...found];
-}
-
 /** rel tokens that stop a link passing ranking signal. */
 const NON_FOLLOWING_REL = new Set(['nofollow', 'ugc', 'sponsored']);
 
@@ -207,7 +175,7 @@ function normalizeAnchor(text: string): string {
  * sell placements. A checker that only reads rel attributes reports these as
  * live and healthy forever.
  */
-export function readPageSignals($: cheerio.CheerioAPI, fetchedUrl: string): PageSignals {
+function readPageSignals($: cheerio.CheerioAPI, fetchedUrl: string): PageSignals {
   const metaRobots: string[] = [];
 
   //  Google-specific directives are honoured by Google and are what actually
