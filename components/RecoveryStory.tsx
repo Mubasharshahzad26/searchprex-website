@@ -20,9 +20,8 @@
 // sitting at position 11 of 19. This section keeps what it is actually about:
 // one account's peak, de-indexing and rebuild.
 
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, TrendingDown, Wrench, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingDown, Wrench, TrendingUp, Zap } from "lucide-react";
 import ProofImage from "@/components/ProofImage";
 import { color, radius } from "@/lib/design-tokens";
 import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
@@ -32,6 +31,8 @@ import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
 const revenueSteps = [
   {
     src: "/images/proof/mso-revenue-1-jul20.png",
+    width: 1040,
+    height: 605,
     stage: "Before",
     tone: "#8a5b08",
     figure: "$0.00",
@@ -40,6 +41,8 @@ const revenueSteps = [
   },
   {
     src: "/images/proof/mso-revenue-2-aug06.png",
+    width: 1366,
+    height: 607,
     stage: "Two weeks later",
     tone: "#534AB7",
     figure: "$206.63",
@@ -48,6 +51,8 @@ const revenueSteps = [
   },
   {
     src: "/images/proof/mso-revenue-3-aug17.png",
+    width: 1366,
+    height: 611,
     stage: "After",
     tone: "#196b4d",
     figure: "$311.05",
@@ -63,13 +68,18 @@ const phases = [
     stage: "The setback",
     when: "March – May 2026",
     body: "The account peaked at +476% organic clicks in March, then gradually de-indexed. Indexed pages fell back to roughly 3,000 while crawled-but-unindexed URLs piled up.",
+    metric: { value: "≈3,000", label: "Indexed pages at the floor" },
   },
   {
     icon: Wrench,
     tone: "#534AB7",
     stage: "The fix",
     when: "May – July 2026",
-    body: "Crawl budget reclaimed from faceted and parameter URLs, canonicals corrected, thin product pages rewritten with unique copy, and high-value URLs pushed through the Indexing API in priority batches.",
+    body: "Crawl budget reclaimed from faceted and parameter URLs, canonicals corrected, and thin product pages rewritten with unique copy. The re-indexing itself ran on NicheSEO Pro Autopilot, which pushed high-value URLs through the Indexing API in priority batches and then verified each page had actually gone live.",
+    metric: { value: "+3,723", label: "Newly indexed, 11 – 25 Jul 2026" },
+    // The tool is named because it did the work, and because its own Search
+    // Console captures for this account are the source of the figure above.
+    tool: { label: "Run on NicheSEO Pro Autopilot", href: "#nicheseo-pro" },
   },
   {
     icon: TrendingUp,
@@ -77,6 +87,7 @@ const phases = [
     stage: "The recovery",
     when: "July – August 2026",
     body: "Indexed pages back to 11,549 — a 285% increase from the floor — with US organic clicks up 83% and CTR from 3.5% to 5.2%. Store revenue restarted the month after.",
+    metric: { value: "11,549", label: "Indexed pages, 25 Jul 2026" },
   },
 ];
 
@@ -126,7 +137,7 @@ export default function RecoveryStory() {
             Michigan Outdoor Sports · The full picture
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            We Recover De Indexing issue and achieved Revenue growth recently
+            How I recovered a de-indexed store — and the revenue that followed
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
             Most agencies would publish the March peak and stop there. I publish the whole
@@ -146,27 +157,31 @@ export default function RecoveryStory() {
           </p>
         </div>
 
-        {/* Indexing Recovery Evidence Chart */}
-        <div className="mb-16">
-          <figure className="m-0">
-            <div
-              className={`overflow-hidden border ${radius.card}`}
-              style={{ borderColor: color.border, background: color.white }}
-            >
-              <Image
-                src="/images/proof/mso-gsc-indexing-full.png"
-                alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
-                width={1366}
-                height={606}
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="h-auto w-full"
-              />
-            </div>
-            <figcaption className="mt-3 text-xs leading-relaxed text-center" style={{ color: color.muted }}>
-              Unedited Google Search Console screenshot — Page indexing, all known pages.
-              Cropped only to remove the account avatar and site URL.
-            </figcaption>
-          </figure>
+        {/* ── Indexing recovery chart ──
+            This is the headline evidence of the whole section, and until now it
+            was the ONE screenshot on the page that could not be opened: a bare
+            next/image element, while every smaller panel below it was a
+            zoomable ProofImage. The copy underneath even told the visitor to
+            "click any panel to read it full size", which was not true of the
+            most important one. It is a ProofImage now, like everything else. */}
+        {/* Capped at the capture's own 778px width. This sat in a max-w-5xl
+            box and was being upscaled to ~1022px, so the one chart the whole
+            section rests on rendered soft. The declared width/height were also
+            1366x606 against a real 778x520, which reserved the wrong aspect box
+            and shifted the layout as it loaded. */}
+        <div className="mx-auto mb-16 w-full max-w-[778px]">
+          <ProofImage
+            src="/images/proof/mso-gsc-indexing-full.png"
+            alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
+            width={778}
+            height={520}
+            stage="Google Search Console · Page indexing"
+            stageTone={color.successDark}
+            caption="≈3,000 → 11,549 indexed pages"
+            note="Unedited screenshot, all known pages, 18 May – 25 July 2026. Cropped only to remove the account avatar and site URL."
+            sizes="(max-width: 778px) 100vw, 778px"
+            eager
+          />
         </div>
 
         {/* Three phases. Numbered because the order is the information. */}
@@ -176,35 +191,77 @@ export default function RecoveryStory() {
             return (
               <li
                 key={p.stage}
-                className={`border p-6 ${radius.card}`}
+                className={`relative flex flex-col overflow-hidden border ${radius.card}`}
                 style={{ background: color.white, borderColor: color.border }}
               >
-                <div className="flex items-center gap-3">
-                  <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
-                    style={{ background: `${p.tone}14` }}
-                  >
-                    <Icon className="h-5 w-5" style={{ color: p.tone }} aria-hidden="true" />
-                  </span>
-                  <span
-                    className="text-xs font-black tabular-nums"
+                {/* Phase colour as a rule across the top, so the three cards
+                    read as one timeline rather than three unrelated boxes. */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-1"
+                  style={{ background: p.tone }}
+                />
+
+                <div className="flex flex-1 flex-col p-6 pt-7">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+                      style={{ background: `${p.tone}14` }}
+                    >
+                      <Icon className="h-5 w-5" style={{ color: p.tone }} aria-hidden="true" />
+                    </span>
+                    {/* The step number was 10px and easy to miss; at this size
+                        it does the sequencing work the layout was relying on. */}
+                    <span
+                      aria-hidden="true"
+                      className="text-3xl font-black leading-none tabular-nums"
+                      style={{ color: `${p.tone}33` }}
+                    >
+                      0{i + 1}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-lg font-black" style={{ color: color.ink }}>
+                    {p.stage}
+                  </h3>
+                  <p
+                    className="mt-1 text-xs font-bold uppercase tracking-widest"
                     style={{ color: p.tone }}
                   >
-                    0{i + 1}
-                  </span>
+                    {p.when}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed" style={{ color: color.muted }}>
+                    {p.body}
+                  </p>
+
+                  {p.tool && (
+                    <Link
+                      href={p.tool.href}
+                      className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-bold transition-colors hover:brightness-95"
+                      style={{ background: `${p.tone}14`, color: p.tone }}
+                    >
+                      <Zap className="h-3.5 w-3.5" aria-hidden="true" />
+                      {p.tool.label}
+                    </Link>
+                  )}
+
+                  {/* Each phase ends on the number that describes it, so the
+                      row reads ≈3,000 → +3,723 → 11,549 at a glance. */}
+                  <div
+                    className="mt-auto border-t pt-4"
+                    style={{ borderColor: color.border, marginTop: "1.5rem" }}
+                  >
+                    <p
+                      className="text-2xl font-black tabular-nums tracking-tight"
+                      style={{ color: color.ink }}
+                    >
+                      {p.metric.value}
+                    </p>
+                    <p className="mt-0.5 text-xs" style={{ color: color.muted }}>
+                      {p.metric.label}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-4 text-lg font-black" style={{ color: color.ink }}>
-                  {p.stage}
-                </h3>
-                <p
-                  className="mt-1 text-xs font-bold uppercase tracking-widest"
-                  style={{ color: p.tone }}
-                >
-                  {p.when}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed" style={{ color: color.muted }}>
-                  {p.body}
-                </p>
               </li>
             );
           })}
@@ -222,20 +279,65 @@ export default function RecoveryStory() {
             size of the figure.
           </p>
 
+          {/* Connectors between the three panels. The figures are $0.00 →
+              $206.63 → $311.05 and the whole point of the block is the
+              direction, but as three equal cards in a row that reading had to
+              be assembled by the visitor. The arrows sit in the existing grid
+              gap, so they cost no layout, and they are aria-hidden because the
+              <ol> already conveys the sequence to a screen reader. */}
+          {/* The figure leads, the screenshot corroborates.
+              Previously each cell was a screenshot with the amount tucked
+              underneath at 14px, so the one thing the block exists to say —
+              $0.00 -> $206.63 -> $311.05 — was the smallest text in it, and a
+              visitor had to open three images to read a trend. The amount is
+              now the largest element in each cell and the capture sits below it
+              as the thing that proves it.
+
+              frameAspect pins all three captures to one box. Their native
+              aspects differ (1040x605, 1366x607, 1366x611), which is why the
+              first panel used to stand taller than the other two and pushed its
+              caption out of line with them. object-contain, so nothing is
+              cropped. */}
           <ol className="mt-8 grid gap-8 lg:grid-cols-3">
-            {revenueSteps.map((r) => (
-              <li key={r.src}>
-                <ProofImage
-                  src={r.src}
-                  alt={`Michigan Outdoor Sports WooCommerce net sales panel on ${r.date}, showing ${r.figure} net sales this month.`}
-                  width={1366}
-                  height={611}
-                  stage={r.stage}
-                  stageTone={r.tone}
-                  caption={`${r.figure} — ${r.date}`}
-                  note={r.note}
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                />
+            {revenueSteps.map((r, i) => (
+              <li key={r.src} className="relative">
+                {i > 0 && (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -left-6 top-8 hidden h-6 w-6 items-center justify-center lg:flex"
+                    style={{ color: color.subtleNonText }}
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </span>
+                )}
+
+                <p
+                  className="text-xs font-black uppercase tracking-widest"
+                  style={{ color: r.tone }}
+                >
+                  {r.stage}
+                </p>
+                <p
+                  className="mt-2 text-4xl font-black tabular-nums tracking-tight"
+                  style={{ color: color.ink }}
+                >
+                  {r.figure}
+                </p>
+                <p className="mt-1 text-sm font-bold" style={{ color: color.muted }}>
+                  {r.date}
+                </p>
+
+                <div className="mt-4">
+                  <ProofImage
+                    src={r.src}
+                    alt={`Michigan Outdoor Sports WooCommerce net sales panel on ${r.date}, showing ${r.figure} net sales this month.`}
+                    width={r.width}
+                    height={r.height}
+                    frameAspect="16 / 9"
+                    note={r.note}
+                    sizes="(max-width: 1024px) 100vw, 400px"
+                  />
+                </div>
               </li>
             ))}
           </ol>

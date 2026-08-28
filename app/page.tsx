@@ -8,6 +8,9 @@ import RevenueProof from "../components/RevenueProof";
 import QuickAuditBar from "../components/QuickAuditBar";
 import RecoveryStory from "../components/RecoveryStory";
 import LocalSeoProof from "../components/LocalSeoProof";
+import LawFirmProof from "../components/LawFirmProof";
+import PersonaSolutions from "../components/PersonaSolutions";
+import NicheSeoProShowcase from "../components/NicheSeoProShowcase";
 import AuditWalkthrough from "../components/AuditWalkthrough";
 import TrustBar from "../components/TrustBar";
 import LeadWizard from "../components/LeadWizard";
@@ -22,10 +25,6 @@ import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
 import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";
 import FounderSection from "../components/FounderSection";
 import FAQ from "../components/FAQ";
-import TroubleshootingAEO from "../components/TroubleshootingAEO";
-import PersonaProblemHeader from "../components/PersonaProblemHeader";
-import SectionBridge from "../components/SectionBridge";
-import { Store, MapPin, Scale } from "lucide-react";
 import EmotionalLeadForm from "../components/EmotionalLeadForm";
 import BlogTeaser from "../components/BlogTeaser";
 import Reveal from "@/components/Reveal";
@@ -325,91 +324,40 @@ export default async function Home() {
           <Reveal><Services /></Reveal>
         </AuroraBackground>
 
-        {/* 3. Ecommerce Store issue and Solution */}
-        <SectionBridge 
-          title="How We Increase USA Based Business Revenue" 
-          subtitle="We serve all 50 US states—from New York to California—specializing in turning failing marketing campaigns into highly profitable assets." 
-        />
-        <Reveal>
-          <PersonaProblemHeader 
-            audience="We Serve All 50 States"
-            painPoint="Worried for your Ecommerce Store in the USA?"
-            iconName="Store"
-            accentColor="#3eb489"
-          >
-            <p>When a large catalog drops out of Google, running expensive PPC to cover the gap destroys your margins. I fix faceted navigation traps, rebuild canonical architecture, and force Google to re-index your revenue-driving URLs using the Indexing API. See the results below.</p>
-          </PersonaProblemHeader>
-        </Reveal>
+        {/* 3-8. The four services, as one interactive dashboard panel.
+            Replaces four separate PersonaProblemHeader blocks (~1,300px of
+            centred interstitial) with a tab rail that lets the four problems
+            be compared side by side and links each one to the section that
+            evidences it. The proof sections themselves are unchanged and keep
+            their original order below. */}
+        <Reveal><PersonaSolutions /></Reveal>
+
         <Reveal><RevenueProof /></Reveal>
-
-        {/* 4. Local SEO Issue and Solution */}
-        <Reveal>
-          <PersonaProblemHeader 
-            audience="Local SEO Solutions"
-            painPoint="Looking to Scale Your Small Local Business?"
-            iconName="MapPin"
-            accentColor="#7F77DD"
-          >
-            <p>Traditional local SEO is dead. If directories like Yelp and Angi are stealing your leads, I restructure your site and GBP profile so Google explicitly recommends your business as the single best local entity for the job in your specific city.</p>
-          </PersonaProblemHeader>
-        </Reveal>
         <Reveal><LocalSeoProof /></Reveal>
-
-        {/* 5 & 6. Technical SEO issue & Solution as Mass non indexing recovery Ecommerce Store */}
-        <Reveal>
-          <PersonaProblemHeader 
-            audience="Mass De-Indexing Recovery"
-            painPoint="Stuck with your website's online visibility?"
-            iconName="AlertTriangle"
-            accentColor="#eab308"
-          >
-            <p>I don't just talk about fixing indexing issues; I publish the full recovery curve. Here is exactly how I restored indexation and revenue for a client that vanished from Google overnight.</p>
-          </PersonaProblemHeader>
-        </Reveal>
         <Reveal><RecoveryStory /></Reveal>
-        
-        {/* Client testimonial moved after Recovery Story */}
-        <SectionBridge title="Client Verification" subtitle="What happens when these solutions land?" />
-        <TrustpilotReviewSection />
 
-        {/* 7 & 8. Law Firm SEO Issue & Free SaaS Solutions subscription */}
-        <Reveal>
-          <PersonaProblemHeader 
-            audience="See we came with a solution for you"
-            painPoint="Burst with PPC campaigns for your Law Firm?"
-            iconName="Scale"
-            accentColor="#185FA5"
-          >
-            <p className="mb-4">Ranking organically for semantic keywords like &apos;Family Law Attorney&apos; and &apos;Personal Injury Lawyer&apos; is the only sustainable way to replace $150+ PPC clicks with highly qualified, free traffic.</p>
-            <div className="bg-[#185FA5]/10 border border-[#185FA5]/20 rounded-xl p-6 mt-6 inline-block">
-              <p className="text-[#185FA5] font-bold text-xs mb-2 uppercase tracking-widest">My Solution Offer:</p>
-              <p className="text-[#0a0f2e] font-bold">I provide a FREE 30-day SaaS Solution subscription for an AI Intake Assistant to test your efficiency first, before you even contact us for the SEO plan.</p>
-            </div>
-          </PersonaProblemHeader>
-        </Reveal>
+        {/* Directly after the de-indexing recovery, because that recovery is
+            this tool's own first case study — same client, same run. Anywhere
+            further down and it reads as an unrelated upsell instead of the
+            answer to "how did one person ship 11,549 pages?" */}
+        <Reveal><NicheSeoProShowcase /></Reveal>
 
-        {/* 9. Also benefit working directly with Founder */}
-        <SectionBridge title="Under My Reservation" subtitle="What edge will you get working directly with the Founder?" />
+        <Reveal><LawFirmProof /></Reveal>
+
+        <Reveal><TrustpilotReviewSection /></Reveal>
+
         <Reveal><FounderSection /></Reveal>
 
         {/* 10. Emotional Lead Form */}
         <Reveal><EmotionalLeadForm /></Reveal>
 
-        {/* 12. Process */}
-        <SectionBridge title="My Process" subtitle="How we achieve this step-by-step" />
         <Reveal><Process /></Reveal>
         
-        {/* 13. All results verified with video recording */}
-        <SectionBridge title="Absolute Transparency" subtitle="All results verified with live video recordings" />
         <Reveal><ProofStrip /></Reveal>
         <Reveal><Results /></Reveal>
 
-        {/* 14. Worried for Ai visibility section */}
-        <SectionBridge title="Future-Proofing" subtitle="Worried about AI Visibility?" />
-        <AIVisibilityShowcase />
+        <Reveal><AIVisibilityShowcase /></Reveal>
 
-        {/* 15. How Audit of a Website */}
-        <SectionBridge title="The Methodology" subtitle="How I audit a website to find these gaps" />
         <Reveal><AuditWalkthrough /></Reveal>
 
         {/* 16. Pricing */}
@@ -418,8 +366,6 @@ export default async function Home() {
         {/* 17. 2nd Lead form already presented on site */}
         <LeadWizard />
 
-        {/* 18. AI overview related content */}
-        <Reveal><TroubleshootingAEO /></Reveal>
 
         {/* 19. Faqs */}
         <Reveal><FAQ /></Reveal>

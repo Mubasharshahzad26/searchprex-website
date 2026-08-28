@@ -159,6 +159,55 @@ export default function LocalSeoProof() {
           ))}
         </ul>
 
+        {/* ── Did the rankings actually produce traffic? ──
+            Everything above this point is a SERP screenshot, which proves
+            position and nothing else. This is the same client measured in
+            Search Console, so the section answers the obvious next question
+            instead of leaving it hanging.
+
+            THE CTR DROP IS STATED, NOT BURIED. Clicks and impressions both
+            rose and average position improved, but CTR fell from 0.5% to 0.3%.
+            That is what happens when impressions grow faster than clicks — the
+            site began surfacing for a much wider set of queries it does not yet
+            rank well for. A prospect who opens the capture will see the 0.3%
+            immediately, so the copy names it first.
+
+            TWO OTHER CANDIDATES WERE REJECTED for this slot, on the same
+            standard that keeps door-doctor and glendora out of this file:
+              - glendora-kitchens-gsc-perofrmance-states.JPG — clicks 8 -> 4,
+                CTR 5.6% -> 0.8%, average position 31.4 -> 47. A decline.
+              - mammoth-roofing-comparison.JPG — impressions 16.9K -> 45.2K but
+                average position 55.7 -> 58.2 and CTR 1.2% -> 0.5%. Two of the
+                four panels visibly run backwards, and position 58 is page six.
+        */}
+        <div className="mt-14 border-t pt-12" style={{ borderColor: color.border }}>
+          <h3 className="text-2xl font-black leading-snug" style={{ color: color.ink }}>
+            And the rankings turned into traffic.
+          </h3>
+          <p className="mt-3 max-w-3xl text-base leading-relaxed" style={{ color: color.muted }}>
+            The same client in Google Search Console, June against July 2025. Clicks went from
+            192 to 264 and average position improved from 31.2 to 22.9. Click-through rate
+            fell from 0.5% to 0.3% over the same window, which is worth saying out loud:
+            impressions grew far faster than clicks, because the site started appearing for a
+            much wider set of queries it does not rank well for yet. The numbers that matter
+            here are the clicks and the position, and both moved the right way.
+          </p>
+
+          <div className="mt-8 max-w-3xl">
+            <ProofImage
+              src="/images/proof/local-dolls-gsc-comparison.jpg"
+              alt="Google Search Console performance comparison for D.O.L.L.S. Cleaning: 264 clicks and 106K impressions for 1-31 July 2025 against 192 clicks and 41K impressions for 1-30 June 2025, average CTR 0.3% against 0.5%, average position 22.9 against 31.2."
+              width={626}
+              height={239}
+              stage="D.O.L.L.S. Cleaning · Michigan · Jun vs Jul 2025"
+              stageTone={color.successDark}
+              caption="192 → 264 clicks · position 31.2 → 22.9"
+              note="Unedited Search Console comparison view. CTR fell 0.5% → 0.3% because impressions rose from 41K to 106K over the same period."
+              sizes="(max-width: 1024px) 100vw, 720px"
+            />
+          </div>
+        </div>
+
         <div
           className="mt-12 flex flex-col items-start gap-3 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
           style={{ borderColor: color.border }}
