@@ -51,14 +51,6 @@ const baseMetadata: Metadata = {
     siteName: 'SearchPrex',
     type: "website",
     locale: 'en_US',
-    images: [
-      {
-        url: `${SITE}/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: 'SearchPrex - SEO Case Studies with Verified Results',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -67,7 +59,6 @@ const baseMetadata: Metadata = {
     title: "SEO Case Studies — Verified Results | SearchPrex",
     description:
       "Browse SearchPrex SEO case studies with real GSC data. Law firm, ecommerce, local & technical SEO results.",
-    images: [`${SITE}/og-image.jpg`],
   },
   formatDetection: {
     email: false,

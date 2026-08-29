@@ -41,14 +41,6 @@ const baseMetadata: Metadata = {
     siteName: 'SearchPrex',
     type: 'website',
     locale: 'en_US',
-    images: [
-      {
-        url: `${siteUrl}/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: 'SearchPrex - SEO Resources & Guides',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -56,7 +48,6 @@ const baseMetadata: Metadata = {
     creator: '@searchprex',
     title: 'SEO Resources & Guides — White Papers, Research, News',
     description: 'Free SEO resources: white papers, original research, real-world learnings, and curated industry news from SearchPrex.',
-    images: [`${siteUrl}/og-image.jpg`],
   },
   formatDetection: {
     email: false,

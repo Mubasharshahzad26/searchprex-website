@@ -204,9 +204,12 @@ export default async function Home() {
           "US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher across all 50 states.",
         "isPartOf": { "@id": `${SITE}/#website` },
         "about": { "@id": `${SITE}/#organization` },
+        // The generated default card (app/opengraph-image.tsx). This was
+        // `${SITE}/og-image.jpg`, a file that has never existed in public/, so
+        // the structured data pointed Google at a 404.
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": `${SITE}/og-image.jpg`
+          "url": `${SITE}/opengraph-image`
         }
       },
       {

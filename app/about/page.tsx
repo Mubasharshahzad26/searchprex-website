@@ -43,14 +43,6 @@ const baseMetadata: Metadata = {
     siteName: 'SearchPrex',
     type: 'profile',
     locale: 'en_US',
-    images: [
-      {
-        url: `${siteUrl}/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: 'SearchPrex - Founder-Led SEO Agency',
-      },
-    ],
     
   },
   twitter: {
@@ -59,7 +51,6 @@ const baseMetadata: Metadata = {
     creator: '@searchprex',
     title: 'About SearchPrex — Founder-Led USA SEO Agency',
     description: 'Meet Mubashar Shahzad, founder of SearchPrex. Founder-executed SEO for law firms, ecommerce & local business.',
-    images: [`${siteUrl}/og-image.jpg`],
   },
   formatDetection: {
     email: false,

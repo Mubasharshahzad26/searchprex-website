@@ -189,9 +189,19 @@ const PAGES: Seed[] = [
   },
   {
     slug: "/ai-search",
-    title: "Free AI SEO Audit Tool | Instant Website Analysis for US Businesses | SearchPrex",
+    // Was "Free AI SEO Audit Tool | Instant Website Analysis for US Businesses".
+    // /ai-search is not an audit tool and never has been: it takes a typed SEO
+    // question and returns an AI answer. There is no URL field, no score, and
+    // no roadmap on the page. The old copy sent searchers to a promise the page
+    // does not keep. Keep this in step with `baseMetadata` in
+    // app/ai-search/page.tsx — the CMS row wins, so that file alone cannot fix
+    // a wrong title here.
+    //
+    // No "| SearchPrex" suffix: the root layout's title template appends it, so
+    // spelling it out here renders it twice.
+    title: "Ask Any SEO Question — Free AI SEO Answer Engine",
     metaDescription:
-      "Free AI-powered SEO audit tool for US businesses. Get an instant website analysis, a personalized 90-day SEO roadmap, or book a free consultation — no login, no credit card, results in seconds.",
+      "Ask any SEO question and get an instant AI answer grounded in live Google Search results, with sources. Built for US law firms, ecommerce stores & local businesses. Free, no login.",
   },
   {
     slug: "/ai-visibility",
