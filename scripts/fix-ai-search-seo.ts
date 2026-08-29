@@ -29,8 +29,19 @@
  *   npx tsx scripts/fix-ai-search-seo.ts --dry    # print the change, write nothing
  *   npx tsx scripts/fix-ai-search-seo.ts          # apply it
  *
- * NOTE: .env.local points at the production database. Without --dry this
- * changes the live site on the next page load; there is no deploy step.
+ * NOTE: .env.local points at the production database, so without --dry this
+ * writes to production. It does NOT change the live page on its own.
+ *
+ * /ai-search is statically prerendered and has no `revalidate` export, so
+ * generateMetadata() — and the getPageSEO() database read inside it — runs at
+ * BUILD time, not per request. Live responses come back
+ * `X-Nextjs-Prerender: 1` / `X-Vercel-Cache: HIT` with an Age well past any
+ * stale window and no background regeneration. The row this script writes is
+ * picked up by the next deploy.
+ *
+ * That applies to every CMS-backed route, which means editing SEO in
+ * /admin/pages is also build-time-only: the panel implies a live change and
+ * does not deliver one until something triggers a rebuild.
  */
 import { db } from "../lib/db";
 
@@ -76,7 +87,12 @@ async function main() {
   }
 
   await db.page.update({ where: { slug: SLUG }, data: NEXT });
-  console.log("Updated. The live title and description change on the next page load.");
+  console.log(
+    "Row updated.\n\n" +
+      "The live page will NOT change yet: /ai-search is statically prerendered, so\n" +
+      "getPageSEO reads this row at build time. Redeploy to publish the new title\n" +
+      "and description."
+  );
 
   if (row.status !== "published") {
     // getPageSEO ignores non-published rows entirely, so a draft row means the

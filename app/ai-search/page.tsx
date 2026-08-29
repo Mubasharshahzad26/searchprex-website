@@ -68,12 +68,15 @@ const baseMetadata: Metadata = {
 // Metadata comes from the CMS row for this route; the object above is the
 // fallback when that row is missing, unpublished, or the database is down.
 //
-// NOTE: a *published* Page row exists for /ai-search and its `title` and
-// `metaDescription` still hold the old audit-tool copy. getPageSEO lets a
-// non-empty CMS field win, so those two fields override what is written above
-// until the row is updated in the admin panel. Every other field here —
-// openGraph, twitter, keywords, robots — is null in that row and ships from
-// this file.
+// NOTE: a *published* Page row exists for /ai-search, and getPageSEO lets a
+// non-empty CMS field win, so the row's `title` and `metaDescription` override
+// what is written above. Both were corrected to match this file by
+// scripts/fix-ai-search-seo.ts. Every other field here — openGraph, twitter,
+// keywords, robots — is null in that row and ships from this file.
+//
+// This route is statically prerendered and exports no `revalidate`, so the
+// getPageSEO read below happens at BUILD time. Changing the CMS row — here or
+// in /admin/pages — has no effect on the live page until the next deploy.
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/ai-search", baseMetadata);
 }
