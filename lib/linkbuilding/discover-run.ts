@@ -18,6 +18,7 @@ import { discoverBacklinkGap } from './core/discovery/backlink-gap';
 import { discoverSerpFootprints } from './core/discovery/serp-footprints';
 import { discoverLinkNeighbourhood } from './core/discovery/link-neighbourhood';
 import { hasDataForSeoCredentials } from './core/discovery/dataforseo';
+import { createSerperSearch, hasSerperKey } from './core/discovery/serper';
 import { DiscoveryError, type DiscoveryResult, type RawProspect } from './core/discovery/types';
 
 export interface DiscoverRunOptions {
@@ -37,6 +38,7 @@ export interface ChannelOutcome {
   created: number;
   enriched: number;
   costUsd: number;
+  costUnit: 'usd' | 'credits';
   warnings: string[];
   error?: string;
   /** True when the channel is simply not configured, rather than broken. */
@@ -164,6 +166,7 @@ async function runChannel(
       created,
       enriched,
       costUsd: result.costUsd,
+      costUnit: result.costUnit ?? 'usd',
       warnings: result.warnings,
     };
   } catch (err) {
@@ -177,6 +180,7 @@ async function runChannel(
       created: 0,
       enriched: 0,
       costUsd: 0,
+      costUnit: 'usd',
       warnings: [],
       error: message,
       //  A DiscoveryError with no credentials is a configuration state, not a
@@ -249,14 +253,27 @@ export async function runLinkDiscovery(
     }
 
     if (wants('serp_footprint') && campaign.topic) {
+      //  Serper first when its key is present: it returns the same Google
+      //  results for a fraction of the DataForSEO price, and this channel
+      //  spends one search per template per topic on every run.
+      const serperKey = process.env.SERPER_API_KEY;
+      const search = hasSerperKey(serperKey)
+        ? createSerperSearch(serperKey, 'serp_footprint')
+        : undefined;
+
       channels.push(
-        await runChannel('serp_footprint', campaign.id, maxPerCampaign, () =>
-          discoverSerpFootprints({
-            topic: campaign.topic!,
-            excludeDomain: campaign.targetDomain,
-            credentials: creds,
-            signal,
-          })
+        await runChannel(
+          search ? 'serp_footprint (serper)' : 'serp_footprint (dataforseo)',
+          campaign.id,
+          maxPerCampaign,
+          () =>
+            discoverSerpFootprints({
+              topic: campaign.topic!,
+              excludeDomain: campaign.targetDomain,
+              credentials: creds,
+              search,
+              signal,
+            })
         )
       );
     }
@@ -293,6 +310,7 @@ export async function runLinkDiscovery(
         created: 0,
         enriched: 0,
         costUsd: 0,
+        costUnit: 'usd',
         warnings: [],
         error:
           'Campaign has no competitors, topic or seedUrls set, so no channel could run.',

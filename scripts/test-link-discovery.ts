@@ -15,6 +15,7 @@ import { discoverLinkNeighbourhood } from '../lib/linkbuilding/core/discovery/li
 import { discoverBacklinkGap } from '../lib/linkbuilding/core/discovery/backlink-gap';
 import { discoverSerpFootprints } from '../lib/linkbuilding/core/discovery/serp-footprints';
 import { hasDataForSeoCredentials } from '../lib/linkbuilding/core/discovery/dataforseo';
+import { createSerperSearch, hasSerperKey, type SearchProvider } from '../lib/linkbuilding/core/discovery/serper';
 import { DiscoveryError } from '../lib/linkbuilding/core/discovery/types';
 import { qualifyProspect } from '../lib/linkbuilding/core/qualify';
 import { extractOutboundLinks } from '../lib/linkbuilding/core/verify';
@@ -120,6 +121,60 @@ async function main() {
       }),
     /exceeds the number of competitors/
   );
+
+  console.log('\nserp footprints - provider seam');
+  check('an empty serper key is not usable', hasSerperKey(''), false);
+  check('whitespace is not a key', hasSerperKey('  '), false);
+  check('a real key is usable', hasSerperKey('abc'), true);
+
+  await throws(
+    'serper refuses without a key, same as every paid adapter',
+    () =>
+      discoverSerpFootprints({
+        topic: 'knives',
+        excludeDomain: 'mine.com',
+        credentials: NO_CREDS,
+        search: createSerperSearch('', 'serp_footprint'),
+      }),
+    /SERPER_API_KEY is not set/
+  );
+
+  {
+    //  An injected provider replaces the network entirely, which is the point
+    //  of the seam: templates and filtering are tested without either vendor.
+    let seenQueries: string[] = [];
+    const fake: SearchProvider = async (queries) => {
+      seenQueries = queries;
+      return {
+        results: [
+          {
+            keyword: queries[0],
+            hits: [
+              { url: 'https://publisher.example/resources', title: 'Resources' },
+              { url: 'https://mine.com/own-page', title: 'Ours' },
+              { url: 'https://publisher.example/resources?utm_source=x', title: 'Dup' },
+            ],
+          },
+        ],
+        cost: 4,
+        warnings: [],
+      };
+    };
+
+    const result = await discoverSerpFootprints({
+      topic: 'survival knives',
+      excludeDomain: 'mine.com',
+      credentials: NO_CREDS,
+      search: fake,
+    });
+
+    check('one search per template', seenQueries.length, 4);
+    check('the topic is substituted in', seenQueries[0].includes('survival knives'), true);
+    check('our own domain is filtered out', result.prospects.some((p) => p.domain === 'mine.com'), false);
+    check('tracking params do not create a duplicate', result.prospects.length, 1);
+    check('provider cost is reported', result.costUsd, 4);
+    check('provenance names the query', result.prospects[0].discoveredVia.startsWith('ranked for'), true);
+  }
 
   console.log('\nextractOutboundLinks');
   {

@@ -21,6 +21,7 @@
 
 import { canonicalizeUrl, hostOf, sameSite } from '../normalize';
 import { callDataForSeo, type DataForSeoCredentials } from './dataforseo';
+import type { SearchProvider } from './serper';
 import { DiscoveryError, type DiscoveryResult, type RawProspect } from './types';
 
 const SOURCE = 'serp_footprint' as const;
@@ -34,6 +35,21 @@ const ENDPOINT = '/v3/serp/google/organic/live/advanced';
  * cost far more reliably than a long tail of clever operators.
  */
 export const FOOTPRINT_TEMPLATES = [
+  'best {topic} blogs',
+  '{topic} resources page',
+  'top {topic} websites',
+  '{topic} roundup',
+] as const;
+
+/**
+ * The same intent expressed with search operators — more precise, and rejected
+ * by Serper's free tier with "Query pattern not allowed for free accounts".
+ *
+ * Quoted phrases narrow the results to pages that literally use the wording a
+ * links page uses, so they are worth switching to on a paid plan. Pass them as
+ * `templates` when the account allows it.
+ */
+export const FOOTPRINT_TEMPLATES_ADVANCED = [
   '{topic} "resources"',
   '{topic} "useful links"',
   'best {topic} blogs',
@@ -51,6 +67,15 @@ export interface SerpFootprintOptions {
   depth?: number;
   templates?: readonly string[];
   credentials: Partial<DataForSeoCredentials> | null | undefined;
+  /**
+   * Which provider actually runs the searches. Omitted, the channel uses
+   * DataForSEO, which is what it always did.
+   *
+   * Injected rather than switched on inside, so the query templates and the
+   * filtering below stay in one place no matter who answers them — and so a
+   * provider can be tested without a network.
+   */
+  search?: SearchProvider;
   signal?: AbortSignal;
 }
 
@@ -72,6 +97,7 @@ export async function discoverSerpFootprints(
     depth = 20,
     templates = FOOTPRINT_TEMPLATES,
     credentials,
+    search,
     signal,
   } = options;
 
@@ -87,41 +113,63 @@ export async function discoverSerpFootprints(
 
   const queries = templates.map((template) => template.replace('{topic}', cleanTopic));
 
-  //  One task per query in a single request. DataForSEO bills per task either
-  //  way, and batching keeps the run to one round trip instead of four.
-  const { results, costUsd, warnings } = await callDataForSeo<{
-    keyword?: string;
-    items?: SerpItem[] | null;
-  }>(
-    ENDPOINT,
-    queries.map((keyword) => ({
-      keyword,
-      location_name: locationName,
-      language_code: languageCode,
-      device: 'desktop',
+  //  When a provider is injected it answers; otherwise DataForSEO does, in one
+  //  request with one task per query. Either way the templates above and the
+  //  filtering below are the same, which is the point of the seam.
+  let normalised: Array<{ keyword: string; hits: Array<{ url: string; title?: string }> }>;
+  let costUsd: number;
+  let costUnit: 'usd' | 'credits';
+  let warnings: string[];
+
+  if (search) {
+    const outcome = await search(queries, {
+      //  Serper wants a two-letter country code, DataForSEO a location name.
+      //  Mapping the common case keeps one option on the public interface.
+      locationCode: locationName === 'United States' ? 'us' : locationName.slice(0, 2).toLowerCase(),
+      languageCode,
       depth,
-    })),
-    credentials,
-    SOURCE,
-    { signal }
-  );
+      signal,
+    });
+    normalised = outcome.results;
+    costUsd = outcome.cost;
+    costUnit = 'credits';
+    warnings = outcome.warnings;
+  } else {
+    const provider = await callDataForSeo<{ keyword?: string; items?: SerpItem[] | null }>(
+      ENDPOINT,
+      queries.map((keyword) => ({
+        keyword,
+        location_name: locationName,
+        language_code: languageCode,
+        device: 'desktop',
+        depth,
+      })),
+      credentials,
+      SOURCE,
+      { signal }
+    );
+
+    normalised = provider.results.map((result) => ({
+      keyword: result.keyword ?? cleanTopic,
+      hits: (result.items ?? [])
+        //  The items array carries maps, videos, people-also-ask and more. Only
+        //  organic results are pages someone could add a link to.
+        .filter((item) => !item.type || item.type === 'organic')
+        .filter((item): item is SerpItem & { url: string } => typeof item.url === 'string')
+        .map((item) => ({ url: item.url, title: item.title?.trim() || undefined })),
+    }));
+    costUsd = provider.costUsd;
+    costUnit = 'usd';
+    warnings = provider.warnings;
+  }
 
   const prospects: RawProspect[] = [];
   const seen = new Set<string>();
 
-  for (const result of results) {
-    const keyword = result.keyword ?? cleanTopic;
-
-    for (const item of result.items ?? []) {
-      //  The items array carries maps, videos, people-also-ask and more.
-      //  Only organic results are pages someone could add a link to.
-      if (item.type && item.type !== 'organic') continue;
-
-      const rawUrl = item.url;
-      if (!rawUrl) continue;
-
-      const url = canonicalizeUrl(rawUrl);
-      const domain = hostOf(rawUrl);
+  for (const result of normalised) {
+    for (const hit of result.hits) {
+      const url = canonicalizeUrl(hit.url);
+      const domain = hostOf(hit.url);
       if (!url || !domain) continue;
 
       if (sameSite(url, cleanExclude)) continue;
@@ -132,11 +180,11 @@ export async function discoverSerpFootprints(
         url,
         domain,
         source: SOURCE,
-        discoveredVia: `ranked for "${keyword}"`,
-        title: item.title?.trim() || undefined,
+        discoveredVia: `ranked for "${result.keyword}"`,
+        title: hit.title,
       });
     }
   }
 
-  return { prospects, costUsd, warnings };
+  return { prospects, costUsd, costUnit, warnings };
 }

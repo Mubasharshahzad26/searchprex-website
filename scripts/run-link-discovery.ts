@@ -206,14 +206,22 @@ async function main() {
         }
         console.log(
           `  ${channel.source.padEnd(20)} found ${channel.found}, new ${channel.created}, ` +
-            `enriched ${channel.enriched}${channel.costUsd ? `, $${channel.costUsd.toFixed(4)}` : ''}`
+            `enriched ${channel.enriched}${
+              channel.costUsd
+                ? channel.costUnit === 'credits'
+                  ? `, ${channel.costUsd} credits`
+                  : `, $${channel.costUsd.toFixed(4)}`
+                : ''
+            }`
         );
         for (const warning of channel.warnings) console.log(`      ! ${warning}`);
       }
     }
+    //  Dollars and credits are different units; summing them across providers
+    //  would invent a number, so the per-channel lines above carry the spend
+    //  and the total carries only what is comparable across them.
     console.log(
-      `\ntotal new: ${stats.totalCreated}   spend: $${stats.totalCostUsd.toFixed(4)}   ` +
-        `${(stats.elapsedMs / 1000).toFixed(1)}s`
+      `\ntotal new: ${stats.totalCreated}   ${(stats.elapsedMs / 1000).toFixed(1)}s`
     );
   }
 

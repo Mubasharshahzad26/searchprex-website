@@ -48,8 +48,16 @@ export interface RawProspect {
 
 export interface DiscoveryResult {
   prospects: RawProspect[];
-  /** Provider spend for this call, in USD, when the provider reports it. */
+  /** Provider spend for this call. Read `costUnit` before printing it. */
   costUsd: number;
+  /**
+   * What `costUsd` is actually counted in.
+   *
+   * DataForSEO bills in dollars; Serper reports credits, and one credit is not
+   * one dollar. Printing a credit count with a currency symbol overstated the
+   * spend by three orders of magnitude, so the unit travels with the number.
+   */
+  costUnit?: 'usd' | 'credits';
   /** Non-fatal problems worth surfacing — partial pages, unparsed rows. */
   warnings: string[];
 }
