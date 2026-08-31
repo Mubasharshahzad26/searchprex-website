@@ -22,6 +22,7 @@ export default function DashboardSidebar({ profile }: { profile: Profile | null 
     { href: "/dashboard/agency/keywords", icon: "🔑", label: "Rankings" },
     { href: "/dashboard/agency/actions", icon: "⚡", label: "Action Items" },
     { href: "/dashboard/agency/work-log", icon: "✅", label: "Work Done" },
+    { href: "/dashboard/links", icon: "🔗", label: "Link Building" },
   ];
 
   const proLinks = [
