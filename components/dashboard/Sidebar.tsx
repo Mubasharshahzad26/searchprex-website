@@ -22,7 +22,6 @@ export default function DashboardSidebar({ profile }: { profile: Profile | null 
     { href: "/dashboard/agency/keywords", icon: "🔑", label: "Rankings" },
     { href: "/dashboard/agency/actions", icon: "⚡", label: "Action Items" },
     { href: "/dashboard/agency/work-log", icon: "✅", label: "Work Done" },
-    { href: "/dashboard/links", icon: "🔗", label: "Link Building" },
   ];
 
   const proLinks = [
@@ -33,7 +32,18 @@ export default function DashboardSidebar({ profile }: { profile: Profile | null 
     { href: "/tools/keywords", icon: "🔑", label: "Keywords" },
   ];
 
-  const links = isAgency ? agencyLinks : isPro ? proLinks : [];
+  //  Shown to every signed-in role rather than bolted onto one list. Link
+  //  building is not an agency-only or Pro-only concern, and a page that is
+  //  reachable by URL but missing from the nav just looks broken.
+  const sharedLinks = [
+    { href: "/dashboard/links", icon: "🔗", label: "Link Building" },
+  ];
+
+  const links = isAgency
+    ? [...agencyLinks, ...sharedLinks]
+    : isPro
+      ? [...proLinks, ...sharedLinks]
+      : [];
 
   async function handleLogout() {
     await supabase.auth.signOut();
