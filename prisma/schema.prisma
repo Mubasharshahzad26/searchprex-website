@@ -21,6 +21,9 @@ model Client {
   autopilotRuns   AutopilotRun[]
   costLogs        CostLog[]
   reportConfig    ReportConfig?
+  linkCampaigns   LinkCampaign[]
+  businessProfile BusinessProfile?
+  brandProperties BrandProperty[]
 }
 
 model GSCConnection {
@@ -456,4 +459,523 @@ model AiSdrEmailLog {
   body            String   @db.Text
   sentAt          DateTime @default(now())
   status          String   @default("sent") // sent, bounced, opened, replied
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Link building — Phase 0: monitoring
+//
+//  LinkProspect and the outreach tables are deliberately absent.
+//  Their shape depends on what the Phase 1 discovery adapters
+//  actually return, and guessing now buys a migration that has to
+//  be undone. Adding nullable columns and new tables later is
+//  cheap; unpicking a wrong relation is not.
+// ─────────────────────────────────────────────────────────────
+
+model LinkCampaign {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  name String
+  /// Bare host the campaign builds links to, e.g. "smkstore.com". Stored
+  /// without protocol or "www." so it can be compared without parsing.
+  targetDomain String
+
+  enabled Boolean @default(true)
+
+  /// Both default closed, matching AutopilotConfig. Phase 0 never sends or
+  /// publishes anything, but the flags exist from the first migration so the
+  /// outreach phases inherit a gate that is already on rather than having to
+  /// add one to live campaigns.
+  dryRunMode       Boolean @default(true)
+  requiresApproval Boolean @default(true)
+
+  /// Days between verification passes for this campaign's placements.
+  verifyIntervalDays Int @default(7)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  /// Competitor domains mined by backlink-gap discovery.
+  competitors String[]
+  /// Subject used to build SERP footprint queries, e.g. "survival knives".
+  topic String?
+  /// Pages mined by link-neighbourhood discovery. Free channel, no provider.
+  seedUrls String[]
+
+  /// Outreach sequencing limits. Enforced in core/outreach/policy.ts, which
+  /// refuses a send that breaches them rather than warning.
+  maxFollowUps          Int @default(2)
+  minDaysBetweenMessages Int @default(4)
+
+  placements LinkPlacement[]
+  prospects  LinkProspect[]
+  threads    OutreachThread[]
+
+  @@index([clientId])
+  @@index([enabled])
+}
+
+model LinkPlacement {
+  id         String       @id @default(cuid())
+  campaignId String
+  campaign   LinkCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  /// The prospect this placement came from, when it came from one. Null for
+  /// imported links that predate discovery.
+  prospectId String?
+  prospect   LinkProspect? @relation(fields: [prospectId], references: [id], onDelete: SetNull)
+
+  /// Page carrying the link.
+  sourceUrl String
+  /// Our page it is supposed to point at.
+  targetUrl String
+  /// Anchor agreed when the placement was made. Null when unknown — an
+  /// imported link with no recorded anchor must not be reported as drifted.
+  expectedAnchor String?
+
+  /// How this placement entered the system: imported | outreach | citation | manual
+  origin String @default("imported")
+
+  /// pending | live | nofollowed | changed | lost | page_gone | unreachable
+  status String @default("pending")
+
+  /// Last observation. Nullable throughout: a placement checked zero times has
+  /// no observations, and zeroes would read as real measurements.
+  linkType          String?
+  observedAnchor    String?
+  observedTargetUrl String?
+  region            String?
+  lastStatusCode    Int?
+  lastReasons       String[]
+
+  firstSeenAt   DateTime?
+  lastCheckedAt DateTime?
+  lastLiveAt    DateTime?
+  lostAt        DateTime?
+
+  /// Consecutive checks that could not reach the page. A link is only declared
+  /// lost on evidence, never on a bot wall or a timeout, so this has to survive
+  /// between runs — see lib/linkbuilding/verify-run.ts.
+  consecutiveFailures Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  checks LinkCheck[]
+
+  /// One row per (page, target) pair: the same article linking to two different
+  /// pages of ours is two placements, and re-importing a CSV must update rather
+  /// than duplicate.
+  @@unique([campaignId, sourceUrl, targetUrl])
+  @@index([campaignId, status])
+  @@index([lastCheckedAt])
+}
+
+model LinkCheck {
+  id          String        @id @default(cuid())
+  placementId String
+  placement   LinkPlacement @relation(fields: [placementId], references: [id], onDelete: Cascade)
+
+  status     String
+  linkType   String?
+  anchorText String?
+  statusCode Int?
+  reasons    String[]
+
+  /// Page-level signals at check time (noindex, canonical, outbound counts).
+  /// Kept as JSON because it is evidence to show a publisher, not something
+  /// queried across rows.
+  pageSignals Json?
+
+  checkedAt DateTime @default(now())
+
+  @@index([placementId, checkedAt])
+  @@index([checkedAt])
+}
+
+/// A site or page worth approaching, and what we decided about it.
+///
+/// Phase 1 fills this; Phase 3 reads it. Nothing here sends anything — a
+/// prospect that passes qualification is a candidate for a human to approve,
+/// not an instruction to email anyone.
+model LinkProspect {
+  id         String       @id @default(cuid())
+  campaignId String
+  campaign   LinkCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  /// Bare host, no "www.". The unit a prospect is deduplicated on: two resource
+  /// pages on one site are one relationship, not two opportunities.
+  domain String
+  /// Best page seen for this domain — the one that surfaced it.
+  url String
+
+  /// backlink_gap | serp_footprint | link_neighbourhood | manual
+  source String
+  /// Human-readable trail, e.g. `links to competitor-a.com, competitor-b.com`.
+  discoveredVia String
+
+  /// discovered | qualified | rejected | unreachable | contacted | placed
+  ///
+  /// `contacted` and `placed` are written by later phases and are listed here
+  /// so the column never has to change meaning once outreach exists.
+  status String @default("discovered")
+
+  /// 0..100 from scoreProspect. Null until qualification runs.
+  qualityScore Int?
+  /// Disqualifying findings. Non-empty means never contact, whatever the score.
+  hardRejects String[]
+  /// Scoring detail, each entry carrying the points it moved.
+  scoreReasons String[]
+  /// Metrics that were unavailable, so a low score can be read correctly
+  /// rather than mistaken for a measured judgement.
+  missingSignals String[]
+
+  /// Provider metrics as discovered. Null means unmeasured, never zero.
+  referringDomains Int?
+  organicTraffic   Int?
+  providerRank     Int?
+
+  title          String?
+  /// Page-level signals at qualification time — evidence for the verdict.
+  pageSignals    Json?
+  lastStatusCode Int?
+  /// Consecutive qualification attempts that could not read the page.
+  consecutiveFailures Int @default(0)
+
+  discoveredAt DateTime  @default(now())
+  qualifiedAt  DateTime?
+  updatedAt    DateTime  @updatedAt
+
+  placements LinkPlacement[]
+  threads    OutreachThread[]
+
+  /// One row per domain per campaign. Re-running discovery must enrich the
+  /// existing row rather than stack duplicates every week.
+  @@unique([campaignId, domain])
+  @@index([campaignId, status])
+  @@index([campaignId, qualityScore])
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Citations — Phase 2
+//
+//  Citations are NOT links and are never counted as such. Most
+//  carry nofollow and Google Business Profile carries no link at
+//  all; the value is entity confirmation through consistency.
+//  CitationSubmission.linkValue records the truth per directory
+//  so a report cannot quietly merge the two numbers.
+// ─────────────────────────────────────────────────────────────
+
+/// The single canonical NAP for a client. Every listing is compared against
+/// this record, so it is the one place a correction has to be made.
+model BusinessProfile {
+  id       String @id @default(cuid())
+  clientId String @unique
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  /// Exactly as it should appear everywhere, including legal suffix.
+  name       String
+  street     String?
+  city       String?
+  region     String?
+  postalCode String?
+  /// ISO country code, e.g. "US".
+  country    String?
+  phone      String?
+  website    String?
+
+  /// Drives which vertical directories apply — see core/citations/registry.ts.
+  industry String?
+
+  /// Fields many directories ask for. Kept here so the submission queue can
+  /// pre-fill a form completely rather than sending someone hunting.
+  description String? @db.Text
+  categories  String[]
+  /// Opening hours as supplied, e.g. {"mon":"9-5"}. Free-form by design:
+  /// every directory wants a different shape and normalising early loses detail.
+  hours       Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  submissions CitationSubmission[]
+}
+
+/// One directory listing, from "should exist" through to "verified consistent".
+model CitationSubmission {
+  id        String          @id @default(cuid())
+  profileId String
+  profile   BusinessProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  /// Stable key from core/citations/registry.ts. Never renamed.
+  directoryId   String
+  directoryName String
+  /// core | vertical | local
+  tier String
+
+  /// none | nofollow | dofollow — the truth about this directory, recorded so
+  /// a citation count can never be added to a link count.
+  linkValue String
+  /// api | manual | aggregator
+  submissionMethod String
+
+  /// queued | submitted | live | rejected | duplicate | not_applicable
+  ///
+  /// A person moves it from `queued` to `submitted`; verification moves it to
+  /// `live`. Scripted submission would breach most directories' terms and get
+  /// the listing pulled, so nothing here submits anything.
+  status String @default("queued")
+
+  /// The published listing, once it exists. Verification needs this.
+  listingUrl String?
+
+  /// consistent | inconsistent | unverified | not_found | unreachable
+  verifyStatus String?
+  /// structured | text_only | not_found — how much the verdict can be trusted.
+  verifyConfidence String?
+  /// 0..100 over comparable fields only.
+  napScore Int?
+  /// Fields that genuinely differ from BusinessProfile.
+  mismatches String[]
+  /// Tracked fields this directory does not publish. Not a fault.
+  missingFields String[]
+  /// What the listing actually said, as evidence to act on.
+  observed Json?
+  reasons  String[]
+
+  linksToSite Boolean @default(false)
+  /// dofollow | nofollow — observed, which can differ from the directory default.
+  observedLinkType String?
+
+  lastCheckedAt       DateTime?
+  lastStatusCode      Int?
+  /// Consecutive checks that could not reach the listing. A listing is never
+  /// declared missing on a bot wall — same rule as LinkPlacement.
+  consecutiveFailures Int @default(0)
+
+  submittedAt DateTime?
+  /// Free-text for whoever works the queue: login used, ticket number, notes.
+  notes String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([profileId, directoryId])
+  @@index([profileId, status])
+  @@index([lastCheckedAt])
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Outreach — Phase 3
+//
+//  Nothing in this section sends anything by itself. Preparing a
+//  draft and sending it are separate operations with a human
+//  approval between them, and every send is gated by
+//  core/outreach/policy.ts, which denies rather than warns.
+// ─────────────────────────────────────────────────────────────
+
+/// A sending identity. Deliberately its own table: outreach MUST NOT share a
+/// domain with transactional mail, because cold volume that annoys strangers
+/// degrades the reputation that delivers invoices, reports and password resets.
+model OutreachMailbox {
+  id       String @id @default(cuid())
+  label    String
+  fromEmail String @unique
+  fromName  String
+
+  /// Sends per day. Capped again in policy.ts by HARD_DAILY_CAP, and lower
+  /// still while warmingUp — a new domain at full volume is a spam signal.
+  dailyCap  Int     @default(25)
+  warmingUp Boolean @default(true)
+
+  /// Rolling counter, reset by the send runner when the UTC day rolls over.
+  sentToday   Int      @default(0)
+  lastResetAt DateTime @default(now())
+
+  /// Required in every message body. Absent, checkCompliance refuses the send.
+  postalAddress String
+  optOutText    String @default("Reply with STOP and I will not write again.")
+
+  active    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages OutreachMessage[]
+}
+
+/// One conversation with one contact about one prospect.
+model OutreachThread {
+  id         String       @id @default(cuid())
+  campaignId String
+  campaign   LinkCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  prospectId String
+  prospect   LinkProspect @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+
+  contactEmail String
+  contactName  String?
+  /// role | personal — from contact-discovery.
+  contactKind  String?
+  /// The page the address was published on. Under GDPR this is the record of
+  /// why contacting it was lawful, so it is required, not optional colour.
+  contactFoundOn String
+
+  /// resource_page | broken_link | unlinked_mention | roundup
+  angle String
+
+  /// discovered | drafted | awaiting_approval | sent | replied | bounced | closed
+  status String @default("discovered")
+
+  /// positive | negative | neutral — set when a reply is recorded.
+  replySentiment String?
+  repliedAt      DateTime?
+  lastSentAt     DateTime?
+  messagesSent   Int       @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages OutreachMessage[]
+
+  /// One thread per contact per prospect. Two campaigns must never
+  /// independently mail the same person about the same site.
+  @@unique([prospectId, contactEmail])
+  @@index([campaignId, status])
+}
+
+model OutreachMessage {
+  id       String         @id @default(cuid())
+  threadId String
+  thread   OutreachThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+
+  mailboxId String?
+  mailbox   OutreachMailbox? @relation(fields: [mailboxId], references: [id], onDelete: SetNull)
+
+  /// 0 is first contact; 1+ are follow-ups.
+  sequenceIndex Int @default(0)
+
+  subject String
+  body    String @db.Text
+
+  /// draft | rejected | approved | sent | failed | skipped
+  ///
+  /// `approved` is only ever written by a person. Nothing automated may set it,
+  /// which is what makes requiresApproval meaningful.
+  status String @default("draft")
+
+  /// Why a draft was rejected by validateDraft, or a send denied by policy.
+  validationProblems String[]
+  policyDenials      String[]
+
+  approvedBy String?
+  approvedAt DateTime?
+  sentAt     DateTime?
+  /// Provider message id, for tracing a delivery complaint back to a send.
+  providerId String?
+  error      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([threadId, sequenceIndex])
+  @@index([status])
+}
+
+/// Do-not-contact list. Global on purpose: an unsubscribe is a statement to the
+/// business, not to one campaign, and a person who opted out of one client's
+/// outreach must not be mailed about another.
+model OutreachSuppression {
+  id String @id @default(cuid())
+  /// A full address, or a bare domain to suppress everyone there.
+  value String @unique
+  /// unsubscribed | bounced | complained | manual | legal_request
+  reason String
+  notes  String?
+
+  createdAt DateTime @default(now())
+
+  @@index([reason])
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Branded properties — Phase 4
+//
+//  Deliberately NOT LinkPlacement rows. These links are excluded
+//  from the link KPI by construction, not by a filter someone can
+//  forget: they live in their own tables, and
+//  core/properties/policy.ts exposes countsTowardLinkKpi() —
+//  which returns false — so any report totalling links finds the
+//  reason in code search.
+//
+//  The purpose is brand SERP control and referral traffic. Built
+//  for PageRank, this is a link scheme. The hard cap of 8 per
+//  client lives in policy.ts and createProperty refuses past it.
+// ─────────────────────────────────────────────────────────────
+
+model BrandProperty {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  /// Host of the platform, e.g. "medium.com". Concentration on one host is a
+  /// footprint the audit flags.
+  platform String
+  /// The property itself, once created.
+  propertyUrl String?
+  handle      String?
+
+  /// Author identity presented on this property. Reusing one name across the
+  /// portfolio ties every property together permanently — auditFootprint
+  /// reports it as critical.
+  authorName String?
+  authorBio  String? @db.Text
+
+  /// planned | live | retired
+  status String @default("planned")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts BrandPropertyPost[]
+
+  @@unique([clientId, platform, handle])
+  @@index([clientId, status])
+}
+
+model BrandPropertyPost {
+  id         String        @id @default(cuid())
+  propertyId String
+  property   BrandProperty @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  title    String
+  bodyHtml String  @db.Text
+  liveUrl  String?
+
+  /// draft | rejected | approved | published
+  status String @default("draft")
+
+  /// Anchors used for links back to the client, and how policy.ts classified
+  /// them: brand | branded_url | generic | exact_match. An exact_match anchor
+  /// is refused at draft time, so a stored one means it was forced by hand.
+  clientAnchors  String[]
+  anchorVerdicts String[]
+
+  /// Highest similarity against any existing post at draft time, 0..1. Kept so
+  /// the portfolio's duplication trend is visible over time rather than only at
+  /// the moment of writing.
+  highestSimilarity Float?
+  /// Where the first client link sits, 0..1 through the post. Identical values
+  /// across posts mean a template rather than an editorial choice.
+  linkPosition Float?
+  wordCount    Int?
+
+  /// Why a draft was refused by checkPostPolicy.
+  policyProblems String[]
+
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([propertyId, status])
+  @@index([publishedAt])
 }
