@@ -25,16 +25,16 @@ const STATUS_STYLE: Record<string, string> = {
   changed: 'text-sky-400 bg-sky-400/10 border-sky-400/20',
   lost: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
   page_gone: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
-  unreachable: 'text-white/40 bg-white/[0.04] border-white/10',
-  pending: 'text-white/40 bg-white/[0.04] border-white/10',
+  unreachable: 'text-slate-400 bg-white/[0.04] border-slate-200',
+  pending: 'text-slate-400 bg-white/[0.04] border-slate-200',
   consistent: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
   inconsistent: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
-  unverified: 'text-white/40 bg-white/[0.04] border-white/10',
+  unverified: 'text-slate-400 bg-white/[0.04] border-slate-200',
   not_found: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
 };
 
 function Pill({ status }: { status: string }) {
-  const style = STATUS_STYLE[status] ?? 'text-white/40 bg-white/[0.04] border-white/10';
+  const style = STATUS_STYLE[status] ?? 'text-slate-400 bg-white/[0.04] border-slate-200';
   return (
     <span className={`inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-medium ${style}`}>
       {status.replace(/_/g, ' ')}
@@ -53,12 +53,12 @@ function Stat({
   const valueColor =
     tone === 'good' ? 'text-emerald-400'
       : tone === 'bad' ? 'text-rose-400'
-        : tone === 'muted' ? 'text-white/40'
-          : 'text-white';
+        : tone === 'muted' ? 'text-slate-400'
+          : 'text-slate-900';
 
   return (
-    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-      <div className="text-[11px] font-medium uppercase tracking-wider text-white/40">{label}</div>
+    <div className="rounded-xl border border-white/[0.06] bg-slate-50 p-4">
+      <div className="text-[11px] font-medium uppercase tracking-wider text-slate-400">{label}</div>
       <div className={`mt-1.5 text-2xl font-semibold tabular-nums ${valueColor}`}>{value}</div>
       {hint && <div className="mt-1 text-[11px] leading-snug text-white/30">{hint}</div>}
     </div>
@@ -73,9 +73,9 @@ function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-xl border border-white/[0.06] bg-white/[0.02]">
+    <section className="rounded-xl border border-white/[0.06] bg-slate-50">
       <header className="border-b border-white/[0.06] px-4 py-3">
-        <h3 className="text-sm font-semibold text-white">{title}</h3>
+        <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
         {note && <p className="mt-0.5 text-[11px] leading-snug text-white/35">{note}</p>}
       </header>
       <div className="p-4">{children}</div>
@@ -86,7 +86,7 @@ function Panel({
 function Empty({ text, hint }: { text: string; hint?: string }) {
   return (
     <div className="py-8 text-center">
-      <p className="text-sm text-white/40">{text}</p>
+      <p className="text-sm text-slate-400">{text}</p>
       {hint && <p className="mt-1 text-[11px] text-white/25">{hint}</p>}
     </div>
   );
@@ -111,7 +111,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
           <div className="flex items-start gap-3">
             <ShieldAlert className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" />
             <div>
-              <h2 className="text-sm font-semibold text-white">Database unreachable</h2>
+              <h2 className="text-sm font-semibold text-slate-900">Database unreachable</h2>
               <p className="mt-1.5 text-sm leading-relaxed text-white/50">
                 The dashboard could not read its data. Nothing is broken in the link
                 building module itself — this is the database connection.
@@ -141,8 +141,8 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
   return (
     <div className="p-6 lg:p-8">
       <header className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight text-white">Link Building</h1>
-        <p className="mt-1 text-sm text-white/40">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Link Building</h1>
+        <p className="mt-1 text-sm text-slate-400">
           {data.campaigns.length} campaign{data.campaigns.length === 1 ? '' : 's'} ·{' '}
           {links.total} tracked placement{links.total === 1 ? '' : 's'}
         </p>
@@ -155,8 +155,8 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             onClick={() => setTab(id)}
             className={`flex items-center gap-2 border-b-2 px-3.5 py-2.5 text-sm transition-colors ${
               tab === id
-                ? 'border-[#818cf8] text-white'
-                : 'border-transparent text-white/40 hover:text-white/70'
+                ? 'border-[#818cf8] text-slate-900'
+                : 'border-transparent text-slate-400 hover:text-slate-600'
             }`}
           >
             <Icon className="h-3.5 w-3.5" />
@@ -200,10 +200,10 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
           </div>
 
           {links.unreachable > 0 && (
-            <div className="flex items-start gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+            <div className="flex items-start gap-2.5 rounded-xl border border-white/[0.06] bg-slate-50 px-4 py-3">
               <HelpCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-white/30" />
-              <p className="text-[12px] leading-relaxed text-white/40">
-                <span className="font-medium text-white/60">
+              <p className="text-[12px] leading-relaxed text-slate-400">
+                <span className="font-medium text-slate-500">
                   {links.unreachable} placement{links.unreachable === 1 ? '' : 's'} could not be
                   checked
                 </span>{' '}
@@ -220,20 +220,20 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             >
               <dl className="space-y-2.5 text-sm">
                 {[
-                  ['Discovered, not yet assessed', prospects.discovered, 'text-white/60'],
+                  ['Discovered, not yet assessed', prospects.discovered, 'text-slate-500'],
                   ['Qualified', prospects.qualified, 'text-emerald-400'],
-                  ['Rejected', prospects.rejected, 'text-white/40'],
+                  ['Rejected', prospects.rejected, 'text-slate-400'],
                   ['Contacted', prospects.contacted, 'text-sky-400'],
                 ].map(([label, value, color]) => (
                   <div key={label as string} className="flex justify-between">
-                    <dt className="text-white/40">{label as string}</dt>
+                    <dt className="text-slate-400">{label as string}</dt>
                     <dd className={`font-medium tabular-nums ${color as string}`}>{value as number}</dd>
                   </div>
                 ))}
                 {prospects.averageScore !== null && (
                   <div className="flex justify-between border-t border-white/[0.06] pt-2.5">
-                    <dt className="text-white/40">Average quality score</dt>
-                    <dd className="font-medium tabular-nums text-white">
+                    <dt className="text-slate-400">Average quality score</dt>
+                    <dd className="font-medium tabular-nums text-slate-900">
                       {prospects.averageScore.toFixed(0)}/100
                     </dd>
                   </div>
@@ -253,13 +253,13 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                   ['Could not read', citations.unverified],
                 ].map(([label, value]) => (
                   <div key={label as string} className="flex justify-between">
-                    <dt className="text-white/40">{label as string}</dt>
-                    <dd className="font-medium tabular-nums text-white">{value as number}</dd>
+                    <dt className="text-slate-400">{label as string}</dt>
+                    <dd className="font-medium tabular-nums text-slate-900">{value as number}</dd>
                   </div>
                 ))}
                 <div className="flex justify-between border-t border-white/[0.06] pt-2.5">
-                  <dt className="text-white/40">Followable links among them</dt>
-                  <dd className="font-medium tabular-nums text-white">{citations.followableLinks}</dd>
+                  <dt className="text-slate-400">Followable links among them</dt>
+                  <dd className="font-medium tabular-nums text-slate-900">{citations.followableLinks}</dd>
                 </div>
               </dl>
             </Panel>
@@ -286,15 +286,15 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                     {data.campaigns.map((c) => (
                       <tr key={c.id}>
                         <td className="py-2.5">
-                          <span className="text-white">{c.name}</span>
+                          <span className="text-slate-900">{c.name}</span>
                           <span className="ml-2 text-[11px] text-white/30">{c.clientName}</span>
                           {!c.enabled && (
                             <span className="ml-2 text-[11px] text-amber-400/70">paused</span>
                           )}
                         </td>
                         <td className="py-2.5 text-white/50">{c.targetDomain}</td>
-                        <td className="py-2.5 text-right tabular-nums text-white/70">{c.placements}</td>
-                        <td className="py-2.5 text-right tabular-nums text-white/70">{c.prospects}</td>
+                        <td className="py-2.5 text-right tabular-nums text-slate-600">{c.placements}</td>
+                        <td className="py-2.5 text-right tabular-nums text-slate-600">{c.prospects}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -341,7 +341,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                         href={c.sourceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-auto flex items-center gap-1 text-[11px] text-white/30 hover:text-white/60"
+                        className="ml-auto flex items-center gap-1 text-[11px] text-white/30 hover:text-slate-500"
                       >
                         {host(c.sourceUrl)}
                         <ExternalLink className="h-3 w-3" />
@@ -408,7 +408,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-white hover:text-[#818cf8]"
+                      className="text-sm text-slate-900 hover:text-[#818cf8]"
                     >
                       {p.domain}
                     </a>
@@ -433,7 +433,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 {prospects.topRejects.map((r) => (
                   <span
                     key={r.reason}
-                    className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1 text-[12px] text-white/50"
+                    className="rounded-lg border border-white/[0.06] bg-slate-50 px-2.5 py-1 text-[12px] text-white/50"
                   >
                     {r.reason} <span className="ml-1 tabular-nums text-white/30">{r.count}</span>
                   </span>
@@ -476,7 +476,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                     className="flex flex-wrap items-center gap-3 rounded-lg border border-white/[0.05] bg-white/[0.015] px-3.5 py-2.5"
                   >
                     <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 text-rose-400/70" />
-                    <span className="text-sm text-white">{p.directory}</span>
+                    <span className="text-sm text-slate-900">{p.directory}</span>
                     <span className="text-[11px] text-rose-300/70">
                       {p.mismatches.join(', ')}
                     </span>
@@ -485,7 +485,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                         href={p.listingUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-auto flex items-center gap-1 text-[11px] text-white/30 hover:text-white/60"
+                        className="ml-auto flex items-center gap-1 text-[11px] text-white/30 hover:text-slate-500"
                       >
                         open <ExternalLink className="h-3 w-3" />
                       </a>
@@ -526,13 +526,13 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                     ) : (
                       <AlertTriangle className="h-3.5 w-3.5 text-white/30" />
                     )}
-                    <span className="text-sm text-white">{m.fromEmail}</span>
+                    <span className="text-sm text-slate-900">{m.fromEmail}</span>
                     {m.warmingUp && (
                       <span className="rounded bg-amber-400/10 px-1.5 py-0.5 text-[10px] text-amber-400">
                         warming up
                       </span>
                     )}
-                    <span className="ml-auto text-[11px] tabular-nums text-white/40">
+                    <span className="ml-auto text-[11px] tabular-nums text-slate-400">
                       {m.sentToday} / {m.dailyCap} today
                     </span>
                   </div>
@@ -555,7 +555,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                     className="rounded-lg border border-white/[0.05] bg-white/[0.015] p-3.5"
                   >
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
-                      <span className="text-white/60">{m.contactEmail}</span>
+                      <span className="text-slate-500">{m.contactEmail}</span>
                       <span className="text-white/25">about {m.domain}</span>
                       {m.problems.length > 0 && (
                         <span className="rounded bg-rose-400/10 px-1.5 py-0.5 text-rose-300/80">
@@ -563,7 +563,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                         </span>
                       )}
                     </div>
-                    <div className="mt-2 text-sm font-medium text-white">{m.subject}</div>
+                    <div className="mt-2 text-sm font-medium text-slate-900">{m.subject}</div>
                     <pre className="mt-1.5 whitespace-pre-wrap font-sans text-[12px] leading-relaxed text-white/45">
                       {m.body}
                     </pre>
@@ -623,3 +623,4 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
     </div>
   );
 }
+

@@ -12,11 +12,12 @@ export default async function PreviewLinksPage({
   const { campaign } = await searchParams;
   const data = await getDashboardData(campaign);
   return (
-    <div className="min-h-screen bg-[#08080f] flex">
+    <div className="min-h-screen bg-[#f8f9fa] flex">
       <main className="flex-1 overflow-auto">
         <LinksDashboard data={data} />
       </main>
     </div>
   );
 }
+
 
