@@ -25,15 +25,21 @@ export async function GET(req: NextRequest) {
   }
 
   const params = req.nextUrl.searchParams;
-  const mailboxId = params.get('mailboxId');
+  let mailboxId = params.get('mailboxId');
+
   if (!mailboxId) {
-    return NextResponse.json(
-      { ok: false, error: 'mailboxId is required — drafts need a sender identity.' },
-      { status: 400 }
-    );
+    const firstMailbox = await db.outreachMailbox.findFirst();
+    if (firstMailbox) {
+      mailboxId = firstMailbox.id;
+    } else {
+      return NextResponse.json(
+        { ok: false, error: 'No mailbox found. Create one in the database first.' },
+        { status: 400 }
+      );
+    }
   }
 
-  const maxParam = Number(params.get('max'));
+  const maxParam = parseInt(params.get('max') ?? '', 10);
   const angleParam = params.get('angle');
   const angles = ['resource_page', 'broken_link', 'unlinked_mention', 'roundup'];
 
