@@ -3,21 +3,14 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 async function run() {
   try {
-    const existing = await prisma.outreachMailbox.findFirst();
-    if (existing) {
-      console.log('ID:', existing.id);
-      return;
-    }
-    const mailbox = await prisma.outreachMailbox.create({
-      data: {
-        label: 'Main Outreach',
-        fromEmail: 'hello@outreach.searchprex.com',
-        fromName: 'Mubashar',
-        warmingUp: true,
-        dailyCap: 25
-      }
-    });
-    console.log('ID:', mailbox.id);
+    const total = await prisma.linkProspect.count();
+    const qualified = await prisma.linkProspect.count({ where: { status: 'qualified' } });
+    const rejected = await prisma.linkProspect.count({ where: { status: 'rejected' } });
+    const discovered = await prisma.linkProspect.count({ where: { status: 'discovered' } });
+    const emails = await prisma.outreachMessage.count();
+    const campaigns = await prisma.linkCampaign.findMany({ select: { name: true, _count: { select: { prospects: true } } } });
+    
+    console.log({ total, qualified, rejected, discovered, emails, campaigns });
   } catch (e) {
     console.error(e);
   } finally {
