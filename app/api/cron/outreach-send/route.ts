@@ -5,7 +5,7 @@ export const maxDuration = 300;
 
 export async function GET(req: NextRequest) {
   const auth = req.headers.get('authorization');
-  if (auth !== \Bearer \\\) {
+  if (auth !== 'Bearer 431b1da10b37bdcd971b2dbe0ef24091049b2a900ef7e4e2') {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 

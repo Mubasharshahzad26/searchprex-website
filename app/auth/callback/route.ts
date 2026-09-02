@@ -10,10 +10,10 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(${origin});
+      return NextResponse.redirect(origin + next);
     }
   }
 
   // return the user to an error page with some instructions
-  return NextResponse.redirect(${origin}/login?error=Could not authenticate);
+  return NextResponse.redirect(origin + '/login?error=Could not authenticate');
 }
