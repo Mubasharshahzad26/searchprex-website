@@ -23,8 +23,9 @@
 // dominant value in its stylesheet). It is deliberately NOT the SearchPrex
 // purple — this is a different product, and it should read as one.
 
-import { useEffect, useRef } from "react";
-import { ArrowUpRight, Check, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Check, X, Zap, FileText, BarChart2 } from "lucide-react";
 
 const BRAND = "#7952ff";
 
@@ -47,33 +48,231 @@ const stats = [
   { value: "<10 min", label: "Full site scan", detail: "Connected to your GSC" },
 ];
 
-export default function NicheSeoProShowcase() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+/* ─── Hero right-side mockup (From NicheSEO Pro Home) ─── */
+function HeroMockup() {
+  const [step, setStep] = useState(0);
 
-  // Same playback contract as the rest of the page: no autoplay attribute,
-  // preload="none" so the 5MB file is only fetched once this section is
-  // reached, playback started on intersection, and skipped entirely when the
-  // visitor has asked for reduced motion.
   useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.preload = "auto";
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { threshold: 0.25 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    const interval = setInterval(() => {
+      setStep((s) => (s + 1) % 6);
+    }, 2200);
+    return () => clearInterval(interval);
   }, []);
 
+  const activeTab = Math.floor(step / 2); // 0, 0, 1, 1, 2, 2
+  const nextTab = Math.floor((step + 1) / 2) % 3; // 0, 1, 1, 2, 2, 0
+
+  const TABS = [
+    { id: 0, label: "SEO Autopilot", icon: Zap },
+    { id: 1, label: "Content Engine", icon: FileText },
+    { id: 2, label: "Indexing Tracker", icon: BarChart2 },
+  ];
+
+  const getCursorPos = (tab: number) => {
+    switch (tab) {
+      case 0:
+        return { top: "22%", left: "12%" };
+      case 1:
+        return { top: "35%", left: "12%" };
+      case 2:
+        return { top: "48%", left: "12%" };
+      default:
+        return { top: "22%", left: "12%" };
+    }
+  };
+
+  return (
+    <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] min-h-[340px] sm:min-h-[420px] bg-white rounded-lg overflow-hidden flex font-sans shadow-sm border border-gray-200/80">
+      {/* Sidebar */}
+      <div className="w-[32%] sm:w-[28%] bg-[#f9f9fb] border-r border-gray-200 flex flex-col p-3 sm:p-5 z-20">
+        <div className="font-black text-base sm:text-xl tracking-tighter mb-4 sm:mb-8 text-black">
+          NicheSEO
+        </div>
+        <div className="flex flex-col gap-1.5 sm:gap-2 relative">
+          {TABS.map((tab, i) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setStep(i * 2)}
+              className={`flex items-center gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors z-10 text-left ${
+                activeTab === i
+                  ? "bg-white shadow-sm border border-gray-100 text-[#7952ff]"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              <tab.icon
+                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${
+                  activeTab === i ? "text-[#7952ff]" : "text-gray-400"
+                }`}
+              />
+              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="sm:hidden text-[10px] leading-tight truncate">
+                {tab.label.split(" ")[0]}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 bg-[#fcfcfd] p-3 sm:p-6 lg:p-8 relative overflow-hidden flex flex-col">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="w-full h-full flex flex-col"
+          >
+            <div className="text-base sm:text-2xl font-bold text-black mb-3 sm:mb-6">
+              {TABS[activeTab].label}
+            </div>
+
+            {activeTab === 0 && (
+              <div className="grid grid-cols-2 gap-2 sm:gap-4 flex-1">
+                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
+                  <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
+                    Pages Published
+                  </div>
+                  <div className="text-xl sm:text-4xl font-bold text-black">
+                    7,826
+                  </div>
+                </div>
+                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
+                  <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
+                    Success Rate
+                  </div>
+                  <div className="text-xl sm:text-4xl font-bold text-emerald-500">
+                    92%
+                  </div>
+                </div>
+                <div className="col-span-2 bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm h-[100px] sm:h-[140px] flex flex-col justify-end gap-1">
+                  <div className="flex items-end gap-1 sm:gap-1.5 h-full w-full">
+                    {[30, 50, 40, 70, 60, 90, 85, 100].map((h, i) => (
+                      <div
+                        key={i}
+                        className="flex-1 bg-emerald-400 rounded-t-sm"
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 1 && (
+              <div className="grid grid-cols-1 gap-2.5 sm:gap-4 flex-1">
+                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
+                  <div>
+                    <div className="text-xs sm:text-sm font-bold text-black mb-0.5 sm:mb-1">
+                      AI Article Generation
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-gray-500">
+                      High-intent keyword clusters
+                    </div>
+                  </div>
+                  <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-emerald-100 text-emerald-700 text-[9px] sm:text-[10px] uppercase font-bold rounded-full">
+                    Active
+                  </div>
+                </div>
+                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex-1 flex flex-col justify-center">
+                  <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-2 sm:mb-4 uppercase tracking-wide">
+                    Recent Content
+                  </div>
+                  <div className="space-y-2 sm:space-y-4">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="flex gap-2.5 sm:gap-4 items-center">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gray-100 flex-shrink-0" />
+                        <div className="flex-1 space-y-1 sm:space-y-2">
+                          <div className="h-1.5 sm:h-2 bg-gray-200 rounded w-3/4" />
+                          <div className="h-1.5 sm:h-2 bg-gray-100 rounded w-1/2" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 2 && (
+              <div className="grid grid-cols-2 gap-2 sm:gap-4 flex-1">
+                <div className="col-span-2 bg-white p-3 sm:p-6 rounded-xl border border-gray-100 shadow-sm flex gap-6 sm:gap-12">
+                  <div>
+                    <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
+                      Indexed URLs
+                    </div>
+                    <div className="text-xl sm:text-4xl font-bold text-black">
+                      3,492
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
+                      Pending
+                    </div>
+                    <div className="text-xl sm:text-4xl font-bold text-amber-500">
+                      128
+                    </div>
+                  </div>
+                </div>
+                <div className="col-span-2 bg-white p-0 rounded-xl border border-gray-100 shadow-sm h-[90px] sm:h-[130px] overflow-hidden relative">
+                  <svg
+                    className="absolute bottom-0 w-full h-[120%]"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0,80 L20,70 L40,85 L60,40 L80,50 L100,20 L100,100 L0,100 Z"
+                      fill="#e8f0fe"
+                    />
+                    <path
+                      d="M0,80 L20,70 L40,85 L60,40 L80,50 L100,20"
+                      fill="none"
+                      stroke="#3b82f6"
+                      strokeWidth="2.5"
+                    />
+                  </svg>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Animated Cursor */}
+      <motion.div
+        className="hidden sm:block absolute z-50 drop-shadow-lg pointer-events-none origin-top-left"
+        animate={{
+          ...getCursorPos(nextTab),
+          scale: step % 2 === 0 ? [1, 0.85, 1] : 1,
+        }}
+        transition={{
+          top: { duration: 0.7, ease: "backInOut" },
+          left: { duration: 0.7, ease: "backInOut" },
+          scale: { duration: 0.3 },
+        }}
+      >
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.1037 25.1092L6.1511 4.50974L24.8197 15.6599L15.932 17.518L10.1037 25.1092Z"
+            fill="white"
+            stroke="black"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </motion.div>
+    </div>
+  );
+}
+
+export default function NicheSeoProShowcase() {
   return (
     <section
       id="nicheseo-pro"
@@ -106,27 +305,10 @@ export default function NicheSeoProShowcase() {
         {/* ── The dashboard, running ── */}
         <div className="mt-10 overflow-hidden rounded-xl border border-[#e6e8f0] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
           <div
-            className="relative border-b border-[#eef0f6] bg-[#f2f4f9] p-3 sm:p-4"
+            className="border-b border-[#eef0f6] bg-[#f2f4f9] p-2.5 sm:p-4 md:p-6"
             style={{ boxShadow: "inset 0 4px 15px rgba(0,0,0,0.05)" }}
           >
-            <video
-              ref={videoRef}
-              className="aspect-video w-full rounded-[6px] object-cover shadow-sm"
-              poster="/images/video-posters/nicheseo-pro.png"
-              muted
-              loop
-              playsInline
-              preload="none"
-              aria-label="The NicheSEO Pro dashboard running an autopilot cycle: content generated, published live, submitted to Google, and verified."
-            >
-              <source src="/video/nicheseo-pro.mp4" type="video/mp4" />
-            </video>
-            <span
-              className="pointer-events-none absolute bottom-6 left-6 rounded-md px-2 py-1 text-xs font-bold uppercase tracking-widest text-white backdrop-blur-sm sm:bottom-7 sm:left-7"
-              style={{ background: `${BRAND}e6` }}
-            >
-              Live autopilot run
-            </span>
+            <HeroMockup />
           </div>
 
           {/* ── Stat strip ── */}
