@@ -41,21 +41,10 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
 
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-[#534AB7]/20 border border-[#534AB7]/40 flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="7.5" cy="7.5" r="5" stroke="#818cf8" strokeWidth="2"/>
-                <path d="M11.5 11.5L16 16" stroke="#818cf8" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </div>
-            <span className="text-white text-lg font-semibold tracking-tight">
-              Search<strong className="text-[#818cf8]">prex</strong>
-            </span>
-          </Link>
-          <h1 className="mt-6 text-2xl font-bold text-white tracking-tight">Create your account</h1>
-          <p className="mt-1 text-sm text-white/40">Free to start — no credit card required</p>
-        </div>
+          <div className="text-center mb-8">
+            <h1 className="mt-6 text-2xl font-black text-white tracking-tight">Create your account</h1>
+            <p className="mt-1 text-sm text-[#94a3b8]">Free to start — no credit card required</p>
+          </div>
 
         {/* Card */}
         <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8">

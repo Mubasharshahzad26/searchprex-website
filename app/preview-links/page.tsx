@@ -1,3 +1,4 @@
+export const metadata = { robots: { index: false } };
 import { getDashboardData } from '@/lib/linkbuilding/dashboard-data';
 import LinksDashboard from '@/components/linkbuilding/LinksDashboard';
 
@@ -18,3 +19,4 @@ export default async function PreviewLinksPage({
     </div>
   );
 }
+

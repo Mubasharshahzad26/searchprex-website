@@ -1,3 +1,4 @@
+export const metadata = { robots: { index: false } };
 // ═══════════════════════════════════════════════════════════
 //  TEMPORARY — not committed, safe to delete any time.
 //
@@ -95,3 +96,4 @@ export default async function LbPreviewPage() {
     </div>
   );
 }
+

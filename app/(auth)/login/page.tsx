@@ -82,9 +82,6 @@ export default function LoginPage() {
  
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex justify-center">
-            <Logo size="md" variant="dark" />
-          </Link>
           <h1 className="mt-6 text-2xl font-black text-[#0a0f2e] tracking-tight">Welcome back</h1>
           <p className="mt-1 text-sm text-[#64748b]">Sign in to your dashboard</p>
         </div>
