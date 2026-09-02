@@ -1,4 +1,4 @@
-'use client';
+ï»¿'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -479,7 +479,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 <p className="text-sm leading-relaxed text-blue-900">
                   <span className="font-bold">Excluded from the link KPI.</span>{' '}
                   Branded properties exist for brand SERP control and referral traffic. Built for
-                  PageRank, they are a link scheme — which is why the cap is hard.
+                  PageRank, they are a link scheme â€” which is why the cap is hard.
                 </p>
               </div>
 
@@ -495,7 +495,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 />
               </div>
 
-              <Panel title="Footprint audit" note="Run monthly — it finds what an investigator would.">
+              <Panel title="Footprint audit" note="Run monthly â€” it finds what an investigator would.">
                 <Empty
                   text="Run the audit from the CLI"
                   hint="npx tsx scripts/properties.ts --audit <clientId>"
@@ -511,7 +511,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 <p className="text-sm leading-relaxed text-sky-900">
                   <span className="font-bold">Citations are not links.</span> Most
                   carry nofollow and Google Business Profile carries no link at all. Their value is
-                  entity confirmation through consistency — never add these to a link count.
+                  entity confirmation through consistency â€” never add these to a link count.
                 </p>
               </div>
 
@@ -521,7 +521,7 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 <Stat label="Inconsistent" value={citations.inconsistent} tone="bad" />
                 <Stat
                   label="Average NAP"
-                  value={citations.averageNap === null ? '—' : \\%\}
+                  value={citations.averageNap === null ? 'â€”' : \\%\}
                   hint="Across comparable fields only"
                 />
               </div>
@@ -571,3 +571,4 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
     </div>
   );
 }
+
