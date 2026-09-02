@@ -37,7 +37,7 @@ const STATUS_STYLE: Record<string, string> = {
 function Pill({ status }: { status: string }) {
   const style = STATUS_STYLE[status] ?? 'text-slate-600 bg-slate-50 border-slate-200';
   return (
-    <span className={\inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium shadow-sm \\}>
+    <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium shadow-sm ${style}`}>
       {status.replace(/_/g, ' ')}
     </span>
   );
@@ -63,10 +63,8 @@ function Stat({
       className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</div>
-      <div className={\mt-2 text-3xl font-bold tabular-nums tracking-tight \\}>{value}</div>
+      <div className={`mt-2 text-3xl font-bold tabular-nums tracking-tight ${valueColor}`}>{value}</div>
       {hint && <div className="mt-2 text-xs font-medium text-slate-400">{hint}</div>}
-      
-      {/* Decorative gradient blob */}
       <div className="absolute -bottom-6 -right-6 h-24 w-24 rounded-full bg-slate-50 opacity-50" />
     </motion.div>
   );
@@ -106,14 +104,6 @@ function Empty({ text, hint }: { text: string; hint?: string }) {
   );
 }
 
-function host(url: string) {
-  try {
-    return new URL(url).hostname.replace(/^www\./, '');
-  } catch {
-    return url;
-  }
-}
-
 export default function LinksDashboard({ data }: { data: DashboardData }) {
   const [tab, setTab] = useState<Tab>('overview');
 
@@ -141,7 +131,6 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
 
   return (
     <div className="mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 font-sans">
-      {/* Header */}
       <header className="mb-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
@@ -151,13 +140,11 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full">
-            <Clock className="h-3.5 w-3.5" />
-            Live Data
+            <Clock className="h-3.5 w-3.5" /> Live Data
           </div>
         </div>
       </header>
 
-      {/* Tabs */}
       <nav className="mb-8 flex space-x-1 overflow-x-auto rounded-xl bg-slate-100 p-1 shadow-inner hide-scrollbar">
         {TABS.map(({ id, label, icon: Icon }) => {
           const isActive = tab === id;
@@ -165,35 +152,25 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             <button
               key={id}
               onClick={() => setTab(id)}
-              className={\elative flex min-w-max items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 \\}
+              className={`relative flex min-w-max items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
+                isActive 
+                  ? 'text-slate-900 shadow-sm' 
+                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200/50'
+              }`}
             >
               {isActive && (
-                <motion.div
-                  layoutId="active-tab"
-                  className="absolute inset-0 rounded-lg bg-white"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
+                <motion.div layoutId="active-tab" className="absolute inset-0 rounded-lg bg-white" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
               )}
               <span className="relative z-10 flex items-center gap-2">
-                <Icon className={\h-4 w-4 \\} />
-                {label}
+                <Icon className={`h-4 w-4 ${isActive ? 'text-blue-600' : 'opacity-70'}`} /> {label}
               </span>
             </button>
           );
         })}
       </nav>
 
-      {/* Content Area */}
       <AnimatePresence mode="wait">
-        <motion.div
-          key={tab}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-        >
-          
-          {/* OVERVIEW TAB */}
+        <motion.div key={tab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
           {tab === 'overview' && (
             <div className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -202,36 +179,18 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 <Stat label="Pending Outreach" value={outreach.sent} hint="Emails sent, awaiting reply" />
                 <Stat label="Total Prospects" value={prospects.discovered} hint="In the pipeline" />
               </div>
-
               <Panel title="Active Campaigns" note="The engine evaluates these domains weekly.">
-                {campaigns.length === 0 ? (
-                  <Empty text="No active campaigns" hint="Create one via the CLI." />
-                ) : (
+                {campaigns.length === 0 ? <Empty text="No active campaigns" hint="Create one via the CLI." /> : (
                   <div className="space-y-3">
                     {campaigns.map((c, i) => (
-                      <motion.div 
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        key={c.id} 
-                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4 transition-colors hover:bg-slate-100/70"
-                      >
+                      <motion.div key={c.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4 hover:bg-slate-100/70">
                         <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="text-sm font-bold text-slate-900">{c.clientName}</h4>
-                            {!c.enabled && <Pill status="paused" />}
-                          </div>
-                          <div className="mt-1 text-xs font-medium text-slate-500">{c.targetDomain}</div>
+                          <div className="flex items-center gap-2"><h4 className="text-sm font-bold">{c.clientName}</h4>{!c.enabled && <Pill status="paused" />}</div>
+                          <div className="mt-1 text-xs text-slate-500">{c.targetDomain}</div>
                         </div>
                         <div className="flex items-center gap-6">
-                          <div className="text-right">
-                            <div className="text-xs font-medium text-slate-400 uppercase tracking-wide">Placements</div>
-                            <div className="text-base font-semibold text-slate-900">{c.placements}</div>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-xs font-medium text-slate-400 uppercase tracking-wide">Prospects</div>
-                            <div className="text-base font-semibold text-slate-900">{c.prospects}</div>
-                          </div>
+                          <div className="text-right"><div className="text-xs text-slate-400">Placements</div><div className="text-base font-semibold">{c.placements}</div></div>
+                          <div className="text-right"><div className="text-xs text-slate-400">Prospects</div><div className="text-base font-semibold">{c.prospects}</div></div>
                         </div>
                       </motion.div>
                     ))}
@@ -241,7 +200,6 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             </div>
           )}
 
-          {/* LINKS TAB */}
           {tab === 'links' && (
             <div className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -250,41 +208,19 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 <Stat label="Nofollowed" value={links.nofollowed} tone="muted" hint="Still passes traffic" />
                 <Stat label="Pending Check" value={links.pending} hint="Awaiting next cron" />
               </div>
-
               <Panel title="Recent Checks" note="The last 10 verification results across all campaigns.">
-                {data.recentChecks.length === 0 ? (
-                  <Empty text="No checks run yet" hint="The verification cron runs every 12 hours." />
-                ) : (
+                {data.recentChecks.length === 0 ? <Empty text="No checks run yet" hint="The verification cron runs every 12 hours." /> : (
                   <div className="space-y-3">
                     {data.recentChecks.map((c, i) => (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        key={c.id} 
-                        className="flex flex-col md:flex-row md:items-center gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4"
-                      >
+                      <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="flex flex-col md:flex-row md:items-center gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3">
                             <Pill status={c.status} />
-                            <span className="text-xs font-medium text-slate-400 truncate">
-                              Checked {new Date(c.checkedAt).toLocaleDateString()}
-                            </span>
+                            <span className="text-xs text-slate-400 truncate">Checked {new Date(c.checkedAt).toLocaleDateString()}</span>
                           </div>
-                          <a 
-                            href={c.pageUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="mt-2 block truncate text-sm font-semibold text-slate-900 hover:text-blue-600 transition-colors"
-                          >
-                            {c.pageUrl}
-                          </a>
+                          <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 block truncate text-sm font-semibold hover:text-blue-600">{c.sourceUrl}</a>
                         </div>
-                        {c.error && (
-                          <div className="rounded-lg border border-rose-100 bg-rose-50/50 px-3 py-2 text-xs font-medium text-rose-700">
-                            {c.error}
-                          </div>
-                        )}
+                        {c.reasons && c.reasons.length > 0 && <div className="rounded-lg border border-rose-100 bg-rose-50/50 px-3 py-2 text-xs text-rose-700">{c.reasons.join(', ')}</div>}
                       </motion.div>
                     ))}
                   </div>
@@ -293,70 +229,42 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             </div>
           )}
 
-          {/* PROSPECTS TAB */}
           {tab === 'prospects' && (
             <div className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <Stat label="Discovered" value={prospects.discovered} hint="In the database" />
-                <Stat label="Qualified" value={prospects.qualified} tone="good" hint="Passed automated checks" />
-                <Stat label="Rejected" value={prospects.rejected} tone="bad" hint="Failed quality thresholds" />
-                <Stat 
-                  label="Average Score" 
-                  value={prospects.averageScore === null ? 'N/A' : prospects.averageScore.toFixed(0)} 
-                  hint="0-100 quality metric" 
-                />
+                <Stat label="Discovered" value={prospects.discovered} />
+                <Stat label="Qualified" value={prospects.qualified} tone="good" />
+                <Stat label="Rejected" value={prospects.rejected} tone="bad" />
+                <Stat label="Average Score" value={prospects.averageScore === null ? 'N/A' : prospects.averageScore.toFixed(0)} />
               </div>
-
               <div className="grid gap-6 lg:grid-cols-3">
                 <div className="lg:col-span-2">
                   <Panel title="Top Prospects" note="The highest scored opportunities awaiting outreach.">
-                    {data.topProspects.length === 0 ? (
-                      <Empty text="No qualified prospects found" />
-                    ) : (
+                    {data.topProspects.length === 0 ? <Empty text="No qualified prospects found" /> : (
                       <div className="space-y-3">
                         {data.topProspects.map((p, i) => (
-                          <motion.div 
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: i * 0.05 }}
-                            key={i} 
-                            className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-blue-200 hover:bg-blue-50/30 hover:shadow-sm"
-                          >
+                          <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4 hover:border-blue-200">
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2">
-                                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white shadow-sm text-xs font-bold text-slate-700">
-                                  {p.score}
-                                </span>
-                                <h4 className="text-sm font-bold text-slate-900 truncate">{p.domain}</h4>
+                                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white shadow-sm text-xs font-bold text-slate-700">{p.score}</span>
+                                <h4 className="text-sm font-bold truncate">{p.domain}</h4>
                               </div>
-                              <p className="mt-1.5 text-xs font-medium text-slate-500 truncate">
-                                via: {p.discoveredVia}
-                              </p>
+                              <p className="mt-1.5 text-xs text-slate-500 truncate">via: {p.discoveredVia}</p>
                             </div>
-                            <a 
-                              href={p.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors whitespace-nowrap"
-                            >
-                              Visit <ExternalLink className="h-3 w-3" />
-                            </a>
+                            <a href={p.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold shadow-sm border hover:bg-slate-50">Visit <ExternalLink className="h-3 w-3" /></a>
                           </motion.div>
                         ))}
                       </div>
                     )}
                   </Panel>
                 </div>
-                
                 <div>
                   <Panel title="Rejection Reasons" note="Why domains fail our checks.">
-                    {prospects.topRejects.length === 0 ? (
-                      <Empty text="No rejected prospects yet" />
-                    ) : (
+                    {prospects.topRejects.length === 0 ? <Empty text="No rejected prospects yet" /> : (
                       <div className="space-y-2">
                         {prospects.topRejects.map((r, i) => (
                           <div key={i} className="flex items-center justify-between rounded-lg bg-slate-50 p-3 border border-slate-100">
-                            <span className="text-xs font-medium text-slate-700">{r.reason.replace(/_/g, ' ')}</span>
+                            <span className="text-xs text-slate-700">{r.reason.replace(/_/g, ' ')}</span>
                             <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-bold text-slate-600">{r.count}</span>
                           </div>
                         ))}
@@ -368,7 +276,6 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
             </div>
           )}
 
-          {/* OUTREACH TAB */}
           {tab === 'outreach' && (
             <div className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -376,54 +283,21 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                 <Stat label="Approved, Unsent" value={outreach.approved} />
                 <Stat label="Sent" value={outreach.sent} />
                 <Stat label="Replied" value={outreach.replied} tone="good" />
-                <Stat label="Suppressed" value={outreach.suppressed} tone="muted" hint="Do not contact" />
+                <Stat label="Suppressed" value={outreach.suppressed} tone="muted" />
               </div>
-
               <div className="grid gap-6 lg:grid-cols-3">
                 <div className="lg:col-span-2">
                   <Panel title="Approval Queue" note="Read every one. Approving without reading is how this mails something embarrassing.">
-                    {data.approvalQueue.length === 0 ? (
-                      <Empty text="Nothing waiting for approval" />
-                    ) : (
+                    {data.approvalQueue.length === 0 ? <Empty text="Nothing waiting for approval" /> : (
                       <div className="space-y-4">
                         {data.approvalQueue.map((m, i) => (
-                          <motion.div 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.05 }}
-                            key={m.id} 
-                            className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
-                          >
+                          <motion.div key={m.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                             <div className="border-b border-slate-100 bg-slate-50/80 p-4">
-                              <div className="flex flex-wrap items-center justify-between gap-2">
-                                <div className="text-xs font-semibold text-slate-600">To: {m.contactEmail} <span className="font-normal text-slate-400">({m.domain})</span></div>
-                                {m.problems.length > 0 && (
-                                  <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-1 text-[10px] font-bold text-rose-600 border border-rose-100">
-                                    <AlertTriangle className="h-3 w-3" />
-                                    {m.problems.length} Problem{m.problems.length === 1 ? '' : 's'}
-                                  </span>
-                                )}
-                              </div>
-                              <div className="mt-2 text-sm font-bold text-slate-900">{m.subject}</div>
+                              <div className="text-xs font-semibold">To: {m.contactEmail}</div>
+                              <div className="mt-2 text-sm font-bold">{m.subject}</div>
                             </div>
                             <div className="p-4">
-                              <pre className="whitespace-pre-wrap font-sans text-[13px] leading-relaxed text-slate-700">
-                                {m.body}
-                              </pre>
-                              
-                              {m.problems.length > 0 && (
-                                <div className="mt-4 flex flex-wrap gap-2 pt-4 border-t border-slate-100">
-                                  {m.problems.map((p) => (
-                                    <span key={p} className="rounded-md bg-rose-50 px-2 py-1 text-[11px] font-medium text-rose-700 border border-rose-100">
-                                      {p}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                              
-                              <div className="mt-4 rounded-lg bg-slate-50 p-3 font-mono text-[11px] text-slate-500 border border-slate-200">
-                                npx tsx scripts/outreach.ts --approve {m.id} --by "your name"
-                              </div>
+                              <pre className="whitespace-pre-wrap font-sans text-[13px] text-slate-700">{m.body}</pre>
                             </div>
                           </motion.div>
                         ))}
@@ -431,36 +305,15 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
                     )}
                   </Panel>
                 </div>
-                
                 <div>
                   <Panel title="Sending Mailboxes" note="Warming up or Active.">
-                    {outreach.mailboxes.length === 0 ? (
-                      <Empty text="No mailbox configured" hint="Create one via CLI" />
-                    ) : (
+                    {outreach.mailboxes.length === 0 ? <Empty text="No mailbox configured" /> : (
                       <div className="space-y-3">
                         {outreach.mailboxes.map((m) => (
-                          <div key={m.id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                          <div key={m.id} className="rounded-xl border border-slate-200 bg-white p-4">
                             <div className="flex items-center gap-2">
-                              {m.active ? (
-                                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                              ) : (
-                                <AlertTriangle className="h-4 w-4 text-amber-500" />
-                              )}
-                              <span className="text-sm font-bold text-slate-900">{m.fromEmail}</span>
-                            </div>
-                            <div className="mt-3 flex items-center justify-between">
-                              {m.warmingUp ? (
-                                <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-bold text-amber-700 border border-amber-200">
-                                  Warming Up
-                                </span>
-                              ) : (
-                                <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-bold text-emerald-700 border border-emerald-200">
-                                  Active
-                                </span>
-                              )}
-                              <span className="text-xs font-bold tabular-nums text-slate-500">
-                                {m.sentToday} / {m.dailyCap} today
-                              </span>
+                              {m.active ? <CheckCircle2 className="h-4 w-4 text-emerald-500" /> : <AlertTriangle className="h-4 w-4 text-amber-500" />}
+                              <span className="text-sm font-bold">{m.fromEmail}</span>
                             </div>
                           </div>
                         ))}
@@ -471,98 +324,26 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
               </div>
             </div>
           )}
-          
-          {/* PROPERTIES TAB */}
+
           {tab === 'properties' && (
             <div className="space-y-6">
-              <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 shadow-sm">
-                <p className="text-sm leading-relaxed text-blue-900">
-                  <span className="font-bold">Excluded from the link KPI.</span>{' '}
-                  Branded properties exist for brand SERP control and referral traffic. Built for
-                  PageRank, they are a link scheme - which is why the cap is hard.
-                </p>
-              </div>
-
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <Stat label="Properties" value={properties.total} hint={\\ below the cap\} />
+                <Stat label="Properties" value={properties.total} />
                 <Stat label="Live" value={properties.live} />
                 <Stat label="Posts" value={properties.posts} />
-                <Stat
-                  label="Empty"
-                  value={properties.empty}
-                  tone={properties.empty > 0 ? 'bad' : 'muted'}
-                  hint="Unused properties are a liability"
-                />
+                <Stat label="Empty" value={properties.empty} tone={properties.empty > 0 ? 'bad' : 'muted'} />
               </div>
-
-              <Panel title="Footprint audit" note="Run monthly - it finds what an investigator would.">
-                <Empty
-                  text="Run the audit from the CLI"
-                  hint="npx tsx scripts/properties.ts --audit <clientId>"
-                />
-              </Panel>
             </div>
           )}
 
-          {/* CITATIONS TAB */}
           {tab === 'citations' && (
             <div className="space-y-6">
-              <div className="rounded-xl border border-sky-200 bg-sky-50 p-4 shadow-sm">
-                <p className="text-sm leading-relaxed text-sky-900">
-                  <span className="font-bold">Citations are not links.</span> Most
-                  carry nofollow and Google Business Profile carries no link at all. Their value is
-                  entity confirmation through consistency - never add these to a link count.
-                </p>
-              </div>
-
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <Stat label="To submit" value={citations.queued} hint="A person submits these" />
+                <Stat label="To submit" value={citations.queued} />
                 <Stat label="Consistent" value={citations.consistent} tone="good" />
                 <Stat label="Inconsistent" value={citations.inconsistent} tone="bad" />
-                <Stat
-                  label="Average NAP"
-                  value={citations.averageNap === null ? '-' : \\%\}
-                  hint="Across comparable fields only"
-                />
+                <Stat label="Average NAP" value={citations.averageNap === null ? '-' : `${citations.averageNap.toFixed(0)}%`} />
               </div>
-
-              <Panel title="Needs fixing" note="Listings whose details differ from the canonical record.">
-                {citations.problems.length === 0 ? (
-                  <Empty text="No inconsistencies found" hint="Or nothing has been verified yet" />
-                ) : (
-                  <div className="space-y-3">
-                    {citations.problems.map((p, i) => (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        key={i}
-                        className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4 hover:border-slate-200 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <AlertTriangle className="h-5 w-5 flex-shrink-0 text-amber-500" />
-                          <div>
-                            <div className="text-sm font-bold text-slate-900">{p.directory}</div>
-                            <div className="text-xs font-medium text-amber-600 mt-0.5">
-                              Mismatch: {p.mismatches.join(', ')}
-                            </div>
-                          </div>
-                        </div>
-                        {p.listingUrl && (
-                          <a
-                            href={p.listingUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors"
-                          >
-                            Visit Listing <ExternalLink className="h-3 w-3" />
-                          </a>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-              </Panel>
             </div>
           )}
 
@@ -571,5 +352,3 @@ export default function LinksDashboard({ data }: { data: DashboardData }) {
     </div>
   );
 }
-
-
