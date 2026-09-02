@@ -10,7 +10,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  FileText, BookOpen, GraduationCap, Newspaper,
+  FileText, BookOpen, GraduationCap, Newspaper, ListChecks,
   ArrowRight, Clock, ExternalLink,
 } from "lucide-react";
 import {
@@ -23,7 +23,28 @@ import {
 import { color, heading, radius, text } from "@/lib/design-tokens";
 
 /* ─── RESOURCE CATEGORIES ─── */
-const hardcodedCategories = [
+// `cta` is the link label on a live card. Without it the grid used to hardcode
+// "Browse news" on every live card, which was fine when news was the only one.
+type ResourceCard = {
+  id: string;
+  icon: any;
+  title: string;
+  desc: string;
+  status: string;
+  href: string | null;
+  cta?: string;
+};
+
+const hardcodedCategories: ResourceCard[] = [
+  {
+    id: "hc-0",
+    icon: ListChecks,
+    title: "Law Firm SEO Audit Checklist",
+    desc: "The 40 checks run on a law firm's site across Map Pack, organic, AI visibility, legal E-E-A-T and practice-area content. Ungated — no email, no download wall.",
+    status: "live",
+    href: "/resources/law-firm-seo-audit-checklist",
+    cta: "Open the checklist",
+  },
   {
     id: "hc-1",
     icon: FileText,
@@ -55,6 +76,7 @@ const hardcodedCategories = [
     desc: "Curated, plain-English breakdowns of Google core updates, algorithm shifts, and AI-search changes that affect your site.",
     status: "live",
     href: "/resources/news",
+    cta: "Browse news",
   },
 ];
 
@@ -87,6 +109,7 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
     desc: r.description,
     status: r.status,
     href: r.fileUrl || (r.slug ? `/resources/${r.slug}` : null),
+    cta: "Open resource",
   }));
 
   const categories = [...dbResourcesFormatted, ...hardcodedCategories];
@@ -178,7 +201,7 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
                       className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
                       style={{ color: color.primary }}
                     >
-                      Browse news <ArrowRight className="h-4 w-4" aria-hidden />
+                      {cat.cta || "Open"} <ArrowRight className="h-4 w-4" aria-hidden />
                     </span>
                   ) : null}
                 </>

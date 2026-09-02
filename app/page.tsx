@@ -26,6 +26,7 @@ import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";
 import FounderSection from "../components/FounderSection";
 import FAQ from "../components/FAQ";
 import EmotionalLeadForm from "../components/EmotionalLeadForm";
+import FreeResources from "../components/FreeResources";
 import BlogTeaser from "../components/BlogTeaser";
 import Reveal from "@/components/Reveal";
 import ChatWidgetLazy from "@/components/ChatWidgetLazy";
@@ -373,7 +374,10 @@ export default async function Home() {
         {/* 19. Faqs */}
         <Reveal><FAQ /></Reveal>
         
-        {/* 20. Blogs */}
+        {/* 20. Free, ungated resources — deliberately after the offer, never before it. */}
+        <Reveal><FreeResources /></Reveal>
+
+        {/* 21. Blogs */}
         <Reveal><BlogTeaser /></Reveal>
       </main>
 

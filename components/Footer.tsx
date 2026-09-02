@@ -44,6 +44,10 @@ const toolLinks = [
   { href: "/tools", label: "All Free SEO Tools" },
   { href: "/tools/serp-checker", label: "SERP Checker" },
   { href: "/tools/keyword-research", label: "AI Keyword Research" },
+  // Same reasoning as the tools above: this one's only other crawlable links
+  // sit 90% of the way down the home page and on one service page.
+  { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },
+  { href: "/law-firm-scorecard", label: "Law Firm SEO Scorecard" },
 ];
  
 /* Each industry → its relevant service page (SEO-safe, no duplicate pages) */

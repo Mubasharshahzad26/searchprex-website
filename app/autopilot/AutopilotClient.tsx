@@ -264,7 +264,10 @@ export default function AutopilotClient() {
         <IndexingStats />
         <AuditStats />
         <RoadmapWidget />
-        <ReportsWidget />
+        <ReportsWidget
+          clientId={selectedClient || undefined}
+          clientName={selectedClientName || undefined}
+        />
       </div>
     </div>
   )

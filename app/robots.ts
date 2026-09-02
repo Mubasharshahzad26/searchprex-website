@@ -18,6 +18,13 @@ const PRIVATE_PATHS = [
   "/api/",          // never let crawlers hit your API routes
   "/admin",         // CMS control surface, must never be indexed
   "/admin/*",
+  // The second CMS surface. Easy to miss because it is not under /admin: it
+  // holds the page, blog, case-study, news and resource editors, and it was
+  // crawlable until now. It is admin-gated in middleware.ts as well, and the
+  // pages carry robots noindex (app/content-admin/layout.tsx) — Disallow alone
+  // stops crawling but not indexing of a URL Google found via a link.
+  "/content-admin",
+  "/content-admin/*",
   "/studio",        // Sanity Studio route
   "/studio/*",
   "/dashboard",     // logged-in area, no SEO value, keep private
@@ -43,7 +50,10 @@ export default function robots(): MetadataRoute.Robots {
         disallow: PRIVATE_PATHS,
       })),
     ],
-    sitemap: `${SITE}/sitemap.xml`,
+    // Both sitemaps, not just the main one. /news-sitemap.xml is a valid Google
+    // News sitemap that has always been served but never advertised, so its
+    // only discovery path was a manual Search Console submission.
+    sitemap: [`${SITE}/sitemap.xml`, `${SITE}/news-sitemap.xml`],
   };
 }
  

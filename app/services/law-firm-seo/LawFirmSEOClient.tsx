@@ -12,7 +12,7 @@
 // separately-approved pass.
 
 import Link from "next/link";
-import { ArrowRight, Check, MapPin, Phone, Scale, BadgeCheck } from "lucide-react";
+import { ArrowRight, Check, MapPin, Phone, Scale, BadgeCheck, ListChecks } from "lucide-react";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
 import VideoTestimonials from "@/components/VideoTestimonials";
 import {
@@ -351,6 +351,43 @@ export default function LawFirmSEOClient() {
           imageAlt="Mubashar Shahzad — Founder & Lead SEO Strategist"
           linkedinUrl={LINKEDIN}
         />
+      </Section>
+
+      {/* ── THE CHECKLIST ──
+          The audit above, written out and ungated. This is the page where a
+          resource link earns its place: the visitor is already a law firm, and
+          the offer still gets the last word in the CtaBand below. */}
+      <Section width="narrow" tight>
+        <Link
+          href="/resources/law-firm-seo-audit-checklist"
+          className={`group flex flex-col gap-5 ${radius.card} border p-6 transition-all hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:p-7`}
+          style={{ borderColor: color.border, background: color.white }}
+        >
+          <span
+            className={`flex h-12 w-12 shrink-0 items-center justify-center ${radius.chip}`}
+            style={{ background: color.primarySoft }}
+          >
+            <ListChecks className="h-6 w-6" style={{ color: color.primary }} aria-hidden />
+          </span>
+
+          <div className="min-w-0 flex-1">
+            <h2 className={`${heading.h4} mb-1.5`} style={{ color: color.ink }}>
+              Rather run the audit yourself?
+            </h2>
+            <p className={text.small} style={{ color: color.muted }}>
+              The same 40 checks, written out in full and free to use — no email, no download wall.
+              Work through it with your own site open and keep whatever you find.
+            </p>
+          </div>
+
+          <span
+            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
+            style={{ color: color.primary }}
+          >
+            Open the checklist
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </span>
+        </Link>
       </Section>
 
       {/* FAQ */}

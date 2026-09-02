@@ -15,6 +15,7 @@
 import * as cheerio from 'cheerio';
 import type { FetchOutcome } from './fetch';
 import { readPageSignalsFromHtml, type PageSignals } from './verify';
+import { readCommerceSignalsFromHtml } from './commerce';
 import { scoreProspect, type ProspectScore } from './score';
 import type { RawProspect } from './discovery/types';
 
@@ -34,6 +35,10 @@ export interface QualifyOptions {
   }) => Promise<number | null>;
   /** Characters of page text handed to the classifier. */
   excerptChars?: number;
+  /** The client's own domain, to prevent them from becoming a prospect. */
+  clientDomain?: string;
+  /** Domains to hard-reject as direct competitors. */
+  namedCompetitors?: string[];
   signal?: AbortSignal;
 }
 
@@ -100,6 +105,7 @@ export async function qualifyProspect(
 
   const page = readPageSignalsFromHtml(fetched.html, fetched.finalUrl);
   const text = visibleText(fetched.html);
+  const commerce = readCommerceSignalsFromHtml(fetched.html, fetched.finalUrl);
 
   //  First pass with no relevance signal. If this rejects outright, the
   //  classifier is never called and the LLM spend never happens.
@@ -108,8 +114,11 @@ export async function qualifyProspect(
     statusCode: fetched.statusCode,
     page,
     text,
+    commerce,
     referringDomains: prospect.referringDomains,
     organicTraffic: prospect.organicTraffic,
+    clientDomain: options.clientDomain,
+    namedCompetitors: options.namedCompetitors,
   });
 
   if (firstPass.hardRejects.length > 0 || !classifyRelevance || signal?.aborted) {
@@ -154,9 +163,12 @@ export async function qualifyProspect(
       statusCode: fetched.statusCode,
       page,
       text,
+      commerce,
       referringDomains: prospect.referringDomains,
       organicTraffic: prospect.organicTraffic,
       topicalRelevance: relevance,
+      clientDomain: options.clientDomain,
+      namedCompetitors: options.namedCompetitors,
     }),
     page,
     statusCode: fetched.statusCode,

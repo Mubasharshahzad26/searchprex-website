@@ -14,6 +14,8 @@
 // ═══════════════════════════════════════════════════════════
 
 import type { PageSignals } from './verify';
+import type { CommerceSignals } from './commerce';
+import { hostOf, sameSite } from './normalize';
 
 export interface ProspectSignals {
   url: string;
@@ -32,6 +34,16 @@ export interface ProspectSignals {
   topicalRelevance?: number | null;
   /** ISO date of the site's most recent post, when discoverable. */
   lastPublishedAt?: string | null;
+
+  //  Relationship, not quality. These decide whether a good site is a site we
+  //  can approach — a rival shop scores well on every other axis and is still
+  //  never going to link out to the client.
+  /** Storefront evidence, from `readCommerceSignalsFromHtml`. */
+  commerce?: CommerceSignals | null;
+  /** The client's own domain, so their own pages cannot become prospects. */
+  clientDomain?: string | null;
+  /** Domains the campaign names as competitors. Matching one is disqualifying. */
+  namedCompetitors?: readonly string[];
 }
 
 export interface ProspectScore {
@@ -135,6 +147,19 @@ export function scoreProspect(signals: ProspectSignals): ProspectScore {
     hardRejects.push(`outbound_domains_${page.externalDomainCount}`);
   }
 
+  //  The client's own site, reached through its own backlinks or its own
+  //  rankings. Costs nothing to catch and is embarrassing to miss.
+  if (signals.clientDomain && sameSite(signals.url, signals.clientDomain)) {
+    hardRejects.push('own_domain');
+  }
+
+  //  A domain someone named as a competitor. Categorical on purpose: this is a
+  //  human judgement already made about the account, and no page-level metric
+  //  should be able to overturn it.
+  if (signals.namedCompetitors?.some((candidate) => sameSite(signals.url, candidate))) {
+    hardRejects.push('competitor_domain');
+  }
+
   if (text) {
     if (hasLinkSellingOffer(text)) hardRejects.push('sells_links');
 
@@ -150,6 +175,14 @@ export function scoreProspect(signals: ProspectSignals): ProspectScore {
 
   let score = 30;
   reasons.push('base_30');
+
+  //  Deduction for storefronts. A storefront is heavily penalized because a
+  //  competitor generally won't link to a competitor. A -25 means it can only
+  //  pass if its domain authority and relevance are exceptionally high.
+  if (signals.commerce?.isStorefront) {
+    score -= 25;
+    reasons.push('storefront_deduction_-25');
+  }
 
   if (typeof signals.referringDomains === 'number') {
     //  Bands rather than a curve: the difference between 40 and 60 referring

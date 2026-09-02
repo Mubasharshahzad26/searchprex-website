@@ -9,11 +9,23 @@ export async function middleware(request: NextRequest) {
   // that does not exist — the dashboard lives at /autopilot, which the matcher
   // never covered. So the rule protected nothing and the real page was open.
 
-  // Admin routes protection
+  // Admin routes protection.
+  //
+  // There are TWO CMS surfaces, not one. /content-admin is a separate editor
+  // for marketing pages, blogs, case studies, news and resources, and it does
+  // not live under /admin — so `startsWith("/admin")` never matched it and it
+  // was reachable, and writable, by anyone with the URL. It writes straight to
+  // the production database, so an anonymous visitor could edit the live site.
+  //
+  // Both are treated identically from here down: same login requirement, same
+  // admin-role requirement. `isCmsRoute` exists so the two checks below cannot
+  // drift apart again — adding a surface to that one line gates it everywhere.
   const isAdminRoute = pathname.startsWith("/admin");
+  const isContentAdminRoute = pathname.startsWith("/content-admin");
+  const isCmsRoute = isAdminRoute || isContentAdminRoute;
   const isGatedTool = isGatedRoute(pathname);
   const isProtectedRoute =
-    isAdminRoute || pathname.startsWith("/dashboard") || isGatedTool;
+    isCmsRoute || pathname.startsWith("/dashboard") || isGatedTool;
 
   // Fail CLOSED, not open. Without Supabase credentials we cannot authenticate
   // anyone, so protected routes must be refused rather than waved through.
@@ -57,7 +69,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Logged in → fetch role and redirect correctly
-  if (user && (pathname === "/dashboard" || isAdminRoute)) {
+  if (user && (pathname === "/dashboard" || isCmsRoute)) {
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -67,7 +79,7 @@ export async function middleware(request: NextRequest) {
     const role = profile?.role ?? "new_user";
 
     // Admin authorization check
-    if (isAdminRoute && role !== "admin") {
+    if (isCmsRoute && role !== "admin") {
       // If they try to access admin but aren't admin, redirect to normal dashboard
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
@@ -95,6 +107,7 @@ export const config = {
   matcher: [
     "/dashboard/:path*",
     "/admin/:path*",
+    "/content-admin/:path*",
     "/login",
     "/register",
     // No public tool routes are listed. GATED_TOOLS in lib/gated-routes is

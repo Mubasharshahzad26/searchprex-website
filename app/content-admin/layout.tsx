@@ -1,6 +1,33 @@
+// app/content-admin/layout.tsx
+//
+// The `robots` block below is load-bearing. This is a second CMS surface,
+// parallel to /admin, and it was fully open to crawlers: no page under it
+// exported a robots directive, so every one inherited the root layout's
+// "index, follow". robots.ts now disallows /content-admin too, but a Disallow
+// only stops crawling, not indexing: Google will still list a URL it was
+// linked to. The meta tag is what keeps these out of the index.
+//
+// It lives on the layout rather than on each page so a new tab added to the nav
+// above is covered by default. The child pages export only `title`, and Next
+// merges metadata field by field, so their `robots` still resolves to this one.
+//
+// Access is a separate concern, handled in two other places: middleware.ts
+// requires an admin session for /content-admin/:path*, and actions.ts guards
+// each Server Action itself, because Next dispatches those by ID rather than
+// by URL and they would otherwise bypass the matcher entirely.
+
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { FileText, Edit3, Briefcase } from "lucide-react";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false },
+  },
+};
 
 export default function ContentAdminLayout({ children }: { children: React.ReactNode }) {
   return (

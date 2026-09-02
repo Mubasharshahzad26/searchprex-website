@@ -144,7 +144,7 @@ export async function runLinkQualification(
         ...(campaignId ? { id: campaignId } : {}),
         ...(clientId ? { clientId } : {}),
       },
-      select: { id: true, topic: true, targetDomain: true },
+      select: { id: true, topic: true, targetDomain: true, competitors: true },
     })
   );
 
@@ -205,6 +205,8 @@ export async function runLinkQualification(
       const result = await qualifyProspect(raw, {
         fetcher: (url) => fetchPage(url, { timeoutMs: remaining, signal }),
         classifyRelevance: classifier?.classify,
+        clientDomain: campaign.targetDomain,
+        namedCompetitors: campaign.competitors,
         signal,
       });
 

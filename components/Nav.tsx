@@ -63,6 +63,7 @@ const navLinks: NavLink[] = [
     hasDropdown: true,
     dropdownItems: [
       { href: "/resources",      label: "All Resources" },
+      { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },
       { href: "/blog",           label: "Blog" },
     ],
   },
