@@ -5,7 +5,7 @@ type BlogPublishInput = {
   metaTitle: string;
   metaDescription: string;
   categoryId: number;      // WP category ID (e.g. 3278 for "blog")
-  authorId: number;        // WP user ID (e.g. 4 for Mubashar Shahzad)
+  authorId: number;        // WP user ID (e.g. 4 for Mubashar Sharif)
   tags?: string[];         // Tag names (WP will create if missing)
   slug?: string;           // Optional custom slug
   username: string;

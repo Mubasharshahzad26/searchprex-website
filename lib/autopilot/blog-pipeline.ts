@@ -240,7 +240,7 @@ ${productContext}
 CONTENT RULES:
 1. 1500-2000 words in contentHtml. Aim for 1700.
 2. First-person expertise voice ("In my experience with these knives...", "I've handled both...")
-3. Author byline: "By Mubashar Shahzad, MSO Content Editor" at the top of contentHtml
+3. Author byline: "By Mubashar Sharif, MSO Content Editor" at the top of contentHtml
 4. Use REAL product data implied from URLs — do not fabricate specifications you can't infer
 5. Internal links: Use ONLY the URLs from "REAL PRODUCTS TO REFERENCE" list above.
    DO NOT invent, guess, or fabricate product URLs.
@@ -276,7 +276,7 @@ OUTPUT — RETURN VALID JSON ONLY (no code fences):
   "title": "Blog post title as displayed at the top of the page (H1)",
   "metaTitle": "SEO title tag (55-60 chars)",
   "metaDescription": "SEO meta description (145-160 chars)",
-  "contentHtml": "<p>By Mubashar Shahzad...</p><p>Intro...</p><h2>...</h2>...",
+  "contentHtml": "<p>By Mubashar Sharif...</p><p>Intro...</p><h2>...</h2>...",
   "faqs": [
     { "question": "Q1?", "answer": "Plain text answer" },
     { "question": "Q2?", "answer": "Plain text answer" },
