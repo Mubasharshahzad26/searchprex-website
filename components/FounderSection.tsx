@@ -74,7 +74,7 @@ const whyFounder = [
  
 const profileLinks = [
   {
-    href: "https://www.linkedin.com/in/mubashar-shahzad-seo/",
+    href: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
     label: "LinkedIn",
     bg: "#E6F1FB",
     textColor: "#0C447C",

@@ -65,7 +65,7 @@ export default function Page() {
         "@type": "Person",
         name: "Mubashar Sharif",
         jobTitle: "SEO Analyst & Founder",
-        sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo"],
+        sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
       },
     },
     areaServed: ["United States", "United Kingdom", "United Arab Emirates"],
@@ -154,7 +154,7 @@ export default function Page() {
       {/* Required prop that was never passed, so the AuthorCard rendered without
           its LinkedIn link — a missing E-E-A-T signal on a page whose whole
           argument is verifiable, founder-led work. */}
-      <EcommerceSEOClient linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/" />
+      <EcommerceSEOClient linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/" />
     </>
   );
 }

@@ -96,7 +96,7 @@ export default function CEOMessage() {
                   {/* Social Links */}
                   <div className="flex items-center gap-3">
                     <a
-                      href="https://linkedin.com/in/mubi00"
+                      href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 rounded-lg border border-[#e5e7eb] bg-white px-4 py-2 text-sm font-medium text-[#374151] transition-all hover:border-[#0a66c2] hover:bg-[#0a66c2] hover:text-white"

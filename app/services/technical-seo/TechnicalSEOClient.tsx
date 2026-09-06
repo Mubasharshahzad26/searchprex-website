@@ -28,7 +28,7 @@ import {
   type GalleryVideo,
 } from "@/components/layout";
 
-const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
+const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 
 /* ─── DATA ─── */
 

@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic";
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/locations/kansas/wichita`;
 const CALENDLY = "https://calendly.com/contact-searchprex/30min";
-const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
+const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
  
 const baseMetadata: Metadata = {
   title: "Wichita Law Firm SEO Services",

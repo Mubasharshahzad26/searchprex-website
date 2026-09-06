@@ -394,7 +394,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
       "@type": "Person",
       name: "Mubashar Sharif",
       jobTitle: "Founder & Lead SEO Strategist",
-      sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
+      sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
     },
   };
 
@@ -414,7 +414,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
         "@type": "Person",
         name: "Mubashar Sharif",
         jobTitle: "Founder & Lead SEO Strategist",
-        sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
+        sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
       },
     },
     areaServed: [

@@ -13,7 +13,7 @@ import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
 const CASE_STUDIES_URL = `${SITE}/all-case-studies`;
 // TODO: replace with Mubashar's exact LinkedIn profile URL before launch.
-const LINKEDIN_URL = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
+const LINKEDIN_URL = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
  
 const baseMetadata: Metadata = {
   title: "SEO Case Studies — Verified Results",

@@ -36,7 +36,7 @@ import { CITY_PAGES } from "@/lib/city-pages";
 import LawFirmStack from "@/components/LawFirmStack";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 
-const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
+const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 
 /* ─── DATA ─── */
 

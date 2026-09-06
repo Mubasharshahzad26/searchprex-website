@@ -195,7 +195,7 @@ export default function PostClient({
                 <p className="text-xs text-[#64748b]">{post.author.role} · {displayDate}</p>
               </div>
             </div>
-            <a href="https://www.linkedin.com/in/mubashar-shahzad-seo/" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-lg border border-[#e5e7eb] px-4 py-2 text-sm font-semibold text-[#0a66c2] hover:border-[#0a66c2] transition-colors">
               <Linkedin className="h-4 w-4" /> Follow on LinkedIn
             </a>

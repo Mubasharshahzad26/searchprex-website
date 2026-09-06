@@ -175,7 +175,7 @@ export default async function Home() {
           "Google Indexing Recovery"
         ],
         "sameAs": [
-          "https://www.linkedin.com/in/mubashar-shahzad-seo/",
+          "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
           "https://www.upwork.com/freelancers/~01400266ea842005be",
           "https://medium.com/@mubasharshahzad726"
         ]

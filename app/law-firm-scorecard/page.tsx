@@ -135,7 +135,7 @@ const jsonLd = {
       author: {
         "@type": "Person",
         name: "Mubashar Sharif",
-        url: "https://www.linkedin.com/in/mubashar-shahzad-seo/",
+        url: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
         jobTitle: "Senior SEO Analyst",
         worksFor: { "@type": "Organization", name: "SearchPrex" },
       },
@@ -347,12 +347,12 @@ const jsonLd = {
       logo: `${SITE}/logo.png`,
       description:
         "Founder-led SEO agency specializing in law firm SEO, local SEO, technical SEO, and e-commerce SEO for US businesses. Proven Map Pack + AI Overview methodology.",
-      sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
+      sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
       founder: {
         "@type": "Person",
         name: "Mubashar Sharif",
         jobTitle: "Founder & Senior SEO Analyst",
-        url: "https://www.linkedin.com/in/mubashar-shahzad-seo/",
+        url: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
       },
       knowsAbout: [
         "Law Firm SEO",

@@ -118,7 +118,7 @@ export default function AboutPage() {
           "email": "contact@searchprex.com",
           "image": `${siteUrl}/images/mubashar-shahzad.jpg`,
           "sameAs": [
-            "https://linkedin.com/in/mubashar-shahzad-seo",
+            "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
             "https://twitter.com/searchprex"
           ],
           "affiliation": { "@id": `${siteUrl}/#organization` }

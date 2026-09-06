@@ -159,7 +159,7 @@ export default function RootLayout({
           "name": "Mubashar Sharif",
           "jobTitle": "CEO & Founder",
           "sameAs": [
-            "https://linkedin.com/in/mubashar-shahzad-seo"
+            "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           ]
         },
         "areaServed": [

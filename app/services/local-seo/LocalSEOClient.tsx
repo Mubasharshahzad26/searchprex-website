@@ -27,7 +27,7 @@ import {
   type Faq,
 } from "@/components/layout";
 
-const LINKEDIN = "https://www.linkedin.com/in/mubashar-shahzad-seo/";
+const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 const HVAC_VIDEO = "g_1TfDU4YeA";
 
 /* ─── DATA ─── */

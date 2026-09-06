@@ -58,7 +58,7 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         name: "Mubashar Sharif",
         jobTitle: "Founder & Senior SEO Strategist",
         sameAs: [
-          "https://www.linkedin.com/in/mubashar-shahzad-seo/",
+          "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
           "https://www.upwork.com/freelancers/~01400266ea842005be",
           "https://medium.com/@mubasharshahzad726",
         ],
@@ -342,7 +342,7 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
                 <a href="https://app.hubspot.com/academy/achievements/tc8vffrw/en/1/mubashar-shahzad/seo-ii" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-white px-3 py-1 text-xs font-semibold text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]">
                   <CheckCircle className="h-3 w-3 text-[#16a34a]" /> HubSpot Certified
                 </a>
-                <a href="https://www.linkedin.com/in/mubashar-shahzad-seo/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-white px-3 py-1 text-xs font-semibold text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]">
+                <a href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-white px-3 py-1 text-xs font-semibold text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]">
                   Verify on LinkedIn <ArrowUpRight className="h-3 w-3" />
                 </a>
               </div>

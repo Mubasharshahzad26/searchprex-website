@@ -421,7 +421,7 @@ export default function Hero({ heroImage }: HeroProps) {
                       </AnimatePresence>
  
                       <a
-                        href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+                        href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-1 flex items-center gap-1.5 transition-opacity hover:opacity-80"

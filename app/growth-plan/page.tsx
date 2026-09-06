@@ -72,7 +72,7 @@ const serviceSchema = {
     founder: {
       "@type": "Person",
       name: "Mubashar Sharif",
-      sameAs: ["https://www.linkedin.com/in/mubashar-shahzad/"],
+      sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
     },
   },
   offers: {

@@ -117,7 +117,7 @@ export default function About() {
                       <Mail className="h-4 w-4" />
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+                      href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#64748b] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"

@@ -43,7 +43,7 @@ const team: TeamMember[] = [
     role: "CEO & Founder",
     bio: "5+ years of hands-on SEO experience across large-scale ecommerce, law firm, and local SEO. Founded SearchPrex to deliver senior-led, founder-driven SEO with zero junior handoffs.",
     image: "/images/mubashar-shahzad.jpg",
-    linkedin: "https://www.linkedin.com/in/mubashar-shahzad-seo/",
+    linkedin: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
     certifications: ["Google Analytics", "Semrush", "Ahrefs"],
     specialties: ["Ecommerce SEO", "Technical SEO", "Strategy"],
   },

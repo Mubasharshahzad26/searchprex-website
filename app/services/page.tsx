@@ -405,7 +405,7 @@ export default function ServicesPage() {
           quote="Every service on this page is led by me personally. 5+ years across local, international, technical, ecommerce and law firm SEO — no juniors, no outsourcing. The person behind these case studies works on your site."
           imageSrc="/images/mubashar-shahzad.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
-          linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/"
+          linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           badges={["Semrush certified", "HubSpot certified"]}
         />
       </Section>
