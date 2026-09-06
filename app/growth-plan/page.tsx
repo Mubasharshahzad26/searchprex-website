@@ -71,7 +71,7 @@ const serviceSchema = {
     url: "https://www.searchprex.com",
     founder: {
       "@type": "Person",
-      name: "Mubashar Shahzad",
+      name: "Mubashar Sharif",
       sameAs: ["https://www.linkedin.com/in/mubashar-shahzad/"],
     },
   },

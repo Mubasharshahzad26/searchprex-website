@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 // Homepage section components (root /components folder)
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
-import ProofStrip from "../components/ProofStrip";
 import RevenueProof from "../components/RevenueProof";
 import QuickAuditBar from "../components/QuickAuditBar";
 import RecoveryStory from "../components/RecoveryStory";
@@ -36,7 +35,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 const baseMetadata: Metadata = {
   title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
   description:
-    "US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
+    "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
   alternates: { 
     canonical: SITE,
     languages: {
@@ -47,7 +46,7 @@ const baseMetadata: Metadata = {
   openGraph: {
     title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
     description:
-      "US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
+      "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
     url: SITE,
     siteName: "SearchPrex",
     type: "website",
@@ -56,7 +55,7 @@ const baseMetadata: Metadata = {
     card: "summary_large_image",
     title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
     description:
-      "US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
+      "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
   },
 };
 
@@ -75,7 +74,7 @@ export default async function Home() {
         "url": SITE,
         "logo": `${SITE}/logo.png`,
         "description":
-          "US-focused SEO agency helping law firms, small businesses, and ecommerce stores rank higher through technical SEO, local SEO, and AI-powered content automation.",
+          "Remote-first, US-focused SEO agency helping law firms, small businesses, and ecommerce stores rank higher through technical SEO, local SEO, and AI-powered content automation.",
         "email": "contact@searchprex.com",
         "founder": { "@id": `${SITE}/#founder` },
         "areaServed": [
@@ -163,7 +162,7 @@ export default async function Home() {
       {
         "@type": "Person",
         "@id": `${SITE}/#founder`,
-        "name": "Mubashar Shahzad",
+        "name": "Mubashar Sharif",
         "jobTitle": "Founder & SEO Strategist",
         "worksFor": { "@id": `${SITE}/#organization` },
         "knowsAbout": [
@@ -202,7 +201,7 @@ export default async function Home() {
         "url": SITE,
         "name": "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
         "description":
-          "US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher across all 50 states.",
+          "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher across all 50 states.",
         "isPartOf": { "@id": `${SITE}/#website` },
         "about": { "@id": `${SITE}/#organization` },
         // The generated default card (app/opengraph-image.tsx). This was
@@ -220,16 +219,16 @@ export default async function Home() {
         "url": SITE,
         "logo": `${SITE}/logo.png`,
         "priceRange": "$$",
-        "telephone": "+923106526316",
+        "telephone": "+923059158010",
         "email": "contact@searchprex.com",
         "areaServed": { "@type": "Country", "name": "United States" },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "1250 Executive Place, Suite 450",
-          "addressLocality": "Geneva",
-          "addressRegion": "IL",
-          "postalCode": "60134",
-          "addressCountry": "US"
+          "streetAddress": "Model Town",
+          "addressLocality": "Gujranwala",
+          "addressRegion": "Punjab",
+          "postalCode": "52250",
+          "addressCountry": "PK"
         }
       },
       // ── Proof images ──
@@ -246,7 +245,7 @@ export default async function Home() {
         "description":
           "Unedited Google Search Console screenshot showing a 285% increase in indexed pages following technical SEO indexing recovery work.",
         "creator": { "@id": `${SITE}/#founder` },
-        "creditText": "SearchPrex — Mubashar Shahzad",
+        "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-08-07",
         "representativeOfPage": false
       },
@@ -257,7 +256,7 @@ export default async function Home() {
         "caption":
           "SMK Store WooCommerce net sales for April 2026: $5,832.02 for the month, top seller at 200 units.",
         "creator": { "@id": `${SITE}/#founder` },
-        "creditText": "SearchPrex — Mubashar Shahzad",
+        "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-04-30"
       },
       {
@@ -267,7 +266,7 @@ export default async function Home() {
         "caption":
           "SMK Store WooCommerce net sales for June 2026: $19,100.71 for the month, top seller at 300 units — a 227% increase over April.",
         "creator": { "@id": `${SITE}/#founder` },
-        "creditText": "SearchPrex — Mubashar Shahzad",
+        "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-06-30"
       },
       {
@@ -277,7 +276,7 @@ export default async function Home() {
         "caption":
           "Michigan Outdoor Sports WooCommerce net sales, 20 July 2026: $0.00 for the month.",
         "creator": { "@id": `${SITE}/#founder` },
-        "creditText": "SearchPrex — Mubashar Shahzad",
+        "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-07-20"
       },
       {
@@ -287,7 +286,7 @@ export default async function Home() {
         "caption":
           "Michigan Outdoor Sports WooCommerce net sales, 6 August 2026: $206.63 for the month.",
         "creator": { "@id": `${SITE}/#founder` },
-        "creditText": "SearchPrex — Mubashar Shahzad",
+        "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-08-06"
       },
       {
@@ -297,7 +296,7 @@ export default async function Home() {
         "caption":
           "Michigan Outdoor Sports WooCommerce net sales, 17 August 2026: $311.05 month to date.",
         "creator": { "@id": `${SITE}/#founder` },
-        "creditText": "SearchPrex — Mubashar Shahzad",
+        "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-08-17"
       },
       trustpilotReviewSchema
@@ -356,7 +355,6 @@ export default async function Home() {
 
         <Reveal><Process /></Reveal>
         
-        <Reveal><ProofStrip /></Reveal>
         <Reveal><Results /></Reveal>
 
         <Reveal><AIVisibilityShowcase /></Reveal>

@@ -28,7 +28,7 @@ const db = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
 });
 
-const AUTHOR = "Mubashar Shahzad";
+const AUTHOR = "Mubashar Sharif";
 
 // Only Unsplash IDs already proven to resolve on this site are reused here; an
 // invented photo ID renders as a broken hero image.

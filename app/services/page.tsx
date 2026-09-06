@@ -143,7 +143,7 @@ const faqs = [
   },
   {
     q: "Who does the work on my SEO account?",
-    a: "The founder, Mubashar Shahzad, leads every account personally — no juniors, no outsourcing. You work directly with the person behind the case studies on this site.",
+    a: "The founder, Mubashar Sharif, leads every account personally — no juniors, no outsourcing. You work directly with the person behind the case studies on this site.",
   },
   {
     q: "How much do your SEO services cost?",
@@ -400,11 +400,11 @@ export default function ServicesPage() {
       {/* ── FOUNDER E-E-A-T ── */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
-          name="Mubashar Shahzad"
+          name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years"
           quote="Every service on this page is led by me personally. 5+ years across local, international, technical, ecommerce and law firm SEO — no juniors, no outsourcing. The person behind these case studies works on your site."
           imageSrc="/images/mubashar-shahzad.jpg"
-          imageAlt="Mubashar Shahzad — Founder & Lead SEO Strategist"
+          imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/"
           badges={["Semrush certified", "HubSpot certified"]}
         />
@@ -422,7 +422,7 @@ export default function ServicesPage() {
         body="The founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours — including exactly which service (if any) you actually need."
         actions={[
           { href: "/free-audit", label: "Get Free SEO Audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
-          { href: "tel:+923106526316", label: "+92 310 652 6316", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
+          { href: "tel:+923059158010", label: "+92 305 9158010", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
         ]}
         trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
       />

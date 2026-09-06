@@ -7,14 +7,14 @@ import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
   title: "Meet Our SEO Experts",
   description:
-    "Meet Mubashar Shahzad, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
+    "Meet Mubashar Sharif, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
   alternates: {
     canonical: "https://www.searchprex.com/experts",
   },
   openGraph: {
     title: "Meet Our Experts - SearchPrex SEO Team",
     description:
-      "Meet Mubashar Shahzad, founder of SearchPrex — senior-led SEO with proven results.",
+      "Meet Mubashar Sharif, founder of SearchPrex — senior-led SEO with proven results.",
     url: "https://www.searchprex.com/experts",
     type: "website",
   },
@@ -39,7 +39,7 @@ interface TeamMember {
  
 const team: TeamMember[] = [
   {
-    name: "Mubashar Shahzad",
+    name: "Mubashar Sharif",
     role: "CEO & Founder",
     bio: "5+ years of hands-on SEO experience across large-scale ecommerce, law firm, and local SEO. Founded SearchPrex to deliver senior-led, founder-driven SEO with zero junior handoffs.",
     image: "/images/mubashar-shahzad.jpg",
@@ -104,11 +104,11 @@ export default function ExpertsPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Meet Our Experts",
-    "description": "Meet Mubashar Shahzad, founder of SearchPrex.",
+    "description": "Meet Mubashar Sharif, founder of SearchPrex.",
     "url": "https://www.searchprex.com/experts",
     "mainEntity": {
       "@type": "Person",
-      "name": "Mubashar Shahzad",
+      "name": "Mubashar Sharif",
       "jobTitle": "CEO & Founder",
       "description": team[0].bio,
       "worksFor": { "@type": "Organization", "name": "SearchPrex" },
@@ -256,10 +256,10 @@ export default function ExpertsPage() {
                 Get Free Consultation
               </a>
               <a
-                href="tel:+923106526316"
+                href="tel:+923059158010"
                 className="rounded-xl border-2 border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:border-white hover:bg-white hover:text-[#0a0f2e]"
               >
-                Call +92 310 652 6316
+                Call +92 305 9158010
               </a>
             </div>
           </div>

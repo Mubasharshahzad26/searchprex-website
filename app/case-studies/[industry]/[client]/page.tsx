@@ -68,7 +68,7 @@ export default async function Page(
     about: `${cs.seoType} case study for ${cs.client} (${cs.location})`,
     author: {
       "@type": "Person",
-      name: "Mubashar Shahzad",
+      name: "Mubashar Sharif",
       jobTitle: "SEO Expert & Content Strategist",
     },
     publisher: {

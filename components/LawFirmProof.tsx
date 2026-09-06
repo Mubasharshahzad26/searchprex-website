@@ -81,19 +81,20 @@ export default function LawFirmProof() {
             className="text-3xl font-black tracking-tight sm:text-4xl"
             style={{ color: color.ink }}
           >
-            I don&apos;t have a law firm case study yet. Here&apos;s what I do have.
+            Accepting select US law firm partners for 2026. Here&apos;s where the evidence stands.
           </h2>
 
           <p className="mt-5 text-lg leading-relaxed" style={{ color: color.muted }}>
-            Every other section on this page puts a screenshot behind its claim. I&apos;m not
-            going to break that rule here by showing you a number from a different industry
-            and letting the layout imply it was an attorney. No firm has come through this
-            practice yet that I can publish.
+            Every other section on this page puts an unedited screenshot behind its claim. I&apos;m not
+            going to break that rule here by showing you an ecommerce number and letting the layout
+            imply it was an attorney. No law firm client has come through this practice yet that
+            I have permission to publish publicly.
           </p>
 
           <p className="mt-4 text-lg leading-relaxed" style={{ color: color.muted }}>
-            What I can tell you is which parts of the work above transfer, and which parts
-            you should make me prove on your own site before you pay me anything.
+            What I can show you is which parts of the technical, local map pack, and AI Overview work
+            transfer directly to legal practices — and how you can test me on your own firm before
+            you pay anything.
           </p>
         </div>
 

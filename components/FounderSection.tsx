@@ -181,14 +181,14 @@ export default function FounderSection() {
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
                   <Image
                     src="/images/mubashar-shahzad.jpg"
-                    alt="Mubashar Shahzad, Founder and CEO of SearchPrex"
+                    alt="Mubashar Sharif, Founder and CEO of SearchPrex"
                     fill
                     sizes="64px"
                     className="object-cover object-top"
                   />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-xl font-bold text-[#0a0f2e]">Mubashar Shahzad</h3>
+                  <h3 className="text-xl font-bold text-[#0a0f2e]">Mubashar Sharif</h3>
                   <p className="text-sm text-[#566070]">
                     Founder &amp; CEO &middot; SearchPrex &mdash; SEO Analyst, 5+ years
                   </p>

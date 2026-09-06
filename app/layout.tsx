@@ -20,10 +20,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.searchprex.com'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'SearchPrex —FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. USA SEO Agency for Law Firms, Ecommerce & Local Business',
+    default: 'SearchPrex — USA SEO Agency for Law Firms, Ecommerce & Local Business',
     template: '%s | SearchPrex'
   },
-  description: 'SearchPrex is a US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
+  description: 'SearchPrex is a Remote-First, US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
   keywords: [
     'SEO agency USA',
     'law firm SEO',
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'SearchPrex —FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. USA SEO Agency for Law Firms & Ecommerce',
+    title: 'SearchPrex — USA SEO Agency for Law Firms & Ecommerce',
     description: 'Senior-led SEO services for law firms, Shopify stores, and local businesses across the USA. Free SEO audit in 48 hours.',
     url: siteUrl,
     siteName: 'SearchPrex',
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SearchPrex —FOUNDER-LED SEO. NO JUNIORS. NO FLUFF. USA SEO Agency',
+    title: 'SearchPrex — USA SEO Agency for Law Firms & Ecommerce',
     description: 'Senior-led SEO for law firms, ecommerce & local businesses. Free audit in 48 hours.',
     // Likewise supplied by app/twitter-image.tsx.
     creator: '@searchprex',
@@ -143,20 +143,20 @@ export default function RootLayout({
           "width": 200,
           "height": 200
         },
-        "description": "US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
+        "description": "Remote-First, US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "1250 Executive Place, Suite 450",
-          "addressLocality": "Geneva",
-          "addressRegion": "IL",
-          "postalCode": "60134",
-          "addressCountry": "US"
+          "streetAddress": "Model Town",
+          "addressLocality": "Gujranwala",
+          "addressRegion": "Punjab",
+          "postalCode": "52250",
+          "addressCountry": "PK"
         },
-        "telephone": "+92-310-652-6316",
+        "telephone": "+92-305-9158010",
         "email": "hello@searchprex.com",
         "founder": {
           "@type": "Person",
-          "name": "Mubashar Shahzad",
+          "name": "Mubashar Sharif",
           "jobTitle": "CEO & Founder",
           "sameAs": [
             "https://linkedin.com/in/mubashar-shahzad-seo"
@@ -188,11 +188,11 @@ export default function RootLayout({
         "name": "SearchPrex SEO Services",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "1250 Executive Place, Suite 450",
-          "addressLocality": "Geneva",
-          "addressRegion": "IL",
-          "postalCode": "60134",
-          "addressCountry": "US"
+          "streetAddress": "Model Town",
+          "addressLocality": "Gujranwala",
+          "addressRegion": "Punjab",
+          "postalCode": "52250",
+          "addressCountry": "PK"
         },
         "areaServed": {
           "@type": "Country",

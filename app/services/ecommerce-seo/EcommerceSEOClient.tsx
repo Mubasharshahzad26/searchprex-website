@@ -296,14 +296,14 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
       {/* ── 7 · FOUNDER — E-E-A-T ── */}
       <Section width="narrow" tight>
         <AuthorCard
-          name="Mubashar Shahzad"
+          name="Mubashar Sharif"
           role="Founder & Lead Ecommerce SEO Strategist · 5+ years"
           quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. I currently run programs on WooCommerce, Shopify, and custom Next.js stores across the US."
           imageSrc="/images/mubashar-shahzad.jpg"
-          imageAlt="Mubashar Shahzad — Founder & Lead Ecommerce SEO Strategist"
+          imageAlt="Mubashar Sharif — Founder & Lead Ecommerce SEO Strategist"
           linkedinUrl={linkedinUrl}
           credential="Verified Ecommerce SEO Expert"
-          badges={["Semrush certified", "HubSpot certified", "+92 310 652 6316"]}
+          badges={["Semrush certified", "HubSpot certified", "+92 305 9158010"]}
         />
       </Section>
 
@@ -415,7 +415,7 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
 
                   {formState === "error" ? (
                     <p className={`${text.small} mt-3`} style={{ color: color.danger }}>
-                      Something went wrong. Please try again, or call {`+92 310 652 6316`}.
+                      Something went wrong. Please try again, or call {`+92 305 9158010`}.
                     </p>
                   ) : null}
 

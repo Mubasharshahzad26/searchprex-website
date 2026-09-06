@@ -241,8 +241,8 @@ export default async function IndustryPage({
               icon: <ArrowRight className="h-4 w-4" aria-hidden />,
             },
             {
-              href: "tel:+923106526316",
-              label: "+92 310 652 6316",
+              href: "tel:+923059158010",
+              label: "+92 305 9158010",
               variant: "onDark",
               icon: <Phone className="h-4 w-4" aria-hidden />,
             },

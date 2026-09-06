@@ -152,7 +152,7 @@ export default function RecoveryStory() {
             dashboard, on a date you can read, and I will walk you through any of it on a
             call.&rdquo;
             <span className="mt-2 block text-sm font-bold not-italic" style={{ color: color.muted }}>
-              — Mubashar Shahzad, Founder
+              — Mubashar Sharif, Founder
             </span>
           </p>
         </div>

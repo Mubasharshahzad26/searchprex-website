@@ -63,7 +63,7 @@ export default function Page() {
       url: SITE,
       founder: {
         "@type": "Person",
-        name: "Mubashar Shahzad",
+        name: "Mubashar Sharif",
         jobTitle: "SEO Analyst & Founder",
         sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo"],
       },

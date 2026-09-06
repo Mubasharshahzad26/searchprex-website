@@ -201,11 +201,11 @@ export default function TechnicalSEOClient() {
       {/* ── AUTHOR — E-E-A-T ── */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
-          name="Mubashar Shahzad"
+          name="Mubashar Sharif"
           role="Founder & Lead Technical SEO Strategist · 5+ years"
           quote="&ldquo;Technical SEO is where I&apos;ve done my deepest work — crawl budget, indexation recovery, Core Web Vitals, schema. I personally took Michigan Outdoor Sports to a +476% clicks peak in March 2026, watched it de-index, and rebuilt it to 11,549 indexed pages and +83% US clicks — all verified in GSC.&rdquo;"
           imageSrc="/images/mubashar-shahzad.jpg"
-          imageAlt="Mubashar Shahzad — Founder & Lead Technical SEO Strategist"
+          imageAlt="Mubashar Sharif — Founder & Lead Technical SEO Strategist"
           linkedinUrl={LINKEDIN}
         />
       </Section>
@@ -222,7 +222,7 @@ export default function TechnicalSEOClient() {
         body="Free technical audit — the founder personally crawls your site, identifies your biggest indexation, speed, and architecture issues, and delivers a prioritized fix plan within 48 hours."
         actions={[
           { href: "/free-audit", label: "Get free technical audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
-          { href: "tel:+923106526316", label: "+92 310 652 6316", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
+          { href: "tel:+923059158010", label: "+92 305 9158010", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
         ]}
         trustPoints={["48hr audit delivery", "No contracts", "Founder does the audit"]}
       />

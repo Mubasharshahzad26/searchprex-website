@@ -51,13 +51,13 @@ export default function NotFound() {
             </div>
             <ArrowRight className="h-4 w-4 text-[#64748b] transition-transform group-hover:translate-x-1" />
           </Link>
-          <a href="tel:+923106526316"
+          <a href="tel:+923059158010"
             className="group flex items-center justify-between rounded-2xl border border-[#d4d8e3] bg-white p-5 text-left transition-all hover:-translate-y-0.5 hover:shadow-lg">
             <div>
               <p className="flex items-center gap-2 font-bold text-[#0a0f2e]">
                 <Phone className="h-4 w-4" style={{ color: GREEN }} /> Talk to Us
               </p>
-              <p className="mt-1 text-xs text-[#64748b]">+92 310 652 6316</p>
+              <p className="mt-1 text-xs text-[#64748b]">+92 305 9158010</p>
             </div>
             <ArrowRight className="h-4 w-4 text-[#64748b] transition-transform group-hover:translate-x-1" />
           </a>

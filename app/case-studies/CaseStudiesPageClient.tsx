@@ -265,10 +265,10 @@ export default function CaseStudiesPageClient() {
                 Get Free SEO Audit <ArrowRight className="h-4 w-4" />
               </Link>
               <a
-                href="tel:+923106526316"
+                href="tel:+923059158010"
                 className="flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-white/10"
               >
-                <Phone className="h-4 w-4" /> +92 310 652 6316
+                <Phone className="h-4 w-4" /> +92 305 9158010
               </a>
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-6">

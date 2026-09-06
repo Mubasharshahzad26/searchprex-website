@@ -156,7 +156,7 @@ export default async function Page() {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${SITE}#founder`,
-    "name": "Mubashar Shahzad",
+    "name": "Mubashar Sharif",
     "jobTitle": "Founder & SEO Expert",
     "description": "Founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses.",
     "image": `${SITE}/images/mubashar-shahzad.jpg`,

@@ -24,7 +24,7 @@ const baseMetadata: Metadata = {
     'free SEO resources',
     'SEO tools'
   ],
-  authors: [{ name: 'Mubashar Shahzad', url: siteUrl }],
+  authors: [{ name: 'Mubashar Sharif', url: siteUrl }],
   creator: 'SearchPrex',
   publisher: 'SearchPrex',
   category: 'SEO Resources',

@@ -40,7 +40,7 @@ export default function CEOMessage() {
                   <div className="h-40 w-40 overflow-hidden rounded-2xl bg-gradient-to-br from-[#1a3c8f] to-[#2563eb]">
                     <Image
                       src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
-                      alt="Mubashar Shahzad - CEO & Founder of SearchPrex"
+                      alt="Mubashar Sharif - CEO & Founder of SearchPrex"
                       width={160}
                       height={160}
                       className="h-full w-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-300"
@@ -86,7 +86,7 @@ export default function CEOMessage() {
                 <div className="mt-8 flex flex-col items-center gap-4 border-t border-[#e5e7eb] pt-8 lg:flex-row lg:justify-between">
                   <div>
                     <p className="text-xl font-bold text-[#0a0f2e]">
-                      Mubashar Shahzad
+                      Mubashar Sharif
                     </p>
                     <p className="text-sm text-[#64748b]">
                       CEO & Founder, SearchPrex

@@ -156,7 +156,7 @@ export default function KeywordTool({
         <div className="mt-1.5 flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
             <BadgeCheck className="size-4" />
-            Built by Mubashar Shahzad · Founder &amp; Verified SEO Expert
+            Built by Mubashar Sharif · Founder &amp; Verified SEO Expert
           </span>
         </div>
       </div>

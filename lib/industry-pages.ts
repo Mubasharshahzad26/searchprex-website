@@ -39,7 +39,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       "Weekly SEO Reports (No guessing where your money goes)",
       "Fair, transparent communication",
       "Budget-friendly, high-ROI packages tailored for PI firms",
-      "You communicate directly with me (Mubashar Shahzad, Founder)",
+      "You communicate directly with me (Mubashar Sharif, Founder)",
     ],
     uniqueSections: [
       {
@@ -91,7 +91,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       "Weekly, easy-to-read SEO Reports",
       "Fair communication with no agency jargon",
       "Budget-friendly solutions for growing family practices",
-      "Communicate directly with the Founder, Mubashar Shahzad",
+      "Communicate directly with the Founder, Mubashar Sharif",
     ],
     uniqueSections: [
       {
@@ -195,7 +195,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       "Weekly SEO Reports (Watch your traffic grow)",
       "Fair communication (We tell you what works)",
       "Budget-friendly pricing for steady growth",
-      "Communicate directly with Founder Mubashar Shahzad",
+      "Communicate directly with Founder Mubashar Sharif",
     ],
     uniqueSections: [
       {
@@ -247,7 +247,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       "Weekly SEO Reports to track national rankings",
       "Fair, honest communication on competitive dockets",
       "Budget-friendly compared to $500+ CPCs",
-      "Communicate directly with me, Mubashar Shahzad",
+      "Communicate directly with me, Mubashar Sharif",
     ],
     uniqueSections: [
       {

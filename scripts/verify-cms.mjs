@@ -26,7 +26,7 @@ if (mode === "restore") {
     data: {
       title: "About SearchPrex — Founder-Led USA SEO Agency | Niche-Focused Strategies",
       metaDescription:
-        "Meet Mubashar Shahzad, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses.",
+        "Meet Mubashar Sharif, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses.",
     },
   });
   console.log("restored /about");

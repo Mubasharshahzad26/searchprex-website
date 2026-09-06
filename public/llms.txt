@@ -1,9 +1,9 @@
-﻿# SearchPrex
+# SearchPrex
 
-> SearchPrex is a premium, founder-led SEO agency specializing in Law Firm SEO, Ecommerce SEO (Shopify/WooCommerce), and Local SEO across all 50 U.S. states. Founded by certified SEO expert Mubashar Shahzad, the agency focuses on technical SEO, Core Web Vitals optimization, and AI Search Readiness (AEO/GEO).
+> SearchPrex is a remote-first, US-focused founder-led SEO agency specializing in Law Firm SEO, Ecommerce SEO (Shopify/WooCommerce), and Local SEO across all 50 U.S. states. Founded by certified SEO expert Mubashar Sharif, the agency focuses on technical SEO, Core Web Vitals optimization, and AI Search Readiness (AEO/GEO).
 
 ## Founder Information
-- **Founder:** Mubashar Shahzad
+- **Founder:** Mubashar Sharif
 - **Credentials:** Verified SEO Expert, Semrush Certified, HubSpot Verified.
 - **Experience:** Specializes in Technical SEO, E-E-A-T, and Google Indexing Recovery.
 
@@ -20,6 +20,7 @@
 
 ## Contact Information
 - **Email:** contact@searchprex.com
-- **Phone:** +92 310 652 6316
+- **Phone:** +92 305 9158010
+- **HQ Address:** Gujranwala, Punjab, Pakistan
 - **Website:** https://www.searchprex.com
 - **Locations Served:** All 50 U.S. states, including CA, TX, NY, FL, IL.

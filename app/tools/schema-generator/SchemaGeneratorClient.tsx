@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
  
 import { useState } from "react";
 import Link from "next/link";
@@ -101,7 +101,7 @@ const schemaTypes = [
     fields: [
       { key: "headline", label: "Article Title", placeholder: "Crawl Budget Optimization: The Complete 2026 Guide", required: true },
       { key: "description", label: "Description/Excerpt", placeholder: "If Google isn't crawling your pages, they won't rank...", required: true, textarea: true },
-      { key: "author", label: "Author Name", placeholder: "Mubashar Shahzad", required: true },
+      { key: "author", label: "Author Name", placeholder: "Mubashar Sharif", required: true },
       { key: "authorUrl", label: "Author Profile URL", placeholder: "https://searchprex.com/experts" },
       { key: "publishDate", label: "Publish Date", placeholder: "2026-05-20" },
       { key: "modifiedDate", label: "Last Modified Date", placeholder: "2026-05-20" },

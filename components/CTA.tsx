@@ -189,7 +189,7 @@ export default function CTA() {
               <Phone className="h-5 w-5 text-white/60" />
               <span className="text-sm text-white/60">
                 Prefer to talk? Call us at{" "}
-                <a href="tel:+923106526316" className="font-medium text-white underline">+92 310 652 6316</a>
+                <a href="tel:+923059158010" className="font-medium text-white underline">+92 305 9158010</a>
               </span>
             </div>
           </motion.div>

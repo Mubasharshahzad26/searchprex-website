@@ -202,11 +202,11 @@ export default function LocalSEOClient() {
       {/* ── AUTHOR — E-E-A-T ── */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
-          name="Mubashar Shahzad"
+          name="Mubashar Sharif"
           role="Founder & Lead Local SEO Strategist · 5+ years"
           quote="&ldquo;Local SEO is won on real signals — accurate GBP data, genuine reviews, content that actually helps your neighbors. I personally took a local HVAC business to the top 3 map pack and an AI Overview placement in 60 days. When you work with SearchPrex, you work directly with me.&rdquo;"
           imageSrc="/images/mubashar-shahzad.jpg"
-          imageAlt="Mubashar Shahzad — Founder & Lead Local SEO Strategist"
+          imageAlt="Mubashar Sharif — Founder & Lead Local SEO Strategist"
           linkedinUrl={LINKEDIN}
         />
       </Section>
@@ -223,7 +223,7 @@ export default function LocalSEOClient() {
         body="Free local SEO audit — the founder personally reviews your Google Business Profile, citations, and local rankings, and delivers a 60-day growth plan within 24 hours."
         actions={[
           { href: "/free-audit", label: "Get free local audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
-          { href: "tel:+923106526316", label: "+92 310 652 6316", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
+          { href: "tel:+923059158010", label: "+92 305 9158010", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
         ]}
         trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
       />

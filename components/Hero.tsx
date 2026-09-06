@@ -371,7 +371,7 @@ export default function Hero({ heroImage }: HeroProps) {
                       <div className="relative aspect-[3/4] w-[270px] sm:w-[340px] lg:w-[440px]">
                         <Image
                           src="/images/mubashar-transparent.png"
-                          alt="Mubashar Shahzad — Founder & Certified SEO Expert at SearchPrex"
+                          alt="Mubashar Sharif — Founder & Certified SEO Expert at SearchPrex"
                           fill
                           priority
                           className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
@@ -387,7 +387,7 @@ export default function Hero({ heroImage }: HeroProps) {
                         <span className="absolute left-[30%] top-[42%] h-2 w-2 rounded-full" style={{ background: "#2f6fed" }} />
                       </div>
  
-                      <p className="text-[15px] font-bold" style={{ color: PURPLE }}>Mubashar Shahzad</p>
+                      <p className="text-[15px] font-bold" style={{ color: PURPLE }}>Mubashar Sharif</p>
  
                       {/* Rotating credential line — synced with the carousel below (Toptal effect) */}
                       <AnimatePresence mode="wait">

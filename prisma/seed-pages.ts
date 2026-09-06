@@ -60,13 +60,13 @@ const PAGES: Seed[] = [
     slug: "/about",
     title: "About SearchPrex — Founder-Led USA SEO Agency | Niche-Focused Strategies",
     metaDescription:
-      "Meet Mubashar Shahzad, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff.",
+      "Meet Mubashar Sharif, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff.",
   },
   {
     slug: "/experts",
     title: "Meet Our Experts - SearchPrex SEO Team",
     metaDescription:
-      "Meet Mubashar Shahzad, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
+      "Meet Mubashar Sharif, founder of SearchPrex. A senior SEO strategist with 5+ years of experience helping law firms, ecommerce stores, and local businesses dominate search.",
   },
   {
     slug: "/why-us",

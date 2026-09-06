@@ -10,11 +10,11 @@ const aboutUrl = `${siteUrl}/about`
  
 const baseMetadata: Metadata = {
   title: 'About Us — Founder-Led USA SEO Agency | Niche-Focused Strategies',
-  description: 'Meet Mubashar Shahzad, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff.',
+  description: 'Meet Mubashar Sharif, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff.',
   keywords: [
     'SearchPrex founder',
     'SEO agency founder',
-    'Mubashar Shahzad',
+    'Mubashar Sharif',
     'founder-led SEO',
     'niche-focused SEO strategy',
     'USA SEO expert',
@@ -26,7 +26,7 @@ const baseMetadata: Metadata = {
     'revenue-focused SEO',
     'algorithm-proof SEO strategy'
   ],
-  authors: [{ name: 'Mubashar Shahzad', url: siteUrl }],
+  authors: [{ name: 'Mubashar Sharif', url: siteUrl }],
   creator: 'SearchPrex',
   publisher: 'SearchPrex',
   category: 'SEO Services',
@@ -38,7 +38,7 @@ const baseMetadata: Metadata = {
   },
   openGraph: {
     title: 'About SearchPrex — Founder-Led USA SEO Agency',
-    description: 'Meet Mubashar Shahzad. Founder-led SEO for law firms, ecommerce, and local businesses. 5+ years of proven results.',
+    description: 'Meet Mubashar Sharif. Founder-led SEO for law firms, ecommerce, and local businesses. 5+ years of proven results.',
     url: aboutUrl,
     siteName: 'SearchPrex',
     type: 'profile',
@@ -50,7 +50,7 @@ const baseMetadata: Metadata = {
     site: '@searchprex',
     creator: '@searchprex',
     title: 'About SearchPrex — Founder-Led USA SEO Agency',
-    description: 'Meet Mubashar Shahzad, founder of SearchPrex. Founder-executed SEO for law firms, ecommerce & local business.',
+    description: 'Meet Mubashar Sharif, founder of SearchPrex. Founder-executed SEO for law firms, ecommerce & local business.',
   },
   formatDetection: {
     email: false,
@@ -109,11 +109,11 @@ export default function AboutPage() {
         "name": "SearchPrex",
         "url": siteUrl,
         "email": "contact@searchprex.com",
-        "telephone": "+92-310-652-6316",
+        "telephone": "+92-305-9158010",
         "founder": {
           "@type": "Person",
           "@id": "#founder",
-          "name": "Mubashar Shahzad",
+          "name": "Mubashar Sharif",
           "jobTitle": "Founder & Lead SEO Strategist",
           "email": "contact@searchprex.com",
           "image": `${siteUrl}/images/mubashar-shahzad.jpg`,
@@ -125,11 +125,11 @@ export default function AboutPage() {
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "1250 Executive Place, Suite 450",
-          "addressLocality": "Geneva",
-          "addressRegion": "IL",
-          "postalCode": "60134",
-          "addressCountry": "US"
+          "streetAddress": "Model Town",
+          "addressLocality": "Gujranwala",
+          "addressRegion": "Punjab",
+          "postalCode": "52250",
+          "addressCountry": "PK"
         },
         "areaServed": [
           { "@type": "State", "name": "California" },
@@ -216,7 +216,7 @@ export default function AboutPage() {
                     <MapPin className="h-4 w-4 text-[#534AB7]" />
                   </div>
                   <address className="text-sm text-[#374151] not-italic">
-                    1250 Executive Place, Suite 450<br />Geneva, IL 60134, USA
+                    Model Town<br />Gujranwala, Punjab, Pakistan
                   </address>
                 </div>
                 <div className="flex items-center gap-4">
@@ -224,11 +224,11 @@ export default function AboutPage() {
                     <Phone className="h-4 w-4 text-[#534AB7]" />
                   </div>
                   <a
-                    href="tel:+923106526316"
+                    href="tel:+923059158010"
                     className="text-sm text-[#475569] transition-colors hover:text-[#534AB7]"
                     title="Call SearchPrex"
                   >
-                    +92 310 652 6316
+                    +92 305 9158010
                   </a>
                 </div>
                 <div className="flex items-center gap-4">

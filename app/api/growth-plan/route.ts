@@ -236,7 +236,7 @@ In the meantime, feel free to browse our <a href="https://www.searchprex.com/cas
  
 <p style="margin:32px 0 0;font-size:14px;line-height:1.6;color:#191a1f;">
 Talk soon,<br/>
-<strong>Mubashar Shahzad</strong><br/>
+<strong>Mubashar Sharif</strong><br/>
 <span style="color:#65676e;">Founder, SearchPrex</span>
 </p>
  

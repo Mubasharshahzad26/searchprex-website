@@ -224,7 +224,7 @@ export default function EmotionalLeadForm() {
                 <p className="text-xs font-bold uppercase tracking-widest text-[#5f6a78]">
                   Handled by
                 </p>
-                <p className="mt-2 text-sm font-bold text-[#0a0f2e]">Mubashar Shahzad</p>
+                <p className="mt-2 text-sm font-bold text-[#0a0f2e]">Mubashar Sharif</p>
                 <p className="mt-0.5 text-sm text-[#566070]">
                   Founder — every account, personally
                 </p>

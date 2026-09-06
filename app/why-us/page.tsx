@@ -225,11 +225,11 @@ export default function WhyUsPage() {
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <a
-                href="tel:+923106526316"
+                href="tel:+923059158010"
                 className="flex items-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-bold text-[#0a0f2e] transition-all hover:bg-[#f7f8fc]"
               >
                 <Phone className="h-5 w-5" />
-                +92 310 652 6316
+                +92 305 9158010
               </a>
               <Link
                 href="/free-audit"

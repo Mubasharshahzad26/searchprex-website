@@ -54,7 +54,7 @@ export const posts = [
       <p>Crawl budget optimization is not a one-time fix — it's an ongoing process. Set up monthly crawl stats monitoring in GSC and re-audit every time you add a major new product category or site section.</p>
     `,
     author: {
-      name: "Mubashar Shahzad",
+      name: "Mubashar Sharif",
       role: "Founder & SEO Expert",
       bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO. He has managed 40,000+ page sites and solved mass non-indexing issues for brands including smkstore.com and michigansportsoutdoor.com.",
     },
@@ -116,7 +116,7 @@ export const posts = [
         <li><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer">Google Search spam policies</a></li>
       </ul>
     `,
-    author: { name: "Mubashar Shahzad", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
   },
   {
     slug:        "ecommerce-product-page-seo",
@@ -174,7 +174,7 @@ export const posts = [
         <li>Push that brand alone and watch its indexing for three weeks. Do not start brand two until you know brand one worked.</li>
       </ol>
     `,
-    author: { name: "Mubashar Shahzad", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
   },
 ];
  

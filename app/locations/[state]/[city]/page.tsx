@@ -295,8 +295,8 @@ export default async function CityPage({
               icon: <ArrowRight className="h-4 w-4" aria-hidden />,
             },
             {
-              href: "tel:+923106526316",
-              label: "+92 310 652 6316",
+              href: "tel:+923059158010",
+              label: "+92 305 9158010",
               variant: "onDark",
               icon: <Phone className="h-4 w-4" aria-hidden />,
             },
@@ -378,7 +378,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
     areaServed,
     priceRange: "$$",
     email: "contact@searchprex.com",
-    telephone: "+92-310-652-6316",
+    telephone: "+92-305-9158010",
     knowsAbout: [
       "Law firm SEO",
       "Local SEO",
@@ -392,7 +392,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
     },
     founder: {
       "@type": "Person",
-      name: "Mubashar Shahzad",
+      name: "Mubashar Sharif",
       jobTitle: "Founder & Lead SEO Strategist",
       sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
     },
@@ -412,7 +412,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
       url: SITE,
       founder: {
         "@type": "Person",
-        name: "Mubashar Shahzad",
+        name: "Mubashar Sharif",
         jobTitle: "Founder & Lead SEO Strategist",
         sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
       },

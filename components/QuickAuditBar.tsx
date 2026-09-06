@@ -34,12 +34,6 @@ export default function QuickAuditBar() {
     e.preventDefault();
     if (!valid) return;
     
-    // Simple frontend qualification logic (for demonstration/UX)
-    if (industry === "other") {
-      setStatus("unqualified");
-      return;
-    }
-    
     setStatus("loading");
     try {
       const res = await fetch("/api/leads", {
@@ -48,7 +42,11 @@ export default function QuickAuditBar() {
         body: JSON.stringify({ name: "", email, website, industry, source: "homepage-quick-bar" }),
       });
       if (!res.ok) throw new Error("failed");
-      setStatus("done");
+      if (industry === "other") {
+        setStatus("unqualified");
+      } else {
+        setStatus("done");
+      }
     } catch {
       setStatus("error");
     }
@@ -89,12 +87,17 @@ export default function QuickAuditBar() {
           </div>
         ) : status === "unqualified" ? (
           <div className="flex flex-col items-center gap-2">
+            <span
+              className="flex h-11 w-11 items-center justify-center rounded-full"
+              style={{ background: `${color.success}22` }}
+            >
+              <Check className="h-6 w-6" style={{ color: color.successDark }} />
+            </span>
             <p className="text-lg font-black" style={{ color: color.ink }}>
-              Thank you for your interest.
+              Details received — thank you!
             </p>
-            <p className="mt-3 text-sm text-[#5b6472]">
-              At this time, I only partner with specific industries to ensure I can guarantee results. 
-              If you fall outside these categories, you can still use our AI tools or check the blog.
+            <p className="mt-2 max-w-xl text-sm text-[#5b6472]">
+              I primarily focus on law firms, high-volume ecommerce stores, and local service businesses. I will review your submission and reply within 24 hours if we can take on your project.
             </p>
           </div>
         ) : (
@@ -104,10 +107,10 @@ export default function QuickAuditBar() {
               className="text-2xl font-black tracking-tight sm:text-3xl"
               style={{ color: color.ink }}
             >
-              Does Your Firm Qualify?
+              Does Your Business Qualify?
             </h2>
             <p className="mt-3 text-sm" style={{ color: color.muted }}>
-              I only partner with firms where I know I can dominate the market. Drop your details below to see if you qualify.
+              I only partner with businesses where I know I can dominate the market. Drop your details below to see if your site qualifies.
             </p>
 
             <form

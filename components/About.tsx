@@ -96,7 +96,7 @@ export default function About() {
                 <div className="relative -mt-12 mb-4 h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-md">
                   <Image
                     src="/images/mubashar-shahzad.jpg"
-                    alt="Mubashar Shahzad — Founder & Lead SEO Strategist at SearchPrex"
+                    alt="Mubashar Sharif — Founder & Lead SEO Strategist at SearchPrex"
                     fill
                     className="object-cover object-top"
                     priority
@@ -104,7 +104,7 @@ export default function About() {
                 </div>
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl font-black text-[#0a0f2e]">Mubashar Shahzad</h3>
+                    <h3 className="text-xl font-black text-[#0a0f2e]">Mubashar Sharif</h3>
                     <p className="text-sm font-semibold text-[#534AB7]">Founder & Lead SEO Strategist</p>
                     <p className="mt-1 text-xs text-[#64748b]">Works personally on every client account</p>
                   </div>

@@ -114,7 +114,7 @@ const schema = {
       areaServed: { "@type": "City", name: "Wichita", containedInPlace: { "@type": "State", name: "Kansas" } },
       provider: { "@type": "Organization", name: "SearchPrex", url: SITE },
     },
-    { "@type": "Person", "@id": `${SITE}#mubashar`, name: "Mubashar Shahzad", jobTitle: "Founder & SEO Strategist", worksFor: { "@type": "Organization", name: "SearchPrex" }, sameAs: [LINKEDIN] },
+    { "@type": "Person", "@id": `${SITE}#mubashar`, name: "Mubashar Sharif", jobTitle: "Founder & SEO Strategist", worksFor: { "@type": "Organization", name: "SearchPrex" }, sameAs: [LINKEDIN] },
     { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Locations", item: `${SITE}/locations` }, { "@type": "ListItem", position: 3, name: "Kansas", item: `${SITE}/locations/kansas` }, { "@type": "ListItem", position: 4, name: "Wichita", item: PAGE_URL }] },
     { "@type": "FAQPage", mainEntity: FAQS.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
   ],
@@ -731,7 +731,7 @@ export default function WichitaPage() {
             <div aria-hidden="true" style={{ width: 72, height: 72, borderRadius: "50%", background: BRAND.purple, border: `3px solid ${BRAND.green}`, color: "#fff", fontSize: 22, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>MS</div>
             <div style={{ flex: 1, minWidth: 240 }}>
               <span style={{ display: "inline-block", background: "#1c2547", color: "#3eb489", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 999, marginBottom: 7, letterSpacing: ".3px" }}>✓ CERTIFIED SEO EXPERT</span>
-              <div style={{ fontSize: 17, fontWeight: 700, color: "#fff" }}>Mubashar Shahzad</div>
+              <div style={{ fontSize: 17, fontWeight: 700, color: "#fff" }}>Mubashar Sharif</div>
               <div style={{ fontSize: 12.5, color: "#9aa0c4", marginTop: 3, lineHeight: 1.5 }}>Founder, SearchPrex · 5+ years in large-scale &amp; local SEO · Semrush + HubSpot certified</div>
               <p style={{ fontSize: 13.5, color: "#c3c7df", lineHeight: 1.6, margin: "10px 0 0" }}>
                 Mubashar founded SearchPrex to give local businesses founder-led SEO — no juniors, no fluff. His work focuses on the fundamentals that move rankings: technical health, genuinely helpful content, and local relevance, built on measurable data.

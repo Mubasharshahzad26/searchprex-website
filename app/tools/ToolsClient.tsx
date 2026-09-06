@@ -264,11 +264,11 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
       {/* ── FOUNDER E-E-A-T ── */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
-          name="Mubashar Shahzad"
+          name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years"
           quote="These are the same utilities I use on real client projects — the ones behind the verified case studies on this site. Nothing here is a lead-capture gimmick."
           imageSrc="/images/mubashar-shahzad.jpg"
-          imageAlt="Mubashar Shahzad — Founder & Lead SEO Strategist"
+          imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl="https://www.linkedin.com/in/mubashar-shahzad-seo/"
           badges={["Semrush certified", "HubSpot certified"]}
         />

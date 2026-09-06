@@ -28,7 +28,7 @@ const baseMetadata: Metadata = {
     "law firm AI visibility",
     "AEO for law firms",
   ],
-  authors: [{ name: "Mubashar Shahzad", url: siteUrl }],
+  authors: [{ name: "Mubashar Sharif", url: siteUrl }],
   creator: "SearchPrex",
   publisher: "SearchPrex",
   category: "SEO Resources",
@@ -68,7 +68,7 @@ export default function LawFirmChecklistPage() {
         description: DESCRIPTION,
         inLanguage: "en-US",
         isAccessibleForFree: true,
-        author: { "@type": "Person", name: "Mubashar Shahzad", url: siteUrl },
+        author: { "@type": "Person", name: "Mubashar Sharif", url: siteUrl },
         publisher: { "@id": `${siteUrl}/#organization` },
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: [

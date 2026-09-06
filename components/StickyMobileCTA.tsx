@@ -46,14 +46,18 @@ export default function StickyMobileCTA() {
     const measure = () => {
       frame = 0;
       const hero = document.getElementById("hero");
-      const form = document.getElementById("free-audit-form");
-      setVisible(
-        shouldShowStickyCTA(
-          hero ? hero.getBoundingClientRect() : null,
-          form ? form.getBoundingClientRect() : null,
-          window.innerHeight
-        )
-      );
+      const forms = [
+        document.getElementById("free-audit-form"),
+        document.getElementById("tell-me-your-issue"),
+        document.getElementById("quick-audit-heading"),
+      ].filter(Boolean);
+
+      const anyFormOnScreen = forms.some((f) => {
+        const rect = f!.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      });
+      const heroPassed = hero ? hero.getBoundingClientRect().bottom <= 0 : true;
+      setVisible(heroPassed && !anyFormOnScreen);
     };
 
     // Coalesce bursts of scroll events into one read per frame.

@@ -121,14 +121,14 @@ export default function Footer() {
                 <Mail className="h-4 w-4" />
                 contact@searchprex.com
               </a>
-              <a href="tel:+923106526316" className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white">
+              <a href="tel:+923059158010" className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white">
                 <Phone className="h-4 w-4" />
-                +92 310 652 6316
+                +92 305 9158010
               </a>
               <p className="flex items-start gap-3 text-sm text-white/70">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>
-                  Remote-first SEO agency serving clients across all 50 U.S. states — with a focus on CA, TX, FL, NY, IL.
+                  Remote-first, US-focused SEO agency (HQ: Gujranwala, Pakistan) serving clients across all 50 U.S. states — with a focus on CA, TX, FL, NY, IL.
                 </span>
               </p>
             </div>

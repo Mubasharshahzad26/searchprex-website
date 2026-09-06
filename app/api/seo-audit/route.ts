@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
           </p>
 
           <p style="color: #0f172a; font-size: 15px; margin-top: 32px;">
-            — Mubashar Shahzad<br>
+            — Mubashar Sharif<br>
             <span style="color: #64748b; font-size: 13px;">Founder & SEO Lead, SearchPrex</span>
           </p>
 

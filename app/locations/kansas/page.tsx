@@ -54,7 +54,7 @@ const schema = {
     {
       "@type": "Person",
       "@id": "https://www.searchprex.com/#founder",
-      name: "Mubashar Shahzad",
+      name: "Mubashar Sharif",
       jobTitle: "Founder & Senior SEO Strategist",
       worksFor: { "@id": "https://www.searchprex.com/locations/kansas#service" },
       sameAs: [
@@ -345,7 +345,7 @@ export default function KansasHubPage() {
               MS
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-black text-[#0a0f2e]">Strategy led by Mubashar Shahzad</h3>
+              <h3 className="text-lg font-black text-[#0a0f2e]">Strategy led by Mubashar Sharif</h3>
               <p className="mb-3 text-sm font-semibold" style={{ color: GREEN_DARK }}>Founder &amp; Senior SEO Strategist, SearchPrex</p>
               <p className="mb-4 text-sm leading-relaxed text-[#475569]">
                 Every Kansas engagement is personally executed by the founder — a Semrush- and HubSpot-certified SEO strategist with 5+ years specializing in law firm, ecommerce, and local SEO. No juniors, no outsourcing. The person who builds your strategy is the person who runs it.

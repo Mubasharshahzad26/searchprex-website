@@ -344,11 +344,11 @@ export default function LawFirmSEOClient() {
       {/* AUTHOR — E-E-A-T */}
       <Section width="narrow" tight>
         <AuthorCard
-          name="Mubashar Shahzad"
+          name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years"
           quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to the top 3 map pack and Google AI Overview placements, and I bring that exact methodology to every firm I work with.&rdquo;"
           imageSrc="/images/mubashar-shahzad.jpg"
-          imageAlt="Mubashar Shahzad — Founder & Lead SEO Strategist"
+          imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl={LINKEDIN}
         />
       </Section>
@@ -421,8 +421,8 @@ export default function LawFirmSEOClient() {
             icon: <ArrowRight className="h-4 w-4" aria-hidden />,
           },
           {
-            href: "tel:+923106526316",
-            label: "+92 310 652 6316",
+            href: "tel:+923059158010",
+            label: "+92 305 9158010",
             variant: "onDark",
             icon: <Phone className="h-4 w-4" aria-hidden />,
           },

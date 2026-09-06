@@ -134,7 +134,7 @@ const jsonLd = {
       dateModified: new Date().toISOString().split("T")[0],
       author: {
         "@type": "Person",
-        name: "Mubashar Shahzad",
+        name: "Mubashar Sharif",
         url: "https://www.linkedin.com/in/mubashar-shahzad-seo/",
         jobTitle: "Senior SEO Analyst",
         worksFor: { "@type": "Organization", name: "SearchPrex" },
@@ -350,7 +350,7 @@ const jsonLd = {
       sameAs: ["https://www.linkedin.com/in/mubashar-shahzad-seo/"],
       founder: {
         "@type": "Person",
-        name: "Mubashar Shahzad",
+        name: "Mubashar Sharif",
         jobTitle: "Founder & Senior SEO Analyst",
         url: "https://www.linkedin.com/in/mubashar-shahzad-seo/",
       },

@@ -87,7 +87,7 @@ export default async function Page(
     about: `${mappedCs.seoType} case study for ${mappedCs.client}`,
     author: {
       "@type": "Person",
-      name: "Mubashar Shahzad",
+      name: "Mubashar Sharif",
       jobTitle: "SEO Expert & Content Strategist",
     },
     publisher: {

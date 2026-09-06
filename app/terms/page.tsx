@@ -144,9 +144,9 @@ export default function TermsPage() {
               <p>For questions about these Terms, please contact us:</p>
               <ul>
                 <li><strong>Email:</strong> legal@searchprex.com</li>
-                <li><strong>Phone:</strong> +92 310 652 6316</li>
+                <li><strong>Phone:</strong> +92 305 9158010</li>
                 <li>
-                  <strong>Address:</strong> 1250 Executive Place, Suite 450, Geneva, IL 60134, USA
+                  <strong>Address:</strong> Gujranwala, Punjab, Pakistan
                 </li>
               </ul>
         </Prose>
