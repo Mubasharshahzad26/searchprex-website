@@ -26,5 +26,5 @@ export default async function LinksDashboardPage({
   //  `dbError` and the client renders an explanation instead of a stack trace.
   const data = await getDashboardData(campaign);
 
-  return <LinksDashboard data={data} />;
+  return <LinksDashboard data={data} currentCampaignId={campaign} />;
 }

@@ -14,7 +14,7 @@ export default async function PreviewLinksPage({
   return (
     <div className="min-h-screen bg-[#f8f9fa] flex">
       <main className="flex-1 overflow-auto">
-        <LinksDashboard data={data} />
+        <LinksDashboard data={data} currentCampaignId={campaign} />
       </main>
     </div>
   );

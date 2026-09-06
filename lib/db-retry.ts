@@ -12,11 +12,14 @@ export async function withRetry<T>(
       const isColdStart =
         e.code === 'P1001' ||
         e.code === 'ECONNREFUSED' ||
+        e.code === 'ECONNRESET' ||
         e.code === 'ETIMEDOUT' ||
         e.code === 'ENOTFOUND' ||
         msg.includes("Can't reach database server") ||
         msg.includes('Connection terminated') ||
         msg.includes('Connection refused') ||
+        msg.includes('ECONNRESET') ||
+        msg.includes('socket disconnected') ||
         msg.includes('ECONNREFUSED');
 
       if (isColdStart && i < retries - 1) {
