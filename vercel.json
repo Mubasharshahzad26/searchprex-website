@@ -1,1 +1,12 @@
-{}
+{
+  "crons": [
+    {
+      "path": "/api/cron/seo-autopilot",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/backlinks-autopilot",
+      "schedule": "0 2 * * 0"
+    }
+  ]
+}
