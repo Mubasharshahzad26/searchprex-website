@@ -50,12 +50,12 @@ const stats = [
 
 /* ─── Hero right-side mockup (From NicheSEO Pro Home) ─── */
 function HeroMockup() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(4); // default to step 4 (activeTab 2: Indexing Tracker)
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStep((s) => (s + 1) % 6);
-    }, 2200);
+    }, 2400);
     return () => clearInterval(interval);
   }, []);
 
@@ -71,21 +71,21 @@ function HeroMockup() {
   const getCursorPos = (tab: number) => {
     switch (tab) {
       case 0:
-        return { top: "22%", left: "12%" };
+        return { top: "24%", left: "14%" };
       case 1:
-        return { top: "35%", left: "12%" };
+        return { top: "37%", left: "14%" };
       case 2:
-        return { top: "48%", left: "12%" };
+        return { top: "50%", left: "14%" };
       default:
-        return { top: "22%", left: "12%" };
+        return { top: "24%", left: "14%" };
     }
   };
 
   return (
-    <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] min-h-[340px] sm:min-h-[420px] bg-white rounded-lg overflow-hidden flex font-sans shadow-sm border border-gray-200/80">
+    <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] min-h-[360px] sm:min-h-[420px] bg-white rounded-2xl overflow-hidden flex font-sans shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-200/80">
       {/* Sidebar */}
-      <div className="w-[32%] sm:w-[28%] bg-[#f9f9fb] border-r border-gray-200 flex flex-col p-3 sm:p-5 z-20">
-        <div className="font-black text-base sm:text-xl tracking-tighter mb-4 sm:mb-8 text-black">
+      <div className="w-[34%] sm:w-[28%] bg-[#fcfcfd] border-r border-gray-150 flex flex-col p-3.5 sm:p-6 z-20">
+        <div className="font-sans font-black text-lg sm:text-2xl tracking-tight mb-5 sm:mb-8 text-black">
           NicheSEO
         </div>
         <div className="flex flex-col gap-1.5 sm:gap-2 relative">
@@ -94,10 +94,10 @@ function HeroMockup() {
               key={tab.id}
               type="button"
               onClick={() => setStep(i * 2)}
-              className={`flex items-center gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors z-10 text-left ${
+              className={`flex items-center gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all z-10 text-left ${
                 activeTab === i
-                  ? "bg-white shadow-sm border border-gray-100 text-[#7952ff]"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "bg-white shadow-sm border border-purple-100 text-[#7952ff]"
+                  : "text-gray-500 hover:text-gray-700 border border-transparent"
               }`}
             >
               <tab.icon
@@ -115,40 +115,42 @@ function HeroMockup() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 bg-[#fcfcfd] p-3 sm:p-6 lg:p-8 relative overflow-hidden flex flex-col">
+      <div className="flex-1 bg-[#ffffff] p-4 sm:p-7 lg:p-8 relative overflow-hidden flex flex-col justify-between">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
-            className="w-full h-full flex flex-col"
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.28 }}
+            className="w-full h-full flex flex-col justify-between"
           >
-            <div className="text-base sm:text-2xl font-bold text-black mb-3 sm:mb-6">
+            <div className="text-center text-lg sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-5">
               {TABS[activeTab].label}
             </div>
 
             {activeTab === 0 && (
-              <div className="grid grid-cols-2 gap-2 sm:gap-4 flex-1">
-                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-                  <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
-                    Pages Published
+              <div className="flex flex-col flex-1 justify-between gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
+                  <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-150 shadow-sm flex flex-col justify-center text-center sm:text-left">
+                    <div className="text-[10px] sm:text-[11px] text-gray-400 font-semibold mb-1 uppercase tracking-wider">
+                      Pages Published
+                    </div>
+                    <div className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-black">
+                      7,826
+                    </div>
                   </div>
-                  <div className="text-xl sm:text-4xl font-bold text-black">
-                    7,826
+                  <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-150 shadow-sm flex flex-col justify-center text-center sm:text-left">
+                    <div className="text-[10px] sm:text-[11px] text-gray-400 font-semibold mb-1 uppercase tracking-wider">
+                      Success Rate
+                    </div>
+                    <div className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-emerald-500">
+                      92%
+                    </div>
                   </div>
                 </div>
-                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-                  <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
-                    Success Rate
-                  </div>
-                  <div className="text-xl sm:text-4xl font-bold text-emerald-500">
-                    92%
-                  </div>
-                </div>
-                <div className="col-span-2 bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm h-[100px] sm:h-[140px] flex flex-col justify-end gap-1">
-                  <div className="flex items-end gap-1 sm:gap-1.5 h-full w-full">
+                <div className="bg-white p-3 sm:p-4 rounded-xl border border-gray-150 shadow-sm h-[100px] sm:h-[140px] flex flex-col justify-end">
+                  <div className="flex items-end gap-1.5 sm:gap-2 h-full w-full">
                     {[30, 50, 40, 70, 60, 90, 85, 100].map((h, i) => (
                       <div
                         key={i}
@@ -162,29 +164,29 @@ function HeroMockup() {
             )}
 
             {activeTab === 1 && (
-              <div className="grid grid-cols-1 gap-2.5 sm:gap-4 flex-1">
-                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
+              <div className="flex flex-col flex-1 justify-between gap-3 sm:gap-4">
+                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-150 shadow-sm flex items-center justify-between">
                   <div>
-                    <div className="text-xs sm:text-sm font-bold text-black mb-0.5 sm:mb-1">
+                    <div className="text-xs sm:text-sm font-bold text-black mb-0.5">
                       AI Article Generation
                     </div>
                     <div className="text-[10px] sm:text-[11px] text-gray-500">
                       High-intent keyword clusters
                     </div>
                   </div>
-                  <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-emerald-100 text-emerald-700 text-[9px] sm:text-[10px] uppercase font-bold rounded-full">
+                  <div className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-emerald-100 text-emerald-700 text-[9px] sm:text-[10px] uppercase font-bold rounded-full">
                     Active
                   </div>
                 </div>
-                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-100 shadow-sm flex-1 flex flex-col justify-center">
-                  <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-2 sm:mb-4 uppercase tracking-wide">
+                <div className="bg-white p-3 sm:p-5 rounded-xl border border-gray-150 shadow-sm flex-1 flex flex-col justify-center">
+                  <div className="text-[10px] sm:text-[11px] text-gray-400 font-semibold mb-2 sm:mb-3 uppercase tracking-wider">
                     Recent Content
                   </div>
-                  <div className="space-y-2 sm:space-y-4">
+                  <div className="space-y-2 sm:space-y-3">
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="flex gap-2.5 sm:gap-4 items-center">
                         <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gray-100 flex-shrink-0" />
-                        <div className="flex-1 space-y-1 sm:space-y-2">
+                        <div className="flex-1 space-y-1 sm:space-y-1.5">
                           <div className="h-1.5 sm:h-2 bg-gray-200 rounded w-3/4" />
                           <div className="h-1.5 sm:h-2 bg-gray-100 rounded w-1/2" />
                         </div>
@@ -196,40 +198,47 @@ function HeroMockup() {
             )}
 
             {activeTab === 2 && (
-              <div className="grid grid-cols-2 gap-2 sm:gap-4 flex-1">
-                <div className="col-span-2 bg-white p-3 sm:p-6 rounded-xl border border-gray-100 shadow-sm flex gap-6 sm:gap-12">
-                  <div>
-                    <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
-                      Indexed URLs
+              <div className="flex flex-col flex-1 justify-between gap-3 sm:gap-4">
+                {/* Metric Card */}
+                <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-gray-150 shadow-sm">
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div>
+                      <div className="text-[10px] sm:text-[11px] text-gray-400 font-semibold mb-1 uppercase tracking-wider">
+                        INDEXED URLS
+                      </div>
+                      <div className="text-2xl sm:text-4xl font-black text-gray-950">
+                        3,492
+                      </div>
                     </div>
-                    <div className="text-xl sm:text-4xl font-bold text-black">
-                      3,492
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[10px] sm:text-[11px] text-gray-500 font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
-                      Pending
-                    </div>
-                    <div className="text-xl sm:text-4xl font-bold text-amber-500">
-                      128
+                    <div>
+                      <div className="text-[10px] sm:text-[11px] text-gray-400 font-semibold mb-1 uppercase tracking-wider">
+                        PENDING
+                      </div>
+                      <div className="text-2xl sm:text-4xl font-black text-[#f59e0b]">
+                        128
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-span-2 bg-white p-0 rounded-xl border border-gray-100 shadow-sm h-[90px] sm:h-[130px] overflow-hidden relative">
+
+                {/* Line Chart Card */}
+                <div className="bg-white rounded-xl border border-gray-150 shadow-sm h-[110px] sm:h-[150px] overflow-hidden relative flex items-end">
                   <svg
-                    className="absolute bottom-0 w-full h-[120%]"
-                    viewBox="0 0 100 100"
+                    className="w-full h-full"
+                    viewBox="0 0 500 150"
                     preserveAspectRatio="none"
                   >
-                    <path
-                      d="M0,80 L20,70 L40,85 L60,40 L80,50 L100,20 L100,100 L0,100 Z"
-                      fill="#e8f0fe"
+                    <polygon
+                      points="0,110 130,95 240,115 340,65 420,78 500,18 500,150 0,150"
+                      fill="#eaf2fe"
                     />
-                    <path
-                      d="M0,80 L20,70 L40,85 L60,40 L80,50 L100,20"
+                    <polyline
+                      points="0,110 130,95 240,115 340,65 420,78 500,18"
                       fill="none"
                       stroke="#3b82f6"
-                      strokeWidth="2.5"
+                      strokeWidth="4.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </div>
@@ -241,7 +250,7 @@ function HeroMockup() {
 
       {/* Animated Cursor */}
       <motion.div
-        className="hidden sm:block absolute z-50 drop-shadow-lg pointer-events-none origin-top-left"
+        className="hidden sm:block absolute z-50 drop-shadow-md pointer-events-none origin-top-left"
         animate={{
           ...getCursorPos(nextTab),
           scale: step % 2 === 0 ? [1, 0.85, 1] : 1,
@@ -253,8 +262,8 @@ function HeroMockup() {
         }}
       >
         <svg
-          width="28"
-          height="28"
+          width="26"
+          height="26"
           viewBox="0 0 28 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -303,12 +312,11 @@ export default function NicheSeoProShowcase() {
         </div>
 
         {/* ── The dashboard, running ── */}
-        <div className="mt-10 overflow-hidden rounded-xl border border-[#e6e8f0] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
-          <div
-            className="border-b border-[#eef0f6] bg-[#f2f4f9] p-2.5 sm:p-4 md:p-6"
-            style={{ boxShadow: "inset 0 4px 15px rgba(0,0,0,0.05)" }}
-          >
-            <HeroMockup />
+        <div className="mt-10 overflow-hidden rounded-2xl border border-[#e6e8f0] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <div className="border-b border-[#eef0f6] bg-gradient-to-br from-[#f1f6ff]/70 via-[#f6f2fe]/70 to-[#ffffff] p-3 sm:p-6 md:p-8">
+            <div className="mx-auto max-w-4xl">
+              <HeroMockup />
+            </div>
           </div>
 
           {/* ── Stat strip ── */}
