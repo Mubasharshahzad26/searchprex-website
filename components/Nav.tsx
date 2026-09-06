@@ -149,9 +149,9 @@ export default function Nav() {
           <div className="flex h-20 items-center justify-between">
  
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 inline-flex items-center" aria-label="Searchprex Home">
               <Logo size="md" variant="dark" />
-            </div>
+            </Link>
  
             {/* Desktop links */}
             <div ref={desktopNavRef} className="hidden items-center gap-6 lg:flex">
