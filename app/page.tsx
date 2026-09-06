@@ -339,6 +339,7 @@ export default async function Home() {
         <Reveal><RevenueProof /></Reveal>
         <Reveal><LocalSeoProof /></Reveal>
         <Reveal><RecoveryStory /></Reveal>
+        <Reveal><TrustpilotReviewSection /></Reveal>
 
         {/* Directly after the de-indexing recovery, because that recovery is
             this tool's own first case study — same client, same run. Anywhere
@@ -347,8 +348,6 @@ export default async function Home() {
         <Reveal><NicheSeoProShowcase /></Reveal>
 
         <Reveal><LawFirmProof /></Reveal>
-
-        <Reveal><TrustpilotReviewSection /></Reveal>
 
         <Reveal><FounderSection /></Reveal>
 
