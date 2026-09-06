@@ -21,6 +21,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FileText, Edit3, Briefcase } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   robots: {
     index: false,

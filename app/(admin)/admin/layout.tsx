@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarProvider } from "@/components/ui/sidebar";
 import { LayoutDashboard, Users, Bot, FileText, Settings, Globe } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
