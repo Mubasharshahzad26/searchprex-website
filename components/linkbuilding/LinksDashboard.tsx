@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -107,7 +107,7 @@ function Empty({ text, hint }: { text: string; hint?: string }) {
 export default function LinksDashboard({ data }: { data: DashboardData }) {
   const [tab, setTab] = useState<Tab>('overview');
 
-  if ('dbError' in data) {
+  if (data.dbError) {
     return (
       <div className="mx-auto max-w-lg p-6">
         <div className="rounded-xl border border-rose-200 bg-rose-50 p-6 shadow-sm">
