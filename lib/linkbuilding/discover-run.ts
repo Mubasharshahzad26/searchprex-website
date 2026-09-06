@@ -17,6 +17,7 @@ import { fetchPage } from './core/fetch';
 import { discoverBacklinkGap } from './core/discovery/backlink-gap';
 import { discoverSerpFootprints } from './core/discovery/serp-footprints';
 import { discoverLinkNeighbourhood } from './core/discovery/link-neighbourhood';
+import { discoverBrokenLinks } from './core/discovery/broken-link-hijack';
 import { hasDataForSeoCredentials } from './core/discovery/dataforseo';
 import { createSerperSearch, hasSerperKey } from './core/discovery/serper';
 import { DiscoveryError, type DiscoveryResult, type RawProspect } from './core/discovery/types';
@@ -25,7 +26,7 @@ export interface DiscoverRunOptions {
   campaignId?: string;
   clientId?: string;
   /** Restrict to named channels. Default: every channel the campaign supports. */
-  only?: Array<'backlink_gap' | 'serp_footprint' | 'link_neighbourhood'>;
+  only?: Array<'backlink_gap' | 'serp_footprint' | 'link_neighbourhood' | 'broken_link'>;
   /** Prospects written per campaign per run. */
   maxPerCampaign?: number;
   signal?: AbortSignal;
@@ -295,6 +296,19 @@ export async function runLinkDiscovery(
             excludeDomain: campaign.targetDomain,
             knownDomains: known.map((k) => k.domain),
             fetcher: (url) => fetchPage(url, { signal }),
+            signal,
+          })
+        )
+      );
+    }
+
+    if (wants('broken_link') && campaign.competitors.length >= 1) {
+      channels.push(
+        await runChannel('broken_link', campaign.id, maxPerCampaign, () =>
+          discoverBrokenLinks({
+            competitors: campaign.competitors,
+            excludeDomain: campaign.targetDomain,
+            credentials: creds,
             signal,
           })
         )

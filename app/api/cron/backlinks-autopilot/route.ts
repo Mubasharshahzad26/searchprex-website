@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { runLinkDiscovery } from '@/lib/linkbuilding/discover-run';
 import { runLinkQualification } from '@/lib/linkbuilding/qualify-run';
 import { runLinkVerification } from '@/lib/linkbuilding/verify-run';
+import { runOutreachFollowUps } from '@/lib/linkbuilding/followup-run';
+import { runAutoPublish } from '@/lib/linkbuilding/auto-publish';
+import { syncAuthority } from '@/lib/linkbuilding/authority-tracker';
 
 export const maxDuration = 300;
 export const dynamic = 'force-dynamic';
@@ -16,10 +19,19 @@ function isAuthorized(req: NextRequest): boolean {
   return false;
 }
 
+export type PipelineAction =
+  | 'discover'
+  | 'qualify'
+  | 'verify'
+  | 'followup'
+  | 'autopublish'
+  | 'authority'
+  | 'all';
+
 async function executePipeline(options: {
   clientId?: string;
   campaignId?: string;
-  action?: 'discover' | 'qualify' | 'verify' | 'all';
+  action?: PipelineAction;
 }) {
   const { clientId, campaignId, action = 'all' } = options;
   const results: Record<string, unknown> = {
@@ -29,7 +41,7 @@ async function executePipeline(options: {
     clientId: clientId ?? 'all',
   };
 
-  // 1. Discovery
+  // 1. Discovery (including Competitor Broken Links)
   if (action === 'all' || action === 'discover') {
     results.discovery = await runLinkDiscovery({
       clientId,
@@ -44,17 +56,54 @@ async function executePipeline(options: {
       clientId,
       campaignId,
       maxProspects: 60,
-      budgetMs: 120_000,
+      budgetMs: 90_000,
     });
   }
 
-  // 3. Verification
+  // 3. Headless Auto-Publish (Telegra.ph & Dev.to)
+  if (action === 'all' || action === 'autopublish') {
+    try {
+      results.autoPublish = await runAutoPublish({
+        clientId,
+        maxPosts: 5,
+      });
+    } catch (err) {
+      results.autoPublishError = String(err);
+    }
+  }
+
+  // 4. Automated Outreach Follow-ups
+  if (action === 'all' || action === 'followup') {
+    try {
+      results.followUps = await runOutreachFollowUps({
+        clientId,
+        campaignId,
+        budgetMs: 60_000,
+      });
+    } catch (err) {
+      results.followUpsError = String(err);
+    }
+  }
+
+  // 5. Verification
   if (action === 'all' || action === 'verify') {
     results.verification = await runLinkVerification({
       clientId,
       campaignId,
       budgetMs: 60_000,
     });
+  }
+
+  // 6. Authority Metrics Sync
+  if (action === 'all' || action === 'authority') {
+    try {
+      results.authoritySync = await syncAuthority({
+        clientId,
+        campaignId,
+      });
+    } catch (err) {
+      results.authoritySyncError = String(err);
+    }
   }
 
   results.completedAt = new Date().toISOString();
@@ -72,7 +121,7 @@ export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   const clientId = params.get('clientId') ?? undefined;
   const campaignId = params.get('campaignId') ?? undefined;
-  const actionParam = params.get('action') as 'discover' | 'qualify' | 'verify' | 'all' | null;
+  const actionParam = params.get('action') as PipelineAction | null;
   const action = actionParam ?? 'all';
 
   try {
@@ -102,7 +151,7 @@ export async function POST(req: NextRequest) {
 
   const clientId = (body.clientId as string) || req.nextUrl.searchParams.get('clientId') || undefined;
   const campaignId = (body.campaignId as string) || req.nextUrl.searchParams.get('campaignId') || undefined;
-  const action = (body.action as 'discover' | 'qualify' | 'verify' | 'all') || 'all';
+  const action = (body.action as PipelineAction) || 'all';
 
   try {
     const stats = await executePipeline({ clientId, campaignId, action });

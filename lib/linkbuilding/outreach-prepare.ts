@@ -34,6 +34,14 @@ const DEFAULT_BUDGET_MS = 240_000;
 const DEFAULT_MAX_PROSPECTS = 40;
 const PER_HOST_DELAY_MS = 2_000;
 
+/**
+ * Prospects scoring at or above this threshold get their initial outreach
+ * message auto-approved — no human review. The threshold is deliberately
+ * high: a false positive at this stage sends an email from the client's
+ * domain, and that cannot be taken back.
+ */
+const AUTO_APPROVE_QUALITY_THRESHOLD = 90;
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export interface PrepareOptions {
@@ -53,6 +61,7 @@ export interface PrepareStats {
   contactsFound: number;
   noContact: number;
   drafted: number;
+  autoApproved: number;
   rejectedByValidation: number;
   modelDeclined: number;
   unreachable: number;
@@ -118,6 +127,7 @@ export async function runOutreachPreparation(options: PrepareOptions): Promise<P
     contactsFound: 0,
     noContact: 0,
     drafted: 0,
+    autoApproved: 0,
     rejectedByValidation: 0,
     modelDeclined: 0,
     unreachable: 0,
@@ -284,6 +294,10 @@ export async function runOutreachPreparation(options: PrepareOptions): Promise<P
         })
       );
 
+      const isHighConfidence =
+        problems.length === 0 &&
+        (prospect.qualityScore ?? 0) >= AUTO_APPROVE_QUALITY_THRESHOLD;
+
       await withRetry(() =>
         db.outreachMessage.create({
           data: {
@@ -292,23 +306,37 @@ export async function runOutreachPreparation(options: PrepareOptions): Promise<P
             sequenceIndex: 0,
             subject: draft.subject,
             body: draft.body,
-            //  A draft that failed validation is stored, not discarded: the
-            //  problems are how the prompt gets better, and a person may still
-            //  choose to rewrite and approve it by hand.
-            status: problems.length === 0 ? 'draft' : validation.skipped ? 'skipped' : 'rejected',
+            status: isHighConfidence
+              ? 'approved'
+              : problems.length === 0
+              ? 'draft'
+              : validation.skipped
+              ? 'skipped'
+              : 'rejected',
             validationProblems: problems,
+            ...(isHighConfidence ? { approvedAt: new Date() } : {}),
           },
         })
       );
 
       if (problems.length === 0) {
-        stats.drafted++;
-        await withRetry(() =>
-          db.outreachThread.update({
-            where: { id: thread.id },
-            data: { status: 'awaiting_approval' },
-          })
-        );
+        if (isHighConfidence) {
+          stats.autoApproved++;
+          await withRetry(() =>
+            db.outreachThread.update({
+              where: { id: thread.id },
+              data: { status: 'approved' },
+            })
+          );
+        } else {
+          stats.drafted++;
+          await withRetry(() =>
+            db.outreachThread.update({
+              where: { id: thread.id },
+              data: { status: 'awaiting_approval' },
+            })
+          );
+        }
       } else {
         stats.rejectedByValidation++;
       }

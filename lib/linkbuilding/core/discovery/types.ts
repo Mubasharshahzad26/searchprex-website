@@ -20,6 +20,8 @@ export type DiscoverySource =
   | 'serp_footprint'
   /** Outbound links mined from a seed page. Free. */
   | 'link_neighbourhood'
+  /** External pages linking to dead/404 competitor pages. */
+  | 'broken_link'
   /** Hand-added. */
   | 'manual';
 

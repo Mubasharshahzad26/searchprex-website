@@ -175,16 +175,23 @@ export default function LinksDashboard({
     }
   };
 
-  const handleRunAction = async (action: 'discover' | 'qualify' | 'verify') => {
+  const handleRunAction = async (action: 'discover' | 'qualify' | 'verify' | 'followup' | 'authority') => {
     setIsRunningAction(true);
     setActionStatus(`Running ${action} pipeline...`);
     try {
       const targetCampaign = selectedCampaignId || undefined;
-      const res = await fetch('/api/cron/backlinks-autopilot', {
+      const endpoint =
+        action === 'followup'
+          ? '/api/cron/outreach-followup'
+          : action === 'authority'
+          ? '/api/cron/authority-sync'
+          : '/api/cron/backlinks-autopilot';
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action,
+          action: action === 'followup' || action === 'authority' ? undefined : action,
           campaignId: targetCampaign,
         }),
       });
@@ -330,6 +337,20 @@ export default function LinksDashboard({
                   className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 shadow-xs hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
                 >
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> Verify Live Links
+                </button>
+                <button
+                  onClick={() => handleRunAction('followup')}
+                  disabled={isRunningAction}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 shadow-xs hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
+                >
+                  <Mail className="h-3.5 w-3.5 text-indigo-600" /> Auto Follow-ups
+                </button>
+                <button
+                  onClick={() => handleRunAction('authority')}
+                  disabled={isRunningAction}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 shadow-xs hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
+                >
+                  <BarChart3 className="h-3.5 w-3.5 text-amber-600" /> Sync DA Metrics
                 </button>
               </div>
             </div>
