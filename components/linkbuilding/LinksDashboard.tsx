@@ -214,7 +214,7 @@ export default function LinksDashboard({
   const isMSO = activeCampaign?.targetDomain?.includes('michigansportsoutdoor.com');
 
   return (
-    <div className="mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 font-sans">
+    <div className="mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 pt-28 sm:pt-32 font-sans">
       {/* Top Header with Multi-Client Switcher */}
       <header className="mb-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/80 pb-6">
