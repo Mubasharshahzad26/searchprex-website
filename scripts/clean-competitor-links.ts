@@ -53,14 +53,23 @@ async function main() {
   console.log(`WordPress: ${conn.baseUrl}`)
 
   const likeClauses = SEARCH_HOSTS.map(h => `"generatedContent"::text ILIKE '%${h}%'`).join(' OR ')
+  //  Ek product ke kai rows hote hain (har run apna banata hai), aur ek hi
+  //  WordPress page ko chaar baar parhne-likhne ka koi faida nahi — sirf origin
+  //  par bojh barhta hai. DISTINCT ON har URL ka sabse naya row uthata hai.
   const rows = await db.$queryRawUnsafe<Array<{ id: string; pageUrl: string; postId: number | null }>>(`
-    SELECT id, "pageUrl", ("generatedContent"->'productData'->>'id')::int AS "postId"
-      FROM "AutopilotPage"
-     WHERE status = 'published'
-       AND "pageUrl" LIKE '%/product/%'
-       AND (${likeClauses})
-     ORDER BY "publishedAt" DESC NULLS LAST
-     ${LIMIT > 0 ? `LIMIT ${LIMIT}` : ''}
+    SELECT * FROM (
+      SELECT DISTINCT ON ("pageUrl")
+             id, "pageUrl",
+             ("generatedContent"->'productData'->>'id')::int AS "postId",
+             "publishedAt"
+        FROM "AutopilotPage"
+       WHERE status = 'published'
+         AND "pageUrl" LIKE '%/product/%'
+         AND (${likeClauses})
+       ORDER BY "pageUrl", "publishedAt" DESC NULLS LAST
+    ) d
+    ORDER BY d."publishedAt" DESC NULLS LAST
+    ${LIMIT > 0 ? `LIMIT ${LIMIT}` : ''}
   `)
 
   console.log(`Saaf karne wale pages: ${rows.length}\n`)
@@ -115,11 +124,19 @@ async function main() {
 
           //  Saved copy bhi theek kar dete hain, warna agli baar audit isi
           //  page ko dobara pakdega aur "kitne bache hain" ka jawab galat aayega.
+          //
+          //  Update pageUrl par hota hai, row id par nahi. Ek hi product ke kai
+          //  AutopilotPage rows hote hain — har autopilot run apna row banata hai
+          //  (unique key runId+pageUrl hai) — aur kuch products ke chaar chaar
+          //  rows mile. Sirf process kiye gaye row ko theek karne se baqi siblings
+          //  purana content liye baithi rehti thin, is liye WordPress saaf hone ke
+          //  bawajood "kitne bache" wali ginti girti hi nahi thi.
           await db.$executeRawUnsafe(
             `UPDATE "AutopilotPage"
                 SET "generatedContent" = jsonb_set("generatedContent"::jsonb, '{generated,contentHtml}', to_jsonb($1::text))
-              WHERE id = $2`,
-            html, row.id
+              WHERE "pageUrl" = $2
+                AND "generatedContent"->'generated'->>'contentHtml' IS NOT NULL`,
+            html, row.pageUrl
           )
         }
 
