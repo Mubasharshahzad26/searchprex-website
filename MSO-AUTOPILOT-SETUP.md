@@ -177,7 +177,32 @@ curl -X POST "https://www.searchprex.com/api/mso/status?key=$CRON_SECRET" \
 
 ---
 
-## 7. Daily cap kaam kaise karta hai
+## 7. Outbound link policy (dono engines par aik jaisi)
+
+Pehle dono engines ke rules ulat the: Searchprex ka scorer external link
+**zaroori** samajhta tha (aur prompt KnifeCenter/Bladeforums tajweez karta tha),
+jabke NicheSEO har external link par **−50** lagata tha. KnifeCenter aapka
+seedha competitor hai — yaani product pages competitor ko link bhej rahe thay.
+
+Ab dono par aik hi rule hai:
+
+| Link | Nateeja |
+|---|---|
+| Koi external link nahi | ✅ Theek (zaroori nahi hai) |
+| Wikipedia (steel grade, lock type) | ✅ Allowed |
+| Product ki apni manufacturer site | ✅ Allowed |
+| KnifeCenter, BladeHQ, Bladeforums, Amazon, eBay | ❌ −50, page fail |
+
+Allowlist do jagah hai aur **dono ko saath badalna hai**:
+
+- `lib/autopilot/scoring.ts` → `ALLOWED_EXTERNAL_HOSTS`
+- NicheSEO Pro: `server/mso-worker.ts` → `ALLOWED_EXTERNAL_HOSTS`
+
+Naya brand stock karein to uska domain dono jagah add kar dein.
+
+---
+
+## 8. Daily cap kaam kaise karta hai
 
 Dono engines ek hi product queue par kaam karte hain — Searchprex aage se
 (id 1, 2, 3…), NicheSEO Pro peeche se (id 36779, 36778…) — aur dono apna publish

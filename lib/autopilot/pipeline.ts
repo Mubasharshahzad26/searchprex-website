@@ -475,9 +475,13 @@ function buildPrompt(p: {
   const currentMetaTitle = pd.currentMetaTitle ?? (pd as any).meta_title ?? '';
   const currentMetaDescription = pd.currentMetaDescription ?? (pd as any).meta_description ?? '';
 
+  //  Wikipedia and the manufacturer only. This used to offer Bladeforums and
+  //  the KnifeCenter blog as well — KnifeCenter is a competing knife retailer,
+  //  and the rule sat on a prompt that asked for one to two outbound links on
+  //  every product page.
   const brandAuthoritySites = brand
-    ? `- Wikipedia article on the material/technology (e.g. https://en.wikipedia.org/wiki/M390_steel)\n- Official brand website (search: "${brand} official")\n- Bladeforums.com (industry community reference)`
-    : `- Wikipedia article on the material/technology\n- Industry authority sites (Bladeforums.com, KnifeCenter blog)`;
+    ? `- Wikipedia article on the material or locking mechanism (e.g. https://en.wikipedia.org/wiki/M390_steel)\n- The official ${brand} manufacturer website`
+    : `- Wikipedia article on the material or locking mechanism`;
 
   return `You are writing SEO product page copy for ${p.siteDomain}, a Michigan-based outdoor and knife retailer serving hunters, anglers, and outdoor enthusiasts across the United States.
 
@@ -517,9 +521,12 @@ STRICT RULES:
 4. Write in plain, direct tone — like a knowledgeable retail associate.
 5. Internal links must come ONLY from this list (use exactly, don't invent):
 ${validInternalLinks}
-6. External authoritative links: Include 1-2 external links to authoritative reference sites where genuinely helpful:
+6. External links: AT MOST ONE, and only if it genuinely helps the reader. None is fine.
+   The only permitted destinations are:
 ${brandAuthoritySites}
-   Only link to real, well-known reference sites. Do NOT invent URLs.
+   NEVER link to any other retailer, shop, marketplace, or knife community
+   (KnifeCenter, BladeHQ, Bladeforums, Amazon, eBay and the like are forbidden —
+   they compete for the same sale). Do NOT invent URLs.
 7. Word count: 400-550 words in contentHtml. Hit at least 400.
 8. Include 3 FAQ questions a real buyer would ask (use case, care, comparison), NOT marketing-style.
 
