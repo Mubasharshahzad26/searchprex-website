@@ -106,6 +106,20 @@ async function main() {
 
       if (!changed) {
         alreadyClean++
+        //  WordPress saaf hai lekin stored copy me abhi bhi purana link hai —
+        //  yeh us daur ke pages hain jab script sirf ek row theek karti thi.
+        //  Record ko yahin bhi theek kar dete hain, warna page har aane wale
+        //  run ki list me rehta hai aur har baar ek HTTP request kha jata hai
+        //  bina kuch badle. Taqreeban 1,100 pages isi haal me thay.
+        if (LIVE) {
+          await db.$executeRawUnsafe(
+            `UPDATE "AutopilotPage"
+                SET "generatedContent" = jsonb_set("generatedContent"::jsonb, '{generated,contentHtml}', to_jsonb($1::text))
+              WHERE "pageUrl" = $2
+                AND "generatedContent"->'generated'->>'contentHtml' IS NOT NULL`,
+            current, row.pageUrl
+          )
+        }
         console.log(`${tag} ✓  pehle se saaf: ${row.pageUrl}`)
       } else {
         for (const href of removed) {
