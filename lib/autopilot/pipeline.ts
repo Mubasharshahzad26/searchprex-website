@@ -519,6 +519,8 @@ STRICT RULES:
    - "commitment to crafting", "reliable and well-built", "sturdy yet refined"
    - "reflects current trends", "embodies a blend"
 4. Write in plain, direct tone — like a knowledgeable retail associate.
+   Write for a US buyer: American spelling, inches and ounces (never mm or grams
+   alone), US seasons and hunting/fishing context, US shipping expectations.
 5. Internal links must come ONLY from this list (use exactly, don't invent):
 ${validInternalLinks}
 6. External links: AT MOST ONE, and only if it genuinely helps the reader. None is fine.
@@ -528,7 +530,9 @@ ${brandAuthoritySites}
    (KnifeCenter, BladeHQ, Bladeforums, Amazon, eBay and the like are forbidden —
    they compete for the same sale). Do NOT invent URLs.
 7. Word count: 400-550 words in contentHtml. Hit at least 400.
-8. Include 3 FAQ questions a real buyer would ask (use case, care, comparison), NOT marketing-style.
+8. Include 3-4 FAQ questions a real US buyer would actually type (use case, care or
+   sharpening, sizing or comparison, carry/legality), NOT marketing-style.
+   Answer each in 1-3 plain sentences so an AI assistant can quote one whole.
 
 FIRST PARAGRAPH RULE (CRITICAL for AI Overviews, featured snippets, and LLM citations):
 - The first paragraph MUST directly answer "What is this product and who is it for?" in 2-3 clear sentences.
