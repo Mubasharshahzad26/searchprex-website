@@ -21,7 +21,7 @@ const MIN_UNIQUE_RATIO = 0.55;
 //
 //  NicheSEO Pro enforces the same rule on the same storefront; keep the two
 //  lists in step.
-const ALLOWED_EXTERNAL_HOSTS = [
+export const ALLOWED_EXTERNAL_HOSTS = [
   'wikipedia.org',
   'srmknives.com',
   'civivi.com',
