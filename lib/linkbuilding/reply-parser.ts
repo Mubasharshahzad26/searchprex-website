@@ -13,7 +13,7 @@
 //    auto_reply  -> Left untouched (OOF / holiday auto-responders)
 // ═══════════════════════════════════════════════════════════
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool, hasGeminiKeySource } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { withRetry } from '@/lib/db-retry';
 
@@ -43,12 +43,12 @@ export async function parseInboundReply(options: {
 }): Promise<ParsedReply> {
   const { threadId, fromEmail, subject, bodyText } = options;
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = hasGeminiKeySource();
   if (!apiKey) {
     throw new Error('GEMINI_API_KEY is not set — cannot classify inbound reply.');
   }
 
-  const gemini = new GoogleGenerativeAI(apiKey);
+  const gemini = geminiPool;
   const model = gemini.getGenerativeModel({
     model: MODEL,
     generationConfig: {

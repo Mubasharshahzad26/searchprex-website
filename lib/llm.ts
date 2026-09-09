@@ -15,6 +15,8 @@
 // 404 "no longer available to new users" on this key, so pinning is actively
 // worse here — the alias keeps working as Google rotates releases.
 
+import { generateWithPool } from "@/lib/gemini-pool";
+
 const GEMINI_MODEL = "gemini-flash-latest";
 const ANTHROPIC_MODEL = "claude-sonnet-4-5";
 
@@ -61,31 +63,24 @@ function stripFence(text: string): string {
   return t.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "").trim();
 }
 
+/**
+ * Goes through the shared 30-key pool rather than a single key, so a key that
+ * has spent its free daily quota is skipped instead of failing the request.
+ * The pool falls back to GEMINI_API_KEY when no pool is configured, so nothing
+ * here depends on the paid key still existing.
+ */
 async function callGemini(prompt: string, temperature: number): Promise<string> {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new LlmError("GEMINI_API_KEY is not set.", 503);
-
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${key}`,
-    {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature, responseMimeType: "application/json" },
-      }),
-      cache: "no-store",
-    }
-  );
-
-  const json = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new LlmError(json?.error?.message ?? `Gemini HTTP ${res.status}`, res.status);
+  try {
+    return await generateWithPool(prompt, {
+      model: GEMINI_MODEL,
+      temperature,
+      json: true,
+    });
+  } catch (err) {
+    const message = (err as Error).message ?? "Gemini call failed.";
+    const status = (err as { status?: number }).status;
+    throw new LlmError(message, status ?? (/no gemini keys/i.test(message) ? 503 : undefined));
   }
-
-  const text = json?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (typeof text !== "string" || !text) throw new LlmError("Gemini returned no content.");
-  return text;
 }
 
 async function callAnthropic(prompt: string, temperature: number): Promise<string> {

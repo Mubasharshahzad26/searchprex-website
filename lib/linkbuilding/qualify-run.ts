@@ -10,7 +10,7 @@
 //  Phase 3 — not an instruction to send anything.
 // ═══════════════════════════════════════════════════════════
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool, hasGeminiKeySource } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { withRetry } from '@/lib/db-retry';
 import { fetchPage } from './core/fetch';
@@ -59,10 +59,9 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
  * unconfigured model lowers confidence instead of inventing relevance.
  */
 function buildClassifier(topic: string, signal?: AbortSignal) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) return undefined;
+  if (!hasGeminiKeySource()) return undefined;
 
-  const gemini = new GoogleGenerativeAI(apiKey);
+  const gemini = geminiPool;
   let calls = 0;
 
   const classify = async (input: {

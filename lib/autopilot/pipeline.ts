@@ -1,12 +1,12 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { db } from '@/lib/db';
 import { scoreContent } from './scoring';
 import { publishToWordPress } from './publisher';
 import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
 import { fetchProductDataFromCsv, ProductFetchError } from './product-fetcher';
+import { getPooledModel } from '@/lib/gemini-pool';
+import { getMsoQuota } from './mso-daily-limit';
 
-const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const MODEL = 'gemini-flash-lite-latest';
 
 type WpCreds = {
@@ -36,8 +36,24 @@ export async function runAutopilotBatch(clientId: string) {
   }
 
   const config = client.autopilotConfig;
-  const batchSize = config.maxPagesPerRun;
   const isDryRun = config.dryRunMode;
+
+  //  The cap is counted across both engines, not per run. NicheSEO Pro works
+  //  the same queue from the other end and records its output in the same
+  //  AutopilotPage table, so checking only this client's runs would let the
+  //  two of them publish the daily limit twice over. A dry run changes
+  //  nothing on the site, so it is not held to the cap.
+  const quota = await getMsoQuota();
+  if (!isDryRun && quota.limitReached) {
+    console.log(
+      `[autopilot] Daily limit reached: ${quota.publishedToday}/${quota.limit} for ${quota.cycleDateLabel} (PKT). Paused until the next cycle.`
+    );
+    return { skipped: 'daily_limit_reached', clientId, ...quota };
+  }
+
+  const batchSize = isDryRun
+    ? config.maxPagesPerRun
+    : Math.min(config.maxPagesPerRun, quota.remainingToday);
 
   const wpConn = client.cmsConnections.find(c => c.cmsType === 'wordpress');
   if (!wpConn) {
@@ -121,7 +137,7 @@ export async function runAutopilotBatch(clientId: string) {
           );
         }
 
-        const model = gemini.getGenerativeModel({
+        const model = getPooledModel({
           model: MODEL,
           generationConfig: {
             responseMimeType: 'application/json',

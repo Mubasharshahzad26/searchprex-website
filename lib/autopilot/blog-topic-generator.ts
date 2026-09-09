@@ -1,7 +1,7 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 
-const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const gemini = geminiPool;
 const MODEL = 'gemini-flash-lite-latest';
 
 export type BlogTopicCategory = 'comparison' | 'buying-guide' | 'educational' | 'roundup';

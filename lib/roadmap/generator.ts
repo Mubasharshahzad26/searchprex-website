@@ -1,4 +1,4 @@
-﻿import { GoogleGenerativeAI } from '@google/generative-ai'
+import { geminiPool } from '@/lib/gemini-pool'
 import { collectRoadmapData } from './data-collector'
 import { db } from '../db'
 import { withRetry } from '../db-retry'
@@ -195,7 +195,7 @@ export async function generateRoadmap(params: {
 
   try {
     const data = await collectRoadmapData(auditRunId, clientId)
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+    const genAI = geminiPool
     const model = genAI.getGenerativeModel({
       model: 'gemini-3.6-flash',
       generationConfig: { responseMimeType: 'application/json', temperature: 0.4 },

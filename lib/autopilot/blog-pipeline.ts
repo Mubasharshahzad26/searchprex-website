@@ -1,10 +1,10 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { submitUrl } from '@/lib/indexing';
 import { generateBlogTopic, WEEKLY_SCHEDULE, type BlogTopic } from './blog-topic-generator';
 import { publishBlogToWordPress } from './blog-publisher';
 
-const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const gemini = geminiPool;
 const MODEL = 'gemini-flash-lite-latest';
 
 // MSO WordPress config

@@ -9,7 +9,7 @@
 //  so a bug in drafting cannot mail anyone.
 // ═══════════════════════════════════════════════════════════
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool, hasGeminiKeySource } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { withRetry } from '@/lib/db-retry';
 import { fetchPage } from './core/fetch';
@@ -135,8 +135,8 @@ export async function runOutreachPreparation(options: PrepareOptions): Promise<P
     problemCounts: {},
   };
 
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error('GEMINI_API_KEY is not set — drafts cannot be composed.');
+  if (!hasGeminiKeySource())
+    throw new Error('No Gemini key source configured — drafts cannot be composed.');
 
   const mailbox = await withRetry(() =>
     db.outreachMailbox.findUniqueOrThrow({ where: { id: mailboxId } })
@@ -145,7 +145,7 @@ export async function runOutreachPreparation(options: PrepareOptions): Promise<P
     throw new Error(`Mailbox ${mailbox.fromEmail} is not active.`);
   }
 
-  const gemini = new GoogleGenerativeAI(apiKey);
+  const gemini = geminiPool;
 
   const campaigns = await withRetry(() =>
     db.linkCampaign.findMany({

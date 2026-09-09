@@ -14,7 +14,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import { Resend } from 'resend';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool, hasGeminiKeySource } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { withRetry } from '@/lib/db-retry';
 
@@ -113,7 +113,7 @@ export async function runOutreachFollowUps(
   };
 
   const apiKey = process.env.RESEND_API_KEY;
-  const geminiKey = process.env.GEMINI_API_KEY;
+  const geminiKey = hasGeminiKeySource();
 
   if (!apiKey || !geminiKey) {
     console.warn('[followup-run] RESEND_API_KEY or GEMINI_API_KEY missing — skipping follow-ups.');
@@ -122,7 +122,7 @@ export async function runOutreachFollowUps(
   }
 
   const resend = new Resend(apiKey);
-  const gemini = new GoogleGenerativeAI(geminiKey);
+  const gemini = geminiPool;
 
   const suppression = new Set(
     (await withRetry(() => db.outreachSuppression.findMany({ select: { value: true } }))).map(

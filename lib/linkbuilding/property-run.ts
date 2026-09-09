@@ -12,7 +12,7 @@
 //  approved; a person posts them, spaced out.
 // ═══════════════════════════════════════════════════════════
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiPool, hasGeminiKeySource } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { withRetry } from '@/lib/db-retry';
 import { canCreateProperty, checkPostPolicy, MAX_PROPERTIES_PER_CLIENT } from './core/properties/policy';
@@ -105,8 +105,8 @@ export interface DraftPostResult {
  * matters, and a per-property check would miss it entirely.
  */
 export async function draftPropertyPost(input: DraftPostInput): Promise<DraftPostResult> {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error('GEMINI_API_KEY is not set — posts cannot be drafted.');
+  if (!hasGeminiKeySource())
+    throw new Error('No Gemini key source configured — posts cannot be drafted.');
 
   const property = await withRetry(() =>
     db.brandProperty.findUniqueOrThrow({
@@ -125,7 +125,7 @@ export async function draftPropertyPost(input: DraftPostInput): Promise<DraftPos
     })
   );
 
-  const gemini = new GoogleGenerativeAI(apiKey);
+  const gemini = geminiPool;
   const model = gemini.getGenerativeModel({
     model: MODEL,
     generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 2400, temperature: 0.85 },
