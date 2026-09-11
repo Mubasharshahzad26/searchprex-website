@@ -6,6 +6,7 @@ export async function publishToWordPress(params: {
   metaDescription: string;
   metaTitle?: string;
   focusKeyword?: string;
+  excerpt?: string;
   username: string;
   appPassword: string;
 }) {
@@ -33,6 +34,9 @@ export async function publishToWordPress(params: {
   };
   if (params.title) {
     body.title = params.title;
+  }
+  if (params.excerpt) {
+    body.excerpt = params.excerpt;
   }
   if (Object.keys(meta).length > 0) {
     body.meta = meta;

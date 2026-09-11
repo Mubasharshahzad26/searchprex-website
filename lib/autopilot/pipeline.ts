@@ -1,6 +1,7 @@
 import { db } from '@/lib/db';
 import { scoreContent } from './scoring';
 import { publishToWordPress } from './publisher';
+import { buildBladeHqLayout } from './bladehq-layout';
 import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
 import { fetchProductDataFromCsv, ProductFetchError } from './product-fetcher';
@@ -243,10 +244,16 @@ export async function runAutopilotBatch(clientId: string) {
           continue;
         }
 
+        const bladeHqLayout = buildBladeHqLayout({
+          product: productData,
+          generated,
+        });
+
         const published = await publishToWordPress({
           siteUrl: wpCreds.baseUrl,
           postId: productData.id,
-          content: generated.contentHtml + buildFaqSchema(generated.faqs),
+          content: bladeHqLayout.fullDescription + buildFaqSchema(generated.faqs),
+          excerpt: bladeHqLayout.shortDescription,
           metaTitle: generated.metaTitle,
           metaDescription: generated.metaDescription,
           username: wpCreds.username,
