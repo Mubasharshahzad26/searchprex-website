@@ -1,6 +1,6 @@
 // lib/autopilot/bladehq-layout.ts
-// Blade HQ 2-Column Split Layout Generator (Layout B)
-// 100% Pure Inline CSS (Zero raw code leaks)
+// Dynamic Blade HQ Layout Engine (Category-Adaptive + Entity-Rich Heading Rotation + 3 Layout Flavors)
+// 100% Pure Inline CSS (Zero raw code leaks) & Strict Semantic H2/H3 Tree
 
 export interface BladeHqLayoutInput {
   product: {
@@ -23,93 +23,284 @@ export interface BladeHqLayoutInput {
   };
 }
 
-export function extractKnifeSpecs(product: BladeHqLayoutInput['product']) {
-  const fullText = (
-    (product.name || product.title || '') + ' ' +
-    (product.description || '') + ' ' +
-    (product.short_description || '') + ' ' +
-    (product.brand || '')
-  ).toLowerCase();
+export type ProductCategoryType = 
+  | 'flashlight' 
+  | 'sharpener' 
+  | 'axe_tool' 
+  | 'edc_accessory' 
+  | 'fixed_blade' 
+  | 'folding_knife';
+
+export function detectProductCategory(name: string, desc: string, categories: any[] = []): ProductCategoryType {
+  const catNames = (categories || []).map(c => (typeof c === 'string' ? c : c.name || '')).join(' ').toLowerCase();
+  const text = `${name} ${desc} ${catNames}`.toLowerCase();
+
+  if (text.includes('flashlight') || text.includes('headlamp') || text.includes('lumens') || text.includes('torch light') || text.includes('weapon light')) {
+    return 'flashlight';
+  }
+  if (text.includes('sharpener') || text.includes('sharpening') || text.includes('whetstone') || text.includes('strop') || text.includes('honing')) {
+    return 'sharpener';
+  }
+  if (text.includes('axe') || text.includes('hatchet') || text.includes('tomahawk') || text.includes('machete') || text.includes('cleaver') || text.includes('camp saw')) {
+    return 'axe_tool';
+  }
+  if (text.includes('wallet') || text.includes('money clip') || text.includes('keychain') || text.includes('lanyard') || text.includes('bead') || text.includes('pen') || text.includes('sheath') || text.includes('organizer') || text.includes('pouch') || text.includes('backpack') || text.includes('pocket tool')) {
+    return 'edc_accessory';
+  }
+  if (text.includes('fixed blade') || text.includes('full tang') || text.includes('kydex') || text.includes('dagger') || text.includes('boot knife') || text.includes('bowie') || text.includes('hunting knife')) {
+    return 'fixed_blade';
+  }
+  return 'folding_knife';
+}
+
+export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
+  const name = product.name || product.title || '';
+  const desc = (product.description || '') + ' ' + (product.short_description || '');
+  const brand = product.brand || name.split(' ')[0] || 'Michigan Sports Outdoor';
+  const categoryType = detectProductCategory(name, desc, product.categories);
+  const fullText = `${name} ${desc} ${brand}`.toLowerCase();
 
   const specs: Record<string, string> = {
-    'Brand': product.brand || (product.name || product.title || '').split(' ')[0] || 'Michigan Sports Outdoor',
-    'Product Type': 'Folding Knife / Outdoor Tool',
-    'Blade Metallurgy': 'High-Carbon Stainless Steel',
-    'Lock / Tang Type': 'Liner Lock / Positive Detent',
-    'Handle Material': 'Ergonomic Composite / Textured G-10',
-    'Blade Length': '3.25" (8.26 cm)',
-    'Pocket Clip': 'Deep Carry Reversible Stainless Clip',
-    'Origin / Quality': 'Inspected & Dispatched from Michigan, USA',
-    'Warranty': 'Manufacturer Lifetime Warranty & 30-Day Guarantee'
+    'Brand': brand
   };
 
+  // Attributes from WooCommerce if present
+  const attrMap: Record<string, string> = {};
   if (product.attributes && Array.isArray(product.attributes)) {
     for (const attr of product.attributes) {
       const val = attr.options && attr.options[0] ? String(attr.options[0]).trim() : '';
       if (!val) continue;
       const attrName = (attr.name || '').toLowerCase();
-      if (attrName.includes('blade material')) {
-        specs['Blade Metallurgy'] = val;
-      } else if (attrName.includes('blade length')) {
-        specs['Blade Length'] = val.includes('"') ? val : `${val}"`;
-      } else if (attrName.includes('handle material')) {
-        specs['Handle Material'] = val;
-      } else if (attrName.includes('manufacturer')) {
-        specs['Brand'] = val;
-      } else if (attrName.includes('country of origin')) {
-        specs['Origin / Quality'] = `Crafted in ${val} & Dispatched from Michigan, USA`;
-      } else if (attrName.includes('fixed') || attrName.includes('folding')) {
-        specs['Product Type'] = val;
+      attrMap[attrName] = val;
+    }
+  }
+
+  // Steel detection helper
+  let detectedSteel = 'High-Carbon Stainless Steel';
+  if (attrMap['blade material']) detectedSteel = attrMap['blade material'];
+  else if (fullText.includes('m390mk')) detectedSteel = 'Böhler M390MK Microclean';
+  else if (fullText.includes('m390')) detectedSteel = 'Böhler M390 Stainless';
+  else if (fullText.includes('magnacut')) detectedSteel = 'Crucible CPM MagnaCut';
+  else if (fullText.includes('s35vn')) detectedSteel = 'Crucible CPM-S35VN';
+  else if (fullText.includes('s45vn')) detectedSteel = 'Crucible CPM-S45VN';
+  else if (fullText.includes('20cv')) detectedSteel = 'Crucible CPM-20CV';
+  else if (fullText.includes('1095')) detectedSteel = '1095 High Carbon Cro-Van';
+  else if (fullText.includes('d2')) detectedSteel = 'D2 Tool Steel';
+  else if (fullText.includes('14c28n')) detectedSteel = 'Sandvik 14C28N Stainless';
+  else if (fullText.includes('vg-10') || fullText.includes('vg10')) detectedSteel = 'VG-10 Super Steel';
+  else if (fullText.includes('aus-10') || fullText.includes('aus10')) detectedSteel = 'Japanese AUS-10A';
+  else if (fullText.includes('n690')) detectedSteel = 'Böhler N690 Cobalt Stainless';
+
+  // Handle detection helper
+  let detectedHandle = 'Ergonomic Composite / Textured G-10';
+  if (attrMap['handle material']) detectedHandle = attrMap['handle material'];
+  else if (fullText.includes('titanium')) detectedHandle = '6Al4V Grade 5 Titanium';
+  else if (fullText.includes('carbon fiber')) detectedHandle = 'Woven Carbon Fiber';
+  else if (fullText.includes('micarta')) detectedHandle = 'Canvas / Linen Micarta';
+  else if (fullText.includes('g-10') || fullText.includes('g10')) detectedHandle = 'Textured G-10 Phenolic';
+  else if (fullText.includes('aluminum')) detectedHandle = '6061-T6 Aircraft Aluminum';
+  else if (fullText.includes('wood') || fullText.includes('ziricote') || fullText.includes('walnut')) detectedHandle = 'Stabilized Hardwood';
+
+  // Blade length helper
+  let detectedLength = '3.25" (8.26 cm)';
+  if (attrMap['blade length']) {
+    detectedLength = attrMap['blade length'].includes('"') ? attrMap['blade length'] : `${attrMap['blade length']}"`;
+  } else {
+    const lenMatch = fullText.match(/(\d+\.?\d*)\s*("|'|inch)/);
+    if (lenMatch) {
+      const inches = parseFloat(lenMatch[1]);
+      if (inches > 0 && inches < 30) {
+        detectedLength = `${inches}" (${(inches * 2.54).toFixed(1)} cm)`;
       }
     }
+  }
+
+  // Category-specific spec population
+  if (categoryType === 'flashlight') {
+    specs['Product Type'] = 'Tactical Illumination / High-Output Flashlight';
+    const lumenMatch = fullText.match(/(\d{3,5})\s*(?:lumens?|lm)/i);
+    specs['Max Output'] = lumenMatch ? `${lumenMatch[1]} Lumens (Turbo Peak)` : 'High-Output LED Illumination';
+    specs['Beam Profile'] = 'Balanced Long-Range Throw & Wide Flood';
+    specs['Power Architecture'] = fullText.includes('usb') ? 'USB-C Rechargeable Li-ion Battery' : 'High-Drain Rechargeable Battery';
+    specs['Housing Construction'] = detectedHandle.includes('Titanium') ? 'Grade 5 Titanium Body' : 'Aerospace Hard-Anodized Aluminum';
+    specs['Water & Impact Rating'] = 'IPX8 Submersible & 1-2m Impact Resistant';
+    specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
+  } else if (categoryType === 'sharpener') {
+    specs['Product Type'] = 'Precision Knife Sharpener & Honing System';
+    specs['Abrasive Material'] = fullText.includes('diamond') ? 'Monocrystalline Industrial Diamond' : (fullText.includes('ceramic') ? 'Alumina Ceramic Hone' : 'Multi-Grit Precision Abrasive');
+    specs['Grit Progression'] = fullText.includes('coarse') ? 'Coarse Profiling & Fine Finishing' : 'Factory Apex Maintenance Grits';
+    specs['Steel Compatibility'] = 'Standard Carbon, Stainless & Powder Super Steels';
+    specs['Base & Alignment'] = 'Slip-Resistant Ergonomic Bench / Field Base';
+    specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Manufacturer Warranty & 30-Day Guarantee';
+  } else if (categoryType === 'axe_tool') {
+    specs['Product Type'] = 'Field Axe / Splitting Hatchet / Heavy Utility Tool';
+    specs['Head Metallurgy'] = detectedSteel.includes('High') ? detectedSteel : 'Forged High-Carbon Shock-Resistant Steel';
+    specs['Handle Construction'] = fullText.includes('hickory') ? 'American Select Hickory' : (fullText.includes('fiberglass') ? 'Reinforced Fiberglass / Poly' : 'Ergonomic Shock-Absorbing Handle');
+    specs['Overall Length'] = detectedLength !== '3.25" (8.26 cm)' ? detectedLength : '14.5" Field Utility Length';
+    specs['Sheath / Mask'] = 'Heavy-Duty Protective Mask / Sheath';
+    specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
+  } else if (categoryType === 'edc_accessory') {
+    specs['Product Type'] = 'Everyday Carry (EDC) Gear / Tactical Accessory';
+    specs['Primary Material'] = detectedHandle.includes('Composite') ? (fullText.includes('titanium') ? '6Al4V Grade 5 Titanium' : 'Aircraft Aluminum / Stainless Steel') : detectedHandle;
+    specs['Form Factor'] = 'Minimalist Slimline Pocket Profile';
+    specs['Utility Profile'] = 'Tactical Organization & Quick Field Access';
+    specs['Finish / Durability'] = 'Corrosion-Resistant PVD / Weatherproof Finish';
+    specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Manufacturer Warranty & 30-Day Guarantee';
+  } else if (categoryType === 'fixed_blade') {
+    specs['Product Type'] = 'Fixed Blade Utility / Field Dressing Knife';
+    specs['Blade Metallurgy'] = detectedSteel;
+    specs['Tang Construction'] = 'Full Tang Integral Steel Construction';
+    specs['Handle Material'] = detectedHandle;
+    specs['Blade Length'] = detectedLength;
+    specs['Sheath System'] = fullText.includes('leather') ? 'Heavy-Duty Stitched Leather Sheath' : 'Molded Kydex Tactical Belt Sheath';
+    specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
+  } else {
+    // Folding Knife (default)
+    specs['Product Type'] = 'Folding Pocket Knife / Everyday Carry (EDC)';
+    specs['Blade Metallurgy'] = detectedSteel;
+
+    let detectedLock = 'Liner Lock with Positive Detent';
+    if (fullText.includes('ram-lok')) detectedLock = 'Ram-Lok Crossbar Lock';
+    else if (fullText.includes('crossbar') || fullText.includes('axis')) detectedLock = 'Crossbar Axis Lock';
+    else if (fullText.includes('tri-ad')) detectedLock = 'Cold Steel Andrew Demko Tri-Ad Lock';
+    else if (fullText.includes('framelock') || fullText.includes('frame lock')) detectedLock = 'Solid Integral Frame Lock';
+    else if (fullText.includes('button lock')) detectedLock = 'Plunge Button Lock';
+    else if (fullText.includes('slip joint') || fullText.includes('slipjoint')) detectedLock = 'Traditional Slip Joint';
+
+    specs['Lock Mechanism'] = detectedLock;
+    specs['Handle Material'] = detectedHandle;
+    specs['Blade Length'] = detectedLength;
+    specs['Pocket Clip'] = 'Deep Carry Reversible Stainless Clip';
+    specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
   }
 
   if (product.sku) {
     specs['Model / SKU'] = product.sku;
   }
 
-  // Steel detection
-  if (fullText.includes('m390mk')) specs['Blade Metallurgy'] = 'Böhler M390MK Microclean';
-  else if (fullText.includes('m390')) specs['Blade Metallurgy'] = 'Böhler M390 Stainless';
-  else if (fullText.includes('magnacut')) specs['Blade Metallurgy'] = 'Crucible CPM MagnaCut';
-  else if (fullText.includes('s35vn')) specs['Blade Metallurgy'] = 'Crucible CPM-S35VN';
-  else if (fullText.includes('s45vn')) specs['Blade Metallurgy'] = 'Crucible CPM-S45VN';
-  else if (fullText.includes('20cv')) specs['Blade Metallurgy'] = 'Crucible CPM-20CV';
-  else if (fullText.includes('1095')) specs['Blade Metallurgy'] = '1095 High Carbon Cro-Van';
-  else if (fullText.includes('d2')) specs['Blade Metallurgy'] = 'D2 Tool Steel';
-  else if (fullText.includes('14c28n')) specs['Blade Metallurgy'] = 'Sandvik 14C28N Stainless';
-  else if (fullText.includes('vg-10') || fullText.includes('vg10')) specs['Blade Metallurgy'] = 'VG-10 Super Steel';
-  else if (fullText.includes('aus-10') || fullText.includes('aus10')) specs['Blade Metallurgy'] = 'Japanese AUS-10A';
-  else if (fullText.includes('n690')) specs['Blade Metallurgy'] = 'Böhler N690 Cobalt Stainless';
+  return { categoryType, specs };
+}
 
-  // Lock detection
-  if (fullText.includes('ram-lok')) specs['Lock / Tang Type'] = 'Ram-Lok Crossbar Lock';
-  else if (fullText.includes('crossbar') || fullText.includes('axis')) specs['Lock / Tang Type'] = 'Crossbar Axis Lock';
-  else if (fullText.includes('tri-ad')) specs['Lock / Tang Type'] = 'Cold Steel Andrew Demko Tri-Ad Lock';
-  else if (fullText.includes('framelock') || fullText.includes('frame lock')) specs['Lock / Tang Type'] = 'Solid Integral Frame Lock';
-  else if (fullText.includes('linerlock') || fullText.includes('liner lock')) specs['Lock / Tang Type'] = 'Liner Lock with Positive Detent';
-  else if (fullText.includes('button lock')) specs['Lock / Tang Type'] = 'Plunge Button Lock';
-  else if (fullText.includes('slip joint') || fullText.includes('slipjoint')) specs['Lock / Tang Type'] = 'Traditional Slip Joint';
-  else if (fullText.includes('fixed') || fullText.includes('full tang')) specs['Lock / Tang Type'] = 'Full Tang Fixed Blade Construction';
+// Backward compatibility helper
+export function extractKnifeSpecs(product: BladeHqLayoutInput['product']): Record<string, string> {
+  return extractProductSpecs(product).specs;
+}
 
-  // Handle detection
-  if (fullText.includes('titanium')) specs['Handle Material'] = '6Al4V Grade 5 Titanium';
-  else if (fullText.includes('carbon fiber')) specs['Handle Material'] = 'Woven Carbon Fiber';
-  else if (fullText.includes('micarta')) specs['Handle Material'] = 'Canvas / Linen Micarta';
-  else if (fullText.includes('g-10') || fullText.includes('g10')) specs['Handle Material'] = 'Textured G-10 Phenolic';
-  else if (fullText.includes('aluminum')) specs['Handle Material'] = '6061-T6 Aircraft Aluminum';
-  else if (fullText.includes('wood') || fullText.includes('ziricote') || fullText.includes('walnut')) specs['Handle Material'] = 'Stabilized Hardwood';
-
-  // Length detection
-  const lenMatch = fullText.match(/(\d+\.?\d*)\s*("|'|inch)/);
-  if (lenMatch) {
-    const inches = parseFloat(lenMatch[1]);
-    if (inches > 0 && inches < 20) {
-      specs['Blade Length'] = `${inches}" (${(inches * 2.54).toFixed(1)} cm)`;
-    }
+export function getDynamicHeadings(product: BladeHqLayoutInput['product']) {
+  const seed = Math.abs(Number(product.id) || 77);
+  const rawName = product.name || product.title || 'Precision Gear';
+  const brand = product.brand || rawName.split(' ')[0] || 'Michigan Sports Outdoor';
+  
+  // Clean short name: strip redundant brand if repeated
+  let cleanName = rawName;
+  if (brand && rawName.toLowerCase().startsWith(brand.toLowerCase())) {
+    cleanName = rawName.slice(brand.length).trim();
+    if (cleanName.startsWith('-') || cleanName.startsWith(':')) cleanName = cleanName.slice(1).trim();
   }
+  const displayLabel = cleanName || rawName;
 
-  return specs;
+  const glanceVariants = [
+    `At a Glance: Key Field Features`,
+    `${displayLabel} at a Glance`,
+    `Quick Specifications &amp; Core Highlights`,
+    `Key Features &amp; Operational Overview`
+  ];
+
+  const overviewVariants = [
+    `${displayLabel} &ndash; Field Overview &amp; Performance`,
+    `${brand} ${displayLabel} &ndash; Field Assessment`,
+    `In the Field: ${displayLabel} Real-World Analysis`,
+    `Product Overview &amp; Practical Utility`
+  ];
+
+  const faqVariants = [
+    `Frequently Asked Questions: ${displayLabel}`,
+    `Common Questions &amp; Expert Answers`,
+    `Field Inquiries &amp; Technical FAQ`,
+    `Frequently Asked Questions`
+  ];
+
+  const specsVariants = [
+    `Engineered Specifications &amp; Technical Data`,
+    `Technical Data &amp; Manufacturing Specs`,
+    `Factory Specifications: ${displayLabel}`,
+    `Build Specifications &amp; Material Analysis`
+  ];
+
+  const companionVariants = [
+    `Customers Also Viewed &amp; Companion Gear`,
+    `Popular Alternatives &amp; Recommended Accessories`,
+    `Field Companions &amp; Related Gear`,
+    `Complementary Tools &amp; Popular Gear`
+  ];
+
+  return {
+    glanceHeading: glanceVariants[seed % glanceVariants.length],
+    overviewHeading: overviewVariants[(seed + 1) % overviewVariants.length],
+    faqHeading: faqVariants[(seed + 2) % faqVariants.length],
+    specsHeading: specsVariants[(seed + 3) % specsVariants.length],
+    companionHeading: companionVariants[(seed + 4) % companionVariants.length],
+    flavor: seed % 3 // 0, 1, or 2
+  };
+}
+
+export function generateGlanceBullets(categoryType: ProductCategoryType, specs: Record<string, string>): string {
+  if (categoryType === 'flashlight') {
+    return `
+    <li style="margin-bottom:8px;"><strong>Luminous Output:</strong> ${specs['Max Output'] || 'High-output LED'} delivering balanced peripheral flood and high candela throw.</li>
+    <li style="margin-bottom:8px;"><strong>Power &amp; Runtime:</strong> ${specs['Power Architecture'] || 'High-capacity battery architecture'} optimized for extended backcountry operation.</li>
+    <li style="margin-bottom:8px;"><strong>Rugged Housing:</strong> ${specs['Housing Construction'] || 'Hard-anodized aerospace aluminum'} with ${specs['Water & Impact Rating'] || 'weatherproof sealing'}.</li>
+    <li style="margin-bottom:8px;"><strong>Operational Mission:</strong> Search and rescue, nighttime tracking, tactical self-defense, and daily utility carry.</li>
+    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} gear backed by factory warranty and Michigan warehouse support.</li>
+    `.trim();
+  } else if (categoryType === 'sharpener') {
+    return `
+    <li style="margin-bottom:8px;"><strong>Abrasive Media:</strong> Premium ${specs['Abrasive Material'] || 'industrial abrasive'} engineered for rapid burr removal and razor apex finishing.</li>
+    <li style="margin-bottom:8px;"><strong>Alloy Compatibility:</strong> Formulated for ${specs['Steel Compatibility'] || 'carbon steels, stainless, and modern powder alloys'}.</li>
+    <li style="margin-bottom:8px;"><strong>Angle Guidance:</strong> ${specs['Base & Alignment'] || 'Precision bevel control'} maintaining uniform factory edge geometry.</li>
+    <li style="margin-bottom:8px;"><strong>Maintenance Utility:</strong> Workshop sharpening, camp touch-ups, and field edge maintenance.</li>
+    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} system backed by factory warranty and Michigan warehouse support.</li>
+    `.trim();
+  } else if (categoryType === 'edc_accessory') {
+    return `
+    <li style="margin-bottom:8px;"><strong>Material &amp; Build:</strong> Precision crafted from ${specs['Primary Material'] || 'premium grade materials'} for durability and minimal pocket weight.</li>
+    <li style="margin-bottom:8px;"><strong>Carry Ergonomics:</strong> ${specs['Form Factor'] || 'Streamlined form factor'} engineered for seamless everyday pocket retention.</li>
+    <li style="margin-bottom:8px;"><strong>Field Utility:</strong> ${specs['Utility Profile'] || 'Organized daily carry, fast deployment, and rugged durability'}.</li>
+    <li style="margin-bottom:8px;"><strong>Finish &amp; Protection:</strong> ${specs['Finish / Durability'] || 'Resistant to abrasions, daily sweat, and field wear'}.</li>
+    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} product inspected and dispatched from our Michigan facility.</li>
+    `.trim();
+  } else if (categoryType === 'fixed_blade') {
+    return `
+    <li style="margin-bottom:8px;"><strong>Blade Metallurgy:</strong> Precision heat-treated ${specs['Blade Metallurgy']} delivering high impact toughness and edge retention.</li>
+    <li style="margin-bottom:8px;"><strong>Tang Construction:</strong> ${specs['Tang Construction']} providing maximum structural strength for rigorous chopping and batoning.</li>
+    <li style="margin-bottom:8px;"><strong>Grip &amp; Chassis:</strong> ${specs['Handle Material']} contoured for hand indexing and zero hot spots during continuous work.</li>
+    <li style="margin-bottom:8px;"><strong>Retention System:</strong> Includes secure ${specs['Sheath System']} for quick belt or pack deployment.</li>
+    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} fixed blade backed by factory warranty and Michigan Sports Outdoor guarantee.</li>
+    `.trim();
+  } else if (categoryType === 'axe_tool') {
+    return `
+    <li style="margin-bottom:8px;"><strong>Head Metallurgy:</strong> Forged ${specs['Head Metallurgy']} tempered to absorb high-impact blows without chipping.</li>
+    <li style="margin-bottom:8px;"><strong>Handle Dynamics:</strong> ${specs['Handle Construction']} engineered to dampen vibration and maximize chopping leverage.</li>
+    <li style="margin-bottom:8px;"><strong>Edge Profile:</strong> Cutting edge optimized for wood splitting, limb clearing, and camp tasks.</li>
+    <li style="margin-bottom:8px;"><strong>Safety &amp; Carry:</strong> Includes heavy-duty ${specs['Sheath / Mask'] || 'protective sheath'} for safe transport.</li>
+    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} tool backed by factory warranty and Michigan warehouse support.</li>
+    `.trim();
+  } else {
+    // Folding Knife (default)
+    return `
+    <li style="margin-bottom:8px;"><strong>Blade Metallurgy:</strong> Precision ground ${specs['Blade Metallurgy']} engineered for high edge retention and wear resistance.</li>
+    <li style="margin-bottom:8px;"><strong>Chassis &amp; Ergonomics:</strong> ${specs['Handle Material']} designed for balanced hand indexing and positive traction in wet or cold environments.</li>
+    <li style="margin-bottom:8px;"><strong>Mechanism / Lock:</strong> ${specs['Lock Mechanism']} providing rock-solid lockup and smooth deployment.</li>
+    <li style="margin-bottom:8px;"><strong>Pocket Retention:</strong> ${specs['Pocket Clip']} enabling discreet, ambidextrous everyday carry.</li>
+    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} cutlery backed by factory warranty and Michigan warehouse support.</li>
+    `.trim();
+  }
 }
 
 export function extractFaqsFromHtml(html: string): Array<{ question: string; answer: string }> {
@@ -119,7 +310,7 @@ export function extractFaqsFromHtml(html: string): Array<{ question: string; ans
   const faqMatch = html.match(/<h[2-4][^>]*>\s*(?:Frequently Asked Questions|FAQs?|Questions & Answers)[\s\S]*?(?=(?:<h2|<\/div|$))/i);
   if (faqMatch) {
     const block = faqMatch[0];
-    const pRegex = /<p>\s*<strong>(.*?\?)<\/strong>(?:<br\s*\/?>)?([\s\S]*?)<\/p>/gi;
+    const pRegex = /<p>\s*<strong>(.*\?)<\/strong>(?:<br\s*\/?>)?([\s\S]*?)<\/p>/gi;
     let m;
     while ((m = pRegex.exec(block)) !== null) {
       const q = m[1].replace(/<[^>]+>/g, '').trim();
@@ -144,11 +335,9 @@ export function sanitizeNarrativeContent(html: string): string {
   let cleaned = html;
 
   // 1. If wrapped in Blade HQ layout, extract the innermost narrative text
-  // The narrative is contained within the font-size:13.5px narrative box
   const narrativeBoxRegex = /<div\s+style="font-size:13\.5px;\s*color:#475569;\s*line-height:1\.65;\s*margin:0\s+0\s+20px\s+0;">([\s\S]*?)(?=(?:<h[2-4][^>]*>\s*Frequently Asked Questions|<div\s+style="background:#f8fafc;|<\/div>\s*(?:<div|<h[2-4]|\s*$)))/gi;
   const matches = [...cleaned.matchAll(narrativeBoxRegex)];
   if (matches.length > 0) {
-    // Pick the deepest/last match which has the actual editorial narrative
     cleaned = matches[matches.length - 1][1];
   } else {
     // Legacy flat content: strip trailing FAQ block, specs tables, and schema if present
@@ -159,8 +348,8 @@ export function sanitizeNarrativeContent(html: string): string {
   }
 
   // 2. Clean any nested Glance bullets or Specs if they leaked in
-  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*This Gear at a Glance[\s\S]*?<\/ul>/gi, '');
-  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Product Overview &amp; Field Performance|Product Overview)[\s\S]*?<\/h[2-4]>/gi, '');
+  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:This Gear at a Glance|At a Glance[\s\S]*?)[\s\S]*?<\/ul>/gi, '');
+  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Product Overview &amp; Field Performance|Product Overview|[\s\S]*?Field Performance)[\s\S]*?<\/h[2-4]>/gi, '');
   cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Frequently Asked Questions|FAQs?)[\s\S]*$/i, '');
 
   // 3. Remove leading H2/H3 that repeats product title (theme already has H1)
@@ -172,7 +361,7 @@ export function sanitizeNarrativeContent(html: string): string {
   // 5. Clean leaked style, wrapper divs, and elementor tags
   cleaned = cleaned.replace(/<style[\s\S]*?<\/style>/gi, '');
   cleaned = cleaned.replace(/<div class="elementor[\s\S]*?<\/div>/gi, '');
-  cleaned = cleaned.replace(/^[\s\S]*?<p>/i, '<p>'); // ensure starts at first real paragraph
+  cleaned = cleaned.replace(/^[\s\S]*?<p>/i, '<p>');
   cleaned = cleaned.replace(/(?:<\/div>\s*)+$/i, '');
 
   return cleaned.trim();
@@ -185,17 +374,23 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   const { product, generated } = input;
   const name = product.name || product.title || 'Precision Outdoor Gear';
   const price = product.price ? parseFloat(String(product.price)).toFixed(2) : '189.00';
-  const specs = extractKnifeSpecs(product);
+  const { categoryType, specs } = extractProductSpecs(product);
+  const headings = getDynamicHeadings(product);
 
-  // 1. STREAMLINED BUY BOX (SHORT DESCRIPTION)
+  // 1. STREAMLINED CATEGORY-ADAPTIVE BUY BOX (SHORT DESCRIPTION)
+  const badge1 = specs['Blade Metallurgy'] || specs['Primary Material'] || specs['Max Output'] || specs['Abrasive Material'] || specs['Head Metallurgy'] || 'High-Performance Build';
+  const badge2 = specs['Lock Mechanism'] || specs['Tang Construction'] || specs['Power Architecture'] || specs['Steel Compatibility'] || specs['Form Factor'] || 'Precision Tolerances';
+  const badge3 = specs['Blade Length'] || specs['Housing Construction'] || specs['Overall Length'] || specs['Base & Alignment'] || 'Factory Inspected';
+  const badge4 = specs['Brand'] || 'Michigan Sports Outdoor';
+
   const shortDescription = `
 <div style="margin:4px 0 10px 0;">
   <span style="background:#e0f2fe; color:#0369a1; font-size:11px; font-weight:800; text-transform:uppercase; padding:3px 8px; border-radius:4px; letter-spacing:0.5px; display:inline-block; margin-bottom:8px;">FREE SHIPPING &bull; SAME-DAY DISPATCH</span>
   <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
-    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${specs['Blade Metallurgy']}</span>
-    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${specs['Blade Length']} Blade</span>
-    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${specs['Lock / Tang Type']}</span>
-    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${specs['Brand']}</span>
+    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge1}</span>
+    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge2}</span>
+    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge3}</span>
+    <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge4}</span>
   </div>
   <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3px solid #16a34a; border-radius:4px; padding:7px 12px; margin-bottom:10px; font-size:12px; color:#15803d; line-height:1.4;">
     <strong>In Stock &bull; Ships Today:</strong> Orders before 2:00 PM EST ship same-day from Michigan warehouse via USPS Priority / UPS.
@@ -212,7 +407,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     ? generated.faqs
     : extractFaqsFromHtml(generated.contentHtml);
 
-  // 2. FAQS HTML (SEO Optimized H2 + H3 Semantic Hierarchy)
+  // 2. FAQS HTML (Entity-Rich Dynamic H2 + H3 Semantic Hierarchy)
   let faqsHtml = '';
   if (effectiveFaqs && effectiveFaqs.length > 0) {
     const faqItems = effectiveFaqs.map(f => `
@@ -224,7 +419,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
 
     faqsHtml = `
       <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:28px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
-        Frequently Asked Questions
+        ${headings.faqHeading}
       </h2>
       <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
         ${faqItems}
@@ -232,34 +427,13 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     `;
   }
 
-  // 3. Clean narrative: strip any existing raw FAQ block so it never duplicates with faqsHtml
+  // 3. Clean narrative: strip any existing raw FAQ block so it never duplicates
   const cleanNarrative = sanitizeNarrativeContent(generated.contentHtml);
 
-  // 3. LEFT COLUMN (55%): Bullets + Clean Narrative + FAQs
-  const leftCol = `
-<div style="flex:1 1 460px; min-width:320px; box-sizing:border-box;">
-  <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
-    This Gear at a Glance
-  </h2>
-  <ul style="list-style-type:disc; padding-left:20px; margin:0 0 24px 0; font-size:13.5px; color:#334155; line-height:1.6;">
-    <li style="margin-bottom:8px;"><strong>Blade Metallurgy:</strong> Precision ground ${specs['Blade Metallurgy']} engineered for high edge retention, toughness, and wear resistance.</li>
-    <li style="margin-bottom:8px;"><strong>Chassis &amp; Ergonomics:</strong> ${specs['Handle Material']} designed for balanced hand indexing and positive traction in wet or cold environments.</li>
-    <li style="margin-bottom:8px;"><strong>Mechanism / Lock:</strong> ${specs['Lock / Tang Type']} providing rock-solid structural integrity under demanding outdoor conditions.</li>
-    <li style="margin-bottom:8px;"><strong>Intended Mission:</strong> Tactical EDC, hunting camp utility, backcountry field dressing, and everyday utility cutting.</li>
-    <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} gear backed by factory warranty and Michigan Sports Outdoor satisfaction guarantee.</li>
-  </ul>
+  // 4. Dynamic Glance Bullets tailored by category
+  const bulletsHtml = generateGlanceBullets(categoryType, specs);
 
-  <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:24px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
-    Product Overview &amp; Field Performance
-  </h2>
-  <div style="font-size:13.5px; color:#475569; line-height:1.65; margin:0 0 20px 0;">
-    ${cleanNarrative}
-  </div>
-
-  ${faqsHtml}
-</div>`.trim();
-
-  // 4. RIGHT COLUMN (45%): Specifications Table + Badges
+  // 5. Specs Table Rows
   const specRows = Object.entries(specs).map(([k, v]) => `
     <tr style="border-bottom:1px solid #f1f5f9;">
       <td style="padding:8px 12px; font-weight:700; width:45%; color:#334155; background:#f8fafc;">${k}:</td>
@@ -267,48 +441,145 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     </tr>
   `).join('');
 
-  const rightCol = `
-<div style="flex:1 1 360px; min-width:290px; box-sizing:border-box;">
-  <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
-    Engineered Specifications
-  </h2>
-  <div style="overflow-x:auto; margin-bottom:20px;">
-    <table style="width:100%; border-collapse:collapse; font-size:12.5px; text-align:left; background:#ffffff; border:1px solid #e2e8f0; border-radius:6px;">
-      <tbody>
-        ${specRows}
-      </tbody>
-    </table>
-  </div>
-
-  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px; margin-bottom:20px;">
-    <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:#0f172a; margin-bottom:6px; letter-spacing:0.5px;">
-      Verified Merchant Standards
+  const specsBlock = `
+    <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+      ${headings.specsHeading}
+    </h2>
+    <div style="overflow-x:auto; margin-bottom:20px;">
+      <table style="width:100%; border-collapse:collapse; font-size:12.5px; text-align:left; background:#ffffff; border:1px solid #e2e8f0; border-radius:6px;">
+        <tbody>
+          ${specRows}
+        </tbody>
+      </table>
     </div>
-    <div style="font-size:12px; color:#475569; line-height:1.5; margin-bottom:8px;">
-      &bull; <strong>BladeForums Community Member:</strong> Verified active community presence.<br />
-      &bull; <strong>Upper Peninsula Tested:</strong> Field performance verified in harsh conditions.<br />
-      &bull; <strong>24-48h US Dispatch:</strong> Fully tracked courier shipping from Michigan.
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px; margin-bottom:20px;">
+      <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:#0f172a; margin-bottom:6px; letter-spacing:0.5px;">
+        Verified Merchant Standards
+      </div>
+      <div style="font-size:12px; color:#475569; line-height:1.5; margin-bottom:8px;">
+        &bull; <strong>BladeForums Community Member:</strong> Verified active community presence.<br />
+        &bull; <strong>Upper Peninsula Tested:</strong> Field performance verified in harsh conditions.<br />
+        &bull; <strong>24-48h US Dispatch:</strong> Fully tracked courier shipping from Michigan.
+      </div>
     </div>
-  </div>
+    <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#334155; letter-spacing:0.5px; margin:16px 0 8px 0;">
+      Related Categories &amp; Brands
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+      <a href="/category/blog/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Field Tests &amp; Guides</a>
+      <a href="/brands/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Authorized Brands</a>
+      <a href="/product-category/pocket-knives/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Outdoor Cutlery</a>
+    </div>
+  `.trim();
 
-  <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#334155; letter-spacing:0.5px; margin:16px 0 8px 0;">
-    Related Categories &amp; Brands
-  </div>
-  <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
-    <a href="/category/blog/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Field Tests &amp; Guides</a>
-    <a href="/brands/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Authorized Brands</a>
-    <a href="/product-category/pocket-knives/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Pocket Knives</a>
-  </div>
-</div>`.trim();
+  // 6. BUILD DOM BY ROTATING 3 STRUCTURAL LAYOUT FLAVORS
+  let splitContainer = '';
 
-  // 5. 2-COLUMN SPLIT CONTAINER
-  const splitContainer = `
-<div style="display:flex; flex-wrap:wrap; gap:32px; margin:28px 0 36px 0;">
-  ${leftCol}
-  ${rightCol}
-</div>`.trim();
+  if (headings.flavor === 1) {
+    // FLAVOR 1: Spec-First Ribbon + Narrative Top Split
+    const topRibbon = `
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:24px;">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px;">
+          <div style="font-size:10.5px; font-weight:800; text-transform:uppercase; color:#0369a1; margin-bottom:2px;">Primary Build</div>
+          <div style="font-size:13px; font-weight:700; color:#0f172a;">${badge1}</div>
+        </div>
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px;">
+          <div style="font-size:10.5px; font-weight:800; text-transform:uppercase; color:#0369a1; margin-bottom:2px;">Mechanism / Form</div>
+          <div style="font-size:13px; font-weight:700; color:#0f172a;">${badge2}</div>
+        </div>
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px;">
+          <div style="font-size:10.5px; font-weight:800; text-transform:uppercase; color:#0369a1; margin-bottom:2px;">Dimensions / Specs</div>
+          <div style="font-size:13px; font-weight:700; color:#0f172a;">${badge3}</div>
+        </div>
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px;">
+          <div style="font-size:10.5px; font-weight:800; text-transform:uppercase; color:#0369a1; margin-bottom:2px;">Brand Lineage</div>
+          <div style="font-size:13px; font-weight:700; color:#0f172a;">${badge4}</div>
+        </div>
+      </div>
+    `.trim();
 
-  // 6. BOTTOM SECTIONS: CTA Banner + 5 Cross Sells + 3 Blog Guides
+    splitContainer = `
+      <div style="margin:24px 0 36px 0;">
+        ${topRibbon}
+        <div style="display:flex; flex-wrap:wrap; gap:32px;">
+          <div style="flex:1 1 460px; min-width:320px; box-sizing:border-box;">
+            <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+              ${headings.overviewHeading}
+            </h2>
+            <div style="font-size:13.5px; color:#475569; line-height:1.65; margin:0 0 20px 0;">
+              ${cleanNarrative}
+            </div>
+
+            <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:24px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+              ${headings.glanceHeading}
+            </h2>
+            <ul style="list-style-type:disc; padding-left:20px; margin:0 0 24px 0; font-size:13.5px; color:#334155; line-height:1.6;">
+              ${bulletsHtml}
+            </ul>
+
+            ${faqsHtml}
+          </div>
+          <div style="flex:1 1 360px; min-width:290px; box-sizing:border-box;">
+            ${specsBlock}
+          </div>
+        </div>
+      </div>
+    `.trim();
+  } else if (headings.flavor === 2) {
+    // FLAVOR 2: Inverted Table-First (Specs on Left, Narrative on Right)
+    splitContainer = `
+      <div style="display:flex; flex-wrap:wrap; gap:32px; margin:28px 0 36px 0;">
+        <div style="flex:1 1 360px; min-width:290px; box-sizing:border-box;">
+          ${specsBlock}
+        </div>
+        <div style="flex:1 1 460px; min-width:320px; box-sizing:border-box;">
+          <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+            ${headings.glanceHeading}
+          </h2>
+          <ul style="list-style-type:disc; padding-left:20px; margin:0 0 24px 0; font-size:13.5px; color:#334155; line-height:1.6;">
+            ${bulletsHtml}
+          </ul>
+
+          <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:24px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+            ${headings.overviewHeading}
+          </h2>
+          <div style="font-size:13.5px; color:#475569; line-height:1.65; margin:0 0 20px 0;">
+            ${cleanNarrative}
+          </div>
+
+          ${faqsHtml}
+        </div>
+      </div>
+    `.trim();
+  } else {
+    // FLAVOR 0: Classic Blade HQ Split (Glance -> Narrative -> FAQs on Left, Specs on Right)
+    splitContainer = `
+      <div style="display:flex; flex-wrap:wrap; gap:32px; margin:28px 0 36px 0;">
+        <div style="flex:1 1 460px; min-width:320px; box-sizing:border-box;">
+          <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+            ${headings.glanceHeading}
+          </h2>
+          <ul style="list-style-type:disc; padding-left:20px; margin:0 0 24px 0; font-size:13.5px; color:#334155; line-height:1.6;">
+            ${bulletsHtml}
+          </ul>
+
+          <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:24px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+            ${headings.overviewHeading}
+          </h2>
+          <div style="font-size:13.5px; color:#475569; line-height:1.65; margin:0 0 20px 0;">
+            ${cleanNarrative}
+          </div>
+
+          ${faqsHtml}
+        </div>
+        <div style="flex:1 1 360px; min-width:290px; box-sizing:border-box;">
+          ${specsBlock}
+        </div>
+      </div>
+    `.trim();
+  }
+
+  // 7. BOTTOM SECTIONS: CTA Banner + 5 Cross Sells + 3 Blog Guides
   const ctaBanner = `
 <div style="background:#0f172a; color:#ffffff; border-radius:12px; padding:28px 32px; margin:36px 0 32px 0; box-shadow:0 8px 24px rgba(0,0,0,0.12);">
   <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
@@ -348,7 +619,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
     <div>
       <h2 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
-        Customers Also Viewed &amp; Companion Gear
+        ${headings.companionHeading}
       </h2>
       <p style="font-size:13.5px; color:#64748b; margin:4px 0 0 0;">
         Complement your gear with in-stock knife sharpeners, boards, and EDC accessories.
