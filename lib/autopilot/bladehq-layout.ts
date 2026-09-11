@@ -468,7 +468,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
       <a href="/category/blog/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Field Tests &amp; Guides</a>
       <a href="/brands/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Authorized Brands</a>
-      <a href="/product-category/pocket-knives/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Outdoor Cutlery</a>
+      <a href="/collections/knives/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Outdoor Cutlery</a>
     </div>
   `.trim();
 
