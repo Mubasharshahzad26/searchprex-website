@@ -286,7 +286,7 @@ export async function runAutopilotBatch(clientId: string) {
               name: productData.name,
               title: productData.name,
               url: (productData as any).url,
-              categoryName: 'Cutlery & Outdoor Gear'
+              taxonomy: bladeHqLayout.taxonomy
             }),
           excerpt: bladeHqLayout.shortDescription,
           metaTitle: generated.metaTitle,

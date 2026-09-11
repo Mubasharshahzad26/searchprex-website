@@ -28,6 +28,7 @@ export type ProductCategoryType =
   | 'sharpener' 
   | 'axe_tool' 
   | 'edc_accessory' 
+  | 'culinary_knife'
   | 'fixed_blade' 
   | 'folding_knife';
 
@@ -41,6 +42,9 @@ export function detectProductCategory(name: string, desc: string, categories: an
   if (text.includes('sharpener') || text.includes('sharpening') || text.includes('whetstone') || text.includes('strop') || text.includes('honing')) {
     return 'sharpener';
   }
+  if (text.includes('chef') || text.includes('kitchen') || text.includes('paring') || text.includes('santoku') || text.includes('bread knife') || text.includes('carving knife') || text.includes('culinary') || text.includes('steak knife') || text.includes('cookware') || text.includes('block set')) {
+    return 'culinary_knife';
+  }
   if (text.includes('axe') || text.includes('hatchet') || text.includes('tomahawk') || text.includes('machete') || text.includes('cleaver') || text.includes('camp saw')) {
     return 'axe_tool';
   }
@@ -51,6 +55,200 @@ export function detectProductCategory(name: string, desc: string, categories: an
     return 'fixed_blade';
   }
   return 'folding_knife';
+}
+
+export interface TaxonomyHierarchy {
+  primaryCategory: { name: string; slug: string; url: string };
+  subCategory?: { name: string; slug: string; url: string };
+  brand: { name: string; slug: string; url: string };
+}
+
+export const MSO_TAXONOMY_MAP: Record<string, { name: string; url: string }> = {
+  'knives': { name: 'Pocket Knives & Fixed Blades for Sale', url: 'https://www.michigansportsoutdoor.com/product-category/knives/' },
+  'locking-knives': { name: 'Locking Pocket Knives (EDC & Tactical)', url: 'https://www.michigansportsoutdoor.com/product-category/locking-knives/' },
+  'assisted-opening': { name: 'Assisted Opening Pocket Knives', url: 'https://www.michigansportsoutdoor.com/product-category/assisted-opening/' },
+  'traditional-pocket-knives': { name: 'Traditional Pocket Knives & Slipjoints', url: 'https://www.michigansportsoutdoor.com/product-category/traditional-pocket-knives/' },
+  'kitchen': { name: 'Kitchen Cutlery & Chef Knives', url: 'https://www.michigansportsoutdoor.com/product-category/kitchen/' },
+  'sharpeners': { name: 'Knife Sharpeners & Honing Systems', url: 'https://www.michigansportsoutdoor.com/product-category/sharpeners/' },
+  'axes': { name: 'Hunting Axes, Tomahawks & Tactical Hatchets', url: 'https://www.michigansportsoutdoor.com/product-category/axes/' },
+  'lights': { name: 'Flashlights & Tactical Illumination', url: 'https://www.michigansportsoutdoor.com/product-category/lights/' },
+  'camping-and-survival': { name: 'Camping & Wilderness Survival Gear', url: 'https://www.michigansportsoutdoor.com/product-category/camping-and-survival/' },
+  'bargain-knives': { name: 'Discount & Bargain Pocket Knives', url: 'https://www.michigansportsoutdoor.com/product-category/bargain-knives/' },
+  'knifemaking': { name: 'Knifemaking Supplies, Blanks & Scales', url: 'https://www.michigansportsoutdoor.com/product-category/knifemaking/' },
+  'sheaths-and-storage': { name: 'Knife Sheaths & Field Storage Cases', url: 'https://www.michigansportsoutdoor.com/product-category/sheaths-and-storage/' },
+  'premium-knives': { name: 'Premium & Custom-Grade Cutlery', url: 'https://www.michigansportsoutdoor.com/product-category/premium-knives/' },
+  'swords-daggers-replicas': { name: 'Swords, Combat Daggers & Historical Replicas', url: 'https://www.michigansportsoutdoor.com/product-category/swords-daggers-replicas/' },
+  'firearm-accessories': { name: 'Tactical Firearm Accessories & Holsters', url: 'https://www.michigansportsoutdoor.com/product-category/firearm-accessories/' },
+  'gear-bags-and-accessories': { name: 'Tactical Gear Bags, Backpacks & Pouches', url: 'https://www.michigansportsoutdoor.com/product-category/gear-bags-and-accessories/' },
+  'hunting-and-shooting': { name: 'Hunting, Shooting & Archery Gear', url: 'https://www.michigansportsoutdoor.com/product-category/hunting-and-shooting/' },
+  'apparel': { name: 'Outdoor Tactical Apparel, Hats & Shirts', url: 'https://www.michigansportsoutdoor.com/product-category/apparel/' },
+  'fishing': { name: 'Fishing Tackle, Fillet Knives & Angler Gear', url: 'https://www.michigansportsoutdoor.com/product-category/fishing/' },
+  'slip-joint': { name: 'Slip Joint Pocket Knives', url: 'https://www.michigansportsoutdoor.com/product-category/slip-joint/' },
+  'daggers': { name: 'Tactical Combat Daggers & Boot Knives', url: 'https://www.michigansportsoutdoor.com/product-category/daggers/' },
+  'bowies': { name: 'Bowie Knives & Heavy Field Blades', url: 'https://www.michigansportsoutdoor.com/product-category/bowies/' },
+  'gardening-and-tree-trimming': { name: 'Arborist & Tree Trimming Saws & Tools', url: 'https://www.michigansportsoutdoor.com/product-category/gardening-and-tree-trimming/' },
+  'lighters-and-smoking-accessories': { name: 'Outdoor Lighters & Windproof Torches', url: 'https://www.michigansportsoutdoor.com/product-category/lighters-and-smoking-accessories/' },
+  'pens-and-notebooks': { name: 'Tactical Pens & Weatherproof Notebooks', url: 'https://www.michigansportsoutdoor.com/product-category/pens-and-notebooks/' },
+  'knife-customization': { name: 'Pocket Knife Customization & Mod Parts', url: 'https://www.michigansportsoutdoor.com/product-category/knife-customization/' }
+};
+
+export function resolveProductTaxonomyHierarchy(
+  product: BladeHqLayoutInput['product'],
+  categoryType?: ProductCategoryType
+): TaxonomyHierarchy {
+  const name = product.name || product.title || '';
+  const cats = Array.isArray(product.categories) ? product.categories : [];
+  
+  let primaryCategory = {
+    name: 'Pocket Knives & Fixed Blades for Sale',
+    slug: 'knives',
+    url: 'https://www.michigansportsoutdoor.com/product-category/knives/'
+  };
+  let subCategory: { name: string; slug: string; url: string } | undefined = undefined;
+
+  // 1. Check if WooCommerce provided category objects
+  for (const c of cats) {
+    const slug = typeof c === 'string' ? c.toLowerCase() : (c.slug || '').toLowerCase();
+    const rawName = typeof c === 'string' ? c : (c.name || '');
+    const cleanName = rawName.replace(/&amp;/g, '&').replace(/&#038;/g, '&');
+
+    if (MSO_TAXONOMY_MAP[slug]) {
+      primaryCategory = {
+        name: MSO_TAXONOMY_MAP[slug].name,
+        slug,
+        url: MSO_TAXONOMY_MAP[slug].url
+      };
+    } else if (slug && cleanName) {
+      subCategory = {
+        name: cleanName,
+        slug,
+        url: `https://www.michigansportsoutdoor.com/product-category/${slug}/`
+      };
+    }
+  }
+
+  // 2. If no direct taxonomy match, infer from categoryType
+  if (!cats.length || primaryCategory.slug === 'knives') {
+    const effectiveType = categoryType || detectProductCategory(name, product.description || '', cats);
+    if (effectiveType === 'culinary_knife') {
+      primaryCategory = {
+        name: 'Kitchen Cutlery & Chef Knives',
+        slug: 'kitchen',
+        url: 'https://www.michigansportsoutdoor.com/product-category/kitchen/'
+      };
+      if (!subCategory) {
+        subCategory = {
+          name: "Chef's Knives & Cutlery",
+          slug: 'chefs-knives',
+          url: 'https://www.michigansportsoutdoor.com/product-category/chefs-knives/'
+        };
+      }
+    } else if (effectiveType === 'sharpener') {
+      primaryCategory = {
+        name: 'Knife Sharpeners & Honing Systems',
+        slug: 'sharpeners',
+        url: 'https://www.michigansportsoutdoor.com/product-category/sharpeners/'
+      };
+    } else if (effectiveType === 'axe_tool') {
+      primaryCategory = {
+        name: 'Hunting Axes, Tomahawks & Tactical Hatchets',
+        slug: 'axes',
+        url: 'https://www.michigansportsoutdoor.com/product-category/axes/'
+      };
+    } else if (effectiveType === 'flashlight') {
+      primaryCategory = {
+        name: 'Flashlights & Tactical Illumination',
+        slug: 'lights',
+        url: 'https://www.michigansportsoutdoor.com/product-category/lights/'
+      };
+    } else if (effectiveType === 'edc_accessory') {
+      primaryCategory = {
+        name: 'Tactical Gear Bags, Backpacks & Pouches',
+        slug: 'gear-bags-and-accessories',
+        url: 'https://www.michigansportsoutdoor.com/product-category/gear-bags-and-accessories/'
+      };
+    } else if (effectiveType === 'fixed_blade') {
+      primaryCategory = {
+        name: 'Pocket Knives & Fixed Blades for Sale',
+        slug: 'knives',
+        url: 'https://www.michigansportsoutdoor.com/product-category/knives/'
+      };
+      if (!subCategory) {
+        subCategory = {
+          name: 'Fixed Blade Field Knives',
+          slug: 'fixed-blade',
+          url: 'https://www.michigansportsoutdoor.com/product-category/knives/'
+        };
+      }
+    } else {
+      primaryCategory = {
+        name: 'Pocket Knives & Fixed Blades for Sale',
+        slug: 'knives',
+        url: 'https://www.michigansportsoutdoor.com/product-category/knives/'
+      };
+      if (!subCategory) {
+        subCategory = {
+          name: 'Locking Pocket Knives',
+          slug: 'locking-knives',
+          url: 'https://www.michigansportsoutdoor.com/product-category/locking-knives/'
+        };
+      }
+    }
+  }
+
+  // 3. Resolve Brand
+  const brandRaw = product.brand || name.split(' ')[0] || 'Michigan Sports Outdoor';
+  const brandSlug = brandRaw.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const brand = {
+    name: brandRaw,
+    slug: brandSlug,
+    url: `https://www.michigansportsoutdoor.com/brand/${brandSlug}/`
+  };
+
+  return {
+    primaryCategory,
+    subCategory,
+    brand
+  };
+}
+
+export function buildVisualBreadcrumbsHtml(
+  name: string,
+  taxonomy: TaxonomyHierarchy
+): string {
+  const { primaryCategory, subCategory } = taxonomy;
+  
+  return `
+<nav aria-label="Breadcrumb" style="margin:0 0 20px 0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:9px 14px; box-shadow:0 1px 2px rgba(0,0,0,0.02);">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; align-items:center; gap:6px; color:#64748b;">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
+      <a itemprop="item" href="https://www.michigansportsoutdoor.com/" style="color:#0284c7; text-decoration:none; font-weight:700;">
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li style="color:#94a3b8; font-size:11px;">/</li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
+      <a itemprop="item" href="${primaryCategory.url}" style="color:#0284c7; text-decoration:none; font-weight:700;">
+        <span itemprop="name">${primaryCategory.name}</span>
+      </a>
+      <meta itemprop="position" content="2" />
+    </li>
+    ${subCategory ? `
+    <li style="color:#94a3b8; font-size:11px;">/</li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
+      <a itemprop="item" href="${subCategory.url}" style="color:#0284c7; text-decoration:none; font-weight:700;">
+        <span itemprop="name">${subCategory.name}</span>
+      </a>
+      <meta itemprop="position" content="3" />
+    </li>` : ''}
+    <li style="color:#94a3b8; font-size:11px;">/</li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center; max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" aria-current="page">
+      <span itemprop="name" style="color:#0f172a; font-weight:700;" title="${name}">${name}</span>
+      <meta itemprop="position" content="${subCategory ? '4' : '3'}" />
+    </li>
+  </ol>
+</nav>`.trim();
 }
 
 export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
@@ -159,6 +357,16 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
     specs['Sheath System'] = fullText.includes('leather') ? 'Heavy-Duty Stitched Leather Sheath' : 'Molded Kydex Tactical Belt Sheath';
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
+  } else if (categoryType === 'culinary_knife') {
+    specs['Product Type'] = 'Precision Kitchen Cutlery / Chef Knife';
+    specs['Blade Metallurgy'] = fullText.includes('1.4116') ? 'German DIN 1.4116 High-Carbon Stainless' : detectedSteel;
+    specs['Blade Length'] = fullText.includes('8') ? '8.00" (20.32 cm)' : detectedLength;
+    specs['Tang Construction'] = 'Precision Full-Profile Culinary Blade';
+    specs['Handle Material'] = fullText.includes('poly') ? 'Ergonomic Textured Polypropylene (Hygienic Grip)' : detectedHandle;
+    specs['Protective Guard'] = 'Custom ABS Hard Blade Guard (Included)';
+    specs['Care & Maintenance'] = 'Hand Wash with Warm Soapy Water (Recommended)';
+    specs['Origin / Fulfillment'] = 'Kershaw Quality Certified & Dispatched from Michigan, USA';
+    specs['Warranty'] = 'Kershaw Limited Lifetime Warranty & 30-Day Guarantee';
   } else {
     // Folding Knife (default)
     specs['Product Type'] = 'Folding Pocket Knife / Everyday Carry (EDC)';
@@ -370,12 +578,15 @@ export function sanitizeNarrativeContent(html: string): string {
 export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   shortDescription: string;
   fullDescription: string;
+  taxonomy: TaxonomyHierarchy;
 } {
   const { product, generated } = input;
   const name = product.name || product.title || 'Precision Outdoor Gear';
   const price = product.price ? parseFloat(String(product.price)).toFixed(2) : '189.00';
   const { categoryType, specs } = extractProductSpecs(product);
   const headings = getDynamicHeadings(product);
+  const taxonomy = resolveProductTaxonomyHierarchy(product, categoryType);
+  const visualBreadcrumbs = buildVisualBreadcrumbsHtml(name, taxonomy);
 
   // 1. STREAMLINED CATEGORY-ADAPTIVE BUY BOX (SHORT DESCRIPTION)
   const badge1 = specs['Blade Metallurgy'] || specs['Primary Material'] || specs['Max Output'] || specs['Abrasive Material'] || specs['Head Metallurgy'] || 'High-Performance Build';
@@ -463,12 +674,14 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
       </div>
     </div>
     <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#334155; letter-spacing:0.5px; margin:16px 0 8px 0;">
-      Related Categories &amp; Brands
+      Category &amp; Brand Lineage
     </div>
     <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
-      <a href="/category/blog/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Field Tests &amp; Guides</a>
-      <a href="/brands/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Authorized Brands</a>
-      <a href="/collections/knives/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Outdoor Cutlery</a>
+      <a href="${taxonomy.primaryCategory.url}" style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0369a1; text-decoration:none;">&bull; ${taxonomy.primaryCategory.name}</a>
+      ${taxonomy.subCategory ? `<a href="${taxonomy.subCategory.url}" style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0369a1; text-decoration:none;">&bull; ${taxonomy.subCategory.name}</a>` : ''}
+      <a href="${taxonomy.brand.url}" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">&bull; ${taxonomy.brand.name} Store</a>
+      <a href="https://www.michigansportsoutdoor.com/product-category/sharpeners/" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">&bull; Knife Sharpeners</a>
+      <a href="https://www.michigansportsoutdoor.com/product-category/camping-and-survival/" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">&bull; Survival Gear</a>
     </div>
   `.trim();
 
@@ -750,11 +963,12 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   </div>
 </div>`.trim();
 
-  const fullDescription = `${splitContainer}\n\n${ctaBanner}\n\n${crossSells}\n\n${guides}`;
+  const fullDescription = `${visualBreadcrumbs}\n\n${splitContainer}\n\n${ctaBanner}\n\n${crossSells}\n\n${guides}`;
 
   return {
     shortDescription,
-    fullDescription
+    fullDescription,
+    taxonomy
   };
 }
 
@@ -871,37 +1085,62 @@ export function buildBreadcrumbSchema(product: {
   url?: string;
   categoryName?: string;
   categoryUrl?: string;
+  subCategoryName?: string;
+  subCategoryUrl?: string;
+  taxonomy?: TaxonomyHierarchy;
 }): string {
   const name = product.name || product.title || 'Precision Outdoor Gear';
   const url = product.url || `https://www.michigansportsoutdoor.com/product/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`;
-  const catName = product.categoryName || 'Cutlery & Outdoor Gear';
-  const catUrl = product.categoryUrl || 'https://www.michigansportsoutdoor.com/product-category/knives/';
+
+  const primaryName = product.taxonomy?.primaryCategory?.name || product.categoryName || 'Pocket Knives & Fixed Blades for Sale';
+  const primaryUrl = product.taxonomy?.primaryCategory?.url || product.categoryUrl || 'https://www.michigansportsoutdoor.com/product-category/knives/';
+  const subName = product.taxonomy?.subCategory?.name || product.subCategoryName;
+  const subUrl = product.taxonomy?.subCategory?.url || product.subCategoryUrl;
+
+  const items: any[] = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.michigansportsoutdoor.com/'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: primaryName,
+      item: primaryUrl
+    }
+  ];
+
+  if (subName && subUrl) {
+    items.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: subName,
+      item: subUrl
+    });
+    items.push({
+      '@type': 'ListItem',
+      position: 4,
+      name: name,
+      item: url
+    });
+  } else {
+    items.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: name,
+      item: url
+    });
+  }
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://www.michigansportsoutdoor.com/'
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: catName,
-        item: catUrl
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: name,
-        item: url
-      }
-    ]
+    itemListElement: items
   };
 
   return `\n<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`;
 }
+
 
