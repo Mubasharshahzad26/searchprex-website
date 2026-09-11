@@ -7,6 +7,7 @@ import { fetchProductData, type ProductData } from './product-fetcher';
 import { fetchProductDataFromCsv, ProductFetchError } from './product-fetcher';
 import { getPooledModel } from '@/lib/gemini-pool';
 import { getMsoQuota } from './mso-daily-limit';
+import { loadTermLinks, resolveTermLinks, type TermLink } from './term-links';
 import {
   fetchCommerceFacts,
   evaluateGate,
@@ -81,6 +82,11 @@ export async function runAutopilotBatch(clientId: string) {
       dryRun: isDryRun,
     },
   });
+
+  //  Category and brand permalinks, read once for the whole batch. Asking
+  //  WordPress is the only way to know the real path — a permalink structure is
+  //  a site setting, and the guessed one has been wrong all along.
+  const termLinks = await loadTermLinks(wpCreds.baseUrl, wpCreds);
 
   const stats = { published: 0, skipped: 0, errors: 0, gated: 0, dryRun: isDryRun };
   const gateConfig = gateConfigFromEnv()
@@ -203,6 +209,7 @@ export async function runAutopilotBatch(clientId: string) {
           buildPrompt({
             productData,
             siteDomain: client.domain,
+            termLinks,
           })
         );
 
@@ -244,8 +251,18 @@ export async function runAutopilotBatch(clientId: string) {
           continue;
         }
 
+        //  ProductData keeps attributes as a plain object, and the layout
+        //  engine walks them as a list — it guards with Array.isArray, so a
+        //  Record does not throw, it silently skips the whole spec block and
+        //  every page ships without specifications. Converting here keeps the
+        //  data and the shapes honest.
         const bladeHqLayout = buildBladeHqLayout({
-          product: productData,
+          product: {
+            ...productData,
+            attributes: Object.entries(productData.attributes ?? {}).map(
+              ([name, value]) => ({ name, options: [String(value)] })
+            ),
+          },
           generated,
         });
 
@@ -504,6 +521,7 @@ type PromptProductData = ProductData & {
 function buildPrompt(p: {
   productData: ProductData;
   siteDomain: string;
+  termLinks?: Map<string, TermLink>;
 }) {
   const pd = p.productData as PromptProductData;
 
@@ -531,9 +549,20 @@ function buildPrompt(p: {
           .filter(Boolean)
       : [];
 
-  const validInternalLinks = categorySlugs.length > 0
-    ? categorySlugs.map((slug: string) => `https://${p.siteDomain}/product-category/${slug}/`).join('\n')
-    : `https://${p.siteDomain}/shop/`;
+  //  Links come from WordPress, not from string concatenation. The old line
+  //  built `https://{domain}/product-category/{slug}/`, and on this store that
+  //  path redirects to the home page — 19,294 published pages carry those, 87%
+  //  of everything published. Every internal link the autopilot has written
+  //  lands the reader on the front page and tells Google nothing about the
+  //  product it came from.
+  //
+  //  A slug with no matching term contributes no link at all. Inventing one is
+  //  worse than omitting it: a guessed URL looks like a working link to the
+  //  model, to the reader and to Googlebot, and only fails when somebody clicks.
+  const resolved = resolveTermLinks(categorySlugs, p.termLinks ?? new Map(), 4);
+  const validInternalLinks = resolved.length > 0
+    ? resolved.map(t => `${t.link}  (${t.name})`).join('\n')
+    : '(no verified category link for this product — do not add one)';
 
   const brand = pd.brand ?? (pd as any).brandName ?? (pd as any).vendor ?? '';
   const existingContent = pd.existingContent ?? (pd as any).description ?? '';
