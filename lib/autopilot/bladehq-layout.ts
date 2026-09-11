@@ -112,6 +112,72 @@ export function extractKnifeSpecs(product: BladeHqLayoutInput['product']) {
   return specs;
 }
 
+export function extractFaqsFromHtml(html: string): Array<{ question: string; answer: string }> {
+  const faqs: Array<{ question: string; answer: string }> = [];
+  if (!html) return faqs;
+
+  const faqMatch = html.match(/<h[2-4][^>]*>\s*(?:Frequently Asked Questions|FAQs?|Questions & Answers)[\s\S]*?(?=(?:<h2|<\/div|$))/i);
+  if (faqMatch) {
+    const block = faqMatch[0];
+    const pRegex = /<p>\s*<strong>(.*?\?)<\/strong>(?:<br\s*\/?>)?([\s\S]*?)<\/p>/gi;
+    let m;
+    while ((m = pRegex.exec(block)) !== null) {
+      const q = m[1].replace(/<[^>]+>/g, '').trim();
+      const a = m[2].replace(/<[^>]+>/g, '').trim();
+      if (q && a) faqs.push({ question: q, answer: a });
+    }
+    if (faqs.length === 0) {
+      const hRegex = /<h[3-5][^>]*>(.*?\?)<\/h[3-5]>\s*<p>([\s\S]*?)<\/p>/gi;
+      while ((m = hRegex.exec(block)) !== null) {
+        const q = m[1].replace(/<[^>]+>/g, '').trim();
+        const a = m[2].replace(/<[^>]+>/g, '').trim();
+        if (q && a) faqs.push({ question: q, answer: a });
+      }
+    }
+  }
+  return faqs;
+}
+
+export function sanitizeNarrativeContent(html: string): string {
+  if (!html) return '';
+
+  let cleaned = html;
+
+  // 1. If wrapped in Blade HQ layout, extract the innermost narrative text
+  // The narrative is contained within the font-size:13.5px narrative box
+  const narrativeBoxRegex = /<div\s+style="font-size:13\.5px;\s*color:#475569;\s*line-height:1\.65;\s*margin:0\s+0\s+20px\s+0;">([\s\S]*?)(?=(?:<h[2-4][^>]*>\s*Frequently Asked Questions|<div\s+style="background:#f8fafc;|<\/div>\s*(?:<div|<h[2-4]|\s*$)))/gi;
+  const matches = [...cleaned.matchAll(narrativeBoxRegex)];
+  if (matches.length > 0) {
+    // Pick the deepest/last match which has the actual editorial narrative
+    cleaned = matches[matches.length - 1][1];
+  } else {
+    // Legacy flat content: strip trailing FAQ block, specs tables, and schema if present
+    cleaned = cleaned.replace(/<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/gi, '');
+    cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Frequently Asked Questions|FAQs?|Questions & Answers)[\s\S]*$/i, '');
+    cleaned = cleaned.replace(/<!-- SECTION: TECHNICAL SPECIFICATIONS[\s\S]*?<\/table>/gi, '');
+    cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Technical Specifications|Product Specifications|Specifications & Metallurgy)[\s\S]*?(?:<\/table>|<\/ul>)/gi, '');
+  }
+
+  // 2. Clean any nested Glance bullets or Specs if they leaked in
+  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*This Gear at a Glance[\s\S]*?<\/ul>/gi, '');
+  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Product Overview &amp; Field Performance|Product Overview)[\s\S]*?<\/h[2-4]>/gi, '');
+  cleaned = cleaned.replace(/<h[2-4][^>]*>\s*(?:Frequently Asked Questions|FAQs?)[\s\S]*$/i, '');
+
+  // 3. Remove leading H2/H3 that repeats product title (theme already has H1)
+  cleaned = cleaned.replace(/^\s*<h[2-4][^>]*>[\s\S]*?<\/h[2-4]>\s*/i, '');
+
+  // 4. Convert all internal subheadings to semantic H3
+  cleaned = cleaned.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/gi, '<h3$1>$2</h3>');
+
+  // 5. Clean leaked style, wrapper divs, and elementor tags
+  cleaned = cleaned.replace(/<style[\s\S]*?<\/style>/gi, '');
+  cleaned = cleaned.replace(/<div class="elementor[\s\S]*?<\/div>/gi, '');
+  cleaned = cleaned.replace(/^[\s\S]*?<p>/i, '<p>'); // ensure starts at first real paragraph
+  cleaned = cleaned.replace(/(?:<\/div>\s*)+$/i, '');
+
+  return cleaned.trim();
+}
+
 export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   shortDescription: string;
   fullDescription: string;
@@ -141,32 +207,40 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   </div>
 </div>`.trim();
 
-  // 2. FAQS HTML
+  // Extract FAQs from narrative if generated.faqs is not provided
+  let effectiveFaqs = (generated.faqs && generated.faqs.length > 0)
+    ? generated.faqs
+    : extractFaqsFromHtml(generated.contentHtml);
+
+  // 2. FAQS HTML (SEO Optimized H2 + H3 Semantic Hierarchy)
   let faqsHtml = '';
-  if (generated.faqs && generated.faqs.length > 0) {
-    const faqItems = generated.faqs.map(f => `
+  if (effectiveFaqs && effectiveFaqs.length > 0) {
+    const faqItems = effectiveFaqs.map(f => `
       <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px 16px; margin-bottom:10px;">
-        <h4 style="font-size:13.5px; font-weight:700; color:#0f172a; margin:0 0 4px 0;">${f.question}</h4>
+        <h3 style="font-size:14px; font-weight:700; color:#0f172a; margin:0 0 4px 0; line-height:1.4;">${f.question}</h3>
         <p style="font-size:12.5px; color:#475569; margin:0; line-height:1.5;">${f.answer}</p>
       </div>
     `).join('');
 
     faqsHtml = `
-      <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin:24px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+      <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:28px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
         Frequently Asked Questions
-      </h3>
+      </h2>
       <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
         ${faqItems}
       </div>
     `;
   }
 
+  // 3. Clean narrative: strip any existing raw FAQ block so it never duplicates with faqsHtml
+  const cleanNarrative = sanitizeNarrativeContent(generated.contentHtml);
+
   // 3. LEFT COLUMN (55%): Bullets + Clean Narrative + FAQs
   const leftCol = `
 <div style="flex:1 1 460px; min-width:320px; box-sizing:border-box;">
-  <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+  <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
     This Gear at a Glance
-  </h3>
+  </h2>
   <ul style="list-style-type:disc; padding-left:20px; margin:0 0 24px 0; font-size:13.5px; color:#334155; line-height:1.6;">
     <li style="margin-bottom:8px;"><strong>Blade Metallurgy:</strong> Precision ground ${specs['Blade Metallurgy']} engineered for high edge retention, toughness, and wear resistance.</li>
     <li style="margin-bottom:8px;"><strong>Chassis &amp; Ergonomics:</strong> ${specs['Handle Material']} designed for balanced hand indexing and positive traction in wet or cold environments.</li>
@@ -175,8 +249,11 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     <li style="margin-bottom:8px;"><strong>Quality Guarantee:</strong> 100% authentic ${specs['Brand']} gear backed by factory warranty and Michigan Sports Outdoor satisfaction guarantee.</li>
   </ul>
 
+  <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:24px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+    Product Overview &amp; Field Performance
+  </h2>
   <div style="font-size:13.5px; color:#475569; line-height:1.65; margin:0 0 20px 0;">
-    ${generated.contentHtml}
+    ${cleanNarrative}
   </div>
 
   ${faqsHtml}
@@ -192,9 +269,9 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
 
   const rightCol = `
 <div style="flex:1 1 360px; min-width:290px; box-sizing:border-box;">
-  <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
+  <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:0 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
     Engineered Specifications
-  </h3>
+  </h2>
   <div style="overflow-x:auto; margin-bottom:20px;">
     <table style="width:100%; border-collapse:collapse; font-size:12.5px; text-align:left; background:#ffffff; border:1px solid #e2e8f0; border-radius:6px;">
       <tbody>
@@ -214,9 +291,9 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     </div>
   </div>
 
-  <h4 style="font-size:14px; font-weight:800; color:#0f172a; margin:16px 0 8px 0;">
+  <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#334155; letter-spacing:0.5px; margin:16px 0 8px 0;">
     Related Categories &amp; Brands
-  </h4>
+  </div>
   <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
     <a href="/category/blog/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Field Tests &amp; Guides</a>
     <a href="/brands/" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">Authorized Brands</a>
@@ -244,9 +321,9 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
         <span style="color:#64748b;">&bull;</span>
         <span style="color:#38bdf8; font-size:12px; font-weight:700;">Verified Multi-Channel US Merchant</span>
       </div>
-      <h3 style="font-size:22px; font-weight:800; color:#ffffff; margin:0 0 8px 0; letter-spacing:-0.3px;">
+      <div style="font-size:22px; font-weight:800; color:#ffffff; margin:0 0 8px 0; letter-spacing:-0.3px;">
         Ready to Own the ${name}?
-      </h3>
+      </div>
       <p style="font-size:13.5px; color:#cbd5e1; margin:0; line-height:1.6;">
         Every order is backed by Michigan Sports Outdoor's 30-Day Hassle-Free Return Guarantee, Manufacturer Lifetime Warranty, and Free Insured US Shipping.
       </p>
@@ -288,7 +365,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/02/ACN005C-2.jpg" alt="AuCon Smiley Bead" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#0284c7; margin-bottom:3px;">EDC Lanyard Bead</div>
-        <h4 style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/aucon-smiley-bead-copper/" style="color:#0f172a; text-decoration:none;">AuCon Smiley Bead Copper</a></h4>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/aucon-smiley-bead-copper/" style="color:#0f172a; text-decoration:none;">AuCon Smiley Bead Copper</a></div>
       </div>
       <div>
         <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$25.99</div>
@@ -301,7 +378,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/02/ACN005BZ-2.jpg" alt="Small Smiley Bead Bronze" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#0284c7; margin-bottom:3px;">EDC Lanyard Bead</div>
-        <h4 style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/aucon-small-smiley-bead-bronze/" style="color:#0f172a; text-decoration:none;">Small Smiley Bead Bronze</a></h4>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/aucon-small-smiley-bead-bronze/" style="color:#0f172a; text-decoration:none;">Small Smiley Bead Bronze</a></div>
       </div>
       <div>
         <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$25.99</div>
@@ -314,7 +391,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BARE320.jpg" alt="Barebones Cutting Board" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#16a34a; margin-bottom:3px;">Kitchen &amp; Camp Prep</div>
-        <h4 style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-square-cutting-board/" style="color:#0f172a; text-decoration:none;">Barebones Cutting Board</a></h4>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-square-cutting-board/" style="color:#0f172a; text-decoration:none;">Barebones Cutting Board</a></div>
       </div>
       <div>
         <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$14.89</div>
@@ -327,7 +404,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BARE367.jpg" alt="Barebones Chef Spatula" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#b45309; margin-bottom:3px;">Grill &amp; Camp</div>
-        <h4 style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-chef-grill-spatula/" style="color:#0f172a; text-decoration:none;">Barebones Chef Spatula</a></h4>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-chef-grill-spatula/" style="color:#0f172a; text-decoration:none;">Barebones Chef Spatula</a></div>
       </div>
       <div>
         <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$18.49</div>
@@ -340,7 +417,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BARE467.jpg" alt="Barebones Spatula" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#b45309; margin-bottom:3px;">Grill &amp; Camp</div>
-        <h4 style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-cowboy-grill-fish-spatula/" style="color:#0f172a; text-decoration:none;">Barebones Spatula</a></h4>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-cowboy-grill-fish-spatula/" style="color:#0f172a; text-decoration:none;">Barebones Spatula</a></div>
       </div>
       <div>
         <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$8.79</div>
@@ -367,7 +444,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <span style="position:absolute; top:10px; left:10px; background:#0284c7; color:#ffffff; font-size:10px; font-weight:800; text-transform:uppercase; padding:3px 7px; border-radius:4px;">Steel Showdown</span>
         </a>
         <div style="padding:16px 18px 12px 18px;">
-          <h4 style="font-size:15px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.35;"><a href="/cpm-magnacut-vs-bohler-m390mk/" style="color:#0f172a; text-decoration:none;">Crucible CPM MagnaCut vs Böhler M390MK</a></h4>
+          <div style="font-size:15px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.35;"><a href="/cpm-magnacut-vs-bohler-m390mk/" style="color:#0f172a; text-decoration:none;">Crucible CPM MagnaCut vs Böhler M390MK</a></div>
           <p style="font-size:12px; color:#64748b; margin:0; line-height:1.5;">Comprehensive metallurgical comparison analyzing edge retention and field toughness.</p>
         </div>
       </div>
@@ -380,7 +457,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <span style="position:absolute; top:10px; left:10px; background:#f59e0b; color:#ffffff; font-size:10px; font-weight:800; text-transform:uppercase; padding:3px 7px; border-radius:4px;">Field Guide</span>
         </a>
         <div style="padding:16px 18px 12px 18px;">
-          <h4 style="font-size:15px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.35;"><a href="/top-best-edc-knives-under-100/" style="color:#0f172a; text-decoration:none;">Top EDC Pocket Knives Tested for Durability</a></h4>
+          <div style="font-size:15px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.35;"><a href="/top-best-edc-knives-under-100/" style="color:#0f172a; text-decoration:none;">Top EDC Pocket Knives Tested for Durability</a></div>
           <p style="font-size:12px; color:#64748b; margin:0; line-height:1.5;">Discover which budget-friendly folding knives match American tactical standards.</p>
         </div>
       </div>
@@ -393,7 +470,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
           <span style="position:absolute; top:10px; left:10px; background:#16a34a; color:#ffffff; font-size:10px; font-weight:800; text-transform:uppercase; padding:3px 7px; border-radius:4px;">Field Comparison</span>
         </a>
         <div style="padding:16px 18px 12px 18px;">
-          <h4 style="font-size:15px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.35;"><a href="/fixed-blade-vs-folding-knife-for-hunting/" style="color:#0f172a; text-decoration:none;">Fixed Blade vs Folding Knife for Outdoor Utility</a></h4>
+          <div style="font-size:15px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.35;"><a href="/fixed-blade-vs-folding-knife-for-hunting/" style="color:#0f172a; text-decoration:none;">Fixed Blade vs Folding Knife for Outdoor Utility</a></div>
           <p style="font-size:12px; color:#64748b; margin:0; line-height:1.5;">We weigh structural rigidity, lock mechanics, and deployment speed for outdoor utility.</p>
         </div>
       </div>
