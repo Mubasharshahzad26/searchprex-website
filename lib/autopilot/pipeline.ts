@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { scoreContent } from './scoring';
 import { publishToWordPress } from './publisher';
-import { buildBladeHqLayout } from './bladehq-layout';
+import { buildBladeHqLayout, buildProductRichSchema, buildBreadcrumbSchema } from './bladehq-layout';
 import { submitUrl } from '@/lib/indexing';
 import { fetchProductData, type ProductData } from './product-fetcher';
 import { fetchProductDataFromCsv, ProductFetchError } from './product-fetcher';
@@ -269,7 +269,25 @@ export async function runAutopilotBatch(clientId: string) {
         const published = await publishToWordPress({
           siteUrl: wpCreds.baseUrl,
           postId: productData.id,
-          content: bladeHqLayout.fullDescription + buildFaqSchema(generated.faqs),
+          content: bladeHqLayout.fullDescription + 
+            buildFaqSchema(generated.faqs) + 
+            buildProductRichSchema({
+              id: productData.id,
+              name: productData.name,
+              title: productData.name,
+              price: productData.price,
+              sku: productData.sku,
+              url: (productData as any).url,
+              brand: (productData as any).brand,
+              description: generated.metaDescription,
+              stock_status: (productData as any).stock_status
+            }) +
+            buildBreadcrumbSchema({
+              name: productData.name,
+              title: productData.name,
+              url: (productData as any).url,
+              categoryName: 'Cutlery & Outdoor Gear'
+            }),
           excerpt: bladeHqLayout.shortDescription,
           metaTitle: generated.metaTitle,
           metaDescription: generated.metaDescription,
