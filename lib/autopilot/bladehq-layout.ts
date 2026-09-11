@@ -13,6 +13,7 @@ export interface BladeHqLayoutInput {
     description?: string;
     short_description?: string;
     categories?: any[];
+    attributes?: Array<{ name?: string; options?: any[] }>;
   };
   generated: {
     contentHtml: string;
@@ -41,6 +42,27 @@ export function extractKnifeSpecs(product: BladeHqLayoutInput['product']) {
     'Origin / Quality': 'Inspected & Dispatched from Michigan, USA',
     'Warranty': 'Manufacturer Lifetime Warranty & 30-Day Guarantee'
   };
+
+  if (product.attributes && Array.isArray(product.attributes)) {
+    for (const attr of product.attributes) {
+      const val = attr.options && attr.options[0] ? String(attr.options[0]).trim() : '';
+      if (!val) continue;
+      const attrName = (attr.name || '').toLowerCase();
+      if (attrName.includes('blade material')) {
+        specs['Blade Metallurgy'] = val;
+      } else if (attrName.includes('blade length')) {
+        specs['Blade Length'] = val.includes('"') ? val : `${val}"`;
+      } else if (attrName.includes('handle material')) {
+        specs['Handle Material'] = val;
+      } else if (attrName.includes('manufacturer')) {
+        specs['Brand'] = val;
+      } else if (attrName.includes('country of origin')) {
+        specs['Origin / Quality'] = `Crafted in ${val} & Dispatched from Michigan, USA`;
+      } else if (attrName.includes('fixed') || attrName.includes('folding')) {
+        specs['Product Type'] = val;
+      }
+    }
+  }
 
   if (product.sku) {
     specs['Model / SKU'] = product.sku;
