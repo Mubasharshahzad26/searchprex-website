@@ -6,6 +6,12 @@ import { fetchProductData, type ProductData } from './product-fetcher';
 import { fetchProductDataFromCsv, ProductFetchError } from './product-fetcher';
 import { getPooledModel } from '@/lib/gemini-pool';
 import { getMsoQuota } from './mso-daily-limit';
+import {
+  fetchCommerceFacts,
+  evaluateGate,
+  gateConfigFromEnv,
+  summariseGateReasons,
+} from './quality-gate';
 
 const MODEL = 'gemini-flash-lite-latest';
 
@@ -75,7 +81,25 @@ export async function runAutopilotBatch(clientId: string) {
     },
   });
 
-  const stats = { published: 0, skipped: 0, errors: 0, dryRun: isDryRun };
+  const stats = { published: 0, skipped: 0, errors: 0, gated: 0, dryRun: isDryRun };
+  const gateConfig = gateConfigFromEnv()
+  const gatedReasons: string[][] = []
+
+  //  Products parked by the gate on an earlier run get another look before this
+  //  one picks its batch — most rejections are "out of stock", and stock comes
+  //  back. Without this the first gated run would retire a third of the
+  //  catalogue for good.
+  const requeued = await db.indexingQueue.updateMany({
+    where: {
+      clientId,
+      status: 'skipped_gate',
+      url: { contains: '/product/' },
+    },
+    data: { status: 'queued' },
+  })
+  if (requeued.count > 0) {
+    console.log(`[autopilot] ${requeued.count} gate-parked products returned to the queue.`)
+  }
   const MAX_ATTEMPTS = batchSize * 3;
   let attempts = 0;
 
@@ -135,6 +159,33 @@ export async function runAutopilotBatch(clientId: string) {
           throw new Error(
             `URL is not in the product export, so there is nothing to rewrite: ${queued.url}`
           );
+        }
+
+        //  Quality gate — is this product worth a page at all?
+        //
+        //  Runs before generation so a product with no photograph, no price or
+        //  no way to buy costs nothing: no Gemini call, no Indexing API slot
+        //  out of the daily 2,000, no crawl budget spent on a page Google will
+        //  decline. Parked rather than dropped, and returned to the queue at
+        //  the start of a later run once stock is back.
+        const facts = await fetchCommerceFacts(productData.id, wpCreds.baseUrl, wpCreds);
+        const gate = evaluateGate(facts, gateConfig);
+        if (!gate.pass) {
+          console.log(`[autopilot] Gate parked ${queued.url} — ${gate.reasons.join(', ')}`);
+          await db.autopilotPage.update({
+            where: { id: page.id },
+            data: {
+              status: 'skipped_gate',
+              errorMessage: gate.reasons.join(','),
+            },
+          });
+          await db.indexingQueue.update({
+            where: { id: queued.id },
+            data: { status: 'skipped_gate' },
+          });
+          gatedReasons.push(gate.reasons);
+          stats.gated++;
+          continue;
         }
 
         const model = getPooledModel({
@@ -314,10 +365,19 @@ export async function runAutopilotBatch(clientId: string) {
         pagesGenerated: stats.published + stats.skipped,
         pagesPublished: stats.published,
         completedAt: new Date(),
-        results: stats as any,
+        results: { ...stats, gateReasons: summariseGateReasons(gatedReasons) } as any,
       },
     });
 
+    if (stats.gated > 0) {
+      console.log(
+        `[autopilot] Gate parked ${stats.gated} products — ${summariseGateReasons(gatedReasons)}`
+      );
+    }
+
+    //  Gated products are excluded from the cost line: nothing was generated
+    //  for them, so charging the run for them would overstate what Gemini
+    //  actually did.
     const processed = stats.published + stats.skipped;
     if (processed > 0) {
       await db.costLog.create({
@@ -332,7 +392,7 @@ export async function runAutopilotBatch(clientId: string) {
       });
     }
 
-    return { runId: run.id, ...stats };
+    return { runId: run.id, ...stats, gateReasons: summariseGateReasons(gatedReasons) };
 
   } catch (err) {
     await db.autopilotRun.update({
