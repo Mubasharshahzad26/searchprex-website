@@ -688,7 +688,7 @@ export interface CompanionItem {
   id: number;
   title: string;
   slug: string;
-  price: string;
+  price?: string;
   badge: string;
   badgeColor: string;
   image: string;
@@ -1112,8 +1112,10 @@ export function generateCategoryCrossSells(categoryType: ProductCategoryType, se
         <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/${item.slug}/" style="color:#0f172a; text-decoration:none;">${item.title}</a></div>
       </div>
       <div>
-        <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$${item.price}</div>
-        <a href="/cart/?add-to-cart=${item.id}" style="display:block; text-align:center; background:#ea580c; color:#ffffff; font-size:11.5px; font-weight:700; padding:6px 10px; border-radius:4px; text-decoration:none;">Add to Cart &rarr;</a>
+        <div style="font-size:11.5px; font-weight:700; color:#16a34a; margin-bottom:8px; display:flex; align-items:center; gap:5px;">
+          <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#16a34a;"></span> In Stock &bull; Ships Fast
+        </div>
+        <a href="/product/${item.slug}/" style="display:block; text-align:center; background:#0f172a; color:#ffffff; font-size:11.5px; font-weight:700; padding:7px 10px; border-radius:5px; text-decoration:none;">View Best Price &rarr;</a>
       </div>
     </div>
   `).join('');
