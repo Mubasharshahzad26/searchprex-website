@@ -131,10 +131,132 @@ OUTPUT — RETURN VALID JSON ONLY (no code fences, no preamble):
 - contextProducts: Real URLs copied EXACTLY from the list above (2-5 URLs, from DIFFERENT brands/categories where possible)`;
 }
 
+export interface CalendarTopic {
+  topic: string;
+  category: BlogTopicCategory;
+  keywords: string[];
+  contextProducts: string[];
+}
+
+export const Q4_EDITORIAL_CALENDAR: CalendarTopic[] = [
+  {
+    topic: 'Best Hunting Knives for Michigan Deer Season (2026 Field-Tested Guide)',
+    category: 'buying-guide',
+    keywords: ['hunting knives for deer', 'best field dressing knife', 'michigan deer hunting gear', 'buck 110 hunting'],
+    contextProducts: [
+      'https://www.michigansportsoutdoor.com/product/buck-110-folding-hunter/',
+      'https://www.michigansportsoutdoor.com/product/sharpi-8-in-1-diamond-sharpener/',
+      'https://www.michigansportsoutdoor.com/product/lansky-turn-box-with-leather-strop-2/'
+    ]
+  },
+  {
+    topic: 'Crucible CPM MagnaCut vs Böhler M390MK: Which Steel Holds Edge Longer?',
+    category: 'comparison',
+    keywords: ['cpm magnacut vs m390mk', 'knife blade steels comparison', 'best edc knife steel', 'corrosion resistant knife steel'],
+    contextProducts: [
+      'https://www.michigansportsoutdoor.com/product/kershaw-8-chefs-knife/',
+      'https://www.michigansportsoutdoor.com/product/dmt-suregrip-powered-diamond-knif/',
+      'https://www.michigansportsoutdoor.com/product/lansky-turn-box-with-leather-strop-2/'
+    ]
+  },
+  {
+    topic: 'The Field Dressing Kit: 4 Essential Tools Every Whitetail Hunter Needs in Their Pack',
+    category: 'roundup',
+    keywords: ['deer field dressing kit', 'gutting kit for hunting', 'hunting pack knife essentials', 'bone saw and skinner kit'],
+    contextProducts: [
+      'https://www.michigansportsoutdoor.com/product/buck-110-folding-hunter/',
+      'https://www.michigansportsoutdoor.com/product/sharpi-8-in-1-diamond-sharpener/',
+      'https://www.michigansportsoutdoor.com/product/sheaths-small-hatchet-sheath/'
+    ]
+  },
+  {
+    topic: 'How to Sharpen a Hunting Knife with a Turn-Box at Camp',
+    category: 'educational',
+    keywords: ['sharpen hunting knife at camp', 'lansky turn box knife sharpening', 'ceramic rod knife sharpener guide', 'restore razor edge in field'],
+    contextProducts: [
+      'https://www.michigansportsoutdoor.com/product/lansky-turn-box-with-leather-strop-2/',
+      'https://www.michigansportsoutdoor.com/product/sharpi-8-in-1-diamond-sharpener/',
+      'https://www.michigansportsoutdoor.com/product/dmt-suregrip-powered-diamond-knif/'
+    ]
+  },
+  {
+    topic: 'Top 5 Best EDC Pocket Knives Under $100 for Fall 2026',
+    category: 'buying-guide',
+    keywords: ['top budget pocket knives 2026', 'best folding knife under 100', 'affordable edc knife', 'd2 knife under 100'],
+    contextProducts: [
+      'https://www.michigansportsoutdoor.com/product/buck-110-folding-hunter/',
+      'https://www.michigansportsoutdoor.com/product/zootility-rift-wallet/',
+      'https://www.michigansportsoutdoor.com/product/sharpi-8-in-1-diamond-sharpener/'
+    ]
+  },
+  {
+    topic: 'Carbon Steel vs Stainless Steel in Wet Fall Conditions: The Northwoods Test',
+    category: 'comparison',
+    keywords: ['1095 carbon vs stainless steel', 'knife steel rust prevention', 'fall outdoor knife steel', 'bushcraft knife steel comparison'],
+    contextProducts: [
+      'https://www.michigansportsoutdoor.com/product/buck-110-folding-hunter/',
+      'https://www.michigansportsoutdoor.com/product/dmt-suregrip-powered-diamond-knif/',
+      'https://www.michigansportsoutdoor.com/product/lansky-turn-box-with-leather-strop-2/'
+    ]
+  }
+];
+
+export async function getNextCalendarCategory(clientId: string): Promise<BlogTopicCategory | null> {
+  try {
+    const publishedPosts = await db.blogPost.findMany({
+      where: {
+        clientId,
+        status: { in: ['published', 'generating'] }
+      },
+      select: { topic: true }
+    });
+    const publishedTitles = new Set(publishedPosts.map(p => (p.topic || '').toLowerCase().trim()));
+
+    for (const calItem of Q4_EDITORIAL_CALENDAR) {
+      const isPublished = Array.from(publishedTitles).some(title => 
+        title.includes(calItem.topic.toLowerCase().slice(0, 25)) || 
+        calItem.topic.toLowerCase().includes(title.slice(0, 25))
+      );
+      if (!isPublished) {
+        return calItem.category;
+      }
+    }
+  } catch (e) {
+    console.error('Error in getNextCalendarCategory:', e);
+  }
+  return null;
+}
+
 export async function generateBlogTopic(
   clientId: string,
   category: BlogTopicCategory
 ): Promise<BlogTopic> {
+  // 1. First priority: Check if any topic from Q4_EDITORIAL_CALENDAR has not been published yet
+  const publishedPosts = await db.blogPost.findMany({
+    where: {
+      clientId,
+      status: { in: ['published', 'generating'] }
+    },
+    select: { topic: true }
+  });
+  const publishedTitles = new Set(publishedPosts.map(p => (p.topic || '').toLowerCase().trim()));
+
+  for (const calItem of Q4_EDITORIAL_CALENDAR) {
+    const isPublished = Array.from(publishedTitles).some(title => 
+      title.includes(calItem.topic.toLowerCase().slice(0, 25)) || 
+      calItem.topic.toLowerCase().includes(title.slice(0, 25))
+    );
+    if (!isPublished) {
+      console.log(`[Blog Autopilot] Selected next scheduled calendar topic: "${calItem.topic}"`);
+      return {
+        topic: calItem.topic,
+        category: calItem.category,
+        keywords: calItem.keywords,
+        contextProducts: calItem.contextProducts
+      };
+    }
+  }
+
   const [productUrls, recentTopics] = await Promise.all([
     fetchProductContext(clientId),
     getRecentTopics(clientId),

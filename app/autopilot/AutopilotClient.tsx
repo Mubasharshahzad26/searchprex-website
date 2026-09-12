@@ -9,6 +9,7 @@ import {
   ChevronDown,
 } from 'lucide-react'
 import PendingReview from '@/components/autopilot/PendingReview'
+import Squad2RetrofitWidget from '@/components/autopilot/Squad2RetrofitWidget'
 import IndexingStats from '@/components/autopilot/IndexingStats'
 import AuditStats from '@/components/autopilot/AuditStats'
 import RoadmapWidget from '@/components/autopilot/RoadmapWidget'
@@ -260,6 +261,7 @@ export default function AutopilotClient() {
           )}
         </div>
 
+        <Squad2RetrofitWidget />
         <PendingReview />
         <IndexingStats />
         <AuditStats />

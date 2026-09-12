@@ -1,7 +1,7 @@
 import { geminiPool } from '@/lib/gemini-pool';
 import { db } from '@/lib/db';
 import { submitUrl } from '@/lib/indexing';
-import { generateBlogTopic, WEEKLY_SCHEDULE, type BlogTopic } from './blog-topic-generator';
+import { generateBlogTopic, getNextCalendarCategory, WEEKLY_SCHEDULE, type BlogTopic } from './blog-topic-generator';
 import { publishBlogToWordPress } from './blog-publisher';
 
 const gemini = geminiPool;
@@ -29,7 +29,11 @@ export async function runBlogPipeline(clientId: string, options?: {
   dryRun?: boolean;
 }) {
   const dryRun = options?.dryRun ?? false;
-  const category = options?.categoryOverride ?? getTodayCategory();
+  let category = options?.categoryOverride ?? getTodayCategory();
+
+  if (!category) {
+    category = (await getNextCalendarCategory(clientId)) ?? null;
+  }
 
   if (!category) {
     return { skipped: 'no_category_for_today', dayOfWeek: new Date().getDay() };
