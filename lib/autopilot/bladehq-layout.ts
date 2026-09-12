@@ -846,7 +846,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     <div style="flex:1 1 180px; min-width:160px; max-width:100%; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
       <div>
         <a href="/product/aucon-smiley-bead-copper/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
-          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/02/ACN005C-2.jpg" alt="AuCon Smiley Bead" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
+          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/ACN005C.jpg" alt="AuCon Smiley Bead Copper" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#0284c7; margin-bottom:3px;">EDC Lanyard Bead</div>
         <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/aucon-smiley-bead-copper/" style="color:#0f172a; text-decoration:none;">AuCon Smiley Bead Copper</a></div>
@@ -859,7 +859,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     <div style="flex:1 1 180px; min-width:160px; max-width:100%; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
       <div>
         <a href="/product/aucon-small-smiley-bead-bronze/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
-          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/02/ACN005BZ-2.jpg" alt="Small Smiley Bead Bronze" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
+          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/ACN005SBRZ.jpg" alt="Small Smiley Bead Bronze" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#0284c7; margin-bottom:3px;">EDC Lanyard Bead</div>
         <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/aucon-small-smiley-bead-bronze/" style="color:#0f172a; text-decoration:none;">Small Smiley Bead Bronze</a></div>
@@ -871,28 +871,28 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     </div>
     <div style="flex:1 1 180px; min-width:160px; max-width:100%; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
       <div>
-        <a href="/product/barebones-living-square-cutting-board/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
-          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BARE320.jpg" alt="Barebones Cutting Board" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
+        <a href="/product/dmt-suregrip-powered-diamond-knif/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
+          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/DMT20187.jpg" alt="DMT Diamond Sharpener" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
-        <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#16a34a; margin-bottom:3px;">Kitchen &amp; Camp Prep</div>
-        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-square-cutting-board/" style="color:#0f172a; text-decoration:none;">Barebones Cutting Board</a></div>
+        <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#16a34a; margin-bottom:3px;">Knife Maintenance</div>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/dmt-suregrip-powered-diamond-knif/" style="color:#0f172a; text-decoration:none;">DMT Diamond Knife Sharpener</a></div>
       </div>
       <div>
-        <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$14.89</div>
-        <a href="/product/barebones-living-square-cutting-board/" style="display:block; text-align:center; background:#0f172a; color:#ffffff; font-size:11.5px; font-weight:700; padding:6px 10px; border-radius:4px; text-decoration:none;">View Tool &rarr;</a>
+        <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$16.34</div>
+        <a href="/cart/?add-to-cart=165928" style="display:block; text-align:center; background:#0f172a; color:#ffffff; font-size:11.5px; font-weight:700; padding:6px 10px; border-radius:4px; text-decoration:none;">Add to Cart &rarr;</a>
       </div>
     </div>
     <div style="flex:1 1 180px; min-width:160px; max-width:100%; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
       <div>
-        <a href="/product/barebones-living-chef-grill-spatula/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
-          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BARE367.jpg" alt="Barebones Chef Spatula" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
+        <a href="/product/sharpi-8-in-1-diamond-sharpener/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
+          <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/08/SHOD0002.jpg" alt="Sharpi 8-in-1 Sharpener" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
         </a>
-        <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#b45309; margin-bottom:3px;">Grill &amp; Camp</div>
-        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/barebones-living-chef-grill-spatula/" style="color:#0f172a; text-decoration:none;">Barebones Chef Spatula</a></div>
+        <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#16a34a; margin-bottom:3px;">Pocket Sharpener</div>
+        <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/sharpi-8-in-1-diamond-sharpener/" style="color:#0f172a; text-decoration:none;">Sharpi 8-in-1 Sharpener</a></div>
       </div>
       <div>
-        <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$18.49</div>
-        <a href="/product/barebones-living-chef-grill-spatula/" style="display:block; text-align:center; background:#0f172a; color:#ffffff; font-size:11.5px; font-weight:700; padding:6px 10px; border-radius:4px; text-decoration:none;">View Tool &rarr;</a>
+        <div style="font-size:15px; font-weight:800; color:#b91c1c; margin-bottom:8px;">$14.85</div>
+        <a href="/cart/?add-to-cart=162785" style="display:block; text-align:center; background:#0f172a; color:#ffffff; font-size:11.5px; font-weight:700; padding:6px 10px; border-radius:4px; text-decoration:none;">Add to Cart &rarr;</a>
       </div>
     </div>
     <div style="flex:1 1 180px; min-width:160px; max-width:100%; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
