@@ -122,13 +122,15 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-usp-sub { font-size: 11px; color: #64748b; font-weight: 500; line-height: 1.35; }
 
 /* 4. Brand Logo Strip (All 17 Brands from Homepage) */
-.mso-brand-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 24px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); flex-wrap: wrap; }
+.mso-brand-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 20px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+.mso-brand-strip-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .mso-brand-strip-left { font-size: 13px; font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; }
-.mso-brand-strip-left span { color: #0066cc; }
-.mso-brand-strip-logos { display: flex; align-items: center; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+.mso-brand-strip-left span { color: #384c3c; font-weight: 900; }
+.mso-all-brands-link { font-size: 12.5px; font-weight: 800; color: #384c3c; text-decoration: none; white-space: nowrap; border-bottom: 2px solid #384c3c; transition: all 0.2s; }
+.mso-all-brands-link:hover { color: #f5a623; border-color: #f5a623; }
+.mso-brand-strip-logos { display: flex; align-items: center; gap: 22px; overflow-x: auto; scrollbar-width: none; width: 100%; }
 .mso-brand-strip-logos img { height: 26px; width: auto; object-fit: contain; filter: grayscale(100%); opacity: 0.8; transition: filter 0.2s, opacity 0.2s; }
 .mso-brand-strip-logos img:hover { filter: grayscale(0%); opacity: 1; }
-.mso-all-brands-link { font-size: 12.5px; font-weight: 800; color: #0066cc; text-decoration: none; white-space: nowrap; border-bottom: 2px solid #0066cc; }
 
 /* 5. Section Headers */
 .mso-bhq-section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
@@ -404,8 +406,11 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 
   <!-- 4. BRAND LOGO STRIP (ALL 17 HOMEPAGE BRANDS) -->
   <section class="mso-brand-strip">
-    <div class="mso-brand-strip-left">
-      THE BEST KNIVES &amp; THE BEST SERVICE ONLY AT <span>MICHIGAN SPORTS OUTDOOR</span>
+    <div class="mso-brand-strip-top">
+      <div class="mso-brand-strip-left">
+        THE BEST KNIVES &amp; THE BEST SERVICE ONLY AT <span>MICHIGAN SPORTS OUTDOOR</span>
+      </div>
+      <a href="https://www.michigansportsoutdoor.com/brands/" class="mso-all-brands-link">All Brands</a>
     </div>
     <div class="mso-brand-strip-logos">
       <a href="https://www.michigansportsoutdoor.com/brand/spyderco/"><img src="${brandSpyderco}" alt="Spyderco" /></a>
@@ -425,7 +430,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
       <a href="https://www.michigansportsoutdoor.com/brand/sog/"><img src="${brandSOG}" alt="SOG" /></a>
       <a href="https://www.michigansportsoutdoor.com/brand/tops/"><img src="${brandTOPS}" alt="TOPS Knives" /></a>
     </div>
-    <a href="https://www.michigansportsoutdoor.com/brands/" class="mso-all-brands-link">All Brands</a>
   </section>
 
   <!-- 5. OPPORTUNITIES TOO GOOD TO MISS (STRICT 1 ROW OF 4 CARDS) -->
