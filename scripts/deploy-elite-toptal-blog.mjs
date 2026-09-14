@@ -9,9 +9,9 @@ async function deployEliteToptalBlog() {
     'Content-Type': 'application/json'
   };
 
-  const blogHtml = `<!-- ========================================== -->
-<!-- 1. TECHNICAL SEO: JSON-LD STRUCTURED DATA  -->
-<!-- ========================================== -->
+  const blogHtml = `<!-- ======================================================== -->
+<!-- 1. TECHNICAL SEO: JSON-LD STRUCTURED DATA SCHEMA GRAPH   -->
+<!-- ======================================================== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -20,8 +20,8 @@ async function deployEliteToptalBlog() {
       "@type": "CollectionPage",
       "@id": "https://www.michigansportsoutdoor.com/blog/#webpage",
       "url": "https://www.michigansportsoutdoor.com/blog/",
-      "name": "Michigan Sports Outdoor Blog | Field Journal & Cutlery Lab",
-      "description": "The premier authority for hunters, backcountry guides, and outdoor cutlery specialists.",
+      "name": "Michigan Sports Outdoor Blog | Cutlery Lab & Field Journal",
+      "description": "The premier authority for hunters, backcountry outfitters, bladesmiths, and outdoor cutlery specialists, led by Mubashar Sharif and the Michigan Editorial Team.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -37,17 +37,63 @@ async function deployEliteToptalBlog() {
           "@type": "ImageObject",
           "url": "https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/MSO-LOGO-1.png"
         }
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "url": "https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/",
+            "name": "Best Hunting Knives for Michigan Deer Season (2026 Guide)"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "url": "https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/",
+            "name": "Best Fixed Blade Hunting Knives 2026: In-Depth Review"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "url": "https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/",
+            "name": "Morakniv Companion vs Kansbol vs Garberg Showdown"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "url": "https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/",
+            "name": "How to Sharpen a Hunting Knife with a Turn-Box at Camp"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "url": "https://www.michigansportsoutdoor.com/top-best-edc-knives-under-100/",
+            "name": "Top 5 Best EDC Pocket Knives Under $100 for Fall 2026"
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "url": "https://www.michigansportsoutdoor.com/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/",
+            "name": "Understanding Knife Edge Geometry: Hollow vs Flat Grind"
+          }
+        ]
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.michigansportsoutdoor.com/shop/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
   ]
 }
 </script>
 
-<!-- ========================================== -->
-<!-- 2. MASTER STYLES: EXACT TOPTAL BLOG SYSTEM -->
-<!-- ========================================== -->
+<!-- ======================================================== -->
+<!-- 2. MASTER STYLES: EXACT TOPTAL BLOG EDITORIAL SYSTEM     -->
+<!-- ======================================================== -->
 <style>
-  /* 2.1 PURE WHITE ROOT RESET (FOR BODY AND THEME WRAPPERS) */
+  /* 2.1 PURE WHITE ROOT RESET & THEME NORMALIZATION */
   html, body, #page, #wrapper, .site, .site-wrapper, .site-content, 
   #content, .content-area, #primary, #main, .site-main, .entry-content, 
   .entry-content-wrap, .page-content, .post-content, 
@@ -56,18 +102,16 @@ async function deployEliteToptalBlog() {
     background-color: #ffffff !important;
   }
 
-  /* HIDE THEME TITLE AND HEADERS */
   .page-header, .header-page-title, .page-title-wrap, .entry-header, .site-content > .page-title {
     display: none !important;
   }
 
-  /* PREVENT HORIZONTAL SCROLL ON FULL-BLEED */
   body {
     overflow-x: hidden !important;
   }
 
   /* ======================================================== */
-  /* 2.2 FULL-BLEED EXACT TOPTAL HERO SECTION (100VW NAVY)    */
+  /* 2.2 FULL-BLEED EXACT TOPTAL HERO BANNER (100VW NAVY)     */
   /* ======================================================== */
   .mso-toptal-hero-fullwidth {
     width: 100vw;
@@ -78,35 +122,35 @@ async function deployEliteToptalBlog() {
     margin-right: -50vw;
     background: #08183a;
     background-image: 
-      radial-gradient(circle at 12% 20%, rgba(37, 99, 235, 0.25) 0%, transparent 45%),
-      radial-gradient(circle at 88% 80%, rgba(30, 58, 138, 0.35) 0%, transparent 50%),
-      linear-gradient(135deg, #071533 0%, #0b2050 50%, #08183a 100%);
-    padding: 68px max(24px, calc((100vw - 1200px) / 2)) 52px max(24px, calc((100vw - 1200px) / 2));
+      radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.28) 0%, transparent 45%),
+      radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.38) 0%, transparent 50%),
+      linear-gradient(135deg, #06132e 0%, #0b2050 50%, #08183a 100%);
+    padding: 72px max(24px, calc((100vw - 1200px) / 2)) 56px max(24px, calc((100vw - 1200px) / 2));
     box-sizing: border-box;
     color: #ffffff;
     overflow: hidden;
   }
 
-  /* TOPTAL CONSTELLATION NETWORK BACKGROUND */
+  /* TOPTAL SIGNATURE CONSTELLATION NETWORK LINES */
   .mso-toptal-hero-fullwidth::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-      radial-gradient(2px 2px at 40px 60px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 160px 180px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 320px 80px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 500px 220px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 720px 90px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 880px 200px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 1080px 110px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0));
-    opacity: 0.7;
+      radial-gradient(2px 2px at 40px 60px, rgba(255, 255, 255, 0.45), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 160px 180px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 320px 80px, rgba(255, 255, 255, 0.32), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 520px 240px, rgba(255, 255, 255, 0.28), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 740px 90px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 900px 210px, rgba(255, 255, 255, 0.32), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 1100px 110px, rgba(255, 255, 255, 0.45), rgba(0,0,0,0));
+    opacity: 0.75;
     pointer-events: none;
   }
 
   .mso-hero-content-row {
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: 1.22fr 1fr;
     gap: 48px;
     align-items: center;
     position: relative;
@@ -120,7 +164,7 @@ async function deployEliteToptalBlog() {
     font-weight: 800;
     line-height: 1.05;
     color: #ffffff !important;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
     margin: 0 0 18px 0;
   }
   .mso-toptal-lead {
@@ -128,7 +172,7 @@ async function deployEliteToptalBlog() {
     line-height: 1.65;
     color: #cbd5e1;
     margin: 0 0 24px 0;
-    max-width: 600px;
+    max-width: 620px;
   }
 
   /* SHARE COUNT BADGE (EXACT TOPTAL REPLICA) */
@@ -188,7 +232,7 @@ async function deployEliteToptalBlog() {
     border-color: #ffffff;
   }
 
-  /* RIGHT HERO: EEAT TRUST CARDS (EXACT TOPTAL "FEATURED IN" FORMAT) */
+  /* RIGHT HERO: EEAT FACTORS (EXACT TOPTAL "FEATURED IN" CARDS) */
   .mso-hero-eeat-col {
     display: flex;
     flex-direction: column;
@@ -209,30 +253,30 @@ async function deployEliteToptalBlog() {
     width: 100%;
   }
   .mso-eeat-card {
-    background: rgba(14, 38, 92, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(14, 38, 92, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    padding: 20px 14px;
+    padding: 22px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     text-decoration: none !important;
-    min-height: 112px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    min-height: 116px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
     transition: all 0.22s ease;
     box-sizing: border-box;
   }
   .mso-eeat-card:hover {
-    background: rgba(24, 58, 136, 0.95);
-    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(24, 58, 136, 0.98);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
   }
   .mso-eeat-svg-wrap {
     width: 100%;
-    height: 34px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,7 +299,7 @@ async function deployEliteToptalBlog() {
   .mso-toptal-search-bar {
     display: flex;
     align-items: center;
-    background: rgba(6, 18, 46, 0.75);
+    background: rgba(6, 18, 46, 0.78);
     border: 1.5px solid rgba(255, 255, 255, 0.35);
     border-radius: 4px;
     padding: 5px 8px 5px 18px;
@@ -722,7 +766,7 @@ async function deployEliteToptalBlog() {
     margin: 0 0 12px 0;
   }
 
-  /* AUTHOR PROFILE (EXACT TOPTAL REPLICA WITH SQUARE AVATAR & CREDENTIAL BIO) */
+  /* AUTHOR PROFILE (MUBASHAR SHARIF & MICHIGAN EDITORIAL TEAM) */
   .mso-author-block {
     display: flex;
     align-items: flex-start;
@@ -981,7 +1025,7 @@ async function deployEliteToptalBlog() {
   }
 
   /* ======================================================== */
-  /* 2.6 RESPONSIVE BREAKPOINTS                               */
+  /* 2.6 RESPONSIVE BREAKPOINTS (ALL DEVICES OPTIMIZED)       */
   /* ======================================================== */
   @media (max-width: 1080px) {
     .mso-matrix-grid {
@@ -992,7 +1036,7 @@ async function deployEliteToptalBlog() {
 
   @media (max-width: 960px) {
     .mso-toptal-hero-fullwidth {
-      padding: 44px 24px 36px 24px;
+      padding: 48px 24px 38px 24px;
     }
     .mso-hero-content-row {
       grid-template-columns: 1fr;
@@ -1012,13 +1056,19 @@ async function deployEliteToptalBlog() {
 
   @media (max-width: 640px) {
     .mso-toptal-hero-fullwidth {
-      padding: 30px 16px 24px 16px;
+      padding: 32px 16px 26px 16px;
     }
     .mso-toptal-heading {
       font-size: 32px;
+      line-height: 1.1;
     }
     .mso-eeat-grid {
       grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .mso-eeat-card {
+      min-height: 80px;
+      padding: 14px 12px;
     }
     .mso-toptal-search-bar {
       flex-wrap: wrap;
@@ -1058,7 +1108,7 @@ async function deployEliteToptalBlog() {
 </style>
 
 <!-- ======================================================== -->
-<!-- 3. HTML5 SEMANTIC MARKUP: FULL TOPTAL SYSTEM             -->
+<!-- 3. HTML5 SEMANTIC MARKUP: EXACT TOPTAL MASTERPIECE       -->
 <!-- ======================================================== -->
 
 <!-- 3.1 FULL-BLEED EXACT TOPTAL HERO SECTION WITH EEAT -->
@@ -1225,7 +1275,7 @@ async function deployEliteToptalBlog() {
       </div>
       <div class="mso-flagship-foot">
         <div class="mso-flagship-author">
-          By <strong>Mubashar Sharif</strong> &bull; Cutlery Lab
+          By <strong>Mubashar Sharif</strong> &bull; Lead Cutlery Analyst
         </div>
         <a href="/cpm-magnacut-vs-bohler-m390mk/" class="mso-btn-flagship">
           Read Analysis &rarr;
@@ -1234,7 +1284,7 @@ async function deployEliteToptalBlog() {
     </div>
   </article>
 
-  <!-- 3-COLUMN EDITORIAL BENTO GRID (COMPACT COVERS + TOPTAL AUTHOR PROFILES) -->
+  <!-- 3-COLUMN EDITORIAL BENTO GRID (MUBASHAR SHARIF & MICHIGAN EDITORIAL TEAM) -->
   <section aria-labelledby="featured-reports-heading">
     <div class="mso-grid-header">
       <h2 id="featured-reports-heading">Featured Field Reports &amp; Buying Guides</h2>
@@ -1243,7 +1293,7 @@ async function deployEliteToptalBlog() {
 
     <div class="mso-editorial-grid" id="msoArticleGrid">
 
-      <!-- CARD 1 -->
+      <!-- CARD 1: MUBASHAR SHARIF -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="hunting">
         <a href="/best-hunting-knives-for-michigan-deer-season-3/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
@@ -1271,18 +1321,18 @@ async function deployEliteToptalBlog() {
             </div>
             <hr class="mso-bento-sep" />
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Dave Miller" class="mso-author-avatar" />
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" alt="Mubashar Sharif" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">By Dave Miller</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Whitetail Outfitting</span>
-                <p class="mso-author-bio">Dave has 18+ years guiding whitetail hunts in Michigan and field dressing big game in cold conditions.</p>
+                <span class="mso-author-name" itemprop="name">By Mubashar Sharif</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Hunting Cutlery</span>
+                <p class="mso-author-bio">Lead editor at MSO Cutlery Lab, evaluating cold-weather edge retention, skinning ergonomics, and steel toughness in Michigan deer camps.</p>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- CARD 2 -->
+      <!-- CARD 2: MICHIGAN EDITORIAL TEAM -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="hunting">
         <a href="/best-fixed-blade-hunting-knives-2026-buying-guide/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
@@ -1309,19 +1359,19 @@ async function deployEliteToptalBlog() {
               <a href="/best-fixed-blade-hunting-knives-2026-buying-guide/" class="mso-bento-link">View Top Picks &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
-            <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Joe Cavazos" class="mso-author-avatar" />
+            <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Organization">
+              <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/MSO-LOGO-1.png" alt="Michigan Editorial Team" class="mso-author-avatar" style="object-fit:contain; padding:2px; background:#f8fafc;" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">By Joe Cavazos</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Metallurgy &amp; Tool Steels</span>
-                <p class="mso-author-bio">Joe is a cutlery specialist with 14+ years evaluating heat treatment protocols and edge geometry in tool steels.</p>
+                <span class="mso-author-name" itemprop="name">By Michigan Editorial Team</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Cutlery Review Board</span>
+                <p class="mso-author-bio">The MSO Cutlery Review Board comprises veteran Michigan outfitters and bladesmiths evaluating full-tang construction and blade grinds.</p>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- CARD 3 -->
+      <!-- CARD 3: MUBASHAR SHARIF -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="bushcraft">
         <a href="/mora-companion-vs-kansbol-vs-garberg/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
@@ -1349,18 +1399,18 @@ async function deployEliteToptalBlog() {
             </div>
             <hr class="mso-bento-sep" />
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Thomas Varghese" class="mso-author-avatar" />
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" alt="Mubashar Sharif" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">By Thomas Varghese</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Wilderness Survival</span>
-                <p class="mso-author-bio">Thomas is a wilderness instructor and knife craftsman who has tested Scandinavian grinds across the Northwoods.</p>
+                <span class="mso-author-name" itemprop="name">By Mubashar Sharif</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Bushcraft Cutlery</span>
+                <p class="mso-author-bio">Bladesmith and cutlery tester who has tested Scandinavian grind bevels and high-carbon batoning durability across northern Michigan backcountry.</p>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- CARD 4 -->
+      <!-- CARD 4: MICHIGAN EDITORIAL TEAM -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="sharpening">
         <a href="/how-to-sharpen-a-knife-at-home/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
@@ -1387,19 +1437,19 @@ async function deployEliteToptalBlog() {
               <a href="/how-to-sharpen-a-knife-at-home/" class="mso-bento-link">Learn Technique &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
-            <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face" alt="Shivam Kapoor" class="mso-author-avatar" />
+            <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Organization">
+              <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/MSO-LOGO-1.png" alt="Michigan Editorial Team" class="mso-author-avatar" style="object-fit:contain; padding:2px; background:#f8fafc;" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">By Shivam Kapoor</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Honing &amp; Edge Restoration</span>
-                <p class="mso-author-bio">Shivam specializes in micro-bevel apex angles and ceramic rod field maintenance for high-Rockwell cutlery.</p>
+                <span class="mso-author-name" itemprop="name">By Michigan Editorial Team</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Honing Specialists</span>
+                <p class="mso-author-bio">Our camp maintenance specialists conduct empirical abrasive micron tests, micro-bevel honing trials, and stropping restoration protocols.</p>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- CARD 5 -->
+      <!-- CARD 5: MUBASHAR SHARIF -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="edc">
         <a href="/top-best-edc-knives-under-100/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
@@ -1431,14 +1481,14 @@ async function deployEliteToptalBlog() {
               <div class="mso-author-meta">
                 <span class="mso-author-name" itemprop="name">By Mubashar Sharif</span>
                 <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Cutlery &amp; EDC Gear</span>
-                <p class="mso-author-bio">Lead editor at MSO Cutlery Lab, reviewing over 120 production and custom pocket knives annually.</p>
+                <p class="mso-author-bio">Lead editor at MSO Cutlery Lab, reviewing lockup tolerances, pocket carry comfort, and real-world edge longevity on 120+ blades yearly.</p>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- CARD 6 -->
+      <!-- CARD 6: MICHIGAN EDITORIAL TEAM -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="steel">
         <a href="/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
@@ -1465,12 +1515,12 @@ async function deployEliteToptalBlog() {
               <a href="/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/" class="mso-bento-link">Explore Geometry &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
-            <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face" alt="Marcus Thorne" class="mso-author-avatar" />
+            <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Organization">
+              <img src="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/MSO-LOGO-1.png" alt="Michigan Editorial Team" class="mso-author-avatar" style="object-fit:contain; padding:2px; background:#f8fafc;" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">By Marcus Thorne</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Custom Knifemaking</span>
-                <p class="mso-author-bio">Marcus is an ABS certified bladesmith crafting high-performance custom hunting cutlery with bespoke bevels.</p>
+                <span class="mso-author-name" itemprop="name">By Michigan Editorial Team</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Cutlery Engineering Lab</span>
+                <p class="mso-author-bio">Empirical testing team measuring slicing friction drag, shoulder wedging, and lateral edge deformation across production cutlery.</p>
               </div>
             </div>
           </div>
@@ -1910,7 +1960,7 @@ function msoFilterCategory(cat, btn) {
 })();
 </script>`;
 
-  console.log('Updating WordPress page #166494 to Full-Bleed Toptal Hero layout...');
+  console.log('Updating WordPress page #166494 to Final Masterpiece Toptal Blog layout...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/166494`, {
     method: 'POST',
     headers,
@@ -1921,7 +1971,7 @@ function msoFilterCategory(cat, btn) {
     })
   });
   const updated = await res.json();
-  console.log(`✅ Full-Bleed Toptal Hero blog page deployed successfully: ${updated.link}`);
+  console.log(`✅ Masterpiece Toptal Blog deployed successfully: ${updated.link}`);
 }
 
 deployEliteToptalBlog().then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); });
