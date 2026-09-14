@@ -12,7 +12,7 @@ async function deployEEATBladeHQOctoberPage() {
   };
 
   // CRO-Optimized October Season & Cutlery Visuals
-  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-magna-2026.jpg';
+  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-2026.jpg';
   const imgPromo1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-whitetail-fixed-blades-promo.jpg';
   const imgPromo2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-special-edition-blades-drop.jpg';
   const imgPromo3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-fall-hunting-gift-guide-2026.jpg';
@@ -95,19 +95,15 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-eeat-badge-pill.dark { background: #f1f5f9 !important; color: #334155 !important; border: 1px solid #e2e8f0 !important; }
 .mso-eeat-badge-pill.forest { background: #ecfdf5 !important; color: #065f46 !important; border: 1px solid #a7f3d0 !important; }
 
-/* 3. Hero Banner (Blade HQ Format & Squeezed CRO Compact) */
-.mso-bhq-hero { position: relative; width: 100%; min-height: 340px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center right/cover no-repeat; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); display: flex; align-items: center; padding: 32px 36px; box-sizing: border-box; }
-.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.80) 48%, rgba(15,23,42,0.25) 80%, rgba(15,23,42,0.12) 100%); }
-.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 600px; }
-.mso-bhq-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,76,60,0.92); border: 1px solid #f5a623; color: #f5a623; font-size: 10px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; backdrop-filter: blur(4px); }
-.mso-bhq-hero-title { font-size: 34px; font-weight: 900; line-height: 1.1; color: #ffffff; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
-.mso-bhq-hero-title span { color: #f5a623; }
-.mso-bhq-hero-sub { font-size: 14px; color: #cbd5e1; margin: 0 0 18px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.45; }
-.mso-bhq-hero-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.mso-bhq-hero-btn-primary { background: #ea580c; color: #ffffff !important; font-size: 13px; font-weight: 900; padding: 11px 24px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(234,88,12,0.35); transition: transform 0.2s, background 0.2s; }
-.mso-bhq-hero-btn-primary:hover { background: #c2410c; transform: translateY(-2px); }
-.mso-bhq-hero-btn-secondary { background: rgba(255,255,255,0.12); color: #ffffff !important; border: 1.5px solid rgba(255,255,255,0.6); font-size: 13px; font-weight: 900; padding: 9.5px 20px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(4px); transition: all 0.2s; }
-.mso-bhq-hero-btn-secondary:hover { background: #ffffff; color: #0f172a !important; border-color: #ffffff; transform: translateY(-2px); }
+/* 3. Hero Banner (Blade HQ Format) */
+.mso-bhq-hero { position: relative; width: 100%; min-height: 420px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center/cover no-repeat; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: flex; align-items: flex-end; padding: 48px 40px; box-sizing: border-box; }
+.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.45) 60%, rgba(15,23,42,0.75) 100%); }
+.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 720px; }
+.mso-bhq-hero-title { font-size: 44px; font-weight: 900; line-height: 1.05; color: #ffffff; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.mso-bhq-hero-sub { font-size: 16.5px; color: #e2e8f0; margin: 0 0 24px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.4); line-height: 1.45; }
+.mso-bhq-hero-action { position: absolute; bottom: 36px; right: 40px; z-index: 2; }
+.mso-bhq-hero-btn { background: #ffffff; color: #0066cc !important; font-size: 15px; font-weight: 900; padding: 12px 28px; border-radius: 25px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s, color 0.2s; }
+.mso-bhq-hero-btn:hover { background: #f5a623; color: #0f172a !important; transform: scale(1.04); }
 
 /* 3.5. 4-Pillar Smart USP Trust Bar */
 .mso-usp-bar { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 20px; margin-bottom: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); box-sizing: border-box; }
@@ -266,10 +262,9 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-blade-club-footer { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .mso-bhq-hero { padding: 22px 16px; min-height: 280px; background-position: center center; }
-  .mso-bhq-hero-title { font-size: 24px; }
-  .mso-bhq-hero-actions { flex-direction: column; align-items: stretch; }
-  .mso-bhq-hero-btn-primary, .mso-bhq-hero-btn-secondary { text-align: center; }
+  .mso-bhq-hero { padding: 32px 20px; min-height: 340px; }
+  .mso-bhq-hero-title { font-size: 28px; }
+  .mso-bhq-hero-action { position: relative; bottom: auto; right: auto; margin-top: 16px; }
   .mso-usp-bar { grid-template-columns: 1fr; gap: 12px; padding: 12px 14px; }
   .mso-opps-grid { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: 1fr; }
@@ -329,19 +324,15 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   <!-- 2. E-E-A-T MASTER CERTIFICATION STRIP (ULTRA-THIN 1-LINE TRUST BAR) -->
   <div class="mso-eeat-cert-strip"><a href="https://maps.google.com/?q=Michigan+Sports+Outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg></span><span class="mso-eeat-item-title">Google Verified</span><span class="mso-eeat-badge-pill gold">5.0 Star</span></a><a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#005A9C"/><text x="12" y="16" fill="#ffffff" font-family="Arial, sans-serif" font-size="9" font-weight="900" text-anchor="middle">BBB</text></svg></span><span class="mso-eeat-item-title">BBB Accredited</span><span class="mso-eeat-badge-pill blue">A+ Rating</span></a><a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00b67a"/><path d="M12 4.5l2.32 7.13h7.5l-6.07 4.41 2.32 7.13L12 18.76l-6.07 4.41 2.32-7.13-6.07-4.41h7.5z" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">Trustpilot</span><span class="mso-eeat-badge-pill green">Verified</span></a><a href="https://www.bladeforums.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1e293b"/><path d="M5 19L19 5M5 5l14 14" stroke="#f5a623" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.8" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">BladeForums</span><span class="mso-eeat-badge-pill dark">Member</span></a><a href="https://www.michigan-sportsman.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#384c3c"/><path d="M12 3.5L5.5 13.5h4v7h5v-7h4L12 3.5z" fill="#f5a623"/></svg></span><span class="mso-eeat-item-title">MichiganSportsman</span><span class="mso-eeat-badge-pill forest">Partner</span></a></div>
 
-  <!-- 3. HERO BANNER (CRO-OPTIMIZED SQUEEZED BANNER) -->
+  <!-- 3. HERO BANNER (BLADE HQ EXACT PATTERN) -->
   <section class="mso-bhq-hero">
     <div class="mso-bhq-hero-overlay"></div>
     <div class="mso-bhq-hero-content">
-      <div class="mso-bhq-hero-badge">
-        <span>OCTOBER HUNTING OPENER</span> • 2026 CUTLERY DROP
-      </div>
-      <h1 class="mso-bhq-hero-title">DON'T BUY A BAD KNIFE.<br/><span>GET IT RIGHT THE FIRST TIME.</span></h1>
-      <p class="mso-bhq-hero-sub">America's premier sportsman &amp; outfitter. Over 7,000+ authentic fixed blades, folders &amp; backcountry field gear tested for the fall season.</p>
-      <div class="mso-bhq-hero-actions">
-        <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-hero-btn-primary">See The Winners</a>
-        <a href="https://www.michigansportsoutdoor.com/product-category/knives-accessories/hunting-knives/" class="mso-bhq-hero-btn-secondary">Explore Hunting Cutlery</a>
-      </div>
+      <h1 class="mso-bhq-hero-title">DON'T BUY A BAD KNIFE.<br/>GET IT RIGHT THE FIRST TIME.</h1>
+      <p class="mso-bhq-hero-sub">Michigan Sportsman &amp; Outfitter — Over 7,000+ in-stock knives, hunting gear &amp; camp cutlery tested by American sportsmen for the October whitetail opener.</p>
+    </div>
+    <div class="mso-bhq-hero-action">
+      <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-hero-btn">See The Winners</a>
     </div>
   </section>
 
