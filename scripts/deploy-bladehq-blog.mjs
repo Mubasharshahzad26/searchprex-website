@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-async function deployPerfectKnifeBlog() {
+async function deployBladeHQWithVipClub() {
   const baseUrl = 'https://www.michigansportsoutdoor.com';
   const username = 'apiuser';
   const appPassword = 'cvxm Bi7y 6o3y r7HJ M1Wn mSMM';
@@ -13,7 +13,7 @@ async function deployPerfectKnifeBlog() {
 
   const authorPhotoUrl = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mubashar-shahzad-lead-cutlery-analyst.jpg';
 
-  // 100% authentic knife images from MSO Media Gallery
+  // 100% authentic knife & cutlery images from MSO Media Gallery
   const imgFeatured = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA1_add_01.jpg'; // Titanium super steel collection
   const imgCard1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA4906_add_01.jpg';    // Whitetail hunting knife
   const imgCard2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg';   // Cryo D2 sharpening & edge
@@ -32,7 +32,6 @@ async function deployPerfectKnifeBlog() {
   const tagImg5 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/KKNJ394CP_add_01.jpg';
   const tagImg6 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/J1954LMGN_add_01.jpg';
 
-  // Robust CSS supporting both CSS Grid and Flexbox fallback with strict empty <p> suppression
   const cleanCss = `
 html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-area,#primary,#main,.site-main,.entry-content,.entry-content-wrap,.page-content,.post-content,.container,.container-wrap,.page-wrapper,.site-main-content{background-color:#ffffff !important;background:#ffffff !important;color:#222222;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;}
 .entry-content{padding-left:0 !important;padding-right:0 !important;max-width:100% !important;width:100% !important;overflow-x:hidden;}
@@ -69,7 +68,7 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
 .bhq-exact-author-avatar-mini{width:20px;height:20px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:5px;border:1px solid #d1d5db;display:inline-block;}
 .bhq-exact-excerpt{font-size:13px;line-height:1.55;color:#4b5563;margin:0;}
 
-/* 2-COLUMN GRID WITH STRICT P TAG SUPPRESSION & FLEX LAYOUT */
+/* 2-COLUMN GRID WITH STRICT P TAG SUPPRESSION */
 .bhq-exact-grid{display:flex !important;flex-wrap:wrap !important;gap:24px !important;margin-bottom:36px !important;width:100% !important;float:none !important;clear:both !important;box-sizing:border-box !important;}
 .bhq-exact-grid > p{display:none !important;margin:0 !important;padding:0 !important;width:0 !important;height:0 !important;line-height:0 !important;font-size:0 !important;position:absolute !important;visibility:hidden !important;}
 .bhq-exact-card{flex:0 0 calc(50% - 12px) !important;width:calc(50% - 12px) !important;max-width:calc(50% - 12px) !important;box-sizing:border-box !important;display:flex !important;flex-direction:column !important;float:none !important;clear:none !important;margin:0 !important;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:box-shadow 0.2s ease,transform 0.2s ease;}
@@ -90,15 +89,31 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
 .bhq-exact-load-more-btn:hover{background:#475d4b;border-color:#475d4b;color:#ffffff;}
 
 /* POPULAR TAGS (6 CIRCULAR IMAGES) */
-.bhq-exact-tags-section{margin-top:20px;padding-top:24px;border-top:1px solid #e5e7eb;text-align:center;clear:both;}
+.bhq-exact-tags-section{margin-top:20px;padding-top:24px;border-top:1px solid #e5e7eb;text-align:center;clear:both;margin-bottom:36px;}
 .bhq-exact-tags-heading{font-size:17px;font-weight:800;color:#111827;margin:0 0 20px 0;}
-.bhq-exact-circle-grid{display:grid !important;grid-template-columns:repeat(3, 1fr) !important;gap:24px !important;max-width:720px;margin:0 auto 30px auto;}
+.bhq-exact-circle-grid{display:grid !important;grid-template-columns:repeat(3, 1fr) !important;gap:24px !important;max-width:720px;margin:0 auto 10px auto;}
 .bhq-exact-circle-item{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1 / 1;border-radius:50%;overflow:hidden;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);transition:transform 0.25s ease,box-shadow 0.25s ease;}
 .bhq-exact-circle-item:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(0,0,0,0.2);}
 .bhq-exact-circle-item img{width:100%;height:100%;object-fit:cover;display:block;}
 .bhq-exact-circle-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.42);display:flex;align-items:center;justify-content:center;padding:12px;text-align:center;transition:background 0.2s ease;}
 .bhq-exact-circle-item:hover .bhq-exact-circle-overlay{background:rgba(71,93,75,0.65);}
 .bhq-exact-circle-label{color:#ffffff;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;line-height:1.2;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
+
+/* MSO BLADE & OUTFITTER VIP CLUB CTA BANNER (EXACT REPLICA IN MSO BRAND COLORS) */
+.mso-vip-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg, #384c3c 0%, #475d4b 100%);color:#ffffff;padding:32px 40px;border-radius:8px;box-shadow:0 6px 20px rgba(56,76,60,0.2);margin-top:20px;box-sizing:border-box;}
+.mso-vip-left{display:flex;flex-direction:column;gap:10px;max-width:440px;}
+.mso-vip-title-wrap{display:flex;align-items:center;gap:10px;}
+.mso-vip-crown{font-size:24px;color:#f5a623;}
+.mso-vip-title{font-size:26px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#ffffff;margin:0;font-style:italic;}
+.mso-vip-title span{color:#f5a623;}
+.mso-vip-desc{font-size:13.5px;color:#e2e8f0;margin:0 0 8px 0;line-height:1.45;}
+.mso-vip-desc strong{color:#ffffff;}
+.mso-vip-cta-btn{display:inline-block;background:transparent;color:#ffffff !important;border:2px solid #ffffff;padding:9px 28px;border-radius:24px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:all 0.25s ease;width:fit-content;}
+.mso-vip-cta-btn:hover{background:#f5a623;border-color:#f5a623;color:#0f172a !important;transform:translateY(-2px);box-shadow:0 4px 12px rgba(245,166,35,0.35);}
+.mso-vip-right{display:flex;flex-direction:column;gap:14px;}
+.mso-vip-perk{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:#ffffff;}
+.mso-vip-perk-icon{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);font-size:14px;color:#f5a623;flex-shrink:0;}
+.mso-vip-perk-text{color:#ffffff;letter-spacing:0.3px;}
 
 /* RESPONSIVE */
 @media (max-width:850px){
@@ -107,6 +122,8 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
   .bhq-exact-featured-body{width:100% !important;}
   .bhq-exact-card{flex:0 0 100% !important;width:100% !important;max-width:100% !important;}
   .bhq-exact-circle-grid{grid-template-columns:repeat(2, 1fr) !important;max-width:440px;}
+  .mso-vip-banner{flex-direction:column;align-items:flex-start;gap:24px;padding:24px;}
+  .mso-vip-left{max-width:100%;}
 }
 @media (max-width:650px){
   .bhq-exact-header{flex-direction:column;align-items:stretch;gap:12px;padding:14px;}
@@ -115,10 +132,10 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
   .bhq-exact-search-input{width:100%;}
   .bhq-exact-circle-grid{grid-template-columns:repeat(2, 1fr) !important;gap:16px !important;}
   .bhq-exact-circle-label{font-size:13px;}
+  .mso-vip-title{font-size:22px;}
 }
 `;
 
-  // Note: Clean HTML without internal comments or extra newlines to prevent wpautop <p> wrapping
   const blogHtml = `<!-- ======================================================== -->
 <!-- 1. TECHNICAL SEO: JSON-LD STRUCTURED DATA SCHEMA GRAPH   -->
 <!-- ======================================================== -->
@@ -492,6 +509,37 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
       </a>
     </div>
   </section>
+
+  <!-- MSO BLADE CLUB / VIP REWARDS CTA BANNER -->
+  <section class="mso-vip-banner">
+    <div class="mso-vip-left">
+      <div class="mso-vip-title-wrap">
+        <span class="mso-vip-crown">👑</span>
+        <h3 class="mso-vip-title">BLADE <span>CLUB</span></h3>
+      </div>
+      <p class="mso-vip-desc">
+        Be sharp, get rewarded for loving knives & backcountry outdoor gear... for <strong>FREE!</strong>
+      </p>
+      <a href="https://www.michigansportsoutdoor.com/my-account/" class="mso-vip-cta-btn">
+        LEARN MORE
+      </a>
+    </div>
+
+    <div class="mso-vip-right">
+      <div class="mso-vip-perk">
+        <span class="mso-vip-perk-icon">★</span>
+        <span class="mso-vip-perk-text">1,000 Point Sign-up Bonus</span>
+      </div>
+      <div class="mso-vip-perk">
+        <span class="mso-vip-perk-icon">$</span>
+        <span class="mso-vip-perk-text">Earn & Redeem Points</span>
+      </div>
+      <div class="mso-vip-perk">
+        <span class="mso-vip-perk-icon">VIP</span>
+        <span class="mso-vip-perk-text">Early-Access to Drops & Deals</span>
+      </div>
+    </div>
+  </section>
 </div>
 
 <script>
@@ -565,7 +613,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 `;
 
-  console.log('Deploying Perfect Symmetrical 2-Column Blade HQ Blog to WordPress...');
+  console.log('Deploying Blade HQ Layout + BLADE CLUB VIP CTA Banner to WordPress...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/166494`, {
     method: 'POST',
     headers,
@@ -589,7 +637,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('✅ Updated repo script at: ' + repoScriptPath);
 }
 
-deployPerfectKnifeBlog().catch(err => {
+deployBladeHQWithVipClub().catch(err => {
   console.error('❌ Deployment error:', err);
   process.exit(1);
 });
