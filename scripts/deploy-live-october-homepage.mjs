@@ -11,17 +11,24 @@ async function deployNoEmojiLiveHomepage() {
     'Content-Type': 'application/json'
   };
 
-  // Authentic MSO Media Library Cutlery Photos
-  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA1_add_01.jpg';
+  // CRO-Optimized October Fall Season & Cutlery Cover Imagery (Hosted on MSO Media Library)
+  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-2026.jpg';
+  const imgWhitetailPromoBg = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-whitetail-fixed-blades-promo.jpg';
+  const imgSpecialPromoBg = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-special-edition-blades-drop.jpg';
+  const imgGiftGuide = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-fall-hunting-gift-guide-2026.jpg';
+  
+  // High-Converting Blog Cover Images (October Field Guides)
+  const imgBlog1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-whitetail-deer-knife-guide.jpg';
+  const imgBlog2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-knife-sharpening-home-guide.jpg';
+  const imgBlog3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-morakniv-camp-knife-battle.jpg';
+
+  // Authentic Best Seller Product Photos
   const imgProd1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA2_add_02.jpg';
   const imgProd2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg';
   const imgProd3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/K1116A4_add_01.jpg';
   const imgProd4 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA2628_add_01.jpg';
-  const imgGiftGuide = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA1619_add_01.jpg';
-  const imgBlog1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA4906_add_01.jpg';
-  const imgBlog2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg';
-  const imgBlog3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG12271157_add_01.jpg';
 
+  // Instagram / Community Field Photos
   const ig1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG12271157_add_01.jpg';
   const ig2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA2_add_02.jpg';
   const ig3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOGS40BBX_add_01.jpg';
@@ -60,16 +67,16 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-oct-nav-deal { color: #c2410c !important; font-weight: 800 !important; }
 .mso-oct-nav-new { color: #16a34a !important; font-weight: 800 !important; }
 
-.mso-oct-hero { background: linear-gradient(135deg, #243527 0%, #475d4b 100%); color: #ffffff; border-radius: 10px; padding: 48px 40px; margin-bottom: 24px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; box-shadow: 0 8px 24px rgba(36,53,39,0.25); position: relative; overflow: hidden; }
+.mso-oct-hero { background: linear-gradient(135deg, #1b2e1f 0%, #384c3c 60%, #475d4b 100%); color: #ffffff; border-radius: 10px; padding: 48px 40px; margin-bottom: 24px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; box-shadow: 0 8px 24px rgba(27,46,31,0.3); position: relative; overflow: hidden; }
 .mso-oct-hero-tag { display: inline-block; background: #f5a623; color: #0f172a; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; }
 .mso-oct-hero-title { font-size: 38px; font-weight: 900; line-height: 1.15; margin: 0 0 14px 0; letter-spacing: -0.5px; color: #ffffff; }
-.mso-oct-hero-desc { font-size: 15px; line-height: 1.55; opacity: 0.92; margin-bottom: 24px; max-width: 480px; }
+.mso-oct-hero-desc { font-size: 15px; line-height: 1.55; opacity: 0.94; margin-bottom: 24px; max-width: 480px; }
 .mso-oct-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 .mso-btn-primary { background: #f5a623; color: #0f172a !important; font-weight: 900; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.8px; padding: 12px 28px; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 14px rgba(245,166,35,0.4); }
 .mso-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(245,166,35,0.5); }
 .mso-btn-secondary { background: transparent; color: #ffffff !important; border: 2px solid rgba(255,255,255,0.8); font-weight: 800; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.8px; padding: 10px 24px; border-radius: 6px; text-decoration: none; transition: background 0.2s, border-color 0.2s; }
 .mso-btn-secondary:hover { background: rgba(255,255,255,0.15); border-color: #ffffff; }
-.mso-oct-hero-img-wrap { width: 100%; height: 320px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2); }
+.mso-oct-hero-img-wrap { width: 100%; height: 340px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.2); }
 .mso-oct-hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .mso-trust-bar { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px 24px; margin-bottom: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
@@ -100,14 +107,14 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-cat-name { font-size: 12.5px; font-weight: 800; color: #0f172a; }
 
 .mso-promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
-.mso-promo-card { border-radius: 8px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 170px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-.mso-promo-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
-.mso-promo-card.green { background: linear-gradient(135deg, #1e3a24 0%, #475d4b 100%); color: #ffffff; }
-.mso-promo-card.dark { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffffff; }
-.mso-promo-tag { font-size: 10px; font-weight: 900; letter-spacing: 1.2px; text-transform: uppercase; color: #f5a623; }
-.mso-promo-title { font-size: 20px; font-weight: 900; margin: 6px 0; color: #ffffff; }
-.mso-promo-sub { font-size: 13px; opacity: 0.9; margin: 0 0 16px 0; line-height: 1.4; }
-.mso-promo-action { font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #f5a623; display: flex; align-items: center; gap: 4px; }
+.mso-promo-card { border-radius: 8px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+.mso-promo-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.mso-promo-card.green { background: linear-gradient(135deg, rgba(27,46,31,0.9) 0%, rgba(71,93,75,0.92) 100%), url('${imgWhitetailPromoBg}') center/cover no-repeat; color: #ffffff; }
+.mso-promo-card.dark { background: linear-gradient(135deg, rgba(15,23,42,0.9) 0%, rgba(30,41,59,0.92) 100%), url('${imgSpecialPromoBg}') center/cover no-repeat; color: #ffffff; }
+.mso-promo-tag { font-size: 10.5px; font-weight: 900; letter-spacing: 1.2px; text-transform: uppercase; color: #f5a623; }
+.mso-promo-title { font-size: 22px; font-weight: 900; margin: 8px 0; color: #ffffff; }
+.mso-promo-sub { font-size: 13.5px; opacity: 0.95; margin: 0 0 18px 0; line-height: 1.45; }
+.mso-promo-action { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #f5a623; display: flex; align-items: center; gap: 4px; }
 
 .mso-prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 36px; }
 .mso-prod-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
@@ -134,8 +141,8 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-brand-tile { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 4px; text-align: center; text-decoration: none; font-size: 12px; font-weight: 800; color: #334155; transition: border-color 0.2s, background 0.2s; }
 .mso-brand-tile:hover { border-color: #475d4b; background: #f8fafc; color: #475d4b; }
 
-.mso-gift-guide { background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 28px; margin-bottom: 36px; display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: center; }
-.mso-gift-img-wrap { width: 100%; height: 190px; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.mso-gift-guide { background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 28px; margin-bottom: 36px; display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: center; box-shadow: 0 4px 12px rgba(245,166,35,0.1); }
+.mso-gift-img-wrap { width: 100%; height: 200px; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
 .mso-gift-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 .mso-gift-body { display: flex; flex-direction: column; gap: 8px; }
 .mso-gift-tag { font-size: 10.5px; font-weight: 900; letter-spacing: 1px; color: #92400e; text-transform: uppercase; }
@@ -170,14 +177,14 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-journal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
 .mso-journal-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform 0.2s; }
 .mso-journal-card:hover { transform: translateY(-3px); }
-.mso-journal-thumb { width: 100%; height: 140px; object-fit: cover; }
+.mso-journal-thumb { width: 100%; height: 160px; object-fit: cover; }
 .mso-journal-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
 .mso-journal-meta { font-size: 11px; font-weight: 800; color: #475d4b; text-transform: uppercase; margin-bottom: 6px; }
 .mso-journal-title { font-size: 15px; font-weight: 800; color: #0f172a; line-height: 1.35; margin: 0; }
 
 @media (max-width: 1080px) {
   .mso-oct-hero { grid-template-columns: 1fr; padding: 32px 24px; }
-  .mso-oct-hero-img-wrap { height: 240px; }
+  .mso-oct-hero-img-wrap { height: 260px; }
   .mso-trust-bar { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .mso-cat-grid { grid-template-columns: repeat(3, 1fr); }
   .mso-brand-grid { grid-template-columns: repeat(4, 1fr); }
@@ -286,7 +293,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
       </div>
     </div>
     <div class="mso-oct-hero-img-wrap">
-      <img src="${imgHero}" alt="Michigan Sports Outdoor Fall Hunting Knives" loading="eager" />
+      <img src="${imgHero}" alt="Michigan Sports Outdoor Fall Hunting Knives Hero" loading="eager" />
     </div>
   </section>
 
@@ -375,7 +382,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 7. DUAL PROMO BANNERS -->
+  <!-- 7. DUAL PROMO BANNERS (BLADE HQ / CHICAGO KNIFE WORKS PATTERN) -->
   <section class="mso-promo-grid">
     <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-promo-card green">
       <div>
@@ -486,7 +493,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   <!-- 10. FALL GIFT GUIDE (EDITORIAL COMMERCE) -->
   <section class="mso-gift-guide">
     <div class="mso-gift-img-wrap">
-      <img src="${imgGiftGuide}" alt="Fall Hunting Gift Guide" loading="lazy" />
+      <img src="${imgGiftGuide}" alt="Fall Hunting Gift Guide Outfitter Picks" loading="lazy" />
     </div>
     <div class="mso-gift-body">
       <span class="mso-gift-tag">GUIDES - OCTOBER 2026</span>
@@ -633,7 +640,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 </script>
 `;
 
-  console.log('Deploying optimized no-emoji October Season Homepage to live Homepage #3821...');
+  console.log('Deploying updated CRO-optimized October Season Homepage to live Homepage #3821...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/3821`, {
     method: 'POST',
     headers,
@@ -652,15 +659,15 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   }
 
   const data = await res.json();
-  console.log('✅ Live Homepage #3821 updated successfully:', data.link);
+  console.log('Live Homepage #3821 updated successfully with CRO cover images:', data.link);
 
   // Sync script to repo
   const repoPath = 'c:/Users/Mubashar Shahzad/Desktop/searchprex-website/scripts/deploy-live-october-homepage.mjs';
   fs.writeFileSync(repoPath, fs.readFileSync(new URL(import.meta.url)));
-  console.log('✅ Saved script to repo at:', repoPath);
+  console.log('Saved script to repo at:', repoPath);
 }
 
 deployNoEmojiLiveHomepage().catch(err => {
-  console.error('❌ Error deploying live homepage:', err);
+  console.error('Error deploying live homepage:', err);
   process.exit(1);
 });
