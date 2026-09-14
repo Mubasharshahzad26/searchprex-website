@@ -21,15 +21,15 @@ async function deployEEATBladeHQOctoberPage() {
   // Author Photo
   const authorAvatar = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mubashar-shahzad-lead-cutlery-analyst.jpg';
 
-  // Authentic 10 Categories from Live Homepage
-  const catHunting = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/AH021-450x414.jpg';
+  // Authentic 10 Categories from Live Homepage (Exact Photos)
   const catLocking = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/AB1026GS-450x432.jpg';
-  const catPremium = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/ANVA100035-450x423.jpg';
-  const catCamping = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/12/camping_category-450x338.jpg';
-  const catApparel = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BO09SH902-450x537.jpg';
   const catLights = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/SFRUDRABK-450x443.jpg';
   const catCleaning = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/AVAR15AMK-450x327.jpg';
   const catFishing = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/LWMH2300G3_add_04-450x450.jpg';
+  const catHunting = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/AH021-450x414.jpg';
+  const catCamping = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/12/camping_category-450x338.jpg';
+  const catApparel = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/BO09SH902-450x537.jpg';
+  const catPremium = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/ANVA100035-450x423.jpg';
   const catKitchen = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/SHUSWTS0600-450x233.jpg';
   const catOptics = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/ST2059-450x377.jpg';
 
@@ -112,21 +112,40 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-bhq-view-all-pill { background: #e2e8f0; color: #334155; font-size: 11.5px; font-weight: 800; padding: 4px 14px; border-radius: 14px; text-decoration: none; transition: background 0.2s, color 0.2s; }
 .mso-bhq-view-all-pill:hover { background: #0066cc; color: #ffffff; }
 
-/* 6. Opportunities Too Good To Miss (4 Cards) */
+/* 6. Opportunities Too Good To Miss (Strict 1 Row of 4 Cards on Desktop) */
 .mso-opps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
-.mso-opp-card { position: relative; height: 310px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; box-sizing: border-box; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
-.mso-opp-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
-.mso-opp-card.card-1 { background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo1}') center/cover no-repeat; }
-.mso-opp-card.card-2 { background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo2}') center/cover no-repeat; }
-.mso-opp-card.card-3 { background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo3}') center/cover no-repeat; }
-.mso-opp-card.card-4 { background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo4}') center/cover no-repeat; }
+.mso-opp-card { position: relative; height: 320px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; box-sizing: border-box; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.12); transition: transform 0.2s, box-shadow 0.2s; }
+.mso-opp-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.mso-opp-card.card-1 { background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo1}') center/cover no-repeat; }
+.mso-opp-card.card-2 { background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo2}') center/cover no-repeat; }
+.mso-opp-card.card-3 { background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo3}') center/cover no-repeat; }
+.mso-opp-card.card-4 { background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.85) 100%), url('${imgPromo4}') center/cover no-repeat; }
 .mso-opp-badge { align-self: flex-start; background: #0066cc; color: #ffffff; font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-bottom: auto; }
 .mso-opp-badge.orange { background: #ea580c; }
 .mso-opp-badge.gold { background: #f5a623; color: #0f172a; }
-.mso-opp-title { font-size: 20px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin: 0 0 6px 0; line-height: 1.15; }
+.mso-opp-title { font-size: 20px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin: 0 0 8px 0; line-height: 1.15; }
 .mso-opp-link { font-size: 13px; font-weight: 800; color: #f5a623; text-decoration: underline; text-underline-offset: 3px; }
 
-/* 7. Product Rows (Discover & Hot Sales) */
+/* 7. EXACT ORIGINAL HOMEPAGE "SHOP POPULAR CATEGORIES" SECTION */
+.mso-orig-cat-slider-wrap { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: center; margin-bottom: 40px; background: #ffffff; padding: 8px 0; }
+.mso-orig-cat-left { display: flex; flex-direction: column; gap: 10px; }
+.mso-orig-cat-title { font-size: 24px; font-weight: 900; color: #384c3c; margin: 0; line-height: 1.2; }
+.mso-orig-cat-desc { font-size: 13px; color: #475569; line-height: 1.55; margin: 0; }
+.mso-orig-cat-nav { display: flex; gap: 10px; margin-top: 6px; }
+.mso-orig-cat-btn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #cbd5e1; background: #ffffff; color: #334155; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; font-weight: 900; transition: all 0.2s; }
+.mso-orig-cat-btn:hover { background: #384c3c; color: #ffffff; border-color: #384c3c; }
+.mso-orig-cat-track { display: flex; gap: 16px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 6px 2px; }
+.mso-orig-cat-track::-webkit-scrollbar { display: none; }
+.mso-orig-cat-item { flex: 0 0 210px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+.mso-orig-cat-item:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: #384c3c; }
+.mso-orig-cat-img-wrap { width: 100%; height: 170px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.mso-orig-cat-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 12px; box-sizing: border-box; transition: transform 0.3s; }
+.mso-orig-cat-item:hover .mso-orig-cat-img-wrap img { transform: scale(1.08); }
+.mso-orig-cat-body { padding: 12px 14px; border-top: 1px solid #f1f5f9; }
+.mso-orig-cat-name { font-size: 13.5px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mso-orig-cat-products { font-size: 11.5px; color: #64748b; font-weight: 600; }
+
+/* 8. Product Rows (Discover & Hot Sales) */
 .mso-bhq-prod-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
 .mso-bhq-prod-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,0.03); transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; }
 .mso-bhq-prod-card:hover { border-color: #cbd5e1; box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
@@ -139,17 +158,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-bhq-prod-price { font-size: 16px; font-weight: 900; color: #0f172a; }
 .mso-bhq-add-cart-btn { background: #f97316; color: #ffffff; font-size: 11.5px; font-weight: 800; padding: 6px 12px; border-radius: 4px; border: none; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
 .mso-bhq-add-cart-btn:hover { background: #ea580c; }
-
-/* 8. Shop 10 Popular Outfitter Categories (Direct from Homepage) */
-.mso-10-cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 36px; }
-.mso-10-cat-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: transform 0.2s, border-color 0.2s; }
-.mso-10-cat-card:hover { transform: translateY(-3px); border-color: #0066cc; }
-.mso-10-cat-img-box { width: 100%; height: 130px; background: #f8fafc; overflow: hidden; }
-.mso-10-cat-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-.mso-10-cat-card:hover .mso-10-cat-img-box img { transform: scale(1.08); }
-.mso-10-cat-body { padding: 12px; display: flex; flex-direction: column; gap: 2px; }
-.mso-10-cat-title { font-size: 12.5px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.3; }
-.mso-10-cat-count { font-size: 11px; font-weight: 600; color: #64748b; }
 
 /* 9. E-E-A-T Cutlery Lab & Testing Protocol Box */
 .mso-eeat-lab-box { background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 28px 32px; margin-bottom: 36px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; }
@@ -215,8 +223,8 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 
 @media (max-width: 1080px) {
   .mso-opps-grid { grid-template-columns: repeat(2, 1fr); }
+  .mso-orig-cat-slider-wrap { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: repeat(2, 1fr); }
-  .mso-10-cat-grid { grid-template-columns: repeat(3, 1fr); }
   .mso-eeat-lab-box { grid-template-columns: 1fr; }
   .mso-review-showcase { grid-template-columns: 1fr; }
   .mso-reviews-cards-row { grid-template-columns: 1fr; }
@@ -231,7 +239,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-bhq-hero-action { position: relative; bottom: auto; right: auto; margin-top: 16px; }
   .mso-opps-grid { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: 1fr; }
-  .mso-10-cat-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-big-trust-strip { grid-template-columns: 1fr; }
   .mso-videos-grid { grid-template-columns: 1fr; }
   .mso-articles-grid { grid-template-columns: 1fr; }
@@ -336,7 +343,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     <a href="https://www.michigansportsoutdoor.com/brands/" class="mso-all-brands-link">All Brands</a>
   </section>
 
-  <!-- 5. OPPORTUNITIES TOO GOOD TO MISS (4 VERTICAL PROMO CARDS) -->
+  <!-- 5. OPPORTUNITIES TOO GOOD TO MISS (STRICT 1 ROW OF 4 CARDS) -->
   <section>
     <div class="mso-bhq-section-header">
       <h2 class="mso-bhq-title-bold">Opportunities <span class="mso-bhq-title-italic">Too Good</span> To Miss</h2>
@@ -369,7 +376,106 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 6. DISCOVER NEW KNIVES (PRODUCT ROW) -->
+  <!-- 6. EXACT ORIGINAL HOMEPAGE "SHOP POPULAR CATEGORIES" SECTION (UNDER OPPORTUNITIES) -->
+  <section class="mso-orig-cat-slider-wrap">
+    <div class="mso-orig-cat-left">
+      <h3 class="mso-orig-cat-title">Shop Popular Categories</h3>
+      <p class="mso-orig-cat-desc">
+        Michigan Sports Outdoor stocks everything for hunting, camping, and outdoor adventures with 4 main categories: apparel, camping gear, premium knives, and hunting knives.
+      </p>
+      <p class="mso-orig-cat-desc">
+        Whether you're outfitting for a hunting trip or weekend adventure, we have fair prices for our USA customers.
+      </p>
+      <div class="mso-orig-cat-nav">
+        <button class="mso-orig-cat-btn" onclick="scrollCats(-1)" aria-label="Previous Categories">&larr;</button>
+        <button class="mso-orig-cat-btn" onclick="scrollCats(1)" aria-label="Next Categories">&rarr;</button>
+      </div>
+    </div>
+
+    <div class="mso-orig-cat-track" id="msoCatSliderTrack">
+      <a href="https://www.michigansportsoutdoor.com/collections/knives/locking-knives/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catLocking}" alt="Locking Pocket Knives" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Locking Pocket Knives (EDC &amp; Tactical)">Locking Pocket Knives</div>
+          <div class="mso-orig-cat-products">15243 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/lights/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catLights}" alt="Flashlights &amp; Tactical Illumination" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Flashlights &amp; Tactical Illumination">Flashlights &amp; Tac...</div>
+          <div class="mso-orig-cat-products">1006 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/cleaning-and-maintenance/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catCleaning}" alt="Cleaning and Maintenance" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Cleaning and Maintenance">Cleaning and Ma...</div>
+          <div class="mso-orig-cat-products">309 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/fishing/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catFishing}" alt="Fishing Tackle, Fillet Knives &amp; Angler Gear" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Fishing Tackle, Fillet Knives &amp; Angler Gear">Fishing Tackle, F...</div>
+          <div class="mso-orig-cat-products">511 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/knives/hunting-knife-sets/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catHunting}" alt="Hunting Knife Sets" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Hunting Knife Sets">Hunting Knife Sets</div>
+          <div class="mso-orig-cat-products">98 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/camping-and-survival/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catCamping}" alt="Camping &amp; Wilderness Survival Gear" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Camping &amp; Wilderness Survival Gear">Camping &amp; Survival</div>
+          <div class="mso-orig-cat-products">1314 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/apparel/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catApparel}" alt="Outdoor Tactical Apparel, Hats &amp; Shirts" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Outdoor Tactical Apparel, Hats &amp; Shirts">Tactical Apparel</div>
+          <div class="mso-orig-cat-products">511 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/knives/premium-knives/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catPremium}" alt="Premium &amp; Custom-Grade Cutlery" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Premium &amp; Custom-Grade Cutlery">Premium Cutlery</div>
+          <div class="mso-orig-cat-products">938 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/kitchen/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catKitchen}" alt="Kitchen Cutlery &amp; Chef Knives" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Kitchen Cutlery &amp; Chef Knives">Kitchen Cutlery</div>
+          <div class="mso-orig-cat-products">1201 products</div>
+        </div>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/optics/" class="mso-orig-cat-item">
+        <div class="mso-orig-cat-img-wrap"><img src="${catOptics}" alt="Optics &amp; Scopes" loading="lazy" /></div>
+        <div class="mso-orig-cat-body">
+          <div class="mso-orig-cat-name" title="Optics &amp; Scopes">Optics &amp; Scopes</div>
+          <div class="mso-orig-cat-products">351 products</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 7. DISCOVER NEW KNIVES (PRODUCT ROW) -->
   <section>
     <div class="mso-bhq-section-header">
       <h2 class="mso-bhq-title-bold">DISCOVER NEW KNIVES</h2>
@@ -409,96 +515,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
         <div class="mso-bhq-prod-bottom">
           <span class="mso-bhq-prod-price">$174.00</span>
           <button class="mso-bhq-add-cart-btn">Add to Cart</button>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- 7. SHOP 10 POPULAR OUTFITTER CATEGORIES (AUTHENTIC HOMEPAGE COLLECTIONS) -->
-  <section>
-    <div class="mso-bhq-section-header">
-      <h2 class="mso-bhq-title-bold">Shop Popular Outfitter Categories</h2>
-      <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-view-all-pill">View All 10 Categories</a>
-    </div>
-    <p class="mso-bhq-subtitle">Michigan Sports Outdoor stocks over 7,000+ verified items for hunting, camping, and cutlery adventures.</p>
-    <div class="mso-10-cat-grid">
-      <a href="https://www.michigansportsoutdoor.com/collections/knives/hunting-knife-sets/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catHunting}" alt="Hunting Knife Sets" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Hunting Knife Sets</h4>
-          <span class="mso-10-cat-count">98 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/knives/locking-knives/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catLocking}" alt="Locking Pocket Knives" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Locking Pocket Knives (EDC)</h4>
-          <span class="mso-10-cat-count">15,243 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/knives/premium-knives/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catPremium}" alt="Premium Cutlery" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Premium &amp; Custom Cutlery</h4>
-          <span class="mso-10-cat-count">938 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/camping-and-survival/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catCamping}" alt="Camping & Survival Gear" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Camping &amp; Survival Gear</h4>
-          <span class="mso-10-cat-count">1,314 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/apparel/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catApparel}" alt="Tactical Apparel" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Tactical Apparel &amp; Shirts</h4>
-          <span class="mso-10-cat-count">511 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/lights/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catLights}" alt="Flashlights & Illumination" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Flashlights &amp; Illumination</h4>
-          <span class="mso-10-cat-count">1,006 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/cleaning-and-maintenance/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catCleaning}" alt="Knife Sharpening & Care" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Cleaning &amp; Maintenance</h4>
-          <span class="mso-10-cat-count">309 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/fishing/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catFishing}" alt="Fishing Tackle & Fillet Knives" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Fishing &amp; Fillet Cutlery</h4>
-          <span class="mso-10-cat-count">511 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/kitchen/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catKitchen}" alt="Kitchen Cutlery" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Kitchen Cutlery &amp; Chefs</h4>
-          <span class="mso-10-cat-count">1,201 products</span>
-        </div>
-      </a>
-
-      <a href="https://www.michigansportsoutdoor.com/collections/optics/" class="mso-10-cat-card">
-        <div class="mso-10-cat-img-box"><img src="${catOptics}" alt="Optics & Scopes" loading="lazy" /></div>
-        <div class="mso-10-cat-body">
-          <h4 class="mso-10-cat-title">Optics &amp; Scopes</h4>
-          <span class="mso-10-cat-count">351 products</span>
         </div>
       </a>
     </div>
@@ -684,7 +700,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
       </a>
 
       <a href="https://www.michigansportsoutdoor.com/blog/" class="mso-video-card">
-        <img src="${imgPromo3}" alt="Crazy Knife Stories" />
+        <img src="${imgPromo3}" alt="Whitetail Field Sharpening Guide" />
         <div class="mso-video-overlay"></div>
         <div class="mso-play-btn">&gt;</div>
         <h4 class="mso-video-title">Whitetail Field Sharpening Guide</h4>
@@ -756,9 +772,19 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 </div>
+
+<script>
+function scrollCats(direction) {
+  const container = document.getElementById('msoCatSliderTrack');
+  if (container) {
+    const scrollAmount = 230 * 2;
+    container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+  }
+}
+</script>
 `;
 
-  console.log('Deploying E-E-A-T enriched Blade HQ masterpiece to /october-season/ (Page #167531)...');
+  console.log('Deploying updated E-E-A-T Blade HQ page to /october-season/ (Page #167531)...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/167531`, {
     method: 'POST',
     headers,
@@ -779,7 +805,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   }
 
   const data = await res.json();
-  console.log('E-E-A-T Enriched Blade HQ October Season page updated successfully:', data.link);
+  console.log('Page updated successfully:', data.link);
 
   // Sync script to repo
   const repoPath = 'c:/Users/Mubashar Shahzad/Desktop/searchprex-website/scripts/deploy-eeat-bladehq-october-page.mjs';
