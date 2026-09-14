@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-async function deployOctoberHomepage() {
+async function deployLiveOctoberHomepage() {
   const baseUrl = 'https://www.michigansportsoutdoor.com';
   const username = 'apiuser';
   const appPassword = 'cvxm Bi7y 6o3y r7HJ M1Wn mSMM';
@@ -11,20 +11,17 @@ async function deployOctoberHomepage() {
     'Content-Type': 'application/json'
   };
 
-  // Authentic MSO Media Library Cutlery Photos
-  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA1_add_01.jpg'; // Titanium outdoor super steel
-  const imgHuntBanner = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA4906_add_01.jpg'; // Whitetail hunting blade
-  const imgSpookyBanner = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/DTK4518MBL_add_01.jpg'; // Tanto tactical dark finish
-  const imgProd1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA2_add_02.jpg'; // Benchmade style folder
-  const imgProd2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg'; // Spyderco / SOG tactical
-  const imgProd3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/K1116A4_add_01.jpg'; // Kershaw assisted
-  const imgProd4 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA2628_add_01.jpg'; // Buck 110 / MagnaCut fixed
-  const imgGiftGuide = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA1619_add_01.jpg'; // Bushcraft camp knife
+  // Authentic MSO Media Library Cutlery Photos (High performance, compressed)
+  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA1_add_01.jpg';
+  const imgProd1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA2_add_02.jpg';
+  const imgProd2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg';
+  const imgProd3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/K1116A4_add_01.jpg';
+  const imgProd4 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA2628_add_01.jpg';
+  const imgGiftGuide = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA1619_add_01.jpg';
   const imgBlog1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA4906_add_01.jpg';
   const imgBlog2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg';
   const imgBlog3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG12271157_add_01.jpg';
 
-  // Instagram / Community Grid Images
   const ig1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG12271157_add_01.jpg';
   const ig2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA2_add_02.jpg';
   const ig3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOGS40BBX_add_01.jpg';
@@ -36,17 +33,14 @@ async function deployOctoberHomepage() {
 html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .content-area, #primary, #main, .site-main, .entry-content, .entry-content-wrap, .page-content, .post-content, .container, .container-wrap, .page-wrapper, .site-main-content { background-color: #ffffff !important; background: #ffffff !important; color: #222222; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 .entry-content { padding-left: 0 !important; padding-right: 0 !important; max-width: 100% !important; width: 100% !important; overflow-x: hidden; }
 
-/* MASTER CONTAINER */
-.mso-oct-container { max-width: 1280px; margin: 0 auto; padding: 0 20px 60px 20px; box-sizing: border-box; width: 100%; }
+.mso-oct-container { max-width: 1280px; margin: 0 auto; padding: 0 20px 40px 20px; box-sizing: border-box; width: 100%; }
 
-/* 1. TOP ANNOUNCEMENT BAR */
 .mso-announcement-bar { background: #384c3c; color: #fdf8f6; padding: 9px 20px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; font-weight: 600; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
 .mso-announcement-bar a { color: #f5a623; text-decoration: none; font-weight: 700; margin-left: 4px; }
 .mso-announcement-bar a:hover { text-decoration: underline; }
 .mso-announcement-links { display: flex; gap: 14px; font-size: 11.5px; opacity: 0.9; }
 .mso-announcement-links a { color: #fdf8f6; text-decoration: none; font-weight: 500; }
 
-/* 2. SEARCH & NAVIGATION BAR */
 .mso-oct-header { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 .mso-oct-search-row { display: grid; grid-template-columns: 200px 1fr auto; gap: 20px; align-items: center; }
 .mso-oct-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 18px; font-weight: 900; color: #475d4b; letter-spacing: 0.5px; }
@@ -66,7 +60,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-oct-nav-deal { color: #c2410c !important; font-weight: 800 !important; }
 .mso-oct-nav-new { color: #16a34a !important; font-weight: 800 !important; }
 
-/* 3. HERO SPOTLIGHT */
 .mso-oct-hero { background: linear-gradient(135deg, #243527 0%, #475d4b 100%); color: #ffffff; border-radius: 10px; padding: 48px 40px; margin-bottom: 24px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; box-shadow: 0 8px 24px rgba(36,53,39,0.25); position: relative; overflow: hidden; }
 .mso-oct-hero-tag { display: inline-block; background: #f5a623; color: #0f172a; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; }
 .mso-oct-hero-title { font-size: 38px; font-weight: 900; line-height: 1.15; margin: 0 0 14px 0; letter-spacing: -0.5px; color: #ffffff; }
@@ -79,14 +72,12 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-oct-hero-img-wrap { width: 100%; height: 320px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2); }
 .mso-oct-hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* 4. TRUST BAR */
 .mso-trust-bar { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px 24px; margin-bottom: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
 .mso-trust-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .mso-trust-icon { font-size: 24px; margin-bottom: 2px; }
 .mso-trust-title { font-size: 13.5px; font-weight: 800; color: #0f172a; }
 .mso-trust-sub { font-size: 11.5px; color: #64748b; font-weight: 500; }
 
-/* 5. OCTOBER FLASH DEALS COUNTDOWN */
 .mso-flash-deal { background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%); color: #ffffff; border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 16px rgba(124,45,18,0.25); flex-wrap: wrap; gap: 16px; }
 .mso-flash-left { display: flex; flex-direction: column; gap: 4px; }
 .mso-flash-tag { font-size: 11px; font-weight: 900; letter-spacing: 1.2px; text-transform: uppercase; color: #fed7aa; }
@@ -97,7 +88,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-timer-num { font-size: 20px; font-weight: 900; color: #ffffff; line-height: 1; }
 .mso-timer-label { font-size: 9px; font-weight: 700; color: #fed7aa; letter-spacing: 0.5px; margin-top: 2px; }
 
-/* 6. SHOP BY CATEGORY (6 TILES) */
 .mso-section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; }
 .mso-section-title { font-size: 22px; font-weight: 900; color: #0f172a; margin: 0; }
 .mso-section-link { font-size: 13px; font-weight: 800; color: #475d4b; text-decoration: none; }
@@ -109,7 +99,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-cat-icon { font-size: 28px; }
 .mso-cat-name { font-size: 12.5px; font-weight: 800; color: #0f172a; }
 
-/* 7. DUAL PROMO BANNERS */
 .mso-promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
 .mso-promo-card { border-radius: 8px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; min-height: 170px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
 .mso-promo-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
@@ -120,7 +109,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-promo-sub { font-size: 13px; opacity: 0.9; margin: 0 0 16px 0; line-height: 1.4; }
 .mso-promo-action { font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #f5a623; display: flex; align-items: center; gap: 4px; }
 
-/* 8. BEST SELLERS (4 PRODUCT CARDS) */
 .mso-prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 36px; }
 .mso-prod-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
 .mso-prod-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
@@ -142,12 +130,10 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-prod-stars { font-size: 11px; color: #f5a623; margin-top: 6px; font-weight: 700; }
 .mso-prod-stars span { color: #94a3b8; font-weight: 500; }
 
-/* 9. SHOP BY BRAND */
 .mso-brand-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; margin-bottom: 36px; }
 .mso-brand-tile { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 4px; text-align: center; text-decoration: none; font-size: 12px; font-weight: 800; color: #334155; transition: border-color 0.2s, background 0.2s; }
 .mso-brand-tile:hover { border-color: #475d4b; background: #f8fafc; color: #475d4b; }
 
-/* 10. FALL GIFT GUIDE (EDITORIAL CONTENT COMMERCE) */
 .mso-gift-guide { background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 28px; margin-bottom: 36px; display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: center; }
 .mso-gift-img-wrap { width: 100%; height: 190px; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .mso-gift-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -158,7 +144,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-gift-btn { background: #451a03; color: #ffffff !important; padding: 10px 22px; border-radius: 4px; font-size: 12.5px; font-weight: 800; text-transform: uppercase; text-decoration: none; width: fit-content; margin-top: 6px; transition: background 0.2s; }
 .mso-gift-btn:hover { background: #78350f; }
 
-/* 11. REVIEWS / SOCIAL PROOF */
 .mso-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 36px; }
 .mso-review-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
 .mso-review-stars { font-size: 13px; color: #f5a623; margin-bottom: 8px; }
@@ -166,7 +151,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-review-author { font-size: 11.5px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 6px; }
 .mso-review-verified { color: #16a34a; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-/* 12. INSTAGRAM / COMMUNITY STRIP */
 .mso-ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 36px; }
 .mso-ig-item { position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden; text-decoration: none; }
 .mso-ig-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
@@ -174,7 +158,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-ig-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 18px; opacity: 0; transition: opacity 0.2s; }
 .mso-ig-item:hover .mso-ig-overlay { opacity: 1; }
 
-/* 13. VIP $10 OFF / NEWSLETTER CAPTURE */
 .mso-newsletter-banner { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffffff; border-radius: 8px; padding: 32px 36px; margin-bottom: 36px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; align-items: center; box-shadow: 0 6px 20px rgba(30,41,59,0.2); }
 .mso-news-title { font-size: 24px; font-weight: 900; margin: 0 0 6px 0; color: #ffffff; }
 .mso-news-desc { font-size: 13.5px; color: #cbd5e1; line-height: 1.5; margin: 0; }
@@ -184,8 +167,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-news-btn { background: #f5a623; color: #0f172a; border: none; font-size: 13px; font-weight: 900; text-transform: uppercase; padding: 10px 20px; border-radius: 4px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
 .mso-news-btn:hover { background: #fbbf24; }
 
-/* 14. FROM THE MSO JOURNAL */
-.mso-journal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 36px; }
+.mso-journal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
 .mso-journal-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform 0.2s; }
 .mso-journal-card:hover { transform: translateY(-3px); }
 .mso-journal-thumb { width: 100%; height: 140px; object-fit: cover; }
@@ -193,7 +175,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-journal-meta { font-size: 11px; font-weight: 800; color: #475d4b; text-transform: uppercase; margin-bottom: 6px; }
 .mso-journal-title { font-size: 15px; font-weight: 800; color: #0f172a; line-height: 1.35; margin: 0; }
 
-/* RESPONSIVE */
 @media (max-width: 1080px) {
   .mso-oct-hero { grid-template-columns: 1fr; padding: 32px 24px; }
   .mso-oct-hero-img-wrap { height: 240px; }
@@ -220,17 +201,16 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 `;
 
   const pageHtml = `
-<!-- TECHNICAL SEO: STRUCTURED DATA GRAPH -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.michigansportsoutdoor.com/october-preview/#webpage",
-      "url": "https://www.michigansportsoutdoor.com/october-preview/",
-      "name": "October Fall Hunting Season Sale 2026 | Michigan Sports Outdoor",
-      "description": "Michigan's premier outfitter for whitetail season, hunting knives, fixed blades, and EDC cutlery. Exclusive October deals and field gear.",
+      "@type": "WebSite",
+      "@id": "https://www.michigansportsoutdoor.com/#website",
+      "url": "https://www.michigansportsoutdoor.com/",
+      "name": "Michigan Sports Outdoor",
+      "description": "Premier Cutlery, Hunting Fixed Blades, EDC Knives & Outdoor Gear Outfitter",
       "publisher": {
         "@type": "Organization",
         "name": "Michigan Sports Outdoor",
@@ -239,6 +219,11 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
           "@type": "ImageObject",
           "url": "https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/MSO-LOGO-1.png"
         }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.michigansportsoutdoor.com/shop/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
   ]
@@ -621,7 +606,6 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 </div>
 
 <script>
-// Dynamic Countdown Timer for Flash Deal
 (function() {
   function updateTimer() {
     const target = new Date();
@@ -653,45 +637,31 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 </script>
 `;
 
-  console.log('Checking if test page "october-preview" exists...');
-  const searchRes = await fetch(`${baseUrl}/wp-json/wp/v2/pages?slug=october-preview`, { headers });
-  const existingPages = await searchRes.json();
-
-  let targetPageId = null;
-  if (existingPages.length > 0) {
-    targetPageId = existingPages[0].id;
-    console.log(`Found existing page ID: ${targetPageId}`);
-  }
-
-  const endpoint = targetPageId ? `${baseUrl}/wp-json/wp/v2/pages/${targetPageId}` : `${baseUrl}/wp-json/wp/v2/pages`;
-  console.log(`Deploying October Season Homepage to ${endpoint}...`);
-
-  const res = await fetch(endpoint, {
+  console.log('Deploying optimized October Season Homepage to live Homepage #3821...');
+  const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/3821`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      title: 'October Season 2026 | Michigan Sports Outdoor Fall Hunting & Cutlery Store',
-      slug: 'october-preview',
-      status: 'publish',
+      title: 'Michigan Sports Outdoor | Premier Cutlery, Hunting Fixed Blades & EDC Gear',
       content: pageHtml
     })
   });
 
   if (!res.ok) {
     const errText = await res.text();
-    throw new Error(`Failed to deploy October homepage: ${res.status} ${errText}`);
+    throw new Error(`Failed to update homepage #3821: ${res.status} ${errText}`);
   }
 
   const data = await res.json();
-  console.log('✅ October Homepage successfully deployed live at: ' + data.link);
+  console.log('✅ Live Homepage #3821 updated successfully:', data.link);
 
-  // Write deployment script to repo
-  const repoPath = 'c:/Users/Mubashar Shahzad/Desktop/searchprex-website/scripts/deploy-october-homepage.mjs';
+  // Sync to repo
+  const repoPath = 'c:/Users/Mubashar Shahzad/Desktop/searchprex-website/scripts/deploy-live-october-homepage.mjs';
   fs.writeFileSync(repoPath, fs.readFileSync(new URL(import.meta.url)));
   console.log('✅ Saved script to repo at:', repoPath);
 }
 
-deployOctoberHomepage().catch(err => {
-  console.error('❌ Error deploying October Homepage:', err);
+deployLiveOctoberHomepage().catch(err => {
+  console.error('❌ Error deploying live homepage:', err);
   process.exit(1);
 });
