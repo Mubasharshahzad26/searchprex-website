@@ -64,7 +64,7 @@ async function deployEliteToptalBlog() {
 <!-- ========================================== -->
 <style>
   /* 2.1 PURE WHITE SURFACES & RESET */
-  html, body, #page, #content, .site-content, .entry-content, .content-area, .site-main, .post-content, .mso-portal {
+  html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .content-area, #primary, #main, .site-main, .entry-content, .entry-content-wrap, .page-content, .post-content, .mso-portal, .container, .container-wrap, .page-wrapper, .site-main-content {
     background: #ffffff !important;
     background-color: #ffffff !important;
   }
@@ -620,22 +620,23 @@ async function deployEliteToptalBlog() {
   }
   .mso-author-block {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 12px;
   }
   .mso-author-avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
     object-fit: cover;
     flex-shrink: 0;
     border: 1px solid #e2e8f0;
   }
   .mso-author-meta {
-    font-size: 11.5px;
+    font-size: 11px;
     line-height: 1.35;
   }
   .mso-author-name {
+    font-size: 12.5px;
     font-weight: 700;
     color: #0f172a;
     display: block;
@@ -643,10 +644,11 @@ async function deployEliteToptalBlog() {
   .mso-verified-stamp {
     color: #15803d;
     font-weight: 700;
-    font-size: 10.5px;
+    font-size: 11px;
     display: flex;
     align-items: center;
     gap: 4px;
+    margin: 1px 0 3px 0;
   }
   .mso-stamp-icon {
     display: inline-block;
@@ -659,6 +661,12 @@ async function deployEliteToptalBlog() {
     line-height: 12px;
     font-size: 8.5px;
     font-weight: 900;
+  }
+  .mso-author-bio {
+    color: #64748b;
+    font-size: 10.5px;
+    line-height: 1.35;
+    margin: 0;
   }
 
   /* 2.8 WORLD-CLASS NEWSLETTER DISPATCH */
@@ -987,13 +995,13 @@ async function deployEliteToptalBlog() {
   <!-- 3.2 HORIZONTAL CATEGORY NAVIGATION PILLS -->
   <nav class="mso-category-nav" aria-label="Editorial Categories">
     <div class="mso-nav-row">
-      <a href="/blog/" class="mso-nav-pill active">All Field Guides</a>
-      <a href="/cpm-magnacut-vs-bohler-m390mk/" class="mso-nav-pill">Steel Showdowns</a>
-      <a href="/best-hunting-knives-for-michigan-deer-season-3/" class="mso-nav-pill">Whitetail &amp; Hunting Cutlery</a>
-      <a href="/mora-companion-vs-kansbol-vs-garberg/" class="mso-nav-pill">Bushcraft &amp; Camp Craft</a>
-      <a href="/how-to-sharpen-a-knife-at-home/" class="mso-nav-pill">Field Sharpening &amp; Care</a>
-      <a href="/top-best-edc-knives-under-100/" class="mso-nav-pill">EDC Pocket Knives</a>
-      <a href="/knife-laws/" class="mso-nav-pill">50-State Knife Laws</a>
+      <button type="button" class="mso-nav-pill active" onclick="msoFilterCategory('all', this)">All Field Guides</button>
+      <button type="button" class="mso-nav-pill" onclick="msoFilterCategory('steel', this)">Steel Showdowns</button>
+      <button type="button" class="mso-nav-pill" onclick="msoFilterCategory('hunting', this)">Whitetail &amp; Hunting Cutlery</button>
+      <button type="button" class="mso-nav-pill" onclick="msoFilterCategory('bushcraft', this)">Bushcraft &amp; Camp Craft</button>
+      <button type="button" class="mso-nav-pill" onclick="msoFilterCategory('sharpening', this)">Field Sharpening &amp; Care</button>
+      <button type="button" class="mso-nav-pill" onclick="msoFilterCategory('edc', this)">EDC Pocket Knives</button>
+      <a href="/knife-laws/" class="mso-nav-pill">50-State Knife Laws &rarr;</a>
     </div>
   </nav>
 
@@ -1043,7 +1051,7 @@ async function deployEliteToptalBlog() {
     <div class="mso-editorial-grid">
 
       <!-- CARD 1 -->
-      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="hunting">
         <a href="/best-hunting-knives-for-michigan-deer-season-3/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
             src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/03/Best-hunting-knife-for-Michigan-Deer-season.jpg" 
@@ -1072,8 +1080,9 @@ async function deployEliteToptalBlog() {
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
               <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Dave Miller" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">Dave Miller</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Whitetail Outfitter</span>
+                <span class="mso-author-name" itemprop="name">By Dave Miller</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Whitetail Outfitting</span>
+                <p class="mso-author-bio">Dave has 18+ years guiding whitetail hunts in Michigan and field dressing big game in cold conditions.</p>
               </div>
             </div>
           </div>
@@ -1081,7 +1090,7 @@ async function deployEliteToptalBlog() {
       </article>
 
       <!-- CARD 2 -->
-      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="hunting">
         <a href="/best-fixed-blade-hunting-knives-2026-buying-guide/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
             src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/03/TOP-BEST-FIXED-BLADE-KNIVES.jpg" 
@@ -1110,8 +1119,9 @@ async function deployEliteToptalBlog() {
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
               <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Joe Cavazos" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">Joe Cavazos</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Metallurgy Analyst</span>
+                <span class="mso-author-name" itemprop="name">By Joe Cavazos</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Metallurgy &amp; Tool Steels</span>
+                <p class="mso-author-bio">Joe is a cutlery specialist with 14+ years evaluating heat treatment protocols and edge geometry in tool steels.</p>
               </div>
             </div>
           </div>
@@ -1119,7 +1129,7 @@ async function deployEliteToptalBlog() {
       </article>
 
       <!-- CARD 3 -->
-      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="bushcraft">
         <a href="/mora-companion-vs-kansbol-vs-garberg/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
             src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/03/Details-on-gut-Hook-Knives-1.jpg" 
@@ -1148,8 +1158,9 @@ async function deployEliteToptalBlog() {
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
               <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Thomas Varghese" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">Thomas Varghese</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Survival Expert</span>
+                <span class="mso-author-name" itemprop="name">By Thomas Varghese</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Wilderness Survival</span>
+                <p class="mso-author-bio">Thomas is a wilderness instructor and knife craftsman who has tested Scandinavian grinds across the Northwoods.</p>
               </div>
             </div>
           </div>
@@ -1157,7 +1168,7 @@ async function deployEliteToptalBlog() {
       </article>
 
       <!-- CARD 4 -->
-      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="sharpening">
         <a href="/how-to-sharpen-a-knife-at-home/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
             src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/04/how-to-sharpen-a-knife-at-home.png" 
@@ -1186,8 +1197,9 @@ async function deployEliteToptalBlog() {
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
               <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face" alt="Shivam Kapoor" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">Shivam Kapoor</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Honing Specialist</span>
+                <span class="mso-author-name" itemprop="name">By Shivam Kapoor</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Honing &amp; Edge Restoration</span>
+                <p class="mso-author-bio">Shivam specializes in micro-bevel apex angles and ceramic rod field maintenance for high-Rockwell cutlery.</p>
               </div>
             </div>
           </div>
@@ -1195,7 +1207,7 @@ async function deployEliteToptalBlog() {
       </article>
 
       <!-- CARD 5 -->
-      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="edc">
         <a href="/top-best-edc-knives-under-100/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
             src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/03/Top-10-Best-EDC-Knives-Under-100-.jpg" 
@@ -1224,8 +1236,9 @@ async function deployEliteToptalBlog() {
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
               <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" alt="Mubashar Sharif" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">Mubashar Sharif</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Cutlery Editor</span>
+                <span class="mso-author-name" itemprop="name">By Mubashar Sharif</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Cutlery &amp; EDC Gear</span>
+                <p class="mso-author-bio">Lead editor at MSO Cutlery Lab, reviewing over 120 production and custom pocket knives annually.</p>
               </div>
             </div>
           </div>
@@ -1233,7 +1246,7 @@ async function deployEliteToptalBlog() {
       </article>
 
       <!-- CARD 6 -->
-      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="steel">
         <a href="/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/" class="mso-bento-thumb" itemprop="mainEntityOfPage">
           <img 
             src="https://www.michigansportsoutdoor.com/wp-content/uploads/2026/03/KNIFE-BLADE-STEELS.jpg" 
@@ -1262,8 +1275,9 @@ async function deployEliteToptalBlog() {
             <div class="mso-author-block" itemprop="author" itemscope itemtype="https://schema.org/Person">
               <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face" alt="Marcus Thorne" class="mso-author-avatar" />
               <div class="mso-author-meta">
-                <span class="mso-author-name" itemprop="name">Marcus Thorne</span>
-                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Custom Knifemaker</span>
+                <span class="mso-author-name" itemprop="name">By Marcus Thorne</span>
+                <span class="mso-verified-stamp"><span class="mso-stamp-icon">&#10003;</span> Verified Expert in Custom Knifemaking</span>
+                <p class="mso-author-bio">Marcus is an ABS certified bladesmith crafting high-performance custom hunting cutlery with bespoke bevels.</p>
               </div>
             </div>
           </div>
@@ -1520,6 +1534,24 @@ function msoQuickSearch(term) {
   } else {
     window.location.href = '/shop/?s=' + encodeURIComponent(term);
   }
+}
+
+function msoFilterCategory(cat, btn) {
+  const pills = document.querySelectorAll('.mso-nav-pill');
+  pills.forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.mso-bento-card');
+  cards.forEach(card => {
+    const cardCat = card.getAttribute('data-category');
+    if (cat === 'all' || cardCat === cat) {
+      card.style.display = 'flex';
+      card.style.opacity = '1';
+    } else {
+      card.style.display = 'none';
+      card.style.opacity = '0';
+    }
+  });
 }
 
 function filterSearch(query) {
