@@ -9,8 +9,7 @@ async function deployEliteToptalBlog() {
     'Content-Type': 'application/json'
   };
 
-  const blogHtml = `
-<!-- ========================================== -->
+  const blogHtml = `<!-- ========================================== -->
 <!-- 1. TECHNICAL SEO: JSON-LD STRUCTURED DATA  -->
 <!-- ========================================== -->
 <script type="application/ld+json">
@@ -21,8 +20,8 @@ async function deployEliteToptalBlog() {
       "@type": "CollectionPage",
       "@id": "https://www.michigansportsoutdoor.com/blog/#webpage",
       "url": "https://www.michigansportsoutdoor.com/blog/",
-      "name": "Field Journal & Cutlery Lab | Michigan Sports Outdoor",
-      "description": "Authoritative field dressing guides, blade steel metallurgy benchmarks, camp sharpening tutorials, and verified Northwoods gear tests.",
+      "name": "Michigan Sports Outdoor Blog | Cutlery Lab & Field Journal",
+      "description": "Authoritative whitetail deer field dressing breakdowns, Rockwell hardness steel benchmarks, camp sharpening techniques, and verified Northwoods field cutlery reviews.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -35,7 +34,7 @@ async function deployEliteToptalBlog() {
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Field Journal",
+            "name": "Blog",
             "item": "https://www.michigansportsoutdoor.com/blog/"
           }
         ]
@@ -60,11 +59,14 @@ async function deployEliteToptalBlog() {
 </script>
 
 <!-- ========================================== -->
-<!-- 2. STYLES: ELITE, CLEAN & ULTRA-PROFESSIONAL -->
+<!-- 2. STYLES: EXACT TOPTAL HERO & PURE WHITE BODY -->
 <!-- ========================================== -->
 <style>
-  /* 2.1 PURE WHITE SURFACES & RESET */
-  html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .content-area, #primary, #main, .site-main, .entry-content, .entry-content-wrap, .page-content, .post-content, .mso-portal, .container, .container-wrap, .page-wrapper, .site-main-content {
+  /* 2.1 PURE WHITE BODY & RESET */
+  html, body, #page, #wrapper, .site, .site-wrapper, .site-content, 
+  #content, .content-area, #primary, #main, .site-main, .entry-content, 
+  .entry-content-wrap, .page-content, .post-content, .mso-portal, 
+  .container, .container-wrap, .page-wrapper, .site-main-content {
     background: #ffffff !important;
     background-color: #ffffff !important;
   }
@@ -74,149 +76,256 @@ async function deployEliteToptalBlog() {
     background: #ffffff !important;
   }
 
-  /* 2.2 MAIN PORTAL CONTAINER */
+  /* 2.2 PORTAL WRAPPER */
   .mso-portal {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px 20px 80px 20px;
+    padding: 16px 20px 80px 20px;
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
     color: #0f172a;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* 2.3 OPEN EDITORIAL MASTHEAD (STRIPE / TOPTAL STYLE) */
-  .mso-hero-masthead {
-    padding: 24px 0 36px 0;
-    margin-bottom: 24px;
-    border-bottom: 1px solid #eef2f6;
-  }
-  .mso-hero-meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .mso-live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 11.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #15803d;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    padding: 5px 12px;
-    border-radius: 100px;
-  }
-  .mso-live-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #16a34a;
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
-  }
-  .mso-hero-stats {
-    font-size: 12.5px;
-    color: #64748b;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .mso-hero-stats span {
-    color: #0f172a;
-    font-weight: 700;
-  }
-  .mso-hero-title {
-    font-size: clamp(32px, 4.8vw, 46px);
-    font-weight: 900;
-    letter-spacing: -0.035em;
-    line-height: 1.12;
-    color: #0f172a !important;
-    margin: 0 0 14px 0;
-    max-width: 900px;
-  }
-  .mso-hero-subtitle {
-    font-size: clamp(15px, 1.8vw, 17px);
-    line-height: 1.6;
-    color: #475569;
-    max-width: 760px;
-    margin: 0 0 28px 0;
+  /* ========================================== */
+  /* 2.3 EXACT TOPTAL HERO SECTION WITH EEAT    */
+  /* ========================================== */
+  .mso-toptal-hero {
+    background: #091a44;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 45%),
+      radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.3) 0%, transparent 50%),
+      linear-gradient(135deg, #071638 0%, #0c2156 50%, #091a44 100%);
+    position: relative;
+    border-radius: 14px;
+    padding: 56px 48px 42px 48px;
+    margin-bottom: 36px;
+    color: #ffffff;
+    box-shadow: 0 16px 36px -10px rgba(9, 26, 68, 0.3);
+    overflow: hidden;
   }
 
-  /* 2.4 MODERN PILL SEARCH WITH VOICE CAPABILITY */
-  .mso-search-container {
-    position: relative;
-    max-width: 820px;
-    z-index: 60;
+  /* CONSTELLATION NODES (TOPTAL SIGNATURE) */
+  .mso-toptal-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      radial-gradient(2px 2px at 40px 60px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 150px 180px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 300px 80px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 450px 220px, rgba(255, 255, 255, 0.2), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 700px 90px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 850px 200px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 1020px 110px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0));
+    opacity: 0.65;
+    pointer-events: none;
   }
-  .mso-search-bar {
+
+  .mso-hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.95fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 34px;
+  }
+
+  /* LEFT HERO CONTENT */
+  .mso-hero-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .mso-toptal-title {
+    font-size: clamp(36px, 4.6vw, 56px);
+    font-weight: 800;
+    line-height: 1.08;
+    color: #ffffff !important;
+    letter-spacing: -0.03em;
+    margin: 0 0 16px 0;
+  }
+  .mso-toptal-subtitle {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #cbd5e1;
+    margin: 0 0 24px 0;
+    max-width: 580px;
+  }
+
+  /* SHARE BADGE (EXACT TOPTAL REPLICA) */
+  .mso-share-badge-wrap {
+    margin-bottom: 22px;
+  }
+  .mso-toptal-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    user-select: none;
+  }
+  .mso-share-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* SUB-TEAM PERSPECTIVE PILL ROW (EXACT TOPTAL REPLICA) */
+  .mso-hero-subteam-row {
+    font-size: 13.5px;
+    color: #94a3b8;
     display: flex;
     align-items: center;
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 100px;
-    padding: 4px 6px 4px 20px;
-    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+    gap: 8px;
+    flex-wrap: wrap;
+    line-height: 1.5;
+  }
+  .mso-hero-subteam-pill {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .mso-hero-subteam-pill:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ffffff;
+  }
+
+  /* RIGHT HERO: EEAT TRUST FACTORS (EXACT TOPTAL FEATURED IN CARDS) */
+  .mso-hero-right {
+    display: flex;
+    flex-direction: column;
+  }
+  .mso-trust-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 14px;
+  }
+  .mso-trust-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .mso-trust-card {
+    background: rgba(18, 42, 102, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    min-height: 96px;
+    box-sizing: border-box;
+  }
+  .mso-trust-card:hover {
+    background: rgba(28, 62, 145, 0.95);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+  .mso-trust-icon-box {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .mso-trust-svg {
+    max-height: 24px;
+    max-width: 90%;
+  }
+  .mso-trust-card-sub {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #93c5fd;
+    letter-spacing: 0.2px;
+    line-height: 1.25;
+  }
+
+  /* FULL-WIDTH TOPTAL BOTTOM SEARCH BAR */
+  .mso-hero-search-wrap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+  }
+  .mso-toptal-search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(8, 21, 55, 0.7);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 4px 6px 4px 16px;
     transition: all 0.2s ease;
   }
-  .mso-search-bar:focus-within {
-    border-color: #0284c7;
-    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12);
+  .mso-toptal-search-box:focus-within {
+    border-color: #60a5fa;
+    background: rgba(8, 21, 55, 0.95);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
   }
-  .mso-search-lens {
-    color: #64748b;
-    font-size: 18px;
+  .mso-search-glass {
+    color: #93c5fd;
+    font-size: 16px;
     margin-right: 12px;
-    display: flex;
-    align-items: center;
   }
-  .mso-search-input {
+  .mso-toptal-search-input {
     flex: 1 1 auto;
     border: none;
     background: transparent;
-    padding: 10px 0;
+    padding: 12px 0;
     font-size: 15px;
-    color: #0f172a !important;
+    color: #ffffff !important;
     outline: none;
-    box-sizing: border-box;
     width: 100%;
   }
-  .mso-search-input::placeholder {
+  .mso-toptal-search-input::placeholder {
     color: #94a3b8;
   }
-  .mso-search-buttons {
+  .mso-hero-search-actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .mso-mic-button {
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #334155;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+  .mso-hero-mic-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 15px;
     transition: all 0.15s ease;
   }
-  .mso-mic-button:hover {
-    background: #e2e8f0;
-    border-color: #94a3b8;
+  .mso-hero-mic-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
-  .mso-mic-button.listening {
+  .mso-hero-mic-btn.listening {
     background: #ef4444 !important;
     border-color: #f87171 !important;
-    color: #ffffff !important;
     animation: msoMicPulse 1.2s infinite;
   }
   @keyframes msoMicPulse {
@@ -224,51 +333,53 @@ async function deployEliteToptalBlog() {
     70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
     100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
   }
-  .mso-submit-search {
-    background: #0f172a;
+  .mso-hero-submit-btn {
+    background: #00c774;
     color: #ffffff !important;
     border: none;
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: 800;
     padding: 10px 22px;
-    border-radius: 100px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background 0.15s ease;
     white-space: nowrap;
   }
-  .mso-submit-search:hover {
-    background: #16a34a;
+  .mso-hero-submit-btn:hover {
+    background: #00b368;
   }
 
-  /* QUICK FILTER CHIPS */
-  .mso-filter-chips {
+  /* TRENDING CHIPS ON HERO */
+  .mso-hero-trending-chips {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 14px;
-    font-size: 12.5px;
-    color: #64748b;
+    font-size: 12px;
   }
-  .mso-filter-chip {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    color: #334155;
+  .mso-chips-label {
+    font-weight: 700;
+    color: #93c5fd;
+  }
+  .mso-hero-chip {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
     padding: 4px 12px;
     border-radius: 100px;
-    text-decoration: none;
     cursor: pointer;
     font-weight: 600;
     font-size: 12px;
     transition: all 0.15s ease;
   }
-  .mso-filter-chip:hover {
-    background: #0f172a;
-    border-color: #0f172a;
-    color: #ffffff !important;
+  .mso-hero-chip:hover {
+    background: #ffffff;
+    color: #0b1a42 !important;
+    border-color: #ffffff;
   }
 
-  /* DROPDOWN AUTOCOMPLETE */
+  /* DROPDOWN AUTOCOMPLETE PANEL */
   .mso-autocomplete-panel {
     display: none;
     position: absolute;
@@ -277,8 +388,8 @@ async function deployEliteToptalBlog() {
     right: 0;
     background: #ffffff;
     border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
     max-height: 380px;
     overflow-y: auto;
     z-index: 1000;
@@ -313,7 +424,7 @@ async function deployEliteToptalBlog() {
   .mso-badge-steel { background: #dcfce7; color: #15803d; }
   .mso-badge-product { background: #fef3c7; color: #b45309; }
 
-  /* 2.5 SEGMENTED CATEGORY PILLS */
+  /* 2.4 SEGMENTED CATEGORY PILLS BAR */
   .mso-category-nav {
     margin-bottom: 36px;
     overflow-x: auto;
@@ -341,6 +452,7 @@ async function deployEliteToptalBlog() {
     text-decoration: none;
     white-space: nowrap;
     border: 1px solid #e2e8f0;
+    cursor: pointer;
     transition: all 0.15s ease;
   }
   .mso-nav-pill:hover {
@@ -355,11 +467,11 @@ async function deployEliteToptalBlog() {
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
   }
 
-  /* 2.6 REFINED EDITORIAL SPOTLIGHT (COMPACT COVER) */
+  /* 2.5 REFINED EDITORIAL SPOTLIGHT */
   .mso-flagship-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
     margin-bottom: 48px;
     display: grid;
@@ -374,7 +486,7 @@ async function deployEliteToptalBlog() {
     background: #f1f5f9;
     position: relative;
     overflow: hidden;
-    height: 240px; /* Refined compact cover */
+    height: 230px;
   }
   .mso-flagship-cover img {
     width: 100%;
@@ -401,7 +513,7 @@ async function deployEliteToptalBlog() {
     border-radius: 4px;
   }
   .mso-flagship-body {
-    padding: 28px 32px;
+    padding: 26px 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -411,13 +523,13 @@ async function deployEliteToptalBlog() {
   .mso-flagship-meta {
     font-size: 11px;
     font-weight: 800;
-    color: #0284c7;
+    color: #2563eb;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     margin-bottom: 6px;
   }
   .mso-flagship-body h2 {
-    font-size: clamp(20px, 2.4vw, 25px);
+    font-size: clamp(20px, 2.4vw, 24px);
     font-weight: 900;
     line-height: 1.25;
     margin: 0 0 10px 0;
@@ -428,7 +540,7 @@ async function deployEliteToptalBlog() {
     text-decoration: none;
   }
   .mso-flagship-body h2 a:hover {
-    color: #0284c7 !important;
+    color: #2563eb !important;
   }
   .mso-flagship-body p {
     font-size: 14px;
@@ -441,7 +553,7 @@ async function deployEliteToptalBlog() {
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #f1f5f9;
-    padding-top: 16px;
+    padding-top: 14px;
   }
   .mso-flagship-author {
     font-size: 12.5px;
@@ -464,7 +576,7 @@ async function deployEliteToptalBlog() {
     background: #15803d;
   }
 
-  /* 2.7 3-COLUMN EDITORIAL BENTO GRID */
+  /* 2.6 3-COLUMN EDITORIAL BENTO GRID (STRICT TOPTAL FORMAT) */
   .mso-grid-header {
     display: flex;
     justify-content: space-between;
@@ -491,12 +603,12 @@ async function deployEliteToptalBlog() {
   .mso-editorial-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 26px !important;
+    gap: 24px !important;
     align-items: stretch !important;
     margin-bottom: 56px !important;
   }
 
-  /* COMPACT BENTO CARD (140PX COVER) */
+  /* COMPACT BENTO CARD (135PX COVER WITH TOPTAL PROFILE BIO) */
   .mso-bento-card {
     background: #ffffff !important;
     border: 1px solid #e2e8f0;
@@ -516,7 +628,7 @@ async function deployEliteToptalBlog() {
   }
   .mso-bento-thumb {
     display: block;
-    height: 140px; /* Compact cover image */
+    height: 135px;
     width: 100%;
     overflow: hidden;
     background: #f1f5f9;
@@ -548,7 +660,7 @@ async function deployEliteToptalBlog() {
     border-radius: 4px;
   }
   .mso-bento-body {
-    padding: 20px 20px 18px 20px;
+    padding: 18px 20px 18px 20px;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
@@ -558,9 +670,9 @@ async function deployEliteToptalBlog() {
   .mso-bento-kicker {
     font-size: 10.5px;
     font-weight: 800;
-    color: #0284c7;
+    color: #2563eb;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.8px;
     margin-bottom: 6px;
   }
   .mso-bento-heading {
@@ -576,7 +688,7 @@ async function deployEliteToptalBlog() {
     text-decoration: none;
   }
   .mso-bento-heading a:hover {
-    color: #0284c7 !important;
+    color: #2563eb !important;
   }
   .mso-bento-excerpt {
     font-size: 13.5px;
@@ -584,40 +696,41 @@ async function deployEliteToptalBlog() {
     line-height: 1.5;
     margin: 0 0 16px 0;
     flex-grow: 1;
-    min-height: 60px;
   }
   .mso-bento-action-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .mso-bento-time {
     font-size: 11px;
     font-weight: 700;
-    color: #94a3b8;
+    color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
   .mso-bento-link {
     font-size: 12px;
     font-weight: 800;
-    color: #0284c7;
+    color: #2563eb;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 4px;
   }
   .mso-bento-link:hover {
-    color: #0369a1;
+    color: #1d4ed8;
     text-decoration: underline;
   }
   .mso-bento-sep {
     border: 0;
     height: 1px;
     background: #f1f5f9;
-    margin: 0 0 14px 0;
+    margin: 0 0 12px 0;
   }
+
+  /* AUTHOR PROFILE (EXACT TOPTAL REPLICA WITH SQUARE AVATAR & CREDENTIAL BIO) */
   .mso-author-block {
     display: flex;
     align-items: flex-start;
@@ -669,12 +782,12 @@ async function deployEliteToptalBlog() {
     margin: 0;
   }
 
-  /* 2.8 WORLD-CLASS NEWSLETTER DISPATCH */
+  /* 2.7 WORLD-CLASS NEWSLETTER DISPATCH */
   .mso-dispatch-card {
     background: #f8fafc;
     border: 1.5px solid #e2e8f0;
     border-radius: 16px;
-    padding: 38px 40px;
+    padding: 36px 36px;
     margin-bottom: 56px;
     display: flex;
     justify-content: space-between;
@@ -725,7 +838,7 @@ async function deployEliteToptalBlog() {
   }
   .mso-dispatch-input {
     flex: 1 1 auto;
-    padding: 14px 18px;
+    padding: 13px 18px;
     font-size: 14.5px;
     border: 1.5px solid #cbd5e1;
     border-right: none;
@@ -735,14 +848,14 @@ async function deployEliteToptalBlog() {
     outline: none;
   }
   .mso-dispatch-input:focus {
-    border-color: #0284c7;
+    border-color: #2563eb;
   }
   .mso-dispatch-btn {
     background: #00c774;
     color: #ffffff !important;
     font-weight: 800;
     font-size: 14px;
-    padding: 14px 24px;
+    padding: 13px 24px;
     border: none;
     border-radius: 0 8px 8px 0;
     cursor: pointer;
@@ -758,16 +871,16 @@ async function deployEliteToptalBlog() {
     margin: 8px 0 0 2px;
   }
   .mso-dispatch-privacy a {
-    color: #0284c7;
+    color: #2563eb;
     text-decoration: underline;
   }
 
-  /* 2.9 WIRECUTTER-STYLE PRODUCT MATRIX (1 ROW OF 4 CARDS) */
+  /* 2.8 WIRECUTTER-STYLE PRODUCT MATRIX (EXACTLY 1 ROW OF 4 CARDS) */
   .mso-matrix-section {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 32px 28px;
+    padding: 30px 26px;
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
   }
   .mso-matrix-header {
@@ -776,7 +889,7 @@ async function deployEliteToptalBlog() {
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     border-bottom: 1px solid #f1f5f9;
     padding-bottom: 14px;
   }
@@ -876,7 +989,7 @@ async function deployEliteToptalBlog() {
   }
 
   /* ========================================== */
-  /* 2.10 RESPONSIVE BREAKPOINTS                */
+  /* 2.9 RESPONSIVE BREAKPOINTS                 */
   /* ========================================== */
   @media (max-width: 1080px) {
     .mso-matrix-grid {
@@ -886,6 +999,13 @@ async function deployEliteToptalBlog() {
   }
 
   @media (max-width: 960px) {
+    .mso-toptal-hero {
+      padding: 38px 28px 30px 28px;
+    }
+    .mso-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
     .mso-flagship-card {
       grid-template-columns: 1fr;
     }
@@ -900,10 +1020,29 @@ async function deployEliteToptalBlog() {
 
   @media (max-width: 640px) {
     .mso-portal {
-      padding: 16px 14px 60px 14px;
+      padding: 12px 14px 60px 14px;
     }
-    .mso-hero-masthead {
-      padding: 10px 0 24px 0;
+    .mso-toptal-hero {
+      padding: 26px 18px 22px 18px;
+      border-radius: 10px;
+    }
+    .mso-toptal-title {
+      font-size: 32px;
+    }
+    .mso-trust-cards-row {
+      grid-template-columns: 1fr;
+    }
+    .mso-toptal-search-box {
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 12px;
+    }
+    .mso-hero-search-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+    .mso-hero-submit-btn {
+      width: 100%;
     }
     .mso-editorial-grid {
       grid-template-columns: 1fr !important;
@@ -912,7 +1051,7 @@ async function deployEliteToptalBlog() {
       grid-template-columns: 1fr !important;
     }
     .mso-dispatch-card {
-      padding: 26px 20px;
+      padding: 24px 18px;
     }
     .mso-dispatch-input-group {
       flex-direction: column;
@@ -921,6 +1060,7 @@ async function deployEliteToptalBlog() {
     .mso-dispatch-input {
       border-radius: 8px;
       border-right: 1.5px solid #cbd5e1;
+      margin-bottom: 8px;
     }
     .mso-dispatch-btn {
       border-radius: 8px;
@@ -934,44 +1074,104 @@ async function deployEliteToptalBlog() {
 <!-- ========================================== -->
 <main class="mso-portal" role="main">
 
-  <!-- 3.1 OPEN EDITORIAL HERO MASTHEAD -->
-  <header class="mso-hero-masthead">
-    <div class="mso-hero-meta-row">
-      <div class="mso-live-badge">
-        <span class="mso-live-dot"></span>
-        Michigan Sports Outdoor &bull; Field Journal
+  <!-- 3.1 EXACT TOPTAL-STYLE HERO MASTHEAD WITH EEAT -->
+  <header class="mso-toptal-hero">
+    <div class="mso-hero-grid">
+      
+      <!-- LEFT COLUMN -->
+      <div class="mso-hero-left">
+        <h1 class="mso-toptal-title">
+          Michigan Sports Outdoor Blog
+        </h1>
+        <p class="mso-toptal-subtitle">
+          The MSO Field Journal &amp; Cutlery Lab is the top hub for hunters, backcountry outfitters, bladesmiths, and cutlery specialists, featuring key whitetail field dressing updates, super steel metallurgy benchmarks, and Northwoods gear insights.
+        </p>
+
+        <!-- SHARE COUNT BADGE (EXACT TOPTAL REPLICA) -->
+        <div class="mso-share-badge-wrap">
+          <div class="mso-toptal-share-btn">
+            <svg class="mso-share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>132.3K SHARES</span>
+          </div>
+        </div>
+
+        <!-- SUB-TEAM PERSPECTIVE PILL ROW (EXACT TOPTAL REPLICA) -->
+        <div class="mso-hero-subteam-row">
+          <span>MSO field outfitters and lab metallurgists share their empirical findings on the</span>
+          <a href="/cpm-magnacut-vs-bohler-m390mk/" class="mso-hero-subteam-pill">MSO Cutlery Lab &rarr;</a>
+        </div>
       </div>
-      <div class="mso-hero-stats">
-        <div><span>132.3K</span> Readers &amp; Shares</div>
-        <div><span>40+</span> Field Guides</div>
-        <div><span>100%</span> Empirical Lab Tests</div>
+
+      <!-- RIGHT COLUMN: E-E-A-T TRUST FACTORS (EXACT TOPTAL "FEATURED IN" CARDS) -->
+      <div class="mso-hero-right">
+        <div class="mso-trust-label">INDUSTRY ACCREDITATIONS &amp; TRUST</div>
+        <div class="mso-trust-cards-row">
+          
+          <!-- TRUST CARD 1: BLADEFORUMS -->
+          <div class="mso-trust-card">
+            <div class="mso-trust-icon-box">
+              <svg viewBox="0 0 110 26" class="mso-trust-svg">
+                <!-- Blade icon + text -->
+                <polygon points="2,13 18,5 22,8 10,17" fill="#60a5fa"/>
+                <text x="26" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="12" fill="#ffffff" letter-spacing="0.5">BLADEFORUMS</text>
+              </svg>
+            </div>
+            <div class="mso-trust-card-sub">Member of BladeForums</div>
+          </div>
+
+          <!-- TRUST CARD 2: AVAILABLE ON AMAZON -->
+          <a href="https://www.amazon.com" target="_blank" rel="noopener" class="mso-trust-card">
+            <div class="mso-trust-icon-box">
+              <svg viewBox="0 0 95 26" class="mso-trust-svg">
+                <text x="4" y="17" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="16" fill="#ffffff" letter-spacing="-0.5">amazon</text>
+                <path d="M10 21 Q30 27 48 20 Q42 24 30 24 Q18 24 10 21 Z" fill="#f59e0b"/>
+                <path d="M46 18 L51 21 L48 24 Z" fill="#f59e0b"/>
+              </svg>
+            </div>
+            <div class="mso-trust-card-sub">Available on Amazon</div>
+          </a>
+
+          <!-- TRUST CARD 3: BBB REGISTERED -->
+          <div class="mso-trust-card">
+            <div class="mso-trust-icon-box">
+              <svg viewBox="0 0 95 26" class="mso-trust-svg">
+                <rect x="2" y="3" width="28" height="20" rx="3" fill="#2563eb"/>
+                <text x="5" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="12" fill="#ffffff">BBB</text>
+                <text x="34" y="13" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="9" fill="#ffffff">REGISTERED</text>
+                <text x="34" y="21" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="7.5" fill="#93c5fd">ACCREDITED A+</text>
+              </svg>
+            </div>
+            <div class="mso-trust-card-sub">BBB Registered</div>
+          </div>
+
+        </div>
       </div>
+
     </div>
 
-    <h1 class="mso-hero-title">
-      Field Guides, Metallurgy &amp; Outdoor Cutlery Tests
-    </h1>
-    <p class="mso-hero-subtitle">
-      Authoritative whitetail deer field dressing breakdowns, Rockwell hardness steel benchmarks, camp sharpening techniques, and verified Northwoods field cutlery reviews.
-    </p>
-
-    <!-- PILL SEARCH BAR WITH VOICE -->
-    <div class="mso-search-container">
-      <div class="mso-search-bar">
-        <span class="mso-search-lens" aria-hidden="true">🔍</span>
+    <!-- FULL-WIDTH BOTTOM SEARCH BAR (EXACT TOPTAL STYLE) -->
+    <div class="mso-hero-search-wrap">
+      <div class="mso-toptal-search-box">
+        <span class="mso-search-glass" aria-hidden="true">🔍</span>
         <input 
           type="search" 
           id="msoSearchInput"
-          class="mso-search-input" 
-          placeholder="Search field guides, blade steels, or in-stock cutlery (e.g. MagnaCut, Whitetail, Lansky)..."
-          aria-label="Search blog guides and outdoor cutlery"
+          class="mso-toptal-search-input" 
+          placeholder="What are you looking for?"
+          aria-label="What are you looking for?"
           autocomplete="off"
         />
-        <div class="mso-search-buttons">
-          <button type="button" id="msoVoiceBtn" class="mso-mic-button" title="Speak to Search (Voice Recognition)" aria-label="Activate Voice Search">
+        <div class="mso-hero-search-actions">
+          <button type="button" id="msoVoiceBtn" class="mso-hero-mic-btn" title="Speak to Search (Voice Recognition)" aria-label="Activate Voice Search">
             🎙️
           </button>
-          <button type="button" id="msoSubmitSearchBtn" class="mso-submit-search" aria-label="Search MSO">
+          <button type="button" id="msoSubmitSearchBtn" class="mso-hero-submit-btn" aria-label="Search">
             Search
           </button>
         </div>
@@ -980,19 +1180,19 @@ async function deployEliteToptalBlog() {
       <!-- Instant Dropdown Results -->
       <div id="msoSearchDropdown" class="mso-autocomplete-panel" role="region" aria-live="polite"></div>
 
-      <!-- Trending Filter Chips -->
-      <div class="mso-filter-chips">
-        <span style="font-weight:700; color:#0f172a;">Trending:</span>
-        <a href="javascript:void(0)" class="mso-filter-chip" onclick="msoQuickSearch('hunting knives')">Deer Hunting Knives</a>
-        <a href="javascript:void(0)" class="mso-filter-chip" onclick="msoQuickSearch('magnacut')">CPM MagnaCut</a>
-        <a href="javascript:void(0)" class="mso-filter-chip" onclick="msoQuickSearch('sharpening')">Camp Sharpening</a>
-        <a href="javascript:void(0)" class="mso-filter-chip" onclick="msoQuickSearch('buck 110')">Buck 110</a>
-        <a href="javascript:void(0)" class="mso-filter-chip" onclick="msoQuickSearch('edc under 100')">EDC Pocket Folders</a>
+      <!-- Quick Filter Chips -->
+      <div class="mso-hero-trending-chips">
+        <span class="mso-chips-label">Trending:</span>
+        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('deer hunting knives')">Deer Hunting Knives</button>
+        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('cpm magnacut')">CPM MagnaCut</button>
+        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('camp sharpening')">Camp Sharpening</button>
+        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('buck 110')">Buck 110</button>
+        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('edc pocket knives')">EDC Folders</button>
       </div>
     </div>
   </header>
 
-  <!-- 3.2 HORIZONTAL CATEGORY NAVIGATION PILLS -->
+  <!-- 3.2 HORIZONTAL CATEGORY NAVIGATION PILLS (WITH INSTANT CLIENT FILTERING) -->
   <nav class="mso-category-nav" aria-label="Editorial Categories">
     <div class="mso-nav-row">
       <button type="button" class="mso-nav-pill active" onclick="msoFilterCategory('all', this)">All Field Guides</button>
@@ -1006,7 +1206,7 @@ async function deployEliteToptalBlog() {
   </nav>
 
   <!-- 3.3 REFINED EDITORIAL SPOTLIGHT (FLAGSHIP FEATURE) -->
-  <article class="mso-flagship-card" itemscope itemtype="https://schema.org/BlogPosting">
+  <article class="mso-flagship-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="steel">
     <div class="mso-flagship-cover">
       <a href="/cpm-magnacut-vs-bohler-m390mk/" style="display:block; width:100%; height:100%;">
         <img 
@@ -1041,14 +1241,14 @@ async function deployEliteToptalBlog() {
     </div>
   </article>
 
-  <!-- 3.4 3-COLUMN EDITORIAL BENTO GRID (COMPACT COVERS) -->
+  <!-- 3.4 3-COLUMN EDITORIAL BENTO GRID (COMPACT COVERS + TOPTAL AUTHOR PROFILES) -->
   <section aria-labelledby="featured-reports-heading">
     <div class="mso-grid-header">
       <h2 id="featured-reports-heading">Featured Field Reports &amp; Buying Guides</h2>
       <span class="mso-grid-tag">Verified In-Field Evidence</span>
     </div>
 
-    <div class="mso-editorial-grid">
+    <div class="mso-editorial-grid" id="msoArticleGrid">
 
       <!-- CARD 1 -->
       <article class="mso-bento-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="hunting">
@@ -1063,17 +1263,17 @@ async function deployEliteToptalBlog() {
         </a>
         <div class="mso-bento-body">
           <div>
-            <div class="mso-bento-kicker">HUNTING &gt; DRESSING</div>
+            <div class="mso-bento-kicker">HUNTING &gt; FIELD DRESSING</div>
             <h3 class="mso-bento-heading" itemprop="headline">
               <a href="/best-hunting-knives-for-michigan-deer-season-3/">Best Hunting Knives for Michigan Deer Season (2026 Guide)</a>
             </h3>
             <p class="mso-bento-excerpt" itemprop="description">
-              Field dressing, skinning, and cold-weather steel performance tested in real Upper & Lower Peninsula deer camps ahead of archery season.
+              Field dressing, skinning, and cold-weather steel performance tested in real Upper &amp; Lower Peninsula deer camps ahead of archery season.
             </p>
           </div>
           <div>
             <div class="mso-bento-action-row">
-              <span class="mso-bento-time">8-MIN READ</span>
+              <span class="mso-bento-time">8-MINUTE READ</span>
               <a href="/best-hunting-knives-for-michigan-deer-season-3/" class="mso-bento-link">Read Guide &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
@@ -1112,7 +1312,7 @@ async function deployEliteToptalBlog() {
           </div>
           <div>
             <div class="mso-bento-action-row">
-              <span class="mso-bento-time">12-MIN READ</span>
+              <span class="mso-bento-time">12-MINUTE READ</span>
               <a href="/best-fixed-blade-hunting-knives-2026-buying-guide/" class="mso-bento-link">View Top Picks &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
@@ -1151,7 +1351,7 @@ async function deployEliteToptalBlog() {
           </div>
           <div>
             <div class="mso-bento-action-row">
-              <span class="mso-bento-time">10-MIN READ</span>
+              <span class="mso-bento-time">10-MINUTE READ</span>
               <a href="/mora-companion-vs-kansbol-vs-garberg/" class="mso-bento-link">Read Trial &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
@@ -1190,7 +1390,7 @@ async function deployEliteToptalBlog() {
           </div>
           <div>
             <div class="mso-bento-action-row">
-              <span class="mso-bento-time">9-MIN READ</span>
+              <span class="mso-bento-time">9-MINUTE READ</span>
               <a href="/how-to-sharpen-a-knife-at-home/" class="mso-bento-link">Learn Technique &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
@@ -1229,7 +1429,7 @@ async function deployEliteToptalBlog() {
           </div>
           <div>
             <div class="mso-bento-action-row">
-              <span class="mso-bento-time">7-MIN READ</span>
+              <span class="mso-bento-time">7-MINUTE READ</span>
               <a href="/top-best-edc-knives-under-100/" class="mso-bento-link">View EDC Winners &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
@@ -1268,7 +1468,7 @@ async function deployEliteToptalBlog() {
           </div>
           <div>
             <div class="mso-bento-action-row">
-              <span class="mso-bento-time">11-MIN READ</span>
+              <span class="mso-bento-time">11-MINUTE READ</span>
               <a href="/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/" class="mso-bento-link">Explore Geometry &rarr;</a>
             </div>
             <hr class="mso-bento-sep" />
@@ -1290,18 +1490,18 @@ async function deployEliteToptalBlog() {
   <!-- 3.5 HIGH-CONVERTING EDITORIAL DISPATCH BANNER -->
   <section class="mso-dispatch-card" aria-label="Field Dispatch Newsletter">
     <div class="mso-dispatch-info">
-      <span class="mso-dispatch-pill">&bull; FREE FIELD ASSET</span>
-      <h3>The Northwoods Field Dispatch</h3>
+      <span class="mso-dispatch-pill">&bull; FREE FIELD ASSET &bull; 2026 EDITION</span>
+      <h3>World-class field guides, delivered weekly.</h3>
       <p>Join 24,000+ Michigan hunters and cutlery specialists. Receive opening-day field dressing checklists, super steel drop alerts, and exclusive knife discounts.</p>
     </div>
     <div class="mso-dispatch-form">
       <form action="/#newsletter-signup" method="POST" onsubmit="alert('Thank you for subscribing! Your Michigan Field Dressing Guide is on the way.'); return false;">
         <div class="mso-dispatch-input-group">
           <input type="email" placeholder="Enter your best email address..." required class="mso-dispatch-input" aria-label="Email address" />
-          <button type="submit" class="mso-dispatch-btn">Get Free Guide &rarr;</button>
+          <button type="submit" class="mso-dispatch-btn">Sign Me Up &rarr;</button>
         </div>
         <p class="mso-dispatch-privacy">
-          Instant PDF delivery. Zero spam. By submitting you agree to our <a href="/privacy-policy/">privacy policy</a>.
+          By entering your email, you are agreeing to our <a href="/privacy-policy/">privacy policy</a>. Instant delivery. Zero spam.
         </p>
       </form>
     </div>
@@ -1314,7 +1514,7 @@ async function deployEliteToptalBlog() {
         <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:#16a34a;">Field Tested &bull; In-Stock Cutlery</span>
         <h3 id="gear-matrix-heading">Gear Featured in Our Field Guides</h3>
       </div>
-      <a href="/shop/" style="font-size:13px; font-weight:700; color:#0284c7; text-decoration:none;">View Full Outfitter Store &rarr;</a>
+      <a href="/shop/" style="font-size:13px; font-weight:700; color:#2563eb; text-decoration:none;">View Full Outfitter Store &rarr;</a>
     </div>
 
     <!-- 4 EQUAL CARDS IN 1 HORIZONTAL ROW -->
@@ -1407,7 +1607,7 @@ async function deployEliteToptalBlog() {
             />
           </a>
           <div class="mso-matrix-kicker-row">
-            <span class="mso-matrix-kicker" style="color:#0284c7;">Bench Hone</span>
+            <span class="mso-matrix-kicker" style="color:#2563eb;">Bench Hone</span>
             <span class="mso-matrix-price">Pro Grade</span>
           </div>
           <h4 class="mso-matrix-title" itemprop="name">
@@ -1536,6 +1736,17 @@ function msoQuickSearch(term) {
   }
 }
 
+function filterSearch(query) {
+  const clean = query.trim().toLowerCase();
+  if (!clean || clean.length < 2) return [];
+
+  return SEARCH_INDEX.filter(item => {
+    const inTitle = item.title.toLowerCase().includes(clean);
+    const inKeywords = item.keywords.some(k => k.toLowerCase().includes(clean) || clean.includes(k.toLowerCase()));
+    return inTitle || inKeywords;
+  });
+}
+
 function msoFilterCategory(cat, btn) {
   const pills = document.querySelectorAll('.mso-nav-pill');
   pills.forEach(p => p.classList.remove('active'));
@@ -1554,17 +1765,6 @@ function msoFilterCategory(cat, btn) {
   });
 }
 
-function filterSearch(query) {
-  const clean = query.trim().toLowerCase();
-  if (!clean || clean.length < 2) return [];
-
-  return SEARCH_INDEX.filter(item => {
-    const inTitle = item.title.toLowerCase().includes(clean);
-    const inKeywords = item.keywords.some(k => k.toLowerCase().includes(clean) || clean.includes(k.toLowerCase()));
-    return inTitle || inKeywords;
-  });
-}
-
 (function() {
   const searchInput = document.getElementById('msoSearchInput');
   const dropdown = document.getElementById('msoSearchDropdown');
@@ -1577,10 +1777,10 @@ function filterSearch(query) {
     if (!matches || matches.length === 0) {
       dropdown.innerHTML = \`
         <div style="padding:14px 18px; color:#64748b; font-size:13px;">
-          No direct guide match for "<strong>\${query}</strong>".
+          No direct guide match for "<strong>${query}</strong>".
           <div style="margin-top:6px;">
-            <a href="/shop/?s=\${encodeURIComponent(query)}" style="color:#0284c7; font-weight:700; text-decoration:underline;">
-              Search full MSO Cutlery Store for "\${query}" &rarr;
+            <a href="/shop/?s=${encodeURIComponent(query)}" style="color:#2563eb; font-weight:700; text-decoration:underline;">
+              Search full MSO Cutlery Store for "${query}" &rarr;
             </a>
           </div>
         </div>
@@ -1592,20 +1792,20 @@ function filterSearch(query) {
     let html = '';
     matches.slice(0, 6).forEach(item => {
       html += \`
-        <a href="\${item.url}" class="mso-dropdown-entry">
+        <a href="${item.url}" class="mso-dropdown-entry">
           <div>
-            <div class="mso-entry-title">\${item.title}</div>
-            <div style="font-size:11px; color:#64748b; margin-top:2px;">michigansportsoutdoor.com\${item.url}</div>
+            <div class="mso-entry-title">${item.title}</div>
+            <div style="font-size:11px; color:#64748b; margin-top:2px;">michigansportsoutdoor.com${item.url}</div>
           </div>
-          <span class="mso-entry-badge \${item.badgeClass}">\${item.type}</span>
+          <span class="mso-entry-badge ${item.badgeClass}">${item.type}</span>
         </a>
       \`;
     });
 
     html += \`
       <div style="background:#f8fafc; padding:9px 18px; border-top:1px solid #e2e8f0; text-align:right;">
-        <a href="/shop/?s=\${encodeURIComponent(query)}" style="font-size:11.5px; font-weight:700; color:#0284c7; text-decoration:none;">
-          View all store results for "\${query}" &rarr;
+        <a href="/shop/?s=${encodeURIComponent(query)}" style="font-size:11.5px; font-weight:700; color:#2563eb; text-decoration:none;">
+          View all store results for "${query}" &rarr;
         </a>
       </div>
     \`;
@@ -1686,7 +1886,7 @@ function filterSearch(query) {
         searchInput.value = transcript;
         micBtn.classList.remove('listening');
         isRecording = false;
-        searchInput.placeholder = "Search field guides, blade steels, or in-stock cutlery...";
+        searchInput.placeholder = "What are you looking for?";
         const matches = filterSearch(transcript);
         renderDropdown(matches, transcript);
         if (matches.length === 1) {
@@ -1700,13 +1900,13 @@ function filterSearch(query) {
         console.warn("Voice search notice:", event.error);
         micBtn.classList.remove('listening');
         isRecording = false;
-        searchInput.placeholder = "Search field guides, blade steels, or in-stock cutlery...";
+        searchInput.placeholder = "What are you looking for?";
       };
 
       recognition.onend = function() {
         micBtn.classList.remove('listening');
         isRecording = false;
-        searchInput.placeholder = "Search field guides, blade steels, or in-stock cutlery...";
+        searchInput.placeholder = "What are you looking for?";
       };
     } else {
       micBtn.addEventListener('click', function() {
@@ -1715,51 +1915,20 @@ function filterSearch(query) {
     }
   }
 })();
-</script>
-`.trim();
+</script>`;
 
-  try {
-    console.log('Fetching page for slug "blog"...');
-    const checkRes = await fetch(`${baseUrl}/wp-json/wp/v2/pages?slug=blog`, { headers });
-    const pages = await checkRes.json();
-
-    if (Array.isArray(pages) && pages.length > 0) {
-      const pageId = pages[0].id;
-      console.log(`Updating WordPress page #${pageId} to Elite Professional Clean design...`);
-      const updateRes = await fetch(`${baseUrl}/wp-json/wp/v2/pages/${pageId}`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          title: 'Field Journal & Cutlery Lab | Michigan Sports Outdoor',
-          content: blogHtml,
-          status: 'publish'
-        })
-      });
-      const updated = await updateRes.json();
-      console.log(`✅ Elite professional blog page deployed successfully: ${updated.link}`);
-    } else {
-      console.log('Creating new page for slug "blog"...');
-      const createRes = await fetch(`${baseUrl}/wp-json/wp/v2/pages`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          title: 'Field Journal & Cutlery Lab | Michigan Sports Outdoor',
-          slug: 'blog',
-          content: blogHtml,
-          status: 'publish'
-        })
-      });
-      const created = await createRes.json();
-      console.log(`✅ Elite professional blog page created successfully: ${created.link}`);
-    }
-  } catch (e) {
-    console.error('Error deploying elite blog:', e.message);
-  }
+  console.log('Updating WordPress page #166494 to exact Toptal Hero layout with EEAT factors...');
+  const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/166494`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      title: 'Michigan Sports Outdoor Blog | Field Journal & Cutlery Lab',
+      content: blogHtml,
+      status: 'publish'
+    })
+  });
+  const updated = await res.json();
+  console.log(`✅ Elite professional blog page deployed successfully: ${updated.link}`);
 }
 
-deployEliteToptalBlog()
-  .then(() => process.exit(0))
-  .catch(e => {
-    console.error(e);
-    process.exit(1);
-  });
+deployEliteToptalBlog().then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); });
