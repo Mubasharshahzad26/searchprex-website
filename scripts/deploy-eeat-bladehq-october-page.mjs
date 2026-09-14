@@ -129,11 +129,11 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-brand-strip-logos img:hover { filter: grayscale(0%); opacity: 1; }
 
 /* 5. Section Headers */
-.mso-bhq-section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-.mso-bhq-title-bold { font-size: 24px; font-weight: 900; color: #0f172a; margin: 0; }
+.mso-bhq-section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; margin-top: 14px; }
+.mso-bhq-title-bold { font-size: 24px; font-weight: 900; color: #0f172a; margin: 0; text-transform: uppercase; letter-spacing: -0.3px; }
 .mso-bhq-title-italic { font-style: italic; font-weight: 800; color: #475569; }
 .mso-bhq-subtitle { font-size: 13px; color: #64748b; font-style: italic; margin: 0 0 18px 0; }
-.mso-bhq-view-all-pill { background: #e2e8f0; color: #334155; font-size: 11.5px; font-weight: 800; padding: 4px 14px; border-radius: 14px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+.mso-bhq-view-all-pill { background: #e2e8f0; color: #334155; font-size: 11.5px; font-weight: 800; padding: 4px 14px; border-radius: 14px; text-decoration: none; transition: background 0.2s, color 0.2s; white-space: nowrap; }
 .mso-bhq-view-all-pill:hover { background: #0066cc; color: #ffffff; }
 
 /* 6. Opportunities Too Good To Miss (Strict 1 Row of 4 Cards on Desktop) */
@@ -183,7 +183,27 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-bhq-add-cart-btn { background: #f97316; color: #ffffff; font-size: 11.5px; font-weight: 800; padding: 6px 12px; border-radius: 4px; border: none; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
 .mso-bhq-add-cart-btn:hover { background: #ea580c; }
 
-/* 9. E-E-A-T Cutlery Lab & Testing Protocol Box */
+/* 9. Feature Banner Split Grid (Sharp Choices & Glow Gear) */
+.mso-split-banner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+.mso-split-banner-card { position: relative; min-height: 240px; border-radius: 8px; overflow: hidden; padding: 32px 28px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.08); transition: transform 0.2s; }
+.mso-split-banner-card:hover { transform: translateY(-3px); }
+.mso-split-banner-card.sharp { background: linear-gradient(135deg, #1e293b 0%, #384c3c 100%); color: #ffffff; }
+.mso-split-banner-card.glow { background: linear-gradient(135deg, #0f172a 0%, #0066cc 100%); color: #ffffff; }
+.mso-split-tag { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; color: #f5a623; }
+.mso-split-title { font-size: 26px; font-weight: 900; line-height: 1.15; margin: 6px 0 10px 0; }
+.mso-split-sub { font-size: 13.5px; color: #e2e8f0; line-height: 1.45; margin: 0 0 16px 0; }
+.mso-split-btn { display: inline-flex; align-items: center; gap: 6px; background: #ffffff; color: #0f172a !important; font-size: 12px; font-weight: 900; padding: 8px 18px; border-radius: 20px; text-transform: uppercase; width: fit-content; transition: background 0.2s, color 0.2s; }
+.mso-split-banner-card:hover .mso-split-btn { background: #f5a623; color: #0f172a !important; }
+
+/* 10. "Knives For Everything You Do" Activity Grid */
+.mso-activity-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 40px; }
+.mso-activity-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 14px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+.mso-activity-card:hover { transform: translateY(-4px); border-color: #384c3c; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+.mso-activity-icon { width: 44px; height: 44px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #384c3c; font-weight: 900; font-size: 14px; transition: background 0.2s, color 0.2s; }
+.mso-activity-card:hover .mso-activity-icon { background: #384c3c; color: #ffffff; }
+.mso-activity-name { font-size: 12.5px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.3; }
+
+/* 11. E-E-A-T Cutlery Lab & Testing Protocol Box */
 .mso-eeat-lab-box { background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 28px 32px; margin-bottom: 36px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; }
 .mso-eeat-lab-title { font-size: 22px; font-weight: 900; color: #0f172a; margin: 0 0 10px 0; }
 .mso-eeat-lab-p { font-size: 13px; color: #475569; line-height: 1.6; margin: 0 0 16px 0; }
@@ -197,28 +217,28 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-eeat-author-role { font-size: 11px; font-weight: 800; color: #16a34a; text-transform: uppercase; margin-bottom: 6px; }
 .mso-eeat-author-bio { font-size: 11.5px; color: #64748b; line-height: 1.45; margin: 0; }
 
-/* 10. Blue Free Shipping Ribbon */
+/* 12. Blue Free Shipping Ribbon */
 .mso-blue-banner { background: #0066cc; color: #ffffff; padding: 18px 24px; border-radius: 6px; text-align: center; font-size: 15px; font-weight: 900; margin-bottom: 36px; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(0,102,204,0.25); }
 
-/* 11. Knife Dreams Delivered (Customer Reviews Blue Box) */
+/* 13. Knife Dreams Delivered (Customer Reviews Blue Box) */
 .mso-review-showcase { background: #083b66; color: #ffffff; border-radius: 8px; padding: 32px 36px; margin-bottom: 36px; display: grid; grid-template-columns: 260px 1fr; gap: 32px; align-items: center; }
 .mso-review-showcase-title { font-size: 26px; font-weight: 900; line-height: 1.15; color: #ffffff; margin: 0 0 8px 0; }
 .mso-review-showcase-sub { font-size: 13px; color: #bfdbfe; margin: 0; line-height: 1.45; }
 .mso-reviews-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .mso-review-bubble { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; }
-.mso-review-stars-gold { color: #f5a623; font-size: 12px; margin-bottom: 6px; }
+.mso-review-stars-gold { color: #f5a623; font-size: 12px; margin-bottom: 6px; font-weight: 800; }
 .mso-review-bubble-title { font-size: 13.5px; font-weight: 800; color: #ffffff; margin: 0 0 6px 0; }
 .mso-review-bubble-text { font-size: 12px; color: #e2e8f0; line-height: 1.45; margin: 0 0 12px 0; font-style: italic; }
 .mso-review-bubble-author { font-size: 11px; font-weight: 800; color: #93c5fd; text-transform: uppercase; }
 
-/* 12. Big 4 Icons Trust Strip */
+/* 14. Big 4 Icons Trust Strip */
 .mso-big-trust-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; margin-bottom: 40px; padding: 20px 0; border-bottom: 1px solid #e2e8f0; }
 .mso-big-trust-item { display: flex; flex-direction: column; align-items: center; }
 .mso-big-trust-badge { width: 48px; height: 48px; border-radius: 50%; background: #e0f2fe; color: #0066cc; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; margin-bottom: 12px; }
 .mso-big-trust-heading { font-size: 15px; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; }
 .mso-big-trust-p { font-size: 12px; color: #64748b; line-height: 1.45; margin: 0; max-width: 240px; }
 
-/* 13. Featured Videos (YouTube Embeds) */
+/* 15. Featured Videos (YouTube Embeds) */
 .mso-videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
 .mso-video-card { position: relative; height: 180px; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .mso-video-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -226,7 +246,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 16px; font-weight: 900; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 2; }
 .mso-video-title { position: relative; z-index: 2; font-size: 13px; font-weight: 800; color: #ffffff; margin: 0; line-height: 1.25; text-transform: uppercase; }
 
-/* 14. Featured Articles */
+/* 16. Featured Articles */
 .mso-articles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
 .mso-article-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: transform 0.2s; }
 .mso-article-card:hover { transform: translateY(-3px); }
@@ -235,7 +255,14 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-article-title { font-size: 13.5px; font-weight: 800; color: #0f172a; margin: 0 0 12px 0; line-height: 1.35; }
 .mso-article-btn { background: #0066cc; color: #ffffff !important; font-size: 11px; font-weight: 800; padding: 6px 14px; border-radius: 4px; text-transform: uppercase; width: fit-content; margin-top: auto; }
 
-/* 15. Blade Club VIP Banner */
+/* 17. FAQs Section (Original Homepage FAQs) */
+.mso-faq-section { margin-bottom: 40px; }
+.mso-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+.mso-faq-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 22px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+.mso-faq-q { font-size: 15px; font-weight: 900; color: #0f172a; margin: 0 0 8px 0; line-height: 1.35; }
+.mso-faq-a { font-size: 13px; color: #475569; line-height: 1.55; margin: 0; }
+
+/* 18. Blade Club VIP Banner */
 .mso-blade-club-footer { background: linear-gradient(135deg, #0b223c 0%, #0066cc 100%); color: #ffffff; border-radius: 8px; padding: 32px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; box-shadow: 0 8px 24px rgba(0,102,204,0.25); }
 .mso-club-left-title { font-size: 28px; font-weight: 900; letter-spacing: 0.5px; margin: 0 0 8px 0; }
 .mso-club-left-title span { color: #f5a623; }
@@ -253,12 +280,15 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-opps-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-orig-cat-slider-wrap { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: repeat(2, 1fr); }
+  .mso-split-banner-grid { grid-template-columns: 1fr; }
+  .mso-activity-grid { grid-template-columns: repeat(3, 1fr); }
   .mso-eeat-lab-box { grid-template-columns: 1fr; }
   .mso-review-showcase { grid-template-columns: 1fr; }
   .mso-reviews-cards-row { grid-template-columns: 1fr; }
   .mso-big-trust-strip { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .mso-videos-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-articles-grid { grid-template-columns: repeat(2, 1fr); }
+  .mso-faq-grid { grid-template-columns: 1fr; }
   .mso-blade-club-footer { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
@@ -268,6 +298,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-usp-bar { grid-template-columns: 1fr; gap: 12px; padding: 12px 14px; }
   .mso-opps-grid { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: 1fr; }
+  .mso-activity-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-big-trust-strip { grid-template-columns: 1fr; }
   .mso-videos-grid { grid-template-columns: 1fr; }
   .mso-articles-grid { grid-template-columns: 1fr; }
@@ -306,6 +337,44 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
         "target": "https://www.michigansportsoutdoor.com/shop/?s={search_term_string}",
         "query-input": "required name=search_term_string"
       }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.michigansportsoutdoor.com/october-season/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Michigan Sports Outdoor known for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Michigan Sports Outdoor is America's premier outfitter for sportsmen, hunters, anglers, and outdoor enthusiasts. We stock over 7,000+ brand-name products including folding EDC pocket knives, fixed hunting blades, camping cookware, survival axes, and multi-tools from top cutlery makers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Michigan knife laws for carrying pocket and hunting knives?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under Michigan law (MCL 750.227), folding pocket knives and typical hunting knives carried without harmful intent are legal for everyday carry. Following the repeal of the switchblade ban, automatic knives and OTF knives are also legal to own and carry for lawful sporting purposes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best knife for field dressing deer in Michigan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A high-carbon or stainless drop-point fixed blade with a 3.5 to 4-inch blade offers optimal belly curve for gutting and skinning whitetail deer without puncturing internal organs or dulling prematurely on bone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast does Michigan Sports Outdoor ship customer orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All orders are packed securely and dispatched rapidly across the United States. In-stock products typically ship within 24 to 48 business hours with verified live tracking numbers."
+          }
+        }
+      ]
     }
   ]
 }
@@ -600,7 +669,67 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 8. E-E-A-T CUTLERY TESTING LAB & LEAD ANALYST STANDARDS -->
+  <!-- 8. SHARP CHOICES & GLOW GEAR (ORIGINAL HOMEPAGE HIGHLIGHTS) -->
+  <section class="mso-split-banner-grid">
+    <a href="https://www.michigansportsoutdoor.com/collections/knives/" class="mso-split-banner-card sharp">
+      <div>
+        <span class="mso-split-tag">FEATURED CUTLERY</span>
+        <h3 class="mso-split-title">Sharp Choices.<br/>Cut Sharper. Work Smarter.</h3>
+        <p class="mso-split-sub">Curated pocket folders, hard-use tactical fixed blades, and precision slicing knives for American sportsmen.</p>
+      </div>
+      <span class="mso-split-btn">Shop Cutlery &rarr;</span>
+    </a>
+
+    <a href="https://www.michigansportsoutdoor.com/collections/lights/" class="mso-split-banner-card glow">
+      <div>
+        <span class="mso-split-tag">ILLUMINATION &amp; CAMP</span>
+        <h3 class="mso-split-title">Glow Gear.<br/>See More. Do More. Anywhere.</h3>
+        <p class="mso-split-sub">Tactical flashlights, rechargeable headlamps, and rugged backcountry lanterns built for midnight tracking.</p>
+      </div>
+      <span class="mso-split-btn">Find Your Light &rarr;</span>
+    </a>
+  </section>
+
+  <!-- 9. "KNIVES FOR EVERYTHING YOU DO" ACTIVITY GRID (BLADE HQ STYLE) -->
+  <section>
+    <div class="mso-bhq-section-header">
+      <h2 class="mso-bhq-title-bold">Knives For <span class="mso-bhq-title-italic">Everything</span> You Do</h2>
+      <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-view-all-pill">View All Activities</a>
+    </div>
+    <div class="mso-activity-grid">
+      <a href="https://www.michigansportsoutdoor.com/collections/knives/locking-knives/" class="mso-activity-card">
+        <div class="mso-activity-icon">EDC</div>
+        <h4 class="mso-activity-name">Everyday Carry</h4>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/knives/hunting-knife-sets/" class="mso-activity-card">
+        <div class="mso-activity-icon">HUNT</div>
+        <h4 class="mso-activity-name">Hunting &amp; Dressing</h4>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/knives/premium-knives/" class="mso-activity-card">
+        <div class="mso-activity-icon">TACT</div>
+        <h4 class="mso-activity-name">Tactical &amp; Duty</h4>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/camping-and-survival/" class="mso-activity-card">
+        <div class="mso-activity-icon">CAMP</div>
+        <h4 class="mso-activity-name">Camping &amp; Bushcraft</h4>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/fishing/" class="mso-activity-card">
+        <div class="mso-activity-icon">SURV</div>
+        <h4 class="mso-activity-name">Survival &amp; Fillet</h4>
+      </a>
+
+      <a href="https://www.michigansportsoutdoor.com/collections/kitchen/" class="mso-activity-card">
+        <div class="mso-activity-icon">CHEF</div>
+        <h4 class="mso-activity-name">Kitchen Cutlery</h4>
+      </a>
+    </div>
+  </section>
+
+  <!-- 10. E-E-A-T CUTLERY TESTING LAB & LEAD ANALYST STANDARDS -->
   <section class="mso-eeat-lab-box">
     <div>
       <h3 class="mso-eeat-lab-title">How We Test, Benchmark &amp; Score Cutlery</h3>
@@ -634,15 +763,15 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 9. FULL WIDTH BLUE FREE SHIPPING BANNER -->
+  <!-- 11. FULL WIDTH BLUE FREE SHIPPING BANNER -->
   <div class="mso-blue-banner">
     FREE SHIPPING: All domestic USA orders ship for free when you spend $99 or more.
   </div>
 
-  <!-- 10. HOT SALES (PRODUCT ROW WITH STARS) -->
+  <!-- 12. HOT SALES (PRODUCT ROW WITH STARS) -->
   <section>
     <div class="mso-bhq-section-header">
-      <h2 class="mso-bhq-title-bold">HOT SALES</h2>
+      <h2 class="mso-bhq-title-bold">HOT SALES &amp; WEEKLY OUTDOOR STEALS</h2>
       <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-view-all-pill">View All Sales</a>
     </div>
     <div class="mso-bhq-prod-row">
@@ -688,7 +817,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 11. KNIFE DREAMS DELIVERED (CUSTOMER REVIEWS BLUE BOX) -->
+  <!-- 13. KNIFE DREAMS DELIVERED (CUSTOMER REVIEWS BLUE BOX) -->
   <section class="mso-review-showcase">
     <div>
       <h3 class="mso-review-showcase-title">Knife Dreams, Delivered</h3>
@@ -724,7 +853,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 12. BIG 4 ICONS TRUST STRIP -->
+  <!-- 14. BIG 4 ICONS TRUST STRIP -->
   <section class="mso-big-trust-strip">
     <div class="mso-big-trust-item">
       <div class="mso-big-trust-badge">HELP</div>
@@ -751,10 +880,10 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 13. FEATURED VIDEOS (YOUTUBE EMBEDS FROM USER) -->
+  <!-- 15. FEATURED VIDEOS (YOUTUBE EMBEDS FROM USER) -->
   <section>
     <div class="mso-bhq-section-header">
-      <h2 class="mso-bhq-title-bold">Featured Videos</h2>
+      <h2 class="mso-bhq-title-bold">Featured Field Videos</h2>
       <a href="https://www.youtube.com/@michigansportsoutdoor" class="mso-bhq-view-all-pill">View All Videos</a>
     </div>
     <div class="mso-videos-grid">
@@ -788,10 +917,10 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 14. FEATURED ARTICLES -->
+  <!-- 16. FEATURED ARTICLES / FROM THE MSO JOURNAL -->
   <section>
     <div class="mso-bhq-section-header">
-      <h2 class="mso-bhq-title-bold">Featured Articles</h2>
+      <h2 class="mso-bhq-title-bold">From The MSO Journal &amp; Field Tests</h2>
       <a href="https://www.michigansportsoutdoor.com/blog/" class="mso-bhq-view-all-pill">View All Articles</a>
     </div>
     <div class="mso-articles-grid">
@@ -829,7 +958,36 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </section>
 
-  <!-- 15. MSO BLADE CLUB VIP FOOTER BANNER -->
+  <!-- 17. FREQUENTLY ASKED MICHIGAN SPORTSMAN QUESTIONS (ORIGINAL HOMEPAGE FAQS) -->
+  <section class="mso-faq-section">
+    <div class="mso-bhq-section-header">
+      <h2 class="mso-bhq-title-bold">Frequently Asked Michigan Sportsman Questions</h2>
+    </div>
+    <p class="mso-bhq-subtitle">Clear, field-tested answers to the most common questions regarding hunting, knives, and outdoor gear in Michigan.</p>
+    <div class="mso-faq-grid">
+      <div class="mso-faq-card">
+        <h3 class="mso-faq-q">What is Michigan Sports Outdoor known for?</h3>
+        <p class="mso-faq-a">Michigan Sports Outdoor is America's premier outfitter for sportsmen, hunters, anglers, and outdoor enthusiasts. We stock over 7,000+ brand-name products including folding EDC pocket knives, fixed hunting blades, camping cookware, survival axes, and multi-tools from top cutlery makers like Kershaw, Spyderco, Morakniv, and Frost Cutlery.</p>
+      </div>
+
+      <div class="mso-faq-card">
+        <h3 class="mso-faq-q">What are Michigan knife laws for carrying pocket and hunting knives?</h3>
+        <p class="mso-faq-a">Under Michigan law (MCL 750.227), folding pocket knives and typical hunting knives carried without harmful intent are legal for everyday carry. Following the 2017 repeal of the switchblade ban, automatic knives and OTF knives are also legal to own and carry openly or concealed for lawful sporting purposes.</p>
+      </div>
+
+      <div class="mso-faq-card">
+        <h3 class="mso-faq-q">What is the best knife for field dressing deer in Michigan?</h3>
+        <p class="mso-faq-a">A high-carbon or stainless drop-point fixed blade with a 3.5 to 4-inch blade (such as Morakniv or Skallywag tactical skinners) offers optimal belly curve for gutting and skinning whitetail deer without puncturing internal organs or dulling on bone.</p>
+      </div>
+
+      <div class="mso-faq-card">
+        <h3 class="mso-faq-q">How fast does Michigan Sports Outdoor ship customer orders?</h3>
+        <p class="mso-faq-a">All orders are packed securely and dispatched rapidly across the United States. In-stock products typically ship within 24 to 48 business hours with verified tracking numbers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18. MSO BLADE CLUB VIP FOOTER BANNER -->
   <section class="mso-blade-club-footer">
     <div>
       <h3 class="mso-club-left-title">BLADE <span>CLUB</span></h3>
@@ -864,7 +1022,7 @@ function scrollCats(direction) {
 </script>
 `;
 
-  console.log('Deploying updated E-E-A-T Blade HQ page to /october-season/ (Page #167531)...');
+  console.log('Deploying complete master Blade HQ layout replicating all homepage sections to /october-season/ (Page #167531)...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/167531`, {
     method: 'POST',
     headers,
@@ -886,11 +1044,6 @@ function scrollCats(direction) {
 
   const data = await res.json();
   console.log('Page updated successfully:', data.link);
-
-  // Sync script to repo
-  const repoPath = 'c:/Users/Mubashar Shahzad/Desktop/searchprex-website/scripts/deploy-eeat-bladehq-october-page.mjs';
-  fs.writeFileSync(repoPath, fs.readFileSync(new URL(import.meta.url)));
-  console.log('Saved script to repo at:', repoPath);
 }
 
 deployEEATBladeHQOctoberPage().catch(err => {
