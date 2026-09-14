@@ -95,22 +95,31 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-eeat-badge-pill.dark { background: #f1f5f9 !important; color: #334155 !important; border: 1px solid #e2e8f0 !important; }
 .mso-eeat-badge-pill.forest { background: #ecfdf5 !important; color: #065f46 !important; border: 1px solid #a7f3d0 !important; }
 
-/* 3. Hero Banner (Blade HQ Format & CRO Optimized) */
-.mso-bhq-hero { position: relative; width: 100%; min-height: 480px; border-radius: 10px; overflow: hidden; background: #0f172a url('${imgHero}') center right/cover no-repeat; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.22); display: flex; align-items: center; padding: 48px 44px; box-sizing: border-box; }
-.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.82) 45%, rgba(15,23,42,0.30) 80%, rgba(15,23,42,0.15) 100%); }
-.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 640px; }
-.mso-bhq-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,76,60,0.92); border: 1px solid #f5a623; color: #f5a623; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; backdrop-filter: blur(4px); }
-.mso-bhq-hero-title { font-size: 42px; font-weight: 900; line-height: 1.08; color: #ffffff; text-transform: uppercase; margin: 0 0 12px 0; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.6); }
+/* 3. Hero Banner (Blade HQ Format & Squeezed CRO Compact) */
+.mso-bhq-hero { position: relative; width: 100%; min-height: 340px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center right/cover no-repeat; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); display: flex; align-items: center; padding: 32px 36px; box-sizing: border-box; }
+.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.80) 48%, rgba(15,23,42,0.25) 80%, rgba(15,23,42,0.12) 100%); }
+.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 600px; }
+.mso-bhq-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,76,60,0.92); border: 1px solid #f5a623; color: #f5a623; font-size: 10px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; backdrop-filter: blur(4px); }
+.mso-bhq-hero-title { font-size: 34px; font-weight: 900; line-height: 1.1; color: #ffffff; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
 .mso-bhq-hero-title span { color: #f5a623; }
-.mso-bhq-hero-sub { font-size: 15.5px; color: #cbd5e1; margin: 0 0 22px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.5; }
-.mso-bhq-hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
-.mso-bhq-hero-btn-primary { background: #ea580c; color: #ffffff !important; font-size: 14px; font-weight: 900; padding: 13px 28px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(234,88,12,0.4); transition: transform 0.2s, background 0.2s; }
+.mso-bhq-hero-sub { font-size: 14px; color: #cbd5e1; margin: 0 0 18px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.45; }
+.mso-bhq-hero-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.mso-bhq-hero-btn-primary { background: #ea580c; color: #ffffff !important; font-size: 13px; font-weight: 900; padding: 11px 24px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(234,88,12,0.35); transition: transform 0.2s, background 0.2s; }
 .mso-bhq-hero-btn-primary:hover { background: #c2410c; transform: translateY(-2px); }
-.mso-bhq-hero-btn-secondary { background: rgba(255,255,255,0.12); color: #ffffff !important; border: 1.5px solid rgba(255,255,255,0.6); font-size: 14px; font-weight: 900; padding: 11.5px 24px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(4px); transition: all 0.2s; }
+.mso-bhq-hero-btn-secondary { background: rgba(255,255,255,0.12); color: #ffffff !important; border: 1.5px solid rgba(255,255,255,0.6); font-size: 13px; font-weight: 900; padding: 9.5px 20px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(4px); transition: all 0.2s; }
 .mso-bhq-hero-btn-secondary:hover { background: #ffffff; color: #0f172a !important; border-color: #ffffff; transform: translateY(-2px); }
-.mso-bhq-hero-trust { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; font-size: 12px; font-weight: 800; color: #94a3b8; }
-.mso-bhq-hero-trust-item { display: flex; align-items: center; gap: 5px; }
-.mso-bhq-hero-trust-tag { color: #10b981; font-weight: 900; }
+
+/* 3.5. 4-Pillar Smart USP Trust Bar */
+.mso-usp-bar { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 20px; margin-bottom: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); box-sizing: border-box; }
+.mso-usp-item { display: flex; align-items: center; gap: 12px; }
+.mso-usp-icon-box { width: 42px; height: 42px; min-width: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.mso-usp-icon-box.green { background: #ecfdf5; border: 1px solid #d1fae5; }
+.mso-usp-icon-box.blue { background: #eff6ff; border: 1px solid #dbeafe; }
+.mso-usp-icon-box.amber { background: #fffbeb; border: 1px solid #fef3c7; }
+.mso-usp-icon-box.slate { background: #f8fafc; border: 1px solid #e2e8f0; }
+.mso-usp-text { display: flex; flex-direction: column; line-height: 1.25; }
+.mso-usp-title { font-size: 13px; font-weight: 900; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.2px; }
+.mso-usp-sub { font-size: 11px; color: #64748b; font-weight: 500; line-height: 1.35; }
 
 /* 4. Brand Logo Strip (All 17 Brands from Homepage) */
 .mso-brand-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 24px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); flex-wrap: wrap; }
@@ -242,6 +251,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-eeat-cert-strip { display: flex; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 8px 12px; gap: 14px; }
   .mso-eeat-cert-strip::-webkit-scrollbar { display: none; }
   .mso-eeat-cert-item { flex: 0 0 auto; min-width: 175px; border-right: 1px solid #e2e8f0; padding-right: 12px; }
+  .mso-usp-bar { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .mso-opps-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-orig-cat-slider-wrap { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: repeat(2, 1fr); }
@@ -254,10 +264,11 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-blade-club-footer { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .mso-bhq-hero { padding: 28px 18px; min-height: 380px; background-position: center center; }
-  .mso-bhq-hero-title { font-size: 26px; }
+  .mso-bhq-hero { padding: 22px 16px; min-height: 280px; background-position: center center; }
+  .mso-bhq-hero-title { font-size: 24px; }
   .mso-bhq-hero-actions { flex-direction: column; align-items: stretch; }
   .mso-bhq-hero-btn-primary, .mso-bhq-hero-btn-secondary { text-align: center; }
+  .mso-usp-bar { grid-template-columns: 1fr; gap: 12px; padding: 12px 14px; }
   .mso-opps-grid { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: 1fr; }
   .mso-big-trust-strip { grid-template-columns: 1fr; }
@@ -316,7 +327,7 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   <!-- 2. E-E-A-T MASTER CERTIFICATION STRIP (ULTRA-THIN 1-LINE TRUST BAR) -->
   <div class="mso-eeat-cert-strip"><a href="https://maps.google.com/?q=Michigan+Sports+Outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg></span><span class="mso-eeat-item-title">Google Verified</span><span class="mso-eeat-badge-pill gold">5.0 Star</span></a><a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#005A9C"/><text x="12" y="16" fill="#ffffff" font-family="Arial, sans-serif" font-size="9" font-weight="900" text-anchor="middle">BBB</text></svg></span><span class="mso-eeat-item-title">BBB Accredited</span><span class="mso-eeat-badge-pill blue">A+ Rating</span></a><a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00b67a"/><path d="M12 4.5l2.32 7.13h7.5l-6.07 4.41 2.32 7.13L12 18.76l-6.07 4.41 2.32-7.13-6.07-4.41h7.5z" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">Trustpilot</span><span class="mso-eeat-badge-pill green">Verified</span></a><a href="https://www.bladeforums.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1e293b"/><path d="M5 19L19 5M5 5l14 14" stroke="#f5a623" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.8" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">BladeForums</span><span class="mso-eeat-badge-pill dark">Member</span></a><a href="https://www.michigan-sportsman.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#384c3c"/><path d="M12 3.5L5.5 13.5h4v7h5v-7h4L12 3.5z" fill="#f5a623"/></svg></span><span class="mso-eeat-item-title">MichiganSportsman</span><span class="mso-eeat-badge-pill forest">Partner</span></a></div>
 
-  <!-- 3. HERO BANNER (CRO-OPTIMIZED BLADE HQ PATTERN) -->
+  <!-- 3. HERO BANNER (CRO-OPTIMIZED SQUEEZED BANNER) -->
   <section class="mso-bhq-hero">
     <div class="mso-bhq-hero-overlay"></div>
     <div class="mso-bhq-hero-content">
@@ -324,15 +335,69 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
         <span>OCTOBER HUNTING OPENER</span> • 2026 CUTLERY DROP
       </div>
       <h1 class="mso-bhq-hero-title">DON'T BUY A BAD KNIFE.<br/><span>GET IT RIGHT THE FIRST TIME.</span></h1>
-      <p class="mso-bhq-hero-sub">America's premier sportsman &amp; outfitter. Over 7,000+ authentic fixed blades, folding knives &amp; backcountry field gear tested in the Northwoods for the fall hunting season.</p>
+      <p class="mso-bhq-hero-sub">America's premier sportsman &amp; outfitter. Over 7,000+ authentic fixed blades, folders &amp; backcountry field gear tested for the fall season.</p>
       <div class="mso-bhq-hero-actions">
         <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-hero-btn-primary">See The Winners</a>
         <a href="https://www.michigansportsoutdoor.com/product-category/knives-accessories/hunting-knives/" class="mso-bhq-hero-btn-secondary">Explore Hunting Cutlery</a>
       </div>
-      <div class="mso-bhq-hero-trust">
-        <div class="mso-bhq-hero-trust-item"><span class="mso-bhq-hero-trust-tag">[VERIFIED]</span> 100% Factory Authorized Dealer</div>
-        <div class="mso-bhq-hero-trust-item"><span class="mso-bhq-hero-trust-tag">[FAST]</span> Same-Day US Dispatch</div>
-        <div class="mso-bhq-hero-trust-item"><span class="mso-bhq-hero-trust-tag">[SECURE]</span> 30-Day Hassle-Free Guarantee</div>
+    </div>
+  </section>
+
+  <!-- 3.5. 4-PILLAR SMART USP TRUST BAR -->
+  <section class="mso-usp-bar">
+    <div class="mso-usp-item">
+      <div class="mso-usp-icon-box green">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13" rx="1"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+      </div>
+      <div class="mso-usp-text">
+        <span class="mso-usp-title">Fast US Dispatch</span>
+        <span class="mso-usp-sub">Ships in 24–48 hours with live tracking</span>
+      </div>
+    </div>
+
+    <div class="mso-usp-item">
+      <div class="mso-usp-icon-box blue">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <polyline points="9 12 11 14 15 10"></polyline>
+        </svg>
+      </div>
+      <div class="mso-usp-text">
+        <span class="mso-usp-title">100% Factory Authentic</span>
+        <span class="mso-usp-sub">Authorized USA dealer of top cutlery</span>
+      </div>
+    </div>
+
+    <div class="mso-usp-item">
+      <div class="mso-usp-icon-box amber">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+      </div>
+      <div class="mso-usp-text">
+        <span class="mso-usp-title">30-Day Hassle-Free</span>
+        <span class="mso-usp-sub">Easy returns &amp; USA customer care</span>
+      </div>
+    </div>
+
+    <div class="mso-usp-item">
+      <div class="mso-usp-icon-box slate">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      </div>
+      <div class="mso-usp-text">
+        <span class="mso-usp-title">7,000+ Gear In-Stock</span>
+        <span class="mso-usp-sub">Massive warehouse inventory ready</span>
       </div>
     </div>
   </section>
