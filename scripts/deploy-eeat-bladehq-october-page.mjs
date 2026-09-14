@@ -11,8 +11,8 @@ async function deployEEATBladeHQOctoberPage() {
     'Content-Type': 'application/json'
   };
 
-  // Blade HQ Signature Hero Background Image
-  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-2026.jpg';
+  // Blade HQ Signature Hero Background Image (Exact Knife Lineup on Blue Mat)
+  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-bladehq-inspired-hero-banner-2026.jpg';
 
   // Promo Cards
   const imgPromo1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-whitetail-fixed-blades-promo.jpg';
@@ -111,14 +111,14 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-eeat-badge-pill.forest { background: #ecfdf5 !important; color: #065f46 !important; border: 1px solid #a7f3d0 !important; }
 
 /* 3. Hero Banner (Blade HQ Format with Live Background & Headline) */
-.mso-bhq-hero { position: relative; width: 100%; min-height: 420px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center/cover no-repeat; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: flex; align-items: flex-end; padding: 48px 40px; box-sizing: border-box; }
-.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.45) 60%, rgba(15,23,42,0.75) 100%); }
-.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 720px; }
-.mso-bhq-hero-title { font-size: 44px; font-weight: 900; line-height: 1.05; color: #ffffff; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.mso-bhq-hero-sub { font-size: 16.5px; color: #e2e8f0; margin: 0 0 24px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.4); line-height: 1.45; }
+.mso-bhq-hero { position: relative; width: 100%; min-height: 440px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center/cover no-repeat; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: flex; align-items: center; padding: 48px 40px; box-sizing: border-box; }
+.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.72) 46%, rgba(15,23,42,0.12) 82%, rgba(15,23,42,0.25) 100%); }
+.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 580px; }
+.mso-bhq-hero-title { font-size: 46px; font-weight: 900; line-height: 1.04; color: #ffffff; text-transform: uppercase; margin: 0 0 12px 0; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
+.mso-bhq-hero-sub { font-size: 16px; color: #f1f5f9; margin: 0 0 24px 0; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.6); line-height: 1.45; }
 .mso-bhq-hero-action { position: absolute; bottom: 36px; right: 40px; z-index: 2; }
-.mso-bhq-hero-btn { background: #ffffff; color: #0066cc !important; font-size: 15px; font-weight: 900; padding: 12px 28px; border-radius: 25px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s, color 0.2s; }
-.mso-bhq-hero-btn:hover { background: #f5a623; color: #0f172a !important; transform: scale(1.04); }
+.mso-bhq-hero-btn { background: #ffffff; color: #0066cc !important; font-size: 15px; font-weight: 900; padding: 13px 30px; border-radius: 30px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 16px rgba(0,0,0,0.35); transition: transform 0.2s, background 0.2s, color 0.2s; display: inline-block; }
+.mso-bhq-hero-btn:hover { background: #f5a623; color: #0f172a !important; transform: scale(1.05); }
 
 /* 4. Brand Logo Strip (All 17 Brands from Homepage) */
 .mso-brand-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 20px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
