@@ -12,7 +12,7 @@ async function deployEEATBladeHQOctoberPage() {
   };
 
   // CRO-Optimized October Season & Cutlery Visuals
-  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-2026.jpg';
+  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-magna-2026.jpg';
   const imgPromo1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-whitetail-fixed-blades-promo.jpg';
   const imgPromo2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-special-edition-blades-drop.jpg';
   const imgPromo3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-fall-hunting-gift-guide-2026.jpg';
@@ -85,15 +85,22 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-eeat-cert-item { display: flex; align-items: center; gap: 6px; }
 .mso-eeat-badge-icon { background: #475d4b; color: #ffffff; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px; }
 
-/* 3. Hero Banner (Blade HQ Format) */
-.mso-bhq-hero { position: relative; width: 100%; min-height: 420px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center/cover no-repeat; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: flex; align-items: flex-end; padding: 48px 40px; box-sizing: border-box; }
-.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.45) 60%, rgba(15,23,42,0.75) 100%); }
-.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 720px; }
-.mso-bhq-hero-title { font-size: 44px; font-weight: 900; line-height: 1.05; color: #ffffff; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.mso-bhq-hero-sub { font-size: 16.5px; color: #e2e8f0; margin: 0 0 24px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.4); line-height: 1.45; }
-.mso-bhq-hero-action { position: absolute; bottom: 36px; right: 40px; z-index: 2; }
-.mso-bhq-hero-btn { background: #ffffff; color: #0066cc !important; font-size: 15px; font-weight: 900; padding: 12px 28px; border-radius: 25px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s, color 0.2s; }
-.mso-bhq-hero-btn:hover { background: #f5a623; color: #0f172a !important; transform: scale(1.04); }
+/* 3. Hero Banner (Blade HQ Format & CRO Optimized) */
+.mso-bhq-hero { position: relative; width: 100%; min-height: 480px; border-radius: 10px; overflow: hidden; background: #0f172a url('${imgHero}') center right/cover no-repeat; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.22); display: flex; align-items: center; padding: 48px 44px; box-sizing: border-box; }
+.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.82) 45%, rgba(15,23,42,0.30) 80%, rgba(15,23,42,0.15) 100%); }
+.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 640px; }
+.mso-bhq-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,76,60,0.92); border: 1px solid #f5a623; color: #f5a623; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; backdrop-filter: blur(4px); }
+.mso-bhq-hero-title { font-size: 42px; font-weight: 900; line-height: 1.08; color: #ffffff; text-transform: uppercase; margin: 0 0 12px 0; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.6); }
+.mso-bhq-hero-title span { color: #f5a623; }
+.mso-bhq-hero-sub { font-size: 15.5px; color: #cbd5e1; margin: 0 0 22px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.5; }
+.mso-bhq-hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.mso-bhq-hero-btn-primary { background: #ea580c; color: #ffffff !important; font-size: 14px; font-weight: 900; padding: 13px 28px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(234,88,12,0.4); transition: transform 0.2s, background 0.2s; }
+.mso-bhq-hero-btn-primary:hover { background: #c2410c; transform: translateY(-2px); }
+.mso-bhq-hero-btn-secondary { background: rgba(255,255,255,0.12); color: #ffffff !important; border: 1.5px solid rgba(255,255,255,0.6); font-size: 14px; font-weight: 900; padding: 11.5px 24px; border-radius: 6px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(4px); transition: all 0.2s; }
+.mso-bhq-hero-btn-secondary:hover { background: #ffffff; color: #0f172a !important; border-color: #ffffff; transform: translateY(-2px); }
+.mso-bhq-hero-trust { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; font-size: 12px; font-weight: 800; color: #94a3b8; }
+.mso-bhq-hero-trust-item { display: flex; align-items: center; gap: 5px; }
+.mso-bhq-hero-trust-tag { color: #10b981; font-weight: 900; }
 
 /* 4. Brand Logo Strip (All 17 Brands from Homepage) */
 .mso-brand-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 24px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); flex-wrap: wrap; }
@@ -234,9 +241,10 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-blade-club-footer { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .mso-bhq-hero { padding: 32px 20px; min-height: 340px; }
-  .mso-bhq-hero-title { font-size: 28px; }
-  .mso-bhq-hero-action { position: relative; bottom: auto; right: auto; margin-top: 16px; }
+  .mso-bhq-hero { padding: 28px 18px; min-height: 380px; background-position: center center; }
+  .mso-bhq-hero-title { font-size: 26px; }
+  .mso-bhq-hero-actions { flex-direction: column; align-items: stretch; }
+  .mso-bhq-hero-btn-primary, .mso-bhq-hero-btn-secondary { text-align: center; }
   .mso-opps-grid { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: 1fr; }
   .mso-big-trust-strip { grid-template-columns: 1fr; }
@@ -305,15 +313,24 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     </div>
   </div>
 
-  <!-- 3. HERO BANNER (BLADE HQ EXACT PATTERN) -->
+  <!-- 3. HERO BANNER (CRO-OPTIMIZED BLADE HQ PATTERN) -->
   <section class="mso-bhq-hero">
     <div class="mso-bhq-hero-overlay"></div>
     <div class="mso-bhq-hero-content">
-      <h1 class="mso-bhq-hero-title">DON'T BUY A BAD KNIFE.<br/>GET IT RIGHT THE FIRST TIME.</h1>
-      <p class="mso-bhq-hero-sub">Michigan Sportsman &amp; Outfitter — Over 7,000+ in-stock knives, hunting gear &amp; camp cutlery tested by American sportsmen for the October whitetail opener.</p>
-    </div>
-    <div class="mso-bhq-hero-action">
-      <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-hero-btn">See The Winners</a>
+      <div class="mso-bhq-hero-badge">
+        <span>OCTOBER HUNTING OPENER</span> • 2026 CUTLERY DROP
+      </div>
+      <h1 class="mso-bhq-hero-title">DON'T BUY A BAD KNIFE.<br/><span>GET IT RIGHT THE FIRST TIME.</span></h1>
+      <p class="mso-bhq-hero-sub">America's premier sportsman &amp; outfitter. Over 7,000+ authentic fixed blades, folding knives &amp; backcountry field gear tested in the Northwoods for the fall hunting season.</p>
+      <div class="mso-bhq-hero-actions">
+        <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-hero-btn-primary">See The Winners</a>
+        <a href="https://www.michigansportsoutdoor.com/product-category/knives-accessories/hunting-knives/" class="mso-bhq-hero-btn-secondary">Explore Hunting Cutlery</a>
+      </div>
+      <div class="mso-bhq-hero-trust">
+        <div class="mso-bhq-hero-trust-item"><span class="mso-bhq-hero-trust-tag">[VERIFIED]</span> 100% Factory Authorized Dealer</div>
+        <div class="mso-bhq-hero-trust-item"><span class="mso-bhq-hero-trust-tag">[FAST]</span> Same-Day US Dispatch</div>
+        <div class="mso-bhq-hero-trust-item"><span class="mso-bhq-hero-trust-tag">[SECURE]</span> 30-Day Hassle-Free Guarantee</div>
+      </div>
     </div>
   </section>
 
