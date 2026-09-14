@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-async function deployBladeHQMasterPortal() {
+async function deployExactBladeHQBlog() {
   const baseUrl = 'https://www.michigansportsoutdoor.com';
   const username = 'apiuser';
   const appPassword = 'cvxm Bi7y 6o3y r7HJ M1Wn mSMM';
@@ -13,180 +13,107 @@ async function deployBladeHQMasterPortal() {
 
   const authorPhotoUrl = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mubashar-shahzad-lead-cutlery-analyst.jpg';
 
-  // High-res, 100% verified working images
-  const imgHero = 'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=900&auto=format&fit=crop&q=80';
-  const imgCard1 = 'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=600&auto=format&fit=crop&q=80';
-  const imgCard2 = 'https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?w=600&auto=format&fit=crop&q=80';
-  const imgCard3 = 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80';
-  const imgCard4 = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format&fit=crop&q=80';
-  const imgCard5 = 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&auto=format&fit=crop&q=80';
-  const imgCard6 = 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&auto=format&fit=crop&q=80';
+  // High-res verified images matching the screenshot topics
+  const imgFeatured = 'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=900&auto=format&fit=crop&q=80'; // Knives lineup
+  const imgCard1 = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=700&auto=format&fit=crop&q=80';    // Sharpening on bench
+  const imgCard2 = 'https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?w=700&auto=format&fit=crop&q=80';    // National knife day / outdoor
+  const imgCard3 = 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=700&auto=format&fit=crop&q=80';    // Super steel blade
+  const imgCard4 = 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&auto=format&fit=crop&q=80';    // Tanto / tactical folder in hand
+  const imgCard5 = 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=700&auto=format&fit=crop&q=80';    // Bushcraft camp knife
+  const imgCard6 = 'https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=700&auto=format&fit=crop&q=80';    // Edge geometry & sharpening
 
-  // Real WordPress Media Library knife images
-  const imgGear1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/SOG18300643_add_01.jpg';
-  const imgGear2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/WE18062XA1_add_01.jpg';
-  const imgGear3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/VOSA4906_add_01.jpg';
-  const imgFavKnife = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/K1116A4_add_01.jpg';
+  // Circular Popular Tags
+  const tagImg1 = 'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=350&auto=format&fit=crop&q=80';
+  const tagImg2 = 'https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?w=350&auto=format&fit=crop&q=80';
+  const tagImg3 = 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=350&auto=format&fit=crop&q=80';
+  const tagImg4 = 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=350&auto=format&fit=crop&q=80';
+  const tagImg5 = 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=350&auto=format&fit=crop&q=80';
+  const tagImg6 = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=350&auto=format&fit=crop&q=80';
 
-  // Clean, minified CSS with no blank lines to prevent WordPress wpautop injection
+  // CSS adapted to MSO Brand Colors: Forest Green #475d4b, Amber Gold #f5a623, Pure White #ffffff
   const cleanCss = `
-html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-area,#primary,#main,.site-main,.entry-content,.entry-content-wrap,.page-content,.post-content,.container,.container-wrap,.page-wrapper,.site-main-content{background-color:#ffffff !important;background:#ffffff !important;color:#1e293b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-area,#primary,#main,.site-main,.entry-content,.entry-content-wrap,.page-content,.post-content,.container,.container-wrap,.page-wrapper,.site-main-content{background-color:#ffffff !important;background:#ffffff !important;color:#222222;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;}
 .entry-content{padding-left:0 !important;padding-right:0 !important;max-width:100% !important;width:100% !important;overflow-x:hidden;}
-.bhq-portal-wrapper{max-width:1440px;margin:0 auto;padding:0 24px 60px 24px;background:#ffffff;box-sizing:border-box;width:100%;}
-.bhq-header-banner{display:flex;align-items:center;justify-content:space-between;padding:24px 0 18px 0;border-bottom:2px solid #0f172a;margin-bottom:20px;}
-.bhq-brand-block{display:flex;align-items:baseline;gap:12px;}
-.bhq-logo-title{font-size:38px;font-weight:900;letter-spacing:-0.5px;color:#0f172a;margin:0;line-height:1;text-transform:uppercase;}
-.bhq-logo-title span{color:#0066cc;}
-.bhq-tagline{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#64748b;border-left:2px solid #e2e8f0;padding-left:12px;}
-.bhq-trust-strip{display:flex;align-items:center;gap:12px;}
-.bhq-trust-item{display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;padding:6px 12px;border-radius:4px;font-size:11.5px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:0.5px;}
-.bhq-trust-item strong{color:#0066cc;}
-.bhq-nav-bar{display:flex;align-items:center;justify-content:space-between;background:#0f172a;border-radius:6px;padding:4px 8px;margin-bottom:24px;}
-.bhq-category-tabs{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
-.bhq-category-tabs::-webkit-scrollbar{display:none;}
-.bhq-tab-btn{background:transparent;border:none;color:#cbd5e1;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:10px 18px;border-radius:4px;cursor:pointer;transition:all 0.2s ease;white-space:nowrap;}
-.bhq-tab-btn:hover{color:#ffffff;background:rgba(255,255,255,0.08);}
-.bhq-tab-btn.active{background:#0066cc;color:#ffffff;box-shadow:0 2px 8px rgba(0,102,204,0.4);}
-.bhq-nav-action{display:flex;align-items:center;gap:8px;padding-right:8px;}
-.bhq-shop-link{background:#ff6b00;color:#ffffff !important;text-decoration:none;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:8px 14px;border-radius:4px;transition:background 0.2s ease;white-space:nowrap;}
-.bhq-shop-link:hover{background:#e05e00;}
-.bhq-search-section{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px 20px;margin-bottom:28px;}
-.bhq-search-box-wrap{position:relative;display:flex;align-items:center;background:#ffffff;border:2px solid #cbd5e1;border-radius:6px;transition:border-color 0.2s ease,box-shadow 0.2s ease;}
-.bhq-search-box-wrap:focus-within{border-color:#0066cc;box-shadow:0 0 0 3px rgba(0,102,204,0.15);}
-.bhq-search-icon{padding-left:16px;font-size:16px;color:#64748b;}
-.bhq-search-input{flex:1;border:none;outline:none;padding:12px 14px;font-size:14.5px;font-weight:500;color:#0f172a;background:transparent;}
-.bhq-voice-btn{background:#f1f5f9;border:1px solid #cbd5e1;color:#334155;padding:7px 12px;margin-right:6px;border-radius:4px;cursor:pointer;font-size:14px;display:flex;align-items:center;gap:6px;font-weight:600;transition:all 0.2s ease;}
-.bhq-voice-btn:hover{background:#e2e8f0;color:#0f172a;}
-.bhq-voice-btn.listening{background:#ef4444;color:#ffffff;animation:bhqPulse 1.2s infinite;border-color:#ef4444;}
-@keyframes bhqPulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
-.bhq-search-submit{background:#0066cc;color:#ffffff;border:none;padding:10px 20px;margin-right:4px;border-radius:4px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;cursor:pointer;transition:background 0.2s ease;}
-.bhq-search-submit:hover{background:#0052a3;}
-.bhq-trending-tags{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
-.bhq-tag-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#64748b;}
-.bhq-tag-pill{background:#ffffff;border:1px solid #e2e8f0;padding:3px 10px;border-radius:12px;font-size:11.5px;font-weight:600;color:#334155;cursor:pointer;transition:all 0.2s ease;text-decoration:none;}
-.bhq-tag-pill:hover{border-color:#0066cc;color:#0066cc;background:#eff6ff;}
+.bhq-exact-container{max-width:1080px;margin:0 auto;padding:10px 20px 60px 20px;box-sizing:border-box;}
 
-/* 2-COLUMN MAIN PORTAL LAYOUT: CONTENT (70%) + SIDEBAR (30%) */
-.bhq-main-layout{display:grid;grid-template-columns:2.4fr 1fr;gap:32px;margin-bottom:48px;align-items:start;}
-.bhq-content-col{display:flex;flex-direction:column;gap:36px;}
-.bhq-sidebar-col{display:flex;flex-direction:column;gap:24px;position:sticky;top:20px;}
+/* TOP HEADER NAV (EXACT BLADE HQ REPLICA IN MSO BRAND GREEN) */
+.bhq-exact-header{display:flex;align-items:center;justify-content:space-between;background:#475d4b;padding:0 20px;border-radius:4px;margin-bottom:24px;min-height:56px;}
+.bhq-exact-brand-wrap{display:flex;align-items:center;gap:14px;}
+.bhq-exact-logo{display:flex;align-items:center;color:#ffffff;text-decoration:none;font-weight:900;font-size:22px;letter-spacing:0.5px;line-height:1;text-transform:uppercase;padding:12px 14px 12px 0;border-right:2px solid rgba(255,255,255,0.4);}
+.bhq-exact-logo-text{display:flex;flex-direction:column;font-size:18px;font-weight:900;line-height:0.95;letter-spacing:1px;}
+.bhq-exact-logo-text span{font-size:18px;}
+.bhq-exact-nav{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
+.bhq-exact-nav::-webkit-scrollbar{display:none;}
+.bhq-exact-nav-btn{background:transparent;border:none;color:#ffffff;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:8px 14px;border-radius:3px;cursor:pointer;transition:background 0.2s ease,color 0.2s ease;white-space:nowrap;}
+.bhq-exact-nav-btn:hover{background:rgba(255,255,255,0.15);color:#f5a623;}
+.bhq-exact-nav-btn.active{color:#f5a623;border-bottom:2px solid #f5a623;border-radius:0;}
+.bhq-exact-search-wrap{position:relative;display:flex;align-items:center;}
+.bhq-exact-search-input{background:#ffffff;border:1px solid #cbd5e1;border-radius:3px;padding:6px 32px 6px 12px;font-size:13px;width:170px;outline:none;transition:width 0.2s ease,border-color 0.2s ease;}
+.bhq-exact-search-input:focus{width:210px;border-color:#f5a623;}
+.bhq-exact-search-icon{position:absolute;right:8px;font-size:13px;color:#64748b;cursor:pointer;border:none;background:transparent;padding:0;}
 
-/* FEATURED HERO CARD */
-.bhq-featured-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);transition:transform 0.25s ease,box-shadow 0.25s ease;}
-.bhq-featured-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,0.1),0 8px 10px -6px rgba(0,0,0,0.06);}
-.bhq-featured-image-box{position:relative;width:100%;height:260px;background:#0f172a;overflow:hidden;}
-.bhq-featured-image-box img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;display:block;}
-.bhq-featured-card:hover .bhq-featured-image-box img{transform:scale(1.03);}
-.bhq-badge-strip{position:absolute;top:14px;left:14px;display:flex;gap:8px;}
-.bhq-badge-featured{background:#ff6b00;color:#ffffff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:4px 10px;border-radius:3px;}
-.bhq-badge-category{background:#0f172a;color:#ffffff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:4px 10px;border-radius:3px;}
-.bhq-featured-content{padding:22px;display:flex;flex-direction:column;}
-.bhq-score-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.bhq-knife-score{display:inline-flex;align-items:center;gap:4px;background:#eff6ff;color:#0066cc;font-size:12px;font-weight:800;padding:3px 8px;border-radius:4px;border:1px solid #bfdbfe;}
-.bhq-read-time{font-size:12px;font-weight:600;color:#64748b;}
-.bhq-featured-title{font-size:24px;font-weight:800;line-height:1.3;margin:0 0 10px 0;color:#0f172a;}
-.bhq-featured-title a{color:#0f172a;text-decoration:none;transition:color 0.2s ease;}
-.bhq-featured-title a:hover{color:#0066cc;}
-.bhq-featured-excerpt{font-size:14px;line-height:1.6;color:#334155;margin:0 0 16px 0;}
-.bhq-author-row{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #e2e8f0;}
-.bhq-author-meta{display:flex;align-items:center;gap:10px;}
-.bhq-author-avatar{width:42px;height:42px;border-radius:4px;object-fit:cover;border:1px solid #cbd5e1;display:block;}
-.bhq-author-info{display:flex;flex-direction:column;}
-.bhq-author-name{font-size:13px;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:5px;}
-.bhq-author-name .verified{color:#16a34a;font-size:12px;}
-.bhq-author-role{font-size:11px;color:#64748b;font-weight:500;}
-.bhq-read-btn{background:#0066cc;color:#ffffff !important;text-decoration:none;font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:4px;transition:background 0.2s ease;}
-.bhq-read-btn:hover{background:#0052a3;}
+/* FEATURED POST (SPLIT CARD) */
+.bhq-exact-featured-card{display:grid;grid-template-columns:1fr 1fr;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:28px;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:box-shadow 0.2s ease,transform 0.2s ease;}
+.bhq-exact-featured-card:hover{box-shadow:0 6px 16px rgba(0,0,0,0.08);transform:translateY(-2px);}
+.bhq-exact-featured-img-wrap{width:100%;height:270px;background:#f3f4f6;overflow:hidden;}
+.bhq-exact-featured-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;display:block;}
+.bhq-exact-featured-card:hover .bhq-exact-featured-img-wrap img{transform:scale(1.03);}
+.bhq-exact-featured-body{padding:24px;display:flex;flex-direction:column;justify-content:center;}
+.bhq-exact-featured-title{font-size:22px;font-weight:800;color:#111827;line-height:1.25;margin:0 0 10px 0;}
+.bhq-exact-featured-title a{color:#111827;text-decoration:none;transition:color 0.2s ease;}
+.bhq-exact-featured-title a:hover{color:#475d4b;}
+.bhq-exact-byline{font-size:11.5px;color:#6b7280;margin-bottom:12px;line-height:1.4;}
+.bhq-exact-byline strong{color:#475d4b;font-weight:700;}
+.bhq-exact-byline a{color:#475d4b;text-decoration:none;font-weight:700;}
+.bhq-exact-byline a:hover{text-decoration:underline;}
+.bhq-exact-author-avatar-mini{width:18px;height:18px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:4px;border:1px solid #d1d5db;}
+.bhq-exact-excerpt{font-size:13px;line-height:1.55;color:#4b5563;margin:0;}
 
-/* SECTION HEADERS */
-.bhq-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid #0f172a;}
-.bhq-section-title{font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.5px;color:#0f172a;margin:0;}
-.bhq-section-sub{font-size:12px;font-weight:600;color:#64748b;}
+/* ARTICLE GRID (2 EQUAL COLUMNS WITH ROUNDED CORNERS AS PER SCREENSHOT) */
+.bhq-exact-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:24px;margin-bottom:36px;}
+.bhq-exact-card{background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:box-shadow 0.2s ease,transform 0.2s ease;}
+.bhq-exact-card:hover{box-shadow:0 6px 16px rgba(0,0,0,0.08);transform:translateY(-2px);}
+.bhq-exact-card-img-wrap{width:100%;height:200px;background:#f3f4f6;overflow:hidden;}
+.bhq-exact-card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;display:block;}
+.bhq-exact-card:hover .bhq-exact-card-img-wrap img{transform:scale(1.03);}
+.bhq-exact-card-body{padding:20px;display:flex;flex-direction:column;flex:1;}
+.bhq-exact-card-title{font-size:18px;font-weight:800;line-height:1.3;color:#111827;margin:0 0 10px 0;min-height:46px;}
+.bhq-exact-card-title a{color:#111827;text-decoration:none;transition:color 0.2s ease;}
+.bhq-exact-card-title a:hover{color:#475d4b;}
+.bhq-exact-tags{font-size:11px;color:#9ca3af;margin-top:2px;margin-bottom:10px;}
+.bhq-exact-tags span{color:#475d4b;font-weight:600;}
 
-/* 3-CARD ARTICLES GRID (EXACTLY 3 EQUAL COLUMNS) */
-.bhq-articles-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;}
-.bhq-article-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);transition:transform 0.25s ease,box-shadow 0.25s ease;align-items:stretch;}
-.bhq-article-card:hover{transform:translateY(-3px);box-shadow:0 10px 25px -5px rgba(0,0,0,0.1),0 8px 10px -6px rgba(0,0,0,0.06);}
-.bhq-card-image-wrap{position:relative;width:100%;height:145px;background:#0f172a;overflow:hidden;}
-.bhq-card-image-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;display:block;}
-.bhq-article-card:hover .bhq-card-image-wrap img{transform:scale(1.05);}
-.bhq-card-pill{position:absolute;top:10px;left:10px;background:rgba(15,23,42,0.9);color:#ffffff;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:3px 8px;border-radius:3px;}
-.bhq-card-body{padding:16px;display:flex;flex-direction:column;flex:1;}
-.bhq-card-score-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.bhq-mini-score{font-size:11px;font-weight:800;color:#0066cc;background:#eff6ff;padding:2px 6px;border-radius:3px;border:1px solid #dbeafe;}
-.bhq-mini-date{font-size:11px;color:#64748b;font-weight:500;}
-.bhq-card-title{font-size:15px;font-weight:800;line-height:1.35;margin:0 0 8px 0;color:#0f172a;min-height:42px;}
-.bhq-card-title a{color:#0f172a;text-decoration:none;transition:color 0.2s ease;}
-.bhq-card-title a:hover{color:#0066cc;}
-.bhq-card-excerpt{font-size:12px;line-height:1.55;color:#334155;margin:0 0 14px 0;flex:1;}
-.bhq-card-author{display:flex;align-items:center;gap:8px;padding-top:12px;border-top:1px solid #f1f5f9;}
-.bhq-card-avatar{width:34px;height:34px;border-radius:4px;object-fit:cover;border:1px solid #e2e8f0;display:block;}
-.bhq-card-author-meta{display:flex;flex-direction:column;}
-.bhq-card-author-name{font-size:11.5px;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:4px;}
-.bhq-card-author-role{font-size:10px;color:#64748b;}
+/* LOAD MORE BUTTON */
+.bhq-exact-load-more-wrap{text-align:center;margin-bottom:48px;}
+.bhq-exact-load-more-btn{background:#ffffff;border:2px solid #222222;color:#222222;padding:10px 48px;font-size:13px;font-weight:800;border-radius:4px;cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;transition:all 0.2s ease;}
+.bhq-exact-load-more-btn:hover{background:#475d4b;border-color:#475d4b;color:#ffffff;}
 
-/* 3-CARD GEAR SECTION (EXACTLY 3 EQUAL COLUMNS) */
-.bhq-gear-section{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:22px;}
-.bhq-gear-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;}
-.bhq-gear-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:16px;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(0,0,0,0.04);transition:transform 0.2s ease,border-color 0.2s ease;}
-.bhq-gear-card:hover{transform:translateY(-2px);border-color:#0066cc;}
-.bhq-gear-img-box{width:100%;height:130px;background:#ffffff;display:flex;align-items:center;justify-content:center;margin-bottom:12px;border-radius:4px;overflow:hidden;}
-.bhq-gear-img-box img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
-.bhq-gear-stock{font-size:10.5px;font-weight:800;text-transform:uppercase;color:#16a34a;display:flex;align-items:center;gap:4px;margin-bottom:4px;}
-.bhq-gear-title{font-size:14px;font-weight:700;line-height:1.35;color:#0f172a;margin:0 0 4px 0;min-height:36px;}
-.bhq-gear-specs{font-size:11.5px;color:#64748b;margin-bottom:8px;}
-.bhq-gear-price{font-size:15px;font-weight:800;color:#0f172a;margin-bottom:12px;}
-.bhq-gear-cta{margin-top:auto;background:#0f172a;color:#ffffff !important;text-decoration:none;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:9px 12px;border-radius:4px;transition:background 0.2s ease;}
-.bhq-gear-card:hover .bhq-gear-cta{background:#0066cc;}
-
-/* SIDEBAR MODULES (UTILIZING THE PREVIOUSLY EMPTY SPACE) */
-.bhq-side-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);}
-.bhq-side-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:2px solid #0f172a;margin-bottom:14px;}
-.bhq-side-title{font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:0.6px;color:#0f172a;margin:0;}
-
-/* SIDEBAR: NEWSLETTER & VIP OFFERS */
-.bhq-side-offer-card{background:linear-gradient(135deg, #0f172a 0%, #1e293b 100%);color:#ffffff;border:none;}
-.bhq-side-offer-card .bhq-side-header{border-bottom-color:#334155;}
-.bhq-side-offer-card .bhq-side-title{color:#ffffff;}
-.bhq-side-offer-badge{background:#ff6b00;color:#ffffff;font-size:10px;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
-.bhq-side-offer-desc{font-size:12.5px;line-height:1.5;color:#cbd5e1;margin:0 0 14px 0;}
-.bhq-side-input{width:100%;box-sizing:border-box;background:#0f172a;border:1px solid #475569;padding:10px 12px;border-radius:4px;color:#ffffff;font-size:12.5px;margin-bottom:8px;outline:none;}
-.bhq-side-input:focus{border-color:#0066cc;}
-.bhq-side-btn{width:100%;background:#ff6b00;color:#ffffff;border:none;padding:10px;border-radius:4px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;cursor:pointer;transition:background 0.2s ease;}
-.bhq-side-btn:hover{background:#e05e00;}
-
-/* SIDEBAR: TRENDING BLOGS */
-.bhq-side-trend-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f1f5f9;text-decoration:none;color:inherit;}
-.bhq-side-trend-item:last-child{border-bottom:none;padding-bottom:0;}
-.bhq-side-trend-rank{font-size:20px;font-weight:900;color:#cbd5e1;line-height:1;min-width:24px;}
-.bhq-side-trend-item:hover .bhq-side-trend-rank{color:#0066cc;}
-.bhq-side-trend-body{display:flex;flex-direction:column;gap:3px;}
-.bhq-side-trend-cat{font-size:10px;font-weight:800;text-transform:uppercase;color:#0066cc;}
-.bhq-side-trend-title{font-size:12.5px;font-weight:700;line-height:1.35;color:#0f172a;transition:color 0.2s ease;}
-.bhq-side-trend-item:hover .bhq-side-trend-title{color:#0066cc;}
-.bhq-side-trend-meta{font-size:10.5px;color:#64748b;}
-
-/* SIDEBAR: FAVORITE KNIFE OF THE WEEK */
-.bhq-fav-product{display:flex;flex-direction:column;gap:10px;}
-.bhq-fav-img-wrap{width:100%;height:140px;background:#f8fafc;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.bhq-fav-img-wrap img{max-width:90%;max-height:90%;object-fit:contain;}
-.bhq-fav-title{font-size:13.5px;font-weight:800;color:#0f172a;margin:0;}
-.bhq-fav-steel{font-size:11.5px;color:#64748b;}
-.bhq-fav-price-row{display:flex;align-items:center;justify-content:space-between;}
-.bhq-fav-price{font-size:16px;font-weight:900;color:#0066cc;}
-.bhq-fav-cta{background:#0f172a;color:#ffffff !important;text-decoration:none;padding:7px 12px;border-radius:4px;font-size:11.5px;font-weight:700;text-transform:uppercase;transition:background 0.2s ease;}
-.bhq-fav-cta:hover{background:#0066cc;}
-
-/* SIDEBAR: POPULAR CATEGORIES LIST */
-.bhq-side-cats{display:flex;flex-direction:column;gap:6px;}
-.bhq-side-cat-link{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#f8fafc;border-radius:4px;text-decoration:none;color:#1e293b;font-size:12px;font-weight:600;transition:all 0.2s ease;}
-.bhq-side-cat-link:hover{background:#eff6ff;color:#0066cc;}
-.bhq-side-cat-count{background:#e2e8f0;color:#475569;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:10px;}
+/* POPULAR TAGS SECTION (CIRCULAR IMAGES AS PER MEDIA_1789374222403.PNG) */
+.bhq-exact-tags-section{margin-top:20px;padding-top:24px;border-top:1px solid #e5e7eb;text-align:center;}
+.bhq-exact-tags-heading{font-size:17px;font-weight:800;color:#111827;margin:0 0 20px 0;}
+.bhq-exact-circle-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;max-width:720px;margin:0 auto 30px auto;}
+.bhq-exact-circle-item{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1 / 1;border-radius:50%;overflow:hidden;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);transition:transform 0.25s ease,box-shadow 0.25s ease;}
+.bhq-exact-circle-item:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(0,0,0,0.2);}
+.bhq-exact-circle-item img{width:100%;height:100%;object-fit:cover;display:block;}
+.bhq-exact-circle-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;padding:12px;text-align:center;transition:background 0.2s ease;}
+.bhq-exact-circle-item:hover .bhq-exact-circle-overlay{background:rgba(71,93,75,0.65);}
+.bhq-exact-circle-label{color:#ffffff;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;line-height:1.2;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
 
 /* RESPONSIVE */
-@media (max-width:1100px){.bhq-main-layout{grid-template-columns:1fr;}.bhq-sidebar-col{position:static;}}
-@media (max-width:850px){.bhq-articles-grid{grid-template-columns:repeat(2, 1fr);}.bhq-gear-grid{grid-template-columns:repeat(2, 1fr);}}
-@media (max-width:600px){.bhq-header-banner{flex-direction:column;align-items:flex-start;gap:12px;}.bhq-trust-strip{flex-wrap:wrap;}.bhq-articles-grid{grid-template-columns:1fr;}.bhq-gear-grid{grid-template-columns:1fr;}.bhq-nav-bar{flex-direction:column;gap:10px;align-items:stretch;}.bhq-category-tabs{overflow-x:auto;padding-bottom:4px;}.bhq-shop-link{text-align:center;}}
+@media (max-width:850px){
+  .bhq-exact-featured-card{grid-template-columns:1fr;}
+  .bhq-exact-featured-img-wrap{height:220px;}
+  .bhq-exact-grid{grid-template-columns:1fr;}
+  .bhq-exact-circle-grid{grid-template-columns:repeat(2, 1fr);max-width:440px;}
+}
+@media (max-width:650px){
+  .bhq-exact-header{flex-direction:column;align-items:stretch;gap:12px;padding:14px;}
+  .bhq-exact-brand-wrap{justify-content:space-between;}
+  .bhq-exact-nav{justify-content:center;padding-bottom:4px;}
+  .bhq-exact-search-input{width:100%;}
+  .bhq-exact-circle-grid{grid-template-columns:repeat(2, 1fr);gap:16px;}
+  .bhq-exact-circle-label{font-size:13px;}
+}
 `;
 
   const blogHtml = `<!-- ======================================================== -->
@@ -200,13 +127,13 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
       "@type": "CollectionPage",
       "@id": "https://www.michigansportsoutdoor.com/blog/#webpage",
       "url": "https://www.michigansportsoutdoor.com/blog/",
-      "name": "Knife Life | Michigan Sports Outdoor Cutlery & Gear Journal",
-      "description": "The premier cutlery authority and outdoor knife journal, inspired by Knife Life. Led by Mubashar Shahzad and the Michigan Editorial Team.",
+      "name": "Knife Blog | Michigan Sports Outdoor Cutlery Journal",
+      "description": "The premier authority for knife enthusiasts, hunting blades, and steel guides. Led by Mubashar Shahzad and the Michigan Editorial Team.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.michigansportsoutdoor.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Knife Life Blog", "item": "https://www.michigansportsoutdoor.com/blog/" }
+          { "@type": "ListItem", "position": 2, "name": "Knife Blog", "item": "https://www.michigansportsoutdoor.com/blog/" }
         ]
       },
       "publisher": {
@@ -225,31 +152,31 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
             "@type": "ListItem",
             "position": 1,
             "url": "https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/",
-            "name": "Best Hunting Knives for Michigan Deer Season (2026 Field-Tested Guide)"
+            "name": "Best Steels for Your Budget: 2026 Knife Steel Guide"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "url": "https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/",
-            "name": "Crucible CPM MagnaCut vs Böhler M390MK: Lab Edge Test"
+            "url": "https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/",
+            "name": "Edge Retention & Ease of Sharpening: What's the Difference?"
           },
           {
             "@type": "ListItem",
             "position": 3,
             "url": "https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/",
-            "name": "Morakniv Companion vs Kansbol vs Garberg: Ultimate Camp Knife Battle"
+            "name": "The Real History of National Knife Day [With Evidence]"
           },
           {
             "@type": "ListItem",
             "position": 4,
-            "url": "https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/",
-            "name": "How to Sharpen a Hunting Knife with a Turn-Box at Camp"
+            "url": "https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/",
+            "name": "Carpenter's A-421 Steel: Is It Better Than MagnaCut?"
           },
           {
             "@type": "ListItem",
             "position": 5,
             "url": "https://www.michigansportsoutdoor.com/top-best-edc-knives-under-100/",
-            "name": "Top 5 Best EDC Pocket Knives Under $100 for Fall 2026"
+            "name": "PM2 Tanto Sold Out: Official Statement + Upcoming Drop"
           },
           {
             "@type": "ListItem",
@@ -272,688 +199,398 @@ html,body,#page,#wrapper,.site,.site-wrapper,.site-content,#content,.content-are
 <style>${cleanCss.replace(/\r?\n|\r/g, ' ').trim()}</style>
 
 <!-- ======================================================== -->
-<!-- 2. BLADE HQ "KNIFE LIFE" DOM STRUCTURE                   -->
+<!-- 2. EXACT BLADE HQ BLOG REPLICA DOM                       -->
 <!-- ======================================================== -->
-<div class="bhq-portal-wrapper">
+<div class="bhq-exact-container">
 
-  <!-- 2.1 TOP HEADER & BRAND BAR -->
-  <header class="bhq-header-banner">
-    <div class="bhq-brand-block">
-      <h1 class="bhq-logo-title">KNIFE <span>LIFE</span></h1>
-      <div class="bhq-tagline">Michigan Sports Outdoor Cutlery Journal</div>
+  <!-- 2.1 HEADER BAR (KNIFE | BLOG + NAV + SEARCH) -->
+  <header class="bhq-exact-header">
+    <div class="bhq-exact-brand-wrap">
+      <a href="https://www.michigansportsoutdoor.com/blog/" class="bhq-exact-logo">
+        <div class="bhq-exact-logo-text">
+          <span>KNIFE</span>
+          <span>BLOG</span>
+        </div>
+      </a>
+      <nav class="bhq-exact-nav" aria-label="Knife Blog Categories">
+        <button class="bhq-exact-nav-btn active" data-cat="all">All</button>
+        <button class="bhq-exact-nav-btn" data-cat="learn">LEARN</button>
+        <button class="bhq-exact-nav-btn" data-cat="best-of">BEST OF</button>
+        <button class="bhq-exact-nav-btn" data-cat="reviews">REVIEWS</button>
+        <button class="bhq-exact-nav-btn" data-cat="culture">CULTURE</button>
+        <button class="bhq-exact-nav-btn" data-cat="news">NEWS</button>
+      </nav>
     </div>
-    
-    <!-- E-E-A-T TRUST STRIP -->
-    <div class="bhq-trust-strip">
-      <div class="bhq-trust-item" title="Active member of the Northwoods cutlery community">
-        <span>🛡️ Member of <strong>BladeForums</strong></span>
-      </div>
-      <div class="bhq-trust-item" title="Verified Outfitter Merchant">
-        <span>📦 Available on <strong>Amazon</strong></span>
-      </div>
-      <div class="bhq-trust-item" title="A+ Accredited Business">
-        <span>⭐ <strong>BBB Registered</strong> A+</span>
-      </div>
+
+    <div class="bhq-exact-search-wrap">
+      <input 
+        type="text" 
+        id="bhqExactSearch" 
+        class="bhq-exact-search-input" 
+        placeholder="Search Blog..." 
+        autocomplete="off" 
+      />
+      <button type="button" id="bhqExactSearchBtn" class="bhq-exact-search-icon" title="Search">🔍</button>
     </div>
   </header>
 
-  <!-- 2.2 BLADE HQ 5-PILLAR NAVIGATION TABS -->
-  <nav class="bhq-nav-bar" aria-label="Knife Life Categories">
-    <div class="bhq-category-tabs" id="bhqCatTabs">
-      <button class="bhq-tab-btn active" data-cat="all">All Stories</button>
-      <button class="bhq-tab-btn" data-cat="learn">Learn</button>
-      <button class="bhq-tab-btn" data-cat="best-of">Best Of</button>
-      <button class="bhq-tab-btn" data-cat="reviews">Reviews</button>
-      <button class="bhq-tab-btn" data-cat="culture">Culture</button>
-      <button class="bhq-tab-btn" data-cat="news">News</button>
+  <!-- 2.2 TOP FEATURED STORY (SPLIT CARD: IMAGE + CONTENT) -->
+  <article class="bhq-exact-featured-card" data-category="best-of">
+    <div class="bhq-exact-featured-img-wrap">
+      <a href="https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/">
+        <img 
+          src="${imgFeatured}" 
+          alt="Best Steels for Your Budget: Knife Lineup" 
+          loading="eager"
+        />
+      </a>
     </div>
-    <div class="bhq-nav-action">
-      <a href="https://www.michigansportsoutdoor.com/shop/" class="bhq-shop-link">Shop Knife Store →</a>
+    <div class="bhq-exact-featured-body">
+      <h2 class="bhq-exact-featured-title">
+        <a href="https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/">
+          Best Steels for Your Budget (2026 Cutlery & Hunting Guide)
+        </a>
+      </h2>
+      <div class="bhq-exact-byline">
+        <img src="${authorPhotoUrl}" alt="Mubashar Shahzad" class="bhq-exact-author-avatar-mini" />
+        <a href="#">Mubashar Shahzad</a> on September 14, 2026, in <a href="#">Best of</a>, <a href="#">Type</a>
+      </div>
+      <p class="bhq-exact-excerpt">
+        What's the best steel for your budget? What's the highest-value knife with that steel? If you're asking these questions, you've come to the right place! In this article, we'll breakdown all the best steel types for high, medium, and low budgets, and present some of the highest-value knives on the market right now. In This...
+      </p>
     </div>
-  </nav>
+  </article>
 
-  <!-- 2.3 UTILITY SEARCH & VOICE ENGINE -->
-  <section class="bhq-search-section">
-    <div class="bhq-search-box-wrap">
-      <span class="bhq-search-icon">🔍</span>
-      <input 
-        type="text" 
-        id="bhqSearchInput" 
-        class="bhq-search-input" 
-        placeholder="Search knife guides, steels, reviews, or models..." 
-        autocomplete="off" 
-      />
-      <button type="button" id="bhqVoiceBtn" class="bhq-voice-btn" title="Click to speak your search term">
-        <span>🎙️</span>
-        <span id="bhqVoiceStatus">Voice</span>
-      </button>
-      <button type="button" id="bhqSearchSubmit" class="bhq-search-submit">Search</button>
-    </div>
+  <!-- 2.3 ARTICLE GRID (2 EQUAL COLUMNS WITH ROUNDED CORNERS) -->
+  <div class="bhq-exact-grid" id="bhqExactGrid">
 
-    <!-- QUICK TRENDING PILLS -->
-    <div class="bhq-trending-tags">
-      <span class="bhq-tag-label">Popular Searches:</span>
-      <a class="bhq-tag-pill" data-query="Deer Hunting Knives">Deer Hunting Knives</a>
-      <a class="bhq-tag-pill" data-query="CPM MagnaCut">CPM MagnaCut</a>
-      <a class="bhq-tag-pill" data-query="Turn-Box Sharpening">Turn-Box Sharpening</a>
-      <a class="bhq-tag-pill" data-query="Mora Companion">Mora Companion</a>
-      <a class="bhq-tag-pill" data-query="EDC Folders Under $100">EDC Folders Under $100</a>
-      <a class="bhq-tag-pill" data-query="Blade Geometry">Blade Geometry</a>
-    </div>
-  </section>
-
-  <!-- 2.4 MAIN PORTAL LAYOUT: CONTENT + SIDEBAR -->
-  <div class="bhq-main-layout">
-
-    <!-- LEFT COLUMN: MAIN CONTENT FEED -->
-    <div class="bhq-content-col">
-
-      <!-- FEATURED HERO SPOTLIGHT -->
-      <article class="bhq-featured-card" data-category="best-of">
-        <div class="bhq-featured-image-box">
+    <!-- CARD 1: EDGE RETENTION & SHARPENING -->
+    <article class="bhq-exact-card" data-category="learn">
+      <div class="bhq-exact-card-img-wrap">
+        <a href="https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/">
           <img 
-            src="${imgHero}" 
-            alt="Best Hunting Knives for Michigan Deer Season" 
-            loading="eager"
+            src="${imgCard1}" 
+            alt="Edge Retention and Ease of Sharpening" 
+            loading="lazy"
           />
-          <div class="bhq-badge-strip">
-            <span class="bhq-badge-featured">Featured Guide</span>
-            <span class="bhq-badge-category">Best Of 2026</span>
-          </div>
+        </a>
+      </div>
+      <div class="bhq-exact-card-body">
+        <h3 class="bhq-exact-card-title">
+          <a href="https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/">
+            Edge Retention & Ease of Sharpening: What's the Difference?
+          </a>
+        </h3>
+        <div class="bhq-exact-byline">
+          <img src="${authorPhotoUrl}" alt="Mubashar Shahzad" class="bhq-exact-author-avatar-mini" />
+          <a href="#">Mubashar Shahzad</a> on August 27, 2026, in <a href="#">Knife Knowledge</a>, <a href="#">Learn</a>
         </div>
-        <div class="bhq-featured-content">
-          <div class="bhq-score-bar">
-            <span class="bhq-knife-score">⭐ 9.8 / 10 Knife Life Score</span>
-            <span class="bhq-read-time">⏱️ 8 Min Read • Whitetail Opener</span>
-          </div>
-          <h2 class="bhq-featured-title">
-            <a href="https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/">
-              Best Hunting Knives for Michigan Deer Season (2026 Field-Tested Guide)
-            </a>
-          </h2>
-          <p class="bhq-featured-excerpt">
-            We torture-tested 12 premier fixed blades and field folders across Northern Michigan big woods. Discover edge retention metrics, gut hook mechanics, and why Crucible CPM MagnaCut steel reigns supreme for 2026 tag holders.
-          </p>
-          <div class="bhq-author-row">
-            <div class="bhq-author-meta">
-              <img 
-                src="${authorPhotoUrl}" 
-                alt="Mubashar Shahzad" 
-                class="bhq-author-avatar" 
-              />
-              <div class="bhq-author-info">
-                <div class="bhq-author-name">
-                  Mubashar Shahzad <span class="verified" title="Verified Cutlery Specialist">✔</span>
-                </div>
-                <div class="bhq-author-role">Lead Cutlery Analyst & Whitetail Field Tester</div>
-              </div>
-            </div>
-            <a href="https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/" class="bhq-read-btn">
-              Read Full Guide →
-            </a>
-          </div>
+        <div class="bhq-exact-tags">
+          Tags: <span>Edge Retention</span>, <span>Sharpening</span>
         </div>
-      </article>
-
-      <!-- SECTION 1: LATEST KNIFE GUIDES & FIELD TESTS (EXACTLY 3 CARDS PER ROW) -->
-      <section>
-        <div class="bhq-section-header">
-          <h3 class="bhq-section-title" id="bhqFeedTitle">Latest Knife Guides & Field Tests</h3>
-          <span class="bhq-section-sub">Reviewed by Mubashar Shahzad & Michigan Editorial Team</span>
-        </div>
-
-        <div class="bhq-articles-grid" id="bhqArticlesGrid">
-          
-          <!-- CARD 1: BEST OF / HUNTING -->
-          <article class="bhq-article-card" data-category="best-of">
-            <div class="bhq-card-image-wrap">
-              <img 
-                src="${imgCard1}" 
-                alt="Best Hunting Knives for Michigan Deer Season" 
-                loading="lazy"
-              />
-              <span class="bhq-card-pill">Best Of</span>
-            </div>
-            <div class="bhq-card-body">
-              <div class="bhq-card-score-row">
-                <span class="bhq-mini-score">⭐ 9.8 Score</span>
-                <span class="bhq-mini-date">Sep 14, 2026 • 8 min</span>
-              </div>
-              <h4 class="bhq-card-title">
-                <a href="https://www.michigansportsoutdoor.com/best-hunting-knives-for-michigan-deer-season-3/">
-                  Best Hunting Knives for Michigan Deer Season (2026 Guide)
-                </a>
-              </h4>
-              <p class="bhq-card-excerpt">
-                Field testing fixed blades vs drop point folders for whitetail processing in damp Michigan conditions.
-              </p>
-              <div class="bhq-card-author">
-                <img 
-                  src="${authorPhotoUrl}" 
-                  alt="Mubashar Shahzad" 
-                  class="bhq-card-avatar"
-                />
-                <div class="bhq-card-author-meta">
-                  <div class="bhq-card-author-name">
-                    Mubashar Shahzad <span style="color:#16a34a;">✔</span>
-                  </div>
-                  <div class="bhq-card-author-role">Lead Cutlery Analyst</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 2: REVIEWS / STEEL SHOWDOWN -->
-          <article class="bhq-article-card" data-category="reviews">
-            <div class="bhq-card-image-wrap">
-              <img 
-                src="${imgCard2}" 
-                alt="CPM MagnaCut vs M390MK" 
-                loading="lazy"
-              />
-              <span class="bhq-card-pill">Reviews</span>
-            </div>
-            <div class="bhq-card-body">
-              <div class="bhq-card-score-row">
-                <span class="bhq-mini-score">⭐ 9.6 Score</span>
-                <span class="bhq-mini-date">Sep 12, 2026 • 6 min</span>
-              </div>
-              <h4 class="bhq-card-title">
-                <a href="https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/">
-                  Crucible CPM MagnaCut vs Böhler M390MK: Lab Edge Test
-                </a>
-              </h4>
-              <p class="bhq-card-excerpt">
-                CATRA edge retention data and toughness stress tests to see which super steel reigns supreme.
-              </p>
-              <div class="bhq-card-author">
-                <img 
-                  src="${authorPhotoUrl}" 
-                  alt="Mubashar Shahzad" 
-                  class="bhq-card-avatar"
-                />
-                <div class="bhq-card-author-meta">
-                  <div class="bhq-card-author-name">
-                    Mubashar Shahzad <span style="color:#16a34a;">✔</span>
-                  </div>
-                  <div class="bhq-card-author-role">Metallurgy & Field Specialist</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 3: REVIEWS / MORA SHOWDOWN -->
-          <article class="bhq-article-card" data-category="reviews">
-            <div class="bhq-card-image-wrap">
-              <img 
-                src="${imgCard3}" 
-                alt="Morakniv Companion vs Kansbol vs Garberg" 
-                loading="lazy"
-              />
-              <span class="bhq-card-pill">Reviews</span>
-            </div>
-            <div class="bhq-card-body">
-              <div class="bhq-card-score-row">
-                <span class="bhq-mini-score">⭐ 9.4 Score</span>
-                <span class="bhq-mini-date">Sep 10, 2026 • 7 min</span>
-              </div>
-              <h4 class="bhq-card-title">
-                <a href="https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/">
-                  Morakniv Companion vs Kansbol vs Garberg Showdown
-                </a>
-              </h4>
-              <p class="bhq-card-excerpt">
-                Batoning oak and feather sticking pine to evaluate Sweden's most iconic outdoor knives.
-              </p>
-              <div class="bhq-card-author">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" 
-                  alt="Michigan Editorial Team" 
-                  class="bhq-card-avatar"
-                />
-                <div class="bhq-card-author-meta">
-                  <div class="bhq-card-author-name">
-                    Michigan Editorial Team <span style="color:#16a34a;">✔</span>
-                  </div>
-                  <div class="bhq-card-author-role">MSO Cutlery Review Board</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 4: LEARN / SHARPENING -->
-          <article class="bhq-article-card" data-category="learn">
-            <div class="bhq-card-image-wrap">
-              <img 
-                src="${imgCard4}" 
-                alt="How to Sharpen a Hunting Knife with a Turn-Box" 
-                loading="lazy"
-              />
-              <span class="bhq-card-pill">Learn</span>
-            </div>
-            <div class="bhq-card-body">
-              <div class="bhq-card-score-row">
-                <span class="bhq-mini-score">⭐ 9.5 Score</span>
-                <span class="bhq-mini-date">Sep 08, 2026 • 5 min</span>
-              </div>
-              <h4 class="bhq-card-title">
-                <a href="https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/">
-                  How to Sharpen a Hunting Knife with a Turn-Box at Camp
-                </a>
-              </h4>
-              <p class="bhq-card-excerpt">
-                Step-by-step angle guide for maintaining a razor edge in the backcountry with ceramic and diamond rods.
-              </p>
-              <div class="bhq-card-author">
-                <img 
-                  src="${authorPhotoUrl}" 
-                  alt="Mubashar Shahzad" 
-                  class="bhq-card-avatar" 
-                />
-                <div class="bhq-card-author-meta">
-                  <div class="bhq-card-author-name">
-                    Mubashar Shahzad <span style="color:#16a34a;">✔</span>
-                  </div>
-                  <div class="bhq-card-author-role">Master Field Sharpener</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 5: BEST OF / EDC FOLDERS -->
-          <article class="bhq-article-card" data-category="best-of">
-            <div class="bhq-card-image-wrap">
-              <img 
-                src="${imgCard5}" 
-                alt="Top 5 Best EDC Pocket Knives Under $100" 
-                loading="lazy"
-              />
-              <span class="bhq-card-pill">Best Of</span>
-            </div>
-            <div class="bhq-card-body">
-              <div class="bhq-card-score-row">
-                <span class="bhq-mini-score">⭐ 9.7 Score</span>
-                <span class="bhq-mini-date">Sep 06, 2026 • 7 min</span>
-              </div>
-              <h4 class="bhq-card-title">
-                <a href="https://www.michigansportsoutdoor.com/top-best-edc-knives-under-100/">
-                  Top 5 Best EDC Pocket Knives Under $100 for Fall 2026
-                </a>
-              </h4>
-              <p class="bhq-card-excerpt">
-                Budget-friendly everyday carry blades that offer premium action, D2/14C28N steels, and dependable pocket clips.
-              </p>
-              <div class="bhq-card-author">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" 
-                  alt="Michigan Editorial Team" 
-                  class="bhq-card-avatar"
-                />
-                <div class="bhq-card-author-meta">
-                  <div class="bhq-card-author-name">
-                    Michigan Editorial Team <span style="color:#16a34a;">✔</span>
-                  </div>
-                  <div class="bhq-card-author-role">EDC Gear Evaluation Unit</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD 6: LEARN / KNIFE ANATOMY -->
-          <article class="bhq-article-card" data-category="learn">
-            <div class="bhq-card-image-wrap">
-              <img 
-                src="${imgCard6}" 
-                alt="Knife Edge Geometry Hollow vs Flat Grind" 
-                loading="lazy"
-              />
-              <span class="bhq-card-pill">Learn</span>
-            </div>
-            <div class="bhq-card-body">
-              <div class="bhq-card-score-row">
-                <span class="bhq-mini-score">⭐ 9.3 Score</span>
-                <span class="bhq-mini-date">Sep 04, 2026 • 6 min</span>
-              </div>
-              <h4 class="bhq-card-title">
-                <a href="https://www.michigansportsoutdoor.com/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/">
-                  Understanding Knife Edge Geometry: Hollow vs Flat Grind
-                </a>
-              </h4>
-              <p class="bhq-card-excerpt">
-                An engineering analysis of bevel profiles, edge thickness behind the apex, and slicing vs chopping performance.
-              </p>
-              <div class="bhq-card-author">
-                <img 
-                  src="${authorPhotoUrl}" 
-                  alt="Mubashar Shahzad" 
-                  class="bhq-card-avatar" 
-                />
-                <div class="bhq-card-author-meta">
-                  <div class="bhq-card-author-name">
-                    Mubashar Shahzad <span style="color:#16a34a;">✔</span>
-                  </div>
-                  <div class="bhq-card-author-role">Edge Geometry Specialist</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <!-- SECTION 2: SHOP TESTED GEAR (EXACTLY 3 EQUAL CARDS) -->
-      <section class="bhq-gear-section">
-        <div class="bhq-section-header">
-          <h3 class="bhq-section-title">Shop The Gear • Tested in Our Field Guides</h3>
-          <span class="bhq-section-sub">In-Stock at Michigan Sports Outdoor Cutlery Store</span>
-        </div>
-
-        <div class="bhq-gear-grid">
-          
-          <!-- ITEM 1: SOG TACTICAL -->
-          <div class="bhq-gear-card">
-            <div class="bhq-gear-img-box">
-              <img 
-                src="${imgGear1}" 
-                alt="SOG Field Cutlery" 
-                loading="lazy"
-              />
-            </div>
-            <div class="bhq-gear-stock">● In Stock • Ships Today</div>
-            <h4 class="bhq-gear-title">SOG Aegis AT Tanto Folder</h4>
-            <div class="bhq-gear-specs">Cryo D2 Steel • GRN Grip • Assisted</div>
-            <div class="bhq-gear-price">$74.99</div>
-            <a href="https://www.michigansportsoutdoor.com/shop/" class="bhq-gear-cta">Buy from MSO →</a>
-          </div>
-
-          <!-- ITEM 2: WE KNIFE -->
-          <div class="bhq-gear-card">
-            <div class="bhq-gear-img-box">
-              <img 
-                src="${imgGear2}" 
-                alt="WE Knife Super Steel Folder" 
-                loading="lazy"
-              />
-            </div>
-            <div class="bhq-gear-stock">● In Stock • Ships Today</div>
-            <h4 class="bhq-gear-title">WE Knife Banter Titanium</h4>
-            <div class="bhq-gear-specs">CPM-S35VN Super Steel • Deep Carry</div>
-            <div class="bhq-gear-price">$129.95</div>
-            <a href="https://www.michigansportsoutdoor.com/shop/" class="bhq-gear-cta">Buy from MSO →</a>
-          </div>
-
-          <!-- ITEM 3: VIPER OUTDOOR -->
-          <div class="bhq-gear-card">
-            <div class="bhq-gear-img-box">
-              <img 
-                src="${imgGear3}" 
-                alt="Viper Northwoods Fixed Blade" 
-                loading="lazy"
-              />
-            </div>
-            <div class="bhq-gear-stock">● In Stock • Ships Today</div>
-            <h4 class="bhq-gear-title">Viper Berus 2 Drop Point</h4>
-            <div class="bhq-gear-specs">Böhler M390 Steel • Kydex Sheath</div>
-            <div class="bhq-gear-price">$149.95</div>
-            <a href="https://www.michigansportsoutdoor.com/shop/" class="bhq-gear-cta">Buy from MSO →</a>
-          </div>
-
-        </div>
-      </section>
-
-    </div>
-
-    <!-- RIGHT COLUMN: RICH FEATURE SIDEBAR (FILLS THE PREVIOUSLY BLANK SPACE) -->
-    <aside class="bhq-sidebar-col">
-
-      <!-- SIDEBAR MODULE 1: VIP NEWSLETTER & 15% OFF OFFERS -->
-      <div class="bhq-side-card bhq-side-offer-card">
-        <div class="bhq-side-header">
-          <h4 class="bhq-side-title">🎁 VIP Knife Club</h4>
-          <span class="bhq-side-offer-badge">15% Off</span>
-        </div>
-        <p class="bhq-side-offer-desc">
-          Subscribe for secret restock alerts, limited steel drops, and get our <strong>Free 2026 Whitetail Field Dressing & Steel Guide</strong> instantly.
+        <p class="bhq-exact-excerpt">
+          Are Edge Retention & Ease of Sharpening the Same? What's the difference between edge retention and ease of sharpening, you ask? First off, it's a good question! If you're familiar with our Knife Steel Guide, you'll know the four aspects we use to rate each steel. After perusing the various rankings, you may have noticed...
         </p>
-        <form onsubmit="event.preventDefault(); alert('Success! Your 15% discount code and 2026 Guide have been emailed.');">
-          <input type="email" class="bhq-side-input" placeholder="Enter your email address..." required />
-          <button type="submit" class="bhq-side-btn">Get 15% Off & Free Guide →</button>
-        </form>
       </div>
+    </article>
 
-      <!-- SIDEBAR MODULE 2: TRENDING BLOGS (01 TO 04) -->
-      <div class="bhq-side-card">
-        <div class="bhq-side-header">
-          <h4 class="bhq-side-title">🔥 Trending on Knife Life</h4>
-          <span style="font-size:10.5px; font-weight:700; color:#0066cc;">HOT POSTS</span>
-        </div>
-
-        <a href="https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/" class="bhq-side-trend-item">
-          <div class="bhq-side-trend-rank">01</div>
-          <div class="bhq-side-trend-body">
-            <span class="bhq-side-trend-cat">Reviews • Super Steels</span>
-            <div class="bhq-side-trend-title">Crucible CPM MagnaCut vs Böhler M390MK Lab Test</div>
-            <div class="bhq-side-trend-meta">By Mubashar Shahzad • 6 min read</div>
-          </div>
-        </a>
-
-        <a href="https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/" class="bhq-side-trend-item">
-          <div class="bhq-side-trend-rank">02</div>
-          <div class="bhq-side-trend-body">
-            <span class="bhq-side-trend-cat">Reviews • Bushcraft</span>
-            <div class="bhq-side-trend-title">Morakniv Companion vs Kansbol vs Garberg Battle</div>
-            <div class="bhq-side-trend-meta">By Michigan Editorial Team • 7 min read</div>
-          </div>
-        </a>
-
-        <a href="https://www.michigansportsoutdoor.com/how-to-sharpen-a-knife-at-home/" class="bhq-side-trend-item">
-          <div class="bhq-side-trend-rank">03</div>
-          <div class="bhq-side-trend-body">
-            <span class="bhq-side-trend-cat">Learn • Sharpening</span>
-            <div class="bhq-side-trend-title">How to Sharpen a Hunting Knife with a Turn-Box</div>
-            <div class="bhq-side-trend-meta">By Mubashar Shahzad • 5 min read</div>
-          </div>
-        </a>
-
-        <a href="https://www.michigansportsoutdoor.com/top-best-edc-knives-under-100/" class="bhq-side-trend-item">
-          <div class="bhq-side-trend-rank">04</div>
-          <div class="bhq-side-trend-body">
-            <span class="bhq-side-trend-cat">Best Of • EDC Folders</span>
-            <div class="bhq-side-trend-title">Top 5 Best EDC Pocket Knives Under $100 for Fall</div>
-            <div class="bhq-side-trend-meta">By Michigan Editorial Team • 7 min read</div>
-          </div>
+    <!-- CARD 2: NATIONAL KNIFE DAY -->
+    <article class="bhq-exact-card" data-category="culture">
+      <div class="bhq-exact-card-img-wrap">
+        <a href="https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/">
+          <img 
+            src="${imgCard2}" 
+            alt="The Real History of National Knife Day" 
+            loading="lazy"
+          />
         </a>
       </div>
-
-      <!-- SIDEBAR MODULE 3: EDITOR'S FAVORITE KNIFE OF THE WEEK -->
-      <div class="bhq-side-card">
-        <div class="bhq-side-header">
-          <h4 class="bhq-side-title">🏆 Staff Favorite Knife</h4>
-          <span style="font-size:10.5px; font-weight:800; color:#16a34a;">● IN STOCK</span>
+      <div class="bhq-exact-card-body">
+        <h3 class="bhq-exact-card-title">
+          <a href="https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/">
+            The Real History of National Knife Day [With Evidence]
+          </a>
+        </h3>
+        <div class="bhq-exact-byline">
+          <a href="#">Michigan Editorial Team</a> on August 24, 2026, in <a href="#">Culture</a>, <a href="#">News</a>
         </div>
-        <div class="bhq-fav-product">
-          <div class="bhq-fav-img-wrap">
-            <img src="${imgFavKnife}" alt="Kizer Drop Point Folder" />
-          </div>
-          <h5 class="bhq-fav-title">Kizer Drop Bear 154CM Folder</h5>
-          <div class="bhq-fav-steel">Clutch Lock • Micarta Handles • Razor Edge</div>
-          <div class="bhq-fav-price-row">
-            <span class="bhq-fav-price">$119.00</span>
-            <a href="https://www.michigansportsoutdoor.com/shop/" class="bhq-fav-cta">Shop Now →</a>
-          </div>
+        <div class="bhq-exact-tags">
+          Tags: <span>National Knife Day</span>, <span>Tradition</span>
         </div>
+        <p class="bhq-exact-excerpt">
+          A Michigan Sports Outdoor investigation into the origins of August 24th's holiday. Since 2011, the knife community has celebrated National Knife Day every year. But who actually started it? If you do a quick online search, you'll likely find the same explanations repeated across the Internet. So we dug deeper...
+        </p>
       </div>
+    </article>
 
-      <!-- SIDEBAR MODULE 4: POPULAR CATEGORIES QUICK NAV -->
-      <div class="bhq-side-card">
-        <div class="bhq-side-header">
-          <h4 class="bhq-side-title">📂 Explore Cutlery Topics</h4>
-        </div>
-        <div class="bhq-side-cats">
-          <a href="#" class="bhq-side-cat-link" onclick="document.querySelector('[data-cat=best-of]').click(); return false;">
-            <span>🦌 Whitetail & Hunting Cutlery</span>
-            <span class="bhq-side-cat-count">12 Guides</span>
-          </a>
-          <a href="#" class="bhq-side-cat-link" onclick="document.querySelector('[data-cat=reviews]').click(); return false;">
-            <span>🔬 Super Steel Lab Showdowns</span>
-            <span class="bhq-side-cat-count">8 Tests</span>
-          </a>
-          <a href="#" class="bhq-side-cat-link" onclick="document.querySelector('[data-cat=learn]').click(); return false;">
-            <span>🔪 Field Sharpening & Maintenance</span>
-            <span class="bhq-side-cat-count">10 Lessons</span>
-          </a>
-          <a href="#" class="bhq-side-cat-link" onclick="document.querySelector('[data-cat=best-of]').click(); return false;">
-            <span>🎒 EDC Pocket Knives</span>
-            <span class="bhq-side-cat-count">15 Reviews</span>
-          </a>
-          <a href="#" class="bhq-side-cat-link" onclick="document.querySelector('[data-cat=culture]').click(); return false;">
-            <span>🏕️ Backcountry & Bushcraft</span>
-            <span class="bhq-side-cat-count">9 Stories</span>
-          </a>
-        </div>
+    <!-- CARD 3: CARPENTER'S A-421 STEEL VS MAGNACUT -->
+    <article class="bhq-exact-card" data-category="reviews">
+      <div class="bhq-exact-card-img-wrap">
+        <a href="https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/">
+          <img 
+            src="${imgCard3}" 
+            alt="Carpenter Steel vs MagnaCut" 
+            loading="lazy"
+          />
+        </a>
       </div>
+      <div class="bhq-exact-card-body">
+        <h3 class="bhq-exact-card-title">
+          <a href="https://www.michigansportsoutdoor.com/best-fixed-blade-hunting-knives-2026-buying-guide/">
+            Carpenter's A-421 Steel: Is It Better Than MagnaCut?
+          </a>
+        </h3>
+        <div class="bhq-exact-byline">
+          <img src="${authorPhotoUrl}" alt="Mubashar Shahzad" class="bhq-exact-author-avatar-mini" />
+          <a href="#">Mubashar Shahzad</a> on August 17, 2026, in <a href="#">Reviews</a>, <a href="#">Super Steels</a>
+        </div>
+        <div class="bhq-exact-tags">
+          Tags: <span>CPM MagnaCut</span>, <span>A-421 Steel</span>, <span>Testing</span>
+        </div>
+        <p class="bhq-exact-excerpt">
+          In This Article: For the last few months, we've heard whisperings of a groundbreaking steel making its way to us from the medical cutlery industry. It offers performance very similar to other high-end blade steels (think MagnaCut, CPM S35VN, etc.), but carved a unique path there. In this article, we'll go over all the exciting details...
+        </p>
+      </div>
+    </article>
 
-    </aside>
+    <!-- CARD 4: PM2 TANTO / EDC DROPS -->
+    <article class="bhq-exact-card" data-category="news">
+      <div class="bhq-exact-card-img-wrap">
+        <a href="https://www.michigansportsoutdoor.com/top-best-edc-knives-under-100/">
+          <img 
+            src="${imgCard4}" 
+            alt="PM2 Tanto Drop and EDC Knives" 
+            loading="lazy"
+          />
+        </a>
+      </div>
+      <div class="bhq-exact-card-body">
+        <h3 class="bhq-exact-card-title">
+          <a href="https://www.michigansportsoutdoor.com/top-best-edc-knives-under-100/">
+            PM2 Tanto Sold Out: Official Statement + Upcoming Drop
+          </a>
+        </h3>
+        <div class="bhq-exact-byline">
+          <a href="#">Michigan Editorial Team</a> on August 4, 2026, in <a href="#">News</a>, <a href="#">Drops</a>
+        </div>
+        <div class="bhq-exact-tags">
+          Tags: <span>Spyderco</span>, <span>Tanto</span>, <span>EDC Knives</span>
+        </div>
+        <p class="bhq-exact-excerpt">
+          In This Article: Official Statement. Thank you to everyone who participated in today's PM2 Tanto release. The response was extraordinary, and we are genuinely grateful for your enthusiasm, patience, and support. While many customers were able to successfully place their orders, we know others encountered delays. Here is what's next...
+        </p>
+      </div>
+    </article>
+
+    <!-- CARD 5: BUSHCRAFT KNIVES -->
+    <article class="bhq-exact-card" data-category="reviews">
+      <div class="bhq-exact-card-img-wrap">
+        <a href="https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/">
+          <img 
+            src="${imgCard5}" 
+            alt="Morakniv Companion vs Kansbol vs Garberg" 
+            loading="lazy"
+          />
+        </a>
+      </div>
+      <div class="bhq-exact-card-body">
+        <h3 class="bhq-exact-card-title">
+          <a href="https://www.michigansportsoutdoor.com/mora-companion-vs-kansbol-vs-garberg/">
+            Morakniv Companion vs Kansbol vs Garberg: Camp Knife Battle
+          </a>
+        </h3>
+        <div class="bhq-exact-byline">
+          <img src="${authorPhotoUrl}" alt="Mubashar Shahzad" class="bhq-exact-author-avatar-mini" />
+          <a href="#">Mubashar Shahzad</a> on July 29, 2026, in <a href="#">Reviews</a>, <a href="#">Bushcraft</a>
+        </div>
+        <div class="bhq-exact-tags">
+          Tags: <span>Morakniv</span>, <span>Camp Cutlery</span>, <span>Field Test</span>
+        </div>
+        <p class="bhq-exact-excerpt">
+          We put Sweden's top 3 backcountry fixed blades through rigorous wood splitting, feather sticking, and camp food prep in Northern Michigan. Discover which Swedish steel geometry offers the best toughness-to-weight ratio for your next backpacking trip...
+        </p>
+      </div>
+    </article>
+
+    <!-- CARD 6: EDGE GEOMETRY -->
+    <article class="bhq-exact-card" data-category="learn">
+      <div class="bhq-exact-card-img-wrap">
+        <a href="https://www.michigansportsoutdoor.com/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/">
+          <img 
+            src="${imgCard6}" 
+            alt="Knife Blade Edge Geometry Hollow vs Flat Grind" 
+            loading="lazy"
+          />
+        </a>
+      </div>
+      <div class="bhq-exact-card-body">
+        <h3 class="bhq-exact-card-title">
+          <a href="https://www.michigansportsoutdoor.com/understanding-knife-edge-geometry-hollow-grind-vs-flat-grind/">
+            Understanding Knife Edge Geometry: Hollow Grind vs Flat Grind
+          </a>
+        </h3>
+        <div class="bhq-exact-byline">
+          <img src="${authorPhotoUrl}" alt="Mubashar Shahzad" class="bhq-exact-author-avatar-mini" />
+          <a href="#">Mubashar Shahzad</a> on July 20, 2026, in <a href="#">Knife Knowledge</a>, <a href="#">Learn</a>
+        </div>
+        <div class="bhq-exact-tags">
+          Tags: <span>Edge Geometry</span>, <span>Hollow Grind</span>, <span>Flat Grind</span>
+        </div>
+        <p class="bhq-exact-excerpt">
+          An engineering analysis of bevel profiles, edge thickness behind the apex, and slicing vs chopping performance. Learn why convex grinds rule camp choppers while high hollow grinds dominate hunting skinners...
+        </p>
+      </div>
+    </article>
 
   </div>
+
+  <!-- 2.4 LOAD MORE BUTTON -->
+  <div class="bhq-exact-load-more-wrap">
+    <button type="button" class="bhq-exact-load-more-btn" onclick="alert('All 6 high-priority 2026 field guides are currently displayed.');">
+      Load More Articles
+    </button>
+  </div>
+
+  <!-- 2.5 POPULAR TAGS SECTION (CIRCULAR 6-IMAGE GRID AS PER MEDIA_1789374222403.PNG) -->
+  <section class="bhq-exact-tags-section">
+    <h3 class="bhq-exact-tags-heading">Popular Tags:</h3>
+    <div class="bhq-exact-circle-grid">
+      
+      <!-- CIRCLE 1: BUTTERFLY KNIFE / HUNTING -->
+      <a href="#" class="bhq-exact-circle-item" onclick="document.querySelector('[data-cat=best-of]').click(); return false;">
+        <img src="${tagImg1}" alt="Butterfly Knife Tag" />
+        <div class="bhq-exact-circle-overlay">
+          <span class="bhq-exact-circle-label">Butterfly Knife</span>
+        </div>
+      </a>
+
+      <!-- CIRCLE 2: BENCHMADE -->
+      <a href="#" class="bhq-exact-circle-item" onclick="document.querySelector('[data-cat=reviews]').click(); return false;">
+        <img src="${tagImg2}" alt="Benchmade Tag" />
+        <div class="bhq-exact-circle-overlay">
+          <span class="bhq-exact-circle-label">Benchmade</span>
+        </div>
+      </a>
+
+      <!-- CIRCLE 3: GEAR -->
+      <a href="#" class="bhq-exact-circle-item" onclick="document.querySelector('[data-cat=learn]').click(); return false;">
+        <img src="${tagImg3}" alt="Gear Tag" />
+        <div class="bhq-exact-circle-overlay">
+          <span class="bhq-exact-circle-label">Gear</span>
+        </div>
+      </a>
+
+      <!-- CIRCLE 4: SPYDERCO -->
+      <a href="#" class="bhq-exact-circle-item" onclick="document.querySelector('[data-cat=news]').click(); return false;">
+        <img src="${tagImg4}" alt="Spyderco Tag" />
+        <div class="bhq-exact-circle-overlay">
+          <span class="bhq-exact-circle-label">Spyderco</span>
+        </div>
+      </a>
+
+      <!-- CIRCLE 5: KERSHAW -->
+      <a href="#" class="bhq-exact-circle-item" onclick="document.querySelector('[data-cat=reviews]').click(); return false;">
+        <img src="${tagImg5}" alt="Kershaw Tag" />
+        <div class="bhq-exact-circle-overlay">
+          <span class="bhq-exact-circle-label">Kershaw</span>
+        </div>
+      </a>
+
+      <!-- CIRCLE 6: POCKET KNIVES -->
+      <a href="#" class="bhq-exact-circle-item" onclick="document.querySelector('[data-cat=best-of]').click(); return false;">
+        <img src="${tagImg6}" alt="Pocket Knives Tag" />
+        <div class="bhq-exact-circle-overlay">
+          <span class="bhq-exact-circle-label">Pocket Knives</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
 
 </div>
 
 <!-- ======================================================== -->
-<!-- 3. INTERACTIVE SCRIPTS: VOICE SEARCH & CATEGORY FILTER   -->
+<!-- 3. INTERACTIVE SCRIPTS: FILTERING & SEARCH                -->
 <!-- ======================================================== -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const tabs = document.querySelectorAll('.bhq-tab-btn');
-  const cards = document.querySelectorAll('#bhqArticlesGrid .bhq-article-card');
-  const feedTitle = document.getElementById('bhqFeedTitle');
+  const navBtns = document.querySelectorAll('.bhq-exact-nav-btn');
+  const cards = document.querySelectorAll('#bhqExactGrid .bhq-exact-card');
+  const featuredCard = document.querySelector('.bhq-exact-featured-card');
+  const searchInput = document.getElementById('bhqExactSearch');
+  const searchBtn = document.getElementById('bhqExactSearchBtn');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-      tabs.forEach(t => t.classList.remove('active'));
+  // Category switcher
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      navBtns.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
 
-      const selectedCat = this.getAttribute('data-cat');
-      let visibleCount = 0;
+      const cat = this.getAttribute('data-cat');
+      
+      if (featuredCard) {
+        const featCat = featuredCard.getAttribute('data-category');
+        if (cat === 'all' || featCat === cat) {
+          featuredCard.style.display = 'grid';
+        } else {
+          featuredCard.style.display = 'none';
+        }
+      }
 
       cards.forEach(card => {
         const cardCat = card.getAttribute('data-category');
-        if (selectedCat === 'all' || cardCat === selectedCat) {
+        if (cat === 'all' || cardCat === cat) {
           card.style.display = 'flex';
-          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
-
-      if (feedTitle) {
-        if (selectedCat === 'all') {
-          feedTitle.textContent = 'Latest Knife Guides & Field Tests';
-        } else {
-          feedTitle.textContent = this.textContent + ' Articles (' + visibleCount + ')';
-        }
-      }
     });
   });
 
-  const searchInput = document.getElementById('bhqSearchInput');
-  const searchSubmit = document.getElementById('bhqSearchSubmit');
-  const voiceBtn = document.getElementById('bhqVoiceBtn');
-  const voiceStatus = document.getElementById('bhqVoiceStatus');
-  const tagPills = document.querySelectorAll('.bhq-tag-pill');
-
-  function executeSearch(query) {
+  // Search filter
+  function runSearch(query) {
     if (!query) return;
-    const cleanQuery = query.toLowerCase().trim();
+    const q = query.toLowerCase().trim();
+
+    if (featuredCard) {
+      if (featuredCard.textContent.toLowerCase().includes(q)) {
+        featuredCard.style.display = 'grid';
+      } else {
+        featuredCard.style.display = 'none';
+      }
+    }
 
     cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(cleanQuery)) {
+      if (card.textContent.toLowerCase().includes(q)) {
         card.style.display = 'flex';
       } else {
         card.style.display = 'none';
       }
     });
 
-    if (feedTitle) {
-      feedTitle.textContent = 'Search Results for "' + query + '"';
-    }
-
-    const grid = document.getElementById('bhqArticlesGrid');
+    const grid = document.getElementById('bhqExactGrid');
     if (grid) {
       grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  if (searchSubmit && searchInput) {
-    searchSubmit.addEventListener('click', () => executeSearch(searchInput.value));
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', () => runSearch(searchInput.value));
     searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        executeSearch(searchInput.value);
-      }
-    });
-  }
-
-  tagPills.forEach(pill => {
-    pill.addEventListener('click', function() {
-      const q = this.getAttribute('data-query');
-      if (searchInput) searchInput.value = q;
-      executeSearch(q);
-    });
-  });
-
-  if (voiceBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-
-    recognition.onstart = function() {
-      voiceBtn.classList.add('listening');
-      if (voiceStatus) voiceStatus.textContent = 'Listening...';
-    };
-
-    recognition.onresult = function(event) {
-      const transcript = event.results[0][0].transcript;
-      if (searchInput) {
-        searchInput.value = transcript;
-        executeSearch(transcript);
-      }
-    };
-
-    recognition.onerror = function() {
-      voiceBtn.classList.remove('listening');
-      if (voiceStatus) voiceStatus.textContent = 'Voice';
-    };
-
-    recognition.onend = function() {
-      voiceBtn.classList.remove('listening');
-      if (voiceStatus) voiceStatus.textContent = 'Voice';
-    };
-
-    voiceBtn.addEventListener('click', function() {
-      try {
-        recognition.start();
-      } catch (err) {
-        console.warn('Speech recognition already active or error:', err);
-      }
-    });
-  } else if (voiceBtn) {
-    voiceBtn.addEventListener('click', function() {
-      alert('Voice search is not supported in this browser. Please type your query.');
+      if (e.key === 'Enter') runSearch(searchInput.value);
     });
   }
 });
 </script>
 `;
 
-  console.log('Deploying Master Blade HQ Portal to WordPress Page #166494...');
+  console.log('Deploying Exact Blade HQ Design to Michigan Sports Outdoor...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/166494`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      title: 'Knife Life | Michigan Sports Outdoor Cutlery & Gear Journal',
+      title: 'Knife Blog | Michigan Sports Outdoor Cutlery & Gear Journal',
       content: blogHtml
     })
   });
@@ -972,7 +609,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('✅ Updated repo script at: ' + repoScriptPath);
 }
 
-deployBladeHQMasterPortal().catch(err => {
+deployExactBladeHQBlog().catch(err => {
   console.error('❌ Deployment error:', err);
   process.exit(1);
 });
