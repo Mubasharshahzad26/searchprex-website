@@ -80,20 +80,20 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-top-notice a { color: #f5a623; text-decoration: underline; font-weight: 800; }
 .mso-notice-arrows { color: #94a3b8; font-weight: 900; letter-spacing: 6px; }
 
-/* 2. E-E-A-T Master Certification Strip (5 Registered Platforms) */
-.mso-eeat-cert-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 16px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.03); gap: 10px; }
-.mso-eeat-cert-item { display: flex; align-items: center; gap: 9px; padding: 4px 6px; border-right: 1px solid #f1f5f9; text-decoration: none; transition: transform 0.2s; }
-.mso-eeat-cert-item:last-child { border-right: none; }
-.mso-eeat-cert-item:hover { transform: translateY(-1.5px); }
-.mso-eeat-icon-box { width: 30px; height: 30px; min-width: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 1px solid #e2e8f0; }
-.mso-eeat-item-text { display: flex; flex-direction: column; line-height: 1.25; }
-.mso-eeat-platform-name { font-size: 11.5px; font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 0.3px; display: flex; align-items: center; gap: 4px; }
-.mso-eeat-platform-status { font-size: 10.5px; font-weight: 700; color: #64748b; display: flex; align-items: center; gap: 4px; }
-.mso-eeat-stars { color: #f59e0b; display: inline-flex; align-items: center; }
-.mso-eeat-badge-seal { background: #0066cc; color: #ffffff; font-size: 9px; font-weight: 900; padding: 1px 4px; border-radius: 3px; }
-.mso-eeat-badge-seal.green { background: #00b67a; }
-.mso-eeat-badge-seal.gold { background: #d97706; }
-.mso-eeat-badge-seal.forest { background: #384c3c; }
+/* 2. E-E-A-T Master Certification Strip (Ultra-Thin 1-Line Trust Bar) */
+.mso-eeat-cert-strip { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; flex-wrap: nowrap !important; width: 100% !important; background: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 6px !important; padding: 6px 14px !important; margin: 0 0 14px 0 !important; box-sizing: border-box !important; gap: 8px !important; min-height: 38px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important; }
+.mso-eeat-cert-strip > p { display: none !important; }
+.mso-eeat-cert-item { display: inline-flex !important; align-items: center !important; gap: 7px !important; text-decoration: none !important; color: #1e293b !important; font-size: 11px !important; font-weight: 800 !important; white-space: nowrap !important; padding: 2px 10px 2px 4px !important; border-right: 1px solid #e2e8f0 !important; transition: opacity 0.2s, transform 0.2s !important; flex: 1 1 auto !important; justify-content: center !important; }
+.mso-eeat-cert-item:last-child { border-right: none !important; padding-right: 4px !important; }
+.mso-eeat-cert-item:hover { opacity: 0.85 !important; transform: translateY(-1px) !important; }
+.mso-eeat-icon-svg { width: 16px !important; height: 16px !important; min-width: 16px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+.mso-eeat-item-title { font-size: 11px !important; font-weight: 900 !important; color: #0f172a !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; }
+.mso-eeat-badge-pill { font-size: 9px !important; font-weight: 900 !important; padding: 1px 5px !important; border-radius: 3px !important; text-transform: uppercase !important; }
+.mso-eeat-badge-pill.gold { background: #fef3c7 !important; color: #b45309 !important; border: 1px solid #fde68a !important; }
+.mso-eeat-badge-pill.blue { background: #dbeafe !important; color: #1d4ed8 !important; border: 1px solid #bfdbfe !important; }
+.mso-eeat-badge-pill.green { background: #dcfce7 !important; color: #15803d !important; border: 1px solid #bbf7d0 !important; }
+.mso-eeat-badge-pill.dark { background: #f1f5f9 !important; color: #334155 !important; border: 1px solid #e2e8f0 !important; }
+.mso-eeat-badge-pill.forest { background: #ecfdf5 !important; color: #065f46 !important; border: 1px solid #a7f3d0 !important; }
 
 /* 3. Hero Banner (Blade HQ Format & CRO Optimized) */
 .mso-bhq-hero { position: relative; width: 100%; min-height: 480px; border-radius: 10px; overflow: hidden; background: #0f172a url('${imgHero}') center right/cover no-repeat; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.22); display: flex; align-items: center; padding: 48px 44px; box-sizing: border-box; }
@@ -313,92 +313,8 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
     <span class="mso-notice-arrows">&gt;</span>
   </div>
 
-  <!-- 2. E-E-A-T MASTER CERTIFICATION STRIP (5 REGISTERED PLATFORMS) -->
-  <div class="mso-eeat-cert-strip">
-    <!-- Google My Business -->
-    <a href="https://maps.google.com/?q=Michigan+Sports+Outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item">
-      <div class="mso-eeat-icon-box">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
-          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
-        </svg>
-      </div>
-      <div class="mso-eeat-item-text">
-        <div class="mso-eeat-platform-name">GOOGLE VERIFIED <span class="mso-eeat-badge-seal gold">5.0</span></div>
-        <div class="mso-eeat-platform-status">
-          <span class="mso-eeat-stars">
-            <svg width="45" height="9" viewBox="0 0 70 12" fill="#f59e0b" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 0l1.8 3.6L12 4.2l-3 3 .7 4.2L6 9.4 2.3 11.4l.7-4.2-3-3 4.2-.6z"/>
-              <path d="M20 0l1.8 3.6 4.2.6-3 3 .7 4.2-3.7-2-3.7 2 .7-4.2-3-3 4.2-.6z"/>
-              <path d="M34 0l1.8 3.6 4.2.6-3 3 .7 4.2-3.7-2-3.7 2 .7-4.2-3-3 4.2-.6z"/>
-              <path d="M48 0l1.8 3.6 4.2.6-3 3 .7 4.2-3.7-2-3.7 2 .7-4.2-3-3 4.2-.6z"/>
-              <path d="M62 0l1.8 3.6 4.2.6-3 3 .7 4.2-3.7-2-3.7 2 .7-4.2-3-3 4.2-.6z"/>
-            </svg>
-          </span>
-          <span>5.0 / 5.0 Rating</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- BBB Better Business Bureau -->
-    <a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item">
-      <div class="mso-eeat-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="24" rx="4" fill="#005A9C"/>
-          <text x="12" y="16" fill="#ffffff" font-family="Arial, sans-serif" font-size="9.5" font-weight="900" text-anchor="middle" letter-spacing="-0.3">BBB</text>
-        </svg>
-      </div>
-      <div class="mso-eeat-item-text">
-        <div class="mso-eeat-platform-name">BBB ACCREDITED <span class="mso-eeat-badge-seal">A+</span></div>
-        <div class="mso-eeat-platform-status">Accredited Business</div>
-      </div>
-    </a>
-
-    <!-- Trustpilot -->
-    <a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item">
-      <div class="mso-eeat-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="24" rx="4" fill="#00b67a"/>
-          <path d="M12 4.5l2.32 7.13h7.5l-6.07 4.41 2.32 7.13L12 18.76l-6.07 4.41 2.32-7.13-6.07-4.41h7.5z" fill="#ffffff"/>
-        </svg>
-      </div>
-      <div class="mso-eeat-item-text">
-        <div class="mso-eeat-platform-name">TRUSTPILOT <span class="mso-eeat-badge-seal green">PRO</span></div>
-        <div class="mso-eeat-platform-status">Verified Outfitter Profile</div>
-      </div>
-    </a>
-
-    <!-- BladeForums -->
-    <a href="https://www.bladeforums.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item">
-      <div class="mso-eeat-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="24" rx="4" fill="#1e293b"/>
-          <path d="M5 19L19 5M5 5l14 14" stroke="#f5a623" stroke-width="2.2" stroke-linecap="round"/>
-          <circle cx="12" cy="12" r="2.8" fill="#ffffff"/>
-        </svg>
-      </div>
-      <div class="mso-eeat-item-text">
-        <div class="mso-eeat-platform-name">BLADEFORUMS <span class="mso-eeat-badge-seal forest">2026</span></div>
-        <div class="mso-eeat-platform-status">Industry Member Since 2026</div>
-      </div>
-    </a>
-
-    <!-- MichiganSportsman -->
-    <a href="https://www.michigan-sportsman.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item">
-      <div class="mso-eeat-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="24" rx="4" fill="#384c3c"/>
-          <path d="M12 3.5L5.5 13.5h4v7h5v-7h4L12 3.5z" fill="#f5a623"/>
-        </svg>
-      </div>
-      <div class="mso-eeat-item-text">
-        <div class="mso-eeat-platform-name">MICHIGAN SPORTSMAN</div>
-        <div class="mso-eeat-platform-status">Community Partner</div>
-      </div>
-    </a>
-  </div>
+  <!-- 2. E-E-A-T MASTER CERTIFICATION STRIP (ULTRA-THIN 1-LINE TRUST BAR) -->
+  <div class="mso-eeat-cert-strip"><a href="https://maps.google.com/?q=Michigan+Sports+Outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg></span><span class="mso-eeat-item-title">Google Verified</span><span class="mso-eeat-badge-pill gold">5.0 Star</span></a><a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#005A9C"/><text x="12" y="16" fill="#ffffff" font-family="Arial, sans-serif" font-size="9" font-weight="900" text-anchor="middle">BBB</text></svg></span><span class="mso-eeat-item-title">BBB Accredited</span><span class="mso-eeat-badge-pill blue">A+ Rating</span></a><a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00b67a"/><path d="M12 4.5l2.32 7.13h7.5l-6.07 4.41 2.32 7.13L12 18.76l-6.07 4.41 2.32-7.13-6.07-4.41h7.5z" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">Trustpilot</span><span class="mso-eeat-badge-pill green">Verified</span></a><a href="https://www.bladeforums.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1e293b"/><path d="M5 19L19 5M5 5l14 14" stroke="#f5a623" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.8" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">BladeForums</span><span class="mso-eeat-badge-pill dark">Member</span></a><a href="https://www.michigan-sportsman.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#384c3c"/><path d="M12 3.5L5.5 13.5h4v7h5v-7h4L12 3.5z" fill="#f5a623"/></svg></span><span class="mso-eeat-item-title">MichiganSportsman</span><span class="mso-eeat-badge-pill forest">Partner</span></a></div>
 
   <!-- 3. HERO BANNER (CRO-OPTIMIZED BLADE HQ PATTERN) -->
   <section class="mso-bhq-hero">
