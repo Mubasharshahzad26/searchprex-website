@@ -11,8 +11,10 @@ async function deployEEATBladeHQOctoberPage() {
     'Content-Type': 'application/json'
   };
 
-  // CRO-Optimized October Season & Cutlery Visuals
-  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-2026.jpg';
+  // Gemini-Generated CRO Hero Visual (with embedded USPs & October Hunt design)
+  const imgHero = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-hero-hunting-cutlery-magna-2026.jpg';
+
+  // Promo Cards
   const imgPromo1 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-whitetail-fixed-blades-promo.jpg';
   const imgPromo2 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-special-edition-blades-drop.jpg';
   const imgPromo3 = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/09/mso-october-fall-hunting-gift-guide-2026.jpg';
@@ -95,27 +97,10 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-eeat-badge-pill.dark { background: #f1f5f9 !important; color: #334155 !important; border: 1px solid #e2e8f0 !important; }
 .mso-eeat-badge-pill.forest { background: #ecfdf5 !important; color: #065f46 !important; border: 1px solid #a7f3d0 !important; }
 
-/* 3. Hero Banner (Blade HQ Format) */
-.mso-bhq-hero { position: relative; width: 100%; min-height: 420px; border-radius: 8px; overflow: hidden; background: #0f172a url('${imgHero}') center/cover no-repeat; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: flex; align-items: flex-end; padding: 48px 40px; box-sizing: border-box; }
-.mso-bhq-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.45) 60%, rgba(15,23,42,0.75) 100%); }
-.mso-bhq-hero-content { position: relative; z-index: 2; max-width: 720px; }
-.mso-bhq-hero-title { font-size: 44px; font-weight: 900; line-height: 1.05; color: #ffffff; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.mso-bhq-hero-sub { font-size: 16.5px; color: #e2e8f0; margin: 0 0 24px 0; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.4); line-height: 1.45; }
-.mso-bhq-hero-action { position: absolute; bottom: 36px; right: 40px; z-index: 2; }
-.mso-bhq-hero-btn { background: #ffffff; color: #0066cc !important; font-size: 15px; font-weight: 900; padding: 12px 28px; border-radius: 25px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s, color 0.2s; }
-.mso-bhq-hero-btn:hover { background: #f5a623; color: #0f172a !important; transform: scale(1.04); }
-
-/* 3.5. 4-Pillar Smart USP Trust Bar */
-.mso-usp-bar { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 20px; margin-bottom: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); box-sizing: border-box; }
-.mso-usp-item { display: flex; align-items: center; gap: 12px; }
-.mso-usp-icon-box { width: 42px; height: 42px; min-width: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-.mso-usp-icon-box.green { background: #ecfdf5; border: 1px solid #d1fae5; }
-.mso-usp-icon-box.blue { background: #eff6ff; border: 1px solid #dbeafe; }
-.mso-usp-icon-box.amber { background: #fffbeb; border: 1px solid #fef3c7; }
-.mso-usp-icon-box.slate { background: #f8fafc; border: 1px solid #e2e8f0; }
-.mso-usp-text { display: flex; flex-direction: column; line-height: 1.25; }
-.mso-usp-title { font-size: 13px; font-weight: 900; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.2px; }
-.mso-usp-sub { font-size: 11px; color: #64748b; font-weight: 500; line-height: 1.35; }
+/* 3. Hero Visual Banner (Gemini-Created Design with Built-in USPs) */
+.mso-gemini-hero-wrap { position: relative; width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); line-height: 0; }
+.mso-gemini-hero-link { display: block; width: 100%; text-decoration: none; }
+.mso-gemini-hero-img { width: 100%; height: auto; display: block; border-radius: 8px; object-fit: cover; }
 
 /* 4. Brand Logo Strip (All 17 Brands from Homepage) */
 .mso-brand-strip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 20px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
@@ -272,11 +257,20 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
 .mso-club-perk { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 800; color: #ffffff; }
 .mso-club-perk-badge { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #f5a623; }
 
+/* 19. FIXED BOTTOM-RIGHT GOOGLE VERIFIED TRUST BADGE */
+.mso-floating-google-badge { position: fixed; bottom: 22px; right: 22px; z-index: 99999; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 50px; padding: 8px 16px 8px 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.14); display: inline-flex; align-items: center; gap: 10px; text-decoration: none !important; transition: transform 0.2s, box-shadow 0.2s; backdrop-filter: blur(8px); }
+.mso-floating-google-badge:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(0,0,0,0.22); }
+.mso-floating-g-logo { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+.mso-floating-text-wrap { display: flex; flex-direction: column; line-height: 1.15; }
+.mso-floating-top { display: flex; align-items: center; gap: 6px; }
+.mso-floating-rating { font-size: 13px; font-weight: 900; color: #0f172a; }
+.mso-floating-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px; }
+.mso-floating-sub { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }
+
 @media (max-width: 1080px) {
   .mso-eeat-cert-strip { display: flex; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 8px 12px; gap: 14px; }
   .mso-eeat-cert-strip::-webkit-scrollbar { display: none; }
   .mso-eeat-cert-item { flex: 0 0 auto; min-width: 175px; border-right: 1px solid #e2e8f0; padding-right: 12px; }
-  .mso-usp-bar { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .mso-opps-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-orig-cat-slider-wrap { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: repeat(2, 1fr); }
@@ -292,16 +286,14 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   .mso-blade-club-footer { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .mso-bhq-hero { padding: 32px 20px; min-height: 340px; }
-  .mso-bhq-hero-title { font-size: 28px; }
-  .mso-bhq-hero-action { position: relative; bottom: auto; right: auto; margin-top: 16px; }
-  .mso-usp-bar { grid-template-columns: 1fr; gap: 12px; padding: 12px 14px; }
   .mso-opps-grid { grid-template-columns: 1fr; }
   .mso-bhq-prod-row { grid-template-columns: 1fr; }
   .mso-activity-grid { grid-template-columns: repeat(2, 1fr); }
   .mso-big-trust-strip { grid-template-columns: 1fr; }
   .mso-videos-grid { grid-template-columns: 1fr; }
   .mso-articles-grid { grid-template-columns: 1fr; }
+  .mso-floating-google-badge { bottom: 14px; right: 14px; padding: 6px 12px 6px 10px; }
+  .mso-floating-sub { font-size: 9px; }
 }
 `;
 
@@ -393,75 +385,11 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   <!-- 2. E-E-A-T MASTER CERTIFICATION STRIP (ULTRA-THIN 1-LINE TRUST BAR) -->
   <div class="mso-eeat-cert-strip"><a href="https://maps.google.com/?q=Michigan+Sports+Outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg></span><span class="mso-eeat-item-title">Google Verified</span><span class="mso-eeat-badge-pill gold">5.0 Star</span></a><a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#005A9C"/><text x="12" y="16" fill="#ffffff" font-family="Arial, sans-serif" font-size="9" font-weight="900" text-anchor="middle">BBB</text></svg></span><span class="mso-eeat-item-title">BBB Accredited</span><span class="mso-eeat-badge-pill blue">A+ Rating</span></a><a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00b67a"/><path d="M12 4.5l2.32 7.13h7.5l-6.07 4.41 2.32 7.13L12 18.76l-6.07 4.41 2.32-7.13-6.07-4.41h7.5z" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">Trustpilot</span><span class="mso-eeat-badge-pill green">Verified</span></a><a href="https://www.bladeforums.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1e293b"/><path d="M5 19L19 5M5 5l14 14" stroke="#f5a623" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.8" fill="#ffffff"/></svg></span><span class="mso-eeat-item-title">BladeForums</span><span class="mso-eeat-badge-pill dark">Member</span></a><a href="https://www.michigan-sportsman.com" target="_blank" rel="noopener noreferrer" class="mso-eeat-cert-item"><span class="mso-eeat-icon-svg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#384c3c"/><path d="M12 3.5L5.5 13.5h4v7h5v-7h4L12 3.5z" fill="#f5a623"/></svg></span><span class="mso-eeat-item-title">MichiganSportsman</span><span class="mso-eeat-badge-pill forest">Partner</span></a></div>
 
-  <!-- 3. HERO BANNER (BLADE HQ EXACT PATTERN) -->
-  <section class="mso-bhq-hero">
-    <div class="mso-bhq-hero-overlay"></div>
-    <div class="mso-bhq-hero-content">
-      <h1 class="mso-bhq-hero-title">DON'T BUY A BAD KNIFE.<br/>GET IT RIGHT THE FIRST TIME.</h1>
-      <p class="mso-bhq-hero-sub">Michigan Sportsman &amp; Outfitter — Over 7,000+ in-stock knives, hunting gear &amp; camp cutlery tested by American sportsmen for the October whitetail opener.</p>
-    </div>
-    <div class="mso-bhq-hero-action">
-      <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-bhq-hero-btn">See The Winners</a>
-    </div>
-  </section>
-
-  <!-- 3.5. 4-PILLAR SMART USP TRUST BAR -->
-  <section class="mso-usp-bar">
-    <div class="mso-usp-item">
-      <div class="mso-usp-icon-box green">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="3" width="15" height="13" rx="1"></rect>
-          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-          <circle cx="5.5" cy="18.5" r="2.5"></circle>
-          <circle cx="18.5" cy="18.5" r="2.5"></circle>
-        </svg>
-      </div>
-      <div class="mso-usp-text">
-        <span class="mso-usp-title">Fast US Dispatch</span>
-        <span class="mso-usp-sub">Ships in 24–48 hours with live tracking</span>
-      </div>
-    </div>
-
-    <div class="mso-usp-item">
-      <div class="mso-usp-icon-box blue">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          <polyline points="9 12 11 14 15 10"></polyline>
-        </svg>
-      </div>
-      <div class="mso-usp-text">
-        <span class="mso-usp-title">100% Factory Authentic</span>
-        <span class="mso-usp-sub">Authorized USA dealer of top cutlery</span>
-      </div>
-    </div>
-
-    <div class="mso-usp-item">
-      <div class="mso-usp-icon-box amber">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="23 4 23 10 17 10"></polyline>
-          <polyline points="1 20 1 14 7 14"></polyline>
-          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-        </svg>
-      </div>
-      <div class="mso-usp-text">
-        <span class="mso-usp-title">30-Day Hassle-Free</span>
-        <span class="mso-usp-sub">Easy returns &amp; USA customer care</span>
-      </div>
-    </div>
-
-    <div class="mso-usp-item">
-      <div class="mso-usp-icon-box slate">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
-        </svg>
-      </div>
-      <div class="mso-usp-text">
-        <span class="mso-usp-title">7,000+ Gear In-Stock</span>
-        <span class="mso-usp-sub">Massive warehouse inventory ready</span>
-      </div>
-    </div>
+  <!-- 3. HERO BANNER (GEMINI-GENERATED WITH INTEGRATED CRO & USPs) -->
+  <section class="mso-gemini-hero-wrap">
+    <a href="https://www.michigansportsoutdoor.com/shop/" class="mso-gemini-hero-link">
+      <img src="${imgHero}" alt="Michigan Sports Outdoor - October Hunting &amp; Cutlery Outfitter" class="mso-gemini-hero-img" />
+    </a>
   </section>
 
   <!-- 4. BRAND LOGO STRIP (ALL 17 HOMEPAGE BRANDS) -->
@@ -1011,6 +939,25 @@ html, body, #page, #wrapper, .site, .site-wrapper, .site-content, #content, .con
   </section>
 </div>
 
+<!-- 19. FIXED BOTTOM-RIGHT GOOGLE VERIFIED 5.0 TRUST SEAL -->
+<a href="https://maps.google.com/?q=Michigan+Sports+Outdoor" target="_blank" rel="noopener noreferrer" class="mso-floating-google-badge" title="Verified 5.0 Rating on Google Reviews">
+  <div class="mso-floating-g-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+    </svg>
+  </div>
+  <div class="mso-floating-text-wrap">
+    <div class="mso-floating-top">
+      <span class="mso-floating-rating">5.0</span>
+      <span class="mso-floating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    </div>
+    <span class="mso-floating-sub">Google Verified</span>
+  </div>
+</a>
+
 <script>
 function scrollCats(direction) {
   const container = document.getElementById('msoCatSliderTrack');
@@ -1022,7 +969,7 @@ function scrollCats(direction) {
 </script>
 `;
 
-  console.log('Deploying complete master Blade HQ layout replicating all homepage sections to /october-season/ (Page #167531)...');
+  console.log('Deploying updated E-E-A-T Blade HQ page to /october-season/ (Page #167531)...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/167531`, {
     method: 'POST',
     headers,
