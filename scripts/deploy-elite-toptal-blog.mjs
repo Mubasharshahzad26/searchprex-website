@@ -20,23 +20,13 @@ async function deployEliteToptalBlog() {
       "@type": "CollectionPage",
       "@id": "https://www.michigansportsoutdoor.com/blog/#webpage",
       "url": "https://www.michigansportsoutdoor.com/blog/",
-      "name": "Michigan Sports Outdoor Blog | Cutlery Lab & Field Journal",
-      "description": "Authoritative whitetail deer field dressing breakdowns, Rockwell hardness steel benchmarks, camp sharpening techniques, and verified Northwoods field cutlery reviews.",
+      "name": "Michigan Sports Outdoor Blog | Field Journal & Cutlery Lab",
+      "description": "The premier authority for hunters, backcountry guides, and outdoor cutlery specialists.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.michigansportsoutdoor.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Blog",
-            "item": "https://www.michigansportsoutdoor.com/blog/"
-          }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.michigansportsoutdoor.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.michigansportsoutdoor.com/blog/" }
         ]
       },
       "publisher": {
@@ -47,11 +37,6 @@ async function deployEliteToptalBlog() {
           "@type": "ImageObject",
           "url": "https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/MSO-LOGO-1.png"
         }
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.michigansportsoutdoor.com/shop/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
       }
     }
   ]
@@ -59,271 +44,269 @@ async function deployEliteToptalBlog() {
 </script>
 
 <!-- ========================================== -->
-<!-- 2. STYLES: EXACT TOPTAL HERO & PURE WHITE BODY -->
+<!-- 2. MASTER STYLES: EXACT TOPTAL BLOG SYSTEM -->
 <!-- ========================================== -->
 <style>
-  /* 2.1 PURE WHITE BODY & RESET */
+  /* 2.1 PURE WHITE ROOT RESET (FOR BODY AND THEME WRAPPERS) */
   html, body, #page, #wrapper, .site, .site-wrapper, .site-content, 
   #content, .content-area, #primary, #main, .site-main, .entry-content, 
-  .entry-content-wrap, .page-content, .post-content, .mso-portal, 
+  .entry-content-wrap, .page-content, .post-content, 
   .container, .container-wrap, .page-wrapper, .site-main-content {
     background: #ffffff !important;
     background-color: #ffffff !important;
   }
 
+  /* HIDE THEME TITLE AND HEADERS */
   .page-header, .header-page-title, .page-title-wrap, .entry-header, .site-content > .page-title {
     display: none !important;
-    background: #ffffff !important;
   }
 
-  /* 2.2 PORTAL WRAPPER */
-  .mso-portal {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px 20px 80px 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-    color: #0f172a;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
+  /* PREVENT HORIZONTAL SCROLL ON FULL-BLEED */
+  body {
+    overflow-x: hidden !important;
   }
 
-  /* ========================================== */
-  /* 2.3 EXACT TOPTAL HERO SECTION WITH EEAT    */
-  /* ========================================== */
-  .mso-toptal-hero {
-    background: #091a44;
-    background-image: 
-      radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 45%),
-      radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.3) 0%, transparent 50%),
-      linear-gradient(135deg, #071638 0%, #0c2156 50%, #091a44 100%);
+  /* ======================================================== */
+  /* 2.2 FULL-BLEED EXACT TOPTAL HERO SECTION (100VW NAVY)    */
+  /* ======================================================== */
+  .mso-toptal-hero-fullwidth {
+    width: 100vw;
     position: relative;
-    border-radius: 14px;
-    padding: 56px 48px 42px 48px;
-    margin-bottom: 36px;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: #08183a;
+    background-image: 
+      radial-gradient(circle at 12% 20%, rgba(37, 99, 235, 0.25) 0%, transparent 45%),
+      radial-gradient(circle at 88% 80%, rgba(30, 58, 138, 0.35) 0%, transparent 50%),
+      linear-gradient(135deg, #071533 0%, #0b2050 50%, #08183a 100%);
+    padding: 68px max(24px, calc((100vw - 1200px) / 2)) 52px max(24px, calc((100vw - 1200px) / 2));
+    box-sizing: border-box;
     color: #ffffff;
-    box-shadow: 0 16px 36px -10px rgba(9, 26, 68, 0.3);
     overflow: hidden;
   }
 
-  /* CONSTELLATION NODES (TOPTAL SIGNATURE) */
-  .mso-toptal-hero::before {
+  /* TOPTAL CONSTELLATION NETWORK BACKGROUND */
+  .mso-toptal-hero-fullwidth::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-      radial-gradient(2px 2px at 40px 60px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 150px 180px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 300px 80px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 450px 220px, rgba(255, 255, 255, 0.2), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 700px 90px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 850px 200px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 1020px 110px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0));
-    opacity: 0.65;
+      radial-gradient(2px 2px at 40px 60px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 160px 180px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 320px 80px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 500px 220px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 720px 90px, rgba(255, 255, 255, 0.35), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 880px 200px, rgba(255, 255, 255, 0.3), rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 1080px 110px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0));
+    opacity: 0.7;
     pointer-events: none;
   }
 
-  .mso-hero-grid {
+  .mso-hero-content-row {
     display: grid;
-    grid-template-columns: 1.25fr 0.95fr;
-    gap: 40px;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 48px;
     align-items: center;
     position: relative;
     z-index: 2;
-    margin-bottom: 34px;
+    margin-bottom: 38px;
   }
 
-  /* LEFT HERO CONTENT */
-  .mso-hero-left {
-    display: flex;
-    flex-direction: column;
-  }
-  .mso-toptal-title {
-    font-size: clamp(36px, 4.6vw, 56px);
+  /* LEFT HERO */
+  .mso-toptal-heading {
+    font-size: clamp(38px, 4.8vw, 58px);
     font-weight: 800;
-    line-height: 1.08;
+    line-height: 1.05;
     color: #ffffff !important;
     letter-spacing: -0.03em;
-    margin: 0 0 16px 0;
+    margin: 0 0 18px 0;
   }
-  .mso-toptal-subtitle {
-    font-size: 15px;
+  .mso-toptal-lead {
+    font-size: 16px;
     line-height: 1.65;
     color: #cbd5e1;
     margin: 0 0 24px 0;
-    max-width: 580px;
+    max-width: 600px;
   }
 
-  /* SHARE BADGE (EXACT TOPTAL REPLICA) */
-  .mso-share-badge-wrap {
-    margin-bottom: 22px;
+  /* SHARE COUNT BADGE (EXACT TOPTAL REPLICA) */
+  .mso-toptal-share-box {
+    margin-bottom: 24px;
   }
-  .mso-toptal-share-btn {
+  .mso-toptal-share-pill {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
     background: rgba(255, 255, 255, 0.06);
-    padding: 8px 16px;
+    padding: 9px 18px;
     border-radius: 4px;
     font-size: 11.5px;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     color: #ffffff;
     user-select: none;
+    transition: all 0.2s ease;
   }
-  .mso-share-icon {
+  .mso-toptal-share-pill:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  .mso-share-svg {
     width: 14px;
     height: 14px;
+    stroke: #ffffff;
   }
 
-  /* SUB-TEAM PERSPECTIVE PILL ROW (EXACT TOPTAL REPLICA) */
-  .mso-hero-subteam-row {
+  /* PERSPECTIVES LINK ROW (EXACT TOPTAL REPLICA) */
+  .mso-toptal-sublink-row {
     font-size: 13.5px;
     color: #94a3b8;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
     line-height: 1.5;
   }
-  .mso-hero-subteam-pill {
+  .mso-toptal-sublink-btn {
     display: inline-block;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.08);
     color: #ffffff !important;
     font-size: 12px;
     font-weight: 700;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 4px;
     text-decoration: none;
     transition: all 0.15s ease;
   }
-  .mso-hero-subteam-pill:hover {
-    background: rgba(255, 255, 255, 0.2);
+  .mso-toptal-sublink-btn:hover {
+    background: #ffffff;
+    color: #08183a !important;
     border-color: #ffffff;
   }
 
-  /* RIGHT HERO: EEAT TRUST FACTORS (EXACT TOPTAL FEATURED IN CARDS) */
-  .mso-hero-right {
+  /* RIGHT HERO: EEAT TRUST CARDS (EXACT TOPTAL "FEATURED IN" FORMAT) */
+  .mso-hero-eeat-col {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
-  .mso-trust-label {
-    font-size: 11px;
+  .mso-eeat-label {
+    font-size: 11.5px;
     font-weight: 800;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
     color: #93c5fd;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
-  .mso-trust-cards-row {
+  .mso-eeat-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
+    width: 100%;
   }
-  .mso-trust-card {
-    background: rgba(18, 42, 102, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+  .mso-eeat-card {
+    background: rgba(14, 38, 92, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 8px;
-    padding: 16px 12px;
+    padding: 20px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     text-decoration: none !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
-    min-height: 96px;
+    min-height: 112px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.22s ease;
     box-sizing: border-box;
   }
-  .mso-trust-card:hover {
-    background: rgba(28, 62, 145, 0.95);
-    border-color: rgba(255, 255, 255, 0.35);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  .mso-eeat-card:hover {
+    background: rgba(24, 58, 136, 0.95);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
   }
-  .mso-trust-icon-box {
+  .mso-eeat-svg-wrap {
     width: 100%;
-    height: 30px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 8px;
   }
-  .mso-trust-svg {
-    max-height: 24px;
-    max-width: 90%;
-  }
-  .mso-trust-card-sub {
-    font-size: 10.5px;
+  .mso-eeat-subtext {
+    font-size: 11px;
     font-weight: 700;
     color: #93c5fd;
     letter-spacing: 0.2px;
     line-height: 1.25;
   }
 
-  /* FULL-WIDTH TOPTAL BOTTOM SEARCH BAR */
-  .mso-hero-search-wrap {
+  /* FULL-WIDTH SEARCH BAR (EXACT TOPTAL RECTANGULAR BOX) */
+  .mso-hero-search-container {
     position: relative;
-    z-index: 10;
     width: 100%;
+    z-index: 20;
   }
-  .mso-toptal-search-box {
+  .mso-toptal-search-bar {
     display: flex;
     align-items: center;
-    background: rgba(8, 21, 55, 0.7);
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    background: rgba(6, 18, 46, 0.75);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
     border-radius: 4px;
-    padding: 4px 6px 4px 16px;
+    padding: 5px 8px 5px 18px;
     transition: all 0.2s ease;
   }
-  .mso-toptal-search-box:focus-within {
+  .mso-toptal-search-bar:focus-within {
     border-color: #60a5fa;
-    background: rgba(8, 21, 55, 0.95);
-    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
+    background: rgba(6, 18, 46, 0.95);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
   }
-  .mso-search-glass {
+  .mso-lens-icon {
     color: #93c5fd;
-    font-size: 16px;
+    font-size: 17px;
     margin-right: 12px;
   }
-  .mso-toptal-search-input {
+  .mso-toptal-input {
     flex: 1 1 auto;
     border: none;
     background: transparent;
     padding: 12px 0;
-    font-size: 15px;
+    font-size: 15.5px;
     color: #ffffff !important;
     outline: none;
     width: 100%;
   }
-  .mso-toptal-search-input::placeholder {
+  .mso-toptal-input::placeholder {
     color: #94a3b8;
   }
-  .mso-hero-search-actions {
+  .mso-search-actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .mso-hero-mic-btn {
+  .mso-voice-mic-btn {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: #ffffff;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 16px;
     transition: all 0.15s ease;
   }
-  .mso-hero-mic-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+  .mso-voice-mic-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
   }
-  .mso-hero-mic-btn.listening {
+  .mso-voice-mic-btn.listening {
     background: #ef4444 !important;
     border-color: #f87171 !important;
     animation: msoMicPulse 1.2s infinite;
@@ -333,24 +316,24 @@ async function deployEliteToptalBlog() {
     70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
     100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
   }
-  .mso-hero-submit-btn {
+  .mso-search-go-btn {
     background: #00c774;
     color: #ffffff !important;
     border: none;
     font-size: 13.5px;
     font-weight: 800;
-    padding: 10px 22px;
+    padding: 10px 24px;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.15s ease;
     white-space: nowrap;
   }
-  .mso-hero-submit-btn:hover {
+  .mso-search-go-btn:hover {
     background: #00b368;
   }
 
-  /* TRENDING CHIPS ON HERO */
-  .mso-hero-trending-chips {
+  /* TRENDING CHIPS UNDER SEARCH */
+  .mso-hero-chips-bar {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -358,11 +341,11 @@ async function deployEliteToptalBlog() {
     margin-top: 14px;
     font-size: 12px;
   }
-  .mso-chips-label {
+  .mso-chips-title {
     font-weight: 700;
     color: #93c5fd;
   }
-  .mso-hero-chip {
+  .mso-chip-item {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #e2e8f0;
@@ -373,13 +356,13 @@ async function deployEliteToptalBlog() {
     font-size: 12px;
     transition: all 0.15s ease;
   }
-  .mso-hero-chip:hover {
+  .mso-chip-item:hover {
     background: #ffffff;
-    color: #0b1a42 !important;
+    color: #08183a !important;
     border-color: #ffffff;
   }
 
-  /* DROPDOWN AUTOCOMPLETE PANEL */
+  /* AUTOCOMPLETE DROPDOWN */
   .mso-autocomplete-panel {
     display: none;
     position: absolute;
@@ -424,13 +407,22 @@ async function deployEliteToptalBlog() {
   .mso-badge-steel { background: #dcfce7; color: #15803d; }
   .mso-badge-product { background: #fef3c7; color: #b45309; }
 
-  /* 2.4 SEGMENTED CATEGORY PILLS BAR */
+  /* ======================================================== */
+  /* 2.3 PURE WHITE EDITORIAL BODY CONTENT (1200PX CENTERED)  */
+  /* ======================================================== */
+  .mso-body-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 0 60px 0;
+    background: #ffffff !important;
+  }
+
+  /* CATEGORY NAVIGATION PILLS BAR */
   .mso-category-nav {
     margin-bottom: 36px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    -ms-overflow-style: none;
     padding: 4px 0;
   }
   .mso-category-nav::-webkit-scrollbar {
@@ -467,7 +459,7 @@ async function deployEliteToptalBlog() {
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
   }
 
-  /* 2.5 REFINED EDITORIAL SPOTLIGHT */
+  /* REFINED EDITORIAL SPOTLIGHT (FLAGSHIP FEATURE) */
   .mso-flagship-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -576,7 +568,7 @@ async function deployEliteToptalBlog() {
     background: #15803d;
   }
 
-  /* 2.6 3-COLUMN EDITORIAL BENTO GRID (STRICT TOPTAL FORMAT) */
+  /* 3-COLUMN EDITORIAL BENTO GRID (EXACT TOPTAL CARD FORMAT) */
   .mso-grid-header {
     display: flex;
     justify-content: space-between;
@@ -782,7 +774,7 @@ async function deployEliteToptalBlog() {
     margin: 0;
   }
 
-  /* 2.7 WORLD-CLASS NEWSLETTER DISPATCH */
+  /* 2.4 WORLD-CLASS NEWSLETTER DISPATCH */
   .mso-dispatch-card {
     background: #f8fafc;
     border: 1.5px solid #e2e8f0;
@@ -875,7 +867,7 @@ async function deployEliteToptalBlog() {
     text-decoration: underline;
   }
 
-  /* 2.8 WIRECUTTER-STYLE PRODUCT MATRIX (EXACTLY 1 ROW OF 4 CARDS) */
+  /* 2.5 WIRECUTTER-STYLE PRODUCT MATRIX (EXACTLY 1 ROW OF 4 CARDS) */
   .mso-matrix-section {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -988,9 +980,9 @@ async function deployEliteToptalBlog() {
     background: #16a34a;
   }
 
-  /* ========================================== */
-  /* 2.9 RESPONSIVE BREAKPOINTS                 */
-  /* ========================================== */
+  /* ======================================================== */
+  /* 2.6 RESPONSIVE BREAKPOINTS                               */
+  /* ======================================================== */
   @media (max-width: 1080px) {
     .mso-matrix-grid {
       grid-template-columns: repeat(2, 1fr) !important;
@@ -999,12 +991,12 @@ async function deployEliteToptalBlog() {
   }
 
   @media (max-width: 960px) {
-    .mso-toptal-hero {
-      padding: 38px 28px 30px 28px;
+    .mso-toptal-hero-fullwidth {
+      padding: 44px 24px 36px 24px;
     }
-    .mso-hero-grid {
+    .mso-hero-content-row {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 32px;
     }
     .mso-flagship-card {
       grid-template-columns: 1fr;
@@ -1019,29 +1011,25 @@ async function deployEliteToptalBlog() {
   }
 
   @media (max-width: 640px) {
-    .mso-portal {
-      padding: 12px 14px 60px 14px;
+    .mso-toptal-hero-fullwidth {
+      padding: 30px 16px 24px 16px;
     }
-    .mso-toptal-hero {
-      padding: 26px 18px 22px 18px;
-      border-radius: 10px;
-    }
-    .mso-toptal-title {
+    .mso-toptal-heading {
       font-size: 32px;
     }
-    .mso-trust-cards-row {
+    .mso-eeat-grid {
       grid-template-columns: 1fr;
     }
-    .mso-toptal-search-box {
+    .mso-toptal-search-bar {
       flex-wrap: wrap;
       gap: 8px;
       padding: 8px 12px;
     }
-    .mso-hero-search-actions {
+    .mso-search-actions {
       width: 100%;
       justify-content: flex-end;
     }
-    .mso-hero-submit-btn {
+    .mso-search-go-btn {
       width: 100%;
     }
     .mso-editorial-grid {
@@ -1069,130 +1057,135 @@ async function deployEliteToptalBlog() {
   }
 </style>
 
-<!-- ========================================== -->
-<!-- 3. HTML5 SEMANTIC MARKUP                   -->
-<!-- ========================================== -->
-<main class="mso-portal" role="main">
+<!-- ======================================================== -->
+<!-- 3. HTML5 SEMANTIC MARKUP: FULL TOPTAL SYSTEM             -->
+<!-- ======================================================== -->
 
-  <!-- 3.1 EXACT TOPTAL-STYLE HERO MASTHEAD WITH EEAT -->
-  <header class="mso-toptal-hero">
-    <div class="mso-hero-grid">
-      
-      <!-- LEFT COLUMN -->
-      <div class="mso-hero-left">
-        <h1 class="mso-toptal-title">
-          Michigan Sports Outdoor Blog
-        </h1>
-        <p class="mso-toptal-subtitle">
-          The MSO Field Journal &amp; Cutlery Lab is the top hub for hunters, backcountry outfitters, bladesmiths, and cutlery specialists, featuring key whitetail field dressing updates, super steel metallurgy benchmarks, and Northwoods gear insights.
-        </p>
+<!-- 3.1 FULL-BLEED EXACT TOPTAL HERO SECTION WITH EEAT -->
+<header class="mso-toptal-hero-fullwidth">
+  
+  <div class="mso-hero-content-row">
+    
+    <!-- LEFT HERO -->
+    <div class="mso-hero-left-col">
+      <h1 class="mso-toptal-heading">
+        Michigan Sports Outdoor Blog
+      </h1>
+      <p class="mso-toptal-lead">
+        The MSO Field Journal &amp; Cutlery Lab is the top hub for hunters, backcountry outfitters, bladesmiths, and outdoor cutlery specialists, featuring key whitetail field dressing guides, Rockwell hardness lab benchmarks, camp sharpening techniques, and verified Northwoods gear insights.
+      </p>
 
-        <!-- SHARE COUNT BADGE (EXACT TOPTAL REPLICA) -->
-        <div class="mso-share-badge-wrap">
-          <div class="mso-toptal-share-btn">
-            <svg class="mso-share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="18" cy="5" r="3"></circle>
-              <circle cx="6" cy="12" r="3"></circle>
-              <circle cx="18" cy="19" r="3"></circle>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      <!-- SHARE BADGE (EXACT TOPTAL REPLICA) -->
+      <div class="mso-toptal-share-box">
+        <div class="mso-toptal-share-pill">
+          <svg class="mso-share-svg" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span>132.3K SHARES</span>
+        </div>
+      </div>
+
+      <!-- PERSPECTIVES LINK ROW (EXACT TOPTAL REPLICA) -->
+      <div class="mso-toptal-sublink-row">
+        <span>MSO field outfitters and cutlery specialists share their experience and tests on the</span>
+        <a href="/cpm-magnacut-vs-bohler-m390mk/" class="mso-toptal-sublink-btn">MSO Cutlery Lab &rarr;</a>
+      </div>
+    </div>
+
+    <!-- RIGHT HERO: EEAT FACTORS (EXACT TOPTAL "FEATURED IN" CARDS) -->
+    <div class="mso-hero-eeat-col">
+      <div class="mso-eeat-label">FEATURED &amp; VERIFIED IN</div>
+      <div class="mso-eeat-grid">
+        
+        <!-- EEAT CARD 1: MEMBER OF BLADEFORUMS -->
+        <div class="mso-eeat-card">
+          <div class="mso-eeat-svg-wrap">
+            <svg viewBox="0 0 120 30" style="max-height:26px; max-width:95%;">
+              <polygon points="2,15 20,5 24,9 10,20" fill="#60a5fa"/>
+              <text x="28" y="20" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="12.5" fill="#ffffff" letter-spacing="0.5">BLADEFORUMS</text>
             </svg>
-            <span>132.3K SHARES</span>
           </div>
+          <div class="mso-eeat-subtext">Member of BladeForums</div>
         </div>
 
-        <!-- SUB-TEAM PERSPECTIVE PILL ROW (EXACT TOPTAL REPLICA) -->
-        <div class="mso-hero-subteam-row">
-          <span>MSO field outfitters and lab metallurgists share their empirical findings on the</span>
-          <a href="/cpm-magnacut-vs-bohler-m390mk/" class="mso-hero-subteam-pill">MSO Cutlery Lab &rarr;</a>
+        <!-- EEAT CARD 2: AVAILABLE ON AMAZON -->
+        <a href="https://www.amazon.com" target="_blank" rel="noopener" class="mso-eeat-card">
+          <div class="mso-eeat-svg-wrap">
+            <svg viewBox="0 0 100 30" style="max-height:26px; max-width:90%;">
+              <text x="5" y="19" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="18" fill="#ffffff" letter-spacing="-0.5">amazon</text>
+              <path d="M12 24 Q36 31 56 22 Q49 27 34 27 Q20 27 12 24 Z" fill="#f59e0b"/>
+              <path d="M54 20 L59 23 L56 26 Z" fill="#f59e0b"/>
+            </svg>
+          </div>
+          <div class="mso-eeat-subtext">Available on Amazon</div>
+        </a>
+
+        <!-- EEAT CARD 3: BBB REGISTERED -->
+        <div class="mso-eeat-card">
+          <div class="mso-eeat-svg-wrap">
+            <svg viewBox="0 0 100 30" style="max-height:26px; max-width:90%;">
+              <rect x="2" y="4" width="30" height="22" rx="3" fill="#2563eb"/>
+              <text x="5" y="20" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="13" fill="#ffffff">BBB</text>
+              <text x="36" y="14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="9.5" fill="#ffffff">REGISTERED</text>
+              <text x="36" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="8" fill="#93c5fd">ACCREDITED A+</text>
+            </svg>
+          </div>
+          <div class="mso-eeat-subtext">BBB Registered</div>
         </div>
+
       </div>
-
-      <!-- RIGHT COLUMN: E-E-A-T TRUST FACTORS (EXACT TOPTAL "FEATURED IN" CARDS) -->
-      <div class="mso-hero-right">
-        <div class="mso-trust-label">INDUSTRY ACCREDITATIONS &amp; TRUST</div>
-        <div class="mso-trust-cards-row">
-          
-          <!-- TRUST CARD 1: BLADEFORUMS -->
-          <div class="mso-trust-card">
-            <div class="mso-trust-icon-box">
-              <svg viewBox="0 0 110 26" class="mso-trust-svg">
-                <!-- Blade icon + text -->
-                <polygon points="2,13 18,5 22,8 10,17" fill="#60a5fa"/>
-                <text x="26" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="12" fill="#ffffff" letter-spacing="0.5">BLADEFORUMS</text>
-              </svg>
-            </div>
-            <div class="mso-trust-card-sub">Member of BladeForums</div>
-          </div>
-
-          <!-- TRUST CARD 2: AVAILABLE ON AMAZON -->
-          <a href="https://www.amazon.com" target="_blank" rel="noopener" class="mso-trust-card">
-            <div class="mso-trust-icon-box">
-              <svg viewBox="0 0 95 26" class="mso-trust-svg">
-                <text x="4" y="17" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="16" fill="#ffffff" letter-spacing="-0.5">amazon</text>
-                <path d="M10 21 Q30 27 48 20 Q42 24 30 24 Q18 24 10 21 Z" fill="#f59e0b"/>
-                <path d="M46 18 L51 21 L48 24 Z" fill="#f59e0b"/>
-              </svg>
-            </div>
-            <div class="mso-trust-card-sub">Available on Amazon</div>
-          </a>
-
-          <!-- TRUST CARD 3: BBB REGISTERED -->
-          <div class="mso-trust-card">
-            <div class="mso-trust-icon-box">
-              <svg viewBox="0 0 95 26" class="mso-trust-svg">
-                <rect x="2" y="3" width="28" height="20" rx="3" fill="#2563eb"/>
-                <text x="5" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="12" fill="#ffffff">BBB</text>
-                <text x="34" y="13" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="9" fill="#ffffff">REGISTERED</text>
-                <text x="34" y="21" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="7.5" fill="#93c5fd">ACCREDITED A+</text>
-              </svg>
-            </div>
-            <div class="mso-trust-card-sub">BBB Registered</div>
-          </div>
-
-        </div>
-      </div>
-
     </div>
 
-    <!-- FULL-WIDTH BOTTOM SEARCH BAR (EXACT TOPTAL STYLE) -->
-    <div class="mso-hero-search-wrap">
-      <div class="mso-toptal-search-box">
-        <span class="mso-search-glass" aria-hidden="true">🔍</span>
-        <input 
-          type="search" 
-          id="msoSearchInput"
-          class="mso-toptal-search-input" 
-          placeholder="What are you looking for?"
-          aria-label="What are you looking for?"
-          autocomplete="off"
-        />
-        <div class="mso-hero-search-actions">
-          <button type="button" id="msoVoiceBtn" class="mso-hero-mic-btn" title="Speak to Search (Voice Recognition)" aria-label="Activate Voice Search">
-            🎙️
-          </button>
-          <button type="button" id="msoSubmitSearchBtn" class="mso-hero-submit-btn" aria-label="Search">
-            Search
-          </button>
-        </div>
-      </div>
+  </div>
 
-      <!-- Instant Dropdown Results -->
-      <div id="msoSearchDropdown" class="mso-autocomplete-panel" role="region" aria-live="polite"></div>
-
-      <!-- Quick Filter Chips -->
-      <div class="mso-hero-trending-chips">
-        <span class="mso-chips-label">Trending:</span>
-        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('deer hunting knives')">Deer Hunting Knives</button>
-        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('cpm magnacut')">CPM MagnaCut</button>
-        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('camp sharpening')">Camp Sharpening</button>
-        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('buck 110')">Buck 110</button>
-        <button type="button" class="mso-hero-chip" onclick="msoQuickSearch('edc pocket knives')">EDC Folders</button>
+  <!-- FULL-WIDTH BOTTOM SEARCH BAR (EXACT TOPTAL RECTANGULAR BOX) -->
+  <div class="mso-hero-search-container">
+    <div class="mso-toptal-search-bar">
+      <span class="mso-lens-icon" aria-hidden="true">🔍</span>
+      <input 
+        type="search" 
+        id="msoSearchInput"
+        class="mso-toptal-input" 
+        placeholder="What are you looking for?"
+        aria-label="What are you looking for?"
+        autocomplete="off"
+      />
+      <div class="mso-search-actions">
+        <button type="button" id="msoVoiceBtn" class="mso-voice-mic-btn" title="Speak to Search (Voice Recognition)" aria-label="Activate Voice Search">
+          🎙️
+        </button>
+        <button type="button" id="msoSubmitSearchBtn" class="mso-search-go-btn" aria-label="Search">
+          Search
+        </button>
       </div>
     </div>
-  </header>
 
-  <!-- 3.2 HORIZONTAL CATEGORY NAVIGATION PILLS (WITH INSTANT CLIENT FILTERING) -->
+    <!-- Autocomplete Dropdown -->
+    <div id="msoSearchDropdown" class="mso-autocomplete-panel" role="region" aria-live="polite"></div>
+
+    <!-- Quick Trending Chips -->
+    <div class="mso-hero-chips-bar">
+      <span class="mso-chips-title">Trending:</span>
+      <button type="button" class="mso-chip-item" onclick="msoQuickSearch('deer hunting knives')">Deer Hunting Knives</button>
+      <button type="button" class="mso-chip-item" onclick="msoQuickSearch('cpm magnacut')">CPM MagnaCut</button>
+      <button type="button" class="mso-chip-item" onclick="msoQuickSearch('camp sharpening')">Camp Sharpening</button>
+      <button type="button" class="mso-chip-item" onclick="msoQuickSearch('buck 110')">Buck 110</button>
+      <button type="button" class="mso-chip-item" onclick="msoQuickSearch('edc pocket knives')">EDC Folders</button>
+    </div>
+  </div>
+
+</header>
+
+<!-- ======================================================== -->
+<!-- 3.2 100% PURE WHITE EDITORIAL BODY (1200PX CENTERED)     -->
+<!-- ======================================================== -->
+<main class="mso-body-container" role="main">
+
+  <!-- CATEGORY NAVIGATION PILLS (WITH INSTANT CLIENT FILTERING) -->
   <nav class="mso-category-nav" aria-label="Editorial Categories">
     <div class="mso-nav-row">
       <button type="button" class="mso-nav-pill active" onclick="msoFilterCategory('all', this)">All Field Guides</button>
@@ -1205,7 +1198,7 @@ async function deployEliteToptalBlog() {
     </div>
   </nav>
 
-  <!-- 3.3 REFINED EDITORIAL SPOTLIGHT (FLAGSHIP FEATURE) -->
+  <!-- REFINED EDITORIAL SPOTLIGHT (FLAGSHIP FEATURE) -->
   <article class="mso-flagship-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="steel">
     <div class="mso-flagship-cover">
       <a href="/cpm-magnacut-vs-bohler-m390mk/" style="display:block; width:100%; height:100%;">
@@ -1241,7 +1234,7 @@ async function deployEliteToptalBlog() {
     </div>
   </article>
 
-  <!-- 3.4 3-COLUMN EDITORIAL BENTO GRID (COMPACT COVERS + TOPTAL AUTHOR PROFILES) -->
+  <!-- 3-COLUMN EDITORIAL BENTO GRID (COMPACT COVERS + TOPTAL AUTHOR PROFILES) -->
   <section aria-labelledby="featured-reports-heading">
     <div class="mso-grid-header">
       <h2 id="featured-reports-heading">Featured Field Reports &amp; Buying Guides</h2>
@@ -1487,7 +1480,7 @@ async function deployEliteToptalBlog() {
     </div>
   </section>
 
-  <!-- 3.5 HIGH-CONVERTING EDITORIAL DISPATCH BANNER -->
+  <!-- WORLD-CLASS NEWSLETTER DISPATCH BANNER -->
   <section class="mso-dispatch-card" aria-label="Field Dispatch Newsletter">
     <div class="mso-dispatch-info">
       <span class="mso-dispatch-pill">&bull; FREE FIELD ASSET &bull; 2026 EDITION</span>
@@ -1507,7 +1500,7 @@ async function deployEliteToptalBlog() {
     </div>
   </section>
 
-  <!-- 3.6 WIRECUTTER-STYLE PRODUCT MATRIX (EXACTLY 1 ROW OF 4 CARDS) -->
+  <!-- WIRECUTTER-STYLE PRODUCT MATRIX (EXACTLY 1 ROW OF 4 CARDS) -->
   <section class="mso-matrix-section" aria-labelledby="gear-matrix-heading">
     <div class="mso-matrix-header">
       <div>
@@ -1625,9 +1618,9 @@ async function deployEliteToptalBlog() {
 
 </main>
 
-<!-- ========================================== -->
-<!-- 4. REAL-TIME SEARCH & VOICE JAVASCRIPT     -->
-<!-- ========================================== -->
+<!-- ======================================================== -->
+<!-- 4. CLIENT JAVASCRIPT: REAL-TIME & VOICE SEARCH + FILTERS -->
+<!-- ======================================================== -->
 <script>
 const SEARCH_INDEX = [
   {
@@ -1917,7 +1910,7 @@ function msoFilterCategory(cat, btn) {
 })();
 </script>`;
 
-  console.log('Updating WordPress page #166494 to exact Toptal Hero layout with EEAT factors...');
+  console.log('Updating WordPress page #166494 to Full-Bleed Toptal Hero layout...');
   const res = await fetch(`${baseUrl}/wp-json/wp/v2/pages/166494`, {
     method: 'POST',
     headers,
@@ -1928,7 +1921,7 @@ function msoFilterCategory(cat, btn) {
     })
   });
   const updated = await res.json();
-  console.log(`✅ Elite professional blog page deployed successfully: ${updated.link}`);
+  console.log(`✅ Full-Bleed Toptal Hero blog page deployed successfully: ${updated.link}`);
 }
 
 deployEliteToptalBlog().then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); });
