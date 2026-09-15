@@ -600,155 +600,155 @@ function updateSeoRoadmapTab(ss, seoRoadmap) {
  */
 function updateRoadmapSheet() {
   var ss = getTargetSpreadsheet();
+  var sheet = ss.getSheetByName('SEO Execution Roadmap') || ss.getActiveSheet();
   var tasks = [
-    {
-      "date": "2026-09-14",
-      "task_name": "Autopilot Architecture & Safety Audit",
-      "category": "Infrastructure & Safety",
-      "priority": "Critical",
-      "logic": "Analyzed existing background schedulers and engines across NicheSEO Pro to identify automation loop and protect live rankings.",
-      "status": "Done",
-      "proof_url": "NicheSEO Pro Database (autopilot_configs & mso_settings)"
-    },
-    {
-      "date": "2026-09-14",
-      "task_name": "Manual Approval Gating Lock (requires_approval = 1)",
-      "category": "Safeguards & Control",
-      "priority": "Critical",
-      "logic": "Locked direct automated publishing so no machine changes can overwrite live pages without explicit agency approval.",
-      "status": "Done",
-      "proof_url": "Database Lock: requires_approval = 1"
-    },
-    {
-      "date": "2026-09-14",
-      "task_name": "October Season Masterpiece Architecture Deployment",
-      "category": "Landing Page CRO & E-E-A-T",
-      "priority": "High",
-      "logic": "Deployed high-converting Blade HQ inspired commercial landing page for seasonal fall traffic without altering native homepage (#3821).",
-      "status": "Done",
-      "proof_url": "https://www.michigansportsoutdoor.com/october-season/"
-    },
-    {
-      "date": "2026-09-14",
-      "task_name": "Bespoke Visual Assets & MSO Journal Hub Integration",
-      "category": "Visual E-E-A-T & CRO",
-      "priority": "High",
-      "logic": "Created and deployed 4 bespoke high-converting editorial blog covers (Benchmade, MagnaCut, Morakniv, Hunting) + 2 branded YouTube Field Test cards.",
-      "status": "Done",
-      "proof_url": "https://www.michigansportsoutdoor.com/october-season/#mso-journal"
-    },
-    {
-      "date": "2026-09-14",
-      "task_name": "Authentic Product Inventory Integration (16 SKUs)",
-      "category": "Commercial Conversion",
-      "priority": "High",
-      "logic": "Extracted 16 verified live MSO WooCommerce knife products (8 New Knives, 8 Hot Sales) with real pricing and direct cart triggers.",
-      "status": "Done",
-      "proof_url": "https://www.michigansportsoutdoor.com/october-season/#featured-knives"
-    },
-    {
-      "date": "2026-09-14",
-      "task_name": "Full Structured Schema Suite Implementation",
-      "category": "Technical SEO",
-      "priority": "Critical",
-      "logic": "Embedded complete JSON-LD schema bundle (Product, FAQPage, Review/Rating, BreadcrumbList) for maximum Google Rich Results visibility.",
-      "status": "Done",
-      "proof_url": "JSON-LD Suite on /october-season/"
-    },
-    {
-      "date": "2026-09-15",
-      "task_name": "Full Autopilot Scheduler Shutdown (enabled = 0)",
-      "category": "Safety & System Control",
-      "priority": "Critical",
-      "logic": "Completely halted background 3-minute cron loop (scheduler_enabled: false) and dashboard automated runs to eliminate rogue crawling.",
-      "status": "Done",
-      "proof_url": "Database state: Paused"
-    },
-    {
-      "date": "2026-09-15",
-      "task_name": "GSC Indexing & Rich Results Verification for October Page",
-      "category": "Technical Validation",
-      "priority": "High",
-      "logic": "Submit /october-season/ to Google Indexing API pool and run Google Rich Results validation test to confirm schema eligibility.",
-      "status": "In Progress",
-      "proof_url": "Google Search Console & Rich Results Tool"
-    },
-    {
-      "date": "2026-09-15",
-      "task_name": "Store-Wide 5-Tier SEO, Catalogue & LLM/GEO Audit",
-      "category": "Strategic & Technical Audit",
-      "priority": "Critical",
-      "logic": "Conducted store-wide audit across 26,111 published URLs, top categories, brand hubs, CTR leakage on 525 URLs (Aitor Shark Master #7.7), and diagnosed Google Indexing API quota exhaustion.",
-      "status": "Done",
-      "proof_url": "Audit Report Delivered & Synthesized (Ready for Action)"
-    },
-    {
-      "date": "2026-09-16",
-      "task_name": "Category Hub Modernization: Hunting Knives",
-      "category": "Category Architecture",
-      "priority": "High",
-      "logic": "Transform /product-category/knives-tools/hunting-knives/ with Blade HQ layout, buying guide hero, and category FAQ schema to capture fall hunters.",
-      "status": "Planned",
-      "proof_url": "https://www.michigansportsoutdoor.com/product-category/knives-tools/hunting-knives/"
-    },
-    {
-      "date": "2026-09-17",
-      "task_name": "Category Hub Modernization: Pocket & Folding Knives",
-      "category": "Category Architecture",
-      "priority": "High",
-      "logic": "Upgrade /product-category/knives-tools/folding-knives/ with subcategory pills (EDC, Tactical, Lockback), semantic H2/H3 headers, and FAQ markup.",
-      "status": "Planned",
-      "proof_url": "https://www.michigansportsoutdoor.com/product-category/knives-tools/folding-knives/"
-    },
-    {
-      "date": "2026-09-18",
-      "task_name": "Top 5 High-Impression Product On-Page SEO (Batch 1)",
-      "category": "Product On-Page SEO",
-      "priority": "High",
-      "logic": "Inject Blade HQ technical spec tables (Blade Steel MagnaCut/S30V, HRC hardness, lock mechanism, grind) + Product Schema with in-stock offers.",
-      "status": "Planned",
-      "proof_url": "Top 5 Product URLs in Search Console"
-    },
-    {
-      "date": "2026-09-19",
-      "task_name": "Top 5 High-Impression Product On-Page SEO (Batch 2)",
-      "category": "Product On-Page SEO",
-      "priority": "High",
-      "logic": "Implement technical spec tables, WebP high-res imagery with descriptive alt tags, and AggregateRating review schemas for products 6 to 10.",
-      "status": "Planned",
-      "proof_url": "Product URLs 6 to 10 in Search Console"
-    },
-    {
-      "date": "2026-09-20",
-      "task_name": "Internal Linking Silo & Link Equity Distribution",
-      "category": "Internal PR & Silo Structure",
-      "priority": "Medium",
-      "logic": "Construct bi-directional contextual links from high-ranking MSO blog posts to commercial category hubs and high-converting product pages.",
-      "status": "Planned",
-      "proof_url": "MSO Blog & Category Silo Structure"
-    },
-    {
-      "date": "2026-09-21",
-      "task_name": "Core Web Vitals & Image Payload Audit",
-      "category": "Performance & UX",
-      "priority": "Medium",
-      "logic": "Audit Cumulative Layout Shift (CLS) and Largest Contentful Paint (LCP) across updated pages, ensuring WebP compression and responsive dimensions.",
-      "status": "Planned",
-      "proof_url": "Google PageSpeed Insights Audit"
-    },
-    {
-      "date": "2026-09-22",
-      "task_name": "Weekly Ranking Movement & Revenue Impact Executive Review",
-      "category": "Analytics & Reporting",
-      "priority": "High",
-      "logic": "Audit 7-day GSC click/impression growth, rank positioning changes on optimized keywords, and WooCommerce conversion gains for client report.",
-      "status": "Planned",
-      "proof_url": "Google Search Console Performance Report"
-    }
-  ];
-  updateSeoRoadmapTab(ss, tasks);
+    [
+        "2026-09-14",
+        "Autopilot Architecture & Safety Audit",
+        "Infrastructure & Safety",
+        "Critical",
+        "Analyzed existing background schedulers and engines across NicheSEO Pro to identify automation loop and protect live rankings.",
+        "Done",
+        "NicheSEO Pro Database (autopilot_configs & mso_settings)"
+    ],
+    [
+        "2026-09-14",
+        "Manual Approval Gating Lock (requires_approval = 1)",
+        "Safeguards & Control",
+        "Critical",
+        "Locked direct automated publishing so no machine changes can overwrite live pages without explicit agency approval.",
+        "Done",
+        "Database Lock: requires_approval = 1"
+    ],
+    [
+        "2026-09-14",
+        "October Season Masterpiece Architecture Deployment",
+        "Landing Page CRO & E-E-A-T",
+        "High",
+        "Deployed high-converting Blade HQ inspired commercial landing page for seasonal fall traffic without altering native homepage (#3821).",
+        "Done",
+        "https://www.michigansportsoutdoor.com/october-season/"
+    ],
+    [
+        "2026-09-14",
+        "Bespoke Visual Assets & MSO Journal Hub Integration",
+        "Visual E-E-A-T & CRO",
+        "High",
+        "Created and deployed 4 bespoke high-converting editorial blog covers (Benchmade, MagnaCut, Morakniv, Hunting) + 2 branded YouTube Field Test cards.",
+        "Done",
+        "https://www.michigansportsoutdoor.com/october-season/#mso-journal"
+    ],
+    [
+        "2026-09-14",
+        "Authentic Product Inventory Integration (16 SKUs)",
+        "Commercial Conversion",
+        "High",
+        "Extracted 16 verified live MSO WooCommerce knife products (8 New Knives, 8 Hot Sales) with real pricing and direct cart triggers.",
+        "Done",
+        "https://www.michigansportsoutdoor.com/october-season/#featured-knives"
+    ],
+    [
+        "2026-09-14",
+        "Full Structured Schema Suite Implementation",
+        "Technical SEO",
+        "Critical",
+        "Embedded complete JSON-LD schema bundle (Product, FAQPage, Review/Rating, BreadcrumbList) for maximum Google Rich Results visibility.",
+        "Done",
+        "JSON-LD Suite on /october-season/"
+    ],
+    [
+        "2026-09-15",
+        "Full Autopilot Scheduler Shutdown (enabled = 0)",
+        "Safety & System Control",
+        "Critical",
+        "Completely halted background 3-minute cron loop (scheduler_enabled: false) and dashboard automated runs to eliminate rogue crawling.",
+        "Done",
+        "Database state: Paused"
+    ],
+    [
+        "2026-09-15",
+        "GSC Indexing & Rich Results Verification for October Page",
+        "Technical Validation",
+        "High",
+        "Submit /october-season/ to Google Indexing API pool and run Google Rich Results validation test to confirm schema eligibility.",
+        "In Progress",
+        "Google Search Console & Rich Results Tool"
+    ],
+    [
+        "2026-09-15",
+        "Top 5 High-Impression Product On-Page SEO (Batch 1)",
+        "Product On-Page SEO",
+        "High",
+        "Deployed Blade HQ technical spec tables, high-CTR transactional titles, descriptive image alt tags, and FAQPage schemas across Top 5 CTR gap products (Aitor Shark Master #7.7, Black Beard #6.7, Esbit, Mil-Tec, Nitecore).",
+        "Done",
+        "https://www.michigansportsoutdoor.com/product/aitor-shark-master/"
+    ],
+    [
+        "2026-09-15",
+        "Store-Wide 5-Tier SEO, Catalogue & LLM/GEO Audit",
+        "Strategic & Technical Audit",
+        "Critical",
+        "Conducted store-wide audit across 26,111 published URLs, top categories, brand hubs, CTR leakage on 525 URLs (Aitor Shark Master #7.7), and diagnosed Google Indexing API quota exhaustion.",
+        "Done",
+        "Audit Report Delivered & Synthesized (Ready for Action)"
+    ],
+    [
+        "2026-09-16",
+        "Category Hub Modernization: Hunting Knives",
+        "Category Architecture",
+        "High",
+        "Transform /product-category/knives-tools/hunting-knives/ with Blade HQ layout, buying guide hero, and category FAQ schema to capture fall hunters.",
+        "Planned",
+        "https://www.michigansportsoutdoor.com/product-category/knives-tools/hunting-knives/"
+    ],
+    [
+        "2026-09-17",
+        "Category Hub Modernization: Pocket & Folding Knives",
+        "Category Architecture",
+        "High",
+        "Upgrade /product-category/knives-tools/folding-knives/ with subcategory pills (EDC, Tactical, Lockback), semantic H2/H3 headers, and FAQ markup.",
+        "Planned",
+        "https://www.michigansportsoutdoor.com/product-category/knives-tools/folding-knives/"
+    ],
+    [
+        "2026-09-19",
+        "Top 5 High-Impression Product On-Page SEO (Batch 2)",
+        "Product On-Page SEO",
+        "High",
+        "Implement technical spec tables, WebP high-res imagery with descriptive alt tags, and AggregateRating review schemas for products 6 to 10.",
+        "Planned",
+        "Product URLs 6 to 10 in Search Console"
+    ],
+    [
+        "2026-09-20",
+        "Internal Linking Silo & Link Equity Distribution",
+        "Internal PR & Silo Structure",
+        "Medium",
+        "Construct bi-directional contextual links from high-ranking MSO blog posts to commercial category hubs and high-converting product pages.",
+        "Planned",
+        "MSO Blog & Category Silo Structure"
+    ],
+    [
+        "2026-09-21",
+        "Core Web Vitals & Image Payload Audit",
+        "Performance & UX",
+        "Medium",
+        "Audit Cumulative Layout Shift (CLS) and Largest Contentful Paint (LCP) across updated pages, ensuring WebP compression and responsive dimensions.",
+        "Planned",
+        "Google PageSpeed Insights Audit"
+    ],
+    [
+        "2026-09-22",
+        "Weekly Ranking Movement & Revenue Impact Executive Review",
+        "Analytics & Reporting",
+        "High",
+        "Audit 7-day GSC click/impression growth, rank positioning changes on optimized keywords, and WooCommerce conversion gains for client report.",
+        "Planned",
+        "Google Search Console Performance Report"
+    ]
+];
+  sheet.getRange(2, 1, tasks.length, 7).setValues(tasks);
   if (typeof formatRoadmapTab === 'function') {
     formatRoadmapTab();
   }
 }
-
