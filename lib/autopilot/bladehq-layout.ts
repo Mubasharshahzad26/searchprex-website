@@ -49,19 +49,19 @@ export function detectProductCategory(name: string, desc: string, categories: an
   if (nameText.includes('sharpener') || nameText.includes('sharpening stone') || nameText.includes('whetstone') || nameText.includes('strop') || nameText.includes('honing') || catNames.includes('sharpener')) {
     return 'sharpener';
   }
-  if (nameText.includes('flashlight') || nameText.includes('headlamp') || nameText.includes('torch') || nameText.includes('lumens') || catNames.includes('light')) {
+  if (nameText.includes('flashlight') || nameText.includes('headlamp') || nameText.includes('torch') || nameText.includes('lantern') || nameText.includes('beacon') || nameText.includes('lumens') || catNames.includes('light') || catNames.includes('lanterns') || catNames.includes('headlamps')) {
     return 'flashlight';
   }
-  if (nameText.includes('axe') || nameText.includes('hatchet') || nameText.includes('tomahawk') || nameText.includes('machete') || catNames.includes('axe')) {
+  if (nameText.includes('axe') || nameText.includes('hatchet') || nameText.includes('tomahawk') || nameText.includes('machete') || nameText.includes('saw') || nameText.includes('gomboy') || catNames.includes('axe') || catNames.includes('saws') || catNames.includes('tree-trimming')) {
     return 'axe_tool';
   }
-  if (nameText.includes('compass') || nameText.includes('survival shovel') || nameText.includes('camp shovel') || nameText.includes('survival kit') || catNames.includes('camping-and-survival') || catNames.includes('survival')) {
+  if (nameText.includes('compass') || nameText.includes('survival shovel') || nameText.includes('camp shovel') || nameText.includes('survival kit') || nameText.includes('fire starter') || nameText.includes('stove') || nameText.includes('burner') || nameText.includes('cookset') || catNames.includes('camping-and-survival') || catNames.includes('survival') || catNames.includes('camp-cooking') || catNames.includes('firestarting')) {
     return 'camping_survival';
   }
-  if (nameText.includes('wallet') || nameText.includes('money clip') || nameText.includes('keychain') || nameText.includes('lanyard') || nameText.includes('bead') || nameText.includes('scale') || catNames.includes('gear-bags') || catNames.includes('pens-and-notebooks')) {
+  if (nameText.includes('wallet') || nameText.includes('money clip') || nameText.includes('keychain') || nameText.includes('lanyard') || nameText.includes('bead') || nameText.includes('scale') || nameText.includes('leverage cap') || nameText.includes('baton') || catNames.includes('gear-bags') || catNames.includes('pens-and-notebooks') || catNames.includes('batons')) {
     return 'edc_accessory';
   }
-  if (nameText.includes('fixed blade') || nameText.includes('full tang') || nameText.includes('dagger') || nameText.includes('boot knife') || nameText.includes('bowie') || catNames.includes('fixed-blade') || catNames.includes('daggers') || catNames.includes('bowies')) {
+  if (nameText.includes('fixed blade') || nameText.includes('full tang') || nameText.includes('dagger') || nameText.includes('boot knife') || nameText.includes('bowie') || nameText.includes('shark master') || nameText.includes('dive knife') || nameText.includes('spear') || catNames.includes('fixed-blade') || catNames.includes('daggers') || catNames.includes('bowies') || catNames.includes('spears')) {
     return 'fixed_blade';
   }
 
@@ -386,6 +386,19 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
       specs['Power Architecture'] = 'NL1416R USB-C Li-ion (Included) or 2x AA Batteries';
       specs['Housing Construction'] = 'HA III Military Grade Hard-Anodized Aluminum';
       specs['Water & Impact Rating'] = 'IP68 Submersible (2m) & 2m Impact Resistance';
+    } else if (fullText.includes('nu25') || fullText.includes('headlamp')) {
+      specs['Product Type'] = 'Ultralight Dual-Beam USB-C Rechargeable Headlamp';
+      specs['Max Output'] = '400 Lumens (Dual Spotlight & Floodlight)';
+      specs['Beam Distance'] = '64 Meters (70 Yards Peak Throw)';
+      specs['Power Architecture'] = 'Built-in 650mAh USB-C Rechargeable Battery';
+      specs['Housing Construction'] = 'Impact-Resistant Polycarbonate Chassis (1.98 oz)';
+      specs['Water & Impact Rating'] = 'IP66 Weatherproof & 1m Impact Resistant';
+    } else if (fullText.includes('barebones') || fullText.includes('beacon') || fullText.includes('lantern')) {
+      specs['Product Type'] = 'Vintage Backcountry LED Hanging Lantern';
+      specs['Max Output'] = '220 Lumens (Smooth Dimming Ambient Dial)';
+      specs['Power Architecture'] = 'Rechargeable Li-ion (Integrated USB Cable, Up to 200h)';
+      specs['Housing Construction'] = 'Stamped Steel & Protective Ribbed Cage with Carabiner';
+      specs['Water & Impact Rating'] = 'Weather-Resistant Outdoor Camping Build';
     } else {
       specs['Product Type'] = 'Tactical Illumination / High-Output Flashlight';
       const lumenMatch = fullText.replace(/,/g, '').match(/(\d{3,5})\s*(?:lumens?|lm)/i);
@@ -406,23 +419,47 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Warranty & 30-Day Guarantee';
   } else if (categoryType === 'axe_tool') {
-    specs['Product Type'] = 'Field Axe / Splitting Hatchet / Heavy Utility Tool';
-    specs['Head Metallurgy'] = detectedSteel.includes('High') ? detectedSteel : 'Forged High-Carbon Shock-Resistant Steel';
-    specs['Handle Construction'] = fullText.includes('hickory') ? 'American Select Hickory' : (fullText.includes('fiberglass') ? 'Reinforced Fiberglass / Poly' : 'Ergonomic Shock-Absorbing Handle');
-    specs['Overall Length'] = detectedLength !== '3.25" (8.26 cm)' ? detectedLength : '14.5" Field Utility Length';
-    specs['Sheath / Mask'] = 'Heavy-Duty Protective Mask / Sheath';
+    if (fullText.includes('gomboy') || fullText.includes('silky') || fullText.includes('saw')) {
+      specs['Product Type'] = 'Professional Japanese Folding Pull Saw';
+      specs['Blade Metallurgy'] = 'Japanese SK4 High-Carbon Steel (Hard Chrome Plated)';
+      specs['Blade Geometry'] = '240mm (9.5") Curved Mirai-Me Impulse Hardened';
+      specs['Teeth Configuration'] = '8.5 Teeth per 30mm (Large Teeth for Aggressive Cut)';
+      specs['Handle Construction'] = 'Non-Slip Textured GOM Rubber with Dual-Angle Lock';
+      specs['Sheath / Mask'] = 'Clear Hard Plastic Flip Storage Case';
+    } else {
+      specs['Product Type'] = 'Field Axe / Splitting Hatchet / Heavy Utility Tool';
+      specs['Head Metallurgy'] = detectedSteel.includes('High') ? detectedSteel : 'Forged High-Carbon Shock-Resistant Steel';
+      specs['Handle Construction'] = fullText.includes('hickory') ? 'American Select Hickory' : (fullText.includes('fiberglass') ? 'Reinforced Fiberglass / Poly' : 'Ergonomic Shock-Absorbing Handle');
+      specs['Overall Length'] = detectedLength !== '3.25" (8.26 cm)' ? detectedLength : '14.5" Field Utility Length';
+      specs['Sheath / Mask'] = 'Heavy-Duty Protective Mask / Sheath';
+    }
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
   } else if (categoryType === 'edc_accessory') {
-    specs['Product Type'] = 'Everyday Carry (EDC) Gear / Tactical Accessory';
-    specs['Primary Material'] = detectedHandle.includes('Composite') ? (fullText.includes('titanium') ? '6Al4V Grade 5 Titanium' : 'Aircraft Aluminum / Stainless Steel') : detectedHandle;
-    specs['Form Factor'] = 'Minimalist Slimline Pocket Profile';
-    specs['Utility Profile'] = 'Tactical Organization & Quick Field Access';
-    specs['Finish / Durability'] = 'Corrosion-Resistant PVD / Weatherproof Finish';
+    if (fullText.includes('leverage cap') || fullText.includes('asp') || fullText.includes('baton')) {
+      specs['Product Type'] = 'Tactical Baton Grip Retention & Leverage Cap';
+      specs['Primary Material'] = 'Precision Machined Solid Alloy Steel (Black Chrome)';
+      specs['Compatibility'] = 'ASP Friction Loc & Talon Expandable Batons';
+      specs['Utility Profile'] = 'Increased Leverage, Faster Draw & Enhanced Officer Grip Retention';
+      specs['Finish / Durability'] = 'Corrosion-Proof Heavy Duty Tactical Finish';
+    } else {
+      specs['Product Type'] = 'Everyday Carry (EDC) Gear / Tactical Accessory';
+      specs['Primary Material'] = detectedHandle.includes('Composite') ? (fullText.includes('titanium') ? '6Al4V Grade 5 Titanium' : 'Aircraft Aluminum / Stainless Steel') : detectedHandle;
+      specs['Form Factor'] = 'Minimalist Slimline Pocket Profile';
+      specs['Utility Profile'] = 'Tactical Organization & Quick Field Access';
+      specs['Finish / Durability'] = 'Corrosion-Resistant PVD / Weatherproof Finish';
+    }
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Warranty & 30-Day Guarantee';
   } else if (categoryType === 'fixed_blade') {
-    if (fullText.includes('shark master') || fullText.includes('aitor')) {
+    if (fullText.includes('spear') || fullText.includes('combat ready')) {
+      specs['Product Type'] = 'Tactical Survival & Big Game Hunting Spear';
+      specs['Blade Metallurgy'] = 'Black Oxide Coated 3Cr13 High-Carbon Stainless';
+      specs['Blade Profile'] = '3.5" Double-Edged Piercing Spear Head';
+      specs['Tang Construction'] = 'Heavy-Duty Reinforced Polymer Shaft Socket';
+      specs['Handle Material'] = 'Grooved Nylon Fiber Shaft with In-Line Grip';
+      specs['Sheath System'] = 'Reinforced Black Nylon Belt Sheath';
+    } else if (fullText.includes('shark master') || fullText.includes('aitor')) {
       specs['Product Type'] = 'Heavy-Duty Field & Diving Fixed Blade Knife';
       specs['Blade Metallurgy'] = 'Spanish Cr-Mo-Va Stainless Steel (55-58 HRC)';
       specs['Tang Construction'] = 'Full Tang Integral Heavy Dive Blade';
