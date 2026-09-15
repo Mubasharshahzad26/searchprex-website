@@ -361,7 +361,7 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
   else if (fullText.includes('micarta')) detectedHandle = 'Canvas / Linen Micarta';
   else if (fullText.includes('g-10') || fullText.includes('g10')) detectedHandle = 'Textured G-10 Phenolic';
   else if (fullText.includes('aluminum')) detectedHandle = '6061-T6 Aircraft Aluminum';
-  else if (fullText.includes('wood') || fullText.includes('ziricote') || fullText.includes('walnut')) detectedHandle = 'Stabilized Hardwood';
+  else if (/\b(wood|ziricote|walnut|rosewood|ebony)\b/i.test(fullText)) detectedHandle = 'Stabilized Hardwood';
 
   // Blade length helper
   let detectedLength = '3.25" (8.26 cm)';
@@ -379,13 +379,22 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
 
   // Category-specific spec population
   if (categoryType === 'flashlight') {
-    specs['Product Type'] = 'Tactical Illumination / High-Output Flashlight';
-    const lumenMatch = fullText.match(/(\d{3,5})\s*(?:lumens?|lm)/i);
-    specs['Max Output'] = lumenMatch ? `${lumenMatch[1]} Lumens (Turbo Peak)` : 'High-Output LED Illumination';
-    specs['Beam Profile'] = 'Balanced Long-Range Throw & Wide Flood';
-    specs['Power Architecture'] = fullText.includes('usb') ? 'USB-C Rechargeable Li-ion Battery' : 'High-Drain Rechargeable Battery';
-    specs['Housing Construction'] = detectedHandle.includes('Titanium') ? 'Grade 5 Titanium Body' : 'Aerospace Hard-Anodized Aluminum';
-    specs['Water & Impact Rating'] = 'IPX8 Submersible & 1-2m Impact Resistant';
+    if (fullText.includes('nitecore') && (fullText.includes('mt2a') || fullText.includes('mt2a pro'))) {
+      specs['Product Type'] = 'Tactical High-Output LED Flashlight';
+      specs['Max Output'] = '1,000 Lumens (Nitecore UHi 20 LED)';
+      specs['Beam Distance'] = '360 Meters (393 Yards Peak Throw)';
+      specs['Power Architecture'] = 'NL1416R USB-C Li-ion (Included) or 2x AA Batteries';
+      specs['Housing Construction'] = 'HA III Military Grade Hard-Anodized Aluminum';
+      specs['Water & Impact Rating'] = 'IP68 Submersible (2m) & 2m Impact Resistance';
+    } else {
+      specs['Product Type'] = 'Tactical Illumination / High-Output Flashlight';
+      const lumenMatch = fullText.replace(/,/g, '').match(/(\d{3,5})\s*(?:lumens?|lm)/i);
+      specs['Max Output'] = lumenMatch ? `${lumenMatch[1]} Lumens (Turbo Peak)` : 'High-Output LED Illumination';
+      specs['Beam Profile'] = 'Balanced Long-Range Throw & Wide Flood';
+      specs['Power Architecture'] = fullText.includes('usb') ? 'USB-C Rechargeable Li-ion Battery' : 'High-Drain Rechargeable Battery';
+      specs['Housing Construction'] = detectedHandle.includes('Titanium') ? 'Grade 5 Titanium Body' : 'Aerospace Hard-Anodized Aluminum';
+      specs['Water & Impact Rating'] = 'IPX8 Submersible & 1-2m Impact Resistant';
+    }
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
   } else if (categoryType === 'sharpener') {
@@ -413,12 +422,21 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Warranty & 30-Day Guarantee';
   } else if (categoryType === 'fixed_blade') {
-    specs['Product Type'] = 'Fixed Blade Utility / Field Dressing Knife';
-    specs['Blade Metallurgy'] = detectedSteel;
-    specs['Tang Construction'] = 'Full Tang Integral Steel Construction';
-    specs['Handle Material'] = detectedHandle;
-    specs['Blade Length'] = detectedLength;
-    specs['Sheath System'] = fullText.includes('leather') ? 'Heavy-Duty Stitched Leather Sheath' : 'Molded Kydex Tactical Belt Sheath';
+    if (fullText.includes('shark master') || fullText.includes('aitor')) {
+      specs['Product Type'] = 'Heavy-Duty Field & Diving Fixed Blade Knife';
+      specs['Blade Metallurgy'] = 'Spanish Cr-Mo-Va Stainless Steel (55-58 HRC)';
+      specs['Tang Construction'] = 'Full Tang Integral Heavy Dive Blade';
+      specs['Handle Material'] = 'Textured Black ABS with Stainless Guard & Pommel';
+      specs['Blade Length'] = '7.25" (18.4 cm) Spear Point with Sawback Spine';
+      specs['Sheath System'] = 'Rigid ABS Dive Sheath with Rubber Leg Straps';
+    } else {
+      specs['Product Type'] = 'Fixed Blade Utility / Field Dressing Knife';
+      specs['Blade Metallurgy'] = detectedSteel;
+      specs['Tang Construction'] = 'Full Tang Integral Steel Construction';
+      specs['Handle Material'] = detectedHandle;
+      specs['Blade Length'] = detectedLength;
+      specs['Sheath System'] = fullText.includes('leather') ? 'Heavy-Duty Stitched Leather Sheath' : 'Molded Kydex Tactical Belt Sheath';
+    }
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
   } else if (categoryType === 'tin_sign_decor') {
@@ -430,10 +448,24 @@ export function extractProductSpecs(product: BladeHqLayoutInput['product']) {
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Michigan Sports Outdoor 30-Day Guarantee';
   } else if (categoryType === 'camping_survival') {
-    specs['Product Type'] = 'Wilderness Camping & Survival Field Gear';
-    specs['Primary Material'] = detectedHandle.includes('Composite') ? 'High-Strength Polymer & Stainless Steel' : detectedHandle;
-    specs['Deployment Profile'] = 'Compact Backcountry & Emergency Preparedness';
-    specs['Weather Resistance'] = 'All-Weather Waterproof / Rust-Resistant Build';
+    if (fullText.includes('fire starter') || fullText.includes('firestarter') || fullText.includes('tinder') || fullText.includes('black beard')) {
+      specs['Product Type'] = 'Emergency Fire Starter & Weatherproof Tinder';
+      specs['Primary Material'] = 'Braided Cotton Tinder & Non-Toxic Wax Blend';
+      specs['Fire Yield'] = '50+ Individual Fires per Stick';
+      specs['Continuous Burn Time'] = 'Up to 4.5 Hours of Sustained Burn';
+      specs['Weather Rating'] = '100% Waterproof, Windproof & Sub-Zero Operable';
+    } else if (fullText.includes('stove') || fullText.includes('burner') || fullText.includes('cookset')) {
+      specs['Product Type'] = 'Ultralight Backcountry Cooking Stove / Burner';
+      specs['Chassis Material'] = fullText.includes('aluminum') ? 'Hard-Anodized Aluminum & Brass' : 'Stainless Steel & Lightweight Alloy';
+      specs['Fuel Compatibility'] = fullText.includes('alcohol') ? 'Denatured Alcohol & Solid Fuel Tablets' : 'Isobutane / Propane Canisters (Threaded Lindal)';
+      specs['Deployment Weight'] = fullText.includes('15 oz') ? '15.0 oz (425 g) Total Nested System' : 'Ultra-Compact Pocket Profile';
+      specs['Ignition / Control'] = fullText.includes('piezo') ? 'Piezo Push-Button Ignition & Micro-Flame Dial' : 'Precision Simmer & Boil Flame Regulator';
+    } else {
+      specs['Product Type'] = 'Wilderness Camping & Survival Field Gear';
+      specs['Primary Material'] = detectedHandle.includes('Composite') ? 'High-Strength Polymer & Stainless Steel' : detectedHandle;
+      specs['Deployment Profile'] = 'Compact Backcountry & Emergency Preparedness';
+      specs['Weather Resistance'] = 'All-Weather Waterproof / Rust-Resistant Build';
+    }
     specs['Origin / Fulfillment'] = 'Inspected & Dispatched from Michigan, USA';
     specs['Warranty'] = 'Manufacturer Lifetime Warranty & 30-Day Guarantee';
   } else if (categoryType === 'culinary_knife') {
@@ -1190,9 +1222,9 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   const visualBreadcrumbs = buildVisualBreadcrumbsHtml(name, taxonomy);
 
   // 1. STREAMLINED CATEGORY-ADAPTIVE BUY BOX (SHORT DESCRIPTION)
-  const badge1 = specs['Blade Metallurgy'] || specs['Primary Material'] || specs['Max Output'] || specs['Abrasive Material'] || specs['Head Metallurgy'] || 'High-Performance Build';
-  const badge2 = specs['Lock Mechanism'] || specs['Tang Construction'] || specs['Power Architecture'] || specs['Steel Compatibility'] || specs['Form Factor'] || 'Precision Tolerances';
-  const badge3 = specs['Blade Length'] || specs['Housing Construction'] || specs['Overall Length'] || specs['Base & Alignment'] || 'Factory Inspected';
+  const badge1 = specs['Blade Metallurgy'] || specs['Primary Material'] || specs['Chassis Material'] || specs['Max Output'] || specs['Abrasive Material'] || specs['Head Metallurgy'] || 'High-Performance Build';
+  const badge2 = specs['Lock Mechanism'] || specs['Tang Construction'] || specs['Fuel Compatibility'] || specs['Fire Yield'] || specs['Beam Distance'] || specs['Power Architecture'] || specs['Steel Compatibility'] || specs['Form Factor'] || 'Precision Tolerances';
+  const badge3 = specs['Blade Length'] || specs['Continuous Burn Time'] || specs['Deployment Weight'] || specs['Housing Construction'] || specs['Overall Length'] || specs['Base & Alignment'] || 'Factory Inspected';
   const badge4 = specs['Brand'] || 'Michigan Sports Outdoor';
 
   const shortDescription = `

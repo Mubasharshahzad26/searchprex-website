@@ -164,6 +164,11 @@ function syncMsoData() {
       updateSeoRoadmapTab(ss, data.seoRoadmap);
     }
 
+    // 5. Update Backlinks Live Log Tab
+    if (data.backlinks && data.backlinks.length > 0) {
+      updateBacklinksLogTab(ss, data.backlinks, data.backlinksSummary);
+    }
+
     Logger.log('[Sync] MSO Autopilot and SEO Roadmap successfully synced with NicheSEO Pro');
     try {
       ss.toast('MSO Autopilot and SEO Roadmap successfully synced with NicheSEO Pro', 'Sync Complete', 5);
@@ -679,7 +684,7 @@ function updateRoadmapSheet() {
         "Top 5 High-Impression Product On-Page SEO (Batch 1)",
         "Product On-Page SEO",
         "High",
-        "Deployed Blade HQ technical spec tables, high-CTR transactional titles, descriptive image alt tags, and FAQPage schemas across Top 5 CTR gap products (Aitor Shark Master #7.7, Black Beard #6.7, Esbit, Mil-Tec, Nitecore).",
+        "Deployed authentic Blade HQ Layout Engine across Top 5 CTR gap products (Aitor Shark Master #7.7, Black Beard #6.7, Esbit, Mil-Tec, Nitecore). Includes category-adaptive Buy Box with 4 badges, visual breadcrumbs with schema microdata, rotating dynamic H2/H3 semantic hierarchy, technical specs table, styled FAQ cards without raw script leakage, dark CTA banner with direct add-to-cart, 5 companion cross-sell cards, 3 editorial blog guides, and Rank Math GTIN metadata. Submitted to Google Indexing API pool.",
         "Done",
         "https://www.michigansportsoutdoor.com/product/aitor-shark-master/"
     ],
