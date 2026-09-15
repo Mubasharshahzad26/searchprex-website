@@ -35,7 +35,7 @@ export interface GateConfig {
 
 export const DEFAULT_GATE: GateConfig = {
   requireImage: true,
-  requireInStock: true,
+  requireInStock: false,
   requireAttributes: true,
   requirePrice: true,
   minAttributes: 1,
