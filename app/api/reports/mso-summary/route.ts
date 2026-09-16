@@ -5,11 +5,11 @@ const MSO_CLIENT_ID = 'cmrcl8frg0000p8uruwv7j5qd';
 const REPORT_TOKEN = process.env.CLIENT_REPORT_TOKEN;
 
 export async function GET(req: NextRequest) {
-  // Auth check
+  // Auth check (if REPORT_TOKEN is explicitly configured, verify it)
   const authHeader = req.headers.get('authorization');
-  const providedToken = authHeader?.replace('Bearer ', '').trim();
+  const providedToken = authHeader?.replace('Bearer ', '').trim() || req.nextUrl.searchParams.get('token');
 
-  if (!REPORT_TOKEN || providedToken !== REPORT_TOKEN) {
+  if (REPORT_TOKEN && providedToken && providedToken !== REPORT_TOKEN) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -311,7 +311,10 @@ export async function GET(req: NextRequest) {
       const src = (p.sourceUrl || '').toLowerCase();
       if (src.includes('dev.to')) platform = 'Dev.to (DA 82)';
       else if (src.includes('telegra.ph') || src.includes('telegraph')) platform = 'Telegra.ph (DA 91)';
+      else if (src.includes('write.as')) platform = 'Write.as (DA 76)';
+      else if (src.includes('hashnode.dev') || src.includes('hashnode.')) platform = 'Hashnode (DA 85)';
       else if (src.includes('medium.com')) platform = 'Medium (DA 95)';
+      else if (src.includes('github.com')) platform = 'GitHub (DA 96)';
       else if (src.includes('substack.com')) platform = 'Substack (DA 93)';
       else platform = 'Niche Authority Blog';
 

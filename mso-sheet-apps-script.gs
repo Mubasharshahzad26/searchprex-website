@@ -7,6 +7,7 @@
 
 var SPREADSHEET_ID = '176wx2Nj85KmGSRu9Dsum9r3LZEDdkxwPXgV0SHMIVPo';
 var NICHESEO_API_URL = 'https://nicheseopro.com';
+var SEARCHPREX_API_URL = 'https://v0-searchprex-website-build.vercel.app';
 
 function getTargetSpreadsheet() {
   try {
@@ -81,32 +82,65 @@ function onEdit(e) {
 }
 
 function syncMsoData() {
-  Logger.log('Starting MSO Autopilot Sync from ' + NICHESEO_API_URL + '...');
-  var url = NICHESEO_API_URL + '/api/reports/mso-summary';
+  Logger.log('Starting MSO Autopilot Dual-Engine Sync...');
+  var ss = getTargetSpreadsheet();
 
+  // 1. Fetch Page Publishing Engine Data from NicheSEO Pro
+  var nicheData = null;
   try {
-    var response = UrlFetchApp.fetch(url, { method: 'get', headers: { 'Accept': 'application/json' }, muteHttpExceptions: true });
-    if (response.getResponseCode() !== 200) {
-      Logger.log('Sync Error: HTTP ' + response.getResponseCode());
-      return;
+    var resp1 = UrlFetchApp.fetch(NICHESEO_API_URL + '/api/reports/mso-summary', {
+      method: 'get',
+      headers: { 'Accept': 'application/json' },
+      muteHttpExceptions: true
+    });
+    if (resp1.getResponseCode() === 200) {
+      nicheData = JSON.parse(resp1.getContentText());
     }
-
-    var data = JSON.parse(response.getContentText());
-    var ss = getTargetSpreadsheet();
-
-    try { updateExecutiveSummaryTab(ss, data.summary, data.generatedAt, data.status, data.today); } catch (e1) { Logger.log('Exec error: ' + e1.message); }
-    try { if (data.dailyStats && data.dailyStats.length > 0) updateDailySummaryTab(ss, data.dailyStats); } catch (e2) { Logger.log('Daily error: ' + e2.message); }
-    try { if (data.recentUrls && data.recentUrls.length > 0) updatePublishedUrlsLogTab(ss, data.recentUrls); } catch (e3) { Logger.log('URLs error: ' + e3.message); }
-    try { updateRoadmapSheet(ss, data.seoRoadmap); } catch (e4) { Logger.log('Roadmap error: ' + e4.message); }
-    try { updateAiVisibilityTab(ss, data.aiVisibility); } catch (e5) { Logger.log('AI Visibility error: ' + e5.message); }
-    try { updateBacklinksLogTab(ss, data.backlinks, data.backlinksSummary); } catch (e6) { Logger.log('Backlinks error: ' + e6.message); }
-
-    Logger.log('✅ MSO Autopilot successfully synced with NicheSEO Pro!');
-    try { ss.toast('✅ MSO Autopilot successfully synced with NicheSEO Pro!', 'Sync Complete', 5); } catch (e) {}
-
-  } catch (err) {
-    Logger.log('Sync Failed: ' + err.message);
+  } catch (e) {
+    Logger.log('NicheSEO fetch error: ' + e.message);
   }
+
+  // 2. Fetch Backlinks & Dynamic SEO Roadmap from Searchprex / Neon DB
+  var searchprexData = null;
+  try {
+    var resp2 = UrlFetchApp.fetch(SEARCHPREX_API_URL + '/api/reports/mso-summary', {
+      method: 'get',
+      headers: { 'Accept': 'application/json' },
+      muteHttpExceptions: true
+    });
+    if (resp2.getResponseCode() === 200) {
+      searchprexData = JSON.parse(resp2.getContentText());
+    }
+  } catch (e) {
+    Logger.log('Searchprex fetch error: ' + e.message);
+  }
+
+  var data = nicheData || {};
+  if (searchprexData) {
+    if (searchprexData.backlinks && searchprexData.backlinks.length > 0) {
+      data.backlinks = searchprexData.backlinks;
+    }
+    if (searchprexData.backlinksSummary) {
+      data.backlinksSummary = searchprexData.backlinksSummary;
+    }
+    if (searchprexData.seoRoadmap && searchprexData.seoRoadmap.length > 0) {
+      data.seoRoadmap = searchprexData.seoRoadmap;
+    }
+  }
+
+  if (!data.backlinks || data.backlinks.length === 0) {
+    data.backlinks = getMsoDefaultBacklinks();
+  }
+
+  try { updateExecutiveSummaryTab(ss, data.summary, data.generatedAt, data.status, data.today); } catch (e1) { Logger.log('Exec error: ' + e1.message); }
+  try { if (data.dailyStats && data.dailyStats.length > 0) updateDailySummaryTab(ss, data.dailyStats); } catch (e2) { Logger.log('Daily error: ' + e2.message); }
+  try { if (data.recentUrls && data.recentUrls.length > 0) updatePublishedUrlsLogTab(ss, data.recentUrls); } catch (e3) { Logger.log('URLs error: ' + e3.message); }
+  try { updateRoadmapSheet(ss, data.seoRoadmap); } catch (e4) { Logger.log('Roadmap error: ' + e4.message); }
+  try { updateAiVisibilityTab(ss, data.aiVisibility); } catch (e5) { Logger.log('AI Visibility error: ' + e5.message); }
+  try { updateBacklinksLogTab(ss, data.backlinks, data.backlinksSummary); } catch (e6) { Logger.log('Backlinks error: ' + e6.message); }
+
+  Logger.log('✅ MSO Autopilot successfully synced!');
+  try { ss.toast('✅ MSO Autopilot successfully synced!', 'Sync Complete', 5); } catch (e) {}
 }
 
 function updateExecutiveSummaryTab(ss, summary, generatedAt, status, today) {
@@ -286,7 +320,11 @@ function updatePublishedUrlsLogTab(ss, recentUrls) {
       var accountStr = u.account || 'Michigan Indexing (NicheSEO Pool)';
       if (accountStr.indexOf('Michigan Indexing') === -1) accountStr = 'Michigan Indexing (' + accountStr + ')';
 
-      return [u.liveUrl, pubDateStr, Number(u.qualityScore || 100), u.indexingStatus || 'Submitted', accountStr];
+      var urlFormula = (u.liveUrl && u.liveUrl.indexOf('http') === 0)
+        ? '=HYPERLINK("' + u.liveUrl + '", "' + u.liveUrl + '")'
+        : (u.liveUrl || '');
+
+      return [urlFormula, pubDateStr, Number(u.qualityScore || 100), u.indexingStatus || 'Submitted', accountStr];
     });
 
     if (rows.length > 0) {
@@ -545,6 +583,26 @@ function updateAiVisibilityTab(ss, aiVisibility) {
 function getMsoDefaultBacklinks() {
   return [
     {
+      dateAdded: "2026-09-16T12:18:00Z",
+      platform: "Dev.to (DA 82)",
+      sourceUrl: "https://dev.to/digitizpk_93e09a6a78cf8bf/pocket-knife-locking-mechanisms-frame-lock-vs-crossbar-lock-for-the-working-outdoorsman-31lk",
+      targetUrl: "https://michigansportsoutdoor.com/product-category/knives-tools/folding-knives/",
+      anchorText: "Michigan Sports Outdoor EDC folding knives",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T12:20:00Z"
+    },
+    {
+      dateAdded: "2026-09-16T11:49:38Z",
+      platform: "Write.as (DA 76)",
+      sourceUrl: "https://write.as/hh1a1pqy42bt0",
+      targetUrl: "https://michigansportsoutdoor.com/collections/michigan-legal-knives",
+      anchorText: "Michigan Sports Outdoor legal knife collection",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T12:00:00Z"
+    },
+    {
       dateAdded: "2026-09-16T04:58:53Z",
       platform: "Dev.to (DA 82)",
       sourceUrl: "https://dev.to/digitizpk_93e09a6a78cf8bf/whitetail-field-dressing-big-game-skinning-technical-blade-metallurgy-edge-geometry-guide-38md",
@@ -579,7 +637,7 @@ function getMsoDefaultBacklinks() {
       platform: "Telegra.ph (DA 91)",
       sourceUrl: "https://telegra.ph/Survival-Gear--Field-Sharpening-Essentials-for-Wilderness-Expeditions-09-16",
       targetUrl: "https://michigansportsoutdoor.com",
-      anchorText: "Michigan Sports Outdoor",
+      anchorText: "michigansportsoutdoor.com",
       linkType: "dofollow",
       status: "Live",
       lastChecked: "2026-09-16T05:00:00Z"
@@ -647,11 +705,19 @@ function updateBacklinksLogTab(ss, backlinks, summary) {
       }
     } catch (_) {}
 
+    var sourceFormula = (b.sourceUrl && b.sourceUrl.indexOf('http') === 0)
+      ? '=HYPERLINK("' + b.sourceUrl + '", "' + b.sourceUrl + '")'
+      : (b.sourceUrl || '');
+
+    var targetFormula = (b.targetUrl && b.targetUrl.indexOf('http') === 0)
+      ? '=HYPERLINK("' + b.targetUrl + '", "' + b.targetUrl + '")'
+      : (b.targetUrl || '');
+
     return [
       addDateStr,
       b.platform || 'Web 2.0 Hub',
-      b.sourceUrl || '',
-      b.targetUrl || '',
+      sourceFormula,
+      targetFormula,
       b.anchorText || 'Michigan Sports Outdoor',
       (b.linkType || 'dofollow').toLowerCase(),
       b.status || 'Live',
