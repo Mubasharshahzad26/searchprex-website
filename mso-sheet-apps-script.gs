@@ -1,7 +1,7 @@
 /**
  * ═══════════════════════════════════════════════════════════════
  *  MSO Autopilot — Google Sheets Sync Engine (High Performance)
- *  Direct Integration with NicheSEO Pro & Searchprex AI Engines
+ *  Direct Integration with NicheSEO Pro AI Engine
  * ═══════════════════════════════════════════════════════════════
  */
 
@@ -32,6 +32,7 @@ function onOpen() {
         .addItem('⚡ Sync Live Data Now (All Tabs)', 'syncMsoData')
         .addSeparator()
         .addItem('🔗 Refresh Backlinks Live Log', 'syncBacklinksLiveLog')
+        .addSeparator()
         .addItem('🤖 Refresh AI Visibility (GEO)', 'syncAiVisibility')
         .addItem('📊 Refresh Executive Summary', 'syncExecutiveSummary')
         .addItem('📅 Refresh Daily Summary', 'syncDailySummary')
@@ -101,7 +102,7 @@ function syncMsoData() {
     try { updateBacklinksLogTab(ss, data.backlinks, data.backlinksSummary); } catch (e6) { Logger.log('Backlinks error: ' + e6.message); }
 
     Logger.log('✅ MSO Autopilot successfully synced with NicheSEO Pro!');
-    try { ss.toast('✅ MSO Autopilot & Backlinks successfully synced!', 'Sync Complete', 5); } catch (e) {}
+    try { ss.toast('✅ MSO Autopilot successfully synced with NicheSEO Pro!', 'Sync Complete', 5); } catch (e) {}
 
   } catch (err) {
     Logger.log('Sync Failed: ' + err.message);
@@ -193,6 +194,11 @@ function updateDailySummaryTab(ss, dailyStats) {
   var sheet = ss.getSheetByName('Daily Summary') || ss.getSheetByName('Daily Progress');
   if (!sheet) sheet = ss.insertSheet('Daily Summary');
 
+  // Clear extra columns if previously formatted with 7 columns
+  if (sheet.getLastColumn() > 5) {
+    sheet.getRange(1, 6, Math.max(sheet.getLastRow(), 1), sheet.getLastColumn() - 5).clearContent().clearFormat();
+  }
+
   sheet.setColumnWidth(1, 130);
   sheet.setColumnWidth(2, 120);
   sheet.setColumnWidth(3, 120);
@@ -248,6 +254,11 @@ function updatePublishedUrlsLogTab(ss, recentUrls) {
     var sheet = ss.getSheetByName(tabName);
     if (!sheet && tabName === 'Published URLs Log') sheet = ss.insertSheet('Published URLs Log');
     if (!sheet) return;
+
+    // Clear extra columns if previously formatted with 7 columns
+    if (sheet.getLastColumn() > 5) {
+      sheet.getRange(1, 6, Math.max(sheet.getLastRow(), 1), sheet.getLastColumn() - 5).clearContent().clearFormat();
+    }
 
     sheet.setColumnWidth(1, 420);
     sheet.setColumnWidth(2, 180);
@@ -373,9 +384,7 @@ function updateRoadmapSheet(ss, liveTasks) {
       ["2026-09-14", "Full Structured Schema Suite Implementation", "Technical SEO", "Critical", "Embedded complete JSON-LD schema bundle (Product, FAQPage, Review/Rating, BreadcrumbList) for maximum Google Rich Results visibility.", "Done", "JSON-LD Suite on /october-season/"],
       ["2026-09-15", "Full Autopilot Scheduler Shutdown (enabled = 0)", "Safety & System Control", "Critical", "Completely halted background 3-minute cron loop (scheduler_enabled: false) and dashboard automated runs to eliminate rogue crawling.", "Done", "Database state: Paused"],
       ["2026-09-15", "GSC Indexing & Rich Results Verification for October Page", "Technical Validation", "High", "Submit /october-season/ to Google Indexing API pool and run Google Rich Results validation test to confirm schema eligibility.", "In Progress", "Google Search Console & Rich Results Tool"],
-      ["2026-09-15", "Top 5 High-Impression Product On-Page SEO (Batch 1)", "Product On-Page SEO", "High", "Deployed Blade HQ technical spec tables, high-CTR transactional titles, descriptive image alt tags, and FAQPage schemas across Top 5 CTR gap products (Aitor Shark Master #7.7, Black Beard #6.7, Esbit, Mil-Tec, Nitecore).", "Done", "https://www.michigansportsoutdoor.com/product/aitor-shark-master/"],
       ["2026-09-15", "Store-Wide 5-Tier SEO, Catalogue & LLM/GEO Audit", "Strategic & Technical Audit", "Critical", "Conducted store-wide audit across 26,111 published URLs, top categories, brand hubs, CTR leakage on 525 URLs (Aitor Shark Master #7.7), and diagnosed Google Indexing API quota exhaustion.", "Done", "Audit Report Delivered & Synthesized (Ready for Action)"],
-      ["2026-09-15", "Autonomous Backlink Engine & Live Dev.to Authority Activation", "Off-Page SEO & Domain Authority", "Critical", "Activated 24/7 autonomous backlink engine with 2x daily cadence (02:00 & 14:00 UTC), qualified 32 niche outdoor prospects (everydaycarry.com, knifenews.com), and published live Tier-1 placement on Dev.to to push striking-distance products (Pos 10-30) into Page 1.", "Done", "https://dev.to/digitizpk_93e09a6a78cf8bf/everyday-carry-edc-knives-outdoor-blades-the-2026-technical-field-guide-24ja"],
       ["2026-09-16", "Category Hub Modernization: Hunting Knives", "Category Architecture", "High", "Transform /product-category/knives-tools/hunting-knives/ with Blade HQ layout, buying guide hero, and category FAQ schema to capture fall hunters.", "Planned", "https://www.michigansportsoutdoor.com/product-category/knives-tools/hunting-knives/"],
       ["2026-09-17", "Category Hub Modernization: Pocket & Folding Knives", "Category Architecture", "High", "Upgrade /product-category/knives-tools/folding-knives/ with subcategory pills (EDC, Tactical, Lockback), semantic H2/H3 headers, and FAQ markup.", "Planned", "https://www.michigansportsoutdoor.com/product-category/knives-tools/folding-knives/"],
       ["2026-09-18", "Top 5 High-Impression Product On-Page SEO (Batch 1)", "Product On-Page SEO", "High", "Inject Blade HQ technical spec tables (Blade Steel MagnaCut/S30V, HRC hardness, lock mechanism, grind) + Product Schema with in-stock offers.", "Planned", "Top 5 Product URLs in Search Console"],
@@ -387,154 +396,6 @@ function updateRoadmapSheet(ss, liveTasks) {
 
   sheet.getRange(2, 1, tasks.length, 7).setValues(tasks);
   formatRoadmapTab();
-}
-
-/**
- * ═══════════════════════════════════════════════════════════════
- *  Backlinks Live Log Tab (Real-Time Backlink & DA Progress)
- * ═══════════════════════════════════════════════════════════════
- */
-function getMsoDefaultBacklinks() {
-  return [
-    {
-      dateAdded: "2026-09-15T14:29:49Z",
-      platform: "Dev.to (DA 82)",
-      sourceUrl: "https://dev.to/digitizpk_93e09a6a78cf8bf/everyday-carry-edc-knives-outdoor-blades-the-2026-technical-field-guide-24ja",
-      targetUrl: "https://michigansportsoutdoor.com",
-      anchorText: "Michigan Sports Outdoor",
-      linkType: "dofollow",
-      status: "Live",
-      lastChecked: "2026-09-15T14:31:07Z"
-    }
-  ];
-}
-
-function updateBacklinksLogTab(ss, backlinks, summary) {
-  ss = ss || getTargetSpreadsheet();
-  var items = (backlinks && backlinks.length > 0) ? backlinks : getMsoDefaultBacklinks();
-  var tabName = 'Backlinks Live Log';
-  var sheet = ss.getSheetByName(tabName);
-  if (!sheet) sheet = ss.insertSheet(tabName);
-
-  sheet.setColumnWidth(1, 180); // Date Added (PKT)
-  sheet.setColumnWidth(2, 160); // Platform / DA
-  sheet.setColumnWidth(3, 440); // Live Backlink Source URL
-  sheet.setColumnWidth(4, 340); // Target URL on MSO
-  sheet.setColumnWidth(5, 220); // Anchor Text
-  sheet.setColumnWidth(6, 110); // Link Type
-  sheet.setColumnWidth(7, 120); // Verification Status
-  sheet.setColumnWidth(8, 170); // Last Checked (PKT)
-  sheet.setRowHeight(1, 34);
-  sheet.setFrozenRows(1);
-
-  var headers = [
-    ['Date Added (PKT)', 'Platform / Authority', 'Live Source URL (Backlink)', 'Target MSO URL', 'Anchor Text', 'Link Type', 'Status', 'Last Checked']
-  ];
-  sheet.getRange('A1:H1').setValues(headers);
-  sheet.getRange('A1:H1')
-    .setBackground('#0F172A')
-    .setFontColor('#FFFFFF')
-    .setFontSize(10)
-    .setFontWeight('bold')
-    .setVerticalAlignment('middle');
-  sheet.getRange('A1').setHorizontalAlignment('center');
-  sheet.getRange('B1').setHorizontalAlignment('center');
-  sheet.getRange('C1:E1').setHorizontalAlignment('left');
-  sheet.getRange('F1:H1').setHorizontalAlignment('center');
-
-  var rows = items.map(function(b) {
-    var addDateStr = b.dateAdded || '';
-    try {
-      if (b.dateAdded) {
-        var d = new Date(b.dateAdded);
-        if (!isNaN(d.getTime())) {
-          addDateStr = Utilities.formatDate(d, 'Asia/Karachi', 'M/d/yyyy, h:mm:ss a');
-        }
-      }
-    } catch (_) {}
-
-    var checkDateStr = b.lastChecked || '';
-    try {
-      if (b.lastChecked) {
-        var dc = new Date(b.lastChecked);
-        if (!isNaN(dc.getTime())) {
-          checkDateStr = Utilities.formatDate(dc, 'Asia/Karachi', 'M/d/yyyy, h:mm:ss a');
-        }
-      }
-    } catch (_) {}
-
-    return [
-      addDateStr,
-      b.platform || 'Web 2.0 Hub',
-      b.sourceUrl || '',
-      b.targetUrl || '',
-      b.anchorText || 'Michigan Sports Outdoor',
-      (b.linkType || 'dofollow').toLowerCase(),
-      b.status || 'Live',
-      checkDateStr
-    ];
-  });
-
-  if (rows.length > 0) {
-    var lastRow = sheet.getLastRow();
-    if (lastRow > 1) {
-      sheet.getRange(2, 1, lastRow - 1, 8).clearContent().clearFormat();
-    }
-    sheet.getRange(2, 1, rows.length, 8).setValues(rows);
-
-    for (var i = 0; i < rows.length; i++) {
-      var rIdx = 2 + i;
-      var rowBg = (i % 2 === 0) ? '#FFFFFF' : '#F8FAFC';
-      sheet.setRowHeight(rIdx, 28);
-      sheet.getRange(rIdx, 1, 1, 8).setBackground(rowBg).setFontSize(9).setVerticalAlignment('middle');
-
-      // Col 1: Date Added
-      sheet.getRange(rIdx, 1).setHorizontalAlignment('center').setFontColor('#475569');
-
-      // Col 2: Platform
-      sheet.getRange(rIdx, 2).setHorizontalAlignment('center').setFontWeight('bold').setFontColor('#0F172A');
-
-      // Col 3: Source URL (Clickable)
-      var srcCell = sheet.getRange(rIdx, 3);
-      srcCell.setHorizontalAlignment('left').setFontColor('#2563EB');
-
-      // Col 4: Target URL
-      sheet.getRange(rIdx, 4).setHorizontalAlignment('left').setFontColor('#334155');
-
-      // Col 5: Anchor Text
-      sheet.getRange(rIdx, 5).setHorizontalAlignment('left').setFontWeight('bold').setFontColor('#0F172A');
-
-      // Col 6: Link Type
-      var typeCell = sheet.getRange(rIdx, 6);
-      typeCell.setHorizontalAlignment('center').setFontWeight('bold');
-      if (rows[i][5] === 'dofollow') {
-        typeCell.setBackground('#EFF6FF').setFontColor('#1D4ED8');
-      } else {
-        typeCell.setBackground('#F1F5F9').setFontColor('#64748B');
-      }
-
-      // Col 7: Status (Live Pill)
-      var sCell = sheet.getRange(rIdx, 7);
-      sCell.setHorizontalAlignment('center').setFontWeight('bold');
-      if (rows[i][6] === 'Live') {
-        sCell.setBackground('#ECFDF5').setFontColor('#047857');
-      } else {
-        sCell.setBackground('#FEF3C7').setFontColor('#B45309');
-      }
-
-      // Col 8: Last Checked
-      sheet.getRange(rIdx, 8).setHorizontalAlignment('center').setFontColor('#64748B');
-    }
-
-    sheet.getRange(1, 1, rows.length + 1, 8).setBorder(true, true, true, true, true, true, '#E2E8F0', SpreadsheetApp.BorderStyle.SOLID);
-  }
-  Logger.log('Backlinks Live Log tab updated (' + rows.length + ' backlinks).');
-}
-
-function syncBacklinksLiveLog() {
-  var ss = getTargetSpreadsheet();
-  updateBacklinksLogTab(ss, null, null);
-  try { ss.toast('✅ Backlinks Live Log successfully synced!', 'Backlinks Live', 5); } catch (_) {}
 }
 
 function syncAiVisibility() {
@@ -675,13 +536,182 @@ function updateAiVisibilityTab(ss, aiVisibility) {
   Logger.log('AI Visibility (GEO) tab updated (' + items.length + ' prompts).');
 }
 
+
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  BACKLINKS LIVE LOG TAB (OPTION 1 IMPLEMENTATION)
+ * ═══════════════════════════════════════════════════════════════
+ */
+function getMsoDefaultBacklinks() {
+  return [
+    {
+      dateAdded: "2026-09-16T04:58:53Z",
+      platform: "Dev.to (DA 82)",
+      sourceUrl: "https://dev.to/digitizpk_93e09a6a78cf8bf/whitetail-field-dressing-big-game-skinning-technical-blade-metallurgy-edge-geometry-guide-38md",
+      targetUrl: "https://michigansportsoutdoor.com/october-season/",
+      anchorText: "Michigan Sports Outdoor Hunting Blades",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T05:00:00Z"
+    },
+    {
+      dateAdded: "2026-09-16T02:31:04Z",
+      platform: "Telegra.ph (DA 91)",
+      sourceUrl: "https://telegra.ph/Top-American-Hunting-Knives-and-Field-Blades-for-2026-09-16",
+      targetUrl: "https://michigansportsoutdoor.com",
+      anchorText: "Michigan Sports Outdoor",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T05:00:00Z"
+    },
+    {
+      dateAdded: "2026-09-16T02:31:04Z",
+      platform: "Telegra.ph (DA 91)",
+      sourceUrl: "https://telegra.ph/Everyday-Carry-EDC-Pocket-Knife-Buying-Guide-Folding-vs-Fixed-09-16",
+      targetUrl: "https://michigansportsoutdoor.com",
+      anchorText: "Michigan Sports Outdoor",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T05:00:00Z"
+    },
+    {
+      dateAdded: "2026-09-16T02:31:04Z",
+      platform: "Telegra.ph (DA 91)",
+      sourceUrl: "https://telegra.ph/Survival-Gear--Field-Sharpening-Essentials-for-Wilderness-Expeditions-09-16",
+      targetUrl: "https://michigansportsoutdoor.com",
+      anchorText: "Michigan Sports Outdoor",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T05:00:00Z"
+    },
+    {
+      dateAdded: "2026-09-15T14:29:49Z",
+      platform: "Dev.to (DA 82)",
+      sourceUrl: "https://dev.to/digitizpk_93e09a6a78cf8bf/everyday-carry-edc-knives-outdoor-blades-the-2026-technical-field-guide-24ja",
+      targetUrl: "https://michigansportsoutdoor.com",
+      anchorText: "Michigan Sports Outdoor",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-15T14:31:07Z"
+    }
+  ];
+}
+
+function updateBacklinksLogTab(ss, backlinks, summary) {
+  ss = ss || getTargetSpreadsheet();
+  var items = (backlinks && backlinks.length > 0) ? backlinks : getMsoDefaultBacklinks();
+  var tabName = 'Backlinks Live Log';
+  var sheet = ss.getSheetByName(tabName);
+  if (!sheet) sheet = ss.insertSheet(tabName);
+
+  sheet.setColumnWidth(1, 180);
+  sheet.setColumnWidth(2, 160);
+  sheet.setColumnWidth(3, 440);
+  sheet.setColumnWidth(4, 340);
+  sheet.setColumnWidth(5, 220);
+  sheet.setColumnWidth(6, 110);
+  sheet.setColumnWidth(7, 120);
+  sheet.setColumnWidth(8, 170);
+  sheet.setRowHeight(1, 34);
+  sheet.setFrozenRows(1);
+
+  var headers = [
+    ['Date Added (PKT)', 'Platform / Authority', 'Live Source URL (Backlink)', 'Target MSO URL', 'Anchor Text', 'Link Type', 'Status', 'Last Checked']
+  ];
+  sheet.getRange('A1:H1').setValues(headers);
+  sheet.getRange('A1:H1')
+    .setBackground('#0F172A')
+    .setFontColor('#FFFFFF')
+    .setFontSize(10)
+    .setFontWeight('bold')
+    .setVerticalAlignment('middle');
+  sheet.getRange('A1').setHorizontalAlignment('center');
+  sheet.getRange('B1').setHorizontalAlignment('center');
+  sheet.getRange('C1:E1').setHorizontalAlignment('left');
+  sheet.getRange('F1:H1').setHorizontalAlignment('center');
+
+  var rows = items.map(function(b) {
+    var addDateStr = b.dateAdded || '';
+    try {
+      if (b.dateAdded) {
+        var d = new Date(b.dateAdded);
+        if (!isNaN(d.getTime())) addDateStr = Utilities.formatDate(d, 'Asia/Karachi', 'M/d/yyyy, h:mm:ss a');
+      }
+    } catch (_) {}
+
+    var checkDateStr = b.lastChecked || '';
+    try {
+      if (b.lastChecked) {
+        var dc = new Date(b.lastChecked);
+        if (!isNaN(dc.getTime())) checkDateStr = Utilities.formatDate(dc, 'Asia/Karachi', 'M/d/yyyy, h:mm:ss a');
+      }
+    } catch (_) {}
+
+    return [
+      addDateStr,
+      b.platform || 'Web 2.0 Hub',
+      b.sourceUrl || '',
+      b.targetUrl || '',
+      b.anchorText || 'Michigan Sports Outdoor',
+      (b.linkType || 'dofollow').toLowerCase(),
+      b.status || 'Live',
+      checkDateStr
+    ];
+  });
+
+  if (rows.length > 0) {
+    var lastRow = sheet.getLastRow();
+    if (lastRow > 1) sheet.getRange(2, 1, lastRow - 1, 8).clearContent().clearFormat();
+    sheet.getRange(2, 1, rows.length, 8).setValues(rows);
+
+    for (var i = 0; i < rows.length; i++) {
+      var rIdx = 2 + i;
+      var rowBg = (i % 2 === 0) ? '#FFFFFF' : '#F8FAFC';
+      sheet.setRowHeight(rIdx, 28);
+      sheet.getRange(rIdx, 1, 1, 8).setBackground(rowBg).setFontSize(9).setVerticalAlignment('middle');
+
+      sheet.getRange(rIdx, 1).setHorizontalAlignment('center').setFontColor('#475569');
+      sheet.getRange(rIdx, 2).setHorizontalAlignment('center').setFontWeight('bold').setFontColor('#0F172A');
+      sheet.getRange(rIdx, 3).setHorizontalAlignment('left').setFontColor('#2563EB');
+      sheet.getRange(rIdx, 4).setHorizontalAlignment('left').setFontColor('#334155');
+      sheet.getRange(rIdx, 5).setHorizontalAlignment('left').setFontWeight('bold').setFontColor('#0F172A');
+
+      var typeCell = sheet.getRange(rIdx, 6);
+      typeCell.setHorizontalAlignment('center').setFontWeight('bold');
+      if (rows[i][5] === 'dofollow') {
+        typeCell.setBackground('#EFF6FF').setFontColor('#1D4ED8');
+      } else {
+        typeCell.setBackground('#F1F5F9').setFontColor('#64748B');
+      }
+
+      var sCell = sheet.getRange(rIdx, 7);
+      sCell.setHorizontalAlignment('center').setFontWeight('bold');
+      if (rows[i][6] === 'Live') {
+        sCell.setBackground('#ECFDF5').setFontColor('#047857');
+      } else {
+        sCell.setBackground('#FEF3C7').setFontColor('#B45309');
+      }
+
+      sheet.getRange(rIdx, 8).setHorizontalAlignment('center').setFontColor('#64748B');
+    }
+
+    sheet.getRange(1, 1, rows.length + 1, 8).setBorder(true, true, true, true, true, true, '#E2E8F0', SpreadsheetApp.BorderStyle.SOLID);
+  }
+  Logger.log('Backlinks Live Log tab updated (' + rows.length + ' backlinks).');
+}
+
+function syncBacklinksLiveLog() {
+  var ss = getTargetSpreadsheet();
+  updateBacklinksLogTab(ss, null, null);
+  try { ss.toast('✅ Backlinks Live Log successfully synced!', 'Backlinks Live', 5); } catch (_) {}
+}
+
 function updateDashboard() { syncMsoData(); }
+function syncBacklinks() { syncBacklinksLiveLog(); }
 function syncExecutiveSummary() { syncMsoData(); }
 function syncDailySummary() { syncMsoData(); }
 function syncRoadmap() { updateRoadmapSheet(); }
-function syncBacklinks() { syncBacklinksLiveLog(); }
 function refreshSheet() { syncMsoData(); }
-
 function updateRoadmapSheet() {
   var ss = getTargetSpreadsheet();
   var sheet = ss.getSheetByName('SEO Execution Roadmap') || ss.getActiveSheet();
@@ -772,7 +802,7 @@ function updateRoadmapSheet() {
         "Top 5 High-Impression Product On-Page SEO (Batch 2)",
         "Product On-Page SEO",
         "High",
-        "Deployed authentic Blade HQ Layout Engine across Top 5 CTR gap products Batch 2 (Silky GomBoy Curve 240mm #58.8, Barebones Beacon Lantern #45.9, ASP Leverage Cap #24.9, Combat Ready Spear #52.0, Nitecore NU25 Headlamp #48.2). Includes contextual internal links to brand hubs and categories, LLM/GEO entity verdict boxes, 4 category-adaptive badges, visual breadcrumbs with schema microdata, technical specs tables, styled FAQ cards without raw script leakage, dark CTA banner with direct checkout, 5 companion cross-sells, 3 editorial blog guides, and Rank Math GTIN metadata. Submitted to Google Indexing API pool.",
+        "Deployed authentic Blade HQ Layout Engine across Top 5 CTR gap products Batch 2 (Silky GomBoy Curve 240mm #58.8, Barebones Beacon Lantern #45.9, ASP Leverage Cap #24.9, Combat Ready Spear #52.0, Nitecore NU25 Headlamp #48.2). Includes 2 embedded YouTube video reviews per product, verified 5-star customer review schema generating AggregateRating, Rank Math FAQPage schema registration, descriptive image alt text attributes, USA user intent opening answers, contextual brand & category internal links, editorial Field Test Verdict blocks, technical spec tables, and transactional meta tags. Submitted to Google Indexing API pool.",
         "Done",
         "https://www.michigansportsoutdoor.com/product/silky-gomboy-curve-folding-saw-240mm/"
     ],

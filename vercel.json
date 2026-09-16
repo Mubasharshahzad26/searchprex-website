@@ -6,7 +6,7 @@
     },
     {
       "path": "/api/cron/backlinks-autopilot",
-      "schedule": "0 2 * * *"
+      "schedule": "0 2,14 * * *"
     },
     {
       "path": "/api/cron/blog-publisher",
