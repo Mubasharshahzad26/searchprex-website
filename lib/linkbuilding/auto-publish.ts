@@ -237,6 +237,52 @@ async function publishToMedium(input: {
   return postData.data?.url;
 }
 
+/** Publishes a technical guide post to GitHub Gist (DA 96). */
+async function publishToGitHubGist(input: {
+  title: string;
+  bodyHtml: string;
+}): Promise<string> {
+  const token = process.env.GITHUB_ACCESS_TOKEN;
+  if (!token) throw new Error('GITHUB_ACCESS_TOKEN is not configured.');
+
+  const markdown = input.bodyHtml
+    .replace(/<h2>(.*?)<\/h2>/gi, '\n## $1\n')
+    .replace(/<h3>(.*?)<\/h3>/gi, '\n### $1\n')
+    .replace(/<p>(.*?)<\/p>/gi, '\n$1\n')
+    .replace(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, '[$2]($1)')
+    .replace(/<[^>]+>/g, '');
+
+  const content = `# ${input.title}\n\n${markdown}\n\n---\n*Published via Michigan Sports Outdoor Editorial Cutlery Hub.*`;
+  const sanitizedName = input.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40) || 'guide';
+  const fileName = `${sanitizedName}.md`;
+
+  const res = await fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Content-Type': 'application/json',
+      'User-Agent': 'Searchprex-LinkBuilding-Engine',
+    },
+    body: JSON.stringify({
+      description: `${input.title} — Technical Outdoor Gear Guide`,
+      public: true,
+      files: {
+        [fileName]: { content },
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`GitHub Gist API error: ${errText}`);
+  }
+
+  const data = await res.json();
+  return data.html_url;
+}
+
 /** Extracts destination URL and anchor text from body HTML. */
 function extractTargetAndAnchor(html: string, fallbackDomain: string, fallbackAnchor: string) {
   const match = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/i.exec(html);
@@ -327,12 +373,33 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
       );
     }
 
+    const hasGitHubKey = !!process.env.GITHUB_ACCESS_TOKEN;
+    let githubProp = properties.find((p) => p.platform.includes('github') || p.platform.includes('gist'));
+    if (!githubProp && hasGitHubKey) {
+      githubProp = await withRetry(() =>
+        db.brandProperty.create({
+          data: {
+            clientId: client.id,
+            platform: 'github',
+            handle: 'Mubasharshahzad26',
+            authorName: 'Mubashar Shahzad (DigitizePK)',
+            authorBio: 'Technical outdoor gear & blade metallurgy guides.',
+            status: 'live',
+          },
+        })
+      );
+    }
+
+    const availableProps = [telegraphProp];
+    if (hasDevtoKey && devtoProp) availableProps.push(devtoProp);
+    if (hasGitHubKey && githubProp) availableProps.push(githubProp);
+
     for (let i = 0; i < needed; i++) {
       const profile = MSO_TARGET_PROFILES[(Date.now() + i) % MSO_TARGET_PROFILES.length];
       const anchor = profile.anchors[i % profile.anchors.length];
       const targetUrl = profile.targetUrl;
 
-      const chosenProp = (hasDevtoKey && devtoProp && (i % 2 === 1)) ? devtoProp : telegraphProp;
+      const chosenProp = availableProps[(Date.now() + i) % availableProps.length] || telegraphProp;
 
       const prompt = `Write an authentic, highly informative, authoritative 500-word outdoor gear editorial article about "${profile.topic}".
 Focus on: ${profile.theme}.
@@ -448,6 +515,20 @@ export async function runAutoPublish(
         } else {
           // Gracefully fallback to Telegraph if dev.to key missing in current env
           console.warn('[auto-publish] DEVTO_API_KEY missing, falling back to Telegra.ph');
+          liveUrl = await publishToTelegraph({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+            authorName: post.property.authorName || undefined,
+          });
+        }
+      } else if (platform.includes('github') || platform.includes('gist')) {
+        if (process.env.GITHUB_ACCESS_TOKEN) {
+          liveUrl = await publishToGitHubGist({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+          });
+        } else {
+          console.warn('[auto-publish] GITHUB_ACCESS_TOKEN missing, falling back to Telegra.ph');
           liveUrl = await publishToTelegraph({
             title: post.title,
             bodyHtml: post.bodyHtml,

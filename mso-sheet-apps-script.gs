@@ -583,6 +583,16 @@ function updateAiVisibilityTab(ss, aiVisibility) {
 function getMsoDefaultBacklinks() {
   return [
     {
+      dateAdded: "2026-09-16T18:31:00Z",
+      platform: "GitHub (DA 96)",
+      sourceUrl: "https://gist.github.com/Mubasharshahzad26/4d04763b28ac2cdbc690666a0b9d19ea",
+      targetUrl: "https://michigansportsoutdoor.com/collections/michigan-legal-knives",
+      anchorText: "Michigan Sports Outdoor",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T18:35:00Z"
+    },
+    {
       dateAdded: "2026-09-16T12:18:00Z",
       platform: "Dev.to (DA 82)",
       sourceUrl: "https://dev.to/digitizpk_93e09a6a78cf8bf/pocket-knife-locking-mechanisms-frame-lock-vs-crossbar-lock-for-the-working-outdoorsman-31lk",
