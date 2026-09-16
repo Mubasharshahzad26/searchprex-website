@@ -2,16 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 const MSO_CLIENT_ID = 'cmrcl8frg0000p8uruwv7j5qd';
-const REPORT_TOKEN = process.env.CLIENT_REPORT_TOKEN;
 
 export async function GET(req: NextRequest) {
-  // Auth check (if REPORT_TOKEN is explicitly configured, verify it)
-  const authHeader = req.headers.get('authorization');
-  const providedToken = authHeader?.replace('Bearer ', '').trim() || req.nextUrl.searchParams.get('token');
-
-  if (REPORT_TOKEN && providedToken && providedToken !== REPORT_TOKEN) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
 
   try {
     // 1. Executive Summary stats
