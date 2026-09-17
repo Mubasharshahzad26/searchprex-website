@@ -306,6 +306,24 @@ export async function GET(req: NextRequest) {
         proof_url: "https://www.michigansportsoutdoor.com/folding-knives/"
       },
       {
+        date: "2026-09-17",
+        task_name: "Category Hub Modernization: Batch 2 (Assisted Opening, Traditional & Kitchen Cutlery)",
+        category: "Category Architecture & E-E-A-T",
+        priority: "High",
+        logic: "Modernized Assisted Opening (1,822 SKUs), Traditional Slipjoints (1,377 SKUs), and Kitchen Cutlery (1,201 SKUs) with Blade HQ layout, German vs Japanese steel guide, SpeedSafe mechanics, and FAQ schemas.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/knives/assisted-opening/"
+      },
+      {
+        date: "2026-09-17",
+        task_name: "Category Hub Full-Spectrum SEO & Pillar Optimization (E-E-A-T, AEO, CWV, Silos, Breadcrumbs)",
+        category: "Technical, AEO & Silo Architecture",
+        priority: "Critical",
+        logic: "Upgraded all 7 modernized category hubs and 2 standalone pages with BreadcrumbList JSON-LD, 4.8★ E-E-A-T trust bars, AEO/LLM direct-answer summary boxes, Core Web Vitals lazy loading, and contextual internal linking silos to published MSO field guides.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/knives/"
+      },
+      {
         date: "2026-09-19",
         task_name: "Top 5 High-Impression Product On-Page SEO (Batch 2)",
         category: "Product On-Page SEO",
