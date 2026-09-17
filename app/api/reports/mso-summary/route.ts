@@ -324,6 +324,15 @@ export async function GET(req: NextRequest) {
         proof_url: "https://www.michigansportsoutdoor.com/collections/knives/"
       },
       {
+        date: "2026-09-17",
+        task_name: "Category Hub Modernization: Batch 3 (Camping & Survival, Sharpeners, Axes & Tactical Lights)",
+        category: "Category Architecture & E-E-A-T",
+        priority: "Critical",
+        logic: "Modernized Camping & Survival (1,314 SKUs), Knife Sharpeners & Strops (1,046 SKUs), Axes & Hatchets (777 SKUs), and Tactical Lights (1,006 SKUs) with Blade HQ standards, Lumens vs Candela matrix, Timber architecture, Grit progression, Breadcrumbs & FAQPage schemas.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/camping-and-survival/"
+      },
+      {
         date: "2026-09-19",
         task_name: "Top 5 High-Impression Product On-Page SEO (Batch 2)",
         category: "Product On-Page SEO",
