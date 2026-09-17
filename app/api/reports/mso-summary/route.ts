@@ -352,12 +352,21 @@ export async function GET(req: NextRequest) {
       },
       {
         date: "2026-09-18",
-        task_name: "Category Hubs AEO & Layout Re-Architecture (Batch 4 & 5 Meta Description & FAQ Fix)",
+        task_name: "Category Hubs AEO & Two-Tier Split Re-Architecture (Batches 1 to 5 Complete - 19 Categories)",
         category: "Technical SEO & AEO Architecture",
         priority: "Critical",
-        logic: "Resolved 5,800+ character meta description overflow by writing concise 150-160 char Rank Math descriptions across all 8 Batch 4 & 5 categories. Re-architected page flow: Hero + AEO direct answers above the grid, moving all Spec Tables, Buyer Guides, and FAQ accordions to below the product grid (woocommerce_after_shop_loop).",
+        logic: "Resolved 5,800+ character meta description overflow by writing concise 150-160 char Rank Math descriptions across all 19 categories in Batches 1, 2, 3, 4, and 5. Re-architected page flow across 63,600+ SKUs: Hero + AEO direct answers above the grid, moving all Spec Tables, Buyer Guides, and FAQ accordions to below the product grid (woocommerce_after_shop_loop).",
         status: "Done",
-        proof_url: "https://www.michigansportsoutdoor.com/collections/knifemaking/"
+        proof_url: "https://www.michigansportsoutdoor.com/collections/knives/"
+      },
+      {
+        date: "2026-09-18",
+        task_name: "Category Hub Modernization: Batch 6 (Arborist Tools, Tactical Pens, Fishing Tackle, Multi-Tools)",
+        category: "Category Architecture & E-E-A-T",
+        priority: "Critical",
+        logic: "Modernized Gardening & Tree Trimming (1,408 SKUs), Tactical Pens & All-Weather Notebooks (634 SKUs), Fishing Tackle & Fillet Cutlery (511 SKUs), and Multi-Tools & Pocket Pliers (445 SKUs) with two-tier split layouts, AEO quick verdicts, high-carbon Japanese SK5 & titanium matrices, and 150-160 char meta descriptions. Total store coverage reaches 66,650+ SKUs across 23 commercial category hubs.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/gardening-and-tree-trimming/"
       },
       {
         date: "2026-09-19",
