@@ -283,6 +283,40 @@ async function publishToGitHubGist(input: {
   return data.html_url;
 }
 
+/** Publishes a technical guide post to Write.as (DA 76). */
+async function publishToWriteAs(input: {
+  title: string;
+  bodyHtml: string;
+}): Promise<string> {
+  const markdown = input.bodyHtml
+    .replace(/<h2>(.*?)<\/h2>/gi, '\n## $1\n')
+    .replace(/<h3>(.*?)<\/h3>/gi, '\n### $1\n')
+    .replace(/<p>(.*?)<\/p>/gi, '\n$1\n')
+    .replace(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, '[$2]($1)')
+    .replace(/<[^>]+>/g, '');
+
+  const body = `# ${input.title}\n\n${markdown}\n\n---\n*Written for Michigan Sports Outdoor Cutlery Journal.*`;
+
+  const res = await fetch('https://write.as/api/posts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': 'Searchprex-LinkBuilding-Engine',
+    },
+    body: JSON.stringify({ body }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Write.as API error: ${errText}`);
+  }
+
+  const data = await res.json();
+  const id = data.data?.id;
+  if (!id) throw new Error('Write.as API did not return post ID');
+  return `https://write.as/${id}`;
+}
+
 /** Extracts destination URL and anchor text from body HTML. */
 function extractTargetAndAnchor(html: string, fallbackDomain: string, fallbackAnchor: string) {
   const match = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/i.exec(html);
@@ -390,7 +424,23 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
       );
     }
 
-    const availableProps = [telegraphProp];
+    let writeasProp = properties.find((p) => p.platform.includes('write.as') || p.platform.includes('writeas'));
+    if (!writeasProp) {
+      writeasProp = await withRetry(() =>
+        db.brandProperty.create({
+          data: {
+            clientId: client.id,
+            platform: 'write.as',
+            handle: 'mso-blade-reviews',
+            authorName: 'MSO Blade & Field Lab',
+            authorBio: 'Independent field evaluations of hunting and tactical cutlery.',
+            status: 'live',
+          },
+        })
+      );
+    }
+
+    const availableProps = [telegraphProp, writeasProp];
     if (hasDevtoKey && devtoProp) availableProps.push(devtoProp);
     if (hasGitHubKey && githubProp) availableProps.push(githubProp);
 
@@ -535,6 +585,11 @@ export async function runAutoPublish(
             authorName: post.property.authorName || undefined,
           });
         }
+      } else if (platform.includes('write.as') || platform.includes('writeas')) {
+        liveUrl = await publishToWriteAs({
+          title: post.title,
+          bodyHtml: post.bodyHtml,
+        });
       } else if (platform.includes('medium')) {
         liveUrl = await publishToMedium({
           title: post.title,
