@@ -7,7 +7,7 @@
 
 var SPREADSHEET_ID = '176wx2Nj85KmGSRu9Dsum9r3LZEDdkxwPXgV0SHMIVPo';
 var NICHESEO_API_URL = 'https://nicheseopro.com';
-var SEARCHPREX_API_URL = 'https://v0-searchprex-website-build.vercel.app';
+var SEARCHPREX_API_URL = 'https://www.searchprex.com';
 
 function getTargetSpreadsheet() {
   try {
@@ -582,6 +582,46 @@ function updateAiVisibilityTab(ss, aiVisibility) {
  */
 function getMsoDefaultBacklinks() {
   return [
+    {
+      dateAdded: "2026-09-17T02:00:00Z",
+      platform: "Telegra.ph (DA 91)",
+      sourceUrl: "https://telegra.ph/Pocket-Knife-Locking-Mechanisms-Frame-Lock-vs-Crossbar-Lock-for-the-Working-Outdoorsman-09-17",
+      targetUrl: "https://michigansportsoutdoor.com/product-category/knives-tools/folding-knives/",
+      anchorText: "Michigan Sports Outdoor EDC folding knives",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-17T02:05:00Z"
+    },
+    {
+      dateAdded: "2026-09-17T02:00:00Z",
+      platform: "Telegra.ph (DA 91)",
+      sourceUrl: "https://telegra.ph/Anatomy-of-an-Autumn-Edge-Fall-Field-Dressing--Big-Game-Skinning-Knives-09-17",
+      targetUrl: "https://michigansportsoutdoor.com/october-season/",
+      anchorText: "Michigan Sports Outdoor Hunting Blades",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-17T02:05:00Z"
+    },
+    {
+      dateAdded: "2026-09-16T20:25:00Z",
+      platform: "Write.as (DA 76)",
+      sourceUrl: "https://write.as/kn15rxib231om",
+      targetUrl: "https://michigansportsoutdoor.com/product-category/knives-tools/folding-knives/",
+      anchorText: "Michigan Sports Outdoor EDC folding knives",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T20:30:00Z"
+    },
+    {
+      dateAdded: "2026-09-16T20:25:00Z",
+      platform: "GitHub (DA 96)",
+      sourceUrl: "https://gist.github.com/Mubasharshahzad26/0cd9ef2c56e22a18d7e2259d3533bec7",
+      targetUrl: "https://michigansportsoutdoor.com/product-category/knives-tools/hunting-knives/",
+      anchorText: "American hunting knives",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-16T20:30:00Z"
+    },
     {
       dateAdded: "2026-09-16T18:31:00Z",
       platform: "GitHub (DA 96)",
