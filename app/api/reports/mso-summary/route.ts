@@ -351,6 +351,15 @@ export async function GET(req: NextRequest) {
         proof_url: "https://www.michigansportsoutdoor.com/collections/sheaths-and-storage/"
       },
       {
+        date: "2026-09-18",
+        task_name: "Category Hubs AEO & Layout Re-Architecture (Batch 4 & 5 Meta Description & FAQ Fix)",
+        category: "Technical SEO & AEO Architecture",
+        priority: "Critical",
+        logic: "Resolved 5,800+ character meta description overflow by writing concise 150-160 char Rank Math descriptions across all 8 Batch 4 & 5 categories. Re-architected page flow: Hero + AEO direct answers above the grid, moving all Spec Tables, Buyer Guides, and FAQ accordions to below the product grid (woocommerce_after_shop_loop).",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/knifemaking/"
+      },
+      {
         date: "2026-09-19",
         task_name: "Top 5 High-Impression Product On-Page SEO (Batch 2)",
         category: "Product On-Page SEO",
