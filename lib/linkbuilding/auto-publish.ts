@@ -365,6 +365,105 @@ async function publishToGitLabSnippet(input: {
   return data.web_url;
 }
 
+/** Publishes a technical guide post to Notion Public Page (DA 91). */
+async function publishToNotionPage(input: {
+  title: string;
+  bodyHtml: string;
+}): Promise<string> {
+  const token = process.env.NOTION_ACCESS_TOKEN;
+  const parentId = process.env.NOTION_PARENT_PAGE_ID || '3de9122f-939d-80ec-b05e-e7427e0b1247';
+  if (!token) throw new Error('NOTION_ACCESS_TOKEN is not configured.');
+
+  const blocks: Array<Record<string, unknown>> = [];
+  const pRegex = /<(p|h2|h3)>(.*?)<\/\1>/gi;
+  let match;
+
+  while ((match = pRegex.exec(input.bodyHtml)) !== null) {
+    const tag = match[1].toLowerCase();
+    const rawContent = match[2];
+
+    const richText: Array<Record<string, unknown>> = [];
+    const linkMatch = /<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/i.exec(rawContent);
+
+    if (linkMatch) {
+      const href = linkMatch[1];
+      const anchorText = linkMatch[2].replace(/<[^>]+>/g, '').trim();
+      const parts = rawContent.split(linkMatch[0]);
+
+      if (parts[0]) {
+        richText.push({
+          type: 'text',
+          text: { content: parts[0].replace(/<[^>]+>/g, '') },
+        });
+      }
+      richText.push({
+        type: 'text',
+        text: { content: anchorText, link: { url: href } },
+      });
+      if (parts[1]) {
+        richText.push({
+          type: 'text',
+          text: { content: parts[1].replace(/<[^>]+>/g, '') },
+        });
+      }
+    } else {
+      richText.push({
+        type: 'text',
+        text: { content: rawContent.replace(/<[^>]+>/g, '') },
+      });
+    }
+
+    if (tag === 'h2') {
+      blocks.push({ object: 'block', type: 'heading_2', heading_2: { rich_text: richText } });
+    } else if (tag === 'h3') {
+      blocks.push({ object: 'block', type: 'heading_3', heading_3: { rich_text: richText } });
+    } else {
+      blocks.push({ object: 'block', type: 'paragraph', paragraph: { rich_text: richText } });
+    }
+  }
+
+  if (blocks.length === 0) {
+    blocks.push({
+      object: 'block',
+      type: 'paragraph',
+      paragraph: {
+        rich_text: [{ type: 'text', text: { content: input.bodyHtml.replace(/<[^>]+>/g, '') } }],
+      },
+    });
+  }
+
+  const res = await fetch('https://api.notion.com/v1/pages', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Notion-Version': '2022-06-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      parent: { page_id: parentId },
+      properties: {
+        title: [
+          {
+            text: {
+              content: input.title,
+            },
+          },
+        ],
+      },
+      children: blocks,
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Notion API error: ${errText}`);
+  }
+
+  const data = await res.json();
+  const publicUrl = data.public_url || (data.url ? data.url.replace('https://app.notion.com/p/', 'https://cautious-point-398.notion.site/') : '');
+  return publicUrl || data.url;
+}
+
 /** Extracts destination URL and anchor text from body HTML. */
 function extractTargetAndAnchor(html: string, fallbackDomain: string, fallbackAnchor: string) {
   const match = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/i.exec(html);
@@ -505,10 +604,28 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
       );
     }
 
+    const hasNotionKey = !!process.env.NOTION_ACCESS_TOKEN;
+    let notionProp = properties.find((p) => p.platform.includes('notion'));
+    if (!notionProp && hasNotionKey) {
+      notionProp = await withRetry(() =>
+        db.brandProperty.create({
+          data: {
+            clientId: client.id,
+            platform: 'notion',
+            handle: 'michigan-sports-outdoor',
+            authorName: 'Michigan Sports Outdoor Knowledge Base',
+            authorBio: 'Official cutlery guides and wilderness equipment documentation.',
+            status: 'live',
+          },
+        })
+      );
+    }
+
     const availableProps = [telegraphProp, writeasProp];
     if (hasDevtoKey && devtoProp) availableProps.push(devtoProp);
     if (hasGitHubKey && githubProp) availableProps.push(githubProp);
     if (hasGitLabKey && gitlabProp) availableProps.push(gitlabProp);
+    if (hasNotionKey && notionProp) availableProps.push(notionProp);
 
     for (let i = 0; i < needed; i++) {
       const profile = MSO_TARGET_PROFILES[(Date.now() + i) % MSO_TARGET_PROFILES.length];
@@ -664,6 +781,19 @@ export async function runAutoPublish(
           });
         } else {
           console.warn('[auto-publish] GITLAB_ACCESS_TOKEN missing, falling back to Telegra.ph');
+          liveUrl = await publishToTelegraph({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+            authorName: post.property.authorName || undefined,
+          });
+      } else if (platform.includes('notion')) {
+        if (process.env.NOTION_ACCESS_TOKEN) {
+          liveUrl = await publishToNotionPage({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+          });
+        } else {
+          console.warn('[auto-publish] NOTION_ACCESS_TOKEN missing, falling back to Telegra.ph');
           liveUrl = await publishToTelegraph({
             title: post.title,
             bodyHtml: post.bodyHtml,

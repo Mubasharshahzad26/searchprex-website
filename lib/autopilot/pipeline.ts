@@ -292,8 +292,17 @@ export async function runAutopilotBatch(clientId: string) {
           metaTitle: generated.metaTitle,
           metaDescription: generated.metaDescription,
           username: wpCreds.username,
-          appPassword: wpCreds.appPassword,
         });
+
+        // Automated on-the-fly WebP conversion for hero & sub-sizes
+        try {
+          const authHeader = Buffer.from(`${wpCreds.username}:${wpCreds.appPassword}`).toString('base64');
+          await fetch(`${wpCreds.baseUrl}/wp-json/mso/v1/convert-product-webp/${productData.id}`, {
+            method: 'POST',
+            headers: { 'Authorization': `Basic ${authHeader}` },
+            signal: AbortSignal.timeout(10000),
+          });
+        } catch (_) {}
 
         const submission = await submitUrl(published.liveUrl, 'new');
 

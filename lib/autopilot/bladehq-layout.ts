@@ -14,12 +14,14 @@ export interface BladeHqLayoutInput {
     short_description?: string;
     categories?: any[];
     attributes?: Array<{ name?: string; options?: any[] }>;
+    images?: any[];
   };
   generated: {
     contentHtml: string;
     metaTitle?: string;
     metaDescription?: string;
     faqs?: Array<{ question: string; answer: string }>;
+    videos?: Array<{ id: string; title: string; caption?: string }>;
   };
 }
 
@@ -1175,7 +1177,7 @@ export function generateCategoryCrossSells(categoryType: ProductCategoryType, se
     <div style="flex:1 1 180px; min-width:160px; max-width:100%; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
       <div>
         <a href="/product/${item.slug}/" style="text-decoration:none; display:block; text-align:center; margin-bottom:10px;">
-          <img src="${item.image}" alt="${item.title}" style="height:115px; width:100%; object-fit:contain;" loading="lazy" />
+          <img src="${item.image}" alt="${item.title}" style="height:115px; width:100%; object-fit:contain;" loading="lazy" decoding="async" />
         </a>
         <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:${item.badgeColor}; margin-bottom:3px;">${item.badge}</div>
         <div style="font-size:12.5px; font-weight:700; color:#0f172a; margin:0 0 6px 0; line-height:1.3;"><a href="/product/${item.slug}/" style="color:#0f172a; text-decoration:none;">${item.title}</a></div>
@@ -1190,7 +1192,7 @@ export function generateCategoryCrossSells(categoryType: ProductCategoryType, se
   `).join('');
 
   return `
-<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:10px; padding:24px; margin:32px 0;">
+<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:10px; padding:24px; margin:32px 0; content-visibility:auto; contain-intrinsic-size:1px 360px;">
   <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
     <div>
       <h2 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
@@ -1218,7 +1220,7 @@ export function generateCategoryBlogGuides(categoryType: ProductCategoryType, se
     <div style="flex:1 1 260px; min-width:240px; max-width:100%; background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 2px 8px rgba(0,0,0,0.03); box-sizing:border-box;">
       <div>
         <a href="/${guide.slug}/" style="display:block; width:100%; height:160px; overflow:hidden; position:relative; background:#0f172a;">
-          <img src="${guide.image}" alt="${guide.title}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
+          <img src="${guide.image}" alt="${guide.title}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" decoding="async" />
           <span style="position:absolute; top:10px; left:10px; background:${guide.tagBg}; color:#ffffff; font-size:10px; font-weight:800; text-transform:uppercase; padding:3px 7px; border-radius:4px;">${guide.tag}</span>
         </a>
         <div style="padding:16px 18px 12px 18px;">
@@ -1231,7 +1233,7 @@ export function generateCategoryBlogGuides(categoryType: ProductCategoryType, se
   `).join('');
 
   return `
-<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:26px 28px; margin:32px 0 20px 0;">
+<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:26px 28px; margin:32px 0 20px 0; content-visibility:auto; contain-intrinsic-size:1px 380px;">
   <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:20px; border-bottom:1px solid #e2e8f0; padding-bottom:14px;">
     <div>
       <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:#16a34a;">Michigan Sports Outdoor Editorial</span>
@@ -1243,6 +1245,166 @@ export function generateCategoryBlogGuides(categoryType: ProductCategoryType, se
     ${guidesHtml}
   </div>
 </div>`.trim();
+}
+
+export function buildBuyBoxTrustBadgesHtml(): string {
+  return `
+<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 12px 0; padding-bottom:10px; border-bottom:1px solid #f1f5f9;">
+  <!-- Trustpilot Badge -->
+  <a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:5px; text-decoration:none;" title="Review Michigan Sports Outdoor on Trustpilot">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 1.5l3.24 6.57 7.26 1.05-5.25 5.12 1.24 7.23L12 18l-6.49 3.47 1.24-7.23-5.25-5.12 7.26-1.05L12 1.5z" fill="#00b67a"/>
+      <path d="M12 1.5l-3.24 6.57-7.26 1.05 5.25 5.12-1.24 7.23L12 18V1.5z" fill="#005128" opacity="0.2"/>
+    </svg>
+    <span style="font-size:15px; font-weight:800; color:#111827; letter-spacing:-0.2px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">Trustpilot</span>
+  </a>
+
+  <!-- BBB Accredited Business Badge (Accredited status, zero inaccurate claims) -->
+  <a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#005a9c; color:#ffffff; padding:4px 8px; border-radius:4px; text-decoration:none; box-sizing:border-box;" title="BBB Accredited Business">
+    <span style="font-size:11.5px; font-weight:900; letter-spacing:-0.5px; border-right:1px solid rgba(255,255,255,0.4); padding-right:5px; line-height:1;">BBB</span>
+    <span style="display:flex; flex-direction:column; line-height:1; text-align:left;">
+      <span style="font-size:7.5px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase;">ACCREDITED</span>
+      <span style="font-size:7.5px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase;">BUSINESS</span>
+    </span>
+  </a>
+
+  <!-- Verified on Google (4.8 ★ · 5 reviews) -->
+  <a href="https://share.google/acI6CfNOs68e2r7eO" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:8px; background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:3px 9px; text-decoration:none; box-shadow:0 1px 2px rgba(0,0,0,0.03);" title="Verified 4.8 Star Rating on Google Reviews">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+    </svg>
+    <div style="display:flex; flex-direction:column; line-height:1.15; text-align:left;">
+      <span style="font-size:11px; font-weight:700; color:#1e293b;">Verified on Google</span>
+      <span style="font-size:10px; color:#64748b; display:flex; align-items:center; gap:3px;">
+        <strong style="color:#0f172a;">4.8</strong>
+        <span style="color:#f59e0b; font-size:10.5px;">&#9733;</span>
+        <span>&bull; 5 reviews</span>
+      </span>
+    </div>
+  </a>
+</div>`.trim();
+}
+
+export function buildEeatCertStripHtml(): string {
+  return `
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; margin:14px 0 20px 0; box-shadow:0 1px 3px rgba(0,0,0,0.02); box-sizing:border-box;">
+  <a href="https://share.google/acI6CfNOs68e2r7eO" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#1e293b; font-size:11px; font-weight:800; padding:3px 8px; border-right:1px solid #f1f5f9;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg>
+    <span style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.3px;">Google Verified</span>
+    <span style="background:#fef3c7; color:#b45309; border:1px solid #fde68a; font-size:9.5px; font-weight:900; padding:1px 5px; border-radius:3px;">4.8 STAR</span>
+  </a>
+  <a href="https://www.bbb.org/us/mi/michigan-sports-outdoor" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#1e293b; font-size:11px; font-weight:800; padding:3px 8px; border-right:1px solid #f1f5f9;">
+    <span style="background:#005A9C; color:#ffffff; font-size:9px; font-weight:900; padding:1px 4px; border-radius:3px;">BBB</span>
+    <span style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.3px;">Accredited</span>
+    <span style="background:#dbeafe; color:#1d4ed8; border:1px solid #bfdbfe; font-size:9.5px; font-weight:900; padding:1px 5px; border-radius:3px;">BUSINESS</span>
+  </a>
+  <a href="https://www.trustpilot.com/review/michigansportsoutdoor.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#1e293b; font-size:11px; font-weight:800; padding:3px 8px; border-right:1px solid #f1f5f9;">
+    <span style="background:#00b67a; color:#ffffff; font-size:9px; font-weight:900; padding:1px 4px; border-radius:3px;">&#9733;</span>
+    <span style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.3px;">Trustpilot</span>
+    <span style="background:#dcfce7; color:#15803d; border:1px solid #bbf7d0; font-size:9.5px; font-weight:900; padding:1px 5px; border-radius:3px;">VERIFIED</span>
+  </a>
+  <a href="https://www.bladeforums.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#1e293b; font-size:11px; font-weight:800; padding:3px 8px; border-right:1px solid #f1f5f9;">
+    <span style="background:#1e293b; color:#f5a623; font-size:9px; font-weight:900; padding:1px 4px; border-radius:3px;">BF</span>
+    <span style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.3px;">BladeForums</span>
+    <span style="background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; font-size:9.5px; font-weight:900; padding:1px 5px; border-radius:3px;">MEMBER</span>
+  </a>
+  <a href="https://www.michigan-sportsman.com/members/michigan-sports-outdoors.179732/" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#1e293b; font-size:11px; font-weight:800; padding:3px 8px;">
+    <span style="background:#384c3c; color:#f5a623; font-size:9px; font-weight:900; padding:1px 4px; border-radius:3px;">MI</span>
+    <span style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.3px;">MichiganSportsman</span>
+    <span style="background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; font-size:9.5px; font-weight:900; padding:1px 5px; border-radius:3px;">PARTNER</span>
+  </a>
+</div>`.trim();
+}
+
+export function buildStoreReviewsSectionHtml(): string {
+  const avatarJoeSell = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/08/ChIJc3vpny2NhYYR700meVMhtto_552fe3ee12ce541ed6a0f3739c99d635.jpg';
+  const avatarAbdullah = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/08/ChIJc3vpny2NhYYR700meVMhtto_dd7e84c4e08cfcb9a1e5ad9362d7d4b9.jpg';
+  const avatarHassan = 'https://www.michigansportsoutdoor.com/wp-content/uploads/2026/08/ChIJc3vpny2NhYYR700meVMhtto_b5a5fa12ed4ab6d736b1e92de78d5ac7.jpg';
+
+  return `
+<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:26px 28px; margin:32px 0 24px 0; box-shadow:0 2px 8px rgba(0,0,0,0.02); content-visibility:auto; contain-intrinsic-size:1px 320px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; border-bottom:1px solid #e2e8f0; padding-bottom:14px;">
+    <div>
+      <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:#0369a1;">Fulfillment &amp; Merchant Authenticity</span>
+      <h2 style="font-size:22px; font-weight:800; color:#0f172a; margin:4px 0 0 0;">Verified MSO Store &amp; Order Experiences</h2>
+    </div>
+    <div style="display:inline-flex; align-items:center; gap:8px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:20px; padding:6px 14px; font-size:12px; font-weight:800; color:#0f172a;">
+      <span>Google Verified 4.8 Rating</span>
+      <span style="color:#f59e0b; font-size:13px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    </div>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:16px;">
+    <div style="flex:1 1 280px; min-width:260px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+          <img src="${avatarJoeSell}" alt="Joe Sell" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid #cbd5e1;" loading="lazy" decoding="async" />
+          <div>
+            <a href="https://www.google.com/maps/contrib/113208006462811821271/reviews" target="_blank" rel="noopener noreferrer" style="font-size:13.5px; font-weight:800; color:#0f172a; text-decoration:none; display:block;">Joe Sell</a>
+            <span style="font-size:11px; color:#64748b; font-weight:600;">Verified Google Buyer &bull; US Order</span>
+          </div>
+        </div>
+        <div style="color:#f59e0b; font-size:12px; margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0</div>
+        <p style="font-size:12.5px; color:#334155; line-height:1.55; margin:0;">
+          &ldquo;I placed my order on 08/03 and it was delivered on 08/07. It shipped free since it was over $100 via UPS. Items were new and exactly as ordered. Honestly, prices were good and I couldn&rsquo;t ask for better service. They have earned my business.&rdquo;
+        </p>
+      </div>
+    </div>
+    <div style="flex:1 1 280px; min-width:260px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+          <img src="${avatarAbdullah}" alt="Abdullah" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid #cbd5e1;" loading="lazy" decoding="async" />
+          <div>
+            <a href="https://www.google.com/maps/contrib/101626929586739438666/reviews" target="_blank" rel="noopener noreferrer" style="font-size:13.5px; font-weight:800; color:#0f172a; text-decoration:none; display:block;">Abdullah</a>
+            <span style="font-size:11px; color:#64748b; font-weight:600;">Verified Google Buyer &bull; Knife Outfitting</span>
+          </div>
+        </div>
+        <div style="color:#f59e0b; font-size:12px; margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0</div>
+        <p style="font-size:12.5px; color:#334155; line-height:1.55; margin:0;">
+          &ldquo;Wasn&rsquo;t sure about buying a knife online, but a friend put me onto this site. Two weeks in and it&rsquo;s honestly one of the better purchases I&rsquo;ve made &mdash; sharp, well-balanced, does the job. Definitely recommend this store.&rdquo;
+        </p>
+      </div>
+    </div>
+    <div style="flex:1 1 280px; min-width:260px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+          <img src="${avatarHassan}" alt="Hassan Ali" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid #cbd5e1;" loading="lazy" decoding="async" />
+          <div>
+            <a href="https://www.google.com/maps/contrib/103596266089790838188/reviews" target="_blank" rel="noopener noreferrer" style="font-size:13.5px; font-weight:800; color:#0f172a; text-decoration:none; display:block;">Hassan Ali</a>
+            <span style="font-size:11px; color:#64748b; font-weight:600;">Verified Google Buyer &bull; Outdoor Gear</span>
+          </div>
+        </div>
+        <div style="color:#f59e0b; font-size:12px; margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0</div>
+        <p style="font-size:12.5px; color:#334155; line-height:1.55; margin:0;">
+          &ldquo;I have excellent experience to order my product with Michigan Sports Outdoor. Customer service was awesome and the order arrived very quickly and securely packaged.&rdquo;
+        </p>
+      </div>
+    </div>
+  </div>
+</div>`.trim();
+}
+
+export function buildFloatingGmbBadgeHtml(): string {
+  return `
+<a href="https://share.google/acI6CfNOs68e2r7eO" target="_blank" rel="noopener noreferrer" style="position:fixed; bottom:20px; right:20px; z-index:9999; background:#ffffff; border:1px solid #cbd5e1; border-radius:50px; padding:7px 15px 7px 11px; box-shadow:0 4px 16px rgba(0,0,0,0.15); display:inline-flex; align-items:center; gap:9px; text-decoration:none; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;" title="Verified 4.8 Rating on Google Reviews (5 Reviews)">
+  <span style="display:flex; align-items:center; justify-content:center; width:20px; height:20px;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+    </svg>
+  </span>
+  <span style="display:flex; flex-direction:column; line-height:1.15;">
+    <span style="display:flex; align-items:center; gap:5px;">
+      <span style="font-size:12.5px; font-weight:900; color:#0f172a;">4.8</span>
+      <span style="color:#f59e0b; font-size:11px; letter-spacing:1px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    </span>
+    <span style="font-size:9.5px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.3px;">5 Google Reviews</span>
+  </span>
+</a>`.trim();
 }
 
 export function buildBladeHqLayout(input: BladeHqLayoutInput): {
@@ -1307,6 +1469,9 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
       </div>
     `;
   }
+
+  // Videos HTML disabled: automated Blade HQ layout focuses on clean specs, narrative & high conversion
+  const videosHtml = '';
 
   // 3. Clean narrative: strip any existing raw FAQ block so it never duplicates
   const cleanNarrative = sanitizeNarrativeContent(generated.contentHtml);
@@ -1501,7 +1666,17 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   const crossSells = generateCategoryCrossSells(categoryType, seed, headings.companionHeading);
   const guides = generateCategoryBlogGuides(categoryType, seed);
 
-  const fullDescription = `${visualBreadcrumbs}\n\n${splitContainer}\n\n${ctaBanner}\n\n${crossSells}\n\n${guides}`;
+  const eeatCertStrip = buildEeatCertStripHtml();
+  const floatingGmbBadge = buildFloatingGmbBadgeHtml();
+
+  const heroImgUrl = (product.images && product.images[0])
+    ? (typeof product.images[0] === 'string' ? product.images[0] : product.images[0]?.src)
+    : '';
+  const lcpPreloadHint = heroImgUrl
+    ? `<link rel="preload" as="image" href="${heroImgUrl}" fetchpriority="high" />\n\n`
+    : '';
+
+  const fullDescription = `${lcpPreloadHint}${visualBreadcrumbs}\n\n${eeatCertStrip}\n\n${splitContainer}\n\n${ctaBanner}\n\n${crossSells}\n\n${guides}\n\n${floatingGmbBadge}`;
 
   return {
     shortDescription,

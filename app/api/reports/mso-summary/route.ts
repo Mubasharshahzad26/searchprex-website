@@ -308,6 +308,7 @@ export async function GET(req: NextRequest) {
       else if (src.includes('medium.com')) platform = 'Medium (DA 95)';
       else if (src.includes('github.com')) platform = 'GitHub (DA 96)';
       else if (src.includes('gitlab.com')) platform = 'GitLab (DA 92)';
+      else if (src.includes('notion.site') || src.includes('notion.so')) platform = 'Notion (DA 91)';
       else if (src.includes('substack.com')) platform = 'Substack (DA 93)';
       else platform = 'Niche Authority Blog';
 
