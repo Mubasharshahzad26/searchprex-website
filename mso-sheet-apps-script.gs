@@ -583,6 +583,16 @@ function updateAiVisibilityTab(ss, aiVisibility) {
 function getMsoDefaultBacklinks() {
   return [
     {
+      dateAdded: "2026-09-17T04:27:00Z",
+      platform: "GitLab (DA 92)",
+      sourceUrl: "https://gitlab.com/-/snippets/6056783",
+      targetUrl: "https://michigansportsoutdoor.com",
+      anchorText: "Michigan Sports Outdoor",
+      linkType: "dofollow",
+      status: "Live",
+      lastChecked: "2026-09-17T04:30:00Z"
+    },
+    {
       dateAdded: "2026-09-17T02:00:00Z",
       platform: "Telegra.ph (DA 91)",
       sourceUrl: "https://telegra.ph/Pocket-Knife-Locking-Mechanisms-Frame-Lock-vs-Crossbar-Lock-for-the-Working-Outdoorsman-09-17",

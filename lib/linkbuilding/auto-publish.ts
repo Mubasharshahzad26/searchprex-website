@@ -317,6 +317,54 @@ async function publishToWriteAs(input: {
   return `https://write.as/${id}`;
 }
 
+/** Publishes a technical guide post to GitLab Snippet (DA 92). */
+async function publishToGitLabSnippet(input: {
+  title: string;
+  bodyHtml: string;
+}): Promise<string> {
+  const token = process.env.GITLAB_ACCESS_TOKEN;
+  if (!token) throw new Error('GITLAB_ACCESS_TOKEN is not configured.');
+
+  const markdown = input.bodyHtml
+    .replace(/<h2>(.*?)<\/h2>/gi, '\n## $1\n')
+    .replace(/<h3>(.*?)<\/h3>/gi, '\n### $1\n')
+    .replace(/<p>(.*?)<\/p>/gi, '\n$1\n')
+    .replace(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, '[$2]($1)')
+    .replace(/<[^>]+>/g, '');
+
+  const content = `# ${input.title}\n\n${markdown}\n\n---\n*Published via Michigan Sports Outdoor Field Engineering Lab.*`;
+  const sanitizedName = input.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40) || 'guide';
+  const fileName = `${sanitizedName}.md`;
+
+  const res = await fetch('https://gitlab.com/api/v4/snippets', {
+    method: 'POST',
+    headers: {
+      'PRIVATE-TOKEN': token,
+      'Content-Type': 'application/json',
+      'User-Agent': 'Searchprex-LinkBuilding-Engine',
+    },
+    body: JSON.stringify({
+      title: input.title,
+      visibility: 'public',
+      description: `${input.title} — Technical Outdoor Cutlery Guide`,
+      files: [
+        {
+          file_path: fileName,
+          content,
+        },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`GitLab Snippet API error: ${errText}`);
+  }
+
+  const data = await res.json();
+  return data.web_url;
+}
+
 /** Extracts destination URL and anchor text from body HTML. */
 function extractTargetAndAnchor(html: string, fallbackDomain: string, fallbackAnchor: string) {
   const match = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/i.exec(html);
@@ -438,11 +486,27 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
           },
         })
       );
+    const hasGitLabKey = !!process.env.GITLAB_ACCESS_TOKEN;
+    let gitlabProp = properties.find((p) => p.platform.includes('gitlab'));
+    if (!gitlabProp && hasGitLabKey) {
+      gitlabProp = await withRetry(() =>
+        db.brandProperty.create({
+          data: {
+            clientId: client.id,
+            platform: 'gitlab',
+            handle: 'digitizpk',
+            authorName: 'DigitizPK Outdoor Gear Lab',
+            authorBio: 'Field-tested outdoor cutlery protocols and technical cutting benchmarks.',
+            status: 'live',
+          },
+        })
+      );
     }
 
     const availableProps = [telegraphProp, writeasProp];
     if (hasDevtoKey && devtoProp) availableProps.push(devtoProp);
     if (hasGitHubKey && githubProp) availableProps.push(githubProp);
+    if (hasGitLabKey && gitlabProp) availableProps.push(gitlabProp);
 
     for (let i = 0; i < needed; i++) {
       const profile = MSO_TARGET_PROFILES[(Date.now() + i) % MSO_TARGET_PROFILES.length];
@@ -590,6 +654,20 @@ export async function runAutoPublish(
           title: post.title,
           bodyHtml: post.bodyHtml,
         });
+      } else if (platform.includes('gitlab')) {
+        if (process.env.GITLAB_ACCESS_TOKEN) {
+          liveUrl = await publishToGitLabSnippet({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+          });
+        } else {
+          console.warn('[auto-publish] GITLAB_ACCESS_TOKEN missing, falling back to Telegra.ph');
+          liveUrl = await publishToTelegraph({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+            authorName: post.property.authorName || undefined,
+          });
+        }
       } else if (platform.includes('medium')) {
         liveUrl = await publishToMedium({
           title: post.title,

@@ -307,6 +307,7 @@ export async function GET(req: NextRequest) {
       else if (src.includes('hashnode.dev') || src.includes('hashnode.')) platform = 'Hashnode (DA 85)';
       else if (src.includes('medium.com')) platform = 'Medium (DA 95)';
       else if (src.includes('github.com')) platform = 'GitHub (DA 96)';
+      else if (src.includes('gitlab.com')) platform = 'GitLab (DA 92)';
       else if (src.includes('substack.com')) platform = 'Substack (DA 93)';
       else platform = 'Niche Authority Blog';
 
