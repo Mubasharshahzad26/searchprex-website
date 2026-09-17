@@ -486,6 +486,8 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
           },
         })
       );
+    }
+
     const hasGitLabKey = !!process.env.GITLAB_ACCESS_TOKEN;
     let gitlabProp = properties.find((p) => p.platform.includes('gitlab'));
     if (!gitlabProp && hasGitLabKey) {
