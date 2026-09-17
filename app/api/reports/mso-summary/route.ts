@@ -333,6 +333,15 @@ export async function GET(req: NextRequest) {
         proof_url: "https://www.michigansportsoutdoor.com/collections/camping-and-survival/"
       },
       {
+        date: "2026-09-18",
+        task_name: "Category Hub Modernization: Batch 4 (Closeout, Bargain Knives, Premium Knives, Knifemaking)",
+        category: "Category Architecture & E-E-A-T",
+        priority: "Critical",
+        logic: "Modernized Closeout Liquidation (5,877 SKUs), Discount & Bargain Folders (1,177 SKUs), Premium Cutlery & Super-Steels (938 SKUs), and Knifemaking Supplies (1,069 SKUs) with Blade HQ standards, Super-Steel metallurgy matrix, Handle scale specs, Breadcrumbs & FAQPage schemas. Total 60,200+ SKUs modernized store-wide.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/closeout/"
+      },
+      {
         date: "2026-09-19",
         task_name: "Top 5 High-Impression Product On-Page SEO (Batch 2)",
         category: "Product On-Page SEO",
