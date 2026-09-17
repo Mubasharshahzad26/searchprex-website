@@ -342,6 +342,15 @@ export async function GET(req: NextRequest) {
         proof_url: "https://www.michigansportsoutdoor.com/collections/closeout/"
       },
       {
+        date: "2026-09-18",
+        task_name: "Category Hub Modernization: Batch 5 (Sheaths & Storage, Swords & Daggers, Firearm Accessories, Gear Bags)",
+        category: "Category Architecture & E-E-A-T",
+        priority: "Critical",
+        logic: "Modernized Knife Sheaths & Storage (924 SKUs), Swords & Historical Replicas (920 SKUs), Tactical Firearm Optics & Holsters (788 SKUs), and Tactical Gear Bags & Packs (791 SKUs) with Blade HQ standards, Optics comparison matrix, Sheath materials guide, Battle-ready steel specs, Breadcrumbs & FAQPage schemas. Store coverage exceeds 63,600+ SKUs.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/collections/sheaths-and-storage/"
+      },
+      {
         date: "2026-09-19",
         task_name: "Top 5 High-Impression Product On-Page SEO (Batch 2)",
         category: "Product On-Page SEO",
