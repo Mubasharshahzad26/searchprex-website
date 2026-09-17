@@ -784,8 +784,8 @@ export async function runAutoPublish(
           liveUrl = await publishToTelegraph({
             title: post.title,
             bodyHtml: post.bodyHtml,
-            authorName: post.property.authorName || undefined,
           });
+        }
       } else if (platform.includes('notion')) {
         if (process.env.NOTION_ACCESS_TOKEN) {
           liveUrl = await publishToNotionPage({
