@@ -236,7 +236,7 @@ export default function CTA() {
                   </p>
                   <p className="text-sm text-[#64748b]">
                     Questions? Email us at{" "}
-                    <a href="mailto:hello@searchprex.com" className="underline" style={{ color: GREEN_DARK }}>hello@searchprex.com</a>
+                    <a href="mailto:contact@searchprex.com" className="underline" style={{ color: GREEN_DARK }}>contact@searchprex.com</a>
                   </p>
                 </motion.div>
               ) : (

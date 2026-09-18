@@ -153,7 +153,10 @@ export default function RootLayout({
           "addressCountry": "PK"
         },
         "telephone": "+92-305-9158010",
-        "email": "hello@searchprex.com",
+        // Must match the page-level schema (home, about, case studies, city
+        // pages), which all say contact@. This block renders on every page, so
+        // a second address here gave Google two emails for one organization.
+        "email": "contact@searchprex.com",
         "founder": {
           "@type": "Person",
           "name": "Mubashar Sharif",

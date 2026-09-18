@@ -302,7 +302,7 @@ export async function POST(req: NextRequest) {
       await resend.emails.send({
         from: NOTIFY_FROM,
         to: lead.email,
-        replyTo: "hello@searchprex.com",
+        replyTo: "contact@searchprex.com",
         subject: user.subject,
         html: user.html,
       });
@@ -318,7 +318,7 @@ export async function POST(req: NextRequest) {
     console.error("Growth plan API error:", err);
     return NextResponse.json(
       {
-        error: "Something went wrong. Please try again, or email hello@searchprex.com directly.",
+        error: "Something went wrong. Please try again, or email contact@searchprex.com directly.",
       },
       { status: 500 },
     );
