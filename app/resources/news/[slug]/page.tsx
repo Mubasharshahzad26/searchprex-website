@@ -249,7 +249,6 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
       // already declare, so the author resolves to one entity across the site.
       sameAs: [
         "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-        "https://twitter.com/searchprex",
       ],
     },
     publisher: {

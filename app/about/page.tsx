@@ -47,8 +47,6 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@searchprex',
-    creator: '@searchprex',
     title: 'About SearchPrex — Founder-Led USA SEO Agency',
     description: 'Meet Mubashar Sharif, founder of SearchPrex. Founder-executed SEO for law firms, ecommerce & local business.',
   },
@@ -118,8 +116,7 @@ export default function AboutPage() {
           "email": "contact@searchprex.com",
           "image": `${siteUrl}/images/mubashar-shahzad.jpg`,
           "sameAs": [
-            "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-            "https://twitter.com/searchprex"
+            "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           ],
           "affiliation": { "@id": `${siteUrl}/#organization` }
         },
@@ -149,9 +146,7 @@ export default function AboutPage() {
           "Link Building"
         ],
         "sameAs": [
-          "https://twitter.com/searchprex",
-          "https://linkedin.com/company/searchprex",
-          "https://instagram.com/searchprex"
+          "https://linkedin.com/company/searchprex"
         ]
       },
       {

@@ -44,8 +44,6 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@searchprex',
-    creator: '@searchprex',
     title: 'SEO Resources & Guides — White Papers, Research, News',
     description: 'Free SEO resources: white papers, original research, real-world learnings, and curated industry news from SearchPrex.',
   },

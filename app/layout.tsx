@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     title: 'SearchPrex — USA SEO Agency for Law Firms & Ecommerce',
     description: 'Senior-led SEO for law firms, ecommerce & local businesses. Free audit in 48 hours.',
     // Likewise supplied by app/twitter-image.tsx.
-    creator: '@searchprex',
+    // No site/creator handle: SearchPrex has no X account yet. Add one only with a real handle.
   },
   // Only emitted when the env var is set — a placeholder value would publish a
   // meta tag that fails verification in Search Console.
@@ -173,7 +173,6 @@ export default function RootLayout({
           { "@type": "State", "name": "Illinois" }
         ],
         "sameAs": [
-          "https://twitter.com/searchprex",
           "https://linkedin.com/company/searchprex"
         ]
       },

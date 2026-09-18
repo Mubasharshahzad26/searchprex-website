@@ -43,8 +43,6 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@searchprex",
-    creator: "@searchprex",
     title: TITLE,
     description: DESCRIPTION,
   },

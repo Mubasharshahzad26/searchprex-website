@@ -54,8 +54,6 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@searchprex',
-    creator: '@searchprex',
     title: "SEO Case Studies — Verified Results | SearchPrex",
     description:
       "Browse SearchPrex SEO case studies with real GSC data. Law firm, ecommerce, local & technical SEO results.",
@@ -162,7 +160,7 @@ export default async function Page() {
     "image": `${SITE}/images/mubashar-shahzad.jpg`,
     "url": `${SITE}/about`,
     "email": "contact@searchprex.com",
-    "sameAs": [LINKEDIN_URL, "https://twitter.com/searchprex"],
+    "sameAs": [LINKEDIN_URL],
     "worksFor": {
       "@type": "Organization",
       "name": "SearchPrex",
@@ -191,7 +189,6 @@ export default async function Page() {
     "email": "contact@searchprex.com",
     "founder": { "@id": `${SITE}#founder` },
     "sameAs": [
-      "https://twitter.com/searchprex",
       "https://linkedin.com/company/searchprex"
     ]
   };
