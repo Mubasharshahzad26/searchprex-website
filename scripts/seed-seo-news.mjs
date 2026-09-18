@@ -175,7 +175,8 @@ const SPOKES = [
     slug: "google-algorithm-updates",
     category: "SEO News",
     title: "Google Algorithm Updates 2026: Every Confirmed Update, Dated",
-    metaTitle: "Google Algorithm Updates 2026: Confirmed Timeline & Dates",
+    metaTitle: "Google Algorithm Updates {month}: Timeline",
+    socialTitle: "Google Algorithm Updates 2026: Confirmed Timeline & Dates",
     metaDescription:
       "Every Google algorithm update confirmed in 2026, with exact start and end dates — Discover, core and spam updates — and what each one actually changed.",
     excerpt:
@@ -187,7 +188,8 @@ const SPOKES = [
     slug: "ai-sge-seo-news",
     category: "SEO News — AI SEO",
     title: "AI SEO News 2026: AI Overviews at 2.5B Users and What Google Now Reports",
-    metaTitle: "AI SEO News 2026: AI Overviews, AI Mode & GEO Updates",
+    metaTitle: "AI SEO News {month}: AI Overviews & AI Mode",
+    socialTitle: "AI SEO News 2026: AI Overviews, AI Mode & GEO Updates",
     metaDescription:
       "The 2026 AI SEO record: AI Overviews at 2.5B monthly users, AI Mode at 1B, and Search Console's first generative AI reports. Dated, sourced, and what to do.",
     excerpt:
@@ -199,7 +201,8 @@ const SPOKES = [
     slug: "llm-seo-news-2026",
     category: "SEO News — LLMs",
     title: "LLM SEO News 2026: Answer Engines, Citations and What Can Be Measured",
-    metaTitle: "LLM SEO News 2026: AEO, Citations & Answer Engine Updates",
+    metaTitle: "LLM SEO News {month}: AEO & Answer Engines",
+    socialTitle: "LLM SEO News 2026: AEO, Citations & Answer Engine Updates",
     metaDescription:
       "How LLM answer engines changed in 2026 — Gemini 3.5 Flash in AI Mode, Search Console's AI reports, crawler control — and what AEO can honestly be measured on.",
     excerpt:
@@ -211,7 +214,8 @@ const SPOKES = [
     slug: "seo-tools-news-2026",
     category: "SEO News — Tools",
     title: "SEO Tools News 2026: Every Search Console Change That Landed This Year",
-    metaTitle: "SEO Tools News 2026: Search Console Updates & AI Trackers",
+    metaTitle: "SEO Tools News {month}: Search Console Updates",
+    socialTitle: "SEO Tools News 2026: Search Console Updates & AI Trackers",
     metaDescription:
       "The 2026 SEO tooling record: Search Console's generative AI reports, platform properties for social and video, and the FAQ report removal. Dated and sourced.",
     excerpt:
@@ -223,7 +227,8 @@ const SPOKES = [
     slug: "ecommerce-seo-news-2026",
     category: "SEO News — Ecommerce",
     title: "Ecommerce SEO News 2026: UCP, Universal Cart and Agentic Checkout",
-    metaTitle: "Ecommerce SEO News 2026: UCP, Universal Cart & AI Shopping",
+    metaTitle: "Ecommerce SEO News {month}: UCP & AI Shopping",
+    socialTitle: "Ecommerce SEO News 2026: UCP, Universal Cart & AI Shopping",
     metaDescription:
       "Google's Universal Commerce Protocol, Universal Cart and agentic checkout in AI Mode — what launched in 2026, when, and what it changes for ecommerce SEO.",
     excerpt:
@@ -235,7 +240,8 @@ const SPOKES = [
     slug: "technical-seo-news-2026",
     category: "SEO News — Technical",
     title: "Technical SEO News 2026: FAQ Rich Results Gone, AI Crawlers, and Crawl Control",
-    metaTitle: "Technical SEO News 2026: FAQ Removal & AI Crawler Control",
+    metaTitle: "Technical SEO News {month}: Crawling & AI Bots",
+    socialTitle: "Technical SEO News 2026: FAQ Removal & AI Crawler Control",
     metaDescription:
       "The 2026 technical SEO changes that matter: FAQ rich results removed, Search Console API changes, and how to control AI crawlers without losing citations.",
     excerpt:
@@ -247,7 +253,8 @@ const SPOKES = [
     slug: "state-of-seo-2026",
     category: "SEO News",
     title: "The State of SEO in 2026: What Eight Months of Updates Actually Taught Us",
-    metaTitle: "State of SEO 2026: Trends Backed by Confirmed Updates",
+    metaTitle: "State of SEO 2026: Updated {month}",
+    socialTitle: "State of SEO 2026: Trends Backed by Confirmed Updates",
     metaDescription:
       "A grounded 2026 SEO review built on confirmed updates and Google's own announcements — what changed, what didn't, and where to put your effort.",
     excerpt:
