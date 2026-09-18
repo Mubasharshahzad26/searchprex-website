@@ -125,10 +125,10 @@ export default function AboutPage() {
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Model Town",
-          "addressLocality": "Gujranwala",
+          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
+          "addressLocality": "Daska",
           "addressRegion": "Punjab",
-          "postalCode": "52250",
+          "postalCode": "51010",
           "addressCountry": "PK"
         },
         "areaServed": [
@@ -216,7 +216,7 @@ export default function AboutPage() {
                     <MapPin className="h-4 w-4 text-[#534AB7]" />
                   </div>
                   <address className="text-sm text-[#374151] not-italic">
-                    Model Town<br />Gujranwala, Punjab, Pakistan
+                    Mohalla Raham Colony, Near Altaf Cold Storage<br />Opposite Chungi No. 1, Daska, Punjab, Pakistan
                   </address>
                 </div>
                 <div className="flex items-center gap-4">

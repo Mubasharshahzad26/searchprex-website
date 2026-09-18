@@ -146,7 +146,7 @@ export default function TermsPage() {
                 <li><strong>Email:</strong> legal@searchprex.com</li>
                 <li><strong>Phone:</strong> +92 305 9158010</li>
                 <li>
-                  <strong>Address:</strong> Gujranwala, Punjab, Pakistan
+                  <strong>Address:</strong> Daska, Punjab, Pakistan
                 </li>
               </ul>
         </Prose>

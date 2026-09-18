@@ -224,10 +224,10 @@ export default async function Home() {
         "areaServed": { "@type": "Country", "name": "United States" },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Model Town",
-          "addressLocality": "Gujranwala",
+          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
+          "addressLocality": "Daska",
           "addressRegion": "Punjab",
-          "postalCode": "52250",
+          "postalCode": "51010",
           "addressCountry": "PK"
         }
       },

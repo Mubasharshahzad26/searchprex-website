@@ -146,10 +146,10 @@ export default function RootLayout({
         "description": "Remote-First, US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Model Town",
-          "addressLocality": "Gujranwala",
+          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
+          "addressLocality": "Daska",
           "addressRegion": "Punjab",
-          "postalCode": "52250",
+          "postalCode": "51010",
           "addressCountry": "PK"
         },
         "telephone": "+92-305-9158010",
@@ -191,10 +191,10 @@ export default function RootLayout({
         "name": "SearchPrex SEO Services",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Model Town",
-          "addressLocality": "Gujranwala",
+          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
+          "addressLocality": "Daska",
           "addressRegion": "Punjab",
-          "postalCode": "52250",
+          "postalCode": "51010",
           "addressCountry": "PK"
         },
         "areaServed": {
