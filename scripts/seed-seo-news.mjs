@@ -180,7 +180,7 @@ const SPOKES = [
       "Every Google algorithm update confirmed in 2026, with exact start and end dates — Discover, core and spam updates — and what each one actually changed.",
     excerpt:
       "Six confirmed updates in eight months. Here is the dated record of what Google actually rolled out in 2026 — and what each one asked of site owners.",
-    readTime: "9 min read",
+    readTime: "8 min read",
     coverImage: IMG.charts,
   },
   {
@@ -192,7 +192,7 @@ const SPOKES = [
       "The 2026 AI SEO record: AI Overviews at 2.5B monthly users, AI Mode at 1B, and Search Console's first generative AI reports. Dated, sourced, and what to do.",
     excerpt:
       "Google finally put numbers on AI search and gave site owners data to measure it. Here is what changed in 2026, with dates — and what it means for your visibility.",
-    readTime: "8 min read",
+    readTime: "7 min read",
     coverImage: IMG.ai,
   },
   {
@@ -204,7 +204,7 @@ const SPOKES = [
       "How LLM answer engines changed in 2026 — Gemini 3.5 Flash in AI Mode, Search Console's AI reports, crawler control — and what AEO can honestly be measured on.",
     excerpt:
       "Answer Engine Optimisation is full of confident numbers and thin sourcing. Here is what is actually documented about LLM search in 2026 — and what is still guesswork.",
-    readTime: "8 min read",
+    readTime: "6 min read",
     coverImage: IMG.ai,
   },
   {
@@ -228,7 +228,7 @@ const SPOKES = [
       "Google's Universal Commerce Protocol, Universal Cart and agentic checkout in AI Mode — what launched in 2026, when, and what it changes for ecommerce SEO.",
     excerpt:
       "Google spent 2026 building a checkout that happens inside the AI answer. For ecommerce SEO, the product feed is quietly becoming more important than the product page.",
-    readTime: "8 min read",
+    readTime: "7 min read",
     coverImage: IMG.charts,
   },
   {
@@ -240,7 +240,7 @@ const SPOKES = [
       "The 2026 technical SEO changes that matter: FAQ rich results removed, Search Console API changes, and how to control AI crawlers without losing citations.",
     excerpt:
       "One deprecation broke live dashboards this month, and one robots.txt mistake is quietly removing sites from AI citations. Both are fixable this week.",
-    readTime: "8 min read",
+    readTime: "7 min read",
     coverImage: IMG.analytics,
   },
   {
@@ -252,7 +252,7 @@ const SPOKES = [
       "A grounded 2026 SEO review built on confirmed updates and Google's own announcements — what changed, what didn't, and where to put your effort.",
     excerpt:
       "Most 2026 trend pieces are predictions. This one is a review: what Google actually shipped between January and August, and what it should change about your plan.",
-    readTime: "8 min read",
+    readTime: "6 min read",
     coverImage: IMG.charts,
   },
   {

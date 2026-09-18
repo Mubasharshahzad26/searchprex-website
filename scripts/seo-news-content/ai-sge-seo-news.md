@@ -1,4 +1,42 @@
-<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026; the update log below was verified September 18, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+
+## AI search update log
+
+Reverse chronological. Every entry carries a date, a source, and a label saying how well established it is.
+
+<div class="callout"><strong>How to read the labels.</strong> <strong>Confirmed</strong> — the company announced or stated it. <strong>Observed</strong> — the SEO community documented it and the company has not commented. <strong>Independent testing</strong> — a third party published its own methodology and results. Nothing enters this log without a date and a named source.</div>
+
+### September 16, 2026 — Ahrefs measures what AI Overviews did to CTR in France
+
+**Independent testing.** AI Overviews launched in France on July 22, 2026. Ahrefs compared 963 of the highest-traffic French domains across the 28 days before launch and the 9 days after, splitting out domains where more than 20% of queries trigger an AI Overview from a control group where fewer than 2% do. The most exposed domains lost 23.1% of their click-through rate, and 82.2% of them lost CTR. Ahrefs' own caveat is worth keeping attached to the number: "A slope is not a prediction." Nine days is a short window.
+
+### September 15, 2026 — Google tests text-link ads inside AI Mode
+
+**Observed.** Spotted by Sachin Patel: ads inside AI Mode rendered as ordinary text links with anchor text, labelled "Sponsored", sitting close to the look of the organic response. Google has not commented. If it ships, the citation you earn in an AI answer will sit beside paid links styled almost identically.
+
+### August 28, 2026 — AI Overviews start opening fully expanded
+
+**Confirmed**, as a test. For some queries AI Overviews now load at full length with no "Show more" click, and the follow-up box loads by default, pushing classic results further down the page. A Google spokesperson: "For some queries, AI Overviews may dynamically expand for topics where our systems determine it's most useful for people." Robby Stein added that the expansion stops if the user scrolls.
+
+### August 26, 2026 — Link carousels for developing topics reach AI Mode
+
+**Confirmed.** Robby Stein on X: "Now live in AI Mode (already in AI Overviews): link carousels for developing topics." Google's stated aim is to "make it easy to connect with original coverage and a range of perspectives" — for news publishers, a visible slot inside AI answers on breaking stories.
+
+### August 20, 2026 — A custom "preferred source" button for your own site
+
+**Confirmed** — Search Central documentation changelog. Site owners can now add a custom, interactive button that takes visitors through setting the site as a preferred source and returns them to where they left off. Preferred sources has applied to AI Overviews and AI Mode since May 27.
+
+### August 17, 2026 — AI-generated images appear in AI Overviews, and Google pulls the test
+
+**Confirmed.** Reported on August 17: AI Overviews for recipe queries began showing AI-generated step-by-step illustrations. Inspired Taste objected that it was trying to "replace creators who buy groceries for testing, photography, and filming recipe videos." Google then ended the test the following Monday; Robby Stein: "This was a small experiment we're no longer running." He distinguished it from Google's image-generation feature, which "only triggers when users explicitly ask to generate an image."
+
+### August 14, 2026 — Gemini 3.7 Flash comes to AI Mode for paying subscribers
+
+**Confirmed.** Robby Stein and Rajan Patel announced it on X: "Rolling out globally today in AI Mode for Google AI Pro & Ultra subscribers in English." It is selected manually by subscribers; Google did not describe it as a change to the default model announced at I/O, covered below.
+
+### May 27, 2026 — Preferred sources extends to AI Overviews and AI Mode
+
+**Confirmed** — Search Central documentation changelog. Google updated the feature's availability because preferred sources "is starting to roll out to AI Overviews and AI Mode."
 
 ## The numbers Google confirmed at I/O 2026
 
@@ -52,6 +90,13 @@ Anyone quoting you a precise "AI traffic" figure for your site today is modellin
 
 ## Sources
 
+- <a href="https://ahrefs.com/blog/ai-overviews-france-impact/" target="_blank" rel="noopener noreferrer">AI Overviews Cut CTR by 23.1% in France — Ahrefs, September 16, 2026</a>
+- <a href="https://www.seroundtable.com/google-ai-mode-text-link-ads-42082.html" target="_blank" rel="noopener noreferrer">Google Testing Text Link Ads In Google AI Mode — Search Engine Roundtable, September 15, 2026</a>
+- <a href="https://www.seroundtable.com/google-ai-overviews-push-ai-mode-responses-41974.html" target="_blank" rel="noopener noreferrer">Google Making AI Overviews Into AI Mode Responses — Search Engine Roundtable, August 28, 2026</a>
+- <a href="https://www.seroundtable.com/google-ai-mode-link-carousels-41947.html" target="_blank" rel="noopener noreferrer">Google AI Mode Adds Link Carousels For Developing Topics — Search Engine Roundtable, August 26, 2026</a>
+- <a href="https://www.seroundtable.com/ai-generated-images-google-ai-overviews-41872.html" target="_blank" rel="noopener noreferrer">AI-Generated Images In Google AI Overviews — Search Engine Roundtable, August 17, 2026</a>
+- <a href="https://www.seroundtable.com/google-search-gemini-3-7-flash-41879.html" target="_blank" rel="noopener noreferrer">Google Search AI Mode Using Gemini 3.7 Flash — Search Engine Roundtable, August 17, 2026</a>
+- <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Latest Google Search Documentation Updates — Google Search Central</a>
 - <a href="https://blog.google/products-and-platforms/products/search/search-io-2026/" target="_blank" rel="noopener noreferrer">Google Search's I/O 2026 updates: AI agents and more — Google Blog</a>
 - <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports" target="_blank" rel="noopener noreferrer">Introducing Search Generative AI performance reports in Search Console — Google Search Central</a>
 - <a href="https://blog.google/products-and-platforms/products/search/new-controls-website-owners/" target="_blank" rel="noopener noreferrer">New opportunities, control and insights for website owners — Google Blog</a>

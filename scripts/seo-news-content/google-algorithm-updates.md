@@ -1,8 +1,8 @@
-<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026; the update table and log were re-checked against the Search Status Dashboard on September 18, 2026. Where a number could not be traced to a named source, it is not published here.</div>
 
 ## The 2026 update record, at a glance
 
-Google confirmed six updates between January 1 and August 27, 2026. Every row below is dated from Google's Search Status Dashboard or the trade reporting that tracked it. Unconfirmed volatility — the "unnamed update" chatter that fills SEO forums most weeks — is deliberately excluded, because a ranking movement nobody can attribute is not something you can plan against.
+Google confirmed six updates between January 1 and September 18, 2026; the Search Status Dashboard shows none after the August spam update. Every row below is dated from Google's Search Status Dashboard or the trade reporting that tracked it. Unconfirmed volatility — the "unnamed update" chatter that fills SEO forums most weeks — is deliberately excluded, because a ranking movement nobody can attribute is not something you can plan against.
 
 | Update | Started | Completed | Duration |
 | --- | --- | --- | --- |
@@ -12,6 +12,24 @@ Google confirmed six updates between January 1 and August 27, 2026. Every row be
 | May 2026 core update | May 21 | Jun 2 | 12 days |
 | June 2026 spam update | Jun 24 | Not separately announced | "a few days" |
 | August 2026 spam update | Aug 18 | Aug 21 | ~2 days, 16 hours |
+
+## Update log since August 27
+
+The table above records confirmed ranking updates only. This log records everything else that bears on reading it — dated, sourced, and labelled.
+
+<div class="callout"><strong>How to read the labels.</strong> <strong>Confirmed</strong> — the company announced or stated it. <strong>Observed</strong> — the SEO community documented it and the company has not commented. <strong>Independent testing</strong> — a third party published its own methodology and results. Nothing enters this log without a date and a named source.</div>
+
+### September 15, 2026 — Ranking volatility reported, no confirmed update
+
+**Observed.** Search Engine Roundtable reported "a huge spike in chatter" and suspected "the start of a Google update," following what it described as "weirdness with the Google rankings between September 4 and September 12." Google has confirmed nothing, and the Search Status Dashboard shows no new update as of September 18 — so it is not in the table. If your traffic moved from September 15, note the date: if Google confirms an update later, it gets a row.
+
+### August 28, 2026 — Site reputation enforcement changes inside the EEA
+
+**Confirmed** — Google Search Central. From August 30, a manual action under the site reputation policy affects only the offending section of a site for searchers outside the EEA; inside the EEA the manual action's impact does not apply, and the section may instead be separated so it ranks independently over time. This is a change to policy enforcement, not a ranking update, so it is not in the table. More in our [local SEO news log](/resources/news/local-seo-updates).
+
+### August 20, 2026 — Google explains which updates it announces
+
+**Confirmed.** John Mueller: "We have lots of systems that update continuously (most of them update automatically), but when we make bigger / broader changes to the systems, we try to announce them so that it's easier for folks if they see a big jump in their metrics." That is the reasoning behind this table's rule: only confirmed updates get a row, because the announcement is Google's own signal that a change was big enough to show up in your metrics.
 
 ## February: the first Discover-only update Google has ever announced
 
@@ -73,3 +91,6 @@ The distinction between spam and core is not academic. A core update is a reasse
 - <a href="https://searchengineland.com/google-releases-june-2026-spam-update-481002" target="_blank" rel="noopener noreferrer">Google releases June 2026 spam update — Search Engine Land</a>
 - <a href="https://searchengineland.com/google-august-2026-spam-update-done-rolling-out-485471" target="_blank" rel="noopener noreferrer">Google August 2026 spam update done rolling out — Search Engine Land</a>
 - <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history" target="_blank" rel="noopener noreferrer">Google Search Status Dashboard — Ranking history</a>
+- <a href="https://www.seroundtable.com/google-update-42091.html" target="_blank" rel="noopener noreferrer">Google Search Ranking Volatility Heating Up September 15th — Search Engine Roundtable, September 15, 2026</a>
+- <a href="https://developers.google.com/search/blog/2026/08/update-site-reputation-policy" target="_blank" rel="noopener noreferrer">Update to the Site Reputation Policy — Google Search Central Blog, August 2026</a>
+- <a href="https://www.seroundtable.com/google-announces-some-updates-41903.html" target="_blank" rel="noopener noreferrer">Why Google Announces Some Updates But Not All — Search Engine Roundtable, August 20, 2026</a>

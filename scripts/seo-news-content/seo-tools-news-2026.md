@@ -1,4 +1,38 @@
-<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026; the update log below was verified September 18, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+
+## SEO tools update log
+
+Reverse chronological. Every entry carries a date, a source, and a label saying how well established it is.
+
+<div class="callout"><strong>How to read the labels.</strong> <strong>Confirmed</strong> — the company announced or stated it. <strong>Observed</strong> — the SEO community documented it and the company has not commented. <strong>Independent testing</strong> — a third party published its own methodology and results. Nothing enters this log without a date and a named source.</div>
+
+### September 16, 2026 — Search profiles get a website badge and single-login management
+
+**Confirmed.** The Search Central changelog added a guide to adding a Search profile badge to your website, "to help site owners point their audience to their Search profile." Google also said publishers "can now claim and manage Search profiles for all of your sub-brands from a single login." Separately, Search Engine Roundtable reports the follower requirement for eligibility has been lowered, now to 10,000.
+
+### August 26, 2026 — Google starts routing result clicks through google.com/goto
+
+**Confirmed.** After testing it from July, Google began sending result clicks through a google.com/goto passthrough URL rather than linking straight to the page. A Google spokesperson: "We have a long history of deploying technical measures against evolving forms of abuse, and we regularly take steps to protect our services and users." Search Engine Roundtable reads it as a measure against scraping by third-party tools and AI companies, and Nozzle's Derek Perkins reported "nearly a 100% rollout across several residential ip providers." Read it alongside the SerpApi entry below.
+
+### August 12, 2026 — Search Console performance data drops: a logging error, not a traffic loss
+
+**Confirmed.** From around August 12, Performance reports showed sharp falls in clicks and impressions across many sites at once. John Mueller: "This is just a logging issue and not representative of visibility changes in Search." If a client dashboard shows an August 12 dip that analytics does not, this is why — annotate it rather than explain it away.
+
+### August 11, 2026 — The generative AI report reaches many more properties, but not all
+
+**Confirmed.** Search Engine Roundtable found the report on a much wider set of profiles, and John Mueller confirmed on Reddit that "it's not yet every domain," adding that "like the discover and news reports, these are only shown if there's sufficient data to display." A missing report can mean too little AI visibility, not a missing rollout.
+
+### August 10, 2026 — Google amends its lawsuit against SerpApi
+
+**Confirmed** — court filing. After its suit against the SERP-scraping service was dismissed about a month earlier, Google filed an amended complaint on August 10 built around licensed content, alleging that licensing partners have "expressly requested that Google prevent unauthorized access to licensed content." Every third-party rank tracker depends on access to SERP data; this case is about the terms of that access.
+
+### July 29, 2026 — Platform properties open to every Search Console user
+
+**Confirmed** — Search Central. Covered in detail below. The same day, Google published a guide to analysing social and video platform content performance in Search Console.
+
+### June 5, 2026 — Google publishes guidance on evaluating third-party SEO tools
+
+**Confirmed** — Search Central documentation changelog. Google added its "guidance on using third-party SEO tools, services, and advice," and updated its "Do you need an SEO?" page with guidance on evaluating an SEO's recommendations and tools — Google's own checklist for deciding whether to trust a tool.
 
 ## Search Console had a bigger year than any third-party tool
 
@@ -61,6 +95,12 @@ Used as a competitive share-of-voice benchmark, these tools are genuinely useful
 
 ## Sources
 
+- <a href="https://www.seroundtable.com/google-search-profiles-updates-42098.html" target="_blank" rel="noopener noreferrer">Google Search Profiles Updates Article Design, Lowers Follower Requirements &amp; Single Login — Search Engine Roundtable, September 16, 2026</a>
+- <a href="https://www.seroundtable.com/google-search-goto-tracking-41957.html" target="_blank" rel="noopener noreferrer">Google Search Rolling Out google.com/goto Tracking Parameters — Search Engine Roundtable, August 26, 2026</a>
+- <a href="https://www.seroundtable.com/google-search-console-performance-reports-drop-41884.html" target="_blank" rel="noopener noreferrer">Google Search Console Performance Reports Drop In Impressions/Clicks August 12th — Search Engine Roundtable, August 17, 2026</a>
+- <a href="https://www.seroundtable.com/google-search-console-ai-report-live-41850.html" target="_blank" rel="noopener noreferrer">Google Search Console Generative AI Performance Report Live For All — Search Engine Roundtable, August 11, 2026</a>
+- <a href="https://www.seroundtable.com/google-amends-lawsuit-against-serpapi-41860.html" target="_blank" rel="noopener noreferrer">Google Amends Lawsuit Against SerpApi — Search Engine Roundtable, August 12, 2026</a>
+- <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Latest Google Search Documentation Updates — Google Search Central</a>
 - <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports" target="_blank" rel="noopener noreferrer">Introducing Search Generative AI performance reports in Search Console — Google Search Central</a>
 - <a href="https://developers.google.com/search/blog/2026/07/search-console-social-video-platforms" target="_blank" rel="noopener noreferrer">See how content from social and video platforms performs on Google Search — Google Search Central</a>
 - <a href="https://www.searchenginejournal.com/google-search-console-adds-social-video-platform-properties/581634/" target="_blank" rel="noopener noreferrer">Google Search Console Adds Reports For Social Posts — Search Engine Journal</a>

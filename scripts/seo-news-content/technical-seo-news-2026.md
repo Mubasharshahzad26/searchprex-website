@@ -1,4 +1,42 @@
-<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026; the update log below was verified September 18, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+
+## Technical SEO update log
+
+Reverse chronological. Every entry carries a date, a source, and a label saying how well established it is.
+
+<div class="callout"><strong>How to read the labels.</strong> <strong>Confirmed</strong> — the company announced or stated it. <strong>Observed</strong> — the SEO community documented it and the company has not commented. <strong>Independent testing</strong> — a third party published its own methodology and results. Nothing enters this log without a date and a named source.</div>
+
+### September 8, 2026 — Google documents regional differences in Search
+
+**Confirmed** — Search Central documentation changelog. New documentation on "regional differences in Search experience, which includes information about search experiences available in certain countries, such as aggregator units, supplier units, and carousels." On September 18 Google updated the aggregator and supplier unit documentation to "include support for local business queries." If you operate across markets, the results page you test from one country is not the one another market sees.
+
+### August 28, 2026 — Supported favicon formats are now listed explicitly
+
+**Confirmed** — Search Central documentation changelog. Google now lists the supported favicon file formats in its own documentation, replacing a link to an external reference that "evolved over time and caused ambiguity." Google notes that "Google Search's supported file formats haven't changed" — this is a clarification, not a new requirement.
+
+### August 25, 2026 — PDFs drop out of results, then return
+
+**Observed.** Site owners including Lily Ray reported sharp falls in clicks to PDFs, with one reporting top PDFs going "to 0 impressions starting August 18." John Mueller said he would take a look. Google has not explained what happened. If PDF traffic dipped in late August, check whether it has recovered before treating it as a site problem.
+
+### July 10, 2026 — Google sets expectations on how long canonical changes take
+
+**Confirmed** — Search Central documentation changelog. The canonicalization troubleshooting guide was updated "with clarifications on re-evaluation time," in Google's words "to provide better expectations about how long it takes for canonicalization changes to take effect."
+
+### July 1, 2026 — Google stops routing AMP through its cache
+
+**Confirmed** — Search Central documentation changelog. "Google Search is updating how it connects users to AMP pages, and will now take users directly to the publisher's AMP host pages." Publishers "no longer need to update the AMP cache or configure signed exchanges," and "AMP content will continue to rank just like any other web page." If the AMP cache was your reason for keeping AMP, that reason is gone.
+
+### June 17, 2026 — Site moves should cover every host variant
+
+**Confirmed** — Search Central documentation changelog. The site move guide now covers using the Change of Address tool "for all subdomain variants (including www and non-www)" during domain migrations, because "domain migrations work best when all variants of a site are migrated properly."
+
+### June 15, 2026 — Google: llms.txt is not needed for Search
+
+**Confirmed** — Search Central documentation changelog. Google's AI optimization guide now states "that while these files aren't needed for Google Search (and won't negatively or positively impact your visibility or rankings), it's fine if you want to maintain these files for other services or systems that use them." See the llms.txt section below.
+
+### December 9, 2025 — OpenAI documents what blocking OAI-SearchBot actually does
+
+**Confirmed** — OpenAI documentation; Search Engine Roundtable reported the revision on December 9, 2025. As the page reads on September 18, 2026: "Sites that are opted out of OAI-SearchBot will not be shown in ChatGPT search answers, though can still appear as navigational links." This is the primary source for the crawler section below.
 
 ## May 7: FAQ rich results stopped appearing
 
@@ -74,6 +112,10 @@ Nothing Google shipped this year altered the technical baseline, and it is worth
 
 ## Sources
 
+- <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Latest Google Search Documentation Updates — Google Search Central</a>
+- <a href="https://www.seroundtable.com/google-search-fewer-pdf-files-41946.html" target="_blank" rel="noopener noreferrer">Google Showing Fewer PDF Files In Search — Search Engine Roundtable, August 25, 2026</a>
+- <a href="https://developers.openai.com/api/docs/bots" target="_blank" rel="noopener noreferrer">Overview of OpenAI Crawlers — OpenAI</a>
+- <a href="https://www.seroundtable.com/openai-chatgpt-crawler-oai-searchbot-update-40558.html" target="_blank" rel="noopener noreferrer">OpenAI Updates Its ChatGPT Crawler OAI-SearchBot — Search Engine Roundtable, December 9, 2025</a>
 - <a href="https://searchengineland.com/google-to-no-longer-support-faq-rich-results-476957" target="_blank" rel="noopener noreferrer">Google to no longer support FAQ rich results — Search Engine Land</a>
 - <a href="https://www.searchenginejournal.com/google-drops-faq-rich-results-from-search/574429/" target="_blank" rel="noopener noreferrer">Google Drops FAQ Rich Results From Search — Search Engine Journal</a>
 - <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes" target="_blank" rel="noopener noreferrer">Changes to HowTo and FAQ rich results — Google Search Central</a>

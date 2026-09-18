@@ -1,8 +1,38 @@
-<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026; the "since this review" log was verified September 18, 2026. Where a number could not be traced to a named source, it is not published here.</div>
 
 ## A review, not a forecast
 
 The genre problem with "state of SEO" articles is that they are written as predictions and never revisited. This one is built the other way round: from the record of what Google confirmed and shipped between January 1 and August 27, 2026. Every claim is dated and sourced, and where the evidence does not support a popular narrative, we say so.
+
+## Since this review: update log
+
+The review below covers January 1 to August 27, 2026. This log records what has happened since, in brief — each entry links to the deep-dive that covers it in full.
+
+<div class="callout"><strong>How to read the labels.</strong> <strong>Confirmed</strong> — the company announced or stated it. <strong>Observed</strong> — the SEO community documented it and the company has not commented. <strong>Independent testing</strong> — a third party published its own methodology and results. Nothing enters this log without a date and a named source.</div>
+
+### September 16, 2026 — First measured CTR impact of AI Overviews in a new market
+
+**Independent testing.** Ahrefs found that in France, the domains most exposed to AI Overviews lost 23.1% of their click-through rate in the nine days after AI Overviews launched there on July 22. Short window, clear direction. [Full entry in our AI SEO news log](/resources/news/ai-sge-seo-news).
+
+### September 16, 2026 — Google widens agentic checkout through Merchant Center
+
+**Confirmed.** Cart transfer and checkout testing arrive in the Merchant Center UCP integration hub, rolling out in the US first. [Full entry in our ecommerce SEO news log](/resources/news/ecommerce-seo-news-2026).
+
+### September 15, 2026 — Ranking volatility, still unconfirmed
+
+**Observed.** Widely reported ranking movement, with no confirmed update on the Search Status Dashboard as of September 18. [See the algorithm tracker](/resources/news/google-algorithm-updates).
+
+### August 26, 2026 — Google routes result clicks through google.com/goto
+
+**Confirmed.** A passthrough URL Google describes as a measure against abuse, which Search Engine Roundtable reads as anti-scraping. [Full entry in our SEO tools news log](/resources/news/seo-tools-news-2026).
+
+### August 20, 2026 — Google explains which updates it announces
+
+**Confirmed.** John Mueller said Google tries to announce "bigger / broader changes" so people can connect a jump in their metrics to them — worth reading alongside point 2 below, on where those announcements now appear. [See the algorithm tracker](/resources/news/google-algorithm-updates).
+
+### August 14, 2026 — Gemini 3.7 Flash reaches AI Mode for paying subscribers
+
+**Confirmed.** Announced by Google's Robby Stein and Rajan Patel for AI Pro and Ultra subscribers in English. [Full entry in our LLM SEO news log](/resources/news/llm-seo-news-2026).
 
 ## 1. Update cadence went up, and rollouts got shorter
 
@@ -63,6 +93,12 @@ Worth stating plainly, because a lot of 2026 commentary implies a clean slate:
 
 ## Sources
 
+- <a href="https://ahrefs.com/blog/ai-overviews-france-impact/" target="_blank" rel="noopener noreferrer">AI Overviews Cut CTR by 23.1% in France — Ahrefs, September 16, 2026</a>
+- <a href="https://blog.google/products-and-platforms/products/shopping/google-shopping-updates-holiday-shopping/" target="_blank" rel="noopener noreferrer">Boost your holiday sales with these agentic commerce updates — Google Blog, September 16, 2026</a>
+- <a href="https://www.seroundtable.com/google-update-42091.html" target="_blank" rel="noopener noreferrer">Google Search Ranking Volatility Heating Up September 15th — Search Engine Roundtable, September 15, 2026</a>
+- <a href="https://www.seroundtable.com/google-search-goto-tracking-41957.html" target="_blank" rel="noopener noreferrer">Google Search Rolling Out google.com/goto Tracking Parameters — Search Engine Roundtable, August 26, 2026</a>
+- <a href="https://www.seroundtable.com/google-announces-some-updates-41903.html" target="_blank" rel="noopener noreferrer">Why Google Announces Some Updates But Not All — Search Engine Roundtable, August 20, 2026</a>
+- <a href="https://www.seroundtable.com/google-search-gemini-3-7-flash-41879.html" target="_blank" rel="noopener noreferrer">Google Search AI Mode Using Gemini 3.7 Flash — Search Engine Roundtable, August 17, 2026</a>
 - <a href="https://blog.google/products-and-platforms/products/search/search-io-2026/" target="_blank" rel="noopener noreferrer">Google Search's I/O 2026 updates: AI agents and more — Google Blog</a>
 - <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports" target="_blank" rel="noopener noreferrer">Introducing Search Generative AI performance reports in Search Console — Google Search Central</a>
 - <a href="https://searchengineland.com/google-february-2026-discover-core-update-is-now-complete-469450" target="_blank" rel="noopener noreferrer">Google February 2026 Discover core update is now complete — Search Engine Land</a>

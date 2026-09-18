@@ -1,4 +1,42 @@
-<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+<div class="callout"><strong>Accuracy note:</strong> every date and figure on this page is taken from the primary announcement or from established trade coverage, linked in Sources at the foot of the article. Last verified August 27, 2026; the update log below was verified September 18, 2026. Where a number could not be traced to a named source, it is not published here.</div>
+
+## Ecommerce SEO update log
+
+Reverse chronological. Every entry carries a date, a source, and a label saying how well established it is.
+
+<div class="callout"><strong>How to read the labels.</strong> <strong>Confirmed</strong> — the company announced or stated it. <strong>Observed</strong> — the SEO community documented it and the company has not commented. <strong>Independent testing</strong> — a third party published its own methodology and results. Nothing enters this log without a date and a named source.</div>
+
+### September 17, 2026 — Bing tests deal and popularity labels on product carousels
+
+**Observed.** Bing product carousels showing labels including "Top Picks", "Sale" and "Price Drop", plus view counts; the Top Picks label was spotted by Khushal Bherwani. Microsoft has not commented, and Search Engine Roundtable notes some of the labels may not be new.
+
+### September 16, 2026 — Google's holiday agentic commerce update
+
+**Confirmed** — Google Blog. AI performance insights in Merchant Center is now available to businesses in Australia, Canada, India, New Zealand and the US. Merchants using the Merchant Center UCP integration hub can enable "cart transfer to a merchant site," with the new capabilities "gradually rolling out in the U.S., with Australia and Canada to follow early next year." Google also opened a Business Agent beta for YouTube ads and pointed retailers at feed attributes: during testing with lululemon, "conversational attributes submitted from the brand were incorporated 50% of the time in relevant product recommendations in AI Mode." That is one brand's test, not a general rate — but it is Google saying brand-supplied feed attributes shape AI Mode recommendations.
+
+### July 24, 2026 — New review snippet guideline on incentivized reviews
+
+**Confirmed** — Search Central documentation changelog. Google added a guideline to the review snippet documentation "about fake and undisclosed incentivized reviews," to "improve user review transparency." If your product pages mark up reviews, audit how those reviews were collected.
+
+### July 14, 2026 — Package tracking program closes to new partners
+
+**Confirmed** — Search Central documentation changelog. "The package tracking early adopters program is no longer accepting new partners."
+
+### July 7, 2026 — Product categories and sale dates in merchant listing markup
+
+**Confirmed** — Search Central documentation changelog. Product.category can now be used "with both Text and CategoryCode types," aligning with Merchant Center's product_type and google_product_category attributes. A new "Sale duration" section explains using validFrom, validThrough and priceValidUntil to set sale price dates, aligned with the sale_price_effective_date feed attribute. Both are exactly the feed-and-markup reconciliation recommended below.
+
+### May 20, 2026 — hasAdultConsideration added to product structured data
+
+**Confirmed** — Search Central documentation changelog. The property was added to the Merchant listing and Product variant documentation; it "brings parity with the Merchant Center feed specification for the adult property."
+
+### March 19, 2026 — UCP adds cart, catalog access and identity linking
+
+**Confirmed** — Google Blog. Shopping agents can save multiple items from one store to a cart at once and "retrieve select real-time product details from a retailer's catalog," and identity linking lets shoppers keep loyalty benefits on integrated platforms. Google said a simplified UCP onboarding process in Merchant Center would roll out "over the coming months," and named Commerce Inc, Salesforce and Stripe as partners implementing UCP.
+
+### January 11, 2026 — Google launches the Universal Commerce Protocol
+
+**Confirmed.** The open standard behind agentic checkout on Google — covered in detail below.
 
 ## January 11: Google launches the Universal Commerce Protocol
 
@@ -54,6 +92,10 @@ Traditional ecommerce SEO also still carries the majority of revenue for most st
 
 ## Sources
 
+- <a href="https://www.seroundtable.com/bing-product-carousel-labels-42092.html" target="_blank" rel="noopener noreferrer">Bing Testing Top Picks Label, Sale, Price Drop &amp; More On Product Carousels — Search Engine Roundtable, September 17, 2026</a>
+- <a href="https://blog.google/products-and-platforms/products/shopping/google-shopping-updates-holiday-shopping/" target="_blank" rel="noopener noreferrer">Boost your holiday sales with these agentic commerce updates — Google Blog, September 16, 2026</a>
+- <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Latest Google Search Documentation Updates — Google Search Central</a>
+- <a href="https://blog.google/products-and-platforms/products/shopping/ucp-updates/" target="_blank" rel="noopener noreferrer">AI shopping gets simpler with Universal Commerce Protocol updates — Google Blog, March 19, 2026</a>
 - <a href="https://searchengineland.com/google-universal-commerce-protocol-467290" target="_blank" rel="noopener noreferrer">Google launches Universal Commerce Protocol for agent-led shopping — Search Engine Land</a>
 - <a href="https://searchengineland.com/google-expands-universal-commerce-protocol-and-launches-new-agentic-shopping-tools-478113" target="_blank" rel="noopener noreferrer">Google expands Universal Commerce Protocol and launches new agentic shopping tools — Search Engine Land</a>
 - <a href="https://blog.google/products-and-platforms/products/shopping/google-shopping-cart/" target="_blank" rel="noopener noreferrer">Google Shopping introduces Universal Cart, agentic shopping — Google Blog</a>
