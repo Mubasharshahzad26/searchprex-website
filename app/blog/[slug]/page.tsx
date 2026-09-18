@@ -31,6 +31,11 @@ async function getPostData(rawSlug: string) {
         category: dbPost.category || "General",
         subcategory: "",
         title: dbPost.title,
+        // Same fix as the news route: the SERP-tuned metaTitle was read by
+        // nothing, and metaDescription was unreachable behind a populated
+        // `excerpt`. `title` stays the H1 and the schema headline.
+        metaTitle: dbPost.metaTitle || dbPost.title,
+        metaDescription: dbPost.metaDescription || dbPost.excerpt || "",
         excerpt: dbPost.excerpt || dbPost.metaDescription || "",
         readTime: dbPost.readTime || "5-minute read",
         date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split('T')[0] : dbPost.createdAt.toISOString().split('T')[0],
@@ -66,6 +71,10 @@ async function getPostData(rawSlug: string) {
   if (fallback) {
     return {
       ...fallback,
+      // The hardcoded posts have no separate meta pair; fall back to the
+      // on-page title and excerpt so generateMetadata always has a value.
+      metaTitle: fallback.title,
+      metaDescription: fallback.excerpt || "",
       canonicalUrl: "",
       schemaType: "BlogPosting",
       ogTitle: "",
@@ -96,14 +105,14 @@ export async function generateMetadata({
 
   const url = `${SITE}/blog/${post.slug}`;
   const canonical = post.canonicalUrl || url;
-  const ogTitle = post.ogTitle || post.title;
-  const ogDesc = post.ogDescription || post.excerpt;
+  const ogTitle = post.ogTitle || post.metaTitle;
+  const ogDesc = post.ogDescription || post.metaDescription;
   const twTitle = post.twitterTitle || ogTitle;
   const twDesc = post.twitterDescription || ogDesc;
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.metaTitle,
+    description: post.metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
     alternates: { canonical },

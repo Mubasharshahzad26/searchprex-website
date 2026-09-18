@@ -72,6 +72,14 @@ const navLinks: NavLink[] = [
     label: "SEO News",
     hasDropdown: true,
     dropdownItems: [
+      // Local points at the spoke itself, not at ?category=Local, and that is
+      // deliberate. The spoke already ranks for "local seo news" while the hub
+      // ranked 61 for the same query -- adding a third URL on the same head
+      // term would re-split the signal we just consolidated. The other
+      // categories have no single ranking page, so a filter view is right for
+      // them. This also gives the spoke the sitewide internal link it had none
+      // of: nothing in the codebase linked to it before.
+      { href: "/resources/news/local-seo-updates",      label: "Local SEO News" },
       { href: "/resources/news?category=AI+SEO",        label: "AI SEO News" },
       { href: "/resources/news?category=LLMs",          label: "LLMs SEO News" },
       { href: "/resources/news?category=Tools",         label: "SEO Tools News" },
@@ -190,15 +198,34 @@ export default function Nav() {
                       </Link>
                     )}
  
-                    {link.hasDropdown && isOpen && (
+                    {link.hasDropdown && (
                       // Wrapper sits flush against the trigger (top-full, no margin) and uses
                       // padding — not margin — for the visual gap, so the hoverable area is
                       // continuous and the dropdown no longer closes before you reach it.
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        className="absolute left-0 top-full z-50 w-56 pt-2"
+                      //
+                      // Rendered unconditionally. This was `isOpen && (...)`, which mounted
+                      // the items only while hovered — so the served HTML contained not one
+                      // dropdown link, and every category, location and tool URL in these
+                      // menus was unlinked as far as a crawler was concerned. The footer
+                      // carries deliberate duplicates of the important ones for exactly
+                      // that reason.
+                      //
+                      // `invisible` (visibility:hidden) rather than `hidden`
+                      // (display:none): the anchors stay in the DOM for crawlers, while
+                      // visibility removes them from the tab order and the accessibility
+                      // tree while closed. It is inside the transition so it flips at the
+                      // END of the fade-out instead of snapping away mid-animation.
+                      //
+                      // framer-motion is dropped from this element deliberately: with no
+                      // AnimatePresence wrapper around it, its `exit` prop never fired, so
+                      // the old exit animation was already dead code. A CSS transition does
+                      // the same job and can animate visibility, which motion cannot.
+                      <div
+                        className={`absolute left-0 top-full z-50 w-56 pt-2 transition-all duration-150 ${
+                          isOpen
+                            ? "visible translate-y-0 opacity-100"
+                            : "invisible pointer-events-none translate-y-2 opacity-0"
+                        }`}
                       >
                         <div className="rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl">
                           {link.dropdownItems?.map((item) => {
@@ -241,7 +268,7 @@ export default function Nav() {
                             );
                           })}
                         </div>
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                 );

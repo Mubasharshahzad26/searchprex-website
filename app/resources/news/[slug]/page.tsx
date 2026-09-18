@@ -20,9 +20,25 @@ async function getPostData(rawSlug: string) {
         category: (dbPost.category?.split("—").pop() ?? "SEO News").trim(),
         subcategory: "",
         title: dbPost.title,
+        // The DB carries a separate, SERP-tuned metaTitle/metaDescription pair
+        // that nothing here used to read. `title` went straight to the <title>
+        // tag from the H1 (too long, so it truncated in the SERP), and
+        // metaDescription was unreachable because `excerpt` is always set and
+        // won the `||` below. Keep `title` for the H1 and the schema headline;
+        // this pair is what Google actually renders.
+        // Expanded here rather than in generateMetadata so the token can never
+        // reach the client payload: this whole object is serialized as a prop
+        // for PostClient, and a raw "{month}" was showing up in the RSC flight
+        // data even though no meta tag carried it.
+        metaTitle: expandMonthToken(dbPost.metaTitle || dbPost.title, dbPost.updatedAt.toISOString()),
+        metaDescription: dbPost.metaDescription || dbPost.excerpt || "",
         excerpt: dbPost.excerpt || dbPost.metaDescription || "",
         readTime: dbPost.readTime || "7-minute read",
         date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split("T")[0] : dbPost.createdAt.toISOString().split("T")[0],
+        // Freshness signal for schema.org. These pages target dated queries
+        // ("... news today", "... updates september 2026"), and datePublished
+        // alone tells Google nothing about whether the page still maintained.
+        dateModified: dbPost.updatedAt.toISOString(),
         author: {
           name: dbPost.author || "SearchPrex Team",
           role: "Verified SEO Expert",
@@ -44,9 +60,9 @@ async function getPostData(rawSlug: string) {
         // Advanced SEO Fields
         canonicalUrl: dbPost.canonicalUrl || "",
         schemaType: dbPost.schemaType || "NewsArticle",
-        ogTitle: dbPost.ogTitle || "",
+        ogTitle: expandMonthToken(dbPost.ogTitle || "", dbPost.updatedAt.toISOString()),
         ogDescription: dbPost.ogDescription || "",
-        twitterTitle: dbPost.twitterTitle || "",
+        twitterTitle: expandMonthToken(dbPost.twitterTitle || "", dbPost.updatedAt.toISOString()),
         twitterDescription: dbPost.twitterDescription || ""
       };
     }
@@ -54,6 +70,75 @@ async function getPostData(rawSlug: string) {
     console.error("Failed to fetch DB post for news spoke:", slug, err);
   }
   return null;
+}
+
+/**
+ * Expands a `{month}` token in a stored metaTitle to the month the row was last
+ * genuinely updated.
+ *
+ * These pages target dated queries ("local seo news today", "... updates
+ * september 2026"), so a month in the SERP title earns clicks. Deriving it from
+ * `updatedAt` rather than from today's date is the whole point: the title can
+ * only ever advertise freshness the content actually has. Bump the row and the
+ * month moves; leave the row alone and the title stops claiming this month.
+ */
+function expandMonthToken(value: string, isoDate: string): string {
+  if (!value.includes("{month}")) return value;
+  const parsed = new Date(isoDate);
+  if (Number.isNaN(parsed.getTime())) return value.replace(/\s*\{month\}/g, "");
+  const month = parsed.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  return value.replace(/\{month\}/g, month);
+}
+
+/** Markdown -> plain text, for schema values that must not contain markup. */
+function stripMarkdown(value: string): string {
+  return value
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]+>/g, "")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/[*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Pulls question/answer pairs out of a "## Quick answers" section in the body.
+ *
+ * Parsed from the article markdown rather than stored as a separate field on
+ * purpose: Google requires FAQPage content to be visible on the page it
+ * describes, and a second source of truth is exactly how that requirement gets
+ * broken six months later. One body, one set of answers.
+ *
+ * Worth being clear about what this is for. It is NOT for FAQ rich results —
+ * Google removed those in 2026, as the technical-seo-news-2026 spoke documents.
+ * The value here is machine-readable Q&A for AI Overviews and LLM answer
+ * engines, which is a different and much less certain payoff.
+ *
+ * Returns [] on anything it does not recognise, so a future formatting change
+ * drops the schema silently instead of emitting something malformed.
+ */
+function extractQuickAnswers(content: string): { question: string; answer: string }[] {
+  const afterHeading = content.split(/^##[ \t]+Quick answers[ \t]*$/m)[1];
+  if (!afterHeading) return [];
+
+  // Stop at the next H2 so following sections are not swept in.
+  const section = afterHeading.split(/^##[ \t]+/m)[0];
+  const blocks = section.split(/^###[ \t]+/m).slice(1);
+
+  const pairs: { question: string; answer: string }[] = [];
+  for (const block of blocks) {
+    const newline = block.indexOf("\n");
+    if (newline === -1) continue;
+    const question = stripMarkdown(block.slice(0, newline));
+    // First paragraph only — the direct answer, not the nuance that follows.
+    const answer = stripMarkdown(block.slice(newline).trim().split(/\n[ \t]*\n/)[0] ?? "");
+    if (question && answer) pairs.push({ question, answer });
+  }
+  return pairs;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -66,14 +151,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const url = `${SITE}/resources/news/${post.slug}`;
   const canonical = post.canonicalUrl || url;
-  const ogTitle = post.ogTitle || post.title;
-  const ogDesc = post.ogDescription || post.excerpt;
+  // Already expanded in getPostData -- nothing here carries a token.
+  const ogTitle = post.ogTitle || post.metaTitle;
+  const ogDesc = post.ogDescription || post.metaDescription;
   const twTitle = post.twitterTitle || ogTitle;
   const twDesc = post.twitterDescription || ogDesc;
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.metaTitle,
+    description: post.metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
     alternates: { canonical },
@@ -149,7 +235,9 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
     description: post.excerpt,
     image: post.heroImage,
     datePublished: post.date,
-    keywords: post.tags.join(", "),
+    dateModified: post.dateModified,
+    // `keywords` used to be here as post.tags.join(", "), but post.tags is
+    // hardcoded to [] above, so every article shipped an empty "keywords": "".
     articleSection: post.category,
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
     author: {
@@ -157,6 +245,12 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
       name: post.author.name,
       jobTitle: post.author.role,
       url: `${SITE}/experts`,
+      // Ties the byline to the same profiles the About and case-study pages
+      // already declare, so the author resolves to one entity across the site.
+      sameAs: [
+        "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
+        "https://twitter.com/searchprex",
+      ],
     },
     publisher: {
       "@type": "Organization",
@@ -177,9 +271,25 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
     ],
   };
 
+  // Only emitted when the body actually carries a Quick answers section, and
+  // only with two or more pairs — a single-question FAQPage is noise.
+  const quickAnswers = extractQuickAnswers(post.content);
+  const faqSchema =
+    quickAnswers.length >= 2
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: quickAnswers.map((qa) => ({
+            "@type": "Question",
+            name: qa.question,
+            acceptedAnswer: { "@type": "Answer", text: qa.answer },
+          })),
+        }
+      : null;
+
   return (
     <>
-      {[articleSchema, breadcrumbSchema].map((schema, i) => (
+      {[articleSchema, breadcrumbSchema, faqSchema].filter(Boolean).map((schema, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
       <PostClient

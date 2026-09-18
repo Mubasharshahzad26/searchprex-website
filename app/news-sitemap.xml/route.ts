@@ -14,12 +14,16 @@ export async function GET(request: Request) {
   const twoDaysAgo = new Date();
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
 
-  // Fetch only recent news posts
+  // The window was commented out "so the sitemap isn't empty on launch", which
+  // meant all eight evergreen spokes -- none of them published in the last 48
+  // hours -- were being submitted as Google News items. A news sitemap full of
+  // months-old URLs gets discounted, so an empty urlset is the better state.
+  // This starts returning rows again as soon as genuinely dated items ship.
   const posts = await db.marketingBlog.findMany({
-    where: { 
-      published: true, 
+    where: {
+      published: true,
       category: { contains: filterCat, mode: "insensitive" },
-      // publishedAt: { gte: twoDaysAgo } // Commented out for now so the sitemap isn't empty on launch
+      publishedAt: { gte: twoDaysAgo },
     },
     orderBy: { publishedAt: "desc" },
     select: { slug: true, title: true, publishedAt: true }

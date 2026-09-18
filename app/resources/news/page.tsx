@@ -11,15 +11,19 @@ import NewsClient from "./NewsClient";
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/resources/news`;
 
+// The hub deliberately does NOT target local head terms. It was ranking 61 for
+// "local seo news" and 67 for "local seo update" against the dedicated spoke's
+// 19 and 21 -- the same queries, two URLs, split signals. The spoke at
+// /resources/news/local-seo-updates owns local; the hub owns the broad terms.
 const baseMetadata: Metadata = {
   title: "SEO News Today: Latest Google Algorithm Updates & Trends (2026)",
   description:
-    "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and local SEO changes. See what actually changed.",
+    "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and spam updates. See what actually changed.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "SEO News Today: Latest Google Algorithm Updates & Trends (2026)",
     description:
-      "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and local SEO changes.",
+      "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and spam updates.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",

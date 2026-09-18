@@ -24,6 +24,12 @@ const companyLinks = [
   { href: "/case-studies", label: "Case Studies" },
   { href: "/resources", label: "Resources" },
   { href: "/resources/news", label: "SEO News" },
+  // Same reasoning as toolLinks and cityLinks: the nav's SEO News dropdown only
+  // renders its items on hover, so a crawler never sees them. This spoke ranks
+  // on page 3 for "local seo news" and had no crawlable internal link anywhere
+  // on the site — the hub listing and the related strip were its only inbound
+  // links, and both are one level deep.
+  { href: "/resources/news/local-seo-updates", label: "Local SEO News" },
   { href: "/faq", label: "FAQ" },
 ];
  

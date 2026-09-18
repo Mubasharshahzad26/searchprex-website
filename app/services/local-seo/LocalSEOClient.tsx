@@ -7,6 +7,7 @@
 //
 // Copy is unchanged from the previous version.
 
+import Link from "next/link";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
 import {
   AuthorCard,
@@ -215,6 +216,26 @@ export default function LocalSEOClient() {
       <Section width="reading">
         <SectionHeading eyebrow="FAQ" title="Local SEO questions, answered" />
         <FaqList faqs={faqs} name="local-seo-faq" />
+      </Section>
+
+      {/*
+        Contextual link to the local news spoke. This page is the closest
+        commercial match to /resources/news/local-seo-updates and linked to it
+        zero times before -- the spoke had no contextual internal links at all.
+      */}
+      <Section width="reading" tight>
+        <p className="text-[0.9375rem] leading-relaxed text-[#374151]">
+          Google changes how local results work more often than it announces it. We keep a dated,
+          sourced record of what actually changed — Business Profile verification, review removals,
+          business-name policy, Ask Maps — in our{" "}
+          <Link
+            href="/resources/news/local-seo-updates"
+            className="font-semibold text-[#534AB7] underline underline-offset-2"
+          >
+            local SEO news log
+          </Link>
+          .
+        </p>
       </Section>
 
       <CtaBand

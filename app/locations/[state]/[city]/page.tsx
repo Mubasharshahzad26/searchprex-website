@@ -41,6 +41,29 @@ import {
 
 const SITE = "https://www.searchprex.com";
 
+/**
+ * Anchor variants for the link to the local news spoke. One template renders
+ * every city page, so a single hardcoded anchor would produce an identical
+ * anchor on every location URL. Rotated by city slug to keep it varied.
+ */
+const LOCAL_NEWS_ANCHORS = [
+  "local SEO news",
+  "local search updates",
+  "2026 local algorithm changes",
+];
+
+/**
+ * Character-sum hash rather than slug length. Length was the obvious choice and
+ * the wrong one: city slugs cluster tightly around 9-11 characters, so
+ * `length % 3` handed the same anchor to detroit, sugar-land and shreveport
+ * alike. Summing char codes spreads the three variants across the set.
+ */
+function localNewsAnchor(slug: string): string {
+  let sum = 0;
+  for (let i = 0; i < slug.length; i++) sum += slug.charCodeAt(i);
+  return LOCAL_NEWS_ANCHORS[sum % LOCAL_NEWS_ANCHORS.length];
+}
+
 export function generateStaticParams() {
   return getAllCityParams();
 }
@@ -277,6 +300,25 @@ export default async function CityPage({
             </ul>
           </Section>
         ) : null}
+
+        {/*
+          Varied anchor text on purpose: this template renders every city page,
+          so an identical anchor would repeat across the whole location set.
+          Keyed off the city name to rotate between three phrasings.
+        */}
+        <Section width="reading" tight>
+          <p className="text-[0.9375rem] leading-relaxed" style={{ color: color.ink }}>
+            Local rankings move when Google changes how local results work.{" "}
+            <Link
+              href="/resources/news/local-seo-updates"
+              className="font-semibold underline underline-offset-2"
+              style={{ color: color.primary }}
+            >
+              {localNewsAnchor(page.citySlug)}
+            </Link>{" "}
+            — dated and sourced, so you can line a ranking drop up against what actually changed.
+          </p>
+        </Section>
 
         <CtaBand
           eyebrow={`${page.city}, ${page.stateAbbr}`}

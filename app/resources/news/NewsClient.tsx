@@ -25,6 +25,7 @@ const TAG_COLORS: Record<string, string> = {
   "Discover": "#7c3aed",
   "Ecommerce": "#be185d",
   "Technical": "#0f766e",
+  "Local": "#c2410c",
 };
 const tagColor = (tag: string) => TAG_COLORS[tag] || PURPLE;
 

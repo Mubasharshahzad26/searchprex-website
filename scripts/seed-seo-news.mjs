@@ -257,14 +257,23 @@ const SPOKES = [
   },
   {
     slug: "local-seo-updates",
-    category: "SEO News",
+    // "SEO News — Local" so the hub query (contains "SEO News") still matches
+    // and the card badge reads "Local" rather than a generic "SEO News".
+    // Note there is deliberately no CATEGORY_META entry for "Local": that makes
+    // ?category=Local canonicalize back to the hub instead of becoming a second
+    // URL competing with this spoke on "local seo news".
+    category: "SEO News — Local",
     title: "Local SEO News 2026: What Confirmed Updates Mean for the Map Pack",
-    metaTitle: "Local SEO News 2026: Map Pack & Google Business Profile",
+    // `{month}` is expanded at render time from the row's updatedAt, not from
+    // today's date -- see expandMonthToken in app/resources/news/[slug]/page.tsx.
+    // Only add a dated entry to the update log and the month moves with it.
+    metaTitle: "Local SEO News {month}: Map Pack & GBP Updates",
+    socialTitle: "Local SEO News 2026: Map Pack & GBP Updates",
     metaDescription:
-      "What 2026's confirmed Google updates mean for local rankings and Google Business Profile — separating documented change from local SEO folklore.",
+      "A dated, sourced log of local search changes — GBP verification, review removals, name policy, Ask Maps — plus what the confirmed 2026 updates actually support.",
     excerpt:
-      "Local SEO attracts more unsourced claims than any other speciality. Here is what the confirmed 2026 updates support — and what is being asserted without evidence.",
-    readTime: "7 min read",
+      "Local SEO attracts more unsourced claims than any other speciality. Here is a dated log of what actually changed — and what is being asserted without evidence.",
+    readTime: "9 min read",
     coverImage: IMG.local,
   },
 ];
@@ -297,9 +306,14 @@ async function main() {
       author: AUTHOR,
       schemaType: "NewsArticle",
       canonicalUrl: `https://www.searchprex.com/resources/news/${spoke.slug}`,
-      ogTitle: spoke.metaTitle,
+      // Social titles must never carry a {month} token. metaTitle is expanded
+      // at render time by the news route, but og:title/twitter:title are also
+      // read by scrapers and by any deploy running older code, where an
+      // unexpanded "{month}" would ship verbatim. `socialTitle` is the
+      // token-free variant; spokes without a token can omit it.
+      ogTitle: spoke.socialTitle || spoke.metaTitle,
       ogDescription: spoke.metaDescription,
-      twitterTitle: spoke.metaTitle,
+      twitterTitle: spoke.socialTitle || spoke.metaTitle,
       twitterDescription: spoke.metaDescription,
       published: true,
       publishedAt: new Date("2026-08-27T09:00:00Z"),

@@ -60,6 +60,8 @@ The distinction between spam and core is not academic. A core update is a reasse
 4. **Wait for the rollout to complete** before acting, using the Search Status Dashboard rather than third-party trackers to confirm.
 5. **Change one thing at a time.** With updates now arriving roughly every six weeks, bundled changes become permanently unattributable.
 
+**If the site you are diagnosing is a local business**, the broad updates above are only half the picture: Business Profile policy, review handling and Maps surfaces change on their own schedule and are rarely announced. Those are tracked separately in our dated [local SEO news log](/resources/news/local-seo-updates).
+
 [← Back to the SEO News hub](/resources/news) for the running algorithm tracker and every other deep-dive.
 
 ## Sources
