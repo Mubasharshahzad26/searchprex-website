@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { isGatedRoute } from "@/lib/gated-routes";
+import { MASTER_ADMIN_COOKIE, isMasterAdminCookie } from "@/lib/admin-master";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -27,28 +28,10 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute =
     isCmsRoute || pathname.startsWith("/dashboard") || isGatedTool;
 
-  // Master Admin Token or Query Key Bypass for CMS & Testing
-  const adminSecret = process.env.CRON_SECRET || "searchprex-admin-2026";
-  const authCookie = request.cookies.get("searchprex_admin_token")?.value;
-  const querySecret = request.nextUrl.searchParams.get("admin_key");
-
-  if (
-    querySecret === "searchprex-admin-2026" ||
-    querySecret === adminSecret ||
-    authCookie === "searchprex-admin-2026" ||
-    authCookie === adminSecret
-  ) {
-    const response = NextResponse.next({ request });
-    if (querySecret) {
-      response.cookies.set("searchprex_admin_token", querySecret, {
-        path: "/",
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-      });
-    }
-    return response;
+  // Master admin session, set by the login page (see lib/admin-master.ts).
+  // Cookie only: there is deliberately no ?admin_key= query login any more.
+  if (await isMasterAdminCookie(request.cookies.get(MASTER_ADMIN_COOKIE)?.value)) {
+    return NextResponse.next({ request });
   }
 
   // Fail CLOSED, not open. Without Supabase credentials we cannot authenticate

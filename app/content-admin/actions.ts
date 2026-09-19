@@ -2,58 +2,16 @@
 
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
-import { cookies } from "next/headers";
+import { requireAdmin } from "@/lib/auth/require-admin";
 
 /**
  * Every action below is admin-only, and the middleware is NOT enough on its own.
- *
- * Next dispatches a Server Action by its ID, not by the URL it was POSTed to.
- * A request carrying a Next-Action header for `deleteMarketingBlog` aimed at
- * `/` executes it without ever touching a path the middleware matcher covers,
- * so `/content-admin/:path*` in middleware.ts guards the pages, not the writes.
- * The guard has to live at the action itself.
+ * See lib/auth/require-admin.ts for why the guard lives at each action.
  *
  * The reads are guarded too, not just the writes: getMarketingBlogs and friends
  * return unpublished drafts, so leaving them open would leak content that has
  * deliberately not shipped.
- *
- * Throwing is the right failure here rather than returning empty — these run
- * against the production database, and a silent empty list reads to the caller
- * as "there is nothing here" instead of "you are not allowed".
  */
-async function requireAdmin() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("searchprex_admin_token")?.value;
-  const adminSecret = process.env.CRON_SECRET || "searchprex-admin-2026";
-  if (token === "searchprex-admin-2026" || (adminSecret && token === adminSecret)) {
-    return;
-  }
-
-  // Fail CLOSED when auth is unconfigured, matching middleware.ts. Without
-  // credentials we cannot tell an admin from anyone else, so we refuse.
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
-    throw new Error(
-      "Authentication is not configured on this deployment, so CMS access is refused. " +
-        "Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to enable sign-in."
-    );
-  }
-
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Not signed in.");
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-
-  if (profile?.role !== "admin") throw new Error("Admin role required.");
-}
 
 // --- MARKETING PAGES ---
 export async function getMarketingPages() {
