@@ -87,8 +87,10 @@ const eeatLinks = [
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#00b67a" aria-label="Trustpilot"><path d="M12 2l2.76 8.47H23l-7.12 5.17 2.76 8.47L12 19 3.36 24.11l2.76-8.47L-1 8.47h8.24z"/></svg> },
   { label: "Clutch", sub: "Registered", href: "https://clutch.co/profile/searchprex", color: "#8a5b08",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#d97706" aria-label="Clutch"><path d="M12 2l2.39 4.84 5.34.78-3.87 3.77.91 5.32L12 14.27l-4.77 2.44.91-5.32L4.27 7.62l5.34-.78z"/></svg> },
-  { label: "BBB", sub: "Accredited", href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
-    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="BBB"><circle cx="12" cy="12" r="10" stroke="#1d4ed8" strokeWidth="2"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#1d4ed8">A+</text></svg> },
+  // "Registered", not "Accredited", and no rating mark: BBB accreditation and
+  // its letter grades are specific statuses SearchPrex does not hold.
+  { label: "BBB", sub: "Registered", href: "https://www.bbb.org/us/il/chicago/profile/searchprex", color: "#1d4ed8",
+    icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="BBB"><circle cx="12" cy="12" r="10" stroke="#1d4ed8" strokeWidth="2"/><text x="12" y="14.5" textAnchor="middle" fontSize="6" fontWeight="bold" fill="#1d4ed8">BBB</text></svg> },
   { label: "G2", sub: "Registered", href: "https://www.g2.com/sellers/searchprex", color: "#b23219",
     icon: <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-label="G2"><circle cx="12" cy="12" r="10" fill="#ff492c"/><text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fff">G2</text></svg> },
   { label: "GoodFirms", sub: "Registered", href: "https://www.goodfirms.co/company/searchprex", color: "#534AB7",
@@ -252,30 +254,44 @@ export default function Hero({ heroImage }: HeroProps) {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-widest sm:text-xs" style={{ color: GREEN_DARK }}>
-                  Founder-Led · Serving US Businesses (EST · CST · PST) · Unedited GSC Proof
+                  Serving US Businesses (EST · CST · PST) · Unedited GSC Proof
                 </span>
               </div>
 
-              {/* ── H1 — Dynamic persona headline ── */}
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={current.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-5 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
-                  style={{ color: CHARCOAL }}
+              {/* ── H1 — fixed, and worded to match the page <title> ──
+                  This used to be the persona headline, so the only H1 Google
+                  ever indexed was the default tab's "Law Firm SEO for US
+                  Practices." while the title targeted "SEO agency". The persona
+                  line now sits underneath and still changes with the tabs. */}
+              <h1
+                className="mb-4 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
+                style={{ color: CHARCOAL }}
+              >
+                Founder-Led
+                <br />
+                SEO Agency
+                <br />
+                <span
+                  className="inline-block border-b-[5px] pb-1"
+                  style={{ borderColor: CHARCOAL }}
                 >
-                  {current.headline}
-                  <br />
-                  <span
-                    className="inline-block border-b-[5px] pb-1"
-                    style={{ borderColor: CHARCOAL }}
-                  >
-                    {current.emphasis}
-                  </span>
-                </motion.h1>
+                  for US Businesses.
+                </span>
+              </h1>
+
+              {/* ── Persona line — follows the tabs ── */}
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={current.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="mb-4 text-xl font-bold leading-snug tracking-tight sm:text-2xl"
+                  style={{ color: PURPLE }}
+                >
+                  {current.headline} {current.emphasis}
+                </motion.p>
               </AnimatePresence>
  
               {/* ── Dynamic subtext ── */}

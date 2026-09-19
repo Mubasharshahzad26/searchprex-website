@@ -24,20 +24,8 @@ export const metadata: Metadata = {
     template: '%s | SearchPrex'
   },
   description: 'SearchPrex is a Remote-First, US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
-  keywords: [
-    'SEO agency USA',
-    'law firm SEO',
-    'Shopify SEO',
-    'ecommerce SEO',
-    'local SEO services',
-    'small business SEO',
-    'enterprise SEO',
-    'family law SEO',
-    'personal injury lawyer SEO',
-    'Google Business Profile optimization',
-    'technical SEO audit',
-    'SEO consultant USA'
-  ],
+  // No `keywords`: Google has ignored the meta keywords tag since 2009, so the
+  // only thing it did was hand competitors our target list on every page.
   authors: [{ name: 'SearchPrex', url: siteUrl }],
   creator: 'SearchPrex',
   publisher: 'SearchPrex',

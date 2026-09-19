@@ -32,10 +32,18 @@ import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
+// The title, the H1 in components/Hero.tsx and this description all lead with
+// the same phrase. They used to disagree: the title said "Boutique SEO Agency
+// USA", the H1 said "Law Firm SEO", and "SEO agency" appeared nowhere in the
+// body. The title is 53 characters and the description 144, so Google shows
+// both whole instead of truncating at ~60 and ~155.
+const HOME_TITLE = "Founder-Led SEO Agency for US Businesses | SearchPrex";
+const HOME_DESCRIPTION =
+  "Founder-led SEO agency for US law firms, Shopify stores and local service businesses. Senior work only, backed by unedited Search Console proof.";
+
 const baseMetadata: Metadata = {
-  title: "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
-  description:
-    "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   alternates: { 
     canonical: SITE,
     languages: {
@@ -44,18 +52,16 @@ const baseMetadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
-    description:
-      "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     url: SITE,
     siteName: "SearchPrex",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
-    description:
-      "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
 };
 
@@ -207,9 +213,8 @@ export default async function Home() {
         "@type": "WebPage",
         "@id": `${SITE}/#webpage`,
         "url": SITE,
-        "name": "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
-        "description":
-          "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
+        "name": HOME_TITLE,
+        "description": HOME_DESCRIPTION,
         "isPartOf": { "@id": `${SITE}/#website` },
         "about": { "@id": `${SITE}/#organization` },
         // The generated default card (app/opengraph-image.tsx). This was
