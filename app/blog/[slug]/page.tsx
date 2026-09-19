@@ -24,7 +24,9 @@ async function getPostData(rawSlug: string) {
   console.log("SLUG REQUESTED:", rawSlug, "DECODED:", slug);
   try {
     const dbPost = await db.marketingBlog.findUnique({ where: { slug } });
-    if (dbPost) {
+    // Unpublished rows must 404 here too (see the news route): otherwise an
+    // unpublished article is still served at /blog/<slug>.
+    if (dbPost && dbPost.published) {
       console.log("Found in DB:", dbPost.slug);
       return {
         slug: dbPost.slug,
