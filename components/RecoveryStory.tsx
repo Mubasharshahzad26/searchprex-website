@@ -95,8 +95,8 @@ export default function RecoveryStory() {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Recover from a Google De-Indexing Event for Ecommerce",
-    "description": "A step-by-step technical SEO methodology used to recover an ecommerce catalog that lost 75% of its indexed pages, scaling back up to 11,549 indexed URLs.",
+    "name": "How to Recover from an Ecommerce Catalog De-Indexing Event",
+    "description": "A step-by-step technical SEO methodology used to fix catalog de-indexing, crawl budget waste, and discovered currently not indexed errors in Google Search Console.",
     "step": [
       {
         "@type": "HowToStep",
@@ -155,6 +155,19 @@ export default function RecoveryStory() {
               — Mubashar Sharif, Founder
             </span>
           </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#5b6472]">Common Issues Solved:</span>
+            <span className="rounded-full border border-[#cdd2dd] bg-white px-3 py-1 text-xs font-medium text-[#0a0f2e] shadow-sm">
+              Shopify &amp; WooCommerce catalog de-indexing
+            </span>
+            <span className="rounded-full border border-[#cdd2dd] bg-white px-3 py-1 text-xs font-medium text-[#0a0f2e] shadow-sm">
+              Discovered – currently not indexed
+            </span>
+            <span className="rounded-full border border-[#cdd2dd] bg-white px-3 py-1 text-xs font-medium text-[#0a0f2e] shadow-sm">
+              Organic traffic drops after migrations
+            </span>
+          </div>
         </div>
 
         {/* ── Indexing recovery chart ──

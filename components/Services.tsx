@@ -11,31 +11,31 @@ const services = [
   {
     icon: Scale,
     title: "Law Firm SEO",
-    desc: "I build practice-area pages, dominate local packs, and write E-E-A-T content that turns legal searches into signed cases for your firm.",
+    desc: "I build practice-area pages, resolve local 3-pack suppression, and optimize Google Business Profiles to turn legal searches into signed cases.",
     href: "/services/law-firm-seo",
   },
   {
     icon: ShoppingCart,
     title: "Ecommerce & Shopify SEO",
-    desc: "I recover mass non-indexing, automate product content at scale, and fix schema — just like I did for a 35,000-product catalog.",
+    desc: "I resolve catalog de-indexing and 'discovered currently not indexed' errors, optimizing crawl budget for 10,000+ SKU stores.",
     href: "/services/ecommerce-seo",
   },
   {
     icon: MapPin,
     title: "Local SEO",
-    desc: "I personally optimize your Google Business Profile and citations to force Google to put you in the top-3 map pack within 60 days.",
+    desc: "I optimize your Google Business Profile, clean up duplicate citations, and push service-area businesses to the top-3 map pack.",
     href: "/services/local-seo",
   },
   {
     icon: Wrench,
     title: "Technical SEO",
-    desc: "I fix the crawl and indexation errors bleeding your traffic — taking one client from ~3,000 to 11,549 indexed pages in ten weeks.",
+    desc: "I fix crawl budget leaks, Core Web Vitals, and indexation bottlenecks — taking one client from ~3,000 to 11,549 indexed pages.",
     href: "/services/technical-seo",
   },
   {
     icon: Sparkles,
     title: "AI Overviews & AEO",
-    desc: "I structure your content to get cited directly by Google AI Overviews and LLMs — so your business is the only answer they see.",
+    desc: "I structure content and entity schema to win direct citations in Google AI Overviews, Perplexity, and ChatGPT search.",
     href: "/services",
   },
 ];

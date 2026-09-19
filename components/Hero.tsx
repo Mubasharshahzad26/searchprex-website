@@ -252,35 +252,38 @@ export default function Hero({ heroImage }: HeroProps) {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-widest sm:text-xs" style={{ color: GREEN_DARK }}>
-                  Founder-Led SEO · Every Number Has a Screenshot
+                  Founder-Led · Serving US Businesses (EST · CST · PST) · Unedited GSC Proof
                 </span>
               </div>
- 
-              {/* ── H1 — the visible headline IS the h1.
-                  It used to be an sr-only h1 with the real headline marked up
-                  as an h2 below it. That buys nothing: it hides the strongest
-                  on-page signal from Google behind a string no visitor reads,
-                  and it left the largest visible text on the page outranked by
-                  the section below the fold. ── */}
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={current.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-5 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
-                  style={{ color: CHARCOAL }}
+
+              {/* ── H1 — Single authoritative heading for US entity ranking, with dynamic persona tracking below ── */}
+              <h1
+                className="mb-4 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
+                style={{ color: CHARCOAL }}
+              >
+                Founder-Led SEO Agency
+                <br />
+                <span
+                  className="inline-block border-b-[5px] pb-1"
+                  style={{ borderColor: CHARCOAL }}
                 >
-                  {current.headline}
-                  <br />
-                  <span
-                    className="inline-block border-b-[5px] pb-1"
-                    style={{ borderColor: CHARCOAL }}
-                  >
-                    {current.emphasis}
-                  </span>
-                </motion.h1>
+                  for US Businesses.
+                </span>
+              </h1>
+
+              {/* Dynamic Focus Track for the selected persona */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.id + "-track"}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25 }}
+                  className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0a0f2e] border border-[#d8dce6] shadow-sm"
+                >
+                  <span className="h-2 w-2 rounded-full bg-[#1a7d59]" />
+                  <span>Specialized Track: <strong className="text-[#1a7d59]">{current.label}</strong></span>
+                </motion.div>
               </AnimatePresence>
  
               {/* ── Dynamic subtext ── */}

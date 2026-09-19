@@ -32,18 +32,18 @@ const steps = [
   {
     number: "02",
     icon: Map,
-    title: "Quick reality check report",
+    title: "Deep technical & competitor audit",
     timing: "Back within 24 hours",
     description:
-      "I audit the site myself and send a reality check report — indexing, technical issues, content gaps and where your US competitors are beating you, as a prioritized P1 / P2 / P3 list. Not a generic PDF, and not written by a junior.",
+      "I audit the site myself — pinpointing crawl budget leaks, catalog indexing bottlenecks, Google Business Profile suppression, and Core Web Vitals issues with a prioritized P1 / P2 / P3 action plan. Not a generic automated PDF.",
   },
   {
     number: "03",
     icon: LineChart,
-    title: "Roadmap, then I start work",
+    title: "Roadmap, then senior execution",
     timing: "No contract, month to month",
     description:
-      "You get the 90-day roadmap either way — run it yourself or I execute it personally, with weekly reporting on revenue, not vanity rankings. Pricing is set only after you have seen the work.",
+      "You get a 90-day organic growth roadmap — covering bottom-funnel keyword targeting, schema markup, and citations in Google AI Overviews. You communicate 1-on-1 with me on Slack with weekly Search Console updates.",
   },
 ];
 

@@ -9,6 +9,16 @@ const faqCategories = [
     category: "Getting started",
     faqs: [
       {
+        question: "How does SearchPrex work with US companies remotely?",
+        answer:
+          "We operate directly in US business hours (covering EST, CST, and PST). You communicate 1-on-1 with founder Mubashar Sharif via dedicated Slack channel and scheduled Zoom calls. Every milestone, search console export, and weekly priority is documented with zero intermediaries or junior account managers.",
+      },
+      {
+        question: "Why choose a boutique founder-led agency over large US agencies?",
+        answer:
+          "Large US agencies often charge $5,000–$10,000/mo while assigning your campaign to fresh junior hires. At SearchPrex, you work directly with a senior technical strategist. I take only one business per niche per market to ensure 100% focus and eliminate conflicts of interest.",
+      },
+      {
         question: "How long does SEO take to show results?",
         answer:
           "Most clients see significant shifts in rankings within 60-90 days. Competitive niche results (like Dallas Family Law) typically hit full stride around the 6-month mark.",
@@ -23,6 +33,16 @@ const faqCategories = [
   {
     category: "Services & specialties",
     faqs: [
+      {
+        question: "How do you fix Shopify product pages showing 'Discovered - currently not indexed'?",
+        answer:
+          "We analyze crawl budget waste caused by faceted navigation and parameter URLs, eliminate duplicate canonical tags, rewrite thin descriptions, and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring.",
+      },
+      {
+        question: "What should we do if our law firm dropped from the Google Map Pack top 3?",
+        answer:
+          "We perform a local pack audit to remove duplicate GBP listings, resolve citation discrepancies across US legal directories, eliminate keyword-stuffed competitor spam, and strengthen geo-relevance with localized practice-area content.",
+      },
       {
         question: "Do you only work with family law firms?",
         answer:

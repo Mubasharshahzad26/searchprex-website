@@ -33,9 +33,9 @@ import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
 const baseMetadata: Metadata = {
-  title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
+  title: "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
   description:
-    "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
+    "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
   alternates: { 
     canonical: SITE,
     languages: {
@@ -44,18 +44,18 @@ const baseMetadata: Metadata = {
     }
   },
   openGraph: {
-    title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
+    title: "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
     description:
-      "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
+      "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
     url: SITE,
     siteName: "SearchPrex",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
+    title: "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
     description:
-      "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher. Free SEO audit + proven results across 50 states.",
+      "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
   },
 };
 
@@ -74,7 +74,7 @@ export default async function Home() {
         "url": SITE,
         "logo": `${SITE}/logo.png`,
         "description":
-          "Remote-first, US-focused SEO agency helping law firms, small businesses, and ecommerce stores rank higher through technical SEO, local SEO, and AI-powered content automation.",
+          "Remote-first, US-focused boutique SEO agency helping law firms, small businesses, and ecommerce stores rank higher through senior-led technical SEO, local SEO, and AI search optimization (GEO/AEO). Active coverage across EST, CST, and PST timezones.",
         "email": "contact@searchprex.com",
         "founder": { "@id": `${SITE}/#founder` },
         "areaServed": [
@@ -83,11 +83,17 @@ export default async function Home() {
           { "@type": "State", "name": "Texas" },
           { "@type": "State", "name": "New York" },
           { "@type": "State", "name": "Florida" },
-          { "@type": "State", "name": "Kansas" },
           { "@type": "State", "name": "Illinois" },
-          { "@type": "State", "name": "Pennsylvania" }
+          { "@type": "State", "name": "Pennsylvania" },
+          { "@type": "State", "name": "Ohio" },
+          { "@type": "State", "name": "Georgia" },
+          { "@type": "State", "name": "North Carolina" },
+          { "@type": "State", "name": "Kansas" }
         ],
         "knowsAbout": [
+          "Boutique SEO Agency Services",
+          "Founder-Led SEO Consulting",
+          "US Organic Growth Strategy",
           "Law Firm SEO",
           "Personal Injury Lawyer SEO",
           "Family Law SEO",
@@ -105,7 +111,9 @@ export default async function Home() {
         ],
         "sameAs": [
           "https://www.linkedin.com/company/searchprex/",
-          "https://www.youtube.com/@SearchPrex"
+          "https://www.youtube.com/@SearchPrex",
+          "https://clutch.co/profile/searchprex",
+          "https://www.crunchbase.com/organization/searchprex"
         ],
         // NOTE: no aggregateRating here on purpose. Google's review-snippet
         // guidelines disallow self-serving aggregate ratings on your own
@@ -199,9 +207,9 @@ export default async function Home() {
         "@type": "WebPage",
         "@id": `${SITE}/#webpage`,
         "url": SITE,
-        "name": "SEO Agency USA | Rank Law Firms, Local & Ecommerce Sites",
+        "name": "Boutique SEO Agency USA | Founder-Led SEO for US Businesses — SearchPrex",
         "description":
-          "Remote-first, US-focused SEO agency helping law firms, small businesses & ecommerce stores rank higher across all 50 states.",
+          "Senior-led, US-focused boutique SEO agency delivering measurable revenue for US law firms, Shopify stores & local service businesses. Zero juniors, unedited GSC proof across all 50 states.",
         "isPartOf": { "@id": `${SITE}/#website` },
         "about": { "@id": `${SITE}/#organization` },
         // The generated default card (app/opengraph-image.tsx). This was
