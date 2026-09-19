@@ -2,7 +2,14 @@
 // Dynamic Blade HQ Layout Engine (Category-Adaptive + Entity-Rich Heading Rotation + 3 Layout Flavors)
 // 100% Pure Inline CSS (Zero raw code leaks) & Strict Semantic H2/H3 Tree
 
+import type { TermLink } from './term-links';
+
 export interface BladeHqLayoutInput {
+  /**
+   * Real category and brand permalinks (loadTermLinks). Without it every
+   * taxonomy link renders as plain text rather than as a guessed URL.
+   */
+  termLinks?: Map<string, TermLink>;
   product: {
     id: number;
     title?: string;
@@ -100,6 +107,46 @@ export interface TaxonomyHierarchy {
   primaryCategory: { name: string; slug: string; url: string };
   subCategory?: { name: string; slug: string; url: string };
   brand: { name: string; slug: string; url: string };
+}
+
+/**
+ * Replaces every guessed taxonomy URL with the term's real permalink.
+ *
+ * resolveProductTaxonomyHierarchy (and MSO_TAXONOMY_MAP) build category URLs as
+ * `/product-category/{slug}/`. On this store that path redirects to the home
+ * page — the live category base is `/collections/` — so every breadcrumb and
+ * category pill on every autopilot product page sent readers and Googlebot to
+ * the front page. That is why /collections/knives/ (26,700 products) had one
+ * referring page and had never been crawled. lib/autopilot/fix-links.ts and
+ * term-links.ts fixed the same guess in the generated copy; the layout kept it.
+ *
+ * Same rule as resolveTermLinks: a slug with no matching term gets url '' and is
+ * rendered as plain text. A guessed URL is worse than no link.
+ */
+export function applyRealPermalinks(
+  taxonomy: TaxonomyHierarchy,
+  termLinks?: Map<string, TermLink>
+): TaxonomyHierarchy {
+  const real = (slug: string) => termLinks?.get(slug)?.link ?? '';
+  return {
+    primaryCategory: { ...taxonomy.primaryCategory, url: real(taxonomy.primaryCategory.slug) },
+    subCategory: taxonomy.subCategory
+      ? { ...taxonomy.subCategory, url: real(taxonomy.subCategory.slug) }
+      : undefined,
+    brand: { ...taxonomy.brand, url: real(taxonomy.brand.slug) },
+  };
+}
+
+const CATEGORY_PILL_STYLE =
+  'background:#f0f9ff; border:1px solid #bae6fd; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0369a1; text-decoration:none;';
+const NEUTRAL_PILL_STYLE =
+  'background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;';
+
+/** `<a>` when there is a real URL, a `<span>` with the same styling when not. */
+function linkOrText(url: string, style: string, inner: string, attrs = ''): string {
+  return url
+    ? `<a ${attrs}href="${url}" style="${style}">${inner}</a>`
+    : `<span ${attrs}style="${style}">${inner}</span>`;
 }
 
 export const MSO_TAXONOMY_MAP: Record<string, { name: string; url: string }> = {
@@ -283,35 +330,41 @@ export function buildVisualBreadcrumbsHtml(
   taxonomy: TaxonomyHierarchy
 ): string {
   const { primaryCategory, subCategory } = taxonomy;
-  
+  const sep = `<li style="color:#94a3b8; font-size:11px;">/</li>`;
+  const linkStyle = 'color:#0284c7; text-decoration:none; font-weight:700;';
+
+  //  Only crumbs with a real URL are BreadcrumbList items; a category whose
+  //  permalink could not be resolved is shown as plain text outside the
+  //  microdata, and positions are numbered over the linked items only, so the
+  //  markup never points at a guessed URL or skips a position.
+  let position = 1;
+  const crumb = (label: string, url: string) =>
+    url
+      ? `<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
+      <a itemprop="item" href="${url}" style="${linkStyle}">
+        <span itemprop="name">${label}</span>
+      </a>
+      <meta itemprop="position" content="${++position}" />
+    </li>`
+      : `<li style="display:inline-flex; align-items:center; color:#64748b; font-weight:700;">${label}</li>`;
+
+  const middle = [crumb(primaryCategory.name, primaryCategory.url)];
+  if (subCategory) middle.push(crumb(subCategory.name, subCategory.url));
+
   return `
 <nav aria-label="Breadcrumb" style="margin:0 0 20px 0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:9px 14px; box-shadow:0 1px 2px rgba(0,0,0,0.02);">
   <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; align-items:center; gap:6px; color:#64748b;">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
-      <a itemprop="item" href="https://www.michigansportsoutdoor.com/" style="color:#0284c7; text-decoration:none; font-weight:700;">
+      <a itemprop="item" href="https://www.michigansportsoutdoor.com/" style="${linkStyle}">
         <span itemprop="name">Home</span>
       </a>
       <meta itemprop="position" content="1" />
     </li>
-    <li style="color:#94a3b8; font-size:11px;">/</li>
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
-      <a itemprop="item" href="${primaryCategory.url}" style="color:#0284c7; text-decoration:none; font-weight:700;">
-        <span itemprop="name">${primaryCategory.name}</span>
-      </a>
-      <meta itemprop="position" content="2" />
-    </li>
-    ${subCategory ? `
-    <li style="color:#94a3b8; font-size:11px;">/</li>
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center;">
-      <a itemprop="item" href="${subCategory.url}" style="color:#0284c7; text-decoration:none; font-weight:700;">
-        <span itemprop="name">${subCategory.name}</span>
-      </a>
-      <meta itemprop="position" content="3" />
-    </li>` : ''}
-    <li style="color:#94a3b8; font-size:11px;">/</li>
+    ${middle.map(m => `${sep}\n    ${m}`).join('\n    ')}
+    ${sep}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display:inline-flex; align-items:center; max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" aria-current="page">
       <span itemprop="name" style="color:#0f172a; font-weight:700;" title="${name}">${name}</span>
-      <meta itemprop="position" content="${subCategory ? '4' : '3'}" />
+      <meta itemprop="position" content="${++position}" />
     </li>
   </ol>
 </nav>`.trim();
@@ -1417,7 +1470,10 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
   const price = product.price ? parseFloat(String(product.price)).toFixed(2) : '189.00';
   const { categoryType, specs } = extractProductSpecs(product);
   const headings = getDynamicHeadings(product);
-  const taxonomy = resolveProductTaxonomyHierarchy(product, categoryType);
+  const taxonomy = applyRealPermalinks(
+    resolveProductTaxonomyHierarchy(product, categoryType),
+    input.termLinks
+  );
   const visualBreadcrumbs = buildVisualBreadcrumbsHtml(name, taxonomy);
 
   // 1. STREAMLINED CATEGORY-ADAPTIVE BUY BOX (SHORT DESCRIPTION)
@@ -1512,11 +1568,19 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
       Category &amp; Brand Lineage
     </div>
     <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
-      <a href="${taxonomy.primaryCategory.url}" style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0369a1; text-decoration:none;">&bull; ${taxonomy.primaryCategory.name}</a>
-      ${taxonomy.subCategory ? `<a href="${taxonomy.subCategory.url}" style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0369a1; text-decoration:none;">&bull; ${taxonomy.subCategory.name}</a>` : ''}
-      <a href="${taxonomy.brand.url}" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">&bull; ${taxonomy.brand.name} Store</a>
-      <a href="https://www.michigansportsoutdoor.com/product-category/sharpeners/" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">&bull; Knife Sharpeners</a>
-      <a href="https://www.michigansportsoutdoor.com/product-category/camping-and-survival/" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none;">&bull; Survival Gear</a>
+      ${linkOrText(taxonomy.primaryCategory.url, CATEGORY_PILL_STYLE, `&bull; ${taxonomy.primaryCategory.name}`)}
+      ${taxonomy.subCategory ? linkOrText(taxonomy.subCategory.url, CATEGORY_PILL_STYLE, `&bull; ${taxonomy.subCategory.name}`) : ''}
+      ${linkOrText(taxonomy.brand.url, NEUTRAL_PILL_STYLE, `&bull; ${taxonomy.brand.name} Store`)}
+      ${(['sharpeners', 'camping-and-survival'] as const)
+        .map((slug) => {
+          //  Cross-sell pills to two evergreen categories — only when the real
+          //  permalink resolves. These were hardcoded /product-category/ URLs
+          //  that redirected to the home page.
+          const link = input.termLinks?.get(slug)?.link;
+          const label = slug === 'sharpeners' ? 'Knife Sharpeners' : 'Survival Gear';
+          return link ? linkOrText(link, NEUTRAL_PILL_STYLE, `&bull; ${label}`) : '';
+        })
+        .join('\n      ')}
     </div>
   `.trim();
 
@@ -1805,47 +1869,21 @@ export function buildBreadcrumbSchema(product: {
   const name = product.name || product.title || 'Precision Outdoor Gear';
   const url = product.url || `https://www.michigansportsoutdoor.com/product/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`;
 
-  const primaryName = product.taxonomy?.primaryCategory?.name || product.categoryName || 'Pocket Knives & Fixed Blades for Sale';
-  const primaryUrl = product.taxonomy?.primaryCategory?.url || product.categoryUrl || 'https://www.michigansportsoutdoor.com/product-category/knives/';
+  //  Only categories with a resolved permalink become list items. The old
+  //  fallback was a hardcoded /product-category/knives/ — a URL that redirects
+  //  to the home page — so the schema pointed there even when the page did not.
+  const crumbs: Array<{ name: string; item: string }> = [
+    { name: 'Home', item: 'https://www.michigansportsoutdoor.com/' },
+  ];
+  const primaryName = product.taxonomy?.primaryCategory?.name || product.categoryName;
+  const primaryUrl = product.taxonomy?.primaryCategory?.url || product.categoryUrl;
+  if (primaryName && primaryUrl) crumbs.push({ name: primaryName, item: primaryUrl });
   const subName = product.taxonomy?.subCategory?.name || product.subCategoryName;
   const subUrl = product.taxonomy?.subCategory?.url || product.subCategoryUrl;
+  if (subName && subUrl) crumbs.push({ name: subName, item: subUrl });
+  crumbs.push({ name, item: url });
 
-  const items: any[] = [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://www.michigansportsoutdoor.com/'
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: primaryName,
-      item: primaryUrl
-    }
-  ];
-
-  if (subName && subUrl) {
-    items.push({
-      '@type': 'ListItem',
-      position: 3,
-      name: subName,
-      item: subUrl
-    });
-    items.push({
-      '@type': 'ListItem',
-      position: 4,
-      name: name,
-      item: url
-    });
-  } else {
-    items.push({
-      '@type': 'ListItem',
-      position: 3,
-      name: name,
-      item: url
-    });
-  }
+  const items = crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.item }));
 
   const schema = {
     '@context': 'https://schema.org',

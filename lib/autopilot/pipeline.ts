@@ -257,6 +257,10 @@ export async function runAutopilotBatch(clientId: string) {
         //  every page ships without specifications. Converting here keeps the
         //  data and the shapes honest.
         const bladeHqLayout = buildBladeHqLayout({
+          //  Real permalinks for the breadcrumb, category pills and breadcrumb
+          //  schema. Without them the layout guessed /product-category/{slug}/,
+          //  which redirects to the home page on this store.
+          termLinks,
           product: {
             ...productData,
             attributes: Object.entries(productData.attributes ?? {}).map(
@@ -292,6 +296,11 @@ export async function runAutopilotBatch(clientId: string) {
           metaTitle: generated.metaTitle,
           metaDescription: generated.metaDescription,
           username: wpCreds.username,
+          //  Dropped by 0bf6259 (2026-09-17). Without it the Authorization
+          //  header is "username:undefined" and WordPress answers 401
+          //  incorrect_password — 1,056 publishes failed that way, and each
+          //  failed product was marked 'error' permanently.
+          appPassword: wpCreds.appPassword,
         });
 
         // Automated on-the-fly WebP conversion for hero & sub-sizes
