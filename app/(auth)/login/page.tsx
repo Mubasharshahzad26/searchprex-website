@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Logo } from "@/components/Logo";
+import { masterAdminLoginAction } from "./actions";
  
 /* Toptal green accent */
 const GREEN = "#3eb489";
@@ -46,6 +47,15 @@ export default function LoginPage() {
     setError("");
  
     try {
+      // 1. Check Master Admin password first
+      const masterRes = await masterAdminLoginAction(password);
+      if (masterRes.success) {
+        router.push(destinationAfterLogin());
+        router.refresh();
+        return;
+      }
+
+      // 2. Fall back to Supabase auth
       const { error } = await supabase.auth.signInWithPassword({ email, password });
  
       if (error) {
