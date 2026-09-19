@@ -51,7 +51,7 @@ export default function AuditWalkthrough() {
             id="audit-walkthrough-heading"
             className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl"
           >
-            Watch me audit a site, start to finish
+            Live Technical SEO Audit: See How I Diagnose Crawl &amp; Indexing Issues
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#475569]">
             This is a complete audit recording, start to finish. Not a highlight reel and not a

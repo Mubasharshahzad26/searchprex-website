@@ -64,7 +64,7 @@ export default function Process() {
             How it works
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-            What happens after you send me your URL
+            Our 3-Step SEO Process: From Technical Audit to Measurable Revenue
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#5b6472]">
             Three steps, no surprises. You will know exactly what is wrong with your site

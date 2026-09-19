@@ -41,7 +41,7 @@ export default function AIVisibilityShowcase() {
             </span>
           </div>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Are you concerned your business is not ranking on <span className="bg-gradient-to-r from-[#534AB7] to-[#196b4d] bg-clip-text text-transparent">AI Overviews or LLMs?</span>
+            AI Search Optimization: Rank in <span className="bg-gradient-to-r from-[#534AB7] to-[#196b4d] bg-clip-text text-transparent">Google AI Overviews, ChatGPT &amp; Perplexity</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-[#566070]">
             Over the years, I have presented solutions and ranked diverse business websites inside Google AI Overviews, ChatGPT, Gemini, and other LLMs. Here is exactly how I do it.

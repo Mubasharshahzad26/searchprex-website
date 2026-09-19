@@ -81,7 +81,7 @@ export default function Results() {
               Undeniable Proof
             </p>
             <h2 className="text-4xl font-black tracking-tight text-[#0a0f2e] sm:text-5xl">
-              Every number below has a live recording behind it.
+              Real SEO Results: Live Video Proof &amp; Verified GSC Dashboards
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-[#566070]">
               Screenshots can be faked. Slide decks can be manipulated. That's why I record live video walkthroughs of my clients' actual Google Search Console accounts. See the exact dates, properties, and revenue growth. Nothing is hidden.

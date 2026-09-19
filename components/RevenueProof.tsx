@@ -53,7 +53,7 @@ export default function RevenueProof() {
             className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
             style={{ color: color.ink }}
           >
-            $5,832 to $19,100 a month, in two months.
+            Ecommerce SEO Revenue Case Study: $5,832 to $19,100 in 60 Days
           </h2>
           <p className="mt-4 text-lg leading-relaxed" style={{ color: color.muted }}>
             One 35,000-product store, one reporting period, one source — the client&apos;s own

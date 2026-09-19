@@ -256,34 +256,26 @@ export default function Hero({ heroImage }: HeroProps) {
                 </span>
               </div>
 
-              {/* ── H1 — Single authoritative heading for US entity ranking, with dynamic persona tracking below ── */}
-              <h1
-                className="mb-4 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
-                style={{ color: CHARCOAL }}
-              >
-                Founder-Led SEO Agency
-                <br />
-                <span
-                  className="inline-block border-b-[5px] pb-1"
-                  style={{ borderColor: CHARCOAL }}
-                >
-                  for US Businesses.
-                </span>
-              </h1>
-
-              {/* Dynamic Focus Track for the selected persona */}
+              {/* ── H1 — Dynamic persona headline ── */}
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={current.id + "-track"}
-                  initial={{ opacity: 0, y: 8 }}
+                <motion.h1
+                  key={current.id}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25 }}
-                  className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0a0f2e] border border-[#d8dce6] shadow-sm"
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.3 }}
+                  className="mb-5 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
+                  style={{ color: CHARCOAL }}
                 >
-                  <span className="h-2 w-2 rounded-full bg-[#1a7d59]" />
-                  <span>Specialized Track: <strong className="text-[#1a7d59]">{current.label}</strong></span>
-                </motion.div>
+                  {current.headline}
+                  <br />
+                  <span
+                    className="inline-block border-b-[5px] pb-1"
+                    style={{ borderColor: CHARCOAL }}
+                  >
+                    {current.emphasis}
+                  </span>
+                </motion.h1>
               </AnimatePresence>
  
               {/* ── Dynamic subtext ── */}

@@ -107,7 +107,7 @@ export default function QuickAuditBar() {
               className="text-2xl font-black tracking-tight sm:text-3xl"
               style={{ color: color.ink }}
             >
-              Does Your Business Qualify?
+              Check If Your US Site Qualifies for Founder-Led SEO
             </h2>
             <p className="mt-3 text-sm" style={{ color: color.muted }}>
               I only partner with businesses where I know I can dominate the market. Drop your details below to see if your site qualifies.
