@@ -58,6 +58,7 @@ type Solution = {
   proofLabel: string;
   serviceHref: string;
   serviceLabel: string;
+  subLinks?: { href: string; label: string }[];
 };
 
 const solutions: Solution[] = [
@@ -79,6 +80,9 @@ const solutions: Solution[] = [
     proofLabel: "See both dashboard captures",
     serviceHref: "/services/ecommerce-seo",
     serviceLabel: "Explore Ecommerce SEO",
+    subLinks: [
+      { href: "/blog/ecommerce-product-page-seo", label: "Catalog SEO at Scale Guide" },
+    ],
   },
   {
     id: "technical",
@@ -98,6 +102,9 @@ const solutions: Solution[] = [
     proofLabel: "See the full recovery curve",
     serviceHref: "/services/technical-seo",
     serviceLabel: "Explore Technical SEO",
+    subLinks: [
+      { href: "/blog/crawl-budget-optimization-guide", label: "Crawl Budget 2026 Guide" },
+    ],
   },
   {
     id: "local",
@@ -117,6 +124,9 @@ const solutions: Solution[] = [
     proofLabel: "See the SERP captures",
     serviceHref: "/services/local-seo",
     serviceLabel: "Explore Local SEO",
+    subLinks: [
+      { href: "/case-studies/hvac/local-hvac-services", label: "HVAC Map Pack Study" },
+    ],
   },
   {
     id: "law-firm",
@@ -134,6 +144,10 @@ const solutions: Solution[] = [
     proofLabel: "See what I can evidence, and the free trial",
     serviceHref: "/services/law-firm-seo",
     serviceLabel: "Explore Law Firm SEO",
+    subLinks: [
+      { href: "/services/law-firm-seo/family-law", label: "Family Law SEO" },
+      { href: "/services/law-firm-seo/personal-injury", label: "Personal Injury SEO" },
+    ],
   },
 ];
 
@@ -314,6 +328,24 @@ export default function PersonaSolutions() {
                         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                       </Link>
                     </div>
+
+                    {current.subLinks && current.subLinks.length > 0 && (
+                      <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-[#eef0f6] pt-4">
+                        <span className="text-xs font-semibold text-[#566070]">
+                          {current.id === "law-firm" ? "Practice Areas:" : "Deep Dive Guides:"}
+                        </span>
+                        {current.subLinks.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className="group inline-flex items-center gap-1 rounded-md border border-[#e2e5ec] bg-white px-2.5 py-1 text-xs font-semibold text-[#0a0f2e] shadow-xs transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                          >
+                            {sub.label}
+                            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                 </div>

@@ -64,9 +64,13 @@ const faqCategories: FaqCategory[] = [
             <Link href="/services/ecommerce-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
               Ecommerce SEO services
             </Link>
-            , and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring (explore our{" "}
+            , and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring (see our{" "}
             <Link href="/case-studies/ecommerce/michigan-outdoor-sports" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
-              11,549-page catalog recovery case study
+              11,549-page catalog recovery
+            </Link>{" "}
+            and our{" "}
+            <Link href="/blog/crawl-budget-optimization-guide" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              Crawl Budget Optimization Guide
             </Link>
             ).
           </>
@@ -93,7 +97,20 @@ const faqCategories: FaqCategory[] = [
       {
         question: "Do you only work with family law firms?",
         answer:
-          "While Family Law is my specialty, I work with various legal practices and eCommerce brands. However, I only take on one client per city per practice area to avoid conflicts of interest.",
+          "While Family Law is my specialty, I work with various legal practices including Personal Injury and Criminal Defense, as well as eCommerce brands. However, I only take on one client per city per practice area to avoid conflicts of interest.",
+        answerNode: (
+          <>
+            While{" "}
+            <Link href="/services/law-firm-seo/family-law" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              Family Law SEO
+            </Link>{" "}
+            is my specialty, I also execute dedicated campaigns for{" "}
+            <Link href="/services/law-firm-seo/personal-injury" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              Personal Injury law firms
+            </Link>{" "}
+            and high-SKU eCommerce stores. However, I only take on one client per city per practice area to eliminate conflicts of interest.
+          </>
+        ),
       },
       {
         question: "What makes SearchPrex different?",

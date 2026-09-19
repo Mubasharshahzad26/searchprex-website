@@ -40,12 +40,10 @@ async function getPostData(rawSlug: string) {
         // alone tells Google nothing about whether the page still maintained.
         dateModified: dbPost.updatedAt.toISOString(),
         author: {
-          name: dbPost.author || "SearchPrex Team",
+          name: dbPost.author || "Mubashar Sharif",
           role: "Verified SEO Expert",
-          // PostClient reads author.bio. This used to sit in a top-level
-          // `authorBio` the component never looked at, so the bio panel on every
-          // news article rendered blank.
-          bio: "Dedicated to tracking and decoding the latest Google algorithm updates and SEO trends.",
+          bio: "Senior SEO Analyst & Algorithm Strategist at SearchPrex, specializing in Google search volatility, technical architecture, and Generative Engine Optimization (GEO).",
+          linkedIn: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
         },
         featured: false,
         heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",

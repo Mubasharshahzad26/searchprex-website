@@ -170,6 +170,12 @@ export default function RecoveryStory() {
             <span className="rounded-full border border-[#cdd2dd] bg-white px-3 py-1 text-xs font-medium text-[#0a0f2e] shadow-sm">
               Organic traffic drops after migrations
             </span>
+            <Link
+              href="/blog/crawl-budget-optimization-guide"
+              className="inline-flex items-center gap-1 rounded-full border border-[#534AB7]/30 bg-[#534AB7]/5 px-3 py-1 text-xs font-semibold text-[#534AB7] shadow-sm transition-colors hover:bg-[#534AB7]/10"
+            >
+              Crawl Budget 2026 Guide <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
         </div>
 

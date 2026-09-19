@@ -71,7 +71,7 @@ export type ArticlePost = {
   readTime: string;
   date: string;
   heroImage: string;
-  author: { name: string; role: string; bio?: string };
+  author: { name: string; role: string; bio?: string; linkedIn?: string };
   tags?: string[];
   toc?: string[];
   stat?: { value: string; label: string } | null;
@@ -250,12 +250,24 @@ export default function PostClient({
  
             {/* Author bio */}
             <div className="mt-10 flex gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-7">
-              <div className="h-14 w-14 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0 ring-2 ring-[#534AB7]/20">
+              <div className="h-14 w-14 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0 ring-2 ring-[#534AB7]/20 overflow-hidden relative">
                 <span className="text-[#534AB7] font-black text-xl">M</span>
               </div>
-              <div>
-                <p className="font-black text-[#0a0f2e] mb-1">{post.author.name}</p>
-                <div className="flex items-center gap-1 mb-3">
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
+                  <p className="font-black text-[#0a0f2e] text-base">{post.author.name}</p>
+                  {(post.author.linkedIn || post.author.name.toLowerCase().includes("mubashar")) && (
+                    <a
+                      href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#0a66c2]/10 px-2.5 py-1 text-xs font-bold text-[#0a66c2] hover:bg-[#0a66c2]/20 transition-colors"
+                    >
+                      <Linkedin className="h-3.5 w-3.5" /> LinkedIn Profile
+                    </a>
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 mb-3">
                   <CheckCircle className="h-3.5 w-3.5 text-[#534AB7]" />
                   <span className="text-xs font-bold text-[#534AB7]">{post.author.role}</span>
                 </div>

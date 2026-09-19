@@ -559,13 +559,28 @@ export function NewsAutopilotClient({
                   {activeTab === "preview" && (
                     <div className="space-y-6">
                       {/* Hero preview */}
-                      <div className="space-y-2 border-b pb-4">
-                        <div className="flex items-center gap-2">
+                      <div className="space-y-3 border-b pb-4">
+                        {generatedArticle.coverImage && (
+                          <div className="relative w-full h-64 sm:h-72 rounded-xl overflow-hidden border border-border shadow-sm mb-4 bg-muted">
+                            <img
+                              src={generatedArticle.coverImage}
+                              alt={generatedArticle.title}
+                              className="w-full h-full object-cover"
+                            />
+                            <span className="absolute bottom-2 right-2 bg-black/75 backdrop-blur-sm text-[10px] text-white px-2 py-0.5 rounded font-mono">
+                              WebP • Optimized (&lt;50kb)
+                            </span>
+                          </div>
+                        )}
+
+                        <div className="flex items-center gap-2 flex-wrap">
                           <Badge variant="secondary" className="text-xs font-semibold">
                             {generatedArticle.category}
                           </Badge>
                           <span className="text-xs text-muted-foreground">{generatedArticle.readTime}</span>
-                          <span className="text-xs text-muted-foreground">• By {generatedArticle.author}</span>
+                          <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                            • By {generatedArticle.author || "Mubashar Sharif"} (Verified SEO Expert)
+                          </span>
                         </div>
                         <h1 className="text-2xl font-bold tracking-tight text-foreground">
                           {generatedArticle.title}
@@ -580,6 +595,32 @@ export function NewsAutopilotClient({
                         className="prose prose-sm dark:prose-invert max-w-none space-y-4 text-foreground/90"
                         dangerouslySetInnerHTML={{ __html: md.render(generatedArticle.content) }}
                       />
+
+                      {/* Author E-E-A-T Bio Card */}
+                      <div className="p-4 rounded-xl border bg-muted/40 flex items-start gap-4 mt-8 border-border">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0 shadow-sm">
+                          MS
+                        </div>
+                        <div className="space-y-1 flex-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h4 className="font-bold text-sm text-foreground">Mubashar Sharif</h4>
+                            <Badge variant="outline" className="text-[10px] border-emerald-500 text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40">
+                              ✓ Verified SEO Expert
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            {generatedArticle.authorBio || "Senior SEO Analyst & Algorithm Strategist at SearchPrex, specializing in Google search volatility, technical architecture, and Generative Engine Optimization (GEO)."}
+                          </p>
+                          <a
+                            href={generatedArticle.authorLinkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs text-blue-600 hover:underline pt-1 font-medium"
+                          >
+                            View LinkedIn Profile ↗
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   )}
 
@@ -672,6 +713,20 @@ export function NewsAutopilotClient({
                               setGeneratedArticle({ ...generatedArticle, author: e.target.value })
                             }
                             className="text-xs"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5 md:col-span-2">
+                          <div className="flex justify-between">
+                            <Label className="text-xs">Cover Image URL (WebP &lt;50kb)</Label>
+                            <span className="text-[10px] text-emerald-600 font-medium">Auto-Optimized CDN WebP</span>
+                          </div>
+                          <Input
+                            value={generatedArticle.coverImage}
+                            onChange={(e) =>
+                              setGeneratedArticle({ ...generatedArticle, coverImage: e.target.value })
+                            }
+                            className="text-xs font-mono"
                           />
                         </div>
                       </div>
