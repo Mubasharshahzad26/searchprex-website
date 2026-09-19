@@ -20,7 +20,7 @@ import { fixInternalLinks, needsLinkFix } from '../lib/autopilot/fix-links'
 const BASE = process.env.MSO_WP_BASE_URL || 'https://www.michigansportsoutdoor.com'
 const CREDS = {
   username: process.env.MSO_WP_USER || 'apiuser',
-  appPassword: process.env.MSO_WP_PASS || 'cvxm Bi7y 6o3y r7HJ M1Wn mSMM',
+  appPassword: process.env.MSO_WP_PASS,
 }
 
 function arg(name: string, fallback?: string): string | undefined {

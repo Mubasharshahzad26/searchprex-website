@@ -3,7 +3,8 @@ import fs from 'fs';
 async function restoreHomePage() {
   const baseUrl = 'https://www.michigansportsoutdoor.com';
   const username = 'apiuser';
-  const appPassword = 'cvxm Bi7y 6o3y r7HJ M1Wn mSMM';
+  const appPassword = process.env.MSO_WP_PASS;
+  if (!appPassword) throw new Error("Set MSO_WP_PASS to the MSO WordPress application password. Never hardcode it: this repository is public.");
   const auth = Buffer.from(`${username}:${appPassword}`).toString('base64');
   const headers = {
     Authorization: `Basic ${auth}`,
