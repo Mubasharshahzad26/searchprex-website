@@ -34,24 +34,30 @@ export default function LoginPage() {
     return next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
   }
  
-  const [email,    setEmail]    = useState("");
-  const [password, setPassword] = useState("");
-  const [error,    setError]    = useState("");
-  const [loading,  setLoading]  = useState(false);
+  const [email,         setEmail]         = useState("");
+  const [password,      setPassword]      = useState("");
+  const [error,         setError]         = useState("");
+  const [emailLoading,  setEmailLoading]  = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
  
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
+    setEmailLoading(true);
     setError("");
  
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
  
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    } else {
-      router.push(destinationAfterLogin());
-      router.refresh();
+      if (error) {
+        setError(error.message);
+        setEmailLoading(false);
+      } else {
+        router.push(destinationAfterLogin());
+        router.refresh();
+      }
+    } catch (err: any) {
+      setError(err.message || "Failed to sign in. Please try again.");
+      setEmailLoading(false);
     }
   }
  
@@ -60,24 +66,29 @@ export default function LoginPage() {
   const labelCls = "block text-xs font-semibold text-[#475569] mb-1.5 uppercase tracking-wider";
  
   const handleGoogleSignIn = async () => {
-    setLoading(true);
+    setGoogleLoading(true);
     setError("");
-    const nextUrl = destinationAfterLogin();
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${nextUrl}`
-      }
-    });
+    try {
+      const nextUrl = destinationAfterLogin();
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextUrl)}`
+        }
+      });
 
-    if (error) {
-      setError(error.message);
-      setLoading(false);
+      if (error) {
+        setError(error.message);
+        setGoogleLoading(false);
+      }
+    } catch (err: any) {
+      setError(err.message || "Google Sign-In failed. Please verify Supabase Google configuration.");
+      setGoogleLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#eaecf3] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#eaecf3] flex items-center justify-center px-4 pt-36 pb-20">
       <div className="w-full max-w-md">
  
         {/* Logo */}
@@ -91,9 +102,10 @@ export default function LoginPage() {
           
           {/* Google Auth */}
           <button
+            type="button"
             onClick={handleGoogleSignIn}
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-3 bg-white border border-[#e2e8f0] text-[#0a0f2e] font-bold rounded-xl py-3 text-sm hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6"
+            disabled={googleLoading || emailLoading}
+            className="w-full flex items-center justify-center gap-3 bg-white border border-[#e2e8f0] text-[#0a0f2e] font-bold rounded-xl py-3 text-sm hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6 shadow-sm"
           >
             <svg viewBox="0 0 24 24" className="w-5 h-5">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -101,7 +113,7 @@ export default function LoginPage() {
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
             </svg>
-            Sign in with Google
+            {googleLoading ? "Connecting to Google..." : "Sign in with Google"}
           </button>
 
           <div className="relative flex items-center mb-6">
@@ -144,13 +156,13 @@ export default function LoginPage() {
  
             <button
               type="submit"
-              disabled={loading}
+              disabled={emailLoading || googleLoading}
               className="w-full text-white font-bold rounded-xl py-3 text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
               style={{ background: GREEN }}
-              onMouseEnter={(e) => !loading && (e.currentTarget.style.background = GREEN_DARK)}
+              onMouseEnter={(e) => !emailLoading && (e.currentTarget.style.background = GREEN_DARK)}
               onMouseLeave={(e) => (e.currentTarget.style.background = GREEN)}
             >
-              {loading ? "Signing in…" : "Sign in →"}
+              {emailLoading ? "Signing in…" : "Sign in →"}
             </button>
           </form>
  

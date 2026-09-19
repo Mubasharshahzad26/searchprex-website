@@ -9,8 +9,9 @@ export function createClient() {
       auth: {
         getUser: async () => ({ data: { user: null }, error: null }),
         getSession: async () => ({ data: { session: null }, error: null }),
-        signInWithPassword: async () => ({ data: null, error: { message: "Not configured" } }),
-        signUp: async () => ({ data: null, error: { message: "Not configured" } }),
+        signInWithPassword: async () => ({ data: null, error: { message: "Authentication is not configured." } }),
+        signInWithOAuth: async () => ({ data: null, error: { message: "Authentication is not configured." } }),
+        signUp: async () => ({ data: null, error: { message: "Authentication is not configured." } }),
         signOut: async () => ({ error: null }),
       },
       from: () => ({
