@@ -16,6 +16,7 @@ import {
   ComparisonTable,
   CtaBand,
   FaqList,
+  AnswerCapsules,
   FeatureCard,
   HeroPanel,
   HeroPanelStats,
@@ -121,6 +122,31 @@ export default function LocalSEOClient() {
       />
 
       <StatStrip stats={proofStats} />
+
+      {/* ── QUICK ANSWERS ──
+          Answer capsules for AI Overviews and answer engines. The first answer
+          quotes Google's Business Profile help page word for word — it says
+          "popularity" in its summary line and "prominence" in its heading, and
+          both are Google's. Client results are Search Console-verified only. */}
+      <Section width="reading">
+        <SectionHeading eyebrow="Quick answers" title="Local SEO, answered plainly" />
+        <AnswerCapsules
+          items={[
+            {
+              q: "How does Google decide Google Maps rankings?",
+              a: "Google says local results are \"mainly based on relevance, distance, and popularity.\" Relevance is how well your Business Profile matches the search, distance is how far you are from the searcher, and prominence is how well known the business is, including how many websites link to it. You can influence relevance and prominence, not distance.",
+            },
+            {
+              q: "What results have SearchPrex local SEO clients seen?",
+              a: "Doll's Cleaning in Chesterfield, Michigan reached #1 local rankings for its core cleaning keywords, with 106K impressions. HVAC Team in Simi Valley, California moved up 40 positions to page one for its primary service keywords. Both are verified in Google Search Console. Outcomes depend on local competition and on where a profile starts.",
+            },
+            {
+              q: "Why did my Google Maps ranking suddenly drop?",
+              a: "Check the profile before blaming an algorithm. A suspension, an edit Google applied, a changed category or removed reviews can all drop a listing; in July 2026 Google removed reviews from many profiles in a spam-detection error it later reversed. Map and website rankings are separate systems, so diagnose them separately.",
+            },
+          ]}
+        />
+      </Section>
 
       {/* ── WHAT'S INCLUDED ── */}
       <Section>

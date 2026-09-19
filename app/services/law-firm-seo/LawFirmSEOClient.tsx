@@ -22,6 +22,7 @@ import {
   CtaBand,
   CtaButton,
   FaqList,
+  AnswerCapsules,
   FeatureCard,
   PageHero,
   Section,
@@ -154,6 +155,31 @@ export default function LawFirmSEOClient() {
       />
 
       <StatStrip stats={proofStats} />
+
+      {/* QUICK ANSWERS
+          Answer capsules for AI Overviews and answer engines: a real question as
+          the heading, the answer in plain view beneath it. There is no law firm
+          client yet, so no legal result is claimed here — the third answer says
+          so, and labels the proof it does cite as coming from other industries. */}
+      <Section width="reading">
+        <SectionHeading eyebrow="Quick answers" title="Law firm SEO, answered plainly" />
+        <AnswerCapsules
+          items={[
+            {
+              q: "What does law firm SEO involve?",
+              a: "Law firm SEO is the work of getting a practice found for the searches people make before they call a lawyer. For personal injury, family law and criminal defense firms, that means a practice-area page for each city served, a complete Google Business Profile, attorney credentials Google can verify, and technically sound pages.",
+            },
+            {
+              q: "Why is SEO for lawyers held to a higher standard?",
+              a: "Google's Search Quality Rater Guidelines list legal issues such as divorce and child custody as \"Your Money or Your Life\" topics, judged on experience, expertise, authoritativeness and trust. Law firm pages also answer to bar advertising rules: ABA Model Rule 7.1 says a lawyer shall not make \"a false or misleading communication\" about their services.",
+            },
+            {
+              q: "Do you have law firm case studies?",
+              a: "Not yet. SearchPrex has not completed a law firm engagement, so we publish no legal-specific results. What we can show is the same underlying work in other industries, labelled as such: a WooCommerce catalogue taken from about 3,000 to 11,549 indexed pages, and local service clients at #1, verified in Google Search Console.",
+            },
+          ]}
+        />
+      </Section>
 
       {/* WHAT'S INCLUDED */}
       <Section>

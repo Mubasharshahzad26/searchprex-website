@@ -21,6 +21,8 @@ import {
   AuthorCard,
   CardGrid,
   FaqList,
+  AnswerCapsules,
+  ComparisonTable,
   FeatureCard,
   PageHero,
   Section,
@@ -180,6 +182,42 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
       />
 
       <StatStrip stats={HERO_STATS} />
+
+      {/* ── QUICK ANSWERS ──
+          Answer capsules for AI Overviews and answer engines. The results answer
+          uses only figures with a named source: MSO from Search Console, SMK from
+          the client's WooCommerce dashboard (total revenue — never a US figure). */}
+      <Section width="reading">
+        <SectionHeading eyebrow="Quick answers" title="Ecommerce SEO, answered plainly" />
+        <AnswerCapsules
+          items={[
+            {
+              q: "Why are my product pages not indexed by Google?",
+              a: "Usually because Google found the pages and decided they are not worth indexing. Common causes are near-duplicate manufacturer descriptions, thin boilerplate, filter and sort URLs wasting crawl budget, and products with no price, image or stock. Search Console reports these as \"Crawled - currently not indexed\". Resubmitting rarely helps; improving or removing the pages does.",
+            },
+            {
+              q: "What results has ecommerce SEO produced for SearchPrex clients?",
+              a: "On Michigan Outdoor Sports, a WooCommerce catalogue, indexed pages rose from about 3,000 to 11,549 between March and July 2026, with US organic clicks up 83% in Google Search Console. On SMK Store, total monthly revenue went from $5,832 to $19,100 between April and June 2026, per the client's WooCommerce dashboard.",
+            },
+            {
+              q: "Is Shopify or WooCommerce better for SEO?",
+              a: "Neither ranks better by default; they fail in different places. Shopify fixes URL prefixes such as /products/ and /collections/ and can expose the same product under collection paths. WooCommerce gives full control, but filter, sort and attribute parameters multiply URLs, and hosting or plugins can slow it down. The comparison below shows where each breaks.",
+            },
+          ]}
+        />
+        <div className="mt-8">
+          <ComparisonTable
+            caption="Where Shopify and WooCommerce stores typically run into SEO problems"
+            columns={["Shopify", "WooCommerce"]}
+            rows={[
+              { label: "URL structure", values: ["Fixed prefixes (/products/, /collections/)", "Fully configurable permalinks"] },
+              { label: "Typical duplicate URLs", values: ["Products reachable under /collections/…/products/…", "Filter, sort and attribute parameters"] },
+              { label: "robots.txt control", values: ["Editable through the robots.txt.liquid template", "Fully editable"] },
+              { label: "Common speed drag", values: ["Third-party app scripts", "Hosting and plugin load"] },
+            ]}
+          />
+        </div>
+      </Section>
 
       {/* ── 2 · PAIN POINTS ── */}
       <Section tone="surface">

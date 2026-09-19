@@ -45,6 +45,9 @@ export type { CardGridProps, CardGridVariant, FeatureCardProps } from "./CardGri
 export { default as FaqList } from "./FaqList";
 export type { FaqListProps, Faq } from "./FaqList";
 
+export { default as AnswerCapsules } from "./AnswerCapsules";
+export type { AnswerCapsulesProps, AnswerCapsule } from "./AnswerCapsules";
+
 export { default as ComparisonTable } from "./ComparisonTable";
 export type { ComparisonTableProps, ComparisonRow, CellValue } from "./ComparisonTable";
 
