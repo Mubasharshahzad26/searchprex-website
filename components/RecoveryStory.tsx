@@ -137,7 +137,7 @@ export default function RecoveryStory() {
             Michigan Outdoor Sports · The full picture
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Technical SEO Case Study: Recovering 11,549 De-Indexed Pages
+            Rebuilding After De-Indexing: How 11,549 Pages Were Restored from Zero
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
             Most agencies would publish the March peak and stop there. I publish the whole

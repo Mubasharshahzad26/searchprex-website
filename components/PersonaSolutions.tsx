@@ -147,7 +147,7 @@ export default function PersonaSolutions() {
             id="solutions-heading"
             className="mt-3 max-w-3xl text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl"
           >
-            Organic Search &amp; Revenue Growth Solutions for US Businesses
+            Where Websites Silently Lose Search Traffic — And How I Fix It
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#566070]">
             Pick the one that sounds like your month. Every figure below is evidenced further

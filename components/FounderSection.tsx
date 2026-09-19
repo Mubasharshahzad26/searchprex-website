@@ -158,7 +158,7 @@ export default function FounderSection() {
             Founder-led &middot; E-E-A-T verified
           </p>
           <h2 className="mt-3 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Founder-Led SEO Consulting: Senior Execution With Zero Account Managers
+            You Work Directly With Me — Founder-Led Execution With Zero Junior Hand-offs
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#566070]">
             Every strategy here comes from campaigns I ran myself for US ecommerce, law firm

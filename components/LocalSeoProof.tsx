@@ -99,7 +99,7 @@ export default function LocalSeoProof() {
             Local SEO · Michigan, California, Texas
           </div>
           <h2 id="local-seo-proof-heading" className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Local SEO Results for US Small Businesses: Google Map Pack Dominance
+            Local SEO in Action: Pushing Service Businesses Into the Google Map Pack Top 3
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
             Real searches, named American cities, and the client visible in the result. Every screenshot below is a
