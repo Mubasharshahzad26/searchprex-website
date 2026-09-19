@@ -102,7 +102,11 @@ export default function LocalSeoProof() {
             Local SEO in Action: Pushing Service Businesses Into the Google Map Pack Top 3
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
-            Real searches, named American cities, and the client visible in the result. Every screenshot below is a
+            Real searches, named American cities, and the client visible in the result. Our focused{" "}
+            <Link href="/services/local-seo" className="font-semibold underline decoration-[#cdd2dd] hover:decoration-blue-600" style={{ color: color.ink }}>
+              Local SEO services
+            </Link>{" "}
+            push service businesses directly into the Google Map Pack and AI Overviews. Every screenshot below is a
             live SERP — click any of them to read the query and the positions for yourself.
           </p>
         </div>
@@ -219,6 +223,13 @@ export default function LocalSeoProof() {
             <p className="mt-1 text-sm" style={{ color: color.muted }}>
               I do not rank two competitors against each other in the same market.
             </p>
+            <Link
+              href="/case-studies/hvac/local-hvac-services"
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold hover:underline"
+              style={{ color: color.primary }}
+            >
+              Read the HVAC local SEO & Map Pack case study <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
           <div className="flex flex-col items-start gap-2 sm:items-end">
             <Link

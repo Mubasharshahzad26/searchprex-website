@@ -57,7 +57,11 @@ export default function RevenueProof() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed" style={{ color: color.muted }}>
             One 35,000-product store, one reporting period, one source — the client&apos;s own
-            WooCommerce dashboard. Not a highlight reel, and not a projection.
+            WooCommerce dashboard driven by targeted{" "}
+            <Link href="/services/ecommerce-seo" className="font-semibold underline decoration-[#cdd2dd] hover:decoration-blue-600" style={{ color: color.ink }}>
+              Ecommerce SEO architecture
+            </Link>
+            . Not a highlight reel, and not a projection.
           </p>
         </div>
 
@@ -125,10 +129,10 @@ export default function RevenueProof() {
             </p>
             <Link
               href="/case-studies/ecommerce/smk-store"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold hover:underline"
               style={{ color: color.primary }}
             >
-              How it was done <ArrowRight className="h-4 w-4" />
+              Read the full SMK Store Ecommerce SEO case study <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 

@@ -141,8 +141,11 @@ export default function RecoveryStory() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
             Most agencies would publish the March peak and stop there. I publish the whole
-            curve — including the part that went backwards — because the recovery is the
-            part that is actually hard, and it is the part you are hiring me for.
+            curve — including the part that went backwards — because catalog-scale{" "}
+            <Link href="/services/technical-seo" className="font-semibold underline decoration-[#cdd2dd] hover:decoration-blue-600" style={{ color: color.ink }}>
+              Technical SEO recovery
+            </Link>{" "}
+            is the work that is actually hard, and it is the part you are hiring me for.
           </p>
           <p
             className="mt-5 border-l-4 pl-4 text-base italic leading-relaxed"
@@ -367,9 +370,18 @@ export default function RecoveryStory() {
           className="mt-12 flex flex-col items-start gap-3 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
           style={{ borderColor: color.border }}
         >
-          <p className="text-sm font-semibold" style={{ color: color.muted }}>
-            If your pages are dropping out of the index, this is the work.
-          </p>
+          <div>
+            <p className="text-sm font-semibold" style={{ color: color.muted }}>
+              If your pages are dropping out of the index, this is the work.
+            </p>
+            <Link
+              href="/case-studies/ecommerce/michigan-outdoor-sports"
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold hover:underline"
+              style={{ color: color.primary }}
+            >
+              Read the Michigan Outdoor Sports 11,549-page recovery case study <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
           <Link
             href={OFFER_HREF}
             className="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5"

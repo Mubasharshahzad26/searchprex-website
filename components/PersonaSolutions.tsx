@@ -39,7 +39,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Store, MapPin, Scale, AlertTriangle, ArrowDown } from "lucide-react";
+import { Store, MapPin, Scale, AlertTriangle, ArrowDown, ArrowRight } from "lucide-react";
 
 type Metric = { label: string; value: string; detail: string };
 
@@ -56,6 +56,8 @@ type Solution = {
   absence?: string;
   proofHref: string;
   proofLabel: string;
+  serviceHref: string;
+  serviceLabel: string;
 };
 
 const solutions: Solution[] = [
@@ -75,6 +77,8 @@ const solutions: Solution[] = [
     ],
     proofHref: "#revenue-proof",
     proofLabel: "See both dashboard captures",
+    serviceHref: "/services/ecommerce-seo",
+    serviceLabel: "Explore Ecommerce SEO",
   },
   {
     id: "technical",
@@ -92,6 +96,8 @@ const solutions: Solution[] = [
     ],
     proofHref: "#recovery",
     proofLabel: "See the full recovery curve",
+    serviceHref: "/services/technical-seo",
+    serviceLabel: "Explore Technical SEO",
   },
   {
     id: "local",
@@ -109,6 +115,8 @@ const solutions: Solution[] = [
     ],
     proofHref: "#local-seo-proof",
     proofLabel: "See the SERP captures",
+    serviceHref: "/services/local-seo",
+    serviceLabel: "Explore Local SEO",
   },
   {
     id: "law-firm",
@@ -124,6 +132,8 @@ const solutions: Solution[] = [
       "Every other tab here is backed by a screenshot further down this page. This one is not, because the client does not exist yet. Start with the free 30-day AI Intake Assistant instead and make me earn the retainer.",
     proofHref: "#law-firm-proof",
     proofLabel: "See what I can evidence, and the free trial",
+    serviceHref: "/services/law-firm-seo",
+    serviceLabel: "Explore Law Firm SEO",
   },
 ];
 
@@ -285,14 +295,25 @@ export default function PersonaSolutions() {
                       </div>
                     )}
 
-                    <Link
-                      href={current.proofHref}
-                      className="group mt-7 inline-flex items-center gap-2 text-sm font-bold"
-                      style={{ color: current.accent }}
-                    >
-                      {current.proofLabel}
-                      <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-                    </Link>
+                    <div className="mt-7 flex flex-wrap items-center gap-4">
+                      <Link
+                        href={current.proofHref}
+                        className="group inline-flex items-center gap-2 text-sm font-bold"
+                        style={{ color: current.accent }}
+                      >
+                        {current.proofLabel}
+                        <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                      </Link>
+                      <span className="text-[#cdd2dd]" aria-hidden="true">·</span>
+                      <Link
+                        href={current.serviceHref}
+                        className="group inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+                        style={{ color: "#0a0f2e" }}
+                      >
+                        {current.serviceLabel}
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </div>
                   </div>
 
                 </div>

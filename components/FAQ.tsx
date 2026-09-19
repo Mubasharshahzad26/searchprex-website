@@ -1,10 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 
-const faqCategories = [
+type FaqItem = {
+  question: string;
+  answer: string;
+  answerNode?: ReactNode;
+};
+
+type FaqCategory = {
+  category: string;
+  faqs: FaqItem[];
+};
+
+const faqCategories: FaqCategory[] = [
   {
     category: "Getting started",
     faqs: [
@@ -22,6 +34,15 @@ const faqCategories = [
         question: "How long does SEO take to show results?",
         answer:
           "Most clients see significant shifts in rankings within 60-90 days. Competitive niche results (like Dallas Family Law) typically hit full stride around the 6-month mark.",
+        answerNode: (
+          <>
+            Most clients see significant shifts in rankings within 60-90 days. Competitive niche results (like Dallas Family Law) typically hit full stride around the 6-month mark — explore our{" "}
+            <Link href="/case-studies/hvac/local-hvac-services" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              HVAC Local SEO case study
+            </Link>{" "}
+            for a 60-day top-3 turnaround.
+          </>
+        ),
       },
       {
         question: "Will I work directly with a senior expert?",
@@ -37,11 +58,37 @@ const faqCategories = [
         question: "How do you fix Shopify product pages showing 'Discovered - currently not indexed'?",
         answer:
           "We analyze crawl budget waste caused by faceted navigation and parameter URLs, eliminate duplicate canonical tags, rewrite thin descriptions, and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring.",
+        answerNode: (
+          <>
+            We analyze crawl budget waste caused by faceted navigation and parameter URLs, eliminate duplicate canonical tags, rewrite thin descriptions through our dedicated{" "}
+            <Link href="/services/ecommerce-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              Ecommerce SEO services
+            </Link>
+            , and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring (explore our{" "}
+            <Link href="/case-studies/ecommerce/michigan-outdoor-sports" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              11,549-page catalog recovery case study
+            </Link>
+            ).
+          </>
+        ),
       },
       {
         question: "What should we do if our law firm dropped from the Google Map Pack top 3?",
         answer:
           "We perform a local pack audit to remove duplicate GBP listings, resolve citation discrepancies across US legal directories, eliminate keyword-stuffed competitor spam, and strengthen geo-relevance with localized practice-area content.",
+        answerNode: (
+          <>
+            We perform a comprehensive local pack audit through our specialized{" "}
+            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              Law Firm SEO services
+            </Link>{" "}
+            to remove duplicate GBP listings, resolve citation discrepancies across US legal directories, eliminate competitor spam, and strengthen geo-relevance. You can also self-evaluate with our free{" "}
+            <Link href="/resources/law-firm-seo-audit-checklist" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
+              Law Firm SEO audit checklist
+            </Link>
+            .
+          </>
+        ),
       },
       {
         question: "Do you only work with family law firms?",
@@ -208,7 +255,7 @@ export default function FAQ() {
                             >
                               <div className="border-t border-[#e5e7eb] px-5 sm:px-6 py-4 sm:py-5 bg-gradient-to-r from-[#f8fafc] to-white">
                                 <p className="leading-relaxed text-[#475569] text-sm sm:text-base">
-                                  {faq.answer}
+                                  {faq.answerNode || faq.answer}
                                 </p>
                               </div>
                             </motion.div>
