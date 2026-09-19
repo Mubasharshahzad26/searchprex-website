@@ -19,7 +19,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FileText, Edit3, Briefcase } from "lucide-react";
+import { FileText, Edit3, Briefcase, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -50,6 +50,9 @@ export default function ContentAdminLayout({ children }: { children: React.React
         </Link>
         <Link href="/content-admin/news" className="flex items-center gap-2 hover:text-primary px-3 py-2 rounded-md hover:bg-muted transition-colors">
           <FileText className="w-4 h-4" /> SEO News
+        </Link>
+        <Link href="/content-admin/news-autopilot" className="flex items-center gap-2 font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50 px-3 py-2 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors border border-indigo-200 dark:border-indigo-800">
+          <Sparkles className="w-4 h-4" /> News Autopilot
         </Link>
         <Link href="/content-admin/resources" className="flex items-center gap-2 hover:text-primary px-3 py-2 rounded-md hover:bg-muted transition-colors">
           <Briefcase className="w-4 h-4" /> Resources
