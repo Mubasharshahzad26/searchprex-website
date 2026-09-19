@@ -16,7 +16,8 @@ export interface RawNewsItem {
   link: string;
   sourceName: string;
   sourceId: string;
-  publishedAt: Date;
+  /** null when the feed gave no parseable date — never guessed as "now". */
+  publishedAt: Date | null;
   summary: string;
   contentHtml?: string;
   defaultCategory: string;
@@ -100,7 +101,7 @@ export async function fetchFeedItems(source: NewsSourceConfig): Promise<RawNewsI
   }
 }
 
-function cleanText(text: string): string {
+export function cleanText(text: string): string {
   if (!text) return "";
   return text
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
@@ -115,8 +116,10 @@ function cleanText(text: string): string {
     .trim();
 }
 
-function parseDate(dateStr: string): Date {
-  if (!dateStr) return new Date();
+// Falling back to "now" here made an undated item look like breaking news, so
+// an unknown date stays unknown and the freshness checks treat it as stale.
+function parseDate(dateStr: string): Date | null {
+  if (!dateStr) return null;
   const d = new Date(dateStr);
-  return isNaN(d.getTime()) ? new Date() : d;
+  return isNaN(d.getTime()) ? null : d;
 }

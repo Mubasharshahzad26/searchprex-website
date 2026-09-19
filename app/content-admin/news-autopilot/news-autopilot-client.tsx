@@ -1,7 +1,7 @@
 // app/content-admin/news-autopilot/news-autopilot-client.tsx
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useMemo, useState, useTransition } from "react";
 import MarkdownIt from "markdown-it";
 import {
   Sparkles,
@@ -22,6 +22,8 @@ import {
   X,
   Eye,
   Layers,
+  ShieldAlert,
+  CircleX,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -34,12 +36,26 @@ import {
   generateNewsArticleAction,
   saveNewsArticleAction,
   updateAutopilotSettings,
-  AutopilotSettings,
 } from "./actions";
+import type { AutopilotSettings } from "@/lib/autopilot-news/settings";
 import type { EnrichedNewsItem } from "@/lib/autopilot-news/harvester";
 import type { GeneratedNewsArticle } from "@/lib/autopilot-news/generator";
+import { checkArticleQuality } from "@/lib/autopilot-news/quality";
+import { MAX_NEWS_AGE_HOURS } from "@/lib/autopilot-news/config";
 
 const md = new MarkdownIt({ html: true, linkify: true, breaks: true });
+
+function formatAge(ageHours: number | null): string {
+  if (ageHours === null) return "Date unknown";
+  if (ageHours < 1) return "Just now";
+  if (ageHours < 48) return `${Math.round(ageHours)}h ago`;
+  return `${Math.round(ageHours / 24)}d ago`;
+}
+
+/** Fresh, dated, not covered and not a repeat — what the cron would consider. */
+function isActionable(item: EnrichedNewsItem): boolean {
+  return !item.alreadyCovered && !item.isStale && !item.similarCoverage;
+}
 
 interface Props {
   initialItems: EnrichedNewsItem[];
@@ -68,12 +84,26 @@ export function NewsAutopilotClient({
   const [isRefreshing, startRefresh] = useTransition();
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState<{ url: string; slug: string; live: boolean } | null>(null);
+  const [saveSuccess, setSaveSuccess] = useState<{
+    url: string;
+    slug: string;
+    live: boolean;
+    requestedSlug?: string;
+  } | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  // The slug this article was last saved under; only that row may be overwritten.
+  const [savedSlug, setSavedSlug] = useState<string | null>(null);
+  // Overridable quality checks the editor has verified by hand.
+  const [overrides, setOverrides] = useState<string[]>([]);
+
+  const quality = useMemo(
+    () => (generatedArticle ? checkArticleQuality(generatedArticle, { overrides }) : null),
+    [generatedArticle, overrides]
+  );
 
   // Filtered feed items
   const displayedItems = items.filter((item) => {
-    if (filterUncovered && item.alreadyCovered) return false;
+    if (filterUncovered && !isActionable(item)) return false;
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
     return item.title.toLowerCase().includes(q) || item.summary.toLowerCase().includes(q);
@@ -100,6 +130,8 @@ export function NewsAutopilotClient({
     setGeneratedArticle(null);
     setSaveSuccess(null);
     setErrorMsg(null);
+    setSavedSlug(null);
+    setOverrides([]);
 
     try {
       const article = await generateNewsArticleAction(item);
@@ -117,10 +149,17 @@ export function NewsAutopilotClient({
     setErrorMsg(null);
 
     try {
-      const res = await saveNewsArticleAction(generatedArticle, publishLive);
+      const res = await saveNewsArticleAction(generatedArticle, {
+        publishLive,
+        replaceSlug: savedSlug,
+        overrides,
+      });
       if (res.success) {
-        setSaveSuccess({ url: res.url, slug: res.slug, live: publishLive });
-        if (publishLive) setPublishedToday((prev) => prev + 1);
+        setSaveSuccess({ url: res.url, slug: res.slug, live: publishLive, requestedSlug: res.requestedSlug });
+        setSavedSlug(res.slug);
+        if (res.slug !== generatedArticle.slug) setGeneratedArticle({ ...generatedArticle, slug: res.slug });
+        // Re-publishing an already-live article doesn't add to today's count.
+        if (publishLive && !saveSuccess?.live) setPublishedToday((prev) => prev + 1);
 
         // Mark item as covered in UI list
         setItems((prev) =>
@@ -154,7 +193,7 @@ export function NewsAutopilotClient({
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Fresh News Candidates</p>
                 <h3 className="text-2xl font-bold mt-1">
-                  {items.filter((i) => !i.alreadyCovered).length}{" "}
+                  {items.filter(isActionable).length}{" "}
                   <span className="text-xs text-muted-foreground font-normal">/ {items.length} total</span>
                 </h3>
               </div>
@@ -310,6 +349,12 @@ export function NewsAutopilotClient({
                 Slug: <code className="font-mono">{saveSuccess.slug}</code>
                 {saveSuccess.live && " • Queued for Google Indexing"}
               </p>
+              {saveSuccess.requestedSlug && (
+                <p className="text-xs text-amber-700 dark:text-amber-400 mt-0.5">
+                  <code className="font-mono">{saveSuccess.requestedSlug}</code> already belongs to another post, so
+                  this was saved under a new slug instead of replacing it.
+                </p>
+              )}
             </div>
           </div>
           {saveSuccess.live && (
@@ -357,7 +402,7 @@ export function NewsAutopilotClient({
                   onClick={() => setFilterUncovered(!filterUncovered)}
                   className="text-xs h-9"
                 >
-                  {filterUncovered ? "Uncovered Only" : "Show All"}
+                  {filterUncovered ? `Fresh & Uncovered (≤${MAX_NEWS_AGE_HOURS}h)` : "Show All"}
                 </Button>
               </div>
 
@@ -385,10 +430,18 @@ export function NewsAutopilotClient({
                               <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-muted text-foreground">
                                 {item.sourceName}
                               </span>
-                              <span className="text-[11px] text-muted-foreground flex items-center gap-1">
+                              <span
+                                className={`text-[11px] flex items-center gap-1 ${item.isStale ? "text-amber-600 dark:text-amber-400 font-medium" : "text-muted-foreground"}`}
+                                title={item.publishedAt ? new Date(item.publishedAt).toLocaleString() : "The feed gave no publish date"}
+                              >
                                 <Clock className="w-3 h-3" />
-                                {new Date(item.publishedAt).toLocaleDateString()}
+                                {formatAge(item.ageHours)}
                               </span>
+                              {item.isStale && !item.alreadyCovered && (
+                                <Badge variant="outline" className="text-[10px] border-amber-400 text-amber-700 dark:text-amber-400">
+                                  {item.ageHours === null ? "Undated" : "Stale"}
+                                </Badge>
+                              )}
                               {item.alreadyCovered && (
                                 <Badge variant="secondary" className="text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                                   Covered
@@ -407,6 +460,27 @@ export function NewsAutopilotClient({
                             <p className="text-xs text-muted-foreground line-clamp-2">
                               {item.summary}
                             </p>
+                            {item.similarCoverage && (
+                              <p className="text-[11px] text-amber-700 dark:text-amber-400 flex items-start gap-1 pt-0.5">
+                                <AlertTriangle className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                                <span>
+                                  Possibly the same story as{" "}
+                                  {item.similarCoverage.slug ? (
+                                    <a
+                                      href={`/resources/news/${item.similarCoverage.slug}`}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="underline"
+                                    >
+                                      {item.similarCoverage.title}
+                                    </a>
+                                  ) : (
+                                    <>&ldquo;{item.similarCoverage.title}&rdquo;</>
+                                  )}
+                                  . Consider updating that article instead.
+                                </span>
+                              </p>
+                            )}
                           </div>
                         </div>
 
@@ -480,7 +554,12 @@ export function NewsAutopilotClient({
                     <Button
                       size="sm"
                       onClick={() => handleSaveArticle(true)}
-                      disabled={isSaving}
+                      disabled={isSaving || !quality?.canPublish}
+                      title={
+                        quality?.canPublish
+                          ? undefined
+                          : `Blocked by the quality gate: ${quality?.blocking.map((c) => c.label).join(", ")}`
+                      }
                       className="gap-1 text-xs bg-emerald-600 hover:bg-emerald-700 text-white"
                     >
                       <Send className="w-3.5 h-3.5" />
@@ -555,6 +634,70 @@ export function NewsAutopilotClient({
                 </div>
               ) : (
                 <div className="space-y-4">
+                  {/* Quality gate: recomputed on every edit, enforced again on the server at save */}
+                  {quality && (
+                    <div
+                      className={`p-3.5 rounded-lg border space-y-2 ${
+                        quality.canPublish
+                          ? "border-emerald-200 bg-emerald-50/60 dark:border-emerald-900 dark:bg-emerald-950/30"
+                          : "border-red-200 bg-red-50/60 dark:border-red-900 dark:bg-red-950/30"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-semibold flex items-center gap-1.5">
+                          {quality.canPublish ? (
+                            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                          ) : (
+                            <ShieldAlert className="w-4 h-4 text-red-600" />
+                          )}
+                          Quality Gate
+                        </span>
+                        <span className="text-[11px] text-muted-foreground">
+                          {quality.canPublish
+                            ? "Ready to publish"
+                            : `${quality.blocking.length} blocking — drafts can still be saved`}
+                        </span>
+                      </div>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5">
+                        {quality.checks.map((check) => (
+                          <li key={check.id} className="text-xs flex items-start gap-1.5">
+                            {check.status === "pass" || check.overridden ? (
+                              <Check className="w-3.5 h-3.5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                            ) : check.status === "warn" ? (
+                              <AlertTriangle className="w-3.5 h-3.5 text-amber-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <CircleX className="w-3.5 h-3.5 text-red-600 mt-0.5 flex-shrink-0" />
+                            )}
+                            <div className="min-w-0">
+                              <span className="font-medium">{check.label}</span>
+                              {check.overridden && (
+                                <span className="text-emerald-700 dark:text-emerald-400"> (verified by editor)</span>
+                              )}
+                              {check.detail && (
+                                <p className="text-[11px] text-muted-foreground break-words">{check.detail}</p>
+                              )}
+                              {check.status === "fail" && check.overridable && (
+                                <label className="flex items-center gap-1.5 text-[11px] mt-1 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={overrides.includes(check.id)}
+                                    onChange={(e) =>
+                                      setOverrides((prev) =>
+                                        e.target.checked ? [...prev, check.id] : prev.filter((id) => id !== check.id)
+                                      )
+                                    }
+                                    className="h-3.5 w-3.5"
+                                  />
+                                  I checked this against the original source
+                                </label>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   {/* TAB 1: VISUAL READER PREVIEW */}
                   {activeTab === "preview" && (
                     <div className="space-y-6">

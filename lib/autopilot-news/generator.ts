@@ -1,6 +1,7 @@
 // lib/autopilot-news/generator.ts
 import { generateWithPool } from "@/lib/gemini-pool";
-import { RawNewsItem } from "./sources";
+import { RawNewsItem, cleanText } from "./sources";
+import { sanitizeSlug } from "./config";
 
 export interface GeneratedNewsArticle {
   title: string;
@@ -19,6 +20,10 @@ export interface GeneratedNewsArticle {
   content: string;
   sourceUrl: string;
   sourceName: string;
+  /** ISO date the source reported the story, or null when the feed had none. */
+  sourcePublishedAt: string | null;
+  /** Plain-text source material the article was written from; the quality gate checks figures against it. */
+  sourceExcerpt: string;
 }
 
 // Lightweight, CDN-compressed WebP images (under 50kb bandwidth)
@@ -71,7 +76,7 @@ Your task is to transform breaking SEO news into an authoritative, highly helpfu
 ### INPUT SOURCE NEWS:
 - Title: ${item.title}
 - Source: ${item.sourceName} (${item.link})
-- Date: ${item.publishedAt.toISOString()}
+- Date: ${item.publishedAt ? new Date(item.publishedAt).toISOString() :"unknown — do not state a date for this news"}
 - Raw Summary / Content:
 ${item.contentHtml || item.summary}
 
@@ -148,11 +153,7 @@ Return ONLY valid JSON matching this schema:
 
   return {
     title: parsed.title || item.title,
-    slug: (parsed.slug || item.title)
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .slice(0, 80),
+    slug: sanitizeSlug(parsed.slug || item.title),
     category,
     metaTitle: parsed.metaTitle || parsed.title || item.title,
     metaDescription: parsed.metaDescription || item.summary.slice(0, 150),
@@ -167,5 +168,7 @@ Return ONLY valid JSON matching this schema:
     content: parsed.content || "",
     sourceUrl: item.link,
     sourceName: item.sourceName,
+    sourcePublishedAt: item.publishedAt ? new Date(item.publishedAt).toISOString() : null,
+    sourceExcerpt: `${item.title}\n${cleanText(item.contentHtml || item.summary || "")}`,
   };
 }

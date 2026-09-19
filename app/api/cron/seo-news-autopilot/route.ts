@@ -2,11 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { harvestLatestNews } from "@/lib/autopilot-news/harvester";
 import { generateSEOArticle } from "@/lib/autopilot-news/generator";
-import {
-  getAutopilotSettings,
-  saveNewsArticleAction,
-} from "@/app/content-admin/news-autopilot/actions";
-import { db } from "@/lib/db";
+import { checkArticleQuality } from "@/lib/autopilot-news/quality";
+import { saveNewsArticle } from "@/lib/autopilot-news/publisher";
+import { countNewsPublishedToday, readAutopilotSettings } from "@/lib/autopilot-news/settings";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 180;
@@ -24,7 +22,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  const settings = await getAutopilotSettings();
+  const settings = await readAutopilotSettings();
   if (!settings.enabled) {
     return NextResponse.json({
       ok: true,
@@ -33,18 +31,7 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Check daily limit
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const publishedToday = await db.marketingBlog.count({
-    where: {
-      category: { contains: "SEO News", mode: "insensitive" },
-      published: true,
-      publishedAt: { gte: today },
-    },
-  });
-
+  const publishedToday = await countNewsPublishedToday();
   if (publishedToday >= settings.dailyLimit) {
     return NextResponse.json({
       ok: true,
@@ -54,31 +41,54 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Harvest news
+  // Unattended, so only stories that are fresh, dated, and not already covered
+  // under another headline qualify. Anything borderline waits for a human.
   const items = await harvestLatestNews();
-  const candidate = items.find((i) => !i.alreadyCovered && i.relevanceScore >= 6);
+  const skipped = {
+    covered: items.filter((i) => i.alreadyCovered).length,
+    similar: items.filter((i) => !i.alreadyCovered && i.similarCoverage).length,
+    stale: items.filter((i) => !i.alreadyCovered && !i.similarCoverage && i.isStale).length,
+  };
+  const candidate = items.find(
+    (i) => !i.alreadyCovered && !i.similarCoverage && !i.isStale && i.relevanceScore >= 6
+  );
 
   if (!candidate) {
     return NextResponse.json({
       ok: true,
       status: "no_candidates",
       message: "No fresh uncovered SEO news found at this time.",
+      skipped,
     });
   }
 
   try {
     const article = await generateSEOArticle(candidate);
-    const saveResult = await saveNewsArticleAction(article, settings.autoPublish);
+
+    // No overrides here: a figure the source doesn't back, or any other failing
+    // check, sends the article to the draft queue for an editor.
+    const quality = checkArticleQuality(article);
+    const publishLive = settings.autoPublish && quality.canPublish;
+    const saveResult = await saveNewsArticle(article, { publishLive });
+
+    if (!saveResult.success) {
+      return NextResponse.json(
+        { ok: false, status: "save_failed", candidate: candidate.title, error: saveResult.error },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       ok: true,
-      status: "processed",
+      status: publishLive ? "published" : settings.autoPublish ? "draft_quality_gate" : "draft",
       candidate: candidate.title,
       source: candidate.sourceName,
       slug: saveResult.slug,
       liveUrl: saveResult.url,
-      published: settings.autoPublish,
-      publishedToday: publishedToday + (settings.autoPublish ? 1 : 0),
+      published: publishLive,
+      failedChecks: quality.blocking.map((c) => ({ id: c.id, detail: c.detail })),
+      publishedToday: publishedToday + (publishLive ? 1 : 0),
+      skipped,
     });
   } catch (err: any) {
     console.error("[cron-seo-news] Processing error:", err);
