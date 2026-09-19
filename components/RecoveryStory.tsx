@@ -92,45 +92,15 @@ const phases = [
 ];
 
 export default function RecoveryStory() {
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Recover from an Ecommerce Catalog De-Indexing Event",
-    "description": "A step-by-step technical SEO methodology used to fix catalog de-indexing, crawl budget waste, and discovered currently not indexed errors in Google Search Console.",
-    "step": [
-      {
-        "@type": "HowToStep",
-        "name": "Reclaim Crawl Budget",
-        "text": "Identify and block faceted navigation and parameter URLs from consuming Googlebot's crawl budget using robots.txt and URL parameter settings."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Correct Canonical Tags",
-        "text": "Audit the canonical tag structure to ensure all product variations point to the primary URL, eliminating duplicate content confusion."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Rewrite Thin Content",
-        "text": "Identify product pages with thin or manufacturer-supplied descriptions and rewrite them with unique, structured copy."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Force Re-Indexing",
-        "text": "Use the Google Indexing API to push high-value URLs back into the index in prioritized batches, rather than waiting for natural recrawls."
-      }
-    ]
-  };
-
+  // No HowTo markup. Google stopped showing HowTo rich results in September
+  // 2023, and its fourth step described pushing product URLs through the
+  // Indexing API, which Google only supports for job postings and livestreams.
   return (
     <section
       id="recovery"
       className="border-y py-20 sm:py-24"
       style={{ background: color.surfaceAlt, borderColor: color.border }}
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#7F77DD]">

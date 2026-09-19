@@ -21,7 +21,6 @@ import AuroraBackground from "../components/AuroraBackground";
 import Results from "../components/Results";
 import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
-import { trustpilotReviewSchema } from "@/lib/trustpilot-review-schema";
 import FounderSection from "../components/FounderSection";
 import FAQ from "../components/FAQ";
 import EmotionalLeadForm from "../components/EmotionalLeadForm";
@@ -30,7 +29,7 @@ import BlogTeaser from "../components/BlogTeaser";
 import Reveal from "@/components/Reveal";
 import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
+import { SITE, founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 
 // The title, the H1 in components/Hero.tsx and this description all lead with
 // the same phrase. They used to disagree: the title said "Boutique SEO Agency
@@ -72,176 +71,24 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
+    // Organization, founder and WebSite come from lib/site-schema.ts via the
+    // root layout. This graph only adds what is specific to the homepage and
+    // points at those by @id.
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${SITE}/#organization`,
-        "name": "SearchPrex",
-        "url": SITE,
-        "logo": `${SITE}/logo.png`,
-        "description":
-          "Remote-first, US-focused boutique SEO agency helping law firms, small businesses, and ecommerce stores rank higher through senior-led technical SEO, local SEO, and AI search optimization (GEO/AEO). Active coverage across EST, CST, and PST timezones.",
-        "email": "contact@searchprex.com",
-        "founder": { "@id": `${SITE}/#founder` },
-        "areaServed": [
-          { "@type": "Country", "name": "United States" },
-          { "@type": "State", "name": "California" },
-          { "@type": "State", "name": "Texas" },
-          { "@type": "State", "name": "New York" },
-          { "@type": "State", "name": "Florida" },
-          { "@type": "State", "name": "Illinois" },
-          { "@type": "State", "name": "Pennsylvania" },
-          { "@type": "State", "name": "Ohio" },
-          { "@type": "State", "name": "Georgia" },
-          { "@type": "State", "name": "North Carolina" },
-          { "@type": "State", "name": "Kansas" }
-        ],
-        "knowsAbout": [
-          "Boutique SEO Agency Services",
-          "Founder-Led SEO Consulting",
-          "US Organic Growth Strategy",
-          "Law Firm SEO",
-          "Personal Injury Lawyer SEO",
-          "Family Law SEO",
-          "Ecommerce SEO",
-          "Shopify SEO",
-          "WooCommerce SEO",
-          "Local SEO",
-          "Technical SEO",
-          "Core Web Vitals",
-          "E-E-A-T",
-          "AI Overviews (GEO/AEO)",
-          "LLM Optimization",
-          "Google Indexing Recovery",
-          "Bulk Content Automation"
-        ],
-        "sameAs": [
-          "https://www.linkedin.com/company/searchprex/",
-          "https://www.youtube.com/@SearchPrex",
-          "https://clutch.co/profile/searchprex",
-          "https://www.crunchbase.com/organization/searchprex"
-        ],
-        // NOTE: no aggregateRating here on purpose. Google's review-snippet
-        // guidelines disallow self-serving aggregate ratings on your own
-        // Organization, and the value that used to sit here (3.8 from 1
-        // review) contradicted both the Trustpilot section and the individual
-        // Review nodes. The real reviews live in trustpilotReviewSchema below.
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "SEO Services",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Law Firm SEO",
-                "url": `${SITE}/services/law-firm-seo`,
-                "description":
-                  "SEO for personal injury, family law, criminal defense, and general practice attorneys across the United States."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Ecommerce & Shopify SEO",
-                "url": `${SITE}/services/ecommerce-seo`,
-                "description":
-                  "Ecommerce SEO for Shopify and WooCommerce stores. Product page optimization, indexing recovery, and bulk content at scale."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Local SEO",
-                "url": `${SITE}/services/local-seo`,
-                "description":
-                  "Local SEO for small businesses. Google Business Profile optimization, local citations, and state-wise ranking strategy."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Technical SEO Audit",
-                "url": `${SITE}/services/technical-seo`,
-                "description":
-                  "Technical SEO audits covering crawl errors, indexing issues, Core Web Vitals, and site architecture."
-              }
-            }
-          ]
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": `${SITE}/#founder`,
-        "name": "Mubashar Sharif",
-        "jobTitle": "Founder & SEO Strategist",
-        "worksFor": { "@id": `${SITE}/#organization` },
-        "knowsAbout": [
-          "Technical SEO",
-          "Ecommerce SEO",
-          "Local SEO",
-          "Law Firm SEO",
-          "AEO/GEO/AIO",
-          "LLM Optimization",
-          "Google Indexing Recovery"
-        ],
-        "sameAs": [
-          "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-          "https://www.upwork.com/freelancers/~01400266ea842005be",
-          "https://medium.com/@mubasharshahzad726"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${SITE}/#website`,
-        "url": SITE,
-        "name": "SearchPrex",
-        "publisher": { "@id": `${SITE}/#organization` },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${SITE}/search?q={search_term_string}`
-          },
-          "query-input": "required name=search_term_string"
-        }
-      },
       {
         "@type": "WebPage",
         "@id": `${SITE}/#webpage`,
         "url": SITE,
         "name": HOME_TITLE,
         "description": HOME_DESCRIPTION,
-        "isPartOf": { "@id": `${SITE}/#website` },
-        "about": { "@id": `${SITE}/#organization` },
+        "isPartOf": websiteRef,
+        "about": organizationRef,
         // The generated default card (app/opengraph-image.tsx). This was
         // `${SITE}/og-image.jpg`, a file that has never existed in public/, so
         // the structured data pointed Google at a 404.
         "primaryImageOfPage": {
           "@type": "ImageObject",
           "url": `${SITE}/opengraph-image`
-        }
-      },
-      {
-        "@type": "ProfessionalService",
-        "@id": `${SITE}/#professionalservice`,
-        "name": "SearchPrex SEO Agency",
-        "url": SITE,
-        "logo": `${SITE}/logo.png`,
-        "priceRange": "$$",
-        "telephone": "+923059158010",
-        "email": "contact@searchprex.com",
-        "areaServed": { "@type": "Country", "name": "United States" },
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
-          "addressLocality": "Daska",
-          "addressRegion": "Punjab",
-          "postalCode": "51010",
-          "addressCountry": "PK"
         }
       },
       // ── Proof images ──
@@ -257,7 +104,7 @@ export default async function Home() {
           "Google Search Console page indexing for Michigan Outdoor Sports: approximately 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026.",
         "description":
           "Unedited Google Search Console screenshot showing a 285% increase in indexed pages following technical SEO indexing recovery work.",
-        "creator": { "@id": `${SITE}/#founder` },
+        "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-08-07",
         "representativeOfPage": false
@@ -268,7 +115,7 @@ export default async function Home() {
         "contentUrl": `${SITE}/images/proof/smk-revenue-before.png`,
         "caption":
           "SMK Store WooCommerce net sales for April 2026: $5,832.02 for the month, top seller at 200 units.",
-        "creator": { "@id": `${SITE}/#founder` },
+        "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-04-30"
       },
@@ -278,7 +125,7 @@ export default async function Home() {
         "contentUrl": `${SITE}/images/proof/smk-revenue-after.png`,
         "caption":
           "SMK Store WooCommerce net sales for June 2026: $19,100.71 for the month, top seller at 300 units — a 227% increase over April.",
-        "creator": { "@id": `${SITE}/#founder` },
+        "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-06-30"
       },
@@ -288,7 +135,7 @@ export default async function Home() {
         "contentUrl": `${SITE}/images/proof/mso-revenue-1-jul20.png`,
         "caption":
           "Michigan Outdoor Sports WooCommerce net sales, 20 July 2026: $0.00 for the month.",
-        "creator": { "@id": `${SITE}/#founder` },
+        "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-07-20"
       },
@@ -298,7 +145,7 @@ export default async function Home() {
         "contentUrl": `${SITE}/images/proof/mso-revenue-2-aug06.png`,
         "caption":
           "Michigan Outdoor Sports WooCommerce net sales, 6 August 2026: $206.63 for the month.",
-        "creator": { "@id": `${SITE}/#founder` },
+        "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-08-06"
       },
@@ -308,11 +155,10 @@ export default async function Home() {
         "contentUrl": `${SITE}/images/proof/mso-revenue-3-aug17.png`,
         "caption":
           "Michigan Outdoor Sports WooCommerce net sales, 17 August 2026: $311.05 month to date.",
-        "creator": { "@id": `${SITE}/#founder` },
+        "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
         "datePublished": "2026-08-17"
-      },
-      trustpilotReviewSchema
+      }
     ]
   };
 

@@ -16,6 +16,7 @@ import RealityCheck from "@/components/wichita/RealityCheck";
 import DeviceMockups from "@/components/wichita/DeviceMockups";
  
 import { getPageSEO } from "@/lib/admin-seo";
+import { organizationRef } from "@/lib/site-schema";
 export const dynamic = "force-dynamic";
  
 const SITE = "https://www.searchprex.com";
@@ -112,9 +113,10 @@ const schema = {
       description: "Local SEO services for law firms in Wichita, Kansas.",
       url: PAGE_URL,
       areaServed: { "@type": "City", name: "Wichita", containedInPlace: { "@type": "State", name: "Kansas" } },
-      provider: { "@type": "Organization", name: "SearchPrex", url: SITE },
+      provider: organizationRef,
     },
-    { "@type": "Person", "@id": `${SITE}#mubashar`, name: "Mubashar Sharif", jobTitle: "Founder & SEO Strategist", worksFor: { "@type": "Organization", name: "SearchPrex" }, sameAs: [LINKEDIN] },
+    // The founder is lib/site-schema.ts's #founder, rendered by the root layout.
+    // This page used to add a second copy under #mubashar.
     { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Locations", item: `${SITE}/locations` }, { "@type": "ListItem", position: 3, name: "Kansas", item: `${SITE}/locations/kansas` }, { "@type": "ListItem", position: 4, name: "Wichita", item: PAGE_URL }] },
     { "@type": "FAQPage", mainEntity: FAQS.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
   ],

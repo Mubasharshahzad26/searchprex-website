@@ -51,18 +51,9 @@ const schema = {
       ],
       founder: { "@id": "https://www.searchprex.com/#founder" },
     },
-    {
-      "@type": "Person",
-      "@id": "https://www.searchprex.com/#founder",
-      name: "Mubashar Sharif",
-      jobTitle: "Founder & Senior SEO Strategist",
-      worksFor: { "@id": "https://www.searchprex.com/locations/kansas#service" },
-      sameAs: [
-        "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-        "https://www.upwork.com/freelancers/~01400266ea842005be",
-        "https://medium.com/@mubasharshahzad726",
-      ],
-    },
+    // #founder is defined once in lib/site-schema.ts and rendered by the root
+    // layout. The copy here had its own job title, and on the state page said
+    // the founder worked for this page's service rather than the organization.
     {
       "@type": "WebPage",
       "@id": "https://www.searchprex.com/locations/kansas#webpage",

@@ -52,17 +52,8 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         knowsAbout: ["Law Firm SEO", "Family Law SEO", "Local SEO", "Google Business Profile optimization", "Attorney E-E-A-T"],
         founder: { "@id": "https://www.searchprex.com/#founder" },
       },
-      {
-        "@type": "Person",
-        "@id": "https://www.searchprex.com/#founder",
-        name: "Mubashar Sharif",
-        jobTitle: "Founder & Senior SEO Strategist",
-        sameAs: [
-          "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-          "https://www.upwork.com/freelancers/~01400266ea842005be",
-          "https://medium.com/@mubasharshahzad726",
-        ],
-      },
+      // #founder is defined once in lib/site-schema.ts and rendered by the root
+      // layout. The copy here carried its own, different job title.
       {
         "@type": "FAQPage",
         "@id": `${url}#faq`,

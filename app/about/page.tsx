@@ -100,64 +100,9 @@ export default function AboutPage() {
         "isPartOf": { "@id": `${siteUrl}/#website` },
         "inLanguage": "en-US",
         "mainEntity": { "@id": `${siteUrl}/#organization` }
-      },
-      {
-        "@type": "Organization",
-        "@id": `${siteUrl}/#organization`,
-        "name": "SearchPrex",
-        "url": siteUrl,
-        "email": "contact@searchprex.com",
-        "telephone": "+92-305-9158010",
-        "founder": {
-          "@type": "Person",
-          "@id": "#founder",
-          "name": "Mubashar Sharif",
-          "jobTitle": "Founder & Lead SEO Strategist",
-          "email": "contact@searchprex.com",
-          "image": `${siteUrl}/images/mubashar-shahzad.jpg`,
-          "sameAs": [
-            "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
-          ],
-          "affiliation": { "@id": `${siteUrl}/#organization` }
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
-          "addressLocality": "Daska",
-          "addressRegion": "Punjab",
-          "postalCode": "51010",
-          "addressCountry": "PK"
-        },
-        "areaServed": [
-          { "@type": "State", "name": "California" },
-          { "@type": "State", "name": "Texas" },
-          { "@type": "State", "name": "Florida" },
-          { "@type": "State", "name": "New York" },
-          { "@type": "State", "name": "Illinois" },
-          { "@type": "Country", "name": "United States" }
-        ],
-        "knowsAbout": [
-          "Search Engine Optimization",
-          "Law Firm SEO",
-          "Ecommerce SEO",
-          "Local SEO",
-          "Technical SEO",
-          "Content Strategy",
-          "Link Building"
-        ],
-        "sameAs": [
-          "https://linkedin.com/company/searchprex"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        "url": siteUrl,
-        "name": "SearchPrex",
-        "description": "Founder-led USA SEO agency for law firms, ecommerce, and local businesses",
-        "publisher": { "@id": `${siteUrl}/#organization` },
-        "inLanguage": "en-US"
       }
+      // Organization, founder and WebSite are defined once in lib/site-schema.ts
+      // and rendered by the root layout; this page only points at them.
     ]
   };
  

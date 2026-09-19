@@ -7,6 +7,7 @@ import './globals.css'
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import { siteGraph } from "@/lib/site-schema";
 
  
 const inter = Inter({ 
@@ -117,111 +118,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${siteUrl}/#organization`,
-        "name": "SearchPrex",
-        "url": siteUrl,
-        "logo": {
-          "@type": "ImageObject",
-          "url": `${siteUrl}/logo.png`,
-          "width": 200,
-          "height": 200
-        },
-        "description": "Remote-First, US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
-          "addressLocality": "Daska",
-          "addressRegion": "Punjab",
-          "postalCode": "51010",
-          "addressCountry": "PK"
-        },
-        "telephone": "+92-305-9158010",
-        // Must match the page-level schema (home, about, case studies, city
-        // pages), which all say contact@. This block renders on every page, so
-        // a second address here gave Google two emails for one organization.
-        "email": "contact@searchprex.com",
-        "founder": {
-          "@type": "Person",
-          "name": "Mubashar Sharif",
-          "jobTitle": "CEO & Founder",
-          "sameAs": [
-            "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
-          ]
-        },
-        "areaServed": [
-          { "@type": "State", "name": "California" },
-          { "@type": "State", "name": "Texas" },
-          { "@type": "State", "name": "Florida" },
-          { "@type": "State", "name": "New York" },
-          { "@type": "State", "name": "Illinois" }
-        ],
-        "sameAs": [
-          "https://linkedin.com/company/searchprex"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        "url": siteUrl,
-        "name": "SearchPrex",
-        "publisher": { "@id": `${siteUrl}/#organization` },
-        "inLanguage": "en-US"
-      },
-      {
-        "@type": "ProfessionalService",
-        "@id": `${siteUrl}/#service`,
-        "name": "SearchPrex SEO Services",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Mohalla Raham Colony, Near Altaf Cold Storage, Opposite Chungi No. 1",
-          "addressLocality": "Daska",
-          "addressRegion": "Punjab",
-          "postalCode": "51010",
-          "addressCountry": "PK"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "United States"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "SEO Services",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Law Firm SEO",
-                "description": "Specialized SEO for family law, personal injury, and criminal defense attorneys."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Shopify SEO",
-                "description": "Technical and content SEO for Shopify ecommerce stores."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Local SEO",
-                "description": "Google Business Profile optimization and local search visibility."
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
- 
   return (
     <html lang="en" dir="ltr" className={`${inter.variable} bg-background`}>
       <head>
@@ -235,7 +131,7 @@ export default function RootLayout({
         <meta name="ICBM" content="37.0902, -95.7129" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph) }}
         />
       </head>
  

@@ -39,8 +39,9 @@ const REVIEWS = [
 // of 5 while the two reviews rendered directly beneath it were both rated 5 —
 // visibly contradictory, and 3.8 is below the level where showing an average
 // helps rather than hurts. If you want to display an average again, read the
-// real number off the live Trustpilot profile and keep it in sync with
-// lib/trustpilot-review-schema.tsx.
+// real number off the live Trustpilot profile. There is no review markup to
+// keep in sync: Google shows no review snippets for an organization's own
+// reviews, so lib/site-schema.ts deliberately carries none.
 const AGGREGATE_COUNT = REVIEWS.length;
  
 // Trustpilot Green Checkmark SVG Badge

@@ -338,33 +338,10 @@ const jsonLd = {
       ],
     },
  
-    /* ──────── 6. Organization (E-E-A-T for GEO) ──────── */
-    {
-      "@type": "Organization",
-      "@id": `${SITE}/#organization`,
-      name: "SearchPrex",
-      url: SITE,
-      logo: `${SITE}/logo.png`,
-      description:
-        "Founder-led SEO agency specializing in law firm SEO, local SEO, technical SEO, and e-commerce SEO for US businesses. Proven Map Pack + AI Overview methodology.",
-      sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
-      founder: {
-        "@type": "Person",
-        name: "Mubashar Sharif",
-        jobTitle: "Founder & Senior SEO Analyst",
-        url: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-      },
-      knowsAbout: [
-        "Law Firm SEO",
-        "Legal SEO",
-        "Local SEO",
-        "E-E-A-T",
-        "Google Business Profile Optimization",
-        "AI Overview Optimization",
-        "AEO (Answer Engine Optimization)",
-        "LegalService Schema",
-      ],
-    },
+    /* ──────── 6. Organization ────────
+       Not redefined here: lib/site-schema.ts defines it once and the root
+       layout renders it. This copy listed the founder's personal LinkedIn as
+       the company's sameAs. */
   ],
 };
  
