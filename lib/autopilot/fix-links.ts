@@ -66,8 +66,24 @@ export function fixInternalLinks(
     }
   )
 
+  //  Second pass: the same guessed URL as a quoted string outside an anchor —
+  //  the BreadcrumbList JSON-LD ("item": ".../product-category/knives/") and the
+  //  microdata the layout emits. The anchor pass never sees these, so the
+  //  schema kept pointing at a URL that redirects to the home page even after
+  //  the visible links were fixed. Unresolvable slugs are left alone here:
+  //  deleting a list item from JSON-LD would leave its positions broken.
+  const final = out.replace(
+    /(["'])(https?:\/\/[^"']*?\/product-category\/([^/"'?#]+)\/?)\1/gi,
+    (whole, quote: string, href: string, slug: string) => {
+      const term = bySlug.get(slug)
+      if (!term) return whole
+      repointed.push([href, term.link])
+      return `${quote}${term.link}${quote}`
+    }
+  )
+
   return {
-    html: out,
+    html: final,
     repointed,
     unwrapped,
     changed: repointed.length > 0 || unwrapped.length > 0,

@@ -75,7 +75,10 @@ const phases = [
     tone: "#534AB7",
     stage: "The fix",
     when: "May – July 2026",
-    body: "Crawl budget reclaimed from faceted and parameter URLs, canonicals corrected, and thin product pages rewritten with unique copy. The re-indexing itself ran on NicheSEO Pro Autopilot, which pushed high-value URLs through the Indexing API in priority batches and then verified each page had actually gone live.",
+    // No longer credits the Indexing API. Google restricts it to job postings
+    // and livestreams, and /blog/google-indexing-api-python publicly retracted
+    // that approach on 27 Aug 2026 — the homepage was still advertising it.
+    body: "Crawl budget reclaimed from faceted and parameter URLs, canonicals corrected, and thin product pages rewritten with unique copy. NicheSEO Pro Autopilot then worked through the high-value URLs in priority batches and verified each page had actually gone live in the index.",
     metric: { value: "+3,723", label: "Newly indexed, 11 – 25 Jul 2026" },
     // The tool is named because it did the work, and because its own Search
     // Console captures for this account are the source of the figure above.
@@ -107,7 +110,11 @@ export default function RecoveryStory() {
             Michigan Outdoor Sports · The full picture
           </p>
           <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
-            Rebuilding After De-Indexing: How 11,549 Pages Were Restored from Zero
+            {/* Was "Restored from Zero". The phase data below, the proof caption
+                and the schema all put the floor at ≈3,000 indexed pages, and a
+                headline that contradicts its own screenshot is the one thing
+                this section cannot afford. */}
+            Rebuilding After De-Indexing: From ≈3,000 to 11,549 Indexed Pages
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#5b6472]">
             Most agencies would publish the March peak and stop there. I publish the whole

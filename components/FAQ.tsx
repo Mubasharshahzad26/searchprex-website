@@ -57,14 +57,14 @@ const faqCategories: FaqCategory[] = [
       {
         question: "How do you fix Shopify product pages showing 'Discovered - currently not indexed'?",
         answer:
-          "We analyze crawl budget waste caused by faceted navigation and parameter URLs, eliminate duplicate canonical tags, rewrite thin descriptions, and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring.",
+          "We analyze crawl budget waste caused by faceted navigation and parameter URLs, eliminate duplicate canonical tags, rewrite thin descriptions, and track the high-priority catalog pages in Search Console, batch by batch, until they are indexed.",
         answerNode: (
           <>
             We analyze crawl budget waste caused by faceted navigation and parameter URLs, eliminate duplicate canonical tags, rewrite thin descriptions through our dedicated{" "}
             <Link href="/services/ecommerce-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
               Ecommerce SEO services
             </Link>
-            , and push high-priority catalog batches through the Google Indexing API with verified Search Console monitoring (see our{" "}
+            , and track the high-priority catalog pages in Search Console, batch by batch, until they are indexed (see our{" "}
             <Link href="/case-studies/ecommerce/michigan-outdoor-sports" className="font-semibold text-[#534AB7] underline hover:text-[#3f378a]">
               11,549-page catalog recovery
             </Link>{" "}

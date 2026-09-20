@@ -24,6 +24,7 @@ node_modules
 *.log
 tsconfig.tsbuildinfo
 live.html
+.tmp-linkfix/
 
 # Design reference recordings — screen captures used to agree the look of the
 # home page, not assets the site serves. semrush-like-dashbaord... is Semrush's

@@ -309,15 +309,9 @@ export default function Footer() {
               >
                 Semrush Certified
               </a>
-              <span aria-hidden="true">•</span>
-              <a
-                href="https://app-na2.hubspot.com/academy/achievements/REPLACE_HUBSPOT_ID"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-[#3eb489] hover:underline"
-              >
-                HubSpot Verified
-              </a>
+              {/* A "HubSpot Verified" link sat here, pointing at a placeholder
+                  achievement URL (REPLACE_HUBSPOT_ID) on every page. Restore
+                  it only with the real certificate link. */}
             </span>
           </div>
         </div>
