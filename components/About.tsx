@@ -95,10 +95,10 @@ export default function About() {
               <div className="px-6 pb-6">
                 <div className="relative -mt-12 mb-4 h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-md">
                   <Image
-                    src="/images/mubashar-shahzad.jpg"
+                    src="/images/mubashar-sharif.jpg"
                     alt="Mubashar Sharif — Founder & Lead SEO Strategist at SearchPrex"
                     fill
-                    className="object-cover object-top"
+                    className="origin-[52%_26%] scale-[1.6] object-cover"
                     priority
                   />
                 </div>

@@ -403,7 +403,7 @@ export default function ServicesPage() {
           name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years"
           quote="Every service on this page is led by me personally. 5+ years across local, international, technical, ecommerce and law firm SEO — no juniors, no outsourcing. The person behind these case studies works on your site."
-          imageSrc="/images/mubashar-shahzad.jpg"
+          imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           badges={["Semrush certified", "HubSpot certified"]}

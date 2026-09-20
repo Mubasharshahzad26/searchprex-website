@@ -180,11 +180,14 @@ export default function FounderSection() {
               <div className="flex items-center gap-4">
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
                   <Image
-                    src="/images/mubashar-shahzad.jpg"
+                    src="/images/mubashar-sharif.jpg"
                     alt="Mubashar Sharif, Founder and CEO of SearchPrex"
                     fill
                     sizes="64px"
-                    className="object-cover object-top"
+                    /* The portrait is a wide office shot, so at 64px the face
+                       would sit small in the middle of the room. Scaling in CSS
+                       frames the head without cropping the file itself. */
+                    className="origin-[52%_26%] scale-[1.75] object-cover"
                   />
                 </div>
                 <div className="min-w-0">

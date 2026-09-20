@@ -46,7 +46,9 @@ export default function AuthorCard({
         className={`relative mx-auto mb-6 h-24 w-24 shrink-0 overflow-hidden ${radius.chip} border sm:mb-0`}
         style={{ borderColor: color.border }}
       >
-        <Image src={imageSrc} alt={imageAlt} fill className="object-cover object-top" itemProp="image" />
+        {/* Scaled and anchored on the face: the founder portrait is a wide
+            office shot, which at 96px would otherwise read as a room. */}
+        <Image src={imageSrc} alt={imageAlt} fill className="origin-[52%_26%] scale-[1.6] object-cover" itemProp="image" />
       </div>
 
       <div>

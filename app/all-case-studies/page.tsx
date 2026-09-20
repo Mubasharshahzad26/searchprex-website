@@ -157,7 +157,7 @@ export default async function Page() {
     "name": "Mubashar Sharif",
     "jobTitle": "Founder & SEO Expert",
     "description": "Founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses.",
-    "image": `${SITE}/images/mubashar-shahzad.jpg`,
+    "image": `${SITE}/images/mubashar-sharif.jpg`,
     "url": `${SITE}/about`,
     "email": "contact@searchprex.com",
     "sameAs": [LINKEDIN_URL],

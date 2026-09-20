@@ -373,7 +373,7 @@ export default function LawFirmSEOClient() {
           name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years"
           quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to the top 3 map pack and Google AI Overview placements, and I bring that exact methodology to every firm I work with.&rdquo;"
-          imageSrc="/images/mubashar-shahzad.jpg"
+          imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl={LINKEDIN}
         />

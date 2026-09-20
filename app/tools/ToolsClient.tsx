@@ -267,7 +267,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
           name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years"
           quote="These are the same utilities I use on real client projects — the ones behind the verified case studies on this site. Nothing here is a lead-capture gimmick."
-          imageSrc="/images/mubashar-shahzad.jpg"
+          imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           badges={["Semrush certified", "HubSpot certified"]}

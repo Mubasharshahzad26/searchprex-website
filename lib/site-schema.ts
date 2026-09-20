@@ -135,7 +135,10 @@ const founder = {
   "@id": FOUNDER_ID,
   name: "Mubashar Sharif",
   jobTitle: "Founder & SEO Strategist",
-  image: `${SITE}/images/mubashar-transparent.png`,
+  // The square portrait, not the hero's background-less cutout: this is the
+  // image Google may show beside the person, and a cutout on a transparent
+  // background renders badly on a white or dark card.
+  image: `${SITE}/images/mubashar-sharif.jpg`,
   worksFor: organizationRef,
   knowsAbout: [
     "Technical SEO",

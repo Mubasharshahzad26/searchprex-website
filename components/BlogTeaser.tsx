@@ -6,7 +6,7 @@ import { ChevronRight, Clock } from "lucide-react";
 import { posts as publishedPosts } from "@/app/blog/[slug]/posts";
  
 // Founder avatar shown as the post author on every card.
-const AVATAR = "/images/mubashar-shahzad.jpg";
+const AVATAR = "/images/mubashar-sharif.jpg";
  
 // Render ONLY posts that actually exist in app/blog/[slug]/posts.ts. That file
 // is the source of truth — app/blog/[slug]/page.tsx calls notFound() for
@@ -71,13 +71,17 @@ export default function BlogTeaser() {
               </p>
               <div className="mt-auto flex items-center justify-between border-t border-[#e5e7eb] pt-5">
                 <div className="flex items-center gap-2">
-                  <Image
-                    src={featured.author.avatar}
-                    alt={featured.author.name}
-                    width={28}
-                    height={28}
-                    className="rounded-full object-cover w-7 h-7"
-                  />
+                  {/* Wrapper clips the zoom: the portrait is a wide office
+                      shot, so the face needs framing at avatar sizes. */}
+                  <span className="relative block h-7 w-7 overflow-hidden rounded-full">
+                    <Image
+                      src={featured.author.avatar}
+                      alt={featured.author.name}
+                      width={28}
+                      height={28}
+                      className="h-7 w-7 origin-[52%_26%] scale-[1.75] object-cover"
+                    />
+                  </span>
                   <span className="text-xs font-semibold text-[#0a0f2e]">
                     {featured.author.name}
                   </span>
@@ -118,13 +122,15 @@ export default function BlogTeaser() {
                     {p.title}
                   </h3>
                   <div className="mt-auto flex items-center gap-2 border-t border-[#e5e7eb] pt-4">
-                    <Image
-                      src={p.author.avatar}
-                      alt={p.author.name}
-                      width={24}
-                      height={24}
-                      className="rounded-full object-cover w-6 h-6"
-                    />
+                    <span className="relative block h-6 w-6 overflow-hidden rounded-full">
+                      <Image
+                        src={p.author.avatar}
+                        alt={p.author.name}
+                        width={24}
+                        height={24}
+                        className="h-6 w-6 origin-[52%_26%] scale-[1.75] object-cover"
+                      />
+                    </span>
                     <span className="text-xs font-semibold text-[#0a0f2e]">
                       {p.author.name}
                     </span>

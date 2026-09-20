@@ -204,7 +204,7 @@ export default function TechnicalSEOClient() {
           name="Mubashar Sharif"
           role="Founder & Lead Technical SEO Strategist · 5+ years"
           quote="&ldquo;Technical SEO is where I&apos;ve done my deepest work — crawl budget, indexation recovery, Core Web Vitals, schema. I personally took Michigan Outdoor Sports to a +476% clicks peak in March 2026, watched it de-index, and rebuilt it to 11,549 indexed pages and +83% US clicks — all verified in GSC.&rdquo;"
-          imageSrc="/images/mubashar-shahzad.jpg"
+          imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Technical SEO Strategist"
           linkedinUrl={LINKEDIN}
         />

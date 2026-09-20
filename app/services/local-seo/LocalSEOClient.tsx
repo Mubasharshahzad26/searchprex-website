@@ -232,7 +232,7 @@ export default function LocalSEOClient() {
           name="Mubashar Sharif"
           role="Founder & Lead Local SEO Strategist · 5+ years"
           quote="&ldquo;Local SEO is won on real signals — accurate GBP data, genuine reviews, content that actually helps your neighbors. I personally took a local HVAC business to the top 3 map pack and an AI Overview placement in 60 days. When you work with SearchPrex, you work directly with me.&rdquo;"
-          imageSrc="/images/mubashar-shahzad.jpg"
+          imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Local SEO Strategist"
           linkedinUrl={LINKEDIN}
         />
