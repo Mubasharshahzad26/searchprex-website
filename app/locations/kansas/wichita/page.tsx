@@ -17,6 +17,8 @@ import DeviceMockups from "@/components/wichita/DeviceMockups";
  
 import { getPageSEO } from "@/lib/admin-seo";
 import { organizationRef } from "@/lib/site-schema";
+import Link from "next/link";
+import { kansasCities } from "@/lib/kansas-cities";
 export const dynamic = "force-dynamic";
  
 const SITE = "https://www.searchprex.com";
@@ -106,10 +108,13 @@ const FAQS = [
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
+    // Service, not ProfessionalService (a LocalBusiness subtype): there is no
+    // Wichita office. Provider is lib/site-schema.ts's Organization.
     {
-      "@type": "ProfessionalService",
+      "@type": "Service",
       "@id": `${PAGE_URL}#service`,
-      name: "SearchPrex \u2014 Wichita Law Firm SEO",
+      name: "Law Firm SEO in Wichita, KS",
+      serviceType: "Law Firm SEO",
       description: "Local SEO services for law firms in Wichita, Kansas.",
       url: PAGE_URL,
       areaServed: { "@type": "City", name: "Wichita", containedInPlace: { "@type": "State", name: "Kansas" } },
@@ -757,6 +762,35 @@ export default function WichitaPage() {
         </a>
         <div style={{ fontSize: 12, color: "#d6efe6", marginTop: 14 }}>Free 30-min call · No commitment · Reply within 24 hours</div>
       </section>
+
+      {/* 15 — WAY BACK UP
+          The schema has always declared Home › Locations › Kansas › Wichita, but
+          nothing on the page linked to Kansas or Locations. It sits here rather
+          than above the hero because AiFinderHero owns the space under the fixed
+          nav. */}
+      <nav aria-label="Breadcrumb" style={{ background: "#f8f9fc", borderTop: "1px solid #e2e8f0", padding: "22px 26px" }}>
+        <div style={{ maxWidth: 1080, margin: "0 auto", fontSize: 13, color: "#64748b" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 10 }}>
+            <Link href="/" style={{ color: "#64748b" }}>Home</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/locations" style={{ color: "#64748b" }}>Locations</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/locations/kansas" style={{ color: "#64748b" }}>Kansas</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" style={{ color: BRAND.ink, fontWeight: 600 }}>Wichita</span>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
+            <span style={{ fontWeight: 600, color: BRAND.ink }}>Other Kansas markets:</span>
+            {kansasCities
+              .filter((c) => c.slug !== "wichita")
+              .map((c) => (
+                <Link key={c.slug} href={`/locations/kansas/${c.slug}`} style={{ color: BRAND.green, fontWeight: 600 }}>
+                  {c.name}
+                </Link>
+              ))}
+          </div>
+        </div>
+      </nav>
     </main>
   );
 }

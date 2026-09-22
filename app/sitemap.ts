@@ -9,6 +9,7 @@ import { caseStudies, detailUrl } from "./all-case-studies/data";
 import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
 import { getAllCityParams } from "@/lib/city-pages";
+import { getDynamicStateHubSlugs } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { isGatedRoute } from "@/lib/gated-routes";
 
@@ -207,11 +208,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Derived from the city data so adding a city is one entry, not two. The hub
   // is listed above its cities because it is the page that links them together.
   add({
+    url: absolute("/locations"),
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  });
+  add({
     url: absolute("/locations/kansas"),
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.7,
   });
+  // State hubs exist only for states with two or more cities; see lib/locations.ts.
+  for (const state of getDynamicStateHubSlugs()) {
+    add({
+      url: absolute(`/locations/${state}`),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
+  }
 
   const newsCategories = ["AI SEO", "LLMs", "Tools", "Ecommerce", "Technical"];
   for (const cat of newsCategories) {

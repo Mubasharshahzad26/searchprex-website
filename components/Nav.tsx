@@ -34,8 +34,10 @@ const navLinks: NavLink[] = [
     href: "/locations",
     label: "Locations",
     hasDropdown: true,
-    linkable: false,
+    // Linkable now that /locations exists; it was a bare dropdown trigger
+    // because the hub used to 404.
     dropdownItems: [
+      { href: "/locations", label: "All locations" },
       ...CITY_PAGES.map((c) => ({
         href: `/locations/${c.stateSlug}/${c.citySlug}`,
         label: `${c.city}, ${c.stateAbbr}`,

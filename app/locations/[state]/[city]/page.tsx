@@ -38,8 +38,9 @@ import {
   getSiblingCities,
   type CityPage,
 } from "@/lib/city-pages";
-
-const SITE = "https://www.searchprex.com";
+import { findPracticePage, getLocationState } from "@/lib/locations";
+import type { IndustryPage } from "@/lib/industry-pages";
+import { SITE, organizationRef } from "@/lib/site-schema";
 
 /**
  * Anchor variants for the link to the local news spoke. One template renders
@@ -117,15 +118,30 @@ export default async function CityPage({
 
   const url = `${SITE}/locations/${page.stateSlug}/${page.citySlug}`;
   const siblings = getSiblingCities(page);
+  // Null for a one-city state, which has no hub page to link to.
+  const stateHubHref = getLocationState(page.stateSlug)?.hubHref ?? null;
+  // Unique practice-area pages matching this city's demand, in demand order.
+  const practicePages = [
+    ...new Map(
+      page.practiceDemand
+        .map((d) => findPracticePage(d.area))
+        .filter((ip): ip is IndustryPage => Boolean(ip))
+        .map((ip) => [ip.slug, ip])
+    ).values(),
+  ];
 
   return (
     <>
-      <Schema page={page} url={url} />
+      <Schema page={page} url={url} stateHubHref={stateHubHref} />
 
+      {/* Follows the URL — Locations › State › City. It used to go Home › Law
+          Firm SEO › City while /locations and the state level 404'd; the link
+          to the service page now lives in the body, under practice areas. */}
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },
-          { label: "Law Firm SEO", href: "/services/law-firm-seo" },
+          { label: "Locations", href: "/locations" },
+          ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
           { label: `${page.city}, ${page.stateAbbr}` },
         ]}
       />
@@ -220,6 +236,30 @@ export default async function CityPage({
               />
             ))}
           </CardGrid>
+          <p className={`${text.small} mt-6`} style={{ color: color.muted }}>
+            How each of these is ranked, anywhere in the US:{" "}
+            {practicePages.map((ip, i) => (
+              <span key={ip.slug}>
+                <Link
+                  href={`/services/law-firm-seo/${ip.slug}`}
+                  className="font-semibold underline underline-offset-2"
+                  style={{ color: color.primary }}
+                >
+                  {ip.name} SEO
+                </Link>
+                {i < practicePages.length - 1 ? " · " : ""}
+              </span>
+            ))}
+            {practicePages.length ? " — or start with " : ""}
+            <Link
+              href="/services/law-firm-seo"
+              className="font-semibold underline underline-offset-2"
+              style={{ color: color.primary }}
+            >
+              how law firm SEO works
+            </Link>
+            .
+          </p>
         </Section>
 
         {/* ── JURISDICTION-SPECIFIC ── */}
@@ -276,14 +316,14 @@ export default async function CityPage({
           <FaqList faqs={page.faqs} name={`${page.citySlug}-faq`} />
         </Section>
 
-        {/* ── SIBLING CITIES ── */}
-        {siblings.length > 0 ? (
-          <Section tone="surface" tight>
-            <SectionHeading
-              eyebrow="Nearby"
-              title={`Also serving ${page.state}`}
-              className="mb-6"
-            />
+        {/* ── SIBLING CITIES + WAY BACK UP ── */}
+        <Section tone="surface" tight>
+          <SectionHeading
+            eyebrow="Nearby"
+            title={siblings.length > 0 ? `Also serving ${page.state}` : "Other markets we serve"}
+            className="mb-6"
+          />
+          {siblings.length > 0 ? (
             <ul className="flex flex-wrap gap-3">
               {siblings.map((s) => (
                 <li key={s.citySlug}>
@@ -298,8 +338,21 @@ export default async function CityPage({
                 </li>
               ))}
             </ul>
-          </Section>
-        ) : null}
+          ) : null}
+          <p className={`${text.small} ${siblings.length > 0 ? "mt-6" : ""}`} style={{ color: color.muted }}>
+            {stateHubHref ? (
+              <>
+                <Link href={stateHubHref} className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
+                  All {page.state} cities
+                </Link>
+                {" · "}
+              </>
+            ) : null}
+            <Link href="/locations" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
+              Every state and city we cover
+            </Link>
+          </p>
+        </Section>
 
         {/*
           Varied anchor text on purpose: this template renders every city page,
@@ -382,64 +435,19 @@ function FactPanel({
 }
 
 /**
- * ProfessionalService + Service + FAQPage + BreadcrumbList.
+ * Service + FAQPage + BreadcrumbList.
  *
- * ProfessionalService is a LocalBusiness subtype, which is what gives these
- * pages a local-business signal Google understands.
- *
- * What it deliberately does NOT carry is a street address in this city.
- * LocalBusiness markup is meant to describe a place a customer can physically
- * visit, and SearchPrex is remote — there is no Detroit office, no Cleveland
- * office. Publishing one would be a fabricated NAP, which is both dishonest and
- * a documented way to get local markup ignored or penalised. `areaServed`
- * carries the geography instead, which is the accurate claim: we serve this
- * city, we are not located in it.
+ * No ProfessionalService. It is a LocalBusiness subtype, which describes a
+ * place a customer can visit, and there is no Detroit office or Cleveland
+ * office — the old node already had to leave `address` out for exactly that
+ * reason. A Service with `areaServed` makes the accurate claim (we serve this
+ * city, we are not located in it), and its provider is the one Organization
+ * defined in lib/site-schema.ts rather than another inline copy of it.
  *
  * FAQPage carries every question the page renders, because that markup is what
  * makes these answers eligible to be quoted in an AI Overview.
  */
-function Schema({ page, url }: { page: CityPage; url: string }) {
-  const areaServed = [
-    {
-      "@type": "City",
-      name: page.city,
-      containedInPlace: { "@type": "State", name: page.state },
-    },
-    { "@type": "AdministrativeArea", name: page.county },
-  ];
-
-  const professionalService = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": `${url}#localbusiness`,
-    name: `SearchPrex — Law Firm SEO, ${page.city}`,
-    description: page.metaDescription,
-    url,
-    // No `address` on purpose — see the note above. `areaServed` is the honest
-    // geographic claim for a remote agency.
-    areaServed,
-    priceRange: "$$",
-    email: "contact@searchprex.com",
-    telephone: "+92-305-9158010",
-    knowsAbout: [
-      "Law firm SEO",
-      "Local SEO",
-      "Google Business Profile optimisation",
-      ...page.practiceDemand.map((p) => p.area),
-    ],
-    parentOrganization: {
-      "@type": "Organization",
-      name: "SearchPrex",
-      url: SITE,
-    },
-    founder: {
-      "@type": "Person",
-      name: "Mubashar Sharif",
-      jobTitle: "Founder & Lead SEO Strategist",
-      sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
-    },
-  };
-
+function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stateHubHref: string | null }) {
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -448,17 +456,7 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
     serviceType: "Law Firm SEO",
     description: page.metaDescription,
     url,
-    provider: {
-      "@type": "Organization",
-      name: "SearchPrex",
-      url: SITE,
-      founder: {
-        "@type": "Person",
-        name: "Mubashar Sharif",
-        jobTitle: "Founder & Lead SEO Strategist",
-        sameAs: ["https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"],
-      },
-    },
+    provider: organizationRef,
     areaServed: [
       { "@type": "City", name: page.city, containedInPlace: { "@type": "State", name: page.state } },
       { "@type": "AdministrativeArea", name: page.county },
@@ -485,14 +483,22 @@ function Schema({ page, url }: { page: CityPage; url: string }) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-      { "@type": "ListItem", position: 2, name: "Law Firm SEO", item: `${SITE}/services/law-firm-seo` },
-      { "@type": "ListItem", position: 3, name: `${page.city}, ${page.stateAbbr}`, item: url },
+      { "@type": "ListItem", position: 2, name: "Locations", item: `${SITE}/locations` },
+      ...(stateHubHref
+        ? [{ "@type": "ListItem", position: 3, name: page.state, item: `${SITE}${stateHubHref}` }]
+        : []),
+      {
+        "@type": "ListItem",
+        position: stateHubHref ? 4 : 3,
+        name: `${page.city}, ${page.stateAbbr}`,
+        item: url,
+      },
     ],
   };
 
   return (
     <>
-      {[professionalService, service, faq, breadcrumb].map((s, i) => (
+      {[service, faq, breadcrumb].map((s, i) => (
         <script
           key={i}
           type="application/ld+json"

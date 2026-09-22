@@ -363,6 +363,18 @@ export default function LawFirmSEOClient() {
             </Link>
           ))}
         </div>
+        {/* The grid above is lib/city-pages only; Kansas lives in its own tree,
+            and the hub is the one page that lists both. */}
+        <p className={`${text.small} mt-6`} style={{ color: color.muted }}>
+          Also serving{" "}
+          <Link href="/locations/kansas" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
+            cities across Kansas
+          </Link>
+          {" · "}
+          <Link href="/locations" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
+            See every state and city we cover
+          </Link>
+        </p>
       </Section>
 
       {/* <VideoTestimonials /> */}

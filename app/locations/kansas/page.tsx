@@ -6,6 +6,7 @@ import {
   Gavel, Users, Award, ShieldCheck, Building2, Search,
 } from "lucide-react";
 import { kansasCities } from "@/lib/kansas-cities";
+import { organizationRef } from "@/lib/site-schema";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const GREEN = "#3eb489";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
+    // Service, not ProfessionalService: the latter is a LocalBusiness subtype
+    // and describes a place to visit. There is no Kansas office; areaServed is
+    // the accurate claim. Provider is the one Organization in lib/site-schema.ts.
     {
-      "@type": "ProfessionalService",
+      "@type": "Service",
       "@id": "https://www.searchprex.com/locations/kansas#service",
-      name: "SearchPrex — Law Firm SEO Kansas",
+      name: "Law Firm SEO in Kansas",
+      serviceType: "Law Firm SEO",
       url: "https://www.searchprex.com/locations/kansas",
       description:
         "Founder-led SEO services for law firms and family law attorneys across Kansas.",
       areaServed: { "@type": "State", name: "Kansas" },
-      knowsAbout: [
-        "Law Firm SEO", "Family Law SEO", "Local SEO",
-        "Google Business Profile optimization", "Attorney E-E-A-T", "Legal YMYL content",
-      ],
-      founder: { "@id": "https://www.searchprex.com/#founder" },
+      provider: organizationRef,
     },
     // #founder is defined once in lib/site-schema.ts and rendered by the root
     // layout. The copy here had its own job title, and on the state page said
@@ -122,6 +123,15 @@ export default function KansasHubPage() {
       {/* ── HERO ── */}
       <section className="px-4 py-28" style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #16213f 100%)` }}>
         <div className="mx-auto max-w-4xl text-center">
+          {/* Visible counterpart of the BreadcrumbList above, which already named
+              /locations as the parent — a page that now exists. */}
+          <nav aria-label="Breadcrumb" className="mb-8 flex items-center justify-center gap-2 text-xs font-semibold text-white/60">
+            <Link href="/" className="transition-colors hover:text-white">Home</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/locations" className="transition-colors hover:text-white">Locations</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" className="text-white">Kansas</span>
+          </nav>
           <div
             className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-widest"
             style={{ borderColor: "rgba(62,180,137,0.35)", color: GREEN, background: "rgba(62,180,137,0.08)" }}

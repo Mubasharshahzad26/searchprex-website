@@ -267,6 +267,12 @@ export default function Footer() {
                 >
                   Kansas
                 </Link>
+                <Link
+                  href="/locations"
+                  className="rounded-full border border-white/40 px-3 py-1 text-xs font-semibold text-white/80 transition-colors hover:border-white hover:text-white"
+                >
+                  All locations →
+                </Link>
               </div>
             </div>
           </div>

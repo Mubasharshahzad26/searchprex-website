@@ -7,6 +7,7 @@ import {
   ArrowUpRight, ChevronDown, Landmark, Users, Building2, ShieldCheck,
 } from "lucide-react";
 import { getCityBySlug, getAllCitySlugs } from "@/lib/kansas-cities";
+import { organizationRef } from "@/lib/site-schema";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
@@ -42,15 +43,17 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
+      // Service, not ProfessionalService (a LocalBusiness subtype): there is no
+      // office in this city. Provider is lib/site-schema.ts's Organization.
       {
-        "@type": "ProfessionalService",
+        "@type": "Service",
         "@id": `${url}#service`,
-        name: `SearchPrex — Law Firm SEO in ${city.name}, KS`,
+        name: `Law Firm SEO in ${city.name}, KS`,
+        serviceType: "Law Firm SEO",
         url,
         description: city.metaDescription,
         areaServed: { "@type": "City", name: `${city.name}, Kansas` },
-        knowsAbout: ["Law Firm SEO", "Family Law SEO", "Local SEO", "Google Business Profile optimization", "Attorney E-E-A-T"],
-        founder: { "@id": "https://www.searchprex.com/#founder" },
+        provider: organizationRef,
       },
       // #founder is defined once in lib/site-schema.ts and rendered by the root
       // layout. The copy here carried its own, different job title.
@@ -68,8 +71,9 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         "@id": `${url}#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://www.searchprex.com" },
-          { "@type": "ListItem", position: 2, name: "Kansas", item: "https://www.searchprex.com/locations/kansas" },
-          { "@type": "ListItem", position: 3, name: city.name, item: url },
+          { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.searchprex.com/locations" },
+          { "@type": "ListItem", position: 3, name: "Kansas", item: "https://www.searchprex.com/locations/kansas" },
+          { "@type": "ListItem", position: 4, name: city.name, item: url },
         ],
       },
     ],
@@ -90,6 +94,8 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center justify-center gap-2 text-xs font-semibold text-[#64748b]">
             <Link href="/" className="transition-colors hover:text-[#0a0f2e]">Home</Link>
+            <span>/</span>
+            <Link href="/locations" className="transition-colors hover:text-[#0a0f2e]">Locations</Link>
             <span>/</span>
             <Link href="/locations/kansas" className="transition-colors hover:text-[#0a0f2e]">Kansas</Link>
             <span>/</span>
