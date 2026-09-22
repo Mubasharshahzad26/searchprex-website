@@ -13,7 +13,7 @@ import {
   ArrowRight, Shield, CheckCircle, MapPin, Play, Youtube, X, Phone,
   BarChart3, ZoomIn, ChevronRight,
 } from "lucide-react";
-import { detailUrl, type CaseStudy } from "../../../all-case-studies/data";
+import { detailUrl, type CaseStudy } from "../../data";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
@@ -45,7 +45,9 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
               className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-[#64748b]">
               <Link href="/case-studies" className="transition-colors hover:text-[#534AB7]">Case Studies</Link>
               <ChevronRight className="h-3.5 w-3.5" />
-              <Link href={`/all-case-studies?industry=${cs.slug.industry}`} className="transition-colors hover:text-[#534AB7]">{cs.industry}</Link>
+              {/* Plain text: no per-industry listing exists, and the old link's
+                  ?industry= param was never read by the grid. */}
+              <span>{cs.industry}</span>
               <ChevronRight className="h-3.5 w-3.5" />
               <span className="font-semibold text-[#0a0f2e]">{cs.client}</span>
             </motion.nav>
@@ -298,7 +300,7 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-8 flex items-end justify-between">
               <h2 className="text-2xl font-black text-[#0a0f2e]">More {cs.seoType} results</h2>
-              <Link href="/all-case-studies"
+              <Link href="/case-studies"
                 className="inline-flex items-center gap-1 text-sm font-bold transition-colors hover:opacity-80"
                 style={{ color: PURPLE }}>
                 View all <ArrowRight className="h-4 w-4" />

@@ -103,7 +103,7 @@ export default async function Page(
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/all-case-studies` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/case-studies` },
       { "@type": "ListItem", position: 3, name: mappedCs.client, item: `${SITE}/case-studies/${dbCs.slug}` },
     ],
   };

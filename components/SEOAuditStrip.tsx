@@ -342,7 +342,7 @@ export default function SEOAuditStrip() {
               {name}
             </span>
           ))}
-          <Link href="/all-case-studies" className="text-sm font-bold text-[#534AB7] hover:underline">
+          <Link href="/case-studies" className="text-sm font-bold text-[#534AB7] hover:underline">
             + see the results →
           </Link>
         </motion.div>

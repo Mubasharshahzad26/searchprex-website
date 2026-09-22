@@ -4,7 +4,7 @@
 // Before this file existed, seven different accent colours were in play across
 // the site (#534AB7, #2563eb, #3eb489, #ff642d, #ff5e2e, #7b61ff, #191a1f) —
 // each page had picked its own. The palette below is derived from the pages
-// that already look right and must not change: the home page, /all-case-studies,
+// that already look right and must not change: the home page, /case-studies,
 // /experts, and /why-us.
 //
 // Import these instead of hardcoding hex values. Tailwind arbitrary values are

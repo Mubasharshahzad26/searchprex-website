@@ -4,38 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
 import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
+import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
  
 const PURPLE = "#534AB7";
 const GREEN = "#3eb489";
  
-/* Ranges LOCKED to /pricing page (source of truth) */
-const plans = [
-  {
-    niche: "Local SEO",
-    range: "$800 – $1,500",
-    best: "Local service businesses",
-    includes: ["GBP & map pack", "Citations & NAP", "Local content"],
-    accent: "#0e7490",
-    bg: "#ecfeff",
-  },
-  {
-    niche: "Law Firm SEO",
-    range: "$1,200 – $2,500",
-    best: "Solo to multi-partner firms",
-    includes: ["Practice-area pages", "E-E-A-T content", "Local pack targeting"],
-    accent: PURPLE,
-    bg: "#f5f3ff",
-    featured: true,
-  },
-  {
-    niche: "Ecommerce SEO",
-    range: "$1,500 – $4,000",
-    best: "Shopify & WooCommerce stores",
-    includes: ["Technical SEO at scale", "Product page content", "Schema & indexing"],
-    accent: "#196b4d",
-    bg: "#dcf2ea",
-  },
-];
+// Ranges come from lib/pricing.ts, which /pricing's schema and meta
+// description also read, so the numbers cannot drift between them.
+const plans = RETAINER_PLANS;
  
 export default function Pricing() {
   return (
@@ -85,7 +61,7 @@ export default function Pricing() {
                 {p.niche}
               </span>
               <div className="mt-4 text-2xl font-black text-[#0a0f2e]">
-                {p.range}<span className="text-sm font-bold text-[#6b7280]"> / mo</span>
+                {formatRange(p)}<span className="text-sm font-bold text-[#6b7280]"> / mo</span>
               </div>
               <p className="mb-5 mt-1 text-xs text-[#566070]">Best for: {p.best}</p>
               <ul className="mb-6 space-y-2">

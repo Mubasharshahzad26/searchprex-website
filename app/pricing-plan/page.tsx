@@ -14,8 +14,14 @@ const baseMetadata: Metadata = {
   alternates: { canonical: "https://www.searchprex.com/pricing-plan" },
 };
 
+// Kept live for a payment provider's verification, but noindexed: it competed
+// with /pricing for the same queries while quoting different terms. Applied
+// after getPageSEO on purpose — the CMS row's robots field ("index, follow")
+// would otherwise override anything set in baseMetadata. Listed in the
+// sitemap's NOINDEX_ROUTES for the same reason.
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageSEO("/pricing-plan", baseMetadata);
+  const metadata = await getPageSEO("/pricing-plan", baseMetadata);
+  return { ...metadata, robots: { index: false, follow: true } };
 }
 
 export default function PricingPage() {

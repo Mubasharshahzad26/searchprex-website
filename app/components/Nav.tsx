@@ -37,7 +37,7 @@ const navLinks: NavLink[] = [
     hasDropdown: true,
     dropdownItems: [
       { href: "/case-studies",     label: "Featured Case Studies" },
-      { href: "/all-case-studies", label: "All Case Studies" },
+      { href: "/case-studies", label: "All Case Studies" },
     ],
   },
   {

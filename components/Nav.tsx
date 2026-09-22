@@ -56,7 +56,7 @@ const navLinks: NavLink[] = [
     ],
   },
   {
-    href: "/all-case-studies",
+    href: "/case-studies",
     label: "Case Studies",
   },
   {

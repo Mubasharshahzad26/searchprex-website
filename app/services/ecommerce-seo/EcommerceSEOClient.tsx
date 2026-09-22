@@ -16,7 +16,7 @@ import {
   TrendingUp, Package, Layers, Zap, Database,
   Wrench, Target, FileCode, GitBranch, AlertTriangle,
 } from "lucide-react";
-import { caseStudies, detailUrl, type CaseStudy } from "../../all-case-studies/data";
+import { caseStudies, detailUrl, type CaseStudy } from "@/app/case-studies/data";
 import {
   AuthorCard,
   CardGrid,

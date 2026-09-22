@@ -46,6 +46,14 @@ const nextConfig = {
         destination: '/tools/keyword-research',
         permanent: true,
       },
+      {
+        // The two case-study hubs were merged into /case-studies, the URL the
+        // detail pages already sit under. The query string carries over, so
+        // ?vertical=ecommerce deep links keep their filter.
+        source: '/all-case-studies',
+        destination: '/case-studies',
+        permanent: true,
+      },
     ]
   },
 

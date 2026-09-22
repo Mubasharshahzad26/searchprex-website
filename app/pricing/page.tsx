@@ -13,17 +13,26 @@ import {
 } from "@/components/layout";
 
 import { getPageSEO } from "@/lib/admin-seo";
+import { LOWEST_RETAINER, RETAINER_PLANS, formatUsd } from "@/lib/pricing";
+
+// No "90-day money-back guarantee" anywhere on this page. It used to be in the
+// meta description, the Open Graph copy, an FAQ answer and the closing band,
+// while the homepage FAQ says — correctly — that rankings are not guaranteed
+// and no refund is offered. The "from $1,500" starting price was also wrong
+// against the ranges this page renders, which start at $800.
+const DESCRIPTION = `Transparent monthly SEO retainers: ${RETAINER_PLANS.map(
+  (p) => `${p.niche.replace(" SEO", "").toLowerCase()} from ${formatUsd(p.min)}`
+).join(", ")}. Exact scope set after a free audit. Monthly, no long-term contracts.`;
+
 const baseMetadata: Metadata = {
   title: "SEO Pricing Plans — USA SEO Agency",
-  description:
-    "Transparent SEO pricing for law firms, ecommerce stores, and local businesses. Starting at $1,500/month. No long-term contracts. 90-day money-back guarantee.",
+  description: DESCRIPTION,
   alternates: {
     canonical: "https://www.searchprex.com/pricing",
   },
   openGraph: {
     title: "SEO Pricing Plans - SearchPrex USA SEO Agency",
-    description:
-      "Transparent SEO pricing starting at $1,500/month. No contracts, 90-day guarantee.",
+    description: `Monthly SEO retainers from ${formatUsd(LOWEST_RETAINER)}, set after a free audit. No long-term contracts.`,
     url: "https://www.searchprex.com/pricing",
     type: "website",
   },
@@ -41,8 +50,10 @@ const faqs: Faq[] = [
     a: "No hidden setup fees. The monthly price you see is the price you pay. We include onboarding and initial setup in all plans.",
   },
   {
-    q: "What's included in the 90-day guarantee?",
-    a: "If you don't see measurable improvement in rankings, traffic, or leads within 90 days, we'll work for free until you do — or provide a full refund.",
+    // Same answer as the homepage FAQ, word for word, so the two pages cannot
+    // make different promises again.
+    q: "Do you offer guarantees?",
+    a: "Not on rankings — nobody can honestly guarantee a position, and any agency that does is telling you what you want to hear. What I do guarantee is process: your reality check report lands within 24 hours, or I tell you why not before the deadline rather than after it. You also get one client per city per practice area, so I am never optimising your competitor at the same time.",
   },
   {
     q: "Can I upgrade or downgrade my plan?",
@@ -55,48 +66,33 @@ const faqs: Faq[] = [
 ];
 
 export default function PricingPage() {
+  // Built from the same ranges the page renders. Each is a monthly range, not a
+  // fixed price, so it is a priceSpecification with min and max.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "SEO Pricing Plans",
-    "description": "Transparent SEO pricing for businesses of all sizes.",
+    "description": DESCRIPTION,
     "url": "https://www.searchprex.com/pricing",
     "mainEntity": {
       "@type": "ItemList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "Offer",
-            "name": "Beginning Plan",
-            "price": "1500",
+      "itemListElement": RETAINER_PLANS.map((p, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "Offer",
+          "name": `${p.niche} retainer`,
+          "description": `Monthly ${p.niche} for ${p.best.toLowerCase()}. Exact scope set after a free audit.`,
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "minPrice": p.min,
+            "maxPrice": p.max,
             "priceCurrency": "USD",
-            "description": "For startups and small businesses starting their SEO journey"
-          }
+            "unitText": "MONTH",
+          },
         },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "Offer",
-            "name": "Agency Level Plan",
-            "price": "3500",
-            "priceCurrency": "USD",
-            "description": "For growing businesses requiring comprehensive SEO management"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "Offer",
-            "name": "Enterprise Plan",
-            "description": "Custom solutions for large organizations with complex needs"
-          }
-        }
-      ]
-    }
+      })),
+    },
   };
 
   return (
@@ -135,7 +131,7 @@ export default function PricingPage() {
               icon: <Phone className="h-4 w-4" aria-hidden />,
             },
           ]}
-          trustPoints={["No Credit Card Required", "Cancel Anytime", "90-Day Guarantee"]}
+          trustPoints={["No Credit Card Required", "Monthly, no long-term contract", "Free audit first"]}
         />
       </main>
       <ChatWidget />

@@ -5,7 +5,7 @@
 import type { MetadataRoute } from "next";
 
 import { db } from "@/lib/db";
-import { caseStudies, detailUrl } from "./all-case-studies/data";
+import { caseStudies, detailUrl } from "./case-studies/data";
 import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
 import { getAllCityParams } from "@/lib/city-pages";
@@ -46,7 +46,6 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/experts", priority: 0.6, changeFrequency: "monthly" },
   { path: "/why-us", priority: 0.6, changeFrequency: "monthly" },
   { path: "/case-studies", priority: 0.9, changeFrequency: "weekly" },
-  { path: "/all-case-studies", priority: 0.9, changeFrequency: "weekly" },
   { path: "/resources", priority: 0.7, changeFrequency: "weekly" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
   { path: "/resources/news", priority: 0.6, changeFrequency: "weekly" },
@@ -74,7 +73,6 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/growth-plan", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/pricing", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/pricing-plan", priority: 0.7, changeFrequency: "monthly" },
   // Location pages are appended below from lib/kansas-cities, not listed here.
   // The previous comment claimed /locations/kansas "always calls notFound()" —
   // it does not: it is a working hub that returns 200 and links to all eight
@@ -106,14 +104,15 @@ function absolute(path: string): string {
  * then told to ignore, and shows up in Search Console as "Alternate page with
  * proper canonical tag".
  *
- *   /nicheseopro  308s to /tools/keyword-research (next.config redirect)
- *   /action-plan  declares canonical /free-audit (app/action-plan/page.tsx)
+ *   /nicheseopro       308s to /tools/keyword-research (next.config redirect)
+ *   /all-case-studies  308s to /case-studies (next.config redirect)
+ *   /action-plan       declares canonical /free-audit (app/action-plan/page.tsx)
  *
  * Both have published CMS rows, so removing them from STATIC_ROUTES is not
  * enough — the CMS loop re-adds them. Same reason the gated-route guard lives
  * inside `add`.
  */
-const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/action-plan"]);
+const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/all-case-studies", "/action-plan"]);
 
 /**
  * Routes whose page sets `robots: noindex` in its own `metadata` export.
@@ -124,7 +123,9 @@ const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/action-plan"]);
  * the same page. Add a route here whenever you noindex it in code, and remove it
  * when the robots block goes.
  */
-const NOINDEX_ROUTES = new Set<string>([]);
+// /pricing-plan stays live (a payment provider's verification points at it)
+// but is noindexed so it no longer competes with /pricing.
+const NOINDEX_ROUTES = new Set<string>(["/pricing-plan"]);
 
 function derivePriority(path: string): number {
   if (path === "/") return 1.0;

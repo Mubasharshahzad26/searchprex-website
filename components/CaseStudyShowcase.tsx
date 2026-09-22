@@ -21,11 +21,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
-import { caseStudies, detailUrl } from "@/app/all-case-studies/data";
+import { caseStudies, detailUrl } from "@/app/case-studies/data";
 import { color, radius } from "@/lib/design-tokens";
 
 // Featured first, then the rest. Twelve is plenty for a homepage slider —
-// /all-case-studies remains the destination for the full set.
+// /case-studies remains the destination for the full set.
 const shown = [
   ...caseStudies.filter((c) => c.featured),
   ...caseStudies.filter((c) => !c.featured),
@@ -212,7 +212,7 @@ export default function CaseStudyShowcase() {
 
         <div className="mt-6 text-center">
           <Link
-            href="/all-case-studies"
+            href="/case-studies"
             className="inline-flex items-center gap-1.5 text-sm font-bold"
             style={{ color: color.primary }}
           >

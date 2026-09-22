@@ -8,7 +8,7 @@
  
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { caseStudies, findBySlug, detailUrl } from "../../../all-case-studies/data";
+import { caseStudies, findBySlug, detailUrl } from "../../data";
 import CaseStudyDetail from "./CaseStudyDetail";
  
 const SITE = "https://www.searchprex.com";
@@ -85,8 +85,9 @@ export default async function Page(
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
       { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/case-studies` },
-      { "@type": "ListItem", position: 3, name: cs.industry, item: `${SITE}/all-case-studies?industry=${cs.slug.industry}` },
-      { "@type": "ListItem", position: 4, name: cs.client, item: `${SITE}${detailUrl(cs)}` },
+      // No industry level: there is no HVAC or Roofing listing page to point at
+      // (the grid filters by SEO type), and a breadcrumb item must be a page.
+      { "@type": "ListItem", position: 3, name: cs.client, item: `${SITE}${detailUrl(cs)}` },
     ],
   };
  

@@ -88,7 +88,7 @@ export default function Results() {
             </p>
           </div>
           <Link
-            href="/all-case-studies"
+            href="/case-studies"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#0a0f2e] transition-colors hover:bg-[#f8f9fc] ring-1 ring-[#e6e8f0]"
           >
             Browse all case studies <ArrowRight className="h-4 w-4" />

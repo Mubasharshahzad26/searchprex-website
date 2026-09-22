@@ -85,7 +85,7 @@ export async function createMarketingCaseStudy(data: any) {
   const { content, ...validData } = data;
   const caseStudy = await db.marketingCaseStudy.create({ data: validData });
   revalidatePath("/content-admin/case-studies");
-  revalidatePath("/all-case-studies");
+  revalidatePath("/case-studies");
   return caseStudy;
 }
 
@@ -94,7 +94,7 @@ export async function updateMarketingCaseStudy(id: string, data: any) {
   const { content, ...validData } = data;
   const caseStudy = await db.marketingCaseStudy.update({ where: { id }, data: validData });
   revalidatePath("/content-admin/case-studies");
-  revalidatePath("/all-case-studies");
+  revalidatePath("/case-studies");
   return caseStudy;
 }
 

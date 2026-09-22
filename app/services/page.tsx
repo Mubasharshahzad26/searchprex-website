@@ -69,7 +69,7 @@ const services = [
       "AI Overview / AEO optimization for legal queries",
     ],
     proof: { v: "Featured", l: "AI Overview placement" },
-    proofLink: "/all-case-studies",
+    proofLink: "/case-studies",
     proofLabel: "See verified results",
   },
   {
@@ -250,7 +250,7 @@ export default function ServicesPage() {
           label: "Get Free SEO Audit",
           icon: <ArrowRight className="h-4 w-4" aria-hidden />,
         }}
-        secondaryCta={{ href: "/all-case-studies", label: "See All Case Studies" }}
+        secondaryCta={{ href: "/case-studies", label: "See All Case Studies" }}
       />
 
       <StatStrip tone="ink" stats={bigStats.map((s) => ({ value: s.v, label: s.l }))} />
