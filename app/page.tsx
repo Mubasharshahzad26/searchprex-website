@@ -4,26 +4,18 @@ import type { Metadata } from "next";
 import Hero from "../components/Hero";
 import ClientLogos from "../components/ClientLogos";
 import RevenueProof from "../components/RevenueProof";
-import QuickAuditBar from "../components/QuickAuditBar";
 import RecoveryStory from "../components/RecoveryStory";
 import LocalSeoProof from "../components/LocalSeoProof";
 import LawFirmProof from "../components/LawFirmProof";
-import PersonaSolutions from "../components/PersonaSolutions";
-import NicheSeoProShowcase from "../components/NicheSeoProShowcase";
-import AuditWalkthrough from "../components/AuditWalkthrough";
 import TrustBar from "../components/TrustBar";
-import LeadWizard from "../components/LeadWizard";
 import Process from "../components/Process";
 import Pricing from "../components/Pricing";
 import StickyMobileCTA from "../components/StickyMobileCTA";
 import Services from "../components/Services";
 import AuroraBackground from "../components/AuroraBackground";
-import Results from "../components/Results";
-import AIVisibilityShowcase from "../components/AIVisibilityShowcase";
 import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
 import FounderSection from "../components/FounderSection";
 import FAQ from "../components/FAQ";
-import EmotionalLeadForm from "../components/EmotionalLeadForm";
 import FreeResources from "../components/FreeResources";
 import BlogTeaser from "../components/BlogTeaser";
 import Reveal from "@/components/Reveal";
@@ -31,14 +23,14 @@ import ChatWidgetLazy from "@/components/ChatWidgetLazy";
 
 import { SITE, founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 
-// The title, the H1 in components/Hero.tsx and this description all lead with
-// the same phrase. They used to disagree: the title said "Boutique SEO Agency
-// USA", the H1 said "Law Firm SEO", and "SEO agency" appeared nowhere in the
-// body. The title is 53 characters and the description 144, so Google shows
-// both whole instead of truncating at ~60 and ~155.
-const HOME_TITLE = "Founder-Led SEO Agency for US Businesses | SearchPrex";
+// The title, the H1 in components/Hero.tsx and this description all name the
+// same three verticals with "SEO agency". They used to disagree: the title
+// said "Boutique SEO Agency USA", the H1 said "Law Firm SEO", and "SEO agency"
+// appeared nowhere in the body. The title is 51 characters and the description
+// 134, so Google shows both whole instead of truncating at ~60 and ~155.
+const HOME_TITLE = "Law Firm, Ecommerce & Local SEO Agency | SearchPrex";
 const HOME_DESCRIPTION =
-  "Founder-led SEO agency for US law firms, Shopify stores and local service businesses. Senior work only, backed by unedited Search Console proof.";
+  "Founder-led SEO for US law firms, Shopify and WooCommerce stores, and local businesses. Get more cases, organic sales and local leads.";
 
 const baseMetadata: Metadata = {
   title: HOME_TITLE,
@@ -169,8 +161,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="main-content">
-        {/* Claim -> proof -> offer, alternating. Never three of the same kind
-            in a row, and nothing links off-site before the form.
+        {/* Claim -> proof -> offer. Nothing links off-site before the offer.
             Moved off this page in Phase 2:
               LawFirmStack     -> /services/law-firm-seo (1 of 3 personas, and
                                   it sent visitors to codeloci.com mid-funnel)
@@ -179,61 +170,33 @@ export default async function Home() {
         <Hero />
         <Reveal><ClientLogos /></Reveal>
         <Reveal><TrustBar /></Reveal>
-        <Reveal><QuickAuditBar /></Reveal>
 
         {/* 2. Services */}
         <AuroraBackground variant="light">
           <Reveal><Services /></Reveal>
         </AuroraBackground>
 
-        {/* 3-8. The four services, as one interactive dashboard panel.
-            Replaces four separate PersonaProblemHeader blocks (~1,300px of
-            centred interstitial) with a tab rail that lets the four problems
-            be compared side by side and links each one to the section that
-            evidences it. The proof sections themselves are unchanged and keep
-            their original order below. */}
-        <Reveal><PersonaSolutions /></Reveal>
-
+        {/* 3. Proof, all of it together: ecommerce revenue, local map pack,
+            the de-indexing recovery, then where the law firm evidence stands
+            (which points back at the screenshots above it). */}
         <Reveal><RevenueProof /></Reveal>
         <Reveal><LocalSeoProof /></Reveal>
         <Reveal><RecoveryStory /></Reveal>
-        <Reveal><TrustpilotReviewSection /></Reveal>
-
-        {/* Directly after the de-indexing recovery, because that recovery is
-            this tool's own first case study — same client, same run. Anywhere
-            further down and it reads as an unrelated upsell instead of the
-            answer to "how did one person ship 11,549 pages?" */}
-        <Reveal><NicheSeoProShowcase /></Reveal>
-
         <Reveal><LawFirmProof /></Reveal>
 
+        {/* 4. What clients say, then who does the work. */}
+        <Reveal><TrustpilotReviewSection /></Reveal>
         <Reveal><FounderSection /></Reveal>
 
-        {/* 10. Emotional Lead Form */}
-        <Reveal><EmotionalLeadForm /></Reveal>
-
+        {/* 5. How it works, what it costs, what people ask. The page carries
+            no lead forms of its own any more (it had four); the audit CTAs
+            all go to /free-audit. */}
         <Reveal><Process /></Reveal>
-        
-        <Reveal><Results /></Reveal>
-
-        <Reveal><AIVisibilityShowcase /></Reveal>
-
-        <Reveal><AuditWalkthrough /></Reveal>
-
-        {/* 16. Pricing */}
         <Reveal><Pricing /></Reveal>
-
-        {/* 17. 2nd Lead form already presented on site */}
-        <LeadWizard />
-
-
-        {/* 19. Faqs */}
         <Reveal><FAQ /></Reveal>
-        
-        {/* 20. Free, ungated resources — deliberately after the offer, never before it. */}
-        <Reveal><FreeResources /></Reveal>
 
-        {/* 21. Blogs */}
+        {/* 6. Free, ungated resources — deliberately after the offer, never before it. */}
+        <Reveal><FreeResources /></Reveal>
         <Reveal><BlogTeaser /></Reveal>
       </main>
 

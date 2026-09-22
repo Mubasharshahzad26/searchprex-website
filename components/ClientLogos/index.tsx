@@ -32,8 +32,11 @@ export default function ClientLogos() {
           {/* Divider */}
           <div className="hidden h-8 w-px bg-[#d1d5db] lg:block" />
  
-          {/* Scrollable logos row */}
-          <div className="relative flex-1 overflow-hidden">
+          {/* Scrollable logos row.
+              w-full + min-w-0: on mobile the parent is a column with
+              items-start, so without them this row sized itself to the whole
+              logo track (~1,400px) and widened every phone's layout viewport. */}
+          <div className="relative w-full min-w-0 flex-1 overflow-hidden">
             {/* Left fade */}
             <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-[#f8f9fc] to-transparent" />
             {/* Right fade */}

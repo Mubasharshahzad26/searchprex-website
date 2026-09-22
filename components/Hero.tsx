@@ -9,7 +9,7 @@ import Certifications, { credentials } from "@/components/Certifications";
 import { color } from "@/lib/design-tokens";
 import {
   OFFER_HREF,
-  OFFER_CTA_BY_PERSONA,
+  OFFER_CTA,
   OFFER_MICROCOPY,
   CALL_HREF,
   CALL_CTA,
@@ -267,15 +267,20 @@ export default function Hero({ heroImage }: HeroProps) {
                 className="mb-4 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
                 style={{ color: CHARCOAL }}
               >
-                Founder-Led
+                {/* Four explicit lines. With the break after "Law Firms," alone,
+                    the first line was too wide for the column and wrapped into
+                    "SEO Agency for Law / Firms,". */}
+                SEO Agency for
                 <br />
-                SEO Agency
+                Law Firms,
+                <br />
+                Ecommerce &amp; Local
                 <br />
                 <span
                   className="inline-block border-b-[5px] pb-1"
                   style={{ borderColor: CHARCOAL }}
                 >
-                  for US Businesses.
+                  Businesses.
                 </span>
               </h1>
 
@@ -321,7 +326,7 @@ export default function Hero({ heroImage }: HeroProps) {
                   className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
                   style={{ background: GREEN }}
                 >
-                  {OFFER_CTA_BY_PERSONA[current.id]} <span aria-hidden="true">→</span>
+                  {OFFER_CTA} <span aria-hidden="true">→</span>
                 </Link>
               </div>
 
@@ -385,6 +390,7 @@ export default function Hero({ heroImage }: HeroProps) {
                           alt="Mubashar Sharif — Founder & Certified SEO Expert at SearchPrex"
                           fill
                           priority
+                          sizes="(max-width: 1024px) 100vw, 440px"
                           className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
                         />
                       </div>

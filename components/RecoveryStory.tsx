@@ -82,7 +82,9 @@ const phases = [
     metric: { value: "+3,723", label: "Newly indexed, 11 – 25 Jul 2026" },
     // The tool is named because it did the work, and because its own Search
     // Console captures for this account are the source of the figure above.
-    tool: { label: "Run on NicheSEO Pro Autopilot", href: "#nicheseo-pro" },
+    // Points at the product page: the #nicheseo-pro showcase this used to jump
+    // to has been taken off the homepage.
+    tool: { label: "Run on NicheSEO Pro Autopilot", href: "/tool" },
   },
   {
     icon: TrendingUp,
