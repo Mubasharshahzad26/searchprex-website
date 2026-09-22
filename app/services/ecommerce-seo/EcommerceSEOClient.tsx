@@ -74,27 +74,31 @@ const PILLARS = [
   { icon: Package, title: "Product page optimization at scale", body: "Programmatic content generation, unique descriptions, FAQ schema, and internal linking across thousands of SKUs — designed to pass Google's helpful content and E-E-A-T bar.", points: ["Unique HTML per product (no templated blocks)", "FAQ schema + JSON-LD Product markup", "Semantic internal links from category + brand pages"] },
   { icon: Target, title: "Category page authority", body: "Turn thin PLPs into topical hubs. Long-form buyer's guides above the fold, comparison tables, FAQ blocks, and merchandising signals that Google actually understands as expertise.", points: ["Buyer-intent H1 + intro copy per collection", "Comparison + specification tables", "Curated cross-linking between related PLPs"] },
   { icon: Database, title: "Structured data & rich results", body: "Product, Offer, AggregateRating, Review, Breadcrumb, FAQPage, and Organization schema — validated, monitored, and mapped to actual on-page data. No fabricated ratings, no schema markup Google will penalize.", points: ["Full Product + Offer + Breadcrumb schema", "FAQPage schema on 100% of product pages", "Weekly Rich Results monitoring in GSC"] },
-  { icon: Zap, title: "Indexing recovery", body: "Sitemap-to-GSC diffing, Google Indexing API automation, and priority-based submission queues that push high-impact URLs to the front — with quota management across service accounts.", points: ["Automated Sitemap ↔ GSC diff", "Indexing API queue with priority scoring", "Multi-account quota rotation (200/day per SA)"] },
+  // Rewritten to match /blog/google-indexing-api-python, which retracted the
+  // Indexing API approach on 27 Aug 2026: Google restricts that API to job
+  // postings and livestreams and names multi-account rotation as
+  // circumvention. This card was still selling both.
+  { icon: Zap, title: "Indexing recovery", body: "Sitemap-to-GSC diffing that shows which URLs Google declined and why, then the fix for each reason: crawl waste reclaimed, clean sitemaps split by template, internal links to orphaned products, and batched resubmission through Search Console.", points: ["Automated Sitemap ↔ GSC diff", "Crawled vs. discovered — triaged by reason", "Batched resubmission, re-measured in cohorts"] },
   { icon: TrendingUp, title: "AEO + AI Overview optimization", body: "Answer engine optimization for ChatGPT, Perplexity, Gemini, and Google's AI Overviews. Entity optimization, knowledge graph signals, and citation-worthy content that gets picked up as source material.", points: ["FAQ-first content architecture", "Entity + author schema for E-E-A-T", "Semantic clustering for AI retrievability"] },
 ];
 
 const PROCESS = [
   { step: "01", title: "Reality check audit", body: "Full technical + content + indexing audit. Crawl your site, pull GSC + GA4 data, benchmark against 2 competitors, and deliver a 90-day roadmap with priorities scored by impact and effort." },
   { step: "02", title: "Strategy & scoping", body: "Confirm target categories, product batches, and technical fix priorities. Align on tooling (WordPress, Shopify, custom), reporting cadence, and content production capacity." },
-  { step: "03", title: "Execution", body: "Weekly sprints — technical fixes shipped by our dev partner, content batches published at 200/day, schema deployed, and indexing API queued. Every change logged in a shared roadmap." },
+  { step: "03", title: "Execution", body: "Weekly sprints — technical fixes shipped by our dev partner, content published in measured batches, schema deployed, and resubmitted through Search Console. Every change logged in a shared roadmap." },
   { step: "04", title: "Monitor & iterate", body: "Weekly reporting on indexation rate, impressions, clicks, and revenue attribution. Monthly review call. Automated alerts for indexing drops, ranking losses, and Core Web Vitals regressions." },
 ];
 
 const TOOLING = [
   "Google Search Console", "GA4", "Screaming Frog", "Ahrefs", "Semrush",
-  "Surfer SEO", "Looker Studio", "Google Indexing API", "Log File Analyzer", "PageSpeed Insights",
+  "Surfer SEO", "Looker Studio", "Log File Analyzer", "PageSpeed Insights",
 ];
 
 const FAQS: Faq[] = [
   { q: "How long before we see results?", a: "Technical wins (indexing, Core Web Vitals) show impact in 2-4 weeks. Content and category-page work typically shows meaningful ranking movement in 60-90 days. Full revenue impact from ecommerce SEO usually lands in month 4-6." },
   { q: "Do you work on Shopify, WooCommerce, or custom platforms?", a: "All three. Our current portfolio includes WooCommerce (SMK Store, Michigan Sports Outdoor), Shopify stores, and custom Next.js/headless commerce builds. Platform-specific implementation quirks are handled by our dev partner." },
-  { q: "What if my products have thin content and I can't write for all of them?", a: "That's most of what we do. We build programmatic content pipelines — unique HTML per product, FAQ schema, meta descriptions, internal links — deployed at 200 products/day, aligned with Google Indexing API quotas." },
-  { q: "How do you handle indexing at scale?", a: "Sitemap ↔ GSC diffing runs daily, feeding a priority queue that rotates across multiple Google Indexing API service accounts. High-revenue and high-search-volume URLs are submitted first. Backlog is worked through automatically." },
+  { q: "What if my products have thin content and I can't write for all of them?", a: "That's most of what we do. We build programmatic content pipelines — unique HTML per product, FAQ schema, meta descriptions, internal links — published in batches and re-measured in Search Console before the next one goes out." },
+  { q: "How do you handle indexing at scale?", a: "By fixing the reason Google declined each URL rather than resubmitting harder. Sitemap ↔ GSC diffing runs daily and sorts unindexed URLs by the reason in Search Console's Pages report — crawled-not-indexed is usually thin or duplicate content, discovered-not-indexed is usually crawl budget or missing internal links. High-revenue URLs are fixed first, resubmitted in batches, and URL Inspection is kept for the handful that are genuinely urgent." },
   { q: "Do you touch conversion rate, or just SEO?", a: "Primary focus is organic acquisition, but we handle CRO adjacent to SEO — product page structure, category page templates, breadcrumbs, related products, and cart-abandonment schema. Full CRO programs are a separate scope." },
   { q: "What's the pricing?", a: "Depends on catalog size, technical scope, and content volume. Retainers typically start at $2,500/month for stores under 500 SKUs, scaling with catalog size and priority. Every engagement starts with a free reality check audit — no commitment." },
 ];

@@ -153,7 +153,8 @@ const stats = [
 const proFeatures = [
   "Bulk schema for 1,000+ pages",
   "AI content rewriting at scale",
-  "GSC + Indexing API automation",
+  // Was "GSC + Indexing API automation" — see /blog/google-indexing-api-python.
+  "Google Search Console automation",
   "White-label SEO reports",
 ];
 

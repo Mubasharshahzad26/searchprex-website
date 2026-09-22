@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import LocalSEOClient from "./LocalSEOClient";
 
 import { getPageSEO } from "@/lib/admin-seo";
@@ -78,7 +77,7 @@ export default function LocalSEOPage() {
 
   return (
     <>
-      <Script id="ld-local-seo" type="application/ld+json"
+      <script id="ld-local-seo" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <LocalSEOClient />
     </>

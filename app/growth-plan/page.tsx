@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import GrowthPlanClient from "./GrowthPlanClient";
  
 import { getPageSEO } from "@/lib/admin-seo";
@@ -87,16 +86,14 @@ const breadcrumbSchema = {
 export default function GrowthPlanPage() {
   return (
     <>
-      <Script
+      <script
         id="growth-plan-service-schema"
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <Script
+      <script
         id="growth-plan-breadcrumb-schema"
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <GrowthPlanClient />

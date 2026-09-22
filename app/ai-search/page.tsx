@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import AIToolClient from "./AIToolClient";
 
 import { getPageSEO } from "@/lib/admin-seo";
@@ -157,7 +156,7 @@ export default function AISearchPage() {
 
   return (
     <>
-      <Script
+      <script
         id="ld-ai-search"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

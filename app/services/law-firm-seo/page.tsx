@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import LawFirmSEOClient from "./LawFirmSEOClient";
 
 import { getPageSEO } from "@/lib/admin-seo";
@@ -78,7 +77,7 @@ export default function LawFirmSEOPage() {
 
   return (
     <>
-      <Script id="ld-law-firm-seo" type="application/ld+json"
+      <script id="ld-law-firm-seo" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <LawFirmSEOClient />
     </>

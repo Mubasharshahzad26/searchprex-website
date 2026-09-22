@@ -126,9 +126,10 @@ export default function RootLayout({
             the first thumbnail request rather than after it. */}
         <link rel="preconnect" href="https://img.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
-        <meta name="geo.region" content="US" />
-        <meta name="geo.placename" content="United States" />
-        <meta name="ICBM" content="37.0902, -95.7129" />
+        {/* No geo.region / geo.placename / ICBM tags. Google ignores them, and
+            these claimed the geographic centre of the US for a business whose
+            schema (lib/site-schema.ts) gives its real address in Daska. The
+            US focus is carried by areaServed and hreflang en-US instead. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph) }}

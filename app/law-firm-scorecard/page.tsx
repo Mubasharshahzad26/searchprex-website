@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import ScorecardClient from "./ScorecardClient";
  
 import { getPageSEO } from "@/lib/admin-seo";
@@ -97,9 +96,9 @@ const baseMetadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  // No geo.* tags: see app/layout.tsx. They claimed a US location the
+  // business schema contradicts.
   other: {
-    "geo.region": "US",
-    "geo.placename": "United States",
     "content-language": "en-US",
     "audience": "US law firms, attorneys, legal marketing directors, personal injury lawyers, family law attorneys, criminal defense lawyers",
   },
@@ -348,7 +347,7 @@ const jsonLd = {
 export default function LawFirmScorecardPage() {
   return (
     <>
-      <Script
+      <script
         id="ld-law-firm-scorecard"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

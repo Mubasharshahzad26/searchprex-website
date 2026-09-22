@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
  
 import { getPageSEO } from "@/lib/admin-seo";
@@ -57,10 +56,6 @@ const baseMetadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
-  },
-  other: {
-    "geo.region": "US",
-    "geo.placename": "United States",
   },
 };
 
@@ -194,7 +189,7 @@ export default function IntakeAssistantPage() {
  
   return (
     <>
-      <Script
+      <script
         id="ld-intake-assistant"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import TechnicalSEOClient from "./TechnicalSEOClient";
 
 import { getPageSEO } from "@/lib/admin-seo";
@@ -78,7 +77,7 @@ export default function TechnicalSEOPage() {
 
   return (
     <>
-      <Script id="ld-technical-seo" type="application/ld+json"
+      <script id="ld-technical-seo" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <TechnicalSEOClient />
     </>

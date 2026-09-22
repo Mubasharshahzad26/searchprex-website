@@ -20,7 +20,7 @@ const playbooks = [
     icon: Store,
     audience: "Large Ecommerce Stores",
     painPoint: "Burning cash on high PPC campaigns while suffering from mass de-indexing.",
-    solution: "When a large catalog drops out of Google, running expensive PPC to cover the gap destroys your margins. I fix faceted navigation traps, rebuild canonical architecture, and force Google to re-index your revenue-driving URLs using the Indexing API.",
+    solution: "When a large catalog drops out of Google, running expensive PPC to cover the gap destroys your margins. I fix faceted navigation traps, rebuild canonical architecture, and get your revenue-driving URLs back into the index by fixing the reason Google dropped them.",
     cta: "See how I grew SMK Store by 227%",
     href: "#results"
   },
