@@ -20,7 +20,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
  * come from the `Page` table, so unpublishing a page in the admin removes it
  * from the sitemap without a deploy.
  *
- * Three things worth knowing:
+ * Four things worth knowing:
+ *
+ * 0. `lastModified` is set only where a real date exists — the CMS row's
+ *    updatedAt, a news spoke's updatedAt, a blog post's date. Everything else
+ *    omits it. It used to be `new Date()` on almost every URL, which claimed
+ *    the whole site changed at crawl time; once this route became per-request
+ *    that timestamp also moved on every fetch. A lastmod Google cannot trust
+ *    is one it ignores, and an omitted one costs nothing.
  *
  * 1. `STATIC_ROUTES` is a *fallback*, not the source of truth. If the database
  *    is unreachable (or hasn't been seeded yet) we still serve a valid sitemap
@@ -140,7 +147,6 @@ function derivePriority(path: string): number {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
   const entries = new Map<string, Entry>();
 
   const add = (entry: Entry) => {
@@ -156,16 +162,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (NOINDEX_ROUTES.has(pathname)) return;
 
     const existing = entries.get(entry.url);
-    // Higher priority wins, so a CMS row can't silently demote the homepage.
-    if (!existing || (entry.priority ?? 0) > (existing.priority ?? 0)) {
+    if (!existing) {
       entries.set(entry.url, entry);
+      return;
     }
+
+    // Higher priority wins, so a CMS row can't silently demote the homepage —
+    // but the date survives either way. The static list carries no
+    // lastModified (it has no way to know one), so without this merge a page
+    // that appears in both lists lost the real updatedAt from its CMS row.
+    const winner = (entry.priority ?? 0) > (existing.priority ?? 0) ? entry : existing;
+    const other = winner === entry ? existing : entry;
+    entries.set(entry.url, {
+      ...winner,
+      lastModified: winner.lastModified ?? other.lastModified,
+    });
   };
 
   for (const route of STATIC_ROUTES) {
     add({
       url: absolute(route.path),
-      lastModified: now,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     });
@@ -216,13 +232,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // is listed above its cities because it is the page that links them together.
   add({
     url: absolute("/locations"),
-    lastModified: now,
     changeFrequency: "monthly",
     priority: 0.7,
   });
   add({
     url: absolute("/locations/kansas"),
-    lastModified: now,
     changeFrequency: "monthly",
     priority: 0.7,
   });
@@ -230,7 +244,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const state of getDynamicStateHubSlugs()) {
     add({
       url: absolute(`/locations/${state}`),
-      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     });
@@ -240,7 +253,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const cat of newsCategories) {
     add({
       url: absolute(`/resources/news?category=${encodeURIComponent(cat)}`),
-      lastModified: now,
       changeFrequency: "daily",
       priority: 0.8,
     });
@@ -273,7 +285,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const { city } of getAllCitySlugs()) {
     add({
       url: absolute(`/locations/kansas/${city}`),
-      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.65,
     });
@@ -285,7 +296,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const page of INDUSTRY_PAGES) {
     add({
       url: absolute(`/services/law-firm-seo/${page.slug}`),
-      lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
     });
@@ -294,7 +304,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const { state, city } of getAllCityParams()) {
     add({
       url: absolute(`/locations/${state}/${city}`),
-      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.75,
     });
@@ -304,7 +313,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const cs of caseStudies) {
     add({
       url: absolute(detailUrl(cs)),
-      lastModified: now,
       changeFrequency: "monthly",
       priority: cs.featured ? 0.85 : 0.7,
     });
