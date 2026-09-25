@@ -15,6 +15,7 @@ import { useState } from "react";
 import parse, { Element } from 'html-react-parser';
 import { getRelated } from "./posts";
 import { renderArticle } from "@/lib/render-article";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 
 /**
  * Which section of the site the post belongs to. This component is shared by
@@ -23,6 +24,40 @@ import { renderArticle } from "@/lib/render-article";
  * handed out /blog/<slug> URLs that 404.
  */
 export type PostSection = { label: string; href: string };
+
+/**
+ * Splices a marker div into the article's markdown at its natural midpoint —
+ * right before the middle top-level "## " heading — so ArticleLeadMagnet's
+ * banner variant can be inserted there by the html-react-parser `replace`
+ * callback below. markdown-it runs with `html: true` (lib/render-article.ts),
+ * so this raw HTML passes through untouched rather than being escaped.
+ *
+ * Only articles with at least four top-level sections get a banner. A short
+ * piece has no natural midpoint, and forcing a banner into it would read as
+ * exactly the low-effort insertion this is trying to avoid — three sections or
+ * fewer, and the sidebar + bottom form are enough.
+ */
+// Both formats exist in MarketingBlog and in ./posts: admin-authored bodies are
+// markdown ("## Heading" at a line start — not "### ", which the lookahead's
+// required space excludes), while the hardcoded blog posts are raw HTML with
+// <h2> tags. Matching only markdown meant the HTML posts, which carry the most
+// sections of anything on the site, never got a mid-article form at all.
+const H2_BOUNDARY = /\n(?=## )|(?=<h2[\s>])/;
+
+function injectMidContentSlot(markdown: string): string {
+  const sections = markdown.split(H2_BOUNDARY);
+  if (sections.length < 4) return markdown;
+
+  const mid = Math.ceil(sections.length / 2);
+  const slot = '<div id="__lead_magnet_slot__"></div>';
+  // Blank lines on both sides are required, not cosmetic. In markdown-it an
+  // HTML block that opens with <div> runs until the next blank line, so a slot
+  // joined with a single newline swallowed the following "## Heading" into the
+  // HTML block — it rendered as the literal text "## SearchPrex Action
+  // Checklist" instead of an H2, and every line after it until the next gap
+  // lost its markdown too.
+  return `${sections.slice(0, mid).join("\n")}\n\n${slot}\n\n${sections.slice(mid).join("\n")}`;
+}
 
 const BLOG_SECTION: PostSection = { label: "Blog", href: "/blog" };
 
@@ -95,6 +130,7 @@ export default function PostClient({
   const [copied, setCopied] = useState(false);
 
   const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
+  const leadSource = `article:${section.href}/${post.slug}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(postUrl);
@@ -214,10 +250,13 @@ export default function PostClient({
               {post.excerpt}
             </p>
  
-            {/* Content with Image Optimization */}
+            {/* Content with Image Optimization + the mid-article lead magnet slot */}
             <div style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
-              {parse(renderArticle(post.content), {
+              {parse(renderArticle(injectMidContentSlot(post.content)), {
                 replace: (domNode) => {
+                  if (domNode instanceof Element && domNode.tagName === 'div' && domNode.attribs?.id === '__lead_magnet_slot__') {
+                    return <ArticleLeadMagnet variant="banner" source={leadSource} />;
+                  }
                   if (domNode instanceof Element && domNode.tagName === 'img') {
                     const { src, alt, width, height } = domNode.attribs;
                     return (
@@ -338,29 +377,10 @@ export default function PostClient({
                 </div>
               </div>
    
-              {/* CTA card */}
-            <div className="rounded-2xl bg-[#0a0f2e] p-6 text-center overflow-hidden relative">
-              <div className="pointer-events-none absolute inset-0 opacity-10"
-                style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #534AB7 1px, transparent 0)", backgroundSize: "12px 12px" }} />
-              <div className="relative">
-                <div className="mx-auto mb-4 h-12 w-12 rounded-full bg-[#EEEDFE] flex items-center justify-center">
-                  <span className="text-[#534AB7] font-black">M</span>
-                </div>
-                <p className="text-white font-black text-sm mb-1">Talk to Mubashar</p>
-                <p className="text-[#9aa0c4] text-xs mb-5 leading-relaxed">
-                  Free 30-min SEO strategy call — no commitment
-                </p>
-                <a href="https://calendly.com/contact-searchprex/30min"
-                  target="_blank" rel="noopener noreferrer"
-                  className="block w-full bg-[#3eb489] hover:bg-[#2f9670] text-white text-sm font-bold py-3 rounded-xl transition-colors mb-2">
-                  Book Free Call →
-                </a>
-                <Link href="/free-audit"
-                  className="block w-full border border-white/15 text-white/60 text-xs font-semibold py-2.5 rounded-xl hover:border-white/40 transition-colors">
-                  Get Free SEO Audit
-                </Link>
-              </div>
-            </div>
+              {/* Lead magnet — was a link-only "Talk to Mubashar" card that sent
+                  an already-engaged reader to a second page to retype their URL
+                  and email. This submits in place. */}
+            <ArticleLeadMagnet variant="sidebar" source={leadSource} />
  
             {/* Stat card */}
             {post.stat && (
@@ -443,27 +463,9 @@ export default function PostClient({
         </section>
       )}
  
-      {/* ══ BOTTOM CTA ══ */}
-      <section className="bg-[#0a0f2e] py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-black text-white mb-4 sm:text-4xl">
-            Ready to rank on Page 1?
-          </h2>
-          <p className="text-[#9aa0c4] text-lg mb-10 max-w-xl mx-auto">
-            Get a free 30-min strategy call with Mubashar — no sales reps, no junior staff.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://calendly.com/contact-searchprex/30min" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#3eb489] hover:bg-[#2f9670] text-white font-bold px-8 py-4 rounded-xl transition-all hover:-translate-y-0.5">
-              Book Free Strategy Call
-            </a>
-            <Link href="/free-audit"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white/20 hover:border-white text-white font-bold px-8 py-4 rounded-xl transition-colors">
-              Get Free SEO Audit →
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ══ BOTTOM CTA — was link-only ("Book Free Strategy Call" / "Get Free
+          SEO Audit"), both hand-offs to a second page. Now submits here. ══ */}
+      <ArticleLeadMagnet variant="bottom" source={leadSource} />
  
     </main>
   );
