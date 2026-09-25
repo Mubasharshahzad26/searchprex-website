@@ -33,6 +33,12 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
  *    fallback list, so the merge runs through a Map keyed on URL.
  */
 
+// Rendered per request, not at build. The sitemap is CMS-driven: pages and
+// news articles are published straight into the database, and a build-time
+// snapshot left every one of them out of the sitemap until the next deploy.
+// /news-sitemap.xml already does this for the same reason.
+export const dynamic = "force-dynamic";
+
 type Entry = MetadataRoute.Sitemap[number];
 
 const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: Entry["changeFrequency"] }> = [
