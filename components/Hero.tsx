@@ -263,24 +263,21 @@ export default function Hero({ heroImage }: HeroProps) {
                   ever indexed was the default tab's "Law Firm SEO for US
                   Practices." while the title targeted "SEO agency". The persona
                   line now sits underneath and still changes with the tabs. */}
-              <h1
-                className="mb-4 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
-                style={{ color: CHARCOAL }}
-              >
-                {/* Four explicit lines. With the break after "Law Firms," alone,
-                    the first line was too wide for the column and wrapped into
-                    "SEO Agency for Law / Firms,". */}
-                SEO Agency for
-                <br />
-                Law Firms,
-                <br />
-                Ecommerce &amp; Local
-                <br />
+              {/* Two tiers, not four equal lines. The full keyword stays in the
+                  H1, but "SEO Agency for" leads at display size and the three
+                  verticals follow one step smaller — which also stops the old
+                  version's lone underlined "Businesses." on its own line.
+                  text-balance keeps the second tier from breaking one word onto
+                  a line of its own. */}
+              <h1 className="mb-4 font-black tracking-tight" style={{ color: CHARCOAL }}>
+                <span className="block text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
+                  SEO Agency for
+                </span>
                 <span
-                  className="inline-block border-b-[5px] pb-1"
-                  style={{ borderColor: CHARCOAL }}
+                  className="mt-1 block text-[1.75rem] leading-[1.15] text-balance sm:text-[2.125rem] lg:text-[2.75rem]"
+                  style={{ color: PURPLE }}
                 >
-                  Businesses.
+                  Law Firms, Ecommerce &amp; Local Businesses
                 </span>
               </h1>
 
@@ -292,8 +289,8 @@ export default function Hero({ heroImage }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.3 }}
-                  className="mb-4 text-xl font-bold leading-snug tracking-tight sm:text-2xl"
-                  style={{ color: PURPLE }}
+                  className="mb-4 text-lg font-semibold leading-snug tracking-tight sm:text-xl"
+                  style={{ color: BODY }}
                 >
                   {current.headline} {current.emphasis}
                 </motion.p>
