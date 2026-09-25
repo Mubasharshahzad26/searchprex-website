@@ -69,26 +69,19 @@ export function looksLikeEmail(value: string): boolean {
  * 200 with `{ok:false}` for its own errors rather than an HTTP error code, so
  * the body must be read; res.ok alone is not enough.
  */
-async function writeToSheet(lead: Lead): Promise<{ ok: boolean; detail: string }> {
-  const url = process.env.LEADS_SHEET_WEBHOOK_URL;
-  const secret = process.env.LEADS_SHEET_SECRET;
-
-  if (!url || !secret) {
-    return { ok: false, detail: "LEADS_SHEET_WEBHOOK_URL or LEADS_SHEET_SECRET not set" };
-  }
-
+async function postToSheet(
+  url: string,
+  secret: string,
+  lead: Lead,
+  requestId: string,
+  timeoutMs: number
+): Promise<{ ok: boolean; detail: string }> {
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...lead, secret }),
-      // 25s, not 10s. Apps Script cold-starts well past ten seconds, and the
-      // first version of this timed out at 10s while Google went on to write
-      // the row anyway — so the lead was stored and the visitor was told it
-      // failed. That false negative is the worst outcome available here: the
-      // visitor resubmits and the sheet gets duplicates. A slow response beats
-      // a wrong one, and maxDuration on the routes is set above this.
-      signal: AbortSignal.timeout(25_000),
+      body: JSON.stringify({ ...lead, requestId, secret }),
+      signal: AbortSignal.timeout(timeoutMs),
       redirect: "follow",
     });
 
@@ -107,6 +100,41 @@ async function writeToSheet(lead: Lead): Promise<{ ok: boolean; detail: string }
   } catch (err) {
     return { ok: false, detail: `sheet request failed: ${String(err).slice(0, 200)}` };
   }
+}
+
+/**
+ * Write to the sheet, retrying once on failure with the same requestId.
+ *
+ * The retry is the point. A cold Apps Script container answers more slowly than
+ * the caller will wait, so the first attempt times out while Google goes on to
+ * write the row — measured on production three separate times: 500 returned,
+ * row present, visitor told it failed. The visitor then resubmits and the sheet
+ * gains a duplicate, and with traffic this thin the script is cold for almost
+ * every real lead, so this is the common case rather than the edge one.
+ *
+ * The first attempt is short, because its job is to wake the container up. The
+ * second is long, because by then it is awake. The shared requestId is what
+ * makes the retry safe: doPost caches it, so a retry that follows a write which
+ * actually succeeded gets the existing row back instead of appending a second.
+ */
+async function writeToSheet(lead: Lead): Promise<{ ok: boolean; detail: string }> {
+  const url = process.env.LEADS_SHEET_WEBHOOK_URL;
+  const secret = process.env.LEADS_SHEET_SECRET;
+
+  if (!url || !secret) {
+    return { ok: false, detail: "LEADS_SHEET_WEBHOOK_URL or LEADS_SHEET_SECRET not set" };
+  }
+
+  const requestId = crypto.randomUUID();
+
+  const first = await postToSheet(url, secret, lead, requestId, 9_000);
+  if (first.ok) return first;
+
+  console.warn("[leads] sheet attempt 1 failed, retrying:", first.detail);
+  const second = await postToSheet(url, secret, lead, requestId, 18_000);
+  if (second.ok) return { ok: true, detail: `${second.detail} (on retry)` };
+
+  return { ok: false, detail: `attempt 1: ${first.detail} | attempt 2: ${second.detail}` };
 }
 
 /**
