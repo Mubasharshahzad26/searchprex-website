@@ -179,9 +179,34 @@ export async function POST(req: NextRequest) {
  * `curl https://www.searchprex.com/api/send-audit`
  */
 export async function GET() {
-  const sheetConfigured = Boolean(
-    process.env.LEADS_SHEET_WEBHOOK_URL && process.env.LEADS_SHEET_SECRET
-  );
+  const webhook = process.env.LEADS_SHEET_WEBHOOK_URL ?? "";
+  const secret = process.env.LEADS_SHEET_SECRET ?? "";
+
+  // Reported per variable rather than as one combined boolean. "Not configured"
+  // for the pair cannot distinguish a missing variable from a misspelled one,
+  // from one added to Preview instead of Production, and those need different
+  // fixes. Shape only — length, and whether the URL looks like an Apps Script
+  // /exec deployment. No values, and never the secret itself.
+  const sheetVars = {
+    LEADS_SHEET_WEBHOOK_URL: webhook
+      ? {
+          present: true,
+          length: webhook.length,
+          looksLikeExecUrl:
+            webhook.startsWith("https://script.google.com/macros/s/") && webhook.endsWith("/exec"),
+          hasSurroundingWhitespace: webhook !== webhook.trim(),
+        }
+      : { present: false },
+    LEADS_SHEET_SECRET: secret
+      ? {
+          present: true,
+          length: secret.length,
+          hasSurroundingWhitespace: secret !== secret.trim(),
+        }
+      : { present: false },
+  };
+
+  const sheetConfigured = Boolean(webhook && secret);
   const supabaseConfigured = Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
       (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
@@ -194,8 +219,9 @@ export async function GET() {
       googleSheet: sheetConfigured ? "configured" : "NOT CONFIGURED",
       supabase: supabaseConfigured ? "configured" : "not configured",
     },
+    sheetVars,
     note: sheetConfigured
       ? "Configured only means the variables are present. Submit one real lead and confirm the row appears."
-      : "Set LEADS_SHEET_WEBHOOK_URL and LEADS_SHEET_SECRET — see scripts/leads-sheet-apps-script.gs.",
+      : "Set LEADS_SHEET_WEBHOOK_URL and LEADS_SHEET_SECRET for the Production environment, then redeploy — a running deployment does not pick up new variables.",
   });
 }
