@@ -6,7 +6,7 @@ import { normaliseLead, storeLead } from "@/lib/leads-store";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // storeLead calls Apps Script, which can cold-start past ten seconds.
-export const maxDuration = 30;
+export const maxDuration = 60;
  
 const NOTIFY_TO = "mubasharshahzad726@gmail.com";
 const NOTIFY_FROM = "SearchPrex Growth Plan <noreply@searchprex.com>";

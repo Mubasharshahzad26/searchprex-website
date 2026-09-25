@@ -103,19 +103,30 @@ async function postToSheet(
 }
 
 /**
- * Write to the sheet, retrying once on failure with the same requestId.
+ * Write to the sheet, and find out what actually happened when that fails.
  *
- * The retry is the point. A cold Apps Script container answers more slowly than
- * the caller will wait, so the first attempt times out while Google goes on to
- * write the row — measured on production three separate times: 500 returned,
- * row present, visitor told it failed. The visitor then resubmits and the sheet
- * gains a duplicate, and with traffic this thin the script is cold for almost
- * every real lead, so this is the common case rather than the edge one.
+ * The failure this is built around is not "the write failed" — it is "the write
+ * succeeded and the response never arrived". Google runs doPost, appends the
+ * row, and returns nothing. Observed repeatedly on production, most recently on
+ * a real submission from the live homepage: the visitor saw an error, the row
+ * was in the sheet.
  *
- * The first attempt is short, because its job is to wake the container up. The
- * second is long, because by then it is awake. The shared requestId is what
- * makes the retry safe: doPost caches it, so a retry that follows a write which
- * actually succeeded gets the existing row back instead of appending a second.
+ * So after a failed attempt the next move is to ASK, not to retry blindly:
+ *
+ *   1. write          short, mostly to wake a cold container
+ *   2. confirm        did it land anyway? catches the common case, cheaply
+ *   3. write again    only if it genuinely did not land
+ *   4. confirm again  same question, last chance
+ *
+ * The shared requestId makes every step safe: doPost caches it, so a second
+ * write after a first that secretly succeeded returns the existing row instead
+ * of appending, and confirm reads that same cache entry.
+ *
+ * The budget matters, and getting it wrong is what let the live submission fail.
+ * The steps have to fit inside the route's maxDuration or the last one never
+ * runs: 9 + 18 + 12 against a 30s limit meant the confirmation — the one check
+ * that would have found the row — was cut off every single time. It is
+ * 9 + 6 + 12 + 6 = 33s against 60 now, with room for the requests themselves.
  */
 async function writeToSheet(lead: Lead): Promise<{ ok: boolean; detail: string }> {
   const url = process.env.LEADS_SHEET_WEBHOOK_URL;
@@ -126,62 +137,63 @@ async function writeToSheet(lead: Lead): Promise<{ ok: boolean; detail: string }
   }
 
   const requestId = crypto.randomUUID();
+  const notes: string[] = [];
 
   const first = await postToSheet(url, secret, lead, requestId, 9_000);
   if (first.ok) return first;
+  notes.push(`write 1: ${first.detail}`);
 
-  console.warn("[leads] sheet attempt 1 failed, retrying:", first.detail);
-  const second = await postToSheet(url, secret, lead, requestId, 18_000);
-  if (second.ok) return { ok: true, detail: `${second.detail} (on retry)` };
-
-  // Both writes reported failure. That is not the same as the lead not being
-  // saved: Google sometimes runs doPost and appends the row but never delivers
-  // the response. Observed twice on production in one sitting — two calls
-  // "failed", the sheet grew by two rows.
-  //
-  // So ask rather than assume. doGet(?requestId=) answers from the same cache
-  // entry doPost writes, so a confirmed row means the lead really is stored and
-  // reporting success is the truth, not a guess. This is the one path allowed
-  // to turn a failed write into a success, and only on the script's word.
-  const confirmed = await confirmWrite(url, requestId);
-  if (confirmed.ok) {
-    console.log("[leads] writes reported failure but the row is present:", confirmed.detail);
-    return { ok: true, detail: `${confirmed.detail} (confirmed after failed responses)` };
+  const afterFirst = await confirmWrite(url, requestId, 6_000);
+  if (afterFirst.ok) {
+    console.log("[leads] write 1 reported failure but the row is present:", afterFirst.detail);
+    return { ok: true, detail: `${afterFirst.detail} (confirmed after write 1)` };
   }
+  notes.push(`confirm 1: ${afterFirst.detail}`);
 
-  return {
-    ok: false,
-    detail: `attempt 1: ${first.detail} | attempt 2: ${second.detail} | ${confirmed.detail}`,
-  };
+  const second = await postToSheet(url, secret, lead, requestId, 12_000);
+  if (second.ok) return { ok: true, detail: `${second.detail} (on retry)` };
+  notes.push(`write 2: ${second.detail}`);
+
+  const afterSecond = await confirmWrite(url, requestId, 6_000);
+  if (afterSecond.ok) {
+    console.log("[leads] both writes reported failure but the row is present:", afterSecond.detail);
+    return { ok: true, detail: `${afterSecond.detail} (confirmed after write 2)` };
+  }
+  notes.push(`confirm 2: ${afterSecond.detail}`);
+
+  return { ok: false, detail: notes.join(" | ") };
 }
 
 /**
  * Ask the script whether a given requestId was written.
  *
  * Only meaningful against script v4 or later; an older deployment ignores the
- * parameter and returns its health payload, which has no `found` field and is
- * therefore correctly read as "not confirmed".
+ * parameter and returns its health payload, which carries no `found` field and
+ * is therefore correctly read as "not confirmed".
  */
-async function confirmWrite(url: string, requestId: string): Promise<{ ok: boolean; detail: string }> {
+async function confirmWrite(
+  url: string,
+  requestId: string,
+  timeoutMs: number
+): Promise<{ ok: boolean; detail: string }> {
   try {
     const res = await fetch(`${url}?requestId=${encodeURIComponent(requestId)}`, {
       method: "GET",
-      signal: AbortSignal.timeout(12_000),
+      signal: AbortSignal.timeout(timeoutMs),
       redirect: "follow",
       cache: "no-store",
     });
     const text = await res.text();
-    if (!text.trim().startsWith("{")) return { ok: false, detail: "confirm: non-JSON response" };
+    if (!text.trim().startsWith("{")) return { ok: false, detail: "non-JSON response" };
 
     const parsed = JSON.parse(text);
     if (parsed?.found) return { ok: true, detail: `row ${parsed.row}` };
-    if (parsed?.found === false) return { ok: false, detail: "confirm: row not found" };
-    return { ok: false, detail: "confirm: script too old to answer" };
+    if (parsed?.found === false) return { ok: false, detail: "row not found" };
+    return { ok: false, detail: "script too old to answer" };
   } catch (err) {
-    return { ok: false, detail: `confirm failed: ${String(err).slice(0, 120)}` };
+    return { ok: false, detail: `confirm failed: ${String(err).slice(0, 100)}` };
   }
 }
-
 /**
  * Supabase. Secondary and best-effort by design: it is the store that broke,
  * and nothing should depend on it again until someone has proven it works.

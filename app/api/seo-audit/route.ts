@@ -10,7 +10,7 @@ import { normaliseLead, storeLead } from "@/lib/leads-store";
 export const dynamic = 'force-dynamic'
 
 // storeLead calls Apps Script, which can cold-start past ten seconds.
-export const maxDuration = 30
+export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);

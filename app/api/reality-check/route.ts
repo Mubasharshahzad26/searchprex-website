@@ -20,10 +20,11 @@ import { leadStoreHealth, looksLikeEmail, normaliseLead, storeLead } from "@/lib
 
 export const dynamic = "force-dynamic";
 
-// The Apps Script call can take over ten seconds on a cold start, and the
-// platform default would kill the function mid-write — storing the lead while
-// telling the visitor it failed.
-export const maxDuration = 30;
+// The store does up to four sequential round-trips to Apps Script (write,
+// confirm, write, confirm) totalling about 33 seconds in the worst case. At 30
+// the final confirmation was cut off every time — which is the one step that
+// catches a row Google wrote without answering.
+export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
