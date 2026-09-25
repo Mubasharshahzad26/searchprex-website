@@ -15,6 +15,11 @@
     {
       "path": "/api/cron/seo-news-autopilot",
       "schedule": "0 14 * * *"
+    },
+    {
+      "_comment": "Every 10 minutes. Google Apps Script goes cold, and a cold container takes long enough that the lead route gives up while Google still writes the row — the visitor is told it failed, resubmits, and the sheet gets a duplicate. This keeps the container alive so a real visitor is almost never the one paying for the cold start. See app/api/cron/warm-leads-sheet/route.ts.",
+      "path": "/api/cron/warm-leads-sheet",
+      "schedule": "*/10 * * * *"
     }
   ]
 }
