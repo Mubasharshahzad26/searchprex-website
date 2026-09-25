@@ -50,13 +50,13 @@ const revenueSteps = [
     note: "First sales after re-indexing. Top seller moving 2 units.",
   },
   {
-    src: "/images/proof/mso-revenue-3-aug17.png",
-    width: 1366,
-    height: 611,
+    src: "/images/proof/mso-revenue-3-sep25.png",
+    width: 1357,
+    height: 601,
     stage: "After",
     tone: "#196b4d",
-    figure: "$311.05",
-    date: "17 August 2026",
+    figure: "$523.49",
+    date: "25 September 2026",
     note: "Month-to-date, already ahead of the previous full month. Top seller now moving 4 units.",
   },
 ];

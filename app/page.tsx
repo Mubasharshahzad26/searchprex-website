@@ -144,12 +144,12 @@ export default async function Home() {
       {
         "@type": "ImageObject",
         "@id": `${SITE}/#proof-revenue-after`,
-        "contentUrl": `${SITE}/images/proof/mso-revenue-3-aug17.png`,
+        "contentUrl": `${SITE}/images/proof/mso-revenue-3-sep25.png`,
         "caption":
-          "Michigan Outdoor Sports WooCommerce net sales, 17 August 2026: $311.05 month to date.",
+          "Michigan Outdoor Sports WooCommerce net sales, 25 September 2026: $523.49 month to date.",
         "creator": founderRef,
         "creditText": "SearchPrex — Mubashar Sharif",
-        "datePublished": "2026-08-17"
+        "datePublished": "2026-09-25"
       }
     ]
   };
