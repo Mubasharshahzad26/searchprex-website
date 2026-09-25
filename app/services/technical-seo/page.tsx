@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import TechnicalSEOClient from "./TechnicalSEOClient";
+import { CAPSULES, FAQS } from "./data";
+import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/technical-seo";
@@ -10,7 +12,7 @@ const PAGE_URL = "https://www.searchprex.com/services/technical-seo";
 const baseMetadata: Metadata = {
   title: "Technical SEO Services | Indexation, Core Web Vitals, Schema",
   description:
-    "Founder-led technical SEO for large sites. Crawl budget recovery, indexation fixes, Core Web Vitals (LCP/INP/CLS), schema markup, and site architecture — proven at 12K+ page scale.",
+    "Founder-led technical SEO: indexation recovery, crawl budget, Core Web Vitals and schema. Michigan Outdoor Sports went from about 3,000 to 11,549 indexed pages.",
   keywords: [
     "technical SEO services", "Core Web Vitals optimization", "indexation recovery",
     "schema markup", "crawl budget", "site architecture SEO", "INP optimization",
@@ -27,7 +29,7 @@ const baseMetadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Technical SEO Services | SearchPrex",
-    description: "Indexation recovery, CWV, schema — proven at 12K+ page scale.",
+    description: "Indexation recovery, crawl budget, Core Web Vitals and schema — about 3,000 to 11,549 indexed pages on one store.",
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };
@@ -38,19 +40,41 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/services/technical-seo", baseMetadata);
 }
 
+/**
+ * When this page was last reviewed by a person. Hardcoded on purpose: a
+ * "reviewed" date that moves on every request claims a check that did not
+ * happen. Change it when the page is actually reviewed.
+ */
+const LAST_REVIEWED = "2026-09-26";
+
 export default function TechnicalSEOPage() {
+  // Every node is built from the data the page renders (./data) or refers to
+  // the site-wide entities by @id — never retyped. The FAQPage used to be
+  // written out here by hand: three of the six visible questions, with answers
+  // that had drifted from the ones on the page.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${PAGE_URL}#webpage`,
+        url: PAGE_URL,
+        name: "Technical SEO Services",
+        isPartOf: websiteRef,
+        about: { "@id": `${PAGE_URL}#service` },
+        author: founderRef,
+        reviewedBy: founderRef,
+        dateModified: LAST_REVIEWED,
+      },
       {
         "@type": "Service",
         "@id": `${PAGE_URL}#service`,
         name: "Technical SEO Services",
         serviceType: "Technical SEO",
-        provider: { "@type": "Organization", name: "SearchPrex", url: "https://www.searchprex.com" },
+        provider: organizationRef,
         areaServed: { "@type": "Country", name: "United States" },
         description:
-          "Technical SEO — full site crawl, indexation recovery, Core Web Vitals (LCP/INP/CLS), schema markup, site architecture, and log file analysis.",
+          "Indexation recovery, crawl budget, Core Web Vitals (LCP, INP, CLS), structured data, site architecture, redirects and migrations.",
         url: PAGE_URL,
       },
       {
@@ -63,14 +87,12 @@ export default function TechnicalSEOPage() {
       },
       {
         "@type": "FAQPage",
-        mainEntity: [
-          { "@type": "Question", name: "My site has thousands of pages — can you handle that?",
-            acceptedAnswer: { "@type": "Answer", text: "Yes — large-scale technical SEO is our specialty. We took Michigan Outdoor Sports from near-zero to 12K+ indexed pages and a +285% indexing rate." } },
-          { "@type": "Question", name: "What are Core Web Vitals and why do they matter?",
-            acceptedAnswer: { "@type": "Answer", text: "Core Web Vitals (LCP, INP, CLS) are Google's user experience metrics that directly impact rankings in 2026. We diagnose and fix all three." } },
-          { "@type": "Question", name: "How quickly will I see results from technical fixes?",
-            acceptedAnswer: { "@type": "Answer", text: "Indexation fixes show GSC improvements in 2–4 weeks after Googlebot recrawls. Core Web Vitals improvements show up in Google's data within 28 days." } },
-        ],
+        "@id": `${PAGE_URL}#faq`,
+        mainEntity: [...CAPSULES, ...FAQS].map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
     ],
   };

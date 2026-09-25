@@ -125,16 +125,16 @@ function ErrorState() {
 }
 
 /** Compact vertical card. Replaces the sidebar's old link-only CTA. */
-function SidebarVariant({ source }: { source: string }) {
+function SidebarVariant({ source, copy }: { source: string; copy?: Copy }) {
   const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
 
   return (
     <div className="rounded-2xl border-2 p-5" style={{ borderColor: GREEN, background: "#fff" }}>
       <p className="text-sm font-black" style={{ color: INK }}>
-        Free competitor tear-down
+        {copy?.headline ?? "Free competitor tear-down"}
       </p>
       <p className="mt-1 text-xs leading-relaxed" style={{ color: BODY }}>
-        I&apos;ll read your site myself and send back what to fix — within 24 hours.
+        {copy?.sub ?? "I’ll read your site myself and send back what to fix — within 24 hours."}
       </p>
 
       {status === "done" ? (
@@ -349,7 +349,7 @@ export default function ArticleLeadMagnet({
    *  site" while an article speaks to what the reader just read. */
   copy?: Copy;
 }) {
-  if (variant === "sidebar") return <SidebarVariant source={source} />;
+  if (variant === "sidebar") return <SidebarVariant source={source} copy={copy} />;
   if (variant === "banner") return <BannerVariant source={source} copy={copy} />;
   return <BottomVariant source={source} copy={copy} />;
 }
