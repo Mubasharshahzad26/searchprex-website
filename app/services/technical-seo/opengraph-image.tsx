@@ -10,6 +10,6 @@ export default async function Image() {
     eyebrow: "Services",
     kicker: "Technical SEO",
     title: "Technical SEO Services",
-    subtitle: "Indexation, Core Web Vitals, and schema — proven at 12K+ page scale.",
+    subtitle: "Indexation, Core Web Vitals and schema — about 3,000 to 11,549 indexed pages on one store.",
   });
 }

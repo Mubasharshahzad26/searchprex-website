@@ -125,11 +125,14 @@ const services = [
   },
 ];
 
+// One fact per stat, each traceable to a screenshot on the site. The strip used
+// to read "20+ clients worldwide" (nothing backs it), "+285% pages indexed" and
+// "+285% indexing rate" (one fact twice) and "12K+ pages indexed".
 const bigStats = [
-  { v: "20+", l: "Clients worldwide" },
-  { v: "+285%", l: "Pages indexed" },
-  { v: "+285%", l: "Indexing rate" },
-  { v: "12K+", l: "Pages indexed" },
+  { v: "3,000 → 11,549", l: "Pages indexed · Michigan Sports & Outdoor" },
+  { v: "$5.8k → $19.1k", l: "Monthly revenue · SMK Store" },
+  { v: "#1", l: "AI Overview · D.O.L.L.S. Cleaning" },
+  { v: "Top 3", l: "Maps pack · HVAC client, 60 days" },
 ];
 
 const faqs = [

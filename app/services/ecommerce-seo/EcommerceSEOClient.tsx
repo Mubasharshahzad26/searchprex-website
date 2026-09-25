@@ -17,6 +17,10 @@ import {
   Wrench, Target, FileCode, GitBranch, AlertTriangle,
 } from "lucide-react";
 import { caseStudies, detailUrl, type CaseStudy } from "@/app/case-studies/data";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ProofImage from "@/components/ProofImage";
+import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { CAPSULES, FAQS } from "./data";
 import {
   AuthorCard,
   CardGrid,
@@ -28,7 +32,6 @@ import {
   Section,
   SectionHeading,
   StatStrip,
-  type Faq,
 } from "@/components/layout";
 import { color, focusRing, heading, radius, text } from "@/lib/design-tokens";
 
@@ -55,12 +58,18 @@ const fadeUp: Variants = {
 
 /* ── Page data ── */
 
+// One fact per stat, each with the store and window it comes from. The strip
+// used to read "+285% pages indexed", "+285% indexing rate" (the same fact
+// twice), "12K+ product pages indexed" (the screenshot says 11,549) and "40+
+// ecommerce sites scaled", which nothing on the site backs.
 const HERO_STATS = [
-  { value: "+285%", label: "Pages indexed" },
-  { value: "+285%", label: "Indexing rate" },
-  { value: "12K+", label: "Product pages indexed" },
-  { value: "40+", label: "Ecommerce sites scaled" },
+  { value: "3,000 → 11,549", label: "Pages indexed · Michigan Sports & Outdoor, May–Jul 2026" },
+  { value: "$5.8k → $19.1k", label: "Monthly revenue · SMK Store, Apr–Jun 2026" },
+  { value: "+83%", label: "US organic clicks · Michigan Sports & Outdoor" },
+  { value: "24h", label: "Tear-down reply" },
 ];
+const SOURCE = "service:ecommerce-seo";
+const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 
 const PAIN_POINTS = [
   { icon: AlertTriangle, title: "Thousands of products, hundreds indexed", body: "Google crawls but refuses to index thin product pages. Your catalog exists in the sitemap and nowhere else — no impressions, no clicks, no revenue." },
@@ -94,14 +103,7 @@ const TOOLING = [
   "Surfer SEO", "Looker Studio", "Log File Analyzer", "PageSpeed Insights",
 ];
 
-const FAQS: Faq[] = [
-  { q: "How long before we see results?", a: "Technical wins (indexing, Core Web Vitals) show impact in 2-4 weeks. Content and category-page work typically shows meaningful ranking movement in 60-90 days. Full revenue impact from ecommerce SEO usually lands in month 4-6." },
-  { q: "Do you work on Shopify, WooCommerce, or custom platforms?", a: "All three. Our current portfolio includes WooCommerce (SMK Store, Michigan Sports Outdoor), Shopify stores, and custom Next.js/headless commerce builds. Platform-specific implementation quirks are handled by our dev partner." },
-  { q: "What if my products have thin content and I can't write for all of them?", a: "That's most of what we do. We build programmatic content pipelines — unique HTML per product, FAQ schema, meta descriptions, internal links — published in batches and re-measured in Search Console before the next one goes out." },
-  { q: "How do you handle indexing at scale?", a: "By fixing the reason Google declined each URL rather than resubmitting harder. Sitemap ↔ GSC diffing runs daily and sorts unindexed URLs by the reason in Search Console's Pages report — crawled-not-indexed is usually thin or duplicate content, discovered-not-indexed is usually crawl budget or missing internal links. High-revenue URLs are fixed first, resubmitted in batches, and URL Inspection is kept for the handful that are genuinely urgent." },
-  { q: "Do you touch conversion rate, or just SEO?", a: "Primary focus is organic acquisition, but we handle CRO adjacent to SEO — product page structure, category page templates, breadcrumbs, related products, and cart-abandonment schema. Full CRO programs are a separate scope." },
-  { q: "What's the pricing?", a: "Depends on catalog size, technical scope, and content volume. Retainers typically start at $2,500/month for stores under 500 SKUs, scaling with catalog size and priority. Every engagement starts with a free reality check audit — no commitment." },
-];
+
 
 type FormState = "idle" | "sending" | "sent" | "error";
 
@@ -149,29 +151,24 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
 
   const inputCls = `w-full ${radius.control} border px-4 py-3 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#534AB7]`;
 
-  const RealityCheckButton = ({ label = "Get a reality check", onDark = false }) => (
-    <button
-      type="button"
-      onClick={openModal}
-      className={`group inline-flex items-center justify-center gap-2 ${radius.control} px-7 py-3.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${focusRing} ${
-        onDark ? "bg-white text-[#0a0f2e]" : "bg-[#534AB7] text-white hover:bg-[#3C3489]"
-      }`}
-    >
-      {label}
-      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-    </button>
-  );
-
   return (
     <main>
       <PageHero
-        centered
         eyebrow="Ecommerce SEO"
-        title="Ecommerce SEO that turns product pages into revenue"
+        title="Ecommerce SEO Services that turn product pages into revenue"
         subtitle="We scale technical SEO, product-page content, and indexing recovery across thousands of SKUs — for WooCommerce, Shopify, and custom stores. Real audits, real fixes, real revenue lift."
+        aside={
+          <ArticleLeadMagnet
+            variant="sidebar"
+            source={SOURCE}
+            copy={{
+              headline: "Free store tear-down",
+              sub: "Send your store URL. I’ll check which products Google is refusing to index and why — and send back what to fix first, within 24 hours.",
+            }}
+          />
+        }
         actions={
           <>
-            <RealityCheckButton />
             <Link
               href="/case-studies"
               className={`inline-flex items-center gap-2 ${radius.control} border px-7 py-3.5 text-sm font-semibold transition-colors hover:bg-[#f8f9fc] ${focusRing}`}
@@ -193,22 +190,7 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
           the client's WooCommerce dashboard (total revenue — never a US figure). */}
       <Section width="reading">
         <SectionHeading eyebrow="Quick answers" title="Ecommerce SEO, answered plainly" />
-        <AnswerCapsules
-          items={[
-            {
-              q: "Why are my product pages not indexed by Google?",
-              a: "Usually because Google found the pages and decided they are not worth indexing. Common causes are near-duplicate manufacturer descriptions, thin boilerplate, filter and sort URLs wasting crawl budget, and products with no price, image or stock. Search Console reports these as \"Crawled - currently not indexed\". Resubmitting rarely helps; improving or removing the pages does.",
-            },
-            {
-              q: "What results has ecommerce SEO produced for SearchPrex clients?",
-              a: "On Michigan Outdoor Sports, a WooCommerce catalogue, indexed pages rose from about 3,000 to 11,549 between March and July 2026, with US organic clicks up 83% in Google Search Console. On SMK Store, total monthly revenue went from $5,832 to $19,100 between April and June 2026, per the client's WooCommerce dashboard.",
-            },
-            {
-              q: "Is Shopify or WooCommerce better for SEO?",
-              a: "Neither ranks better by default; they fail in different places. Shopify fixes URL prefixes such as /products/ and /collections/ and can expose the same product under collection paths. WooCommerce gives full control, but filter, sort and attribute parameters multiply URLs, and hosting or plugins can slow it down. The comparison below shows where each breaks.",
-            },
-          ]}
-        />
+        <AnswerCapsules items={CAPSULES} />
         <div className="mt-8">
           <ComparisonTable
             caption="Where Shopify and WooCommerce stores typically run into SEO problems"
@@ -278,6 +260,19 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
         </CardGrid>
       </Section>
 
+      {/* ── MID-PAGE FORM ── */}
+      <Section tight>
+        <ArticleLeadMagnet
+          variant="banner"
+          source={SOURCE}
+          copy={{
+            eyebrow: "Recognise one of those?",
+            headline: "Find out how much of your catalogue Google is ignoring.",
+            sub: "Send me your store URL. I’ll compare your sitemap with what Google has actually indexed and tell you what to fix first — free, within 24 hours.",
+          }}
+        />
+      </Section>
+
       {/* ── 4 · CASE STUDIES ── */}
       {featuredEcom.length > 0 ? (
         <Section tone="surface">
@@ -295,6 +290,37 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
               View all ecommerce case studies
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
+          </div>
+          {/* The screenshots behind the two headline figures, before the cards. */}
+          <div className="mb-10 grid gap-6 lg:grid-cols-3">
+            <ProofImage
+              src="/images/proof/smk-revenue-before.png"
+              alt="SMK Store WooCommerce dashboard for April 2026, showing $5,832.02 net sales for the month."
+              width={1366}
+              height={607}
+              frameAspect="16 / 9"
+              stage="SMK Store · April 2026"
+              caption="Net sales: $5,832"
+            />
+            <ProofImage
+              src="/images/proof/smk-revenue-after.png"
+              alt="SMK Store WooCommerce dashboard for June 2026, showing $19,100.71 net sales for the month."
+              width={863}
+              height={350
+}
+              frameAspect="16 / 9"
+              stage="SMK Store · June 2026"
+              caption="Net sales: $19,100"
+            />
+            <ProofImage
+              src="/images/proof/mso-gsc-indexing-full.png"
+              alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
+              width={778}
+              height={520}
+              frameAspect="16 / 9"
+              stage="Michigan Sports & Outdoor · May–Jul 2026"
+              caption="About 3,000 → 11,549 pages indexed"
+            />
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featuredEcom.map((cs) => (
@@ -339,15 +365,34 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
       <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead Ecommerce SEO Strategist · 5+ years"
+          role="Founder & Lead Ecommerce SEO Strategist"
           quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. I currently run programs on WooCommerce, Shopify, and custom Next.js stores across the US."
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Ecommerce SEO Strategist"
           linkedinUrl={linkedinUrl}
-          credential="Verified Ecommerce SEO Expert"
-          badges={["Semrush certified", "HubSpot certified", "+92 305 9158010"]}
+          credential="Semrush-certified"
+          badges={["Semrush certified", "+92 305 9158010"]}
         />
       </Section>
+
+      {/* ── PRICE ── */}
+      {ECOM_PLAN ? (
+        <Section>
+          <SectionHeading variant="center" eyebrow="What it costs" title="Ecommerce SEO pricing" />
+          <div className="mx-auto max-w-2xl rounded-2xl border-2 p-6 text-center" style={{ borderColor: ECOM_PLAN.accent, background: ECOM_PLAN.bg }}>
+            <p className="text-3xl font-black" style={{ color: ECOM_PLAN.accent }}>
+              {formatRange(ECOM_PLAN)} <span className="text-base font-bold" style={{ color: color.muted }}>/ month</span>
+            </p>
+            <p className="mt-2 text-sm text-[#374151]">{ECOM_PLAN.best}: {ECOM_PLAN.includes.join(" · ")}</p>
+            <p className="mt-3 text-xs leading-relaxed" style={{ color: color.muted }}>
+              Where a store lands in the range depends on catalogue size, technical scope and content volume. Month to month.
+            </p>
+            <Link href="/pricing" className="mt-3 inline-flex items-center gap-1 text-sm font-bold" style={{ color: color.primary }}>
+              Full pricing <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </Section>
+      ) : null}
 
       {/* ── 8 · FAQ ── */}
       <Section tone="surface" width="reading">
@@ -355,25 +400,17 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
         <FaqList faqs={FAQS} name="ecommerce-seo-faq" />
       </Section>
 
-      {/* ── 9 · FINAL CTA ── */}
-      <Section tone="ink" width="narrow" bordered={false}>
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="mx-auto max-w-2xl text-center"
-        >
-          <h2 className={`${heading.h2} mb-4 text-white`}>
-            Ready to see what&rsquo;s holding your store back?
-          </h2>
-          <p className={`${text.lead} mb-9 text-white/60`}>
-            Get a free reality check — full technical + content + indexing audit, benchmarked against
-            2 competitors, with a 90-day priority roadmap. Founder-reviewed, delivered in 24 hours.
-          </p>
-          <RealityCheckButton onDark />
-        </motion.div>
-      </Section>
+      {/* ── 9 · FINAL CTA — was a button opening a four-field modal; now the
+          two-field form in place. The floating "Reality Check" button and its
+          modal stay for anyone who would rather leave a phone number. ── */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={SOURCE}
+        copy={{
+          headline: "Send me your store URL. I’ll tell you what Google is ignoring.",
+          sub: "Two fields. Which products are indexed, which aren’t and why — from me, within 24 hours.",
+        }}
+      />
 
       {/* ── FLOATING CTA ── */}
       <button
