@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+
+import { normaliseLead, storeLead } from "@/lib/leads-store";
  
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// storeLead calls Apps Script, which can cold-start past ten seconds.
+export const maxDuration = 30;
  
 const NOTIFY_TO = "mubasharshahzad726@gmail.com";
 const NOTIFY_FROM = "SearchPrex Growth Plan <noreply@searchprex.com>";
@@ -281,6 +286,29 @@ export async function POST(req: NextRequest) {
       );
     }
  
+    // ── Store the lead ──
+    // Before emailing, because the email is the alert and this is the record.
+    // The note below the admin send used to say "lead is not lost silently" —
+    // it was: nothing on this route wrote the lead anywhere, so a Resend outage
+    // or an expired key lost it completely. Best-effort, so a store outage
+    // cannot block a notification that would otherwise have gone out.
+    await storeLead(
+      normaliseLead(
+        {
+          name: lead.fullName,
+          email: lead.email,
+          website: lead.websiteUrl,
+          phone: lead.phone,
+          business: `${lead.industry}${lead.companyName ? ` — ${lead.companyName}` : ""}`,
+          message: [lead.primaryGoal, lead.currentSeoStatus, lead.message]
+            .filter(Boolean)
+            .join(" | "),
+        },
+        "growth-plan",
+      ),
+      "leads",
+    ).catch((err) => console.error("[growth-plan] storeLead threw:", err));
+
     // ── Send admin notification ──
     const admin = buildAdminEmail(lead);
     const adminEmailResult = await resend.emails.send({

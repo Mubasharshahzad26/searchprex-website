@@ -32,6 +32,8 @@ export interface Lead {
   email: string;
   name?: string;
   website?: string;
+  /** Law firm owners leave a number far more often than they write a message. */
+  phone?: string;
   /** Business type, practice area or industry — whatever the form collected. */
   business?: string;
   /** Free text the visitor wrote. The most valuable field when it is filled. */
@@ -168,6 +170,7 @@ export function normaliseLead(input: Record<string, unknown>, fallbackSource: st
     email: str(input.email),
     name: str(input.name),
     website: str(input.website),
+    phone: str(input.phone),
     // /api/leads callers send `industry`; /api/send-audit sends `business`.
     business: str(input.business) || str(input.industry),
     message: str(input.message),

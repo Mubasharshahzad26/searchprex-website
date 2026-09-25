@@ -5,7 +5,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { normaliseLead, storeLead } from "@/lib/leads-store";
+
 export const dynamic = 'force-dynamic'
+
+// storeLead calls Apps Script, which can cold-start past ten seconds.
+export const maxDuration = 30
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -28,6 +33,19 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Store before emailing. The email is the alert; the sheet is the record,
+    // and until now this route had only the alert — if Resend failed or its key
+    // expired, the lead existed nowhere. Best-effort so a store outage cannot
+    // block a notification that would otherwise have gone out.
+    await storeLead(
+      normaliseLead(
+        { name: fullName, email, website: websiteUrl, phone, business: businessType,
+          message: Array.isArray(problems) ? problems.join("; ") : String(problems ?? "") },
+        "seo-audit-form",
+      ),
+      "leads",
+    ).catch((err) => console.error("[seo-audit] storeLead threw:", err));
 
     // Send notification to Mubashar
     await resend.emails.send({
