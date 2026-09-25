@@ -138,7 +138,11 @@ const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/all-case-studies", "/act
  */
 // /pricing-plan stays live (a payment provider's verification points at it)
 // but is noindexed so it no longer competes with /pricing.
-const NOINDEX_ROUTES = new Set<string>(["/pricing-plan"]);
+//
+// /home-page-test is a CRO layout test of the homepage. Two near-identical
+// homepages competing for the same terms is exactly the duplication this file
+// exists to prevent, so it is noindexed in code and kept out of the sitemap.
+const NOINDEX_ROUTES = new Set<string>(["/pricing-plan", "/home-page-test"]);
 
 function derivePriority(path: string): number {
   if (path === "/") return 1.0;

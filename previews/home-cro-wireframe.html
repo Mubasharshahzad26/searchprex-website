@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SearchPrex Home CRO Wireframe</title>
+<style>
+  :root{
+    --ink:#1c1c24; --body:#5b6472; --green:#1a7d59; --green-dark:#196b4d;
+    --purple:#534AB7; --page:#eaecf3; --line:#cdd2dd; --soft:#f8f9fc;
+    --note:#b8123a; --fill:#dfe3ec;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 80px}
+  h1.pt{font-size:28px;margin:0 0 6px;letter-spacing:-.5px}
+  .sub{color:var(--body);margin:0 0 26px;max-width:70ch}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 30px;font-size:12px;color:var(--body)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+
+  .frame{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 8px 28px rgba(17,24,39,.09)}
+  .frame + .frame{margin-top:34px}
+  .chrome{display:flex;gap:6px;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+  .chrome i{width:10px;height:10px;border-radius:99px;background:var(--line);display:block}
+  .chrome b{margin-left:10px;font:11px/1 ui-monospace,Menlo,monospace;color:var(--body);align-self:center}
+
+  section.blk{padding:22px 24px;border-bottom:1px dashed var(--line);position:relative}
+  section.blk:last-child{border-bottom:0}
+  .tag{position:absolute;top:0;left:0;background:var(--ink);color:#fff;font:10px/1 ui-monospace,Menlo,monospace;
+    padding:5px 9px;border-bottom-right-radius:8px;letter-spacing:.4px}
+  .blk > *:first-child{margin-top:16px}
+
+  .fold{background:repeating-linear-gradient(90deg,var(--note) 0 10px,transparent 10px 20px);
+    height:3px;position:relative;margin:0}
+  .fold em{position:absolute;right:10px;top:-9px;background:var(--note);color:#fff;font:10px/1 ui-monospace,monospace;
+    padding:4px 8px;border-radius:99px;font-style:normal}
+
+  .row{display:flex;gap:18px;flex-wrap:wrap}
+  .col{flex:1 1 0;min-width:190px}
+  .box{background:var(--fill);border:1px solid var(--line);border-radius:10px;padding:14px;min-height:52px}
+  .box.hi{background:#fff;border-color:var(--green);box-shadow:0 0 0 3px rgba(26,125,89,.10)}
+  .lbl{font:11px/1.3 ui-monospace,Menlo,monospace;color:var(--body);text-transform:uppercase;letter-spacing:.6px;margin:0 0 7px}
+  .h1w{font-size:30px;line-height:1.1;font-weight:900;margin:2px 0 8px;letter-spacing:-.6px}
+  .h1w small{display:block;font-size:19px;font-weight:800;color:var(--purple);letter-spacing:-.3px;margin-top:4px}
+  .h2w{font-size:20px;font-weight:800;margin:0 0 4px;letter-spacing:-.3px}
+  .p{color:var(--body);margin:0 0 10px}
+  .cta{display:inline-block;background:var(--green);color:#fff;font-weight:800;font-size:13px;
+    padding:13px 18px;border-radius:9px;text-transform:uppercase;letter-spacing:.6px}
+  .cta.ghost{background:#fff;color:var(--green-dark);border:1.5px solid var(--green)}
+  .field{background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px;color:#8b95a5;font-size:13px}
+  .ticks{list-style:none;padding:0;margin:10px 0 0;font-size:12.5px;color:var(--body)}
+  .ticks li{margin:0 0 5px}
+  .ticks li::before{content:"OK ";color:var(--green);font-weight:800;font-family:ui-monospace,monospace}
+  .stat{text-align:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 8px}
+  .stat b{display:block;font-size:20px;color:var(--green-dark);line-height:1}
+  .stat span{font-size:11px;color:var(--body);display:block;margin-top:4px}
+  .shot{background:linear-gradient(135deg,#e7ebf3,#d7dde9);border:1px solid var(--line);border-radius:8px;
+    height:104px;display:flex;align-items:center;justify-content:center;font:11px/1.4 ui-monospace,monospace;
+    color:var(--body);text-align:center;padding:8px}
+  .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:99px;
+    padding:6px 11px;font-size:11.5px;color:var(--body);margin:0 5px 6px 0}
+  .pill.on{border-color:var(--purple);color:var(--purple);font-weight:700}
+  .note{border-left:3px solid var(--note);background:#fff5f7;padding:9px 12px;margin:12px 0 0;
+    font-size:12.5px;color:#7a1026;border-radius:0 7px 7px 0}
+  .note b{color:var(--note)}
+  .win{border-left:3px solid var(--green);background:#f1faf5;padding:9px 12px;margin:12px 0 0;
+    font-size:12.5px;color:#14543c;border-radius:0 7px 7px 0}
+  .avatar{width:56px;height:56px;border-radius:99px;background:var(--fill);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font:9px/1.2 ui-monospace,monospace;color:var(--body);
+    text-align:center;flex:0 0 auto}
+  .map{background:var(--fill);border:1px solid var(--line);border-radius:10px;height:150px;
+    display:flex;align-items:center;justify-content:center;font:11px/1.4 ui-monospace,monospace;color:var(--body);text-align:center}
+  .nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .nav .logo{font-weight:900;letter-spacing:-.4px}
+  .nav .item{font-size:13px;color:var(--body);font-weight:600}
+  .nav .spacer{flex:1}
+  .phone{font-size:13px;font-weight:800;color:var(--ink)}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:11px/1.3 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.5px;color:var(--body)}
+  td.bad{color:var(--note)}
+  td.good{color:var(--green-dark)}
+  .mob{max-width:390px;margin:0 auto}
+  h2.sh{font-size:20px;margin:40px 0 4px;letter-spacing:-.4px}
+  .shp{color:var(--body);margin:0 0 16px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="pt">SearchPrex homepage &mdash; CRO wireframe</h1>
+  <p class="sub">Positioning: an SEO agency <strong>actually run by Mubashar Sharif</strong>, serving law firms,
+  local businesses and technical SEO across US states. One offer, one form, proof before pitch.
+  Red notes = friction removed from the current page. Green notes = why the block earns its place.</p>
+
+  <div class="legend">
+    <span><i class="sw" style="background:var(--fill);border:1px solid var(--line)"></i> placeholder block</span>
+    <span><i class="sw" style="background:#fff;border:1.5px solid var(--green)"></i> conversion element</span>
+    <span><i class="sw" style="background:var(--note)"></i> friction removed</span>
+    <span><i class="sw" style="background:var(--green)"></i> rationale</span>
+  </div>
+
+  <h2 class="sh">Desktop</h2>
+  <p class="shp">Nine blocks. The current page has fifteen.</p>
+
+  <div class="frame">
+    <div class="chrome"><i></i><i></i><i></i><b>searchprex.com</b></div>
+
+    <section class="blk">
+      <span class="tag">01 &nbsp;HEADER &mdash; sticky</span>
+      <div class="nav">
+        <span class="logo">SearchPrex</span>
+        <span class="item">Services</span>
+        <span class="item">Results</span>
+        <span class="item">Locations</span>
+        <span class="item">About Mubashar</span>
+        <span class="spacer"></span>
+        <span class="phone">(xxx) xxx-xxxx</span>
+        <span class="cta" style="padding:9px 14px">Free tear-down</span>
+      </div>
+      <div class="note"><b>Cut:</b> 7 top-level items with mega-dropdowns (~35 links) down to 4 + phone.
+      Resources, SEO News and Solutions move to the footer &mdash; they are research paths, not buying paths,
+      and above the fold they compete with the offer.</div>
+      <div class="win">A visible phone number is added: law-firm owners call, they do not fill forms.
+      It is also the strongest &ldquo;a real person runs this&rdquo; signal on the page.</div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">02 &nbsp;HERO &mdash; claim + one form + proof, all above the fold</span>
+      <div class="row">
+        <div class="col" style="flex:1.25 1 0">
+          <p class="lbl">Founder-led &middot; One client per city &middot; US-wide</p>
+          <div class="h1w">SEO Agency for Law Firms &amp; Local Businesses
+            <small>Run personally by Mubashar Sharif &mdash; not a team of juniors</small>
+          </div>
+          <p class="p">You deal with the person doing the work. Every number below is a Search Console or
+          store screenshot you can open, not a claim in a slide.</p>
+          <div class="row" style="gap:10px">
+            <div class="stat"><b>+227%</b><span>Store revenue<br>$5.8k &rarr; $19.1k</span></div>
+            <div class="stat"><b>+285%</b><span>Pages indexed<br>GSC verified</span></div>
+            <div class="stat"><b>Top 3</b><span>Map pack<br>HVAC, local</span></div>
+          </div>
+          <div class="row" style="gap:10px;margin-top:12px">
+            <div class="col"><div class="box" style="min-height:0;padding:9px 12px;font-size:12px;color:var(--body)">
+              Trustpilot &starf;&starf;&starf;&starf;&starf; &mdash; verified reviews (only outbound link in the hero)</div></div>
+          </div>
+        </div>
+        <div class="col" style="flex:1 1 0">
+          <div class="box hi">
+            <div class="row" style="gap:12px;align-items:center;margin-bottom:12px">
+              <div class="avatar">PHOTO<br>Mubashar</div>
+              <div>
+                <p style="margin:0;font-weight:800;font-size:13.5px">Free competitor tear-down</p>
+                <p style="margin:2px 0 0;font-size:12px;color:var(--body)">I analyse it myself. Reply in 24 hours.</p>
+              </div>
+            </div>
+            <div class="field">yoursite.com</div>
+            <div class="field" style="margin-top:9px">you@firm.com</div>
+            <div class="cta" style="display:block;text-align:center;margin-top:10px">Send my tear-down &rarr;</div>
+            <ul class="ticks">
+              <li>2 fields. No credit card, no call required.</li>
+              <li>One client per city &mdash; your market stays yours.</li>
+              <li>Prefer to talk? 30-min call &rarr;</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Cut 1:</b> the persona tab-switcher. Today two of three tabs <em>replace the form
+      with a YouTube embed</em> &mdash; the highest-intent moment on the site sends people to YouTube.
+      <b>Cut 2:</b> the duplicate form (the hero currently has two). <b>Cut 3:</b> the 8-badge
+      &ldquo;Verified &amp; Listed On&rdquo; strip &mdash; six of those pills say &ldquo;Registered&rdquo; and are
+      not even clickable; being registered on a directory is not proof, and it pushes real proof below the fold.</div>
+      <div class="win">Self-selection moves to block 03 where it costs nothing. The form drops from 4 fields
+      to 2 (name and business type are askable in the reply). The founder photo sits <em>in</em> the hero because
+      &ldquo;run by the owner&rdquo; is the differentiator &mdash; not 8 scrolls down.</div>
+    </section>
+    <div class="fold"><em>fold ~ 900px</em></div>
+
+    <section class="blk">
+      <span class="tag">03 &nbsp;THREE DOORS &mdash; self-selection, no hidden content</span>
+      <div class="row">
+        <div class="col"><div class="box"><p class="h2w">Law Firm SEO</p>
+          <p class="p" style="font-size:13px">Cases, not clicks. PI, family, criminal defense, estate, mass torts.</p>
+          <span class="cta ghost" style="font-size:11px;padding:9px 13px">See law firm results &rarr;</span></div></div>
+        <div class="col"><div class="box"><p class="h2w">Local Business SEO</p>
+          <p class="p" style="font-size:13px">Map pack top 3, GBP, service-area pages, calls tracked.</p>
+          <span class="cta ghost" style="font-size:11px;padding:9px 13px">See local results &rarr;</span></div></div>
+        <div class="col"><div class="box"><p class="h2w">Technical SEO</p>
+          <p class="p" style="font-size:13px">De-indexing recovery, crawl waste, Core Web Vitals, migrations.</p>
+          <span class="cta ghost" style="font-size:11px;padding:9px 13px">See technical results &rarr;</span></div></div>
+      </div>
+      <div class="win">Three doors, three service pages, three internal links with descriptive anchors.
+      Ecommerce keeps its own service page but stops being a homepage headline &mdash; the stated positioning is
+      law firms, local and technical.</div>
+      <div class="note"><b>Cut:</b> the 6-card Services grid, where two cards pointed at the same
+      /services URL and one repeated a link already used in another card.</div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">04 &nbsp;PROOF &mdash; three screenshots, one row</span>
+      <div class="row">
+        <div class="col"><div class="shot">GSC indexing<br>3,000 &rarr; 11,549 pages</div>
+          <p class="p" style="font-size:12px;margin-top:8px">Michigan Outdoor Sports &mdash; May to Jul 2026.
+          <strong>Read the case study &rarr;</strong></p></div>
+        <div class="col"><div class="shot">WooCommerce net sales<br>$5,832 &rarr; $19,100 / mo</div>
+          <p class="p" style="font-size:12px;margin-top:8px">SMK Store &mdash; Apr to Jun 2026.
+          <strong>Read the case study &rarr;</strong></p></div>
+        <div class="col"><div class="shot">Map pack rank tracker<br>outside top 10 &rarr; top 3</div>
+          <p class="p" style="font-size:12px;margin-top:8px">HVAC Services Team &mdash; local.
+          <strong>Read the case study &rarr;</strong></p></div>
+      </div>
+      <div class="note"><b>Cut:</b> four full-height proof sections stacked back to back
+      (RevenueProof, LocalSeoProof, RecoveryStory, LawFirmProof) &mdash; roughly 2,600px of scroll before
+      anyone reaches the offer, and LawFirmProof mostly points back at the screenshots above it.</div>
+      <div class="win">Same evidence, one screen. Each caption carries its date and links to the long
+      version, so the detail stays crawlable &mdash; it just is not in the buyer&rsquo;s way.</div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">05 &nbsp;COVERAGE &mdash; the missing block</span>
+      <p class="h2w">Where I work</p>
+      <p class="p">Law firm and local SEO across Kansas, Texas, Michigan, Louisiana, Ohio, Pennsylvania,
+      California, Arizona and New Mexico &mdash; one client per city.</p>
+      <div class="map">US map, states with a live city page filled<br>each state links to its hub</div>
+      <div style="margin-top:12px">
+        <span class="pill on">Kansas &mdash; 8 cities</span><span class="pill on">Texas &mdash; 3</span>
+        <span class="pill on">Michigan &mdash; 2</span><span class="pill on">Louisiana &mdash; 2</span>
+        <span class="pill">Ohio</span><span class="pill">Pennsylvania</span><span class="pill">California</span>
+        <span class="pill">Arizona</span><span class="pill">New Mexico</span>
+        <span class="pill" style="border-style:dashed">+ your city &mdash; ask</span>
+      </div>
+      <div class="win"><b>The single biggest SEO gap on the page.</b> Twenty city pages exist and the homepage
+      body links to none of them &mdash; only the footer and one service card do. The homepage is the strongest
+      page on the site; this block passes that strength to the money pages and makes the
+      &ldquo;across US states&rdquo; claim verifiable instead of asserted.</div>
+      <div class="note"><b>Honesty guard:</b> the words must match the map. Nine states have pages today,
+      so the copy says nine states, not &ldquo;all 50&rdquo;. The dashed &ldquo;+ your city&rdquo; pill is the
+      honest way to invite the rest.</div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">06 &nbsp;WHO ACTUALLY DOES THE WORK</span>
+      <div class="row" style="align-items:flex-start">
+        <div class="col" style="flex:0 0 120px"><div class="avatar" style="width:120px;height:120px;border-radius:12px">PHOTO<br>Mubashar Sharif</div></div>
+        <div class="col" style="flex:1 1 0">
+          <p class="h2w">Mubashar Sharif &mdash; owner, and the person on your account</p>
+          <p class="p">One paragraph: years in search, what he specialises in, what he will not do.
+          Then the receipts &mdash; LinkedIn, the YouTube walkthroughs, the news desk he writes.</p>
+          <span class="pill">LinkedIn</span><span class="pill">YouTube walkthroughs</span>
+          <span class="pill">Writes the SEO news desk</span><span class="pill">Trustpilot reviews</span>
+        </div>
+      </div>
+      <div class="win">This is the whole positioning, so it sits above pricing, not below the FAQ.
+      It is also the E-E-A-T block: a named, verifiable person with a track record, which is what
+      Google&rsquo;s quality signals and AI Overviews both reward.</div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">07 &nbsp;PROCESS &amp; PRICE &mdash; side by side</span>
+      <div class="row">
+        <div class="col">
+          <p class="h2w">What happens next</p>
+          <div class="box" style="margin-bottom:8px"><strong>Day 0</strong> &mdash; you send the URL</div>
+          <div class="box" style="margin-bottom:8px"><strong>Day 1</strong> &mdash; tear-down in your inbox</div>
+          <div class="box" style="margin-bottom:8px"><strong>Day 7</strong> &mdash; 30/60/90 plan, if you want one</div>
+          <div class="box"><strong>Weekly</strong> &mdash; Monday report: rankings, calls, forms, what changed</div>
+        </div>
+        <div class="col">
+          <p class="h2w">What it costs</p>
+          <div class="box" style="margin-bottom:8px">Retainer range, from $X &mdash; what is in it</div>
+          <div class="box" style="margin-bottom:8px">Mid tier &mdash; what changes</div>
+          <div class="box">Technical / project &mdash; fixed scope</div>
+          <p class="p" style="font-size:12px;margin-top:10px">No lock-in language, no fake discount timer.</p>
+        </div>
+      </div>
+      <div class="note"><b>Cut:</b> the &ldquo;2 Spots Remaining This Month&rdquo; scarcity bar. If nothing in the
+      system actually decrements it, it is a manufactured number on a page whose entire argument is
+      &ldquo;my numbers are real&rdquo;. Exclusivity is the honest version, and it is already in the hero.</div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">08 &nbsp;REVIEWS &amp; FAQ</span>
+      <div class="row">
+        <div class="col"><div class="box">3 real Trustpilot reviews, named, with the platform badge</div></div>
+        <div class="col"><div class="box">6 FAQs, answer in the first sentence, FAQPage schema<br>
+          (AI Overviews lift the first sentence &mdash; write for that)</div></div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <span class="tag">09 &nbsp;CLOSE &mdash; same offer, third and final ask</span>
+      <div class="box hi" style="text-align:center">
+        <p class="h2w" style="margin-bottom:6px">Send me your URL. I will tell you what is wrong with it.</p>
+        <p class="p" style="font-size:13px">Two fields, 24-hour reply, one client per city.</p>
+        <div class="field" style="max-width:320px;margin:0 auto">yoursite.com</div>
+        <div class="cta" style="margin-top:10px">Send my tear-down &rarr;</div>
+        <p class="p" style="font-size:12px;margin:10px 0 0">or call (xxx) xxx-xxxx &mdash; you get Mubashar, not a rep</p>
+      </div>
+      <div class="win">Three asks on the page in total (hero, sticky mobile bar, close) &mdash; all the same
+      offer, same wording, same destination. Free resources and blog teasers move into the footer so the
+      last thing before the footer is the offer, not a reading list.</div>
+    </section>
+  </div>
+
+  <h2 class="sh">Mobile</h2>
+  <p class="shp">Same order. The hero has to fit the offer on one phone screen &mdash; that constraint is what decides
+  everything that is allowed in it.</p>
+
+  <div class="frame mob">
+    <div class="chrome"><i></i><i></i><i></i><b>375 x 812</b></div>
+    <section class="blk" style="padding:16px">
+      <span class="tag">HEADER</span>
+      <div class="nav" style="gap:8px"><span class="logo" style="font-size:14px">SearchPrex</span><span class="spacer"></span>
+      <span class="phone" style="font-size:12px">CALL</span><span class="cta" style="padding:7px 10px;font-size:10px">Free audit</span></div>
+    </section>
+    <section class="blk" style="padding:16px">
+      <span class="tag">HERO</span>
+      <p class="lbl" style="font-size:10px">Founder-led &middot; one client per city</p>
+      <div class="h1w" style="font-size:23px">SEO Agency for Law Firms &amp; Local Businesses<small style="font-size:15px">Run personally by Mubashar Sharif</small></div>
+      <div class="box hi" style="margin-top:12px">
+        <div class="field">yoursite.com</div>
+        <div class="field" style="margin-top:8px">you@firm.com</div>
+        <div class="cta" style="display:block;text-align:center;margin-top:9px;font-size:11px">Send my tear-down &rarr;</div>
+      </div>
+      <div class="row" style="gap:7px;margin-top:11px">
+        <div class="stat" style="padding:8px 4px"><b style="font-size:15px">+227%</b><span style="font-size:9.5px">Revenue</span></div>
+        <div class="stat" style="padding:8px 4px"><b style="font-size:15px">+285%</b><span style="font-size:9.5px">Indexed</span></div>
+        <div class="stat" style="padding:8px 4px"><b style="font-size:15px">Top 3</b><span style="font-size:9.5px">Map pack</span></div>
+      </div>
+    </section>
+    <div class="fold"><em>fold</em></div>
+    <section class="blk" style="padding:16px"><span class="tag">DOORS</span>
+      <div class="box" style="margin-bottom:7px">Law Firm SEO &rarr;</div>
+      <div class="box" style="margin-bottom:7px">Local Business SEO &rarr;</div>
+      <div class="box">Technical SEO &rarr;</div></section>
+    <section class="blk" style="padding:16px"><span class="tag">PROOF</span>
+      <div class="shot" style="height:80px;margin-bottom:8px">GSC indexing screenshot</div>
+      <div class="shot" style="height:80px;margin-bottom:8px">Store revenue screenshot</div>
+      <div class="shot" style="height:80px">Map pack screenshot</div></section>
+    <section class="blk" style="padding:16px"><span class="tag">COVERAGE</span><div class="map" style="height:110px">state links</div></section>
+    <section class="blk" style="padding:16px"><span class="tag">FOUNDER</span>
+      <div class="row" style="align-items:center;gap:10px"><div class="avatar">PHOTO</div>
+      <div style="font-size:12.5px;color:var(--body)">Mubashar Sharif &mdash; owner</div></div></section>
+    <section class="blk" style="padding:16px"><span class="tag">PROCESS</span><div class="box">Day 0 / 1 / 7 / weekly</div></section>
+    <section class="blk" style="padding:16px"><span class="tag">PRICE</span><div class="box">3 tiers</div></section>
+    <section class="blk" style="padding:16px"><span class="tag">REVIEWS + FAQ</span><div class="box">Trustpilot, 6 FAQs</div></section>
+    <section class="blk" style="padding:16px"><span class="tag">CLOSE</span><div class="box hi">URL field + CTA</div></section>
+    <section class="blk" style="padding:12px 16px;background:var(--ink)">
+      <div class="row" style="gap:8px;align-items:center"><span style="color:#fff;font-size:11px;flex:1">Sticky bar: one CTA + call</span>
+      <span class="cta" style="padding:8px 11px;font-size:10px">Free audit</span></div></section>
+  </div>
+
+  <h2 class="sh">Friction removed, line by line</h2>
+  <p class="shp">Every item in the left column is in the live homepage today.</p>
+  <div class="frame"><section class="blk" style="padding:18px 20px">
+  <table>
+    <tr><th style="width:34%">Now</th><th style="width:33%">Why it costs leads</th><th style="width:33%">Wireframe</th></tr>
+    <tr><td class="bad">Persona tabs; 2 of 3 swap the form for a YouTube embed</td>
+        <td>The highest-intent block sends visitors off-site, and two thirds of the value hides behind a click</td>
+        <td class="good">Form always visible; self-selection becomes 3 linked doors</td></tr>
+    <tr><td class="bad">Two forms inside the hero</td><td>Two identical asks read as a mistake and split attention</td>
+        <td class="good">One form, 2 fields (was 4)</td></tr>
+    <tr><td class="bad">8-badge &ldquo;Verified &amp; Listed On&rdquo; strip; 6 not clickable, 6 say &ldquo;Registered&rdquo;</td>
+        <td>Eats the fold with directory listings anyone can get, and pushes real proof below it</td>
+        <td class="good">Trustpilot only in the hero; 3 real numbers instead</td></tr>
+    <tr><td class="bad">4 stacked proof sections, roughly 2,600px, before the offer</td>
+        <td>The buyer decides in the first screen and leaves before the ask</td>
+        <td class="good">One proof row, 3 screenshots, links to the long versions</td></tr>
+    <tr><td class="bad">7 nav items, around 35 dropdown links</td><td>Every extra path is another way to not convert</td>
+        <td class="good">4 items + phone + one CTA</td></tr>
+    <tr><td class="bad">&ldquo;2 Spots Remaining This Month&rdquo;</td><td>Unverifiable scarcity on a page whose argument is that its numbers are verifiable</td>
+        <td class="good">One-client-per-city exclusivity, which is true</td></tr>
+    <tr><td class="bad">No phone number above the fold</td><td>Law firm owners call; the callers are lost entirely</td>
+        <td class="good">Phone in header, sticky bar and close</td></tr>
+    <tr><td class="bad">FreeResources + BlogTeaser as the last two blocks</td>
+        <td>The final impression is &ldquo;go read something&rdquo; instead of &ldquo;send your URL&rdquo;</td>
+        <td class="good">Offer last; resources move to the footer</td></tr>
+    <tr><td class="bad">Homepage body links to 0 of 20 city pages</td>
+        <td>The strongest page passes no authority to the pages meant to win local searches</td>
+        <td class="good">Coverage block links every state hub</td></tr>
+    <tr><td class="bad">Sticky mobile CTA + chat widget + cookie bar together</td>
+        <td>Three overlays on a 375px screen cover the form</td>
+        <td class="good">Sticky bar only; chat loads after the first interaction</td></tr>
+  </table>
+  </section></div>
+
+</div>
+</body>
+</html>

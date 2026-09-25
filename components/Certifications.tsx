@@ -9,17 +9,11 @@ const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
 const SEMRUSH = "#ff642d";
  
-/*
-  ⚠️ EDIT CERT NAMES (specialty) ⚠️
-  Har Semrush PDF khol ke uska EXACT naam daalo. Links 100% real.
-*/
-export const credentials = [
-  { specialty: "SEO Fundamentals",       credType: "Certified by", source: "Semrush",            isArticle: false, href: "https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf" },
-  { specialty: "On-Page & Technical SEO", credType: "Certified by", source: "Semrush",            isArticle: false, href: "https://static.semrush.com/academy/certificates/0053423184/mubashar-shahzad_2.pdf" },
-  { specialty: "Content Strategy · SEO",  credType: "Published on", source: "HVAC Services Team", isArticle: true,  href: "https://www.hvacservicesteam.com/blog/best-time-to-install-a-new-ac-near-me-california-2026" },
-  { specialty: "Keyword Research",        credType: "Certified by", source: "Semrush",            isArticle: false, href: "https://static.semrush.com/academy/certificates/7ec9b0d154/mubashar-shahzad_2.pdf" },
-  { specialty: "Local SEO",               credType: "Certified by", source: "Semrush",            isArticle: false, href: "https://static.semrush.com/academy/certificates/e2cb11d7cb/mubashar-shahzad_26.pdf" },
-];
+// The list moved to lib/credentials.ts so server components (the homepage
+// among them) can read it too; this file is "use client". Imported for the
+// carousel below and re-exported so nothing that read it from this module breaks.
+import { credentials } from "@/lib/credentials";
+export { credentials };
  
 /* Left block — fills the card edge-to-edge like Toptal's expert photo */
 function Mark({ isArticle }: { isArticle: boolean }) {
