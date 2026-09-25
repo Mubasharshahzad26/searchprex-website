@@ -46,6 +46,7 @@ import { CALL_HREF } from "@/lib/offer";
 
 type Status = "idle" | "loading" | "done" | "error";
 type Variant = "sidebar" | "banner" | "bottom";
+export type Copy = { eyebrow?: string; headline?: string; sub?: string };
 
 const INK = "#0a0f2e";
 const BODY = "#5b6472";
@@ -193,7 +194,7 @@ function SidebarVariant({ source }: { source: string }) {
 }
 
 /** Full-width banner, spliced into the article body at its midpoint. */
-function BannerVariant({ source }: { source: string }) {
+function BannerVariant({ source, copy }: { source: string; copy?: Copy }) {
   const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
 
   return (
@@ -204,15 +205,14 @@ function BannerVariant({ source }: { source: string }) {
       <div className="grid gap-5 sm:grid-cols-[1.3fr_1fr] sm:items-center">
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: PURPLE }}>
-            While you&apos;re thinking about this
+            {copy?.eyebrow ?? "While you’re thinking about this"}
           </p>
           <p className="mt-1.5 text-lg font-black leading-snug sm:text-xl" style={{ color: INK }}>
-            Is your own site making this mistake?
+            {copy?.headline ?? "Is your own site making this mistake?"}
           </p>
           <p className="mt-2 text-sm leading-relaxed" style={{ color: BODY }}>
-            Send me your URL and I&apos;ll check it myself against what you just read — competitor gaps,
-            content gaps, and whether Google&apos;s AI names you or them. Free, written by me, reply within
-            24 hours.
+            {copy?.sub ??
+              "Send me your URL and I’ll check it myself against what you just read — competitor gaps, content gaps, and whether Google’s AI names you or them. Free, written by me, reply within 24 hours."}
           </p>
         </div>
 
@@ -264,17 +264,17 @@ function BannerVariant({ source }: { source: string }) {
 }
 
 /** Full-width closing section. Replaces the old link-only bottom CTA. */
-function BottomVariant({ source }: { source: string }) {
+function BottomVariant({ source, copy }: { source: string; copy?: Copy }) {
   const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
 
   return (
     <section className="py-20" style={{ background: INK }}>
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
         <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
-          Send me your URL. I&apos;ll tell you what&apos;s wrong with it.
+          {copy?.headline ?? "Send me your URL. I’ll tell you what’s wrong with it."}
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
-          Two fields, a reply within 24 hours, written by me — the person you just read.
+          {copy?.sub ?? "Two fields, a reply within 24 hours, written by me — the person you just read."}
         </p>
 
         <div className="mx-auto mt-7 max-w-md">
@@ -337,8 +337,19 @@ function BottomVariant({ source }: { source: string }) {
   );
 }
 
-export default function ArticleLeadMagnet({ variant, source }: { variant: Variant; source: string }) {
+export default function ArticleLeadMagnet({
+  variant,
+  source,
+  copy,
+}: {
+  variant: Variant;
+  source: string;
+  /** Context-specific wording. The offer and the form never change — only the
+   *  Attention line does, so a hub page can speak to "a Google update hit my
+   *  site" while an article speaks to what the reader just read. */
+  copy?: Copy;
+}) {
   if (variant === "sidebar") return <SidebarVariant source={source} />;
-  if (variant === "banner") return <BannerVariant source={source} />;
-  return <BottomVariant source={source} />;
+  if (variant === "banner") return <BannerVariant source={source} copy={copy} />;
+  return <BottomVariant source={source} copy={copy} />;
 }

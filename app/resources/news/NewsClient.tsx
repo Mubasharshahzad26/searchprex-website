@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Newspaper, ExternalLink, ArrowRight, Calendar } from "lucide-react";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
  
 /* ─── THEME ─── */
 const GREEN = "#3eb489";
@@ -62,7 +63,24 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
-export default function NewsClient({ initialNews = [], initialSpokes = [] }: { initialNews?: any[], initialSpokes?: any[] }) {
+export default function NewsClient({
+  initialNews = [],
+  initialSpokes = [],
+  category,
+  heading,
+  intro,
+  categories = [],
+}: {
+  initialNews?: any[];
+  initialSpokes?: any[];
+  /** The ?category= filter, when one is active and recognised. */
+  category?: string;
+  heading?: string;
+  intro?: string;
+  categories?: Array<{ key: string; label: string }>;
+}) {
+  // Which listing produced the lead — "news-hub" or "news-category:Local".
+  const leadSource = category ? `news-category:${category}` : "news-hub";
   const dbNewsFormatted = initialNews.map((n: any) => ({
     id: n.id,
     date: formatDate(n.newsDate),
@@ -89,11 +107,43 @@ export default function NewsClient({ initialNews = [], initialSpokes = [] }: { i
             <Newspaper className="h-3.5 w-3.5" /> Latest SEO News
           </span>
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-[#0a0f2e] sm:text-5xl">
-            SEO &amp; Google Update News
+            {heading ?? <>SEO &amp; Google Update News</>}
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-[#64748b] leading-relaxed">
-            Plain-English breakdowns of the algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated and explained.
+            {intro ??
+              "Plain-English breakdowns of the algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated and explained."}
           </p>
+
+          {/* Category links. Crawlable internal links between the listings, and
+              a way for a reader who landed on one category to find the others
+              without opening the nav. */}
+          {categories.length > 0 && (
+            <nav aria-label="News categories" className="mt-7 flex flex-wrap justify-center gap-2">
+              <Link
+                href="/resources/news"
+                aria-current={!category ? "page" : undefined}
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-bold transition-colors ${
+                  !category ? "border-[#534AB7] bg-[#534AB7] text-white" : "border-[#dfe3ec] bg-white text-[#475569] hover:border-[#534AB7]"
+                }`}
+              >
+                All news
+              </Link>
+              {categories.map((c) => (
+                <Link
+                  key={c.key}
+                  href={`/resources/news?category=${encodeURIComponent(c.key)}`}
+                  aria-current={category === c.key ? "page" : undefined}
+                  className={`rounded-full border px-3.5 py-1.5 text-xs font-bold transition-colors ${
+                    category === c.key
+                      ? "border-[#534AB7] bg-[#534AB7] text-white"
+                      : "border-[#dfe3ec] bg-white text-[#475569] hover:border-[#534AB7]"
+                  }`}
+                >
+                  {c.label}
+                </Link>
+              ))}
+            </nav>
+          )}
         </div>
       </section>
  
@@ -120,6 +170,22 @@ export default function NewsClient({ initialNews = [], initialSpokes = [] }: { i
           </div>
         </section>
       )}
+
+      {/* ── LEAD MAGNET — between the deep-dives and the feed, where a reader
+          who came for one story has just decided whether to keep reading. ── */}
+      <section className="bg-[#f8f9fc] pt-4">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <ArticleLeadMagnet
+            variant="banner"
+            source={leadSource}
+            copy={{
+              eyebrow: "Reading about an update?",
+              headline: "Find out whether it touched your site.",
+              sub: "Send me your URL. I’ll check it myself against the changes on this page — what moved, what didn’t, and whether Google’s AI names you or a competitor. Free, reply within 24 hours.",
+            }}
+          />
+        </div>
+      </section>
 
       {/* ── NEWS FEED ── */}
       <section className="py-16">
@@ -166,25 +232,16 @@ export default function NewsClient({ initialNews = [], initialSpokes = [] }: { i
         </div>
       </section>
  
-      {/* ── CTA ── */}
-      <section className="bg-[#0a0f2e] py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <motion.h2 variants={fadeUp} className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Worried a core update hit your site?
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mb-8 text-base text-white/70">
-              Get a free audit — we'll pinpoint what changed and build a recovery plan around the latest 2026 signals.
-            </motion.p>
-            <motion.div variants={fadeUp}>
-              <Link href="/free-audit" className="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5" style={{ background: GREEN }}>
-                Get Free SEO Audit <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
- 
+      {/* ── CTA — was a single "Get Free SEO Audit" link to a second page. ── */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={leadSource}
+        copy={{
+          headline: "Worried a Google update hit your site?",
+          sub: "Two fields. I’ll pinpoint what changed for you and what to fix first — written by me, within 24 hours.",
+        }}
+      />
+
     </main>
   );
 }
