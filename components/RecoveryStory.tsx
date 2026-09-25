@@ -337,6 +337,17 @@ export default function RecoveryStory() {
                     frameAspect="16 / 9"
                     note={r.note}
                     sizes="(max-width: 1024px) 100vw, 400px"
+                    /* Eager, like every other proof capture on the homepage.
+                       These three were the only ones left lazy, and lazy does
+                       not survive the <Reveal> wrapper: the section ships at
+                       opacity:0, so the browser treats the images as not worth
+                       fetching and never requests them. Measured on production —
+                       smk-revenue-* (eager) had naturalWidth 282, all three of
+                       these had naturalWidth 0 after scrolling them into view.
+                       Three ~90KB screenshots that carry the revenue claim are
+                       worth the bytes; that is the trade lazy loading exists to
+                       make, and here it was making it the wrong way round. */
+                    eager
                   />
                 </div>
               </li>

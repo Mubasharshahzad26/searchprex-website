@@ -27,14 +27,23 @@ export const dynamic = "force-dynamic";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
-/** The proof screenshots the homepage renders; see lib/site-schema.ts. */
+/**
+ * The proof screenshots the homepage renders.
+ *
+ * Keep this in step with components/RecoveryStory.tsx and RevenueProof.tsx,
+ * which is what actually puts them on the page. It drifted once already: this
+ * list advertised mso-revenue-3-aug17.png after the third panel had been
+ * replaced by mso-revenue-3-sep25.png, so the sitemap pointed Google at an
+ * image that appears on no page while omitting the one that does. An image
+ * sitemap entry for an image no page contains is a dead end for a crawler.
+ */
 const HOMEPAGE_PROOF = [
   "/images/proof/mso-gsc-indexing-full.png",
   "/images/proof/smk-revenue-before.png",
   "/images/proof/smk-revenue-after.png",
   "/images/proof/mso-revenue-1-jul20.png",
   "/images/proof/mso-revenue-2-aug06.png",
-  "/images/proof/mso-revenue-3-aug17.png",
+  "/images/proof/mso-revenue-3-sep25.png",
 ];
 
 function absolute(url: string): string | null {
