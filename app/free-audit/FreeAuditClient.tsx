@@ -66,21 +66,45 @@ export default function FreeAuditClient() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [form, setForm] = useState({ name: "", email: "", website: "", business: "" });
   const [fromTool, setFromTool] = useState<string | null>(null);
+  /** Where this lead came from, so the Sheet can answer "which page earns leads". */
+  const [attribution, setAttribution] = useState({
+    source: "",
+    utmSource: "",
+    utmCampaign: "",
+    referrer: "",
+  });
 
   // Prefill the domain when the visitor arrives from a tool (currently the SERP
   // Checker's preview mode, which sends ?website=). Read from window rather than
   // useSearchParams so this client component doesn't need a Suspense boundary.
   //
-  // Only `website` is carried across: /api/send-audit destructures exactly
-  // name/email/website/business, so the keywords the visitor typed have nowhere
-  // to land until that table gains a column. They're shown back to them below
-  // rather than being silently dropped.
+  // `email` is carried across too now: the hero form on the homepage collects a
+  // URL and an email before sending the visitor here, and asking for the email
+  // a second time is the kind of friction that loses the people who are already
+  // convinced.
+  //
+  // The keywords a visitor typed in the SERP Checker are shown back to them
+  // rather than submitted — there is still nowhere for them to land.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const website = params.get("website");
+    const email = params.get("email");
     const keywords = params.get("keywords");
-    if (website) setForm((f) => ({ ...f, website }));
+    setForm((f) => ({
+      ...f,
+      ...(website ? { website } : {}),
+      ...(email ? { email } : {}),
+    }));
     if (keywords) setFromTool(keywords);
+    // Captured at mount, not at submit: a visitor can navigate within the site
+    // between arriving and submitting, and by then document.referrer is this
+    // site and the UTM parameters are gone from the URL.
+    setAttribution({
+      source: window.location.pathname + window.location.search,
+      utmSource: params.get("utm_source") ?? "",
+      utmCampaign: params.get("utm_campaign") ?? "",
+      referrer: document.referrer || "",
+    });
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -90,7 +114,7 @@ export default function FreeAuditClient() {
       const res = await fetch("/api/send-audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...attribution }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("done");
