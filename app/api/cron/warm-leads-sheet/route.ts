@@ -17,11 +17,20 @@
 // On the site's primary CTA that is not acceptable, and it happens precisely
 // when traffic is thin, which is exactly the situation now.
 //
-// A GET every ten minutes costs nothing and keeps the container alive, so a
-// real visitor is almost never the one paying for the cold start. It does not
-// make the race impossible; it makes it rare. The complete fix is an
-// idempotency key so a timed-out write can be retried without duplicating, and
-// that needs a change on the Apps Script side.
+// NOT SCHEDULED. This project is on Vercel's Hobby plan, where a cron can only
+// run once a day, and a daily warm-up warms nothing. The entry was in
+// vercel.json for a while at */10 and — together with a `_comment` key that the
+// cron schema does not accept — it made the file invalid, so every deployment
+// after it was rejected. Several commits looked like they were not working when
+// in fact they were never deployed.
+//
+// It is kept because the real fix made it unnecessary rather than wrong: the
+// sheet write now retries with an idempotency key (lib/leads-store.ts), so a
+// cold start costs a few seconds instead of a false failure, and a retry that
+// follows a write which already succeeded cannot duplicate the row.
+//
+// Call it by hand to check reachability and latency from the deployment, or
+// schedule it if the project ever moves to a plan with sub-daily crons.
 //
 // The GET is the script's own health check: it reads the sheet and returns a
 // row count. It writes nothing.

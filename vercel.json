@@ -15,10 +15,6 @@
     {
       "path": "/api/cron/seo-news-autopilot",
       "schedule": "0 14 * * *"
-    },
-    {
-      "path": "/api/cron/warm-leads-sheet",
-      "schedule": "*/10 * * * *"
     }
   ]
 }
