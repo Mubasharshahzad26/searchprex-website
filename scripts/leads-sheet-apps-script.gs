@@ -79,6 +79,18 @@
  * public repo.
  */
 var CONFIG = {
+  // Bumped whenever this file changes in a way that matters, and returned by
+  // doGet. Without it there is no way to tell which code a deployment is
+  // actually running: "I redeployed" and "the new code is live" are different
+  // claims, and a Save without Deploy -> Manage deployments -> New version
+  // looks exactly like a successful deploy from the editor. Two rounds of
+  // inferring the answer from row counts is what put this here.
+  //
+  //   v3  requestId de-duplication via CacheService
+  //   v2  Phone column
+  //   v1  first working version
+  SCRIPT_VERSION: 'v3',
+
   SHARED_SECRET: 'CHANGE_ME_TO_A_LONG_RANDOM_STRING',
 
   // Public address only. Add the private one as a Script Property.
@@ -192,7 +204,13 @@ function doGet() {
   } catch (err) {
     return jsonOut_({ ok: false, error: 'sheet unavailable: ' + err });
   }
-  return jsonOut_({ ok: true, secretConfigured: configured, leadsStored: rows });
+  return jsonOut_({
+    ok: true,
+    version: CONFIG.SCRIPT_VERSION,
+    secretConfigured: configured,
+    dedupe: true,
+    leadsStored: rows,
+  });
 }
 
 function doPost(e) {
@@ -222,6 +240,32 @@ function doPost(e) {
       return jsonOut_({ ok: false, error: 'email required' });
     }
 
+    // Idempotency.
+    //
+    // A cold Apps Script container takes longer to answer than the calling
+    // function is willing to wait, so the caller times out while this script
+    // goes on to write the row. Measured on production more than once: the
+    // route returned 500, the row appeared, the visitor was told it failed.
+    // The caller therefore retries with the SAME requestId, and this is what
+    // stops the retry becoming a second row.
+    //
+    // CacheService rather than a sheet column: the lookup has to be fast (it
+    // runs before every write) and it only has to survive the seconds between
+    // an attempt and its retry. Six hours is generous for that.
+    var requestId = String(body.requestId || '').trim();
+    var cache = null;
+    if (requestId) {
+      try {
+        cache = CacheService.getScriptCache();
+        var seen = cache.get('lead:' + requestId);
+        if (seen) {
+          return jsonOut_({ ok: true, row: Number(seen), duplicate: true });
+        }
+      } catch (cacheErr) {
+        Logger.log('cache unavailable, proceeding without dedupe: ' + cacheErr);
+      }
+    }
+
     var sheet = getLeadsSheet_();
     var stamp = Utilities.formatDate(new Date(), 'Asia/Karachi', 'yyyy-MM-dd HH:mm');
 
@@ -240,6 +284,17 @@ function doPost(e) {
     ]);
 
     var rowNumber = sheet.getLastRow();
+
+    // Recorded immediately after the append and before the email, because the
+    // email is the slow part and a retry arriving mid-send must still be
+    // recognised as a duplicate.
+    if (requestId && cache) {
+      try {
+        cache.put('lead:' + requestId, String(rowNumber), 21600);
+      } catch (cacheErr) {
+        Logger.log('could not cache requestId: ' + cacheErr);
+      }
+    }
 
     // The alert is best-effort: if the mail quota is exhausted the lead is
     // already in the sheet, and reporting failure here would make the website
