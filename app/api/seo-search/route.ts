@@ -1,5 +1,5 @@
 ﻿import { NextResponse } from 'next/server'
-import { GoogleGenAI } from '@google/genai'
+import { generateContentWithPool } from '@/lib/gemini-pool'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -149,21 +149,16 @@ export async function POST(req: Request) {
   const query = (body.query || '').trim()
   if (!query) return NextResponse.json({ error: 'A search query is required.' }, { status: 400 })
  
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) return NextResponse.json({ error: 'GEMINI_API_KEY is not configured.' }, { status: 500 })
  
   const vertical = detectVertical(query)
   const related = relevantPages(query, vertical)
-  const ai = new GoogleGenAI({ apiKey })
  
   try {
-    const response = await ai.models.generateContent({
+    const response = await generateContentWithPool({
       model: MODEL,
       contents: [{ parts: [{ text: `Question: "${query}"` }] }],
-      config: {
-        tools: [{ googleSearch: {} }],
-        systemInstruction: systemPrompt(vertical, related),
-      },
+      tools: [{ googleSearch: {} }],
+      systemInstruction: systemPrompt(vertical, related),
     })
  
     let answer = (response.text || '').trim()
@@ -176,7 +171,7 @@ export async function POST(req: Request) {
  
     // Real web sources the answer is grounded on
     const chunks: any[] =
-      (response as any)?.candidates?.[0]?.groundingMetadata?.groundingChunks || []
+      response?.candidates?.[0]?.groundingMetadata?.groundingChunks || []
     const seen = new Set<string>()
     const sources: { title: string; url: string }[] = []
     for (const c of chunks) {

@@ -1,17 +1,21 @@
 // app/api/seo-finder/route.ts
 //
 // Secure server-side proxy for the AI SEO Package Finder.
-// The Anthropic API key NEVER reaches the browser — it lives only here, on the server.
 //
-// Setup:
-//   1) npm i  (no SDK needed — uses fetch)
-//   2) Add to .env.local:   ANTHROPIC_API_KEY=sk-ant-...
-//   3) Add the same env var in Vercel → Project → Settings → Environment Variables
+// Was a direct call to the paid Anthropic API (claude-sonnet-4-6) on a public,
+// unauthenticated tool page — every visitor's click billed the account, with no
+// cap beyond the per-IP rate limiter below. This is a diagnose-and-recommend
+// task against a fixed set of three packages: not the kind of judgment that
+// needs Claude specifically, and lib/gemini-pool.ts's 30-key free rotation is
+// the same mechanism the SEO news and blog autopilots already run on. Moved
+// here for the same reason those did: nothing to fund, nothing to watch for a
+// silent quota cutoff.
 //
 // The in-memory rate limiter below is basic and resets on serverless cold starts.
 // For real production, swap it for Upstash Redis (@upstash/ratelimit) — noted below.
  
 import { NextRequest, NextResponse } from "next/server";
+import { generateContentWithPool } from "@/lib/gemini-pool";
  
 export const runtime = "nodejs";
  
@@ -79,46 +83,21 @@ export async function POST(req: NextRequest) {
       );
     }
  
-    const apiKey = process.env.ANTHROPIC_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: "Server is not configured. Missing API key." },
-        { status: 500 }
-      );
-    }
- 
-    const r = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        // claude-sonnet-4-6 = great quality/cost balance.
-        // For lower cost, switch to "claude-haiku-4-5-20251001".
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: [{ role: "user", content: problem.trim() }],
-      }),
-    });
- 
-    if (!r.ok) {
+    let result;
+    try {
+      result = await generateContentWithPool({
+        contents: [{ parts: [{ text: problem.trim() }] }],
+        systemInstruction: SYSTEM_PROMPT,
+        responseMimeType: "application/json",
+      });
+    } catch {
       return NextResponse.json(
         { error: "Analysis service is busy. Please try again shortly." },
         { status: 502 }
       );
     }
  
-    const data = await r.json();
-    const raw: string = (data.content || [])
-      .map((b: { type: string; text?: string }) =>
-        b.type === "text" ? b.text ?? "" : ""
-      )
-      .join("")
-      .trim();
- 
+    const raw = (result.text || "").trim();
     const clean = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
     const start = clean.indexOf("{");
     const end = clean.lastIndexOf("}");

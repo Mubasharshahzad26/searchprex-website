@@ -1,5 +1,5 @@
 ﻿import { NextResponse } from 'next/server'
-import { GoogleGenAI } from '@google/genai'
+import { generateContentWithPool } from '@/lib/gemini-pool'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -35,23 +35,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Firm name and city are required.' }, { status: 400 })
   }
  
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) return NextResponse.json({ error: 'GEMINI_API_KEY is not configured.' }, { status: 500 })
- 
-  const ai = new GoogleGenAI({ apiKey })
   const query = `Who are the best ${practiceArea} lawyers or law firms in ${city}? Name the specific firms a potential client should consider.`
  
   try {
     // â”€â”€ Call 1: grounded answer (what an AI actually recommends for this query) â”€â”€
-    const g = await ai.models.generateContent({
+    const g = await generateContentWithPool({
       model: MODEL,
       contents: [{ parts: [{ text: query }] }],
-      config: { tools: [{ googleSearch: {} }] },
+      tools: [{ googleSearch: {} }],
     })
     const answer = (g.text || '').trim()
  
     // Grounding sources = the sites the AI pulled from
-    const chunks: any[] = (g as any)?.candidates?.[0]?.groundingMetadata?.groundingChunks || []
+    const chunks: any[] = g?.candidates?.[0]?.groundingMetadata?.groundingChunks || []
     const seen = new Set<string>()
     const sources: { title: string; url: string; domain: string }[] = []
     for (const c of chunks) {
@@ -81,7 +77,7 @@ export async function POST(req: Request) {
     let whyVisible = ''
     let recommendations: string[] = []
     try {
-      const a = await ai.models.generateContent({
+      const a = await generateContentWithPool({
         model: MODEL,
         contents: [
           {
@@ -101,7 +97,7 @@ Return ONLY a JSON object (no markdown, no code fences):
             ],
           },
         ],
-        config: { responseMimeType: 'application/json' },
+        responseMimeType: 'application/json',
       })
       const raw = (a.text || '{}').trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim()
       const data = JSON.parse(raw)

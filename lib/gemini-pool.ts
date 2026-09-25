@@ -269,6 +269,145 @@ export async function generateWithPool(
 }
 
 /**
+ * Full-shape Gemini call: multi-turn contents, a system instruction, and/or
+ * Google Search grounding — everything generateWithPool's single-string
+ * prompt cannot express. Added for the four public tools that called
+ * `new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY})` directly (a single
+ * key, no rotation, no fallback): the AI SEO Search, AI Visibility Checker,
+ * Intake Assistant and Law Firm Scorecard. Two of those use
+ * `tools: [{ googleSearch: {} }]` for real-time grounding — swapping them onto
+ * the plain-prompt pool would have silently dropped the one thing that makes
+ * an "AI visibility" tool tell the truth instead of hallucinating an answer.
+ *
+ * Returns the shape `@google/genai`'s `ai.models.generateContent()` returns
+ * (`{ text, candidates }`), so a call site built against that SDK only needs
+ * its constructor call replaced, not its response-parsing code.
+ */
+export interface GeminiContentRequest {
+  model?: string;
+  contents: unknown;
+  systemInstruction?: string;
+  tools?: Array<{ googleSearch?: Record<string, never> }>;
+  responseMimeType?: string;
+  temperature?: number;
+  maxOutputTokens?: number;
+}
+
+export interface GeminiContentResult {
+  text: string;
+  candidates: any[];
+}
+
+async function callGeminiRaw(
+  req: GeminiContentRequest,
+  key: string,
+  model: string
+): Promise<GeminiContentResult> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  const generationConfig: Record<string, unknown> = {
+    temperature: req.temperature ?? 0.7,
+    maxOutputTokens: req.maxOutputTokens ?? 8192,
+  };
+  if (req.responseMimeType) generationConfig.responseMimeType = req.responseMimeType;
+
+  const body: Record<string, unknown> = { contents: req.contents, generationConfig };
+  if (req.systemInstruction) {
+    body.systemInstruction = { parts: [{ text: req.systemInstruction }] };
+  }
+  if (req.tools) body.tools = req.tools;
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
+      {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        signal: controller.signal,
+        cache: 'no-store',
+        body: JSON.stringify(body),
+      }
+    );
+
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      const err = new Error(`Gemini HTTP ${res.status}: ${detail.slice(0, 300)}`) as Error & {
+        status: number;
+        detail: string;
+      };
+      err.status = res.status;
+      err.detail = detail;
+      throw err;
+    }
+
+    const json: any = await res.json();
+    const candidates = json?.candidates ?? [];
+    const text = candidates?.[0]?.content?.parts?.map((p: any) => p?.text ?? '').join('') ?? '';
+    return { text, candidates };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Same rotation, retry and quota-classification behaviour as generateWithPool,
+ * against the full request shape rather than a single prompt string. Kept as
+ * its own loop rather than sharing generateWithPool's — that function is used
+ * by fourteen autopilot call sites today, and duplicating ~20 lines here costs
+ * far less than a shared refactor risking any of them.
+ */
+export async function generateContentWithPool(req: GeminiContentRequest): Promise<GeminiContentResult> {
+  const keys = await loadGeminiKeys();
+  if (keys.length === 0) {
+    throw new Error('No Gemini keys configured (GEMINI_API_KEYS, Neon pool, or GEMINI_API_KEY).');
+  }
+
+  let model = req.model ?? DEFAULT_MODEL;
+  const maxAttempts = Math.min(Math.max(keys.length, 4), 12);
+  let lastErr: Error | undefined;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const key = pickKey(keys);
+
+    try {
+      return await callGeminiRaw(req, key, model);
+    } catch (err) {
+      lastErr = err as Error;
+      const status = (err as any).status as number | undefined;
+      const detail = ((err as any).detail as string) ?? '';
+
+      if (status === 429) {
+        const { daily, retryAfterMs } = classify429(detail);
+        if (daily) {
+          markExhausted(key, 'daily quota');
+        } else {
+          markRateLimited(key, retryAfterMs || 10_000);
+          if (!keys.some((k) => !isBlocked(k))) {
+            await new Promise((r) => setTimeout(r, 10_000));
+          }
+        }
+        continue;
+      }
+
+      if (status === 404 && model !== FALLBACK_MODEL) {
+        console.warn(`[gemini-pool] ${model} returned 404; falling back to ${FALLBACK_MODEL}.`);
+        model = FALLBACK_MODEL;
+        continue;
+      }
+
+      if (status && ![500, 502, 503, 504].includes(status)) throw err;
+
+      if (attempt < maxAttempts) {
+        await new Promise((r) => setTimeout(r, Math.min(attempt * 1000, 5000)));
+      }
+    }
+  }
+
+  throw lastErr ?? new Error('Gemini call failed across the whole key pool.');
+}
+
+/**
  * Drop-in stand-in for `new GoogleGenerativeAI(key).getGenerativeModel(...)`.
  * The response shape matches the SDK's so existing call sites — which do
  * `result.response.text()` — need no change beyond swapping the constructor.

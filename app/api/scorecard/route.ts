@@ -1,5 +1,5 @@
 ﻿import { NextResponse } from 'next/server'
-import { GoogleGenAI } from '@google/genai'
+import { generateContentWithPool } from '@/lib/gemini-pool'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -22,11 +22,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Website, city, and practice area are required.' }, { status: 400 })
   }
  
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) return NextResponse.json({ error: 'GEMINI_API_KEY is not configured.' }, { status: 500 })
- 
-  const ai = new GoogleGenAI({ apiKey })
- 
   try {
     // â”€â”€ Call 1: grounded research across the 5 pillars (googleSearch) â”€â”€
     const researchPrompt = `You are a senior law-firm SEO auditor. Research the law firm at "${website}" - they practice ${practiceArea} law in ${city}. Use Google Search to investigate their real online presence, and assess each of these five areas with specific findings:
@@ -39,10 +34,10 @@ export async function POST(req: Request) {
  
 Also identify the firm's real name. Write a concise, specific assessment of each area based on what you actually find.`
  
-    const g = await ai.models.generateContent({
+    const g = await generateContentWithPool({
       model: MODEL,
       contents: [{ parts: [{ text: researchPrompt }] }],
-      config: { tools: [{ googleSearch: {} }] },
+      tools: [{ googleSearch: {} }],
     })
     const research = (g.text || '').trim()
  
@@ -71,10 +66,10 @@ Produce a Law Firm SEO Scorecard. Return ONLY a JSON object in EXACTLY this shap
  
 Rules: overallScore is an integer 0-100 (roughly the weighted average of the pillar scores). Each pillar score is an integer 0-100. Exactly 5 pillars in that exact order; max 2 findings each, one sentence each. Exactly 5 fixes ordered by priority, highest-leverage first. status must be "weak" if score < 50, "moderate" if 50-74, "strong" if 75 or above. Each fix pillar must be one of: map-pack, organic, ai-visibility, eeat-schema, content. impact must be High, Medium, or Low. Be specific to THIS firm from the research above; if something could not be verified, assess conservatively rather than inventing exact numbers. Keep every string concise.`
  
-    const a = await ai.models.generateContent({
+    const a = await generateContentWithPool({
       model: MODEL,
       contents: [{ parts: [{ text: jsonPrompt }] }],
-      config: { responseMimeType: 'application/json' },
+      responseMimeType: 'application/json',
     })
     const raw = (a.text || '{}').trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim()
  

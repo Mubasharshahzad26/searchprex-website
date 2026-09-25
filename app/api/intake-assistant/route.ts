@@ -1,5 +1,5 @@
 ﻿import { NextResponse } from 'next/server'
-import { GoogleGenAI } from '@google/genai'
+import { generateContentWithPool } from '@/lib/gemini-pool'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -54,8 +54,6 @@ export async function POST(req: Request) {
   const messages = Array.isArray(body.messages) ? body.messages : []
   if (!messages.length) return NextResponse.json({ error: 'messages required' }, { status: 400 })
  
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) return NextResponse.json({ error: 'GEMINI_API_KEY is not configured.' }, { status: 500 })
  
   // Gemini requires the conversation to start with a user turn â€” drop any
   // leading assistant (greeting) messages.
@@ -66,17 +64,13 @@ export async function POST(req: Request) {
     parts: [{ text: m.content }],
   }))
  
-  const ai = new GoogleGenAI({ apiKey })
- 
   try {
-    const response = await ai.models.generateContent({
+    const response = await generateContentWithPool({
       model: MODEL,
       contents,
-      config: {
-        systemInstruction: systemPrompt(body.firm || '', body.practiceAreas || ''),
-        responseMimeType: 'application/json',
-        temperature: 0.6,
-      },
+      systemInstruction: systemPrompt(body.firm || '', body.practiceAreas || ''),
+      responseMimeType: 'application/json',
+      temperature: 0.6,
     })
  
     const raw = (response.text || '{}')
