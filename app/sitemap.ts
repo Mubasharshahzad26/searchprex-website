@@ -249,7 +249,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  const newsCategories = ["AI SEO", "LLMs", "Tools", "Ecommerce", "Technical"];
+  const newsCategories = ["AI SEO", "LLMs", "Tools", "Ecommerce", "Technical", "Local"];
   for (const cat of newsCategories) {
     add({
       url: absolute(`/resources/news?category=${encodeURIComponent(cat)}`),
