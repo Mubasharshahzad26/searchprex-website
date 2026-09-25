@@ -8,18 +8,32 @@
 // (ACCENT #ff642d, INK #0f0f0f, MUTED #6b7280, BG_SOFT #fafafa) is gone, and
 // with it the reason this page looked like a different website from /pricing.
 //
-// Copy is unchanged from the previous version. Content revisions are a separate,
-// separately-approved pass.
+// Rebuilt on the shared service-page template (previews/services-cro-wireframe.html)
+// on 26 September 2026, keeping what was already good here — the answer
+// capsules, the "be our first law firm case study" section, the live intake
+// demo, the practice-area navigation and the self-serve checklist.
+//
+// Fixed: a visually hidden H1 over a different visible headline; a hero
+// checklist promising "Rank #1 for your city's practice-area keywords" (nobody
+// can promise a position, and ABA Model Rule 7.1 bars misleading claims); an
+// unsourced "$80 per click"; a stat strip with "20+ businesses served" and a
+// "60d median time to top 3" drawn from no dataset; an FAQ saying "most clients
+// significantly reduce ad spend" when there are no law firm clients yet; and a
+// city grid that left out all eight Kansas cities.
 
 import Link from "next/link";
-import { ArrowRight, Check, MapPin, Phone, Scale, BadgeCheck, ListChecks } from "lucide-react";
+import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import CoverageSection from "@/components/CoverageSection";
+import ProofImage from "@/components/ProofImage";
+import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { CAPSULES, FAQS, PROBLEMS } from "./data";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
 import VideoTestimonials from "@/components/VideoTestimonials";
 import {
   AuthorCard,
   CardGrid,
   ComparisonTable,
-  CtaBand,
   CtaButton,
   FaqList,
   AnswerCapsules,
@@ -30,10 +44,8 @@ import {
   StatStrip,
   Accent,
   type ComparisonRow,
-  type Faq,
 } from "@/components/layout";
 import { color, heading, radius, text } from "@/lib/design-tokens";
-import { CITY_PAGES } from "@/lib/city-pages";
 import LawFirmStack from "@/components/LawFirmStack";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 
@@ -41,19 +53,18 @@ const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst
 
 /* ─── DATA ─── */
 
-const heroIncludes = [
-  "Rank #1 for your city's practice-area keywords",
-  "Dominate the Google Maps local pack",
-  "Get cited in Google AI Overviews & ChatGPT",
-  "Attorney E-E-A-T content (YMYL compliant)",
-  "Replace expensive Google Ads with organic leads",
-];
+const SOURCE = "service:law-firm-seo";
+const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
 
-const proofStats = [
-  { value: "5+", label: "Years SEO experience" },
-  { value: "20+", label: "Businesses served" },
-  { value: "60d", label: "Median time to top 3" },
-  { value: "24hr", label: "Audit turnaround" },
+/**
+ * Facts about the service, not results. There is no law firm result to put
+ * here yet, and the strip says nothing that implies one.
+ */
+const stats = [
+  { value: "1 firm", label: "Per city and practice area" },
+  { value: "5", label: "Practice areas with their own page" },
+  { value: "20", label: "City pages in 9 states" },
+  { value: "24h", label: "Tear-down reply" },
 ];
 
 const services = [
@@ -91,15 +102,6 @@ const coreUpdate2026 = [
   { title: "People-first legal content", body: "Every page genuinely helps prospective clients — never thin, keyword-stuffed pages the Helpful Content system demotes." },
 ];
 
-const faqs: Faq[] = [
-  { q: "How long before I see results?", a: "Most law firms see ranking improvements in 30–60 days. First-page and local pack rankings typically follow in 60–90 days, depending on city and practice area competition." },
-  { q: "Do you work with all practice areas?", a: "Yes — family law, personal injury, criminal defense, estate planning, immigration, employment law, and more. Every strategy is tailored to your specific practice and city." },
-  { q: "What is GEO / AIO / LLMs optimization?", a: "It's optimizing so your firm gets cited in AI answers — Google AI Overviews, ChatGPT, Perplexity, and Gemini. As more clients research lawyers through AI, this is becoming as important as ranking #1." },
-  { q: "Are you compliant with Google's 2026 core updates?", a: "Completely. Legal content is YMYL, so we build every page around E-E-A-T — attorney credentials, real experience, authoritative sourcing, and people-first content that survives every core update." },
-  { q: "Can I keep running Google Ads?", a: "You can, but our goal is to replace that spend with free organic traffic. Most clients significantly reduce ad spend within months as organic leads grow." },
-  { q: "Is there a contract?", a: "No long-term contracts. We earn your business every month with results — more qualified consultations, more local visibility, more cases." },
-];
-
 const partnershipPoints = [
   "Market Exclusivity: We only work with one firm per city and practice area",
   "Proven local pack + AI Overview methodology",
@@ -134,27 +136,57 @@ export default function LawFirmSEOClient() {
       </div>
     <main>
       <PageHero
-        seoH1="Law Firm SEO Services | Rank in Local Pack & AI Overviews"
         eyebrow="Law Firm SEO"
         title={
           <>
-            Get more cases from
-            <br />
-            <Accent>Google in 2026.</Accent>
+            Law Firm SEO Services <Accent>that bring in signed cases</Accent>
           </>
         }
-        subtitle="While you pay $80 per click on Google Ads, competitors get free organic traffic. We help law firms rank #1 in their city and get cited in Google's 2026 AI Overviews — so qualified clients call you first."
-        primaryCta={{
-          href: "/free-audit",
-          label: "Claim free competitor tear-down",
-          icon: <ArrowRight className="h-4 w-4" aria-hidden />,
-        }}
-        secondaryCta={{ href: "#approach", label: "See our approach" }}
-        trustPoints={["No contracts", "Results in 60–90 days", "Founder works your account"]}
-        aside={<HeroChecklist />}
+        subtitle="Every click on Google Ads is paid for, every month. Practice-area and city pages keep bringing in cases after you stop paying. I build them to legal YMYL standards — led by Mubashar Sharif, Semrush-certified."
+        actions={
+          <Link href="#approach" className="inline-flex items-center gap-1.5 text-sm font-bold" style={{ color: color.primary }}>
+            See how it works <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        }
+        trustPoints={["One firm per city", "Reply within 24 hours", "The founder does the work"]}
+        aside={
+          <ArticleLeadMagnet
+            variant="sidebar"
+            source={SOURCE}
+            copy={{
+              headline: "Free law firm tear-down",
+              sub: "Send your URL. I’ll check your practice-area pages, Business Profile and the firms outranking you in your city — within 24 hours.",
+            }}
+          />
+        }
       />
 
-      <StatStrip stats={proofStats} />
+      <StatStrip stats={stats} />
+
+      {/* THE PROBLEM — four checks a managing partner can run today */}
+      <Section>
+        <SectionHeading
+          eyebrow="The problem"
+          title="Why good firms lose the search to worse ones"
+          intro="Four things you can check yourself today. Each one is costing you consultations if it fails."
+        />
+        <CardGrid columns={2}>
+          {PROBLEMS.map((p) => (
+            <div key={p.title} className="rounded-2xl border bg-white p-6" style={{ borderColor: color.border }}>
+              <p className="flex items-center gap-2 text-sm font-black" style={{ color: color.ink }}>
+                <Scale className="h-4 w-4 flex-shrink-0 text-[#b8123a]" aria-hidden />
+                {p.title}
+              </p>
+              <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#374151]">
+                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1a7d59]" aria-hidden />
+                <span><strong>Check:</strong> {p.check}</span>
+              </p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: color.muted }}>{p.costs}</p>
+            </div>
+          ))}
+        </CardGrid>
+      </Section>
+
 
       {/* QUICK ANSWERS
           Answer capsules for AI Overviews and answer engines: a real question as
@@ -163,22 +195,7 @@ export default function LawFirmSEOClient() {
           so, and labels the proof it does cite as coming from other industries. */}
       <Section width="reading">
         <SectionHeading eyebrow="Quick answers" title="Law firm SEO, answered plainly" />
-        <AnswerCapsules
-          items={[
-            {
-              q: "What does law firm SEO involve?",
-              a: "Law firm SEO is the work of getting a practice found for the searches people make before they call a lawyer. For personal injury, family law and criminal defense firms, that means a practice-area page for each city served, a complete Google Business Profile, attorney credentials Google can verify, and technically sound pages.",
-            },
-            {
-              q: "Why is SEO for lawyers held to a higher standard?",
-              a: "Google's Search Quality Rater Guidelines list legal issues such as divorce and child custody as \"Your Money or Your Life\" topics, judged on experience, expertise, authoritativeness and trust. Law firm pages also answer to bar advertising rules: ABA Model Rule 7.1 says a lawyer shall not make \"a false or misleading communication\" about their services.",
-            },
-            {
-              q: "Do you have law firm case studies?",
-              a: "Not yet. SearchPrex has not completed a law firm engagement, so we publish no legal-specific results. What we can show is the same underlying work in other industries, labelled as such: a WooCommerce catalogue taken from about 3,000 to 11,549 indexed pages, and local service clients at #1, verified in Google Search Console.",
-            },
-          ]}
-        />
+        <AnswerCapsules items={CAPSULES} />
       </Section>
 
       {/* WHAT'S INCLUDED */}
@@ -200,6 +217,19 @@ export default function LawFirmSEOClient() {
             <FeatureCard key={s.title} label="Included" title={s.title} body={s.body} />
           ))}
         </CardGrid>
+      </Section>
+
+      {/* MID-PAGE FORM */}
+      <Section tight>
+        <ArticleLeadMagnet
+          variant="banner"
+          source={SOURCE}
+          copy={{
+            eyebrow: "Failed one of those checks?",
+            headline: "See exactly which firms outrank you, and why.",
+            sub: "Send me your URL. I’ll compare your pages, Business Profile and reviews with the firms above you in your city — free, within 24 hours.",
+          }}
+        />
       </Section>
 
       {/* COMPARISON */}
@@ -250,6 +280,28 @@ export default function LawFirmSEOClient() {
           title="Be our first law firm case study"
           intro="We've delivered GSC-verified results in ecommerce, local, and technical SEO — including a local service business reaching the top 3 map pack and a Google AI Overview placement in 60 days. Now we're bringing that same methodology to law firms."
         />
+        {/* The transferable proof, labelled as coming from other industries —
+            the same line the third answer capsule draws. */}
+        <div className="mb-8 grid gap-6 md:grid-cols-2">
+          <ProofImage
+            src="/images/proof/local-dolls-ai-overview-rank1.png"
+            alt="Google results for 'post construction cleaning in Chesterfield, MI' showing D.O.L.L.S. Cleaning cited first in the AI Overview and ranking first organically."
+            width={628}
+            height={322}
+            frameAspect="16 / 9"
+            stage="Local service business · not a law firm"
+            caption="Named first in the AI Overview, #1 organic"
+          />
+          <ProofImage
+            src="/images/proof/mso-gsc-indexing-full.png"
+            alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
+            width={778}
+            height={520}
+            frameAspect="16 / 9"
+            stage="Ecommerce · not a law firm"
+            caption="About 3,000 → 11,549 pages indexed, May–Jul 2026"
+          />
+        </div>
         <div
           className={`overflow-hidden ${radius.card} border bg-white lg:grid lg:grid-cols-2`}
           style={{ borderColor: color.border }}
@@ -328,54 +380,30 @@ export default function LawFirmSEOClient() {
         </CardGrid>
       </Section>
 
-      {/* CITY PAGES ──
-          The city pages name this page as their breadcrumb parent, so the link
-          should run both ways. It is also the honest answer to the question this
-          page raises: local search is decided city by city, and a national page
-          cannot rank for "law firm seo detroit" no matter how well it is written. */}
-      <Section>
-        <SectionHeading
-          eyebrow="By city"
-          title="Where does your firm practise?"
-          intro="Every local market has its own competition, its own courts, and its own state law shaping what your pages need to say. These are the cities we have built for."
-        />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {CITY_PAGES.map((c) => (
-            <Link
-              key={`${c.stateSlug}-${c.citySlug}`}
-              href={`/locations/${c.stateSlug}/${c.citySlug}`}
-              className={`flex items-start gap-3 ${radius.card} border bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-md`}
-              style={{ borderColor: color.border }}
-            >
-              <MapPin
-                className="mt-0.5 h-4 w-4 shrink-0"
-                style={{ color: color.primary }}
-                aria-hidden
-              />
-              <span>
-                <span className="block font-semibold" style={{ color: color.ink }}>
-                  {c.city}, {c.stateAbbr}
-                </span>
-                <span className={text.caption} style={{ color: color.muted }}>
-                  {c.county}
-                </span>
-              </span>
+      {/* CITY PAGES — the shared coverage block. The grid it replaces read
+          lib/city-pages only and left out all eight Kansas cities; this reads
+          lib/locations, which merges both. The city pages name this page as
+          their breadcrumb parent, so the link runs both ways. */}
+      <CoverageSection />
+
+      {/* PRICE */}
+      {LAW_PLAN ? (
+        <Section>
+          <SectionHeading eyebrow="What it costs" title="Law firm SEO pricing" />
+          <div className="mx-auto max-w-2xl rounded-2xl border-2 p-6 text-center" style={{ borderColor: LAW_PLAN.accent, background: LAW_PLAN.bg }}>
+            <p className="text-3xl font-black" style={{ color: LAW_PLAN.accent }}>
+              {formatRange(LAW_PLAN)} <span className="text-base font-bold" style={{ color: color.muted }}>/ month</span>
+            </p>
+            <p className="mt-2 text-sm text-[#374151]">{LAW_PLAN.best}: {LAW_PLAN.includes.join(" · ")}</p>
+            <p className="mt-3 text-xs leading-relaxed" style={{ color: color.muted }}>
+              Where a firm lands in the range depends on the number of practice areas and cities. Month to month; one firm per city and practice area.
+            </p>
+            <Link href="/pricing" className="mt-3 inline-flex items-center gap-1 text-sm font-bold" style={{ color: color.primary }}>
+              Full pricing <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-          ))}
-        </div>
-        {/* The grid above is lib/city-pages only; Kansas lives in its own tree,
-            and the hub is the one page that lists both. */}
-        <p className={`${text.small} mt-6`} style={{ color: color.muted }}>
-          Also serving{" "}
-          <Link href="/locations/kansas" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
-            cities across Kansas
-          </Link>
-          {" · "}
-          <Link href="/locations" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
-            See every state and city we cover
-          </Link>
-        </p>
-      </Section>
+          </div>
+        </Section>
+      ) : null}
 
       {/* <VideoTestimonials /> */}
 
@@ -383,7 +411,7 @@ export default function LawFirmSEOClient() {
       <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead SEO Strategist · 5+ years"
+          role="Founder & Lead SEO Strategist · Semrush-certified"
           quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to the top 3 map pack and Google AI Overview placements, and I bring that exact methodology to every firm I work with.&rdquo;"
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
@@ -394,7 +422,7 @@ export default function LawFirmSEOClient() {
       {/* ── THE CHECKLIST ──
           The audit above, written out and ungated. This is the page where a
           resource link earns its place: the visitor is already a law firm, and
-          the offer still gets the last word in the CtaBand below. */}
+          the offer still gets the last word in the closing form below. */}
       <Section width="narrow" tight>
         <Link
           href="/resources/law-firm-seo-audit-checklist"
@@ -431,7 +459,7 @@ export default function LawFirmSEOClient() {
       {/* FAQ */}
       <Section tone="surface" width="reading">
         <SectionHeading eyebrow="FAQ" title="Law firm SEO questions, answered" />
-        <FaqList faqs={faqs} name="law-firm-seo-faq" />
+        <FaqList faqs={FAQS} name="law-firm-seo-faq" />
       </Section>
 
       {/* ── THE COMPLETE STACK (SearchPrex x Codeloci) ──
@@ -442,79 +470,15 @@ export default function LawFirmSEOClient() {
           next step rather than a leak. */}
       <LawFirmStack />
 
-      <CtaBand
-        eyebrow="Ready to get more cases?"
-        title={
-          <>
-            Stop paying per click.
-            <br />
-            Start owning your market.
-          </>
-        }
-        body="Free law firm SEO audit — the founder personally reviews your site, local rankings, and AI search visibility, and delivers a 90-day growth roadmap within 24 hours."
-        actions={[
-          {
-            href: "/free-audit",
-            label: "Claim free competitor tear-down",
-            icon: <ArrowRight className="h-4 w-4" aria-hidden />,
-          },
-          {
-            href: "tel:+923059158010",
-            label: "+92 305 9158010",
-            variant: "onDark",
-            icon: <Phone className="h-4 w-4" aria-hidden />,
-          },
-        ]}
-        trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={SOURCE}
+        copy={{
+          headline: "Send me your URL. I’ll show you who’s taking your cases.",
+          sub: "Two fields. A written look at your pages, Business Profile and the firms outranking you in your city — from me, within 24 hours.",
+        }}
       />
     </main>
     </>
-  );
-}
-
-/* ─── Hero aside ─── */
-
-function HeroChecklist() {
-  return (
-    <div className={`${radius.card} border bg-white`} style={{ borderColor: color.border }}>
-      <div
-        className="flex items-center justify-between border-b px-5 py-3"
-        style={{ borderColor: color.border }}
-      >
-        <span className="flex items-center gap-2">
-          <Scale className="h-3.5 w-3.5" style={{ color: color.primary }} aria-hidden />
-          <span className={heading.eyebrow} style={{ color: color.ink }}>
-            Built for law firms
-          </span>
-        </span>
-        <span className={text.caption} style={{ color: color.muted }}>
-          2026 aligned
-        </span>
-      </div>
-
-      <ul className="space-y-3.5 p-6">
-        {heroIncludes.map((t) => (
-          <li key={t} className="flex items-start gap-3">
-            <span
-              className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full"
-              style={{ background: color.primary }}
-              aria-hidden
-            >
-              <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} />
-            </span>
-            <span className={text.small} style={{ color: color.ink }}>
-              {t}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <div
-        className={`${text.caption} border-t px-5 py-3`}
-        style={{ borderColor: color.border, color: color.muted }}
-      >
-        YMYL E-E-A-T · GEO · AIO · LLMs
-      </div>
-    </div>
   );
 }

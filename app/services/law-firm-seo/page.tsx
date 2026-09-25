@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import LawFirmSEOClient from "./LawFirmSEOClient";
+import { CAPSULES, FAQS } from "./data";
+import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
+import { RETAINER_PLANS } from "@/lib/pricing";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/law-firm-seo";
@@ -38,20 +41,56 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/services/law-firm-seo", baseMetadata);
 }
 
+/**
+ * When this page was last reviewed by a person. Hardcoded on purpose — a date
+ * that moves on every request claims a review that did not happen.
+ */
+const LAST_REVIEWED = "2026-09-26";
+const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
+
 export default function LawFirmSEOPage() {
+  // Built from ./data (what the page renders) and the site-wide entities by
+  // @id. The FAQPage used to be typed here by hand — three of six questions,
+  // including "Most law firms see ranking improvements in 30–60 days".
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${PAGE_URL}#webpage`,
+        url: PAGE_URL,
+        name: "Law Firm SEO Services",
+        isPartOf: websiteRef,
+        about: { "@id": `${PAGE_URL}#service` },
+        author: founderRef,
+        reviewedBy: founderRef,
+        dateModified: LAST_REVIEWED,
+      },
       {
         "@type": "Service",
         "@id": `${PAGE_URL}#service`,
         name: "Law Firm SEO Services",
         serviceType: "Law Firm SEO",
-        provider: { "@type": "Organization", name: "SearchPrex", url: "https://www.searchprex.com" },
+        provider: organizationRef,
         areaServed: { "@type": "Country", name: "United States" },
+        audience: { "@type": "BusinessAudience", audienceType: "Law firms" },
         description:
-          "SEO for law firms — attorney E-E-A-T content, practice area pages, local pack rankings, review generation, technical SEO, and AI Overview citations.",
+          "SEO for law firms: practice-area and city pages, Google Business Profile, attorney E-E-A-T, technical SEO and AI Overview readiness, built to legal YMYL standards.",
         url: PAGE_URL,
+        ...(LAW_PLAN
+          ? {
+              offers: {
+                "@type": "Offer",
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  minPrice: LAW_PLAN.min,
+                  maxPrice: LAW_PLAN.max,
+                  priceCurrency: "USD",
+                  unitText: "MONTH",
+                },
+              },
+            }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -63,14 +102,12 @@ export default function LawFirmSEOPage() {
       },
       {
         "@type": "FAQPage",
-        mainEntity: [
-          { "@type": "Question", name: "How long before I see results?",
-            acceptedAnswer: { "@type": "Answer", text: "Most law firms see ranking improvements in 30–60 days. First-page and local pack rankings typically follow in 60–90 days." } },
-          { "@type": "Question", name: "What is GEO / AIO / LLMs optimization?",
-            acceptedAnswer: { "@type": "Answer", text: "It's optimizing so your firm gets cited in AI answers — Google AI Overviews, ChatGPT, Perplexity, and Gemini." } },
-          { "@type": "Question", name: "Are you compliant with Google's 2026 core updates?",
-            acceptedAnswer: { "@type": "Answer", text: "Completely. Legal content is YMYL, so we build every page around E-E-A-T — attorney credentials, real experience, authoritative sourcing." } },
-        ],
+        "@id": `${PAGE_URL}#faq`,
+        mainEntity: [...CAPSULES, ...FAQS].map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
     ],
   };
