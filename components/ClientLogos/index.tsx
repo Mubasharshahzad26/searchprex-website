@@ -24,9 +24,10 @@
 // and "Local HVAC Services" — three spellings, and no way to tell they were the
 // same business.
 //
-// Logos: SMK Store and HVAC Services Team were taken from their own websites
-// (public/images/clients/). Michigan Sports & Outdoor's site sits behind a
-// Cloudflare challenge, so it shows a wordmark until the logo is supplied.
+// Logos: SMK Store and HVAC Services Team were taken from their own websites;
+// Michigan Sports & Outdoor's was supplied directly (its site sits behind a
+// Cloudflare challenge) and cropped to the mark for the square tile — the full
+// wordmark is kept alongside as michigan-sports-outdoor-full.png.
 //
 // Motion is CSS only, pauses on hover and focus, and stops entirely under
 // prefers-reduced-motion — where the rows wrap instead of scrolling. The
@@ -47,7 +48,11 @@ type Featured = {
 
 const FEATURED: Featured[] = [
   { name: "SMK Store", caseClient: "SMK Store", logo: { src: "/images/clients/smk-store.png", width: 400, height: 211 } },
-  { name: "Michigan Sports & Outdoor", caseClient: "Michigan Outdoor Sports" },
+  {
+    name: "Michigan Sports & Outdoor",
+    caseClient: "Michigan Outdoor Sports",
+    logo: { src: "/images/clients/michigan-sports-outdoor.png", width: 160, height: 160 },
+  },
   {
     name: "HVAC Services Team",
     caseClient: "Local HVAC Services",

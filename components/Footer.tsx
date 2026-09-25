@@ -2,8 +2,15 @@
 import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { CITY_PAGES } from "@/lib/city-pages";
+import { LOCATION_STATES } from "@/lib/locations";
 import { usePathname } from "next/navigation";
 import { Mail, Phone, MapPin } from "lucide-react";
+
+// Read from the location data so the footer can never name a state without a
+// page, or miss one that gains a page.
+const RANKED_STATES = [...LOCATION_STATES].sort((a, b) => b.cities.length - a.cities.length);
+const TOP_STATES = RANKED_STATES.slice(0, 4).map((s) => s.name);
+const MORE_STATES = Math.max(0, RANKED_STATES.length - TOP_STATES.length);
  
 /* Toptal green accent */
 const GREEN = "#3eb489";
@@ -133,7 +140,13 @@ export default function Footer() {
               <p className="flex items-start gap-3 text-sm text-white/70">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>
-                  Remote-first, US-focused SEO agency (HQ: Daska, Pakistan) serving clients across all 50 U.S. states — with a focus on CA, TX, FL, NY, IL.
+                  {/* The "focus" list used to name CA, TX, FL, NY and IL. Florida,
+                      New York and Illinois have no city pages, while the
+                      homepage's coverage block names the nine states that do.
+                      The honest version: where the business is, who it serves,
+                      and where pages exist. */}
+                  Remote-first SEO agency based in Daska, Pakistan, working US business hours for clients across the United States — with city pages in {TOP_STATES.join(", ")} and{" "}
+                  <Link href="/locations" className="underline hover:text-white">{MORE_STATES} more states</Link>.
                 </span>
               </p>
             </div>
