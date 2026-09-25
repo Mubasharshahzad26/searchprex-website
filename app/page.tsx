@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 // import { getPageSEO } from "@/lib/admin-seo";
 // Homepage section components (root /components folder)
-import Hero from "../components/Hero";
+import HeroV2 from "../components/HeroV2";
 import ClientLogos from "../components/ClientLogos";
 import RevenueProof from "../components/RevenueProof";
 import RecoveryStory from "../components/RecoveryStory";
@@ -28,9 +28,9 @@ import { SITE, founderRef, organizationRef, websiteRef } from "@/lib/site-schema
 // said "Boutique SEO Agency USA", the H1 said "Law Firm SEO", and "SEO agency"
 // appeared nowhere in the body. The title is 51 characters and the description
 // 134, so Google shows both whole instead of truncating at ~60 and ~155.
-const HOME_TITLE = "Law Firm, Ecommerce & Local SEO Agency | SearchPrex";
+const HOME_TITLE = "US SEO Agency — Law Firm, Ecommerce & Local SEO | SearchPrex";
 const HOME_DESCRIPTION =
-  "Founder-led SEO for US law firms, Shopify and WooCommerce stores, and local businesses. Get more cases, organic sales and local leads.";
+  "Revenue-driven SEO for US law firms, ecommerce stores and local businesses. Founder-led, one client per city. Get your free competitor tear-down.";
 
 const baseMetadata: Metadata = {
   title: HOME_TITLE,
@@ -167,7 +167,13 @@ export default async function Home() {
                                   it sent visitors to codeloci.com mid-funnel)
               SolutionsCarousel -> /tools (six more "things we do", after three
                                   proof sections had already run long) */}
-        <Hero />
+        {/* HeroV2, not Hero. The old hero hid two of its three personas behind
+            tabs that replaced the lead form with a YouTube embed, ran two
+            duplicate forms, and submitted nothing — both CTAs pushed to
+            /free-audit where the visitor retyped everything. HeroV2 submits in
+            place. components/Hero.tsx is kept for now so the change can be
+            reverted in one line. */}
+        <HeroV2 />
         <Reveal><ClientLogos /></Reveal>
         <Reveal><TrustBar /></Reveal>
 
