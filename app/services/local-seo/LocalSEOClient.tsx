@@ -1,160 +1,220 @@
 "use client";
 
 // app/services/local-seo/LocalSEOClient.tsx
-// Assembled from components/layout primitives. The old local theme block
-// (ACCENT #ff642d, INK #0f0f0f, MUTED #6b7280, BG_SOFT #fafafa) is gone — this
-// page declares no colours of its own.
 //
-// Copy is unchanged from the previous version.
+// Rebuilt on the shared service-page template (previews/services-cro-wireframe.html),
+// in AIDA order. Same approach as /services/technical-seo.
+//
+// What was wrong with the previous version, and is fixed here:
+//
+//   - A visually hidden H1 ("Local SEO Services | Rank in Google Maps & AI
+//     Overviews") over a different visible headline. The visible H1 now leads
+//     with the keyword.
+//   - A stat strip claiming "5.7x avg. call growth in 90 days", "60d median
+//     time to top 3" and "20+ local businesses served". 5.7x is one HVAC
+//     client's 60-day result; "average" and "median" claim a dataset that does
+//     not exist, and nothing backed "20+".
+//   - No lead form, no screenshots, no link to a single city page, and no link
+//     to any local case study — on the page that should feed all of them.
 
 import Link from "next/link";
-import { ArrowRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
+
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import CoverageSection from "@/components/CoverageSection";
+import ProofImage from "@/components/ProofImage";
+import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import {
+  AnswerCapsules,
   AuthorCard,
+  Breadcrumb,
   CardGrid,
   CaseStudyPanel,
   ComparisonTable,
-  CtaBand,
   FaqList,
-  AnswerCapsules,
   FeatureCard,
-  HeroPanel,
-  HeroPanelStats,
   PageHero,
   Section,
   SectionHeading,
   StatStrip,
   Accent,
   type ComparisonRow,
-  type Faq,
 } from "@/components/layout";
+
+import { CAPSULES, FAQS, PROBLEMS, PROOF } from "./data";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 const HVAC_VIDEO = "g_1TfDU4YeA";
+const SOURCE = "service:local-seo";
+const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
 
-/* ─── DATA ─── */
-
-const heroStats = [
-  { value: "Top 3", label: "Google Maps pack" },
-  { value: "Featured", label: "AI Overview" },
-  { value: "5.7x", label: "Organic calls" },
-  { value: "60 days", label: "Time to rank" },
-];
-
-const proofStats = [
-  { value: "50+", label: "Directories cleaned per client" },
-  { value: "20+", label: "Local businesses served" },
-  { value: "5.7x", label: "Avg. call growth in 90 days" },
-  { value: "60d", label: "Median time to top 3" },
+/** Each stat is one named client's result, labelled as such. */
+const stats = [
+  { value: "Top 3", label: "Maps pack · HVAC client, 60 days" },
+  { value: "5.7x", label: "Organic calls · same client" },
+  { value: "#1", label: "AI Overview · D.O.L.L.S. Cleaning" },
+  { value: "24h", label: "Tear-down reply" },
 ];
 
 const services = [
-  { title: "Google Business Profile", body: "Category optimization, weekly posts, Q&A, photo strategy, and services setup for top-3 local pack rankings." },
-  { title: "Citation Building", body: "NAP consistency across 50+ directories — Google, Bing, Apple Maps, Yelp, and niche local sources." },
-  { title: "Local Landing Pages", body: "City and service-area pages built around real 'near me' search intent — no thin doorway pages." },
-  { title: "Review Velocity Program", body: "Systematic 5-star review generation — the strongest local ranking and trust signal there is." },
-  { title: "AI Overview Optimization", body: "Structured content and schema so your business gets cited in Google AI Overviews for local queries." },
-  { title: "Weekly Reporting", body: "Map pack rankings, calls, direction requests, and GBP insights — plain-English every Monday." },
+  { title: "Google Business Profile", body: "Categories, services, weekly posts, Q&A and photos — set up for the searches that bring calls, not just views." },
+  { title: "Citations & NAP consistency", body: "Your name, address and phone made identical across Google, Bing, Apple Maps, Yelp and the directories that matter in your niche." },
+  { title: "Service-area pages", body: "A page for each service and city people actually search — written for them, never a find-and-replace doorway page." },
+  { title: "Review program", body: "A steady, policy-safe way to ask real customers for reviews, because recency moves the map pack." },
+  { title: "AI Overview readiness", body: "Clear service answers and structured data so Google can name your business when it answers a local question." },
+  { title: "Monday reporting", body: "Map pack positions, calls, direction requests and Profile insights — in plain English, every week." },
 ];
 
 const comparisonColumns = ["SearchPrex", "Google Ads", "Generic agency"];
-
 const comparisonRows: ComparisonRow[] = [
   { label: "Google Maps top 3 rankings", values: [true, false, "Sometimes"] },
   { label: "AI Overview local citations", values: [true, false, false] },
-  { label: "GBP + citations at scale (50+)", values: [true, false, "Sometimes"] },
-  { label: "Systematic review generation", values: [true, false, false] },
-  { label: "Ranks that stay when you pause", values: [true, false, "Sometimes"] },
-  { label: "Founder-led (no juniors)", values: [true, false, false] },
-  { label: "Cost per lead over time", values: ["Down", "Up", "Flat"] },
+  { label: "Business Profile + citations cleaned up", values: [true, false, "Sometimes"] },
+  { label: "Review program", values: [true, false, "Sometimes"] },
+  { label: "Visibility that stays when spend stops", values: [true, false, "Sometimes"] },
+  { label: "The person you hire does the work", values: [true, "—", false] },
 ];
 
 const process = [
-  { step: "01", week: "Week 1–2", title: "Local audit", body: "GBP, citations, competitors, and local landscape — mapped into a city-specific ranking roadmap." },
-  { step: "02", week: "Week 3–4", title: "GBP & citations", body: "Full Google Business Profile optimization and NAP citation cleanup across 50+ directories." },
-  { step: "03", week: "Week 5–8", title: "Content & reviews", body: "Local landing pages, service-area content, and review generation running in parallel." },
-  { step: "04", week: "Week 9+", title: "Rank & convert", body: "Climb the map pack and AI Overviews, calls increase, weekly reporting every Monday." },
+  { step: "01", week: "Day 1", title: "Tear-down", body: "Your URL in, a written diagnosis back within 24 hours: your Profile, your citations and the three competitors above you." },
+  { step: "02", week: "Weeks 1–4", title: "Profile & citations", body: "Business Profile rebuilt, business details made consistent everywhere they appear." },
+  { step: "03", week: "Weeks 5–8", title: "Pages & reviews", body: "Service-area pages live and the review program running in parallel." },
+  { step: "04", week: "Every Monday", title: "Report", body: "Map pack positions, calls and what changed — and what is next." },
 ];
 
-const coreUpdate2026 = [
-  { title: "AI Overview local citations", body: "Google's 2026 AI Overviews answer local questions directly. We structure content and schema so your business is the one cited." },
-  { title: "Real experience signals", body: "Genuine photos, real reviews, accurate service data — the first-hand signals Google now weighs most heavily for local trust." },
-  { title: "Local entity authority", body: "We build your business as a recognized local entity — consistent NAP, citations, and structured data across the knowledge graph." },
-  { title: "People-first local content", body: "Service-area pages written to genuinely help local customers — never thin doorway pages the Helpful Content system demotes." },
+const related = [
+  { href: "/resources/news/google-business-profile-four-days-suggested-edits", title: "Google now gives you four days to reject a suggested edit", body: "What changed, and why your website is now the tie-breaker." },
+  { href: "/resources/news/local-seo-updates", title: "Local SEO news log", body: "A dated, sourced record of what actually changed in local search." },
+  { href: "/resources/news?category=Local", title: "Business Profile & map pack news", body: "Every local update, in one place." },
+  { href: "/case-studies", title: "All case studies", body: "HVAC, cleaning, roofing and door repair — with the screenshots." },
 ];
-
-const faqs: Faq[] = [
-  { q: "How fast can I rank in the Google Maps local pack?", a: "Most local businesses see map pack movement in 30–60 days. Our HVAC client reached the top 3 and captured an AI Overview placement within 60 days of our GBP and citation work." },
-  { q: "Do you optimize for 'near me' searches?", a: "Yes — 'near me' and service-area queries are the core of local SEO. We build city and neighborhood landing pages plus GBP signals that capture this high-intent traffic." },
-  { q: "What is AI Overview optimization?", a: "Google's 2026 AI Overviews answer local queries directly above the map pack. We structure your content, reviews, and schema so Google cites your business in those answers." },
-  { q: "Which local businesses do you work with?", a: "HVAC, plumbers, electricians, restaurants, clinics, contractors, salons, and other service businesses targeting a specific city or service area." },
-  { q: "Is your work aligned with Google's 2026 core updates?", a: "Completely. Every local page is people-first, E-E-A-T compliant, and built around real experience signals — never thin doorway pages that get demoted." },
-  { q: "Is there a contract?", a: "No long-term contracts. We earn your business every month with results — more calls, more map pack visibility, more local customers." },
-];
-
-/* ─── PAGE ─── */
 
 export default function LocalSEOClient() {
   return (
     <main>
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: "Local SEO" },
+        ]}
+      />
+
+      {/* 01 — HERO · Attention */}
       <PageHero
-        seoH1="Local SEO Services | Rank in Google Maps & AI Overviews"
+        compactTop
         eyebrow="Local SEO"
-        title={<>Own the map pack.<br />Get cited in <Accent>AI Overviews.</Accent></>}
-        subtitle="Your customers search 'near me' and call whoever shows up in the top 3. We get local service businesses into the Google Maps pack — and cited in Google's 2026 AI Overviews."
-        primaryCta={{
-          href: "/free-audit",
-          label: "Get free local audit",
-          icon: <ArrowRight className="h-4 w-4" aria-hidden />,
-        }}
-        secondaryCta={{ href: "#case-study", label: "See the HVAC case study" }}
-        trustPoints={["No contracts", "Results in 60 days", "Founder works your account"]}
+        title={
+          <>
+            Local SEO Services <Accent>that make your phone ring</Accent>
+          </>
+        }
+        subtitle="Your customers search “near me” and call whoever is in the top three. I get local service businesses into the Google Maps pack and named in AI Overviews — led by Mubashar Sharif, Semrush-certified."
+        actions={
+          <Link href="#proof" className="inline-flex items-center gap-1.5 text-sm font-bold" style={{ color: "#534AB7" }}>
+            See the map pack results <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        }
+        trustPoints={["Reply within 24 hours", "Month to month", "The founder does the work"]}
         aside={
-          <HeroPanel
-            live
-            label="Live client · HVAC · United States"
-            note="GSC verified"
-            footer="60-day result · Verified in Google Search Console"
-          >
-            <HeroPanelStats stats={heroStats} />
-          </HeroPanel>
+          <ArticleLeadMagnet
+            variant="sidebar"
+            source={SOURCE}
+            copy={{
+              headline: "Free local tear-down",
+              sub: "Send your URL. I’ll check your Business Profile, citations and the three competitors above you — and tell you what to fix first, within 24 hours.",
+            }}
+          />
         }
       />
 
-      <StatStrip stats={proofStats} />
+      <StatStrip stats={stats} />
 
-      {/* ── QUICK ANSWERS ──
-          Answer capsules for AI Overviews and answer engines. The first answer
-          quotes Google's Business Profile help page word for word — it says
-          "popularity" in its summary line and "prominence" in its heading, and
-          both are Google's. Client results are Search Console-verified only. */}
-      <Section width="reading">
-        <SectionHeading eyebrow="Quick answers" title="Local SEO, answered plainly" />
-        <AnswerCapsules
-          items={[
-            {
-              q: "How does Google decide Google Maps rankings?",
-              a: "Google says local results are \"mainly based on relevance, distance, and popularity.\" Relevance is how well your Business Profile matches the search, distance is how far you are from the searcher, and prominence is how well known the business is, including how many websites link to it. You can influence relevance and prominence, not distance.",
-            },
-            {
-              q: "What results have SearchPrex local SEO clients seen?",
-              a: "Doll's Cleaning in Chesterfield, Michigan reached #1 local rankings for its core cleaning keywords, with 106K impressions. HVAC Team in Simi Valley, California moved up 40 positions to page one for its primary service keywords. Both are verified in Google Search Console. Outcomes depend on local competition and on where a profile starts.",
-            },
-            {
-              q: "Why did my Google Maps ranking suddenly drop?",
-              a: "Check the profile before blaming an algorithm. A suspension, an edit Google applied, a changed category or removed reviews can all drop a listing; in July 2026 Google removed reviews from many profiles in a spam-detection error it later reversed. Map and website rankings are separate systems, so diagnose them separately.",
-            },
-          ]}
+      {/* 02 — THE PROBLEM · Interest */}
+      <Section>
+        <SectionHeading
+          eyebrow="The problem"
+          title="Why local businesses lose the map pack"
+          intro="Four things you can check yourself in the next ten minutes. If any of them fails, it is costing you calls."
         />
+        <CardGrid columns={2}>
+          {PROBLEMS.map((p) => (
+            <div key={p.title} className="rounded-2xl border border-[#e5e7eb] bg-white p-6">
+              <p className="flex items-center gap-2 text-sm font-black text-[#0a0f2e]">
+                <MapPin className="h-4 w-4 flex-shrink-0 text-[#b8123a]" aria-hidden />
+                {p.title}
+              </p>
+              <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#374151]">
+                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1a7d59]" aria-hidden />
+                <span>
+                  <strong>Check:</strong> {p.check}
+                </span>
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-[#5b6472]">{p.costs}</p>
+            </div>
+          ))}
+        </CardGrid>
       </Section>
 
-      {/* ── WHAT'S INCLUDED ── */}
-      <Section>
+      {/* 03 — QUICK ANSWERS · Interest / AEO */}
+      <Section tone="surface" width="reading">
+        <SectionHeading eyebrow="Quick answers" title="Local SEO, answered plainly" />
+        <AnswerCapsules items={CAPSULES} />
+      </Section>
+
+      {/* 04 — PROOF · Desire */}
+      <Section id="proof">
+        <SectionHeading
+          eyebrow="Proof"
+          title="Named in AI Overviews, ranked in the map pack"
+          intro="Unedited screenshots of real searches. Click any of them to read it yourself."
+        />
+        <CardGrid columns={3}>
+          {PROOF.map((p) => (
+            <div key={p.src} className="flex flex-col">
+              <ProofImage
+                src={p.src}
+                alt={p.alt}
+                width={p.width}
+                height={p.height}
+                frameAspect="16 / 9"
+                stage={p.stage}
+                caption={p.caption}
+              />
+              <Link
+                href={p.href}
+                className="mt-2 inline-flex items-center gap-1 text-xs font-bold"
+                style={{ color: "#534AB7" }}
+              >
+                Read the case study <ArrowRight className="h-3 w-3" aria-hidden />
+              </Link>
+            </div>
+          ))}
+        </CardGrid>
+
+        <div className="mt-10">
+          <CaseStudyPanel
+            videoId={HVAC_VIDEO}
+            videoTitle="Local HVAC SEO case study walkthrough"
+            metrics={[
+              { value: "Top 3", label: "Maps pack" },
+              { value: "Featured", label: "AI Overview" },
+              { value: "5.7x", label: "Organic calls" },
+            ]}
+            challenge="A local HVAC business with no map pack presence, no “near me” rankings, and no visibility in AI Overviews for high-intent emergency searches."
+            strategy="Full Business Profile optimisation, business details made consistent across 50+ directories, service-area landing pages, a review program, and AI Overview-ready content."
+            outcome="Top 3 map pack for its primary service keywords, a featured AI Overview placement, and 5.7x organic calls in 60 days — verified in Search Console."
+          />
+        </div>
+      </Section>
+
+      {/* 05 — WHAT YOU GET · Desire */}
+      <Section tone="surface">
         <SectionHeading
           variant="split"
           eyebrow="Everything included"
-          title={<>What&apos;s in your<br />Local SEO package</>}
-          intro="Every deliverable maps to a real local ranking signal — accurate business data, genuine reviews, and content that helps the people searching in your city."
+          title={<>What&apos;s in the<br />local SEO work</>}
+          intro="Every deliverable maps to a real local ranking signal — accurate business details, genuine reviews, and pages that help the people searching in your city."
         />
         <CardGrid columns={3}>
           {services.map((s) => (
@@ -163,12 +223,35 @@ export default function LocalSEOClient() {
         </CardGrid>
       </Section>
 
-      {/* ── COMPARISON ── */}
+      {/* 06 — MID-PAGE FORM · Action */}
+      <Section tight>
+        <ArticleLeadMagnet
+          variant="banner"
+          source={SOURCE}
+          copy={{
+            eyebrow: "Failed one of those checks?",
+            headline: "Find out what is keeping you out of the top three.",
+            sub: "Send me your URL. I’ll check your Profile, citations and reviews against the businesses above you — free, within 24 hours.",
+          }}
+        />
+      </Section>
+
+      {/* 07 — PROCESS · Desire */}
+      <Section>
+        <SectionHeading eyebrow="How it works" title="From tear-down to the map pack" />
+        <CardGrid columns={4}>
+          {process.map((p) => (
+            <FeatureCard key={p.step} step={p.step} label={p.week} title={p.title} body={p.body} />
+          ))}
+        </CardGrid>
+      </Section>
+
+      {/* 08 — COMPARE · Desire */}
       <Section tone="surface">
         <SectionHeading
           eyebrow="Why SearchPrex"
           title="Compare the approaches"
-          intro="Most local businesses bounce between Google Ads and generic SEO agencies. Here's what actually delivers durable local visibility."
+          intro="Most local businesses bounce between Google Ads and generic agencies. Here is what lasts."
         />
         <ComparisonTable
           columns={comparisonColumns}
@@ -177,102 +260,74 @@ export default function LocalSEOClient() {
         />
       </Section>
 
-      {/* ── PROCESS ── */}
-      <Section>
-        <SectionHeading eyebrow="How we work" title="From audit to map pack in 60 days" />
+      {/* 09 — COVERAGE · SEO (hub and spoke to every city page) */}
+      <CoverageSection />
+
+      {/* 10 — PRICE · Desire */}
+      {LOCAL_PLAN ? (
+        <Section>
+          <SectionHeading eyebrow="What it costs" title="Local SEO pricing" />
+          <div className="mx-auto max-w-2xl rounded-2xl border-2 p-6 text-center" style={{ borderColor: LOCAL_PLAN.accent, background: LOCAL_PLAN.bg }}>
+            <p className="text-3xl font-black" style={{ color: LOCAL_PLAN.accent }}>
+              {formatRange(LOCAL_PLAN)} <span className="text-base font-bold text-[#5b6472]">/ month</span>
+            </p>
+            <p className="mt-2 text-sm text-[#374151]">{LOCAL_PLAN.best}: {LOCAL_PLAN.includes.join(" · ")}</p>
+            <p className="mt-3 text-xs leading-relaxed text-[#5b6472]">
+              The number within the range depends on how many locations and service areas the plan covers. Month to month.
+            </p>
+            <Link href="/pricing" className="mt-3 inline-flex items-center gap-1 text-sm font-bold" style={{ color: "#534AB7" }}>
+              Full pricing <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </Section>
+      ) : null}
+
+      {/* RELATED · internal links */}
+      <Section tone="surface">
+        <SectionHeading eyebrow="Keep reading" title="Related local SEO resources" />
         <CardGrid columns={4}>
-          {process.map((p) => (
-            <FeatureCard key={p.step} step={p.step} label={p.week} title={p.title} body={p.body} />
+          {related.map((r) => (
+            <Link
+              key={r.href}
+              href={r.href}
+              className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+            >
+              <p className="text-sm font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{r.title}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">{r.body}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                Open <ArrowRight className="h-3 w-3" aria-hidden />
+              </span>
+            </Link>
           ))}
         </CardGrid>
       </Section>
 
-      {/* ── CASE STUDY ── */}
-      <Section id="case-study" tone="surface">
-        <SectionHeading
-          eyebrow="Case study · HVAC · United States"
-          title="Top 3 Google Maps + AI Overview in 60 days"
-        />
-        <CaseStudyPanel
-          videoId={HVAC_VIDEO}
-          videoTitle="Local HVAC SEO case study walkthrough"
-          metrics={[
-            { value: "Top 3", label: "Maps pack" },
-            { value: "Featured", label: "AI Overview" },
-            { value: "5.7x", label: "Organic calls" },
-          ]}
-          challenge="A local HVAC service business had no map pack presence, no 'near me' rankings, and zero visibility in Google's AI Overview results for high-intent emergency service searches."
-          strategy="Full GBP optimization, NAP consistency across 50+ directories, service-area landing pages, a review generation program, and AI Overview-ready structured content."
-          outcome="Top 3 map pack for primary service keywords, a featured AI Overview placement, and 5.7x organic call growth in 60 days — all verified in GSC."
-        />
-      </Section>
-
-      {/* ── 2026 CORE UPDATE ── */}
-      <Section>
-        <SectionHeading
-          eyebrow="SEO · GEO · AIO · LLMs · 2026 core update"
-          title="Local SEO tuned for AI search"
-          intro="AI Overviews now answer local questions above the map pack. Here's how we keep your business visible everywhere customers look."
-        />
-        <CardGrid columns={2}>
-          {coreUpdate2026.map((c) => (
-            <FeatureCard
-              key={c.title}
-              icon={<MapPin className="h-5 w-5" style={{ color: "#534AB7" }} aria-hidden />}
-              title={c.title}
-              body={c.body}
-            />
-          ))}
-        </CardGrid>
-      </Section>
-
-      {/* ── AUTHOR — E-E-A-T ── */}
-      <Section tone="surface" width="narrow" tight>
+      {/* AUTHOR · E-E-A-T */}
+      <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead Local SEO Strategist · 5+ years"
-          quote="&ldquo;Local SEO is won on real signals — accurate GBP data, genuine reviews, content that actually helps your neighbors. I personally took a local HVAC business to the top 3 map pack and an AI Overview placement in 60 days. When you work with SearchPrex, you work directly with me.&rdquo;"
+          role="Founder & Lead Local SEO Strategist · Semrush-certified"
+          quote="&ldquo;Local SEO is won on real signals — accurate business details, genuine reviews, pages that actually help your neighbours. I took a local HVAC business into the top three and an AI Overview in 60 days. When you work with SearchPrex, you work with me.&rdquo;"
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Local SEO Strategist"
           linkedinUrl={LINKEDIN}
         />
       </Section>
 
-      {/* ── FAQ ── */}
-      <Section width="reading">
+      {/* 11 — FAQ · AEO */}
+      <Section tone="surface" width="reading">
         <SectionHeading eyebrow="FAQ" title="Local SEO questions, answered" />
-        <FaqList faqs={faqs} name="local-seo-faq" />
+        <FaqList faqs={FAQS} name="local-seo-faq" />
       </Section>
 
-      {/*
-        Contextual link to the local news spoke. This page is the closest
-        commercial match to /resources/news/local-seo-updates and linked to it
-        zero times before -- the spoke had no contextual internal links at all.
-      */}
-      <Section width="reading" tight>
-        <p className="text-[0.9375rem] leading-relaxed text-[#374151]">
-          Google changes how local results work more often than it announces it. We keep a dated,
-          sourced record of what actually changed — Business Profile verification, review removals,
-          business-name policy, Ask Maps — in our{" "}
-          <Link
-            href="/resources/news/local-seo-updates"
-            className="font-semibold text-[#534AB7] underline underline-offset-2"
-          >
-            local SEO news log
-          </Link>
-          .
-        </p>
-      </Section>
-
-      <CtaBand
-        eyebrow="Ready to own your city?"
-        title={<>Stop renting clicks.<br />Start owning your map pack.</>}
-        body="Free local SEO audit — the founder personally reviews your Google Business Profile, citations, and local rankings, and delivers a 60-day growth plan within 24 hours."
-        actions={[
-          { href: "/free-audit", label: "Get free local audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
-          { href: "tel:+923059158010", label: "+92 305 9158010", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
-        ]}
-        trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
+      {/* 12 — CLOSE · Action */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={SOURCE}
+        copy={{
+          headline: "Send me your URL. I’ll tell you why you’re not in the top three.",
+          sub: "Two fields. A written look at your Profile, citations and competitors — from me, within 24 hours.",
+        }}
       />
     </main>
   );

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import LocalSEOClient from "./LocalSEOClient";
+import { CAPSULES, FAQS } from "./data";
+import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
+import { RETAINER_PLANS } from "@/lib/pricing";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/local-seo";
@@ -38,20 +41,54 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/services/local-seo", baseMetadata);
 }
 
+/**
+ * When this page was last reviewed by a person. Hardcoded on purpose — a date
+ * that moves on every request claims a review that did not happen.
+ */
+const LAST_REVIEWED = "2026-09-26";
+const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
+
 export default function LocalSEOPage() {
+  // Built from ./data (what the page renders) and the site-wide entities by
+  // @id. The FAQPage used to be typed here by hand — three of six questions.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${PAGE_URL}#webpage`,
+        url: PAGE_URL,
+        name: "Local SEO Services",
+        isPartOf: websiteRef,
+        about: { "@id": `${PAGE_URL}#service` },
+        author: founderRef,
+        reviewedBy: founderRef,
+        dateModified: LAST_REVIEWED,
+      },
       {
         "@type": "Service",
         "@id": `${PAGE_URL}#service`,
         name: "Local SEO Services",
         serviceType: "Local SEO",
-        provider: { "@type": "Organization", name: "SearchPrex", url: "https://www.searchprex.com" },
+        provider: organizationRef,
         areaServed: { "@type": "Country", name: "United States" },
         description:
-          "Local SEO for service businesses — Google Business Profile optimization, citation building, local landing pages, review generation, and AI Overview citations.",
+          "Google Business Profile optimisation, citation and NAP consistency, service-area pages, a review program, and AI Overview readiness for local service businesses.",
         url: PAGE_URL,
+        ...(LOCAL_PLAN
+          ? {
+              offers: {
+                "@type": "Offer",
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  minPrice: LOCAL_PLAN.min,
+                  maxPrice: LOCAL_PLAN.max,
+                  priceCurrency: "USD",
+                  unitText: "MONTH",
+                },
+              },
+            }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -63,14 +100,12 @@ export default function LocalSEOPage() {
       },
       {
         "@type": "FAQPage",
-        mainEntity: [
-          { "@type": "Question", name: "How fast can I rank in the Google Maps local pack?",
-            acceptedAnswer: { "@type": "Answer", text: "Most local businesses see map pack movement in 30–60 days. Our HVAC client reached the top 3 and captured an AI Overview placement within 60 days." } },
-          { "@type": "Question", name: "What is AI Overview optimization?",
-            acceptedAnswer: { "@type": "Answer", text: "Google's 2026 AI Overviews answer local queries directly above the map pack. We structure your content, reviews, and schema so Google cites your business in those answers." } },
-          { "@type": "Question", name: "Which local businesses do you work with?",
-            acceptedAnswer: { "@type": "Answer", text: "HVAC, plumbers, electricians, restaurants, clinics, contractors, salons, and other service businesses targeting a specific city or service area." } },
-        ],
+        "@id": `${PAGE_URL}#faq`,
+        mainEntity: [...CAPSULES, ...FAQS].map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
     ],
   };
