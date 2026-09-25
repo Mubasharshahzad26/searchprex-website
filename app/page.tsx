@@ -15,6 +15,8 @@ import Services from "../components/Services";
 import AuroraBackground from "../components/AuroraBackground";
 import TrustpilotReviewSection from "@/components/TrustpilotReviewSection";
 import FounderSection from "../components/FounderSection";
+import CoverageSection from "@/components/CoverageSection";
+import TrustStrap from "@/components/TrustStrap";
 import FAQ from "../components/FAQ";
 import FreeResources from "../components/FreeResources";
 import BlogTeaser from "../components/BlogTeaser";
@@ -175,6 +177,9 @@ export default async function Home() {
             reverted in one line. */}
         <HeroV2 />
         <Reveal><ClientLogos /></Reveal>
+        {/* Directory profiles as links a visitor can open — the E-E-A-T strap,
+            done without the unclickable "Registered" badges the old hero had. */}
+        <TrustStrap />
         <Reveal><TrustBar /></Reveal>
 
         {/* 2. Services */}
@@ -189,6 +194,12 @@ export default async function Home() {
         <Reveal><LocalSeoProof /></Reveal>
         <Reveal><RecoveryStory /></Reveal>
         <Reveal><LawFirmProof /></Reveal>
+
+        {/* 3b. Where I work — every state hub and city page, linked from the
+            strongest page on the domain. Not wrapped in <Reveal>: these are the
+            links that matter most for crawling, and Reveal ships its children
+            at opacity 0 until JavaScript runs. */}
+        <CoverageSection />
 
         {/* 4. What clients say, then who does the work. */}
         <Reveal><TrustpilotReviewSection /></Reveal>

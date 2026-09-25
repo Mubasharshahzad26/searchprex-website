@@ -55,6 +55,7 @@ import { CALL_HREF, OFFER_HREF } from "@/lib/offer";
 import { FOUNDER_ID, SITE, founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 
 import HeroV2 from "@/components/HeroV2";
+import CoverageSection from "@/components/CoverageSection";
 import { DOORS, FAQS, PHONE_DISPLAY, PHONE_HREF, PROCESS, PROOF } from "./data";
 
 const INK = "#0a0f2e";
@@ -382,99 +383,8 @@ export default function HomePageTest() {
           </div>
         </section>
 
-        {/* ── 05 COVERAGE — the block the live homepage does not have ──
-            The homepage body currently links to none of the city pages; only
-            the footer and one Services card do. That is the mechanism behind
-            every city page except Wichita sitting at zero impressions. */}
-        <section className="border-y bg-white py-16 sm:py-20" style={{ borderColor: "#e5e7eb" }}>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionHeading
-              eyebrow="Where I work"
-              title={`Law firm and local SEO in ${STATES_WITH_PAGES} states, ${LOCATION_CITY_COUNT} cities`}
-              sub="One client per city. The counts here are read from the live location data, so the claim on this page can never get ahead of the pages that back it."
-            />
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {LOCATION_STATES.map((state) => (
-                <div
-                  key={state.slug}
-                  className="rounded-2xl border bg-[#f8f9fc] p-5"
-                  style={{ borderColor: LINE }}
-                >
-                  <div className="mb-3 flex items-center justify-between gap-2">
-                    {state.hubHref ? (
-                      <Link
-                        href={state.hubHref}
-                        className="inline-flex items-center gap-1.5 text-base font-black tracking-tight transition-opacity hover:opacity-70"
-                        style={{ color: INK }}
-                      >
-                        <MapPin className="h-4 w-4 flex-shrink-0" style={{ color: PURPLE }} />
-                        {state.name}
-                      </Link>
-                    ) : (
-                      <span
-                        className="inline-flex items-center gap-1.5 text-base font-black tracking-tight"
-                        style={{ color: INK }}
-                      >
-                        <MapPin className="h-4 w-4 flex-shrink-0" style={{ color: PURPLE }} />
-                        {state.name}
-                      </span>
-                    )}
-                    <span
-                      className="rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-                      style={{ borderColor: LINE, color: BODY }}
-                    >
-                      {state.cities.length} {state.cities.length === 1 ? "city" : "cities"}
-                    </span>
-                  </div>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {state.cities.map((city) => (
-                      <li key={city.href}>
-                        <Link
-                          href={city.href}
-                          className="inline-block rounded-full border bg-white px-2.5 py-1 text-xs transition-all hover:border-[#1a7d59] hover:text-[#196b4d]"
-                          style={{ borderColor: LINE, color: BODY }}
-                        >
-                          {city.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              {/* The honest way to invite the other states: an offer, not a
-                  claim that pages exist where they do not. */}
-              <div
-                className="flex flex-col justify-center rounded-2xl border-2 border-dashed bg-white p-5"
-                style={{ borderColor: LINE }}
-              >
-                <p className="text-base font-black tracking-tight" style={{ color: INK }}>
-                  Your city is not listed?
-                </p>
-                <p className="mt-1.5 text-xs leading-relaxed" style={{ color: BODY }}>
-                  These are the states with pages built, not the limit of where I work. Send your URL
-                  and I will tell you what the search landscape looks like in your market.
-                </p>
-                <Link
-                  href={OFFER_HREF}
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
-                  style={{ color: GREEN_DARK }}
-                >
-                  Ask about your city <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-            <p className="mt-6 text-sm">
-              <Link
-                href="/locations"
-                className="font-bold underline decoration-2 underline-offset-2"
-                style={{ color: PURPLE }}
-              >
-                All locations
-              </Link>
-            </p>
-          </div>
-        </section>
+        {/* ── 05 COVERAGE — shared with the live homepage (components/CoverageSection). ── */}
+        <CoverageSection />
 
         {/* ── 06 FOUNDER ── */}
         <section className="bg-[#eaecf3] py-16 sm:py-20">

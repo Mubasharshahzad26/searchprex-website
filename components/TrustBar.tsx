@@ -1,7 +1,23 @@
-"use client";
+// Server component: nothing here is interactive, and the state list is read
+// from lib/locations at render time.
 
+import Link from "next/link";
 
-const states = ["CALIFORNIA", "TEXAS", "FLORIDA", "NEW YORK", "ILLINOIS"];
+import { LOCATION_STATES } from "@/lib/locations";
+
+// The list used to be typed: California, Texas, Florida, New York, Illinois.
+// Florida, New York and Illinois have no pages, and three sections further down
+// the same homepage the Coverage block says nine states and names them. Two
+// contradictory coverage claims on one page, one of them unbacked. It is now
+// the states that actually have pages, most cities first, each linking to its
+// hub (or its only city), with the remainder pointing at the full block.
+const SHOWN = 5;
+const ranked = [...LOCATION_STATES].sort((a, b) => b.cities.length - a.cities.length);
+const states = ranked.slice(0, SHOWN).map((s) => ({
+  name: s.name,
+  href: s.hubHref ?? s.cities[0]?.href ?? "/locations",
+}));
+const more = Math.max(0, ranked.length - SHOWN);
 
 export default function TrustBar() {
   return (
@@ -18,14 +34,23 @@ export default function TrustBar() {
               and was harder to read than the plain list it contained. */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             {states.map((state) => (
-              <span
-                key={state}
-                className="flex items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#0a0f2e]"
+              <Link
+                key={state.name}
+                href={state.href}
+                className="flex items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#0a0f2e] hover:text-[#534AB7]"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-[#534AB7]" />
-                {state}
-              </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-[#534AB7]" aria-hidden="true" />
+                {state.name}
+              </Link>
             ))}
+            {more > 0 ? (
+              <a
+                href="#locations"
+                className="whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#534AB7] hover:underline"
+              >
+                +{more} more
+              </a>
+            ) : null}
           </div>
 
           {/* Availability.
