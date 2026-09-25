@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SearchPrex Service Page Wireframe</title>
+<style>
+  :root{--ink:#0a0f2e;--body:#5b6472;--green:#1a7d59;--green-dark:#196b4d;--purple:#534AB7;--page:#eaecf3;--line:#cdd2dd;--soft:#f8f9fc;--note:#b8123a;--fill:#dfe3ec}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 80px}
+  h1.pt{font-size:28px;margin:0 0 6px;letter-spacing:-.5px}
+  .sub{color:var(--body);margin:0 0 22px;max-width:75ch}
+  h2.sh{font-size:20px;margin:40px 0 6px}
+  .shp{color:var(--body);margin:0 0 14px;font-size:14px}
+  .frame{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 28px rgba(17,24,39,.09)}
+  .chrome{display:flex;gap:6px;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+  .chrome i{width:10px;height:10px;border-radius:99px;background:var(--line);display:block}
+  .chrome b{margin-left:10px;font:11px/1 ui-monospace,Menlo,monospace;color:var(--body);align-self:center}
+  section.blk{padding:22px 24px;border-bottom:1px dashed var(--line);position:relative}
+  section.blk:last-child{border-bottom:0}
+  .tag{position:absolute;top:0;left:0;background:var(--ink);color:#fff;font:10px/1 ui-monospace,monospace;padding:5px 9px;border-bottom-right-radius:8px}
+  .aida{position:absolute;top:0;right:0;background:var(--purple);color:#fff;font:10px/1 ui-monospace,monospace;padding:5px 9px;border-bottom-left-radius:8px}
+  .blk > *:nth-child(3){margin-top:16px}
+  .row{display:flex;gap:16px;flex-wrap:wrap}
+  .col{flex:1 1 0;min-width:180px}
+  .box{background:var(--fill);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:44px;font-size:13px}
+  .box.hi{background:#fff;border:2px solid var(--green)}
+  .h1w{font-size:28px;font-weight:900;line-height:1.1;margin:4px 0 6px}
+  .h1w small{display:block;font-size:17px;color:var(--purple);font-weight:800;margin-top:4px}
+  .h2w{font-size:18px;font-weight:800;margin:0 0 6px}
+  .p{color:var(--body);margin:0 0 8px;font-size:13.5px}
+  .field{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px;color:#8b95a5;font-size:12px;margin-bottom:7px}
+  .cta{display:block;text-align:center;background:var(--green);color:#fff;font-weight:800;font-size:12px;padding:11px;border-radius:8px;text-transform:uppercase}
+  .stat{text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 6px;font-size:11px;color:var(--body)}
+  .stat b{display:block;font-size:17px;color:var(--green-dark)}
+  .shot{background:linear-gradient(135deg,#e7ebf3,#d7dde9);border:1px solid var(--line);border-radius:8px;height:90px;display:flex;align-items:center;justify-content:center;font:11px/1.4 ui-monospace,monospace;color:var(--body);text-align:center;padding:8px}
+  .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 10px;font-size:11.5px;color:var(--body);margin:0 5px 6px 0}
+  .note{border-left:3px solid var(--note);background:#fff5f7;padding:8px 11px;margin:10px 0 0;font-size:12.5px;color:#7a1026;border-radius:0 7px 7px 0}
+  .win{border-left:3px solid var(--green);background:#f1faf5;padding:8px 11px;margin:10px 0 0;font-size:12.5px;color:#14543c;border-radius:0 7px 7px 0}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--soft);font:11px/1.3 ui-monospace,monospace;text-transform:uppercase;color:var(--body)}
+  td.bad{color:var(--note)} td.good{color:var(--green-dark)}
+  code{font:12px ui-monospace,monospace;background:var(--soft);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="pt">Service page wireframe &mdash; one template, four verticals</h1>
+  <p class="sub">Law Firm SEO, Local SEO, Ecommerce SEO, Technical SEO. Today the four pages share almost nothing:
+  different section orders, no inline form on three of them, and no proof screenshots on any. This is one
+  AIDA-ordered template with per-vertical content slots. Purple tag = AIDA stage. Red = what is wrong today. Green = why the block is there.</p>
+
+  <h2 class="sh">What is wrong today</h2>
+  <table>
+    <tr><th>Page</th><th>Inline lead form</th><th>Proof screenshots</th><th>City links</th><th>Case-study links</th><th>Notes</th></tr>
+    <tr><td>/services/law-firm-seo</td><td class="bad">none</td><td class="bad">0</td><td>3</td><td class="bad">0</td><td>"Be our first law firm case study" &mdash; honest, keep it</td></tr>
+    <tr><td>/services/local-seo</td><td class="bad">none, no CTA link found</td><td class="bad">0</td><td class="bad">0</td><td class="bad">0</td><td>Has an HVAC case block but no screenshot, no link to it</td></tr>
+    <tr><td>/services/ecommerce-seo</td><td>modal &rarr; /api/reality-check</td><td class="bad">0</td><td>0</td><td>3</td><td>That route did not exist until 25 Sep &mdash; the modal said "sent" and dropped every lead</td></tr>
+    <tr><td>/services/technical-seo</td><td class="bad">none</td><td class="bad">0</td><td>0</td><td class="bad">0</td><td>Thinnest page, ~770 words; the 11,549-page GSC recovery is the proof and it is not shown</td></tr>
+  </table>
+
+  <h2 class="sh">The template</h2>
+  <p class="shp">Twelve blocks. Blocks marked <b>per-vertical</b> pull their content from one data file, the way <code>lib/city-pages.ts</code> already does for cities.</p>
+
+  <div class="frame">
+    <div class="chrome"><i></i><i></i><i></i><b>searchprex.com/services/[vertical]</b></div>
+
+    <section class="blk"><span class="tag">01 HERO</span><span class="aida">ATTENTION</span>
+      <div class="row">
+        <div class="col" style="flex:1.3 1 0">
+          <div class="p" style="font:11px ui-monospace;color:var(--purple);text-transform:uppercase">Breadcrumb: Home › Services › Law Firm SEO</div>
+          <div class="h1w">Law Firm SEO Services<small>More signed cases from search &mdash; not more clicks</small></div>
+          <p class="p">One line in the buyer's own words (law: "PPC is eating the budget and the phone still isn't ringing"). Led by Mubashar Sharif &mdash; Semrush-certified.</p>
+          <div class="row" style="gap:8px"><div class="stat"><b>Top 3</b>Map pack</div><div class="stat"><b>#1</b>AI Overview</div><div class="stat"><b>+5.7x</b>Organic calls</div></div>
+        </div>
+        <div class="col"><div class="box hi"><b>Free [vertical] tear-down</b><div class="field">yoursite.com</div><div class="field">you@firm.com</div><div class="cta">Send my tear-down &rarr;</div></div></div>
+      </div>
+      <div class="win">H1 = the primary keyword exactly ("Law Firm SEO Services"). Stats are per-vertical and every one links to the case study it comes from. The form submits in place through /api/send-audit with <code>source: "service:law-firm-seo"</code>.</div>
+      <div class="note">Today: no inline form on three of four pages; the H1s are "…answered plainly" and "Compare the approaches"-style headings that carry no keyword.</div>
+    </section>
+
+    <section class="blk"><span class="tag">02 THE PROBLEM</span><span class="aida">INTEREST</span>
+      <div class="h2w">Why [vertical] sites stall</div>
+      <div class="row"><div class="col box">Law: PPC at $50–150/click, map pack owned by 3 firms, intake leaks</div><div class="col box">Local: GBP neglect, NAP drift, no service-area pages</div><div class="col box">Ecom: 35k products, 30% indexed</div><div class="col box">Tech: crawl waste, de-indexing, CWV</div></div>
+      <div class="win">The reader should recognise their situation before they see a service list. Per-vertical copy.</div>
+    </section>
+
+    <section class="blk"><span class="tag">03 QUICK ANSWERS</span><span class="aida">INTEREST · AEO</span>
+      <div class="row"><div class="col box"><b>How long does law firm SEO take?</b><br>First sentence answers it. Then detail.</div><div class="col box"><b>What does it cost?</b><br>Real range from lib/pricing.</div><div class="col box"><b>Is it better than PPC?</b><br>Honest comparison.</div></div>
+      <div class="win">Answer-first sentences are what AI Overviews and ChatGPT lift. Marked up as FAQPage and <code>speakable</code>. Kept (three pages already have this block) and made consistent.</div>
+    </section>
+
+    <section class="blk"><span class="tag">04 PROOF</span><span class="aida">DESIRE</span>
+      <div class="row"><div class="col"><div class="shot">GSC / ranking screenshot<br>(ProofImage, click to enlarge)</div></div><div class="col"><div class="shot">Before / after</div></div><div class="col"><div class="shot">AI Overview citation</div></div></div>
+      <div class="win">Real screenshots from <code>public/images/proof</code>, dated, each linked to its case study. Local: D.O.L.L.S. AI Overview + HVAC. Ecom: SMK + MSO revenue. Tech: the 11,549-page indexing recovery. Law: no law-firm result yet &mdash; the block says so and shows the local/technical work that transfers, rather than inventing one.</div>
+      <div class="note">Today: zero screenshots on all four pages.</div>
+    </section>
+
+    <section class="blk"><span class="tag">05 WHAT YOU GET</span><span class="aida">DESIRE</span>
+      <div class="row"><div class="col box">Deliverable 1 &mdash; what, when</div><div class="col box">Deliverable 2</div><div class="col box">Deliverable 3</div><div class="col box">Monday report</div></div>
+      <div class="win">Deliverables with dates (Day 1 tear-down, Week 1 plan, Week 4 first pages live), not a feature grid.</div>
+    </section>
+
+    <section class="blk"><span class="tag">06 MID-PAGE FORM</span><span class="aida">ACTION</span>
+      <div class="box hi">Banner: "Is your [firm/store/site] making these mistakes?" &mdash; URL + email, submits in place</div>
+      <div class="win">Same ArticleLeadMagnet banner already live on every article &mdash; the reader who has just seen the proof is the most likely to act.</div>
+    </section>
+
+    <section class="blk"><span class="tag">07 COMPARE</span><span class="aida">DESIRE</span>
+      <div class="box">Founder-led vs. typical agency vs. freelancer &mdash; 5 honest rows</div>
+      <div class="win">Kept from today's pages; made consistent.</div>
+    </section>
+
+    <section class="blk"><span class="tag">08 SPOKES</span><span class="aida">INTEREST · SEO</span>
+      <span class="pill">Personal injury</span><span class="pill">Family law</span><span class="pill">Criminal defense</span><span class="pill">Estate planning</span><span class="pill">Mass torts</span>
+      <div class="win">Hub-and-spoke: law links its 5 practice-area pages; technical links the case study + news; local links its industries. Descriptive anchors.</div>
+    </section>
+
+    <section class="blk"><span class="tag">09 COVERAGE</span><span class="aida">SEO</span>
+      <div class="box">CoverageSection &mdash; 9 states, 20 cities (law firm + local only)</div>
+      <div class="note">Today: local SEO links zero city pages.</div>
+    </section>
+
+    <section class="blk"><span class="tag">10 PRICE</span><span class="aida">DESIRE</span>
+      <div class="box">This vertical's retainer range from lib/pricing + "what changes the number"</div>
+    </section>
+
+    <section class="blk"><span class="tag">11 FAQ</span><span class="aida">AEO</span>
+      <div class="box">6 questions, answer-first, FAQPage schema</div>
+    </section>
+
+    <section class="blk"><span class="tag">12 CLOSE</span><span class="aida">ACTION</span>
+      <div class="box hi" style="text-align:center">Bottom form &mdash; same offer, context headline</div>
+    </section>
+  </div>
+
+  <h2 class="sh">Schema on every service page</h2>
+  <p class="shp"><code>Service</code> (provider = #organization, areaServed = United States, offers = the lib/pricing range) · <code>BreadcrumbList</code> · <code>FAQPage</code> · <code>WebPage</code> with <code>author</code>/<code>reviewedBy</code> = #founder and a real <code>dateModified</code>. Built from the same data the page renders, so markup and visible content cannot drift.</p>
+
+  <h2 class="sh">Build order</h2>
+  <p class="shp">1. <b>Technical SEO</b> &mdash; thinnest page, strongest proof sitting unused. 2. <b>Local SEO</b> &mdash; no CTA and no city links today. 3. <b>Law Firm SEO</b> &mdash; the primary money page. 4. <b>Ecommerce</b> &mdash; already closest to the template.</p>
+</div>
+</body>
+</html>
