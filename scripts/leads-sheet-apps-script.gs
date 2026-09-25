@@ -86,10 +86,11 @@ var CONFIG = {
   // looks exactly like a successful deploy from the editor. Two rounds of
   // inferring the answer from row counts is what put this here.
   //
+  //   v4  doGet(?requestId=) confirms whether a write landed
   //   v3  requestId de-duplication via CacheService
   //   v2  Phone column
   //   v1  first working version
-  SCRIPT_VERSION: 'v3',
+  SCRIPT_VERSION: 'v4',
 
   SHARED_SECRET: 'CHANGE_ME_TO_A_LONG_RANDOM_STRING',
 
@@ -195,7 +196,38 @@ function jsonOut_(obj) {
  * It exists so a misconfiguration can be found without submitting a fake lead —
  * which is exactly how the Supabase breakage went unnoticed for months.
  */
-function doGet() {
+function doGet(e) {
+  // Confirmation mode: /exec?requestId=... answers "did this write land?".
+  //
+  // Google sometimes runs doPost and writes the row but never delivers the
+  // response — observed repeatedly on 25 September 2026, including twice where
+  // both the initial attempt and its retry came back empty while the sheet grew
+  // by two rows. The caller was left reporting failure for leads that had in
+  // fact been saved, and on this site's traffic one visitor turned away by a
+  // false error is expensive.
+  //
+  // So rather than guess after a failed write, the caller asks. Answering from
+  // the same CacheService entry that powers de-duplication means no sheet scan,
+  // and a requestId is an unguessable uuid whose existence reveals nothing, so
+  // this needs no secret — which also keeps the secret out of a query string
+  // that Google would log.
+  var askedFor = e && e.parameter ? String(e.parameter.requestId || '').trim() : '';
+  if (askedFor) {
+    var found = null;
+    try {
+      found = CacheService.getScriptCache().get('lead:' + askedFor);
+    } catch (err) {
+      return jsonOut_({ ok: false, version: CONFIG.SCRIPT_VERSION, error: 'cache unavailable' });
+    }
+    return jsonOut_({
+      ok: true,
+      version: CONFIG.SCRIPT_VERSION,
+      requestId: askedFor,
+      found: Boolean(found),
+      row: found ? Number(found) : null,
+    });
+  }
+
   var secret = setting_('SHARED_SECRET');
   var configured = secret !== 'CHANGE_ME_TO_A_LONG_RANDOM_STRING' && secret.length >= 16;
   var rows = 0;

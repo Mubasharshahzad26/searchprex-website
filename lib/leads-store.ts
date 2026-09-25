@@ -134,7 +134,52 @@ async function writeToSheet(lead: Lead): Promise<{ ok: boolean; detail: string }
   const second = await postToSheet(url, secret, lead, requestId, 18_000);
   if (second.ok) return { ok: true, detail: `${second.detail} (on retry)` };
 
-  return { ok: false, detail: `attempt 1: ${first.detail} | attempt 2: ${second.detail}` };
+  // Both writes reported failure. That is not the same as the lead not being
+  // saved: Google sometimes runs doPost and appends the row but never delivers
+  // the response. Observed twice on production in one sitting — two calls
+  // "failed", the sheet grew by two rows.
+  //
+  // So ask rather than assume. doGet(?requestId=) answers from the same cache
+  // entry doPost writes, so a confirmed row means the lead really is stored and
+  // reporting success is the truth, not a guess. This is the one path allowed
+  // to turn a failed write into a success, and only on the script's word.
+  const confirmed = await confirmWrite(url, requestId);
+  if (confirmed.ok) {
+    console.log("[leads] writes reported failure but the row is present:", confirmed.detail);
+    return { ok: true, detail: `${confirmed.detail} (confirmed after failed responses)` };
+  }
+
+  return {
+    ok: false,
+    detail: `attempt 1: ${first.detail} | attempt 2: ${second.detail} | ${confirmed.detail}`,
+  };
+}
+
+/**
+ * Ask the script whether a given requestId was written.
+ *
+ * Only meaningful against script v4 or later; an older deployment ignores the
+ * parameter and returns its health payload, which has no `found` field and is
+ * therefore correctly read as "not confirmed".
+ */
+async function confirmWrite(url: string, requestId: string): Promise<{ ok: boolean; detail: string }> {
+  try {
+    const res = await fetch(`${url}?requestId=${encodeURIComponent(requestId)}`, {
+      method: "GET",
+      signal: AbortSignal.timeout(12_000),
+      redirect: "follow",
+      cache: "no-store",
+    });
+    const text = await res.text();
+    if (!text.trim().startsWith("{")) return { ok: false, detail: "confirm: non-JSON response" };
+
+    const parsed = JSON.parse(text);
+    if (parsed?.found) return { ok: true, detail: `row ${parsed.row}` };
+    if (parsed?.found === false) return { ok: false, detail: "confirm: row not found" };
+    return { ok: false, detail: "confirm: script too old to answer" };
+  } catch (err) {
+    return { ok: false, detail: `confirm failed: ${String(err).slice(0, 120)}` };
+  }
 }
 
 /**
