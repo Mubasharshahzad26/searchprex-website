@@ -15,7 +15,7 @@
 
 import { Section, SectionHeading, VideoGallery, type GalleryVideo } from "@/components/layout";
 
-const VIDEOS: GalleryVideo[] = [
+export const RECORDED_VIDEOS: GalleryVideo[] = [
   {
     id: "Y5PxSECNGP0",
     title: "Search Console, live: Michigan Sports & Outdoor",
@@ -41,7 +41,7 @@ export default function VideoProof() {
         title="Don't take the screenshots on trust — watch them"
         intro="Unedited screen recordings from inside each client's own accounts. A screenshot can be edited; a live session moving through the real account is far harder to fake."
       />
-      <VideoGallery videos={VIDEOS} badge="Recorded live" columns={3} />
+      <VideoGallery videos={RECORDED_VIDEOS} badge="Recorded live" columns={3} />
     </Section>
   );
 }
