@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { getCityBySlug, getAllCitySlugs } from "@/lib/kansas-cities";
 import { organizationRef } from "@/lib/site-schema";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
@@ -140,6 +141,22 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
  
+      {/* ── LEAD FORM (early) — these pages carried no form at all; the only
+          action was a Calendly link. ── */}
+      <section className="bg-white px-4 pt-12">
+        <div className="mx-auto max-w-4xl">
+          <ArticleLeadMagnet
+            variant="banner"
+            source={`location:kansas/${city.slug}`}
+            copy={{
+              eyebrow: `${city.name} law firms`,
+              headline: `Free ${city.name} tear-down, written by me.`,
+              sub: `Send your URL. I’ll check your practice-area pages, Business Profile and the firms outranking you in ${city.county} — within 24 hours.`,
+            }}
+          />
+        </div>
+      </section>
+
       {/* ── OVERVIEW + LOCAL MAP ── */}
       <section className="bg-white px-4 py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
@@ -244,6 +261,21 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
  
+      {/* ── LEAD FORM (mid) ── */}
+      <section className="bg-white px-4 pb-16">
+        <div className="mx-auto max-w-4xl">
+          <ArticleLeadMagnet
+            variant="banner"
+            source={`location:kansas/${city.slug}`}
+            copy={{
+              eyebrow: `Competing in ${city.county}?`,
+              headline: `See which ${city.name} firms outrank you, and why.`,
+              sub: `Two fields. I’ll compare your pages and reviews with the firms above you in ${city.name} — free, within 24 hours.`,
+            }}
+          />
+        </div>
+      </section>
+
       {/* ── PRACTICE AREAS + NEIGHBORHOODS (local demand + geo) ── */}
       {city.practiceAreas && (
         <section className="bg-[#eaecf3] px-4 py-24">
@@ -348,23 +380,15 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
  
-      {/* ── CTA STRIP ── */}
-      <section className="px-4 py-16" style={{ background: "#534AB7" }}>
-        <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <div>
-            <p className="mb-1 text-lg font-bold text-white sm:text-xl">Ready to rank your {city.name} law firm?</p>
-            <p className="text-sm text-white/70">Book a free 30-minute strategy call — no commitment, no sales pitch.</p>
-          </div>
-          <div className="flex flex-shrink-0 gap-3">
-            <a href="https://calendly.com/contact-searchprex/30min" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#2f9670]">
-              <Calendar className="h-4 w-4" /> Book free call
-            </a>
-            <Link href="/locations/kansas" className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white">
-              All Kansas cities <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ── CLOSING FORM — replaces a Calendly-only strip. ── */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={`location:kansas/${city.slug}`}
+        copy={{
+          headline: `See exactly where you rank in ${city.name} — free.`,
+          sub: `Your site, your Business Profile and your ${city.county} competition, reviewed by me within 24 hours.`,
+        }}
+      />
     </main>
   );
 }

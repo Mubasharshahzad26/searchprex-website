@@ -46,14 +46,14 @@ export const kansasCities: KansasCity[] = [
     population: "156,607",
     metaTitle: "Law Firm SEO Kansas City, KS",
     metaDescription:
-      "Rank #1 on Google for legal searches in Kansas City, KS. Searchprex delivers proven law firm SEO and family law SEO for Wyandotte County attorneys.",
+      "Law firm SEO for Kansas City, KS attorneys: practice-area pages, Google Business Profile and map pack work for Wyandotte County firms. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Kansas City, KS",
     heroSub:
-      "Rank at the top of Google for personal injury, family law, and criminal defense searches across Wyandotte County and the Kansas City metro.",
+      "Get found for personal injury, family law and criminal defense searches across Wyandotte County and the Kansas City metro.",
     overview:
       "Kansas City, Kansas is one of the most competitive legal markets in the state, with dozens of firms competing for the same high-value searches. With the Wyandotte County District Court handling thousands of civil and family law cases each year, the demand for qualified attorneys is high — and so is the online competition.",
     lawFirmDesc:
-      "We help Kansas City, KS law firms dominate Google for searches like 'personal injury lawyer Kansas City KS' and 'criminal defense attorney near me'. Our geo-targeted content strategy and Google Business Profile optimization places your firm in the local map pack, where the majority of legal searches end in a phone call.",
+      "We help Kansas City, KS law firms compete for searches like 'personal injury lawyer Kansas City KS' and 'criminal defense attorney near me'. Our geo-targeted content strategy and Google Business Profile work are built to earn a place in the local map pack, where many legal searches end in a phone call.",
     familyLawDesc:
       "Family law is one of the most searched legal categories in the Kansas City metro. We build practice-area landing pages optimized for 'divorce attorney Kansas City KS', 'child custody lawyer Wyandotte County', and 'family law attorney near me' — capturing intent-ready clients at the exact moment they are searching.",
     courts: [
@@ -244,7 +244,7 @@ export const kansasCities: KansasCity[] = [
       "Expert law firm SEO for Lawrence, KS attorneys. Searchprex ranks Douglas County law firms for family law, personal injury, and criminal defense searches.",
     heroHeadline: "Law Firm SEO in Lawrence, KS",
     heroSub:
-      "Rank at the top of Google for legal searches in Lawrence and Douglas County — including university-market and family law queries.",
+      "Get found for legal searches in Lawrence and Douglas County — including university-market and family law queries.",
     overview:
       "Lawrence is home to the University of Kansas and KU Law School — creating a unique legal market that blends academic community needs with traditional family law and personal injury demand. Douglas County's growing population makes it an increasingly valuable market for law firms investing in SEO.",
     lawFirmDesc:
@@ -319,7 +319,7 @@ export const kansasCities: KansasCity[] = [
     population: "57,799",
     metaTitle: "Law Firm SEO Lenexa, KS",
     metaDescription:
-      "Rank your Lenexa law firm #1 on Google. Searchprex delivers expert law firm SEO and family law SEO for Lenexa and Johnson County attorneys.",
+      "Law firm SEO for Lenexa and Johnson County attorneys: practice-area pages, Google Business Profile and map pack work. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Lenexa, KS",
     heroSub:
       "Capture growing legal demand in Lenexa — rank above the competition in one of Johnson County's fastest-growing cities.",
@@ -361,7 +361,7 @@ export const kansasCities: KansasCity[] = [
       "Law firm SEO for Manhattan, KS attorneys. Searchprex ranks Riley County law firms for family law and personal injury searches in the Little Apple.",
     heroHeadline: "Law Firm SEO in Manhattan, KS",
     heroSub:
-      "Rank #1 for legal searches in the Little Apple — family law, personal injury, and criminal defense for Riley County attorneys.",
+      "Get found for legal searches in the Little Apple — family law, personal injury and criminal defense for Riley County attorneys.",
     overview:
       "Manhattan is shaped by a unique mix of demographics: military families from Fort Riley, Kansas State University students and faculty, and long-term residents. This combination creates consistent demand for family law, personal injury, and criminal defense services — with SEO opportunities that most firms have yet to capture.",
     lawFirmDesc:

@@ -13,7 +13,6 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Scale } from "lucide-react";
 import {
   Breadcrumb,
-  CtaBand,
   PageHero,
   Section,
   SectionHeading,
@@ -23,6 +22,7 @@ import { color, heading, radius, text } from "@/lib/design-tokens";
 import { LOCATION_CITY_COUNT, LOCATION_STATES } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { SITE, websiteRef } from "@/lib/site-schema";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 
 const URL = `${SITE}/locations`;
 const TITLE = "Law Firm SEO by City & State";
@@ -151,24 +151,14 @@ export default function LocationsHubPage() {
           </ul>
         </Section>
 
-        <CtaBand
-          eyebrow="Your market isn't listed?"
-          title={
-            <>
-              See where your firm ranks
-              <br />
-              in your city — free.
-            </>
-          }
-          body="The founder reviews your site, your Google Business Profile and your local rankings, then sends a 90-day plan within 24 hours. No obligation, no contract."
-          actions={[
-            {
-              href: "/free-audit",
-              label: "Get my free audit",
-              icon: <ArrowRight className="h-4 w-4" aria-hidden />,
-            },
-          ]}
-          trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
+        {/* Closing form in place of a link-only band. */}
+        <ArticleLeadMagnet
+          variant="bottom"
+          source="locations-hub"
+          copy={{
+            headline: "See where your firm ranks in your city \u2014 free.",
+            sub: "Two fields. Your site, your Business Profile and the firms above you, reviewed by me within 24 hours.",
+          }}
         />
       </main>
     </>

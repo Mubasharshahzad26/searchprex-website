@@ -18,11 +18,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check, MapPin, Phone, Scale, Landmark, Users } from "lucide-react";
+import { ArrowRight, Check, MapPin, Scale, Landmark, Users } from "lucide-react";
 import {
   Breadcrumb,
   CardGrid,
-  CtaBand,
   CtaButton,
   FaqList,
   FeatureCard,
@@ -38,6 +37,7 @@ import {
   getSiblingCities,
   type CityPage,
 } from "@/lib/city-pages";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import { findPracticePage, getLocationState } from "@/lib/locations";
 import type { IndustryPage } from "@/lib/industry-pages";
 import { SITE, organizationRef } from "@/lib/site-schema";
@@ -166,6 +166,16 @@ export default async function CityPage({
           }}
           secondaryCta={{ href: "/tools/keyword-research", label: "See keyword data for your practice area" }}
           trustPoints={["No contracts", "Founder works your account", "24-hour audit turnaround"]}
+          aside={
+            <ArticleLeadMagnet
+              variant="sidebar"
+              source={`location:${page.stateSlug}/${page.citySlug}`}
+              copy={{
+                headline: `Free ${page.city} tear-down`,
+                sub: `Send your URL. I’ll check your pages, Business Profile and the firms outranking you in ${page.county} — within 24 hours.`,
+              }}
+            />
+          }
         />
 
         {/* ── PROBLEM ── */}
@@ -268,6 +278,20 @@ export default async function CityPage({
           <p className={text.body} style={{ color: color.muted }}>
             {page.legalContext.body}
           </p>
+        </Section>
+
+        {/* Lead capture mid-page: the reader who has just read the jurisdiction
+            section is the one most likely to want their own market checked. */}
+        <Section tight>
+          <ArticleLeadMagnet
+            variant="banner"
+            source={`location:${page.stateSlug}/${page.citySlug}`}
+            copy={{
+              eyebrow: `${page.city} law firms`,
+              headline: `See which ${page.city} firms outrank you, and why.`,
+              sub: `Send me your URL. I’ll compare your practice-area pages, Business Profile and reviews with the firms above you in ${page.city} — free, within 24 hours.`,
+            }}
+          />
         </Section>
 
         {/* ── LOCAL SIGNALS ── */}
@@ -373,30 +397,15 @@ export default async function CityPage({
           </p>
         </Section>
 
-        <CtaBand
-          eyebrow={`${page.city}, ${page.stateAbbr}`}
-          title={
-            <>
-              See exactly where you rank
-              <br />
-              in {page.city} — free.
-            </>
-          }
-          body={`The founder personally reviews your site, your Google Business Profile and your ${page.county} rankings, then sends a 90-day plan within 24 hours. No obligation, no contract.`}
-          actions={[
-            {
-              href: "/free-audit",
-              label: "Get my free audit",
-              icon: <ArrowRight className="h-4 w-4" aria-hidden />,
-            },
-            {
-              href: "tel:+923059158010",
-              label: "+92 305 9158010",
-              variant: "onDark",
-              icon: <Phone className="h-4 w-4" aria-hidden />,
-            },
-          ]}
-          trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
+        {/* Closing form in place of a link-only band that sent readers to a
+            second page to retype their URL and email. */}
+        <ArticleLeadMagnet
+          variant="bottom"
+          source={`location:${page.stateSlug}/${page.citySlug}`}
+          copy={{
+            headline: `See exactly where you rank in ${page.city} — free.`,
+            sub: `Two fields. Your site, your Business Profile and your ${page.county} competition, reviewed by me within 24 hours.`,
+          }}
         />
       </main>
     </>

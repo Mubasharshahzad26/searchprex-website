@@ -18,7 +18,6 @@ import { ArrowRight, Landmark, MapPin, Scale } from "lucide-react";
 import {
   Breadcrumb,
   CardGrid,
-  CtaBand,
   FeatureCard,
   PageHero,
   Section,
@@ -29,6 +28,7 @@ import { color, heading, radius, text } from "@/lib/design-tokens";
 import { CITY_PAGES, type CityPage } from "@/lib/city-pages";
 import { findPracticePage, getDynamicStateHubSlugs, getLocationState, joinNames } from "@/lib/locations";
 import { SITE, websiteRef } from "@/lib/site-schema";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 
 export function generateStaticParams() {
   return getDynamicStateHubSlugs().map((state) => ({ state }));
@@ -219,24 +219,14 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
           </p>
         </Section>
 
-        <CtaBand
-          eyebrow={state.name}
-          title={
-            <>
-              See where your firm ranks
-              <br />
-              in {state.name} — free.
-            </>
-          }
-          body="The founder reviews your site, your Google Business Profile and your local rankings, then sends a 90-day plan within 24 hours. No obligation, no contract."
-          actions={[
-            {
-              href: "/free-audit",
-              label: "Get my free audit",
-              icon: <ArrowRight className="h-4 w-4" aria-hidden />,
-            },
-          ]}
-          trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
+        {/* Closing form in place of a link-only band. */}
+        <ArticleLeadMagnet
+          variant="bottom"
+          source={`location:${state.slug}`}
+          copy={{
+            headline: `See where your firm ranks in ${state.name} \u2014 free.`,
+            sub: "Two fields. Your site, your Business Profile and the firms above you, reviewed by me within 24 hours.",
+          }}
         />
       </main>
     </>

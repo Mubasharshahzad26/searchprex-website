@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { kansasCities } from "@/lib/kansas-cities";
 import { organizationRef } from "@/lib/site-schema";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const GREEN = "#3eb489";
@@ -380,29 +381,15 @@ export default function KansasHubPage() {
       </section>
  
       {/* ── CTA STRIP ── */}
-      <section className="px-4 py-16" style={{ background: NAVY }}>
-        <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <div>
-            <p className="mb-1 text-lg font-bold text-white sm:text-xl">Ready to rank your Kansas law firm?</p>
-            <p className="text-sm text-blue-300">Book a free 30-minute strategy call — no commitment, no sales pitch.</p>
-          </div>
-          <div className="flex flex-shrink-0 gap-3">
-            <a
-              href="https://calendly.com/contact-searchprex/30min"
-              target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#2f9670]"
-            >
-              <Calendar className="h-4 w-4" /> Book free call
-            </a>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white"
-            >
-              View services <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Closing form in place of a Calendly-only strip. */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source="location:kansas"
+        copy={{
+          headline: "See where your firm ranks in Kansas \u2014 free.",
+          sub: "Two fields. Your site, your Business Profile and the firms above you in your county, reviewed by me within 24 hours.",
+        }}
+      />
     </main>
   );
 }
