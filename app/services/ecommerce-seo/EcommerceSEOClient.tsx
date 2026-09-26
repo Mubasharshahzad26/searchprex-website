@@ -20,6 +20,7 @@ import { caseStudies, detailUrl, type CaseStudy } from "@/app/case-studies/data"
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { CAPSULES, FAQS } from "./data";
 import {
   AuthorCard,
@@ -373,6 +374,42 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
           credential="Semrush-certified"
           badges={["Semrush certified", "+92 305 9158010"]}
         />
+      </Section>
+
+      {/* ── BY PLATFORM & NICHE ── hub and spoke to each sub-page */}
+      <Section>
+        <SectionHeading
+          eyebrow="By platform and niche"
+          title="Ecommerce SEO for your kind of store"
+          intro="WooCommerce and knife & outdoor stores are where the case studies are. The Shopify page says plainly that there isn't one yet."
+        />
+        <CardGrid columns={3}>
+          {ECOMMERCE_INDUSTRIES.map((i) => {
+            const cs = caseStudies.find((c) => c.slug.client === i.caseClients[0]);
+            const metric = cs?.metrics[0];
+            return (
+              <Link
+                key={i.slug}
+                href={`/services/ecommerce-seo/${i.slug}`}
+                className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+              >
+                <p className="text-base font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{i.h1}</p>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">
+                  {cs && metric ? (
+                    <>
+                      <strong className="text-[#0a0f2e]">{metric.v}</strong> {metric.l} · {cs.client}
+                    </>
+                  ) : (
+                    "No case study yet — what I would fix, and how."
+                  )}
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                  See {i.name} SEO <ArrowRight className="h-3 w-3" aria-hidden />
+                </span>
+              </Link>
+            );
+          })}
+        </CardGrid>
       </Section>
 
       {/* ── PRICE ── */}

@@ -12,6 +12,7 @@ import { getAllCityParams } from "@/lib/city-pages";
 import { getDynamicStateHubSlugs } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
+import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { isGatedRoute } from "@/lib/gated-routes";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
@@ -310,6 +311,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const industry of LOCAL_INDUSTRIES) {
     add({
       url: absolute(`/services/local-seo/${industry.slug}`),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    });
+  }
+
+  // Ecommerce SEO by platform and niche.
+  for (const industry of ECOMMERCE_INDUSTRIES) {
+    add({
+      url: absolute(`/services/ecommerce-seo/${industry.slug}`),
       changeFrequency: "monthly",
       priority: 0.8,
     });
