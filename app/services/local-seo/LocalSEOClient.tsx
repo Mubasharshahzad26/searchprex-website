@@ -24,6 +24,8 @@ import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
+import { caseStudies } from "@/app/case-studies/data";
 import {
   AnswerCapsules,
   AuthorCard,
@@ -258,6 +260,38 @@ export default function LocalSEOClient() {
           rows={comparisonRows}
           caption="Local SEO with SearchPrex compared with Google Ads and a generic SEO agency"
         />
+      </Section>
+
+      {/* INDUSTRIES · hub and spoke to each trade page, each with its own result */}
+      <Section>
+        <SectionHeading
+          eyebrow="Industries we serve"
+          title="Local SEO by trade"
+          intro="Only trades we have real results in — each page shows the case study behind it."
+        />
+        <CardGrid columns={3}>
+          {LOCAL_INDUSTRIES.map((i) => {
+            const cs = caseStudies.find((c) => c.slug.client === i.caseClients[0]);
+            const metric = cs?.metrics[0];
+            return (
+              <Link
+                key={i.slug}
+                href={`/services/local-seo/${i.slug}`}
+                className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+              >
+                <p className="text-base font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{i.h1}</p>
+                {cs && metric ? (
+                  <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">
+                    <strong className="text-[#0a0f2e]">{metric.v}</strong> {metric.l} · {cs.client}
+                  </p>
+                ) : null}
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                  See {i.name.toLowerCase()} SEO <ArrowRight className="h-3 w-3" aria-hidden />
+                </span>
+              </Link>
+            );
+          })}
+        </CardGrid>
       </Section>
 
       {/* 09 — COVERAGE · SEO (hub and spoke to every city page) */}

@@ -11,6 +11,7 @@ import { getAllCitySlugs } from "@/lib/kansas-cities";
 import { getAllCityParams } from "@/lib/city-pages";
 import { getDynamicStateHubSlugs } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
+import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { isGatedRoute } from "@/lib/gated-routes";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
@@ -301,6 +302,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     add({
       url: absolute(`/services/law-firm-seo/${page.slug}`),
       changeFrequency: "weekly",
+      priority: 0.8,
+    });
+  }
+
+  // Local SEO by trade — one page per industry with a real case study behind it.
+  for (const industry of LOCAL_INDUSTRIES) {
+    add({
+      url: absolute(`/services/local-seo/${industry.slug}`),
+      changeFrequency: "monthly",
       priority: 0.8,
     });
   }
