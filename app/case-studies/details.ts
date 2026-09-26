@@ -202,15 +202,15 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
     proof: [
       {
         src: "/images/proof/remit-gsc-2023.png",
-        figure: "36K", figureLabel: "clicks",
+        figure: "36K", figureLabel: "clicks in about four months",
         width: 563,
         height: 296,
-        alt: "Google Search Console for remitchoice.com, 2023: 36K clicks, 1.97M impressions, 1.8% CTR, average position 47.1.",
-        caption: "2023 · 36K clicks · 1.97M impressions",
+        alt: "Google Search Console for remitchoice.com, late August to December 2023 (about four months): 36K clicks, 1.97M impressions, 1.8% CTR, average position 47.1.",
+        caption: "Late Aug–Dec 2023 (about four months) · 36K clicks · 1.97M impressions",
       },
       {
         src: "/images/proof/remit-gsc-2024.png",
-        figure: "113K", figureLabel: "clicks",
+        figure: "113K", figureLabel: "clicks across 2024",
         width: 536,
         height: 267,
         alt: "Google Search Console for remitchoice.com, 2024: 113K clicks, 5.76M impressions, 2% CTR, average position 43.4.",

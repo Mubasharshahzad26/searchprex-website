@@ -534,14 +534,16 @@ export default function SchemaGeneratorClient() {
                 Need schema for 1,000+ pages?
               </h3>
               <p className="text-blue-300 text-sm mb-4 leading-relaxed">
-                NicheSEO Pro generates schema markup in bulk — product pages, brand pages, blog posts — all at once. Plus GSC integration, content rewriting, and indexing automation.
+                NicheSEO Pro rewrites thin product copy, titles and meta across a whole store, and on its Enterprise plan adds FAQ schema to older pages.
               </p>
               <div className="space-y-2 mb-5">
+                {/* From NicheSEO Pro's plan table. "Bulk schema (1,000+ pages)"
+                    and "auto-inject schema via script" are not features of it. */}
                 {[
-                  "Bulk schema generation (1,000+ pages)",
-                  "Auto-inject schema via script",
-                  "GSC integration + indexing API",
-                  "Content rewriting at scale",
+                  "Product copy, title and meta rewrites",
+                  "Finds pages Google crawled but never indexed",
+                  "FAQ schema on older pages (Enterprise)",
+                  "Free plan: 3 site audits a month",
                 ].map((f) => (
                   <div key={f} className="flex items-center gap-2 text-xs text-blue-200">
                     <CheckCircle className="h-3.5 w-3.5 text-emerald-400 flex-shrink-0" />
@@ -549,13 +551,13 @@ export default function SchemaGeneratorClient() {
                   </div>
                 ))}
               </div>
-              <Link
-                href="/nicheseopro"
+              <a
+                href="https://nicheseopro.com/"
                 className="flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3d35a0] text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm w-full"
               >
                 Try NicheSEO Pro Free
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </a>
             </div>
  
           </div>

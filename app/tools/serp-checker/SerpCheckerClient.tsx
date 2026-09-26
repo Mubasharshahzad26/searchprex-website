@@ -456,17 +456,20 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-[#0a0f2e] px-8 py-10 text-center lg:flex-row lg:text-left">
             <div>
-              <h2 className="text-2xl font-black text-white mb-2">Tracking more than 5 keywords?</h2>
+              {/* Used to promise rank tracking for hundreds of keywords with
+                  position history, alerts and white-label reports. NicheSEO
+                  Pro has no rank tracking on any plan. */}
+              <h2 className="text-2xl font-black text-white mb-2">Need more than a snapshot of one results page?</h2>
               <p className="max-w-xl text-blue-200">
-                NicheSEO Pro tracks hundreds of keywords on a schedule, with position history,
-                competitor movement alerts and white-label reports.
+                NicheSEO Pro audits your whole site, finds the pages Google is skipping, and rewrites
+                thin product copy at scale. The free plan includes 3 site audits a month.
               </p>
             </div>
-            <Link href="/tools/keyword-research"
+            <a href="https://nicheseopro.com/"
               className="inline-flex flex-shrink-0 items-center gap-2 rounded-xl bg-[#534AB7] px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-[#3d35a0]">
-              <Sparkles className="h-4 w-4" /> Try NicheSEO Pro
+              <Sparkles className="h-4 w-4" /> Try NicheSEO Pro free
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>

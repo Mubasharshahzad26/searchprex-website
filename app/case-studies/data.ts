@@ -276,28 +276,34 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 10,
     client: "Remit Choice",
-    period: "From January 2026",
+    // The work began in 2023, in an in-house SEO role (as the home page
+    // says); the AI search hub came later, in January 2026. This entry used
+    // to open "From January 2026" while showing 2023–24 Search Console
+    // evidence, and led with "500+ keywords ranked" and "Instant — Answers
+    // powered": no screenshot behind the first, and the second is not a
+    // metric. Every figure below is on a screenshot in details.ts.
+    period: "From 2023 (in-house)",
     seoType: "Technical SEO",
     industry: "Fintech",
     location: "Global",
     demoLink: "https://remit-choice-ai-search-eg7382ggi-mubasharshahzad26s-projects.vercel.app/",
-    headline: "AI-powered remittance search: 500+ keywords ranked, Google AI Overview featured.",
+    headline: "International SEO for a UK remittance brand: #1 above Wise and Xoom, and named in Google's AI Overview.",
     badgeColor: "#185FA5",
     badgeBg: "#E6F1FB",
     video: "La-BCpoxcII",
     featured: false,
     slug: { industry: "fintech", client: "remit-choice" },
     metrics: [
-      { v: "500+", l: "Keywords ranked" },
-      { v: "Google AI", l: "Overview featured" },
-      { v: "Instant", l: "Answers powered" },
+      { v: "#1", l: "Above Wise and Xoom" },
+      { v: "AI Overview", l: "Named for Ghana" },
+      { v: "113K", l: "Organic clicks, 2024" },
     ],
     challenge:
-      "Remit Choice users were searching for instant remittance answers but found only buried FAQ pages and scattered documentation. Competitors offered basic information; none provided AI-powered instant solutions.",
+      "Duplicate content across country and corridor pages, thin pages meant to rank, no heading structure and no keyword mapping — on a business sending money across many international corridors.",
     solution:
-      "Built AI-powered information hub (January 2026) using Google Gemini API with intelligent search, featured snippet optimization, AI Overview eligibility architecture, real-time currency conversion, and spell-check integration.",
+      "As Remit Choice's in-house SEO from 2023, I introduced international SEO: a page per country and corridor, one primary search per page, duplicated copy consolidated or rewritten, and a clear heading structure. In January 2026 I added an AI search hub for fee and rate questions, built on the Gemini API.",
     outcome:
-      "Ranked organically for 500+ financial keywords. Featured in Google AI Overviews. Users get instant answers in seconds instead of searching through pages of documentation.",
+      "#1 for 'free of cost money transfer to Pakistan from uk' above Xoom and Wise, page one for 'send money to pakistan at zero fee', and named in Google's AI Overview for 'send money to ghana zero fees'. 113K organic clicks across 2024 in Search Console.",
   },
 ];
  

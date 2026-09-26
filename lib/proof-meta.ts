@@ -40,7 +40,7 @@ export const PROOF_META: Record<string, ProofMeta> = {
   "/images/proof/local-hvac-simi-valley.png": { source: "Google Search" },
 
   // Remit Choice
-  "/images/proof/remit-gsc-2023.png": { source: "Google Search Console", domain: "remitchoice.com", when: "2023" },
+  "/images/proof/remit-gsc-2023.png": { source: "Google Search Console", domain: "remitchoice.com", when: "Late Aug–Dec 2023" },
   "/images/proof/remit-gsc-2024.png": { source: "Google Search Console", domain: "remitchoice.com", when: "2024" },
   "/images/proof/remit-rank-1-pakistan.png": { source: "Google Search" },
   "/images/proof/remit-ai-overview-ghana.png": { source: "Google AI Overview" },

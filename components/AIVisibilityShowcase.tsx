@@ -120,7 +120,7 @@ export default function AIVisibilityShowcase() {
             growth percentage.
 
             WHY: the two captures cover very different window lengths — the
-            2023 one spans roughly 82 days (29 Sep – 19 Dec) and the 2024 one
+            2023 one spans roughly four months (29 Aug on the date axis to late Dec) and the 2024 one
             roughly 343 days (1 Jan – 9 Dec). 36K clicks against 113K clicks
             therefore is NOT a like-for-like comparison, and quoting it as
             "+214%" would be arithmetic that falls apart the moment a prospect
@@ -141,9 +141,9 @@ export default function AIVisibilityShowcase() {
               This one is not agency work and should not be read as it — I was on staff at
               Remit Choice through 2023 and 2024, and International SEO was the programme I
               introduced there. The Ghana and Pakistan results above came out of that work.
-              Below are both Search Console exports: the quarter before, and the full year
-              after. Average CTR went from 1.8% to 2.0% and average position from 47.1 to
-              43.4.
+              Below are both Search Console exports: the last four months of 2023, and the
+              full year 2024. Average CTR went from 1.8% to 2.0% and average position from
+              47.1 to 43.4.
             </p>
           </div>
 
@@ -154,13 +154,13 @@ export default function AIVisibilityShowcase() {
           <div className="mt-8 grid gap-8 lg:grid-cols-2">
             <ProofImage
               src="/images/proof/remit-gsc-2023.png"
-              alt="Google Search Console performance for remitchoice.com from 29 September to 19 December 2023: 36K clicks, 1.97M impressions, 1.8% average CTR, 47.1 average position."
+              alt="Google Search Console performance for remitchoice.com from late August to December 2023: 36K clicks, 1.97M impressions, 1.8% average CTR, 47.1 average position."
               width={563}
               height={296}
-              stage="Before · late 2023"
+              stage="Late 2023"
               stageTone="#8a5b08"
               caption="1.8% CTR · average position 47.1"
-              note="36K clicks and 1.97M impressions across roughly twelve weeks."
+              note="36K clicks and 1.97M impressions across about four months."
               sizes="(max-width: 1024px) 100vw, 520px"
             />
             <ProofImage
@@ -168,7 +168,7 @@ export default function AIVisibilityShowcase() {
               alt="Google Search Console performance for remitchoice.com from 1 January to 9 December 2024: 113K clicks, 5.76M impressions, 2% average CTR, 43.4 average position."
               width={536}
               height={267}
-              stage="After · full year 2024"
+              stage="Full year 2024"
               stageTone="#534AB7"
               caption="2.0% CTR · average position 43.4"
               note="113K clicks and 5.76M impressions across the year."

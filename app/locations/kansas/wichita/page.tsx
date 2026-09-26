@@ -549,11 +549,11 @@ export default function WichitaPage() {
       {/* NICHESEO PRO PROMO */}
       <section style={{ padding: "44px 0" }}>
         <div style={container}>
-          <a href="https://nicheseo-pro-ai.vercel.app" target="_blank" rel="noopener noreferrer" className="spx-hover" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", background: BRAND.purpleSoft, border: "1px solid #cecbf6", borderRadius: 14, padding: "20px 24px", textDecoration: "none" }}>
+          <a href="https://nicheseopro.com/" target="_blank" rel="noopener noreferrer" className="spx-hover" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", background: BRAND.purpleSoft, border: "1px solid #cecbf6", borderRadius: 14, padding: "20px 24px", textDecoration: "none" }}>
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, color: BRAND.purple, letterSpacing: ".4px", marginBottom: 4 }}>POWERED BY OUR OWN AI TOOLS</div>
               <div style={{ fontSize: 17, fontWeight: 800, color: BRAND.navy }}>Explore NicheSEO Pro — our AI SEO tool suite</div>
-              <div style={{ fontSize: 13.5, color: BRAND.muted, marginTop: 3 }}>Content generation, audits, keyword tracking &amp; competitive intel — in one place.</div>
+              <div style={{ fontSize: 13.5, color: BRAND.muted, marginTop: 3 }}>Site audits, keyword research and product-copy rewrites — free plan includes 3 audits a month.</div>
             </div>
             <span style={{ background: BRAND.purple, color: "#fff", fontSize: 13.5, fontWeight: 700, padding: "11px 20px", borderRadius: 9, whiteSpace: "nowrap" }}>Try NicheSEO Pro &rarr;</span>
           </a>

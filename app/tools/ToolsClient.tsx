@@ -150,12 +150,14 @@ const stats = [
   { num: "GSC", label: "Verified workflows" },
 ];
 
+// Read from NicheSEO Pro's own plan table (nicheseo-pro-ai/src/lib/plans.ts).
+// This list used to promise "bulk schema for 1,000+ pages" and "white-label
+// SEO reports", neither of which is a capability on any plan.
 const proFeatures = [
-  "Bulk schema for 1,000+ pages",
-  "AI content rewriting at scale",
-  // Was "GSC + Indexing API automation" — see /blog/google-indexing-api-python.
-  "Google Search Console automation",
-  "White-label SEO reports",
+  "Finds pages Google crawled but never indexed",
+  "Rewrites thin product copy, titles and meta",
+  "Blog autopilot and scheduled audits",
+  "Free plan: 3 site audits a month",
 ];
 
 export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
@@ -303,10 +305,10 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
             >
               <Sparkles className="h-3.5 w-3.5" aria-hidden /> NicheSEO Pro
             </span>
-            <h2 className={`${heading.h2} mb-3 text-white`}>Need these tools at scale?</h2>
+            <h2 className={`${heading.h2} mb-3 text-white`}>Need this across a whole catalogue?</h2>
             <p className={`${text.lead} max-w-xl text-white/60`}>
-              NicheSEO Pro automates everything — bulk schema generation, content rewriting, GSC
-              integration, and indexing API — for 10,000+ pages at once.
+              NicheSEO Pro is the software behind the Michigan Sports &amp; Outdoor recovery. It finds
+              the pages Google is skipping and rewrites thin product copy across the store.
             </p>
           </div>
 
@@ -318,7 +320,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
               </p>
             ))}
             <CtaButton
-              href="/tools/keyword-research"
+              href="https://nicheseopro.com/"
               className="mt-4 w-full justify-center lg:w-auto"
               icon={<ArrowRight className="h-4 w-4" aria-hidden />}
             >
