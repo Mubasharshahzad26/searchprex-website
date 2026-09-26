@@ -28,6 +28,7 @@ const navLinks: NavLink[] = [
       { href: "/services/ecommerce-seo", label: "Ecommerce SEO" },
       { href: "/services/local-seo",     label: "Local SEO" },
       { href: "/services/technical-seo", label: "Technical SEO" },
+      { href: "/industries",             label: "Industries We Serve" },
     ],
   },
   {

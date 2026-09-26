@@ -18,7 +18,7 @@ const GREEN_DARK = "#2f9670";
  
 const serviceLinks = [
   { href: "/services/law-firm-seo",   label: "Law Firm SEO" },
-  { href: "/services/ecommerce-seo",  label: "Shopify & Ecommerce SEO" },
+  { href: "/services/ecommerce-seo",  label: "Ecommerce SEO" },
   { href: "/services/local-seo",      label: "Local SEO" },
   { href: "/services/technical-seo",  label: "Technical SEO Audit" },
   { href: "/services",                label: "All Services" },
@@ -63,20 +63,32 @@ const toolLinks = [
   { href: "/law-firm-scorecard", label: "Law Firm SEO Scorecard" },
 ];
  
-/* Each industry → its relevant service page (SEO-safe, no duplicate pages) */
+/*
+ * Every industry page on the site. This list used to name restaurants,
+ * dentists, plumbers, electricians, auto repair and salons — none with a client
+ * or a page behind them — and sent all twelve chips to three generic service
+ * pages.
+ *
+ * Typed out rather than read from lib/local-industries.ts and friends: this is
+ * a client component on every page, and importing those files would ship all
+ * their page copy in every page's JavaScript. Keep in step with them; the
+ * /industries hub and the sitemap read the data directly.
+ */
 const industries = [
-  { label: "Family Law Firms",         href: "/services/law-firm-seo" },
-  { label: "Personal Injury Attorneys", href: "/services/law-firm-seo" },
-  { label: "Criminal Defense Lawyers",  href: "/services/law-firm-seo" },
-  { label: "Shopify Stores",            href: "/services/ecommerce-seo" },
-  { label: "DTC Ecommerce",             href: "/services/ecommerce-seo" },
-  { label: "Local Restaurants",         href: "/services/local-seo" },
-  { label: "Dental Practices",          href: "/services/local-seo" },
-  { label: "HVAC Contractors",          href: "/services/local-seo" },
-  { label: "Plumbers",                  href: "/services/local-seo" },
-  { label: "Electricians",              href: "/services/local-seo" },
-  { label: "Auto Repair Shops",         href: "/services/local-seo" },
-  { label: "Salons & Spas",             href: "/services/local-seo" },
+  { label: "HVAC",                   href: "/services/local-seo/hvac" },
+  { label: "Roofing",                href: "/services/local-seo/roofing" },
+  { label: "Cleaning",               href: "/services/local-seo/cleaning" },
+  { label: "Home Services",          href: "/services/local-seo/home-services" },
+  { label: "Remodeling",             href: "/services/local-seo/remodeling" },
+  { label: "WooCommerce Stores",     href: "/services/ecommerce-seo/woocommerce" },
+  { label: "Knife & Outdoor Stores", href: "/services/ecommerce-seo/outdoor-knife-stores" },
+  { label: "Shopify Stores",         href: "/services/ecommerce-seo/shopify" },
+  { label: "Personal Injury Law",    href: "/services/law-firm-seo/personal-injury" },
+  { label: "Family Law",             href: "/services/law-firm-seo/family-law" },
+  { label: "Criminal Defense",       href: "/services/law-firm-seo/criminal-defense" },
+  { label: "Estate Planning",        href: "/services/law-firm-seo/estate-planning" },
+  { label: "Mass Torts",             href: "/services/law-firm-seo/mass-torts" },
+  { label: "All industries",         href: "/industries" },
 ];
  
 /**
