@@ -238,7 +238,7 @@ export default function Footer() {
               Get Started
             </h3>
             <p className="mb-4 text-sm text-white/70">
-              Ready to dominate search? Get your free SEO audit in 24 hours.
+              Find out what is holding your site back. Free SEO audit, within 24 hours.
             </p>
             <Link
               href="/free-audit"

@@ -257,7 +257,7 @@ export default function LawFirmSEOClient() {
       </Section>
 
       {/* LIVE INTAKE DEMO */}
-      <Section tone="surface" width="narrow">
+      <Section id="intake-demo" tone="surface" width="narrow">
         <SectionHeading
           variant="center"
           eyebrow="Live demo · AI Intake Assistant"

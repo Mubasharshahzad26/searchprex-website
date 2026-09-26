@@ -22,7 +22,7 @@ const baseMetadata: Metadata = {
   openGraph: {
     title: "Law Firm SEO Services | SearchPrex",
     description:
-      "Rank #1 in your city, dominate the map pack, and get cited in Google AI Overviews. Founder-led SEO built for YMYL legal content.",
+      "Practice-area pages, local map pack work and AI Overview-ready answers for law firms. Founder-led SEO built for YMYL legal content — no ranking promises.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
