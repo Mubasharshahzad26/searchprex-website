@@ -8,12 +8,21 @@
 // Keyed by the `client` slug in data.ts. Every figure in a caption is read off
 // the screenshot it captions.
 
+import type { ProofSource } from "@/components/ProofImage";
+
 export interface ProofShot {
   src: string;
   width: number;
   height: number;
   alt: string;
   caption: string;
+  /** Evidence-card fields (components/ProofImage). Only what the capture shows. */
+  source?: ProofSource;
+  when?: string;
+  domain?: string;
+  figure?: string;
+  figureLabel?: string;
+  delta?: string;
 }
 
 export interface CaseDetail {
@@ -79,6 +88,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
     proof: [
       {
         src: "/images/proof/smk-revenue-before.png",
+        figure: "$5,832", figureLabel: "net sales in April",
         width: 1366,
         height: 607,
         alt: "SMK Store WooCommerce dashboard for April 2026, showing $5,832.02 net sales for the month.",
@@ -86,6 +96,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       },
       {
         src: "/images/proof/smk-revenue-after.png",
+        figure: "$19,100", figureLabel: "net sales in June", delta: "+227% against April",
         width: 863,
         height: 350,
         alt: "SMK Store WooCommerce dashboard for June 2026, showing $19,100.71 net sales for the month.",
@@ -100,6 +111,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
     proof: [
       {
         src: "/images/indexing-comparsion-before-mso-autopilot.png",
+        figure: "12.2K", figureLabel: "pages indexed", delta: "Up from about 4,000 at the end of May",
         width: 1362,
         height: 495,
         alt: "Google Search Console Page indexing for michigansportsoutdoor.com, last updated 21 August 2026: 12.2K pages indexed, up from about 4,000 at the end of May 2026 and 5,247 on 13 June.",
@@ -107,6 +119,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       },
       {
         src: "/images/clicks-comaprsion-after-run-mso-autopilot.PNG",
+        figure: "322", figureLabel: "US clicks", delta: "Against 224 from 1 Apr–12 Jun · CTR 3.7% → 5.1%",
         width: 1366,
         height: 520,
         alt: "Google Search Console Performance, United States: 224 clicks from 1 April to 12 June 2026 against 322 clicks from 13 June to 29 August 2026; CTR 3.7% to 5.1%.",
@@ -114,6 +127,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       },
       {
         src: "/images/proof/mso-revenue-1-jul20.png",
+        figure: "$0.00", figureLabel: "net sales this month",
         width: 1040,
         height: 605,
         alt: "Michigan Outdoor Sports WooCommerce net sales on 20 July 2026: $0.00 for the month.",
@@ -121,6 +135,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       },
       {
         src: "/images/proof/mso-revenue-3-sep25.png",
+        figure: "$523.49", figureLabel: "net sales month to date",
         width: 1357,
         height: 601,
         alt: "Michigan Outdoor Sports WooCommerce net sales on 25 September 2026: $523.49 month to date.",
@@ -183,10 +198,11 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       { title: "Heading structure", body: "A clear H1–H3 hierarchy on every template, so Google and AI answers can lift the right section." },
       { title: "Campaign page wireframe", body: "The campaign landing page redesigned from the wireframe up to improve visibility and make the zero-fee offer the first thing a visitor sees." },
     ],
-    aiVisibility: "Google's AI Overview now names Remit Choice for 'send money to ghana zero fees', alongside the category's largest apps.",
+    aiVisibility: "Google's AI Overview now names Remit Choice for 'send money to ghana zero fees', alongside LemFi and Taptap Send.",
     proof: [
       {
         src: "/images/proof/remit-gsc-2023.png",
+        figure: "36K", figureLabel: "clicks",
         width: 563,
         height: 296,
         alt: "Google Search Console for remitchoice.com, 2023: 36K clicks, 1.97M impressions, 1.8% CTR, average position 47.1.",
@@ -194,6 +210,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       },
       {
         src: "/images/proof/remit-gsc-2024.png",
+        figure: "113K", figureLabel: "clicks",
         width: 536,
         height: 267,
         alt: "Google Search Console for remitchoice.com, 2024: 113K clicks, 5.76M impressions, 2% CTR, average position 43.4.",
@@ -241,7 +258,7 @@ export const EXTRA_PROOF: Record<string, ProofShot[]> = {
   "dolls-cleaning": [
     { src: "/images/proof/local-dolls-ai-overview-rank1.png", width: 628, height: 322, alt: "Google results for 'post construction cleaning in Chesterfield, MI' showing D.O.L.L.S. Cleaning cited first in the AI Overview and ranking first organically.", caption: "Named first in the AI Overview, #1 organic below it" },
     { src: "/images/proof/local-dolls-rank-1-and-2.png", width: 627, height: 338, alt: "Google results for 'carpet cleaning services in Clawson, MI' with D.O.L.L.S. Cleaning holding the first and second organic positions.", caption: "Positions #1 and #2 for 'carpet cleaning services in Clawson, MI'" },
-    { src: "/images/proof/local-dolls-gsc-comparison.jpg", width: 626, height: 239, alt: "Google Search Console performance comparison for D.O.L.L.S. Cleaning.", caption: "Search Console performance comparison" },
+    { src: "/images/proof/local-dolls-gsc-comparison.jpg", figure: "264", figureLabel: "clicks in July", delta: "Up from 192 in June · impressions 41K → 106K", width: 626, height: 239, alt: "Google Search Console performance comparison for D.O.L.L.S. Cleaning.", caption: "Search Console performance comparison" },
   ],
   "mammoth-roofing": [
     { src: "/images/mammoth-roofing-gsc.JPG", width: 663, height: 307, alt: "Google Search Console performance for Mammoth Roofing.", caption: "Search Console performance" },

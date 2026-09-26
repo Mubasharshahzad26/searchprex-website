@@ -331,15 +331,7 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
               <p className="mt-1 text-sm text-[#64748b]">Click any of them to read the numbers yourself.</p>
               <div className="mt-6 grid gap-6 sm:grid-cols-2">
                 {proof.map((shot) => (
-                  <ProofImage
-                    key={shot.src}
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                    frameAspect="16 / 9"
-                    caption={shot.caption}
-                  />
+                  <ProofImage key={shot.src} {...shot} frameAspect="16 / 9" />
                 ))}
               </div>
             </div>

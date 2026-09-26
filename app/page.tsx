@@ -7,6 +7,7 @@ import RevenueProof from "../components/RevenueProof";
 import RecoveryStory from "../components/RecoveryStory";
 import LocalSeoProof from "../components/LocalSeoProof";
 import LawFirmProof from "../components/LawFirmProof";
+import VideoProof from "../components/VideoProof";
 import TrustBar from "../components/TrustBar";
 import Process from "../components/Process";
 import Pricing from "../components/Pricing";
@@ -193,6 +194,8 @@ export default async function Home() {
         <Reveal><RevenueProof /></Reveal>
         <Reveal><LocalSeoProof /></Reveal>
         <Reveal><RecoveryStory /></Reveal>
+        {/* The same clients, recorded live in their own accounts. */}
+        <Reveal><VideoProof /></Reveal>
         <Reveal><LawFirmProof /></Reveal>
 
         {/* 3b. Where I work — every state hub and city page, linked from the

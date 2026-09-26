@@ -24,9 +24,10 @@ export interface VideoGalleryProps {
   videos: GalleryVideo[];
   /** Ribbon shown on each thumbnail. */
   badge?: string;
+  columns?: 2 | 3;
 }
 
-export default function VideoGallery({ videos, badge = "Live walkthrough" }: VideoGalleryProps) {
+export default function VideoGallery({ videos, badge = "Live walkthrough", columns = 2 }: VideoGalleryProps) {
   const [active, setActive] = useState<GalleryVideo | null>(null);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function VideoGallery({ videos, badge = "Live walkthrough" }: Vid
 
   return (
     <>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className={`grid gap-6 md:grid-cols-2 ${columns === 3 ? "lg:grid-cols-3" : ""}`}>
         {videos.map((v) => (
           <div
             key={v.id}

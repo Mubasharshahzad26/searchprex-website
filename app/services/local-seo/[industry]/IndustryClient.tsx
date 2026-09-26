@@ -193,17 +193,10 @@ export default function IndustryClient({ slug }: { slug: string }) {
 
         {proof.length > 0 ? (
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {proof.map((shot) => (
+            {proof.map(({ href, ...shot }) => (
               <div key={shot.src} className="flex flex-col">
-                <ProofImage
-                  src={shot.src}
-                  alt={shot.alt}
-                  width={shot.width}
-                  height={shot.height}
-                  frameAspect="16 / 9"
-                  caption={shot.caption}
-                />
-                <Link href={shot.href} className="mt-2 inline-flex items-center gap-1 text-xs font-bold" style={{ color: "#534AB7" }}>
+                <ProofImage {...shot} frameAspect="16 / 9" />
+                <Link href={href} className="mt-2 inline-flex items-center gap-1 text-xs font-bold" style={{ color: "#534AB7" }}>
                   Read the case study <ArrowRight className="h-3 w-3" aria-hidden />
                 </Link>
               </div>
