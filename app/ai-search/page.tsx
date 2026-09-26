@@ -17,7 +17,7 @@ const PAGE_URL = "https://www.searchprex.com/ai-search";
 const baseMetadata: Metadata = {
   title: "Ask Any SEO Question — Free AI SEO Answer Engine",
   description:
-    "Ask any SEO question and get an instant AI answer grounded in live Google Search results, with sources. Built for US law firms, ecommerce stores & local businesses. Free, no login.",
+    "Ask any SEO question and get an instant, plain-English AI answer tuned for US law firms, ecommerce stores & local businesses. Free, no login.",
   keywords: [
     "AI SEO answer engine",
     "ask AI SEO questions",
@@ -34,7 +34,7 @@ const baseMetadata: Metadata = {
   openGraph: {
     title: "Ask Any SEO Question — Free AI SEO Answer Engine | SearchPrex",
     description:
-      "Instant, source-cited AI answers to any SEO question — grounded in live Google Search. Tuned for law firms, ecommerce stores, and local businesses across the US.",
+      "Instant AI answers to any SEO question, tuned for law firms, ecommerce stores, and local businesses across the US.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
@@ -44,7 +44,7 @@ const baseMetadata: Metadata = {
     card: "summary_large_image",
     title: "Ask Any SEO Question — Free AI SEO Answer Engine | SearchPrex",
     description:
-      "Instant, source-cited AI answers to any SEO question. Free, no login.",
+      "Instant AI answers to any SEO question. Free, no login.",
   },
   robots: {
     index: true,
@@ -90,7 +90,7 @@ export default function AISearchPage() {
         url: PAGE_URL,
         name: "Ask Any SEO Question — Free AI SEO Answer Engine",
         description:
-          "A free AI answer engine for SEO questions. Ask anything about SEO and get an instant answer grounded in live Google Search results, with the sources it drew on.",
+          "A free AI answer engine for SEO questions. Ask anything about SEO and get an instant, plain-English answer.",
         inLanguage: "en-US",
         isPartOf: {
           "@type": "WebSite",
@@ -107,7 +107,7 @@ export default function AISearchPage() {
         operatingSystem: "Web",
         url: PAGE_URL,
         description:
-          "Ask a free-form SEO question and get an AI-generated answer grounded in live Google Search results, with cited sources and links to relevant SearchPrex resources.",
+          "Ask a free-form SEO question and get an AI-generated answer, with links to relevant SearchPrex resources.",
         offers: {
           "@type": "Offer",
           price: "0",
@@ -121,9 +121,7 @@ export default function AISearchPage() {
         // than the page is a Google spam-policy violation, not just noise.
         featureList: [
           "Answers any free-form SEO question",
-          "Grounded in live Google Search results",
-          "Cites the web sources behind each answer",
-          "Detects your vertical: law firm, ecommerce, or local",
+         "Detects your vertical: law firm, ecommerce, or local",
           "Links to relevant SearchPrex guidance",
           "No login, signup, or credit card",
         ],

@@ -101,7 +101,9 @@ const navLinks: NavLink[] = [
       // is the deployed page for the same product.
       { href: "/intake-assistant",      label: "AI Intake Assistant", badge: "Free" },
       { href: "/case-calculator",       label: "Lost Case Calculator" },
-      { href: "/law-firm-scorecard",    label: "Law Firm Scorecard" },
+      // Law Firm Scorecard is out of the menu until Google Search grounding is
+      // available on the Gemini keys: without it the "audit" of a named firm
+      // would be written from nothing. See GroundingUnavailableError.
       { href: "/ai-search",             label: "AI Search" },
       { href: "/tools",                 label: "All Tools" },
       { href: "/tools/serp-checker",    label: "SERP Checker", badge: "New" },

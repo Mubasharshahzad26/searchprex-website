@@ -244,9 +244,6 @@ export default function ChecklistClient() {
               {OFFER_CTA_BY_PERSONA["law-firm"]}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/law-firm-scorecard" className={`${surface.ctaSecondary} ${focusRing}`}>
-              Score my firm automatically
-            </Link>
           </div>
 
           <p className={`${text.caption} mt-4`} style={{ color: color.subtle }}>

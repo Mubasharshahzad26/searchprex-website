@@ -1,5 +1,5 @@
 ﻿import { NextResponse } from 'next/server'
-import { generateContentWithPool } from '@/lib/gemini-pool'
+import { generateContentWithPool, GroundingUnavailableError } from '@/lib/gemini-pool'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -112,7 +112,7 @@ const VERTICAL_HINTS: Record<Vertical, string> = {
     'General SEO â€” tailor to whatever the query implies; if it relates to law firms, ecommerce, or local businesses, lean into that angle.',
 }
  
-function systemPrompt(vertical: Vertical, related: IndexItem[]): string {
+function systemPrompt(vertical: Vertical, related: IndexItem[], grounded = true): string {
   const pagesBlock = related.length
     ? `
  
@@ -126,7 +126,11 @@ Your job: give the user a genuinely useful, accurate, well-structured answer to 
  
 USER VERTICAL: ${VERTICAL_HINTS[vertical]}
  
-GROUNDING: Use the Google Search tool to ground your answer in current, accurate information. Accuracy is the top priority.
+${
+    grounded
+      ? 'GROUNDING: Use the Google Search tool to ground your answer in current, accurate information. Accuracy is the top priority.'
+      : 'ACCURACY: You have no live search for this answer. Stick to established, stable SEO practice; do not state recent dates, statistics or announcements you cannot be sure of, and say so plainly when a question depends on something recent.'
+  }
  
 FORMAT:
 - Output clean HTML only (use <h3>, <p>, <ul>/<li>, <strong>, <a>). No <html>/<head>/<body> wrappers and no markdown code fences.
@@ -154,12 +158,28 @@ export async function POST(req: Request) {
   const related = relevantPages(query, vertical)
  
   try {
-    const response = await generateContentWithPool({
-      model: MODEL,
-      contents: [{ parts: [{ text: `Question: "${query}"` }] }],
-      tools: [{ googleSearch: {} }],
-      systemInstruction: systemPrompt(vertical, related),
-    })
+    const contents = [{ parts: [{ text: `Question: "${query}"` }] }]
+    // Grounded when the keys allow it; otherwise answered from the model alone,
+    // and the response says which, so the page never implies live search it
+    // did not do. See GroundingUnavailableError in lib/gemini-pool.ts.
+    let grounded = true
+    let response
+    try {
+      response = await generateContentWithPool({
+        model: MODEL,
+        contents,
+        tools: [{ googleSearch: {} }],
+        systemInstruction: systemPrompt(vertical, related, true),
+      })
+    } catch (err) {
+      if (!(err instanceof GroundingUnavailableError)) throw err
+      grounded = false
+      response = await generateContentWithPool({
+        model: MODEL,
+        contents,
+        systemInstruction: systemPrompt(vertical, related, false),
+      })
+    }
  
     let answer = (response.text || '').trim()
     answer = answer
@@ -185,10 +205,15 @@ export async function POST(req: Request) {
  
     const relatedPages = related.map((p) => ({ title: p.title, url: p.url, snippet: p.snippet }))
  
-    return NextResponse.json({ answer, sources: sources.slice(0, 6), vertical, relatedPages })
+    return NextResponse.json({ answer, sources: sources.slice(0, 6), vertical, relatedPages, grounded })
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Search failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    // The raw provider error used to be sent to the browser and shown on the
+    // page — a Gemini quota JSON in front of a visitor. Log it; show a sentence.
+    console.error('[seo-search]', err)
+    return NextResponse.json(
+      { error: 'The answer engine is busy right now. Please try again in a minute.' },
+      { status: 503 }
+    )
   }
 }
  

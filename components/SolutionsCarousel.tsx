@@ -32,7 +32,7 @@ const SOLUTIONS: Solution[] = [
   {
     category: "AI Search",
     title: "Instant answers to any SEO question",
-    desc: "Grounded, source-backed answers to any SEO or AI-search question in seconds.",
+    desc: "Plain-English AI answers to any SEO or AI-search question in seconds.",
     href: "/ai-search",
     mockup: "search",
   },

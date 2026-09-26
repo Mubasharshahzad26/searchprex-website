@@ -60,7 +60,6 @@ const toolLinks = [
   // Same reasoning as the tools above: this one's only other crawlable links
   // sit 90% of the way down the home page and on one service page.
   { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },
-  { href: "/law-firm-scorecard", label: "Law Firm SEO Scorecard" },
 ];
  
 /*

@@ -31,7 +31,7 @@ const TOOLS: Tool[] = [
     feature: true,
     accent: PURPLE,
   },
-  { name: "AI Search", href: "/ai-search", desc: "Instant, grounded answers to any SEO question.", icon: Sparkles, accent: PURPLE },
+  { name: "AI Search", href: "/ai-search", desc: "Instant AI answers to any SEO question.", icon: Sparkles, accent: PURPLE },
   { name: "Lost Case Calculator", href: "/case-calculator", desc: "See the revenue your firm leaks from SEO & intake gaps.", icon: Calculator, accent: GREEN },
   {
     name: "AI Intake Assistant",

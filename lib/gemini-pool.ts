@@ -351,6 +351,21 @@ async function callGeminiRaw(
 }
 
 /**
+ * Google Search grounding is refused on every key in the pool: the free tier
+ * answers a grounded request with a 429 that carries no retryDelay and no
+ * quotaId, only "check your plan and billing details" (verified 2026-09-26
+ * against all 30 keys, on every model). Rotating through the pool cannot help,
+ * so the first such 429 ends the call with this error and the caller decides
+ * whether to answer without grounding.
+ */
+export class GroundingUnavailableError extends Error {
+  constructor() {
+    super('Google Search grounding is not available on the current Gemini keys.');
+    this.name = 'GroundingUnavailableError';
+  }
+}
+
+/**
  * Same rotation, retry and quota-classification behaviour as generateWithPool,
  * against the full request shape rather than a single prompt string. Kept as
  * its own loop rather than sharing generateWithPool's — that function is used
@@ -379,6 +394,11 @@ export async function generateContentWithPool(req: GeminiContentRequest): Promis
 
       if (status === 429) {
         const { daily, retryAfterMs } = classify429(detail);
+        // Grounding refused for billing reasons: every key will say the same,
+        // and blocking keys over it would starve ungrounded calls too.
+        if (req.tools?.length && !daily && !retryAfterMs && /plan and billing/i.test(detail)) {
+          throw new GroundingUnavailableError();
+        }
         if (daily) {
           markExhausted(key, 'daily quota');
         } else {

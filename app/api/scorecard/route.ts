@@ -86,6 +86,11 @@ Rules: overallScore is an integer 0-100 (roughly the weighted average of the pil
  
     return NextResponse.json(parsed)
   } catch (err) {
-    return NextResponse.json({ error: err instanceof Error ? err.message : 'Audit failed.' }, { status: 500 })
+    // Never forward the provider's error body to the browser. The usual cause
+    // today is GroundingUnavailableError: the research step needs Google Search
+    // grounding, which the current keys cannot use, and without it the "audit"
+    // of a named firm would be invented — so there is no ungrounded fallback.
+    console.error('[scorecard]', err)
+    return NextResponse.json({ error: 'The live audit is unavailable right now.' }, { status: 503 })
   }
 }

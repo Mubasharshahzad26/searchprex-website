@@ -106,8 +106,15 @@ const baseMetadata: Metadata = {
 
 // Metadata comes from the CMS row for this route; the object above is the
 // fallback when that row is missing, unpublished, or the database is down.
+//
+// noindex while the scorecard is paused: its research step needs Google Search
+// grounding, which the current Gemini keys cannot use, so the page cannot
+// deliver the audit its title promises. Applied after getPageSEO because a
+// published CMS row would otherwise set robots back to index. Remove this
+// override (and restore the nav, footer and sitemap links) when grounding works.
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageSEO("/law-firm-scorecard", baseMetadata);
+  const meta = await getPageSEO("/law-firm-scorecard", baseMetadata);
+  return { ...meta, robots: { index: false, follow: true } };
 }
  
 const jsonLd = {

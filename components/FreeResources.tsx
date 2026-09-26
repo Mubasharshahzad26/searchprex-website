@@ -41,13 +41,15 @@ const RESOURCES: Resource[] = [
     action: "Open the checklist",
   },
   {
-    href: "/law-firm-scorecard",
+    // Was the automated scorecard, paused until its live-search research
+    // works again. The same five pillars, checked by hand.
+    href: "/free-audit",
     icon: Gauge,
-    kind: "Free tool",
-    title: "Score your firm on the same five pillars",
+    kind: "Free, done by hand",
+    title: "Have your firm checked on the same five pillars",
     desc:
-      "The automated version of the checklist. Enter your site, city and practice area and get the five pillar scores with the fixes ranked by impact.",
-    action: "Run the scorecard",
+      "Send your site, city and practice area. I check the five pillars against the firms above you and send the fixes ranked by impact, within 24 hours.",
+    action: "Get the tear-down",
   },
   {
     href: "/resources/news",

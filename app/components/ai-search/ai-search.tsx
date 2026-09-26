@@ -57,6 +57,8 @@ type SearchResult = {
   sources: { title: string; url: string }[]
   vertical: Vertical
   relatedPages: RelatedPage[]
+  /** False when the answer came from the model alone, without live Google Search. */
+  grounded?: boolean
 }
  
 type LeadStatus = 'idle' | 'submitting' | 'success' | 'error'
@@ -138,7 +140,7 @@ export default function AiSearch() {
         </div>
         <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Ask anything about SEO</h1>
         <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
-          Instant, AI-grounded answers for law firms, ecommerce stores &amp; local businesses.
+          Instant AI answers for law firms, ecommerce stores &amp; local businesses.
         </p>
       </div>
  
@@ -188,7 +190,7 @@ export default function AiSearch() {
           <div className="h-3 w-full animate-pulse rounded bg-muted" />
           <div className="h-3 w-5/6 animate-pulse rounded bg-muted" />
           <div className="h-3 w-4/6 animate-pulse rounded bg-muted" />
-          <p className="pt-1 text-center text-xs text-muted-foreground">SearchPrex AI is researching…</p>
+          <p className="pt-1 text-center text-xs text-muted-foreground">SearchPrex AI is writing your answer…</p>
         </div>
       )}
  
@@ -207,7 +209,10 @@ export default function AiSearch() {
               <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                 {VIcon && <VIcon className="size-3.5" />} {vm?.label}
               </span>
-              <span className="text-xs text-muted-foreground">AI Overview</span>
+              {/* Was "AI Overview", which reads as Google's own feature. */}
+              <span className="text-xs text-muted-foreground">
+                {result.grounded === false ? 'SearchPrex AI · general SEO knowledge, not live search' : 'SearchPrex AI · checked against live Google Search'}
+              </span>
             </div>
             <div
               className="text-sm leading-relaxed [&_a]:text-primary [&_a]:underline [&_h3]:mb-1.5 [&_h3]:mt-4 [&_h3]:text-base [&_h3]:font-bold [&_li]:my-1 [&_p]:my-2 [&_strong]:font-semibold [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5"

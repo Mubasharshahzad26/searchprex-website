@@ -4,7 +4,7 @@ import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
   title: "Personal Injury Lost Case Calculator",
   description:
-    "See how much revenue your personal injury firm is leaking from SEO visibility gaps and slow client intake. Free, instant estimate based on real local search demand.",
+    "See how much revenue your personal injury firm is leaking from SEO visibility gaps and slow client intake. Free, instant estimate from typical search demand and your own numbers.",
 };
 
 // Metadata comes from the CMS row for this route; the object above is the

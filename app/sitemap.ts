@@ -74,7 +74,6 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/tools/serp-checker", priority: 0.8, changeFrequency: "weekly" },
   { path: "/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
   { path: "/case-calculator", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/law-firm-scorecard", priority: 0.7, changeFrequency: "monthly" },
   { path: "/ai-search", priority: 0.9, changeFrequency: "weekly" },
   { path: "/ai-visibility", priority: 0.7, changeFrequency: "monthly" },
   { path: "/content-generator", priority: 0.7, changeFrequency: "monthly" },
@@ -145,7 +144,8 @@ const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/all-case-studies", "/act
 // /home-page-test is a CRO layout test of the homepage. Two near-identical
 // homepages competing for the same terms is exactly the duplication this file
 // exists to prevent, so it is noindexed in code and kept out of the sitemap.
-const NOINDEX_ROUTES = new Set<string>(["/pricing-plan", "/home-page-test"]);
+// /law-firm-scorecard: paused and noindexed until Gemini grounding works (see its page.tsx).
+const NOINDEX_ROUTES = new Set<string>(["/pricing-plan", "/home-page-test", "/law-firm-scorecard"]);
 
 function derivePriority(path: string): number {
   if (path === "/") return 1.0;

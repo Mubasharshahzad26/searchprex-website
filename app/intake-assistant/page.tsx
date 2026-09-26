@@ -125,12 +125,9 @@ export default function IntakeAssistantPage() {
             name: "United States",
           },
         },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: "15",
-          bestRating: "5",
-        },
+        // No aggregateRating: the removed block claimed 4.9 from 15 reviews
+        // that appear nowhere on the page. Google requires a marked-up rating
+        // to be visible and about the item, or it risks a manual action.
       },
       {
         "@type": "BreadcrumbList",
@@ -139,51 +136,9 @@ export default function IntakeAssistantPage() {
           { "@type": "ListItem", position: 2, name: "AI Intake Assistant", item: PAGE_URL },
         ],
       },
-      {
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "What is an AI intake assistant for law firms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "An AI intake assistant is a 24/7 automated system that engages potential clients the moment they contact your firm — asking qualifying questions, capturing case details, and delivering a structured lead summary to the attorney in seconds. It ensures no lead is lost to missed calls, after-hours inquiries, or voicemails.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Which practice areas does the intake assistant support?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Personal injury, family law, criminal defense, estate planning, immigration, employment law, and any other legal practice area. The assistant is customized for each firm's intake criteria and case types.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How does the AI intake assistant qualify leads?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "It asks structured qualifying questions — case type, incident date, injuries or damages, jurisdiction, urgency, and contact preferences — then scores each lead so attorneys know which ones to prioritize.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Is the intake assistant demo really free?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. The live demo on this page is completely free — no signup, no credit card. Play a potential client scenario and see the AI qualify the lead in real time.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Can the AI intake assistant integrate with my law firm's existing systems?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes — it integrates with common law firm CRMs, case management systems, and email platforms. Lead summaries are delivered wherever your intake team already works.",
-            },
-          },
-        ],
-      },
+      // No FAQPage: its five Q&As appeared nowhere on the page (FAQ markup has
+      // to match visible content), and one claimed CRM integrations with nothing
+      // behind them. It comes back with a visible FAQ section.
     ],
   };
  
