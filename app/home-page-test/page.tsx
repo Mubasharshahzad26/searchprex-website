@@ -28,12 +28,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, ExternalLink, FileText, Newspaper, Star } from "lucide-react";
+import { ArrowRight, Clock, ExternalLink, Star } from "lucide-react";
 
 import ClientLogos from "@/components/ClientLogos";
 import HeroV2 from "@/components/HeroV2";
 import ProofImage from "@/components/ProofImage";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import { SMK_REVENUE_METRICS } from "@/components/RevenueProof";
+import { MSO_RECOVERY_PHASES } from "@/components/RecoveryStory";
+import { posts as blogPosts } from "@/app/blog/[slug]/posts";
+import { TRUSTPILOT_REVIEW_COUNT, TRUSTPILOT_URL } from "@/lib/hero-content";
 import { VideoGallery } from "@/components/layout";
 import { RECORDED_VIDEOS } from "@/components/VideoProof";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
@@ -68,15 +72,30 @@ const byClient = (client: string) => caseStudies.find((c) => c.slug.client === c
 const shot = (client: string, i: number): ProofShot | undefined =>
   (CASE_DETAILS[client]?.proof ?? EXTRA_PROOF[client] ?? [])[i];
 
+// SMK and MSO get their own full-width cards below (before/after, and the
+// setback-fix-recovery story); these two are the compact cards.
 const BENTO = [
-  { client: "smk-store", shot: 1, wide: true, tag: "Ecommerce · WooCommerce", title: "$5,832 → $19,100 a month", line: "Monthly net sales, April to June 2026, after thin content, indexing and site quality were rebuilt." },
-  { client: "michigan-outdoor-sports", shot: 0, wide: false, tag: "Ecommerce · Recovery", title: "12.2K pages indexed", line: "Up from about 4,000 at the end of May 2026." },
   { client: "dolls-cleaning", shot: 0, wide: false, tag: "Local · Cleaning", title: "Named first in Google's AI Overview", line: "And #1 organically below it, for post-construction cleaning in Chesterfield, MI." },
   { client: "remit-choice", shot: 2, wide: true, tag: "International · Fintech", title: "#1 above Wise and Xoom", line: "For “free of cost money transfer to Pakistan from uk”, from international SEO introduced in 2023." },
 ].map((b) => ({ ...b, cs: byClient(b.client), proof: shot(b.client, b.shot) }));
 
 const hvac = byClient("local-hvac-services");
 const smk = byClient("smk-store");
+const mso = byClient("michigan-outdoor-sports");
+const smkBefore = shot("smk-store", 0);
+const smkAfter = shot("smk-store", 1);
+
+// Third-party profiles. Clutch, BBB and GoodFirms are left out until their
+// listed location matches the Daska address on this site: a visitor who
+// clicks through to a different address trusts the page less, not more.
+const PROFILES = [
+  { name: "Trustpilot", label: TRUSTPILOT_REVIEW_COUNT === 1 ? "1 verified review" : `${TRUSTPILOT_REVIEW_COUNT} verified reviews`, href: TRUSTPILOT_URL },
+  { name: "LinkedIn", label: "Company page", href: "https://www.linkedin.com/company/searchprex/" },
+  { name: "YouTube", label: "Case-study walkthroughs", href: "https://www.youtube.com/@SearchPrex" },
+];
+
+// The three newest articles, from the same file the blog renders.
+const GUIDES = blogPosts.slice(0, 3);
 
 const TABS: AudienceTab[] = [
   {
@@ -181,12 +200,6 @@ const FAQS = [
   },
 ];
 
-const LEARN = [
-  { href: "/resources/law-firm-seo-audit-checklist", icon: FileText, kind: "Free checklist", title: "The law firm SEO audit checklist", body: "The checks I run on a firm's site, to work through yourself." },
-  { href: "/resources/news", icon: Newspaper, kind: "Updated weekly", title: "What changed in search this week", body: "Google and AI search updates in plain English, with a source for every claim." },
-  { href: "/case-studies", icon: BookOpen, kind: "Case studies", title: "Every result, with the screenshots", body: "The full story behind each number on this page." },
-];
-
 function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
     <div className="mx-auto mb-10 max-w-2xl text-center">
@@ -234,8 +247,26 @@ export default function HomePageTest() {
       {/* 1 · HERO — the live home page's hero, kept on purpose: the form card carries the founder's face and name (people hire a person, not a tool), both fields are visible so the 24-hour human reply is clear up front, proof and a phone number sit on the first screen, and it is proven in production. */}
       <HeroV2 />
 
-      {/* 2 · PROOF STRIP */}
+      {/* 2 · PROOF STRIP — client logos, then the third-party profiles */}
       <ClientLogos />
+      <section aria-label="Find SearchPrex on" className="border-b border-[#e5e7eb] bg-[#f8f9fc] px-4 pb-8 sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3">
+          <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5b6472]">Find SearchPrex on</span>
+          {PROFILES.map((p) => (
+            <a
+              key={p.name}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-[#e5e7eb] bg-white px-4 py-2 text-sm transition-colors hover:border-[#534AB7]"
+            >
+              <strong className="font-bold text-[#0a0f2e]">{p.name}</strong>
+              <span className="text-xs text-[#5b6472]">{p.label}</span>
+              <ExternalLink className="h-3 w-3 text-[#8a93a3]" aria-hidden />
+            </a>
+          ))}
+        </div>
+      </section>
 
       {/* 3 · RESULTS BENTO */}
       <section className="bg-[#f7f7fc] px-4 py-20 sm:px-6 lg:py-24">
@@ -246,6 +277,78 @@ export default function HomePageTest() {
             sub="Every figure below is on a screenshot from the client's own account. Click one to read it full size, or open the case study for the whole story."
           />
           <div className="grid gap-5 lg:grid-cols-3">
+            {/* SMK — the before/after contrast is what makes it memorable. */}
+            {smk && smkBefore && smkAfter ? (
+              <article className="rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-8 lg:col-span-3">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">Ecommerce · WooCommerce · {smk.period}</p>
+                <h3 className={`${H} mt-2 text-2xl tracking-tight text-[#0a0f2e] sm:text-3xl`}>$5,832 → $19,100 a month</h3>
+                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-[#5b6472]">
+                  One 35,000-product store, one reporting period, one source: the store&apos;s own WooCommerce dashboard.
+                </p>
+                <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#e7e8f0] bg-[#e7e8f0] sm:grid-cols-3">
+                  {SMK_REVENUE_METRICS.map((m) => (
+                    <div key={m.l} className="bg-white px-5 py-4">
+                      <dd className="text-3xl font-black tabular-nums tracking-tight text-[#196b4d]">{m.v}</dd>
+                      <dt className="mt-1 text-sm font-bold text-[#0a0f2e]">{m.l}</dt>
+                      <p className="text-xs tabular-nums text-[#5b6472]">{m.d}</p>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mt-6 grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+                  <ProofImage {...smkBefore} stage="Before · April 2026" stageTone="#8a5b08" frameAspect="16 / 9" sizes="(max-width: 768px) 100vw, 480px" />
+                  <span className="mx-auto rounded-full bg-[#effaf5] px-3 py-1.5 text-sm font-black text-[#196b4d]">+227%</span>
+                  <ProofImage {...smkAfter} stage="After · June 2026" frameAspect="16 / 9" sizes="(max-width: 768px) 100vw, 480px" />
+                </div>
+                <Link href={detailUrl(smk)} className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+                  {smk.client} case study <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </article>
+            ) : null}
+
+            {/* MSO — the one that went wrong first. Admitting the setback is
+                what makes the recovery believable. */}
+            {mso ? (
+              <article className="grid gap-8 rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-8 lg:col-span-3 lg:grid-cols-[1fr_1.05fr]">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">Ecommerce · Recovery · {mso.period}</p>
+                  <h3 className={`${H} mt-2 text-2xl tracking-tight text-[#0a0f2e] sm:text-3xl`}>The one that went wrong first</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-[#5b6472]">
+                    Most agencies would publish the March peak and stop there. This is the whole curve.
+                  </p>
+                  <ol className="mt-6 space-y-4">
+                    {MSO_RECOVERY_PHASES.map((p, i) => (
+                      <li key={p.stage} className="flex gap-4">
+                        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm font-black text-white" style={{ background: p.tone }}>
+                          {i + 1}
+                        </span>
+                        <div>
+                          <p className="text-sm font-black text-[#0a0f2e]">
+                            {p.stage} <span className="font-semibold text-[#8a93a3]">· {p.when}</span>
+                          </p>
+                          <p className="mt-0.5 text-sm">
+                            <strong className="font-black tabular-nums" style={{ color: p.tone }}>{p.metric.value}</strong>{" "}
+                            <span className="text-[#5b6472]">{p.metric.label.toLowerCase()}</span>
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <Link href={detailUrl(mso)} className="mt-6 inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+                    The full recovery story <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                </div>
+                <ProofImage
+                  src="/images/proof/mso-gsc-indexing-full.png"
+                  alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
+                  width={778}
+                  height={520}
+                  figure="≈3,000 → 11,549"
+                  figureLabel="indexed pages"
+                  sizes="(max-width: 1024px) 100vw, 560px"
+                />
+              </article>
+            ) : null}
+
             {BENTO.map((b) =>
               b.cs && b.proof ? (
                 <article key={b.client} className={`flex flex-col rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-7 ${b.wide ? "lg:col-span-2" : ""}`}>
@@ -472,7 +575,46 @@ export default function HomePageTest() {
         </div>
       </section>
 
-      {/* 12 · CLOSE */}
+      {/* 12 · SEO GUIDES — the three newest articles. Links from the home page
+          help new posts get found, and show the site is still being written. */}
+      <section className="bg-[#f7f7fc] px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <Heading eyebrow="Free to read" title="Explore trending SEO guides" />
+          <div className="grid gap-5 md:grid-cols-3">
+            {GUIDES.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/blog/${g.slug}`}
+                className="group flex flex-col overflow-hidden rounded-3xl border border-[#e7e8f0] bg-white transition-all hover:border-[#534AB7] hover:shadow-md"
+              >
+                <span className="relative block aspect-[16/9] overflow-hidden bg-[#eef0f4]">
+                  <Image
+                    src={g.heroImage}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, 360px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </span>
+                <span className="flex flex-1 flex-col p-6">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">{g.category}</span>
+                  <span className={`${H} mt-2 text-lg leading-snug text-[#0a0f2e] group-hover:text-[#534AB7]`}>{g.title}</span>
+                  <span className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#5b6472]">{g.excerpt}</span>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-[#8a93a3]">
+                    <Clock className="h-3.5 w-3.5" aria-hidden /> {g.readTime}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-8 text-center">
+            <Link href="/blog" className="inline-flex items-center gap-1 rounded-full border border-[#dcdfea] bg-white px-5 py-2.5 text-sm font-bold text-[#0a0f2e] hover:border-[#534AB7]">
+              Read more SEO guides <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </p>
+        </div>
+      </section>
+      {/* 13 · CLOSE — the last thing on the page is the offer */}
       <section className="px-4 pb-20 sm:px-6">
         <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#0a0f2e] px-6 py-14 text-center sm:px-12">
           <h2 className={`${H} mx-auto max-w-2xl text-3xl  tracking-tight text-white sm:text-4xl`}>
@@ -483,26 +625,6 @@ export default function HomePageTest() {
           </p>
           <div className="mt-8">
             <PillForm source="homepage-v3:close" tone="dark" />
-          </div>
-        </div>
-      </section>
-
-      {/* 13 · LEARN */}
-      <section className="border-t border-[#eef0f4] px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-6xl">
-          <p className="mb-6 text-center text-xs font-bold uppercase tracking-[0.16em] text-[#534AB7]">Free to read</p>
-          <div className="grid gap-5 md:grid-cols-3">
-            {LEARN.map((l) => {
-              const Icon = l.icon;
-              return (
-                <Link key={l.href} href={l.href} className="group rounded-3xl border border-[#e7e8f0] p-6 transition-all hover:border-[#534AB7] hover:shadow-md">
-                  <Icon className="h-5 w-5 text-[#534AB7]" aria-hidden />
-                  <p className="mt-4 text-xs font-bold uppercase tracking-widest text-[#5b6472]">{l.kind}</p>
-                  <p className={`${H} mt-1 text-lg  text-[#0a0f2e] group-hover:text-[#534AB7]`}>{l.title}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-[#5b6472]">{l.body}</p>
-                </Link>
-              );
-            })}
           </div>
         </div>
       </section>

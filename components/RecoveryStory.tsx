@@ -61,7 +61,9 @@ const revenueSteps = [
   },
 ];
 
-const phases = [
+// Exported so the redesigned home page (app/home-page-test) tells the same
+// three-step story from the same place.
+export const MSO_RECOVERY_PHASES = [
   {
     icon: TrendingDown,
     tone: "#8a5b08",
@@ -187,7 +189,7 @@ export default function RecoveryStory() {
 
         {/* Three phases. Numbered because the order is the information. */}
         <ol className="mt-12 grid gap-6 md:grid-cols-3">
-          {phases.map((p, i) => {
+          {MSO_RECOVERY_PHASES.map((p, i) => {
             const Icon = p.icon;
             return (
               <li

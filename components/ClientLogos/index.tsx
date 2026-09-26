@@ -24,7 +24,9 @@
 // and "Local HVAC Services" — three spellings, and no way to tell they were the
 // same business.
 //
-// Logos: SMK Store and HVAC Services Team were taken from their own websites;
+// Logos: SMK Store, HVAC Services Team and Mammoth Roofing were taken from their
+// own websites (Mammoth's is its white wordmark, so it sits on a dark tile);
+// Remit Choice and Door Doctor were supplied directly;
 // Michigan Sports & Outdoor's was supplied directly (its site sits behind a
 // Cloudflare challenge) and cropped to the mark for the square tile — the full
 // wordmark is kept alongside as michigan-sports-outdoor-full.png.
@@ -43,7 +45,9 @@ type Featured = {
   name: string;
   /** The `client` value in app/case-studies/data.ts. */
   caseClient: string;
-  logo?: { src: string; width: number; height: number };
+  /** `wide` for wordmark logos that are unreadable in a square tile; `dark`
+   *  for a white logo that needs a dark tile behind it. */
+  logo?: { src: string; width: number; height: number; wide?: boolean; dark?: boolean };
 };
 
 const FEATURED: Featured[] = [
@@ -59,9 +63,13 @@ const FEATURED: Featured[] = [
     logo: { src: "/images/clients/hvac-services-team.webp", width: 500, height: 500 },
   },
   { name: "Doll's Cleaning", caseClient: "Doll's Cleaning" },
-  { name: "Mammoth Roofing", caseClient: "Mammoth Roofing" },
-  { name: "Door Doctor", caseClient: "Door Doctor" },
-  { name: "Remit Choice", caseClient: "Remit Choice" },
+  {
+    name: "Mammoth Roofing",
+    caseClient: "Mammoth Roofing",
+    logo: { src: "/images/clients/mammoth-roofing-white.png", width: 768, height: 193, wide: true, dark: true },
+  },
+  { name: "Door Doctor", caseClient: "Door Doctor", logo: { src: "/images/clients/door-doctor.png", width: 320, height: 100, wide: true } },
+  { name: "Remit Choice", caseClient: "Remit Choice", logo: { src: "/images/clients/remit-choice.png", width: 984, height: 221, wide: true } },
 ];
 
 const OTHERS = [
@@ -103,14 +111,18 @@ function FeaturedTrack({ hidden = false }: { hidden?: boolean }) {
       {featured.map((c) => {
         const body = (
           <>
-            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[#e5e7eb] bg-white">
+            <span
+              className={`flex h-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border ${
+                c.logo?.wide ? "w-24 px-1.5" : "w-11"
+              } ${c.logo?.dark ? "border-[#0a0f2e] bg-[#0a0f2e]" : "border-[#e5e7eb] bg-white"}`}
+            >
               {c.logo ? (
                 <Image
                   src={c.logo.src}
                   alt={hidden ? "" : `${c.name} logo`}
                   width={c.logo.width}
                   height={c.logo.height}
-                  className="h-9 w-9 object-contain"
+                  className={c.logo.wide ? "h-8 w-full object-contain" : "h-9 w-9 object-contain"}
                 />
               ) : (
                 <span className="text-xs font-black tracking-tight text-[#534AB7]">{initials(c.name)}</span>

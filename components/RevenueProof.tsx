@@ -25,7 +25,9 @@ import ProofImage from "@/components/ProofImage";
 import { color, radius } from "@/lib/design-tokens";
 import { OFFER_HREF, OFFER_CTA, OFFER_MICROCOPY } from "@/lib/offer";
 
-const metrics = [
+// Exported so the redesigned home page (app/home-page-test) quotes the same
+// figures from the same place.
+export const SMK_REVENUE_METRICS = [
   { v: "+227%", l: "Monthly store revenue", d: "$5,832.02 → $19,100.71" },
   { v: "+50%", l: "Top-seller units", d: "200 → 300 units in the month" },
   { v: "+89%", l: "Orders in the queue", d: "9 → 17 awaiting processing" },
@@ -70,7 +72,7 @@ export default function RevenueProof() {
           className="mt-10 grid grid-cols-1 gap-px border sm:grid-cols-3"
           style={{ background: color.border, borderColor: color.border }}
         >
-          {metrics.map((m) => (
+          {SMK_REVENUE_METRICS.map((m) => (
             <div key={m.l} className="px-6 py-6" style={{ background: color.white }}>
               <dd
                 className="text-4xl font-black leading-none tracking-tight tabular-nums sm:text-5xl"
