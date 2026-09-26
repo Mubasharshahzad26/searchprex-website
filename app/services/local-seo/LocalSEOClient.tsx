@@ -306,7 +306,7 @@ export default function LocalSEOClient() {
       <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead Local SEO Strategist · Semrush-certified"
+          role="Founder & Lead Local SEO Strategist · 5+ years · Semrush-certified"
           quote="&ldquo;Local SEO is won on real signals — accurate business details, genuine reviews, pages that actually help your neighbours. I took a local HVAC business into the top three and an AI Overview in 60 days. When you work with SearchPrex, you work with me.&rdquo;"
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Local SEO Strategist"

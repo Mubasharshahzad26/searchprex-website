@@ -326,7 +326,7 @@ export default function TechnicalSEOClient() {
       <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead Technical SEO Strategist · Semrush-certified"
+          role="Founder & Lead Technical SEO Strategist · 5+ years · Semrush-certified"
           quote="&ldquo;Technical SEO is where I&apos;ve done my deepest work. I took Michigan Outdoor Sports to a +476% clicks peak in March 2026, watched it de-index, and rebuilt it to 11,549 indexed pages and +83% US clicks — every step verified in Search Console.&rdquo;"
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Technical SEO Strategist"

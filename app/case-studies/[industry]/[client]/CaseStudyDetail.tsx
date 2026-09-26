@@ -14,6 +14,9 @@ import {
   BarChart3, ZoomIn, ChevronRight,
 } from "lucide-react";
 import { detailUrl, type CaseStudy } from "../../data";
+import { CASE_DETAILS, DEFAULT_FIXES, EXTRA_PROOF } from "../../details";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ProofImage from "@/components/ProofImage";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
@@ -29,6 +32,10 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; related: CaseStudy[] }) {
   const [videoOpen, setVideoOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const detail = CASE_DETAILS[cs.slug.client];
+  const fixes = detail?.fixes ?? DEFAULT_FIXES;
+  const proof = detail?.proof ?? EXTRA_PROOF[cs.slug.client] ?? [];
+  const leadSource = `case-study:${cs.slug.client}`;
  
   return (
     <main className="bg-[#eaecf3]">
@@ -274,23 +281,82 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
             )}
           </div>
  
-          {/* Mid-page CTA (CRO: after the story, before related) */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mt-10 flex flex-col items-center gap-3 rounded-3xl border border-[#d4d8e3] bg-white p-8 text-center">
-            <p className="text-lg font-black text-[#0a0f2e]">
-              Facing the same problem as {cs.client}?
-            </p>
-            <p className="max-w-xl text-sm text-[#64748b]">
-              The founder personally reviews your site vs your top competitors and shows you exactly what&apos;s holding it back — free, within 24 hours.
-            </p>
-            <Link href="/free-audit"
-              className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-              style={{ background: GREEN }}>
-              <BarChart3 className="h-4 w-4" /> Reality Check
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
+          {/* ── WHAT WE FOUND ── the starting point, in the owner's own terms.
+              Only rendered where it was written down; nothing is inferred. */}
+          {detail?.issues?.length ? (
+            <div className="mt-12 rounded-3xl border border-[#d4d8e3] bg-white p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#b8123a]">What we found</p>
+              <h2 className="mt-2 text-2xl font-black text-[#0a0f2e]">Where {cs.client} was when the work started</h2>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {detail.issues.map((issue) => (
+                  <li key={issue} className="flex items-start gap-2.5 rounded-xl border border-[#f3c2cd] bg-[#fff5f7] px-4 py-3 text-sm text-[#7a1026]">
+                    <X className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden />
+                    {issue}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {/* ── WHAT WE FIXED ── */}
+          <div className="mt-8 rounded-3xl border border-[#d4d8e3] bg-white p-7 sm:p-9">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN_DARK }}>What we fixed</p>
+            <h2 className="mt-2 text-2xl font-black text-[#0a0f2e]">The work, step by step</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {fixes.map((f, i) => (
+                <div key={f.title} className="rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-5">
+                  <p className="flex items-center gap-2 text-sm font-black text-[#0a0f2e]">
+                    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-black text-white" style={{ background: GREEN_DARK }}>
+                      {i + 1}
+                    </span>
+                    {f.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-[#475569]">{f.body}</p>
+                </div>
+              ))}
+            </div>
+            {detail?.aiVisibility ? (
+              <p className="mt-6 flex items-start gap-2.5 rounded-xl border border-[#d9d5f5] bg-[#f5f3ff] px-4 py-3 text-sm text-[#3C3489]">
+                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden />
+                <span><strong>AI visibility:</strong> {detail.aiVisibility}</span>
+              </p>
+            ) : null}
+          </div>
+
+          {/* ── THE PROOF ── every screenshot on file for this client. */}
+          {proof.length > 0 ? (
+            <div className="mt-8 rounded-3xl border border-[#d4d8e3] bg-white p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-widest" style={{ color: PURPLE }}>The proof</p>
+              <h2 className="mt-2 text-2xl font-black text-[#0a0f2e]">Unedited screenshots</h2>
+              <p className="mt-1 text-sm text-[#64748b]">Click any of them to read the numbers yourself.</p>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                {proof.map((shot) => (
+                  <ProofImage
+                    key={shot.src}
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
+                    frameAspect="16 / 9"
+                    caption={shot.caption}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {/* ── LEAD MAGNET ── was a link to /free-audit; now submits in place. */}
+          <div className="mt-8">
+            <ArticleLeadMagnet
+              variant="banner"
+              source={leadSource}
+              copy={{
+                eyebrow: `Same problems as ${cs.client}?`,
+                headline: "Find out what is holding your site back.",
+                sub: "Send me your URL. I\u2019ll check it against the issues on this page \u2014 crawling, indexing, content, structure \u2014 and tell you what to fix first. Free, within 24 hours.",
+              }}
+            />
+          </div>
         </div>
       </section>
  
@@ -340,41 +406,15 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
         </section>
       )}
  
-      {/* ── FINAL CTA — navy, same as main case studies page ── */}
-      <section className="bg-[#0a0f2e] py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <motion.p variants={fadeUp} className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>
-              Ready to be our next case study?
-            </motion.p>
-            <motion.h2 variants={fadeUp} className="mb-4 text-4xl font-black tracking-tight text-white">
-              Your Business. Your Results.<br />
-              <span style={{ color: GREEN }}>Let&apos;s Build the Story.</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mb-8 text-base text-white/70 leading-relaxed">
-              Get a free Competitor SEO & AI Tear-Down — the founder personally reviews your top 3 competitors and delivers a 90-day growth roadmap within 24 hours. Market exclusivity guaranteed.
-            </motion.p>
-            <motion.div variants={fadeUp} className="mb-6 flex flex-wrap justify-center gap-3">
-              <Link href="/free-audit"
-                className="flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-                style={{ background: GREEN }}>
-                Claim Free Competitor Tear-Down <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a href="tel:+923059158010"
-                className="flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-white/10">
-                <Phone className="h-4 w-4" /> +92 305 9158010
-              </a>
-            </motion.div>
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-6">
-              {["24hr turnaround", "No contracts", "Founder does the audit"].map((t) => (
-                <span key={t} className="flex items-center gap-2 text-sm text-white/60">
-                  <CheckCircle className="h-4 w-4" style={{ color: GREEN }} />{t}
-                </span>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* ── FINAL CTA — the two-field form in place of link-only buttons. ── */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={leadSource}
+        copy={{
+          headline: "Your business could be the next case study.",
+          sub: "Send your URL. A written tear-down of your site and your top competitors \u2014 from me, within 24 hours.",
+        }}
+      />
  
       {/* ── FLOATING STICKY CTA (CRO) ── */}
       <Link href="/free-audit"

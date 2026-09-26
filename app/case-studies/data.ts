@@ -44,28 +44,32 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 1,
     client: "SMK Store",
-    period: "2 months",
-    verifiedVia: "Google Search Console",
+    // Revenue only. The card used to carry "+285% indexing rate" and "12K+
+    // pages indexed" — the Michigan Sports & Outdoor figures, with no SMK
+    // indexing screenshot behind them. What SMK can show is its own
+    // WooCommerce dashboard, so that is what it claims.
+    period: "April – June 2026",
+    verifiedVia: "the store's WooCommerce dashboard",
     seoType: "Ecommerce SEO",
     industry: "Ecommerce",
     location: "United States",
-    headline: "+75% US revenue in 2 months by fixing mass non-indexing across a 35,000-product catalog.",
+    headline: "Monthly net sales from $5,832 to $19,100 in two months — after rebuilding thin content, indexing and site quality across a 35,000-product catalog.",
     badgeColor: "#0891b2",
     badgeBg: "#ecfeff",
     video: "gFod-dTY-bg",
     featured: true,
     slug: { industry: "ecommerce", client: "smk-store" },
     metrics: [
-      { v: "+75%", l: "US revenue" },
-      { v: "+285%", l: "Indexing rate" },
-      { v: "12K+", l: "Pages indexed" },
+      { v: "+227%", l: "Monthly net sales" },
+      { v: "$5.8K", l: "April 2026" },
+      { v: "$19.1K", l: "June 2026" },
     ],
     challenge:
       "SMK Store's 35,000+ product pages were barely indexed. Thin, near-identical boilerplate descriptions triggered Google's duplicate-content filters, Core Web Vitals were failing, and US organic revenue had stalled.",
     solution:
       "We rewrote product content brand by brand with unique, people-first descriptions, optimized crawl budget, implemented product schema, fixed Core Web Vitals, and resubmitted pages to GSC in batches — aligned with Google's 2026 Helpful Content standards.",
     outcome:
-      "Indexing rate jumped +285%, over 12,000 product pages got indexed and started ranking, and US revenue grew 75% within two months — with no additional ad spend. All verified via Google Search Console.",
+      "Monthly net sales rose from $5,832 in April 2026 to $19,100 in June 2026 — a 227% increase in two months, with no additional ad spend, as shown on the store's WooCommerce dashboard.",
   },
   {
     id: 2,

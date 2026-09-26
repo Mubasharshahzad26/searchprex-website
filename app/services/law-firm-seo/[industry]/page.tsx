@@ -169,7 +169,6 @@ export default async function IndustryPage({
                 eyebrow="Local SEO Case Study"
                 title={page.caseStudy.title}
                 intro={page.caseStudy.description}
-                align="left"
               />
               <p className={`mt-4 font-semibold text-lg`} style={{ color: color.primary }}>
                 Become our next first-page case study.

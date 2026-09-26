@@ -411,7 +411,7 @@ export default function LawFirmSEOClient() {
       <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead SEO Strategist · Semrush-certified"
+          role="Founder & Lead SEO Strategist · 5+ years · Semrush-certified"
           quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to the top 3 map pack and Google AI Overview placements, and I bring that exact methodology to every firm I work with.&rdquo;"
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"

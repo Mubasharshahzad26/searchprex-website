@@ -365,7 +365,7 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
       <Section width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead Ecommerce SEO Strategist"
+          role="Founder & Lead Ecommerce SEO Strategist · 5+ years"
           quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. I currently run programs on WooCommerce, Shopify, and custom Next.js stores across the US."
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead Ecommerce SEO Strategist"
