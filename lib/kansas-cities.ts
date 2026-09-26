@@ -63,6 +63,38 @@ export const kansasCities: KansasCity[] = [
     ],
     barAssociation: "Kansas City Bar Association",
     nearbyAreas: ["Bonner Springs", "Edwardsville", "Merriam", "Roeland Park"],
+    // Enhanced local content — added 26 Sep 2026. Legal references verified
+    // against ksrevisor.gov; see the commit that added it.
+    localInsight: "Kansas City, Kansas shares a metro — and a name — with Kansas City, Missouri, and the state line decides the rules. Kansas bars recovery once an injured person is 50% or more at fault (K.S.A. 60-258a); Missouri uses pure comparative fault. A searcher typing \"Kansas City lawyer\" can land on either side, so a KCK firm's pages have to say plainly that it practises in Kansas courts, starting with the Wyandotte County District Court in the 29th Judicial District.",
+    neighborhoods: ["Strawberry Hill", "Rosedale", "Argentine", "Armourdale", "Turner", "Village West"],
+    practiceAreas: [
+      {
+        name: "Car accident & injury claims",
+        demand: "Heavy cross-state traffic, and a case's fault rules depend on which side of State Line Road it happened.",
+      },
+      {
+        name: "Criminal defense",
+        demand: "Searches come from both sides of the line; the page has to make clear which courts you appear in.",
+      },
+      {
+        name: "Family law",
+        demand: "Kansas requires 60 days' residency before filing for divorce (K.S.A. 23-2703) — a common question for families who recently moved from Missouri.",
+      },
+      {
+        name: "Workers' compensation",
+        demand: "A large industrial and logistics workforce keeps workplace-injury searches steady.",
+      },
+    ],
+    localGuide: [
+      {
+        heading: "Kansas or Missouri? Check where your case belongs",
+        body: "In the Kansas City metro, the state where an accident happened usually decides which law applies. Under Kansas law, an injured person who is 50% or more at fault recovers nothing (K.S.A. 60-258a); Missouri reduces the award instead. Before hiring anyone, confirm they are licensed and regularly appear in the state where your case will be heard.",
+      },
+      {
+        heading: "The two-year injury deadline",
+        body: "Most Kansas personal injury claims must be filed within two years (K.S.A. 60-513). Evidence and witnesses fade well before that, so the practical deadline for getting advice is much sooner.",
+      },
+    ],
     faqs: [
       {
         q: "How long does law firm SEO take to show results in Kansas City?",
@@ -219,6 +251,38 @@ export const kansasCities: KansasCity[] = [
     ],
     barAssociation: "Topeka Bar Association",
     nearbyAreas: ["Silver Lake", "Wakarusa", "Rossville", "Auburn"],
+    // Enhanced local content — added 26 Sep 2026. Legal references verified
+    // against ksrevisor.gov; see the commit that added it.
+    localInsight: "Topeka is the state capital, which gives it a legal landscape no other Kansas city has: the Kansas Supreme Court and Court of Appeals sit here, as does one of the U.S. District Court for the District of Kansas courthouses, alongside the Shawnee County District Court. State government is a major employer, so employment and administrative questions show up next to the family law and injury searches every city has.",
+    neighborhoods: ["Potwin", "College Hill", "Westboro", "Oakland", "North Topeka", "Sherwood"],
+    practiceAreas: [
+      {
+        name: "Family law",
+        demand: "Divorce and custody searches are steady; Kansas requires 60 days' residency and a 60-day wait before a divorce is granted.",
+      },
+      {
+        name: "Personal injury",
+        demand: "Accident and injury claims under Kansas's 50% comparative-fault rule.",
+      },
+      {
+        name: "Employment & administrative law",
+        demand: "A large public-sector workforce brings workplace, benefits and agency disputes.",
+      },
+      {
+        name: "Criminal defense",
+        demand: "Cases in Shawnee County District Court and Topeka Municipal Court.",
+      },
+    ],
+    localGuide: [
+      {
+        heading: "How long a Kansas divorce takes",
+        body: "One spouse must have lived in Kansas for 60 days before filing (K.S.A. 23-2703), and the court cannot grant the divorce until 60 days after the petition is filed (K.S.A. 23-2708). Contested cases take longer; uncontested ones rarely go faster than that minimum.",
+      },
+      {
+        heading: "Choosing a Topeka attorney",
+        body: "Ask how often they appear in the Shawnee County District Court, who will actually handle your file, and how they will keep you updated. Check their standing with the Kansas Supreme Court's attorney registration before you sign anything.",
+      },
+    ],
     faqs: [
       {
         q: "Does being in the state capital affect law firm SEO in Topeka?",
@@ -258,6 +322,38 @@ export const kansasCities: KansasCity[] = [
     ],
     barAssociation: "Douglas County Bar Association",
     nearbyAreas: ["Eudora", "Baldwin City", "Lecompton", "Linwood"],
+    // Enhanced local content — added 26 Sep 2026. Legal references verified
+    // against ksrevisor.gov; see the commit that added it.
+    localInsight: "Lawrence is home to the University of Kansas, and that shapes local legal demand more than anything else. A large student population means criminal defense and landlord-tenant questions — often searched by parents rather than students — make up a real share of searches, and the volume rises and falls with the academic calendar. Cases are heard in the Douglas County District Court or the Lawrence Municipal Court.",
+    neighborhoods: ["Old West Lawrence", "Oread", "East Lawrence", "Brook Creek", "Prairie Park", "Alvamar"],
+    practiceAreas: [
+      {
+        name: "Criminal defense",
+        demand: "Student-related charges drive searches, frequently made by parents in other states.",
+      },
+      {
+        name: "Landlord-tenant",
+        demand: "Deposits, leases and housing disputes in a renter-heavy market.",
+      },
+      {
+        name: "Family law",
+        demand: "Divorce and custody for faculty, staff and long-time residents.",
+      },
+      {
+        name: "Personal injury",
+        demand: "Accident claims under Kansas's two-year deadline (K.S.A. 60-513).",
+      },
+    ],
+    localGuide: [
+      {
+        heading: "For parents: when a student is charged in Lawrence",
+        body: "Look for an attorney who regularly appears in the court hearing the case — Lawrence Municipal Court for many minor offences, Douglas County District Court for more serious ones. Ask how they handle clients whose family lives out of state, and what the realistic outcomes are before any fee is agreed.",
+      },
+      {
+        heading: "Why search demand here is seasonal",
+        body: "Legal searches in a university town follow the calendar: move-in, football weekends and graduation all bring spikes. A firm that publishes useful answers ahead of those weeks is the one found when they arrive.",
+      },
+    ],
     faqs: [
       {
         q: "Is Lawrence a good market for law firm SEO?",
@@ -297,6 +393,38 @@ export const kansasCities: KansasCity[] = [
     ],
     barAssociation: "Kansas City Metropolitan Bar Association",
     nearbyAreas: ["Lenexa", "Merriam", "Roeland Park", "De Soto", "Bonner Springs"],
+    // Enhanced local content — added 26 Sep 2026. Legal references verified
+    // against ksrevisor.gov; see the commit that added it.
+    localInsight: "Shawnee the city is in Johnson County — not Shawnee County, which is Topeka. The two get confused in search constantly, and they point to different courthouses in different cities: Shawnee residents' cases go to the Johnson County District Court in Olathe. A Shawnee firm's pages have to make that distinction clear, and they compete in the same crowded Johnson County market as Overland Park and Lenexa.",
+    neighborhoods: ["Downtown Shawnee", "Old Shawnee Town", "Mill Valley", "Clear Creek"],
+    practiceAreas: [
+      {
+        name: "Family law",
+        demand: "A family-heavy suburb with steady divorce and custody searches.",
+      },
+      {
+        name: "Estate planning",
+        demand: "Wills, trusts and probate questions from established homeowners.",
+      },
+      {
+        name: "Personal injury",
+        demand: "Accident claims across the western Johnson County corridor.",
+      },
+      {
+        name: "Criminal defense",
+        demand: "Municipal and Johnson County District Court cases.",
+      },
+    ],
+    localGuide: [
+      {
+        heading: "Shawnee or Shawnee County?",
+        body: "If you live in the city of Shawnee, your case is almost certainly in Johnson County, heard in Olathe. Shawnee County is Topeka, an hour west. When you search for a lawyer, check which one they mean — a Topeka firm and a Johnson County firm work in different courts.",
+      },
+      {
+        heading: "Standing out in Johnson County",
+        body: "Shawnee firms compete with the whole county for the same searches. Pages built for Shawnee specifically, real reviews from local clients and a complete Business Profile are what separate a local firm from the larger ones advertising across the metro.",
+      },
+    ],
     faqs: [
       {
         q: "Can a Shawnee law firm compete with larger Overland Park firms online?",
@@ -336,6 +464,38 @@ export const kansasCities: KansasCity[] = [
     ],
     barAssociation: "Kansas City Metropolitan Bar Association",
     nearbyAreas: ["Shawnee", "Olathe", "Overland Park", "Clear Creek"],
+    // Enhanced local content — added 26 Sep 2026. Legal references verified
+    // against ksrevisor.gov; see the commit that added it.
+    localInsight: "Lenexa sits in Johnson County, minutes from the county courthouse in Olathe, and competes for the same searches as Overland Park and Shawnee. It also has its own municipal court, which matters for search: traffic tickets and minor offences are heard in Lenexa Municipal Court, while felonies and divorces go to the Johnson County District Court — and people search for help with each very differently.",
+    neighborhoods: ["Lenexa City Center", "Old Town Lenexa", "Canyon Creek", "Falcon Ridge"],
+    practiceAreas: [
+      {
+        name: "Family law",
+        demand: "Divorce and custody, with Kansas's 60-day residency and 60-day waiting period.",
+      },
+      {
+        name: "Estate planning",
+        demand: "Wills, trusts and probate for a growing, established population.",
+      },
+      {
+        name: "Business law",
+        demand: "A large base of offices and employers brings contract and business-formation questions.",
+      },
+      {
+        name: "Traffic & criminal defense",
+        demand: "Split between Lenexa Municipal Court and the district court in Olathe.",
+      },
+    ],
+    localGuide: [
+      {
+        heading: "Municipal court or district court?",
+        body: "Most traffic tickets and minor offences in Lenexa go to Lenexa Municipal Court. Felonies, divorces and civil lawsuits go to the Johnson County District Court in Olathe. Knowing which court your matter is in tells you what kind of lawyer to look for.",
+      },
+      {
+        heading: "Filing for divorce in Johnson County",
+        body: "Kansas requires 60 days' residency before filing (K.S.A. 23-2703) and a 60-day wait before the divorce can be granted (K.S.A. 23-2708). Ask any attorney how often they appear in the Johnson County District Court.",
+      },
+    ],
     faqs: [
       {
         q: "Is Lenexa a good market to invest in law firm SEO?",
@@ -375,6 +535,38 @@ export const kansasCities: KansasCity[] = [
     ],
     barAssociation: "Riley County Bar Association",
     nearbyAreas: ["Junction City", "Ogden", "Wamego", "Leonardville", "Riley"],
+    // Enhanced local content — added 26 Sep 2026. Legal references verified
+    // against ksrevisor.gov; see the commit that added it.
+    localInsight: "Manhattan is home to Kansas State University and sits next to Fort Riley, which gives it a family-law audience most cities do not have. Kansas lets a service member stationed at a Kansas post for 60 days meet the divorce residency requirement and file in a county adjacent to the installation (K.S.A. 23-2703). Cases are heard in the Riley County District Court, part of the 21st Judicial District with Clay County.",
+    neighborhoods: ["Aggieville", "Downtown Manhattan", "Bluemont Hill", "Westloop", "Northview"],
+    practiceAreas: [
+      {
+        name: "Military family law",
+        demand: "Divorce and custody for Fort Riley families, including the Kansas residency rule for service members.",
+      },
+      {
+        name: "Criminal defense",
+        demand: "Student-related charges, often searched by parents out of state.",
+      },
+      {
+        name: "Landlord-tenant",
+        demand: "A large renter population around campus and the base.",
+      },
+      {
+        name: "Personal injury",
+        demand: "Accident claims under Kansas's 50% comparative-fault rule.",
+      },
+    ],
+    localGuide: [
+      {
+        heading: "Divorce when one spouse is stationed at Fort Riley",
+        body: "A service member stationed at a Kansas military post for 60 days meets Kansas's residency requirement and may file in a county adjacent to the installation (K.S.A. 23-2703). Deployment, relocation and custody across state lines add questions a general family lawyer may not handle often — ask about military experience directly.",
+      },
+      {
+        heading: "For K-State families",
+        body: "When a student faces a charge, find an attorney who regularly appears in the Riley County District Court or the municipal court hearing the case, and ask about realistic outcomes before agreeing a fee.",
+      },
+    ],
     faqs: [
       {
         q: "Can you help my Manhattan law firm target Fort Riley military clients?",
