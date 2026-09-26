@@ -56,7 +56,7 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
           className={active === t.id ? "grid gap-6 lg:grid-cols-[1.15fr_1fr]" : "hidden"}
         >
           <div className="rounded-3xl border border-[#e7e8f0] bg-white p-7 sm:p-9">
-            <h3 className="font-[family-name:var(--font-jakarta)] text-2xl font-extrabold tracking-tight text-[#0a0f2e]">{t.title}</h3>
+            <h3 className="text-2xl font-black tracking-tight text-[#0a0f2e]">{t.title}</h3>
             <p className="mt-3 text-[15px] leading-relaxed text-[#5b6472]">{t.problem}</p>
             <ul className="mt-6 space-y-3">
               {t.work.map((w) => (

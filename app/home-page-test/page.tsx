@@ -13,11 +13,11 @@
 //   - The full proof stories (6,298px on the live page) live on the case study
 //     pages already. Here they are a four-card bento of evidence cards, each
 //     linking to its study.
-//   - One action throughout: the free tear-down, as a Semrush-style pill that
-//     asks for the website first and the email second (PillForm).
+//   - One action throughout: the free tear-down. The hero is the live one
+//     (HeroV2); the later forms are a pill that asks for the website first
+//     and the email second (PillForm). The action is green everywhere.
 //   - Three audiences become one tabbed section instead of three stacked ones.
-//   - One visual system: Plus Jakarta Sans headings (NicheSEO Pro's face),
-//     rounded 24px cards, pill controls, soft tinted sections, one primary
+//   - One visual system: the site's Inter throughout, rounded 24px cards, pill controls, soft tinted sections, one primary
 //     colour for every CTA. No reveal-on-scroll animations, which kept
 //     content invisible until scrolled to.
 //   - One floating element (the sticky mobile CTA); no chat widget.
@@ -28,10 +28,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { ArrowRight, BookOpen, ExternalLink, FileText, Newspaper, Star } from "lucide-react";
 
 import ClientLogos from "@/components/ClientLogos";
+import HeroV2 from "@/components/HeroV2";
 import ProofImage from "@/components/ProofImage";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { VideoGallery } from "@/components/layout";
@@ -50,12 +50,6 @@ import AudienceTabs, { type AudienceTab } from "./AudienceTabs";
 import FaqAccordion from "./FaqAccordion";
 import PillForm from "./PillForm";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-jakarta",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Home page redesign test — SearchPrex (internal)",
@@ -64,7 +58,8 @@ export const metadata: Metadata = {
 };
 
 const LAST_REVIEWED = "2026-09-26";
-const H = "font-[family-name:var(--font-jakarta)]";
+// One typeface site-wide (Inter, from the root layout); headings only change weight.
+const H = "font-black";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 
 // ── Data, read from the case studies ──────────────────────────────────────
@@ -196,7 +191,7 @@ function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?
   return (
     <div className="mx-auto mb-10 max-w-2xl text-center">
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#534AB7]">{eyebrow}</p>
-      <h2 className={`${H} mt-3 text-3xl font-extrabold tracking-[-0.02em] text-[#0a0f2e] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1]`}>{title}</h2>
+      <h2 className={`${H} mt-3 text-3xl  tracking-[-0.02em] text-[#0a0f2e] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1]`}>{title}</h2>
       {sub ? <p className="mt-4 text-base leading-relaxed text-[#5b6472]">{sub}</p> : null}
     </div>
   );
@@ -233,42 +228,11 @@ export default function HomePageTest() {
   };
 
   return (
-    <main id="main-content" className={`${jakarta.variable} bg-white`}>
+    <main id="main-content" className="bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* 1 · HERO — one action */}
-      <section
-        id="get-started"
-        className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-6 sm:pt-32 lg:pb-20"
-        style={{ background: "radial-gradient(1200px 500px at 50% -10%, #ecebfd 0%, #f7f7fd 45%, #ffffff 100%)" }}
-      >
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#dcdaf6] bg-white/70 px-4 py-1.5 text-xs font-bold text-[#3C3489]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#1a7d59]" aria-hidden /> One client per city · Reply within 24 hours
-          </p>
-          <h1 className={`${H} mx-auto mt-6 max-w-3xl text-[2.3rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#0a0f2e] sm:text-5xl lg:text-[4rem]`}>
-            <span className="text-[#534AB7]">Revenue-focused SEO</span> for law firms, local businesses and ecommerce
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#5b6472]">
-            Cases, calls and sales from Google and AI search — planned and done by the founder, never handed to a junior.
-          </p>
-          <div className="mt-9">
-            <PillForm source="homepage-v3:hero" />
-          </div>
-
-          <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-3">
-            {BENTO.filter((b) => b.cs).slice(0, 3).map((b) => (
-              <Link
-                key={b.client}
-                href={detailUrl(b.cs!)}
-                className="inline-flex items-center gap-2 rounded-full border border-[#e7e8f0] bg-white px-4 py-2 text-sm text-[#5b6472] transition-colors hover:border-[#534AB7]"
-              >
-                <strong className="font-bold text-[#0a0f2e]">{b.title}</strong> · {b.cs!.client}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 1 · HERO — the live home page's hero, kept on purpose: the form card carries the founder's face and name (people hire a person, not a tool), both fields are visible so the 24-hour human reply is clear up front, proof and a phone number sit on the first screen, and it is proven in production. */}
+      <HeroV2 />
 
       {/* 2 · PROOF STRIP */}
       <ClientLogos />
@@ -286,7 +250,7 @@ export default function HomePageTest() {
               b.cs && b.proof ? (
                 <article key={b.client} className={`flex flex-col rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-7 ${b.wide ? "lg:col-span-2" : ""}`}>
                   <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">{b.tag}</p>
-                  <h3 className={`${H} mt-2 text-2xl font-extrabold tracking-tight text-[#0a0f2e]`}>{b.title}</h3>
+                  <h3 className={`${H} mt-2 text-2xl  tracking-tight text-[#0a0f2e]`}>{b.title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-[#5b6472]">{b.line}</p>
                   <div className="mt-5 flex-1">
                     <ProofImage
@@ -311,7 +275,7 @@ export default function HomePageTest() {
       {/* 4 · MID FORM */}
       <section className="px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-[#dcdaf6] bg-[#f6f5ff] px-6 py-10 text-center sm:px-10">
-          <h2 className={`${H} text-2xl font-extrabold tracking-tight text-[#0a0f2e] sm:text-3xl`}>Want to know where your site stands?</h2>
+          <h2 className={`${H} text-2xl  tracking-tight text-[#0a0f2e] sm:text-3xl`}>Want to know where your site stands?</h2>
           <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#5b6472]">
             The same checks behind the results above, run on your site and your competitors. Free, written by me.
           </p>
@@ -348,8 +312,8 @@ export default function HomePageTest() {
           <ol className="grid gap-5 md:grid-cols-3">
             {STEPS.map((s) => (
               <li key={s.n} className="rounded-3xl border border-[#e7e8f0] bg-white p-7">
-                <span className={`${H} flex h-10 w-10 items-center justify-center rounded-full bg-[#f1f0fb] text-lg font-extrabold text-[#534AB7]`}>{s.n}</span>
-                <h3 className={`${H} mt-5 text-xl font-extrabold text-[#0a0f2e]`}>{s.title}</h3>
+                <span className={`${H} flex h-10 w-10 items-center justify-center rounded-full bg-[#f1f0fb] text-lg  text-[#534AB7]`}>{s.n}</span>
+                <h3 className={`${H} mt-5 text-xl  text-[#0a0f2e]`}>{s.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-[#5b6472]">{s.body}</p>
               </li>
             ))}
@@ -370,7 +334,7 @@ export default function HomePageTest() {
             />
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#a79fed]">Who does the work</p>
-              <h2 className={`${H} mt-2 text-3xl font-extrabold tracking-tight text-white`}>Mubashar Sharif</h2>
+              <h2 className={`${H} mt-2 text-3xl  tracking-tight text-white`}>Mubashar Sharif</h2>
               <p className="mt-1 text-sm text-white/65">
                 Founder · 5+ years in SEO · {certCount} Semrush certificates
               </p>
@@ -437,7 +401,7 @@ export default function HomePageTest() {
               >
                 <p className="text-sm font-bold text-[#0a0f2e]">{p.niche}</p>
                 <p className="mt-1 text-xs text-[#5b6472]">{p.best}</p>
-                <p className={`${H} mt-5 text-3xl font-extrabold tracking-tight text-[#0a0f2e]`}>
+                <p className={`${H} mt-5 text-3xl  tracking-tight text-[#0a0f2e]`}>
                   {formatRange(p)}
                   <span className="text-sm font-semibold text-[#5b6472]"> / mo</span>
                 </p>
@@ -449,7 +413,7 @@ export default function HomePageTest() {
                 <a
                   href="#get-started"
                   className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
-                    p.featured ? "bg-[#534AB7] text-white hover:bg-[#3C3489]" : "border border-[#dcdfea] text-[#0a0f2e] hover:border-[#534AB7]"
+                    p.featured ? "bg-[#1a7d59] text-white hover:bg-[#196b4d]" : "border border-[#dcdfea] text-[#0a0f2e] hover:border-[#534AB7]"
                   }`}
                 >
                   Start with the free tear-down
@@ -511,7 +475,7 @@ export default function HomePageTest() {
       {/* 12 · CLOSE */}
       <section className="px-4 pb-20 sm:px-6">
         <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#0a0f2e] px-6 py-14 text-center sm:px-12">
-          <h2 className={`${H} mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl`}>
+          <h2 className={`${H} mx-auto max-w-2xl text-3xl  tracking-tight text-white sm:text-4xl`}>
             Send me your URL. I&apos;ll tell you what&apos;s holding it back.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-white/70">
@@ -534,7 +498,7 @@ export default function HomePageTest() {
                 <Link key={l.href} href={l.href} className="group rounded-3xl border border-[#e7e8f0] p-6 transition-all hover:border-[#534AB7] hover:shadow-md">
                   <Icon className="h-5 w-5 text-[#534AB7]" aria-hidden />
                   <p className="mt-4 text-xs font-bold uppercase tracking-widest text-[#5b6472]">{l.kind}</p>
-                  <p className={`${H} mt-1 text-lg font-extrabold text-[#0a0f2e] group-hover:text-[#534AB7]`}>{l.title}</p>
+                  <p className={`${H} mt-1 text-lg  text-[#0a0f2e] group-hover:text-[#534AB7]`}>{l.title}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-[#5b6472]">{l.body}</p>
                 </Link>
               );

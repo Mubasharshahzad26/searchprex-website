@@ -19,6 +19,9 @@ import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle, ChevronDown } from "lu
 type Step = "url" | "email" | "sending" | "done" | "error";
 type Tone = "light" | "dark";
 
+// Optional and blank by default: a pre-selected "Law firm" would file every
+// visitor who does not touch it under the wrong segment. Wrong data is worse
+// than none.
 const BUSINESS = [
   { value: "Law firm", label: "Law firm" },
   { value: "Local business", label: "Local business" },
@@ -28,7 +31,7 @@ const BUSINESS = [
 export default function PillForm({ source, tone = "light", cta = "Get my free tear-down" }: { source: string; tone?: Tone; cta?: string }) {
   const [step, setStep] = useState<Step>("url");
   const [website, setWebsite] = useState("");
-  const [business, setBusiness] = useState<string>(BUSINESS[0].value);
+  const [business, setBusiness] = useState("");
   const [email, setEmail] = useState("");
   const [hint, setHint] = useState("");
   const [attribution, setAttribution] = useState({ utmSource: "", utmCampaign: "", referrer: "" });
@@ -45,7 +48,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
   const dark = tone === "dark";
   const shell = dark
     ? "border-white/15 bg-white/[0.06] focus-within:border-white/40"
-    : "border-[#dcdfea] bg-white shadow-[0_8px_30px_rgba(83,74,183,0.12)] focus-within:border-[#534AB7]";
+    : "border-[#dcdfea] bg-white shadow-[0_8px_30px_rgba(83,74,183,0.12)] focus-within:border-[#1a7d59]";
   const inputText = dark ? "text-white placeholder:text-white/45" : "text-[#0a0f2e] placeholder:text-[#8a93a3]";
   const muted = dark ? "text-white/60" : "text-[#5b6472]";
 
@@ -72,7 +75,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
       const res = await fetch("/api/send-audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ website: website.trim(), email: email.trim(), business, source, ...attribution }),
+        body: JSON.stringify({ website: website.trim(), email: email.trim(), ...(business ? { business } : {}), source, ...attribution }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStep("done");
@@ -113,6 +116,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
               onChange={(e) => setBusiness(e.target.value)}
               className={`w-full appearance-none rounded-full py-2.5 pl-4 pr-9 text-sm font-semibold outline-none sm:w-auto ${dark ? "bg-white/10 text-white" : "bg-[#f3f2fd] text-[#3C3489]"}`}
             >
+              <option value="" className="text-[#0a0f2e]">Type of business</option>
               {BUSINESS.map((b) => (
                 <option key={b.value} value={b.value} className="text-[#0a0f2e]">
                   {b.label}
@@ -123,7 +127,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#534AB7] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#3C3489]"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#1a7d59] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#196b4d]"
           >
             {cta} <ArrowRight className="h-4 w-4" aria-hidden />
           </button>
@@ -152,7 +156,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
           <button
             type="submit"
             disabled={step === "sending"}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#534AB7] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#3C3489] disabled:opacity-70"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#1a7d59] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#196b4d] disabled:opacity-70"
           >
             {step === "sending" ? "Sending…" : "Send my tear-down"} {step === "sending" ? null : <ArrowRight className="h-4 w-4" aria-hidden />}
           </button>
@@ -169,7 +173,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
         </p>
       ) : (
         <p className={`mt-3 text-center text-xs ${muted}`}>
-          {step === "url" ? "Free · Reply within 24 hours · Written by me, not a tool" : "Step 2 of 2 · No newsletter, no calls unless you ask"}
+          {step === "url" ? "A written tear-down in your inbox within 24 hours · Free · By me, not a tool" : "Step 2 of 2 · No newsletter, no calls unless you ask"}
         </p>
       )}
     </div>
