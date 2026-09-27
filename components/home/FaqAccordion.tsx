@@ -1,4 +1,4 @@
-// app/home-page-test/FaqAccordion.tsx
+// components/home/FaqAccordion.tsx
 // Native <details>, so every answer is in the HTML (the FAQPage schema must
 // match visible content) and it works without JavaScript.
 

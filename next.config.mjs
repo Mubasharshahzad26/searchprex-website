@@ -38,6 +38,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        // The redesigned home page was reviewed here, then shipped at "/".
+        source: '/home-page-test',
+        destination: '/',
+        permanent: true,
+      },
+      {
         // /nicheseopro is renamed to /tools/keyword-research. Permanent (301)
         // so Search Console transfers the old URL's history rather than
         // treating the new one as an unrelated page — it already had

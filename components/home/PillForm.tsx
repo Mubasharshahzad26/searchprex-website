@@ -1,6 +1,6 @@
 "use client";
 
-// app/home-page-test/PillForm.tsx
+// components/home/PillForm.tsx
 //
 // The one action on the redesigned home page, used three times (hero, after
 // the results, and the close). Semrush / NicheSEO Pro pattern: a single pill

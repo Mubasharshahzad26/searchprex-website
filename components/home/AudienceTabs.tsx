@@ -1,6 +1,6 @@
 "use client";
 
-// app/home-page-test/AudienceTabs.tsx
+// components/home/AudienceTabs.tsx
 //
 // "Who it's for" — three audiences in one section instead of three stacked
 // ones. Every panel is rendered into the HTML and only the inactive ones are
