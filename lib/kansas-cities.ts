@@ -44,7 +44,7 @@ export const kansasCities: KansasCity[] = [
     name: "Kansas City",
     county: "Wyandotte County",
     population: "156,607",
-    metaTitle: "Law Firm SEO Kansas City, KS",
+    metaTitle: "Law Firm SEO Company in Kansas City, KS",
     metaDescription:
       "Law firm SEO for Kansas City, KS attorneys: practice-area pages and map pack work for Wyandotte County firms. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Kansas City, KS",
@@ -115,12 +115,12 @@ export const kansasCities: KansasCity[] = [
     name: "Wichita",
     county: "Sedgwick County",
     population: "397,532",
-    metaTitle: "Law Firm SEO Wichita, KS | Family Law SEO",
+    metaTitle: "Law Firm SEO Company in Wichita, KS",
     metaDescription:
       "Founder-led law firm SEO for Wichita attorneys: personal injury, family law and criminal defense firms across Sedgwick County.",
     heroHeadline: "Law Firm SEO in Wichita, KS",
     heroSub:
-      "Get found by Wichita clients the moment they search. We rank family law, personal injury, and criminal defense firms across Sedgwick County — and turn local searches into signed cases.",
+      "Get found by Wichita clients the moment they search. Practice-area pages and map pack work for family law, personal injury and criminal defense firms across Sedgwick County.",
     overview:
       "As Kansas's largest city, Wichita is also its most competitive legal market. The Sedgwick County District Court (18th Judicial District) is one of the busiest in the state, and the firms that own page one capture the overwhelming majority of high-value cases. For everyone else, the cost isn't lost rankings — it's lost clients calling a competitor instead.",
     localInsight:
@@ -173,7 +173,7 @@ export const kansasCities: KansasCity[] = [
     name: "Overland Park",
     county: "Johnson County",
     population: "199,067",
-    metaTitle: "Law Firm SEO Overland Park, KS | Family Law SEO",
+    metaTitle: "Law Firm SEO Company in Overland Park, KS",
     metaDescription:
       "Founder-led law firm SEO for Overland Park attorneys: family law, estate and business firms in Johnson County's competitive legal market.",
     heroHeadline: "Law Firm SEO in Overland Park, KS",
@@ -231,7 +231,7 @@ export const kansasCities: KansasCity[] = [
     name: "Topeka",
     county: "Shawnee County",
     population: "126,587",
-    metaTitle: "Law Firm SEO Topeka, KS",
+    metaTitle: "Law Firm SEO Company in Topeka, KS",
     metaDescription:
       "Rank your Topeka law firm higher on Google. Searchprex delivers law firm SEO and family law SEO for Shawnee County attorneys in Kansas's state capital.",
     heroHeadline: "Law Firm SEO in Topeka, KS",
@@ -303,7 +303,7 @@ export const kansasCities: KansasCity[] = [
     name: "Lawrence",
     county: "Douglas County",
     population: "95,358",
-    metaTitle: "Law Firm SEO Lawrence, KS",
+    metaTitle: "Law Firm SEO Company in Lawrence, KS",
     metaDescription:
       "Expert law firm SEO for Lawrence, KS attorneys. Searchprex ranks Douglas County law firms for family law, personal injury, and criminal defense searches.",
     heroHeadline: "Law Firm SEO in Lawrence, KS",
@@ -374,7 +374,7 @@ export const kansasCities: KansasCity[] = [
     name: "Shawnee",
     county: "Johnson County",
     population: "67,208",
-    metaTitle: "Law Firm SEO Shawnee, KS",
+    metaTitle: "Law Firm SEO Company in Shawnee, KS",
     metaDescription:
       "Law firm SEO for Shawnee, KS attorneys. Searchprex ranks Johnson County law firms for family law and personal injury searches in Shawnee.",
     heroHeadline: "Law Firm SEO in Shawnee, KS",
@@ -445,7 +445,7 @@ export const kansasCities: KansasCity[] = [
     name: "Lenexa",
     county: "Johnson County",
     population: "57,799",
-    metaTitle: "Law Firm SEO Lenexa, KS",
+    metaTitle: "Law Firm SEO Company in Lenexa, KS",
     metaDescription:
       "Law firm SEO for Lenexa and Johnson County attorneys: practice-area pages, Google Business Profile and map pack work. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Lenexa, KS",
@@ -516,7 +516,7 @@ export const kansasCities: KansasCity[] = [
     name: "Manhattan",
     county: "Riley County",
     population: "54,811",
-    metaTitle: "Law Firm SEO Manhattan, KS",
+    metaTitle: "Law Firm SEO Company in Manhattan, KS",
     metaDescription:
       "Law firm SEO for Manhattan, KS attorneys. Searchprex ranks Riley County law firms for family law and personal injury searches in the Little Apple.",
     heroHeadline: "Law Firm SEO in Manhattan, KS",

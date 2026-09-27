@@ -27,12 +27,12 @@ const CALENDLY = "https://calendly.com/contact-searchprex/30min";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
  
 const baseMetadata: Metadata = {
-  title: "Wichita Law Firm SEO Services",
+  title: "Law Firm SEO Company in Wichita, KS",
   description:
-    "Local SEO for Wichita law firms. Rank in the Google map pack for your practice area in Sedgwick County. Free audit, no commitment, reply in 24 hrs.",
+    "Law firm SEO for Wichita attorneys: practice-area pages, Google Business Profile and map pack work across Sedgwick County. Free tear-down within 24 hours.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "Wichita Law Firm SEO Services | SearchPrex",
+    title: "Law Firm SEO Company in Wichita, KS | SearchPrex",
     description:
       "Local SEO for Wichita law firms — dominate Google Maps and local search in Sedgwick County.",
     url: PAGE_URL, siteName: "SearchPrex", type: "website",

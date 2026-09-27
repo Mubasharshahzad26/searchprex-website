@@ -31,8 +31,15 @@ export async function generateMetadata(
   if (!cs) return {};
  
   // No "| SearchPrex" suffix here — the root layout's title template appends it.
-  const title = `${cs.client} ${cs.seoType} Case Study — ${cs.metrics[0].v} ${cs.metrics[0].l}`;
-  const description = `${cs.headline} See the full ${cs.seoType.toLowerCase()} strategy, verified Google Search Console results, and how we did it.`;
+  const title = cs.seoTitle ?? `${cs.client} ${cs.seoType} Case Study — ${cs.metrics[0].v} ${cs.metrics[0].l}`;
+  // Not every study is evidenced in Search Console (SMK Store's is a WooCommerce
+  // dashboard), so the tail only promises the original screenshots.
+  const place = /^(United States|Global|Multiple Locations)$/.test(cs.location) ? "" : ` in ${cs.location}`;
+  const description =
+    [
+      `${cs.headline} The full ${cs.seoType} case study${place}, with the original screenshots.`,
+      `${cs.headline} The full ${cs.seoType} case study, with the original screenshots.`,
+    ].find((d) => d.length <= 155) ?? cs.headline;
  
   return {
     title,

@@ -11,6 +11,8 @@ export interface Metric {
 export interface CaseStudy {
   id: number;
   client: string;
+  /** The <title>, hand-written to fit 47 characters (the layout appends " | SearchPrex"). */
+  seoTitle?: string;
   seoType: SeoType;
   industry: string;
   location: string;
@@ -44,6 +46,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 1,
     client: "SMK Store",
+    seoTitle: "Ecommerce SEO Case Study: SMK Store +227% Sales",
     // Revenue only. The card used to carry "+285% indexing rate" and "12K+
     // pages indexed" — the Michigan Sports & Outdoor figures, with no SMK
     // indexing screenshot behind them. What SMK can show is its own
@@ -74,10 +77,11 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 2,
     client: "Local HVAC Services",
+    seoTitle: "HVAC SEO Case Study, California: Top 3 Map Pack",
     period: "60 days",
     seoType: "Local SEO",
     industry: "HVAC",
-    location: "United States",
+    location: "Simi Valley, CA",
     headline: "Top 3 map pack and a Google AI Overview placement — from zero local visibility in 60 days.",
     badgeColor: "#059669",
     badgeBg: "#ecfdf5",
@@ -99,6 +103,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 3,
     client: "Michigan Outdoor Sports",
+    seoTitle: "Technical SEO Case Study: +285% Pages Indexed",
     period: "March – July 2026",
     seoType: "Technical SEO",
     industry: "Ecommerce",
@@ -128,6 +133,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 4,
     client: "Doll's Cleaning",
+    seoTitle: "Doll's Cleaning SEO Case Study, Chesterfield MI",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Cleaning",
@@ -153,6 +159,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 5,
     client: "Mammoth Roofing",
+    seoTitle: "Roofing SEO Case Study, Texas: +210 Clicks",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Roofing",
@@ -178,6 +185,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 6,
     client: "Carpet Cleaning",
+    seoTitle: "Carpet Cleaning SEO Case Study, Michigan: #1",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Cleaning",
@@ -203,6 +211,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 7,
     client: "Door Doctor",
+    seoTitle: "Door Doctor GBP Case Study: 490+ Interactions",
     seoType: "Local SEO",
     industry: "Home Services",
     location: "Multiple Locations",
@@ -227,6 +236,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 8,
     client: "Kitchen Cabinets",
+    seoTitle: "Kitchen Cabinet SEO Case Study, Glendora, CA",
     seoType: "Local SEO",
     industry: "Remodeling",
     location: "Glendora, CA",
@@ -251,6 +261,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 9,
     client: "HVAC Team",
+    seoTitle: "Simi Valley HVAC SEO Case Study: +40 Positions",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "HVAC",
@@ -276,6 +287,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 10,
     client: "Remit Choice",
+    seoTitle: "Fintech SEO Case Study: #1 Above Wise and Xoom",
     // The work began in 2023, in an in-house SEO role (as the home page
     // says); the AI search hub came later, in January 2026. This entry used
     // to open "From January 2026" while showing 2023–24 Search Console

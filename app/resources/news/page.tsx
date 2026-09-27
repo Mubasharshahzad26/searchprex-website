@@ -16,12 +16,12 @@ const PAGE_URL = `${SITE}/resources/news`;
 // 19 and 21 -- the same queries, two URLs, split signals. The spoke at
 // /resources/news/local-seo-updates owns local; the hub owns the broad terms.
 const baseMetadata: Metadata = {
-  title: "SEO News Today: Latest Google Algorithm Updates & Trends (2026)",
+  title: "SEO News Today: Latest SEO & Google Updates",
   description:
-    "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and spam updates. See what actually changed.",
+    "SEO news and Google updates as they land: core and spam updates, AI Overviews and ranking changes, in plain English with every original source linked.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "SEO News Today: Latest Google Algorithm Updates & Trends (2026)",
+    title: "SEO News Today: Latest SEO & Google Updates",
     description:
       "Stay ahead with the latest SEO news today. We break down Google core algorithm updates, AI Overviews, and spam updates.",
     url: PAGE_URL,
