@@ -21,6 +21,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import type { Guide } from "@/lib/guides";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
@@ -91,7 +93,8 @@ const related = [
   { href: "/case-studies", title: "All case studies", body: "HVAC, cleaning, roofing and door repair — with the screenshots." },
 ];
 
-export default function LocalSEOClient() {
+// `guide` comes from the server page so the checklist data is not bundled here.
+export default function LocalSEOClient({ guide }: { guide: Guide }) {
   return (
     <main>
       <Breadcrumb
@@ -225,17 +228,9 @@ export default function LocalSEOClient() {
         </CardGrid>
       </Section>
 
-      {/* 06 — MID-PAGE FORM · Action */}
+      {/* 06 — MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close */}
       <Section tight>
-        <ArticleLeadMagnet
-          variant="banner"
-          source={SOURCE}
-          copy={{
-            eyebrow: "Failed one of those checks?",
-            headline: "Find out what is keeping you out of the top three.",
-            sub: "Send me your URL. I’ll check your Profile, citations and reviews against the businesses above you — free, within 24 hours.",
-          }}
-        />
+        <GuideMagnet guide={guide} source="local-seo" eyebrow="Failed one of those checks? Free checklist" />
       </Section>
 
       {/* 07 — PROCESS · Desire */}

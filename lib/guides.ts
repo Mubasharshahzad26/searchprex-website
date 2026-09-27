@@ -8,6 +8,7 @@
 // as a prop, so the checklist data never ships in client JavaScript.
 
 import { CHECKLIST_PILLARS, CRITICAL_CHECKS, TOTAL_CHECKS } from "@/lib/law-firm-checklist";
+import { GBP_CHECKLIST_PILLARS, GBP_CRITICAL_CHECKS, GBP_TOTAL_CHECKS } from "@/lib/gbp-checklist";
 
 export interface Guide {
   id: string;
@@ -31,6 +32,18 @@ export const LAW_CHECKLIST_GUIDE: Guide = {
     "A scoring sheet and tick boxes to run it with your team",
   ],
   webHref: "/resources/law-firm-seo-audit-checklist",
+};
+
+export const GBP_CHECKLIST_GUIDE: Guide = {
+  id: "gbp-checklist",
+  title: `The ${GBP_TOTAL_CHECKS}-point Google Business Profile checklist`,
+  href: "/guides/google-business-profile-checklist.pdf",
+  fileName: "google-business-profile-checklist.pdf",
+  points: [
+    `${GBP_TOTAL_CHECKS} checks: setup, content, reviews, consistency and monitoring`,
+    `The ${GBP_CRITICAL_CHECKS} critical checks flagged — the ones that get profiles suspended or ignored`,
+    "Written to Google's own guidelines, with a scoring sheet",
+  ],
 };
 
 // Figures match the SMK Store and Michigan Sports & Outdoor case studies and

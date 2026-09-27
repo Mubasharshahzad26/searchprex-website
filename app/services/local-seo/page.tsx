@@ -3,6 +3,7 @@ import LocalSEOClient from "./LocalSEOClient";
 import { CAPSULES, FAQS } from "./data";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 import { RETAINER_PLANS } from "@/lib/pricing";
+import { GBP_CHECKLIST_GUIDE } from "@/lib/guides";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/local-seo";
@@ -114,7 +115,7 @@ export default function LocalSEOPage() {
     <>
       <script id="ld-local-seo" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <LocalSEOClient />
+      <LocalSEOClient guide={GBP_CHECKLIST_GUIDE} />
     </>
   );
 }

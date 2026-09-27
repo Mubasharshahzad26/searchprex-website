@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { caseStudies, findBySlug, detailUrl } from "../../data";
 import CaseStudyDetail from "./CaseStudyDetail";
-import { ECOMMERCE_PLAYBOOK_GUIDE } from "@/lib/guides";
+import { ECOMMERCE_PLAYBOOK_GUIDE, GBP_CHECKLIST_GUIDE } from "@/lib/guides";
  
 const SITE = "https://www.searchprex.com";
  
@@ -115,8 +115,13 @@ export default async function Page(
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      {/* Ecommerce studies offer the indexing playbook mid-page; the rest keep the tear-down. */}
-      <CaseStudyDetail cs={cs} related={related} guide={cs.industry === "Ecommerce" ? ECOMMERCE_PLAYBOOK_GUIDE : undefined} />
+      {/* Mid-page guide matched to the study: ecommerce -> indexing playbook,
+          local -> Business Profile checklist; the rest keep the tear-down. */}
+      <CaseStudyDetail
+        cs={cs}
+        related={related}
+        guide={cs.industry === "Ecommerce" ? ECOMMERCE_PLAYBOOK_GUIDE : cs.seoType === "Local SEO" ? GBP_CHECKLIST_GUIDE : undefined}
+      />
     </>
   );
 }

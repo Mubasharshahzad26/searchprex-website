@@ -4,6 +4,7 @@ import IndustryClient from "./IndustryClient";
 import { LOCAL_INDUSTRIES, getLocalIndustry } from "@/lib/local-industries";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 import { RETAINER_PLANS } from "@/lib/pricing";
+import { GBP_CHECKLIST_GUIDE } from "@/lib/guides";
 
 const SITE = "https://www.searchprex.com";
 
@@ -128,7 +129,7 @@ export default async function LocalIndustryPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <IndustryClient slug={industry.slug} />
+      <IndustryClient slug={industry.slug} guide={GBP_CHECKLIST_GUIDE} />
     </>
   );
 }

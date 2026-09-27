@@ -12,6 +12,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { LOCAL_INDUSTRIES, getLocalIndustry } from "@/lib/local-industries";
@@ -35,7 +37,7 @@ const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst
 const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
 const MAX_PROOF = 4;
 
-export default function IndustryClient({ slug }: { slug: string }) {
+export default function IndustryClient({ slug, guide }: { slug: string; guide: Guide }) {
   const industry = getLocalIndustry(slug);
   if (!industry) return null;
 
@@ -220,17 +222,9 @@ export default function IndustryClient({ slug }: { slug: string }) {
         </CardGrid>
       </Section>
 
-      {/* 06 — MID-PAGE FORM · Action */}
+      {/* 06 — MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close */}
       <Section tight>
-        <ArticleLeadMagnet
-          variant="banner"
-          source={source}
-          copy={{
-            eyebrow: "Failed one of those checks?",
-            headline: `Find out what is keeping your ${industry.name.toLowerCase()} business out of the top three.`,
-            sub: "Send me your URL. I’ll check your Profile, pages and reviews against the businesses above you — free, within 24 hours.",
-          }}
-        />
+        <GuideMagnet guide={guide} source={`local-seo/${industry.slug}`} eyebrow={`Free for ${industry.name.toLowerCase()} businesses`} />
       </Section>
 
       {/* 07 — PRICE · Desire */}
