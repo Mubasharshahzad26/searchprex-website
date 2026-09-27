@@ -44,6 +44,7 @@ export const GBP_CHECKLIST_GUIDE: Guide = {
     `The ${GBP_CRITICAL_CHECKS} critical checks flagged — the ones that get profiles suspended or ignored`,
     "Written to Google's own guidelines, with a scoring sheet",
   ],
+  webHref: "/resources/google-business-profile-checklist",
 };
 
 // Figures match the SMK Store and Michigan Sports & Outdoor case studies and

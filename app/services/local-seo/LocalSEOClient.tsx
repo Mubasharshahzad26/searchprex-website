@@ -89,7 +89,7 @@ const process = [
 const related = [
   { href: "/resources/news/google-business-profile-four-days-suggested-edits", title: "Google now gives you four days to reject a suggested edit", body: "What changed, and why your website is now the tie-breaker." },
   { href: "/resources/news/local-seo-updates", title: "Local SEO news log", body: "A dated, sourced record of what actually changed in local search." },
-  { href: "/resources/news?category=Local", title: "Business Profile & map pack news", body: "Every local update, in one place." },
+  { href: "/resources/google-business-profile-checklist", title: "Google Business Profile checklist", body: "23 checks, written to Google's own rules. Free, no email." },
   { href: "/case-studies", title: "All case studies", body: "HVAC, cleaning, roofing and door repair — with the screenshots." },
 ];
 
