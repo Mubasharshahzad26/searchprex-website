@@ -35,7 +35,7 @@ import HeroV2 from "@/components/HeroV2";
 import ProofImage from "@/components/ProofImage";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { SMK_REVENUE_METRICS } from "@/components/RevenueProof";
-import { MSO_RECOVERY_PHASES } from "@/components/RecoveryStory";
+import { MSO_RECOVERY_PHASES, MSO_REVENUE_STEPS } from "@/components/RecoveryStory";
 import { posts as blogPosts } from "@/app/blog/[slug]/posts";
 import { TRUSTPILOT_REVIEW_COUNT, TRUSTPILOT_URL } from "@/lib/hero-content";
 import { VideoGallery } from "@/components/layout";
@@ -346,6 +346,36 @@ export default function HomePageTest() {
                   figureLabel="indexed pages"
                   sizes="(max-width: 1024px) 100vw, 560px"
                 />
+
+                {/* What the recovery did to revenue — the reason the indexing
+                    mattered. Three dated captures from the store's own
+                    WooCommerce dashboard. */}
+                <div className="border-t border-[#eef0f4] pt-7 lg:col-span-2">
+                  <p className="text-sm font-black text-[#0a0f2e]">What the recovery did to store revenue</p>
+                  <p className="mt-1 text-xs text-[#5b6472]">Total store revenue from the WooCommerce dashboard, not split by country.</p>
+                  <ol className="mt-5 grid gap-6 md:grid-cols-3">
+                    {MSO_REVENUE_STEPS.map((r) => (
+                      <li key={r.src}>
+                        <p className="text-xs font-black uppercase tracking-widest" style={{ color: r.tone }}>
+                          {r.stage}
+                        </p>
+                        <p className="mt-1 text-3xl font-black tabular-nums tracking-tight text-[#0a0f2e]">{r.figure}</p>
+                        <p className="text-xs font-bold text-[#5b6472]">{r.date}</p>
+                        <div className="mt-3">
+                          <ProofImage
+                            src={r.src}
+                            alt={`Michigan Outdoor Sports WooCommerce net sales panel on ${r.date}, showing ${r.figure} net sales.`}
+                            width={r.width}
+                            height={r.height}
+                            frameAspect="16 / 9"
+                            note={r.note}
+                            sizes="(max-width: 768px) 100vw, 340px"
+                          />
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               </article>
             ) : null}
 

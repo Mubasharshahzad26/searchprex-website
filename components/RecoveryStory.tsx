@@ -27,8 +27,9 @@ import { color, radius } from "@/lib/design-tokens";
 import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
 
 // Before / after / and the gradual climb in between — each a dated capture
-// from the client's own WooCommerce dashboard.
-const revenueSteps = [
+// from the client's own WooCommerce dashboard. Exported for the redesigned home
+// page (app/home-page-test).
+export const MSO_REVENUE_STEPS = [
   {
     src: "/images/proof/mso-revenue-1-jul20.png",
     width: 1040,
@@ -302,7 +303,7 @@ export default function RecoveryStory() {
               caption out of line with them. object-contain, so nothing is
               cropped. */}
           <ol className="mt-8 grid gap-8 lg:grid-cols-3">
-            {revenueSteps.map((r, i) => (
+            {MSO_REVENUE_STEPS.map((r, i) => (
               <li key={r.src} className="relative">
                 {i > 0 && (
                   <span
