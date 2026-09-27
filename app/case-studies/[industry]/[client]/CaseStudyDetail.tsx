@@ -16,6 +16,8 @@ import {
 import { detailUrl, type CaseStudy } from "../../data";
 import { CASE_DETAILS, DEFAULT_FIXES, EXTRA_PROOF } from "../../details";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
  
 const GREEN = "#3eb489";
@@ -29,7 +31,7 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
-export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; related: CaseStudy[] }) {
+export default function CaseStudyDetail({ cs, related, guide }: { cs: CaseStudy; related: CaseStudy[]; guide?: Guide }) {
   const [videoOpen, setVideoOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const detail = CASE_DETAILS[cs.slug.client];
@@ -337,8 +339,12 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
             </div>
           ) : null}
 
-          {/* ── LEAD MAGNET ── was a link to /free-audit; now submits in place. */}
+          {/* ── LEAD MAGNET ── the playbook for ecommerce studies (the tear-down
+              still closes the page); the tear-down banner for the rest. */}
           <div className="mt-8">
+            {guide ? (
+              <GuideMagnet guide={guide} source={`case-study:${cs.slug.client}`} eyebrow={`How ${cs.client} was fixed, step by step`} />
+            ) : (
             <ArticleLeadMagnet
               variant="banner"
               source={leadSource}
@@ -348,6 +354,7 @@ export default function CaseStudyDetail({ cs, related }: { cs: CaseStudy; relate
                 sub: "Send me your URL. I\u2019ll check it against the issues on this page \u2014 crawling, indexing, content, structure \u2014 and tell you what to fix first. Free, within 24 hours.",
               }}
             />
+            )}
           </div>
         </div>
       </section>

@@ -4,6 +4,7 @@ import IndustryClient from "./IndustryClient";
 import { ECOMMERCE_INDUSTRIES, getEcommerceIndustry } from "@/lib/ecommerce-industries";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 import { RETAINER_PLANS } from "@/lib/pricing";
+import { ECOMMERCE_PLAYBOOK_GUIDE } from "@/lib/guides";
 
 const SITE = "https://www.searchprex.com";
 
@@ -128,7 +129,7 @@ export default async function EcommerceIndustryPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <IndustryClient slug={industry.slug} />
+      <IndustryClient slug={industry.slug} guide={ECOMMERCE_PLAYBOOK_GUIDE} />
     </>
   );
 }

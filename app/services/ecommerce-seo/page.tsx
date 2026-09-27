@@ -8,6 +8,7 @@ import EcommerceSEOClient from "./EcommerceSEOClient";
 import { CAPSULES, FAQS } from "./data";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 import { RETAINER_PLANS } from "@/lib/pricing";
+import { ECOMMERCE_PLAYBOOK_GUIDE } from "@/lib/guides";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
@@ -123,7 +124,7 @@ export default function Page() {
       {/* Required prop that was never passed, so the AuthorCard rendered without
           its LinkedIn link — a missing E-E-A-T signal on a page whose whole
           argument is verifiable, founder-led work. */}
-      <EcommerceSEOClient linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/" />
+      <EcommerceSEOClient linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/" guide={ECOMMERCE_PLAYBOOK_GUIDE} />
     </>
   );
 }

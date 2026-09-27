@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { caseStudies, detailUrl, type CaseStudy } from "@/app/case-studies/data";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
@@ -110,7 +112,8 @@ type FormState = "idle" | "sending" | "sent" | "error";
 
 /* ── Page ── */
 
-export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: string }) {
+// `guide` comes from the server page so the guide data is not bundled here.
+export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl: string; guide: Guide }) {
   const ecommerceStudies = useMemo(
     () =>
       caseStudies.filter((cs) => {
@@ -261,17 +264,9 @@ export default function EcommerceSEOClient({ linkedinUrl }: { linkedinUrl: strin
         </CardGrid>
       </Section>
 
-      {/* ── MID-PAGE FORM ── */}
+      {/* ── MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close ── */}
       <Section tight>
-        <ArticleLeadMagnet
-          variant="banner"
-          source={SOURCE}
-          copy={{
-            eyebrow: "Recognise one of those?",
-            headline: "Find out how much of your catalogue Google is ignoring.",
-            sub: "Send me your store URL. I’ll compare your sitemap with what Google has actually indexed and tell you what to fix first — free, within 24 hours.",
-          }}
-        />
+        <GuideMagnet guide={guide} source="ecommerce-seo" eyebrow="Recognise one of those? Free playbook" />
       </Section>
 
       {/* ── 4 · CASE STUDIES ── */}

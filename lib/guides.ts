@@ -32,3 +32,17 @@ export const LAW_CHECKLIST_GUIDE: Guide = {
   ],
   webHref: "/resources/law-firm-seo-audit-checklist",
 };
+
+// Figures match the SMK Store and Michigan Sports & Outdoor case studies and
+// the screenshots embedded in the PDF (app/guides/ecommerce-indexing-playbook.pdf).
+export const ECOMMERCE_PLAYBOOK_GUIDE: Guide = {
+  id: "ecommerce-playbook",
+  title: "The 35,000-product indexing playbook",
+  href: "/guides/ecommerce-indexing-playbook.pdf",
+  fileName: "ecommerce-indexing-playbook.pdf",
+  points: [
+    "The 8 steps in order, from Search Console diagnosis to batch resubmission",
+    "SMK Store: $5,832 → $19,100 a month, with the dashboards",
+    "Michigan Sports & Outdoor: ~3,000 → 11,549 indexed pages, setback included",
+  ],
+};

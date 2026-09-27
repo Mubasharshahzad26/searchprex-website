@@ -14,6 +14,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle, Info, ShoppingCart } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES, getEcommerceIndustry } from "@/lib/ecommerce-industries";
@@ -37,7 +39,7 @@ const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst
 const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 const MAX_PROOF = 4;
 
-export default function IndustryClient({ slug }: { slug: string }) {
+export default function IndustryClient({ slug, guide }: { slug: string; guide: Guide }) {
   const industry = getEcommerceIndustry(slug);
   if (!industry) return null;
 
@@ -244,17 +246,9 @@ export default function IndustryClient({ slug }: { slug: string }) {
         </CardGrid>
       </Section>
 
-      {/* 06 — MID-PAGE FORM · Action */}
+      {/* 06 — MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close */}
       <Section tight>
-        <ArticleLeadMagnet
-          variant="banner"
-          source={source}
-          copy={{
-            eyebrow: "Failed one of those checks?",
-            headline: "Find out what is holding your store back.",
-            sub: "Send me your store URL. I’ll check indexing, product copy and speed against the stores above you — free, within 24 hours.",
-          }}
-        />
+        <GuideMagnet guide={guide} source={`ecommerce-seo/${industry.slug}`} eyebrow="Failed one of those checks? Free playbook" />
       </Section>
 
       {/* 07 — PRICE · Desire */}
