@@ -13,6 +13,7 @@
 // also answer to ABA Model Rule 7.1 on misleading communications, which is one
 // more reason for this page to be the most careful on the site.
 
+import { costFaq } from "@/lib/pricing";
 export interface QA {
   q: string;
   a: string;
@@ -60,6 +61,10 @@ export const FAQS: QA[] = [
     a: "No long-term contract. Month to month, with one firm per city and practice area.",
   },
 ];
+
+// The question people type ("… seo cost"), answered from lib/pricing.
+const LAW_COST = costFaq("Law Firm SEO", "law firm SEO");
+if (LAW_COST) FAQS.push(LAW_COST);
 
 /** Four checks a managing partner can run today. */
 export const PROBLEMS: Array<{ title: string; check: string; costs: string }> = [

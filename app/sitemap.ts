@@ -75,17 +75,12 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
   { path: "/case-calculator", priority: 0.7, changeFrequency: "monthly" },
   { path: "/ai-search", priority: 0.9, changeFrequency: "weekly" },
-  { path: "/ai-visibility", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/content-generator", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/bulk-generation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/tools/keyword-research", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/tool", priority: 0.7, changeFrequency: "monthly" },
   // /autopilot is deliberately absent: it is an internal dashboard rendering
   // client names and run history, and now carries robots noindex. Listing a
   // noindex page here is the contradictory signal this file's own header warns
   // about, and it shows up as an error in Search Console.
   { path: "/free-audit", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/growth-plan", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/pricing", priority: 0.8, changeFrequency: "monthly" },
   // Location pages are appended below from lib/kansas-cities, not listed here.
@@ -145,7 +140,8 @@ const NON_CANONICAL_ROUTES = new Set(["/nicheseopro", "/all-case-studies", "/act
 // homepages competing for the same terms is exactly the duplication this file
 // exists to prevent, so it is noindexed in code and kept out of the sitemap.
 // /law-firm-scorecard: paused and noindexed until Gemini grounding works (see its page.tsx).
-const NOINDEX_ROUTES = new Set<string>(["/pricing-plan", "/home-page-test", "/law-firm-scorecard"]);
+// Thin utility/tool pages noindexed in the Sept 2026 SEO audit; /tool now redirects to nicheseopro.com.
+const NOINDEX_ROUTES = new Set<string>(["/pricing-plan", "/home-page-test", "/law-firm-scorecard", "/growth-plan", "/bulk-generation", "/content-generator", "/ai-visibility", "/tool"]);
 
 function derivePriority(path: string): number {
   if (path === "/") return 1.0;

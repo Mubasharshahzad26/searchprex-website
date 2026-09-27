@@ -38,6 +38,13 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        // The old NicheSEO Pro teaser page (thin, and it used Semrush's "Keyword
+        // Magic Tool" name). The product lives at its own domain.
+        source: '/tool',
+        destination: 'https://nicheseopro.com/',
+        permanent: true,
+      },
+      {
         // The redesigned home page was reviewed here, then shipped at "/".
         source: '/home-page-test',
         destination: '/',

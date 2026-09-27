@@ -10,6 +10,7 @@
 // days; "average" and "median" claim a dataset the site does not have, and
 // nothing backs "20+". Those are gone.
 
+import { costFaq } from "@/lib/pricing";
 export interface QA {
   q: string;
   a: string;
@@ -57,6 +58,10 @@ export const FAQS: QA[] = [
     a: "No long-term contract. Local SEO is month to month; the free tear-down tells you what the first 60 days would focus on before you commit to anything.",
   },
 ];
+
+// The question people type ("local seo services cost"), answered from lib/pricing.
+const LOCAL_COST = costFaq("Local SEO", "local SEO");
+if (LOCAL_COST) FAQS.push(LOCAL_COST);
 
 /** Why local businesses lose the map pack — each a thing an owner can check today. */
 export const PROBLEMS: Array<{ title: string; check: string; costs: string }> = [

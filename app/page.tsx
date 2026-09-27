@@ -159,7 +159,12 @@ const TABS: AudienceTab[] = [
       href: smk ? detailUrl(smk) : "/case-studies",
     },
     hub: { href: "/services/ecommerce-seo", label: "Ecommerce SEO" },
-    pages: ECOMMERCE_INDUSTRIES.map((i) => ({ href: `/services/ecommerce-seo/${i.slug}`, label: i.name })),
+    pages: [
+      ...ECOMMERCE_INDUSTRIES.map((i) => ({ href: `/services/ecommerce-seo/${i.slug}`, label: i.name })),
+      // Technical SEO was the least-linked service page (Sept 2026 audit); large
+      // catalogues are where its work matters most.
+      { href: "/services/technical-seo", label: "Technical SEO" },
+    ],
   },
 ];
 

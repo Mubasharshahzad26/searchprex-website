@@ -10,9 +10,9 @@ const PAGE_URL = "https://www.searchprex.com/services/technical-seo";
 // pointed into public/og/, a directory that has never existed in this repo.
 
 const baseMetadata: Metadata = {
-  title: "Technical SEO Services | Indexation, Core Web Vitals, Schema",
+  title: "Technical SEO Audit & Fix Services",
   description:
-    "Founder-led technical SEO: indexation recovery, crawl budget, Core Web Vitals and schema. Michigan Outdoor Sports went from about 3,000 to 11,549 indexed pages.",
+    "Technical SEO audit and fixes: indexing recovery, crawl budget, Core Web Vitals and schema. One store went from about 3,000 to 11,549 indexed pages.",
   keywords: [
     "technical SEO services", "Core Web Vitals optimization", "indexation recovery",
     "schema markup", "crawl budget", "site architecture SEO", "INP optimization",

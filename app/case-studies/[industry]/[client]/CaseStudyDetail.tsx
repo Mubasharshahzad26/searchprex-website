@@ -22,6 +22,13 @@ import ProofImage from "@/components/ProofImage";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
+
+const SERVICE_HREF: Record<string, string> = {
+  "Ecommerce SEO": "/services/ecommerce-seo",
+  "Local SEO": "/services/local-seo",
+  "Technical SEO": "/services/technical-seo",
+  "Law Firm SEO": "/services/law-firm-seo",
+};
 const PURPLE = "#534AB7";
 const NAVY = "#0a0f2e";
  
@@ -189,12 +196,20 @@ export default function CaseStudyDetail({ cs, related, guide }: { cs: CaseStudy;
                 </div>
                 <div className="flex justify-between gap-4 border-b border-[#f1f5f9] pb-3">
                   <dt className="text-[#64748b]">Service</dt>
-                  <dd className="text-right font-bold text-[#0a0f2e]">{cs.seoType}</dd>
+                  {/* Linked to the service page — case studies sent no
+                      contextual links to their service before. */}
+                  <dd className="text-right font-bold">
+                    <Link href={SERVICE_HREF[cs.seoType] ?? "/services"} className="text-[#0a0f2e] underline decoration-[#cbd5e1] underline-offset-2 hover:text-[#534AB7]">
+                      {cs.seoType}
+                    </Link>
+                  </dd>
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-[#64748b]">Proof</dt>
+                  {/* Was "GSC verified" on every study, including ones proved by
+                      a WooCommerce dashboard or a Business Profile. */}
                   <dd className="inline-flex items-center gap-1 text-right font-bold" style={{ color: GREEN_DARK }}>
-                    <CheckCircle className="h-4 w-4" /> GSC verified
+                    <CheckCircle className="h-4 w-4" /> {cs.verifiedVia ? `Verified via ${cs.verifiedVia}` : "Screenshots on this page"}
                   </dd>
                 </div>
               </dl>

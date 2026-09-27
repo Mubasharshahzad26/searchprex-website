@@ -46,7 +46,7 @@ export const kansasCities: KansasCity[] = [
     population: "156,607",
     metaTitle: "Law Firm SEO Kansas City, KS",
     metaDescription:
-      "Law firm SEO for Kansas City, KS attorneys: practice-area pages, Google Business Profile and map pack work for Wyandotte County firms. Free tear-down within 24 hours.",
+      "Law firm SEO for Kansas City, KS attorneys: practice-area pages and map pack work for Wyandotte County firms. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Kansas City, KS",
     heroSub:
       "Get found for personal injury, family law and criminal defense searches across Wyandotte County and the Kansas City metro.",
@@ -115,9 +115,9 @@ export const kansasCities: KansasCity[] = [
     name: "Wichita",
     county: "Sedgwick County",
     population: "397,532",
-    metaTitle: "Law Firm SEO Wichita, KS | Family Law & Attorney SEO",
+    metaTitle: "Law Firm SEO Wichita, KS | Family Law SEO",
     metaDescription:
-      "Founder-led law firm SEO for Wichita attorneys. We rank personal injury, family law, and criminal defense firms across Sedgwick County and the 18th Judicial District.",
+      "Founder-led law firm SEO for Wichita attorneys: personal injury, family law and criminal defense firms across Sedgwick County.",
     heroHeadline: "Law Firm SEO in Wichita, KS",
     heroSub:
       "Get found by Wichita clients the moment they search. We rank family law, personal injury, and criminal defense firms across Sedgwick County — and turn local searches into signed cases.",
@@ -173,9 +173,9 @@ export const kansasCities: KansasCity[] = [
     name: "Overland Park",
     county: "Johnson County",
     population: "199,067",
-    metaTitle: "Law Firm SEO Overland Park, KS | High-Asset Family Law SEO",
+    metaTitle: "Law Firm SEO Overland Park, KS | Family Law SEO",
     metaDescription:
-      "Founder-led law firm SEO for Overland Park attorneys. We rank high-asset family law, estate, and business firms across Johnson County's most competitive legal market.",
+      "Founder-led law firm SEO for Overland Park attorneys: family law, estate and business firms in Johnson County's competitive legal market.",
     heroHeadline: "Law Firm SEO in Overland Park, KS",
     heroSub:
       "Win Johnson County's highest-value clients. We rank family law, estate, and business firms in Kansas's most affluent — and most competitive — legal market.",

@@ -407,6 +407,34 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
         </CardGrid>
       </Section>
 
+      {/* ── KEEP READING — the hub sent only 7 contextual links out (Sept 2026
+          audit): nothing to its case studies, technical SEO or the guides. ── */}
+      <Section tone="surface">
+        <SectionHeading eyebrow="Keep reading" title="The case studies and guides behind this page" />
+        <CardGrid columns={3}>
+          {[
+            { href: "/case-studies/ecommerce/smk-store", title: "SMK Store case study", body: "35,000 products: thin copy, indexing and site quality rebuilt — $5,832 to $19,100 a month." },
+            { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages." },
+            { href: "/services/technical-seo", title: "Technical SEO services", body: "Crawling, indexing and Core Web Vitals fixed at the template — the base every catalogue needs." },
+            { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget optimization guide", body: "Why Google skips pages on big sites, and how to stop it." },
+            { href: "/blog/ecommerce-product-page-seo", title: "Product page SEO at scale", body: "Writing product pages for 10,000+ SKUs without thin or duplicate copy." },
+            { href: "/resources/news/ecommerce-seo-news-2026", title: "Ecommerce SEO news", body: "What changed in search for stores this month, with sources." },
+          ].map((r) => (
+            <Link
+              key={r.href}
+              href={r.href}
+              className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+            >
+              <p className="text-sm font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{r.title}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">{r.body}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                Open <ArrowRight className="h-3 w-3" aria-hidden />
+              </span>
+            </Link>
+          ))}
+        </CardGrid>
+      </Section>
+
       {/* ── PRICE ── */}
       {ECOM_PLAN ? (
         <Section>

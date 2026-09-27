@@ -16,6 +16,8 @@
 // Industries with no client yet (plumbing, dental...) are left out until there
 // is something true to show.
 
+import { costFaq } from "@/lib/pricing";
+
 export interface QA {
   q: string;
   a: string;
@@ -45,9 +47,9 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "HVAC",
     h1: "HVAC SEO Services",
     accent: "for the calls that come in a heatwave",
-    metaTitle: "HVAC SEO Services | Map Pack & AI Overviews for HVAC Companies",
+    metaTitle: "HVAC SEO Services | Map Pack for HVAC Companies",
     metaDescription:
-      "SEO for HVAC companies: Business Profile, service-area pages and AI Overview visibility. One HVAC client is now named in Google's AI Overview for AC installation.",
+      "SEO for HVAC companies: Business Profile, service-area pages and AI Overviews. One HVAC client is named in Google's AI Overview for AC installation.",
     heroSub:
       "When the AC fails in July, people search once and call whoever is at the top. I get HVAC companies into the map pack and named in AI Overviews — with the case studies to show it.",
     caseClients: ["local-hvac-services", "hvac-team"],
@@ -119,9 +121,9 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Roofing",
     h1: "Roofing SEO Services",
     accent: "for jobs worth thousands",
-    metaTitle: "Roofing SEO Services | Rank for Roof Repair & Replacement",
+    metaTitle: "Roofing SEO Company | Roof Repair & Replacement",
     metaDescription:
-      "SEO for roofing contractors: service pages, Business Profile and statewide visibility. Mammoth Roofing ranks seventh for “Local Residential Roof Repair in Texas”.",
+      "Roofing SEO for contractors: service pages, Business Profile and statewide reach. Mammoth Roofing ranks seventh for residential roof repair in Texas.",
     heroSub:
       "A roof is one of the biggest purchases a homeowner makes, and they research before they call. I get roofing contractors found for repair and replacement searches — backed by a Texas roofing client's results.",
     caseClients: ["mammoth-roofing"],
@@ -193,7 +195,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Cleaning",
     h1: "SEO for Cleaning Companies",
     accent: "named first in AI Overviews",
-    metaTitle: "SEO for Cleaning Companies | Map Pack & AI Overviews",
+    metaTitle: "SEO for Cleaning Companies & Cleaning Services",
     metaDescription:
       "SEO for residential, commercial and specialist cleaning companies. D.O.L.L.S. Cleaning is named first in Google's AI Overview and ranks #1 below it.",
     heroSub:
@@ -267,9 +269,9 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Home Services",
     h1: "SEO for Home Service Businesses",
     accent: "where the call comes from the profile",
-    metaTitle: "SEO for Home Service Businesses | Garage Door, Door Repair & More",
+    metaTitle: "Home Services SEO | Garage Door & Door Repair",
     metaDescription:
-      "Local SEO for garage door, door repair and other home service businesses. Door Doctor reached 490+ monthly Business Profile interactions and 78% more profile views.",
+      "Local SEO for garage door and home service businesses. Door Doctor reached 490+ monthly Business Profile interactions and 78% more profile views.",
     heroSub:
       "For garage door and door repair companies, most customers never reach your website — they call straight from the Business Profile. I make the profile, and the pages behind it, do that job.",
     caseClients: ["door-doctor"],
@@ -341,9 +343,9 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Remodeling",
     h1: "SEO for Remodeling Contractors",
     accent: "for kitchen and bath projects",
-    metaTitle: "SEO for Remodeling Contractors | Kitchen & Bath Remodel Leads",
+    metaTitle: "SEO for Remodeling Contractors | Kitchen & Bath",
     metaDescription:
-      "SEO for kitchen, bath and home remodeling contractors: project pages, cost answers and local rankings. A kitchen cabinets client reached top-10 rankings for high-intent remodel searches.",
+      "SEO for remodeling contractors: kitchen and bath project pages, honest cost answers and local rankings. A cabinets client reached top-10 rankings.",
     heroSub:
       "Remodeling customers take weeks to decide and read everything first. I get kitchen, bath and remodeling contractors found while they are researching — and remembered when they are ready.",
     caseClients: ["kitchen-cabinets"],
@@ -411,6 +413,14 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     ],
   },
 ];
+
+// A cost question on every trade page, answered from lib/pricing, placed just
+// before the closing "Is there a contract?" — the page and its FAQPage schema
+// both read `faqs`, so they stay identical.
+for (const i of LOCAL_INDUSTRIES) {
+  const cost = costFaq("Local SEO", `${i.name} SEO`);
+  if (cost) i.faqs.splice(Math.max(0, i.faqs.length - 1), 0, cost);
+}
 
 export function getLocalIndustry(slug: string): LocalIndustry | undefined {
   return LOCAL_INDUSTRIES.find((i) => i.slug === slug);

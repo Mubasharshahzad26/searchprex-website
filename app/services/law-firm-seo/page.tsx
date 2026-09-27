@@ -12,9 +12,9 @@ const PAGE_URL = "https://www.searchprex.com/services/law-firm-seo";
 // pointed into public/og/, a directory that has never existed in this repo.
 
 const baseMetadata: Metadata = {
-  title: "Law Firm SEO Services | Rank in Local Pack & AI Overviews",
+  title: "Law Firm SEO Agency | Local Pack & AI Overviews",
   description:
-    "Founder-led SEO for law firms. Attorney E-E-A-T content, practice area pages, local pack rankings, and AI Overview citations — replace expensive Google Ads with organic cases.",
+    "Founder-led law firm SEO agency: attorney E-E-A-T content, practice-area pages, local pack work and AI Overview readiness — organic cases, not ad spend.",
   keywords: [
     "law firm SEO", "attorney SEO", "legal SEO services",
     "law firm local SEO", "attorney AI Overview", "YMYL legal content",

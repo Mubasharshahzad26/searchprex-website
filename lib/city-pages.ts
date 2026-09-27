@@ -78,9 +78,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Michigan",
     stateAbbr: "MI",
     county: "Wayne County",
-    metaTitle: "Law Firm SEO Detroit, MI — Rank for No-Fault & Injury Cases",
+    metaTitle: "Law Firm SEO Detroit, MI | Injury & No-Fault",
     metaDescription:
-      "SEO for Detroit law firms. Rank in the Wayne County map pack for car accident, no-fault and criminal defense searches. Founder-led, GSC-verified, no contracts.",
+      "SEO for Detroit law firms: compete in the Wayne County map pack for car accident, no-fault and criminal defense searches. Founder-led, no contracts.",
     h1: "Law Firm SEO in Detroit, Michigan",
     heroSub:
       "Detroit injury searches are dominated by four firms with television budgets and a decade of backlinks. You do not out-spend them. You out-specify them — by owning the searches they treat as too small to bother with.",
@@ -158,7 +158,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Michigan",
     stateAbbr: "MI",
     county: "Kent County",
-    metaTitle: "Law Firm SEO Grand Rapids, MI — Kent County Attorney SEO",
+    metaTitle: "Law Firm SEO Grand Rapids, MI | Kent County",
     metaDescription:
       "SEO for Grand Rapids law firms. Win the Kent County map pack for family law, injury and business litigation searches. Founder-led, GSC-verified results.",
     h1: "Law Firm SEO in Grand Rapids, Michigan",
@@ -222,7 +222,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Ohio",
     stateAbbr: "OH",
     county: "Cuyahoga County",
-    metaTitle: "Law Firm SEO Cleveland, OH — Cuyahoga County Attorney SEO",
+    metaTitle: "Law Firm SEO Cleveland, OH | Cuyahoga County",
     metaDescription:
       "SEO for Cleveland law firms. Rank in the Cuyahoga County map pack for injury, workers' comp and criminal defence searches. Founder-led, no contracts.",
     h1: "Law Firm SEO in Cleveland, Ohio",
@@ -291,9 +291,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Pennsylvania",
     stateAbbr: "PA",
     county: "Philadelphia County",
-    metaTitle: "Law Firm SEO Philadelphia, PA — Attorney SEO That Wins Cases",
+    metaTitle: "Law Firm SEO Philadelphia, PA | Attorney SEO",
     metaDescription:
-      "SEO for Philadelphia law firms. Compete in one of the country's toughest legal markets with practice-area pages, map pack visibility and AI Overview citations.",
+      "SEO for Philadelphia law firms: practice-area pages, map pack visibility and AI Overview readiness in one of the country's toughest legal markets.",
     h1: "Law Firm SEO in Philadelphia, Pennsylvania",
     heroSub:
       "Philadelphia is a mass tort centre with a bar association older than the Constitution. The competition is real. What is also real is that most Philadelphia firms still publish one page per practice area and wonder why they do not rank for neighbourhood searches.",
@@ -360,7 +360,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "New Mexico",
     stateAbbr: "NM",
     county: "Bernalillo County",
-    metaTitle: "Law Firm SEO Albuquerque, NM — Attorney SEO for New Mexico",
+    metaTitle: "Law Firm SEO Albuquerque, NM | Attorney SEO",
     metaDescription:
       "SEO for Albuquerque law firms. Rank across Bernalillo County for injury, DWI and family law searches. Founder-led, GSC-verified, no long-term contracts.",
     h1: "Law Firm SEO in Albuquerque, New Mexico",
@@ -429,7 +429,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Fort Bend County",
-    metaTitle: "Law Firm SEO Sugar Land, TX — Fort Bend County Attorney SEO",
+    metaTitle: "Law Firm SEO Sugar Land, TX | Fort Bend County",
     metaDescription:
       "SEO for Sugar Land law firms. Rank in Fort Bend County for high-asset family law, business and injury searches. Founder-led, GSC-verified, no contracts.",
     h1: "Law Firm SEO in Sugar Land, Texas",
@@ -493,7 +493,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Collin County",
-    metaTitle: "Law Firm SEO Plano, TX — Collin County Attorney SEO",
+    metaTitle: "Law Firm SEO Plano, TX | Collin County",
     metaDescription:
       "SEO for Plano law firms. Rank in Collin County for family law, business and injury searches. Founder-led, GSC-verified results, no long-term contracts.",
     h1: "Law Firm SEO in Plano, Texas",
@@ -557,7 +557,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Denton County",
-    metaTitle: "Law Firm SEO Denton, TX — Denton County Attorney SEO",
+    metaTitle: "Law Firm SEO Denton, TX | Denton County",
     metaDescription:
       "SEO for Denton law firms. Rank in Denton County for criminal defence, family law and injury searches. Founder-led, GSC-verified, no long-term contracts.",
     h1: "Law Firm SEO in Denton, Texas",
@@ -622,7 +622,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Arizona",
     stateAbbr: "AZ",
     county: "Maricopa County",
-    metaTitle: "Law Firm SEO Tempe, AZ — Maricopa County Attorney SEO",
+    metaTitle: "Law Firm SEO Tempe, AZ | Maricopa County",
     metaDescription:
       "SEO for Tempe law firms. Rank in Maricopa County for DUI, criminal defence and injury searches. Founder-led, GSC-verified, no long-term contracts.",
     h1: "Law Firm SEO in Tempe, Arizona",
@@ -691,7 +691,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "California",
     stateAbbr: "CA",
     county: "Santa Clara County",
-    metaTitle: "Law Firm SEO San Jose, CA — Santa Clara County Attorney SEO",
+    metaTitle: "Law Firm SEO San Jose, CA | Santa Clara County",
     metaDescription:
       "SEO for San Jose law firms. Rank in Santa Clara County for employment, high-asset family law and injury searches. Founder-led, GSC-verified results.",
     h1: "Law Firm SEO in San Jose, California",
@@ -756,7 +756,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Louisiana",
     stateAbbr: "LA",
     county: "East Baton Rouge Parish",
-    metaTitle: "Law Firm SEO Baton Rouge, LA — East Baton Rouge Attorney SEO",
+    metaTitle: "Law Firm SEO Baton Rouge, LA | Attorney SEO",
     metaDescription:
       "SEO for Baton Rouge law firms. Rank in East Baton Rouge Parish for injury, family law and criminal defence searches. Founder-led, GSC-verified results.",
     h1: "Law Firm SEO in Baton Rouge, Louisiana",
@@ -820,7 +820,7 @@ export const CITY_PAGES: CityPage[] = [
     state: "Louisiana",
     stateAbbr: "LA",
     county: "Caddo Parish",
-    metaTitle: "Law Firm SEO Shreveport, LA — Caddo Parish Attorney SEO",
+    metaTitle: "Law Firm SEO Shreveport, LA | Caddo Parish",
     metaDescription:
       "SEO for Shreveport law firms. Rank in Caddo Parish for injury, family law and criminal defence searches. Founder-led, GSC-verified, no long-term contracts.",
     h1: "Law Firm SEO in Shreveport, Louisiana",

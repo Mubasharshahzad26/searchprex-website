@@ -56,3 +56,27 @@ export const formatUsd = (n: number) => `$${n.toLocaleString("en-US")}`;
 export const formatRange = (p: RetainerPlan) => `${formatUsd(p.min)} – ${formatUsd(p.max)}`;
 
 export const LOWEST_RETAINER = Math.min(...RETAINER_PLANS.map((p) => p.min));
+
+// What moves the number within each range — the same wording the pricing
+// sections on the service pages use.
+const COST_FACTORS: Record<string, string> = {
+  "Local SEO": "how many locations and service areas the plan covers",
+  "Law Firm SEO": "how many practice areas and cities the plan covers",
+  "Ecommerce SEO": "catalogue size, technical scope and content volume",
+};
+
+/**
+ * "How much does X cost?" — the question people actually type (Google
+ * Autocomplete: "local seo services cost", "… optimization cost"), answered
+ * from RETAINER_PLANS so an FAQ can never quote a price the pricing page
+ * doesn't. Undefined if the niche has no published plan.
+ */
+export function costFaq(niche: string, subject: string): { q: string; a: string } | undefined {
+  const plan = RETAINER_PLANS.find((p) => p.niche === niche);
+  if (!plan) return undefined;
+  const lead = subject.charAt(0).toUpperCase() + subject.slice(1);
+  return {
+    q: `How much does ${subject} cost?`,
+    a: `${lead} with SearchPrex runs ${formatRange(plan)} a month, depending on ${COST_FACTORS[niche] ?? "the scope"}. It is month to month, and the free tear-down comes first, so you see the scope before paying anything.`,
+  };
+}

@@ -6,7 +6,8 @@ import {
   MapPin, Scale, Gavel, ArrowRight, CheckCircle, Calendar,
   ArrowUpRight, ChevronDown, Landmark, Users, Building2, ShieldCheck,
 } from "lucide-react";
-import { getCityBySlug, getAllCitySlugs } from "@/lib/kansas-cities";
+import { getCityBySlug, getAllCitySlugs, kansasCities } from "@/lib/kansas-cities";
+import { findPracticePage } from "@/lib/locations";
 import { organizationRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
@@ -282,12 +283,24 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
               </p>
             </div>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              {city.practiceAreas.map((pa) => (
-                <div key={pa.name} className="rounded-2xl border border-[#e2e8f0] bg-white p-6">
-                  <h3 className="mb-1.5 text-base font-black text-[#0a0f2e]">{pa.name}</h3>
-                  <p className="text-sm leading-relaxed text-[#475569]">{pa.demand}</p>
-                </div>
-              ))}
+              {city.practiceAreas.map((pa) => {
+                // Link the practice area to its page where one exists.
+                const practice = findPracticePage(pa.name);
+                return (
+                  <div key={pa.name} className="rounded-2xl border border-[#e2e8f0] bg-white p-6">
+                    <h3 className="mb-1.5 text-base font-black text-[#0a0f2e]">
+                      {practice ? (
+                        <Link href={`/services/law-firm-seo/${practice.slug}`} className="hover:text-[#534AB7] hover:underline">
+                          {pa.name}
+                        </Link>
+                      ) : (
+                        pa.name
+                      )}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#475569]">{pa.demand}</p>
+                  </div>
+                );
+              })}
             </div>
             {city.neighborhoods && (
               <div className="mt-10 text-center">
@@ -326,6 +339,34 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </section>
       )}
  
+      {/* ── OTHER KANSAS CITIES — these eight pages linked to none of each
+          other (5 contextual links in and out each, the weakest cluster in the
+          Sept 2026 audit). ── */}
+      <section className="bg-white px-4 py-16">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Also in Kansas</p>
+          <h2 className="mb-6 text-2xl font-black tracking-tight text-[#0a0f2e] sm:text-3xl">Law firm SEO in other Kansas cities</h2>
+          <div className="flex flex-wrap justify-center gap-2">
+            {kansasCities
+              .filter((c) => c.slug !== city.slug)
+              .map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/locations/kansas/${c.slug}`}
+                  className="rounded-full border border-[#e2e8f0] bg-[#f8f9fc] px-4 py-2 text-sm font-semibold text-[#0a0f2e] hover:border-[#534AB7] hover:text-[#534AB7]"
+                >
+                  {c.name}
+                </Link>
+              ))}
+          </div>
+          <p className="mt-6 text-sm">
+            <Link href="/locations/kansas" className="font-bold text-[#534AB7] hover:underline">All Kansas cities</Link>
+            <span className="mx-2 text-[#cbd5e1]">·</span>
+            <Link href="/services/law-firm-seo" className="font-bold text-[#534AB7] hover:underline">Law firm SEO services</Link>
+          </p>
+        </div>
+      </section>
+
       {/* ── FAQ (native <details> — no JS, server-safe, FAQ schema above) ── */}
       <section className="bg-[#eaecf3] px-4 py-24">
         <div className="mx-auto max-w-3xl">

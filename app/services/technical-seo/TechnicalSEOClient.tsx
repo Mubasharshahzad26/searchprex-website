@@ -104,6 +104,11 @@ const related = [
   { href: "/resources/news?category=Technical", title: "Technical SEO news", body: "Crawling, indexing and Core Web Vitals changes as they land." },
   { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget guide", body: "How to find and stop the URLs eating your crawl." },
   { href: "/tools/schema-generator", title: "Free schema generator", body: "JSON-LD for your page type, ready to paste." },
+  // Added in the Sept 2026 audit: this page linked out to only six pages.
+  { href: "/services/ecommerce-seo", title: "Ecommerce SEO services", body: "Technical SEO applied to catalogues of thousands of products." },
+  { href: "/services/ecommerce-seo/woocommerce", title: "WooCommerce SEO", body: "Filter URLs, plugin weight and indexing on WooCommerce stores." },
+  { href: "/blog/google-indexing-api-python", title: "The Indexing API is not a shortcut", body: "What Google's Indexing API is really for, and what to do instead." },
+  { href: "/resources/news/technical-seo-news-2026", title: "Technical SEO news, this month", body: "Crawling, indexing and AI bot changes, with sources." },
 ];
 
 export default function TechnicalSEOClient() {

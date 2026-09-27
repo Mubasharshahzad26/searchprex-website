@@ -58,6 +58,13 @@ export const FAQS: QA[] = [
     a: "Yes. Shopify brings faceted-navigation and duplicate-URL problems, WordPress plugin bloat and archive sprawl, custom builds rendering and routing issues. The diagnosis is the same; the fixes differ by platform.",
   },
   {
+    // "technical seo audit cost" is a common search. No figure here: technical
+    // work has no published retainer in lib/pricing, and inventing one is not
+    // an option.
+    q: "How much does a technical SEO audit cost?",
+    a: "The first audit is free: a written tear-down of your crawling, indexing and speed problems within 24 hours. The fixes are then quoted as a project, because the price depends on how many pages and templates are affected — you see the scope before paying anything.",
+  },
+  {
     q: "Is there a long-term contract?",
     a: "No. Technical SEO has a clear audit-and-fix phase, so it is scoped as a project; ongoing monitoring is optional and month to month.",
   },

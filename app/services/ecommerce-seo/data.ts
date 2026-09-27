@@ -62,7 +62,7 @@ export const FAQS: QA[] = [
     a: "Primary focus is organic acquisition, but we handle CRO adjacent to SEO — product page structure, category page templates, breadcrumbs and related products. Full CRO programs are a separate scope.",
   },
   {
-    q: "What's the pricing?",
+    q: "How much does ecommerce SEO cost?",
     a: ECOM_PLAN
       ? `Ecommerce retainers run ${formatRange(ECOM_PLAN)} a month, depending on catalogue size, technical scope and content volume. Every engagement starts with the free tear-down — no commitment, month to month.`
       : "Pricing depends on catalogue size, technical scope and content volume. Every engagement starts with the free tear-down — no commitment.",

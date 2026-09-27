@@ -30,9 +30,10 @@ import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
 
 const baseMetadata: Metadata = {
-  title: "SEO Services USA — Law Firm, Ecommerce, Local & Technical",
+  // Kept in step with the CMS row for /services, which wins when published.
+  title: "SEO Services | Law, Ecommerce, Local, Technical",
   description:
-    "Four SEO services with GSC-verified results: law firm SEO, ecommerce & Shopify SEO, local SEO, technical SEO. Founder-led. Free audit + 90-day roadmap.",
+    "Four SEO services with the proof for each: law firm, ecommerce, local and technical SEO. Founder-led, published prices, every figure screenshotted.",
   alternates: { canonical: `${SITE}/services` },
   openGraph: {
     title: "SEO Services USA — Law Firm, Ecommerce, Local & Technical | SearchPrex",

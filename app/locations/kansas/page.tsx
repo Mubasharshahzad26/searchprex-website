@@ -18,7 +18,7 @@ const NAVY = "#0a0f2e"; // aligned to site palette (was #0d1b4b)
 const baseMetadata: Metadata = {
   title: "Law Firm SEO Kansas | Family Law & Attorney SEO",
   description:
-    "Founder-led law firm SEO for Kansas attorneys. We help family law, personal injury, and criminal defense firms rank across Wichita, Overland Park, Kansas City, Topeka, Lawrence, Shawnee, Lenexa, and Manhattan.",
+    "Founder-led law firm SEO for Kansas attorneys in family law, personal injury and criminal defense — Wichita, Overland Park, Kansas City, Topeka and more.",
   alternates: { canonical: "https://www.searchprex.com/locations/kansas" },
   openGraph: {
     title: "Law Firm SEO Across Kansas | SearchPrex",

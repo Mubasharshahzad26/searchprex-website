@@ -9,7 +9,10 @@ const baseMetadata: Metadata = {
 // Metadata comes from the CMS row for this route; the object above is the
 // fallback when that row is missing, unpublished, or the database is down.
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageSEO("/bulk-generation", baseMetadata);
+  // noindex: a thin utility/tool page that should not compete in search (SEO audit,
+  // Sept 2026). Applied after getPageSEO so a published CMS row cannot reset it.
+  const meta = await getPageSEO("/bulk-generation", baseMetadata);
+  return { ...meta, robots: { index: false, follow: true } };
 }
 
 export default function BulkGenerationPage() {

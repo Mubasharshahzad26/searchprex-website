@@ -12,9 +12,9 @@ const PAGE_URL = "https://www.searchprex.com/services/local-seo";
 // pointed into public/og/, a directory that has never existed in this repo.
 
 const baseMetadata: Metadata = {
-  title: "Local SEO Services | Own the Map Pack & AI Overviews",
+  title: "Local SEO Services | Map Pack & AI Overviews",
   description:
-    "Founder-led local SEO that puts your business in the top 3 Google Maps pack and 2026 AI Overviews. GBP optimization, citations, review velocity, and city-level landing pages.",
+    "Local SEO services for service businesses: Business Profile, citations, reviews and service-area pages for the map pack and AI Overviews. Founder-led.",
   keywords: [
     "local SEO services", "Google Maps SEO", "GBP optimization",
     "local pack ranking", "near me SEO", "AI Overview local SEO",

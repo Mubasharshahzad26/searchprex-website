@@ -17,6 +17,7 @@
 // Dallas" pages would differ only by city name — doorway pages.
 
 import type { QA } from "@/lib/local-industries";
+import { costFaq } from "@/lib/pricing";
 
 export interface EcommerceIndustry {
   slug: string;
@@ -42,9 +43,9 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     name: "WooCommerce",
     h1: "WooCommerce SEO Services",
     accent: "with two stores to show for it",
-    metaTitle: "WooCommerce SEO Services | Indexing, Product Content & Speed",
+    metaTitle: "WooCommerce SEO Expert | Indexing, Copy, Speed",
     metaDescription:
-      "WooCommerce SEO for large catalogues: filter URLs, thin product copy, indexing and speed. SMK Store's monthly net sales went from $5,832 to $19,100 in two months.",
+      "WooCommerce SEO for large catalogues: filter URLs, thin product copy, indexing and speed. SMK Store grew monthly sales from $5,832 to $19,100.",
     heroSub:
       "Filter URLs Google crawls forever, manufacturer copy every dealer shares, plugins slowing every page. WooCommerce gives you full control — and full responsibility. I have fixed exactly this on two WooCommerce stores.",
     caseClients: ["smk-store", "michigan-outdoor-sports"],
@@ -116,9 +117,9 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     name: "Shopify",
     h1: "Shopify SEO Services",
     accent: "with a straight answer up front",
-    metaTitle: "Shopify SEO Services | Collections, Apps, Speed & Product Content",
+    metaTitle: "Shopify SEO Services USA | Collections & Speed",
     metaDescription:
-      "Shopify SEO for growing stores: duplicate collection URLs, app scripts, tag pages and thin product copy — with a plain answer on what has and hasn't been done on Shopify.",
+      "Shopify SEO services for US stores: duplicate collection URLs, app scripts, tag pages and thin product copy — with a plain answer on our Shopify record.",
     heroSub:
       "Shopify handles hosting and the basics well. What it leaves to you: duplicate collection URLs, app scripts on every page, tag pages Google shouldn't index, and product copy half the internet also has.",
     caseClients: [],
@@ -192,9 +193,9 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     name: "Knife & Outdoor Stores",
     h1: "SEO for Knife & Outdoor Stores",
     accent: "from someone who has done it twice",
-    metaTitle: "SEO for Knife & Outdoor Stores | Brand Pages, Specs & Indexing",
+    metaTitle: "SEO for Knife & Outdoor Stores | Brand Pages",
     metaDescription:
-      "Ecommerce SEO for knife, tactical and outdoor gear stores. Both SearchPrex case studies are knife and outdoor retailers — one grew monthly net sales from $5,832 to $19,100.",
+      "SEO for knife, tactical and outdoor gear stores. Both SearchPrex ecommerce case studies are in this niche — one grew monthly sales from $5,832 to $19,100.",
     heroSub:
       "Brand pages with nothing on them, the same manufacturer copy as every other dealer, and ads Google won't let you run for some knives. Both stores in my case studies sell knives and outdoor gear — this is the niche I know best.",
     caseClients: ["smk-store", "michigan-outdoor-sports"],
@@ -262,6 +263,18 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     ],
   },
 ];
+
+// A cost question on every page, from lib/pricing, before the closing
+// "Is there a contract?" (page and FAQPage schema both read `faqs`).
+const COST_SUBJECT: Record<string, string> = {
+  woocommerce: "WooCommerce SEO",
+  shopify: "Shopify SEO",
+  "outdoor-knife-stores": "SEO for a knife or outdoor store",
+};
+for (const i of ECOMMERCE_INDUSTRIES) {
+  const cost = costFaq("Ecommerce SEO", COST_SUBJECT[i.slug] ?? `${i.name} SEO`);
+  if (cost) i.faqs.splice(Math.max(0, i.faqs.length - 1), 0, cost);
+}
 
 export function getEcommerceIndustry(slug: string): EcommerceIndustry | undefined {
   return ECOMMERCE_INDUSTRIES.find((i) => i.slug === slug);

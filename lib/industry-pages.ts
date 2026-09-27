@@ -26,6 +26,7 @@
 // (lib/locations.ts, the location pages, /industries).
 
 import type { QA } from "@/lib/local-industries";
+import { costFaq } from "@/lib/pricing";
 
 export interface IndustryPage {
   name: string;
@@ -63,9 +64,9 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Personal Injury",
     slug: "personal-injury",
-    metaTitle: "Personal Injury Law Firm SEO | Injury-Type Pages & Map Pack",
+    metaTitle: "Personal Injury Law Firm SEO | Map Pack & Cases",
     metaDescription:
-      "SEO for personal injury law firms: pages by injury type, Business Profile work, a mobile path built for 2am, and results published within bar advertising rules. No ranking promises.",
+      "SEO for personal injury law firms: injury-type pages, Business Profile work, a mobile path built for 2am and results within bar rules. No ranking promises.",
     h1: "Personal Injury Law Firm SEO",
     accent: "for the cases decided at 2am",
     heroSub:
@@ -128,9 +129,9 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Family Law",
     slug: "family-law",
-    metaTitle: "Family Law SEO | Divorce & Custody Attorney SEO",
+    metaTitle: "Family Law SEO | SEO for Family Lawyers",
     metaDescription:
-      "SEO for family law firms: county-level custody and divorce content, answers built for AI Overviews, and privacy-aware marketing. No ranking promises and no borrowed case studies.",
+      "SEO for family lawyers: county-level custody and divorce content, answers built for AI Overviews and privacy-aware marketing. No ranking promises.",
     h1: "Family Law SEO",
     accent: "for divorce and custody searches",
     heroSub:
@@ -193,9 +194,9 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Criminal Defense",
     slug: "criminal-defense",
-    metaTitle: "Criminal Defense SEO | Charge-Specific Pages & Urgent Search",
+    metaTitle: "Criminal Defense Lawyer SEO | Charge Pages",
     metaDescription:
-      "SEO for criminal defense attorneys: charge-specific pages, content for the family member searching, expungement, and mobile pages fast enough for 2am. No ranking promises.",
+      "Criminal defense lawyer SEO: charge-specific pages, content for the family member searching, expungement and fast mobile pages. No ranking promises.",
     h1: "Criminal Defense SEO",
     accent: "for the one phone call",
     heroSub:
@@ -258,9 +259,9 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Estate Planning",
     slug: "estate-planning",
-    metaTitle: "Estate Planning SEO | Wills, Trusts & Probate Attorney SEO",
+    metaTitle: "Estate Planning Lawyer SEO | Wills & Probate",
     metaDescription:
-      "SEO for estate planning and probate firms: county-level probate content, pages for business owners, and plain answers that compete with DIY templates. No ranking promises.",
+      "Estate planning lawyer SEO: county-level probate content, pages for business owners and plain answers that compete with DIY templates. No ranking promises.",
     h1: "Estate Planning SEO",
     accent: "for wills, trusts and probate",
     heroSub:
@@ -315,7 +316,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Mass Torts",
     slug: "mass-torts",
-    metaTitle: "Mass Tort SEO | Docket-Ready Content & Symptom Search",
+    metaTitle: "Mass Tort SEO | Docket-Ready Content",
     metaDescription:
       "SEO for mass tort firms: content ready when a docket opens, symptom-to-claim search paths, co-counsel pages and compliance-first copy. No ranking promises.",
     h1: "Mass Tort SEO",
@@ -377,3 +378,17 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
     locationsMentioned: ["philadelphia", "detroit", "baton-rouge"],
   },
 ];
+
+// A cost question on every practice-area page, from lib/pricing, before the
+// closing NO_CONTRACT (the page and its FAQPage schema both read `faqs`).
+const COST_SUBJECT: Record<string, string> = {
+  "personal-injury": "personal injury law firm SEO",
+  "family-law": "family law SEO",
+  "criminal-defense": "criminal defense SEO",
+  "estate-planning": "estate planning SEO",
+  "mass-torts": "mass tort SEO",
+};
+for (const p of INDUSTRY_PAGES) {
+  const cost = costFaq("Law Firm SEO", COST_SUBJECT[p.slug] ?? `${p.name} SEO`);
+  if (cost) p.faqs.splice(Math.max(0, p.faqs.length - 1), 0, cost);
+}

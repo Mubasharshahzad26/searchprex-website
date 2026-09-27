@@ -87,7 +87,7 @@ export const MSO_RECOVERY_PHASES = [
     // Console captures for this account are the source of the figure above.
     // Points at the product page: the #nicheseo-pro showcase this used to jump
     // to has been taken off the homepage.
-    tool: { label: "Run on NicheSEO Pro Autopilot", href: "/tool" },
+    tool: { label: "Run on NicheSEO Pro Autopilot", href: "https://nicheseopro.com/" },
   },
   {
     icon: TrendingUp,
