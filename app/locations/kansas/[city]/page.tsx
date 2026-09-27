@@ -9,6 +9,8 @@ import {
 import { getCityBySlug, getAllCitySlugs } from "@/lib/kansas-cities";
 import { organizationRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
  
 const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
@@ -261,18 +263,10 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
  
-      {/* ── LEAD FORM (mid) ── */}
+      {/* ── GUIDE (mid) — the softer offer; the early form stays the tear-down ── */}
       <section className="bg-white px-4 pb-16">
         <div className="mx-auto max-w-4xl">
-          <ArticleLeadMagnet
-            variant="banner"
-            source={`location:kansas/${city.slug}`}
-            copy={{
-              eyebrow: `Competing in ${city.county}?`,
-              headline: `See which ${city.name} firms outrank you, and why.`,
-              sub: `Two fields. I’ll compare your pages and reviews with the firms above you in ${city.name} — free, within 24 hours.`,
-            }}
-          />
+          <GuideMagnet guide={LAW_CHECKLIST_GUIDE} source={`location:kansas/${city.slug}`} eyebrow={`Free for ${city.name} law firms`} />
         </div>
       </section>
 

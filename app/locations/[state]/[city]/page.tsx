@@ -38,6 +38,8 @@ import {
   type CityPage,
 } from "@/lib/city-pages";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 import { findPracticePage, getLocationState } from "@/lib/locations";
 import type { IndustryPage } from "@/lib/industry-pages";
 import { SITE, organizationRef } from "@/lib/site-schema";
@@ -283,15 +285,7 @@ export default async function CityPage({
         {/* Lead capture mid-page: the reader who has just read the jurisdiction
             section is the one most likely to want their own market checked. */}
         <Section tight>
-          <ArticleLeadMagnet
-            variant="banner"
-            source={`location:${page.stateSlug}/${page.citySlug}`}
-            copy={{
-              eyebrow: `${page.city} law firms`,
-              headline: `See which ${page.city} firms outrank you, and why.`,
-              sub: `Send me your URL. I’ll compare your practice-area pages, Business Profile and reviews with the firms above you in ${page.city} — free, within 24 hours.`,
-            }}
-          />
+          <GuideMagnet guide={LAW_CHECKLIST_GUIDE} source={`location:${page.stateSlug}/${page.citySlug}`} eyebrow={`Free for ${page.city} law firms`} />
         </Section>
 
         {/* ── LOCAL SIGNALS ── */}

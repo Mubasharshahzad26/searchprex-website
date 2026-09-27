@@ -15,6 +15,8 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Info, MapPin, Scale, Sparkles } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 import {
   AnswerCapsules,
   AuthorCard,
@@ -261,17 +263,9 @@ export default async function IndustryPage({
         <AnswerCapsules items={page.capsules} />
       </Section>
 
-      {/* MID-PAGE FORM · Action */}
+      {/* MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close. */}
       <Section tight>
-        <ArticleLeadMagnet
-          variant="banner"
-          source={source}
-          copy={{
-            eyebrow: "Want to see it on your firm first?",
-            headline: "Test me on your own site before you pay anything.",
-            sub: "Send your URL. A written tear-down of your practice-area pages, profile and the firms above you in your city — free, within 24 hours.",
-          }}
-        />
+        <GuideMagnet guide={LAW_CHECKLIST_GUIDE} source={`law-firm-seo/${page.slug}`} eyebrow={`Free for ${page.name.toLowerCase()} firms`} />
       </Section>
 
       {/* INTAKE DEMO · the live product, in place of the old "free SaaS" box */}

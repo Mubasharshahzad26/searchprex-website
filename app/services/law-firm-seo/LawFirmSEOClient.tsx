@@ -24,6 +24,8 @@
 import Link from "next/link";
 import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import GuideMagnet from "@/components/GuideMagnet";
+import type { Guide } from "@/lib/guides";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
@@ -112,7 +114,9 @@ const partnershipPoints = [
 
 /* ─── PAGE ─── */
 
-export default function LawFirmSEOClient() {
+// `guide` comes from the server page so the checklist data is not bundled into
+// this client component.
+export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
   return (
     <>
       <div className="border-b bg-slate-50 overflow-x-auto pt-24" style={{ borderColor: color.border }}>
@@ -219,17 +223,9 @@ export default function LawFirmSEOClient() {
         </CardGrid>
       </Section>
 
-      {/* MID-PAGE FORM */}
+      {/* MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close. */}
       <Section tight>
-        <ArticleLeadMagnet
-          variant="banner"
-          source={SOURCE}
-          copy={{
-            eyebrow: "Failed one of those checks?",
-            headline: "See exactly which firms outrank you, and why.",
-            sub: "Send me your URL. I’ll compare your pages, Business Profile and reviews with the firms above you in your city — free, within 24 hours.",
-          }}
-        />
+        <GuideMagnet guide={guide} source="law-firm-seo" eyebrow="Failed one of those checks? Get all of them" />
       </Section>
 
       {/* COMPARISON */}

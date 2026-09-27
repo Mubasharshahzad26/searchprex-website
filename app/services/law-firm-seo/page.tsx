@@ -3,6 +3,7 @@ import LawFirmSEOClient from "./LawFirmSEOClient";
 import { CAPSULES, FAQS } from "./data";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 import { RETAINER_PLANS } from "@/lib/pricing";
+import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/law-firm-seo";
@@ -116,7 +117,7 @@ export default function LawFirmSEOPage() {
     <>
       <script id="ld-law-firm-seo" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <LawFirmSEOClient />
+      <LawFirmSEOClient guide={LAW_CHECKLIST_GUIDE} />
     </>
   );
 }
