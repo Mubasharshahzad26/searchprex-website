@@ -102,7 +102,7 @@ const aiSearch = [
 
 const related = [
   { href: CASE_STUDY, title: "Michigan Outdoor Sports case study", body: "The de-indexing, the rebuild, and every screenshot." },
-  { href: "/resources/news?category=Technical", title: "Technical SEO news", body: "Crawling, indexing and Core Web Vitals changes as they land." },
+  { href: "/resources/technical-seo-checklist", title: "Technical SEO audit checklist", body: "26 checks you can run with free Google tools. No email." },
   { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget guide", body: "How to find and stop the URLs eating your crawl." },
   { href: "/tools/schema-generator", title: "Free schema generator", body: "JSON-LD for your page type, ready to paste." },
   // Added in the Sept 2026 audit: this page linked out to only six pages.

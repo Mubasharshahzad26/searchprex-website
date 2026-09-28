@@ -101,6 +101,11 @@ export default function WooChecklistPage() {
             <Link href="/tools/serp-simulator" className={link}>
               SERP simulator
             </Link>
+
+            , and for the platform-independent checks, the{" "}
+            <Link href="/resources/technical-seo-checklist" className={link}>
+              technical SEO checklist
+            </Link>
             . Want the full method with screenshots? It is on the{" "}
             <Link href="/services/ecommerce-seo/woocommerce" className={link}>
               WooCommerce SEO page

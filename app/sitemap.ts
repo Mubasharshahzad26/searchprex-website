@@ -59,6 +59,7 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/industries", priority: 0.8, changeFrequency: "monthly" },
   { path: "/resources/google-business-profile-checklist", priority: 0.7, changeFrequency: "monthly" },
   { path: "/resources/woocommerce-seo-checklist", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/resources/technical-seo-checklist", priority: 0.7, changeFrequency: "monthly" },
   { path: "/services/local-seo", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/technical-seo", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.7, changeFrequency: "monthly" },
