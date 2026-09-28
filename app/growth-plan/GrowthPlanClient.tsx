@@ -1,5 +1,6 @@
 "use client";
  
+import { trackLead } from "@/lib/track";
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -137,6 +138,7 @@ export default function GrowthPlanClient() {
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
  
+      trackLead("growth_plan", "growth-plan");
       setFormState("sent");
       setStep(4);
     } catch (err) {

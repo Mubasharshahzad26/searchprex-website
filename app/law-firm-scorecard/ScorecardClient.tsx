@@ -1,5 +1,6 @@
 "use client";
  
+import { trackLead } from "@/lib/track";
 import { useState, useEffect, useRef } from "react";
 import {
   Scale, Search, Bot, MapPin, FileText, ArrowRight,
@@ -476,6 +477,7 @@ export default function ScorecardClient() {
       const parsed = (await res.json()) as Scorecard;
       if (!parsed || !Array.isArray(parsed.pillars)) throw new Error("parse");
       setData(parsed);
+      trackLead("scorecard", "law-firm-scorecard");
       setStage("results");
     } catch {
       setStage("input");

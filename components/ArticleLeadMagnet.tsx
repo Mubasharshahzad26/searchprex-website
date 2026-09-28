@@ -38,6 +38,7 @@
 // this whole lead-capture effort exists to fix was a form that said "sent"
 // while storing nothing; this does not repeat it.
 
+import { trackLead } from "@/lib/track";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AlertCircle, ArrowRight, CheckCircle, Globe, Mail } from "lucide-react";
@@ -81,6 +82,7 @@ function useLeadForm(source: string) {
         body: JSON.stringify({ website: website.trim(), email: email.trim(), source, ...attribution }),
       });
       if (!res.ok) throw new Error(String(res.status));
+      trackLead("tear_down", source);
       setStatus("done");
     } catch {
       setStatus("error");

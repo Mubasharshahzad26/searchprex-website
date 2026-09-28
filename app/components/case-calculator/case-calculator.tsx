@@ -1,5 +1,6 @@
 'use client'
  
+import { trackLead } from '@/lib/track'
 import { useMemo, useState } from 'react'
 import {
   Calculator,
@@ -164,6 +165,7 @@ export default function CaseCalculator() {
         }),
       })
       if (!res.ok) throw new Error()
+      trackLead('case_calculator', 'case-calculator')
       setLeadStatus('success')
     } catch {
       setLeadStatus('error')

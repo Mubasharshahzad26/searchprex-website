@@ -16,6 +16,7 @@
 // saying so — withholding a free PDF over our own error would be the wrong
 // trade, and the note keeps it honest.
 
+import { trackLead } from "@/lib/track";
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle, Download, FileText } from "lucide-react";
 
@@ -70,6 +71,7 @@ export default function GuideMagnet({
           ...attribution,
         }),
       });
+      if (res.ok) trackLead("guide_download", `guide:${guide.id}:${source}`);
       setStatus(res.ok ? "done" : "fallback");
     } catch {
       setStatus("fallback");

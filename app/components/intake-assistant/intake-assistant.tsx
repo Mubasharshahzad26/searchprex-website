@@ -1,5 +1,6 @@
 'use client'
  
+import { trackLead } from '@/lib/track'
 import { useEffect, useRef, useState } from 'react'
 import {
   Scale,
@@ -113,6 +114,7 @@ export default function IntakeAssistant({ embedded = false }: { embedded?: boole
         body: JSON.stringify({ ...lead, source: 'intake-assistant', firm }),
       })
       if (!res.ok) throw new Error()
+      trackLead('intake_setup', 'intake-assistant')
       setLeadStatus('success')
     } catch {
       setLeadStatus('error')

@@ -1,5 +1,6 @@
 'use client'
  
+import { trackLead } from '@/lib/track'
 import { useState } from 'react'
 import {
   Search,
@@ -121,6 +122,7 @@ export default function AiSearch() {
         }),
       })
       if (!res.ok) throw new Error()
+      trackLead('ai_search', 'ai-search')
       setLeadStatus('success')
     } catch {
       setLeadStatus('error')

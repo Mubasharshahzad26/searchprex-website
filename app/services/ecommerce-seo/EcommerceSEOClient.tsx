@@ -8,6 +8,7 @@
 //
 // Copy is unchanged from the previous version.
 
+import { trackLead } from "@/lib/track";
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
@@ -143,6 +144,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
         body: JSON.stringify({ ...form, source: "ecommerce-seo" }),
       });
       if (!res.ok) throw new Error("Request failed");
+      trackLead("reality_check", "ecommerce-seo");
       setFormState("sent");
       setTimeout(() => {
         setShowModal(false);

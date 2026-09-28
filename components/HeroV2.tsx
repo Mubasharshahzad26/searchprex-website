@@ -30,6 +30,7 @@
 // this site is recovering from is a form that said "Audit Request Received!"
 // while storing nothing.
 
+import { trackLead } from "@/lib/track";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -91,6 +92,7 @@ export default function HeroV2() {
         body: JSON.stringify({ website: website.trim(), email: email.trim(), ...attribution }),
       });
       if (!res.ok) throw new Error(String(res.status));
+      trackLead("tear_down", "homepage-hero");
       setStatus("done");
     } catch {
       setStatus("error");

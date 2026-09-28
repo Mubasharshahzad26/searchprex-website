@@ -1,5 +1,6 @@
 "use client";
  
+import { trackLead } from "@/lib/track";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -94,7 +95,7 @@ export default function CTA() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      await fetch("/api/send-audit", {
+      const res = await fetch("/api/send-audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -109,6 +110,7 @@ export default function CTA() {
           source: data.heardAboutUs,
         }),
       });
+      if (res.ok) trackLead("tear_down", "action-plan");
     } catch (error) {
       console.error("Submit error:", error);
     }

@@ -1,5 +1,6 @@
 'use client'
  
+import { trackLead } from '@/lib/track'
 import { useState } from 'react'
 import {
   Radar,
@@ -125,6 +126,7 @@ export default function AiVisibility() {
         }),
       })
       if (!res.ok) throw new Error()
+      trackLead('ai_visibility', 'ai-visibility')
       setLeadStatus('success')
     } catch {
       setLeadStatus('error')

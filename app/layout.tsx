@@ -7,6 +7,7 @@ import './globals.css'
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import ContactClickTracker from "@/components/ContactClickTracker";
 import { siteGraph } from "@/lib/site-schema";
 
  
@@ -141,7 +142,8 @@ export default function RootLayout({
         {children}
         <Footer />
         <CookieConsent />
- 
+        <ContactClickTracker />
+
         {/* ✅ Vercel Analytics - Production Only */}
         {process.env.NODE_ENV === 'production' && <Analytics />}
  

@@ -13,6 +13,7 @@
 // shows the segment without asking a third question. Never reports success
 // unless the API does.
 
+import { trackLead } from "@/lib/track";
 import { useEffect, useState } from "react";
 import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle, ChevronDown } from "lucide-react";
 
@@ -78,6 +79,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
         body: JSON.stringify({ website: website.trim(), email: email.trim(), ...(business ? { business } : {}), source, ...attribution }),
       });
       if (!res.ok) throw new Error(String(res.status));
+      trackLead("tear_down", source);
       setStep("done");
     } catch {
       setStep("error");

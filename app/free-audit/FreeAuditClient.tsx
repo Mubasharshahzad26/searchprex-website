@@ -25,6 +25,7 @@
 // on the right — collapsing to one on mobile, with the type taken from the
 // site's own scale rather than invented here.
 
+import { trackLead } from "@/lib/track";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
@@ -117,6 +118,7 @@ export default function FreeAuditClient() {
         body: JSON.stringify({ ...form, ...attribution }),
       });
       if (!res.ok) throw new Error("Request failed");
+      trackLead("free_audit", "free-audit");
       setStatus("done");
     } catch {
       setStatus("error");
