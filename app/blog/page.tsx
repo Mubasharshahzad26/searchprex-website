@@ -7,6 +7,9 @@ import type { Metadata } from "next";
 import BlogClient from "./BlogClient";
 import { posts as hardcodedPosts, mostRead as hardcodedMostRead } from "./data";
 import { db } from "@/lib/db";
+
+// Re-read the CMS hourly so published/unpublished posts show up without a deploy.
+export const revalidate = 3600;
  
 import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";

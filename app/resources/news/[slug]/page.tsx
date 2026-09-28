@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import PostClient from "@/app/blog/[slug]/PostClient";
 import { db } from "@/lib/db";
 
+// Spokes render on demand and were then cached until the next deploy, so CMS
+// edits and unpublishes did not reach the live page. An hour bounds that.
+export const revalidate = 3600;
+
 const SITE = "https://www.searchprex.com";
 
 // Helper to get post from DB

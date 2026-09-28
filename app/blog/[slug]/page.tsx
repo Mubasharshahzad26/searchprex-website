@@ -16,6 +16,11 @@ import { posts as hardcodedPosts } from "./posts";
 import PostClient from "./PostClient";
 import { db } from "@/lib/db";
 
+// CMS posts render on demand and were then cached until the next deploy, so
+// unpublishing a row left it live (an autopilot test article stayed up this
+// way in Sept 2026). An hour bounds how long a CMS change takes to show.
+export const revalidate = 3600;
+
 const SITE = "https://www.searchprex.com";
 
 // Helper to get post from DB or fallback
