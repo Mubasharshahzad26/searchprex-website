@@ -19,6 +19,8 @@
 // sentence. That is what gets lifted into an AI Overview — the answer has to be
 // extractable without reading the paragraph around it.
 
+import { costFaq } from "@/lib/pricing";
+
 export interface CityFaq {
   q: string;
   a: string;
@@ -58,6 +60,16 @@ export interface CityPage {
   /** The jurisdiction-specific anchor. Never templated. */
   legalContext: { heading: string; body: string };
   faqs: CityFaq[];
+}
+
+/** The cost answer from the published retainer range, so no city page can quote a price /pricing doesn't. */
+function lawCost(city: string): CityFaq {
+  return (
+    costFaq("Law Firm SEO", `law firm SEO in ${city}`) ?? {
+      q: `How much does law firm SEO cost in ${city}?`,
+      a: "It depends on the practice areas and cities the plan covers. The free tear-down comes first, so you see the scope before paying anything.",
+    }
+  );
 }
 
 const SHARED_SOLUTION: string[] = [
@@ -144,10 +156,7 @@ export const CITY_PAGES: CityPage[] = [
         q: "Should a Detroit firm target 'car accident lawyer' or 'no-fault attorney'?",
         a: "Both, on separate pages. They are different searches with different intent: 'car accident lawyer Detroit' is someone looking to hire, while 'no-fault attorney Michigan' is often someone in a benefits dispute with an insurer. One page cannot serve both well, and Google will rank neither.",
       },
-      {
-        q: "How much does law firm SEO cost in Detroit?",
-        a: "For a Detroit firm competing on injury keywords, budget $2,500–$5,000 per month. That reflects the link acquisition and content volume the market demands. Smaller practice areas or suburban targeting can work at a lower spend — the free audit tells you which bracket you are actually in.",
-      },
+      lawCost("Detroit"),
     ],
   },
 
@@ -343,12 +352,9 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         q: "How long do I have to file a personal injury claim in Pennsylvania?",
-        a: "Two years from the date of injury in most cases. Pennsylvania also applies modified comparative negligence, meaning you can recover damages only if you are 50% or less at fault, and your award is reduced by your share. Explaining this clearly on your site answers a question thousands of people search every month.",
+        a: "Two years from the date of injury in most cases. Pennsylvania also applies modified comparative negligence, meaning you can recover damages only if you are 50% or less at fault, and your award is reduced by your share. Explaining this clearly on your site answers a question people ask constantly.",
       },
-      {
-        q: "What does law firm SEO cost in Philadelphia?",
-        a: "Budget $3,000–$6,000 per month to compete on injury keywords, reflecting the link acquisition and content volume the market requires. Narrower practice areas or neighbourhood-focused strategies work at lower spend — the free audit identifies which applies to your firm.",
-      },
+      lawCost("Philadelphia"),
     ],
   },
 
@@ -611,6 +617,130 @@ export const CITY_PAGES: CityPage[] = [
         q: "Should a Denton firm target Lewisville and Flower Mound?",
         a: "Yes, on their own pages. They are distinct searches within Denton County, and a Denton page will not reliably surface for them. Each needs content specific to that community.",
       },
+    ],
+  },
+
+  {
+    stateSlug: "texas",
+    citySlug: "katy",
+    city: "Katy",
+    state: "Texas",
+    stateAbbr: "TX",
+    county: "Harris, Fort Bend & Waller Counties",
+    metaTitle: "Law Firm SEO Company in Katy, TX",
+    metaDescription:
+      "SEO for Katy law firms across Harris, Fort Bend and Waller counties: family law, injury and estate pages and map pack work. Founder-led, one firm per city.",
+    h1: "Law Firm SEO in Katy, Texas",
+    heroSub:
+      "Katy sits where Harris, Fort Bend and Waller counties meet, in a fast-growing part of the Houston area. Most of the firms that show up for Katy searches are downtown Houston practices with no Katy page at all.",
+    problem:
+      "Katy clients search for Katy — and for Cinco Ranch, Fulshear and Brookshire — but the firms that appear are mostly Houston practices with no page about the Katy area, and none of them say which county courthouse a Katy case actually goes to.",
+    problemPoints: [
+      "Page one for Katy legal searches is mostly Houston firms and directories rather than practices based in the Katy area",
+      "Three counties meet in Katy, and few firm sites explain which courthouse a client's case will be heard in",
+      "Families moving into new master-planned communities search for family law and estate planning and find no local page",
+      "I-10, the Grand Parkway and the Westpark Tollway carry heavy commuter traffic, yet injury pages rarely name them",
+      "Cinco Ranch, Fulshear and Brookshire are searched separately and served by almost nobody",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    practiceDemand: [
+      { area: "Family law", why: "A large, young family population across the Katy area — and the county a family lives in decides where a divorce is filed." },
+      { area: "Personal injury", why: "Commuter traffic on I-10, the Grand Parkway (SH 99) and the Westpark Tollway." },
+      { area: "Estate planning", why: "New homeowners in master-planned communities putting first wills and trusts in place." },
+      { area: "Business law", why: "A growing base of small businesses and franchises along the I-10 corridor." },
+    ],
+    localSignals: [
+      { label: "Three-county coverage", detail: "Harris, Fort Bend and Waller county courts named where each applies" },
+      { label: "Community pages", detail: "Cinco Ranch, Fulshear and Brookshire each searched on their own" },
+      { label: "Corridor relevance", detail: "I-10 and the Grand Parkway named on injury pages, because people search them" },
+      { label: "Katy, not Houston", detail: "Katy content for Katy searchers, not a downtown page with Katy in the footer" },
+    ],
+    courts: [
+      "Harris County District Courts (Houston)",
+      "Fort Bend County District Courts (Richmond)",
+      "Waller County District Court (Hempstead)",
+      "U.S. District Court, Southern District of Texas",
+    ],
+    barAssociation: "State Bar of Texas · Houston Bar Association · Fort Bend County Bar Association",
+    neighborhoods: ["Old Town Katy", "Cinco Ranch", "Cross Creek Ranch", "Firethorne", "Seven Meadows", "Grand Lakes"],
+    nearbyCities: ["Houston", "Fulshear", "Brookshire", "Sugar Land", "Cypress"],
+    legalContext: {
+      heading: "Why three counties meet in Katy — and why it matters for your pages",
+      body:
+        "Katy sits at the point where Harris, Fort Bend and Waller counties meet, and the county line decides where a case is heard. A family in Cinco Ranch, on the Fort Bend side, files for divorce in the Fort Bend County district courts in Richmond; a family on the Harris County side files in Houston; the Waller County side goes to Hempstead. Texas also requires one spouse to have lived in the state for six months and in the county for 90 days before filing (Tex. Fam. Code § 6.301). People search with exactly this confusion — which court, which county — and almost no firm page answers it. A page that explains it for each part of Katy is useful to the reader and specific enough for an AI Overview to quote.",
+    },
+    faqs: [
+      {
+        q: "Which court handles a divorce for someone who lives in Katy?",
+        a: "It depends on the county. Katy spans Harris, Fort Bend and Waller counties, so a divorce is filed in that county's district court — Houston for Harris, Richmond for Fort Bend, Hempstead for Waller. Texas also requires six months' residence in the state and 90 days in the county before filing (Tex. Fam. Code § 6.301).",
+      },
+      {
+        q: "Should a Katy firm target Houston keywords?",
+        a: "Not first. Houston-wide terms are held by large firms on domain strength. Pages for Katy, Cinco Ranch, Fulshear and the county courts you appear in rank sooner and bring clients who are closer to your office.",
+      },
+      lawCost("Katy"),
+    ],
+  },
+
+  {
+    stateSlug: "texas",
+    citySlug: "the-woodlands",
+    city: "The Woodlands",
+    state: "Texas",
+    stateAbbr: "TX",
+    county: "Montgomery County",
+    metaTitle: "Law Firm SEO Company in The Woodlands, TX",
+    metaDescription:
+      "SEO for law firms in The Woodlands: Montgomery County courts, family law, estate and injury pages, and map pack work. Founder-led, one firm per city.",
+    h1: "Law Firm SEO in The Woodlands, Texas",
+    heroSub:
+      "The Woodlands is a master-planned community of more than 100,000 people, not a city, and most of its cases go to the Montgomery County courts in Conroe — something most firm pages targeting it never say.",
+    problem:
+      "People in The Woodlands search for their village — Alden Bridge, Sterling Ridge, Creekside Park — and for Spring and Conroe, but the firms that appear are mostly Houston practices with no page about The Woodlands or the Montgomery County courts.",
+    problemPoints: [
+      "Houston firms and directories hold most of page one for legal searches in The Woodlands",
+      "Few firm pages explain that The Woodlands is not a city, or which county court a case goes to",
+      "Creekside Park lies mostly in Harris County, so its cases can go to different courts from the rest of The Woodlands",
+      "An established, high-income population searches for estate planning and high-asset family law and finds little local content",
+      "Spring, Conroe and Tomball are separate searches most firms never address",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    practiceDemand: [
+      { area: "Estate planning", why: "An established, high-income population with property and business interests to pass on." },
+      { area: "High-asset family law", why: "Divorces involving business interests, retirement accounts and more than one property." },
+      { area: "Personal injury", why: "Commuter traffic on I-45 and the Grand Parkway into and around Houston." },
+      { area: "Business law", why: "Corporate and energy-sector employers along the I-45 corridor." },
+    ],
+    localSignals: [
+      { label: "Montgomery County venue", detail: "Naming the Conroe courts separates you from Houston firms" },
+      { label: "Village pages", detail: "Alden Bridge, Sterling Ridge, Cochran's Crossing and the other villages searched on their own" },
+      { label: "Creekside Park", detail: "Harris County courts named for the village that lies mostly in Harris County" },
+      { label: "Spring and Conroe", detail: "Neighbouring communities covered on their own pages, where you serve them" },
+    ],
+    courts: [
+      "Montgomery County District Courts (Conroe)",
+      "Montgomery County Courts at Law",
+      "Harris County District Courts (for Creekside Park)",
+      "U.S. District Court, Southern District of Texas",
+    ],
+    barAssociation: "State Bar of Texas · Montgomery County Bar Association",
+    neighborhoods: ["Alden Bridge", "Sterling Ridge", "Cochran's Crossing", "Panther Creek", "Grogan's Mill", "Creekside Park"],
+    nearbyCities: ["Spring", "Conroe", "Tomball", "Magnolia", "Shenandoah"],
+    legalContext: {
+      heading: "The Woodlands is not a city — and that changes where cases are heard",
+      body:
+        "The Woodlands is an unincorporated, master-planned community governed by The Woodlands Township, not a city with its own municipal court. Most of it lies in Montgomery County, so family, civil and criminal cases generally go to the Montgomery County courts in Conroe. The exception is the village of Creekside Park, which lies mostly in Harris County and is served by Harris County's courts. Texas also requires one spouse to have lived in the state for six months and in the county for 90 days before filing for divorce (Tex. Fam. Code § 6.301), so which county a family lives in matters from day one. Firm pages that simply say 'serving The Woodlands' answer none of this; a page that does is what searchers and AI Overviews can use.",
+    },
+    faqs: [
+      {
+        q: "Which court handles a case for someone who lives in The Woodlands?",
+        a: "Most of The Woodlands is in Montgomery County, so cases generally go to the Montgomery County courts in Conroe. Creekside Park is the exception: it lies mostly in Harris County, where cases go to Harris County's courts.",
+      },
+      {
+        q: "Should a firm in The Woodlands target Houston keywords?",
+        a: "Not first. Houston-wide terms are held by large firms on domain strength. Pages for The Woodlands, its villages, Spring and Conroe, and the Montgomery County courts rank sooner and bring clients close to your office.",
+      },
+      lawCost("The Woodlands"),
     ],
   },
 

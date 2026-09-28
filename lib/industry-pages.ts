@@ -124,7 +124,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       },
       NO_CONTRACT,
     ],
-    locationsMentioned: ["detroit", "baton-rouge", "philadelphia"],
+    locationsMentioned: ["detroit", "baton-rouge", "philadelphia", "katy"],
   },
   {
     name: "Family Law",
@@ -201,7 +201,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       ONE_FIRM,
       NO_CONTRACT,
     ],
-    locationsMentioned: ["grand-rapids", "sugar-land", "plano", "san-jose"],
+    locationsMentioned: ["grand-rapids", "sugar-land", "plano", "san-jose", "katy"],
   },
   {
     name: "Criminal Defense",
@@ -335,7 +335,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       },
     ],
     faqs: [NO_GUARANTEE, ONE_FIRM, NO_CONTRACT],
-    locationsMentioned: ["sugar-land", "grand-rapids"],
+    locationsMentioned: ["sugar-land", "grand-rapids", "the-woodlands", "katy"],
   },
   {
     name: "Mass Torts",

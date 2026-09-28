@@ -89,12 +89,12 @@ export const STATE_HUBS: StateHub[] = [
   },
   {
     slug: "texas",
-    metaTitle: "Texas Law Firm SEO: Sugar Land, Plano & Denton",
+    metaTitle: "Texas Law Firm SEO: Houston & Dallas Suburbs",
     metaDescription:
-      "Law firm SEO for Texas attorneys in Sugar Land, Plano and Denton: suburban county pages, map pack work and Texas rules explained. One firm per city.",
+      "Law firm SEO for Texas attorneys in Katy, The Woodlands, Sugar Land, Plano and Denton: county-level pages, map pack work and Texas rules explained.",
     intro: [
-      "Texas legal search is dominated by Houston and Dallas firms that rank on domain strength across whole metros. The opening is in the suburban counties around them — Fort Bend, Collin and Denton — where residents search for their own city and county, and where most of the firms showing up have no page that speaks to that market at all.",
-      "Each of those counties has its own character: high-asset family law and multilingual demand in Fort Bend, corporate relocations and equity compensation in Collin, a student population of close to 60,000 in Denton. The city pages go into each. What they share is Texas law and the State Bar's advertising rules, which shape what a firm's pages can say.",
+      "Texas legal search is dominated by Houston and Dallas firms that rank on domain strength across whole metros. The opening is in the suburbs around them — Katy, The Woodlands and Sugar Land around Houston, Plano and Denton around Dallas — where residents search for their own city and county, and where most of the firms showing up have no page that speaks to that market at all.",
+      "Each of those markets has its own character: high-asset family law and multilingual demand in Fort Bend, corporate relocations and equity compensation in Collin, a student population of close to 60,000 in Denton, and county lines that decide the courthouse in Katy and The Woodlands. The city pages go into each. What they share is Texas law and the State Bar's advertising rules, which shape what a firm's pages can say.",
     ],
     law: [
       {
@@ -119,7 +119,7 @@ export const STATE_HUBS: StateHub[] = [
     search: [
       {
         title: "Suburbs are searched by name",
-        body: "Fort Bend residents search Sugar Land, Missouri City, Katy and Richmond; Collin residents search Plano, Frisco, Allen and McKinney. Each is a separate search, and most are served by Houston or Dallas firms with no local page.",
+        body: "Houston-area residents search Katy, The Woodlands, Sugar Land, Missouri City and Richmond; Collin residents search Plano, Frisco, Allen and McKinney. Each is a separate search, and most are served by Houston or Dallas firms with no local page.",
       },
       {
         title: "Spanish-language demand",
