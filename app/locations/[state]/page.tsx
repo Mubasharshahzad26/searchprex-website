@@ -14,10 +14,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
-import { ArrowRight, Landmark, MapPin, Scale } from "lucide-react";
+import { ArrowRight, BookOpen, Landmark, MapPin, Scale, Search } from "lucide-react";
 import {
   Breadcrumb,
   CardGrid,
+  FaqList,
   FeatureCard,
   PageHero,
   Section,
@@ -29,6 +30,9 @@ import { CITY_PAGES, type CityPage } from "@/lib/city-pages";
 import { findPracticePage, getDynamicStateHubSlugs, getLocationState, joinNames } from "@/lib/locations";
 import { SITE, websiteRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
+import { getStateHub, type StateHub } from "@/lib/state-hubs";
+import { caseStudies, detailUrl } from "@/app/case-studies/data";
 
 export function generateStaticParams() {
   return getDynamicStateHubSlugs().map((state) => ({ state }));
@@ -50,8 +54,11 @@ export async function generateMetadata({
   const url = `${SITE}${state.hubHref}`;
   const names = state.cities.map((c) => c.name);
   // The root layout appends " | SearchPrex"; this keeps the whole thing near 60.
-  const title = `Law Firm SEO ${state.name}: ${names.join(", ")}`;
-  const description = `Law firm SEO for ${state.name} attorneys in ${joinNames(names)}: practice-area demand, local ranking signals and ${state.name} law, city by city.`;
+  const hub = getStateHub(slug);
+  const title = hub?.metaTitle ?? `Law Firm SEO ${state.name}: ${names.join(", ")}`;
+  const description =
+    hub?.metaDescription ??
+    `Law firm SEO for ${state.name} attorneys in ${joinNames(names)}: practice-area demand, local ranking signals and ${state.name} law, city by city.`;
   return {
     title,
     description,
@@ -71,6 +78,10 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
 
   const cities = citiesIn(slug);
   const url = `${SITE}${state.hubHref}`;
+  const hub = getStateHub(slug);
+  const clients = (hub?.stateClients ?? [])
+    .map((c) => caseStudies.find((cs) => cs.slug.client === c))
+    .filter((c): c is NonNullable<typeof c> => c !== undefined);
 
   // Practice areas across the state, with the cities that report demand for
   // each. Straight from each city's practiceDemand, nothing added.
@@ -86,7 +97,7 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
 
   return (
     <>
-      <Schema stateName={state.name} url={url} cities={cities} />
+      <Schema stateName={state.name} url={url} cities={cities} hub={hub} />
 
       <Breadcrumb
         items={[
@@ -113,6 +124,19 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
           }}
           secondaryCta={{ href: "/services/law-firm-seo", label: "How law firm SEO works" }}
         />
+
+        {hub ? (
+          <Section width="reading">
+            <SectionHeading eyebrow={state.name} title={`Law firm SEO in ${state.name}: the market`} />
+            <div className="space-y-4">
+              {hub.intro.map((p) => (
+                <p key={p.slice(0, 40)} className={text.body} style={{ color: color.ink }}>
+                  {p}
+                </p>
+              ))}
+            </div>
+          </Section>
+        ) : null}
 
         {/* ── CITIES ── */}
         <Section tone="surface">
@@ -151,6 +175,59 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
             ))}
           </div>
         </Section>
+
+        {hub ? (
+          <Section>
+            <SectionHeading
+              eyebrow={`${state.name} law`}
+              title={`What ${state.name} law changes on a firm's website`}
+              intro="The rules that decide what an accurate practice-area page has to say. Each links to its source."
+            />
+            <CardGrid columns={3}>
+              {hub.law.map((l) => (
+                <FeatureCard
+                  key={l.title}
+                  icon={<BookOpen className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
+                  title={l.title}
+                  body={
+                    <>
+                      {l.body}{" "}
+                      <span className="mt-2 block text-xs" style={{ color: color.muted }}>
+                        Source:{" "}
+                        {l.source.href ? (
+                          <a href={l.source.href} target="_blank" rel="noopener" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
+                            {l.source.label}
+                          </a>
+                        ) : (
+                          l.source.label
+                        )}
+                      </span>
+                    </>
+                  }
+                />
+              ))}
+            </CardGrid>
+            <p className={`${text.caption} mt-6`} style={{ color: color.muted }}>
+              General information about how {state.name} law affects website content, checked in September 2026 — not legal advice.
+            </p>
+          </Section>
+        ) : null}
+
+        {hub ? (
+          <Section tone="surface">
+            <SectionHeading eyebrow="Search behaviour" title={`How people in ${state.name} search for a lawyer`} />
+            <CardGrid columns={3}>
+              {hub.search.map((q) => (
+                <FeatureCard
+                  key={q.title}
+                  icon={<Search className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
+                  title={q.title}
+                  body={q.body}
+                />
+              ))}
+            </CardGrid>
+          </Section>
+        ) : null}
 
         {/* ── PRACTICE DEMAND ── */}
         <Section>
@@ -219,6 +296,45 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
           </p>
         </Section>
 
+        {hub && clients.length > 0 ? (
+          <Section>
+            <SectionHeading
+              eyebrow={`SearchPrex in ${state.name}`}
+              title={`${state.name} clients (not law firms)`}
+              intro="There is no published law firm case study yet. These are the clients SearchPrex has in this state, each with the screenshots behind its numbers."
+            />
+            <div className="grid gap-4 md:grid-cols-3">
+              {clients.map((cs) => (
+                <Link
+                  key={cs.slug.client}
+                  href={detailUrl(cs)}
+                  className={`group ${radius.card} border bg-white p-5 transition-all hover:shadow-md`}
+                  style={{ borderColor: color.border }}
+                >
+                  <p className={heading.eyebrow} style={{ color: color.primary }}>
+                    {cs.location} · {cs.seoType}
+                  </p>
+                  <p className={`${heading.h4} mt-2`} style={{ color: color.ink }}>
+                    {cs.client}
+                  </p>
+                  <p className={`${text.small} mt-2`} style={{ color: color.muted }}>
+                    <strong style={{ color: color.ink }}>{cs.metrics[0].v}</strong> {cs.metrics[0].l}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </Section>
+        ) : null}
+
+        <WhySearchPrex variant="law" service={`law firm SEO in ${state.name}`} tone={clients.length > 0 ? "surface" : "white"} />
+
+        {hub ? (
+          <Section width="reading">
+            <SectionHeading eyebrow="FAQ" title={`Law firm SEO in ${state.name}: questions, answered`} />
+            <FaqList faqs={hub.faqs} name={`state-${state.slug}-faq`} />
+          </Section>
+        ) : null}
+
         {/* Closing form in place of a link-only band. */}
         <ArticleLeadMagnet
           variant="bottom"
@@ -233,7 +349,7 @@ export default async function StateHubPage({ params }: { params: Promise<{ state
   );
 }
 
-function Schema({ stateName, url, cities }: { stateName: string; url: string; cities: CityPage[] }) {
+function Schema({ stateName, url, cities, hub }: { stateName: string; url: string; cities: CityPage[]; hub?: StateHub }) {
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -262,6 +378,15 @@ function Schema({ stateName, url, cities }: { stateName: string; url: string; ci
           { "@type": "ListItem", position: 3, name: stateName, item: url },
         ],
       },
+      ...(hub
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${url}#faq`,
+              mainEntity: hub.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+            },
+          ]
+        : []),
     ],
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />;

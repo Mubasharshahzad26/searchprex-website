@@ -767,7 +767,7 @@ export const CITY_PAGES: CityPage[] = [
     problemPoints: [
       "Louisiana's civil law system uses different terminology and different deadlines from every other state",
       "National directories publish common-law advice that does not apply in East Baton Rouge Parish",
-      "Louisiana's prescription period for most injury claims is one year, not the two or three most people assume",
+      "Louisiana's injury deadline changed in 2024 (two years for injuries after 1 July 2024, one year before), and most pages still state the old rule or none",
       "New Orleans firms rank on domain strength with no Baton Rouge content",
       "Parish-level searches — Ascension, Livingston, West Baton Rouge — are served by nobody",
     ],
@@ -795,12 +795,12 @@ export const CITY_PAGES: CityPage[] = [
     legalContext: {
       heading: "Why Louisiana's civil law system is the biggest content gap in the state",
       body:
-        "Louisiana is the only US state whose legal system derives from French and Spanish civil law rather than English common law. The consequences are not academic. Louisiana uses prescription rather than statute of limitations, and the prescriptive period for most personal injury claims is one year from the date of injury — not the two or three years that applies in most states and that national content confidently states. Counties are parishes. Succession replaces probate. A resident of East Baton Rouge Parish researching their claim will read national advice, believe they have two years, and lose the claim entirely. A firm that explains the actual Louisiana position clearly is not just ranking for a keyword; it is correcting information that is actively harming the people searching.",
+        "Louisiana is the only US state whose legal system derives from French and Spanish civil law rather than English common law. The consequences are not academic. Louisiana uses prescription rather than statute of limitations, and the rules have just changed: injuries after 1 July 2024 have two years (Civil Code art. 3493.1), injuries before that date only one, and since 1 January 2026 anyone found 51% or more at fault recovers nothing (art. 2323). Counties are parishes. Succession replaces probate. A resident of East Baton Rouge Parish who reads out-of-date or national advice can apply the wrong deadline or the wrong fault rule and lose the claim entirely. A firm that explains the actual Louisiana position clearly is not just ranking for a keyword; it is correcting information that is actively harming the people searching.",
     },
     faqs: [
       {
         q: "How long do I have to file an injury claim in Louisiana?",
-        a: "One year from the date of injury for most personal injury claims. Louisiana calls this prescription rather than a statute of limitations, and one year is significantly shorter than the two or three years that applies in most states — which is why national legal content routinely misleads Louisiana residents.",
+        a: "For most personal injury claims arising after 1 July 2024, two years from the date of injury (Civil Code art. 3493.1). Injuries before that date keep the old one-year period. Louisiana calls this prescription rather than a statute of limitations, and because the rule changed recently, a lot of content online still states the old deadline. A Louisiana attorney can confirm which applies to a particular claim.",
       },
       {
         q: "Why is Louisiana law different from other states?",
@@ -830,14 +830,14 @@ export const CITY_PAGES: CityPage[] = [
       "Shreveport searchers get results from firms three hundred miles away and directories that publish common-law advice wrong for Louisiana. Local firms are absent because they have not published.",
     problemPoints: [
       "Caddo Parish attorney searches face little genuine local competition",
-      "Louisiana's one-year prescription period for injury claims is almost never stated correctly in national results",
+      "Louisiana's 2024 prescription change and 2026 fault rule are rarely stated correctly in national results",
       "The Texas and Arkansas borders create cross-jurisdiction questions nobody addresses locally",
       "Bossier City, Minden and Ruston are separate searches with no local coverage",
       "New Orleans and Baton Rouge firms rank on domain strength with zero North Louisiana relevance",
     ],
     solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
-      { area: "Personal injury", why: "I-20 and I-49 intersect at Shreveport, and Louisiana's one-year prescription period makes timing urgent." },
+      { area: "Personal injury", why: "I-20 and I-49 intersect at Shreveport, and Louisiana's recently changed deadlines and fault rule make accurate pages urgent." },
       { area: "Family law", why: "Louisiana community property and covenant marriage rules differ from neighbouring Texas and Arkansas." },
       { area: "Criminal defence", why: "Caddo Parish District Court handles North Louisiana's heaviest criminal docket." },
       { area: "Workers' compensation", why: "Regional healthcare, gaming and manufacturing employment sustain claim volume." },
@@ -859,7 +859,7 @@ export const CITY_PAGES: CityPage[] = [
     legalContext: {
       heading: "Why the Ark-La-Tex border creates questions nobody is answering",
       body:
-        "Shreveport sits close enough to both Texas and Arkansas that residents routinely work in one state, live in another, and are injured in a third. That produces a genuinely difficult and frequently searched question: which state's law applies, and which deadline governs. It matters enormously here, because Louisiana's one-year prescription period for injury claims is roughly half of what applies in Texas and Arkansas. Someone injured across the state line who assumes Louisiana's clock applies, or the reverse, can lose a claim on timing alone. No national directory addresses this, and no firm in New Orleans has reason to. For a Shreveport practice it is both the clearest content gap and the most useful thing it can publish.",
+        "Shreveport sits close enough to both Texas and Arkansas that residents routinely work in one state, live in another, and are injured in a third. That produces a genuinely difficult and frequently searched question: which state's law applies, and which deadline governs. It matters here because the rules differ at every border: Louisiana allows two years for injuries after 1 July 2024 but only one for earlier ones, Arkansas generally allows three, and Louisiana's fault rule changed on 1 January 2026. Someone who assumes the wrong state's rule can lose a claim on timing alone. No national directory addresses this, and no firm in New Orleans has reason to. For a Shreveport practice it is both the clearest content gap and the most useful thing it can publish.",
     },
     faqs: [
       {
@@ -868,7 +868,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         q: "Which state's law applies if I was injured near the Texas border?",
-        a: "It depends on where the injury occurred and where the parties reside, and the difference matters a great deal. Louisiana's prescription period for injury claims is one year, while Texas and Arkansas allow longer — so an incorrect assumption about which applies can end a claim on timing alone.",
+        a: "It depends on where the injury occurred and where the parties reside, and the difference matters a great deal. Louisiana allows two years for most injuries after 1 July 2024 (one year for earlier ones), Texas generally two and Arkansas generally three — so an incorrect assumption about which applies can end a claim on timing alone.",
       },
       {
         q: "Should a Shreveport firm target Bossier City separately?",
