@@ -274,7 +274,7 @@ export default function IntakeAssistant({ embedded = false }: { embedded?: boole
                     })()}
                   </div>
  
-                  <p className="mb-3 text-xs text-muted-foreground">This is what your firm would receive in its inbox/CRM — instantly.</p>
+                  <p className="mb-3 text-xs text-muted-foreground">This is the summary your firm would receive — as soon as the conversation ends.</p>
  
                   <div className="grid gap-3 sm:grid-cols-2">
                     <div className="rounded-lg bg-muted/40 p-3">
