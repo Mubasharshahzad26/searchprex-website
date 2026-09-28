@@ -7,6 +7,93 @@
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "keyword-research-for-law-firms",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    title:       "Keyword Research for Lawyers and Law Firms",
+    excerpt:     "Start with the matters you take and the places you serve. A step-by-step method using free data, and the words bar rules keep off your pages.",
+    readTime:    "10-minute read",
+    date:        "September 28, 2026",
+    tags:        ["keyword research", "law firm seo", "legal seo", "search console"],
+    stat:        { value: "4", label: "Free data sources" },
+    /* Unsplash — law books / legal research */
+    heroImage:   "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "Why keyword research is different for law firms",
+      "Step 1 — Start with the matters you actually take",
+      "Step 2 — Add the places you serve",
+      "Step 3 — Sort every search by intent",
+      "Step 4 — Get real search terms from free sources",
+      "Step 5 — Map one topic to one page",
+      "Step 6 — Look at the results before you write",
+      "Step 7 — Keep bar rules in mind when you choose words",
+      "Step 8 — Measure what the pages are found for",
+      "Conclusion",
+    ],
+    content: `
+      <h2>Why keyword research is different for law firms</h2>
+      <p>Most keyword research advice is written for sites that want as much traffic as possible. A law firm does not. It wants the right person, in the area it can serve, with a matter it takes. A thousand visitors reading about a practice area you do not handle, or from a state where you are not licensed, are worth nothing. That changes the whole method: you start from the firm, not from a keyword tool.</p>
+      <p>Legal searches also split into three very different moments. Someone searching <em>car accident lawyer in Plano</em> is ready to call today. Someone searching <em>how much does a divorce lawyer cost</em> is comparing. Someone searching <em>how is child custody decided</em> may be months from hiring anyone. Good law firm keyword research finds all three and gives each a different page.</p>
+
+      <h2>Step 1 — Start with the matters you actually take</h2>
+      <p>Write down every type of matter the firm handles, in the words a client would use, not the words on your letterhead. "Family law" is a practice area; people search for <em>divorce</em>, <em>child custody</em>, <em>child support</em>, <em>alimony</em> and <em>prenup</em>. "Personal injury" becomes <em>car accident</em>, <em>truck accident</em>, <em>slip and fall</em>, <em>dog bite</em> and <em>wrongful death</em>.</p>
+      <p>Then cross out anything you would turn away. Keyword research that ignores intake criteria produces pages that bring calls you cannot take. This list — matters you want, in client language — is the backbone of everything that follows.</p>
+      <div class="callout"><strong>Quick test:</strong> if a page on your site covers more than one of these matters, it is probably trying to rank for all of them and ranking for none. Our <a href="/services/law-firm-seo/family-law">family law SEO</a> page explains why each matter needs its own page.</div>
+
+      <h2>Step 2 — Add the places you serve</h2>
+      <p>Legal search is local. People add a city, a county, a neighbourhood or a courthouse — <em>divorce lawyer Fort Bend County</em>, <em>DUI attorney Tempe</em>. For each matter, list the places you genuinely serve: the city of each office, the counties whose courts you appear in, and the nearby towns clients come from.</p>
+      <p>Two cautions. Do not stuff <em>near me</em> into titles and headings; Google already works out proximity from the searcher's location, and the phrase reads badly. And do not build pages for places you do not serve. Near-identical city pages with only the name swapped are what Google's spam policies call doorway pages, and they can hurt the whole site.</p>
+
+      <h2>Step 3 — Sort every search by intent</h2>
+      <p>Put each phrase into one of three groups, because each group belongs on a different kind of page:</p>
+      <ul>
+        <li><strong>Ready to hire</strong> — matter + lawyer/attorney + place (<em>child custody lawyer Grand Rapids</em>). These belong on practice-area and location pages, and they are what the map pack answers.</li>
+        <li><strong>Comparing</strong> — cost, reviews, "best", "how to choose" (<em>how much does a probate lawyer cost</em>). These belong on the same practice pages as clear, honest answers, or on a dedicated cost page.</li>
+        <li><strong>Researching</strong> — questions about the law or the process (<em>do I have to sell the house in a divorce</em>). These belong in guides that answer the question plainly and link to the practice page for when the reader is ready.</li>
+      </ul>
+
+      <h2>Step 4 — Get real search terms from free sources</h2>
+      <p>You do not need to guess, and you do not need an expensive tool to start. Four free sources give you real phrases:</p>
+      <ul>
+        <li><strong>Google Search Console</strong> — the Queries report shows the exact searches your site already appears for, with impressions and position. It is the best keyword source a firm has, because it is your own data. Filter by page to see what each page is really being found for.</li>
+        <li><strong>Google Business Profile</strong> — the Performance report's <a href="https://support.google.com/business/answer/9918094?hl=en" target="_blank" rel="noopener">searches breakdown</a> lists the terms people used when your profile appeared. For map pack visibility, this is the closest thing to a keyword report.</li>
+        <li><strong>Google autocomplete and "People also ask"</strong> — type the start of a matter plus your city and note what Google suggests, then read the questions in the People also ask box. These are the questions to answer in guides.</li>
+        <li><strong>Google Keyword Planner</strong> — free inside a Google Ads account. It often shows broad ranges rather than exact numbers, which is enough to compare phrases against each other.</li>
+      </ul>
+      <p>To speed up the grouping step, our free <a href="/tools/keyword-research">AI keyword research tool</a> takes a topic and returns keywords grouped by theme with the intent behind each and the page to build. It shows no search volumes, on purpose — volumes need a paid data source, and inventing them helps nobody.</p>
+
+      <h2>Step 5 — Map one topic to one page</h2>
+      <p>Give every page one main topic and a handful of close variations. Two pages chasing the same search split your signals and usually both lose. A simple map for a small family law firm might look like this:</p>
+      <table>
+        <thead><tr><th>Page</th><th>Main topic</th><th>Close variations</th></tr></thead>
+        <tbody>
+          <tr><td>Divorce</td><td>divorce lawyer + city</td><td>divorce attorney, uncontested divorce, contested divorce</td></tr>
+          <tr><td>Child custody</td><td>child custody lawyer + city</td><td>custody attorney, parenting time, custody modification</td></tr>
+          <tr><td>Child support</td><td>child support lawyer + city</td><td>support modification, back child support</td></tr>
+          <tr><td>Guide</td><td>how is custody decided in [state]</td><td>best interests of the child, custody factors</td></tr>
+        </tbody>
+      </table>
+      <p>Then write the title of each page for its main topic, with the place, and check how it will look in results with the <a href="/tools/serp-simulator">SERP simulator</a> — the end of a long title gets cut.</p>
+
+      <h2>Step 6 — Look at the results before you write</h2>
+      <p>Search each main topic yourself and look at what Google shows. If the map pack sits at the top, your Business Profile matters as much as the page. If the first results are Avvo, FindLaw and Justia, a specific, well-answered page can outrank a directory listing. If an AI Overview answers the question, write the answer plainly in the first paragraph so it can be quoted. The results tell you what kind of page Google thinks the search deserves.</p>
+
+      <h2>Step 7 — Keep bar rules in mind when you choose words</h2>
+      <p>Some of the most searched words are ones a lawyer cannot always use. Under <a href="https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_7_2_advertising/" target="_blank" rel="noopener">ABA Model Rule 7.2(c)</a>, a lawyer may say they are certified as a specialist only when an approved organisation has certified them, and the organisation must be named. States adopt their own versions of the rules, and many are strict about words like <em>specialist</em>, <em>expert</em> and <em>best</em>. Target the search, not the claim: a page can answer what someone looking for "the best divorce lawyer" needs without calling the firm the best. When in doubt, check your state bar's advertising rules.</p>
+
+      <h2>Step 8 — Measure what the pages are found for</h2>
+      <p>Six to eight weeks after a page goes live, open Search Console, filter the Queries report by that page and compare what it is found for with what you planned. New phrases you did not expect are ideas for sections or new pages; phrases where you sit on page two are the ones to improve first. Keyword research for law firms is not done once — it is a quarterly check against your own data.</p>
+
+      <h2>Conclusion</h2>
+      <p>Start with the matters you take and the places you serve, sort every search by how close the person is to hiring, and give each group its own page. Use your own Search Console and Business Profile data before any paid tool, and choose words your state bar allows. To check the rest of the site against the same standard, run the free <a href="/resources/law-firm-seo-audit-checklist">law firm SEO audit checklist</a> — or see how we do it for firms on the <a href="/services/law-firm-seo">law firm SEO</a> page.</p>
+    `,
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Expert",
+      bio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified. He builds practice-area and location pages for US law firms and local businesses.",
+    },
+  },
+  {
     slug:        "crawl-budget-optimization-guide",
     category:    "Technical SEO",
     subcategory: "Crawl Optimization",

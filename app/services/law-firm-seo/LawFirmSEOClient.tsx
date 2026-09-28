@@ -453,6 +453,13 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
             <ArrowRight className="h-4 w-4" aria-hidden />
           </span>
         </Link>
+        <p className={`${text.small} mt-4 text-center`} style={{ color: color.muted }}>
+          Planning new pages first?{" "}
+          <Link href="/blog/keyword-research-for-law-firms" className="font-semibold underline" style={{ color: color.primary }}>
+            Keyword research for lawyers and law firms
+          </Link>{" "}
+          — a step-by-step guide using free data.
+        </p>
       </Section>
 
       {/* FAQ */}
