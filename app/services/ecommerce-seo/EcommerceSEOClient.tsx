@@ -418,6 +418,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
           {[
             { href: "/case-studies/ecommerce/smk-store", title: "SMK Store case study", body: "35,000 products: thin copy, indexing and site quality rebuilt — $5,832 to $19,100 a month." },
             { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages." },
+            { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks in the order the case-study work was done. Free, no email." },
             { href: "/services/technical-seo", title: "Technical SEO services", body: "Crawling, indexing and Core Web Vitals fixed at the template — the base every catalogue needs." },
             { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget optimization guide", body: "Why Google skips pages on big sites, and how to stop it." },
             { href: "/blog/ecommerce-product-page-seo", title: "Product page SEO at scale", body: "Writing product pages for 10,000+ SKUs without thin or duplicate copy." },

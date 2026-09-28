@@ -279,7 +279,9 @@ export default function IndustryClient({ slug, guide }: { slug: string; guide: G
         <CardGrid columns={3}>
           {[
             { href: "/services/ecommerce-seo", title: "Ecommerce SEO services", body: "The full approach: indexing, product and category content, structured data and speed." },
-            { href: "/services/technical-seo", title: "Technical SEO", body: "Crawling, indexing and Core Web Vitals, fixed at the template." },
+            industry.slug === "shopify"
+              ? { href: "/services/technical-seo", title: "Technical SEO", body: "Crawling, indexing and Core Web Vitals, fixed at the template." }
+              : { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks for indexing, product pages, schema and speed. Free, no email." },
             { href: "/case-studies", title: "All case studies", body: "Every client result, with the screenshots." },
           ].map((r) => (
             <Link
