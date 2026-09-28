@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Pricing from "@/components/Pricing";
 import ChatWidget from "@/components/ChatWidget";
 import { Phone, ShieldCheck } from "lucide-react";
@@ -15,17 +16,17 @@ import {
 import { getPageSEO } from "@/lib/admin-seo";
 import { LOWEST_RETAINER, RETAINER_PLANS, formatUsd } from "@/lib/pricing";
 
-// No "90-day money-back guarantee" and no ranking guarantee on this page. The
-// guarantee shown is the 90-day *progress* guarantee as the founder confirmed
-// it (Sept 2026): no measurable progress in 90 days → the work continues at
-// no extra cost. Same wording as /why-us and components/WhySearchPrex. The
-// "from $1,500" starting price was also wrong against the ranges this page
-// renders, which start at $800.
+// The 90-day money-back guarantee, as /terms section 4 states it and the
+// founder confirmed in Sept 2026: no measurable progress in 90 days → the
+// work continues at no extra cost, or the fees for those 90 days are
+// refunded. Same wording as /why-us, /refund and components/WhySearchPrex.
+// There is no ranking guarantee. The "from $1,500" starting price was also
+// wrong against the ranges this page renders, which start at $800.
 const GUARANTEE =
-  "If you don't see measurable progress within 90 days, I keep working at no extra cost until you do.";
-const DESCRIPTION = `Transparent monthly SEO retainers: ${RETAINER_PLANS.map(
+  "If you don't see measurable progress within 90 days, I either keep working at no extra cost until you do, or refund what you paid for those 90 days.";
+const DESCRIPTION = `SEO retainers: ${RETAINER_PLANS.map(
   (p) => `${p.niche.replace(" SEO", "").toLowerCase()} from ${formatUsd(p.min)}`
-).join(", ")}. Exact scope set after a free audit. Monthly, no long-term contracts.`;
+).join(", ")}. Month to month, no long-term contract, 90-day money-back guarantee.`;
 
 const baseMetadata: Metadata = {
   title: "SEO Pricing Plans — USA SEO Agency",
@@ -35,7 +36,7 @@ const baseMetadata: Metadata = {
   },
   openGraph: {
     title: "SEO Pricing Plans - SearchPrex USA SEO Agency",
-    description: `Monthly SEO retainers from ${formatUsd(LOWEST_RETAINER)}, set after a free audit. No long-term contracts.`,
+    description: `Monthly SEO retainers from ${formatUsd(LOWEST_RETAINER)}, set after a free audit. No long-term contract, 90-day money-back guarantee.`,
     url: "https://www.searchprex.com/pricing",
     type: "website",
   },
@@ -114,15 +115,19 @@ export default function PricingPage() {
 
         <Pricing />
 
-        {/* The 90-day progress guarantee, next to the prices it applies to. */}
+        {/* The 90-day guarantee, next to the prices it applies to. */}
         <Section width="reading" tight>
           <div className="flex flex-col items-center gap-3 rounded-2xl border-2 border-[#1a7d59]/30 bg-[#ecfdf5] p-6 text-center sm:flex-row sm:text-left">
             <ShieldCheck className="h-10 w-10 flex-shrink-0 text-[#1a7d59]" aria-hidden />
             <div>
-              <h2 className="text-lg font-black text-[#0a0f2e]">90-day progress guarantee</h2>
+              <h2 className="text-lg font-black text-[#0a0f2e]">90-day money-back guarantee</h2>
               <p className="mt-1 text-sm leading-relaxed text-[#374151]">
-                {GUARANTEE} It is a guarantee on progress, not on a particular ranking — nobody can honestly promise a
-                Google position.
+                {GUARANTEE} It is a guarantee on measurable progress in rankings, traffic or leads — not on a particular
+                ranking, because nobody can honestly promise a Google position.{" "}
+                <Link href="/terms" className="font-semibold underline">
+                  Full terms
+                </Link>
+                .
               </p>
             </div>
           </div>
@@ -148,7 +153,7 @@ export default function PricingPage() {
               icon: <Phone className="h-4 w-4" aria-hidden />,
             },
           ]}
-          trustPoints={["Free audit first", "Monthly, no long-term contract", "90-day progress guarantee"]}
+          trustPoints={["Free audit first", "Monthly, no long-term contract", "90-day money-back guarantee"]}
         />
       </main>
       <ChatWidget />

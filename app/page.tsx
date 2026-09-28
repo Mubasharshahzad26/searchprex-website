@@ -198,7 +198,7 @@ const FAQS = [
   },
   {
     q: "Do you guarantee rankings?",
-    a: "No, and nobody honestly can — Google decides rankings. What is guaranteed is progress: if you don't see measurable progress within 90 days, I keep working at no extra cost until you do. And the process: the tear-down within 24 hours, the work done by me, and a plain report every Monday.",
+    a: "No, and nobody honestly can — Google decides rankings. What is guaranteed is progress: if you don't see measurable progress within 90 days, I either keep working at no extra cost until you do, or refund what you paid for those 90 days. And the process: the tear-down within 24 hours, the work done by me, and a plain report every Monday.",
   },
   {
     q: "Where is SearchPrex based?",

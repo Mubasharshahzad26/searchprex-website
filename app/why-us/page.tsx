@@ -45,9 +45,9 @@ const reasons = [
   },
   {
     icon: Shield,
-    title: "90-Day Progress Guarantee",
+    title: "90-Day Money-Back Guarantee",
     description:
-      "If you don't see measurable progress within 90 days, we keep working at no extra cost until you do. We're that confident in our process.",
+      "If you don't see measurable progress within 90 days, we either keep working at no extra cost until you do, or refund what you paid for those 90 days. We're that confident in our process.",
     stats: "100% Risk-Free",
   },
   {
@@ -82,7 +82,7 @@ const reasons = [
  
 const comparisons = [
   { feature: "Senior SEO Strategist (Founder)", us: true, others: false },
-  { feature: "90-Day Progress Guarantee", us: true, others: false },
+  { feature: "90-Day Money-Back Guarantee", us: true, others: false },
   { feature: "No Long-Term Contracts", us: true, others: false },
   { feature: "US-Market Focused", us: true, others: false },
   { feature: "Niche Industry Expertise", us: true, others: false },

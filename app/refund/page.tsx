@@ -16,7 +16,7 @@ const PAGE_URL = `${SITE}/refund`;
 const baseMetadata: Metadata = {
   title: "Refund Policy",
   description:
-    "SearchPrex refund policy — terms for the SEO Growth Roadmap audit, NicheSEOPro subscriptions, and how to request a refund.",
+    "SearchPrex refund policy: the 90-day money-back guarantee on SEO retainers, terms for the SEO Growth Roadmap audit, and how to request a refund.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Refund Policy | SearchPrex",
@@ -38,11 +38,20 @@ export default function RefundPolicyPage() {
         centered
         eyebrow="Legal"
         title="Refund Policy"
-        subtitle="Terms for our audits and subscriptions, and how to request a refund."
+        subtitle="The 90-day money-back guarantee on SEO retainers, terms for our audits and subscriptions, and how to request a refund."
       />
 
       <Section width="reading" bordered={false}>
-        <Prose meta="Last updated: June 2026">
+        <Prose meta="Last updated: September 2026">
+          <h2>SEO Retainers: 90-Day Money-Back Guarantee</h2>
+          <p>
+            Monthly SEO retainers carry a 90-day money-back guarantee. If you don&apos;t see measurable progress —
+            an improvement in rankings, traffic or leads — within 90 days of your campaign launching, we will either
+            keep working at no charge until you do, or refund the fees you paid during those 90 days. The full wording
+            is in section 4 of our <a href="/terms">Terms and Conditions</a>. It is a guarantee on progress, not on any
+            particular ranking.
+          </p>
+
           <h2>SEO Growth Roadmap ($2 Audit)</h2>
           <p>
             This is a digital report delivered to your email within 24 hours of payment.
