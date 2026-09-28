@@ -6,6 +6,7 @@ import {
   Gavel, Users, Award, ShieldCheck, Building2, Search,
 } from "lucide-react";
 import { kansasCities } from "@/lib/kansas-cities";
+import { KANSAS_SEO_CITIES } from "@/lib/kansas-seo-cities";
 import { organizationRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
  
@@ -258,6 +259,28 @@ export default function KansasHubPage() {
         </div>
       </section>
  
+      {/* ── NOT A LAW FIRM — the general SEO pages (lib/kansas-seo-cities.ts) ── */}
+      <section className="bg-white px-4 pt-20">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-8 text-center">
+          <p className="mb-2 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Not a law firm?</p>
+          <h2 className="mb-3 text-2xl font-black tracking-tight text-[#0a0f2e]">SEO services for other Kansas businesses</h2>
+          <p className="mx-auto mb-5 max-w-2xl text-sm leading-relaxed text-[#475569]">
+            Local, ecommerce and technical SEO for trades, B2B firms and online stores.
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {KANSAS_SEO_CITIES.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/locations/kansas/${c.slug}/seo-services`}
+                className="rounded-full border border-[#e2e8f0] bg-white px-4 py-2 text-sm font-semibold text-[#0a0f2e] hover:border-[#534AB7] hover:text-[#534AB7]"
+              >
+                SEO in {c.name}, KS
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── LOCAL EXPERTISE (people-first, accurate) ── */}
       <section className="bg-white px-4 py-24">
         <div className="mx-auto max-w-5xl">

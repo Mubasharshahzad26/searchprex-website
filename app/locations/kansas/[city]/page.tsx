@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { getCityBySlug, getAllCitySlugs, kansasCities } from "@/lib/kansas-cities";
 import { findPracticePage } from "@/lib/locations";
+import { getKansasSeoCity } from "@/lib/kansas-seo-cities";
 import { organizationRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
@@ -42,7 +43,9 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
   if (!city) notFound();
  
   const url = `https://www.searchprex.com/locations/kansas/${city.slug}`;
- 
+  // The general (non-legal) page, for cities that have one.
+  const generalPage = getKansasSeoCity(city.slug) ? `/locations/kansas/${city.slug}/seo-services` : undefined;
+
   // ── JSON-LD: service + FAQ + breadcrumb + founder (E-E-A-T & rich results) ──
   const schema = {
     "@context": "https://schema.org",
@@ -142,8 +145,17 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
             </div>
           ))}
         </div>
+        {generalPage ? (
+          <p className="mx-auto mt-8 max-w-3xl rounded-xl bg-[#f8f9fc] px-4 py-3 text-center text-sm text-[#475569]">
+            Not a law firm?{" "}
+            <Link href={generalPage} className="font-bold text-[#534AB7] hover:underline">
+              SEO services for other {city.name} businesses
+            </Link>{" "}
+            — trades, B2B firms and online stores.
+          </p>
+        ) : null}
       </section>
- 
+
       {/* ── LEAD FORM (early) — these pages carried no form at all; the only
           action was a Calendly link. ── */}
       <section className="bg-white px-4 pt-12">

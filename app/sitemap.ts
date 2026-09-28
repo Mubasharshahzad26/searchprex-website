@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import { caseStudies, detailUrl } from "./case-studies/data";
 import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
+import { KANSAS_SEO_CITIES } from "@/lib/kansas-seo-cities";
 import { getAllCityParams } from "@/lib/city-pages";
 import { getDynamicStateHubSlugs } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
@@ -289,6 +290,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const { city } of getAllCitySlugs()) {
     add({
       url: absolute(`/locations/kansas/${city}`),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    });
+  }
+
+  // General (non-legal) SEO pages for the Kansas cities where Search Console
+  // showed non-legal SEO searches landing on the law page.
+  for (const c of KANSAS_SEO_CITIES) {
+    add({
+      url: absolute(`/locations/kansas/${c.slug}/seo-services`),
       changeFrequency: "monthly",
       priority: 0.65,
     });

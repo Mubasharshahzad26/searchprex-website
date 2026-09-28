@@ -178,7 +178,7 @@ export const kansasCities: KansasCity[] = [
       "Founder-led law firm SEO for Overland Park attorneys: family law, estate and business firms in Johnson County's competitive legal market.",
     heroHeadline: "Law Firm SEO in Overland Park, KS",
     heroSub:
-      "Win Johnson County's highest-value clients. We rank family law, estate, and business firms in Kansas's most affluent — and most competitive — legal market.",
+      "Win Johnson County's highest-value clients. Practice-area pages and map pack work for family law, estate and business firms in Kansas's most competitive legal market.",
     overview:
       "Overland Park is the second-largest city in Kansas and one of the wealthiest communities in the Midwest. That affluence drives demand for complex, high-stakes legal work — contested divorces, asset division, estate planning, and business disputes. It also makes this the single most competitive legal SEO market in the state, where large, established firms spend heavily to stay visible.",
     localInsight:
@@ -305,7 +305,7 @@ export const kansasCities: KansasCity[] = [
     population: "95,358",
     metaTitle: "Law Firm SEO Company in Lawrence, KS",
     metaDescription:
-      "Expert law firm SEO for Lawrence, KS attorneys. Searchprex ranks Douglas County law firms for family law, personal injury, and criminal defense searches.",
+      "Law firm SEO for Lawrence, KS attorneys: family law, personal injury and criminal defense pages for Douglas County firms. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Lawrence, KS",
     heroSub:
       "Get found for legal searches in Lawrence and Douglas County — including university-market and family law queries.",
@@ -376,7 +376,7 @@ export const kansasCities: KansasCity[] = [
     population: "67,208",
     metaTitle: "Law Firm SEO Company in Shawnee, KS",
     metaDescription:
-      "Law firm SEO for Shawnee, KS attorneys. Searchprex ranks Johnson County law firms for family law and personal injury searches in Shawnee.",
+      "Law firm SEO for Shawnee, KS attorneys: family law and personal injury pages and map pack work for Johnson County firms. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Shawnee, KS",
     heroSub:
       "Stand out in Shawnee's growing legal market — rank above larger firms with targeted local SEO.",
@@ -518,7 +518,7 @@ export const kansasCities: KansasCity[] = [
     population: "54,811",
     metaTitle: "Law Firm SEO Company in Manhattan, KS",
     metaDescription:
-      "Law firm SEO for Manhattan, KS attorneys. Searchprex ranks Riley County law firms for family law and personal injury searches in the Little Apple.",
+      "Law firm SEO for Manhattan, KS attorneys: family law, military divorce and personal injury pages for Riley County firms. Free tear-down within 24 hours.",
     heroHeadline: "Law Firm SEO in Manhattan, KS",
     heroSub:
       "Get found for legal searches in the Little Apple — family law, personal injury and criminal defense for Riley County attorneys.",
