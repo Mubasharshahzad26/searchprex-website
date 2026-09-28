@@ -24,6 +24,7 @@ const DOCS = {
   titles: "https://developers.google.com/search/docs/appearance/title-link",
   snippets: "https://developers.google.com/search/docs/appearance/snippet",
   faqChange: "https://developers.google.com/search/blog/2023/08/howto-faq-changes",
+  faqDoc: "https://developers.google.com/search/docs/appearance/structured-data/faqpage",
   reviews: "https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful",
 };
 
@@ -46,7 +47,7 @@ const FAQS = [
   },
   {
     q: "Can I get review stars or FAQ dropdowns in my result?",
-    a: "Only in some cases. Review stars appear for certain page types, such as products, recipes and software, and not for reviews a business publishes about itself. Since August 2023 Google shows FAQ rich results only for well-known government and health websites.",
+    a: "Review stars, only in some cases: they appear for certain page types, such as products, recipes and software, and not for reviews a business publishes about itself. FAQ dropdowns, no: Google stopped showing FAQ rich results in Search on 7 May 2026. FAQPage markup can stay on your pages, but it no longer earns a rich result.",
   },
   {
     q: "Is anything I type stored or sent anywhere?",
@@ -189,11 +190,16 @@ export default function SerpSimulatorPage() {
             <a href={DOCS.reviews} className={link} rel="noopener" target="_blank">
               are not shown for reviews a business publishes about itself
             </a>
-            , and since August 2023{" "}
+            . FAQ dropdowns are gone altogether: Google{" "}
             <a href={DOCS.faqChange} className={link} rel="noopener" target="_blank">
-              FAQ rich results appear only for well-known government and health sites
+              limited them to government and health sites in August 2023
+            </a>{" "}
+            and{" "}
+            <a href={DOCS.faqDoc} className={link} rel="noopener" target="_blank">
+              stopped showing them in Search on 7 May 2026
             </a>
-            . That is why this tool offers stars as an option with a warning, and no FAQ dropdowns.
+            . FAQPage markup can stay on your pages, but it no longer earns a rich result. That is why this tool offers stars
+            as an option with a warning, and no FAQ dropdowns.
           </p>
         </div>
       </Section>
