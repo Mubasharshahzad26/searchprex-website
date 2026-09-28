@@ -129,11 +129,11 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Family Law",
     slug: "family-law",
-    metaTitle: "Family Law SEO | SEO for Family Lawyers",
+    metaTitle: "Divorce & Family Law Attorney SEO Services",
     metaDescription:
-      "SEO for family lawyers: county-level custody and divorce content, answers built for AI Overviews and privacy-aware marketing. No ranking promises.",
-    h1: "Family Law SEO",
-    accent: "for divorce and custody searches",
+      "Divorce and family law attorney SEO: custody, divorce and support pages by county, answers for AI Overviews, privacy-aware marketing. No ranking promises.",
+    h1: "Family Law & Divorce SEO",
+    accent: "for attorneys and law firms",
     heroSub:
       "Divorce and custody clients research for weeks before they call, often privately. I build family law firms the county-level answers those people are searching for — and I'll tell you up front that there is no published law firm case study yet.",
     approach: {
@@ -141,6 +141,14 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       body: "No published family law case study yet, so here is the approach. Answers to the custody and asset-division questions people actually type, county-level content rather than state-level, and a review process that respects how sensitive this work is. Ads win the top of the page; the questions underneath them are still open.",
     },
     sections: [
+      {
+        heading: "The Pages a Divorce and Family Law Site Needs",
+        body: "Divorce lawyer SEO is not one page. People search for their specific problem, so a family law site needs a page for each matter the firm takes: contested and uncontested divorce, child custody and parenting time, child support, spousal support, property and debt division, modifications after a decree, protective orders, prenuptial agreements and adoption. Each page answers the questions for that matter, names the county courts where the firm appears and links to the attorney who handles it. A single family law page competing for all of those searches loses to firms that built them separately.",
+      },
+      {
+        heading: "Ready to Hire, or Still Researching",
+        body: "Searches like divorce attorney near me, child custody lawyer in a named county or how much a divorce lawyer costs come from people close to hiring, and belong on the practice-area and location pages. Questions like how custody is decided, whether the house has to be sold or how long a divorce takes come from people months earlier, and belong in guides that link to those pages. Family law attorney SEO works when both exist and point to each other, so the person who read your guide in March finds the same firm in June.",
+      },
       {
         heading: "The Search Starts Months Before the Call",
         body: "Nobody types divorce lawyer near me on day one. They spend weeks searching what happens to the house, whether they have to move out, and what custody actually means in practice. Firms write only for the final query and miss the entire research phase, which is where trust is built. Content for the pre-decision months is why a stranger calls you rather than the firm with the bigger ad budget.",
@@ -176,6 +184,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
         a: "Nobody controls what Google's AI cites, but clear, direct answers to specific questions — written by or reviewed by the attorney, on a page about that one question — are what these answers tend to draw from.",
       },
       {
+        q: "What keywords should a divorce lawyer target?",
+        a: "The matters the firm takes, in the words clients use, with the place: divorce lawyer, child custody attorney, child support lawyer, each with the city or county. Then the questions people ask before hiring — how custody is decided, what happens to the house — answered in guides that link to those pages. Which of these carries the most demand in a market is something to check in keyword tools and Search Console, not to guess.",
+      },
+      {
         q: "Does SearchPrex have a family law case study?",
         a: "Not yet. No law firm client has been published; SearchPrex's verified results are in ecommerce and local services.",
       },
@@ -189,7 +201,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       ONE_FIRM,
       NO_CONTRACT,
     ],
-    locationsMentioned: ["grand-rapids", "sugar-land", "plano"],
+    locationsMentioned: ["grand-rapids", "sugar-land", "plano", "san-jose"],
   },
   {
     name: "Criminal Defense",
@@ -259,11 +271,11 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Estate Planning",
     slug: "estate-planning",
-    metaTitle: "Estate Planning Lawyer SEO | Wills & Probate",
+    metaTitle: "Estate Planning & Probate Attorney SEO",
     metaDescription:
-      "Estate planning lawyer SEO: county-level probate content, pages for business owners and plain answers that compete with DIY templates. No ranking promises.",
-    h1: "Estate Planning SEO",
-    accent: "for wills, trusts and probate",
+      "SEO for estate planning and probate attorneys: county probate pages, content for business owners and adult children, plain answers. No ranking promises.",
+    h1: "Estate Planning & Probate SEO",
+    accent: "for attorneys and law firms",
     heroSub:
       "People research estate planning for months, and many consider a DIY template first. I build estate planning firms the county-level, plain-English answers that earn the call — with no published law firm case study yet, stated up front.",
     approach: {
@@ -271,6 +283,14 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       body: "No published estate planning case study yet. The approach is content built around what people search before they are ready to hire — revocable versus irrevocable, probate timelines in their county, what happens to a business interest — with structured data that makes those answers easy for search and AI results to read.",
     },
     sections: [
+      {
+        heading: "Probate Attorney SEO Starts After a Death",
+        body: "Probate searches come from a different person at a different moment than estate planning searches: usually an adult child or executor, after a parent has died, trying to work out what to do first. They search for the county probate court, whether probate is needed at all, how long it takes and what an executor has to do. A probate page for each county you practise in, written for that person, reaches clients an estate planning page never will — and many of them later need their own will.",
+      },
+      {
+        heading: "The Pages an Estate Planning Site Needs",
+        body: "Wills, revocable living trusts, powers of attorney and healthcare directives, trust administration, probate and estate administration, and — where the firm does this work — business succession, special needs trusts and elder law planning. Each deserves its own page with the questions for that document, the attorney who handles it and the counties served. One general estate planning page cannot rank for all of them.",
+      },
       {
         heading: "Experience and Trust on a YMYL Topic",
         body: "Google's quality rater guidelines treat legal topics as “Your Money or Your Life”, judged on experience, expertise, authoritativeness and trust. Attorney bios with real credentials, a named author on every guide and citations to the statutes discussed are how an estate planning site meets that bar.",
@@ -304,6 +324,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       {
         q: "What content works best for an estate planning firm?",
         a: "County-level probate answers, honest comparisons with DIY templates, and pages for business owners and for adult children searching on a parent's behalf — the questions national sites cannot answer and most local firms never write.",
+      },
+      {
+        q: "What is probate attorney SEO?",
+        a: "Getting a probate practice found by the executors and families who search after a death — for their county's probate court, whether probate is required, and what an executor must do. It works best with a page for each county served and plain answers to those first questions, linked to the attorney who handles probate.",
       },
       {
         q: "Does SearchPrex have an estate planning case study?",
