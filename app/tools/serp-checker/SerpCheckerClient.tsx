@@ -141,6 +141,13 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
             </Link>
             .
           </p>
+          <p className="text-[#64748b] text-sm max-w-2xl leading-relaxed -mt-4 mb-8">
+            Want to see how a title and meta description will look in Google instead?{" "}
+            <Link href="/tools/serp-simulator" className="font-semibold text-[#534AB7] underline underline-offset-2">
+              Use the SERP simulator
+            </Link>
+            .
+          </p>
 
           {/* Form */}
           <form onSubmit={runCheck} className="rounded-2xl border border-[#e5e7eb] bg-white p-6 shadow-sm">

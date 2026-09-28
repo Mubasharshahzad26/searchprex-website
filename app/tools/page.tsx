@@ -60,6 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
 // Re-add each one on the day its page ships.
 const toolSchemaList = [
   { name: "Schema Markup Generator", url: `${SITE}/tools/schema-generator`, desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review." },
+  { name: "SERP Simulator", url: `${SITE}/tools/serp-simulator`, desc: "Preview a title and meta description as Google shows them on desktop and mobile, measured in pixels." },
   { name: "SERP Checker", url: `${SITE}/tools/serp-checker`, desc: "Check your Google ranking position for any keyword and country, and see who outranks you." },
   { name: "AI Keyword Research", url: `${SITE}/tools/keyword-research`, desc: "Get keywords grouped by theme, the intent behind each, and the page to build for it." },
 ];

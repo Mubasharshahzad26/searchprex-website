@@ -51,6 +51,35 @@ const tools = [
     stats: "No signup",
   },
   {
+    id: "schema-generator",
+    icon: Code2,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    label: "Schema Markup Generator",
+    desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
+    tags: ["JSON-LD", "Rich Results", "Structured Data"],
+    // Live: the generator moved into /tools/schema-generator (see its page.tsx)
+    // and the "Coming soon" stub is gone.
+    status: "live",
+    href: "/tools/schema-generator",
+    stats: "6 schema types",
+  },
+  {
+    id: "serp-simulator",
+    icon: Search,
+    iconBg: "#E6F1FB",
+    iconColor: "#185FA5",
+    accentColor: "#185FA5",
+    label: "SERP Simulator",
+    desc: "Preview your title and meta description as Google shows them on desktop and mobile, measured in pixels, with the cut marked.",
+    tags: ["SERP Preview", "Pixel Width", "Meta Tags"],
+    // Live: runs entirely in the browser, so it needs no data provider.
+    status: "live",
+    href: "/tools/serp-simulator",
+    stats: "Desktop + Mobile",
+  },
+  {
     id: "serp-checker",
     icon: Target,
     iconBg: "#EEEDFE",
@@ -72,35 +101,6 @@ const tools = [
     status: "preview",
     href: "/tools/serp-checker",
     stats: "Up to 5 keywords",
-  },
-  {
-    id: "schema-generator",
-    icon: Code2,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
-    label: "Schema Markup Generator",
-    desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
-    tags: ["JSON-LD", "Rich Results", "Structured Data"],
-    // "soon", not "live". /tools/schema-generator returns 200 but the page is a
-    // stub that says "Coming soon." — the card was promising a working tool and
-    // "6 schema types" to anyone who clicked. Flip back once the page is built.
-    status: "soon",
-    href: "/tools/schema-generator",
-    stats: "6 schema types",
-  },
-  {
-    id: "serp-simulator",
-    icon: Search,
-    iconBg: "#E6F1FB",
-    iconColor: "#185FA5",
-    accentColor: "#185FA5",
-    label: "SERP Simulator",
-    desc: "Preview exactly how your page looks in Google search results — title, description, URL, rich snippets.",
-    tags: ["SERP Preview", "CTR", "Meta Tags"],
-    status: "soon",
-    href: "/tools/serp-simulator",
-    stats: "Desktop + Mobile",
   },
   {
     id: "meta-tag-analyzer",
