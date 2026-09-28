@@ -1484,15 +1484,14 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
 
   const shortDescription = `
 <div style="margin:4px 0 10px 0;">
-  <span style="background:#e0f2fe; color:#0369a1; font-size:11px; font-weight:800; text-transform:uppercase; padding:3px 8px; border-radius:4px; letter-spacing:0.5px; display:inline-block; margin-bottom:8px;">FREE SHIPPING &bull; SAME-DAY DISPATCH</span>
   <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
     <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge1}</span>
     <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge2}</span>
     <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge3}</span>
     <span style="background:#f8fafc; color:#0f172a; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid #e2e8f0;">${badge4}</span>
   </div>
-  <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3px solid #16a34a; border-radius:4px; padding:7px 12px; margin-bottom:10px; font-size:12px; color:#15803d; line-height:1.4;">
-    <strong>In Stock &bull; Ships Today:</strong> Orders before 2:00 PM EST ship same-day from Michigan warehouse via USPS Priority / UPS.
+  <div class="mso-free-ship-100-banner" style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3px solid #16a34a; border-radius:4px; padding:7px 12px; margin-bottom:10px; font-size:12px; color:#15803d; line-height:1.4;">
+    <strong>&#10003; Free US Shipping Over $100:</strong> Enjoy free tracked U.S. shipping on all orders of $100 or more.
   </div>
   <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; font-size:11.5px; color:#334155;">
     <span style="background:#ffffff; border:1px solid #e2e8f0; padding:4px 8px; border-radius:4px;"><strong>100% Factory Authentic</strong></span>
@@ -1698,17 +1697,15 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     <div style="max-width:620px;">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
         <span style="background:#16a34a; color:#ffffff; font-size:11px; font-weight:800; text-transform:uppercase; padding:3px 8px; border-radius:4px; letter-spacing:0.5px;">
-          Verified In-Stock &bull; Ships Today
+          Verified In-Stock &bull; Factory Authentic
         </span>
-        <span style="color:#94a3b8; font-size:12.5px;">Orders before 2:00 PM EST</span>
-        <span style="color:#64748b;">&bull;</span>
         <span style="color:#38bdf8; font-size:12px; font-weight:700;">Verified Multi-Channel US Merchant</span>
       </div>
       <div style="font-size:22px; font-weight:800; color:#ffffff; margin:0 0 8px 0; letter-spacing:-0.3px;">
         Ready to Own the ${name}?
       </div>
       <p style="font-size:13.5px; color:#cbd5e1; margin:0; line-height:1.6;">
-        Every order is backed by Michigan Sports Outdoor's 30-Day Hassle-Free Return Guarantee, Manufacturer Lifetime Warranty, and Free Insured US Shipping.
+        Every order is backed by Michigan Sports Outdoor's 30-Day Hassle-Free Return Guarantee, Manufacturer Lifetime Warranty, and Free Tracked US Shipping on Orders Over $100.
       </p>
     </div>
     <div style="text-align:right; min-width:240px;">
@@ -1720,7 +1717,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
         Add to Cart &bull; Secure Checkout &rarr;
       </a>
       <div style="display:flex; justify-content:center; align-items:center; gap:6px; font-size:11.5px; color:#94a3b8; margin-top:8px;">
-        <span>Free Shipping Eligible</span> &bull; <span>30-Day Return Guarantee</span>
+        <span>Free Shipping Over $100</span> &bull; <span>30-Day Return Guarantee</span>
       </div>
     </div>
   </div>
@@ -1763,7 +1760,9 @@ export function buildProductRichSchema(product: {
   stock_status?: string;
 }): string {
   const name = product.name || product.title || 'Precision Outdoor Gear';
-  const price = product.price ? parseFloat(String(product.price)).toFixed(2) : '189.00';
+  const numericPrice = product.price ? parseFloat(String(product.price)) : 189.0;
+  const price = numericPrice.toFixed(2);
+  const shippingRateVal = numericPrice >= 100.0 ? '0.00' : '7.95';
   const brand = product.brand || 'Michigan Sports Outdoor';
   const url = product.url || `https://www.michigansportsoutdoor.com/product/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`;
   const inStock = product.stock_status !== 'outofstock';
@@ -1786,9 +1785,10 @@ export function buildProductRichSchema(product: {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${url}#product`,
     name,
     image: imageUrls.slice(0, 4),
-    description: product.description || `Buy ${name} at Michigan Sports Outdoor. Fast same-day shipping from Michigan warehouse with full factory warranty and 30-day returns.`,
+    description: product.description || `Buy ${name} at Michigan Sports Outdoor. Fast tracked shipping from Michigan warehouse (Free US Shipping Over $100) with full factory warranty and 30-day returns.`,
     sku: product.sku || `MSO-${numId}`,
     mpn: product.sku || `MSO-${numId}`,
     brand: {
@@ -1812,7 +1812,7 @@ export function buildProductRichSchema(product: {
         '@type': 'OfferShippingDetails',
         shippingRate: {
           '@type': 'MonetaryAmount',
-          value: '0.00',
+          value: shippingRateVal,
           currency: 'USD'
         },
         shippingDestination: {

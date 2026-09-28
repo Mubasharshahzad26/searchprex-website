@@ -415,6 +415,15 @@ export async function GET(req: NextRequest) {
       },
       {
         date: "2026-09-28",
+        task_name: "Store-Wide Shipping & Same-Day Claims Cleanup + 'Free US Shipping Over $100' Banner, Hyper-Relevant OOS/Related Products Engine v4 & Schema Sync (Snippet #11)",
+        category: "Merchant Compliance, CRO & Technical Schema",
+        priority: "Critical",
+        logic: "Removed misleading 'FREE SHIPPING • SAME-DAY DISPATCH' and 'Orders before 2:00 PM EST ship same-day' claims across all 40,398 products and replaced them with the client-approved '✓ Free US Shipping Over $100' banner in all product buy boxes and the homepage top authority bar. Upgraded OOS Rescue Box & native WooCommerce Related Products (v4) to match Brand + Product-Type Keyword + Deepest Leaf Sub-Category + Price Proximity. Synced inline Product JSON-LD shippingRate ($0.00 for >=$100, $7.95 for <$100) and live stock availability, plus added CollectionPage + ItemList schema on Category/Brand archives.",
+        status: "Done",
+        proof_url: "https://www.michigansportsoutdoor.com/product/vosteed-raccoon-crossbar-modswap/"
+      },
+      {
+        date: "2026-09-30",
         task_name: "Weekly Ranking Movement, GSC Validation Progress & Revenue Impact Executive Review",
         category: "Analytics & Reporting",
         priority: "High",
