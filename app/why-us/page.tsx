@@ -68,8 +68,8 @@ const reasons = [
     icon: Award,
     title: "Certified Expertise",
     description:
-      "Certified across Google Analytics, Semrush, and Ahrefs. We stay ahead of algorithm changes so you don't have to.",
-    stats: "Google · Semrush · Ahrefs",
+      "Semrush and HubSpot certified in SEO. We stay ahead of algorithm changes so you don't have to.",
+    stats: "Semrush · HubSpot",
   },
   {
     icon: MapPin,
