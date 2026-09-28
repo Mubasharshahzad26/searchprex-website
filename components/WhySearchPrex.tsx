@@ -4,11 +4,12 @@
 // Six reasons, each one already stated and backed elsewhere on the site —
 // nothing here is new: the founder does the work (home page), figures have a
 // screenshot behind them (case studies), one client per city (home and law
-// pages), published prices (lib/pricing.ts), the 24-hour tear-down and the
-// Monday report (the service pages' process sections).
+// pages), published prices (lib/pricing.ts), the 24-hour tear-down, the
+// Monday report (the service pages' process sections) and the 90-day progress
+// guarantee (/why-us and the terms; confirmed by the founder, Sept 2026).
 //
-// Deliberately absent: guarantees, client counts and certifications that are
-// not on the credentials the site links to.
+// The guarantee is worded as "keep working at no extra cost" — the part the
+// founder confirmed. It is never a ranking guarantee.
 
 import Link from "next/link";
 import { CalendarCheck, FileSearch, MapPinned, ReceiptText, ScanEye, UserRound, Wrench } from "lucide-react";
@@ -95,8 +96,8 @@ export default function WhySearchPrex({
     },
     {
       i: CalendarCheck,
-      title: "A Monday report, no ranking promises",
-      body: "Google does not sell positions, so nobody can honestly guarantee one. What you get is a plain-English report every Monday on what changed and what is next.",
+      title: "A 90-day progress guarantee",
+      body: "Nobody can honestly guarantee a Google position. What I guarantee is progress: if you don't see measurable progress within 90 days, I keep working at no extra cost until you do. You see where things stand in a report every Monday.",
     },
   ];
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Pricing from "@/components/Pricing";
 import ChatWidget from "@/components/ChatWidget";
-import { Phone } from "lucide-react";
+import { Phone, ShieldCheck } from "lucide-react";
 import {
   CtaBand,
   FaqList,
@@ -15,11 +15,14 @@ import {
 import { getPageSEO } from "@/lib/admin-seo";
 import { LOWEST_RETAINER, RETAINER_PLANS, formatUsd } from "@/lib/pricing";
 
-// No "90-day money-back guarantee" anywhere on this page. It used to be in the
-// meta description, the Open Graph copy, an FAQ answer and the closing band,
-// while the homepage FAQ says — correctly — that rankings are not guaranteed
-// and no refund is offered. The "from $1,500" starting price was also wrong
-// against the ranges this page renders, which start at $800.
+// No "90-day money-back guarantee" and no ranking guarantee on this page. The
+// guarantee shown is the 90-day *progress* guarantee as the founder confirmed
+// it (Sept 2026): no measurable progress in 90 days → the work continues at
+// no extra cost. Same wording as /why-us and components/WhySearchPrex. The
+// "from $1,500" starting price was also wrong against the ranges this page
+// renders, which start at $800.
+const GUARANTEE =
+  "If you don't see measurable progress within 90 days, I keep working at no extra cost until you do.";
 const DESCRIPTION = `Transparent monthly SEO retainers: ${RETAINER_PLANS.map(
   (p) => `${p.niche.replace(" SEO", "").toLowerCase()} from ${formatUsd(p.min)}`
 ).join(", ")}. Exact scope set after a free audit. Monthly, no long-term contracts.`;
@@ -53,7 +56,7 @@ const faqs: Faq[] = [
     // Same answer as the homepage FAQ, word for word, so the two pages cannot
     // make different promises again.
     q: "Do you offer guarantees?",
-    a: "Not on rankings — nobody can honestly guarantee a position, and any agency that does is telling you what you want to hear. What I do guarantee is process: your reality check report lands within 24 hours, or I tell you why not before the deadline rather than after it. You also get one client per city per practice area, so I am never optimising your competitor at the same time.",
+    a: `Not on rankings — nobody can honestly guarantee a position, and any agency that does is telling you what you want to hear. What I do guarantee is progress: ${GUARANTEE} Your reality check report lands within 24 hours, or I tell you why not before the deadline rather than after it. You also get one client per city per practice area, so I am never optimising your competitor at the same time.`,
   },
   {
     q: "Can I upgrade or downgrade my plan?",
@@ -111,6 +114,20 @@ export default function PricingPage() {
 
         <Pricing />
 
+        {/* The 90-day progress guarantee, next to the prices it applies to. */}
+        <Section width="reading" tight>
+          <div className="flex flex-col items-center gap-3 rounded-2xl border-2 border-[#1a7d59]/30 bg-[#ecfdf5] p-6 text-center sm:flex-row sm:text-left">
+            <ShieldCheck className="h-10 w-10 flex-shrink-0 text-[#1a7d59]" aria-hidden />
+            <div>
+              <h2 className="text-lg font-black text-[#0a0f2e]">90-day progress guarantee</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[#374151]">
+                {GUARANTEE} It is a guarantee on progress, not on a particular ranking — nobody can honestly promise a
+                Google position.
+              </p>
+            </div>
+          </div>
+        </Section>
+
         <Section tone="surface" width="reading">
           <SectionHeading variant="center" eyebrow="FAQ" title="Pricing FAQs" />
           <FaqList faqs={faqs} name="pricing-faq" />
@@ -131,7 +148,7 @@ export default function PricingPage() {
               icon: <Phone className="h-4 w-4" aria-hidden />,
             },
           ]}
-          trustPoints={["No Credit Card Required", "Monthly, no long-term contract", "Free audit first"]}
+          trustPoints={["Free audit first", "Monthly, no long-term contract", "90-day progress guarantee"]}
         />
       </main>
       <ChatWidget />
