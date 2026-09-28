@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getPageSEO } from "@/lib/admin-seo";
 import { PageHero, Accent } from "@/components/layout";
 import { color, text, radius } from "@/lib/design-tokens";
 import { CHECKLIST_PILLARS, TOTAL_CHECKS, CRITICAL_CHECKS } from "@/lib/law-firm-checklist";
-import ChecklistClient from "./ChecklistClient";
+import ChecklistWorkbook from "@/components/ChecklistWorkbook";
+import { OFFER_CTA_BY_PERSONA } from "@/lib/offer";
+import { founderRef } from "@/lib/site-schema";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 const pageUrl = `${siteUrl}/resources/law-firm-seo-audit-checklist`;
@@ -66,7 +69,7 @@ export default function LawFirmChecklistPage() {
         description: DESCRIPTION,
         inLanguage: "en-US",
         isAccessibleForFree: true,
-        author: { "@type": "Person", name: "Mubashar Sharif", url: siteUrl },
+        author: founderRef,
         publisher: { "@id": `${siteUrl}/#organization` },
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: [
@@ -135,12 +138,29 @@ export default function LawFirmChecklistPage() {
             site open in another tab and tick what is genuinely true — not what you intended to do.
             Your progress is saved in this browser, so you can leave and come back. When you are
             done, the unticked <strong>fix first</strong> items are your quarter. Print or save it as
-            a PDF at any point using the button in the bar above.
+            a PDF at any point using the button in the bar above. For how the work is done, see{" "}
+            <Link href="/services/law-firm-seo" className="font-semibold underline">
+              law firm SEO
+            </Link>{" "}
+            and the{" "}
+            <Link href="/locations" className="font-semibold underline">
+              city and state pages
+            </Link>
+            .
           </p>
         </div>
       </div>
 
-      <ChecklistClient />
+      {/* Same storage key as the old page-specific client, so progress people
+          saved before the move to the shared workbook is kept. */}
+      <ChecklistWorkbook
+        pillars={CHECKLIST_PILLARS}
+        storageKey="sp-law-firm-checklist-v1"
+        closerTitle="Ran the checklist and want a second pair of eyes?"
+        closerBody="This is the same audit I run, written out so you can run it yourself — no email required, and it stays free whether or not we ever speak. If you would rather I ran it against your firm and the three competitors above you, that is the offer below."
+        ctaLabel={OFFER_CTA_BY_PERSONA["law-firm"]}
+        disclaimer="Nothing here is legal advice, and bar advertising rules differ by jurisdiction. Where a check touches testimonials, case results or required disclaimers, confirm the position with your own state bar before publishing."
+      />
     </main>
   );
 }
