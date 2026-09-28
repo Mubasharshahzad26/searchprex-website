@@ -16,6 +16,7 @@ import { ArrowRight, Info, MapPin, Scale, Sparkles } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 import {
   AnswerCapsules,
@@ -330,6 +331,8 @@ export default async function IndustryPage({
           </div>
         </Section>
       ) : null}
+
+      <WhySearchPrex variant="law" service={`${page.name.toLowerCase()} SEO`} tone="white" />
 
       {/* AUTHOR · E-E-A-T */}
       <Section width="narrow" tight>

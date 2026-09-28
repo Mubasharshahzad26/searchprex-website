@@ -38,6 +38,7 @@ import {
   type CityPage,
 } from "@/lib/city-pages";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import GuideMagnet from "@/components/GuideMagnet";
 import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 import { findPracticePage, getLocationState } from "@/lib/locations";
@@ -324,6 +325,8 @@ export default async function CityPage({
             />
           </div>
         </Section>
+
+        <WhySearchPrex variant="law" service={`law firm SEO in ${page.city}`} tone="white" />
 
         {/* ── FAQ ── */}
         <Section width="reading">

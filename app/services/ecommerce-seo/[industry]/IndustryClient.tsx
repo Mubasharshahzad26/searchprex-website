@@ -17,6 +17,7 @@ import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES, getEcommerceIndustry } from "@/lib/ecommerce-industries";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
@@ -250,6 +251,8 @@ export default function IndustryClient({ slug, guide }: { slug: string; guide: G
       <Section tight>
         <GuideMagnet guide={guide} source={`ecommerce-seo/${industry.slug}`} eyebrow="Failed one of those checks? Free playbook" />
       </Section>
+
+      <WhySearchPrex variant="ecommerce" service={`${industry.name} SEO`} />
 
       {/* 07 — PRICE · Desire */}
       {ECOM_PLAN ? (

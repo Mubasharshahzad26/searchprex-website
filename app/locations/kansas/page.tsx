@@ -90,7 +90,7 @@ const whyPoints = [
   { title: "Attorney-Specific E-E-A-T", body: "Every page is built to Google's legal YMYL standards — credential signals, authoritative content, and practitioner-led copy. No thin, mass-produced pages." },
   { title: "Map Pack Optimization", body: "We optimize and actively manage your Google Business Profile to compete for a top-3 local position in the cities you actually serve." },
   { title: "Senior-Executed, No Outsourcing", body: "Strategy, content, and technical work are handled in-house by the founder — never handed off to juniors or overseas freelancers." },
-  { title: "Transparent Reporting", body: "Monthly reports on rankings, organic traffic, GBP performance, and lead attribution — money metrics, no vanity filler." },
+  { title: "Transparent Reporting", body: "A report every Monday on rankings, organic traffic, Business Profile performance and leads — money metrics, no vanity filler." },
 ];
  
 const services = [

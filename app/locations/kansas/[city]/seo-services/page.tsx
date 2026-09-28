@@ -12,6 +12,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import ProofImage from "@/components/ProofImage";
 import {
   AuthorCard,
@@ -383,6 +384,8 @@ export default async function KansasSeoServicesPage({ params }: { params: Promis
           </Link>
         </p>
       </Section>
+
+      <WhySearchPrex variant="local" service={`SEO in ${place}`} tone="white" />
 
       {/* AUTHOR */}
       <Section width="narrow" tight>

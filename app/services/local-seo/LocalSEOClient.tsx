@@ -22,6 +22,7 @@ import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
@@ -246,7 +247,7 @@ export default function LocalSEOClient({ guide }: { guide: Guide }) {
       {/* 08 — COMPARE · Desire */}
       <Section tone="surface">
         <SectionHeading
-          eyebrow="Why SearchPrex"
+          eyebrow="Compare"
           title="Compare the approaches"
           intro="Most local businesses bounce between Google Ads and generic agencies. Here is what lasts."
         />
@@ -256,6 +257,8 @@ export default function LocalSEOClient({ guide }: { guide: Guide }) {
           caption="Local SEO with SearchPrex compared with Google Ads and a generic SEO agency"
         />
       </Section>
+
+      <WhySearchPrex variant="local" service="local SEO" tone="white" />
 
       {/* INDUSTRIES · hub and spoke to each trade page, each with its own result */}
       <Section>

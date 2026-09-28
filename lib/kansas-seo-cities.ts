@@ -35,7 +35,7 @@ export interface KansasSeoCity {
 
 const NO_OFFICE = (city: string): QA => ({
   q: `Do you have an office in ${city}?`,
-  a: `No. SearchPrex is a founder-led agency that works remotely with businesses across the United States, and I will not pretend otherwise with a borrowed ${city} address. You get me on a call booked at a time that suits you, a written plan, and monthly reports you can check against your own Google Search Console and Business Profile data.`,
+  a: `No. SearchPrex is a founder-led agency that works remotely with businesses across the United States, and I will not pretend otherwise with a borrowed ${city} address. You get me on a call booked at a time that suits you, a written plan, and a Monday report you can check against your own Google Search Console and Business Profile data.`,
 });
 
 const NO_KANSAS_RESULTS: QA = {
@@ -45,7 +45,7 @@ const NO_KANSAS_RESULTS: QA = {
 
 const TIMELINE = (area: string): QA => ({
   q: `How long does SEO take for a ${area} business?`,
-  a: "Fixes to your Business Profile and site can show in Search Console within weeks. Competitive map pack and organic positions usually take several months, and nobody can honestly guarantee a position. You get a monthly report showing what moved and what did not.",
+  a: "Fixes to your Business Profile and site can show in Search Console within weeks. Competitive map pack and organic positions usually take several months, and nobody can honestly guarantee a position. You get a report every Monday showing what moved and what did not.",
 });
 
 function withCost(faqs: QA[], city: string): QA[] {

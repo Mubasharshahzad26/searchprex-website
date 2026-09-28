@@ -15,6 +15,7 @@ import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { LOCAL_INDUSTRIES, getLocalIndustry } from "@/lib/local-industries";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
@@ -226,6 +227,8 @@ export default function IndustryClient({ slug, guide }: { slug: string; guide: G
       <Section tight>
         <GuideMagnet guide={guide} source={`local-seo/${industry.slug}`} eyebrow={`Free for ${industry.name.toLowerCase()} businesses`} />
       </Section>
+
+      <WhySearchPrex variant="local" service={`${industry.name} SEO`} />
 
       {/* 07 — PRICE · Desire */}
       {LOCAL_PLAN ? (

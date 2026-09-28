@@ -506,8 +506,8 @@ export const kansasCities: KansasCity[] = [
         a: "Through hyper-local content and geo-targeted GBP optimization, we signal to Google that your firm specifically serves Lenexa — giving you a local authority advantage over firms in neighboring cities.",
       },
       {
-        q: "Do you provide monthly SEO reporting?",
-        a: "Yes. Every client receives a monthly report covering keyword rankings, organic traffic, GBP performance, and lead attribution — fully transparent with no filler metrics.",
+        q: "How do you report on SEO progress?",
+        a: "Every client gets a plain-English report every Monday covering rankings, organic traffic, Business Profile performance and leads — what changed, what moved and what is next.",
       },
     ],
   },

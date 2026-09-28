@@ -28,6 +28,7 @@ import { ArrowRight, Search, Wrench } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ProofImage from "@/components/ProofImage";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import {
   AnswerCapsules,
   AuthorCard,
@@ -277,7 +278,7 @@ export default function TechnicalSEOClient() {
       {/* 08 — COMPARE · Desire */}
       <Section tone="surface">
         <SectionHeading
-          eyebrow="Why SearchPrex"
+          eyebrow="Compare"
           title="Compare the approaches"
           intro="Technical SEO usually stalls between an agency that only writes reports and an in-house team whose tickets never get prioritised."
         />
@@ -287,6 +288,8 @@ export default function TechnicalSEOClient() {
           caption="Technical SEO with SearchPrex compared with a generic agency and an in-house team"
         />
       </Section>
+
+      <WhySearchPrex variant="technical" service="technical SEO" tone="white" />
 
       {/* 09 — AI SEARCH · AEO / GEO */}
       <Section>

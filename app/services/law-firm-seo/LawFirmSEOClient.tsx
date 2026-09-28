@@ -25,6 +25,7 @@ import Link from "next/link";
 import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
@@ -231,7 +232,7 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
       {/* COMPARISON */}
       <Section tone="surface">
         <SectionHeading
-          eyebrow="Why SearchPrex"
+          eyebrow="Compare"
           title="Compare the approaches"
           intro="Most law firms cycle between Google Ads and generic SEO agencies. Here's what actually delivers durable legal visibility."
         />
@@ -241,6 +242,8 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
           caption="Law firm SEO with SearchPrex compared with Google Ads and a generic SEO agency"
         />
       </Section>
+
+      <WhySearchPrex variant="law" service="law firm SEO" tone="white" />
 
       {/* PROCESS */}
       <Section id="approach">

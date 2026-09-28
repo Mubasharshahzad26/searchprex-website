@@ -19,6 +19,7 @@ import {
 import { caseStudies, detailUrl, type CaseStudy } from "@/app/case-studies/data";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
@@ -370,6 +371,8 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
           badges={["Semrush certified", "+92 305 9158010"]}
         />
       </Section>
+
+      <WhySearchPrex variant="ecommerce" service="ecommerce SEO" />
 
       {/* ── BY PLATFORM & NICHE ── hub and spoke to each sub-page */}
       <Section>

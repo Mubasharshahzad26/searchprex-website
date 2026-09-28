@@ -12,6 +12,7 @@ import { getKansasSeoCity } from "@/lib/kansas-seo-cities";
 import { organizationRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
+import WhySearchPrex from "@/components/WhySearchPrex";
 import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
  
 const GREEN = "#3eb489";
@@ -378,6 +379,8 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
           </p>
         </div>
       </section>
+
+      <WhySearchPrex variant="law" service={`law firm SEO in ${city.name}, KS`} tone="white" />
 
       {/* ── FAQ (native <details> — no JS, server-safe, FAQ schema above) ── */}
       <section className="bg-[#eaecf3] px-4 py-24">

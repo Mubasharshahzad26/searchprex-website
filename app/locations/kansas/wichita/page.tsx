@@ -70,7 +70,7 @@ const SERVICES = [
   ["Practice-area content", "Pages written for real Wichita searchers — not thin, templated filler."],
   ["Technical SEO", "Site speed, mobile, schema, and indexing fixes so Google can find and trust your pages."],
   ["Local citations & links", "Consistent listings across legal directories and local sources that signal authority."],
-  ["Transparent reporting", "Clear monthly reporting on rankings, calls, and leads. You see what your money does."],
+  ["Transparent reporting", "A plain-English report every Monday on rankings, calls, and leads. You see what your money does."],
 ];
  
 const PRACTICE_AREAS = [
@@ -100,7 +100,7 @@ const FAQS = [
   ["Do you guarantee first-page rankings?", "No \u2014 and you should be wary of anyone who does. Google's results aren't for sale. What we guarantee is a clear strategy, honest reporting, and work focused on the rankings and calls that actually grow your practice."],
   ["What makes local SEO different for Wichita law firms?", "Wichita's demand is shaped by its economy and community \u2014 aerospace and manufacturing injuries, McConnell military families, and suburb-level searches in Derby and Andover. Generic national tactics miss this. Local relevance is the whole game."],
   ["Do you only work with law firms?", "We specialize in local service businesses, including law firms. That focus means we already understand legal directories, practice-area intent, and the trust signals that matter in your market."],
-  ["How do you measure results?", "Transparent monthly reporting on rankings, map-pack visibility, calls, and form leads \u2014 the metrics tied to actual cases, not vanity numbers."],
+  ["How do you measure results?", "A report every Monday on rankings, map-pack visibility, calls, and form leads \u2014 the metrics tied to actual cases, not vanity numbers."],
   ["Which areas around Wichita do you cover?", "All of the Wichita metro and Sedgwick County \u2014 downtown, east and west Wichita, Derby, Andover, Bel Aire, Park City, Maize, Goddard, and Haysville."],
 ];
  
