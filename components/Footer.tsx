@@ -56,7 +56,8 @@ const resourceLinks = [
 const toolLinks = [
   { href: "/tools", label: "All Free SEO Tools" },
   { href: "/tools/serp-checker", label: "SERP Checker" },
-  { href: "/tools/keyword-research", label: "AI Keyword Research" },
+  { href: "/tools/keyword-research", label: "Law Firm Keyword Research" },
+  { href: "/tools/serp-simulator", label: "SERP Simulator" },
   // Same reasoning as the tools above: this one's only other crawlable links
   // sit 90% of the way down the home page and on one service page.
   { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },

@@ -104,9 +104,13 @@ const navLinks: NavLink[] = [
       // Law Firm Scorecard is out of the menu until Google Search grounding is
       // available on the Gemini keys: without it the "audit" of a named firm
       // would be written from nothing. See GroundingUnavailableError.
+      { href: "/tools/keyword-research", label: "Law Firm Keyword Research" },
+      { href: "/tools/serp-simulator",  label: "SERP Simulator" },
       { href: "/ai-search",             label: "AI Search" },
+      // "Preview", not "New": without the DataForSEO connection it shows the
+      // results page for a query but no live position (see app/tools/ToolsClient).
+      { href: "/tools/serp-checker",    label: "SERP Checker", badge: "Preview" },
       { href: "/tools",                 label: "All Tools" },
-      { href: "/tools/serp-checker",    label: "SERP Checker", badge: "New" },
     ],
   },
 ];

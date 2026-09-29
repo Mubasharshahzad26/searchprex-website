@@ -11,6 +11,7 @@
 // glance, the way a chart palette identifies a series. They never appear on
 // headings, links or buttons, which all come from the design tokens.
 
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -264,6 +265,36 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         </div>
       </Section>
 
+      {/* ── FREE CHECKLISTS — the ungated resources, next to the tools ── */}
+      <Section>
+        <SectionHeading
+          eyebrow="Free checklists"
+          title="Checklists you can run today"
+          intro="No email, no download wall. Tick what is true for your site; progress is saved in your browser."
+        />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { href: "/resources/law-firm-seo-audit-checklist", title: "Law firm SEO audit", body: "40 checks: Map Pack, organic, AI visibility, E-E-A-T and practice-area content." },
+            { href: "/resources/google-business-profile-checklist", title: "Google Business Profile", body: "23 checks for local businesses, written to Google's own rules." },
+            { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO", body: "25 checks for indexing, product pages, schema and speed." },
+            { href: "/resources/technical-seo-checklist", title: "Technical SEO audit", body: "26 checks you can run with free Google tools." },
+          ].map((c) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className={`group ${radius.card} border bg-white p-5 transition-all hover:shadow-md`}
+              style={{ borderColor: color.border }}
+            >
+              <p className="text-sm font-black" style={{ color: color.ink }}>{c.title}</p>
+              <p className={`${text.caption} mt-1.5`} style={{ color: color.muted }}>{c.body}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold" style={{ color: color.primary }}>
+                Open the checklist <ArrowRight className="h-3 w-3" aria-hidden />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
       {/* ── FOUNDER E-E-A-T ── */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
@@ -329,6 +360,15 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
           </div>
         </div>
       </Section>
+
+      <ArticleLeadMagnet
+        variant="bottom"
+        source="tools"
+        copy={{
+          headline: "A tool found a problem? Send me your URL and I'll look at the whole site.",
+          sub: "A written look at your site, your Business Profile and the competitors above you — from me, within 24 hours.",
+        }}
+      />
 
       {/* ── FLOATING CTA ── */}
       <Link

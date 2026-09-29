@@ -3,6 +3,7 @@
 // SERP Checker UI. Styling follows ToolsClient.tsx: navy #0a0f2e, purple #534AB7,
 // green #3eb489 on the #eeeef5 page background, framer-motion fade-ups, lucide icons.
 
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -457,6 +458,16 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
           </div>
         </div>
       </section>
+
+      {/* ── Tear-down form — the offer, in place, instead of only a link ── */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source="serp-checker"
+        copy={{
+          headline: "Want your real position, not a preview? Send me your URL.",
+          sub: "I'll check where you actually rank for your key searches, who is above you and why, and send back what to fix first — within 24 hours.",
+        }}
+      />
 
       {/* ── NicheSEO Pro banner ── */}
       <section className="py-16 border-t border-[#e5e7eb]">
