@@ -13,9 +13,9 @@ const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/tools/keyword-research`;
 
 const baseMetadata: Metadata = {
-  title: "Free Law Firm Keyword Tool — Volume & CPC by US State",
+  title: "Keyword Research Tool for Lawyers, by State",
   description:
-    "Pick your practice area and state. See the keywords clients search, what each click costs on Google Ads, and how hard it is to rank. Built for personal injury, family law, criminal defense and more.",
+    "Pick a practice area and US state to get the keywords clients search and the page to build for each. Free. Volume and CPC show once live data is connected.",
   keywords: [
     "law firm keyword research",
     "attorney keyword tool",
@@ -32,9 +32,9 @@ const baseMetadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Free Law Firm Keyword Tool — Volume & CPC by US State | SearchPrex",
+    title: "Keyword Research Tool for Lawyers, by State | SearchPrex",
     description:
-      "Practice area × state keyword data for attorneys: real search volume, keyword difficulty and Google Ads CPC. No signup.",
+      "Pick a practice area and US state to get the keywords clients search and the page to build for each. Free. Volume and CPC show once live data is connected.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
@@ -43,7 +43,7 @@ const baseMetadata: Metadata = {
     card: "summary_large_image",
     title: "Free Law Firm Keyword Tool | SearchPrex",
     description:
-      "Practice area × state keyword data for attorneys: real volume, difficulty and CPC.",
+      "The keywords clients search, by practice area and US state, with the page to build for each.",
   },
 };
 
@@ -60,7 +60,7 @@ export default function Page() {
     applicationCategory: "BusinessApplication",
     operatingSystem: "Any",
     description:
-      "Free keyword research for US law firms: pick a practice area and state to see search volume, keyword difficulty and Google Ads CPC for the keywords clients actually search.",
+      "Free keyword research for US law firms: pick a practice area and state to see the keywords clients search and the page to build for each. Search volume, difficulty and CPC appear when licensed data is connected.",
     audience: {
       "@type": "Audience",
       audienceType: "Law firms and attorneys in the United States",

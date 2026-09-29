@@ -28,6 +28,8 @@ import { generateJson } from "@/lib/llm";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
+/** How long the optional content-angle enrichment may take. */
+const ANGLES_TIMEOUT_MS = 15_000;
 
 const OVERVIEW_ENDPOINT =
   "https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_overview/live";
@@ -105,10 +107,14 @@ Return ONLY this JSON, no fence:
 {"angles":[{"keyword":"exact keyword from the list","contentAngle":"one short sentence"}]}`;
 
   try {
-    const out = await generateJson<{ angles?: Array<{ keyword?: unknown; contentAngle?: unknown }> }>(
-      prompt,
-      0.3
-    );
+    // Bounded: with no DataForSEO credentials this call is the whole response,
+    // and an unbounded model call ran past maxDuration, so visitors got a
+    // FUNCTION_INVOCATION_TIMEOUT instead of their keywords. After the limit
+    // the keywords are returned without angles, which the UI handles.
+    const out = await Promise.race([
+      generateJson<{ angles?: Array<{ keyword?: unknown; contentAngle?: unknown }> }>(prompt, 0.3),
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), ANGLES_TIMEOUT_MS)),
+    ]);
     const map = new Map<string, string>();
     for (const a of out?.angles ?? []) {
       if (typeof a?.keyword === "string" && typeof a?.contentAngle === "string") {
@@ -187,7 +193,7 @@ export async function POST(req: NextRequest) {
         area.label,
         state,
         keywords,
-        "Live search volume and CPC aren't connected yet — those come from licensed data, never from AI. The keywords and content angles below are real.",
+        "Live search volume and CPC aren't connected yet — those come from licensed data, never from AI. The keywords below are the searches clients use; volume and CPC will appear here once the data is connected.",
         await anglesPromise
       )
     );

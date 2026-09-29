@@ -49,12 +49,12 @@ export const SERP_FAQS = [
 const baseMetadata: Metadata = {
   // No "| SearchPrex" suffix here — app/layout.tsx applies
   // title.template = "%s | SearchPrex" and would double it.
-  title: "Free SERP Checker — Check Your Google Ranking Position",
+  title: "Free SERP Checker: See Who Ranks and Why",
   // Describes what a visitor actually gets today. Promising "your exact position
   // in the top 100" while the tool runs in preview mode buys a click and loses
   // the trust it was bought with.
   description:
-    "See which SERP features (AI Overview, local pack, People Also Ask) own any Google query and what the top 10 looks like. Free, no signup — plus a founder-run check of your real ranking within 24 hours.",
+    "See which SERP features own a Google query and what the top 10 looks like. Free, no signup, plus a founder-run check of your real ranking in 24 hours.",
   alternates: { 
     canonical: `${SITE}/tools/serp-checker`,
     languages: {
@@ -63,7 +63,7 @@ const baseMetadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Free SERP Checker — Check Your Google Ranking Position | SearchPrex",
+    title: "Free SERP Checker: See Who Ranks and Why | SearchPrex",
     description:
       "See which SERP features own any Google query, what the top 10 looks like, and get your real ranking checked free within 24 hours.",
     url: `${SITE}/tools/serp-checker`,

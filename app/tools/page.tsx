@@ -27,9 +27,9 @@ export const FAQS = [
 ];
  
 const baseMetadata: Metadata = {
-  title: "Free SEO Tools — Schema Generator, SERP Simulator & More",
+  title: "Free SEO Tools: Keywords, Schema, SERP Preview",
   description:
-    "Free SEO tools built by a practicing SEO analyst: JSON-LD schema markup generator, SERP simulator, meta tag analyzer, robots.txt tester and more. No signup, no paywalls.",
+    "Free SEO tools from a working SEO: law firm keyword research, a JSON-LD schema generator, a SERP simulator and a SERP checker. No signup, no paywall.",
   alternates: { 
     canonical: `${SITE}/tools`,
     languages: {
