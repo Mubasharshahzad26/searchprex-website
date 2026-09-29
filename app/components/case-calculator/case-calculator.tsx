@@ -179,7 +179,7 @@ export default function CaseCalculator() {
         <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
           <Calculator className="size-3.5" /> SearchPrex · Personal Injury Tool
         </div>
-        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Lost Case Calculator</h1>
+        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Personal Injury Lost Case Calculator</h1>
         <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
           See how much revenue your firm is leaking from SEO visibility gaps and slow client intake.
         </p>
@@ -372,9 +372,9 @@ export default function CaseCalculator() {
                     />
                   </div>
                   <p className="text-[11px] leading-relaxed text-muted-foreground">
-                    These are directional estimates based on industry benchmarks and the numbers you entered — not a
-                    guarantee of results. Intake-loss factors come from lead-response research (faster response and 24/7
-                    coverage sign meaningfully more cases). Adjust the sliders to match your own data.
+                    These are directional estimates built from the numbers you entered and the calculator&apos;s default
+                    assumptions — not a guarantee of results. The click share, lead rate and intake-loss percentages are
+                    starting assumptions, not measured data. Adjust them to match your own.
                   </p>
                 </div>
               )}
@@ -385,17 +385,17 @@ export default function CaseCalculator() {
               {leadStatus === 'success' ? (
                 <div className="flex flex-col items-center py-2 text-center">
                   <CheckCircle2 className="size-9 text-primary" />
-                  <h3 className="mt-2 text-base font-bold">Roadmap on the way! 🎉</h3>
+                  <h3 className="mt-2 text-base font-bold">Thanks — your tear-down is on its way</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    We&apos;ll map exactly how to plug these leaks for your firm and send your free 30-day roadmap.
+                    I&apos;ll look at your site, Business Profile and intake path and send back what to fix first, within 24 hours.
                   </p>
                 </div>
               ) : (
                 <>
-                  <h3 className="text-base font-bold">Plug these leaks — free 30-day roadmap</h3>
+                  <h3 className="text-base font-bold">Want to know which leak to fix first?</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Get a tailored plan to close your SEO visibility gap and tighten intake — built for your practice area
-                    and market.
+                    Send your details and I&apos;ll look at your site, Business Profile and intake path for your practice area
+                    and market, and send back what to fix first — free, within 24 hours.
                   </p>
                   <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                     <input
@@ -430,7 +430,7 @@ export default function CaseCalculator() {
                       <Loader2 className="size-4 animate-spin" />
                     ) : (
                       <>
-                        Get my free 30-day roadmap <ArrowRight className="size-4" />
+                        Get my free tear-down <ArrowRight className="size-4" />
                       </>
                     )}
                   </button>
@@ -439,7 +439,7 @@ export default function CaseCalculator() {
             </div>
  
             <p className="px-1 text-center text-[11px] leading-relaxed text-muted-foreground">
-              Estimates are directional and based on the inputs above plus industry benchmarks. SearchPrex does not
+              Estimates are directional and based on the inputs above plus the calculator&apos;s default assumptions. SearchPrex does not
               guarantee specific rankings, case volumes, or outcomes.
             </p>
           </div>
