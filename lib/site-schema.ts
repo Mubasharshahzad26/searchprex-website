@@ -130,7 +130,7 @@ const organization = {
   },
 };
 
-const founder = {
+export const founder = {
   "@type": "Person",
   "@id": FOUNDER_ID,
   name: "Mubashar Sharif",

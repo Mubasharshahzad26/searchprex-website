@@ -21,7 +21,7 @@ import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import WhySearchPrex from "@/components/WhySearchPrex";
 import { CardGrid, FaqList, FeatureCard, Section, SectionHeading } from "@/components/layout";
 import { getPageSEO } from "@/lib/admin-seo";
-import { SITE, founderRef, websiteRef } from "@/lib/site-schema";
+import { SITE, founder, websiteRef } from "@/lib/site-schema";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
 
 const PAGE_URL = `${SITE}/experts`;
@@ -125,7 +125,7 @@ export default function ExpertsPage() {
         name: TITLE,
         description: DESCRIPTION,
         isPartOf: websiteRef,
-        mainEntity: founderRef,
+        mainEntity: founder,
         dateModified: "2026-09-29T00:00:00Z",
       },
       {
