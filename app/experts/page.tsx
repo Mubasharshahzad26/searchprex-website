@@ -126,7 +126,7 @@ export default function ExpertsPage() {
         description: DESCRIPTION,
         isPartOf: websiteRef,
         mainEntity: founderRef,
-        dateModified: "2026-09-28",
+        dateModified: "2026-09-29T00:00:00Z",
       },
       {
         "@type": "BreadcrumbList",
