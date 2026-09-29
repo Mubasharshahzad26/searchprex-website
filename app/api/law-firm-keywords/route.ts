@@ -29,7 +29,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 /** How long the optional content-angle enrichment may take. */
-const ANGLES_TIMEOUT_MS = 15_000;
+const ANGLES_TIMEOUT_MS = 25_000;
 
 const OVERVIEW_ENDPOINT =
   "https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_overview/live";

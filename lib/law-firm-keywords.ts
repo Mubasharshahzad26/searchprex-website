@@ -29,7 +29,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     label: "Personal Injury & Car Accident",
     terms: ["personal injury", "car accident", "truck accident", "slip and fall"],
     blurb:
-      "The most expensive clicks in Google Ads — often $100–250 each. If you're not ranking organically here, you're renting every case.",
+      "Among the most expensive practice areas to advertise in on Google Ads. If you're not ranking organically here, you're renting every case.",
   },
   {
     id: "family-law",

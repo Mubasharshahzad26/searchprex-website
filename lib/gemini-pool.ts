@@ -22,6 +22,11 @@ import { db } from '@/lib/db';
 
 const DEFAULT_MODEL = 'gemini-flash-lite-latest';
 const FALLBACK_MODEL = 'gemini-flash-latest';
+
+/** The other of the two pool models, for a one-time switch when one is overloaded. */
+function alternateModel(model: string): string {
+  return model === DEFAULT_MODEL ? FALLBACK_MODEL : DEFAULT_MODEL;
+}
 const KEYS_CACHE_TTL_MS = 5 * 60 * 1000;
 const REQUEST_TIMEOUT_MS = 120_000;
 
@@ -223,6 +228,7 @@ export async function generateWithPool(
   let model = opts.model ?? DEFAULT_MODEL;
   const maxAttempts = Math.min(Math.max(keys.length, 4), 12);
   let lastErr: Error | undefined;
+  let switchedOn503 = false;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const key = pickKey(keys);
@@ -254,6 +260,17 @@ export async function generateWithPool(
       if (status === 404 && model !== FALLBACK_MODEL) {
         console.warn(`[gemini-pool] ${model} returned 404; falling back to ${FALLBACK_MODEL}.`);
         model = FALLBACK_MODEL;
+        continue;
+      }
+
+      // A model under load answers 503 "high demand" on every key for a while,
+      // and backing off turned a 2-second call into a minute. Switch to the
+      // other model once instead.
+      if (status === 503 && !switchedOn503) {
+        const next = alternateModel(model);
+        console.warn(`[gemini-pool] ${model} returned 503; switching to ${next}.`);
+        model = next;
+        switchedOn503 = true;
         continue;
       }
 
@@ -381,6 +398,7 @@ export async function generateContentWithPool(req: GeminiContentRequest): Promis
   let model = req.model ?? DEFAULT_MODEL;
   const maxAttempts = Math.min(Math.max(keys.length, 4), 12);
   let lastErr: Error | undefined;
+  let switchedOn503 = false;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const key = pickKey(keys);
@@ -413,6 +431,17 @@ export async function generateContentWithPool(req: GeminiContentRequest): Promis
       if (status === 404 && model !== FALLBACK_MODEL) {
         console.warn(`[gemini-pool] ${model} returned 404; falling back to ${FALLBACK_MODEL}.`);
         model = FALLBACK_MODEL;
+        continue;
+      }
+
+      // A model under load answers 503 "high demand" on every key for a while,
+      // and backing off turned a 2-second call into a minute. Switch to the
+      // other model once instead.
+      if (status === 503 && !switchedOn503) {
+        const next = alternateModel(model);
+        console.warn(`[gemini-pool] ${model} returned 503; switching to ${next}.`);
+        model = next;
+        switchedOn503 = true;
         continue;
       }
 

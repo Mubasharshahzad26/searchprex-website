@@ -86,7 +86,7 @@ export default function KeywordResearchClient() {
   const live = data?.source === "dataforseo";
 
   return (
-    <main>
+    <div>
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },
@@ -100,12 +100,12 @@ export default function KeywordResearchClient() {
         eyebrow="Free Law Firm Keyword Tool"
         title={
           <>
-            What your practice area is
+            The keywords your clients search,
             <br />
-            <Accent>worth in your state.</Accent>
+            <Accent>state by state.</Accent>
           </>
         }
-        subtitle="Pick your practice area and state. You get the keywords clients actually search, what each is worth per click on Google Ads, and how hard it is to rank — so you can see exactly what you're paying for instead of earning."
+        subtitle="Pick your practice area and state. You get the keywords clients search in that state and, for each one, the page worth building to win it. Search volume, difficulty and Google Ads CPC appear here once licensed data is connected — never guessed."
         actions={
           <form
             onSubmit={(e) => {
@@ -325,7 +325,7 @@ export default function KeywordResearchClient() {
         {!data && !loading && !error ? (
           <div className="py-12 text-center">
             <p className={text.lead} style={{ color: color.muted }}>
-              Pick a practice area and state to see what it&apos;s worth.
+              Pick a practice area and state to see the keywords clients search there.
             </p>
           </div>
         ) : null}
@@ -361,7 +361,7 @@ export default function KeywordResearchClient() {
           </p>
         </div>
       </Section>
-    </main>
+    </div>
   );
 }
 
