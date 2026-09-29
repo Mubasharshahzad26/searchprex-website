@@ -1,5 +1,48 @@
 import type { Metadata } from "next";
-import AIToolClient from "./AIToolClient";
+import Link from "next/link";
+import AiSearch from "@/app/components/ai-search/ai-search";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import { CardGrid, FaqList, FeatureCard, Section, SectionHeading } from "@/components/layout";
+
+const STEPS = [
+  { step: "01", title: "Ask in plain English", body: "Type the question the way you would ask a colleague — about your law firm, your store or your local business." },
+  { step: "02", title: "Get a straight answer", body: "The answer comes back in plain English, tuned to the kind of business the question is about, with links to the SearchPrex guides that go deeper." },
+  { step: "03", title: "Know where it came from", body: "When live Google Search checking is available, the answer is checked against it and says so. Otherwise it is labelled as general SEO knowledge, not live search." },
+];
+
+const GUIDES = [
+  { href: "/services/law-firm-seo", title: "Law firm SEO", body: "Practice-area pages, the map pack and bar rules." },
+  { href: "/blog/keyword-research-for-law-firms", title: "Keyword research for law firms", body: "An eight-step method using free data." },
+  { href: "/services/local-seo", title: "Local SEO", body: "Business Profile, reviews and service-area pages." },
+  { href: "/resources/google-business-profile-checklist", title: "Business Profile checklist", body: "23 checks, written to Google's rules." },
+  { href: "/services/ecommerce-seo", title: "Ecommerce SEO", body: "Indexing and product content for large catalogues." },
+  { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks from real store recoveries." },
+  { href: "/resources/technical-seo-checklist", title: "Technical SEO checklist", body: "26 checks you can run with free Google tools." },
+  { href: "/resources/news", title: "SEO news", body: "Google updates, dated and sourced." },
+];
+
+const FAQS = [
+  {
+    q: "Is the AI SEO answer engine free?",
+    a: "Yes. There is no login, signup or credit card. Ask as many SEO questions as you like.",
+  },
+  {
+    q: "Where do the answers come from?",
+    a: "From an AI model given SEO guidance for law firms, ecommerce stores and local businesses. When live Google Search checking is available the answer is checked against it and labelled that way; otherwise it is labelled as general SEO knowledge, not live search.",
+  },
+  {
+    q: "Can it check my website or my rankings?",
+    a: "No. It answers questions; it does not crawl your site or look up your positions. For a specific site, use the SERP checker or ask for the free tear-down, where I review your site myself.",
+  },
+  {
+    q: "How accurate are the answers?",
+    a: "They are general guidance and can be incomplete or out of date, like any AI answer. Check anything important against Google's own documentation, and treat the answer as a starting point rather than a decision.",
+  },
+  {
+    q: "What happens to the question I type?",
+    a: "It is sent to the AI model to generate the answer and is not saved by SearchPrex. Your details are only stored if you choose to fill in the form after an answer.",
+  },
+];
 
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/ai-search";
@@ -15,7 +58,7 @@ const PAGE_URL = "https://www.searchprex.com/ai-search";
 // profile — none of which exists here or ever did. Searchers arriving on that
 // promise found a single question box and left.
 const baseMetadata: Metadata = {
-  title: "Ask Any SEO Question — Free AI SEO Answer Engine",
+  title: "Free AI SEO Answer Engine: Ask Any Question",
   description:
     "Ask any SEO question and get an instant, plain-English AI answer tuned for US law firms, ecommerce stores & local businesses. Free, no login.",
   keywords: [
@@ -32,7 +75,7 @@ const baseMetadata: Metadata = {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Ask Any SEO Question — Free AI SEO Answer Engine | SearchPrex",
+    title: "Free AI SEO Answer Engine: Ask Any Question | SearchPrex",
     description:
       "Instant AI answers to any SEO question, tuned for law firms, ecommerce stores, and local businesses across the US.",
     url: PAGE_URL,
@@ -42,7 +85,7 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ask Any SEO Question — Free AI SEO Answer Engine | SearchPrex",
+    title: "Free AI SEO Answer Engine: Ask Any Question | SearchPrex",
     description:
       "Instant AI answers to any SEO question. Free, no login.",
   },
@@ -88,7 +131,7 @@ export default function AISearchPage() {
         "@type": "WebPage",
         "@id": `${PAGE_URL}#webpage`,
         url: PAGE_URL,
-        name: "Ask Any SEO Question — Free AI SEO Answer Engine",
+        name: "Free AI SEO Answer Engine: Ask Any Question",
         description:
           "A free AI answer engine for SEO questions. Ask anything about SEO and get an instant, plain-English answer.",
         inLanguage: "en-US",
@@ -144,22 +187,81 @@ export default function AISearchPage() {
           { "@type": "ListItem", position: 2, name: "AI Search", item: PAGE_URL },
         ],
       },
-      // The FAQPage block is gone for now. Its five Q&As all described the
-      // audit tool ("Enter your URL and get results in seconds"), and none of
-      // them appeared anywhere on the page. FAQ markup has to correspond to
-      // FAQ content the visitor can actually see. It comes back with the
-      // visible FAQ section, not before.
+      // Built from the FAQ rendered below, so the markup matches what a
+      // visitor can read.
+      {
+        "@type": "FAQPage",
+        "@id": `${PAGE_URL}#faq`,
+        mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+      },
     ],
   };
 
+  const link = "text-sm font-black text-[#0a0f2e] group-hover:text-[#534AB7]";
+
   return (
-    <>
+    <main id="main-content" className="bg-[#f8f9fc] pt-20">
       <script
         id="ld-ai-search"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <AIToolClient />
-    </>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <AiSearch />
+      </div>
+
+      <Section>
+        <SectionHeading eyebrow="How it works" title="How the AI SEO answer engine works" />
+        <CardGrid columns={3}>
+          {STEPS.map((st) => (
+            <FeatureCard key={st.step} step={st.step} title={st.title} body={st.body} />
+          ))}
+        </CardGrid>
+      </Section>
+
+      <Section tone="surface">
+        <SectionHeading eyebrow="Use it well" title="What it is good for — and what it isn't" />
+        <CardGrid columns={2}>
+          <FeatureCard
+            title="Good for"
+            body="Strategy questions, how a Google feature works, what to fix first on a type of site, and explaining SEO terms in plain English — for law firms, stores and local businesses in the US."
+          />
+          <FeatureCard
+            title="Not for"
+            body="Your live rankings or traffic, anything that needs your own analytics, legal or financial advice, and guarantees. For your specific site, the free tear-down below is the right tool."
+          />
+        </CardGrid>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Go deeper" title="Guides and free checklists" intro="The pages the answers most often point to." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {GUIDES.map((g) => (
+            <Link
+              key={g.href}
+              href={g.href}
+              className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+            >
+              <p className={link}>{g.title}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">{g.body}</p>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="surface" width="reading">
+        <SectionHeading eyebrow="FAQ" title="AI SEO answer engine questions, answered" />
+        <FaqList faqs={FAQS} name="ai-search-faq" />
+      </Section>
+
+      <ArticleLeadMagnet
+        variant="bottom"
+        source="ai-search"
+        copy={{
+          headline: "Want an answer about your own site? Send me your URL.",
+          sub: "A written look at your site, your Business Profile and the competitors above you — from me, within 24 hours.",
+        }}
+      />
+    </main>
   );
 }

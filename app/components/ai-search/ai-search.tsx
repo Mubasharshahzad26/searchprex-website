@@ -28,19 +28,19 @@ const VERTICAL_META: Record<Vertical, { label: string; icon: typeof Globe }> = {
 const CTA_COPY: Record<Vertical, { title: string; sub: string }> = {
   lawfirm: {
     title: 'Get more cases from search',
-    sub: 'Free 30-day SEO roadmap for your firm — practice-area targeting, local visibility, and a higher-converting intake funnel.',
+    sub: 'Send your firm\'s site and I\'ll check your practice-area pages, Business Profile and the firms outranking you — free, within 24 hours.',
   },
   ecommerce: {
     title: 'Turn organic traffic into revenue',
-    sub: 'Free 30-day SEO roadmap for your store — indexation, product & category optimization, and scalable organic growth.',
+    sub: 'Send your store and I\'ll check indexing, product and category pages and the stores outranking you — free, within 24 hours.',
   },
   local: {
     title: 'Get found by nearby customers',
-    sub: 'Free 30-day local SEO roadmap — Google Business Profile, citations, and "near me" visibility.',
+    sub: 'Send your site and I\'ll check your Business Profile, listings and the businesses above you in the map — free, within 24 hours.',
   },
   general: {
     title: 'Want a plan built for your business?',
-    sub: 'Get a free 30-day SEO roadmap from SearchPrex — tailored to your site, niche, and goals.',
+    sub: 'Send your site and I\'ll send back a written look at what is holding it back and what to fix first — free, within 24 hours.',
   },
 }
  
@@ -140,7 +140,7 @@ export default function AiSearch() {
         <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
           <Sparkles className="size-3.5" /> SearchPrex AI · SEO Answer Engine
         </div>
-        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Ask anything about SEO</h1>
+        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Ask any SEO question</h1>
         <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
           Instant AI answers for law firms, ecommerce stores &amp; local businesses.
         </p>
@@ -275,7 +275,7 @@ export default function AiSearch() {
                 <CheckCircle2 className="size-9 text-primary" />
                 <h3 className="mt-2 text-base font-bold">You&apos;re in! 🎉</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  We&apos;ll review your site and send your free 30-day SEO roadmap shortly.
+                  I&apos;ll review your site and send your written tear-down within 24 hours.
                 </p>
               </div>
             ) : (
@@ -321,7 +321,7 @@ export default function AiSearch() {
                     <Loader2 className="size-4 animate-spin" />
                   ) : (
                     <>
-                      Book your free 30-day roadmap <ArrowRight className="size-4" />
+                      Get my free tear-down <ArrowRight className="size-4" />
                     </>
                   )}
                 </button>
