@@ -263,6 +263,184 @@ export const posts = [
     `,
     author: { name: "Mubashar Sharif", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
   },
+  {
+    slug:        "fix-crawled-currently-not-indexed-ecommerce",
+    category:    "E-commerce SEO",
+    subcategory: "Indexing",
+    title:       "How to Fix 'Crawled – Currently Not Indexed' on Product Pages: Ecommerce Recovery Guide",
+    excerpt:     "Struggling with product pages deindexed in Search Console? Learn the 5 technical culprits behind mass ecommerce deindexing and our step-by-step recovery framework.",
+    readTime:    "12-minute read",
+    date:        "September 29, 2026",
+    stat:        { value: "+202%", label: "Indexed SKUs" },
+    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    tags:        ["crawled currently not indexed", "e-commerce seo", "product pages", "technical seo", "indexing recovery"],
+    toc: [
+      "What 'Crawled – Currently Not Indexed' actually means",
+      "5 technical culprits behind mass product deindexing",
+      "The 5-step indexing recovery framework",
+      "Platform-specific fixes: Shopify vs WooCommerce",
+      "Case study results: 35,000-SKU recovery",
+      "Frequently asked questions",
+      "Action checklist for this week",
+    ],
+    content: `
+      <div class="callout">
+        <strong>Direct Answer for AI Overviews & Searchers (TL;DR):</strong>
+        <em>"Crawled – currently not indexed"</em> in Google Search Console means Googlebot successfully visited and rendered your ecommerce product page, but evaluated its content and structural signals as falling below its indexing quality threshold. Mass ecommerce deindexing is typically caused by faceted navigation crawl traps, manufacturer boilerplate descriptions, orphan product pages with click depth &gt; 3, and conflicting canonical tags. To fix it, you must block junk filter parameters in <code>robots.txt</code>, segment dynamic XML sitemaps by category, inject unique buyer-focused specifications at scale, and rebuild internal link equity silos across your store.
+      </div>
+
+      <p>Seeing thousands of product pages drop from Google's index is the single most frustrating technical issue an online store owner or SEO team can face.</p>
+      <p>You launch 10,000+ products, submit your sitemap, and wait for organic traffic. But a few weeks later, Google Search Console (GSC) flags a steep drop in indexed pages. When you open the <strong>Page Indexing Report</strong>, thousands of your revenue-generating SKUs are dumped into one dreaded bucket: <strong>"Crawled — currently not indexed"</strong>.</p>
+      <p>When this happens, your products become invisible to Google Search, Google Shopping, and AI answer engines. Below is our complete breakdown of why Google deindexes ecommerce product pages, the 5 hidden culprits behind mass catalog drops, and the step-by-step recovery framework we used to lift a 35,000-SKU store's indexation rate from 32% to over 94%.</p>
+
+      <h2>What 'Crawled – Currently Not Indexed' actually means</h2>
+      <p>Before fixing the issue, you must understand how Google evaluates URLs in ecommerce catalogs. There is a critical difference between the two primary exclusion buckets:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>GSC Status</th>
+            <th>What It Means</th>
+            <th>Root Cause</th>
+            <th>Primary Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Discovered — currently not indexed</strong></td>
+            <td>Google knows the URL exists (via sitemap or link) but <em>has not crawled it yet</em>.</td>
+            <td>Crawl budget exhaustion, server overload, or weak site authority.</td>
+            <td>Optimize crawl paths via <a href="/blog/crawl-budget-optimization-guide">Crawl Budget Optimization</a> and reduce server response latency.</td>
+          </tr>
+          <tr>
+            <td><strong>Crawled — currently not indexed</strong></td>
+            <td>Googlebot <em>visited, rendered, and parsed the page</em>, but deliberately decided <strong>NOT</strong> to index it.</td>
+            <td>Low content value, duplicate boilerplate, or conflicting canonical signals.</td>
+            <td>Content differentiation, structural redesign, and internal link equity routing.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Key Rule of Thumb:</strong> If a URL is in <em>"Crawled — currently not indexed"</em>, re-submitting your sitemap or using third-party indexing tools will <strong>not</strong> fix it. Google has already seen the page and rejected it based on quality and architecture signals.
+      </div>
+
+      <figure class="my-8">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&auto=format&fit=crop" alt="Large ecommerce warehouse catalog management" class="rounded-xl border border-[#e5e7eb] w-full" />
+        <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Large e-commerce catalogs with thousands of SKUs require tight crawl hygiene and unique content to maintain 90%+ indexation rates.</figcaption>
+      </figure>
+
+      <h2>5 technical culprits behind mass product deindexing</h2>
+      <p>Through hundreds of <a href="/services/technical-seo">technical SEO audits</a> for stores on Shopify, WooCommerce, and Magento, we have found that 95% of deindexing cases trace back to these 5 structural flaws:</p>
+
+      <h3>1. Faceted Navigation &amp; Query Parameter Sprawl</h3>
+      <p>Faceted filters (sorting by color, size, price range, or brand) generate millions of virtual URLs (e.g., <code>store.com/shop?color=black&amp;size=xl&amp;sort=price_desc</code>). When Googlebot spends 80% of its resources crawling filter combinations, it exhausts your store's render budget before reaching your primary product URLs.</p>
+
+      <h3>2. Manufacturer Boilerplate &amp; Thin Descriptions</h3>
+      <p>If your store imports descriptions directly from manufacturer feeds, your text is identical to hundreds of other retail websites. Google applies a sitewide <strong>Quality Threshold</strong>. When thousands of SKUs carry 3 lines of manufacturer text and near-identical specs, Google treats them as low-value duplicates and drops them from the index. (See our breakdown on <a href="/blog/ecommerce-product-page-seo">Product Page SEO at Scale</a>).</p>
+
+      <h3>3. Out-of-Stock SKUs Generating "Soft 404s"</h3>
+      <p>When an item goes out of stock and the page displays "Product Unavailable" with no structured details, Googlebot flags it as a <strong>Soft 404</strong> and drops it from the index. If 30% of your catalog is out of stock, your store's overall indexation ratio collapses.</p>
+
+      <h3>4. Orphaned Products with Click Depth &gt; 3</h3>
+      <p>If a product page cannot be reached within 3 clicks from your homepage or primary category navigation, Googlebot considers it unimportant. Without strong internal links, the URL lacks the internal PageRank needed to stay in the index.</p>
+
+      <h3>5. Canonical Tag Mismatches</h3>
+      <p>When a product page's canonical tag points to a parent category, an HTTP version, or a variant that returns a 301 redirect, Google receives conflicting signals and ignores the page entirely.</p>
+
+      <h2>The 5-step indexing recovery framework</h2>
+      <p>This is the exact step-by-step framework used by <a href="/experts">SearchPrex's SEO Specialists</a> to recover deindexed product catalogs across multi-thousand SKU brands:</p>
+
+      <figure class="my-8">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop" alt="Technical server and robots.txt architecture setup" class="rounded-xl border border-[#e5e7eb] w-full" />
+        <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Restricting crawl access to low-value filter combinations frees up server and crawl capacity for primary product URLs.</figcaption>
+      </figure>
+
+      <h3>Step 1 — Block Crawl Traps in robots.txt</h3>
+      <p>Prevent Googlebot from wasting crawl cycles on non-indexable filter query strings. Add strict disallow directives to your <code>robots.txt</code>:</p>
+      <pre><code># Block Faceted Filter Traps
+User-agent: *
+Disallow: /*?*sort=
+Disallow: /*?*price=
+Disallow: /*?*filter*
+Disallow: /*?*dir=
+Disallow: /*?*limit=
+
+# Allow Primary Clean Product &amp; Category URLs
+Allow: /products/
+Allow: /collections/
+Allow: /shop/</code></pre>
+
+      <h3>Step 2 — Segment Dynamic XML Sitemaps by Brand &amp; Category</h3>
+      <p>Never submit a single massive sitemap containing 50,000 URLs. When indexation fails on a single massive file, GSC does not tell you <em>which</em> section of your inventory has quality problems.</p>
+      <p>Instead, chunk your XML sitemaps into clean, segmented files containing 2,000 to 5,000 URLs each (e.g., <code>sitemap-category-knives.xml</code>, <code>sitemap-category-optics.xml</code>). This isolates indexation bottlenecks immediately.</p>
+
+      <h3>Step 3 — Programmatic Content Differentiation</h3>
+      <p>To pass Google's indexation quality threshold, every product page must contain unique, searchable value. If you have 10,000 SKUs, manual rewriting is impossible. Use structured programmatic enhancement:</p>
+      <ul>
+        <li><strong>Feature Comparison Table:</strong> Add structured technical specs (Weight, Material, Dimensions, Compatibility).</li>
+        <li><strong>Dynamic Buyer Use-Cases:</strong> State clearly <em>who</em> the product is for (e.g., "Best for heavy-duty field dressing").</li>
+        <li><strong>Structured Schema Markup:</strong> Embed JSON-LD <code>Product</code> and <code>Offer</code> schema so Googlebot and LLM search engines can parse inventory and pricing instantly.</li>
+      </ul>
+
+      <h3>Step 4 — Rebuild Internal Link Equity (Click Depth &lt; 3)</h3>
+      <p>Google indexes pages that are structurally important to your website:</p>
+      <ul>
+        <li><strong>Implement Semantic Breadcrumbs:</strong> Use Schema-backed <code>BreadcrumbList</code> on every single SKU (<em>Home &gt; Hunting Gear &gt; Fixed Blade Knives &gt; Product Name</em>).</li>
+        <li><strong>Dynamic "Related SKUs" Modules:</strong> Place smart contextual internal links on every product page linking to complementary items within the same category silo.</li>
+        <li><strong>Topical Blog Interlinking:</strong> Link directly from top-performing guides to individual product pages.</li>
+      </ul>
+
+      <h3>Step 5 — Enforce Clean Self-Referential Canonicals</h3>
+      <p>Ensure every canonical product URL self-references its clean permalink without parameters, tracking tags (UTMs), or trailing slash variations.</p>
+
+      <h2>Platform-specific fixes: Shopify vs WooCommerce</h2>
+      
+      <h3>For Shopify Stores</h3>
+      <p>By default, Shopify generates duplicate URLs for products inside collections (<code>/collections/apparel/products/t-shirt</code> instead of <code>/products/t-shirt</code>).</p>
+      <p>Update your theme's collection product grid template to ensure internal links always point directly to the canonical <code>/products/t-shirt</code> permalink.</p>
+
+      <h3>For WooCommerce Stores</h3>
+      <p>WooCommerce generates archives for every single product attribute (<code>/pa_color/black/</code>, <code>/pa_size/xl/</code>).</p>
+      <p>In your SEO plugin (Yoast / RankMath), set all attribute taxonomies (<code>pa_*</code>) to <strong><code>noindex, follow</code></strong> to keep your crawl budget 100% focused on real revenue pages.</p>
+
+      <h2>Case study results: 35,000-SKU recovery</h2>
+      <p>In our client case study for a large outdoor online store (<a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Outdoor Sports</a>), over 20,000 SKUs were dropped into <em>"Crawled – currently not indexed"</em> following an unmanaged theme overhaul.</p>
+
+      <figure class="my-8">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop" alt="Search Console analytics and traffic growth dashboard" class="rounded-xl border border-[#e5e7eb] w-full" />
+        <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Recovering indexation on high-margin product lines directly translates to sustained organic revenue growth.</figcaption>
+      </figure>
+
+      <p>By blocking 45,000+ faceted filter variations in <code>robots.txt</code>, programmatically generating unique technical spec tables across 150 brands, and rebuilding internal category silos, the results within 60 days were transformative:</p>
+      <ul>
+        <li><strong>Indexed Pages:</strong> Increased from <strong>11,200 to 33,850+ SKUs (+202% Indexation Rate)</strong>.</li>
+        <li><strong>Organic Search Clicks:</strong> Grew by <strong>+184% within 60 days</strong>.</li>
+        <li><strong>Zero Drop-off:</strong> GSC "Crawled — currently not indexed" dropped from 68% of the catalog to under 4%.</li>
+      </ul>
+      <p>A similar approach on <a href="/case-studies/ecommerce/smk-store">SMK Store</a> lifted indexation by 285% and drove a 75% US revenue increase within two months.</p>
+
+      <h2>Frequently asked questions</h2>
+      
+      <h3>Can I use the Google Indexing API to force product page indexing?</h3>
+      <p><strong>No.</strong> Google's official documentation explicitly restricts the Google Indexing API to <code>JobPosting</code> and <code>BroadcastEvent</code> structured data. Submitting standard ecommerce product URLs through multi-service accounts violates Google's API Terms of Service and will not solve quality-based deindexing. (Read our deep dive: <a href="/blog/google-indexing-api-python">The Google Indexing API Is Not a Shortcut</a>).</p>
+
+      <h3>How long does it take for Google to re-index fixed product pages?</h3>
+      <p>Typically between <strong>2 to 6 weeks</strong>. The speed depends on your store's domain authority, crawl frequency, and how cleanly you submit your segmented sitemaps and internal link updates.</p>
+
+      <h3>Should I delete or noindex out-of-stock products?</h3>
+      <p>If the item is <strong>temporarily out of stock</strong>: Keep it live, show an email waitlist form, keep structured data active, and display relevant alternative products. If the item is <strong>permanently discontinued</strong>: 301 redirect it to the closest parent category or replacement SKU. If no equivalent exists, serve a clean 410 Gone status.</p>
+
+      <h2>Action checklist for this week</h2>
+      <ol>
+        <li>Export the Page Indexing report from Google Search Console and calculate what percentage of your catalog sits in "Crawled — currently not indexed".</li>
+        <li>Audit your <code>robots.txt</code> file and ensure faceted filter parameters (<code>?sort=</code>, <code>?price=</code>) are disallowed from burning crawl budget.</li>
+        <li>Chunk your sitemaps by brand and product category so you can pinpoint which inventory lines are underperforming.</li>
+        <li>If your store is losing organic revenue to indexing issues, get a free 24-hour technical audit from our team on the <a href="/free-audit">Free SEO Audit</a> page — or explore our full suite of <a href="/services/ecommerce-seo">Ecommerce SEO Services</a>.</li>
+      </ol>
+    `,
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
+  },
 ];
  
 export function getRelated(currentSlug: string, category: string) {
