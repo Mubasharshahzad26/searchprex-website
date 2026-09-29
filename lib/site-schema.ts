@@ -37,6 +37,7 @@ const organization = {
     width: 200,
     height: 200,
   },
+  image: `${SITE}/logo.png`,
   description:
     "Remote-first, US-focused SEO agency helping law firms, small businesses, and ecommerce stores rank higher through senior-led technical SEO, local SEO, and AI search optimization (GEO/AEO). Active coverage across EST, CST, and PST timezones.",
   email: "contact@searchprex.com",
