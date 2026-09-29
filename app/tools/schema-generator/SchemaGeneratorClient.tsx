@@ -18,17 +18,17 @@ const schemaTypes = [
     bg: "#EEEDFE",
     desc: "For any local service business",
     fields: [
-      { key: "name", label: "Business Name", placeholder: "SearchPrex SEO Agency", required: true },
-      { key: "description", label: "Description", placeholder: "Founder-led SEO agency specializing in...", required: true, textarea: true },
-      { key: "url", label: "Website URL", placeholder: "https://searchprex.com", required: true },
+      { key: "name", label: "Business Name", placeholder: "Acme Plumbing & Heating", required: true },
+      { key: "description", label: "Description", placeholder: "Family-run plumbing and heating company serving Springfield and nearby towns...", required: true, textarea: true },
+      { key: "url", label: "Website URL", placeholder: "https://acmeplumbing.com", required: true },
       { key: "telephone", label: "Phone Number", placeholder: "+1-800-555-1234", required: true },
-      { key: "email", label: "Email", placeholder: "contact@searchprex.com" },
-      { key: "streetAddress", label: "Street Address", placeholder: "1250 Executive Place, Suite 450" },
-      { key: "city", label: "City", placeholder: "Chicago" },
+      { key: "email", label: "Email", placeholder: "hello@acmeplumbing.com" },
+      { key: "streetAddress", label: "Street Address", placeholder: "123 Main Street" },
+      { key: "city", label: "City", placeholder: "Springfield" },
       { key: "state", label: "State", placeholder: "IL" },
-      { key: "zip", label: "ZIP Code", placeholder: "60134" },
+      { key: "zip", label: "ZIP Code", placeholder: "62701" },
       { key: "priceRange", label: "Price Range", placeholder: "$$$$" },
-      { key: "openingHours", label: "Opening Hours", placeholder: "Mon-Fri 09:00-18:00" },
+      { key: "openingHours", label: "Opening Hours", placeholder: "Mo-Fr 08:00-18:00" },
     ],
   },
   {
@@ -48,7 +48,7 @@ const schemaTypes = [
       { key: "city", label: "City", placeholder: "Chicago" },
       { key: "state", label: "State", placeholder: "IL" },
       { key: "zip", label: "ZIP Code", placeholder: "60601" },
-      { key: "practiceArea", label: "Practice Area", placeholder: "Personal Injury, Family Law" },
+      { key: "practiceArea", label: "Practice Areas (comma-separated)", placeholder: "Personal Injury, Family Law" },
       { key: "attorney", label: "Lead Attorney Name", placeholder: "John Smith, Esq." },
     ],
   },
@@ -79,7 +79,7 @@ const schemaTypes = [
     icon: HelpCircle,
     color: "#854F0B",
     bg: "#FAEEDA",
-    desc: "For FAQ sections — get rich results",
+    desc: "For FAQ sections (no longer shown as rich results)",
     fields: [
       { key: "faq1q", label: "Question 1", placeholder: "How long does SEO take to show results?", required: true },
       { key: "faq1a", label: "Answer 1", placeholder: "SEO typically shows meaningful results in 3-6 months...", required: true, textarea: true },
@@ -117,15 +117,15 @@ const schemaTypes = [
     icon: Star,
     color: "#BA7517",
     bg: "#FAEEDA",
-    desc: "For review/testimonial pages",
+    desc: "For reviews of a product, book or software — not your own business",
     fields: [
-      { key: "itemName", label: "Item Being Reviewed", placeholder: "SearchPrex SEO Services", required: true },
-      { key: "itemType", label: "Item Type", placeholder: "LocalBusiness" },
-      { key: "reviewBody", label: "Review Text", placeholder: "SearchPrex transformed our law firm's online presence...", required: true, textarea: true },
+      { key: "itemName", label: "Item Being Reviewed", placeholder: "Acme Pro 500 Blender", required: true },
+      { key: "itemType", label: "Item Type", placeholder: "Product" },
+      { key: "reviewBody", label: "Review Text", placeholder: "Powerful and easy to clean, but louder than expected...", required: true, textarea: true },
       { key: "reviewAuthor", label: "Reviewer Name", placeholder: "John Smith", required: true },
       { key: "ratingValue", label: "Rating (1-5)", placeholder: "5", required: true },
       { key: "datePublished", label: "Date Published", placeholder: "2026-05-15" },
-      { key: "itemUrl", label: "Item URL", placeholder: "https://searchprex.com" },
+      { key: "itemUrl", label: "Item URL", placeholder: "https://example.com/acme-pro-500" },
     ],
   },
 ];
@@ -163,7 +163,8 @@ function generateSchema(type: string, data: Record<string, string>): string {
         "url": data.url || "",
         "telephone": data.telephone || "",
         ...(data.email && { "email": data.email }),
-        ...(data.practiceArea && { "areaServed": data.practiceArea }),
+        ...(data.city && { "areaServed": data.state ? `${data.city}, ${data.state}` : data.city }),
+        ...(data.practiceArea && { "knowsAbout": data.practiceArea.split(",").map((p) => p.trim()).filter(Boolean) }),
         ...(data.attorney && {
           "employee": {
             "@type": "Person",
@@ -197,11 +198,11 @@ function generateSchema(type: string, data: Record<string, string>): string {
           "priceCurrency": data.currency || "USD",
           "availability": `https://schema.org/${data.availability || "InStock"}`
         },
-        ...(data.rating && {
+        ...(data.rating && data.reviewCount && {
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": data.rating,
-            "reviewCount": data.reviewCount || "1"
+            "reviewCount": data.reviewCount
           }
         })
       }, null, 2);
@@ -234,8 +235,8 @@ function generateSchema(type: string, data: Record<string, string>): string {
         "description": data.description || "",
         "url": data.url || "",
         ...(data.image && { "image": data.image }),
-        "datePublished": data.publishDate || new Date().toISOString().split("T")[0],
-        "dateModified": data.modifiedDate || new Date().toISOString().split("T")[0],
+        ...(data.publishDate && { "datePublished": data.publishDate }),
+        ...(data.modifiedDate && { "dateModified": data.modifiedDate }),
         "author": {
           "@type": "Person",
           "name": data.author || "",
@@ -258,7 +259,7 @@ function generateSchema(type: string, data: Record<string, string>): string {
         "@context": "https://schema.org",
         "@type": "Review",
         "itemReviewed": {
-          "@type": data.itemType || "LocalBusiness",
+          "@type": data.itemType || "Product",
           "name": data.itemName || "",
           ...(data.itemUrl && { "url": data.itemUrl })
         },
@@ -272,7 +273,7 @@ function generateSchema(type: string, data: Record<string, string>): string {
           "ratingValue": data.ratingValue || "5",
           "bestRating": "5"
         },
-        "datePublished": data.datePublished || new Date().toISOString().split("T")[0]
+        ...(data.datePublished && { "datePublished": data.datePublished })
       }, null, 2);
  
     default:
@@ -308,7 +309,7 @@ export default function SchemaGeneratorClient() {
   };
  
   return (
-    <main className="bg-[#f8f9fc] min-h-screen">
+    <div className="bg-[#f8f9fc]">
  
       {/* ── Hero ── */}
       <section className="bg-[#eeeef5] pt-28 pb-14 relative overflow-hidden">
@@ -568,30 +569,26 @@ export default function SchemaGeneratorClient() {
           <h2 className="text-xl font-black text-[#0a0f2e] mb-6">More Free SEO Tools</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { label: "SERP Simulator", desc: "Preview Google listing", href: "/tools/serp-simulator", icon: "🔍", soon: true },
-              { label: "Meta Tag Analyzer", desc: "Audit title & description", href: "/tools/meta-tag-analyzer", icon: "📊", soon: true },
-              { label: "Robots.txt Tester", desc: "Check crawl rules", href: "/tools/robots-txt-tester", icon: "🤖", soon: true },
-              { label: "Keyword Difficulty", desc: "Estimate KD score", href: "/tools/keyword-difficulty", icon: "📈", soon: true },
+              { label: "SERP Simulator", desc: "Preview your Google listing", href: "/tools/serp-simulator", icon: "🔍" },
+              { label: "Keyword Research", desc: "Law firm keywords by state", href: "/tools/keyword-research", icon: "🔑" },
+              { label: "SERP Checker", desc: "See what owns a query", href: "/tools/serp-checker", icon: "📊" },
+              { label: "Technical SEO Checklist", desc: "26 checks, free tools only", href: "/resources/technical-seo-checklist", icon: "✅" },
             ].map((tool) => (
-              <div
+              <Link
                 key={tool.label}
-                className="bg-white border border-[#e5e7eb] rounded-xl p-4 relative"
+                href={tool.href}
+                className="bg-white border border-[#e5e7eb] rounded-xl p-4 transition-all hover:border-[#534AB7] hover:shadow-md"
               >
-                {tool.soon && (
-                  <span className="absolute top-3 right-3 text-[10px] font-bold bg-[#EEEDFE] text-[#534AB7] px-2 py-0.5 rounded-full">
-                    Soon
-                  </span>
-                )}
                 <div className="text-2xl mb-2">{tool.icon}</div>
                 <p className="text-sm font-bold text-[#0a0f2e] mb-1">{tool.label}</p>
                 <p className="text-xs text-[#64748b]">{tool.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
  
       </div>
-    </main>
+    </div>
   );
 }
  
