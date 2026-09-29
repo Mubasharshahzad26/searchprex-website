@@ -80,8 +80,8 @@ async function getPostData(rawSlug: string) {
       ...fallback,
       // The hardcoded posts have no separate meta pair; fall back to the
       // on-page title and excerpt so generateMetadata always has a value.
-      metaTitle: fallback.title,
-      metaDescription: fallback.excerpt || "",
+      metaTitle: (fallback as any).metaTitle || fallback.title,
+      metaDescription: (fallback as any).metaDescription || fallback.excerpt || "",
       canonicalUrl: "",
       schemaType: "BlogPosting",
       ogTitle: "",
