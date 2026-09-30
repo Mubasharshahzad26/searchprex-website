@@ -994,3 +994,24 @@ model BrandPropertyPost {
   @@index([propertyId, status])
   @@index([publishedAt])
 }
+
+// ─────────────────────────────────────────────────────────────
+//  Blog Newsletter Subscribers & Publication Alerts
+// ─────────────────────────────────────────────────────────────
+
+model NewsletterSubscriber {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  status           String    @default("active") // active | unsubscribed
+  unsubscribeToken String    @unique
+  source           String    @default("blog")
+  categories       String[]
+  lastNotifiedSlug String?
+  lastNotifiedAt   DateTime?
+  unsubscribedAt   DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([status])
+}
+

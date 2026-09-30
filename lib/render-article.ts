@@ -40,8 +40,8 @@ const md = new MarkdownIt({
 const TAG_STYLES: Record<string, string> = {
   // h1 is the page title, rendered by the layout. A body-level h1 is a
   // duplicate, so it is styled to match h2 rather than dominating the page.
-  h1: "font-size:1.5rem;font-weight:900;color:#0a0f2e;margin:2.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:2px solid #e5e7eb",
-  h2: "font-size:1.5rem;font-weight:900;color:#0a0f2e;margin:2.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:2px solid #e5e7eb",
+  h1: "font-size:1.5rem;font-weight:900;color:#0a0f2e;margin:2.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:2px solid #e5e7eb;scroll-margin-top:6rem",
+  h2: "font-size:1.5rem;font-weight:900;color:#0a0f2e;margin:2.5rem 0 1rem;padding-bottom:0.5rem;border-bottom:2px solid #e5e7eb;scroll-margin-top:6rem",
   h3: "font-size:1.1875rem;font-weight:800;color:#0a0f2e;margin:2rem 0 0.75rem",
   h4: "font-size:1.0625rem;font-weight:700;color:#0a0f2e;margin:1.5rem 0 0.5rem",
   p: "font-size:1.0625rem;color:#374151;margin-bottom:1.25rem;line-height:1.85",
@@ -74,16 +74,24 @@ const CALLOUT_STYLE =
   "background:#EEEDFE;border-left:4px solid #534AB7;border-radius:8px;padding:1rem 1.25rem;margin:1.5rem 0;font-size:0.9375rem;color:#3C3489";
 
 export function styleArticleHtml(html: string): string {
+  let h2Index = 0;
   return html
     .replace(
       /<div class="callout">/g,
       `<div class="callout" style="${CALLOUT_STYLE}">`
     )
     .replace(OPEN_TAG, (_match, tag: string, attrs?: string) => {
+      let nextAttrs = attrs ?? "";
+      if (tag === "h2") {
+        const idx = h2Index++;
+        if (!/\sid=/.test(nextAttrs)) {
+          nextAttrs = ` id="section-${idx}"${nextAttrs}`;
+        }
+      }
       // An author-supplied style wins; overwriting it would silently discard
       // deliberate formatting.
-      if (attrs && /\sstyle=/.test(attrs)) return _match;
-      return `<${tag}${attrs ?? ""} style="${TAG_STYLES[tag]}">`;
+      if (/\sstyle=/.test(nextAttrs)) return `<${tag}${nextAttrs}>`;
+      return `<${tag}${nextAttrs} style="${TAG_STYLES[tag]}">`;
     });
 }
 
@@ -113,3 +121,22 @@ export function renderArticle(source?: string | null): string {
   if (!source) return "";
   return styleArticleHtml(md.render(dedent(source)));
 }
+
+/** Extracts top-level H2 headings for automatic Table of Contents generation. */
+export function extractArticleToc(source?: string | null): string[] {
+  if (!source) return [];
+  const html = md.render(dedent(source));
+  const matches = Array.from(html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi));
+  return matches
+    .map((m) =>
+      m[1]
+        .replace(/<[^>]+>/g, "")
+        .replace(/&amp;/g, "&")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;|&rsquo;|&lsquo;/g, "'")
+        .replace(/&ndash;|&mdash;/g, "-")
+        .trim()
+    )
+    .filter(Boolean);
+}
+

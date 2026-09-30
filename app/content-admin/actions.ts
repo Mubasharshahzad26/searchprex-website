@@ -3,6 +3,7 @@
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth/require-admin";
+import { notifySubscribersOfNewPost } from "@/lib/newsletter";
 
 /**
  * Every action below is admin-only, and the middleware is NOT enough on its own.
@@ -49,6 +50,18 @@ export async function createMarketingBlog(data: any) {
   await requireAdmin();
   if (data.published && !data.publishedAt) data.publishedAt = new Date();
   const blog = await db.marketingBlog.create({ data });
+  if (blog.published) {
+    await notifySubscribersOfNewPost({
+      slug: blog.slug,
+      title: blog.title,
+      excerpt: blog.excerpt || blog.metaDescription,
+      category: blog.category,
+      readTime: blog.readTime,
+      author: blog.author,
+      coverImage: blog.coverImage,
+      published: blog.published,
+    });
+  }
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
   return blog;
@@ -56,11 +69,24 @@ export async function createMarketingBlog(data: any) {
 
 export async function updateMarketingBlog(id: string, data: any) {
   await requireAdmin();
-  if (data.published && !data.publishedAt) {
-    const existing = await db.marketingBlog.findUnique({ where: { id } });
-    if (!existing?.publishedAt) data.publishedAt = new Date();
+  const existing = await db.marketingBlog.findUnique({ where: { id } });
+  const newlyPublished = Boolean(data.published && !existing?.published);
+  if (data.published && !data.publishedAt && !existing?.publishedAt) {
+    data.publishedAt = new Date();
   }
   const blog = await db.marketingBlog.update({ where: { id }, data });
+  if (newlyPublished && blog.published) {
+    await notifySubscribersOfNewPost({
+      slug: blog.slug,
+      title: blog.title,
+      excerpt: blog.excerpt || blog.metaDescription,
+      category: blog.category,
+      readTime: blog.readTime,
+      author: blog.author,
+      coverImage: blog.coverImage,
+      published: blog.published,
+    });
+  }
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
   revalidatePath(`/blog/${blog.slug}`);

@@ -60,14 +60,15 @@ export default async function Page() {
     if (dbBlogs && dbBlogs.length > 0) {
       initialPosts = dbBlogs.map(b => ({
         slug: b.slug,
-        category: b.category || "General",
+        category: b.category || "Technical SEO",
         subcategory: "",
         title: b.title,
         excerpt: b.excerpt || b.metaDescription || "",
-        readTime: b.readTime || "5-minute read",
+        readTime: b.readTime || "8-minute read",
         date: b.publishedAt ? b.publishedAt.toISOString().split('T')[0] : b.createdAt.toISOString().split('T')[0],
-        author: { name: b.author || "SearchPrex Team", role: "Verified SEO Expert" },
-        authorBio: "",
+        author: { name: b.author || "Mubashar Sharif", role: "Verified SEO Expert" },
+        authorBio:
+          "Senior SEO Architect with 5+ years specializing in large-scale e-commerce indexation, technical crawl optimization, and high-intent local search.",
         featured: false,
         heroImage: b.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],

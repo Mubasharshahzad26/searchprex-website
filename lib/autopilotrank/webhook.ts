@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import { db } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
+import { notifySubscribersOfNewPost } from '@/lib/newsletter';
 
 export interface WebhookResult {
   ok: boolean;
@@ -288,6 +289,17 @@ export async function handleAutopilotRankWebhook(
         },
       });
       console.log(`[autopilotrank-webhook] New post created (${blogPost.id}, slug: ${blogPost.slug})`);
+
+      await notifySubscribersOfNewPost({
+        slug: blogPost.slug,
+        title: blogPost.title,
+        excerpt: blogPost.excerpt || blogPost.metaDescription,
+        category: blogPost.category,
+        readTime: blogPost.readTime,
+        author: blogPost.author,
+        coverImage: blogPost.coverImage,
+        published: true,
+      });
     }
 
     // Record delivery

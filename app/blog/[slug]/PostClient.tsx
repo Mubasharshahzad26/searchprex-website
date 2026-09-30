@@ -9,12 +9,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Calendar, Clock, ChevronRight, ArrowRight,
-  CheckCircle, Share2, Copy, Linkedin, TrendingUp,
+  CheckCircle, Share2, Copy, Linkedin, TrendingUp, Mail, Loader2, ShieldCheck,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import parse, { Element } from 'html-react-parser';
 import { getRelated } from "./posts";
-import { renderArticle } from "@/lib/render-article";
+import { renderArticle, extractArticleToc } from "@/lib/render-article";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 
 /**
@@ -123,11 +123,34 @@ export default function PostClient({
   related?: Array<Record<string, any>>;
 }) {
   const tags = post.tags ?? [];
-  const toc = post.toc ?? [];
+  const toc =
+    post.toc && post.toc.length > 0 ? post.toc : extractArticleToc(post.content);
   const displayDate = formatPostDate(post.date);
   const related: Array<Record<string, any>> =
     relatedOverride ?? getRelated(post.slug, post.category);
   const [copied, setCopied] = useState(false);
+  const [readingProgress, setReadingProgress] = useState(0);
+
+  // Sidebar newsletter state
+  const [subEmail, setSubEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [subError, setSubError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const updateScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) {
+        setReadingProgress(0);
+      } else {
+        setReadingProgress(Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)));
+      }
+    };
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    updateScroll();
+    return () => window.removeEventListener("scroll", updateScroll);
+  }, []);
 
   const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
   const leadSource = `article:${section.href}/${post.slug}`;
@@ -138,8 +161,44 @@ export default function PostClient({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleArticleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!subEmail.trim()) return;
+    setSubmitting(true);
+    setSubError(null);
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: subEmail.trim(),
+          source: leadSource,
+          categories: post.category ? [post.category] : [],
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        setSubError(data.error || "Could not subscribe. Try again.");
+      } else {
+        setSubscribed(true);
+        setSubEmail("");
+      }
+    } catch {
+      setSubError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <main className="bg-white min-h-screen">
+      {/* Toptal-style Top Reading Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-transparent pointer-events-none">
+        <div
+          className="h-full bg-gradient-to-r from-[#534AB7] to-[#3eb489] transition-all duration-150"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
  
       {/* ══ HERO IMAGE SECTION ══ */}
       <section className="relative h-[460px] overflow-hidden">
@@ -377,11 +436,60 @@ export default function PostClient({
                 </div>
               </div>
    
-              {/* Lead magnet — was a link-only "Talk to Mubashar" card that sent
-                  an already-engaged reader to a second page to retype their URL
-                  and email. This submits in place. */}
+            {/* Lead magnet — was a link-only "Talk to Mubashar" card that sent
+                an already-engaged reader to a second page to retype their URL
+                and email. This submits in place. */}
             <ArticleLeadMagnet variant="sidebar" source={leadSource} />
- 
+
+            {/* Blog Newsletter Alert Box */}
+            <div className="rounded-2xl border border-[#dce1eb] bg-gradient-to-br from-[#0a0f2e] to-[#1e1b4b] p-5 text-white shadow-sm">
+              <div className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#3eb489] mb-2">
+                <Mail className="h-3.5 w-3.5" /> New Guide Alerts
+              </div>
+              <p className="text-sm font-extrabold text-white leading-snug mb-1.5">
+                Get notified when our next SEO guide drops.
+              </p>
+              <p className="text-xs text-slate-300 leading-relaxed mb-3.5">
+                Practitioner-grade technical SEO playbooks delivered straight to your inbox.
+              </p>
+              {subscribed ? (
+                <div className="flex items-start gap-2 rounded-lg bg-emerald-500/20 border border-emerald-400/30 p-3 text-xs text-emerald-200 font-semibold">
+                  <CheckCircle className="h-4 w-4 text-[#3eb489] flex-shrink-0 mt-0.5" />
+                  <span>Subscribed! You&apos;ll receive an email when the next guide is published.</span>
+                </div>
+              ) : (
+                <form onSubmit={handleArticleSubscribe} className="flex flex-col gap-2">
+                  <input
+                    type="email"
+                    required
+                    value={subEmail}
+                    onChange={(e) => {
+                      setSubEmail(e.target.value);
+                      if (subError) setSubError(null);
+                    }}
+                    placeholder="Your email address..."
+                    className="w-full rounded-lg bg-white px-3.5 py-2.5 text-xs font-medium text-[#0a0f2e] placeholder-[#94a3b8] outline-none"
+                  />
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full rounded-lg bg-[#3eb489] hover:bg-[#34a078] disabled:opacity-60 py-2.5 text-xs font-extrabold text-[#0a0f2e] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="h-3.5 w-3.5 animate-spin" /> Subscribing...
+                      </>
+                    ) : (
+                      <>
+                        Subscribe to Blog <ArrowRight className="h-3.5 w-3.5" />
+                      </>
+                    )}
+                  </button>
+                  {subError && <p className="text-[11px] text-red-300 font-medium">{subError}</p>}
+                </form>
+              )}
+            </div>
+
             {/* Stat card */}
             {post.stat && (
               <div className="rounded-2xl border border-[#e5e7eb] bg-gradient-to-br from-[#EEEDFE] to-white p-5">
@@ -394,7 +502,7 @@ export default function PostClient({
                 </Link>
               </div>
             )}
- 
+
             {/* Tags */}
             {tags.length > 0 && (
               <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5">
