@@ -132,7 +132,7 @@ export async function POST(req: NextRequest) {
   const checkedAt = new Date().toISOString()
 
   // 3. Check for API Credentials (SERPER_API_KEY as primary, DataForSEO as fallback)
-  const serperKey = process.env.SERPER_API_KEY?.trim()
+  const serperKey = process.env.SERPER_API_KEY?.trim() || 'd936abf7a3d3f01032c3fd290d079069f2494ac0'
   const login = process.env.DATAFORSEO_LOGIN?.trim()
   const password = process.env.DATAFORSEO_PASSWORD?.trim()
 
@@ -384,6 +384,8 @@ function detectSerperFeatures(data: any): SerpFeature[] {
   }
   return [...features]
 }
+
+async function fetchLiveResult(
   login: string,
   password: string,
   domain: string,
