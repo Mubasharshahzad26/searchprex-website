@@ -443,6 +443,175 @@ Allow: /shop/</code></pre>
 `,
     author: { name: "Mubashar Sharif", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
   },
+  {
+    slug:        "fix-discovered-currently-not-indexed-ecommerce",
+    category:    "E-commerce SEO",
+    subcategory: "Indexing",
+    metaTitle:       "Fix 'Discovered – Currently Not Indexed' for Ecommerce",
+    metaDescription: "Fix 'Discovered – currently not indexed' on Shopify & WooCommerce. Learn the 4 crawl budget bottlenecks and our 5-step framework to get SKUs indexed fast.",
+    title:           "How to Fix 'Discovered – Currently Not Indexed' on E-commerce Stores: 5 Proven Steps",
+    excerpt:         "Fix 'Discovered – currently not indexed' on Shopify & WooCommerce. Learn the 4 crawl budget bottlenecks and our 5-step framework to get SKUs indexed fast.",
+    readTime:    "10-minute read",
+    date:        "September 30, 2026",
+    stat:        { value: "14 Days", label: "Recovery window" },
+    heroImage:   "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+    tags:        ["discovered currently not indexed", "e-commerce seo", "crawl budget", "shopify seo", "indexing issues"],
+    toc: [
+      "1. 'Discovered' vs. 'Crawled' Not Indexed: What's the Real Difference?",
+      "2. 4 Reasons Why E-commerce Products Stay in the 'Discovered' Queue",
+      "3. The 5-Step Framework to Fix 'Discovered – Currently Not Indexed'",
+      "4. Platform-Specific Fixes: Shopify vs. WooCommerce",
+      "5. Frequently Asked Questions (FAQs)",
+      "Action Checklist for This Week",
+    ],
+    content: `
+<div class="callout">
+<strong>Direct Answer for AI Overviews & Search Engines (TL;DR):</strong>
+<em>"Discovered – currently not indexed"</em> in Google Search Console means Googlebot found your product URLs (typically through an XML sitemap or backlink), but has <strong>not yet crawled or rendered them</strong>. For e-commerce stores, this is primarily caused by crawl budget exhaustion, slow server response times (TTFB > 600ms), sitemap bloat, and weak internal link equity on new SKUs. To fix it, you must remove non-200 URLs from sitemaps, reduce server latency, block crawl waste in <code>robots.txt</code>, and build direct HTML internal links from high-authority category pages to newly launched products.
+</div>
+
+<p>You upload 5,000 new products to your online store, submit your sitemap, and check Google Search Console a week later expecting organic traffic. Instead, you see a massive spike under the Page Indexing report:</p>
+
+<p>👉 <strong>"Discovered — currently not indexed"</strong></p>
+
+<p>Unlike <a href="/blog/fix-crawled-currently-not-indexed-ecommerce">Crawled – currently not indexed</a> (where Google inspected your page and rejected its content quality), <em>Discovered</em> means Google hasn't even bothered to visit the page yet. Your product URLs are sitting in Googlebot's crawl queue, ignored.</p>
+
+<p>Below is our technical breakdown of why Google delays crawling ecommerce product pages and the exact 5-step framework to force Googlebot to crawl and index your catalog.</p>
+
+<h2>1. 'Discovered' vs. 'Crawled' Not Indexed: What's the Real Difference?</h2>
+<p>Understanding where the bottleneck occurs in Google's indexing pipeline is essential for applying the right fix:</p>
+
+<table>
+<thead>
+<tr>
+<th>GSC Exclusion Status</th>
+<th>Googlebot Action</th>
+<th>Primary Bottleneck</th>
+<th>How to Fix It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Discovered — currently not indexed</strong></td>
+<td>Google knows the URL exists, but <em>has not fetched or rendered the HTML</em>.</td>
+<td>Crawl budget deficit, server latency (TTFB), or sitemap overpopulation.</td>
+<td>Server speed optimization, internal linking, and <a href="/blog/crawl-budget-optimization-guide">Crawl Budget Optimization</a>.</td>
+</tr>
+<tr>
+<td><strong>Crawled — currently not indexed</strong></td>
+<td>Googlebot <em>visited and rendered the page</em>, but excluded it from search results.</td>
+<td>Thin descriptions, duplicate content, or canonical tag conflicts.</td>
+<td>Content differentiation, spec tables, and <a href="/blog/ecommerce-product-page-seo">Product Page SEO at Scale</a>.</td>
+</tr>
+</tbody>
+</table>
+
+<div class="callout">
+<strong>Key Insight:</strong> <em>Discovered</em> is a <strong>Crawl Priority & Infrastructure problem</strong>. <em>Crawled</em> is a <strong>Content Quality & Canonical problem</strong>.
+</div>
+
+<figure class="my-8">
+<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop" alt="Server architecture and Googlebot crawl capacity management" class="rounded-xl border border-[#e5e7eb] w-full" />
+<figcaption class="mt-2 text-center text-xs text-[#6b7280]">When server response latency spikes, Googlebot reduces its simultaneous crawl threads to protect site stability.</figcaption>
+</figure>
+
+<h2>2. 4 Reasons Why E-commerce Products Stay in the 'Discovered' Queue</h2>
+
+<p>Through comprehensive <a href="/services/technical-seo">technical SEO audits</a> across multi-thousand SKU brands, we find that product URLs get stuck in the discovery queue due to these 4 issues:</p>
+
+<h3>1. Server Response Latency (High Time to First Byte)</h3>
+<p>When Googlebot crawls an online store, it dynamically adjusts its crawl speed based on your server's health. If your Time to First Byte (TTFB) exceeds 600ms or your server returns occasional 503/504 errors, Googlebot throttles its crawl rate to prevent crashing your store. Thousands of URLs get pushed back in the crawl queue.</p>
+
+<h3>2. Sitemap Bloat &amp; Dirty XML Files</h3>
+<p>If your XML sitemap contains out-of-stock items, redirected URLs (301s), broken pages (404s), or noindexed filter parameters, Googlebot learns that your sitemap is untrustworthy. It stops prioritizing sitemap submissions as high-value discovery sources.</p>
+
+<h3>3. Zero Internal Link Equity (Orphan Products)</h3>
+<p>Googlebot prioritizes URLs discovered via organic HTML internal links over URLs discovered purely through XML sitemaps. If a new SKU is only listed in a sitemap and has 0 internal links from category pages or homepage modules, it receives the lowest crawl priority.</p>
+
+<h3>4. Crawl Budget Waste on Useless Internal Paths</h3>
+<p>Googlebot spending crawl cycles on <code>/cart</code>, <code>/checkout</code>, customer account portals, search query URLs (<code>/search?q=</code>), and dynamic sort parameters steals crawl capacity away from newly added product lines.</p>
+
+<h2>3. The 5-Step Framework to Fix 'Discovered – Currently Not Indexed'</h2>
+
+<p>Follow this technical sequence executed by <a href="/experts">SearchPrex's SEO Specialists</a> to unblock your crawl queue:</p>
+
+<figure class="my-8">
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop" alt="Google Search Console URL crawl queue and indexing recovery" class="rounded-xl border border-[#e5e7eb] w-full" />
+<figcaption class="mt-2 text-center text-xs text-[#6b7280]">Restructuring internal link paths forces Googlebot to crawl discovered URLs within 7 to 14 days.</figcaption>
+</figure>
+
+<h3>Step 1 — Disallow Non-Revenue Crawl Paths in robots.txt</h3>
+<p>Ensure your <code>robots.txt</code> file explicitly prevents crawlers from entering utility and administrative paths:</p>
+
+<pre><code>User-agent: *
+# Disallow Utility &amp; Checkout Paths
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account/
+Disallow: /search
+Disallow: /*?*query=
+Disallow: /*?*sort=
+
+# Allow Canonical Catalog Paths
+Allow: /products/
+Allow: /collections/
+Allow: /categories/</code></pre>
+
+<h3>Step 2 — Clean and Validate Dynamic XML Sitemaps</h3>
+<p>Audit your sitemaps to ensure 100% of the included URLs meet these criteria:</p>
+<ul>
+<li>Return an immediate <strong>HTTP 200 OK</strong> status (no 301 redirects, 404s, or 500s).</li>
+<li>Contain a self-referential canonical tag matching the sitemap URL exactly.</li>
+<li>Are free of <code>noindex</code> robots meta directives.</li>
+</ul>
+
+<h3>Step 3 — Build "New Arrivals" &amp; Category HTML Link Bridges</h3>
+<p>Never rely solely on an XML sitemap to introduce new SKUs to Google. Create crawl pathways by linking new products from high-authority pages:</p>
+<ul>
+<li><strong>"Featured New Arrivals" Grid:</strong> Feature new SKUs on your homepage and top-level category headers.</li>
+<li><strong>Breadcrumb Hierarchy:</strong> Ensure breadcrumbs link parent categories to child products with structured <code>BreadcrumbList</code> schema.</li>
+<li><strong>Contextual Blog Links:</strong> Insert natural product links into top-performing editorial guides.</li>
+</ul>
+
+<h3>Step 4 — Optimize Server TTFB and Caching Layers</h3>
+<p>Target a TTFB under 300ms across all product endpoints:</p>
+<ul>
+<li><strong>On Shopify:</strong> Audit installed apps and remove inactive tracking scripts loading in <code>theme.liquid</code>.</li>
+<li><strong>On WooCommerce:</strong> Enable Redis Object Caching, clean expired transients in <code>wp_options</code>, and use a CDN with Full Page Caching.</li>
+</ul>
+
+<h3>Step 5 — Monitor Crawl Stats in Google Search Console</h3>
+<p>Navigate to <strong>GSC &gt; Settings &gt; Crawl Stats</strong>. Check your store's "Average response time" chart. When response time drops below 300ms, "Total crawl requests" naturally increases, and URLs move from <em>Discovered</em> to <em>Indexed</em> within 14 days.</p>
+
+<h2>4. Platform-Specific Fixes: Shopify vs. WooCommerce</h2>
+
+<h3>For Shopify Stores</h3>
+<p>Shopify generates separate collection URLs for items. Ensure your theme's collection templates link directly to root <code>/products/item-name</code> URLs rather than <code>/collections/collection-name/products/item-name</code> to prevent duplicate discovery queues.</p>
+
+<h3>For WooCommerce Stores</h3>
+<p>Large WooCommerce stores often suffer from bloated database queries when rendering product grids. Ensure your database indexes are optimized and query transients are cached to keep bot crawl times under 200ms.</p>
+
+<h2>5. Frequently Asked Questions (FAQs)</h2>
+
+<h3>Why does Google discover my product pages but refuse to crawl them?</h3>
+<p>Googlebot determines crawl priority based on your website's domain authority, server response latency, and internal link depth. If your server is slow or new products lack internal links, Googlebot queues them for later crawling.</p>
+
+<h3>Does submitting a sitemap guarantee that Google will crawl my products?</h3>
+<p><strong>No.</strong> Sitemaps serve as discovery hints, not crawl mandates. Googlebot crawls pages based on internal PageRank flow and available crawl capacity.</p>
+
+<h3>How long does it take for 'Discovered' pages to get indexed?</h3>
+<p>Once server speed and internal links are optimized, URLs typically move from <em>Discovered</em> to <em>Crawled and Indexed</em> within <strong>1 to 3 weeks</strong>.</p>
+
+<h2>Action Checklist for This Week</h2>
+<ol>
+<li>Open Google Search Console and check your <strong>Settings &gt; Crawl Stats</strong> report for response time spikes.</li>
+<li>Export your XML sitemap and run it through a crawler to verify that zero redirected (301) or non-indexable URLs exist.</li>
+<li>Add a dynamic "Featured New SKUs" module to your category pages to create immediate HTML crawl bridges.</li>
+<li>If your store is battling indexing backlogs, request a comprehensive review on our <a href="/free-audit">Free SEO Audit</a> page — or explore our tailored <a href="/services/ecommerce-seo">Ecommerce SEO Services</a>.</li>
+</ol>
+`,
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in large-scale e-commerce SEO." },
+  },
 ];
  
 export function getRelated(currentSlug: string, category: string) {
