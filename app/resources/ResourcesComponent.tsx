@@ -12,19 +12,19 @@ import { motion } from "framer-motion";
 import {
   FileText, BookOpen, GraduationCap, Newspaper, ListChecks,
   ArrowRight, Clock, ExternalLink, Terminal, ShoppingBag, MapPin, Wrench,
+  Bot, Sparkles, Code2, Search, Target, Calculator, MessageSquare, Layers,
 } from "lucide-react";
 import {
   CardGrid,
   CtaBand,
   PageHero,
   Section,
+  SectionHeading,
   Accent,
 } from "@/components/layout";
 import { color, heading, radius, text } from "@/lib/design-tokens";
 
-/* ─── RESOURCE CATEGORIES ─── */
-// `cta` is the link label on a live card. Without it the grid used to hardcode
-// "Browse news" on every live card, which was fine when news was the only one.
+/* ─── RESOURCE CATEGORIES (CHECKLISTS, VAULTS & PLAYBOOKS) ─── */
 type ResourceCard = {
   id: string;
   icon: any;
@@ -101,6 +101,82 @@ const hardcodedCategories: ResourceCard[] = [
   },
 ];
 
+/* ─── INTERACTIVE TOOLS & NICHESEO PRO FEATURES ─── */
+const interactiveTools: ResourceCard[] = [
+  {
+    id: "tool-llms",
+    icon: Bot,
+    title: "llms.txt & AI Crawler Generator",
+    desc: "Generate a spec-compliant /llms.txt Markdown file and AI crawler robots.txt rules (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended).",
+    status: "live",
+    href: "/tools/llms-txt-generator",
+    cta: "Open generator",
+  },
+  {
+    id: "tool-kw",
+    icon: Sparkles,
+    title: "AI Keyword Research Tool",
+    desc: "Enter any niche or practice area and get keywords grouped by theme, search intent, and the exact page type to build.",
+    status: "live",
+    href: "/tools/keyword-research",
+    cta: "Run keyword research",
+  },
+  {
+    id: "tool-serp-checker",
+    icon: Target,
+    title: "Live Google SERP & Rank Checker",
+    desc: "Check your live Google ranking position for any keyword and country, see which SERP features own the page, and inspect the top 10.",
+    status: "live",
+    href: "/tools/serp-checker",
+    cta: "Check live rankings",
+  },
+  {
+    id: "tool-schema",
+    icon: Code2,
+    title: "JSON-LD Schema Markup Generator",
+    desc: "Generate spec-valid JSON-LD structured data for Law Firm, Local Business, Product, FAQ, Article & Review in seconds.",
+    status: "live",
+    href: "/tools/schema-generator",
+    cta: "Generate schema",
+  },
+  {
+    id: "tool-serp-sim",
+    icon: Search,
+    title: "Google SERP Snippet Simulator",
+    desc: "Preview your title tag and meta description on desktop and mobile measured in exact pixels before you publish.",
+    status: "live",
+    href: "/tools/serp-simulator",
+    cta: "Simulate snippet",
+  },
+  {
+    id: "tool-case-calc",
+    icon: Calculator,
+    title: "Personal Injury Lost Case Calculator",
+    desc: "Estimate how many signed cases and fees a personal injury firm loses to Map Pack visibility gaps and slow intake.",
+    status: "live",
+    href: "/case-calculator",
+    cta: "Calculate lost cases",
+  },
+  {
+    id: "tool-intake",
+    icon: MessageSquare,
+    title: "24/7 AI Legal Intake Assistant",
+    desc: "Interactive live demo of our AI intake assistant that qualifies law firm leads 24/7 so no after-hours case is lost.",
+    status: "live",
+    href: "/intake-assistant",
+    cta: "Try live demo",
+  },
+  {
+    id: "tool-content-suite",
+    icon: Layers,
+    title: "NicheSEO Pro: AI Content & Bulk Suite",
+    desc: "Generate E-E-A-T-driven SEO briefs, full HTML articles, meta tags, FAQs, and JSON-LD schema for single pages or in bulk.",
+    status: "live",
+    href: "/content-generator",
+    cta: "Open AI Content Suite",
+  },
+];
+
 /* 🔮 FEATURED (real, published) 🔮 */
 const featured = {
   title: "Best Time to Install a New AC Near Me — California 2026",
@@ -135,17 +211,118 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
 
   const categories = [...dbResourcesFormatted, ...hardcodedCategories];
 
+  const renderCard = (cat: ResourceCard) => {
+    const Icon = cat.icon;
+    const isLive = cat.status === "live";
+
+    const inner = (
+      <>
+        <div className="mb-4 flex items-center justify-between">
+          <span
+            className={`flex h-11 w-11 items-center justify-center ${radius.chip}`}
+            style={{ background: color.primarySoft }}
+          >
+            <Icon className="h-5 w-5" style={{ color: color.primary }} aria-hidden />
+          </span>
+          {isLive ? (
+            <span
+              className={`${heading.eyebrow} inline-flex items-center gap-1 rounded-full px-2.5 py-1`}
+              style={{ background: "#eafaf3", color: color.successDark }}
+            >
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: color.success }}
+                aria-hidden
+              />
+              Live
+            </span>
+          ) : (
+            <span
+              className={`${heading.eyebrow} inline-flex items-center gap-1 rounded-full px-2.5 py-1`}
+              style={{ background: color.surface, color: color.subtle }}
+            >
+              <Clock className="h-3 w-3" aria-hidden /> Coming Soon
+            </span>
+          )}
+        </div>
+        <h3 className={`${heading.h4} mb-2`} style={{ color: color.ink }}>
+          {cat.title}
+        </h3>
+        <p className={text.small} style={{ color: color.muted }}>
+          {cat.desc}
+        </p>
+        {isLive ? (
+          <span
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
+            style={{ color: color.primary }}
+          >
+            {cat.cta || "Open"} <ArrowRight className="h-4 w-4" aria-hidden />
+          </span>
+        ) : null}
+      </>
+    );
+
+    return cat.href ? (
+      <motion.div key={cat.id || cat.title} variants={fadeUp}>
+        <Link
+          href={cat.href}
+          className={`group block h-full ${radius.card} border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-xl`}
+          style={{ borderColor: color.border }}
+        >
+          {inner}
+        </Link>
+      </motion.div>
+    ) : (
+      <motion.div
+        key={cat.id || cat.title}
+        variants={fadeUp}
+        className={`h-full ${radius.card} border bg-white p-6 opacity-90`}
+        style={{ borderColor: color.border }}
+      >
+        {inner}
+      </motion.div>
+    );
+  };
+
   return (
     <main>
       <PageHero
         centered
-        eyebrow="Resources"
-        title={<>SEO Resources &amp; <Accent>Insights</Accent></>}
-        subtitle="White papers, original research, real-world learnings, and curated industry news — everything to help you win in search and AI-powered results."
+        eyebrow="Free Resources & Tools · No Signup"
+        title={<>SEO Resources, Checklists &amp; <Accent>Free Tools</Accent></>}
+        subtitle="Practitioner checklists, Google Search Console regex vaults, indexing playbooks, and interactive AI SEO tools — built from real client campaigns, completely ungated."
       />
 
-      {/* ── FEATURED ── */}
-      <Section tone="surface" width="narrow" tight>
+      {/* ── 1. CHECKLISTS, REGEX VAULT & PLAYBOOKS ── */}
+      <Section width="narrow">
+        <SectionHeading
+          eyebrow="Checklists, Playbooks & Vaults"
+          title="Step-by-step SEO Audit Checklists & GSC Regex Vault"
+          subtitle="Run the exact audits and Search Console regex filters we use on law firms, 35,000-product ecommerce catalogues, and local service businesses."
+        />
+        <motion.div className="mt-8" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <CardGrid variant="cards" columns={2}>
+            {categories.map(renderCard)}
+          </CardGrid>
+        </motion.div>
+      </Section>
+
+      {/* ── 2. INTERACTIVE SEO & AI TOOLS (NICHESEO PRO FEATURES) ── */}
+      <Section tone="surface" width="narrow">
+        <SectionHeading
+          eyebrow="Interactive SEO & AI Tools"
+          title="Free SEO Tools & NicheSEO Pro Utilities"
+          subtitle="Generate llms.txt files, JSON-LD schema, pixel-accurate SERP previews, AI keyword clusters, live Google rank checks, and E-E-A-T content."
+        />
+        <motion.div className="mt-8" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <CardGrid variant="cards" columns={2}>
+            {interactiveTools.map(renderCard)}
+          </CardGrid>
+        </motion.div>
+      </Section>
+
+      {/* ── 3. FEATURED PUBLISHED CLIENT PIECE ── */}
+      <Section width="narrow" tight>
         <motion.a
           href={featured.href}
           target="_blank"
@@ -171,91 +348,6 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
             Read the published article <ExternalLink className="h-3.5 w-3.5" aria-hidden />
           </span>
         </motion.a>
-      </Section>
-
-      {/* ── CATEGORIES ── */}
-      <Section width="narrow">
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <CardGrid variant="cards" columns={2}>
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              const isLive = cat.status === "live";
-
-              const inner = (
-                <>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span
-                      className={`flex h-11 w-11 items-center justify-center ${radius.chip}`}
-                      style={{ background: color.primarySoft }}
-                    >
-                      <Icon className="h-5 w-5" style={{ color: color.primary }} aria-hidden />
-                    </span>
-                    {isLive ? (
-                      <span
-                        className={`${heading.eyebrow} inline-flex items-center gap-1 rounded-full px-2.5 py-1`}
-                        style={{ background: "#eafaf3", color: color.successDark }}
-                      >
-                        <span
-                          className="h-1.5 w-1.5 rounded-full"
-                          style={{ background: color.success }}
-                          aria-hidden
-                        />
-                        Live
-                      </span>
-                    ) : (
-                      <span
-                        className={`${heading.eyebrow} inline-flex items-center gap-1 rounded-full px-2.5 py-1`}
-                        style={{ background: color.surface, color: color.subtle }}
-                      >
-                        <Clock className="h-3 w-3" aria-hidden /> Coming Soon
-                      </span>
-                    )}
-                  </div>
-                  <h3 className={`${heading.h4} mb-2`} style={{ color: color.ink }}>
-                    {cat.title}
-                  </h3>
-                  <p className={text.small} style={{ color: color.muted }}>
-                    {cat.desc}
-                  </p>
-                  {isLive ? (
-                    <span
-                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
-                      style={{ color: color.primary }}
-                    >
-                      {cat.cta || "Open"} <ArrowRight className="h-4 w-4" aria-hidden />
-                    </span>
-                  ) : null}
-                </>
-              );
-
-              return cat.href ? (
-                <motion.div key={cat.title} variants={fadeUp}>
-                  <Link
-                    href={cat.href}
-                    className={`group block h-full ${radius.card} border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-xl`}
-                    style={{ borderColor: color.border }}
-                  >
-                    {inner}
-                  </Link>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key={cat.title}
-                  variants={fadeUp}
-                  className={`h-full ${radius.card} border bg-white p-6 opacity-90`}
-                  style={{ borderColor: color.border }}
-                >
-                  {inner}
-                </motion.div>
-              );
-            })}
-          </CardGrid>
-        </motion.div>
-
-        <p className={`${text.small} mt-8 text-center`} style={{ color: color.subtle }}>
-          New white papers, research, and guides are in the works — published from real client
-          results, not generic theory.
-        </p>
       </Section>
 
       <CtaBand
