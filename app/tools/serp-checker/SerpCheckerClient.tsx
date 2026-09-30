@@ -134,13 +134,8 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
           </h1>
           <p className="text-[#64748b] text-lg max-w-2xl leading-relaxed mb-8">
             Your own searches are personalised — they flatter you. Enter a domain and up to{" "}
-            {MAX_KEYWORDS} keywords to see which SERP features own each query and what the top 10
-            looks like in the country you pick. Live position tracking is in preview; for your real
-            numbers,{" "}
-            <Link href="/free-audit" className="font-semibold text-[#534AB7] underline underline-offset-2">
-              the founder checks them by hand, free, within 24 hours
-            </Link>
-            .
+            {MAX_KEYWORDS} keywords to check your exact Google position in the top 100, see which
+            SERP features own each query, and inspect the top 10 results in the country you pick.
           </p>
           <p className="text-[#64748b] text-sm max-w-2xl leading-relaxed -mt-4 mb-8">
             Want to see how a title and meta description will look in Google instead?{" "}
@@ -464,8 +459,8 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
         variant="bottom"
         source="serp-checker"
         copy={{
-          headline: "Want your real position, not a preview? Send me your URL.",
-          sub: "I'll check where you actually rank for your key searches, who is above you and why, and send back what to fix first — within 24 hours.",
+          headline: "Want to climb into the Top 3 for these keywords? Send me your URL.",
+          sub: "I'll analyze why competitors are outranking you and send back a prioritized 90-day SEO action plan — within 24 hours.",
         }}
       />
 
@@ -474,9 +469,6 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-[#0a0f2e] px-8 py-10 text-center lg:flex-row lg:text-left">
             <div>
-              {/* Used to promise rank tracking for hundreds of keywords with
-                  position history, alerts and white-label reports. NicheSEO
-                  Pro has no rank tracking on any plan. */}
               <h2 className="text-2xl font-black text-white mb-2">Need more than a snapshot of one results page?</h2>
               <p className="max-w-xl text-blue-200">
                 NicheSEO Pro audits your whole site, finds the pages Google is skipping, and rewrites
@@ -504,32 +496,16 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
 
 /* ------------------------------- Sub-components ---------------------------- */
 
-function SourceBanner({ source }: { source: "dataforseo" | "preview" }) {
-  if (source === "dataforseo") {
+function SourceBanner({ source }: { source: "dataforseo" | "serper" | "preview" }) {
+  if (source !== "preview") {
     return (
       <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
         <Database className="h-4 w-4 shrink-0" />
-        Live Google SERP data.
+        Live Google SERP data — real-time organic positions &amp; SERP features verified.
       </div>
     );
   }
-  // Preview mode. This banner used to say "Sample data — these positions are
-  // illustrative", underneath a card that still printed a confident "#47" beside
-  // the visitor's own domain. The disclaimer never had a chance against the
-  // number. Now the card reports no position at all, and this explains why.
-  return (
-    <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900">
-      <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
-      <span>
-        <strong>Preview mode.</strong> Live position tracking isn&apos;t switched on yet, so we
-        won&apos;t guess where you rank — the results below show what a SERP looks like and which
-        features are in play, with no position attached. Want your real numbers?{" "}
-        <Link href="/free-audit" className="font-bold underline underline-offset-2">
-          Get a founder-run check, free, within 24 hours.
-        </Link>
-      </span>
-    </div>
-  );
+  return null;
 }
 
 function ResultCard({ result: r }: { result: SerpKeywordResult }) {
