@@ -88,11 +88,21 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
 
   if (step === "done") {
     return (
-      <div className={`mx-auto flex max-w-xl items-start gap-3 rounded-3xl border p-5 text-left ${dark ? "border-white/15 bg-white/[0.06]" : "border-[#bfe5d3] bg-[#effaf5]"}`}>
-        <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#1a7d59]" aria-hidden />
-        <p className={`text-sm leading-relaxed ${dark ? "text-white/85" : "text-[#0a0f2e]"}`}>
-          <strong>Got it.</strong> I&apos;ll read {website.trim()} myself and reply to <strong>{email.trim()}</strong> within 24 hours.
-        </p>
+      <div className={`mx-auto flex max-w-xl flex-col gap-3 rounded-3xl border p-5 text-left sm:flex-row sm:items-center sm:justify-between ${dark ? "border-white/15 bg-white/[0.06]" : "border-[#bfe5d3] bg-[#effaf5]"}`}>
+        <div className="flex items-start gap-3">
+          <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#1a7d59]" aria-hidden />
+          <p className={`text-sm leading-relaxed ${dark ? "text-white/85" : "text-[#0a0f2e]"}`}>
+            <strong>Got it.</strong> I&apos;ll read {website.trim()} myself and reply to <strong>{email.trim()}</strong> within 24 hours.
+          </p>
+        </div>
+        <a
+          href="https://calendly.com/contact-searchprex/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#1a7d59] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[#196b4d]"
+        >
+          Book 30-min call <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+        </a>
       </div>
     );
   }

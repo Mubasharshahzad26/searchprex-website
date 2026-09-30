@@ -112,7 +112,7 @@ const TABS: AudienceTab[] = [
       "An AI intake assistant, so a 2am enquiry is not lost",
     ],
     proof: {
-      text: "No law firm client has been published yet. The practice-area pages show the plan, and the free tear-down lets you test me on your own firm first.",
+      text: "No law firm client has been published yet — which means the first firm I partner with in your city gets direct founder execution and market exclusivity while we build our flagship legal case study. Start with the free tear-down to test me on your firm first.",
       href: "/services/law-firm-seo",
       honest: true,
     },
@@ -418,7 +418,7 @@ export default function Home() {
       </section>
 
       {/* 4 · MID FORM */}
-      <section className="px-4 py-16 sm:px-6">
+      <section id="mid-audit-form" className="px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-[#dcdaf6] bg-[#f6f5ff] px-6 py-10 text-center sm:px-10">
           <h2 className={`${H} text-2xl  tracking-tight text-[#0a0f2e] sm:text-3xl`}>Want to know where your site stands?</h2>
           <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#5b6472]">
@@ -657,7 +657,7 @@ export default function Home() {
         </div>
       </section>
       {/* 13 · CLOSE — the last thing on the page is the offer */}
-      <section className="px-4 pb-20 sm:px-6">
+      <section id="get-started" className="scroll-mt-24 px-4 pb-20 sm:px-6">
         <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#0a0f2e] px-6 py-14 text-center sm:px-12">
           <h2 className={`${H} mx-auto max-w-2xl text-3xl  tracking-tight text-white sm:text-4xl`}>
             Send me your URL. I&apos;ll tell you what&apos;s holding it back.

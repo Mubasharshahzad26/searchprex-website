@@ -210,6 +210,15 @@ export default function HeroV2() {
                     </a>{" "}
                     and chase me.
                   </p>
+                  <a
+                    href={CALL_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-xs font-bold text-white transition-opacity hover:opacity-90"
+                    style={{ background: GREEN }}
+                  >
+                    Want to talk sooner? Book a 30-min call →
+                  </a>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
@@ -221,6 +230,7 @@ export default function HeroV2() {
                     />
                     <input
                       type="text"
+                      required
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
                       placeholder="yoursite.com"

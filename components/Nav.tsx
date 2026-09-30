@@ -430,7 +430,7 @@ export default function Nav() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="rounded-lg bg-[#534AB7] px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-[#3C3489]"
                   >
-                    Get My Growth Plan →
+                    Get My Free Audit →
                   </Link>
                 </div>
               </div>

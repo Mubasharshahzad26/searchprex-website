@@ -85,17 +85,6 @@ const profileLinks = [
     ),
   },
   {
-    href: "https://www.upwork.com/freelancers/~01400266ea842005be",
-    label: "Upwork",
-    bg: "#EAF3DE",
-    textColor: "#27500A",
-    icon: (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3.001-2.439-5.438-5.439-5.438z" />
-      </svg>
-    ),
-  },
-  {
     href: "https://www.researchgate.net/profile/Mubashar-Shahzad-4",
     label: "ResearchGate",
     bg: "#FAECE7",
@@ -132,20 +121,6 @@ const profileLinks = [
  
 export default function FounderSection() {
   return (
-    // Reworked into the same language as the rest of the page: flat token
-    // ground, hairline-bordered white cards at 12px with the soft
-    // 0 2px 12px shadow, and one accent instead of five.
-    //
-    // What went, and why:
-    //   - two gradient top-bars (purple -> green) and a gradient CTA button.
-    //     Semrush uses flat solid fills; a gradient reads as dated chrome next
-    //     to everything else here.
-    //   - the blurred blob behind the CTA card. Decoration on a credibility
-    //     block buys nothing.
-    //   - four pastel certificate chips and five pastel profile chips, each in
-    //     its own hue. Nine background colours in one section made a list of
-    //     verifiable credentials look like a sticker sheet; they are neutral
-    //     rows now, which reads as a record.
     <section className="border-y border-[#e6e8f0] bg-[#f8f9fc] py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -162,8 +137,7 @@ export default function FounderSection() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-[#566070]">
             Every strategy here comes from campaigns I ran myself for US ecommerce, law firm
-            and local clients &mdash; and every credential below opens the certificate that
-            proves it.
+            and local clients &mdash; backed by unedited Search Console and store revenue proof.
           </p>
         </motion.div>
 
@@ -174,33 +148,27 @@ export default function FounderSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-xl border border-[#e6e8f0] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.05)]"
+            className="flex flex-col justify-between rounded-xl border border-[#e6e8f0] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.05)]"
           >
             <div className="border-b border-[#eef0f6] p-6 sm:p-7">
               <div className="flex items-center gap-4">
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-[#e6e8f0] bg-[#eaecf3]">
                   <Image
                     src="/images/mubashar-sharif.jpg"
                     alt="Mubashar Sharif, Founder and CEO of SearchPrex"
                     fill
-                    sizes="64px"
-                    /* The portrait is a wide office shot, so at 64px the face
-                       would sit small in the middle of the room. Scaling in CSS
-                       frames the head without cropping the file itself. */
-                    className="origin-[52%_26%] scale-[1.75] object-cover"
+                    sizes="80px"
+                    className="object-cover object-top"
                   />
                 </div>
                 <div className="min-w-0">
                   <h3 className="text-xl font-bold text-[#0a0f2e]">Mubashar Sharif</h3>
                   <p className="text-sm text-[#566070]">
-                    Founder &amp; CEO &middot; SearchPrex &mdash; SEO Analyst, 5+ years
+                    Founder &amp; CEO &middot; SearchPrex &mdash; SEO Strategist, 5+ years
                   </p>
-                  <div className="mt-1.5 flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-3 w-3 fill-[#EF9F27] text-[#EF9F27]" />
-                    ))}
-                    <span className="ml-1 text-xs text-[#566070]">Upwork Top Rated</span>
-                  </div>
+                  <p className="mt-1 text-xs font-semibold text-[#196b4d]">
+                    Direct Founder Execution &middot; US Market Exclusivity
+                  </p>
                 </div>
               </div>
 
@@ -214,39 +182,6 @@ export default function FounderSection() {
                 with US organic clicks up 83% over the same period. Every number I publish comes
                 from a Search Console export I can show you.&rdquo;
               </blockquote>
-            </div>
-
-            {/* Certificates: a checkable list, not a sticker sheet */}
-            <div className="border-b border-[#eef0f6] p-6 sm:p-7">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#5f6a78]">
-                Semrush certified &mdash; click to verify
-              </p>
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                {credentials.map((c) => (
-                  <Link
-                    key={c.label}
-                    href={c.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-start gap-2.5 rounded-lg border border-[#e6e8f0] bg-white px-3 py-2.5 transition-colors hover:border-[#534AB7]/40 hover:bg-[#fafbfd]"
-                  >
-                    <CheckCircle
-                      className="mt-0.5 h-4 w-4 shrink-0"
-                      style={{ color: c.color }}
-                      aria-hidden="true"
-                    />
-                    <span className="min-w-0">
-                      <span className="block text-sm font-bold leading-snug text-[#0a0f2e]">
-                        {c.label}
-                      </span>
-                      <span className="mt-0.5 flex items-center gap-1 text-xs text-[#566070]">
-                        {c.sub}
-                        <ExternalLink className="h-3 w-3 opacity-60 transition-opacity group-hover:opacity-100" />
-                      </span>
-                    </span>
-                  </Link>
-                ))}
-              </div>
             </div>
 
             <div className="p-6 sm:p-7">

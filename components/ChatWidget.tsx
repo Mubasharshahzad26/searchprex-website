@@ -127,7 +127,7 @@ export default function ChatWidget() {
           <>
             <span className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border-2 border-[#3eb489]">
               <Image
-                src="/images/mubashar-transparent.png"
+                src="/images/mubashar-sharif.jpg"
                 alt="Mubashar Sharif"
                 fill
                 sizes="40px"
@@ -175,7 +175,7 @@ export default function ChatWidget() {
                   <div className="relative">
                     <div className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-[#3eb489]">
                       <Image
-                        src="/images/mubashar-transparent.png"
+                        src="/images/mubashar-sharif.jpg"
                         alt="Mubashar Sharif"
                         fill
                         sizes="44px"

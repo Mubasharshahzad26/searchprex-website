@@ -71,15 +71,13 @@ export default function BlogTeaser() {
               </p>
               <div className="mt-auto flex items-center justify-between border-t border-[#e5e7eb] pt-5">
                 <div className="flex items-center gap-2">
-                  {/* Wrapper clips the zoom: the portrait is a wide office
-                      shot, so the face needs framing at avatar sizes. */}
-                  <span className="relative block h-7 w-7 overflow-hidden rounded-full">
+                  <span className="relative block h-7 w-7 overflow-hidden rounded-full bg-[#eaecf3]">
                     <Image
                       src={featured.author.avatar}
                       alt={featured.author.name}
                       width={28}
                       height={28}
-                      className="h-7 w-7 origin-[52%_26%] scale-[1.75] object-cover"
+                      className="h-7 w-7 object-cover object-top scale-125 translate-y-0.5"
                     />
                   </span>
                   <span className="text-xs font-semibold text-[#0a0f2e]">
@@ -122,13 +120,13 @@ export default function BlogTeaser() {
                     {p.title}
                   </h3>
                   <div className="mt-auto flex items-center gap-2 border-t border-[#e5e7eb] pt-4">
-                    <span className="relative block h-6 w-6 overflow-hidden rounded-full">
+                    <span className="relative block h-6 w-6 overflow-hidden rounded-full bg-[#eaecf3]">
                       <Image
                         src={p.author.avatar}
                         alt={p.author.name}
                         width={24}
                         height={24}
-                        className="h-6 w-6 origin-[52%_26%] scale-[1.75] object-cover"
+                        className="h-6 w-6 object-cover object-top scale-125 translate-y-0.5"
                       />
                     </span>
                     <span className="text-xs font-semibold text-[#0a0f2e]">

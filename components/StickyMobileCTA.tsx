@@ -48,6 +48,8 @@ export default function StickyMobileCTA() {
       const hero = document.getElementById("hero");
       const forms = [
         document.getElementById("free-audit-form"),
+        document.getElementById("mid-audit-form"),
+        document.getElementById("get-started"),
         document.getElementById("tell-me-your-issue"),
         document.getElementById("quick-audit-heading"),
       ].filter(Boolean);

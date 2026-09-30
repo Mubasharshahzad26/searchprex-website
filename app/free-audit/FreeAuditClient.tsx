@@ -200,12 +200,23 @@ export default function FreeAuditClient() {
                 <strong className="font-bold text-[#0a0f2e]">{form.email}</strong> within 24
                 hours.
               </p>
-              <Link
-                href="/"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-[#196b4d] transition-colors hover:text-[#1a7d59]"
-              >
-                Back to home
-              </Link>
+              <div className="mt-6 flex flex-col gap-3 border-t border-[#eef0f6] pt-5">
+                <a
+                  href="https://calendly.com/contact-searchprex/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a7d59] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#156648]"
+                >
+                  Want to talk sooner? Book a 30-min call
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <Link
+                  href="/"
+                  className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#566070] transition-colors hover:text-[#0a0f2e]"
+                >
+                  ← Back to home
+                </Link>
+              </div>
             </div>
           ) : (
             <div className="overflow-hidden rounded-2xl border border-[#dfe3ec] bg-white shadow-[0_12px_36px_rgba(10,15,46,0.07)]">

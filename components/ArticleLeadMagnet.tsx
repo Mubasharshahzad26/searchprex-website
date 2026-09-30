@@ -103,6 +103,15 @@ function SuccessState({ website, email }: { website: string; email: string }) {
         I&apos;ll read {website.trim() || "your site"} myself and reply to{" "}
         <strong style={{ color: INK }}>{email.trim()}</strong> within 24 hours.
       </p>
+      <a
+        href={CALL_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+        style={{ background: GREEN }}
+      >
+        Want to talk sooner? Book 30 min →
+      </a>
     </div>
   );
 }
@@ -149,6 +158,7 @@ function SidebarVariant({ source, copy }: { source: string; copy?: Copy }) {
             <Globe className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2" style={{ color: "#94a3b8" }} aria-hidden="true" />
             <input
               type="text"
+              required
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
               placeholder="yoursite.com"
@@ -227,6 +237,7 @@ function BannerVariant({ source, copy }: { source: string; copy?: Copy }) {
                 <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: "#94a3b8" }} aria-hidden="true" />
                 <input
                   type="text"
+                  required
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
                   placeholder="yoursite.com"
@@ -290,6 +301,7 @@ function BottomVariant({ source, copy }: { source: string; copy?: Copy }) {
                 <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" aria-hidden="true" />
                 <input
                   type="text"
+                  required
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
                   placeholder="yoursite.com"
