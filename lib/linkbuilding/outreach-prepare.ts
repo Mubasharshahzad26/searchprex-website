@@ -214,17 +214,61 @@ export async function runOutreachPreparation(options: PrepareOptions): Promise<P
 
       stats.contactsFound++;
 
+      const isSearchPrex = campaign.targetDomain.toLowerCase().replace(/^www\./, '') === 'searchprex.com';
+      const prospectTextForMatching = `${title ?? ''} ${prospect.url} ${html
+        .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ')
+        .replace(/<[^>]+>/g, ' ')
+        .slice(0, 2000)}`.toLowerCase();
+
+      let suggestedUrl = `https://${campaign.targetDomain}`;
+      let suggestedValue = campaign.topic ?? campaign.name;
+
+      if (isSearchPrex) {
+        if (/llm|ai overview|chatgpt|perplexity|gptbot|ai search|generative/i.test(prospectTextForMatching)) {
+          suggestedUrl = 'https://www.searchprex.com/tools/llms-txt-generator';
+          suggestedValue =
+            'Free interactive llms.txt & AI bot robots.txt generator for controlling how GPTBot, ClaudeBot, PerplexityBot and Google-Extended index a site';
+        } else if (/regex|search console|\bgsc\b|query filter/i.test(prospectTextForMatching)) {
+          suggestedUrl = 'https://www.searchprex.com/resources/gsc-regex-library';
+          suggestedValue =
+            'Free copy-paste Google Search Console (GSC) Regex library for filtering question queries, long-tail keywords, and commercial intent';
+        } else if (/schema|json-ld|structured data|rich result|rich snippet/i.test(prospectTextForMatching)) {
+          suggestedUrl = 'https://www.searchprex.com/tools/schema-generator';
+          suggestedValue =
+            'Free JSON-LD Schema Markup Generator with copy-paste validation for LocalBusiness, LegalService, Product, and FAQPage';
+        } else if (/law firm|lawyer|attorney|legal marketing|personal injury|bar rule/i.test(prospectTextForMatching)) {
+          suggestedUrl =
+            angle === 'broken_link'
+              ? 'https://www.searchprex.com/resources/law-firm-seo-audit-checklist'
+              : 'https://www.searchprex.com/tools/keyword-research';
+          suggestedValue =
+            'Free Law Firm SEO Keyword Research Tool & Bar-Compliant Audit Checklist built specifically for US practice areas';
+        } else if (/woocommerce|shopify|ecommerce|crawl budget|de-index|product page/i.test(prospectTextForMatching)) {
+          suggestedUrl =
+            angle === 'broken_link'
+              ? 'https://www.searchprex.com/resources/woocommerce-seo-checklist'
+              : 'https://www.searchprex.com/case-studies/ecommerce/smk-store';
+          suggestedValue =
+            'Real 35,000-SKU WooCommerce SEO case study ($5,832 to $19,100/mo net sales in 60 days) and technical crawl-budget checklist';
+        } else if (/google business profile|\bgbp\b|map pack|local seo|local pack|citation/i.test(prospectTextForMatching)) {
+          suggestedUrl = 'https://www.searchprex.com/resources/google-business-profile-checklist';
+          suggestedValue =
+            'Free Google Business Profile (GBP) & Local Map Pack Checklist backed by real 60-day top-3 local pack and AI Overview case studies';
+        } else {
+          suggestedUrl = 'https://www.searchprex.com/tools';
+          suggestedValue =
+            'Suite of free browser-based SEO tools including an llms.txt Generator, JSON-LD Schema Generator, GSC Regex Library, and live SERP Checker';
+        }
+      }
+
       const composeInput: ComposeInput = {
         angle,
         senderName: mailbox.fromName,
         senderRole,
         clientName: campaign.client.companyName,
         clientSite: `https://${campaign.targetDomain}`,
-        //  Phase 3 suggests the campaign's home page by default. Which page to
-        //  pitch per prospect is a judgement call, and picking it badly is
-        //  worse than letting a human set it before approving.
-        targetUrl: `https://${campaign.targetDomain}`,
-        targetValue: campaign.topic ?? campaign.name,
+        targetUrl: suggestedUrl,
+        targetValue: suggestedValue,
         prospectDomain: prospect.domain,
         prospectUrl: finalUrl,
         prospectTitle: title,

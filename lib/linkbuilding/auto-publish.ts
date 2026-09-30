@@ -37,37 +37,67 @@ export interface AutoPublishStats {
 
 const DEFAULT_MAX_POSTS = 10;
 
-/** Target profiles for rotating high-commercial MSO links */
+/** Target profiles for rotating high-commercial MSO links (8-12 quality links/day) */
 const MSO_TARGET_PROFILES = [
   {
-    targetUrl: 'https://michigansportsoutdoor.com/october-season/',
-    topic: 'Fall Field Dressing & Big Game Skinning Knives',
-    anchors: ['Michigan Sports Outdoor Hunting Blades', 'Michigan Sports Outdoor fall blades', 'hunting knife collection'],
-    theme: 'autumn hunting prep, steel toughness for Michigan whitetail field dress, blade geometries'
+    targetUrl: 'https://www.michigansportsoutdoor.com/sale/',
+    topic: '2026 Knife Sale & Outdoor Gear Clearance: How to Spot Genuine Cutlery Deals',
+    anchors: ['Michigan Sports Outdoor knife sale', 'Michigan Sports Outdoor clearance blades', 'discounted pocket knives and outdoor gear'],
+    theme: 'evaluating clearance cutlery, manufacturer warranty on sale knives, saving up to 86% on in-stock blades'
   },
   {
-    targetUrl: 'https://michigansportsoutdoor.com/collections/michigan-legal-knives',
-    topic: 'Midwest Knife Carry Laws & Everyday Legal Blades',
-    anchors: ['Michigan Sports Outdoor legal knife collection', 'Michigan legal EDC knives', 'Midwest legal cutlery'],
-    theme: 'statutory compliance in Michigan and Midwest, automatic knife legality, EDC blade length'
+    targetUrl: 'https://www.michigansportsoutdoor.com/product/kershaw-scrip-linerlock-a-o/',
+    topic: 'SpeedSafe Assisted Opening Knives for Everyday Utility Under $50',
+    anchors: ['Kershaw Scrip assisted knife', 'Kershaw Scrip Linerlock A/O', 'Kershaw BlackWash pocket knife'],
+    theme: 'one-handed torsion-bar deployment, 8Cr13MoV BlackWash edge retention, budget workhorse folders'
   },
   {
-    targetUrl: 'https://michigansportsoutdoor.com/product-category/knives-tools/hunting-knives/',
-    topic: 'High-Carbon vs Powder Metallurgy Steel in Hunting Cutlery',
-    anchors: ['American hunting knives', 'Michigan Sports Outdoor hunting gear', 'field hunting blades'],
-    theme: 'MagnaCut, CPM-S35VN, D2 blade steels comparison for rugged woods work'
+    targetUrl: 'https://www.michigansportsoutdoor.com/product/maratac-anvil-acebeam-flashlight/',
+    topic: 'High-Output 1000-Lumen Pocket EDC Flashlights for Backcountry Navigation',
+    anchors: ['Maratac Anvil Acebeam flashlight', '1000-lumen USB-C EDC flashlight', 'Maratac Anvil tactical light'],
+    theme: '14500 rechargeable lithium-ion cells, 105-meter beam distance, aircraft aluminum knurled chassis'
   },
   {
-    targetUrl: 'https://michigansportsoutdoor.com/product-category/knives-tools/folding-knives/',
-    topic: 'Pocket Knife Locking Mechanisms: Frame Lock vs Crossbar Lock',
-    anchors: ['everyday carry pocket knives', 'Michigan Sports Outdoor EDC folding knives', 'folding knife catalog'],
+    targetUrl: 'https://www.michigansportsoutdoor.com/product/revo-canyon-button-lock-gray/',
+    topic: 'Why Plunge Button Lock Pocket Knives Dominate Modern Everyday Carry',
+    anchors: ['Revo Canyon button lock', 'Revo Canyon EDC folding knife', 'button lock pocket knife'],
+    theme: 'keeping fingers out of the blade path, caged ceramic bearings, fidget-friendly zero-play lockup'
+  },
+  {
+    targetUrl: 'https://www.michigansportsoutdoor.com/product/kubey-thorn-fixed-blade-blue-mic/',
+    topic: 'Compact Full-Tang EDC Fixed Blades with Micarta Scales for Hikers',
+    anchors: ['Kubey Thorn fixed blade', 'Kubey Thorn blue Micarta knife', 'compact full-tang camp knife'],
+    theme: 'wet-weather linen Micarta traction, Kydex belt sheath carry, structural integrity over folding hinges'
+  },
+  {
+    targetUrl: 'https://www.michigansportsoutdoor.com/product/bestech-knives-cicadas-wing-bar-lock-grey/',
+    topic: 'Ambidextrous Crossbar Lock Engineering in Modern Pocket Cutlery',
+    anchors: ["Bestech Cicada's Wing bar lock knife", 'Bestech crossbar lock folder', 'ambidextrous bar lock pocket knife'],
+    theme: 'dual omega spring tension, symmetrical thumb stud deployment, deep-carry pocket ergonomics'
+  },
+  {
+    targetUrl: 'https://www.michigansportsoutdoor.com/product/silky-gomboy-pro-folding-saw-240mm/',
+    topic: 'Clearing Whitetail Deer Blind Shooting Lanes with Japanese Pull-Stroke Saws',
+    anchors: ['Silky Gomboy 240 folding saw', 'Silky GomBoy Pro 240mm saw', 'Japanese SK4 folding pruning saw'],
+    theme: 'impulse-hardened Mirai-Me teeth, silent pre-dawn treestand prep, backcountry timber processing'
+  },
+  {
+    targetUrl: 'https://www.michigansportsoutdoor.com/folding-knives/',
+    topic: 'Pocket Knife Locking Mechanisms: Frame Lock, Crossbar Lock & Liner Lock Compared',
+    anchors: ['Michigan Sports Outdoor EDC folding knives', 'everyday carry pocket knives', 'folding knife catalog'],
     theme: 'lock strength, thumb stud deployment, deep carry clips for working outdoorsmen'
   },
   {
-    targetUrl: 'https://michigansportsoutdoor.com/',
-    topic: 'Wilderness Survival Gear & Field Sharpening Protocol',
-    anchors: ['Michigan Sports Outdoor', 'michigansportsoutdoor.com', 'Michigan Sports Outdoor gear'],
-    theme: 'diamond whetstones, ceramic rods in sub-zero wilderness camps, maintaining factory apex'
+    targetUrl: 'https://www.michigansportsoutdoor.com/collections/knives/locking-knives/',
+    topic: 'Heavy-Duty Locking Pocket Knives for Tactical and Jobsite Chores',
+    anchors: ['locking pocket knives at Michigan Sports Outdoor', 'EDC and tactical locking folders', 'Michigan Sports Outdoor knife collection'],
+    theme: 'shear strength under heavy torque, Sandvik 14C28N and D2 tool steel workhorses'
+  },
+  {
+    targetUrl: 'https://www.michigansportsoutdoor.com/october-season/',
+    topic: 'Fall Field Dressing & Michigan Whitetail Skinning Knives',
+    anchors: ['Michigan Sports Outdoor Hunting Blades', 'Michigan Sports Outdoor fall blades', 'hunting knife collection'],
+    theme: 'autumn hunting prep, steel toughness for Michigan whitetail field dress, blade geometries'
   },
 ];
 
@@ -505,6 +535,12 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
 
     if (!client || !client.linkCampaigns.length) return 0;
 
+    // Safety guard: Never run Web 2.0 auto-publish replenishment on SearchPrex's own flagship domain.
+    if (client.domain.toLowerCase().includes('searchprex.com')) {
+      console.log('[auto-publish] Skipping Web 2.0 auto-publish replenishment for flagship agency domain (searchprex.com).');
+      return 0;
+    }
+
     const approvedCount = await withRetry(() =>
       db.brandPropertyPost.count({
         where: {
@@ -514,9 +550,9 @@ async function replenishApprovedPosts(clientId?: string): Promise<number> {
       })
     );
 
-    if (approvedCount >= 2) return 0;
+    if (approvedCount >= 10) return 0;
 
-    const needed = 2 - approvedCount;
+    const needed = Math.min(8, 10 - approvedCount);
     let created = 0;
 
     const properties = client.brandProperties.filter((p) => p.status !== 'retired');
@@ -700,12 +736,17 @@ export async function runAutoPublish(
   // 1. Autonomous Queue Replenishment — ensure approved posts exist
   await replenishApprovedPosts(clientId);
 
-  // 2. Find posts that are approved and ready for publishing
+  // 2. Find posts that are approved and ready for publishing (excluding flagship searchprex.com)
   const posts = await withRetry(() =>
     db.brandPropertyPost.findMany({
       where: {
         status: 'approved',
-        ...(clientId ? { property: { clientId } } : {}),
+        property: {
+          ...(clientId ? { clientId } : {}),
+          client: {
+            domain: { notIn: ['searchprex.com', 'www.searchprex.com'] },
+          },
+        },
       },
       include: {
         property: {
@@ -732,85 +773,115 @@ export async function runAutoPublish(
     const platform = (post.property.platform || 'telegraph').toLowerCase();
     let liveUrl = '';
 
+    let usedPlatform = platform;
     try {
-      if (platform.includes('telegraph') || platform.includes('telegra.ph')) {
-        liveUrl = await publishToTelegraph({
-          title: post.title,
-          bodyHtml: post.bodyHtml,
-          authorName: post.property.authorName || undefined,
-        });
-      } else if (platform.includes('dev.to') || platform.includes('devto')) {
-        if (process.env.DEVTO_API_KEY) {
-          liveUrl = await publishToDevTo({
+      try {
+        if (platform.includes('telegraph') || platform.includes('telegra.ph')) {
+          liveUrl = await publishToTelegraph({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+            authorName: post.property.authorName || undefined,
+          });
+        } else if (platform.includes('dev.to') || platform.includes('devto')) {
+          if (process.env.DEVTO_API_KEY) {
+            liveUrl = await publishToDevTo({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+          } else {
+            console.warn('[auto-publish] DEVTO_API_KEY missing, falling back to GitHub Gist');
+            liveUrl = await publishToGitHubGist({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+            usedPlatform = 'github';
+          }
+        } else if (platform.includes('github') || platform.includes('gist')) {
+          if (process.env.GITHUB_ACCESS_TOKEN) {
+            liveUrl = await publishToGitHubGist({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+          } else {
+            console.warn('[auto-publish] GITHUB_ACCESS_TOKEN missing, falling back to Telegra.ph');
+            liveUrl = await publishToTelegraph({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+              authorName: post.property.authorName || undefined,
+            });
+          }
+        } else if (platform.includes('write.as') || platform.includes('writeas')) {
+          liveUrl = await publishToWriteAs({
+            title: post.title,
+            bodyHtml: post.bodyHtml,
+          });
+        } else if (platform.includes('gitlab')) {
+          if (process.env.GITLAB_ACCESS_TOKEN) {
+            liveUrl = await publishToGitLabSnippet({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+          } else {
+            console.warn('[auto-publish] GITLAB_ACCESS_TOKEN missing, falling back to GitHub Gist');
+            liveUrl = await publishToGitHubGist({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+            usedPlatform = 'github';
+          }
+        } else if (platform.includes('notion')) {
+          if (process.env.NOTION_ACCESS_TOKEN) {
+            liveUrl = await publishToNotionPage({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+          } else {
+            console.warn('[auto-publish] NOTION_ACCESS_TOKEN missing, falling back to GitHub Gist');
+            liveUrl = await publishToGitHubGist({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+            usedPlatform = 'github';
+          }
+        } else if (platform.includes('medium')) {
+          liveUrl = await publishToMedium({
             title: post.title,
             bodyHtml: post.bodyHtml,
           });
         } else {
-          // Gracefully fallback to Telegraph if dev.to key missing in current env
-          console.warn('[auto-publish] DEVTO_API_KEY missing, falling back to Telegra.ph');
           liveUrl = await publishToTelegraph({
             title: post.title,
             bodyHtml: post.bodyHtml,
             authorName: post.property.authorName || undefined,
           });
         }
-      } else if (platform.includes('github') || platform.includes('gist')) {
-        if (process.env.GITHUB_ACCESS_TOKEN) {
+      } catch (primaryErr) {
+        console.warn(`[auto-publish] Primary platform ${platform} failed for post ${post.id}, trying high-DA fallback (Notion/GitHub)...`);
+        if (process.env.NOTION_ACCESS_TOKEN && stats.published % 2 === 0) {
+          try {
+            liveUrl = await publishToNotionPage({
+              title: post.title,
+              bodyHtml: post.bodyHtml,
+            });
+            usedPlatform = 'notion';
+          } catch {
+            if (process.env.GITHUB_ACCESS_TOKEN) {
+              liveUrl = await publishToGitHubGist({
+                title: post.title,
+                bodyHtml: post.bodyHtml,
+              });
+              usedPlatform = 'github';
+            }
+          }
+        } else if (process.env.GITHUB_ACCESS_TOKEN) {
           liveUrl = await publishToGitHubGist({
             title: post.title,
             bodyHtml: post.bodyHtml,
           });
+          usedPlatform = 'github';
         } else {
-          console.warn('[auto-publish] GITHUB_ACCESS_TOKEN missing, falling back to Telegra.ph');
-          liveUrl = await publishToTelegraph({
-            title: post.title,
-            bodyHtml: post.bodyHtml,
-            authorName: post.property.authorName || undefined,
-          });
+          throw primaryErr;
         }
-      } else if (platform.includes('write.as') || platform.includes('writeas')) {
-        liveUrl = await publishToWriteAs({
-          title: post.title,
-          bodyHtml: post.bodyHtml,
-        });
-      } else if (platform.includes('gitlab')) {
-        if (process.env.GITLAB_ACCESS_TOKEN) {
-          liveUrl = await publishToGitLabSnippet({
-            title: post.title,
-            bodyHtml: post.bodyHtml,
-          });
-        } else {
-          console.warn('[auto-publish] GITLAB_ACCESS_TOKEN missing, falling back to Telegra.ph');
-          liveUrl = await publishToTelegraph({
-            title: post.title,
-            bodyHtml: post.bodyHtml,
-          });
-        }
-      } else if (platform.includes('notion')) {
-        if (process.env.NOTION_ACCESS_TOKEN) {
-          liveUrl = await publishToNotionPage({
-            title: post.title,
-            bodyHtml: post.bodyHtml,
-          });
-        } else {
-          console.warn('[auto-publish] NOTION_ACCESS_TOKEN missing, falling back to Telegra.ph');
-          liveUrl = await publishToTelegraph({
-            title: post.title,
-            bodyHtml: post.bodyHtml,
-            authorName: post.property.authorName || undefined,
-          });
-        }
-      } else if (platform.includes('medium')) {
-        liveUrl = await publishToMedium({
-          title: post.title,
-          bodyHtml: post.bodyHtml,
-        });
-      } else {
-        liveUrl = await publishToTelegraph({
-          title: post.title,
-          bodyHtml: post.bodyHtml,
-          authorName: post.property.authorName || undefined,
-        });
       }
 
       if (liveUrl) {
@@ -871,7 +942,7 @@ export async function runAutoPublish(
         }
 
         stats.published++;
-        stats.platforms[platform] = (stats.platforms[platform] ?? 0) + 1;
+        stats.platforms[usedPlatform] = (stats.platforms[usedPlatform] ?? 0) + 1;
       }
     } catch (err) {
       console.error(`[auto-publish] Failed to publish post ${post.id} to ${platform}:`, err);

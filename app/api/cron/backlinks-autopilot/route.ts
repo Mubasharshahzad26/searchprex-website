@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/db';
 import { runLinkDiscovery } from '@/lib/linkbuilding/discover-run';
 import { runLinkQualification } from '@/lib/linkbuilding/qualify-run';
 import { runLinkVerification } from '@/lib/linkbuilding/verify-run';
+import { runOutreachPreparation } from '@/lib/linkbuilding/outreach-prepare';
 import { runOutreachFollowUps } from '@/lib/linkbuilding/followup-run';
 import { runAutoPublish } from '@/lib/linkbuilding/auto-publish';
 import { syncAuthority } from '@/lib/linkbuilding/authority-tracker';
@@ -22,6 +24,7 @@ function isAuthorized(req: NextRequest): boolean {
 export type PipelineAction =
   | 'discover'
   | 'qualify'
+  | 'prepare'
   | 'verify'
   | 'followup'
   | 'autopublish'
@@ -60,7 +63,30 @@ async function executePipeline(options: {
     });
   }
 
-  // 3. Headless Auto-Publish (Telegra.ph & Dev.to)
+  // 3. Outreach Draft Preparation (Finds contacts & drafts Free Tool / Case Study pitches — never sends)
+  if (action === 'all' || action === 'prepare') {
+    try {
+      const activeMailbox = await db.outreachMailbox.findFirst({
+        where: { active: true },
+        orderBy: { createdAt: 'asc' },
+      });
+      if (activeMailbox) {
+        results.outreachPrepare = await runOutreachPreparation({
+          mailboxId: activeMailbox.id,
+          clientId,
+          campaignId,
+          maxProspects: 20,
+          budgetMs: 60_000,
+        });
+      } else {
+        results.outreachPrepare = { skipped: true, reason: 'No active outreach mailbox configured yet.' };
+      }
+    } catch (err) {
+      results.outreachPrepareError = String(err);
+    }
+  }
+
+  // 4. Headless Auto-Publish (MSO / Eligible E-commerce Stores Only; SearchPrex is safely excluded)
   if (action === 'all' || action === 'autopublish') {
     try {
       results.autoPublish = await runAutoPublish({
@@ -72,7 +98,7 @@ async function executePipeline(options: {
     }
   }
 
-  // 4. Automated Outreach Follow-ups
+  // 5. Automated Outreach Follow-ups
   if (action === 'all' || action === 'followup') {
     try {
       results.followUps = await runOutreachFollowUps({

@@ -175,7 +175,7 @@ export default function LinksDashboard({
     }
   };
 
-  const handleRunAction = async (action: 'discover' | 'qualify' | 'verify' | 'followup' | 'authority') => {
+  const handleRunAction = async (action: 'discover' | 'qualify' | 'prepare' | 'verify' | 'followup' | 'authority') => {
     setIsRunningAction(true);
     setActionStatus(`Running ${action} pipeline...`);
     try {
@@ -212,6 +212,7 @@ export default function LinksDashboard({
   };
 
   const isMSO = activeCampaign?.targetDomain?.includes('michigansportsoutdoor.com');
+  const isSearchPrex = activeCampaign?.targetDomain?.includes('searchprex.com');
 
   return (
     <div className="mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 pt-28 sm:pt-32 font-sans">
@@ -255,18 +256,22 @@ export default function LinksDashboard({
           </div>
         </div>
 
-        {/* Dynamic Aggressive Authority Banner (When MSO or any campaign is active) */}
+        {/* Dynamic Authority Banner (When MSO, SearchPrex, or any campaign is active) */}
         {activeCampaign && (
           <div className={`mt-6 rounded-2xl border p-5 shadow-sm transition-all ${
             isMSO 
               ? 'border-blue-200 bg-gradient-to-r from-blue-50/80 via-indigo-50/60 to-sky-50/80' 
+              : isSearchPrex
+              ? 'border-emerald-200 bg-gradient-to-r from-emerald-50/80 via-teal-50/60 to-sky-50/80'
               : 'border-slate-200 bg-slate-50/70'
           }`}>
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-blue-600 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-white">
-                    {isMSO ? 'Aggressive Growth Campaign' : 'Active Client'}
+                  <span className={`rounded-md px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-white ${
+                    isSearchPrex ? 'bg-emerald-600' : 'bg-blue-600'
+                  }`}>
+                    {isMSO ? 'Aggressive Growth Campaign' : isSearchPrex ? 'White-Hat Authority & Free Tools Outreach' : 'Active Client'}
                   </span>
                   <span className="text-xs font-semibold text-slate-500">Target Domain:</span>
                   <a 
@@ -284,16 +289,22 @@ export default function LinksDashboard({
                 <p className="text-xs text-slate-600 leading-relaxed max-w-2xl">
                   {isMSO 
                     ? 'Engine targets High-DA outdoor/knife blogs, competitor backlink gaps (BladeHQ, KnifeCenter), and Web 2.0 authority hubs with safe anchor text distribution.'
+                    : isSearchPrex
+                    ? 'White-Hat Agency Mode: Web 2.0 auto-posting disabled. Pitches Free SEO Tools (llms.txt, Schema Generator, GSC Regex) & Case Studies with human approval + tracks 15 B2B Agency Citations.'
                     : 'Engine monitors backlinks, qualified prospect pipeline, and local directory listings.'
                   }
                 </p>
               </div>
 
-              {/* Authority Goals for MSO */}
+              {/* Authority Goals for MSO / SearchPrex */}
               <div className="flex flex-wrap items-center gap-3">
                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-center shadow-xs">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Current Authority</div>
-                  <div className="text-xl font-black text-slate-800">{isMSO ? 'DA 6' : 'Active'}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    {isSearchPrex ? 'Safety Mode' : 'Current Authority'}
+                  </div>
+                  <div className="text-xl font-black text-slate-800">
+                    {isMSO ? 'DA 6' : isSearchPrex ? 'White-Hat' : 'Active'}
+                  </div>
                 </div>
                 {isMSO && (
                   <>
@@ -301,6 +312,15 @@ export default function LinksDashboard({
                     <div className="rounded-xl border border-blue-200 bg-blue-600 px-4 py-2.5 text-center shadow-sm text-white">
                       <div className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Target Goal</div>
                       <div className="text-xl font-black">DA 25+</div>
+                    </div>
+                  </>
+                )}
+                {isSearchPrex && (
+                  <>
+                    <div className="text-emerald-600 font-black text-base hidden sm:block">➔</div>
+                    <div className="rounded-xl border border-emerald-200 bg-emerald-600 px-4 py-2.5 text-center shadow-sm text-white">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-100">Target Goal</div>
+                      <div className="text-xl font-black">DR 40+</div>
                     </div>
                   </>
                 )}
@@ -330,6 +350,13 @@ export default function LinksDashboard({
                   className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 shadow-xs hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
                 >
                   <Sparkles className="h-3.5 w-3.5 text-purple-600" /> Run AI Qualify
+                </button>
+                <button
+                  onClick={() => handleRunAction('prepare')}
+                  disabled={isRunningAction}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 shadow-xs hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
+                >
+                  <Mail className="h-3.5 w-3.5 text-teal-600" /> Prepare Drafts
                 </button>
                 <button
                   onClick={() => handleRunAction('verify')}
