@@ -256,7 +256,7 @@ export default function GscRegexLibraryPage() {
           title="Google Search Console Regex Questions, Answered"
         />
         <div className="mt-10">
-          <FaqList items={FAQS} />
+          <FaqList faqs={FAQS} name="gsc-regex-faq" />
         </div>
       </Section>
 

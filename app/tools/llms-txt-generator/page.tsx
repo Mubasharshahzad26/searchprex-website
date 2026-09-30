@@ -217,7 +217,7 @@ export default function LlmsTxtGeneratorPage() {
           title="llms.txt & AI Crawler Questions, Answered"
         />
         <div className="mt-10">
-          <FaqList items={FAQS} />
+          <FaqList faqs={FAQS} name="llms-txt-faq" />
         </div>
       </Section>
 
