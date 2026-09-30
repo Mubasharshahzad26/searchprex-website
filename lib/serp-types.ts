@@ -37,7 +37,7 @@ export interface SerpKeywordResult {
    *                position for the user's real domain — on an SEO agency's own
    *                site, a fabricated rank is the worst possible thing to ship.
    */
-  source: 'dataforseo' | 'preview'
+  source: 'dataforseo' | 'serper' | 'preview'
   /** Organic position in the top 100, or null when the domain never appears. */
   position: number | null
   found: boolean
@@ -59,7 +59,7 @@ export interface SerpKeywordResult {
 export interface SerpResponse {
   domain: string
   location: string
-  source: 'dataforseo' | 'preview'
+  source: 'dataforseo' | 'serper' | 'preview'
   results: SerpKeywordResult[]
   checkedAt: string
 }

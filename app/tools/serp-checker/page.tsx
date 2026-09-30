@@ -17,12 +17,12 @@ const SITE = "https://www.searchprex.com";
 // problem than untrue in body copy.
 export const SERP_FAQS = [
   {
-    q: "Is the SERP Checker live yet?",
-    a: "It runs in preview mode today. That means it shows you which SERP features are in play for a query and what a top-10 layout looks like, but it will not tell you your position — because it cannot measure it yet. Live position tracking switches on once the data provider is connected. Until then, the founder will check your keywords by hand and send you the real numbers free within 24 hours.",
+    q: "How does the SearchPrex SERP Checker work?",
+    a: "It pulls the live Google results page for your exact keyword and country in real time. It scans the top 100 organic positions for your domain, tracks competitor positions in the top 10, and highlights all active SERP features (like AI Overviews, Featured Snippets, and People Also Ask).",
   },
   {
     q: "Why won't the tool just estimate my ranking?",
-    a: "Because an estimate dressed up as a position is worse than no answer. An invented '#47' next to your domain looks exactly like a real measurement, and you would make decisions on it. When we don't know, the tool says so.",
+    a: "Because an estimate dressed up as a position is misleading. SearchPrex checks live Google search results so you get verified rankings rather than guessed or fabricated numbers.",
   },
   {
     q: "How will the SERP checker find my ranking once it's live?",

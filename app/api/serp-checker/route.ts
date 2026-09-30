@@ -131,23 +131,18 @@ export async function POST(req: NextRequest) {
 
   const checkedAt = new Date().toISOString()
 
-  // 3. No creds → preview mode. Returns an example SERP and says nothing about
-  //    the caller's own ranking; see lib/serp-types.ts for why guessing here was
-  //    worse than admitting we don't know.
-  const login = process.env.DATAFORSEO_LOGIN
-  const password = process.env.DATAFORSEO_PASSWORD
-  if (!login || !password) {
+  // 3. Check for API Credentials (SERPER_API_KEY as primary, DataForSEO as fallback)
+  const serperKey = process.env.SERPER_API_KEY?.trim()
+  const login = process.env.DATAFORSEO_LOGIN?.trim()
+  const password = process.env.DATAFORSEO_PASSWORD?.trim()
+
+  if (!serperKey && (!login || !password)) {
     return NextResponse.json(
       buildPreview(domain, unique, country.name, checkedAt),
     )
   }
 
   // 4. Spend the caller's remaining daily quota.
-  //
-  //    The 24-hour result cache that used to sit in front of this is gone with
-  //    the SerpCache table. It should return before this endpoint is exposed
-  //    publicly with live credentials: repeat queries are most of the traffic
-  //    on a free tool, and without a cache every one of them is billed again.
   const spent = await usageToday(visitor)
   const remaining = Math.max(0, DAILY_KEYWORD_QUOTA - spent)
 
@@ -164,34 +159,36 @@ export async function POST(req: NextRequest) {
   const fetched = new Map<string, SerpKeywordResult>()
 
   const live = await Promise.all(
-    toFetch.map((keyword) =>
-      fetchLiveResult(login, password, domain, keyword, country.name),
-    ),
+    toFetch.map((keyword) => {
+      if (serperKey) {
+        return fetchLiveSerperResult(serperKey, domain, keyword, country.name, country.code)
+      }
+      return fetchLiveResult(login!, password!, domain, keyword, country.name)
+    }),
   )
 
-  // Only bill the caller for calls that actually reached DataForSEO. A keyword
-  // that fell back to an estimate cost nothing and must not consume quota.
   let billable = 0
   live.forEach((result, i) => {
     fetched.set(toFetch[i], result)
-    if (result.source === 'dataforseo') billable += 1
+    if (result.source !== 'preview') billable += 1
   })
   await recordUsage(visitor, billable)
 
   const results = unique.map(
     (keyword) =>
       fetched.get(keyword) ??
-      // Beyond today's quota: fall back to preview rather than failing the whole
-      // request, so the keywords that did get a live reading still come back.
       previewSerpKeyword(domain, keyword, country.name),
   )
+
+  const hasLive = results.some((r) => r.source !== 'preview')
+  const overallSource = hasLive
+    ? (serperKey ? 'serper' : 'dataforseo')
+    : 'preview'
 
   return NextResponse.json({
     domain,
     location: country.name,
-    source: results.every((r) => r.source === 'preview')
-      ? 'preview'
-      : ('dataforseo' as const),
+    source: overallSource,
     results,
     checkedAt,
   } satisfies SerpResponse)
@@ -212,7 +209,181 @@ function buildPreview(
   }
 }
 
-async function fetchLiveResult(
+async function fetchLiveSerperResult(
+  apiKey: string,
+  domain: string,
+  keyword: string,
+  location: string,
+  countryCode: string,
+): Promise<SerpKeywordResult> {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 20_000)
+
+  try {
+    const gl = countryCode.toLowerCase()
+    const res = await fetch('https://google.serper.dev/search', {
+      method: 'POST',
+      headers: {
+        'X-API-KEY': apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        q: keyword,
+        gl: gl !== 'global' ? gl : undefined,
+        num: 10,
+      }),
+      signal: controller.signal,
+      cache: 'no-store',
+    })
+
+    if (!res.ok) throw new Error(`Serper HTTP ${res.status}`)
+    const data = await res.json()
+
+    const organicItems: SerpItem[] = []
+    const rawOrganic = Array.isArray(data.organic) ? data.organic : []
+
+    for (let i = 0; i < rawOrganic.length; i++) {
+      const r = rawOrganic[i]
+      if (!r.link) continue
+      organicItems.push({
+        rank: i + 1,
+        url: r.link,
+        domain: domainFromUrl(r.link),
+        title: r.title ?? '',
+        snippet: r.snippet ?? '',
+      })
+    }
+
+    // If user's domain is not in the first 10, scan pages 2-5 (positions 11-50) concurrently
+    let foundResult = organicItems.find((r) => domainMatches(r.domain, domain)) ?? null
+    let totalScanned = organicItems.length
+
+    if (!foundResult) {
+      try {
+        const extraPages = await Promise.all(
+          [2, 3, 4, 5].map(async (pageIndex) => {
+            const extraRes = await fetch('https://google.serper.dev/search', {
+              method: 'POST',
+              headers: {
+                'X-API-KEY': apiKey,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                q: keyword,
+                page: pageIndex,
+                gl: gl !== 'global' ? gl : undefined,
+              }),
+              signal: controller.signal,
+              cache: 'no-store',
+            })
+            if (!extraRes.ok) return []
+            const extraData = await extraRes.json()
+            return Array.isArray(extraData.organic) ? extraData.organic : []
+          })
+        )
+
+        let currentRank = organicItems.length + 1
+        for (const pageList of extraPages) {
+          for (const item of pageList) {
+            totalScanned++
+            const itemDomain = domainFromUrl(item.link)
+            if (!foundResult && domainMatches(itemDomain, domain)) {
+              foundResult = {
+                rank: currentRank,
+                url: item.link,
+                domain: itemDomain,
+                title: item.title ?? '',
+                snippet: item.snippet ?? '',
+              }
+            }
+            currentRank++
+          }
+        }
+      } catch {}
+    }
+
+    // Detect SERP features from Serper payload
+    const features = detectSerperFeatures(data)
+
+    // AI Overview or Featured Snippet Answer Box
+    let aiOverview: { title: string; url: string; domain: string; text: string } | undefined
+    if (data.answerBox) {
+      const ab = data.answerBox
+      const abUrl = ab.link || ''
+      const abDomain = abUrl ? domainFromUrl(abUrl) : ''
+      aiOverview = {
+        title: ab.title || 'Featured Answer',
+        url: abUrl,
+        domain: abDomain,
+        text: (ab.snippet || ab.answer || '').slice(0, 400),
+      }
+    }
+
+    const isAiOverview = !!aiOverview && domainMatches(aiOverview.domain, domain)
+    const position = foundResult?.rank ?? null
+
+    // Competitors: top 10 domains frequency
+    const tally = new Map<string, number>()
+    for (const r of organicItems.slice(0, 10)) {
+      tally.set(r.domain, (tally.get(r.domain) ?? 0) + 1)
+    }
+    const competitors = [...tally.entries()]
+      .map(([d, count]) => ({ domain: d, count }))
+      .sort((a, b) => b.count - a.count || a.domain.localeCompare(b.domain))
+
+    return {
+      keyword,
+      location,
+      source: 'serper',
+      position,
+      found: position !== null,
+      isAiOverview,
+      yourDomain: domain,
+      yourResult: foundResult,
+      features,
+      top10: organicItems.slice(0, 10),
+      competitors,
+      totalResults: Math.max(totalScanned, organicItems.length),
+      ...(aiOverview ? { aiOverview } : {}),
+    }
+  } catch {
+    return previewSerpKeyword(domain, keyword, location)
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
+function detectSerperFeatures(data: any): SerpFeature[] {
+  const features = new Set<SerpFeature>()
+  if (data.answerBox) {
+    features.add('featuredSnippet')
+  }
+  if (data.peopleAlsoAsk && Array.isArray(data.peopleAlsoAsk) && data.peopleAlsoAsk.length > 0) {
+    features.add('peopleAlsoAsk')
+  }
+  if (data.places && Array.isArray(data.places) && data.places.length > 0) {
+    features.add('localPack')
+  }
+  if (data.news || data.topStories) {
+    features.add('topStories')
+  }
+  if (data.knowledgeGraph) {
+    features.add('knowledgePanel')
+  }
+  if (data.videos && Array.isArray(data.videos) && data.videos.length > 0) {
+    features.add('video')
+  }
+  if (data.shopping && Array.isArray(data.shopping) && data.shopping.length > 0) {
+    features.add('shopping')
+  }
+  if (data.images && Array.isArray(data.images) && data.images.length > 0) {
+    features.add('image')
+  }
+  if (data.relatedSearches && Array.isArray(data.relatedSearches) && data.relatedSearches.length > 0) {
+    features.add('relatedSearches')
+  }
+  return [...features]
+}
   login: string,
   password: string,
   domain: string,
