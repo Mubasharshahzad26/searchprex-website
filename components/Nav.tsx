@@ -157,6 +157,31 @@ export default function Nav() {
   // Hide nav on admin pages
   if (pathname?.startsWith("/admin")) return null;
 
+  // Dedicated conversion page: minimal header with no exit-leak dropdowns or duplicate CTA
+  if (pathname === "/free-audit") {
+    return (
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#e5e7eb]/80 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6">
+          <Link href="/" className="inline-flex flex-shrink-0 items-center" aria-label="Searchprex Home">
+            <Logo size="md" variant="dark" />
+          </Link>
+          <div className="flex items-center gap-4 sm:gap-6">
+            <span className="hidden items-center gap-2 rounded-full border border-[#1a7d59]/20 bg-[#1a7d59]/5 px-3.5 py-1.5 text-xs font-semibold text-[#196b4d] sm:inline-flex">
+              <span className="h-2 w-2 rounded-full bg-[#1a7d59]" aria-hidden="true" />
+              Founder-reviewed in 24 hours
+            </span>
+            <Link
+              href="/"
+              className="text-xs font-semibold text-[#566070] transition-colors hover:text-[#0a0f2e] sm:text-sm"
+            >
+              ← Back to site
+            </Link>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <>
       <header
