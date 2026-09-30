@@ -32,17 +32,28 @@ const TOP: NavItem[] = []
 
 const GROUPS: NavGroup[] = [
   {
-    label: 'SEO',
-    items: [{ label: 'Keyword Magic Tool', icon: Search, href: '/' }],
+    label: 'SEO & Technical',
+    items: [
+      { label: 'Keyword Research', icon: Search, href: '/tools/keyword-research' },
+      { label: 'MSO (GSC Optimizer)', icon: Sparkles, href: '/dashboard/pro/mso', badge: 'Live' },
+      { label: 'llms.txt & AI Bot Gen', icon: Sparkles, href: '/tools/llms-txt-generator', badge: 'New' },
+      { label: 'GSC Regex Library', icon: Search, href: '/resources/gsc-regex-library' },
+    ],
   },
   {
     label: 'Content Marketing',
     items: [
       {
+        label: 'AI Content Suite',
+        icon: Sparkles,
+        href: '/content-generator',
+        badge: 'AI',
+      },
+      {
         label: 'Bulk Content Generator',
         icon: Sparkles,
         href: '/bulk-generation',
-        badge: 'AI',
+        badge: 'Bulk',
       },
     ],
   },

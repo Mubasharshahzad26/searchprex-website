@@ -55,12 +55,16 @@ const resourceLinks = [
  */
 const toolLinks = [
   { href: "/tools", label: "All Free SEO Tools" },
+  { href: "/tools/llms-txt-generator", label: "llms.txt & AI Bot Generator" },
+  { href: "/tools/schema-generator", label: "Schema Markup Generator" },
+  { href: "/tools/serp-simulator", label: "SERP Simulator" },
   { href: "/tools/serp-checker", label: "SERP Checker" },
   { href: "/tools/keyword-research", label: "Law Firm Keyword Research" },
-  { href: "/tools/serp-simulator", label: "SERP Simulator" },
-  // Same reasoning as the tools above: this one's only other crawlable links
-  // sit 90% of the way down the home page and on one service page.
+  { href: "/resources/gsc-regex-library", label: "GSC Regex Library" },
   { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },
+  { href: "/resources/technical-seo-checklist", label: "Technical SEO Checklist" },
+  { href: "/resources/woocommerce-seo-checklist", label: "WooCommerce SEO Checklist" },
+  { href: "/resources/google-business-profile-checklist", label: "GBP Local Checklist" },
 ];
  
 /*

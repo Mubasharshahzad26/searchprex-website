@@ -65,9 +65,13 @@ const navLinks: NavLink[] = [
     label: "Resources",
     hasDropdown: true,
     dropdownItems: [
-      { href: "/resources",      label: "All Resources" },
-      { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },
-      { href: "/blog",           label: "Blog" },
+      { href: "/resources",                                   label: "All Resources" },
+      { href: "/resources/gsc-regex-library",                 label: "GSC Regex Library", badge: "New" },
+      { href: "/resources/law-firm-seo-audit-checklist",      label: "Law Firm SEO Checklist" },
+      { href: "/resources/technical-seo-checklist",           label: "Technical SEO Checklist" },
+      { href: "/resources/woocommerce-seo-checklist",         label: "WooCommerce SEO Checklist" },
+      { href: "/resources/google-business-profile-checklist", label: "GBP Local Checklist" },
+      { href: "/blog",                                        label: "Blog" },
     ],
   },
   {
@@ -99,18 +103,18 @@ const navLinks: NavLink[] = [
       // Was http://localhost:3005 — a developer machine address shipped to
       // production, so the entry was dead for every real visitor. /intake-assistant
       // is the deployed page for the same product.
-      { href: "/intake-assistant",      label: "AI Intake Assistant", badge: "Free" },
-      { href: "/case-calculator",       label: "Lost Case Calculator" },
+      { href: "/tools/llms-txt-generator", label: "llms.txt & AI Bot Generator", badge: "New" },
+      { href: "/intake-assistant",         label: "AI Intake Assistant", badge: "Free" },
+      { href: "/case-calculator",          label: "Lost Case Calculator" },
       // Law Firm Scorecard is out of the menu until Google Search grounding is
       // available on the Gemini keys: without it the "audit" of a named firm
       // would be written from nothing. See GroundingUnavailableError.
-      { href: "/tools/keyword-research", label: "Law Firm Keyword Research" },
-      { href: "/tools/serp-simulator",  label: "SERP Simulator" },
-      { href: "/ai-search",             label: "AI Search" },
-      // "Preview", not "New": without the DataForSEO connection it shows the
-      // results page for a query but no live position (see app/tools/ToolsClient).
-      { href: "/tools/serp-checker",    label: "SERP Checker", badge: "Preview" },
-      { href: "/tools",                 label: "All Tools" },
+      { href: "/tools/keyword-research",   label: "Law Firm Keyword Research" },
+      { href: "/tools/schema-generator",   label: "Schema Markup Generator" },
+      { href: "/tools/serp-simulator",     label: "SERP Simulator" },
+      { href: "/ai-search",                label: "AI Search" },
+      { href: "/tools/serp-checker",       label: "SERP Checker", badge: "Live" },
+      { href: "/tools",                    label: "All Tools" },
     ],
   },
 ];

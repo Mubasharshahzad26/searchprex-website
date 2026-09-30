@@ -181,6 +181,18 @@ const PAGES: Seed[] = [
       "Free SEO tools built by a practicing SEO analyst: JSON-LD schema markup generator, SERP simulator, meta tag analyzer, robots.txt tester and more. No signup, no paywalls.",
   },
   {
+    slug: "/tools/llms-txt-generator",
+    title: "Free llms.txt & AI Crawler robots.txt Generator (2026) | SearchPrex",
+    metaDescription:
+      "Generate a spec-compliant /llms.txt file and AI crawler robots.txt rules (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended) for Law Firms, Ecommerce & Local Businesses. Free, instant.",
+  },
+  {
+    slug: "/resources/gsc-regex-library",
+    title: "Google Search Console Regex Library & Custom Filter Builder (2026) | SearchPrex",
+    metaDescription:
+      "25+ copy-paste RE2 regular expressions for Google Search Console: filter AI Overview conversational queries, non-branded traffic, law firm case intent, ecommerce SKUs, and indexing bloat.",
+  },
+  {
     slug: "/tools/schema-generator",
     // No metadata existed; the page itself is a 4-line stub with only an <h1>.
     title: "Free JSON-LD Schema Markup Generator | SearchPrex",

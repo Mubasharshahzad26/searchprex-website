@@ -70,7 +70,9 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
   { path: "/resources/news", priority: 0.6, changeFrequency: "weekly" },
   { path: "/resources/law-firm-seo-audit-checklist", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/resources/gsc-regex-library", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tools", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/tools/llms-txt-generator", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tools/schema-generator", priority: 0.6, changeFrequency: "monthly" },
   { path: "/tools/serp-simulator", priority: 0.7, changeFrequency: "monthly" },
   // The page shipped — it is committed and returns 200. The note that used to

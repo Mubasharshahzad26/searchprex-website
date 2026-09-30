@@ -59,6 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
 // discovering this section, so the bad entries cost real crawl budget.
 // Re-add each one on the day its page ships.
 const toolSchemaList = [
+  { name: "llms.txt & AI Crawler Generator", url: `${SITE}/tools/llms-txt-generator`, desc: "Generate a spec-compliant /llms.txt file and AI crawler robots.txt rules for OAI-SearchBot, PerplexityBot, ClaudeBot & Google-Extended." },
   { name: "Schema Markup Generator", url: `${SITE}/tools/schema-generator`, desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review." },
   { name: "SERP Simulator", url: `${SITE}/tools/serp-simulator`, desc: "Preview a title and meta description as Google shows them on desktop and mobile, measured in pixels." },
   { name: "SERP Checker", url: `${SITE}/tools/serp-checker`, desc: "Check your Google ranking position for any keyword and country, and see who outranks you." },

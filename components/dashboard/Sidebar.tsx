@@ -26,10 +26,12 @@ export default function DashboardSidebar({ profile }: { profile: Profile | null 
 
   const proLinks = [
     { href: "/dashboard/pro", icon: "🏠", label: "Dashboard" },
-    { href: "/tools/audit", icon: "🔍", label: "Site Audit" },
-    { href: "/tools/content", icon: "✍️", label: "Content Gen" },
-    { href: "/tools/rankings", icon: "📈", label: "Rank Tracker" },
-    { href: "/tools/keywords", icon: "🔑", label: "Keywords" },
+    { href: "/dashboard/pro/mso", icon: "📊", label: "MSO (GSC Optimizer)" },
+    { href: "/content-generator", icon: "✍️", label: "AI Content Suite" },
+    { href: "/bulk-generation", icon: "⚡", label: "Bulk Generator" },
+    { href: "/tools/keyword-research", icon: "🔑", label: "Keyword Research" },
+    { href: "/tools/serp-checker", icon: "📈", label: "SERP Checker" },
+    { href: "/tools/llms-txt-generator", icon: "🤖", label: "llms.txt Generator" },
   ];
 
   //  Shown to every signed-in role rather than bolted onto one list. Link

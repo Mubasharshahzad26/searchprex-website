@@ -11,7 +11,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   FileText, BookOpen, GraduationCap, Newspaper, ListChecks,
-  ArrowRight, Clock, ExternalLink,
+  ArrowRight, Clock, ExternalLink, Terminal, ShoppingBag, MapPin, Wrench,
 } from "lucide-react";
 import {
   CardGrid,
@@ -37,6 +37,15 @@ type ResourceCard = {
 
 const hardcodedCategories: ResourceCard[] = [
   {
+    id: "hc-regex",
+    icon: Terminal,
+    title: "GSC Regex Library & Filter Builder",
+    desc: "25+ copy-paste RE2 regex filters for Google Search Console — isolate AI Overview conversational queries, non-branded traffic, law firm case intent, ecommerce SKUs, and indexing bloat.",
+    status: "live",
+    href: "/resources/gsc-regex-library",
+    cta: "Open regex library",
+  },
+  {
     id: "hc-0",
     icon: ListChecks,
     title: "Law Firm SEO Audit Checklist",
@@ -46,33 +55,45 @@ const hardcodedCategories: ResourceCard[] = [
     cta: "Open the checklist",
   },
   {
-    id: "hc-1",
+    id: "hc-tech",
+    icon: Wrench,
+    title: "Technical SEO Audit Checklist",
+    desc: "Interactive technical SEO workbook covering crawling, indexing recovery, redirects, rendering, Core Web Vitals (LCP/INP/CLS) and AI crawlers. Runs on free Google tools.",
+    status: "live",
+    href: "/resources/technical-seo-checklist",
+    cta: "Open technical checklist",
+  },
+  {
+    id: "hc-woo",
+    icon: ShoppingBag,
+    title: "WooCommerce & Ecommerce SEO Checklist",
+    desc: "Built from our 35,000-product SMK Store and Michigan Outdoor Sports campaigns: stop parameter crawl waste, fix product non-indexing, and structure categories that rank.",
+    status: "live",
+    href: "/resources/woocommerce-seo-checklist",
+    cta: "Open ecommerce checklist",
+  },
+  {
+    id: "hc-gbp",
+    icon: MapPin,
+    title: "Google Business Profile Checklist",
+    desc: "The local Map Pack optimization checklist for HVAC, roofing, legal and home service businesses: primary categories, suspension-safe setup, review velocity and local pages.",
+    status: "live",
+    href: "/resources/google-business-profile-checklist",
+    cta: "Open GBP checklist",
+  },
+  {
+    id: "hc-playbook",
     icon: FileText,
-    title: "White Papers",
-    desc: "In-depth, data-backed reports on SEO strategy, technical audits, and ranking systems — built from real client work.",
-    status: "coming",
-    href: null,
-  },
-  {
-    id: "hc-2",
-    icon: BookOpen,
-    title: "Research & Guides",
-    desc: "Original research, step-by-step guides, and frameworks covering technical SEO, E-E-A-T, AI Overviews, and GEO.",
-    status: "coming",
-    href: null,
-  },
-  {
-    id: "hc-3",
-    icon: GraduationCap,
-    title: "What I'm Learning",
-    desc: "First-hand experiments, test results, and lessons from optimizing real sites — what actually moves rankings in 2026.",
-    status: "coming",
-    href: null,
+    title: "The 35,000-Product Indexing Playbook (PDF)",
+    desc: "The 8-step Search Console indexing recovery playbook behind SMK Store ($5,832 to $19,100/mo) and Michigan Sports & Outdoor (~3,000 to 11,549 indexed pages). Instant PDF.",
+    status: "live",
+    href: "/guides/ecommerce-indexing-playbook.pdf",
+    cta: "Download PDF playbook",
   },
   {
     id: "hc-4",
     icon: Newspaper,
-    title: "Latest SEO News",
+    title: "Latest SEO & Google Update News",
     desc: "Curated, plain-English breakdowns of Google core updates, algorithm shifts, and AI-search changes that affect your site.",
     status: "live",
     href: "/resources/news",

@@ -35,6 +35,19 @@ import SolutionsCarousel from "@/components/SolutionsCarousel";
 
 const tools = [
   {
+    id: "llms-txt-generator",
+    icon: Bot,
+    iconBg: "#EEEDFE",
+    iconColor: "#534AB7",
+    accentColor: "#534AB7",
+    label: "llms.txt & AI Crawler Generator",
+    desc: "Generate a spec-compliant /llms.txt Markdown file and AI crawler robots.txt rules (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended).",
+    tags: ["llms.txt", "AI Crawlers", "GEO / AEO"],
+    status: "live",
+    href: "/tools/llms-txt-generator",
+    stats: "Instant download",
+  },
+  {
     id: "keyword-research",
     icon: Sparkles,
     iconBg: "#EEEDFE",
@@ -87,19 +100,9 @@ const tools = [
     iconColor: "#534AB7",
     accentColor: "#534AB7",
     label: "SERP Checker",
-    desc: "See which SERP features own a query and what the top 10 looks like. Live position tracking arrives when the data provider is connected.",
+    desc: "Check your live Google ranking position for any keyword and country, see which SERP features appear, and inspect the top 10.",
     tags: ["Rank Tracking", "SERP Analysis", "Competitors"],
-    // "preview", not "soon" and not "live".
-    //
-    // "soon" was wrong: the page IS deployed (200 in production) and rendered a
-    // dead "Coming Soon" button, so the tool hub gave Google no crawlable link
-    // to a page that is already earning impressions.
-    //
-    // "live" would also be wrong: without DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD
-    // the API cannot read Google, so the page runs in preview mode and reports
-    // no position at all. Promote this to "live" once
-    // `npx tsx scripts/verify-dataforseo.ts` passes.
-    status: "preview",
+    status: "live",
     href: "/tools/serp-checker",
     stats: "Up to 5 keywords",
   },

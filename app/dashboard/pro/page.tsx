@@ -2,12 +2,15 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 const PRO_TOOLS = [
-  { icon: "🔍", label: "AI Site Audit",       desc: "Full technical SEO scan",       href: "/tools/audit",       color: "from-[#534AB7]/20" },
-  { icon: "✍️", label: "Content Generator",   desc: "AI-powered SEO content",        href: "/tools/content",     color: "from-[#0891b2]/20" },
-  { icon: "📈", label: "Rank Tracker",         desc: "Track keyword positions",        href: "/tools/rankings",    color: "from-emerald-500/20" },
-  { icon: "🔑", label: "Keyword Research",     desc: "Find winning keywords",          href: "/tools/keywords",    color: "from-amber-500/20" },
-  { icon: "🕵️", label: "Competitor Analysis", desc: "Spy on competitor strategy",     href: "/tools/competitors", color: "from-rose-500/20" },
-  { icon: "🔗", label: "Backlink Checker",     desc: "Analyze link profile",           href: "/tools/backlinks",   color: "from-purple-500/20" },
+  { icon: "📊", label: "MSO Performance (GSC)", desc: "Live Search Console & AI optimizer", href: "/dashboard/pro/mso",        color: "from-[#534AB7]/20" },
+  { icon: "✍️", label: "AI Content Suite",      desc: "E-E-A-T article & schema engine",    href: "/content-generator",        color: "from-[#0891b2]/20" },
+  { icon: "⚡", label: "Bulk Content Generator",desc: "Generate 100s of pages in one run",  href: "/bulk-generation",          color: "from-indigo-500/20" },
+  { icon: "🔑", label: "AI Keyword Research",   desc: "Find winning niche keywords",        href: "/tools/keyword-research",   color: "from-amber-500/20" },
+  { icon: "📈", label: "SERP & Rank Checker",   desc: "Analyze top 10 & SERP features",     href: "/tools/serp-checker",       color: "from-emerald-500/20" },
+  { icon: "🔗", label: "Link Building Monitor", desc: "Track campaigns & live backlinks",   href: "/dashboard/links",          color: "from-purple-500/20" },
+  { icon: "🤖", label: "llms.txt & AI Bot Gen", desc: "Configure AI search grounding",      href: "/tools/llms-txt-generator", color: "from-teal-500/20" },
+  { icon: "🧩", label: "Schema Markup Gen",     desc: "JSON-LD for Law, Product & Local",   href: "/tools/schema-generator",   color: "from-rose-500/20" },
+  { icon: "🧮", label: "GSC Regex Library",     desc: "25+ copy-paste RE2 GSC filters",     href: "/resources/gsc-regex-library", color: "from-cyan-500/20" },
 ];
 
 export default async function ProDashboard() {
