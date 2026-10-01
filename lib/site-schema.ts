@@ -71,6 +71,7 @@ const organization = {
   ],
   // Every profile the hero's "Verified & Listed On" strip links to.
   sameAs: [
+    "https://www.wikidata.org/wiki/Q141611840",
     "https://www.linkedin.com/company/searchprex/",
     "https://www.youtube.com/@SearchPrex",
     "https://www.trustpilot.com/review/searchprex.com",
