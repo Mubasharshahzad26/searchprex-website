@@ -194,10 +194,9 @@ const PAGES: Seed[] = [
   },
   {
     slug: "/tools/schema-generator",
-    // No metadata existed; the page itself is a 4-line stub with only an <h1>.
-    title: "Free JSON-LD Schema Markup Generator | SearchPrex",
+    title: "Free Schema Markup Generator (JSON-LD Tool) | SearchPrex",
     metaDescription:
-      "Generate valid JSON-LD schema markup for your pages — Organization, FAQ, Article, LocalBusiness and more. Free, instant, no signup required.",
+      "Generate 100% valid JSON-LD schema markup for US local businesses, law firms, eCommerce stores, articles, and reviews. Boost Google rich results with zero code.",
   },
   {
     slug: "/ai-search",
