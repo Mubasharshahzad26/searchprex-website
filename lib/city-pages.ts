@@ -796,11 +796,11 @@ export const CITY_PAGES: CityPage[] = [
     faqs: [
       {
         q: "Why is DUI defence the strongest SEO opportunity in Tempe?",
-        a: "Because Arizona's penalties are severe enough to make searchers act immediately. Mandatory jail time for a first offence and required ignition interlock mean someone arrested at the weekend starts researching within hours, from a phone, ready to call. That is the shortest funnel in legal search.",
+        a: "Because Arizona's penalties are severe enough to make searchers act immediately. Mandatory jail time for a first offence and required ignition interlock mean someone arrested at the weekend starts researching within hours, from a phone, ready to call.",
       },
       {
         q: "Does Arizona require ignition interlock for a first DUI?",
-        a: "Yes. Arizona requires an ignition interlock device on conviction, including for first offences, and imposes mandatory jail time. These penalties are stricter than most states, which is why Arizona DUI searchers research far more heavily than the national average.",
+        a: "Yes. On a first DUI conviction Arizona requires an ignition interlock device, and the sentence includes at least ten consecutive days in jail, all but one of which a judge may suspend once a screening or treatment programme is completed (A.R.S. § 28-1381).",
       },
       {
         q: "Should a Tempe firm target Phoenix searches?",
@@ -810,6 +810,76 @@ export const CITY_PAGES: CityPage[] = [
         q: "How important is site speed for a DUI law firm?",
         a: "Decisive. These searches happen at night on mobile connections, and the visitor is not browsing — they want a phone number. A page that takes four seconds to load loses to one that takes one, regardless of which ranks higher.",
       },
+    ],
+  },
+
+  {
+    stateSlug: "arizona",
+    citySlug: "scottsdale",
+    city: "Scottsdale",
+    state: "Arizona",
+    stateAbbr: "AZ",
+    county: "Maricopa County",
+    metaTitle: "Law Firm SEO Company in Scottsdale, AZ",
+    metaDescription:
+      "SEO for Scottsdale law firms: high-asset divorce, DUI and estate pages that get Arizona law right, plus map pack work. Founder-led, one firm per city.",
+    h1: "Law Firm SEO in Scottsdale, Arizona",
+    heroSub:
+      "Scottsdale clients bring high-asset divorces, estates with property in more than one state, and DUI arrests from Old Town on a Saturday night. Most firm pages that target them say \"serving Scottsdale\" and nothing about how Arizona law treats any of it.",
+    problem:
+      "Scottsdale legal searches are crowded with Phoenix firms and national directories, and the pages that rank rarely explain the two things a Scottsdale client most needs to know: how Arizona's community property law splits what they own, and which court a Scottsdale case actually goes to.",
+    problemPoints: [
+      "Phoenix firms and directories hold most of page one for Scottsdale legal searches on domain strength",
+      "Arizona is a community property state, yet few divorce pages aimed at Scottsdale explain what that means for a business, a second home or a retirement account",
+      "A DUI arrest by Scottsdale police generally goes to Scottsdale City Court, while an arrest by another agency can go to a county justice court — and few pages say which",
+      "Retirees and seasonal residents with property in more than one state search for estate planning and find national templates",
+      "North Scottsdale, Paradise Valley and Fountain Hills are searched on their own, and almost nobody serves them with a page",
+    ],
+    solutionPoints: SHARED_SOLUTION,
+    practiceDemand: [
+      { area: "High-asset family law", why: "Divorces involving business interests, investment accounts and more than one property, all divided under Arizona's community property rules." },
+      { area: "DUI defence", why: "Old Town's bars and restaurants, and Arizona's mandatory jail terms — longer again for an extreme DUI at 0.15 or above." },
+      { area: "Estate planning", why: "Retirees and seasonal residents with assets, and often homes, in more than one state." },
+      { area: "Personal injury", why: "Traffic on the Loop 101 and Scottsdale Road corridors, and a large visitor population on unfamiliar roads." },
+    ],
+    localSignals: [
+      { label: "Community property, explained", detail: "Divorce pages that say what Arizona law does with a business or a second home" },
+      { label: "The right court named", detail: "Scottsdale City Court, the justice courts and the Superior Court, each where it applies" },
+      { label: "Neighbourhood pages", detail: "North Scottsdale, Old Town, McCormick Ranch and Paradise Valley searched on their own" },
+      { label: "Scottsdale, not Phoenix", detail: "Content for Scottsdale searchers, not a downtown Phoenix page with Scottsdale in the footer" },
+    ],
+    courts: [
+      "Scottsdale City Court",
+      "Maricopa County Justice Courts (precinct depends on the address)",
+      "Maricopa County Superior Court",
+      "U.S. District Court, District of Arizona",
+    ],
+    barAssociation: "State Bar of Arizona · Maricopa County Bar Association",
+    neighborhoods: ["Old Town Scottsdale", "North Scottsdale", "McCormick Ranch", "Gainey Ranch", "DC Ranch", "Grayhawk"],
+    nearbyCities: ["Phoenix", "Paradise Valley", "Fountain Hills", "Tempe", "Cave Creek"],
+    legalContext: {
+      heading: "Community property: the question every Scottsdale divorce starts with",
+      body:
+        "Arizona is one of a handful of community property states. Everything either spouse acquires during the marriage is community property, apart from gifts and inheritances and anything acquired after a divorce petition is served (A.R.S. § 25-211). For the clients a Scottsdale family law firm sees — business owners, two-home households, executives with deferred compensation — the first question is what counts as community property and what stays separate. Arizona also requires one spouse to have lived in the state for 90 days before filing (§ 25-312), and no decree can be entered until 60 days after service (§ 25-329). A page that answers those questions plainly, for Scottsdale, is useful to the reader and specific enough for an AI Overview to quote. A page that says \"we handle complex divorces\" is neither.",
+    },
+    faqs: [
+      {
+        q: "Is Arizona a community property state?",
+        a: "Yes. Under A.R.S. § 25-211, property either spouse acquires during the marriage is community property, except gifts, inheritances and property acquired after a divorce petition is served. That is why Scottsdale divorce pages need to explain how a business or a second home is treated.",
+      },
+      {
+        q: "How long does a divorce take in Arizona?",
+        a: "At least 60 days from service of the petition, because Arizona does not allow a decree to be entered sooner (A.R.S. § 25-329). One spouse must also have lived in Arizona for 90 days before filing (§ 25-312). Contested high-asset divorces usually take far longer.",
+      },
+      {
+        q: "Can a Scottsdale lawyer call themselves a certified specialist?",
+        a: "Only if they are certified. The State Bar of Arizona reserves \"certified specialist\" for lawyers certified by the Arizona Board of Legal Specialization or a body it recognises, and firms are not certified — lawyers are. Pages should name the certified lawyer, not the firm.",
+      },
+      {
+        q: "Should a Scottsdale firm target Phoenix keywords?",
+        a: "Not first. Phoenix-wide terms are held by large firms on domain strength. Pages for Scottsdale, its neighbourhoods, Paradise Valley and Fountain Hills rank sooner and bring clients who are closer to your office.",
+      },
+      lawCost("Scottsdale"),
     ],
   },
 

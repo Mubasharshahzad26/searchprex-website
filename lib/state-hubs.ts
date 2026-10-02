@@ -1,7 +1,7 @@
 // lib/state-hubs.ts
 //
 // State-level copy for the /locations/[state] hubs (Michigan, Texas,
-// Louisiana). The hubs used to be a summary of their city pages at ~400 words;
+// Louisiana, Arizona). The hubs used to be a summary of their city pages at ~400 words;
 // the Phase 2 audit asked for real state-level substance.
 //
 // Every legal statement here was checked against the statute or bar rule it
@@ -199,6 +199,62 @@ export const STATE_HUBS: StateHub[] = [
       {
         q: "Does a Louisiana firm need different pages from a firm in another state?",
         a: "Yes. The terminology (parish, succession, prescription), the deadlines and the fault rule are all Louisiana-specific. Pages adapted from a national template usually get at least one of them wrong.",
+      },
+    ]),
+  },
+  {
+    slug: "arizona",
+    metaTitle: "Arizona Law Firm SEO: Scottsdale & Tempe",
+    metaDescription:
+      "Law firm SEO for Arizona attorneys in Scottsdale and Tempe: DUI, divorce and injury pages that state Arizona law correctly, plus map pack work.",
+    intro: [
+      "Arizona legal search is centred on Maricopa County, where Phoenix firms and national directories rank across the whole Valley on domain strength. The opening is city by city. People in Scottsdale and Tempe search for their own city, and the firms showing up for those searches rarely have a page that speaks to either one.",
+      "The two markets are different. Tempe is a university city where DUI and criminal defence searches come at night, from a phone. Scottsdale brings high-asset divorces, estate planning for retirees and seasonal residents, and DUI arrests from Old Town. Both run on Arizona law, which differs from its neighbours in ways a firm's pages have to get right: a two-year injury deadline, a fault rule that reduces damages but never bars them, community property in divorce, and mandatory jail even for a first DUI.",
+    ],
+    law: [
+      {
+        title: "Two years for most injury claims",
+        body: "Personal injury actions in Arizona must be brought within two years. A page that states the Arizona deadline plainly beats national content that quotes a range or no deadline at all — and it is the answer an AI Overview can quote.",
+        source: { label: "A.R.S. § 12-542", href: "https://www.azleg.gov/ars/12/00542.htm" },
+      },
+      {
+        title: "Fault reduces damages — it never bars them",
+        body: "Arizona uses pure comparative fault: an injured person's claim \"is not barred\", but damages are reduced by their share of fault. Texas bars recovery past 50% fault and Michigan bars pain-and-suffering damages past 50%; Arizona does neither. Injury pages copied from another state's template get this wrong.",
+        source: { label: "A.R.S. § 12-2505", href: "https://www.azleg.gov/ars/12/02505.htm" },
+      },
+      {
+        title: "\"Certified specialist\" is a protected term",
+        body: "The State Bar of Arizona reserves \"certified specialist\" for lawyers certified by the Arizona Board of Legal Specialization or a body it recognises, and firms are not certified — lawyers are. Practice pages and title tags should name the certified lawyer, not call the firm a specialist.",
+        source: { label: "State Bar of Arizona, Ethics Tips for Attorney Marketing", href: "https://www.azbar.org/media/1qykhcnm/ethical-marketing-tips.pdf" },
+      },
+    ],
+    search: [
+      {
+        title: "The Valley is searched city by city",
+        body: "Residents search Scottsdale, Tempe, Mesa, Chandler and Gilbert by name, not \"Phoenix\". Each is a separate search, and most are answered by Phoenix firms or directories with no local page.",
+      },
+      {
+        title: "DUI searches start the night of the arrest",
+        body: "A first DUI in Arizona carries at least ten consecutive days in jail, with all but one suspendable after a treatment programme, and an ignition interlock (A.R.S. § 28-1381). An extreme DUI at 0.15 or more means at least 30 days (§ 28-1382). People search immediately, on a phone, and call the first page that answers clearly.",
+      },
+      {
+        title: "Divorce questions are property questions",
+        body: "Because Arizona is a community property state (A.R.S. § 25-211), divorce searches turn into questions about the house, the business and the retirement account. Pages that answer those for the reader's own city are rare.",
+      },
+    ],
+    stateClients: [],
+    faqs: withCost("Arizona", [
+      {
+        q: "Do you have Arizona law firm case studies?",
+        a: "No. There is no published law firm case study on this site and no Arizona client yet. The results on the case studies page come from other states and other industries, and each says where it is from.",
+      },
+      {
+        q: "Is Arizona a comparative fault state?",
+        a: "Yes — pure comparative fault. Under A.R.S. § 12-2505 an injured person's claim is not barred by their own fault; their damages are reduced in proportion to it. That differs from Texas, which bars recovery above 50% fault, and Michigan, which bars non-economic damages above 50%.",
+      },
+      {
+        q: "Does a firm in Scottsdale or Tempe need its own city pages?",
+        a: "Yes, if it wants clients from those cities. Phoenix-wide terms are held by large firms on domain strength, while Scottsdale and Tempe searches are answered by almost no local pages. A page per city and practice area ranks sooner and brings clients closer to the office.",
       },
     ]),
   },

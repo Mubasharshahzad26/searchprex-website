@@ -201,7 +201,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       ONE_FIRM,
       NO_CONTRACT,
     ],
-    locationsMentioned: ["grand-rapids", "sugar-land", "plano", "san-jose", "katy"],
+    locationsMentioned: ["grand-rapids", "sugar-land", "plano", "san-jose", "katy", "scottsdale"],
   },
   {
     name: "Criminal Defense",
@@ -266,7 +266,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       ONE_FIRM,
       NO_CONTRACT,
     ],
-    locationsMentioned: ["denton", "tempe", "albuquerque"],
+    locationsMentioned: ["denton", "tempe", "scottsdale", "albuquerque"],
   },
   {
     name: "Estate Planning",
@@ -335,7 +335,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       },
     ],
     faqs: [NO_GUARANTEE, ONE_FIRM, NO_CONTRACT],
-    locationsMentioned: ["sugar-land", "grand-rapids", "the-woodlands", "katy"],
+    locationsMentioned: ["sugar-land", "grand-rapids", "the-woodlands", "katy", "scottsdale"],
   },
   {
     name: "Mass Torts",
