@@ -50,7 +50,6 @@ export interface CityPage {
   /** The situation an attorney in this city recognises. */
   problem: string;
   problemPoints: string[];
-  solutionPoints: string[];
   practiceDemand: PracticeDemand[];
   localSignals: LocalSignal[];
   courts: string[];
@@ -71,15 +70,6 @@ function lawCost(city: string): CityFaq {
     }
   );
 }
-
-const SHARED_SOLUTION: string[] = [
-  "A page for every practice area × neighbourhood combination that gets searched — not one page trying to rank for all of them",
-  "Google Business Profile built for the map pack: correct categories, service areas, weekly posts, and photos with real EXIF location data",
-  "Attorney bios that satisfy YMYL E-E-A-T — bar admission year, jurisdictions, reported cases, and a named author on every page",
-  "Answers written so Google's AI Overview can quote them directly, in the first sentence under each question",
-  "Review velocity from real clients, because the map pack weighs recency as much as star count",
-  "Plain-English reporting every Monday: rankings, calls, form fills, and what changed",
-];
 
 export const CITY_PAGES: CityPage[] = [
   /* ─────────────── MICHIGAN ─────────────── */
@@ -105,7 +95,6 @@ export const CITY_PAGES: CityPage[] = [
       "Michigan's no-fault rules changed how PIP claims work, and almost no firm site explains the current position clearly",
       "Google Business Profiles list a downtown address but no service area, so the map pack never shows them in Dearborn, Livonia or Warren",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       {
         area: "Auto accident & no-fault",
@@ -181,7 +170,6 @@ export const CITY_PAGES: CityPage[] = [
       "Suburban searches — Wyoming, Kentwood, Walker, Grandville — are treated as one market when Google treats them as four",
       "Firms compete on 'best lawyer' terms while ignoring the question-shaped searches that feed AI Overviews",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Family law & high-asset divorce", why: "Closely held family businesses and manufacturing wealth make asset valuation a recurring issue." },
       { area: "Personal injury", why: "US-131 and I-96 corridor collisions, plus Michigan no-fault benefit disputes." },
@@ -246,7 +234,6 @@ export const CITY_PAGES: CityPage[] = [
       "Ohio workers' compensation is a state-run monopoly system with its own procedures, and almost no site explains it",
       "Question-shaped searches — 'how long do I have to file', 'what is my case worth' — go entirely unanswered locally",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Workers' compensation", why: "Ohio runs a state-fund system rather than private insurance, so the process differs from most states and searchers research it heavily." },
       { area: "Personal injury", why: "I-90 and I-77 corridor collisions plus premises liability across an older housing stock." },
@@ -315,7 +302,6 @@ export const CITY_PAGES: CityPage[] = [
       "Pennsylvania's comparative negligence rule and two-year limitation period are rarely explained clearly on local sites",
       "Firms chase 'best personal injury lawyer Philadelphia' and ignore the long-tail questions that actually convert",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Personal injury & mass tort", why: "Philadelphia's Complex Litigation Center makes the city a national venue for coordinated pharmaceutical and device claims." },
       { area: "Criminal defence", why: "One of the busiest municipal court systems in the country generates constant, urgent search demand." },
@@ -381,7 +367,6 @@ export const CITY_PAGES: CityPage[] = [
       "Firms target 'Albuquerque' alone and miss Rio Rancho, Santa Fe and Las Cruces entirely",
       "Spanish-language search demand across the metro is almost universally ignored",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "DWI defence", why: "New Mexico enforces strict DWI penalties including mandatory interlock, producing urgent and continuous search demand." },
       { area: "Personal injury", why: "I-25 and I-40 intersect in Albuquerque, and the state's crash rates keep injury claim volume high." },
@@ -450,7 +435,6 @@ export const CITY_PAGES: CityPage[] = [
       "High household income makes this a high-asset family law market, but pages are written for standard divorce",
       "Missouri City, Katy, Richmond and Rosenberg are searched separately and served by nobody",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "High-asset family law", why: "Fort Bend household income is well above the state median, making asset valuation, business interests and executive compensation routine issues." },
       { area: "Business & corporate", why: "Energy sector professionals and a dense small-business base generate contract and formation work." },
@@ -514,7 +498,6 @@ export const CITY_PAGES: CityPage[] = [
       "Collin County's own court system and bar association go unmentioned on most firm sites",
       "Business immigration demand from corporate transfers is almost entirely unserved locally",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "High-asset & executive divorce", why: "Corporate headquarters concentration means stock awards, deferred compensation and equity division are routine." },
       { area: "Business & corporate", why: "A dense corporate base drives contract, formation and commercial dispute work." },
@@ -578,7 +561,6 @@ export const CITY_PAGES: CityPage[] = [
       "Lewisville, Flower Mound, Frisco and Little Elm are separate searches nobody is serving",
       "Rapid county growth means new residents searching without any existing firm relationship",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Criminal defence & DWI", why: "Two large universities produce steady demand for alcohol, drug and misdemeanour defence." },
       { area: "Family law", why: "One of the fastest-growing counties in Texas, with a young family demographic." },
@@ -642,7 +624,6 @@ export const CITY_PAGES: CityPage[] = [
       "I-10, the Grand Parkway and the Westpark Tollway carry heavy commuter traffic, yet injury pages rarely name them",
       "Cinco Ranch, Fulshear and Brookshire are searched separately and served by almost nobody",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Family law", why: "A large, young family population across the Katy area — and the county a family lives in decides where a divorce is filed." },
       { area: "Personal injury", why: "Commuter traffic on I-10, the Grand Parkway (SH 99) and the Westpark Tollway." },
@@ -704,7 +685,6 @@ export const CITY_PAGES: CityPage[] = [
       "An established, high-income population searches for estate planning and high-asset family law and finds little local content",
       "Spring, Conroe and Tomball are separate searches most firms never address",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Estate planning", why: "An established, high-income population with property and business interests to pass on." },
       { area: "High-asset family law", why: "Divorces involving business interests, retirement accounts and more than one property." },
@@ -767,7 +747,6 @@ export const CITY_PAGES: CityPage[] = [
       "Mesa, Chandler, Scottsdale and Gilbert are separate searches served by nobody locally",
       "'DUI lawyer near me' searches happen late at night on phones, and most local sites are not built for that moment",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "DUI defence", why: "Arizona imposes mandatory jail time even for first offences and requires ignition interlock — searchers act immediately and research heavily." },
       { area: "Criminal defence", why: "ASU's student population produces steady possession, alcohol and misdemeanour demand." },
@@ -835,7 +814,6 @@ export const CITY_PAGES: CityPage[] = [
       "Retirees and seasonal residents with property in more than one state search for estate planning and find national templates",
       "North Scottsdale, Paradise Valley and Fountain Hills are searched on their own, and almost nobody serves them with a page",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "High-asset family law", why: "Divorces involving business interests, investment accounts and more than one property, all divided under Arizona's community property rules." },
       { area: "DUI defence", why: "Old Town's bars and restaurants, and Arizona's mandatory jail terms — longer again for an extreme DUI at 0.15 or above." },
@@ -906,7 +884,6 @@ export const CITY_PAGES: CityPage[] = [
       "Sunnyvale, Santa Clara, Mountain View, Cupertino and Palo Alto are separate searches nobody covers",
       "Multilingual search demand across the county is substantial and almost entirely unserved",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Employment law", why: "California's ban on most non-competes, plus wage-and-hour and discrimination claims, drives continuous demand." },
       { area: "High-asset family law", why: "Equity compensation and community property together make asset division uniquely technical here." },
@@ -971,7 +948,6 @@ export const CITY_PAGES: CityPage[] = [
       "New Orleans firms rank on domain strength with no Baton Rouge content",
       "Parish-level searches — Ascension, Livingston, West Baton Rouge — are served by nobody",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Personal injury", why: "I-10 and I-12 corridor collisions, plus industrial incidents along the petrochemical corridor." },
       { area: "Maritime & industrial injury", why: "Mississippi River commerce and refinery employment produce Jones Act and industrial claims." },
@@ -1035,7 +1011,6 @@ export const CITY_PAGES: CityPage[] = [
       "Bossier City, Minden and Ruston are separate searches with no local coverage",
       "New Orleans and Baton Rouge firms rank on domain strength with zero North Louisiana relevance",
     ],
-    solutionPoints: SHARED_SOLUTION,
     practiceDemand: [
       { area: "Personal injury", why: "I-20 and I-49 intersect at Shreveport, and Louisiana's recently changed deadlines and fault rule make accurate pages urgent." },
       { area: "Family law", why: "Louisiana community property and covenant marriage rules differ from neighbouring Texas and Arkansas." },

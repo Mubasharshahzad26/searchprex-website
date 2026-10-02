@@ -10,9 +10,9 @@ import { getCityBySlug, getAllCitySlugs, kansasCities } from "@/lib/kansas-citie
 import { findPracticePage } from "@/lib/locations";
 import { getKansasSeoCity } from "@/lib/kansas-seo-cities";
 import { organizationRef } from "@/lib/site-schema";
+import { isLocationIndexable } from "@/lib/location-indexing";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
-import WhySearchPrex from "@/components/WhySearchPrex";
 import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
  
 const GREEN = "#3eb489";
@@ -30,9 +30,11 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const city = getCityBySlug(slug);
   if (!city) return { title: "Location Not Found | SearchPrex" };
   const url = `https://www.searchprex.com/locations/kansas/${city.slug}`;
+  const indexable = isLocationIndexable(`/locations/kansas/${city.slug}`);
   return {
     title: city.metaTitle,
     description: city.metaDescription,
+    ...(indexable ? {} : { robots: { index: false, follow: true } }),
     alternates: { canonical: url },
     openGraph: { title: city.metaTitle, description: city.metaDescription, url, type: "website" },
   };
@@ -380,7 +382,18 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
 
-      <WhySearchPrex variant="law" service={`law firm SEO in ${city.name}, KS`} tone="white" />
+      {/* One line in place of the six-card WhySearchPrex block, which repeated
+          word for word on every city page. The full reasons live on /why-us. */}
+      <section className="bg-white px-4 py-10">
+        <p className="mx-auto max-w-3xl text-sm leading-relaxed text-[#64748b]">
+          <strong className="text-[#0f172a]">Working with SearchPrex:</strong> the founder does the work, one firm per
+          practice area in {city.name}, published prices and a 90-day money-back guarantee.{" "}
+          <Link href="/why-us" className="font-bold text-[#534AB7] hover:underline">
+            Why firms choose SearchPrex
+          </Link>
+          .
+        </p>
+      </section>
 
       {/* ── FAQ (native <details> — no JS, server-safe, FAQ schema above) ── */}
       <section className="bg-[#eaecf3] px-4 py-24">

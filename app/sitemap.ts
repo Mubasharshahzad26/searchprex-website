@@ -10,6 +10,7 @@ import { posts as blogPosts } from "./blog/data";
 import { getAllCitySlugs } from "@/lib/kansas-cities";
 import { KANSAS_SEO_CITIES } from "@/lib/kansas-seo-cities";
 import { getAllCityParams } from "@/lib/city-pages";
+import { isLocationIndexable } from "@/lib/location-indexing";
 import { getDynamicStateHubSlugs } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
@@ -293,6 +294,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   for (const { city } of getAllCitySlugs()) {
+    // Noindexed location pages stay out of the sitemap (lib/location-indexing).
+    if (!isLocationIndexable(`/locations/kansas/${city}`)) continue;
     add({
       url: absolute(`/locations/kansas/${city}`),
       changeFrequency: "monthly",
@@ -340,6 +343,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   for (const { state, city } of getAllCityParams()) {
+    if (!isLocationIndexable(`/locations/${state}/${city}`)) continue;
     add({
       url: absolute(`/locations/${state}/${city}`),
       changeFrequency: "monthly",

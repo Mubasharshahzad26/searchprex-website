@@ -18,7 +18,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check, MapPin, Scale, Landmark, Users } from "lucide-react";
+import { ArrowRight, MapPin, Scale, Landmark, Users } from "lucide-react";
 import {
   Breadcrumb,
   CardGrid,
@@ -38,12 +38,12 @@ import {
   type CityPage,
 } from "@/lib/city-pages";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
-import WhySearchPrex from "@/components/WhySearchPrex";
 import GuideMagnet from "@/components/GuideMagnet";
 import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 import { findPracticePage, getLocationState } from "@/lib/locations";
 import type { IndustryPage } from "@/lib/industry-pages";
 import { SITE, organizationRef } from "@/lib/site-schema";
+import { isLocationIndexable } from "@/lib/location-indexing";
 
 /**
  * Anchor variants for the link to the local news spoke. One template renders
@@ -82,10 +82,12 @@ export async function generateMetadata({
   if (!page) return { title: "Location not found", robots: { index: false, follow: true } };
 
   const url = `${SITE}/locations/${page.stateSlug}/${page.citySlug}`;
+  const indexable = isLocationIndexable(`/locations/${page.stateSlug}/${page.citySlug}`);
 
   return {
     title: page.metaTitle,
     description: page.metaDescription,
+    ...(indexable ? {} : { robots: { index: false, follow: true } }),
     keywords: [
       `law firm seo ${page.city.toLowerCase()}`,
       `attorney seo ${page.city.toLowerCase()}`,
@@ -208,32 +210,13 @@ export default async function CityPage({
           </ul>
         </Section>
 
-        {/* ── SOLUTION ── */}
-        <Section>
-          <SectionHeading
-            eyebrow="What we do about it"
-            title={`What law firm SEO in ${page.city} actually involves`}
-            intro={`Every item below is work we do on your site and your Google Business Profile — not a report telling you to do it yourself.`}
-          />
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {page.solutionPoints.map((point) => (
-              <li key={point} className="flex items-start gap-3">
-                <Check
-                  className="mt-0.5 h-4 w-4 shrink-0"
-                  style={{ color: color.success }}
-                  strokeWidth={2.5}
-                  aria-hidden
-                />
-                <span className={text.small} style={{ color: color.muted }}>
-                  {point}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        {/* The generic "what law firm SEO involves" list used to sit here: six
+            bullets identical on every city page, about a tenth of each page's
+            text. How the work is done lives once, on /services/law-firm-seo,
+            linked under the practice areas below. */}
 
         {/* ── PRACTICE AREAS ── */}
-        <Section tone="surface">
+        <Section>
           <SectionHeading
             eyebrow="Where the demand is"
             title={`Which practice areas get searched most in ${page.city}?`}
@@ -276,7 +259,7 @@ export default async function CityPage({
         </Section>
 
         {/* ── JURISDICTION-SPECIFIC ── */}
-        <Section width="reading">
+        <Section width="reading" tone="surface">
           <SectionHeading eyebrow={`${page.state} specifics`} title={page.legalContext.heading} />
           <p className={text.body} style={{ color: color.muted }}>
             {page.legalContext.body}
@@ -326,7 +309,19 @@ export default async function CityPage({
           </div>
         </Section>
 
-        <WhySearchPrex variant="law" service={`law firm SEO in ${page.city}`} tone="white" />
+        {/* The full six-card WhySearchPrex block repeated word for word on
+            every city page; the same reasons now take one line here and live
+            in full on /why-us and the service pages. */}
+        <Section width="reading" tight>
+          <p className={text.small} style={{ color: color.muted }}>
+            <strong style={{ color: color.ink }}>Working with SearchPrex:</strong> the founder does the work, one firm per
+            practice area in {page.city}, published prices and a 90-day money-back guarantee.{" "}
+            <Link href="/why-us" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
+              Why firms choose SearchPrex
+            </Link>
+            .
+          </p>
+        </Section>
 
         {/* ── FAQ ── */}
         <Section width="reading">
