@@ -8,6 +8,7 @@
 // studies) stay crawlable. The data comes from the server page as props, so
 // this client component does not ship the industry files' copy.
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, Check, Info } from "lucide-react";
@@ -17,6 +18,12 @@ export interface AudienceTab {
   label: string;
   title: string;
   problem: string;
+  visual?: {
+    src: string;
+    alt: string;
+    caption: string;
+    badge: string;
+  };
   work: string[];
   /** One sourced result, or an honest note where there is none. */
   proof: { text: string; href?: string; honest?: boolean };
@@ -77,6 +84,29 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
           </div>
 
           <div className="flex flex-col gap-6">
+            {t.visual ? (
+              <div className="group relative overflow-hidden rounded-3xl border border-[#e7e8f0] bg-white shadow-sm">
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0a0f2e]">
+                  <Image
+                    src={t.visual.src}
+                    alt={t.visual.alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 500px"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-md">
+                      {t.visual.badge}
+                    </span>
+                    <p className="mt-2 text-sm font-semibold leading-snug text-white/95 drop-shadow-sm sm:text-[15px]">
+                      &ldquo;{t.visual.caption}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+
             <div className={`rounded-3xl p-7 ${t.proof.honest ? "border border-[#d9d5f5] bg-[#f6f5ff]" : "bg-[#effaf5]"}`}>
               <p className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest ${t.proof.honest ? "text-[#534AB7]" : "text-[#1a7d59]"}`}>
                 {t.proof.honest ? <Info className="h-3.5 w-3.5" aria-hidden /> : null}

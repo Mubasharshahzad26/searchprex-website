@@ -105,6 +105,12 @@ const TABS: AudienceTab[] = [
     title: "Found for the cases you want",
     problem:
       "People search by practice area and city, often at night, and call whoever answers first. Most firm sites have one practice page, a thin Business Profile and no answer to the questions clients actually type.",
+    visual: {
+      src: "/images/audiences/lawyer-ppc-fatigue.jpg",
+      alt: "Attorney working late in a law office reviewing high PPC ad spend and low return",
+      badge: "The Problem · PPC Ad Burnout",
+      caption: "9:45 PM: Another $150 click that turned into a price-shopper who hung up in 30 seconds, while Google Ads eats your retainer.",
+    },
     work: [
       "Practice-area and city pages, written to bar advertising rules",
       "Business Profile and local pack work",
@@ -125,6 +131,12 @@ const TABS: AudienceTab[] = [
     title: "The map pack, and the phone ringing",
     problem:
       "When someone searches “near me”, they call one of the three businesses in the map pack. A profile set up as an afterthought and a single services page keep good businesses out of it.",
+    visual: {
+      src: "/images/audiences/local-contractor-garage.jpg",
+      alt: "Garage and local home service business owner with technicians waiting for incoming service calls",
+      badge: "The Problem · Silent Dispatch",
+      caption: "Three service vans parked inside and payroll running, while the local 3-pack sends all the emergency repair calls to competitors.",
+    },
     work: [
       "Business Profile rebuilt for the searches that bring calls",
       "A page for every service and area you actually cover",
@@ -146,6 +158,12 @@ const TABS: AudienceTab[] = [
     title: "Every product page earning its keep",
     problem:
       "Large catalogues fail in the same places: thin manufacturer copy, thousands of pages Google never indexes, and templates that make every product slow at once.",
+    visual: {
+      src: "/images/audiences/ecommerce-inventory-stress.jpg",
+      alt: "Ecommerce store owner in warehouse concerned about dropping sales and ad fatigue",
+      badge: "The Problem · Inventory Stagnation",
+      caption: "Thousands of product SKUs sitting in the warehouse, rising ad CAC, and Google Search Console still leaving half your catalogue unindexed.",
+    },
     work: [
       "Thin product and brand pages rewritten at scale",
       "Crawling and indexing fixed, batch by batch, in Search Console",
