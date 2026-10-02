@@ -9,6 +9,137 @@ import { proofBoxHtml } from "@/lib/proof-box";
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "ecommerce-organic-traffic-drop",
+    category:    "E-commerce SEO",
+    subcategory: "Traffic Recovery",
+    metaTitle:       "Ecommerce Organic Traffic Dropped? 7 Checks to Find Why",
+    metaDescription: "Online store traffic from Google dropped? Rule out tracking and seasonality, then check site changes, indexing, manual actions, updates and lost pages.",
+    title:       "Online Store Traffic Dropped? 7 Checks to Find Out Why",
+    excerpt:     "A sudden drop in Google traffic feels like a penalty, but most drops have an ordinary cause you can find in Search Console. Here are the checks to run, in the order that finds the answer fastest.",
+    readTime:    "11-minute read",
+    date:        "October 3, 2026",
+    tags:        ["ecommerce traffic drop", "organic traffic dropped", "google search console", "ecommerce seo"],
+    stat:        { value: "7", label: "Checks, in order" },
+    /* Unsplash — analytics chart on a laptop */
+    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "First, is the drop real?",
+      "Check 1 — Date it, and compare 16 months",
+      "Check 2 — Did the site change?",
+      "Check 3 — Can Google still crawl and index the store?",
+      "Check 4 — Security issues and manual actions",
+      "Check 5 — Does the date match a Google update?",
+      "Check 6 — Which pages and searches lost traffic?",
+      "Check 7 — Is it Shopping, not Search?",
+      "Symptom, likely cause, where to look",
+      "What not to do",
+      "Frequently asked questions",
+      "Sources",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>Short answer:</strong> when an online store loses Google traffic, Google's own debugging guide names seven usual causes: algorithm updates, technical issues, security issues, spam problems, seasonality and changing interest, site moves, and reporting glitches. Start by confirming the drop is real and not seasonal, then check whether the site changed, whether Google can still crawl and index it, and whether the date lines up with a Google update. Rule out those ordinary causes before assuming a penalty.</div>
+      <p>Work through the checks in order. Each one rules out a cause, and the early ones take minutes.</p>
+
+      <h2>First, is the drop real?</h2>
+      <p>Google lists "reporting glitches" as a cause in its own right. Before you change anything on the store, compare two sources: your analytics tool and Google Search Console's Performance report.</p>
+      <ul>
+        <li><strong>Analytics dropped, Search Console didn't.</strong> Google is still sending the clicks; your tracking stopped counting them. A theme update that removed the tag, a new consent banner or a checkout app is the usual culprit.</li>
+        <li><strong>Both dropped.</strong> The traffic really fell. Carry on.</li>
+      </ul>
+
+      <h2>Check 1 — Date it, and compare 16 months</h2>
+      <p>Note the day the drop started; most of the later checks depend on it. Then widen the view. Google's advice: "Choose the Date filter on top of the chart and select Last 16 months. This will help you analyze the traffic drop in context and make sure it's not a drop that happens every year due to a festivity or a trend."</p>
+      <p>Stores are seasonal. A garden store's October and a gift store's January look like disasters next to their peaks. Google also suggests Google Trends to see whether interest in your products fell across the whole market, not just for you. If the same dip shows up last year, or in Trends, it isn't an SEO problem.</p>
+
+      <h2>Check 2 — Did the site change?</h2>
+      <p>A change the store made is one of the first things to rule out. Ask what changed in the weeks before: a new theme, a platform move, new URLs, deleted categories, a new app, a redesign of product templates.</p>
+      <p>If URLs changed, check the redirects. Google recommends "server side permanent redirects from the old URLs to the new URLs", such as 301 or 308, built from "a mapping of old to new URLs". Even done well, a move brings "ranking fluctuations while Google recrawls and reindexes your site", and Google says it "can take a few weeks or more" for a medium-sized site, longer for large ones.</p>
+      <p><strong>Ecommerce traps:</strong> discontinued products deleted without a redirect, collection URLs renamed in a re-organisation, and a new theme that dropped the product description or structured data from the page template.</p>
+
+      <h2>Check 3 — Can Google still crawl and index the store?</h2>
+      <p>Google describes technical issues as "errors that can prevent Google from crawling, indexing, or serving your pages to users. For example, server availability, robots.txt fetching, 'page not found', and others." In Search Console, look at:</p>
+      <ul>
+        <li><strong>Pages report.</strong> A jump in "Not indexed", especially "Crawled – currently not indexed" or "Discovered – currently not indexed", means Google is keeping fewer of your pages. Our guides to <a href="/blog/fix-crawled-currently-not-indexed-ecommerce">Crawled – currently not indexed</a> and <a href="/blog/fix-discovered-currently-not-indexed-ecommerce">Discovered – currently not indexed</a> cover both.</li>
+        <li><strong>Crawl stats.</strong> A spike in server errors or a fall in crawl requests around the date of the drop points to hosting or the platform.</li>
+        <li><strong>robots.txt and noindex.</strong> A changed robots.txt or a stray noindex can remove a whole section. On Shopify, our <a href="/blog/shopify-products-not-showing-on-google">Shopify products not showing on Google</a> guide walks through both.</li>
+      </ul>
+
+      <h2>Check 4 — Security issues and manual actions</h2>
+      <p>These two are rare, but they're quick to rule out and they explain the sharpest drops.</p>
+      <ul>
+        <li><strong>Security issues report.</strong> If the store was hacked or flagged for malware, Google "may alert users before they reach your site with warnings or interstitial pages, which may decrease Search traffic."</li>
+        <li><strong>Manual actions report.</strong> If a person at Google found a spam policy violation, it shows here. Google's spam policies say non-compliant content "might rank lower in results or not appear in results at all." An empty report means there's no manual action — most drops aren't one.</li>
+      </ul>
+
+      <h2>Check 5 — Does the date match a Google update?</h2>
+      <p>Compare your date with the <a href="https://status.search.google.com/" target="_blank" rel="noopener noreferrer">Google Search Status Dashboard</a> and our <a href="/resources/news/google-algorithm-updates">confirmed Google update timeline</a>. In 2026 Google confirmed core updates in March and May and spam updates in March, June, August and September; the <a href="/resources/news/google-september-2026-spam-update">September 2026 spam update</a> was still rolling out in early October.</p>
+      <p>If a core update lines up, read Google's guidance before changing anything. It warns: "Avoid doing 'quick fix' changes (like removing some page element because you heard it was bad for SEO)." Recovery is slow: "it could take several months for our systems to learn and confirm", and "if it's been a few months and you still haven't seen any effect, that could mean waiting until the next core update." For a store, the work is usually product and category content that's genuinely more useful than the competition's — not copied manufacturer descriptions.</p>
+
+      <h2>Check 6 — Which pages and searches lost traffic?</h2>
+      <p>In the Performance report, compare the period before and after the drop and look at the <em>Pages</em> and <em>Queries</em> tabs. Google suggests filtering by search type, device, country and page.</p>
+      <ul>
+        <li><strong>A few pages lost most of it.</strong> Look at those pages: did they change, lose internal links, or get outranked by a better page?</li>
+        <li><strong>Every page fell a little.</strong> That points to something site-wide: a technical problem, an update, or seasonality.</li>
+        <li><strong>Impressions fell, position held.</strong> Fewer people are searching — demand, not ranking.</li>
+        <li><strong>Position fell, impressions held.</strong> You're still shown, just lower. That's a ranking problem on the pages that lost position.</li>
+      </ul>
+      <p>Google's advice after making changes is to "wait a few weeks to analyze your site in Search Console again".</p>
+      ${proofBoxHtml("michigan-outdoor-sports", "An outdoor store whose traffic peaked, then fell as pages dropped out of the index — and how it was rebuilt.")}
+
+      <h2>Check 7 — Is it Shopping, not Search?</h2>
+      <p>If the traffic you lost came from the Shopping tab or free product listings rather than ordinary results, the cause is usually in Google Merchant Center: disapproved products, a feed that stopped syncing, or an account issue. Open <em>Products → Needs attention</em> in Merchant Center. Our Shopify guide covers <a href="/blog/shopify-products-not-showing-on-google">the Merchant Center side</a> too.</p>
+
+      <h2>Symptom, likely cause, where to look</h2>
+      <table>
+        <thead><tr><th>What you see</th><th>Likely cause</th><th>Where to look</th></tr></thead>
+        <tbody>
+          <tr><td>Analytics down, Search Console flat</td><td>Tracking broke</td><td>Analytics tag, consent banner, recent theme or app changes</td></tr>
+          <tr><td>Same dip last year</td><td>Seasonality</td><td>Performance report, last 16 months; Google Trends</td></tr>
+          <tr><td>Drop right after a relaunch or migration</td><td>Missing or wrong redirects, changed templates</td><td>Old URLs, redirect map, Pages report</td></tr>
+          <tr><td>"Not indexed" pages climbing</td><td>Crawling or quality problem</td><td>Pages report, Crawl stats, product content</td></tr>
+          <tr><td>Sudden, near-total drop</td><td>Security issue, manual action, robots.txt or noindex</td><td>Security issues, Manual actions, robots.txt</td></tr>
+          <tr><td>Date matches a confirmed update</td><td>Algorithmic change</td><td>Status Dashboard; top pages against competitors</td></tr>
+          <tr><td>Shopping clicks gone, Search fine</td><td>Feed or Merchant Center issue</td><td>Merchant Center, Needs attention</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What not to do</h2>
+      <ul>
+        <li><strong>Don't make "quick fix" changes.</strong> Google warns against exactly that after a core update.</li>
+        <li><strong>Don't noindex or delete large sections in a panic.</strong> You can turn a temporary dip into a permanent loss.</li>
+        <li><strong>Don't change five things at once.</strong> You'll never know which one worked, or which one hurt.</li>
+        <li><strong>Don't buy links to "recover".</strong> Link schemes break Google's spam policies — the last thing you want during a spam update.</li>
+      </ul>
+      ${proofBoxHtml("smk-store", "A 35,000-product catalog where rebuilding thin content and indexing came before the sales recovery.")}
+
+      <h2>Frequently asked questions</h2>
+      <h3>How long does it take to recover from an organic traffic drop?</h3>
+      <p>It depends on the cause. A broken tag or a missing redirect can recover within weeks of the fix. After a site move, Google says it can take a few weeks or more for a medium-sized site. After a core update, Google says it could take several months, sometimes until the next core update.</p>
+      <h3>Is my online store being penalized by Google?</h3>
+      <p>Check the Manual actions report in Search Console. If it's empty, there's no manual penalty. Most drops come from site changes, indexing problems, seasonality or algorithm updates, and each has its own check above.</p>
+      <h3>Why did my impressions drop but my average position stay the same?</h3>
+      <p>That usually means fewer people searched, not that you ranked lower. Compare the same months last year and check Google Trends for your product terms.</p>
+      <h3>Why did traffic drop after I changed my Shopify or WooCommerce theme?</h3>
+      <p>Theme changes often alter page templates: product descriptions, headings, internal links or structured data can disappear, and URLs can change. Compare an old and a new product page side by side, and check that any changed URLs redirect permanently.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops" target="_blank" rel="noopener noreferrer">Debugging drops in Google Search traffic — Google Search Central</a></li>
+        <li><a href="https://developers.google.com/search/docs/appearance/core-updates" target="_blank" rel="noopener noreferrer">Google Search's core updates and your website — Google Search Central</a></li>
+        <li><a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes" target="_blank" rel="noopener noreferrer">Site moves and migrations — Google Search Central</a></li>
+        <li><a href="https://status.search.google.com/" target="_blank" rel="noopener noreferrer">Google Search Status Dashboard</a></li>
+      </ul>
+      <p>If you'd rather have someone find the cause, send your store for a <a href="/free-audit">free 24-hour tear-down</a>, or see our <a href="/services/ecommerce-seo">ecommerce SEO services</a>.</p>
+    `,
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Expert",
+      bio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified. He diagnoses and recovers traffic drops on Shopify, WooCommerce and BigCommerce stores.",
+    },
+  },
+  {
     slug:        "get-more-calls-from-google-business-profile",
     category:    "Local SEO",
     subcategory: "Google Business Profile",
