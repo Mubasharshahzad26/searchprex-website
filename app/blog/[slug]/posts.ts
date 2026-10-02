@@ -233,7 +233,7 @@ export const posts = [
     readTime:    "12-minute read",
     date:        "May 15, 2026",
     tags:        ["crawl budget", "indexing", "technical seo", "e-commerce"],
-    stat:        { value: "+285%", label: "Indexing Rate" },
+    stat:        { value: "+285%", label: "Pages indexed · MSO" },
     /* Unsplash — server room / tech */
     heroImage:   "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
     toc: [
@@ -318,7 +318,7 @@ export const posts = [
       </ol>
       <h2>What that looked like on a 35,000-page store</h2>
       <p>SMK Store had over 35,000 product pages that were barely indexed. The cause was not submission volume — it was thin, near-identical boilerplate descriptions tripping duplicate-content filters, plus failing Core Web Vitals.</p>
-      <p>We rewrote product content brand by brand, optimised crawl budget, implemented product schema, fixed Core Web Vitals, and resubmitted in batches through Search Console. Indexing rate rose 285%, more than 12,000 product pages were indexed and began ranking, and US revenue grew 75% within two months with no additional ad spend — all verified in Search Console. The full write-up is in the <a href="/case-studies/ecommerce/smk-store">SMK Store case study</a>.</p>
+      <p>We rewrote product content brand by brand, optimised crawl budget, implemented product schema, fixed Core Web Vitals, and resubmitted in batches through Search Console. Monthly net sales went from $5,832 in April 2026 to $19,100 in June 2026 (+227%) with no additional ad spend, as shown on the store's WooCommerce dashboard. The full write-up is in the <a href="/case-studies/ecommerce/smk-store">SMK Store case study</a>.</p>
       <p>The honest version of a second project is worth including too. <a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Outdoor Sports</a> peaked at +476% organic clicks in March 2026, then lost ground to a gradual de-indexing before we rebuilt it to 11,549 indexed pages and +83% US organic clicks by July. Indexing is not a one-time unlock, and anyone selling it as one is overselling.</p>
       <h2>Do this week</h2>
       <ol>
@@ -341,10 +341,10 @@ export const posts = [
     category:    "E-commerce SEO",
     subcategory: "Product Pages",
     title:       "Product Page SEO at Scale: 10,000+ SKUs",
-    excerpt:     "Near-identical boilerplate is the most common reason large catalogues fail to index. Here is the brand-by-brand rewriting method we used to lift one 35,000-page store's indexing rate by 285%.",
+    excerpt:     "Near-identical boilerplate is the most common reason large catalogues fail to index. Here is the brand-by-brand rewriting method we used on one 35,000-product store.",
     readTime:    "11-minute read",
     date:        "August 27, 2026",
-    stat:        { value: "+285%", label: "Indexing rate" },
+    stat:        { value: "+227%", label: "Monthly net sales · SMK" },
     heroImage:   "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format&fit=crop",
     tags:        ["product pages", "e-commerce", "content", "indexing"],
     toc:         ["The duplicate content problem","Brand-by-brand, not page-by-page","The content template","Where AI fits, and where it gets you hurt","What the results looked like","Do this week"],
@@ -381,7 +381,7 @@ export const posts = [
       <p>Budget for review. On the projects where this worked, review time was roughly a third of total effort — and it is the third that produces the "who it does not suit" and "how it differs" sections that carry the whole approach.</p>
       <h2>What the results looked like</h2>
       <p>Two projects, reported honestly, including the one that went backwards before it went forwards.</p>
-      <p><strong>SMK Store</strong> — over 35,000 product pages, barely indexed, with thin near-identical descriptions tripping duplicate-content filters and failing Core Web Vitals. We rewrote brand by brand, optimised crawl budget, implemented product schema and fixed Core Web Vitals, resubmitting in batches. Indexing rate rose 285%, more than 12,000 product pages were indexed and began ranking, and US revenue grew 75% within two months with no additional ad spend, verified in Search Console. Full detail in the <a href="/case-studies/ecommerce/smk-store">SMK Store case study</a>.</p>
+      <p><strong>SMK Store</strong> — over 35,000 product pages, barely indexed, with thin near-identical descriptions tripping duplicate-content filters and failing Core Web Vitals. We rewrote brand by brand, optimised crawl budget, implemented product schema and fixed Core Web Vitals, resubmitting in batches. Monthly net sales went from $5,832 in April 2026 to $19,100 in June 2026 (+227%) with no additional ad spend, as shown on the store's WooCommerce dashboard. Full detail in the <a href="/case-studies/ecommerce/smk-store">SMK Store case study</a>.</p>
       <p><strong>Michigan Outdoor Sports</strong> — brand pages never properly submitted, thin content causing mass non-indexing, crawl budget wasted. Organic clicks peaked at +476% in March 2026, then <em>lost ground to a gradual de-indexing</em> before we rebuilt to 11,549 indexed pages, up from roughly 3,000, and +83% US organic clicks by July. Written up in the <a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Outdoor Sports case study</a>.</p>
       <p>That second trajectory is the more useful one to plan around. Indexing gains are held, not won — if the underlying content stays thin in places, pages drop back out.</p>
       <h2>Do this week</h2>
@@ -404,7 +404,7 @@ export const posts = [
     excerpt:         "Struggling with product pages deindexed in Search Console? Learn the 5 technical culprits behind mass ecommerce deindexing and our step-by-step recovery framework.",
     readTime:    "12-minute read",
     date:        "September 29, 2026",
-    stat:        { value: "+202%", label: "Indexed SKUs" },
+    stat:        { value: "+285%", label: "Pages indexed · MSO" },
     heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
     tags:        ["crawled currently not indexed", "e-commerce seo", "product pages", "technical seo", "indexing recovery"],
     toc: [
@@ -412,7 +412,7 @@ export const posts = [
       "5 technical culprits behind mass product deindexing",
       "The 5-step indexing recovery framework",
       "Platform-specific fixes: Shopify vs WooCommerce",
-      "Case study results: 35,000-SKU recovery",
+      "Case study: rebuilding indexation after a de-indexing",
       "Frequently asked questions",
       "Action checklist for this week",
     ],
@@ -464,7 +464,7 @@ export const posts = [
 </figure>
 
 <h2>5 technical culprits behind mass product deindexing</h2>
-<p>Through hundreds of <a href="/services/technical-seo">technical SEO audits</a> for stores on Shopify, WooCommerce, and Magento, we have found that 95% of deindexing cases trace back to these 5 structural flaws:</p>
+<p>In the <a href="/services/technical-seo">technical SEO audits</a> we run on Shopify, WooCommerce and Magento stores, mass deindexing usually traces back to one or more of these 5 structural flaws:</p>
 
 <h3>1. Faceted Navigation &amp; Query Parameter Sprawl</h3>
 <p>Faceted filters (sorting by color, size, price range, or brand) generate millions of virtual URLs (e.g., <code>store.com/shop?color=black&amp;size=xl&amp;sort=price_desc</code>). When Googlebot spends 80% of its resources crawling filter combinations, it exhausts your store's render budget before reaching your primary product URLs.</p>
@@ -537,21 +537,20 @@ Allow: /shop/</code></pre>
 <p>WooCommerce generates archives for every single product attribute (<code>/pa_color/black/</code>, <code>/pa_size/xl/</code>).</p>
 <p>In your SEO plugin (Yoast / RankMath), set all attribute taxonomies (<code>pa_*</code>) to <strong><code>noindex, follow</code></strong> to keep your crawl budget 100% focused on real revenue pages.</p>
 
-<h2>Case study results: 35,000-SKU recovery</h2>
-<p>In our client case study for a large outdoor online store (<a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Outdoor Sports</a>), over 20,000 SKUs were dropped into <em>"Crawled – currently not indexed"</em> following an unmanaged theme overhaul.</p>
+<h2>Case study: rebuilding indexation after a de-indexing</h2>
+<p><a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Outdoor Sports</a>, a large outdoor store, peaked at +476% organic clicks in March 2026 and then lost ground to a gradual de-indexing: brand pages had never been properly submitted, thin content left large parts of the catalog out of the index, and crawl budget was going to low-value URLs.</p>
 
 <figure class="my-8">
 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop" alt="Search Console analytics and traffic growth dashboard" class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Recovering indexation on high-margin product lines directly translates to sustained organic revenue growth.</figcaption>
 </figure>
 
-<p>By blocking 45,000+ faceted filter variations in <code>robots.txt</code>, programmatically generating unique technical spec tables across 150 brands, and rebuilding internal category silos, the results within 60 days were transformative:</p>
+<p>Rebuilding the thin content, submitting the brand pages properly and cutting crawl waste produced these results between May and July 2026, verified in Search Console:</p>
 <ul>
-<li><strong>Indexed Pages:</strong> Increased from <strong>11,200 to 33,850+ SKUs (+202% Indexation Rate)</strong>.</li>
-<li><strong>Organic Search Clicks:</strong> Grew by <strong>+184% within 60 days</strong>.</li>
-<li><strong>Zero Drop-off:</strong> GSC "Crawled — currently not indexed" dropped from 68% of the catalog to under 4%.</li>
+<li><strong>Indexed pages:</strong> from roughly <strong>3,000 to 11,549 (+285%)</strong>.</li>
+<li><strong>US organic clicks:</strong> up <strong>83%</strong> over the same period, with no ad spend.</li>
 </ul>
-<p>A similar approach on <a href="/case-studies/ecommerce/smk-store">SMK Store</a> lifted indexation by 285% and drove a 75% US revenue increase within two months.</p>
+<p>Indexing gains are held, not won: if parts of the catalog stay thin, pages drop back out. On <a href="/case-studies/ecommerce/smk-store">SMK Store</a>, a 35,000-product catalog, the same kind of content and crawl work came before monthly net sales rising from $5,832 to $19,100 between April and June 2026.</p>
 
 <h2>Frequently asked questions</h2>
 
@@ -937,7 +936,7 @@ add_filter('rank_math/sitemap/max_entries', function() {
 <p>Shopify themes historically use the <code>within: collection</code> Liquid filter to maintain breadcrumb trail context when visitors browse through specific collections. However, this generates multiple URLs for the same product, creating crawl budget waste and canonical conflicts in Google Search Console.</p>
 
 <h3>Should I noindex WooCommerce product tags and attribute pages?</h3>
-<p>Yes. In 95% of e-commerce stores, product tags (e.g., <code>/product-tag/red/</code>) provide zero unique editorial value and cannibalize primary category keyword rankings. Setting them to <code>noindex, follow</code> preserves crawl budget for revenue-generating product and category pages.</p>
+<p>Yes, for most stores. In a typical e-commerce store, product tags (e.g., <code>/product-tag/red/</code>) provide zero unique editorial value and cannibalize primary category keyword rankings. Setting them to <code>noindex, follow</code> preserves crawl budget for revenue-generating product and category pages.</p>
 
 <h3>How does server TTFB affect Shopify and WooCommerce indexing rates?</h3>
 <p>Googlebot dynamically calculates a host crawl rate based on server response speed. When Time to First Byte (TTFB) exceeds 600ms, Googlebot throttles concurrent crawl threads to avoid overloading the site, causing thousands of URLs to stall in the <em>Discovered – currently not indexed</em> queue.</p>
