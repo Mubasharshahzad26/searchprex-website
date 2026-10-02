@@ -737,7 +737,9 @@ export default function AiFinderHero() {
         </div>
       </div>
  
-      {/* Verified & listed on strip */}
+      {/* Profiles strip. Only profiles that exist (the TrustStrap list):
+          G2, Crunchbase and DesignRush were listed here as "verified" while
+          still unsubmitted, and the DesignRush URL returned 404. */}
       <div style={{ background: "#fff", borderTop: `1px solid ${BRAND.line}` }}>
         <div
           style={{
@@ -759,7 +761,7 @@ export default function AiFinderHero() {
               whiteSpace: "nowrap",
             }}
           >
-            VERIFIED &amp; LISTED ON
+            FIND US ON
           </span>
           <div
             style={{ display: "flex", flexWrap: "wrap", gap: 8, flex: 1 }}
@@ -768,11 +770,9 @@ export default function AiFinderHero() {
               "Trustpilot",
               "Clutch",
               "BBB",
-              "G2",
               "GoodFirms",
-              "Crunchbase",
-              "DesignRush",
               "LinkedIn",
+              "YouTube",
             ].map((name) => (
               <span
                 key={name}

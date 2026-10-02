@@ -69,7 +69,9 @@ const organization = {
     "LLM Optimization",
     "Google Indexing Recovery",
   ],
-  // Every profile the hero's "Verified & Listed On" strip links to.
+  // Profiles that exist — the same list TrustStrap links to. G2, Crunchbase
+  // and DesignRush were here before their profiles were created (DesignRush
+  // returned 404); add each back on the day its profile goes live.
   sameAs: [
     "https://www.wikidata.org/wiki/Q141611840",
     "https://www.linkedin.com/company/searchprex/",
@@ -77,10 +79,7 @@ const organization = {
     "https://www.trustpilot.com/review/searchprex.com",
     "https://clutch.co/profile/searchprex",
     "https://www.bbb.org/us/il/chicago/profile/searchprex",
-    "https://www.g2.com/sellers/searchprex",
     "https://www.goodfirms.co/company/searchprex",
-    "https://www.crunchbase.com/organization/searchprex",
-    "https://www.designrush.com/agency/searchprex",
   ],
   // No aggregateRating or review: Google does not show review snippets for an
   // organization's reviews of itself, so they earn nothing here.
