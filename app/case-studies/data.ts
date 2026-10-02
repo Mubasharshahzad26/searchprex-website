@@ -133,6 +133,9 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 4,
     client: "Doll's Cleaning",
+    // Was "+264 clicks": 264 is July's total, not the gain. The GSC comparison
+    // screenshot shows 192 → 264 clicks and 41K → 106K impressions, Jun → Jul 2025.
+    period: "June – July 2025",
     seoTitle: "Doll's Cleaning SEO Case Study, Chesterfield MI",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
@@ -149,22 +152,25 @@ export const caseStudies: CaseStudy[] = [
     solution:
       "We fully optimized the Google Business Profile, built dedicated service-area pages, fixed on-page local SEO signals, cleaned up citations, and set up a steady review-generation cadence.",
     outcome:
-      "The business reached #1 local rankings for its core cleaning keywords, generating 106K impressions and +264 clicks — driving consistent inbound calls. All verified in Google Search Console.",
+      "The business reached #1 local rankings for its core cleaning keywords. In July 2025 it had 264 clicks and 106K impressions in Google Search, up from 192 clicks and 41K impressions in June, with average position improving from 31.2 to 22.9. Verified in Google Search Console.",
     metrics: [
       { v: "#1", l: "Local ranking" },
-      { v: "+264", l: "Clicks" },
-      { v: "106K", l: "Impressions" },
+      { v: "192 → 264", l: "Clicks, Jun → Jul 2025" },
+      { v: "41K → 106K", l: "Impressions" },
     ],
   },
   {
     id: 5,
     client: "Mammoth Roofing",
-    seoTitle: "Roofing SEO Case Study, Texas: +210 Clicks",
+    // Was "+210 monthly clicks": 210 is the 28-day total (197 the 28 days
+    // before). The real movement in the GSC comparison is impressions.
+    period: "28 days to October 2024",
+    seoTitle: "Roofing SEO Case Study, Texas: +167% Impressions",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Roofing",
     location: "Texas",
-    headline: "+210 monthly clicks and top-6 positions for competitive roofing terms.",
+    headline: "Impressions up 167% in 28 days, and a top-6 position for a competitive Texas roofing term.",
     badgeColor: "#ea580c",
     badgeBg: "#fef3c7",
     image: "/images/mammoth-roofing-gsc.JPG",
@@ -175,10 +181,10 @@ export const caseStudies: CaseStudy[] = [
     solution:
       "We mapped keywords across roofing services, built location-targeted landing pages, fixed technical SEO issues, and published content aligned with what Texas homeowners actually search for.",
     outcome:
-      "Top-6 positions for competitive roofing terms, +210 monthly clicks and 45K impressions — measurable lead growth without ad spend. Verified in Google Search Console.",
+      "Over 28 days to October 2024, impressions rose from 16.9K to 45.2K (+167%) and clicks from 197 to 210, and the site ranked #6 for \"copper roofing company in Texas\". Verified in Google Search Console.",
     metrics: [
-      { v: "+210", l: "Monthly clicks" },
-      { v: "45K", l: "Impressions" },
+      { v: "+167%", l: "Impressions, 28 days" },
+      { v: "45.2K", l: "Impressions" },
       { v: "Top 6", l: "Position" },
     ],
   },
@@ -211,11 +217,16 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 7,
     client: "Door Doctor",
-    seoTitle: "Door Doctor GBP Case Study: 490+ Interactions",
+    // Was "490+ monthly interactions and +78% more profile views". The
+    // Performance screenshot covers April–May 2025 (two months, not one) and
+    // shows no profile-views figure, so only the interactions total is claimed.
+    period: "April – May 2025",
+    verifiedVia: "the Business Profile Performance report",
+    seoTitle: "Door Doctor Google Business Profile Case Study",
     seoType: "Local SEO",
     industry: "Home Services",
     location: "Multiple Locations",
-    headline: "490+ monthly profile interactions and +78% more profile views.",
+    headline: "490 Business Profile interactions in two months across a multi-location door repair business.",
     badgeColor: "#059669",
     badgeBg: "#ecfdf5",
     image: "/images/door-doctor-google-my-business.JPG",
@@ -226,10 +237,9 @@ export const caseStudies: CaseStudy[] = [
     solution:
       "We standardized NAP data across every location, optimized each Google Business Profile, and set up a posting and review strategy to keep profiles active.",
     outcome:
-      "490+ monthly profile interactions and +78% more profile views across locations — turning dormant profiles into a steady lead source.",
+      "490 Business Profile interactions (calls, direction requests and website clicks) across April and May 2025, shown in the Business Profile Performance report.",
     metrics: [
-      { v: "490", l: "Interactions" },
-      { v: "+78%", l: "Profile views" },
+      { v: "490", l: "Interactions, Apr–May 2025" },
       { v: "Active", l: "GBP" },
     ],
   },

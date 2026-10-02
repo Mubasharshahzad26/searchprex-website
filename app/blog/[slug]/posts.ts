@@ -9,6 +9,124 @@ import { proofBoxHtml } from "@/lib/proof-box";
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "get-more-calls-from-google-business-profile",
+    category:    "Local SEO",
+    subcategory: "Google Business Profile",
+    metaTitle:       "How to Get More Calls From Your Google Business Profile",
+    metaDescription: "Get more phone calls from your Google Business Profile: measure calls properly, fix the number and hours, show up for more searches and win the click.",
+    title:       "How to Get More Calls From Your Google Business Profile",
+    excerpt:     "For most local businesses the profile, not the website, is where the phone rings from. Here is how to measure calls properly and the changes that make more people tap the call button.",
+    readTime:    "10-minute read",
+    date:        "October 2, 2026",
+    tags:        ["google business profile calls", "more phone calls", "google maps", "local seo"],
+    stat:        { value: "6", label: "Levers for more calls" },
+    /* Unsplash — person on a phone call */
+    heroImage:   "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "First, measure calls the way Google counts them",
+      "1 — Make the number right",
+      "2 — Be open when people call",
+      "3 — Show up for more searches",
+      "4 — Give people a reason to call you, not the next one",
+      "5 — Keep the profile current with posts",
+      "6 — Protect the profile",
+      "What not to do",
+      "Frequently asked questions",
+      "Sources",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>Short answer:</strong> more calls come from two things: appearing for more of the right searches, and giving the people who see you a reason to tap "Call" instead of the next business. Get the basics exact first — a local number you control, hours you actually answer the phone, the right primary category — then build reviews, photos and posts. Measure it with the Calls figure in your Business Profile Performance report, compared month against the same month.</div>
+      <p>For plumbers, HVAC companies, cleaners, roofers and most other local service businesses, a lot of customers never reach the website. They search, see the profile, and call. That makes the profile the most important page you have.</p>
+
+      <h2>First, measure calls the way Google counts them</h2>
+      <p>Open your profile's <strong>Performance</strong> report. Google defines the Calls metric as "the number of times a customer clicked on the call button". The same report shows views on Search and Maps, the search terms people used to find you, direction requests and website clicks.</p>
+      <p>Two cautions before you judge any change:</p>
+      <ul>
+        <li><strong>A call click isn't an answered call.</strong> Someone can tap the button and hang up, or reach voicemail. Count answered calls and booked jobs on your side too.</li>
+        <li><strong>Compare like with like.</strong> Most local services are seasonal. Compare this month with the same month last year, or a long enough stretch, before deciding something worked.</li>
+      </ul>
+
+      <h2>1 — Make the number right</h2>
+      <p>It sounds obvious, but a wrong or awkward number is the most common reason a profile gets views and few calls. Google's <a href="https://support.google.com/business/answer/3038177" target="_blank" rel="noopener noreferrer">guidelines</a> are specific:</p>
+      <ul>
+        <li>"Use a local phone number instead of a central call center helpline number whenever possible."</li>
+        <li>"The phone number must be under the direct control of the business."</li>
+        <li>"Do not provide phone numbers or URLs that redirect or 'refer' users to landing pages or phone numbers other than those of the actual business."</li>
+        <li>"Premium phone numbers are not acceptable regardless of the rate charged to the caller."</li>
+      </ul>
+      <p><strong>Do this:</strong> call your own number from the profile on a phone. Check that it rings the business, that whoever answers says the business name, and that the same number appears on your website. Keep it identical everywhere — a different number on your site gives customers, and Google, two versions of you.</p>
+
+      <h2>2 — Be open when people call</h2>
+      <p>The profile shows whether you're open right now, and people call businesses that are open. Google asks you to "provide your regular customer-facing hours of operation" and lets you "specify special hours for particular days, like holidays or special events."</p>
+      <p><strong>Do this:</strong> set the hours someone actually answers the phone, not the hours the office lights are on. Add special hours before every holiday. If you take emergency calls out of hours, set the hours that reflect that only if the phone really is answered.</p>
+
+      <h2>3 — Show up for more searches</h2>
+      <p>You can't get a call from a search you don't appear in. Google says local ranking depends on relevance, distance and prominence, and that "businesses with complete and accurate info are more likely to show up in local search results."</p>
+      <ul>
+        <li><strong>Primary category.</strong> It's the strongest statement of what you are. Google asks for "as few categories as possible to describe your overall core business", chosen so the sentence reads "this business <em>is</em> a…".</li>
+        <li><strong>Services and service areas.</strong> List the services you want calls for, in the words customers use, and the areas you really serve.</li>
+        <li><strong>Verification.</strong> Google says verifying tells it "you're authorized to represent the business, so it's more likely to show up in search results."</li>
+      </ul>
+      <p>Then look at the <em>Searches</em> section of the Performance report. It shows the terms people used to find you. Services you offer that never appear there are the gaps to work on — on the profile and on the website pages behind it. If your visibility dropped suddenly rather than slowly, start with <a href="/blog/google-maps-ranking-drop">why your Google Maps ranking dropped</a>.</p>
+
+      <h2>4 — Give people a reason to call you, not the next one</h2>
+      <p>Showing up gets you looked at. What decides the call is how you compare with the two or three businesses next to you.</p>
+      <ul>
+        <li><strong>Reviews.</strong> Google says "more reviews and positive ratings can help your business's local ranking", and they're the first thing a caller reads. Ask every customer, using the review link or QR code Google provides. Never offer anything in return: Google says incentives "in exchange for customers to post reviews, change reviews, or remove negative reviews" are "strictly prohibited".</li>
+        <li><strong>Replies.</strong> "When you reply to customer reviews, it shows that you value their feedback." A calm, specific reply to a bad review often does more for the next caller than another five-star review.</li>
+        <li><strong>Photos.</strong> Google suggests you "show customers what you offer and tell the story of your business with photos and videos." Real photos of your team, vehicles and finished work beat stock images.</li>
+      </ul>
+      ${proofBoxHtml("dolls-cleaning", "One local service business: more search visibility, measured in Search Console — the step that comes before more calls.")}
+
+      <h2>5 — Keep the profile current with posts</h2>
+      <p>Business Profile posts let you "share announcements, offers, updates, and event details directly with your customers on Search and Maps." There are three kinds: updates, offers (with dates) and events.</p>
+      <p><strong>Do this:</strong> post when something real happens — a seasonal service, a limited offer with an end date, a new service area. A profile with a recent post looks looked-after. Don't expect posts on their own to move rankings; their job is to answer a question the caller has right now.</p>
+
+      <h2>6 — Protect the profile</h2>
+      <p>A profile that's been edited by someone else, or suspended, stops the calls overnight.</p>
+      <ul>
+        <li><strong>Watch suggested edits.</strong> Owners now have <a href="/resources/news/google-business-profile-four-days-suggested-edits">four days to reject a suggested edit</a> before Google may publish it — including a changed phone number.</li>
+        <li><strong>Stay inside the guidelines.</strong> A keyword in the business name can bring a suspension. If it happens, follow our guide to <a href="/blog/google-business-profile-suspended">getting a suspended profile reinstated</a>.</li>
+        <li><strong>Check it quarterly</strong> against our <a href="/resources/google-business-profile-checklist">Google Business Profile checklist</a>.</li>
+      </ul>
+
+      <h2>What not to do</h2>
+      <ul>
+        <li><strong>Don't add keywords or a city to the business name.</strong> It breaks the guidelines and risks the profile.</li>
+        <li><strong>Don't use a call-centre or premium number</strong> as the profile's number.</li>
+        <li><strong>Don't buy reviews or trade discounts for them.</strong> It's prohibited, and a sudden spike is easy to spot.</li>
+        <li><strong>Don't list hours you can't answer.</strong> A missed call from a profile that says "Open" costs you the customer and the review.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Does the Calls number in Business Profile count answered calls?</h3>
+      <p>No. Google defines it as the number of times a customer clicked the call button. Answered calls, missed calls and booked jobs have to be counted on your side.</p>
+      <h3>How long does it take to get more calls from Google Business Profile?</h3>
+      <p>Fixes to the number and hours can show up as soon as the edit is live. Changes that depend on ranking — categories, reviews, the pages behind the profile — usually take weeks to months, and seasonality can hide them, so compare against the same period last year.</p>
+      <h3>What matters most for getting calls from Google Maps?</h3>
+      <p>Appearing for the searches that bring calls, then standing out against the businesses next to you. In practice that means the right primary category and services first, then a steady flow of genuine reviews with replies, and real photos.</p>
+      <h3>Do Google Business Profile posts increase calls?</h3>
+      <p>They can help a caller decide, especially offers with dates and seasonal updates, but Google doesn't say they affect ranking. Treat them as a way to answer the caller's question, not as a ranking tactic.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://support.google.com/business/answer/9918094" target="_blank" rel="noopener noreferrer">Understand your Business Profile performance &amp; insights — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/3038177" target="_blank" rel="noopener noreferrer">Guidelines for representing your business on Google — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/7091" target="_blank" rel="noopener noreferrer">Tips to improve your local ranking on Google — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/3474122" target="_blank" rel="noopener noreferrer">Tips to get more reviews — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/7342169" target="_blank" rel="noopener noreferrer">Business Profile posts — Google Business Profile Help</a></li>
+      </ul>
+      <p>Want to know what's holding your profile back? Send it for a <a href="/free-audit">free 24-hour review</a>, or see how we run profiles on our <a href="/services/local-seo">local SEO services</a> page.</p>
+    `,
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Expert",
+      bio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified. He manages Google Business Profiles for US local service businesses.",
+    },
+  },
+  {
     slug:        "google-business-profile-suspended",
     category:    "Local SEO",
     subcategory: "Google Business Profile",
@@ -88,7 +206,6 @@ export const posts = [
         <li><strong>Don't upload evidence that doesn't match.</strong> A document with a different name or address undermines the appeal it's meant to support.</li>
         <li><strong>Don't add keywords back to the name after reinstatement.</strong> It's the same violation, and the next suspension starts from a worse position.</li>
       </ul>
-      ${proofBoxHtml("door-doctor", "Multi-location profiles with mismatched details were standardized and kept active — the steady, guideline-first work that keeps profiles out of trouble.")}
 
       <h2>How to avoid another suspension</h2>
       <ul>

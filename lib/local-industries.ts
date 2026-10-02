@@ -271,7 +271,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     accent: "where the call comes from the profile",
     metaTitle: "Home Services SEO | Garage Door & Door Repair",
     metaDescription:
-      "Local SEO for garage door and home service businesses. Door Doctor reached 490+ monthly Business Profile interactions and 78% more profile views.",
+      "Local SEO for garage door and home service businesses. Door Doctor's profiles logged 490 Business Profile interactions in two months.",
     heroSub:
       "For garage door and door repair companies, most customers never reach your website — they call straight from the Business Profile. I make the profile, and the pages behind it, do that job.",
     caseClients: ["door-doctor"],
@@ -304,7 +304,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       },
       {
         q: "What results has SearchPrex got for a home service business?",
-        a: "Door Doctor reached more than 490 monthly Business Profile interactions — calls, direction requests and website visits — and 78% more profile views after the profile and its supporting pages were rebuilt.",
+        a: "Door Doctor's profiles logged 490 Business Profile interactions — calls, direction requests and website clicks — across April and May 2025 after the profiles were standardized and rebuilt. The figure comes from the Business Profile Performance report; the case study links the screenshot.",
       },
       {
         q: "Do I still need a website if customers call from the profile?",
