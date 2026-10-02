@@ -91,6 +91,7 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
                     src={t.visual.src}
                     alt={t.visual.alt}
                     fill
+                    priority
                     sizes="(max-width: 1024px) 100vw, 500px"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />

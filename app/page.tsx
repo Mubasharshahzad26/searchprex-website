@@ -106,8 +106,8 @@ const TABS: AudienceTab[] = [
     problem:
       "People search by practice area and city, often at night, and call whoever answers first. Most firm sites have one practice page, a thin Business Profile and no answer to the questions clients actually type.",
     visual: {
-      src: "/images/audiences/lawyer-ppc-fatigue.jpg",
-      alt: "Attorney working late in a law office reviewing high PPC ad spend and low return",
+      src: "/images/audiences/lawyer-ppc-fatigue.webp",
+      alt: "Attorney at law firm reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night",
       badge: "The Problem · PPC Ad Burnout",
       caption: "9:45 PM: Another $150 click that turned into a price-shopper who hung up in 30 seconds, while Google Ads eats your retainer.",
     },
@@ -132,8 +132,8 @@ const TABS: AudienceTab[] = [
     problem:
       "When someone searches “near me”, they call one of the three businesses in the map pack. A profile set up as an afterthought and a single services page keep good businesses out of it.",
     visual: {
-      src: "/images/audiences/local-contractor-garage.jpg",
-      alt: "Garage and local home service business owner with technicians waiting for incoming service calls",
+      src: "/images/audiences/local-contractor-garage.webp",
+      alt: "Local contractor and garage repair business owner waiting for incoming phone calls with idle service vans",
       badge: "The Problem · Silent Dispatch",
       caption: "Three service vans parked inside and payroll running, while the local 3-pack sends all the emergency repair calls to competitors.",
     },
@@ -159,8 +159,8 @@ const TABS: AudienceTab[] = [
     problem:
       "Large catalogues fail in the same places: thin manufacturer copy, thousands of pages Google never indexes, and templates that make every product slow at once.",
     visual: {
-      src: "/images/audiences/ecommerce-inventory-stress.jpg",
-      alt: "Ecommerce store owner in warehouse concerned about dropping sales and ad fatigue",
+      src: "/images/audiences/ecommerce-inventory-stress.webp",
+      alt: "Ecommerce store owner in warehouse worried about unindexed product catalog and rising ad CAC",
       badge: "The Problem · Inventory Stagnation",
       caption: "Thousands of product SKUs sitting in the warehouse, rising ad CAC, and Google Search Console still leaving half your catalogue unindexed.",
     },
