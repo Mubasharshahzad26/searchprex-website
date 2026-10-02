@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { sdrAdminGuard } from "@/lib/sdr/guard";
 
 export async function POST(req: Request) {
+  const denied = await sdrAdminGuard();
+  if (denied) return denied;
+
   try {
     const { leads } = await req.json();
     if (!leads || !Array.isArray(leads)) {

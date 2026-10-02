@@ -2,6 +2,15 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 export async function POST(req: Request) {
+  //  Called by Zapier/Make, so it can't use an admin session. It takes a shared
+  //  secret instead, and refuses everything while none is configured: an open
+  //  endpoint that writes to the production lead table is a spam inbox.
+  const secret = process.env.SDR_WEBHOOK_SECRET;
+  const given = req.headers.get("x-webhook-secret") ?? new URL(req.url).searchParams.get("secret");
+  if (!secret || given !== secret) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const data = await req.json();
     

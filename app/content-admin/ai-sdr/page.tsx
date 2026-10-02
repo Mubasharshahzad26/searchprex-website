@@ -14,7 +14,7 @@ export default async function AiSdrPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">AI SDR Engine</h2>
-          <p className="text-muted-foreground">Automated market analysis, lead qualification, and outreach.</p>
+          <p className="text-muted-foreground">Verified store checks, drafts you review, and sends you approve.</p>
         </div>
       </div>
       <AiSdrClient initialLeads={leads} />

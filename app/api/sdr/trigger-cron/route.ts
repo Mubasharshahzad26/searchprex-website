@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
+import { sdrAdminGuard } from "@/lib/sdr/guard";
 
 export async function POST(req: Request) {
+  //  This forwards the server's own CRON_SECRET, so without this check anyone
+  //  could run the lead processor.
+  const denied = await sdrAdminGuard();
+  if (denied) return denied;
+
   try {
     // Determine the base URL dynamically based on the request to support both dev and production
     const protocol = req.headers.get("x-forwarded-proto") || "http";
