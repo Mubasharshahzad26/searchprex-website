@@ -10,6 +10,7 @@
 
 import { trackLead } from "@/lib/track";
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
@@ -220,6 +221,35 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
           title="Why big catalogs stall"
           intro="Four failure modes account for almost every stuck ecommerce store we audit."
         />
+
+        {/* Pain-Point Reality Banner */}
+        <div className="mb-8 overflow-hidden rounded-3xl border border-[#e5e7eb] bg-[#0a0f2e] shadow-sm">
+          <div className="grid md:grid-cols-[1.1fr_1fr] items-center">
+            <div className="relative aspect-[16/10] md:aspect-auto md:h-full min-h-[260px] w-full overflow-hidden">
+              <Image
+                src="/images/audiences/ecommerce-inventory-stress.webp"
+                alt="Ecommerce store owner in warehouse worried about unindexed product catalog and rising ad CAC"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0a0f2e]" />
+            </div>
+            <div className="p-6 sm:p-8 text-white">
+              <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm mb-3">
+                The Reality · Inventory Stagnation
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-snug">
+                “Thousands of product SKUs in the warehouse, rising ad CAC, and Google indexing less than half.”
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                Large catalogues stall in the same places: thin manufacturer descriptions, crawl budget waste, and products trapped in duplicate parameter URLs. We unblock indexing so your catalogue earns organic sales.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <CardGrid columns={2}>
           {PAIN_POINTS.map((p) => (
             <FeatureCard

@@ -17,6 +17,7 @@
 //   - No lead form, no screenshots, no link to a single city page, and no link
 //     to any local case study — on the page that should feed all of them.
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
 
@@ -143,6 +144,35 @@ export default function LocalSEOClient({ guide }: { guide: Guide }) {
           title="Why local businesses lose the map pack"
           intro="Four things you can check yourself in the next ten minutes. If any of them fails, it is costing you calls."
         />
+
+        {/* Pain-Point Reality Banner */}
+        <div className="mb-8 overflow-hidden rounded-3xl border border-[#e5e7eb] bg-[#0a0f2e] shadow-sm">
+          <div className="grid md:grid-cols-[1.1fr_1fr] items-center">
+            <div className="relative aspect-[16/10] md:aspect-auto md:h-full min-h-[260px] w-full overflow-hidden">
+              <Image
+                src="/images/audiences/local-contractor-garage.webp"
+                alt="Local contractor and garage repair business owner waiting for incoming phone calls with idle service vans"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0a0f2e]" />
+            </div>
+            <div className="p-6 sm:p-8 text-white">
+              <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm mb-3">
+                The Reality · Silent Dispatch
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-snug">
+                “Three service vans parked inside and payroll running, while the map pack sends calls to competitors.”
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                When someone&apos;s garage door breaks, heating stops, or roof leaks, they call one of the top three in the local pack. If you&apos;re buried at #7, your crews stay idle while worse competitors stay booked out.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <CardGrid columns={2}>
           {PROBLEMS.map((p) => (
             <div key={p.title} className="rounded-2xl border border-[#e5e7eb] bg-white p-6">

@@ -21,6 +21,7 @@
 // significantly reduce ad spend" when there are no law firm clients yet; and a
 // city grid that left out all eight Kansas cities.
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
@@ -175,6 +176,35 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
           title="Why good firms lose the search to worse ones"
           intro="Four things you can check yourself today. Each one is costing you consultations if it fails."
         />
+
+        {/* Pain-Point Reality Banner */}
+        <div className="mb-8 overflow-hidden rounded-3xl border border-[#e5e7eb] bg-[#0a0f2e] shadow-sm">
+          <div className="grid md:grid-cols-[1.1fr_1fr] items-center">
+            <div className="relative aspect-[16/10] md:aspect-auto md:h-full min-h-[260px] w-full overflow-hidden">
+              <Image
+                src="/images/audiences/lawyer-ppc-fatigue.webp"
+                alt="Attorney at law firm reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0a0f2e]" />
+            </div>
+            <div className="p-6 sm:p-8 text-white">
+              <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm mb-3">
+                The Reality · PPC Budget Burnout
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-snug">
+                “Another $150 click that turned into a price-shopper who hung up in 30 seconds.”
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                Every click on Google Ads is paid for, every single month. When you pause the campaign, the inquiries stop immediately. Practice-area and city pages keep bringing qualified consultations long after the work is done.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <CardGrid columns={2}>
           {PROBLEMS.map((p) => (
             <div key={p.title} className="rounded-2xl border bg-white p-6" style={{ borderColor: color.border }}>
