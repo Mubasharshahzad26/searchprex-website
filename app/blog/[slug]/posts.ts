@@ -4,10 +4,148 @@
 // which is why every blog post was serving the root layout default (the
 // homepage title and description) to Google.
 
+import { proofBoxHtml } from "@/lib/proof-box";
+
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "shopify-products-not-showing-on-google",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Which of the eight is it on your store?", sub: "Running all eight checks on a real catalogue takes an afternoon, and the answer is usually one setting nobody thinks to look at. Send me the URL and I’ll run them myself and tell you which one it is. Free, within 24 hours." },
+    category:    "E-commerce SEO",
+    subcategory: "Shopify",
+    metaTitle:       "Shopify Products Not Showing on Google? 8 Checks to Fix It",
+    metaDescription: "Shopify products missing from Google? Check private mode, product status, Search Console, robots.txt, noindex, duplicates and Merchant Center, in order.",
+    title:       "Shopify Products Not Showing on Google? How to Find and Fix It",
+    excerpt:     "When a Shopify product won't show on Google, the cause is usually a setting, a status or a duplicate URL rather than a penalty. Here are the eight checks to run, in order.",
+    readTime:    "11-minute read",
+    date:        "October 2, 2026",
+    tags:        ["shopify seo", "shopify products not indexed", "google search console", "google merchant center"],
+    stat:        { value: "8", label: "Checks, in order" },
+    /* Unsplash — laptop with ecommerce dashboard */
+    heroImage:   "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "Google Search or the Shopping tab?",
+      "Check 1 — Is the store in private mode?",
+      "Check 2 — Is the product active and on the Online Store?",
+      "Check 3 — Ask Google directly with URL Inspection",
+      "Check 4 — Read the indexing status",
+      "Check 5 — Has robots.txt been edited?",
+      "Check 6 — Is a noindex hiding the product?",
+      "Check 7 — Duplicate URLs and duplicate descriptions",
+      "Check 8 — The Shopping tab: Merchant Center",
+      "What not to do",
+      "Frequently asked questions",
+      "Sources",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>Short answer:</strong> when a Shopify product doesn't show on Google, the cause is usually something you can find in ten minutes: the store is in private mode, the product isn't active or published to the Online Store, it's unlisted or hidden with a noindex, or Google has crawled it and decided not to index it because it looks like a duplicate. Check the store settings first, then ask Google directly with Search Console's URL Inspection tool. Products missing from the <em>Shopping</em> tab are a separate system: that's Google Merchant Center.</div>
+      <p>Work through the checks below in order. The first six take minutes and fix most cases. The last two are where catalog-wide problems usually sit.</p>
+
+      <h2>Google Search or the Shopping tab?</h2>
+      <p>"Not showing on Google" means two different things, and they have different fixes:</p>
+      <ul>
+        <li><strong>Not in normal search results.</strong> This is indexing. The tool is Google Search Console, and checks 1–7 cover it.</li>
+        <li><strong>Not in the Shopping tab or shopping ads.</strong> This is your product feed. On Shopify, the Google &amp; YouTube app syncs your products to Google Merchant Center, and for eligible US stores those products can appear in Shopping tab listings for free. Check 8 covers it.</li>
+      </ul>
+      <p>A product can be indexed in Search and still missing from Shopping, or the other way round, so check the one you actually care about.</p>
+
+      <h2>Check 1 — Is the store in private mode?</h2>
+      <p>If the store is password protected, nothing is visible to Google. Shopify's help is direct: in private mode "all of your online store's pages are hidden from visitors and search engines". It also means Google can't read your sitemap. New stores often launch with the password page still on, or turn it back on during a redesign and forget it.</p>
+      <p><strong>Fix:</strong> in Shopify admin, turn off password protection (Shopify calls it private mode), then confirm by opening the store in a private browser window. If you see the password page, so does Google.</p>
+
+      <h2>Check 2 — Is the product active and on the Online Store?</h2>
+      <p>Shopify products have a status, and only one of them can be found through search. In Shopify's own definitions:</p>
+      <ul>
+        <li><strong>Active</strong> — "ready to sell and can be published to sales channels". Active is not the same as published: the product also has to be made available on the <em>Online Store</em> sales channel.</li>
+        <li><strong>Draft</strong> and <strong>Archived</strong> — not available to customers on any sales channel.</li>
+        <li><strong>Unlisted</strong> — reachable by direct link only. Shopify says unlisted products are removed "from internet search, Shopify Catalog, and your store's sitemap".</li>
+      </ul>
+      <p><strong>Fix:</strong> open the product and check its status and its <em>Sales channels</em> list. If it's unlisted on purpose, Google won't show it, and that's working as designed.</p>
+
+      <h2>Check 3 — Ask Google directly with URL Inspection</h2>
+      <p>Once the settings are right, stop guessing and ask Google. In Google Search Console, paste the product URL into the <strong>URL Inspection</strong> tool. It shows whether the URL is on Google, the canonical Google picked, and whether the live page can be indexed.</p>
+      <p>If the page is fine but not indexed, you can click <strong>Request indexing</strong>. Google's own help gives the limits: "Submitting a request does not guarantee that the page will appear in the Google Index", there is a daily limit, and indexing "typically takes only a day or so, but can take much longer in some cases". For many products at once, Google recommends a sitemap over individual requests.</p>
+      <p>You don't have to build that sitemap. Shopify generates <code>/sitemap.xml</code> automatically, with links to your products, pages, collections and blog posts, and updates it when you add products. Submit it once under <em>Sitemaps</em> in Search Console.</p>
+
+      <h2>Check 4 — Read the indexing status</h2>
+      <p>URL Inspection and the <strong>Pages</strong> report give a reason when a page isn't indexed. These are the ones that show up most on Shopify stores, with Google's definitions:</p>
+      <table>
+        <thead><tr><th>Status</th><th>What Google says</th><th>What it usually means on Shopify</th></tr></thead>
+        <tbody>
+          <tr><td>Crawled – currently not indexed</td><td>"The page was crawled by Google but not indexed. It may or may not be indexed in the future."</td><td>Google read the page and didn't think it was worth keeping. Often thin or copied product descriptions.</td></tr>
+          <tr><td>Discovered – currently not indexed</td><td>"The page was found by Google, but not crawled yet."</td><td>Google knows the URL but hasn't got to it. Common on large catalogs with lots of duplicate URLs to crawl.</td></tr>
+          <tr><td>Duplicate, Google chose different canonical than user</td><td>"Google thinks another URL makes a better canonical."</td><td>Variants or near-identical products that Google is folding into one.</td></tr>
+          <tr><td>Excluded by 'noindex' tag</td><td>Google "encountered a 'noindex' directive and therefore did not index it."</td><td>A theme setting, app or metafield is telling Google not to index it (check 6).</td></tr>
+          <tr><td>Blocked by robots.txt</td><td>"This page was blocked by your site's robots.txt file."</td><td>A custom robots.txt.liquid rule is blocking it (check 5).</td></tr>
+        </tbody>
+      </table>
+      <p>The first two have their own guides: <a href="/blog/fix-crawled-currently-not-indexed-ecommerce">fixing "Crawled – currently not indexed"</a> and <a href="/blog/fix-discovered-currently-not-indexed-ecommerce">fixing "Discovered – currently not indexed"</a>.</p>
+
+      <h2>Check 5 — Has robots.txt been edited?</h2>
+      <p>Shopify's default robots.txt is fine for most stores: it lets crawlers in and keeps them out of the admin, cart and checkout. Stores can override it with a <code>robots.txt.liquid</code> file in the theme, and that's where problems come from. Shopify warns that this is "an unsupported customization" and that "incorrect use of the feature can result in loss of all traffic."</p>
+      <p><strong>Fix:</strong> open <code>yourstore.com/robots.txt</code>. If you see <code>Disallow</code> rules for <code>/products</code> or <code>/collections</code> that nobody can explain, that's your answer. Check whether the theme has a <code>robots.txt.liquid</code> template, and who added it.</p>
+
+      <h2>Check 6 — Is a noindex hiding the product?</h2>
+      <p>Shopify has two built-in ways to hide a product from search engines, and SEO apps add more. The <code>seo.hidden</code> metafield set to <code>1</code> hides a product "from sitemaps, search engines, and your online store search". A <code>noindex</code> robots meta tag added to the theme does the same for indexing.</p>
+      <p><strong>Fix:</strong> view the product page's source and search for <code>noindex</code>. If it's there, check the product's metafields, the theme's <code>&lt;head&gt;</code> code, and any SEO app's settings. Apps that "hide out-of-stock products" or "noindex low-value pages" are a common cause.</p>
+
+      <h2>Check 7 — Duplicate URLs and duplicate descriptions</h2>
+      <p>If the settings are clean and Google still won't index products, the cause is usually catalog-wide. Two patterns cause most of it:</p>
+      <ul>
+        <li><strong>Collection-wrapped product URLs.</strong> Many themes link to products as <code>/collections/name/products/item</code>. Shopify adds a canonical tag pointing to <code>/products/item</code>, but every collection a product sits in still creates another URL for Google to crawl. On a big catalog that's thousands of extra URLs, and it's a common reason for "Discovered – currently not indexed". Our <a href="/blog/shopify-woocommerce-indexing-blueprint">Shopify and WooCommerce indexing blueprint</a> shows the theme change that fixes it.</li>
+        <li><strong>Copied manufacturer descriptions.</strong> When hundreds of stores use the same supplier text, Google has little reason to index your copy. This is the classic cause of "Crawled – currently not indexed", and the fix is rewriting, starting with the products that sell. <a href="/blog/ecommerce-product-page-seo">Product page SEO at scale</a> covers how to do that without rewriting every SKU.</li>
+      </ul>
+      ${proofBoxHtml("michigan-outdoor-sports", "A large outdoor store that lost much of its index to thin content and crawl waste — the same causes as check 7.")}
+
+      <h2>Check 8 — The Shopping tab: Merchant Center</h2>
+      <p>If the product is in normal search results but not in the Shopping tab, look at the feed instead. The Google &amp; YouTube app syncs products from Shopify to Google Merchant Center, and Merchant Center decides whether each one is approved.</p>
+      <p><strong>Fix:</strong> in Merchant Center, open <em>Products → Needs attention</em> and read the reason for each product that isn't showing. Typical causes are missing identifiers such as GTINs, price or availability that doesn't match the product page, images Google rejects, and policy issues. Fix them in Shopify so the next sync carries the change. If the whole account is suspended rather than a few products, read our note on <a href="/resources/news/merchant-center-policy-pages-appeals">Merchant Center enforcement and appeals</a> before you appeal anything.</p>
+
+      <h2>What not to do</h2>
+      <ul>
+        <li><strong>Don't request indexing for hundreds of products.</strong> There's a daily limit, and Google recommends a sitemap for anything beyond a handful of URLs.</li>
+        <li><strong>Don't use the Indexing API for products.</strong> Google restricts it to job postings and livestreams. We explain why in <a href="/blog/google-indexing-api-python">The Google Indexing API is not a shortcut</a>.</li>
+        <li><strong>Don't block /collections in robots.txt without a plan.</strong> Collection pages are often your best-ranking pages. Fix the internal links instead.</li>
+        <li><strong>Don't change five things at once.</strong> Fix one cause, re-check in URL Inspection, then move on, so you know what worked.</li>
+      </ul>
+      ${proofBoxHtml("smk-store", "A 35,000-product catalog where thin, near-identical descriptions kept most pages out of the index.")}
+
+      <h2>Frequently asked questions</h2>
+      <h3>How long does it take for a new Shopify product to show on Google?</h3>
+      <p>Often a few days, sometimes weeks. Google says indexing typically takes a day or so after a request but can take much longer, and new stores with few links are usually crawled less often. A product that's still missing after a few weeks has a cause worth finding, starting with check 1.</p>
+      <h3>Do I need to submit my Shopify sitemap to Google?</h3>
+      <p>Submit it once. Shopify creates and updates <code>/sitemap.xml</code> automatically, so after you add it in Search Console you don't need to resubmit it when products change.</p>
+      <h3>My product is indexed but doesn't rank. Is that the same problem?</h3>
+      <p>No. Indexed means Google stored the page; ranking depends on whether it's the most useful result for the search. If URL Inspection says the page is on Google, the work moves to the product content, the collection page it sits in, and links to it from the rest of the store.</p>
+      <h3>Why are my products on Google but not in the Shopping tab?</h3>
+      <p>Because the Shopping tab runs on your Merchant Center feed, not on indexing. Check Merchant Center's <em>Needs attention</em> list for the reason each product isn't approved.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://help.shopify.com/en/manual/online-store/themes/password-page" target="_blank" rel="noopener noreferrer">Restrict access to your online store — Shopify Help Center</a></li>
+        <li><a href="https://shopify.dev/docs/api/admin-graphql/latest/enums/ProductStatus" target="_blank" rel="noopener noreferrer">ProductStatus — Shopify GraphQL Admin API</a></li>
+        <li><a href="https://help.shopify.com/en/manual/promoting-marketing/seo/hide-a-page-from-search-engines" target="_blank" rel="noopener noreferrer">Hiding a page from search engines — Shopify Help Center</a></li>
+        <li><a href="https://help.shopify.com/en/manual/promoting-marketing/seo/find-site-map" target="_blank" rel="noopener noreferrer">Finding and submitting your sitemap — Shopify Help Center</a></li>
+        <li><a href="https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt" target="_blank" rel="noopener noreferrer">Editing robots.txt.liquid — Shopify Help Center</a></li>
+        <li><a href="https://help.shopify.com/en/manual/online-sales-channels/google" target="_blank" rel="noopener noreferrer">Google &amp; YouTube — Shopify Help Center</a></li>
+        <li><a href="https://support.google.com/webmasters/answer/9012289" target="_blank" rel="noopener noreferrer">URL Inspection tool — Search Console Help</a></li>
+        <li><a href="https://support.google.com/webmasters/answer/7440203" target="_blank" rel="noopener noreferrer">Page indexing report — Search Console Help</a></li>
+      </ul>
+      <p>If you'd rather have someone find the cause for you, send your store URL for a <a href="/free-audit">free 24-hour tear-down</a>, or see how we work on <a href="/services/ecommerce-seo/shopify">Shopify SEO</a>.</p>
+    `,
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Expert",
+      bio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified. He fixes indexing and product-page SEO for Shopify, WooCommerce and BigCommerce stores.",
+    },
+  },
+  {
     slug:        "google-maps-ranking-drop",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Want me to go through your profile instead?", sub: "Most Maps drops trace back to the profile rather than an algorithm — but finding which part means going through it line by line. Send me your site and I’ll do that and send back what I find. Free, within 24 hours." },
     category:    "Local SEO",
     subcategory: "Google Business Profile",
     metaTitle:       "Google Maps Ranking Dropped? How to Check and Fix It",
@@ -107,6 +245,7 @@ export const posts = [
         <li><strong>Don't change five fields at once.</strong> You will not know which change helped or hurt.</li>
         <li><strong>Don't pay anyone who promises a guaranteed map ranking.</strong> Google says you can't pay it for a better local ranking, and nobody else can sell you one either.</li>
       </ul>
+      ${proofBoxHtml("local-hvac-services", "What steady profile work, consistent NAP and genuine reviews look like on a local service business — the opposite of the shortcuts above.")}
 
       <h2>Frequently asked questions</h2>
       <h3>How long does it take to recover a Google Maps ranking?</h3>
@@ -139,6 +278,8 @@ export const posts = [
   },
   {
     slug:        "keyword-research-for-law-firms",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Want the keyword list built for your firm?", sub: "The method above works, but doing it properly for one firm is a full day across practice areas and cities. Send me your site and I’ll build the list myself — the terms worth chasing, and the ones that quietly waste budget. Free, within 24 hours." },
     category:    "Content Strategy",
     subcategory: "Law Firms",
     title:       "Keyword Research for Lawyers and Law Firms",
@@ -226,6 +367,8 @@ export const posts = [
   },
   {
     slug:        "crawl-budget-optimization-guide",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "How much of your crawl budget is going to waste?", sub: "On a large site this is usually tens of thousands of wasted URLs, and you cannot see it without reading the sitemap and the crawl data together. Send me the URL and I’ll find where yours is going. Free, within 24 hours." },
     category:    "Technical SEO",
     subcategory: "Crawl Optimization",
     title:       "Crawl Budget Optimization: The 2026 Guide",
@@ -279,6 +422,8 @@ export const posts = [
   },
   {
     slug:        "google-indexing-api-python",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Before you build this, check it is your problem", sub: "The Indexing API only helps a narrow set of pages, and most sites that reach for it have something else wrong underneath. Send me your site and I’ll tell you whether this is worth building — or what to fix instead. Free, within 24 hours." },
     category:    "Technical SEO",
     subcategory: "Indexing",
     title:       "The Google Indexing API Is Not a Shortcut",
@@ -338,6 +483,8 @@ export const posts = [
   },
   {
     slug:        "ecommerce-product-page-seo",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Want me to grade your product pages?", sub: "Doing this across a real catalogue means sampling pages, comparing them against what actually ranks, and finding the pattern. Send me the store URL and I’ll do that and send back what I would change first. Free, within 24 hours." },
     category:    "E-commerce SEO",
     subcategory: "Product Pages",
     title:       "Product Page SEO at Scale: 10,000+ SKUs",
@@ -396,6 +543,8 @@ export const posts = [
   },
   {
     slug:        "fix-crawled-currently-not-indexed-ecommerce",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "How many of your pages are stuck in there?", sub: "“Crawled – currently not indexed” is Google’s verdict on quality, and the fix depends entirely on which pages it landed on. Send me your store and I’ll pull the real number and tell you what those pages have in common. Free, within 24 hours." },
     category:    "E-commerce SEO",
     subcategory: "Indexing",
     metaTitle:       "Fix 'Crawled – Currently Not Indexed' (Ecommerce Guide)",
@@ -575,6 +724,8 @@ Allow: /shop/</code></pre>
   },
   {
     slug:        "fix-discovered-currently-not-indexed-ecommerce",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Want the real count for your store?", sub: "Discovered but not crawled usually means Google decided the page was not worth the trip. Send me the URL and I’ll find how many of yours are sitting there, and why. Free, within 24 hours." },
     category:    "E-commerce SEO",
     subcategory: "Indexing",
     metaTitle:       "Fix 'Discovered – Currently Not Indexed' for Ecommerce",
@@ -746,6 +897,8 @@ Allow: /categories/</code></pre>
   },
   {
     slug:        "shopify-woocommerce-indexing-blueprint",
+    /* The exit offer speaks to this article. The offer itself never changes. */
+    exitOffer:   { headline: "Want the blueprint run on your store?", sub: "It works, but applying it means auditing every layer — sitemap, canonicals, thin pages, internal links. Send me the URL and I’ll run it myself and send back the order I would fix things in. Free, within 24 hours." },
     category:    "E-commerce SEO",
     subcategory: "Indexing",
     metaTitle:       "Shopify & WooCommerce Indexing Blueprint (8 Fixes)",
