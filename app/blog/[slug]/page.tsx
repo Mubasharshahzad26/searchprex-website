@@ -23,6 +23,15 @@ export const revalidate = 3600;
 
 const SITE = "https://www.searchprex.com";
 
+// File-based posts carry a display date ("October 2, 2026"); schema.org wants
+// ISO 8601, so datePublished from those posts was not a valid date. DB posts
+// are already ISO and pass through unchanged.
+function toIsoDate(value: string): string {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  const parsed = new Date(`${value} 00:00:00 UTC`);
+  return Number.isNaN(parsed.getTime()) ? value : parsed.toISOString().slice(0, 10);
+}
+
 // Helper to get post from DB or fallback
 async function getPostData(rawSlug: string) {
   const slug = decodeURIComponent(rawSlug);
@@ -129,7 +138,7 @@ export async function generateMetadata({
       url: canonical,
       siteName: "SearchPrex",
       type: "article",
-      publishedTime: post.date,
+      publishedTime: toIsoDate(post.date),
       authors: [post.author.name],
       images: [{ url: post.heroImage, width: 1400, height: 787, alt: post.title }],
     },
@@ -166,7 +175,7 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.excerpt,
     image: post.heroImage,
-    datePublished: post.date,
+    datePublished: toIsoDate(post.date),
     keywords: post.tags.join(", "),
     articleSection: post.category,
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },

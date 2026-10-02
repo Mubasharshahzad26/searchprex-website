@@ -7,6 +7,137 @@
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "google-maps-ranking-drop",
+    category:    "Local SEO",
+    subcategory: "Google Business Profile",
+    metaTitle:       "Google Maps Ranking Dropped? How to Check and Fix It",
+    metaDescription: "Your Google Maps ranking dropped? Check whether the drop is real, then work through suspensions, edits, reviews, competitors and updates, in that order.",
+    title:       "Why Did My Google Maps Ranking Drop? How to Check and Fix It",
+    excerpt:     "Most Maps ranking drops trace back to the profile, not an algorithm. Here is the order to check things in, where to look, and what not to do while you fix it.",
+    readTime:    "11-minute read",
+    date:        "October 2, 2026",
+    tags:        ["google maps ranking", "map pack", "google business profile", "local seo"],
+    stat:        { value: "7", label: "Checks, in order" },
+    /* Unsplash — paper map with pins */
+    heroImage:   "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "First, check the drop is real",
+      "Check 1 — Is the profile suspended?",
+      "Check 2 — Did someone else change your profile?",
+      "Check 3 — Did you change something?",
+      "Check 4 — What happened to your reviews?",
+      "Check 5 — Did the competition change?",
+      "Check 6 — Does the date match a Google update?",
+      "Check 7 — Is the website still doing its job?",
+      "What not to do while you fix it",
+      "Frequently asked questions",
+      "Sources",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>Short answer:</strong> when a business drops in Google Maps, the cause is usually on the profile itself — a suspension, an edit someone else made, a change you made, or a change in your reviews — rather than an algorithm update. Google ranks local results on three things: relevance, distance and prominence. Check the drop is real first, then work through the profile, the reviews, your competitors, the update calendar and your website, in that order.</div>
+      <p>Google's own help page names the three factors. Relevance is "how well a Business Profile matches what someone is searching for". Distance is "how far each business is from the customer who's searching". Prominence is "how well-known a business is", which Google says is also based on things like how many websites link to you and how many reviews you have. Every check below maps back to one of those three. The same page is also clear that "there's no way to request or pay for a better local ranking on Google".</p>
+
+      <h2>First, check the drop is real</h2>
+      <p>Map pack results change with the searcher's location, because distance is one of the three factors. If you searched your main keyword from your office last month and from home this week, you will see different results, and that tells you nothing about a drop. Searching on your own phone is the least reliable test there is.</p>
+      <p>Use data instead:</p>
+      <ul>
+        <li><strong>Business Profile Performance report.</strong> It shows views on Search and Maps, the search terms people used to find you, and calls, direction requests and website clicks. Compare the same length of time before and after the drop you think you saw. If calls and direction requests held steady, the drop may be smaller than it looks, or limited to a few searches.</li>
+        <li><strong>Search Console.</strong> Filter to the page your profile links to. If clicks to that page fell at the same time, the problem may be on the website, or it may be both.</li>
+        <li><strong>A grid rank tracker.</strong> These tools check your position from a grid of points around your location. They are the only fair way to compare rankings over time, because they search from the same places every time.</li>
+      </ul>
+      <p>Write down the date the drop started. Almost every check below depends on it.</p>
+
+      <h2>Check 1 — Is the profile suspended?</h2>
+      <p>This is the first thing to rule out, because nothing else matters until it is fixed. Google says it may "suspend or disable Business Profiles that don't follow our guidelines". When that happens, the public can't see the profile and the owner and managers can't act on it. If your listing has vanished from Maps altogether, rather than slipping a few places, check your Business Profile dashboard for a suspension notice.</p>
+      <p>If it is suspended, read the reason, fix whatever broke the <a href="https://support.google.com/business/answer/3038177" target="_blank" rel="noopener noreferrer">guidelines</a>, and then appeal through Google's appeals tool. Google warns: "Do not create a new Business Profile for the same business while your appeal is under review." A second profile makes the problem worse, not better.</p>
+
+      <h2>Check 2 — Did someone else change your profile?</h2>
+      <p>Anyone can suggest an edit to a Business Profile: hours, phone number, category, website, even the address. Google also updates profiles itself from information it finds elsewhere. A changed primary category or a wrong address hits relevance and distance directly, and it can happen without you noticing.</p>
+      <p>Since September 2026, Google's help documentation says owners have <strong>four days</strong> to accept or reject a suggested edit after being notified. If nobody answers, Google may publish the edit itself if other public information, such as your website, supports it. Some edits are applied with no notice at all. We covered the change in <a href="/resources/news/google-business-profile-four-days-suggested-edits">Google gives you four days to reject a suggested edit</a>.</p>
+      <p>Open the profile and compare every field with what it should be: name, primary and secondary categories, address or service area, phone, website link and hours. Check that notifications go to someone who actually reads them.</p>
+
+      <h2>Check 3 — Did you change something?</h2>
+      <p>Owner edits cause as many drops as anything else. Ask whoever manages the profile and the website what changed in the weeks before the drop. Common causes:</p>
+      <ul>
+        <li><strong>Keywords added to the business name.</strong> Google's guidelines say "including unnecessary information in your business name isn't permitted, and could result in the suspension of your Business Profile." It may help for a while, then lead to a suspension or a forced name change.</li>
+        <li><strong>A new primary category.</strong> The primary category is one of the strongest relevance signals. Changing it changes what you show up for.</li>
+        <li><strong>A moved address or a changed service area.</strong> Distance is calculated from where Google thinks you are.</li>
+        <li><strong>A new website link,</strong> or a site redesign that moved or removed the page the profile pointed to.</li>
+      </ul>
+      <p>If the drop lines up with one of these, put the old value back where it was correct, and change one thing at a time from then on so you can tell what worked.</p>
+
+      <h2>Check 4 — What happened to your reviews?</h2>
+      <p>Reviews feed prominence. Google says "more reviews and positive ratings can help your business's local ranking." Look at three things:</p>
+      <ul>
+        <li><strong>Did reviews disappear?</strong> Google removes reviews it thinks break its policies, and there have been waves where many businesses lost reviews at once — our <a href="/resources/news/local-seo-updates">local SEO update log</a> records one in July 2026. If you lost a block of reviews, check whether they came from a campaign that could look incentivised.</li>
+        <li><strong>Has the flow slowed down?</strong> A business that stopped asking for reviews a year ago can drift behind competitors who kept asking.</li>
+        <li><strong>Are you breaking the rules without knowing it?</strong> Google's policy bans reviews "that have been paid for, directly or in kind", and bans businesses from offering discounts or free services for reviews or asking only happy customers for them. Review gating is common, and it is against the policy.</li>
+      </ul>
+      <p>The fix is a steady, genuine flow: ask every customer, make it easy with a direct link, and reply to reviews. Google says replying "shows that you value their feedback".</p>
+
+      <h2>Check 5 — Did the competition change?</h2>
+      <p>Sometimes you did not drop; someone else rose. Search your main keywords from your location, or look at your grid tracker, and compare the current top three with the ones from before the drop. Look for:</p>
+      <ul>
+        <li>a new business that opened closer to the area you serve;</li>
+        <li>a competitor that has picked up a lot of reviews or a better primary category;</li>
+        <li>competitors with keywords stuffed into their names, or fake listings at addresses that are not real offices.</li>
+      </ul>
+      <p>For spam listings, use <strong>Suggest an edit</strong> on the listing and report the problem. Keep it factual and point to the guideline it breaks. It is slow and not guaranteed, but legitimate businesses do get spam removed this way.</p>
+
+      <h2>Check 6 — Does the date match a Google update?</h2>
+      <p>Only now is it worth checking the update calendar. Compare the date the drop started with the <a href="/resources/news/google-algorithm-updates">confirmed Google update timeline</a>. In 2026 Google confirmed core updates in March and May and spam updates in March, June, August and September. The <a href="/resources/news/google-september-2026-spam-update">September 2026 spam update</a> was still rolling out on October 1.</p>
+      <p>Two cautions. First, Google has not announced a separate local algorithm update in 2026, so there is no "local update" to blame. Second, spam updates act on web search: they are most likely to hit your website's city and service pages, especially near-identical city pages that only swap the place name. If the dates match, read Google's <a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer">spam policies</a> against your site honestly, and judge the impact after the rollout finishes, not during it.</p>
+
+      <h2>Check 7 — Is the website still doing its job?</h2>
+      <p>Your website feeds relevance and prominence, and since September it is also what Google checks suggested edits against. Open the page your profile links to and check:</p>
+      <ul>
+        <li>it loads, returns a normal page rather than a 404 or a redirect chain, and is indexed (use URL Inspection in Search Console);</li>
+        <li>the business name, address, phone and hours match the profile exactly;</li>
+        <li>it clearly says what you do and where you do it, in the words customers use.</li>
+      </ul>
+      <p>A site migration that broke the linked page, or a redesign that removed the service text, is a common cause of a drop that looks like it came from nowhere.</p>
+
+      <h2>What not to do while you fix it</h2>
+      <ul>
+        <li><strong>Don't create a new profile.</strong> Duplicates break the guidelines, and Google specifically warns against it during an appeal.</li>
+        <li><strong>Don't add keywords to the name</strong> to win the ranking back. It breaks the guidelines and can lead to a suspension.</li>
+        <li><strong>Don't buy reviews or run a review blitz.</strong> Paid and incentivised reviews break the policy, and a sudden spike is easy to spot.</li>
+        <li><strong>Don't change five fields at once.</strong> You will not know which change helped or hurt.</li>
+        <li><strong>Don't pay anyone who promises a guaranteed map ranking.</strong> Google says you can't pay it for a better local ranking, and nobody else can sell you one either.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+      <h3>How long does it take to recover a Google Maps ranking?</h3>
+      <p>It depends on the cause. Fixing a wrong field can show results once the edit is published. A suspension takes as long as the appeal takes, and Google gives no fixed time. Drops caused by reviews or competitors take longest, because you are rebuilding prominence. Be wary of anyone who gives you a date.</p>
+      <h3>Why did my map ranking drop when my website ranking stayed the same?</h3>
+      <p>They are different systems. The map pack depends on your Business Profile, the searcher's location and your reviews. Organic results depend on your website. A drop in one and not the other usually points to the profile: check for suspensions, edits and review changes first.</p>
+      <h3>Does running Google Ads affect my Maps ranking?</h3>
+      <p>No. Google states there is no way to request or pay for a better local ranking. Ads can appear above the map pack, but they do not change your organic position in it.</p>
+      <h3>Can a competitor make my ranking drop?</h3>
+      <p>They can try, for example by suggesting false edits to your profile or posting fake reviews. That is why notifications matter: with four days to reject a suggested edit, someone needs to be watching. Report fake reviews through the profile and keep your website's details accurate, since Google uses it to check edits.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://support.google.com/business/answer/7091" target="_blank" rel="noopener noreferrer">Tips to improve your local ranking on Google — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/3038177" target="_blank" rel="noopener noreferrer">Guidelines for representing your business on Google — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/4569145" target="_blank" rel="noopener noreferrer">Fix suspended or disabled profiles — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/3480441" target="_blank" rel="noopener noreferrer">Understand Google updates on your Business Profile — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/business/answer/9918094" target="_blank" rel="noopener noreferrer">Understand your Business Profile performance &amp; insights — Google Business Profile Help</a></li>
+        <li><a href="https://support.google.com/contributionpolicy/answer/7400114" target="_blank" rel="noopener noreferrer">Prohibited &amp; restricted content — Maps User Generated Content Policy Help</a></li>
+        <li><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer">Spam policies for Google web search — Google Search Central</a></li>
+        <li><a href="https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu" target="_blank" rel="noopener noreferrer">September 2026 spam update — Google Search Status Dashboard</a></li>
+      </ul>
+      <p>To check the whole profile against Google's guidelines, use the free <a href="/resources/google-business-profile-checklist">Google Business Profile checklist</a>. If you would rather have someone find the cause for you, see our <a href="/services/local-seo">local SEO services</a> or ask for a <a href="/free-audit">free audit</a>.</p>
+    `,
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Expert",
+      bio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified. He manages Google Business Profiles and local pages for US law firms and local businesses.",
+    },
+  },
+  {
     slug:        "keyword-research-for-law-firms",
     category:    "Content Strategy",
     subcategory: "Law Firms",
