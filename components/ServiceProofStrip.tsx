@@ -21,12 +21,15 @@ export type ProofShot = Pick<
 >;
 
 export default function ServiceProofStrip({
+  id,
   title,
   shots,
   footnote,
   moreHref,
   moreLabel = "See the full case studies",
 }: {
+  /** Anchor for an in-page link, e.g. the hero's "See the proof". */
+  id?: string;
   title: string;
   shots: ProofShot[];
   /** A plain line under the captures, e.g. who the clients are. */
@@ -36,7 +39,7 @@ export default function ServiceProofStrip({
 }) {
   const two = shots.length > 1;
   return (
-    <Section tone="surface" tight>
+    <Section id={id} tone="surface" tight>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className={heading.eyebrow} style={{ color: color.primary }}>

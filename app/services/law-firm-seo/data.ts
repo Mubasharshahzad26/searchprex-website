@@ -31,7 +31,7 @@ export const CAPSULES: QA[] = [
   },
   {
     q: "Do you have law firm case studies?",
-    a: "Not yet. SearchPrex has not completed a law firm engagement, so we publish no legal-specific results. What we can show is the same underlying work in other industries, labelled as such: a WooCommerce catalogue taken from about 3,000 to 11,549 indexed pages, and local service clients at #1, verified in Google Search Console.",
+    a: "Not yet. SearchPrex has not completed a law firm engagement, so we publish no legal-specific results. What we can show is the same underlying work in other industries, labelled as such: a WooCommerce catalogue taken from about 3,000 to 11,549 indexed pages, and local service clients ranking #1 in Google, each with its screenshot on the case study.",
   },
 ];
 

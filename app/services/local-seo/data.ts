@@ -24,7 +24,7 @@ export const CAPSULES: QA[] = [
   },
   {
     q: "What results have SearchPrex local SEO clients seen?",
-    a: "Doll's Cleaning in Chesterfield, Michigan reached #1 local rankings for its core cleaning keywords, with 106K impressions. HVAC Team in Simi Valley, California moved up 40 positions to page one for its primary service keywords. Both are verified in Google Search Console. Outcomes depend on local competition and on where a profile starts.",
+    a: "D.O.L.L.S. Cleaning in Michigan went from 192 to 264 monthly clicks and from 41K to 106K impressions in Search Console, and holds #1 and #2 for carpet cleaning in Clawson. HVAC Services Team in Simi Valley, California is named in Google's AI Overview for an AC installation search. Each result has its screenshot on the case study. Outcomes depend on local competition and on where a profile starts.",
   },
   {
     q: "Why did my Google Maps ranking suddenly drop?",

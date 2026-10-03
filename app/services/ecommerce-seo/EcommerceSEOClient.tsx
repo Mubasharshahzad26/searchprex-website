@@ -1,135 +1,116 @@
 "use client";
 
 // app/services/ecommerce-seo/EcommerceSEOClient.tsx
-// Assembled from components/layout primitives. The old local theme block
-// (ACCENT #3eb489 as the button colour, INK #191a1f, SLATE #65676e,
-// LINE #e6e7eb, PAPER #f7f7f8) is gone — green is now reserved for verified
-// metrics, and actions use the brand primary like every other page.
 //
-// Copy is unchanged from the previous version.
+// Topical layout (Oct 2026), built from components/ServiceBands like the other
+// service pages: bands that alternate dark navy and white, each with one
+// heading, a short paragraph and a "what I check" list.
+//
+// Figures, each readable in a screenshot on this page or its case study:
+//   - Michigan Sports & Outdoor: about 3,000 → 11,549 indexed pages, May–Jul
+//     2026 (Search Console Pages report); US clicks 224 → 322, 1 Apr–12 Jun vs
+//     13 Jun–29 Aug 2026 (Search Console Performance).
+//   - SMK Store: net sales $5,832 (April 2026) → $19,100 (June 2026), from the
+//     client's WooCommerce dashboard — total revenue, never a US figure.
+//   - Michigan Sports & Outdoor: +83% US organic clicks by July 2026, as the
+//     case study reports it.
+//
+// Dropped in this layout: the stat strip, the case-study cards (they fell back
+// to Unsplash stock photos), the mid-page guide magnet and WhySearchPrex. Kept:
+// the AI image banner, the Shopify vs WooCommerce table, the floating "Reality
+// Check" button and its modal.
 
 import { trackLead } from "@/lib/track";
-import { useState, useMemo } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
-import {
-  ArrowRight, X, ShieldCheck, BarChart3,
-  TrendingUp, Package, Layers, Zap, Database,
-  Wrench, Target, FileCode, GitBranch, AlertTriangle,
-} from "lucide-react";
-import { caseStudies, detailUrl, type CaseStudy } from "@/app/case-studies/data";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, X, ShieldCheck, BarChart3, AlertTriangle, GitBranch, FileCode, Layers } from "lucide-react";
+
+import { caseStudies } from "@/app/case-studies/data";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
-import GuideMagnet from "@/components/GuideMagnet";
-import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
-import ProcessTimeline from "@/components/ProcessTimeline";
-import { ClipboardCheck as ClipboardCheckIcon, Target as TargetIcon, Rocket as RocketIcon, TrendingUp as TrendingUpIcon } from "lucide-react";
-import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { RETAINER_PLANS } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
-import { CAPSULES, FAQS } from "./data";
-import {
-  AuthorCard,
-  CardGrid,
-  FaqList,
-  AnswerCapsules,
-  ComparisonTable,
-  FeatureCard,
-  PageHero,
-  Section,
-  SectionHeading,
-  StatStrip,
-} from "@/components/layout";
+import { AuthorCard, ComparisonTable, FaqList } from "@/components/layout";
 import { color, focusRing, heading, radius, text } from "@/lib/design-tokens";
+import {
+  BODY,
+  INK,
+  PURPLE,
+  Band,
+  BandIntro,
+  CheckList,
+  CheckPanel,
+  Eyebrow,
+  FaqBand,
+  GuaranteeCard,
+  H2,
+  Lead,
+  PriceCard,
+  ProofPanel,
+  RealityBanner,
+  RuleGrid,
+  RuleItem,
+  ServiceHero,
+  Steps,
+  TextLink,
+} from "@/components/ServiceBands";
 
-/* Fallback stock images */
-const FALLBACK_IMAGES = [
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80",
-  "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-];
-const fallbackFor = (seed: string | number) => {
-  const s = String(seed);
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-  return FALLBACK_IMAGES[h % FALLBACK_IMAGES.length];
-};
-const cardImage = (cs: CaseStudy) =>
-  cs.video ? `https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg` : cs.image ?? fallbackFor(cs.id);
+import { CAPSULES, FAQS } from "./data";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-/* ── Page data ── */
-
-// One fact per stat, each with the store and window it comes from. The strip
-// used to read "+285% pages indexed", "+285% indexing rate" (the same fact
-// twice), "12K+ product pages indexed" (the screenshot says 11,549) and "40+
-// ecommerce sites scaled", which nothing on the site backs.
-const HERO_STATS = [
-  { value: "3,000 → 11,549", label: "Pages indexed · Michigan Sports & Outdoor, May–Jul 2026" },
-  { value: "$5.8k → $19.1k", label: "Monthly revenue · SMK Store, Apr–Jun 2026" },
-  { value: "+83%", label: "US organic clicks · Michigan Sports & Outdoor" },
-  { value: "24h", label: "Tear-down reply" },
-];
 const SOURCE = "service:ecommerce-seo";
 const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 
 const PAIN_POINTS = [
   { icon: AlertTriangle, title: "Thousands of products, hundreds indexed", body: "Google crawls but refuses to index thin product pages. Your catalog exists in the sitemap and nowhere else — no impressions, no clicks, no revenue." },
-  { icon: GitBranch, title: "Faceted navigation eating crawl budget", body: "Filter combinations spawn millions of low-value URLs. Google wastes its budget crawling color × size × price permutations instead of your money pages." },
-  { icon: FileCode, title: "No structured data, no rich results", body: "Missing Product, Offer, Review, and FAQ schema means competitors get star ratings, price snippets, and AI Overview citations while you get plain blue links." },
-  { icon: Layers, title: "Category pages that don't rank", body: "Empty category templates with a product grid and nothing else. Google sees a list of thumbnails and a thin H1 — nothing to rank for competitive commercial keywords." },
+  { icon: GitBranch, title: "Faceted navigation eating crawl budget", body: "Filter combinations spawn huge numbers of low-value URLs. Google spends its crawl on color × size × price permutations instead of your money pages." },
+  { icon: FileCode, title: "No structured data, no rich results", body: "Missing Product, Offer and Review schema means competitors get price and rating snippets while you get plain blue links." },
+  { icon: Layers, title: "Category pages that don't rank", body: "A product grid and a thin H1. Google sees a list of thumbnails — nothing to rank for competitive commercial searches." },
 ];
 
 const PILLARS = [
-  { icon: Wrench, title: "Technical foundation", body: "Crawl budget audit, log-file analysis, faceted navigation rules, canonical hygiene, XML sitemap architecture at scale, and Core Web Vitals fixes on WooCommerce, Shopify, and custom stacks.", points: ["Sitemap consolidation & indexation control", "Faceted nav with rel=canonical + noindex logic", "LCP, CLS, INP optimization on product templates"] },
-  { icon: Package, title: "Product page optimization at scale", body: "Programmatic content generation, unique descriptions, FAQ schema, and internal linking across thousands of SKUs — designed to pass Google's helpful content and E-E-A-T bar.", points: ["Unique HTML per product (no templated blocks)", "FAQ schema + JSON-LD Product markup", "Semantic internal links from category + brand pages"] },
-  { icon: Target, title: "Category page authority", body: "Turn thin PLPs into topical hubs. Long-form buyer's guides above the fold, comparison tables, FAQ blocks, and merchandising signals that Google actually understands as expertise.", points: ["Buyer-intent H1 + intro copy per collection", "Comparison + specification tables", "Curated cross-linking between related PLPs"] },
-  { icon: Database, title: "Structured data & rich results", body: "Product, Offer, AggregateRating, Review, Breadcrumb, FAQPage, and Organization schema — validated, monitored, and mapped to actual on-page data. No fabricated ratings, no schema markup Google will penalize.", points: ["Full Product + Offer + Breadcrumb schema", "FAQPage schema on 100% of product pages", "Weekly Rich Results monitoring in GSC"] },
-  // Rewritten to match /blog/google-indexing-api-python, which retracted the
-  // Indexing API approach on 27 Aug 2026: Google restricts that API to job
-  // postings and livestreams and names multi-account rotation as
-  // circumvention. This card was still selling both.
-  { icon: Zap, title: "Indexing recovery", body: "Sitemap-to-GSC diffing that shows which URLs Google declined and why, then the fix for each reason: crawl waste reclaimed, clean sitemaps split by template, internal links to orphaned products, and batched resubmission through Search Console.", points: ["Automated Sitemap ↔ GSC diff", "Crawled vs. discovered — triaged by reason", "Batched resubmission, re-measured in cohorts"] },
-  { icon: TrendingUp, title: "AEO + AI Overview optimization", body: "Answer engine optimization for ChatGPT, Perplexity, Gemini, and Google's AI Overviews. Entity optimization, knowledge graph signals, and citation-worthy content that gets picked up as source material.", points: ["FAQ-first content architecture", "Entity + author schema for E-E-A-T", "Semantic clustering for AI retrievability"] },
+  { title: "Technical foundation", body: "Crawl budget, faceted navigation rules, canonicals, sitemap architecture and Core Web Vitals on WooCommerce, Shopify and custom stacks.", href: "#indexing" },
+  { title: "Product pages at scale", body: "Unique descriptions, Product markup and internal links across thousands of SKUs — published in batches and measured.", href: "#indexing" },
+  { title: "Category page authority", body: "Thin collection pages turned into buying guides: intro copy, comparison tables and FAQs a shopper actually uses.", href: "#platforms" },
+  { title: "Structured data", body: "Product, Offer, Review, Breadcrumb and FAQ schema mapped to real on-page data. No fabricated ratings.", href: "#indexing" },
+  { title: "Indexing recovery", body: "Sitemap-to-Search-Console diffing that shows which URLs Google declined and why — then the fix for each reason.", href: "#indexing" },
+  { title: "AI Overview readiness", body: "Clear product and category answers that Google’s AI Overviews, ChatGPT and Perplexity can lift as a source.", href: "#process" },
+];
+
+const indexingChecks = [
+  "Sitemap URLs compared with what Search Console says is indexed",
+  "“Crawled – currently not indexed” sorted by template and cause",
+  "Filter, sort and parameter URLs eating crawl budget",
+  "Near-duplicate manufacturer descriptions across products",
+  "Products with no price, image or stock that Google skips",
+  "Orphaned products no category or brand page links to",
+  "Core Web Vitals on product and category templates",
 ];
 
 const PROCESS = [
-  { step: "01", title: "Reality check audit", body: "Full technical + content + indexing audit. Crawl your site, pull GSC + GA4 data, benchmark against 2 competitors, and deliver a 90-day roadmap with priorities scored by impact and effort." },
-  { step: "02", title: "Strategy & scoping", body: "Confirm target categories, product batches, and technical fix priorities. Align on tooling (WordPress, Shopify, custom), reporting cadence, and content production capacity." },
-  { step: "03", title: "Execution", body: "Weekly sprints — technical fixes shipped, content published in measured batches, schema deployed, and resubmitted through Search Console. Every change logged in a shared roadmap." },
-  { step: "04", title: "Monitor & iterate", body: "Weekly reporting on indexation rate, impressions, clicks, and revenue attribution. Monthly review call. Automated alerts for indexing drops, ranking losses, and Core Web Vitals regressions." },
+  { when: "Day 1", title: "Free tear-down", body: "Your store URL in, a written look back within 24 hours: which products Google is refusing to index, and why." },
+  { when: "Weeks 1–2", title: "Audit & roadmap", body: "Crawl, Search Console and GA4 data, two competitors benchmarked, and a 90-day plan ranked by impact." },
+  { when: "Weekly sprints", title: "Execution", body: "Technical fixes shipped, content published in measured batches, schema deployed and resubmitted — every change logged." },
+  { when: "Every Monday", title: "Report", body: "Indexed pages, impressions, clicks and revenue — what moved, what did not, and what happens next." },
 ];
 
-const TOOLING = [
-  "Google Search Console", "GA4", "Screaming Frog", "Ahrefs", "Semrush",
-  "Surfer SEO", "Looker Studio", "Log File Analyzer", "PageSpeed Insights",
+const TOOLING = ["Google Search Console", "GA4", "Screaming Frog", "Ahrefs", "Semrush", "Looker Studio", "PageSpeed Insights"];
+
+const RELATED = [
+  { href: "/case-studies/ecommerce/smk-store", title: "SMK Store case study", body: "35,000 products: thin copy, indexing and site quality rebuilt — $5,832 to $19,100 a month." },
+  { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages." },
+  { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks in the order the case-study work was done. Free, no email." },
+  { href: "/services/technical-seo", title: "Technical SEO services", body: "Crawling, indexing and Core Web Vitals fixed at the template." },
+  { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget guide", body: "Why Google skips pages on big sites, and how to stop it." },
+  { href: "/blog/ecommerce-product-page-seo", title: "Product page SEO at scale", body: "Product pages for 10,000+ SKUs without thin or duplicate copy." },
 ];
-
-
 
 type FormState = "idle" | "sending" | "sent" | "error";
 
-/* ── Page ── */
-
-// `guide` comes from the server page so the guide data is not bundled here.
-export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl: string; guide: Guide }) {
-  const ecommerceStudies = useMemo(
-    () =>
-      caseStudies.filter((cs) => {
-        const s = `${cs.seoType} ${cs.industry}`.toLowerCase();
-        return s.includes("ecommerce") || s.includes("e-commerce") || s.includes("commerce") || s.includes("retail");
-      }),
-    []
-  );
-  const featuredEcom = ecommerceStudies.slice(0, 3);
-
+// `guide` is still passed by page.tsx; the checklist is linked from the related band.
+export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { linkedinUrl: string; guide: Guide }) {
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", website: "", phone: "" });
   const [formState, setFormState] = useState<FormState>("idle");
@@ -164,10 +145,15 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
 
   return (
     <main>
-      <PageHero
-        eyebrow="Ecommerce SEO"
-        title="Ecommerce SEO Services that turn product pages into revenue"
-        subtitle="We scale technical SEO, product-page content, and indexing recovery across thousands of SKUs — for WooCommerce, Shopify, and custom stores. Real audits, real fixes, real revenue lift."
+      <ServiceHero
+        crumb="Ecommerce SEO"
+        eyebrow="Ecommerce SEO services"
+        title="Ecommerce SEO Services"
+        accent="that turn product pages into revenue"
+        subtitle="Technical SEO, product-page content and indexing recovery across thousands of SKUs — for WooCommerce, Shopify and custom stores."
+        primary={{ href: "#proof", label: "See store results" }}
+        secondary={{ href: "#process", label: "How it works" }}
+        trustPoints={["The founder does the work", "90-day money-back guarantee", "Month to month"]}
         aside={
           <ArticleLeadMagnet
             variant="sidebar"
@@ -178,29 +164,13 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
             }}
           />
         }
-        actions={
-          <>
-            <Link
-              href="/case-studies"
-              className={`inline-flex items-center gap-2 ${radius.control} border px-7 py-3.5 text-sm font-semibold transition-colors hover:bg-[#f8f9fc] ${focusRing}`}
-              style={{ borderColor: color.borderStrong, color: color.ink }}
-            >
-              See ecommerce case studies
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </>
-        }
-        trustPoints={["Every result verified with Google Search Console data"]}
       />
 
-      <StatStrip stats={HERO_STATS} />
-
-      {/* Evidence before explanation, using a capture the case-study section
-          further down doesn't already show. */}
       <ServiceProofStrip
+        id="proof"
         title="An outdoor store's US clicks, before and after the rebuild"
         moreHref="/case-studies/ecommerce/michigan-outdoor-sports"
-        moreLabel="Read the Michigan Outdoor Sports case study"
+        moreLabel="Read the Michigan Sports & Outdoor case study"
         shots={[
           {
             src: "/images/clicks-comaprsion-after-run-mso-autopilot.PNG",
@@ -215,14 +185,157 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
         ]}
       />
 
-      {/* ── QUICK ANSWERS ──
-          Answer capsules for AI Overviews and answer engines. The results answer
-          uses only figures with a named source: MSO from Search Console, SMK from
-          the client's WooCommerce dashboard (total revenue — never a US figure). */}
-      <Section width="reading">
-        <SectionHeading eyebrow="Quick answers" title="Ecommerce SEO, answered plainly" />
-        <AnswerCapsules items={CAPSULES} />
-        <div className="mt-8">
+      {/* THE PROBLEM */}
+      <Band>
+        <BandIntro
+          center={false}
+          eyebrow="The problem"
+          title="Why big catalogs stall"
+          lead="Four failure modes account for almost every stuck store I audit."
+        />
+        <RealityBanner
+          src="/images/audiences/ecommerce-inventory-stress.webp"
+          alt="Ecommerce store owner in warehouse worried about unindexed product catalog and rising ad CAC"
+          tag="The Reality · Inventory Stagnation"
+          quote="“Thousands of product SKUs in the warehouse, rising ad CAC, and Google indexing less than half.”"
+          body="Large catalogues stall in the same places: thin manufacturer descriptions, crawl budget waste, and products trapped in duplicate parameter URLs. I unblock indexing so your catalogue earns organic sales."
+        />
+        <RuleGrid columns={2}>
+          {PAIN_POINTS.map((p) => (
+            <RuleItem
+              key={p.title}
+              icon={<p.icon className="h-5 w-5 flex-shrink-0 text-[#b8123a]" aria-hidden />}
+              title={p.title}
+              body={p.body}
+            />
+          ))}
+        </RuleGrid>
+      </Band>
+
+      {/* WHAT'S INCLUDED */}
+      <Band dark>
+        <BandIntro
+          dark
+          eyebrow="What’s included"
+          title="Six parts of an ecommerce SEO program"
+          lead="Each one maps to a specific reason Google is under-serving your catalog. I start with the ones your store is missing."
+        />
+        <RuleGrid>
+          {PILLARS.map((p) => (
+            <RuleItem key={p.title} dark {...p} />
+          ))}
+        </RuleGrid>
+      </Band>
+
+      {/* INDEXING */}
+      <Band id="indexing">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <Eyebrow>Indexing recovery</Eyebrow>
+            <H2>A product Google won’t index can’t sell</H2>
+            <Lead>
+              Most stuck stores don’t have a ranking problem, they have an indexing one. Google found the pages and decided they were not worth keeping. Resubmitting rarely helps; fixing the reason does.
+            </Lead>
+            <Lead>I sort every unindexed URL by the reason Search Console gives, fix the highest-revenue products first and re-measure before the next batch.</Lead>
+            <TextLink href="/blog/google-indexing-api-python">Why the Indexing API is not a shortcut</TextLink>
+          </div>
+          <CheckPanel items={indexingChecks} />
+        </div>
+      </Band>
+
+      {/* CASE STUDIES */}
+      <Band dark>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center [&>*]:min-w-0">
+          <div>
+            <Eyebrow dark>Ecommerce SEO in action</Eyebrow>
+            <H2 dark>Two WooCommerce stores, unedited screenshots</H2>
+            <Lead dark>
+              SMK Store has more than 35,000 products; Michigan Sports & Outdoor came back from a de-indexing. The work was the same in both: thin copy rewritten, crawl waste removed, indexing fixed and resubmitted in batches.
+            </Lead>
+            <div className="mt-8">
+              <CheckList
+                dark
+                items={[
+                  "SMK Store net sales $5,832 (April 2026) → $19,100 (June 2026), WooCommerce dashboard",
+                  "Michigan Sports & Outdoor: about 3,000 → 11,549 indexed pages, May–July 2026, and +83% US organic clicks by July",
+                  "Michigan Sports & Outdoor US clicks 224 → 322 (1 Apr–12 Jun vs 13 Jun–29 Aug 2026)",
+                ]}
+              />
+            </div>
+            <div className="mt-6 flex flex-wrap gap-x-6">
+              <TextLink dark href="/case-studies/ecommerce/smk-store">SMK Store case study</TextLink>
+              <TextLink dark href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Sports & Outdoor case study</TextLink>
+            </div>
+          </div>
+          <ProofPanel>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 [&>*]:min-w-0">
+              <ProofImage
+                src="/images/proof/smk-revenue-before-v2.png"
+                alt="SMK Store WooCommerce dashboard for April 2026, showing $5,832.02 net sales for the month."
+                width={1366}
+                height={607}
+                frameAspect="16 / 9"
+                stage="SMK Store · April 2026"
+                caption="Net sales: $5,832"
+              />
+              <ProofImage
+                src="/images/proof/smk-revenue-after-v2.png"
+                alt="SMK Store WooCommerce dashboard for June 2026, showing $19,100.71 net sales for the month."
+                width={863}
+                height={350}
+                frameAspect="16 / 9"
+                stage="SMK Store · June 2026"
+                caption="Net sales: $19,100"
+              />
+            </div>
+            <ProofImage
+              src="/images/proof/mso-gsc-indexing-full.png"
+              alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
+              width={778}
+              height={520}
+              frameAspect="16 / 9"
+              stage="Michigan Sports & Outdoor · May–Jul 2026"
+              caption="About 3,000 → 11,549 pages indexed"
+            />
+          </ProofPanel>
+        </div>
+      </Band>
+
+      {/* PLATFORMS & NICHES */}
+      <Band muted id="platforms">
+        <BandIntro
+          eyebrow="Platforms & niches"
+          title="Ecommerce SEO for your kind of store"
+          lead="WooCommerce and knife & outdoor stores are where the case studies are. The Shopify page says plainly that there isn’t one yet."
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {ECOMMERCE_INDUSTRIES.map((i) => {
+            const cs = caseStudies.find((c) => c.slug.client === i.caseClients[0]);
+            const metric = cs?.metrics[0];
+            return (
+              <Link
+                key={i.slug}
+                href={`/services/ecommerce-seo/${i.slug}`}
+                className="group rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+              >
+                <p className="text-lg font-black group-hover:text-[#534AB7]" style={{ color: INK }}>{i.h1}</p>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: BODY }}>
+                  {cs && metric ? (
+                    <>
+                      <strong style={{ color: INK }}>{metric.v}</strong> {metric.l} · {cs.client}
+                    </>
+                  ) : (
+                    "No case study yet — what I would fix, and how."
+                  )}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold" style={{ color: PURPLE }}>
+                  See {i.name} SEO <ArrowRight className="h-3 w-3" aria-hidden />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+        <div className="mx-auto mt-12 max-w-4xl">
           <ComparisonTable
             caption="Where Shopify and WooCommerce stores typically run into SEO problems"
             columns={["Shopify", "WooCommerce"]}
@@ -234,300 +347,92 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
             ]}
           />
         </div>
-      </Section>
+      </Band>
 
-      {/* ── 2 · PAIN POINTS ── */}
-      <Section tone="surface">
-        <SectionHeading
-          variant="center"
-          eyebrow="The problem"
-          title="Why big catalogs stall"
-          intro="Four failure modes account for almost every stuck ecommerce store we audit."
-        />
+      {/* PROCESS */}
+      <Band dark id="process">
+        <BandIntro dark eyebrow="How it works" title="From free tear-down to indexed, selling products" />
+        <Steps steps={PROCESS} cta={{ href: "#get-started", label: "Get my free store tear-down" }} />
+      </Band>
 
-        {/* Pain-Point Reality Banner */}
-        <div className="mb-8 overflow-hidden rounded-3xl border border-[#e5e7eb] bg-[#0a0f2e] shadow-sm">
-          <div className="grid md:grid-cols-[1.1fr_1fr] items-center">
-            <div className="relative aspect-[16/10] md:aspect-auto md:h-full min-h-[260px] w-full overflow-hidden">
-              <Image
-                src="/images/audiences/ecommerce-inventory-stress.webp"
-                alt="Ecommerce store owner in warehouse worried about unindexed product catalog and rising ad CAC"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 600px"
-                className="object-cover"
+      {/* PRICE, GUARANTEE & WHO DOES THE WORK */}
+      <Band>
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <Eyebrow>Why SearchPrex</Eyebrow>
+            <H2>One person, one roadmap, a clear price</H2>
+            <Lead>
+              You work with the person who audits your store and ships the fixes. Priorities are ranked by what brings revenue, and every change is logged.
+            </Lead>
+            <div className="mt-8">
+              <CheckList
+                items={[
+                  "The founder does the work — no account managers in between",
+                  "A written roadmap before you pay anything",
+                  "Fixes shipped, not just a PDF of problems",
+                  "A plain-English report every Monday",
+                  "Month to month, no long contract",
+                ]}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0a0f2e]" />
             </div>
-            <div className="p-6 sm:p-8 text-white">
-              <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm mb-3">
-                The Reality · Inventory Stagnation
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-snug">
-                “Thousands of product SKUs in the warehouse, rising ad CAC, and Google indexing less than half.”
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/75">
-                Large catalogues stall in the same places: thin manufacturer descriptions, crawl budget waste, and products trapped in duplicate parameter URLs. We unblock indexing so your catalogue earns organic sales.
-              </p>
-            </div>
+            <p className="mt-8 text-xs font-bold uppercase tracking-wider" style={{ color: BODY }}>Tools I work with</p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {TOOLING.map((t) => (
+                <li key={t} className="rounded-full bg-[#f4f5f8] px-3 py-1.5 text-xs font-bold" style={{ color: INK }}>{t}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex flex-col gap-5">
+            {ECOM_PLAN ? (
+              <PriceCard
+                plan={ECOM_PLAN}
+                label="Ecommerce SEO"
+                note="Where a store lands in the range depends on catalogue size, technical scope and content volume. Month to month."
+              />
+            ) : null}
+            <GuaranteeCard />
           </div>
         </div>
+        <div className="mx-auto mt-14 max-w-4xl">
+          <AuthorCard
+            name="Mubashar Sharif"
+            role="Founder · 5+ years · Semrush & HubSpot certified"
+            quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. Both published case studies are WooCommerce stores, one with more than 35,000 products."
+            imageSrc="/images/mubashar-sharif.jpg"
+            imageAlt="Mubashar Sharif — Founder of SearchPrex"
+            linkedinUrl={linkedinUrl}
+            badges={["Semrush certified", "HubSpot certified", "+92 305 9158010"]}
+          />
+        </div>
+      </Band>
 
-        <CardGrid columns={2}>
-          {PAIN_POINTS.map((p) => (
-            <FeatureCard
-              key={p.title}
-              icon={<p.icon className="h-5 w-5" style={{ color: color.danger }} aria-hidden />}
-              title={p.title}
-              body={p.body}
-            />
+      {/* KEEP READING */}
+      <Band dark>
+        <BandIntro dark eyebrow="Keep reading" title="The case studies and guides behind this page" />
+        <RuleGrid>
+          {RELATED.map((r) => (
+            <RuleItem key={r.href} dark {...r} />
           ))}
-        </CardGrid>
-      </Section>
+        </RuleGrid>
+      </Band>
 
-      {/* ── 3 · PILLARS ── */}
-      <Section>
-        <SectionHeading
-          variant="center"
-          eyebrow="Our approach"
-          title="Six pillars of an ecommerce SEO program"
-          intro="Each one maps to a specific reason Google is under-serving your catalog."
+      {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      <FaqBand title="Ecommerce SEO questions, answered">
+        <FaqList faqs={[...CAPSULES, ...FAQS]} name="ecommerce-seo-faq" />
+      </FaqBand>
+
+      <div id="get-started">
+        <ArticleLeadMagnet
+          variant="bottom"
+          source={SOURCE}
+          copy={{
+            headline: "Send me your store URL. I’ll tell you what Google is ignoring.",
+            sub: "Two fields. Which products are indexed, which aren’t and why — from me, within 24 hours.",
+          }}
         />
-        <CardGrid variant="cards" columns={3}>
-          {PILLARS.map((p) => (
-            <div
-              key={p.title}
-              className={`${radius.card} border bg-white p-7`}
-              style={{ borderColor: color.border }}
-            >
-              <p.icon className="mb-4 h-6 w-6" style={{ color: color.primary }} aria-hidden />
-              <h3 className={`${heading.h4} mb-2`} style={{ color: color.ink }}>{p.title}</h3>
-              <p className={`${text.small} mb-4`} style={{ color: color.muted }}>{p.body}</p>
-              <ul className="space-y-2">
-                {p.points.map((pt) => (
-                  <li key={pt} className={`flex items-start gap-2 ${text.caption}`} style={{ color: color.muted }}>
-                    <span
-                      className="mt-1.5 h-1 w-1 shrink-0 rounded-full"
-                      style={{ background: color.success }}
-                      aria-hidden
-                    />
-                    {pt}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </CardGrid>
-      </Section>
+      </div>
 
-      {/* ── MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close ── */}
-      <Section tight>
-        <GuideMagnet guide={guide} source="ecommerce-seo" eyebrow="Recognise one of those? Free playbook" />
-      </Section>
-
-      {/* ── 4 · CASE STUDIES ── */}
-      {featuredEcom.length > 0 ? (
-        <Section tone="surface">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading
-              className="mb-0"
-              eyebrow="Proof"
-              title="Ecommerce stores we&rsquo;ve moved the needle for"
-            />
-            <Link
-              href="/case-studies?type=ecommerce-seo"
-              className={`inline-flex items-center gap-1.5 ${text.small} font-semibold hover:opacity-70`}
-              style={{ color: color.primary }}
-            >
-              View all ecommerce case studies
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-          {/* The screenshots behind the two headline figures, before the cards. */}
-          <div className="mb-10 grid gap-6 lg:grid-cols-3">
-            <ProofImage
-              src="/images/proof/smk-revenue-before-v2.png"
-              alt="SMK Store WooCommerce dashboard for April 2026, showing $5,832.02 net sales for the month."
-              width={1366}
-              height={607}
-              frameAspect="16 / 9"
-              stage="SMK Store · April 2026"
-              caption="Net sales: $5,832"
-            />
-            <ProofImage
-              src="/images/proof/smk-revenue-after-v2.png"
-              alt="SMK Store WooCommerce dashboard for June 2026, showing $19,100.71 net sales for the month."
-              width={863}
-              height={350
-}
-              frameAspect="16 / 9"
-              stage="SMK Store · June 2026"
-              caption="Net sales: $19,100"
-            />
-            <ProofImage
-              src="/images/proof/mso-gsc-indexing-full.png"
-              alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
-              width={778}
-              height={520}
-              frameAspect="16 / 9"
-              stage="Michigan Sports & Outdoor · May–Jul 2026"
-              caption="About 3,000 → 11,549 pages indexed"
-            />
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredEcom.map((cs) => (
-              <CaseCard key={cs.id} cs={cs} />
-            ))}
-          </div>
-        </Section>
-      ) : null}
-
-      {/* ── 5 · PROCESS ── */}
-      <Section>
-        <SectionHeading
-          variant="center"
-          eyebrow="How we work"
-          title="A four-phase engagement, built for scale"
-          intro="Predictable process, transparent reporting, no black-box tactics."
-        />
-        <ProcessTimeline steps={PROCESS.map((p, i) => ({ title: p.title, body: p.body, icon: [ClipboardCheckIcon, TargetIcon, RocketIcon, TrendingUpIcon][i] }))} />
-      </Section>
-
-      {/* ── 6 · TOOLING ── */}
-      <Section tone="surface" width="narrow" tight>
-        <SectionHeading variant="center" eyebrow="Tooling" title="The stack we run every program on" />
-        <ul className="flex flex-wrap justify-center gap-2">
-          {TOOLING.map((t) => (
-            <li
-              key={t}
-              className={`${radius.control} border bg-white px-4 py-2 text-sm font-semibold`}
-              style={{ borderColor: color.border, color: color.ink }}
-            >
-              {t}
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* ── 7 · FOUNDER — E-E-A-T ── */}
-      <Section width="narrow" tight>
-        <AuthorCard
-          name="Mubashar Sharif"
-          role="Founder & Lead Ecommerce SEO Strategist · 5+ years"
-          quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. Both published case studies are WooCommerce stores, one with more than 35,000 products."
-          imageSrc="/images/mubashar-sharif.jpg"
-          imageAlt="Mubashar Sharif — Founder & Lead Ecommerce SEO Strategist"
-          linkedinUrl={linkedinUrl}
-          credential="Semrush-certified"
-          badges={["Semrush certified", "+92 305 9158010"]}
-        />
-      </Section>
-
-      <WhySearchPrex variant="ecommerce" service="ecommerce SEO" />
-
-      {/* ── BY PLATFORM & NICHE ── hub and spoke to each sub-page */}
-      <Section>
-        <SectionHeading
-          eyebrow="By platform and niche"
-          title="Ecommerce SEO for your kind of store"
-          intro="WooCommerce and knife & outdoor stores are where the case studies are. The Shopify page says plainly that there isn't one yet."
-        />
-        <CardGrid columns={3}>
-          {ECOMMERCE_INDUSTRIES.map((i) => {
-            const cs = caseStudies.find((c) => c.slug.client === i.caseClients[0]);
-            const metric = cs?.metrics[0];
-            return (
-              <Link
-                key={i.slug}
-                href={`/services/ecommerce-seo/${i.slug}`}
-                className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
-              >
-                <p className="text-base font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{i.h1}</p>
-                <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">
-                  {cs && metric ? (
-                    <>
-                      <strong className="text-[#0a0f2e]">{metric.v}</strong> {metric.l} · {cs.client}
-                    </>
-                  ) : (
-                    "No case study yet — what I would fix, and how."
-                  )}
-                </p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
-                  See {i.name} SEO <ArrowRight className="h-3 w-3" aria-hidden />
-                </span>
-              </Link>
-            );
-          })}
-        </CardGrid>
-      </Section>
-
-      {/* ── KEEP READING — the hub sent only 7 contextual links out (Sept 2026
-          audit): nothing to its case studies, technical SEO or the guides. ── */}
-      <Section tone="surface">
-        <SectionHeading eyebrow="Keep reading" title="The case studies and guides behind this page" />
-        <CardGrid columns={3}>
-          {[
-            { href: "/case-studies/ecommerce/smk-store", title: "SMK Store case study", body: "35,000 products: thin copy, indexing and site quality rebuilt — $5,832 to $19,100 a month." },
-            { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages." },
-            { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks in the order the case-study work was done. Free, no email." },
-            { href: "/services/technical-seo", title: "Technical SEO services", body: "Crawling, indexing and Core Web Vitals fixed at the template — the base every catalogue needs." },
-            { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget optimization guide", body: "Why Google skips pages on big sites, and how to stop it." },
-            { href: "/blog/ecommerce-product-page-seo", title: "Product page SEO at scale", body: "Writing product pages for 10,000+ SKUs without thin or duplicate copy." },
-            { href: "/resources/news/ecommerce-seo-news-2026", title: "Ecommerce SEO news", body: "What changed in search for stores this month, with sources." },
-          ].map((r) => (
-            <Link
-              key={r.href}
-              href={r.href}
-              className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
-            >
-              <p className="text-sm font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{r.title}</p>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">{r.body}</p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
-                Open <ArrowRight className="h-3 w-3" aria-hidden />
-              </span>
-            </Link>
-          ))}
-        </CardGrid>
-      </Section>
-
-      {/* ── PRICE ── */}
-      {ECOM_PLAN ? (
-        <Section>
-          <SectionHeading variant="center" eyebrow="What it costs" title="Ecommerce SEO pricing" />
-          <div className="mx-auto max-w-2xl rounded-2xl border-2 p-6 text-center" style={{ borderColor: ECOM_PLAN.accent, background: ECOM_PLAN.bg }}>
-            <p className="text-3xl font-black" style={{ color: ECOM_PLAN.accent }}>
-              {formatRange(ECOM_PLAN)} <span className="text-base font-bold" style={{ color: color.muted }}>/ month</span>
-            </p>
-            <p className="mt-2 text-sm text-[#374151]">{ECOM_PLAN.best}: {ECOM_PLAN.includes.join(" · ")}</p>
-            <p className="mt-3 text-xs leading-relaxed" style={{ color: color.muted }}>
-              Where a store lands in the range depends on catalogue size, technical scope and content volume. Month to month.
-            </p>
-            <Link href="/pricing" className="mt-3 inline-flex items-center gap-1 text-sm font-bold" style={{ color: color.primary }}>
-              Full pricing <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-        </Section>
-      ) : null}
-
-      {/* ── 8 · FAQ ── */}
-      <Section tone="surface" width="reading">
-        <SectionHeading variant="center" eyebrow="FAQ" title="Frequently asked questions" />
-        <FaqList faqs={FAQS} name="ecommerce-seo-faq" />
-      </Section>
-
-      {/* ── 9 · FINAL CTA — was a button opening a four-field modal; now the
-          two-field form in place. The floating "Reality Check" button and its
-          modal stay for anyone who would rather leave a phone number. ── */}
-      <ArticleLeadMagnet
-        variant="bottom"
-        source={SOURCE}
-        copy={{
-          headline: "Send me your store URL. I’ll tell you what Google is ignoring.",
-          sub: "Two fields. Which products are indexed, which aren’t and why — from me, within 24 hours.",
-        }}
-      />
-
-      {/* ── FLOATING CTA ── */}
+      {/* FLOATING CTA — for anyone who would rather leave a phone number */}
       <button
         type="button"
         onClick={openModal}
@@ -537,7 +442,6 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
         <BarChart3 className="h-4 w-4" aria-hidden /> Reality Check
       </button>
 
-      {/* ── REALITY CHECK MODAL ── */}
       <AnimatePresence>
         {showModal ? (
           <motion.div
@@ -633,45 +537,5 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
         ) : null}
       </AnimatePresence>
     </main>
-  );
-}
-
-/* ─── Case study card ─── */
-
-function CaseCard({ cs }: { cs: CaseStudy }) {
-  const img = cardImage(cs);
-
-  return (
-    <Link
-      href={detailUrl(cs)}
-      className={`group flex flex-col overflow-hidden ${radius.card} border bg-white transition-all hover:-translate-y-1 hover:shadow-xl ${focusRing}`}
-      style={{ borderColor: color.border }}
-    >
-      <div className="relative aspect-[16/10] overflow-hidden" style={{ background: color.surfaceAlt }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={img}
-          alt=""
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-
-      <div className="flex flex-1 flex-col p-6">
-        <p className={`${heading.eyebrow} mb-2`} style={{ color: color.primary }}>
-          {cs.industry} · {cs.location}
-        </p>
-        <h3 className={`${heading.h4} mb-4 flex-1`} style={{ color: color.ink }}>
-          {cs.headline}
-        </h3>
-        <dl className="flex flex-wrap gap-4 border-t pt-4" style={{ borderColor: color.border }}>
-          {cs.metrics.slice(0, 3).map((m) => (
-            <div key={m.l}>
-              <dd className="text-lg font-bold" style={{ color: color.success }}>{m.v}</dd>
-              <dt className={text.caption} style={{ color: color.muted }}>{m.l}</dt>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </Link>
   );
 }

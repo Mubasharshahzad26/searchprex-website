@@ -1,163 +1,141 @@
 "use client";
 
 // app/services/law-firm-seo/LawFirmSEOClient.tsx
-// PILOT PAGE for the unified design system.
 //
-// Every section here is assembled from components/layout primitives. The page
-// no longer declares a single colour of its own — the old local theme block
-// (ACCENT #ff642d, INK #0f0f0f, MUTED #6b7280, BG_SOFT #fafafa) is gone, and
-// with it the reason this page looked like a different website from /pricing.
+// Topical layout (Oct 2026), built from components/ServiceBands like the other
+// service pages: bands that alternate dark navy and white, each with one
+// heading, a short paragraph and a "what I check" list.
 //
-// Rebuilt on the shared service-page template (previews/services-cro-wireframe.html)
-// on 26 September 2026, keeping what was already good here — the answer
-// capsules, the "be our first law firm case study" section, the live intake
-// demo, the practice-area navigation and the self-serve checklist.
+// The honesty rule that governs this page (see ./data.ts): SearchPrex has not
+// completed a law firm engagement, so no legal result is claimed anywhere.
+// Every screenshot here is from another industry and is labelled as such. Law
+// firm pages also answer to ABA Model Rule 7.1 on misleading communications —
+// no position, no timeline and no "cost per lead goes down" is promised.
 //
-// Fixed: a visually hidden H1 over a different visible headline; a hero
-// checklist promising "Rank #1 for your city's practice-area keywords" (nobody
-// can promise a position, and ABA Model Rule 7.1 bars misleading claims); an
-// unsourced "$80 per click"; a stat strip with "20+ businesses served" and a
-// "60d median time to top 3" drawn from no dataset; an FAQ saying "most clients
-// significantly reduce ad spend" when there are no law firm clients yet; and a
-// city grid that left out all eight Kansas cities.
+// Dropped in this layout: the comparison table (it promised "Local map pack top
+// 3" and "Cost per qualified lead: Down"), the mid-page guide magnet (the
+// checklist is linked from the practice-area band) and WhySearchPrex (folded
+// into the price band). Kept: the practice-area tabs, the AI image banner, the
+// live intake demo, the "first law firm case study" offer and LawFirmStack.
 
-import Image from "next/image";
-import ServiceProofStrip from "@/components/ServiceProofStrip";
-import ProcessTimeline from "@/components/ProcessTimeline";
-import { Search as SearchIcon, Wrench as WrenchIcon, FileText as FileTextIcon, TrendingUp as TrendingUpIcon } from "lucide-react";
 import Link from "next/link";
-import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
+import { Scale } from "lucide-react";
+
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
-import GuideMagnet from "@/components/GuideMagnet";
-import WhySearchPrex from "@/components/WhySearchPrex";
-import type { Guide } from "@/lib/guides";
-import CoverageSection from "@/components/CoverageSection";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
 import ProofImage from "@/components/ProofImage";
-import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
-import { CAPSULES, FAQS, PROBLEMS } from "./data";
-import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
-import VideoTestimonials from "@/components/VideoTestimonials";
-import {
-  AuthorCard,
-  CardGrid,
-  ComparisonTable,
-  CtaButton,
-  FaqList,
-  AnswerCapsules,
-  FeatureCard,
-  PageHero,
-  Section,
-  SectionHeading,
-  StatStrip,
-  Accent,
-  type ComparisonRow,
-} from "@/components/layout";
-import { color, heading, radius, text } from "@/lib/design-tokens";
 import LawFirmStack from "@/components/LawFirmStack";
+import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
+import type { Guide } from "@/lib/guides";
+import { RETAINER_PLANS } from "@/lib/pricing";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
+import { AuthorCard, FaqList } from "@/components/layout";
+import {
+  Band,
+  BandIntro,
+  CheckList,
+  CheckPanel,
+  Eyebrow,
+  FaqBand,
+  GuaranteeCard,
+  H2,
+  Lead,
+  MarketsBand,
+  PriceCard,
+  ProofPanel,
+  RealityBanner,
+  RuleGrid,
+  RuleItem,
+  ServiceHero,
+  Steps,
+  TextLink,
+  WhiteButton,
+} from "@/components/ServiceBands";
+
+import { CAPSULES, FAQS, PROBLEMS } from "./data";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
-
-/* ─── DATA ─── */
-
 const SOURCE = "service:law-firm-seo";
 const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
 
-/**
- * Facts about the service, not results. There is no law firm result to put
- * here yet, and the strip says nothing that implies one.
- */
-const stats = [
-  { value: "1 firm", label: "Per city and practice area" },
-  { value: "5", label: "Practice areas with their own page" },
-  { value: "20", label: "City pages in 9 states" },
-  { value: "24h", label: "Tear-down reply" },
+const included = [
+  { title: "Practice-area & city pages", body: "A page for each practice and each city you take cases in, written for the questions clients ask before they call.", href: "#practice-areas" },
+  { title: "Attorney E-E-A-T", body: "Bar admissions, jurisdictions, real photos and bylines, so Google can verify who stands behind the advice.", href: "#ymyl" },
+  { title: "Google Business Profile", body: "The right primary category, practice areas as services, and a review routine that stays inside bar rules.", href: "#profile" },
+  { title: "Technical SEO", body: "Speed, indexing, attorney and FAQ schema, and mobile pages that load before a caller gives up.", href: "/services/technical-seo" },
+  { title: "Legal authority", body: "Legal directories, bar associations and local mentions that make sense for a firm — no bought link volume.", href: "#profile" },
+  { title: "AI answers & Monday reports", body: "Clear answers that AI Overviews and ChatGPT can cite, and a plain-English report on rankings, calls and forms every week.", href: "#ymyl" },
 ];
 
-const services = [
-  { title: "Technical SEO", body: "Site speed, Core Web Vitals, attorney schema, indexation, and mobile optimization for legal sites." },
-  { title: "Local SEO", body: "GBP optimization, citations, local pack rankings, and review generation for your city." },
-  { title: "Practice Area Pages", body: "Keyword-optimized pages for each practice area and target city, written for real client search intent." },
-  { title: "Legal Link Building", body: "Legal directory listings, digital PR, and authority backlinks built specifically for law firms." },
-  { title: "Weekly Reporting", body: "Plain-English reports every Monday — rankings, traffic, leads, and next action items." },
-  { title: "GEO / AIO / LLMs SEO", body: "Get cited in Google AI Overviews, ChatGPT, and Perplexity for local legal queries." },
+const practiceChecks = [
+  "One page per practice area, per city you serve",
+  "The first paragraph answers what happens next, in plain English",
+  "Attorney byline with bar admission year and jurisdictions",
+  "Fees, consultations and next steps stated without overpromising",
+  "A tappable phone number and a short form above the fold",
+  "Nothing that breaks ABA Model Rule 7.1 — no “best”, no guaranteed outcomes",
 ];
 
-const comparisonColumns = ["SearchPrex", "Google Ads", "Generic agency"];
+const ymylItems = [
+  { title: "Attorney E-E-A-T", body: "Legal content is a Your-Money-Your-Life topic. Credentials, bar admissions and real experience go on every page, with a named author." },
+  { title: "AI Overview citations", body: "AI Overviews now answer many legal questions above the results. Clear answers, reviews and schema make your firm the one quoted." },
+  { title: "ChatGPT & Perplexity", body: "People ask AI tools who to call. The same clear, verifiable pages make it more likely your firm is named." },
+  { title: "People-first content", body: "Every page has to help a prospective client. Thin, keyword-stuffed pages are what Google’s helpful-content systems push down." },
+];
 
-const comparisonRows: ComparisonRow[] = [
-  { label: "Attorney E-E-A-T (YMYL)", values: [true, false, "Sometimes"] },
-  { label: "AI Overview + ChatGPT citations", values: [true, false, false] },
-  { label: "Local map pack top 3", values: [true, false, "Sometimes"] },
-  { label: "Practice area × city pages", values: [true, false, "Sometimes"] },
-  { label: "Ranks that hold when you pause", values: [true, false, "Sometimes"] },
-  { label: "Founder-led (no juniors)", values: [true, false, false] },
-  { label: "Cost per qualified lead", values: ["Down", "Up", "Flat"] },
+const profileChecks = [
+  "Primary category matches your main practice, not just “Law firm”",
+  "Each practice area listed as a service",
+  "Office address, hours and phone identical to your website",
+  "Reviews from real clients, asked for in a way bar rules allow",
+  "Legal directory listings (Avvo, Justia, state bar) consistent with the Profile",
+  "Calls and website clicks from the Profile, tracked every week",
 ];
 
 const process = [
-  { step: "01", week: "Week 1–2", title: "Deep audit", body: "Site, competitors, and local legal landscape — mapped into a city-specific ranking strategy." },
-  { step: "02", week: "Week 3–4", title: "Foundation fix", body: "Technical SEO, attorney + FAQ schema, GBP optimization, and citation cleanup." },
-  { step: "03", week: "Week 5–8", title: "Content & authority", body: "Practice-area pages, city pages, E-E-A-T legal content, and authority link building in parallel." },
-  { step: "04", week: "Week 9+", title: "Rankings & cases", body: "Keywords climb, qualified consultations increase, plain-English reports every Monday." },
-];
-
-const coreUpdate2026 = [
-  { title: "Attorney E-E-A-T (YMYL)", body: "Legal content is Your-Money-Your-Life — we surface attorney credentials, bar admissions, real case experience, and author authority on every page." },
-  { title: "AI Overview legal citations", body: "Google's 2026 AI Overviews answer 'best lawyer near me' directly. We structure content, reviews, and schema so your firm is the one cited." },
-  { title: "GEO & LLM visibility", body: "Generative Engine Optimization gets your firm referenced in ChatGPT, Perplexity, and Gemini when clients research legal help." },
-  { title: "People-first legal content", body: "Every page genuinely helps prospective clients — never thin, keyword-stuffed pages the Helpful Content system demotes." },
+  { when: "Day 1", title: "Free tear-down", body: "Your URL in, a written look back within 24 hours: your pages, your Profile and the firms outranking you in your city." },
+  { when: "Weeks 1–2", title: "Deep audit", body: "Site, competitors and the local legal market, mapped into a plan for your city and practice areas." },
+  { when: "Weeks 3–8", title: "Foundation & pages", body: "Technical fixes, attorney and FAQ schema, Business Profile, then practice-area and city pages." },
+  { when: "Every Monday", title: "Report", body: "Rankings, calls and form fills — what moved, what did not, and what happens next." },
 ];
 
 const partnershipPoints = [
-  "Market Exclusivity: We only work with one firm per city and practice area",
-  "Proven local pack + AI Overview methodology",
-  "Founder-led — not handed to a junior",
-  "Transparent GSC reporting from day one",
-  "YMYL E-E-A-T aligned every step",
+  "One firm per city and practice area — I never rank you against another client",
+  "The same map pack and AI Overview work behind the results above",
+  "The founder does the work, not a junior",
+  "Search Console reporting from day one",
+  "Built to YMYL and bar-advertising rules at every step",
 ];
 
-/* ─── PAGE ─── */
-
-// `guide` comes from the server page so the checklist data is not bundled into
-// this client component.
-export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
+// `guide` is still passed by page.tsx; the checklist is linked from the practice-area band.
+export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
   return (
-    <>
-      <div className="border-b bg-slate-50 overflow-x-auto pt-24" style={{ borderColor: color.border }}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex space-x-6 text-sm font-medium" aria-label="Practice Areas">
-            <span className="text-blue-700 border-b-2 border-blue-700 pb-3 -mb-3 whitespace-nowrap">
-              Overview
-            </span>
-            {INDUSTRY_PAGES.map((ind) => (
-              <Link 
-                key={ind.slug} 
-                href={`/services/law-firm-seo/${ind.slug}`} 
-                className="whitespace-nowrap transition-colors text-slate-500 hover:text-slate-900"
-              >
-                {ind.name}
-              </Link>
-            ))}
-
-          </nav>
-        </div>
-      </div>
     <main>
-      <PageHero
-        eyebrow="Law Firm SEO"
-        title={
-          <>
-            Law Firm SEO Services <Accent>that bring in signed cases</Accent>
-          </>
+      <ServiceHero
+        crumb="Law Firm SEO"
+        above={
+          <div className="mt-4 overflow-x-auto border-y bg-slate-50" style={{ borderColor: "#e5e7eb" }}>
+            <nav className="mx-auto flex max-w-6xl space-x-6 px-4 py-3 text-sm font-medium sm:px-6 lg:px-8" aria-label="Practice areas">
+              <span className="whitespace-nowrap font-bold text-[#534AB7]">Overview</span>
+              {INDUSTRY_PAGES.map((ind) => (
+                <Link
+                  key={ind.slug}
+                  href={`/services/law-firm-seo/${ind.slug}`}
+                  className="whitespace-nowrap text-slate-500 transition-colors hover:text-slate-900"
+                >
+                  {ind.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
         }
-        subtitle="Every click on Google Ads is paid for, every month. Practice-area and city pages keep bringing in cases after you stop paying. I build them to legal YMYL standards — led by Mubashar Sharif, Semrush-certified."
-        actions={
-          <Link href="#approach" className="inline-flex items-center gap-1.5 text-sm font-bold" style={{ color: color.primary }}>
-            See how it works <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-        }
-        trustPoints={["One firm per city", "Reply within 24 hours", "The founder does the work"]}
+        eyebrow="Law firm SEO services"
+        title="Law Firm SEO Services"
+        accent="that bring in signed cases"
+        subtitle="Every click on Google Ads is paid for, every month. Practice-area and city pages keep bringing in cases after you stop paying. I build them to legal YMYL standards."
+        primary={{ href: "#approach", label: "See how it works" }}
+        secondary={{ href: "#intake-demo", label: "Try the intake demo" }}
+        trustPoints={["One firm per city", "The founder does the work", "90-day money-back guarantee"]}
         aside={
           <ArticleLeadMagnet
             variant="sidebar"
@@ -170,13 +148,11 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
         }
       />
 
-      <StatStrip stats={stats} />
-
-      {/* Evidence before explanation. There is no law firm case study yet, so
-          these are local service businesses and the footnote says so in plain
-          words rather than letting the strip imply otherwise. */}
+      {/* No law firm case study yet, so these are local service businesses and
+          the footnote says so in plain words. */}
       <ServiceProofStrip
-        title="Local results from the same method we'd use for your firm"
+        id="proof"
+        title="Local results from the same method I'd use for your firm"
         moreHref="/case-studies"
         moreLabel="See every case study"
         shots={[
@@ -197,351 +173,245 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
             caption: "HVAC Services Team named in Google's AI Overview for a Simi Valley AC installation search.",
           },
         ]}
-        footnote="These are local service businesses, not law firms — there is no published law firm case study on this site yet. The map pack and AI Overview work behind them is the same work we do for firms."
+        footnote="These are local service businesses, not law firms — there is no published law firm case study on this site yet. The map pack and AI Overview work behind them is the same work I do for firms."
       />
 
-      {/* THE PROBLEM — four checks a managing partner can run today */}
-      <Section>
-        <SectionHeading
+      {/* THE PROBLEM */}
+      <Band>
+        <BandIntro
+          center={false}
           eyebrow="The problem"
           title="Why good firms lose the search to worse ones"
-          intro="Four things you can check yourself today. Each one is costing you consultations if it fails."
+          lead="Four things you can check yourself today. Each one is costing you consultations if it fails."
         />
-
-        {/* Pain-Point Reality Banner */}
-        <div className="mb-8 overflow-hidden rounded-3xl border border-[#e5e7eb] bg-[#0a0f2e] shadow-sm">
-          <div className="grid md:grid-cols-[1.1fr_1fr] items-center">
-            <div className="relative aspect-[16/10] md:aspect-auto md:h-full min-h-[260px] w-full overflow-hidden">
-              <Image
-                src="/images/audiences/lawyer-ppc-fatigue.webp"
-                alt="Attorney at law firm reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 600px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0a0f2e]" />
-            </div>
-            <div className="p-6 sm:p-8 text-white">
-              <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm mb-3">
-                The Reality · PPC Budget Burnout
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-snug">
-                “Another $150 click that turned into a price-shopper who hung up in 30 seconds.”
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/75">
-                Every click on Google Ads is paid for, every single month. When you pause the campaign, the inquiries stop immediately. Practice-area and city pages keep bringing qualified consultations long after the work is done.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <CardGrid columns={2}>
+        <RealityBanner
+          src="/images/audiences/lawyer-ppc-fatigue.webp"
+          alt="Attorney at law firm reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night"
+          tag="The Reality · PPC Budget Burnout"
+          quote="“Another $150 click that turned into a price-shopper who hung up in 30 seconds.”"
+          body="Every click on Google Ads is paid for, every single month. When you pause the campaign, the inquiries stop immediately. Practice-area and city pages keep bringing qualified consultations long after the work is done."
+        />
+        <RuleGrid columns={2}>
           {PROBLEMS.map((p) => (
-            <div key={p.title} className="rounded-2xl border bg-white p-6" style={{ borderColor: color.border }}>
-              <p className="flex items-center gap-2 text-sm font-black" style={{ color: color.ink }}>
-                <Scale className="h-4 w-4 flex-shrink-0 text-[#b8123a]" aria-hidden />
-                {p.title}
-              </p>
-              <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#374151]">
-                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1a7d59]" aria-hidden />
-                <span><strong>Check:</strong> {p.check}</span>
-              </p>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: color.muted }}>{p.costs}</p>
-            </div>
-          ))}
-        </CardGrid>
-      </Section>
-
-
-      {/* QUICK ANSWERS
-          Answer capsules for AI Overviews and answer engines: a real question as
-          the heading, the answer in plain view beneath it. There is no law firm
-          client yet, so no legal result is claimed here — the third answer says
-          so, and labels the proof it does cite as coming from other industries. */}
-      <Section width="reading">
-        <SectionHeading eyebrow="Quick answers" title="Law firm SEO, answered plainly" />
-        <AnswerCapsules items={CAPSULES} />
-      </Section>
-
-      {/* WHAT'S INCLUDED */}
-      <Section>
-        <SectionHeading
-          variant="split"
-          eyebrow="Everything included"
-          title={
-            <>
-              What&apos;s in your
-              <br />
-              Law Firm SEO package
-            </>
-          }
-          intro="Every deliverable is built around legal YMYL standards — attorney credentials, real experience, and content that both Google and prospective clients trust."
-        />
-        <CardGrid columns={3}>
-          {services.map((s) => (
-            <FeatureCard key={s.title} label="Included" title={s.title} body={s.body} />
-          ))}
-        </CardGrid>
-      </Section>
-
-      {/* MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close. */}
-      <Section tight>
-        <GuideMagnet guide={guide} source="law-firm-seo" eyebrow="Failed one of those checks? Get all of them" />
-      </Section>
-
-      {/* COMPARISON */}
-      <Section tone="surface">
-        <SectionHeading
-          eyebrow="Compare"
-          title="Compare the approaches"
-          intro="Most law firms cycle between Google Ads and generic SEO agencies. Here's what actually delivers durable legal visibility."
-        />
-        <ComparisonTable
-          columns={comparisonColumns}
-          rows={comparisonRows}
-          caption="Law firm SEO with SearchPrex compared with Google Ads and a generic SEO agency"
-        />
-      </Section>
-
-      <WhySearchPrex variant="law" service="law firm SEO" tone="white" />
-
-      {/* PROCESS */}
-      <Section id="approach">
-        <SectionHeading eyebrow="How we work" title="From audit to more cases in 90 days" />
-        <ProcessTimeline steps={process.map((p, i) => ({ title: p.title, body: p.body, when: p.week, icon: [SearchIcon, WrenchIcon, FileTextIcon, TrendingUpIcon][i] }))} />
-      </Section>
-
-      {/* LIVE INTAKE DEMO */}
-      <Section id="intake-demo" tone="surface" width="narrow">
-        <SectionHeading
-          variant="center"
-          eyebrow="Live demo · AI Intake Assistant"
-          title={
-            <>
-              Getting found is half the battle.
-              <br />
-              Capturing every lead is the other half.
-            </>
-          }
-          intro="Ranking #1 means nothing if a 2 a.m. call goes to voicemail. Play a potential client below and watch our 24/7 AI intake assistant qualify the lead in seconds."
-        />
-        <IntakeAssistant embedded />
-      </Section>
-
-      {/* PARTNERSHIP CTA */}
-      <Section>
-        <SectionHeading
-          eyebrow="Selective law firm partnerships"
-          title="Be our first law firm case study"
-          intro="We've delivered verified results in ecommerce, local, and technical SEO — including local service businesses named in Google's AI Overviews. Now we're bringing that same methodology to law firms."
-        />
-        {/* The transferable proof, labelled as coming from other industries —
-            the same line the third answer capsule draws. */}
-        <div className="mb-8 grid gap-6 md:grid-cols-2">
-          <ProofImage
-            src="/images/proof/local-dolls-ai-overview-rank1.png"
-            alt="Google results for 'post construction cleaning in Chesterfield, MI' showing D.O.L.L.S. Cleaning cited first in the AI Overview and ranking first organically."
-            width={628}
-            height={322}
-            frameAspect="16 / 9"
-            stage="Local service business · not a law firm"
-            caption="Named first in the AI Overview, #1 organic"
-          />
-          <ProofImage
-            src="/images/proof/mso-gsc-indexing-full.png"
-            alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
-            width={778}
-            height={520}
-            frameAspect="16 / 9"
-            stage="Ecommerce · not a law firm"
-            caption="About 3,000 → 11,549 pages indexed, May–Jul 2026"
-          />
-        </div>
-        <div
-          className={`overflow-hidden ${radius.card} border bg-white lg:grid lg:grid-cols-2`}
-          style={{ borderColor: color.border }}
-        >
-          <div className="p-8 lg:p-10">
-            <Scale className="mb-4 h-8 w-8" style={{ color: color.primary }} aria-hidden />
-            <h3 className={`${heading.h3} mb-4`} style={{ color: color.ink }}>
-              Proven methodology, applied to your firm
-            </h3>
-            <ul className="space-y-3.5">
-              {partnershipPoints.map((t) => (
-                <li key={t} className="flex items-start gap-3">
-                  <Check
-                    className="mt-0.5 h-4 w-4 shrink-0"
-                    style={{ color: color.primary }}
-                    strokeWidth={2.5}
-                    aria-hidden
-                  />
-                  <span className={text.small} style={{ color: color.ink }}>
-                    {t}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div
-            className="flex flex-col justify-center border-t p-8 lg:border-l lg:border-t-0 lg:p-10"
-            style={{ borderColor: color.border, background: color.surface }}
-          >
-            <h4 className={`${heading.h4} mb-3`} style={{ color: color.ink }}>
-              Your firm could be the next #1 in your city.
-            </h4>
-            <p className={`${text.small} mb-6`} style={{ color: color.muted }}>
-              We&apos;re selectively partnering with law firms ready to own their local market
-              organically. Free audit shows exactly what it takes to rank — and get cited in AI
-              answers — in your city and practice area.
-            </p>
-            <CtaButton
-              href="/free-audit"
-              compact
-              icon={<ArrowRight className="h-4 w-4" aria-hidden />}
-            >
-              Claim free law firm audit
-            </CtaButton>
-            <p className={`${text.caption} mt-4`} style={{ color: color.muted }}>
-              No obligation · 24-hour turnaround · Founder reviews it personally
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      {/* 2026 CORE UPDATE */}
-      <Section tone="surface">
-        <SectionHeading
-          eyebrow="SEO · GEO · AIO · LLMs · 2026 core update"
-          title="Legal SEO built for the AI answer era"
-          intro="Legal is YMYL — Google holds it to the highest trust bar, and AI Overviews now answer legal questions directly. Here's how we keep your firm visible everywhere clients look."
-        />
-        <CardGrid columns={2}>
-          {coreUpdate2026.map((c) => (
-            <FeatureCard
-              key={c.title}
-              icon={
-                <span
-                  className={`${heading.eyebrow} inline-flex items-center gap-2`}
-                  style={{ color: color.primary }}
-                >
-                  <BadgeCheck className="h-4 w-4" aria-hidden /> Aligned
-                </span>
+            <RuleItem
+              key={p.title}
+              icon={<Scale className="h-5 w-5 flex-shrink-0 text-[#b8123a]" aria-hidden />}
+              title={p.title}
+              body={
+                <>
+                  <p className="text-[#374151]"><strong>Check:</strong> {p.check}</p>
+                  <p className="mt-1">{p.costs}</p>
+                </>
               }
-              title={c.title}
-              body={c.body}
             />
           ))}
-        </CardGrid>
-      </Section>
+        </RuleGrid>
+      </Band>
 
-      {/* CITY PAGES — the shared coverage block. The grid it replaces read
-          lib/city-pages only and left out all eight Kansas cities; this reads
-          lib/locations, which merges both. The city pages name this page as
-          their breadcrumb parent, so the link runs both ways. */}
-      <CoverageSection />
-
-      {/* PRICE */}
-      {LAW_PLAN ? (
-        <Section>
-          <SectionHeading eyebrow="What it costs" title="Law firm SEO pricing" />
-          <div className="mx-auto max-w-2xl rounded-2xl border-2 p-6 text-center" style={{ borderColor: LAW_PLAN.accent, background: LAW_PLAN.bg }}>
-            <p className="text-3xl font-black" style={{ color: LAW_PLAN.accent }}>
-              {formatRange(LAW_PLAN)} <span className="text-base font-bold" style={{ color: color.muted }}>/ month</span>
-            </p>
-            <p className="mt-2 text-sm text-[#374151]">{LAW_PLAN.best}: {LAW_PLAN.includes.join(" · ")}</p>
-            <p className="mt-3 text-xs leading-relaxed" style={{ color: color.muted }}>
-              Where a firm lands in the range depends on the number of practice areas and cities. Month to month; one firm per city and practice area.
-            </p>
-            <Link href="/pricing" className="mt-3 inline-flex items-center gap-1 text-sm font-bold" style={{ color: color.primary }}>
-              Full pricing <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-        </Section>
-      ) : null}
-
-      {/* <VideoTestimonials /> */}
-
-      {/* AUTHOR — E-E-A-T */}
-      <Section width="narrow" tight>
-        <AuthorCard
-          name="Mubashar Sharif"
-          role="Founder & Lead SEO Strategist · 5+ years · Semrush-certified"
-          quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to #1 in Google's local results and into its AI Overviews, and I bring that exact methodology to every firm I work with.&rdquo;"
-          imageSrc="/images/mubashar-sharif.jpg"
-          imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
-          linkedinUrl={LINKEDIN}
+      {/* WHAT'S INCLUDED */}
+      <Band dark>
+        <BandIntro
+          dark
+          eyebrow="What’s included"
+          title="What a complete law firm SEO plan covers"
+          lead="Legal search is judged harder than most. Every part of the plan is built around trust a client — and Google — can verify."
         />
-      </Section>
+        <RuleGrid>
+          {included.map((i) => (
+            <RuleItem key={i.title} dark {...i} />
+          ))}
+        </RuleGrid>
+      </Band>
 
-      {/* ── THE CHECKLIST ──
-          The audit above, written out and ungated. This is the page where a
-          resource link earns its place: the visitor is already a law firm, and
-          the offer still gets the last word in the closing form below. */}
-      <Section width="narrow" tight>
-        <Link
-          href="/resources/law-firm-seo-audit-checklist"
-          className={`group flex flex-col gap-5 ${radius.card} border p-6 transition-all hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:p-7`}
-          style={{ borderColor: color.border, background: color.white }}
-        >
-          <span
-            className={`flex h-12 w-12 shrink-0 items-center justify-center ${radius.chip}`}
-            style={{ background: color.primarySoft }}
-          >
-            <ListChecks className="h-6 w-6" style={{ color: color.primary }} aria-hidden />
-          </span>
-
-          <div className="min-w-0 flex-1">
-            <h2 className={`${heading.h4} mb-1.5`} style={{ color: color.ink }}>
-              Rather run the audit yourself?
-            </h2>
-            <p className={text.small} style={{ color: color.muted }}>
-              The same 40 checks, written out in full and free to use — no email, no download wall.
-              Work through it with your own site open and keep whatever you find.
+      {/* PRACTICE AREAS */}
+      <Band id="practice-areas">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <Eyebrow>Practice-area pages</Eyebrow>
+            <H2>One page for every case you want, in every city you serve</H2>
+            <Lead>
+              A single “practice areas” page cannot win “car accident lawyer Detroit” and “divorce attorney Tempe” at the same time. Each search needs its own page, written for the person typing it.
+            </Lead>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {INDUSTRY_PAGES.map((ind) => (
+                <Link
+                  key={ind.slug}
+                  href={`/services/law-firm-seo/${ind.slug}`}
+                  className="rounded-full border border-[#d9d6f3] px-4 py-2 text-sm font-bold text-[#0a0f2e] transition hover:border-[#534AB7] hover:text-[#534AB7]"
+                >
+                  {ind.name} SEO
+                </Link>
+              ))}
+            </div>
+            <TextLink href="/resources/law-firm-seo-audit-checklist">Run the 40-check audit yourself — free, no email</TextLink>
+            <p className="mt-3 text-sm" style={{ color: "#5b6472" }}>
+              Planning new pages?{" "}
+              <Link href="/blog/keyword-research-for-law-firms" className="font-semibold underline" style={{ color: "#534AB7" }}>
+                Keyword research for law firms
+              </Link>
             </p>
           </div>
+          <CheckPanel title="What every page needs" items={practiceChecks} />
+        </div>
+      </Band>
 
-          <span
-            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
-            style={{ color: color.primary }}
-          >
-            Open the checklist
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </span>
-        </Link>
-        <p className={`${text.small} mt-4 text-center`} style={{ color: color.muted }}>
-          Planning new pages first?{" "}
-          <Link href="/blog/keyword-research-for-law-firms" className="font-semibold underline" style={{ color: color.primary }}>
-            Keyword research for lawyers and law firms
-          </Link>{" "}
-          — a step-by-step guide using free data.
-        </p>
-      </Section>
+      {/* YMYL & AI ANSWERS */}
+      <Band dark id="ymyl">
+        <BandIntro
+          dark
+          eyebrow="Trust & AI answers"
+          title="Legal SEO built for the AI answer era"
+          lead="Google holds legal topics to its highest trust bar, and AI Overviews now answer legal questions directly. This is how your firm stays visible wherever clients look."
+        />
+        <RuleGrid columns={4}>
+          {ymylItems.map((c) => (
+            <RuleItem key={c.title} dark {...c} />
+          ))}
+        </RuleGrid>
+      </Band>
 
-      {/* FAQ */}
-      <Section tone="surface" width="reading">
-        <SectionHeading eyebrow="FAQ" title="Law firm SEO questions, answered" />
-        <FaqList faqs={FAQS} name="law-firm-seo-faq" />
-      </Section>
+      {/* GOOGLE BUSINESS PROFILE */}
+      <Band id="profile">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <Eyebrow>Google Business Profile & local pack</Eyebrow>
+            <H2>Win the map pack for “lawyer near me”</H2>
+            <Lead>
+              For local legal searches, the map pack sits above the normal results. The firms in it usually have the right primary category, a steady stream of genuine reviews and details that match their website exactly.
+            </Lead>
+            <Lead>I compare your Profile with the three firms above you, so every change has a reason behind it.</Lead>
+          </div>
+          <CheckPanel items={profileChecks} />
+        </div>
+      </Band>
 
-      {/* ── THE COMPLETE STACK (SearchPrex x Codeloci) ──
-          Moved here from the homepage. The partnership is relevant to exactly
-          one of the three homepage personas, and it linked visitors off-site
-          to codeloci.com from the middle of the funnel. On this page the
-          audience is already law firms and the outbound link is a genuine
-          next step rather than a leak. */}
+      {/* PROCESS */}
+      <Band dark id="approach">
+        <BandIntro dark eyebrow="How it works" title="From free tear-down to more consultations" />
+        <Steps steps={process} cta={{ href: "#get-started", label: "Get my free law firm tear-down" }} />
+      </Band>
+
+      {/* LIVE INTAKE DEMO */}
+      <Band muted id="intake-demo">
+        <BandIntro
+          eyebrow="Live demo · AI intake assistant"
+          title="Getting found is half the battle. Capturing every lead is the other half."
+          lead="A 2 a.m. call that goes to voicemail is a case lost. Play a potential client below and watch a 24/7 intake assistant qualify the lead in seconds."
+        />
+        <div className="mx-auto mt-10 max-w-4xl">
+          <IntakeAssistant embedded />
+        </div>
+      </Band>
+
+      {/* FIRST LAW FIRM CASE STUDY */}
+      <Band dark>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center [&>*]:min-w-0">
+          <div>
+            <Eyebrow dark>Selective law firm partnerships</Eyebrow>
+            <H2 dark>Be my first law firm case study</H2>
+            <Lead dark>
+              I have results in local, ecommerce and technical SEO — including local service businesses named in Google’s AI Overviews. I am now bringing the same method to law firms, one firm per city.
+            </Lead>
+            <div className="mt-8">
+              <CheckList dark items={partnershipPoints} />
+            </div>
+            <div className="mt-8">
+              <WhiteButton href="#get-started">Claim a free law firm tear-down</WhiteButton>
+            </div>
+            <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>
+              No obligation · reply within 24 hours · written by the founder
+            </p>
+          </div>
+          <ProofPanel>
+            <ProofImage
+              src="/images/proof/local-dolls-ai-overview-rank1.png"
+              alt="Google results for 'post construction cleaning in Chesterfield, MI' showing D.O.L.L.S. Cleaning cited first in the AI Overview and ranking first organically."
+              width={628}
+              height={322}
+              stage="Local service business · not a law firm"
+              caption="Named first in the AI Overview, #1 organic"
+            />
+            <ProofImage
+              src="/images/proof/mso-gsc-indexing-full.png"
+              alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
+              width={778}
+              height={520}
+              stage="Ecommerce · not a law firm"
+              caption="About 3,000 → 11,549 pages indexed, May–Jul 2026"
+            />
+          </ProofPanel>
+        </div>
+      </Band>
+
+      {/* PRICE, GUARANTEE & WHO DOES THE WORK */}
+      <Band>
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <Eyebrow>Why SearchPrex</Eyebrow>
+            <H2>One firm per city, one person doing the work</H2>
+            <Lead>
+              You work with the person who builds your pages. Every recommendation is made for your city, your practice areas and the firms you compete with.
+            </Lead>
+            <div className="mt-8">
+              <CheckList
+                items={[
+                  "Market exclusivity: one firm per city and practice area",
+                  "A written plan before you pay anything",
+                  "Built to YMYL and bar-advertising rules",
+                  "A plain-English report every Monday",
+                  "Month to month, no long contract",
+                ]}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-5">
+            {LAW_PLAN ? (
+              <PriceCard
+                plan={LAW_PLAN}
+                label="Law firm SEO"
+                note="Where a firm lands in the range depends on the number of practice areas and cities. Month to month; one firm per city and practice area."
+              />
+            ) : null}
+            <GuaranteeCard />
+          </div>
+        </div>
+        <div className="mx-auto mt-14 max-w-4xl">
+          <AuthorCard
+            name="Mubashar Sharif"
+            role="Founder · 5+ years · Semrush & HubSpot certified"
+            quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google&rsquo;s YMYL standards. I&rsquo;ve taken local service businesses to #1 in Google&rsquo;s local results and into its AI Overviews, and I bring that same method to every firm I work with.&rdquo;"
+            imageSrc="/images/mubashar-sharif.jpg"
+            imageAlt="Mubashar Sharif — Founder of SearchPrex"
+            linkedinUrl={LINKEDIN}
+            badges={["Semrush certified", "HubSpot certified"]}
+          />
+        </div>
+      </Band>
+
+      {/* MARKETS — the /locations pages name this page as their parent */}
+      <MarketsBand
+        title="Law firm SEO in the cities I already cover"
+        lead="Each city page covers that market’s legal searches and competition. Not on the list? The tear-down works for any US city."
+      />
+
+      {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      <FaqBand title="Law firm SEO questions, answered">
+        <FaqList faqs={[...CAPSULES, ...FAQS]} name="law-firm-seo-faq" />
+      </FaqBand>
+
+      {/* SearchPrex × Codeloci — relevant only to law firms */}
       <LawFirmStack />
 
-      <ArticleLeadMagnet
-        variant="bottom"
-        source={SOURCE}
-        copy={{
-          headline: "Send me your URL. I’ll show you who’s taking your cases.",
-          sub: "Two fields. A written look at your pages, Business Profile and the firms outranking you in your city — from me, within 24 hours.",
-        }}
-      />
+      <div id="get-started">
+        <ArticleLeadMagnet
+          variant="bottom"
+          source={SOURCE}
+          copy={{
+            headline: "Send me your URL. I’ll show you who’s taking your cases.",
+            sub: "Two fields. A written look at your pages, Business Profile and the firms outranking you in your city — from me, within 24 hours.",
+          }}
+        />
+      </div>
     </main>
-    </>
   );
 }
