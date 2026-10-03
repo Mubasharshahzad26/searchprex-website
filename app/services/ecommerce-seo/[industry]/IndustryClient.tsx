@@ -287,8 +287,9 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
       {/* RELATED */}
       <Band dark>
         <BandIntro dark eyebrow="Keep reading" title="More on ecommerce SEO" />
-        <RuleGrid>
+        <RuleGrid columns={4}>
           <RuleItem dark href="/services/ecommerce-seo" title="Ecommerce SEO services" body="The full approach: indexing, product and category content, structured data and speed." />
+          <RuleItem dark href="/services/ecommerce-seo/product-page-seo" title="Product page SEO" body="Unique product copy, titles and schema at catalog scale, measured batch by batch." />
           {industry.slug === "shopify" ? (
             <RuleItem dark href="/services/technical-seo" title="Technical SEO" body="Crawling, indexing and Core Web Vitals, fixed at the template." />
           ) : (

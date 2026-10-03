@@ -72,7 +72,7 @@ const PAIN_POINTS = [
 
 const PILLARS = [
   { title: "Technical foundation", body: "Crawl budget, faceted navigation rules, canonicals, sitemap architecture and Core Web Vitals on WooCommerce, Shopify and custom stacks.", href: "#indexing" },
-  { title: "Product pages at scale", body: "Unique descriptions, Product markup and internal links across thousands of SKUs — published in batches and measured.", href: "#indexing" },
+  { title: "Product pages at scale", body: "Unique descriptions, Product markup and internal links across thousands of SKUs — published in batches and measured.", href: "/services/ecommerce-seo/product-page-seo" },
   { title: "Category page authority", body: "Thin collection pages turned into buying guides: intro copy, comparison tables and FAQs a shopper actually uses.", href: "#platforms" },
   { title: "Structured data", body: "Product, Offer, Review, Breadcrumb and FAQ schema mapped to real on-page data. No fabricated ratings.", href: "#indexing" },
   { title: "Indexing recovery", body: "Sitemap-to-Search-Console diffing that shows which URLs Google declined and why — then the fix for each reason.", href: "#indexing" },
@@ -237,7 +237,8 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
               Most stuck stores don’t have a ranking problem, they have an indexing one. Google found the pages and decided they were not worth keeping. Resubmitting rarely helps; fixing the reason does.
             </Lead>
             <Lead>I sort every unindexed URL by the reason Search Console gives, fix the highest-revenue products first and re-measure before the next batch.</Lead>
-            <TextLink href="/blog/google-indexing-api-python">Why the Indexing API is not a shortcut</TextLink>
+            <TextLink href="/services/technical-seo/indexing-recovery">Indexing recovery service</TextLink>
+            <div><TextLink href="/services/ecommerce-seo/product-page-seo">Product page SEO at catalog scale</TextLink></div>
           </div>
           <CheckPanel items={indexingChecks} />
         </div>
