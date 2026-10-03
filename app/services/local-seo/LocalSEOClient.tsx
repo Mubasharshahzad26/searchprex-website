@@ -57,7 +57,7 @@ const SOURCE = "service:local-seo";
 const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
 
 const included = [
-  { title: "Google Business Profile", body: "Categories, services, photos, posts and Q&A set up for the searches that bring calls.", href: "#profile" },
+  { title: "Google Business Profile", body: "Categories, services, photos, posts and reviews set up for the searches that bring calls.", href: "/services/local-seo/google-business-profile-optimization" },
   { title: "Website & service-area pages", body: "A real page for each service and each city you serve — never a find-and-replace copy.", href: "#website" },
   { title: "Reviews", body: "A steady, policy-safe way to ask genuine customers, because recent reviews move the map pack.", href: "#trust" },
   { title: "Citations & business data", body: "Name, address, phone and hours made identical on Google, Bing, Apple Maps, Yelp and your niche directories.", href: "#trust" },
@@ -214,7 +214,8 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
               For “near me” searches, the map pack sits above the normal results, and the Profile is what people tap. It works best when it agrees with your website, carries recent reviews and lists the services you actually want calls for.
             </Lead>
             <Lead>I look at the Profile next to the three businesses ranking above you, so every change has a reason behind it.</Lead>
-            <TextLink href="/resources/google-business-profile-checklist">Free Google Business Profile checklist (23 checks)</TextLink>
+            <TextLink href="/services/local-seo/google-business-profile-optimization">Google Business Profile optimization service</TextLink>
+            <div><TextLink href="/resources/google-business-profile-checklist">Free Google Business Profile checklist (23 checks)</TextLink></div>
           </div>
           <CheckPanel items={profileChecks} />
         </div>

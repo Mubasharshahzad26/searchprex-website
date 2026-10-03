@@ -282,7 +282,13 @@ export function ServiceHero({
           <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
             <div>
               <Eyebrow dark>{eyebrow}</Eyebrow>
-              <h1 className="mt-4 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl" style={{ color: "#fff" }}>
+              {/* A long keyword H1 steps down a size so it stays within four lines. */}
+              <h1
+                className={`mt-4 font-black leading-[1.08] tracking-tight ${
+                  title.length + accent.length > 60 ? "text-3xl sm:text-4xl lg:text-5xl" : "text-4xl sm:text-5xl lg:text-6xl"
+                }`}
+                style={{ color: "#fff" }}
+              >
                 {title} <span style={{ color: LAVENDER }}>{accent}</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.78)" }}>
