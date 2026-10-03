@@ -35,9 +35,9 @@ export const SIGNS: Array<{ title: string; body: string }> = [
 ];
 
 /** The areas the audit covers — the dark "what I audit" band. */
-export const AREAS: Array<{ title: string; body: string }> = [
+export const AREAS: Array<{ title: string; body: string; href?: string }> = [
   { title: "Crawlability", body: "robots.txt, crawl traps, faceted and parameter URLs, and where Googlebot actually spends its visits." },
-  { title: "Indexing", body: "Every URL in Search Console’s Pages report sorted by the reason Google gives, and the fix for each reason." },
+  { title: "Indexing", body: "Every URL in Search Console’s Pages report sorted by the reason Google gives, and the fix for each reason.", href: "/services/technical-seo/indexing-recovery" },
   { title: "Core Web Vitals", body: "LCP, INP and CLS from real-user data, traced to the template that causes them." },
   { title: "Structured data", body: "Product, Article, FAQ, Breadcrumb and Organization schema validated against what the page actually shows." },
   { title: "Site architecture", body: "Crawl depth, orphan pages and internal links, so the pages that earn money are reached first." },

@@ -159,7 +159,7 @@ export default function AuditClient() {
         />
         <RuleGrid columns={4}>
           {AREAS.map((a) => (
-            <RuleItem key={a.title} dark title={a.title} body={a.body} />
+            <RuleItem key={a.title} dark title={a.title} body={a.body} href={a.href} />
           ))}
         </RuleGrid>
       </Band>
