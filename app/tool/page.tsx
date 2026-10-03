@@ -103,12 +103,12 @@ export default function ToolPage() {
         <section className="bg-white pb-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
+              <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
                 NicheSEOPro Tool
               </span>
               <h1 className="mt-4 text-4xl font-bold text-[#0a0f2e] sm:text-5xl lg:text-6xl">
                 The SEO Tool Built for <br className="hidden sm:block" />
-                <span className="text-[#2563eb]">Your Industry</span>
+                <span className="text-[#534AB7]">Your Industry</span>
               </h1>
               <p className="mx-auto mt-6 max-w-3xl text-xl text-[#64748b]">
                 Generic SEO tools give generic advice. NicheSEOPro understands law firms, 
@@ -118,7 +118,7 @@ export default function ToolPage() {
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   href="#cta"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3C3489]"
                 >
                   Start Free Trial
                   <ArrowRight className="h-4 w-4" />
@@ -154,7 +154,7 @@ export default function ToolPage() {
         {/* Keyword Magic Tool Section */}
         <section className="bg-white py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-2xl bg-gradient-to-br from-[#2563eb]/5 to-[#534AB7]/5 p-8 sm:p-12 border border-[#2563eb]/10">
+            <div className="rounded-2xl bg-gradient-to-br from-[#534AB7]/5 to-[#534AB7]/10 p-8 sm:p-12 border border-[#534AB7]/15">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
                   Keyword Magic Tool
@@ -220,7 +220,7 @@ export default function ToolPage() {
         </section>
  
         {/* CTA */}
-        <section className="bg-[#2563eb] py-20">
+        <section className="bg-[#0a0f2e] py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Ready to Try NicheSEOPro?

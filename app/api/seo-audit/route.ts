@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
               </tr>
               <tr style="background: #f8fafc;">
                 <td style="padding: 8px 0; color: #64748b; font-size: 14px;">Email</td>
-                <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #2563eb; font-size: 14px;">${email}</a></td>
+                <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #534AB7; font-size: 14px;">${email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #64748b; font-size: 14px;">Phone</td>
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
               </tr>
               <tr style="background: #f8fafc;">
                 <td style="padding: 8px 0; color: #64748b; font-size: 14px;">Website</td>
-                <td style="padding: 8px 0;"><a href="${websiteUrl}" style="color: #2563eb; font-size: 14px;">${websiteUrl}</a></td>
+                <td style="padding: 8px 0;"><a href="${websiteUrl}" style="color: #534AB7; font-size: 14px;">${websiteUrl}</a></td>
               </tr>
             </table>
           </div>
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
             <h2 style="color: #0f172a; font-size: 16px; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9;">
               🏢 Business Info
             </h2>
-            <p style="margin: 0 0 8px;"><span style="color: #64748b; font-size: 14px;">Business Type: </span><strong style="color: #2563eb;">${businessType}</strong></p>
+            <p style="margin: 0 0 8px;"><span style="color: #64748b; font-size: 14px;">Business Type: </span><strong style="color: #534AB7;">${businessType}</strong></p>
           </div>
 
           <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; margin-bottom: 24px;">
@@ -97,14 +97,14 @@ export async function POST(req: NextRequest) {
             </h2>
             <div style="display: flex; flex-wrap: wrap; gap: 8px;">
               ${problems && problems.length > 0
-                ? problems.map((p: string) => `<span style="background: #eff6ff; color: #2563eb; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block; margin: 4px;">${p}</span>`).join("")
+                ? problems.map((p: string) => `<span style="background: #f4f3ff; color: #534AB7; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block; margin: 4px;">${p}</span>`).join("")
                 : '<span style="color: #94a3b8; font-size: 14px;">Not specified</span>'
               }
             </div>
           </div>
 
           <div style="text-align: center;">
-            <a href="mailto:${email}" style="background: #2563eb; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; display: inline-block;">
+            <a href="mailto:${email}" style="background: #534AB7; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; display: inline-block;">
               Reply to ${fullName} →
             </a>
           </div>

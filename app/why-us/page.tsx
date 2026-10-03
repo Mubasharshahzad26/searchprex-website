@@ -112,12 +112,12 @@ export default function WhyUsPage() {
         <section className="bg-[#eaecf3] pb-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
+              <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
                 Why SearchPrex
               </span>
               <h1 className="mt-4 text-4xl font-bold text-[#0a0f2e] sm:text-5xl lg:text-6xl">
                 Why Businesses <br className="hidden sm:block" />
-                <span className="text-[#2563eb]">Trust SearchPrex</span>
+                <span className="text-[#534AB7]">Trust SearchPrex</span>
               </h1>
               <p className="mx-auto mt-6 max-w-3xl text-xl text-[#475569]">
                 We&apos;re not your typical SEO agency. No smoke and mirrors, no
@@ -137,8 +137,8 @@ export default function WhyUsPage() {
                   key={reason.title}
                   className="rounded-3xl bg-white p-8 shadow-lg"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#2563eb]/10">
-                    <reason.icon className="h-7 w-7 text-[#2563eb]" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#534AB7]/10">
+                    <reason.icon className="h-7 w-7 text-[#534AB7]" />
                   </div>
                   <h2 className="mt-6 text-xl font-bold text-[#0a0f2e]">
                     {reason.title}
@@ -146,7 +146,7 @@ export default function WhyUsPage() {
                   <p className="mt-3 text-[#64748b] leading-relaxed">
                     {reason.description}
                   </p>
-                  <p className="mt-4 inline-block rounded-full bg-[#f1f3f9] px-4 py-1.5 text-sm font-bold text-[#2563eb]">
+                  <p className="mt-4 inline-block rounded-full bg-[#f1f3f9] px-4 py-1.5 text-sm font-bold text-[#534AB7]">
                     {reason.stats}
                   </p>
                 </div>
@@ -212,8 +212,8 @@ export default function WhyUsPage() {
           </div>
         </section>
  
-        {/* Call CTA — blue bg, white text is CORRECT, kept */}
-        <section className="bg-[#2563eb] py-20">
+        {/* Call CTA — deep navy bg, white text */}
+        <section className="bg-[#0a0f2e] py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <Phone className="mx-auto h-16 w-16 text-white/20" />
             <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">

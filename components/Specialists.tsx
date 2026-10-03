@@ -146,7 +146,7 @@ export default function Specialists() {
 
                 {/* Win Metric */}
                 <div className="mb-4 rounded-lg bg-[#f7f8fc] p-3">
-                  <p className="text-2xl font-black text-[#1a3c8f]">
+                  <p className="text-2xl font-black text-[#534AB7]">
                     {specialist.win}
                   </p>
                   <p className="text-xs text-[#64748b]">{specialist.winLabel}</p>
@@ -177,7 +177,7 @@ export default function Specialists() {
           >
             <p className="mb-4 text-3xl font-black text-white">200+</p>
             <p className="mb-6 text-white">More Verified Specialists</p>
-            <button className="group flex items-center gap-2 rounded-lg bg-[#2563eb] px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]">
+            <button className="group flex items-center gap-2 rounded-lg bg-[#534AB7] px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#534AB7]">
               Discover All
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>

@@ -78,7 +78,7 @@ export default function BulkContentGen() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your content prompt here... e.g., 'Personal injury lawyer tips for car accident cases'"
-            className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] placeholder-[#9ca3af] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20"
+            className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] placeholder-[#9ca3af] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
             rows={4}
           />
         </div>
@@ -95,7 +95,7 @@ export default function BulkContentGen() {
               max="10"
               value={numberOfPieces}
               onChange={(e) => setNumberOfPieces(parseInt(e.target.value))}
-              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20"
+              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
             />
           </div>
  
@@ -107,7 +107,7 @@ export default function BulkContentGen() {
             <select
               value={contentType}
               onChange={(e) => setContentType(e.target.value)}
-              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20"
+              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
             >
               <option value="blog-post">Blog Post</option>
               <option value="landing-page">Landing Page</option>
@@ -124,7 +124,7 @@ export default function BulkContentGen() {
       <button
         onClick={handleGenerateContent}
         disabled={loading || !prompt}
-        className="w-full rounded-lg bg-[#2563eb] px-6 py-3 font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full rounded-lg bg-[#534AB7] px-6 py-3 font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3C3489] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {loading && <Loader className="h-4 w-4 animate-spin" />}
         {loading ? 'Generating...' : 'Generate Content'}
@@ -155,13 +155,13 @@ export default function BulkContentGen() {
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={handleCopyContent}
-              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#2563eb] px-4 py-2 font-bold text-[#2563eb] transition-all hover:bg-[#2563eb] hover:text-white"
+              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#534AB7] px-4 py-2 font-bold text-[#534AB7] transition-all hover:bg-[#534AB7] hover:text-white"
             >
               Copy Content
             </button>
             <button
               onClick={handleDownloadContent}
-              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#2563eb] px-4 py-2 font-bold text-[#2563eb] transition-all hover:bg-[#2563eb] hover:text-white"
+              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#534AB7] px-4 py-2 font-bold text-[#534AB7] transition-all hover:bg-[#534AB7] hover:text-white"
             >
               Download
             </button>

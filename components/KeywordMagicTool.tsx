@@ -93,14 +93,14 @@ export default function KeywordMagicTool() {
               onChange={(e) => setKeyword(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Enter keyword... e.g., 'personal injury lawyer'"
-              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 pl-10 text-[#0a0f2e] placeholder-[#9ca3af] focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20"
+              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 pl-10 text-[#0a0f2e] placeholder-[#9ca3af] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
             />
             <Search className="absolute left-3 top-3.5 h-5 w-5 text-[#9ca3af]" />
           </div>
           <button
             onClick={handleSearchKeyword}
             disabled={loading || !keyword}
-            className="rounded-lg bg-[#2563eb] px-6 py-3 font-bold text-white transition-all hover:bg-[#1a3c8f] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="rounded-lg bg-[#534AB7] px-6 py-3 font-bold text-white transition-all hover:bg-[#3C3489] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             {loading && <Loader className="h-4 w-4 animate-spin" />}
             {loading ? 'Searching...' : 'Search'}
@@ -115,7 +115,7 @@ export default function KeywordMagicTool() {
               <button
                 key={idx}
                 onClick={() => handleQuickSearch(term)}
-                className="rounded-full border border-[#e5e7eb] bg-white px-3 py-1.5 text-xs font-medium text-[#0a0f2e] transition-all hover:border-[#2563eb] hover:bg-[#2563eb]/5"
+                className="rounded-full border border-[#e5e7eb] bg-white px-3 py-1.5 text-xs font-medium text-[#0a0f2e] transition-all hover:border-[#534AB7] hover:bg-[#534AB7]/5"
               >
                 {term}
               </button>
@@ -147,8 +147,8 @@ export default function KeywordMagicTool() {
                     {formatNumber(keywordData.searchVolume)}
                   </p>
                 </div>
-                <div className="rounded-full bg-blue-100 p-3">
-                  <TrendingUp className="h-5 w-5 text-[#2563eb]" />
+                <div className="rounded-full bg-[#534AB7]/10 p-3">
+                  <TrendingUp className="h-5 w-5 text-[#534AB7]" />
                 </div>
               </div>
             </div>
@@ -226,7 +226,7 @@ export default function KeywordMagicTool() {
                 navigator.clipboard.writeText(keywordData.keyword);
                 alert('Keyword copied!');
               }}
-              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#2563eb] px-4 py-2 font-bold text-[#2563eb] transition-all hover:bg-[#2563eb] hover:text-white"
+              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#534AB7] px-4 py-2 font-bold text-[#534AB7] transition-all hover:bg-[#534AB7] hover:text-white"
             >
               Copy Keyword
             </button>

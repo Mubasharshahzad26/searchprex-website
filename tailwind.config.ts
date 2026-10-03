@@ -11,9 +11,15 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          DEFAULT: "#1a3c8f",
+          DEFAULT: "#0a0f2e",
           dark: "#0a0f2e",
-          light: "#2563eb",
+          light: "#1e295d",
+        },
+        brand: {
+          purple: "#534AB7",
+          purpleDark: "#3C3489",
+          navy: "#0a0f2e",
+          green: "#1a7d59",
         },
       },
       fontFamily: {

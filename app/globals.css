@@ -10,42 +10,42 @@
   --card-foreground: #0a0f2e;
   --popover: #ffffff;
   --popover-foreground: #0a0f2e;
-  --primary: #1a3c8f;            /* ⚠️ was corrupted — restored. NOTE: this is BLUE; your brand is purple #534AB7 — see note below */
+  --primary: #534AB7;            /* Brand Purple / Indigo */
   --primary-foreground: #ffffff;
   --secondary: #f7f8fc;
   --secondary-foreground: #0a0f2e;
   --muted: #f7f8fc;
-  --muted-foreground: #64748b;
-  --accent: #2563eb;             /* also BLUE — see note */
+  --muted-foreground: #566070;
+  --accent: #534AB7;             /* Brand Accent */
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e5e7eb;
   --input: #e5e7eb;
-  --ring: #2563eb;
+  --ring: #534AB7;
   --radius: 0.75rem;
 }
  
 .dark {
   --background: #0a0f2e;
   --foreground: #ffffff;
-  --card: #1a3c8f;               /* restored */
+  --card: #131b4d;
   --card-foreground: #ffffff;
   --popover: #0a0f2e;
   --popover-foreground: #ffffff;
-  --primary: #2563eb;
+  --primary: #6c63ff;
   --primary-foreground: #ffffff;
-  --secondary: #1a3c8f;          /* restored */
+  --secondary: #131b4d;
   --secondary-foreground: #ffffff;
-  --muted: #1a3c8f;              /* restored */
+  --muted: #131b4d;
   --muted-foreground: #94a3b8;
-  --accent: #2563eb;
+  --accent: #6c63ff;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #1a3c8f;             /* restored */
-  --input: #1a3c8f;              /* restored */
-  --ring: #2563eb;
+  --border: #1e295d;
+  --input: #1e295d;
+  --ring: #6c63ff;
 }
  
 @theme inline {

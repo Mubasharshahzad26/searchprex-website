@@ -217,7 +217,7 @@ export default function Nav() {
                         aria-haspopup="true"
                         aria-expanded={isOpen}
                         onClick={() => setActiveDropdown(isOpen ? null : link.label)}
-                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
                       >
                         {link.label}
                         {link.hasDropdown && (
@@ -228,7 +228,7 @@ export default function Nav() {
                       <Link
                         href={link.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
                       >
                         {link.label}
                         {link.hasDropdown && (
@@ -288,7 +288,7 @@ export default function Nav() {
                                   href={item.href}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                                  className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                                 >
                                   {content}
                                 </a>
@@ -300,7 +300,7 @@ export default function Nav() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setActiveDropdown(null)}
-                                className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                                className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                               >
                                 {content}
                               </Link>
@@ -372,7 +372,7 @@ export default function Nav() {
                       <Link
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                        className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                       >
                         {link.label}
                       </Link>
@@ -400,7 +400,7 @@ export default function Nav() {
                                 href={item.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                                className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
                               >
                                 {content}
                               </a>
@@ -412,7 +412,7 @@ export default function Nav() {
                               key={item.label}
                               href={item.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                              className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
                             >
                               {content}
                             </Link>

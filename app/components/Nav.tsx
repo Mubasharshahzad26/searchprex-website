@@ -106,7 +106,7 @@ export default function Nav() {
                 >
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#1a3c8f]"
+                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
                   >
                     {link.label}
                     {link.hasDropdown && <ChevronDown className="h-3 w-3" />}
@@ -123,7 +123,7 @@ export default function Nav() {
                         <Link
                           key={item.label}
                           href={item.href}
-                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                         >
                           <span>{item.label}</span>
                           {item.badge && (
@@ -212,7 +212,7 @@ export default function Nav() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#1a3c8f]"
+                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
                     >
                       {link.label}
                     </Link>
@@ -223,7 +223,7 @@ export default function Nav() {
                             key={item.label}
                             href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#1a3c8f]"
+                            className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
                           >
                             {item.label}
                             {item.badge && (

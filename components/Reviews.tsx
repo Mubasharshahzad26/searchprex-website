@@ -96,7 +96,7 @@ export default function Reviews() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1a3c8f] text-sm font-bold text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#534AB7] text-sm font-bold text-white">
                   {review.initials}
                 </div>
                 <div>

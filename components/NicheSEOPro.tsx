@@ -63,16 +63,16 @@ export default function NicheSEOPro() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#2563eb]/20 px-4 py-1.5">
-              <Sparkles className="h-4 w-4 text-[#2563eb]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-[#2563eb]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#534AB7]/20 px-4 py-1.5">
+              <Sparkles className="h-4 w-4 text-[#534AB7]" />
+              <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">
                 Introducing NicheSEOPro
               </span>
             </div>
  
             <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
               The SEO Tool Built for{" "}
-              <span className="text-[#2563eb]">Niche Businesses</span>
+              <span className="text-[#534AB7]">Niche Businesses</span>
             </h2>
  
             <p className="mt-6 text-lg text-white/70 leading-relaxed">
@@ -92,8 +92,8 @@ export default function NicheSEOPro() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#2563eb]/20">
-                    <feature.icon className="h-4 w-4 text-[#2563eb]" />
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#534AB7]/20">
+                    <feature.icon className="h-4 w-4 text-[#534AB7]" />
                   </div>
                   <div>
                     <p className="font-medium text-white">{feature.title}</p>
@@ -111,7 +111,7 @@ export default function NicheSEOPro() {
                 href="https://nicheseopro.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#1a3c8f]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3C3489]"
               >
                 Start Free Trial
                 <ArrowRight className="h-4 w-4" />
@@ -193,7 +193,7 @@ export default function NicheSEOPro() {
                       (height, i) => (
                         <div
                           key={i}
-                          className="flex-1 rounded-t bg-[#2563eb]"
+                          className="flex-1 rounded-t bg-[#534AB7]"
                           style={{ height: `${height}%` }}
                         />
                       )
@@ -227,7 +227,7 @@ export default function NicheSEOPro() {
             </div>
  
             {/* Floating Badge */}
-            <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#2563eb] px-4 py-2 shadow-lg">
+            <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#534AB7] px-4 py-2 shadow-lg">
               <p className="text-xs font-bold text-white">Free 14-Day Trial</p>
             </div>
           </motion.div>

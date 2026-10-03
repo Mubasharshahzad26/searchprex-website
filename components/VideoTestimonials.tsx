@@ -53,7 +53,7 @@ export default function VideoTestimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`overflow-hidden bg-[#1a3c8f] flex flex-col ${radius.card}`}
+              className={`overflow-hidden bg-[#0a0f2e] flex flex-col ${radius.card}`}
             >
               {/* Video Thumbnail Area (Click to play placeholder) */}
               <div className="group relative aspect-video w-full bg-slate-800 cursor-pointer overflow-hidden">

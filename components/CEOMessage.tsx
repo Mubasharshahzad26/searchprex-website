@@ -14,7 +14,7 @@ export default function CEOMessage() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <span className="inline-block rounded-full bg-[#2563eb]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563eb]">
+          <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
             From Our Founder
           </span>
           <h2 className="mt-4 text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
@@ -31,13 +31,13 @@ export default function CEOMessage() {
         >
           <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-white p-8 shadow-xl sm:p-12">
             {/* Quote Icon */}
-            <Quote className="absolute right-8 top-8 h-24 w-24 text-[#2563eb]/5" />
+            <Quote className="absolute right-8 top-8 h-24 w-24 text-[#534AB7]/5" />
 
             <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-start">
               {/* CEO Photo */}
               <div className="flex-shrink-0">
                 <div className="relative">
-                  <div className="h-40 w-40 overflow-hidden rounded-2xl bg-gradient-to-br from-[#1a3c8f] to-[#2563eb]">
+                  <div className="h-40 w-40 overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a0f2e] to-[#534AB7]">
                     <Image
                       src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
                       alt="Mubashar Sharif - CEO & Founder of SearchPrex"
@@ -46,7 +46,7 @@ export default function CEOMessage() {
                       className="h-full w-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-300"
                     />
                   </div>
-                  <div className="absolute -bottom-3 -right-3 rounded-xl bg-[#2563eb] px-3 py-1.5 text-xs font-bold text-white shadow-lg">
+                  <div className="absolute -bottom-3 -right-3 rounded-xl bg-[#534AB7] px-3 py-1.5 text-xs font-bold text-white shadow-lg">
                     CEO & Founder
                   </div>
                 </div>
