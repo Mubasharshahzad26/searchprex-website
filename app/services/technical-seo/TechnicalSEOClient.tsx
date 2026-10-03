@@ -28,6 +28,7 @@ import { ArrowRight, Search, Wrench } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ProofImage from "@/components/ProofImage";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
 import WhySearchPrex from "@/components/WhySearchPrex";
 import {
   AnswerCapsules,
@@ -156,6 +157,32 @@ export default function TechnicalSEOClient() {
       />
 
       <StatStrip stats={stats} />
+
+      {/* Evidence before explanation, from a project the indexing case study
+          further down doesn't cover. */}
+      <ServiceProofStrip
+        title="Technical SEO on a money-transfer site: a year of clicks, and an AI Overview citation"
+        moreHref="/case-studies/fintech/remit-choice"
+        moreLabel="Read the Remit Choice case study"
+        shots={[
+          {
+            src: "/images/proof/remit-gsc-2024.png",
+            alt: "Google Search Console performance for remitchoice.com in 2024: 113K total clicks and 5.76M total impressions.",
+            width: 536,
+            height: 267,
+            figure: "113K",
+            figureLabel: "organic clicks in 2024",
+            caption: "Remit Choice — Search Console, full year 2024, with 5.76M impressions.",
+          },
+          {
+            src: "/images/proof/remit-ai-overview-ghana.png",
+            alt: "Google AI Overview for 'send money to ghana zero fees' listing Remit Choice among the services offering zero-fee transfers to Ghana.",
+            width: 1355,
+            height: 609,
+            caption: "Remit Choice named in Google's AI Overview for \"send money to ghana zero fees\".",
+          },
+        ]}
+      />
 
       {/* 02 — THE PROBLEM · Interest */}
       <Section>

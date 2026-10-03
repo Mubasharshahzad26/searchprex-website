@@ -22,6 +22,7 @@
 // city grid that left out all eight Kansas cities.
 
 import Image from "next/image";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
 import Link from "next/link";
 import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
@@ -168,6 +169,34 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
       />
 
       <StatStrip stats={stats} />
+
+      {/* Evidence before explanation. There is no law firm case study yet, so
+          these are local service businesses and the footnote says so in plain
+          words rather than letting the strip imply otherwise. */}
+      <ServiceProofStrip
+        title="Local results from the same method we'd use for your firm"
+        moreHref="/case-studies"
+        moreLabel="See every case study"
+        shots={[
+          {
+            src: "/images/proof/local-dolls-gsc-comparison.jpg",
+            alt: "Google Search Console comparison for D.O.L.L.S. Cleaning: 264 clicks and 106K impressions in July 2025 against 192 clicks and 41K impressions in June 2025.",
+            width: 626,
+            height: 239,
+            figure: "192 → 264",
+            figureLabel: "monthly clicks, June → July 2025",
+            caption: "D.O.L.L.S. Cleaning, Michigan — Search Console. Impressions went from 41K to 106K.",
+          },
+          {
+            src: "/images/proof/local-hvac-ai-overview.png",
+            alt: "Google AI Overview for 'free cost estimation for ac installation in simi valley california' naming HVAC Services Team among businesses offering free estimates.",
+            width: 717,
+            height: 292,
+            caption: "HVAC Services Team named in Google's AI Overview for a Simi Valley AC installation search.",
+          },
+        ]}
+        footnote="These are local service businesses, not law firms — there is no published law firm case study on this site yet. The map pack and AI Overview work behind them is the same work we do for firms."
+      />
 
       {/* THE PROBLEM — four checks a managing partner can run today */}
       <Section>

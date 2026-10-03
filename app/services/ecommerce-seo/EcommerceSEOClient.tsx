@@ -24,6 +24,7 @@ import GuideMagnet from "@/components/GuideMagnet";
 import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { CAPSULES, FAQS } from "./data";
@@ -191,6 +192,26 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
       />
 
       <StatStrip stats={HERO_STATS} />
+
+      {/* Evidence before explanation, using a capture the case-study section
+          further down doesn't already show. */}
+      <ServiceProofStrip
+        title="An outdoor store's US clicks, before and after the rebuild"
+        moreHref="/case-studies/ecommerce/michigan-outdoor-sports"
+        moreLabel="Read the Michigan Outdoor Sports case study"
+        shots={[
+          {
+            src: "/images/clicks-comaprsion-after-run-mso-autopilot.PNG",
+            alt: "Google Search Console comparison for michigansportsoutdoor.com, United States only: 322 clicks from 13 June to 29 August 2026 against 224 clicks from 1 April to 12 June 2026.",
+            width: 1366,
+            height: 520,
+            figure: "224 → 322",
+            figureLabel: "US organic clicks",
+            delta: "+44%",
+            caption: "Michigan Sports & Outdoor — Search Console, United States only: 1 Apr–12 Jun vs 13 Jun–29 Aug 2026.",
+          },
+        ]}
+      />
 
       {/* ── QUICK ANSWERS ──
           Answer capsules for AI Overviews and answer engines. The results answer

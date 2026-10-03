@@ -27,6 +27,7 @@ import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { caseStudies } from "@/app/case-studies/data";
@@ -136,6 +137,25 @@ export default function LocalSEOClient({ guide }: { guide: Guide }) {
       />
 
       <StatStrip stats={stats} />
+
+      {/* Evidence before explanation: a capture that isn't already in the
+          proof section further down. */}
+      <ServiceProofStrip
+        title="A Texas roofer's Search Console, before and after"
+        moreHref="/case-studies/roofing/mammoth-roofing"
+        moreLabel="Read the Mammoth Roofing case study"
+        shots={[
+          {
+            src: "/images/mammoth-roofing-comparison.JPG",
+            alt: "Google Search Console comparison for mammothroofs.com: 45.2K impressions and 210 clicks in the last 28 days against 16.9K impressions and 197 clicks in the previous 28 days.",
+            width: 626,
+            height: 350,
+            figure: "16.9K → 45.2K",
+            figureLabel: "Google impressions, 28 days vs the 28 before",
+            caption: "Mammoth Roofing, Texas — Search Console, October 2024. Clicks went from 197 to 210 over the same period.",
+          },
+        ]}
+      />
 
       {/* 02 — THE PROBLEM · Interest */}
       <Section>

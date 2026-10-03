@@ -49,11 +49,11 @@ export const PROOF_META: Record<string, ProofMeta> = {
   // D.O.L.L.S. Cleaning
   "/images/proof/local-dolls-ai-overview-rank1.png": { source: "Google AI Overview" },
   "/images/proof/local-dolls-rank-1-and-2.png": { source: "Google Search" },
-  "/images/proof/local-dolls-gsc-comparison.jpg": { source: "Google Search Console", when: "July vs June 2025" },
+  "/images/proof/local-dolls-gsc-comparison.jpg": { source: "Google Search Console", domain: "dollscleaning.com", when: "July vs June 2025" },
 
   // Other local projects
   "/images/mammoth-roofing-gsc.JPG": { source: "Google Search Console" },
-  "/images/mammoth-roofing-comparison.JPG": { source: "Google Search Console" },
+  "/images/mammoth-roofing-comparison.JPG": { source: "Google Search Console", domain: "mammothroofs.com", when: "28 days to Oct 2024" },
   "/images/proof/local-mammoth-texas.png": { source: "Google Search" },
   "/images/carpet-cleaning-service.JPG": { source: "Google Search" },
   "/images/door-doctor-google-my-business.JPG": { source: "Google Business Profile" },
