@@ -76,7 +76,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: 2,
-    client: "Local HVAC Services",
+    client: "HVAC Services Team",
     // Was "Top 3 map pack" and "+5.7x organic calls in 60 days". The owner
     // confirmed in October 2026 that there is no screenshot for either; the
     // captures show the AI Overview citation and a page-one organic ranking.
@@ -273,28 +273,31 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: 9,
-    client: "HVAC Team",
-    seoTitle: "Simi Valley HVAC SEO Case Study: +40 Positions",
-    verifiedVia: "Google Search Console",
+    // The same client as "HVAC Services Team" above (confirmed by the owner,
+    // October 2026); this entry covers its blog's organic rankings. It used to
+    // appear as a separate client and claimed "+40 positions", "+0.5% CTR" and
+    // "pages 4–5" with Search Console as the source, but its screenshots are
+    // Google results pages that show none of those figures.
+    client: "HVAC Services Team — blog rankings",
+    seoTitle: "Simi Valley HVAC Blog SEO Case Study: Page One",
     seoType: "Local SEO",
     industry: "HVAC",
     location: "Simi Valley, CA",
-    headline: "Jumped 40 positions to page one for primary service keywords.",
+    headline: "The client's blog on page one for Simi Valley AC searches, above directories and national sites.",
     badgeColor: "#dc2626",
     badgeBg: "#fee2e2",
     image: "/images/hvac-ranking.JPG",
     featured: false,
     slug: { industry: "hvac", client: "hvac-team" },
     challenge:
-      "An HVAC company in Simi Valley, CA was buried on pages 4–5 for its primary service keywords — effectively invisible to local customers.",
+      "HVAC Services Team, a Simi Valley, CA company, needed its service and blog pages to show up for the AC searches local customers make before they call.",
     solution:
       "We cleaned up technical SEO issues, rebuilt the core service pages, and strengthened local relevance signals for Simi Valley searches.",
     outcome:
-      "A +40 position jump to page one for primary keywords, with CTR improving as rankings climbed. Verified in Google Search Console.",
+      "The blog ranks on page one for \"local ac installation Simi Valley\" and as the first organic result, below the ads, for \"replace AC in Simi Valley before summer 2026\", as the screenshots show.",
     metrics: [
-      { v: "+40", l: "Position jump" },
-      { v: "Page 1", l: "Ranking" },
-      { v: "+0.5%", l: "CTR" },
+      { v: "Page 1", l: "local AC installation" },
+      { v: "1st organic", l: "replace AC in Simi Valley" },
     ],
   },
   {

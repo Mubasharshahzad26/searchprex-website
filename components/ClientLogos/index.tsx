@@ -59,7 +59,7 @@ const FEATURED: Featured[] = [
   },
   {
     name: "HVAC Services Team",
-    caseClient: "Local HVAC Services",
+    caseClient: "HVAC Services Team",
     logo: { src: "/images/clients/hvac-services-team.webp", width: 500, height: 500 },
   },
   { name: "Doll's Cleaning", caseClient: "Doll's Cleaning" },

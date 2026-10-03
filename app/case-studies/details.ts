@@ -276,7 +276,7 @@ export const EXTRA_PROOF: Record<string, ProofShot[]> = {
     { src: "/images/glendora-kitchens-top-raking.JPG", width: 700, height: 375, alt: "Google results showing the kitchen cabinets client in top positions.", caption: "Top rankings for kitchen remodel searches" },
   ],
   "hvac-team": [
-    { src: "/images/hvac-ranking.JPG", width: 600, height: 334, alt: "Google results showing HVAC Team on page one for its primary service keywords.", caption: "Page one for primary service keywords" },
-    { src: "/images/rank-hvac.JPG", width: 586, height: 321, alt: "Google ranking screenshot for HVAC Team.", caption: "Ranking snapshot" },
+    { src: "/images/hvac-ranking.JPG", width: 600, height: 334, alt: "Google results for 'local ac installation Simi Valley' with the HVAC Services Team blog on page one.", caption: "Page one for local AC installation in Simi Valley" },
+    { src: "/images/rank-hvac.JPG", width: 586, height: 321, alt: "Google results for 'replace AC in Simi Valley before summer 2026' with the HVAC Services Team blog as the first organic result below two ads.", caption: "First organic result, below the ads" },
   ],
 };
