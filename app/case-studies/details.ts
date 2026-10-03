@@ -87,7 +87,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
     fixes: STORE_FIXES,
     proof: [
       {
-        src: "/images/proof/smk-revenue-before.png",
+        src: "/images/proof/smk-revenue-before-v2.png",
         figure: "$5,832", figureLabel: "net sales in April",
         width: 1366,
         height: 607,
@@ -95,7 +95,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
         caption: "April 2026 · net sales $5,832",
       },
       {
-        src: "/images/proof/smk-revenue-after.png",
+        src: "/images/proof/smk-revenue-after-v2.png",
         figure: "$19,100", figureLabel: "net sales in June", delta: "+227% against April",
         width: 863,
         height: 350,
@@ -126,7 +126,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
         caption: "US clicks 224 → 322 and CTR 3.7% → 5.1% (1 Apr–12 Jun vs 13 Jun–29 Aug 2026)",
       },
       {
-        src: "/images/proof/mso-revenue-1-jul20.png",
+        src: "/images/proof/mso-revenue-1-jul20-v2.png",
         figure: "$0.00", figureLabel: "net sales this month",
         width: 1040,
         height: 605,
@@ -134,7 +134,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
         caption: "20 Jul 2026 · net sales this month $0.00",
       },
       {
-        src: "/images/proof/mso-revenue-3-sep25.png",
+        src: "/images/proof/mso-revenue-3-sep25-v2.png",
         figure: "$523.49", figureLabel: "net sales month to date",
         width: 1357,
         height: 601,

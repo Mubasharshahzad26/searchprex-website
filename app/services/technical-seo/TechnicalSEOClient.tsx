@@ -203,7 +203,7 @@ export default function TechnicalSEOClient() {
           </div>
           <div className="grid gap-6">
             <ProofImage
-              src="/images/proof/mso-revenue-1-jul20.png"
+              src="/images/proof/mso-revenue-1-jul20-v2.png"
               alt="Michigan Outdoor Sports WooCommerce net sales on 20 July 2026: $0.00 for the month."
               width={1040}
               height={605}
@@ -212,7 +212,7 @@ export default function TechnicalSEOClient() {
               caption="Net sales this month: $0.00"
             />
             <ProofImage
-              src="/images/proof/mso-revenue-3-sep25.png"
+              src="/images/proof/mso-revenue-3-sep25-v2.png"
               alt="Michigan Outdoor Sports WooCommerce net sales on 25 September 2026: $523.49 month to date."
               width={1357}
               height={601}

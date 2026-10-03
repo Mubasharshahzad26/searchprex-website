@@ -93,7 +93,7 @@ export default function RevenueProof() {
         {/* The two dashboards the figures come from */}
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <ProofImage
-            src="/images/proof/smk-revenue-before.png"
+            src="/images/proof/smk-revenue-before-v2.png"
             alt="SMK Store WooCommerce dashboard for April 2026, showing $5,832.02 net sales for the month, top seller at 200 units and 9 orders awaiting processing."
             width={1366}
             height={607}
@@ -105,7 +105,7 @@ export default function RevenueProof() {
             eager
           />
           <ProofImage
-            src="/images/proof/smk-revenue-after.png"
+            src="/images/proof/smk-revenue-after-v2.png"
             alt="SMK Store WooCommerce dashboard for June 2026, showing $19,100.71 net sales for the month, top seller at 300 units and 17 orders awaiting processing."
             width={863}
             height={350}

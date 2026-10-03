@@ -145,8 +145,8 @@ const SHOTS: Array<{ heading: string; text: string; shots: Shot[] }> = [
     heading: "SMK Store — monthly net sales, April vs June 2026",
     text: "A 35,000-product WooCommerce store. Net sales went from $5,832.02 in April to $19,100.71 in June 2026 (+227%). Top seller: 200 units, then 300. These are total store figures from the store's own dashboard, not split by country.",
     shots: [
-      { file: "images/proof/smk-revenue-before.png", caption: "April 2026 · net sales $5,832.02" },
-      { file: "images/proof/smk-revenue-after.png", caption: "June 2026 · net sales $19,100.71" },
+      { file: "images/proof/smk-revenue-before-v2.png", caption: "April 2026 · net sales $5,832.02" },
+      { file: "images/proof/smk-revenue-after-v2.png", caption: "June 2026 · net sales $19,100.71" },
     ],
   },
   {
@@ -161,9 +161,9 @@ const SHOTS: Array<{ heading: string; text: string; shots: Shot[] }> = [
     heading: "What the recovery did to MSO's store revenue",
     text: "Net sales on the store's WooCommerce dashboard: $0.00 on 20 July 2026, $206.63 on 6 August, and $523.49 month to date on 25 September. Small numbers, honestly reported — the point is the direction once the pages were back in the index.",
     shots: [
-      { file: "images/proof/mso-revenue-1-jul20.png", caption: "20 Jul 2026 · $0.00 this month" },
-      { file: "images/proof/mso-revenue-2-aug06.png", caption: "6 Aug 2026 · $206.63 this month" },
-      { file: "images/proof/mso-revenue-3-sep25.png", caption: "25 Sep 2026 · $523.49 month to date" },
+      { file: "images/proof/mso-revenue-1-jul20-v2.png", caption: "20 Jul 2026 · $0.00 this month" },
+      { file: "images/proof/mso-revenue-2-aug06-v2.png", caption: "6 Aug 2026 · $206.63 this month" },
+      { file: "images/proof/mso-revenue-3-sep25-v2.png", caption: "25 Sep 2026 · $523.49 month to date" },
     ],
   },
 ];

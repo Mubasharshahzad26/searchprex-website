@@ -31,7 +31,7 @@ import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
 // page (app/home-page-test).
 export const MSO_REVENUE_STEPS = [
   {
-    src: "/images/proof/mso-revenue-1-jul20.png",
+    src: "/images/proof/mso-revenue-1-jul20-v2.png",
     width: 1040,
     height: 605,
     stage: "Before",
@@ -41,7 +41,7 @@ export const MSO_REVENUE_STEPS = [
     note: "Store at a standstill. Pages were still out of the index, so nothing was being found.",
   },
   {
-    src: "/images/proof/mso-revenue-2-aug06.png",
+    src: "/images/proof/mso-revenue-2-aug06-v2.png",
     width: 1366,
     height: 607,
     stage: "Two weeks later",
@@ -51,7 +51,7 @@ export const MSO_REVENUE_STEPS = [
     note: "First sales after re-indexing. Top seller moving 2 units.",
   },
   {
-    src: "/images/proof/mso-revenue-3-sep25.png",
+    src: "/images/proof/mso-revenue-3-sep25-v2.png",
     width: 1357,
     height: 601,
     stage: "After",

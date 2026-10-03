@@ -23,16 +23,16 @@ const MSO = "michigansportsoutdoor.com";
 
 export const PROOF_META: Record<string, ProofMeta> = {
   // SMK Store — WooCommerce dashboard
-  "/images/proof/smk-revenue-before.png": { source: "WooCommerce", domain: "smkstore.com", when: "April 2026" },
-  "/images/proof/smk-revenue-after.png": { source: "WooCommerce", domain: "smkstore.com", when: "June 2026" },
+  "/images/proof/smk-revenue-before-v2.png": { source: "WooCommerce", domain: "smkstore.com", when: "April 2026" },
+  "/images/proof/smk-revenue-after-v2.png": { source: "WooCommerce", domain: "smkstore.com", when: "June 2026" },
 
   // Michigan Sports & Outdoor
   "/images/proof/mso-gsc-indexing-full.png": { source: "Google Search Console", domain: MSO, when: "25 Jul 2026" },
   "/images/indexing-comparsion-before-mso-autopilot.png": { source: "Google Search Console", domain: MSO, when: "21 Aug 2026" },
   "/images/clicks-comaprsion-after-run-mso-autopilot.PNG": { source: "Google Search Console", domain: MSO, when: "13 Jun–29 Aug 2026" },
-  "/images/proof/mso-revenue-1-jul20.png": { source: "WooCommerce", domain: MSO, when: "20 Jul 2026" },
-  "/images/proof/mso-revenue-2-aug06.png": { source: "WooCommerce", domain: MSO, when: "6 Aug 2026" },
-  "/images/proof/mso-revenue-3-sep25.png": { source: "WooCommerce", domain: MSO, when: "25 Sep 2026" },
+  "/images/proof/mso-revenue-1-jul20-v2.png": { source: "WooCommerce", domain: MSO, when: "20 Jul 2026" },
+  "/images/proof/mso-revenue-2-aug06-v2.png": { source: "WooCommerce", domain: MSO, when: "6 Aug 2026" },
+  "/images/proof/mso-revenue-3-sep25-v2.png": { source: "WooCommerce", domain: MSO, when: "25 Sep 2026" },
 
   // Local HVAC Services
   "/images/proof/local-hvac-ai-overview.png": { source: "Google AI Overview" },
