@@ -64,6 +64,7 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/services/local-seo", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/local-seo/google-business-profile-optimization", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/technical-seo", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/services/technical-seo/technical-seo-audit", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.7, changeFrequency: "monthly" },
   { path: "/experts", priority: 0.6, changeFrequency: "monthly" },
   { path: "/why-us", priority: 0.6, changeFrequency: "monthly" },

@@ -57,7 +57,7 @@ const VIDEOS: GalleryVideo[] = [
 ];
 
 const services = [
-  { title: "Technical SEO audit", body: "Full crawl — indexation, redirects, canonicals, orphan pages, crawl budget — plus server-log review where logs are available.", href: "#crawl" },
+  { title: "Technical SEO audit", body: "Full crawl — indexation, redirects, canonicals, orphan pages, crawl budget — plus server-log review where logs are available.", href: "/services/technical-seo/technical-seo-audit" },
   { title: "Indexation & crawl budget", body: "Every reason Google skips your pages: robots rules, noindex, faceted URLs, duplicate templates at scale.", href: "#crawl" },
   { title: "Core Web Vitals", body: "LCP, INP and CLS diagnosed from real-user data, then fixed in the templates rather than page by page.", href: "#crawl" },
   { title: "Schema & structured data", body: "JSON-LD for every page type — products, articles, FAQs, breadcrumbs, organisation — built from the data the page renders.", href: "#ai-search" },
@@ -199,7 +199,8 @@ export default function TechnicalSEOClient() {
               Most traffic problems on large sites start before the content: Google can’t reach the pages, doesn’t think they are worth keeping, or spends its crawl on URLs that should not exist.
             </Lead>
             <Lead>I fix the reasons at the template, so one change repairs thousands of pages instead of one.</Lead>
-            <TextLink href="/resources/technical-seo-checklist">Free technical SEO checklist (26 checks)</TextLink>
+            <TextLink href="/services/technical-seo/technical-seo-audit">Technical SEO audit service</TextLink>
+            <div><TextLink href="/resources/technical-seo-checklist">Free technical SEO checklist (26 checks)</TextLink></div>
           </div>
           <CheckPanel title="What I check in a crawl" items={crawlChecks} />
         </div>
