@@ -59,8 +59,8 @@ const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
 
 /** Each stat is one named client's result, labelled as such. */
 const stats = [
-  { value: "Top 3", label: "Maps pack · HVAC client, 60 days" },
-  { value: "5.7x", label: "Organic calls · same client" },
+  { value: "192 → 264", label: "Monthly clicks · D.O.L.L.S. Cleaning" },
+  { value: "Named", label: "AI Overview · HVAC client" },
   { value: "#1", label: "AI Overview · D.O.L.L.S. Cleaning" },
   { value: "24h", label: "Tear-down reply" },
 ];
@@ -255,13 +255,12 @@ export default function LocalSEOClient({ guide }: { guide: Guide }) {
             videoId={HVAC_VIDEO}
             videoTitle="Local HVAC SEO case study walkthrough"
             metrics={[
-              { value: "Top 3", label: "Maps pack" },
-              { value: "Featured", label: "AI Overview" },
-              { value: "5.7x", label: "Organic calls" },
+              { value: "Named", label: "Google AI Overview" },
+              { value: "Page 1", label: "Organic ranking" },
             ]}
             challenge="A local HVAC business with no map pack presence, no “near me” rankings, and no visibility in AI Overviews for high-intent emergency searches."
             strategy="Full Business Profile optimisation, business details made consistent across 50+ directories, service-area landing pages, a review program, and AI Overview-ready content."
-            outcome="Top 3 map pack for its primary service keywords, a featured AI Overview placement, and 5.7x organic calls in 60 days — verified in Search Console."
+            outcome="Named in Google's AI Overview for a Simi Valley AC installation search, and a page-one organic ranking for local AC installation — both in the screenshots."
           />
         </div>
       </Section>

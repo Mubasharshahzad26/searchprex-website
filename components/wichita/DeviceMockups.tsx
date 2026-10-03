@@ -279,16 +279,16 @@ export default function DeviceMockups() {
             </h2>
  
             <p style={{ fontSize: 15, color: "#9aa0c4", lineHeight: 1.7, margin: "0 0 28px" }}>
-              A professionally optimized website plus a top-3 Google Maps placement — that&apos;s what every Wichita family law client sees when they search. This is what we build.
+              A professionally optimized website plus a Business Profile built to compete for the map pack — that&apos;s what we build for Wichita family law firms.
             </p>
  
             {/* Result stats */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 28 }}>
               {[
-                { icon: "📍", stat: "Top 3", label: "Google Maps placement — Sedgwick County" },
-                { icon: "★", stat: "4.9",   label: "Average client review score after 6 months" },
-                { icon: "📞", stat: "3×",   label: "More qualified calls vs paid ads" },
-                { icon: "🤖", stat: "Yes",  label: "AI Overview citations — ChatGPT & Google" },
+                { icon: "📍", stat: "GBP",     label: "Business Profile built for Sedgwick County searches" },
+                { icon: "★", stat: "Reviews", label: "A review request routine inside Google's rules" },
+                { icon: "📞", stat: "Calls",   label: "Click-to-call on every practice-area page" },
+                { icon: "🤖", stat: "AI",      label: "Pages structured so AI Overviews can quote them" },
               ].map(({ icon, stat, label }) => (
                 <div key={label} style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{

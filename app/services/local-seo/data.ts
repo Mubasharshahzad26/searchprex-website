@@ -35,7 +35,7 @@ export const CAPSULES: QA[] = [
 export const FAQS: QA[] = [
   {
     q: "How fast can I rank in the Google Maps local pack?",
-    a: "It depends on the competition and on where the profile starts. The HVAC client in the case study below reached the top 3 map pack and an AI Overview placement within 60 days; a crowded market or a suspended profile takes longer.",
+    a: "It depends on the competition and on where the profile starts, so nobody can honestly promise a date. A complete, verified profile, consistent details and a steady flow of genuine reviews move it fastest; a crowded market or a suspended profile takes longer.",
   },
   {
     q: "Do you optimise for “near me” searches?",

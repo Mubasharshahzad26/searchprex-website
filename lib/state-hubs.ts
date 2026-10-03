@@ -71,11 +71,11 @@ export const STATE_HUBS: StateHub[] = [
         body: "In Kent County, Avvo, FindLaw and Justia hold many first-page spots on domain strength alone. A page that answers the specific Kent County question can outrank a directory listing in a way it cannot outrank an established local firm.",
       },
     ],
-    stateClients: ["michigan-outdoor-sports", "dolls-cleaning", "carpet-cleaning"],
+    stateClients: ["michigan-outdoor-sports", "dolls-cleaning"],
     faqs: withCost("Michigan", [
       {
         q: "Do you have Michigan law firm case studies?",
-        a: "Not yet — there is no published law firm case study on this site. SearchPrex does have three Michigan clients, none of them law firms: Michigan Outdoor Sports (technical SEO), Doll's Cleaning in Chesterfield and a carpet cleaning company in Clawson (local SEO). Their results are linked on this page, with the screenshots.",
+        a: "Not yet — there is no published law firm case study on this site. SearchPrex does have two Michigan clients, neither of them a law firm: Michigan Outdoor Sports (technical SEO) and D.O.L.L.S. Cleaning (local SEO, in Chesterfield and Clawson). Their results are linked on this page, with the screenshots.",
       },
       {
         q: "Should a Michigan injury firm have a no-fault page?",

@@ -152,12 +152,12 @@ export default function WichitaPage() {
               <span style={{ background: "#1c2547", color: "#9aa0c4", fontSize: 10, fontWeight: 600, padding: "3px 10px", borderRadius: 999 }}>Wichita · Sedgwick County</span>
             </div>
             <div style={{ fontSize: 22, fontWeight: 800, color: "#fff", lineHeight: 1.25 }}>
-              We double your family law cases.<br />
+              Family law SEO for Wichita firms.<br />
               <span style={{ color: "#3eb489" }}>Because we understand how clients find attorneys in 2026.</span>
             </div>
           </div>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            {[["3×", "more calls vs paid ads"], ["+5.7×", "organic growth achieved"], ["90 days", "to first results"]].map(([v, l]) => (
+            {[["192 → 264", "monthly clicks · local client"], ["Named", "in Google AI Overviews"], ["24h", "free tear-down reply"]].map(([v, l]) => (
               <div key={l} style={{ textAlign: "center", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 10, padding: "12px 16px" }}>
                 <div style={{ fontSize: 20, fontWeight: 800, color: BRAND.green }}>{v}</div>
                 <div style={{ fontSize: 11, color: "#9aa0c4", marginTop: 3 }}>{l}</div>
@@ -568,16 +568,16 @@ export default function WichitaPage() {
         <div style={{ ...container, maxWidth: 760 }}>
           <h2 style={{ ...h2, textAlign: "center" }}>Local SEO that gets into the map pack</h2>
           <p style={{ fontSize: 14.5, color: BRAND.muted, textAlign: "center", margin: "0 auto 24px", maxWidth: 520, lineHeight: 1.6 }}>
-            We&apos;ve taken local service businesses from invisible to the top of Google&apos;s map results. Here&apos;s one:
+            We&apos;ve helped local service businesses get named in Google&apos;s AI Overviews and onto page one. Here&apos;s one:
           </p>
           <div style={{ position: "relative", paddingTop: "56.25%", background: "#0a0f2e", borderRadius: 12, overflow: "hidden" }}>
-            <iframe src="https://www.youtube.com/embed/g_1TfDU4YeA?rel=0&modestbranding=1" title="How HVAC Services Team reached the Google Map Pack Top 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
+            <iframe src="https://www.youtube.com/embed/g_1TfDU4YeA?rel=0&modestbranding=1" title="HVAC Services Team local SEO case study video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
           </div>
           <p style={{ fontSize: 15, fontWeight: 700, color: BRAND.navy, textAlign: "center", margin: "16px 0 0", lineHeight: 1.4 }}>
-            How HVAC Services Team reached the Google Map Pack Top 3 and earned an AI Overview placement
+            How HVAC Services Team earned a Google AI Overview placement
           </p>
           <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
-            {[["Top 3", "Maps pack"], ["Featured", "AI Overview"], ["+5.7x", "organic calls"]].map(([v, l]) => (
+            {[["Named", "Google AI Overview"], ["Page 1", "Organic ranking"]].map(([v, l]) => (
               <span key={l} style={{ display: "inline-flex", alignItems: "baseline", gap: 6, border: `1px solid rgba(62,180,137,0.3)`, background: "rgba(62,180,137,0.08)", borderRadius: 9, padding: "8px 14px", fontSize: 12.5, color: "#0f6e56", fontWeight: 600 }}>
                 <span style={{ fontSize: 15, fontWeight: 800 }}>{v}</span> {l}
               </span>

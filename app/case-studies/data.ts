@@ -77,28 +77,29 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 2,
     client: "Local HVAC Services",
-    seoTitle: "HVAC SEO Case Study, California: Top 3 Map Pack",
-    period: "60 days",
+    // Was "Top 3 map pack" and "+5.7x organic calls in 60 days". The owner
+    // confirmed in October 2026 that there is no screenshot for either; the
+    // captures show the AI Overview citation and a page-one organic ranking.
+    seoTitle: "HVAC SEO Case Study, California: Google AI Overview",
     seoType: "Local SEO",
     industry: "HVAC",
     location: "Simi Valley, CA",
-    headline: "Top 3 map pack and a Google AI Overview placement — from zero local visibility in 60 days.",
+    headline: "Named in Google's AI Overview for a Simi Valley AC installation search, with a page-one organic ranking.",
     badgeColor: "#059669",
     badgeBg: "#ecfdf5",
     video: "g_1TfDU4YeA",
     featured: true,
     slug: { industry: "hvac", client: "local-hvac-services" },
     metrics: [
-      { v: "Top 3", l: "Maps pack" },
-      { v: "Featured", l: "AI Overview" },
-      { v: "+5.7x", l: "Organic calls" },
+      { v: "Named", l: "Google AI Overview" },
+      { v: "Page 1", l: "Organic ranking" },
     ],
     challenge:
       "A local HVAC service business had no map pack presence, no 'near me' rankings, and zero visibility in Google's new AI Overview results for high-intent emergency service searches.",
     solution:
       "We fully optimized the Google Business Profile, fixed NAP consistency across 50+ directories, built service-area landing pages, launched a review generation program, and structured content to be cited in AI Overviews.",
     outcome:
-      "The business reached the top 3 Google Maps pack for its primary service keywords, earned a featured AI Overview placement, and grew organic clicks 5.7x in 60 days — driving consistent inbound calls.",
+      "Google's AI Overview for \"free cost estimation for ac installation in simi valley california\" names the business among those offering free estimates, and its blog ranks on page one for \"local ac installation Simi Valley\". Both are shown in the screenshots.",
   },
   {
     id: 3,
@@ -190,28 +191,30 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: 6,
-    client: "Carpet Cleaning",
-    seoTitle: "Carpet Cleaning SEO Case Study, Michigan: #1",
+    // The same client as "Doll's Cleaning" above — its Clawson carpet cleaning
+    // service (the screenshot shows D.O.L.L.S. Cleaning). It used to appear as
+    // a separate, unnamed client, which counted one business twice.
+    client: "D.O.L.L.S. Cleaning — Clawson",
+    seoTitle: "Carpet Cleaning SEO Case Study, Clawson MI: #1 and #2",
     verifiedVia: "Google Search Console",
     seoType: "Local SEO",
     industry: "Cleaning",
     location: "Clawson, MI",
-    headline: "Ranked #1 local with a +95% jump in search visibility.",
+    headline: "Positions #1 and #2 for carpet cleaning services in Clawson, MI.",
     badgeColor: "#0369a1",
     badgeBg: "#e0f2fe",
     image: "/images/carpet-cleaning-service.JPG",
     featured: false,
     slug: { industry: "cleaning", client: "carpet-cleaning" },
     challenge:
-      "A Clawson, MI carpet cleaning service had near-zero visibility, losing local customers to national directories that dominated every search result.",
+      "D.O.L.L.S. Cleaning's carpet cleaning service in Clawson, MI had near-zero visibility, losing local customers to national directories that dominated every search result.",
     solution:
       "We rebuilt on-page local SEO, optimized the Google Business Profile, fixed citations, and created content targeting Clawson and surrounding areas.",
     outcome:
-      "#1 local position for primary keywords and a +95% jump in search visibility — putting the business ahead of the directories. Verified in Google Search Console.",
+      "Both the first and second organic results for \"carpet cleaning services in Clawson, MI\", ahead of the directories, as the screenshot shows.",
     metrics: [
-      { v: "#1", l: "Position" },
-      { v: "+95%", l: "Visibility" },
-      { v: "Top", l: "Local pack" },
+      { v: "#1 & #2", l: "Organic positions" },
+      { v: "Clawson", l: "Carpet cleaning, MI" },
     ],
   },
   {

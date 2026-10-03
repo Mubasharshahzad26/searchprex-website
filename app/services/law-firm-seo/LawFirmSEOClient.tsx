@@ -334,7 +334,7 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
         <SectionHeading
           eyebrow="Selective law firm partnerships"
           title="Be our first law firm case study"
-          intro="We've delivered GSC-verified results in ecommerce, local, and technical SEO — including a local service business reaching the top 3 map pack and a Google AI Overview placement in 60 days. Now we're bringing that same methodology to law firms."
+          intro="We've delivered verified results in ecommerce, local, and technical SEO — including local service businesses named in Google's AI Overviews. Now we're bringing that same methodology to law firms."
         />
         {/* The transferable proof, labelled as coming from other industries —
             the same line the third answer capsule draws. */}
@@ -468,7 +468,7 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
         <AuthorCard
           name="Mubashar Sharif"
           role="Founder & Lead SEO Strategist · 5+ years · Semrush-certified"
-          quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to the top 3 map pack and Google AI Overview placements, and I bring that exact methodology to every firm I work with.&rdquo;"
+          quote="&ldquo;Law firm SEO is won on trust — real attorney credentials, genuine reviews, and content built to Google's YMYL E-E-A-T standards. I've taken local service businesses to #1 in Google's local results and into its AI Overviews, and I bring that exact methodology to every firm I work with.&rdquo;"
           imageSrc="/images/mubashar-sharif.jpg"
           imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
           linkedinUrl={LINKEDIN}
