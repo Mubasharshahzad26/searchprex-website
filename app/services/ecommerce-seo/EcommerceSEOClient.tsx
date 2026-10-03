@@ -25,6 +25,8 @@ import WhySearchPrex from "@/components/WhySearchPrex";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import { ClipboardCheck as ClipboardCheckIcon, Target as TargetIcon, Rocket as RocketIcon, TrendingUp as TrendingUpIcon } from "lucide-react";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { CAPSULES, FAQS } from "./data";
@@ -101,7 +103,7 @@ const PILLARS = [
 const PROCESS = [
   { step: "01", title: "Reality check audit", body: "Full technical + content + indexing audit. Crawl your site, pull GSC + GA4 data, benchmark against 2 competitors, and deliver a 90-day roadmap with priorities scored by impact and effort." },
   { step: "02", title: "Strategy & scoping", body: "Confirm target categories, product batches, and technical fix priorities. Align on tooling (WordPress, Shopify, custom), reporting cadence, and content production capacity." },
-  { step: "03", title: "Execution", body: "Weekly sprints — technical fixes shipped by our dev partner, content published in measured batches, schema deployed, and resubmitted through Search Console. Every change logged in a shared roadmap." },
+  { step: "03", title: "Execution", body: "Weekly sprints — technical fixes shipped, content published in measured batches, schema deployed, and resubmitted through Search Console. Every change logged in a shared roadmap." },
   { step: "04", title: "Monitor & iterate", body: "Weekly reporting on indexation rate, impressions, clicks, and revenue attribution. Monthly review call. Automated alerts for indexing drops, ranking losses, and Core Web Vitals regressions." },
 ];
 
@@ -388,11 +390,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide }: { linkedinUrl
           title="A four-phase engagement, built for scale"
           intro="Predictable process, transparent reporting, no black-box tactics."
         />
-        <CardGrid columns={4}>
-          {PROCESS.map((p) => (
-            <FeatureCard key={p.step} step={p.step} title={p.title} body={p.body} />
-          ))}
-        </CardGrid>
+        <ProcessTimeline steps={PROCESS.map((p, i) => ({ title: p.title, body: p.body, icon: [ClipboardCheckIcon, TargetIcon, RocketIcon, TrendingUpIcon][i] }))} />
       </Section>
 
       {/* ── 6 · TOOLING ── */}

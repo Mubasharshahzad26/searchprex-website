@@ -29,6 +29,8 @@ import { ArrowRight, Search, Wrench } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import { FileSearch as FileSearchIcon, ScanSearch as ScanSearchIcon, Wrench as WrenchIcon, CalendarCheck as CalendarCheckIcon } from "lucide-react";
 import WhySearchPrex from "@/components/WhySearchPrex";
 import {
   AnswerCapsules,
@@ -295,11 +297,7 @@ export default function TechnicalSEOClient() {
       {/* 07 — PROCESS · Desire */}
       <Section>
         <SectionHeading eyebrow="How it works" title="Tear-down to fixes live in four weeks" />
-        <CardGrid columns={4}>
-          {process.map((p) => (
-            <FeatureCard key={p.step} step={p.step} label={p.week} title={p.title} body={p.body} />
-          ))}
-        </CardGrid>
+        <ProcessTimeline steps={process.map((p, i) => ({ title: p.title, body: p.body, when: p.week, icon: [FileSearchIcon, ScanSearchIcon, WrenchIcon, CalendarCheckIcon][i] }))} />
       </Section>
 
       {/* 08 — COMPARE · Desire */}

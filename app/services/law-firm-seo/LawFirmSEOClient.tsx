@@ -23,6 +23,8 @@
 
 import Image from "next/image";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import { Search as SearchIcon, Wrench as WrenchIcon, FileText as FileTextIcon, TrendingUp as TrendingUpIcon } from "lucide-react";
 import Link from "next/link";
 import { ArrowRight, Check, CheckCircle, Scale, BadgeCheck, ListChecks } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
@@ -307,11 +309,7 @@ export default function LawFirmSEOClient({ guide }: { guide: Guide }) {
       {/* PROCESS */}
       <Section id="approach">
         <SectionHeading eyebrow="How we work" title="From audit to more cases in 90 days" />
-        <CardGrid columns={4}>
-          {process.map((p) => (
-            <FeatureCard key={p.step} step={p.step} label={p.week} title={p.title} body={p.body} />
-          ))}
-        </CardGrid>
+        <ProcessTimeline steps={process.map((p, i) => ({ title: p.title, body: p.body, when: p.week, icon: [SearchIcon, WrenchIcon, FileTextIcon, TrendingUpIcon][i] }))} />
       </Section>
 
       {/* LIVE INTAKE DEMO */}

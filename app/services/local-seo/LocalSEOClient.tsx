@@ -28,6 +28,8 @@ import type { Guide } from "@/lib/guides";
 import CoverageSection from "@/components/CoverageSection";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import { FileSearch as FileSearchIcon, MapPin as MapPinIcon, Star as StarIcon, CalendarCheck as CalendarCheckIcon } from "lucide-react";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { caseStudies } from "@/app/case-studies/data";
@@ -287,11 +289,7 @@ export default function LocalSEOClient({ guide }: { guide: Guide }) {
       {/* 07 — PROCESS · Desire */}
       <Section>
         <SectionHeading eyebrow="How it works" title="From tear-down to the map pack" />
-        <CardGrid columns={4}>
-          {process.map((p) => (
-            <FeatureCard key={p.step} step={p.step} label={p.week} title={p.title} body={p.body} />
-          ))}
-        </CardGrid>
+        <ProcessTimeline steps={process.map((p, i) => ({ title: p.title, body: p.body, when: p.week, icon: [FileSearchIcon, MapPinIcon, StarIcon, CalendarCheckIcon][i] }))} />
       </Section>
 
       {/* 08 — COMPARE · Desire */}
