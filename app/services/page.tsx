@@ -27,6 +27,8 @@ import { color, heading, radius, text } from "@/lib/design-tokens";
 import { CITY_PAGES } from "@/lib/city-pages";
 
 import { getPageSEO } from "@/lib/admin-seo";
+import ProofImage from "@/components/ProofImage";
+import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 const SITE = "https://www.searchprex.com";
 
 const baseMetadata: Metadata = {
@@ -69,9 +71,17 @@ const services = [
       "E-E-A-T content attorneys can stand behind",
       "AI Overview / AEO optimization for legal queries",
     ],
-    proof: { v: "Featured", l: "AI Overview placement" },
+    // No law firm case study yet: the capture is a local business, and the
+    // caption says so rather than letting a law card imply a law result.
+    shot: {
+      src: "/images/proof/local-dolls-ai-overview-rank1.png",
+      alt: "Google AI Overview for post-construction cleaning in Chesterfield, MI naming D.O.L.L.S. Cleaning, with the business ranked first in the results below.",
+      width: 628,
+      height: 322,
+      caption: "A local business named in Google's AI Overview and ranked #1 — not a law firm; there is no law firm case study yet.",
+    },
     proofLink: "/case-studies",
-    proofLabel: "See verified results",
+    proofLabel: "See every case study",
   },
   {
     icon: ShoppingCart,
@@ -86,7 +96,15 @@ const services = [
       "Product schema, crawl budget & Core Web Vitals",
       "Brand-by-brand content strategy",
     ],
-    proof: { v: "+75%", l: "US revenue in 2 months" },
+    shot: {
+      src: "/images/proof/smk-revenue-after-v2.png",
+      alt: "SMK Store WooCommerce dashboard for June 2026 showing $19,100.71 net sales this month.",
+      width: 863,
+      height: 350,
+      figure: "$5.8K → $19.1K",
+      figureLabel: "monthly net sales, Apr → Jun 2026",
+      caption: "SMK Store — WooCommerce dashboard, June 2026.",
+    },
     proofLink: "/case-studies/ecommerce/smk-store",
     proofLabel: "Read the SMK Store case study",
   },
@@ -103,9 +121,17 @@ const services = [
       "Service-area landing pages that rank",
       "'Near me' + AI Overview visibility",
     ],
-    proof: { v: "Top 3", l: "Maps pack in 60 days" },
-    proofLink: "/case-studies/hvac/local-hvac-services",
-    proofLabel: "Read the HVAC case study",
+    shot: {
+      src: "/images/proof/local-dolls-gsc-comparison.jpg",
+      alt: "Google Search Console comparison for D.O.L.L.S. Cleaning: 264 clicks and 106K impressions in July 2025 against 192 clicks and 41K impressions in June 2025.",
+      width: 626,
+      height: 239,
+      figure: "192 → 264",
+      figureLabel: "monthly clicks, Jun → Jul 2025",
+      caption: "D.O.L.L.S. Cleaning, Michigan — Search Console.",
+    },
+    proofLink: "/case-studies/cleaning/dolls-cleaning",
+    proofLabel: "Read the D.O.L.L.S. Cleaning case study",
   },
   {
     icon: Wrench,
@@ -120,7 +146,15 @@ const services = [
       "Core Web Vitals & site speed fixes",
       "Structured data / schema implementation",
     ],
-    proof: { v: "+285%", l: "pages indexed, May–Jul 2026" },
+    shot: {
+      src: "/images/proof/mso-gsc-indexing-full.png",
+      alt: "Google Search Console Pages report for Michigan Sports & Outdoor showing 11,549 indexed pages on 25 July 2026.",
+      width: 778,
+      height: 520,
+      figure: "3,000 → 11,549",
+      figureLabel: "pages indexed, May → Jul 2026",
+      caption: "Michigan Sports & Outdoor — Search Console Pages report.",
+    },
     proofLink: "/case-studies/ecommerce/michigan-outdoor-sports",
     proofLabel: "Read the Michigan case study",
   },
@@ -133,7 +167,7 @@ const bigStats = [
   { v: "3,000 → 11,549", l: "Pages indexed · Michigan Sports & Outdoor" },
   { v: "$5.8k → $19.1k", l: "Monthly revenue · SMK Store" },
   { v: "#1", l: "AI Overview · D.O.L.L.S. Cleaning" },
-  { v: "Top 3", l: "Maps pack · HVAC client, 60 days" },
+  { v: "16.9K → 45.2K", l: "Impressions in 28 days · Mammoth Roofing" },
 ];
 
 const faqs = [
@@ -143,7 +177,7 @@ const faqs = [
   },
   {
     q: "How are your SEO results verified?",
-    a: "Every metric we publish comes straight from Google Search Console — clicks, impressions, indexing and rankings. Several case studies include live GSC screen recordings, not edited screenshots.",
+    a: "Every figure we publish comes from the client's own dashboard — Google Search Console for clicks, impressions and indexing, the store's WooCommerce dashboard for sales, and Google's own results pages for rankings — and the screenshot is on the case study. Several case studies also have screen recordings.",
   },
   {
     q: "Who does the work on my SEO account?",
@@ -151,7 +185,7 @@ const faqs = [
   },
   {
     q: "How much do your SEO services cost?",
-    a: "SEO service pricing depends on your website size, competition level, and goals. Small business local SEO starts around $500/month, while ecommerce SEO for large stores can range from $2,000-$5,000/month. The free audit includes a specific pricing recommendation based on your actual needs.",
+    a: `Monthly retainers are ${RETAINER_PLANS.map((p) => `${formatRange(p)} for ${p.niche}`).join(", ")}; technical SEO is quoted after the audit. Everything is month to month, and the full breakdown is on the pricing page.`,
   },
   {
     q: "How long does SEO take to show results?",
@@ -302,14 +336,8 @@ export default function ServicesPage() {
                   ))}
                 </ul>
 
-                <div
-                  className={`mt-auto ${radius.chip} border p-4`}
-                  style={{ borderColor: color.border, background: color.surface }}
-                >
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold" style={{ color: color.success }}>{s.proof.v}</span>
-                    <span className={heading.eyebrow} style={{ color: color.muted }}>{s.proof.l}</span>
-                  </div>
+                <div className="mt-auto">
+                  <ProofImage {...s.shot} sizes="(min-width: 768px) 45vw, 100vw" />
                   <Link
                     href={s.proofLink}
                     className={`mt-2 inline-flex items-center gap-1 ${text.small} font-semibold transition-colors hover:opacity-80`}
