@@ -52,7 +52,9 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       "SEO for HVAC companies: Business Profile, service-area pages and AI Overviews. One HVAC client is named in Google's AI Overview for AC installation.",
     heroSub:
       "When the AC fails in July, people search once and call whoever is at the top. I get HVAC companies into the map pack and named in AI Overviews — with the case studies to show it.",
-    caseClients: ["local-hvac-services", "hvac-team"],
+    // "hvac-team" is the same client (HVAC Services Team); listing both showed
+    // one business as two.
+    caseClients: ["local-hvac-services"],
     problems: [
       {
         title: "No page for each service",
@@ -82,7 +84,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       },
       {
         q: "What results has SearchPrex got for HVAC companies?",
-        a: "HVAC Services Team is named by Google's AI Overview for a free-estimate AC installation search in Simi Valley, has a blog post ranking first organically, and ranks on page one for “local ac installation Simi Valley”. A second HVAC client, HVAC Team, moved up 40 positions to page one for its primary service keywords.",
+        a: "HVAC Services Team is named by Google's AI Overview for a free-estimate AC installation search in Simi Valley, has a blog post ranking first organically, and ranks on page one for “local ac installation Simi Valley”. Each result has its screenshot on the case study.",
       },
       {
         q: "Is SEO worth it for HVAC compared with ads?",
@@ -100,7 +102,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     faqs: [
       {
         q: "How long does HVAC SEO take to work?",
-        a: "The HVAC client in the case study reached the top three in the map pack and an AI Overview placement within 60 days; a crowded market or a suspended profile takes longer. The free tear-down gives you a realistic read for your area.",
+        a: "It depends on the competition and on where the profile starts, so nobody can honestly promise a date. A crowded market or a suspended profile takes longer. The free tear-down gives you a realistic read for your area.",
       },
       {
         q: "Can you help with emergency “near me” searches?",
@@ -156,7 +158,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       },
       {
         q: "What results has SearchPrex got for a roofing company?",
-        a: "Mammoth Roofing, in Texas, ranks seventh for the statewide search “Local Residential Roof Repair in Texas” and reached top-six positions for competitive roofing terms, with 210 more monthly clicks and 45K impressions in Search Console.",
+        a: "Mammoth Roofing, in Texas, ranks seventh for the statewide search “Local Residential Roof Repair in Texas” and sixth for “Copper Roofing Company in Texas”. Its Google impressions went from 16.9K to 45.2K over 28 days against the 28 before, in Search Console.",
       },
       {
         q: "Should a roofer target the city or the whole state?",
@@ -200,7 +202,9 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       "SEO for residential, commercial and specialist cleaning companies. D.O.L.L.S. Cleaning is named first in Google's AI Overview and ranks #1 below it.",
     heroSub:
       "Carpet, post-construction, move-out, commercial — each is a different search from a different customer. I build cleaning companies a page for each, and one client is now named first in Google's AI Overview.",
-    caseClients: ["dolls-cleaning", "carpet-cleaning"],
+    // "carpet-cleaning" (Clawson) is D.O.L.L.S. Cleaning too; listing both showed
+    // one business as two.
+    caseClients: ["dolls-cleaning"],
     problems: [
       {
         title: "Every service on one page",
@@ -230,7 +234,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       },
       {
         q: "What results has SearchPrex got for cleaning companies?",
-        a: "D.O.L.L.S. Cleaning is named first in Google's AI Overview for “post construction cleaning in Chesterfield, MI” and ranks first organically below it. It also holds the first and second positions for “carpet cleaning services in Clawson, MI”, and reached #1 local rankings with 106K impressions in Search Console.",
+        a: "D.O.L.L.S. Cleaning is named first in Google's AI Overview for “post construction cleaning in Chesterfield, MI” and ranks first organically below it. It also holds the first and second positions for “carpet cleaning services in Clawson, MI”. In Search Console its monthly clicks went from 192 to 264 and impressions from 41K to 106K, June to July 2025.",
       },
       {
         q: "Residential or commercial cleaning — which is easier to rank for?",
@@ -378,7 +382,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
       },
       {
         q: "What results has SearchPrex got for a remodeling business?",
-        a: "A kitchen cabinets client reached top-10 rankings for high-intent kitchen remodel keywords, with five more keywords ranking, verified in Search Console.",
+        a: "A kitchen cabinets client in Glendora, California ranks fifth for “Kitchen Cabinet replacement in Glendora”, in the top 10 alongside Angi and Yelp. The screenshots are on the case study.",
       },
       {
         q: "Should a remodeling company publish prices?",

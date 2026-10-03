@@ -241,6 +241,7 @@ export function WhiteButton({ href, children }: { href: string; children: React.
  */
 export function ServiceHero({
   crumb,
+  parent,
   above,
   eyebrow,
   title,
@@ -252,6 +253,8 @@ export function ServiceHero({
   aside,
 }: {
   crumb: string;
+  /** A level between Services and this page, e.g. Local SEO on a trade page. */
+  parent?: { label: string; href: string };
   /** Optional strip between the breadcrumb and the dark band, e.g. sub-page tabs. */
   above?: React.ReactNode;
   eyebrow: string;
@@ -269,6 +272,7 @@ export function ServiceHero({
         items={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
+          ...(parent ? [parent] : []),
           { label: crumb },
         ]}
       />

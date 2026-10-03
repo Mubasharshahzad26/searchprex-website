@@ -2,45 +2,64 @@
 
 // app/services/ecommerce-seo/[industry]/IndustryClient.tsx
 //
-// Ecommerce SEO by platform and niche, on the same AIDA template as
-// /services/ecommerce-seo. Copy lives in lib/ecommerce-industries.ts; figures
-// are read from the case studies and screenshots from their write-ups.
+// Ecommerce SEO by platform and niche, on the topical band layout of the
+// service pages (components/ServiceBands). Copy lives in
+// lib/ecommerce-industries.ts; figures are read from the case studies and
+// screenshots from their write-ups.
 //
-// A page with no case study of its own (Shopify) shows no stat strip and no
-// proof section — it shows its honest note instead, and links to the
-// WooCommerce results as what they are rather than presenting them as its own.
+// A page with no case study of its own (Shopify) shows no proof — it shows its
+// honest note instead, and links to the WooCommerce results as what they are
+// rather than presenting them as its own.
+//
+// Dropped in this layout: the stat strip, the mid-page guide magnet and
+// WhySearchPrex. Quick answers are merged into the FAQ; page.tsx builds the
+// FAQPage schema from both arrays.
 
 import Link from "next/link";
-import { ArrowRight, CheckCircle, Info, ShoppingCart } from "lucide-react";
+import { ArrowRight, ShoppingCart } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
-import GuideMagnet from "@/components/GuideMagnet";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
-import WhySearchPrex from "@/components/WhySearchPrex";
-import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
+import { RETAINER_PLANS } from "@/lib/pricing";
 import { ECOMMERCE_INDUSTRIES, getEcommerceIndustry } from "@/lib/ecommerce-industries";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
 import { CASE_DETAILS, EXTRA_PROOF } from "@/app/case-studies/details";
+import { AuthorCard, FaqList } from "@/components/layout";
 import {
-  AnswerCapsules,
-  AuthorCard,
-  Breadcrumb,
-  CardGrid,
-  FaqList,
-  FeatureCard,
-  PageHero,
-  Section,
-  SectionHeading,
-  StatStrip,
-  Accent,
-} from "@/components/layout";
+  BODY,
+  INK,
+  PURPLE,
+  Band,
+  BandIntro,
+  CheckList,
+  Eyebrow,
+  FaqBand,
+  GuaranteeCard,
+  H2,
+  Lead,
+  PriceCard,
+  RuleGrid,
+  RuleItem,
+  ServiceHero,
+  Steps,
+  TextLink,
+} from "@/components/ServiceBands";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 const MAX_PROOF = 4;
 
-export default function IndustryClient({ slug, guide }: { slug: string; guide: Guide }) {
+const PROCESS = [
+  { when: "Day 1", title: "Free tear-down", body: "Your store URL in, a written look back within 24 hours: which products Google is refusing to index, and why." },
+  { when: "Weeks 1–2", title: "Audit & roadmap", body: "Crawl, Search Console and GA4 data, two competitors benchmarked, and a 90-day plan ranked by impact." },
+  { when: "Weekly sprints", title: "Execution", body: "Technical fixes shipped, content published in measured batches, schema deployed and resubmitted — every change logged." },
+  { when: "Every Monday", title: "Report", body: "Indexed pages, impressions, clicks and revenue — what moved, what did not, and what happens next." },
+];
+
+// `guide` is still passed by page.tsx; the checklist is linked from the related band.
+export default function IndustryClient({ slug, guide: _guide }: { slug: string; guide: Guide }) {
   const industry = getEcommerceIndustry(slug);
   if (!industry) return null;
 
@@ -50,15 +69,6 @@ export default function IndustryClient({ slug, guide }: { slug: string; guide: G
     .map((client) => caseStudies.find((c) => c.slug.client === client))
     .filter((c): c is NonNullable<typeof c> => c !== undefined);
 
-  // Each stat is one named client's result, labelled as such: the first
-  // metric of each case, then the rest, so both stores are represented.
-  const stats = [
-    ...[...cases.map((cs) => ({ cs, m: cs.metrics[0] })), ...cases.flatMap((cs) => cs.metrics.slice(1).map((m) => ({ cs, m })))]
-      .slice(0, 3)
-      .map(({ cs, m }) => ({ value: m.v, label: `${m.l} · ${cs.client}` })),
-    { value: "24h", label: "Tear-down reply" },
-  ];
-
   // Interleave the stores' screenshots so each is represented.
   const shotsByCase = cases.map((cs) =>
     (CASE_DETAILS[cs.slug.client]?.proof ?? EXTRA_PROOF[cs.slug.client] ?? []).map((shot) => ({ ...shot, href: detailUrl(cs) })),
@@ -66,61 +76,45 @@ export default function IndustryClient({ slug, guide }: { slug: string; guide: G
   const proof = Array.from({ length: Math.max(0, ...shotsByCase.map((s) => s.length)) })
     .flatMap((_, i) => shotsByCase.map((s) => s[i]).filter(Boolean))
     .slice(0, MAX_PROOF);
+  // The first two captures go under the hero; any others sit with the results.
+  const stripShots = proof.slice(0, 2);
+  const moreShots = proof.slice(2);
+
+  const others = ECOMMERCE_INDUSTRIES.filter((i) => i.slug !== industry.slug);
+  const hasCases = cases.length > 0;
 
   return (
     <main>
-      <Breadcrumb
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Services", href: "/services" },
-          { label: "Ecommerce SEO", href: "/services/ecommerce-seo" },
-          { label: industry.name },
-        ]}
-      />
-
-      {/* Sideways links between the platform and niche pages. */}
-      <nav aria-label="Ecommerce SEO by platform and niche" className="border-b border-[#e5e7eb] bg-[#f8f9fc]">
-        <div className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-4 py-3 text-sm font-semibold sm:px-6 lg:px-8">
-          <Link href="/services/ecommerce-seo" className="whitespace-nowrap text-[#5b6472] hover:text-[#0a0f2e]">
-            All ecommerce SEO
-          </Link>
-          {ECOMMERCE_INDUSTRIES.map((i) => (
-            <Link
-              key={i.slug}
-              href={`/services/ecommerce-seo/${i.slug}`}
-              aria-current={i.slug === industry.slug ? "page" : undefined}
-              className={
-                i.slug === industry.slug
-                  ? "whitespace-nowrap text-[#534AB7] underline underline-offset-4"
-                  : "whitespace-nowrap text-[#5b6472] hover:text-[#0a0f2e]"
-              }
-            >
-              {i.name}
-            </Link>
-          ))}
-        </div>
-      </nav>
-
-      {/* 01 — HERO · Attention */}
-      <PageHero
-        compactTop
+      <ServiceHero
+        crumb={industry.name}
+        parent={{ label: "Ecommerce SEO", href: "/services/ecommerce-seo" }}
+        above={
+          <nav aria-label="Ecommerce SEO by platform and niche" className="mt-4 overflow-x-auto border-y bg-slate-50" style={{ borderColor: "#e5e7eb" }}>
+            <div className="mx-auto flex max-w-6xl gap-6 px-4 py-3 text-sm font-medium sm:px-6 lg:px-8">
+              <Link href="/services/ecommerce-seo" className="whitespace-nowrap text-slate-500 hover:text-slate-900">
+                All ecommerce SEO
+              </Link>
+              {ECOMMERCE_INDUSTRIES.map((i) =>
+                i.slug === industry.slug ? (
+                  <span key={i.slug} aria-current="page" className="whitespace-nowrap font-bold text-[#534AB7]">
+                    {i.name}
+                  </span>
+                ) : (
+                  <Link key={i.slug} href={`/services/ecommerce-seo/${i.slug}`} className="whitespace-nowrap text-slate-500 hover:text-slate-900">
+                    {i.name}
+                  </Link>
+                ),
+              )}
+            </div>
+          </nav>
+        }
         eyebrow={`Ecommerce SEO · ${industry.name}`}
-        title={
-          <>
-            {industry.h1} <Accent>{industry.accent}</Accent>
-          </>
-        }
+        title={industry.h1}
+        accent={industry.accent}
         subtitle={industry.heroSub}
-        actions={
-          <Link
-            href={cases.length ? "#proof" : "#honest"}
-            className="inline-flex items-center gap-1.5 text-sm font-bold"
-            style={{ color: "#534AB7" }}
-          >
-            {cases.length ? "See the store results" : "What I have and haven't done"} <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-        }
-        trustPoints={["Reply within 24 hours", "Month to month", "The founder does the work"]}
+        primary={cases.length ? { href: "#proof", label: "See the store results" } : { href: "#honest", label: "What I have and haven't done" }}
+        secondary={{ href: "#process", label: "How it works" }}
+        trustPoints={["The founder does the work", "90-day money-back guarantee", "Month to month"]}
         aside={
           <ArticleLeadMagnet
             variant="sidebar"
@@ -133,199 +127,204 @@ export default function IndustryClient({ slug, guide }: { slug: string; guide: G
         }
       />
 
-      {cases.length ? <StatStrip stats={stats} /> : null}
-
       {/* The straight answer, for a page without a case study of its own. */}
       {industry.honestNote ? (
-        <Section id="honest" tight>
-          <div className="mx-auto flex max-w-3xl items-start gap-3 rounded-2xl border border-[#d9d5f5] bg-[#f5f3ff] p-6">
-            <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#534AB7]" aria-hidden />
-            <div>
-              <p className="text-sm font-black text-[#0a0f2e]">A straight answer first</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-[#374151]">{industry.honestNote}</p>
-              <Link href="/services/ecommerce-seo/woocommerce" className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
-                See the WooCommerce results <ArrowRight className="h-3 w-3" aria-hidden />
-              </Link>
-            </div>
+        <Band muted id="honest">
+          <div className="mx-auto max-w-3xl text-center">
+            <Eyebrow>A straight answer first</Eyebrow>
+            <H2 center>No {industry.name} case study yet</H2>
+            <Lead center>{industry.honestNote}</Lead>
+            <TextLink href="/services/ecommerce-seo/woocommerce">See the WooCommerce results</TextLink>
           </div>
-        </Section>
+        </Band>
       ) : null}
 
-      {/* 02 — THE PROBLEM · Interest */}
-      <Section>
-        <SectionHeading
+      {stripShots.length ? (
+        <ServiceProofStrip
+          id="proof"
+          title="Store results, straight from the dashboards"
+          moreHref={cases[0] ? detailUrl(cases[0]) : "/case-studies"}
+          moreLabel="Read the case study"
+          shots={stripShots.map(({ href: _href, ...shot }) => shot)}
+        />
+      ) : null}
+
+      {/* THE PROBLEM */}
+      <Band>
+        <BandIntro
+          center={false}
           eyebrow="The problem"
           title={`Where ${stores} lose traffic`}
-          intro="Four things you can check yourself in the next ten minutes. If any of them fails, it is costing you sales."
+          lead="Four things you can check yourself in the next ten minutes. If any of them fails, it is costing you sales."
         />
-        <CardGrid columns={2}>
+        <RuleGrid columns={2}>
           {industry.problems.map((p) => (
-            <div key={p.title} className="rounded-2xl border border-[#e5e7eb] bg-white p-6">
-              <p className="flex items-center gap-2 text-sm font-black text-[#0a0f2e]">
-                <ShoppingCart className="h-4 w-4 flex-shrink-0 text-[#b8123a]" aria-hidden />
-                {p.title}
-              </p>
-              <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#374151]">
-                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1a7d59]" aria-hidden />
-                <span>
-                  <strong>Check:</strong> {p.check}
-                </span>
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-[#5b6472]">{p.costs}</p>
-            </div>
+            <RuleItem
+              key={p.title}
+              icon={<ShoppingCart className="h-5 w-5 flex-shrink-0 text-[#b8123a]" aria-hidden />}
+              title={p.title}
+              body={
+                <>
+                  <p className="text-[#374151]"><strong>Check:</strong> {p.check}</p>
+                  <p className="mt-1">{p.costs}</p>
+                </>
+              }
+            />
           ))}
-        </CardGrid>
-      </Section>
+        </RuleGrid>
+      </Band>
 
-      {/* 03 — ANSWERS · AEO */}
-      <Section tone="surface" width="reading">
-        <SectionHeading eyebrow="Quick answers" title={`${industry.name} SEO, answered plainly`} />
-        <AnswerCapsules items={industry.capsules} />
-      </Section>
+      {/* WHAT'S INCLUDED — light on a page with no results band, so the dark
+          process band below is not stacked on another dark band. */}
+      <Band dark={hasCases} muted={!hasCases}>
+        <BandIntro
+          dark={hasCases}
+          eyebrow="What’s included"
+          title={`What ${industry.name} SEO covers`}
+          lead={`Built around how ${stores} actually break and get fixed — not a generic ecommerce package with the name swapped in.`}
+        />
+        <RuleGrid>
+          {industry.included.map((s) => (
+            <RuleItem key={s.title} dark={hasCases} title={s.title} body={s.body} />
+          ))}
+        </RuleGrid>
+      </Band>
 
-      {/* 04 — PROOF · Desire (only where the page has its own case studies) */}
+      {/* RESULTS — only where the page has its own case studies */}
       {cases.length ? (
-        <Section id="proof">
-          <SectionHeading
-            eyebrow="Proof"
-            title="Store results, with the screenshots"
-            intro="Real stores, their own dashboards. Every number below is on the case study it links to."
+        <Band muted>
+          <BandIntro
+            eyebrow="Results"
+            title="Ecommerce SEO in action"
+            lead="Real stores, their own dashboards. Every number below is on the case study it links to."
           />
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
             {cases.map((cs) => (
               <Link
                 key={cs.slug.client}
                 href={detailUrl(cs)}
-                className="group rounded-2xl border border-[#e5e7eb] bg-white p-6 transition-all hover:border-[#534AB7] hover:shadow-md"
+                className={`group rounded-2xl bg-white p-7 shadow-sm transition hover:shadow-md ${cases.length === 1 ? "md:col-span-2" : ""}`}
               >
-                <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+                <p className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: PURPLE }}>
                   {cs.client} · {cs.location}
                 </p>
-                <p className="mt-2 text-base font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{cs.headline}</p>
-                <div className="mt-4 grid grid-cols-3 gap-3">
+                <p className="mt-2 text-xl font-black group-hover:text-[#534AB7]" style={{ color: INK }}>{cs.headline}</p>
+                <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
                   {cs.metrics.slice(0, 3).map((m) => (
-                    <div key={m.l}>
-                      <p className="text-xl font-black text-[#0a0f2e]">{m.v}</p>
-                      <p className="text-xs text-[#5b6472]">{m.l}</p>
+                    <div key={m.l} className="border-t-2 pt-3" style={{ borderColor: "#d9d6f3" }}>
+                      <p className="text-2xl font-black" style={{ color: INK }}>{m.v}</p>
+                      <p className="text-xs" style={{ color: BODY }}>{m.l}</p>
                     </div>
                   ))}
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
-                  Read the case study <ArrowRight className="h-3 w-3" aria-hidden />
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-bold" style={{ color: PURPLE }}>
+                  Read the case study <ArrowRight className="h-4 w-4" aria-hidden />
                 </span>
               </Link>
             ))}
           </div>
-
-          {proof.length > 0 ? (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              {proof.map(({ href, ...shot }) => (
-                <div key={shot.src} className="flex flex-col">
-                  <ProofImage {...shot} frameAspect="16 / 9" />
-                  <Link href={href} className="mt-2 inline-flex items-center gap-1 text-xs font-bold" style={{ color: "#534AB7" }}>
-                    Read the case study <ArrowRight className="h-3 w-3" aria-hidden />
-                  </Link>
-                </div>
+          {moreShots.length ? (
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 [&>*]:min-w-0">
+              {moreShots.map(({ href: _href, ...shot }) => (
+                <ProofImage key={shot.src} {...shot} frameAspect="16 / 9" />
               ))}
             </div>
           ) : null}
-        </Section>
+        </Band>
       ) : null}
 
-      {/* 05 — WHAT YOU GET · Desire */}
-      <Section tone="surface">
-        <SectionHeading
-          variant="split"
-          eyebrow="Everything included"
-          title={<>What&apos;s in the<br />{industry.name} SEO work</>}
-          intro={`Built around how ${stores} actually break and get fixed — not a generic ecommerce package with the name swapped in.`}
-        />
-        <CardGrid columns={3}>
-          {industry.included.map((s) => (
-            <FeatureCard key={s.title} label="Included" title={s.title} body={s.body} />
-          ))}
-        </CardGrid>
-      </Section>
+      {/* PROCESS */}
+      <Band dark id="process">
+        <BandIntro dark eyebrow="How it works" title="From free tear-down to indexed, selling products" />
+        <Steps steps={PROCESS} cta={{ href: "#get-started", label: "Get my free store tear-down" }} />
+      </Band>
 
-      {/* 06 — MID-PAGE GUIDE — the softer offer; the tear-down keeps the hero and the close */}
-      <Section tight>
-        <GuideMagnet guide={guide} source={`ecommerce-seo/${industry.slug}`} eyebrow="Failed one of those checks? Free playbook" />
-      </Section>
-
-      <WhySearchPrex variant="ecommerce" service={`${industry.name} SEO`} />
-
-      {/* 07 — PRICE · Desire */}
-      {ECOM_PLAN ? (
-        <Section>
-          <SectionHeading eyebrow="What it costs" title={`${industry.name} SEO pricing`} />
-          <div className="mx-auto max-w-2xl rounded-2xl border-2 p-6 text-center" style={{ borderColor: ECOM_PLAN.accent, background: ECOM_PLAN.bg }}>
-            <p className="text-3xl font-black" style={{ color: ECOM_PLAN.accent }}>
-              {formatRange(ECOM_PLAN)} <span className="text-base font-bold text-[#5b6472]">/ month</span>
-            </p>
-            <p className="mt-2 text-sm text-[#374151]">{ECOM_PLAN.best}: {ECOM_PLAN.includes.join(" · ")}</p>
-            <p className="mt-3 text-xs leading-relaxed text-[#5b6472]">
-              The number within the range depends on catalogue size, technical scope and content volume. Month to month.
-            </p>
-            <Link href="/pricing" className="mt-3 inline-flex items-center gap-1 text-sm font-bold" style={{ color: "#534AB7" }}>
-              Full pricing <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
+      {/* PRICE, GUARANTEE & WHO DOES THE WORK */}
+      <Band>
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <Eyebrow>Why SearchPrex</Eyebrow>
+            <H2>One person, one roadmap, a clear price</H2>
+            <Lead>
+              You work with the person who audits your store and ships the fixes. Priorities are ranked by what brings revenue, and every change is logged.
+            </Lead>
+            <div className="mt-8">
+              <CheckList
+                items={[
+                  "The founder does the work — no account managers in between",
+                  "A written roadmap before you pay anything",
+                  "Fixes shipped, not just a PDF of problems",
+                  "A plain-English report every Monday",
+                  "Month to month, no long contract",
+                ]}
+              />
+            </div>
           </div>
-        </Section>
-      ) : null}
+          <div className="flex flex-col gap-5">
+            {ECOM_PLAN ? (
+              <PriceCard
+                plan={ECOM_PLAN}
+                label={`${industry.name} SEO`}
+                note="Where a store lands in the range depends on catalogue size, technical scope and content volume. Month to month."
+              />
+            ) : null}
+            <GuaranteeCard />
+          </div>
+        </div>
+        <div className="mx-auto mt-14 max-w-4xl">
+          <AuthorCard
+            name="Mubashar Sharif"
+            role="Founder · 5+ years · Semrush & HubSpot certified"
+            quote="&ldquo;Big catalogues fail in the same places: thin copy, pages Google never indexes, templates that slow every product at once. I fixed those on two stores and built a content autopilot to do it at scale. When you work with SearchPrex, you work with me.&rdquo;"
+            imageSrc="/images/mubashar-sharif.jpg"
+            imageAlt="Mubashar Sharif — Founder of SearchPrex"
+            linkedinUrl={LINKEDIN}
+            badges={["Semrush certified", "HubSpot certified"]}
+          />
+        </div>
+      </Band>
 
-      {/* RELATED · internal links */}
-      <Section tone="surface">
-        <SectionHeading eyebrow="Keep reading" title="More on ecommerce SEO" />
-        <CardGrid columns={3}>
-          {[
-            { href: "/services/ecommerce-seo", title: "Ecommerce SEO services", body: "The full approach: indexing, product and category content, structured data and speed." },
-            industry.slug === "shopify"
-              ? { href: "/services/technical-seo", title: "Technical SEO", body: "Crawling, indexing and Core Web Vitals, fixed at the template." }
-              : { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks for indexing, product pages, schema and speed. Free, no email." },
-            { href: "/case-studies", title: "All case studies", body: "Every client result, with the screenshots." },
-          ].map((r) => (
+      {/* RELATED */}
+      <Band dark>
+        <BandIntro dark eyebrow="Keep reading" title="More on ecommerce SEO" />
+        <RuleGrid>
+          <RuleItem dark href="/services/ecommerce-seo" title="Ecommerce SEO services" body="The full approach: indexing, product and category content, structured data and speed." />
+          {industry.slug === "shopify" ? (
+            <RuleItem dark href="/services/technical-seo" title="Technical SEO" body="Crawling, indexing and Core Web Vitals, fixed at the template." />
+          ) : (
+            <RuleItem dark href="/resources/woocommerce-seo-checklist" title="WooCommerce SEO checklist" body="25 checks for indexing, product pages, schema and speed. Free, no email." />
+          )}
+          <RuleItem dark href="/case-studies" title="All case studies" body="Every client result, with the screenshots." />
+        </RuleGrid>
+        <div className="mt-10 flex flex-wrap justify-center gap-2">
+          {others.map((i) => (
             <Link
-              key={r.href}
-              href={r.href}
-              className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+              key={i.slug}
+              href={`/services/ecommerce-seo/${i.slug}`}
+              className="rounded-full border px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
+              style={{ borderColor: "rgba(185,179,245,0.45)" }}
             >
-              <p className="text-sm font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{r.title}</p>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">{r.body}</p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
-                Open <ArrowRight className="h-3 w-3" aria-hidden />
-              </span>
+              {i.h1}
             </Link>
           ))}
-        </CardGrid>
-      </Section>
+        </div>
+      </Band>
 
-      {/* AUTHOR · E-E-A-T */}
-      <Section width="narrow" tight>
-        <AuthorCard
-          name="Mubashar Sharif"
-          role="Founder & Lead Ecommerce SEO Strategist · 5+ years"
-          quote="&ldquo;Big catalogues fail in the same places: thin copy, pages Google never indexes, templates that slow every product at once. I fixed those on two stores and built a content autopilot to do it at scale. When you work with SearchPrex, you work with me.&rdquo;"
-          imageSrc="/images/mubashar-sharif.jpg"
-          imageAlt="Mubashar Sharif — Founder & Lead Ecommerce SEO Strategist"
-          linkedinUrl={LINKEDIN}
+      {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      <FaqBand title={`${industry.name} SEO questions, answered`}>
+        <FaqList faqs={[...industry.capsules, ...industry.faqs]} name={`ecommerce-seo-${industry.slug}-faq`} />
+      </FaqBand>
+
+      <div id="get-started">
+        <ArticleLeadMagnet
+          variant="bottom"
+          source={source}
+          copy={{
+            headline: "Send me your store URL. I’ll tell you what is holding it back.",
+            sub: "Two fields. A written look at your indexing, product copy and competitors — from me, within 24 hours.",
+          }}
         />
-      </Section>
-
-      {/* FAQ · AEO */}
-      <Section tone="surface" width="reading">
-        <SectionHeading eyebrow="FAQ" title={`${industry.name} SEO questions, answered`} />
-        <FaqList faqs={industry.faqs} name={`ecommerce-seo-${industry.slug}-faq`} />
-      </Section>
-
-      {/* CLOSE · Action */}
-      <ArticleLeadMagnet
-        variant="bottom"
-        source={source}
-        copy={{
-          headline: "Send me your store URL. I’ll tell you what is holding it back.",
-          sub: "Two fields. A written look at your indexing, product copy and competitors — from me, within 24 hours.",
-        }}
-      />
+      </div>
     </main>
   );
 }

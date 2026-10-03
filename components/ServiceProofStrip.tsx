@@ -55,7 +55,8 @@ export default function ServiceProofStrip({
           </Link>
         ) : null}
       </div>
-      <div className={`grid gap-6 ${two ? "md:grid-cols-2" : "mx-auto max-w-3xl"}`}>
+      {/* min-w-0: a wide capture must shrink to the column, not push the page sideways on a phone. */}
+      <div className={`grid grid-cols-1 gap-6 [&>*]:min-w-0 ${two ? "md:grid-cols-2" : "mx-auto max-w-3xl"}`}>
         {shots.map((s) => (
           <ProofImage
             key={s.src}
