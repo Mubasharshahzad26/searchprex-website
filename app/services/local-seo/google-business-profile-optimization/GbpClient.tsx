@@ -83,7 +83,7 @@ const PROCESS = [
 
 const RELATED = [
   { href: "/blog/get-more-calls-from-google-business-profile", title: "Get more calls from your Business Profile", body: "Why views don’t turn into calls, and the fixes that change it." },
-  { href: "/blog/google-business-profile-suspended", title: "Google Business Profile suspended?", body: "The usual causes, and how to get reinstated." },
+  { href: "/services/local-seo/google-business-profile-suspended", title: "Profile suspended?", body: "The usual causes, a free review, and help with the appeal." },
   { href: "/blog/google-maps-ranking-drop", title: "Why your Google Maps ranking dropped", body: "Check the profile before blaming an algorithm." },
   { href: "/resources/google-business-profile-checklist", title: "Free GBP checklist", body: "23 checks written to Google’s own rules. No email." },
 ];

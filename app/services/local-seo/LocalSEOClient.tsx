@@ -248,6 +248,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
           ))}
         </RuleGrid>
         <TextLink href="/services/technical-seo">Need deeper site fixes? Technical SEO</TextLink>
+        <div><TextLink href="/services/local-seo/google-business-profile-suspended">Profile suspended? Get it reviewed free</TextLink></div>
       </Band>
 
       {/* REVIEWS, CITATIONS & BUSINESS DATA */}

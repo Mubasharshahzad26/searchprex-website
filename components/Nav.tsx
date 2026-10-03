@@ -8,7 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
 import { CITY_PAGES } from "@/lib/city-pages";
  
-type DropItem = { href: string; label: string; badge?: string };
+/** `sub` = a spoke page, shown indented under the pillar above it. */
+type DropItem = { href: string; label: string; badge?: string; sub?: boolean };
 type NavLink = {
   href: string;
   label: string;
@@ -24,10 +25,17 @@ const navLinks: NavLink[] = [
     label: "Services",
     hasDropdown: true,
     dropdownItems: [
+      // Pillars, each followed by its spoke pages (hub and spoke).
       { href: "/services/law-firm-seo",  label: "Law Firm SEO" },
+      { href: "/services/law-firm-seo/google-business-profile-for-lawyers", label: "Google Business Profile for Lawyers", sub: true },
       { href: "/services/ecommerce-seo", label: "Ecommerce SEO" },
+      { href: "/services/ecommerce-seo/product-page-seo", label: "Product Page SEO", sub: true },
       { href: "/services/local-seo",     label: "Local SEO" },
+      { href: "/services/local-seo/google-business-profile-optimization", label: "Google Business Profile Optimization", sub: true },
+      { href: "/services/local-seo/google-business-profile-suspended", label: "GBP Suspension Help", sub: true },
       { href: "/services/technical-seo", label: "Technical SEO" },
+      { href: "/services/technical-seo/technical-seo-audit", label: "Technical SEO Audit", sub: true },
+      { href: "/services/technical-seo/indexing-recovery", label: "Indexing Recovery", sub: true },
       { href: "/industries",             label: "Industries We Serve" },
     ],
   },
@@ -260,7 +268,7 @@ export default function Nav() {
                       // the old exit animation was already dead code. A CSS transition does
                       // the same job and can animate visibility, which motion cannot.
                       <div
-                        className={`absolute left-0 top-full z-50 w-56 pt-2 transition-all duration-150 ${
+                        className={`absolute left-0 top-full z-50 ${link.dropdownItems?.some((i) => i.sub) ? "w-72" : "w-56"} pt-2 transition-all duration-150 ${
                           isOpen
                             ? "visible translate-y-0 opacity-100"
                             : "invisible pointer-events-none translate-y-2 opacity-0"
@@ -300,7 +308,11 @@ export default function Nav() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setActiveDropdown(null)}
-                                className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
+                                className={`flex items-center justify-between gap-2 rounded-lg transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7] ${
+                                  item.sub
+                                    ? "py-1.5 pl-7 pr-3 text-[13px] text-[#5b6472]"
+                                    : `px-3 py-2 text-sm ${link.dropdownItems?.some((i) => i.sub) ? "font-semibold text-[#0a0f2e]" : "text-[#374151]"}`
+                                }`}
                               >
                                 {content}
                               </Link>
@@ -412,7 +424,9 @@ export default function Nav() {
                               key={item.label}
                               href={item.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
+                              className={`flex items-center gap-2 hover:text-[#534AB7] ${
+                                item.sub ? "py-1 pl-4 text-[13px] text-[#8a93a3]" : "py-1.5 text-sm text-[#64748b]"
+                              }`}
                             >
                               {content}
                             </Link>

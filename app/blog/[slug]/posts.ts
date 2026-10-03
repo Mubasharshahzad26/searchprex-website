@@ -338,6 +338,8 @@ export const posts = [
         <li><strong>Don't add keywords back to the name after reinstatement.</strong> It's the same violation, and the next suspension starts from a worse position.</li>
       </ul>
 
+      <p>Would rather someone checked it before you appeal? <a href="/services/local-seo/google-business-profile-suspended">I review suspended profiles for free</a> — what caused it and what has to change, in writing within 24 hours.</p>
+
       <h2>How to avoid another suspension</h2>
       <ul>
         <li><strong>Make one person responsible for the profile,</strong> and make sure Google's notifications reach them. Since September 2026, owners have <a href="/resources/news/google-business-profile-four-days-suggested-edits">four days to reject a suggested edit</a> before Google may publish it.</li>
