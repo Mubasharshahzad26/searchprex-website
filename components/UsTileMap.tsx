@@ -36,9 +36,20 @@ export type MapClient = {
   place: string;
   result: string;
   href: string;
+  /** Link text; defaults to the case-study wording. */
+  linkLabel?: string;
 };
 
-export default function UsTileMap({ clients, dark = false }: { clients: MapClient[]; dark?: boolean }) {
+export default function UsTileMap({
+  clients,
+  dark = false,
+  label,
+}: {
+  clients: MapClient[];
+  dark?: boolean;
+  /** Accessible name for the map, when the highlights mean something other than client case studies. */
+  label?: string;
+}) {
   const active = new Set(clients.map((c) => c.state));
   const cols = 12;
   const rows = 8;
@@ -54,7 +65,7 @@ export default function UsTileMap({ clients, dark = false }: { clients: MapClien
         viewBox={`0 0 ${width} ${height}`}
         className="h-auto w-full"
         role="img"
-        aria-label={`Map of the United States with ${[...active].join(", ")} highlighted where client case studies are set`}
+        aria-label={label ?? `Map of the United States with ${[...active].join(", ")} highlighted where client case studies are set`}
       >
         {TILES.map(([st, c, r]) => {
           const on = active.has(st);
@@ -98,7 +109,7 @@ export default function UsTileMap({ clients, dark = false }: { clients: MapClien
             <p className="mt-1 text-base font-black" style={{ color: ink }}>{c.name}</p>
             <p className="mt-1 text-sm leading-relaxed" style={{ color: muted }}>{c.result}</p>
             <Link href={c.href} className="mt-1 inline-block text-sm font-bold hover:underline" style={{ color: dark ? "#b9b3f5" : "#534AB7" }}>
-              Read the case study →
+              {c.linkLabel ?? "Read the case study"} →
             </Link>
           </li>
         ))}

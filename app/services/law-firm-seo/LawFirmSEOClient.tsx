@@ -61,7 +61,7 @@ const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
 const included = [
   { title: "Practice-area & city pages", body: "A page for each practice and each city you take cases in, written for the questions clients ask before they call.", href: "#practice-areas" },
   { title: "Attorney E-E-A-T", body: "Bar admissions, jurisdictions, real photos and bylines, so Google can verify who stands behind the advice.", href: "#ymyl" },
-  { title: "Google Business Profile", body: "The right primary category, practice areas as services, and a review routine that stays inside bar rules.", href: "#profile" },
+  { title: "Google Business Profile", body: "The right primary category, practice areas as services, and a review routine that stays inside bar rules.", href: "/services/law-firm-seo/google-business-profile-for-lawyers" },
   { title: "Technical SEO", body: "Speed, indexing, attorney and FAQ schema, and mobile pages that load before a caller gives up.", href: "/services/technical-seo" },
   { title: "Legal authority", body: "Legal directories, bar associations and local mentions that make sense for a firm — no bought link volume.", href: "#profile" },
   { title: "AI answers & Monday reports", body: "Clear answers that AI Overviews and ChatGPT can cite, and a plain-English report on rankings, calls and forms every week.", href: "#ymyl" },
@@ -280,6 +280,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
               For local legal searches, the map pack sits above the normal results. The firms in it usually have the right primary category, a steady stream of genuine reviews and details that match their website exactly.
             </Lead>
             <Lead>I compare your Profile with the three firms above you, so every change has a reason behind it.</Lead>
+            <TextLink href="/services/law-firm-seo/google-business-profile-for-lawyers">Google Business Profile for lawyers</TextLink>
           </div>
           <CheckPanel items={profileChecks} />
         </div>

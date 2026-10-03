@@ -335,7 +335,8 @@ export default async function IndustryPage({
             ))}
           </div>
         ) : null}
-        <RuleGrid>
+        <RuleGrid columns={4}>
+          <RuleItem dark href="/services/law-firm-seo/google-business-profile-for-lawyers" title="Google Business Profile for lawyers" body="Categories, attorney listings and reviews inside bar rules." />
           <RuleItem dark href="/services/law-firm-seo" title="Law firm SEO services" body="The full approach: practice-area pages, attorney E-E-A-T, Business Profile and AI answers." />
           <RuleItem dark href="/resources/law-firm-seo-audit-checklist" title="Law firm SEO audit checklist" body="40 checks, written out in full. Free, no email." />
           <RuleItem dark href="/blog/keyword-research-for-law-firms" title="Keyword research for law firms" body="A step-by-step guide using free data." />
