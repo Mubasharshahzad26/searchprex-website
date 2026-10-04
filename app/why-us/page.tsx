@@ -12,6 +12,7 @@ import {
   MapPin
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
  
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
@@ -128,8 +129,47 @@ export default function WhyUsPage() {
           </div>
         </section>
  
+        {/* Real Strategy Desk Feature Banner */}
+        <section className="bg-[#eaecf3] pt-4 pb-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="overflow-hidden rounded-3xl border border-[#dfe3ec] bg-[#0a0f2e] shadow-xl">
+              <div className="grid items-center lg:grid-cols-[1.15fr_1fr]">
+                <div className="relative aspect-[16/9] min-h-[280px] w-full overflow-hidden lg:aspect-auto lg:h-full">
+                  <Image
+                    src="/images/about/founder-hands-on-strategy-desk.webp"
+                    alt="Senior SEO analyst working hands-on with live Google Search Console performance data and technical audit spreadsheets"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 700px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0a0f2e]" />
+                </div>
+                <div className="p-8 text-white sm:p-10">
+                  <span className="inline-block rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                    Direct Founder Execution
+                  </span>
+                  <h2 className="mt-4 text-2xl font-black leading-tight text-white sm:text-3xl">
+                    Every audit, crawl, and campaign managed directly by a senior strategist.
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-white/75 sm:text-base">
+                    Traditional agencies sell you with senior partners and pass your account to junior interns. At SearchPrex, every keyword recommendation, technical fix, and content plan is personally analyzed on live Search Console data.
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-semibold text-white/80">
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle className="h-4 w-4 text-[#3eb489]" /> Semrush &amp; HubSpot Certified
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle className="h-4 w-4 text-[#3eb489]" /> Zero Outsourcing
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Reasons Grid — grey bg, white cards */}
-        <section className="bg-[#eaecf3] py-20">
+        <section className="bg-[#eaecf3] py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {reasons.map((reason) => (

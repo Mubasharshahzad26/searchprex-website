@@ -36,6 +36,7 @@ import {
   Lead,
   PriceCard,
   ProofPanel,
+  RealityBanner,
   RuleGrid,
   RuleItem,
   ServiceHero,
@@ -148,6 +149,13 @@ export default function GbpClient() {
           eyebrow="The problem"
           title="Why your Business Profile isn’t bringing calls"
           lead="Six things you can check on your own profile today. Each one that fails is costing you calls — and some put the profile at risk."
+        />
+        <RealityBanner
+          src="/images/local/google-business-profile-local-intent.webp"
+          alt="Local customer walking down commercial street using Google Maps navigation on smartphone to visit a storefront"
+          tag="The Reality · Local Buyer Intent"
+          quote="“Customers search on their phone 5 blocks away. If your profile isn’t in the 3-pack, you’re completely invisible.”"
+          body="84% of local service searches happen on mobile with immediate buying intent. When someone searches 'near me', Google gives 100% of the screen to the map pack. If you are missing from the top 3, your competitors get the call before anyone even scrolls."
         />
         <RuleGrid columns={2}>
           {PROBLEMS.map((p) => (

@@ -38,6 +38,7 @@ import {
   H2,
   Lead,
   ProofPanel,
+  RealityBanner,
   RuleGrid,
   RuleItem,
   ServiceHero,
@@ -156,6 +157,13 @@ export default function TechnicalSEOClient() {
           eyebrow="The problem"
           title="The Search Console statuses that mean Google is dropping your pages"
           lead="If you have seen one of these in your own Pages report, this is where your traffic is going."
+        />
+        <RealityBanner
+          src="/images/audiences/technical-seo-indexing-crisis.webp"
+          alt="Engineering lead and technical SEO specialist analyzing sudden organic traffic drop and crawl budget alerts in Google Search Console"
+          tag="The Reality · The Indexing Cliff"
+          quote="“Traffic dropped 60% after our redesign, and Google flagged 14,000 product pages as ‘Crawled - Currently Not Indexed’.”"
+          body="You spent months investing into content and backlinks, but if your canonical tags loop, faceted URLs create millions of duplicate parameters, or render-blocking scripts exhaust crawl budget, Google abandons your site before ever evaluating your pages."
         />
         <RuleGrid columns={2}>
           {SYMPTOMS.map((s) => (
