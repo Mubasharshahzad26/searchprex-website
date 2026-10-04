@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Pricing from "@/components/Pricing";
 import ChatWidget from "@/components/ChatWidget";
+import { BillingOverviewSection } from "@/components/PaymentTrustBadges";
 import { Phone, ShieldCheck } from "lucide-react";
 import {
   CtaBand,
@@ -67,6 +68,14 @@ const faqs: Faq[] = [
     q: "Do you offer custom packages?",
     a: "Yes! Enterprise clients receive custom pricing based on their specific needs. Contact us for a tailored proposal.",
   },
+  {
+    q: "How do I pay, and what payment methods do you accept?",
+    a: "All payments are processed securely via official Stripe Invoicing. We accept all major Credit and Debit Cards (Visa, Mastercard, American Express), Apple Pay, direct US Bank ACH Direct Debit, and international wire transfers via Wise. You receive an itemized, tax-deductible invoice immediately upon payment.",
+  },
+  {
+    q: "Are retainers billed monthly or upfront with a contract?",
+    a: "Retainers are billed month-to-month. There are no mandatory 6-month or 12-month lock-in contracts. You can pause or cancel anytime before your next billing cycle with zero friction.",
+  },
 ];
 
 export default function PricingPage() {
@@ -114,6 +123,9 @@ export default function PricingPage() {
         />
 
         <Pricing />
+
+        {/* Transparent B2B Billing & Payment Methods */}
+        <BillingOverviewSection />
 
         {/* The 90-day guarantee, next to the prices it applies to. */}
         <Section width="reading" tight>

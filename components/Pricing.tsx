@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
 import { OFFER_HREF, OFFER_CTA } from "@/lib/offer";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { PaymentIconsRow } from "./PaymentTrustBadges";
  
 const PURPLE = "#534AB7";
 const GREEN = "#3eb489";
@@ -98,11 +99,17 @@ export default function Pricing() {
             {OFFER_CTA} <ArrowRight className="h-4 w-4" />
           </Link>
           <p className="text-xs text-[#5b6472]">
-            Final pricing is set after your free audit · no contracts
+            Final pricing is set after your free audit · month-to-month, no lock-in
           </p>
+          <div className="mt-2 flex flex-col items-center">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-[#64748b] mb-2">
+              Accepted B2B Payment Methods
+            </p>
+            <PaymentIconsRow className="scale-90" />
+          </div>
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-2.5"
             style={{ color: PURPLE }}
           >
             See what&apos;s included, my process &amp; FAQs <ArrowRight className="h-4 w-4" />
