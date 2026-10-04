@@ -7,6 +7,7 @@
 // studies for continued engagement.
  
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -14,7 +15,7 @@ import {
   BarChart3, ZoomIn, ChevronRight,
 } from "lucide-react";
 import { detailUrl, type CaseStudy } from "../../data";
-import { CASE_DETAILS, DEFAULT_FIXES, EXTRA_PROOF } from "../../details";
+import { CASE_DETAILS, DEFAULT_FIXES, EXTRA_PROOF, OPERATIONAL_VISUALS } from "../../details";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import GuideMagnet from "@/components/GuideMagnet";
 import type { Guide } from "@/lib/guides";
@@ -44,6 +45,7 @@ export default function CaseStudyDetail({ cs, related, guide }: { cs: CaseStudy;
   const detail = CASE_DETAILS[cs.slug.client];
   const fixes = detail?.fixes ?? DEFAULT_FIXES;
   const proof = detail?.proof ?? EXTRA_PROOF[cs.slug.client] ?? [];
+  const operationalVisual = detail?.operationalVisual ?? OPERATIONAL_VISUALS[cs.slug.client];
   const leadSource = `case-study:${cs.slug.client}`;
  
   return (
@@ -297,7 +299,45 @@ export default function CaseStudyDetail({ cs, related, guide }: { cs: CaseStudy;
               ) : null
             )}
           </div>
- 
+
+          {/* Operational Transformation Visual */}
+          {operationalVisual ? (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+              className="mt-8 overflow-hidden rounded-3xl border border-[#dfe3ec] bg-[#0a0f2e] text-white shadow-xl"
+            >
+              <div className="grid items-center md:grid-cols-[1.1fr_1fr]">
+                <div className="relative aspect-[16/10] min-h-[260px] w-full overflow-hidden md:aspect-auto md:h-full">
+                  <Image
+                    src={operationalVisual.src}
+                    alt={operationalVisual.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0a0f2e]" />
+                </div>
+                <div className="p-7 sm:p-9">
+                  <span
+                    className="inline-block rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm"
+                    style={{ background: GREEN_DARK }}
+                  >
+                    {operationalVisual.badge}
+                  </span>
+                  <h3 className="mt-4 text-xl font-black leading-snug tracking-tight text-white sm:text-2xl">
+                    {operationalVisual.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/80">
+                    {operationalVisual.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ) : null}
+
           {/* ── WHAT WE FOUND ── the starting point, in the owner's own terms.
               Only rendered where it was written down; nothing is inferred. */}
           {detail?.issues?.length ? (

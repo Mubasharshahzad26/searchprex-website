@@ -25,6 +25,14 @@ export interface ProofShot {
   delta?: string;
 }
 
+export interface OperationalVisual {
+  src: string;
+  badge: string;
+  title: string;
+  description: string;
+  alt: string;
+}
+
 export interface CaseDetail {
   /** What was wrong when the engagement started. */
   issues: string[];
@@ -34,6 +42,8 @@ export interface CaseDetail {
   proof: ProofShot[];
   /** One line on AI-search visibility, where there is something to say. */
   aiVisibility?: string;
+  /** Real-world business or operational transformation photo. */
+  operationalVisual?: OperationalVisual;
 }
 
 /** The shared starting point on both WooCommerce stores. */
@@ -280,3 +290,25 @@ export const EXTRA_PROOF: Record<string, ProofShot[]> = {
     { src: "/images/rank-hvac.JPG", width: 586, height: 321, alt: "Google results for 'replace AC in Simi Valley before summer 2026' with the HVAC Services Team blog as the first organic result below two ads.", caption: "First organic result, below the ads" },
   ],
 };
+
+/**
+ * Real-world operational transformation visuals for case studies, grounding
+ * organic ranking improvements in tangible business outcomes (dispatch, fulfillment, calls).
+ */
+export const OPERATIONAL_VISUALS: Record<string, OperationalVisual> = {
+  "michigan-outdoor-sports": {
+    src: "/images/case-studies/michigan-outdoor-dispatch.webp",
+    badge: "Operational Outcome · Catalog Fulfillment",
+    title: "When 8,000+ catalog pages re-indexed, warehouse fulfillment went back to daily dispatch.",
+    description: "Organic search recovery isn't just an indexing graph. For Michigan Sports & Outdoor, lifting Google's de-indexing suppression unlocked real buyer intent across thousands of outdoor recreation SKUs — packing and shipping gear daily to customers across the Midwest.",
+    alt: "Michigan outdoor sports warehouse fulfillment operations packing and shipping customer orders",
+  },
+  "dolls-cleaning": {
+    src: "/images/case-studies/dolls-cleaning-local-van.webp",
+    badge: "Operational Outcome · Fully Booked Route",
+    title: "Securing positions #1 & #2 transformed silent dispatch into a fully booked local cleaning route.",
+    description: "Dominating local search in Clawson and Chesterfield, MI generated steady inbound calls from homeowners and commercial property managers — keeping service vans on the road with zero paid ad reliance.",
+    alt: "D.O.L.L.S. cleaning service van parked outside a residential property with commercial carpet cleaning equipment",
+  },
+};
+
