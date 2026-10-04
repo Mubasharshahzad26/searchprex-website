@@ -21,7 +21,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, MapPin, Scale, Landmark, Users, CheckCircle2, ShieldCheck } from "lucide-react";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
-import { RealityBanner } from "@/components/ServiceBands";
+import { LocalSerpBattlefieldCard, LocalMapPackSimulationCard } from "@/components/LocalSerpVisuals";
 import {
   Breadcrumb,
   CardGrid,
@@ -189,7 +189,7 @@ export default async function CityPage({
         {/* ── VERIFIED LOCAL SEARCH PROOF STRIP ── */}
         <ServiceProofStrip
           id="proof"
-          title={`Verified local search results from our campaigns`}
+          title="Verified Multi-Location Local SEO Proof"
           moreHref="/case-studies"
           moreLabel="Explore case studies"
           shots={[
@@ -212,7 +212,7 @@ export default async function CityPage({
               caption: `Local authority: ranking both primary domain and localized service silo in the top 2 spots above national competitors.`,
             },
           ]}
-          footnote={`Every figure shown is from verified Google Search Console and live search engine data. We deploy this exact local map pack and high-intent practice-area architecture for your ${page.city} law firm.`}
+          footnote={`Every figure shown is from verified Google Search Console and live search engine data across our multi-location client campaigns in Michigan, California, and Texas. We deploy this exact ranking architecture for your ${page.city} law firm.`}
         />
 
         {/* ── PROBLEM ── */}
@@ -222,13 +222,7 @@ export default async function CityPage({
             title={`Why ${page.city} law firms are not showing up`}
             intro={page.problem}
           />
-          <RealityBanner
-            src="/images/audiences/lawyer-ppc-fatigue.webp"
-            alt={`Attorney in ${page.city} reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night`}
-            tag="The Local Reality · PPC Budget Burnout"
-            quote={`“Another $150 click in ${page.city} that turned into a price-shopper who hung up in 30 seconds.”`}
-            body={`Every click on Google Ads for personal injury, criminal defense, or estate planning in ${page.county} is costly. When paid ad budgets pause, case inquiries vanish immediately. Our organic practice-area and Google Map Pack architecture continuously delivers qualified case consultations with zero ongoing cost-per-click.`}
-          />
+          <LocalSerpBattlefieldCard page={page} />
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {page.problemPoints.map((point) => (
               <li
@@ -318,13 +312,7 @@ export default async function CityPage({
             title={`How we make Google see you as a ${page.city} firm`}
             intro="Local rankings come from signals Google can verify, not from repeating the city name. These are the ones that move the map pack."
           />
-          <RealityBanner
-            src="/images/local/google-business-profile-local-intent.webp"
-            alt={`Prospective client in ${page.city} searching for legal services on Google Maps on their smartphone`}
-            tag="Local Search Intent · The 3-Pack Advantage"
-            quote={`How prospective clients in ${page.city} choose an attorney in 2026.`}
-            body={`When an individual in ${page.county} needs urgent legal representation, they search on mobile and tap one of the top three firms in Google's Map Pack. By aligning your Google Business Profile primary category, synchronizing verified local citations, and building localized practice-area content, we position your firm where 70%+ of inbound calls originate.`}
-          />
+          <LocalMapPackSimulationCard page={page} />
           <div className="mt-8">
             <CardGrid columns={2}>
               {page.localSignals.map((s) => (
