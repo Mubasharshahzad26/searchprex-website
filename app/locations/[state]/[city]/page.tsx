@@ -16,9 +16,12 @@
 // unaffected.
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, MapPin, Scale, Landmark, Users } from "lucide-react";
+import { ArrowRight, MapPin, Scale, Landmark, Users, CheckCircle2, ShieldCheck } from "lucide-react";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
+import { RealityBanner } from "@/components/ServiceBands";
 import {
   Breadcrumb,
   CardGrid,
@@ -183,6 +186,35 @@ export default async function CityPage({
           }
         />
 
+        {/* ── VERIFIED LOCAL SEARCH PROOF STRIP ── */}
+        <ServiceProofStrip
+          id="proof"
+          title={`Verified local search results from our campaigns`}
+          moreHref="/case-studies"
+          moreLabel="Explore case studies"
+          shots={[
+            {
+              src: "/images/proof/local-dolls-gsc-comparison.jpg",
+              alt: `Google Search Console local ranking performance: 192 to 264 monthly clicks and 106K impressions in local market`,
+              width: 626,
+              height: 239,
+              figure: "192 → 264",
+              figureLabel: "Monthly organic clicks (+37.5%)",
+              caption: `Real Google Search Console data: local impressions jumped from 41K to 106K (+158%) without paid advertising.`,
+            },
+            {
+              src: "/images/proof/local-dolls-rank-1-and-2.png",
+              alt: `Google search results with local client occupying position #1 and #2 simultaneously`,
+              width: 627,
+              height: 338,
+              figure: "#1 & #2",
+              figureLabel: "Dominating local search results",
+              caption: `Local authority: ranking both primary domain and localized service silo in the top 2 spots above national competitors.`,
+            },
+          ]}
+          footnote={`Every figure shown is from verified Google Search Console and live search engine data. We deploy this exact local map pack and high-intent practice-area architecture for your ${page.city} law firm.`}
+        />
+
         {/* ── PROBLEM ── */}
         <Section tone="surface">
           <SectionHeading
@@ -190,7 +222,14 @@ export default async function CityPage({
             title={`Why ${page.city} law firms are not showing up`}
             intro={page.problem}
           />
-          <ul className="grid gap-3 sm:grid-cols-2">
+          <RealityBanner
+            src="/images/audiences/lawyer-ppc-fatigue.webp"
+            alt={`Attorney in ${page.city} reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night`}
+            tag="The Local Reality · PPC Budget Burnout"
+            quote={`“Another $150 click in ${page.city} that turned into a price-shopper who hung up in 30 seconds.”`}
+            body={`Every click on Google Ads for personal injury, criminal defense, or estate planning in ${page.county} is costly. When paid ad budgets pause, case inquiries vanish immediately. Our organic practice-area and Google Map Pack architecture continuously delivers qualified case consultations with zero ongoing cost-per-click.`}
+          />
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {page.problemPoints.map((point) => (
               <li
                 key={point}
@@ -279,16 +318,25 @@ export default async function CityPage({
             title={`How we make Google see you as a ${page.city} firm`}
             intro="Local rankings come from signals Google can verify, not from repeating the city name. These are the ones that move the map pack."
           />
-          <CardGrid columns={2}>
-            {page.localSignals.map((s) => (
-              <FeatureCard
-                key={s.label}
-                icon={<MapPin className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
-                title={s.label}
-                body={s.detail}
-              />
-            ))}
-          </CardGrid>
+          <RealityBanner
+            src="/images/local/google-business-profile-local-intent.webp"
+            alt={`Prospective client in ${page.city} searching for legal services on Google Maps on their smartphone`}
+            tag="Local Search Intent · The 3-Pack Advantage"
+            quote={`How prospective clients in ${page.city} choose an attorney in 2026.`}
+            body={`When an individual in ${page.county} needs urgent legal representation, they search on mobile and tap one of the top three firms in Google's Map Pack. By aligning your Google Business Profile primary category, synchronizing verified local citations, and building localized practice-area content, we position your firm where 70%+ of inbound calls originate.`}
+          />
+          <div className="mt-8">
+            <CardGrid columns={2}>
+              {page.localSignals.map((s) => (
+                <FeatureCard
+                  key={s.label}
+                  icon={<MapPin className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
+                  title={s.label}
+                  body={s.detail}
+                />
+              ))}
+            </CardGrid>
+          </div>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             <FactPanel
@@ -309,18 +357,60 @@ export default async function CityPage({
           </div>
         </Section>
 
-        {/* The full six-card WhySearchPrex block repeated word for word on
-            every city page; the same reasons now take one line here and live
-            in full on /why-us and the service pages. */}
-        <Section width="reading" tight>
-          <p className={text.small} style={{ color: color.muted }}>
-            <strong style={{ color: color.ink }}>Working with SearchPrex:</strong> the founder does the work, one firm per
-            practice area in {page.city}, published prices and a 90-day money-back guarantee.{" "}
-            <Link href="/why-us" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
-              Why firms choose SearchPrex
-            </Link>
-            .
-          </p>
+        {/* ── FOUNDER EXECUTION & TRUST ── */}
+        <Section>
+          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="grid items-center md:grid-cols-2">
+              <div className="relative aspect-[16/10] h-full min-h-[300px] w-full overflow-hidden bg-slate-900">
+                <Image
+                  src="/images/about/founder-hands-on-strategy-desk.webp"
+                  alt={`Mubashar Sharif analyzing Google Search Console and local technical SEO data for ${page.city}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 550px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
+              </div>
+              <div className="p-8 lg:p-10">
+                <span className="inline-block rounded-full bg-[#534AB7]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                  Founder-Led Execution
+                </span>
+                <h3 className="mt-3 text-2xl font-black tracking-tight text-[#0a0f2e]">
+                  One firm per practice area in {page.city}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#5b6472]">
+                  No junior account managers, no automated monthly fluff reports. Mubashar Sharif personally analyzes your Google Search Console profile, audits the competitors outranking you in {page.county}, and executes the technical architecture.
+                </p>
+
+                <div className="mt-6 space-y-2.5">
+                  {[
+                    `Exclusive representation: only 1 practice per legal niche in ${page.city}`,
+                    "Direct founder strategy with weekly Monday progress updates",
+                    "90-day performance milestone guarantee — zero long-term lock-in",
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#0a0f2e]">
+                      <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <CtaButton
+                    href="/free-audit"
+                    label={`Request Free 24h ${page.city} Teardown`}
+                    icon={<ArrowRight className="h-4 w-4" aria-hidden />}
+                  />
+                  <Link
+                    href="/why-us"
+                    className="text-xs font-bold text-[#534AB7] hover:underline"
+                  >
+                    Why firms choose SearchPrex →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </Section>
 
         {/* ── FAQ ── */}

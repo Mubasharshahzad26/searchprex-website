@@ -23,6 +23,7 @@ import { LOCATION_CITY_COUNT, LOCATION_STATES } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { SITE, websiteRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceProofStrip from "@/components/ServiceProofStrip";
 
 const URL = `${SITE}/locations`;
 const TITLE = "Law Firm SEO by City & State";
@@ -64,6 +65,35 @@ export default function LocationsHubPage() {
             icon: <ArrowRight className="h-4 w-4" aria-hidden />,
           }}
           secondaryCta={{ href: "/services/law-firm-seo", label: "How law firm SEO works" }}
+        />
+
+        {/* ── VERIFIED PROOF STRIP ── */}
+        <ServiceProofStrip
+          id="proof"
+          title="Verified local search results from our campaigns"
+          moreHref="/case-studies"
+          moreLabel="Explore case studies"
+          shots={[
+            {
+              src: "/images/proof/local-dolls-gsc-comparison.jpg",
+              alt: "Google Search Console local ranking performance: 192 to 264 monthly clicks and 106K impressions in local market",
+              width: 626,
+              height: 239,
+              figure: "192 → 264",
+              figureLabel: "Monthly organic clicks (+37.5%)",
+              caption: "Real Google Search Console data: local impressions jumped from 41K to 106K (+158%) without paid ads.",
+            },
+            {
+              src: "/images/proof/local-dolls-rank-1-and-2.png",
+              alt: "Google search results with local client occupying positions #1 and #2 simultaneously",
+              width: 627,
+              height: 338,
+              figure: "#1 & #2",
+              figureLabel: "Dominating local search results",
+              caption: "Local authority: ranking both primary domain and localized service silo in the top 2 spots above national competitors.",
+            },
+          ]}
+          footnote="Every screenshot is live Google Search Console & search engine data. We deploy this exact local map pack and practice-area architecture across all covered cities."
         />
 
         {/* ── STATES & CITIES ── */}
