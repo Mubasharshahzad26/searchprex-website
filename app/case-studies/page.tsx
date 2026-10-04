@@ -15,6 +15,7 @@
 import type { Metadata } from "next";
 import CaseStudiesClient from "./CaseStudiesClient";
 import { caseStudies, detailUrl, FAQS } from "./data";
+import { posts as hardcodedBlogPosts } from "@/app/blog/data";
 import { getPageSEO } from "@/lib/admin-seo";
 import { db } from "@/lib/db";
 import { SITE, organizationRef, websiteRef } from "@/lib/site-schema";
@@ -60,6 +61,39 @@ export default async function Page() {
       console.error("[case-studies] CMS case studies unavailable:", err);
       return [];
     });
+
+  let latestBlogs: any[] = [];
+  try {
+    const dbBlogs = await db.marketingBlog.findMany({
+      where: {
+        published: true,
+        NOT: { category: { contains: "SEO News", mode: "insensitive" } },
+      },
+      orderBy: { publishedAt: "desc" },
+      take: 4,
+    });
+
+    if (dbBlogs && dbBlogs.length > 0) {
+      latestBlogs = dbBlogs.map((b) => ({
+        slug: b.slug,
+        category: b.category || "Technical SEO",
+        title: b.title,
+        excerpt: b.excerpt || b.metaDescription || "",
+        readTime: b.readTime || "8-minute read",
+        heroImage:
+          b.coverImage ||
+          "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+      }));
+    }
+  } catch (err) {
+    console.error("[case-studies] CMS blogs unavailable for resources:", err);
+  }
+
+  const dbSlugs = new Set(latestBlogs.map((b) => b.slug));
+  const mergedBlogs = [
+    ...latestBlogs,
+    ...hardcodedBlogPosts.filter((p) => !dbSlugs.has(p.slug)),
+  ].slice(0, 4);
 
   // Organization, founder and WebSite come from lib/site-schema.ts via the root
   // layout. The old /all-case-studies page redefined all three under a second
@@ -110,7 +144,11 @@ export default async function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
-      <CaseStudiesClient linkedinUrl={LINKEDIN_URL} initialCaseStudies={dbCaseStudies} />
+      <CaseStudiesClient
+        linkedinUrl={LINKEDIN_URL}
+        initialCaseStudies={dbCaseStudies}
+        latestBlogs={mergedBlogs}
+      />
     </>
   );
 }

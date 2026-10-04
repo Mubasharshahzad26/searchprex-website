@@ -25,6 +25,7 @@ export interface Post {
   author: { name: string; role: string };
   authorBio: string;
   featured: boolean;
+  heroImage?: string;
 }
  
 const ALL_POSTS: Post[] = [
@@ -67,6 +68,34 @@ const ALL_MOST_READ = [
  */
 
 const PUBLISHABLE = new Set(publishedPosts.map((p) => p.slug));
+const heroImageBySlug = new Map(publishedPosts.map((p) => [p.slug, p.heroImage]));
 
-export const posts: Post[] = ALL_POSTS.filter((p) => PUBLISHABLE.has(p.slug));
-export const mostRead = ALL_MOST_READ.filter((p) => PUBLISHABLE.has(p.slug));
+const CATEGORY_COVERS: Record<string, string> = {
+  "Technical SEO": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80",
+  "On-Page SEO": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=900&q=80",
+  "Local SEO": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+  "E-commerce SEO": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+  "Link Building": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80",
+  "Content Strategy": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80",
+};
+
+export const posts: Post[] = ALL_POSTS
+  .filter((p) => PUBLISHABLE.has(p.slug))
+  .map((p) => ({
+    ...p,
+    heroImage:
+      heroImageBySlug.get(p.slug) ||
+      CATEGORY_COVERS[p.category] ||
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80",
+  }));
+
+export const mostRead = ALL_MOST_READ
+  .filter((p) => PUBLISHABLE.has(p.slug))
+  .map((p) => ({
+    ...p,
+    heroImage:
+      heroImageBySlug.get(p.slug) ||
+      CATEGORY_COVERS[p.category] ||
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80",
+  }));
+

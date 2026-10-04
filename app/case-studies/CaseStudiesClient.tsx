@@ -23,6 +23,7 @@ import { ArrowUpRight, ArrowRight, TrendingUp, Filter, Sparkles, CheckCircle2, S
 
 import type { CaseStudy, SeoType, Metric } from "./data";
 import { caseStudies, detailUrl } from "./data";
+import { posts as fallbackBlogPosts } from "@/app/blog/data";
 
 // ─────────────────────────────────────────────────────────────
 // SEMRUSH LG-STYLE SPIKE FIELD
@@ -106,9 +107,11 @@ const isFilterKey = (v: string | null): v is FilterKey =>
 export default function CaseStudiesClient({
   linkedinUrl,
   initialCaseStudies = [],
+  latestBlogs = [],
 }: {
   linkedinUrl?: string;
   initialCaseStudies?: any[];
+  latestBlogs?: any[];
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -120,6 +123,10 @@ export default function CaseStudiesClient({
   // Quick form state for bottom CTA
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", website: "", service: "Ecommerce SEO" });
+
+  const blogsToDisplay = (latestBlogs && latestBlogs.length > 0)
+    ? latestBlogs.slice(0, 4)
+    : fallbackBlogPosts.slice(0, 4);
 
   const dbCaseStudiesFormatted: CaseStudy[] = initialCaseStudies.flatMap((cs) => {
     const [industry, client] = String(cs.slug ?? "").split("/");
@@ -395,54 +402,58 @@ export default function CaseStudiesClient({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Technical SEO for AI: Making your site machine-readable",
-                desc: "Understand how AI search crawlers parse websites and the architectural decisions that get you cited.",
-                tag: "Playbook · 6 min read",
-                href: "/services/technical-seo",
-                gradient: "from-[#534AB7] to-[#7b61ff]",
-              },
-              {
-                title: "From keywords to intent: Redefining e-commerce search",
-                desc: "How programmatic content enrichment turns thin product catalogs into revenue-generating shopping hubs.",
-                tag: "Whitepaper · 8 min read",
-                href: "/services/ecommerce-seo",
-                gradient: "from-[#0ea5e9] to-[#06b6d4]",
-              },
-              {
-                title: "Local map dominance: Google 3-Pack & AI Overviews",
-                desc: "Structuring localized service silos to capture high-margin inbound calls with zero ongoing ad spend.",
-                tag: "Guide · 5 min read",
-                href: "/services/local-seo",
-                gradient: "from-[#2f9670] to-[#3eb489]",
-              },
-              {
-                title: "Corridor SEO architecture for international fintech",
-                desc: "Outranking multi-billion brands on high-intent cross-border remittance queries.",
-                tag: "Case Study Breakdown",
-                href: "/case-studies/fintech/remit-choice",
-                gradient: "from-[#6366f1] to-[#a855f7]",
-              },
-            ].map((res, i) => (
+            {blogsToDisplay.map((blog: any, i: number) => (
               <Link
-                key={i}
-                href={res.href}
-                className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-xs transition-all hover:-translate-y-1 hover:shadow-lg"
+                key={blog.slug || i}
+                href={`/blog/${blog.slug}`}
+                className="group flex flex-col rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#534AB7]/40"
               >
-                <div className={`h-28 w-full rounded-xl bg-gradient-to-br ${res.gradient} p-4 flex items-end text-white shadow-xs`}>
-                  <Sparkles className="h-6 w-6 text-white/80" />
+                {/* Real Blog Cover Image */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={blog.heroImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80"}
+                    alt={blog.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+
+                  {/* Category Pill Tag */}
+                  <div className="absolute top-3 left-3">
+                    <span className="inline-flex items-center rounded-full bg-black/60 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wider">
+                      {blog.category || "Technical SEO"}
+                    </span>
+                  </div>
+
+                  {/* Read Time Pill */}
+                  {blog.readTime && (
+                    <div className="absolute top-3 right-3">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md px-2 py-0.5 text-[10px] font-bold text-[#0a0f2e]">
+                        {blog.readTime}
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <div className="mt-4 flex-1 flex flex-col">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#534AB7]">
-                    {res.tag}
-                  </span>
-                  <h3 className="mt-1.5 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
-                    {res.title}
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-500 line-clamp-2">
-                    {res.desc}
-                  </p>
+
+                {/* Card Content Body */}
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#534AB7]">
+                      {blog.subcategory || "Verified SEO Guide"}
+                    </span>
+                    <h3 className="mt-1.5 text-sm sm:text-base font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors line-clamp-2">
+                      {blog.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-500 line-clamp-2">
+                      {blog.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#534AB7] group-hover:text-[#7b61ff]">
+                    <span>Read full guide</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
                 </div>
               </Link>
             ))}
