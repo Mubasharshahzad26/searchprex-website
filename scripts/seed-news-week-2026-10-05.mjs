@@ -6,7 +6,8 @@
  * deep-dive spokes, so running it cannot overwrite edits made in the admin.
  * Upserts on title: run again to update in place.
  *
- * Every claim is dated and carries a source link.
+ * Every claim is dated and carries a source link. Google's Oct 1 AI-content
+ * fact-checking guidance is not here: it was already published on the site.
  *
  *   node scripts/seed-news-week-2026-10-05.mjs
  */
@@ -20,15 +21,6 @@ const db = new PrismaClient({
 });
 
 const NEWS = [
-  {
-    title: "Google Now Says to Fact-Check All AI Content Before Publishing",
-    tag: "AI Content",
-    newsDate: new Date("2026-10-01T12:00:00Z"),
-    summary:
-      "On October 1 Google revised its guide to using generative AI content, with a changelog entry that reads: \"Updated the using generative AI content guide with information from the Search Quality Raters guidelines.\" The page now says generative models predict words rather than retrieve facts, that their output can contain hallucinations, and that manual fact-checking of all AI-generated content before publishing is critical — including title elements, meta descriptions, structured data and image alt text. It points to the rater guidelines' sections on scaled content abuse and on content made with little effort, originality or added value. For anyone generating product descriptions or location pages at scale, the practical read is that the review step is now part of Google's own written guidance, not an optional extra.",
-    sourceLabel: "PPC Land",
-    sourceHref: "https://ppc.land/google-tells-sites-to-manually-factcheck-all-ai-content-before-publishing/",
-  },
   {
     title: "September 2026 Spam Update: A Second Wave Hits on September 30",
     tag: "Spam Update",
