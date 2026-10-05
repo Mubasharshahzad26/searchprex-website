@@ -22,15 +22,6 @@ const db = new PrismaClient({
 
 const NEWS = [
   {
-    title: "September 2026 Spam Update: A Second Wave Hits on September 30",
-    tag: "Spam Update",
-    newsDate: new Date("2026-09-30T12:00:00Z"),
-    summary:
-      "Google's fourth spam update of 2026 began on September 24 and, unlike March, June and August — each done in under three days — Google said this one may take up to two weeks to roll out. Site owners reported a first wave of drops on September 25–27 and a second on September 30, when volatility trackers including Mozcast, Wincher and Semrush also spiked. Google has not announced a separate update or named the techniques it targets, so a drop in this window should be checked against the spam policies, and no conclusions drawn until Google marks the rollout complete.",
-    sourceLabel: "Search Engine Roundtable",
-    sourceHref: "https://www.seroundtable.com/google-september-2026-spam-update-two-42209.html",
-  },
-  {
     title: "Google Tests Paying Publishers When Their Content Shapes AI Answers",
     tag: "AI Search",
     newsDate: new Date("2026-09-30T16:00:00Z"),
@@ -47,15 +38,6 @@ const NEWS = [
       "Google's VP of Product for Search, Robby Stein, announced on September 28 that info monitoring in AI Mode, previously limited to Pro and Ultra subscribers, is rolling out to everyone globally. Users tell AI Mode what to watch and Search keeps checking sites, forums and Google's Shopping Graph, then sends an update — Google's own examples include back-in-stock and price-drop alerts. For stores, accurate price and availability in product structured data and Merchant Center feeds now decides whether a returning shopper is told about your offer.",
     sourceLabel: "Search Engine Watch",
     sourceHref: "https://searchenginewatch.com/google-rolls-out-monitoring-capabilities-in-ai-mode-to-everyone/",
-  },
-  {
-    title: "Search Console Adds a Multimodal Filter for Image-Led Searches",
-    tag: "Search Console",
-    newsDate: new Date("2026-09-24T12:00:00Z"),
-    summary:
-      "On September 24 Google added a \"multimodal\" option to the Search type filter in Search Console. It covers web results for searches where an image was part of the query — Google Lens, Circle to Search, image uploads to Google Search and Chrome's right-click image search — and appears in both the Performance report and the generative AI report. There is no query data for this traffic, because the search was an image rather than text. Product and local businesses with strong photography can now see how much of their traffic starts from a camera instead of a keyboard.",
-    sourceLabel: "Search Engine Journal",
-    sourceHref: "https://www.searchenginejournal.com/google-search-console-multimodal-filter/590781/",
   },
 ];
 
