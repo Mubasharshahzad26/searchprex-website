@@ -21,7 +21,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, MapPin, Scale, Landmark, Users, CheckCircle2, ShieldCheck } from "lucide-react";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
-import { LocalSerpBattlefieldCard, LocalMapPackSimulationCard } from "@/components/LocalSerpVisuals";
 import { LocalProblemSpotlight, LocalSolutionSpotlight } from "@/components/LocalCitySpotlight";
 import {
   Breadcrumb,
@@ -223,11 +222,7 @@ export default async function CityPage({
             title={`Why ${page.city} law firms are not showing up`}
             intro={page.problem}
           />
-          {page.citySlug === "detroit" ? (
-            <LocalProblemSpotlight page={page} />
-          ) : (
-            <LocalSerpBattlefieldCard page={page} />
-          )}
+          <LocalProblemSpotlight page={page} />
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {page.problemPoints.map((point) => (
               <li
@@ -317,11 +312,7 @@ export default async function CityPage({
             title={`How we make Google see you as a ${page.city} firm`}
             intro="Local rankings come from signals Google can verify, not from repeating the city name. These are the ones that move the map pack."
           />
-          {page.citySlug === "detroit" ? (
-            <LocalSolutionSpotlight page={page} />
-          ) : (
-            <LocalMapPackSimulationCard page={page} />
-          )}
+          <LocalSolutionSpotlight page={page} />
           <div className="mt-8">
             <CardGrid columns={2}>
               {page.localSignals.map((s) => (
