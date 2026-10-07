@@ -9,6 +9,144 @@ import { proofBoxHtml } from "@/lib/proof-box";
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "google-ai-overviews-seo",
+    category:    "Content Strategy",
+    subcategory: "Generative Engine Optimization",
+    metaTitle:       "How to Appear in Google AI Overviews: 2026 GEO Strategy",
+    metaDescription: "Learn how to get cited in Google AI Overviews, Perplexity, and Gemini in 2026. A 5-step Generative Engine Optimization (GEO) framework for ecommerce and brands.",
+    title:       "How to Appear in Google AI Overviews: GEO Strategy for 2026",
+    excerpt:     "Google AI Overviews now answer multi-intent queries before users see blue links. Here is how Google's Gemini models select citations, extract facts, and how to optimize your content for generative engines in 2026.",
+    readTime:    "12-minute read",
+    date:        "October 8, 2026",
+    tags:        ["google ai overviews", "generative engine optimization", "geo strategy", "ai search seo", "answer engine optimization"],
+    stat:        { value: "2.5B+", label: "Monthly AI Overview users" },
+    heroImage:   "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "How Google AI Overviews select and cite sources",
+      "Information gain: the primary GEO ranking factor",
+      "Formatting for LLM token extraction",
+      "Schema and entity disambiguation for generative search",
+      "E-commerce GEO: winning product recommendations",
+      "Common mistakes that disqualify pages from AI citations",
+      "Measuring AI search visibility in Search Console",
+      "Frequently asked questions",
+      "Actionable GEO implementation checklist",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>Short answer:</strong> To appear in Google AI Overviews in 2026, content must satisfy three criteria: high <em>information gain</em> (original data, proprietary testing, or unique perspectives not found in existing SERPs), structured <em>answer syntax</em> (clear declarative summaries within the first 60 words of each H2), and clean <em>entity verification</em> (valid JSON-LD schema, named author entities, and verifiable factual claims). Google's Gemini RAG pipeline selects source cards that confirm high consensus across the web while providing unique incremental value.</div>
+      <p>Generative Engine Optimization (GEO) is not a replacement for traditional technical SEO; it is an evolution of how search engines consume and synthesize content. Google does not index pages merely as lists of keywords anymore. Its Retrieval-Augmented Generation (RAG) framework breaks pages down into factual token triplets (Subject, Predicate, Object). Sites that present factual answers in unambiguous syntax capture the carousel cards, while wordy boilerplate is filtered out.</p>
+
+      <h2>How Google AI Overviews select and cite sources</h2>
+      <p>Google AI Overviews operate via a multi-stage RAG pipeline powered by Gemini models:</p>
+      <ol>
+        <li><strong>Query Decomposition:</strong> The user query is broken down into constituent sub-intents. For example, a query like <em>"best CRM for commercial real estate"</em> is split into sub-queries regarding feature requirements, pricing tiers, broker integrations, and user sentiment.</li>
+        <li><strong>Vector Retrieval:</strong> Google queries its search index for authoritative URLs that rank within the top 20 organic positions for each decomposed sub-query. Pages that rank below position 20 are rarely selected as generative source cards.</li>
+        <li><strong>Passage Extraction &amp; Fact Verification:</strong> The model extracts 150-word passages and cross-references them against trusted Knowledge Graph nodes and consensus data across other high-authority pages.</li>
+        <li><strong>Synthesis &amp; Source Attribution:</strong> The generative answer is compiled, and citation links (the carousel cards and in-text source chips) are assigned to the specific URLs from which the facts, statistics, or conclusions were derived.</li>
+      </ol>
+      <p>If your article repeats what every other blog says in generic terms, Google uses your competitors as the consensus source and ignores your URL. You must provide unique data or distinct analytical conclusions to earn citation cards.</p>
+
+      <h2>Information gain: the primary GEO ranking factor</h2>
+      <p>Google holds multiple patents regarding <em>Information Gain Scores</em>. When multiple search results answer the same query, Google's algorithms measure how much novel, non-redundant information a specific URL provides relative to what the searcher has already viewed.</p>
+
+      <h3>How to build high Information Gain into every page</h3>
+      <ul>
+        <li><strong>Proprietary Metrics and Case Data:</strong> Include specific numbers, test results, or time frames (e.g., <em>"tested across 35,000 SKUs over 14 weeks"</em> rather than <em>"tested on many products"</em>).</li>
+        <li><strong>Contrarian or Nuanced Findings:</strong> Challenge outdated industry advice with evidence (e.g., explain why Google Indexing API does not work for general web pages).</li>
+        <li><strong>Original Visual Assets:</strong> Custom technical diagrams, workflow charts, and unedited platform screenshots are recognized by Google Lens and multimodal crawlers as original assets.</li>
+        <li><strong>Direct Quotations and Named Experts:</strong> Content attributed to verified practitioners with active digital footprints scores higher on entity trustworthiness.</li>
+      </ul>
+
+      <h2>Formatting for LLM token extraction</h2>
+      <p>Large language models parse content linearly. How you structure your HTML headings, paragraphs, and list elements determines whether an algorithm can cleanly lift your explanation into an AI summary.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Content Element</th>
+            <th>Poor Legacy Format (Ignored by AI)</th>
+            <th>Optimal GEO Format (Cited by AI)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Section Openers</strong></td>
+            <td>"In today's fast-paced digital landscape, understanding SEO is crucial..."</td>
+            <td>"Generative Engine Optimization (GEO) is the process of optimizing web content for inclusion in AI-generated search overviews."</td>
+          </tr>
+          <tr>
+            <td><strong>Comparisons</strong></td>
+            <td>Walls of text discussing advantages and disadvantages without direct summary.</td>
+            <td>Structured HTML <code>&lt;table&gt;</code> with clear headers, metrics, and definitive tradeoff summaries.</td>
+          </tr>
+          <tr>
+            <td><strong>Step-by-Step Guides</strong></td>
+            <td>H3 tags separated by long introductory paragraphs.</td>
+            <td>Sequential <code>&lt;ol&gt;</code> numbered steps with bold imperative directives at the start of each bullet.</td>
+          </tr>
+          <tr>
+            <td><strong>Definitions</strong></td>
+            <td>Vague explanations scattered across multiple paragraphs.</td>
+            <td>Dedicated <code>&lt;dl&gt;</code> or bolded term-definition pairs matching natural language queries.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Schema and entity disambiguation for generative search</h2>
+      <p>Before Gemini can cite a statement, it must understand the entities referenced. Ambiguous brand names, unverified authors, and missing structured relationships make LLMs hesitant to present your claims as facts.</p>
+      <ul>
+        <li><strong>Article and Author Schema:</strong> Use <code>Person</code> schema for authors, linking to external profiles (LinkedIn, Crunchbase, author bio) using <code>sameAs</code>.</li>
+        <li><strong>About and Mentions Schema:</strong> Tag the primary subject matter in your JSON-LD using Wikidata and Wikipedia entity URIs under <code>about</code> and <code>mentions</code>.</li>
+        <li><strong>FAQPage Schema:</strong> While FAQ rich snippets no longer display star ratings in general search, structured Q&amp;A markup remains one of the fastest ways for Google's RAG pipeline to map questions to direct answers.</li>
+      </ul>
+
+      <h2>E-commerce GEO: winning product recommendations</h2>
+      <p>For online retailers, AI Overviews represent the new digital storefront. When shoppers query <em>"best lightweight trail shoes for wide feet under $150"</em>, Google AI Overviews do not list ten links; they construct a curated product carousel directly above the fold.</p>
+      <p>To qualify your catalog for AI product carousels:</p>
+      <ol>
+        <li>Implement complete <code>Product</code> JSON-LD with <code>aggregateRating</code>, <code>offers.price</code>, <code>OfferShippingDetails</code>, and <code>MerchantReturnPolicy</code> (see our companion guide on <a href="/blog/schema-markup-ecommerce">Product Schema Markup</a>).</li>
+        <li>Provide exact dimensional and material attributes in product descriptions (weight in ounces/grams, specific materials like Vibram or Gore-Tex, and clear sizing fit notes).</li>
+        <li>Encourage customer reviews that mention specific use cases, body types, and real-world conditions; LLMs analyze review sentiment and review text passages to match niche constraints.</li>
+      </ol>
+
+      <h2>Common mistakes that disqualify pages from AI citations</h2>
+      <ul>
+        <li><strong>Clickbait and Fluff Openers:</strong> Articles that withhold the direct answer until paragraph five lose to competitors who lead with the conclusion.</li>
+        <li><strong>Uncited Statistical Claims:</strong> Quoting generic stats (<em>"studies show 70% of users..."</em>) without citing the exact year, source, and methodology causes Google's spam classifiers to flag the passage.</li>
+        <li><strong>Slow Time to First Byte (TTFB):</strong> If Googlebot-Mobile encounters server timeouts or slow rendering, generative extraction models skip the URL in favor of cached alternatives.</li>
+        <li><strong>Paywalls and Heavy Script Gating:</strong> If the primary factual content is hidden behind client-side JavaScript or unrendered popups, vector embeddings cannot parse the text.</li>
+      </ul>
+
+      <h2>Measuring AI search visibility in Search Console</h2>
+      <p>Google Search Console provides two primary tools to assess generative traffic:</p>
+      <p>Under the <strong>Performance &gt; Search results</strong> report, use the <em>Search appearance</em> filter to inspect <strong>Good Page Experience</strong> and <strong>Merchant listings</strong>. Additionally, monitor referral parameters and direct impressions for multi-modal Lens and AI Mode interactions in the dimensions tab.</p>
+      <p>A sudden increase in impressions combined with a lower average CTR often indicates that your page is being featured as a citation source in an AI Overview. While users may read the summary on Google, high-intent buyers who need full implementation steps click through to your domain.</p>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>Is Generative Engine Optimization different from Answer Engine Optimization (AEO)?</h3>
+      <p>They share identical underlying principles. AEO originally focused on voice search (Google Assistant, Siri, Alexa) and featured snippets. GEO expands this concept to include multi-step reasoning, generative synthesis, and multi-source attribution across modern LLM interfaces like Google AI Overviews, Perplexity, and ChatGPT Search.</p>
+
+      <h3>Can an AI overview cite a page that doesn't rank on page 1?</h3>
+      <p>Rarely. Google's RAG architecture draws its retrieval pool from top-ranking organic pages for decomposed sub-queries. Achieving top 10–20 organic rankings remains the necessary prerequisite for earning an AI Overview citation card.</p>
+
+      <h3>Does blocking Google-Extended protect content from AI Overviews?</h3>
+      <p>No. <code>Google-Extended</code> controls whether your content is used to train standalone Gemini models. It does not affect standard Googlebot indexing or inclusion in Google Search AI Overviews. Disallowing Googlebot entirely removes you from both generative answers and organic search.</p>
+
+      <h2>Actionable GEO implementation checklist</h2>
+      <ol>
+        <li>Audit your top 10 traffic-generating pages and insert a 40–60 word direct answer callout below each primary H2.</li>
+        <li>Add proprietary data points, test numbers, or case study statistics to differentiate your text from competitor summaries.</li>
+        <li>Convert narrative comparisons into clear HTML comparison tables.</li>
+        <li>Ensure all author bios include verifiable credentials, published articles, and external entity links.</li>
+        <li>Review our companion guides on <a href="/blog/topical-authority-content-clusters">Topical Authority Content Clusters</a> and <a href="/blog/schema-markup-ecommerce">Product Schema Markup</a>.</li>
+        <li>For enterprise stores and businesses looking to build a full generative search moat, schedule a diagnostic session on our <a href="/free-audit">Free SEO Audit</a> page or explore our full <a href="/services/technical-seo">Technical SEO Services</a>.</li>
+      </ol>
+`,
+    author: { name: "Mubashar Sharif", role: "Verified SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in technical and generative search optimization." },
+  },
+  {
     slug:        "schema-markup-ecommerce",
     category:    "On-Page SEO",
     subcategory: "Schema Markup",
