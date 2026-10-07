@@ -9,6 +9,397 @@ import { proofBoxHtml } from "@/lib/proof-box";
 /* ── posts data ── */
 export const posts = [
   {
+    slug:        "schema-markup-ecommerce",
+    category:    "On-Page SEO",
+    subcategory: "Schema Markup",
+    metaTitle:       "Product Schema Markup: Complete JSON-LD Guide for Ecommerce",
+    metaDescription: "Master ecommerce product schema markup in 2026. Complete JSON-LD templates for merchant listings, product variants, shipping details, and return policies.",
+    title:       "Product Schema Markup: The Complete JSON-LD Guide for E-commerce",
+    excerpt:     "Missing shipping details, return policies, or variant prices strip rich results from Google Search. Here is the complete JSON-LD implementation guide to secure merchant listings in 2026.",
+    readTime:    "12-minute read",
+    date:        "October 6, 2026",
+    tags:        ["product schema", "json-ld ecommerce", "merchant listings", "rich snippets", "ecommerce seo"],
+    stat:        { value: "100%", label: "Rich result compliance" },
+    heroImage:   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "Product snippets vs merchant listings in 2026",
+      "Mandatory properties and baseline requirements",
+      "Complete single-product JSON-LD template",
+      "Handling product variants with ProductGroup",
+      "Adding shippingDetails and hasMerchantReturnPolicy",
+      "Platform implementations: Shopify and WooCommerce",
+      "Fixing common Search Console schema warnings",
+      "Testing and validation workflow",
+      "Frequently asked questions",
+      "Implementation checklist",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>Short answer:</strong> In 2026, Google evaluates e-commerce structured data under two distinct experiences: standard <em>Product Snippets</em> (ratings, price, stock status) and expanded <em>Merchant Listings</em> (price drop badges, free shipping tags, fast return signals, visual carousel inclusion). To qualify for both without Search Console warnings, your JSON-LD must include accurate pricing and currency, real-time availability, GTIN/MPN identifiers, nested <code>shippingDetails</code>, and <code>hasMerchantReturnPolicy</code> entities. Incomplete markup causes Google to demote or discard rich result enhancements across mobile and desktop SERPs.</div>
+      <p>Most online stores rely on basic theme structured data that dates back to 2018. While those legacy templates output basic price and name properties, they consistently trigger warnings in Google Search Console for missing shipping rules, omitted return windows, and malformed variant arrays. Addressing these technical gaps restores rich snippet visibility and lifts organic click-through rates across commercial searches.</p>
+
+      <h2>Product snippets vs merchant listings in 2026</h2>
+      <p>Google distinguishes between two tiers of rich result eligibility for e-commerce websites:</p>
+      <ul>
+        <li><strong>Product Snippets:</strong> Basic search result enhancements that display star ratings, review counts, price figures, and stock availability beneath your page title on standard web results. Available to any page selling a product or reviewing a specific item.</li>
+        <li><strong>Merchant Listings:</strong> Comprehensive product presentations that populate the Google Shopping tab, Popular Products carousels, visual filter rails, and enhanced mobile product cards. Qualifying requires explicit shipping speeds, delivery costs, return windows, and unique product identifiers (UPC/EAN/GTIN).</li>
+      </ul>
+      <p>If your store omits <code>OfferShippingDetails</code> or <code>MerchantReturnPolicy</code>, Google will downgrade your listing to a standard snippet or suppress rich treatment entirely when competitors provide full structured data.</p>
+
+      <h2>Mandatory properties and baseline requirements</h2>
+      <p>Google Search Central requires specific entity fields before granting rich result eligibility. Missing any mandatory field invalidates the entire structured data block.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Technical Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>name</code></td>
+            <td>Text</td>
+            <td>Mandatory</td>
+            <td>The exact commercial title of the product matching the page H1.</td>
+          </tr>
+          <tr>
+            <td><code>image</code></td>
+            <td>URL / Array</td>
+            <td>Mandatory</td>
+            <td>Direct crawlable image URLs (minimum 1200px wide, 16:9, 4:3, or 1:1 aspect ratio).</td>
+          </tr>
+          <tr>
+            <td><code>offers</code></td>
+            <td>Offer / AggregateOffer</td>
+            <td>Mandatory</td>
+            <td>Contains price, priceCurrency, availability, and seller information.</td>
+          </tr>
+          <tr>
+            <td><code>offers.price</code></td>
+            <td>Number / Text</td>
+            <td>Mandatory</td>
+            <td>Current checkout price formatted without currency symbols (e.g., <code>"49.99"</code>).</td>
+          </tr>
+          <tr>
+            <td><code>offers.priceCurrency</code></td>
+            <td>Text (ISO 4217)</td>
+            <td>Mandatory</td>
+            <td>Standard 3-letter currency code (e.g., <code>"USD"</code>, <code>"GBP"</code>, <code>"CAD"</code>).</td>
+          </tr>
+          <tr>
+            <td><code>offers.availability</code></td>
+            <td>ItemAvailability</td>
+            <td>Mandatory</td>
+            <td>Valid Schema URI: <code>https://schema.org/InStock</code> or <code>https://schema.org/OutOfStock</code>.</td>
+          </tr>
+          <tr>
+            <td><code>sku</code></td>
+            <td>Text</td>
+            <td>Highly Recommended</td>
+            <td>Unique merchant stock-keeping unit matching your inventory backend.</td>
+          </tr>
+          <tr>
+            <td><code>gtin13</code> / <code>gtin12</code></td>
+            <td>Text</td>
+            <td>Highly Recommended</td>
+            <td>Barcodes (UPC in US, EAN in Europe). Required for Merchant Listing disambiguation.</td>
+          </tr>
+          <tr>
+            <td><code>brand</code></td>
+            <td>Brand / Organization</td>
+            <td>Recommended</td>
+            <td>Entity object indicating manufacturer name: <code>{"@type": "Brand", "name": "BrandName"}</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Complete single-product JSON-LD template</h2>
+      <p>Below is a production-ready, fully compliant JSON-LD template configured with 2026 Merchant Listing properties, including shipping rates and returns governance:</p>
+      <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "Men's Waterproof Trail Running Shoe",
+  "image": [
+    "https://example.com/images/1x1/trail-shoe.jpg",
+    "https://example.com/images/4x3/trail-shoe.jpg",
+    "https://example.com/images/16x9/trail-shoe.jpg"
+  ],
+  "description": "Durable waterproof trail running shoe with Vibram rubber lug outsole and breathable membrane.",
+  "sku": "TRS-BLK-105",
+  "gtin12": "012345678905",
+  "brand": {
+    "@type": "Brand",
+    "name": "Apex Outdoor"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://example.com/products/trail-running-shoe",
+    "priceCurrency": "USD",
+    "price": "139.99",
+    "priceValidUntil": "2026-12-31",
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Apex Outdoor Official"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0.00",
+        "currency": "USD"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "US"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 1,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 2,
+          "maxValue": 4,
+          "unitCode": "DAY"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "124"
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Handling product variants with ProductGroup</h2>
+      <p>A frequent architecture mistake in e-commerce SEO is outputting conflicting product markup when a page contains multiple variants (sizes, colors, materials). Historically, store owners either merged all variants into a generic price range or duplicated multiple separate <code>Product</code> roots on the same URL, causing Search Console parsing conflicts.</p>
+      <p>Google's recommended standard for multi-variant products uses the <code>ProductGroup</code> specification with the <code>hasVariant</code> array:</p>
+      <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org/",
+  "@type": "ProductGroup",
+  "name": "Classic Merino Wool Crewneck",
+  "description": "Ultra-fine Australian merino wool sweater available in multiple seasonal colors.",
+  "url": "https://example.com/products/merino-crewneck",
+  "brand": {
+    "@type": "Brand",
+    "name": "Nordic Weave"
+  },
+  "variesBy": [
+    "https://schema.org/color",
+    "https://schema.org/size"
+  ],
+  "hasVariant": [
+    {
+      "@type": "Product",
+      "name": "Classic Merino Wool Crewneck - Navy / Medium",
+      "sku": "MC-NVY-M",
+      "gtin12": "987654321012",
+      "color": "Navy",
+      "size": "M",
+      "image": "https://example.com/images/merino-navy.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "98.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Classic Merino Wool Crewneck - Charcoal / Large",
+      "sku": "MC-CHR-L",
+      "gtin12": "987654321029",
+      "color": "Charcoal",
+      "size": "L",
+      "image": "https://example.com/images/merino-charcoal.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "98.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+}
+&lt;/script&gt;</code></pre>
+      <p>When implementing <code>ProductGroup</code>, ensure each nested variant carries its own SKU, specific image URL, and real-time inventory state.</p>
+
+      <h2>Adding shippingDetails and hasMerchantReturnPolicy</h2>
+      <p>Google uses structured shipping and return parameters directly in SERP snippets. When buyers see <em>"Free 3-day shipping"</em> and <em>"Free 30-day returns"</em> highlighted in bold next to your search listing, CTR improves significantly over competitor listings lacking structured signals.</p>
+
+      <h3>Configuring shipping rates by order tier</h3>
+      <p>If your store provides free shipping above a specific order threshold (for example, free shipping over $50, otherwise $5.99 flat rate), your <code>shippingRate</code> specification should reflect your default standard rate for individual item checkout:</p>
+      <pre><code>"shippingDetails": {
+  "@type": "OfferShippingDetails",
+  "shippingRate": {
+    "@type": "MonetaryAmount",
+    "value": "5.99",
+    "currency": "USD"
+  },
+  "shippingDestination": {
+    "@type": "DefinedRegion",
+    "addressCountry": "US"
+  }
+}</code></pre>
+      <p>Alternatively, if you configure shipping settings at account level inside Google Merchant Center, you can omit page-level shipping schema, and Google will sync rates directly from your Merchant Center feed.</p>
+
+      <h2>Platform implementations: Shopify and WooCommerce</h2>
+
+      <h3>Shopify Liquid implementation</h3>
+      <p>Modern Shopify themes typically render JSON-LD within <code>snippets/product-schema.liquid</code>. Ensure your snippet outputs structured prices from <code>product.selected_or_first_available_variant</code> and incorporates the return policy URL configured in your store admin:</p>
+      <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "image": [
+    {% for image in product.images limit: 3 %}
+      {{ image.src | image_url: width: 1200 | prepend: "https:" | json }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "description": {{ product.description | strip_html | truncatewords: 40 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | default: product.id | json }},
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": {{ canonical_url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ product.selected_or_first_available_variant.price | money_without_currency | remove: "," | json }},
+    "availability": "https://schema.org/{% if product.selected_or_first_available_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h3>WooCommerce PHP filter hook</h3>
+      <p>Avoid editing WooCommerce template files directly. Instead, extend the native structured data schema using the <code>woocommerce_structured_data_product</code> filter inside your child theme <code>functions.php</code> or custom plugin:</p>
+      <pre><code>add_filter( 'woocommerce_structured_data_product', 'searchprex_enrich_product_schema', 10, 2 );
+function searchprex_enrich_product_schema( $markup, $product ) {
+    if ( ! is_a( $product, 'WC_Product' ) ) {
+        return $markup;
+    }
+
+    // Add Merchant Return Policy
+    $markup['offers']['hasMerchantReturnPolicy'] = array(
+        '@type'                 =&gt; 'MerchantReturnPolicy',
+        'applicableCountry'     =&gt; 'US',
+        'returnPolicyCategory' =&gt; 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        'merchantReturnDays'    =&gt; 30,
+        'returnMethod'          =&gt; 'https://schema.org/ReturnByMail',
+        'returnFees'            =&gt; 'https://schema.org/FreeReturn',
+    );
+
+    // Add Standard Ground Shipping
+    $markup['offers']['shippingDetails'] = array(
+        '@type'               =&gt; 'OfferShippingDetails',
+        'shippingRate'        =&gt; array(
+            '@type'    =&gt; 'MonetaryAmount',
+            'value'    =&gt; '0.00',
+            'currency' =&gt; get_woocommerce_currency(),
+        ),
+        'shippingDestination' =&gt; array(
+            '@type'          =&gt; 'DefinedRegion',
+            'addressCountry' =&gt; 'US',
+        ),
+    );
+
+    return $markup;
+}</code></pre>
+
+      <h2>Fixing common Search Console schema warnings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Search Console Error / Warning</th>
+            <th>Underlying Cause</th>
+            <th>Required Code Resolution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Missing field 'shippingDetails' (optional)</strong></td>
+            <td>Google Merchant Listings feature requires transit time and shipping rate definitions.</td>
+            <td>Add <code>OfferShippingDetails</code> under <code>offers</code> or configure account-level shipping in Merchant Center.</td>
+          </tr>
+          <tr>
+            <td><strong>Missing field 'hasMerchantReturnPolicy' (optional)</strong></td>
+            <td>Merchant Listings expects return policy window and return fee disclosures.</td>
+            <td>Inject <code>MerchantReturnPolicy</code> with valid <code>merchantReturnDays</code> and returnMethod.</td>
+          </tr>
+          <tr>
+            <td><strong>Missing field 'priceValidUntil'</strong></td>
+            <td>Offers without price validity expiration prevent Google from tracking seasonal deals.</td>
+            <td>Add an ISO-8601 date string (e.g., <code>"2026-12-31"</code>) indicating price validity.</td>
+          </tr>
+          <tr>
+            <td><strong>Value in field 'price' cannot be zero or empty</strong></td>
+            <td>Theme outputs free promotional gifts or call-for-quote items with <code>price: 0</code>.</td>
+            <td>Set <code>price</code> to current retail value or suppress <code>Offer</code> block on unpriced items.</td>
+          </tr>
+          <tr>
+            <td><strong>Duplicate field 'Product' detected</strong></td>
+            <td>Page runs multiple review apps or theme snippets each generating uncoordinated schema.</td>
+            <td>Audit theme output, disable redundant SEO app schemas, and consolidate into one clean JSON-LD node.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Testing and validation workflow</h2>
+      <p>Before deploying schema updates sitewide across thousands of SKUs, follow this three-stage validation protocol:</p>
+      <ol>
+        <li><strong>Schema.org Validator:</strong> Test raw JSON-LD syntax on <a href="https://validator.schema.org/" target="_blank" rel="noopener noreferrer">validator.schema.org</a> to confirm clean semantic inheritance and zero broken brackets.</li>
+        <li><strong>Google Rich Results Test:</strong> Submit rendered product URLs to the <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer">Rich Results Test</a>. Confirm that green checkmarks appear for both <em>Merchant listings</em> and <em>Product snippets</em>.</li>
+        <li><strong>Google Search Console Monitoring:</strong> Within 48 hours of deployment, inspect the <strong>Shopping &gt; Merchant listings</strong> and <strong>Enhancements &gt; Product snippets</strong> reports in GSC to ensure warning counts drop to zero.</li>
+      </ol>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>Does product schema markup directly increase Google organic rankings?</h3>
+      <p>Structured data is not a direct ranking factor in the same way backlinks or content depth are. However, product schema enables rich results, review stars, pricing details, and Merchant Center integrations that substantially lift organic CTR. Higher CTR and qualified organic traffic provide powerful engagement signals that support long-term ranking stability.</p>
+
+      <h3>Can I use Microdata instead of JSON-LD for product schema?</h3>
+      <p>While Google technically supports Microdata and RDFa, Google Search Central explicitly recommends <strong>JSON-LD</strong>. JSON-LD scripts sit in head or body tags without interfering with page markup, make debugging faster, and are far less vulnerable to formatting breakage during theme design updates.</p>
+
+      <h3>How does schema impact AI search engines like Google AI Overviews and Perplexity?</h3>
+      <p>Generative AI search engines rely heavily on clean JSON-LD entity graphs to extract reliable commercial facts (current pricing, specifications, in-stock status, and brand ownership). Clean structured data ensures AI answer bots accurately cite and recommend your products in comparative answers.</p>
+
+      <h2>Implementation checklist</h2>
+      <ol>
+        <li>Inspect your live product pages with the Google Rich Results Test to identify missing fields.</li>
+        <li>Consolidate duplicate product schema blocks generated by conflicting third-party review and theme apps.</li>
+        <li>Deploy nested <code>shippingDetails</code> and <code>hasMerchantReturnPolicy</code> entities on all active SKUs.</li>
+        <li>For catalogs with color and size variants, migrate to the <code>ProductGroup</code> specification.</li>
+        <li>Review our companion guides on the <a href="/blog/shopify-woocommerce-indexing-blueprint">Shopify &amp; WooCommerce Indexing Blueprint</a> and <a href="/blog/ecommerce-product-page-seo">Product Page SEO at Scale</a>.</li>
+        <li>For multi-thousand SKU catalogs needing automated technical optimization, explore our specialized <a href="/services/ecommerce-seo">Ecommerce SEO Services</a> or schedule a comprehensive audit on our <a href="/free-audit">Free SEO Audit</a> page.</li>
+      </ol>
+`,
+    author: { name: "Mubashar Sharif", role: "Verified SEO Expert", bio: "Mubashar is an SEO analyst with 5+ years specializing in technical and e-commerce SEO architecture." },
+  },
+  {
     slug:        "ecommerce-organic-traffic-drop",
     category:    "E-commerce SEO",
     subcategory: "Traffic Recovery",

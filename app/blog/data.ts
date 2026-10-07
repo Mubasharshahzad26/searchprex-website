@@ -29,6 +29,7 @@ export interface Post {
 }
  
 const ALL_POSTS: Post[] = [
+  { slug: "schema-markup-ecommerce", category: "On-Page SEO", subcategory: "Schema Markup", title: "Product Schema Markup: The Complete JSON-LD Guide for E-commerce", excerpt: "Missing shipping details, return policies, or variant prices strip rich results from Google Search. Here is the complete JSON-LD implementation guide to secure merchant listings in 2026.", readTime: "12-minute read", date: "2026-10-06", author: { name: "Mubashar Sharif", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years specializing in technical and e-commerce SEO architecture.", featured: true },
   { slug: "ecommerce-organic-traffic-drop", category: "E-commerce SEO", subcategory: "Traffic Recovery", title: "Online Store Traffic Dropped? 7 Checks to Find Out Why", excerpt: "A sudden drop in Google traffic feels like a penalty, but most drops have an ordinary cause you can find in Search Console. Here are the checks to run, in the order that finds the answer fastest.", readTime: "11-minute read", date: "2026-10-03", author: { name: "Mubashar Sharif", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified.", featured: false },
   { slug: "get-more-calls-from-google-business-profile", category: "Local SEO", subcategory: "Google Business Profile", title: "How to Get More Calls From Your Google Business Profile", excerpt: "For most local businesses the profile, not the website, is where the phone rings from. Here is how to measure calls properly and the changes that make more people tap the call button.", readTime: "10-minute read", date: "2026-10-02", author: { name: "Mubashar Sharif", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified.", featured: false },
   { slug: "google-business-profile-suspended", category: "Local SEO", subcategory: "Google Business Profile", title: "Google Business Profile Suspended? How to Get It Reinstated", excerpt: "A suspended profile disappears from Search and Maps and locks you out of editing it. Here is how to find out why, what to fix before you appeal, the evidence Google asks for, and the mistakes that make it worse.", readTime: "10-minute read", date: "2026-10-02", author: { name: "Mubashar Sharif", role: "Verified SEO Expert" }, authorBio: "Mubashar is an SEO analyst with 5+ years of hands-on SEO, Semrush and HubSpot certified.", featured: false },
@@ -47,9 +48,9 @@ const ALL_POSTS: Post[] = [
 ];
  
 const ALL_MOST_READ = [
-  { slug: "non-indexing-fix-ecommerce", category: "Technical SEO", subcategory: "Indexing", title: "Why 80% of Your E-commerce Pages Aren't Indexed (And How to Fix It)", readTime: "10-minute read", date: "2026-06-12", rank: 1 },
-  { slug: "schema-markup-ecommerce", category: "On-Page SEO", subcategory: "Schema", title: "Product Schema Markup: The Complete JSON-LD Guide for E-commerce", readTime: "8-minute read", date: "2026-05-21", rank: 2 },
-  { slug: "google-ai-overviews-seo", category: "Content Strategy", subcategory: "AIO", title: "How to Appear in Google AI Overviews: GEO Strategy for 2026", readTime: "11-minute read", date: "2026-06-02", rank: 3 },
+  { slug: "shopify-woocommerce-indexing-blueprint", category: "E-commerce SEO", subcategory: "Indexing", title: "Shopify & WooCommerce Indexing Blueprint: 8 Platform-Specific Fixes for 2026", readTime: "14-minute read", date: "2026-10-02", rank: 1 },
+  { slug: "schema-markup-ecommerce", category: "On-Page SEO", subcategory: "Schema Markup", title: "Product Schema Markup: The Complete JSON-LD Guide for E-commerce", readTime: "12-minute read", date: "2026-10-06", rank: 2 },
+  { slug: "fix-crawled-currently-not-indexed-ecommerce", category: "E-commerce SEO", subcategory: "Indexing", title: "How to Fix 'Crawled – Currently Not Indexed' on Product Pages: Ecommerce Recovery Guide", readTime: "12-minute read", date: "2026-09-29", rank: 3 },
 ];
  
 /**
