@@ -24,6 +24,9 @@ import ServiceProofStrip from "@/components/ServiceProofStrip";
 import { LocalProblemSpotlight, LocalSolutionSpotlight } from "@/components/LocalCitySpotlight";
 import LocalCityMapSection from "@/components/LocalCityMapSection";
 import LocalJurisdictionIntelligence from "@/components/LocalJurisdictionIntelligence";
+import SemrushLocalMetricStrip from "@/components/SemrushLocalMetricStrip";
+import SemrushCompetitorMatrix from "@/components/SemrushCompetitorMatrix";
+import GeoAiOverviewMockup from "@/components/GeoAiOverviewMockup";
 import {
   Breadcrumb,
   CardGrid,
@@ -188,6 +191,11 @@ export default async function CityPage({
           }
         />
 
+        {/* ── SEMRUSH LOCAL SERP METRIC STRIP ── */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SemrushLocalMetricStrip page={page} />
+        </div>
+
         {/* ── VERIFIED LOCAL SEARCH PROOF STRIP ── */}
         <ServiceProofStrip
           id="proof"
@@ -243,6 +251,11 @@ export default async function CityPage({
               </li>
             ))}
           </ul>
+        </Section>
+
+        {/* ── SEMRUSH COMPETITOR GAP AUDIT ── */}
+        <Section>
+          <SemrushCompetitorMatrix page={page} />
         </Section>
 
         {/* The generic "what law firm SEO involves" list used to sit here: six
@@ -334,6 +347,16 @@ export default async function CityPage({
             intro={`Real-time geographic verification: Google evaluates physical proximity, courthouse corridors, and neighborhood coverage to rank firms in the ${page.county} 3-pack.`}
           />
           <LocalCityMapSection page={page} />
+        </Section>
+
+        {/* ── GEO & AI OVERVIEW CITATION TERMINAL ── */}
+        <Section tone="surface">
+          <SectionHeading
+            eyebrow="AI Search & LLM Engine Optimization"
+            title={`How Google Gemini & ChatGPT Cite Your Firm in ${page.city}`}
+            intro="In 2026, prospective legal clients ask AI chatbots conversational questions. We structure your authority so LLMs cite your firm as the primary verified source."
+          />
+          <GeoAiOverviewMockup page={page} />
         </Section>
 
         {/* ── FOUNDER EXECUTION & TRUST ── */}
