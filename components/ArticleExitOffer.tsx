@@ -267,7 +267,7 @@ export default function ArticleExitOffer({
         )}
       </div>
 
-      <style jsx global>{`
+      <style>{`
         @keyframes spxRise {
           from {
             opacity: 0;

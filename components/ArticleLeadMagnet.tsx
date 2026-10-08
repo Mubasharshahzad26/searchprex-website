@@ -49,14 +49,17 @@ type Status = "idle" | "loading" | "done" | "error";
 type Variant = "sidebar" | "banner" | "bottom";
 export type Copy = { eyebrow?: string; headline?: string; sub?: string };
 
-const INK = "#0a0f2e";
-const BODY = "#5b6472";
-const GREEN = "#1a7d59";
+export const INK = "#0a0f2e";
+export const BODY = "#5b6472";
+export const GREEN = "#1a7d59";
 const GREEN_DARK = "#196b4d";
 const PURPLE = "#534AB7";
-const LINE = "#dfe3ec";
+export const LINE = "#dfe3ec";
 
-function useLeadForm(source: string) {
+/** Set once a reader has actually submitted, so no later surface asks the same person again. */
+export const LEAD_DONE_KEY = "spx_lead_done";
+
+export function useLeadForm(source: string) {
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -84,6 +87,10 @@ function useLeadForm(source: string) {
       if (!res.ok) throw new Error(String(res.status));
       trackLead("tear_down", source);
       setStatus("done");
+      //  Remembered so the exit offer never interrupts someone who has already asked for
+      //  the tear-down. Storage can be unavailable (private windows, blocked cookies), and
+      //  a failure here must not break a submit that already succeeded.
+      try { window.localStorage.setItem(LEAD_DONE_KEY, String(Date.now())); } catch { /* not essential */ }
     } catch {
       setStatus("error");
     }
@@ -92,7 +99,7 @@ function useLeadForm(source: string) {
   return { website, setWebsite, email, setEmail, status, submit };
 }
 
-function SuccessState({ website, email }: { website: string; email: string }) {
+export function SuccessState({ website, email }: { website: string; email: string }) {
   return (
     <div className="rounded-xl border p-4 text-center" style={{ borderColor: GREEN, background: "rgba(26,125,89,0.06)" }}>
       <CheckCircle className="mx-auto h-6 w-6" style={{ color: GREEN }} aria-hidden="true" />
@@ -116,7 +123,7 @@ function SuccessState({ website, email }: { website: string; email: string }) {
   );
 }
 
-function ErrorState() {
+export function ErrorState() {
   return (
     <p
       className="flex items-start gap-2 rounded-lg border p-3 text-xs leading-relaxed"
