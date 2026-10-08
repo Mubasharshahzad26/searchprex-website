@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   // hours -- were being submitted as Google News items. A news sitemap full of
   // months-old URLs gets discounted, so an empty urlset is the better state.
   // This starts returning rows again as soon as genuinely dated items ship.
-  const posts = await db.marketingBlog.findMany({
+  let posts = await db.marketingBlog.findMany({
     where: {
       published: true,
       category: { contains: filterCat, mode: "insensitive" },
@@ -28,6 +28,21 @@ export async function GET(request: Request) {
     orderBy: { publishedAt: "desc" },
     select: { slug: true, title: true, publishedAt: true }
   });
+
+  // If no posts were published in the last 48 hours, fall back to the latest 5
+  // news items so the sitemap never serves an empty <urlset> with zero <url>
+  // tags (which triggers Google Search Console's "Missing XML tag" error).
+  if (posts.length === 0) {
+    posts = await db.marketingBlog.findMany({
+      where: {
+        published: true,
+        category: { contains: filterCat, mode: "insensitive" },
+      },
+      orderBy: { publishedAt: "desc" },
+      take: 5,
+      select: { slug: true, title: true, publishedAt: true }
+    });
+  }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
