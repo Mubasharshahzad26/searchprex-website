@@ -27,6 +27,9 @@ import LocalJurisdictionIntelligence from "@/components/LocalJurisdictionIntelli
 import SemrushLocalMetricStrip from "@/components/SemrushLocalMetricStrip";
 import SemrushCompetitorMatrix from "@/components/SemrushCompetitorMatrix";
 import GeoAiOverviewMockup from "@/components/GeoAiOverviewMockup";
+import LegalLostCaseCalculator from "@/components/LegalLostCaseCalculator";
+import LocalSerpScanner from "@/components/LocalSerpScanner";
+import AiIntakeEfficiency from "@/components/AiIntakeEfficiency";
 import {
   Breadcrumb,
   CardGrid,
@@ -258,6 +261,11 @@ export default async function CityPage({
           <SemrushCompetitorMatrix page={page} />
         </Section>
 
+        {/* ── LOST CASE & REVENUE OPPORTUNITY CALCULATOR ── */}
+        <Section tone="surface">
+          <LegalLostCaseCalculator page={page} />
+        </Section>
+
         {/* The generic "what law firm SEO involves" list used to sit here: six
             bullets identical on every city page, about a tenth of each page's
             text. How the work is done lives once, on /services/law-firm-seo,
@@ -311,6 +319,11 @@ export default async function CityPage({
           <LocalJurisdictionIntelligence page={page} />
         </Section>
 
+        {/* ── INSTANT LOCAL SERP & MAP PACK SCANNER ── */}
+        <Section>
+          <LocalSerpScanner page={page} />
+        </Section>
+
         {/* Lead capture mid-page: the reader who has just read the jurisdiction
             section is the one most likely to want their own market checked. */}
         <Section tight>
@@ -347,6 +360,11 @@ export default async function CityPage({
             intro={`Real-time geographic verification: Google evaluates physical proximity, courthouse corridors, and neighborhood coverage to rank firms in the ${page.county} 3-pack.`}
           />
           <LocalCityMapSection page={page} />
+        </Section>
+
+        {/* ── 24/7 AI LEGAL INTAKE & SPEED-TO-LEAD ── */}
+        <Section>
+          <AiIntakeEfficiency page={page} />
         </Section>
 
         {/* ── GEO & AI OVERVIEW CITATION TERMINAL ── */}
