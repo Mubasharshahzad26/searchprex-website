@@ -16,6 +16,7 @@ import parse, { Element } from 'html-react-parser';
 import { getRelated } from "./posts";
 import { renderArticle, extractArticleToc } from "@/lib/render-article";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ArticleExitOffer from "@/components/ArticleExitOffer";
 
 /**
  * Which section of the site the post belongs to. This component is shared by
@@ -154,6 +155,12 @@ export default function PostClient({
 
   const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
   const leadSource = `article:${section.href}/${post.slug}`;
+  //  Written per article in posts.ts, so the exit offer answers the piece the reader just
+  //  finished. The offer behind it is identical everywhere; only this line changes.
+  const exitCopy = (post as { exitOffer?: { headline: string; sub: string } }).exitOffer ?? {
+    headline: "Want this run on your own site?",
+    sub: "Doing it by hand takes an afternoon, and the answer is usually not where people look first. Send me the URL and I’ll run it myself and send back what I’d fix first. Free, within 24 hours.",
+  };
 
   const copyLink = () => {
     navigator.clipboard.writeText(postUrl);
@@ -303,14 +310,41 @@ export default function PostClient({
         <div className="flex gap-12 items-start">
  
           {/* Article */}
-          <article className="flex-1 min-w-0">
+          <article className="flex-1 min-w-0 max-w-full">
             {/* Excerpt pull-quote */}
-            <p className="mb-10 text-xl text-[#374151] leading-relaxed font-medium border-l-4 border-[#534AB7] pl-6 py-1">
+            <p className="mb-8 text-xl text-[#374151] leading-relaxed font-medium border-l-4 border-[#534AB7] pl-6 py-1">
               {post.excerpt}
             </p>
- 
+
+            {/* Mobile Table of Contents (collapsible, shown on screens < lg where sidebar is hidden) */}
+            {toc.length > 0 && (
+              <details className="lg:hidden mb-8 rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-4 group">
+                <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-sm select-none">
+                  <span className="flex items-center gap-2">
+                    <span className="text-[#534AB7] text-xs uppercase tracking-wider font-extrabold">Table of Contents</span>
+                    <span className="text-xs text-[#64748b] font-normal">({toc.length} sections)</span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 text-[#64748b] transition-transform group-open:rotate-90" />
+                </summary>
+                <nav className="mt-3.5 flex flex-col gap-2 pt-3 border-t border-[#e5e7eb]">
+                  {toc.map((item, i) => (
+                    <a
+                      key={i}
+                      href={`#section-${i}`}
+                      className="flex items-start gap-2 text-xs text-[#64748b] hover:text-[#534AB7] py-1 transition-colors"
+                    >
+                      <span className="text-[#534AB7] font-bold text-[11px] w-4 flex-shrink-0">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="leading-snug">{item}</span>
+                    </a>
+                  ))}
+                </nav>
+              </details>
+            )}
+
             {/* Content with Image Optimization + the mid-article lead magnet slot */}
-            <div style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
+            <div className="max-w-full overflow-hidden" style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
               {parse(renderArticle(injectMidContentSlot(post.content)), {
                 replace: (domNode) => {
                   if (domNode instanceof Element && domNode.tagName === 'div' && domNode.attribs?.id === '__lead_magnet_slot__') {
@@ -574,6 +608,17 @@ export default function PostClient({
       {/* ══ BOTTOM CTA — was link-only ("Book Free Strategy Call" / "Get Free
           SEO Audit"), both hand-offs to a second page. Now submits here. ══ */}
       <ArticleLeadMagnet variant="bottom" source={leadSource} />
+
+      {/* ══ EXIT OFFER — the only interruption on the page, and the only one that can
+          reach a reader who finished the article and is leaving without scrolling to
+          any of the three blocks above. Shows once per reader per 30 days, never to
+          someone who has already submitted, never on arrival, and never as a
+          full-screen cover on a phone. ══ */}
+      <ArticleExitOffer
+        source={`${leadSource}:exit`}
+        headline={exitCopy?.headline}
+        sub={exitCopy?.sub}
+      />
  
     </main>
   );

@@ -31,6 +31,10 @@ const md = new MarkdownIt({
   breaks: false,
   typographer: false,
 });
+// Disable indented code blocks. Modern authors use fenced blocks (```) or <pre><code>;
+// indented code blocks cause 4-space indented HTML lines (common in template strings)
+// to accidentally render as literal escaped <pre><code> tags.
+md.disable("code");
 
 /**
  * Inline styles rather than classes: html-react-parser inserts these nodes
@@ -53,10 +57,11 @@ const TAG_STYLES: Record<string, string> = {
   a: "color:#534AB7;font-weight:600;text-decoration:underline;text-underline-offset:2px",
   blockquote:
     "border-left:4px solid #3eb489;background:#f8f9fc;border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:1.0625rem;color:#374151;font-style:italic",
-  table: "width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9375rem",
+  table: "width:100%;border-collapse:collapse;margin:0;font-size:0.9375rem",
   th: "text-align:left;padding:0.65rem 0.75rem;background:#f8f9fc;border:1px solid #e5e7eb;font-weight:700;color:#0a0f2e",
   td: "padding:0.65rem 0.75rem;border:1px solid #e5e7eb;color:#374151;vertical-align:top",
   code: "background:#f1f5f9;border-radius:4px;padding:2px 6px;font-size:0.875rem;color:#0a0f2e",
+  pre: "background:#0a0f2e;color:#e2e8f0;padding:1.25rem;border-radius:0.75rem;overflow-x:auto;max-width:100%;font-size:0.875rem;line-height:1.6;margin:1.5rem 0;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace",
 };
 
 const STYLED_TAGS = Object.keys(TAG_STYLES).join("|");
@@ -80,6 +85,18 @@ export function styleArticleHtml(html: string): string {
       /<div class="callout">/g,
       `<div class="callout" style="${CALLOUT_STYLE}">`
     )
+    .replace(
+      /<table(?:\s[^>]*)?>([\s\S]*?)<\/table>/gi,
+      (_match, tableContent) => {
+        return `<div style="width:100%;overflow-x:auto;margin:1.75rem 0;-webkit-overflow-scrolling:touch;border:1px solid #e5e7eb;border-radius:0.75rem;"><table style="${TAG_STYLES.table}">${tableContent}</table></div>`;
+      }
+    )
+    .replace(
+      /<pre(?:\s[^>]*)?>\s*<code(?:\s[^>]*)?>([\s\S]*?)<\/code>\s*<\/pre>/gi,
+      (_match, codeContent) => {
+        return `<div style="margin:1.5rem 0;border-radius:0.75rem;background:#0a0f2e;border:1px solid #1e293b;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);"><div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem;background:#060a22;border-bottom:1px solid #1e293b;"><span style="font-size:0.75rem;font-weight:700;color:#3eb489;font-family:ui-monospace,monospace;letter-spacing:0.05em;text-transform:uppercase;">Code Snippet</span></div><pre style="margin:0;padding:1rem 1.25rem;overflow-x:auto;max-width:100%;font-size:0.84rem;line-height:1.65;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#e2e8f0;background:transparent;"><code style="background:transparent;padding:0;color:inherit;font-size:inherit;font-family:inherit;">${codeContent}</code></pre></div>`;
+      }
+    )
     .replace(OPEN_TAG, (_match, tag: string, attrs?: string) => {
       let nextAttrs = attrs ?? "";
       if (tag === "h2") {
@@ -98,22 +115,32 @@ export function styleArticleHtml(html: string): string {
 /**
  * Strips the shared leading indentation from a body.
  *
- * Required, not cosmetic. The file-based blog posts store their HTML inside
- * indented template literals, so every line begins with six spaces. Markdown
- * treats four or more leading spaces as an indented code block, which rendered
- * those posts as one grey <pre> full of visible <p> tags. Removing the common
- * indent leaves deliberate relative indentation (nested list items) intact.
+ * The file-based blog posts store their HTML inside indented template
+ * literals, so every line begins with six spaces. Removing the common
+ * indent ensures standard HTML block tags (h2, p, ul) are recognized cleanly.
  */
 function dedent(source: string): string {
   const lines = source.split("\n");
-  const indents = lines
-    .filter((line) => line.trim() !== "")
-    .map((line) => line.match(/^[ \t]*/)?.[0].length ?? 0);
+  const firstNonEmpty = lines.find((line) => line.trim() !== "");
+  if (!firstNonEmpty) return source;
 
-  if (!indents.length) return source;
+  const baseIndent = firstNonEmpty.match(/^[ \t]*/)?.[0].length ?? 0;
+  if (baseIndent === 0) return source;
 
-  const common = Math.min(...indents);
-  return common > 0 ? lines.map((line) => line.slice(common)).join("\n") : source;
+  let inPre = false;
+  return lines
+    .map((line) => {
+      if (line.includes("<pre>")) inPre = true;
+      if (inPre) {
+        if (line.includes("</pre>")) inPre = false;
+        const currentIndent = line.match(/^[ \t]*/)?.[0].length ?? 0;
+        if (currentIndent < baseIndent) return line;
+        return line.slice(baseIndent);
+      }
+      const currentIndent = line.match(/^[ \t]*/)?.[0].length ?? 0;
+      return line.slice(Math.min(currentIndent, baseIndent));
+    })
+    .join("\n");
 }
 
 /** Markdown (or raw HTML) in, styled HTML out. */
