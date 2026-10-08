@@ -249,9 +249,21 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
               Why {page.city} Law Firms Struggle with Qualified Client Leads
             </h3>
 
-            <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#5b6472]">
-              We understand the daily frustration facing attorneys in {page.city}: regional mega-firms with massive monthly advertising budgets dominate broad search terms, while national directories like Avvo and FindLaw capture early clicks and resell the same lead to multiple competitors. Meanwhile, prospective clients actively searching near {page.neighborhoods.slice(0, 2).join(" and ") || page.city} for urgent legal representation end up routed to out-of-town referral brokers or non-viable price-shoppers.
-            </p>
+            {/* Scannable Local Market Diagnosis Chips */}
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="rounded-xl border border-red-200/70 bg-red-50/60 p-3 text-left">
+                <span className="block text-xs font-bold text-red-800">PPC Budget Burn</span>
+                <span className="text-[11px] text-slate-600 leading-tight block mt-0.5">Mega-firms burning $200–$350/click on broad terms in {page.county}.</span>
+              </div>
+              <div className="rounded-xl border border-amber-200/70 bg-amber-50/60 p-3 text-left">
+                <span className="block text-xs font-bold text-amber-900">Directory Reselling</span>
+                <span className="text-[11px] text-slate-600 leading-tight block mt-0.5">Avvo & FindLaw reselling shared leads to competing firms.</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-left">
+                <span className="block text-xs font-bold text-slate-800">Lost Local Leads</span>
+                <span className="text-[11px] text-slate-600 leading-tight block mt-0.5">Searches in {page.neighborhoods[0] || page.city} routed to out-of-town brokers.</span>
+              </div>
+            </div>
 
             <div className="mt-6 rounded-2xl bg-slate-50 border border-slate-200/80 p-4">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
@@ -334,9 +346,18 @@ export function LocalSolutionSpotlight({ page }: { page: CityPage }) {
               Engineering High-Intent Retained Inquiries for {page.city} Law Firms
             </h3>
 
-            <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#5b6472]">
-              We don&apos;t sell generic SEO packages or empty traffic reports. SearchPrex solves the client acquisition bottleneck by positioning your firm directly where 70%+ of mobile legal inquiries happen: the **Google Map 3-Pack** and authoritative localized practice-area silos.
-            </p>
+            {/* Scannable Growth Architecture Pills */}
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-800">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> Google Map 3-Pack Priority
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-bold text-[#534AB7]">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#534AB7]" /> Localized Practice Silos
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800">
+                <ShieldCheck className="h-3.5 w-3.5 text-slate-700" /> Exclusive Single-Firm Representation
+              </span>
+            </div>
 
             <div className="mt-6 space-y-3.5">
               {[

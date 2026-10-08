@@ -22,6 +22,8 @@ import { notFound } from "next/navigation";
 import { ArrowRight, MapPin, Scale, Landmark, Users, CheckCircle2, ShieldCheck } from "lucide-react";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import { LocalProblemSpotlight, LocalSolutionSpotlight } from "@/components/LocalCitySpotlight";
+import LocalCityMapSection from "@/components/LocalCityMapSection";
+import LocalJurisdictionIntelligence from "@/components/LocalJurisdictionIntelligence";
 import {
   Breadcrumb,
   CardGrid,
@@ -291,12 +293,9 @@ export default async function CityPage({
           </p>
         </Section>
 
-        {/* ── JURISDICTION-SPECIFIC ── */}
-        <Section width="reading" tone="surface">
-          <SectionHeading eyebrow={`${page.state} specifics`} title={page.legalContext.heading} />
-          <p className={text.body} style={{ color: color.muted }}>
-            {page.legalContext.body}
-          </p>
+        {/* ── JURISDICTION-SPECIFIC INTELLIGENCE ── */}
+        <Section tone="surface">
+          <LocalJurisdictionIntelligence page={page} />
         </Section>
 
         {/* Lead capture mid-page: the reader who has just read the jurisdiction
@@ -305,7 +304,7 @@ export default async function CityPage({
           <GuideMagnet guide={LAW_CHECKLIST_GUIDE} source={`location:${page.stateSlug}/${page.citySlug}`} eyebrow={`Free for ${page.city} law firms`} />
         </Section>
 
-        {/* ── LOCAL SIGNALS ── */}
+        {/* ── LOCAL SIGNALS & SOLUTION ── */}
         <Section tone="surface">
           <SectionHeading
             eyebrow="Local ranking signals"
@@ -325,24 +324,16 @@ export default async function CityPage({
               ))}
             </CardGrid>
           </div>
+        </Section>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            <FactPanel
-              icon={<Landmark className="h-4 w-4" aria-hidden />}
-              label="Courts we reference"
-              items={page.courts}
-            />
-            <FactPanel
-              icon={<Users className="h-4 w-4" aria-hidden />}
-              label="Bar associations"
-              items={[page.barAssociation]}
-            />
-            <FactPanel
-              icon={<MapPin className="h-4 w-4" aria-hidden />}
-              label="Areas covered"
-              items={page.neighborhoods}
-            />
-          </div>
+        {/* ── INTERACTIVE GOOGLE MAP & COURT GEOFENCING ── */}
+        <Section>
+          <SectionHeading
+            eyebrow="Geographic Authority"
+            title={`Interactive ${page.city} Court Corridor & Geofencing Map`}
+            intro={`Real-time geographic verification: Google evaluates physical proximity, courthouse corridors, and neighborhood coverage to rank firms in the ${page.county} 3-pack.`}
+          />
+          <LocalCityMapSection page={page} />
         </Section>
 
         {/* ── FOUNDER EXECUTION & TRUST ── */}
