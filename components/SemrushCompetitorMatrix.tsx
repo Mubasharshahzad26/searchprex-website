@@ -68,26 +68,26 @@ export default function SemrushCompetitorMatrix({ page }: { page: CityPage }) {
   ];
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       {/* Matrix Header */}
-      <div className="border-b border-slate-200 bg-slate-900 px-6 py-6 text-white sm:px-8">
+      <div className="border-b border-slate-100 bg-slate-50/70 px-6 py-6 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#ff642d]/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ff642d] border border-[#ff642d]/30">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ff642d] border border-orange-100">
               <Sparkles className="h-3.5 w-3.5" />
               <span>Competitor Gap Audit · {page.county}</span>
             </div>
-            <h3 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-3xl">
+            <h3 className="mt-2 text-2xl font-bold tracking-tight text-[#0a0f2e] sm:text-3xl">
               How Your Firm Out-Ranks {page.city} Competitors
             </h3>
-            <p className="mt-1.5 text-xs sm:text-sm text-slate-300 max-w-2xl">
+            <p className="mt-1 text-xs sm:text-sm text-[#566070] max-w-2xl">
               Why spending $20,000/mo on billboards or buying shared leads from Avvo fails against precision local SEO in {page.state}.
             </p>
           </div>
 
-          <div className="rounded-xl bg-white/10 p-3 text-center border border-white/10 hidden md:block">
-            <span className="block text-xs text-slate-300">Exclusive Agency Model</span>
-            <span className="text-sm font-bold text-emerald-400">1 Firm Per Legal Niche</span>
+          <div className="rounded-xl bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 border border-slate-200 shadow-2xs hidden md:block">
+            <span className="block text-[11px] text-slate-500 font-medium">Exclusive Agency Model</span>
+            <span className="text-xs font-bold text-emerald-600">1 Firm Per Legal Niche</span>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ function getCityMetrics(page: CityPage): CityMetricData {
       intentPct: 88,
       cpc: "$285.50",
       monthlyPpcBurn: "$14,200",
-      serpFeatures: ["Local 3-Pack", "Google AI Overview", "People Also Ask", "Reviews ★★★★★"],
+      serpFeatures: ["Local 3-Pack", "Google AI Overview", "People Also Ask", "Client Reviews"],
     };
   }
 

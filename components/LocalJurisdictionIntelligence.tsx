@@ -48,22 +48,22 @@ export default function LocalJurisdictionIntelligence({ page }: { page: CityPage
     : `${page.state} Statutory Code`;
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       {/* Top Header */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 px-6 py-6 text-white sm:px-10">
+      <div className="border-b border-slate-100 bg-slate-50/70 px-6 py-6 sm:px-8">
         <div className="flex flex-wrap items-center gap-2 mb-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-300 border border-indigo-400/20">
-            <Gavel className="h-3.5 w-3.5 text-indigo-400" />
-            {page.state} Legal Framework · {page.county}
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] border border-indigo-100/80">
+            <Gavel className="h-3.5 w-3.5" />
+            {page.state} Statutory Framework · {page.county}
           </span>
-          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
+          <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 border border-slate-200 shadow-2xs">
             {statuteBadge}
           </span>
         </div>
-        <h3 className="text-2xl font-black tracking-tight text-white sm:text-3xl leading-snug max-w-3xl">
+        <h3 className="text-2xl font-bold tracking-tight text-[#0a0f2e] sm:text-3xl leading-snug max-w-3xl">
           {page.legalContext.heading}
         </h3>
-        <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-2xl">
+        <p className="mt-1.5 text-xs sm:text-sm text-[#566070] max-w-2xl">
           Why boilerplate national marketing fails in {page.city}: search intent is governed by {page.state} statutory nuances that only deep legal content can rank for.
         </p>
       </div>

@@ -8,7 +8,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, MapPin, Scale, ShieldCheck, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle2, MapPin, Scale, ShieldCheck, Sparkles, TrendingUp, X, Check } from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
 interface CityVisualAsset {
@@ -218,7 +218,7 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
   const primaryCourt = page.courts[0] ?? `${page.county} Court`;
 
   return (
-    <div className="my-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="my-8 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       <div className="grid lg:grid-cols-12 lg:items-stretch">
         {/* Image Column */}
         <div className="relative min-h-[320px] lg:min-h-full lg:col-span-6 bg-slate-900 overflow-hidden">
@@ -240,44 +240,44 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
         <div className="p-6 sm:p-8 lg:p-10 lg:col-span-6 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-red-700">
+              <span className="rounded-full bg-rose-50 border border-rose-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-rose-700">
                 Local Market Reality · {page.county}
               </span>
             </div>
 
-            <h3 className="mt-3 text-2xl font-black tracking-tight text-[#0a0f2e] sm:text-3xl leading-tight">
+            <h3 className="mt-3 text-2xl font-bold tracking-tight text-[#0a0f2e] sm:text-3xl leading-tight">
               Why {page.city} Law Firms Struggle with Qualified Client Leads
             </h3>
 
             {/* Scannable Local Market Diagnosis Chips */}
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <div className="rounded-xl border border-red-200/70 bg-red-50/60 p-3 text-left">
-                <span className="block text-xs font-bold text-red-800">PPC Budget Burn</span>
-                <span className="text-[11px] text-slate-600 leading-tight block mt-0.5">Mega-firms burning $200–$350/click on broad terms in {page.county}.</span>
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left">
+                <span className="block text-xs font-bold text-[#0a0f2e]">PPC Budget Burn</span>
+                <span className="text-[11px] text-[#566070] leading-tight block mt-0.5">Mega-firms burning $200–$350/click on broad terms in {page.county}.</span>
               </div>
-              <div className="rounded-xl border border-amber-200/70 bg-amber-50/60 p-3 text-left">
-                <span className="block text-xs font-bold text-amber-900">Directory Reselling</span>
-                <span className="text-[11px] text-slate-600 leading-tight block mt-0.5">Avvo & FindLaw reselling shared leads to competing firms.</span>
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left">
+                <span className="block text-xs font-bold text-[#0a0f2e]">Directory Reselling</span>
+                <span className="text-[11px] text-[#566070] leading-tight block mt-0.5">Avvo &amp; FindLaw reselling shared leads to competing firms.</span>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-left">
-                <span className="block text-xs font-bold text-slate-800">Lost Local Leads</span>
-                <span className="text-[11px] text-slate-600 leading-tight block mt-0.5">Searches in {page.neighborhoods[0] || page.city} routed to out-of-town brokers.</span>
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left">
+                <span className="block text-xs font-bold text-[#0a0f2e]">Lost Local Leads</span>
+                <span className="text-[11px] text-[#566070] leading-tight block mt-0.5">Searches in {page.neighborhoods[0] || page.city} routed to out-of-town brokers.</span>
               </div>
             </div>
 
-            <div className="mt-6 rounded-2xl bg-slate-50 border border-slate-200/80 p-4">
+            <div className="mt-6 rounded-2xl bg-slate-50/80 border border-slate-200/80 p-4">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Where Competitors Burn Cash vs Your High-Intent Opportunities in {page.city}:
               </h4>
               <ul className="mt-3 space-y-2 text-xs sm:text-sm text-[#0a0f2e]">
                 <li className="flex items-start gap-2">
-                  <span className="text-red-500 font-bold shrink-0">✕</span>
+                  <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
                   <span>
                     <strong>$150–$300+ Google Ads PPC click burn:</strong> Uncontested ad spend in {page.county} that vanishes the moment monthly budgets pause.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                  <Check className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>Untapped high-intent practice demand:</strong> Dedicated localized landing pages targeting{" "}
                     <Link href="/services/law-firm-seo/car-accident" className="font-semibold text-[#534AB7] underline hover:text-[#3d368e]">
@@ -291,7 +291,7 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                  <Check className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>
                     High-converting localized silos for{" "}
                     <Link href="/services/law-firm-seo/criminal-defense" className="font-semibold text-[#534AB7] underline hover:text-[#3d368e]">
@@ -299,7 +299,7 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
                     </Link>{" "}
                     and{" "}
                     <Link href="/services/law-firm-seo/family-law" className="font-semibold text-[#534AB7] underline hover:text-[#3d368e]">
-                      family law & divorce SEO
+                      family law &amp; divorce SEO
                     </Link>{" "}
                     tailored specifically to {primaryCourt} procedures.
                   </span>
@@ -330,19 +330,19 @@ export function LocalSolutionSpotlight({ page }: { page: CityPage }) {
   const primaryCourt = page.courts[0] ?? `${page.city} Courts`;
 
   return (
-    <div className="my-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="my-8 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       <div className="grid lg:grid-cols-12 lg:items-stretch">
         {/* Content Column */}
         <div className="p-6 sm:p-8 lg:p-10 lg:col-span-6 flex flex-col justify-between order-2 lg:order-1">
           <div>
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1">
+              <span className="rounded-full bg-emerald-50 border border-emerald-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1">
                 <Sparkles className="h-3 w-3 text-emerald-700" />
                 SearchPrex Solution · {page.city} Growth Partner
               </span>
             </div>
 
-            <h3 className="mt-3 text-2xl font-black tracking-tight text-[#0a0f2e] sm:text-3xl leading-tight">
+            <h3 className="mt-3 text-2xl font-bold tracking-tight text-[#0a0f2e] sm:text-3xl leading-tight">
               Engineering High-Intent Retained Inquiries for {page.city} Law Firms
             </h3>
 

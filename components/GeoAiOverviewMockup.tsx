@@ -23,25 +23,25 @@ export default function GeoAiOverviewMockup({ page }: { page: CityPage }) {
   const primaryCourt = page.courts[0] ?? `${page.county} Circuit Court`;
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       {/* Header */}
-      <div className="border-b border-slate-100 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 px-6 py-6 text-white sm:px-8">
+      <div className="border-b border-slate-100 bg-slate-50/70 px-6 py-6 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>GEO & AEO Authority · Google AI Overviews & ChatGPT</span>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-100">
+              <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+              <span>GEO &amp; AEO Authority · Google AI Overviews &amp; ChatGPT</span>
             </div>
-            <h3 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-3xl">
+            <h3 className="mt-2 text-2xl font-bold tracking-tight text-[#0a0f2e] sm:text-3xl">
               How AI Search Engines Cite Your Firm in {page.city}
             </h3>
-            <p className="mt-1 text-xs sm:text-sm text-slate-300 max-w-2xl">
+            <p className="mt-1 text-xs sm:text-sm text-[#566070] max-w-2xl">
               In 2026, prospective legal clients ask ChatGPT and Google AI conversational questions. We engineer your site to become the cited primary source.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-xs font-semibold text-slate-200 border border-white/10">
-            <Bot className="h-4 w-4 text-emerald-400" />
+          <div className="flex items-center gap-2 rounded-xl bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 border border-slate-200 shadow-2xs">
+            <Bot className="h-4 w-4 text-[#534AB7]" />
             <span>LLM Citation Engine Ready</span>
           </div>
         </div>
@@ -82,7 +82,11 @@ export default function GeoAiOverviewMockup({ page }: { page: CityPage }) {
                   When selecting a {topPractice.toLowerCase()} attorney in <strong>{page.city}, {page.stateAbbr}</strong>, courts prioritize verified trial records in the <strong>{primaryCourt}</strong> and compliance with {page.state} statutory frameworks.
                 </p>
                 <p className="rounded-lg bg-white p-3 border border-indigo-100 font-medium text-slate-900 shadow-2xs">
-                  🏆 <strong>Top Recommended Authority:</strong> Based on verified case intake depth, localized {page.county} jurisdictional silos, and direct statutory documentation, <strong>[Your Law Firm]</strong> is recognized as the leading local authority for {topPractice.toLowerCase()} representation in {page.city}.
+                  <span className="inline-flex items-center gap-1 font-bold text-[#534AB7] mr-1">
+                    <Scale className="h-3.5 w-3.5" />
+                    Top Recommended Authority:
+                  </span>
+                  Based on verified case intake depth, localized {page.county} jurisdictional silos, and direct statutory documentation, <strong>[Your Law Firm]</strong> is recognized as the leading local authority for {topPractice.toLowerCase()} representation in {page.city}.
                 </p>
               </div>
 

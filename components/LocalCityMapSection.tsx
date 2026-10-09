@@ -16,6 +16,7 @@ import {
   Compass,
   CheckCircle2,
   Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
@@ -26,24 +27,24 @@ export default function LocalCityMapSection({ page }: { page: CityPage }) {
   const primaryPractice = page.practiceDemand[0]?.area ?? "Personal Injury";
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       {/* Top Header Strip */}
-      <div className="border-b border-slate-100 bg-slate-900 px-6 py-5 text-white sm:px-8">
+      <div className="border-b border-slate-100 bg-slate-50/70 px-6 py-5 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#534AB7]/30 text-indigo-400 border border-indigo-500/30">
-              <Compass className="h-5 w-5 animate-pulse" />
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-[#534AB7] border border-indigo-100">
+              <Compass className="h-5 w-5" />
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-emerald-400 border border-emerald-500/30">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-                  Live Google Map & Local Geofencing
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-emerald-800 border border-emerald-100">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Live Google Map &amp; Local Geofencing
                 </span>
-                <span className="text-xs text-slate-400 hidden sm:inline">· {page.county}</span>
+                <span className="text-xs text-slate-500 hidden sm:inline">· {page.county}</span>
               </div>
-              <h3 className="mt-1 text-lg font-black tracking-tight text-white sm:text-xl">
-                {page.city}, {page.state} Legal District & Court Corridor
+              <h3 className="mt-1 text-lg font-bold tracking-tight text-[#0a0f2e] sm:text-xl">
+                {page.city}, {page.state} Legal District &amp; Court Corridor
               </h3>
             </div>
           </div>
@@ -52,10 +53,10 @@ export default function LocalCityMapSection({ page }: { page: CityPage }) {
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-white/10 px-4 py-2 text-xs font-semibold text-white backdrop-blur transition-colors hover:bg-white/20 border border-white/10"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50 border border-slate-200 shadow-2xs"
           >
             <span>Open in Google Maps</span>
-            <ExternalLink className="h-3.5 w-3.5" />
+            <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
           </a>
         </div>
       </div>
@@ -72,8 +73,9 @@ export default function LocalCityMapSection({ page }: { page: CityPage }) {
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
-          <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg bg-slate-950/85 px-3 py-1.5 text-[11px] font-medium text-slate-200 backdrop-blur border border-white/10 shadow">
-            📍 Centered on {page.city} Municipal & County Legal Corridor
+          <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg bg-slate-950/85 px-3 py-1.5 text-[11px] font-medium text-slate-200 backdrop-blur border border-white/10 shadow flex items-center gap-1.5">
+            <MapPin className="h-3 w-3 text-red-400 shrink-0" />
+            <span>Centered on {page.city} Municipal & County Legal Corridor</span>
           </div>
         </div>
 
@@ -156,7 +158,7 @@ export default function LocalCityMapSection({ page }: { page: CityPage }) {
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0a0f2e] px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-[#1a2366] transition-colors"
             >
               <span>Check Your Firm&apos;s Map Pack Position in {page.city}</span>
-              <span className="text-emerald-400">→</span>
+              <ArrowRight className="h-3.5 w-3.5 text-emerald-400" />
             </Link>
           </div>
         </div>

@@ -27,9 +27,11 @@ import LocalJurisdictionIntelligence from "@/components/LocalJurisdictionIntelli
 import SemrushLocalMetricStrip from "@/components/SemrushLocalMetricStrip";
 import SemrushCompetitorMatrix from "@/components/SemrushCompetitorMatrix";
 import GeoAiOverviewMockup from "@/components/GeoAiOverviewMockup";
-import LegalLostCaseCalculator from "@/components/LegalLostCaseCalculator";
-import LocalSerpScanner from "@/components/LocalSerpScanner";
-import AiIntakeEfficiency from "@/components/AiIntakeEfficiency";
+import FreeDomainAuthorityChecker from "@/components/FreeDomainAuthorityChecker";
+import LocalLegalSolutionsCta from "@/components/LocalLegalSolutionsCta";
+import LocalCompetitorReportSample from "@/components/LocalCompetitorReportSample";
+import LocalQuickNavSidebar from "@/components/LocalQuickNavSidebar";
+import DetroitWireframeView from "@/components/location-wireframe/DetroitWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -146,6 +148,26 @@ export default async function CityPage({
     ).values(),
   ];
 
+  // For Detroit, MI render the finalized 8-page wireframe layout
+  if (page.stateSlug === "michigan" && page.citySlug === "detroit") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <DetroitWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
   return (
     <>
       <Schema page={page} url={url} stateHubHref={stateHubHref} />
@@ -165,7 +187,7 @@ export default async function CityPage({
       <main>
         <PageHero
           compactTop
-          eyebrow={`Law Firm SEO · ${page.city}, ${page.stateAbbr}`}
+          eyebrow={`Local SEO · Law Firm SEO · Accident Law Firm SEO · ${page.city}, ${page.stateAbbr}`}
           title={
             <>
               Law Firm SEO in{" "}
@@ -174,21 +196,25 @@ export default async function CityPage({
               </Accent>
             </>
           }
-          subtitle={page.heroSub}
+          subtitle={`Stop burning $250+/click on Google Ads PPC campaigns with diminishing returns. Get qualified leads via our modern SEO strategy for Solo Attorneys and Mid-Size Law Firms in ${page.city} — dominating the local map pack and AI overviews.`}
           primaryCta={{
             href: "/free-audit",
-            label: `Get a free ${page.city} SEO audit`,
+            label: "Get Free Reality Check",
             icon: <ArrowRight className="h-4 w-4" aria-hidden />,
           }}
-          secondaryCta={{ href: "/tools/keyword-research", label: "See keyword data for your practice area" }}
-          trustPoints={["No contracts", "Founder works your account", "24-hour audit turnaround"]}
+          secondaryCta={{ href: "#da-checker", label: "Check Free Domain Authority" }}
+          trustPoints={[
+            "We Came with Solution, Not Just Traditional SEO",
+            `1 Firm Per Practice Niche in ${page.city}`,
+            "90-Day Milestone Guarantee",
+          ]}
           aside={
             <ArticleLeadMagnet
               variant="sidebar"
               source={`location:${page.stateSlug}/${page.citySlug}`}
               copy={{
-                headline: `Free ${page.city} tear-down`,
-                sub: `Send your URL. I’ll check your pages, Business Profile and the firms outranking you in ${page.county} — within 24 hours.`,
+                headline: `Free ${page.city} reality check`,
+                sub: `Send your URL. I’ll audit your pages, Google Business Profile and the firms outranking you in ${page.county} — within 24 hours.`,
               }}
             />
           }
@@ -199,305 +225,302 @@ export default async function CityPage({
           <SemrushLocalMetricStrip page={page} />
         </div>
 
-        {/* ── VERIFIED LOCAL SEARCH PROOF STRIP ── */}
-        <ServiceProofStrip
-          id="proof"
-          title="Verified Multi-Location Local SEO Proof"
-          moreHref="/case-studies"
-          moreLabel="Explore case studies"
-          shots={[
-            {
-              src: "/images/proof/local-dolls-gsc-comparison.jpg",
-              alt: `Google Search Console local ranking performance: 192 to 264 monthly clicks and 106K impressions in local market`,
-              width: 626,
-              height: 239,
-              figure: "192 → 264",
-              figureLabel: "Monthly organic clicks (+37.5%)",
-              caption: `Real Google Search Console data: local impressions jumped from 41K to 106K (+158%) without paid advertising.`,
-            },
-            {
-              src: "/images/proof/local-dolls-rank-1-and-2.png",
-              alt: `Google search results with local client occupying position #1 and #2 simultaneously`,
-              width: 627,
-              height: 338,
-              figure: "#1 & #2",
-              figureLabel: "Dominating local search results",
-              caption: `Local authority: ranking both primary domain and localized service silo in the top 2 spots above national competitors.`,
-            },
-          ]}
-          footnote={`Every figure shown is from verified Google Search Console and live search engine data across our multi-location client campaigns in Michigan, California, and Texas. We deploy this exact ranking architecture for your ${page.city} law firm.`}
-        />
+        {/* ── WIREFRAME 2-COLUMN DESKTOP CONTAINER ── */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-10">
+            {/* LEFT COLUMN: DESKTOP STICKY QUICK-NAV SIDEBAR */}
+            <LocalQuickNavSidebar page={page} />
 
-        {/* ── PROBLEM ── */}
-        <Section tone="surface">
-          <SectionHeading
-            eyebrow="The situation"
-            title={`Why ${page.city} law firms are not showing up`}
-            intro={page.problem}
-          />
-          <LocalProblemSpotlight page={page} />
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-            {page.problemPoints.map((point) => (
-              <li
-                key={point}
-                className={`flex items-start gap-3 ${radius.card} border bg-white p-5`}
-                style={{ borderColor: color.border }}
-              >
-                <span
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                  style={{ background: color.danger }}
-                  aria-hidden
-                />
-                <span className={text.small} style={{ color: color.muted }}>
-                  {point}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        {/* ── SEMRUSH COMPETITOR GAP AUDIT ── */}
-        <Section>
-          <SemrushCompetitorMatrix page={page} />
-        </Section>
-
-        {/* ── LOST CASE & REVENUE OPPORTUNITY CALCULATOR ── */}
-        <Section tone="surface">
-          <LegalLostCaseCalculator page={page} />
-        </Section>
-
-        {/* The generic "what law firm SEO involves" list used to sit here: six
-            bullets identical on every city page, about a tenth of each page's
-            text. How the work is done lives once, on /services/law-firm-seo,
-            linked under the practice areas below. */}
-
-        {/* ── PRACTICE AREAS ── */}
-        <Section>
-          <SectionHeading
-            eyebrow="Where the demand is"
-            title={`Which practice areas get searched most in ${page.city}?`}
-            intro={`These are the areas with real search volume in ${page.county}. Each one needs its own page — a single "practice areas" page will not rank for any of them.`}
-          />
-          <CardGrid columns={2}>
-            {page.practiceDemand.map((p) => (
-              <FeatureCard
-                key={p.area}
-                icon={<Scale className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
-                title={p.area}
-                body={p.why}
-              />
-            ))}
-          </CardGrid>
-          <p className={`${text.small} mt-6`} style={{ color: color.muted }}>
-            How each of these is ranked, anywhere in the US:{" "}
-            {practicePages.map((ip, i) => (
-              <span key={ip.slug}>
-                <Link
-                  href={`/services/law-firm-seo/${ip.slug}`}
-                  className="font-semibold underline underline-offset-2"
-                  style={{ color: color.primary }}
-                >
-                  {ip.name} SEO
-                </Link>
-                {i < practicePages.length - 1 ? " · " : ""}
-              </span>
-            ))}
-            {practicePages.length ? " — or start with " : ""}
-            <Link
-              href="/services/law-firm-seo"
-              className="font-semibold underline underline-offset-2"
-              style={{ color: color.primary }}
-            >
-              how law firm SEO works
-            </Link>
-            .
-          </p>
-        </Section>
-
-        {/* ── JURISDICTION-SPECIFIC INTELLIGENCE ── */}
-        <Section tone="surface">
-          <LocalJurisdictionIntelligence page={page} />
-        </Section>
-
-        {/* ── INSTANT LOCAL SERP & MAP PACK SCANNER ── */}
-        <Section>
-          <LocalSerpScanner page={page} />
-        </Section>
-
-        {/* Lead capture mid-page: the reader who has just read the jurisdiction
-            section is the one most likely to want their own market checked. */}
-        <Section tight>
-          <GuideMagnet guide={LAW_CHECKLIST_GUIDE} source={`location:${page.stateSlug}/${page.citySlug}`} eyebrow={`Free for ${page.city} law firms`} />
-        </Section>
-
-        {/* ── LOCAL SIGNALS & SOLUTION ── */}
-        <Section tone="surface">
-          <SectionHeading
-            eyebrow="Local ranking signals"
-            title={`How we make Google see you as a ${page.city} firm`}
-            intro="Local rankings come from signals Google can verify, not from repeating the city name. These are the ones that move the map pack."
-          />
-          <LocalSolutionSpotlight page={page} />
-          <div className="mt-8">
-            <CardGrid columns={2}>
-              {page.localSignals.map((s) => (
-                <FeatureCard
-                  key={s.label}
-                  icon={<MapPin className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
-                  title={s.label}
-                  body={s.detail}
-                />
-              ))}
-            </CardGrid>
-          </div>
-        </Section>
-
-        {/* ── INTERACTIVE GOOGLE MAP & COURT GEOFENCING ── */}
-        <Section>
-          <SectionHeading
-            eyebrow="Geographic Authority"
-            title={`Interactive ${page.city} Court Corridor & Geofencing Map`}
-            intro={`Real-time geographic verification: Google evaluates physical proximity, courthouse corridors, and neighborhood coverage to rank firms in the ${page.county} 3-pack.`}
-          />
-          <LocalCityMapSection page={page} />
-        </Section>
-
-        {/* ── 24/7 AI LEGAL INTAKE & SPEED-TO-LEAD ── */}
-        <Section>
-          <AiIntakeEfficiency page={page} />
-        </Section>
-
-        {/* ── GEO & AI OVERVIEW CITATION TERMINAL ── */}
-        <Section tone="surface">
-          <SectionHeading
-            eyebrow="AI Search & LLM Engine Optimization"
-            title={`How Google Gemini & ChatGPT Cite Your Firm in ${page.city}`}
-            intro="In 2026, prospective legal clients ask AI chatbots conversational questions. We structure your authority so LLMs cite your firm as the primary verified source."
-          />
-          <GeoAiOverviewMockup page={page} />
-        </Section>
-
-        {/* ── FOUNDER EXECUTION & TRUST ── */}
-        <Section>
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div className="grid items-center md:grid-cols-2">
-              <div className="relative aspect-[16/10] h-full min-h-[300px] w-full overflow-hidden bg-slate-900">
-                <Image
-                  src="/images/about/founder-hands-on-strategy-desk.webp"
-                  alt={`Mubashar Sharif analyzing Google Search Console and local technical SEO data for ${page.city}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 550px"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
+            {/* RIGHT COLUMN: MAIN CONTENT STREAM */}
+            <div className="flex-1 min-w-0 space-y-16">
+              {/* 1. FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
+              <div id="da-checker" className="scroll-mt-24">
+                <FreeDomainAuthorityChecker city={page.city} county={page.county} variant="location" />
               </div>
-              <div className="p-8 lg:p-10">
-                <span className="inline-block rounded-full bg-[#534AB7]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-                  Founder-Led Execution
-                </span>
-                <h3 className="mt-3 text-2xl font-black tracking-tight text-[#0a0f2e]">
-                  One firm per practice area in {page.city}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#5b6472]">
-                  No junior account managers, no automated monthly fluff reports. Mubashar Sharif personally analyzes your Google Search Console profile, audits the competitors outranking you in {page.county}, and executes the technical architecture.
-                </p>
 
-                <div className="mt-6 space-y-2.5">
-                  {[
-                    `Exclusive representation: only 1 practice per legal niche in ${page.city}`,
-                    "Direct founder strategy with weekly Monday progress updates",
-                    "90-day performance milestone guarantee — zero long-term lock-in",
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#0a0f2e]">
-                      <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0" />
-                      <span>{item}</span>
-                    </div>
+              {/* 2. WHERE THE DEMAND IS (PRACTICE AREAS) */}
+              <div id="practice-areas" className="scroll-mt-24 space-y-6">
+                <SectionHeading
+                  eyebrow="Where the demand is"
+                  title={`Which practice areas get searched most in ${page.city}?`}
+                  intro={`These are the areas with real search volume in ${page.county}. Each one needs its own page — a single "practice areas" page will not rank for any of them.`}
+                />
+                <CardGrid columns={2}>
+                  {page.practiceDemand.map((p) => (
+                    <FeatureCard
+                      key={p.area}
+                      icon={<Scale className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
+                      title={p.area}
+                      body={p.why}
+                    />
                   ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <CtaButton
-                    href="/free-audit"
-                    label={`Request Free 24h ${page.city} Teardown`}
-                    icon={<ArrowRight className="h-4 w-4" aria-hidden />}
-                  />
+                </CardGrid>
+                <p className={`${text.small} mt-4`} style={{ color: color.muted }}>
+                  How each of these is ranked, anywhere in the US:{" "}
+                  {practicePages.map((ip, i) => (
+                    <span key={ip.slug}>
+                      <Link
+                        href={`/services/law-firm-seo/${ip.slug}`}
+                        className="font-semibold underline underline-offset-2"
+                        style={{ color: color.primary }}
+                      >
+                        {ip.name} SEO
+                      </Link>
+                      {i < practicePages.length - 1 ? " · " : ""}
+                    </span>
+                  ))}
+                  {practicePages.length ? " — or start with " : ""}
                   <Link
-                    href="/why-us"
-                    className="text-xs font-bold text-[#534AB7] hover:underline"
+                    href="/services/law-firm-seo"
+                    className="font-semibold underline underline-offset-2"
+                    style={{ color: color.primary }}
                   >
-                    Why firms choose SearchPrex →
+                    how law firm SEO works
                   </Link>
+                  .
+                </p>
+              </div>
+
+              {/* 3. VERIFIED PROOF STRIP */}
+              <div id="proof" className="scroll-mt-24">
+                <ServiceProofStrip
+                  id="proof-strip"
+                  title="Verified Multi-Location Local SEO Proof"
+                  moreHref="/case-studies"
+                  moreLabel="Explore case studies"
+                  shots={[
+                    {
+                      src: "/images/proof/local-dolls-gsc-comparison.jpg",
+                      alt: `Google Search Console local ranking performance: 192 to 264 monthly clicks and 106K impressions in local market`,
+                      width: 626,
+                      height: 239,
+                      figure: "192 → 264",
+                      figureLabel: "Monthly organic clicks (+37.5%)",
+                      caption: `Real Google Search Console data: local impressions jumped from 41K to 106K (+158%) without paid advertising.`,
+                    },
+                    {
+                      src: "/images/proof/local-dolls-rank-1-and-2.png",
+                      alt: `Google search results with local client occupying position #1 and #2 simultaneously`,
+                      width: 627,
+                      height: 338,
+                      figure: "#1 & #2",
+                      figureLabel: "Dominating local search results",
+                      caption: `Local authority: ranking both primary domain and localized service silo in the top 2 spots above national competitors.`,
+                    },
+                  ]}
+                  footnote={`Every figure shown is from verified Google Search Console and live search engine data across our multi-location client campaigns in Michigan, California, and Texas. We deploy this exact ranking architecture for your ${page.city} law firm.`}
+                />
+              </div>
+
+              {/* 4. THE SITUATION / PROBLEM SPOTLIGHT */}
+              <div id="the-situation" className="scroll-mt-24 space-y-6">
+                <SectionHeading
+                  eyebrow="The situation"
+                  title={`Why ${page.city} law firms are not showing up`}
+                  intro={page.problem}
+                />
+                <LocalProblemSpotlight page={page} />
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {page.problemPoints.map((point) => (
+                    <li
+                      key={point}
+                      className={`flex items-start gap-3 ${radius.card} border bg-white p-5`}
+                      style={{ borderColor: color.border }}
+                    >
+                      <span
+                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+                        style={{ background: color.danger }}
+                        aria-hidden
+                      />
+                      <span className={text.small} style={{ color: color.muted }}>
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 5. COMPETITOR GAP AUDIT MATRIX */}
+              <div id="competitor-gap" className="scroll-mt-24">
+                <SemrushCompetitorMatrix page={page} />
+              </div>
+
+              {/* 6. COMPETITOR TEARDOWN SAMPLE (REPORT FORMAT PREVIEW) */}
+              <div id="report-sample" className="scroll-mt-24">
+                <LocalCompetitorReportSample page={page} />
+              </div>
+
+              {/* 7. JURISDICTION & STATUTORY REALITY */}
+              <div id="jurisdiction" className="scroll-mt-24">
+                <LocalJurisdictionIntelligence page={page} />
+              </div>
+
+              {/* 8. "WE CAME WITH SOLUTION, NOT JUST TRADITIONAL SEO" */}
+              <div id="solutions" className="scroll-mt-24">
+                <LocalLegalSolutionsCta page={page} />
+              </div>
+
+              {/* 9. MID-PAGE LEAD CAPTURE GUIDE */}
+              <div className="scroll-mt-24">
+                <GuideMagnet
+                  guide={LAW_CHECKLIST_GUIDE}
+                  source={`location:${page.stateSlug}/${page.citySlug}`}
+                  eyebrow={`Free for ${page.city} law firms`}
+                />
+              </div>
+
+              {/* 10. LOCAL SIGNALS SPOTLIGHT */}
+              <div id="local-signals" className="scroll-mt-24 space-y-6">
+                <SectionHeading
+                  eyebrow="Local ranking signals"
+                  title={`How we make Google see you as a ${page.city} firm`}
+                  intro="Local rankings come from signals Google can verify, not from repeating the city name. These are the ones that move the map pack."
+                />
+                <LocalSolutionSpotlight page={page} />
+                <CardGrid columns={2}>
+                  {page.localSignals.map((s) => (
+                    <FeatureCard
+                      key={s.label}
+                      icon={<MapPin className="h-5 w-5" style={{ color: color.primary }} aria-hidden />}
+                      title={s.label}
+                      body={s.detail}
+                    />
+                  ))}
+                </CardGrid>
+              </div>
+
+              {/* 11. INTERACTIVE GOOGLE MAP & COURT CORRIDOR */}
+              <div id="map-corridor" className="scroll-mt-24 space-y-4">
+                <SectionHeading
+                  eyebrow="Geographic Authority"
+                  title={`Interactive ${page.city} Court Corridor & Geofencing Map`}
+                  intro={`Real-time geographic verification: Google evaluates physical proximity, courthouse corridors, and neighborhood coverage to rank firms in the ${page.county} 3-pack.`}
+                />
+                <LocalCityMapSection page={page} />
+              </div>
+
+              {/* 12. AI SEARCH & LLM OVERVIEW CITATION */}
+              <div id="ai-overview" className="scroll-mt-24 space-y-4">
+                <SectionHeading
+                  eyebrow="AI Search & LLM Engine Optimization"
+                  title={`How Google Gemini & ChatGPT Cite Your Firm in ${page.city}`}
+                  intro="In 2026, prospective legal clients ask AI chatbots conversational questions. We structure your authority so LLMs cite your firm as the primary verified source."
+                />
+                <GeoAiOverviewMockup page={page} />
+              </div>
+
+              {/* 13. FOUNDER EXECUTION & TRUST */}
+              <div className="scroll-mt-24 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+                <div className="grid items-center md:grid-cols-2">
+                  <div className="relative aspect-[16/10] h-full min-h-[300px] w-full overflow-hidden bg-slate-900">
+                    <Image
+                      src="/images/about/founder-hands-on-strategy-desk.webp"
+                      alt={`Mubashar Sharif analyzing Google Search Console and local technical SEO data for ${page.city}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 550px"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
+                  </div>
+                  <div className="p-8 lg:p-10">
+                    <span className="inline-block rounded-full bg-[#534AB7]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                      Founder-Led Execution
+                    </span>
+                    <h3 className="mt-3 text-2xl font-black tracking-tight text-[#0a0f2e]">
+                      One firm per practice area in {page.city}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#5b6472]">
+                      No junior account managers, no automated monthly fluff reports. Mubashar Sharif personally analyzes your Google Search Console profile, audits the competitors outranking you in {page.county}, and executes the technical architecture.
+                    </p>
+
+                    <div className="mt-6 space-y-2.5">
+                      {[
+                        `Exclusive representation: only 1 practice per legal niche in ${page.city}`,
+                        "Direct founder strategy with weekly Monday progress updates",
+                        "90-day performance milestone guarantee — zero long-term lock-in",
+                      ].map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#0a0f2e]">
+                          <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
+                      <CtaButton
+                        href="/free-audit"
+                        label={`Request Free 24h ${page.city} Teardown`}
+                        icon={<ArrowRight className="h-4 w-4" aria-hidden />}
+                      />
+                      <Link
+                        href="/why-us"
+                        className="text-xs font-bold text-[#534AB7] hover:underline"
+                      >
+                        Why firms choose SearchPrex →
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              {/* 14. COMMON QUESTIONS FAQ */}
+              <div id="faq" className="scroll-mt-24 space-y-6">
+                <SectionHeading
+                  eyebrow="FAQ"
+                  title={`Law firm SEO in ${page.city} — common questions`}
+                />
+                <FaqList faqs={page.faqs} name={`${page.citySlug}-faq`} />
+              </div>
+
+              {/* 15. SIBLING CITIES */}
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+                <h4 className="text-sm font-bold uppercase tracking-wider text-slate-700">
+                  {siblings.length > 0 ? `Also serving ${page.state}` : "Other markets we serve"}
+                </h4>
+                {siblings.length > 0 ? (
+                  <ul className="flex flex-wrap gap-2.5">
+                    {siblings.map((s) => (
+                      <li key={s.citySlug}>
+                        <Link
+                          href={`/locations/${s.stateSlug}/${s.citySlug}`}
+                          className={`inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-[#0a0f2e] transition-colors hover:border-[#534AB7]`}
+                        >
+                          <MapPin className="h-3.5 w-3.5 text-[#534AB7]" aria-hidden />
+                          Law Firm SEO {s.city}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                <p className={`${text.small} pt-2 border-t border-slate-200 text-slate-500`}>
+                  {stateHubHref ? (
+                    <>
+                      <Link href={stateHubHref} className="font-semibold text-[#534AB7] underline underline-offset-2">
+                        All {page.state} cities
+                      </Link>
+                      {" · "}
+                    </>
+                  ) : null}
+                  <Link href="/locations" className="font-semibold text-[#534AB7] underline underline-offset-2">
+                    Every state and city we cover
+                  </Link>
+                </p>
+              </div>
+
+              {/* Local news update link */}
+              <p className="text-[0.9375rem] leading-relaxed text-slate-700">
+                Local rankings move when Google changes how local results work.{" "}
+                <Link
+                  href="/resources/news/local-seo-updates"
+                  className="font-semibold text-[#534AB7] underline underline-offset-2"
+                >
+                  {localNewsAnchor(page.citySlug)}
+                </Link>{" "}
+                — dated and sourced, so you can line a ranking drop up against what actually changed.
+              </p>
             </div>
           </div>
-        </Section>
-
-        {/* ── FAQ ── */}
-        <Section width="reading">
-          <SectionHeading
-            eyebrow="FAQ"
-            title={`Law firm SEO in ${page.city} — common questions`}
-          />
-          <FaqList faqs={page.faqs} name={`${page.citySlug}-faq`} />
-        </Section>
-
-        {/* ── SIBLING CITIES + WAY BACK UP ── */}
-        <Section tone="surface" tight>
-          <SectionHeading
-            eyebrow="Nearby"
-            title={siblings.length > 0 ? `Also serving ${page.state}` : "Other markets we serve"}
-            className="mb-6"
-          />
-          {siblings.length > 0 ? (
-            <ul className="flex flex-wrap gap-3">
-              {siblings.map((s) => (
-                <li key={s.citySlug}>
-                  <Link
-                    href={`/locations/${s.stateSlug}/${s.citySlug}`}
-                    className={`inline-flex items-center gap-2 ${radius.control} border bg-white px-4 py-2 text-sm font-semibold transition-colors hover:border-[#534AB7]`}
-                    style={{ borderColor: color.border, color: color.ink }}
-                  >
-                    <MapPin className="h-3.5 w-3.5" style={{ color: color.primary }} aria-hidden />
-                    Law Firm SEO {s.city}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          <p className={`${text.small} ${siblings.length > 0 ? "mt-6" : ""}`} style={{ color: color.muted }}>
-            {stateHubHref ? (
-              <>
-                <Link href={stateHubHref} className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
-                  All {page.state} cities
-                </Link>
-                {" · "}
-              </>
-            ) : null}
-            <Link href="/locations" className="font-semibold underline underline-offset-2" style={{ color: color.primary }}>
-              Every state and city we cover
-            </Link>
-          </p>
-        </Section>
-
-        {/*
-          Varied anchor text on purpose: this template renders every city page,
-          so an identical anchor would repeat across the whole location set.
-          Keyed off the city name to rotate between three phrasings.
-        */}
-        <Section width="reading" tight>
-          <p className="text-[0.9375rem] leading-relaxed" style={{ color: color.ink }}>
-            Local rankings move when Google changes how local results work.{" "}
-            <Link
-              href="/resources/news/local-seo-updates"
-              className="font-semibold underline underline-offset-2"
-              style={{ color: color.primary }}
-            >
-              {localNewsAnchor(page.citySlug)}
-            </Link>{" "}
-            — dated and sourced, so you can line a ranking drop up against what actually changed.
-          </p>
-        </Section>
+        </div>
 
         {/* Closing form in place of a link-only band that sent readers to a
             second page to retype their URL and email. */}
