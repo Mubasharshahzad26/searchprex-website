@@ -33,7 +33,7 @@ export default function DetroitProblemFix({ page }: { page: CityPage }) {
             THE PROBLEM → THE FIX
           </span>
           <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-            Why most {page.city} law firm sites never get the call
+            Why Most Detroit Law Firm Websites Don&apos;t Get the Call (and How We Fix It)
           </h2>
         </div>
 

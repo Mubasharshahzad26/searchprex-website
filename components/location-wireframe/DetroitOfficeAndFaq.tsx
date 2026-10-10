@@ -29,28 +29,44 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
 
   const faqs = [
     {
-      q: `How long does law firm SEO take in ${page.city}?`,
-      a: `Local Map Pack gains typically appear within 60 to 90 days as citations and Google Business Profile signals sync. Competitive organic keywords for high-value practice areas (e.g. "Detroit car accident lawyer") generally achieve dominant page-one placement within 4 to 6 months of statutory silo deployment.`,
+      q: "How long does law firm SEO take in Detroit?",
+      a: "Map Pack improvements often start within 60 to 90 days as Business Profile and citation signals update. Competitive organic terms like \"Detroit car accident lawyer\" usually take longer, commonly four to six months or more depending on the competition and your starting point. We agree on milestones up front, and results are never guaranteed.",
     },
     {
-      q: `Do you work with firms outside ${page.city}?`,
-      a: `Yes, but we strictly enforce our One Firm Per Practice Niche exclusivity policy. If we represent a personal injury firm in Detroit, we will never represent a competing personal injury firm in Wayne County.`,
+      q: "How much does law firm SEO cost in Detroit?",
+      a: "It depends on your practice area, the competition and the scope. Most active Detroit campaigns range between $1,500 and $4,500/month depending on practice density across Wayne, Oakland, and Macomb counties. Plans are month-to-month, and we quote after reviewing your site and the firms you compete with.",
+    },
+    {
+      q: "Do you work with firms outside Detroit?",
+      a: "Yes. We also build location pages and campaigns for firms in Grand Rapids, Ann Arbor, Lansing, Warren, and other Midwest markets. Every territory receives the same one-firm-per-niche exclusivity.",
     },
     {
       q: "Is your content compliant with Michigan legal advertising rules?",
-      a: "Yes. All statutory copy, practice silos, and case result descriptions adhere strictly to Michigan Rules of Professional Conduct (MRPC 7.1 through 7.3), including required disclaimers regarding past verdicts and no-guarantee disclosures.",
+      a: "We write with Michigan Rule of Professional Conduct 7 (MRPC Rule 7) in mind, covering testimonials, past results and disclaimers, and your attorneys approve every page before it goes live. The firm remains responsible for its own advertising.",
     },
     {
-      q: "How does Michigan no-fault insurance law impact law firm SEO?",
-      a: `Michigan's unique no-fault system (MCL § 500.3101) means prospective clients search for both first-party PIP benefits and third-party threshold tort claims. Standard generic out-of-state SEO templates fail because they ignore this statutory distinction. We build dedicated silos that answer both questions directly.`,
+      q: "How does Michigan no-fault insurance law affect law firm SEO?",
+      a: "Injured drivers search with very specific questions about PIP benefits, claim deadlines and when they can sue under the serious impairment threshold (MCL § 500.3135). Michigan's 2019 no-fault reforms changed coverage choices and provider reimbursement, so outdated content loses trust fast. We build and refresh no-fault pages with attorney review.",
     },
     {
-      q: "What makes your AI visibility (AEO/GEO) different from traditional SEO?",
-      a: "In 2026, prospective legal clients query conversational LLMs like Google Gemini and ChatGPT for lawyer recommendations. We structure your attorney credentials, bar admissions, and case results in verified JSON-LD entity schema so AI models cite your firm as the verified primary recommendation.",
+      q: "What makes AI visibility (AEO/GEO) different from traditional SEO?",
+      a: "Traditional SEO targets rankings in blue links. AI visibility focuses on being cited in Google AI Overviews, ChatGPT and Perplexity answers, which depends on clear entity signals, answer-first content and trusted mentions. We track your AI citation rate alongside Map Pack rankings.",
     },
     {
-      q: `Do you require a long-term lock-in contract?`,
-      a: `No. We operate on month-to-month performance retainers after the initial 90-day technical foundation sprint. Our work earns retainers every month through transparent CallRail call attribution and signed case telemetry.`,
+      q: "Do you require a long-term contract?",
+      a: "No. We work month-to-month and earn the renewal through calls and signed cases.",
+    },
+    {
+      q: "Can you help my firm rank in the Google Map Pack for \"car accident lawyer Detroit\"?",
+      a: "Map Pack rankings depend on proximity, relevance and prominence. We optimize the controllable parts (profile, reviews, citations, practice-area pages) and measure progress with geo-grid tracking. We do not guarantee a specific position.",
+    },
+    {
+      q: "What does one firm per practice area mean?",
+      a: "We take on a single firm per practice area in your Detroit territory, so we will never run your strategy against another client of ours.",
+    },
+    {
+      q: "Do you guarantee rankings or signed cases?",
+      a: "No. No honest agency can. We commit to a transparent process, monthly reporting and agreed milestones with a 90-day milestone review.",
     },
   ];
 
@@ -71,10 +87,10 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
               METRO DETROIT PRACTICE COVERAGE
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              Wayne County Legal Jurisdiction &amp; Practice Coverage
+              Remote Law Firm SEO for Metro Detroit With Direct Founder Access
             </h2>
             <p className="mt-2 text-xs sm:text-base text-slate-600 leading-relaxed">
-              We engineer dominant Google 3-Pack and AI Overview presence for law firms throughout Metro Detroit—without charging firms for expensive Downtown office leases. You partner directly with a senior legal SEO strategist.
+              SearchPrex works remotely with Detroit firms, which means no downtown office overhead built into your fee. You get bi-weekly video reviews, call recordings and a live dashboard, and you talk directly to the strategist doing the work.
             </p>
           </div>
 

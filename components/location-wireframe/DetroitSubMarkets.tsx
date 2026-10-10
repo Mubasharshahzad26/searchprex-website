@@ -29,29 +29,29 @@ export default function DetroitSubMarkets({ page }: { page: CityPage }) {
             </span>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e] leading-tight">
-              Worried of Not Getting Qualified Law Firm Leads In {page.city}, {page.stateAbbr}?
+              Not Getting Qualified Leads From Your Detroit Law Firm Website?
             </h2>
 
             <h3 className="text-xl sm:text-2xl font-bold text-[#534AB7]">
-              We Came With a Solution Instead of Traditional SEO Approach
+              Why Generic Law Firm SEO Fails in Detroit
             </h3>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Most legal marketing agencies sell vanity traffic reports filled with out-of-state clicks and price-shoppers who never sign a retainer. In {page.city}&apos;s unique statutory environment, generic SEO fails because it ignores localized courthouse corridors and Michigan&apos;s complex statutory no-fault thresholds.
+              Most legal marketing agencies report traffic, impressions and rankings. None of that pays the bills. A driver searching &ldquo;car accident lawyer near me&rdquo; from Midtown is a different client from someone searching &ldquo;no-fault attorney Southfield&rdquo;, and both differ from a person looking for a DUI lawyer near the 36th District Court. Generic SEO treats them all the same. We build a page, a Business Profile signal and a tracking setup for each.
             </p>
 
             <div className="pt-2 space-y-2.5 text-xs sm:text-sm text-slate-700">
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0" />
-                <span>Targeting Wayne County 36th District &amp; 3rd Circuit Court proximity</span>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                <span><strong>Court and neighborhood intent:</strong> pages written for the courts and communities your clients actually search from.</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0" />
-                <span>Statutory MCL § 500.3101 No-Fault distinction that drives real retainers</span>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                <span><strong>Michigan no-fault depth:</strong> content built around real questions about PIP benefits, the serious impairment threshold (MCL § 500.3135) and claim deadlines.</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0" />
-                <span>Zero vanity clicks — 100% phone call and intake attribution</span>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                <span><strong>Call-level attribution:</strong> every phone call and form tied to the search that produced it.</span>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function DetroitSubMarkets({ page }: { page: CityPage }) {
             <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-lg group">
               <Image
                 src="/images/locations/detroit-law-consultation.webp"
-                alt="Detroit Law Firm Partner Reviewing Qualified Client Retainer Intake"
+                alt="Detroit attorney reviewing a new client intake after a Google search call"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500"

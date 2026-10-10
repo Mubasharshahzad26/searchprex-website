@@ -101,13 +101,6 @@ export async function generateMetadata({
     title: page.metaTitle,
     description: page.metaDescription,
     ...(indexable ? {} : { robots: { index: false, follow: true } }),
-    keywords: [
-      `law firm seo ${page.city.toLowerCase()}`,
-      `attorney seo ${page.city.toLowerCase()}`,
-      `seo for lawyers ${page.city.toLowerCase()}`,
-      `${page.city.toLowerCase()} law firm marketing`,
-      `lawyer seo ${page.state.toLowerCase()}`,
-    ],
     alternates: { canonical: url },
     openGraph: {
       title: page.metaTitle,
@@ -591,10 +584,18 @@ function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stat
     description: page.metaDescription,
     url,
     provider: organizationRef,
-    areaServed: [
-      { "@type": "City", name: page.city, containedInPlace: { "@type": "State", name: page.state } },
-      { "@type": "AdministrativeArea", name: page.county },
-    ],
+    areaServed:
+      page.citySlug === "detroit"
+        ? [
+            { "@type": "City", name: "Detroit", containedInPlace: { "@type": "State", name: "Michigan" } },
+            { "@type": "AdministrativeArea", name: "Wayne County" },
+            { "@type": "AdministrativeArea", name: "Oakland County" },
+            { "@type": "AdministrativeArea", name: "Macomb County" },
+          ]
+        : [
+            { "@type": "City", name: page.city, containedInPlace: { "@type": "State", name: page.state } },
+            { "@type": "AdministrativeArea", name: page.county },
+          ],
     audience: {
       "@type": "Audience",
       audienceType: `Law firms and attorneys in ${page.city}, ${page.state}`,

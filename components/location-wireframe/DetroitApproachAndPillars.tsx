@@ -36,26 +36,29 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
     {
       number: "PILLAR 1",
       title: "Be Found",
+      h3: "Be Found: Local SEO and Google Map Pack Rankings for Detroit Lawyers",
       icon: Search,
       tag: "Local 3-Pack & Maps",
-      desc: "Local SEO essentials: Google Business Profile optimization, NAP entity consistency, statutory intent pages and technical crawl health.",
+      desc: "Google Business Profile optimization, consistent name-address-phone data, practice-area pages and technical health, so you show up when someone searches \"personal injury lawyer Detroit\".",
       tactics: ["GBP Proximity Geofencing", "Local Court Citation Authority", "Core Web Vitals <1.2s"],
     },
     {
       number: "PILLAR 2",
       title: "Be Cited",
+      h3: "Be Cited: AI Overviews, ChatGPT and Perplexity Visibility for Law Firms",
       icon: Sparkles,
       tag: "AI Overviews & LLMs",
-      desc: "AI visibility: answer-first structured legal content, entity co-occurrence signals and earned media that raise your AI citation rate in Google Gemini, ChatGPT and Perplexity.",
+      desc: "Answer-first content, structured data and earned mentions that raise the odds AI tools cite your firm. We track your AI citation rate monthly. We cannot guarantee any platform's output.",
       tactics: ["JSON-LD LegalService Schema", "Perplexity & Gemini Citations", "Statutory Threshold Answers"],
     },
     {
       number: "PILLAR 3",
       title: "Be Chosen",
+      h3: "Be Chosen: Reviews, Intake Speed and Conversion",
       icon: UserCheck,
       tag: "Intake & Conversion",
-      desc: "Client conversion: review generation engine, verified case result proof and sub-60-second speed-to-lead intake that turn search traffic into signed retainers.",
-      tactics: ["Review Velocity Acceleration", "Verified Verdict Feeds", "CallRail Intake Telemetry"],
+      desc: "A compliant review flow, case-result proof and fast intake, because a ranking only matters if the phone gets answered.",
+      tactics: ["Compliant Review Flow", "Verified Verdict Feeds", "CallRail Intake Telemetry"],
     },
   ];
 
@@ -63,16 +66,16 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
     <section id="see-approach" className="py-16 bg-[#f8fafc] border-b border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-14">
         
-        {/* ── Section Header: H2: See Our Approach ── */}
+        {/* ── Section Header: H2: Our Detroit Law Firm SEO Approach ── */}
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
             PROVEN REVENUE FRAMEWORK · {page.city.toUpperCase()}, {page.stateAbbr}
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0a0f2e]">
-            See Our Approach
+            Our Detroit Law Firm SEO Approach: Local SEO, AI Visibility and Brand Authority
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-            Legal consumers in {page.city} cross-reference Google Maps 3-Pack rankings, AI Overviews, and verified reviews on their phones before dialing. We build an authoritative multi-surface presence that turns searchers into signed retainers.
+            Detroit legal consumers compare Google Maps results, AI Overviews and reviews on their phones before they dial. We build one connected presence across all three, so your firm is found, cited and chosen.
           </p>
         </div>
 
@@ -83,7 +86,7 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
             <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
               <Image
                 src="/images/locations/detroit-case-strategy.jpg"
-                alt="Detroit Law Firm Litigation Team Case Strategy Briefing Session"
+                alt="Law firm team reviewing a local SEO and Map Pack strategy in Detroit"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-center hover:scale-105 transition-transform duration-500"
@@ -104,7 +107,7 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
 
             <div className="mt-3 flex items-center justify-between text-xs text-slate-500 px-1">
               <span>Verified Wayne County Case Velocity</span>
-              <span className="text-[#534AB7] font-bold">100% Bar Ethics Compliant</span>
+              <span className="text-[#534AB7] font-bold">Written with MRPC Rule 7 in mind</span>
             </div>
           </div>
 

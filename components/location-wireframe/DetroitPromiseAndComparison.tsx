@@ -16,15 +16,15 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
   const promises = [
     {
       title: "White-hat only",
-      desc: "No link schemes, no private blog networks (PBNs), no fake reviews, ever.",
+      desc: "No link schemes, private blog networks or fake reviews.",
     },
     {
-      title: "Bar-rule-aware content",
-      desc: "Every page respects Michigan State Bar advertising ethics rules, disclaimers and verdict guidelines.",
+      title: "Written with Michigan advertising rules in mind",
+      desc: "Pages follow MRPC Rule 7 guidance, and your attorneys approve final copy.",
     },
     {
-      title: "Monthly proof & accountability",
-      desc: "Monthly proof of rankings, incoming calls, and signed cases with our 90-day milestone guarantee.",
+      title: "Monthly proof",
+      desc: "Rankings, calls and signed cases, plus a 90-day milestone review against agreed targets.",
     },
   ];
 
@@ -74,7 +74,7 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
     {
       icon: UserCheck,
       title: "A named strategist",
-      desc: "Mubashar Sharif serves as your dedicated strategic partner — direct founder strategy with zero junior account managers.",
+      desc: "Mubashar Shahzad serves as your dedicated strategic partner — direct founder strategy with zero junior account managers.",
       kpi: "Direct Senior Partnership",
       execution: "Weekly Slack/phone updates and bi-weekly GSC strategy syncs directly with the founder executing your technical architecture.",
       advantage: "No hand-offs to recent college graduates or generic offshore support queues.",
@@ -87,6 +87,24 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
       searchprex: "Signed cases and revenue",
       typical: "Rankings and traffic",
       diy: "Whatever you track",
+    },
+    {
+      capability: "Territory exclusivity",
+      searchprex: "One firm per practice area",
+      typical: "Often serves competing firms",
+      diy: "Not applicable",
+    },
+    {
+      capability: "Contract terms",
+      searchprex: "Month-to-month",
+      typical: "Frequently fixed-term",
+      diy: "Salary and tools",
+    },
+    {
+      capability: "Call tracking to signed case",
+      searchprex: "CallRail + CRM",
+      typical: "Rarely connected",
+      diy: "Manual",
     },
     {
       capability: "AI visibility and citation tracking",
@@ -130,7 +148,7 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
               OUR PROMISE
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
-              What you can hold us to
+              Our Promise to Detroit Law Firms: White-Hat SEO, Bar-Rule Awareness and Monthly Proof
             </h2>
           </div>
 
@@ -158,9 +176,9 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">
                 WHY CHOOSE US · INTERACTIVE EXECUTION PROOF
               </span>
-              <h3 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-                Why {page.city} Law Firms Choose SearchPrex Over a Generic SEO Agency
-              </h3>
+              <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
+                Why Detroit Law Firms Choose SearchPrex Over a Generic SEO Agency
+              </h2>
               <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
                 Click any card below to explore our exact implementation methodology, verified law firm KPIs, and competitive advantage.
               </p>
@@ -253,7 +271,7 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
         {/* Lower: Comparison Table */}
         <div className="space-y-6">
           <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
-            Comparison: SearchPrex vs Typical SEO Agency vs DIY
+            SearchPrex vs Typical Law Firm SEO Agency vs In-House SEO
           </h3>
 
           <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
@@ -265,7 +283,7 @@ export default function DetroitPromiseAndComparison({ page }: { page: CityPage }
                     SearchPrex
                   </th>
                   <th className="py-4 px-5 w-[22%] text-slate-200">Typical SEO agency</th>
-                  <th className="py-4 px-5 w-[22%] text-slate-200">DIY / in-house</th>
+                  <th className="py-4 px-5 w-[22%] text-slate-200">In-house</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-700">

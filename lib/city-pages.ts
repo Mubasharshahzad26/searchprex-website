@@ -82,12 +82,12 @@ export const CITY_PAGES: CityPage[] = [
     county: "Wayne County",
     metaTitle: "Law Firm SEO Company in Detroit, MI",
     metaDescription:
-      "SEO for Detroit law firms: compete in the Wayne County map pack for car accident, no-fault and criminal defense searches. Founder-led, no contracts.",
-    h1: "Law Firm SEO in Detroit, Michigan",
+      "Law firm SEO in Detroit built for signed cases: Map Pack rankings, AI Overviews and call tracking for injury, no-fault and criminal defense firms. Month-to-month.",
+    h1: "Law Firm SEO in Detroit, Michigan: A Revenue-First Approach",
     heroSub:
-      "Detroit injury searches are dominated by four firms with television budgets and a decade of backlinks. You do not out-spend them. You out-specify them — by owning the searches they treat as too small to bother with.",
+      "SearchPrex is a law firm SEO company for Detroit attorneys who want signed cases, not vanity traffic. We help personal injury, no-fault, criminal defense, family and employment firms rank in the Google Map Pack, appear in AI Overviews and turn searches into phone calls across Wayne, Oakland and Macomb counties.",
     problem:
-      "A Detroit attorney searching their own name sees themselves at the top and assumes things are fine. That result is personalised. On a clean SERP for the searches that actually produce cases, the same firm is usually nowhere.",
+      "Not Getting Qualified Leads From Your Detroit Law Firm Website?",
     problemPoints: [
       "Wayne County injury keywords are held by four firms with heavy TV spend and years of accumulated links",
       "Directories — Avvo, FindLaw, Justia, Yelp — occupy most of the first page before a single firm appears",
@@ -134,18 +134,45 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "How long does law firm SEO take to work in Detroit?",
-        a: "Expect map pack movement in 60–90 days and meaningful organic rankings in 4–6 months. Detroit injury keywords are among the most competitive in the Midwest because several firms have spent a decade building links, so anyone promising first-page results in 30 days is either targeting keywords nobody searches or is not being straight with you.",
+        q: "How long does law firm SEO take in Detroit?",
+        a: "Map Pack improvements often start within 60 to 90 days as Business Profile and citation signals update. Competitive organic terms like \"Detroit car accident lawyer\" usually take longer, commonly four to six months or more depending on the competition and your starting point. We agree on milestones up front, and results are never guaranteed.",
       },
       {
-        q: "Why does my firm not show in the Google map pack for Detroit?",
-        a: "Almost always one of three things: your Google Business Profile has no service area set, your primary category is wrong, or your review velocity has stalled. Google ranks the map pack largely on proximity, relevance and prominence — a downtown address with no service area will not surface for someone searching from Livonia.",
+        q: "How much does law firm SEO cost in Detroit?",
+        a: "It depends on your practice area, the competition and the scope. Most active Detroit campaigns range between $1,500 and $4,500/month depending on practice density across Wayne, Oakland, and Macomb counties. Plans are month-to-month, and we quote after reviewing your site and the firms you compete with.",
       },
       {
-        q: "Should a Detroit firm target 'car accident lawyer' or 'no-fault attorney'?",
-        a: "Both, on separate pages. They are different searches with different intent: 'car accident lawyer Detroit' is someone looking to hire, while 'no-fault attorney Michigan' is often someone in a benefits dispute with an insurer. One page cannot serve both well, and Google will rank neither.",
+        q: "Do you work with firms outside Detroit?",
+        a: "Yes. We also build location pages and campaigns for firms in Grand Rapids, Ann Arbor, Lansing, Warren, and other Midwest markets. Every territory receives the same one-firm-per-niche exclusivity.",
       },
-      lawCost("Detroit"),
+      {
+        q: "Is your content compliant with Michigan legal advertising rules?",
+        a: "We write with Michigan Rule of Professional Conduct 7 (MRPC Rule 7) in mind, covering testimonials, past results and disclaimers, and your attorneys approve every page before it goes live. The firm remains responsible for its own advertising.",
+      },
+      {
+        q: "How does Michigan no-fault insurance law affect law firm SEO?",
+        a: "Injured drivers search with very specific questions about PIP benefits, claim deadlines and when they can sue under the serious impairment threshold (MCL § 500.3135). Michigan's 2019 no-fault reforms changed coverage choices and provider reimbursement, so outdated content loses trust fast. We build and refresh no-fault pages with attorney review.",
+      },
+      {
+        q: "What makes AI visibility (AEO/GEO) different from traditional SEO?",
+        a: "Traditional SEO targets rankings in blue links. AI visibility focuses on being cited in Google AI Overviews, ChatGPT and Perplexity answers, which depends on clear entity signals, answer-first content and trusted mentions. We track your AI citation rate alongside Map Pack rankings.",
+      },
+      {
+        q: "Do you require a long-term contract?",
+        a: "No. We work month-to-month and earn the renewal through calls and signed cases.",
+      },
+      {
+        q: "Can you help my firm rank in the Google Map Pack for \"car accident lawyer Detroit\"?",
+        a: "Map Pack rankings depend on proximity, relevance and prominence. We optimize the controllable parts (profile, reviews, citations, practice-area pages) and measure progress with geo-grid tracking. We do not guarantee a specific position.",
+      },
+      {
+        q: "What does one firm per practice area mean?",
+        a: "We take on a single firm per practice area in your Detroit territory, so we will never run your strategy against another client of ours.",
+      },
+      {
+        q: "Do you guarantee rankings or signed cases?",
+        a: "No. No honest agency can. We commit to a transparent process, monthly reporting and agreed milestones with a 90-day milestone review.",
+      },
     ],
   },
 

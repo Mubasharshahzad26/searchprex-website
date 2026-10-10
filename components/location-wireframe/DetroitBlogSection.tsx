@@ -57,10 +57,10 @@ export default function DetroitBlogSection({ page }: { page: CityPage }) {
               LEGAL SEO INSIGHTS &amp; BLUEPRINTS
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              {`Latest ${page.city} Law Firm SEO & AEO Research`}
+              Law Firm SEO and AI Search Insights for Detroit Attorneys
             </h2>
             <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Articles and strategic analyses from our blog category relevant to {page.city} and Michigan law firm visibility.
+              Practical guides on AI Overviews, Google Business Profile and law firm SEO in 2026.
             </p>
           </div>
 

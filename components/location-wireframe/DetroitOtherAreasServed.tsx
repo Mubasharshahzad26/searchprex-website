@@ -31,32 +31,30 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
   const embedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=m&z=10&output=embed`;
 
   const wayneAreas = [
-    { name: "Downtown Detroit", note: "36th District Court & Coleman A. Young Municipal Center corridor" },
-    { name: "Midtown & New Center", note: "Wayne State legal corridor & Henry Ford healthcare network" },
-    { name: "Corktown & Riverfront", note: "Emerging commercial and civil litigation corridor" },
-    { name: "Dearborn", note: "19th District Court, Ford Motor HQ & Arab American community hub" },
-    { name: "Livonia", note: "16th District Court & I-96 high-traffic commercial accident corridor" },
-    { name: "Grosse Pointe", note: "Municipal court venues & high-net-worth estate/family matters" },
-    { name: "Canton & Plymouth", note: "35th District Court corridor & growing suburban litigation" },
-    { name: "Downriver (Taylor/Wyandotte)", note: "23rd District Court & industrial manufacturing claims" },
+    { name: "Downtown Detroit", note: "SEO for law firms near the Coleman A. Young Municipal Center and city courts: criminal defense, injury and civil litigation searches." },
+    { name: "Midtown & New Center", note: "Injury and medical malpractice intent from the hospital and university corridor." },
+    { name: "Dearborn", note: "Community-specific and multilingual search intent for injury, immigration and family law." },
+    { name: "Livonia & Downriver", note: "Commuter and highway accident searches across western Wayne County." },
+    { name: "Grosse Pointe", note: "Municipal court venues & high-net-worth estate/family matters." },
+    { name: "Canton & Plymouth", note: "35th District Court corridor & growing suburban litigation." },
   ];
 
   const oaklandAreas = [
-    { name: "Southfield", note: "The primary Oakland County legal hub with dozens of prominent firms" },
-    { name: "Troy", note: "Big Oakland County corporate, defense, and business law practices" },
-    { name: "Birmingham & Bloomfield", note: "High-value catastrophic injury and private client representation" },
-    { name: "Royal Oak & Ferndale", note: "44th District Court & Woodward Avenue commercial corridor" },
-    { name: "Farmington Hills & Novi", note: "47th & 52-1 District Courts along I-275 / I-696 interchange" },
-    { name: "Rochester Hills", note: "52-3 District Court & northern Oakland County suburban corridor" },
+    { name: "Southfield", note: "Oakland County employment, business and family law searches." },
+    { name: "Troy", note: "Higher-value family, estate and business law intent." },
+    { name: "Birmingham & Bloomfield", note: "High-value catastrophic injury and private client representation." },
+    { name: "Royal Oak & Ferndale", note: "44th District Court & Woodward Avenue commercial corridor." },
+    { name: "Farmington Hills & Novi", note: "47th & 52-1 District Courts along I-275 / I-696 interchange." },
+    { name: "Rochester Hills", note: "52-3 District Court & northern Oakland County suburban corridor." },
   ];
 
   const macombAreas = [
-    { name: "Warren", note: "37th District Court, GM Tech Center & manufacturing injury corridor" },
-    { name: "Sterling Heights", note: "41A District Court & Hall Road / M-59 commercial litigation hub" },
-    { name: "Mount Clemens", note: "16th Judicial Circuit Court of Macomb County seat" },
-    { name: "Clinton Township", note: "41B District Court & Macomb County's most populous township" },
-    { name: "St. Clair Shores", note: "40th District Court & Nautical Mile maritime / traffic corridor" },
-    { name: "Shelby Township", note: "High-growth residential and commercial corridor along M-53" },
+    { name: "Warren & Macomb County", note: "Growing suburban injury and defense demand." },
+    { name: "Sterling Heights", note: "41A District Court & Hall Road / M-59 commercial litigation hub." },
+    { name: "Mount Clemens", note: "16th Judicial Circuit Court of Macomb County seat." },
+    { name: "Clinton Township", note: "41B District Court & Macomb County's most populous township." },
+    { name: "St. Clair Shores", note: "40th District Court & Nautical Mile maritime / traffic corridor." },
+    { name: "Shelby Township", note: "High-growth residential and commercial corridor along M-53." },
   ];
 
   const michiganMarkets = [
@@ -103,10 +101,10 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
               REGIONAL COVERAGE &amp; STATUTORY HUBS
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              Other Areas We Serve Across Metro Detroit &amp; Michigan
+              Law Firm SEO Across Metro Detroit: Wayne, Oakland and Macomb Counties
             </h2>
             <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Google ranks legal firms based on verified geographic proximity and judicial jurisdiction relevance. We build authoritative location silos across all three Metro Detroit counties and major Michigan hubs.
+              Google weighs proximity and local relevance. We build separate local pages so a Southfield employment lawyer and a Downtown criminal defense lawyer are not competing with the same generic page.
             </p>
           </div>
 
@@ -122,7 +120,7 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
           <div className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-slate-200 shadow-md min-h-[340px]">
             <Image
               src="/images/locations/detroit-legal-district.webp"
-              alt="Downtown Detroit Legal District and Wayne County Courthouse Corridor"
+              alt="Wayne County courthouse corridor in Detroit, service area for law firm SEO"
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover object-center"

@@ -36,49 +36,49 @@ export default function DetroitCoreExpertise({ page }: { page: CityPage }) {
   const usps = [
     {
       icon: Scale,
-      title: "Legal-only focus",
-      desc: "Law firm SEO is all we do, from YMYL statutory compliance to high-stakes practice-area intent.",
+      title: "Legal-specific SEO",
+      desc: "Practice-area intent, YMYL content standards and Michigan advertising rules (MRPC Rule 7) built into every page.",
       backHeadline: "Precision Legal Architecture",
       backPoints: [
-        "Strict Michigan Rules of Professional Conduct (MRPC 7.1–7.3) compliance",
-        "Deep statutory silos (MCL § 500.3101 No-Fault, catastrophic torts)",
-        "Zero generic out-of-the-box local SEO boilerplate",
+        "For law firms, we do legal-specific SEO only",
+        "Written with MRPC Rule 7 in mind with final attorney review",
+        "Deep statutory depth (MCL § 500.3135 serious impairment threshold)",
       ],
-      metric: "100% Legal Specialization",
+      metric: "Legal-Specific Specialization",
     },
     {
       icon: TrendingUp,
       title: "Cases, not clicks",
-      desc: "Reporting follows incoming calls, intake forms and signed retainers, not vanity traffic.",
+      desc: "Reports follow calls, intake forms and signed retainers. CallRail and your CRM show cost per signed case.",
       backHeadline: "Retainer Value Attribution",
       backPoints: [
         "CallRail multi-touch telephone call & SMS attribution",
-        "CRM intake pipeline tracking through to signed retainers",
-        "Monthly executive KPI dashboard showing cost-per-signed-case",
+        "Clio / Lawmatics CRM intake tracking through to signed retainers",
+        "Monthly reporting showing cost per signed case vs paid ads",
       ],
       metric: "ROI & Revenue Telemetry",
     },
     {
       icon: MapPin,
-      title: "Detroit-first locality",
-      desc: `Neighborhood pages, local links and GBP signals built directly around Metro Detroit & Wayne County.`,
+      title: "Detroit-first local SEO",
+      desc: "Court venue pages, Google Business Profile signals and Local Falcon grid tracking across Wayne, Oakland and Macomb.",
       backHeadline: "Tri-County Proximity Dominance",
       backPoints: [
-        "Local Falcon 7x7 geo-grid map tracking at 0.5-mile intervals",
+        "Local Falcon 7x7 geo-grid map tracking across Wayne, Oakland & Macomb",
         "Court venue landing pages (36th District, Wayne County 3rd Circuit)",
-        "Oakland (Southfield/Troy) and Macomb county regional corridors",
+        "Suburban corridor relevance (Dearborn, Southfield, Troy, Warren)",
       ],
       metric: "Wayne, Oakland & Macomb",
     },
     {
       icon: Cpu,
       title: "Proprietary stack",
-      desc: "NicheSEO PRO automates indexing, briefs and citation monitoring alongside senior human strategy.",
+      desc: "NicheSEO PRO automates indexing, content briefs and AI citation monitoring, with senior strategy on top.",
       backHeadline: "NicheSEO PRO Engine",
       backPoints: [
-        "Sub-2-hour Google Search Console API re-indexing triggers",
-        "Entity co-occurrence modeling for Gemini, Perplexity & AI Overviews",
-        "Direct algorithmic citation tracking across legal LLM indexes",
+        "Automated indexation triggers, briefs & citation monitoring",
+        "Entity co-occurrence modeling for Gemini, ChatGPT & Perplexity",
+        "Senior strategy and direct founder execution on top",
       ],
       metric: "NicheSEO PRO Platform",
     },
@@ -112,7 +112,7 @@ export default function DetroitCoreExpertise({ page }: { page: CityPage }) {
               WHY SEARCHPREX
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-              Our core expertise
+              What Makes Our Law Firm SEO in Detroit Different
             </h2>
             <p className="mt-3 text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
               Tap or click any card below to flip and inspect our tactical execution standards for {page.city} law firms.

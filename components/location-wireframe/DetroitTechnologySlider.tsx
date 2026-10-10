@@ -187,10 +187,10 @@ export default function DetroitTechnologySlider({ page }: { page: CityPage }) {
             ENTERPRISE SEO INFRASTRUCTURE
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-            Technology We Used
+            The Law Firm SEO Tech Stack Behind Our Detroit Rankings
           </h2>
           <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            The enterprise-grade intelligence platforms we deploy to build, crawl-test, track, and report on your {page.city} law firm rankings.
+            We use Semrush for competitive research, Google Search Console for real query data, Screaming Frog for technical crawls, BrightLocal for citations, Local Falcon for 7x7 geo-grid tracking, CallRail for call attribution, GA4 for conversions and our own NicheSEO PRO platform for indexing and AI citation monitoring.
           </p>
         </div>
 

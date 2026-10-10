@@ -63,7 +63,7 @@ export default function DetroitHero({ page }: { page: CityPage }) {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/locations/detroit-skyline-hero.jpg"
-          alt="Downtown Detroit Woodward Avenue & Legal District Skyline"
+          alt="Downtown Detroit skyline and legal district, Detroit law firm SEO"
           fill
           priority
           sizes="100vw"
@@ -82,13 +82,13 @@ export default function DetroitHero({ page }: { page: CityPage }) {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#a594fd] bg-white/5 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm">
               <span className="h-2 w-2 rounded-full bg-[#3eb489] animate-pulse" />
-              <span>LAW FIRM SEO · {page.city.toUpperCase()}, {page.state.toUpperCase()}</span>
+              <span>LAW FIRM SEO · DETROIT, MICHIGAN</span>
             </div>
 
             {/* H1 & Subheading */}
             <div className="space-y-3">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12]">
-                Revenue First Approach SEO in {page.city}, {page.state}
+                Law Firm SEO in Detroit, Michigan: A Revenue-First Approach
               </h1>
               <p className="text-xl sm:text-2xl font-bold text-[#a594fd]">
                 Be the Firm Injured Clients See First
@@ -96,7 +96,7 @@ export default function DetroitHero({ page }: { page: CityPage }) {
             </div>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-              {page.city} clients search in panic, on mobile, minutes after an accident or an arrest. We put your firm in the Map Pack and page one so the call comes to you, not the firm above you.
+              SearchPrex is a law firm SEO company for Detroit attorneys who want signed cases, not vanity traffic. We help personal injury, no-fault, criminal defense, family and employment firms rank in the Google Map Pack, appear in AI Overviews and turn searches into phone calls across Wayne, Oakland and Macomb counties.
             </p>
 
             {/* CTAs */}
@@ -105,21 +105,21 @@ export default function DetroitHero({ page }: { page: CityPage }) {
                 href="#growth-plan"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all cursor-pointer"
               >
-                <span>Check Your Firm&apos;s Ranking</span>
+                <span>Get My Free Law Firm SEO Tear-Down</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#see-approach"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-5 py-3.5 text-sm font-semibold text-white transition-all cursor-pointer backdrop-blur-xs"
               >
-                <span>See Our Approach</span>
+                <span>See How We Win Cases From Search</span>
               </a>
             </div>
 
             {/* Badges / Trust strip */}
             <div className="pt-4 border-t border-slate-800/80 text-xs text-slate-400 flex flex-wrap items-center gap-2">
               <span className="font-semibold text-slate-200">Target Practice Focus:</span>
-              <span>Built for personal injury, criminal defense, family and employment law firms across {page.county}.</span>
+              <span>Built for personal injury, no-fault, criminal defense, family and employment law firms across Wayne, Oakland and Macomb counties.</span>
             </div>
           </div>
 
@@ -140,7 +140,7 @@ export default function DetroitHero({ page }: { page: CityPage }) {
                   Free law firm tear-down
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-slate-500 font-medium">
-                  Send your URL. I’ll check your practice-area pages, Business Profile and the firms outranking you in {page.city} — within 24 hours.
+                  Send your URL. Within 24 hours I will review your practice-area pages, Google Business Profile and the Detroit firms outranking you.
                 </p>
               </div>
 
@@ -228,9 +228,9 @@ export default function DetroitHero({ page }: { page: CityPage }) {
               {/* Trust signals & Exclusivity */}
               <div className="mt-3.5 flex flex-col gap-1.5 pt-2 border-t border-slate-100 text-xs">
                 {[
-                  `One firm per practice area in ${page.city} exclusivity`,
-                  "The founder reviews your site personally",
-                  "Zero spam, zero sales pressure",
+                  "One firm per practice area in your Detroit territory",
+                  "Your site reviewed personally by the founder",
+                  "Month-to-month, no long-term contract",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <CheckCircle className="h-3.5 w-3.5 shrink-0 text-[#1a7d59]" />

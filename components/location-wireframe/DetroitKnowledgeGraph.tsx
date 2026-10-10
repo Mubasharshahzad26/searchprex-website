@@ -82,11 +82,11 @@ export default function DetroitKnowledgeGraph({ page }: { page: CityPage }) {
           <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
             ENTITY ARCHITECTURE
           </span>
-          <h3 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e] leading-tight">
-            How Google and AI See Your Law Firm
-          </h3>
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e] leading-tight">
+            Entity SEO for Detroit Law Firms: How Google and AI Understand Your Practice
+          </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-            Google and AI assistants answer from connected entities, not isolated pages. When your firm, attorneys, practice areas and {page.city} location are clearly linked and confirmed by trusted sources, you become easier to cite and recommend. Tap a node below.
+            Google and AI assistants answer from connected entities, not isolated pages. When your firm, attorneys, practice areas and Detroit location are clearly linked and confirmed by trusted sources, you become easier to cite and recommend. Tap a node below.
           </p>
         </div>
 
@@ -126,15 +126,18 @@ export default function DetroitKnowledgeGraph({ page }: { page: CityPage }) {
                   Core Legal Entity
                 </span>
                 <span className="text-base sm:text-lg font-black text-white mt-0.5 block">
-                  Your Law Firm ({page.city})
+                  Your Law Firm (Detroit, MI)
                 </span>
               </div>
             </div>
 
-            <div className="text-center pt-4 border-t border-slate-200">
-              <span className="text-xs text-slate-500 font-medium">
+            <div className="text-center pt-4 border-t border-slate-200 space-y-1">
+              <p className="text-xs text-slate-600 font-medium">
                 Tap any node above to inspect how Google &amp; AI evaluate that entity link.
-              </span>
+              </p>
+              <p className="text-[11px] text-slate-400">
+                We strengthen the signals that help search engines understand your firm. We cannot guarantee a Knowledge Panel or any AI platform&apos;s output.
+              </p>
             </div>
           </div>
 

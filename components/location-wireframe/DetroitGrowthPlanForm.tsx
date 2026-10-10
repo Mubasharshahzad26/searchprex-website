@@ -66,7 +66,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
             MARKET EXCLUSIVITY &amp; STRATEGY
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-            Why Our Strategy is Successful for Law Firms in {page.city}, {page.state}
+            One Law Firm Per Practice Area: Exclusive Law Firm SEO in Wayne, Oakland and Macomb Counties
           </h2>
           <h3 className="text-xl sm:text-2xl font-bold text-[#3eb489]">
             Book Your Free Consultation
@@ -75,7 +75,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
           {/* Explanatory Contextual Internal Linking Paragraphs */}
           <div className="space-y-3 pt-2 text-sm sm:text-base text-slate-300 leading-relaxed">
             <p>
-              Unlike mass-market marketing agencies that service multiple direct competitors in the same courthouse district, SearchPrex enforces a strict <strong>single-firm-per-practice territorial exclusivity policy</strong> across Wayne, Oakland, and Macomb counties. When we partner with your firm, our complete{" "}
+              Most agencies serve several competing firms in the same courthouse district. We accept one firm per practice area in your Detroit territory, so the strategy we build for you is never run against you. You work directly with a senior strategist, and our terms are month-to-month because we would rather earn the renewal. When we partner with your firm, our complete{" "}
               <Link
                 href="/services/law-firm-seo"
                 className="font-bold text-[#a594fd] hover:text-white underline decoration-[#a594fd]/60 underline-offset-4 transition-colors"
@@ -140,26 +140,26 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
               <div className="flex items-start gap-2.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489] shrink-0 mt-1.5" />
                 <span className="leading-snug">
-                  <strong>Strict 1-Firm Per Practice Niche:</strong> We will never represent a competing personal injury or defense firm in your Detroit practice corridor.
+                  <strong>Strict one-firm-per-niche policy</strong> across personal injury, criminal defense, family and employment.
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489] shrink-0 mt-1.5" />
                 <span className="leading-snug">
-                  <strong>Direct Senior Strategist Access:</strong> You collaborate directly with our search director, not entry-level account managers.
+                  <strong>Direct strategist access</strong> with no junior hand-offs.
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489] shrink-0 mt-1.5" />
                 <span className="leading-snug">
-                  <strong>Month-to-Month Agile Execution:</strong> Zero multi-year locked retainers — we prove value through inbound signed case volume.
+                  <strong>Month-to-month terms</strong> with no multi-year lock-in.
                 </span>
               </div>
             </div>
 
             <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-              <span>Michigan Bar Ethics Compliant</span>
-              <span className="text-[#a594fd] font-semibold">MRPC 7.1–7.3 Verified</span>
+              <span>Legal Advertising Ethics</span>
+              <span className="text-[#a594fd] font-semibold">Written with MRPC Rule 7 in mind</span>
             </div>
           </div>
 
@@ -186,13 +186,13 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
-                    FREE 30-MINUTE DETROIT STRATEGY CALL
+                    EXCLUSIVE DETROIT TERRITORY CHECK
                   </span>
                   <h4 className="text-xl sm:text-2xl font-black text-[#0a0f2e] mt-1">
                     Check Territory Availability
                   </h4>
                   <p className="text-xs text-slate-500 mt-1">
-                    Tell us about your practice. We will confirm whether your {page.city} zip codes are open.
+                    Tell us about your practice and we will confirm whether your Detroit territory is still open.
                   </p>
                 </div>
 
@@ -280,12 +280,12 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                   type="submit"
                   className="w-full rounded-xl bg-[#1a7d59] hover:bg-[#196b4d] px-6 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <span>Request Exclusivity Check &amp; Strategy Plan</span>
+                  <span>Check My Territory</span>
                   <ArrowRight className="h-4 w-4" />
                 </button>
 
                 <p className="text-[11px] text-slate-400 text-center">
-                  Strict confidentiality guaranteed. We never disclose prospective firm audits to third parties.
+                  We keep every audit confidential and never share it with other firms.
                 </p>
               </form>
             )}
@@ -304,7 +304,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                 Live Results Produced with Our Local Search Methodology
               </h4>
               <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
-                Unedited performance telemetry demonstrating real client rank growth across local map packs and Google Search Console.
+                Real performance telemetry labeled by client type and date range, demonstrating how our search methodology wins local visibility and AI Overviews.
               </p>
             </div>
 
@@ -324,7 +324,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
               <div className="p-5 sm:p-6 pb-4 space-y-2">
                 <div className="flex items-center justify-between gap-2">
                   <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#3eb489]/20 text-[#3eb489] border border-[#3eb489]/30">
-                    Michigan Local Search Console
+                    Michigan Local Business
                   </span>
                   <span className="text-[11px] font-mono text-slate-400 font-semibold">
                     60-Day Telemetry
@@ -349,8 +349,10 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                 />
               </div>
 
-              <div className="p-4 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                <span className="truncate pr-2">Michigan Service Area · Search Console Verified</span>
+              <div className="p-4 bg-slate-950/80 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+                <span className="text-[11px] font-mono text-slate-300">
+                  Michigan Local Service Business, &ldquo;detroit local services&rdquo;, 60-Day Comparison, source: Google Search Console
+                </span>
                 <Link
                   href="/case-studies"
                   className="inline-flex items-center gap-1 font-bold text-[#3eb489] hover:underline shrink-0"
@@ -366,10 +368,10 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
               <div className="p-5 sm:p-6 pb-4 space-y-2">
                 <div className="flex items-center justify-between gap-2">
                   <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#534AB7]/30 text-[#a594fd] border border-[#534AB7]/40">
-                    Google AI Overview &amp; Local Pack
+                    Home Services &amp; HVAC
                   </span>
                   <span className="text-[11px] font-mono text-slate-400 font-semibold">
-                    Rank #1 Position
+                    Rank #1 in AI Overview
                   </span>
                 </div>
                 <h5 className="text-lg font-bold text-white group-hover:text-[#3eb489] transition-colors">
@@ -391,8 +393,10 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                 />
               </div>
 
-              <div className="p-4 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                <span className="truncate pr-2">Generative Engine Optimization · Live SERP Capture</span>
+              <div className="p-4 bg-slate-950/80 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+                <span className="text-[11px] font-mono text-slate-300">
+                  HVAC &amp; Home Services Client, &ldquo;emergency services near me&rdquo;, Live SERP Capture, source: Google Gemini / Search AI Overview
+                </span>
                 <Link
                   href="/services/law-firm-seo"
                   className="inline-flex items-center gap-1 font-bold text-[#a594fd] hover:underline shrink-0"
