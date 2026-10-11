@@ -33,6 +33,7 @@ import LocalCompetitorReportSample from "@/components/LocalCompetitorReportSampl
 import LocalQuickNavSidebar from "@/components/LocalQuickNavSidebar";
 import DetroitWireframeView from "@/components/location-wireframe/DetroitWireframeView";
 import GrandRapidsWireframeView from "@/components/location-wireframe/grand-rapids/GrandRapidsWireframeView";
+import ClevelandWireframeView from "@/components/location-wireframe/cleveland/ClevelandWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -177,6 +178,26 @@ export default async function CityPage({
         />
         <main>
           <GrandRapidsWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  // For Cleveland, OH render the Cleveland wireframe layout
+  if (page.stateSlug === "ohio" && page.citySlug === "cleveland") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <ClevelandWireframeView page={page} />
         </main>
       </>
     );
@@ -622,6 +643,17 @@ function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stat
             { "@type": "City", name: "Kentwood" },
             { "@type": "City", name: "Walker" },
             { "@type": "City", name: "Grandville" },
+          ]
+        : page.citySlug === "cleveland"
+        ? [
+            { "@type": "City", name: "Cleveland", containedInPlace: { "@type": "State", name: "Ohio" } },
+            { "@type": "AdministrativeArea", name: "Cuyahoga County" },
+            { "@type": "City", name: "Lakewood" },
+            { "@type": "City", name: "Parma" },
+            { "@type": "City", name: "Beachwood" },
+            { "@type": "City", name: "Shaker Heights" },
+            { "@type": "City", name: "Westlake" },
+            { "@type": "City", name: "Akron" },
           ]
         : [
             { "@type": "City", name: page.city, containedInPlace: { "@type": "State", name: page.state } },

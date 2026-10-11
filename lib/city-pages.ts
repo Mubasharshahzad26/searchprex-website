@@ -262,9 +262,9 @@ export const CITY_PAGES: CityPage[] = [
     metaTitle: "Law Firm SEO Company in Cleveland, OH",
     metaDescription:
       "SEO for Cleveland law firms. Rank in the Cuyahoga County map pack for injury, workers' comp and criminal defence searches. Founder-led, no contracts.",
-    h1: "Law Firm SEO in Cleveland, Ohio",
+    h1: "Law Firm SEO in Cleveland, Ohio: Predictable Leads, Proven Numbers",
     heroSub:
-      "Search page one for most Cleveland attorney terms and you will find national directories, not Cleveland firms. That is not a competitive market. That is an open one — and it is open because almost nobody local has published anything worth ranking.",
+      "Cleveland attorneys do not buy hype. They buy results they can audit. We build search visibility that earns signed cases, then show you every number behind it.",
     problem:
       "Cleveland legal searches return national directories and firms from other cities. Local firms are absent not because they are outranked, but because they have nothing on the page that says they practise here.",
     problemPoints: [
@@ -292,8 +292,8 @@ export const CITY_PAGES: CityPage[] = [
       "U.S. District Court, Northern District of Ohio",
     ],
     barAssociation: "Ohio State Bar Association · Cleveland Metropolitan Bar Association",
-    neighborhoods: ["Downtown", "Ohio City", "Tremont", "Lakewood", "Parma", "Beachwood"],
-    nearbyCities: ["Columbus", "Akron", "Toledo", "Canton"],
+    neighborhoods: ["Downtown", "Ohio City", "Tremont", "University Circle", "Lakewood", "Parma", "Euclid", "Beachwood", "Westlake"],
+    nearbyCities: ["Lakewood", "Parma", "Beachwood", "Shaker Heights", "Westlake", "Akron"],
     legalContext: {
       heading: "Why Ohio workers' compensation is the content gap nobody is filling",
       body:
@@ -315,6 +315,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         q: "What does workers' compensation SEO involve in Ohio?",
         a: "Explaining the state-fund system properly. Ohio runs workers' comp through the Bureau of Workers' Compensation rather than private insurers, so the claim and appeal process differs from most states — and national directory content gets it wrong. That gap is the opportunity.",
+      },
+      {
+        q: "Do I have to stop my PPC?",
+        a: "No. We run organic alongside ads and recommend trimming only when your ledger shows organic can carry the load.",
       },
     ],
   },
