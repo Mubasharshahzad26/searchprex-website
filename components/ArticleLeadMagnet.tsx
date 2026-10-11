@@ -290,9 +290,9 @@ function BottomVariant({ source, copy, buttonText }: { source: string; copy?: Co
   return (
     <section className="py-20" style={{ background: INK }}>
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-        <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+        <p className="text-2xl font-black tracking-tight text-white sm:text-3xl">
           {copy?.headline ?? "Send me your URL. I’ll tell you what’s wrong with it."}
-        </h2>
+        </p>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
           {copy?.sub ?? "Two fields, a reply within 24 hours, written by me — the person you just read."}
         </p>

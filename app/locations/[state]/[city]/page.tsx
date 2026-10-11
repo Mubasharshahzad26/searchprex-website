@@ -34,6 +34,7 @@ import LocalQuickNavSidebar from "@/components/LocalQuickNavSidebar";
 import DetroitWireframeView from "@/components/location-wireframe/DetroitWireframeView";
 import GrandRapidsWireframeView from "@/components/location-wireframe/grand-rapids/GrandRapidsWireframeView";
 import ClevelandWireframeView from "@/components/location-wireframe/cleveland/ClevelandWireframeView";
+import PhiladelphiaWireframeView from "@/components/location-wireframe/philadelphia/PhiladelphiaWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -198,6 +199,26 @@ export default async function CityPage({
         />
         <main>
           <ClevelandWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  // For Philadelphia, PA render the Philadelphia wireframe layout
+  if (page.stateSlug === "pennsylvania" && page.citySlug === "philadelphia") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <PhiladelphiaWireframeView page={page} />
         </main>
       </>
     );

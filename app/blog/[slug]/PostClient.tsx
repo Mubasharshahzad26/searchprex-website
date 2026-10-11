@@ -291,7 +291,7 @@ export default function PostClient({
                   <span className="font-bold text-[#0a0f2e] text-sm">{post.author.name}</span>
                   <span className="inline-flex items-center gap-1 bg-[#EEEDFE] px-2 py-0.5 rounded-full">
                     <CheckCircle className="h-3 w-3 text-[#534AB7]" />
-                    <span className="text-[9px] font-bold text-[#534AB7]">Verified SEO Expert</span>
+                    <span className="text-[9px] font-bold text-[#534AB7]">Semrush &amp; HubSpot Certified SEO Analyst</span>
                   </span>
                 </div>
                 <p className="text-xs text-[#64748b]">{post.author.role} · {displayDate}</p>
@@ -561,7 +561,7 @@ export default function PostClient({
             <h2 className="text-2xl font-black text-[#0a0f2e] mb-8">Related articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((p) => (
-                <Link key={p.slug} href={`${section.href}/${p.slug}`}
+                <Link key={p.slug} href={(p as any).href || `${section.href}/${p.slug}`}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white hover:border-[#534AB7] hover:shadow-lg transition-all">
                   <div className="relative h-44 overflow-hidden bg-[#0a0f2e]">
                     {(p as any).heroImage && (

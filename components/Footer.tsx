@@ -170,9 +170,9 @@ export default function Footer() {
  
           {/* Services */}
           <div>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">
+            <p className="mb-4 text-sm font-bold uppercase tracking-widest text-white">
               Services
-            </h3>
+            </p>
             <ul className="space-y-2">
               {serviceLinks.map((link) => (
                 <li key={link.label}>
@@ -189,9 +189,9 @@ export default function Footer() {
  
           {/* Company */}
           <div>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">
+            <p className="mb-4 text-sm font-bold uppercase tracking-widest text-white">
               Company
-            </h3>
+            </p>
             <ul className="space-y-2">
               {companyLinks.map((link) => (
                 <li key={link.label}>
@@ -204,9 +204,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <h3 className="mb-4 mt-6 text-sm font-bold uppercase tracking-widest text-white">
+            <p className="mb-4 mt-6 text-sm font-bold uppercase tracking-widest text-white">
               Free Tools
-            </h3>
+            </p>
             <ul className="space-y-2">
               {toolLinks.map((link) => (
                 <li key={link.label}>
@@ -219,9 +219,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <h3 className="mb-4 mt-6 text-sm font-bold uppercase tracking-widest text-white">
+            <p className="mb-4 mt-6 text-sm font-bold uppercase tracking-widest text-white">
               Legal
-            </h3>
+            </p>
             <ul className="space-y-2">
               {resourceLinks.map((link) => (
                 <li key={link.label}>
@@ -238,9 +238,9 @@ export default function Footer() {
  
           {/* CTA */}
           <div>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">
+            <p className="mb-4 text-sm font-bold uppercase tracking-widest text-white">
               Get Started
-            </h3>
+            </p>
             <p className="mb-4 text-sm text-white/70">
               Find out what is holding your site back. Free SEO audit, within 24 hours.
             </p>
@@ -259,9 +259,9 @@ export default function Footer() {
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Industries Served — now clickable links */}
             <div>
-              <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
+              <p className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
                 Industries We Serve
-              </h4>
+              </p>
               <div className="flex flex-wrap gap-2">
                 {industries.map((industry) => (
                   <Link
@@ -277,9 +277,9 @@ export default function Footer() {
  
             {/* States Served */}
             <div>
-              <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
+              <p className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
                 Law Firm SEO by City
-              </h4>
+              </p>
               <div className="flex flex-wrap gap-2">
                 {cityLinks.map((city) => (
                   <Link

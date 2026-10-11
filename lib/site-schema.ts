@@ -136,6 +136,7 @@ export const founder = {
   "@id": FOUNDER_ID,
   name: "Mubashar Sharif",
   jobTitle: "Founder & SEO Strategist",
+  url: `${SITE}/experts`,
   // The square portrait, not the hero's background-less cutout: this is the
   // image Google may show beside the person, and a cutout on a transparent
   // background renders badly on a white or dark card.
