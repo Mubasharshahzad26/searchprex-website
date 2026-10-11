@@ -1,0 +1,354 @@
+"use client";
+
+import React, { useState } from "react";
+import { Search, Loader2, Sparkles, CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, HelpCircle } from "lucide-react";
+
+interface DiagnosticItem {
+  n: string;
+  why: string;
+  fix: string;
+  tool: string;
+}
+
+export default function AlbuquerqueDiagnosisTool() {
+  const [query, setQuery] = useState("");
+  const [selectedChips, setSelectedChips] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasDiagnosed, setHasDiagnosed] = useState(false);
+  const [diagnostics, setDiagnostics] = useState<DiagnosticItem[]>([]);
+  const [recommendation, setRecommendation] = useState<string>("");
+  const [isAiGenerated, setIsAiGenerated] = useState(false);
+
+  // Form lead submission state
+  const [leadUrl, setLeadUrl] = useState("");
+  const [leadEmail, setLeadEmail] = useState("");
+  const [leadPhone, setLeadPhone] = useState("");
+  const [leadPractice, setLeadPractice] = useState("Personal Injury");
+  const [isSubmittingLead, setIsSubmittingLead] = useState(false);
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+
+  const chips = [
+    "Spanish Search Void",
+    "DWI Interlock & MVD Intent",
+    "Community Property Confusion",
+    "Out-of-State Directory Dominance",
+    "Map Pack Stagnation",
+    "Missed Intake & Bilingual Leads",
+  ];
+
+  const toggleChip = (chip: string) => {
+    if (selectedChips.includes(chip)) {
+      setSelectedChips(selectedChips.filter((c) => c !== chip));
+    } else {
+      setSelectedChips([...selectedChips, chip]);
+    }
+  };
+
+  const handleRunDiagnosis = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!query.trim() && selectedChips.length === 0) return;
+
+    setIsLoading(true);
+    setHasDiagnosed(false);
+
+    try {
+      const res = await fetch("/api/diagnose-seo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query,
+          selectedChips,
+          city: "Albuquerque",
+          state: "New Mexico",
+          county: "Bernalillo County",
+        }),
+      });
+
+      if (!res.ok) throw new Error("Diagnosis request failed");
+
+      const data = await res.json();
+      setDiagnostics(data.items || []);
+      setRecommendation(data.recommendation || "");
+      setIsAiGenerated(Boolean(data.isAiGenerated));
+      setHasDiagnosed(true);
+    } catch (err) {
+      console.error(err);
+      // Fallback
+      setDiagnostics([
+        {
+          n: "Bilingual Search Void & Rio Rancho Suburban Intent",
+          why: "With a 49.8% Hispanic community across the Albuquerque metro, thousands of high-intent searches are ignored by English-only competitor websites.",
+          fix: "Deploy native-reviewed Spanish landing pages, proper hreflang tagging, and Spanish LegalService JSON-LD schema.",
+          tool: "Hispanic Search & Hreflang Engine",
+        },
+        {
+          n: "Bernalillo County Map Pack Deficit",
+          why: "Google treats Downtown Albuquerque, Westside, Northeast Heights, and Rio Rancho as distinct geo-grids; unoptimized listings lose out to directories.",
+          fix: "Calibrate primary GBP categories, launch bilingual review velocity workflows, and embed localized geo-signals for Metropolitan Court.",
+          tool: "Geo-Grid Local Rank Tracker",
+        },
+      ]);
+      setRecommendation("Target bilingual Spanish queries and anchor localized pages to the Second Judicial District Court to displace generic out-of-state aggregators.");
+      setIsAiGenerated(false);
+      setHasDiagnosed(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!leadUrl || !leadEmail) return;
+
+    setIsSubmittingLead(true);
+    try {
+      await fetch("/api/reality-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          website: leadUrl,
+          email: leadEmail,
+          phone: leadPhone,
+          practiceArea: leadPractice,
+          location: "Albuquerque, NM",
+          selectedChips,
+          query,
+        }),
+      });
+      setLeadSubmitted(true);
+    } catch {
+      setLeadSubmitted(true);
+    } finally {
+      setIsSubmittingLead(false);
+    }
+  };
+
+  return (
+    <section id="diagnosis-tool" className="py-16 bg-slate-50 border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Interactive Diagnostic Engine · Gemini AI Powered</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+            Diagnose Your Albuquerque Law Firm&apos;s Organic Stagnation
+          </h2>
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Type your firm&apos;s primary visibility challenge or click the specific Albuquerque legal market symptoms below. Our system synthesizes immediate strategic directives for Bernalillo County.
+          </p>
+        </div>
+
+        {/* Diagnosis Input & Chips Card */}
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 mb-8">
+          <form onSubmit={handleRunDiagnosis} className="mb-6">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="e.g., We get zero DWI calls from Rio Rancho, or our Spanish intake is nonexistent..."
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#534AB7] focus:bg-white transition-all"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-sm sm:text-base transition-all disabled:opacity-60 shadow-md shadow-[#534AB7]/20 shrink-0"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Analyzing...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Run Albuquerque Diagnosis</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+
+          {/* Issue Chips */}
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-1.5">
+              <HelpCircle className="w-3.5 h-3.5 text-[#534AB7]" />
+              <span>Or select local symptoms you are currently experiencing:</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {chips.map((chip) => {
+                const isSelected = selectedChips.includes(chip);
+                return (
+                  <button
+                    key={chip}
+                    type="button"
+                    onClick={() => toggleChip(chip)}
+                    className={`text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-lg border transition-all ${
+                      isSelected
+                        ? "bg-[#534AB7] text-white border-[#534AB7] shadow-xs"
+                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:border-slate-300"
+                    }`}
+                  >
+                    {chip}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Diagnosis Results Card */}
+        {hasDiagnosed && (
+          <div className="space-y-6 animate-in fade-in-50 duration-300">
+            <div className="bg-white rounded-2xl border border-indigo-100 p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                <div>
+                  <span className="text-xs font-bold text-[#534AB7] uppercase tracking-wider">
+                    Diagnostic Findings
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0a0f2e]">
+                    Albuquerque Legal Market Analysis
+                  </h3>
+                </div>
+                {isAiGenerated && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Gemini API Synthesis Verified
+                  </span>
+                )}
+              </div>
+
+              {/* Items Grid */}
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                {diagnostics.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-xl bg-slate-50 border border-slate-200 hover:border-[#534AB7]/40 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <AlertCircle className="w-4 h-4 text-[#534AB7] shrink-0" />
+                        <h4 className="font-bold text-[#0a0f2e] text-base">{item.n}</h4>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">
+                        <strong className="text-slate-800">Why in Albuquerque:</strong> {item.why}
+                      </p>
+                      <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        <strong className="text-[#1a7d59]">Strategic Fix:</strong> {item.fix}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500 font-medium">
+                      <span>Tool: {item.tool}</span>
+                      <span className="text-[#534AB7] font-semibold">Included in Retainer</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Executive Recommendation from Founder */}
+              {recommendation && (
+                <div className="p-5 rounded-xl bg-gradient-to-r from-indigo-50/80 via-white to-slate-50 border border-indigo-200 mb-8">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-[#534AB7] text-white flex items-center justify-center shrink-0 font-bold text-xs">
+                      MS
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#534AB7] uppercase tracking-wider mb-1">
+                        Executive Recommendation · Mubashar Sharif, CEO
+                      </div>
+                      <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                        &quot;{recommendation}&quot;
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Lead Magnet: Claim Free Reality Check Form */}
+              <div id="reality-check" className="bg-[#0a0f2e] text-white rounded-xl p-6 sm:p-8">
+                {leadSubmitted ? (
+                  <div className="text-center py-6">
+                    <div className="w-12 h-12 rounded-full bg-[#1a7d59]/20 border border-[#1a7d59] text-emerald-400 flex items-center justify-center mx-auto mb-3">
+                      <CheckCircle2 className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-xl font-bold mb-2">Reality Check Request Received</h4>
+                    <p className="text-slate-300 text-sm max-w-md mx-auto">
+                      CEO Mubashar Sharif will personally audit your website against Bernalillo County competitors and send your confidential analysis within 24 hours.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="max-w-2xl mb-6">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#EEEDFE]">
+                        Free · No Pressure · Confidential
+                      </span>
+                      <h4 className="text-xl sm:text-2xl font-extrabold text-white mt-1 mb-2">
+                        Get Your Free Albuquerque Reality Check
+                      </h4>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                        We will audit your Google Map Pack grid coordinates, bilingual ranking deficits, and AI search visibility. Delivered within 24 hours with exact next steps.
+                      </p>
+                    </div>
+
+                    <form onSubmit={handleLeadSubmit} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      <input
+                        type="url"
+                        required
+                        value={leadUrl}
+                        onChange={(e) => setLeadUrl(e.target.value)}
+                        placeholder="Firm Website (e.g., yourfirm.com)"
+                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#534AB7]"
+                      />
+                      <input
+                        type="email"
+                        required
+                        value={leadEmail}
+                        onChange={(e) => setLeadEmail(e.target.value)}
+                        placeholder="Your Direct Email"
+                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#534AB7]"
+                      />
+                      <select
+                        value={leadPractice}
+                        onChange={(e) => setLeadPractice(e.target.value)}
+                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#534AB7]"
+                      >
+                        <option value="Personal Injury">Personal Injury</option>
+                        <option value="DWI Defense">DWI Defense</option>
+                        <option value="Family Law & Divorce">Family Law &amp; Divorce</option>
+                        <option value="Criminal Defense">Criminal Defense</option>
+                        <option value="Estate Planning">Estate Planning</option>
+                      </select>
+                      <button
+                        type="submit"
+                        disabled={isSubmittingLead}
+                        className="px-5 py-3 rounded-lg bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 disabled:opacity-60"
+                      >
+                        {isSubmittingLead ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <>
+                            <span>Send My Request</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </>
+                        )}
+                      </button>
+                    </form>
+                    <div className="mt-3 flex items-center gap-2 text-[11px] text-slate-400">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#1a7d59]" />
+                      <span>100% Confidential. Never shared with other Albuquerque firms.</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}

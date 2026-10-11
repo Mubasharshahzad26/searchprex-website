@@ -35,6 +35,7 @@ import DetroitWireframeView from "@/components/location-wireframe/DetroitWirefra
 import GrandRapidsWireframeView from "@/components/location-wireframe/grand-rapids/GrandRapidsWireframeView";
 import ClevelandWireframeView from "@/components/location-wireframe/cleveland/ClevelandWireframeView";
 import PhiladelphiaWireframeView from "@/components/location-wireframe/philadelphia/PhiladelphiaWireframeView";
+import AlbuquerqueWireframeView from "@/components/location-wireframe/albuquerque/AlbuquerqueWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -219,6 +220,26 @@ export default async function CityPage({
         />
         <main>
           <PhiladelphiaWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  // For Albuquerque, NM render the Albuquerque wireframe layout
+  if (page.stateSlug === "new-mexico" && page.citySlug === "albuquerque") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <AlbuquerqueWireframeView page={page} />
         </main>
       </>
     );

@@ -96,10 +96,11 @@ export async function POST(req: Request) {
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];
-  const city = body.city || 'Philadelphia';
-  const state = body.state || (city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
-  const isPhilly = city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn');
-  const county = body.county || (isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
+  const city = body.city || 'Albuquerque';
+  const state = body.state || (city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
+  const isAlbuquerque = city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico');
+  const isPhilly = !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
+  const county = body.county || (isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
 
   if (!query && selectedChips.length === 0) {
     return NextResponse.json({
@@ -108,6 +109,72 @@ export async function POST(req: Request) {
       isAiGenerated: false,
     });
   }
+
+  // Albuquerque & New Mexico fallback rules
+  const ALBUQUERQUE_FALLBACKS: Array<{
+    n: string;
+    rx: RegExp;
+    why: string;
+    fix: string;
+    tool: string;
+  }> = [
+    {
+      n: "Traffic is low or not growing",
+      rx: /traffic|visitor|clicks|low traffic|stagnant/i,
+      why: "Albuquerque searchers in Nob Hill, Westside, Northeast Heights, and Rio Rancho search with specific municipal and suburban intent; single generic pages get outranked by national directories.",
+      fix: "Build dedicated practice silos for Bernalillo County and Rio Rancho tied to Second Judicial District Court and Metropolitan Court procedures.",
+      tool: "Crawl & Submarket Indexing Monitor",
+    },
+    {
+      n: "Spanish Search Void (Bilingual Intent)",
+      rx: /spanish|espanol|idioma|bilingual|latino|hispanic|mexic/i,
+      why: "With a 49.8% Hispanic community across the Albuquerque metro, thousands of high-intent searches ('abogado de DWI', 'abogado de accidentes') are ignored by English-only competitor websites.",
+      fix: "Deploy native-reviewed Spanish landing pages, proper hreflang tagging, and Spanish LegalService JSON-LD schema to capture untouched bilingual search demand.",
+      tool: "Hispanic Search & Hreflang Engine",
+    },
+    {
+      n: "Low visibility on Google and AI",
+      rx: /visib|invisible|not showing|\bai\b|chatgpt|gemini|overview|found|perplexity/i,
+      why: "Weak entity grounding, missing LegalService schema, and lack of answer-first New Mexico statutory explanations (pure comparative fault, 50/50 community property, mandatory ignition interlock).",
+      fix: "Deploy structured LegalService schema, build answer-first practice guides cited by Google AI Overviews, and configure an llms.txt protocol.",
+      tool: "Bilingual AI Citation & Search Tracker",
+    },
+    {
+      n: "Citations and mentions are not coming",
+      rx: /citation|mention|cited|directory|backlink|authority|press/i,
+      why: "Missing alignment with the State Bar of New Mexico and Albuquerque Bar Association, inconsistent Bernalillo County NAP data, and zero local editorial backlink anchors.",
+      fix: "Audit and build verified citations across New Mexico legal directories, local Hispanic business networks, and regional community entities.",
+      tool: "Regional Citation & Mention Suite",
+    },
+    {
+      n: "Not ranking in the Map Pack",
+      rx: /map|local|rank|pack|near me|3-pack|gmb/i,
+      why: "Google Map Pack treats Downtown Albuquerque, Westside, Northeast Heights, and Rio Rancho as distinct geo-grids with separate local 3-pack results.",
+      fix: "Calibrate primary GBP categories, launch bilingual review acquisition workflows, and embed localized geo-signals for Metropolitan Court and Lomas Blvd legal corridor.",
+      tool: "Geo-Grid Local Rank Tracker",
+    },
+    {
+      n: "We target the wrong keywords",
+      rx: /keyword|wrong|search term|intent|ranking for nothing/i,
+      why: "Targeting high-difficulty vanity head terms dominated by national mass tort aggregators instead of urgent NM-specific queries ('abogado de DWI en Albuquerque', 'community property divorce NM', 'uninsured motorist claim Albuquerque').",
+      fix: "Map intent-driven long-tail queries addressing New Mexico Tort Claims Act, MVD license revocation hearings, and Rio Rancho suburban intent.",
+      tool: "Bilingual Keyword & Intent Engine",
+    },
+    {
+      n: "Leads are not qualified",
+      rx: /lead|qualified|calls|convert|unqualified|tire kicker|junk/i,
+      why: "Inbound phone calls arriving without case viability filters, missing bilingual intake routing, and no lead source attribution.",
+      fix: "Deploy Whisper call tracking with dual-language intake prompts, pre-qualification criteria, and CRM intake synchronization.",
+      tool: "Dual-Language Call Tracking Suite",
+    },
+    {
+      n: "Intake is slow or leaking",
+      rx: /intake|missed|follow|response|phone|receptionist|slow|leak/i,
+      why: "Urgent DWI arrests and collision victims call at 2 a.m.; missed calls without instant text-back or Spanish bilingual intake go straight to rival practices.",
+      fix: "Deploy 24/7 automated instant text-back, bilingual intake scripts, and mobile lead dispatch.",
+      tool: "24/7 Intake & Rapid Response Suite",
+    },
+  ];
 
   // Philadelphia-specific fallback rules
   const PHILLY_FALLBACKS: Array<{
@@ -168,7 +235,7 @@ export async function POST(req: Request) {
     },
   ];
 
-  const activeRules = isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
+  const activeRules = isAlbuquerque ? ALBUQUERQUE_FALLBACKS : isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
 
   // Fallback matching logic
   const matchedFallbacks: DiagnosticItem[] = [];
@@ -204,21 +271,31 @@ export async function POST(req: Request) {
   if (matchedFallbacks.length === 0) {
     matchedFallbacks.push(
       {
-        n: isPhilly ? 'Neighborhood Intent Fragmentation' : 'Traffic & Qualified Leads Disconnect',
-        why: isPhilly
+        n: isAlbuquerque
+          ? 'Bilingual Search Void & Rio Rancho Suburban Intent'
+          : isPhilly
+          ? 'Neighborhood Intent Fragmentation'
+          : 'Traffic & Qualified Leads Disconnect',
+        why: isAlbuquerque
+          ? `Albuquerque searchers in ${county} search heavily in both English and Spanish across Nob Hill, Westside, and Rio Rancho, but single generic pages leave bilingual legal demand completely untouched.`
+          : isPhilly
           ? `Philadelphia searchers in ${county} search by specific neighborhood (Center City, Northeast, South Philly) and Pennsylvania statutes, but single generic pages fail to convert.`
           : `Cleveland searchers in ${county} look for specific procedural guidance, but broad pages fail to satisfy search intent or convert visitors into phone calls.`,
-        fix: isPhilly
+        fix: isAlbuquerque
+          ? 'Build dedicated bilingual practice silos anchored to the Second Judicial District Court, Bernalillo County Metropolitan Court, and deploy Whisper call tracking.'
+          : isPhilly
           ? 'Build hyper-local practice silos anchored to the Philadelphia Court of Common Pleas and deploy Whisper call tracking.'
           : 'Publish answer-first practice silos explaining Ohio court processes, install call tracking with lead attribution, and target suburb corridors.',
-        tool: 'Practice Silo & Call Tracking Suite',
+        tool: 'Bilingual Silo & Call Tracking Suite',
       },
       {
         n: 'Local Map Pack & AI Visibility Deficit',
-        why: isPhilly
+        why: isAlbuquerque
+          ? 'National aggregators outspend on broad legal head-terms while unoptimized local Albuquerque GBP listings miss out on local 3-pack and Google AI Overview citations.'
+          : isPhilly
           ? 'National aggregators outspend on broad legal queries while unoptimized local GBP listings miss out on local 3-pack and Google AI Overview citations.'
           : 'National directories (Justia, FindLaw) capture organic positions while unoptimized GBP listings miss out on local 3-pack and Google AI Overview citations.',
-        fix: 'Restructure GBP primary categories, embed localized geo-signals (City Hall, suburban courts), and deploy LegalService structured schema.',
+        fix: 'Restructure GBP primary categories, embed localized geo-signals (Metropolitan Court, Lomas Blvd legal corridor), and deploy LegalService structured schema.',
         tool: 'Geo-Grid Rank Tracker & AI Citation Engine',
       }
     );
@@ -226,7 +303,9 @@ export async function POST(req: Request) {
 
   // Attempt live diagnosis using Gemini Pool
   try {
-    const contextPrompt = isPhilly
+    const contextPrompt = isAlbuquerque
+      ? `legal market (Bernalillo County Metropolitan Court, Second Judicial District Court, New Mexico 50/50 community property rules, pure comparative fault, mandatory ignition interlock DWI statutes, bilingual Spanish search intent, and corridors like Nob Hill, North Valley, Westside, Northeast Heights, Rio Rancho, Santa Fe, and Las Cruces)`
+      : isPhilly
       ? `legal market (Philadelphia Court of Common Pleas, Complex Litigation Center, Philadelphia Municipal Court, Pennsylvania 2-year statute of limitations, 51% modified comparative fault, Limited vs Full Tort auto rules, and neighborhoods like Center City, South Philly, Northeast, Fishtown, University City, and suburbs like Upper Darby, King of Prussia, Bensalem)`
       : `legal market (Cuyahoga County Court of Common Pleas, Cleveland Municipal Court, Ohio BWC for workers' comp, Ohio state statutes, suburban markets like Lakewood, Parma, Beachwood, and high-stakes injury/defense practice areas)`;
 
