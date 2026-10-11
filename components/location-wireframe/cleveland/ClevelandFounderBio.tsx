@@ -9,17 +9,17 @@ export default function ClevelandFounderBio() {
   return (
     <section className="border-b border-slate-200 bg-slate-50/70 py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xl shadow-slate-100">
+        <div className="group overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xl shadow-slate-100 transition-all duration-500 hover:shadow-2xl hover:shadow-[#534AB7]/15 hover:border-[#534AB7]/40">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
             
             {/* Left Image Column */}
-            <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[340px] bg-slate-900">
+            <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[340px] bg-slate-900 overflow-hidden">
               <Image
                 src="/images/about/founder-hands-on-strategy-desk.webp"
                 alt="Mubashar Shahzad, Certified SEO Analyst and Founder of SearchPrex, reviewing technical legal SEO audits"
                 fill
                 sizes="(max-width: 1024px) 100vw, 500px"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent lg:hidden" />
               <div className="absolute bottom-4 left-4 right-4 text-white lg:hidden">
@@ -32,7 +32,7 @@ export default function ClevelandFounderBio() {
 
             {/* Right Bio Column */}
             <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] transition-transform group-hover:scale-105">
                 <Award className="h-3.5 w-3.5" />
                 <span>The Brain Behind It · Direct Founder Engagement</span>
               </div>
@@ -55,7 +55,7 @@ export default function ClevelandFounderBio() {
                 ].map((badge, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 transition-all duration-200 hover:bg-[#EEEDFE] hover:border-[#534AB7]/30 hover:scale-105 cursor-default"
                   >
                     <CheckCircle2 className="h-3.5 w-3.5 text-[#1a7d59]" />
                     <span>{badge}</span>
@@ -66,7 +66,7 @@ export default function ClevelandFounderBio() {
               <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-4">
                 <a
                   href="#reality-check"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white px-6 py-3.5 text-sm font-bold shadow-md shadow-[#534AB7]/25 transition-all"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white px-6 py-3.5 text-sm font-bold shadow-md shadow-[#534AB7]/25 transition-all hover:scale-105 active:scale-95"
                 >
                   <span>Request 24h Review from Mubashar</span>
                   <ArrowRight className="h-4 w-4" />

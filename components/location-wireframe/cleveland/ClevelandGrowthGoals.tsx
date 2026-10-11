@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Target, AlertCircle, Compass, CheckCircle } from "lucide-react";
+import { Target, AlertCircle, Compass, CheckCircle, Sparkles } from "lucide-react";
 
 const GOALS = [
   {
@@ -62,10 +62,10 @@ export default function ClevelandGrowthGoals() {
               <button
                 key={goal.name}
                 onClick={() => setSelectedGoal(idx)}
-                className={`rounded-xl px-4 py-3 text-xs sm:text-sm font-bold transition-all ${
+                className={`rounded-xl px-4 py-3 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25"
-                    : "border-2 border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                    : "border-2 border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100 hover:scale-[1.01]"
                 }`}
               >
                 {goal.name}
@@ -74,49 +74,68 @@ export default function ClevelandGrowthGoals() {
           })}
         </div>
 
-        {/* 3-Column Goal Analysis Cards */}
+        {/* 3-Column Goal Analysis Cards with hover lift and glow */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: Your Priority */}
-          <div className="rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
-              <Target className="h-4 w-4" />
-              <span>Your Strategic Priority</span>
+          <div className="group relative rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+                <Target className="h-4 w-4 text-[#534AB7] group-hover:scale-110 transition-transform" />
+                <span>Your Strategic Priority</span>
+              </div>
+              <h3 className="text-lg font-bold text-[#0a0f2e]">
+                {current.short}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                {current.priority}
+              </p>
             </div>
-            <h3 className="text-lg font-bold text-[#0a0f2e]">
-              {current.short}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              {current.priority}
-            </p>
+            <div className="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
+              Target Outcome
+            </div>
           </div>
 
           {/* Card 2: Likely Hurdle */}
-          <div className="rounded-3xl border-2 border-slate-200 bg-rose-50/40 p-7 shadow-sm border-rose-200/80">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-600 mb-3">
-              <AlertCircle className="h-4 w-4" />
-              <span>Cuyahoga County Hurdle</span>
+          <div className="group relative rounded-3xl border-2 border-slate-200 bg-rose-50/40 p-7 shadow-xs hover:shadow-xl hover:shadow-rose-500/10 hover:border-rose-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-600 mb-3">
+                <AlertCircle className="h-4 w-4 text-rose-600 group-hover:scale-110 transition-transform" />
+                <span>Cuyahoga County Hurdle</span>
+              </div>
+              <h3 className="text-lg font-bold text-[#0a0f2e]">
+                What Stands in the Way
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                {current.hurdle}
+              </p>
             </div>
-            <h3 className="text-lg font-bold text-[#0a0f2e]">
-              What Stands in the Way
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">
-              {current.hurdle}
-            </p>
+            <div className="mt-6 pt-4 border-t border-rose-100 text-xs font-semibold text-rose-500">
+              Bottleneck Identified
+            </div>
           </div>
 
           {/* Card 3: SearchPrex Path */}
-          <div className="rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 to-white p-7 shadow-md">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
-              <Compass className="h-4 w-4 text-[#534AB7]" />
-              <span>Our SearchPrex Path</span>
+          <div className="group relative rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE] via-white to-white p-7 shadow-md hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+            {/* Top highlight bar */}
+            <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-80" />
+
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+                <Compass className="h-4 w-4 text-[#534AB7] group-hover:rotate-45 transition-transform duration-300" />
+                <span>Our SearchPrex Path</span>
+              </div>
+              <h3 className="text-lg font-bold text-[#0a0f2e]">
+                Architected Roadmap
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-700 font-medium">
+                {current.path}
+              </p>
             </div>
-            <h3 className="text-lg font-bold text-[#0a0f2e]">
-              Architected Roadmap
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700 font-medium">
-              {current.path}
-            </p>
+            <div className="mt-6 pt-4 border-t border-[#534AB7]/20 text-xs font-bold text-[#534AB7] flex items-center justify-between">
+              <span>Execution Blueprint</span>
+              <span className="group-hover:translate-x-1 transition-transform">✓</span>
+            </div>
           </div>
 
         </div>

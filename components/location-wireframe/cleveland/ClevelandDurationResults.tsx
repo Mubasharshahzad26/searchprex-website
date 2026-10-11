@@ -62,10 +62,10 @@ export default function ClevelandDurationResults() {
               <button
                 key={d.name}
                 onClick={() => setSelectedDuration(idx)}
-                className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all ${
+                className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 active:scale-95 ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25"
-                    : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
+                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-105"
+                    : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-102"
                 }`}
               >
                 {d.name}
@@ -76,8 +76,8 @@ export default function ClevelandDurationResults() {
 
         {/* 2-Column deliverables card */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-sm">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-[#534AB7]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2 transition-transform group-hover:translate-x-1 duration-200">
               What SearchPrex Executes
             </span>
             <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
@@ -85,8 +85,8 @@ export default function ClevelandDurationResults() {
             </p>
           </div>
 
-          <div className="rounded-3xl border-2 border-[#534AB7]/40 bg-gradient-to-br from-[#EEEDFE]/50 to-white p-6 sm:p-7 shadow-sm">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-2">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-[#534AB7]/40 bg-gradient-to-br from-[#EEEDFE]/50 to-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#1a7d59]/15 hover:border-[#1a7d59]/50 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-[#1a7d59]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-2 transition-transform group-hover:translate-x-1 duration-200">
               What Goes in Your Monthly Ledger
             </span>
             <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
@@ -96,7 +96,7 @@ export default function ClevelandDurationResults() {
         </div>
 
         {/* Progression Table Container */}
-        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm">
+        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[650px]">
               <thead>
@@ -110,20 +110,20 @@ export default function ClevelandDurationResults() {
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {METRIC_ROWS.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={idx} className="group hover:bg-indigo-50/40 transition-colors duration-200">
                     <td className="py-4 px-6 font-bold text-[#0a0f2e]">
                       {row.metric}
                     </td>
-                    <td className="py-4 px-6 font-mono text-slate-500">
+                    <td className="py-4 px-6 font-mono text-slate-500 group-hover:text-slate-700 transition-colors">
                       {row.d0}
                     </td>
-                    <td className="py-4 px-6 font-mono text-slate-700">
+                    <td className="py-4 px-6 font-mono text-slate-700 group-hover:text-slate-900 transition-colors">
                       {row.d90}
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-slate-800">
+                    <td className="py-4 px-6 font-mono font-bold text-slate-800 group-hover:text-[#534AB7] transition-colors">
                       {row.d180}
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-[#534AB7] bg-[#EEEDFE]/20">
+                    <td className="py-4 px-6 font-mono font-bold text-[#534AB7] bg-[#EEEDFE]/20 group-hover:bg-[#EEEDFE]/50 transition-colors">
                       {row.d365}
                     </td>
                   </tr>

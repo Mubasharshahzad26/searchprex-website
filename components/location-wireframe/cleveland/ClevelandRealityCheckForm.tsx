@@ -83,20 +83,20 @@ export default function ClevelandRealityCheckForm() {
               We identify your priorities, uncover the exact technical hurdles between you and high-value signed cases, then teardown the competitors outranking you in Cuyahoga County.
             </p>
 
-            <div className="rounded-2xl border-2 border-slate-200 bg-slate-50 p-6 space-y-3 font-mono text-xs sm:text-sm text-slate-700">
-              <div className="flex items-center gap-2.5">
+            <div className="group rounded-2xl border-2 border-slate-200 bg-slate-50 p-6 space-y-3 font-mono text-xs sm:text-sm text-slate-700 transition-all duration-300 hover:border-[#534AB7]/30 hover:shadow-lg hover:shadow-[#534AB7]/10 hover:-translate-y-1">
+              <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200">
                 <span className="text-[#534AB7] font-bold">+</span>
                 <span>YOUR GROWTH PRIORITIES & REVENUE TARGETS</span>
               </div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-75">
                 <span className="text-rose-500 font-bold">+</span>
                 <span>YOUR TOP 3 CUYAHOGA COUNTY VISIBILITY HURDLES</span>
               </div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-150">
                 <span className="text-[#1a7d59] font-bold">+</span>
                 <span>LOCAL 3-PACK RANK & AI OVERVIEW CITATION GAP</span>
               </div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-200">
                 <span className="text-indigo-600 font-bold">+</span>
                 <span>ACTIONABLE 90-DAY PLAN — ZERO SALES PRESSURE</span>
               </div>
@@ -110,10 +110,10 @@ export default function ClevelandRealityCheckForm() {
 
           {/* Right Form Card */}
           <div className="lg:col-span-6">
-            <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-9 shadow-xl shadow-slate-100">
+            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-9 shadow-xl shadow-slate-100 transition-all duration-300 hover:shadow-2xl hover:shadow-[#534AB7]/15 hover:border-[#534AB7]/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:bg-gradient-to-r before:from-[#534AB7] before:via-indigo-400 before:to-[#1a7d59]">
               {done ? (
                 <div className="text-center py-8 space-y-3">
-                  <CheckCircle2 className="h-14 w-14 text-emerald-500 mx-auto" />
+                  <CheckCircle2 className="h-14 w-14 text-emerald-500 mx-auto animate-bounce" />
                   <h3 className="text-2xl font-extrabold text-[#0a0f2e]">
                     Reality Check Requested!
                   </h3>
@@ -137,7 +137,7 @@ export default function ClevelandRealityCheckForm() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Attorney Jane Smith"
-                      className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:outline-none"
+                      className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -152,7 +152,7 @@ export default function ClevelandRealityCheckForm() {
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
                         placeholder="yourfirm.com"
-                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:outline-none"
+                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 focus:outline-none transition-all"
                       />
                     </div>
 
@@ -166,7 +166,7 @@ export default function ClevelandRealityCheckForm() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@yourfirm.com"
-                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:outline-none"
+                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -184,9 +184,9 @@ export default function ClevelandRealityCheckForm() {
                             type="button"
                             key={sz}
                             onClick={() => setFirmSize(sz)}
-                            className={`rounded-lg px-3 py-2 text-xs font-bold transition-all ${
+                            className={`rounded-lg px-3 py-2 text-xs font-bold transition-all duration-200 active:scale-95 ${
                               isSelected
-                                ? "bg-[#534AB7] text-white shadow-sm"
+                                ? "bg-[#534AB7] text-white shadow-sm scale-105"
                                 : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                             }`}
                           >
@@ -210,9 +210,9 @@ export default function ClevelandRealityCheckForm() {
                             type="button"
                             key={pa}
                             onClick={() => setPracticeArea(pa)}
-                            className={`rounded-lg px-3 py-2 text-xs font-bold transition-all ${
+                            className={`rounded-lg px-3 py-2 text-xs font-bold transition-all duration-200 active:scale-95 ${
                               isSelected
-                                ? "bg-[#0a0f2e] text-white shadow-sm"
+                                ? "bg-[#0a0f2e] text-white shadow-sm scale-105"
                                 : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                             }`}
                           >
@@ -230,7 +230,7 @@ export default function ClevelandRealityCheckForm() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] px-6 py-4 text-base font-extrabold text-white shadow-lg shadow-[#534AB7]/25 hover:bg-[#3C3489] transition-all disabled:opacity-75"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] px-6 py-4 text-base font-extrabold text-white shadow-lg shadow-[#534AB7]/25 hover:bg-[#3C3489] transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-75 cursor-pointer"
                   >
                     {loading ? (
                       <>
@@ -240,7 +240,7 @@ export default function ClevelandRealityCheckForm() {
                     ) : (
                       <>
                         <span>Send My Reality Check Request</span>
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </>
                     )}
                   </button>

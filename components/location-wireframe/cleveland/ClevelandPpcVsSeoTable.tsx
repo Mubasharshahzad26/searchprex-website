@@ -66,7 +66,7 @@ export default function ClevelandPpcVsSeoTable() {
         </div>
 
         {/* Comparison Table Container */}
-        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm">
+        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
@@ -77,24 +77,27 @@ export default function ClevelandPpcVsSeoTable() {
                   <th className="py-4.5 px-6 text-sm font-extrabold text-slate-700 bg-slate-50 w-1/3">
                     Google Ads (PPC)
                   </th>
-                  <th className="py-4.5 px-6 text-sm font-extrabold text-white bg-[#534AB7] w-1/3">
-                    SearchPrex Legal SEO
+                  <th className="py-4.5 px-6 text-sm font-extrabold text-white bg-gradient-to-r from-[#534AB7] to-[#3C3489] w-1/3">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-amber-300 animate-pulse" />
+                      <span>SearchPrex Legal SEO</span>
+                    </div>
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm">
                 {COMPARISON_ROWS.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-4 px-6 font-bold text-[#0a0f2e] bg-slate-50/30">
+                  <tr key={idx} className="group hover:bg-indigo-50/40 transition-colors duration-200">
+                    <td className="py-4 px-6 font-bold text-[#0a0f2e] bg-slate-50/30 group-hover:bg-transparent transition-colors">
                       {row.feature}
                     </td>
-                    <td className="py-4 px-6 text-slate-600 leading-relaxed">
+                    <td className="py-4 px-6 text-slate-600 leading-relaxed group-hover:text-slate-800 transition-colors">
                       {row.ppc}
                     </td>
-                    <td className="py-4 px-6 font-medium text-slate-800 bg-[#EEEDFE]/20 leading-relaxed">
+                    <td className="py-4 px-6 font-medium text-slate-800 bg-[#EEEDFE]/20 group-hover:bg-[#EEEDFE]/40 leading-relaxed transition-colors">
                       <div className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
-                        <span>{row.seo}</span>
+                        <Check className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5 transition-transform group-hover:scale-110" />
+                        <span className="font-semibold text-slate-900">{row.seo}</span>
                       </div>
                     </td>
                   </tr>

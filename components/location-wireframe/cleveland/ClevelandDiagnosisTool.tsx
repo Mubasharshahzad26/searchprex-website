@@ -159,9 +159,9 @@ export default function ClevelandDiagnosisTool() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
-            <Sparkles className="h-3.5 w-3.5 text-[#534AB7]" />
-            <span>Interactive Problem Diagnosis · Gemini AI Powered</span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3 shadow-2xs">
+            <Sparkles className="h-3.5 w-3.5 text-[#534AB7] animate-pulse" />
+            <span>Interactive Problem Diagnosis · Gemini 30-Key AI Pool</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0a0f2e] leading-tight">
@@ -174,11 +174,11 @@ export default function ClevelandDiagnosisTool() {
           </p>
         </div>
 
-        {/* Search input bar & Chip selector */}
-        <div className="mt-8 rounded-3xl border-2 border-slate-200 bg-slate-50/70 p-5 sm:p-7 shadow-sm">
+        {/* Search input bar & Chip selector box with elevated styling */}
+        <div className="mt-8 rounded-3xl border-2 border-slate-200/90 bg-gradient-to-b from-slate-50 to-white p-5 sm:p-8 shadow-lg shadow-slate-100 transition-all duration-300 hover:border-[#534AB7]/30 hover:shadow-xl hover:shadow-[#534AB7]/5">
           <div className="flex flex-col sm:flex-row gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <div className="relative flex-1 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-[#534AB7] transition-colors" />
               <input
                 id="dg-q"
                 type="text"
@@ -188,14 +188,14 @@ export default function ClevelandDiagnosisTool() {
                   if (e.key === "Enter") handleDiagnose();
                 }}
                 placeholder="e.g. We get traffic but no qualified leads, or PPC is too expensive in Cleveland"
-                className="w-full rounded-2xl border-2 border-slate-300 bg-white pl-12 pr-4 py-4 text-base font-medium text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:outline-none transition-all shadow-inner"
+                className="w-full rounded-2xl border-2 border-slate-300 bg-white pl-12 pr-4 py-4 text-base font-medium text-slate-900 placeholder-slate-400 shadow-inner focus:border-[#534AB7] focus:outline-none focus:ring-4 focus:ring-[#534AB7]/10 transition-all duration-200"
               />
             </div>
 
             <button
               onClick={() => handleDiagnose()}
               disabled={loading}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#534AB7] px-7 py-4 text-base font-bold text-white shadow-md shadow-[#534AB7]/25 hover:bg-[#3C3489] transition-all disabled:opacity-75"
+              className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-[#534AB7] px-7 py-4 text-base font-bold text-white shadow-md shadow-[#534AB7]/25 hover:bg-[#3C3489] hover:shadow-lg hover:shadow-[#534AB7]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-75"
             >
               {loading ? (
                 <>
@@ -205,15 +205,15 @@ export default function ClevelandDiagnosisTool() {
               ) : (
                 <>
                   <span>Diagnose my problem</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </>
               )}
             </button>
           </div>
 
           {/* Quick-select chips */}
-          <div className="mt-4 pt-4 border-t border-slate-200/80">
-            <div className="flex items-center justify-between text-xs font-semibold text-slate-600 mb-2.5">
+          <div className="mt-5 pt-5 border-t border-slate-200/80">
+            <div className="flex items-center justify-between text-xs font-semibold text-slate-600 mb-3">
               <span>Quick-select common Cleveland legal challenges:</span>
               <span className="text-slate-400 hidden sm:inline">Tap one or more chips to update diagnosis</span>
             </div>
@@ -227,16 +227,16 @@ export default function ClevelandDiagnosisTool() {
                     onClick={() => {
                       handleChipToggle(chip);
                     }}
-                    className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold transition-all ${
+                    className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? "bg-[#0a0f2e] text-white shadow-sm ring-2 ring-[#534AB7]/40"
-                        : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
+                        ? "bg-[#0a0f2e] text-white shadow-md shadow-slate-900/20 scale-[1.02] ring-2 ring-[#534AB7]/50"
+                        : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-[1.01]"
                     }`}
                   >
                     {isSelected ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-400" />
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                     ) : (
-                      <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-slate-300 shrink-0" />
                     )}
                     <span>{chip}</span>
                   </button>
@@ -260,8 +260,8 @@ export default function ClevelandDiagnosisTool() {
               </div>
 
               {isAiGenerated ? (
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
-                  <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-bold text-emerald-800 shadow-2xs">
+                  <Sparkles className="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
                   <span>Live Gemini AI Intelligence Analysis</span>
                 </div>
               ) : (
@@ -272,9 +272,9 @@ export default function ClevelandDiagnosisTool() {
               )}
             </div>
 
-            {/* Strategic Recommendation Callout */}
+            {/* Strategic Recommendation Callout with smooth glow */}
             {recommendation && (
-              <div className="rounded-2xl border-l-4 border-l-[#534AB7] border border-slate-200 bg-[#EEEDFE]/40 p-4 sm:p-5">
+              <div className="relative overflow-hidden rounded-2xl border-l-4 border-l-[#534AB7] border border-slate-200 bg-gradient-to-r from-[#EEEDFE]/80 via-white to-white p-4 sm:p-5 shadow-xs transition-all hover:shadow-sm">
                 <div className="flex items-start gap-3">
                   <Sparkles className="h-5 w-5 text-[#534AB7] shrink-0 mt-0.5" />
                   <div>
@@ -289,34 +289,37 @@ export default function ClevelandDiagnosisTool() {
               </div>
             )}
 
-            {/* Diagnostic Cards Grid */}
+            {/* Diagnostic Cards Grid with animated hover effects */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                  className="group relative rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                 >
+                  {/* Subtle top indicator bar */}
+                  <div className="absolute inset-x-6 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                   <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-1 text-xs font-mono font-bold text-[#534AB7]">
+                    <div className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-1 text-xs font-mono font-bold text-[#534AB7] group-hover:bg-[#EEEDFE] transition-colors">
                       <span>{item.n}</span>
                     </div>
 
                     <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-rose-600 flex items-center gap-1.5 mb-1">
+                      <div className="text-xs font-bold uppercase tracking-wider text-rose-600 flex items-center gap-1.5 mb-1.5">
                         <AlertTriangle className="h-3.5 w-3.5" />
                         <span>Probable Cause</span>
                       </div>
-                      <p className="text-sm text-slate-700 leading-relaxed bg-rose-50/50 p-3 rounded-xl border border-rose-100">
+                      <p className="text-sm text-slate-700 leading-relaxed bg-rose-50/60 p-3.5 rounded-xl border border-rose-100">
                         {item.why}
                       </p>
                     </div>
 
                     <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 mb-1">
+                      <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 mb-1.5">
                         <Wrench className="h-3.5 w-3.5" />
                         <span>Our SearchPrex Fix</span>
                       </div>
-                      <p className="text-sm text-slate-700 leading-relaxed bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
+                      <p className="text-sm text-slate-700 leading-relaxed bg-emerald-50/60 p-3.5 rounded-xl border border-emerald-100">
                         {item.fix}
                       </p>
                     </div>
@@ -324,7 +327,7 @@ export default function ClevelandDiagnosisTool() {
 
                   <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
                     <span className="font-semibold text-slate-500">Software we add:</span>
-                    <span className="rounded-md bg-[#EEEDFE] px-2.5 py-1 font-bold text-[#534AB7]">
+                    <span className="rounded-lg bg-[#EEEDFE] px-2.5 py-1 font-bold text-[#534AB7] shadow-2xs">
                       {item.tool}
                     </span>
                   </div>
@@ -332,159 +335,166 @@ export default function ClevelandDiagnosisTool() {
               ))}
             </div>
 
-            {/* 7-DAY FREE TRIAL LEAD FORM CARD */}
-            <div className="mt-10 overflow-hidden rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-indigo-900 via-[#0a0f2e] to-slate-900 p-6 sm:p-10 text-white shadow-xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white mb-3">
-                <Sparkles className="h-3.5 w-3.5 text-amber-300" />
-                <span>Recommended Solution for Your Firm</span>
-              </div>
+            {/* 7-DAY FREE TRIAL LEAD FORM CARD with glass & animated shine */}
+            <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-indigo-950 via-[#0a0f2e] to-slate-950 p-6 sm:p-10 text-white shadow-2xl transition-all duration-300 hover:shadow-indigo-900/30">
+              
+              {/* Subtle animated background radial glow */}
+              <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-[#534AB7]/20 rounded-full blur-3xl pointer-events-none" />
 
-              <h3 className="!text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-                The Complete Package, with a 7-Day Free Trial
-              </h3>
-
-              <p className="mt-3 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-                One full-service package engineered around your diagnosis, plus the law firm intake tools that convert calls into retained clients. Take seven days to see it working before you decide anything.
-              </p>
-
-              {/* 2-Column deliverables breakdown */}
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div>
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-amber-300 mb-3 flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                    Included in the 7-day trial
-                  </h4>
-                  <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Full site, Google Business Profile, citation and AI visibility audit</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Keyword and intent map for Cleveland and Cuyahoga County</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Quick-win technical and schema fixes started within the 7 days</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Dashboard preview and transparent weekly report templates</span>
-                    </li>
-                  </ul>
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white mb-3 shadow-md">
+                  <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+                  <span>Recommended Solution for Your Firm</span>
                 </div>
 
-                <div>
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-300 mb-3 flex items-center gap-2">
-                    <Wrench className="h-4 w-4 text-indigo-400" />
-                    Law firm tools (intake efficiency)
-                  </h4>
-                  <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-400 font-bold">✓</span>
-                      <span>Call and form tracking with Whisper source attribution</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-400 font-bold">✓</span>
-                      <span>Instant missed-call text-back (never lose an urgent client)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-400 font-bold">✓</span>
-                      <span>Intake form routing and automated lead scoring</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-400 font-bold">✓</span>
-                      <span>Compliant client review collection and follow-up templates</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                <h3 className="!text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                  The Complete Package, with a 7-Day Free Trial
+                </h3>
 
-              {/* No risk reassurance */}
-              <p className="mt-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
-                <strong className="text-white">7 days free. No credit card required. No auto-charge.</strong> You keep the comprehensive audit either way. Seven days will not move rankings, which take months and are never guaranteed. The trial gives you the diagnosis, the first fixes, and the tools, so you can judge us on substance.
-              </p>
+                <p className="mt-3 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
+                  One full-service package engineered around your diagnosis, plus the law firm intake tools that convert calls into retained clients. Take seven days to see it working before you decide anything.
+                </p>
 
-              {/* Form or success state */}
-              <div className="mt-8 pt-6 border-t border-white/10">
-                {trialDone ? (
-                  <div className="rounded-2xl bg-emerald-950/60 border border-emerald-500/50 p-6 text-center space-y-2">
-                    <CheckCircle2 className="h-10 w-10 text-emerald-400 mx-auto" />
-                    <h4 className="text-xl font-bold text-white">Trial Request Received!</h4>
-                    <p className="text-sm text-emerald-200 max-w-xl mx-auto">
-                      Thank you. Mubashar Shahzad will personally review your Cleveland law firm URL and email your 7-day trial onboarding details within 1 business day.
-                    </p>
+                {/* 2-Column deliverables breakdown */}
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                  <div className="hover:bg-white/5 p-3 rounded-xl transition-colors">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-amber-300 mb-3 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                      Included in the 7-day trial
+                    </h4>
+                    <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span>Full site, Google Business Profile, citation and AI visibility audit</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span>Keyword and intent map for Cleveland and Cuyahoga County</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span>Quick-win technical and schema fixes started within the 7 days</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span>Dashboard preview and transparent weekly report templates</span>
+                      </li>
+                    </ul>
                   </div>
-                ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-300 mb-1">Your Name *</label>
-                        <input
-                          type="text"
-                          required
-                          value={trialName}
-                          onChange={(e) => setTrialName(e.target.value)}
-                          placeholder="e.g. Attorney Jane Smith"
-                          className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none"
-                        />
-                      </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-300 mb-1">Firm Website *</label>
-                        <input
-                          type="text"
-                          required
-                          value={trialWebsite}
-                          onChange={(e) => setTrialWebsite(e.target.value)}
-                          placeholder="e.g. smithinjurycleveland.com"
-                          className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none"
-                        />
-                      </div>
+                  <div className="hover:bg-white/5 p-3 rounded-xl transition-colors">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-300 mb-3 flex items-center gap-2">
+                      <Wrench className="h-4 w-4 text-indigo-400" />
+                      Law firm tools (intake efficiency)
+                    </h4>
+                    <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
+                      <li className="flex items-start gap-2">
+                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span>Call and form tracking with Whisper source attribution</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span>Instant missed-call text-back (never lose an urgent client)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span>Intake form routing and automated lead scoring</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span>Compliant client review collection and follow-up templates</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
-                        <input
-                          type="email"
-                          required
-                          value={trialEmail}
-                          onChange={(e) => setTrialEmail(e.target.value)}
-                          placeholder="e.g. jane@smithinjurycleveland.com"
-                          className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none"
-                        />
-                      </div>
+                {/* No risk reassurance */}
+                <p className="mt-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  <strong className="text-white">7 days free. No credit card required. No auto-charge.</strong> You keep the comprehensive audit either way. Seven days will not move rankings, which take months and are never guaranteed. The trial gives you the diagnosis, the first fixes, and the tools, so you can judge us on substance.
+                </p>
+
+                {/* Form or success state */}
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  {trialDone ? (
+                    <div className="rounded-2xl bg-emerald-950/60 border border-emerald-500/50 p-6 text-center space-y-2 shadow-lg animate-in fade-in duration-300">
+                      <CheckCircle2 className="h-10 w-10 text-emerald-400 mx-auto" />
+                      <h4 className="text-xl font-bold text-white">Trial Request Received!</h4>
+                      <p className="text-sm text-emerald-200 max-w-xl mx-auto">
+                        Thank you. Mubashar Shahzad will personally review your Cleveland law firm URL and email your 7-day trial onboarding details within 1 business day.
+                      </p>
                     </div>
+                  ) : (
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-300 mb-1">Your Name *</label>
+                          <input
+                            type="text"
+                            required
+                            value={trialName}
+                            onChange={(e) => setTrialName(e.target.value)}
+                            placeholder="e.g. Attorney Jane Smith"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30 transition-all"
+                          />
+                        </div>
 
-                    {trialError && (
-                      <p className="text-xs font-bold text-rose-400">{trialError}</p>
-                    )}
+                        <div>
+                          <label className="block text-xs font-bold text-slate-300 mb-1">Firm Website *</label>
+                          <input
+                            type="text"
+                            required
+                            value={trialWebsite}
+                            onChange={(e) => setTrialWebsite(e.target.value)}
+                            placeholder="e.g. smithinjurycleveland.com"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30 transition-all"
+                          />
+                        </div>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                      <button
-                        type="submit"
-                        disabled={submittingTrial}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#0a0f2e] font-extrabold px-8 py-4 text-base shadow-lg transition-all disabled:opacity-70"
-                      >
-                        {submittingTrial ? (
-                          <>
-                            <Loader2 className="h-5 w-5 animate-spin" />
-                            <span>Starting trial...</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>Start my 7-day free trial</span>
-                            <ArrowRight className="h-4 w-4" />
-                          </>
-                        )}
-                      </button>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
+                          <input
+                            type="email"
+                            required
+                            value={trialEmail}
+                            onChange={(e) => setTrialEmail(e.target.value)}
+                            placeholder="e.g. jane@smithinjurycleveland.com"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30 transition-all"
+                          />
+                        </div>
+                      </div>
 
-                      <span className="text-xs text-slate-400">
-                        100% Confidential. Never shared with competing Cleveland firms.
-                      </span>
-                    </div>
-                  </form>
-                )}
+                      {trialError && (
+                        <p className="text-xs font-bold text-rose-400">{trialError}</p>
+                      )}
+
+                      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                        <button
+                          type="submit"
+                          disabled={submittingTrial}
+                          className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#0a0f2e] font-extrabold px-8 py-4 text-base shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 cursor-pointer"
+                        >
+                          {submittingTrial ? (
+                            <>
+                              <Loader2 className="h-5 w-5 animate-spin" />
+                              <span>Starting trial...</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>Start my 7-day free trial</span>
+                              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                            </>
+                          )}
+                        </button>
+
+                        <span className="text-xs text-slate-400">
+                          100% Confidential. Never shared with competing Cleveland firms.
+                        </span>
+                      </div>
+                    </form>
+                  )}
+                </div>
               </div>
+
             </div>
 
           </div>

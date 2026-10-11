@@ -9,9 +9,9 @@ export default function ClevelandQuickAnswer() {
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div
         id="quick-answer"
-        className="relative overflow-hidden rounded-3xl border-2 border-[#534AB7]/25 bg-gradient-to-br from-white via-indigo-50/20 to-white p-6 sm:p-10 shadow-lg shadow-indigo-100/50"
+        className="group relative overflow-hidden rounded-3xl border-2 border-[#534AB7]/25 bg-gradient-to-br from-white via-indigo-50/20 to-white p-6 sm:p-10 shadow-lg shadow-indigo-100/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#534AB7]/15 hover:border-[#534AB7]/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:bg-gradient-to-r before:from-[#534AB7] before:via-indigo-400 before:to-[#1a7d59]"
       >
-        <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-4">
+        <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-4 transition-transform group-hover:scale-105">
           <Info className="h-4 w-4" />
           <span>Quick Answer · For Cuyahoga County Attorneys</span>
         </div>
@@ -27,21 +27,21 @@ export default function ClevelandQuickAnswer() {
           SearchPrex engineers Cuyahoga County court-aligned practice silos, optimizes your{" "}
           <Link
             href="/services/law-firm-seo/google-business-profile-for-lawyers"
-            className="font-bold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489]"
+            className="font-bold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489] transition-colors"
           >
             Google Business Profile
           </Link>
           , and attributes every incoming call and signed case in a transparent monthly ledger with live{" "}
           <Link
             href="/ai-search"
-            className="font-bold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489]"
+            className="font-bold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489] transition-colors"
           >
             AI search visibility tracking
           </Link>
           . Flexible month-to-month partnership, backed by a complimentary 24-hour market reality check first. Learn more about{" "}
           <Link
             href="/services/law-firm-seo"
-            className="font-bold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489]"
+            className="font-bold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489] transition-colors"
           >
             how our modern law firm SEO works
           </Link>
@@ -70,7 +70,7 @@ export default function ClevelandQuickAnswer() {
             </span>
           </div>
 
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#534AB7] bg-[#EEEDFE] px-2.5 py-1 rounded-md">
+          <div className="text-xs font-semibold uppercase tracking-wider text-[#534AB7] bg-[#EEEDFE] px-2.5 py-1 rounded-md transition-transform group-hover:scale-105">
             MRPC & Ohio Rule 7 Aligned
           </div>
         </div>

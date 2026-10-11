@@ -62,18 +62,18 @@ export default function ClevelandFaqAndCta() {
             return (
               <div
                 key={idx}
-                className="overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-2xs transition-all"
+                className="overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="flex w-full items-center justify-between p-5 sm:p-6 text-left transition-colors hover:bg-slate-50"
+                  className="flex w-full items-center justify-between p-5 sm:p-6 text-left transition-colors hover:bg-slate-50 cursor-pointer"
                 >
                   <span className="text-base sm:text-lg font-bold text-[#0a0f2e] pr-4">
                     {faq.q}
                   </span>
                   <ChevronDown
                     className={`h-5 w-5 text-[#534AB7] shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180" : ""
+                      isOpen ? "rotate-180 text-[#3C3489]" : ""
                     }`}
                   />
                 </button>
@@ -91,8 +91,11 @@ export default function ClevelandFaqAndCta() {
 
       {/* High-Contrast Conversion CTA Banner */}
       <section className="relative overflow-hidden bg-gradient-to-r from-[#0a0f2e] via-[#3C3489] to-[#0a0f2e] py-16 lg:py-20 text-white">
+        {/* Ambient background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#534AB7]/30 rounded-full blur-3xl pointer-events-none" />
+
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-5">
-          <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 border border-white/15">
+          <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 border border-white/15 backdrop-blur-sm">
             Transparent Ledger Guarantee
           </span>
 
@@ -108,7 +111,7 @@ export default function ClevelandFaqAndCta() {
           <div className="pt-2">
             <button
               onClick={scrollToRealityCheck}
-              className="inline-flex items-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#0a0f2e] font-black px-8 py-4 text-base shadow-xl transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#0a0f2e] font-black px-8 py-4 text-base shadow-xl shadow-amber-400/20 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>Request my reality check</span>
               <ArrowRight className="h-4 w-4" />

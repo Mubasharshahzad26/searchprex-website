@@ -89,12 +89,12 @@ export default function ClevelandSubMarkets() {
           </p>
         </div>
 
-        {/* Suburb Badges */}
+        {/* Suburb Badges with subtle hover lift */}
         <div className="mt-8 flex flex-wrap gap-2">
           {SUBURB_LIST.map((sub) => (
             <span
               key={sub}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 shadow-2xs hover:border-[#534AB7]/40 hover:bg-indigo-50/20 hover:scale-105 transition-all duration-200 cursor-default"
             >
               <MapPin className="h-3.5 w-3.5 text-[#534AB7]" />
               <span>{sub}</span>
@@ -103,7 +103,7 @@ export default function ClevelandSubMarkets() {
         </div>
 
         {/* Localized Venues Callout */}
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 text-xs sm:text-sm text-slate-700 space-y-1">
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 text-xs sm:text-sm text-slate-700 space-y-1 shadow-2xs">
           <strong className="text-[#0a0f2e] font-bold block mb-1">
             Local Court and Statutory Anchors Embedded in Your Content:
           </strong>
@@ -134,10 +134,10 @@ export default function ClevelandSubMarkets() {
                 <button
                   key={sub.name}
                   onClick={() => setSelectedSuburb(idx)}
-                  className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all ${
+                  className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25"
-                      : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
+                      ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                      : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-[1.01]"
                   }`}
                 >
                   {sub.name}
@@ -146,15 +146,15 @@ export default function ClevelandSubMarkets() {
             })}
           </div>
 
-          {/* 4-Column detail display card */}
+          {/* 4-Column detail display card with animated hover effects */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* 1. County and Venue */}
-            <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-sm">
+            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300">
               <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
                 County & Courthouses
               </span>
-              <h4 className="text-base font-bold text-[#0a0f2e]">
+              <h4 className="text-base font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
                 {current.name}
               </h4>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
@@ -163,7 +163,7 @@ export default function ClevelandSubMarkets() {
             </div>
 
             {/* 2. Local Intent */}
-            <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-sm">
+            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#1a7d59]/10 hover:border-[#1a7d59]/40 hover:-translate-y-1.5 transition-all duration-300">
               <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-2">
                 Search Intent
               </span>
@@ -173,19 +173,19 @@ export default function ClevelandSubMarkets() {
             </div>
 
             {/* 3. Live Searches */}
-            <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-sm space-y-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
                 Sample Suburb Queries
               </span>
               {current.searches.map((s, i) => (
-                <div key={i} className="text-xs font-mono text-slate-800 bg-slate-50 px-2.5 py-1.5 rounded border border-slate-200">
+                <div key={i} className="text-xs font-mono text-slate-800 bg-slate-50 p-2 rounded-lg border border-slate-200 group-hover:bg-indigo-50/20 transition-colors">
                   {s}
                 </div>
               ))}
             </div>
 
             {/* 4. Linked Practice Silo */}
-            <div className="rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 to-white p-6 shadow-md flex flex-col justify-between">
+            <div className="group rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 via-white to-white p-6 shadow-md hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
                   Targeted Silo Architecture
@@ -204,7 +204,7 @@ export default function ClevelandSubMarkets() {
                   className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
                 >
                   <span>Explore practice silo</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>

@@ -79,26 +79,26 @@ export default function ClevelandPricingTiers() {
           </p>
         </div>
 
-        {/* Pricing Cards Grid */}
+        {/* Pricing Cards Grid with enhanced animations */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           {TIERS.map((tier) => (
             <div
               key={tier.name}
-              className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all relative ${
+              className={`group rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative cursor-default ${
                 tier.highlight
-                  ? "border-2 border-[#534AB7] bg-gradient-to-b from-indigo-50/40 via-white to-white shadow-xl shadow-indigo-100/60 ring-2 ring-[#534AB7]/20"
-                  : "border-2 border-slate-200 bg-white shadow-sm hover:shadow-md"
+                  ? "border-2 border-[#534AB7] bg-gradient-to-b from-indigo-50/50 via-white to-white shadow-xl shadow-indigo-100/70 ring-2 ring-[#534AB7]/20 hover:-translate-y-2.5 hover:shadow-2xl hover:shadow-[#534AB7]/25"
+                  : "border-2 border-slate-200 bg-white shadow-xs hover:-translate-y-2 hover:border-[#534AB7]/40 hover:shadow-xl hover:shadow-[#534AB7]/10"
               }`}
             >
               {tier.badge && (
-                <div className="absolute -top-3.5 left-8 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-extrabold text-white shadow-sm flex items-center gap-1.5">
+                <div className="absolute -top-3.5 left-8 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-extrabold text-white shadow-md flex items-center gap-1.5 animate-pulse">
                   <Sparkles className="h-3 w-3 text-amber-300" />
                   <span>{tier.badge}</span>
                 </div>
               )}
 
               <div>
-                <h3 className="text-2xl font-extrabold text-[#0a0f2e]">
+                <h3 className="text-2xl font-extrabold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors duration-200">
                   {tier.name}
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed min-h-[40px]">
@@ -132,14 +132,14 @@ export default function ClevelandPricingTiers() {
               <div className="mt-8 pt-6 border-t border-slate-100">
                 <button
                   onClick={scrollToContact}
-                  className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-3.5 px-6 text-sm sm:text-base font-bold transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-3.5 px-6 text-sm sm:text-base font-bold transition-all duration-200 cursor-pointer ${
                     tier.highlight
-                      ? "bg-[#534AB7] hover:bg-[#3C3489] text-white shadow-md shadow-[#534AB7]/25"
-                      : "border-2 border-slate-200 bg-slate-50 text-[#0a0f2e] hover:border-[#534AB7] hover:bg-white"
+                      ? "bg-[#534AB7] hover:bg-[#3C3489] text-white shadow-md shadow-[#534AB7]/25 hover:shadow-lg hover:shadow-[#534AB7]/35 hover:scale-[1.02] active:scale-[0.98]"
+                      : "border-2 border-slate-200 bg-slate-50 text-[#0a0f2e] hover:border-[#534AB7] hover:bg-white hover:scale-[1.01] active:scale-[0.99]"
                   }`}
                 >
                   <span>{tier.ctaLabel}</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <p className="mt-2 text-[11px] text-center text-slate-400">
                   Month-to-month · 30-day notice to pause · Zero hostage assets
