@@ -36,6 +36,7 @@ import GrandRapidsWireframeView from "@/components/location-wireframe/grand-rapi
 import ClevelandWireframeView from "@/components/location-wireframe/cleveland/ClevelandWireframeView";
 import PhiladelphiaWireframeView from "@/components/location-wireframe/philadelphia/PhiladelphiaWireframeView";
 import AlbuquerqueWireframeView from "@/components/location-wireframe/albuquerque/AlbuquerqueWireframeView";
+import DentonWireframeView from "@/components/location-wireframe/denton/DentonWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -240,6 +241,25 @@ export default async function CityPage({
         />
         <main>
           <AlbuquerqueWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  if (page.stateSlug === "texas" && page.citySlug === "denton") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <DentonWireframeView page={page} />
         </main>
       </>
     );

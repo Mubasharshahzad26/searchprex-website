@@ -96,11 +96,12 @@ export async function POST(req: Request) {
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];
-  const city = body.city || 'Albuquerque';
-  const state = body.state || (city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
-  const isAlbuquerque = city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico');
-  const isPhilly = !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
-  const county = body.county || (isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
+  const city = body.city || 'Denton';
+  const state = body.state || (city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
+  const isDenton = city.toLowerCase().includes('denton');
+  const isAlbuquerque = !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
+  const isPhilly = !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
+  const county = body.county || (isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
 
   if (!query && selectedChips.length === 0) {
     return NextResponse.json({
@@ -109,6 +110,72 @@ export async function POST(req: Request) {
       isAiGenerated: false,
     });
   }
+
+  // Denton & Texas fallback rules
+  const DENTON_FALLBACKS: Array<{
+    n: string;
+    rx: RegExp;
+    why: string;
+    fix: string;
+    tool: string;
+  }> = [
+    {
+      n: "Traffic is low or not growing",
+      rx: /traffic|visitor|clicks|low traffic|stagnant/i,
+      why: "Dallas-Fort Worth mega-firms sit above Denton practices on raw domain strength, while local Denton County searchers looking for courthouse and campus help bounce from generic Dallas pages.",
+      fix: "Architect dedicated Denton County practice silos answering local procedural questions for UNT, TWU, and the Denton Courthouse-on-the-Square.",
+      tool: "Crawl & Submarket Indexing Monitor",
+    },
+    {
+      n: "UNT & TWU Student Demographic Void",
+      rx: /student|college|unt|twu|campus|parent|worried|mip|possession/i,
+      why: "Over 60,000 university students across UNT and TWU drive alcohol, minor in possession (MIP), and misdemeanors, where the actual searcher is often an anxious parent three hours away.",
+      fix: "Deploy parent-targeted reassurance pages with remote consultation protocols and student defense silos addressing university disciplinary hearings.",
+      tool: "Student & Parent Search Intent Engine",
+    },
+    {
+      n: "DFW Mega-Firm Displacement",
+      rx: /dfw|dallas|fort worth|mega|outranked|competitor|big firm/i,
+      why: "Regional DFW firms hold page one rankings without a single sentence of genuine Denton County court or local municipal content.",
+      fix: "Displace regional giants with hyper-local Denton court jurisdiction content, Denton County Bar Association alignment, and localized entity schema.",
+      tool: "DFW Displacement & Geo-Entity Suite",
+    },
+    {
+      n: "Low visibility on Google and AI",
+      rx: /visib|invisible|not showing|\bai\b|chatgpt|gemini|overview|found|perplexity/i,
+      why: "Missing LegalService JSON-LD schema, absent Texas statutory entity tags (Texas Penal Code, Property Code), and copy that does not provide direct, answer-first guidance.",
+      fix: "Structured schema injection, answer-first headers optimized for Google AI Overviews and Gemini citation, and an llms.txt protocol.",
+      tool: "AI Search & Citation Tracker",
+    },
+    {
+      n: "Citations and mentions are not coming",
+      rx: /citation|mention|cited|directory|backlink|authority|press/i,
+      why: "Missing alignment with the Denton County Bar Association, inconsistent local NAP data, and zero Denton community backlink anchors.",
+      fix: "Audit and build verified citations across Texas legal directories, local Denton business chambers, and community university networks.",
+      tool: "Citation & Mention Tracker",
+    },
+    {
+      n: "Not ranking in the Map Pack",
+      rx: /map|local|rank|pack|near me|3-pack|gmb/i,
+      why: "Google Map Pack treats Denton Square, Rayzor Ranch, Lewisville, and Flower Mound as distinct geo-grids with separate local pack results.",
+      fix: "Calibrate primary GBP categories, localized photo geotagging, and compliant client review acquisition workflows.",
+      tool: "Geo-Grid Local Rank Tracker",
+    },
+    {
+      n: "Leads are not qualified",
+      rx: /lead|qualified|calls|convert|unqualified|tire kicker|junk/i,
+      why: "Inbound student inquiries lacking payment capacity or out-of-county calls with zero case viability filters.",
+      fix: "Install Whisper call tracking with automated parental guarantor intake questions and case scoring filters.",
+      tool: "Call Tracking & Lead Scoring Suite",
+    },
+    {
+      n: "Intake is slow or leaking",
+      rx: /intake|missed|follow|response|phone|receptionist|slow|leak/i,
+      why: "Worried parents calling late at night after student arrests go directly to competitors if a phone call is missed without immediate response.",
+      fix: "Deploy 24/7 automated missed-call instant text-back, after-hours intake routing, and mobile lead notifications.",
+      tool: "24/7 Intake & Rapid Response Suite",
+    },
+  ];
 
   // Albuquerque & New Mexico fallback rules
   const ALBUQUERQUE_FALLBACKS: Array<{
@@ -235,7 +302,7 @@ export async function POST(req: Request) {
     },
   ];
 
-  const activeRules = isAlbuquerque ? ALBUQUERQUE_FALLBACKS : isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
+  const activeRules = isDenton ? DENTON_FALLBACKS : isAlbuquerque ? ALBUQUERQUE_FALLBACKS : isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
 
   // Fallback matching logic
   const matchedFallbacks: DiagnosticItem[] = [];
@@ -271,31 +338,39 @@ export async function POST(req: Request) {
   if (matchedFallbacks.length === 0) {
     matchedFallbacks.push(
       {
-        n: isAlbuquerque
+        n: isDenton
+          ? 'UNT & TWU Student Intent & DFW Mega-Firm Void'
+          : isAlbuquerque
           ? 'Bilingual Search Void & Rio Rancho Suburban Intent'
           : isPhilly
           ? 'Neighborhood Intent Fragmentation'
           : 'Traffic & Qualified Leads Disconnect',
-        why: isAlbuquerque
+        why: isDenton
+          ? `Over 60,000 university students and anxious out-of-town parents search in ${county} for student defense, while DFW mega-firms hold page one without a single sentence of Denton County court content.`
+          : isAlbuquerque
           ? `Albuquerque searchers in ${county} search heavily in both English and Spanish across Nob Hill, Westside, and Rio Rancho, but single generic pages leave bilingual legal demand completely untouched.`
           : isPhilly
           ? `Philadelphia searchers in ${county} search by specific neighborhood (Center City, Northeast, South Philly) and Pennsylvania statutes, but single generic pages fail to convert.`
           : `Cleveland searchers in ${county} look for specific procedural guidance, but broad pages fail to satisfy search intent or convert visitors into phone calls.`,
-        fix: isAlbuquerque
+        fix: isDenton
+          ? 'Architect hyper-local practice silos anchored to the Denton County Courthouse-on-the-Square and student defense intake workflows.'
+          : isAlbuquerque
           ? 'Build dedicated bilingual practice silos anchored to the Second Judicial District Court, Bernalillo County Metropolitan Court, and deploy Whisper call tracking.'
           : isPhilly
           ? 'Build hyper-local practice silos anchored to the Philadelphia Court of Common Pleas and deploy Whisper call tracking.'
           : 'Publish answer-first practice silos explaining Ohio court processes, install call tracking with lead attribution, and target suburb corridors.',
-        tool: 'Bilingual Silo & Call Tracking Suite',
+        tool: isDenton ? 'Denton Practice Silo & Parent Intake Suite' : 'Practice Silo & Call Tracking Suite',
       },
       {
         n: 'Local Map Pack & AI Visibility Deficit',
-        why: isAlbuquerque
+        why: isDenton
+          ? 'DFW regional directory aggregators capture broad organic positions while unoptimized Denton Square listings miss out on local 3-pack and Google AI Overview citations.'
+          : isAlbuquerque
           ? 'National aggregators outspend on broad legal head-terms while unoptimized local Albuquerque GBP listings miss out on local 3-pack and Google AI Overview citations.'
           : isPhilly
           ? 'National aggregators outspend on broad legal queries while unoptimized local GBP listings miss out on local 3-pack and Google AI Overview citations.'
           : 'National directories (Justia, FindLaw) capture organic positions while unoptimized GBP listings miss out on local 3-pack and Google AI Overview citations.',
-        fix: 'Restructure GBP primary categories, embed localized geo-signals (Metropolitan Court, Lomas Blvd legal corridor), and deploy LegalService structured schema.',
+        fix: 'Restructure GBP primary categories, embed localized geo-signals (Denton County Courthouse, campus corridors), and deploy LegalService structured schema.',
         tool: 'Geo-Grid Rank Tracker & AI Citation Engine',
       }
     );
@@ -303,7 +378,9 @@ export async function POST(req: Request) {
 
   // Attempt live diagnosis using Gemini Pool
   try {
-    const contextPrompt = isAlbuquerque
+    const contextPrompt = isDenton
+      ? `legal market (Denton County Courthouse-on-the-Square, Denton County Criminal Courts, University of North Texas UNT, Texas Woman's University TWU, student offenses like minor in possession and first DWI, anxious parents searching remotely 3 hours away, Texas Penal Code, and regional DFW mega-firms)`
+      : isAlbuquerque
       ? `legal market (Bernalillo County Metropolitan Court, Second Judicial District Court, New Mexico 50/50 community property rules, pure comparative fault, mandatory ignition interlock DWI statutes, bilingual Spanish search intent, and corridors like Nob Hill, North Valley, Westside, Northeast Heights, Rio Rancho, Santa Fe, and Las Cruces)`
       : isPhilly
       ? `legal market (Philadelphia Court of Common Pleas, Complex Litigation Center, Philadelphia Municipal Court, Pennsylvania 2-year statute of limitations, 51% modified comparative fault, Limited vs Full Tort auto rules, and neighborhoods like Center City, South Philly, Northeast, Fishtown, University City, and suburbs like Upper Darby, King of Prussia, Bensalem)`
