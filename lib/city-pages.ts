@@ -183,12 +183,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Michigan",
     stateAbbr: "MI",
     county: "Kent County",
-    metaTitle: "Law Firm SEO Company in Grand Rapids, MI",
+    metaTitle: "Law Firm SEO in Grand Rapids, MI: Qualified Leads Without the PPC Bill",
     metaDescription:
-      "SEO for Grand Rapids law firms. Win the Kent County map pack for family law, injury and business litigation searches. Founder-led, one firm per city.",
-    h1: "Law Firm SEO in Grand Rapids, Michigan",
+      "SEO for Grand Rapids law firms. Win Kent County Map Pack rankings and high-intent clients without the PPC bill. Founder-led, one firm per practice area.",
+    h1: "Law Firm SEO in Grand Rapids: Qualified Leads Without the PPC Bill",
     heroSub:
-      "Grand Rapids is competitive enough to matter and small enough to win. Firms here still rank on genuine local relevance rather than raw link budget — which means the window is open, and it will not stay open.",
+      "For solo attorneys and mid-size firms tired of paying for clicks that never sign. We build the Map Pack, page-one and AI-answer visibility that keeps working after the ad budget stops.",
     problem:
       "West Michigan firms often assume Detroit-level competition applies to them and either overspend or give up. Kent County is materially less contested, and the firms that recognise that now will hold those positions for years.",
     problemPoints: [
@@ -213,6 +213,7 @@ export const CITY_PAGES: CityPage[] = [
       "17th Circuit Court (Kent County)",
       "61st District Court",
       "U.S. District Court, Western District of Michigan",
+      "Grand Rapids Bar Association",
     ],
     barAssociation: "State Bar of Michigan · Grand Rapids Bar Association",
     neighborhoods: ["Downtown", "East Grand Rapids", "Wyoming", "Kentwood", "Walker", "Grandville"],
@@ -224,16 +225,28 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "Is SEO easier for a Grand Rapids firm than a Detroit firm?",
-        a: "Yes, measurably. Kent County keyword difficulty runs well below Wayne County because fewer local firms have invested in content, so directories still hold most first-page positions. Directories are easier to displace than established competitors, since they rank on domain authority rather than on answering the specific question.",
+        q: "Can SEO replace my Google Ads?",
+        a: "Often it can reduce your dependence on them over time, but we keep ads running until organic data proves it is safe to trim. We never ask you to cut paid spend before organic intake is proven in your CallRail dashboard. Over 6–9 months, as Map Pack and organic rankings compound, firms typically trim 50%–80% of low-converting PPC keywords while lowering their blended cost per signed case. Results are never guaranteed.",
       },
       {
-        q: "Do I need separate pages for Wyoming, Kentwood and Grandville?",
-        a: "If you want to appear for those searches, yes. Google treats them as distinct local markets even though they sit minutes apart, and someone searching 'divorce lawyer Kentwood' will not reliably see a page optimised for Grand Rapids. Each page needs genuinely different content, not the city name swapped out.",
+        q: "How long before I see leads from SEO in Grand Rapids?",
+        a: "Kent County is significantly less saturated than Detroit or Chicago. Most of our Grand Rapids clients see Google Business Profile rankings and initial local phone calls within 30 to 60 days. Suburb-specific practice pages (Wyoming, Kentwood, East Grand Rapids) typically begin ranking for high-intent queries between days 60 and 90, creating a sustainable foundation by month 4.",
       },
       {
-        q: "What is the best practice area to target first in Grand Rapids?",
-        a: "Usually high-asset family law. West Michigan's closely held businesses and manufacturing wealth create demand for asset-valuation and business-interest division that generic divorce pages do not serve, and the competition for those specific terms is thin.",
+        q: "I am a solo attorney with no time. Will this need me?",
+        a: "Virtually zero technical time. We handle the entire workload: citation audits, Google Business Profile management, statutory legal content writing, schema architecture, and call tracking setup. You only give us one short 20-minute monthly strategy call to review intake and signed retainers.",
+      },
+      {
+        q: "Do you share leads or take multiple firms in my practice area?",
+        a: "Never. Unlike lead directories (Avvo, Justia) or mass agencies that sign 15 personal injury firms in the same zip code, we enforce strict exclusivity: one law firm per practice area in Grand Rapids and Kent County. If you sign with us for personal injury or family law, we lock out your local competitors.",
+      },
+      {
+        q: "What does it cost?",
+        a: "We work on a transparent, flat monthly retainer with no surprise fees and no long-term contracts (month-to-month). Our retainer is designed to be fully covered by a single signed case per month, removing the anxiety of unpredictable Google Ads bills.",
+      },
+      {
+        q: "Do I need separate pages for Wyoming, Kentwood, Walker and Grandville?",
+        a: "Yes. Google evaluates Kent County suburbs as distinct geo-targets. A resident searching 'divorce attorney Kentwood' or 'car accident lawyer Wyoming MI' expects localized content referencing their local municipal courts. We build dedicated high-intent submarket spokes for each so your firm captures cases across the entire metropolitan area.",
       },
     ],
   },

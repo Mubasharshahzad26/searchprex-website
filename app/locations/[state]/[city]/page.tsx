@@ -32,6 +32,7 @@ import LocalLegalSolutionsCta from "@/components/LocalLegalSolutionsCta";
 import LocalCompetitorReportSample from "@/components/LocalCompetitorReportSample";
 import LocalQuickNavSidebar from "@/components/LocalQuickNavSidebar";
 import DetroitWireframeView from "@/components/location-wireframe/DetroitWireframeView";
+import GrandRapidsWireframeView from "@/components/location-wireframe/grand-rapids/GrandRapidsWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -156,6 +157,26 @@ export default async function CityPage({
         />
         <main>
           <DetroitWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  // For Grand Rapids, MI render the wireframe layout
+  if (page.stateSlug === "michigan" && page.citySlug === "grand-rapids") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <GrandRapidsWireframeView page={page} />
         </main>
       </>
     );
@@ -591,6 +612,16 @@ function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stat
             { "@type": "AdministrativeArea", name: "Wayne County" },
             { "@type": "AdministrativeArea", name: "Oakland County" },
             { "@type": "AdministrativeArea", name: "Macomb County" },
+          ]
+        : page.citySlug === "grand-rapids"
+        ? [
+            { "@type": "City", name: "Grand Rapids", containedInPlace: { "@type": "State", name: "Michigan" } },
+            { "@type": "AdministrativeArea", name: "Kent County" },
+            { "@type": "City", name: "East Grand Rapids" },
+            { "@type": "City", name: "Wyoming" },
+            { "@type": "City", name: "Kentwood" },
+            { "@type": "City", name: "Walker" },
+            { "@type": "City", name: "Grandville" },
           ]
         : [
             { "@type": "City", name: page.city, containedInPlace: { "@type": "State", name: page.state } },
