@@ -266,15 +266,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  const newsCategories = ["AI SEO", "LLMs", "Tools", "Ecommerce", "Technical", "Local"];
-  for (const cat of newsCategories) {
-    add({
-      url: absolute(`/resources/news?category=${encodeURIComponent(cat)}`),
-      changeFrequency: "daily",
-      priority: 0.8,
-    });
-  }
-
   // ── SEO News deep-dives (the spokes) ─────────────────────────────────────
   // These were reachable only through news-sitemap.xml, which exists for Google
   // News and is scoped to a short freshness window -- so the articles the hub

@@ -874,7 +874,7 @@ function searchprex_enrich_product_schema( $markup, $product ) {
         <li><strong>Make one person responsible for the profile,</strong> and make sure Google's notifications reach them. Since September 2026, owners have <a href="/resources/news/google-business-profile-four-days-suggested-edits">four days to reject a suggested edit</a> before Google may publish it.</li>
         <li><strong>Keep the name, address, phone and hours identical</strong> on the profile, your website and your main directories.</li>
         <li><strong>Make changes deliberately.</strong> One reason, one change, and only to reflect something that actually changed in the business.</li>
-        <li><strong>Check the profile against the guidelines once a quarter</strong> with our <a href="/resources/google-business-profile-checklist">Google Business Profile checklist</a>, and keep an eye on <a href="/resources/news/local-seo-updates">local SEO updates</a> for policy changes.</li>
+        <li><strong>Check the profile against the guidelines once a quarter</strong> with our <a href="/resources/google-business-profile-checklist">Google Business Profile checklist</a>, and keep an eye on <a href="/resources/news/local-seo-updates">local SEO news</a> for policy changes.</li>
       </ul>
 
       <h2>Frequently asked questions</h2>

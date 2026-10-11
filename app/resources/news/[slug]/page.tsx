@@ -48,12 +48,15 @@ async function getPostData(rawSlug: string) {
         dateModified: dbPost.updatedAt.toISOString(),
         author: {
           name: dbPost.author || "Mubashar Sharif",
-          role: "Verified SEO Expert",
-          bio: "Senior SEO Analyst & Algorithm Strategist at SearchPrex, specializing in Google search volatility, technical architecture, and Generative Engine Optimization (GEO).",
+          role: "Founder & SEO Strategist",
+          bio: "Founder & SEO Strategist at SearchPrex, specializing in Google search volatility, technical architecture, and Generative Engine Optimization (GEO).",
           linkedIn: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
         },
         featured: false,
-        heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+        heroImage:
+          dbPost.slug === "local-seo-updates"
+            ? `${SITE}/og/local-seo-updates-1200x630.png`
+            : dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
         // null, not an empty object: PostClient renders the headline stat badge
         // on any truthy value, so `{ value: "", label: "" }` produced an empty
@@ -106,6 +109,11 @@ function stripMarkdown(value: string): string {
     .replace(/<[^>]+>/g, "")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
     .replace(/[*_`]/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -163,7 +171,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const twDesc = post.twitterDescription || ogDesc;
 
   return {
-    title: post.metaTitle,
+    title: { absolute: post.metaTitle },
     description: post.metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
@@ -176,7 +184,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "article",
       publishedTime: post.date,
       authors: [post.author.name],
-      images: [{ url: post.heroImage, width: 1400, height: 787, alt: post.title }],
+      images: [{ url: post.heroImage, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -195,6 +203,56 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
  * hub-and-spoke, so it is worth supplying them explicitly.
  */
 async function getRelatedSpokes(currentSlug: string) {
+  if (currentSlug === "local-seo-updates") {
+    return [
+      {
+        slug: "google-business-profile-four-days-suggested-edits",
+        href: "/resources/news/google-business-profile-four-days-suggested-edits",
+        title: "Google Gives You Four Days to Reject a Suggested Edit",
+        category: "Local",
+        subcategory: "",
+        readTime: "5-minute read",
+        heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+      },
+      {
+        slug: "google-maps-sign-in-to-read-reviews",
+        href: "/resources/news/google-maps-sign-in-to-read-reviews",
+        title: "Google Maps Now Asks Users to Sign In to Read All Reviews",
+        category: "Local",
+        subcategory: "",
+        readTime: "4-minute read",
+        heroImage: "https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?w=1400&q=85&auto=format&fit=crop",
+      },
+      {
+        slug: "google-maps-ranking-drop",
+        href: "/blog/google-maps-ranking-drop",
+        title: "Why Did My Google Maps Ranking Drop? How to Check and Fix It",
+        category: "Local SEO",
+        subcategory: "",
+        readTime: "11-minute read",
+        heroImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+      },
+      {
+        slug: "get-more-calls-from-google-business-profile",
+        href: "/blog/get-more-calls-from-google-business-profile",
+        title: "How to Get More Calls From Your Google Business Profile",
+        category: "Local SEO",
+        subcategory: "",
+        readTime: "10-minute read",
+        heroImage: "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?w=1400&q=85&auto=format&fit=crop",
+      },
+      {
+        slug: "google-september-2026-spam-update",
+        href: "/resources/news/google-september-2026-spam-update",
+        title: "Google September 2026 Spam Update Concluded: 14-Day Rollout Triggers Manual Actions",
+        category: "Algorithms",
+        subcategory: "",
+        readTime: "6-minute read",
+        heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+      },
+    ];
+  }
+
   try {
     const siblings = await db.marketingBlog.findMany({
       where: {
@@ -233,40 +291,43 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
   const url = `${SITE}/resources/news/${post.slug}`;
   const canonical = post.canonicalUrl || url;
 
-  const articleSchema = {
-    "@context": "https://schema.org",
+  const articleNode = {
     "@type": post.schemaType || "NewsArticle",
+    "@id": `${canonical}#article`,
     headline: post.title,
     description: post.excerpt,
-    image: post.heroImage,
+    image: [
+      post.slug === "local-seo-updates"
+        ? `${SITE}/og/local-seo-updates-1200x630.png`
+        : post.heroImage,
+    ],
     datePublished: post.date,
     dateModified: post.dateModified,
-    // `keywords` used to be here as post.tags.join(", "), but post.tags is
-    // hardcoded to [] above, so every article shipped an empty "keywords": "".
     articleSection: post.category,
-    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
-    author: {
-      "@type": "Person",
-      name: post.author.name,
-      jobTitle: post.author.role,
-      url: `${SITE}/experts`,
-      // Ties the byline to the same profiles the About and case-study pages
-      // already declare, so the author resolves to one entity across the site.
-      sameAs: [
-        "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
-      ],
+    inLanguage: "en-US",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonical,
     },
-    publisher: {
-      "@type": "Organization",
-      name: "SearchPrex",
-      url: SITE,
-      logo: { "@type": "ImageObject", url: `${SITE}/logo.png` },
-    },
+    isPartOf: { "@id": `${SITE}/#website` },
+    author: { "@id": `${SITE}/#founder` },
+    publisher: { "@id": `${SITE}/#organization` },
+    ...(post.slug === "local-seo-updates"
+      ? {
+          citation: [
+            "https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu",
+            "https://support.google.com/business/answer/3480441",
+            "https://www.seroundtable.com/google-maps-account-reviews-42186.html",
+            "https://www.seroundtable.com/google-business-profiles-4-days-42139.html",
+            "https://www.seroundtable.com/google-local-knowledge-panel-ai-overview-42105.html",
+          ],
+        }
+      : {}),
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
+  const breadcrumbNode = {
     "@type": "BreadcrumbList",
+    "@id": `${canonical}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE },
       { "@type": "ListItem", position: 2, name: "Resources", item: `${SITE}/resources` },
@@ -278,11 +339,11 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
   // Only emitted when the body actually carries a Quick answers section, and
   // only with two or more pairs — a single-question FAQPage is noise.
   const quickAnswers = extractQuickAnswers(post.content);
-  const faqSchema =
+  const faqNode =
     quickAnswers.length >= 2
       ? {
-          "@context": "https://schema.org",
           "@type": "FAQPage",
+          "@id": `${canonical}#faq`,
           mainEntity: quickAnswers.map((qa) => ({
             "@type": "Question",
             name: qa.question,
@@ -291,11 +352,17 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
         }
       : null;
 
+  const pageGraph = {
+    "@context": "https://schema.org",
+    "@graph": [articleNode, breadcrumbNode, ...(faqNode ? [faqNode] : [])],
+  };
+
   return (
     <>
-      {[articleSchema, breadcrumbSchema, faqSchema].filter(Boolean).map((schema, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageGraph) }}
+      />
       <PostClient
         post={post}
         section={{ label: "SEO News", href: "/resources/news" }}

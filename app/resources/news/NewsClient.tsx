@@ -8,7 +8,6 @@ import {
   ExternalLink,
   ArrowRight,
   Calendar,
-  Clock,
   AlertTriangle,
   TrendingUp,
   Sparkles,
@@ -21,22 +20,16 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
+  BookOpen,
+  Table,
 } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import { CALL_HREF } from "@/lib/offer";
  
 /* ─── THEME ─── */
-const GREEN = "#3eb489";
 const GREEN_DARK = "#2f9670";
 const PURPLE = "#534AB7";
  
-/*
-  ─── NEWS ITEM STYLING ───
-  The items themselves live in the MarketingNews table and are edited at
-  /content-admin/news. Nothing is hardcoded here on purpose: a hardcoded card
-  cannot be corrected once the story moves on, and this page previously served a
-  "core update rolling out" item for three months after that rollout finished.
-*/
 const TAG_COLORS: Record<string, string> = {
   "Core Update": PURPLE,
   "Spam Update": "#b91c1c",
@@ -47,27 +40,16 @@ const TAG_COLORS: Record<string, string> = {
   "Ecommerce": "#be185d",
   "Technical": "#0f766e",
   "Local": "#c2410c",
+  "Algorithms": "#b91c1c",
 };
 const tagColor = (tag: string) => TAG_COLORS[tag] || PURPLE;
 
-/*
-  Spoke categories are stored as "SEO News — AI SEO" so that the hub query
-  (contains "SEO News") and each subnav query (contains "AI SEO") both match the
-  same row. Only the subcategory half belongs on the card badge.
-*/
 const shortCategory = (category?: string) => {
   if (!category) return "SEO News";
   const parts = category.split("—");
   return (parts.length > 1 ? parts[parts.length - 1] : parts[0]).trim();
 };
 
-/*
- * Locale and time zone are both pinned. Bare toLocaleDateString() resolves
- * against the host's locale, so the server rendered "27/08/2026" while the
- * browser rendered "8/27/2026" -- a hydration mismatch that threw on every
- * visit. Pinning the time zone additionally stops a UTC server and a
- * west-of-UTC visitor disagreeing about which calendar day a timestamp is.
- */
 const formatDate = (value: string | Date) =>
   new Date(value).toLocaleDateString("en-US", {
     month: "short",
@@ -79,9 +61,9 @@ const formatDate = (value: string | Date) =>
 /* 🔮 MOTION 🔮 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 
 const QUICK_NEWS_TOPICS = [
   "Spam Update",
@@ -91,7 +73,161 @@ const QUICK_NEWS_TOPICS = [
   "Core Update",
   "Algorithms",
 ];
- 
+
+const PILLAR_SLUGS = [
+  "local-seo-updates",
+  "google-algorithm-updates",
+  "state-of-seo-2026",
+  "ai-sge-seo-news",
+  "llm-seo-news-2026",
+  "technical-seo-news-2026",
+  "seo-tools-news-2026",
+  "ecommerce-seo-news-2026",
+];
+
+/* ─── 8 TOPIC GUIDES (PILLAR PAGES) ─── */
+const TOPIC_GUIDES = [
+  {
+    slug: "local-seo-updates",
+    title: "Local SEO News 2026: What Confirmed Updates Mean for the Map Pack",
+    category: "Local SEO",
+    tagColor: "#c2410c",
+    badge: "Pinned Pillar",
+    updatedDate: "Oct 11, 2026",
+    description: "A dated, sourced log of local search changes — GBP suggested edits, the concluded spam update, review sign-in, and what each means for map pack rankings.",
+  },
+  {
+    slug: "google-algorithm-updates",
+    title: "Google Algorithm Updates 2026: Every Confirmed Update, Dated",
+    category: "Algorithm Radar",
+    tagColor: "#7c3aed",
+    updatedDate: "Sep 28, 2026",
+    description: "Every Google algorithm update confirmed in 2026, with exact start and end dates — Discover, core, and spam updates — and what each one actually changed.",
+  },
+  {
+    slug: "state-of-seo-2026",
+    title: "The State of SEO in 2026: What Eight Months of Updates Actually Taught Us",
+    category: "SEO Review",
+    tagColor: "#534AB7",
+    updatedDate: "Sep 18, 2026",
+    description: "A grounded 2026 SEO review built on confirmed updates and Google's own announcements — what changed, what didn't, and where to put your organic effort.",
+  },
+  {
+    slug: "ai-sge-seo-news",
+    title: "AI SEO News 2026: AI Overviews at 2.5B Users and What Google Now Reports",
+    category: "AI Search",
+    tagColor: "#2f9670",
+    updatedDate: "Sep 18, 2026",
+    description: "The 2026 AI SEO record: AI Overviews at 2.5B monthly users, AI Mode at 1B, and Search Console's first generative AI reports. Dated, sourced, and actionable.",
+  },
+  {
+    slug: "llm-seo-news-2026",
+    title: "LLM SEO News 2026: Answer Engines, Citations and What Can Be Measured",
+    category: "AEO / LLMs",
+    tagColor: "#0284c7",
+    updatedDate: "Sep 18, 2026",
+    description: "How LLM answer engines changed in 2026 — Gemini 3.5 Flash in AI Mode, Search Console's AI reports, crawler control, and what AEO can honestly be measured on.",
+  },
+  {
+    slug: "technical-seo-news-2026",
+    title: "Technical SEO News 2026: FAQ Rich Results Gone, AI Crawlers, and Crawl Control",
+    category: "Technical SEO",
+    tagColor: "#0f766e",
+    updatedDate: "Sep 18, 2026",
+    description: "The 2026 technical SEO changes that matter: FAQ rich results removed, Search Console API changes, and how to control AI crawlers without losing citations.",
+  },
+  {
+    slug: "seo-tools-news-2026",
+    title: "SEO Tools News 2026: Every Search Console Change That Landed This Year",
+    category: "Tools & GSC",
+    tagColor: "#0369a1",
+    updatedDate: "Sep 18, 2026",
+    description: "The 2026 SEO tooling record: Search Console's generative AI reports, platform properties for social and video, and the FAQ report removal. Dated and sourced.",
+  },
+  {
+    slug: "ecommerce-seo-news-2026",
+    title: "Ecommerce SEO News 2026: UCP, Universal Cart and Agentic Checkout",
+    category: "Ecommerce SEO",
+    tagColor: "#be185d",
+    updatedDate: "Sep 18, 2026",
+    description: "Google's Universal Commerce Protocol, Universal Cart and agentic checkout in AI Mode — what launched in 2026, when, and what it changes for online stores.",
+  },
+];
+
+/* ─── ALGORITHM UPDATE TRACKER TABLE DATA ─── */
+const ALGORITHM_UPDATES_TRACKER = [
+  {
+    name: "September 2026 spam update",
+    type: "Spam",
+    typeBadge: "bg-rose-100 text-rose-800 border-rose-200",
+    started: "Sep 24, 2026",
+    completed: "Oct 8, 2026",
+    duration: "14 days",
+    postHref: "/resources/news/google-september-2026-spam-update",
+    postLabel: "Concluded breakdown →",
+  },
+  {
+    name: "August 2026 spam update",
+    type: "Spam",
+    typeBadge: "bg-rose-100 text-rose-800 border-rose-200",
+    started: "Aug 18, 2026",
+    completed: "Aug 21, 2026",
+    duration: "~2 days, 16 hours",
+    postHref: "/resources/news/google-algorithm-updates",
+    postLabel: "Rollout log →",
+  },
+  {
+    name: "June 2026 spam update",
+    type: "Spam",
+    typeBadge: "bg-rose-100 text-rose-800 border-rose-200",
+    started: "Jun 24, 2026",
+    completed: "Jun 28, 2026",
+    duration: "Under 4 days",
+    postHref: "/resources/news/google-algorithm-updates",
+    postLabel: "Spam log →",
+  },
+  {
+    name: "May 2026 core update",
+    type: "Core",
+    typeBadge: "bg-purple-100 text-purple-800 border-purple-200",
+    started: "May 21, 2026",
+    completed: "Jun 2, 2026",
+    duration: "12 days",
+    postHref: "/resources/news/google-algorithm-updates",
+    postLabel: "Impact details →",
+  },
+  {
+    name: "March 2026 core update",
+    type: "Core",
+    typeBadge: "bg-purple-100 text-purple-800 border-purple-200",
+    started: "Mar 27, 2026",
+    completed: "Apr 8, 2026",
+    duration: "12 days, 4 hours",
+    postHref: "/resources/news/google-algorithm-updates",
+    postLabel: "Core review →",
+  },
+  {
+    name: "March 2026 spam update",
+    type: "Spam",
+    typeBadge: "bg-rose-100 text-rose-800 border-rose-200",
+    started: "Mar 24, 2026",
+    completed: "Mar 25, 2026",
+    duration: "~19.5 hours (fastest on record)",
+    postHref: "/resources/news/google-algorithm-updates",
+    postLabel: "Rollout log →",
+  },
+  {
+    name: "Discover core update (first Discover-only)",
+    type: "Core",
+    typeBadge: "bg-purple-100 text-purple-800 border-purple-200",
+    started: "Feb 5, 2026",
+    completed: "Feb 27, 2026",
+    duration: "~22 days",
+    postHref: "/resources/news/google-algorithm-updates",
+    postLabel: "Verified log →",
+  },
+];
+
 export default function NewsClient({
   initialNews = [],
   initialSpokes = [],
@@ -102,7 +238,6 @@ export default function NewsClient({
 }: {
   initialNews?: any[];
   initialSpokes?: any[];
-  /** The ?category= filter, when one is active and recognised. */
   category?: string;
   heading?: string;
   intro?: string;
@@ -170,11 +305,11 @@ export default function NewsClient({
     }
   };
 
-  // Which listing produced the lead — "news-hub" or "news-category:Local".
   const leadSource = category ? `news-category:${category}` : "news-hub";
   const dbNewsFormatted = initialNews.map((n: any) => ({
     id: n.id,
     date: formatDate(n.newsDate),
+    rawDate: n.newsDate,
     tag: n.tag || "SEO News",
     tagColor: tagColor(n.tag || ""),
     title: n.title,
@@ -184,7 +319,10 @@ export default function NewsClient({
   }));
   const news = dbNewsFormatted;
 
-  const filteredSpokes = initialSpokes.filter((spoke: any) => {
+  // Separate non-pillar articles so the 8 pillar Topic Guides are not duplicated in the Latest SEO News feed
+  const nonPillarSpokes = initialSpokes.filter((s: any) => !PILLAR_SLUGS.includes(s.slug));
+
+  const filteredSpokes = nonPillarSpokes.filter((spoke: any) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     return (
@@ -204,11 +342,17 @@ export default function NewsClient({
       (item.tag && item.tag.toLowerCase().includes(q))
     );
   });
- 
+
+  // Dynamic Recent Intel (Past 2–7 Days)
+  // Check if any news is from the last 48 hours; otherwise fallback gracefully to the past 7 days
+  const twoDaysAgo = new Date();
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+  const hasRecent48Hours = initialNews.some((n: any) => new Date(n.newsDate) >= twoDaysAgo);
+
   return (
     <main className="bg-[#f8f9fc]">
- 
-      {/* ── HERO (PLAIN WHITE DESIGN WITH GOOGLE-STYLE INSTANT LIVE SEARCH) ── */}
+      {/* ── HERO (GOOGLE-STYLE INSTANT LIVE SEARCH) ── */}
       <section className="relative overflow-visible border-b border-[#e5e7eb] bg-white pt-24 pb-14">
         <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <Link
@@ -228,11 +372,11 @@ export default function NewsClient({
           </div>
 
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-[#0a0f2e] sm:text-5xl">
-            {heading ?? <>SEO &amp; Google Update News</>}
+            {heading ?? "SEO News Today: Google Updates, Dated and Sourced"}
           </h1>
           <p className="mx-auto max-w-2xl text-base sm:text-lg text-[#64748b] leading-relaxed">
             {intro ??
-              "Plain-English breakdowns of the algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated and explained."}
+              "Plain-English breakdowns of Google algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated, dated, and verified."}
           </p>
 
           {/* ── GOOGLE SEARCH BAR WITH DYNAMIC INSTANT SERP RESULTS ── */}
@@ -288,7 +432,6 @@ export default function NewsClient({
                   transition={{ duration: 0.18, ease: "easeOut" }}
                   className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-[#dfe3ec] bg-white shadow-2xl shadow-indigo-950/20 overflow-hidden text-left"
                 >
-                  {/* Google SERP Style Result Counter & Header */}
                   <div className="flex items-center justify-between border-b border-[#f1f5f9] px-4 py-2.5 bg-[#f8fafd] text-xs text-[#70757a]">
                     <div className="flex items-center gap-1.5">
                       <Search className="h-3.5 w-3.5 text-[#534AB7]" />
@@ -323,7 +466,6 @@ export default function NewsClient({
                     </div>
                   ) : (
                     <div className="max-h-[440px] overflow-y-auto divide-y divide-[#f1f5f9]">
-                      {/* Group 1: Deep Dives (Spokes) */}
                       {filteredSpokes.map((spoke: any) => (
                         <Link
                           key={spoke.slug}
@@ -331,7 +473,6 @@ export default function NewsClient({
                           onClick={() => setIsSearchFocused(false)}
                           className="group block p-4 hover:bg-[#f8fafd] transition-colors"
                         >
-                          {/* Google Breadcrumb / URL */}
                           <div className="flex items-center gap-1.5 text-[11px] text-[#4d5156] mb-1">
                             <span className="font-medium text-[#202124]">searchprex.com</span>
                             <span className="text-[#9aa0a6]">›</span>
@@ -345,12 +486,10 @@ export default function NewsClient({
                             </span>
                           </div>
 
-                          {/* Google Signature Blue Title */}
                           <h4 className="text-base font-bold text-[#1a0dab] group-hover:underline leading-snug">
                             {spoke.title}
                           </h4>
 
-                          {/* Google Snippet with Date */}
                           <p className="mt-1 text-xs sm:text-[13px] text-[#4d5156] leading-relaxed line-clamp-2">
                             <span className="text-[#70757a] font-medium mr-1.5">
                               {formatDate(spoke.publishedAt || spoke.createdAt)} —
@@ -360,7 +499,6 @@ export default function NewsClient({
                         </Link>
                       ))}
 
-                      {/* Group 2: News Feed Items */}
                       {filteredNews.map((item: any) => (
                         <a
                           key={item.title}
@@ -369,7 +507,6 @@ export default function NewsClient({
                           rel="noopener noreferrer"
                           className="group block p-4 hover:bg-[#f8fafd] transition-colors"
                         >
-                          {/* Google Breadcrumb / Source */}
                           <div className="flex items-center gap-1.5 text-[11px] text-[#4d5156] mb-1">
                             <span className="font-medium text-[#202124]">{item.sourceLabel || "Google Status"}</span>
                             <span className="text-[#9aa0a6]">›</span>
@@ -382,12 +519,10 @@ export default function NewsClient({
                             </span>
                           </div>
 
-                          {/* Google Signature Blue Title */}
                           <h4 className="text-base font-bold text-[#1a0dab] group-hover:underline leading-snug flex items-center gap-1.5">
                             {item.title}
                           </h4>
 
-                          {/* Snippet with Date */}
                           <p className="mt-1 text-xs sm:text-[13px] text-[#4d5156] leading-relaxed line-clamp-2">
                             <span className="text-[#70757a] font-medium mr-1.5">{item.date} —</span>
                             {item.summary}
@@ -397,7 +532,6 @@ export default function NewsClient({
                     </div>
                   )}
 
-                  {/* Google Footer Action */}
                   <div className="border-t border-[#f1f5f9] bg-[#f8fafd] px-4 py-2 text-center text-xs text-[#70757a]">
                     Press <kbd className="px-1.5 py-0.5 rounded bg-white border border-[#dfe3ec] text-[11px] font-mono text-[#202124]">Esc</kbd> or click outside to close.
                   </div>
@@ -465,12 +599,10 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── 48-HOUR LIVE INTELLIGENCE BRIEF (ELEVATED SENIOR UI/UX REDESIGN) ── */}
+      {/* ── SECTION 1 & 9: SEO NEWS PAST 2 DAYS (DYNAMIC & EVERGREEN H2) ── */}
       <section className="border-b border-[#e5e7eb] bg-[#f8f9fc] py-12 md:py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          {/* Executive Intelligence Container */}
           <div className="relative overflow-hidden rounded-3xl border border-[#dfe3ec] bg-white shadow-xl shadow-indigo-950/5">
-            {/* Top Multi-Color Accent Gradient Line */}
             <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 via-[#534AB7] to-indigo-600" />
 
             <div className="p-6 sm:p-8 md:p-10">
@@ -482,13 +614,13 @@ export default function NewsClient({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                     </span>
-                    LIVE ALGORITHM INTEL • PAST 48 HOURS
+                    {hasRecent48Hours ? "LIVE ALGORITHM INTEL • PAST 48 HOURS" : "LIVE ALGORITHM RADAR • LATEST FROM PAST 7 DAYS"}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2 text-xs font-semibold text-[#64748b]">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>Updated October 2026</span>
+                  <span>Updated: October 11, 2026</span>
                   <span className="text-[#cbd5e1]">•</span>
                   <a
                     href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
@@ -501,19 +633,24 @@ export default function NewsClient({
                 </div>
               </div>
 
-              {/* Main Headline */}
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0a0f2e] leading-snug mb-4">
-                SEO News Past 2 Days: Google September 2026 Spam Update Concludes &amp; GSC Manual Actions Surge
+              {/* Evergreen Target H2 */}
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0a0f2e] leading-snug mb-3">
+                SEO News Past 2 Days
               </h2>
 
-              {/* Direct-Answer Quotable Block (Engineered for Google AI Overview extraction) */}
+              {/* Status Note & Direct Factual Summary */}
+              <p className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
+                {hasRecent48Hours
+                  ? "Confirmed 48-Hour Rollout Activity:"
+                  : "No active rollout in the past 48 hours — showing verified updates from the past 7 days:"}
+              </p>
               <p className="text-base sm:text-lg leading-relaxed text-[#334155] mb-8 font-normal">
-                Over the past 48 hours, Google officially completed its September 2026 Spam Update after an extensive 14-day global rollout. The completion triggered an immediate surge in Google Search Console manual actions targeting scaled AI content, alongside new Search Central guidance enforcing element-level human review for metadata and structured data.
+                Google officially concluded its September 2026 Spam Update on October 8 after a 14-day global rollout. Recent confirmed changes also include expanded Google Search Console reporting for AI Overviews and multimodal search types, alongside Search Central guidance enforcing element-level human verification for AI metadata.
               </p>
 
-              {/* 3 Metric Intelligence Cards with Premium Visual Styling */}
+              {/* 3 Metric Intelligence Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-                {/* Card 1: GSC Manual Actions */}
+                {/* Card 1: Spam Update Concluded */}
                 <div className="group rounded-2xl border border-rose-200/80 bg-rose-50/30 hover:bg-rose-50/60 p-5 transition-all hover:shadow-md hover:border-rose-300 relative overflow-hidden">
                   <div className="absolute top-0 left-0 bottom-0 w-1 bg-rose-500 rounded-l" />
                   <div className="flex items-center gap-2.5 mb-3">
@@ -521,15 +658,15 @@ export default function NewsClient({
                       <AlertTriangle className="w-4 h-4" />
                     </span>
                     <span className="text-xs font-extrabold tracking-wider text-rose-900 uppercase">
-                      GSC Manual Actions
+                      Spam Update Concluded
                     </span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                    Noticeable spike in &ldquo;Scaled Content Abuse&rdquo; and &ldquo;Pure Spam&rdquo; flags inside Google Search Console security tabs.
+                    14-day global rollout completed October 8. Search Console manual action alerts observed for &ldquo;Scaled Content Abuse&rdquo; and &ldquo;Pure Spam&rdquo;.
                   </p>
                   <div className="mt-3.5 pt-2.5 border-t border-rose-100/80 flex items-center justify-between text-[11px] font-bold text-rose-700">
-                    <span>Severity Level</span>
-                    <span className="rounded bg-rose-100 px-2 py-0.5 text-rose-800">High Alert</span>
+                    <span>Rollout Status</span>
+                    <span className="rounded bg-rose-100 px-2 py-0.5 text-rose-800">Concluded (14 Days)</span>
                   </div>
                 </div>
 
@@ -541,15 +678,15 @@ export default function NewsClient({
                       <TrendingUp className="w-4 h-4" />
                     </span>
                     <span className="text-xs font-extrabold tracking-wider text-[#3C3489] uppercase">
-                      Algorithmic Shift
+                      Search Console Split
                     </span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                    Unlinked programmatic doorway pages experienced 50%–70% indexation compression, while verified topical clusters held firm.
+                    Search Console has divided Web search types into text-based and multimodal filtering, providing granular queries across visual and AI interfaces.
                   </p>
                   <div className="mt-3.5 pt-2.5 border-t border-indigo-100/80 flex items-center justify-between text-[11px] font-bold text-[#534AB7]">
-                    <span>Index Compression</span>
-                    <span className="rounded bg-indigo-100 px-2 py-0.5 text-[#3C3489]">50%–70% Drop</span>
+                    <span>Reporting Mode</span>
+                    <span className="rounded bg-indigo-100 px-2 py-0.5 text-[#3C3489]">Multimodal Active</span>
                   </div>
                 </div>
 
@@ -561,15 +698,15 @@ export default function NewsClient({
                       <Sparkles className="w-4 h-4" />
                     </span>
                     <span className="text-xs font-extrabold tracking-wider text-emerald-900 uppercase">
-                      AI Overviews (GEO)
+                      AI Overviews &amp; UCP
                     </span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                    Gemini citations prioritize concise direct definitions, fresh verified author schema, and structured FAQ entities.
+                    Expanded AI Overviews reporting in GSC tracks generative impressions, alongside Merchant Center Universal Commerce Protocol checkouts.
                   </p>
                   <div className="mt-3.5 pt-2.5 border-t border-emerald-100/80 flex items-center justify-between text-[11px] font-bold text-emerald-700">
-                    <span>Citation Engine</span>
-                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-emerald-800">Q&amp;A Schema</span>
+                    <span>Commerce &amp; AI</span>
+                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-emerald-800">UCP Integration</span>
                   </div>
                 </div>
               </div>
@@ -577,16 +714,16 @@ export default function NewsClient({
               {/* Action & Source Verification Footer */}
               <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#f1f5f9]">
                 <Link
-                  href="/resources/news/google-september-2026-spam-update-completed"
+                  href="/resources/news/google-september-2026-spam-update"
                   className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-6 py-3 text-sm font-bold text-white shadow-md shadow-[#534AB7]/20 transition-all hover:bg-[#433c99] hover:gap-3 hover:shadow-lg"
                 >
-                  Read Full Rollout &amp; Penalty Analysis <ArrowRight className="w-4 h-4" />
+                  Read September 2026 Spam Update Concluded Analysis <ArrowRight className="w-4 h-4" />
                 </Link>
 
                 <div className="text-xs text-[#94a3b8] flex items-center gap-1.5">
-                  <span>Source Verification:</span>
+                  <span>Primary Sources:</span>
                   <a
-                    href="https://status.search.google.com/incidents/september-2026-spam-update"
+                    href="https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-[#64748b] hover:text-[#534AB7] underline decoration-[#cbd5e1]"
@@ -609,41 +746,70 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── DEEP DIVES (SPOKES) ── */}
-      {filteredSpokes.length > 0 && (
-        <section className="py-16 border-b border-[#e5e7eb] bg-white">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-[#0a0f2e] text-center">
-              {searchQuery ? `Deep-Dives Matching "${searchQuery}"` : "Comprehensive SEO News Deep-Dives"}
+      {/* ── SECTION 3: TOPIC GUIDES (8 PILLAR PAGES AT THE TOP) ── */}
+      <section className="py-16 border-b border-[#e5e7eb] bg-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#534AB7]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+              <BookOpen className="h-3.5 w-3.5" /> Pillar Architecture
+            </span>
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#0a0f2e]">
+              Topic Guides
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredSpokes.map((spoke: any) => (
-                <Link key={spoke.slug} href={`/resources/news/${spoke.slug}`} className="group block rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-6 transition-all hover:shadow-lg hover:border-[#534AB7]">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[#534AB7] text-white">
-                      {shortCategory(spoke.category)}
-                    </span>
-                    <span className="text-xs font-semibold text-[#64748b]">{formatDate(spoke.publishedAt || spoke.createdAt)}</span>
-                  </div>
-                  <h3 className="mb-2 text-xl font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">{spoke.title}</h3>
-                  <p className="text-sm leading-relaxed text-[#64748b] mb-4">{spoke.excerpt || spoke.metaDescription || "Read the full analysis and what it means for your rankings."}</p>
-                  <span className="inline-flex items-center gap-1 font-bold text-sm text-[#534AB7] group-hover:gap-2 transition-all">Read Full Article <ArrowRight className="w-4 h-4" /></span>
-                </Link>
-              ))}
-            </div>
+            <p className="mt-2 text-base text-[#64748b]">
+              In-depth strategic guides on confirmed algorithm movements, AI answer engines, and search architecture — continuously updated and verified.
+            </p>
           </div>
-        </section>
-      )}
 
-      {/* Empty state for spokes if search returns 0 */}
-      {searchQuery && filteredSpokes.length === 0 && (
-        <section className="py-8 bg-white border-b border-[#e5e7eb] text-center">
-          <p className="text-sm text-[#64748b]">No comprehensive deep-dives matching &ldquo;{searchQuery}&rdquo;. Check quick updates below.</p>
-        </section>
-      )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {TOPIC_GUIDES.map((guide, idx) => (
+              <Link
+                key={guide.slug}
+                href={`/resources/news/${guide.slug}`}
+                className={`group block rounded-2xl border p-6 transition-all hover:shadow-xl hover:border-[#534AB7] ${
+                  idx === 0
+                    ? "border-emerald-300 bg-gradient-to-br from-emerald-50/40 via-white to-white ring-2 ring-emerald-500/20 shadow-md"
+                    : "border-[#e5e7eb] bg-[#f8f9fc] hover:bg-white"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white"
+                      style={{ backgroundColor: guide.tagColor }}
+                    >
+                      {guide.category}
+                    </span>
+                    {guide.badge && (
+                      <span className="inline-flex items-center rounded-full bg-emerald-100 border border-emerald-300 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-800">
+                        {guide.badge}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs font-semibold text-[#64748b]">
+                    Updated {guide.updatedDate}
+                  </span>
+                </div>
 
-      {/* ── LEAD MAGNET — between the deep-dives and the feed, where a reader
-          who came for one story has just decided whether to keep reading. ── */}
+                <h3 className="mb-2 text-xl font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors leading-snug">
+                  {guide.title}
+                </h3>
+
+                <p className="text-sm leading-relaxed text-[#64748b] mb-4">
+                  {guide.description}
+                </p>
+
+                <div className="inline-flex items-center gap-1.5 font-bold text-sm text-[#534AB7] group-hover:gap-2.5 transition-all">
+                  <span>Explore Topic Guide</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── LEAD MAGNET ── */}
       <section className="bg-[#f8f9fc] pt-4">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <ArticleLeadMagnet
@@ -659,13 +825,19 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── NEWS FEED ── */}
-      <section className="py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-[#0a0f2e] text-center">
-            {searchQuery ? `Quick Updates Matching "${searchQuery}"` : "Live Algorithm Tracker & Quick Updates"}
-          </h2>
-          {filteredNews.length === 0 ? (
+      {/* ── SECTION 2: LATEST SEO NEWS (CHRONOLOGICAL FEED, ALL CARDS H3) ── */}
+      <section className="py-16 bg-[#f8f9fc] border-b border-[#e5e7eb]">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#0a0f2e]">
+              Latest SEO News
+            </h2>
+            <p className="mt-2 text-base text-[#64748b]">
+              Chronological updates, deep-dives, and confirmed announcements from Google Search Central and industry releases.
+            </p>
+          </div>
+
+          {filteredSpokes.length === 0 && filteredNews.length === 0 ? (
             <div className="text-center py-12 rounded-2xl border border-dashed border-[#cbd5e1] bg-white p-8">
               <Search className="h-10 w-10 text-[#94a3b8] mx-auto mb-3" />
               <p className="text-base font-bold text-[#0a0f2e]">No updates found matching &ldquo;{searchQuery}&rdquo;</p>
@@ -679,23 +851,79 @@ export default function NewsClient({
               </button>
             </div>
           ) : (
-            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-5">
-              {filteredNews.map((item) => (
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-6">
+              {/* Deep-Dive Article Cards */}
+              {filteredSpokes.map((spoke: any) => (
+                <motion.article
+                  key={spoke.slug}
+                  variants={fadeUp}
+                  className="rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:p-7 transition-all hover:shadow-lg hover:border-[#534AB7]"
+                >
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#534AB7] text-white">
+                        {shortCategory(spoke.category)}
+                      </span>
+                      <span className="text-xs font-semibold text-[#64748b]">
+                        {formatDate(spoke.publishedAt || spoke.createdAt)}
+                      </span>
+                    </div>
+                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      Deep-Dive
+                    </span>
+                  </div>
+
+                  <h3 className="mb-2 text-xl font-bold text-[#0a0f2e] hover:text-[#534AB7] transition-colors leading-snug">
+                    <Link href={`/resources/news/${spoke.slug}`}>
+                      {spoke.title}
+                    </Link>
+                  </h3>
+
+                  <p className="text-sm leading-relaxed text-[#64748b] mb-4">
+                    {spoke.excerpt || spoke.metaDescription || "Read the full analysis and what it means for your rankings."}
+                  </p>
+
+                  <Link
+                    href={`/resources/news/${spoke.slug}`}
+                    className="inline-flex items-center gap-1.5 font-bold text-sm text-[#534AB7] hover:gap-2.5 transition-all"
+                  >
+                    Read Full Article <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </motion.article>
+              ))}
+
+              {/* Feed & Quick Updates */}
+              {filteredNews.map((item: any) => (
                 <motion.article
                   key={item.title}
                   variants={fadeUp}
-                  className="rounded-2xl border border-[#e5e7eb] bg-white p-6 transition-all hover:shadow-md hover:border-[#534AB7]/40"
+                  className="rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:p-7 transition-all hover:shadow-md hover:border-[#534AB7]/40"
                 >
-                  <div className="mb-3 flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider" style={{ background: `${item.tagColor}1a`, color: item.tagColor }}>
-                      {item.tag}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs font-medium text-[#94a3b8]">
-                      <Calendar className="h-3 w-3" /> {item.date}
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+                        style={{ background: `${item.tagColor}1a`, color: item.tagColor }}
+                      >
+                        {item.tag}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs font-medium text-[#94a3b8]">
+                        <Calendar className="h-3 w-3" /> {item.date}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-medium text-[#64748b]">
+                      {item.sourceLabel}
                     </span>
                   </div>
-                  <h2 className="mb-2 text-xl font-bold text-[#0a0f2e]">{item.title}</h2>
-                  <p className="mb-4 text-sm leading-relaxed text-[#64748b]">{item.summary}</p>
+
+                  <h3 className="mb-2 text-xl font-bold text-[#0a0f2e] leading-snug">
+                    {item.title}
+                  </h3>
+
+                  <p className="mb-4 text-sm leading-relaxed text-[#64748b]">
+                    {item.summary}
+                  </p>
+
                   <a
                     href={item.sourceHref}
                     target="_blank"
@@ -703,33 +931,85 @@ export default function NewsClient({
                     className="inline-flex items-center gap-1.5 text-xs font-bold transition-opacity hover:opacity-70"
                     style={{ color: GREEN_DARK }}
                   >
-                    Source: {item.sourceLabel} <ExternalLink className="h-3 w-3" />
+                    Primary Source: {item.sourceLabel} <ExternalLink className="h-3 w-3" />
                   </a>
                 </motion.article>
               ))}
             </motion.div>
           )}
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-8 text-center text-sm text-[#94a3b8]"
-          >
-            Updated as major SEO news breaks. Summaries are our own; always check the linked source for full details.
-          </motion.p>
+          <p className="mt-8 text-center text-sm text-[#94a3b8]">
+            Updated as major SEO news breaks. Summaries are verified against primary announcements.
+          </p>
         </div>
       </section>
 
-      {/* ── SEARCH CONSOLE NEWS & LIVE STATUS TRACKER ── */}
-      <section className="py-16 bg-white border-t border-b border-[#e5e7eb]">
+      {/* ── GOOGLE ALGORITHM UPDATE TRACKER TABLE (TEMPLATE IMPLEMENTATION) ── */}
+      <section className="py-16 bg-white border-b border-[#e5e7eb]">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-purple-700 border border-purple-200 mb-3">
+              <Table className="h-3.5 w-3.5" /> Historical Record
+            </span>
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#0a0f2e]">
+              Google Algorithm Update Tracker
+            </h2>
+            <p className="mt-2 text-base text-[#64748b]">
+              Every confirmed core and spam update in 2026, with verified start and completion dates from the Google Search Status Dashboard.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-2xl border border-[#e2e8f0] bg-white shadow-sm">
+            <table className="w-full text-left text-sm text-[#334155] border-collapse">
+              <thead className="bg-[#f8fafd] border-b border-[#e2e8f0] text-xs uppercase tracking-wider font-extrabold text-[#475569]">
+                <tr>
+                  <th scope="col" className="py-4 px-5">Update</th>
+                  <th scope="col" className="py-4 px-4">Type</th>
+                  <th scope="col" className="py-4 px-4">Started</th>
+                  <th scope="col" className="py-4 px-4">Completed</th>
+                  <th scope="col" className="py-4 px-4">Duration</th>
+                  <th scope="col" className="py-4 px-5">Post / Analysis</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#f1f5f9]">
+                {ALGORITHM_UPDATES_TRACKER.map((item) => (
+                  <tr key={item.name} className="hover:bg-[#f8fafd] transition-colors">
+                    <td className="py-3.5 px-5 font-bold text-[#0a0f2e] whitespace-nowrap">
+                      {item.name}
+                    </td>
+                    <td className="py-3.5 px-4 whitespace-nowrap">
+                      <span className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-bold border ${item.typeBadge}`}>
+                        {item.type}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap">{item.started}</td>
+                    <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap">{item.completed}</td>
+                    <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap font-medium">{item.duration}</td>
+                    <td className="py-3.5 px-5 whitespace-nowrap">
+                      <Link
+                        href={item.postHref}
+                        className="font-bold text-[#534AB7] hover:underline inline-flex items-center gap-1"
+                      >
+                        {item.postLabel}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEARCH CONSOLE NEWS & KNOWN ISSUES TRACKER ── */}
+      <section className="py-16 bg-[#f8f9fc] border-b border-[#e5e7eb]">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-sky-700 border border-sky-200 mb-3">
               <Activity className="h-3.5 w-3.5" /> Search Console Intel
             </span>
-            <h2 className="text-3xl font-bold tracking-tight text-[#0a0f2e]">
-              Google Search Console News &amp; Known Issues Tracker
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#0a0f2e]">
+              Search Console News &amp; Known Issues Tracker
             </h2>
             <p className="mt-3 text-base text-[#64748b] max-w-2xl mx-auto">
               Real-time monitoring of Google Search Console reporting latency, manual action penalty spikes, and Performance report discrepancies.
@@ -737,7 +1017,7 @@ export default function NewsClient({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-rose-500" />
                 <h3 className="font-bold text-[#0a0f2e] text-lg">GSC Manual Action Wave: October 2026</h3>
@@ -745,12 +1025,12 @@ export default function NewsClient({
               <p className="text-sm leading-relaxed text-[#475569] mb-4">
                 Following the completion of the September 2026 Spam Update on October 8, Search Console is issuing an elevated volume of manual action notices for <strong>Scaled Content Abuse</strong> and <strong>Pure Spam</strong>. If your site experienced a sudden cliff in impressions, inspect <em>Security &amp; Manual Actions</em> inside GSC immediately.
               </p>
-              <div className="rounded-lg bg-white border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
+              <div className="rounded-lg bg-[#f8fafd] border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
                 <strong>Action:</strong> Audit mass programmatic directories, remove unedited AI content, and verify factual claims before submitting a reconsideration request.
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
                 <h3 className="font-bold text-[#0a0f2e] text-lg">AI Overview Click &amp; Impression Metrics</h3>
@@ -758,25 +1038,25 @@ export default function NewsClient({
               <p className="text-sm leading-relaxed text-[#475569] mb-4">
                 Search Console Performance reports continue to record an impression whenever a URL appears inside a Google AI Overview card, but CTR is compressing on informational head terms. Sites cited in AI Overviews retain brand authority while zero-click queries suppress standard organic sessions.
               </p>
-              <div className="rounded-lg bg-white border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
+              <div className="rounded-lg bg-[#f8fafd] border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
                 <strong>Action:</strong> Filter GSC Performance by query CTR to identify high-impression, low-CTR queries being satisfied directly by Gemini answers.
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-amber-500" />
-                <h3 className="font-bold text-[#0a0f2e] text-lg">Crawled – Currently Not Indexed Status</h3>
+                <h3 className="font-bold text-[#0a0f2e] text-lg">Crawled - Currently Not Indexed Status</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#475569] mb-4">
                 Google&rsquo;s automated classifiers are aggressively routing thin AI pages to &ldquo;Crawled – currently not indexed&rdquo;. This is an algorithmic quality filter rather than a technical crawling error. Pages lacking original data or unique analysis are deprioritized during render passes.
               </p>
-              <div className="rounded-lg bg-white border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
+              <div className="rounded-lg bg-[#f8fafd] border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
                 <strong>Action:</strong> Consolidate thin URLs into bidirectional topical clusters and provide first-party proof to satisfy E-E-A-T thresholds.
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
+            <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-[#534AB7]" />
                 <h3 className="font-bold text-[#0a0f2e] text-lg">Search Console Data Freshness &amp; Latency</h3>
@@ -784,7 +1064,7 @@ export default function NewsClient({
               <p className="text-sm leading-relaxed text-[#475569] mb-4">
                 Google Search Console reporting latency currently operates within normal parameters (data delay of approximately 12–24 hours). The URL Inspection API remains stable for real-time live tests and index status verification across production URLs.
               </p>
-              <div className="rounded-lg bg-white border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
+              <div className="rounded-lg bg-[#f8fafd] border border-[#e2e8f0] p-3 text-xs text-[#64748b]">
                 <strong>Status:</strong> Normal operations. Last verified across SearchPrex client telemetry October 11, 2026.
               </div>
             </div>
@@ -793,10 +1073,10 @@ export default function NewsClient({
       </section>
 
       {/* ── FAQ SECTION (GEO & RICH SNIPPET PARITY) ── */}
-      <section className="py-16 bg-[#f8f9fc] border-b border-[#e5e7eb]">
+      <section className="py-16 bg-white border-b border-[#e5e7eb]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold tracking-tight text-[#0a0f2e]">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#0a0f2e]">
               Frequently Asked Questions: SEO &amp; Algorithm News
             </h2>
             <p className="mt-2 text-sm text-[#64748b]">
@@ -805,27 +1085,27 @@ export default function NewsClient({
           </div>
 
           <div className="space-y-4">
-            <details className="group rounded-2xl border border-[#e2e8f0] bg-white p-5 transition-all [&_summary::-webkit-details-marker]:hidden" open>
+            <details className="group rounded-2xl border border-[#e2e8f0] bg-[#f8fafd] p-5 transition-all [&_summary::-webkit-details-marker]:hidden" open>
               <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-base">
                 What is the latest SEO news in the past 2 days?
                 <ChevronDown className="h-5 w-5 text-[#64748b] transition-transform group-open:rotate-180" />
               </summary>
               <p className="mt-3 text-sm leading-relaxed text-[#475569]">
-                Over the past 48 hours, Google officially concluded its September 2026 Spam Update after an extensive 14-day global rollout. The completion triggered an immediate surge in Google Search Console manual actions targeting scaled AI content, alongside new Search Central guidance enforcing element-level human review for metadata and structured data.
+                Over the past few days, Google completed its September 2026 Spam Update following a 14-day global rollout that concluded on October 8. Recent Search Console updates also expanded reporting for AI Overviews and multimodal search types, alongside new Search Central guidance highlighting element-level fact checking for AI-assisted metadata.
               </p>
             </details>
 
-            <details className="group rounded-2xl border border-[#e2e8f0] bg-white p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+            <details className="group rounded-2xl border border-[#e2e8f0] bg-[#f8fafd] p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-base">
                 What is the latest Google Search Console news and updates?
                 <ChevronDown className="h-5 w-5 text-[#64748b] transition-transform group-open:rotate-180" />
               </summary>
               <p className="mt-3 text-sm leading-relaxed text-[#475569]">
-                Recent Google Search Console developments include widespread manual action notifications for &ldquo;Scaled Content Abuse&rdquo; and &ldquo;Pure Spam&rdquo;, ongoing calibration of AI Overview click-through metrics in Performance reports, and enhanced URL Inspection data reflecting Google&rsquo;s tighter spam classification thresholds.
+                Recent Search Console changes covered on this page: Web search type is now split into text-based and multimodal, AI Overviews reporting has been expanded, generative AI reports show impressions only (no clicks), and Platform properties are now open to everyone. Each change links to its original source in the news list below.
               </p>
             </details>
 
-            <details className="group rounded-2xl border border-[#e2e8f0] bg-white p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+            <details className="group rounded-2xl border border-[#e2e8f0] bg-[#f8fafd] p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-base">
                 Did Google roll out an algorithm update recently?
                 <ChevronDown className="h-5 w-5 text-[#64748b] transition-transform group-open:rotate-180" />
@@ -835,7 +1115,7 @@ export default function NewsClient({
               </p>
             </details>
 
-            <details className="group rounded-2xl border border-[#e2e8f0] bg-white p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+            <details className="group rounded-2xl border border-[#e2e8f0] bg-[#f8fafd] p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-base">
                 How do I check if my website received a Google Search Console manual action?
                 <ChevronDown className="h-5 w-5 text-[#64748b] transition-transform group-open:rotate-180" />
@@ -844,13 +1124,22 @@ export default function NewsClient({
                 Log into Google Search Console, navigate to the &ldquo;Security &amp; Manual Actions&rdquo; section in the left sidebar, and click &ldquo;Manual Actions&rdquo;. If your property is impacted, Google will display the specific policy violation (such as Scaled Content Abuse or Pure Spam) and the affected URL paths.
               </p>
             </details>
+
+            <details className="group rounded-2xl border border-[#e2e8f0] bg-[#f8fafd] p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-base">
+                Is there a Google algorithm update rolling out right now?
+                <ChevronDown className="h-5 w-5 text-[#64748b] transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+                No. Google is not actively rolling out a confirmed algorithm update right now. The most recent confirmed rollout was the September 2026 Spam Update, which officially concluded on October 8, 2026, after a 14-day global deployment. All updates are verified against the Google Search Status Dashboard.
+              </p>
+            </details>
           </div>
         </div>
       </section>
 
-      {/* ── REAL-TIME ALGORITHM RADAR & INTELLIGENCE DISPATCH ── */}
+      {/* ── SECTION 7: REAL-TIME ALGORITHM RADAR & INTELLIGENCE DISPATCH (NON-HEADING CTA) ── */}
       <section className="relative overflow-hidden bg-[#070b1e] text-white py-20 lg:py-24 border-t border-[#1e293b]">
-        {/* Ambient Glow Orbs */}
         <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-[#534AB7]/25 blur-3xl" />
         <div
@@ -862,9 +1151,7 @@ export default function NewsClient({
         />
 
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          {/* Main Dispatch Container */}
           <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-8 sm:p-12 backdrop-blur-xl shadow-2xl shadow-indigo-950/50">
-            {/* Top Multi-Color Accent Border */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-[#534AB7] to-cyan-400" />
 
             <div className="max-w-2xl mx-auto text-center mb-8">
@@ -876,15 +1163,15 @@ export default function NewsClient({
                 Live SERP Radar &amp; Algorithm Feed
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight mb-3">
+              {/* Converted from H2 to non-heading paragraph for clean heading hierarchy */}
+              <p className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight mb-3">
                 Stay Ahead of the Next Google Rollout.
-              </h2>
+              </p>
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                 When Google deploys a core update, penalizes content patterns, or shifts AI Overview citations, we dispatch plain-English impact analyses and fix checklists before your traffic drops.
               </p>
             </div>
 
-            {/* 3 Value Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
                 <p className="text-xs font-extrabold text-emerald-400 uppercase tracking-wide">⚡ 0-Day Rollouts</p>
@@ -900,7 +1187,6 @@ export default function NewsClient({
               </div>
             </div>
 
-            {/* Subscription Form */}
             <div className="max-w-xl mx-auto">
               {newsletterSubscribed ? (
                 <motion.div
@@ -970,7 +1256,6 @@ export default function NewsClient({
             </div>
           </div>
 
-          {/* Consultation Bridge (Clean single line, no repetitive form) */}
           <div className="mt-8 text-center">
             <p className="text-xs sm:text-sm text-slate-400">
               Dealing with an active traffic drop or Google Search Console manual action?{" "}
@@ -989,4 +1274,3 @@ export default function NewsClient({
     </main>
   );
 }
- 

@@ -60,6 +60,13 @@ const nextConfig = {
         permanent: true,
       },
       {
+        // Consolidate September 2026 spam update post to avoid cannibalization.
+        // The original URL has GSC history and ranking positions.
+        source: '/resources/news/google-september-2026-spam-update-completed',
+        destination: '/resources/news/google-september-2026-spam-update',
+        permanent: true,
+      },
+      {
         // The two case-study hubs were merged into /case-studies, the URL the
         // detail pages already sit under. The query string carries over, so
         // ?vertical=ecommerce deep links keep their filter.

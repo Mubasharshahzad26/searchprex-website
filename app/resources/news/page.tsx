@@ -1,12 +1,12 @@
 // app/resources/news/page.tsx
 // Server Component. Owns metadata; the list lives in NewsClient.
-//
-// Previously "use client" and therefore served the root layout's default
-// (homepage) title.
+// ISR revalidation: refresh page every hour to keep news and "past 2 days" block fresh.
+export const revalidate = 3600;
 
 import type { Metadata } from "next";
 import { getPageSEO } from "@/lib/admin-seo";
 import NewsClient from "./NewsClient";
+import { db } from "@/lib/db";
 
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/resources/news`;
@@ -37,17 +37,6 @@ const baseMetadata: Metadata = {
 
 /**
  * One entry per category filter the nav and sitemap link to.
- *
- * `h1` and `intro` exist because every category page used to render the
- * hub's own H1 and intro — "SEO & Google Update News" on ?category=Local and
- * ?category=Technical alike. Six URLs with one heading and one paragraph read
- * to Google as near-duplicates of each other and of the hub, which is the
- * opposite of what a category page is for.
- *
- * Local is angled at Google Business Profile and the map pack rather than
- * "local SEO news": /resources/news/local-seo-updates owns those head terms
- * (see the note on baseMetadata), and a category page competing with its own
- * spoke splits the signal between two URLs.
  */
 const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; intro: string }> = {
   "AI SEO": {
@@ -90,18 +79,21 @@ const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; i
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ category?: string }> }): Promise<Metadata> {
   const { category } = await searchParams;
-  
+  const isFiltered = Boolean(category);
+
+  // Filtered ?category= URLs point canonical to the main hub and use noindex, follow
+  // to avoid competing with and cannibalizing the main hub page.
   if (category && CATEGORY_META[category]) {
     const metaInfo = CATEGORY_META[category];
-    const catUrl = `${PAGE_URL}?category=${encodeURIComponent(category)}`;
     return {
       title: metaInfo.title,
       description: metaInfo.desc,
-      alternates: { canonical: catUrl },
+      alternates: { canonical: PAGE_URL },
+      robots: { index: false, follow: true },
       openGraph: {
         title: metaInfo.title,
         description: metaInfo.desc,
-        url: catUrl,
+        url: PAGE_URL,
         siteName: "SearchPrex",
         type: "website",
       },
@@ -113,16 +105,29 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     };
   }
 
-  return getPageSEO("/resources/news", baseMetadata);
+  const base = await getPageSEO("/resources/news", baseMetadata);
+  return {
+    ...base,
+    alternates: { canonical: PAGE_URL },
+    robots: isFiltered
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+  };
 }
 
-import { db } from "@/lib/db";
+const PILLAR_SLUGS = [
+  "local-seo-updates",
+  "google-algorithm-updates",
+  "state-of-seo-2026",
+  "ai-sge-seo-news",
+  "llm-seo-news-2026",
+  "technical-seo-news-2026",
+  "seo-tools-news-2026",
+  "ecommerce-seo-news-2026",
+];
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category: rawCategory } = await searchParams;
-  // Unknown values are ignored rather than filtered on. Any string used to
-  // produce its own filtered page with the hub's metadata — an unbounded set of
-  // thin URLs for a crawler to find.
   const category = rawCategory && CATEGORY_META[rawCategory] ? rawCategory : undefined;
   const meta = category ? CATEGORY_META[category] : undefined;
   const pageUrl = category ? `${PAGE_URL}?category=${encodeURIComponent(category)}` : PAGE_URL;
@@ -132,10 +137,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
     orderBy: { newsDate: "desc" },
   });
 
-  // Every spoke must be an SEO News row. The category filter used to be
-  // `contains: category` alone, so ?category=Local would match any blog post
-  // whose category merely contained "Local" — and its card linked to
-  // /resources/news/<slug>, which 404s for anything that is not SEO News.
   const dbSpokes = await db.marketingBlog.findMany({
     where: {
       published: true,
@@ -146,6 +147,13 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
     },
     orderBy: { publishedAt: "desc" },
   });
+
+  // Pin local-seo-updates spoke to the top of the collection
+  const localSpokeIdx = dbSpokes.findIndex((s) => s.slug === "local-seo-updates");
+  if (localSpokeIdx > 0) {
+    const [pinned] = dbSpokes.splice(localSpokeIdx, 1);
+    dbSpokes.unshift(pinned);
+  }
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -158,28 +166,47 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
     ],
   };
 
-  // CollectionPage + ItemList: a machine-readable index of the articles on
-  // this page, which is what answer engines use to understand what a listing
-  // page covers. Only emitted when there is something to list.
-  const collectionSchema =
-    dbSpokes.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: meta?.h1 ?? "SEO & Google Update News",
-          description: meta?.desc ?? baseMetadata.description,
-          url: pageUrl,
-          mainEntity: {
-            "@type": "ItemList",
-            itemListElement: dbSpokes.slice(0, 20).map((s, i) => ({
-              "@type": "ListItem",
-              position: i + 1,
-              url: `${PAGE_URL}/${s.slug}`,
-              name: s.title,
-            })),
-          },
-        }
-      : null;
+  // Pillar pages for hasPart (Topic Guides)
+  const pillarHasPart = [
+    { "@type": "WebPage", name: "Local SEO News 2026: What Confirmed Updates Mean for the Map Pack", url: `${PAGE_URL}/local-seo-updates` },
+    { "@type": "WebPage", name: "Google Algorithm Updates 2026: Every Confirmed Update, Dated", url: `${PAGE_URL}/google-algorithm-updates` },
+    { "@type": "WebPage", name: "The State of SEO in 2026: What Eight Months of Updates Actually Taught Us", url: `${PAGE_URL}/state-of-seo-2026` },
+    { "@type": "WebPage", name: "AI SEO News 2026: AI Overviews at 2.5B Users and What Google Now Reports", url: `${PAGE_URL}/ai-sge-seo-news` },
+    { "@type": "WebPage", name: "LLM SEO News 2026: Answer Engines, Citations and What Can Be Measured", url: `${PAGE_URL}/llm-seo-news-2026` },
+    { "@type": "WebPage", name: "Technical SEO News 2026: FAQ Rich Results Gone, AI Crawlers, and Crawl Control", url: `${PAGE_URL}/technical-seo-news-2026` },
+    { "@type": "WebPage", name: "SEO Tools News 2026: Every Search Console Change That Landed This Year", url: `${PAGE_URL}/seo-tools-news-2026` },
+    { "@type": "WebPage", name: "Ecommerce SEO News 2026: UCP, Universal Cart and Agentic Checkout", url: `${PAGE_URL}/ecommerce-seo-news-2026` },
+  ];
+
+  // News-only articles for the ItemList (excluding pillar topic guides)
+  const newsOnlySpokes = dbSpokes.filter((s) => !PILLAR_SLUGS.includes(s.slug));
+  const latestDateModified = dbSpokes[0]?.updatedAt ? new Date(dbSpokes[0].updatedAt).toISOString() : new Date().toISOString();
+
+  // CollectionPage + ItemList: machine-readable index of articles
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${PAGE_URL}#collection`,
+    name: "SEO & Google Update News",
+    description: "SEO news and Google updates as they land: core and spam updates, AI Overviews and ranking changes, in plain English with every original source linked.",
+    url: PAGE_URL,
+    inLanguage: "en-US",
+    dateModified: latestDateModified,
+    isPartOf: { "@id": `${SITE}/#website` },
+    publisher: { "@id": `${SITE}/#organization` },
+    hasPart: pillarHasPart,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: newsOnlySpokes.length,
+      itemListElement: newsOnlySpokes.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${PAGE_URL}/${s.slug}`,
+        name: s.title,
+      })),
+    },
+  };
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -190,7 +217,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "What is the latest SEO news in the past 2 days?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Over the past 48 hours, Google officially concluded its September 2026 Spam Update after an extensive 14-day global rollout. The completion triggered an immediate surge in Google Search Console manual actions targeting scaled AI content, alongside new Search Central guidance enforcing element-level human review for metadata and structured data.",
+          text: "Over the past few days, Google completed its September 2026 Spam Update following a 14-day global rollout that concluded on October 8. Recent Search Console updates also expanded reporting for AI Overviews and multimodal search types, alongside new Search Central guidance highlighting element-level fact checking for AI-assisted metadata.",
         },
       },
       {
@@ -198,7 +225,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "What is the latest Google Search Console news and updates?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Recent Google Search Console developments include widespread manual action notifications for 'Scaled Content Abuse' and 'Pure Spam', ongoing calibration of AI Overview click-through metrics in Performance reports, and enhanced URL Inspection data reflecting Google's tighter spam classification thresholds.",
+          text: "Recent Search Console changes covered on this page: Web search type is now split into text-based and multimodal, AI Overviews reporting has been expanded, generative AI reports show impressions only (no clicks), and Platform properties are now open to everyone. Each change links to its original source in the news list below.",
         },
       },
       {
@@ -217,19 +244,35 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
           text: "Log into Google Search Console, navigate to the 'Security & Manual Actions' section in the left sidebar, and click 'Manual Actions'. If your property is impacted, Google will display the specific policy violation (such as Scaled Content Abuse or Pure Spam) and the affected URL paths.",
         },
       },
+      {
+        "@type": "Question",
+        name: "Is there a Google algorithm update rolling out right now?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No. Google is not actively rolling out a confirmed algorithm update right now. The most recent confirmed rollout was the September 2026 Spam Update, which officially concluded on October 8, 2026, after a 14-day global deployment. All updates are verified against the Google Search Status Dashboard.",
+        },
+      },
     ],
   };
 
   return (
     <>
-      {[breadcrumbSchema, collectionSchema, faqSchema].filter(Boolean).map((schema, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
+      {[breadcrumbSchema, collectionSchema, faqSchema].filter(Boolean).map((schema, i) => {
+        // Prevent script breakage while preserving raw & characters (avoiding &amp; bugs)
+        const jsonLd = JSON.stringify(schema).replace(/</g, "\\u003c");
+        return (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: jsonLd }}
+          />
+        );
+      })}
       <NewsClient
         initialNews={dbNews}
         initialSpokes={dbSpokes}
         category={category}
-        heading={meta?.h1}
+        heading={meta?.h1 ?? "SEO News Today: Google Updates, Dated and Sourced"}
         intro={meta?.intro}
         categories={Object.entries(CATEGORY_META).map(([key, v]) => ({ key, label: v.h1 }))}
       />
