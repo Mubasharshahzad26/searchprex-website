@@ -279,7 +279,7 @@ export default function ClevelandDiagnosisTool() {
                   <Sparkles className="h-5 w-5 text-[#534AB7] shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-                      Founder Takeaway · Mubashar Shahzad
+                      Founder Takeaway · Mubashar Sharif, CEO
                     </h4>
                     <p className="mt-1 text-sm sm:text-base font-semibold text-[#0a0f2e] leading-relaxed">
                       "{recommendation}"
@@ -420,7 +420,7 @@ export default function ClevelandDiagnosisTool() {
                       <CheckCircle2 className="h-10 w-10 text-emerald-400 mx-auto" />
                       <h4 className="text-xl font-bold text-white">Trial Request Received!</h4>
                       <p className="text-sm text-emerald-200 max-w-xl mx-auto">
-                        Thank you. Mubashar Shahzad will personally review your Cleveland law firm URL and email your 7-day trial onboarding details within 1 business day.
+                        Thank you. Mubashar Sharif (CEO) will personally review your Cleveland law firm URL and email your 7-day trial onboarding details within 1 business day.
                       </p>
                     </div>
                   ) : (

@@ -55,7 +55,7 @@ export default function ClevelandQuickAnswer() {
               <UserCheck className="h-4 w-4 text-[#534AB7]" />
               Written by{" "}
               <Link href="/about" className="font-bold text-[#534AB7] hover:underline">
-                Mubashar Shahzad, Certified SEO Analyst
+                Mubashar Sharif, CEO & Founder
               </Link>
             </span>
             <span className="hidden sm:inline text-slate-300">|</span>

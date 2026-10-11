@@ -13,20 +13,21 @@ export default function ClevelandFounderBio() {
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
             
             {/* Left Image Column */}
-            <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[340px] bg-slate-900 overflow-hidden">
+            <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[380px] bg-slate-900 overflow-hidden">
               <Image
-                src="/images/about/founder-hands-on-strategy-desk.webp"
-                alt="Mubashar Shahzad, Certified SEO Analyst and Founder of SearchPrex, reviewing technical legal SEO audits"
+                src="/images/mubashar-sharif.jpg"
+                alt="Mubashar Sharif, CEO and Founder of SearchPrex, reviewing technical legal SEO audits"
                 fill
+                priority
                 sizes="(max-width: 1024px) 100vw, 500px"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent lg:hidden" />
               <div className="absolute bottom-4 left-4 right-4 text-white lg:hidden">
                 <span className="font-mono text-xs uppercase text-amber-300 font-bold">
-                  Founder & Principal Strategist
+                  CEO & Principal Strategist
                 </span>
-                <h4 className="text-lg font-bold">Mubashar Shahzad</h4>
+                <h4 className="text-lg font-bold">Mubashar Sharif</h4>
               </div>
             </div>
 
@@ -34,11 +35,11 @@ export default function ClevelandFounderBio() {
             <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 space-y-5">
               <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] transition-transform group-hover:scale-105">
                 <Award className="h-3.5 w-3.5" />
-                <span>The Brain Behind It · Direct Founder Engagement</span>
+                <span>The Brain Behind It · Direct CEO Engagement</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-                Mubashar Shahzad, Certified SEO Analyst
+                Mubashar Sharif, CEO & Principal Strategist
               </h2>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed">

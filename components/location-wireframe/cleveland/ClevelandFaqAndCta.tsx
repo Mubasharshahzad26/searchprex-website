@@ -105,7 +105,7 @@ export default function ClevelandFaqAndCta() {
           </h2>
 
           <p className="text-base sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-            Get your comprehensive Cleveland Market Reality Check within 24 hours. Reviewed personally by Mubashar Shahzad.
+            Get your comprehensive Cleveland Market Reality Check within 24 hours. Reviewed personally by Mubashar Sharif, CEO.
           </p>
 
           <div className="pt-2">

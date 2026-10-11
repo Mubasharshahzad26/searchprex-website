@@ -104,7 +104,7 @@ export default function ClevelandRealityCheckForm() {
 
             <p className="text-xs text-slate-500 flex items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-[#1a7d59]" />
-              Conducted personally by Certified SEO Analyst Mubashar Shahzad.
+              Conducted personally by Mubashar Sharif, CEO & Founder of SearchPrex.
             </p>
           </div>
 
@@ -118,7 +118,7 @@ export default function ClevelandRealityCheckForm() {
                     Reality Check Requested!
                   </h3>
                   <p className="text-slate-600 text-sm max-w-md mx-auto">
-                    Thank you. Mubashar Shahzad will inspect your site, Google Business Profile, and local Cuyahoga County competitors. Your full audit teardown will arrive in your inbox within 24 hours.
+                    Thank you. Mubashar Sharif (CEO) will inspect your site, Google Business Profile, and local Cuyahoga County competitors. Your full audit teardown will arrive in your inbox within 24 hours.
                   </p>
                 </div>
               ) : (
