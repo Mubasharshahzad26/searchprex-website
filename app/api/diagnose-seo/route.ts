@@ -96,12 +96,13 @@ export async function POST(req: Request) {
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];
-  const city = body.city || 'Denton';
-  const state = body.state || (city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
-  const isDenton = city.toLowerCase().includes('denton');
-  const isAlbuquerque = !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
-  const isPhilly = !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
-  const county = body.county || (isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
+  const city = body.city || 'Katy';
+  const state = body.state || (city.toLowerCase().includes('katy') || city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
+  const isKaty = city.toLowerCase().includes('katy');
+  const isDenton = !isKaty && city.toLowerCase().includes('denton');
+  const isAlbuquerque = !isKaty && !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
+  const isPhilly = !isKaty && !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
+  const county = body.county || (isKaty ? 'Harris, Fort Bend & Waller Counties' : isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
 
   if (!query && selectedChips.length === 0) {
     return NextResponse.json({
@@ -110,6 +111,65 @@ export async function POST(req: Request) {
       isAiGenerated: false,
     });
   }
+
+  // Katy tri-county fallback rules
+  const KATY_FALLBACKS: Array<{
+    n: string;
+    rx: RegExp;
+    why: string;
+    fix: string;
+    tool: string;
+  }> = [
+    {
+      n: "Tri-County Venue Confusion",
+      rx: /tri-county|county|venue|jurisdiction|harris|fort bend|waller|courthouse|richmond|hempstead|where to file/i,
+      why: "Katy sits on the tri-border of Harris, Fort Bend, and Waller counties. Prospective clients do not know whether their case is heard in Houston, Richmond, or Hempstead, and generic Houston pages fail to clarify venue.",
+      fix: "Architect dedicated county venue landing pages clarifying local filing rules (Tex. Fam. Code § 6.301 residency requirements, Richmond vs Houston vs Hempstead court procedures) to capture high-converting search intent.",
+      tool: "Tri-County Venue & Practice Silo Suite",
+    },
+    {
+      n: "Houston Mega-Firm Displacement",
+      rx: /houston|mega|big firm|competitor|downtown|outranked/i,
+      why: "Downtown Houston mega-firms hold broad organic rankings on generic domain authority, but lack authentic local signals for Katy, Cinco Ranch, and Fulshear.",
+      fix: "Outrank downtown Houston giants with hyper-local Katy entity schemas, local court mileage benchmarks, and dedicated suburban silos that Google prioritizes for Katy IP addresses.",
+      tool: "Local Entity Authority Engine",
+    },
+    {
+      n: "Missing Master-Planned Communities (Cinco Ranch & Fulshear)",
+      rx: /cinco ranch|fulshear|neighborhood|community|suburb|estate|divorce|high net|seven meadows|cross creek|firethorne/i,
+      why: "High-net-worth clients in master-planned communities like Cinco Ranch ($120k+ median income) and Fulshear search by community name, but firms lump them into a generic Katy page.",
+      fix: "Build dedicated community silos with unique localized content, school district geography, and asset division/probate intent for master-planned neighborhoods.",
+      tool: "Master-Planned Submarket Indexer",
+    },
+    {
+      n: "Commuter Highway Accident Corridors (I-10 & Grand Parkway)",
+      rx: /highway|i-10|i10|grand parkway|sh 99|tollway|accident|crash|truck|westpark/i,
+      why: "The I-10 Katy Freeway and SH 99 Grand Parkway see thousands of heavy commercial freight and commuter crashes weekly, but firms target generic 'car accident lawyer' terms instead of exact intersection searches.",
+      fix: "Deploy accident corridor pages targeting 'truck accident lawyer I-10 Katy' and 'Grand Parkway crash attorney' with Texas DOT collision data and emergency response entity anchors.",
+      tool: "Highway Crash Intent & Corridor Tracker",
+    },
+    {
+      n: "Not ranking in the Map Pack",
+      rx: /map|pack|local|near me|3-pack|gmb|google business/i,
+      why: "Google Business Profiles located near the Grand Parkway or I-10 struggle to trigger across all three counties due to proximity drop-off past 5 miles.",
+      fix: "Calibrate GBP secondary categories, launch automated client review collection from Katy residents, and syndicate verified geo-coordinates across local Texas directories.",
+      tool: "Katy Geo-Grid Rank & Review Suite",
+    },
+    {
+      n: "Traffic is low or not growing",
+      rx: /traffic|visitor|clicks|low traffic|stagnant/i,
+      why: "Houston firms absorb broad legal queries because your firm lacks localized topical authority across Katy, Cinco Ranch, and surrounding corridors.",
+      fix: "Build answer-first legal silos with LegalService schema and llms.txt optimization to capture local organic searchers and Google AI Overviews.",
+      tool: "Crawl & Topical Authority Suite",
+    },
+    {
+      n: "Leads are not qualified or intake leaks",
+      rx: /lead|qualified|unqualified|tire kicker|junk|calls|phone|slow|intake/i,
+      why: "Receiving inquiries for distant courts in north Houston or unviable small claims without pre-intake venue filtering, leading to wasted consultation hours.",
+      fix: "Implement Whisper call tracking, automated county jurisdiction pre-qualification, and instant missed-call SMS response.",
+      tool: "Call Tracking & Venue Scoring Suite",
+    },
+  ];
 
   // Denton & Texas fallback rules
   const DENTON_FALLBACKS: Array<{
@@ -302,7 +362,7 @@ export async function POST(req: Request) {
     },
   ];
 
-  const activeRules = isDenton ? DENTON_FALLBACKS : isAlbuquerque ? ALBUQUERQUE_FALLBACKS : isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
+  const activeRules = isKaty ? KATY_FALLBACKS : isDenton ? DENTON_FALLBACKS : isAlbuquerque ? ALBUQUERQUE_FALLBACKS : isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
 
   // Fallback matching logic
   const matchedFallbacks: DiagnosticItem[] = [];
@@ -338,32 +398,40 @@ export async function POST(req: Request) {
   if (matchedFallbacks.length === 0) {
     matchedFallbacks.push(
       {
-        n: isDenton
+        n: isKaty
+          ? 'Tri-County Venue Confusion & Houston Mega-Firm Displacement'
+          : isDenton
           ? 'UNT & TWU Student Intent & DFW Mega-Firm Void'
           : isAlbuquerque
           ? 'Bilingual Search Void & Rio Rancho Suburban Intent'
           : isPhilly
           ? 'Neighborhood Intent Fragmentation'
           : 'Traffic & Qualified Leads Disconnect',
-        why: isDenton
+        why: isKaty
+          ? `Katy spans Harris, Fort Bend, and Waller counties. Prospective clients do not know whether their case is heard in Houston, Richmond, or Hempstead, and downtown Houston mega-firms fail to clarify venue while outspending on broad keywords.`
+          : isDenton
           ? `Over 60,000 university students and anxious out-of-town parents search in ${county} for student defense, while DFW mega-firms hold page one without a single sentence of Denton County court content.`
           : isAlbuquerque
           ? `Albuquerque searchers in ${county} search heavily in both English and Spanish across Nob Hill, Westside, and Rio Rancho, but single generic pages leave bilingual legal demand completely untouched.`
           : isPhilly
           ? `Philadelphia searchers in ${county} search by specific neighborhood (Center City, Northeast, South Philly) and Pennsylvania statutes, but single generic pages fail to convert.`
           : `Cleveland searchers in ${county} look for specific procedural guidance, but broad pages fail to satisfy search intent or convert visitors into phone calls.`,
-        fix: isDenton
+        fix: isKaty
+          ? 'Architect hyper-local practice silos anchored to Harris, Fort Bend, and Waller County district courts, plus Cinco Ranch and Fulshear community hubs.'
+          : isDenton
           ? 'Architect hyper-local practice silos anchored to the Denton County Courthouse-on-the-Square and student defense intake workflows.'
           : isAlbuquerque
           ? 'Build dedicated bilingual practice silos anchored to the Second Judicial District Court, Bernalillo County Metropolitan Court, and deploy Whisper call tracking.'
           : isPhilly
           ? 'Build hyper-local practice silos anchored to the Philadelphia Court of Common Pleas and deploy Whisper call tracking.'
           : 'Publish answer-first practice silos explaining Ohio court processes, install call tracking with lead attribution, and target suburb corridors.',
-        tool: isDenton ? 'Denton Practice Silo & Parent Intake Suite' : 'Practice Silo & Call Tracking Suite',
+        tool: isKaty ? 'Tri-County Venue & Community Silo Suite' : isDenton ? 'Denton Practice Silo & Parent Intake Suite' : 'Practice Silo & Call Tracking Suite',
       },
       {
         n: 'Local Map Pack & AI Visibility Deficit',
-        why: isDenton
+        why: isKaty
+          ? 'Downtown Houston directories and regional firms dominate broad organic queries while unoptimized Katy and Cinco Ranch GBP listings suffer from geographic radius drop-off.'
+          : isDenton
           ? 'DFW regional directory aggregators capture broad organic positions while unoptimized Denton Square listings miss out on local 3-pack and Google AI Overview citations.'
           : isAlbuquerque
           ? 'National aggregators outspend on broad legal head-terms while unoptimized local Albuquerque GBP listings miss out on local 3-pack and Google AI Overview citations.'
@@ -378,7 +446,9 @@ export async function POST(req: Request) {
 
   // Attempt live diagnosis using Gemini Pool
   try {
-    const contextPrompt = isDenton
+    const contextPrompt = isKaty
+      ? `legal market (Tri-county jurisdiction of Harris, Fort Bend, and Waller counties; court venues in Houston, Richmond, and Hempstead; high-intent corridors including I-10 Katy Freeway, SH 99 Grand Parkway, and Westpark Tollway; affluent master-planned communities like Cinco Ranch, Cross Creek Ranch, Firethorne, and neighboring Fulshear; Texas Family Code § 6.301 residency requirements; and competition from downtown Houston mega-firms)`
+      : isDenton
       ? `legal market (Denton County Courthouse-on-the-Square, Denton County Criminal Courts, University of North Texas UNT, Texas Woman's University TWU, student offenses like minor in possession and first DWI, anxious parents searching remotely 3 hours away, Texas Penal Code, and regional DFW mega-firms)`
       : isAlbuquerque
       ? `legal market (Bernalillo County Metropolitan Court, Second Judicial District Court, New Mexico 50/50 community property rules, pure comparative fault, mandatory ignition interlock DWI statutes, bilingual Spanish search intent, and corridors like Nob Hill, North Valley, Westside, Northeast Heights, Rio Rancho, Santa Fe, and Las Cruces)`
