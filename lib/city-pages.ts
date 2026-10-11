@@ -514,8 +514,8 @@ export const CITY_PAGES: CityPage[] = [
         a: "It is usually the strongest opening. Fort Bend household income runs well above the Texas median, so divorces here routinely involve business interests, executive compensation and multiple properties. Competition for those specific terms is much thinner than for general divorce terms.",
       },
       {
-        q: "Should a Sugar Land firm also target Missouri City and Katy?",
-        a: "Yes, on separate pages. They are distinct searches, and a Sugar Land page will not reliably rank for them. Each needs its own content about that community — the same page with the city name changed is exactly the thin-content pattern Google demotes.",
+        q: "What makes law firm SEO in Sugarland effective for Fort Bend practices?",
+        a: "Fort Bend County residents search locally for Sugar Land (often typed as Sugarland), Missouri City and Richmond rather than Houston. Effective Sugar Land law firm SEO focuses on high-asset divorce, business litigation, and Fort Bend County court venues, outranking generic Houston directories.",
       },
     ],
   },

@@ -70,7 +70,31 @@ export function detectProductCategory(name: string, desc: string, categories: an
   if (nameText.includes('wallet') || nameText.includes('money clip') || nameText.includes('keychain') || nameText.includes('lanyard') || nameText.includes('bead') || nameText.includes('scale') || nameText.includes('leverage cap') || nameText.includes('baton') || catNames.includes('gear-bags') || catNames.includes('pens-and-notebooks') || catNames.includes('batons')) {
     return 'edc_accessory';
   }
-  if (nameText.includes('fixed blade') || nameText.includes('full tang') || nameText.includes('dagger') || nameText.includes('boot knife') || nameText.includes('bowie') || nameText.includes('shark master') || nameText.includes('dive knife') || nameText.includes('spear') || catNames.includes('fixed-blade') || catNames.includes('daggers') || catNames.includes('bowies') || catNames.includes('spears')) {
+
+  // Check explicit folding knife signals first before general fixed blade keywords
+  const isExplicitFolder = nameText.includes('button lock') ||
+    nameText.includes('liner lock') ||
+    nameText.includes('frame lock') ||
+    nameText.includes('framelock') ||
+    nameText.includes('slipjoint') ||
+    nameText.includes('slip joint') ||
+    nameText.includes('crossbar') ||
+    nameText.includes('axis lock') ||
+    nameText.includes('folder') ||
+    nameText.includes('folding knife') ||
+    nameText.includes('flipper') ||
+    catNames.includes('locking pocket knives') ||
+    catNames.includes('locking-knives') ||
+    catNames.includes('slipjoint-pocket-knives');
+
+  if (isExplicitFolder) {
+    return 'folding_knife';
+  }
+
+  // Clean catNames without the umbrella "pocket knives & fixed blades for sale"
+  const specificCatNames = catNames.replace(/pocket knives & fixed blades for sale/gi, '').replace(/pocket-knives-fixed-blades/gi, '');
+
+  if (nameText.includes('fixed blade') || nameText.includes('full tang') || nameText.includes('dagger') || nameText.includes('boot knife') || nameText.includes('bowie') || nameText.includes('shark master') || nameText.includes('dive knife') || nameText.includes('spear') || specificCatNames.includes('fixed-blade') || specificCatNames.includes('fixed blade') || specificCatNames.includes('daggers') || specificCatNames.includes('bowies') || specificCatNames.includes('spears')) {
     return 'fixed_blade';
   }
 
@@ -799,9 +823,10 @@ export function sanitizeNarrativeContent(html: string): string {
   // 5. Convert all internal subheadings to semantic H3
   cleaned = cleaned.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/gi, '<h3$1>$2</h3>');
 
-  // 6. Clean leaked style, wrapper divs, and elementor tags
+  // 6. Clean leaked style, wrapper divs, elementor tags, and raw JSON schema leaks
   cleaned = cleaned.replace(/<style[\s\S]*?<\/style>/gi, '');
   cleaned = cleaned.replace(/<div class="elementor[\s\S]*?<\/div>/gi, '');
+  cleaned = cleaned.replace(/(?:<p>)?\s*\{\s*["']@context["']:\s*["']https?:\/\/schema\.org[\s\S]*$/gi, '');
   cleaned = cleaned.replace(/^[\s\S]*?<p>/i, '<p>');
   cleaned = cleaned.replace(/(?:<\/div>\s*)+$/i, '');
 
@@ -1505,13 +1530,15 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
     ? generated.faqs
     : extractFaqsFromHtml(generated.contentHtml);
 
-  // 2. FAQS HTML (Entity-Rich Dynamic H2 + H3 Semantic Hierarchy)
+  // 2. FAQS HTML (Entity-Rich Dynamic H2 + H3 Semantic Hierarchy with Schema.org Microdata)
   let faqsHtml = '';
   if (effectiveFaqs && effectiveFaqs.length > 0) {
     const faqItems = effectiveFaqs.map(f => `
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px 16px; margin-bottom:10px;">
-        <h3 style="font-size:14px; font-weight:700; color:#0f172a; margin:0 0 4px 0; line-height:1.4;">${f.question}</h3>
-        <p style="font-size:12.5px; color:#475569; margin:0; line-height:1.5;">${f.answer}</p>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px 16px; margin-bottom:10px;">
+        <h3 itemprop="name" style="font-size:14px; font-weight:700; color:#0f172a; margin:0 0 4px 0; line-height:1.4;">${f.question}</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text" style="font-size:12.5px; color:#475569; margin:0; line-height:1.5;">${f.answer}</p>
+        </div>
       </div>
     `).join('');
 
@@ -1519,7 +1546,7 @@ export function buildBladeHqLayout(input: BladeHqLayoutInput): {
       <h2 style="font-size:18px; font-weight:800; color:#0f172a; margin:28px 0 12px 0; border-bottom:2px solid #e2e8f0; padding-bottom:6px;">
         ${headings.faqHeading}
       </h2>
-      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
+      <div itemscope itemtype="https://schema.org/FAQPage" style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
         ${faqItems}
       </div>
     `;

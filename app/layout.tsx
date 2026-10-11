@@ -149,6 +149,17 @@ export default function RootLayout({
  
         {/* ✅ Google Tag Manager */}
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+
+        {/* ✅ GA4, loaded directly rather than through the container.
+            GoogleAnalytics was imported here but never rendered, and the container holds no
+            GA4 tag, so Analytics recorded nothing at all — zero users, zero events, for the
+            whole of the last week. Measuring the site should not depend on a tag someone
+            remembered to create inside GTM; this sends the pageviews whatever the container
+            is doing. Rendered only when the id is set, so a missing variable leaves the page
+            clean instead of requesting gtag.js for "undefined". */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
  
         {/* ✅ Meta / Facebook Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">

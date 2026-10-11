@@ -181,9 +181,48 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         }
       : null;
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the latest SEO news in the past 2 days?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Over the past 48 hours, Google officially concluded its September 2026 Spam Update after an extensive 14-day global rollout. The completion triggered an immediate surge in Google Search Console manual actions targeting scaled AI content, alongside new Search Central guidance enforcing element-level human review for metadata and structured data.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the latest Google Search Console news and updates?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Recent Google Search Console developments include widespread manual action notifications for 'Scaled Content Abuse' and 'Pure Spam', ongoing calibration of AI Overview click-through metrics in Performance reports, and enhanced URL Inspection data reflecting Google's tighter spam classification thresholds.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Did Google roll out an algorithm update recently?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Google launched the September 2026 Spam Update on September 24, which concluded on October 8, 2026. This follows the August 2026 Spam Update, marking two major global spam overhauls in under six weeks.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I check if my website received a Google Search Console manual action?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Log into Google Search Console, navigate to the 'Security & Manual Actions' section in the left sidebar, and click 'Manual Actions'. If your property is impacted, Google will display the specific policy violation (such as Scaled Content Abuse or Pure Spam) and the affected URL paths.",
+        },
+      },
+    ],
+  };
+
   return (
     <>
-      {[breadcrumbSchema, collectionSchema].filter(Boolean).map((schema, i) => (
+      {[breadcrumbSchema, collectionSchema, faqSchema].filter(Boolean).map((schema, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
       <NewsClient

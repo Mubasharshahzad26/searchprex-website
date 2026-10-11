@@ -23,6 +23,7 @@ node_modules
 # tsconfig.tsbuildinfo and t.log were committed in 1582d75 by accident.
 *.log
 tsconfig.tsbuildinfo
+*.tsbuildinfo
 live.html
 .tmp-linkfix/
 

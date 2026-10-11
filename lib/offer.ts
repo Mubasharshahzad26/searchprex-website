@@ -42,9 +42,9 @@ export const CALL_CTA = "Prefer to talk? Book a 30-min call";
  * funnel. Keys match the persona ids in components/Hero.tsx.
  */
 export const OFFER_CTA_BY_PERSONA: Record<string, string> = {
-  "law-firm": "Get my free Law Firm Competitor Tear-Down",
-  ecommerce: "Get my free Ecommerce Competitor Tear-Down",
-  local: "Get my free Local SEO Competitor Tear-Down",
+  "law-firm": "See How You Stack Up Against Local Competitors",
+  ecommerce: "Find Your Hidden Revenue Gaps",
+  local: "Check Your Local Visibility Now",
 };
 
 /**

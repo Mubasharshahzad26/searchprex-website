@@ -5,20 +5,29 @@ import DashboardSidebar from "@/components/dashboard/Sidebar";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  let profile = null;
 
-  if (!user) redirect("/login");
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    try {
+      const supabase = await createClient();
+      const { data: { user } } = await supabase.auth.getUser();
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single();
+      if (user) {
+        const { data } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+        profile = data;
+      }
+    } catch {
+      // Ignore Supabase auth fetch errors so /dashboard/links can still render
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#f8f9fa] flex">
-      <DashboardSidebar profile={profile} />
+      {profile && <DashboardSidebar profile={profile} />}
       <main className="flex-1 overflow-auto">
         {children}
       </main>

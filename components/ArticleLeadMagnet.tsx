@@ -143,7 +143,7 @@ export function ErrorState() {
 }
 
 /** Compact vertical card. Replaces the sidebar's old link-only CTA. */
-function SidebarVariant({ source, copy }: { source: string; copy?: Copy }) {
+function SidebarVariant({ source, copy, buttonText }: { source: string; copy?: Copy; buttonText?: string }) {
   const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
 
   return (
@@ -193,7 +193,7 @@ function SidebarVariant({ source, copy }: { source: string; copy?: Copy }) {
             className="w-full rounded-lg py-2.5 text-xs font-bold uppercase tracking-wide text-white disabled:opacity-70"
             style={{ background: GREEN }}
           >
-            {status === "loading" ? "Sending…" : "Send my tear-down →"}
+            {status === "loading" ? "Sending…" : (buttonText ?? "Send my tear-down →")}
           </button>
           {status === "error" ? <ErrorState /> : null}
         </form>
@@ -213,7 +213,7 @@ function SidebarVariant({ source, copy }: { source: string; copy?: Copy }) {
 }
 
 /** Full-width banner, spliced into the article body at its midpoint. */
-function BannerVariant({ source, copy }: { source: string; copy?: Copy }) {
+function BannerVariant({ source, copy, buttonText }: { source: string; copy?: Copy; buttonText?: string }) {
   const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
 
   return (
@@ -272,7 +272,7 @@ function BannerVariant({ source, copy }: { source: string; copy?: Copy }) {
                 className="w-full rounded-lg py-3 text-sm font-bold uppercase tracking-wide text-white disabled:opacity-70"
                 style={{ background: GREEN }}
               >
-                {status === "loading" ? "Sending…" : "Send my tear-down →"}
+                {status === "loading" ? "Sending…" : (buttonText ?? "Send my tear-down →")}
               </button>
               {status === "error" ? <ErrorState /> : null}
             </form>
@@ -284,7 +284,7 @@ function BannerVariant({ source, copy }: { source: string; copy?: Copy }) {
 }
 
 /** Full-width closing section. Replaces the old link-only bottom CTA. */
-function BottomVariant({ source, copy }: { source: string; copy?: Copy }) {
+function BottomVariant({ source, copy, buttonText }: { source: string; copy?: Copy; buttonText?: string }) {
   const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
 
   return (
@@ -334,7 +334,7 @@ function BottomVariant({ source, copy }: { source: string; copy?: Copy }) {
                 className="w-full rounded-xl px-7 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-70"
                 style={{ background: GREEN }}
               >
-                {status === "loading" ? "Sending…" : "Get my free tear-down →"}
+                {status === "loading" ? "Sending…" : (buttonText ?? "Get my free tear-down →")}
               </button>
               {status === "error" ? (
                 <div className="rounded-lg bg-white/10 p-3 text-left">
@@ -362,6 +362,7 @@ export default function ArticleLeadMagnet({
   variant,
   source,
   copy,
+  buttonText,
 }: {
   variant: Variant;
   source: string;
@@ -369,8 +370,9 @@ export default function ArticleLeadMagnet({
    *  Attention line does, so a hub page can speak to "a Google update hit my
    *  site" while an article speaks to what the reader just read. */
   copy?: Copy;
+  buttonText?: string;
 }) {
-  if (variant === "sidebar") return <SidebarVariant source={source} copy={copy} />;
-  if (variant === "banner") return <BannerVariant source={source} copy={copy} />;
-  return <BottomVariant source={source} copy={copy} />;
+  if (variant === "sidebar") return <SidebarVariant source={source} copy={copy} buttonText={buttonText} />;
+  if (variant === "banner") return <BannerVariant source={source} copy={copy} buttonText={buttonText} />;
+  return <BottomVariant source={source} copy={copy} buttonText={buttonText} />;
 }

@@ -25,6 +25,12 @@ export async function middleware(request: NextRequest) {
   const isContentAdminRoute = pathname.startsWith("/content-admin");
   const isCmsRoute = isAdminRoute || isContentAdminRoute;
   const isGatedTool = isGatedRoute(pathname);
+
+  // Allow /dashboard/links (noindex linkbuilding monitor) to open directly like /autopilot and /preview-links
+  if (pathname.startsWith("/dashboard/links")) {
+    return NextResponse.next({ request });
+  }
+
   const isProtectedRoute =
     isCmsRoute || pathname.startsWith("/dashboard") || isGatedTool;
 

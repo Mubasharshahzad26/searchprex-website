@@ -340,10 +340,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Mass Torts",
     slug: "mass-torts",
-    metaTitle: "Mass Tort SEO | Docket-Ready Content",
+    metaTitle: "SEO for Mass Tort Lawyers | Docket-Ready Acquisition",
     metaDescription:
-      "SEO for mass tort firms: content ready when a docket opens, symptom-to-claim search paths, co-counsel pages and compliance-first copy. No ranking promises.",
-    h1: "Mass Tort SEO",
+      "SEO for mass tort lawyers and litigation firms: symptom-to-claim search paths, MDL docket content ready on day one, and AI Overview citations. No ranking promises.",
+    h1: "SEO for Mass Tort Lawyers",
     accent: "for the first weeks of a docket",
     heroSub:
       "Mass tort search is largely settled in the first weeks after a docket opens, and claimants search symptoms long before they search lawsuits. I build the templates, the review process and the pages to publish fast — and there is no published law firm case study yet.",
@@ -365,6 +365,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
         body: "Nobody types their device name plus lawsuit first. They type the symptom, then the device or drug name, then whether it has been recalled, and only then whether anyone is suing. Firms that only target the final query arrive after the claimant has already read someone else's explanation. Mapping the full path from symptom to claim is how you reach them while they are still deciding whether something went wrong.",
       },
       {
+        heading: "Winning Google AI Overviews for Mass Tort Claimants",
+        body: "When prospective plaintiffs search diagnostic questions regarding chemical exposures, defective medical devices, or recall criteria, Google AI Overviews synthesize direct answers from structured, authoritative sources. We structure eligibility dates, injury timelines, and docket milestones into clear semantic blocks that answer engines cite.",
+      },
+      {
         heading: "Other Firms Are Searching Too",
         body: "Much of mass tort volume moves between firms rather than direct from claimants. A page that sets out your co-counsel terms, the case types you accept and the jurisdictions you are admitted in reaches a very small audience with very high value. It also builds the topical signals that help the consumer-facing pages, because a firm other lawyers cite is a firm search engines can place.",
       },
@@ -378,6 +382,10 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       },
     ],
     capsules: [
+      {
+        q: "What makes SEO for mass tort lawyers different from standard personal injury?",
+        a: "Mass tort campaigns target national multidistrict litigation (MDL) dockets rather than single-city map packs. Claimants search symptoms, chemical exposure criteria, and product recalls months before typing lawsuit queries. Effective SEO for mass tort lawyers requires pre-built docket architectures, medical review compliance, citable definitions for Google AI Overviews, and co-counsel referral pages.",
+      },
       {
         q: "How do mass tort firms compete in organic search?",
         a: "By being ready before a docket opens — templates, medical review and structured data in place — so pages publish within days. Then by covering the whole search path, from the symptom to the recall to the lawsuit, and by reaching other firms looking for co-counsel.",

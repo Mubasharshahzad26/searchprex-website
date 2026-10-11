@@ -9,7 +9,7 @@ config({ path: '.env.local' });
 
 const baseUrl = 'https://www.michigansportsoutdoor.com';
 const username = 'apiuser';
-const appPassword = process.env.MSO_WP_PASS || process.env.WP_PASSWORD || 'cvxm Bi7y 6o3y r7HJ M1Wn mSMM';
+const appPassword = (process.env.MSO_WP_PASS || process.env.WP_PASSWORD || (() => { throw new Error('Set MSO_WP_PASS (never hardcode it: this repo is public)'); })());
 const auth = Buffer.from(`${username}:${appPassword}`).toString('base64');
 const headers = {
   Authorization: `Basic ${auth}`,
@@ -19,9 +19,9 @@ const headers = {
 
 const productId = 22695;
 
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // 1. STREAMLINED BUY BOX SHORT DESCRIPTION
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const shortDescription = `
 <div style="margin:4px 0 10px 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
   <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
@@ -41,9 +41,9 @@ const shortDescription = `
   </div>
 </div>`.trim();
 
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // 2. COMPREHENSIVE BLADE HQ FULL DESCRIPTION
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const fullDescription = `
 <link rel="preload" as="image" href="https://www.michigansportsoutdoor.com/wp-content/uploads/2025/10/JKRCN112.jpg" fetchpriority="high" />
 
@@ -200,7 +200,7 @@ const fullDescription = `
         <tbody>
           <tr style="border-bottom:1px solid #f1f5f9;">
             <td style="padding:8px 12px; font-weight:700; width:45%; color:#334155; background:#f8fafc;">Brand:</td>
-            <td style="padding:8px 12px; color:#0f172a;">Joker Knives (Cuchillería Joker)</td>
+            <td style="padding:8px 12px; color:#0f172a;">Joker Knives (CuchillerÃ­a Joker)</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9;">
             <td style="padding:8px 12px; font-weight:700; width:45%; color:#334155; background:#f8fafc;">Model / SKU:</td>
@@ -560,9 +560,9 @@ const fullDescription = `
 </a>
 `.trim();
 
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // 3. RANK MATH SEO METADATA
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const rankMathPayload = {
   rank_math_title: 'Joker Bushcraft Knife Walnut Handle 4" Sandvik 14C28N | MSO',
   rank_math_description: 'Explore the Joker Bushcraft Knife with 4" Sandvik 14C28N stainless steel drop point blade and sculpted walnut handle. Full tang Spanish field knife with leather sheath. Ships fast from Michigan!',
@@ -570,9 +570,9 @@ const rankMathPayload = {
   _mso_stop_update_content: 'yes' // Protect from unintended automated overwrites
 };
 
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // 4. DEPLOYMENT EXECUTION FUNCTION
-// ─────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function deploy() {
   console.log(`Starting SEO - AEO - GEO deployment for Product #${productId}...`);
 
@@ -593,7 +593,7 @@ async function deploy() {
     throw new Error(`WooCommerce update failed with HTTP ${wcRes.status}: ${errorText}`);
   }
   const wcData = await wcRes.json();
-  console.log(`✓ WooCommerce product updated successfully! ID: ${wcData.id}, Slug: ${wcData.slug}`);
+  console.log(`âœ“ WooCommerce product updated successfully! ID: ${wcData.id}, Slug: ${wcData.slug}`);
 
   // 2. Update WP Post Meta for Rank Math directly (guarantees Rank Math reads it)
   console.log('Step 2: Updating WordPress post meta for Rank Math SEO...');
@@ -608,7 +608,7 @@ async function deploy() {
   if (!wpRes.ok) {
     console.warn(`Warning: Direct WP meta update returned HTTP ${wpRes.status}, but WooCommerce meta_data was already set.`);
   } else {
-    console.log('✓ Direct WordPress Rank Math post meta updated successfully!');
+    console.log('âœ“ Direct WordPress Rank Math post meta updated successfully!');
   }
 
   // 3. Verification check
@@ -626,7 +626,7 @@ async function deploy() {
     });
   }
 
-  console.log(`\n🎉 Product ${productId} successfully optimized for SEO, AEO, and GEO!`);
+  console.log(`\nðŸŽ‰ Product ${productId} successfully optimized for SEO, AEO, and GEO!`);
   console.log(`Live URL: ${baseUrl}/product/joker-bushcraft-knife-walnut-handle/`);
 }
 

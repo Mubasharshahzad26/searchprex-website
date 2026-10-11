@@ -12,6 +12,12 @@
       "runtimeExecutable": "C:/Users/MUBASH~1/AppData/Local/Temp/claude/C--Users-Mubashar-Shahzad-Desktop-searchprex-website/cca9b71d-dd84-44c7-91a2-f13133a906fb/scratchpad/nicheseo-dev.cmd",
       "runtimeArgs": [],
       "port": 5173
+    },
+    {
+      "name": "term-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/MUBASH~1/AppData/Local/Temp/claude/C--Users-Mubashar-Shahzad-Desktop-searchprex-website/44e28262-99e9-44ac-951a-ded90e85c1a2/scratchpad/preview-server.mjs"],
+      "port": 5199
     }
   ]
 }

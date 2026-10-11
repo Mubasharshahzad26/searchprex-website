@@ -28,6 +28,7 @@ import ClientLogos from "@/components/ClientLogos";
 import HeroV2 from "@/components/HeroV2";
 import ProofImage from "@/components/ProofImage";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import FreeDomainAuthorityChecker from "@/components/FreeDomainAuthorityChecker";
 import { SMK_REVENUE_METRICS } from "@/components/RevenueProof";
 import { MSO_RECOVERY_PHASES, MSO_REVENUE_STEPS } from "@/components/RecoveryStory";
 import { posts as blogPosts } from "@/app/blog/[slug]/posts";
@@ -435,16 +436,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 · MID FORM */}
-      <section id="mid-audit-form" className="px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-4xl rounded-[2rem] border border-[#dcdaf6] bg-[#f6f5ff] px-6 py-10 text-center sm:px-10">
-          <h2 className={`${H} text-2xl  tracking-tight text-[#0a0f2e] sm:text-3xl`}>Want to know where your site stands?</h2>
-          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#5b6472]">
-            The same checks behind the results above, run on your site and your competitors. Free, written by me.
-          </p>
-          <div className="mt-7">
-            <PillForm source="homepage-mid" cta="Check my site" />
-          </div>
+      {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
+      <section id="free-da-checker" className="px-4 py-16 sm:px-6 bg-[#f7f7fc]/50">
+        <div className="mx-auto max-w-5xl">
+          <FreeDomainAuthorityChecker variant="home" />
         </div>
       </section>
 
