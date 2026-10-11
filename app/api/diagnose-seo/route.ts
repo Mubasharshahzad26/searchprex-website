@@ -96,13 +96,14 @@ export async function POST(req: Request) {
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];
-  const city = body.city || 'Katy';
-  const state = body.state || (city.toLowerCase().includes('katy') || city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
-  const isKaty = city.toLowerCase().includes('katy');
-  const isDenton = !isKaty && city.toLowerCase().includes('denton');
-  const isAlbuquerque = !isKaty && !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
-  const isPhilly = !isKaty && !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
-  const county = body.county || (isKaty ? 'Harris, Fort Bend & Waller Counties' : isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
+  const city = body.city || 'Sugar Land';
+  const state = body.state || (city.toLowerCase().includes('sugar') || city.toLowerCase().includes('katy') || city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
+  const isSugarLand = city.toLowerCase().includes('sugar');
+  const isKaty = !isSugarLand && city.toLowerCase().includes('katy');
+  const isDenton = !isSugarLand && !isKaty && city.toLowerCase().includes('denton');
+  const isAlbuquerque = !isSugarLand && !isKaty && !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
+  const isPhilly = !isSugarLand && !isKaty && !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
+  const county = body.county || (isSugarLand ? 'Fort Bend County' : isKaty ? 'Harris, Fort Bend & Waller Counties' : isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
 
   if (!query && selectedChips.length === 0) {
     return NextResponse.json({
@@ -111,6 +112,65 @@ export async function POST(req: Request) {
       isAiGenerated: false,
     });
   }
+
+  // Sugar Land & Fort Bend fallback rules
+  const SUGAR_LAND_FALLBACKS: Array<{
+    n: string;
+    rx: RegExp;
+    why: string;
+    fix: string;
+    tool: string;
+  }> = [
+    {
+      n: "Trapped in Houston PPC Ad Auction",
+      rx: /ppc|ad|auction|expensive|cpc|google ads|budget|overbilled/i,
+      why: "Houston mega-firms bid Sugar Land and Fort Bend legal keywords up to $200-$350+ per click. Once ad budgets pause, inbound lead generation instantly vanishes.",
+      fix: "Build compounding organic practice silos for Sugar Land and Fort Bend County that permanently capture local searchers without recurring per-click penalties.",
+      tool: "Organic Practice Equity Engine",
+    },
+    {
+      n: "High-Asset Divorce & Asset Division Intent Void",
+      rx: /high asset|divorce|qdro|business valuation|stock|rsu|executive|prenup/i,
+      why: "Sugar Land and First Colony households average $130k+ incomes with substantial retirement, executive stock, and corporate holdings. Generic family law copy fails to answer complex Texas community property and business valuation questions.",
+      fix: "Deploy authoritative high-asset divorce practice hubs addressing QDROs, forensic business valuations, and premarital agreement enforceability under Texas Family Code.",
+      tool: "High-Asset Intent Silo Suite",
+    },
+    {
+      n: "Fort Bend County Court Jurisdiction Disconnect",
+      rx: /fort bend|court|richmond|district court|venue|where to file/i,
+      why: "Cases in Sugar Land are filed at the Fort Bend County Justice Center in Richmond, yet regional Houston competitors publish generic Harris County procedural copy.",
+      fix: "Create Richmond court venue guides explaining Fort Bend district court filing timelines, local standing orders, and judicial procedures.",
+      tool: "Fort Bend Venue Authority Suite",
+    },
+    {
+      n: "Overshadowed by Houston Mega-Firms",
+      rx: /houston|mega|outranked|competitor|downtown|galleria/i,
+      why: "Downtown and Galleria Houston firms hold page one positions purely through legacy domain age, despite having no physical presence or localized content in Sugar Land.",
+      fix: "Displace regional Houston firms using localized schema markup, verified Fort Bend entity signals, and neighborhood-specific pages (First Colony, Riverstone, Sweetwater).",
+      tool: "Local Entity Displacement Suite",
+    },
+    {
+      n: "Not Ranking in the Map Pack for Sugar Land & Suburbs",
+      rx: /map|pack|local|near me|3-pack|gmb|google business/i,
+      why: "Google Business Profiles fail to rank across nearby Missouri City, Stafford, and Richmond due to artificial proximity boundaries.",
+      fix: "Calibrate GBP secondary legal categories, deploy localized review generation workflows, and build dedicated suburban landing pages.",
+      tool: "Fort Bend Geo-Grid Tracker",
+    },
+    {
+      n: "Traffic is low or not growing",
+      rx: /traffic|visitor|clicks|low traffic|stagnant/i,
+      why: "Thin practice pages fail to answer the detailed questions affluent Fort Bend searchers ask, leading to high bounce rates and poor indexation.",
+      fix: "Deploy comprehensive, answer-first practice silos optimized for Google AI Overviews and traditional organic search.",
+      tool: "Crawl & Content Depth Suite",
+    },
+    {
+      n: "Intake Leaks & Unqualified Leads",
+      rx: /intake|lead|qualified|unqualified|calls|phone|slow/i,
+      why: "Inquiries from distant Harris County zip codes or small-claims inquiries waste attorney time without automated venue pre-qualification.",
+      fix: "Implement Whisper call tracking, automated Fort Bend venue qualification, and instant missed-call SMS response.",
+      tool: "Intake Routing & Qualification Suite",
+    },
+  ];
 
   // Katy tri-county fallback rules
   const KATY_FALLBACKS: Array<{
@@ -362,7 +422,17 @@ export async function POST(req: Request) {
     },
   ];
 
-  const activeRules = isKaty ? KATY_FALLBACKS : isDenton ? DENTON_FALLBACKS : isAlbuquerque ? ALBUQUERQUE_FALLBACKS : isPhilly ? PHILLY_FALLBACKS : FALLBACK_RULES;
+  const activeRules = isSugarLand
+    ? SUGAR_LAND_FALLBACKS
+    : isKaty
+    ? KATY_FALLBACKS
+    : isDenton
+    ? DENTON_FALLBACKS
+    : isAlbuquerque
+    ? ALBUQUERQUE_FALLBACKS
+    : isPhilly
+    ? PHILLY_FALLBACKS
+    : FALLBACK_RULES;
 
   // Fallback matching logic
   const matchedFallbacks: DiagnosticItem[] = [];
@@ -398,7 +468,9 @@ export async function POST(req: Request) {
   if (matchedFallbacks.length === 0) {
     matchedFallbacks.push(
       {
-        n: isKaty
+        n: isSugarLand
+          ? 'Houston PPC Ad Auction Treadmill & High-Asset Intent Void'
+          : isKaty
           ? 'Tri-County Venue Confusion & Houston Mega-Firm Displacement'
           : isDenton
           ? 'UNT & TWU Student Intent & DFW Mega-Firm Void'
@@ -407,7 +479,9 @@ export async function POST(req: Request) {
           : isPhilly
           ? 'Neighborhood Intent Fragmentation'
           : 'Traffic & Qualified Leads Disconnect',
-        why: isKaty
+        why: isSugarLand
+          ? `Houston mega-firms drive up PPC ad auctions in ${county} to unsustainable levels, while unoptimized local practices lack high-asset divorce and Fort Bend court silos.`
+          : isKaty
           ? `Katy spans Harris, Fort Bend, and Waller counties. Prospective clients do not know whether their case is heard in Houston, Richmond, or Hempstead, and downtown Houston mega-firms fail to clarify venue while outspending on broad keywords.`
           : isDenton
           ? `Over 60,000 university students and anxious out-of-town parents search in ${county} for student defense, while DFW mega-firms hold page one without a single sentence of Denton County court content.`
@@ -416,7 +490,9 @@ export async function POST(req: Request) {
           : isPhilly
           ? `Philadelphia searchers in ${county} search by specific neighborhood (Center City, Northeast, South Philly) and Pennsylvania statutes, but single generic pages fail to convert.`
           : `Cleveland searchers in ${county} look for specific procedural guidance, but broad pages fail to satisfy search intent or convert visitors into phone calls.`,
-        fix: isKaty
+        fix: isSugarLand
+          ? 'Deploy compounding organic practice silos for Sugar Land, First Colony, and Richmond district court venues with LegalService schema.'
+          : isKaty
           ? 'Architect hyper-local practice silos anchored to Harris, Fort Bend, and Waller County district courts, plus Cinco Ranch and Fulshear community hubs.'
           : isDenton
           ? 'Architect hyper-local practice silos anchored to the Denton County Courthouse-on-the-Square and student defense intake workflows.'
@@ -425,11 +501,19 @@ export async function POST(req: Request) {
           : isPhilly
           ? 'Build hyper-local practice silos anchored to the Philadelphia Court of Common Pleas and deploy Whisper call tracking.'
           : 'Publish answer-first practice silos explaining Ohio court processes, install call tracking with lead attribution, and target suburb corridors.',
-        tool: isKaty ? 'Tri-County Venue & Community Silo Suite' : isDenton ? 'Denton Practice Silo & Parent Intake Suite' : 'Practice Silo & Call Tracking Suite',
+        tool: isSugarLand
+          ? 'Fort Bend High-Asset & Organic Equity Suite'
+          : isKaty
+          ? 'Tri-County Venue & Community Silo Suite'
+          : isDenton
+          ? 'Denton Practice Silo & Parent Intake Suite'
+          : 'Practice Silo & Call Tracking Suite',
       },
       {
         n: 'Local Map Pack & AI Visibility Deficit',
-        why: isKaty
+        why: isSugarLand
+          ? 'Regional Houston directory aggregators capture broad organic positions while unoptimized Sugar Land Town Square listings miss out on local 3-pack and Google AI Overview citations.'
+          : isKaty
           ? 'Downtown Houston directories and regional firms dominate broad organic queries while unoptimized Katy and Cinco Ranch GBP listings suffer from geographic radius drop-off.'
           : isDenton
           ? 'DFW regional directory aggregators capture broad organic positions while unoptimized Denton Square listings miss out on local 3-pack and Google AI Overview citations.'
@@ -446,7 +530,9 @@ export async function POST(req: Request) {
 
   // Attempt live diagnosis using Gemini Pool
   try {
-    const contextPrompt = isKaty
+    const contextPrompt = isSugarLand
+      ? `legal market (Fort Bend County Justice Center in Richmond, Fort Bend County courts, affluent master-planned enclaves like First Colony, Riverstone, Sweetwater, and Avalon; high-asset divorce issues including business valuation, oil & gas executive community property, RSUs, stock options, and QDROs; estate planning and muniment of title under Texas Estates Code; competition from downtown Houston and Galleria ad bidders; and neighboring submarkets like Missouri City, Stafford, and Richmond)`
+      : isKaty
       ? `legal market (Tri-county jurisdiction of Harris, Fort Bend, and Waller counties; court venues in Houston, Richmond, and Hempstead; high-intent corridors including I-10 Katy Freeway, SH 99 Grand Parkway, and Westpark Tollway; affluent master-planned communities like Cinco Ranch, Cross Creek Ranch, Firethorne, and neighboring Fulshear; Texas Family Code § 6.301 residency requirements; and competition from downtown Houston mega-firms)`
       : isDenton
       ? `legal market (Denton County Courthouse-on-the-Square, Denton County Criminal Courts, University of North Texas UNT, Texas Woman's University TWU, student offenses like minor in possession and first DWI, anxious parents searching remotely 3 hours away, Texas Penal Code, and regional DFW mega-firms)`

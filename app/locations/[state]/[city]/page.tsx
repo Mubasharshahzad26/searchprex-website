@@ -38,6 +38,7 @@ import PhiladelphiaWireframeView from "@/components/location-wireframe/philadelp
 import AlbuquerqueWireframeView from "@/components/location-wireframe/albuquerque/AlbuquerqueWireframeView";
 import DentonWireframeView from "@/components/location-wireframe/denton/DentonWireframeView";
 import KatyWireframeView from "@/components/location-wireframe/katy/KatyWireframeView";
+import SugarLandWireframeView from "@/components/location-wireframe/sugar-land/SugarLandWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -280,6 +281,25 @@ export default async function CityPage({
         />
         <main>
           <KatyWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  if (page.stateSlug === "texas" && page.citySlug === "sugar-land") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <SugarLandWireframeView page={page} />
         </main>
       </>
     );
