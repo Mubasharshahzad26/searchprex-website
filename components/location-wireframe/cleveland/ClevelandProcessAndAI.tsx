@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Sparkles, CheckCircle2, ChevronRight, Bot, Search } from "lucide-react";
 
 const STEPS = [
@@ -66,13 +67,13 @@ export default function ClevelandProcessAndAI() {
         
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-            05 · Our process
+            Execution Framework · 6-Step Implementation
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            We start with you, not with keywords
+            Cuyahoga Legal SEO Roadmap: From Intake Gaps to Signed Retainers
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Not traditional SEO. A 6-step roadmap built around your firm's case priorities, the hurdles in your way, and the latest 2026 search signals: verified citations, brand mentions, and Google AI Overviews.
+            A methodical 6-step roadmap built around your firm's case priorities, eliminating intake hurdles, and capturing modern search signals: verified legal citations, local proximity, and Google AI Overviews.
           </p>
         </div>
 
@@ -123,7 +124,11 @@ export default function ClevelandProcessAndAI() {
                 <span>AI Search Prompts We Position Your Firm to Win</span>
               </div>
               <p className="text-xs text-slate-500">
-                Prospective clients now ask LLMs conversational questions. We structure your entity so Google Gemini & ChatGPT cite your attorneys:
+                Prospective clients now ask LLMs conversational questions. We structure your entity through our{" "}
+                <Link href="/ai-search" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+                  AI search optimization framework
+                </Link>{" "}
+                so Google Gemini & ChatGPT cite your attorneys:
               </p>
 
               <div className="space-y-2 pt-1">

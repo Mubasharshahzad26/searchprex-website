@@ -107,7 +107,11 @@ export default function ClevelandAgencyComparison() {
             Confused Between Choosing an SEO Agency in Cleveland? We Help You.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Managing partners in Cuyahoga County receive multiple marketing pitches each week. Evaluating options can feel overwhelming when everyone promises "Page 1 on Google." Here is an objective, transparent breakdown of your choices.
+            Managing partners in Cuyahoga County receive multiple marketing pitches each week. Evaluating options can feel overwhelming when everyone promises "Page 1 on Google." Explore our proven{" "}
+            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+              law firm SEO methodology
+            </Link>{" "}
+            or use this objective breakdown to make an informed decision for your firm.
           </p>
         </div>
 
@@ -124,7 +128,7 @@ export default function ClevelandAgencyComparison() {
             >
               {agency.recommended && (
                 <div className="absolute top-0 right-0 rounded-bl-2xl bg-gradient-to-r from-[#534AB7] to-[#3C3489] px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-sm flex items-center gap-1.5">
-                  <Sparkles className="h-3 w-3 text-amber-300 animate-pulse" />
+                  <Sparkles className="h-3 w-3 text-indigo-200 animate-pulse" />
                   <span>Recommended for Cleveland Firms</span>
                 </div>
               )}
@@ -167,12 +171,12 @@ export default function ClevelandAgencyComparison() {
 
                 {/* Cons */}
                 <div className="mt-5 space-y-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-rose-600 block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
                     The Risks & Limitations:
                   </span>
                   {agency.cons.map((c, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
-                      <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                      <X className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
                       <span>{c}</span>
                     </div>
                   ))}
@@ -247,6 +251,27 @@ export default function ClevelandAgencyComparison() {
               );
             })}
           </div>
+        </div>
+
+        {/* Comparison Callout */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6 text-sm text-slate-700">
+          <p>
+            Ready to review empirical client results? Explore our{" "}
+            <Link href="/case-studies" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+              verified law firm SEO case studies
+            </Link>{" "}
+            or claim a complimentary{" "}
+            <Link href="/free-audit" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+              technical SEO audit
+            </Link>.
+          </p>
+          <Link
+            href="/case-studies"
+            className="inline-flex shrink-0 items-center gap-1.5 font-bold text-[#534AB7] hover:text-[#3C3489]"
+          >
+            <span>Read Case Studies</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
       </div>

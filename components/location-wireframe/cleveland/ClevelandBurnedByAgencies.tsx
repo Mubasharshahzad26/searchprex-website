@@ -15,29 +15,59 @@ import {
   Unlock,
 } from "lucide-react";
 
+import Link from "next/link";
+
 const COMPARISON_TRAPS = [
   {
-    trap: "The 12-Month Lock-In Excuse",
-    theyDo: "Locked your firm into an expensive 12 to 24-month contract, claimed 'SEO takes a year before anything happens,' and collected checks while doing minimal monthly work.",
-    weDo: "Month-to-month partnership. We earn your business every 30 days with transparent milestones starting in your first 30 days.",
+    trap: "The 12-Month Contract Lock-In",
+    theyDo: "Locked your firm into an inflexible 12 to 24-month agreement, claiming legal SEO takes a year before any progress, while billing monthly for minimal technical output.",
+    weDo: (
+      <span>
+        Month-to-month partnership. We earn your retainer every 30 days. You see indexation, ranking movements, and early inquiries within the first 30 to 90 days of our{" "}
+        <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+          law firm SEO sprint
+        </Link>
+        .
+      </span>
+    ),
     icon: Lock,
   },
   {
-    trap: "Vanity Traffic with Zero Phone Calls",
-    theyDo: "Sent automated PDF charts boasting 'thousands of impressions' for national informational queries that never resulted in a single Cuyahoga County client consultation.",
-    weDo: "Whisper call tracking on every line. Your intake coordinator hears 'SearchPrex Legal Inbound' before every call connects. We track signed cases, not empty clicks.",
+    trap: "Vanity Traffic with Zero Inbound Calls",
+    theyDo: "Emailed automated graphs showing thousands of impressions for national legal terms that never produced a single consultation in Cuyahoga County.",
+    weDo: (
+      <span>
+        Whisper call tracking on every campaign line. Your intake team hears "SearchPrex Legal Inbound" before answering. We track real signed cases and consult requests, not hollow clicks.
+      </span>
+    ),
     icon: PhoneCall,
   },
   {
-    trap: "De-Indexed AI Fluff Content",
-    theyDo: "Spammed your website with 50 generic AI articles that Google penalized or de-indexed, and which Google AI Overviews and ChatGPT refuse to cite as legal authorities.",
-    weDo: "Ohio BWC and Cuyahoga County court-aligned procedural guides. Answer-first content structured with llms.txt protocol so AI search models cite your firm as the primary authority.",
+    trap: "De-Indexed AI-Generated Articles",
+    theyDo: "Spammed your blog with 40 generic AI articles that Google demoted, and which generative engines like ChatGPT and Google AI Overviews ignore as authoritative sources.",
+    weDo: (
+      <span>
+        Ohio BWC and Cuyahoga County court-aligned procedural guides. Answer-first content engineered with structured schema and verified citations via our{" "}
+        <Link href="/ai-search" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+          AI search optimization (GEO)
+        </Link>{" "}
+        framework.
+      </span>
+    ),
     icon: FileText,
   },
   {
-    trap: "The Junior Account Manager Bait-and-Switch",
-    theyDo: "You were sold by an impressive agency founder or VP of sales, but the moment you signed, your account was dumped onto a junior intern managing 35 other law firms.",
-    weDo: "Direct CEO strategy with Mubashar Sharif. Every audit, practice silo architecture, and Google Business Profile optimization is overseen personally.",
+    trap: "Junior Account Manager Hand-Off",
+    theyDo: "Pitched by senior executives, then immediately handed off to an entry-level coordinator managing 30+ non-legal clients simultaneously.",
+    weDo: (
+      <span>
+        Direct CEO execution. Mubashar Sharif personally audits your site, directs technical repairs, and optimizes your{" "}
+        <Link href="/services/law-firm-seo/google-business-profile-for-lawyers" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+          Google Business Profile
+        </Link>
+        .
+      </span>
+    ),
     icon: ShieldCheck,
   },
 ];
@@ -54,15 +84,19 @@ export default function ClevelandBurnedByAgencies() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-rose-100 border border-rose-200 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-800 mb-3">
-            <AlertTriangle className="h-4 w-4 text-rose-600" />
-            <span>Accountability & Real Signed Case Attribution</span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 border border-slate-300 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">
+            <ShieldCheck className="h-4 w-4 text-[#534AB7]" />
+            <span>Accountability & Signed Case Attribution</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
-            Didn't Get Results from Your Previous SEO Agency? We Are Here with Real Results.
+            Burned by Previous SEO Agencies? We Deliver Verifiable Signed Cases.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Most managing partners who contact SearchPrex have already spent \$15,000 to \$50,000 on past marketing agencies that delivered nothing but fluff reports and excuses. Here is why your past agency failed—and how SearchPrex replaces empty promises with verifiable signed cases.
+            Most managing partners who reach out to SearchPrex have already spent thousands on previous agencies that delivered traffic reports instead of paying clients. Review our{" "}
+            <Link href="/case-studies" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+              verified law firm case studies
+            </Link>{" "}
+            to see how we replace empty promises with transparent monthly case attribution.
           </p>
         </div>
 
@@ -88,21 +122,21 @@ export default function ClevelandBurnedByAgencies() {
               </div>
 
               {/* What Past Agency Did */}
-              <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-4 mb-4 space-y-1">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-rose-700 flex items-center gap-1.5">
-                  <XCircle className="h-3.5 w-3.5 text-rose-600 shrink-0" />
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 mb-4 space-y-1">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+                  <XCircle className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                   What Past Agencies Did:
                 </span>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {item.theyDo}
                 </p>
               </div>
 
               {/* What SearchPrex Delivers */}
-              <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4 space-y-1">
+              <div className="rounded-2xl border border-[#1a7d59]/30 bg-emerald-50/40 p-4 space-y-1">
                 <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
                   <CheckCircle2 className="h-3.5 w-3.5 text-[#1a7d59] shrink-0" />
-                  How SearchPrex Delivers Real Results:
+                  How SearchPrex Solves It:
                 </span>
                 <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
                   {item.weDo}
@@ -117,26 +151,26 @@ export default function ClevelandBurnedByAgencies() {
           <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-200">
             
             {/* Left: Typical Failed Agency Retainer */}
-            <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 bg-slate-50/50 space-y-4">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-rose-100 px-3 py-1 text-xs font-bold text-rose-700">
-                <XCircle className="h-3.5 w-3.5" />
-                <span>Typical Failed Agency Retainer</span>
+            <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 bg-slate-50/70 space-y-4">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-200/80 px-3 py-1 text-xs font-bold text-slate-700">
+                <XCircle className="h-3.5 w-3.5 text-slate-500" />
+                <span>Typical Agency Retainer</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
-                \$3,000–\$5,000 / mo Burned on Empty Metrics
+                \$3,000–\$5,000 / mo Spent on Vanity Traffic
               </h3>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600">
                 <li className="flex items-start gap-2">
-                  <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
-                  <span><strong>Zero Call Attribution:</strong> Partners have no idea whether incoming calls came from SEO or referrals.</span>
+                  <XCircle className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
+                  <span><strong>Zero Call Tracking:</strong> Partners cannot tell whether inquiries came from SEO, referrals, or billboards.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
-                  <span><strong>Generic Boilerplate:</strong> No differentiation between Ohio Bureau of Workers' Compensation and other states.</span>
+                  <XCircle className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
+                  <span><strong>Generic Out-of-State Content:</strong> Misses Ohio Bureau of Workers' Compensation (BWC) and local court rules.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
-                  <span><strong>Trapped in Contracts:</strong> Penalties of \$10,000+ if you attempt to leave early.</span>
+                  <XCircle className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
+                  <span><strong>12-Month Lock-In:</strong> Massive financial penalties for exiting when performance stalls.</span>
                 </li>
               </ul>
             </div>
@@ -145,23 +179,23 @@ export default function ClevelandBurnedByAgencies() {
             <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-indigo-50/40 via-white to-white space-y-4">
               <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
                 <CheckCircle2 className="h-3.5 w-3.5 text-[#1a7d59]" />
-                <span>The SearchPrex Real Results Standard</span>
+                <span>SearchPrex Accountable Standard</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
-                Verifiable Signed Cases & Month-to-Month Freedom
+                Verifiable Case Attribution & Month-to-Month Flexibility
               </h3>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
-                  <span><strong>Whisper Inbound Audio:</strong> Instant verification that your intake team is speaking to an SEO lead.</span>
+                  <span><strong>Whisper Call Attribution:</strong> Immediate audio confirmation whenever an inbound call originates from organic search.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
-                  <span><strong>Cuyahoga Court Silos:</strong> Targeted landing architecture for Lakewood, Parma, Beachwood & Cleveland.</span>
+                  <span><strong>Cuyahoga Court Silos:</strong> Targeted localized practice silos for Lakewood, Parma, Beachwood, and Downtown Cleveland.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
-                  <span><strong>100% Asset Ownership:</strong> You own all rankings, schema markup, content, and citations permanently.</span>
+                  <span><strong>100% Asset Ownership:</strong> You permanently own your code, content, schema, and citation listings.</span>
                 </li>
               </ul>
             </div>

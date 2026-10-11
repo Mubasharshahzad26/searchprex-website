@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Target, AlertCircle, Compass, CheckCircle, Sparkles } from "lucide-react";
 
 const GOALS = [
@@ -47,10 +48,14 @@ export default function ClevelandGrowthGoals() {
             02 · How you want to grow
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            What is your growth goal for the next 12 months?
+            Cleveland Law Practice Growth: 12-Month Strategic Objectives
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Select your firm's primary objective to see how SearchPrex navigates the local hurdle and builds a reliable pipeline:
+            Select your firm's primary objective to see how our{" "}
+            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+              law firm SEO strategy
+            </Link>{" "}
+            navigates local competition and builds a consistent case pipeline:
           </p>
         </div>
 
@@ -97,10 +102,10 @@ export default function ClevelandGrowthGoals() {
           </div>
 
           {/* Card 2: Likely Hurdle */}
-          <div className="group relative rounded-3xl border-2 border-slate-200 bg-rose-50/40 p-7 shadow-xs hover:shadow-xl hover:shadow-rose-500/10 hover:border-rose-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+          <div className="group relative rounded-3xl border-2 border-slate-200 bg-slate-50/90 p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-600 mb-3">
-                <AlertCircle className="h-4 w-4 text-rose-600 group-hover:scale-110 transition-transform" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
+                <AlertCircle className="h-4 w-4 text-slate-500 group-hover:scale-110 transition-transform" />
                 <span>Cuyahoga County Hurdle</span>
               </div>
               <h3 className="text-lg font-bold text-[#0a0f2e]">
@@ -110,8 +115,8 @@ export default function ClevelandGrowthGoals() {
                 {current.hurdle}
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-rose-100 text-xs font-semibold text-rose-500">
-              Bottleneck Identified
+            <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-500">
+              Market Challenge Addressed
             </div>
           </div>
 

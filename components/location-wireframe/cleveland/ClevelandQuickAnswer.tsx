@@ -17,7 +17,7 @@ export default function ClevelandQuickAnswer() {
         </div>
 
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#0a0f2e]">
-          What is law firm SEO in Cleveland?
+          Cleveland Law Firm SEO: Definition, Scope & Local Case Attribution
         </h2>
 
         <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-700">

@@ -89,7 +89,7 @@ export default function ClevelandRealityCheckForm() {
                 <span>YOUR GROWTH PRIORITIES & REVENUE TARGETS</span>
               </div>
               <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-75">
-                <span className="text-rose-500 font-bold">+</span>
+                <span className="text-slate-500 font-bold">+</span>
                 <span>YOUR TOP 3 CUYAHOGA COUNTY VISIBILITY HURDLES</span>
               </div>
               <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-150">
@@ -224,7 +224,9 @@ export default function ClevelandRealityCheckForm() {
                   </div>
 
                   {errorMsg && (
-                    <p className="text-xs font-bold text-rose-600">{errorMsg}</p>
+                    <div className="rounded-xl border border-slate-300 bg-slate-100 p-3 text-xs font-semibold text-slate-800">
+                      {errorMsg}
+                    </div>
                   )}
 
                   <button

@@ -72,10 +72,14 @@ export default function ClevelandPricingTiers() {
             07 · What you pay
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Three engagements, no long contract
+            Cleveland Law Firm SEO Pricing: Flexible Month-to-Month Engagements
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Compared with Google Ads PPC, where you pay inflated click costs plus agency fees and inquiries halt the moment you pause spend—our engagements are 100% month-to-month, building digital assets you own forever.
+            Unlike traditional agencies that demand rigid 12-month lock-ins, our{" "}
+            <a href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+              law firm SEO services
+            </a>{" "}
+            are 100% month-to-month. Every dollar builds compounding digital equity your practice owns forever:
           </p>
         </div>
 
@@ -91,8 +95,8 @@ export default function ClevelandPricingTiers() {
               }`}
             >
               {tier.badge && (
-                <div className="absolute -top-3.5 left-8 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-extrabold text-white shadow-md flex items-center gap-1.5 animate-pulse">
-                  <Sparkles className="h-3 w-3 text-amber-300" />
+                <div className="absolute -top-3.5 left-8 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-extrabold text-white shadow-md flex items-center gap-1.5">
+                  <Sparkles className="h-3 w-3 text-indigo-200" />
                   <span>{tier.badge}</span>
                 </div>
               )}

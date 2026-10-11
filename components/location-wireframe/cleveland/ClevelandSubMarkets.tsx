@@ -79,10 +79,10 @@ export default function ClevelandSubMarkets() {
         {/* Coverage Header */}
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-            08 · Cleveland coverage
+            Cuyahoga County Geographic Coverage
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Built for Cuyahoga County, suburb by suburb
+            Cleveland Metro Law Firm SEO: Programmatic Suburb & Court Silos
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             A single Downtown Cleveland landing page will not reliably trigger Google's 3-pack or AI search across the suburbs. We architect hyper-localized silos anchored by local courts and municipal jurisdictions.

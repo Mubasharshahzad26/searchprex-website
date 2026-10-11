@@ -37,13 +37,13 @@ export default function ClevelandFourPillars() {
         
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-            01 · What you actually want
+            Core Performance Standards
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Four things Cleveland attorneys ask us for
+            Four Foundational Pillars Cleveland Law Firms Require
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Before we talk technical architecture, we align with what a solo practitioner or a partner-track firm needs to feel completely safe investing in SEO.
+            Before discussing technical code architecture, we align with the financial and operational outcomes required to make law firm SEO completely predictable.
           </p>
         </div>
 

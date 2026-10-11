@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { DollarSign, Calendar, TrendingDown, ArrowRight, Sparkles } from "lucide-react";
 
+import Link from "next/link";
+
 const PPC_BUDGETS = [3000, 6000, 10000];
 const SEO_BUDGETS = [1500, 3000, 5000];
 const MONTHS_OPTIONS = [12, 24, 36];
@@ -30,15 +32,19 @@ export default function ClevelandCostLedger() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 border border-white/10 mb-2">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>04 · The cost ledger</span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#EEEDFE] border border-white/15 mb-2">
+            <Sparkles className="h-3.5 w-3.5 text-indigo-300" />
+            <span>04 · The Cost Ledger</span>
           </div>
           <h2 className="!text-white mt-1 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            What you pay over time: PPC vs SEO
+            Law Firm Budget Forecast: PPC vs. Compounding SEO
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-300">
-            Pick your current monthly budgets and comparison timeline. This compares cumulative capital spend and asset retention across your investment horizon.
+            Compare cumulative spend and long-term asset equity across 12, 24, and 36-month horizons. Learn why firms shift ad spend to{" "}
+            <Link href="/services/law-firm-seo" className="font-semibold text-indigo-300 underline hover:text-white">
+              high-retention law firm SEO
+            </Link>
+            .
           </p>
         </div>
 
@@ -62,8 +68,8 @@ export default function ClevelandCostLedger() {
                       onClick={() => setPpcBudget(amt)}
                       className={`rounded-xl py-3 px-2 text-xs sm:text-sm font-extrabold transition-all duration-200 text-center cursor-pointer ${
                         isSelected
-                          ? "bg-amber-400 text-[#0a0f2e] shadow-lg shadow-amber-400/25 scale-[1.02] ring-2 ring-amber-300"
-                          : "border border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-500 hover:bg-slate-750"
+                          ? "bg-slate-200 text-[#0a0f2e] shadow-lg scale-[1.02] ring-2 ring-white"
+                          : "border border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-500"
                       }`}
                     >
                       {formatCurrency(amt)}/mo
@@ -88,7 +94,7 @@ export default function ClevelandCostLedger() {
                       className={`rounded-xl py-3 px-2 text-xs sm:text-sm font-extrabold transition-all duration-200 text-center cursor-pointer ${
                         isSelected
                           ? "bg-[#534AB7] text-white shadow-lg shadow-[#534AB7]/40 scale-[1.02] ring-2 ring-indigo-400"
-                          : "border border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-500 hover:bg-slate-750"
+                          : "border border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-500"
                       }`}
                     >
                       {formatCurrency(amt)}/mo
@@ -143,13 +149,13 @@ export default function ClevelandCostLedger() {
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm">
                 <span className="font-bold text-slate-300">Google Ads (PPC Cumulative):</span>
-                <span className="font-mono text-base font-extrabold text-amber-400">
+                <span className="font-mono text-base font-extrabold text-slate-300">
                   {formatCurrency(ppcTotal)}
                 </span>
               </div>
               <div className="h-6 w-full rounded-xl bg-slate-800 overflow-hidden p-1 border border-slate-700/60">
                 <div
-                  className="h-full rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 transition-all duration-700 ease-out shadow-sm shadow-amber-400/20"
+                  className="h-full rounded-lg bg-gradient-to-r from-slate-500 to-slate-400 transition-all duration-700 ease-out shadow-sm"
                   style={{ width: `${ppcPercent}%` }}
                 />
               </div>
@@ -159,7 +165,7 @@ export default function ClevelandCostLedger() {
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm">
                 <span className="font-bold text-slate-300">SearchPrex SEO (Asset Cumulative):</span>
-                <span className="font-mono text-base font-extrabold text-indigo-400">
+                <span className="font-mono text-base font-extrabold text-indigo-300">
                   {formatCurrency(seoTotal)}
                 </span>
               </div>
@@ -176,15 +182,15 @@ export default function ClevelandCostLedger() {
               <p className="text-sm font-semibold text-slate-200">
                 {diff > 0 ? (
                   <span className="text-emerald-400">
-                    At these chosen budgets, SEO spend is {formatCurrency(diff)} lower over {months} months — while building equity you retain permanently.
+                    At these chosen budgets, SEO spend is {formatCurrency(diff)} lower over {months} months — while constructing digital equity your firm retains permanently.
                   </span>
                 ) : diff < 0 ? (
                   <span>
-                    At these budgets, SEO costs {formatCurrency(-diff)} more. It pays off when compounding organic cases exceed initial ad returns.
+                    At these budgets, SEO costs {formatCurrency(-diff)} more initially. It compounds as permanent organic cases displace ongoing per-click auctions.
                   </span>
                 ) : (
                   <span>
-                    Equal dollar spend. The decisive question is which channel continues generating signed cases after you stop paying.
+                    Equal dollar spend. The decisive factor is whether visibility stops or compounds when ongoing spend is reduced.
                   </span>
                 )}
               </p>
@@ -192,16 +198,16 @@ export default function ClevelandCostLedger() {
 
             {/* Comparative After-Effect Blocks with hover lift */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 space-y-1 hover:border-amber-400/60 hover:-translate-y-1 transition-all duration-300">
-                <span className="text-xs uppercase font-bold text-amber-400 block">After PPC budget stops:</span>
+              <div className="rounded-2xl border border-slate-700 bg-slate-800/60 p-4 space-y-1 hover:border-slate-500 hover:-translate-y-1 transition-all duration-300">
+                <span className="text-xs uppercase font-bold text-slate-400 block">When PPC spend ends:</span>
                 <p className="text-sm font-bold text-white">Inbound leads halt immediately.</p>
-                <p className="text-xs text-slate-300">Zero residual presence in Google Search or Maps.</p>
+                <p className="text-xs text-slate-400">Zero residual presence in Google Search or Google Maps.</p>
               </div>
 
               <div className="rounded-2xl border border-[#534AB7]/50 bg-[#534AB7]/20 p-4 space-y-1 hover:border-[#534AB7] hover:-translate-y-1 transition-all duration-300">
-                <span className="text-xs uppercase font-bold text-indigo-300 block">After SEO engagement stops:</span>
-                <p className="text-sm font-bold text-white">Pages, Map Pack & citations stay.</p>
-                <p className="text-xs text-slate-300">Established organic domain authority continues working.</p>
+                <span className="text-xs uppercase font-bold text-indigo-300 block">When SEO foundation matures:</span>
+                <p className="text-sm font-bold text-white">Pages, 3-Pack & citations remain yours.</p>
+                <p className="text-xs text-slate-300">Domain authority continues generating signed cases.</p>
               </div>
             </div>
 

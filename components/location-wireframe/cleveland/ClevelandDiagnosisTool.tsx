@@ -289,7 +289,7 @@ export default function ClevelandDiagnosisTool() {
               </div>
             )}
 
-            {/* Diagnostic Cards Grid with animated hover effects */}
+              {/* Diagnostic Cards Grid with animated hover effects */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {items.map((item, idx) => (
                 <div
@@ -305,28 +305,28 @@ export default function ClevelandDiagnosisTool() {
                     </div>
 
                     <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-rose-600 flex items-center gap-1.5 mb-1.5">
-                        <AlertTriangle className="h-3.5 w-3.5" />
-                        <span>Probable Cause</span>
+                      <div className="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5 mb-1.5">
+                        <AlertTriangle className="h-3.5 w-3.5 text-slate-500" />
+                        <span>Technical Bottleneck</span>
                       </div>
-                      <p className="text-sm text-slate-700 leading-relaxed bg-rose-50/60 p-3.5 rounded-xl border border-rose-100">
+                      <p className="text-sm text-slate-700 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-200">
                         {item.why}
                       </p>
                     </div>
 
                     <div>
                       <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 mb-1.5">
-                        <Wrench className="h-3.5 w-3.5" />
-                        <span>Our SearchPrex Fix</span>
+                        <Wrench className="h-3.5 w-3.5 text-[#1a7d59]" />
+                        <span>SearchPrex Strategic Fix</span>
                       </div>
-                      <p className="text-sm text-slate-700 leading-relaxed bg-emerald-50/60 p-3.5 rounded-xl border border-emerald-100">
+                      <p className="text-sm text-slate-800 leading-relaxed bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-200/60 font-medium">
                         {item.fix}
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-500">Software we add:</span>
+                    <span className="font-semibold text-slate-500">Software stack:</span>
                     <span className="rounded-lg bg-[#EEEDFE] px-2.5 py-1 font-bold text-[#534AB7] shadow-2xs">
                       {item.tool}
                     </span>
@@ -336,36 +336,36 @@ export default function ClevelandDiagnosisTool() {
             </div>
 
             {/* 7-DAY FREE TRIAL LEAD FORM CARD with glass & animated shine */}
-            <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-indigo-950 via-[#0a0f2e] to-slate-950 p-6 sm:p-10 text-white shadow-2xl transition-all duration-300 hover:shadow-indigo-900/30">
+            <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-[#534AB7]/50 bg-[#0a0f2e] p-6 sm:p-10 text-white shadow-2xl transition-all duration-300">
               
               {/* Subtle animated background radial glow */}
-              <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-[#534AB7]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-[#534AB7]/25 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white mb-3 shadow-md">
-                  <Sparkles className="h-3.5 w-3.5 text-amber-300" />
-                  <span>Recommended Solution for Your Firm</span>
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#EEEDFE] border border-white/15 mb-3">
+                  <Sparkles className="h-3.5 w-3.5 text-indigo-300" />
+                  <span>Complimentary Cleveland Legal Audit</span>
                 </div>
 
                 <h3 className="!text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-                  The Complete Package, with a 7-Day Free Trial
+                  Full Implementation Plan with a 7-Day Trial
                 </h3>
 
                 <p className="mt-3 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-                  One full-service package engineered around your diagnosis, plus the law firm intake tools that convert calls into retained clients. Take seven days to see it working before you decide anything.
+                  Engineered around your firm's specific practice bottlenecks, plus call tracking and client intake tools to capture high-value inquiries.
                 </p>
 
                 {/* 2-Column deliverables breakdown */}
                 <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                   <div className="hover:bg-white/5 p-3 rounded-xl transition-colors">
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-amber-300 mb-3 flex items-center gap-2">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-[#EEEDFE] mb-3 flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                       Included in the 7-day trial
                     </h4>
                     <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-400 font-bold">✓</span>
-                        <span>Full site, Google Business Profile, citation and AI visibility audit</span>
+                        <span>Full website, Google Business Profile, citation and AI visibility audit</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-400 font-bold">✓</span>
@@ -373,11 +373,11 @@ export default function ClevelandDiagnosisTool() {
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-400 font-bold">✓</span>
-                        <span>Quick-win technical and schema fixes started within the 7 days</span>
+                        <span>Quick-win technical and schema fixes initiated within the 7 days</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-400 font-bold">✓</span>
-                        <span>Dashboard preview and transparent weekly report templates</span>
+                        <span>Transparent weekly report templates and live ranking verification</span>
                       </li>
                     </ul>
                   </div>
@@ -410,7 +410,7 @@ export default function ClevelandDiagnosisTool() {
 
                 {/* No risk reassurance */}
                 <p className="mt-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  <strong className="text-white">7 days free. No credit card required. No auto-charge.</strong> You keep the comprehensive audit either way. Seven days will not move rankings, which take months and are never guaranteed. The trial gives you the diagnosis, the first fixes, and the tools, so you can judge us on substance.
+                  <strong className="text-white">7 days free. No credit card required. No auto-charge.</strong> You retain the full audit findings regardless.
                 </p>
 
                 {/* Form or success state */}
@@ -434,7 +434,7 @@ export default function ClevelandDiagnosisTool() {
                             value={trialName}
                             onChange={(e) => setTrialName(e.target.value)}
                             placeholder="e.g. Attorney Jane Smith"
-                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30 transition-all"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30 transition-all"
                           />
                         </div>
 
@@ -446,7 +446,7 @@ export default function ClevelandDiagnosisTool() {
                             value={trialWebsite}
                             onChange={(e) => setTrialWebsite(e.target.value)}
                             placeholder="e.g. smithinjurycleveland.com"
-                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30 transition-all"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30 transition-all"
                           />
                         </div>
 
@@ -458,30 +458,30 @@ export default function ClevelandDiagnosisTool() {
                             value={trialEmail}
                             onChange={(e) => setTrialEmail(e.target.value)}
                             placeholder="e.g. jane@smithinjurycleveland.com"
-                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30 transition-all"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30 transition-all"
                           />
                         </div>
                       </div>
 
                       {trialError && (
-                        <p className="text-xs font-bold text-rose-400">{trialError}</p>
+                        <p className="text-xs font-bold text-slate-300">{trialError}</p>
                       )}
 
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                         <button
                           type="submit"
                           disabled={submittingTrial}
-                          className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#0a0f2e] font-extrabold px-8 py-4 text-base shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 cursor-pointer"
+                          className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-[#0a0f2e] font-extrabold px-8 py-4 text-base shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 cursor-pointer"
                         >
                           {submittingTrial ? (
                             <>
-                              <Loader2 className="h-5 w-5 animate-spin" />
+                              <Loader2 className="h-5 w-5 animate-spin text-[#534AB7]" />
                               <span>Starting trial...</span>
                             </>
                           ) : (
                             <>
-                              <span>Start my 7-day free trial</span>
-                              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                              <span>Start 7-Day Free Trial</span>
+                              <ArrowRight className="h-4 w-4 text-[#534AB7] transition-transform duration-200 group-hover:translate-x-1" />
                             </>
                           )}
                         </button>

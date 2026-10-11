@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Clock, CheckCircle2, TrendingUp, BarChart4 } from "lucide-react";
 
 const DURATIONS = [
@@ -44,13 +45,13 @@ export default function ClevelandDurationResults() {
         
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-            06 · What we produced, and how fast
+            Campaign Progression & Milestones
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Results by duration: The compounding timeline
+            Cleveland SEO Performance Timeline: 30, 90, 180 & 365-Day Benchmarks
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Pick a milestone in the engagement to see the exact deliverables we execute and what gets documented in your monthly performance ledger.
+            Select a milestone below to inspect exact technical deliverables executed and the concrete metrics logged into your monthly client ledger.
           </p>
         </div>
 
@@ -132,8 +133,11 @@ export default function ClevelandDurationResults() {
             </table>
           </div>
 
-          <div className="p-4 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
-            * Benchmark averages derived from multi-location personal injury and litigation campaigns. Performance is tracked and audited monthly.
+          <div className="p-4 bg-slate-50 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <span>* Benchmark averages derived from litigation campaigns. Performance tracked and audited monthly.</span>
+            <Link href="/case-studies" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+              Explore verified case study results →
+            </Link>
           </div>
         </div>
 

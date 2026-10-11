@@ -41,10 +41,10 @@ export default function ClevelandKeywordCluster() {
         
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-            Legal keywords and semantics
+            Semantic Authority & Statutory Entities
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Law Firm SEO Keywords for Cleveland: The Legal Topics Google Expects
+            Cleveland Legal Keyword Clusters: Statutory Entities Google AI Rewards
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Google's Helpful Content System and AI search tools judge a Cleveland landing page by whether it accurately covers the statutory concepts Ohio residents search, reinforced by local modifiers like Cuyahoga County and suburban courts.

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Scale, ShieldCheck, CheckCircle2, FileText, ChevronRight, Sparkles } from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
@@ -87,7 +88,11 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
             </h1>
 
             <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              Cleveland attorneys do not buy hype. They buy results they can audit. We build search visibility that earns signed cases across Cuyahoga County, then show you every number behind it in a monthly ledger.
+              Cleveland attorneys do not buy hype. They buy results they can audit. We build dedicated{" "}
+              <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+                law firm SEO
+              </Link>{" "}
+              that earns signed cases across Cuyahoga County, then show you every number behind it in a monthly ledger.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">

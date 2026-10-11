@@ -53,13 +53,17 @@ export default function ClevelandEmotionalIntent() {
         
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-            What your prospective clients feel
+            09 · Client Psychological Intent
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Behind Every Cleveland Search Is a Real Person Under Pressure
+            Client Search Intent: Converting High-Pressure Legal Inquiries
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Cleveland clients searching after a workplace accident or an OVI arrest are worried about income and reputation. They don't want aggressive agency marketing—they seek calm, authoritative legal guidance.
+            Cleveland residents searching after a workplace accident or an urgent legal dispute seek clear authority and rapid resolution. Learn how our{" "}
+            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+              legal content architecture
+            </Link>{" "}
+            converts distressed searchers into retained clients.
           </p>
         </div>
 
@@ -87,11 +91,11 @@ export default function ClevelandEmotionalIntent() {
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: What they feel */}
-          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-rose-500/10 hover:border-rose-300 hover:-translate-y-1.5 transition-all duration-300">
-            <span className="text-xs font-bold uppercase tracking-wider text-rose-600 block mb-2">
+          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
               Emotional State
             </span>
-            <h4 className="text-base font-bold text-[#0a0f2e] mb-2 group-hover:text-rose-600 transition-colors">
+            <h4 className="text-base font-bold text-[#0a0f2e] mb-2 group-hover:text-[#534AB7] transition-colors">
               What They Feel
             </h4>
             <p className="text-sm text-slate-700 leading-relaxed">

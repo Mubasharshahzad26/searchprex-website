@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   MapPin,
   Users,
@@ -108,8 +109,8 @@ export default function ClevelandDemographyMap() {
             <p className="mt-1 text-xs text-slate-500">Targeted Map Pack proximity grid per practice</p>
           </div>
 
-          <div className="group relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-amber-400">
-            <div className="flex items-center gap-2 text-slate-400 group-hover:text-amber-500 transition-colors mb-2">
+          <div className="group relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-[#534AB7]">
+            <div className="flex items-center gap-2 text-slate-400 group-hover:text-[#534AB7] transition-colors mb-2">
               <TrendingUp className="h-4 w-4" />
               <span className="text-xs font-bold uppercase tracking-wider">High-Intent Traffic</span>
             </div>
@@ -202,7 +203,7 @@ export default function ClevelandDemographyMap() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                 <div className="absolute bottom-3 left-4 right-4 text-white">
-                  <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-amber-300">
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-indigo-200">
                     Downtown Anchor Venue
                   </span>
                   <h4 className="text-sm sm:text-base font-bold">
@@ -212,7 +213,11 @@ export default function ClevelandDemographyMap() {
               </div>
               <div className="p-4 sm:p-5">
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Located in the heart of Downtown Cleveland, the Justice Center processes Ohio's highest civil claim volume. We align your practice page citations with local court rules and judicial clerk protocols.
+                  Located in the heart of Downtown Cleveland, the Justice Center processes Ohio's highest civil claim volume. We align your practice page citations with local court rules and judicial clerk protocols. Learn about our{" "}
+                  <Link href="/services/local-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+                    local geofenced SEO setup
+                  </Link>
+                  .
                 </p>
               </div>
             </div>

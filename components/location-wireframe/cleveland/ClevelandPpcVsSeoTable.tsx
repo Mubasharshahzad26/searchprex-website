@@ -58,10 +58,14 @@ export default function ClevelandPpcVsSeoTable() {
             03 · Why SEO instead of PPC
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Why Cleveland firms move budget from PPC to SEO
+            Cleveland Legal Marketing: Google Ads (PPC) vs. Organic Law Firm SEO
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            PPC rents fleeting visibility. SEO constructs enduring digital assets you own. Here is how that fundamental difference impacts your firm's balance sheet:
+            PPC rents temporary clicks in volatile auctions. Our{" "}
+            <a href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+              modern law firm SEO
+            </a>{" "}
+            builds permanent digital authority across Cuyahoga County courts that your practice owns forever:
           </p>
         </div>
 
@@ -79,7 +83,7 @@ export default function ClevelandPpcVsSeoTable() {
                   </th>
                   <th className="py-4.5 px-6 text-sm font-extrabold text-white bg-gradient-to-r from-[#534AB7] to-[#3C3489] w-1/3">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-amber-300 animate-pulse" />
+                      <Sparkles className="h-4 w-4 text-indigo-200" />
                       <span>SearchPrex Legal SEO</span>
                     </div>
                   </th>

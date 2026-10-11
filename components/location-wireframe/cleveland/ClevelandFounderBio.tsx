@@ -24,7 +24,7 @@ export default function ClevelandFounderBio() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent lg:hidden" />
               <div className="absolute bottom-4 left-4 right-4 text-white lg:hidden">
-                <span className="font-mono text-xs uppercase text-amber-300 font-bold">
+                <span className="font-mono text-xs uppercase text-indigo-200 font-bold">
                   CEO & Principal Strategist
                 </span>
                 <h4 className="text-lg font-bold">Mubashar Sharif</h4>
