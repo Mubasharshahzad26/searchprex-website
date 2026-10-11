@@ -96,14 +96,15 @@ export async function POST(req: Request) {
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];
-  const city = body.city || 'Sugar Land';
-  const state = body.state || (city.toLowerCase().includes('sugar') || city.toLowerCase().includes('katy') || city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
-  const isSugarLand = city.toLowerCase().includes('sugar');
-  const isKaty = !isSugarLand && city.toLowerCase().includes('katy');
-  const isDenton = !isSugarLand && !isKaty && city.toLowerCase().includes('denton');
-  const isAlbuquerque = !isSugarLand && !isKaty && !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
-  const isPhilly = !isSugarLand && !isKaty && !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
-  const county = body.county || (isSugarLand ? 'Fort Bend County' : isKaty ? 'Harris, Fort Bend & Waller Counties' : isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
+  const city = body.city || 'The Woodlands';
+  const state = body.state || (city.toLowerCase().includes('woodlands') || city.toLowerCase().includes('sugar') || city.toLowerCase().includes('katy') || city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
+  const isWoodlands = city.toLowerCase().includes('woodlands');
+  const isSugarLand = !isWoodlands && city.toLowerCase().includes('sugar');
+  const isKaty = !isWoodlands && !isSugarLand && city.toLowerCase().includes('katy');
+  const isDenton = !isWoodlands && !isSugarLand && !isKaty && city.toLowerCase().includes('denton');
+  const isAlbuquerque = !isWoodlands && !isSugarLand && !isKaty && !isDenton && (city.toLowerCase().includes('albuquerque') || state.toLowerCase().includes('mexico'));
+  const isPhilly = !isWoodlands && !isSugarLand && !isKaty && !isDenton && !isAlbuquerque && (city.toLowerCase().includes('phila') || state.toLowerCase().includes('penn'));
+  const county = body.county || (isWoodlands ? 'Montgomery & Harris Counties' : isSugarLand ? 'Fort Bend County' : isKaty ? 'Harris, Fort Bend & Waller Counties' : isDenton ? 'Denton County' : isAlbuquerque ? 'Bernalillo County' : isPhilly ? 'Philadelphia County' : 'Cuyahoga County');
 
   if (!query && selectedChips.length === 0) {
     return NextResponse.json({
@@ -112,6 +113,65 @@ export async function POST(req: Request) {
       isAiGenerated: false,
     });
   }
+
+  // The Woodlands & Montgomery County fallback rules
+  const WOODLANDS_FALLBACKS: Array<{
+    n: string;
+    rx: RegExp;
+    why: string;
+    fix: string;
+    tool: string;
+  }> = [
+    {
+      n: "Unincorporated Township & County Venue Split",
+      rx: /township|unincorporated|conroe|montgomery|creekside|venue|jurisdiction|where to file/i,
+      why: "The Woodlands is not an incorporated city. Over 90% is in Montgomery County (court in Conroe), while Creekside Park is in Harris County (court in downtown Houston). Generic Houston pages fail to guide searchers to the right bench.",
+      fix: "Deploy Montgomery and Harris county venue guides detailing Conroe district court filing protocols and Creekside Park jurisdictional boundaries.",
+      tool: "Montgomery & Harris Venue Silo Suite",
+    },
+    {
+      n: "Village Search Intent Fragmentation",
+      rx: /village|alden bridge|sterling ridge|creekside|cochran|panther creek|grogan/i,
+      why: "Woodlands residents search by their specific village (Alden Bridge, Sterling Ridge, Creekside Park). When firms lump all queries onto a generic page, Google awards rankings to neighborhood-specific competitors.",
+      fix: "Engineer dedicated village landing pages with authentic neighborhood boundaries, school district zoning (Conroe ISD vs Tomball ISD), and executive wealth topics.",
+      tool: "Woodlands Village Indexer",
+    },
+    {
+      n: "AI Search & Referral Network Invisibility",
+      rx: /referral|word of mouth|ai|chatgpt|perplexity|ai overview|citation/i,
+      why: "In an affluent referral-driven market like The Woodlands, prospective clients cross-reference personal attorney recommendations against Google AI Overviews and ChatGPT.",
+      fix: "Author answer-first statutory content, deploy LegalService & FAQPage schemas, and publish an llms.txt file to secure generative AI recommendations.",
+      tool: "AI Referral & Entity Citation Engine",
+    },
+    {
+      n: "Overshadowed by North Houston & Mega-Firms",
+      rx: /houston|mega|spring|outranked|competitor|big firm/i,
+      why: "Regional Houston mega-firms dominate broad legal queries on domain authority, despite having no physical address or local community roots in The Woodlands.",
+      fix: "Displace regional giants with hyper-local Woodlands Town Center entity signals, local court filing benchmarks, and verified client review workflows.",
+      tool: "Local Entity Displacement Engine",
+    },
+    {
+      n: "High-Asset Estate & Executive Wealth Intent Void",
+      rx: /estate|trust|probate|executive|oil and gas|rsu|high asset|will|wealth/i,
+      why: "With median household incomes exceeding $145k+, Woodlands residents seek counsel for corporate succession, Texas revocable living trusts, and muniment of title. Generic copy fails to earn their trust.",
+      fix: "Deploy authoritative wealth preservation and Texas Estates Code silos addressing oil & gas royalties, business succession, and Conroe probate procedures.",
+      tool: "Executive Estate & Asset Protection Suite",
+    },
+    {
+      n: "Traffic is low or not growing",
+      rx: /traffic|visitor|clicks|low traffic|stagnant/i,
+      why: "Thin location pages fail to satisfy search intent for nuanced Texas estate, divorce, or commuter crash queries, suppressing organic reach.",
+      fix: "Publish deep, answer-first practice silos with structured submarket linking and FAQPage schema.",
+      tool: "Crawl Depth & Topical Authority Suite",
+    },
+    {
+      n: "Intake Inefficiency & Slow Follow-Up",
+      rx: /intake|lead|qualified|unqualified|calls|phone|slow/i,
+      why: "Affluent executive searchers demand immediate, discrete follow-up; missed intake calls without immediate text-back go directly to competing firms.",
+      fix: "Deploy Whisper call recording, automated confidential intake screening, and instant missed-call response.",
+      tool: "Executive Intake & Lead Attribution Suite",
+    },
+  ];
 
   // Sugar Land & Fort Bend fallback rules
   const SUGAR_LAND_FALLBACKS: Array<{
@@ -422,7 +482,9 @@ export async function POST(req: Request) {
     },
   ];
 
-  const activeRules = isSugarLand
+  const activeRules = isWoodlands
+    ? WOODLANDS_FALLBACKS
+    : isSugarLand
     ? SUGAR_LAND_FALLBACKS
     : isKaty
     ? KATY_FALLBACKS
@@ -468,7 +530,9 @@ export async function POST(req: Request) {
   if (matchedFallbacks.length === 0) {
     matchedFallbacks.push(
       {
-        n: isSugarLand
+        n: isWoodlands
+          ? 'Montgomery & Harris County Venue Disconnect & Village Search Fragmentation'
+          : isSugarLand
           ? 'Houston PPC Ad Auction Treadmill & High-Asset Intent Void'
           : isKaty
           ? 'Tri-County Venue Confusion & Houston Mega-Firm Displacement'
@@ -479,7 +543,9 @@ export async function POST(req: Request) {
           : isPhilly
           ? 'Neighborhood Intent Fragmentation'
           : 'Traffic & Qualified Leads Disconnect',
-        why: isSugarLand
+        why: isWoodlands
+          ? `The Woodlands spans Montgomery and Harris counties with 8 distinct villages. Prospective clients search for Conroe courts vs Houston venues, while regional mega-firms fail to address executive wealth or local village realities.`
+          : isSugarLand
           ? `Houston mega-firms drive up PPC ad auctions in ${county} to unsustainable levels, while unoptimized local practices lack high-asset divorce and Fort Bend court silos.`
           : isKaty
           ? `Katy spans Harris, Fort Bend, and Waller counties. Prospective clients do not know whether their case is heard in Houston, Richmond, or Hempstead, and downtown Houston mega-firms fail to clarify venue while outspending on broad keywords.`
@@ -490,7 +556,9 @@ export async function POST(req: Request) {
           : isPhilly
           ? `Philadelphia searchers in ${county} search by specific neighborhood (Center City, Northeast, South Philly) and Pennsylvania statutes, but single generic pages fail to convert.`
           : `Cleveland searchers in ${county} look for specific procedural guidance, but broad pages fail to satisfy search intent or convert visitors into phone calls.`,
-        fix: isSugarLand
+        fix: isWoodlands
+          ? 'Deploy Montgomery County (Conroe) and Harris County (Creekside Park) venue silos, village landing hubs, and executive estate planning schema.'
+          : isSugarLand
           ? 'Deploy compounding organic practice silos for Sugar Land, First Colony, and Richmond district court venues with LegalService schema.'
           : isKaty
           ? 'Architect hyper-local practice silos anchored to Harris, Fort Bend, and Waller County district courts, plus Cinco Ranch and Fulshear community hubs.'
@@ -501,7 +569,9 @@ export async function POST(req: Request) {
           : isPhilly
           ? 'Build hyper-local practice silos anchored to the Philadelphia Court of Common Pleas and deploy Whisper call tracking.'
           : 'Publish answer-first practice silos explaining Ohio court processes, install call tracking with lead attribution, and target suburb corridors.',
-        tool: isSugarLand
+        tool: isWoodlands
+          ? 'Montgomery Venue & Executive Wealth Silo Suite'
+          : isSugarLand
           ? 'Fort Bend High-Asset & Organic Equity Suite'
           : isKaty
           ? 'Tri-County Venue & Community Silo Suite'
@@ -511,7 +581,9 @@ export async function POST(req: Request) {
       },
       {
         n: 'Local Map Pack & AI Visibility Deficit',
-        why: isSugarLand
+        why: isWoodlands
+          ? 'Regional Houston mega-firms capture broad head terms while unoptimized Woodlands Town Center listings miss out on local 3-pack and Google AI Overview citations.'
+          : isSugarLand
           ? 'Regional Houston directory aggregators capture broad organic positions while unoptimized Sugar Land Town Square listings miss out on local 3-pack and Google AI Overview citations.'
           : isKaty
           ? 'Downtown Houston directories and regional firms dominate broad organic queries while unoptimized Katy and Cinco Ranch GBP listings suffer from geographic radius drop-off.'
@@ -522,7 +594,7 @@ export async function POST(req: Request) {
           : isPhilly
           ? 'National aggregators outspend on broad legal queries while unoptimized local GBP listings miss out on local 3-pack and Google AI Overview citations.'
           : 'National directories (Justia, FindLaw) capture organic positions while unoptimized GBP listings miss out on local 3-pack and Google AI Overview citations.',
-        fix: 'Restructure GBP primary categories, embed localized geo-signals (Denton County Courthouse, campus corridors), and deploy LegalService structured schema.',
+        fix: 'Restructure GBP primary categories, embed localized geo-signals, and deploy LegalService structured schema.',
         tool: 'Geo-Grid Rank Tracker & AI Citation Engine',
       }
     );
@@ -530,7 +602,9 @@ export async function POST(req: Request) {
 
   // Attempt live diagnosis using Gemini Pool
   try {
-    const contextPrompt = isSugarLand
+    const contextPrompt = isWoodlands
+      ? `legal market (Unincorporated master-planned township split between Montgomery County with courts in Conroe and Harris County Creekside Park; affluent executive demographic with $145k+ median household incomes; high-asset divorce with corporate RSUs, deferred compensation, and oil & gas executive holdings; Texas revocable living trusts, pour-over wills, and muniment of title under Texas Estates Code; distinct villages like Alden Bridge, Sterling Ridge, Creekside Park, Cochran's Crossing, and Panther Creek; and nearby hubs like Conroe, Spring, Shenandoah, and Tomball)`
+      : isSugarLand
       ? `legal market (Fort Bend County Justice Center in Richmond, Fort Bend County courts, affluent master-planned enclaves like First Colony, Riverstone, Sweetwater, and Avalon; high-asset divorce issues including business valuation, oil & gas executive community property, RSUs, stock options, and QDROs; estate planning and muniment of title under Texas Estates Code; competition from downtown Houston and Galleria ad bidders; and neighboring submarkets like Missouri City, Stafford, and Richmond)`
       : isKaty
       ? `legal market (Tri-county jurisdiction of Harris, Fort Bend, and Waller counties; court venues in Houston, Richmond, and Hempstead; high-intent corridors including I-10 Katy Freeway, SH 99 Grand Parkway, and Westpark Tollway; affluent master-planned communities like Cinco Ranch, Cross Creek Ranch, Firethorne, and neighboring Fulshear; Texas Family Code § 6.301 residency requirements; and competition from downtown Houston mega-firms)`
@@ -584,7 +658,7 @@ Output strictly JSON without markdown wrappers or code fences.`;
             fix: String(item.fix || ''),
             tool: String(item.tool || 'SearchPrex Growth Engine'),
           })),
-          recommendation: parsed.recommendation || `Target Cuyahoga County high-intent procedural searches and win the Map Pack before scaling ad spend.`,
+          recommendation: parsed.recommendation || `Target ${county} high-intent procedural searches and win the Map Pack before scaling ad spend.`,
           isAiGenerated: true,
         });
       }
@@ -594,9 +668,23 @@ Output strictly JSON without markdown wrappers or code fences.`;
   }
 
   // Graceful deterministic return
+  const fallbackRecommendation = isWoodlands
+    ? `Anchor your firm to Montgomery County court procedures in Conroe and executive wealth intent before losing affluent village referrals to downtown Houston firms.`
+    : isSugarLand
+    ? `Capture high-asset Sugar Land divorce and Fort Bend County court intent organically to escape unsustainable Houston PPC auctions.`
+    : isKaty
+    ? `Clarify tri-county filing venues (Harris, Fort Bend, Waller) and capture Grand Parkway & I-10 commuter accident search volume before expanding ad spend.`
+    : isDenton
+    ? `Capture Denton County court search intent and UNT/TWU student defense volume directly to outposition regional DFW mega-firms.`
+    : isAlbuquerque
+    ? `Capture Albuquerque & Rio Rancho bilingual search demand and Bernalillo County court procedures before wasting budget on broad head-terms.`
+    : isPhilly
+    ? `Anchor your firm to specific Philadelphia neighborhood search intent and Pennsylvania procedural statutes before competing on broad generic keywords.`
+    : `Focus on answering Cuyahoga County procedural questions directly and capturing high-intent suburb searches before spending more on paid ads.`;
+
   return NextResponse.json({
     items: matchedFallbacks.slice(0, 4),
-    recommendation: `Focus on answering Cuyahoga County procedural questions directly and capturing high-intent suburb searches before spending more on paid ads.`,
+    recommendation: fallbackRecommendation,
     isAiGenerated: false,
   });
 }
