@@ -16,14 +16,20 @@ interface NewsDiscussionSectionProps {
   slug: string;
   title: string;
   category?: string;
+  externalLikes?: number;
+  externalUserLiked?: boolean;
+  onExternalToggleLike?: () => void;
 }
 
 export default function NewsDiscussionSection({
   slug,
   title,
   category,
+  externalLikes,
+  externalUserLiked,
+  onExternalToggleLike,
 }: NewsDiscussionSectionProps) {
-  const [likes, setLikes] = useState(24);
+  const [likes, setLikes] = useState(0);
   const [userLiked, setUserLiked] = useState(false);
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -67,7 +73,14 @@ export default function NewsDiscussionSection({
       .finally(() => setLoading(false));
   }, [slug]);
 
+  const effectiveLikes = externalLikes !== undefined ? externalLikes : likes;
+  const effectiveUserLiked = externalUserLiked !== undefined ? externalUserLiked : userLiked;
+
   const handleToggleLike = async () => {
+    if (onExternalToggleLike) {
+      onExternalToggleLike();
+      return;
+    }
     const nextLiked = !userLiked;
     setUserLiked(nextLiked);
     setLikes((prev) => (nextLiked ? prev + 1 : Math.max(0, prev - 1)));
@@ -165,7 +178,7 @@ export default function NewsDiscussionSection({
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[#534AB7] bg-[#EEEDFE] px-2.5 py-0.5 rounded-full">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-900 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">
               Community Discussion
             </span>
             <span className="text-xs text-slate-400 font-medium">
@@ -182,22 +195,22 @@ export default function NewsDiscussionSection({
           <button
             type="button"
             onClick={handleToggleLike}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-sm ${
-              userLiked
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-sm cursor-pointer ${
+              effectiveUserLiked
                 ? "bg-rose-50 text-rose-600 border border-rose-200 shadow-rose-100"
                 : "bg-slate-50 text-slate-700 border border-slate-200 hover:border-rose-300 hover:text-rose-600"
             }`}
           >
             <Heart
               className={`h-4 w-4 ${
-                userLiked ? "fill-rose-500 text-rose-500 scale-110" : ""
+                effectiveUserLiked ? "fill-rose-500 text-rose-500 scale-110" : ""
               } transition-transform`}
             />
-            <span>{likes} {likes === 1 ? "Like" : "Likes"}</span>
+            <span>{effectiveLikes} {effectiveLikes === 1 ? "Like" : "Likes"}</span>
           </button>
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-600">
-            <MessageSquare className="h-4 w-4 text-[#534AB7]" />
+            <MessageSquare className="h-4 w-4 text-neutral-900" />
             <span>{comments.length} {comments.length === 1 ? "Comment" : "Comments"}</span>
           </div>
         </div>
@@ -230,14 +243,14 @@ export default function NewsDiscussionSection({
               onChange={(e) => setName(e.target.value)}
               placeholder="Your Name (e.g. Alex Mercer) *"
               required
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-[#534AB7] focus:bg-white focus:ring-1 focus:ring-[#534AB7]"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
             />
             <input
               type="text"
               value={role}
               onChange={(e) => setRole(e.target.value)}
               placeholder="Your Role or Company (e.g. SEO Director at Agency) (optional)"
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-[#534AB7] focus:bg-white focus:ring-1 focus:ring-[#534AB7]"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
             />
           </div>
 
@@ -245,9 +258,9 @@ export default function NewsDiscussionSection({
             rows={3}
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Share your thoughts, observations, or what you experienced during this rollout... *"
+            placeholder="Share your thoughts, observations, or what you experienced... *"
             required
-            className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#534AB7] focus:bg-white focus:ring-1 focus:ring-[#534AB7] resize-none"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900 resize-none"
           />
 
           <div className="flex items-center justify-between pt-1">
@@ -258,7 +271,7 @@ export default function NewsDiscussionSection({
             <button
               type="submit"
               disabled={submitting || !content.trim() || !name.trim()}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-[#433c99] disabled:opacity-50 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-neutral-800 disabled:opacity-50 transition-all cursor-pointer"
             >
               {submitting ? (
                 <>
@@ -280,12 +293,12 @@ export default function NewsDiscussionSection({
       <div className="mt-8 pt-8 border-t border-slate-100 space-y-4">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-10 text-slate-400">
-            <Loader2 className="h-6 w-6 animate-spin mb-2 text-[#534AB7]" />
+            <Loader2 className="h-6 w-6 animate-spin mb-2 text-neutral-900" />
             <p className="text-xs font-medium">Loading comments...</p>
           </div>
         ) : comments.length === 0 ? (
           <div className="text-center py-8 rounded-2xl bg-slate-50 border border-dashed border-slate-200">
-            <Sparkles className="h-6 w-6 text-[#534AB7] mx-auto mb-2 opacity-50" />
+            <Sparkles className="h-6 w-6 text-neutral-900 mx-auto mb-2 opacity-50" />
             <p className="text-xs font-bold text-slate-700">No comments yet</p>
             <p className="text-[11px] text-slate-500 mt-0.5">
               Be the first to share your observations on this article.
@@ -299,7 +312,7 @@ export default function NewsDiscussionSection({
             >
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-[#534AB7] to-[#7971d9] text-white text-xs font-black flex items-center justify-center shadow-sm">
+                  <div className="h-9 w-9 rounded-full bg-neutral-900 text-white text-xs font-black flex items-center justify-center shadow-sm">
                     {comment.name.slice(0, 2).toUpperCase()}
                   </div>
                   <div>
@@ -308,7 +321,7 @@ export default function NewsDiscussionSection({
                         {comment.name}
                       </span>
                       {comment.role && (
-                        <span className="text-[10px] font-semibold text-[#534AB7] bg-[#EEEDFE] px-2.5 py-0.5 rounded-full">
+                        <span className="text-[10px] font-semibold text-neutral-900 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">
                           {comment.role}
                         </span>
                       )}
