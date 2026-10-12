@@ -122,13 +122,13 @@ export default function GrandRapidsSubMarkets() {
         
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <span className="text-xs font-semibold text-[#534AB7] uppercase tracking-wider bg-[#EEEDFE] px-3 py-1 rounded-full border border-[#534AB7]/20">
+          <span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
             WEST MICHIGAN, NOT DETROIT
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0a0f2e] mt-4 tracking-tight">
-            A smaller market you can actually win
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mt-4 tracking-tight">
+            West Michigan Markets You Can Win
           </h2>
-          <p className="text-[#566070] text-sm sm:text-base mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-2">
             Kent County is a completely different game from Wayne County. Fewer firms have invested in content, which means directories still clog page one. Tap an area to see the exact searches we build for:
           </p>
         </div>
@@ -142,7 +142,7 @@ export default function GrandRapidsSubMarkets() {
               onClick={() => setActiveTab(market.id)}
               className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                 activeTab === market.id
-                  ? "bg-[#534AB7] text-white shadow-sm"
+                  ? "bg-neutral-900 text-white shadow-sm"
                   : "bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-50"
               }`}
             >
@@ -157,22 +157,22 @@ export default function GrandRapidsSubMarkets() {
           {/* Main Info Box */}
           <div className="lg:col-span-7 bg-white rounded-2xl p-7 sm:p-9 border border-slate-200 shadow-sm space-y-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1a7d59] uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-800 uppercase tracking-wider mb-2">
                 <MapPin className="w-4 h-4" />
                 {currentMarket.subtitle}
               </div>
-              <h3 className="text-2xl font-bold text-[#0a0f2e]">
+              <h3 className="text-2xl font-bold text-neutral-950">
                 {currentMarket.name}
               </h3>
-              <p className="text-sm text-[#566070] mt-3 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 {currentMarket.description}
               </p>
             </div>
 
             {/* Searches We Target */}
             <div className="pt-4 border-t border-slate-100">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0a0f2e] mb-3">
-                <Search className="w-4 h-4 text-[#534AB7]" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-950 mb-3">
+                <Search className="w-4 h-4 text-neutral-800" />
                 High-Intent Searches We Build For:
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -189,14 +189,14 @@ export default function GrandRapidsSubMarkets() {
 
             {/* Local Anchors */}
             <div className="pt-4 border-t border-slate-100">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0a0f2e] mb-3">
-                <Landmark className="w-4 h-4 text-[#1a7d59]" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-950 mb-3">
+                <Landmark className="w-4 h-4 text-neutral-800" />
                 Local Anchors In Your Content:
               </div>
               <ul className="space-y-2">
                 {currentMarket.venues.map((venue, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#566070]">
-                    <CheckCircle2 className="w-4 h-4 text-[#1a7d59] flex-shrink-0 mt-0.5" />
+                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <CheckCircle2 className="w-4 h-4 text-neutral-800 flex-shrink-0 mt-0.5" />
                     <span>{venue}</span>
                   </li>
                 ))}
@@ -213,9 +213,9 @@ export default function GrandRapidsSubMarkets() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/80 via-[#0a0f2e]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
+                <p className="text-xs font-semibold uppercase tracking-wider text-neutral-200">
                   Kent County Reality
                 </p>
                 <p className="text-sm font-bold mt-0.5">
@@ -225,8 +225,8 @@ export default function GrandRapidsSubMarkets() {
             </div>
 
             {/* Competitive Advantage Note */}
-            <div className="bg-white rounded-xl p-5 border border-slate-200 text-xs text-[#566070] space-y-2">
-              <div className="font-bold text-[#0a0f2e] text-sm">
+            <div className="bg-white rounded-xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2">
+              <div className="font-bold text-neutral-950 text-sm">
                 Why Suburb Spokes Win In Kent County:
               </div>
               <p>

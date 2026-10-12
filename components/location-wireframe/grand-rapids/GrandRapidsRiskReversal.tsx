@@ -37,13 +37,13 @@ export default function GrandRapidsRiskReversal() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-xs font-semibold text-[#1a7d59] uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+          <span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
             RISK REVERSAL
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0a0f2e] mt-4 tracking-tight">
-            What you keep, no matter what happens
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mt-4 tracking-tight">
+            What You Keep, No Matter What
           </h2>
-          <p className="text-[#566070] text-sm sm:text-base mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-2">
             Most legal marketing agencies hold your website or Google Business Profile hostage. Here is our explicit commitment to Grand Rapids attorneys:
           </p>
         </div>
@@ -58,17 +58,17 @@ export default function GrandRapidsRiskReversal() {
                 className="bg-white rounded-2xl p-7 border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#1a7d59] flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 text-neutral-800 flex items-center justify-center mb-5">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-[#0a0f2e] leading-snug">
+                  <h3 className="text-lg font-bold text-neutral-950 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-[#566070] mt-3 leading-relaxed">
+                  <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
-                <div className="pt-5 border-t border-slate-100 mt-6 text-xs font-bold text-[#1a7d59]">
+                <div className="pt-5 border-t border-slate-100 mt-6 text-xs font-bold text-neutral-800">
                   ✓ {item.highlight}
                 </div>
               </div>

@@ -49,13 +49,13 @@ export default function GrandRapidsFaqAndCta() {
         
         {/* FAQS SECTION */}
         <div className="max-w-3xl mb-14">
-          <span className="text-xs font-semibold text-[#534AB7] uppercase tracking-wider bg-[#EEEDFE] px-3 py-1 rounded-full border border-[#534AB7]/20">
+          <span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
             COMMON QUESTIONS
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0a0f2e] mt-4 tracking-tight">
-            Questions from Grand Rapids attorneys
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mt-4 tracking-tight">
+            Grand Rapids Law Firm SEO FAQs
           </h2>
-          <p className="text-[#566070] text-sm sm:text-base mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-2">
             Clear, honest answers about legal SEO timelines, Google Ads transitions, and Kent County search dynamics.
           </p>
         </div>
@@ -72,20 +72,20 @@ export default function GrandRapidsFaqAndCta() {
                 <button
                   type="button"
                   onClick={() => toggleFaq(idx)}
-                  className="w-full py-4.5 px-6 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#0a0f2e]"
+                  className="w-full py-4.5 px-6 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-neutral-950"
                 >
                   <span className="flex items-center gap-3">
-                    <HelpCircle className="w-4 h-4 text-[#534AB7] flex-shrink-0" />
+                    <HelpCircle className="w-4 h-4 text-neutral-800 flex-shrink-0" />
                     {faq.q}
                   </span>
                   <ChevronDown
                     className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#534AB7]" : ""
+                      isOpen ? "rotate-180 text-neutral-800" : ""
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-[#566070] leading-relaxed border-t border-slate-200/60 bg-white">
+                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
                     {faq.a}
                   </div>
                 )}
@@ -95,17 +95,17 @@ export default function GrandRapidsFaqAndCta() {
         </div>
 
         {/* FINAL CONVERSION BANNER */}
-        <div className="rounded-3xl bg-gradient-to-br from-[#0a0f2e] via-[#141b4d] to-[#0a0f2e] p-8 sm:p-14 text-white text-center shadow-2xl relative overflow-hidden border border-white/10">
-          <div className="absolute top-0 right-1/4 -z-0 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+        <div className="rounded-3xl bg-neutral-900 p-8 sm:p-14 text-white text-center shadow-xl relative overflow-hidden border border-neutral-800">
+          <div className="absolute inset-0 bg-[radial-gradient(#3f3f46_1px,transparent_1px)] [background-size:22px_22px] opacity-40 pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-emerald-300 text-xs font-bold uppercase tracking-wider border border-white/20 shadow-xs">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-neutral-200 text-xs font-bold uppercase tracking-wider border border-white/20 shadow-xs">
+              <ShieldCheck className="w-4 h-4 text-neutral-300" />
               ONE LAW FIRM PER PRACTICE AREA
             </span>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight !text-white drop-shadow-sm">
-              Ready to stop renting your leads?
+              Ready to Stop Renting Leads?
             </h2>
 
             <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-xl mx-auto">
@@ -115,10 +115,10 @@ export default function GrandRapidsFaqAndCta() {
             <div className="pt-3">
               <a
                 href="#ppc-audit"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#1a7d59] hover:bg-[#156748] !text-white font-bold text-base shadow-lg hover:shadow-xl transition-all border border-emerald-400/30 hover:scale-[1.02] active:scale-[0.99]"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 !text-neutral-950 font-bold text-base shadow-lg hover:shadow-xl transition-all border border-white hover:scale-[1.02] active:scale-[0.99]"
               >
                 <span>Request My Free Audit</span>
-                <ArrowRight className="w-5 h-5 text-white" />
+                <ArrowRight className="w-5 h-5 text-neutral-950" />
               </a>
             </div>
 

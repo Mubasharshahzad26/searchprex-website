@@ -48,13 +48,13 @@ export default function GrandRapidsComparisonMatrix() {
         
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <span className="text-xs font-semibold text-[#534AB7] uppercase tracking-wider bg-[#EEEDFE] px-3 py-1 rounded-full border border-[#534AB7]/20">
+          <span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
             HONEST COMPARISON
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0a0f2e] mt-4 tracking-tight">
-            PPC vs lead directories vs owning your visibility
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mt-4 tracking-tight">
+            PPC vs Directories vs Law Firm SEO
           </h2>
-          <p className="text-[#566070] text-sm sm:text-base mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-2">
             No marketing channel is evil. Paid search is great for instant testing; directories can backfill. But here is how the economics actually compare for a Grand Rapids firm:
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function GrandRapidsComparisonMatrix() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 bg-slate-50 text-xs sm:text-sm">
-                  <th className="py-4 px-4 sm:px-6 font-bold text-[#0a0f2e] w-1/4">
+                  <th className="py-4 px-4 sm:px-6 font-bold text-neutral-950 w-1/4">
                     Comparison Factor
                   </th>
                   <th className="py-4 px-4 sm:px-6 font-semibold text-slate-600 w-1/4">
@@ -74,9 +74,9 @@ export default function GrandRapidsComparisonMatrix() {
                   <th className="py-4 px-4 sm:px-6 font-semibold text-slate-600 w-1/4">
                     Lead Directories (Avvo, Justia)
                   </th>
-                  <th className="py-4 px-4 sm:px-6 font-bold text-[#1a7d59] bg-emerald-50/70 border-l border-emerald-200/80 w-1/4">
+                  <th className="py-4 px-4 sm:px-6 font-bold text-neutral-800 bg-slate-100 border-l border-slate-200 w-1/4">
                     <div className="flex items-center gap-1.5">
-                      <Award className="w-4 h-4 text-[#1a7d59]" />
+                      <Award className="w-4 h-4 text-neutral-800" />
                       SearchPrex Organic SEO
                     </div>
                   </th>
@@ -85,17 +85,17 @@ export default function GrandRapidsComparisonMatrix() {
               <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {COMPARISON_ROWS.map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="py-4 px-4 sm:px-6 font-bold text-[#0a0f2e] bg-slate-50/30">
+                    <td className="py-4 px-4 sm:px-6 font-bold text-neutral-950 bg-slate-50/30">
                       {row.question}
                     </td>
-                    <td className="py-4 px-4 sm:px-6 text-[#566070] leading-relaxed">
+                    <td className="py-4 px-4 sm:px-6 text-slate-600 leading-relaxed">
                       {row.ppc}
                     </td>
-                    <td className="py-4 px-4 sm:px-6 text-[#566070] leading-relaxed">
+                    <td className="py-4 px-4 sm:px-6 text-slate-600 leading-relaxed">
                       {row.directories}
                     </td>
-                    <td className={`py-4 px-4 sm:px-6 font-semibold border-l border-emerald-200/60 leading-relaxed ${
-                      row.highlight ? "text-[#1a7d59] bg-emerald-50/40" : "text-slate-900 bg-emerald-50/20"
+                    <td className={`py-4 px-4 sm:px-6 font-semibold border-l border-slate-200 leading-relaxed ${
+                      row.highlight ? "text-neutral-800 bg-slate-100" : "text-slate-900 bg-slate-50"
                     }`}>
                       {row.searchprex}
                     </td>

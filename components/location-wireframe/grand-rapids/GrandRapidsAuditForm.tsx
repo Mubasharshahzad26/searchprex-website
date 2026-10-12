@@ -55,16 +55,16 @@ export default function GrandRapidsAuditForm() {
           
           {/* LEFT: AUDIT VALUE PROPOSITION */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#1a7d59] text-xs font-bold uppercase tracking-wider border border-emerald-200">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider border border-slate-200">
               <Clock className="w-3.5 h-3.5" />
               FREE FOR GRAND RAPIDS FIRMS
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0a0f2e] leading-tight tracking-tight">
-              Get your PPC Waste Audit in 24 hours
+            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-950 leading-tight tracking-tight">
+              Free Grand Rapids PPC Waste Audit
             </h2>
 
-            <p className="text-base text-[#566070] leading-relaxed">
+            <p className="text-base text-slate-600 leading-relaxed">
               I review your Google Ads exposure, Business Profile and the Kent County firms outranking you, then show where organic can replace paid spend.
             </p>
 
@@ -75,15 +75,15 @@ export default function GrandRapidsAuditForm() {
                 "A plain-English plan, no sales pressure and no multi-year lock-in",
                 "Reviewed personally by the founder (Mubashar Shahzad) — not an outsourced sales rep",
               ].map((bullet, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-sm text-[#0a0f2e]">
-                  <CheckCircle2 className="w-5 h-5 text-[#1a7d59] flex-shrink-0 mt-0.5" />
+                <li key={idx} className="flex items-start gap-3 text-sm text-neutral-950">
+                  <CheckCircle2 className="w-5 h-5 text-neutral-800 flex-shrink-0 mt-0.5" />
                   <span className="font-medium leading-snug">{bullet}</span>
                 </li>
               ))}
             </ul>
 
             <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center gap-3 text-xs text-slate-500">
-              <ShieldCheck className="w-5 h-5 text-[#534AB7] flex-shrink-0" />
+              <ShieldCheck className="w-5 h-5 text-neutral-800 flex-shrink-0" />
               <span>
                 <strong>Strict Exclusivity:</strong> We only represent one law firm per practice area in Grand Rapids. If your practice niche is already claimed, we will let you know immediately.
               </span>
@@ -93,7 +93,7 @@ export default function GrandRapidsAuditForm() {
           {/* RIGHT: AUDIT REQUEST FORM */}
           <div className="lg:col-span-6">
             <div className="bg-white rounded-2xl p-7 sm:p-9 shadow-md border border-slate-200 relative">
-              <h3 className="text-xl font-bold text-[#0a0f2e] mb-1">
+              <h3 className="text-xl font-bold text-neutral-950 mb-1">
                 Request my audit
               </h3>
               <p className="text-xs text-slate-500 mb-6">
@@ -101,9 +101,9 @@ export default function GrandRapidsAuditForm() {
               </p>
 
               {status === "success" ? (
-                <div className="p-6 rounded-xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
-                  <CheckCircle2 className="w-10 h-10 text-[#1a7d59] mx-auto" />
-                  <h4 className="text-base font-bold text-[#0a0f2e]">
+                <div className="p-6 rounded-xl bg-slate-100 border border-slate-200 text-center space-y-3">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-800 mx-auto" />
+                  <h4 className="text-base font-bold text-neutral-950">
                     Audit Request Received!
                   </h4>
                   <p className="text-sm text-slate-600">
@@ -122,7 +122,7 @@ export default function GrandRapidsAuditForm() {
                       placeholder="Jane Smith, Esq."
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
                     />
                   </div>
 
@@ -137,7 +137,7 @@ export default function GrandRapidsAuditForm() {
                       placeholder="yourfirm.com"
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
                     />
                   </div>
 
@@ -152,7 +152,7 @@ export default function GrandRapidsAuditForm() {
                       placeholder="you@yourfirm.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
                     />
                   </div>
 
@@ -169,7 +169,7 @@ export default function GrandRapidsAuditForm() {
                           onClick={() => setFirmSize(size)}
                           className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
                             firmSize === size
-                              ? "bg-[#0a0f2e] text-white border-[#0a0f2e]"
+                              ? "bg-neutral-900 text-white border-neutral-900"
                               : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                           }`}
                         >
@@ -192,7 +192,7 @@ export default function GrandRapidsAuditForm() {
                           onClick={() => setPracticeArea(area)}
                           className={`py-1.5 px-3 rounded-lg text-xs font-semibold border transition-all ${
                             practiceArea === area
-                              ? "bg-[#534AB7] text-white border-[#534AB7]"
+                              ? "bg-neutral-900 text-white border-neutral-900"
                               : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                           }`}
                         >
@@ -213,7 +213,7 @@ export default function GrandRapidsAuditForm() {
                     <button
                       type="submit"
                       disabled={status === "submitting"}
-                      className="w-full py-3.5 px-4 rounded-xl bg-[#1a7d59] hover:bg-[#156748] text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-3.5 px-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                     >
                       {status === "submitting" ? "Submitting Request..." : "Send my audit request"}
                       <ArrowRight className="w-4 h-4" />
