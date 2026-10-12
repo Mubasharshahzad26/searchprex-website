@@ -42,6 +42,7 @@ import SugarLandWireframeView from "@/components/location-wireframe/sugar-land/S
 import WoodlandsWireframeView from "@/components/location-wireframe/the-woodlands/WoodlandsWireframeView";
 import PlanoWireframeView from "@/components/location-wireframe/plano/PlanoWireframeView";
 import TempeWireframeView from "@/components/location-wireframe/tempe/TempeWireframeView";
+import ScottsdaleWireframeView from "@/components/location-wireframe/scottsdale/ScottsdaleWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -360,6 +361,25 @@ export default async function CityPage({
         />
         <main>
           <TempeWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  if (page.stateSlug === "arizona" && page.citySlug === "scottsdale") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <ScottsdaleWireframeView page={page} />
         </main>
       </>
     );
