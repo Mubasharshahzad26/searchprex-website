@@ -49,7 +49,7 @@ export default function FaqList({ faqs, name = "faq", defaultOpen = 0 }: FaqList
           <summary
             // list-none covers Firefox/Chrome; the webkit pseudo-element is what
             // actually hides the disclosure triangle in Safari.
-            className={`flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-base font-semibold [&::-webkit-details-marker]:hidden ${radius.chip} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#534AB7] focus-visible:ring-offset-2`}
+            className={`flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-base font-semibold [&::-webkit-details-marker]:hidden ${radius.chip} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2`}
             style={{ color: color.ink }}
           >
             {f.q}

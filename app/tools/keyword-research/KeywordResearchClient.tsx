@@ -169,7 +169,7 @@ export default function KeywordResearchClient() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`inline-flex h-12 items-center gap-2 ${radius.control} bg-[#534AB7] px-6 text-sm font-semibold text-white transition-all hover:bg-[#3C3489] disabled:opacity-50 ${focusRing}`}
+                  className={`inline-flex h-12 items-center gap-2 ${radius.control} bg-neutral-900 px-6 text-sm font-semibold text-white transition-all hover:bg-neutral-800 disabled:opacity-50 ${focusRing}`}
                 >
                   {loading ? (
                     <>

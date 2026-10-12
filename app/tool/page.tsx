@@ -103,14 +103,14 @@ export default function ToolPage() {
         <section className="bg-white pb-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+              <span className="inline-block rounded-full border border-slate-200 bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-neutral-900">
                 NicheSEOPro Tool
               </span>
-              <h1 className="mt-4 text-4xl font-bold text-[#0a0f2e] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 text-4xl font-bold text-neutral-950 sm:text-5xl lg:text-6xl">
                 The SEO Tool Built for <br className="hidden sm:block" />
-                <span className="text-[#534AB7]">Your Industry</span>
+                <span className="text-neutral-950">Your Industry</span>
               </h1>
-              <p className="mx-auto mt-6 max-w-3xl text-xl text-[#64748b]">
+              <p className="mx-auto mt-6 max-w-3xl text-xl text-slate-600">
                 Generic SEO tools give generic advice. NicheSEOPro understands law firms, 
                 ecommerce stores, and local businesses — delivering insights that actually 
                 move the needle.
@@ -118,29 +118,29 @@ export default function ToolPage() {
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   href="#cta"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3C3489]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-neutral-800"
                 >
                   Start Free Trial
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#features"
-                  className="rounded-xl border-2 border-[#0a0f2e] px-8 py-4 text-sm font-bold uppercase tracking-widest text-[#0a0f2e] transition-all hover:bg-[#0a0f2e] hover:text-white"
+                  className="rounded-xl border border-slate-300 bg-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-neutral-950 transition-all hover:bg-slate-50"
                 >
                   See Features
                 </Link>
               </div>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-[#64748b]">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-600">
                 <span className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-green-500" />
+                  <Check className="h-4 w-4 text-emerald-600" />
                   14-Day Free Trial
                 </span>
                 <span className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-green-500" />
+                  <Check className="h-4 w-4 text-emerald-600" />
                   No Credit Card Required
                 </span>
                 <span className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-green-500" />
+                  <Check className="h-4 w-4 text-emerald-600" />
                   Cancel Anytime
                 </span>
               </div>
@@ -154,18 +154,18 @@ export default function ToolPage() {
         {/* Keyword Magic Tool Section */}
         <section className="bg-white py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-2xl bg-gradient-to-br from-[#534AB7]/5 to-[#534AB7]/10 p-8 sm:p-12 border border-[#534AB7]/15">
+            <div className="rounded-2xl bg-slate-50 p-8 sm:p-12 border border-slate-200">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+                <h2 className="text-3xl font-bold text-neutral-950 sm:text-4xl">
                   Keyword Magic Tool
                 </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-[#64748b]">
+                <p className="mx-auto mt-4 max-w-2xl text-slate-600">
                   Discover keyword opportunities with real search volume, CPC, and competition data. 
                   Perfect for finding high-value keywords for law firms and ecommerce stores.
                 </p>
               </div>
  
-              <div className="bg-white rounded-xl p-8 border border-[#e5e7eb]">
+              <div className="bg-white rounded-xl p-8 border border-slate-200">
                 <KeywordMagicTool initial={initialKeywordData} />
               </div>
             </div>
@@ -173,14 +173,14 @@ export default function ToolPage() {
         </section>
  
         {/* Bulk Content Generator Section */}
-        <section className="bg-[#f8f9fa] py-20">
+        <section className="bg-slate-50 py-20 border-y border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-2xl bg-white p-8 sm:p-12">
+            <div className="rounded-2xl bg-white p-8 sm:p-12 border border-slate-200">
               <div className="text-center">
-                <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+                <h2 className="text-3xl font-bold text-neutral-950 sm:text-4xl">
                   Generate Content at Scale
                 </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-[#64748b]">
+                <p className="mx-auto mt-4 max-w-2xl text-slate-600">
                   Use AI to generate bulk SEO content for your websites. Perfect for law firms, 
                   ecommerce stores, and local service businesses that need content fast.
                 </p>
@@ -197,10 +197,10 @@ export default function ToolPage() {
         <section id="features" className="bg-white py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+              <h2 className="text-3xl font-bold text-neutral-950 sm:text-4xl">
                 Everything You Need to Dominate Search
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-[#64748b]">
+              <p className="mx-auto mt-4 max-w-2xl text-slate-600">
                 NicheSEOPro combines powerful analysis tools with industry-specific 
                 intelligence to give you an unfair advantage.
               </p>
@@ -208,9 +208,9 @@ export default function ToolPage() {
  
             <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {features.map((feature) => (
-                <div key={feature.title} className="rounded-2xl border border-[#e5e7eb] p-8">
-                  <h3 className="text-xl font-bold text-[#0a0f2e]">{feature.title}</h3>
-                  <p className="mt-3 text-[#64748b] leading-relaxed">
+                <div key={feature.title} className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                  <h3 className="text-xl font-bold text-neutral-950">{feature.title}</h3>
+                  <p className="mt-3 text-slate-600 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -220,17 +220,17 @@ export default function ToolPage() {
         </section>
  
         {/* CTA */}
-        <section className="bg-[#0a0f2e] py-20">
+        <section className="bg-neutral-900 py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Ready to Try NicheSEOPro?
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-300">
               Start your 14-day free trial today. No credit card required, no commitment.
             </p>
             <Link
               href="#cta"
-              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-[#0a0f2e] transition-all hover:bg-[#f7f8fc]"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-neutral-950 transition-all hover:bg-slate-100"
             >
               Start Free Trial
               <ArrowRight className="h-4 w-4" />

@@ -109,7 +109,7 @@ export default function SerpSimulatorPage() {
     ],
   };
 
-  const link = "font-semibold text-[#534AB7] underline underline-offset-2";
+  const link = "font-semibold text-neutral-950 underline underline-offset-2";
 
   return (
     <main>
@@ -139,8 +139,8 @@ export default function SerpSimulatorPage() {
             { t: "2. Check both devices", b: "Switch between desktop and mobile. If a line ends in \"...\", the words after the cut are lost." },
             { t: "3. Fix and copy", b: "Move the important words to the front, work through the checks, then copy the HTML tags into your page." },
           ].map((s) => (
-            <div key={s.t} className="rounded-2xl border border-[#e5e7eb] bg-white p-6">
-              <h3 className="text-base font-black text-[#0a0f2e]">{s.t}</h3>
+            <div key={s.t} className="rounded-2xl border border-slate-200 bg-white p-6">
+              <h3 className="text-base font-black text-neutral-950">{s.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[#374151]">{s.b}</p>
             </div>
           ))}

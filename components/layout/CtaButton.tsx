@@ -35,10 +35,10 @@ export default function CtaButton({
     // Kept as Tailwind classes rather than a style prop so the hover state can
     // actually change the background — inline styles have no hover variant.
     primary: {
-      className: "bg-[#534AB7] text-white hover:-translate-y-0.5 hover:bg-[#3C3489]",
+      className: "bg-neutral-900 text-white hover:-translate-y-0.5 hover:bg-neutral-800",
     },
     secondary: {
-      className: "border hover:bg-[#f8f9fc]",
+      className: "border hover:bg-slate-50",
       style: { borderColor: color.borderStrong, color: color.ink },
     },
     onDark: {

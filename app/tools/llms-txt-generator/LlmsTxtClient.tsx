@@ -662,7 +662,7 @@ export default function LlmsTxtClient() {
         <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-4">
           <div
             className={`${radius.card} border p-6 shadow-lg`}
-            style={{ background: color.ink, borderColor: color.ink }}
+            style={{ background: "#171717", borderColor: "#171717" }}
           >
             {/* Output Switcher Tabs */}
             <div className="flex items-center justify-between gap-2 pb-4 border-b border-white/10">
@@ -671,7 +671,7 @@ export default function LlmsTxtClient() {
                   type="button"
                   onClick={() => setOutputTab("llms")}
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    outputTab === "llms" ? "bg-white text-[#0a0f2e]" : "text-white/70 hover:text-white"
+                    outputTab === "llms" ? "bg-white text-neutral-950" : "text-white/70 hover:text-white"
                   }`}
                 >
                   <FileText className="h-3.5 w-3.5" aria-hidden /> /llms.txt
@@ -680,7 +680,7 @@ export default function LlmsTxtClient() {
                   type="button"
                   onClick={() => setOutputTab("robots")}
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    outputTab === "robots" ? "bg-white text-[#0a0f2e]" : "text-white/70 hover:text-white"
+                    outputTab === "robots" ? "bg-white text-neutral-950" : "text-white/70 hover:text-white"
                   }`}
                 >
                   <Bot className="h-3.5 w-3.5" aria-hidden /> /robots.txt AI Rules

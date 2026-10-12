@@ -124,10 +124,10 @@ export default function CaseCalculatorPage() {
     ],
   };
 
-  const link = "font-semibold text-[#534AB7] underline underline-offset-2";
+  const link = "font-semibold text-neutral-950 underline underline-offset-2";
 
   return (
-    <main id="main-content" className="bg-gradient-to-br from-gray-50 to-gray-100 pt-20">
+    <main id="main-content" className="bg-white pt-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <div className="mx-auto max-w-4xl">

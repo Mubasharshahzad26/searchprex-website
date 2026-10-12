@@ -37,9 +37,9 @@ const tools = [
   {
     id: "llms-txt-generator",
     icon: Bot,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
+    iconBg: "#f1f5f9",
+    iconColor: "#0a0a0a",
+    accentColor: "#171717",
     label: "llms.txt & AI Crawler Generator",
     desc: "Generate a spec-compliant /llms.txt Markdown file and AI crawler robots.txt rules (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended).",
     tags: ["llms.txt", "AI Crawlers", "GEO / AEO"],
@@ -50,16 +50,12 @@ const tools = [
   {
     id: "keyword-research",
     icon: Sparkles,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
+    iconBg: "#f1f5f9",
+    iconColor: "#0a0a0a",
+    accentColor: "#171717",
     label: "AI Keyword Research",
     desc: "Enter a topic and get keywords grouped by theme, the search intent behind each, and the page to build for it.",
     tags: ["Keyword Ideas", "Search Intent", "Content Angles"],
-    // Genuinely live: /tools/keyword-research is deployed and its API returns
-    // real model output. It shows no search volume or difficulty, because those
-    // require a paid data provider and inventing them is what the SERP Checker
-    // used to do.
     status: "live",
     href: "/tools/keyword-research",
     stats: "No signup",
@@ -67,14 +63,12 @@ const tools = [
   {
     id: "schema-generator",
     icon: Code2,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
+    iconBg: "#f1f5f9",
+    iconColor: "#0a0a0a",
+    accentColor: "#171717",
     label: "Schema Markup Generator",
     desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
     tags: ["JSON-LD", "Rich Results", "Structured Data"],
-    // Live: the generator moved into /tools/schema-generator (see its page.tsx)
-    // and the "Coming soon" stub is gone.
     status: "live",
     href: "/tools/schema-generator",
     stats: "6 schema types",
@@ -82,13 +76,12 @@ const tools = [
   {
     id: "serp-simulator",
     icon: Search,
-    iconBg: "#E6F1FB",
-    iconColor: "#185FA5",
-    accentColor: "#185FA5",
+    iconBg: "#f1f5f9",
+    iconColor: "#0a0a0a",
+    accentColor: "#171717",
     label: "SERP Simulator",
     desc: "Preview your title and meta description as Google shows them on desktop and mobile, measured in pixels, with the cut marked.",
     tags: ["SERP Preview", "Pixel Width", "Meta Tags"],
-    // Live: runs entirely in the browser, so it needs no data provider.
     status: "live",
     href: "/tools/serp-simulator",
     stats: "Desktop + Mobile",
@@ -96,9 +89,9 @@ const tools = [
   {
     id: "serp-checker",
     icon: Target,
-    iconBg: "#EEEDFE",
-    iconColor: "#534AB7",
-    accentColor: "#534AB7",
+    iconBg: "#f1f5f9",
+    iconColor: "#0a0a0a",
+    accentColor: "#171717",
     label: "SERP Checker",
     desc: "Check your live Google ranking position for any keyword and country, see which SERP features appear, and inspect the top 10.",
     tags: ["Rank Tracking", "SERP Analysis", "Competitors"],
@@ -109,9 +102,9 @@ const tools = [
   {
     id: "meta-tag-analyzer",
     icon: FileText,
-    iconBg: "#E1F5EE",
-    iconColor: "#0F6E56",
-    accentColor: "#1D9E75",
+    iconBg: "#f1f5f9",
+    iconColor: "#475569",
+    accentColor: "#94a3b8",
     label: "Meta Tag Analyzer",
     desc: "Audit any URL's title tag, meta description, Open Graph, and Twitter Card tags in one click.",
     tags: ["Title Tag", "Meta Description", "OG Tags"],
@@ -122,9 +115,9 @@ const tools = [
   {
     id: "robots-txt-tester",
     icon: Bot,
-    iconBg: "#FAEEDA",
-    iconColor: "#854F0B",
-    accentColor: "#BA7517",
+    iconBg: "#f1f5f9",
+    iconColor: "#475569",
+    accentColor: "#94a3b8",
     label: "Robots.txt Tester",
     desc: "Test if Googlebot can crawl any URL on your site. Paste your robots.txt and check any path instantly.",
     tags: ["Crawl Budget", "Googlebot", "Indexing"],
@@ -135,9 +128,9 @@ const tools = [
   {
     id: "keyword-difficulty",
     icon: TrendingUp,
-    iconBg: "#FAECE7",
-    iconColor: "#993C1D",
-    accentColor: "#D85A30",
+    iconBg: "#f1f5f9",
+    iconColor: "#475569",
+    accentColor: "#94a3b8",
     label: "Keyword Difficulty Checker",
     desc: "Estimate how hard it is to rank for any keyword based on SERP competition and search intent signals.",
     tags: ["KD Score", "Search Intent", "SERP Analysis"],
@@ -330,17 +323,17 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
       <Section bordered={false}>
         <div
           className={`${radius.card} px-8 py-10 lg:flex lg:items-center lg:justify-between lg:gap-8`}
-          style={{ background: color.ink }}
+          style={{ background: "#171717" }}
         >
           <div className="text-center lg:text-left">
             <span
               className={`${heading.eyebrow} mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-2`}
-              style={{ borderColor: `${color.primary}66`, color: "#A79FED" }}
+              style={{ borderColor: "rgba(255,255,255,0.2)", color: "#cbd5e1" }}
             >
               <Sparkles className="h-3.5 w-3.5" aria-hidden /> NicheSEO Pro
             </span>
             <h2 className={`${heading.h2} mb-3 text-white`}>Need this across a whole catalogue?</h2>
-            <p className={`${text.lead} max-w-xl text-white/60`}>
+            <p className={`${text.lead} max-w-xl text-neutral-300`}>
               NicheSEO Pro is the software behind the Michigan Sports &amp; Outdoor recovery. It finds
               the pages Google is skipping and rewrites thin product copy across the store.
             </p>
@@ -348,7 +341,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
 
           <div className="mt-8 w-full shrink-0 space-y-3 lg:mt-0 lg:w-auto">
             {proFeatures.map((f) => (
-              <p key={f} className={`flex items-center gap-2 ${text.small} text-white/70`}>
+              <p key={f} className={`flex items-center gap-2 ${text.small} text-neutral-300`}>
                 <CheckCircle className="h-4 w-4 shrink-0" style={{ color: color.success }} aria-hidden />
                 {f}
               </p>
@@ -425,7 +418,7 @@ function StatusBadge({ status }: { status: string }) {
     return (
       <span
         className="flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold"
-        style={{ borderColor: "#AFA9EC", background: color.primarySoft, color: color.primary }}
+        style={{ borderColor: "#cbd5e1", background: color.primarySoft, color: color.primary }}
       >
         <Lock className="h-2.5 w-2.5" aria-hidden /> Pro
       </span>
@@ -438,7 +431,7 @@ function StatusBadge({ status }: { status: string }) {
     return (
       <span
         className="flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold"
-        style={{ borderColor: "#f5d9a8", background: "#fdf6e8", color: "#8a5a0b" }}
+        style={{ borderColor: "#cbd5e1", background: "#f8fafc", color: "#334155" }}
       >
         Preview
       </span>
@@ -468,8 +461,8 @@ function ToolAction({ status, href }: { status: string; href: string }) {
     return (
       <Link
         href={href}
-        className={`flex w-full items-center justify-center gap-2 ${radius.control} border px-5 py-3 text-sm font-semibold transition-colors hover:bg-[#534AB7] hover:text-white`}
-        style={{ borderColor: "#AFA9EC", background: color.primarySoft, color: color.primary }}
+        className={`flex w-full items-center justify-center gap-2 ${radius.control} border px-5 py-3 text-sm font-semibold transition-colors hover:bg-neutral-900 hover:text-white`}
+        style={{ borderColor: "#cbd5e1", background: color.primarySoft, color: color.primary }}
       >
         <Sparkles className="h-4 w-4" aria-hidden /> Get NicheSEO Pro
       </Link>

@@ -117,9 +117,9 @@ export function KeywordTable({
           {rows.map((row, i) => (
             <tr
               key={`${row.keyword}-${i}`}
-              className="group border-b border-border/70 transition-colors hover:bg-accent/40"
+              className="group border-b border-border/70 transition-colors hover:bg-slate-50"
             >
-              <td className="sticky left-0 z-[1] max-w-[280px] bg-card px-3 py-2.5 font-medium text-foreground group-hover:bg-[#f4f8ff]">
+              <td className="sticky left-0 z-[1] max-w-[280px] bg-card px-3 py-2.5 font-medium text-foreground group-hover:bg-slate-50">
                 <span className="block truncate">{row.keyword}</span>
               </td>
               <td className="px-3 py-2.5 text-right font-semibold tabular-nums">

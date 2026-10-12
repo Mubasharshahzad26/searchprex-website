@@ -37,8 +37,8 @@ export default function SectionHeading({
   className = "",
 }: SectionHeadingProps) {
   const titleColor = onDark ? color.white : color.ink;
-  const introColor = onDark ? "rgba(255,255,255,0.62)" : color.muted;
-  const eyebrowColor = onDark ? "#A79FED" : color.primary;
+  const introColor = onDark ? "rgba(255,255,255,0.70)" : color.muted;
+  const eyebrowColor = onDark ? "#cbd5e1" : "#334155";
 
   const eyebrowEl = eyebrow ? (
     <span className={`${heading.eyebrow} mb-3 block`} style={{ color: eyebrowColor }}>

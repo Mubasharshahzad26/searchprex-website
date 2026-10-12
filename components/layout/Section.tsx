@@ -10,7 +10,7 @@ export type SectionWidth = "default" | "narrow" | "reading";
 const toneStyle: Record<SectionTone, React.CSSProperties> = {
   white: { background: color.white },
   surface: { background: color.surface },
-  ink: { background: color.ink },
+  ink: { background: "#171717" },
 };
 
 const widthClass: Record<SectionWidth, string> = {

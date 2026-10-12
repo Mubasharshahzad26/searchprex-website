@@ -161,7 +161,7 @@ export default function IntakeAssistantPage() {
     ],
   };
 
-  const link = "font-semibold text-[#534AB7] underline underline-offset-2";
+  const link = "font-semibold text-neutral-950 underline underline-offset-2";
 
   return (
     <main id="main-content">
@@ -192,17 +192,17 @@ export default function IntakeAssistantPage() {
         />
         <CardGrid columns={2}>
           {DOES.map((d) => (
-            <FeatureCard key={d.title} icon={<d.icon className="h-5 w-5" style={{ color: "#534AB7" }} aria-hidden />} title={d.title} body={d.body} />
+            <FeatureCard key={d.title} icon={<d.icon className="h-5 w-5" style={{ color: "#171717" }} aria-hidden />} title={d.title} body={d.body} />
           ))}
         </CardGrid>
       </Section>
 
       <Section width="reading">
         <SectionHeading eyebrow="The handoff" title="What your firm receives from each conversation" />
-        <dl className="divide-y divide-[#e5e7eb] rounded-2xl border border-[#e5e7eb] bg-white">
+        <dl className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
           {SUMMARY_FIELDS.map(([term, def]) => (
             <div key={term} className="grid gap-1 p-4 sm:grid-cols-[180px_1fr] sm:gap-4">
-              <dt className="text-sm font-black text-[#0a0f2e]">{term}</dt>
+              <dt className="text-sm font-black text-neutral-950">{term}</dt>
               <dd className="text-sm leading-relaxed text-[#374151]">{def}</dd>
             </div>
           ))}

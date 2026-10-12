@@ -127,7 +127,7 @@ export default function Page() {
     mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
 
-  const link = "font-semibold text-[#534AB7] underline underline-offset-2";
+  const link = "font-semibold text-neutral-950 underline underline-offset-2";
 
   return (
     <main>

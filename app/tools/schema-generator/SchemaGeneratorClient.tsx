@@ -44,8 +44,8 @@ const schemaTypes: SchemaTypeConfig[] = [
     id: "local-business",
     label: "Local Business",
     icon: Building2,
-    color: "#534AB7",
-    bg: "#EEEDFE",
+    color: "#0a0a0a",
+    bg: "#f1f5f9",
     desc: "For US local service businesses, contractors & stores",
     fields: [
       { key: "name", label: "Business Name", placeholder: "Acme Plumbing & Heating", required: true, colSpan: 2 },
@@ -67,8 +67,8 @@ const schemaTypes: SchemaTypeConfig[] = [
     id: "law-firm",
     label: "Law Firm",
     icon: Scale,
-    color: "#185FA5",
-    bg: "#E6F1FB",
+    color: "#0a0a0a",
+    bg: "#f1f5f9",
     desc: "For US attorneys, legal practices & law firms",
     fields: [
       { key: "name", label: "Law Firm Name", placeholder: "Smith & Sterling Law Firm", required: true, colSpan: 2 },
@@ -89,8 +89,8 @@ const schemaTypes: SchemaTypeConfig[] = [
     id: "product",
     label: "Product",
     icon: ShoppingCart,
-    color: "#0F6E56",
-    bg: "#E1F5EE",
+    color: "#0a0a0a",
+    bg: "#f1f5f9",
     desc: "For Shopify, WooCommerce & eCommerce products",
     fields: [
       { key: "name", label: "Product Name", placeholder: "UltraComfort Ergonomic Office Chair", required: true, colSpan: 2 },
@@ -110,8 +110,8 @@ const schemaTypes: SchemaTypeConfig[] = [
     id: "faq",
     label: "FAQ",
     icon: HelpCircle,
-    color: "#854F0B",
-    bg: "#FAEEDA",
+    color: "#0a0a0a",
+    bg: "#f1f5f9",
     desc: "For FAQ sections, support pages & AI Overviews",
     fields: [
       { key: "faq1q", label: "Question 1", placeholder: "How long does local SEO take to produce results in the US?", required: true, colSpan: 2 },
@@ -128,8 +128,8 @@ const schemaTypes: SchemaTypeConfig[] = [
     id: "article",
     label: "Article / Blog",
     icon: FileText,
-    color: "#534AB7",
-    bg: "#EEEDFE",
+    color: "#0a0a0a",
+    bg: "#f1f5f9",
     desc: "For blog posts, news & thought leadership",
     fields: [
       { key: "headline", label: "Article Headline", placeholder: "How to Build a High-Converting Law Firm Website in 2026", required: true, colSpan: 2 },
@@ -148,8 +148,8 @@ const schemaTypes: SchemaTypeConfig[] = [
     id: "review",
     label: "Review / Rating",
     icon: Star,
-    color: "#BA7517",
-    bg: "#FAEEDA",
+    color: "#0a0a0a",
+    bg: "#f1f5f9",
     desc: "For third-party reviews of products, books or software",
     fields: [
       { key: "itemName", label: "Item Being Reviewed", placeholder: "Sony WH-1000XM5 Wireless Headphones", required: true, colSpan: 2 },
@@ -387,12 +387,12 @@ export default function SchemaGeneratorClient() {
         {/* LEFT COLUMN: Controls & Input Form (7 cols on lg) */}
         <div className="lg:col-span-7 space-y-6">
           {/* 1. Schema Type Selector */}
-          <div className="bg-white rounded-2xl border border-[#e5e7eb] p-5 sm:p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs sm:text-sm font-bold text-[#0a0f2e] uppercase tracking-wider">
+              <h2 className="text-xs sm:text-sm font-bold text-neutral-950 uppercase tracking-wider">
                 1. Select Schema Type
               </h2>
-              <span className="text-[11px] font-medium text-[#566070] bg-[#f8f9fc] px-2.5 py-1 rounded-full border border-[#e5e7eb]">
+              <span className="text-[11px] font-medium text-slate-600 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-200">
                 Schema.org Standard
               </span>
             </div>
@@ -413,8 +413,8 @@ export default function SchemaGeneratorClient() {
                     }}
                     className={`flex flex-col items-center justify-center gap-2 p-3 rounded-xl border text-center transition-all min-h-[78px] ${
                       isSelected
-                        ? "border-[#534AB7] bg-[#EEEDFE] shadow-sm ring-1 ring-[#534AB7]"
-                        : "border-[#e5e7eb] bg-white hover:border-[#534AB7]/40 hover:bg-[#f8f9fc]"
+                        ? "border-neutral-900 bg-slate-100 shadow-sm ring-1 ring-neutral-900"
+                        : "border-slate-200 bg-white hover:border-slate-400 hover:bg-slate-50"
                     }`}
                   >
                     <div
@@ -425,7 +425,7 @@ export default function SchemaGeneratorClient() {
                     </div>
                     <span
                       className={`text-xs font-semibold leading-tight text-center break-words ${
-                        isSelected ? "text-[#534AB7]" : "text-[#374151]"
+                        isSelected ? "text-neutral-950" : "text-slate-700"
                       }`}
                     >
                       {type.label}
@@ -435,19 +435,19 @@ export default function SchemaGeneratorClient() {
               })}
             </div>
 
-            <div className="mt-4 pt-3.5 border-t border-[#f1f3f7] flex items-center gap-2 text-xs text-[#566070]">
+            <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-600">
               <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0" />
               <span>{currentSchema.desc}</span>
             </div>
           </div>
 
           {/* 2. Dynamic Form Fields */}
-          <div className="bg-white rounded-2xl border border-[#e5e7eb] p-5 sm:p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs sm:text-sm font-bold text-[#0a0f2e] uppercase tracking-wider">
+              <h2 className="text-xs sm:text-sm font-bold text-neutral-950 uppercase tracking-wider">
                 2. Fill in {currentSchema.label} Details
               </h2>
-              <span className="text-[11px] text-[#566070]">
+              <span className="text-[11px] text-slate-600">
                 <span className="text-red-500 font-bold">*</span> required
               </span>
             </div>
@@ -458,7 +458,7 @@ export default function SchemaGeneratorClient() {
                   key={field.key}
                   className={field.colSpan === 2 || field.textarea ? "sm:col-span-2" : "sm:col-span-1"}
                 >
-                  <label className="block text-xs font-semibold text-[#374151] mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     {field.label}
                     {field.required && <span className="text-red-500 ml-1">*</span>}
                   </label>
@@ -470,7 +470,7 @@ export default function SchemaGeneratorClient() {
                         setFormData((prev) => ({ ...prev, [field.key]: e.target.value }))
                       }
                       placeholder={field.placeholder}
-                      className="w-full px-3 py-2.5 text-base sm:text-sm border border-[#e5e7eb] rounded-lg focus:outline-none focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/10 transition-all text-[#0a0f2e] placeholder-[#94a3b8] resize-none bg-white"
+                      className="w-full px-3 py-2.5 text-base sm:text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10 transition-all text-neutral-950 placeholder-slate-400 resize-none bg-white"
                     />
                   ) : (
                     <input
@@ -480,7 +480,7 @@ export default function SchemaGeneratorClient() {
                         setFormData((prev) => ({ ...prev, [field.key]: e.target.value }))
                       }
                       placeholder={field.placeholder}
-                      className="w-full px-3 py-2.5 text-base sm:text-sm border border-[#e5e7eb] rounded-lg focus:outline-none focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/10 transition-all text-[#0a0f2e] placeholder-[#94a3b8] bg-white"
+                      className="w-full px-3 py-2.5 text-base sm:text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10 transition-all text-neutral-950 placeholder-slate-400 bg-white"
                     />
                   )}
                 </div>
@@ -488,11 +488,11 @@ export default function SchemaGeneratorClient() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-5 border-t border-[#f1f3f7]">
+            <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-5 border-t border-slate-100">
               <button
                 type="button"
                 onClick={handleGenerate}
-                className="flex-1 flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold py-3 px-5 rounded-xl transition-all shadow-sm hover:shadow text-sm active:scale-[0.99]"
+                className="flex-1 flex items-center justify-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white font-bold py-3 px-5 rounded-xl transition-all shadow-sm hover:shadow text-sm active:scale-[0.99]"
               >
                 <Zap className="h-4 w-4" />
                 Generate JSON-LD Schema
@@ -501,7 +501,7 @@ export default function SchemaGeneratorClient() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex items-center justify-center gap-2 border border-[#e5e7eb] hover:border-[#0a0f2e] text-[#374151] hover:text-[#0a0f2e] font-semibold py-3 px-4 rounded-xl transition-all text-sm bg-white"
+                  className="flex items-center justify-center gap-2 border border-slate-200 hover:border-neutral-900 text-slate-700 hover:text-neutral-950 font-semibold py-3 px-4 rounded-xl transition-all text-sm bg-white"
                 >
                   <RefreshCw className="h-4 w-4" />
                   Reset
@@ -514,11 +514,11 @@ export default function SchemaGeneratorClient() {
         {/* RIGHT COLUMN: Output, Copy & Verification (5 cols on lg) */}
         <div className="lg:col-span-5 space-y-6">
           {/* Generated Output Box */}
-          <div className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden shadow-sm flex flex-col">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#e5e7eb] bg-white">
+          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 bg-white">
               <div className="flex items-center gap-2">
-                <Code2 className="h-4 w-4 text-[#534AB7]" />
-                <h2 className="text-xs sm:text-sm font-bold text-[#0a0f2e] uppercase tracking-wider">
+                <Code2 className="h-4 w-4 text-neutral-900" />
+                <h2 className="text-xs sm:text-sm font-bold text-neutral-950 uppercase tracking-wider">
                   Generated JSON-LD
                 </h2>
               </div>
@@ -530,7 +530,7 @@ export default function SchemaGeneratorClient() {
                     className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                       copied
                         ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                        : "bg-[#EEEDFE] text-[#534AB7] hover:bg-[#534AB7] hover:text-white"
+                        : "bg-slate-100 text-neutral-950 hover:bg-neutral-900 hover:text-white"
                     }`}
                   >
                     {copied ? <CheckCircle className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
@@ -540,7 +540,7 @@ export default function SchemaGeneratorClient() {
                     href="https://search.google.com/test/rich-results"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-[#e5e7eb] text-[#374151] hover:border-[#534AB7] hover:text-[#534AB7] transition-all bg-white"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 text-slate-700 hover:border-neutral-900 hover:text-neutral-950 transition-all bg-white"
                     title="Validate on Google Rich Results Test"
                   >
                     <ExternalLink className="h-3 w-3" />
@@ -552,19 +552,19 @@ export default function SchemaGeneratorClient() {
 
             {output ? (
               <div className="relative">
-                <pre className="p-4 sm:p-5 text-xs text-[#0a0f2e] bg-[#f8f9fc] overflow-x-auto leading-relaxed font-mono min-h-[300px] sm:min-h-[380px] max-h-[500px] overflow-y-auto">
+                <pre className="p-4 sm:p-5 text-xs text-neutral-950 bg-slate-50 overflow-x-auto leading-relaxed font-mono min-h-[300px] sm:min-h-[380px] max-h-[500px] overflow-y-auto">
                   {`<script type="application/ld+json">\n${output}\n</script>`}
                 </pre>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center py-16 sm:py-20 px-4 sm:px-6 text-center min-h-[300px] sm:min-h-[380px]">
-                <div className="h-14 w-14 rounded-2xl bg-[#EEEDFE] flex items-center justify-center mb-3">
-                  <Code2 className="h-7 w-7 text-[#534AB7]" />
+                <div className="h-14 w-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-3">
+                  <Code2 className="h-7 w-7 text-neutral-900" />
                 </div>
-                <p className="text-[#0a0f2e] font-bold text-sm sm:text-base mb-1">
+                <p className="text-neutral-950 font-bold text-sm sm:text-base mb-1">
                   Ready to generate your schema
                 </p>
-                <p className="text-[#566070] text-xs max-w-xs">
+                <p className="text-slate-600 text-xs max-w-xs">
                   Select your schema type on the left, enter your details, and click &ldquo;Generate JSON-LD Schema&rdquo;.
                 </p>
               </div>
@@ -572,8 +572,8 @@ export default function SchemaGeneratorClient() {
           </div>
 
           {/* Quick Implementation Card */}
-          <div className="bg-white rounded-2xl border border-[#e5e7eb] p-5 sm:p-6 shadow-sm">
-            <h3 className="text-xs sm:text-sm font-bold text-[#0a0f2e] uppercase tracking-wider mb-3.5">
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+            <h3 className="text-xs sm:text-sm font-bold text-neutral-950 uppercase tracking-wider mb-3.5">
               Quick Implementation (4 Steps)
             </h3>
             <div className="space-y-3">
@@ -584,23 +584,23 @@ export default function SchemaGeneratorClient() {
                 { title: "Inspect in GSC", desc: "Check Search Console's Enhancement reports after Google crawls the page." },
               ].map((step, idx) => (
                 <div key={step.title} className="flex items-start gap-3">
-                  <div className="h-5 w-5 rounded-full bg-[#EEEDFE] text-[#534AB7] flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                  <div className="h-5 w-5 rounded-full bg-slate-100 text-neutral-950 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                     {idx + 1}
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-[#0a0f2e]">{step.title}</p>
-                    <p className="text-xs text-[#566070] leading-relaxed">{step.desc}</p>
+                    <p className="text-xs font-bold text-neutral-950">{step.title}</p>
+                    <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-4 pt-3.5 border-t border-[#f1f3f7] flex items-center justify-between text-xs">
+            <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
               <a
                 href="https://search.google.com/test/rich-results"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#534AB7] hover:underline flex items-center gap-1.5"
+                className="font-semibold text-neutral-950 hover:underline flex items-center gap-1.5"
               >
                 Google Rich Results Tool
                 <ArrowRight className="h-3 w-3" />
@@ -609,7 +609,7 @@ export default function SchemaGeneratorClient() {
                 href="https://validator.schema.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#566070] hover:text-[#0a0f2e] hover:underline flex items-center gap-1.5"
+                className="font-semibold text-slate-600 hover:text-neutral-950 hover:underline flex items-center gap-1.5"
               >
                 Schema.org Validator
                 <ExternalLink className="h-3 w-3" />
@@ -618,17 +618,17 @@ export default function SchemaGeneratorClient() {
           </div>
 
           {/* NicheSEO Pro Promo Banner */}
-          <div className="bg-[#0a0f2e] rounded-2xl p-5 sm:p-6 text-white shadow-md">
+          <div className="bg-neutral-900 rounded-2xl p-5 sm:p-6 text-white shadow-md">
             <div className="flex items-center gap-2 mb-2.5">
-              <Sparkles className="h-4 w-4 text-[#534AB7]" />
-              <span className="text-[11px] font-bold text-[#EEEDFE] uppercase tracking-wider">
+              <Sparkles className="h-4 w-4 text-neutral-300" />
+              <span className="text-[11px] font-bold text-neutral-300 uppercase tracking-wider">
                 Automate Structured Data
               </span>
             </div>
             <h3 className="font-bold text-base text-white mb-2 leading-snug">
               Need Schema & Meta Tags Across 1,000+ Pages?
             </h3>
-            <p className="text-slate-300 text-xs mb-4 leading-relaxed">
+            <p className="text-neutral-300 text-xs mb-4 leading-relaxed">
               Manually writing JSON-LD for every product or location page is slow. NicheSEO Pro audits thin content, optimizes title tags, and detects pages Google crawls without indexing.
             </p>
             <div className="space-y-2 mb-4">
@@ -637,7 +637,7 @@ export default function SchemaGeneratorClient() {
                 "Identifies crawled but unindexed URL bloat",
                 "Includes 3 free monthly deep site audits",
               ].map((feat) => (
-                <div key={feat} className="flex items-center gap-2 text-xs text-slate-300">
+                <div key={feat} className="flex items-center gap-2 text-xs text-neutral-300">
                   <CheckCircle className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                   <span>{feat}</span>
                 </div>
@@ -647,7 +647,7 @@ export default function SchemaGeneratorClient() {
               href="https://nicheseopro.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold py-2.5 px-4 rounded-xl transition-all text-xs w-full text-center"
+              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-neutral-950 font-bold py-2.5 px-4 rounded-xl transition-all text-xs w-full text-center"
             >
               Explore NicheSEO Pro Free
               <ArrowRight className="h-3.5 w-3.5" />

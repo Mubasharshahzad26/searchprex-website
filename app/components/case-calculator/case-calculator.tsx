@@ -354,7 +354,7 @@ export default function CaseCalculator() {
                       max={45}
                       value={ctr * 100}
                       onChange={(e) => setCtr(+e.target.value / 100)}
-                      className="mt-1.5 w-full accent-[#534AB7]"
+                      className="mt-1.5 w-full accent-neutral-900"
                     />
                   </div>
                   <div>
@@ -368,7 +368,7 @@ export default function CaseCalculator() {
                       max={10}
                       value={vtl * 100}
                       onChange={(e) => setVtl(+e.target.value / 100)}
-                      className="mt-1.5 w-full accent-[#534AB7]"
+                      className="mt-1.5 w-full accent-neutral-900"
                     />
                   </div>
                   <p className="text-[11px] leading-relaxed text-muted-foreground">

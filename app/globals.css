@@ -5,47 +5,47 @@
  
 :root {
   --background: #ffffff;
-  --foreground: #0a0f2e;
+  --foreground: #0a0a0a;
   --card: #ffffff;
-  --card-foreground: #0a0f2e;
+  --card-foreground: #0a0a0a;
   --popover: #ffffff;
-  --popover-foreground: #0a0f2e;
-  --primary: #534AB7;            /* Brand Purple / Indigo */
+  --popover-foreground: #0a0a0a;
+  --primary: #171717;            /* Dark Grey / Neutral 900 */
   --primary-foreground: #ffffff;
-  --secondary: #f7f8fc;
-  --secondary-foreground: #0a0f2e;
-  --muted: #f7f8fc;
-  --muted-foreground: #566070;
-  --accent: #534AB7;             /* Brand Accent */
+  --secondary: #f8fafc;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f8fafc;
+  --muted-foreground: #475569;
+  --accent: #171717;             /* Brand Accent */
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #534AB7;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #171717;
   --radius: 0.75rem;
 }
  
 .dark {
-  --background: #0a0f2e;
+  --background: #171717;
   --foreground: #ffffff;
-  --card: #131b4d;
+  --card: #262626;
   --card-foreground: #ffffff;
-  --popover: #0a0f2e;
+  --popover: #171717;
   --popover-foreground: #ffffff;
-  --primary: #6c63ff;
-  --primary-foreground: #ffffff;
-  --secondary: #131b4d;
+  --primary: #f8fafc;
+  --primary-foreground: #0a0a0a;
+  --secondary: #262626;
   --secondary-foreground: #ffffff;
-  --muted: #131b4d;
+  --muted: #262626;
   --muted-foreground: #94a3b8;
-  --accent: #6c63ff;
-  --accent-foreground: #ffffff;
+  --accent: #f8fafc;
+  --accent-foreground: #0a0a0a;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #1e295d;
-  --input: #1e295d;
-  --ring: #6c63ff;
+  --border: #334155;
+  --input: #334155;
+  --ring: #94a3b8;
 }
  
 @theme inline {
@@ -89,7 +89,7 @@
  
   /* ── Unified headings across the WHOLE site (one place, all pages) ── */
   h1, h2, h3, h4, h5, h6 {
-    color: #0a0f2e;          /* solid dark — Toptal-style, no colored accents */
+    color: #0a0a0a;          /* solid black — no colored accents */
     letter-spacing: -0.02em; /* = tracking-tight */
   }
   /* White headings on dark sections (CTA, Footer) still work — `text-white` overrides this. */

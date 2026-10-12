@@ -24,10 +24,10 @@ export interface CtaBandProps {
 
 export default function CtaBand({ eyebrow, title, body, actions, trustPoints }: CtaBandProps) {
   return (
-    <section style={{ background: color.ink }}>
+    <section style={{ background: "#171717" }}>
       <div className={`mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 ${layout.section} text-center`}>
         {eyebrow ? (
-          <span className={`${heading.eyebrow} mb-3 block`} style={{ color: "#A79FED" }}>
+          <span className={`${heading.eyebrow} mb-3 block`} style={{ color: "#cbd5e1" }}>
             {eyebrow}
           </span>
         ) : null}
@@ -35,7 +35,7 @@ export default function CtaBand({ eyebrow, title, body, actions, trustPoints }: 
         <h2 className={`${heading.h2} mb-5 text-white`}>{title}</h2>
 
         {body ? (
-          <p className={`${text.lead} mx-auto mb-10 max-w-xl text-white/60`}>{body}</p>
+          <p className={`${text.lead} mx-auto mb-10 max-w-xl text-neutral-300`}>{body}</p>
         ) : null}
 
         {actions?.length ? (
@@ -49,14 +49,14 @@ export default function CtaBand({ eyebrow, title, body, actions, trustPoints }: 
         ) : null}
 
         {trustPoints?.length ? (
-          <ul className={`flex flex-wrap justify-center gap-x-6 gap-y-2 ${text.small} text-white/50`}>
+          <ul className={`flex flex-wrap justify-center gap-x-6 gap-y-2 ${text.small} text-neutral-400`}>
             {trustPoints.map((t) => (
               <li key={t} className="inline-flex items-center gap-1.5">
                 <svg
                   className="h-3.5 w-3.5 shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#A79FED"
+                  stroke="#cbd5e1"
                   strokeWidth={3}
                   strokeLinecap="round"
                   strokeLinejoin="round"

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import GenerationEngine from "@/app/components/generator/generation-engine";
- 
+
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
   title: "AI Content Suite",
@@ -16,14 +16,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const meta = await getPageSEO("/content-generator", baseMetadata);
   return { ...meta, robots: { index: false, follow: true } };
 }
- 
+
 export default function ContentGeneratorPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-20">
+    <div className="min-h-screen bg-white pt-20">
       <div className="mx-auto max-w-5xl">
         <GenerationEngine />
       </div>
     </div>
   );
 }
- 

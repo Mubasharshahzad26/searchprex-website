@@ -15,24 +15,18 @@
 
 export const color = {
   /** Buttons, links, active states, accents. */
-  primary: "#534AB7",
+  primary: "#171717",
   /** Hover / pressed state for primary. */
-  primaryDark: "#3C3489",
+  primaryDark: "#262626",
   /** Tinted primary background — badges, soft callouts. */
-  primarySoft: "#EEEDFE",
+  primarySoft: "#f1f5f9",
 
-  /** Headings and high-contrast body text. Also the dark section background. */
-  ink: "#0a0f2e",
-  /** Secondary body text, labels, captions.
-   *  Was #64748b: 4.76:1 on white but only 4.03:1 on the tinted section
-   *  grounds (#eaecf3), so it failed AA everywhere except pure white.
-   *  #566070 measures 6.36 / 6.04 / 5.39 across the three grounds. */
-  muted: "#566070",
-  /** Tertiary text — timestamps, fine print, captions.
-   *  Was #94a3b8, which measures 2.5:1 on white. WCAG AA needs 4.5:1 for
-   *  body text and it was used at 9-11px throughout, so it failed twice over.
-   *  #5f6a78 measures 5.5:1 on white and 4.66:1 on the tinted ground. */
-  subtle: "#5f6a78",
+  /** Headings and high-contrast body text. */
+  ink: "#0a0a0a",
+  /** Secondary body text, labels, captions. */
+  muted: "#475569",
+  /** Tertiary text — timestamps, fine print, captions. */
+  subtle: "#64748b",
 
   /** #94a3b8 kept ONLY for non-text use — decorative icons, dividers,
    *  placeholder glyphs. Never put copy in this colour: it is 2.5:1. */
@@ -40,29 +34,25 @@ export const color = {
 
   /** Verified metrics, checkmarks, positive deltas. */
   success: "#3eb489",
-  /** Green for TEXT and for solid buttons carrying white text.
-   *  Was #2f9670: 3.67:1 on white, 3.11:1 on tinted — failed as text.
-   *  #196b4d measures 6.46 / 5.47. Use color.success (#3eb489) only for
-   *  decorative fills and icons, never for copy. */
+  /** Green for TEXT and for solid buttons carrying white text. */
   successDark: "#196b4d",
 
-  /** Solid green button background. White text on #3eb489 is 2.59:1 — the
-   *  primary CTA failed AA. This measures 5.1:1. */
+  /** Solid green button background. */
   successButton: "#1a7d59",
   /** Problems, "the challenge", negative deltas. */
   danger: "#ef4444",
 
   /** Card edges, dividers, input borders. */
-  border: "#e5e7eb",
+  border: "#e2e8f0",
   /** Heavier border on tinted backgrounds. */
-  borderStrong: "#d4d8e3",
+  borderStrong: "#cbd5e1",
 
   /** Page background. */
   white: "#ffffff",
-  /** Alternating section background — very light. */
-  surface: "#f8f9fc",
-  /** Alternating section background — one step heavier. */
-  surfaceAlt: "#eaecf3",
+  /** Alternating section background — very light grey. */
+  surface: "#f8fafc",
+  /** Alternating section background — one step heavier light grey. */
+  surfaceAlt: "#f1f5f9",
 } as const;
 
 /* ── TYPE SCALE ────────────────────────────────────────────── */
@@ -127,20 +117,20 @@ export const radius = {
 // buttons, links-as-buttons, and accordion triggers.
 
 export const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#534AB7] focus-visible:ring-offset-2";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2";
 
 /* ── SURFACES ──────────────────────────────────────────────── */
 
 export const surface = {
   /** Default card. */
-  card: "rounded-2xl border border-[#e5e7eb] bg-white",
+  card: "rounded-2xl border border-slate-200 bg-white",
   /** Card that lifts on hover — use on linked cards only. */
   cardHover:
-    "rounded-2xl border border-[#e5e7eb] bg-white transition-all hover:-translate-y-1 hover:shadow-xl",
+    "rounded-2xl border border-slate-200 bg-white transition-all hover:-translate-y-1 hover:shadow-xl",
   /** Primary call to action. */
   ctaPrimary:
-    "inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-7 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#3C3489]",
+    "inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-neutral-800",
   /** Secondary call to action — outlined. */
   ctaSecondary:
-    "inline-flex items-center gap-2 rounded-xl border border-[#0a0f2e]/20 px-7 py-3.5 text-sm font-semibold text-[#0a0f2e] transition-colors hover:bg-[#f8f9fc]",
+    "inline-flex items-center gap-2 rounded-xl border border-slate-300 px-7 py-3.5 text-sm font-semibold text-neutral-950 transition-colors hover:bg-slate-50",
 } as const;

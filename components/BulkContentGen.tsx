@@ -71,22 +71,22 @@ export default function BulkContentGen() {
       <div className="space-y-4">
         {/* Prompt Input */}
         <div>
-          <label className="block text-sm font-bold text-[#0a0f2e] mb-2">
+          <label className="block text-sm font-bold text-neutral-950 mb-2">
             Content Prompt
           </label>
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your content prompt here... e.g., 'Personal injury lawyer tips for car accident cases'"
-            className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] placeholder-[#9ca3af] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
+            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-neutral-950 placeholder-[#9ca3af] focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
             rows={4}
           />
         </div>
- 
+
         {/* Number of Pieces */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-bold text-[#0a0f2e] mb-2">
+            <label className="block text-sm font-bold text-neutral-950 mb-2">
               Number of Pieces
             </label>
             <input
@@ -95,19 +95,19 @@ export default function BulkContentGen() {
               max="10"
               value={numberOfPieces}
               onChange={(e) => setNumberOfPieces(parseInt(e.target.value))}
-              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
+              className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-neutral-950 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
             />
           </div>
- 
+
           {/* Content Type */}
           <div>
-            <label className="block text-sm font-bold text-[#0a0f2e] mb-2">
+            <label className="block text-sm font-bold text-neutral-950 mb-2">
               Content Type
             </label>
             <select
               value={contentType}
               onChange={(e) => setContentType(e.target.value)}
-              className="w-full rounded-lg border border-[#e5e7eb] bg-white px-4 py-3 text-[#0a0f2e] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
+              className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-neutral-950 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
             >
               <option value="blog-post">Blog Post</option>
               <option value="landing-page">Landing Page</option>
@@ -119,49 +119,49 @@ export default function BulkContentGen() {
           </div>
         </div>
       </div>
- 
+
       {/* Generate Button */}
       <button
         onClick={handleGenerateContent}
         disabled={loading || !prompt}
-        className="w-full rounded-lg bg-[#534AB7] px-6 py-3 font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3C3489] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full rounded-lg bg-neutral-900 px-6 py-3 font-bold uppercase tracking-widest text-white transition-all hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {loading && <Loader className="h-4 w-4 animate-spin" />}
         {loading ? 'Generating...' : 'Generate Content'}
       </button>
- 
+
       {/* Error Message */}
       {error && (
         <div className="rounded-lg bg-red-50 border border-red-200 p-4">
           <p className="text-sm text-red-700 font-medium">Error: {error}</p>
         </div>
       )}
- 
+
       {/* Generated Content Section */}
       {generatedContent && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-bold text-[#0a0f2e] mb-2">
+            <label className="block text-sm font-bold text-neutral-950 mb-2">
               Generated Content
             </label>
-            <div className="rounded-lg border border-[#e5e7eb] bg-[#f8f9fa] p-4 max-h-96 overflow-y-auto">
-              <p className="text-[#0a0f2e] whitespace-pre-wrap text-sm leading-relaxed">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 max-h-96 overflow-y-auto">
+              <p className="text-neutral-950 whitespace-pre-wrap text-sm leading-relaxed">
                 {generatedContent}
               </p>
             </div>
           </div>
- 
+
           {/* Action Buttons */}
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={handleCopyContent}
-              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#534AB7] px-4 py-2 font-bold text-[#534AB7] transition-all hover:bg-[#534AB7] hover:text-white"
+              className="flex-1 min-w-[150px] rounded-lg border-2 border-neutral-900 px-4 py-2 font-bold text-neutral-900 transition-all hover:bg-neutral-900 hover:text-white"
             >
               Copy Content
             </button>
             <button
               onClick={handleDownloadContent}
-              className="flex-1 min-w-[150px] rounded-lg border-2 border-[#534AB7] px-4 py-2 font-bold text-[#534AB7] transition-all hover:bg-[#534AB7] hover:text-white"
+              className="flex-1 min-w-[150px] rounded-lg border-2 border-neutral-900 px-4 py-2 font-bold text-neutral-900 transition-all hover:bg-neutral-900 hover:text-white"
             >
               Download
             </button>
@@ -174,11 +174,11 @@ export default function BulkContentGen() {
           </div>
         </div>
       )}
- 
+
       {/* Info Message */}
       {!generatedContent && !error && (
-        <div className="rounded-lg bg-blue-50 border border-blue-200 p-4">
-          <p className="text-sm text-blue-700">
+        <div className="rounded-lg bg-slate-50 border border-slate-200 p-4">
+          <p className="text-sm text-slate-700">
             💡 Enter your content prompt above and click "Generate Content" to create SEO-optimized content using AI.
           </p>
         </div>

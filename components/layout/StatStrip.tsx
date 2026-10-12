@@ -24,7 +24,7 @@ export default function StatStrip({ stats, tone = "surface" }: StatStripProps) {
     <section
       className={onDark ? undefined : "border-b"}
       style={{
-        background: onDark ? color.ink : color.surface,
+        background: onDark ? "#171717" : color.surface,
         borderColor: color.border,
       }}
     >

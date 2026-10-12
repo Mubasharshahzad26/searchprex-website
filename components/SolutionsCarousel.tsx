@@ -71,16 +71,16 @@ const SOLUTIONS: Solution[] = [
 function MockVisibility() {
   return (
     <div className="rounded-lg bg-white p-3 shadow-sm ring-1 ring-black/5">
-      <div className="mb-2 flex flex-wrap gap-2 text-[9px] font-semibold text-[#64748b]">
-        <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#534AB7]" />AI visibility</span>
+      <div className="mb-2 flex flex-wrap gap-2 text-[9px] font-semibold text-slate-600">
+        <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-neutral-900" />AI visibility</span>
         <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#3eb489]" />ChatGPT</span>
-        <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />AI mode</span>
+        <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-slate-400" />AI mode</span>
       </div>
       <svg viewBox="0 0 200 70" className="h-20 w-full" aria-hidden="true">
-        <line x1="0" y1="60" x2="200" y2="60" stroke="#eef0f6" />
-        <polyline points="5,55 50,50 100,40 150,25 195,12" fill="none" stroke="#534AB7" strokeWidth="2" strokeLinecap="round" />
+        <line x1="0" y1="60" x2="200" y2="60" stroke="#e2e8f0" />
+        <polyline points="5,55 50,50 100,40 150,25 195,12" fill="none" stroke="#171717" strokeWidth="2" strokeLinecap="round" />
         <polyline points="5,58 50,54 100,48 150,38 195,28" fill="none" stroke="#3eb489" strokeWidth="2" strokeLinecap="round" />
-        <polyline points="5,60 50,57 100,52 150,46 195,38" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
+        <polyline points="5,60 50,57 100,52 150,46 195,38" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" />
       </svg>
     </div>
   );
@@ -89,14 +89,14 @@ function MockVisibility() {
 function MockSearch() {
   return (
     <div className="rounded-lg bg-white p-3 shadow-sm ring-1 ring-black/5">
-      <div className="flex items-center gap-2 rounded-md bg-[#f1f3f9] px-2 py-1.5">
-        <Search className="h-3 w-3 text-[#94a3b8]" />
-        <span className="text-[9px] text-[#94a3b8]">Ask any SEO question…</span>
+      <div className="flex items-center gap-2 rounded-md bg-slate-100 px-2 py-1.5">
+        <Search className="h-3 w-3 text-slate-400" />
+        <span className="text-[9px] text-slate-500">Ask any SEO question…</span>
       </div>
       <div className="mt-2 space-y-1.5">
-        <div className="h-1.5 w-full rounded bg-[#e9ecf5]" />
-        <div className="h-1.5 w-5/6 rounded bg-[#e9ecf5]" />
-        <div className="h-1.5 w-4/6 rounded bg-[#3eb489]/40" />
+        <div className="h-1.5 w-full rounded bg-slate-200" />
+        <div className="h-1.5 w-5/6 rounded bg-slate-200" />
+        <div className="h-1.5 w-4/6 rounded bg-neutral-900/30" />
       </div>
     </div>
   );
@@ -106,11 +106,11 @@ function MockRevenue() {
   const bars = [40, 55, 48, 70, 62, 82];
   return (
     <div className="rounded-lg bg-white p-3 shadow-sm ring-1 ring-black/5">
-      <div className="text-[9px] font-semibold uppercase tracking-wide text-[#94a3b8]">Revenue leaked / mo</div>
-      <div className="text-2xl font-black text-[#534AB7]">$48,200</div>
+      <div className="text-[9px] font-semibold uppercase tracking-wide text-slate-500">Revenue leaked / mo</div>
+      <div className="text-2xl font-black text-neutral-950">$48,200</div>
       <div className="mt-2 flex h-10 items-end gap-1">
         {bars.map((h, i) => (
-          <span key={i} className="flex-1 rounded-t bg-gradient-to-t from-[#534AB7] to-[#3eb489]" style={{ height: `${h}%` }} />
+          <span key={i} className="flex-1 rounded-t bg-neutral-900" style={{ height: `${h}%` }} />
         ))}
       </div>
     </div>
@@ -121,13 +121,13 @@ function MockIntake() {
   return (
     <div className="space-y-2 rounded-lg bg-white p-3 shadow-sm ring-1 ring-black/5">
       <div className="flex justify-start">
-        <div className="rounded-lg rounded-tl-none bg-[#f1f3f9] px-2 py-1 text-[9px] text-[#374151]">Hi! What do you need help with?</div>
+        <div className="rounded-lg rounded-tl-none bg-slate-100 px-2 py-1 text-[9px] text-slate-700">Hi! What do you need help with?</div>
       </div>
       <div className="flex justify-end">
-        <div className="rounded-lg rounded-tr-none bg-[#534AB7] px-2 py-1 text-[9px] text-white">Car accident case</div>
+        <div className="rounded-lg rounded-tr-none bg-neutral-900 px-2 py-1 text-[9px] text-white">Car accident case</div>
       </div>
       <div className="flex justify-start">
-        <div className="rounded-lg rounded-tl-none bg-[#f1f3f9] px-2 py-1 text-[9px] text-[#374151]">Got it — let&apos;s grab your details.</div>
+        <div className="rounded-lg rounded-tl-none bg-slate-100 px-2 py-1 text-[9px] text-slate-700">Got it — let&apos;s grab your details.</div>
       </div>
     </div>
   );
@@ -137,12 +137,12 @@ function MockContent() {
   return (
     <div className="rounded-lg bg-white p-3 shadow-sm ring-1 ring-black/5">
       <div className="space-y-1.5">
-        <div className="h-2 w-1/2 rounded bg-[#0a0f2e]/80" />
-        <div className="h-1.5 w-full rounded bg-[#e9ecf5]" />
-        <div className="h-1.5 w-full rounded bg-[#e9ecf5]" />
-        <div className="h-1.5 w-4/5 rounded bg-[#e9ecf5]" />
+        <div className="h-2 w-1/2 rounded bg-neutral-900" />
+        <div className="h-1.5 w-full rounded bg-slate-200" />
+        <div className="h-1.5 w-full rounded bg-slate-200" />
+        <div className="h-1.5 w-4/5 rounded bg-slate-200" />
       </div>
-      <div className="mt-2 inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-[#534AB7] to-[#3eb489] px-2 py-1 text-[9px] font-bold text-white">
+      <div className="mt-2 inline-flex items-center gap-1 rounded-md bg-neutral-900 px-2 py-1 text-[9px] font-bold text-white">
         <Sparkles className="h-2.5 w-2.5" /> Generate
       </div>
     </div>
@@ -155,11 +155,11 @@ function MockKeyword() {
     <div className="space-y-2 rounded-lg bg-white p-3 shadow-sm ring-1 ring-black/5">
       {rows.map(([kw, v]) => (
         <div key={kw} className="flex items-center gap-2">
-          <span className="w-16 truncate text-[9px] text-[#374151]">{kw}</span>
-          <div className="h-1.5 flex-1 rounded bg-[#eef0f6]">
-            <div className="h-full rounded bg-gradient-to-r from-[#534AB7] to-[#3eb489]" style={{ width: `${v}%` }} />
+          <span className="w-16 truncate text-[9px] text-slate-700">{kw}</span>
+          <div className="h-1.5 flex-1 rounded bg-slate-100">
+            <div className="h-full rounded bg-neutral-900" style={{ width: `${v}%` }} />
           </div>
-          <span className="text-[9px] font-semibold text-[#64748b]">{v}K</span>
+          <span className="text-[9px] font-semibold text-slate-600">{v}K</span>
         </div>
       ))}
     </div>
@@ -209,7 +209,7 @@ export default function SolutionsCarousel() {
   };
  
   return (
-    <section className="bg-[#f7f8fc] py-20 sm:py-28" id="solutions">
+    <section className="bg-slate-50 py-20 sm:py-28 border-y border-slate-200" id="solutions">
       <div className="mx-auto max-w-7xl px-6">
         {/* header */}
         <div className="flex items-end justify-between gap-6">
@@ -219,12 +219,12 @@ export default function SolutionsCarousel() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#534AB7]">
+            <p className="text-sm font-semibold uppercase tracking-widest text-slate-600">
               Solutions · {SOLUTIONS.length} free tools
             </p>
-            <h2 className="mt-2 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 text-3xl font-black tracking-tight text-neutral-950 sm:text-4xl lg:text-5xl">
               Free tools.{" "}
-              <span className="bg-gradient-to-r from-[#534AB7] to-[#3eb489] bg-clip-text text-transparent">
+              <span className="text-neutral-900">
                 Unfair advantage.
               </span>
             </h2>
@@ -235,7 +235,7 @@ export default function SolutionsCarousel() {
               onClick={() => scroll(-1)}
               disabled={!canLeft}
               aria-label="Previous"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-[#1c1c24] transition-all hover:border-[#534AB7] hover:text-[#534AB7] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-slate-300 disabled:hover:text-[#1c1c24]"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-neutral-950 transition-all hover:border-neutral-900 hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-slate-300"
             >
               <ArrowLeft className="h-5 w-5" />
             </button>
@@ -243,7 +243,7 @@ export default function SolutionsCarousel() {
               onClick={() => scroll(1)}
               disabled={!canRight}
               aria-label="Next"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-[#1c1c24] transition-all hover:border-[#534AB7] hover:text-[#534AB7] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-slate-300 disabled:hover:text-[#1c1c24]"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-neutral-950 transition-all hover:border-neutral-900 hover:text-neutral-950 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-slate-300"
             >
               <ArrowRight className="h-5 w-5" />
             </button>
@@ -259,31 +259,22 @@ export default function SolutionsCarousel() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative w-[300px] shrink-0 snap-start overflow-hidden rounded-2xl border border-[#e9ecf5] bg-gradient-to-br from-[#f3f5fb] to-[#e7f0f6] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:w-[340px]"
+              className="group relative w-[300px] shrink-0 snap-start overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl sm:w-[340px]"
             >
-              {/* diagonal texture */}
-              <div
-                className="pointer-events-none absolute inset-0 opacity-60"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(83,74,183,0.03) 10px, rgba(83,74,183,0.03) 11px)",
-                }}
-              />
- 
               <div className="relative">
                 <div className="flex items-start justify-between gap-3">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#534AB7]">{s.category}</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">{s.category}</span>
                   <Link
                     href={s.href}
                     aria-label={`Open ${s.title}`}
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#534AB7]/25 text-[#534AB7] transition-colors hover:bg-[#534AB7] hover:text-white"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-slate-300 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-white"
                   >
                     <Plus className="h-4 w-4" />
                   </Link>
                 </div>
  
-                <h3 className="mt-3 text-lg font-black leading-snug text-[#0a0f2e]">{s.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-[#64748b]">{s.desc}</p>
+                <h3 className="mt-3 text-lg font-black leading-snug text-neutral-950">{s.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">{s.desc}</p>
  
                 <div className="mt-4">
                   <Mock type={s.mockup} />
@@ -291,7 +282,7 @@ export default function SolutionsCarousel() {
  
                 <Link
                   href={s.href}
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#2f9670] transition-all group-hover:gap-2"
+                  className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-neutral-950 transition-all group-hover:gap-2"
                 >
                   Try it free <ArrowRight className="h-4 w-4" />
                 </Link>

@@ -121,7 +121,7 @@ export default function CaseStudyPanel({
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className={`mt-8 inline-flex items-center gap-2 ${radius.control} px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#3C3489] ${focusRing}`}
+            className={`mt-8 inline-flex items-center gap-2 ${radius.control} px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-neutral-800 ${focusRing}`}
             style={{ background: color.primary }}
           >
             <Play className="h-4 w-4 fill-white" aria-hidden /> {ctaLabel}

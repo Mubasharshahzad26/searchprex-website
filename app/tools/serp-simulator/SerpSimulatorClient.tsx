@@ -100,12 +100,12 @@ function Meter({ label, used, limit, chars }: { label: string; used: number; lim
   return (
     <div>
       <div className="flex items-baseline justify-between text-xs">
-        <span className="font-bold text-[#0a0f2e]">{label}</span>
+        <span className="font-bold text-neutral-950">{label}</span>
         <span style={{ color: tone }} className="font-semibold tabular-nums">
           {Math.round(used)} / {limit} px · {chars} chars
         </span>
       </div>
-      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#e5e7eb]" role="presentation">
+      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-slate-200" role="presentation">
         <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: tone }} />
       </div>
     </div>
@@ -222,56 +222,56 @@ export default function SerpSimulatorClient() {
 
   const ratingNum = Math.max(0, Math.min(5, parseFloat(rating) || 0));
   const input =
-    "mt-1 w-full rounded-lg border border-[#d1d5db] bg-white px-3 py-2 text-sm text-[#0a0f2e] focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20";
+    "mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-neutral-950 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15";
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
       {/* ── Inputs ── */}
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()} aria-label="Snippet details">
-        <label className="block text-sm font-bold text-[#0a0f2e]">
+        <label className="block text-sm font-bold text-neutral-950">
           Title tag
           <input className={input} value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Your page title" />
         </label>
-        <label className="block text-sm font-bold text-[#0a0f2e]">
+        <label className="block text-sm font-bold text-neutral-950">
           Meta description
           <textarea className={`${input} min-h-[96px]`} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Your meta description" />
         </label>
-        <label className="block text-sm font-bold text-[#0a0f2e]">
+        <label className="block text-sm font-bold text-neutral-950">
           Page URL
           <input className={input} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://example.com/page" inputMode="url" />
         </label>
         <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block text-sm font-bold text-[#0a0f2e]">
+          <label className="block text-sm font-bold text-neutral-950">
             Site name
             <input className={input} value={siteName} onChange={(e) => setSiteName(e.target.value)} placeholder="Your brand" />
           </label>
-          <label className="block text-sm font-bold text-[#0a0f2e]">
-            Keyword <span className="font-normal text-[#5b6472]">(to bold)</span>
+          <label className="block text-sm font-bold text-neutral-950">
+            Keyword <span className="font-normal text-slate-600">(to bold)</span>
             <input className={input} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="what people search" />
           </label>
         </div>
 
-        <fieldset className="rounded-xl border border-[#e5e7eb] p-4">
-          <legend className="px-1 text-xs font-bold uppercase tracking-widest text-[#5b6472]">Extras</legend>
-          <label className="flex items-center gap-2 text-sm text-[#374151]">
+        <fieldset className="rounded-xl border border-slate-200 p-4">
+          <legend className="px-1 text-xs font-bold uppercase tracking-widest text-slate-600">Extras</legend>
+          <label className="flex items-center gap-2 text-sm text-slate-700">
             <input type="checkbox" checked={showDate} onChange={(e) => setShowDate(e.target.checked)} />
             Show a date (it uses part of the description space)
           </label>
-          <label className="mt-2 flex items-center gap-2 text-sm text-[#374151]">
+          <label className="mt-2 flex items-center gap-2 text-sm text-slate-700">
             <input type="checkbox" checked={showStars} onChange={(e) => setShowStars(e.target.checked)} />
             Show review stars
           </label>
           {showStars ? (
             <div className="mt-3 grid grid-cols-2 gap-3">
-              <label className="text-xs font-bold text-[#0a0f2e]">
+              <label className="text-xs font-bold text-neutral-950">
                 Rating
                 <input className={input} value={rating} onChange={(e) => setRating(e.target.value)} inputMode="decimal" />
               </label>
-              <label className="text-xs font-bold text-[#0a0f2e]">
+              <label className="text-xs font-bold text-neutral-950">
                 Reviews
                 <input className={input} value={reviews} onChange={(e) => setReviews(e.target.value)} inputMode="numeric" />
               </label>
-              <p className="col-span-2 text-xs leading-relaxed text-[#5b6472]">
+              <p className="col-span-2 text-xs leading-relaxed text-slate-600">
                 Google shows stars only for some page types (products, recipes, software and others), and not for reviews a
                 business publishes about itself.
               </p>
@@ -280,15 +280,15 @@ export default function SerpSimulatorClient() {
         </fieldset>
 
         <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={() => copy("html")} className="inline-flex items-center gap-1.5 rounded-lg bg-[#534AB7] px-4 py-2 text-sm font-bold text-white hover:bg-[#433a9e]">
+          <button type="button" onClick={() => copy("html")} className="inline-flex items-center gap-1.5 rounded-lg bg-neutral-900 px-4 py-2 text-sm font-bold text-white hover:bg-neutral-800">
             {copied === "html" ? <Check className="h-4 w-4" aria-hidden /> : <Copy className="h-4 w-4" aria-hidden />}
             {copied === "html" ? "Copied" : "Copy HTML tags"}
           </button>
-          <button type="button" onClick={() => copy("link")} className="inline-flex items-center gap-1.5 rounded-lg border border-[#d1d5db] bg-white px-4 py-2 text-sm font-bold text-[#0a0f2e] hover:border-[#534AB7]">
+          <button type="button" onClick={() => copy("link")} className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-neutral-950 hover:border-neutral-900">
             {copied === "link" ? <Check className="h-4 w-4" aria-hidden /> : <Link2 className="h-4 w-4" aria-hidden />}
             {copied === "link" ? "Link copied" : "Copy share link"}
           </button>
-          <button type="button" onClick={reset} className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-[#5b6472] hover:text-[#0a0f2e]">
+          <button type="button" onClick={reset} className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:text-neutral-950">
             <RotateCcw className="h-4 w-4" aria-hidden /> Example
           </button>
         </div>
@@ -297,8 +297,8 @@ export default function SerpSimulatorClient() {
       {/* ── Preview + checks ── */}
       <div className="min-w-0">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#5b6472]">Google preview</p>
-          <div className="inline-flex rounded-lg border border-[#e5e7eb] bg-[#f8f9fc] p-1" role="tablist" aria-label="Device">
+          <p className="text-xs font-bold uppercase tracking-widest text-slate-600">Google preview</p>
+          <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1" role="tablist" aria-label="Device">
             {(["desktop", "mobile"] as const).map((dv) => (
               <button
                 key={dv}
@@ -307,7 +307,7 @@ export default function SerpSimulatorClient() {
                 aria-selected={device === dv}
                 onClick={() => setDevice(dv)}
                 className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold ${
-                  device === dv ? "bg-white text-[#0a0f2e] shadow-sm" : "text-[#5b6472]"
+                  device === dv ? "bg-white text-neutral-950 shadow-sm" : "text-slate-600"
                 }`}
               >
                 {dv === "desktop" ? <Monitor className="h-3.5 w-3.5" aria-hidden /> : <Smartphone className="h-3.5 w-3.5" aria-hidden />}
@@ -317,7 +317,7 @@ export default function SerpSimulatorClient() {
           </div>
         </div>
 
-        <div className="mt-3 overflow-x-auto rounded-2xl border border-[#e5e7eb] bg-white p-5">
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-slate-200 bg-white p-5">
           <div
             className="mx-auto"
             style={{ width: device === "desktop" ? 600 : 360, maxWidth: "100%", fontFamily: "Arial, sans-serif" }}
@@ -363,10 +363,10 @@ export default function SerpSimulatorClient() {
           </div>
         </div>
 
-        <div className="mt-5 space-y-3 rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-5">
+        <div className="mt-5 space-y-3 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <Meter label={`Title · ${device}`} used={t.width} limit={lim.title.px} chars={title.trim().length} />
           <Meter label={`Description · ${device}`} used={d.width} limit={lim.desc.px} chars={descWithDate.trim().length} />
-          <p className="text-xs leading-relaxed text-[#5b6472]">
+          <p className="text-xs leading-relaxed text-slate-600">
             Measured in pixels in Arial. Google publishes no fixed limits; these are close approximations, and Google may
             still rewrite your title or snippet.
           </p>
@@ -374,7 +374,7 @@ export default function SerpSimulatorClient() {
 
         <ul className="mt-5 space-y-2" aria-label="Checks">
           {checks.map((c) => (
-            <li key={c.text} className="flex items-start gap-2 text-sm leading-relaxed text-[#374151]">
+            <li key={c.text} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
               {c.ok ? (
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1a7d59]" aria-hidden />
               ) : (

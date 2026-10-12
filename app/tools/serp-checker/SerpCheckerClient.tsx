@@ -22,8 +22,8 @@ import {
   type SerpResponse,
 } from "@/lib/serp-types";
 
-const GREEN = "#3eb489";
-const PURPLE = "#534AB7";
+const GREEN = "#171717";
+const PURPLE = "#171717";
 
 type Faq = { q: string; a: string };
 
@@ -109,58 +109,58 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
     : "/free-audit";
 
   return (
-    <main className="bg-[#eeeef5] min-h-screen">
+    <main className="bg-white min-h-screen">
 
       {/* ── Hero + form ── */}
-      <section className="pt-28 pb-12">
+      <section className="pt-28 pb-12 border-b border-slate-200">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
           <div className="flex items-center gap-2 mb-6">
-            <Link href="/" className="text-[#64748b] text-sm hover:text-[#0a0f2e] transition-colors">Home</Link>
-            <span className="text-[#94a3b8]">›</span>
-            <Link href="/tools" className="text-[#64748b] text-sm hover:text-[#0a0f2e] transition-colors">Free SEO Tools</Link>
-            <span className="text-[#94a3b8]">›</span>
-            <span className="text-[#534AB7] text-sm font-semibold">SERP Checker</span>
+            <Link href="/" className="text-slate-600 text-sm hover:text-neutral-950 transition-colors">Home</Link>
+            <span className="text-slate-400">›</span>
+            <Link href="/tools" className="text-slate-600 text-sm hover:text-neutral-950 transition-colors">Free SEO Tools</Link>
+            <span className="text-slate-400">›</span>
+            <span className="text-neutral-950 text-sm font-semibold">SERP Checker</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 bg-[#EEEDFE] border border-[#534AB7]/30 rounded-full px-4 py-2 mb-5">
-            <Target className="h-3.5 w-3.5 text-[#534AB7]" />
-            <span className="text-xs font-bold text-[#534AB7] uppercase tracking-widest">Free SERP Checker</span>
+          <div className="inline-flex items-center gap-2 bg-slate-100 border border-slate-200 rounded-full px-4 py-2 mb-5">
+            <Target className="h-3.5 w-3.5 text-neutral-900" />
+            <span className="text-xs font-bold text-neutral-900 uppercase tracking-widest">Free SERP Checker</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-black text-[#0a0f2e] mb-4 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-black text-neutral-950 mb-4 leading-tight">
             Where do you actually <br />
-            <span className="text-[#534AB7]">rank on Google?</span>
+            <span className="text-neutral-950">rank on Google?</span>
           </h1>
-          <p className="text-[#64748b] text-lg max-w-2xl leading-relaxed mb-8">
+          <p className="text-slate-600 text-lg max-w-2xl leading-relaxed mb-8">
             Your own searches are personalised — they flatter you. Enter a domain and up to{" "}
             {MAX_KEYWORDS} keywords to check your exact Google position in the top 100, see which
             SERP features own each query, and inspect the top 10 results in the country you pick.
           </p>
-          <p className="text-[#64748b] text-sm max-w-2xl leading-relaxed -mt-4 mb-8">
+          <p className="text-slate-600 text-sm max-w-2xl leading-relaxed -mt-4 mb-8">
             Want to see how a title and meta description will look in Google instead?{" "}
-            <Link href="/tools/serp-simulator" className="font-semibold text-[#534AB7] underline underline-offset-2">
+            <Link href="/tools/serp-simulator" className="font-semibold text-neutral-950 underline underline-offset-2">
               Use the SERP simulator
             </Link>
             .
           </p>
 
           {/* Form */}
-          <form onSubmit={runCheck} className="rounded-2xl border border-[#e5e7eb] bg-white p-6 shadow-sm">
+          <form onSubmit={runCheck} className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
 
             {/* Domain + country */}
-            <label className="block text-xs font-bold uppercase tracking-widest text-[#64748b] mb-2">
+            <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">
               Your domain
             </label>
             <div className="flex flex-col sm:flex-row gap-3 mb-5">
               <div className="relative flex-1">
-                <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9ca3af]" />
+                <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
                 <input
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
                   placeholder="searchprex.com"
                   aria-label="Your domain"
-                  className="h-12 w-full rounded-xl border border-[#e5e7eb] bg-white pl-11 pr-4 text-base font-medium text-[#0a0f2e] placeholder-[#9ca3af] outline-none transition-colors focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20"
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-base font-medium text-neutral-950 placeholder-slate-400 outline-none transition-colors focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/15"
                 />
               </div>
 
@@ -169,26 +169,26 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
                 <button
                   type="button"
                   onClick={() => setCountryOpen((v) => !v)}
-                  className="flex h-12 w-full items-center justify-between gap-2 rounded-xl border border-[#e5e7eb] bg-white px-3.5 text-sm font-medium text-[#0a0f2e] transition-colors hover:bg-[#f8f9fc]"
+                  className="flex h-12 w-full items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-slate-50"
                 >
                   <span className="flex items-center gap-2 truncate">
                     <span className="text-lg leading-none">{country.flag}</span>
                     <span className="truncate">{country.name}</span>
                   </span>
-                  <ChevronDown className={`h-4 w-4 shrink-0 text-[#64748b] transition-transform ${countryOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`h-4 w-4 shrink-0 text-slate-600 transition-transform ${countryOpen ? "rotate-180" : ""}`} />
                 </button>
                 {countryOpen && (
-                  <div className="absolute z-20 mt-2 max-h-72 w-full overflow-y-auto rounded-xl border border-[#e5e7eb] bg-white py-1 shadow-lg">
+                  <div className="absolute z-20 mt-2 max-h-72 w-full overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 shadow-lg">
                     {SERP_COUNTRIES.map((c) => (
                       <button
                         key={c.code}
                         type="button"
                         onClick={() => { setCountry(c); setCountryOpen(false); }}
-                        className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-sm text-[#0a0f2e] transition-colors hover:bg-[#f8f9fc]"
+                        className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-sm text-neutral-950 transition-colors hover:bg-slate-50"
                       >
                         <span className="text-lg leading-none">{c.flag}</span>
                         <span className="flex-1">{c.name}</span>
-                        <span className="text-xs text-[#94a3b8]">{c.code}</span>
+                        <span className="text-xs text-slate-400">{c.code}</span>
                       </button>
                     ))}
                   </div>
@@ -197,12 +197,12 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
             </div>
 
             {/* Keywords */}
-            <label className="block text-xs font-bold uppercase tracking-widest text-[#64748b] mb-2">
-              Keywords <span className="text-[#94a3b8] normal-case tracking-normal font-medium">({keywords.length}/{MAX_KEYWORDS})</span>
+            <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">
+              Keywords <span className="text-slate-400 normal-case tracking-normal font-medium">({keywords.length}/{MAX_KEYWORDS})</span>
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <Search className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9ca3af]" />
+                <Search className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
                 <input
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
@@ -212,14 +212,14 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
                   disabled={atLimit}
                   placeholder={atLimit ? `Limit of ${MAX_KEYWORDS} keywords reached` : "personal injury lawyer wichita"}
                   aria-label="Keyword to check"
-                  className="h-12 w-full rounded-xl border border-[#e5e7eb] bg-white pl-11 pr-4 text-base font-medium text-[#0a0f2e] placeholder-[#9ca3af] outline-none transition-colors focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 disabled:bg-[#f8f9fc] disabled:cursor-not-allowed"
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-base font-medium text-neutral-950 placeholder-slate-400 outline-none transition-colors focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/15 disabled:bg-slate-50 disabled:cursor-not-allowed"
                 />
               </div>
               <button
                 type="button"
                 onClick={addKeyword}
                 disabled={atLimit || !draft.trim()}
-                className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[#e5e7eb] bg-white px-5 text-sm font-bold text-[#0a0f2e] transition-colors hover:bg-[#f8f9fc] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-12 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 text-sm font-bold text-neutral-950 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Plus className="h-4 w-4" /> Add
               </button>
@@ -228,7 +228,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
             {keywords.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
                 {keywords.map((k) => (
-                  <span key={k} className="inline-flex items-center gap-1.5 rounded-full border border-[#AFA9EC] bg-[#EEEDFE] px-3 py-1.5 text-xs font-semibold text-[#534AB7]">
+                  <span key={k} className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-950">
                     {k}
                     <button type="button" onClick={() => removeKeyword(k)} aria-label={`Remove ${k}`} className="transition-opacity hover:opacity-60">
                       <X className="h-3.5 w-3.5" />
@@ -241,7 +241,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
             <button
               type="submit"
               disabled={loading}
-              className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#534AB7] px-6 font-bold text-white transition-colors hover:bg-[#3d35a0] disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 font-bold text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
               {loading ? "Checking Google…" : "Check My Rankings"}
@@ -259,16 +259,16 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
 
       {/* ── Results ── */}
       {data && (
-        <section className="pb-16">
+        <section className="py-12 bg-slate-50 border-b border-slate-200">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
             <SourceBanner source={data.source} />
 
             <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h2 className="text-2xl font-black text-[#0a0f2e]">
+              <h2 className="text-2xl font-black text-neutral-950">
                 {data.domain}
               </h2>
-              <span className="text-sm text-[#64748b]">
+              <span className="text-sm text-slate-600">
                 {data.results.length} keyword{data.results.length === 1 ? "" : "s"} · {data.location}
               </span>
             </div>
@@ -286,45 +286,39 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
               ))}
             </div>
 
-            {/* Conversion hook — matches the /tools mid-page CTA.
-                Preview mode gets its own version: the tool can't tell the visitor
-                where they rank, so the offer becomes "a human will". That is a
-                stronger promise than the automated number anyway. */}
             {isPreview && (
-              <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border-2 border-[#AFA9EC] bg-white p-8 text-center">
-                <p className="text-xl font-black text-[#0a0f2e]">
+              <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-slate-300 bg-white p-8 text-center">
+                <p className="text-xl font-black text-neutral-950">
                   Want the real position for {data.domain}?
                 </p>
-                <p className="max-w-xl text-sm text-[#64748b]">
+                <p className="max-w-xl text-sm text-slate-600">
                   Automated position tracking isn&apos;t switched on yet — but the founder will run
                   {data.results.length === 1 ? " your keyword " : ` all ${data.results.length} of your keywords `}
                   by hand and send back the actual numbers, who&apos;s outranking you, and a 90-day
                   plan. Free, within 24 hours.
                 </p>
                 <Link href={auditHref}
-                  className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-                  style={{ background: GREEN }}>
+                  className="group mt-2 inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5">
                   <BarChart3 className="h-4 w-4" /> Get My Real Rankings
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
-                <p className="text-xs text-[#94a3b8]">
+                <p className="text-xs text-slate-500">
                   No credit card. Your domain and keywords carry over.
                 </p>
               </div>
             )}
 
             {missing > 0 && (
-              <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-[#e5e7eb] bg-white p-8 text-center">
-                <p className="text-xl font-black text-[#0a0f2e]">
+              <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-8 text-center">
+                <p className="text-xl font-black text-neutral-950">
                   {missing} of your keyword{missing === 1 ? "" : "s"} {missing === 1 ? "isn't" : "aren't"} in the top 100.
                 </p>
-                <p className="max-w-xl text-sm text-[#64748b]">
+                <p className="max-w-xl text-sm text-slate-600">
                   A missing ranking is a symptom, not the problem. Get the founder to review the whole
                   picture — free, with a 90-day roadmap, within 24 hours.
                 </p>
                 <Link href={auditHref}
-                  className="group mt-2 inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5"
-                  style={{ background: GREEN }}>
+                  className="group mt-2 inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5">
                   <BarChart3 className="h-4 w-4" /> Get Free SEO Audit
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
@@ -334,14 +328,10 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
         </section>
       )}
 
-      {/* ── How to read the results ──
-          The page was previously a form, a results area and an FAQ — nothing for
-          Google to rank when the visitor hasn't run a check yet, which is the
-          state every crawler and most first-time visitors see. These three
-          sections are the body copy that state was missing. */}
-      <section className="pb-4">
+      {/* ── How to read the results ── */}
+      <section className="py-12 bg-white border-b border-slate-200">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-black text-[#0a0f2e]">How to read your results</h2>
+          <h2 className="mb-6 text-2xl font-black text-neutral-950">How to read your results</h2>
           <div className="space-y-4">
             {[
               {
@@ -365,13 +355,13 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
                 d: "If the top 10 is directories and listicles, you need a comparison page. If it's all local businesses, your Google Business Profile is the lever. If it's Reddit and forums, Google has decided this query wants opinion, not marketing copy.",
               },
             ].map((s) => (
-              <div key={s.n} className="flex gap-4 rounded-2xl border border-[#e5e7eb] bg-white p-5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#EEEDFE] text-sm font-black text-[#534AB7]">
+              <div key={s.n} className="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-900 text-sm font-black text-white">
                   {s.n}
                 </span>
                 <div>
-                  <h3 className="font-bold text-[#0a0f2e]">{s.t}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-[#475569]">{s.d}</p>
+                  <h3 className="font-bold text-neutral-950">{s.t}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{s.d}</p>
                 </div>
               </div>
             ))}
@@ -379,13 +369,13 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
         </div>
       </section>
 
-      {/* ── SERP feature glossary — reuses the hints already written for the chips ── */}
-      <section className="py-12">
+      {/* ── SERP feature glossary ── */}
+      <section className="py-12 bg-slate-50 border-b border-slate-200">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-black text-[#0a0f2e]">
+          <h2 className="mb-2 text-2xl font-black text-neutral-950">
             What each SERP feature means
           </h2>
-          <p className="mb-6 text-sm leading-relaxed text-[#64748b]">
+          <p className="mb-6 text-sm leading-relaxed text-slate-600">
             A SERP feature is anything Google puts on the results page that isn&apos;t a plain blue
             link. Each one takes clicks away from the organic results — and each one is its own
             opportunity to appear.
@@ -394,7 +384,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
             {(Object.keys(SERP_FEATURE_META) as Array<keyof typeof SERP_FEATURE_META>).map((key) => {
               const meta = SERP_FEATURE_META[key];
               return (
-                <div key={key} className="rounded-2xl border border-[#e5e7eb] bg-white p-4">
+                <div key={key} className="rounded-2xl border border-slate-200 bg-white p-4">
                   <dt>
                     <span
                       className="inline-block rounded-lg px-2.5 py-1 text-[11px] font-bold"
@@ -403,7 +393,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
                       {meta.label}
                     </span>
                   </dt>
-                  <dd className="mt-2 text-sm leading-relaxed text-[#475569]">{meta.hint}</dd>
+                  <dd className="mt-2 text-sm leading-relaxed text-slate-600">{meta.hint}</dd>
                 </div>
               );
             })}
@@ -412,9 +402,9 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
       </section>
 
       {/* ── Why your own searches lie to you ── */}
-      <section className="pb-12">
+      <section className="py-12 bg-white border-b border-slate-200">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-black text-[#0a0f2e]">
+          <h2 className="mb-6 text-2xl font-black text-neutral-950">
             Why your position looks different when you search
           </h2>
           <div className="space-y-3">
@@ -423,13 +413,13 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
               ["Location", "Results shift between countries, cities and even neighbourhoods. Checking from your office is checking one very specific SERP."],
               ["Device and account", "Desktop and mobile return different results, and being signed in changes them again. An incognito window helps but does not fully strip personalisation."],
             ].map(([t, d]) => (
-              <div key={t} className="rounded-2xl border border-[#e5e7eb] bg-white p-5">
-                <h3 className="font-bold text-[#0a0f2e]">{t}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#475569]">{d}</p>
+              <div key={t} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <h3 className="font-bold text-neutral-950">{t}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{d}</p>
               </div>
             ))}
           </div>
-          <p className="mt-5 text-sm leading-relaxed text-[#64748b]">
+          <p className="mt-5 text-sm leading-relaxed text-slate-600">
             This is why an un-personalised check is the number worth tracking — and why the
             position you see in your own browser is almost always flattering.
           </p>
@@ -437,17 +427,17 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
       </section>
 
       {/* ── FAQ (matches FAQPage schema) ── */}
-      <section className="pb-16">
+      <section className="py-16 bg-slate-50 border-b border-slate-200">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-center text-2xl font-black text-[#0a0f2e]">Quick Answers</h2>
+          <h2 className="mb-6 text-center text-2xl font-black text-neutral-950">Quick Answers</h2>
           <div className="space-y-3">
             {faqs.map((f) => (
-              <details key={f.q} className="group rounded-2xl border border-[#e5e7eb] bg-white p-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-[#0a0f2e]">
+              <details key={f.q} className="group rounded-2xl border border-slate-200 bg-white p-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-neutral-950">
                   {f.q}
-                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-[#64748b] transition-transform group-open:rotate-180" />
+                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-slate-600 transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{f.a}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.a}</p>
               </details>
             ))}
           </div>
@@ -465,18 +455,18 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
       />
 
       {/* ── NicheSEO Pro banner ── */}
-      <section className="py-16 border-t border-[#e5e7eb]">
+      <section className="py-16 border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-[#0a0f2e] px-8 py-10 text-center lg:flex-row lg:text-left">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-neutral-900 px-8 py-10 text-center lg:flex-row lg:text-left">
             <div>
               <h2 className="text-2xl font-black text-white mb-2">Need more than a snapshot of one results page?</h2>
-              <p className="max-w-xl text-blue-200">
+              <p className="max-w-xl text-neutral-300">
                 NicheSEO Pro audits your whole site, finds the pages Google is skipping, and rewrites
                 thin product copy at scale. The free plan includes 3 site audits a month.
               </p>
             </div>
             <a href="https://nicheseopro.com/"
-              className="inline-flex flex-shrink-0 items-center gap-2 rounded-xl bg-[#534AB7] px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-[#3d35a0]">
+              className="inline-flex flex-shrink-0 items-center gap-2 rounded-xl bg-white px-8 py-4 text-sm font-bold text-neutral-950 transition-colors hover:bg-slate-100">
               <Sparkles className="h-4 w-4" /> Try NicheSEO Pro free
               <ArrowRight className="h-4 w-4" />
             </a>
@@ -486,8 +476,7 @@ export default function SerpCheckerClient({ faqs }: { faqs: Faq[] }) {
 
       {/* ── Floating CTA ── */}
       <Link href="/free-audit"
-        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5"
-        style={{ background: GREEN }}>
+        className="fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-4 py-3 text-sm font-bold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5">
         <BarChart3 className="h-4 w-4" /> Reality Check
       </Link>
     </main>
@@ -513,24 +502,21 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
   const band = positionBand(r.position);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white">
-      <div className="h-1 w-full" style={{ background: r.found ? PURPLE : "#e5e7eb" }} />
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+      <div className="h-1 w-full" style={{ background: r.found ? PURPLE : "#e2e8f0" }} />
 
       <div className="p-6">
         {/* Header: keyword + position */}
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8]">Keyword</p>
-            <h3 className="mt-1 text-lg font-black text-[#0a0f2e] break-words">{r.keyword}</h3>
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Keyword</p>
+            <h3 className="mt-1 text-lg font-black text-neutral-950 break-words">{r.keyword}</h3>
           </div>
           <div className="flex items-center gap-3">
-            {/* In preview mode there is no position to show. Printing "—" with a red
-                "Not in top 100" badge would be its own kind of lie: we haven't
-                looked, which is not the same as "you don't rank". */}
             {isPreview ? (
               <div className="text-right">
-                <Lock className="ml-auto h-6 w-6 text-[#94a3b8]" aria-hidden />
-                <span className="mt-1.5 inline-block rounded-full bg-[#f1f5f9] px-2.5 py-1 text-[10px] font-bold text-[#475569]">
+                <Lock className="ml-auto h-6 w-6 text-slate-400" aria-hidden />
+                <span className="mt-1.5 inline-block rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold text-slate-600">
                   Not measured
                 </span>
               </div>
@@ -550,7 +536,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
 
         {/* AI Overview callout */}
         {r.isAiOverview && (
-          <div className="mt-4 flex items-center gap-2 rounded-xl border border-[#AFA9EC] bg-[#EEEDFE] px-4 py-3 text-sm font-semibold text-[#534AB7]">
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-slate-300 bg-slate-100 px-4 py-3 text-sm font-semibold text-neutral-950">
             <Sparkles className="h-4 w-4 shrink-0" />
             You&apos;re cited in Google&apos;s AI Overview for this query.
           </div>
@@ -562,7 +548,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700">
               <Trophy className="h-3.5 w-3.5" /> Your ranking page
             </div>
-            <p className="mt-1.5 font-bold text-[#0a0f2e] break-words">{r.yourResult.title}</p>
+            <p className="mt-1.5 font-bold text-neutral-950 break-words">{r.yourResult.title}</p>
             <a href={r.yourResult.url} target="_blank" rel="noopener noreferrer"
               className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-emerald-800 break-all hover:underline">
               {r.yourResult.url} <ExternalLink className="h-3 w-3 shrink-0" />
@@ -571,16 +557,16 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
         )}
 
         {!r.found && (
-          <div className="mt-4 rounded-xl border border-[#e5e7eb] bg-[#f8f9fc] px-4 py-3 text-sm text-[#64748b]">
+          <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
             {isPreview ? (
               <>
                 We haven&apos;t checked where{" "}
-                <strong className="text-[#0a0f2e]">{r.yourDomain}</strong> ranks for this keyword —
+                <strong className="text-neutral-950">{r.yourDomain}</strong> ranks for this keyword —
                 that needs a live reading of Google, which isn&apos;t switched on yet.
               </>
             ) : (
               <>
-                <strong className="text-[#0a0f2e]">{r.yourDomain}</strong> doesn&apos;t appear in the
+                <strong className="text-neutral-950">{r.yourDomain}</strong> doesn&apos;t appear in the
                 top 100 for this keyword in {r.location}.
               </>
             )}
@@ -590,7 +576,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
         {/* SERP features */}
         {r.features.length > 0 && (
           <div className="mt-5">
-            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-slate-500">
               {isPreview ? "SERP features to watch on this query type" : "SERP features"}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -611,7 +597,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
         {/* Top 10 */}
         {r.top10.length > 0 && (
           <div className="mt-6">
-            <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
+            <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-slate-500">
               {isPreview ? `Example top ${r.top10.length} — layout only` : `Top ${r.top10.length} results`}
             </p>
             <ol className="space-y-1.5">
@@ -620,16 +606,16 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
                 return (
                   <li key={item.rank}
                     className={`flex items-start gap-3 rounded-lg border px-3 py-2.5 ${
-                      isYou ? "border-emerald-200 bg-emerald-50" : "border-transparent bg-[#f8f9fc]"
+                      isYou ? "border-emerald-200 bg-emerald-50" : "border-transparent bg-slate-50"
                     }`}>
                     <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[11px] font-black ${
-                      isYou ? "bg-emerald-600 text-white" : "bg-white text-[#64748b] border border-[#e5e7eb]"
+                      isYou ? "bg-emerald-600 text-white" : "bg-white text-slate-600 border border-slate-200"
                     }`}>
                       {item.rank}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-bold text-[#0a0f2e]">{item.title || item.domain}</p>
-                      <p className={`truncate text-xs ${isYou ? "text-emerald-700 font-semibold" : "text-[#64748b]"}`}>
+                      <p className="truncate text-sm font-bold text-neutral-950">{item.title || item.domain}</p>
+                      <p className={`truncate text-xs ${isYou ? "text-emerald-700 font-semibold" : "text-slate-600"}`}>
                         {item.domain}{isYou && " — that's you"}
                       </p>
                     </div>
@@ -643,7 +629,7 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
         {/* Competitors */}
         {r.competitors.length > 0 && (
           <div className="mt-6">
-            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-slate-500">
               {isPreview ? "Example competitor set" : "Domains owning this SERP"}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -652,10 +638,10 @@ function ResultCard({ result: r }: { result: SerpKeywordResult }) {
                   className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-semibold ${
                     domainMatches(c.domain, r.yourDomain)
                       ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                      : "border-[#e5e7eb] bg-white text-[#475569]"
+                      : "border-slate-200 bg-white text-slate-600"
                   }`}>
                   {c.domain}
-                  {c.count > 1 && <span className="text-[#94a3b8]">×{c.count}</span>}
+                  {c.count > 1 && <span className="text-slate-400">×{c.count}</span>}
                 </span>
               ))}
             </div>

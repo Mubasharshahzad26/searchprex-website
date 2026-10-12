@@ -197,10 +197,10 @@ export default function AISearchPage() {
     ],
   };
 
-  const link = "text-sm font-black text-[#0a0f2e] group-hover:text-[#534AB7]";
+  const link = "text-sm font-black text-neutral-950 group-hover:text-neutral-700";
 
   return (
-    <main id="main-content" className="bg-[#f8f9fc] pt-20">
+    <main id="main-content" className="bg-white pt-20">
       <script
         id="ld-ai-search"
         type="application/ld+json"
@@ -240,7 +240,7 @@ export default function AISearchPage() {
             <Link
               key={g.href}
               href={g.href}
-              className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+              className="group rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
             >
               <p className={link}>{g.title}</p>
               <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">{g.body}</p>

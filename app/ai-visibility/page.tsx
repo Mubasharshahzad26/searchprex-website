@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AiVisibility from "@/components/ai-visibility/ai-visibility";
- 
+
 import { getPageSEO } from "@/lib/admin-seo";
 const baseMetadata: Metadata = {
   title: "AI Visibility Checker for Law Firms",
@@ -16,14 +16,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const meta = await getPageSEO("/ai-visibility", baseMetadata);
   return { ...meta, robots: { index: false, follow: true } };
 }
- 
+
 export default function AiVisibilityPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-[#f8f9fc] pt-20">
+    <main id="main-content" className="min-h-screen bg-white pt-20">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <AiVisibility />
       </div>
     </main>
   );
 }
- 

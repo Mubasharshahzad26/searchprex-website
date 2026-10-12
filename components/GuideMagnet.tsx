@@ -79,24 +79,24 @@ export default function GuideMagnet({
   }
 
   return (
-    <div className="not-prose rounded-3xl border border-[#dcdaf6] bg-[#f6f5ff] p-6 sm:p-8">
+    <div className="not-prose rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
       <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:items-center">
         <div className="flex gap-4">
           {/* A small "document" so the offer reads as a file, not a form. */}
-          <div className="hidden h-24 w-[4.5rem] flex-shrink-0 flex-col justify-between rounded-lg border border-[#dcdaf6] bg-white p-2 shadow-sm sm:flex" aria-hidden>
-            <FileText className="h-4 w-4 text-[#534AB7]" />
-            <span className="block h-1 w-full rounded bg-[#e7e8f0]" />
-            <span className="block h-1 w-4/5 rounded bg-[#e7e8f0]" />
-            <span className="block h-1 w-3/5 rounded bg-[#e7e8f0]" />
-            <span className="text-[8px] font-black text-[#534AB7]">PDF</span>
+          <div className="hidden h-24 w-[4.5rem] flex-shrink-0 flex-col justify-between rounded-lg border border-slate-200 bg-white p-2 shadow-sm sm:flex" aria-hidden>
+            <FileText className="h-4 w-4 text-neutral-900" />
+            <span className="block h-1 w-full rounded bg-slate-200" />
+            <span className="block h-1 w-4/5 rounded bg-slate-200" />
+            <span className="block h-1 w-3/5 rounded bg-slate-200" />
+            <span className="text-[8px] font-black text-neutral-950">PDF</span>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">{eyebrow}</p>
-            <p className="mt-1.5 text-xl font-black leading-snug tracking-tight text-[#0a0f2e]">{headline ?? `${guide.title} (PDF)`}</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-600">{eyebrow}</p>
+            <p className="mt-1.5 text-xl font-black leading-snug tracking-tight text-neutral-950">{headline ?? `${guide.title} (PDF)`}</p>
             <ul className="mt-3 space-y-1.5">
               {guide.points.map((p) => (
                 <li key={p} className="flex items-start gap-2 text-sm leading-relaxed text-[#374151]">
-                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1a7d59]" aria-hidden />
+                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-neutral-900" aria-hidden />
                   {p}
                 </li>
               ))}
@@ -106,11 +106,11 @@ export default function GuideMagnet({
 
         <div>
           {status === "done" || status === "fallback" ? (
-            <div className="rounded-2xl border border-[#bfe5d3] bg-white p-5 text-center">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 text-center">
               <a
                 href={guide.href}
                 download={guide.fileName}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1a7d59] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#196b4d]"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-neutral-800"
               >
                 <Download className="h-4 w-4" aria-hidden /> Download the PDF
               </a>
@@ -118,7 +118,7 @@ export default function GuideMagnet({
                 {status === "fallback"
                   ? "Your email didn't save on our side, but the file is yours anyway."
                   : "It's yours. Want it run against your site instead?"}{" "}
-                <a href="/free-audit" className="font-bold text-[#534AB7]">
+                <a href="/free-audit" className="font-bold text-neutral-950">
                   Free tear-down <ArrowRight className="inline h-3 w-3" aria-hidden />
                 </a>
               </p>
@@ -133,7 +133,7 @@ export default function GuideMagnet({
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@yourfirm.com"
                 autoComplete="email"
-                className="w-full rounded-full border border-[#dcdfea] bg-white px-5 py-3 text-sm text-[#0a0f2e] outline-none focus:border-[#1a7d59] focus:ring-2 focus:ring-[#1a7d59]/20"
+                className="w-full rounded-full border border-slate-300 bg-white px-5 py-3 text-sm text-neutral-950 outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/20"
               />
               <label className="sr-only" htmlFor={`guide-${guide.id}-${source}-site`}>Your website (optional)</label>
               <input
@@ -142,12 +142,12 @@ export default function GuideMagnet({
                 onChange={(e) => setWebsite(e.target.value)}
                 placeholder="Your website (optional)"
                 autoComplete="url"
-                className="w-full rounded-full border border-[#dcdfea] bg-white px-5 py-3 text-sm text-[#0a0f2e] outline-none focus:border-[#1a7d59] focus:ring-2 focus:ring-[#1a7d59]/20"
+                className="w-full rounded-full border border-slate-300 bg-white px-5 py-3 text-sm text-neutral-950 outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/20"
               />
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1a7d59] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#196b4d] disabled:opacity-70"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-neutral-800 disabled:opacity-70"
               >
                 {status === "sending" ? "Preparing…" : "Get the PDF"} {status === "sending" ? null : <Download className="h-4 w-4" aria-hidden />}
               </button>

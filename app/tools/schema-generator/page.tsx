@@ -259,7 +259,7 @@ export default function SchemaGeneratorPage() {
     ],
   };
 
-  const linkStyle = "font-semibold text-[#534AB7] underline underline-offset-2 hover:text-[#3C3489]";
+  const linkStyle = "font-semibold text-neutral-950 underline underline-offset-2 hover:text-neutral-700";
 
   return (
     <main id="main-content">
@@ -357,7 +357,7 @@ export default function SchemaGeneratorPage() {
             <FeatureCard key={rule.title} title={rule.title} body={rule.body} />
           ))}
         </CardGrid>
-        <div className="mt-8 rounded-xl border border-[#e5e7eb] bg-[#f8f9fc] p-5 text-sm leading-relaxed text-[#566070]">
+        <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-relaxed text-[#566070]">
           <p>
             Structured data is check #14 in our free{" "}
             <Link href="/resources/technical-seo-checklist" className={linkStyle}>
@@ -412,14 +412,14 @@ export default function SchemaGeneratorPage() {
             <Link
               key={tool.label}
               href={tool.href}
-              className="bg-white border border-[#e5e7eb] rounded-xl p-5 transition-all hover:border-[#534AB7] hover:shadow-md flex flex-col justify-between"
+              className="bg-white border border-slate-200 rounded-xl p-5 transition-all hover:border-neutral-900 hover:shadow-md flex flex-col justify-between"
             >
               <div>
                 <div className="text-2xl mb-3">{tool.icon}</div>
-                <h3 className="text-sm font-bold text-[#0a0f2e] mb-1.5">{tool.label}</h3>
+                <h3 className="text-sm font-bold text-neutral-950 mb-1.5">{tool.label}</h3>
                 <p className="text-xs text-[#566070] leading-relaxed">{tool.desc}</p>
               </div>
-              <span className="mt-4 inline-flex items-center text-xs font-semibold text-[#534AB7]">
+              <span className="mt-4 inline-flex items-center text-xs font-semibold text-neutral-950">
                 Open Tool →
               </span>
             </Link>
