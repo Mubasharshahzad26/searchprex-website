@@ -1121,62 +1121,83 @@ export const CITY_PAGES: CityPage[] = [
     state: "California",
     stateAbbr: "CA",
     county: "Santa Clara County",
-    metaTitle: "Law Firm SEO Company in San Jose, CA",
+    metaTitle: "San Jose Law Firm SEO | Silicon Valley Map Pack & Retainers",
     metaDescription:
-      "SEO for San Jose law firms. Rank in Santa Clara County for employment, high-asset family law and injury searches. Founder-led, one firm per city.",
-    h1: "Law Firm SEO in San Jose, California",
+      "San Jose law firm SEO for tech employment, high-asset divorce, and IP litigation attorneys. Dominate Santa Clara County Map Pack and AI search visibility. Month-to-month.",
+    h1: "San Jose Law Firm SEO: Silicon Valley Retainer Engine",
     heroSub:
-      "Equity compensation, non-compete disputes and community property collide in Santa Clara County in ways they do nowhere else. The firms that explain that collision clearly are the ones that get found.",
+      "Capture high-value Santa Clara County retainers before San Francisco mega-firms outspend you on generic keywords. We deploy technical Map Pack authority, Silicon Valley equity silos, and AI answer engine optimization tailored specifically for South Bay attorneys.",
     problem:
-      "San Jose firms compete against San Francisco practices and national directories. What neither offers is content that understands what a stock option grant does to a divorce, or what California law actually says about a non-compete.",
+      "Struggling to Sign High-Value Silicon Valley Clients Against San Francisco Mega-Firms?",
     problemPoints: [
-      "San Francisco firms outrank San Jose practices on domain strength while ignoring Santa Clara County specifics",
-      "Equity compensation — RSUs, options, vesting schedules — makes local divorce matters unusually complex, and pages are written for simple cases",
-      "California voids most non-compete agreements, and employees searching about them get advice written for states where they are enforceable",
-      "Sunnyvale, Santa Clara, Mountain View, Cupertino and Palo Alto are separate searches nobody covers",
-      "Multilingual search demand across the county is substantial and almost entirely unserved",
+      "San Francisco multi-office conglomerates dominate generic regional SERPs while offering zero hyper-local relevance to Santa Clara County tech professionals",
+      "Executive tech divorces involving complex RSU vesting schedules, founder stock, and multi-million-dollar real estate require California community property depth that generic content fails to convey",
+      "California's strict ban on non-compete agreements (Cal. Bus. & Prof. Code § 16600) drives massive search volume from tech employees reading outdated out-of-state advice",
+      "High-value South Bay tech hubs—including Sunnyvale, Mountain View, Cupertino, Palo Alto, and Santa Clara—are searched independently and neglected by competitors",
+      "PPC Google Ads costs for employment and personal injury in San Jose frequently exceed $320 per click, exhausting marketing budgets with low conversion",
     ],
     practiceDemand: [
-      { area: "Employment law", why: "California's ban on most non-competes, plus wage-and-hour and discrimination claims, drives continuous demand." },
-      { area: "High-asset family law", why: "Equity compensation and community property together make asset division uniquely technical here." },
-      { area: "Business & startup", why: "Formation, founder disputes and equity agreements from a dense startup base." },
-      { area: "Personal injury", why: "US-101, I-280 and I-880 carry heavy commuter volume through the county." },
+      { area: "Tech employment & executive severance", why: "California's voiding of non-competes (Cal. Bus. & Prof. Code § 16600), wage disputes, tech layoffs, and whistleblower claims generate massive high-income search volume." },
+      { area: "High-asset divorce & RSU division", why: "Silicon Valley's equity compensation structures make California community property division uniquely technical, requiring specialized Huggins/Nelson formula apportionment." },
+      { area: "Startup IP & founder disputes", why: "Dense startup ecosystems across San Jose and the South Bay create ongoing demand for trade secret defense, partnership dissolutions, and breach of fiduciary duty litigation." },
+      { area: "Catastrophic personal injury", why: "Heavy commuter arteries (US-101, I-280, I-880, and SR-85) produce severe multi-vehicle collisions requiring swift, aggressive representation." },
     ],
     localSignals: [
-      { label: "South Bay coverage", detail: "Sunnyvale, Santa Clara, Mountain View, Cupertino and Palo Alto searched separately" },
-      { label: "Santa Clara County venue", detail: "Naming the actual court separates you from San Francisco firms" },
-      { label: "Equity compensation content", detail: "RSUs, options and vesting in divorce — written for this market specifically" },
-      { label: "Multilingual demand", detail: "Substantial non-English search volume that competitors ignore entirely" },
+      { label: "Silicon Valley entity authority", detail: "Dominating search clusters across San Jose, Cupertino, Sunnyvale, and Mountain View" },
+      { label: "Santa Clara County venue silos", detail: "Direct statutory alignment with Santa Clara County Superior Court and Hall of Justice" },
+      { label: "Equity compensation depth", detail: "Authoritative citation of California community property formulas for unvested RSUs and stock options" },
+      { label: "Executive privacy conversion UX", detail: "Sub-second mobile speed and discreet intake funnels tailored for high-profile tech professionals" },
     ],
     courts: [
-      "Santa Clara County Superior Court",
-      "Santa Clara County Hall of Justice",
-      "U.S. District Court, Northern District of California",
+      "Santa Clara County Superior Court (191 N. 1st St, San Jose)",
+      "Santa Clara County Hall of Justice (190 W. Hedding St, San Jose)",
+      "U.S. District Court, Northern District of California (San Jose Division)",
+      "California 6th District Court of Appeal (San Jose)",
     ],
-    barAssociation: "State Bar of California · Santa Clara County Bar Association",
-    neighborhoods: ["Downtown San Jose", "Willow Glen", "Almaden Valley", "Sunnyvale", "Santa Clara", "Cupertino"],
-    nearbyCities: ["San Francisco", "Oakland", "Fremont", "Palo Alto"],
+    barAssociation: "State Bar of California · Santa Clara County Bar Association · Silicon Valley Bar Association",
+    neighborhoods: ["Downtown San Jose", "Willow Glen", "Almaden Valley", "Rose Garden", "Santana Row & Valley Fair", "Silver Creek"],
+    nearbyCities: ["Santa Clara", "Sunnyvale", "Cupertino", "Mountain View", "Palo Alto", "Fremont"],
     legalContext: {
-      heading: "Why equity compensation and community property make San Jose different",
+      heading: "Why equity compensation and California community property make San Jose unique",
       body:
-        "California is a community property state, meaning assets acquired during a marriage are generally owned equally. Layer that over Santa Clara County's compensation structure — where a substantial share of household wealth arrives as restricted stock units and options with multi-year vesting schedules — and asset division becomes genuinely technical. Whether unvested equity granted during the marriage but vesting after separation is community or separate property is a question with real money attached, and it is one that national divorce content never addresses. Separately, California voids most non-compete agreements, so employees here searching about a restrictive covenant they signed are routinely reading advice written for states where such agreements are enforceable. Both gaps are wide, and both are worth more per client than almost any general legal keyword.",
+        "California is a pure community property state. Under California Family Code, assets acquired during marriage are owned 50/50. When applied to Silicon Valley tech compensation—where the overwhelming majority of executive net worth consists of restricted stock units (RSUs), incentive stock options (ISOs), and multi-year vesting schedules—asset division becomes extraordinarily complex. Questions regarding whether unvested grants constitute community or separate property under the Huggins or Nelson formulas represent millions of dollars in dispute. National directories and generalist agencies produce surface-level copy that wealthy tech executives instantly dismiss. SearchPrex engineers authoritative legal silos that answer these precise statutory questions in the first sentence, establishing undeniable local authority for prospective clients and AI search algorithms alike.",
     },
     faqs: [
       {
-        q: "Are non-compete agreements enforceable in California?",
-        a: "Generally no. California voids most non-compete agreements as a matter of public policy, with narrow exceptions such as the sale of a business. This is the opposite of the position in most states, which means employees searching for guidance frequently find advice that does not apply to them.",
+        q: "Why is San Jose law firm SEO more cost-effective than Google Ads in Silicon Valley?",
+        a: "San Jose law firm SEO builds permanent organic equity and generates high-value retainers at a fixed monthly cost, whereas Google Ads for Silicon Valley employment or injury terms cost $240 to $340 per click with zero compounding value.",
       },
       {
-        q: "How does equity compensation affect a California divorce?",
-        a: "Considerably. California is a community property state, and restricted stock units or options granted during the marriage are generally community property even if they vest later. Apportioning equity that straddles the separation date is technical, high-value, and almost never explained on general divorce pages.",
+        q: "How does SearchPrex help San Jose firms outrank San Francisco mega-agencies?",
+        a: "We outrank San Francisco firms by engineering hyper-localized Santa Clara County content silos, optimizing for South Bay municipal entities, and structuring venue pages directly mapped to Santa Clara County Superior Court.",
       },
       {
-        q: "Should a San Jose firm target San Francisco searches?",
-        a: "Rarely worth it first. San Francisco terms are more competitive and serve a different client base. Santa Clara County searches — San Jose, Sunnyvale, Santa Clara, Cupertino — are where you have genuine relevance and far less competition.",
+        q: "Are non-compete agreements enforceable against tech employees in California?",
+        a: "No. Under California Business and Professions Code § 16600, non-compete agreements are void as a matter of public policy, creating continuous search demand from tech workers seeking severance and trade secret counsel.",
+      },
+      {
+        q: "How are unvested RSUs and stock options divided in a San Jose divorce?",
+        a: "Unvested stock options and RSUs are apportioned between community and separate property using judicial time-rule formulas such as the Huggins or Nelson standards, depending on whether the grant was awarded for past performance or future retention.",
+      },
+      {
+        q: "Can a San Jose law firm capture clients across Sunnyvale, Cupertino, and Mountain View?",
+        a: "Yes. By establishing localized South Bay submarket pages with unique jurisdictional signals, localized case studies, and Schema markup, your San Jose office can rank across neighboring municipal boundaries.",
+      },
+      {
+        q: "How does SearchPrex optimize for Google AI Overviews and ChatGPT in Silicon Valley?",
+        a: "We structure legal insights with answer-first opening sentences, clear statutory definitions, and verified FAQPage Schema that generative search models extract directly as primary authoritative sources.",
+      },
+      {
+        q: "Do you lock San Jose law firms into annual contracts?",
+        a: "No. SearchPrex operates on a month-to-month retainer with zero long-term contracts and provides full geographic practice area exclusivity so we never work with your direct competitors.",
+      },
+      {
+        q: "How quickly can a San Jose law firm expect to see improved Map Pack rankings?",
+        a: "Most San Jose law firms see measurable Google Map Pack movement and improved local keyword visibility within 60 to 90 days following our technical GBP overhaul and localized citation cleanup.",
       },
     ],
   },
-
+  
   /* ─────────────── LOUISIANA ─────────────── */
   {
     stateSlug: "louisiana",
