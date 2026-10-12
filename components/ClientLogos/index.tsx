@@ -114,7 +114,7 @@ function FeaturedTrack({ hidden = false }: { hidden?: boolean }) {
             <span
               className={`flex h-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border ${
                 c.logo?.wide ? "w-24 px-1.5" : "w-11"
-              } ${c.logo?.dark ? "border-[#0a0f2e] bg-[#0a0f2e]" : "border-[#e5e7eb] bg-white"}`}
+              } ${c.logo?.dark ? "border-neutral-900 bg-neutral-900" : "border-slate-200 bg-white"}`}
             >
               {c.logo ? (
                 <Image
@@ -125,15 +125,15 @@ function FeaturedTrack({ hidden = false }: { hidden?: boolean }) {
                   className={c.logo.wide ? "h-8 w-full object-contain" : "h-9 w-9 object-contain"}
                 />
               ) : (
-                <span className="text-xs font-black tracking-tight text-[#534AB7]">{initials(c.name)}</span>
+                <span className="text-xs font-black tracking-tight text-neutral-900">{initials(c.name)}</span>
               )}
             </span>
             <span className="min-w-0">
-              <span className="block whitespace-nowrap text-sm font-black text-[#0a0f2e]">{c.name}</span>
+              <span className="block whitespace-nowrap text-sm font-black text-neutral-950">{c.name}</span>
               {c.metric ? (
                 <span className="block whitespace-nowrap text-xs">
                   <strong className="font-black text-[#196b4d]">{c.metric.v}</strong>{" "}
-                  <span className="text-[#5b6472]">{c.metric.l.toLowerCase()}</span>
+                  <span className="text-slate-600">{c.metric.l.toLowerCase()}</span>
                 </span>
               ) : null}
             </span>
@@ -145,13 +145,13 @@ function FeaturedTrack({ hidden = false }: { hidden?: boolean }) {
               <Link
                 href={c.href}
                 tabIndex={hidden ? -1 : undefined}
-                className="flex items-center gap-3 rounded-xl border border-[#e5e7eb] bg-white px-4 py-2.5 shadow-sm transition-all hover:border-[#1a7d59] hover:shadow-md"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-2xs transition-all hover:border-neutral-900 hover:shadow-sm"
                 title={`${c.name} case study`}
               >
                 {body}
               </Link>
             ) : (
-              <span className="flex items-center gap-3 rounded-xl border border-[#e5e7eb] bg-white px-4 py-2.5">{body}</span>
+              <span className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2.5">{body}</span>
             )}
           </li>
         );
@@ -164,7 +164,7 @@ function OthersTrack({ hidden = false }: { hidden?: boolean }) {
   return (
     <ul className="flex shrink-0 items-center gap-10 pr-10" aria-hidden={hidden || undefined}>
       {OTHERS.map((name) => (
-        <li key={name} className="whitespace-nowrap text-sm font-bold tracking-tight text-[#6b7280]">
+        <li key={name} className="whitespace-nowrap text-sm font-bold tracking-tight text-slate-500">
           {name}
         </li>
       ))}
@@ -174,20 +174,20 @@ function OthersTrack({ hidden = false }: { hidden?: boolean }) {
 
 export default function ClientLogos() {
   return (
-    <section aria-labelledby="clients-heading" className="border-t border-[#e5e7eb] bg-[#f8f9fc] py-10">
+    <section aria-labelledby="clients-heading" className="border-t border-slate-200 bg-slate-50 py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
-          <h2 id="clients-heading" className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#534AB7]">
+          <h2 id="clients-heading" className="text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-600">
             Businesses I&apos;ve grown
           </h2>
-          <Link href="/case-studies" className="text-xs font-bold text-[#196b4d] hover:underline">
+          <Link href="/case-studies" className="text-xs font-bold text-neutral-900 hover:underline">
             Every case study, with the screenshots →
           </Link>
         </div>
 
         <div className="client-marquee relative overflow-hidden">
-          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-[#f8f9fc] to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-[#f8f9fc] to-transparent" />
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-slate-50 to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-slate-50 to-transparent" />
 
           <div className="client-row client-row-a flex w-max">
             <FeaturedTrack />

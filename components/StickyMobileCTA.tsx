@@ -90,13 +90,13 @@ export default function StickyMobileCTA() {
     >
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-black text-[#0a0f2e]">Free Competitor Tear-Down</p>
-          <p className="truncate text-xs text-[#5b6472]">Market exclusivity in your city</p>
+          <p className="truncate text-sm font-black text-neutral-950">Free Competitor Tear-Down</p>
+          <p className="truncate text-xs text-slate-600">Market exclusivity in your city</p>
         </div>
         <Link
           href={OFFER_HREF}
           tabIndex={visible ? undefined : -1}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-[#534AB7] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#3C3489]"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-neutral-900 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-neutral-800"
         >
           {OFFER_CTA_SHORT} <ArrowRight className="h-4 w-4" />
         </Link>

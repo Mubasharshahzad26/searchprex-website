@@ -149,12 +149,10 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
           </span>
           {isLive ? (
             <span
-              className={`${heading.eyebrow} inline-flex items-center gap-1 rounded-full px-2.5 py-1`}
-              style={{ background: "#eafaf3", color: color.successDark }}
+              className={`${heading.eyebrow} inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-neutral-900`}
             >
               <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ background: color.success }}
+                className="h-1.5 w-1.5 rounded-full bg-neutral-900"
                 aria-hidden
               />
               Live
@@ -240,8 +238,7 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={`group block overflow-hidden ${radius.card} p-8 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl`}
-          style={{ background: color.ink }}
+          className={`group block overflow-hidden ${radius.card} bg-neutral-900 p-8 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl`}
         >
           <span
             className={`${heading.eyebrow} mb-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-white/80`}
@@ -249,10 +246,9 @@ export default function ResourcesPageComponent({ initialResources = [] }: { init
             <FileText className="h-3 w-3" aria-hidden /> {featured.type}
           </span>
           <h2 className={`${heading.h3} mb-2 text-white`}>{featured.title}</h2>
-          <p className={`${text.small} mb-4 max-w-2xl text-white/60`}>{featured.desc}</p>
+          <p className={`${text.small} mb-4 max-w-2xl text-slate-300`}>{featured.desc}</p>
           <span
-            className="inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
-            style={{ color: color.success }}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-all group-hover:gap-2.5"
           >
             Read the published article <ExternalLink className="h-3.5 w-3.5" aria-hidden />
           </span>

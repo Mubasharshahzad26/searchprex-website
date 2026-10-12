@@ -49,60 +49,60 @@ export function PaymentIconsRow({ className = "" }: { className?: string }) {
 
 export function BillingOverviewSection() {
   return (
-    <section className="bg-white py-16 sm:py-20 border-t border-[#e2e8f0]">
+    <section className="bg-white py-16 sm:py-20 border-t border-slate-200">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+          <span className="inline-block rounded-full border border-slate-200 bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-neutral-900">
             Transparent B2B Billing
           </span>
-          <h2 className="mt-3 text-3xl font-black text-[#0a0f2e] sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-black text-neutral-950 sm:text-4xl">
             How Payments &amp; Invoicing Work
           </h2>
-          <p className="mt-3 text-base text-[#475569] leading-relaxed">
+          <p className="mt-3 text-base text-slate-600 leading-relaxed">
             We operate with complete corporate transparency. No hidden charges, no mandatory long-term contracts, and 100% tax-deductible digital invoices.
           </p>
         </div>
 
         {/* 3 Pillars of Billing */}
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-7 transition-all hover:shadow-md">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#534AB7]/10 text-[#534AB7]">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 transition-all hover:shadow-md">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-900 text-white">
               <Receipt className="h-6 w-6" />
             </div>
-            <h3 className="mt-5 text-lg font-black text-[#0a0f2e]">Official Tax-Deductible Invoices</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+            <h3 className="mt-5 text-lg font-black text-neutral-950">Official Tax-Deductible Invoices</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
               Every retainer and project is billed with an itemized digital invoice detailing deliverables, company tax information, and payment timestamps — ready for corporate accounting.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-7 transition-all hover:shadow-md">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#3eb489]/15 text-[#2f9670]">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 transition-all hover:shadow-md">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-900 text-white">
               <CreditCard className="h-6 w-6" />
             </div>
-            <h3 className="mt-5 text-lg font-black text-[#0a0f2e]">Secure Global Payment Gateways</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+            <h3 className="mt-5 text-lg font-black text-neutral-950">Secure Global Payment Gateways</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
               Pay securely via <strong>Stripe Billing</strong> using Visa, Mastercard, American Express, Apple Pay, or direct <strong>US Bank ACH transfer</strong> (zero credit card fees for retainers).
             </p>
           </div>
 
-          <div className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-7 transition-all hover:shadow-md">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#534AB7]/10 text-[#534AB7]">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 transition-all hover:shadow-md">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-900 text-white">
               <Clock className="h-6 w-6" />
             </div>
-            <h3 className="mt-5 text-lg font-black text-[#0a0f2e]">Month-to-Month Flexibility</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+            <h3 className="mt-5 text-lg font-black text-neutral-950">Month-to-Month Flexibility</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
               Retainers are billed on a month-to-month basis. You are never locked into an inflexible 12-month contract. Pause or cancel before your next billing cycle with zero friction.
             </p>
           </div>
         </div>
 
         {/* Payment Icons Bar */}
-        <div className="mt-12 rounded-2xl border border-[#e2e8f0] bg-[#f1f5f9]/60 p-6 text-center">
-          <p className="text-xs font-bold uppercase tracking-wider text-[#64748b] mb-4">
+        <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-4">
             Accepted Payment Methods &amp; Gateways
           </p>
           <PaymentIconsRow />
-          <p className="mt-4 text-xs text-[#64748b]">
+          <p className="mt-4 text-xs text-slate-600">
             All transactions are 256-bit encrypted and processed through PCI-DSS Level 1 certified gateways.
           </p>
         </div>

@@ -143,19 +143,19 @@ export default function ExpertsPage() {
     ],
   };
 
-  const link = "font-semibold text-[#534AB7] underline underline-offset-2";
+  const link = "font-semibold text-neutral-950 underline underline-offset-2";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main id="main-content">
         {/* HERO — the person */}
-        <section className="bg-[#f8f9fc] px-4 pb-16 pt-32 sm:px-6 lg:px-8">
+        <section className="bg-white border-b border-slate-200 px-4 pb-16 pt-32 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1fr_360px]">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">Founder · SearchPrex</p>
-              <h1 className="mt-3 text-4xl font-black leading-tight text-[#0a0f2e] sm:text-5xl">
-                Mubashar Sharif, <span className="text-[#534AB7]">local SEO expert</span>
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-600">Founder · SearchPrex</p>
+              <h1 className="mt-3 text-4xl font-black leading-tight text-neutral-950 sm:text-5xl">
+                Mubashar Sharif, <span className="text-neutral-950">local SEO expert</span>
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#374151]">
                 I help US law firms, local service businesses and online stores get found — and I do the work myself. Every
@@ -163,21 +163,21 @@ export default function ExpertsPage() {
               </p>
               <ul className="mt-6 flex flex-wrap gap-2 text-sm">
                 {["5+ years of hands-on SEO", "Semrush certified", "HubSpot certified", "20+ clients"].map((c) => (
-                  <li key={c} className="inline-flex items-center gap-1.5 rounded-full border border-[#e5e7eb] bg-white px-3 py-1.5 font-semibold text-[#0a0f2e]">
-                    <BadgeCheck className="h-4 w-4 text-[#1a7d59]" aria-hidden />
+                  <li key={c} className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-semibold text-neutral-950">
+                    <BadgeCheck className="h-4 w-4 text-neutral-900" aria-hidden />
                     {c}
                   </li>
                 ))}
               </ul>
               <div className="mt-7 flex flex-wrap items-center gap-4">
-                <Link href="#start" className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] px-6 py-3 text-sm font-bold text-white hover:bg-[#433a9e]">
+                <Link href="#start" className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-6 py-3 text-sm font-bold text-white hover:bg-neutral-800">
                   Get a free tear-down <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <a
                   href={LINKEDIN}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0a0f2e] hover:text-[#0a66c2]"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 hover:text-neutral-700"
                 >
                   <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn profile
                 </a>
@@ -197,11 +197,11 @@ export default function ExpertsPage() {
               <Link
                 key={f.href}
                 href={f.href}
-                className="group rounded-2xl border border-[#e5e7eb] bg-white p-6 transition-all hover:border-[#534AB7] hover:shadow-md"
+                className="group rounded-2xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
               >
-                <h3 className="text-lg font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{f.title}</h3>
+                <h3 className="text-lg font-black text-neutral-950 group-hover:text-neutral-700">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#374151]">{f.body}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-neutral-950">
                   Open <ArrowRight className="h-3 w-3" aria-hidden />
                 </span>
               </Link>
@@ -221,14 +221,14 @@ export default function ExpertsPage() {
               <Link
                 key={cs.slug.client}
                 href={detailUrl(cs)}
-                className="group rounded-2xl border border-[#e5e7eb] bg-white p-6 transition-all hover:border-[#534AB7] hover:shadow-md"
+                className="group rounded-2xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
               >
-                <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+                <p className="text-xs font-bold uppercase tracking-widest text-slate-600">
                   {cs.seoType} · {cs.location}
                 </p>
-                <p className="mt-2 text-base font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{cs.client}</p>
+                <p className="mt-2 text-base font-black text-neutral-950 group-hover:text-neutral-700">{cs.client}</p>
                 <p className="mt-1 text-sm leading-relaxed text-[#374151]">{cs.headline}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-neutral-950">
                   Read the case study <ArrowRight className="h-3 w-3" aria-hidden />
                 </span>
               </Link>

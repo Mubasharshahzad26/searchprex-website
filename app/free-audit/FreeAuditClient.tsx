@@ -128,33 +128,33 @@ export default function FreeAuditClient() {
   }
 
   const inputCls =
-    "w-full rounded-xl border border-[#dfe3ec] bg-[#fbfcfe] px-4 py-3 text-sm text-[#0a0f2e] outline-none transition-all placeholder:text-[#9aa3b2] focus:border-[#1a7d59] focus:bg-white focus:ring-4 focus:ring-[#1a7d59]/10";
-  const labelCls = "mb-1.5 block text-xs font-bold uppercase tracking-widest text-[#5f6a78]";
+    "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-neutral-950 outline-none transition-all placeholder:text-slate-400 focus:border-neutral-900 focus:bg-white focus:ring-4 focus:ring-neutral-900/10";
+  const labelCls = "mb-1.5 block text-xs font-bold uppercase tracking-widest text-slate-600";
 
   return (
     <main
       id="main-content"
-      className="bg-[#f8f9fc] px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-32"
+      className="bg-white px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-32"
     >
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_460px] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-12 lg:gap-y-8">
         {/* ── 1. Hero Intro + Founder Trust Badge (Top on Mobile, Top-Left on Desktop) ── */}
         <div className="lg:col-start-1 lg:row-start-1">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#1a7d59]/20 bg-[#1a7d59]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#196b4d]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-neutral-900">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             Free competitor SEO &amp; AI tear-down
           </span>
 
-          <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tight text-[#0a0f2e] sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tight text-neutral-950 sm:text-4xl lg:text-5xl">
             I&apos;ll audit your site myself and send you the fix list
           </h1>
 
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-[#566070] sm:text-lg">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
             {OFFER_PROMISE}
           </p>
 
           {/* Personal Founder Trust Block — answers "Who is 'I'?" immediately */}
-          <div className="mt-6 flex items-start gap-4 rounded-2xl border border-[#e5e7eb] bg-white p-4 shadow-sm sm:items-center sm:p-5">
-            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-[#1a7d59]/20">
+          <div className="mt-6 flex items-start gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm sm:items-center sm:p-5">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-slate-200">
               <Image
                 src="/images/mubashar-sharif.jpg"
                 alt="Mubashar Sharif, Founder of SearchPrex"
@@ -165,13 +165,13 @@ export default function FreeAuditClient() {
             </div>
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-sm font-bold text-[#0a0f2e]">Mubashar Sharif</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#1a7d59]/10 px-2 py-0.5 text-[11px] font-semibold text-[#196b4d]">
+                <span className="text-sm font-bold text-neutral-950">Mubashar Sharif</span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-white border border-slate-200 px-2 py-0.5 text-[11px] font-semibold text-neutral-900">
                   <BadgeCheck className="h-3 w-3" aria-hidden="true" />
                   Founder · SearchPrex
                 </span>
               </div>
-              <p className="mt-1 text-xs leading-relaxed text-[#566070] sm:text-sm">
+              <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">
                 5+ yrs hands-on SEO · Semrush &amp; HubSpot Certified · Every audit written by hand,
                 never an automated crawler PDF.
               </p>
@@ -182,54 +182,54 @@ export default function FreeAuditClient() {
         {/* ── 2. The Form (Second on Mobile for zero scroll friction, Right Column Sticky on Desktop) ── */}
         <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:sticky lg:top-28">
           {fromTool && (
-            <div className="mb-4 rounded-xl border border-[#e6e8f0] bg-white px-4 py-3 text-sm text-[#566070]">
-              <span className="font-bold text-[#0a0f2e]">From the SERP Checker:</span> I&apos;ll
+            <div className="mb-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+              <span className="font-bold text-neutral-950">From the SERP Checker:</span> I&apos;ll
               include your live position for{" "}
-              <span className="font-bold text-[#0a0f2e]">{fromTool}</span> in the audit.
+              <span className="font-bold text-neutral-950">{fromTool}</span> in the audit.
             </div>
           )}
 
           {status === "done" ? (
-            <div className="rounded-2xl border border-[#1a7d59]/30 bg-white p-8 shadow-[0_8px_30px_rgba(10,15,46,0.06)]">
-              <CheckCircle2 className="h-9 w-9 text-[#196b4d]" aria-hidden="true" />
-              <h2 className="mt-4 text-xl font-black text-[#0a0f2e]">Audit request received</h2>
-              <p className="mt-3 text-sm leading-relaxed text-[#566070]">
+            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-[0_8px_30px_rgba(10,15,46,0.06)]">
+              <CheckCircle2 className="h-9 w-9 text-neutral-900" aria-hidden="true" />
+              <h2 className="mt-4 text-xl font-black text-neutral-950">Audit request received</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 I&apos;ll review{" "}
-                <strong className="font-bold text-[#0a0f2e]">{form.website}</strong> and send the
+                <strong className="font-bold text-neutral-950">{form.website}</strong> and send the
                 tear-down to{" "}
-                <strong className="font-bold text-[#0a0f2e]">{form.email}</strong> within 24
+                <strong className="font-bold text-neutral-950">{form.email}</strong> within 24
                 hours.
               </p>
-              <div className="mt-6 flex flex-col gap-3 border-t border-[#eef0f6] pt-5">
+              <div className="mt-6 flex flex-col gap-3 border-t border-slate-200 pt-5">
                 <a
                   href="https://calendly.com/contact-searchprex/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a7d59] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#156648]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-neutral-800"
                 >
                   Want to talk sooner? Book a 30-min call
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/"
-                  className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#566070] transition-colors hover:text-[#0a0f2e]"
+                  className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-600 transition-colors hover:text-neutral-950"
                 >
                   ← Back to home
                 </Link>
               </div>
             </div>
           ) : (
-            <div className="overflow-hidden rounded-2xl border border-[#dfe3ec] bg-white shadow-[0_12px_36px_rgba(10,15,46,0.07)]">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_12px_36px_rgba(10,15,46,0.07)]">
               {/* Top accent bar */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-[#1a7d59] via-[#3eb489] to-[#1a7d59]" />
+              <div className="h-1.5 w-full bg-neutral-900" />
 
               <div className="p-6 sm:p-8">
                 {/* Conversational micro-header */}
-                <div className="mb-6 border-b border-[#eef0f6] pb-4">
-                  <h2 className="text-lg font-black tracking-tight text-[#0a0f2e] sm:text-xl">
+                <div className="mb-6 border-b border-slate-200 pb-4">
+                  <h2 className="text-lg font-black tracking-tight text-neutral-950 sm:text-xl">
                     Where should I send your tear-down?
                   </h2>
-                  <p className="mt-1 text-xs text-[#566070] sm:text-sm">
+                  <p className="mt-1 text-xs text-slate-600 sm:text-sm">
                     Takes 30 seconds · Delivered to your inbox within 24 hours
                   </p>
                 </div>
@@ -318,7 +318,7 @@ export default function FreeAuditClient() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a7d59] px-6 py-4 text-sm font-bold text-white shadow-md shadow-[#1a7d59]/20 transition-all hover:-translate-y-0.5 hover:bg-[#156648] disabled:opacity-60 disabled:hover:translate-y-0"
+                    className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-4 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-neutral-800 disabled:opacity-60 disabled:hover:translate-y-0"
                   >
                     {status === "loading" ? (
                       <>
@@ -334,17 +334,17 @@ export default function FreeAuditClient() {
                   </button>
                 </form>
 
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-[#eef0f6] pt-5 text-xs font-medium text-[#5f6a78]">
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-slate-200 pt-5 text-xs font-medium text-slate-600">
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#196b4d]" aria-hidden="true" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-neutral-900" aria-hidden="true" />
                     24hr turnaround
                   </span>
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#196b4d]" aria-hidden="true" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-neutral-900" aria-hidden="true" />
                     No credit card
                   </span>
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#196b4d]" aria-hidden="true" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-neutral-900" aria-hidden="true" />
                     Real founder audit
                   </span>
                 </div>
@@ -355,7 +355,7 @@ export default function FreeAuditClient() {
 
         {/* ── 3. Deliverables & Guarantee (Below Form on Mobile, Bottom-Left on Desktop) ── */}
         <div className="self-start lg:col-start-1 lg:row-start-2">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-[#5f6a78]">
+          <h2 className="text-xs font-bold uppercase tracking-widest text-slate-600">
             What&apos;s inside your 24-hour tear-down
           </h2>
 
@@ -365,14 +365,14 @@ export default function FreeAuditClient() {
               return (
                 <div
                   key={d.title}
-                  className="flex items-start gap-3.5 rounded-xl border border-[#e5e7eb] bg-white p-4 shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
+                  className="flex items-start gap-3.5 rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1a7d59]/10">
-                    <Icon className="h-[18px] w-[18px] text-[#196b4d]" aria-hidden="true" />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white border border-slate-200">
+                    <Icon className="h-[18px] w-[18px] text-neutral-900" aria-hidden="true" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-sm font-bold text-[#0a0f2e]">{d.title}</span>
-                    <span className="mt-1 block text-xs leading-relaxed text-[#566070] sm:text-sm">
+                    <span className="block text-sm font-bold text-neutral-950">{d.title}</span>
+                    <span className="mt-1 block text-xs leading-relaxed text-slate-600 sm:text-sm">
                       {d.body}
                     </span>
                   </span>
@@ -381,7 +381,7 @@ export default function FreeAuditClient() {
             })}
           </div>
 
-          <p className="mt-6 border-l-2 border-[#1a7d59] pl-4 text-sm leading-relaxed text-[#566070]">
+          <p className="mt-6 border-l-2 border-neutral-900 pl-4 text-sm leading-relaxed text-slate-600">
             A real audit by the founder, not a tool report. If all you want is a crawler&apos;s
             error list, you can get one free in ten minutes without me.
           </p>

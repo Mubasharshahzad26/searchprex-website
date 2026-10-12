@@ -179,23 +179,23 @@ export default function IndustriesPage() {
                 <Link
                   key={c.href}
                   href={c.href}
-                  className="group rounded-2xl border border-[#e5e7eb] bg-white p-5 transition-all hover:border-[#534AB7] hover:shadow-md"
+                  className="group rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
                 >
-                  <p className="flex items-center gap-2 text-base font-black text-[#0a0f2e] group-hover:text-[#534AB7]">
-                    <Icon className="h-4 w-4 flex-shrink-0 text-[#534AB7]" aria-hidden />
+                  <p className="flex items-center gap-2 text-base font-black text-neutral-950 group-hover:text-neutral-700">
+                    <Icon className="h-4 w-4 flex-shrink-0 text-neutral-900" aria-hidden />
                     {c.title}
                   </p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-[#5b6472]">
+                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                     {c.proof ?? "No case study yet — the approach, stated honestly."}
                   </p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#534AB7]">
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-neutral-900">
                     Open <ArrowRight className="h-3 w-3" aria-hidden />
                   </span>
                 </Link>
               ))}
             </CardGrid>
             <p className="mt-6 text-center">
-              <Link href={g.hub} className="inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+              <Link href={g.hub} className="inline-flex items-center gap-1 text-sm font-bold text-neutral-950 hover:text-neutral-700">
                 {g.hubLabel} <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </p>

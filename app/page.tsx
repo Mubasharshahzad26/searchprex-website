@@ -228,9 +228,9 @@ const FAQS = [
 function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
     <div className="mx-auto mb-10 max-w-2xl text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#534AB7]">{eyebrow}</p>
-      <h2 className={`${H} mt-3 text-3xl  tracking-[-0.02em] text-[#0a0f2e] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1]`}>{title}</h2>
-      {sub ? <p className="mt-4 text-base leading-relaxed text-[#5b6472]">{sub}</p> : null}
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-neutral-600">{eyebrow}</p>
+      <h2 className={`${H} mt-3 text-3xl tracking-[-0.02em] text-neutral-950 sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1]`}>{title}</h2>
+      {sub ? <p className="mt-4 text-base leading-relaxed text-slate-600">{sub}</p> : null}
     </div>
   );
 }
@@ -300,7 +300,7 @@ export default function Home() {
       <ClientLogos />
       <TrustStrap />
       {/* 3 · RESULTS BENTO */}
-      <section className="bg-[#f7f7fc] px-4 py-20 sm:px-6 lg:py-24">
+      <section className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Results"
@@ -310,18 +310,18 @@ export default function Home() {
           <div className="grid gap-5 lg:grid-cols-3">
             {/* SMK — the before/after contrast is what makes it memorable. */}
             {smk && smkBefore && smkAfter ? (
-              <article className="rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-8 lg:col-span-3">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">Ecommerce · WooCommerce · {smk.period}</p>
-                <h3 className={`${H} mt-2 text-2xl tracking-tight text-[#0a0f2e] sm:text-3xl`}>$5,832 → $19,100 a month</h3>
-                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-[#5b6472]">
+              <article className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 lg:col-span-3">
+                <p className="text-xs font-bold uppercase tracking-widest text-neutral-600">Ecommerce · WooCommerce · {smk.period}</p>
+                <h3 className={`${H} mt-2 text-2xl tracking-tight text-neutral-950 sm:text-3xl`}>$5,832 → $19,100 a month</h3>
+                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-slate-600">
                   One 35,000-product store, one reporting period, one source: the store&apos;s own WooCommerce dashboard.
                 </p>
-                <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-[#e7e8f0] bg-[#e7e8f0] sm:grid-cols-3">
+                <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-3">
                   {SMK_REVENUE_METRICS.map((m) => (
                     <div key={m.l} className="bg-white px-5 py-4">
                       <dd className="text-3xl font-black tabular-nums tracking-tight text-[#196b4d]">{m.v}</dd>
-                      <dt className="mt-1 text-sm font-bold text-[#0a0f2e]">{m.l}</dt>
-                      <p className="text-xs tabular-nums text-[#5b6472]">{m.d}</p>
+                      <dt className="mt-1 text-sm font-bold text-neutral-950">{m.l}</dt>
+                      <p className="text-xs tabular-nums text-slate-600">{m.d}</p>
                     </div>
                   ))}
                 </dl>
@@ -330,7 +330,7 @@ export default function Home() {
                   <span className="mx-auto rounded-full bg-[#effaf5] px-3 py-1.5 text-sm font-black text-[#196b4d]">+227%</span>
                   <ProofImage {...smkAfter} stage="After · June 2026" frameAspect="16 / 9" sizes="(max-width: 768px) 100vw, 480px" />
                 </div>
-                <Link href={detailUrl(smk)} className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+                <Link href={detailUrl(smk)} className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
                   {smk.client} case study <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </article>
@@ -339,11 +339,11 @@ export default function Home() {
             {/* MSO — the one that went wrong first. Admitting the setback is
                 what makes the recovery believable. */}
             {mso ? (
-              <article className="grid gap-8 rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-8 lg:col-span-3 lg:grid-cols-[1fr_1.05fr]">
+              <article className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 lg:col-span-3 lg:grid-cols-[1fr_1.05fr]">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">Ecommerce · Recovery · {mso.period}</p>
-                  <h3 className={`${H} mt-2 text-2xl tracking-tight text-[#0a0f2e] sm:text-3xl`}>The one that went wrong first</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-[#5b6472]">
+                  <p className="text-xs font-bold uppercase tracking-widest text-neutral-600">Ecommerce · Recovery · {mso.period}</p>
+                  <h3 className={`${H} mt-2 text-2xl tracking-tight text-neutral-950 sm:text-3xl`}>The one that went wrong first</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
                     Most agencies would publish the March peak and stop there. This is the whole curve.
                   </p>
                   <ol className="mt-6 space-y-4">
@@ -353,18 +353,18 @@ export default function Home() {
                           {i + 1}
                         </span>
                         <div>
-                          <p className="text-sm font-black text-[#0a0f2e]">
-                            {p.stage} <span className="font-semibold text-[#8a93a3]">· {p.when}</span>
+                          <p className="text-sm font-black text-neutral-950">
+                            {p.stage} <span className="font-semibold text-slate-500">· {p.when}</span>
                           </p>
                           <p className="mt-0.5 text-sm">
                             <strong className="font-black tabular-nums" style={{ color: p.tone }}>{p.metric.value}</strong>{" "}
-                            <span className="text-[#5b6472]">{p.metric.label.toLowerCase()}</span>
+                            <span className="text-slate-600">{p.metric.label.toLowerCase()}</span>
                           </p>
                         </div>
                       </li>
                     ))}
                   </ol>
-                  <Link href={detailUrl(mso)} className="mt-6 inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+                  <Link href={detailUrl(mso)} className="mt-6 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
                     The full recovery story <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                 </div>
@@ -381,17 +381,17 @@ export default function Home() {
                 {/* What the recovery did to revenue — the reason the indexing
                     mattered. Three dated captures from the store's own
                     WooCommerce dashboard. */}
-                <div className="border-t border-[#eef0f4] pt-7 lg:col-span-2">
-                  <p className="text-sm font-black text-[#0a0f2e]">What the recovery did to store revenue</p>
-                  <p className="mt-1 text-xs text-[#5b6472]">Total store revenue from the WooCommerce dashboard, not split by country.</p>
+                <div className="border-t border-slate-200 pt-7 lg:col-span-2">
+                  <p className="text-sm font-black text-neutral-950">What the recovery did to store revenue</p>
+                  <p className="mt-1 text-xs text-slate-600">Total store revenue from the WooCommerce dashboard, not split by country.</p>
                   <ol className="mt-5 grid gap-6 md:grid-cols-3">
                     {MSO_REVENUE_STEPS.map((r) => (
                       <li key={r.src}>
                         <p className="text-xs font-black uppercase tracking-widest" style={{ color: r.tone }}>
                           {r.stage}
                         </p>
-                        <p className="mt-1 text-3xl font-black tabular-nums tracking-tight text-[#0a0f2e]">{r.figure}</p>
-                        <p className="text-xs font-bold text-[#5b6472]">{r.date}</p>
+                        <p className="mt-1 text-3xl font-black tabular-nums tracking-tight text-neutral-950">{r.figure}</p>
+                        <p className="text-xs font-bold text-slate-600">{r.date}</p>
                         <div className="mt-3">
                           <ProofImage
                             src={r.src}
@@ -412,10 +412,10 @@ export default function Home() {
 
             {BENTO.map((b) =>
               b.cs && b.proof ? (
-                <article key={b.client} className={`flex flex-col rounded-3xl border border-[#e7e8f0] bg-white p-6 sm:p-7 ${b.wide ? "lg:col-span-2" : ""}`}>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">{b.tag}</p>
-                  <h3 className={`${H} mt-2 text-2xl  tracking-tight text-[#0a0f2e]`}>{b.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-[#5b6472]">{b.line}</p>
+                <article key={b.client} className={`flex flex-col rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 ${b.wide ? "lg:col-span-2" : ""}`}>
+                  <p className="text-xs font-bold uppercase tracking-widest text-neutral-600">{b.tag}</p>
+                  <h3 className={`${H} mt-2 text-2xl tracking-tight text-neutral-950`}>{b.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{b.line}</p>
                   <div className="mt-5 flex-1">
                     <ProofImage
                       src={b.proof.src}
@@ -426,7 +426,7 @@ export default function Home() {
                       sizes={b.wide ? "(max-width: 1024px) 100vw, 740px" : "(max-width: 1024px) 100vw, 360px"}
                     />
                   </div>
-                  <Link href={detailUrl(b.cs)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+                  <Link href={detailUrl(b.cs)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
                     {b.cs.client} case study <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                 </article>
@@ -437,14 +437,14 @@ export default function Home() {
       </section>
 
       {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
-      <section id="free-da-checker" className="px-4 py-16 sm:px-6 bg-[#f7f7fc]/50">
+      <section id="free-da-checker" className="bg-white px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-5xl">
           <FreeDomainAuthorityChecker variant="home" />
         </div>
       </section>
 
       {/* 5 · WHO IT'S FOR */}
-      <section className="px-4 py-20 sm:px-6 lg:py-24">
+      <section className="border-t border-slate-200 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading eyebrow="Who it's for" title="Three kinds of business. One way of working." />
           <AudienceTabs tabs={TABS} />
@@ -452,7 +452,7 @@ export default function Home() {
       </section>
 
       {/* 6 · RECORDED LIVE */}
-      <section className="bg-[#f7f7fc] px-4 py-20 sm:px-6 lg:py-24">
+      <section className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Recorded live"
@@ -469,10 +469,10 @@ export default function Home() {
           <Heading eyebrow="How it works" title="From your URL to a Monday report" />
           <ol className="grid gap-5 md:grid-cols-3">
             {STEPS.map((s) => (
-              <li key={s.n} className="rounded-3xl border border-[#e7e8f0] bg-white p-7">
-                <span className={`${H} flex h-10 w-10 items-center justify-center rounded-full bg-[#f1f0fb] text-lg  text-[#534AB7]`}>{s.n}</span>
-                <h3 className={`${H} mt-5 text-xl  text-[#0a0f2e]`}>{s.title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-[#5b6472]">{s.body}</p>
+              <li key={s.n} className="rounded-3xl border border-slate-200 bg-white p-7">
+                <span className={`${H} flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-lg text-neutral-950`}>{s.n}</span>
+                <h3 className={`${H} mt-5 text-xl text-neutral-950`}>{s.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{s.body}</p>
               </li>
             ))}
           </ol>
@@ -480,7 +480,7 @@ export default function Home() {
       </section>
 
       {/* 8 · FOUNDER + REVIEW */}
-      <section className="bg-[#0a0f2e] px-4 py-20 text-white sm:px-6 lg:py-24">
+      <section className="bg-neutral-900 px-4 py-20 text-white sm:px-6 lg:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
             <Image
@@ -491,8 +491,8 @@ export default function Home() {
               className="h-32 w-32 flex-shrink-0 rounded-3xl object-cover sm:h-40 sm:w-40"
             />
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#a79fed]">Who does the work</p>
-              <h2 className={`${H} mt-2 text-3xl  tracking-tight text-white`}>Mubashar Sharif</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Who does the work</p>
+              <h2 className={`${H} mt-2 text-3xl tracking-tight text-white`}>Mubashar Sharif</h2>
               <p className="mt-1 text-sm text-white/65">
                 Founder · 5+ years in SEO · {certCount} Semrush certificates
               </p>
@@ -522,7 +522,7 @@ export default function Home() {
             </div>
           </div>
 
-          <figure className="rounded-3xl bg-white p-7 text-[#0a0f2e]">
+          <figure className="rounded-3xl bg-white p-7 text-neutral-950">
             <div className="flex gap-0.5" aria-label="5 out of 5 stars">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} className="h-4 w-4 fill-[#00b67a] text-[#00b67a]" aria-hidden />
@@ -532,7 +532,7 @@ export default function Home() {
             <figcaption className="mt-5 flex items-center justify-between gap-3 text-sm">
               <span>
                 <strong className="block">{review.author}</strong>
-                <span className="text-[#5b6472]">Ecommerce, USA · {review.date}</span>
+                <span className="text-slate-600">Ecommerce, USA · {review.date}</span>
               </span>
               <a
                 href="https://www.trustpilot.com/review/searchprex.com"
@@ -555,15 +555,15 @@ export default function Home() {
             {RETAINER_PLANS.map((p) => (
               <div
                 key={p.niche}
-                className={`flex flex-col rounded-3xl border p-7 ${p.featured ? "border-[#534AB7] shadow-[0_12px_40px_rgba(83,74,183,0.15)]" : "border-[#e7e8f0]"}`}
+                className={`flex flex-col rounded-3xl border p-7 ${p.featured ? "border-neutral-900 shadow-md" : "border-slate-200"}`}
               >
-                <p className="text-sm font-bold text-[#0a0f2e]">{p.niche}</p>
-                <p className="mt-1 text-xs text-[#5b6472]">{p.best}</p>
-                <p className={`${H} mt-5 text-3xl  tracking-tight text-[#0a0f2e]`}>
+                <p className="text-sm font-bold text-neutral-950">{p.niche}</p>
+                <p className="mt-1 text-xs text-slate-600">{p.best}</p>
+                <p className={`${H} mt-5 text-3xl tracking-tight text-neutral-950`}>
                   {formatRange(p)}
-                  <span className="text-sm font-semibold text-[#5b6472]"> / mo</span>
+                  <span className="text-sm font-semibold text-slate-600"> / mo</span>
                 </p>
-                <ul className="mt-5 flex-1 space-y-2 text-sm text-[#374151]">
+                <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
                   {p.includes.map((i) => (
                     <li key={i}>· {i}</li>
                   ))}
@@ -571,7 +571,7 @@ export default function Home() {
                 <a
                   href="#get-started"
                   className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
-                    p.featured ? "bg-[#1a7d59] text-white hover:bg-[#196b4d]" : "border border-[#dcdfea] text-[#0a0f2e] hover:border-[#534AB7]"
+                    p.featured ? "bg-[#1a7d59] text-white hover:bg-[#196b4d]" : "border border-slate-300 text-neutral-950 hover:border-neutral-900"
                   }`}
                 >
                   Start with the free tear-down
@@ -583,26 +583,26 @@ export default function Home() {
       </section>
 
       {/* 10 · COVERAGE — every state and city page, compact */}
-      <section className="bg-[#f7f7fc] px-4 py-16 sm:px-6">
+      <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <Heading eyebrow="Where" title={`Law firm and local SEO in ${LOCATION_STATES.length} states, ${LOCATION_CITY_COUNT} cities`} />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {LOCATION_STATES.map((s) => (
-              <div key={s.slug} className="rounded-2xl border border-[#e7e8f0] bg-white px-5 py-4">
+              <div key={s.slug} className="rounded-2xl border border-slate-200 bg-white px-5 py-4">
                 {s.hubHref ? (
-                  <Link href={s.hubHref} className="text-sm font-bold text-[#0a0f2e] hover:text-[#534AB7]">
+                  <Link href={s.hubHref} className="text-sm font-bold text-neutral-950 hover:underline">
                     {s.name}
                   </Link>
                 ) : (
-                  <p className="text-sm font-bold text-[#0a0f2e]">{s.name}</p>
+                  <p className="text-sm font-bold text-neutral-950">{s.name}</p>
                 )}
                 <p className="mt-1.5 text-sm leading-relaxed">
                   {s.cities.map((c, i) => (
                     <span key={c.href}>
-                      <Link href={c.href} className="text-[#5b6472] hover:text-[#534AB7]">
+                      <Link href={c.href} className="text-slate-600 hover:text-neutral-950 hover:underline">
                         {c.name}
                       </Link>
-                      {i < s.cities.length - 1 ? <span className="text-[#c4c8d4]"> · </span> : null}
+                      {i < s.cities.length - 1 ? <span className="text-slate-300"> · </span> : null}
                     </span>
                   ))}
                 </p>
@@ -610,7 +610,7 @@ export default function Home() {
             ))}
           </div>
           <p className="mt-6 text-center">
-            <Link href="/locations" className="inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+            <Link href="/locations" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
               All locations <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </p>
@@ -623,7 +623,7 @@ export default function Home() {
           <Heading eyebrow="FAQ" title="SEO questions, answered straight" />
           <FaqAccordion faqs={FAQS} />
           <p className="mt-6 text-center">
-            <Link href="/faq" className="inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+            <Link href="/faq" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
               More questions <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </p>
@@ -632,7 +632,7 @@ export default function Home() {
 
       {/* 12 · SEO GUIDES — the three newest articles. Links from the home page
           help new posts get found, and show the site is still being written. */}
-      <section className="bg-[#f7f7fc] px-4 py-20 sm:px-6">
+      <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <Heading eyebrow="Free to read" title="Explore trending SEO guides" />
           <div className="grid gap-5 md:grid-cols-3">
@@ -640,9 +640,9 @@ export default function Home() {
               <Link
                 key={g.slug}
                 href={`/blog/${g.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-[#e7e8f0] bg-white transition-all hover:border-[#534AB7] hover:shadow-md"
+                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition-all hover:border-neutral-900 hover:shadow-md"
               >
-                <span className="relative block aspect-[16/9] overflow-hidden bg-[#eef0f4]">
+                <span className="relative block aspect-[16/9] overflow-hidden bg-slate-100">
                   <Image
                     src={g.heroImage}
                     alt=""
@@ -652,10 +652,10 @@ export default function Home() {
                   />
                 </span>
                 <span className="flex flex-1 flex-col p-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7]">{g.category}</span>
-                  <span className={`${H} mt-2 text-lg leading-snug text-[#0a0f2e] group-hover:text-[#534AB7]`}>{g.title}</span>
-                  <span className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#5b6472]">{g.excerpt}</span>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-[#8a93a3]">
+                  <span className="text-xs font-bold uppercase tracking-widest text-neutral-600">{g.category}</span>
+                  <span className={`${H} mt-2 text-lg leading-snug text-neutral-950 group-hover:text-neutral-700`}>{g.title}</span>
+                  <span className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">{g.excerpt}</span>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-slate-500">
                     <Clock className="h-3.5 w-3.5" aria-hidden /> {g.readTime}
                   </span>
                 </span>
@@ -663,16 +663,16 @@ export default function Home() {
             ))}
           </div>
           <p className="mt-8 text-center">
-            <Link href="/blog" className="inline-flex items-center gap-1 rounded-full border border-[#dcdfea] bg-white px-5 py-2.5 text-sm font-bold text-[#0a0f2e] hover:border-[#534AB7]">
+            <Link href="/blog" className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-neutral-950 hover:border-neutral-900">
               Read more SEO guides <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </p>
         </div>
       </section>
       {/* 13 · CLOSE — the last thing on the page is the offer */}
-      <section id="get-started" className="scroll-mt-24 px-4 pb-20 sm:px-6">
-        <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#0a0f2e] px-6 py-14 text-center sm:px-12">
-          <h2 className={`${H} mx-auto max-w-2xl text-3xl  tracking-tight text-white sm:text-4xl`}>
+      <section id="get-started" className="scroll-mt-24 bg-slate-50 px-4 pb-20 sm:px-6">
+        <div className="mx-auto max-w-5xl rounded-[2rem] bg-neutral-900 px-6 py-14 text-center sm:px-12">
+          <h2 className={`${H} mx-auto max-w-2xl text-3xl tracking-tight text-white sm:text-4xl`}>
             Send me your URL. I&apos;ll tell you what&apos;s holding it back.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-white/70">

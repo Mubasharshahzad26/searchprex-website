@@ -129,14 +129,14 @@ export default function PricingPage() {
 
         {/* The 90-day guarantee, next to the prices it applies to. */}
         <Section width="reading" tight>
-          <div className="flex flex-col items-center gap-3 rounded-2xl border-2 border-[#1a7d59]/30 bg-[#ecfdf5] p-6 text-center sm:flex-row sm:text-left">
-            <ShieldCheck className="h-10 w-10 flex-shrink-0 text-[#1a7d59]" aria-hidden />
+          <div className="flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center sm:flex-row sm:text-left">
+            <ShieldCheck className="h-10 w-10 flex-shrink-0 text-neutral-900" aria-hidden />
             <div>
-              <h2 className="text-lg font-black text-[#0a0f2e]">90-day money-back guarantee</h2>
-              <p className="mt-1 text-sm leading-relaxed text-[#374151]">
+              <h2 className="text-lg font-black text-neutral-950">90-day money-back guarantee</h2>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">
                 {GUARANTEE} It is a guarantee on measurable progress in rankings, traffic or leads — not on a particular
                 ranking, because nobody can honestly promise a Google position.{" "}
-                <Link href="/terms" className="font-semibold underline">
+                <Link href="/terms" className="font-semibold text-neutral-900 underline">
                   Full terms
                 </Link>
                 .

@@ -225,7 +225,7 @@ export default function Nav() {
                         aria-haspopup="true"
                         aria-expanded={isOpen}
                         onClick={() => setActiveDropdown(isOpen ? null : link.label)}
-                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
+                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-neutral-950"
                       >
                         {link.label}
                         {link.hasDropdown && (
@@ -236,7 +236,7 @@ export default function Nav() {
                       <Link
                         href={link.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
+                        className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-neutral-950"
                       >
                         {link.label}
                         {link.hasDropdown && (
@@ -274,7 +274,7 @@ export default function Nav() {
                             : "invisible pointer-events-none translate-y-2 opacity-0"
                         }`}
                       >
-                        <div className="rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl">
+                        <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
                           {link.dropdownItems?.map((item) => {
                             const isExternal = item.href.startsWith("http");
                             
@@ -296,7 +296,7 @@ export default function Nav() {
                                   href={item.href}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
+                                  className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
                                 >
                                   {content}
                                 </a>
@@ -308,10 +308,10 @@ export default function Nav() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setActiveDropdown(null)}
-                                className={`flex items-center justify-between gap-2 rounded-lg transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7] ${
+                                className={`flex items-center justify-between gap-2 rounded-lg transition-colors hover:bg-slate-50 hover:text-neutral-950 ${
                                   item.sub
-                                    ? "py-1.5 pl-7 pr-3 text-[13px] text-[#5b6472]"
-                                    : `px-3 py-2 text-sm ${link.dropdownItems?.some((i) => i.sub) ? "font-semibold text-[#0a0f2e]" : "text-[#374151]"}`
+                                    ? "py-1.5 pl-7 pr-3 text-[13px] text-slate-600"
+                                    : `px-3 py-2 text-sm ${link.dropdownItems?.some((i) => i.sub) ? "font-semibold text-neutral-950" : "text-[#374151]"}`
                                 }`}
                               >
                                 {content}
@@ -332,10 +332,10 @@ export default function Nav() {
               {/* Get My Growth Plan — primary CTA (CRO-optimized) */}
               <Link
                 href="/free-audit"
-                className="relative flex items-center gap-2 overflow-hidden rounded-lg bg-[#534AB7] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#3C3489] hover:shadow-[0_0_28px_rgba(83,74,183,0.5)] hover:-translate-y-px"
+                className="relative flex items-center gap-2 overflow-hidden rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-neutral-800 hover:-translate-y-px"
               >
                 <span
-                  className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-[#22d3ee]"
+                  className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-emerald-400"
                   style={{ animation: "sp-pulse 2s ease-in-out infinite" }}
                 />
                 <style>{`
@@ -354,7 +354,7 @@ export default function Nav() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="rounded-lg p-2 text-[#374151] transition-colors hover:bg-[#f7f8fc] lg:hidden"
+              className="rounded-lg p-2 text-[#374151] transition-colors hover:bg-slate-50 lg:hidden"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen
@@ -384,13 +384,13 @@ export default function Nav() {
                       <Link
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
+                        className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
                       >
                         {link.label}
                       </Link>
                     )}
                     {link.hasDropdown && (
-                      <div className="ml-4 mt-1 space-y-1 border-l border-[#e5e7eb] pl-3">
+                      <div className="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3">
                         {link.dropdownItems?.map((item) => {
                           const isExternal = item.href.startsWith("http");
                           
@@ -412,7 +412,7 @@ export default function Nav() {
                                 href={item.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
+                                className="flex items-center gap-2 py-1.5 text-sm text-slate-600 hover:text-neutral-950"
                               >
                                 {content}
                               </a>
@@ -424,8 +424,8 @@ export default function Nav() {
                               key={item.label}
                               href={item.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className={`flex items-center gap-2 hover:text-[#534AB7] ${
-                                item.sub ? "py-1 pl-4 text-[13px] text-[#8a93a3]" : "py-1.5 text-sm text-[#64748b]"
+                              className={`flex items-center gap-2 hover:text-neutral-950 ${
+                                item.sub ? "py-1 pl-4 text-[13px] text-slate-500" : "py-1.5 text-sm text-slate-600"
                               }`}
                             >
                               {content}
@@ -438,11 +438,11 @@ export default function Nav() {
                 ))}
  
                 {/* Mobile: CTAs */}
-                <div className="mt-4 flex flex-col gap-3 border-t border-[#e5e7eb] pt-4">
+                <div className="mt-4 flex flex-col gap-3 border-t border-slate-200 pt-4">
                   <Link
                     href="/free-audit"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="rounded-lg bg-[#534AB7] px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-[#3C3489]"
+                    className="rounded-lg bg-neutral-900 px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-neutral-800"
                   >
                     Get My Free Audit →
                   </Link>

@@ -170,7 +170,7 @@ export default function LocationsHubPage() {
               <li key={p.slug}>
                 <Link
                   href={`/services/law-firm-seo/${p.slug}`}
-                  className={`flex items-center gap-3 ${radius.card} border bg-white p-4 font-semibold transition-colors hover:border-[#534AB7]`}
+                  className={`flex items-center gap-3 ${radius.card} border bg-white p-4 font-semibold transition-colors hover:border-neutral-900`}
                   style={{ borderColor: color.border, color: color.ink }}
                 >
                   <Scale className="h-4 w-4 shrink-0" style={{ color: color.primary }} aria-hidden />

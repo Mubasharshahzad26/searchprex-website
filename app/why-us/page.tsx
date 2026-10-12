@@ -107,20 +107,20 @@ export default function WhyUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* GREY page background */}
-      <main id="main-content" className="bg-[#eaecf3] pt-32">
-        {/* Hero — grey */}
-        <section className="bg-[#eaecf3] pb-16">
+      {/* WHITE page background */}
+      <main id="main-content" className="bg-white pt-32">
+        {/* Hero — white */}
+        <section className="bg-white pb-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="inline-block rounded-full bg-[#534AB7]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+              <span className="inline-block rounded-full border border-slate-200 bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-neutral-900">
                 Why SearchPrex
               </span>
-              <h1 className="mt-4 text-4xl font-bold text-[#0a0f2e] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 text-4xl font-bold text-neutral-950 sm:text-5xl lg:text-6xl">
                 Why Businesses <br className="hidden sm:block" />
-                <span className="text-[#534AB7]">Trust SearchPrex</span>
+                <span className="text-neutral-950">Trust SearchPrex</span>
               </h1>
-              <p className="mx-auto mt-6 max-w-3xl text-xl text-[#475569]">
+              <p className="mx-auto mt-6 max-w-3xl text-xl text-slate-600">
                 We&apos;re not your typical SEO agency. No smoke and mirrors, no
                 vanity metrics — just real results from a founder who genuinely
                 cares about your success.
@@ -130,9 +130,9 @@ export default function WhyUsPage() {
         </section>
  
         {/* Real Strategy Desk Feature Banner */}
-        <section className="bg-[#eaecf3] pt-4 pb-8">
+        <section className="bg-white pt-4 pb-8">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-3xl border border-[#dfe3ec] bg-[#0a0f2e] shadow-xl">
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-neutral-900 shadow-xl">
               <div className="grid items-center lg:grid-cols-[1.15fr_1fr]">
                 <div className="relative aspect-[16/9] min-h-[280px] w-full overflow-hidden lg:aspect-auto lg:h-full">
                   <Image
@@ -142,10 +142,10 @@ export default function WhyUsPage() {
                     sizes="(max-width: 1024px) 100vw, 700px"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0a0f2e]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-neutral-900" />
                 </div>
                 <div className="p-8 text-white sm:p-10">
-                  <span className="inline-block rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200">
                     Direct Founder Execution
                   </span>
                   <h2 className="mt-4 text-2xl font-black leading-tight text-white sm:text-3xl">
@@ -156,10 +156,10 @@ export default function WhyUsPage() {
                   </p>
                   <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-semibold text-white/80">
                     <span className="flex items-center gap-1.5">
-                      <CheckCircle className="h-4 w-4 text-[#3eb489]" /> Semrush &amp; HubSpot Certified
+                      <CheckCircle className="h-4 w-4 text-slate-300" /> Semrush &amp; HubSpot Certified
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <CheckCircle className="h-4 w-4 text-[#3eb489]" /> Zero Outsourcing
+                      <CheckCircle className="h-4 w-4 text-slate-300" /> Zero Outsourcing
                     </span>
                   </div>
                 </div>
@@ -168,25 +168,25 @@ export default function WhyUsPage() {
           </div>
         </section>
 
-        {/* Reasons Grid — grey bg, white cards */}
-        <section className="bg-[#eaecf3] py-16">
+        {/* Reasons Grid — light grey bg, white cards */}
+        <section className="bg-slate-50 border-y border-slate-200 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {reasons.map((reason) => (
                 <div
                   key={reason.title}
-                  className="rounded-3xl bg-white p-8 shadow-lg"
+                  className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#534AB7]/10">
-                    <reason.icon className="h-7 w-7 text-[#534AB7]" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100">
+                    <reason.icon className="h-7 w-7 text-neutral-900" />
                   </div>
-                  <h2 className="mt-6 text-xl font-bold text-[#0a0f2e]">
+                  <h2 className="mt-6 text-xl font-bold text-neutral-950">
                     {reason.title}
                   </h2>
-                  <p className="mt-3 text-[#64748b] leading-relaxed">
+                  <p className="mt-3 text-slate-600 leading-relaxed">
                     {reason.description}
                   </p>
-                  <p className="mt-4 inline-block rounded-full bg-[#f1f3f9] px-4 py-1.5 text-sm font-bold text-[#534AB7]">
+                  <p className="mt-4 inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-sm font-bold text-neutral-900">
                     {reason.stats}
                   </p>
                 </div>
@@ -195,21 +195,21 @@ export default function WhyUsPage() {
           </div>
         </section>
  
-        {/* Comparison Table — grey bg, dark table header keeps white text (correct) */}
-        <section className="bg-[#eaecf3] py-20">
+        {/* Comparison Table — white bg, dark grey table header */}
+        <section className="bg-white py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-[#0a0f2e] sm:text-4xl">
+              <h2 className="text-3xl font-bold text-neutral-950 sm:text-4xl">
                 SearchPrex vs. Other Agencies
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-[#64748b]">
+              <p className="mx-auto mt-4 max-w-2xl text-slate-600">
                 See how we stack up against the competition. Spoiler: we do things differently.
               </p>
             </div>
  
-            <div className="mt-12 overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white">
+            <div className="mt-12 overflow-hidden rounded-2xl border border-slate-200 bg-white">
               <table className="w-full">
-                <thead className="bg-[#0a0f2e]">
+                <thead className="bg-neutral-900">
                   <tr>
                     <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-widest text-white">
                       Feature
@@ -222,24 +222,24 @@ export default function WhyUsPage() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e5e7eb]">
+                <tbody className="divide-y divide-slate-200">
                   {comparisons.map((row) => (
-                    <tr key={row.feature} className="hover:bg-[#f7f8fc]">
+                    <tr key={row.feature} className="hover:bg-slate-50">
                       <td className="px-6 py-4 text-[#374151]">{row.feature}</td>
                       <td className="px-6 py-4 text-center">
                         {row.us === true ? (
-                          <CheckCircle className="mx-auto h-6 w-6 text-green-500" />
+                          <CheckCircle className="mx-auto h-6 w-6 text-neutral-900" />
                         ) : (
-                          <span className="text-[#64748b]">{String(row.us)}</span>
+                          <span className="text-slate-600">{String(row.us)}</span>
                         )}
                       </td>
                       <td className="px-6 py-4 text-center">
                         {row.others === true ? (
-                          <CheckCircle className="mx-auto h-6 w-6 text-green-500" />
+                          <CheckCircle className="mx-auto h-6 w-6 text-neutral-900" />
                         ) : row.others === false ? (
-                          <span className="text-2xl text-red-400">×</span>
+                          <span className="text-2xl text-slate-400">×</span>
                         ) : (
-                          <span className="text-sm text-[#64748b]">
+                          <span className="text-sm text-slate-600">
                             {row.others}
                           </span>
                         )}
@@ -252,8 +252,8 @@ export default function WhyUsPage() {
           </div>
         </section>
  
-        {/* Call CTA — deep navy bg, white text */}
-        <section className="bg-[#0a0f2e] py-20">
+        {/* Call CTA — dark grey bg, white text */}
+        <section className="bg-neutral-900 py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <Phone className="mx-auto h-16 w-16 text-white/20" />
             <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
@@ -266,14 +266,14 @@ export default function WhyUsPage() {
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <a
                 href="tel:+923059158010"
-                className="flex items-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-bold text-[#0a0f2e] transition-all hover:bg-[#f7f8fc]"
+                className="flex items-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-bold text-neutral-950 transition-all hover:bg-slate-100"
               >
                 <Phone className="h-5 w-5" />
                 +92 305 9158010
               </a>
               <Link
                 href="/free-audit"
-                className="flex items-center gap-2 rounded-xl border-2 border-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-[#0a0f2e]"
+                className="flex items-center gap-2 rounded-xl border-2 border-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-neutral-950"
               >
                 Request Callback
                 <ArrowRight className="h-4 w-4" />
@@ -285,13 +285,13 @@ export default function WhyUsPage() {
           </div>
         </section>
  
-        {/* Location — grey bg */}
-        <section className="bg-[#eaecf3] py-12">
+        {/* Location — light grey bg */}
+        <section className="bg-slate-50 border-t border-slate-200 py-12">
           <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-            <div className="flex items-center justify-center gap-3 text-[#64748b]">
+            <div className="flex items-center justify-center gap-3 text-slate-600">
               <MapPin className="h-5 w-5" />
               <p>
-                <strong className="text-[#0a0f2e]">Serving businesses remotely</strong> across all 50 U.S. states · Remote-first SEO
+                <strong className="text-neutral-950">Serving businesses remotely</strong> across all 50 U.S. states · Remote-first SEO
               </p>
             </div>
           </div>

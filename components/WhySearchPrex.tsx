@@ -25,7 +25,7 @@ const PLAN_NICHE: Record<WhyVariant, string | undefined> = {
   technical: undefined,
 };
 
-const icon = (I: typeof UserRound) => <I className="h-5 w-5" style={{ color: "#534AB7" }} aria-hidden />;
+const icon = (I: typeof UserRound) => <I className="h-5 w-5" style={{ color: "#171717" }} aria-hidden />;
 
 export default function WhySearchPrex({
   variant,
@@ -53,7 +53,7 @@ export default function WhySearchPrex({
         <>
           Every figure on this site has a screenshot from the client&apos;s own Search Console, Business Profile or store
           dashboard behind it.{" "}
-          <Link href="/case-studies" className="font-semibold text-[#534AB7] underline underline-offset-2">
+          <Link href="/case-studies" className="font-semibold text-neutral-950 underline underline-offset-2">
             See the case studies
           </Link>
           .
@@ -80,7 +80,7 @@ export default function WhySearchPrex({
       body: plan ? (
         <>
           {plan.niche} runs {formatRange(plan)} a month, depending on scope. No long-term contract.{" "}
-          <Link href="/pricing" className="font-semibold text-[#534AB7] underline underline-offset-2">
+          <Link href="/pricing" className="font-semibold text-neutral-950 underline underline-offset-2">
             Full pricing
           </Link>
           .

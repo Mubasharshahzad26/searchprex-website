@@ -153,7 +153,7 @@ export default function ChecklistWorkbook({ pillars, storageKey, closerTitle, cl
                     <li key={c.id}>
                       <div
                         className={`sp-check-card ${radius.card} border p-4 transition-colors sm:p-5`}
-                        style={{ borderColor: isDone ? color.success : color.border, background: isDone ? "#f6fdfa" : color.white }}
+                        style={{ borderColor: isDone ? color.ink : color.border, background: isDone ? color.surface : color.white }}
                       >
                         <div className="flex items-start gap-3.5">
                           <button
@@ -163,7 +163,7 @@ export default function ChecklistWorkbook({ pillars, storageKey, closerTitle, cl
                             aria-label={c.title}
                             onClick={() => toggle(c.id)}
                             className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition-all ${focusRing}`}
-                            style={{ borderColor: isDone ? color.successButton : color.borderStrong, background: isDone ? color.successButton : "transparent" }}
+                            style={{ borderColor: isDone ? color.primary : color.borderStrong, background: isDone ? color.primary : "transparent" }}
                           >
                             {isDone ? <Check className="h-3.5 w-3.5 text-white" aria-hidden /> : null}
                           </button>
@@ -173,7 +173,7 @@ export default function ChecklistWorkbook({ pillars, storageKey, closerTitle, cl
                                 {c.title}
                               </h3>
                               {c.critical ? (
-                                <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider" style={{ background: "#fef2f2", color: "#b91c1c" }}>
+                                <span className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-slate-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-900">
                                   <AlertTriangle className="h-2.5 w-2.5" aria-hidden />
                                   Fix first
                                 </span>

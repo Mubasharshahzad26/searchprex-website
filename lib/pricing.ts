@@ -27,8 +27,8 @@ export const RETAINER_PLANS: RetainerPlan[] = [
     max: 1500,
     best: "Local service businesses",
     includes: ["GBP & map pack", "Citations & NAP", "Local content"],
-    accent: "#0e7490",
-    bg: "#ecfeff",
+    accent: "#171717",
+    bg: "#f1f5f9",
   },
   {
     niche: "Law Firm SEO",
@@ -36,8 +36,8 @@ export const RETAINER_PLANS: RetainerPlan[] = [
     max: 2500,
     best: "Solo to multi-partner firms",
     includes: ["Practice-area pages", "E-E-A-T content", "Local pack targeting"],
-    accent: "#534AB7",
-    bg: "#f5f3ff",
+    accent: "#171717",
+    bg: "#f1f5f9",
     featured: true,
   },
   {
@@ -46,8 +46,8 @@ export const RETAINER_PLANS: RetainerPlan[] = [
     max: 4000,
     best: "Shopify & WooCommerce stores",
     includes: ["Technical SEO at scale", "Product page content", "Schema & indexing"],
-    accent: "#196b4d",
-    bg: "#dcf2ea",
+    accent: "#171717",
+    bg: "#f1f5f9",
   },
 ];
 

@@ -36,7 +36,7 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Who SearchPrex works with" className="mx-auto mb-8 flex w-fit flex-wrap justify-center gap-1 rounded-full bg-[#f1f0fb] p-1">
+      <div role="tablist" aria-label="Who SearchPrex works with" className="mx-auto mb-8 flex w-fit flex-wrap justify-center gap-1 rounded-full border border-slate-200 bg-slate-100 p-1">
         {tabs.map((t) => (
           <button
             key={t.id}
@@ -46,7 +46,7 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
             aria-controls={`panel-${t.id}`}
             onClick={() => setActive(t.id)}
             className={`rounded-full px-5 py-2.5 text-sm font-bold transition-colors ${
-              active === t.id ? "bg-white text-[#0a0f2e] shadow-sm" : "text-[#5b6472] hover:text-[#0a0f2e]"
+              active === t.id ? "bg-neutral-900 text-white shadow-2xs" : "text-slate-600 hover:text-neutral-950"
             }`}
           >
             {t.label}
@@ -62,12 +62,12 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
           aria-labelledby={`tab-${t.id}`}
           className={active === t.id ? "grid gap-6 lg:grid-cols-[1.15fr_1fr]" : "hidden"}
         >
-          <div className="rounded-3xl border border-[#e7e8f0] bg-white p-7 sm:p-9">
-            <h3 className="text-2xl font-black tracking-tight text-[#0a0f2e]">{t.title}</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-[#5b6472]">{t.problem}</p>
+          <div className="rounded-3xl border border-slate-200 bg-white p-7 sm:p-9">
+            <h3 className="text-2xl font-black tracking-tight text-neutral-950">{t.title}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-slate-600">{t.problem}</p>
             <ul className="mt-6 space-y-3">
               {t.work.map((w) => (
-                <li key={w} className="flex items-start gap-3 text-sm leading-relaxed text-[#374151]">
+                <li key={w} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
                   <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#effaf5]">
                     <Check className="h-3 w-3 text-[#1a7d59]" aria-hidden />
                   </span>
@@ -77,7 +77,7 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
             </ul>
             <Link
               href={t.hub.href}
-              className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-[#0a0f2e] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#534AB7]"
+              className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-neutral-800"
             >
               {t.hub.label} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
@@ -85,8 +85,8 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
 
           <div className="flex flex-col gap-6">
             {t.visual ? (
-              <div className="group relative overflow-hidden rounded-3xl border border-[#e7e8f0] bg-white shadow-sm">
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0a0f2e]">
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xs">
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-neutral-900">
                   <Image
                     src={t.visual.src}
                     alt={t.visual.alt}
@@ -95,7 +95,7 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
                     sizes="(max-width: 1024px) 100vw, 500px"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/30 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-5">
                     <span className="inline-block rounded-full bg-[#ef4444] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-md">
                       {t.visual.badge}
@@ -108,27 +108,27 @@ export default function AudienceTabs({ tabs }: { tabs: AudienceTab[] }) {
               </div>
             ) : null}
 
-            <div className={`rounded-3xl p-7 ${t.proof.honest ? "border border-[#d9d5f5] bg-[#f6f5ff]" : "bg-[#effaf5]"}`}>
-              <p className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest ${t.proof.honest ? "text-[#534AB7]" : "text-[#1a7d59]"}`}>
+            <div className={`rounded-3xl p-7 ${t.proof.honest ? "border border-slate-200 bg-slate-50" : "bg-[#effaf5]"}`}>
+              <p className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest ${t.proof.honest ? "text-neutral-700" : "text-[#1a7d59]"}`}>
                 {t.proof.honest ? <Info className="h-3.5 w-3.5" aria-hidden /> : null}
                 {t.proof.honest ? "Where the evidence stands" : "Result"}
               </p>
-              <p className="mt-2 text-base font-semibold leading-snug text-[#0a0f2e]">{t.proof.text}</p>
+              <p className="mt-2 text-base font-semibold leading-snug text-neutral-950">{t.proof.text}</p>
               {t.proof.href ? (
-                <Link href={t.proof.href} className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-[#534AB7]">
+                <Link href={t.proof.href} className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
                   {t.proof.honest ? "See the approach" : "Read the case study"} <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               ) : null}
             </div>
 
-            <div className="rounded-3xl border border-[#e7e8f0] bg-white p-7">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#5b6472]">By industry</p>
+            <div className="rounded-3xl border border-slate-200 bg-white p-7">
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-600">By industry</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {t.pages.map((p) => (
                   <Link
                     key={p.href}
                     href={p.href}
-                    className="rounded-full border border-[#e7e8f0] px-3.5 py-1.5 text-sm font-semibold text-[#0a0f2e] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                    className="rounded-full border border-slate-200 px-3.5 py-1.5 text-sm font-semibold text-neutral-950 transition-colors hover:border-neutral-900 hover:bg-slate-50"
                   >
                     {p.label}
                   </Link>

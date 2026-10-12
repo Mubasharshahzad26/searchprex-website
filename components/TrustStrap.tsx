@@ -61,7 +61,7 @@ const PROFILES: Profile[] = [
     label: "Company profile",
     href: "https://www.goodfirms.co/company/searchprex",
     mark: (
-      <span className="flex h-5 w-5 items-center justify-center rounded bg-[#534AB7] text-[10px] font-black text-white" aria-hidden="true">
+      <span className="flex h-5 w-5 items-center justify-center rounded bg-neutral-900 text-[10px] font-black text-white" aria-hidden="true">
         G
       </span>
     ),
@@ -94,11 +94,11 @@ const PROFILES: Profile[] = [
 
 export default function TrustStrap() {
   return (
-    <section aria-labelledby="trust-strap-heading" className="border-t border-[#e5e7eb] bg-white py-6">
+    <section aria-labelledby="trust-strap-heading" className="border-t border-slate-200 bg-white py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2
           id="trust-strap-heading"
-          className="mb-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#5b6472]"
+          className="mb-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-600"
         >
           Find SearchPrex on
         </h2>
@@ -109,14 +109,14 @@ export default function TrustStrap() {
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 shadow-sm transition-all hover:border-[#1a7d59] hover:shadow-md"
+                className="group flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 shadow-2xs transition-all hover:border-neutral-900 hover:shadow-sm"
               >
                 {p.mark}
                 <span>
-                  <span className="block text-xs font-bold leading-none text-[#0a0f2e]">{p.name}</span>
-                  <span className="mt-0.5 block text-[10px] leading-tight text-[#5b6472]">{p.label}</span>
+                  <span className="block text-xs font-bold leading-none text-neutral-950">{p.name}</span>
+                  <span className="mt-0.5 block text-[10px] leading-tight text-slate-600">{p.label}</span>
                 </span>
-                <ExternalLink className="h-3 w-3 text-[#94a3b8] transition-colors group-hover:text-[#1a7d59]" aria-hidden="true" />
+                <ExternalLink className="h-3 w-3 text-slate-400 transition-colors group-hover:text-neutral-950" aria-hidden="true" />
               </a>
             </li>
           ))}

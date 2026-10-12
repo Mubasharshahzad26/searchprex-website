@@ -59,8 +59,8 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
  
 export default function About() {
   return (
-    /* GREY background */
-    <section id="about" className="bg-[#eaecf3] py-24">
+    /* Light surface background */
+    <section id="about" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
         {/* ── Section header ── */}
@@ -68,14 +68,14 @@ export default function About() {
           variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <motion.span variants={fadeUp} className="mb-4 inline-block rounded-full bg-[#f5f3ff] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#534AB7]">
+          <motion.span variants={fadeUp} className="mb-4 inline-block rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-xs font-bold uppercase tracking-widest text-neutral-900">
             Why SearchPrex
           </motion.span>
-          <motion.h1 variants={fadeUp} className="mb-4 text-4xl font-black leading-tight tracking-tight text-[#0a0f2e] sm:text-5xl">
+          <motion.h1 variants={fadeUp} className="mb-4 text-4xl font-black leading-tight tracking-tight text-neutral-950 sm:text-5xl">
             Founder-Led. Niche-Focused.<br />
             <span>Revenue-Obsessed.</span>
           </motion.h1>
-          <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-[#475569]">
+          <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-lg text-slate-600">
             Every account is handled personally by the founder — no juniors, no account managers, no templates. We understand your business niche better than any generalist agency ever could.
           </motion.p>
         </motion.div>
@@ -90,8 +90,8 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="mb-8 overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white shadow-lg">
-              <div className="h-24 bg-gradient-to-r from-[#534AB7] to-[#7c3aed]" />
+            <div className="mb-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+              <div className="h-24 bg-neutral-900" />
               <div className="px-6 pb-6">
                 <div className="relative -mt-12 mb-4 h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-md">
                   <Image
@@ -104,14 +104,14 @@ export default function About() {
                 </div>
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl font-black text-[#0a0f2e]">Mubashar Sharif</h3>
-                    <p className="text-sm font-semibold text-[#534AB7]">Founder & Lead SEO Strategist</p>
-                    <p className="mt-1 text-xs text-[#64748b]">Works personally on every client account</p>
+                    <h3 className="text-xl font-black text-neutral-950">Mubashar Sharif</h3>
+                    <p className="text-sm font-semibold text-neutral-700">Founder & Lead SEO Strategist</p>
+                    <p className="mt-1 text-xs text-slate-600">Works personally on every client account</p>
                   </div>
                   <div className="flex gap-2">
                     <a
                       href="mailto:contact@searchprex.com"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#64748b] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 transition-colors hover:border-neutral-900 hover:text-neutral-950"
                       aria-label="Email Mubashar"
                     >
                       <Mail className="h-4 w-4" />
@@ -120,7 +120,7 @@ export default function About() {
                       href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#64748b] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 transition-colors hover:border-neutral-900 hover:text-neutral-950"
                       aria-label="LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" />
@@ -128,7 +128,7 @@ export default function About() {
                   </div>
                 </div>
  
-                <blockquote className="mt-5 border-l-2 border-[#534AB7] pl-4 text-sm italic leading-relaxed text-[#64748b]">
+                <blockquote className="mt-5 border-l-2 border-neutral-900 pl-4 text-sm italic leading-relaxed text-slate-600">
                   &quot;I started SearchPrex because I was tired of watching business owners get burned — by bad agencies, expensive ads, and cookie-cutter strategies. Every client I take on, I treat their revenue like it&apos;s my own.&quot;
                 </blockquote>
  
@@ -140,17 +140,17 @@ export default function About() {
                       href={cert.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-medium text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                      className="flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-neutral-900 hover:text-neutral-950"
                     >
-                      <CheckCircle className="h-3 w-3 text-[#16a34a]" />{cert.label}
+                      <CheckCircle className="h-3 w-3 text-neutral-900" />{cert.label}
                     </a>
                   ))}
                 </div>
  
                 {/* Honest trust signal (replaced fake star rating) */}
                 <div className="mt-5 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#16a34a]" />
-                  <span className="text-xs font-medium text-[#64748b]">Real GSC-verified results · Founder-led, no juniors</span>
+                  <CheckCircle className="h-4 w-4 text-neutral-900" />
+                  <span className="text-xs font-medium text-slate-600">Real GSC-verified results · Founder-led, no juniors</span>
                 </div>
               </div>
             </div>
@@ -166,13 +166,13 @@ export default function About() {
                   transition={{ duration: 0.5 }}
                   className={`rounded-2xl p-5 ${
                     stat.highlight
-                      ? "bg-[#534AB7] text-white"
-                      : "border border-[#e2e8f0] bg-white text-[#0a0f2e]"
+                      ? "bg-neutral-900 text-white"
+                      : "border border-slate-200 bg-slate-50 text-neutral-950"
                   }`}
                 >
-                  <stat.icon className={`mb-3 h-5 w-5 ${stat.highlight ? "text-[#c4b5fd]" : "text-[#534AB7]"}`} />
+                  <stat.icon className={`mb-3 h-5 w-5 ${stat.highlight ? "text-slate-300" : "text-neutral-900"}`} />
                   <p className="mb-1 text-2xl font-black">{stat.value}</p>
-                  <p className={`text-xs font-medium uppercase tracking-widest ${stat.highlight ? "text-white/80" : "text-[#64748b]"}`}>
+                  <p className={`text-xs font-medium uppercase tracking-widest ${stat.highlight ? "text-slate-300" : "text-slate-600"}`}>
                     {stat.label}
                   </p>
                 </motion.div>
@@ -187,7 +187,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="mb-6 text-xs font-bold uppercase tracking-widest text-[#534AB7]">What makes us different</p>
+            <p className="mb-6 text-xs font-bold uppercase tracking-widest text-neutral-900">What makes us different</p>
             <div className="space-y-6">
               {reasons.map((reason, index) => (
                 <motion.div
@@ -196,14 +196,14 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-4 rounded-xl border border-[#e2e8f0] bg-white p-5 transition-colors hover:border-[#534AB7]/30"
+                  className="flex gap-4 rounded-xl border border-slate-200 bg-slate-50 p-5 transition-colors hover:border-slate-300"
                 >
-                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#534AB7] text-xs font-black text-white">
+                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-neutral-900 text-xs font-black text-white">
                     {reason.number}
                   </span>
                   <div>
-                    <h3 className="mb-1.5 font-black text-[#0a0f2e]">{reason.title}</h3>
-                    <p className="text-sm leading-relaxed text-[#64748b]">{reason.description}</p>
+                    <h3 className="mb-1.5 font-black text-neutral-950">{reason.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-600">{reason.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -214,25 +214,25 @@ export default function About() {
         {/* ── E-E-A-T Section ── */}
         <motion.div
           variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="rounded-2xl border border-[#534AB7]/20 bg-[#f5f3ff] p-8"
+          className="rounded-2xl border border-slate-200 bg-slate-50 p-8"
         >
           <motion.div variants={fadeUp} className="mb-8 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#534AB7]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900">
               <Shield className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h3 className="font-black text-[#0a0f2e]">Google E-E-A-T Compliant Agency</h3>
-              <p className="text-sm text-[#64748b]">Every strategy we build is grounded in the four signals Google uses to evaluate trust and quality</p>
+              <h3 className="font-black text-neutral-950">Google E-E-A-T Compliant Agency</h3>
+              <p className="text-sm text-slate-600">Every strategy we build is grounded in the four signals Google uses to evaluate trust and quality</p>
             </div>
           </motion.div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {eeats.map((e) => (
-              <motion.div key={e.label} variants={fadeUp} className="rounded-xl border border-[#AFA9EC]/40 bg-white p-4">
+              <motion.div key={e.label} variants={fadeUp} className="rounded-xl border border-slate-200 bg-white p-4">
                 <div className="mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#534AB7]" />
-                  <span className="text-xs font-black uppercase tracking-wider text-[#534AB7]">{e.label}</span>
+                  <CheckCircle className="h-4 w-4 text-neutral-900" />
+                  <span className="text-xs font-black uppercase tracking-wider text-neutral-950">{e.label}</span>
                 </div>
-                <p className="text-xs leading-relaxed text-[#64748b]">{e.desc}</p>
+                <p className="text-xs leading-relaxed text-slate-600">{e.desc}</p>
               </motion.div>
             ))}
           </div>

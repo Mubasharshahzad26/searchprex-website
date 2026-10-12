@@ -46,12 +46,12 @@ import {
   TRUSTPILOT_URL,
 } from "@/lib/hero-content";
 
-const INK = "#0a0f2e";
-const BODY = "#5b6472";
+const INK = "#0a0a0a";
+const BODY = "#525252";
 const GREEN = "#1a7d59";
 const GREEN_DARK = "#196b4d";
-const PURPLE = "#534AB7";
-const LINE = "#cdd2dd";
+const PURPLE = "#171717";
+const LINE = "#e2e8f0";
 
 type Status = "idle" | "loading" | "done" | "error";
 
@@ -100,17 +100,7 @@ export default function HeroV2() {
   }
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-[#eaecf3] pt-20">
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <span className="hv2-aurora hv2-aurora-1" />
-        <span className="hv2-aurora hv2-aurora-2" />
-        <style>{`
-          .hv2-aurora{position:absolute;border-radius:9999px;filter:blur(100px);}
-          .hv2-aurora-1{width:50%;height:70%;left:-12%;top:-10%;background:#534AB7;opacity:.14;}
-          .hv2-aurora-2{width:45%;height:65%;right:-12%;top:5%;background:#3eb489;opacity:.12;}
-        `}</style>
-      </div>
-
+    <section id="hero" className="relative overflow-hidden border-b border-slate-200 bg-white pt-20">
       <div className="relative z-10 mx-auto max-w-7xl px-4 pb-12 pt-8 sm:px-6 lg:px-8">
         {/* Explicit grid placement rather than source order, because the two
             orders differ. Desktop: claim top-left, detail bottom-left, form
@@ -120,8 +110,7 @@ export default function HeroV2() {
           {/* ── Claim ── */}
           <div className="order-1 lg:order-none lg:col-start-1 lg:row-start-1">
             <p
-              className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em]"
-              style={{ color: PURPLE }}
+              className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-600"
             >
               Founder-led · One client per city · 9 US states
             </p>
@@ -133,13 +122,12 @@ export default function HeroV2() {
                 actually win. "Revenue-Focused" is the differentiator, not a
                 keyword. Not "First ... Agency" either: unprovable superlatives
                 sit badly on a page arguing that every figure has a screenshot. */}
-            <h1 className="mb-3 font-black tracking-tight" style={{ color: INK }}>
+            <h1 className="mb-3 font-black tracking-tight text-neutral-950">
               <span className="block text-[1.95rem] leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
                 Revenue-Focused SEO Agency
               </span>
               <span
-                className="mt-2 block text-[1.2rem] font-extrabold leading-[1.25] text-balance sm:text-[1.6rem]"
-                style={{ color: PURPLE }}
+                className="mt-2 block text-[1.2rem] font-extrabold leading-[1.25] text-balance text-neutral-700 sm:text-[1.6rem]"
               >
                 for US Law Firms, Local Businesses &amp; Ecommerce Stores
               </span>

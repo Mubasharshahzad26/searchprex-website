@@ -161,12 +161,11 @@ export default function GscRegexClient() {
           </div>
 
           <div
-            className={`${radius.control} p-4 sm:p-5 border flex flex-col justify-between gap-3`}
-            style={{ background: color.ink, borderColor: color.ink }}
+            className={`${radius.control} p-4 sm:p-5 border flex flex-col justify-between gap-3 bg-neutral-900 border-neutral-900`}
           >
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-mono uppercase tracking-wider text-white/60 flex items-center gap-1.5">
-                <Terminal className="h-3.5 w-3.5 text-[#3eb489]" aria-hidden />
+                <Terminal className="h-3.5 w-3.5 text-white" aria-hidden />
                 Generated RE2 Expression
               </span>
               <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-white/10 text-white/80">
@@ -174,7 +173,7 @@ export default function GscRegexClient() {
               </span>
             </div>
 
-            <code className="block font-mono text-sm sm:text-base text-[#3eb489] break-all py-1">
+            <code className="block font-mono text-sm sm:text-base text-white break-all py-1">
               {customRegex}
             </code>
 
@@ -182,10 +181,7 @@ export default function GscRegexClient() {
               <button
                 type="button"
                 onClick={() => copyToClipboard("custom-builder", customRegex)}
-                className={`inline-flex items-center gap-2 ${radius.control} px-4 py-2 text-xs font-semibold text-white transition-all`}
-                style={{
-                  background: copiedId === "custom-builder" ? color.successButton : color.primary,
-                }}
+                className={`inline-flex items-center gap-2 ${radius.control} bg-white px-4 py-2 text-xs font-semibold text-neutral-950 transition-all hover:bg-slate-100`}
               >
                 {copiedId === "custom-builder" ? (
                   <>
@@ -313,21 +309,17 @@ export default function GscRegexClient() {
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <div className="flex flex-wrap items-center gap-2">
                       <span
-                        className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold"
-                        style={{
-                          background: item.filterTarget === "Query" ? color.primarySoft : "#E6F1FB",
-                          color: item.filterTarget === "Query" ? color.primary : "#185FA5",
-                        }}
+                        className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-neutral-900"
                       >
                         <Filter className="h-3 w-3" aria-hidden />
                         GSC {item.filterTarget}
                       </span>
                       <span
-                        className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold"
-                        style={{
-                          background: isNegative ? "#FEE2E2" : "#eafaf3",
-                          color: isNegative ? "#991B1B" : color.successDark,
-                        }}
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
+                          isNegative
+                            ? "border border-slate-300 bg-slate-200 text-neutral-950"
+                            : "border border-slate-200 bg-slate-50 text-slate-700"
+                        }`}
                       >
                         {item.matchMode}
                       </span>
@@ -341,19 +333,15 @@ export default function GscRegexClient() {
 
                   {/* Regex Code Box */}
                   <div
-                    className={`${radius.control} p-3.5 my-3 flex items-center justify-between gap-3 border`}
-                    style={{ background: color.ink, borderColor: color.ink }}
+                    className={`${radius.control} p-3.5 my-3 flex items-center justify-between gap-3 border border-neutral-900 bg-neutral-900`}
                   >
-                    <code className="font-mono text-xs sm:text-sm text-[#3eb489] break-all select-all">
+                    <code className="font-mono text-xs sm:text-sm text-white break-all select-all">
                       {item.regex}
                     </code>
                     <button
                       type="button"
                       onClick={() => copyToClipboard(item.id, item.regex)}
-                      className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-white transition-all"
-                      style={{
-                        background: isCopied ? color.successButton : color.primary,
-                      }}
+                      className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-neutral-950 transition-all hover:bg-slate-100"
                       aria-label={`Copy regex for ${item.title}`}
                     >
                       {isCopied ? (

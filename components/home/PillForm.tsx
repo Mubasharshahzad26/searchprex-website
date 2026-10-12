@@ -49,9 +49,9 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
   const dark = tone === "dark";
   const shell = dark
     ? "border-white/15 bg-white/[0.06] focus-within:border-white/40"
-    : "border-[#dcdfea] bg-white shadow-[0_8px_30px_rgba(83,74,183,0.12)] focus-within:border-[#1a7d59]";
-  const inputText = dark ? "text-white placeholder:text-white/45" : "text-[#0a0f2e] placeholder:text-[#8a93a3]";
-  const muted = dark ? "text-white/60" : "text-[#5b6472]";
+    : "border-slate-300 bg-white shadow-sm focus-within:border-[#1a7d59]";
+  const inputText = dark ? "text-white placeholder:text-white/45" : "text-neutral-950 placeholder:text-slate-400";
+  const muted = dark ? "text-white/60" : "text-slate-600";
 
   function next(e: React.FormEvent) {
     e.preventDefault();
@@ -91,7 +91,7 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
       <div className={`mx-auto flex max-w-xl flex-col gap-3 rounded-3xl border p-5 text-left sm:flex-row sm:items-center sm:justify-between ${dark ? "border-white/15 bg-white/[0.06]" : "border-[#bfe5d3] bg-[#effaf5]"}`}>
         <div className="flex items-start gap-3">
           <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#1a7d59]" aria-hidden />
-          <p className={`text-sm leading-relaxed ${dark ? "text-white/85" : "text-[#0a0f2e]"}`}>
+          <p className={`text-sm leading-relaxed ${dark ? "text-white/85" : "text-neutral-950"}`}>
             <strong>Got it.</strong> I&apos;ll read {website.trim()} myself and reply to <strong>{email.trim()}</strong> within 24 hours.
           </p>
         </div>
@@ -126,16 +126,16 @@ export default function PillForm({ source, tone = "light", cta = "Get my free te
               id={`${source}-biz`}
               value={business}
               onChange={(e) => setBusiness(e.target.value)}
-              className={`w-full appearance-none rounded-full py-2.5 pl-4 pr-9 text-sm font-semibold outline-none sm:w-auto ${dark ? "bg-white/10 text-white" : "bg-[#f3f2fd] text-[#3C3489]"}`}
+              className={`w-full appearance-none rounded-full py-2.5 pl-4 pr-9 text-sm font-semibold outline-none sm:w-auto ${dark ? "bg-white/10 text-white" : "bg-slate-100 text-neutral-900"}`}
             >
-              <option value="" className="text-[#0a0f2e]">Type of business</option>
+              <option value="" className="text-neutral-950">Type of business</option>
               {BUSINESS.map((b) => (
-                <option key={b.value} value={b.value} className="text-[#0a0f2e]">
+                <option key={b.value} value={b.value} className="text-neutral-950">
                   {b.label}
                 </option>
               ))}
             </select>
-            <ChevronDown className={`pointer-events-none absolute right-3 h-4 w-4 ${dark ? "text-white/70" : "text-[#534AB7]"}`} aria-hidden />
+            <ChevronDown className={`pointer-events-none absolute right-3 h-4 w-4 ${dark ? "text-white/70" : "text-neutral-700"}`} aria-hidden />
           </div>
           <button
             type="submit"

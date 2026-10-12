@@ -104,26 +104,26 @@ export default function FreeDomainAuthorityChecker({
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
       {/* Enterprise Header */}
-      <div className="border-b border-slate-100 bg-slate-50/70 px-6 py-6 sm:px-8">
+      <div className="border-b border-slate-200 bg-slate-50 px-6 py-6 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] border border-indigo-100/80">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-800 border border-slate-200">
               <Activity className="h-3.5 w-3.5" />
               <span>Free Domain Authority &amp; SEO Health Checker</span>
             </div>
-            <h3 className="mt-2 text-2xl font-bold tracking-tight text-[#0a0f2e] sm:text-3xl">
+            <h3 className="mt-2 text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
               {city
                 ? `Check Free Domain Authority for ${city} Law Firms`
                 : "Check Your Free Website Domain Authority & Technical Health"}
             </h3>
-            <p className="mt-1 text-xs sm:text-sm text-[#566070] max-w-2xl">
+            <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-2xl">
               Instant 0–100 DA scale, crawl efficiency breakdown, and topical authority score.
               Zero sign-up required.
             </p>
           </div>
 
           <div className="flex items-center gap-2 rounded-xl bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 border border-slate-200 shadow-2xs">
-            <Cpu className="h-4 w-4 text-[#534AB7]" />
+            <Cpu className="h-4 w-4 text-neutral-900" />
             <span>NicheSEO Pro Data Engine</span>
           </div>
         </div>
@@ -152,12 +152,12 @@ export default function FreeDomainAuthorityChecker({
                     placeholder="e.g. yourfirm.com or mystore.com"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#534AB7] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20"
+                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 text-sm font-medium text-neutral-950 placeholder:text-slate-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0a0f2e] px-7 py-3.5 text-sm font-bold text-white shadow-md hover:bg-[#1a2366] transition-colors cursor-pointer shrink-0"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-7 py-3.5 text-sm font-bold text-white shadow-sm hover:bg-neutral-800 transition-colors cursor-pointer shrink-0"
                 >
                   <Search className="h-4 w-4 text-emerald-400" />
                   <span>Check Free Authority</span>
@@ -185,11 +185,11 @@ export default function FreeDomainAuthorityChecker({
 
         {status === "analyzing" && (
           <div className="max-w-xl mx-auto text-center py-8 space-y-6">
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-[#534AB7] animate-pulse border border-indigo-100">
+            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-neutral-900 animate-pulse border border-slate-200">
               <Activity className="h-8 w-8" />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-[#0a0f2e]">
+              <h4 className="text-lg font-bold text-neutral-950">
                 Analyzing Authority & Indexation for {domain}
               </h4>
               <p className="text-xs text-slate-500 mt-1 font-mono">
@@ -198,7 +198,7 @@ export default function FreeDomainAuthorityChecker({
             </div>
             <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
               <div
-                className="h-full rounded-full bg-[#534AB7] transition-all duration-500"
+                className="h-full rounded-full bg-neutral-900 transition-all duration-500"
                 style={{ width: `${((stepIndex + 1) / SCAN_STEPS.length) * 100}%` }}
               />
             </div>
@@ -208,19 +208,19 @@ export default function FreeDomainAuthorityChecker({
         {status === "result" && (
           <div className="space-y-8">
             {/* Scorecard Strip */}
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
               <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
                     Domain Audited
                   </span>
-                  <span className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
+                  <span className="text-xl sm:text-2xl font-black text-neutral-950">
                     {resultData.cleanDomain}
                   </span>
                 </div>
                 <button
                   onClick={() => setStatus("idle")}
-                  className="text-xs font-bold text-[#534AB7] hover:underline cursor-pointer"
+                  className="text-xs font-bold text-neutral-900 hover:underline cursor-pointer"
                 >
                   Audit Another Domain
                 </button>
@@ -232,17 +232,17 @@ export default function FreeDomainAuthorityChecker({
                 <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
                   <div className="flex items-center justify-between text-xs text-slate-500">
                     <span className="font-bold uppercase tracking-wider">Domain Authority</span>
-                    <BarChart3 className="h-4 w-4 text-[#534AB7]" />
+                    <BarChart3 className="h-4 w-4 text-neutral-900" />
                   </div>
                   <div className="mt-2 flex items-baseline gap-2">
-                    <span className="text-3xl font-black text-[#0a0f2e]">
+                    <span className="text-3xl font-black text-neutral-950">
                       {resultData.da}
                     </span>
                     <span className="text-xs text-slate-400">/ 100</span>
                   </div>
                   <div className="mt-2 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-[#534AB7]"
+                      className="h-full rounded-full bg-neutral-900"
                       style={{ width: `${resultData.da}%` }}
                     />
                   </div>
@@ -301,17 +301,17 @@ export default function FreeDomainAuthorityChecker({
                 <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs">
                   <div className="flex items-center justify-between text-xs text-slate-500">
                     <span className="font-bold uppercase tracking-wider">Entity Citations</span>
-                    <Activity className="h-4 w-4 text-indigo-500" />
+                    <Activity className="h-4 w-4 text-neutral-700" />
                   </div>
                   <div className="mt-2 flex items-baseline gap-2">
-                    <span className="text-3xl font-black text-indigo-600">
+                    <span className="text-3xl font-black text-neutral-900">
                       {resultData.citations}
                     </span>
                     <span className="text-xs text-slate-400">Venues</span>
                   </div>
                   <div className="mt-2 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-indigo-500"
+                      className="h-full rounded-full bg-neutral-700"
                       style={{ width: `${resultData.citations * 3}%` }}
                     />
                   </div>
@@ -322,8 +322,8 @@ export default function FreeDomainAuthorityChecker({
               </div>
 
               {/* Strategic Reality Check Note */}
-              <div className="mt-6 rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 text-xs text-slate-700 space-y-1">
-                <span className="font-bold text-[#0a0f2e] block">
+              <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-xs text-slate-700 space-y-1">
+                <span className="font-bold text-neutral-950 block">
                   Strategic Reality Check:
                 </span>
                 <p className="leading-relaxed">
@@ -337,7 +337,7 @@ export default function FreeDomainAuthorityChecker({
             {/* DUAL CONVERSION CTAS (User Never Leaves Empty-Handed) */}
             <div className="grid gap-6 md:grid-cols-2">
               {/* Card 1: SearchPrex Core Strategy & Reality Check */}
-              <div className="rounded-2xl border border-slate-900 bg-[#0a0f2e] p-6 text-white flex flex-col justify-between shadow-sm">
+              <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6 text-white flex flex-col justify-between shadow-sm">
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="inline-block rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30">
@@ -373,14 +373,14 @@ export default function FreeDomainAuthorityChecker({
               <div className="rounded-2xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-2xs">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="inline-block rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] border border-indigo-100">
+                    <span className="inline-block rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-800 border border-slate-200">
                       Autonomous Sister Engine
                     </span>
                     <span className="text-[11px] font-medium text-slate-500">
                       Live Software
                     </span>
                   </div>
-                  <h4 className="mt-3 text-xl font-bold text-[#0a0f2e]">
+                  <h4 className="mt-3 text-xl font-bold text-neutral-950">
                     Get Latest SEO Brain (NicheSEO Pro)
                   </h4>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -395,10 +395,10 @@ export default function FreeDomainAuthorityChecker({
                     href="https://nicheseopro.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-slate-50 px-5 py-3 text-xs sm:text-sm font-bold text-[#0a0f2e] hover:bg-slate-100 transition-colors"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-slate-50 px-5 py-3 text-xs sm:text-sm font-bold text-neutral-950 hover:bg-slate-100 transition-colors"
                   >
                     <span>Get Latest SEO Brain</span>
-                    <ExternalLink className="h-4 w-4 text-[#534AB7]" />
+                    <ExternalLink className="h-4 w-4 text-neutral-900" />
                   </a>
                   <span className="block text-center text-[11px] text-slate-500">
                     Direct access to the NicheSEO Pro autonomous intelligence platform.

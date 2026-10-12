@@ -124,13 +124,13 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <div
                 key={value.title}
-                className="rounded-2xl border border-[#e5e7eb] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl"
+                className="rounded-2xl border border-slate-200 bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#534AB7] text-sm font-bold text-white">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-900 text-sm font-bold text-white">
                   {String(index + 1).padStart(2, "0")}
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-[#0a0f2e]">{value.title}</h3>
-                <p className="text-sm leading-relaxed text-[#64748b]">{value.description}</p>
+                <h3 className="mb-2 text-lg font-semibold text-neutral-950">{value.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-600">{value.description}</p>
               </div>
             ))}
           </CardGrid>
@@ -139,60 +139,60 @@ export default function AboutPage() {
         {/* ── Contact / Location ── */}
         <Section bordered={false}>
           <SectionHeading variant="center" eyebrow="Contact Us" title="Get in Touch" />
-          <div className="mx-auto max-w-2xl rounded-2xl border border-[#e5e7eb] bg-white p-8 shadow-sm sm:p-10">
+          <div className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
               <div className="flex items-start gap-4 mb-8">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#534AB7]">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-900">
                   <Building2 className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-black text-[#0a0f2e]">SearchPrex</h3>
-                  <p className="text-sm text-[#64748b]">US-Focused SEO Agency · Serving All 50 States</p>
+                  <h3 className="text-lg font-black text-neutral-950">SearchPrex</h3>
+                  <p className="text-sm text-slate-600">US-Focused SEO Agency · Serving All 50 States</p>
                 </div>
               </div>
  
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
-                    <MapPin className="h-4 w-4 text-[#534AB7]" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100">
+                    <MapPin className="h-4 w-4 text-neutral-900" />
                   </div>
-                  <address className="text-sm text-[#374151] not-italic">
+                  <address className="text-sm text-slate-700 not-italic">
                     Mohalla Raham Colony, Near Altaf Cold Storage<br />Opposite Chungi No. 1, Daska, Punjab, Pakistan
                   </address>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
-                    <Phone className="h-4 w-4 text-[#534AB7]" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100">
+                    <Phone className="h-4 w-4 text-neutral-900" />
                   </div>
                   <a
                     href="tel:+923059158010"
-                    className="text-sm text-[#475569] transition-colors hover:text-[#534AB7]"
+                    className="text-sm text-slate-600 transition-colors hover:text-neutral-950"
                     title="Call SearchPrex"
                   >
                     +92 305 9158010
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
-                    <Mail className="h-4 w-4 text-[#534AB7]" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100">
+                    <Mail className="h-4 w-4 text-neutral-900" />
                   </div>
                   <a 
                     href="mailto:contact@searchprex.com" 
-                    className="text-sm text-[#374151] hover:text-[#534AB7] transition-colors"
+                    className="text-sm text-slate-700 hover:text-neutral-950 transition-colors"
                     title="Email SearchPrex"
                   >
                     contact@searchprex.com
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f5f3ff]">
-                    <Clock className="h-4 w-4 text-[#534AB7]" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100">
+                    <Clock className="h-4 w-4 text-neutral-900" />
                   </div>
-                  <p className="text-sm text-[#374151]">Mon – Fri: 9:00 AM – 6:00 PM EST</p>
+                  <p className="text-sm text-slate-700">Mon – Fri: 9:00 AM – 6:00 PM EST</p>
                 </div>
               </div>
  
-              <div className="mt-8 rounded-xl border border-[#534AB7]/20 bg-[#f5f3ff] px-5 py-4 text-center">
-                <p className="text-sm font-medium text-[#534AB7]">
+              <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 text-center">
+                <p className="text-sm font-medium text-neutral-900">
                   Proudly serving clients in all <strong>50 US States</strong>
                 </p>
               </div>
