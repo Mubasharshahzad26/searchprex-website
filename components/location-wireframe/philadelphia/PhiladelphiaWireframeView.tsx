@@ -20,6 +20,7 @@ import PhiladelphiaDemographyMap from "./PhiladelphiaDemographyMap";
 import PhiladelphiaEmotionalIntent from "./PhiladelphiaEmotionalIntent";
 import PhiladelphiaKeywordCluster from "./PhiladelphiaKeywordCluster";
 import PhiladelphiaFaqAndCta from "./PhiladelphiaFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface PhiladelphiaWireframeViewProps {
   page: CityPage;
@@ -30,6 +31,9 @@ export default function PhiladelphiaWireframeView({ page }: PhiladelphiaWirefram
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Stylized Philadelphia Transit Diagram */}
       <PhiladelphiaHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Band */}
       <PhiladelphiaPainBanner id="painband-top" variant="top" />
@@ -81,6 +85,9 @@ export default function PhiladelphiaWireframeView({ page }: PhiladelphiaWirefram
 
       {/* 18. Attorney FAQ Accordion + Closing High-Contrast CTA Banner + Bottom Pain Band */}
       <PhiladelphiaFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

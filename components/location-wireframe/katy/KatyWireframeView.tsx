@@ -15,6 +15,7 @@ import KatyPricingAndCalculator from "./KatyPricingAndCalculator";
 import KatyFounderBio from "./KatyFounderBio";
 import KatyDemographyMap from "./KatyDemographyMap";
 import KatyFaqAndCta from "./KatyFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface KatyWireframeViewProps {
   page: CityPage;
@@ -25,6 +26,9 @@ export default function KatyWireframeView({ page }: KatyWireframeViewProps) {
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Crossroads Typography & I-10 / SH 99 Highway Crossroads SVG */}
       <KatyHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Banner ("Confused between choosing an SEO agency / Didn't get results") */}
       <KatyPainBanner id="painband-top" variant="top" />
@@ -61,6 +65,9 @@ export default function KatyWireframeView({ page }: KatyWireframeViewProps) {
 
       {/* 13. Attorney FAQs, Regional Texas Directories & Closing Conversion CTA */}
       <KatyFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

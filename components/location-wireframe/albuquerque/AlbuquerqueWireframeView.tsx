@@ -18,6 +18,7 @@ import AlbuquerqueFounderBio from "./AlbuquerqueFounderBio";
 import AlbuquerqueNearbySubmarkets from "./AlbuquerqueNearbySubmarkets";
 import AlbuquerqueKeywordCluster from "./AlbuquerqueKeywordCluster";
 import AlbuquerqueFaqAndCta from "./AlbuquerqueFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface AlbuquerqueWireframeViewProps {
   page: CityPage;
@@ -28,6 +29,9 @@ export default function AlbuquerqueWireframeView({ page }: AlbuquerqueWireframeV
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Bilingual Toggle & Sandia Mountain Hot Air Balloon SVG */}
       <AlbuquerqueHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Banner ("Confused between choosing an SEO agency / Didn't get results") */}
       <AlbuquerquePainBanner id="painband-top" variant="top" />
@@ -73,6 +77,9 @@ export default function AlbuquerqueWireframeView({ page }: AlbuquerqueWireframeV
 
       {/* 16. FAQs, High-Converting Final CTA, and Bottom Pain Band */}
       <AlbuquerqueFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

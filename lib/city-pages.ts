@@ -183,12 +183,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Michigan",
     stateAbbr: "MI",
     county: "Kent County",
-    metaTitle: "Law Firm SEO in Grand Rapids, MI: Qualified Leads Without the PPC Bill",
+    metaTitle: "Law Firm SEO Grand Rapids, MI | More Qualified Cases",
     metaDescription:
-      "SEO for Grand Rapids law firms. Win Kent County Map Pack rankings and high-intent clients without the PPC bill. Founder-led, one firm per practice area.",
-    h1: "Law Firm SEO in Grand Rapids: Qualified Leads Without the PPC Bill",
+      "Law firm SEO in Grand Rapids for solo and mid-size firms: Map Pack, AI answers and Kent County pages that cut PPC spend. Free PPC waste audit.",
+    h1: "Law Firm SEO in Grand Rapids, Michigan: Qualified Leads Without the PPC Bill",
     heroSub:
-      "For solo attorneys and mid-size firms tired of paying for clicks that never sign. We build the Map Pack, page-one and AI-answer visibility that keeps working after the ad budget stops.",
+      "West Michigan clients check reviews, then call. We build the Map Pack, Kent County pages and AI-answer visibility that keep working after the ad budget stops.",
     problem:
       "West Michigan firms often assume Detroit-level competition applies to them and either overspend or give up. Kent County is materially less contested, and the firms that recognise that now will hold those positions for years.",
     problemPoints: [
@@ -210,12 +210,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "Review recency", detail: "A smaller market means review velocity moves rankings faster" },
     ],
     courts: [
-      "17th Circuit Court (Kent County)",
-      "61st District Court",
-      "U.S. District Court, Western District of Michigan",
-      "Grand Rapids Bar Association",
+      "Kent County Circuit Court (17th Circuit)",
+      "61st District Court, Grand Rapids",
+      "Friend of the Court, Kent County",
+      "Ottawa County courts (Holland)",
+      "Muskegon County courts",
     ],
-    barAssociation: "State Bar of Michigan · Grand Rapids Bar Association",
+    barAssociation: "Grand Rapids Bar Association",
     neighborhoods: ["Downtown", "East Grand Rapids", "Wyoming", "Kentwood", "Walker", "Grandville"],
     nearbyCities: ["Detroit", "Lansing", "Kalamazoo", "Holland"],
     legalContext: {
@@ -225,28 +226,36 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "Can SEO replace my Google Ads?",
-        a: "Often it can reduce your dependence on them over time, but we keep ads running until organic data proves it is safe to trim. We never ask you to cut paid spend before organic intake is proven in your CallRail dashboard. Over 6–9 months, as Map Pack and organic rankings compound, firms typically trim 50%–80% of low-converting PPC keywords while lowering their blended cost per signed case. Results are never guaranteed.",
+        q: "What is law firm SEO in Grand Rapids?",
+        a: "Law firm SEO in Grand Rapids makes your firm visible in Google's Map Pack, organic results and AI answers for West Michigan legal searches. It combines a tuned Business Profile, Kent County practice pages, local citations and tracking.",
       },
       {
-        q: "How long before I see leads from SEO in Grand Rapids?",
-        a: "Kent County is significantly less saturated than Detroit or Chicago. Most of our Grand Rapids clients see Google Business Profile rankings and initial local phone calls within 30 to 60 days. Suburb-specific practice pages (Wyoming, Kentwood, East Grand Rapids) typically begin ranking for high-intent queries between days 60 and 90, creating a sustainable foundation by month 4.",
+        q: "Can SEO replace PPC for a Grand Rapids law firm?",
+        a: "SEO can reduce your dependence on PPC over time, but it starts slower, so we keep ads running until your numbers show organic can carry the load. You trim spend only where the data supports it.",
       },
       {
-        q: "I am a solo attorney with no time. Will this need me?",
-        a: "Virtually zero technical time. We handle the entire workload: citation audits, Google Business Profile management, statutory legal content writing, schema architecture, and call tracking setup. You only give us one short 20-minute monthly strategy call to review intake and signed retainers.",
+        q: "Which court handles a divorce for someone who lives in Grand Rapids?",
+        a: "It is generally filed in the Kent County Circuit Court, with the Friend of the Court handling support and parenting time matters. Michigan generally requires 180 days in the state and 10 days in the county before filing.",
       },
       {
-        q: "Do you share leads or take multiple firms in my practice area?",
-        a: "Never. Unlike lead directories (Avvo, Justia) or mass agencies that sign 15 personal injury firms in the same zip code, we enforce strict exclusivity: one law firm per practice area in Grand Rapids and Kent County. If you sign with us for personal injury or family law, we lock out your local competitors.",
+        q: "How much does law firm SEO cost in Grand Rapids?",
+        a: "Pricing depends on your practice areas and how many Kent County communities you cover. Plans are month-to-month, and the free audit comes first.",
       },
       {
-        q: "What does it cost?",
-        a: "We work on a transparent, flat monthly retainer with no surprise fees and no long-term contracts (month-to-month). Our retainer is designed to be fully covered by a single signed case per month, removing the anxiety of unpredictable Google Ads bills.",
+        q: "How long does law firm SEO take in Grand Rapids?",
+        a: "Map Pack improvements can begin within a few months, while competitive organic terms often take longer. Results are never guaranteed, so we agree on milestones up front.",
       },
       {
-        q: "Do I need separate pages for Wyoming, Kentwood, Walker and Grandville?",
-        a: "Yes. Google evaluates Kent County suburbs as distinct geo-targets. A resident searching 'divorce attorney Kentwood' or 'car accident lawyer Wyoming MI' expects localized content referencing their local municipal courts. We build dedicated high-intent submarket spokes for each so your firm captures cases across the entire metropolitan area.",
+        q: "Do you cover Holland, Muskegon, Wyoming and Kentwood?",
+        a: "Yes, each area gets its own page where you serve it, because Google treats them as separate local searches. We also name the county courts that apply to each.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. We write answer-first content, add schema and an llms.txt file, and track your citation rate. No platform's output can be guaranteed.",
+      },
+      {
+        q: "What are low-hanging keywords for a Grand Rapids law firm?",
+        a: "Long-tail searches that combine a legal topic with a suburb or court, such as \"OWI lawyer Walker MI\" or \"Friend of the Court Kent County help\". They have less competition and attract people closer to hiring.",
       },
     ],
   },
@@ -259,12 +268,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Ohio",
     stateAbbr: "OH",
     county: "Cuyahoga County",
-    metaTitle: "Law Firm SEO Company in Cleveland, OH",
+    metaTitle: "Law Firm SEO Cleveland, OH | Proven Numbers, More Cases",
     metaDescription:
-      "SEO for Cleveland law firms. Rank in the Cuyahoga County map pack for injury, workers' comp and criminal defence searches. Founder-led, no contracts.",
+      "Law firm SEO in Cleveland, Ohio: Map Pack, AI answers and Cuyahoga County pages, reported in calls and signed cases. Free reality check.",
     h1: "Law Firm SEO in Cleveland, Ohio: Predictable Leads, Proven Numbers",
     heroSub:
-      "Cleveland attorneys do not buy hype. They buy results they can audit. We build search visibility that earns signed cases, then show you every number behind it.",
+      "Cleveland attorneys do not buy hype. We build search and AI visibility that earns signed cases, then show every number behind it.",
     problem:
       "Cleveland legal searches return national directories and firms from other cities. Local firms are absent not because they are outranked, but because they have nothing on the page that says they practise here.",
     problemPoints: [
@@ -289,9 +298,11 @@ export const CITY_PAGES: CityPage[] = [
     courts: [
       "Cuyahoga County Court of Common Pleas",
       "Cleveland Municipal Court",
-      "U.S. District Court, Northern District of Ohio",
+      "Eighth District Court of Appeals",
+      "Ohio BWC and the Industrial Commission",
+      "Summit County courts (Akron)",
     ],
-    barAssociation: "Ohio State Bar Association · Cleveland Metropolitan Bar Association",
+    barAssociation: "Cleveland Metropolitan Bar Association",
     neighborhoods: ["Downtown", "Ohio City", "Tremont", "University Circle", "Lakewood", "Parma", "Euclid", "Beachwood", "Westlake"],
     nearbyCities: ["Lakewood", "Parma", "Beachwood", "Shaker Heights", "Westlake", "Akron"],
     legalContext: {
@@ -301,24 +312,36 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "How competitive is law firm SEO in Cleveland?",
-        a: "Less than you would expect for a metro of this size. Keyword difficulty for many Cleveland attorney searches sits at 2–5 out of 100, because the first page is held by national directories rather than local firms. Directories rank on domain authority, so a page that actually answers the searcher's question can displace them.",
+        q: "What is law firm SEO in Cleveland?",
+        a: "Law firm SEO in Cleveland makes your firm visible in Google's Map Pack, organic results and AI answers for Cuyahoga County legal searches. It combines a tuned Business Profile, practice and suburb pages, citations and a ledger of calls and signed cases.",
       },
       {
-        q: "Why do directories outrank my Cleveland firm?",
-        a: "Avvo, FindLaw and Justia have domain authority built across hundreds of thousands of pages, which lets them rank on almost any legal query. You do not beat them on authority — you beat them on specificity, by answering the exact question a Cuyahoga County searcher has in a way a national template never will.",
+        q: "Which court handles a divorce for someone who lives in Cleveland?",
+        a: "It is generally filed in the Cuyahoga County Court of Common Pleas, Domestic Relations Division. Ohio generally requires six months in the state and 90 days in the county, and dissolution is an option when both spouses agree.",
       },
       {
-        q: "Do Cleveland suburbs need their own pages?",
-        a: "Yes. Parma, Lakewood, Euclid and Westlake are searched as distinct markets, and a page optimised for 'Cleveland' will not reliably surface for them. Each needs its own content covering that community specifically, not the city name find-and-replaced.",
+        q: "How does Ohio workers' compensation affect law firm SEO?",
+        a: "Ohio uses a state fund through the BWC, so pages must explain the Ohio claim and appeal process rather than generic advice. Clear local explanations earn trust and calls.",
       },
       {
-        q: "What does workers' compensation SEO involve in Ohio?",
-        a: "Explaining the state-fund system properly. Ohio runs workers' comp through the Bureau of Workers' Compensation rather than private insurers, so the claim and appeal process differs from most states — and national directory content gets it wrong. That gap is the opportunity.",
+        q: "How much does law firm SEO cost in Cleveland?",
+        a: "Pricing depends on practice areas and suburbs covered. Plans are month-to-month, and you see the scope in the free reality check first.",
       },
       {
-        q: "Do I have to stop my PPC?",
-        a: "No. We run organic alongside ads and recommend trimming only when your ledger shows organic can carry the load.",
+        q: "How long before law firm SEO produces cases in Cleveland?",
+        a: "Map Pack movement often begins within a few months, with compounding growth after. PPC is faster at first, and results are never guaranteed. We agree on milestones up front.",
+      },
+      {
+        q: "Do I need separate pages for Lakewood, Parma and Beachwood?",
+        a: "Yes, if you want to appear in those searches, because Google treats them as distinct local markets. Each page needs genuinely different local content.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted pages. We add answer-first content, schema and an llms.txt file, and track your citation rate. We cannot guarantee any platform's output.",
+      },
+      {
+        q: "What keywords are low-hanging for a Cleveland law firm?",
+        a: "Searches that combine a legal topic with a suburb or Ohio term, such as \"BWC claim denied attorney Cuyahoga County\" or \"OVI lawyer Cleveland\". Less competition, higher intent.",
       },
     ],
   },
@@ -331,12 +354,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Pennsylvania",
     stateAbbr: "PA",
     county: "Philadelphia County",
-    metaTitle: "Law Firm SEO Company in Philadelphia, PA",
+    metaTitle: "Law Firm SEO Philadelphia, PA | Out-Local National Firms",
     metaDescription:
-      "SEO for Philadelphia law firms: practice-area pages, map pack visibility and AI Overview readiness in one of the country's toughest legal markets.",
-    h1: "Law Firm SEO in Philadelphia, Pennsylvania",
+      "Law firm SEO in Philadelphia built on neighborhoods: Map Pack, AI answers and Pennsylvania-specific pages that national firms cannot match.",
+    h1: "Law Firm SEO in Philadelphia: You Cannot Outspend Them. Out-Local Them.",
     heroSub:
-      "Philadelphia is a mass tort centre with a bar association older than the Constitution. The competition is real. What is also real is that most Philadelphia firms still publish one page per practice area and wonder why they do not rank for neighbourhood searches.",
+      "National firms treat Philadelphia as a venue. You live here. We turn neighborhood knowledge into Map Pack, page-one and AI-answer visibility that budget alone cannot buy.",
     problem:
       "Philadelphia firms compete against national plaintiff practices that treat the city as a venue rather than a home. Those firms have budget. They do not have genuine neighbourhood relevance, and that is the gap.",
     problemPoints: [
@@ -361,9 +384,11 @@ export const CITY_PAGES: CityPage[] = [
     courts: [
       "Philadelphia Court of Common Pleas",
       "Philadelphia Municipal Court",
-      "U.S. District Court, Eastern District of Pennsylvania",
+      "Criminal Justice Center",
+      "Delaware, Montgomery and Bucks county courts",
+      "Philadelphia Bar Association",
     ],
-    barAssociation: "Pennsylvania Bar Association · Philadelphia Bar Association",
+    barAssociation: "Philadelphia Bar Association",
     neighborhoods: ["Center City", "Northeast Philadelphia", "South Philadelphia", "Fishtown", "Manayunk", "University City"],
     nearbyCities: ["Pittsburgh", "Allentown", "Camden", "Wilmington"],
     legalContext: {
@@ -373,18 +398,37 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "How competitive is law firm SEO in Philadelphia?",
-        a: "Very, and for a specific reason: Philadelphia's Complex Litigation Center draws national mass tort firms that target the city as a favourable venue. They bring budgets local firms cannot match. Your advantage is genuine local relevance — neighbourhood pages and Pennsylvania-specific content that a firm with only a filing address here cannot credibly write.",
+        q: "What is law firm SEO in Philadelphia?",
+        a: "Law firm SEO in Philadelphia makes your firm visible in Google's Map Pack, organic results and AI answers for Philadelphia legal searches, neighborhood by neighborhood. It combines a tuned Business Profile, neighborhood pages, Pennsylvania-specific content and tracking.",
       },
       {
-        q: "Should a Philadelphia firm build neighbourhood pages?",
-        a: "Yes, and it is the most underused tactic in the market. Center City, Northeast Philadelphia, South Philly and Fishtown are searched as distinct places, and almost no firm has pages for them. That is a first-page opportunity sitting unclaimed while everyone fights over the citywide term.",
+        q: "Which court handles a divorce for someone who lives in Philadelphia?",
+        a: "It is generally filed in the Philadelphia Court of Common Pleas, Family Court division. Pennsylvania generally requires six months of residence before filing.",
       },
       {
-        q: "How long do I have to file a personal injury claim in Pennsylvania?",
-        a: "Two years from the date of injury in most cases. Pennsylvania also applies modified comparative negligence, meaning you can recover damages only if you are 50% or less at fault, and your award is reduced by your share. Explaining this clearly on your site answers a question people ask constantly.",
+        q: "What is limited tort versus full tort?",
+        a: "Limited tort is an auto insurance choice that can restrict the right to sue for pain and suffering, while full tort preserves it. Pages that explain this plainly earn trust and calls.",
       },
-      lawCost("Philadelphia"),
+      {
+        q: "How much does law firm SEO cost in Philadelphia?",
+        a: "Plans run from to per month depending on practice areas and neighborhoods covered. Month-to-month, and the free reality check comes first.",
+      },
+      {
+        q: "How long does law firm SEO take in Philadelphia?",
+        a: "Map Pack movement can begin within a few months, with compounding growth after. Results are never guaranteed. We agree on a 90-day milestone review.",
+      },
+      {
+        q: "Should I build neighborhood pages?",
+        a: "Usually yes, because Google treats Center City, South Philly and the Northeast as distinct searches. Each page needs genuinely different local content, not a swapped neighborhood name.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. AI answers now act like a digital referral. We add answer-first content, schema and an llms.txt file, and track citation rate. No platform's output is guaranteed.",
+      },
+      {
+        q: "What are low-hanging keywords for a Philadelphia law firm?",
+        a: "Neighborhood and Pennsylvania-term searches such as \"limited tort attorney Philadelphia\" or \"DUI lawyer Center City\". Lower competition and higher intent than \"Philadelphia lawyer\".",
+      },
     ],
   },
 
@@ -396,12 +440,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "New Mexico",
     stateAbbr: "NM",
     county: "Bernalillo County",
-    metaTitle: "Law Firm SEO Company in Albuquerque, NM",
+    metaTitle: "Law Firm SEO Albuquerque, NM / English and Spanish",
     metaDescription:
-      "SEO for Albuquerque law firms. Rank across Bernalillo County for injury, DWI and family law searches. Founder-led, one firm per city, no contracts.",
-    h1: "Law Firm SEO in Albuquerque, New Mexico",
+      "Law firm SEO in Albuquerque in English and Spanish: Map Pack, AI answers and Bernalillo County pages that build trust. Free reality check.",
+    h1: "Law Firm SEO in Albuquerque, New Mexico: Be the Lawyer Your Community Trusts",
     heroSub:
-      "New Mexico attorney searches carry real volume at low difficulty — a combination that rarely survives long. Albuquerque is the largest legal market in the state and the least contested relative to its size.",
+      "Your reputation was built face to face. We carry it to Google, the Map Pack and AI answers, in English and Spanish, so the right people find you when they need you most.",
     problem:
       "Albuquerque firms compete against out-of-state directories and a handful of local practices with strong brands. Beneath those, the search results are thin — which means the questions New Mexicans actually ask are going unanswered.",
     problemPoints: [
@@ -424,11 +468,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "Bilingual consideration", detail: "Spanish-language demand across the metro that competitors leave untouched" },
     ],
     courts: [
-      "Second Judicial District Court (Bernalillo County)",
       "Bernalillo County Metropolitan Court",
-      "U.S. District Court, District of New Mexico",
+      "Second Judicial District Court",
+      "Sandoval County (Rio Rancho)",
+      "First Judicial District (Santa Fe)",
+      "Third Judicial District (Las Cruces)",
     ],
-    barAssociation: "State Bar of New Mexico · Albuquerque Bar Association",
+    barAssociation: "Albuquerque Bar Association",
     neighborhoods: ["Downtown", "Nob Hill", "North Valley", "Westside", "Rio Rancho", "Northeast Heights"],
     nearbyCities: ["Santa Fe", "Rio Rancho", "Las Cruces", "Roswell"],
     legalContext: {
@@ -438,20 +484,36 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "Is New Mexico a community property state?",
-        a: "Yes. Property acquired during a marriage is generally owned equally by both spouses, regardless of whose name is on the title or who earned the income. This differs from the equitable distribution rule used in most states, which is why national legal content is often wrong for New Mexico residents.",
+        q: "What is law firm SEO in Albuquerque?",
+        a: "Law firm SEO in Albuquerque makes your firm visible in Google's Map Pack, organic results and AI answers, in English and Spanish, for Bernalillo County legal searches. It combines a tuned Business Profile, bilingual practice pages and tracking.",
       },
       {
-        q: "How competitive is attorney SEO in Albuquerque?",
-        a: "Lower than the market size suggests. Statewide attorney searches carry real volume, and the first page is held by national directories rather than local firms — which is a far softer thing to displace than an established local competitor. That combination does not usually last long once local firms start publishing. Pull current difficulty figures for your own practice area before committing a budget; they move.",
+        q: "You are not in New Mexico. Why should I trust you?",
+        a: "Fair question. We are a remote team, we say so openly, and we earn trust through month-to-month terms, monthly numbers, founder access and references. You bring the community, we bring the tools.",
       },
       {
-        q: "Should an Albuquerque firm target Santa Fe and Rio Rancho too?",
-        a: "If you serve them, yes, on separate pages. Google treats them as distinct markets, and a page built for Albuquerque will not reliably rank for a Rio Rancho search. Each needs content about that community specifically.",
+        q: "Which court handles a divorce for someone who lives in Albuquerque?",
+        a: "It is generally filed in the Second Judicial District Court, and New Mexico calls divorce dissolution of marriage. New Mexico is a community property state.",
       },
       {
-        q: "Does Spanish-language content help a New Mexico law firm rank?",
-        a: "It can, substantially, and almost nobody is doing it. There is genuine Spanish-language search demand across the Albuquerque metro that competitors leave untouched. Properly translated pages with hreflang markup capture searches your English-only competitors never see.",
+        q: "Does Spanish content really help?",
+        a: "It can, because many people search in Spanish and fewer firms answer them well. We use native-speaker review and correct language tagging.",
+      },
+      {
+        q: "How much does law firm SEO cost in Albuquerque?",
+        a: "Pricing depends on practice areas, languages and communities covered. Month-to-month, and the free reality check comes first.",
+      },
+      {
+        q: "How long does law firm SEO take in Albuquerque?",
+        a: "Map Pack movement can begin within a few months, with steady growth after. Results are never guaranteed. We agree on milestones up front.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages, in English and Spanish. We add schema, answer-first content and an llms.txt file, and track citation rate. No platform's output is guaranteed.",
+      },
+      {
+        q: "What are low-hanging keywords for an Albuquerque law firm?",
+        a: "Searches that combine a legal topic with a town or a Spanish phrase, such as \"abogado de DWI en Albuquerque\" or \"DWI attorney Rio Rancho\". Lower competition and high intent.",
       },
     ],
   },
@@ -464,12 +526,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Fort Bend County",
-    metaTitle: "Law Firm SEO Company in Sugar Land, TX",
+    metaTitle: "Law Firm SEO Sugar Land, TX | Beat Houston Firms",
     metaDescription:
-      "SEO for Sugar Land law firms. Rank in Fort Bend County for high-asset family law, business and injury searches. One firm per city, no contracts.",
-    h1: "Law Firm SEO in Sugar Land, Texas",
+      "Law firm SEO in Sugar Land and Fort Bend County: Map Pack, AI answers and local pages that lift you out of Houston's shadow. Free rescue plan.",
+    h1: "Law Firm SEO in Sugar Land, Texas: Rescue Your Practice From Houston's Ad Auction",
     heroSub:
-      "Sugar Land sits inside Houston's shadow, and that is exactly why it is winnable. Firms optimise for 'Houston' and leave one of the wealthiest counties in Texas to whoever bothers to name it.",
+      "Fort Bend families search for a lawyer they can trust close to home. We lift your firm out of Houston's shadow and out of the click-by-click spending race.",
     problem:
       "Fort Bend County residents do not search for 'Houston lawyer'. They search for Sugar Land (often typed as one word, Sugarland), Missouri City, Katy and Richmond — and the firms ranking for those terms are usually Houston practices with no local page at all.",
     problemPoints: [
@@ -492,11 +554,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "Multilingual demand", detail: "One of the most diverse counties in the country, and nobody is serving it" },
     ],
     courts: [
-      "Fort Bend County District Courts (240th, 268th, 328th, 400th, 434th, 458th)",
-      "Fort Bend County Courts at Law",
-      "U.S. District Court, Southern District of Texas",
+      "Fort Bend County district courts, Richmond",
+      "Fort Bend County courts at law",
+      "Sugar Land Municipal Court",
+      "Harris County district courts (Houston) for some addresses",
+      "Fort Bend County Bar Association",
     ],
-    barAssociation: "State Bar of Texas · Fort Bend County Bar Association",
+    barAssociation: "Fort Bend County Bar Association",
     neighborhoods: ["First Colony", "Telfair", "Riverstone", "New Territory", "Missouri City", "Greatwood"],
     nearbyCities: ["Houston", "Katy", "Richmond", "Pearland"],
     legalContext: {
@@ -506,16 +570,36 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
+        q: "What is law firm SEO in Sugar Land?",
+        a: "Law firm SEO in Sugar Land makes your firm visible in Google's Map Pack, organic results and AI answers for Fort Bend legal searches. It combines a tuned Business Profile, Fort Bend County pages, local citations and tracking.",
+      },
+      {
         q: "Why does my Sugar Land firm rank below Houston firms?",
-        a: "Because those firms have more domain authority, not more relevance. They rank on general strength while having no Fort Bend-specific content at all. A page that names Fort Bend County courts, covers Missouri City and Katy, and speaks to the actual income profile of the market beats a generic Houston page on relevance.",
+        a: "Often domain strength rather than relevance, and many Houston firms have no Fort Bend page. Local pages that name the Richmond courts and Sugar Land communities can compete.",
       },
       {
-        q: "Is high-asset family law worth targeting in Sugar Land?",
-        a: "It is usually the strongest opening. Fort Bend household income runs well above the Texas median, so divorces here routinely involve business interests, executive compensation and multiple properties. Competition for those specific terms is much thinner than for general divorce terms.",
+        q: "Which court handles a divorce for someone who lives in Sugar Land?",
+        a: "It is generally filed in the Fort Bend County district courts in Richmond. Texas requires six months in the state and 90 days in the county (Tex. Fam. Code § 6.301).",
       },
       {
-        q: "What makes law firm SEO in Sugarland effective for Fort Bend practices?",
-        a: "Fort Bend County residents search locally for Sugar Land (often typed as Sugarland), Missouri City and Richmond rather than Houston. Effective Sugar Land law firm SEO focuses on high-asset divorce, business litigation, and Fort Bend County court venues, outranking generic Houston directories.",
+        q: "How much does law firm SEO in Sugar Land cost?",
+        a: "Plans run $1,200 to $2,500 per month depending on practice areas and communities covered. Month-to-month, and the free rescue plan comes first.",
+      },
+      {
+        q: "How long does law firm SEO take in Sugar Land?",
+        a: "Map Pack improvements can begin within a few months, while competitive organic terms often take longer. Results are never guaranteed. We agree on a milestone review.",
+      },
+      {
+        q: "Will you cover Missouri City, Katy and Richmond?",
+        a: "Yes, on separate pages, because Google treats them as distinct searches. We avoid overlapping with other city pages we run, such as Katy.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. We add schema, answer-first content and an llms.txt file, and track citation rate. No platform's output is guaranteed.",
+      },
+      {
+        q: "What are low-hanging keywords for a Sugar Land law firm?",
+        a: "Fort Bend phrases such as \"probate attorney Richmond TX\" or \"family lawyer Missouri City TX\", and the \"Sugarland\" spelling. Lower competition and higher intent than \"Houston lawyer\".",
       },
     ],
   },
@@ -527,12 +611,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Collin County",
-    metaTitle: "Law Firm SEO Company in Plano, TX",
+    metaTitle: "Law Firm SEO Plano, TX | Be Found in Week One",
     metaDescription:
-      "SEO for Plano law firms. Rank in Collin County for family law, business and injury searches. Founder-led, one firm per city, no long-term contracts.",
-    h1: "Law Firm SEO in Plano, Texas",
+      "Law firm SEO in Plano, Texas for executive divorce, business immigration and estate firms: Collin County pages, Map Pack and AI answers.",
+    h1: "Law Firm SEO in Plano, Texas: Be the Firm Newcomers Find in Week One",
     heroSub:
-      "Corporate relocations turned Collin County into one of the wealthiest legal markets in Texas. Most firms here still optimise for 'Dallas' and leave the county's own searches to whoever claims them.",
+      "Many professionals move to Plano with no local lawyer and no one to ask. Google and AI assistants are their referral network. We make sure your firm is the answer.",
     problem:
       "Plano is not a Dallas suburb in search terms. It is its own market with its own courts, its own bar, and residents who search by their own city name — and firms that fold it into a Dallas page never appear.",
     problemPoints: [
@@ -555,11 +639,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "Corporate relocation angle", detail: "Immigration and employment demand that follows headquarters moves" },
     ],
     courts: [
-      "Collin County District Courts (199th, 219th, 380th, 401st, 416th, 429th)",
-      "Collin County Courts at Law",
+      "Collin County district and county courts, McKinney",
+      "Plano Municipal Court",
+      "Denton County courts for some addresses",
       "U.S. District Court, Eastern District of Texas",
+      "Collin County Bar Association",
     ],
-    barAssociation: "State Bar of Texas · Collin County Bar Association",
+    barAssociation: "Collin County Bar Association",
     neighborhoods: ["West Plano", "Legacy West", "Willow Bend", "Frisco", "Allen", "Richardson"],
     nearbyCities: ["Dallas", "Frisco", "McKinney", "Denton"],
     legalContext: {
@@ -569,16 +655,36 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "Should a Plano firm target Dallas keywords?",
-        a: "Usually not first. Dallas terms are far more competitive and less relevant to your actual client base — Collin County residents search by their own city. Win Plano, Frisco, McKinney and Allen first, then expand outward once those positions hold.",
+        q: "What is law firm SEO in Plano?",
+        a: "Law firm SEO in Plano makes your firm visible in Google's Map Pack, organic results and AI answers for Collin County legal searches, especially from newcomers. It combines a tuned Business Profile, Collin County pages, local citations and tracking.",
       },
       {
-        q: "What practice area has the least competition in Plano?",
-        a: "Business immigration is the clearest gap. Corporate relocations into the Legacy corridor generate sustained H-1B, L-1 and employment-based green card demand, and almost no Collin County firm has built content for it.",
+        q: "Why is Google the referral network for Plano newcomers?",
+        a: "Many Plano residents recently moved and have no local lawyer to ask, so they search and ask AI tools first. The firm that answers clearly and shows credentials becomes their pick.",
       },
       {
-        q: "How does executive compensation change a Plano divorce page?",
-        a: "It changes what the page needs to explain. Divorces here routinely involve restricted stock units, deferred compensation and equity awards, and someone facing that searches very differently from someone with a house and a pension. A page addressing equity division specifically competes against almost nothing.",
+        q: "Which court handles a divorce for someone who lives in Plano?",
+        a: "It is generally filed in the Collin County district courts in McKinney. Texas requires six months in the state and 90 days in the county before filing.",
+      },
+      {
+        q: "How much does law firm SEO in Plano cost?",
+        a: "Pricing depends on practice areas and cities covered. Month-to-month, and the free reality check comes first.",
+      },
+      {
+        q: "How long does law firm SEO take in Plano?",
+        a: "Map Pack improvements can begin within a few months, while competitive organic terms often take longer. Results are never guaranteed. We agree on milestones up front.",
+      },
+      {
+        q: "Do you cover Frisco, Allen and McKinney?",
+        a: "Yes, each gets its own page where you serve it, because Google treats them as separate local searches. We keep Frisco distinct from our Denton work.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. We add schema, answer-first content and an llms.txt file, and track citation rate. No platform's output is guaranteed.",
+      },
+      {
+        q: "What are low-hanging keywords for a Plano law firm?",
+        a: "Life-event and corridor searches such as \"executive divorce lawyer Plano TX\" or \"H-1B attorney Plano TX\". Lower competition and high intent.",
       },
     ],
   },
@@ -590,12 +696,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Denton County",
-    metaTitle: "Law Firm SEO Company in Denton, TX",
+    metaTitle: "Law Firm SEO Denton, TX | Solo and Small Firms",
     metaDescription:
-      "SEO for Denton law firms. Rank in Denton County for criminal defence, family law and injury searches. Founder-led, one firm per city, no contracts.",
-    h1: "Law Firm SEO in Denton, Texas",
+      "Law firm SEO in Denton, Texas for solo and small firms: Map Pack, AI answers and Denton County pages, with a 7-day free trial.",
+    h1: "Law Firm SEO in Denton, Texas: You Do Not Have to Carry This Alone",
     heroSub:
-      "Two universities, a fast-growing county, and a first page held by Dallas-Fort Worth firms with no Denton County content. Denton is the kind of market where a firm that publishes properly for six months is still holding position three years later.",
+      "I know the ad bills, the quiet Mondays and the Dallas-Fort Worth firms above you on Google. I am Mubashar, and I will take this off your shoulders with qualified leads that come to you organically.",
     problem:
       "Denton firms are squeezed between Dallas-Fort Worth domain authority above them and directories beside them. Neither has anything specific to say about practising in Denton County.",
     problemPoints: [
@@ -618,11 +724,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "New-resident targeting", detail: "Rapid growth means searchers with no existing firm relationship" },
     ],
     courts: [
-      "Denton County District Courts (16th, 158th, 211th, 362nd, 367th, 393rd, 431st)",
-      "Denton County Courts at Law",
-      "U.S. District Court, Eastern District of Texas",
+      "Denton County district and county courts",
+      "Denton Municipal Court and justice courts",
+      "Eastern District of Texas, Sherman Division",
+      "Denton County Bar Association",
+      "UNT and TWU campus communities",
     ],
-    barAssociation: "State Bar of Texas · Denton County Bar Association",
+    barAssociation: "Denton County Bar Association",
     neighborhoods: ["Downtown Denton", "Southridge", "Robson Ranch", "Lewisville", "Flower Mound", "Little Elm"],
     nearbyCities: ["Dallas", "Fort Worth", "Plano", "Frisco"],
     legalContext: {
@@ -632,16 +740,36 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "How competitive is law firm SEO in Denton?",
-        a: "Less contested than the county’s size suggests. Denton attorney searches carry real volume, but page one is DFW firms ranking on domain strength without a line of Denton County content between them. That is a position a local firm can take and hold. Check current difficulty for your own practice area before you budget — these figures move.",
+        q: "What is law firm SEO in Denton?",
+        a: "Law firm SEO in Denton makes your firm visible in Google's Map Pack, organic results and AI answers for Denton County legal searches. It combines a tuned Business Profile, Denton County pages, local citations and tracking.",
       },
       {
-        q: "Does the student population change what a Denton firm should publish?",
-        a: "Substantially. Close to 60,000 students across UNT and TWU drive alcohol, possession and misdemeanour defence demand — and the person searching is often a parent, not the defendant. Content written for a worried parent converts very differently from content written for the accused.",
+        q: "How does the 90-day money-back guarantee work?",
+        a: "We agree on milestones in writing before we start, and if they are not met by Day 90 we refund. It is not a ranking guarantee, because nobody controls Google.",
       },
       {
-        q: "Should a Denton firm target Lewisville and Flower Mound?",
-        a: "Yes, on their own pages. They are distinct searches within Denton County, and a Denton page will not reliably surface for them. Each needs content specific to that community.",
+        q: "Which court handles a divorce for someone who lives in Denton?",
+        a: "It is generally filed in the Denton County district courts. Texas requires six months in the state and 90 days in the county before filing.",
+      },
+      {
+        q: "I was burned by an agency before. Why is this different?",
+        a: "You deal with me, not a junior, you get weekly updates, and you own your site and content. Your fees are also protected by the guarantee.",
+      },
+      {
+        q: "Is law firm SEO affordable for a small Denton firm?",
+        a: "Plans start at per month, month-to-month. One signed case can cover many months of service.",
+      },
+      {
+        q: "How long before SEO produces cases in Denton?",
+        a: "Map Pack movement can begin within a few months, with growth after. Results are never guaranteed. We review milestones at Day 30, 60 and 90.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. We add schema, answer-first content and an llms.txt file, and track citation rate. No platform's output is guaranteed.",
+      },
+      {
+        q: "What are low-hanging keywords for a Denton law firm?",
+        a: "Searches that combine a legal topic with a city or campus, such as \"minor in possession attorney Denton\" or \"security deposit lawyer Denton\". Lower competition and high intent.",
       },
     ],
   },
@@ -653,12 +781,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Harris, Fort Bend & Waller Counties",
-    metaTitle: "Law Firm SEO Company in Katy, TX",
+    metaTitle: "Law Firm SEO Katy, TX | Harris, Fort Bend, Waller",
     metaDescription:
-      "SEO for Katy law firms across Harris, Fort Bend and Waller counties: family law, injury and estate pages and map pack work. Founder-led, one firm per city.",
-    h1: "Law Firm SEO in Katy, Texas",
+      "Law firm SEO in Katy, Texas: county-correct pages for Harris, Fort Bend and Waller, plus Map Pack and AI answer visibility. Free tear-down.",
+    h1: "Law Firm SEO in Katy, Texas: Be the Firm at the Crossroads",
     heroSub:
-      "Katy sits where Harris, Fort Bend and Waller counties meet, in a fast-growing part of the Houston area. Most of the firms that show up for Katy searches are downtown Houston practices with no Katy page at all.",
+      "Harris, Fort Bend and Waller counties meet in Katy. Clients search for a lawyer close to home and nobody tells them which courthouse is theirs. We make your firm the one that does.",
     problem:
       "Katy clients search for Katy — and for Cinco Ranch, Fulshear and Brookshire — but the firms that appear are mostly Houston practices with no page about the Katy area, and none of them say which county courthouse a Katy case actually goes to.",
     problemPoints: [
@@ -681,12 +809,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "Katy, not Houston", detail: "Katy content for Katy searchers, not a downtown page with Katy in the footer" },
     ],
     courts: [
-      "Harris County District Courts (Houston)",
-      "Fort Bend County District Courts (Richmond)",
-      "Waller County District Court (Hempstead)",
+      "Harris County district courts, Houston",
+      "Fort Bend County district courts, Richmond",
+      "Waller County district court, Hempstead",
       "U.S. District Court, Southern District of Texas",
+      "Houston and Fort Bend County bar associations",
     ],
-    barAssociation: "State Bar of Texas · Houston Bar Association · Fort Bend County Bar Association",
+    barAssociation: "Houston Bar Association",
     neighborhoods: ["Old Town Katy", "Cinco Ranch", "Cross Creek Ranch", "Firethorne", "Seven Meadows", "Grand Lakes"],
     nearbyCities: ["Houston", "Fulshear", "Brookshire", "Sugar Land", "Cypress"],
     legalContext: {
@@ -696,14 +825,37 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
+        q: "What is law firm SEO in Katy, Texas?",
+        a: "Law firm SEO in Katy makes a firm visible in Google's Map Pack, organic results and AI answers for Katy-area legal searches. It combines a tuned Business Profile, county-specific practice pages, local citations and tracking.",
+      },
+      {
         q: "Which court handles a divorce for someone who lives in Katy?",
-        a: "It depends on the county. Katy spans Harris, Fort Bend and Waller counties, so a divorce is filed in that county's district court — Houston for Harris, Richmond for Fort Bend, Hempstead for Waller. Texas also requires six months' residence in the state and 90 days in the county before filing (Tex. Fam. Code § 6.301).",
+        a: "It is filed in the district court of the county where the spouse lives: Houston for Harris, Richmond for Fort Bend and Hempstead for Waller. Texas requires six months in the state and 90 days in the county (Tex. Fam. Code § 6.301).",
+      },
+      {
+        q: "How much does law firm SEO in Katy cost?",
+        a: "It runs $1,200 to $2,500 per month depending on practice areas and communities covered. Month-to-month, and the free tear-down comes first.",
+      },
+      {
+        q: "How long does law firm SEO take in Katy?",
+        a: "Map Pack improvements can begin within a few months, while competitive organic terms often take longer. Results are never guaranteed. We agree on a 90-day milestone review.",
       },
       {
         q: "Should a Katy firm target Houston keywords?",
-        a: "Not first. Houston-wide terms are held by large firms on domain strength. Pages for Katy, Cinco Ranch, Fulshear and the county courts you appear in rank sooner and bring clients who are closer to your office.",
+        a: "Not first, because Houston-wide terms are held by large firms on domain strength. Pages for Katy, Cinco Ranch, Fulshear and the county courts rank sooner and reach clients closer to your office.",
       },
-      lawCost("Katy"),
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. We write answer-first content, add schema and an llms.txt file, and track your citation rate. No platform's output can be guaranteed.",
+      },
+      {
+        q: "Do I need separate pages for Cinco Ranch, Fulshear and Brookshire?",
+        a: "Yes, if you want to appear in those searches, because they are searched separately. Each page needs genuinely different local content, not the city name swapped out.",
+      },
+      {
+        q: "What are low-hanging keywords for a Katy law firm?",
+        a: "County and road phrases such as \"Waller County divorce Brookshire\" or \"truck accident lawyer I-10 Katy\". Less competition and higher intent than \"Houston lawyer\".",
+      },
     ],
   },
 
@@ -714,12 +866,12 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Montgomery County",
-    metaTitle: "Law Firm SEO Company in The Woodlands, TX",
+    metaTitle: "Law Firm SEO The Woodlands, TX | Be the Name They Hear",
     metaDescription:
-      "SEO for law firms in The Woodlands: Montgomery County courts, family law, estate and injury pages, and map pack work. Founder-led, one firm per city.",
-    h1: "Law Firm SEO in The Woodlands, Texas",
+      "Law firm SEO in The Woodlands, Texas: Montgomery and Harris County pages, referral-ready reputation and AI answers. Complimentary review.",
+    h1: "Law Firm SEO in The Woodlands, Texas: Be the Name Your Clients Already Hear",
     heroSub:
-      "The Woodlands is a master-planned community of more than 100,000 people, not a city, and most of its cases go to the Montgomery County courts in Conroe — something most firm pages targeting it never say.",
+      "Behind every estate plan, probate and divorce search is a family trying to protect what matters. We make sure that when they check you out on Google or ask an AI, your firm earns their trust and their call.",
     problem:
       "People in The Woodlands search for their village — Alden Bridge, Sterling Ridge, Creekside Park — and for Spring and Conroe, but the firms that appear are mostly Houston practices with no page about The Woodlands or the Montgomery County courts.",
     problemPoints: [
@@ -742,12 +894,13 @@ export const CITY_PAGES: CityPage[] = [
       { label: "Spring and Conroe", detail: "Neighbouring communities covered on their own pages, where you serve them" },
     ],
     courts: [
-      "Montgomery County District Courts (Conroe)",
-      "Montgomery County Courts at Law",
-      "Harris County District Courts (for Creekside Park)",
+      "Montgomery County district courts and courts at law, Conroe",
+      "Harris County district courts, Houston (Creekside Park)",
       "U.S. District Court, Southern District of Texas",
+      "Montgomery County Bar Association",
+      "The Woodlands Township (no city court)",
     ],
-    barAssociation: "State Bar of Texas · Montgomery County Bar Association",
+    barAssociation: "Montgomery County Bar Association",
     neighborhoods: ["Alden Bridge", "Sterling Ridge", "Cochran's Crossing", "Panther Creek", "Grogan's Mill", "Creekside Park"],
     nearbyCities: ["Spring", "Conroe", "Tomball", "Magnolia", "Shenandoah"],
     legalContext: {
@@ -757,14 +910,37 @@ export const CITY_PAGES: CityPage[] = [
     },
     faqs: [
       {
-        q: "Which court handles a case for someone who lives in The Woodlands?",
-        a: "Most of The Woodlands is in Montgomery County, so cases generally go to the Montgomery County courts in Conroe. Creekside Park is the exception: it lies mostly in Harris County, where cases go to Harris County's courts.",
+        q: "What is law firm SEO in The Woodlands, Texas?",
+        a: "Law firm SEO in The Woodlands makes a firm visible in Google's Map Pack, organic results and AI answers for Woodlands-area legal searches. It combines a tuned Business Profile, venue-correct practice pages, village pages and tracking.",
       },
       {
-        q: "Should a firm in The Woodlands target Houston keywords?",
-        a: "Not first. Houston-wide terms are held by large firms on domain strength. Pages for The Woodlands, its villages, Spring and Conroe, and the Montgomery County courts rank sooner and bring clients close to your office.",
+        q: "Which court handles a case for someone who lives in The Woodlands?",
+        a: "Most cases generally go to the Montgomery County courts in Conroe, while Creekside Park, which lies mostly in Harris County, goes to Harris County courts. For divorce, Texas requires six months in the state and 90 days in the county.",
       },
-      lawCost("The Woodlands"),
+      {
+        q: "Is The Woodlands a city?",
+        a: "No, The Woodlands is an unincorporated, master-planned community governed by The Woodlands Township. That is why there is no city municipal court, and why pages that say only \"serving The Woodlands\" miss the venue question.",
+      },
+      {
+        q: "How much does law firm SEO in The Woodlands cost?",
+        a: "It runs $1,200 to $2,500 per month depending on practice areas and villages covered. Month-to-month, and the complimentary review comes first.",
+      },
+      {
+        q: "What is included in the complimentary review?",
+        a: "It covers your Montgomery and Harris venue gaps, missing village pages, Business Profile health and an AI citation baseline. You receive a short summary and video walkthrough with no obligation.",
+      },
+      {
+        q: "How long does law firm SEO take in The Woodlands?",
+        a: "Map Pack improvements can begin within a few months, while competitive organic terms often take longer. Results are never guaranteed. We agree on a milestone review.",
+      },
+      {
+        q: "Can SEO help my firm appear in ChatGPT and Google AI Overviews?",
+        a: "It can improve the odds, because AI tools quote clear, trusted, well-structured pages. We write answer-first content, add schema and an llms.txt file, and track your citation rate. No platform's output can be guaranteed.",
+      },
+      {
+        q: "Should a Woodlands firm target Houston keywords?",
+        a: "Not first, because Houston-wide terms are held by large firms on domain strength. Pages for The Woodlands, its villages, Conroe and Spring rank sooner and reach clients closer to your office.",
+      },
     ],
   },
 

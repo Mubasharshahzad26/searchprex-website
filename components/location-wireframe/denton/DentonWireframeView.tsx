@@ -17,6 +17,7 @@ import DentonDemographyMap from "./DentonDemographyMap";
 import DentonNearbySubmarkets from "./DentonNearbySubmarkets";
 import DentonKeywordCluster from "./DentonKeywordCluster";
 import DentonFaqAndCta from "./DentonFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface DentonWireframeViewProps {
   page: CityPage;
@@ -27,6 +28,9 @@ export default function DentonWireframeView({ page }: DentonWireframeViewProps) 
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Denton Courthouse-on-the-Square Sunrise SVG & Direct Trust Chips */}
       <DentonHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Banner ("Confused between choosing an SEO agency / Didn't get results") */}
       <DentonPainBanner id="painband-top" variant="top" />
@@ -69,6 +73,9 @@ export default function DentonWireframeView({ page }: DentonWireframeViewProps) 
 
       {/* 15. Direct 24-Hour Review Intake Form, Denton Attorney FAQs, Contextual Links & CTA */}
       <DentonFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

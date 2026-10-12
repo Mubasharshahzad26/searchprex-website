@@ -40,6 +40,7 @@ import DentonWireframeView from "@/components/location-wireframe/denton/DentonWi
 import KatyWireframeView from "@/components/location-wireframe/katy/KatyWireframeView";
 import SugarLandWireframeView from "@/components/location-wireframe/sugar-land/SugarLandWireframeView";
 import WoodlandsWireframeView from "@/components/location-wireframe/the-woodlands/WoodlandsWireframeView";
+import PlanoWireframeView from "@/components/location-wireframe/plano/PlanoWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -320,6 +321,25 @@ export default async function CityPage({
         />
         <main>
           <WoodlandsWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  if (page.stateSlug === "texas" && page.citySlug === "plano") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <PlanoWireframeView page={page} />
         </main>
       </>
     );

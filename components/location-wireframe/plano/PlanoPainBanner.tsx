@@ -1,0 +1,113 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { HelpCircle, AlertOctagon, CheckCircle2, ArrowRight } from 'lucide-react';
+
+interface PlanoPainBannerProps {
+  id?: string;
+  variant?: 'top' | 'bottom';
+}
+
+export default function PlanoPainBanner({
+  id = 'painband-top',
+  variant = 'top',
+}: PlanoPainBannerProps) {
+  if (variant === 'bottom') {
+    return (
+      <section id={id} className="py-16 bg-[#0a0f2e] text-white border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-slate-900 to-[#0a0f2e] border border-slate-700/60 rounded-3xl p-8 sm:p-12 shadow-xl">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider border border-emerald-500/20">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>The SearchPrex Retainer Guarantee</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  Burnt by Previous Agencies with Zero Results? We Deliver Signed Retainers.
+                </h3>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Managing partners in Plano are tired of paying thousands each month for vanity keyword impressions while their intake calendar stays dry. We hold ourselves accountable to verified client inquiries, high-asset consultations, and signed retainers in Collin County.
+                </p>
+              </div>
+              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
+                <a
+                  href="#reality-check-form"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-sm shadow-md transition-all text-center"
+                >
+                  <span>Claim Your Free Reality Check</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 transition-all text-center"
+                >
+                  <span>Review 7-Day Free Trial</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id={id} className="py-12 bg-slate-50 border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Box 1: Confused between choosing an SEO agency */}
+          <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#534AB7]/10 text-[#534AB7] flex items-center justify-center shrink-0 mt-0.5">
+                <HelpCircle className="w-5 h-5" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-extrabold text-base sm:text-lg text-[#0a0f2e] tracking-tight">
+                  Confused Between Choosing an SEO Agency in Plano? We Help You.
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Most agencies pitch Dallas rankings that waste your budget on 30-mile commutes. We focus strictly on Plano, Frisco, Allen, and McKinney high-intent clients who need local representation in Collin County courts.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="#reality-check-form"
+                    className="text-xs font-bold text-[#534AB7] hover:text-[#3C3489] inline-flex items-center gap-1"
+                  >
+                    Compare local reality vs national pitches <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Box 2: Burnt by previous agencies */}
+          <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+                <AlertOctagon className="w-5 h-5 text-[#534AB7]" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-extrabold text-base sm:text-lg text-[#0a0f2e] tracking-tight">
+                  Burnt by Previous Agencies with Zero Signed Cases? We Deliver.
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  If you got burned by long 12-month lock-in contracts with zero phone calls, we reverse the risk: 7-day free trial, month-to-month flexibility, and full ownership of every digital asset from day one.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="#pricing"
+                    className="text-xs font-bold text-[#534AB7] hover:text-[#3C3489] inline-flex items-center gap-1"
+                  >
+                    See risk-reversal guarantee & pricing <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -15,6 +15,7 @@ import SugarLandDemographyMap from "./SugarLandDemographyMap";
 import SugarLandNearbySubmarkets from "./SugarLandNearbySubmarkets";
 import SugarLandKeywords from "./SugarLandKeywords";
 import SugarLandFaqAndCta from "./SugarLandFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface SugarLandWireframeViewProps {
   page: CityPage;
@@ -25,6 +26,9 @@ export default function SugarLandWireframeView({ page }: SugarLandWireframeViewP
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Town Square Palms SVG & Anti-PPC Auction Positioning */}
       <SugarLandHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Banner ("Confused between choosing an SEO agency / Didn't get results") */}
       <SugarLandPainBanner id="painband-top" variant="top" />
@@ -61,6 +65,9 @@ export default function SugarLandWireframeView({ page }: SugarLandWireframeViewP
 
       {/* 13. Attorney FAQs, Regional Texas Directories & Closing Conversion CTA */}
       <SugarLandFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

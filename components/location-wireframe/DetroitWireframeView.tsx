@@ -57,6 +57,7 @@ import DetroitOtherAreasServed from "./DetroitOtherAreasServed";
 import DetroitTechnologySlider from "./DetroitTechnologySlider";
 import DetroitBlogSection from "./DetroitBlogSection";
 import DetroitOfficeAndFaq from "./DetroitOfficeAndFaq";
+import TaglinePainBand from "./TaglinePainBand";
 
 interface DetroitWireframeViewProps {
   page: CityPage;
@@ -70,6 +71,9 @@ export default function DetroitWireframeView({ page }: DetroitWireframeViewProps
 
       {/* 1. HERO SECTION (H1: Revenue First Approach SEO in Detroit, MI + Replicated Lead Form + Background) */}
       <DetroitHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. LEAD PROBLEM & NATIONWIDE AUTHORITY (H2: Worried of Not Getting Qualified Leads + detroit-law-consultation.webp) */}
       <DetroitSubMarkets page={page} />
@@ -106,6 +110,9 @@ export default function DetroitWireframeView({ page }: DetroitWireframeViewProps
 
       {/* 13. FAQS & PRACTICE COVERAGE */}
       <DetroitOfficeAndFaq page={page} />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

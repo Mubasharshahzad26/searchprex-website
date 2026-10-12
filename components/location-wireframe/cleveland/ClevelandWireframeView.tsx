@@ -22,6 +22,7 @@ import ClevelandSubMarkets from "./ClevelandSubMarkets";
 import ClevelandEmotionalIntent from "./ClevelandEmotionalIntent";
 import ClevelandKeywordCluster from "./ClevelandKeywordCluster";
 import ClevelandFaqAndCta from "./ClevelandFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface ClevelandWireframeViewProps {
   page: CityPage;
@@ -32,6 +33,9 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Demand Ledger */}
       <ClevelandHero page={page} />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Band */}
       <ClevelandPainBanner id="painband-top" variant="top" />
@@ -89,6 +93,9 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
 
       {/* 20. FAQ Accordion + Closing High-Contrast CTA Banner + Bottom Pain Band */}
       <ClevelandFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

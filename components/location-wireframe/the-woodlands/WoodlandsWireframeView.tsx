@@ -17,6 +17,7 @@ import WoodlandsPricingAndGuarantee from './WoodlandsPricingAndGuarantee';
 import WoodlandsFounderBio from './WoodlandsFounderBio';
 import WoodlandsDemographyMap from './WoodlandsDemographyMap';
 import WoodlandsFaqAndCta from './WoodlandsFaqAndCta';
+import TaglinePainBand from '../TaglinePainBand';
 
 interface WoodlandsWireframeViewProps {
   page: CityPage;
@@ -27,6 +28,9 @@ export default function WoodlandsWireframeView({ page }: WoodlandsWireframeViewP
     <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
       {/* 1. Hero with Waterway & Pine Tree Vector, Montgomery & Harris Stats */}
       <WoodlandsHero />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Top Pain Banner ("Confused between choosing an SEO agency in The Woodlands") */}
       <WoodlandsPainBanner variant="confused" />
@@ -72,6 +76,9 @@ export default function WoodlandsWireframeView({ page }: WoodlandsWireframeViewP
 
       {/* 16. FAQs, Texas Legal Practice Network Directory & Closing CTA Banner */}
       <WoodlandsFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }

@@ -45,6 +45,7 @@ import GrandRapidsQualifiedLeadTests from "./GrandRapidsQualifiedLeadTests";
 import GrandRapidsComparisonMatrix from "./GrandRapidsComparisonMatrix";
 import GrandRapidsRiskReversal from "./GrandRapidsRiskReversal";
 import GrandRapidsFaqAndCta from "./GrandRapidsFaqAndCta";
+import TaglinePainBand from "../TaglinePainBand";
 
 interface GrandRapidsWireframeViewProps {
   page: CityPage;
@@ -55,6 +56,9 @@ export default function GrandRapidsWireframeView({ page }: GrandRapidsWireframeV
     <div className="w-full bg-white text-slate-900 font-sans">
       {/* 1. Hero Section */}
       <GrandRapidsHero />
+
+      {/* Tagline band under hero */}
+      <TaglinePainBand />
 
       {/* 2. Interactive Ad Spend Quiz */}
       <GrandRapidsAdSpendQuiz />
@@ -88,6 +92,9 @@ export default function GrandRapidsWireframeView({ page }: GrandRapidsWireframeV
 
       {/* 12. Local FAQs & Final Action Banner */}
       <GrandRapidsFaqAndCta />
+
+      {/* Tagline band above footer */}
+      <TaglinePainBand />
     </div>
   );
 }
