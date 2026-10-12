@@ -71,21 +71,21 @@ export default function ClevelandRealityCheckForm() {
           
           {/* Left Context Column */}
           <div className="lg:col-span-6 space-y-6">
-            <span className="inline-block rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+            <span className="inline-block rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900">
               Free for Cleveland Law Firms
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0a0f2e] leading-tight">
-              Your Cleveland Market Reality Check in 24 Hours
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950 leading-tight">
+              Your Cleveland Market Reality Check
             </h2>
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
               We identify your priorities, uncover the exact technical hurdles between you and high-value signed cases, then teardown the competitors outranking you in Cuyahoga County.
             </p>
 
-            <div className="group rounded-2xl border-2 border-slate-200 bg-slate-50 p-6 space-y-3 font-mono text-xs sm:text-sm text-slate-700 transition-all duration-300 hover:border-[#534AB7]/30 hover:shadow-lg hover:shadow-[#534AB7]/10 hover:-translate-y-1">
+            <div className="group rounded-2xl border-2 border-slate-200 bg-slate-50 p-6 space-y-3 font-mono text-xs sm:text-sm text-slate-700 transition-all duration-300 hover:border-neutral-900/30 hover:shadow-lg hover:shadow-sm hover:-translate-y-1">
               <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200">
-                <span className="text-[#534AB7] font-bold">+</span>
+                <span className="text-neutral-900 font-bold">+</span>
                 <span>YOUR GROWTH PRIORITIES & REVENUE TARGETS</span>
               </div>
               <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-75">
@@ -93,28 +93,28 @@ export default function ClevelandRealityCheckForm() {
                 <span>YOUR TOP 3 CUYAHOGA COUNTY VISIBILITY HURDLES</span>
               </div>
               <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-150">
-                <span className="text-[#1a7d59] font-bold">+</span>
+                <span className="text-neutral-800 font-bold">+</span>
                 <span>LOCAL 3-PACK RANK & AI OVERVIEW CITATION GAP</span>
               </div>
               <div className="flex items-center gap-2.5 transition-transform group-hover:translate-x-1 duration-200 delay-200">
-                <span className="text-indigo-600 font-bold">+</span>
+                <span className="text-neutral-800 font-bold">+</span>
                 <span>ACTIONABLE 90-DAY PLAN — ZERO SALES PRESSURE</span>
               </div>
             </div>
 
             <p className="text-xs text-slate-500 flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[#1a7d59]" />
+              <ShieldCheck className="h-4 w-4 text-neutral-800" />
               Conducted personally by Mubashar Sharif, CEO & Founder of SearchPrex.
             </p>
           </div>
 
           {/* Right Form Card */}
           <div className="lg:col-span-6">
-            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-9 shadow-xl shadow-slate-100 transition-all duration-300 hover:shadow-2xl hover:shadow-[#534AB7]/15 hover:border-[#534AB7]/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:bg-gradient-to-r before:from-[#534AB7] before:via-indigo-400 before:to-[#1a7d59]">
+            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-9 shadow-xl shadow-slate-100 transition-all duration-300 hover:shadow-2xl hover:shadow-sm hover:border-neutral-900/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:bg-neutral-900">
               {done ? (
                 <div className="text-center py-8 space-y-3">
-                  <CheckCircle2 className="h-14 w-14 text-emerald-500 mx-auto animate-bounce" />
-                  <h3 className="text-2xl font-extrabold text-[#0a0f2e]">
+                  <CheckCircle2 className="h-14 w-14 text-neutral-800 mx-auto animate-bounce" />
+                  <h3 className="text-2xl font-extrabold text-neutral-950">
                     Reality Check Requested!
                   </h3>
                   <p className="text-slate-600 text-sm max-w-md mx-auto">
@@ -123,7 +123,7 @@ export default function ClevelandRealityCheckForm() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e]">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-neutral-950">
                     Request My Cleveland Reality Check
                   </h3>
 
@@ -137,7 +137,7 @@ export default function ClevelandRealityCheckForm() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Attorney Jane Smith"
-                      className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 focus:outline-none transition-all"
+                      className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/20 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -152,7 +152,7 @@ export default function ClevelandRealityCheckForm() {
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
                         placeholder="yourfirm.com"
-                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 focus:outline-none transition-all"
+                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/20 focus:outline-none transition-all"
                       />
                     </div>
 
@@ -166,7 +166,7 @@ export default function ClevelandRealityCheckForm() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@yourfirm.com"
-                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:ring-2 focus:ring-[#534AB7]/20 focus:outline-none transition-all"
+                        className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/20 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -186,7 +186,7 @@ export default function ClevelandRealityCheckForm() {
                             onClick={() => setFirmSize(sz)}
                             className={`rounded-lg px-3 py-2 text-xs font-bold transition-all duration-200 active:scale-95 ${
                               isSelected
-                                ? "bg-[#534AB7] text-white shadow-sm scale-105"
+                                ? "bg-neutral-900 text-white shadow-sm scale-105"
                                 : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                             }`}
                           >
@@ -212,7 +212,7 @@ export default function ClevelandRealityCheckForm() {
                             onClick={() => setPracticeArea(pa)}
                             className={`rounded-lg px-3 py-2 text-xs font-bold transition-all duration-200 active:scale-95 ${
                               isSelected
-                                ? "bg-[#0a0f2e] text-white shadow-sm scale-105"
+                                ? "bg-neutral-900 text-white shadow-sm scale-105"
                                 : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                             }`}
                           >
@@ -232,7 +232,7 @@ export default function ClevelandRealityCheckForm() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] px-6 py-4 text-base font-extrabold text-white shadow-lg shadow-[#534AB7]/25 hover:bg-[#3C3489] transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-75 cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-4 text-base font-extrabold text-white shadow-lg shadow-sm hover:bg-neutral-800 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-75 cursor-pointer"
                   >
                     {loading ? (
                       <>

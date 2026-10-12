@@ -99,16 +99,16 @@ export default function ClevelandAgencyComparison() {
         
         {/* Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Scale className="h-4 w-4" />
             <span>Cleveland SEO Agency Decision Guide</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
-            Confused Between Choosing an SEO Agency in Cleveland? We Help You.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            Choosing an SEO Agency in Cleveland
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Managing partners in Cuyahoga County receive multiple marketing pitches each week. Evaluating options can feel overwhelming when everyone promises "Page 1 on Google." Explore our proven{" "}
-            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
               law firm SEO methodology
             </Link>{" "}
             or use this objective breakdown to make an informed decision for your firm.
@@ -122,13 +122,13 @@ export default function ClevelandAgencyComparison() {
               key={idx}
               className={`relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 transition-all duration-300 p-6 sm:p-8 ${
                 agency.recommended
-                  ? "border-[#534AB7] bg-gradient-to-b from-indigo-50/40 via-white to-white shadow-2xl shadow-[#534AB7]/15 hover:-translate-y-2"
+                  ? "border-neutral-900 bg-gradient-to-b from-slate-50/40 via-white to-white shadow-2xl shadow-sm hover:-translate-y-2"
                   : "border-slate-200 bg-white shadow-sm hover:border-slate-300 hover:shadow-xl hover:-translate-y-1"
               }`}
             >
               {agency.recommended && (
-                <div className="absolute top-0 right-0 rounded-bl-2xl bg-gradient-to-r from-[#534AB7] to-[#3C3489] px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-sm flex items-center gap-1.5">
-                  <Sparkles className="h-3 w-3 text-indigo-200 animate-pulse" />
+                <div className="absolute top-0 right-0 rounded-bl-2xl bg-gradient-to-r from-[#171717] to-[#262626] px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-sm flex items-center gap-1.5">
+                  <Sparkles className="h-3 w-3 text-slate-200 animate-pulse" />
                   <span>Recommended for Cleveland Firms</span>
                 </div>
               )}
@@ -137,7 +137,7 @@ export default function ClevelandAgencyComparison() {
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
                   Option 0{idx + 1}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e]">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-neutral-950">
                   {agency.title}
                 </h3>
                 <p className="text-xs text-slate-500 font-medium mt-0.5">
@@ -148,7 +148,7 @@ export default function ClevelandAgencyComparison() {
                 <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 space-y-1.5 text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-slate-500 font-semibold">Typical Retainer:</span>
-                    <span className="font-extrabold text-[#0a0f2e]">{agency.fee}</span>
+                    <span className="font-extrabold text-neutral-950">{agency.fee}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-slate-500 font-semibold">Contract Length:</span>
@@ -158,12 +158,12 @@ export default function ClevelandAgencyComparison() {
 
                 {/* Pros */}
                 <div className="mt-5 space-y-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block">
                     The Advantages:
                   </span>
                   {agency.pros.map((p, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                      <Check className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                      <Check className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                       <span>{p}</span>
                     </div>
                   ))}
@@ -192,7 +192,7 @@ export default function ClevelandAgencyComparison() {
                 {agency.recommended ? (
                   <a
                     href="#reality-check"
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white px-5 py-3 text-sm font-bold shadow-md shadow-[#534AB7]/25 transition-all hover:scale-102 active:scale-98 cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white px-5 py-3 text-sm font-bold shadow-md shadow-sm transition-all hover:scale-102 active:scale-98 cursor-pointer"
                   >
                     <span>Request 24h Reality Check</span>
                     <ArrowRight className="h-4 w-4" />
@@ -210,10 +210,10 @@ export default function ClevelandAgencyComparison() {
         {/* 4 Essential Questions to Ask Any Agency */}
         <div className="mt-16 rounded-3xl border-2 border-slate-200 bg-slate-50 p-6 sm:p-10">
           <div className="max-w-2xl mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
               Attorney Vetting Guide
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e]">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
               4 Questions to Ask Any SEO Agency Before You Sign
             </h3>
             <p className="text-sm text-slate-600 mt-2">
@@ -227,24 +227,24 @@ export default function ClevelandAgencyComparison() {
               return (
                 <div
                   key={idx}
-                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-200 hover:border-[#534AB7]/40"
+                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-200 hover:border-neutral-900/40"
                 >
                   <button
                     onClick={() => toggleQuestion(idx)}
                     className="flex w-full items-center justify-between p-4 sm:p-5 text-left hover:bg-slate-50 transition-colors cursor-pointer"
                   >
-                    <span className="text-sm sm:text-base font-bold text-[#0a0f2e] pr-4">
+                    <span className="text-sm sm:text-base font-bold text-neutral-950 pr-4">
                       {idx + 1}. {item.q}
                     </span>
                     <ChevronDown
-                      className={`h-4 w-4 text-[#534AB7] shrink-0 transition-transform duration-200 ${
+                      className={`h-4 w-4 text-neutral-900 shrink-0 transition-transform duration-200 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     />
                   </button>
                   {isOpen && (
                     <div className="px-4 pb-4 pt-1 sm:px-5 text-xs sm:text-sm text-slate-600 border-t border-slate-100 bg-slate-50/50 leading-relaxed">
-                      <strong className="text-[#0a0f2e]">Why this matters:</strong> {item.why}
+                      <strong className="text-neutral-950">Why this matters:</strong> {item.why}
                     </div>
                   )}
                 </div>
@@ -257,17 +257,17 @@ export default function ClevelandAgencyComparison() {
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6 text-sm text-slate-700">
           <p>
             Ready to review empirical client results? Explore our{" "}
-            <Link href="/case-studies" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/case-studies" className="font-bold text-neutral-900 underline hover:text-neutral-950">
               verified law firm SEO case studies
             </Link>{" "}
             or claim a complimentary{" "}
-            <Link href="/free-audit" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/free-audit" className="font-bold text-neutral-900 underline hover:text-neutral-950">
               technical SEO audit
             </Link>.
           </p>
           <Link
             href="/case-studies"
-            className="inline-flex shrink-0 items-center gap-1.5 font-bold text-[#534AB7] hover:text-[#3C3489]"
+            className="inline-flex shrink-0 items-center gap-1.5 font-bold text-neutral-900 hover:text-neutral-950"
           >
             <span>Read Case Studies</span>
             <ArrowRight className="h-4 w-4" />

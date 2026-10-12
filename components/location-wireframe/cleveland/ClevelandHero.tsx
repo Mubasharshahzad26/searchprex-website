@@ -2,7 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Scale, ShieldCheck, CheckCircle2, FileText, ChevronRight, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+  BarChart3,
+  ChevronRight,
+} from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
 interface ClevelandHeroProps {
@@ -52,6 +62,51 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
   const [selectedDemand, setSelectedDemand] = useState(0);
   const current = DEMAND_AREAS[selectedDemand];
 
+  // Hero Lead Form State
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [email, setEmail] = useState("");
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("Workers' comp");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "Cleveland Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "cleveland:hero-lead-form",
+          notes: `Requested Cleveland Hero Reality Check. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
+  };
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -60,164 +115,280 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-slate-200">
-      {/* Background blueprint grid pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: "linear-gradient(#0a0f2e 1px, transparent 1px), linear-gradient(90deg, #0a0f2e 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Hero Column */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#534AB7]/20 bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] shadow-2xs hover:shadow-xs transition-shadow">
-              <Scale className="h-3.5 w-3.5" />
-              <span>Law Firm SEO · Cleveland, Ohio</span>
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · Cleveland, OH
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight text-[#0a0f2e] leading-[1.12]">
-              Law Firm SEO in Cleveland, Ohio: Predictable Leads,{" "}
-              <span className="relative inline-block rounded-xl bg-[#EEEDFE] px-3 py-0.5 text-[#534AB7] border border-[#534AB7]/20 shadow-xs">
-                Proven Numbers
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              Cleveland Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
+                Predictable Leads, Proven Numbers
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              Cleveland attorneys do not buy hype. They buy results they can audit. We build dedicated{" "}
-              <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
-                law firm SEO
-              </Link>{" "}
-              that earns signed cases across Cuyahoga County, then show you every number behind it in a monthly ledger.
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Cleveland law firm SEO is engineered for Ohio attorneys who need signed retainers, not vanity clicks. We build permanent Cuyahoga County Map Pack, page-one organic, and AI-answer visibility across Cleveland, Lakewood, and Beachwood that delivers phone-ready cases with verified month-to-month attribution.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={() => scrollToSection("reality-check")}
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#534AB7] px-6 py-4 text-base font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all duration-300 hover:bg-[#3C3489] hover:shadow-xl hover:shadow-[#534AB7]/35 hover:-translate-y-1 active:translate-y-0"
-              >
-                <span>Get My Free Reality Check</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-
-              <button
-                onClick={() => scrollToSection("cost-ledger")}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-6 py-3.5 text-base font-bold text-[#0a0f2e] shadow-xs transition-all duration-300 hover:border-[#534AB7] hover:bg-slate-50 hover:-translate-y-0.5 hover:shadow-sm"
-              >
-                <span>See the cost ledger</span>
-              </button>
-            </div>
-
-            {/* Trust points bar */}
-            <div className="pt-4 border-t border-slate-200">
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm font-semibold text-slate-700">
-                <span className="flex items-center gap-1.5 transition-colors hover:text-[#0a0f2e]">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59]" />
-                  1 Firm Per Practice Area
+            {/* Demand Ledger Practice Selector */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-700">
+                  Cuyahoga County Practice Demand
                 </span>
-                <span className="flex items-center gap-1.5 transition-colors hover:text-[#0a0f2e]">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59]" />
-                  No Long Contract (Month-to-Month)
-                </span>
-                <span className="flex items-center gap-1.5 transition-colors hover:text-[#0a0f2e]">
-                  <ShieldCheck className="h-4 w-4 text-[#534AB7]" />
-                  Founder-Led Execution
+                <span className="text-[11px] font-semibold text-slate-500">
+                  Tap to view live search drivers
                 </span>
               </div>
-            </div>
-          </div>
-
-          {/* Right Column: Interactive Cleveland Demand Ledger */}
-          <div className="lg:col-span-5">
-            <div className="group relative rounded-3xl border-2 border-slate-200/90 bg-white p-6 sm:p-7 shadow-xl shadow-slate-200/70 transition-all duration-300 hover:-translate-y-1 hover:border-[#534AB7]/40 hover:shadow-2xl hover:shadow-[#534AB7]/10">
-              {/* Subtle top gradient accent glow */}
-              <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-60 group-hover:opacity-100 transition-opacity" />
-
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-                    Live Cuyahoga County Intelligence
-                  </span>
-                  <h3 className="text-xl font-extrabold text-[#0a0f2e] mt-0.5">
-                    Cleveland Demand Ledger
-                  </h3>
-                </div>
-                
-                {/* Live pulse radar beacon */}
-                <div className="relative flex items-center justify-center h-4 w-4" title="Live Cuyahoga County search index">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                </div>
+              <div className="flex flex-wrap gap-1.5">
+                {DEMAND_AREAS.map((item, idx) => (
+                  <button
+                    key={item.name}
+                    type="button"
+                    onClick={() => {
+                      setSelectedDemand(idx);
+                      setPracticeArea(item.name);
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                      selectedDemand === idx
+                        ? "bg-neutral-900 text-white border-neutral-900 shadow-xs"
+                        : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                ))}
               </div>
-
-              <p className="mt-3 text-xs sm:text-sm text-slate-500">
-                Tap a practice area below to see what drives searches in Cuyahoga County:
-              </p>
-
-              {/* Chips selector */}
-              <div className="mt-4 flex flex-wrap gap-2">
-                {DEMAND_AREAS.map((item, idx) => {
-                  const isSelected = selectedDemand === idx;
-                  return (
-                    <button
-                      key={item.name}
-                      onClick={() => setSelectedDemand(idx)}
-                      className={`rounded-xl px-3 py-2 text-xs font-bold transition-all duration-200 text-left ${
-                        isSelected
-                          ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
-                          : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100 hover:scale-[1.01]"
-                      }`}
-                    >
-                      {item.name}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Selected practice detail card with smooth animation */}
-              <div className="mt-5 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-slate-50/90 to-indigo-50/20 p-4 sm:p-5 space-y-3 transition-all duration-300">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-base font-bold text-[#0a0f2e]">{current.name}</h4>
-                  <span className="rounded-full bg-[#EEEDFE] px-2.5 py-0.5 text-[11px] font-bold text-[#534AB7] shadow-2xs">
-                    {current.badge}
-                  </span>
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <div className="pt-2 border-t border-slate-200/80">
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  <span className="font-semibold text-neutral-900">{current.name}: </span>
                   {current.why}
                 </p>
+              </div>
+            </div>
 
-                <div className="pt-2 border-t border-slate-200/60">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
-                    Target Search Queries in Cleveland:
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-1">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">8th Dist.</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Cuyahoga Court Silos</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Top 3</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Google Map Pack Focus</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Zero</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Long-Term Lock-In</p>
+              </div>
+            </div>
+
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <button
+                type="button"
+                onClick={() => scrollToSection("cost-ledger")}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
+              >
+                <BarChart3 className="w-4 h-4 text-neutral-700" />
+                See the Cost Ledger
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollToSection("reality-check")}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
+              >
+                Explore 24h Reality Check
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                Founder-led execution
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
+              
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Cuyahoga Audit
                   </span>
-                  <div className="space-y-1.5">
-                    {current.searches.map((s, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-1.5 text-xs font-mono text-slate-700 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 shadow-2xs hover:border-[#534AB7]/40 hover:bg-indigo-50/30 transition-colors"
-                      >
-                        <ChevronRight className="h-3 w-3 text-[#534AB7] shrink-0" />
-                        <span className="truncate">{s}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Cleveland Reality Check
+                  </h2>
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
-                <span>Verified in SEMrush & Google GSC</span>
-                <button
-                  onClick={() => scrollToSection("diagnose")}
-                  className="font-bold text-[#534AB7] hover:text-[#3C3489] hover:underline transition-colors"
-                >
-                  Diagnose this practice →
-                </button>
-              </div>
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally audit your Cleveland rankings, Cuyahoga County citation profile, and competitor gaps, and email your 24-hour video review directly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label htmlFor="cl-hero-name" className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      id="cl-hero-name"
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Website */}
+                  <div>
+                    <label htmlFor="cl-hero-website" className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      id="cl-hero-website"
+                      type="text"
+                      required
+                      placeholder="clevelandfirm.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Work Email */}
+                  <div>
+                    <label htmlFor="cl-hero-email" className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      id="cl-hero-email"
+                      type="email"
+                      required
+                      placeholder="you@clevelandfirm.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Workers' comp", "Personal injury", "Med mal", "Criminal defense", "Employment", "Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea.toLowerCase().includes(area.toLowerCase().slice(0, 5))
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Reality Check"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
+                </form>
+              )}
+
             </div>
           </div>
 

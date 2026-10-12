@@ -66,11 +66,11 @@ export default function ClevelandProcessAndAI() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             Execution Framework · 6-Step Implementation
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cuyahoga Legal SEO Roadmap: From Intake Gaps to Signed Retainers
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cuyahoga Legal SEO Roadmap
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             A methodical 6-step roadmap built around your firm's case priorities, eliminating intake hurdles, and capturing modern search signals: verified legal citations, local proximity, and Google AI Overviews.
@@ -92,7 +92,7 @@ export default function ClevelandProcessAndAI() {
                     onClick={() => setActiveStep(idx)}
                     className={`rounded-xl px-3.5 py-2.5 text-xs font-bold transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                        ? "bg-neutral-900 text-white shadow-md shadow-sm scale-[1.02]"
                         : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100 hover:scale-[1.01]"
                     }`}
                   >
@@ -103,13 +103,13 @@ export default function ClevelandProcessAndAI() {
             </div>
 
             {/* Active Step Highlight Card with animated glow */}
-            <div className="group relative rounded-3xl border-2 border-[#534AB7]/40 bg-gradient-to-br from-[#EEEDFE]/70 via-white to-white p-7 sm:p-8 shadow-sm hover:shadow-xl hover:shadow-[#534AB7]/10 hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full" />
+            <div className="group relative rounded-3xl border-2 border-neutral-900/40 bg-gradient-to-br from-slate-50 via-white to-white p-7 sm:p-8 shadow-sm hover:shadow-xl hover:shadow-sm hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-neutral-700 to-transparent rounded-t-full" />
               
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#534AB7]">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-900">
                 {current.k}
               </span>
-              <h3 className="mt-1 text-2xl font-extrabold text-[#0a0f2e]">
+              <h3 className="mt-1 text-2xl font-extrabold text-neutral-950">
                 {current.title}
               </h3>
               <p className="mt-3 text-base text-slate-700 leading-relaxed">
@@ -118,14 +118,14 @@ export default function ClevelandProcessAndAI() {
             </div>
 
             {/* AI Prompts We Aim to Win Card */}
-            <div className="rounded-3xl border-2 border-slate-200 bg-slate-50/80 p-6 sm:p-7 space-y-3 shadow-xs hover:border-[#534AB7]/30 transition-all">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+            <div className="rounded-3xl border-2 border-slate-200 bg-slate-50/80 p-6 sm:p-7 space-y-3 shadow-xs hover:border-neutral-900/30 transition-all">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900">
                 <Bot className="h-4 w-4" />
                 <span>AI Search Prompts We Position Your Firm to Win</span>
               </div>
               <p className="text-xs text-slate-500">
                 Prospective clients now ask LLMs conversational questions. We structure your entity through our{" "}
-                <Link href="/ai-search" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+                <Link href="/ai-search" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
                   AI search optimization framework
                 </Link>{" "}
                 so Google Gemini & ChatGPT cite your attorneys:
@@ -135,9 +135,9 @@ export default function ClevelandProcessAndAI() {
                 {AI_PROMPTS.map((prompt, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-mono text-slate-800 shadow-2xs hover:border-[#534AB7]/50 hover:bg-indigo-50/30 hover:scale-[1.01] hover:text-[#534AB7] transition-all duration-200"
+                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-mono text-slate-800 shadow-2xs hover:border-neutral-900/50 hover:bg-slate-50/30 hover:scale-[1.01] hover:text-neutral-900 transition-all duration-200"
                   >
-                    <Search className="h-3.5 w-3.5 text-[#534AB7] shrink-0" />
+                    <Search className="h-3.5 w-3.5 text-neutral-900 shrink-0" />
                     <span className="truncate">{prompt}</span>
                   </div>
                 ))}
@@ -147,20 +147,20 @@ export default function ClevelandProcessAndAI() {
           </div>
 
           {/* Right Column: AI Citation Rate Tracker Gauge */}
-          <div className="lg:col-span-5 rounded-3xl border-2 border-slate-200 bg-white p-7 sm:p-8 shadow-sm space-y-6 text-center hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1 transition-all duration-300">
+          <div className="lg:col-span-5 rounded-3xl border-2 border-slate-200 bg-white p-7 sm:p-8 shadow-sm space-y-6 text-center hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1 transition-all duration-300">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4 text-left">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                   LLM Intelligence Engine
                 </span>
-                <h3 className="text-lg font-bold text-[#0a0f2e]">
+                <h3 className="text-lg font-bold text-neutral-950">
                   AI Citation Rate Tracker
                 </h3>
               </div>
               
               {/* Radar beacon */}
-              <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-200 px-2.5 py-0.5 text-xs font-bold text-neutral-900">
+                <span className="h-2 w-2 rounded-full bg-neutral-800 animate-pulse" />
                 <span>Active</span>
               </div>
             </div>
@@ -181,7 +181,7 @@ export default function ClevelandProcessAndAI() {
                   cy="80"
                   r="62"
                   fill="none"
-                  stroke="#534AB7"
+                  stroke="#171717"
                   strokeWidth="16"
                   strokeDasharray="390"
                   strokeDashoffset="80"
@@ -191,7 +191,7 @@ export default function ClevelandProcessAndAI() {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-mono text-3xl font-black text-[#0a0f2e]">
+                <span className="font-mono text-3xl font-black text-neutral-950">
                   82%
                 </span>
                 <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
@@ -204,19 +204,19 @@ export default function ClevelandProcessAndAI() {
             <div className="space-y-2 text-left text-xs sm:text-sm">
               <div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors border-b border-slate-100">
                 <span className="font-medium text-slate-700">Google AI Overviews</span>
-                <span className="font-mono font-bold text-[#534AB7]">8 / 10 Prompts</span>
+                <span className="font-mono font-bold text-neutral-900">8 / 10 Prompts</span>
               </div>
               <div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors border-b border-slate-100">
                 <span className="font-medium text-slate-700">ChatGPT Search</span>
-                <span className="font-mono font-bold text-[#534AB7]">7 / 10 Prompts</span>
+                <span className="font-mono font-bold text-neutral-900">7 / 10 Prompts</span>
               </div>
               <div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors border-b border-slate-100">
                 <span className="font-medium text-slate-700">Google Gemini</span>
-                <span className="font-mono font-bold text-[#534AB7]">9 / 10 Prompts</span>
+                <span className="font-mono font-bold text-neutral-900">9 / 10 Prompts</span>
               </div>
               <div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors">
                 <span className="font-medium text-slate-700">Perplexity Pro</span>
-                <span className="font-mono font-bold text-[#534AB7]">8 / 10 Prompts</span>
+                <span className="font-mono font-bold text-neutral-900">8 / 10 Prompts</span>
               </div>
             </div>
 

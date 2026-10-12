@@ -78,11 +78,11 @@ export default function ClevelandSubMarkets() {
         
         {/* Coverage Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             Cuyahoga County Geographic Coverage
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cleveland Metro Law Firm SEO: Programmatic Suburb & Court Silos
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cleveland Metro Submarkets & Courts
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             A single Downtown Cleveland landing page will not reliably trigger Google's 3-pack or AI search across the suburbs. We architect hyper-localized silos anchored by local courts and municipal jurisdictions.
@@ -94,9 +94,9 @@ export default function ClevelandSubMarkets() {
           {SUBURB_LIST.map((sub) => (
             <span
               key={sub}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 shadow-2xs hover:border-[#534AB7]/40 hover:bg-indigo-50/20 hover:scale-105 transition-all duration-200 cursor-default"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 shadow-2xs hover:border-neutral-900/40 hover:bg-slate-50/20 hover:scale-105 transition-all duration-200 cursor-default"
             >
-              <MapPin className="h-3.5 w-3.5 text-[#534AB7]" />
+              <MapPin className="h-3.5 w-3.5 text-neutral-900" />
               <span>{sub}</span>
             </span>
           ))}
@@ -104,7 +104,7 @@ export default function ClevelandSubMarkets() {
 
         {/* Localized Venues Callout */}
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 text-xs sm:text-sm text-slate-700 space-y-1 shadow-2xs">
-          <strong className="text-[#0a0f2e] font-bold block mb-1">
+          <strong className="text-neutral-950 font-bold block mb-1">
             Local Court and Statutory Anchors Embedded in Your Content:
           </strong>
           <p className="leading-relaxed">
@@ -115,11 +115,11 @@ export default function ClevelandSubMarkets() {
         {/* Detailed Interactive Suburb Hub */}
         <div className="mt-14 pt-10 border-t border-slate-200">
           <div className="max-w-3xl mb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
               Nearby Submarket Intelligence
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] mt-1">
-              Law Firm SEO Near Cleveland: Lakewood, Parma, Beachwood & Akron
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 mt-1">
+              Law Firm SEO in Cuyahoga Submarkets
             </h3>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
               Tap a submarket below to inspect the localized intent, county courthouses, and search phrases that capture high-margin cases outside downtown:
@@ -136,7 +136,7 @@ export default function ClevelandSubMarkets() {
                   onClick={() => setSelectedSuburb(idx)}
                   className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                      ? "bg-neutral-900 text-white shadow-md shadow-sm scale-[1.02]"
                       : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-[1.01]"
                   }`}
                 >
@@ -150,11 +150,11 @@ export default function ClevelandSubMarkets() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* 1. County and Venue */}
-            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
+            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-2">
                 County & Courthouses
               </span>
-              <h4 className="text-base font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
+              <h4 className="text-base font-bold text-neutral-950 group-hover:text-neutral-900 transition-colors">
                 {current.name}
               </h4>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
@@ -163,8 +163,8 @@ export default function ClevelandSubMarkets() {
             </div>
 
             {/* 2. Local Intent */}
-            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#1a7d59]/10 hover:border-[#1a7d59]/40 hover:-translate-y-1.5 transition-all duration-300">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-2">
+            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-slate-300/40 hover:-translate-y-1.5 transition-all duration-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block mb-2">
                 Search Intent
               </span>
               <p className="text-sm text-slate-700 leading-relaxed">
@@ -173,24 +173,24 @@ export default function ClevelandSubMarkets() {
             </div>
 
             {/* 3. Live Searches */}
-            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 space-y-2">
+            <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300 space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
                 Sample Suburb Queries
               </span>
               {current.searches.map((s, i) => (
-                <div key={i} className="text-xs font-mono text-slate-800 bg-slate-50 p-2 rounded-lg border border-slate-200 group-hover:bg-indigo-50/20 transition-colors">
+                <div key={i} className="text-xs font-mono text-slate-800 bg-slate-50 p-2 rounded-lg border border-slate-200 group-hover:bg-slate-50/20 transition-colors">
                   {s}
                 </div>
               ))}
             </div>
 
             {/* 4. Linked Practice Silo */}
-            <div className="group rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 via-white to-white p-6 shadow-md hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+            <div className="group rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-slate-50 via-white to-white p-6 shadow-md hover:shadow-2xl hover:shadow-sm hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-2">
                   Targeted Silo Architecture
                 </span>
-                <p className="text-sm font-bold text-[#0a0f2e]">
+                <p className="text-sm font-bold text-neutral-950">
                   Linked Practice Page:
                 </p>
                 <p className="mt-1 text-sm text-slate-600">
@@ -198,10 +198,10 @@ export default function ClevelandSubMarkets() {
                 </p>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-[#534AB7]/20">
+              <div className="mt-4 pt-4 border-t border-neutral-900/20">
                 <Link
                   href={current.href}
-                  className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 hover:underline"
                 >
                   <span>Explore practice silo</span>
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />

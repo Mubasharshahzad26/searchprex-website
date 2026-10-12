@@ -40,11 +40,11 @@ export default function ClevelandKeywordCluster() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             Semantic Authority & Statutory Entities
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cleveland Legal Keyword Clusters: Statutory Entities Google AI Rewards
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cleveland Legal Keyword Clusters
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Google's Helpful Content System and AI search tools judge a Cleveland landing page by whether it accurately covers the statutory concepts Ohio residents search, reinforced by local modifiers like Cuyahoga County and suburban courts.
@@ -61,7 +61,7 @@ export default function ClevelandKeywordCluster() {
                 onClick={() => setSelectedCluster(idx)}
                 className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-[1.02]"
                     : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-[1.01]"
                 }`}
               >
@@ -75,15 +75,15 @@ export default function ClevelandKeywordCluster() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: Core Legal Topics */}
-          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-2">
                 Ohio Statutory Topics
               </span>
-              <h4 className="text-base font-bold text-[#0a0f2e] mb-3 group-hover:text-[#534AB7] transition-colors">
+              <h4 className="text-base font-bold text-neutral-950 mb-3 group-hover:text-neutral-900 transition-colors">
                 Core Legal Topics Google Expects
               </h4>
-              <p className="text-sm text-slate-700 leading-relaxed font-mono text-xs bg-slate-50 p-3.5 rounded-2xl border border-slate-200 group-hover:bg-indigo-50/20 transition-colors">
+              <p className="text-sm text-slate-700 leading-relaxed font-mono text-xs bg-slate-50 p-3.5 rounded-2xl border border-slate-200 group-hover:bg-slate-50/20 transition-colors">
                 {current.coreTopics}
               </p>
             </div>
@@ -93,34 +93,34 @@ export default function ClevelandKeywordCluster() {
           </div>
 
           {/* Card 2: Local Long-Tail We Target */}
-          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-[#1a7d59]/10 hover:border-[#1a7d59]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-slate-300/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block mb-1">
                 Local High-Intent Modifiers
               </span>
-              <h4 className="text-base font-bold text-[#0a0f2e] mb-3 group-hover:text-[#1a7d59] transition-colors">
+              <h4 className="text-base font-bold text-neutral-950 mb-3 group-hover:text-neutral-800 transition-colors">
                 Local Long-Tail Phrases We Target
               </h4>
               <div className="space-y-2">
                 {current.longTail.map((phrase, i) => (
-                  <div key={i} className="text-xs font-mono text-slate-800 bg-slate-50 p-2.5 rounded-xl border border-slate-200 group-hover:bg-emerald-50/20 transition-colors">
+                  <div key={i} className="text-xs font-mono text-slate-800 bg-slate-50 p-2.5 rounded-xl border border-slate-200 group-hover:bg-slate-50/20 transition-colors">
                     {phrase}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-[#1a7d59]">
+            <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-neutral-800">
               High Conversion Density
             </div>
           </div>
 
           {/* Card 3: Intent and Linked Silo */}
-          <div className="group rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 via-white to-white p-6 sm:p-7 shadow-md hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+          <div className="group rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-slate-50 via-white to-white p-6 sm:p-7 shadow-md hover:shadow-2xl hover:shadow-sm hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-2">
                 User Intent & Silo Linking
               </span>
-              <h4 className="text-base font-bold text-[#0a0f2e] mb-2">
+              <h4 className="text-base font-bold text-neutral-950 mb-2">
                 Conversion Intent Profile
               </h4>
               <p className="text-sm text-slate-700 leading-relaxed">
@@ -128,10 +128,10 @@ export default function ClevelandKeywordCluster() {
               </p>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-[#534AB7]/20">
+            <div className="mt-5 pt-4 border-t border-neutral-900/20">
               <Link
                 href={current.href}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 hover:underline"
               >
                 <span>{current.linkLabel}</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
@@ -144,23 +144,23 @@ export default function ClevelandKeywordCluster() {
         {/* Cross-linking navigation strip */}
         <div className="mt-10 pt-6 border-t border-slate-200 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm text-slate-600">
           <span className="font-bold text-slate-900">Explore more locations:</span>
-          <Link href="/locations" className="text-[#534AB7] font-semibold hover:underline">
+          <Link href="/locations" className="text-neutral-900 font-semibold hover:underline">
             All State & City Landing Pages
           </Link>
           <span>·</span>
-          <Link href="/locations/michigan/detroit" className="text-[#534AB7] font-semibold hover:underline">
+          <Link href="/locations/michigan/detroit" className="text-neutral-900 font-semibold hover:underline">
             Law Firm SEO Detroit
           </Link>
           <span>·</span>
-          <Link href="/locations/michigan/grand-rapids" className="text-[#534AB7] font-semibold hover:underline">
+          <Link href="/locations/michigan/grand-rapids" className="text-neutral-900 font-semibold hover:underline">
             Law Firm SEO Grand Rapids
           </Link>
           <span>·</span>
-          <Link href="/resources/law-firm-seo-audit-checklist" className="text-[#534AB7] font-semibold hover:underline">
+          <Link href="/resources/law-firm-seo-audit-checklist" className="text-neutral-900 font-semibold hover:underline">
             Law Firm SEO Checklist
           </Link>
           <span>·</span>
-          <Link href="/resources/news/local-seo-updates" className="text-[#534AB7] font-semibold hover:underline">
+          <Link href="/resources/news/local-seo-updates" className="text-neutral-900 font-semibold hover:underline">
             Local SEO Algorithm News
           </Link>
         </div>

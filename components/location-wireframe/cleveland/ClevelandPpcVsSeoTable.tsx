@@ -54,15 +54,15 @@ export default function ClevelandPpcVsSeoTable() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             03 · Why SEO instead of PPC
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cleveland Legal Marketing: Google Ads (PPC) vs. Organic Law Firm SEO
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Google Ads (PPC) vs Organic SEO
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             PPC rents temporary clicks in volatile auctions. Our{" "}
-            <a href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+            <a href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
               modern law firm SEO
             </a>{" "}
             builds permanent digital authority across Cuyahoga County courts that your practice owns forever:
@@ -70,7 +70,7 @@ export default function ClevelandPpcVsSeoTable() {
         </div>
 
         {/* Comparison Table Container */}
-        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30">
+        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:shadow-sm hover:border-neutral-900/30">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
@@ -81,9 +81,9 @@ export default function ClevelandPpcVsSeoTable() {
                   <th className="py-4.5 px-6 text-sm font-extrabold text-slate-700 bg-slate-50 w-1/3">
                     Google Ads (PPC)
                   </th>
-                  <th className="py-4.5 px-6 text-sm font-extrabold text-white bg-gradient-to-r from-[#534AB7] to-[#3C3489] w-1/3">
+                  <th className="py-4.5 px-6 text-sm font-extrabold text-white bg-gradient-to-r from-[#171717] to-[#262626] w-1/3">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-indigo-200" />
+                      <Sparkles className="h-4 w-4 text-slate-200" />
                       <span>SearchPrex Legal SEO</span>
                     </div>
                   </th>
@@ -91,16 +91,16 @@ export default function ClevelandPpcVsSeoTable() {
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm">
                 {COMPARISON_ROWS.map((row, idx) => (
-                  <tr key={idx} className="group hover:bg-indigo-50/40 transition-colors duration-200">
-                    <td className="py-4 px-6 font-bold text-[#0a0f2e] bg-slate-50/30 group-hover:bg-transparent transition-colors">
+                  <tr key={idx} className="group hover:bg-slate-50/40 transition-colors duration-200">
+                    <td className="py-4 px-6 font-bold text-neutral-950 bg-slate-50/30 group-hover:bg-transparent transition-colors">
                       {row.feature}
                     </td>
                     <td className="py-4 px-6 text-slate-600 leading-relaxed group-hover:text-slate-800 transition-colors">
                       {row.ppc}
                     </td>
-                    <td className="py-4 px-6 font-medium text-slate-800 bg-[#EEEDFE]/20 group-hover:bg-[#EEEDFE]/40 leading-relaxed transition-colors">
+                    <td className="py-4 px-6 font-medium text-slate-800 bg-slate-100/20 group-hover:bg-slate-100/40 leading-relaxed transition-colors">
                       <div className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5 transition-transform group-hover:scale-110" />
+                        <Check className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5 transition-transform group-hover:scale-110" />
                         <span className="font-semibold text-slate-900">{row.seo}</span>
                       </div>
                     </td>
@@ -112,7 +112,7 @@ export default function ClevelandPpcVsSeoTable() {
 
           <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs text-slate-500 gap-2">
             <span>Market benchmark patterns based on Cuyahoga County legal search data.</span>
-            <span className="font-semibold text-[#534AB7]">SearchPrex recommends a blended transition, not an abrupt stop.</span>
+            <span className="font-semibold text-neutral-900">SearchPrex recommends a blended transition, not an abrupt stop.</span>
           </div>
         </div>
 

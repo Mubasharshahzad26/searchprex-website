@@ -44,12 +44,12 @@ export default function ClevelandFaqAndCta() {
       {/* FAQ Accordion Section */}
       <section className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-neutral-950 mb-3">
             <HelpCircle className="h-3.5 w-3.5" />
             <span>Cleveland Legal SEO FAQ</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Questions from Cleveland attorneys
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cleveland Law Firm SEO FAQs
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Clear, honest answers about keyword difficulty, Ohio BWC content, and realistic ranking timelines.
@@ -62,18 +62,18 @@ export default function ClevelandFaqAndCta() {
             return (
               <div
                 key={idx}
-                className="overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40"
+                className="overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-md hover:border-slate-400"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
                   className="flex w-full items-center justify-between p-5 sm:p-6 text-left transition-colors hover:bg-slate-50 cursor-pointer"
                 >
-                  <span className="text-base sm:text-lg font-bold text-[#0a0f2e] pr-4">
+                  <span className="text-base sm:text-lg font-bold text-neutral-950 pr-4">
                     {faq.q}
                   </span>
                   <ChevronDown
-                    className={`h-5 w-5 text-[#534AB7] shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#3C3489]" : ""
+                    className={`h-5 w-5 text-neutral-950 shrink-0 transition-transform duration-200 ${
+                      isOpen ? "rotate-180 text-neutral-950" : ""
                     }`}
                   />
                 </button>
@@ -90,18 +90,18 @@ export default function ClevelandFaqAndCta() {
       </section>
 
       {/* High-Contrast Conversion CTA Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#0a0f2e] via-[#3C3489] to-[#0a0f2e] py-16 lg:py-20 text-white">
+      <section className="relative overflow-hidden bg-neutral-900 border border-neutral-800 py-16 lg:py-20 text-white">
         {/* Ambient background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#534AB7]/30 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 hidden rounded-full blur-3xl pointer-events-none" />
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-5">
-          <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#EEEDFE] border border-white/20 backdrop-blur-sm">
+          <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 border border-white/20 backdrop-blur-sm">
             Transparent Ledger Guarantee
           </span>
 
           {/* Heading with explicit !text-white to avoid app/globals.css black text overwrite */}
           <h2 className="!text-white text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
-            Transparent Numbers. Verifiable Signed Cases.
+            Ready for Predictable Case Acquisition?
           </h2>
 
           <p className="text-base sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
@@ -111,10 +111,10 @@ export default function ClevelandFaqAndCta() {
           <div className="pt-2">
             <button
               onClick={scrollToRealityCheck}
-              className="inline-flex items-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-[#0a0f2e] font-black px-8 py-4 text-base shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-black px-8 py-4 text-base shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>Request My Reality Check</span>
-              <ArrowRight className="h-4 w-4 text-[#534AB7]" />
+              <ArrowRight className="h-4 w-4 text-neutral-950" />
             </button>
           </div>
         </div>

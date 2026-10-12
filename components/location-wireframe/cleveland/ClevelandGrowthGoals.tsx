@@ -44,15 +44,15 @@ export default function ClevelandGrowthGoals() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             02 · How you want to grow
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cleveland Law Practice Growth: 12-Month Strategic Objectives
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cleveland Law Practice Growth Goals
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Select your firm's primary objective to see how our{" "}
-            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
               law firm SEO strategy
             </Link>{" "}
             navigates local competition and builds a consistent case pipeline:
@@ -69,7 +69,7 @@ export default function ClevelandGrowthGoals() {
                 onClick={() => setSelectedGoal(idx)}
                 className={`rounded-xl px-4 py-3 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-[1.02]"
                     : "border-2 border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100 hover:scale-[1.01]"
                 }`}
               >
@@ -83,13 +83,13 @@ export default function ClevelandGrowthGoals() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: Your Priority */}
-          <div className="group relative rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+          <div className="group relative rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
-                <Target className="h-4 w-4 text-[#534AB7] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
+                <Target className="h-4 w-4 text-neutral-900 group-hover:scale-110 transition-transform" />
                 <span>Your Strategic Priority</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0a0f2e]">
+              <h3 className="text-lg font-bold text-neutral-950">
                 {current.short}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -102,13 +102,13 @@ export default function ClevelandGrowthGoals() {
           </div>
 
           {/* Card 2: Likely Hurdle */}
-          <div className="group relative rounded-3xl border-2 border-slate-200 bg-slate-50/90 p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+          <div className="group relative rounded-3xl border-2 border-slate-200 bg-slate-50/90 p-7 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/30 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
                 <AlertCircle className="h-4 w-4 text-slate-500 group-hover:scale-110 transition-transform" />
                 <span>Cuyahoga County Hurdle</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0a0f2e]">
+              <h3 className="text-lg font-bold text-neutral-950">
                 What Stands in the Way
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-700">
@@ -121,25 +121,25 @@ export default function ClevelandGrowthGoals() {
           </div>
 
           {/* Card 3: SearchPrex Path */}
-          <div className="group relative rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE] via-white to-white p-7 shadow-md hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+          <div className="group relative rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-[#f1f5f9] via-white to-white p-7 shadow-md hover:shadow-2xl hover:shadow-sm hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             {/* Top highlight bar */}
-            <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-80" />
+            <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-neutral-700 to-transparent rounded-t-full opacity-80" />
 
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
-                <Compass className="h-4 w-4 text-[#534AB7] group-hover:rotate-45 transition-transform duration-300" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
+                <Compass className="h-4 w-4 text-neutral-900 group-hover:rotate-45 transition-transform duration-300" />
                 <span>Our SearchPrex Path</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0a0f2e]">
+              <h3 className="text-lg font-bold text-neutral-950">
                 Architected Roadmap
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-700 font-medium">
                 {current.path}
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-[#534AB7]/20 text-xs font-bold text-[#534AB7] flex items-center justify-between">
+            <div className="mt-6 pt-4 border-t border-neutral-900/20 text-xs font-bold text-neutral-900 flex items-center justify-between">
               <span>Execution Blueprint</span>
-              <span className="group-hover:translate-x-1 transition-transform">✓</span>
+              <span className="group-hover:translate-x-1 transition-transform">•</span>
             </div>
           </div>
 

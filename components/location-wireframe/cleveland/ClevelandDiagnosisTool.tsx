@@ -159,26 +159,26 @@ export default function ClevelandDiagnosisTool() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3 shadow-2xs">
-            <Sparkles className="h-3.5 w-3.5 text-[#534AB7] animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3 shadow-2xs">
+            <Sparkles className="h-3.5 w-3.5 text-neutral-900 animate-pulse" />
             <span>Interactive Problem Diagnosis · Gemini 30-Key AI Pool</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0a0f2e] leading-tight">
-            Cleveland Law Firm SEO Diagnosis: Tell Us the Problem and We Will Show the Fix
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950 leading-tight">
+            Cleveland Law Firm SEO Diagnosis
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            <strong className="text-[#0a0f2e]">We are here for the solution because we can feel your pain.</strong>{" "}
+            <strong className="text-neutral-950">We are here for the solution because we can feel your pain.</strong>{" "}
             You are tired of traffic that never becomes signed cases, so skip the sales pitch: tell us what is going wrong, and our Gemini-powered engine will pinpoint the probable cause in Cuyahoga County and show exactly how we fix it.
           </p>
         </div>
 
         {/* Search input bar & Chip selector box with elevated styling */}
-        <div className="mt-8 rounded-3xl border-2 border-slate-200/90 bg-gradient-to-b from-slate-50 to-white p-5 sm:p-8 shadow-lg shadow-slate-100 transition-all duration-300 hover:border-[#534AB7]/30 hover:shadow-xl hover:shadow-[#534AB7]/5">
+        <div className="mt-8 rounded-3xl border-2 border-slate-200/90 bg-gradient-to-b from-slate-50 to-white p-5 sm:p-8 shadow-lg shadow-slate-100 transition-all duration-300 hover:border-neutral-900/30 hover:shadow-xl hover:shadow-sm">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-[#534AB7] transition-colors" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-neutral-900 transition-colors" />
               <input
                 id="dg-q"
                 type="text"
@@ -188,14 +188,14 @@ export default function ClevelandDiagnosisTool() {
                   if (e.key === "Enter") handleDiagnose();
                 }}
                 placeholder="e.g. We get traffic but no qualified leads, or PPC is too expensive in Cleveland"
-                className="w-full rounded-2xl border-2 border-slate-300 bg-white pl-12 pr-4 py-4 text-base font-medium text-slate-900 placeholder-slate-400 shadow-inner focus:border-[#534AB7] focus:outline-none focus:ring-4 focus:ring-[#534AB7]/10 transition-all duration-200"
+                className="w-full rounded-2xl border-2 border-slate-300 bg-white pl-12 pr-4 py-4 text-base font-medium text-slate-900 placeholder-slate-400 shadow-inner focus:border-neutral-900 focus:outline-none focus:ring-4 focus:ring-neutral-900/10 transition-all duration-200"
               />
             </div>
 
             <button
               onClick={() => handleDiagnose()}
               disabled={loading}
-              className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-[#534AB7] px-7 py-4 text-base font-bold text-white shadow-md shadow-[#534AB7]/25 hover:bg-[#3C3489] hover:shadow-lg hover:shadow-[#534AB7]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-75"
+              className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-neutral-900 px-7 py-4 text-base font-bold text-white shadow-md shadow-sm hover:bg-neutral-800 hover:shadow-lg hover:shadow-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-75"
             >
               {loading ? (
                 <>
@@ -229,12 +229,12 @@ export default function ClevelandDiagnosisTool() {
                     }}
                     className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? "bg-[#0a0f2e] text-white shadow-md shadow-slate-900/20 scale-[1.02] ring-2 ring-[#534AB7]/50"
+                        ? "bg-neutral-900 text-white shadow-md shadow-slate-900/20 scale-[1.02] ring-2 ring-neutral-900/50"
                         : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-[1.01]"
                     }`}
                   >
                     {isSelected ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                      <Check className="h-3.5 w-3.5 text-slate-300 shrink-0" />
                     ) : (
                       <span className="h-1.5 w-1.5 rounded-full bg-slate-300 shrink-0" />
                     )}
@@ -251,8 +251,8 @@ export default function ClevelandDiagnosisTool() {
           <div className="mt-12 space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e]">
-                  What is probably going on, and how we fix it
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
+                  What Is Happening & How We Fix It
                 </h3>
                 <p className="text-sm text-slate-500 mt-0.5">
                   Tailored specifically for Cleveland law firms & Cuyahoga County courts
@@ -260,8 +260,8 @@ export default function ClevelandDiagnosisTool() {
               </div>
 
               {isAiGenerated ? (
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-bold text-emerald-800 shadow-2xs">
-                  <Sparkles className="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-bold text-neutral-900 shadow-2xs">
+                  <Sparkles className="h-3.5 w-3.5 text-neutral-800 animate-pulse" />
                   <span>Live Gemini AI Intelligence Analysis</span>
                 </div>
               ) : (
@@ -274,14 +274,14 @@ export default function ClevelandDiagnosisTool() {
 
             {/* Strategic Recommendation Callout with smooth glow */}
             {recommendation && (
-              <div className="relative overflow-hidden rounded-2xl border-l-4 border-l-[#534AB7] border border-slate-200 bg-gradient-to-r from-[#EEEDFE]/80 via-white to-white p-4 sm:p-5 shadow-xs transition-all hover:shadow-sm">
+              <div className="relative overflow-hidden rounded-2xl border-l-4 border-l-[#171717] border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-white p-4 sm:p-5 shadow-xs transition-all hover:shadow-sm">
                 <div className="flex items-start gap-3">
-                  <Sparkles className="h-5 w-5 text-[#534AB7] shrink-0 mt-0.5" />
+                  <Sparkles className="h-5 w-5 text-neutral-900 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Founder Takeaway · Mubashar Sharif, CEO
                     </h4>
-                    <p className="mt-1 text-sm sm:text-base font-semibold text-[#0a0f2e] leading-relaxed">
+                    <p className="mt-1 text-sm sm:text-base font-semibold text-neutral-950 leading-relaxed">
                       "{recommendation}"
                     </p>
                   </div>
@@ -294,13 +294,13 @@ export default function ClevelandDiagnosisTool() {
               {items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="group relative rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+                  className="group relative rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                 >
                   {/* Subtle top indicator bar */}
-                  <div className="absolute inset-x-6 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-x-6 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-neutral-700 to-transparent rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-1 text-xs font-mono font-bold text-[#534AB7] group-hover:bg-[#EEEDFE] transition-colors">
+                    <div className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-1 text-xs font-mono font-bold text-neutral-900 group-hover:bg-slate-100 transition-colors">
                       <span>{item.n}</span>
                     </div>
 
@@ -315,11 +315,11 @@ export default function ClevelandDiagnosisTool() {
                     </div>
 
                     <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 mb-1.5">
-                        <Wrench className="h-3.5 w-3.5 text-[#1a7d59]" />
+                      <div className="text-xs font-bold uppercase tracking-wider text-neutral-800 flex items-center gap-1.5 mb-1.5">
+                        <Wrench className="h-3.5 w-3.5 text-neutral-800" />
                         <span>SearchPrex Strategic Fix</span>
                       </div>
-                      <p className="text-sm text-slate-800 leading-relaxed bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-200/60 font-medium">
+                      <p className="text-sm text-slate-800 leading-relaxed bg-slate-50/50 p-3.5 rounded-xl border border-slate-200/60 font-medium">
                         {item.fix}
                       </p>
                     </div>
@@ -327,7 +327,7 @@ export default function ClevelandDiagnosisTool() {
 
                   <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
                     <span className="font-semibold text-slate-500">Software stack:</span>
-                    <span className="rounded-lg bg-[#EEEDFE] px-2.5 py-1 font-bold text-[#534AB7] shadow-2xs">
+                    <span className="rounded-lg bg-slate-100 px-2.5 py-1 font-bold text-neutral-900 shadow-2xs">
                       {item.tool}
                     </span>
                   </div>
@@ -336,19 +336,19 @@ export default function ClevelandDiagnosisTool() {
             </div>
 
             {/* 7-DAY FREE TRIAL LEAD FORM CARD with glass & animated shine */}
-            <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-[#534AB7]/50 bg-[#0a0f2e] p-6 sm:p-10 text-white shadow-2xl transition-all duration-300">
+            <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-neutral-900/50 bg-neutral-900 p-6 sm:p-10 text-white shadow-2xl transition-all duration-300">
               
               {/* Subtle animated background radial glow */}
-              <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-[#534AB7]/25 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-neutral-900/25 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#EEEDFE] border border-white/15 mb-3">
-                  <Sparkles className="h-3.5 w-3.5 text-indigo-300" />
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 border border-white/15 mb-3">
+                  <Sparkles className="h-3.5 w-3.5 text-slate-300" />
                   <span>Complimentary Cleveland Legal Audit</span>
                 </div>
 
                 <h3 className="!text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-                  Full Implementation Plan with a 7-Day Trial
+                  Implementation Plan & 7-Day Trial
                 </h3>
 
                 <p className="mt-3 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
@@ -358,50 +358,50 @@ export default function ClevelandDiagnosisTool() {
                 {/* 2-Column deliverables breakdown */}
                 <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                   <div className="hover:bg-white/5 p-3 rounded-xl transition-colors">
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-[#EEEDFE] mb-3 flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-200 mb-3 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-slate-300" />
                       Included in the 7-day trial
                     </h4>
                     <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
                       <li className="flex items-start gap-2">
-                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span className="text-slate-300 font-bold">•</span>
                         <span>Full website, Google Business Profile, citation and AI visibility audit</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span className="text-slate-300 font-bold">•</span>
                         <span>Keyword and intent map for Cleveland and Cuyahoga County</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span className="text-slate-300 font-bold">•</span>
                         <span>Quick-win technical and schema fixes initiated within the 7 days</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span className="text-slate-300 font-bold">•</span>
                         <span>Transparent weekly report templates and live ranking verification</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="hover:bg-white/5 p-3 rounded-xl transition-colors">
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-300 mb-3 flex items-center gap-2">
-                      <Wrench className="h-4 w-4 text-indigo-400" />
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-300 mb-3 flex items-center gap-2">
+                      <Wrench className="h-4 w-4 text-slate-400" />
                       Law firm tools (intake efficiency)
                     </h4>
                     <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
                       <li className="flex items-start gap-2">
-                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span className="text-slate-400 font-bold">•</span>
                         <span>Call and form tracking with Whisper source attribution</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span className="text-slate-400 font-bold">•</span>
                         <span>Instant missed-call text-back (never lose an urgent client)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span className="text-slate-400 font-bold">•</span>
                         <span>Intake form routing and automated lead scoring</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-indigo-400 font-bold">✓</span>
+                        <span className="text-slate-400 font-bold">•</span>
                         <span>Compliant client review collection and follow-up templates</span>
                       </li>
                     </ul>
@@ -416,10 +416,10 @@ export default function ClevelandDiagnosisTool() {
                 {/* Form or success state */}
                 <div className="mt-8 pt-6 border-t border-white/10">
                   {trialDone ? (
-                    <div className="rounded-2xl bg-emerald-950/60 border border-emerald-500/50 p-6 text-center space-y-2 shadow-lg animate-in fade-in duration-300">
-                      <CheckCircle2 className="h-10 w-10 text-emerald-400 mx-auto" />
+                    <div className="rounded-2xl bg-neutral-900/60 border border-neutral-800/50 p-6 text-center space-y-2 shadow-lg animate-in fade-in duration-300">
+                      <CheckCircle2 className="h-10 w-10 text-slate-300 mx-auto" />
                       <h4 className="text-xl font-bold text-white">Trial Request Received!</h4>
-                      <p className="text-sm text-emerald-200 max-w-xl mx-auto">
+                      <p className="text-sm text-slate-200 max-w-xl mx-auto">
                         Thank you. Mubashar Sharif (CEO) will personally review your Cleveland law firm URL and email your 7-day trial onboarding details within 1 business day.
                       </p>
                     </div>
@@ -434,7 +434,7 @@ export default function ClevelandDiagnosisTool() {
                             value={trialName}
                             onChange={(e) => setTrialName(e.target.value)}
                             placeholder="e.g. Attorney Jane Smith"
-                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30 transition-all"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/30 transition-all"
                           />
                         </div>
 
@@ -446,7 +446,7 @@ export default function ClevelandDiagnosisTool() {
                             value={trialWebsite}
                             onChange={(e) => setTrialWebsite(e.target.value)}
                             placeholder="e.g. smithinjurycleveland.com"
-                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30 transition-all"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/30 transition-all"
                           />
                         </div>
 
@@ -458,7 +458,7 @@ export default function ClevelandDiagnosisTool() {
                             value={trialEmail}
                             onChange={(e) => setTrialEmail(e.target.value)}
                             placeholder="e.g. jane@smithinjurycleveland.com"
-                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30 transition-all"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/30 transition-all"
                           />
                         </div>
                       </div>
@@ -471,17 +471,17 @@ export default function ClevelandDiagnosisTool() {
                         <button
                           type="submit"
                           disabled={submittingTrial}
-                          className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-[#0a0f2e] font-extrabold px-8 py-4 text-base shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 cursor-pointer"
+                          className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-extrabold px-8 py-4 text-base shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 cursor-pointer"
                         >
                           {submittingTrial ? (
                             <>
-                              <Loader2 className="h-5 w-5 animate-spin text-[#534AB7]" />
+                              <Loader2 className="h-5 w-5 animate-spin text-neutral-900" />
                               <span>Starting trial...</span>
                             </>
                           ) : (
                             <>
                               <span>Start 7-Day Free Trial</span>
-                              <ArrowRight className="h-4 w-4 text-[#534AB7] transition-transform duration-200 group-hover:translate-x-1" />
+                              <ArrowRight className="h-4 w-4 text-neutral-900 transition-transform duration-200 group-hover:translate-x-1" />
                             </>
                           )}
                         </button>

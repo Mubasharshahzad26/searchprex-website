@@ -68,15 +68,15 @@ export default function ClevelandPricingTiers() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             07 · What you pay
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cleveland Law Firm SEO Pricing: Flexible Month-to-Month Engagements
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cleveland Law Firm SEO Pricing
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Unlike traditional agencies that demand rigid 12-month lock-ins, our{" "}
-            <a href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+            <a href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
               law firm SEO services
             </a>{" "}
             are 100% month-to-month. Every dollar builds compounding digital equity your practice owns forever:
@@ -90,19 +90,19 @@ export default function ClevelandPricingTiers() {
               key={tier.name}
               className={`group rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative cursor-default ${
                 tier.highlight
-                  ? "border-2 border-[#534AB7] bg-gradient-to-b from-indigo-50/50 via-white to-white shadow-xl shadow-indigo-100/70 ring-2 ring-[#534AB7]/20 hover:-translate-y-2.5 hover:shadow-2xl hover:shadow-[#534AB7]/25"
-                  : "border-2 border-slate-200 bg-white shadow-xs hover:-translate-y-2 hover:border-[#534AB7]/40 hover:shadow-xl hover:shadow-[#534AB7]/10"
+                  ? "border-2 border-neutral-900 bg-gradient-to-b from-slate-50 via-white to-white shadow-xl shadow-slate-100/70 ring-2 ring-neutral-900/20 hover:-translate-y-2.5 hover:shadow-2xl hover:shadow-sm"
+                  : "border-2 border-slate-200 bg-white shadow-xs hover:-translate-y-2 hover:border-neutral-900/40 hover:shadow-xl hover:shadow-sm"
               }`}
             >
               {tier.badge && (
-                <div className="absolute -top-3.5 left-8 rounded-full bg-[#534AB7] px-3.5 py-1 text-xs font-extrabold text-white shadow-md flex items-center gap-1.5">
-                  <Sparkles className="h-3 w-3 text-indigo-200" />
+                <div className="absolute -top-3.5 left-8 rounded-full bg-neutral-900 px-3.5 py-1 text-xs font-extrabold text-white shadow-md flex items-center gap-1.5">
+                  <Sparkles className="h-3 w-3 text-slate-200" />
                   <span>{tier.badge}</span>
                 </div>
               )}
 
               <div>
-                <h3 className="text-2xl font-extrabold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors duration-200">
+                <h3 className="text-2xl font-extrabold text-neutral-950 group-hover:text-neutral-900 transition-colors duration-200">
                   {tier.name}
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed min-h-[40px]">
@@ -110,7 +110,7 @@ export default function ClevelandPricingTiers() {
                 </p>
 
                 <div className="mt-5 pb-5 border-b border-slate-100 flex items-baseline">
-                  <span className="font-mono text-4xl sm:text-5xl font-black text-[#0a0f2e]">
+                  <span className="font-mono text-4xl sm:text-5xl font-black text-neutral-950">
                     {tier.price}
                   </span>
                   <span className="text-sm font-semibold text-slate-500 ml-1">
@@ -125,7 +125,7 @@ export default function ClevelandPricingTiers() {
                   <ul className="space-y-2.5">
                     {tier.features.map((feat, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                        <Check className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -138,8 +138,8 @@ export default function ClevelandPricingTiers() {
                   onClick={scrollToContact}
                   className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-3.5 px-6 text-sm sm:text-base font-bold transition-all duration-200 cursor-pointer ${
                     tier.highlight
-                      ? "bg-[#534AB7] hover:bg-[#3C3489] text-white shadow-md shadow-[#534AB7]/25 hover:shadow-lg hover:shadow-[#534AB7]/35 hover:scale-[1.02] active:scale-[0.98]"
-                      : "border-2 border-slate-200 bg-slate-50 text-[#0a0f2e] hover:border-[#534AB7] hover:bg-white hover:scale-[1.01] active:scale-[0.99]"
+                      ? "bg-neutral-900 hover:bg-neutral-800 text-white shadow-md shadow-sm hover:shadow-lg hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                      : "border-2 border-slate-200 bg-slate-50 text-neutral-950 hover:border-neutral-900 hover:bg-white hover:scale-[1.01] active:scale-[0.99]"
                   }`}
                 >
                   <span>{tier.ctaLabel}</span>

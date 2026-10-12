@@ -36,11 +36,11 @@ export default function ClevelandFourPillars() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             Core Performance Standards
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Four Foundational Pillars Cleveland Law Firms Require
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Four Pillars Cleveland Law Firms Require
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Before discussing technical code architecture, we align with the financial and operational outcomes required to make law firm SEO completely predictable.
@@ -53,22 +53,22 @@ export default function ClevelandFourPillars() {
             return (
               <div
                 key={p.num}
-                className="group relative rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/15 hover:border-[#534AB7]/50 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
+                className="group relative rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/50 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Glowing top accent indicator */}
-                <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-neutral-700 to-transparent rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="rounded-2xl bg-[#EEEDFE] p-3.5 text-[#534AB7] group-hover:bg-[#534AB7] group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-2xs">
+                    <div className="rounded-2xl bg-slate-100 p-3.5 text-neutral-900 group-hover:bg-neutral-900 group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-2xs">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <span className="font-mono text-2xl font-extrabold text-slate-300 group-hover:text-[#534AB7] transition-colors duration-300">
+                    <span className="font-mono text-2xl font-extrabold text-slate-300 group-hover:text-neutral-900 transition-colors duration-300">
                       {p.num}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors duration-200">
+                  <h3 className="text-xl font-bold text-neutral-950 group-hover:text-neutral-900 transition-colors duration-200">
                     {p.title}
                   </h3>
 
@@ -77,7 +77,7 @@ export default function ClevelandFourPillars() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#534AB7]">
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-neutral-900">
                   <span>SearchPrex Standard</span>
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
                 </div>

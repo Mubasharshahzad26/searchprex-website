@@ -24,7 +24,7 @@ const COMPARISON_TRAPS = [
     weDo: (
       <span>
         Month-to-month partnership. We earn your retainer every 30 days. You see indexation, ranking movements, and early inquiries within the first 30 to 90 days of our{" "}
-        <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+        <Link href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
           law firm SEO sprint
         </Link>
         .
@@ -48,7 +48,7 @@ const COMPARISON_TRAPS = [
     weDo: (
       <span>
         Ohio BWC and Cuyahoga County court-aligned procedural guides. Answer-first content engineered with structured schema and verified citations via our{" "}
-        <Link href="/ai-search" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+        <Link href="/ai-search" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
           AI search optimization (GEO)
         </Link>{" "}
         framework.
@@ -62,7 +62,7 @@ const COMPARISON_TRAPS = [
     weDo: (
       <span>
         Direct CEO execution. Mubashar Sharif personally audits your site, directs technical repairs, and optimizes your{" "}
-        <Link href="/services/law-firm-seo/google-business-profile-for-lawyers" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+        <Link href="/services/law-firm-seo/google-business-profile-for-lawyers" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
           Google Business Profile
         </Link>
         .
@@ -85,15 +85,15 @@ export default function ClevelandBurnedByAgencies() {
         {/* Section Header */}
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 border border-slate-300 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">
-            <ShieldCheck className="h-4 w-4 text-[#534AB7]" />
+            <ShieldCheck className="h-4 w-4 text-neutral-900" />
             <span>Accountability & Signed Case Attribution</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
-            Burned by Previous SEO Agencies? We Deliver Verifiable Signed Cases.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            Burned by Previous SEO Agencies?
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Most managing partners who reach out to SearchPrex have already spent thousands on previous agencies that delivered traffic reports instead of paying clients. Review our{" "}
-            <Link href="/case-studies" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/case-studies" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
               verified law firm case studies
             </Link>{" "}
             to see how we replace empty promises with transparent monthly case attribution.
@@ -105,17 +105,17 @@ export default function ClevelandBurnedByAgencies() {
           {COMPARISON_TRAPS.map((item, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30"
+              className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-sm hover:border-neutral-900/30"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEEDFE] text-[#534AB7] group-hover:bg-[#534AB7] group-hover:text-white transition-colors">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-neutral-900 group-hover:bg-neutral-900 group-hover:text-white transition-colors">
                   <item.icon className="h-5 w-5" />
                 </div>
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
                     Past Agency Trap 0{idx + 1}
                   </span>
-                  <h3 className="text-lg sm:text-xl font-extrabold text-[#0a0f2e]">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-neutral-950">
                     {item.trap}
                   </h3>
                 </div>
@@ -133,9 +133,9 @@ export default function ClevelandBurnedByAgencies() {
               </div>
 
               {/* What SearchPrex Delivers */}
-              <div className="rounded-2xl border border-[#1a7d59]/30 bg-emerald-50/40 p-4 space-y-1">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-[#1a7d59] shrink-0" />
+              <div className="rounded-2xl border border-slate-300/30 bg-slate-50/40 p-4 space-y-1">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-900 flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-neutral-800 shrink-0" />
                   How SearchPrex Solves It:
                 </span>
                 <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
@@ -147,7 +147,7 @@ export default function ClevelandBurnedByAgencies() {
         </div>
 
         {/* Before vs After Audit Reality Teardown Card */}
-        <div className="mt-12 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xl shadow-slate-100 transition-all duration-300 hover:shadow-2xl hover:border-[#534AB7]/30">
+        <div className="mt-12 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xl shadow-slate-100 transition-all duration-300 hover:shadow-2xl hover:border-neutral-900/30">
           <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-200">
             
             {/* Left: Typical Failed Agency Retainer */}
@@ -156,7 +156,7 @@ export default function ClevelandBurnedByAgencies() {
                 <XCircle className="h-3.5 w-3.5 text-slate-500" />
                 <span>Typical Agency Retainer</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
+              <h3 className="text-xl sm:text-2xl font-black text-neutral-950">
                 \$3,000–\$5,000 / mo Spent on Vanity Traffic
               </h3>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600">
@@ -176,25 +176,25 @@ export default function ClevelandBurnedByAgencies() {
             </div>
 
             {/* Right: The SearchPrex Transparent Standard */}
-            <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-indigo-50/40 via-white to-white space-y-4">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[#1a7d59]" />
+            <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-slate-50/40 via-white to-white space-y-4">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-neutral-900">
+                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-800" />
                 <span>SearchPrex Accountable Standard</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
+              <h3 className="text-xl sm:text-2xl font-black text-neutral-950">
                 Verifiable Case Attribution & Month-to-Month Flexibility
               </h3>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span><strong>Whisper Call Attribution:</strong> Immediate audio confirmation whenever an inbound call originates from organic search.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span><strong>Cuyahoga Court Silos:</strong> Targeted localized practice silos for Lakewood, Parma, Beachwood, and Downtown Cleveland.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span><strong>100% Asset Ownership:</strong> You permanently own your code, content, schema, and citation listings.</span>
                 </li>
               </ul>
@@ -205,7 +205,7 @@ export default function ClevelandBurnedByAgencies() {
           {/* Bottom Action Strip */}
           <div className="bg-slate-50 p-5 sm:p-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h4 className="text-sm font-extrabold text-[#0a0f2e]">
+              <h4 className="text-sm font-extrabold text-neutral-950">
                 Want to know why your previous SEO failed?
               </h4>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -214,7 +214,7 @@ export default function ClevelandBurnedByAgencies() {
             </div>
             <button
               onClick={scrollToRealityCheck}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white px-5 py-3 text-xs sm:text-sm font-bold shadow-md shadow-[#534AB7]/25 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white px-5 py-3 text-xs sm:text-sm font-bold shadow-md shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>Get Free 24h Forensic Teardown</span>
               <ArrowRight className="h-4 w-4" />

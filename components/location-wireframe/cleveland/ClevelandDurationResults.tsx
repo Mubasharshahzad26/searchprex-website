@@ -44,11 +44,11 @@ export default function ClevelandDurationResults() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             Campaign Progression & Milestones
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Cleveland SEO Performance Timeline: 30, 90, 180 & 365-Day Benchmarks
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Cleveland SEO Performance Timeline
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Select a milestone below to inspect exact technical deliverables executed and the concrete metrics logged into your monthly client ledger.
@@ -65,7 +65,7 @@ export default function ClevelandDurationResults() {
                 onClick={() => setSelectedDuration(idx)}
                 className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 active:scale-95 ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-105"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-105"
                     : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-102"
                 }`}
               >
@@ -77,8 +77,8 @@ export default function ClevelandDurationResults() {
 
         {/* 2-Column deliverables card */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-[#534AB7]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2 transition-transform group-hover:translate-x-1 duration-200">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-sm hover:border-neutral-900/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-neutral-900">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-2 transition-transform group-hover:translate-x-1 duration-200">
               What SearchPrex Executes
             </span>
             <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
@@ -86,8 +86,8 @@ export default function ClevelandDurationResults() {
             </p>
           </div>
 
-          <div className="group relative overflow-hidden rounded-3xl border-2 border-[#534AB7]/40 bg-gradient-to-br from-[#EEEDFE]/50 to-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#1a7d59]/15 hover:border-[#1a7d59]/50 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-[#1a7d59]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-2 transition-transform group-hover:translate-x-1 duration-200">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-neutral-900/40 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-sm hover:border-slate-300/50 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-neutral-900">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block mb-2 transition-transform group-hover:translate-x-1 duration-200">
               What Goes in Your Monthly Ledger
             </span>
             <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
@@ -97,7 +97,7 @@ export default function ClevelandDurationResults() {
         </div>
 
         {/* Progression Table Container */}
-        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/30">
+        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:shadow-sm hover:border-neutral-900/30">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[650px]">
               <thead>
@@ -106,13 +106,13 @@ export default function ClevelandDurationResults() {
                   <th className="py-4 px-6 text-slate-500 font-mono">Day 0 (Baseline)</th>
                   <th className="py-4 px-6 text-slate-700 font-mono">Day 90</th>
                   <th className="py-4 px-6 text-slate-800 font-mono">Day 180</th>
-                  <th className="py-4 px-6 text-[#534AB7] font-mono bg-[#EEEDFE]/40">Day 365 (Compounding)</th>
+                  <th className="py-4 px-6 text-neutral-900 font-mono bg-slate-100/40">Day 365 (Compounding)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {METRIC_ROWS.map((row, idx) => (
-                  <tr key={idx} className="group hover:bg-indigo-50/40 transition-colors duration-200">
-                    <td className="py-4 px-6 font-bold text-[#0a0f2e]">
+                  <tr key={idx} className="group hover:bg-slate-50/40 transition-colors duration-200">
+                    <td className="py-4 px-6 font-bold text-neutral-950">
                       {row.metric}
                     </td>
                     <td className="py-4 px-6 font-mono text-slate-500 group-hover:text-slate-700 transition-colors">
@@ -121,10 +121,10 @@ export default function ClevelandDurationResults() {
                     <td className="py-4 px-6 font-mono text-slate-700 group-hover:text-slate-900 transition-colors">
                       {row.d90}
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-slate-800 group-hover:text-[#534AB7] transition-colors">
+                    <td className="py-4 px-6 font-mono font-bold text-slate-800 group-hover:text-neutral-900 transition-colors">
                       {row.d180}
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-[#534AB7] bg-[#EEEDFE]/20 group-hover:bg-[#EEEDFE]/50 transition-colors">
+                    <td className="py-4 px-6 font-mono font-bold text-neutral-900 bg-slate-100/20 group-hover:bg-slate-100/50 transition-colors">
                       {row.d365}
                     </td>
                   </tr>
@@ -135,7 +135,7 @@ export default function ClevelandDurationResults() {
 
           <div className="p-4 bg-slate-50 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span>* Benchmark averages derived from litigation campaigns. Performance tracked and audited monthly.</span>
-            <Link href="/case-studies" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/case-studies" className="font-bold text-neutral-900 underline hover:text-neutral-950">
               Explore verified case study results →
             </Link>
           </div>

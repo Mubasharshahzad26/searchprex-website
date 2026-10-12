@@ -52,15 +52,15 @@ export default function ClevelandEmotionalIntent() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
             09 · Client Psychological Intent
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Client Search Intent: Converting High-Pressure Legal Inquiries
+          <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Client Search Intent & Intake Psychology
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
             Cleveland residents searching after a workplace accident or an urgent legal dispute seek clear authority and rapid resolution. Learn how our{" "}
-            <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
               legal content architecture
             </Link>{" "}
             converts distressed searchers into retained clients.
@@ -77,7 +77,7 @@ export default function ClevelandEmotionalIntent() {
                 onClick={() => setSelectedEmotion(idx)}
                 className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30 scale-[1.02]"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-[1.02]"
                     : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100 hover:scale-[1.01]"
                 }`}
               >
@@ -91,11 +91,11 @@ export default function ClevelandEmotionalIntent() {
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: What they feel */}
-          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300">
+          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
               Emotional State
             </span>
-            <h4 className="text-base font-bold text-[#0a0f2e] mb-2 group-hover:text-[#534AB7] transition-colors">
+            <h4 className="text-base font-bold text-neutral-950 mb-2 group-hover:text-neutral-900 transition-colors">
               What They Feel
             </h4>
             <p className="text-sm text-slate-700 leading-relaxed">
@@ -104,26 +104,26 @@ export default function ClevelandEmotionalIntent() {
           </div>
 
           {/* Card 2: What they quietly search */}
-          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#534AB7]/10 hover:border-[#534AB7]/40 hover:-translate-y-1.5 transition-all duration-300 space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-1">
+          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-neutral-900/40 hover:-translate-y-1.5 transition-all duration-300 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
               Private Search Queries
             </span>
-            <h4 className="text-base font-bold text-[#0a0f2e] mb-2 group-hover:text-[#534AB7] transition-colors">
+            <h4 className="text-base font-bold text-neutral-950 mb-2 group-hover:text-neutral-900 transition-colors">
               They Quietly Type
             </h4>
             {current.searches.map((s, i) => (
-              <div key={i} className="text-xs font-mono text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-200 group-hover:bg-indigo-50/20 transition-colors">
+              <div key={i} className="text-xs font-mono text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-200 group-hover:bg-slate-50/20 transition-colors">
                 {s}
               </div>
             ))}
           </div>
 
           {/* Card 3: What they need to read */}
-          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-[#1a7d59]/10 hover:border-[#1a7d59]/40 hover:-translate-y-1.5 transition-all duration-300">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block mb-2">
+          <div className="group rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs hover:shadow-xl hover:shadow-sm hover:border-slate-300/40 hover:-translate-y-1.5 transition-all duration-300">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block mb-2">
               Content Expectation
             </span>
-            <h4 className="text-base font-bold text-[#0a0f2e] mb-2 group-hover:text-[#1a7d59] transition-colors">
+            <h4 className="text-base font-bold text-neutral-950 mb-2 group-hover:text-neutral-800 transition-colors">
               They Need to Read
             </h4>
             <p className="text-sm text-slate-700 leading-relaxed">
@@ -132,12 +132,12 @@ export default function ClevelandEmotionalIntent() {
           </div>
 
           {/* Card 4: Our page tone & practice link */}
-          <div className="group rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 via-white to-white p-6 shadow-md hover:shadow-2xl hover:shadow-[#534AB7]/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+          <div className="group rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-slate-50 via-white to-white p-6 shadow-md hover:shadow-2xl hover:shadow-sm hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-2">
                 Conversion Copywriting
               </span>
-              <h4 className="text-base font-bold text-[#0a0f2e] mb-1">
+              <h4 className="text-base font-bold text-neutral-950 mb-1">
                 Our Page Tone
               </h4>
               <p className="text-sm text-slate-700 font-medium leading-relaxed">
@@ -145,10 +145,10 @@ export default function ClevelandEmotionalIntent() {
               </p>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-[#534AB7]/20">
+            <div className="mt-5 pt-4 border-t border-neutral-900/20">
               <Link
                 href={current.href}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 hover:underline"
               >
                 <span>{current.linkLabel}</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
