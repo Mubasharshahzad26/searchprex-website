@@ -1,0 +1,220 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Calculator, ArrowRight } from 'lucide-react';
+
+export default function BatonRougeDiagnosisTool() {
+  const [practice, setPractice] = useState('injury');
+  const [targetRadius, setTargetRadius] = useState('ebr-core');
+  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const metrics: Record<string, { lostClicks: number; estRetainers: number; adSavings: string }> = {
+    injury: { lostClicks: 460, estRetainers: 5, adSavings: '$32,400/mo' },
+    plant: { lostClicks: 310, estRetainers: 4, adSavings: '$28,600/mo' },
+    succession: { lostClicks: 280, estRetainers: 5, adSavings: '$19,800/mo' },
+    family: { lostClicks: 340, estRetainers: 6, adSavings: '$22,500/mo' },
+  };
+
+  const currentMetric = metrics[practice] || metrics.injury;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!websiteUrl || !email) return;
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="reality-check-form" className="py-16 bg-slate-50 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-600 bg-white px-3 py-1 rounded border border-slate-200">
+            Interactive Growth Simulator
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 mb-3">
+            Baton Rouge Law Firm Search Opportunity Diagnosis
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600">
+            Evaluate high-intent East Baton Rouge Parish legal search traffic currently siphoned away by out-of-parish New Orleans aggregators and legal directories.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Form: Configuration */}
+          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
+            <h3 className="text-base font-bold text-slate-900 mb-6 flex items-center gap-2">
+              <Calculator className="w-5 h-5 text-[#4338ca]" />
+              Step 1: Configure Practice Parameters
+            </h3>
+
+            <div className="space-y-5">
+              {/* Practice selector */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+                  Primary Legal Specialty
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {[
+                    { id: 'injury', label: 'Freeway Truck Injury' },
+                    { id: 'plant', label: 'Petrochemical / Maritime' },
+                    { id: 'succession', label: 'Succession & Estates' },
+                    { id: 'family', label: 'Family & Divorce' },
+                  ].map((p) => (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => setPractice(p.id)}
+                      className={`py-2.5 px-3 rounded-lg text-xs font-semibold border transition-all text-center ${
+                        practice === p.id
+                          ? 'bg-[#4338ca] text-white border-[#4338ca]'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Geographic Scope */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+                  Target Geographic Footprint
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {[
+                    { id: 'ebr-core', label: 'Baton Rouge Core & Downtown' },
+                    { id: 'capital-region', label: 'Capital Area (Ascension / Livingston)' },
+                    { id: 'industrial-river', label: 'Mississippi Industrial Corridor' },
+                  ].map((g) => (
+                    <button
+                      key={g.id}
+                      type="button"
+                      onClick={() => setTargetRadius(g.id)}
+                      className={`p-2.5 rounded-lg text-xs font-semibold border transition-all text-left ${
+                        targetRadius === g.id
+                          ? 'bg-slate-900 text-white border-slate-900'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                      }`}
+                    >
+                      {g.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* URL & Email Input */}
+              <form onSubmit={handleSubmit} className="pt-4 border-t border-slate-100 space-y-4">
+                <div>
+                  <label htmlFor="br-firm-url" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Law Firm Website URL
+                  </label>
+                  <input
+                    id="br-firm-url"
+                    type="text"
+                    value={websiteUrl}
+                    onChange={(e) => setWebsiteUrl(e.target.value)}
+                    placeholder="e.g. www.batonrougelefirm.com"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#4338ca] focus:border-transparent"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="br-firm-email" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Managing Partner Work Email
+                  </label>
+                  <input
+                    id="br-firm-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="partner@firm.com"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#4338ca] focus:border-transparent"
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 px-6 rounded-lg text-sm font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-all duration-150 shadow-md shadow-indigo-100"
+                >
+                  Generate East Baton Rouge Search Diagnosis
+                </button>
+              </form>
+
+              {submitted && (
+                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800">
+                  <p className="font-bold mb-1">Diagnosis Request Received</p>
+                  <p>Our senior legal strategist is analyzing your domain against top Baton Rouge competitors and will deliver your complete audit to {email} within 24 hours.</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column: Dynamic Projections Card */}
+          <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm space-y-6">
+            <div>
+              <span className="text-xs font-mono font-bold text-slate-500 uppercase">Step 2: Capital Area Projection</span>
+              <h3 className="text-lg font-bold text-slate-900 mt-1">
+                Estimated Recoverable Search Value
+              </h3>
+              <p className="text-xs text-slate-600 mt-1">
+                Estimated monthly organic opportunity for top 3 Google Map Pack placement in East Baton Rouge Parish.
+              </p>
+            </div>
+
+            <div className="space-y-4 pt-4 border-t border-slate-200">
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between">
+                <div>
+                  <span className="text-xs text-slate-500 block">Monthly Lost Legal Clicks</span>
+                  <span className="text-2xl font-bold text-slate-900">{currentMetric.lostClicks} clicks/mo</span>
+                </div>
+                <span className="text-xs font-medium text-slate-600 bg-white px-2.5 py-1 rounded border border-slate-200">
+                  High-Intent
+                </span>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between">
+                <div>
+                  <span className="text-xs text-slate-500 block">Estimated Retained Caseload</span>
+                  <span className="text-2xl font-bold text-[#4338ca]">+{currentMetric.estRetainers} retainers/mo</span>
+                </div>
+                <span className="text-xs font-medium text-slate-600 bg-white px-2.5 py-1 rounded border border-slate-200">
+                  Qualified
+                </span>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between">
+                <div>
+                  <span className="text-xs text-slate-500 block">Equivalent Google Ads Ad Spend</span>
+                  <span className="text-2xl font-bold text-slate-900">{currentMetric.adSavings}</span>
+                </div>
+                <span className="text-xs font-medium text-slate-600 bg-white px-2.5 py-1 rounded border border-slate-200">
+                  Saved Budget
+                </span>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-slate-200 text-xs text-slate-600 space-y-2">
+              <p className="font-semibold text-slate-800">Why Organic Beats Paid Ads in Baton Rouge:</p>
+              <p>
+                East Baton Rouge accident victims and succession heirs deliberately skip sponsored ads and review-farm directories to hire established, local attorneys ranked in the genuine Google 3-Pack.
+              </p>
+            </div>
+
+            <a
+              href="#pricing"
+              className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-lg text-xs font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
+            >
+              Explore Transparent Retainer Plans
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -44,6 +44,8 @@ import PlanoWireframeView from "@/components/location-wireframe/plano/PlanoWiref
 import TempeWireframeView from "@/components/location-wireframe/tempe/TempeWireframeView";
 import ScottsdaleWireframeView from "@/components/location-wireframe/scottsdale/ScottsdaleWireframeView";
 import SanJoseWireframeView from "@/components/location-wireframe/san-jose/SanJoseWireframeView";
+import BatonRougeWireframeView from "@/components/location-wireframe/baton-rouge/BatonRougeWireframeView";
+import ShreveportWireframeView from "@/components/location-wireframe/shreveport/ShreveportWireframeView";
 import {
   Breadcrumb,
   CardGrid,
@@ -400,6 +402,44 @@ export default async function CityPage({
         />
         <main>
           <SanJoseWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  if (page.stateSlug === "louisiana" && page.citySlug === "baton-rouge") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <BatonRougeWireframeView page={page} />
+        </main>
+      </>
+    );
+  }
+
+  if (page.stateSlug === "louisiana" && page.citySlug === "shreveport") {
+    return (
+      <>
+        <Schema page={page} url={url} stateHubHref={stateHubHref} />
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Locations", href: "/locations" },
+            ...(stateHubHref ? [{ label: page.state, href: stateHubHref }] : []),
+            { label: `${page.city}, ${page.stateAbbr}` },
+          ]}
+        />
+        <main>
+          <ShreveportWireframeView page={page} />
         </main>
       </>
     );
