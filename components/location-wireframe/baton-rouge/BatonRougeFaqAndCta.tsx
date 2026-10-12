@@ -87,7 +87,7 @@ export default function BatonRougeFaqAndCta({ faqs }: BatonRougeFaqAndCtaProps) 
                     <span>{item.q}</span>
                     <ChevronDown
                       className={`w-4 h-4 text-slate-500 shrink-0 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-[#4338ca]' : ''
+                        isOpen ? 'rotate-180 text-neutral-950' : ''
                       }`}
                     />
                   </button>
@@ -125,7 +125,7 @@ export default function BatonRougeFaqAndCta({ faqs }: BatonRougeFaqAndCtaProps) 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#reality-check-form"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-sm font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-all shadow-lg shadow-indigo-950"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-sm font-bold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-lg shadow-slate-200"
             >
               <Sparkles className="w-4 h-4" />
               Claim Free Parish Audit

@@ -23,7 +23,7 @@ export default function BatonRougeFounderBio() {
               </div>
               <div className="mt-4">
                 <h3 className="text-lg font-bold text-slate-900">Mubashar Sharif</h3>
-                <p className="text-xs text-[#4338ca] font-semibold">Founder & Technical Search Director</p>
+                <p className="text-xs text-neutral-950 font-semibold">Founder & Technical Search Director</p>
                 <p className="text-xs text-slate-500 mt-0.5">SearchPrex Legal Practice Group</p>
               </div>
             </div>
@@ -55,7 +55,7 @@ export default function BatonRougeFounderBio() {
 
                 <Link
                   href="/contact"
-                  className="font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                  className="font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
                 >
                   Schedule Founder Consultation
                   <ArrowRight className="w-3.5 h-3.5" />

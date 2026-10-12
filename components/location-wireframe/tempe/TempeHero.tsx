@@ -36,7 +36,7 @@ export default function TempeHero({ page }: TempeHeroProps) {
           <div className="lg:col-span-7">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.14] mb-6">
               Tempe Law Firm SEO:{' '}
-              <span className="text-[#4338ca] underline decoration-slate-300 decoration-2 underline-offset-8">
+              <span className="text-neutral-950 underline decoration-slate-300 decoration-2 underline-offset-8">
                 Dominate East Valley Search
               </span>
             </h1>
@@ -49,9 +49,9 @@ export default function TempeHero({ page }: TempeHeroProps) {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
               <a
                 href="#reality-check-form"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-base font-semibold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-all duration-150 shadow-md shadow-indigo-100 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-150 shadow-md shadow-slate-100 hover:-translate-y-0.5"
               >
-                <Sparkles className="w-5 h-5 text-indigo-100" />
+                <Sparkles className="w-5 h-5 text-slate-100" />
                 Request Free Reality Check
               </a>
               <Link
@@ -129,7 +129,7 @@ export default function TempeHero({ page }: TempeHeroProps) {
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -top-5 -right-3 hidden sm:flex items-center gap-3 p-3.5 rounded-lg bg-white border border-slate-300 shadow-lg"
             >
-              <div className="w-9 h-9 rounded bg-indigo-50 border border-indigo-100 flex items-center justify-center text-[#4338ca]">
+              <div className="w-9 h-9 rounded bg-slate-50 border border-slate-100 flex items-center justify-center text-neutral-950">
                 <BarChart3 className="w-5 h-5" />
               </div>
               <div>
@@ -145,7 +145,7 @@ export default function TempeHero({ page }: TempeHeroProps) {
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               className="absolute -bottom-5 -left-3 hidden sm:flex items-center gap-2.5 p-3 rounded-lg bg-white border border-slate-300 shadow-lg"
             >
-              <Scale className="w-4 h-4 text-[#4338ca]" />
+              <Scale className="w-4 h-4 text-neutral-950" />
               <span className="text-xs font-semibold text-slate-800">
                 1-Firm Practice Exclusivity Locked
               </span>

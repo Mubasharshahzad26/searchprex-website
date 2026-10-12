@@ -83,11 +83,11 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
         {/* ── 1. Metro Detroit Jurisdictional Coverage & Practice Radius ── */}
         <div>
           <div className="max-w-3xl mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
               METRO DETROIT PRACTICE COVERAGE
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              Remote Law Firm SEO for Metro Detroit With Direct Founder Access
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
+              Metro Detroit Coverage & Direct Founder Access
             </h2>
             <p className="mt-2 text-xs sm:text-base text-slate-600 leading-relaxed">
               SearchPrex works remotely with Detroit firms, which means no downtown office overhead built into your fee. You get bi-weekly video reviews, call recordings and a live dashboard, and you talk directly to the strategist doing the work.
@@ -106,7 +106,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
                 allowFullScreen
               />
               <div className="pointer-events-none absolute bottom-3 left-3 right-3 sm:right-auto rounded-xl bg-slate-950/90 px-3.5 py-2 text-[11px] font-medium text-slate-200 backdrop-blur border border-white/10 shadow flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#534AB7] shrink-0" />
+                <MapPin className="h-4 w-4 text-neutral-900 shrink-0" />
                 <span>Target Optimization Corridor: Wayne County 3rd Circuit Court &amp; 36th District Court</span>
               </div>
             </div>
@@ -115,16 +115,16 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
             <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs flex flex-col justify-between space-y-6">
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                     Dedicated Practice Partner
                   </span>
-                  <span className="text-[10px] font-semibold text-[#196b4d] bg-[#3eb489]/15 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="text-[10px] font-semibold text-[#196b4d] bg-slate-300/15 px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     <Laptop className="h-3 w-3 text-[#196b4d]" />
                     <span>Direct Strategist Access</span>
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e] mt-3">
+                <h3 className="text-xl sm:text-2xl font-black text-neutral-950 mt-3">
                   Serving Metro Detroit Law Firms
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
@@ -134,7 +134,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
                 {/* Tactical Commitments Checklist */}
                 <div className="mt-5 space-y-3 text-xs sm:text-sm text-slate-700">
                   <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-slate-300 shrink-0 mt-0.5" />
                     <div>
                       <strong className="block text-slate-900 font-bold">Tri-County Proximity Optimization</strong>
                       <span className="text-slate-600 text-xs">Dominating Wayne, Oakland (Southfield/Troy), and Macomb county searches.</span>
@@ -142,7 +142,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
                   </div>
 
                   <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-slate-300 shrink-0 mt-0.5" />
                     <div>
                       <strong className="block text-slate-900 font-bold">Strict Market Exclusivity</strong>
                       <span className="text-slate-600 text-xs">We accept only 1 law firm per practice area in the Metro Detroit territory.</span>
@@ -150,7 +150,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
                   </div>
 
                   <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-slate-300 shrink-0 mt-0.5" />
                     <div>
                       <strong className="block text-slate-900 font-bold">Live Attribution &amp; Standups</strong>
                       <span className="text-slate-600 text-xs">Bi-weekly video reviews, CallRail intake recordings, and 24/7 client dashboard.</span>
@@ -164,7 +164,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
                     Active Coverage Corridors:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
-                    <span className="rounded-lg bg-[#EEEDFE] px-2.5 py-1 text-xs font-semibold text-[#534AB7] border border-[#534AB7]/20">
+                    <span className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-semibold text-neutral-900 border border-slate-300">
                       Wayne County
                     </span>
                     <span className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 border border-slate-200">
@@ -180,7 +180,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
               {/* Action Button */}
               <a
                 href="#growth-plan"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] py-3 px-4 text-xs sm:text-sm font-bold text-white shadow-xs transition-colors cursor-pointer group"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 py-3 px-4 text-xs sm:text-sm font-bold text-white shadow-xs transition-colors cursor-pointer group"
               >
                 <span>Check Territory Exclusivity for Your Firm</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -193,10 +193,10 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
         {/* ── 2. Frequently Asked Questions (Simple heading as requested) ── */}
         <div className="space-y-6 max-w-4xl mx-auto pt-4">
           <div className="text-center sm:text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
               COMMON QUESTIONS
             </span>
-            <h3 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight text-[#0a0f2e]">
+            <h3 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight text-neutral-950">
               Frequently Asked Questions
             </h3>
             <p className="mt-1 text-xs sm:text-sm text-slate-500">
@@ -210,16 +210,16 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs transition-all hover:border-[#534AB7]/40"
+                  className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs transition-all hover:border-slate-300"
                 >
                   <button
                     type="button"
                     onClick={() => toggleFaq(idx)}
-                    className="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#0a0f2e] hover:bg-slate-50 transition-colors cursor-pointer"
+                    className="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-neutral-950 hover:bg-slate-50 transition-colors cursor-pointer"
                   >
                     <span>{faq.q}</span>
                     {isOpen ? (
-                      <ChevronUp className="h-4 w-4 text-[#534AB7] shrink-0" />
+                      <ChevronUp className="h-4 w-4 text-neutral-900 shrink-0" />
                     ) : (
                       <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
                     )}

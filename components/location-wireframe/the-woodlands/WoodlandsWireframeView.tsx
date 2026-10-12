@@ -25,7 +25,7 @@ interface WoodlandsWireframeViewProps {
 
 export default function WoodlandsWireframeView({ page }: WoodlandsWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero with Waterway & Pine Tree Vector, Montgomery & Harris Stats */}
       <WoodlandsHero />
 

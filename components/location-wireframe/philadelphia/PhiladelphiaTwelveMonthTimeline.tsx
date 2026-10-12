@@ -49,11 +49,11 @@ export default function PhiladelphiaTwelveMonthTimeline() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Clock className="h-4 w-4" />
             <span>Campaign Progression & Milestones</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Philadelphia SEO Performance Timeline: 30, 90, 180 & 365-Day Benchmarks
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -65,7 +65,7 @@ export default function PhiladelphiaTwelveMonthTimeline() {
         <div className="mt-10">
           <div className="h-2 w-full bg-slate-200 rounded-full mb-6 overflow-hidden">
             <div
-              className="h-2 bg-[#534AB7] transition-all duration-300"
+              className="h-2 bg-neutral-900 transition-all duration-300"
               style={{ width: current.percent }}
             />
           </div>
@@ -79,7 +79,7 @@ export default function PhiladelphiaTwelveMonthTimeline() {
                   onClick={() => setActiveIdx(idx)}
                   className={`rounded-2xl px-5 py-3 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-102"
+                      ? "bg-neutral-900 text-white shadow-md shadow-sm scale-102"
                       : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
                   }`}
                 >
@@ -93,7 +93,7 @@ export default function PhiladelphiaTwelveMonthTimeline() {
         {/* 2-Column Deliverables Card */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
               What SearchPrex Executes
             </span>
             <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
@@ -101,8 +101,8 @@ export default function PhiladelphiaTwelveMonthTimeline() {
             </p>
           </div>
 
-          <div className="rounded-3xl border-2 border-[#534AB7]/40 bg-gradient-to-br from-[#EEEDFE]/50 to-white p-6 sm:p-8 shadow-xs space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block">
+          <div className="rounded-3xl border-2 border-slate-300 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 shadow-xs space-y-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block">
               What Goes in Your Monthly Ledger
             </span>
             <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
@@ -121,13 +121,13 @@ export default function PhiladelphiaTwelveMonthTimeline() {
                   <th className="py-4 px-6 text-slate-500 font-mono">Day 0 (Baseline)</th>
                   <th className="py-4 px-6 text-slate-700 font-mono">Day 90</th>
                   <th className="py-4 px-6 text-slate-800 font-mono">Day 180</th>
-                  <th className="py-4 px-6 text-[#534AB7] font-mono bg-[#EEEDFE]/40">Day 365 (Compounding)</th>
+                  <th className="py-4 px-6 text-neutral-900 font-mono bg-slate-100">Day 365 (Compounding)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {METRIC_ROWS.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-indigo-50/30 transition-colors">
-                    <td className="py-4 px-6 font-bold text-[#0a0f2e]">
+                  <tr key={idx} className="hover:bg-slate-50/30 transition-colors">
+                    <td className="py-4 px-6 font-bold text-neutral-950">
                       {row.metric}
                     </td>
                     <td className="py-4 px-6 font-mono text-slate-500">
@@ -139,7 +139,7 @@ export default function PhiladelphiaTwelveMonthTimeline() {
                     <td className="py-4 px-6 font-mono font-bold text-slate-800">
                       {row.d180}
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-[#534AB7] bg-[#EEEDFE]/20">
+                    <td className="py-4 px-6 font-mono font-bold text-neutral-900 bg-slate-100">
                       {row.d365}
                     </td>
                   </tr>
@@ -150,7 +150,7 @@ export default function PhiladelphiaTwelveMonthTimeline() {
 
           <div className="p-4 bg-slate-50 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span>* Benchmark averages derived from multi-location litigation campaigns. Performance tracked monthly.</span>
-            <Link href="/case-studies" className="font-bold text-[#534AB7] underline hover:text-[#3C3489]">
+            <Link href="/case-studies" className="font-bold text-neutral-900 underline hover:text-neutral-950">
               Explore verified case study results →
             </Link>
           </div>

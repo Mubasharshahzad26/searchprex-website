@@ -10,27 +10,27 @@ export default function KatyVsHoustonPillars() {
       title: "Name the County Courts",
       desc: "Harris, Fort Bend, and Waller courts must be explicitly named where each applies. When prospective clients and AI scrapers see exact judicial districts cited, you establish undeniable jurisdictional competence.",
       benefit: "Displaces generic Houston mega-firms who lump Katy into vague 'Greater Houston' pages.",
-      color: "text-[#534AB7]",
-      bgColor: "bg-[#534AB7]/10",
-      borderColor: "border-[#534AB7]/30",
+      color: "text-neutral-900",
+      bgColor: "bg-slate-100",
+      borderColor: "border-slate-300",
     },
     {
       icon: MapPin,
       title: "Own the Communities",
       desc: "Cinco Ranch, Fulshear, Firethorne, and Brookshire are searched on their own by high-income residents. Separate, genuinely localized pages win these queries while competitors ignore them.",
       benefit: "Captures high-net-worth divorce, wealth preservation, and family law searches close to home.",
-      color: "text-[#1a7d59]",
-      bgColor: "bg-[#1a7d59]/10",
-      borderColor: "border-[#1a7d59]/30",
+      color: "text-neutral-800",
+      bgColor: "bg-slate-100",
+      borderColor: "border-slate-300",
     },
     {
       icon: Sparkles,
       title: "Be the Citable Answer",
       desc: "We write answer-first legal definitions backed by LegalService and FAQPage schema so that Google AI Overviews, Perplexity, and ChatGPT directly quote your firm as the leading local authority.",
       benefit: "Secures top citations in generative AI engine summaries before users ever click organic links.",
-      color: "text-[#3C3489]",
-      bgColor: "bg-[#3C3489]/10",
-      borderColor: "border-[#3C3489]/30",
+      color: "text-neutral-900",
+      bgColor: "bg-[#262626]/10",
+      borderColor: "border-[#262626]/30",
     },
   ];
 
@@ -39,11 +39,11 @@ export default function KatyVsHoustonPillars() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-3">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Katy, Not Houston · Local Positioning</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Katy Clients Search for Katy. Houston Firms Answer.
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -66,7 +66,7 @@ export default function KatyVsHoustonPillars() {
                   >
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-[#0a0f2e] tracking-tight">
+                  <h3 className="text-2xl font-extrabold text-neutral-950 tracking-tight">
                     {p.title}
                   </h3>
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed">

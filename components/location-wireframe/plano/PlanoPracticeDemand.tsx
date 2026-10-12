@@ -40,12 +40,12 @@ export default function PlanoPracticeDemand() {
     <section className="py-16 bg-white border-b border-slate-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-100 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-50 text-neutral-800 border border-slate-100 mb-3">
             <Scale className="w-3.5 h-3.5" />
             High-Yield Case Types
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            What Plano Searchers Need, Practice by Practice
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Collin County Legal Demand by Practice
           </h2>
           <p className="mt-3 text-base text-slate-600 leading-relaxed">
             Relocating professionals and established executives in Plano do not search for generic legal directories. They search for counsel who understand their precise financial assets and corporate reality.
@@ -58,14 +58,14 @@ export default function PlanoPracticeDemand() {
             return (
               <div
                 key={idx}
-                className="p-7 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-300 transition-all shadow-sm flex flex-col justify-between"
+                className="p-7 rounded-2xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all shadow-sm flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#534AB7]/10 text-[#534AB7] flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 text-neutral-900 flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="font-extrabold text-lg text-[#0a0f2e]">{p.title}</h3>
+                    <h3 className="font-extrabold text-lg text-neutral-950">{p.title}</h3>
                   </div>
 
                   <p className="text-sm text-slate-700 leading-relaxed mb-4">{p.why}</p>
@@ -88,7 +88,7 @@ export default function PlanoPracticeDemand() {
                 <div>
                   <Link
                     href={p.link}
-                    className="text-xs font-bold text-[#534AB7] hover:text-[#3C3489] inline-flex items-center gap-1.5"
+                    className="text-xs font-bold text-neutral-900 hover:text-neutral-950 inline-flex items-center gap-1.5"
                   >
                     View practice SEO strategy <ArrowRight className="w-3.5 h-3.5" />
                   </Link>

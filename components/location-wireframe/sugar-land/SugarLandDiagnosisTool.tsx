@@ -118,12 +118,12 @@ export default function SugarLandDiagnosisTool() {
     <section id="diagnosis-tool" className="py-20 bg-slate-50 border-b border-slate-200 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Fort Bend Practice Audit Engine</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
-            Diagnose Your Sugar Land Law Firm&apos;s Search Bottlenecks
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
+            Sugar Land Law Firm SEO Diagnosis
           </h2>
           <p className="text-slate-600 text-base sm:text-lg">
             Select common Fort Bend legal challenges or enter your specific situation below. Our system will analyze your firm against Galleria and downtown Houston competitors.
@@ -147,7 +147,7 @@ export default function SugarLandDiagnosisTool() {
                     onClick={() => toggleChip(chip)}
                     className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all border cursor-pointer ${
                       isSelected
-                        ? "bg-[#534AB7] text-white border-[#534AB7] shadow-sm"
+                        ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
                         : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:border-slate-300"
                     }`}
                   >
@@ -168,13 +168,13 @@ export default function SugarLandDiagnosisTool() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="e.g. Houston firms outbid us on PPC and take First Colony high-asset divorce clients..."
-                  className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] text-sm sm:text-base bg-slate-50/50"
+                  className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 text-sm sm:text-base bg-slate-50/50"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isLoading || (!query.trim() && selectedChips.length === 0)}
-                className="px-7 py-4 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-sm sm:text-base shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="px-7 py-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-sm sm:text-base shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isLoading ? (
                   <>
@@ -183,7 +183,7 @@ export default function SugarLandDiagnosisTool() {
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-5 h-5 text-emerald-400" />
+                    <Sparkles className="w-5 h-5 text-slate-400" />
                     <span>Run Live Diagnosis</span>
                   </>
                 )}
@@ -192,7 +192,7 @@ export default function SugarLandDiagnosisTool() {
           </form>
 
           <p className="text-xs text-slate-500 text-center sm:text-left flex items-center gap-1.5 justify-center sm:justify-start">
-            <ShieldCheck className="w-4 h-4 text-[#1a7d59]" />
+            <ShieldCheck className="w-4 h-4 text-neutral-800" />
             <span>Calibrated for Sugar Land, First Colony, Missouri City, and Richmond legal demand</span>
           </p>
         </div>
@@ -202,14 +202,14 @@ export default function SugarLandDiagnosisTool() {
           <div className="mb-16 space-y-6 animate-in fade-in duration-500">
             <div className="flex items-center justify-between flex-wrap gap-3 pb-2 border-b border-slate-200">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-[#1a7d59]" />
-                <h3 className="font-extrabold text-xl text-[#0a0f2e]">
+                <CheckCircle2 className="w-5 h-5 text-neutral-800" />
+                <h3 className="font-extrabold text-xl text-neutral-950">
                   Sugar Land Jurisdictional Audit Findings
                 </h3>
               </div>
               {isAiGenerated && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 text-neutral-800 text-xs font-bold border border-slate-200">
+                  <Sparkles className="w-3.5 h-3.5 text-neutral-800" />
                   Gemini AI Live Analysis
                 </span>
               )}
@@ -220,13 +220,13 @@ export default function SugarLandDiagnosisTool() {
               {diagnostics.map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm space-y-4 hover:border-indigo-300 transition-colors"
+                  className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm space-y-4 hover:border-slate-300 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <h4 className="font-extrabold text-base sm:text-lg text-[#0a0f2e]">
+                    <h4 className="font-extrabold text-base sm:text-lg text-neutral-950">
                       {item.n}
                     </h4>
-                    <span className="px-2.5 py-1 rounded-lg bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold shrink-0">
+                    <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-neutral-900 text-xs font-bold shrink-0">
                       Issue #{idx + 1}
                     </span>
                   </div>
@@ -240,7 +240,7 @@ export default function SugarLandDiagnosisTool() {
                     </div>
 
                     <div className="pt-2 border-t border-slate-100">
-                      <div className="font-bold text-[#1a7d59] uppercase tracking-wider text-[11px] mb-1">
+                      <div className="font-bold text-neutral-800 uppercase tracking-wider text-[11px] mb-1">
                         SearchPrex Strategic Fix:
                       </div>
                       <p className="text-slate-800 font-medium leading-relaxed">
@@ -263,13 +263,13 @@ export default function SugarLandDiagnosisTool() {
 
             {/* Executive Recommendation from Mubashar Sharif */}
             {recommendation && (
-              <div className="rounded-2xl bg-[#EEEDFE]/40 border border-[#534AB7]/30 p-6 sm:p-7">
+              <div className="rounded-2xl bg-slate-100 border border-slate-300 p-6 sm:p-7">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#534AB7] text-white flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
+                  <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
                     MS
                   </div>
                   <div className="space-y-1">
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Executive Recommendation from Mubashar Sharif
                     </div>
                     <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
@@ -283,10 +283,10 @@ export default function SugarLandDiagnosisTool() {
         )}
 
         {/* Lead Magnet / Sugar Land Rescue Plan Form */}
-        <div id="rescue-form" className="bg-gradient-to-br from-[#0a0f2e] via-slate-900 to-[#1e1b4b] rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden scroll-mt-24">
+        <div id="rescue-form" className="bg-neutral-900 via-slate-900 to-[#1e1b4b] rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden scroll-mt-24">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider border border-emerald-500/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-700/10 text-slate-400 text-xs font-bold uppercase tracking-wider border border-neutral-700/20">
                 <Building2 className="w-3.5 h-3.5" />
                 <span>Free for Sugar Land Firms · 24-Hour Delivery</span>
               </div>
@@ -298,15 +298,15 @@ export default function SugarLandDiagnosisTool() {
               </p>
               <div className="space-y-2 pt-2 text-xs sm:text-sm text-slate-300">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-slate-400 shrink-0" />
                   <span>Your Map Pack geo-radius drop-off points</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-slate-400 shrink-0" />
                   <span>Where Houston firms beat you, and the exact content gaps</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-slate-400 shrink-0" />
                   <span>A step-by-step roadmap sized to your caseload goals</span>
                 </div>
               </div>
@@ -326,7 +326,7 @@ export default function SugarLandDiagnosisTool() {
                         value={leadUrl}
                         onChange={(e) => setLeadUrl(e.target.value)}
                         placeholder="e.g. sugarlandlegal.com"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50"
                       />
                     </div>
 
@@ -341,7 +341,7 @@ export default function SugarLandDiagnosisTool() {
                           value={leadEmail}
                           onChange={(e) => setLeadEmail(e.target.value)}
                           placeholder="partner@sugarlandlegal.com"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50"
                         />
                       </div>
                       <div>
@@ -353,7 +353,7 @@ export default function SugarLandDiagnosisTool() {
                           value={leadPhone}
                           onChange={(e) => setLeadPhone(e.target.value)}
                           placeholder="(281) 555-0188"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50"
                         />
                       </div>
                     </div>
@@ -365,7 +365,7 @@ export default function SugarLandDiagnosisTool() {
                       <select
                         value={leadPractice}
                         onChange={(e) => setLeadPractice(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50 text-slate-800"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50 text-slate-800"
                       >
                         <option>High-Asset Family Law &amp; Divorce</option>
                         <option>Estate Planning &amp; Probate</option>
@@ -378,7 +378,7 @@ export default function SugarLandDiagnosisTool() {
                     <button
                       type="submit"
                       disabled={isSubmittingLead}
-                      className="w-full py-4 px-6 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-sm sm:text-base shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                      className="w-full py-4 px-6 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-sm sm:text-base shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer"
                     >
                       <span>
                         {isSubmittingLead ? "Analyzing Site..." : "Send My Free Fort Bend Rescue Plan"}
@@ -392,10 +392,10 @@ export default function SugarLandDiagnosisTool() {
                   </form>
                 ) : (
                   <div className="py-8 text-center space-y-3">
-                    <div className="w-14 h-14 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] mx-auto flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-slate-100 text-neutral-800 mx-auto flex items-center justify-center">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h4 className="text-xl font-extrabold text-[#0a0f2e]">
+                    <h4 className="text-xl font-extrabold text-neutral-950">
                       Rescue Plan Request Received
                     </h4>
                     <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto">
@@ -403,7 +403,7 @@ export default function SugarLandDiagnosisTool() {
                     </p>
                     <button
                       onClick={() => setLeadSubmitted(false)}
-                      className="text-xs text-[#534AB7] font-bold hover:underline pt-2"
+                      className="text-xs text-neutral-900 font-bold hover:underline pt-2"
                     >
                       Audit another website
                     </button>

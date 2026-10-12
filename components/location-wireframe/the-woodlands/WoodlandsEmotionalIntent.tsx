@@ -60,8 +60,8 @@ export default function WoodlandsEmotionalIntent() {
   return (
     <section id="emotional-intent" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto bg-white rounded-3xl border border-slate-200/90 shadow-sm my-10">
       <div className="max-w-3xl mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-          <HeartHandshake className="w-3.5 h-3.5 text-[#534AB7]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+          <HeartHandshake className="w-3.5 h-3.5 text-neutral-900" />
           Empathetic Search Psychology
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
@@ -82,7 +82,7 @@ export default function WoodlandsEmotionalIntent() {
               onClick={() => setActiveTab(idx)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 border ${
                 isActive
-                  ? 'bg-[#534AB7] text-white border-indigo-600 shadow-md shadow-indigo-900/20'
+                  ? 'bg-neutral-900 text-white border-neutral-800 shadow-md shadow-neutral-900/20'
                   : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
@@ -115,7 +115,7 @@ export default function WoodlandsEmotionalIntent() {
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
               What They Quietly Search
             </span>
-            <div className="text-xs font-mono text-[#3C3489] mt-2 leading-relaxed bg-indigo-50/70 p-2.5 rounded-lg border border-indigo-100">
+            <div className="text-xs font-mono text-neutral-900 mt-2 leading-relaxed bg-slate-50/70 p-2.5 rounded-lg border border-slate-100">
               {current.search}
             </div>
           </div>
@@ -140,9 +140,9 @@ export default function WoodlandsEmotionalIntent() {
         </div>
 
         {/* Card 4: Our Tone & Strategy */}
-        <div className="rounded-2xl bg-gradient-to-br from-[#0a0f2e] to-[#10194a] text-white p-5 space-y-2 flex flex-col justify-between shadow-md">
+        <div className="rounded-2xl bg-neutral-900 to-[#1e293b] text-white p-5 space-y-2 flex flex-col justify-between shadow-md">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-300">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
               SearchPrex Editorial Tone
             </span>
             <div className="text-sm font-semibold text-white mt-2 leading-snug">
@@ -152,10 +152,10 @@ export default function WoodlandsEmotionalIntent() {
               We eliminate loud billboard slogans in favor of dignified authority that converts executive clients.
             </p>
           </div>
-          <div className="pt-3 border-t border-indigo-900/70">
+          <div className="pt-3 border-t border-neutral-900/70">
             <Link
               href={current.linkHref}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-300 hover:text-white"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white"
             >
               <span>{current.linkText}</span>
               <ArrowRight className="w-3.5 h-3.5" />

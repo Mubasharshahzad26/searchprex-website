@@ -65,8 +65,8 @@ export default function WoodlandsProcessSteps() {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div className="max-w-3xl mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-          <Award className="w-3.5 h-3.5 text-[#534AB7]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+          <Award className="w-3.5 h-3.5 text-neutral-900" />
           Structured Three-Phase Methodology
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
@@ -87,17 +87,17 @@ export default function WoodlandsProcessSteps() {
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-black text-[#534AB7]/30 group-hover:text-[#534AB7] transition-colors">
+                  <span className="text-2xl font-black text-neutral-900/30 group-hover:text-neutral-900 transition-colors">
                     {st.step}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-[#534AB7] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 text-neutral-900 flex items-center justify-center">
                     <Icon className="w-5 h-5" />
                   </div>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-900">{st.title}</h3>
-                  <div className="text-xs font-semibold text-indigo-700 mt-0.5">{st.subtitle}</div>
+                  <div className="text-xs font-semibold text-neutral-800 mt-0.5">{st.subtitle}</div>
                 </div>
 
                 <p className="text-xs text-slate-600 leading-relaxed">
@@ -107,7 +107,7 @@ export default function WoodlandsProcessSteps() {
                 <div className="pt-2 border-t border-slate-100 space-y-2">
                   {st.features.map((feat, fIdx) => (
                     <div key={fIdx} className="flex items-start gap-2 text-xs text-slate-700">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-800 shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -119,7 +119,7 @@ export default function WoodlandsProcessSteps() {
                   <Link
                     key={lIdx}
                     href={link.href}
-                    className="flex items-center justify-between text-xs font-semibold text-slate-700 hover:text-[#534AB7] transition-colors p-2 rounded-lg hover:bg-indigo-50/50"
+                    className="flex items-center justify-between text-xs font-semibold text-slate-700 hover:text-neutral-900 transition-colors p-2 rounded-lg hover:bg-slate-50/50"
                   >
                     <span>{link.label}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400" />

@@ -65,11 +65,11 @@ export default function PhiladelphiaNearbySubmarkets() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Compass className="h-4 w-4" />
             <span>Regional Tri-County Expansion</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Law Firm SEO Near Philadelphia: Upper Darby, King of Prussia, Bensalem & Conshohocken
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -87,7 +87,7 @@ export default function PhiladelphiaNearbySubmarkets() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`rounded-2xl px-5 py-3 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-102"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-102"
                     : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
                 }`}
               >
@@ -102,10 +102,10 @@ export default function PhiladelphiaNearbySubmarkets() {
           
           {/* 1. County and Venue */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
               County & Court Venue
             </span>
-            <h4 className="text-base font-bold text-[#0a0f2e]">
+            <h4 className="text-base font-bold text-neutral-950">
               {current.name}
             </h4>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -115,7 +115,7 @@ export default function PhiladelphiaNearbySubmarkets() {
 
           {/* 2. Local Intent */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 shadow-xs space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block">
               Search Intent Profile
             </span>
             <p className="text-sm text-slate-700 leading-relaxed">
@@ -138,12 +138,12 @@ export default function PhiladelphiaNearbySubmarkets() {
           </div>
 
           {/* 4. Linked Practice Silo */}
-          <div className="rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 via-white to-white p-6 shadow-md flex flex-col justify-between">
+          <div className="rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-slate-50 via-white to-white p-6 shadow-md flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
                 Target Silo Architecture
               </span>
-              <p className="text-sm font-bold text-[#0a0f2e]">
+              <p className="text-sm font-bold text-neutral-950">
                 Connected Practice Hub:
               </p>
               <p className="mt-1 text-sm text-slate-600">
@@ -151,10 +151,10 @@ export default function PhiladelphiaNearbySubmarkets() {
               </p>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-[#534AB7]/20">
+            <div className="mt-4 pt-4 border-t border-slate-300">
               <Link
                 href={current.href}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 hover:underline"
               >
                 <span>Explore Practice Silo</span>
                 <ArrowRight className="h-3.5 w-3.5" />

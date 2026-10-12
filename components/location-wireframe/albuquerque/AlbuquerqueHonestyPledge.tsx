@@ -23,11 +23,11 @@ export default function AlbuquerqueHonestyPledge() {
   ];
 
   return (
-    <section className="py-20 bg-[#0a0f2e] text-white border-b border-slate-800">
+    <section className="py-20 bg-neutral-900 text-white border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/20 text-[#EEEDFE] text-xs font-bold uppercase tracking-wider mb-3">
-            <Handshake className="w-3.5 h-3.5 text-[#EEEDFE]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-700/10 border border-slate-400/20 text-slate-200 text-xs font-bold uppercase tracking-wider mb-3">
+            <Handshake className="w-3.5 h-3.5 text-slate-200" />
             <span>Our Honesty Pledge</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
@@ -42,10 +42,10 @@ export default function AlbuquerqueHonestyPledge() {
           {pillars.map((pillar, idx) => (
             <div
               key={idx}
-              className="p-7 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-[#534AB7]/50 transition-all flex flex-col justify-between"
+              className="p-7 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-slate-300 transition-all flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-bold text-[#EEEDFE] uppercase tracking-wider bg-[#534AB7]/20 px-2.5 py-1 rounded-md inline-block mb-4">
+                <span className="text-xs font-bold text-slate-200 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-md inline-block mb-4">
                   {pillar.highlight}
                 </span>
                 <h3 className="text-xl font-bold text-white mb-3">
@@ -56,8 +56,8 @@ export default function AlbuquerqueHonestyPledge() {
                 </p>
               </div>
 
-              <div className="pt-5 border-t border-slate-800/80 flex items-center gap-2 text-xs text-emerald-400 mt-6 font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-[#1a7d59]" />
+              <div className="pt-5 border-t border-slate-800/80 flex items-center gap-2 text-xs text-slate-400 mt-6 font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-neutral-800" />
                 <span>Verified in Client Agreement</span>
               </div>
             </div>

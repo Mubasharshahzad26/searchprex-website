@@ -57,12 +57,12 @@ export default function WoodlandsCountyCourts() {
   return (
     <section id="county-courts" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div className="space-y-4 mb-10 max-w-3xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100">
-          <Scale className="w-3.5 h-3.5 text-[#534AB7]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100">
+          <Scale className="w-3.5 h-3.5 text-neutral-900" />
           Courthouse Jurisdictions & Procedural Silos
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Which Court Hears a Case for Someone Who Lives in The Woodlands?
+          Montgomery & Harris County Court Venues
         </h2>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
           The Woodlands is not an incorporated municipality; it is a master-planned community divided across two distinct counties. When searchers look for an attorney, their legal procedural questions must point to the exact bench hearing their case.
@@ -79,15 +79,15 @@ export default function WoodlandsCountyCourts() {
               onClick={() => setSelectedCounty(idx)}
               className={`px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 border flex items-center gap-2.5 ${
                 isSelected
-                  ? 'bg-[#534AB7] text-white border-indigo-500 shadow-md shadow-indigo-900/20'
+                  ? 'bg-neutral-900 text-white border-neutral-700 shadow-md shadow-neutral-900/20'
                   : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
-              <MapPin className={`w-4 h-4 ${isSelected ? 'text-indigo-200' : 'text-slate-400'}`} />
+              <MapPin className={`w-4 h-4 ${isSelected ? 'text-slate-200' : 'text-slate-400'}`} />
               <span>{c.title}</span>
               <span
                 className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                  isSelected ? 'bg-indigo-700/60 text-indigo-100' : 'bg-slate-100 text-slate-500'
+                  isSelected ? 'bg-neutral-800/60 text-slate-100' : 'bg-slate-100 text-slate-500'
                 }`}
               >
                 {c.tag}
@@ -103,12 +103,12 @@ export default function WoodlandsCountyCourts() {
         <div className="lg:col-span-8 rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-6">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div>
-              <span className="text-xs font-bold tracking-wider uppercase text-indigo-700">
+              <span className="text-xs font-bold tracking-wider uppercase text-neutral-800">
                 {current.badge}
               </span>
               <h3 className="text-2xl font-bold text-slate-900 mt-1">{current.title}</h3>
             </div>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-200">
               Verified Texas Estates & Family Code
             </span>
           </div>
@@ -127,7 +127,7 @@ export default function WoodlandsCountyCourts() {
                   key={dIdx}
                   className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700 leading-relaxed flex items-start gap-2"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span>{detail}</span>
                 </div>
               ))}
@@ -143,7 +143,7 @@ export default function WoodlandsCountyCourts() {
               {current.sampleSearches.map((s, sIdx) => (
                 <span
                   key={sIdx}
-                  className="px-3 py-1 rounded-lg text-xs font-mono bg-indigo-50/70 text-[#3C3489] border border-indigo-100"
+                  className="px-3 py-1 rounded-lg text-xs font-mono bg-slate-50/70 text-neutral-900 border border-slate-100"
                 >
                   {s}
                 </span>
@@ -154,7 +154,7 @@ export default function WoodlandsCountyCourts() {
           <div className="pt-2 flex items-center justify-between">
             <Link
               href={current.linkHref}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#534AB7] hover:text-[#3C3489] group"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 hover:text-neutral-950 group"
             >
               <span>{current.linkText}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -163,15 +163,15 @@ export default function WoodlandsCountyCourts() {
         </div>
 
         {/* Right Side: Map & Jurisdiction Boundary Graphic */}
-        <div className="lg:col-span-4 rounded-2xl bg-gradient-to-br from-slate-900 to-[#10194a] text-white p-6 shadow-md flex flex-col justify-between">
+        <div className="lg:col-span-4 rounded-2xl bg-gradient-to-br from-slate-900 to-[#1e293b] text-white p-6 shadow-md flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Scale className="w-5 h-5 text-indigo-300" />
+              <Scale className="w-5 h-5 text-slate-300" />
               <h4 className="font-bold text-base text-white">Jurisdictional Boundary Map</h4>
             </div>
 
             {/* SVG Visualizing Montgomery & Harris split */}
-            <div className="w-full h-48 rounded-xl bg-slate-800/80 border border-indigo-900/50 p-2 relative overflow-hidden mb-4 flex items-center justify-center">
+            <div className="w-full h-48 rounded-xl bg-slate-800/80 border border-neutral-900/50 p-2 relative overflow-hidden mb-4 flex items-center justify-center">
               <svg viewBox="0 0 260 160" className="w-full h-full">
                 {/* Montgomery County Region (Top 75%) */}
                 <rect
@@ -180,7 +180,7 @@ export default function WoodlandsCountyCourts() {
                   width="240"
                   height="100"
                   rx="8"
-                  className={selectedCounty === 0 ? 'fill-indigo-600/40 stroke-indigo-400 stroke-2' : 'fill-slate-800 stroke-slate-700 stroke-1'}
+                  className={selectedCounty === 0 ? 'fill-neutral-800/40 stroke-slate-400 stroke-2' : 'fill-slate-800 stroke-slate-700 stroke-1'}
                 />
                 <text x="30" y="35" className="fill-white text-[11px] font-bold">
                   Montgomery County (90%)
@@ -188,13 +188,13 @@ export default function WoodlandsCountyCourts() {
                 <text x="30" y="52" className="fill-slate-300 text-[9px]">
                   Courthouse: Conroe, TX
                 </text>
-                <text x="30" y="68" className="fill-indigo-200 text-[8px]">
+                <text x="30" y="68" className="fill-slate-200 text-[8px]">
                   Alden Bridge, Sterling Ridge, Panther Creek
                 </text>
 
                 {/* Spring Creek Dividing Line */}
                 <line x1="10" y1="110" x2="250" y2="110" stroke="#818cf8" strokeDasharray="3 3" strokeWidth="1.5" />
-                <text x="170" y="106" className="fill-indigo-300 text-[8px] font-medium">
+                <text x="170" y="106" className="fill-slate-300 text-[8px] font-medium">
                   Spring Creek
                 </text>
 
@@ -205,7 +205,7 @@ export default function WoodlandsCountyCourts() {
                   width="240"
                   height="36"
                   rx="6"
-                  className={selectedCounty === 1 ? 'fill-emerald-600/40 stroke-emerald-400 stroke-2' : 'fill-slate-800 stroke-slate-700 stroke-1'}
+                  className={selectedCounty === 1 ? 'fill-neutral-800/40 stroke-slate-400 stroke-2' : 'fill-slate-800 stroke-slate-700 stroke-1'}
                 />
                 <text x="30" y="132" className="fill-white text-[10px] font-bold">
                   Harris County (~10%)
@@ -223,7 +223,7 @@ export default function WoodlandsCountyCourts() {
 
           <div className="pt-4 border-t border-slate-800 mt-4 text-[11px] text-slate-400 flex items-center justify-between">
             <span>Tex. Fam. Code § 6.301</span>
-            <span className="text-emerald-400 font-medium">Verified Texas Protocol</span>
+            <span className="text-slate-400 font-medium">Verified Texas Protocol</span>
           </div>
         </div>
       </div>

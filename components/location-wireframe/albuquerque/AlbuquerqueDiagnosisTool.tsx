@@ -127,11 +127,11 @@ export default function AlbuquerqueDiagnosisTool() {
     <section id="diagnosis-tool" className="py-16 bg-slate-50 border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Interactive Diagnostic Engine · Gemini AI Powered</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Diagnose Your Albuquerque Law Firm&apos;s Organic Stagnation
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -150,13 +150,13 @@ export default function AlbuquerqueDiagnosisTool() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="e.g., We get zero DWI calls from Rio Rancho, or our Spanish intake is nonexistent..."
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#534AB7] focus:bg-white transition-all"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:bg-white transition-all"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-sm sm:text-base transition-all disabled:opacity-60 shadow-md shadow-[#534AB7]/20 shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm sm:text-base transition-all disabled:opacity-60 shadow-md shadow-sm shrink-0"
               >
                 {isLoading ? (
                   <>
@@ -176,7 +176,7 @@ export default function AlbuquerqueDiagnosisTool() {
           {/* Issue Chips */}
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-1.5">
-              <HelpCircle className="w-3.5 h-3.5 text-[#534AB7]" />
+              <HelpCircle className="w-3.5 h-3.5 text-neutral-900" />
               <span>Or select local symptoms you are currently experiencing:</span>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -189,7 +189,7 @@ export default function AlbuquerqueDiagnosisTool() {
                     onClick={() => toggleChip(chip)}
                     className={`text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-lg border transition-all ${
                       isSelected
-                        ? "bg-[#534AB7] text-white border-[#534AB7] shadow-xs"
+                        ? "bg-neutral-900 text-white border-neutral-900 shadow-xs"
                         : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:border-slate-300"
                     }`}
                   >
@@ -204,18 +204,18 @@ export default function AlbuquerqueDiagnosisTool() {
         {/* Diagnosis Results Card */}
         {hasDiagnosed && (
           <div className="space-y-6 animate-in fade-in-50 duration-300">
-            <div className="bg-white rounded-2xl border border-indigo-100 p-6 sm:p-8 shadow-sm">
+            <div className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-sm">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                 <div>
-                  <span className="text-xs font-bold text-[#534AB7] uppercase tracking-wider">
+                  <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider">
                     Diagnostic Findings
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0a0f2e]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-950">
                     Albuquerque Legal Market Analysis
                   </h3>
                 </div>
                 {isAiGenerated && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold">
                     <Sparkles className="w-3.5 h-3.5" />
                     Gemini API Synthesis Verified
                   </span>
@@ -227,24 +227,24 @@ export default function AlbuquerqueDiagnosisTool() {
                 {diagnostics.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-xl bg-slate-50 border border-slate-200 hover:border-[#534AB7]/40 transition-all flex flex-col justify-between"
+                    className="p-5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center gap-2 mb-2">
-                        <AlertCircle className="w-4 h-4 text-[#534AB7] shrink-0" />
-                        <h4 className="font-bold text-[#0a0f2e] text-base">{item.n}</h4>
+                        <AlertCircle className="w-4 h-4 text-neutral-900 shrink-0" />
+                        <h4 className="font-bold text-neutral-950 text-base">{item.n}</h4>
                       </div>
                       <p className="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">
                         <strong className="text-slate-800">Why in Albuquerque:</strong> {item.why}
                       </p>
                       <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                        <strong className="text-[#1a7d59]">Strategic Fix:</strong> {item.fix}
+                        <strong className="text-neutral-800">Strategic Fix:</strong> {item.fix}
                       </p>
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500 font-medium">
                       <span>Tool: {item.tool}</span>
-                      <span className="text-[#534AB7] font-semibold">Included in Retainer</span>
+                      <span className="text-neutral-900 font-semibold">Included in Retainer</span>
                     </div>
                   </div>
                 ))}
@@ -252,13 +252,13 @@ export default function AlbuquerqueDiagnosisTool() {
 
               {/* Executive Recommendation from Founder */}
               {recommendation && (
-                <div className="p-5 rounded-xl bg-gradient-to-r from-indigo-50/80 via-white to-slate-50 border border-indigo-200 mb-8">
+                <div className="p-5 rounded-xl bg-gradient-to-r from-slate-50/80 via-white to-slate-50 border border-slate-200 mb-8">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#534AB7] text-white flex items-center justify-center shrink-0 font-bold text-xs">
+                    <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center shrink-0 font-bold text-xs">
                       MS
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-[#534AB7] uppercase tracking-wider mb-1">
+                      <div className="text-xs font-bold text-neutral-900 uppercase tracking-wider mb-1">
                         Executive Recommendation · Mubashar Sharif, CEO
                       </div>
                       <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
@@ -270,10 +270,10 @@ export default function AlbuquerqueDiagnosisTool() {
               )}
 
               {/* Lead Magnet: Claim Free Reality Check Form */}
-              <div id="reality-check" className="bg-[#0a0f2e] text-white rounded-xl p-6 sm:p-8">
+              <div id="reality-check" className="bg-neutral-900 text-white rounded-xl p-6 sm:p-8">
                 {leadSubmitted ? (
                   <div className="text-center py-6">
-                    <div className="w-12 h-12 rounded-full bg-[#1a7d59]/20 border border-[#1a7d59] text-emerald-400 flex items-center justify-center mx-auto mb-3">
+                    <div className="w-12 h-12 rounded-full bg-slate-100 border border-slate-300 text-slate-400 flex items-center justify-center mx-auto mb-3">
                       <CheckCircle2 className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl font-bold mb-2">Reality Check Request Received</h4>
@@ -284,7 +284,7 @@ export default function AlbuquerqueDiagnosisTool() {
                 ) : (
                   <div>
                     <div className="max-w-2xl mb-6">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#EEEDFE]">
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
                         Free · No Pressure · Confidential
                       </span>
                       <h4 className="text-xl sm:text-2xl font-extrabold text-white mt-1 mb-2">
@@ -302,7 +302,7 @@ export default function AlbuquerqueDiagnosisTool() {
                         value={leadUrl}
                         onChange={(e) => setLeadUrl(e.target.value)}
                         placeholder="Firm Website (e.g., yourfirm.com)"
-                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#534AB7]"
+                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-neutral-900"
                       />
                       <input
                         type="email"
@@ -310,12 +310,12 @@ export default function AlbuquerqueDiagnosisTool() {
                         value={leadEmail}
                         onChange={(e) => setLeadEmail(e.target.value)}
                         placeholder="Your Direct Email"
-                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#534AB7]"
+                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-neutral-900"
                       />
                       <select
                         value={leadPractice}
                         onChange={(e) => setLeadPractice(e.target.value)}
-                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-[#534AB7]"
+                        className="px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:border-neutral-900"
                       >
                         <option value="Personal Injury">Personal Injury</option>
                         <option value="DWI Defense">DWI Defense</option>
@@ -326,7 +326,7 @@ export default function AlbuquerqueDiagnosisTool() {
                       <button
                         type="submit"
                         disabled={isSubmittingLead}
-                        className="px-5 py-3 rounded-lg bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 disabled:opacity-60"
+                        className="px-5 py-3 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 disabled:opacity-60"
                       >
                         {isSubmittingLead ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -339,7 +339,7 @@ export default function AlbuquerqueDiagnosisTool() {
                       </button>
                     </form>
                     <div className="mt-3 flex items-center gap-2 text-[11px] text-slate-400">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#1a7d59]" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-neutral-800" />
                       <span>100% Confidential. Never shared with other Albuquerque firms.</span>
                     </div>
                   </div>

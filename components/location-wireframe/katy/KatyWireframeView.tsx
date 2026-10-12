@@ -23,7 +23,7 @@ interface KatyWireframeViewProps {
 
 export default function KatyWireframeView({ page }: KatyWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero with Crossroads Typography & I-10 / SH 99 Highway Crossroads SVG */}
       <KatyHero page={page} />
 

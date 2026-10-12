@@ -46,11 +46,11 @@ export default function PlanoFaqAndCta() {
     <section className="py-16 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 text-[#534AB7] border border-indigo-100 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
             <HelpCircle className="w-3.5 h-3.5" />
             Frequently Asked Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             Plano Law Firm SEO: Common Questions
           </h2>
           <p className="mt-3 text-base text-slate-600">
@@ -70,12 +70,12 @@ export default function PlanoFaqAndCta() {
                 <button
                   type="button"
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-[#0a0f2e] hover:text-[#534AB7] transition-colors"
+                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-neutral-950 hover:text-neutral-900 transition-colors"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-[#534AB7]' : ''
+                      isOpen ? 'rotate-180 text-neutral-900' : ''
                     }`}
                   />
                 </button>
@@ -90,11 +90,11 @@ export default function PlanoFaqAndCta() {
         </div>
 
         {/* Final CTA Box */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#0a0f2e] via-[#10194a] to-[#0a0f2e] text-white border border-indigo-900 shadow-2xl relative overflow-hidden text-center sm:text-left">
+        <div className="p-8 sm:p-12 rounded-3xl bg-neutral-900 via-neutral-900 to-neutral-900 text-white border border-neutral-900 shadow-2xl relative overflow-hidden text-center sm:text-left">
           <div className="grid sm:grid-cols-12 gap-8 items-center">
             <div className="sm:col-span-8 space-y-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-700/10 text-slate-300 border border-neutral-700/20">
+                <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
                 Zero Conflict · 1 Firm Per Practice Area
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
@@ -107,9 +107,9 @@ export default function PlanoFaqAndCta() {
             <div className="sm:col-span-4 flex flex-col gap-3 justify-center sm:justify-end">
               <a
                 href="#reality-check-form"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-bold text-white bg-[#534AB7] hover:bg-[#3C3489] transition shadow-lg shadow-indigo-950/50 text-center"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-bold text-white bg-neutral-900 hover:bg-neutral-800 transition shadow-lg shadow-neutral-950/50 text-center"
               >
-                <Sparkles className="w-4 h-4 text-indigo-200" />
+                <Sparkles className="w-4 h-4 text-slate-200" />
                 Get Free Reality Check
               </a>
               <Link

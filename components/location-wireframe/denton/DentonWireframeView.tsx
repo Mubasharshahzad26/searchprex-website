@@ -25,7 +25,7 @@ interface DentonWireframeViewProps {
 
 export default function DentonWireframeView({ page }: DentonWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero with Denton Courthouse-on-the-Square Sunrise SVG & Direct Trust Chips */}
       <DentonHero page={page} />
 

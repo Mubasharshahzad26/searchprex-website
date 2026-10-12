@@ -23,7 +23,7 @@ export default function ScottsdaleFounderBio() {
                 />
               </div>
               <h3 className="text-xl font-bold text-slate-900">Mubashar Sharif</h3>
-              <p className="text-xs font-semibold text-[#4338ca] uppercase tracking-wider mt-0.5">
+              <p className="text-xs font-semibold text-neutral-950 uppercase tracking-wider mt-0.5">
                 Technical Director & Founder
               </p>
               <p className="text-xs text-slate-500 mt-1">SearchPrex Legal Search Practice</p>

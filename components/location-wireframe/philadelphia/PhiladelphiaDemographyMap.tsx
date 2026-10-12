@@ -54,11 +54,11 @@ export default function PhiladelphiaDemographyMap() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Landmark className="h-4 w-4" />
             <span>Philadelphia Demography & Geo-Targeting</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Philadelphia Legal Geography: Proximity, Courthouses & Case Density
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -70,10 +70,10 @@ export default function PhiladelphiaDemographyMap() {
         <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-              <Users className="h-4 w-4 text-[#534AB7]" />
+              <Users className="h-4 w-4 text-neutral-900" />
               <span>County Population</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] font-mono">
+            <div className="text-2xl sm:text-3xl font-extrabold text-neutral-950 font-mono">
               1,570,000+
             </div>
             <p className="text-xs text-slate-500">6.2M+ in Greater Philadelphia Metro</p>
@@ -81,10 +81,10 @@ export default function PhiladelphiaDemographyMap() {
 
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-              <Landmark className="h-4 w-4 text-[#534AB7]" />
+              <Landmark className="h-4 w-4 text-neutral-900" />
               <span>Legal Establishments</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] font-mono">
+            <div className="text-2xl sm:text-3xl font-extrabold text-neutral-950 font-mono">
               3,400+
             </div>
             <p className="text-xs text-slate-500">Fierce competition for vanity search</p>
@@ -92,10 +92,10 @@ export default function PhiladelphiaDemographyMap() {
 
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-              <TrendingUp className="h-4 w-4 text-[#1a7d59]" />
+              <TrendingUp className="h-4 w-4 text-neutral-800" />
               <span>Complex Litigation</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] font-mono">
+            <div className="text-2xl sm:text-3xl font-extrabold text-neutral-950 font-mono">
               Top 5 US
             </div>
             <p className="text-xs text-slate-500">National mass tort magnet</p>
@@ -103,10 +103,10 @@ export default function PhiladelphiaDemographyMap() {
 
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-              <Navigation className="h-4 w-4 text-[#534AB7]" />
+              <Navigation className="h-4 w-4 text-neutral-900" />
               <span>Map Proximity Radius</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] font-mono">
+            <div className="text-2xl sm:text-3xl font-extrabold text-neutral-950 font-mono">
               1.8 Miles
             </div>
             <p className="text-xs text-slate-500">Requires dedicated neighborhood silos</p>
@@ -125,7 +125,7 @@ export default function PhiladelphiaDemographyMap() {
                   onClick={() => setActiveZoneIdx(idx)}
                   className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-[#534AB7] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
                   }`}
                 >
@@ -140,10 +140,10 @@ export default function PhiladelphiaDemographyMap() {
             <div className="lg:col-span-5 p-6 sm:p-8 space-y-5 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200">
               <div className="space-y-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                     Selected Legal Jurisdiction
                   </span>
-                  <h3 className="text-2xl font-extrabold text-[#0a0f2e] mt-1">
+                  <h3 className="text-2xl font-extrabold text-neutral-950 mt-1">
                     {current.name}
                   </h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">
@@ -152,7 +152,7 @@ export default function PhiladelphiaDemographyMap() {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                  <MapPin className="h-4 w-4 text-[#534AB7] shrink-0" />
+                  <MapPin className="h-4 w-4 text-neutral-900 shrink-0" />
                   <span className="font-semibold">{current.address}</span>
                 </div>
 
@@ -168,9 +168,9 @@ export default function PhiladelphiaDemographyMap() {
                     {current.keyCourts.map((court, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-indigo-50/40 px-3 py-1.5 rounded-lg border border-indigo-100"
+                        className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50/40 px-3 py-1.5 rounded-lg border border-slate-100"
                       >
-                        <Landmark className="h-3.5 w-3.5 text-[#534AB7] shrink-0" />
+                        <Landmark className="h-3.5 w-3.5 text-neutral-900 shrink-0" />
                         <span>{court}</span>
                       </div>
                     ))}
@@ -181,7 +181,7 @@ export default function PhiladelphiaDemographyMap() {
               <div className="pt-4 border-t border-slate-100">
                 <Link
                   href="/services/local-seo"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#534AB7] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:underline"
                 >
                   <span>Explore Local SEO Architecture</span>
                   <ArrowRight className="h-3.5 w-3.5" />
@@ -207,7 +207,7 @@ export default function PhiladelphiaDemographyMap() {
 
         {/* Local Verified Photos Grid */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xs hover:border-[#534AB7]/40 hover:shadow-xl transition-all">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xs hover:border-slate-300 hover:shadow-xl transition-all">
             <div className="relative h-64 sm:h-72 w-full overflow-hidden">
               <Image
                 src="/images/locations/philadelphia-legal-district.webp"
@@ -215,9 +215,9 @@ export default function PhiladelphiaDemographyMap() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-200 block mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-200 block mb-1">
                   Judicial Hub
                 </span>
                 <h4 className="text-xl font-extrabold text-white">
@@ -232,7 +232,7 @@ export default function PhiladelphiaDemographyMap() {
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xs hover:border-[#534AB7]/40 hover:shadow-xl transition-all">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-xs hover:border-slate-300 hover:shadow-xl transition-all">
             <div className="relative h-64 sm:h-72 w-full overflow-hidden">
               <Image
                 src="/images/locations/philadelphia-law-consultation.webp"
@@ -240,9 +240,9 @@ export default function PhiladelphiaDemographyMap() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-200 block mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-200 block mb-1">
                   Client Intake
                 </span>
                 <h4 className="text-xl font-extrabold text-white">

@@ -72,8 +72,8 @@ export default function DetroitTechnologySlider({ page }: { page: CityPage }) {
           <circle cx="25" cy="15" r="4.5" fill="#16A34A" />
           <circle cx="15" cy="15" r="2.5" fill="white" />
           <circle cx="25" cy="15" r="2.5" fill="white" />
-          <circle cx="16" cy="14.5" r="1.2" fill="#0A0F2E" />
-          <circle cx="24" cy="14.5" r="1.2" fill="#0A0F2E" />
+          <circle cx="16" cy="14.5" r="1.2" fill="#0f172a" />
+          <circle cx="24" cy="14.5" r="1.2" fill="#0f172a" />
         </svg>
       ),
     },
@@ -108,10 +108,10 @@ export default function DetroitTechnologySlider({ page }: { page: CityPage }) {
       tag: "Proprietary Automation",
       svg: (
         <svg viewBox="0 0 40 40" className="h-7 w-7" fill="none">
-          <rect width="40" height="40" rx="10" fill="#534AB7" fillOpacity="0.25" />
-          <rect x="12" y="12" width="16" height="16" rx="4" stroke="#a594fd" strokeWidth="2" />
-          <circle cx="20" cy="20" r="3" fill="#3eb489" />
-          <path d="M20 8V12M20 28V32M8 20H12M28 20H32" stroke="#a594fd" strokeWidth="2" strokeLinecap="round" />
+          <rect width="40" height="40" rx="10" fill="#171717" fillOpacity="0.25" />
+          <rect x="12" y="12" width="16" height="16" rx="4" stroke="#cbd5e1" strokeWidth="2" />
+          <circle cx="20" cy="20" r="3" fill="#94a3b8" />
+          <path d="M20 8V12M20 28V32M8 20H12M28 20H32" stroke="#cbd5e1" strokeWidth="2" strokeLinecap="round" />
         </svg>
       ),
     },
@@ -177,17 +177,17 @@ export default function DetroitTechnologySlider({ page }: { page: CityPage }) {
   return (
     <section className="py-16 bg-[#070b24] text-white border-b border-slate-800 relative overflow-hidden">
       {/* Background radial glow */}
-      <div className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-56 w-[600px] rounded-full bg-[#534AB7]/25 blur-3xl" />
+      <div className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-56 w-[600px] rounded-full bg-slate-100 blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#a594fd] bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-300 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
             ENTERPRISE SEO INFRASTRUCTURE
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-            The Law Firm SEO Tech Stack Behind Our Detroit Rankings
+            Technology Stack Behind Our Rankings
           </h2>
           <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
             We use Semrush for competitive research, Google Search Console for real query data, Screaming Frog for technical crawls, BrightLocal for citations, Local Falcon for 7x7 geo-grid tracking, CallRail for call attribution, GA4 for conversions and our own NicheSEO PRO platform for indexing and AI citation monitoring.
@@ -218,13 +218,13 @@ export default function DetroitTechnologySlider({ page }: { page: CityPage }) {
             {[...marqueeLogos, ...marqueeLogos].map((tool, idx) => (
               <div
                 key={idx}
-                className="flex items-center gap-3.5 px-5 py-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 hover:border-[#534AB7]/80 transition-all shrink-0 cursor-default group shadow-sm"
+                className="flex items-center gap-3.5 px-5 py-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 hover:border-slate-300 transition-all shrink-0 cursor-default group shadow-sm"
               >
                 <div className="shrink-0 transition-transform group-hover:scale-110">
                   {tool.svg}
                 </div>
                 <div className="text-left">
-                  <span className="block text-sm font-bold text-white whitespace-nowrap group-hover:text-[#a594fd] transition-colors">
+                  <span className="block text-sm font-bold text-white whitespace-nowrap group-hover:text-slate-300 transition-colors">
                     {tool.name}
                   </span>
                   <span className="block text-[10px] uppercase font-semibold tracking-wider text-slate-400">
@@ -239,11 +239,11 @@ export default function DetroitTechnologySlider({ page }: { page: CityPage }) {
         {/* Bottom Sub-Caption */}
         <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 pt-2">
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#3eb489]" />
+            <span className="h-2 w-2 rounded-full bg-slate-300" />
             <span>Direct API integrations for sub-2h indexation</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#a594fd]" />
+            <span className="h-2 w-2 rounded-full bg-slate-200" />
             <span>Multi-channel call tracking with CallRail</span>
           </div>
           <div className="flex items-center gap-2">

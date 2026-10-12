@@ -4,7 +4,7 @@
 //
 // Matches Page 7:
 // 1. "COMPETITOR TEARDOWN (SAMPLE): See exactly why they outrank you" (Data comparison table)
-// 2. Dark card (#0a0f2e): "FREE AUDIT: Check where your firm ranks in Detroit" with instant submit form.
+// 2. Dark card (#0f172a): "FREE AUDIT: Check where your firm ranks in Detroit" with instant submit form.
 
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle2, ShieldAlert, BarChart3, AlertCircle } from "lucide-react";
@@ -68,7 +68,7 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">
               COMPETITOR TEARDOWN (SAMPLE)
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
               See exactly why they outrank you
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
@@ -83,7 +83,7 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
                   <th className="py-4 px-5 w-[28%] text-white">Metric</th>
                   <th className="py-4 px-5 w-[24%] text-slate-300">Your Firm</th>
                   <th className="py-4 px-5 w-[24%] text-white font-bold">Top Competitor</th>
-                  <th className="py-4 px-5 w-[24%] bg-[#534AB7] text-white font-black">
+                  <th className="py-4 px-5 w-[24%] bg-neutral-900 text-white font-black">
                     Competitive Gap
                   </th>
                 </tr>
@@ -94,16 +94,16 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
                     key={idx}
                     className={`transition-colors ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
                   >
-                    <td className="py-4 px-5 font-bold text-[#0a0f2e]">
+                    <td className="py-4 px-5 font-bold text-neutral-950">
                       {row.metric}
                     </td>
                     <td className="py-4 px-5 text-slate-600">
                       {row.yourFirm}
                     </td>
-                    <td className="py-4 px-5 font-semibold text-[#0a0f2e]">
+                    <td className="py-4 px-5 font-semibold text-neutral-950">
                       {row.competitor}
                     </td>
-                    <td className="py-4 px-5 font-bold text-rose-700 bg-rose-50/40">
+                    <td className="py-4 px-5 font-bold text-neutral-800 bg-slate-50/40">
                       {row.gap}
                     </td>
                   </tr>
@@ -118,10 +118,10 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
         </div>
 
         {/* Lower: Free Audit Lead Capture Card */}
-        <div className="rounded-3xl bg-[#0a0f2e] text-white p-8 sm:p-12 shadow-xl border border-slate-800">
+        <div className="rounded-3xl bg-neutral-900 text-white p-8 sm:p-12 shadow-xl border border-slate-800">
           <div className="max-w-2xl mx-auto text-center space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#a594fd] block">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-300 block">
                 FREE AUDIT
               </span>
               <h3 className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-white">
@@ -133,8 +133,8 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
             </div>
 
             {submitted ? (
-              <div className="rounded-xl bg-emerald-500/20 border border-emerald-500/40 p-6 text-center space-y-2">
-                <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto" />
+              <div className="rounded-xl bg-neutral-700/20 border border-neutral-700/40 p-6 text-center space-y-2">
+                <CheckCircle2 className="h-8 w-8 text-slate-400 mx-auto" />
                 <h4 className="text-base font-bold text-white">Audit Request Received</h4>
                 <p className="text-xs text-slate-300">
                   We are running your {page.city} competitor teardown now. Check your inbox within 24 hours.
@@ -152,7 +152,7 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
                     placeholder="yourfirm.com"
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-[#534AB7] focus:outline-none"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-neutral-900 focus:outline-none"
                   />
                 </div>
 
@@ -166,13 +166,13 @@ export default function DetroitCompetitorTeardownSection({ page }: { page: CityP
                     placeholder="you@yourfirm.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-[#534AB7] focus:outline-none"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-neutral-900 focus:outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] py-3.5 text-sm font-bold text-white shadow-md transition-colors cursor-pointer"
+                  className="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 py-3.5 text-sm font-bold text-white shadow-md transition-colors cursor-pointer"
                 >
                   <span>Show My Ranking</span>
                   <ArrowRight className="h-4 w-4" />

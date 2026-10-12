@@ -96,12 +96,12 @@ export default function WoodlandsFaqAndCta() {
       {/* FAQ Accordion */}
       <div>
         <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-[#534AB7]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-neutral-900" />
             Frequently Asked Questions
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-            Frequently Asked Questions: Law Firm SEO in The Woodlands
+            The Woodlands Law Firm SEO FAQs
           </h2>
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             Straightforward answers regarding court venue silos, village optimization, AI Overviews, and how SearchPrex positions law practices in Montgomery and Harris counties.
@@ -135,7 +135,7 @@ export default function WoodlandsFaqAndCta() {
                     <div>
                       <Link
                         href={faq.linkHref}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#534AB7] hover:text-[#3C3489]"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-900 hover:text-neutral-950"
                       >
                         <span>{faq.linkText}</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -152,7 +152,7 @@ export default function WoodlandsFaqAndCta() {
       {/* Texas Legal Network Links */}
       <div className="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-4">
         <div className="flex items-center gap-2">
-          <MapPin className="w-4 h-4 text-indigo-700" />
+          <MapPin className="w-4 h-4 text-neutral-800" />
           <h3 className="text-base font-bold text-slate-900">
             SearchPrex Texas Legal Practice Network
           </h3>
@@ -168,8 +168,8 @@ export default function WoodlandsFaqAndCta() {
               href={`/locations/texas/${city.slug}`}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                 city.slug === 'the-woodlands'
-                  ? 'bg-[#534AB7] text-white border-indigo-600 shadow-sm'
-                  : 'bg-white text-slate-700 border-slate-200 hover:bg-indigo-50 hover:text-[#534AB7]'
+                  ? 'bg-neutral-900 text-white border-neutral-800 shadow-sm'
+                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-neutral-900'
               }`}
             >
               {city.name} Legal SEO
@@ -179,12 +179,12 @@ export default function WoodlandsFaqAndCta() {
       </div>
 
       {/* Closing CTA Banner */}
-      <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-[#10194a] to-slate-900 border border-indigo-900/60 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-neutral-900 to-slate-900 border border-neutral-900/60 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-neutral-700/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-3xl space-y-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-neutral-700/20 text-slate-300 border border-neutral-700/30">
+            <ShieldCheck className="w-4 h-4 text-slate-400" />
             Zero-Obligation • Founder Review
           </div>
 
@@ -199,9 +199,9 @@ export default function WoodlandsFaqAndCta() {
           <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <a
               href="#diagnosis-tool"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-semibold text-white bg-[#534AB7] hover:bg-[#3C3489] transition-all shadow-lg shadow-indigo-900/50 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-lg shadow-neutral-900/50 hover:-translate-y-0.5"
             >
-              <Sparkles className="w-4 h-4 text-indigo-200" />
+              <Sparkles className="w-4 h-4 text-slate-200" />
               Claim Complimentary Review
             </a>
             <a
@@ -215,15 +215,15 @@ export default function WoodlandsFaqAndCta() {
 
           <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-400">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
               1 Firm Per Practice Exclusivity
             </span>
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
               90-Day Milestone Guarantee
             </span>
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
               Direct Founder Collaboration
             </span>
           </div>

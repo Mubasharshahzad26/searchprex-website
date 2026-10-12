@@ -87,8 +87,8 @@ export default function WoodlandsNearbySubmarkets() {
   return (
     <section id="nearby" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div className="max-w-3xl mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-          <Building2 className="w-3.5 h-3.5 text-[#534AB7]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+          <Building2 className="w-3.5 h-3.5 text-neutral-900" />
           Regional Suburban Geo-Grid Hubs
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
@@ -109,7 +109,7 @@ export default function WoodlandsNearbySubmarkets() {
               onClick={() => setActiveMarket(idx)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 border ${
                 isActive
-                  ? 'bg-[#534AB7] text-white border-indigo-600 shadow-md shadow-indigo-900/20'
+                  ? 'bg-neutral-900 text-white border-neutral-800 shadow-md shadow-neutral-900/20'
                   : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
@@ -125,7 +125,7 @@ export default function WoodlandsNearbySubmarkets() {
           <div>
             <div className="flex items-center gap-3">
               <h3 className="text-2xl font-bold text-slate-900">{current.name}, Texas</h3>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-neutral-900">
                 {current.county}
               </span>
             </div>
@@ -137,7 +137,7 @@ export default function WoodlandsNearbySubmarkets() {
 
           <Link
             href={current.linkHref}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#534AB7] hover:bg-[#3C3489] transition-all self-start lg:self-auto"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all self-start lg:self-auto"
           >
             <span>{current.linkText}</span>
             <ArrowRight className="w-4 h-4" />
@@ -151,7 +151,7 @@ export default function WoodlandsNearbySubmarkets() {
             </h4>
             <p className="text-sm text-slate-700 leading-relaxed">{current.intent}</p>
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0 mt-0.5" />
               <span>
                 SearchPrex structures your site architecture so your Woodlands location ranks across {current.name} without creating duplicate doorway content.
               </span>
@@ -162,8 +162,8 @@ export default function WoodlandsNearbySubmarkets() {
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
               High-Value Queries Captured:
             </h4>
-            <div className="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100">
-              <div className="text-xs font-mono text-[#3C3489] leading-relaxed">
+            <div className="p-4 rounded-xl bg-slate-50/70 border border-slate-100">
+              <div className="text-xs font-mono text-neutral-900 leading-relaxed">
                 {current.sampleSearches}
               </div>
             </div>

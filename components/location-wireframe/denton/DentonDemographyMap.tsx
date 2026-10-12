@@ -43,11 +43,11 @@ export default function DentonDemographyMap() {
     <section className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Users className="w-3.5 h-3.5" />
             <span>Denton County Demographics &amp; Geographic Authority</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Denton Legal Market Demographics &amp; Interactive Court Map
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -60,12 +60,12 @@ export default function DentonDemographyMap() {
           {demographicStats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-[#534AB7]/40 transition-all"
+              className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-slate-300 transition-all"
             >
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#534AB7] mb-1">
+              <div className="text-2xl sm:text-3xl font-extrabold text-neutral-900 mb-1">
                 {stat.value}
               </div>
-              <div className="text-xs sm:text-sm font-bold text-[#0a0f2e] mb-0.5">
+              <div className="text-xs sm:text-sm font-bold text-neutral-950 mb-0.5">
                 {stat.label}
               </div>
               <div className="text-[11px] text-slate-500">
@@ -87,9 +87,9 @@ export default function DentonDemographyMap() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-[#534AB7] px-2.5 py-1 rounded-md mb-1.5 inline-block">
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-900 px-2.5 py-1 rounded-md mb-1.5 inline-block">
                   Courthouse on the Square
                 </span>
                 <h3 className="text-lg font-bold">
@@ -112,9 +112,9 @@ export default function DentonDemographyMap() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-[#1a7d59] px-2.5 py-1 rounded-md mb-1.5 inline-block">
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-900 px-2.5 py-1 rounded-md mb-1.5 inline-block">
                   Executive Legal Consultation
                 </span>
                 <h3 className="text-lg font-bold">
@@ -132,10 +132,10 @@ export default function DentonDemographyMap() {
         <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
           <div className="flex items-center justify-between flex-wrap gap-4 border-b border-slate-100 pb-4 mb-6">
             <div>
-              <span className="text-xs font-bold text-[#534AB7] uppercase tracking-wider">
+              <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider">
                 Geographic Proximity Focus
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#0a0f2e]">
+              <h3 className="text-xl sm:text-2xl font-bold text-neutral-950">
                 Explore Denton Legal Corridors
               </h3>
             </div>
@@ -146,7 +146,7 @@ export default function DentonDemographyMap() {
                   onClick={() => setActiveZone(idx)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     activeZone === idx
-                      ? "bg-[#534AB7] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
@@ -160,11 +160,11 @@ export default function DentonDemographyMap() {
             {/* Zone Information */}
             <div className="lg:col-span-5 space-y-4">
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#534AB7] uppercase tracking-wider mb-1">
-                  <Building className="w-4 h-4 text-[#534AB7]" />
+                <div className="flex items-center gap-2 text-xs font-bold text-neutral-900 uppercase tracking-wider mb-1">
+                  <Building className="w-4 h-4 text-neutral-900" />
                   <span>Selected Sub-District</span>
                 </div>
-                <h4 className="text-base font-extrabold text-[#0a0f2e]">
+                <h4 className="text-base font-extrabold text-neutral-950">
                   {currentZone.name}
                 </h4>
                 <div className="text-xs text-slate-500 font-semibold mt-1">
@@ -176,7 +176,7 @@ export default function DentonDemographyMap() {
               </div>
 
               <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                <ShieldCheck className="w-4 h-4 text-[#1a7d59]" />
+                <ShieldCheck className="w-4 h-4 text-neutral-800" />
                 <span>Geotagged Google Business Profile Coordinates Configured</span>
               </div>
             </div>

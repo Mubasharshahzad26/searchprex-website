@@ -85,12 +85,12 @@ export default function DentonFaqAndCta() {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Reassurance */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider">
                 <Clock className="w-3.5 h-3.5" />
                 <span>No Pressure · Founder-Led Audit</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight leading-tight">
                 Let&apos;s talk. I&apos;ll review your Denton firm&apos;s site within 24 hours.
               </h2>
 
@@ -100,19 +100,19 @@ export default function DentonFaqAndCta() {
 
               <div className="space-y-3.5 pt-2">
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base font-semibold text-slate-800">
                     Your Local 3-Pack and Google AI Overview visibility gaps
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base font-semibold text-slate-800">
                     Exact analysis of DFW firms outranking you in Denton County
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base font-semibold text-slate-800">
                     A realistic roadmap sized to your firm&apos;s caseload goals
                   </span>
@@ -131,7 +131,7 @@ export default function DentonFaqAndCta() {
                 {!isSubmitted ? (
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                      <h3 className="text-2xl font-extrabold text-[#0a0f2e] tracking-tight mb-1">
+                      <h3 className="text-2xl font-extrabold text-neutral-950 tracking-tight mb-1">
                         Request Your 24-Hour Review
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600">
@@ -149,7 +149,7 @@ export default function DentonFaqAndCta() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Attorney Sarah Jenkins"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50/50"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50/50"
                       />
                     </div>
 
@@ -163,7 +163,7 @@ export default function DentonFaqAndCta() {
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
                         placeholder="e.g. dentondefensefirm.com"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50/50"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50/50"
                       />
                     </div>
 
@@ -177,7 +177,7 @@ export default function DentonFaqAndCta() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@yourfirm.com"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7]/40 focus:border-[#534AB7] bg-slate-50/50"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-neutral-900 bg-slate-50/50"
                       />
                     </div>
 
@@ -193,7 +193,7 @@ export default function DentonFaqAndCta() {
                             onClick={() => setPracticeArea(pa)}
                             className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
                               practiceArea === pa
-                                ? "bg-[#534AB7] text-white border-[#534AB7]"
+                                ? "bg-neutral-900 text-white border-neutral-900"
                                 : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200"
                             }`}
                           >
@@ -215,7 +215,7 @@ export default function DentonFaqAndCta() {
                             onClick={() => setStartPreference(opt)}
                             className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
                               startPreference === opt
-                                ? "bg-[#1a7d59] text-white border-[#1a7d59]"
+                                ? "bg-neutral-900 text-white border-slate-300"
                                 : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200"
                             }`}
                           >
@@ -228,7 +228,7 @@ export default function DentonFaqAndCta() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="w-full py-4 px-6 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-sm sm:text-base shadow-md transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                      className="w-full py-4 px-6 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-sm sm:text-base shadow-md transition-all flex items-center justify-center gap-2 group cursor-pointer"
                     >
                       <span>{submitting ? "Analyzing..." : "Send My Review Request"}</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -240,10 +240,10 @@ export default function DentonFaqAndCta() {
                   </form>
                 ) : (
                   <div className="py-12 text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] mx-auto flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-slate-100 text-neutral-800 mx-auto flex items-center justify-center">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
-                    <h3 className="text-2xl font-extrabold text-[#0a0f2e]">
+                    <h3 className="text-2xl font-extrabold text-neutral-950">
                       Thank you, {name || "Counsel"}.
                     </h3>
                     <p className="text-sm text-slate-700 max-w-md mx-auto">
@@ -252,7 +252,7 @@ export default function DentonFaqAndCta() {
                     <div className="pt-4">
                       <button
                         onClick={() => setIsSubmitted(false)}
-                        className="text-xs text-[#534AB7] font-bold hover:underline"
+                        className="text-xs text-neutral-900 font-bold hover:underline"
                       >
                         Submit another inquiry
                       </button>
@@ -269,11 +269,11 @@ export default function DentonFaqAndCta() {
       <section className="py-20 bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Questions Denton Attorneys Ask Me</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
               Clear, Direct Answers for Denton Legal Practitioners
             </h2>
             <p className="text-slate-600 text-base sm:text-lg">
@@ -293,12 +293,12 @@ export default function DentonFaqAndCta() {
                     onClick={() => toggleFaq(idx)}
                     className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors"
                   >
-                    <span className="font-extrabold text-base sm:text-lg text-[#0a0f2e]">
+                    <span className="font-extrabold text-base sm:text-lg text-neutral-950">
                       {faq.q}
                     </span>
                     <ChevronDown
                       className={`w-5 h-5 text-slate-500 transition-transform duration-200 shrink-0 ${
-                        isOpen ? "rotate-180 text-[#534AB7]" : ""
+                        isOpen ? "rotate-180 text-neutral-900" : ""
                       }`}
                     />
                   </button>
@@ -324,28 +324,28 @@ export default function DentonFaqAndCta() {
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-700">
             <Link
               href="/locations/texas"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               All Texas Cities
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/locations"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Every State &amp; City We Cover
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/resources/law-firm-seo-audit-checklist"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Free Law Firm SEO Checklist
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/resources/news/local-seo-updates"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Local SEO News &amp; Updates
             </Link>
@@ -354,10 +354,10 @@ export default function DentonFaqAndCta() {
       </section>
 
       {/* Closing CTA Banner */}
-      <section className="py-20 bg-gradient-to-br from-[#534AB7] via-[#3C3489] to-[#0a0f2e] text-white">
+      <section className="py-20 bg-gradient-to-br from-neutral-800 via-neutral-800 to-neutral-900 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#EEEDFE] text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-slate-200 text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
+            <ShieldCheck className="w-4 h-4 text-slate-400" />
             <span>Exclusivity Guaranteed · One Law Firm Per Practice Area</span>
           </span>
 
@@ -372,15 +372,15 @@ export default function DentonFaqAndCta() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
               href="#review-intake"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-[#0a0f2e] font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
             >
               <span>Talk to Me Directly</span>
-              <ArrowRight className="w-4 h-4 text-[#534AB7]" />
+              <ArrowRight className="w-4 h-4 text-neutral-900" />
             </a>
 
             <a
               href="#diagnosis-tool"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-indigo-900/40 hover:bg-indigo-900/60 text-white font-bold text-base border border-white/20 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-neutral-900/40 hover:bg-neutral-900/60 text-white font-bold text-base border border-white/20 transition-all"
             >
               <span>Diagnose Issues with Gemini</span>
             </a>
@@ -388,11 +388,11 @@ export default function DentonFaqAndCta() {
 
           <div className="flex items-center justify-center gap-6 text-xs text-slate-300 font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               Month-to-Month Terms
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               90-Day Money-Back Guarantee
             </span>
           </div>

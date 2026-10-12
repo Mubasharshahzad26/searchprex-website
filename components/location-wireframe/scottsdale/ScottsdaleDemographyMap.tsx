@@ -53,7 +53,7 @@ export default function ScottsdaleDemographyMap() {
               </div>
               <div className="p-3.5 bg-white rounded-lg border border-slate-200 shadow-sm">
                 <span className="text-xs font-semibold text-slate-500 block">Median Income</span>
-                <span className="text-xl font-bold text-[#4338ca] mt-0.5 block">$104,000+</span>
+                <span className="text-xl font-bold text-neutral-950 mt-0.5 block">$104,000+</span>
                 <span className="text-[11px] text-slate-500">North zip codes $165k+</span>
               </div>
               <div className="p-3.5 bg-white rounded-lg border border-slate-200 shadow-sm col-span-2 sm:col-span-1">

@@ -40,11 +40,11 @@ export default function PhiladelphiaThreeQuestionTriage() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Compass className="h-4 w-4" />
             <span>Interactive Strategic Triage</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Three Questions. Your Personalized Philadelphia Roadmap.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -57,10 +57,10 @@ export default function PhiladelphiaThreeQuestionTriage() {
           
           {/* Question 1 */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4">
-            <span className="text-xs font-mono font-bold text-[#534AB7] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider block">
               Question 01
             </span>
-            <h3 className="text-base sm:text-lg font-bold text-[#0a0f2e]">
+            <h3 className="text-base sm:text-lg font-bold text-neutral-950">
               Where does your firm show on Google Maps for your core practice?
             </h3>
             <div className="space-y-2 pt-1">
@@ -71,7 +71,7 @@ export default function PhiladelphiaThreeQuestionTriage() {
                   onClick={() => setA1(idx)}
                   className={`w-full text-left rounded-xl p-3 text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     a1 === idx
-                      ? "bg-[#534AB7] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                   }`}
                 >
@@ -83,10 +83,10 @@ export default function PhiladelphiaThreeQuestionTriage() {
 
           {/* Question 2 */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4">
-            <span className="text-xs font-mono font-bold text-[#534AB7] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider block">
               Question 02
             </span>
-            <h3 className="text-base sm:text-lg font-bold text-[#0a0f2e]">
+            <h3 className="text-base sm:text-lg font-bold text-neutral-950">
               What does your website currently feature for practice & neighborhood pages?
             </h3>
             <div className="space-y-2 pt-1">
@@ -97,7 +97,7 @@ export default function PhiladelphiaThreeQuestionTriage() {
                   onClick={() => setA2(idx)}
                   className={`w-full text-left rounded-xl p-3 text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     a2 === idx
-                      ? "bg-[#534AB7] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                   }`}
                 >
@@ -109,10 +109,10 @@ export default function PhiladelphiaThreeQuestionTriage() {
 
           {/* Question 3 */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4">
-            <span className="text-xs font-mono font-bold text-[#534AB7] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider block">
               Question 03
             </span>
-            <h3 className="text-base sm:text-lg font-bold text-[#0a0f2e]">
+            <h3 className="text-base sm:text-lg font-bold text-neutral-950">
               How do most retained cases reach your office today?
             </h3>
             <div className="space-y-2 pt-1">
@@ -123,7 +123,7 @@ export default function PhiladelphiaThreeQuestionTriage() {
                   onClick={() => setA3(idx)}
                   className={`w-full text-left rounded-xl p-3 text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     a3 === idx
-                      ? "bg-[#534AB7] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                   }`}
                 >
@@ -136,9 +136,9 @@ export default function PhiladelphiaThreeQuestionTriage() {
         </div>
 
         {/* Dynamic Recommendation Output Box */}
-        <div className="mt-8 rounded-3xl border-2 border-[#534AB7] bg-white p-6 sm:p-8 shadow-lg shadow-indigo-100/50">
+        <div className="mt-8 rounded-3xl border-2 border-neutral-900 bg-white p-6 sm:p-8 shadow-lg shadow-slate-100/50">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1a7d59]">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-800">
               <Sparkles className="h-4 w-4" />
               <span>Recommended Strategic Focus</span>
             </div>
@@ -150,7 +150,7 @@ export default function PhiladelphiaThreeQuestionTriage() {
           </div>
 
           <div className="pt-4 space-y-2">
-            <h4 className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e]">
+            <h4 className="text-xl sm:text-2xl font-extrabold text-neutral-950">
               {recTitle}
             </h4>
             <p className="text-sm sm:text-base text-slate-700 leading-relaxed max-w-4xl">
@@ -165,7 +165,7 @@ export default function PhiladelphiaThreeQuestionTriage() {
               </span>
               <a
                 href="#reality-check"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 hover:underline"
               >
                 <span>Request Free 24h Reality Check →</span>
               </a>

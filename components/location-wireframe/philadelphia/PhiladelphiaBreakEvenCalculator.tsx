@@ -33,11 +33,11 @@ export default function PhiladelphiaBreakEvenCalculator() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Calculator className="h-4 w-4" />
             <span>Financial Modeling & ROI</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Philadelphia Law Practice Break-Even: How Many Cases Pay for a Year of SEO?
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -65,12 +65,12 @@ export default function PhiladelphiaBreakEvenCalculator() {
                       onClick={() => setSelectedFeeIdx(idx)}
                       className={`rounded-2xl p-3.5 text-left transition-all cursor-pointer ${
                         isSelected
-                          ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-102"
+                          ? "bg-neutral-900 text-white shadow-md shadow-sm scale-102"
                           : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                       }`}
                     >
                       <span className="font-extrabold text-sm sm:text-base block">{item.label}</span>
-                      <span className={`text-[11px] block mt-0.5 ${isSelected ? "text-indigo-100" : "text-slate-500"}`}>
+                      <span className={`text-[11px] block mt-0.5 ${isSelected ? "text-slate-100" : "text-slate-500"}`}>
                         {item.sub}
                       </span>
                     </button>
@@ -94,7 +94,7 @@ export default function PhiladelphiaBreakEvenCalculator() {
                       onClick={() => setSelectedRetainerIdx(idx)}
                       className={`rounded-2xl p-3.5 text-left transition-all cursor-pointer ${
                         isSelected
-                          ? "bg-[#0a0f2e] text-white shadow-md shadow-slate-900/20 scale-102"
+                          ? "bg-neutral-900 text-white shadow-md shadow-slate-900/20 scale-102"
                           : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                       }`}
                     >
@@ -114,36 +114,36 @@ export default function PhiladelphiaBreakEvenCalculator() {
           </div>
 
           {/* Results Display Column */}
-          <div className="lg:col-span-6 rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-indigo-50/40 via-white to-white p-7 sm:p-9 shadow-xl shadow-indigo-100/50 flex flex-col justify-between">
+          <div className="lg:col-span-6 rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-slate-50/40 via-white to-white p-7 sm:p-9 shadow-xl shadow-slate-100/50 flex flex-col justify-between">
             <div className="space-y-6">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
                   Total Annual Campaign Investment
                 </span>
-                <div className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] font-mono">
+                <div className="text-3xl sm:text-4xl font-extrabold text-neutral-950 font-mono">
                   ${annual.toLocaleString()}
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-indigo-100 bg-[#EEEDFE]/60 p-6 space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+              <div className="rounded-2xl border border-slate-100 bg-slate-100 p-6 space-y-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                   Signed Cases Needed to Break Even Over 12 Months
                 </span>
-                <div className="text-5xl sm:text-6xl font-black text-[#534AB7] font-mono leading-none">
+                <div className="text-5xl sm:text-6xl font-black text-neutral-900 font-mono leading-none">
                   {breakEvenCases.toFixed(1)} <span className="text-xl font-bold text-slate-700">cases</span>
                 </div>
                 <p className="text-sm text-slate-700 pt-1 font-medium">
-                  That is just <strong className="text-[#0a0f2e]">{casesPerMonth.toFixed(1)} cases per month</strong>. Every signed case beyond that represents 100% net profit margin and compounding firm equity.
+                  That is just <strong className="text-neutral-950">{casesPerMonth.toFixed(1)} cases per month</strong>. Every signed case beyond that represents 100% net profit margin and compounding firm equity.
                 </p>
               </div>
 
               <div className="space-y-2 text-xs sm:text-sm text-slate-600">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0" />
                   <span>No PPC auction spikes or paying per click when users research competitors.</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0" />
                   <span>Permanent asset ownership: code, content, citations, and call logs belong to you.</span>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function PhiladelphiaBreakEvenCalculator() {
               </span>
               <a
                 href="#reality-check"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:underline"
               >
                 <span>Request Reality Check</span>
                 <ArrowRight className="h-3.5 w-3.5" />

@@ -65,7 +65,7 @@ export default function ScottsdaleReliefQuote() {
               </span>
               <a
                 href="#reality-check-form"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4338ca] hover:text-[#3730a3]"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-950 hover:text-neutral-950"
               >
                 Schedule Your Diagnostic Review
                 <ArrowRight className="w-3.5 h-3.5" />

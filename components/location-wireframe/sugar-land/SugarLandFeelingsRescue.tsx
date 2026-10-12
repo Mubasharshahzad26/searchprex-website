@@ -39,11 +39,11 @@ export default function SugarLandFeelingsRescue() {
   const current = feelings[selectedFeeling];
 
   return (
-    <section id="feelings-rescue" className="py-20 bg-[#0a0f2e] text-white border-b border-slate-800 scroll-mt-20">
+    <section id="feelings-rescue" className="py-20 bg-neutral-900 text-white border-b border-slate-800 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-500/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-700/10 text-slate-400 text-xs font-bold uppercase tracking-wider mb-3 border border-neutral-700/20">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>The Reality Facing Sugar Land Partners</span>
           </div>
@@ -66,7 +66,7 @@ export default function SugarLandFeelingsRescue() {
                 onClick={() => setSelectedFeeling(idx)}
                 className={`px-6 py-3.5 rounded-xl font-bold text-sm transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-lg shadow-indigo-950/50"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-lg shadow-neutral-950/50"
                     : "bg-slate-900 text-slate-300 border-slate-700 hover:bg-slate-800"
                 }`}
               >
@@ -93,12 +93,12 @@ export default function SugarLandFeelingsRescue() {
           </div>
 
           {/* Right: The Rescue */}
-          <div className="rounded-3xl border border-emerald-500/40 bg-gradient-to-br from-slate-900 to-[#132820] p-8 sm:p-10 space-y-4 shadow-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="rounded-3xl border border-neutral-700/40 bg-gradient-to-br from-slate-900 to-[#132820] p-8 sm:p-10 space-y-4 shadow-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-700/20 text-slate-300 text-xs font-bold uppercase tracking-wider">
+              <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
               <span>The SearchPrex Rescue</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-emerald-300 tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-300 tracking-tight">
               {current.rescueTitle}
             </h3>
             <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
@@ -107,7 +107,7 @@ export default function SugarLandFeelingsRescue() {
             <div className="pt-4">
               <a
                 href="#rescue-steps"
-                className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 hover:underline"
+                className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-slate-300 hover:underline"
               >
                 <span>Explore the 4-step execution plan</span>
                 <ArrowRight className="w-3.5 h-3.5" />

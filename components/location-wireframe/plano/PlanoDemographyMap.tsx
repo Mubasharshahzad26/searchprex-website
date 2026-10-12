@@ -35,12 +35,12 @@ export default function PlanoDemographyMap() {
     <section className="py-16 bg-slate-50 border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 text-[#534AB7] border border-indigo-100 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
             <MapPin className="w-3.5 h-3.5" />
             Local Demographic Anchor
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
-            Plano & Collin County Demographic Intelligence
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+            Plano & Collin County Demographics
           </h2>
           <p className="mt-3 text-base text-slate-600 leading-relaxed">
             Plano is an economic powerhouse where executive relocations and high-income families seek specialized, discrete legal counsel.
@@ -58,11 +58,11 @@ export default function PlanoDemographyMap() {
                   className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#534AB7]/10 text-[#534AB7] flex items-center justify-center mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 text-neutral-900 flex items-center justify-center mb-3">
                       <Icon className="w-5 h-5" />
                     </div>
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{s.label}</p>
-                    <p className="text-2xl font-extrabold text-[#0a0f2e] mt-1">{s.value}</p>
+                    <p className="text-2xl font-extrabold text-neutral-950 mt-1">{s.value}</p>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed mt-3 pt-3 border-t border-slate-100">
                     {s.detail}
@@ -75,7 +75,7 @@ export default function PlanoDemographyMap() {
           {/* Map Embed */}
           <div className="lg:col-span-5 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white min-h-[340px] flex flex-col">
             <div className="p-4 bg-slate-100 border-b border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-[#534AB7]" />
+              <MapPin className="w-4 h-4 text-neutral-900" />
               <span>Plano & Collin County Map Pack Geo-Target</span>
             </div>
             <div className="flex-1 w-full min-h-[290px] relative">

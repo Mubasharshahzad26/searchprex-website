@@ -68,10 +68,10 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
         
         {/* ── Section Header: H2: Our Detroit Law Firm SEO Approach ── */}
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
             PROVEN REVENUE FRAMEWORK · {page.city.toUpperCase()}, {page.stateAbbr}
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0a0f2e]">
+          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-neutral-950">
             Our Detroit Law Firm SEO Approach: Local SEO, AI Visibility and Brand Authority
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -91,12 +91,12 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-center hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
               
               {/* Image Overlays */}
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#534AB7]/90 text-white backdrop-blur-xs mb-1.5 border border-white/10">
-                  <ShieldCheck className="h-3.5 w-3.5 text-[#3eb489]" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-white backdrop-blur-xs mb-1.5 border border-white/10">
+                  <ShieldCheck className="h-3.5 w-3.5 text-slate-300" />
                   <span>Detroit Litigation Case Briefing</span>
                 </span>
                 <p className="text-xs font-semibold text-slate-200">
@@ -107,7 +107,7 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
 
             <div className="mt-3 flex items-center justify-between text-xs text-slate-500 px-1">
               <span>Verified Wayne County Case Velocity</span>
-              <span className="text-[#534AB7] font-bold">Written with MRPC Rule 7 in mind</span>
+              <span className="text-neutral-900 font-bold">Written with MRPC Rule 7 in mind</span>
             </div>
           </div>
 
@@ -131,17 +131,17 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
             </div>
 
             {/* SearchPrex Approach */}
-            <div className="rounded-2xl border-2 border-[#534AB7] bg-gradient-to-b from-white via-white to-[#EEEDFE]/25 p-6 shadow-md hover:shadow-lg transition-all">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
+            <div className="rounded-2xl border-2 border-neutral-900 bg-gradient-to-b from-white via-white to-[#f1f5f9]/25 p-6 shadow-md hover:shadow-lg transition-all">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
                 <span>THE SEARCHPREX APPROACH</span>
-                <span className="text-[10px] font-bold text-[#196b4d] bg-[#3eb489]/15 px-2.5 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold text-[#196b4d] bg-slate-300/15 px-2.5 py-0.5 rounded-full">
                   Revenue-First
                 </span>
               </span>
               <ul className="space-y-3.5">
                 {searchprexApproach.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-[13px] font-semibold text-[#0a0f2e]">
-                    <span className="font-mono text-[11px] font-bold text-[#534AB7] bg-[#EEEDFE] px-1.5 py-0.5 rounded shrink-0 mt-0.5">
+                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-[13px] font-semibold text-neutral-950">
+                    <span className="font-mono text-[11px] font-bold text-neutral-900 bg-slate-100 px-1.5 py-0.5 rounded shrink-0 mt-0.5">
                       0{idx + 1}
                     </span>
                     <span className="leading-snug">{item}</span>
@@ -158,7 +158,7 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
               OUR 3 EXECUTION PILLARS
             </span>
-            <span className="text-xs text-[#534AB7] font-semibold">
+            <span className="text-xs text-neutral-900 font-semibold">
               Tap any pillar to view tactical roadmap
             </span>
           </div>
@@ -174,13 +174,13 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
                   onClick={() => setActivePillar(isSelected ? null : idx)}
                   className={`rounded-2xl border bg-white p-6 sm:p-7 flex flex-col justify-between transition-all cursor-pointer shadow-2xs hover:shadow-sm ${
                     isSelected
-                      ? "border-[#534AB7] ring-2 ring-[#534AB7]/20 bg-[#EEEDFE]/20"
-                      : "border-slate-200 hover:border-[#534AB7]/40"
+                      ? "border-neutral-900 ring-2 ring-slate-300 bg-slate-100"
+                      : "border-slate-200 hover:border-slate-300"
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#534AB7]">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-900">
                         {p.number}
                       </span>
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
@@ -189,10 +189,10 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
                     </div>
 
                     <div className="flex items-center gap-2.5 mt-3">
-                      <div className="p-2 rounded-xl bg-[#EEEDFE] text-[#534AB7]">
+                      <div className="p-2 rounded-xl bg-slate-100 text-neutral-900">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className="text-xl font-black text-[#0a0f2e]">
+                      <h3 className="text-xl font-black text-neutral-950">
                         {p.title}
                       </h3>
                     </div>
@@ -203,7 +203,7 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
                   </div>
 
                   <div className="mt-5 pt-3 border-t border-slate-100">
-                    <div className="flex items-center justify-between text-xs font-bold text-[#534AB7]">
+                    <div className="flex items-center justify-between text-xs font-bold text-neutral-900">
                       <span>Technical Execution</span>
                       <ChevronRight className={`h-3.5 w-3.5 transition-transform ${isSelected ? "rotate-90" : ""}`} />
                     </div>
@@ -212,7 +212,7 @@ export default function DetroitApproachAndPillars({ page }: { page: CityPage }) 
                       <ul className="mt-3 space-y-1.5 animate-in fade-in duration-200">
                         {p.tactics.map((tac, tIdx) => (
                           <li key={tIdx} className="text-xs text-slate-700 flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#534AB7]" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-neutral-900" />
                             <span>{tac}</span>
                           </li>
                         ))}

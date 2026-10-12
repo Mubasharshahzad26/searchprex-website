@@ -52,11 +52,11 @@ export default function AlbuquerqueProcess() {
     <section id="how-it-works" className="py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>Structured 4-Step Process</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Listen. Map. Build. Prove.
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -75,7 +75,7 @@ export default function AlbuquerqueProcess() {
                 onClick={() => setActiveStep(idx)}
                 className={`p-4 rounded-xl text-left border transition-all ${
                   isActive
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-md shadow-[#534AB7]/20"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-md shadow-sm"
                     : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
                 }`}
               >
@@ -83,7 +83,7 @@ export default function AlbuquerqueProcess() {
                   <span className="text-[11px] font-bold uppercase tracking-wider opacity-80">
                     Phase {item.step}
                   </span>
-                  <StepIcon className={`w-4 h-4 ${isActive ? "text-white" : "text-[#534AB7]"}`} />
+                  <StepIcon className={`w-4 h-4 ${isActive ? "text-white" : "text-neutral-900"}`} />
                 </div>
                 <div className="font-extrabold text-base sm:text-lg">
                   {item.title}
@@ -98,11 +98,11 @@ export default function AlbuquerqueProcess() {
           {/* Main What We Do Card */}
           <div className="md:col-span-7 bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-[#534AB7] uppercase tracking-wider mb-2">
-                <Icon className="w-4 h-4 text-[#534AB7]" />
+              <div className="flex items-center gap-2 text-xs font-bold text-neutral-900 uppercase tracking-wider mb-2">
+                <Icon className="w-4 h-4 text-neutral-900" />
                 <span>Phase {current.step} Deliverable</span>
               </div>
-              <h3 className="text-2xl font-extrabold text-[#0a0f2e] mb-4">
+              <h3 className="text-2xl font-extrabold text-neutral-950 mb-4">
                 {current.heading}
               </h3>
               <p className="text-base text-slate-700 leading-relaxed mb-6">
@@ -112,21 +112,21 @@ export default function AlbuquerqueProcess() {
 
             <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-700">
               <span>Primary Milestone:</span>
-              <span className="text-[#534AB7] font-bold">{current.deliverable}</span>
+              <span className="text-neutral-900 font-bold">{current.deliverable}</span>
             </div>
           </div>
 
           {/* What You Feel Card */}
-          <div className="md:col-span-5 bg-gradient-to-br from-indigo-50/70 via-white to-slate-50 rounded-2xl border-2 border-[#534AB7]/30 p-6 sm:p-8 flex flex-col justify-between shadow-xs">
+          <div className="md:col-span-5 bg-gradient-to-br from-slate-50/70 via-white to-slate-50 rounded-2xl border-2 border-slate-300 p-6 sm:p-8 flex flex-col justify-between shadow-xs">
             <div>
-              <div className="text-xs font-bold text-[#1a7d59] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#1a7d59]" />
+              <div className="text-xs font-bold text-neutral-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-neutral-800" />
                 <span>What Managing Partners Experience</span>
               </div>
               <h4 className="text-sm font-semibold text-slate-500 mb-2">
                 Client Peace of Mind
               </h4>
-              <p className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e] leading-snug">
+              <p className="text-xl sm:text-2xl font-extrabold text-neutral-950 leading-snug">
                 &quot;{current.clientFeel}&quot;
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function AlbuquerqueProcess() {
             <div className="pt-6 mt-6 border-t border-slate-200/80">
               <a
                 href="#reality-check"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#534AB7] hover:text-[#3C3489] transition-colors"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-neutral-900 hover:text-neutral-950 transition-colors"
               >
                 <span>Initiate Step 1 with a Free Reality Check</span>
                 <ArrowRight className="w-4 h-4" />

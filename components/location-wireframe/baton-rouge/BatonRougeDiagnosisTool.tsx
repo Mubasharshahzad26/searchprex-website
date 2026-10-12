@@ -45,7 +45,7 @@ export default function BatonRougeDiagnosisTool() {
           {/* Left Form: Configuration */}
           <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
             <h3 className="text-base font-bold text-slate-900 mb-6 flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-[#4338ca]" />
+              <Calculator className="w-5 h-5 text-neutral-950" />
               Step 1: Configure Practice Parameters
             </h3>
 
@@ -68,7 +68,7 @@ export default function BatonRougeDiagnosisTool() {
                       onClick={() => setPractice(p.id)}
                       className={`py-2.5 px-3 rounded-lg text-xs font-semibold border transition-all text-center ${
                         practice === p.id
-                          ? 'bg-[#4338ca] text-white border-[#4338ca]'
+                          ? 'bg-neutral-900 text-white border-neutral-900'
                           : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
                       }`}
                     >
@@ -117,7 +117,7 @@ export default function BatonRougeDiagnosisTool() {
                     value={websiteUrl}
                     onChange={(e) => setWebsiteUrl(e.target.value)}
                     placeholder="e.g. www.batonrougelefirm.com"
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#4338ca] focus:border-transparent"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#171717] focus:border-transparent"
                     required
                   />
                 </div>
@@ -132,21 +132,21 @@ export default function BatonRougeDiagnosisTool() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="partner@firm.com"
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#4338ca] focus:border-transparent"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#171717] focus:border-transparent"
                     required
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-lg text-sm font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-all duration-150 shadow-md shadow-indigo-100"
+                  className="w-full py-3.5 px-6 rounded-lg text-sm font-bold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-150 shadow-md shadow-slate-100"
                 >
                   Generate East Baton Rouge Search Diagnosis
                 </button>
               </form>
 
               {submitted && (
-                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800">
+                <div className="p-4 bg-slate-200 border border-slate-200 rounded-lg text-xs text-slate-200">
                   <p className="font-bold mb-1">Diagnosis Request Received</p>
                   <p>Our senior legal strategist is analyzing your domain against top Baton Rouge competitors and will deliver your complete audit to {email} within 24 hours.</p>
                 </div>
@@ -180,7 +180,7 @@ export default function BatonRougeDiagnosisTool() {
               <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between">
                 <div>
                   <span className="text-xs text-slate-500 block">Estimated Retained Caseload</span>
-                  <span className="text-2xl font-bold text-[#4338ca]">+{currentMetric.estRetainers} retainers/mo</span>
+                  <span className="text-2xl font-bold text-neutral-950">+{currentMetric.estRetainers} retainers/mo</span>
                 </div>
                 <span className="text-xs font-medium text-slate-600 bg-white px-2.5 py-1 rounded border border-slate-200">
                   Qualified

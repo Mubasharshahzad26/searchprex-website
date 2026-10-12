@@ -35,11 +35,11 @@ export default function PlanoCountyCourts() {
     <section className="py-16 bg-white border-b border-slate-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 text-[#534AB7] border border-indigo-100 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
             <Scale className="w-3.5 h-3.5" />
             Collin County Venue Intelligence
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             Which Court Hears a Plano Case? Collin County Courts in McKinney
           </h2>
           <p className="mt-3 text-base text-slate-600 leading-relaxed">
@@ -51,14 +51,14 @@ export default function PlanoCountyCourts() {
           {courts.map((court, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-300 transition-colors shadow-sm space-y-3"
+              className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors shadow-sm space-y-3"
             >
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-lg bg-[#534AB7]/10 text-[#534AB7] flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-9 h-9 rounded-lg bg-slate-100 text-neutral-900 flex items-center justify-center shrink-0 mt-0.5">
                   <Landmark className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-[#0a0f2e]">{court.name}</h3>
+                  <h3 className="font-bold text-base text-neutral-950">{court.name}</h3>
                   <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
                     <MapPin className="w-3.5 h-3.5 text-slate-400" />
                     {court.location}
@@ -71,7 +71,7 @@ export default function PlanoCountyCourts() {
               </p>
 
               <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-xs text-slate-600">
-                <strong className="text-indigo-900 block font-semibold mb-0.5">SEO Architecture Insight:</strong>
+                <strong className="text-neutral-900 block font-semibold mb-0.5">SEO Architecture Insight:</strong>
                 {court.insight}
               </div>
             </div>

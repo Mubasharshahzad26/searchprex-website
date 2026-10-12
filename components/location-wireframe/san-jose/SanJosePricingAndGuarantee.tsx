@@ -83,12 +83,12 @@ export default function SanJosePricingAndGuarantee() {
               key={tier.name}
               className={`rounded-xl border p-7 bg-white flex flex-col justify-between shadow-sm relative transition-all ${
                 tier.popular
-                  ? 'border-[#4338ca] ring-2 ring-[#4338ca]/10'
+                  ? 'border-neutral-900 ring-2 ring-[#171717]/10'
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#4338ca] text-white text-[11px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-[11px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
                   Most Requested by San Jose Firms
                 </div>
               )}
@@ -130,7 +130,7 @@ export default function SanJosePricingAndGuarantee() {
                   href={tier.ctaHref}
                   className={`w-full py-3 px-4 rounded-lg text-xs font-bold transition-all text-center block ${
                     tier.popular
-                      ? 'bg-[#4338ca] hover:bg-[#3730a3] text-white shadow-sm'
+                      ? 'bg-neutral-900 hover:bg-neutral-800 text-white shadow-sm'
                       : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
                   }`}
                 >

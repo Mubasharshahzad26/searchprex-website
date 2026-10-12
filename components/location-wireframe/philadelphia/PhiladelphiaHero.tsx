@@ -2,7 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Scale, ShieldCheck, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+  BarChart3,
+  ChevronRight,
+} from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
 interface PhiladelphiaHeroProps {
@@ -23,6 +33,51 @@ export default function PhiladelphiaHero({ page }: PhiladelphiaHeroProps) {
   const [selectedStop, setSelectedStop] = useState(0);
   const current = NEIGHBORHOOD_STOPS[selectedStop];
 
+  // Hero Lead Form State
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [email, setEmail] = useState("");
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("Personal injury");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "Philadelphia Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "philadelphia:hero-lead-form",
+          notes: `Requested Philadelphia Hero Reality Check. Stop: ${current.name}, Size: ${firmSize}, Practice: ${practiceArea}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
+  };
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -31,178 +86,277 @@ export default function PhiladelphiaHero({ page }: PhiladelphiaHeroProps) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-slate-200">
-      {/* Blueprint grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: "linear-gradient(#0a0f2e 1px, transparent 1px), linear-gradient(90deg, #0a0f2e 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Hero Content */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#534AB7]/20 bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] shadow-xs">
-              <Scale className="h-3.5 w-3.5" />
-              <span>Law Firm SEO · Philadelphia, Pennsylvania</span>
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · Philadelphia, PA
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight text-[#0a0f2e] leading-[1.12]">
-              Law Firm SEO in Philadelphia: You Can't Outspend Them.{" "}
-              <span className="relative inline-block rounded-xl bg-[#EEEDFE] px-3 py-0.5 text-[#534AB7] border border-[#534AB7]/20 shadow-xs">
-                Out-Local Them.
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              Philadelphia Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
+                Out-Local the National Advertisers
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              National mass tort practices treat Philadelphia as a filing venue. You live and practice here. We turn your local neighborhood insight into Map Pack dominance, page-one rankings, and Google AI Overview citations that ad budget alone cannot buy. Explore our dedicated{" "}
-              <Link href="/services/law-firm-seo" className="font-semibold text-[#534AB7] underline hover:text-[#3C3489]">
-                law firm SEO methodology
-              </Link>.
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Philadelphia law firm SEO helps Pennsylvania attorneys dominate the local Map Pack, organic rankings, and generative AI answers without entering endless pay-per-click bidding wars with national directories. We engineer Center City and neighborhood silos across Philadelphia, Delaware County, and Montgomery County that deliver verified signed retainers.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={() => scrollToSection("reality-check")}
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#534AB7] px-6 py-4 text-base font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all duration-300 hover:bg-[#3C3489] hover:shadow-xl hover:shadow-[#534AB7]/35 hover:-translate-y-1 active:translate-y-0 cursor-pointer"
-              >
-                <span>Get My Free Reality Check</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-
-              <button
-                onClick={() => scrollToSection("three-questions")}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-6 py-3.5 text-base font-bold text-[#0a0f2e] shadow-xs transition-all duration-300 hover:border-[#534AB7] hover:bg-slate-50 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer"
-              >
-                <span>Find My First Stop</span>
-              </button>
-            </div>
-
-            {/* Trust points bar */}
-            <div className="pt-4 border-t border-slate-200">
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm font-semibold text-slate-700">
-                <span className="flex items-center gap-1.5 transition-colors hover:text-[#0a0f2e]">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59]" />
-                  1 Firm Per Practice Area
+            {/* Neighborhood Stop Selector */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-700">
+                  Philadelphia Neighborhood Intelligence
                 </span>
-                <span className="flex items-center gap-1.5 transition-colors hover:text-[#0a0f2e]">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59]" />
-                  Month-to-Month Flexibility
-                </span>
-                <span className="flex items-center gap-1.5 transition-colors hover:text-[#0a0f2e]">
-                  <ShieldCheck className="h-4 w-4 text-[#534AB7]" />
-                  CEO-Led Execution by Mubashar Sharif
+                <span className="text-[11px] font-semibold text-slate-500">
+                  Select a legal territory
                 </span>
               </div>
-            </div>
-          </div>
-
-          {/* Right Hero Visual: Stylized Philadelphia Neighborhood Transit Diagram */}
-          <div className="lg:col-span-5">
-            <div className="group relative rounded-3xl border-2 border-slate-200/90 bg-white p-6 sm:p-7 shadow-xl shadow-slate-200/70 transition-all duration-300 hover:-translate-y-1 hover:border-[#534AB7]/40 hover:shadow-2xl hover:shadow-[#534AB7]/10">
-              {/* Top gradient accent glow */}
-              <div className="absolute inset-x-8 -top-[2px] h-[3px] bg-gradient-to-r from-transparent via-[#534AB7] to-transparent rounded-t-full opacity-60 group-hover:opacity-100 transition-opacity" />
-
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
-                    Cuyahoga & Philadelphia Transit Map
-                  </span>
-                  <h3 className="text-xl font-extrabold text-[#0a0f2e] mt-0.5">
-                    Neighborhood Territory Map
-                  </h3>
-                </div>
-                
-                {/* Live pulse radar */}
-                <div className="relative flex items-center justify-center h-4 w-4" title="Live Philadelphia Neighborhood Grid">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a7d59] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#1a7d59]" />
-                </div>
-              </div>
-
-              {/* Transit SVG Schema */}
-              <div className="my-4 rounded-2xl bg-slate-900 p-4 border border-slate-800 shadow-inner">
-                <svg viewBox="0 0 460 300" className="w-full h-auto drop-shadow" role="img" aria-label="Interactive transit diagram of Philadelphia legal territories">
-                  {/* Broad Street Line (Vertical) */}
-                  <line x1="230" y1="20" x2="230" y2="280" stroke="#534AB7" strokeWidth="8" strokeLinecap="round" />
-                  {/* Market-Frankford Line (Horizontal) */}
-                  <line x1="40" y1="150" x2="420" y2="150" stroke="#3C3489" strokeWidth="8" strokeLinecap="round" />
-                  {/* Diagonal Regional Connector */}
-                  <line x1="80" y1="50" x2="380" y2="250" stroke="#1a7d59" strokeWidth="6" strokeLinecap="round" strokeDasharray="6 4" />
-
-                  {/* Hub Circles */}
-                  {/* Center City (Junction) */}
-                  <circle cx="230" cy="150" r="18" fill="#0a0f2e" stroke="#EEEDFE" strokeWidth="4" />
-                  <circle cx="230" cy="150" r="10" fill="#534AB7" className="animate-pulse" />
-                  <text x="254" y="146" fontSize="13" fontWeight="bold" fill="#ffffff" fontFamily="sans-serif">Center City (City Hall)</text>
-
-                  {/* Northeast */}
-                  <circle cx="230" cy="50" r="8" fill="#0a0f2e" stroke="#534AB7" strokeWidth="3" />
-                  <text x="246" y="54" fontSize="11" fontWeight="600" fill="#cbd5e1" fontFamily="sans-serif">Northeast Philly</text>
-
-                  {/* South Philly */}
-                  <circle cx="230" cy="250" r="8" fill="#0a0f2e" stroke="#534AB7" strokeWidth="3" />
-                  <text x="246" y="254" fontSize="11" fontWeight="600" fill="#cbd5e1" fontFamily="sans-serif">South Philly</text>
-
-                  {/* University City */}
-                  <circle cx="90" cy="150" r="8" fill="#0a0f2e" stroke="#3C3489" strokeWidth="3" />
-                  <text x="50" y="180" fontSize="11" fontWeight="600" fill="#cbd5e1" fontFamily="sans-serif">University City</text>
-
-                  {/* Fishtown */}
-                  <circle cx="370" cy="150" r="8" fill="#0a0f2e" stroke="#3C3489" strokeWidth="3" />
-                  <text x="340" y="180" fontSize="11" fontWeight="600" fill="#cbd5e1" fontFamily="sans-serif">Fishtown</text>
-
-                  {/* Manayunk */}
-                  <circle cx="80" cy="50" r="7" fill="#0a0f2e" stroke="#1a7d59" strokeWidth="3" />
-                  <text x="96" y="46" fontSize="11" fontWeight="600" fill="#cbd5e1" fontFamily="sans-serif">Manayunk</text>
-
-                  {/* Delaware County */}
-                  <circle cx="380" cy="250" r="7" fill="#0a0f2e" stroke="#1a7d59" strokeWidth="3" />
-                  <text x="300" y="275" fontSize="11" fontWeight="600" fill="#cbd5e1" fontFamily="sans-serif">Delaware Co.</text>
-                </svg>
-              </div>
-
-              {/* Stop Selector Chips */}
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap gap-1.5">
                 {NEIGHBORHOOD_STOPS.map((st, idx) => (
                   <button
                     key={st.name}
+                    type="button"
                     onClick={() => setSelectedStop(idx)}
-                    className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all cursor-pointer ${
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                       selectedStop === idx
-                        ? "bg-[#534AB7] text-white shadow-xs"
-                        : "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
+                        ? "bg-neutral-900 text-white border-neutral-900 shadow-xs"
+                        : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
                     }`}
                   >
                     {st.name}
                   </button>
                 ))}
               </div>
-
-              {/* Active stop info box */}
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3.5 space-y-1">
-                <div className="flex items-center justify-between text-xs font-bold">
-                  <span className="text-[#0a0f2e]">{current.name}</span>
-                  <span className="text-[#534AB7]">{current.line}</span>
-                </div>
+              <div className="pt-2 border-t border-slate-200/80">
                 <p className="text-xs text-slate-600 leading-relaxed">
+                  <span className="font-semibold text-neutral-900">{current.name} ({current.line}): </span>
                   {current.desc}
                 </p>
               </div>
+            </div>
 
-              <div className="mt-3 flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
-                <span>1 Firm Exclusivity Per Submarket</span>
-                <button
-                  onClick={() => scrollToSection("diagnose")}
-                  className="font-bold text-[#534AB7] hover:text-[#3C3489] hover:underline cursor-pointer"
-                >
-                  Diagnose My Firm →
-                </button>
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-1">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">City Hall</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Court Venue Silos</p>
               </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Top 3</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Google Map Pack Focus</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Zero</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Long-Term Lock-In</p>
+              </div>
+            </div>
+
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <button
+                type="button"
+                onClick={() => scrollToSection("cost-ledger")}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
+              >
+                <BarChart3 className="w-4 h-4 text-neutral-700" />
+                See the Cost Ledger
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollToSection("reality-check")}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
+              >
+                Get Free 24h Reality Check
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                CEO-led execution
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
+              
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Philadelphia Audit
+                  </span>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Philadelphia Reality Check
+                  </h2>
+                </div>
+              </div>
+
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally audit your Philadelphia rankings, Google Business Profile, and regional competitors, and email your 24-hour video review directly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label htmlFor="ph-hero-name" className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      id="ph-hero-name"
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Website */}
+                  <div>
+                    <label htmlFor="ph-hero-website" className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      id="ph-hero-website"
+                      type="text"
+                      required
+                      placeholder="phillylawfirm.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Work Email */}
+                  <div>
+                    <label htmlFor="ph-hero-email" className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      id="ph-hero-email"
+                      type="email"
+                      required
+                      placeholder="you@phillylawfirm.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Personal injury", "Workers' comp", "Med mal", "Criminal defense", "Employment", "Estate", "Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea.toLowerCase().includes(area.toLowerCase().slice(0, 5))
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Reality Check"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
+                </form>
+              )}
+
             </div>
           </div>
 

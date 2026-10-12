@@ -73,7 +73,7 @@ export default function ShreveportSubmarkets() {
                   <span>ZIP: {sm.zipCodes}</span>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">{sm.name}</h3>
-                <p className="text-xs font-semibold text-[#4338ca] mb-3">{sm.role}</p>
+                <p className="text-xs font-semibold text-neutral-950 mb-3">{sm.role}</p>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {sm.intent}
                 </p>
@@ -83,7 +83,7 @@ export default function ShreveportSubmarkets() {
                 <span className="text-xs font-medium text-slate-500">Parish Silo Active</span>
                 <Link
                   href="/locations/louisiana/shreveport"
-                  className="text-xs font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                  className="text-xs font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
                 >
                   Explore Silo
                   <ArrowRight className="w-3 h-3" />

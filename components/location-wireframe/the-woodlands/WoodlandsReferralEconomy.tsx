@@ -44,8 +44,8 @@ export default function WoodlandsReferralEconomy() {
       {/* Referral Economy Section */}
       <div>
         <div className="max-w-3xl mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-            <UserCheck className="w-3.5 h-3.5 text-[#534AB7]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+            <UserCheck className="w-3.5 h-3.5 text-neutral-900" />
             Modern Referral Dynamics
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
@@ -66,7 +66,7 @@ export default function WoodlandsReferralEconomy() {
                 onClick={() => setActiveRef(idx)}
                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 border ${
                   isActive
-                    ? 'bg-[#534AB7] text-white border-indigo-600 shadow-md shadow-indigo-900/20'
+                    ? 'bg-neutral-900 text-white border-neutral-800 shadow-md shadow-neutral-900/20'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
@@ -93,11 +93,11 @@ export default function WoodlandsReferralEconomy() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-gradient-to-br from-slate-900 via-[#10194a] to-slate-900 text-white p-6 sm:p-8 space-y-4 shadow-lg flex flex-col justify-between border border-indigo-900/60">
+          <div className="rounded-2xl bg-gradient-to-br from-slate-900 via-neutral-900 to-slate-900 text-white p-6 sm:p-8 space-y-4 shadow-lg flex flex-col justify-between border border-neutral-900/60">
             <div>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-indigo-300" />
-                <span className="text-xs font-bold text-indigo-300 uppercase tracking-wider">
+                <Sparkles className="w-4 h-4 text-slate-300" />
+                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
                   What SearchPrex Ensures They Find:
                 </span>
               </div>
@@ -110,7 +110,7 @@ export default function WoodlandsReferralEconomy() {
             <div className="pt-4 border-t border-slate-800">
               <Link
                 href={current.linkHref}
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-300 hover:text-white"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white"
               >
                 <span>{current.linkText}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -121,12 +121,12 @@ export default function WoodlandsReferralEconomy() {
       </div>
 
       {/* Discretion Promise Section */}
-      <div className="rounded-3xl bg-[#0a0f2e] border border-indigo-950 p-8 sm:p-12 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="rounded-3xl bg-neutral-900 border border-neutral-950 p-8 sm:p-12 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-neutral-700/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-3xl mb-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 mb-3">
-            <Lock className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-neutral-700/10 text-slate-300 border border-neutral-700/20 mb-3">
+            <Lock className="w-3.5 h-3.5 text-slate-400" />
             The SearchPrex Discretion Promise
           </div>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
@@ -139,8 +139,8 @@ export default function WoodlandsReferralEconomy() {
 
         {/* 4 Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-indigo-900/40 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400 font-bold text-sm">
+          <div className="p-5 rounded-2xl bg-slate-900/80 border border-neutral-900/40 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 flex items-center justify-center text-slate-400 font-bold text-sm">
               01
             </div>
             <h4 className="font-bold text-white text-base">Confidential Reviews</h4>
@@ -149,8 +149,8 @@ export default function WoodlandsReferralEconomy() {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-indigo-900/40 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400 font-bold text-sm">
+          <div className="p-5 rounded-2xl bg-slate-900/80 border border-neutral-900/40 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 flex items-center justify-center text-slate-400 font-bold text-sm">
               02
             </div>
             <h4 className="font-bold text-white text-base">1 Firm Per Practice</h4>
@@ -159,8 +159,8 @@ export default function WoodlandsReferralEconomy() {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-indigo-900/40 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400 font-bold text-sm">
+          <div className="p-5 rounded-2xl bg-slate-900/80 border border-neutral-900/40 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 flex items-center justify-center text-slate-400 font-bold text-sm">
               03
             </div>
             <h4 className="font-bold text-white text-base">Zero Shared Leads</h4>
@@ -169,8 +169,8 @@ export default function WoodlandsReferralEconomy() {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-indigo-900/40 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400 font-bold text-sm">
+          <div className="p-5 rounded-2xl bg-slate-900/80 border border-neutral-900/40 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 flex items-center justify-center text-slate-400 font-bold text-sm">
               04
             </div>
             <h4 className="font-bold text-white text-base">Dignified Tone</h4>

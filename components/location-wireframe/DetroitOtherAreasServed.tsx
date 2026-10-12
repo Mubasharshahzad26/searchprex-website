@@ -97,19 +97,19 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
               REGIONAL COVERAGE &amp; STATUTORY HUBS
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              Law Firm SEO Across Metro Detroit: Wayne, Oakland and Macomb Counties
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
+              Areas We Serve Across Metro Detroit
             </h2>
             <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
               Google weighs proximity and local relevance. We build separate local pages so a Southfield employment lawyer and a Downtown criminal defense lawyer are not competing with the same generic page.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-bold text-[#196b4d] bg-[#EEEDFE]/60 px-4 py-2 rounded-xl border border-[#534AB7]/20 shrink-0">
-            <ShieldCheck className="h-4 w-4 text-[#534AB7]" />
+          <div className="flex items-center gap-2 text-xs font-bold text-[#196b4d] bg-slate-100 px-4 py-2 rounded-xl border border-slate-300 shrink-0">
+            <ShieldCheck className="h-4 w-4 text-neutral-900" />
             <span>Strict 1-Firm Per Practice Exclusivity</span>
           </div>
         </div>
@@ -125,10 +125,10 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
               sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/90 via-[#0a0f2e]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900 to-transparent" />
             
             <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-[#534AB7] text-white mb-2 shadow-xs">
+              <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-neutral-900 text-white mb-2 shadow-xs">
                 Metro Detroit Court Venues We Target
               </span>
               <h4 className="text-base font-bold text-white leading-snug">
@@ -151,7 +151,7 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
               allowFullScreen
             />
             <div className="pointer-events-none absolute bottom-3 left-3 right-3 sm:right-auto rounded-xl bg-slate-950/90 px-3.5 py-2 text-[11px] font-medium text-slate-200 backdrop-blur border border-white/10 shadow flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-[#534AB7] shrink-0" />
+              <MapPin className="h-4 w-4 text-neutral-900 shrink-0" />
               <span>Highlighting all practice coverage spots across Metro Detroit</span>
             </div>
           </div>
@@ -164,7 +164,7 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             onClick={() => setActiveTab("wayne")}
             className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeTab === "wayne"
-                ? "bg-[#534AB7] text-white shadow-xs"
+                ? "bg-neutral-900 text-white shadow-xs"
                 : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
@@ -175,7 +175,7 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             onClick={() => setActiveTab("oakland")}
             className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeTab === "oakland"
-                ? "bg-[#534AB7] text-white shadow-xs"
+                ? "bg-neutral-900 text-white shadow-xs"
                 : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
@@ -186,7 +186,7 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             onClick={() => setActiveTab("macomb")}
             className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeTab === "macomb"
-                ? "bg-[#534AB7] text-white shadow-xs"
+                ? "bg-neutral-900 text-white shadow-xs"
                 : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
@@ -197,7 +197,7 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             onClick={() => setActiveTab("michigan")}
             className={`rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeTab === "michigan"
-                ? "bg-[#0a0f2e] text-white shadow-xs"
+                ? "bg-neutral-900 text-white shadow-xs"
                 : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
@@ -211,18 +211,18 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             {wayneAreas.map((area, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-slate-200 bg-[#f8fafc] p-4 flex flex-col justify-between hover:border-[#534AB7]/40 transition-colors"
+                className="rounded-xl border border-slate-200 bg-[#f8fafc] p-4 flex flex-col justify-between hover:border-slate-300 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-1.5 text-sm font-bold text-[#0a0f2e] mb-1">
-                    <MapPin className="h-4 w-4 text-[#534AB7] shrink-0" />
+                  <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-950 mb-1">
+                    <MapPin className="h-4 w-4 text-neutral-900 shrink-0" />
                     <span>{area.name}</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     {area.note}
                   </p>
                 </div>
-                <span className="text-[10px] font-semibold text-[#534AB7] mt-3 block pt-2 border-t border-slate-200/60">
+                <span className="text-[10px] font-semibold text-neutral-900 mt-3 block pt-2 border-t border-slate-200/60">
                   Wayne County Jurisdiction
                 </span>
               </div>
@@ -235,18 +235,18 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             {oaklandAreas.map((area, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-slate-200 bg-[#f8fafc] p-4 flex flex-col justify-between hover:border-[#534AB7]/40 transition-colors"
+                className="rounded-xl border border-slate-200 bg-[#f8fafc] p-4 flex flex-col justify-between hover:border-slate-300 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-1.5 text-sm font-bold text-[#0a0f2e] mb-1">
-                    <MapPin className="h-4 w-4 text-[#534AB7] shrink-0" />
+                  <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-950 mb-1">
+                    <MapPin className="h-4 w-4 text-neutral-900 shrink-0" />
                     <span>{area.name}</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     {area.note}
                   </p>
                 </div>
-                <span className="text-[10px] font-semibold text-[#534AB7] mt-3 block pt-2 border-t border-slate-200/60">
+                <span className="text-[10px] font-semibold text-neutral-900 mt-3 block pt-2 border-t border-slate-200/60">
                   Oakland County 6th Circuit Court Venue
                 </span>
               </div>
@@ -259,18 +259,18 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
             {macombAreas.map((area, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-slate-200 bg-[#f8fafc] p-4 flex flex-col justify-between hover:border-[#534AB7]/40 transition-colors"
+                className="rounded-xl border border-slate-200 bg-[#f8fafc] p-4 flex flex-col justify-between hover:border-slate-300 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-1.5 text-sm font-bold text-[#0a0f2e] mb-1">
-                    <MapPin className="h-4 w-4 text-[#534AB7] shrink-0" />
+                  <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-950 mb-1">
+                    <MapPin className="h-4 w-4 text-neutral-900 shrink-0" />
                     <span>{area.name}</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     {area.note}
                   </p>
                 </div>
-                <span className="text-[10px] font-semibold text-[#534AB7] mt-3 block pt-2 border-t border-slate-200/60">
+                <span className="text-[10px] font-semibold text-neutral-900 mt-3 block pt-2 border-t border-slate-200/60">
                   Macomb County 16th Circuit Court Venue
                 </span>
               </div>
@@ -284,23 +284,23 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
               <Link
                 key={idx}
                 href={market.href}
-                className="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between shadow-2xs hover:border-[#534AB7] hover:shadow-sm transition-all group"
+                className="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between shadow-2xs hover:border-neutral-900 hover:shadow-sm transition-all group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] bg-[#EEEDFE] px-2.5 py-0.5 rounded-full">
+                    <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 bg-slate-100 px-2.5 py-0.5 rounded-full">
                       {market.badge}
                     </span>
-                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#534AB7] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h4 className="text-base font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
+                  <h4 className="text-base font-bold text-neutral-950 group-hover:text-neutral-900 transition-colors">
                     {market.name}
                   </h4>
                   <p className="text-xs text-slate-600 leading-relaxed mt-1.5">
                     {market.desc}
                   </p>
                 </div>
-                <span className="text-xs font-bold text-[#534AB7] mt-4 flex items-center gap-1">
+                <span className="text-xs font-bold text-neutral-900 mt-4 flex items-center gap-1">
                   <span>View location intelligence</span>
                   <span>→</span>
                 </span>
@@ -312,40 +312,40 @@ export default function DetroitOtherAreasServed({ page }: { page: CityPage }) {
         {/* Deep Contextual Legal SEO Silo Interlinking Strip */}
         <div className="rounded-2xl border border-slate-200 bg-[#f8fafc] p-6 sm:p-8 space-y-4">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-            <Building2 className="h-4 w-4 text-[#534AB7]" />
+            <Building2 className="h-4 w-4 text-neutral-900" />
             <span>SearchPrex Core Legal SEO Silos &amp; Research</span>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <Link
               href="/services/law-firm-seo"
-              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-[#534AB7] transition-colors group"
+              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-neutral-900 transition-colors group"
             >
-              <strong className="block text-slate-900 group-hover:text-[#534AB7]">Law Firm SEO Architecture</strong>
+              <strong className="block text-slate-900 group-hover:text-neutral-900">Law Firm SEO Architecture</strong>
               <span className="text-slate-500 text-[11px]">How we structure high-intent practice silos</span>
             </Link>
 
             <Link
               href="/case-studies"
-              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-[#534AB7] transition-colors group"
+              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-neutral-900 transition-colors group"
             >
-              <strong className="block text-slate-900 group-hover:text-[#534AB7]">Verified Case Studies</strong>
+              <strong className="block text-slate-900 group-hover:text-neutral-900">Verified Case Studies</strong>
               <span className="text-slate-500 text-[11px]">GSC screenshots &amp; +227% organic revenue proof</span>
             </Link>
 
             <Link
               href="/why-us"
-              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-[#534AB7] transition-colors group"
+              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-neutral-900 transition-colors group"
             >
-              <strong className="block text-slate-900 group-hover:text-[#534AB7]">Founder-Led Execution</strong>
+              <strong className="block text-slate-900 group-hover:text-neutral-900">Founder-Led Execution</strong>
               <span className="text-slate-500 text-[11px]">Zero junior account managers or fluff</span>
             </Link>
 
             <Link
               href="/free-audit"
-              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-[#534AB7] transition-colors group"
+              className="p-3 rounded-xl bg-white border border-slate-200 hover:border-neutral-900 transition-colors group"
             >
-              <strong className="block text-slate-900 group-hover:text-[#534AB7]">Free 24h Diagnostic Audit</strong>
+              <strong className="block text-slate-900 group-hover:text-neutral-900">Free 24h Diagnostic Audit</strong>
               <span className="text-slate-500 text-[11px]">Wayne County competitor gap teardown</span>
             </Link>
           </div>

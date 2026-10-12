@@ -25,14 +25,14 @@ export default function PhiladelphiaPainBanner({
   return (
     <div
       id={id}
-      className="relative overflow-hidden border-y border-indigo-950/20 bg-gradient-to-r from-[#0a0f2e] via-[#3C3489] to-[#0a0f2e] py-8 text-white shadow-inner"
+      className="relative overflow-hidden border-y border-neutral-950/20 bg-neutral-900 border-y border-neutral-800 py-8 text-white shadow-inner"
     >
       {/* Background ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#534AB7_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#171717_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-3">
-        <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#EEEDFE] backdrop-blur-xs">
-          <Wrench className="h-3.5 w-3.5 text-indigo-300" />
+        <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 backdrop-blur-xs">
+          <Wrench className="h-3.5 w-3.5 text-slate-300" />
           <span>{isTop ? "Immediate Strategic Remedy" : "7-Day Risk-Free Trial Available"}</span>
         </div>
 
@@ -40,7 +40,7 @@ export default function PhiladelphiaPainBanner({
           Facing Stagnant Philadelphia Rankings? We Engineer the Fix.
         </h2>
 
-        <p className="text-sm sm:text-base text-indigo-100 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-slate-100 max-w-2xl mx-auto">
           Tired of seeing national aggregators take case calls while your site spins on page two? Tell us your bottleneck, and we will diagnose the exact technical hurdles.
         </p>
 
@@ -48,7 +48,7 @@ export default function PhiladelphiaPainBanner({
           <a
             href="#diagnose"
             onClick={scrollToDiagnose}
-            className="inline-flex items-center gap-2 font-bold text-white underline underline-offset-4 hover:text-[#EEEDFE] transition-colors cursor-pointer group text-sm sm:text-base"
+            className="inline-flex items-center gap-2 font-bold text-white underline underline-offset-4 hover:text-slate-200 transition-colors cursor-pointer group text-sm sm:text-base"
           >
             <span>{isTop ? "Identify your law firm's bottlenecks below" : "Claim your free 24-hour reality check now"}</span>
             <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />

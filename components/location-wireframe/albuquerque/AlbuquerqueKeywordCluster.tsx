@@ -43,11 +43,11 @@ export default function AlbuquerqueKeywordCluster() {
     <section id="keywords" className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <KeyRound className="w-3.5 h-3.5" />
             <span>Semantic Entity Architecture</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Albuquerque Legal Keywords: The Semantic Topics Google &amp; AI Expect
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -65,7 +65,7 @@ export default function AlbuquerqueKeywordCluster() {
                 onClick={() => setSelectedCluster(idx)}
                 className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all border ${
                   isActive
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-sm"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
                     : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -80,11 +80,11 @@ export default function AlbuquerqueKeywordCluster() {
           {/* Card 1: Core Statutory Topics */}
           <div className="p-7 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-2 flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-neutral-900 mb-2 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Core Statutory Entities</span>
               </div>
-              <h3 className="text-base font-extrabold text-[#0a0f2e] mb-3">
+              <h3 className="text-base font-extrabold text-neutral-950 mb-3">
                 {current.name} Topic Cloud
               </h3>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
@@ -99,11 +99,11 @@ export default function AlbuquerqueKeywordCluster() {
           {/* Card 2: Local Long-Tail Queries */}
           <div className="p-7 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] mb-2 flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-neutral-800 mb-2 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>High-Converting Long-Tail</span>
               </div>
-              <h3 className="text-base font-extrabold text-[#0a0f2e] mb-3">
+              <h3 className="text-base font-extrabold text-neutral-950 mb-3">
                 Targeted Search Phrases
               </h3>
               <p className="text-xs sm:text-sm font-mono font-bold text-slate-800 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200/60">
@@ -116,10 +116,10 @@ export default function AlbuquerqueKeywordCluster() {
           </div>
 
           {/* Card 3: Intent & Dedicated Silo */}
-          <div className="p-7 rounded-2xl bg-[#0a0f2e] text-white border border-[#3C3489] shadow-md flex flex-col justify-between">
+          <div className="p-7 rounded-2xl bg-neutral-900 text-white border border-[#262626] shadow-md flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#EEEDFE] mb-2 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-200 mb-2 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
                 <span>Search Intent Profile</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
@@ -130,7 +130,7 @@ export default function AlbuquerqueKeywordCluster() {
             <div className="pt-4 border-t border-slate-800">
               <Link
                 href={current.siloLink}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#EEEDFE] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-200 hover:underline"
               >
                 <span>Explore {current.siloName}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -142,15 +142,15 @@ export default function AlbuquerqueKeywordCluster() {
         {/* Breadcrumb Contextual Navigation */}
         <div className="text-xs sm:text-sm text-slate-500 pt-4 flex flex-wrap items-center gap-3">
           <span>Explore related legal markets:</span>
-          <Link href="/locations/texas" className="text-[#534AB7] hover:underline font-semibold">
+          <Link href="/locations/texas" className="text-neutral-900 hover:underline font-semibold">
             All Texas Practice Hubs
           </Link>
           <span>·</span>
-          <Link href="/locations" className="text-[#534AB7] hover:underline font-semibold">
+          <Link href="/locations" className="text-neutral-900 hover:underline font-semibold">
             All Covered Locations
           </Link>
           <span>·</span>
-          <Link href="/resources/law-firm-seo-audit-checklist" className="text-[#534AB7] hover:underline font-semibold">
+          <Link href="/resources/law-firm-seo-audit-checklist" className="text-neutral-900 hover:underline font-semibold">
             Free Law Firm SEO Checklist
           </Link>
         </div>

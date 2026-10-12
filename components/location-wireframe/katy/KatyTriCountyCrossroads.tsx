@@ -18,12 +18,12 @@ export default function KatyTriCountyCrossroads() {
       searches: '"Harris County divorce lawyer Katy", "family law attorney Katy Harris County", "Harris County car crash lawyer Katy"',
       href: "/services/law-firm-seo/family-law",
       linkText: "Explore our Family Law SEO framework",
-      color: "#534AB7",
-      bgColor: "bg-indigo-50/60",
-      borderColor: "border-[#534AB7]",
-      badgeColor: "bg-[#534AB7]/10 text-[#534AB7]",
-      svgFill: "#EEEDFE",
-      svgFillActive: "#534AB7",
+      color: "#171717",
+      bgColor: "bg-slate-50/60",
+      borderColor: "border-neutral-900",
+      badgeColor: "bg-slate-100 text-neutral-900",
+      svgFill: "#f1f5f9",
+      svgFillActive: "#171717",
       svgPoints: "250,30 505,30 505,305 250,305 232,195 250,110",
       labelX: 360,
       labelY: 160,
@@ -38,12 +38,12 @@ export default function KatyTriCountyCrossroads() {
       searches: '"Fort Bend County divorce Cinco Ranch", "Richmond family court lawyer Katy", "child custody attorney Fort Bend"',
       href: "/locations/texas/sugar-land",
       linkText: "Compare with Law Firm SEO in Sugar Land, TX",
-      color: "#1a7d59",
-      bgColor: "bg-emerald-50/60",
-      borderColor: "border-[#1a7d59]",
-      badgeColor: "bg-[#1a7d59]/10 text-[#1a7d59]",
+      color: "#334155",
+      bgColor: "bg-slate-50/60",
+      borderColor: "border-slate-300",
+      badgeColor: "bg-slate-100 text-neutral-800",
       svgFill: "#E6F4EA",
-      svgFillActive: "#1a7d59",
+      svgFillActive: "#334155",
       svgPoints: "30,175 232,195 250,305 30,305",
       labelX: 130,
       labelY: 250,
@@ -58,12 +58,12 @@ export default function KatyTriCountyCrossroads() {
       searches: '"Waller County divorce Brookshire", "Hempstead district court lawyer Katy", "Waller County DWI attorney"',
       href: "/services/law-firm-seo/personal-injury",
       linkText: "See Personal Injury & Accident SEO strategy",
-      color: "#3C3489",
+      color: "#262626",
       bgColor: "bg-slate-50",
-      borderColor: "border-[#3C3489]",
-      badgeColor: "bg-[#3C3489]/10 text-[#3C3489]",
+      borderColor: "border-[#262626]",
+      badgeColor: "bg-[#262626]/10 text-neutral-900",
       svgFill: "#E2E8F0",
-      svgFillActive: "#3C3489",
+      svgFillActive: "#262626",
       svgPoints: "30,30 250,30 250,110 232,195 30,175",
       labelX: 130,
       labelY: 100,
@@ -77,11 +77,11 @@ export default function KatyTriCountyCrossroads() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>The Crossroads of Three Jurisdictions</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Which Courthouse Handles a Katy Case? Harris, Fort Bend or Waller County
           </h2>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
@@ -100,7 +100,7 @@ export default function KatyTriCountyCrossroads() {
                 onClick={() => setSelectedCounty(idx)}
                 className={`px-5 py-3 rounded-xl font-bold text-sm transition-all border flex items-center gap-2 cursor-pointer ${
                   isSelected
-                    ? "bg-[#0a0f2e] text-white border-[#0a0f2e] shadow-md"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-md"
                     : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -138,7 +138,7 @@ export default function KatyTriCountyCrossroads() {
                     <polygon
                       points={c.svgPoints}
                       fill={isSelected ? c.color : c.svgFill}
-                      stroke={isSelected ? "#0a0f2e" : "#94a3b8"}
+                      stroke={isSelected ? "#0f172a" : "#94a3b8"}
                       strokeWidth={isSelected ? "3" : "1.5"}
                       className="transition-colors duration-300"
                     />
@@ -163,7 +163,7 @@ export default function KatyTriCountyCrossroads() {
                 cy="190"
                 r="16"
                 fill="#ffffff"
-                stroke="#0a0f2e"
+                stroke="#0f172a"
                 strokeWidth="3.5"
               />
               <circle cx="240" cy="190" r="7" fill="#10b981" />
@@ -173,7 +173,7 @@ export default function KatyTriCountyCrossroads() {
                 textAnchor="middle"
                 fontSize="13"
                 fontWeight="900"
-                fill="#0a0f2e"
+                fill="#0f172a"
                 className="select-none"
               >
                 KATY, TX
@@ -182,15 +182,15 @@ export default function KatyTriCountyCrossroads() {
 
             <div className="mt-4 flex items-center justify-center gap-4 text-xs font-semibold text-slate-600">
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[#534AB7]" />
+                <span className="w-3 h-3 rounded-full bg-neutral-900" />
                 Harris
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[#1a7d59]" />
+                <span className="w-3 h-3 rounded-full bg-neutral-900" />
                 Fort Bend
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[#3C3489]" />
+                <span className="w-3 h-3 rounded-full bg-[#262626]" />
                 Waller
               </span>
             </div>
@@ -212,7 +212,7 @@ export default function KatyTriCountyCrossroads() {
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
                 {current.title}
               </h3>
 
@@ -232,7 +232,7 @@ export default function KatyTriCountyCrossroads() {
               <div className="pt-2">
                 <Link
                   href={current.href}
-                  className="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-[#534AB7] hover:text-[#3C3489] hover:underline group"
+                  className="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-neutral-900 hover:text-neutral-950 hover:underline group"
                 >
                   <span>{current.linkText}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

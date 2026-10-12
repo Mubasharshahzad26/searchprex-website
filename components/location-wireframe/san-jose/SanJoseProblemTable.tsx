@@ -57,7 +57,7 @@ export default function SanJoseProblemTable() {
                 <tr className="bg-slate-100/80 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-700">
                   <th className="py-4 px-6 w-1/3">What You Experience (Symptom)</th>
                   <th className="py-4 px-6 w-1/3">Root Technical Cause (Diagnosis)</th>
-                  <th className="py-4 px-6 w-1/3 text-[#4338ca]">SearchPrex Fix (Engineered Solution)</th>
+                  <th className="py-4 px-6 w-1/3 text-neutral-950">SearchPrex Fix (Engineered Solution)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-xs sm:text-sm text-slate-700">
@@ -74,7 +74,7 @@ export default function SanJoseProblemTable() {
                     </td>
                     <td className="py-4 px-6 font-medium text-slate-900 align-top">
                       <div className="flex items-start gap-2">
-                        <span className="font-bold text-[#4338ca]">•</span>
+                        <span className="font-bold text-neutral-950">•</span>
                         <span>{row.fix}</span>
                       </div>
                     </td>
@@ -92,7 +92,7 @@ export default function SanJoseProblemTable() {
           </p>
           <Link
             href="/tools/serp-checker"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4338ca] hover:text-[#3730a3] shrink-0"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-950 hover:text-neutral-950 shrink-0"
           >
             Run Instant SERP Diagnostic
             <ArrowRight className="w-3.5 h-3.5" />

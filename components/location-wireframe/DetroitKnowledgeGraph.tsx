@@ -79,10 +79,10 @@ export default function DetroitKnowledgeGraph({ page }: { page: CityPage }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
             ENTITY ARCHITECTURE
           </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e] leading-tight">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950 leading-tight">
             Entity SEO for Detroit Law Firms: How Google and AI Understand Your Practice
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -111,7 +111,7 @@ export default function DetroitKnowledgeGraph({ page }: { page: CityPage }) {
                     onClick={() => setSelectedNode(key)}
                     className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
                       selectedNode === key
-                        ? "bg-[#534AB7] text-white shadow-xs scale-105 font-bold"
+                        ? "bg-neutral-900 text-white shadow-xs scale-105 font-bold"
                         : "bg-white text-slate-700 border border-slate-300 hover:bg-slate-100"
                     }`}
                   >
@@ -121,8 +121,8 @@ export default function DetroitKnowledgeGraph({ page }: { page: CityPage }) {
               </div>
 
               {/* Central Node */}
-              <div className="rounded-2xl bg-[#0a0f2e] text-white px-8 py-5 text-center shadow-xl border-2 border-slate-700 max-w-xs">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#a594fd] block">
+              <div className="rounded-2xl bg-neutral-900 text-white px-8 py-5 text-center shadow-xl border-2 border-slate-700 max-w-xs">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-slate-300 block">
                   Core Legal Entity
                 </span>
                 <span className="text-base sm:text-lg font-black text-white mt-0.5 block">
@@ -142,12 +142,12 @@ export default function DetroitKnowledgeGraph({ page }: { page: CityPage }) {
           </div>
 
           {/* Right: Selected Node Detail Inspector */}
-          <div className="lg:col-span-5 rounded-2xl border-2 border-[#534AB7] bg-white p-6 sm:p-8 shadow-xs space-y-5">
+          <div className="lg:col-span-5 rounded-2xl border-2 border-neutral-900 bg-white p-6 sm:p-8 shadow-xs space-y-5">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                 {current.relation}
               </span>
-              <h3 className="text-2xl font-black text-[#0a0f2e] mt-1">
+              <h3 className="text-2xl font-black text-neutral-950 mt-1">
                 {current.title}
               </h3>
             </div>

@@ -79,7 +79,7 @@ export default function SanJoseProcessSteps() {
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-black font-mono text-[#4338ca]">
+                  <span className="text-2xl font-black font-mono text-neutral-950">
                     {step.number}
                   </span>
                   <span className="text-xs font-bold px-2 py-0.5 rounded bg-white text-slate-700 border border-slate-200">

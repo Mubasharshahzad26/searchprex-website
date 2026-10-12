@@ -141,15 +141,15 @@ export default function PhiladelphiaDiagnosisTool() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Wrench className="h-4 w-4" />
             <span>Interactive Law Practice Diagnostics</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
-            Philadelphia Law Firm SEO Diagnosis: Tell Us the Problem and We Will Show the Fix
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            Philadelphia Law Firm SEO Diagnosis
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            <strong className="text-[#0a0f2e] font-bold">
+            <strong className="text-neutral-950 font-bold">
               We are here for the solution because we understand your frustration.
             </strong>{" "}
             Skip generic sales pitches. Type what is going wrong with your search visibility or intake, or select your challenges below. Our Gemini-powered engine will teardown probable causes in Philadelphia County and show our concrete technical fix.
@@ -157,7 +157,7 @@ export default function PhiladelphiaDiagnosisTool() {
         </div>
 
         {/* Input Box Card */}
-        <div className="mt-10 rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-all hover:border-[#534AB7]/40 hover:shadow-lg">
+        <div className="mt-10 rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-all hover:border-slate-300 hover:shadow-lg">
           <form onSubmit={handleDiagnose} className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -166,13 +166,13 @@ export default function PhiladelphiaDiagnosisTool() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="e.g. We get traffic but zero signed cases in Center City and South Philly"
-                className="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 py-3.5 pl-12 pr-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#534AB7] focus:bg-white focus:outline-none transition-all"
+                className="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 py-3.5 pl-12 pr-4 text-base text-slate-900 placeholder-slate-400 focus:border-neutral-900 focus:bg-white focus:outline-none transition-all"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#534AB7] px-7 py-3.5 text-base font-bold text-white shadow-md shadow-[#534AB7]/25 hover:bg-[#3C3489] transition-all hover:scale-102 active:scale-98 disabled:opacity-75 cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-neutral-900 px-7 py-3.5 text-base font-bold text-white shadow-md shadow-sm hover:bg-neutral-800 transition-all hover:scale-102 active:scale-98 disabled:opacity-75 cursor-pointer shrink-0"
             >
               {loading ? (
                 <>
@@ -181,7 +181,7 @@ export default function PhiladelphiaDiagnosisTool() {
                 </>
               ) : (
                 <>
-                  <Sparkles className="h-5 w-5 text-indigo-200" />
+                  <Sparkles className="h-5 w-5 text-slate-200" />
                   <span>Diagnose My Problem</span>
                 </>
               )}
@@ -209,11 +209,11 @@ export default function PhiladelphiaDiagnosisTool() {
                     onClick={() => toggleChip(chip)}
                     className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
                       active
-                        ? "bg-[#534AB7] text-white shadow-xs"
+                        ? "bg-neutral-900 text-white shadow-xs"
                         : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                     }`}
                   >
-                    {active ? "✓ " : "+ "}
+                    {active ? "• " : "+ "}
                     {chip}
                   </button>
                 );
@@ -227,15 +227,15 @@ export default function PhiladelphiaDiagnosisTool() {
           <div className="mt-12 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                   Analysis Complete
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e]">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
                   Probable Bottlenecks & SearchPrex Remediation
                 </h3>
               </div>
               {isAiGenerated && (
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 border border-indigo-200 px-3 py-1 text-xs font-bold text-[#534AB7]">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-200 px-3 py-1 text-xs font-bold text-neutral-900">
                   <Bot className="h-3.5 w-3.5" />
                   <span>Generated via Gemini Legal Intelligence</span>
                 </div>
@@ -244,10 +244,10 @@ export default function PhiladelphiaDiagnosisTool() {
 
             {/* Recommendation callout */}
             {recommendation && (
-              <div className="rounded-2xl border border-indigo-100 bg-[#EEEDFE]/60 p-5 text-sm sm:text-base text-slate-800 flex items-start gap-3">
-                <Sparkles className="h-5 w-5 text-[#534AB7] shrink-0 mt-0.5" />
+              <div className="rounded-2xl border border-slate-100 bg-slate-100 p-5 text-sm sm:text-base text-slate-800 flex items-start gap-3">
+                <Sparkles className="h-5 w-5 text-neutral-900 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-[#0a0f2e] font-bold block mb-0.5">
+                  <strong className="text-neutral-950 font-bold block mb-0.5">
                     Executive Strategy Directive:
                   </strong>
                   <span>{recommendation}</span>
@@ -260,10 +260,10 @@ export default function PhiladelphiaDiagnosisTool() {
               {items.map((it, idx) => (
                 <div
                   key={idx}
-                  className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4 hover:border-[#534AB7]/40 hover:shadow-lg transition-all"
+                  className="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4 hover:border-slate-300 hover:shadow-lg transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Issue 0{idx + 1}
                     </span>
                     <span className="text-xs font-mono font-bold text-slate-400">
@@ -271,7 +271,7 @@ export default function PhiladelphiaDiagnosisTool() {
                     </span>
                   </div>
 
-                  <h4 className="text-xl font-extrabold text-[#0a0f2e]">{it.n}</h4>
+                  <h4 className="text-xl font-extrabold text-neutral-950">{it.n}</h4>
 
                   <div className="space-y-2.5 text-xs sm:text-sm">
                     <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
@@ -281,14 +281,14 @@ export default function PhiladelphiaDiagnosisTool() {
                       <p className="text-slate-600 leading-relaxed">{it.why}</p>
                     </div>
 
-                    <div className="rounded-xl bg-indigo-50/50 p-3 border border-indigo-100/60">
-                      <strong className="text-[#534AB7] font-bold block mb-1">
+                    <div className="rounded-xl bg-slate-50/50 p-3 border border-slate-100/60">
+                      <strong className="text-neutral-900 font-bold block mb-1">
                         SearchPrex Fix:
                       </strong>
                       <p className="text-slate-700 leading-relaxed">{it.fix}</p>
                     </div>
 
-                    <div className="rounded-xl bg-emerald-50/60 p-3 border border-emerald-100 text-emerald-900">
+                    <div className="rounded-xl bg-slate-50/60 p-3 border border-slate-100 text-neutral-900">
                       <strong className="font-bold block mb-0.5">
                         Software & Tooling We Add:
                       </strong>
@@ -300,15 +300,15 @@ export default function PhiladelphiaDiagnosisTool() {
             </div>
 
             {/* Complete Package with 7-Day Free Trial Card */}
-            <div className="rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#0a0f2e] via-[#3C3489] to-[#0a0f2e] p-8 sm:p-10 text-white shadow-xl relative overflow-hidden">
+            <div className="rounded-3xl border-2 border-neutral-900 bg-neutral-900 via-neutral-800 to-neutral-900 p-8 sm:p-10 text-white shadow-xl relative overflow-hidden">
               <div className="max-w-3xl space-y-4">
-                <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-200">
+                <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-200">
                   Recommended For Your Practice
                 </span>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
                   The Complete Philadelphia Package, with a 7-Day Free Trial
                 </h3>
-                <p className="text-indigo-100 text-sm sm:text-base leading-relaxed">
+                <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
                   One full-service execution package built around your firm's specific diagnosis, plus legal intake efficiency tools. Experience our work for seven days before deciding on a month-to-month partnership.
                 </p>
 
@@ -317,20 +317,20 @@ export default function PhiladelphiaDiagnosisTool() {
                     <strong className="text-white font-bold block mb-1">
                       Included in Your 7-Day Trial:
                     </strong>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Full Philadelphia site & GBP audit</span>
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Neighborhood keyword & intent map</span>
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Quick-win technical indexation fixes</span>
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Live dashboard & report templates</span>
                     </div>
                   </div>
@@ -339,34 +339,34 @@ export default function PhiladelphiaDiagnosisTool() {
                     <strong className="text-white font-bold block mb-1">
                       Intake Efficiency Toolkit:
                     </strong>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Whisper call tracking setup</span>
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Missed-call automated text-back</span>
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Intake lead qualification scoring</span>
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-100">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-slate-100">
+                      <CheckCircle2 className="h-4 w-4 text-slate-400 shrink-0" />
                       <span>Compliant client review workflow</span>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-xs text-indigo-200 pt-2">
+                <p className="text-xs text-slate-200 pt-2">
                   7 days free · No credit card required · No auto-charge. You keep the complete audit teardown permanently.
                 </p>
 
                 {/* Trial Intake Form */}
                 <div className="pt-4">
                   {trialDone ? (
-                    <div className="rounded-2xl bg-emerald-950/40 border border-emerald-400/40 p-4 text-emerald-200 text-sm font-semibold flex items-center gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
+                    <div className="rounded-2xl bg-neutral-950/40 border border-slate-400/40 p-4 text-slate-200 text-sm font-semibold flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-slate-400 shrink-0" />
                       <span>Thank you. Your Philadelphia 7-day trial materials will be delivered to your inbox within 24 hours.</span>
                     </div>
                   ) : (
@@ -377,14 +377,14 @@ export default function PhiladelphiaDiagnosisTool() {
                         value={trialName}
                         onChange={(e) => setTrialName(e.target.value)}
                         placeholder="Attorney Name *"
-                        className="rounded-xl border border-indigo-400/40 bg-white/10 px-4 py-3 text-sm text-white placeholder-indigo-200 focus:bg-white/20 focus:outline-none"
+                        className="rounded-xl border border-slate-400/40 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-200 focus:bg-white/20 focus:outline-none"
                       />
                       <input
                         type="text"
                         value={trialWebsite}
                         onChange={(e) => setTrialWebsite(e.target.value)}
                         placeholder="Firm Website"
-                        className="rounded-xl border border-indigo-400/40 bg-white/10 px-4 py-3 text-sm text-white placeholder-indigo-200 focus:bg-white/20 focus:outline-none"
+                        className="rounded-xl border border-slate-400/40 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-200 focus:bg-white/20 focus:outline-none"
                       />
                       <input
                         type="email"
@@ -392,12 +392,12 @@ export default function PhiladelphiaDiagnosisTool() {
                         value={trialEmail}
                         onChange={(e) => setTrialEmail(e.target.value)}
                         placeholder="Work Email *"
-                        className="rounded-xl border border-indigo-400/40 bg-white/10 px-4 py-3 text-sm text-white placeholder-indigo-200 focus:bg-white/20 focus:outline-none"
+                        className="rounded-xl border border-slate-400/40 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-200 focus:bg-white/20 focus:outline-none"
                       />
                       <button
                         type="submit"
                         disabled={trialLoading}
-                        className="rounded-xl bg-white text-[#0a0f2e] hover:bg-slate-100 font-bold px-5 py-3 text-sm shadow-md transition-all hover:scale-102 active:scale-98 cursor-pointer disabled:opacity-75"
+                        className="rounded-xl bg-white text-neutral-950 hover:bg-slate-100 font-bold px-5 py-3 text-sm shadow-md transition-all hover:scale-102 active:scale-98 cursor-pointer disabled:opacity-75"
                       >
                         {trialLoading ? "Activating..." : "Start 7-Day Free Trial"}
                       </button>

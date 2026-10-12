@@ -23,7 +23,7 @@ interface PlanoWireframeViewProps {
 
 export default function PlanoWireframeView({ page }: PlanoWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white font-sans">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero Section */}
       <PlanoHero page={page} />
 

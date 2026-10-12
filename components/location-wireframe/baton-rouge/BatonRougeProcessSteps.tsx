@@ -67,7 +67,7 @@ export default function BatonRougeProcessSteps() {
               className="bg-slate-50 rounded-xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:border-slate-300 transition-colors"
             >
               <div>
-                <span className="text-xs font-mono font-bold text-[#4338ca] uppercase block mb-1">
+                <span className="text-xs font-mono font-bold text-neutral-950 uppercase block mb-1">
                   Step {idx + 1}
                 </span>
                 <span className="text-xs font-bold text-slate-500 block mb-2">{s.phase}</span>
@@ -84,7 +84,7 @@ export default function BatonRougeProcessSteps() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-slate-200 flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-200" />
                 <span>Deliverable Milestone</span>
               </div>
             </div>

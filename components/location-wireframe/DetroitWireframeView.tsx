@@ -65,7 +65,7 @@ interface DetroitWireframeViewProps {
 
 export default function DetroitWireframeView({ page }: DetroitWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7]/20 selection:text-[#0a0f2e] font-sans">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 0. TOP ANNOUNCEMENT & CALL BAR (Limited-time 14-day free trial offer + Direct Call) */}
       <DetroitTopPromoBar />
 

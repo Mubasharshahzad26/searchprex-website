@@ -113,7 +113,7 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
           <rect width="36" height="36" rx="8" fill="#F9AB00" />
           <rect x="10" y="19" width="4" height="9" rx="2" fill="#E37400" />
           <rect x="16" y="14" width="4" height="14" rx="2" fill="white" />
-          <rect x="22" y="9" width="4" height="19" rx="2" fill="#0A0F2E" />
+          <rect x="22" y="9" width="4" height="19" rx="2" fill="#0f172a" />
         </svg>
       ),
     },
@@ -175,10 +175,10 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
       name: "NicheSEO PRO",
       svg: (
         <svg viewBox="0 0 36 36" className="h-6 w-6" fill="none">
-          <rect width="36" height="36" rx="8" fill="#534AB7" />
-          <circle cx="18" cy="18" r="7" stroke="#EEEDFE" strokeWidth="2" />
-          <circle cx="18" cy="18" r="2.5" fill="#3EB489" />
-          <path d="M11 18H13.5M22.5 18H25M18 11V13.5M18 22.5V25" stroke="#EEEDFE" strokeWidth="1.8" strokeLinecap="round" />
+          <rect width="36" height="36" rx="8" fill="#171717" />
+          <circle cx="18" cy="18" r="7" stroke="#f1f5f9" strokeWidth="2" />
+          <circle cx="18" cy="18" r="2.5" fill="#94a3b8" />
+          <path d="M11 18H13.5M22.5 18H25M18 11V13.5M18 22.5V25" stroke="#f1f5f9" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
       ),
     },
@@ -321,15 +321,15 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* ── Top Block: WHY SEARCHPREX - "Our core expertise" (User requested heading) ── */}
-        <div className="rounded-3xl bg-[#0a0f2e] text-white p-6 sm:p-10 lg:p-12 shadow-2xl border border-slate-800 relative overflow-hidden">
+        <div className="rounded-3xl bg-neutral-900 text-white p-6 sm:p-10 lg:p-12 shadow-2xl border border-slate-800 relative overflow-hidden">
           {/* Subtle background ambient purple glow */}
-          <div className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#534AB7]/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#3eb489]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-slate-100 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-slate-300/15 blur-3xl" />
 
           {/* Header */}
           <div className="relative max-w-3xl mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#a594fd] block">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-300 block">
                 WHY SEARCHPREX
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
@@ -340,8 +340,8 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
               </p>
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-[#a594fd] bg-white/5 px-3 py-1.5 rounded-full border border-white/10 shrink-0">
-              <RotateCw className="h-3.5 w-3.5 text-[#3eb489] animate-spin-slow" />
+            <div className="hidden sm:flex items-center gap-2 text-[11px] font-semibold text-slate-300 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 shrink-0">
+              <RotateCw className="h-3.5 w-3.5 text-slate-300 animate-spin-slow" />
               <span>Interactive 3D Flip Cards</span>
             </div>
           </div>
@@ -369,14 +369,14 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                     }`}
                   >
                     {/* ── CARD FRONT ── */}
-                    <div className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 flex flex-col justify-between [backface-visibility:hidden] hover:bg-white/10 hover:border-[#534AB7]/60 transition-all shadow-md">
+                    <div className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 flex flex-col justify-between [backface-visibility:hidden] hover:bg-white/10 hover:border-slate-300 transition-all shadow-md">
                       <div>
                         <div className="flex items-center justify-between mb-4">
-                          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#534AB7]/30 text-[#a594fd] border border-[#534AB7]/50 shadow-inner group-hover:scale-105 transition-transform">
+                          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-300 border border-slate-300 shadow-inner group-hover:scale-105 transition-transform">
                             <Icon className="h-5 w-5" />
                           </span>
                           <span className="text-[10px] uppercase font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded-md border border-white/5 flex items-center gap-1">
-                            <RotateCw className="h-2.5 w-2.5 text-[#a594fd]" />
+                            <RotateCw className="h-2.5 w-2.5 text-slate-300" />
                             <span>Flip</span>
                           </span>
                         </div>
@@ -388,7 +388,7 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-semibold text-[#a594fd]">
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-semibold text-slate-300">
                         <span>{usp.metric}</span>
                         <span className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all">
                           Details →
@@ -397,10 +397,10 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                     </div>
 
                     {/* ── CARD BACK (Flipped 180deg) ── */}
-                    <div className="absolute inset-0 h-full w-full rounded-2xl border-2 border-[#534AB7] bg-[#101740] p-5 sm:p-6 flex flex-col justify-between [backface-visibility:hidden] [transform:rotateY(180deg)] shadow-xl">
+                    <div className="absolute inset-0 h-full w-full rounded-2xl border-2 border-neutral-900 bg-[#101740] p-5 sm:p-6 flex flex-col justify-between [backface-visibility:hidden] [transform:rotateY(180deg)] shadow-xl">
                       <div>
                         <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
-                          <span className="text-xs font-bold text-[#3eb489] uppercase tracking-wider">
+                          <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
                             {usp.backHeadline}
                           </span>
                           <span className="text-[10px] text-slate-400 flex items-center gap-1">
@@ -411,14 +411,14 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                         <ul className="space-y-2 mt-2">
                           {usp.backPoints.map((pt, pIdx) => (
                             <li key={pIdx} className="flex items-start gap-2 text-[11px] sm:text-xs text-slate-200 leading-snug">
-                              <CheckCircle2 className="h-3.5 w-3.5 text-[#3eb489] shrink-0 mt-0.5" />
+                              <CheckCircle2 className="h-3.5 w-3.5 text-slate-300 shrink-0 mt-0.5" />
                               <span>{pt}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-[#a594fd]">
+                      <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-300">
                         <span className="font-semibold text-white">SearchPrex Standard</span>
                         <span className="underline text-slate-300 hover:text-white">Tap to close ↩</span>
                       </div>
@@ -444,8 +444,8 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
           {/* Wireframe Banner: Technologies We Use */}
           <div className="rounded-3xl bg-gradient-to-r from-[#070b24] via-[#0d164d] to-[#070b24] text-white p-8 sm:p-12 shadow-xl border border-slate-800 text-center relative overflow-hidden">
             {/* Ambient background glow */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[#534AB7] to-transparent" />
-            <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 h-32 w-96 rounded-full bg-[#534AB7]/30 blur-3xl" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+            <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 h-32 w-96 rounded-full bg-slate-100 blur-3xl" />
 
             <div className="relative max-w-3xl mx-auto space-y-3 mb-8">
               <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
@@ -488,10 +488,10 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
           <div className="max-w-4xl mx-auto space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+                <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
                   TECHNICAL STACK SPECIFICATION
                 </span>
-                <h4 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
+                <h4 className="text-xl sm:text-2xl font-black text-neutral-950">
                   How Each Platform Powers Your Detroit Rankings
                 </h4>
               </div>
@@ -505,7 +505,7 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                     onClick={() => setToolIndex(i)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                       toolIndex === i
-                        ? "bg-[#534AB7] text-white shadow-xs"
+                        ? "bg-neutral-900 text-white shadow-xs"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
@@ -525,8 +525,8 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
             >
               {/* Category & Status Bar */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-200 text-xs">
-                <span className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-[#534AB7]">
-                  <span className="h-2 w-2 rounded-full bg-[#3eb489] animate-pulse" />
+                <span className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-neutral-900">
+                  <span className="h-2 w-2 rounded-full bg-slate-300 animate-pulse" />
                   <span>{tools[toolIndex].category}</span>
                 </span>
                 <span className="text-[11px] text-slate-400 font-semibold">
@@ -552,11 +552,11 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                     </div>
                   </div>
 
-                  <span className="inline-block px-3 py-0.5 rounded-full text-[11px] font-bold bg-[#EEEDFE] text-[#534AB7] border border-[#534AB7]/20">
+                  <span className="inline-block px-3 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-neutral-900 border border-slate-300">
                     {tools[toolIndex].badge}
                   </span>
 
-                  <h5 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
+                  <h5 className="text-xl sm:text-2xl font-black text-neutral-950">
                     {tools[toolIndex].name}
                   </h5>
 
@@ -587,7 +587,7 @@ export default function DetroitUspAndStack({ page }: { page: CityPage }) {
                     type="button"
                     onClick={() => setToolIndex(i)}
                     className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      toolIndex === i ? "w-7 bg-[#534AB7]" : "w-2 bg-slate-300 hover:bg-slate-400"
+                      toolIndex === i ? "w-7 bg-neutral-900" : "w-2 bg-slate-300 hover:bg-slate-400"
                     }`}
                     aria-label={`Go to tool ${i + 1}`}
                   />

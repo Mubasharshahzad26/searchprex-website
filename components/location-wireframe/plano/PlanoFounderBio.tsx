@@ -22,11 +22,11 @@ export default function PlanoFounderBio() {
 
             <div className="space-y-4 text-center sm:text-left">
               <div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 text-[#534AB7] border border-indigo-100 mb-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-50 text-neutral-900 border border-slate-100 mb-2">
                   <Award className="w-3.5 h-3.5" />
                   Direct Founder Accountability
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e]">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
                   Who Builds Your Plano Strategy
                 </h2>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">
@@ -40,19 +40,19 @@ export default function PlanoFounderBio() {
 
               <div className="grid sm:grid-cols-2 gap-2.5 pt-2 text-xs text-slate-700">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0" />
                   <span>Semrush Certified Technical Auditor</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0" />
                   <span>5+ Years in High-Intent Legal SEO</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0" />
                   <span>Exclusive Single-Firm Representation</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0" />
                   <span>Ethical Texas Bar Compliance</span>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export default function PlanoFounderBio() {
               <div className="pt-4 flex flex-wrap items-center justify-center sm:justify-start gap-4">
                 <Link
                   href="/experts"
-                  className="text-xs font-bold text-[#534AB7] hover:text-[#3C3489] inline-flex items-center gap-1"
+                  className="text-xs font-bold text-neutral-900 hover:text-neutral-950 inline-flex items-center gap-1"
                 >
                   Meet the SearchPrex leadership team <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

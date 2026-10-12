@@ -69,7 +69,7 @@ export default function GrandRapidsRiskReversal() {
                   </p>
                 </div>
                 <div className="pt-5 border-t border-slate-100 mt-6 text-xs font-bold text-neutral-800">
-                  ✓ {item.highlight}
+                  • {item.highlight}
                 </div>
               </div>
             );

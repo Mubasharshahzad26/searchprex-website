@@ -53,11 +53,11 @@ export default function DentonBurdenLifted() {
     <section className="py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <HeartHandshake className="w-3.5 h-3.5" />
             <span>Attorney Stress Relief</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Take a Breath. Tell Me What&apos;s Heavy, and I&apos;ll Show You Who Carries It.
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -77,14 +77,14 @@ export default function DentonBurdenLifted() {
                   onClick={() => toggleBurden(idx)}
                   className={`w-full text-left p-5 rounded-2xl border transition-all ${
                     isSelected
-                      ? "bg-[#EEEDFE]/50 border-[#534AB7] shadow-sm"
+                      ? "bg-slate-100 border-neutral-900 shadow-sm"
                       : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/60"
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 shrink-0">
                       {isSelected ? (
-                        <CheckCircle2 className="w-5 h-5 text-[#534AB7]" />
+                        <CheckCircle2 className="w-5 h-5 text-neutral-900" />
                       ) : (
                         <Circle className="w-5 h-5 text-slate-400" />
                       )}
@@ -92,14 +92,14 @@ export default function DentonBurdenLifted() {
                     <div>
                       <h3
                         className={`text-base font-bold ${
-                          isSelected ? "text-[#0a0f2e]" : "text-slate-800"
+                          isSelected ? "text-neutral-950" : "text-slate-800"
                         }`}
                       >
                         {item.title}
                       </h3>
                       {isSelected && (
                         <p className="text-xs sm:text-sm text-slate-700 mt-2 font-medium leading-relaxed animate-in fade-in-50 duration-200">
-                          <strong className="text-[#1a7d59]">How I Carry It:</strong>{" "}
+                          <strong className="text-neutral-800">How I Carry It:</strong>{" "}
                           {item.solution}
                         </p>
                       )}
@@ -111,9 +111,9 @@ export default function DentonBurdenLifted() {
           </div>
 
           {/* Right Column: Weight Lifted Summary Card */}
-          <div className="lg:col-span-5 bg-[#0a0f2e] text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-800 sticky top-24">
-            <div className="text-xs font-bold text-[#EEEDFE] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="lg:col-span-5 bg-neutral-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-800 sticky top-24">
+            <div className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-slate-400" />
               <span>Weight Lifted Tracker</span>
             </div>
 
@@ -124,7 +124,7 @@ export default function DentonBurdenLifted() {
             {/* Progress Bar */}
             <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden my-4">
               <div
-                className="h-full bg-gradient-to-r from-[#534AB7] to-[#1a7d59] transition-all duration-500 rounded-full"
+                className="h-full bg-gradient-to-r from-neutral-800 to-neutral-800 transition-all duration-500 rounded-full"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -136,7 +136,7 @@ export default function DentonBurdenLifted() {
             <div className="pt-5 border-t border-slate-800 flex flex-col gap-3">
               <a
                 href="#talk-to-me"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-sm shadow-md transition-all"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm shadow-md transition-all"
               >
                 <span>Hand This Off to Mubashar Sharif</span>
                 <ArrowRight className="w-4 h-4" />

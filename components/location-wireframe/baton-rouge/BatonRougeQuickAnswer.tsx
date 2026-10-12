@@ -13,7 +13,7 @@ export default function BatonRougeQuickAnswer() {
           {/* Header pill */}
           <div className="flex items-center gap-2 mb-4">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white text-slate-800 text-xs font-bold border border-slate-300">
-              <Bot className="w-3.5 h-3.5 text-[#4338ca]" />
+              <Bot className="w-3.5 h-3.5 text-neutral-950" />
               AI Overview & Search Extraction
             </span>
             <span className="text-xs text-slate-500 font-medium">
@@ -73,7 +73,7 @@ export default function BatonRougeQuickAnswer() {
             <div className="flex items-center gap-3">
               <Link
                 href="/tools/ai-search"
-                className="font-semibold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                className="font-semibold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
               >
                 Explore AI Search Tracking
                 <ArrowRight className="w-3.5 h-3.5" />

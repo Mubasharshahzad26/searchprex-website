@@ -1,214 +1,301 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { ArrowRight, ShieldCheck, Sparkles, CheckCircle2, Building2 } from "lucide-react";
+import React, { useState } from "react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+} from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
 interface DentonHeroProps {
-  page: CityPage;
+  page?: CityPage;
 }
 
 export default function DentonHero({ page }: DentonHeroProps) {
-  // 12 Sun rays for sunrise over the Denton Courthouse Square
-  const rays = Array.from({ length: 12 }, (_, i) => {
-    const a = (i * Math.PI) / 6;
-    return {
-      x1: 900 + Math.cos(a) * 90,
-      y1: 235 + Math.sin(a) * 90,
-      x2: 900 + Math.cos(a) * (i % 2 ? 130 : 145),
-      y2: 235 + Math.sin(a) * (i % 2 ? 130 : 145),
-    };
-  });
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [email, setEmail] = useState("");
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("Personal injury");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "Denton Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "denton:hero-lead-form",
+          notes: `Requested Denton Hero Audit. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
+  };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#EEEDFE]/60 via-white to-white pt-10 sm:pt-16 pb-20 border-b border-slate-200">
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-[#534AB7]/10 to-transparent blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          {/* Left Hero Content */}
-          <div className="lg:col-span-7">
-            {/* Pill Tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-5">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Law Firm SEO · Denton, Texas</span>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · Denton, TX
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
             </div>
 
-            {/* H1 */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#0a0f2e] tracking-tight leading-[1.12] mb-6">
-              Law Firm SEO in Denton, Texas: You Don&apos;t Have to Carry This Alone
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              Denton Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
+                Qualified Cases Without the Ad Burden
+              </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-slate-700 leading-relaxed mb-8 max-w-2xl">
-              I know the skyrocketing Google ad bills, the quiet Mondays, and the generic Dallas–Fort Worth mega-firms sitting above you on search results. I&apos;m Mubashar. Let me take the client acquisition burden off your shoulders with qualified Denton County retainers that compound organically.
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Denton law firm SEO replaces rising pay-per-click ad bills and quiet Mondays with compounding Denton County retainers. We engineer local Map Pack dominance, page-one authority, and AI citations across Denton Square, Corinth, Flower Mound, and the UNT/TWU corridors so injured and urgent clients call your practice first.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-6">
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Denton Co.</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Courthouse Venue Silos</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">60,000+</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">UNT & TWU Corridor</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">90-Day</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Performance Guarantee</p>
+              </div>
+            </div>
+
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
               <a
                 href="#talk-to-me"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-base shadow-lg shadow-[#534AB7]/25 transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
               >
-                <span>Talk to Me Directly</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Talk to Founder Directly</span>
+                <ArrowRight className="w-4 h-4 text-neutral-700" />
               </a>
-
               <a
                 href="#guarantee"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-slate-50 text-slate-900 font-bold text-base border-2 border-slate-200 transition-all"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
               >
                 <span>See the 90-Day Guarantee</span>
               </a>
             </div>
 
-            {/* Trust points */}
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 font-medium">
-              <CheckCircle2 className="w-4 h-4 text-[#1a7d59] shrink-0" />
-              <span>Founder-led · One firm per practice area in Denton · 90-day money-back guarantee</span>
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                Founder-led execution
+              </div>
             </div>
+
           </div>
 
-          {/* Right Hero Graphic: Historic Denton County Courthouse-on-the-Square Dome & Sunrise */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl bg-gradient-to-br from-indigo-50/70 via-white to-slate-50 border border-slate-200 p-6 shadow-xl shadow-indigo-950/5 overflow-hidden">
-              <div className="flex items-center justify-between border-b border-slate-200/80 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#1a7d59]" />
-                  <span className="text-xs font-bold text-[#0a0f2e] uppercase tracking-wider">
-                    Denton County Courthouse Square
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
+              
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Denton County Audit
                   </span>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Denton Reality Check
+                  </h2>
                 </div>
-                <span className="text-[11px] font-semibold text-[#534AB7] bg-[#EEEDFE] px-2 py-0.5 rounded">
-                  60,000+ Student Hub (UNT &amp; TWU)
-                </span>
               </div>
 
-              {/* Stylized SVG: Historic Denton Square Dome Silhouette & Sunrise */}
-              <div className="relative w-full h-72 rounded-xl bg-gradient-to-b from-[#EEEDFE]/40 via-sky-50/30 to-[#0a0f2e]/10 overflow-hidden border border-slate-100 flex items-end">
-                <svg
-                  viewBox="0 0 1360 400"
-                  className="w-full h-full"
-                  preserveAspectRatio="xMidYMax slice"
-                  aria-label="Historic Denton County Courthouse on the Square sunrise illustration"
-                >
-                  <defs>
-                    <linearGradient id="dentonSun" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#534AB7" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#3C3489" stopOpacity="0.8" />
-                    </linearGradient>
-                    <linearGradient id="domeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#3C3489" />
-                      <stop offset="100%" stopColor="#0a0f2e" />
-                    </linearGradient>
-                  </defs>
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally review your Denton website, Google Business Profile, and local search competitors, and email your 24-hour teardown directly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
 
-                  {/* Rising Sun & Rays in Brand Indigo */}
-                  <g>
-                    <circle cx="900" cy="235" r="120" fill="#EEEDFE" opacity="0.8" />
-                    <g>
-                      {rays.map((r, i) => (
-                        <line
-                          key={i}
-                          x1={r.x1}
-                          y1={r.y1}
-                          x2={r.x2}
-                          y2={r.y2}
-                          stroke="#534AB7"
-                          strokeWidth="5"
-                          strokeLinecap="round"
-                          opacity="0.45"
-                        />
+                  {/* Website */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="dentonlawfirm.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Work Email */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="you@dentonlawfirm.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
                       ))}
-                    </g>
-                    <circle cx="900" cy="235" r="76" fill="url(#dentonSun)" />
-                  </g>
+                    </div>
+                  </div>
 
-                  {/* Gentle Tree Hills */}
-                  <ellipse cx="260" cy="340" rx="150" ry="70" fill="#3C3489" opacity="0.6" />
-                  <ellipse cx="470" cy="352" rx="120" ry="52" fill="#534AB7" opacity="0.5" />
-                  <ellipse cx="1180" cy="338" rx="170" ry="74" fill="#3C3489" opacity="0.6" />
-                  <ellipse cx="1320" cy="354" rx="110" ry="50" fill="#534AB7" opacity="0.5" />
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Personal injury","DWI / Criminal","Family law","Student defense","Estate","Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea === area
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-                  {/* Historic Courthouse Architecture (1896 Denton County Courthouse-on-the-Square) */}
-                  <rect x="760" y="290" width="280" height="70" fill="url(#domeGrad)" />
-                  <rect x="800" y="262" width="200" height="30" fill="url(#domeGrad)" />
-                  <rect x="866" y="190" width="68" height="80" fill="url(#domeGrad)" />
-                  <polygon points="856,192 900,140 944,192" fill="#534AB7" />
-                  <rect x="893" y="118" width="14" height="28" fill="#3C3489" />
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
+                    </p>
+                  )}
 
-                  {/* Glowing Courthouse Windows in Soft Indigo Tint */}
-                  <circle cx="900" cy="222" r="14" fill="#EEEDFE" />
-                  <rect x="790" y="300" width="14" height="22" rx="2" fill="#EEEDFE" />
-                  <rect x="830" y="300" width="14" height="22" rx="2" fill="#EEEDFE" />
-                  <rect x="956" y="300" width="14" height="22" rx="2" fill="#EEEDFE" />
-                  <rect x="996" y="300" width="14" height="22" rx="2" fill="#EEEDFE" />
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Audit"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
 
-                  {/* Base ground line */}
-                  <rect x="0" y="360" width="1360" height="40" fill="#0a0f2e" />
-                </svg>
-              </div>
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
+                </form>
+              )}
 
-              {/* Status pill */}
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-                <span className="flex items-center gap-1.5 font-semibold text-[#0a0f2e]">
-                  <ShieldCheck className="w-4 h-4 text-[#1a7d59]" />
-                  Denton County Courts Optimized
-                </span>
-                <span className="text-slate-500">Parent &amp; Student Inquiries</span>
-              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Corridor Ticker Ribbon */}
-      <div className="mt-14 w-full bg-[#0a0f2e] text-slate-300 py-3.5 overflow-hidden border-y border-slate-800">
-        <div className="flex whitespace-nowrap animate-marquee">
-          <div className="flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300 px-4">
-            <span className="text-[#EEEDFE]">SERVING DENTON COUNTY</span>
-            <span>•</span>
-            <span>HISTORIC DENTON SQUARE</span>
-            <span>•</span>
-            <span>UNT &amp; TWU CAMPUS</span>
-            <span>•</span>
-            <span>LEWISVILLE</span>
-            <span>•</span>
-            <span>FLOWER MOUND</span>
-            <span>•</span>
-            <span>FRISCO</span>
-            <span>•</span>
-            <span>LITTLE ELM</span>
-            <span>•</span>
-            <span>CORINTH</span>
-            <span>•</span>
-            <span>THE COLONY</span>
-            <span>•</span>
-            <span className="text-[#EEEDFE]">DISPLACING DFW MEGA-FIRMS</span>
-          </div>
-          <div className="flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300 px-4" aria-hidden="true">
-            <span className="text-[#EEEDFE]">SERVING DENTON COUNTY</span>
-            <span>•</span>
-            <span>HISTORIC DENTON SQUARE</span>
-            <span>•</span>
-            <span>UNT &amp; TWU CAMPUS</span>
-            <span>•</span>
-            <span>LEWISVILLE</span>
-            <span>•</span>
-            <span>FLOWER MOUND</span>
-            <span>•</span>
-            <span>FRISCO</span>
-            <span>•</span>
-            <span>LITTLE ELM</span>
-            <span>•</span>
-            <span>CORINTH</span>
-            <span>•</span>
-            <span>THE COLONY</span>
-            <span>•</span>
-            <span className="text-[#EEEDFE]">DISPLACING DFW MEGA-FIRMS</span>
-          </div>
         </div>
       </div>
     </section>

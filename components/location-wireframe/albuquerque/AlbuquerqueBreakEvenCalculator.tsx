@@ -23,11 +23,11 @@ export default function AlbuquerqueBreakEvenCalculator() {
     <section className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <BarChart3 className="w-3.5 h-3.5" />
             <span>Economic Predictability &amp; ROI</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Feast or Famine vs. Steady Presence: What Peace of Mind Looks Like
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -48,7 +48,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
                   onClick={() => setViewMode("ads")}
                   className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                     viewMode === "ads"
-                      ? "bg-[#0a0f2e] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
@@ -58,7 +58,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
                   onClick={() => setViewMode("seo")}
                   className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                     viewMode === "seo"
-                      ? "bg-[#534AB7] text-white shadow-xs"
+                      ? "bg-neutral-900 text-white shadow-xs"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
@@ -79,7 +79,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
                     className={`w-full rounded-t-lg transition-all duration-500 ${
                       viewMode === "ads"
                         ? "bg-slate-400 group-hover:bg-slate-600"
-                        : "bg-[#534AB7] group-hover:bg-[#3C3489]"
+                        : "bg-neutral-900 group-hover:bg-neutral-800"
                     }`}
                   />
                   <span className="text-[11px] font-bold text-slate-500 mt-2">
@@ -95,10 +95,10 @@ export default function AlbuquerqueBreakEvenCalculator() {
                 {viewMode === "ads" ? (
                   <AlertCircle className="w-5 h-5 text-slate-600 shrink-0 mt-0.5" />
                 ) : (
-                  <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                 )}
                 <div>
-                  <h4 className="font-bold text-[#0a0f2e] text-sm mb-1">
+                  <h4 className="font-bold text-neutral-950 text-sm mb-1">
                     {viewMode === "ads"
                       ? "Ad Budget Volatility: The Endless Treadmill"
                       : "Compounding Authority: Compounded Equity"}
@@ -116,8 +116,8 @@ export default function AlbuquerqueBreakEvenCalculator() {
           {/* Right Column: Case Break-Even Arithmetic Calculator */}
           <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2 mb-4">
-              <Calculator className="w-5 h-5 text-[#534AB7]" />
-              <h3 className="text-lg font-bold text-[#0a0f2e]">
+              <Calculator className="w-5 h-5 text-neutral-900" />
+              <h3 className="text-lg font-bold text-neutral-950">
                 Albuquerque Retainer Break-Even Calculator
               </h3>
             </div>
@@ -129,7 +129,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
             <div className="mb-4">
               <div className="flex justify-between items-center text-xs font-bold text-slate-700 mb-1.5">
                 <span>Average Value Per Signed Case:</span>
-                <span className="text-[#534AB7] text-sm">${retainerFee.toLocaleString()}</span>
+                <span className="text-neutral-900 text-sm">${retainerFee.toLocaleString()}</span>
               </div>
               <input
                 type="range"
@@ -138,7 +138,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
                 step="500"
                 value={retainerFee}
                 onChange={(e) => setRetainerFee(Number(e.target.value))}
-                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#534AB7]"
+                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#171717]"
               />
               <div className="flex justify-between text-[10px] text-slate-400 mt-1">
                 <span>$1,500 (Simple DWI)</span>
@@ -150,7 +150,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
             <div className="mb-6">
               <div className="flex justify-between items-center text-xs font-bold text-slate-700 mb-1.5">
                 <span>Estimated Monthly SEO Retainer:</span>
-                <span className="text-[#534AB7] text-sm">${monthlyRetainer.toLocaleString()}</span>
+                <span className="text-neutral-900 text-sm">${monthlyRetainer.toLocaleString()}</span>
               </div>
               <input
                 type="range"
@@ -159,7 +159,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
                 step="500"
                 value={monthlyRetainer}
                 onChange={(e) => setMonthlyRetainer(Number(e.target.value))}
-                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#534AB7]"
+                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#171717]"
               />
               <div className="flex justify-between text-[10px] text-slate-400 mt-1">
                 <span>$2,000 / mo</span>
@@ -171,7 +171,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
             <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 mb-6">
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="p-3 bg-white rounded-lg border border-slate-100">
-                  <div className="text-2xl font-extrabold text-[#534AB7]">
+                  <div className="text-2xl font-extrabold text-neutral-900">
                     {casesNeededPerMonth}
                   </div>
                   <div className="text-[11px] font-bold text-slate-600 mt-0.5">
@@ -180,7 +180,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
                 </div>
 
                 <div className="p-3 bg-white rounded-lg border border-slate-100">
-                  <div className="text-2xl font-extrabold text-[#1a7d59]">
+                  <div className="text-2xl font-extrabold text-neutral-800">
                     {annualCasesToBreakEven}
                   </div>
                   <div className="text-[11px] font-bold text-slate-600 mt-0.5">
@@ -196,7 +196,7 @@ export default function AlbuquerqueBreakEvenCalculator() {
 
             <a
               href="#reality-check"
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-xs sm:text-sm shadow-md shadow-[#534AB7]/20 transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-sm transition-all"
             >
               <span>Verify Availability in Your Practice Area</span>
               <ArrowRight className="w-4 h-4" />

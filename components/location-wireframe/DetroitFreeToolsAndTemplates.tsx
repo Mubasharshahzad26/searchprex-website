@@ -52,10 +52,10 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
             FREE RESOURCES
           </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
             Free tools every {page.city} law firm can use today
           </h2>
           <p className="mt-2.5 text-sm sm:text-base text-slate-600">
@@ -68,7 +68,7 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
           {/* Tool 1: Map Pack Readiness Checklist */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-5">
             <div>
-              <h3 className="text-xl font-black text-[#0a0f2e]">
+              <h3 className="text-xl font-black text-neutral-950">
                 Map Pack readiness checklist
               </h3>
               <p className="mt-1 text-xs text-slate-500">
@@ -86,12 +86,12 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
                     onClick={() => toggleItem(idx)}
                     className={`w-full text-left flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
                       isChecked
-                        ? "bg-emerald-50/70 border-emerald-200 text-slate-900"
+                        ? "bg-slate-50/70 border-slate-200 text-slate-900"
                         : "bg-slate-50/60 border-slate-200 text-slate-700 hover:bg-slate-100/70"
                     }`}
                   >
                     {isChecked ? (
-                      <CheckSquare className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckSquare className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                     ) : (
                       <Square className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
                     )}
@@ -105,7 +105,7 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
             <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
               <div>
                 <span className="text-xs font-bold text-slate-600 block">Your local audit score:</span>
-                <span className="text-2xl font-black text-[#0a0f2e]">{score} / 10</span>
+                <span className="text-2xl font-black text-neutral-950">{score} / 10</span>
               </div>
               <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700">
                 {score <= 4
@@ -120,7 +120,7 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
           {/* Tool 2: Case Value Calculator */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-6">
             <div>
-              <h3 className="text-xl font-black text-[#0a0f2e]">
+              <h3 className="text-xl font-black text-neutral-950">
                 Case value calculator
               </h3>
               <p className="mt-1 text-xs text-slate-500">
@@ -142,7 +142,7 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
                       onClick={() => setLeadsPerMonth(num)}
                       className={`flex-1 rounded-xl py-2.5 text-xs font-bold transition-all cursor-pointer ${
                         leadsPerMonth === num
-                          ? "bg-[#0a0f2e] text-white shadow-xs"
+                          ? "bg-neutral-900 text-white shadow-xs"
                           : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                       }`}
                     >
@@ -169,7 +169,7 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
                       onClick={() => setCloseRate(rate.val)}
                       className={`flex-1 rounded-xl py-2.5 text-xs font-bold transition-all cursor-pointer ${
                         closeRate === rate.val
-                          ? "bg-[#0a0f2e] text-white shadow-xs"
+                          ? "bg-neutral-900 text-white shadow-xs"
                           : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                       }`}
                     >
@@ -196,7 +196,7 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
                       onClick={() => setFeePerCase(fee.val)}
                       className={`flex-1 rounded-xl py-2.5 text-xs font-bold transition-all cursor-pointer ${
                         feePerCase === fee.val
-                          ? "bg-[#0a0f2e] text-white shadow-xs"
+                          ? "bg-neutral-900 text-white shadow-xs"
                           : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                       }`}
                     >
@@ -207,11 +207,11 @@ export default function DetroitFreeToolsAndTemplates({ page }: { page: CityPage 
               </div>
 
               {/* Output Result Card */}
-              <div className="rounded-2xl bg-[#0a0f2e] text-white p-5 text-center shadow-md border border-slate-800">
+              <div className="rounded-2xl bg-neutral-900 text-white p-5 text-center shadow-md border border-slate-800">
                 <span className="text-xs text-slate-400 block font-medium">
                   Estimated new cases per month: <strong>{newCasesPerMonth}</strong>
                 </span>
-                <div className="mt-1 text-3xl sm:text-4xl font-black text-[#3eb489]">
+                <div className="mt-1 text-3xl sm:text-4xl font-black text-slate-300">
                   ${annualRevenue.toLocaleString()} / year
                 </div>
                 <span className="text-[11px] text-slate-400 mt-1 block">

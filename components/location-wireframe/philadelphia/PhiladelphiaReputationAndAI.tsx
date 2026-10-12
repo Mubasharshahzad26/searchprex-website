@@ -46,11 +46,11 @@ export default function PhiladelphiaReputationAndAI() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Sparkles className="h-4 w-4" />
             <span>Modern Word-of-Mouth Architecture</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             AI Is the New "My Cousin's Lawyer": Modern Philadelphia Referral Signals
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -69,7 +69,7 @@ export default function PhiladelphiaReputationAndAI() {
                 onClick={() => setActiveTab(idx)}
                 className={`inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-bold transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-102"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-102"
                     : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
                 }`}
               >
@@ -86,18 +86,18 @@ export default function PhiladelphiaReputationAndAI() {
           {/* Active Tab Explanation Card */}
           <div className="lg:col-span-7 rounded-3xl border-2 border-slate-200 bg-white p-7 sm:p-9 shadow-xs space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                 Pillar 0{activeTab + 1} · SearchPrex Blueprint
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e]">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
                 {current.title}
               </h3>
               <p className="text-base text-slate-700 leading-relaxed">
                 {current.desc}
               </p>
               
-              <div className="rounded-2xl bg-indigo-50/60 p-4 border border-indigo-100 text-xs sm:text-sm text-slate-800 flex items-center gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0" />
+              <div className="rounded-2xl bg-slate-50/60 p-4 border border-slate-100 text-xs sm:text-sm text-slate-800 flex items-center gap-2.5">
+                <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0" />
                 <span>
                   <strong>Strategic Impact:</strong> {current.benefit}
                 </span>
@@ -107,7 +107,7 @@ export default function PhiladelphiaReputationAndAI() {
             <div className="pt-4 border-t border-slate-100">
               <Link
                 href="/ai-search"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:underline"
               >
                 <span>Learn how SearchPrex optimizes for Generative AI</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -116,13 +116,13 @@ export default function PhiladelphiaReputationAndAI() {
           </div>
 
           {/* Right Column: AI Prompts We Aim to Win */}
-          <div className="lg:col-span-5 rounded-3xl border-2 border-[#534AB7]/30 bg-gradient-to-br from-indigo-50/40 via-white to-white p-7 sm:p-8 shadow-xs space-y-4 flex flex-col justify-between">
+          <div className="lg:col-span-5 rounded-3xl border-2 border-slate-300 bg-gradient-to-br from-slate-50/40 via-white to-white p-7 sm:p-8 shadow-xs space-y-4 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-2">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-2">
                 <Bot className="h-4 w-4" />
                 <span>AI Prompts We Position Your Firm to Win</span>
               </div>
-              <h4 className="text-xl font-extrabold text-[#0a0f2e]">
+              <h4 className="text-xl font-extrabold text-neutral-950">
                 Conversational Queries in Philadelphia
               </h4>
               <p className="text-xs text-slate-500 mt-1">
@@ -133,9 +133,9 @@ export default function PhiladelphiaReputationAndAI() {
                 {AI_PROMPTS.map((prompt, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-mono text-slate-800 shadow-2xs hover:border-[#534AB7]/40 hover:bg-indigo-50/20 transition-all"
+                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-mono text-slate-800 shadow-2xs hover:border-slate-300 hover:bg-slate-50/20 transition-all"
                   >
-                    <Search className="h-3.5 w-3.5 text-[#534AB7] shrink-0" />
+                    <Search className="h-3.5 w-3.5 text-neutral-900 shrink-0" />
                     <span className="truncate">{prompt}</span>
                   </div>
                 ))}

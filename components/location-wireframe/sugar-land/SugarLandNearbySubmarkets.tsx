@@ -65,11 +65,11 @@ export default function SugarLandNearbySubmarkets() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-3.5 h-3.5" />
             <span>Fort Bend Regional Expansion</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Law Firm SEO Near Sugar Land: Missouri City, Stafford, Richmond and Beyond
           </h2>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
@@ -88,7 +88,7 @@ export default function SugarLandNearbySubmarkets() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-sm"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
                     : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -102,12 +102,12 @@ export default function SugarLandNearbySubmarkets() {
         <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-sm">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider">
                 <Landmark className="w-3.5 h-3.5" />
                 <span>{active.county}</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
                 {active.name} Legal Search Dynamics
               </h3>
 
@@ -117,7 +117,7 @@ export default function SugarLandNearbySubmarkets() {
 
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <Search className="w-3.5 h-3.5 text-[#534AB7]" />
+                  <Search className="w-3.5 h-3.5 text-neutral-900" />
                   <span>Targeted Local Search Queries:</span>
                 </div>
                 <div className="text-xs sm:text-sm font-semibold text-slate-900 font-mono">
@@ -131,14 +131,14 @@ export default function SugarLandNearbySubmarkets() {
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                   Target Practice Hub
                 </div>
-                <div className="font-extrabold text-lg text-[#0a0f2e]">
+                <div className="font-extrabold text-lg text-neutral-950">
                   {active.linkText}
                 </div>
               </div>
 
               <Link
                 href={active.href}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-sm shadow-sm transition-all"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm shadow-sm transition-all"
               >
                 <span>View Strategy Framework</span>
                 <ArrowRight className="w-4 h-4" />

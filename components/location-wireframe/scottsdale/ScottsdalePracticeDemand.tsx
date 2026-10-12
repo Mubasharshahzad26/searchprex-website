@@ -97,7 +97,7 @@ export default function ScottsdalePracticeDemand() {
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-800">
-                        <Icon className="w-5 h-5 text-[#4338ca]" />
+                        <Icon className="w-5 h-5 text-neutral-950" />
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-slate-900">{practice.title}</h3>
@@ -114,7 +114,7 @@ export default function ScottsdalePracticeDemand() {
                     <span className="bg-white px-2.5 py-1 rounded border border-slate-200 text-slate-700">
                       KD: {practice.metrics.kd}
                     </span>
-                    <span className="bg-indigo-50 px-2.5 py-1 rounded border border-indigo-100 text-[#4338ca]">
+                    <span className="bg-slate-50 px-2.5 py-1 rounded border border-slate-100 text-neutral-950">
                       Intent: {practice.metrics.intent}
                     </span>
                   </div>
@@ -140,7 +140,7 @@ export default function ScottsdalePracticeDemand() {
                   <span className="text-xs font-medium text-slate-500">Practice Hub:</span>
                   <Link
                     href={practice.link}
-                    className="text-xs font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                    className="text-xs font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
                   >
                     {practice.linkText}
                     <ArrowRight className="w-3.5 h-3.5" />

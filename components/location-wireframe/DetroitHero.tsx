@@ -1,253 +1,297 @@
 "use client";
 
-// components/location-wireframe/DetroitHero.tsx
-//
-// Matches user's exact specification:
-// - Background: High-quality Detroit geography/skyline image (/images/locations/detroit-skyline-hero.jpg)
-// - H1: Revenue First Approach SEO in Detroit, Michigan
-// - Subheading: Be the Firm Injured Clients See First
-// - Right Column: Replicated exact Service Page Lead Collection Form (from LawFirmSEOClient / ArticleLeadMagnet)
-//   with Website + Work Email fields, in-place submit to /api/send-audit, 24h founder review pledge.
-
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, CheckCircle, Globe, Mail, AlertCircle, ShieldCheck } from "lucide-react";
+import React, { useState } from "react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+} from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
-import { CALL_HREF } from "@/lib/offer";
-import { trackLead } from "@/lib/track";
 
-export default function DetroitHero({ page }: { page: CityPage }) {
+interface DetroitHeroProps {
+  page?: CityPage;
+}
+
+export default function DetroitHero({ page }: DetroitHeroProps) {
+  const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
-  const [attribution, setAttribution] = useState({ utmSource: "", utmCampaign: "", referrer: "" });
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("Personal injury");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      setAttribution({
-        utmSource: params.get("utm_source") ?? "",
-        utmCampaign: params.get("utm_campaign") ?? "",
-        referrer: document.referrer || "",
-      });
-    }
-  }, []);
-
-  const handleHeroAuditSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (status === "loading" || !website.trim() || !email.trim()) return;
-    setStatus("loading");
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
     try {
-      const res = await fetch("/api/send-audit", {
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          website: website.trim(),
-          email: email.trim(),
-          source: `location-hero-${page.slug}`,
-          ...attribution,
+          name: name || "Detroit Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "detroit:hero-lead-form",
+          notes: `Requested Detroit Hero Audit. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
         }),
       });
-      if (!res.ok) throw new Error(String(res.status));
-      trackLead("tear_down", `location-hero-${page.slug}`);
-      setStatus("done");
-    } catch {
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
       setStatus("error");
     }
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#0a0f2e] text-white pt-12 pb-16 lg:pt-16 lg:pb-24 border-b border-slate-800">
-      {/* ── High-Quality Local Detroit Geography Background Image ── */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/locations/detroit-skyline-hero.jpg"
-          alt="Downtown Detroit skyline and legal district, Detroit law firm SEO"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-30 mix-blend-luminosity scale-105"
-        />
-        {/* Layered dark gradients for contrast and readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f2e] via-[#0a0f2e]/90 to-[#0a0f2e]/80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-transparent to-[#0a0f2e]/70" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#534AB7]/30 via-transparent to-transparent" />
-      </div>
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Heading & Value Prop */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#a594fd] bg-white/5 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm">
-              <span className="h-2 w-2 rounded-full bg-[#3eb489] animate-pulse" />
-              <span>LAW FIRM SEO · DETROIT, MICHIGAN</span>
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · Detroit, MI
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
             </div>
 
-            {/* H1 & Subheading */}
-            <div className="space-y-3">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12]">
-                Law Firm SEO in Detroit, Michigan: A Revenue-First Approach
-              </h1>
-              <p className="text-xl sm:text-2xl font-bold text-[#a594fd]">
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              Detroit Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
                 Be the Firm Injured Clients See First
-              </p>
-            </div>
+              </span>
+            </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-              SearchPrex is a law firm SEO company for Detroit attorneys who want signed cases, not vanity traffic. We help personal injury, no-fault, criminal defense, family and employment firms rank in the Google Map Pack, appear in AI Overviews and turn searches into phone calls across Wayne, Oakland and Macomb counties.
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Detroit law firm SEO is built for Michigan attorneys who want signed cases, not agency vanity traffic. We help personal injury, Michigan no-fault auto, criminal defense, family, and employment law firms rank in the Google Map Pack, appear in AI Overviews, and convert searches into direct phone calls across Wayne, Oakland, and Macomb counties.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">3 Counties</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Wayne, Oakland & Macomb</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Top 3</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Google Map Pack Focus</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Zero</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Long-Term Lock-In</p>
+              </div>
+            </div>
+
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
               <a
                 href="#growth-plan"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#534AB7]/25 transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
               >
-                <span>Get My Free Law Firm SEO Tear-Down</span>
-                <ArrowRight className="h-4 w-4" />
+                <span>Get My Free SEO Tear-Down</span>
+                <ArrowRight className="w-4 h-4 text-neutral-700" />
               </a>
               <a
                 href="#see-approach"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-5 py-3.5 text-sm font-semibold text-white transition-all cursor-pointer backdrop-blur-xs"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
               >
-                <span>See How We Win Cases From Search</span>
+                <span>See Our 3-Pillar Approach</span>
               </a>
             </div>
 
-            {/* Badges / Trust strip */}
-            <div className="pt-4 border-t border-slate-800/80 text-xs text-slate-400 flex flex-wrap items-center gap-2">
-              <span className="font-semibold text-slate-200">Target Practice Focus:</span>
-              <span>Built for personal injury, no-fault, criminal defense, family and employment law firms across Wayne, Oakland and Macomb counties.</span>
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                Founder-led execution
+              </div>
             </div>
+
           </div>
 
-          {/* Right Column: Replicated Service Page Lead Collection Form */}
-          <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="w-full max-w-md rounded-2xl border-2 border-[#1a7d59]/40 bg-white p-6 shadow-2xl sm:p-7 text-slate-900">
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
               
-              {/* Form Header matching service page */}
-              <div className="mb-4 pb-3 border-b border-slate-100">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[#1a7d59]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#1a7d59]">
-                    <ShieldCheck className="h-3 w-3" />
-                    <span>Free Law Firm Tear-Down</span>
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Metro Detroit Audit
                   </span>
-                  <span className="text-[11px] text-slate-400 font-medium">· 24h Turnaround</span>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Free Law Firm Tear-Down
+                  </h2>
                 </div>
-                <p className="text-base sm:text-lg font-black text-[#0a0f2e]">
-                  Free law firm tear-down
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-slate-500 font-medium">
-                  Send your URL. Within 24 hours I will review your practice-area pages, Google Business Profile and the Detroit firms outranking you.
-                </p>
               </div>
 
-              {/* Lead Submission Form or Success State */}
-              {status === "done" ? (
-                <div className="rounded-xl border border-[#1a7d59] p-4 text-center bg-[#1a7d59]/5 space-y-2">
-                  <CheckCircle className="mx-auto h-7 w-7 text-[#1a7d59]" />
-                  <p className="text-sm font-bold text-[#0a0f2e]">
-                    Got it — on its way.
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally review your Detroit website, Google Business Profile, and local search competitors, and email your 24-hour teardown directly.
                   </p>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    I&apos;ll read <span className="font-bold text-[#0a0f2e]">{website.trim()}</span> myself and reply to{" "}
-                    <strong className="text-[#0a0f2e]">{email.trim()}</strong> within 24 hours.
-                  </p>
-                  <a
-                    href={CALL_HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center justify-center rounded-lg bg-[#1a7d59] hover:bg-[#196b4d] px-4 py-2 text-xs font-bold text-white transition-opacity"
-                  >
-                    Want to talk sooner? Book 30 min →
-                  </a>
                 </div>
               ) : (
-                <form onSubmit={handleHeroAuditSubmit} className="flex flex-col gap-2.5">
-                  <div className="relative">
-                    <Globe
-                      className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400"
-                      aria-hidden="true"
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
                     />
+                  </div>
+
+                  {/* Website */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
                     <input
                       type="text"
                       required
+                      placeholder="detroitlawfirm.com"
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
-                      placeholder="yourlawfirm.com"
-                      aria-label="Your website URL"
-                      className="w-full rounded-lg border border-slate-200 bg-[#f8f9fc] py-2.5 pl-9 pr-3 text-xs text-[#0a0f2e] outline-none transition-all placeholder:text-slate-400 focus:border-[#1a7d59] focus:bg-white focus:ring-2 focus:ring-[#1a7d59]/20"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
                     />
                   </div>
 
-                  <div className="relative">
-                    <Mail
-                      className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400"
-                      aria-hidden="true"
-                    />
+                  {/* Work Email */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
                     <input
                       type="email"
                       required
+                      placeholder="you@detroitlawfirm.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="attorney@yourfirm.com"
-                      aria-label="Your work email address"
-                      className="w-full rounded-lg border border-slate-200 bg-[#f8f9fc] py-2.5 pl-9 pr-3 text-xs text-[#0a0f2e] outline-none transition-all placeholder:text-slate-400 focus:border-[#1a7d59] focus:bg-white focus:ring-2 focus:ring-[#1a7d59]/20"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="w-full rounded-lg py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-[#196b4d] cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-70"
-                    style={{ background: "#1a7d59" }}
-                  >
-                    <span>{status === "loading" ? "Sending…" : "Send my free tear-down →"}</span>
-                  </button>
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-                  {status === "error" ? (
-                    <p
-                      className="flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 p-2.5 text-xs text-rose-800"
-                      role="alert"
-                    >
-                      <AlertCircle className="mt-px h-4 w-4 shrink-0" />
-                      <span>
-                        That didn&apos;t send — email{" "}
-                        <a href="mailto:contact@searchprex.com" className="font-bold underline">
-                          contact@searchprex.com
-                        </a>{" "}
-                        instead.
-                      </span>
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Personal injury","No-Fault auto","Criminal defense","Family law","Employment","Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea === area
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
                     </p>
-                  ) : null}
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Audit"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
                 </form>
               )}
-
-              {/* Trust signals & Exclusivity */}
-              <div className="mt-3.5 flex flex-col gap-1.5 pt-2 border-t border-slate-100 text-xs">
-                {[
-                  "One firm per practice area in your Detroit territory",
-                  "Your site reviewed personally by the founder",
-                  "Month-to-month, no long-term contract",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <CheckCircle className="h-3.5 w-3.5 shrink-0 text-[#1a7d59]" />
-                    <span className="text-[11px] sm:text-xs text-slate-600 font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Direct Booking Link */}
-              <a
-                href={CALL_HREF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 block text-center text-xs font-bold text-[#196b4d] hover:underline"
-              >
-                Prefer to talk sooner? Book 30 min →
-              </a>
 
             </div>
           </div>

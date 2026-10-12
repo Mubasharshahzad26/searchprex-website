@@ -72,11 +72,11 @@ export default function KatyProcessExits() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>The SearchPrex Implementation Highway</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Three Exits From Invisible to Found in Katy
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -87,7 +87,7 @@ export default function KatyProcessExits() {
         {/* Progress Bar */}
         <div className="mb-8 bg-slate-200 h-2.5 rounded-full overflow-hidden">
           <div
-            className="bg-[#534AB7] h-full transition-all duration-500 rounded-full"
+            className="bg-neutral-900 h-full transition-all duration-500 rounded-full"
             style={{ width: current.progress }}
           />
         </div>
@@ -103,7 +103,7 @@ export default function KatyProcessExits() {
                 onClick={() => setSelectedExit(idx)}
                 className={`px-5 py-3 rounded-xl font-bold text-sm transition-all border flex items-center gap-2 cursor-pointer ${
                   isSelected
-                    ? "bg-[#0a0f2e] text-white border-[#0a0f2e] shadow-md"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-md"
                     : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -117,12 +117,12 @@ export default function KatyProcessExits() {
         <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider">
                 <Icon className="w-3.5 h-3.5" />
                 <span>{current.kicker}</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
                 {current.headline}
               </h3>
 
@@ -130,12 +130,12 @@ export default function KatyProcessExits() {
                 {current.body}
               </p>
 
-              <div className="pt-2 flex flex-wrap gap-4 text-xs sm:text-sm font-bold text-[#534AB7]">
+              <div className="pt-2 flex flex-wrap gap-4 text-xs sm:text-sm font-bold text-neutral-900">
                 {current.links.map((link, lIdx) => (
                   <Link
                     key={lIdx}
                     href={link.href}
-                    className="inline-flex items-center gap-1.5 hover:text-[#3C3489] hover:underline"
+                    className="inline-flex items-center gap-1.5 hover:text-neutral-950 hover:underline"
                   >
                     <span>{link.label}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -150,7 +150,7 @@ export default function KatyProcessExits() {
               </div>
               {current.deliverables.map((item, dIdx) => (
                 <div key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-800">
-                  <CheckCircle2 className="w-4 h-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>
               ))}

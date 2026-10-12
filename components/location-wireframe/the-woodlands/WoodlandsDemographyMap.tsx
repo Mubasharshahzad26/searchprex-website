@@ -9,12 +9,12 @@ export default function WoodlandsDemographyMap() {
     <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
       {/* Section Header */}
       <div className="max-w-3xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-          <MapPin className="w-3.5 h-3.5 text-[#534AB7]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+          <MapPin className="w-3.5 h-3.5 text-neutral-900" />
           Local Demographics & Market Geography
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-          The Woodlands Legal Market & Client Demographics
+          The Woodlands Legal Market & Demographics
         </h2>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           The Woodlands represents one of the most affluent master-planned enclaves in the United States. Ranking in this submarket requires precise alignment with executive wealth indicators and distinct village boundaries.
@@ -24,7 +24,7 @@ export default function WoodlandsDemographyMap() {
       {/* Demographic Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-1">
-          <div className="flex items-center gap-2 text-indigo-700">
+          <div className="flex items-center gap-2 text-neutral-800">
             <Users className="w-4 h-4" />
             <span className="text-xs font-bold uppercase tracking-wider">Population</span>
           </div>
@@ -33,7 +33,7 @@ export default function WoodlandsDemographyMap() {
         </div>
 
         <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-1">
-          <div className="flex items-center gap-2 text-emerald-700">
+          <div className="flex items-center gap-2 text-neutral-800">
             <DollarSign className="w-4 h-4" />
             <span className="text-xs font-bold uppercase tracking-wider">Median Income</span>
           </div>
@@ -42,7 +42,7 @@ export default function WoodlandsDemographyMap() {
         </div>
 
         <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-1">
-          <div className="flex items-center gap-2 text-indigo-700">
+          <div className="flex items-center gap-2 text-neutral-800">
             <Home className="w-4 h-4" />
             <span className="text-xs font-bold uppercase tracking-wider">Homeownership</span>
           </div>
@@ -51,7 +51,7 @@ export default function WoodlandsDemographyMap() {
         </div>
 
         <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-1">
-          <div className="flex items-center gap-2 text-indigo-700">
+          <div className="flex items-center gap-2 text-neutral-800">
             <Building className="w-4 h-4" />
             <span className="text-xs font-bold uppercase tracking-wider">Median Home</span>
           </div>
@@ -72,7 +72,7 @@ export default function WoodlandsDemographyMap() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-indigo-600/90 text-white uppercase tracking-wider">
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-neutral-800/90 text-white uppercase tracking-wider">
                 Town Center & Waterway
               </span>
               <h3 className="text-lg font-bold text-white mt-1">
@@ -95,7 +95,7 @@ export default function WoodlandsDemographyMap() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-600/90 text-white uppercase tracking-wider">
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-neutral-800/90 text-white uppercase tracking-wider">
                 Executive Consultation
               </span>
               <h3 className="text-lg font-bold text-white mt-1">
@@ -124,7 +124,7 @@ export default function WoodlandsDemographyMap() {
             href="https://maps.google.com/?q=The+Woodlands+TX"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#534AB7] hover:text-[#3C3489]"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-900 hover:text-neutral-950"
           >
             <span>Open in Google Maps</span>
             <ExternalLink className="w-3.5 h-3.5" />

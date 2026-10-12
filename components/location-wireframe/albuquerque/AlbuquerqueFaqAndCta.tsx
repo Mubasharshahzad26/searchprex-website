@@ -41,11 +41,11 @@ export default function AlbuquerqueFaqAndCta() {
       <section className="py-20 bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Jurisdictional Clarity</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
               Frequently Asked Questions from New Mexico Attorneys
             </h2>
             <p className="text-slate-600 text-base sm:text-lg">
@@ -65,12 +65,12 @@ export default function AlbuquerqueFaqAndCta() {
                     onClick={() => toggleFaq(idx)}
                     className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors"
                   >
-                    <span className="font-extrabold text-base sm:text-lg text-[#0a0f2e]">
+                    <span className="font-extrabold text-base sm:text-lg text-neutral-950">
                       {faq.q}
                     </span>
                     <ChevronDown
                       className={`w-5 h-5 text-slate-500 transition-transform duration-200 shrink-0 ${
-                        isOpen ? "rotate-180 text-[#534AB7]" : ""
+                        isOpen ? "rotate-180 text-neutral-900" : ""
                       }`}
                     />
                   </button>
@@ -88,10 +88,10 @@ export default function AlbuquerqueFaqAndCta() {
       </section>
 
       {/* Closing CTA Banner */}
-      <section className="py-20 bg-gradient-to-br from-[#534AB7] via-[#3C3489] to-[#0a0f2e] text-white">
+      <section className="py-20 bg-gradient-to-br from-neutral-800 via-neutral-800 to-neutral-900 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#EEEDFE] text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-slate-200 text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
+            <ShieldCheck className="w-4 h-4 text-slate-400" />
             <span>Exclusivity Guaranteed · One Firm Per Practice Area</span>
           </span>
 
@@ -106,15 +106,15 @@ export default function AlbuquerqueFaqAndCta() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
               href="#reality-check"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-[#0a0f2e] font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
             >
               <span>Get My Free Reality Check</span>
-              <ArrowRight className="w-4 h-4 text-[#534AB7]" />
+              <ArrowRight className="w-4 h-4 text-neutral-900" />
             </a>
 
             <a
               href="#diagnosis-tool"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-indigo-900/40 hover:bg-indigo-900/60 text-white font-bold text-base border border-white/20 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-neutral-900/40 hover:bg-neutral-900/60 text-white font-bold text-base border border-white/20 transition-all"
             >
               <span>Diagnose Issues with Gemini</span>
             </a>
@@ -122,11 +122,11 @@ export default function AlbuquerqueFaqAndCta() {
 
           <div className="flex items-center justify-center gap-6 text-xs text-slate-300 font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               Month-to-Month Terms
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               Founder-Led Architecture
             </span>
           </div>

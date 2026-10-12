@@ -15,12 +15,12 @@ export default function AlbuquerquePainBanner({
 }: AlbuquerquePainBannerProps) {
   if (variant === "bottom") {
     return (
-      <section id={id} className="w-full bg-[#0a0f2e] text-white py-14 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+      <section id={id} className="w-full bg-neutral-900 text-white py-14 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/20 text-[#EEEDFE] text-xs font-bold uppercase tracking-wider mb-3">
-                <ShieldAlert className="w-3.5 h-3.5 text-[#EEEDFE]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-700/10 border border-slate-400/20 text-slate-200 text-xs font-bold uppercase tracking-wider mb-3">
+                <ShieldAlert className="w-3.5 h-3.5 text-slate-200" />
                 Zero Vanity Metrics · Signed Case Retention
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
@@ -31,7 +31,7 @@ export default function AlbuquerquePainBanner({
               </p>
             </div>
 
-            <div className="bg-slate-900/80 border border-indigo-500/20 rounded-2xl p-6 sm:p-7 shadow-xl">
+            <div className="bg-slate-900/80 border border-neutral-700/20 rounded-2xl p-6 sm:p-7 shadow-xl">
               <h3 className="text-lg font-bold text-white mb-2">
                 We Fix the Disconnect with High-Intent Local Authority
               </h3>
@@ -41,7 +41,7 @@ export default function AlbuquerquePainBanner({
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="#reality-check"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-xs sm:text-sm transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm transition-all"
                 >
                   <span>Request Albuquerque Reality Check</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -61,13 +61,13 @@ export default function AlbuquerquePainBanner({
   }
 
   return (
-    <section id={id} className="w-full bg-[#0a0f2e] text-white py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+    <section id={id} className="w-full bg-neutral-900 text-white py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-6 items-center">
           {/* Problem 1: Confused Between Agencies */}
           <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="w-10 h-10 rounded-xl bg-[#534AB7]/20 border border-[#534AB7]/30 flex items-center justify-center shrink-0">
-              <HelpCircle className="w-5 h-5 text-[#EEEDFE]" />
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center shrink-0">
+              <HelpCircle className="w-5 h-5 text-slate-200" />
             </div>
             <div>
               <h3 className="text-base font-bold text-white mb-1">
@@ -76,8 +76,8 @@ export default function AlbuquerquePainBanner({
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-2">
                 Out-of-state agencies pitch national cookie-cutter packages that treat Albuquerque the same as Dallas or Phoenix. They don&apos;t know the difference between the Second Judicial District Court and Bernalillo County Metropolitan Court.
               </p>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#EEEDFE]">
-                <CheckCircle className="w-3.5 h-3.5 text-[#1a7d59]" />
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-200">
+                <CheckCircle className="w-3.5 h-3.5 text-neutral-800" />
                 We provide founder-led legal strategy tailored to New Mexico.
               </span>
             </div>
@@ -85,8 +85,8 @@ export default function AlbuquerquePainBanner({
 
           {/* Problem 2: Didn't Get Results */}
           <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="w-10 h-10 rounded-xl bg-[#1a7d59]/20 border border-[#1a7d59]/30 flex items-center justify-center shrink-0">
-              <AlertTriangle className="w-5 h-5 text-emerald-400" />
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center shrink-0">
+              <AlertTriangle className="w-5 h-5 text-slate-400" />
             </div>
             <div>
               <h3 className="text-base font-bold text-white mb-1">
@@ -95,8 +95,8 @@ export default function AlbuquerquePainBanner({
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-2">
                 If your previous agency handed you 40-page PDF reports filled with &quot;impressions&quot; and vanity keyword rankings while your phone remained silent, you suffered an intent mismatch.
               </p>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-300">
-                <CheckCircle className="w-3.5 h-3.5 text-[#1a7d59]" />
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-300">
+                <CheckCircle className="w-3.5 h-3.5 text-neutral-800" />
                 We track qualified client calls, intake speed, and signed case revenue.
               </span>
             </div>

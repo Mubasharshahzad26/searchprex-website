@@ -83,12 +83,12 @@ export default function ShreveportPricingAndGuarantee() {
               key={tier.name}
               className={`rounded-xl border p-7 bg-white flex flex-col justify-between shadow-sm relative transition-all ${
                 tier.popular
-                  ? 'border-[#4338ca] ring-2 ring-[#4338ca]/10'
+                  ? 'border-neutral-900 ring-2 ring-[#171717]/10'
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#4338ca] text-white text-[11px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-[11px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
                   Most Requested by Shreveport Firms
                 </div>
               )}
@@ -114,7 +114,7 @@ export default function ShreveportPricingAndGuarantee() {
                 <ul className="space-y-3 text-xs text-slate-700 mb-8">
                   {tier.features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-2.5">
-                      <span className="font-bold text-[#4338ca] shrink-0">•</span>
+                      <span className="font-bold text-neutral-950 shrink-0">•</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -126,7 +126,7 @@ export default function ShreveportPricingAndGuarantee() {
                   href={tier.ctaHref}
                   className={`w-full py-3 px-4 rounded-lg text-xs font-bold text-center block transition-all ${
                     tier.popular
-                      ? 'bg-[#4338ca] text-white hover:bg-[#3730a3] shadow-md shadow-indigo-100'
+                      ? 'bg-neutral-900 text-white hover:bg-neutral-800 shadow-md shadow-slate-100'
                       : 'bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-200'
                   }`}
                 >

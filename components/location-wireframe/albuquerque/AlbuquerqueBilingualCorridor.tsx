@@ -20,12 +20,12 @@ export default function AlbuquerqueBilingualCorridor() {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Left Text Column */}
           <div className="lg:col-span-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-4">
               <Languages className="w-3.5 h-3.5" />
               <span>Two Languages · One Legal Community</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-5 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-5 leading-tight">
               Spanish-Speaking Clients Are Searching in Albuquerque. Almost No Law Firms Answer.
             </h2>
 
@@ -35,21 +35,21 @@ export default function AlbuquerqueBilingualCorridor() {
 
             <div className="space-y-3.5 mb-8">
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                 <p className="text-sm text-slate-700">
                   <strong className="text-slate-900 font-bold">Native-Speaker Review:</strong> Every Spanish page is reviewed and calibrated by native Spanish speakers — never machine-translated gibberish that harms your firm&apos;s dignity.
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                 <p className="text-sm text-slate-700">
-                  <strong className="text-slate-900 font-bold">Proper Hreflang Tagging:</strong> Precise bidirectional <code className="text-xs bg-slate-100 text-[#534AB7] px-1.5 py-0.5 rounded font-mono">hreflang=&quot;es&quot;</code> and <code className="text-xs bg-slate-100 text-[#534AB7] px-1.5 py-0.5 rounded font-mono">hreflang=&quot;en&quot;</code> architecture prevents duplicate content penalties and instructs Google exactly which audience to serve.
+                  <strong className="text-slate-900 font-bold">Proper Hreflang Tagging:</strong> Precise bidirectional <code className="text-xs bg-slate-100 text-neutral-900 px-1.5 py-0.5 rounded font-mono">hreflang=&quot;es&quot;</code> and <code className="text-xs bg-slate-100 text-neutral-900 px-1.5 py-0.5 rounded font-mono">hreflang=&quot;en&quot;</code> architecture prevents duplicate content penalties and instructs Google exactly which audience to serve.
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#1a7d59] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
                 <p className="text-sm text-slate-700">
                   <strong className="text-slate-900 font-bold">Spanish LegalService Schema:</strong> Structured data entities declaring Spanish language capabilities directly to Google AI Overviews and Gemini search engines.
                 </p>
@@ -59,7 +59,7 @@ export default function AlbuquerqueBilingualCorridor() {
             <div className="flex items-center gap-4">
               <a
                 href="#reality-check"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-sm shadow-md shadow-[#534AB7]/20 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm shadow-md shadow-sm transition-all"
               >
                 <span>Audit Your Bilingual Search Gap</span>
                 <ArrowRight className="w-4 h-4" />
@@ -72,14 +72,14 @@ export default function AlbuquerqueBilingualCorridor() {
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
               <div className="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-5">
                 <div>
-                  <span className="text-xs font-bold text-[#534AB7] uppercase tracking-wider">
+                  <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider">
                     Untapped High-Intent Search Queries
                   </span>
-                  <h3 className="text-lg font-bold text-[#0a0f2e]">
+                  <h3 className="text-lg font-bold text-neutral-950">
                     Albuquerque Spanish Practice Keywords
                   </h3>
                 </div>
-                <span className="text-xs font-bold text-[#1a7d59] bg-[#1a7d59]/10 px-2.5 py-1 rounded-full">
+                <span className="text-xs font-bold text-neutral-800 bg-slate-100 px-2.5 py-1 rounded-full">
                   High Volume · Low Competition
                 </span>
               </div>
@@ -88,7 +88,7 @@ export default function AlbuquerqueBilingualCorridor() {
                 {sampleSearches.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-white border border-slate-200/80 hover:border-[#534AB7]/40 transition-all flex items-center justify-between gap-4"
+                    className="p-3.5 rounded-xl bg-white border border-slate-200/80 hover:border-slate-300 transition-all flex items-center justify-between gap-4"
                   >
                     <div>
                       <div className="font-bold text-slate-900 text-sm sm:text-base">
@@ -98,7 +98,7 @@ export default function AlbuquerqueBilingualCorridor() {
                         {item.en}
                       </div>
                     </div>
-                    <span className="text-[11px] font-semibold text-[#534AB7] bg-[#EEEDFE] px-2.5 py-1 rounded-md shrink-0">
+                    <span className="text-[11px] font-semibold text-neutral-900 bg-slate-100 px-2.5 py-1 rounded-md shrink-0">
                       {item.intent}
                     </span>
                   </div>
@@ -107,7 +107,7 @@ export default function AlbuquerqueBilingualCorridor() {
 
               <div className="mt-5 pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500">
                 <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                  <ShieldCheck className="w-4 h-4 text-[#1a7d59]" />
+                  <ShieldCheck className="w-4 h-4 text-neutral-800" />
                   Includes Spanish Click-to-Call Intake Routing
                 </span>
                 <span>Bernalillo County</span>

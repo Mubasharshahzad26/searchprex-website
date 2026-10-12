@@ -71,12 +71,12 @@ export default function WoodlandsPricingAndGuarantee() {
       {/* Pricing Header */}
       <div>
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#534AB7]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+            <ShieldCheck className="w-3.5 h-3.5 text-neutral-900" />
             Transparent Investment & Zero Lock-In
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-            Simple, Transparent Retainers for The Woodlands Law Firms
+            The Woodlands Law Firm SEO Pricing
           </h2>
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             Every engagement begins with our complimentary Venue & AI Visibility Review so you inspect our strategic blueprint before spending a dime. No hidden setup fees, no multi-year lock-in contracts, and zero shared client inquiries.
@@ -93,12 +93,12 @@ export default function WoodlandsPricingAndGuarantee() {
                 onClick={() => setSelectedPlan(idx)}
                 className={`rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-200 cursor-pointer relative ${
                   p.popular
-                    ? 'bg-gradient-to-b from-indigo-950 to-[#0a0f2e] text-white border-2 border-indigo-500 shadow-xl shadow-indigo-950/30'
-                    : 'bg-white text-slate-900 border border-slate-200 hover:border-indigo-300 shadow-sm'
+                    ? 'bg-gradient-to-b from-neutral-950 to-neutral-900 text-white border-2 border-neutral-700 shadow-xl shadow-neutral-950/30'
+                    : 'bg-white text-slate-900 border border-slate-200 hover:border-slate-300 shadow-sm'
                 }`}
               >
                 {p.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[11px] font-bold tracking-wide uppercase bg-[#534AB7] text-white shadow-sm border border-indigo-400">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[11px] font-bold tracking-wide uppercase bg-neutral-900 text-white shadow-sm border border-slate-400">
                     Most Popular
                   </span>
                 )}
@@ -107,13 +107,13 @@ export default function WoodlandsPricingAndGuarantee() {
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-xs font-bold uppercase tracking-wider ${
-                        p.popular ? 'text-indigo-300' : 'text-indigo-700'
+                        p.popular ? 'text-slate-300' : 'text-neutral-800'
                       }`}
                     >
                       {p.tag}
                     </span>
                     {isSelected && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/30">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-700/20 text-slate-400 font-semibold border border-neutral-700/30">
                         Selected Plan
                       </span>
                     )}
@@ -139,14 +139,14 @@ export default function WoodlandsPricingAndGuarantee() {
 
                   <div
                     className={`pt-4 border-t space-y-2.5 ${
-                      p.popular ? 'border-indigo-900/80' : 'border-slate-100'
+                      p.popular ? 'border-neutral-900/80' : 'border-slate-100'
                     }`}
                   >
                     {p.features.map((feat, fIdx) => (
                       <div key={fIdx} className="flex items-start gap-2.5 text-xs">
                         <Check
                           className={`w-4 h-4 shrink-0 mt-0.5 ${
-                            p.popular ? 'text-emerald-400' : 'text-emerald-600'
+                            p.popular ? 'text-slate-400' : 'text-neutral-800'
                           }`}
                         />
                         <span className={p.popular ? 'text-slate-200' : 'text-slate-700'}>
@@ -166,8 +166,8 @@ export default function WoodlandsPricingAndGuarantee() {
                     }}
                     className={`w-full py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                       p.popular
-                        ? 'bg-[#534AB7] hover:bg-[#3C3489] text-white shadow-lg shadow-indigo-900/50'
-                        : 'bg-slate-100 hover:bg-indigo-50 text-slate-800 hover:text-[#534AB7] border border-slate-200'
+                        ? 'bg-neutral-900 hover:bg-neutral-800 text-white shadow-lg shadow-neutral-900/50'
+                        : 'bg-slate-100 hover:bg-slate-50 text-slate-800 hover:text-neutral-900 border border-slate-200'
                     }`}
                   >
                     Select {p.name}
@@ -180,10 +180,10 @@ export default function WoodlandsPricingAndGuarantee() {
       </div>
 
       {/* 90-Day Milestone Guarantee Box */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-950 via-[#0a1f18] to-slate-900 border border-emerald-800/40 p-8 sm:p-10 text-white shadow-lg">
+      <div className="rounded-3xl bg-gradient-to-r from-neutral-950 via-[#0a1f18] to-slate-900 border border-neutral-900/40 p-8 sm:p-10 text-white shadow-lg">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-neutral-700/20 text-slate-300 border border-neutral-700/30">
               <ShieldCheck className="w-4 h-4" />
               The SearchPrex 90-Day Performance Milestone Guarantee
             </div>
@@ -198,7 +198,7 @@ export default function WoodlandsPricingAndGuarantee() {
           <div className="shrink-0">
             <a
               href="#diagnosis-tool"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-emerald-700 hover:bg-emerald-800 transition-all shadow-md shadow-emerald-950/50 whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-neutral-800 hover:bg-neutral-900 transition-all shadow-md shadow-neutral-950/50 whitespace-nowrap"
             >
               Start With Free Review
               <ArrowRight className="w-4 h-4" />
@@ -210,8 +210,8 @@ export default function WoodlandsPricingAndGuarantee() {
       {/* Interactive Case ROI Calculator */}
       <div className="rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-10 shadow-sm">
         <div className="max-w-2xl mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-2">
-            <Calculator className="w-3.5 h-3.5 text-[#534AB7]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-2">
+            <Calculator className="w-3.5 h-3.5 text-neutral-900" />
             Law Firm Case ROI Arithmetic
           </div>
           <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
@@ -228,7 +228,7 @@ export default function WoodlandsPricingAndGuarantee() {
             <div>
               <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
                 <span>Average Retainer / Case Value:</span>
-                <span className="text-sm font-bold text-[#534AB7]">
+                <span className="text-sm font-bold text-neutral-900">
                   ${caseValue.toLocaleString()}
                 </span>
               </div>
@@ -239,7 +239,7 @@ export default function WoodlandsPricingAndGuarantee() {
                 step={500}
                 value={caseValue}
                 onChange={(e) => setCaseValue(Number(e.target.value))}
-                className="w-full accent-[#534AB7] cursor-pointer"
+                className="w-full accent-[#171717] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-slate-400 mt-1">
                 <span>$3,000 (Estate Will)</span>
@@ -251,7 +251,7 @@ export default function WoodlandsPricingAndGuarantee() {
             <div>
               <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
                 <span>Target New Signed Cases Per Month:</span>
-                <span className="text-sm font-bold text-[#534AB7]">
+                <span className="text-sm font-bold text-neutral-900">
                   {newCases} case{newCases > 1 ? 's' : ''} / month
                 </span>
               </div>
@@ -262,7 +262,7 @@ export default function WoodlandsPricingAndGuarantee() {
                 step={1}
                 value={newCases}
                 onChange={(e) => setNewCases(Number(e.target.value))}
-                className="w-full accent-[#534AB7] cursor-pointer"
+                className="w-full accent-[#171717] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-slate-400 mt-1">
                 <span>1 Case</span>
@@ -290,15 +290,15 @@ export default function WoodlandsPricingAndGuarantee() {
 
             <div className="flex items-baseline justify-between pt-1">
               <div>
-                <div className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                <div className="text-xs font-bold text-neutral-800 uppercase tracking-wider">
                   Net Monthly Revenue Gain:
                 </div>
-                <div className="text-2xl font-black text-emerald-800">
+                <div className="text-2xl font-black text-neutral-900">
                   +${netMonthlyGain.toLocaleString()}/mo
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md border border-indigo-100">
+                <span className="text-xs font-semibold text-neutral-800 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
                   {roiPercentage}% Projected ROI
                 </span>
               </div>

@@ -1,130 +1,303 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { ArrowRight, ShieldCheck, CheckCircle2, Waves, Compass, DollarSign } from "lucide-react";
+import React, { useState } from "react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+} from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
 interface SugarLandHeroProps {
-  page: CityPage;
+  page?: CityPage;
 }
 
 export default function SugarLandHero({ page }: SugarLandHeroProps) {
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [email, setEmail] = useState("");
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("Family law");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "Sugar Land Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "sugar-land:hero-lead-form",
+          notes: `Requested Sugar Land Hero Audit. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
+  };
+
   return (
-    <div className="relative bg-[#0a0f2e] text-white overflow-hidden border-b border-slate-800">
-      {/* Background glow effects */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#534AB7]/25 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      {/* Main Hero Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-48 sm:pb-56 relative z-10">
-        {/* Eyebrow badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#EEEDFE] text-xs sm:text-sm font-bold uppercase tracking-wider mb-6 border border-white/15 backdrop-blur-sm">
-          <Waves className="w-4 h-4 text-emerald-400" />
-          <span>Fort Bend County Legal Authority · Sugar Land, Texas</span>
-        </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · Sugar Land, TX
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
+            </div>
 
-        {/* Main Heading */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] mb-6">
-          Law Firm SEO in Sugar Land:{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-indigo-200">
-            Rescue Your Practice From Houston&apos;s Ad Auction.
-          </span>
-        </h1>
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              Sugar Land Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
+                Escape Houston's Bloated Ad Auction
+              </span>
+            </h1>
 
-        {/* Lead paragraph */}
-        <p className="text-lg sm:text-2xl text-slate-200 leading-relaxed max-w-3xl mb-8 font-normal">
-          Affluent Fort Bend families are not casually shopping—they are protecting high-asset marital estates, generational family businesses, and catastrophic crash claims. Stop paying hundreds per click to compete in Houston&apos;s bloated PPC auctions. We build compounding organic dominance that positions your firm first.
-        </p>
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Sugar Land law firm SEO builds permanent organic visibility for Fort Bend County practices tired of paying hundreds per click in Houston's crowded PPC auctions. We engineer high-net-worth family law, estate probate, business litigation, and severe injury silos across First Colony, Telfair, and Riverstone that deliver qualified retainers month after month.
+            </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
-          <a
-            href="#rescue-form"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-base sm:text-lg shadow-xl shadow-indigo-950/50 transition-all transform hover:-translate-y-0.5 cursor-pointer"
-          >
-            <span>Get My Free 24-Hour Rescue Plan</span>
-            <ArrowRight className="w-5 h-5" />
-          </a>
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Fort Bend</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Richmond Court Silos</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Top 3</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Google Map Pack Focus</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Zero</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Long-Term Lock-In</p>
+              </div>
+            </div>
 
-          <a
-            href="#ppc-compare"
-            className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-base sm:text-lg border border-white/20 backdrop-blur-sm transition-all"
-          >
-            <span>Compare with Ad Budget</span>
-          </a>
-        </div>
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <a
+                href="#rescue-form"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
+              >
+                <span>Get My 24-Hour Rescue Plan</span>
+                <ArrowRight className="w-4 h-4 text-neutral-700" />
+              </a>
+              <a
+                href="#ppc-compare"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
+              >
+                <span>Compare with Ad Spend</span>
+              </a>
+            </div>
 
-        {/* Trust chips */}
-        <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-300 font-medium">
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Founder-Led Architecture</span>
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                Founder-led execution
+              </div>
+            </div>
+
           </div>
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>One Law Firm Per Practice Area</span>
+
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
+              
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Fort Bend Audit
+                  </span>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Sugar Land Rescue Plan
+                  </h2>
+                </div>
+              </div>
+
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally review your Sugar Land website, Google Business Profile, and local search competitors, and email your 24-hour teardown directly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Website */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="sugarlandfirm.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Work Email */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="you@sugarlandfirm.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Family law","Personal injury","Estate & trusts","Business law","Criminal defense","Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea === area
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Audit"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
+                </form>
+              )}
+
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Month-to-Month Terms (Zero Lock-In)</span>
-          </div>
+
         </div>
       </div>
-
-      {/* SVG Graphic: Sugar Land Town Square Palms & Horizon Waves */}
-      <div className="absolute left-0 bottom-0 w-full overflow-hidden leading-none pointer-events-none">
-        <svg
-          viewBox="0 0 1360 260"
-          preserveAspectRatio="xMidYMax slice"
-          className="w-full h-auto max-h-52 block opacity-90"
-          aria-hidden="true"
-        >
-          {/* Subtle Sugar Land Town Square Silhouettes */}
-          <rect x="80" y="120" width="60" height="70" fill="#1e293b" opacity="0.6" />
-          <rect x="155" y="90" width="75" height="100" fill="#334155" opacity="0.5" />
-          <rect x="245" y="130" width="55" height="60" fill="#1e293b" opacity="0.6" />
-          <rect x="540" y="110" width="70" height="80" fill="#1e293b" opacity="0.6" />
-          <rect x="625" y="80" width="85" height="110" fill="#334155" opacity="0.5" />
-          <rect x="725" y="125" width="50" height="65" fill="#1e293b" opacity="0.6" />
-
-          {/* Stylized Palm Tree Silhouettes of First Colony */}
-          <g transform="translate(420 80)">
-            <path d="M20 110 Q22 50 25 10" stroke="#475569" strokeWidth="4" fill="none" />
-            <path d="M25 10 Q10 -5 -10 15" stroke="#10b981" strokeWidth="3" fill="none" />
-            <path d="M25 10 Q35 -15 55 5" stroke="#10b981" strokeWidth="3" fill="none" />
-            <path d="M25 10 Q40 5 60 25" stroke="#10b981" strokeWidth="3" fill="none" />
-            <path d="M25 10 Q5 -15 -5 -3" stroke="#10b981" strokeWidth="3" fill="none" />
-          </g>
-
-          <g transform="translate(980 75)">
-            <path d="M20 115 Q24 55 26 12" stroke="#475569" strokeWidth="4" fill="none" />
-            <path d="M26 12 Q8 -3 -12 18" stroke="#10b981" strokeWidth="3" fill="none" />
-            <path d="M26 12 Q38 -12 58 8" stroke="#10b981" strokeWidth="3" fill="none" />
-            <path d="M26 12 Q42 8 62 28" stroke="#10b981" strokeWidth="3" fill="none" />
-          </g>
-
-          {/* Calm Water & Highway 6 Horizon Waves */}
-          <path
-            d="M0 190 Q340 170 680 190 T1360 190 L1360 260 L0 260 Z"
-            fill="#0f172a"
-          />
-          <path
-            d="M0 215 Q340 200 680 215 T1360 215"
-            stroke="#10b981"
-            strokeWidth="2.5"
-            fill="none"
-            opacity="0.8"
-          />
-          <path
-            d="M0 235 Q340 225 680 235 T1360 235"
-            stroke="#534AB7"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.6"
-          />
-        </svg>
-      </div>
-    </div>
+    </section>
   );
 }

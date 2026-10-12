@@ -23,11 +23,11 @@ export default function PlanoDiagnosisTool() {
     <section id="reality-check-form" className="py-16 bg-slate-50 border-b border-slate-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#534AB7]/10 text-[#534AB7] border border-[#534AB7]/20 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-neutral-900 border border-slate-300 mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             Collin County Practice Audit
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             Get Your Free Plano SEO Reality Check
           </h2>
           <p className="mt-3 text-base text-slate-600">
@@ -38,10 +38,10 @@ export default function PlanoDiagnosisTool() {
         <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-10">
           {isSubmitted ? (
             <div className="text-center py-10 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-slate-100 text-neutral-800 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-[#0a0f2e]">Reality Check Received!</h3>
+              <h3 className="text-2xl font-bold text-neutral-950">Reality Check Received!</h3>
               <p className="text-slate-600 max-w-md mx-auto text-sm leading-relaxed">
                 Mubashar Sharif will personally audit your Plano and Collin County presence and send your bespoke action plan within 24 business hours.
               </p>
@@ -61,7 +61,7 @@ export default function PlanoDiagnosisTool() {
                       placeholder="e.g., www.planofamilylawyer.com"
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
-                      className="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7] focus:border-transparent transition"
+                      className="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition"
                     />
                     <Search className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
                   </div>
@@ -78,7 +78,7 @@ export default function PlanoDiagnosisTool() {
                     placeholder="partner@yourfirm.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7] focus:border-transparent transition"
+                    className="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition"
                   />
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default function PlanoDiagnosisTool() {
                       onClick={() => setPractice(item.id)}
                       className={`px-4 py-3 rounded-xl text-xs font-semibold border transition text-center ${
                         practice === item.id
-                          ? 'bg-[#534AB7] text-white border-[#534AB7] shadow-sm'
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-sm'
                           : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                       }`}
                     >
@@ -115,15 +115,15 @@ export default function PlanoDiagnosisTool() {
                 <p className="font-bold text-slate-800">Included in your 24-hour Reality Check:</p>
                 <div className="grid sm:grid-cols-3 gap-2">
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-neutral-800 shrink-0" />
                     <span>Collin County Map Pack rankings</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-neutral-800 shrink-0" />
                     <span>AI Overviews & ChatGPT mentions</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-neutral-800 shrink-0" />
                     <span>Missing Frisco/Allen/McKinney hubs</span>
                   </div>
                 </div>
@@ -131,14 +131,14 @@ export default function PlanoDiagnosisTool() {
 
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <ShieldCheck className="w-4 h-4 text-neutral-800" />
                   <span>No credit card required · 100% confidential under NDA</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold text-white bg-[#534AB7] hover:bg-[#3C3489] transition-all shadow-md shadow-indigo-900/30 hover:shadow-indigo-900/50"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-md shadow-neutral-900/30 hover:shadow-neutral-900/50"
                 >
                   {isSubmitting ? (
                     'Generating Analysis...'

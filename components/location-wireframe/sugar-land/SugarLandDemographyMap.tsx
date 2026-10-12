@@ -37,11 +37,11 @@ export default function SugarLandDemographyMap() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-3.5 h-3.5" />
             <span>Local Market Demographics</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Sugar Land Demographics, Service Area &amp; Court Corridor Map
           </h2>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
@@ -56,15 +56,15 @@ export default function SugarLandDemographyMap() {
             return (
               <div
                 key={idx}
-                className="bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-2 hover:border-indigo-300 transition-colors"
+                className="bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-2 hover:border-slate-300 transition-colors"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                     {s.label}
                   </span>
-                  <Icon className="w-4 h-4 text-[#534AB7]" />
+                  <Icon className="w-4 h-4 text-neutral-900" />
                 </div>
-                <div className="text-3xl font-extrabold text-[#0a0f2e]">
+                <div className="text-3xl font-extrabold text-neutral-950">
                   {s.value}
                 </div>
                 <div className="text-xs text-slate-600 font-medium">

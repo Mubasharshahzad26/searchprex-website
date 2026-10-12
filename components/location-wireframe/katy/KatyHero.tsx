@@ -1,190 +1,303 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { ArrowRight, Compass, ShieldCheck, MapPin, CheckCircle2 } from "lucide-react";
+import React, { useState } from "react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+} from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
 
 interface KatyHeroProps {
-  page: CityPage;
+  page?: CityPage;
 }
 
 export default function KatyHero({ page }: KatyHeroProps) {
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [email, setEmail] = useState("");
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("Personal injury");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "Katy Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "katy:hero-lead-form",
+          notes: `Requested Katy Hero Audit. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
+  };
+
   return (
-    <div className="relative bg-[#0a0f2e] text-white overflow-hidden border-b border-slate-800">
-      {/* Background glow effects */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#534AB7]/25 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      {/* Main Hero Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-48 sm:pb-56 relative z-10">
-        {/* Eyebrow badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#EEEDFE] text-xs sm:text-sm font-bold uppercase tracking-wider mb-6 border border-white/15 backdrop-blur-sm">
-          <Compass className="w-4 h-4 text-emerald-400" />
-          <span>The Tri-County Crossroads · Harris, Fort Bend &amp; Waller Counties</span>
-        </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · Katy, TX
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
+            </div>
 
-        {/* Main Heading */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] mb-6">
-          Law Firm SEO in Katy, Texas:{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-indigo-200">
-            Be the Firm at the Crossroads.
-          </span>
-        </h1>
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              Katy Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
+                Be the Firm at the Tri-County Crossroads
+              </span>
+            </h1>
 
-        {/* Lead paragraph */}
-        <p className="text-lg sm:text-2xl text-slate-200 leading-relaxed max-w-3xl mb-8 font-normal">
-          Harris, Fort Bend, and Waller counties converge right in Katy. When local residents search for an attorney close to home, generic downtown Houston firms never clarify which courthouse has jurisdiction. We position your firm as the authoritative, local answer they find first.
-        </p>
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Katy law firm SEO positions your practice at the exact intersection of Harris, Fort Bend, and Waller counties. While generic downtown Houston firms confuse local families over courthouse venue, we build tri-county Map Pack, page-one organic, and AI-answer authority along I-10 and Grand Parkway (SH 99) that turns local searches into signed retainers.
+            </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
-          <a
-            href="#tear-down-form"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-base sm:text-lg shadow-xl shadow-indigo-950/50 transition-all transform hover:-translate-y-0.5 cursor-pointer"
-          >
-            <span>Get My Free Katy Tear-Down</span>
-            <ArrowRight className="w-5 h-5" />
-          </a>
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">3 Counties</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Harris, Fort Bend & Waller</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">I-10 / SH 99</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Corridor Intent Silos</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">Zero</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Long-Term Lock-In</p>
+              </div>
+            </div>
 
-          <a
-            href="#county-crossroads"
-            className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-base sm:text-lg border border-white/20 backdrop-blur-sm transition-all"
-          >
-            <span>Which Courthouse?</span>
-          </a>
-        </div>
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <a
+                href="#tear-down-form"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
+              >
+                <span>Get My Free Katy Tear-Down</span>
+                <ArrowRight className="w-4 h-4 text-neutral-700" />
+              </a>
+              <a
+                href="#county-crossroads"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
+              >
+                <span>Explore Tri-County Venues</span>
+              </a>
+            </div>
 
-        {/* Trust chips */}
-        <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-300 font-medium">
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Founder-Led Architecture</span>
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
+              </div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                Founder-led execution
+              </div>
+            </div>
+
           </div>
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>One Law Firm Per Practice Area</span>
+
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
+              
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Tri-County Audit
+                  </span>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Free Katy Tear-Down
+                  </h2>
+                </div>
+              </div>
+
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally review your Katy website, Google Business Profile, and local search competitors, and email your 24-hour teardown directly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Website */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="katylawfirm.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Work Email */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="you@katylawfirm.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["Personal injury","Family law","Estate & probate","Criminal defense","Business","Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea === area
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Audit"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
+                </form>
+              )}
+
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Month-to-Month Terms (Zero Lock-In)</span>
-          </div>
+
         </div>
       </div>
-
-      {/* SVG Graphic: Katy I-10 & SH 99 Highway Crossroads */}
-      <div className="absolute left-0 bottom-0 w-full overflow-hidden leading-none pointer-events-none">
-        <svg
-          viewBox="0 0 1360 280"
-          preserveAspectRatio="xMidYMax slice"
-          className="w-full h-auto max-h-56 block opacity-95"
-          aria-hidden="true"
-        >
-          {/* Distant Suburban Silhouette */}
-          <rect x="40" y="110" width="44" height="60" fill="#1e293b" opacity="0.6" />
-          <rect x="96" y="90" width="52" height="80" fill="#334155" opacity="0.5" />
-          <rect x="160" y="125" width="40" height="45" fill="#1e293b" opacity="0.6" />
-          <rect x="480" y="105" width="58" height="65" fill="#1e293b" opacity="0.6" />
-          <rect x="550" y="130" width="44" height="40" fill="#334155" opacity="0.5" />
-          <rect x="720" y="95" width="50" height="75" fill="#1e293b" opacity="0.6" />
-          <rect x="860" y="115" width="46" height="55" fill="#334155" opacity="0.5" />
-
-          {/* I-10 Katy Freeway Multi-Lane Highway Deck */}
-          <rect x="0" y="170" width="1360" height="110" fill="#0f172a" />
-          <line x1="0" y1="175" x2="1360" y2="175" stroke="#475569" strokeWidth="2.5" />
-          <line x1="0" y1="275" x2="1360" y2="275" stroke="#475569" strokeWidth="2.5" />
-
-          {/* Dashed Lane Dividers in Brand White & Emerald */}
-          <line
-            x1="0"
-            y1="205"
-            x2="1400"
-            y2="205"
-            stroke="#10b981"
-            strokeWidth="3.5"
-            strokeDasharray="45 45"
-            opacity="0.85"
-          />
-          <line
-            x1="0"
-            y1="240"
-            x2="1400"
-            y2="240"
-            stroke="#cbd5e1"
-            strokeWidth="2.5"
-            strokeDasharray="40 40"
-            opacity="0.6"
-          />
-
-          {/* Stylized Modern Commuter Vehicles */}
-          {/* Car 1: Emerald Compact */}
-          <g transform="translate(180 185)">
-            <rect y="4" width="60" height="16" rx="4" fill="#1a7d59" />
-            <rect x="12" width="32" height="11" rx="3" fill="#1a7d59" />
-            <circle cx="14" cy="21" r="5" fill="#020617" />
-            <circle cx="46" cy="21" r="5" fill="#020617" />
-          </g>
-
-          {/* Car 2: White SUV */}
-          <g transform="translate(560 215)">
-            <rect y="4" width="68" height="18" rx="4" fill="#f8fafc" />
-            <rect x="14" width="36" height="13" rx="3" fill="#f8fafc" />
-            <circle cx="16" cy="24" r="5.5" fill="#020617" />
-            <circle cx="52" cy="24" r="5.5" fill="#020617" />
-          </g>
-
-          {/* Car 3: Brand Indigo Sedan */}
-          <g transform="translate(940 185)">
-            <rect y="4" width="64" height="17" rx="4" fill="#534AB7" />
-            <rect x="14" width="34" height="12" rx="3" fill="#534AB7" />
-            <circle cx="15" cy="23" r="5" fill="#020617" />
-            <circle cx="49" cy="23" r="5" fill="#020617" />
-          </g>
-
-          {/* Overhead Interstate Highway Gantry Sign */}
-          <rect x="1040" y="25" width="8" height="165" fill="#64748b" />
-          <rect x="1290" y="25" width="8" height="165" fill="#64748b" />
-          <rect x="1030" y="25" width="276" height="8" fill="#64748b" />
-
-          {/* Texas Interstate Highway Sign: KATY / I-10 / 3 COUNTIES */}
-          <g>
-            <rect
-              x="1050"
-              y="35"
-              width="232"
-              height="95"
-              rx="6"
-              fill="#1a7d59"
-              stroke="#ffffff"
-              strokeWidth="3.5"
-            />
-            <text
-              x="1166"
-              y="80"
-              textAnchor="middle"
-              fontSize="38"
-              fontWeight="900"
-              fill="#ffffff"
-              fontFamily="system-ui, sans-serif"
-              letterSpacing="2"
-            >
-              KATY
-            </text>
-            <text
-              x="1166"
-              y="110"
-              textAnchor="middle"
-              fontSize="14"
-              fontWeight="700"
-              fill="#ffffff"
-              fontFamily="system-ui, sans-serif"
-              letterSpacing="1"
-            >
-              I-10 · SH 99 · 3 COUNTIES
-            </text>
-          </g>
-        </svg>
-      </div>
-    </div>
+    </section>
   );
 }

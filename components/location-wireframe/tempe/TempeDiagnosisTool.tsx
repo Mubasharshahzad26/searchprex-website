@@ -46,7 +46,7 @@ export default function TempeDiagnosisTool() {
           {/* Left Form: Configuration */}
           <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
             <h3 className="text-base font-bold text-slate-900 mb-6 flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-[#4338ca]" />
+              <Calculator className="w-5 h-5 text-neutral-950" />
               Step 1: Configure Practice Parameters
             </h3>
 
@@ -69,7 +69,7 @@ export default function TempeDiagnosisTool() {
                       onClick={() => setPractice(p.id)}
                       className={`py-2.5 px-3 rounded-lg text-xs font-semibold border transition-all text-center ${
                         practice === p.id
-                          ? 'bg-[#4338ca] text-white border-[#4338ca]'
+                          ? 'bg-neutral-900 text-white border-neutral-900'
                           : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
                       }`}
                     >
@@ -119,7 +119,7 @@ export default function TempeDiagnosisTool() {
                     value={websiteUrl}
                     onChange={(e) => setWebsiteUrl(e.target.value)}
                     placeholder="https://yourtempefirm.com"
-                    className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#4338ca]/30 focus:border-[#4338ca] text-slate-900"
+                    className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#171717]/30 focus:border-neutral-900 text-slate-900"
                   />
                 </div>
 
@@ -134,14 +134,14 @@ export default function TempeDiagnosisTool() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="partner@yourtempefirm.com"
-                    className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#4338ca]/30 focus:border-[#4338ca] text-slate-900"
+                    className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#171717]/30 focus:border-neutral-900 text-slate-900"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitted}
-                  className="w-full py-3.5 px-6 rounded-lg text-sm font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-all shadow-sm flex items-center justify-center gap-2 mt-2 disabled:bg-slate-400"
+                  className="w-full py-3.5 px-6 rounded-lg text-sm font-bold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-sm flex items-center justify-center gap-2 mt-2 disabled:bg-slate-400"
                 >
                   {submitted ? (
                     <span>Diagnosis Request Received - Audit In Progress</span>
@@ -164,7 +164,7 @@ export default function TempeDiagnosisTool() {
           <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm space-y-6">
             <h3 className="text-base font-bold text-slate-900 flex items-center justify-between">
               <span>Estimated Market Yield</span>
-              <span className="text-xs font-bold text-[#4338ca] uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+              <span className="text-xs font-bold text-neutral-950 uppercase tracking-wider bg-slate-50 px-2 py-0.5 rounded border border-slate-100">
                 Live Model
               </span>
             </h3>
@@ -178,7 +178,7 @@ export default function TempeDiagnosisTool() {
 
               <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
                 <p className="text-xs font-semibold text-slate-600">Projected Monthly Signed Retainers</p>
-                <p className="text-3xl font-extrabold text-[#4338ca] mt-1">{currentMetric.estRetainers} - {currentMetric.estRetainers + 4} Cases</p>
+                <p className="text-3xl font-extrabold text-neutral-950 mt-1">{currentMetric.estRetainers} - {currentMetric.estRetainers + 4} Cases</p>
                 <p className="text-[11px] text-slate-500 mt-1">Based on local 3-Pack top-tier placement.</p>
               </div>
 

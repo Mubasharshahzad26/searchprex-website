@@ -9,11 +9,11 @@ export default function PlanoQuickAnswer() {
   return (
     <section className="py-12 bg-white border-b border-slate-100">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-7 sm:p-9 rounded-2xl bg-[#EEEDFE]/40 border border-[#534AB7]/20 shadow-sm relative overflow-hidden">
+        <div className="p-7 sm:p-9 rounded-2xl bg-slate-100 border border-slate-300 shadow-sm relative overflow-hidden">
           {/* Badge */}
           <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#534AB7] text-white">
-              <Bot className="w-3.5 h-3.5 text-indigo-200" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-neutral-900 text-white">
+              <Bot className="w-3.5 h-3.5 text-slate-200" />
               Quick Answer · Google AI Overviews & ChatGPT
             </span>
             <span className="text-xs text-slate-500 font-medium hidden sm:inline">
@@ -22,7 +22,7 @@ export default function PlanoQuickAnswer() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-neutral-950 tracking-tight mb-4">
             What is Law Firm SEO in Plano?
           </h2>
 
@@ -31,14 +31,14 @@ export default function PlanoQuickAnswer() {
             <strong>Law firm SEO in Plano</strong> is the work of making your firm appear in Google’s Map Pack, organic search results, and AI answers when executives, business leaders, and families in Plano, Frisco, Allen, McKinney, and Richardson search for legal representation—especially newcomers without an existing local network. SearchPrex builds Collin County practice silos, optimizes your{' '}
             <Link
               href="/services/law-firm-seo/google-business-profile-for-lawyers"
-              className="text-[#534AB7] underline font-semibold hover:text-[#3C3489]"
+              className="text-neutral-900 underline font-semibold hover:text-neutral-950"
             >
               Google Business Profile
             </Link>
             , and tracks visibility across{' '}
             <Link
               href="/ai-search"
-              className="text-[#534AB7] underline font-semibold hover:text-[#3C3489]"
+              className="text-neutral-900 underline font-semibold hover:text-neutral-950"
             >
               AI search engines
             </Link>
@@ -46,9 +46,9 @@ export default function PlanoQuickAnswer() {
           </p>
 
           {/* Author attribution */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-5 border-t border-indigo-100/80 text-xs text-slate-600">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-5 border-t border-slate-100/80 text-xs text-slate-600">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#534AB7]/30 shrink-0">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-slate-300 shrink-0">
                 <Image
                   src="/images/mubashar-sharif.jpg"
                   alt="Mubashar Sharif, CEO & Principal Strategist"
@@ -59,7 +59,7 @@ export default function PlanoQuickAnswer() {
               <div>
                 <p className="font-bold text-slate-900">
                   Written by{' '}
-                  <Link href="/experts" className="text-[#534AB7] hover:underline">
+                  <Link href="/experts" className="text-neutral-900 hover:underline">
                     Mubashar Sharif, CEO & Principal Strategist
                   </Link>
                 </p>
@@ -68,7 +68,7 @@ export default function PlanoQuickAnswer() {
             </div>
 
             <div className="flex items-center gap-2 text-slate-500">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <ShieldCheck className="w-4 h-4 text-neutral-800" />
               <span>Compliant with Texas Disciplinary Rules of Professional Conduct</span>
             </div>
           </div>

@@ -69,11 +69,11 @@ export default function SugarLandPricingAndPpcComparison() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-3">
             <DollarSign className="w-3.5 h-3.5" />
             <span>Premium Performance · Zero Contract Handcuffs</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Law Firm SEO Pricing in Sugar Land: $1,200 to $2,500 / Month
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -91,14 +91,14 @@ export default function SugarLandPricingAndPpcComparison() {
                 onClick={() => setSelectedPlan(idx)}
                 className={`rounded-3xl p-8 flex flex-col justify-between transition-all cursor-pointer relative ${
                   p.popular
-                    ? "bg-[#0a0f2e] text-white shadow-2xl ring-2 ring-[#534AB7] scale-105 z-10"
+                    ? "bg-neutral-900 text-white shadow-2xl ring-2 ring-neutral-900 scale-105 z-10"
                     : isSelected
-                    ? "bg-slate-50 text-slate-900 border-2 border-[#534AB7] shadow-lg"
+                    ? "bg-slate-50 text-slate-900 border-2 border-neutral-900 shadow-lg"
                     : "bg-white text-slate-900 border border-slate-200 hover:border-slate-300 shadow-sm"
                 }`}
               >
                 {p.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#534AB7] text-white text-xs font-extrabold uppercase tracking-wider shadow-md">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-neutral-900 text-white text-xs font-extrabold uppercase tracking-wider shadow-md">
                     Most Popular in Fort Bend
                   </div>
                 )}
@@ -108,7 +108,7 @@ export default function SugarLandPricingAndPpcComparison() {
                     <span
                       className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${
                         p.popular
-                          ? "bg-white/10 text-emerald-400"
+                          ? "bg-white/10 text-slate-400"
                           : "bg-slate-100 text-slate-600"
                       }`}
                     >
@@ -150,7 +150,7 @@ export default function SugarLandPricingAndPpcComparison() {
                       <div key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm">
                         <Check
                           className={`w-4 h-4 shrink-0 mt-0.5 ${
-                            p.popular ? "text-emerald-400" : "text-[#1a7d59]"
+                            p.popular ? "text-slate-400" : "text-neutral-800"
                           }`}
                         />
                         <span className={p.popular ? "text-slate-200" : "text-slate-700"}>
@@ -166,7 +166,7 @@ export default function SugarLandPricingAndPpcComparison() {
                     href="#rescue-form"
                     className={`w-full py-3.5 rounded-xl font-bold text-sm text-center block transition-all ${
                       p.popular
-                        ? "bg-[#534AB7] hover:bg-[#3C3489] text-white shadow-lg shadow-indigo-950/50"
+                        ? "bg-neutral-900 hover:bg-neutral-800 text-white shadow-lg shadow-neutral-950/50"
                         : "bg-slate-900 hover:bg-slate-800 text-white"
                     }`}
                   >
@@ -179,13 +179,13 @@ export default function SugarLandPricingAndPpcComparison() {
         </div>
 
         {/* Written Guarantee Box */}
-        <div className="bg-[#EEEDFE]/40 border-2 border-[#534AB7]/20 rounded-3xl p-8 sm:p-10 mb-16">
+        <div className="bg-slate-100 border-2 border-slate-300 rounded-3xl p-8 sm:p-10 mb-16">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="w-14 h-14 rounded-2xl bg-[#534AB7] text-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="w-14 h-14 rounded-2xl bg-neutral-900 text-white flex items-center justify-center shrink-0 shadow-md">
               <ShieldCheck className="w-8 h-8" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e]">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-neutral-950">
                 The SearchPrex 90-Day Written Milestone Guarantee
               </h3>
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
@@ -200,12 +200,12 @@ export default function SugarLandPricingAndPpcComparison() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             {/* Left: PPC Controls */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider">
                 <TrendingUp className="w-3.5 h-3.5" />
                 <span>Ad Auction Comparison Tool</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
                 Compare SEO Investment with Your Monthly PPC Ad Budget
               </h3>
 
@@ -227,7 +227,7 @@ export default function SugarLandPricingAndPpcComparison() {
                         onClick={() => setSelectedPpcBudget(budget)}
                         className={`px-5 py-3 rounded-xl font-extrabold text-sm transition-all border cursor-pointer ${
                           isSelected
-                            ? "bg-[#0a0f2e] text-white border-[#0a0f2e] shadow-md"
+                            ? "bg-neutral-900 text-white border-neutral-900 shadow-md"
                             : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                         }`}
                       >
@@ -268,19 +268,19 @@ export default function SugarLandPricingAndPpcComparison() {
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                   Monthly Capital Saved or Reallocated:
                 </div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-[#1a7d59] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-extrabold text-neutral-800 tracking-tight">
                   +${monthlySavings.toLocaleString()}{" "}
                   <span className="text-sm font-normal text-slate-500">/ month</span>
                 </div>
                 <div className="text-xs font-bold text-slate-600">
-                  That is over <span className="text-[#1a7d59] font-extrabold">${annualSavings.toLocaleString()}</span> in retained cash annually while building an owned organic asset.
+                  That is over <span className="text-neutral-800 font-extrabold">${annualSavings.toLocaleString()}</span> in retained cash annually while building an owned organic asset.
                 </div>
               </div>
 
               <div className="pt-2">
                 <a
                   href="#rescue-form"
-                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-extrabold text-sm shadow-md transition-all text-center"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-sm shadow-md transition-all text-center"
                 >
                   <span>Build Your Owned Organic Pipeline</span>
                   <ArrowRight className="w-4 h-4" />

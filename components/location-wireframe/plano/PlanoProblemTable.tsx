@@ -46,11 +46,11 @@ export default function PlanoProblemTable() {
     <section className="py-16 bg-slate-50 border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-indigo-900 border border-indigo-200 mb-3">
-            <AlertTriangle className="w-3.5 h-3.5 text-[#534AB7]" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-50 text-neutral-900 border border-slate-200 mb-3">
+            <AlertTriangle className="w-3.5 h-3.5 text-neutral-900" />
             Intake Diagnosis & Resolution
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             Why Plano Firms Pay More for PPC and Still Miss Cases
           </h2>
           <p className="mt-3 text-base text-slate-600 leading-relaxed">
@@ -71,7 +71,7 @@ export default function PlanoProblemTable() {
               <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {rows.map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-4 px-6 font-bold text-[#0a0f2e] align-top">
+                    <td className="py-4 px-6 font-bold text-neutral-950 align-top">
                       {row.see}
                     </td>
                     <td className="py-4 px-6 text-slate-600 align-top leading-relaxed">
@@ -79,7 +79,7 @@ export default function PlanoProblemTable() {
                     </td>
                     <td className="py-4 px-6 text-slate-900 align-top leading-relaxed font-medium">
                       <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-neutral-800 shrink-0 mt-0.5" />
                         <span>{row.fix}</span>
                       </div>
                     </td>

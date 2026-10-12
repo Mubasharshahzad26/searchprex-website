@@ -47,7 +47,7 @@ export default function BatonRougeProblemTable() {
         <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
           <div className="p-4 bg-slate-100 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Table className="w-4 h-4 text-[#4338ca]" />
+              <Table className="w-4 h-4 text-neutral-950" />
               <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                 Technical Failure vs. SearchPrex Engineering Fix
               </span>
@@ -73,7 +73,7 @@ export default function BatonRougeProblemTable() {
                     <td className="py-4 px-4 sm:px-6 text-slate-600 align-top">
                       {row.cause}
                     </td>
-                    <td className="py-4 px-4 sm:px-6 text-[#4338ca] font-medium align-top">
+                    <td className="py-4 px-4 sm:px-6 text-neutral-950 font-medium align-top">
                       {row.solution}
                     </td>
                   </tr>
@@ -86,7 +86,7 @@ export default function BatonRougeProblemTable() {
             <span>Want a customized technical teardown of your Baton Rouge law firm website?</span>
             <a
               href="#reality-check-form"
-              className="inline-flex items-center gap-1.5 font-bold text-[#4338ca] hover:text-[#3730a3]"
+              className="inline-flex items-center gap-1.5 font-bold text-neutral-950 hover:text-neutral-950"
             >
               Request Firm Teardown
               <ArrowRight className="w-3.5 h-3.5" />

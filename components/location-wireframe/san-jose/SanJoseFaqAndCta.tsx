@@ -87,7 +87,7 @@ export default function SanJoseFaqAndCta({ faqs }: SanJoseFaqAndCtaProps) {
                     <span>{item.q}</span>
                     <ChevronDown
                       className={`w-4 h-4 text-slate-500 shrink-0 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-[#4338ca]' : ''
+                        isOpen ? 'rotate-180 text-neutral-950' : ''
                       }`}
                     />
                   </button>
@@ -108,7 +108,7 @@ export default function SanJoseFaqAndCta({ faqs }: SanJoseFaqAndCtaProps) {
       <section className="py-16 bg-slate-100/80 border-b border-slate-200 text-slate-900">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-white text-slate-800 border border-slate-300 mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-[#4338ca]" />
+            <Sparkles className="w-3.5 h-3.5 text-neutral-950" />
             Claim Your Silicon Valley Geographic Moat
           </span>
 
@@ -123,7 +123,7 @@ export default function SanJoseFaqAndCta({ faqs }: SanJoseFaqAndCtaProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#reality-check-form"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-sm font-bold text-white bg-[#4338ca] hover:bg-[#3730a3] transition-all shadow-md shadow-indigo-100"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-sm font-bold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-md shadow-slate-100"
             >
               Request Free Practice Reality Check
               <ArrowRight className="w-4 h-4" />

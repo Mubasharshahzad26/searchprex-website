@@ -53,22 +53,22 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
   }
 
   return (
-    <section id="growth-plan" className="py-16 sm:py-20 bg-[#0a0f2e] text-white border-b border-slate-800 relative overflow-hidden">
+    <section id="growth-plan" className="py-16 sm:py-20 bg-neutral-900 text-white border-b border-slate-800 relative overflow-hidden">
       {/* Background glow */}
-      <div className="pointer-events-none absolute -top-24 right-1/4 h-80 w-80 rounded-full bg-[#534AB7]/25 blur-3xl" />
+      <div className="pointer-events-none absolute -top-24 right-1/4 h-80 w-80 rounded-full bg-slate-100 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 left-1/4 h-80 w-80 rounded-full bg-[#196b4d]/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* ── Section Header & Explanatory Contextual Paragraphs ── */}
         <div className="max-w-4xl space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#a594fd] block">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-300 block">
             MARKET EXCLUSIVITY &amp; STRATEGY
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
             One Law Firm Per Practice Area: Exclusive Law Firm SEO in Wayne, Oakland and Macomb Counties
           </h2>
-          <h3 className="text-xl sm:text-2xl font-bold text-[#3eb489]">
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-300">
             Book Your Free Consultation
           </h3>
           
@@ -78,7 +78,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
               Most agencies serve several competing firms in the same courthouse district. We accept one firm per practice area in your Detroit territory, so the strategy we build for you is never run against you. You work directly with a senior strategist, and our terms are month-to-month because we would rather earn the renewal. When we partner with your firm, our complete{" "}
               <Link
                 href="/services/law-firm-seo"
-                className="font-bold text-[#a594fd] hover:text-white underline decoration-[#a594fd]/60 underline-offset-4 transition-colors"
+                className="font-bold text-slate-300 hover:text-white underline decoration-[#cbd5e1]/60 underline-offset-4 transition-colors"
               >
                 dedicated law firm SEO framework
               </Link>{" "}
@@ -88,21 +88,21 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
               Our methodology combines deep{" "}
               <Link
                 href="/services/local-seo"
-                className="font-bold text-[#3eb489] hover:text-white underline decoration-[#3eb489]/60 underline-offset-4 transition-colors"
+                className="font-bold text-slate-300 hover:text-white underline decoration-[#94a3b8]/60 underline-offset-4 transition-colors"
               >
                 local Google Business Profile geofencing
               </Link>{" "}
               with sub-second{" "}
               <Link
                 href="/services/technical-seo"
-                className="font-bold text-[#a594fd] hover:text-white underline decoration-[#a594fd]/60 underline-offset-4 transition-colors"
+                className="font-bold text-slate-300 hover:text-white underline decoration-[#cbd5e1]/60 underline-offset-4 transition-colors"
               >
                 technical SEO and indexing recovery
               </Link>
               , transforming dormant traffic into pre-qualified retainers. Review our{" "}
               <Link
                 href="/case-studies"
-                className="font-bold text-white hover:text-[#3eb489] underline decoration-white/60 underline-offset-4 transition-colors"
+                className="font-bold text-white hover:text-slate-300 underline decoration-white/60 underline-offset-4 transition-colors"
               >
                 verified client case studies
               </Link>{" "}
@@ -117,7 +117,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
           {/* Left Column: Exclusivity Safeguards & Venue Coverage */}
           <div className="lg:col-span-5 rounded-2xl border border-slate-700 bg-slate-900/90 p-6 sm:p-7 text-slate-200 shadow-xl space-y-5">
             <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
-              <ShieldCheck className="h-5 w-5 text-[#3eb489]" />
+              <ShieldCheck className="h-5 w-5 text-slate-300" />
               <h4 className="text-base font-bold text-white">
                 Wayne &amp; Tri-County Exclusivity Lock
               </h4>
@@ -125,10 +125,10 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
 
             <div className="flex items-center justify-between text-xs font-bold text-slate-300">
               <span className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-[#a594fd]" />
+                <MapPin className="h-3.5 w-3.5 text-slate-300" />
                 Protected Jurisdictional Radius
               </span>
-              <span className="text-[11px] text-[#3eb489] font-bold">Wayne, Oakland &amp; Macomb</span>
+              <span className="text-[11px] text-slate-300 font-bold">Wayne, Oakland &amp; Macomb</span>
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed">
@@ -138,19 +138,19 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
             {/* Explanatory Bullet Points */}
             <div className="space-y-3 pt-2 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489] shrink-0 mt-1.5" />
+                <span className="h-1.5 w-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5" />
                 <span className="leading-snug">
                   <strong>Strict one-firm-per-niche policy</strong> across personal injury, criminal defense, family and employment.
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489] shrink-0 mt-1.5" />
+                <span className="h-1.5 w-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5" />
                 <span className="leading-snug">
                   <strong>Direct strategist access</strong> with no junior hand-offs.
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#3eb489] shrink-0 mt-1.5" />
+                <span className="h-1.5 w-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5" />
                 <span className="leading-snug">
                   <strong>Month-to-month terms</strong> with no multi-year lock-in.
                 </span>
@@ -159,7 +159,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
 
             <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
               <span>Legal Advertising Ethics</span>
-              <span className="text-[#a594fd] font-semibold">Written with MRPC Rule 7 in mind</span>
+              <span className="text-slate-300 font-semibold">Written with MRPC Rule 7 in mind</span>
             </div>
           </div>
 
@@ -167,17 +167,17 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
           <div className="lg:col-span-7 rounded-2xl border border-slate-700 bg-white p-6 sm:p-8 text-slate-900 shadow-2xl">
             {submitted ? (
               <div className="text-center py-10 space-y-4">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-neutral-800">
                   <CheckCircle2 className="h-8 w-8" />
                 </div>
-                <h4 className="text-2xl font-black text-[#0a0f2e]">
+                <h4 className="text-2xl font-black text-neutral-950">
                   Consultation Request Received
                 </h4>
                 <p className="text-sm text-slate-600 max-w-md mx-auto">
                   Our senior legal SEO strategist will review your firm&apos;s current Wayne County map rankings and send your custom growth plan within 24 hours.
                 </p>
                 <div className="pt-4">
-                  <span className="text-xs font-semibold text-[#534AB7] bg-[#EEEDFE] px-4 py-2 rounded-xl">
+                  <span className="text-xs font-semibold text-neutral-900 bg-slate-100 px-4 py-2 rounded-xl">
                     Territory Exclusivity Hold Initiated for {practice}
                   </span>
                 </div>
@@ -185,10 +185,10 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                     EXCLUSIVE DETROIT TERRITORY CHECK
                   </span>
-                  <h4 className="text-xl sm:text-2xl font-black text-[#0a0f2e] mt-1">
+                  <h4 className="text-xl sm:text-2xl font-black text-neutral-950 mt-1">
                     Check Territory Availability
                   </h4>
                   <p className="text-xs text-slate-500 mt-1">
@@ -208,7 +208,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                         onClick={() => setPractice(p)}
                         className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
                           practice === p
-                            ? "bg-[#534AB7] text-white shadow-xs"
+                            ? "bg-neutral-900 text-white shadow-xs"
                             : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                         }`}
                       >
@@ -228,7 +228,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                       placeholder="Jane Doe, Esq."
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-[#534AB7] focus:bg-white"
+                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-neutral-900 focus:bg-white"
                     />
                   </div>
 
@@ -242,7 +242,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                       placeholder="detroitinjurylaw.com"
                       value={formData.website}
                       onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-[#534AB7] focus:bg-white"
+                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-neutral-900 focus:bg-white"
                     />
                   </div>
                 </div>
@@ -258,7 +258,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                       placeholder="jdoe@firm.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-[#534AB7] focus:bg-white"
+                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-neutral-900 focus:bg-white"
                     />
                   </div>
 
@@ -271,14 +271,14 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                       placeholder="(313) 555-0199"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-[#534AB7] focus:bg-white"
+                      className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-900 outline-none focus:border-neutral-900 focus:bg-white"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full rounded-xl bg-[#1a7d59] hover:bg-[#196b4d] px-6 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full rounded-xl bg-neutral-900 hover:bg-[#196b4d] px-6 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
                   <span>Check My Territory</span>
                   <ArrowRight className="h-4 w-4" />
@@ -297,7 +297,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
         <div className="pt-8 border-t border-slate-800 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#3eb489] block">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-300 block">
                 VERIFIED LOCAL PERFORMANCE EVIDENCE
               </span>
               <h4 className="mt-1 text-2xl sm:text-3xl font-black text-white">
@@ -310,7 +310,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
 
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 text-xs font-bold text-[#a594fd] hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-xl transition-all shrink-0"
+              className="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-xl transition-all shrink-0"
             >
               <span>Explore All Case Studies</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -323,14 +323,14 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
             <div className="rounded-2xl border border-slate-700 bg-slate-900/90 overflow-hidden shadow-xl flex flex-col justify-between group">
               <div className="p-5 sm:p-6 pb-4 space-y-2">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#3eb489]/20 text-[#3eb489] border border-[#3eb489]/30">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-300/20 text-slate-300 border border-[#94a3b8]/30">
                     Michigan Local Business
                   </span>
                   <span className="text-[11px] font-mono text-slate-400 font-semibold">
                     60-Day Telemetry
                   </span>
                 </div>
-                <h5 className="text-lg font-bold text-white group-hover:text-[#a594fd] transition-colors">
+                <h5 className="text-lg font-bold text-white group-hover:text-slate-300 transition-colors">
                   192 → 264 Monthly Clicks (+37.5%) &amp; 41K → 106K Impressions (+158%)
                 </h5>
                 <p className="text-xs text-slate-300 leading-relaxed">
@@ -355,7 +355,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                 </span>
                 <Link
                   href="/case-studies"
-                  className="inline-flex items-center gap-1 font-bold text-[#3eb489] hover:underline shrink-0"
+                  className="inline-flex items-center gap-1 font-bold text-slate-300 hover:underline shrink-0"
                 >
                   <span>View Case Study</span>
                   <ExternalLink className="h-3 w-3" />
@@ -367,14 +367,14 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
             <div className="rounded-2xl border border-slate-700 bg-slate-900/90 overflow-hidden shadow-xl flex flex-col justify-between group">
               <div className="p-5 sm:p-6 pb-4 space-y-2">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#534AB7]/30 text-[#a594fd] border border-[#534AB7]/40">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-300 border border-slate-300">
                     Home Services &amp; HVAC
                   </span>
                   <span className="text-[11px] font-mono text-slate-400 font-semibold">
                     Rank #1 in AI Overview
                   </span>
                 </div>
-                <h5 className="text-lg font-bold text-white group-hover:text-[#3eb489] transition-colors">
+                <h5 className="text-lg font-bold text-white group-hover:text-slate-300 transition-colors">
                   Named as Primary Recommended Provider in Google AI Overviews
                 </h5>
                 <p className="text-xs text-slate-300 leading-relaxed">
@@ -399,7 +399,7 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
                 </span>
                 <Link
                   href="/services/law-firm-seo"
-                  className="inline-flex items-center gap-1 font-bold text-[#a594fd] hover:underline shrink-0"
+                  className="inline-flex items-center gap-1 font-bold text-slate-300 hover:underline shrink-0"
                 >
                   <span>See Methodology</span>
                   <ExternalLink className="h-3 w-3" />

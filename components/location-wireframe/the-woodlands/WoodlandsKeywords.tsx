@@ -116,8 +116,8 @@ export default function WoodlandsKeywords() {
   return (
     <section id="keywords" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div className="max-w-3xl mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-[#3C3489] border border-indigo-100 mb-3">
-          <Layers className="w-3.5 h-3.5 text-[#534AB7]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-slate-50 text-neutral-900 border border-slate-100 mb-3">
+          <Layers className="w-3.5 h-3.5 text-neutral-900" />
           Texas Legal Semantic Entities
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
@@ -138,7 +138,7 @@ export default function WoodlandsKeywords() {
               onClick={() => setActiveCluster(idx)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 border ${
                 isActive
-                  ? 'bg-[#534AB7] text-white border-indigo-600 shadow-md shadow-indigo-900/20'
+                  ? 'bg-neutral-900 text-white border-neutral-800 shadow-md shadow-neutral-900/20'
                   : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
@@ -152,14 +152,14 @@ export default function WoodlandsKeywords() {
       <div className="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-slate-100">
           <div>
-            <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider">
+            <span className="text-xs font-bold text-neutral-800 uppercase tracking-wider">
               {current.tag}
             </span>
             <h3 className="text-2xl font-bold text-slate-900 mt-0.5">{current.title}</h3>
           </div>
           <Link
             href={current.linkHref}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#534AB7] hover:text-[#3C3489] group"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-neutral-900 hover:text-neutral-950 group"
           >
             <span>{current.linkText}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -197,9 +197,9 @@ export default function WoodlandsKeywords() {
                 {current.longTail.map((kw, kwIdx) => (
                   <div
                     key={kwIdx}
-                    className="px-3 py-1.5 rounded-lg bg-indigo-50/70 border border-indigo-100 text-xs font-mono text-[#3C3489] flex items-center gap-2"
+                    className="px-3 py-1.5 rounded-lg bg-slate-50/70 border border-slate-100 text-xs font-mono text-neutral-900 flex items-center gap-2"
                   >
-                    <Tag className="w-3.5 h-3.5 text-[#534AB7] shrink-0" />
+                    <Tag className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                     <span>{kw}</span>
                   </div>
                 ))}

@@ -11,11 +11,11 @@ export default function PhiladelphiaOutspentVsOutranked() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Scale className="h-4 w-4" />
             <span>Competitive Market Dynamics</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Philadelphia Legal Market: Outspent by National Filers, Never Outranked Locally
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -69,21 +69,21 @@ export default function PhiladelphiaOutspentVsOutranked() {
           </div>
 
           {/* Local Philadelphia Law Firm Card (SearchPrex Advantage) */}
-          <div className="relative rounded-3xl border-2 border-[#534AB7] bg-gradient-to-b from-indigo-50/40 via-white to-white p-7 sm:p-9 shadow-xl shadow-indigo-100/50 space-y-6 flex flex-col justify-between">
-            <div className="absolute top-0 right-0 rounded-bl-2xl bg-gradient-to-r from-[#534AB7] to-[#3C3489] px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-xs">
+          <div className="relative rounded-3xl border-2 border-neutral-900 bg-gradient-to-b from-slate-50/40 via-white to-white p-7 sm:p-9 shadow-xl shadow-slate-100/50 space-y-6 flex flex-col justify-between">
+            <div className="absolute top-0 right-0 rounded-bl-2xl bg-gradient-to-r from-neutral-800 to-neutral-800 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-xs">
               Home-Field Advantage
             </div>
 
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="rounded-2xl bg-[#EEEDFE] p-3 text-[#534AB7]">
+                <div className="rounded-2xl bg-slate-100 p-3 text-neutral-900">
                   <Home className="h-6 w-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                     Your True Advantage
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0a0f2e]">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-neutral-950">
                     You, an Established Philadelphia Firm
                   </h3>
                 </div>
@@ -91,31 +91,31 @@ export default function PhiladelphiaOutspentVsOutranked() {
 
               <div className="space-y-3 pt-2">
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-800 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span>Real physical office and verified local client reviews across Center City & suburbs</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-800 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span>Deep familiarity with Court of Common Pleas, Municipal Court & local judges</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-800 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span>Genuine community ties, Philadelphia Bar Association standing, and word of mouth</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-800 font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-[#1a7d59] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-4 w-4 text-neutral-800 shrink-0 mt-0.5" />
                   <span>The compounding organic authority SearchPrex transforms into signed retainer equity</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-indigo-100 flex items-center justify-between">
-              <span className="text-xs font-bold text-[#534AB7]">
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span className="text-xs font-bold text-neutral-900">
                 Compounding Equity vs. Rented Ad Traffic
               </span>
               <Link
                 href="/services/law-firm-seo"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:underline"
               >
                 <span>Explore Law Firm SEO</span>
                 <ArrowRight className="h-3.5 w-3.5" />

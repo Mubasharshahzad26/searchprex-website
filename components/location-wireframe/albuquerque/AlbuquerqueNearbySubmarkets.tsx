@@ -64,11 +64,11 @@ export default function AlbuquerqueNearbySubmarkets() {
     <section id="nearby" className="py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-3.5 h-3.5" />
             <span>Nearby Geographic Submarkets</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Law Firm SEO Near Albuquerque: Rio Rancho, Santa Fe, Los Lunas &amp; Las Cruces
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -86,7 +86,7 @@ export default function AlbuquerqueNearbySubmarkets() {
                 onClick={() => setSelectedArea(idx)}
                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
                   isActive
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-sm"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
                     : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
                 }`}
               >
@@ -104,7 +104,7 @@ export default function AlbuquerqueNearbySubmarkets() {
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
                 County &amp; Venue
               </div>
-              <h3 className="text-base font-extrabold text-[#0a0f2e]">
+              <h3 className="text-base font-extrabold text-neutral-950">
                 {current.county}
               </h3>
             </div>
@@ -144,10 +144,10 @@ export default function AlbuquerqueNearbySubmarkets() {
           </div>
 
           {/* Card 4: Linked Practice Silo */}
-          <div className="p-6 rounded-2xl bg-[#0a0f2e] text-white border border-[#3C3489] shadow-md flex flex-col justify-between">
+          <div className="p-6 rounded-2xl bg-neutral-900 text-white border border-[#262626] shadow-md flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#EEEDFE] mb-2 flex items-center gap-1.5">
-                <Building2 className="w-4 h-4 text-emerald-400" />
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-200 mb-2 flex items-center gap-1.5">
+                <Building2 className="w-4 h-4 text-slate-400" />
                 <span>Recommended Silo</span>
               </div>
               <h4 className="text-base font-bold text-white mb-2">
@@ -161,7 +161,7 @@ export default function AlbuquerqueNearbySubmarkets() {
             <div className="pt-4 border-t border-slate-800 mt-4">
               <Link
                 href={current.linkHref}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#EEEDFE] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-200 hover:underline"
               >
                 <span>View Practice Methodology</span>
                 <ArrowRight className="w-3.5 h-3.5" />

@@ -24,7 +24,7 @@ interface ShreveportWireframeViewProps {
 
 export default function ShreveportWireframeView({ page }: ShreveportWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#4338ca] selection:text-white font-sans">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero Section: Pure white background, Semrush layout, floating elements, real WebP city image */}
       <ShreveportHero page={page} />
 

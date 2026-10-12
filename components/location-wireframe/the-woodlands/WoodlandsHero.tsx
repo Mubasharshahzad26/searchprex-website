@@ -1,156 +1,301 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { ShieldCheck, MapPin, Sparkles, ArrowRight, CheckCircle2, TrendingUp } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  ArrowRight,
+  Scale,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  MapPin,
+} from "lucide-react";
+import type { CityPage } from "@/lib/city-pages";
 
-export default function WoodlandsHero() {
+interface WoodlandsHeroProps {
+  page?: CityPage;
+}
+
+export default function WoodlandsHero({ page }: WoodlandsHeroProps) {
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [email, setEmail] = useState("");
+  const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys">("Solo");
+  const [practiceArea, setPracticeArea] = useState<string>("High-asset divorce");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!website || !email) {
+      setErrorMessage("Please enter both your firm website URL and email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "The Woodlands Attorney",
+          url: website,
+          email,
+          firmSize,
+          practiceArea,
+          source: "the-woodlands:hero-lead-form",
+          notes: `Requested The Woodlands Hero Audit. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to submit request. Please try again.");
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#0a0f2e] via-[#10194a] to-[#0a0f2e] text-white pt-24 pb-20 px-4 sm:px-6 lg:px-8 border-b border-indigo-950">
-      {/* Background radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-indigo-600/10 blur-3xl pointer-events-none rounded-full" />
+    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+      {/* Subtle Light Grey Ambient Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Top Badges */}
-        <div className="flex flex-wrap items-center gap-3 mb-6">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 backdrop-blur-sm">
-            <MapPin className="w-3.5 h-3.5 text-indigo-400" />
-            The Woodlands & Montgomery County Legal Market
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            Zero-Conflict Exclusivity: 1 Firm Per Practice Area
-          </span>
-        </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* LEFT COLUMN: HERO CONTENT */}
+          <div className="lg:col-span-7 space-y-6 pt-2">
+            
+            {/* Eyebrow Badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                Law Firm SEO · The Woodlands, TX
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                1-Firm Practice Exclusivity
+              </div>
+            </div>
 
-        {/* Main Title & Subtitle */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12] mb-6">
-              Law Firm SEO in{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-[#EEEDFE] to-indigo-200">
-                The Woodlands, TX
+            {/* H1 Headline: Solid Black on Light White Background */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+              The Woodlands Law Firm SEO:{" "}
+              <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
+                Built for Montgomery County & Village Intent
               </span>
-              : Built for Montgomery County Venue & Village Intent
             </h1>
-            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mb-8">
-              The Woodlands is an affluent master-planned township split between Montgomery County (Conroe courts) and Harris County (Creekside Park). We build answer-first practice silos, village hubs, and AI citation engines that turn high-net-worth inquiries into signed retainers.
+
+            {/* Subheading (Focus Keyword in First 100 Words) */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              Law firm SEO in The Woodlands captures high-net-worth families and corporate executives across Montgomery County (Conroe courts) and Harris County (Creekside Park). We engineer answer-first practice silos, village-level hubs from Alden Bridge to Sterling Ridge, and AI citation authority that converts referrals and local searches into signed retainers.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+            {/* Key Metrics Strip */}
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">$145k+</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Median Household Income</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">8 Villages</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Alden Bridge to Creekside</p>
+              </div>
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <p className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">2 Counties</p>
+                <p className="text-xs text-slate-600 font-medium mt-0.5">Montgomery & Harris</p>
+              </div>
+            </div>
+
+            {/* Secondary Action Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
               <a
                 href="#diagnosis-tool"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-semibold text-white bg-[#534AB7] hover:bg-[#3C3489] transition-all duration-200 shadow-lg shadow-indigo-900/40 hover:shadow-indigo-900/60 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
               >
-                <Sparkles className="w-5 h-5 text-indigo-200" />
-                Diagnose Your Woodlands Firm
+                <span>Diagnose Your Woodlands Firm</span>
+                <ArrowRight className="w-4 h-4 text-neutral-700" />
               </a>
               <a
                 href="#pricing"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-800 hover:text-white border border-slate-700/80 transition-all duration-200"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
               >
-                View Plans & 90-Day Guarantee
-                <ArrowRight className="w-4 h-4 text-slate-400" />
+                <span>View Plans & 90-Day Guarantee</span>
               </a>
             </div>
 
-            {/* Fast Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800/80">
-              <div>
-                <div className="text-2xl font-bold text-white tracking-tight">$145k+</div>
-                <div className="text-xs text-slate-400 mt-0.5">Median Household Income</div>
+            {/* Trust Points */}
+            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
+              <div className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-4 h-4 text-neutral-900" />
+                One firm per practice area
               </div>
-              <div>
-                <div className="text-2xl font-bold text-indigo-300 tracking-tight">8 Villages</div>
-                <div className="text-xs text-slate-400 mt-0.5">Alden Bridge to Creekside</div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
+                Month-to-month contracts
               </div>
-              <div className="col-span-2 sm:col-span-1">
-                <div className="text-2xl font-bold text-emerald-400 tracking-tight">2 Counties</div>
-                <div className="text-xs text-slate-400 mt-0.5">Montgomery (90%) & Harris</div>
+              <div className="flex items-center gap-1.5 font-medium">
+                <Scale className="w-4 h-4 text-neutral-900" />
+                Founder-led execution
               </div>
             </div>
+
           </div>
 
-          {/* Decorative Pine & Waterway Vector Card */}
-          <div className="lg:col-span-4">
-            <div className="relative rounded-2xl bg-gradient-to-br from-slate-900/90 to-indigo-950/60 border border-indigo-900/50 p-6 shadow-2xl backdrop-blur-sm overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
-
-              {/* Waterway & Pines Sunrise SVG */}
-              <div className="w-full h-44 rounded-xl bg-gradient-to-b from-[#11183c] to-[#0c102a] border border-indigo-900/40 relative overflow-hidden flex items-end justify-center mb-5">
-                <svg
-                  viewBox="0 0 400 180"
-                  className="w-full h-full object-cover"
-                  preserveAspectRatio="xMidYMid slice"
-                >
-                  <defs>
-                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#1e1b4b" />
-                      <stop offset="60%" stopColor="#312e81" />
-                      <stop offset="100%" stopColor="#4338ca" />
-                    </linearGradient>
-                    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#3730a3" />
-                      <stop offset="100%" stopColor="#1e1b4b" />
-                    </linearGradient>
-                    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#a5b4fc" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-
-                  {/* Sky */}
-                  <rect width="400" height="120" fill="url(#skyGrad)" />
-                  {/* Subtle Morning Sun */}
-                  <circle cx="200" cy="70" r="38" fill="url(#sunGlow)" />
-                  <circle cx="200" cy="70" r="16" fill="#e0e7ff" opacity="0.9" />
-
-                  {/* Silhouette Pines */}
-                  <path d="M 20 120 L 35 70 L 50 120 Z" fill="#1e1b4b" opacity="0.8" />
-                  <path d="M 40 120 L 58 60 L 76 120 Z" fill="#0f172a" />
-                  <path d="M 70 120 L 85 75 L 100 120 Z" fill="#1e1b4b" opacity="0.8" />
-                  
-                  <path d="M 300 120 L 315 72 L 330 120 Z" fill="#1e1b4b" opacity="0.8" />
-                  <path d="M 320 120 L 340 58 L 360 120 Z" fill="#0f172a" />
-                  <path d="M 350 120 L 368 68 L 386 120 Z" fill="#1e1b4b" opacity="0.8" />
-
-                  {/* The Woodlands Waterway canal */}
-                  <rect y="120" width="400" height="60" fill="url(#waterGrad)" />
-                  {/* Water reflections */}
-                  <ellipse cx="200" cy="132" rx="70" ry="2" fill="#c7d2fe" opacity="0.4" />
-                  <ellipse cx="200" cy="144" rx="90" ry="2.5" fill="#a5b4fc" opacity="0.3" />
-                  <ellipse cx="200" cy="158" rx="120" ry="3" fill="#818cf8" opacity="0.2" />
-                </svg>
-                <div className="absolute top-2 right-2 px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-900/80 text-indigo-200 border border-indigo-700/50">
-                  Town Center Waterway
+          {/* RIGHT COLUMN: HERO LEAD CAPTURE FORM */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8 relative">
+              
+              {/* Top Form Badge */}
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
+                    <Clock className="w-3 h-3 text-neutral-800" />
+                    Free 24-Hour Woodlands Audit
+                  </span>
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
+                    Get Your Woodlands Reality Check
+                  </h2>
                 </div>
               </div>
 
-              <h2 className="text-base font-semibold text-white mb-2">
-                The Woodlands Legal Architecture
-              </h2>
-              <ul className="space-y-2.5 text-xs text-slate-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>Montgomery Court filing:</strong> Conroe district venue rules for 90% of township.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>Harris Court filing:</strong> Creekside Park exceptions clarified.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>Executive wealth intent:</strong> Trusts, muniment of title, & executive equity.</span>
-                </li>
-              </ul>
+              {status === "success" ? (
+                <div className="p-6 rounded-xl bg-white border border-slate-200 text-center space-y-3 my-4">
+                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
+                  <h3 className="text-base font-bold text-neutral-950">
+                    Audit Request Received
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Thank you. Mubashar will personally review your The Woodlands website, Google Business Profile, and local search competitors, and email your 24-hour teardown directly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Jane Smith, Esq."
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
 
-              <div className="mt-5 pt-4 border-t border-indigo-950 flex items-center justify-between text-xs">
-                <span className="text-slate-400">Led by Founder</span>
-                <span className="font-medium text-indigo-300">Mubashar Sharif</span>
-              </div>
+                  {/* Website */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Firm Website <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="woodlandslawfirm.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Work Email */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Work Email <span className="text-neutral-950">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="you@woodlandslawfirm.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-sm text-neutral-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/15 focus:border-neutral-900"
+                    />
+                  </div>
+
+                  {/* Firm Size */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Firm Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["Solo", "2-10 attorneys"] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFirmSize(size)}
+                          className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all ${
+                            firmSize === size
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Practice Area */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Practice Area
+                    </label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["High-asset divorce","Estate & trusts","Personal injury","Corporate / Energy","Criminal","Other"].map((area) => (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setPracticeArea(area)}
+                          className={`py-1.5 px-2.5 rounded-lg text-xs font-semibold border transition-all ${
+                            practiceArea === area
+                              ? "bg-neutral-900 text-white border-neutral-900"
+                              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"
+                          }`}
+                        >
+                          {area}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-600 font-medium">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                    >
+                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Audit"}</span>
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+
+                  {/* Confidentiality Note */}
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1">
+                    <Lock className="w-3 h-3 text-slate-400" />
+                    <span>100% Confidential · Reviewed personally by Founder</span>
+                  </div>
+                </form>
+              )}
+
             </div>
           </div>
+
         </div>
       </div>
     </section>

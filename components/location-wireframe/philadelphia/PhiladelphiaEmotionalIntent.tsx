@@ -53,11 +53,11 @@ export default function PhiladelphiaEmotionalIntent() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <HeartHandshake className="h-4 w-4" />
             <span>Search Psychology & Tone of Voice</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Client Search Psychology: Converting High-Pressure Philadelphia Inquiries
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -75,7 +75,7 @@ export default function PhiladelphiaEmotionalIntent() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`rounded-2xl px-5 py-3 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/25 scale-102"
+                    ? "bg-neutral-900 text-white shadow-md shadow-sm scale-102"
                     : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
                 }`}
               >
@@ -93,7 +93,7 @@ export default function PhiladelphiaEmotionalIntent() {
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
               Emotional State
             </span>
-            <h4 className="text-lg font-extrabold text-[#0a0f2e]">
+            <h4 className="text-lg font-extrabold text-neutral-950">
               What They Feel
             </h4>
             <p className="text-sm text-slate-700 leading-relaxed font-medium">
@@ -103,10 +103,10 @@ export default function PhiladelphiaEmotionalIntent() {
 
           {/* Card 2: What They Quietly Search */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 space-y-2 shadow-2xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
               Private Google Queries
             </span>
-            <h4 className="text-lg font-extrabold text-[#0a0f2e]">
+            <h4 className="text-lg font-extrabold text-neutral-950">
               What They Quietly Search
             </h4>
             <p className="text-xs font-mono text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-200 leading-relaxed">
@@ -116,10 +116,10 @@ export default function PhiladelphiaEmotionalIntent() {
 
           {/* Card 3: What They Need to Read */}
           <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 space-y-2 shadow-2xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block">
               Conversion Trigger
             </span>
-            <h4 className="text-lg font-extrabold text-[#0a0f2e]">
+            <h4 className="text-lg font-extrabold text-neutral-950">
               What They Need to Read
             </h4>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -128,12 +128,12 @@ export default function PhiladelphiaEmotionalIntent() {
           </div>
 
           {/* Card 4: Our Strategic Tone & Silo Link */}
-          <div className="rounded-3xl border-2 border-[#534AB7] bg-gradient-to-br from-[#EEEDFE]/80 via-white to-white p-6 flex flex-col justify-between shadow-md">
+          <div className="rounded-3xl border-2 border-neutral-900 bg-gradient-to-br from-slate-50 via-white to-white p-6 flex flex-col justify-between shadow-md">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
                 Content Execution
               </span>
-              <h4 className="text-lg font-extrabold text-[#0a0f2e] mb-2">
+              <h4 className="text-lg font-extrabold text-neutral-950 mb-2">
                 Our Page Tone & Voice
               </h4>
               <p className="text-sm text-slate-800 font-semibold leading-relaxed">
@@ -141,10 +141,10 @@ export default function PhiladelphiaEmotionalIntent() {
               </p>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-[#534AB7]/20">
+            <div className="mt-4 pt-4 border-t border-slate-300">
               <Link
                 href={current.href}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#534AB7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 hover:underline"
               >
                 <span>{current.linkLabel}</span>
                 <ArrowRight className="h-3.5 w-3.5" />

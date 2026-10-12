@@ -96,7 +96,7 @@ export default function ScottsdaleSubmarkets() {
                   <span className="font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
                     Zip: {sub.zip}
                   </span>
-                  <span className="font-semibold text-[#4338ca] bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+                  <span className="font-semibold text-neutral-950 bg-slate-50 px-2 py-0.5 rounded border border-slate-100">
                     {sub.focus}
                   </span>
                 </div>

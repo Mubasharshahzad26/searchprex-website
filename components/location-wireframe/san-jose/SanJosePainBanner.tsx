@@ -60,7 +60,7 @@ export default function SanJosePainBanner() {
               <span className="text-xs font-semibold text-slate-600">The Strategic Solution:</span>
               <Link
                 href="/case-studies"
-                className="text-xs font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                className="text-xs font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
               >
                 View High-Yield Tech Retainer Proof
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -105,7 +105,7 @@ export default function SanJosePainBanner() {
               <span className="text-xs font-semibold text-slate-600">The Strategic Solution:</span>
               <Link
                 href="/about"
-                className="text-xs font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                className="text-xs font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
               >
                 Meet Founder Mubashar Sharif
                 <ArrowRight className="w-3.5 h-3.5" />

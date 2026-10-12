@@ -39,9 +39,9 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
   const currentGrid = viewState === "before" ? beforeGrid : afterGrid;
 
   function getBadgeColor(val: number) {
-    if (val <= 3) return "bg-emerald-500 text-white font-bold";
-    if (val <= 10) return "bg-amber-400 text-slate-900 font-bold";
-    return "bg-rose-100 text-rose-800 font-semibold";
+    if (val <= 3) return "bg-neutral-700 text-white font-bold";
+    if (val <= 10) return "bg-slate-400 text-slate-900 font-bold";
+    return "bg-slate-100 text-neutral-900 font-semibold";
   }
 
   return (
@@ -51,10 +51,10 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
         {/* ── Section Header (Section 6) ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
               VERIFIED RANKINGS &amp; REVENUE TELEMETRY
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
               Local SEO Results: Map Pack Rankings, Calls and Signed Cases
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
@@ -62,9 +62,9 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#EEEDFE] px-4 py-2 rounded-xl border border-[#534AB7]/20 shrink-0">
-            <ShieldCheck className="h-4 w-4 text-[#534AB7]" />
-            <span className="text-xs font-bold text-[#534AB7]">Live Local Falcon Verification</span>
+          <div className="flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-xl border border-slate-300 shrink-0">
+            <ShieldCheck className="h-4 w-4 text-neutral-900" />
+            <span className="text-xs font-bold text-neutral-900">Live Local Falcon Verification</span>
           </div>
         </div>
 
@@ -94,7 +94,7 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
                   onClick={() => setViewState("after")}
                   className={`rounded-md px-3 py-1 transition-all cursor-pointer ${
                     viewState === "after"
-                      ? "bg-[#534AB7] text-white shadow-2xs font-bold"
+                      ? "bg-neutral-900 text-white shadow-2xs font-bold"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
@@ -121,13 +121,13 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
             <div className="space-y-2 pt-2 border-t border-slate-200">
               <div className="flex items-center justify-center gap-4 text-[11px] font-semibold text-slate-600">
                 <span className="flex items-center gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-emerald-500" /> Top 3 (Map Pack)
+                  <span className="h-3 w-3 rounded-full bg-neutral-700" /> Top 3 (Map Pack)
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-amber-400" /> Rank 4–10
+                  <span className="h-3 w-3 rounded-full bg-slate-400" /> Rank 4–10
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-rose-200" /> Rank 11+
+                  <span className="h-3 w-3 rounded-full bg-slate-200" /> Rank 11+
                 </span>
               </div>
               <p className="text-[10px] text-center font-mono text-slate-400">
@@ -140,36 +140,36 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
           <div className="lg:col-span-6 space-y-6">
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                <span className="text-2xl sm:text-3xl font-black text-[#0a0f2e] block">+227%</span>
+                <span className="text-2xl sm:text-3xl font-black text-neutral-950 block">+227%</span>
                 <span className="text-xs font-bold text-slate-700 mt-1 block">Phone calls from Google Business Profile</span>
                 <span className="text-[11px] text-slate-500 mt-0.5 block">CallRail verified high-intent calls</span>
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                <span className="text-2xl sm:text-3xl font-black text-[#3eb489] block">#1 Rank</span>
+                <span className="text-2xl sm:text-3xl font-black text-slate-300 block">#1 Rank</span>
                 <span className="text-xs font-bold text-slate-700 mt-1 block">Wayne County Map Pack position</span>
                 <span className="text-[11px] text-slate-500 mt-0.5 block">Across 18 high-intent zip codes</span>
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                <span className="text-2xl sm:text-3xl font-black text-[#534AB7] block">14 to 38</span>
+                <span className="text-2xl sm:text-3xl font-black text-neutral-900 block">14 to 38</span>
                 <span className="text-xs font-bold text-slate-700 mt-1 block">Signed retainers per month</span>
                 <span className="text-[11px] text-slate-500 mt-0.5 block">Intake acceleration across Wayne Co.</span>
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-2xs">
-                <span className="text-2xl sm:text-3xl font-black text-[#0a0f2e] block">-58%</span>
+                <span className="text-2xl sm:text-3xl font-black text-neutral-950 block">-58%</span>
                 <span className="text-xs font-bold text-slate-700 mt-1 block">Cost per signed case versus paid ads</span>
                 <span className="text-[11px] text-slate-500 mt-0.5 block">Vs Google Ads pay-per-click spend</span>
               </div>
             </div>
 
             {/* ── Section 7: Free Law Firm Local SEO Checklist ── */}
-            <div className="rounded-2xl border-2 border-[#534AB7] bg-[#EEEDFE]/40 p-6 space-y-3 shadow-xs">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#534AB7] block">
+            <div className="rounded-2xl border-2 border-neutral-900 bg-slate-100 p-6 space-y-3 shadow-xs">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-900 block">
                 COMPLIMENTARY LAW FIRM RESOURCE
               </span>
-              <h3 className="text-xl sm:text-2xl font-black text-[#0a0f2e]">
+              <h3 className="text-xl sm:text-2xl font-black text-neutral-950">
                 Free Law Firm Local SEO Checklist: 10 Points to Diagnose Your Map Pack Ranking
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -179,7 +179,7 @@ export default function DetroitRankGridProof({ page }: { page: CityPage }) {
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <a
                   href="#free-checklist"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs transition-colors cursor-pointer"
                 >
                   <Download className="h-4 w-4" />
                   <span>Download the Free 10-Point Checklist</span>

@@ -47,11 +47,11 @@ export default function SugarLandKeywords() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-3">
             <Tag className="w-3.5 h-3.5" />
             <span>Topical Authority &amp; Semantic Entities</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Law Firm SEO Keywords for Sugar Land: Topics Google &amp; AI Overviews Expect
           </h2>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
@@ -70,7 +70,7 @@ export default function SugarLandKeywords() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-sm"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
                     : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -86,7 +86,7 @@ export default function SugarLandKeywords() {
             {/* Box 1: Core Topics */}
             <div className="space-y-2 p-6 rounded-2xl bg-white border border-slate-200/80">
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-[#534AB7]" />
+                <Tag className="w-3.5 h-3.5 text-neutral-900" />
                 <span>Core Statutory Entities:</span>
               </div>
               <p className="text-sm text-slate-800 leading-relaxed font-medium">
@@ -97,7 +97,7 @@ export default function SugarLandKeywords() {
             {/* Box 2: Local Long-Tail Queries */}
             <div className="space-y-2 p-6 rounded-2xl bg-white border border-slate-200/80">
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <Search className="w-3.5 h-3.5 text-[#1a7d59]" />
+                <Search className="w-3.5 h-3.5 text-neutral-800" />
                 <span>Local Long-Tail Queries We Target:</span>
               </div>
               <p className="text-xs sm:text-sm font-semibold text-slate-900 font-mono leading-relaxed">
@@ -106,9 +106,9 @@ export default function SugarLandKeywords() {
             </div>
 
             {/* Box 3: Intent & Strategy Link */}
-            <div className="space-y-4 p-6 rounded-2xl bg-[#EEEDFE]/40 border border-[#534AB7]/30 flex flex-col justify-between h-full">
+            <div className="space-y-4 p-6 rounded-2xl bg-slate-100 border border-slate-300 flex flex-col justify-between h-full">
               <div className="space-y-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+                <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                   Search Intent &amp; Conversion Logic:
                 </div>
                 <p className="text-sm text-slate-700 leading-relaxed">
@@ -119,7 +119,7 @@ export default function SugarLandKeywords() {
               <div className="pt-2">
                 <Link
                   href={active.href}
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#534AB7] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-neutral-900 hover:underline"
                 >
                   <span>{active.linkLabel}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

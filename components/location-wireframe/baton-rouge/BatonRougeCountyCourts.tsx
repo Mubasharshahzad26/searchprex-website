@@ -103,7 +103,7 @@ export default function BatonRougeCountyCourts() {
                 <span className="text-xs font-semibold text-slate-500">Practice Alignment:</span>
                 <Link
                   href={court.link}
-                  className="text-xs font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                  className="text-xs font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
                 >
                   {court.linkText}
                   <ArrowRight className="w-3.5 h-3.5" />

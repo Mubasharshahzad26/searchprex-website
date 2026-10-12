@@ -24,15 +24,15 @@ export default function DetroitSubMarkets({ page }: { page: CityPage }) {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Headings & Value Proposition */}
           <div className="lg:col-span-7 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
               QUALIFIED CASE ACQUISITION · {page.city.toUpperCase()}, {page.stateAbbr}
             </span>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e] leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950 leading-tight">
               Not Getting Qualified Leads From Your Detroit Law Firm Website?
             </h2>
 
-            <h3 className="text-xl sm:text-2xl font-bold text-[#534AB7]">
+            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900">
               Why Generic Law Firm SEO Fails in Detroit
             </h3>
 
@@ -42,15 +42,15 @@ export default function DetroitSubMarkets({ page }: { page: CityPage }) {
 
             <div className="pt-2 space-y-2.5 text-xs sm:text-sm text-slate-700">
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-slate-300 shrink-0 mt-0.5" />
                 <span><strong>Court and neighborhood intent:</strong> pages written for the courts and communities your clients actually search from.</span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-slate-300 shrink-0 mt-0.5" />
                 <span><strong>Michigan no-fault depth:</strong> content built around real questions about PIP benefits, the serious impairment threshold (MCL § 500.3135) and claim deadlines.</span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-[#3eb489] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-slate-300 shrink-0 mt-0.5" />
                 <span><strong>Call-level attribution:</strong> every phone call and form tied to the search that produced it.</span>
               </div>
             </div>
@@ -66,11 +66,11 @@ export default function DetroitSubMarkets({ page }: { page: CityPage }) {
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
               
               <div className="absolute bottom-3 left-3 right-3 text-white">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#534AB7]/90 text-white backdrop-blur-xs mb-1 border border-white/10">
-                  <ShieldCheck className="h-3.5 w-3.5 text-[#3eb489]" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-white backdrop-blur-xs mb-1 border border-white/10">
+                  <ShieldCheck className="h-3.5 w-3.5 text-slate-300" />
                   <span>Qualified Case Acquisition</span>
                 </span>
                 <p className="text-xs text-slate-200 font-medium">

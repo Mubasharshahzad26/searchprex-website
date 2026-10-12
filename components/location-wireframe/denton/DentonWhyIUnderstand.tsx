@@ -36,11 +36,11 @@ export default function DentonWhyIUnderstand() {
     <section className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <UserCheck className="w-3.5 h-3.5" />
             <span>Strategic Alignment</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Why I Understand Your Problem: Not Because I Say So. Because of Where I Stand.
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -55,13 +55,13 @@ export default function DentonWhyIUnderstand() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#534AB7]/40 hover:shadow-md transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-[#534AB7]/10 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-[#534AB7]" />
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-neutral-900" />
                   </div>
-                  <h3 className="text-base font-bold text-[#0a0f2e] mb-2 leading-snug">
+                  <h3 className="text-base font-bold text-neutral-950 mb-2 leading-snug">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -69,7 +69,7 @@ export default function DentonWhyIUnderstand() {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-[#1a7d59] mt-4">
+                <div className="pt-4 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-neutral-800 mt-4">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Guaranteed Principle</span>
                 </div>

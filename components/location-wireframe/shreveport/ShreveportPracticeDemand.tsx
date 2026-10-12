@@ -75,7 +75,7 @@ export default function ShreveportPracticeDemand() {
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[#4338ca] shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-neutral-950 shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-xs font-bold px-2.5 py-1 rounded bg-white text-slate-800 border border-slate-200">
@@ -99,7 +99,7 @@ export default function ShreveportPracticeDemand() {
                   <span className="text-xs font-medium text-slate-500">Practice Blueprint:</span>
                   <Link
                     href={p.link}
-                    className="text-xs font-bold text-[#4338ca] hover:text-[#3730a3] inline-flex items-center gap-1"
+                    className="text-xs font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
                   >
                     {p.linkText}
                     <ArrowRight className="w-3.5 h-3.5" />

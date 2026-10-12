@@ -23,7 +23,7 @@ interface SugarLandWireframeViewProps {
 
 export default function SugarLandWireframeView({ page }: SugarLandWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero with Town Square Palms SVG & Anti-PPC Auction Positioning */}
       <SugarLandHero page={page} />
 

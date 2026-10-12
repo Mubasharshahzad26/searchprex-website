@@ -53,11 +53,11 @@ export default function DetroitBlogSection({ page }: { page: CityPage }) {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#534AB7] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block">
               LEGAL SEO INSIGHTS &amp; BLUEPRINTS
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              Law Firm SEO and AI Search Insights for Detroit Attorneys
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
+              Detroit Law Firm SEO & AI Search Insights
             </h2>
             <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
               Practical guides on AI Overviews, Google Business Profile and law firm SEO in 2026.
@@ -66,7 +66,7 @@ export default function DetroitBlogSection({ page }: { page: CityPage }) {
 
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#534AB7] hover:text-[#3C3489] transition-colors shrink-0 group"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-neutral-900 hover:text-neutral-950 transition-colors shrink-0 group"
           >
             <span>View all legal SEO articles</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -79,11 +79,11 @@ export default function DetroitBlogSection({ page }: { page: CityPage }) {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 flex flex-col justify-between shadow-2xs hover:border-[#534AB7] hover:shadow-sm transition-all group"
+              className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 flex flex-col justify-between shadow-2xs hover:border-neutral-900 hover:shadow-sm transition-all group"
             >
               <div>
                 <div className="flex items-center justify-between text-[11px] mb-3">
-                  <span className="font-bold uppercase tracking-wider text-[#534AB7] bg-[#EEEDFE] px-2.5 py-0.5 rounded-full">
+                  <span className="font-bold uppercase tracking-wider text-neutral-900 bg-slate-100 px-2.5 py-0.5 rounded-full">
                     {post.subcategory || post.category}
                   </span>
                   <span className="text-slate-400 flex items-center gap-1 font-medium">
@@ -92,7 +92,7 @@ export default function DetroitBlogSection({ page }: { page: CityPage }) {
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors leading-snug line-clamp-3">
+                <h3 className="text-base font-bold text-neutral-950 group-hover:text-neutral-900 transition-colors leading-snug line-clamp-3">
                   {post.title}
                 </h3>
 
@@ -101,7 +101,7 @@ export default function DetroitBlogSection({ page }: { page: CityPage }) {
                 </p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#534AB7]">
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-neutral-900">
                 <span className="text-slate-500 font-normal text-[11px] flex items-center gap-1">
                   <User className="h-3 w-3 text-slate-400" />
                   <span>{post.author.name}</span>

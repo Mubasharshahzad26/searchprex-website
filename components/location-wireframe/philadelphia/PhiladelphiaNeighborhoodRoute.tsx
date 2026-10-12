@@ -73,11 +73,11 @@ export default function PhiladelphiaNeighborhoodRoute() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Compass className="h-4 w-4" />
             <span>Hyper-Local Geographic Silos</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Every Neighborhood Is a Stop: Most Law Firms Skip All of Them
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -91,7 +91,7 @@ export default function PhiladelphiaNeighborhoodRoute() {
           <div className="relative mb-8 hidden md:block">
             <div className="h-2 w-full bg-slate-200 rounded-full" />
             <div
-              className="absolute top-0 h-2 bg-[#534AB7] rounded-full transition-all duration-300"
+              className="absolute top-0 h-2 bg-neutral-900 rounded-full transition-all duration-300"
               style={{ width: `${((activeStop + 1) / STOPS.length) * 100}%` }}
             />
             <div className="absolute -top-3.5 flex w-full justify-between">
@@ -104,7 +104,7 @@ export default function PhiladelphiaNeighborhoodRoute() {
                   <div
                     className={`h-9 w-9 rounded-full border-4 flex items-center justify-center transition-all ${
                       idx <= activeStop
-                        ? "border-white bg-[#534AB7] text-white shadow-md shadow-[#534AB7]/30"
+                        ? "border-white bg-neutral-900 text-white shadow-md shadow-sm"
                         : "border-slate-300 bg-white text-slate-500"
                     }`}
                   >
@@ -112,7 +112,7 @@ export default function PhiladelphiaNeighborhoodRoute() {
                   </div>
                   <span
                     className={`text-xs mt-2 font-bold transition-colors ${
-                      idx === activeStop ? "text-[#534AB7]" : "text-slate-500 group-hover:text-slate-800"
+                      idx === activeStop ? "text-neutral-900" : "text-slate-500 group-hover:text-slate-800"
                     }`}
                   >
                     {st.name}
@@ -130,7 +130,7 @@ export default function PhiladelphiaNeighborhoodRoute() {
                 onClick={() => setActiveStop(idx)}
                 className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
                   activeStop === idx
-                    ? "bg-[#534AB7] text-white shadow-xs"
+                    ? "bg-neutral-900 text-white shadow-xs"
                     : "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
                 }`}
               >
@@ -144,10 +144,10 @@ export default function PhiladelphiaNeighborhoodRoute() {
             
             {/* Column 1: Local Search Intent */}
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                 Local Search Intent
               </span>
-              <h4 className="text-lg font-extrabold text-[#0a0f2e]">
+              <h4 className="text-lg font-extrabold text-neutral-950">
                 {current.name} Client Demand
               </h4>
               <p className="text-sm text-slate-600 leading-relaxed">
@@ -156,11 +156,11 @@ export default function PhiladelphiaNeighborhoodRoute() {
             </div>
 
             {/* Column 2: What SearchPrex Builds */}
-            <div className="rounded-2xl border border-indigo-100 bg-[#EEEDFE]/50 p-6 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+            <div className="rounded-2xl border border-slate-100 bg-slate-100 p-6 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                 Architecture Deliverable
               </span>
-              <h4 className="text-lg font-extrabold text-[#0a0f2e]">
+              <h4 className="text-lg font-extrabold text-neutral-950">
                 What We Build for Your Firm
               </h4>
               <p className="text-sm text-slate-700 leading-relaxed">
@@ -171,10 +171,10 @@ export default function PhiladelphiaNeighborhoodRoute() {
             {/* Column 3: Example Searches & Practice Silo Link */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 flex flex-col justify-between shadow-2xs">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#1a7d59] block">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 block">
                   Target Search Queries
                 </span>
-                <h4 className="text-lg font-extrabold text-[#0a0f2e]">
+                <h4 className="text-lg font-extrabold text-neutral-950">
                   High-Converting Inquiries
                 </h4>
                 <div className="space-y-1.5 mt-2">
@@ -183,7 +183,7 @@ export default function PhiladelphiaNeighborhoodRoute() {
                       key={i}
                       className="flex items-center gap-2 text-xs font-mono text-slate-800 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200"
                     >
-                      <Search className="h-3 w-3 text-[#534AB7] shrink-0" />
+                      <Search className="h-3 w-3 text-neutral-900 shrink-0" />
                       <span className="truncate">{s}</span>
                     </div>
                   ))}
@@ -193,7 +193,7 @@ export default function PhiladelphiaNeighborhoodRoute() {
               <div className="pt-3 border-t border-slate-100">
                 <Link
                   href={current.siloHref}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#534AB7] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:underline"
                 >
                   <span>{current.siloLabel}</span>
                   <ArrowRight className="h-3.5 w-3.5" />

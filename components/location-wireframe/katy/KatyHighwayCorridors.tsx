@@ -13,8 +13,8 @@ export default function KatyHighwayCorridors() {
       desc: "One of the widest freeways in the world, carrying intense commercial 18-wheeler freight traffic between Houston and San Antonio alongside tens of thousands of daily commuters. Severe multi-vehicle collisions frequently lead to high-value commercial liability and catastrophic injury claims.",
       query: '"truck accident lawyer I-10 Katy", "Katy Freeway 18 wheeler attorney"',
       href: "/services/law-firm-seo/car-accident",
-      color: "border-[#1a7d59] bg-[#1a7d59]/5",
-      badge: "bg-[#1a7d59] text-white",
+      color: "border-slate-300 bg-slate-100",
+      badge: "bg-neutral-900 text-white",
     },
     {
       name: "SH 99 · Grand Parkway",
@@ -23,8 +23,8 @@ export default function KatyHighwayCorridors() {
       desc: "The critical circumferential highway connecting Katy directly with Cypress to the north and Sugar Land to the south. High-speed merges and constant ongoing construction produce frequent intersection T-bone and rollover wrecks.",
       query: '"Grand Parkway crash attorney Katy", "SH 99 accident lawyer Katy"',
       href: "/services/law-firm-seo/car-accident",
-      color: "border-[#534AB7] bg-[#534AB7]/5",
-      badge: "bg-[#534AB7] text-white",
+      color: "border-neutral-900 bg-slate-100",
+      badge: "bg-neutral-900 text-white",
     },
     {
       name: "Westpark Tollway",
@@ -33,8 +33,8 @@ export default function KatyHighwayCorridors() {
       desc: "The primary high-speed commuter artery linking Cinco Ranch, Grand Lakes, and southern Katy directly into the Houston Galleria and Midtown. Rush-hour rear-end and express lane collisions generate urgent, high-intent searches.",
       query: '"Westpark Tollway accident lawyer", "tollway crash lawyer Katy TX"',
       href: "/services/law-firm-seo/personal-injury",
-      color: "border-[#3C3489] bg-[#3C3489]/5",
-      badge: "bg-[#3C3489] text-white",
+      color: "border-[#262626] bg-[#262626]/5",
+      badge: "bg-[#262626] text-white",
     },
   ];
 
@@ -43,7 +43,7 @@ export default function KatyHighwayCorridors() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-500/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-700/10 text-slate-400 text-xs font-bold uppercase tracking-wider mb-3 border border-neutral-700/20">
             <Navigation className="w-3.5 h-3.5" />
             <span>High-Intent Transit Corridors</span>
           </div>
@@ -69,7 +69,7 @@ export default function KatyHighwayCorridors() {
                     <span className={`px-3 py-1 rounded-lg text-xs font-bold ${c.badge}`}>
                       Corridor #{idx + 1}
                     </span>
-                    <Icon className="w-5 h-5 text-emerald-400" />
+                    <Icon className="w-5 h-5 text-slate-400" />
                   </div>
 
                   <h3 className="text-2xl font-extrabold text-white tracking-tight">
@@ -90,14 +90,14 @@ export default function KatyHighwayCorridors() {
                     <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
                       Target Search Queries:
                     </div>
-                    <div className="text-xs font-semibold text-emerald-300 font-mono">
+                    <div className="text-xs font-semibold text-slate-300 font-mono">
                       {c.query}
                     </div>
                   </div>
 
                   <Link
                     href={c.href}
-                    className="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-emerald-300 hover:underline transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-slate-300 hover:underline transition-colors"
                   >
                     <span>View Injury SEO Framework</span>
                     <ArrowRight className="w-3.5 h-3.5" />

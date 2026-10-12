@@ -20,7 +20,7 @@ export default function AlbuquerqueFounderBio() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             {/* Left: Founder Photo Card */}
             <div className="lg:col-span-4 text-center">
-              <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-full overflow-hidden border-4 border-[#534AB7]/20 shadow-xl mb-4 group">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-full overflow-hidden border-4 border-slate-300 shadow-xl mb-4 group">
                 <Image
                   src="/images/mubashar-sharif.jpg"
                   alt="Mubashar Sharif, Founder and Lead Legal SEO Strategist at SearchPrex"
@@ -29,7 +29,7 @@ export default function AlbuquerqueFounderBio() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-1">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Verified Legal Strategist</span>
               </div>
@@ -40,12 +40,12 @@ export default function AlbuquerqueFounderBio() {
 
             {/* Right: Bio Information & Credentials */}
             <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
                 <UserCheck className="w-3.5 h-3.5" />
                 <span>The Strategist Behind Your Growth</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-3">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-3">
                 Mubashar Sharif, CEO &amp; Principal Legal SEO Analyst
               </h2>
 
@@ -60,7 +60,7 @@ export default function AlbuquerqueFounderBio() {
                     key={idx}
                     className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs sm:text-sm font-bold text-slate-800"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#534AB7] shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-neutral-900 shrink-0" />
                     <span>{cred}</span>
                   </div>
                 ))}
@@ -70,7 +70,7 @@ export default function AlbuquerqueFounderBio() {
               <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
                 <a
                   href="#reality-check"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#534AB7] hover:bg-[#3C3489] text-white font-bold text-sm shadow-md shadow-[#534AB7]/20 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm shadow-md shadow-sm transition-all"
                 >
                   <span>Request Founder Reality Check</span>
                   <ArrowRight className="w-4 h-4" />

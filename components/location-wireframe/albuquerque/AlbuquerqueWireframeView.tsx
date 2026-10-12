@@ -26,7 +26,7 @@ interface AlbuquerqueWireframeViewProps {
 
 export default function AlbuquerqueWireframeView({ page }: AlbuquerqueWireframeViewProps) {
   return (
-    <div className="w-full bg-white text-slate-900 selection:bg-[#534AB7] selection:text-white">
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       {/* 1. Hero with Bilingual Toggle & Sandia Mountain Hot Air Balloon SVG */}
       <AlbuquerqueHero page={page} />
 

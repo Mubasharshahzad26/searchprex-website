@@ -126,17 +126,17 @@ export default function WoodlandsDiagnosisTool() {
 
   return (
     <section id="diagnosis-tool" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div className="rounded-3xl bg-gradient-to-b from-slate-900 via-[#10194a] to-slate-900 border border-indigo-900/60 p-6 sm:p-10 shadow-2xl text-white relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-b from-slate-900 via-neutral-900 to-slate-900 border border-neutral-900/60 p-6 sm:p-10 shadow-2xl text-white relative overflow-hidden">
         {/* Glow backdrop */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-neutral-700/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-3xl mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 mb-3">
-            <BrainCircuit className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-neutral-700/10 text-slate-300 border border-neutral-700/20 mb-3">
+            <BrainCircuit className="w-3.5 h-3.5 text-slate-400" />
             Live Gemini SEO Diagnostic Engine
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-            Interactive SEO Diagnosis for The Woodlands Law Firms
+            The Woodlands Law Firm SEO Diagnosis
           </h2>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
             Select the issues holding your firm back or enter your firm's current visibility challenge. Our engine evaluates your positioning against Montgomery County courts in Conroe, Harris County Creekside exceptions, and Woodlands village-level search intent.
@@ -159,11 +159,11 @@ export default function WoodlandsDiagnosisTool() {
                     onClick={() => toggleChip(chip)}
                     className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 border ${
                       isSelected
-                        ? 'bg-[#534AB7] text-white border-indigo-400 shadow-md shadow-indigo-900/40'
+                        ? 'bg-neutral-900 text-white border-slate-400 shadow-md shadow-neutral-900/40'
                         : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-800 hover:text-white'
                     }`}
                   >
-                    {isSelected ? '✓ ' : '+ '}
+                    {isSelected ? '• ' : '+ '}
                     {chip}
                   </button>
                 );
@@ -181,12 +181,12 @@ export default function WoodlandsDiagnosisTool() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="e.g. Losing high-net-worth estate planning searches in Alden Bridge to downtown Houston firms..."
-                className="w-full px-4 py-3.5 pr-12 rounded-xl bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#534AB7] focus:border-transparent transition-all"
+                className="w-full px-4 py-3.5 pr-12 rounded-xl bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-[#534AB7] hover:bg-[#3C3489] text-white transition-all disabled:opacity-50"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white transition-all disabled:opacity-50"
               >
                 {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
               </button>
@@ -200,7 +200,7 @@ export default function WoodlandsDiagnosisTool() {
             <button
               type="submit"
               disabled={isLoading || (!query.trim() && selectedChips.length === 0)}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-[#534AB7] hover:bg-[#3C3489] transition-all shadow-lg shadow-indigo-900/40 disabled:opacity-50 disabled:pointer-events-none hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-lg shadow-neutral-900/40 disabled:opacity-50 disabled:pointer-events-none hover:-translate-y-0.5"
             >
               {isLoading ? (
                 <>
@@ -209,7 +209,7 @@ export default function WoodlandsDiagnosisTool() {
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-4 h-4 text-indigo-200" />
+                  <Sparkles className="w-4 h-4 text-slate-200" />
                   Run Instant Woodlands Audit
                 </>
               )}
@@ -219,16 +219,16 @@ export default function WoodlandsDiagnosisTool() {
 
         {/* Diagnosis Results Section */}
         {hasDiagnosed && (
-          <div className="mt-10 pt-8 border-t border-indigo-900/60 space-y-6 animate-fadeIn">
+          <div className="mt-10 pt-8 border-t border-neutral-900/60 space-y-6 animate-fadeIn">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-lg font-bold text-white">The Woodlands Diagnostic Findings</span>
                 {isAiGenerated ? (
-                  <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-neutral-700/20 text-slate-300 border border-neutral-700/30">
                     Live Gemini Output
                   </span>
                 ) : (
-                  <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-neutral-700/20 text-slate-300 border border-neutral-700/30">
                     Verified Benchmark Rules
                   </span>
                 )}
@@ -243,11 +243,11 @@ export default function WoodlandsDiagnosisTool() {
               {diagnostics.map((item, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl bg-slate-800/90 border border-indigo-900/50 p-5 space-y-3 shadow-md hover:border-indigo-600/50 transition-all"
+                  className="rounded-2xl bg-slate-800/90 border border-neutral-900/50 p-5 space-y-3 shadow-md hover:border-neutral-800/50 transition-all"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h4 className="text-base font-bold text-white leading-snug">{item.n}</h4>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-900/80 text-indigo-200 border border-indigo-700/60 whitespace-nowrap">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-neutral-900/80 text-slate-200 border border-neutral-800/60 whitespace-nowrap">
                       {item.tool}
                     </span>
                   </div>
@@ -260,11 +260,11 @@ export default function WoodlandsDiagnosisTool() {
                   </div>
 
                   <div className="pt-2 border-t border-slate-700/70">
-                    <div className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                       SearchPrex Resolution:
                     </div>
-                    <p className="text-xs text-emerald-200/90 leading-relaxed">{item.fix}</p>
+                    <p className="text-xs text-slate-200/90 leading-relaxed">{item.fix}</p>
                   </div>
                 </div>
               ))}
@@ -272,12 +272,12 @@ export default function WoodlandsDiagnosisTool() {
 
             {/* Executive Recommendation from Mubashar Sharif */}
             {recommendation && (
-              <div className="rounded-2xl bg-indigo-950/70 border border-indigo-700/60 p-6 flex flex-col sm:flex-row items-start gap-4">
-                <div className="p-3 rounded-xl bg-[#534AB7] text-white shrink-0">
+              <div className="rounded-2xl bg-neutral-950/70 border border-neutral-800/60 p-6 flex flex-col sm:flex-row items-start gap-4">
+                <div className="p-3 rounded-xl bg-neutral-900 text-white shrink-0">
                   <Scale className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
-                  <div className="text-xs font-semibold text-indigo-300 uppercase tracking-wider">
+                  <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
                     Executive Recommendation from Mubashar Sharif (CEO):
                   </div>
                   <p className="text-sm sm:text-base text-white font-medium leading-relaxed">
@@ -288,7 +288,7 @@ export default function WoodlandsDiagnosisTool() {
             )}
 
             {/* In-Line Lead Capture for Deep Strategy */}
-            <div className="mt-8 rounded-2xl bg-slate-900/90 border border-indigo-800/50 p-6 sm:p-8">
+            <div className="mt-8 rounded-2xl bg-slate-900/90 border border-neutral-900/50 p-6 sm:p-8">
               <div className="max-w-2xl">
                 <h4 className="text-xl font-bold text-white mb-2">
                   Request Your Complimentary Venue & AI Visibility Review
@@ -298,8 +298,8 @@ export default function WoodlandsDiagnosisTool() {
                 </p>
 
                 {leadSubmitted ? (
-                  <div className="p-4 rounded-xl bg-emerald-900/30 border border-emerald-600/50 text-emerald-200 text-sm flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div className="p-4 rounded-xl bg-neutral-900/30 border border-neutral-800/50 text-slate-200 text-sm flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-slate-400 shrink-0" />
                     <span>
                       Thank you. Founder Mubashar Sharif will personally audit your firm and deliver your confidential review within 48 hours.
                     </span>
@@ -316,7 +316,7 @@ export default function WoodlandsDiagnosisTool() {
                         value={leadUrl}
                         onChange={(e) => setLeadUrl(e.target.value)}
                         placeholder="https://yourwoodlandsfirm.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs focus:ring-2 focus:ring-[#534AB7] focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs focus:ring-2 focus:ring-neutral-900 focus:outline-none"
                       />
                     </div>
 
@@ -327,7 +327,7 @@ export default function WoodlandsDiagnosisTool() {
                       <select
                         value={leadPractice}
                         onChange={(e) => setLeadPractice(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs focus:ring-2 focus:ring-[#534AB7] focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs focus:ring-2 focus:ring-neutral-900 focus:outline-none"
                       >
                         <option>Estate Planning & Wealth Preservation</option>
                         <option>High-Asset Divorce & Family Law</option>
@@ -347,7 +347,7 @@ export default function WoodlandsDiagnosisTool() {
                         value={leadEmail}
                         onChange={(e) => setLeadEmail(e.target.value)}
                         placeholder="attorney@yourwoodlandsfirm.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs focus:ring-2 focus:ring-[#534AB7] focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs focus:ring-2 focus:ring-neutral-900 focus:outline-none"
                       />
                     </div>
 
@@ -360,7 +360,7 @@ export default function WoodlandsDiagnosisTool() {
                         value={leadPhone}
                         onChange={(e) => setLeadPhone(e.target.value)}
                         placeholder="(281) 000-0000"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs focus:ring-2 focus:ring-[#534AB7] focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs focus:ring-2 focus:ring-neutral-900 focus:outline-none"
                       />
                     </div>
 
@@ -371,7 +371,7 @@ export default function WoodlandsDiagnosisTool() {
                       <button
                         type="submit"
                         disabled={isSubmittingLead}
-                        className="px-6 py-2.5 rounded-xl text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 transition-all shadow-md flex items-center gap-2"
+                        className="px-6 py-2.5 rounded-xl text-xs font-semibold text-white bg-neutral-800 hover:bg-neutral-900 transition-all shadow-md flex items-center gap-2"
                       >
                         {isSubmittingLead ? (
                           <>

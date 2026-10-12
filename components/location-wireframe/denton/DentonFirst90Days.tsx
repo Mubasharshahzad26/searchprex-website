@@ -47,11 +47,11 @@ export default function DentonFirst90Days() {
     <section className="py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Calendar className="w-3.5 h-3.5" />
             <span>Structured Implementation Roadmap</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Your First 90 Days: You Will Never Wonder What Is Happening
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -63,12 +63,12 @@ export default function DentonFirst90Days() {
         <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200 mb-10">
           <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
             <span>Onboarding &amp; Execution Progress</span>
-            <span className="text-[#534AB7]">{current.day}: {current.name}</span>
+            <span className="text-neutral-900">{current.day}: {current.name}</span>
           </div>
 
           <div className="w-full h-3 bg-slate-200 rounded-full overflow-hidden mb-8">
             <div
-              className="h-full bg-gradient-to-r from-[#534AB7] to-[#1a7d59] transition-all duration-500 rounded-full"
+              className="h-full bg-gradient-to-r from-neutral-800 to-neutral-800 transition-all duration-500 rounded-full"
               style={{ width: current.progress }}
             />
           </div>
@@ -83,12 +83,12 @@ export default function DentonFirst90Days() {
                   onClick={() => setActiveDay(idx)}
                   className={`p-4 rounded-xl text-left border transition-all ${
                     isActive
-                      ? "bg-[#534AB7] text-white border-[#534AB7] shadow-md shadow-[#534AB7]/20"
+                      ? "bg-neutral-900 text-white border-neutral-900 shadow-md shadow-sm"
                       : "bg-white hover:bg-slate-100 text-slate-700 border-slate-200"
                   }`}
                 >
                   <div className="flex items-center gap-1.5 mb-1">
-                    <Clock className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-[#534AB7]"}`} />
+                    <Clock className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-neutral-900"}`} />
                     <span className="text-xs font-bold uppercase tracking-wider opacity-80">
                       {cp.day}
                     </span>
@@ -107,7 +107,7 @@ export default function DentonFirst90Days() {
           {/* Col 1: What I Do */}
           <div className="bg-slate-50 rounded-2xl p-6 sm:p-7 border border-slate-200 flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold text-[#534AB7] uppercase tracking-wider mb-3">
+              <div className="text-xs font-bold text-neutral-900 uppercase tracking-wider mb-3">
                 1. What I Execute
               </div>
               <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-semibold">
@@ -120,32 +120,32 @@ export default function DentonFirst90Days() {
           </div>
 
           {/* Col 2: What You Feel */}
-          <div className="bg-[#EEEDFE]/40 rounded-2xl p-6 sm:p-7 border border-[#534AB7]/30 flex flex-col justify-between">
+          <div className="bg-slate-100 rounded-2xl p-6 sm:p-7 border border-slate-300 flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold text-[#1a7d59] uppercase tracking-wider mb-3">
+              <div className="text-xs font-bold text-neutral-800 uppercase tracking-wider mb-3">
                 2. What You Feel
               </div>
-              <p className="text-base sm:text-lg text-[#0a0f2e] leading-relaxed font-bold italic">
+              <p className="text-base sm:text-lg text-neutral-950 leading-relaxed font-bold italic">
                 &quot;{current.whatYouFeel}&quot;
               </p>
             </div>
-            <div className="pt-4 border-t border-indigo-100 text-xs text-slate-500 mt-6">
+            <div className="pt-4 border-t border-slate-100 text-xs text-slate-500 mt-6">
               Client experience milestone
             </div>
           </div>
 
           {/* Col 3: Guarantee Checkpoint */}
-          <div className="bg-[#0a0f2e] text-white rounded-2xl p-6 sm:p-7 border border-[#3C3489] shadow-sm flex flex-col justify-between">
+          <div className="bg-neutral-900 text-white rounded-2xl p-6 sm:p-7 border border-[#262626] shadow-sm flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-slate-400" />
                 <span>3. Guarantee Checkpoint</span>
               </div>
               <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-semibold">
                 {current.checkpoint}
               </p>
             </div>
-            <div className="pt-4 border-t border-slate-800 text-xs text-emerald-400 font-bold mt-6">
+            <div className="pt-4 border-t border-slate-800 text-xs text-slate-400 font-bold mt-6">
               Protected by written agreement
             </div>
           </div>

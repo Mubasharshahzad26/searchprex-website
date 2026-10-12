@@ -14,7 +14,7 @@ export default function SugarLandClientArchetypes() {
       risk: "Unfair asset division, public exposure of wealth, or losing control of family holdings.",
       trustFactors: "Board certification credentials, absolute privacy discretion, transparent fee structures, and calm judicial authority.",
       practices: "High-Asset Divorce, QDROs, Revocable Living Trusts, Executive Estate Planning",
-      badgeColor: "bg-[#534AB7]/10 text-[#534AB7]",
+      badgeColor: "bg-slate-100 text-neutral-900",
     },
     {
       name: "Time-Poor Professionals",
@@ -23,7 +23,7 @@ export default function SugarLandClientArchetypes() {
       risk: "Protracted litigation dragging out for months, slow attorney communication, and billable hour waste.",
       trustFactors: "Immediate callback protocols, seamless digital intake, online consultation booking, and crisp, direct counsel.",
       practices: "Executive Employment Agreements, Corporate Governance, Fast-Track Uncontested Divorce",
-      badgeColor: "bg-[#1a7d59]/10 text-[#1a7d59]",
+      badgeColor: "bg-slate-100 text-neutral-800",
     },
     {
       name: "Multilingual Families",
@@ -32,7 +32,7 @@ export default function SugarLandClientArchetypes() {
       risk: "Procedural misinterpretation, complex USCIS delays, or unintended probate loss across borders.",
       trustFactors: "Verified bilingual communication (Spanish, Mandarin, Hindi), cultural fluency, and cross-border estate structures.",
       practices: "EB-5 & Investor Immigration, Family Visa Petitions, Transnational Estate Planning",
-      badgeColor: "bg-[#3C3489]/10 text-[#3C3489]",
+      badgeColor: "bg-[#262626]/10 text-neutral-900",
     },
     {
       name: "Commuters in Crisis",
@@ -41,7 +41,7 @@ export default function SugarLandClientArchetypes() {
       risk: "Mounting medical debt, lost executive earnings, and being pressured into premature settlements.",
       trustFactors: "Direct attorney access from day one, plain-English guidance on Texas fault rules, and proven trial results.",
       practices: "Highway 6 Collisions, I-69 / US-59 Commercial Freight Crashes, Catastrophic Injury",
-      badgeColor: "bg-[#1a7d59]/10 text-[#1a7d59]",
+      badgeColor: "bg-slate-100 text-neutral-800",
     },
     {
       name: "Local Business Owners",
@@ -50,7 +50,7 @@ export default function SugarLandClientArchetypes() {
       risk: "Partner deadlock, vendor breach, or employment disputes that threaten business viability.",
       trustFactors: "Commercial acumen, pragmatic dispute resolution, and contractual clarity without legalese.",
       practices: "Commercial Leases, Shareholder Operating Agreements, Partnership Dissolution",
-      badgeColor: "bg-[#534AB7]/10 text-[#534AB7]",
+      badgeColor: "bg-slate-100 text-neutral-900",
     },
   ];
 
@@ -62,11 +62,11 @@ export default function SugarLandClientArchetypes() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a7d59]/10 text-[#1a7d59] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-800 text-xs font-bold uppercase tracking-wider mb-3">
             <HeartHandshake className="w-3.5 h-3.5" />
             <span>Target Searcher Psychology</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Sugar Land Clients Are Not Shopping. They Are Protecting Something.
           </h2>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
@@ -85,7 +85,7 @@ export default function SugarLandClientArchetypes() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-[#0a0f2e] text-white border-[#0a0f2e] shadow-md"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-md"
                     : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -100,14 +100,14 @@ export default function SugarLandClientArchetypes() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-8 space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#534AB7]/10 text-[#534AB7] flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-slate-100 text-neutral-900 flex items-center justify-center">
                   <Icon className="w-6 h-6" />
                 </div>
                 <div>
                   <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${current.badgeColor}`}>
                     Searcher Archetype
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f2e] tracking-tight mt-1">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight mt-1">
                     {current.name}
                   </h3>
                 </div>
@@ -133,8 +133,8 @@ export default function SugarLandClientArchetypes() {
                 </div>
               </div>
 
-              <div className="space-y-2 p-5 rounded-2xl bg-[#EEEDFE]/40 border border-[#534AB7]/30">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#534AB7]">
+              <div className="space-y-2 p-5 rounded-2xl bg-slate-100 border border-slate-300">
+                <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                   What Truly Earns Their Retainer:
                 </div>
                 <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-medium">
@@ -147,7 +147,7 @@ export default function SugarLandClientArchetypes() {
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
                 Relevant Practice Silos:
               </div>
-              <div className="text-sm font-extrabold text-[#0a0f2e] leading-relaxed">
+              <div className="text-sm font-extrabold text-neutral-950 leading-relaxed">
                 {current.practices}
               </div>
               <div className="pt-2 text-xs text-slate-600 leading-relaxed">

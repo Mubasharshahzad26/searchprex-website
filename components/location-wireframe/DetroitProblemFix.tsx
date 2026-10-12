@@ -3,7 +3,7 @@
 // components/location-wireframe/DetroitProblemFix.tsx
 //
 // Matches user request:
-// - Removed tick (✓) and cross (✗) icons from both headers
+// - Removed tick (•) and cross (✗) icons from both headers
 // - Bullet points in plain solid black colour in both boxes
 // - Two clean, modern comparison cards: What's going wrong vs What we build instead
 
@@ -32,7 +32,7 @@ export default function DetroitProblemFix({ page }: { page: CityPage }) {
           <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">
             THE PROBLEM → THE FIX
           </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
             Why Most Detroit Law Firm Websites Don&apos;t Get the Call (and How We Fix It)
           </h2>
         </div>
@@ -64,7 +64,7 @@ export default function DetroitProblemFix({ page }: { page: CityPage }) {
           <div className="rounded-2xl border-2 border-slate-900 bg-white p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
             <div>
               <div className="pb-4 border-b border-slate-200">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#534AB7] block mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-900 block mb-1">
                   SEARCHPREX STANDARDS
                 </span>
                 <h3 className="text-xl font-black text-black">

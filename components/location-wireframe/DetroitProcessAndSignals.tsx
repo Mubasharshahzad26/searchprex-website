@@ -3,7 +3,7 @@
 // components/location-wireframe/DetroitProcessAndSignals.tsx
 //
 // Matches Page 3:
-// 1. "OUR UNIQUE PROCESS: Our 7-Step Law Firm Local SEO and AI Visibility Process" (Interactive step switcher)
+// 1. "OUR UNIQUE PROCESS: Our 7-Step Detroit Legal SEO Process" (Interactive step switcher)
 // 2. "HOW WE RANK YOU: Three signals Google weighs for law firms" (Progress bars for Relevance, Prominence, Proximity & Trust).
 
 import React, { useState } from "react";
@@ -110,8 +110,8 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">
               OUR UNIQUE PROCESS
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0a0f2e]">
-              Our 7-Step Law Firm Local SEO and AI Visibility Process
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-neutral-950">
+              Our 7-Step Detroit Legal SEO Process
             </h2>
           </div>
 
@@ -124,12 +124,12 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
                 onClick={() => setActiveStep(idx)}
                 className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                   activeStep === idx
-                    ? "bg-[#534AB7] text-white shadow-xs"
+                    ? "bg-neutral-900 text-white shadow-xs"
                     : "bg-slate-50 text-slate-600 border border-slate-200 hover:bg-slate-100"
                 }`}
               >
                 <span className={`flex h-5 w-5 items-center justify-center rounded-full text-xs ${
-                  activeStep === idx ? "bg-white text-[#534AB7] font-black" : "bg-slate-200 text-slate-700"
+                  activeStep === idx ? "bg-white text-neutral-900 font-black" : "bg-slate-200 text-slate-700"
                 }`}>
                   {s.num}
                 </span>
@@ -141,10 +141,10 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
           {/* Active Step Showcase */}
           <div className="mt-6 rounded-2xl border border-slate-200 bg-[#f8fafc] p-6 sm:p-8 space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#534AB7] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">
                 {current.stage}
               </span>
-              <h3 className="mt-1 text-xl sm:text-2xl font-black text-[#0a0f2e]">
+              <h3 className="mt-1 text-xl sm:text-2xl font-black text-neutral-950">
                 {current.title}
               </h3>
               <p className="mt-3 text-sm text-slate-700 leading-relaxed max-w-3xl">
@@ -164,9 +164,9 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
             </div>
 
             {/* AI Citation Rate Formula Banner */}
-            <div className="rounded-xl bg-[#0a0f2e] text-white p-5 text-xs sm:text-sm space-y-2 border border-slate-800">
-              <div className="flex items-center gap-2 text-[#a594fd] font-bold">
-                <Sparkles className="h-4 w-4 text-[#3eb489]" />
+            <div className="rounded-xl bg-neutral-900 text-white p-5 text-xs sm:text-sm space-y-2 border border-slate-800">
+              <div className="flex items-center gap-2 text-slate-300 font-bold">
+                <Sparkles className="h-4 w-4 text-slate-300" />
                 <span>AI Citation Rate Formula:</span>
               </div>
               <p className="text-slate-300 font-mono text-xs">
@@ -185,7 +185,7 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">
               HOW WE RANK YOU
             </span>
-            <h3 className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-[#0a0f2e]">
+            <h3 className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-neutral-950">
               Three signals Google weighs for law firms
             </h3>
             <p className="mt-1 text-sm text-slate-600">
@@ -197,12 +197,12 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
             {signals.map((sig, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:border-[#534AB7]/40 transition-colors"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <h4 className="text-lg font-bold text-[#0a0f2e]">{sig.name}</h4>
-                    <span className="text-xs font-bold text-[#534AB7]">{sig.focusShare}</span>
+                    <h4 className="text-lg font-bold text-neutral-950">{sig.name}</h4>
+                    <span className="text-xs font-bold text-neutral-900">{sig.focusShare}</span>
                   </div>
                   <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {sig.detail}
@@ -212,7 +212,7 @@ export default function DetroitProcessAndSignals({ page }: { page: CityPage }) {
                 <div className="mt-6 pt-4 border-t border-slate-100">
                   <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-[#534AB7]"
+                      className="h-full rounded-full bg-neutral-900"
                       style={{ width: `${sig.percentage * 2.5}%` }}
                     />
                   </div>

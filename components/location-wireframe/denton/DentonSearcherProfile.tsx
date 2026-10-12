@@ -55,11 +55,11 @@ export default function DentonSearcherProfile() {
     <section className="py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <Users className="w-3.5 h-3.5" />
             <span>Searcher Psychology &amp; Demographics</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             The Person on the Other Side of the Screen is Scared, Not Shopping
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -77,7 +77,7 @@ export default function DentonSearcherProfile() {
                 onClick={() => setSelectedProfile(idx)}
                 className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all border ${
                   isActive
-                    ? "bg-[#534AB7] text-white border-[#534AB7] shadow-sm"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
                     : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -93,10 +93,10 @@ export default function DentonSearcherProfile() {
           <div className="rounded-2xl p-6 bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-                <Heart className="w-4 h-4 text-[#534AB7]" />
+                <Heart className="w-4 h-4 text-neutral-900" />
                 <span>What They Feel</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0a0f2e] mb-2 leading-snug">
+              <h3 className="text-lg font-bold text-neutral-950 mb-2 leading-snug">
                 {current.feeling}
               </h3>
             </div>
@@ -109,7 +109,7 @@ export default function DentonSearcherProfile() {
           <div className="rounded-2xl p-6 bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-                <Clock className="w-4 h-4 text-[#534AB7]" />
+                <Clock className="w-4 h-4 text-neutral-900" />
                 <span>What They Search</span>
               </div>
               <p className="text-xs sm:text-sm font-semibold text-slate-800 italic bg-white p-3.5 rounded-xl border border-slate-200/60 leading-relaxed">
@@ -125,7 +125,7 @@ export default function DentonSearcherProfile() {
           <div className="rounded-2xl p-6 bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-                <FileText className="w-4 h-4 text-[#1a7d59]" />
+                <FileText className="w-4 h-4 text-neutral-800" />
                 <span>What They Need to Read</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
@@ -138,10 +138,10 @@ export default function DentonSearcherProfile() {
           </div>
 
           {/* Card 4: Our Page Tone */}
-          <div className="rounded-2xl p-6 bg-[#0a0f2e] text-white border border-[#3C3489] shadow-md flex flex-col justify-between">
+          <div className="rounded-2xl p-6 bg-neutral-900 text-white border border-[#262626] shadow-md flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-[#EEEDFE] uppercase tracking-wider mb-3">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">
+                <CheckCircle2 className="w-4 h-4 text-slate-400" />
                 <span>Our Calibrated Tone</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
@@ -150,7 +150,7 @@ export default function DentonSearcherProfile() {
             </div>
             <div className="text-xs text-slate-400 pt-3 border-t border-slate-800 mt-4 flex items-center justify-between">
               <span>Conversion Calibration</span>
-              <span className="text-emerald-400 font-bold">100% Tested</span>
+              <span className="text-slate-400 font-bold">100% Tested</span>
             </div>
           </div>
         </div>

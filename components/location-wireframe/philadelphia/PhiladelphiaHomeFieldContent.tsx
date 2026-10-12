@@ -42,11 +42,11 @@ export default function PhiladelphiaHomeFieldContent() {
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEEDFE] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#534AB7] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
             <Scale className="h-4 w-4" />
             <span>Pennsylvania Statutory Authority</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a0f2e] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
             Pennsylvania Answers a Filing-Address Firm Cannot Write
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -59,14 +59,14 @@ export default function PhiladelphiaHomeFieldContent() {
           {STATUTORY_TOPICS.map((item, idx) => (
             <div
               key={idx}
-              className="group rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:border-[#534AB7]/50 hover:shadow-xl hover:shadow-[#534AB7]/10 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+              className="group rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:border-slate-300 hover:shadow-xl hover:shadow-sm hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#534AB7] bg-[#EEEDFE] px-2.5 py-1 rounded-md inline-block mb-3">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-900 bg-slate-100 px-2.5 py-1 rounded-md inline-block mb-3">
                   {item.statute}
                 </span>
 
-                <h3 className="text-lg sm:text-xl font-extrabold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-2">
+                <h3 className="text-lg sm:text-xl font-extrabold text-neutral-950 group-hover:text-neutral-900 transition-colors mb-2">
                   {item.title}
                 </h3>
 
@@ -78,7 +78,7 @@ export default function PhiladelphiaHomeFieldContent() {
               <div className="mt-6 pt-4 border-t border-slate-100">
                 <Link
                   href={item.link}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#534AB7] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:underline"
                 >
                   <span>{item.linkLabel}</span>
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />

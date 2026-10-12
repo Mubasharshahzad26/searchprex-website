@@ -79,11 +79,11 @@ export default function KatyFaqAndCta() {
       <section id="faq" className="py-20 bg-white border-b border-slate-200 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Jurisdictional Clarity</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
               Law Firm SEO in Katy: Common Questions
             </h2>
             <p className="text-slate-600 text-base sm:text-lg">
@@ -103,12 +103,12 @@ export default function KatyFaqAndCta() {
                     onClick={() => toggleFaq(idx)}
                     className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors cursor-pointer"
                   >
-                    <span className="font-extrabold text-base sm:text-lg text-[#0a0f2e]">
+                    <span className="font-extrabold text-base sm:text-lg text-neutral-950">
                       {faq.q}
                     </span>
                     <ChevronDown
                       className={`w-5 h-5 text-slate-500 transition-transform duration-200 shrink-0 ${
-                        isOpen ? "rotate-180 text-[#534AB7]" : ""
+                        isOpen ? "rotate-180 text-neutral-900" : ""
                       }`}
                     />
                   </button>
@@ -121,7 +121,7 @@ export default function KatyFaqAndCta() {
                       <div>
                         <Link
                           href={faq.href}
-                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#534AB7] hover:underline"
+                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-neutral-900 hover:underline"
                         >
                           <span>{faq.link}</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -145,53 +145,53 @@ export default function KatyFaqAndCta() {
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-sm font-semibold text-slate-700">
             <Link
               href="/locations/texas/sugar-land"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Law Firm SEO Sugar Land
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/locations/texas/the-woodlands"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Law Firm SEO The Woodlands
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/locations/texas/denton"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Law Firm SEO Denton
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/locations/texas/plano"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Law Firm SEO Plano
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/locations/texas"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               All Texas Cities
             </Link>
             <span className="text-slate-300">·</span>
             <Link
               href="/locations"
-              className="text-[#534AB7] hover:text-[#3C3489] hover:underline"
+              className="text-neutral-900 hover:text-neutral-950 hover:underline"
             >
               Every State &amp; City We Cover
             </Link>
           </div>
           <p className="mt-4 text-xs text-slate-500 max-w-xl mx-auto">
             Stay ahead of Google algorithm updates with our dated{" "}
-            <Link href="/resources/news/local-seo-updates" className="text-[#534AB7] underline font-semibold">
+            <Link href="/resources/news/local-seo-updates" className="text-neutral-900 underline font-semibold">
               local SEO news
             </Link>{" "}
             and audit your practice with our free{" "}
-            <Link href="/resources/law-firm-seo-audit-checklist" className="text-[#534AB7] underline font-semibold">
+            <Link href="/resources/law-firm-seo-audit-checklist" className="text-neutral-900 underline font-semibold">
               law firm SEO checklist
             </Link>
             .
@@ -200,10 +200,10 @@ export default function KatyFaqAndCta() {
       </section>
 
       {/* Closing CTA Banner */}
-      <section className="py-20 bg-gradient-to-br from-[#534AB7] via-[#3C3489] to-[#0a0f2e] text-white">
+      <section className="py-20 bg-gradient-to-br from-neutral-800 via-neutral-800 to-neutral-900 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#EEEDFE] text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-slate-200 text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
+            <ShieldCheck className="w-4 h-4 text-slate-400" />
             <span>Exclusivity Guaranteed · One Law Firm Per Practice Area</span>
           </span>
 
@@ -218,15 +218,15 @@ export default function KatyFaqAndCta() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
               href="#tear-down-form"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-[#0a0f2e] font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
             >
               <span>Get My Free Katy Tear-Down</span>
-              <ArrowRight className="w-4 h-4 text-[#534AB7]" />
+              <ArrowRight className="w-4 h-4 text-neutral-900" />
             </a>
 
             <a
               href="#diagnosis-tool"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-indigo-900/40 hover:bg-indigo-900/60 text-white font-bold text-base border border-white/20 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-neutral-900/40 hover:bg-neutral-900/60 text-white font-bold text-base border border-white/20 transition-all"
             >
               <span>Diagnose Issues with Gemini</span>
             </a>
@@ -234,15 +234,15 @@ export default function KatyFaqAndCta() {
 
           <div className="flex items-center justify-center gap-6 text-xs text-slate-300 font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               Month-to-Month Terms
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               Direct Founder Access
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-slate-400" />
               90-Day Money-Back Guarantee
             </span>
           </div>

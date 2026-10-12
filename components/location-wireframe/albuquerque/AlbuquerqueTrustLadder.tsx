@@ -60,11 +60,11 @@ export default function AlbuquerqueTrustLadder() {
     <section className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#534AB7]/10 text-[#534AB7] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-neutral-900 text-xs font-bold uppercase tracking-wider mb-3">
             <TrendingUp className="w-3.5 h-3.5" />
             <span>The Trust Ladder Methodology</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a0f2e] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             In a Community Market, Trust is Earned One Rung at a Time
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -76,12 +76,12 @@ export default function AlbuquerqueTrustLadder() {
         <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm mb-10">
           <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
             <span>Client Conversion Journey</span>
-            <span className="text-[#534AB7]">Stage {current.step} of 5 ({current.progress} Trust Built)</span>
+            <span className="text-neutral-900">Stage {current.step} of 5 ({current.progress} Trust Built)</span>
           </div>
 
           <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden mb-8 border border-slate-200/60">
             <div
-              className="h-full bg-gradient-to-r from-[#534AB7] to-[#1a7d59] transition-all duration-500 rounded-full"
+              className="h-full bg-gradient-to-r from-neutral-800 to-neutral-800 transition-all duration-500 rounded-full"
               style={{ width: current.progress }}
             />
           </div>
@@ -97,12 +97,12 @@ export default function AlbuquerqueTrustLadder() {
                   onClick={() => setSelectedRung(idx)}
                   className={`p-3.5 rounded-xl text-left border transition-all ${
                     isActive
-                      ? "bg-[#534AB7] text-white border-[#534AB7] shadow-md shadow-[#534AB7]/20"
+                      ? "bg-neutral-900 text-white border-neutral-900 shadow-md shadow-sm"
                       : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1.5">
-                    <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-[#534AB7]"}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-neutral-900"}`} />
                     <span className="text-[11px] font-bold uppercase tracking-wider opacity-80">
                       Step {item.step}
                     </span>
@@ -124,7 +124,7 @@ export default function AlbuquerqueTrustLadder() {
               <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
                 1. The Client Thinks
               </div>
-              <p className="text-base sm:text-lg font-bold text-[#0a0f2e] italic leading-relaxed">
+              <p className="text-base sm:text-lg font-bold text-neutral-950 italic leading-relaxed">
                 {current.clientThinks}
               </p>
             </div>
@@ -136,7 +136,7 @@ export default function AlbuquerqueTrustLadder() {
           {/* Col 2: What Builds Trust */}
           <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold text-[#1a7d59] uppercase tracking-wider mb-3">
+              <div className="text-xs font-bold text-neutral-800 uppercase tracking-wider mb-3">
                 2. What Builds Trust
               </div>
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
@@ -149,17 +149,17 @@ export default function AlbuquerqueTrustLadder() {
           </div>
 
           {/* Col 3: What SearchPrex Does */}
-          <div className="bg-white rounded-2xl p-6 sm:p-7 border-2 border-[#534AB7] shadow-sm flex flex-col justify-between">
+          <div className="bg-white rounded-2xl p-6 sm:p-7 border-2 border-neutral-900 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="text-xs font-bold text-[#534AB7] uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#534AB7]" />
+              <div className="text-xs font-bold text-neutral-900 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-neutral-900" />
                 <span>3. What SearchPrex Executes</span>
               </div>
               <p className="text-sm sm:text-base text-slate-900 leading-relaxed font-semibold">
                 {current.whatSearchPrexDoes}
               </p>
             </div>
-            <div className="pt-4 border-t border-indigo-100 text-xs text-[#534AB7] font-bold mt-6">
+            <div className="pt-4 border-t border-slate-100 text-xs text-neutral-900 font-bold mt-6">
               Included in our monthly retainer
             </div>
           </div>
