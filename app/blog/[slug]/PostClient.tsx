@@ -17,6 +17,7 @@ import { getRelated } from "./posts";
 import { renderArticle, extractArticleToc } from "@/lib/render-article";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ArticleExitOffer from "@/components/ArticleExitOffer";
+import NewsDiscussionSection from "@/components/news/NewsDiscussionSection";
 
 /**
  * Which section of the site the post belongs to. This component is shared by
@@ -423,6 +424,13 @@ export default function PostClient({
                 {copied ? "Copied!" : "Copy link"}
               </button>
             </div>
+
+            {/* Community Reactions & Discussion */}
+            <NewsDiscussionSection
+              slug={post.slug}
+              title={post.title}
+              category={post.category}
+            />
           </article>
  
           {/* Sidebar */}

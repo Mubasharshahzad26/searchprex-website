@@ -760,11 +760,13 @@ function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stat
         ? [
             { "@type": "City", name: "Grand Rapids", containedInPlace: { "@type": "State", name: "Michigan" } },
             { "@type": "AdministrativeArea", name: "Kent County" },
-            { "@type": "City", name: "East Grand Rapids" },
             { "@type": "City", name: "Wyoming" },
             { "@type": "City", name: "Kentwood" },
             { "@type": "City", name: "Walker" },
             { "@type": "City", name: "Grandville" },
+            { "@type": "City", name: "East Grand Rapids" },
+            { "@type": "City", name: "Holland" },
+            { "@type": "City", name: "Muskegon" },
           ]
         : page.citySlug === "cleveland"
         ? [
@@ -772,10 +774,91 @@ function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stat
             { "@type": "AdministrativeArea", name: "Cuyahoga County" },
             { "@type": "City", name: "Lakewood" },
             { "@type": "City", name: "Parma" },
+            { "@type": "City", name: "Euclid" },
             { "@type": "City", name: "Beachwood" },
             { "@type": "City", name: "Shaker Heights" },
             { "@type": "City", name: "Westlake" },
             { "@type": "City", name: "Akron" },
+          ]
+        : page.citySlug === "philadelphia"
+        ? [
+            { "@type": "City", name: "Philadelphia", containedInPlace: { "@type": "State", name: "Pennsylvania" } },
+            { "@type": "AdministrativeArea", name: "Philadelphia County" },
+            { "@type": "City", name: "Upper Darby" },
+            { "@type": "City", name: "King of Prussia" },
+            { "@type": "City", name: "Bensalem" },
+            { "@type": "City", name: "Conshohocken" },
+            { "@type": "City", name: "Chester" },
+          ]
+        : page.citySlug === "albuquerque"
+        ? [
+            { "@type": "City", name: "Albuquerque", containedInPlace: { "@type": "State", name: "New Mexico" } },
+            { "@type": "AdministrativeArea", name: "Bernalillo County" },
+            { "@type": "City", name: "Rio Rancho" },
+            { "@type": "City", name: "Santa Fe" },
+            { "@type": "City", name: "Los Lunas" },
+            { "@type": "City", name: "Corrales" },
+            { "@type": "City", name: "Belen" },
+            { "@type": "City", name: "Las Cruces" },
+          ]
+        : page.citySlug === "sugar-land"
+        ? [
+            { "@type": "City", name: "Sugar Land", containedInPlace: { "@type": "State", name: "Texas" } },
+            { "@type": "AdministrativeArea", name: "Fort Bend County" },
+            { "@type": "City", name: "Missouri City" },
+            { "@type": "City", name: "Stafford" },
+            { "@type": "City", name: "Richmond" },
+            { "@type": "City", name: "Rosenberg" },
+            { "@type": "City", name: "Fulshear" },
+            { "@type": "City", name: "Pearland" },
+          ]
+        : page.citySlug === "denton"
+        ? [
+            { "@type": "City", name: "Denton", containedInPlace: { "@type": "State", name: "Texas" } },
+            { "@type": "AdministrativeArea", name: "Denton County" },
+            { "@type": "City", name: "Lewisville" },
+            { "@type": "City", name: "Flower Mound" },
+            { "@type": "City", name: "Little Elm" },
+            { "@type": "City", name: "Corinth" },
+            { "@type": "City", name: "Frisco" },
+            { "@type": "City", name: "The Colony" },
+          ]
+        : page.citySlug === "katy"
+        ? [
+            { "@type": "City", name: "Katy", containedInPlace: { "@type": "State", name: "Texas" } },
+            { "@type": "AdministrativeArea", name: "Harris County" },
+            { "@type": "AdministrativeArea", name: "Fort Bend County" },
+            { "@type": "AdministrativeArea", name: "Waller County" },
+            { "@type": "City", name: "Fulshear" },
+            { "@type": "City", name: "Brookshire" },
+            { "@type": "City", name: "Richmond" },
+            { "@type": "City", name: "Cypress" },
+            { "@type": "City", name: "Hempstead" },
+            { "@type": "City", name: "Sugar Land" },
+          ]
+        : page.citySlug === "the-woodlands"
+        ? [
+            { "@type": "City", name: "The Woodlands", containedInPlace: { "@type": "State", name: "Texas" } },
+            { "@type": "AdministrativeArea", name: "Montgomery County" },
+            { "@type": "AdministrativeArea", name: "Harris County" },
+            { "@type": "City", name: "Conroe" },
+            { "@type": "City", name: "Spring" },
+            { "@type": "City", name: "Shenandoah" },
+            { "@type": "City", name: "Oak Ridge North" },
+            { "@type": "City", name: "Tomball" },
+            { "@type": "City", name: "Magnolia" },
+            { "@type": "City", name: "Kingwood" },
+          ]
+        : page.citySlug === "plano"
+        ? [
+            { "@type": "City", name: "Plano", containedInPlace: { "@type": "State", name: "Texas" } },
+            { "@type": "AdministrativeArea", name: "Collin County" },
+            { "@type": "City", name: "Frisco" },
+            { "@type": "City", name: "Allen" },
+            { "@type": "City", name: "McKinney" },
+            { "@type": "City", name: "Richardson" },
+            { "@type": "City", name: "Murphy" },
+            { "@type": "City", name: "Prosper" },
           ]
         : [
             { "@type": "City", name: page.city, containedInPlace: { "@type": "State", name: page.state } },
