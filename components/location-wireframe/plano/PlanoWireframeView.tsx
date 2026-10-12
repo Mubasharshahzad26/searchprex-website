@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import type { CityPage } from '@/lib/city-pages';
+import type { CityPage } from "@/lib/city-pages";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 import TaglinePainBand from '../TaglinePainBand';
 import PlanoHero from './PlanoHero';
 import PlanoPainBanner from './PlanoPainBanner';
@@ -67,6 +69,8 @@ export default function PlanoWireframeView({ page }: PlanoWireframeViewProps) {
       <PlanoPainBanner id="painband-bottom" variant="bottom" />
 
       {/* 14. Attorney FAQs & Closing Conversion Banner */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <PlanoFaqAndCta />
 
       {/* Tagline band above footer */}

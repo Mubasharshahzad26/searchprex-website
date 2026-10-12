@@ -19,6 +19,8 @@ import AlbuquerqueNearbySubmarkets from "./AlbuquerqueNearbySubmarkets";
 import AlbuquerqueKeywordCluster from "./AlbuquerqueKeywordCluster";
 import AlbuquerqueFaqAndCta from "./AlbuquerqueFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface AlbuquerqueWireframeViewProps {
   page: CityPage;
@@ -76,6 +78,8 @@ export default function AlbuquerqueWireframeView({ page }: AlbuquerqueWireframeV
       <AlbuquerqueKeywordCluster />
 
       {/* 16. FAQs, High-Converting Final CTA, and Bottom Pain Band */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <AlbuquerqueFaqAndCta />
 
       {/* Tagline band above footer */}

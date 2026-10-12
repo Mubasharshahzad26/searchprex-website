@@ -16,6 +16,7 @@ import { notFound } from "next/navigation";
 import { MapPin, Scale } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import { AuthorCard, FaqList } from "@/components/layout";
 import {
   Band,
@@ -344,6 +345,9 @@ export default async function IndustryPage({
       </Band>
 
       {/* FAQ — the FAQPage schema above is built from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="law-firm" />
+
       <FaqBand title={`${page.name} SEO questions, answered`}>
         <FaqList faqs={[...page.capsules, ...page.faqs]} name={`law-firm-seo-${page.slug}-faq`} />
       </FaqBand>

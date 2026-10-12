@@ -19,6 +19,7 @@ import Link from "next/link";
 import { ArrowRight, ShoppingCart } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
@@ -312,6 +313,9 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
       </Band>
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="ecommerce" />
+
       <FaqBand title={`${industry.name} SEO questions, answered`}>
         <FaqList faqs={[...industry.capsules, ...industry.faqs]} name={`ecommerce-seo-${industry.slug}-faq`} />
       </FaqBand>

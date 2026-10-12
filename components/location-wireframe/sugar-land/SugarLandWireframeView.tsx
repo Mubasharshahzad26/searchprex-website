@@ -16,6 +16,8 @@ import SugarLandNearbySubmarkets from "./SugarLandNearbySubmarkets";
 import SugarLandKeywords from "./SugarLandKeywords";
 import SugarLandFaqAndCta from "./SugarLandFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface SugarLandWireframeViewProps {
   page: CityPage;
@@ -64,6 +66,8 @@ export default function SugarLandWireframeView({ page }: SugarLandWireframeViewP
       <SugarLandKeywords />
 
       {/* 13. Attorney FAQs, Regional Texas Directories & Closing Conversion CTA */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <SugarLandFaqAndCta />
 
       {/* Tagline band above footer */}

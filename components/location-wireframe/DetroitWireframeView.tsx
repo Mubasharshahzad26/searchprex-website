@@ -56,6 +56,7 @@ import DetroitPromiseAndComparison from "./DetroitPromiseAndComparison";
 import DetroitOtherAreasServed from "./DetroitOtherAreasServed";
 import DetroitTechnologySlider from "./DetroitTechnologySlider";
 import DetroitBlogSection from "./DetroitBlogSection";
+import LocationLocalCaseStudies from "./LocationLocalCaseStudies";
 import DetroitOfficeAndFaq from "./DetroitOfficeAndFaq";
 import TaglinePainBand from "./TaglinePainBand";
 
@@ -106,6 +107,8 @@ export default function DetroitWireframeView({ page }: DetroitWireframeViewProps
       <DetroitTechnologySlider page={page} />
 
       {/* 12. BLOG SECTION (Dynamic Detroit & Law Firm SEO Published Articles) */}
+      <LocationLocalCaseStudies page={page} />
+
       <DetroitBlogSection page={page} />
 
       {/* 13. FAQS & PRACTICE COVERAGE */}

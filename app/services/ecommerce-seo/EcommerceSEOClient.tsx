@@ -28,6 +28,7 @@ import { ArrowRight, X, ShieldCheck, BarChart3, AlertTriangle, GitBranch, FileCo
 
 import { caseStudies } from "@/app/case-studies/data";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
@@ -103,7 +104,7 @@ const RELATED = [
   { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages." },
   { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks in the order the case-study work was done. Free, no email." },
   { href: "/services/technical-seo", title: "Technical SEO services", body: "Crawling, indexing and Core Web Vitals fixed at the template." },
-  { href: "/blog/crawl-budget-optimization-guide", title: "Crawl budget guide", body: "Why Google skips pages on big sites, and how to stop it." },
+  { href: "/blog/shopify-woocommerce-indexing-blueprint", title: "Shopify & WooCommerce indexing blueprint", body: "8 platform-specific fixes for Liquid canonicals, sitemaps and catalog scale." },
   { href: "/blog/ecommerce-product-page-seo", title: "Product page SEO at scale", body: "Product pages for 10,000+ SKUs without thin or duplicate copy." },
 ];
 
@@ -416,6 +417,9 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
           ))}
         </RuleGrid>
       </Band>
+
+      {/* ECOMMERCE BLOG TEASER */}
+      <ServiceBlogTeaser topic="ecommerce" />
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
       <FaqBand title="Ecommerce SEO questions, answered">

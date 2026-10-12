@@ -13,6 +13,7 @@ import Link from "next/link";
 import { Scale } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import TrustStrap from "@/components/TrustStrap";
@@ -322,6 +323,9 @@ export default function LawGbpClient() {
       </Band>
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="law-firm" />
+
       <FaqBand title="Law firm Google Business Profile questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="law-firm-gbp-faq" />
       </FaqBand>

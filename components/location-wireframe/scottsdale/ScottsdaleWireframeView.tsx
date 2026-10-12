@@ -3,6 +3,8 @@
 import React from "react";
 import type { CityPage } from "@/lib/city-pages";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 import ScottsdaleHero from "./ScottsdaleHero";
 import ScottsdaleQuickAnswer from "./ScottsdaleQuickAnswer";
 import ScottsdaleWealthAndDivorceSilo from "./ScottsdaleWealthAndDivorceSilo";
@@ -40,6 +42,8 @@ export default function ScottsdaleWireframeView({ page }: ScottsdaleWireframeVie
       <ScottsdaleDiagnosisTool />
       <ScottsdaleDemographyMap />
       <ScottsdaleFounderBio />
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <ScottsdaleFaqAndCta faqs={page.faqs} />
       <TaglinePainBand />
     </div>

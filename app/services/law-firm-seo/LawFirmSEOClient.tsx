@@ -22,6 +22,7 @@ import Link from "next/link";
 import { Scale } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import ProofImage from "@/components/ProofImage";
 import LawFirmStack from "@/components/LawFirmStack";
@@ -394,6 +395,9 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         title="Law firm SEO in the cities I already cover"
         lead="Each city page covers that market’s legal searches and competition. Not on the list? The tear-down works for any US city."
       />
+
+      {/* LAW FIRM BLOG TEASER */}
+      <ServiceBlogTeaser topic="law-firm" />
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
       <FaqBand title="Law firm SEO questions, answered">

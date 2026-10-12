@@ -16,6 +16,8 @@ import KatyFounderBio from "./KatyFounderBio";
 import KatyDemographyMap from "./KatyDemographyMap";
 import KatyFaqAndCta from "./KatyFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface KatyWireframeViewProps {
   page: CityPage;
@@ -64,6 +66,8 @@ export default function KatyWireframeView({ page }: KatyWireframeViewProps) {
       <KatyDemographyMap />
 
       {/* 13. Attorney FAQs, Regional Texas Directories & Closing Conversion CTA */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <KatyFaqAndCta />
 
       {/* Tagline band above footer */}

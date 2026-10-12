@@ -3,6 +3,8 @@
 import React from "react";
 import type { CityPage } from "@/lib/city-pages";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 import BatonRougeHero from "./BatonRougeHero";
 import BatonRougeCivilCodeAdvantage from "./BatonRougeCivilCodeAdvantage";
 import BatonRougeCountyCourts from "./BatonRougeCountyCourts";
@@ -39,6 +41,8 @@ export default function BatonRougeWireframeView({ page }: BatonRougeWireframeVie
       <BatonRougeReliefQuote />
       <BatonRougeDemographyMap />
       <BatonRougeFounderBio />
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <BatonRougeFaqAndCta faqs={page.faqs} />
     </div>
   );

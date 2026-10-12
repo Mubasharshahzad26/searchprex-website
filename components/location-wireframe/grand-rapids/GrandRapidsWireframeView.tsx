@@ -46,6 +46,8 @@ import GrandRapidsComparisonMatrix from "./GrandRapidsComparisonMatrix";
 import GrandRapidsRiskReversal from "./GrandRapidsRiskReversal";
 import GrandRapidsFaqAndCta from "./GrandRapidsFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface GrandRapidsWireframeViewProps {
   page: CityPage;
@@ -91,6 +93,8 @@ export default function GrandRapidsWireframeView({ page }: GrandRapidsWireframeV
       <GrandRapidsRiskReversal />
 
       {/* 12. Local FAQs & Final Action Banner */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <GrandRapidsFaqAndCta />
 
       {/* Tagline band above footer */}

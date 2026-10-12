@@ -23,6 +23,8 @@ import ClevelandEmotionalIntent from "./ClevelandEmotionalIntent";
 import ClevelandKeywordCluster from "./ClevelandKeywordCluster";
 import ClevelandFaqAndCta from "./ClevelandFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface ClevelandWireframeViewProps {
   page: CityPage;
@@ -92,6 +94,8 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
       <ClevelandKeywordCluster />
 
       {/* 20. FAQ Accordion + Closing High-Contrast CTA Banner + Bottom Pain Band */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <ClevelandFaqAndCta />
 
       {/* Tagline band above footer */}

@@ -12,6 +12,7 @@ import { getKansasSeoCity } from "@/lib/kansas-seo-cities";
 import { organizationRef } from "@/lib/site-schema";
 import { isLocationIndexable } from "@/lib/location-indexing";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import GuideMagnet from "@/components/GuideMagnet";
 import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
  
@@ -443,6 +444,12 @@ export default async function KansasCityPage({ params }: { params: Promise<{ cit
         </div>
       </section>
  
+      {/* ── RELATED LEGAL & LOCAL SEO GUIDES ── */}
+      <ServiceBlogTeaser
+        topic="law-firm"
+        title={`${city.name}, KS Law Firm SEO & Map Pack Guides`}
+      />
+
       {/* ── CLOSING FORM — replaces a Calendly-only strip. ── */}
       <ArticleLeadMagnet
         variant="bottom"

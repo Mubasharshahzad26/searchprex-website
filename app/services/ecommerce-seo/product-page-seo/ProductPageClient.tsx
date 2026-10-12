@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import TrustStrap from "@/components/TrustStrap";
@@ -316,6 +317,9 @@ export default function ProductPageClient() {
       </Band>
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="ecommerce" />
+
       <FaqBand title="Product page SEO questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="product-page-seo-faq" />
       </FaqBand>

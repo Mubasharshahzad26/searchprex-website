@@ -14,6 +14,7 @@
 import { Search } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import TrustStrap from "@/components/TrustStrap";
@@ -309,6 +310,9 @@ export default function AuditClient() {
       </Band>
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="technical" />
+
       <FaqBand title="Technical SEO audit questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="technical-seo-audit-faq" />
       </FaqBand>

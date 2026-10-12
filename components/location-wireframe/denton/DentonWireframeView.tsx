@@ -18,6 +18,8 @@ import DentonNearbySubmarkets from "./DentonNearbySubmarkets";
 import DentonKeywordCluster from "./DentonKeywordCluster";
 import DentonFaqAndCta from "./DentonFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface DentonWireframeViewProps {
   page: CityPage;
@@ -72,6 +74,8 @@ export default function DentonWireframeView({ page }: DentonWireframeViewProps) 
       <DentonKeywordCluster />
 
       {/* 15. Direct 24-Hour Review Intake Form, Denton Attorney FAQs, Contextual Links & CTA */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <DentonFaqAndCta />
 
       {/* Tagline band above footer */}

@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import type { CityPage } from '@/lib/city-pages';
+import type { CityPage } from "@/lib/city-pages";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 import WoodlandsHero from './WoodlandsHero';
 import WoodlandsPainBanner from './WoodlandsPainBanner';
 import WoodlandsQuickAnswer from './WoodlandsQuickAnswer';
@@ -75,6 +77,8 @@ export default function WoodlandsWireframeView({ page }: WoodlandsWireframeViewP
       <WoodlandsPainBanner variant="burnt" />
 
       {/* 16. FAQs, Texas Legal Practice Network Directory & Closing CTA Banner */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <WoodlandsFaqAndCta />
 
       {/* Tagline band above footer */}

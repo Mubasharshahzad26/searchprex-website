@@ -21,6 +21,8 @@ import PhiladelphiaEmotionalIntent from "./PhiladelphiaEmotionalIntent";
 import PhiladelphiaKeywordCluster from "./PhiladelphiaKeywordCluster";
 import PhiladelphiaFaqAndCta from "./PhiladelphiaFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 
 interface PhiladelphiaWireframeViewProps {
   page: CityPage;
@@ -84,6 +86,8 @@ export default function PhiladelphiaWireframeView({ page }: PhiladelphiaWirefram
       <PhiladelphiaKeywordCluster />
 
       {/* 18. Attorney FAQ Accordion + Closing High-Contrast CTA Banner + Bottom Pain Band */}
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <PhiladelphiaFaqAndCta />
 
       {/* Tagline band above footer */}

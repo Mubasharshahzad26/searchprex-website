@@ -17,6 +17,7 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import TrustStrap from "@/components/TrustStrap";
@@ -352,6 +353,9 @@ export default function GbpClient() {
       </Band>
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="local" />
+
       <FaqBand title="Google Business Profile questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="gbp-optimization-faq" />
       </FaqBand>

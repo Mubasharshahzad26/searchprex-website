@@ -3,6 +3,8 @@
 import React from "react";
 import type { CityPage } from "@/lib/city-pages";
 import TaglinePainBand from "../TaglinePainBand";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 import TempeHero from "./TempeHero";
 import TempeQuickAnswer from "./TempeQuickAnswer";
 import TempeAsuAndCorridorMatrix from "./TempeAsuAndCorridorMatrix";
@@ -39,6 +41,8 @@ export default function TempeWireframeView({ page }: TempeWireframeViewProps) {
       <TempePricingAndGuarantee />
       <TempeDemographyMap />
       <TempeFounderBio />
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <TempeFaqAndCta faqs={page.faqs} />
     </div>
   );

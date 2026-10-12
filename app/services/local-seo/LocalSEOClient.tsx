@@ -20,6 +20,7 @@ import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import type { Guide } from "@/lib/guides";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
@@ -388,6 +389,9 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
           />
         </div>
       </Band>
+
+      {/* LOCAL SEO BLOG TEASER */}
+      <ServiceBlogTeaser topic="local" />
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
       <FaqBand title="Local SEO questions, answered">

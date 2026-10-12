@@ -2,6 +2,8 @@
 
 import React from "react";
 import type { CityPage } from "@/lib/city-pages";
+import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
+import LocationBlogTeaser from "../LocationBlogTeaser";
 import ShreveportHero from "./ShreveportHero";
 import ShreveportQuickAnswer from "./ShreveportQuickAnswer";
 import ShreveportArkLaTexCorridorMap from "./ShreveportArkLaTexCorridorMap";
@@ -37,6 +39,8 @@ export default function ShreveportWireframeView({ page }: ShreveportWireframeVie
       <ShreveportDemographyMap />
       <ShreveportPricingAndGuarantee />
       <ShreveportFounderBio />
+      <LocationLocalCaseStudies page={page} />
+      <LocationBlogTeaser page={page} />
       <ShreveportFaqAndCta faqs={page.faqs} />
     </div>
   );

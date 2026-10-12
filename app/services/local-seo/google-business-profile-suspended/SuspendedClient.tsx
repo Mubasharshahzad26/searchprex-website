@@ -13,6 +13,7 @@
 import { AlertTriangle } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import TrustStrap from "@/components/TrustStrap";
 import { AuthorCard, FaqList } from "@/components/layout";
 import {
@@ -260,6 +261,9 @@ export default function SuspendedClient() {
       </Band>
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
+      {/* TOPIC BLOG TEASER */}
+      <ServiceBlogTeaser topic="local" />
+
       <FaqBand title="Suspended profile questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="gbp-suspended-faq" />
       </FaqBand>

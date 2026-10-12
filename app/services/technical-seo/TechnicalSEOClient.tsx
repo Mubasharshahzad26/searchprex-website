@@ -24,6 +24,7 @@ import Link from "next/link";
 import { Search } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ProofImage from "@/components/ProofImage";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
 import { AuthorCard, FaqList, VideoGallery, type GalleryVideo } from "@/components/layout";
@@ -353,6 +354,9 @@ export default function TechnicalSEOClient() {
           ))}
         </RuleGrid>
       </Band>
+
+      {/* TECHNICAL SEO BLOG TEASER */}
+      <ServiceBlogTeaser topic="technical" />
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
       <FaqBand title="Technical SEO questions, answered">
