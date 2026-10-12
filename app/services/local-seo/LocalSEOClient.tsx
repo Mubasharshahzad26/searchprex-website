@@ -330,7 +330,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
                 href={`/services/local-seo/${i.slug}`}
                 className="group rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
               >
-                <p className="text-lg font-black group-hover:text-[#534AB7]" style={{ color: INK }}>
+                <p className="text-lg font-black group-hover:text-[#171717]" style={{ color: INK }}>
                   {i.name} SEO
                 </p>
                 {cs && metric ? (

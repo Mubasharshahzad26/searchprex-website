@@ -30,11 +30,11 @@ export default function BlogTeaser() {
   const compact = posts.filter((p) => p.slug !== featured.slug).slice(0, 4);
  
   return (
-    <section className="bg-[#f8f9fc] py-20" id="from-the-blog">
+    <section className="bg-[#f8fafc] py-20" id="from-the-blog">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
  
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
+          <h2 className="text-3xl font-black tracking-tight text-[#0a0a0a] sm:text-4xl">
             Explore Trending SEO Guides
           </h2>
         </div>
@@ -54,7 +54,7 @@ export default function BlogTeaser() {
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 300px"
               />
-              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#534AB7]">
+              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#171717]">
                 {featured.category}
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function BlogTeaser() {
               <p className="mb-3 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#6b7280]">
                 {featured.subcategory} <ChevronRight className="h-3 w-3" />
               </p>
-              <h3 className="mb-4 text-xl font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
+              <h3 className="mb-4 text-xl font-black leading-snug text-[#0a0a0a] group-hover:text-[#171717] transition-colors">
                 {featured.title}
               </h3>
               <p className="mb-6 text-sm leading-relaxed text-[#566070]">
@@ -80,7 +80,7 @@ export default function BlogTeaser() {
                       className="h-7 w-7 object-cover object-top scale-125 translate-y-0.5"
                     />
                   </span>
-                  <span className="text-xs font-semibold text-[#0a0f2e]">
+                  <span className="text-xs font-semibold text-[#0a0a0a]">
                     {featured.author.name}
                   </span>
                 </div>
@@ -107,7 +107,7 @@ export default function BlogTeaser() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 250px"
                   />
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#534AB7]">
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#171717]">
                     {p.category}
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function BlogTeaser() {
                   <p className="mb-2 flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#6b7280]">
                     {p.subcategory} <ChevronRight className="h-2.5 w-2.5" />
                   </p>
-                  <h3 className="mb-4 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors">
+                  <h3 className="mb-4 text-sm font-black leading-snug text-[#0a0a0a] group-hover:text-[#171717] transition-colors">
                     {p.title}
                   </h3>
                   <div className="mt-auto flex items-center gap-2 border-t border-[#e5e7eb] pt-4">
@@ -129,7 +129,7 @@ export default function BlogTeaser() {
                         className="h-6 w-6 object-cover object-top scale-125 translate-y-0.5"
                       />
                     </span>
-                    <span className="text-xs font-semibold text-[#0a0f2e]">
+                    <span className="text-xs font-semibold text-[#0a0a0a]">
                       {p.author.name}
                     </span>
                   </div>
@@ -143,7 +143,7 @@ export default function BlogTeaser() {
         <div className="mt-12 text-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#d4d8e3] bg-white px-6 py-3 text-sm font-bold text-[#0a0f2e] transition-all hover:border-[#534AB7] hover:text-[#534AB7]"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#d4d8e3] bg-white px-6 py-3 text-sm font-bold text-[#0a0a0a] transition-all hover:border-[#171717] hover:text-[#171717]"
           >
             Read More SEO Guides
             <ChevronRight className="h-4 w-4" />

@@ -312,7 +312,7 @@ export default function TechnicalSEOClient() {
             <p className="mt-3 text-sm leading-relaxed text-[#374151]">
               Ongoing monitoring after the fixes is optional and month to month.
             </p>
-            <Link href="/pricing" className="mt-4 inline-flex text-sm font-bold hover:underline" style={{ color: "#534AB7" }}>
+            <Link href="/pricing" className="mt-4 inline-flex text-sm font-bold hover:underline" style={{ color: "#171717" }}>
               See all pricing →
             </Link>
           </div>

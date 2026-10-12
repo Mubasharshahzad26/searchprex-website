@@ -193,9 +193,9 @@ export default function ProductPageClient() {
               href={`/services/ecommerce-seo/${i.slug}`}
               className="group rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
             >
-              <p className="text-lg font-black text-[#0a0f2e] group-hover:text-[#534AB7]">{i.h1}</p>
+              <p className="text-lg font-black text-[#0a0a0a] group-hover:text-[#171717]">{i.h1}</p>
               <p className="mt-2 text-sm leading-relaxed text-[#5b6472]">{i.accent}</p>
-              <span className="mt-4 inline-flex text-xs font-bold text-[#534AB7]">See {i.name} SEO →</span>
+              <span className="mt-4 inline-flex text-xs font-bold text-[#171717]">See {i.name} SEO →</span>
             </Link>
           ))}
         </div>

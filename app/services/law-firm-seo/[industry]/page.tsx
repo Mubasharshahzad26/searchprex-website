@@ -188,7 +188,7 @@ export default async function IndustryPage({
               </Link>
               {INDUSTRY_PAGES.map((p) =>
                 p.slug === page.slug ? (
-                  <span key={p.slug} aria-current="page" className="whitespace-nowrap font-bold text-[#534AB7]">
+                  <span key={p.slug} aria-current="page" className="whitespace-nowrap font-bold text-[#171717]">
                     {p.name}
                   </span>
                 ) : (
@@ -242,7 +242,7 @@ export default async function IndustryPage({
             <RuleItem
               key={s.heading}
               dark
-              icon={<Scale className="h-5 w-5 flex-shrink-0 text-[#b9b3f5]" aria-hidden />}
+              icon={<Scale className="h-5 w-5 flex-shrink-0 text-[#525252]" aria-hidden />}
               title={s.heading}
               body={s.body}
             />
@@ -330,7 +330,7 @@ export default async function IndustryPage({
                 className="inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
                 style={{ borderColor: "rgba(185,179,245,0.45)" }}
               >
-                <MapPin className="h-3.5 w-3.5 text-[#b9b3f5]" aria-hidden />
+                <MapPin className="h-3.5 w-3.5 text-[#525252]" aria-hidden />
                 {c.city}, {c.stateAbbr}
               </Link>
             ))}

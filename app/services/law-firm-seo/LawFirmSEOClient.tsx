@@ -117,7 +117,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         above={
           <div className="mt-4 overflow-x-auto border-y bg-slate-50" style={{ borderColor: "#e5e7eb" }}>
             <nav className="mx-auto flex max-w-6xl space-x-6 px-4 py-3 text-sm font-medium sm:px-6 lg:px-8" aria-label="Practice areas">
-              <span className="whitespace-nowrap font-bold text-[#534AB7]">Overview</span>
+              <span className="whitespace-nowrap font-bold text-[#171717]">Overview</span>
               {INDUSTRY_PAGES.map((ind) => (
                 <Link
                   key={ind.slug}
@@ -238,7 +238,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
                 <Link
                   key={ind.slug}
                   href={`/services/law-firm-seo/${ind.slug}`}
-                  className="rounded-full border border-[#d9d6f3] px-4 py-2 text-sm font-bold text-[#0a0f2e] transition hover:border-[#534AB7] hover:text-[#534AB7]"
+                  className="rounded-full border border-[#d9d6f3] px-4 py-2 text-sm font-bold text-[#0a0a0a] transition hover:border-[#171717] hover:text-[#171717]"
                 >
                   {ind.name} SEO
                 </Link>
@@ -247,7 +247,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
             <TextLink href="/resources/law-firm-seo-audit-checklist">Run the 40-check audit yourself — free, no email</TextLink>
             <p className="mt-3 text-sm" style={{ color: "#5b6472" }}>
               Planning new pages?{" "}
-              <Link href="/blog/keyword-research-for-law-firms" className="font-semibold underline" style={{ color: "#534AB7" }}>
+              <Link href="/blog/keyword-research-for-law-firms" className="font-semibold underline" style={{ color: "#171717" }}>
                 Keyword research for law firms
               </Link>
             </p>

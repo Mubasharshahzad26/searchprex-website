@@ -34,7 +34,7 @@ import {
 } from "lucide-react";
 import { categories as categoryData, posts, mostRead, type Post } from "./data";
 
-const GREEN = "#3eb489";
+const GREEN = "#171717";
 
 const QUICK_TOPICS = [
   "Crawl Budget",
@@ -84,7 +84,7 @@ function BlogImage({
   const [imgError, setImgError] = useState(false);
 
   const gradients: Record<string, string> = {
-    "Technical SEO": "from-[#0a0f2e] to-[#3C3489]",
+    "Technical SEO": "from-[#0a0a0a] to-[#171717]",
     "E-commerce SEO": "from-[#0f2027] to-[#203a43]",
     "Local SEO": "from-[#1a1a2e] to-[#16213e]",
     "Content Strategy": "from-[#0d1b2a] to-[#1b263b]",
@@ -113,11 +113,11 @@ function BlogImage({
     "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80";
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-[#0a0f2e]">
+    <div className="relative w-full h-full overflow-hidden bg-[#0a0a0a]">
       {/* Branded gradient fallback */}
       <div
         className={`absolute inset-0 bg-gradient-to-br ${
-          gradients[category] || "from-[#0a0f2e] to-[#3C3489]"
+          gradients[category] || "from-[#0a0a0a] to-[#171717]"
         } flex items-center justify-center`}
       >
         <div className="text-center opacity-30">
@@ -138,17 +138,17 @@ function BlogImage({
       )}
 
       {/* Subtle editorial vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/45 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/45 via-transparent to-transparent pointer-events-none" />
 
       {featured && (
-        <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-md bg-[#0a0f2e]/90 backdrop-blur-sm border border-white/15 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-[#3eb489]">
+        <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-md bg-[#0a0a0a]/90 backdrop-blur-sm border border-white/15 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-[#171717]">
           <Sparkles className="h-3 w-3" /> Featured Deep-Dive
         </div>
       )}
 
       {rank && (
-        <div className="absolute top-3.5 left-3.5 z-10 flex h-8 w-8 items-center justify-center rounded-md bg-[#0a0f2e]/90 border border-white/20 shadow-md">
-          <span className="text-[#3eb489] text-xs font-black tracking-tight">
+        <div className="absolute top-3.5 left-3.5 z-10 flex h-8 w-8 items-center justify-center rounded-md bg-[#0a0a0a]/90 border border-white/20 shadow-md">
+          <span className="text-[#171717] text-xs font-black tracking-tight">
             {String(rank).padStart(2, "0")}
           </span>
         </div>
@@ -174,7 +174,7 @@ function CategoryKicker({
 
   return (
     <div className="flex items-center gap-1.5 flex-wrap">
-      <span className={`${textClass} text-[#3C3489]`}>{category || "Technical SEO"}</span>
+      <span className={`${textClass} text-[#171717]`}>{category || "Technical SEO"}</span>
       {subcategory && subcategory.trim() !== "" && (
         <>
           <ChevronRight className="h-3 w-3 text-[#94a3b8] flex-shrink-0" />
@@ -191,7 +191,7 @@ function Byline({ post }: { post: Post }) {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-2.5 min-w-0">
-        <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#3C3489] to-[#534AB7] flex items-center justify-center flex-shrink-0 ring-2 ring-[#EEEDFE]">
+        <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#171717] to-[#171717] flex items-center justify-center flex-shrink-0 ring-2 ring-[#f1f5f9]">
           <span className="text-white font-extrabold text-[10px] tracking-tighter">
             {initials}
           </span>
@@ -199,12 +199,12 @@ function Byline({ post }: { post: Post }) {
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-[#64748b]">By</span>
-            <span className="text-xs font-bold text-[#0a0f2e] truncate">
+            <span className="text-xs font-bold text-[#0a0a0a] truncate">
               {post.author.name}
             </span>
           </div>
           <div className="flex items-center gap-1 text-[10px] font-semibold text-[#15803d]">
-            <ShieldCheck className="h-3 w-3 text-[#3eb489] flex-shrink-0" />
+            <ShieldCheck className="h-3 w-3 text-[#171717] flex-shrink-0" />
             <span>Verified Expert in SEO</span>
           </div>
         </div>
@@ -450,11 +450,11 @@ export default function BlogClient({
       : `/blog/${post.slug}`;
 
   return (
-    <main className="bg-[#f8f9fc] min-h-screen">
+    <main className="bg-[#f8fafc] min-h-screen">
       {/* ══════════════════════════════════════════════════════════════════
           01. TOPTAL-STYLE EDITORIAL HERO + VOICE/COMMAND SEARCH
          ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-gradient-to-b from-[#0a0f2e] via-[#0f173d] to-[#131b47] text-white pt-28 pb-12 border-b border-white/10 overflow-hidden">
+      <section className="relative bg-slate-50 text-neutral-950 pt-28 pb-12 border-b border-slate-200 overflow-hidden font-sans">
         {/* Subtle architectural grid background */}
         <div
           className="absolute inset-0 opacity-[0.06] pointer-events-none"
@@ -464,7 +464,7 @@ export default function BlogClient({
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="absolute -top-24 right-0 w-[520px] h-[520px] rounded-full bg-[#534AB7]/20 blur-3xl pointer-events-none" />
+        <div className="hidden" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -473,25 +473,25 @@ export default function BlogClient({
             transition={{ duration: 0.5 }}
           >
             {/* Top Editorial Kicker Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-7 border-b border-white/10">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-7 border-b border-slate-200">
               <div className="flex items-center gap-2.5">
-                <span className="inline-flex items-center gap-1.5 rounded bg-[#3eb489]/15 border border-[#3eb489]/40 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-widest text-[#3eb489]">
+                <span className="inline-flex items-center gap-1.5 rounded bg-white border border-slate-300 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-widest text-neutral-900">
                   <ShieldCheck className="h-3.5 w-3.5" /> SearchPrex Engineering &amp; SEO Insights
                 </span>
-                <span className="hidden sm:inline text-xs text-white/50">
+                <span className="hidden sm:inline text-xs text-slate-500">
                   Peer-reviewed playbooks by senior SEO practitioners
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 text-xs text-white/70">
-                <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-3 py-1.5">
-                  <BookOpen className="h-3.5 w-3.5 text-[#3eb489]" />
-                  <span className="font-bold text-white">{activePosts.length}</span>
+              <div className="flex items-center gap-3 text-xs text-slate-600">
+                <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-md px-3 py-1.5">
+                  <BookOpen className="h-3.5 w-3.5 text-[#171717]" />
+                  <span className="font-bold text-neutral-950">{activePosts.length}</span>
                   <span>In-Depth Guides</span>
                 </div>
-                <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-md px-3 py-1.5">
+                <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-md px-3 py-1.5">
                   <TrendingUp className="h-3.5 w-3.5 text-[#a5b4fc]" />
-                  <span className="font-bold text-white">4.2K</span>
+                  <span className="font-bold text-neutral-950">4.2K</span>
                   <span>Practitioner Shares</span>
                 </div>
               </div>
@@ -499,10 +499,10 @@ export default function BlogClient({
 
             {/* Main Headline & Subtitle */}
             <div className="max-w-3xl">
-              <h1 className="mb-4 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[54px]">
+              <h1 className="mb-4 text-4xl font-extrabold leading-[1.1] tracking-tight text-neutral-950 sm:text-5xl lg:text-[54px]">
                 SearchPrex SEO Blog
               </h1>
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
                 Founder-written technical breakdowns on Crawl Budget, E-commerce Indexation, Core
                 Web Vitals, Local Map Pack engineering, and AI Search — built for practitioners,
                 not beginners.
@@ -516,7 +516,7 @@ export default function BlogClient({
               className={`flex items-center bg-white rounded-xl overflow-hidden shadow-2xl border transition-all ${
                 isListening
                   ? "border-red-500 ring-4 ring-red-500/25"
-                  : "border-white/20 focus-within:ring-4 focus-within:ring-[#534AB7]/30"
+                  : "border-slate-300 focus-within:ring-4 focus-within:ring-neutral-900/10"
               }`}
             >
               <div className="pl-5 pr-3 text-[#64748b]">
@@ -539,7 +539,7 @@ export default function BlogClient({
                     : "Search guides by topic, issue, or keyword (Press '/' to focus)..."
                 }
                 aria-label="Search blog articles"
-                className="flex-1 py-4 sm:py-5 pr-3 text-base sm:text-lg text-[#0a0f2e] placeholder-[#94a3b8] outline-none font-medium bg-transparent"
+                className="flex-1 py-4 sm:py-5 pr-3 text-base sm:text-lg text-[#0a0a0a] placeholder-[#94a3b8] outline-none font-medium bg-transparent"
               />
 
               {query && !isListening && (
@@ -549,7 +549,7 @@ export default function BlogClient({
                     setQuery("");
                     searchInputRef.current?.focus();
                   }}
-                  className="px-3 py-2 text-[#64748b] hover:text-[#0a0f2e] text-xs font-bold uppercase tracking-wider flex items-center gap-1"
+                  className="px-3 py-2 text-[#64748b] hover:text-[#0a0a0a] text-xs font-bold uppercase tracking-wider flex items-center gap-1"
                 >
                   <X className="h-4 w-4" /> Clear
                 </button>
@@ -572,7 +572,7 @@ export default function BlogClient({
                 className={`px-4 sm:px-5 py-4 sm:py-5 transition-all flex items-center gap-2 text-sm font-bold whitespace-nowrap ${
                   isListening
                     ? "bg-red-50 text-red-600"
-                    : "text-[#3C3489] hover:bg-[#f8f9fc] hover:text-[#0a0f2e]"
+                    : "text-[#171717] hover:bg-[#f8fafc] hover:text-[#0a0a0a]"
                 }`}
               >
                 {isListening ? (
@@ -586,7 +586,7 @@ export default function BlogClient({
                   </>
                 ) : (
                   <>
-                    <Mic className="h-4 w-4 text-[#534AB7]" />
+                    <Mic className="h-4 w-4 text-[#171717]" />
                     <span className="text-xs sm:text-sm">Voice Search</span>
                   </>
                 )}
@@ -602,12 +602,12 @@ export default function BlogClient({
                   exit={{ opacity: 0, y: -6 }}
                   className={`mt-2.5 flex items-center justify-between gap-3 rounded-lg px-4 py-2.5 text-xs font-medium border ${
                     isListening
-                      ? "bg-[#1e1b4b] border-[#534AB7] text-white"
+                      ? "bg-[#1e1b4b] border-[#171717] text-white"
                       : "bg-amber-500/15 border-amber-400/40 text-amber-200"
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#3eb489]" />
+                    <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#171717]" />
                     <span>{voiceMessage}</span>
                   </div>
                   <button
@@ -625,7 +625,7 @@ export default function BlogClient({
             {/* Quick Topic Filter Pills & Live Result Count */}
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-white/50 mr-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 mr-1">
                   Popular Topics:
                 </span>
                 {QUICK_TOPICS.map((topic) => {
@@ -648,8 +648,8 @@ export default function BlogClient({
                       }}
                       className={`text-xs font-semibold px-3 py-1 rounded-full border transition-all ${
                         isActive
-                          ? "bg-[#3eb489] border-[#3eb489] text-[#0a0f2e]"
-                          : "bg-white/5 border-white/15 text-slate-300 hover:bg-white/10 hover:text-white"
+                          ? "bg-neutral-900 border-neutral-900 text-white"
+                          : "bg-white border-slate-300 text-slate-700 hover:bg-slate-100 hover:text-neutral-950"
                       }`}
                     >
                       {topic}
@@ -659,7 +659,7 @@ export default function BlogClient({
               </div>
 
               {query && (
-                <div className="text-xs font-bold text-[#3eb489]">
+                <div className="text-xs font-bold text-[#171717]">
                   {filtered.length === 0
                     ? `No matches for "${query}"`
                     : `${filtered.length} article${filtered.length !== 1 ? "s" : ""} matched`}
@@ -680,10 +680,10 @@ export default function BlogClient({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#534AB7] mb-1.5">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#171717] mb-1.5">
                 Explore By Discipline
               </p>
-              <h2 id="blog-categories" className="text-2xl font-extrabold text-[#0a0f2e]">
+              <h2 id="blog-categories" className="text-2xl font-extrabold text-[#0a0a0a]">
                 Browse Practitioner Guides by Category
               </h2>
             </div>
@@ -691,7 +691,7 @@ export default function BlogClient({
               <button
                 type="button"
                 onClick={() => setActiveCategory("All")}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#534AB7] hover:text-[#0a0f2e]"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#171717] hover:text-[#0a0a0a]"
               >
                 <X className="h-3.5 w-3.5" /> Reset Filter (Showing {activeCategory})
               </button>
@@ -722,7 +722,7 @@ export default function BlogClient({
                   }}
                   className={`relative text-left p-7 transition-all group flex flex-col justify-between ${
                     isSelected
-                      ? "bg-[#f8f7ff]"
+                      ? "bg-[#f8fafc]"
                       : "bg-white hover:bg-[#fcfdff]"
                   }`}
                 >
@@ -730,8 +730,8 @@ export default function BlogClient({
                   <div
                     className={`absolute top-0 left-0 right-0 h-1 transition-opacity ${
                       isSelected
-                        ? "bg-[#534AB7] opacity-100"
-                        : "bg-[#3eb489] opacity-0 group-hover:opacity-100"
+                        ? "bg-[#171717] opacity-100"
+                        : "bg-[#171717] opacity-0 group-hover:opacity-100"
                     }`}
                   />
 
@@ -740,8 +740,8 @@ export default function BlogClient({
                       <div
                         className={`flex h-11 w-11 items-center justify-center rounded-lg border transition-colors ${
                           isSelected
-                            ? "bg-[#534AB7] border-[#534AB7] text-white"
-                            : "bg-[#f8f9fc] border-[#e5e7eb] text-[#3C3489] group-hover:border-[#534AB7]/40 group-hover:bg-[#EEEDFE]"
+                            ? "bg-[#171717] border-[#171717] text-white"
+                            : "bg-[#f8fafc] border-[#e5e7eb] text-[#171717] group-hover:border-[#171717]/40 group-hover:bg-[#f1f5f9]"
                         }`}
                       >
                         <Icon className="h-5 w-5" />
@@ -751,7 +751,7 @@ export default function BlogClient({
                         <span
                           className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
                             isSelected
-                              ? "bg-[#534AB7] text-white"
+                              ? "bg-[#171717] text-white"
                               : "bg-[#f1f5f9] text-[#64748b]"
                           }`}
                         >
@@ -763,8 +763,8 @@ export default function BlogClient({
                     <h3
                       className={`text-lg font-extrabold mb-2 transition-colors ${
                         isSelected
-                          ? "text-[#534AB7]"
-                          : "text-[#0a0f2e] group-hover:text-[#3C3489]"
+                          ? "text-[#171717]"
+                          : "text-[#0a0a0a] group-hover:text-[#171717]"
                       }`}
                     >
                       {cat.label}
@@ -774,7 +774,7 @@ export default function BlogClient({
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#534AB7]">
+                  <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#171717]">
                     <span>{isSelected ? "Active Filter" : "View Articles"}</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </div>
@@ -788,17 +788,17 @@ export default function BlogClient({
       {/* ══════════════════════════════════════════════════════════════════
           03. TOPTAL EDITORIAL NEWSLETTER BAND (REAL SUBSCRIPTION + ALERTS)
          ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-gradient-to-r from-[#0a0f2e] via-[#131b4d] to-[#1e1b4b] text-white py-12 border-b border-[#e5e7eb]">
+      <section className="bg-slate-100 text-neutral-950 py-12 border-b border-slate-200 font-sans">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#3eb489] mb-2">
+              <div className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#171717] mb-2">
                 <Mail className="h-3.5 w-3.5" /> Instant Publication Alerts
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-2">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 leading-tight mb-2">
                 Get notified whenever we publish a new SEO guide.
               </h2>
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 Subscribe to the SearchPrex Editorial Briefing. Every time a new technical guide or
                 case breakdown goes live, we send the full breakdown directly to your inbox.
               </p>
@@ -812,7 +812,7 @@ export default function BlogClient({
                   className="rounded-xl bg-emerald-500/15 border border-emerald-400/40 p-5 text-white"
                 >
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-[#3eb489] flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="h-6 w-6 text-[#171717] flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="font-extrabold text-base text-white">
                         {alreadySubscribed
@@ -830,7 +830,7 @@ export default function BlogClient({
               ) : (
                 <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
                   <div className="flex flex-col sm:flex-row gap-2.5">
-                    <div className="flex items-center bg-white rounded-xl flex-1 px-4 border border-white/20 focus-within:ring-2 focus-within:ring-[#3eb489]">
+                    <div className="flex items-center bg-white rounded-xl flex-1 px-4 border border-white/20 focus-within:ring-2 focus-within:ring-[#171717]">
                       <Mail className="h-4 w-4 text-[#64748b] mr-2.5 flex-shrink-0" />
                       <input
                         type="email"
@@ -842,13 +842,13 @@ export default function BlogClient({
                         }}
                         placeholder="Enter your work or personal email..."
                         aria-label="Email address for blog updates"
-                        className="flex-1 py-3.5 text-[#0a0f2e] placeholder-[#94a3b8] outline-none text-sm font-medium bg-transparent"
+                        className="flex-1 py-3.5 text-[#0a0a0a] placeholder-[#94a3b8] outline-none text-sm font-medium bg-transparent"
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={submittingNewsletter}
-                      className="bg-[#3eb489] hover:bg-[#34a078] disabled:opacity-60 text-[#0a0f2e] font-extrabold px-6 py-3.5 rounded-xl transition-all text-sm whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                      className="bg-neutral-900 hover:bg-neutral-800 disabled:opacity-60 text-white font-extrabold px-6 py-3.5 rounded-xl transition-all text-sm whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                     >
                       {submittingNewsletter ? (
                         <>
@@ -887,7 +887,7 @@ export default function BlogClient({
       {/* ══════════════════════════════════════════════════════════════════
           04. TOPTAL EDITORIAL POSTS GRID (FEATURED LEAD + COMPACT CARDS)
          ══════════════════════════════════════════════════════════════════ */}
-      <section ref={postsRef} id="posts-grid" className="py-16 sm:py-20 bg-[#f8f9fc] scroll-mt-20">
+      <section ref={postsRef} id="posts-grid" className="py-16 sm:py-20 bg-[#f8fafc] scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Active Filter Bar */}
           {isFiltering && (
@@ -897,24 +897,24 @@ export default function BlogClient({
                   Active Filters:
                 </span>
                 {query && (
-                  <span className="inline-flex items-center gap-1.5 bg-[#f1f5f9] text-[#0a0f2e] px-3 py-1 rounded-md text-xs font-bold">
+                  <span className="inline-flex items-center gap-1.5 bg-[#f1f5f9] text-[#0a0a0a] px-3 py-1 rounded-md text-xs font-bold">
                     Search: &ldquo;{query}&rdquo;
                     <button
                       type="button"
                       onClick={() => setQuery("")}
-                      className="text-[#64748b] hover:text-[#0a0f2e]"
+                      className="text-[#64748b] hover:text-[#0a0a0a]"
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>
                   </span>
                 )}
                 {activeCategory !== "All" && (
-                  <span className="inline-flex items-center gap-1.5 bg-[#EEEDFE] text-[#534AB7] px-3 py-1 rounded-md text-xs font-bold">
+                  <span className="inline-flex items-center gap-1.5 bg-[#f1f5f9] text-[#171717] px-3 py-1 rounded-md text-xs font-bold">
                     Topic: {activeCategory}
                     <button
                       type="button"
                       onClick={() => setActiveCategory("All")}
-                      className="text-[#534AB7] hover:text-[#0a0f2e]"
+                      className="text-[#171717] hover:text-[#0a0a0a]"
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>
@@ -931,7 +931,7 @@ export default function BlogClient({
                   setQuery("");
                   setActiveCategory("All");
                 }}
-                className="text-xs font-bold text-[#534AB7] hover:underline"
+                className="text-xs font-bold text-[#171717] hover:underline"
               >
                 Clear all filters
               </button>
@@ -941,7 +941,7 @@ export default function BlogClient({
           {isFiltering && filtered.length === 0 ? (
             <div className="text-center py-20 bg-white rounded-2xl border border-[#e5e7eb] px-6">
               <Search className="h-12 w-12 mx-auto mb-4 text-[#94a3b8]" />
-              <h3 className="text-xl font-extrabold text-[#0a0f2e] mb-2">
+              <h3 className="text-xl font-extrabold text-[#0a0a0a] mb-2">
                 No articles matched &ldquo;{query || activeCategory}&rdquo;
               </h3>
               <p className="text-sm text-[#64748b] max-w-md mx-auto mb-6">
@@ -955,7 +955,7 @@ export default function BlogClient({
                   setQuery("");
                   setActiveCategory("All");
                 }}
-                className="inline-flex items-center gap-2 rounded-lg bg-[#0a0f2e] text-white px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider hover:bg-[#3C3489] transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#0a0a0a] text-white px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider hover:bg-[#171717] transition-colors"
               >
                 Show All Articles
               </button>
@@ -967,7 +967,7 @@ export default function BlogClient({
                 <motion.article
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="lg:col-span-5 flex flex-col bg-white rounded-xl border border-[#dce1eb] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#534AB7]/50 transition-all group"
+                  className="lg:col-span-5 flex flex-col bg-white rounded-xl border border-[#dce1eb] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#171717]/50 transition-all group"
                 >
                   <Link
                     href={postHref(featuredPost)}
@@ -990,7 +990,7 @@ export default function BlogClient({
                     </div>
 
                     <Link href={postHref(featuredPost)}>
-                      <h2 className="text-[#0a0f2e] font-extrabold text-2xl sm:text-[26px] leading-[1.28] mb-4 group-hover:text-[#3C3489] transition-colors">
+                      <h2 className="text-[#0a0a0a] font-extrabold text-2xl sm:text-[26px] leading-[1.28] mb-4 group-hover:text-[#171717] transition-colors">
                         {featuredPost.title}
                       </h2>
                     </Link>
@@ -1003,26 +1003,26 @@ export default function BlogClient({
                       <span>{fmtDate(featuredPost.date)}</span>
                       <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />
                       <span className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5 text-[#534AB7]" />
+                        <Clock className="h-3.5 w-3.5 text-[#171717]" />
                         {featuredPost.readTime}
                       </span>
                     </div>
 
                     {/* Toptal Full Verified Author Card — Featured Article */}
-                    <div className="mt-auto rounded-xl bg-[#f8f9fc] border border-[#e5e7eb] p-4">
+                    <div className="mt-auto rounded-xl bg-[#f8fafc] border border-[#e5e7eb] p-4">
                       <div className="flex items-start gap-3.5">
-                        <div className="h-11 w-11 rounded-full bg-gradient-to-br from-[#3C3489] to-[#534AB7] flex items-center justify-center flex-shrink-0 ring-2 ring-[#EEEDFE]">
+                        <div className="h-11 w-11 rounded-full bg-gradient-to-br from-[#171717] to-[#171717] flex items-center justify-center flex-shrink-0 ring-2 ring-[#f1f5f9]">
                           <span className="text-white font-black text-sm">
                             {getAuthorInitials(featuredPost.author.name)}
                           </span>
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <span className="text-sm font-extrabold text-[#0a0f2e]">
+                            <span className="text-sm font-extrabold text-[#0a0a0a]">
                               {featuredPost.author.name}
                             </span>
                             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-extrabold text-emerald-700">
-                              <ShieldCheck className="h-3 w-3 text-[#3eb489]" />
+                              <ShieldCheck className="h-3 w-3 text-[#171717]" />
                               {featuredPost.author.role || "Verified SEO Expert"}
                             </span>
                           </div>
@@ -1037,7 +1037,7 @@ export default function BlogClient({
 
                     <Link
                       href={postHref(featuredPost)}
-                      className="mt-6 inline-flex items-center gap-1.5 text-[#3C3489] text-xs font-extrabold uppercase tracking-widest group-hover:gap-2.5 transition-all"
+                      className="mt-6 inline-flex items-center gap-1.5 text-[#171717] text-xs font-extrabold uppercase tracking-widest group-hover:gap-2.5 transition-all"
                     >
                       Read Full Technical Guide <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -1059,7 +1059,7 @@ export default function BlogClient({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: Math.min(i * 0.05, 0.3) }}
-                    className="flex flex-col bg-white rounded-xl border border-[#dce1eb] overflow-hidden shadow-sm hover:shadow-lg hover:border-[#534AB7]/40 transition-all group"
+                    className="flex flex-col bg-white rounded-xl border border-[#dce1eb] overflow-hidden shadow-sm hover:shadow-lg hover:border-[#171717]/40 transition-all group"
                   >
                     <Link
                       href={postHref(post)}
@@ -1078,7 +1078,7 @@ export default function BlogClient({
                       </div>
 
                       <Link href={postHref(post)}>
-                        <h2 className="text-[#0a0f2e] font-extrabold text-lg leading-snug mb-2.5 group-hover:text-[#3C3489] transition-colors line-clamp-2">
+                        <h2 className="text-[#0a0a0a] font-extrabold text-lg leading-snug mb-2.5 group-hover:text-[#171717] transition-colors line-clamp-2">
                           {post.title}
                         </h2>
                       </Link>
@@ -1093,7 +1093,7 @@ export default function BlogClient({
                         <span>{fmtDate(post.date)}</span>
                         <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />
                         <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3 text-[#534AB7]" />
+                          <Clock className="h-3 w-3 text-[#171717]" />
                           {post.readTime}
                         </span>
                       </div>
@@ -1103,7 +1103,7 @@ export default function BlogClient({
                         <Link
                           href={postHref(post)}
                           aria-label={`Read ${post.title}`}
-                          className="h-8 w-8 rounded-lg bg-[#f8f9fc] border border-[#e5e7eb] flex items-center justify-center text-[#534AB7] group-hover:bg-[#534AB7] group-hover:text-white transition-colors flex-shrink-0"
+                          className="h-8 w-8 rounded-lg bg-[#f8fafc] border border-[#e5e7eb] flex items-center justify-center text-[#171717] group-hover:bg-[#171717] group-hover:text-white transition-colors flex-shrink-0"
                         >
                           <ArrowRight className="h-4 w-4" />
                         </Link>
@@ -1118,10 +1118,10 @@ export default function BlogClient({
           {/* ── Audit CTA (CRO) ── */}
           <div className="mt-16 flex flex-col md:flex-row items-center justify-between gap-6 rounded-2xl border border-[#dce1eb] bg-white p-8 sm:p-10 shadow-sm">
             <div className="max-w-xl text-center md:text-left">
-              <span className="inline-block text-[11px] font-extrabold uppercase tracking-widest text-[#534AB7] mb-2">
+              <span className="inline-block text-[11px] font-extrabold uppercase tracking-widest text-[#171717] mb-2">
                 Hands-On Technical SEO Engineering
               </span>
-              <p className="text-2xl font-extrabold text-[#0a0f2e] mb-2">
+              <p className="text-2xl font-extrabold text-[#0a0a0a] mb-2">
                 Reading about the problem? We fix it for a living.
               </p>
               <p className="text-sm text-[#64748b] leading-relaxed">
@@ -1131,8 +1131,8 @@ export default function BlogClient({
             </div>
             <Link
               href="/free-audit"
-              className="group inline-flex items-center gap-2.5 rounded-xl px-7 py-4 text-sm font-extrabold text-[#0a0f2e] shadow-lg transition-all hover:-translate-y-0.5 whitespace-nowrap"
-              style={{ background: GREEN }}
+              className="group inline-flex items-center gap-2.5 rounded-xl bg-neutral-900 px-7 py-4 text-sm font-extrabold text-white shadow-sm transition-all hover:bg-neutral-800 whitespace-nowrap"
+              
             >
               <BarChart3 className="h-4 w-4" /> Get Free SEO Audit
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -1149,10 +1149,10 @@ export default function BlogClient({
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between mb-10">
               <div>
-                <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#534AB7] mb-1.5">
+                <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#171717] mb-1.5">
                   Reader Favorites
                 </p>
-                <h2 className="text-2xl font-extrabold text-[#0a0f2e]">Most-Read Guides</h2>
+                <h2 className="text-2xl font-extrabold text-[#0a0a0a]">Most-Read Guides</h2>
               </div>
             </div>
 
@@ -1161,7 +1161,7 @@ export default function BlogClient({
                 <Link
                   key={post.slug}
                   href={postHref(post)}
-                  className="group flex flex-col bg-[#f8f9fc] rounded-xl border border-[#dce1eb] p-5 hover:bg-white hover:shadow-lg hover:border-[#534AB7]/40 transition-all"
+                  className="group flex flex-col bg-[#f8fafc] rounded-xl border border-[#dce1eb] p-5 hover:bg-white hover:shadow-lg hover:border-[#171717]/40 transition-all"
                 >
                   <div className="aspect-[16/9] rounded-lg overflow-hidden mb-4 relative">
                     <BlogImage
@@ -1177,14 +1177,14 @@ export default function BlogClient({
                       size="sm"
                     />
                   </div>
-                  <h3 className="text-[#0a0f2e] font-extrabold text-base leading-snug mb-3 group-hover:text-[#3C3489] transition-colors">
+                  <h3 className="text-[#0a0a0a] font-extrabold text-base leading-snug mb-3 group-hover:text-[#171717] transition-colors">
                     {post.title}
                   </h3>
                   <div className="mt-auto flex items-center gap-2 text-[#94a3b8] text-xs font-bold uppercase tracking-wider">
                     <span>{fmtDate(post.date)}</span>
                     <span className="h-1 w-1 rounded-full bg-[#cbd5e1]" />
                     <span className="flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5 text-[#534AB7]" />
+                      <Clock className="h-3.5 w-3.5 text-[#171717]" />
                       {post.readTime}
                     </span>
                   </div>

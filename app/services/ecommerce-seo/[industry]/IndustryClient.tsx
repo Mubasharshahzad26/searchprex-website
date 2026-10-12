@@ -97,7 +97,7 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
               </Link>
               {ECOMMERCE_INDUSTRIES.map((i) =>
                 i.slug === industry.slug ? (
-                  <span key={i.slug} aria-current="page" className="whitespace-nowrap font-bold text-[#534AB7]">
+                  <span key={i.slug} aria-current="page" className="whitespace-nowrap font-bold text-[#171717]">
                     {i.name}
                   </span>
                 ) : (
@@ -209,7 +209,7 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
                 <p className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: PURPLE }}>
                   {cs.client} · {cs.location}
                 </p>
-                <p className="mt-2 text-xl font-black group-hover:text-[#534AB7]" style={{ color: INK }}>{cs.headline}</p>
+                <p className="mt-2 text-xl font-black group-hover:text-[#171717]" style={{ color: INK }}>{cs.headline}</p>
                 <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
                   {cs.metrics.slice(0, 3).map((m) => (
                     <div key={m.l} className="border-t-2 pt-3" style={{ borderColor: "#d9d6f3" }}>

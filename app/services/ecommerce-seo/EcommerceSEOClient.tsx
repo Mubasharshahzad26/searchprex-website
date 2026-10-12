@@ -142,7 +142,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
     }
   };
 
-  const inputCls = `w-full ${radius.control} border px-4 py-3 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#534AB7]`;
+  const inputCls = `w-full ${radius.control} border px-4 py-3 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#171717]`;
 
   return (
     <main>
@@ -320,7 +320,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
                 href={`/services/ecommerce-seo/${i.slug}`}
                 className="group rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
               >
-                <p className="text-lg font-black group-hover:text-[#534AB7]" style={{ color: INK }}>{i.h1}</p>
+                <p className="text-lg font-black group-hover:text-[#171717]" style={{ color: INK }}>{i.h1}</p>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: BODY }}>
                   {cs && metric ? (
                     <>
@@ -470,7 +470,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
                 type="button"
                 onClick={() => setShowModal(false)}
                 aria-label="Close"
-                className={`absolute right-4 top-4 ${radius.chip} p-1 transition-colors hover:bg-[#f8f9fc] ${focusRing}`}
+                className={`absolute right-4 top-4 ${radius.chip} p-1 transition-colors hover:bg-[#f8fafc] ${focusRing}`}
                 style={{ color: color.muted }}
               >
                 <X className="h-5 w-5" aria-hidden />
@@ -526,7 +526,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
                     type="button"
                     onClick={submit}
                     disabled={formState === "sending" || !form.name || !form.email || !form.website}
-                    className={`mt-5 flex w-full items-center justify-center gap-2 ${radius.control} bg-[#534AB7] px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#3C3489] disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
+                    className={`mt-5 flex w-full items-center justify-center gap-2 ${radius.control} bg-[#171717] px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#171717] disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
                   >
                     {formState === "sending" ? "Sending…" : "Request reality check"}
                     {formState === "sending" ? null : <ArrowRight className="h-4 w-4" aria-hidden />}

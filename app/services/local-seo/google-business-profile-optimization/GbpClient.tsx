@@ -223,7 +223,7 @@ export default function GbpClient() {
             <Link
               key={i.slug}
               href={`/services/local-seo/${i.slug}`}
-              className="rounded-full border border-[#d9d6f3] bg-white px-4 py-2 text-sm font-bold text-[#0a0f2e] transition hover:border-[#534AB7] hover:text-[#534AB7]"
+              className="rounded-full border border-[#d9d6f3] bg-white px-4 py-2 text-sm font-bold text-[#0a0a0a] transition hover:border-[#171717] hover:text-[#171717]"
             >
               {i.name} SEO
             </Link>

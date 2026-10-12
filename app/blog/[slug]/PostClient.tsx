@@ -203,7 +203,7 @@ export default function PostClient({
       {/* Toptal-style Top Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-transparent pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-[#534AB7] to-[#3eb489] transition-all duration-150"
+          className="h-full bg-neutral-900 transition-all duration-150"
           style={{ width: `${readingProgress}%` }}
         />
       </div>
@@ -221,7 +221,7 @@ export default function PostClient({
           unoptimized
         />
         {/* Deep gradient so text is always readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/70 to-[#0a0f2e]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/20" />
  
         {/* Content over image */}
         <div className="absolute inset-0 flex flex-col justify-end">
@@ -235,7 +235,7 @@ export default function PostClient({
               {post.category !== section.label && (
                 <>
                   <ChevronRight className="h-3.5 w-3.5" />
-                  <span className="text-sm text-[#3eb489] font-semibold">{post.category}</span>
+                  <span className="text-sm text-[#e2e8f0] font-semibold">{post.category}</span>
                 </>
               )}
             </div>
@@ -243,8 +243,8 @@ export default function PostClient({
             {/* Stat badge */}
             {post.stat && (
               <div className="mb-5 inline-flex items-center gap-2.5 rounded-xl bg-white/10 px-4 py-2 backdrop-blur-sm border border-white/20">
-                <TrendingUp className="h-4 w-4 text-[#3eb489]" />
-                <span className="text-xl font-black text-[#3eb489]">{post.stat.value}</span>
+                <TrendingUp className="h-4 w-4 text-[#e2e8f0]" />
+                <span className="text-xl font-black text-[#e2e8f0]">{post.stat.value}</span>
                 <span className="text-xs font-semibold text-white/70">{post.stat.label}</span>
               </div>
             )}
@@ -270,7 +270,7 @@ export default function PostClient({
               <button onClick={copyLink}
                 className="flex items-center gap-1.5 text-white/60 text-sm hover:text-white transition-colors">
                 {copied
-                  ? <CheckCircle className="h-4 w-4 text-[#3eb489]" />
+                  ? <CheckCircle className="h-4 w-4 text-[#e2e8f0]" />
                   : <Share2 className="h-4 w-4" />}
                 {copied ? "Copied!" : "Share"}
               </button>
@@ -284,15 +284,15 @@ export default function PostClient({
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
-              <div className="h-11 w-11 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0 ring-2 ring-[#534AB7]/20">
-                <span className="text-[#534AB7] font-black">M</span>
+              <div className="h-11 w-11 rounded-full bg-[#f1f5f9] flex items-center justify-center flex-shrink-0 ring-2 ring-[#171717]/20">
+                <span className="text-[#171717] font-black">M</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="font-bold text-[#0a0f2e] text-sm">{post.author.name}</span>
-                  <span className="inline-flex items-center gap-1 bg-[#EEEDFE] px-2 py-0.5 rounded-full">
-                    <CheckCircle className="h-3 w-3 text-[#534AB7]" />
-                    <span className="text-[9px] font-bold text-[#534AB7]">Semrush &amp; HubSpot Certified SEO Analyst</span>
+                  <span className="font-bold text-[#0a0a0a] text-sm">{post.author.name}</span>
+                  <span className="inline-flex items-center gap-1 bg-[#f1f5f9] px-2 py-0.5 rounded-full">
+                    <CheckCircle className="h-3 w-3 text-[#171717]" />
+                    <span className="text-[9px] font-bold text-[#171717]">Semrush &amp; HubSpot Certified SEO Analyst</span>
                   </span>
                 </div>
                 <p className="text-xs text-[#64748b]">{post.author.role} · {displayDate}</p>
@@ -313,16 +313,16 @@ export default function PostClient({
           {/* Article */}
           <article className="flex-1 min-w-0 max-w-full">
             {/* Excerpt pull-quote */}
-            <p className="mb-8 text-xl text-[#374151] leading-relaxed font-medium border-l-4 border-[#534AB7] pl-6 py-1">
+            <p className="mb-8 text-xl text-[#374151] leading-relaxed font-medium border-l-4 border-[#171717] pl-6 py-1">
               {post.excerpt}
             </p>
 
             {/* Mobile Table of Contents (collapsible, shown on screens < lg where sidebar is hidden) */}
             {toc.length > 0 && (
-              <details className="lg:hidden mb-8 rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-4 group">
-                <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0f2e] text-sm select-none">
+              <details className="lg:hidden mb-8 rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-4 group">
+                <summary className="flex cursor-pointer items-center justify-between font-bold text-[#0a0a0a] text-sm select-none">
                   <span className="flex items-center gap-2">
-                    <span className="text-[#534AB7] text-xs uppercase tracking-wider font-extrabold">Table of Contents</span>
+                    <span className="text-[#171717] text-xs uppercase tracking-wider font-extrabold">Table of Contents</span>
                     <span className="text-xs text-[#64748b] font-normal">({toc.length} sections)</span>
                   </span>
                   <ChevronRight className="h-4 w-4 text-[#64748b] transition-transform group-open:rotate-90" />
@@ -332,9 +332,9 @@ export default function PostClient({
                     <a
                       key={i}
                       href={`#section-${i}`}
-                      className="flex items-start gap-2 text-xs text-[#64748b] hover:text-[#534AB7] py-1 transition-colors"
+                      className="flex items-start gap-2 text-xs text-[#64748b] hover:text-[#171717] py-1 transition-colors"
                     >
-                      <span className="text-[#534AB7] font-bold text-[11px] w-4 flex-shrink-0">
+                      <span className="text-[#171717] font-bold text-[11px] w-4 flex-shrink-0">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="leading-snug">{item}</span>
@@ -354,7 +354,7 @@ export default function PostClient({
                   if (domNode instanceof Element && domNode.tagName === 'img') {
                     const { src, alt, width, height } = domNode.attribs;
                     return (
-                      <div className="my-8 relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] flex justify-center bg-[#f8f9fc]">
+                      <div className="my-8 relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] flex justify-center bg-[#f8fafc]">
                         <Image
                           src={src || ''}
                           alt={alt || "Blog image"}
@@ -374,7 +374,7 @@ export default function PostClient({
             {tags.length > 0 && (
               <div className="mt-12 flex flex-wrap gap-2 border-t border-[#e5e7eb] pt-8">
                 {tags.map((t) => (
-                  <span key={t} className="text-xs font-semibold bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-3 py-1.5 rounded-full">
+                  <span key={t} className="text-xs font-semibold bg-[#f8fafc] border border-[#e5e7eb] text-[#64748b] px-3 py-1.5 rounded-full">
                     #{t}
                   </span>
                 ))}
@@ -382,13 +382,13 @@ export default function PostClient({
             )}
  
             {/* Author bio */}
-            <div className="mt-10 flex gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8f9fc] p-7">
-              <div className="h-14 w-14 rounded-full bg-[#EEEDFE] flex items-center justify-center flex-shrink-0 ring-2 ring-[#534AB7]/20 overflow-hidden relative">
-                <span className="text-[#534AB7] font-black text-xl">M</span>
+            <div className="mt-10 flex gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-7">
+              <div className="h-14 w-14 rounded-full bg-[#f1f5f9] flex items-center justify-center flex-shrink-0 ring-2 ring-[#171717]/20 overflow-hidden relative">
+                <span className="text-[#171717] font-black text-xl">M</span>
               </div>
               <div className="flex-1">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-                  <p className="font-black text-[#0a0f2e] text-base">{post.author.name}</p>
+                  <p className="font-black text-[#0a0a0a] text-base">{post.author.name}</p>
                   {(post.author.linkedIn || post.author.name.toLowerCase().includes("mubashar")) && (
                     <a
                       href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"}
@@ -401,8 +401,8 @@ export default function PostClient({
                   )}
                 </div>
                 <div className="flex items-center gap-1.5 mb-3">
-                  <CheckCircle className="h-3.5 w-3.5 text-[#534AB7]" />
-                  <span className="text-xs font-bold text-[#534AB7]">{post.author.role}</span>
+                  <CheckCircle className="h-3.5 w-3.5 text-[#171717]" />
+                  <span className="text-xs font-bold text-[#171717]">{post.author.role}</span>
                 </div>
                 {post.author.bio && (
                   <p className="text-sm text-[#64748b] leading-relaxed">{post.author.bio}</p>
@@ -412,14 +412,14 @@ export default function PostClient({
  
             {/* Share */}
             <div className="mt-8 flex items-center gap-3 flex-wrap">
-              <span className="text-sm font-semibold text-[#0a0f2e]">Share:</span>
+              <span className="text-sm font-semibold text-[#0a0a0a]">Share:</span>
               <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
                 target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-[#0a66c2] text-white text-sm font-bold px-4 py-2.5 rounded-xl hover:bg-[#084e96] transition-colors">
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
               <button onClick={copyLink}
-                className="flex items-center gap-2 border border-[#e5e7eb] text-[#374151] text-sm font-bold px-4 py-2.5 rounded-xl hover:border-[#534AB7] hover:text-[#534AB7] transition-colors">
+                className="flex items-center gap-2 border border-[#e5e7eb] text-[#374151] text-sm font-bold px-4 py-2.5 rounded-xl hover:border-[#171717] hover:text-[#171717] transition-colors">
                 <Copy className="h-4 w-4" />
                 {copied ? "Copied!" : "Copy link"}
               </button>
@@ -446,8 +446,8 @@ export default function PostClient({
               <nav className="flex flex-col gap-2">
                 {toc.map((item, i) => (
                   <a key={i} href={`#section-${i}`}
-                    className="group flex items-start gap-2 text-sm text-[#64748b] hover:text-[#534AB7] transition-colors">
-                    <span className="text-[#534AB7] font-bold text-xs mt-0.5 flex-shrink-0 w-5">
+                    className="group flex items-start gap-2 text-sm text-[#64748b] hover:text-[#171717] transition-colors">
+                    <span className="text-[#171717] font-bold text-xs mt-0.5 flex-shrink-0 w-5">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="group-hover:underline leading-snug">{item}</span>
@@ -464,15 +464,15 @@ export default function PostClient({
                 </p>
                 <div className="flex flex-col gap-4">
                   <Link href="/services/law-firm-seo" className="group block">
-                    <p className="text-sm font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-0.5">Law Firm SEO</p>
+                    <p className="text-sm font-bold text-[#0a0a0a] group-hover:text-[#171717] transition-colors mb-0.5">Law Firm SEO</p>
                     <p className="text-xs text-[#64748b] leading-relaxed">Dominate the local pack and AI Overviews for your practice areas.</p>
                   </Link>
                   <Link href="/services/ecommerce-seo" className="group block border-t border-[#e5e7eb] pt-4">
-                    <p className="text-sm font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-0.5">Ecommerce SEO</p>
+                    <p className="text-sm font-bold text-[#0a0a0a] group-hover:text-[#171717] transition-colors mb-0.5">Ecommerce SEO</p>
                     <p className="text-xs text-[#64748b] leading-relaxed">Scale product-page content and indexing across thousands of SKUs.</p>
                   </Link>
                   <Link href="/services/local-seo" className="group block border-t border-[#e5e7eb] pt-4">
-                    <p className="text-sm font-bold text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors mb-0.5">Local SEO Services</p>
+                    <p className="text-sm font-bold text-[#0a0a0a] group-hover:text-[#171717] transition-colors mb-0.5">Local SEO Services</p>
                     <p className="text-xs text-[#64748b] leading-relaxed">Rank in the Google Maps top 3 and capture 'near me' search intent.</p>
                   </Link>
                 </div>
@@ -484,19 +484,19 @@ export default function PostClient({
             <ArticleLeadMagnet variant="sidebar" source={leadSource} />
 
             {/* Blog Newsletter Alert Box */}
-            <div className="rounded-2xl border border-[#dce1eb] bg-gradient-to-br from-[#0a0f2e] to-[#1e1b4b] p-5 text-white shadow-sm">
-              <div className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#3eb489] mb-2">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-neutral-950 shadow-2xs">
+              <div className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#e2e8f0] mb-2">
                 <Mail className="h-3.5 w-3.5" /> New Guide Alerts
               </div>
-              <p className="text-sm font-extrabold text-white leading-snug mb-1.5">
+              <p className="text-sm font-extrabold text-neutral-950 leading-snug mb-1.5">
                 Get notified when our next SEO guide drops.
               </p>
-              <p className="text-xs text-slate-300 leading-relaxed mb-3.5">
+              <p className="text-xs text-slate-600 leading-relaxed mb-3.5">
                 Practitioner-grade technical SEO playbooks delivered straight to your inbox.
               </p>
               {subscribed ? (
                 <div className="flex items-start gap-2 rounded-lg bg-emerald-500/20 border border-emerald-400/30 p-3 text-xs text-emerald-200 font-semibold">
-                  <CheckCircle className="h-4 w-4 text-[#3eb489] flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="h-4 w-4 text-[#e2e8f0] flex-shrink-0 mt-0.5" />
                   <span>Subscribed! You&apos;ll receive an email when the next guide is published.</span>
                 </div>
               ) : (
@@ -510,12 +510,12 @@ export default function PostClient({
                       if (subError) setSubError(null);
                     }}
                     placeholder="Your email address..."
-                    className="w-full rounded-lg bg-white px-3.5 py-2.5 text-xs font-medium text-[#0a0f2e] placeholder-[#94a3b8] outline-none"
+                    className="w-full rounded-lg bg-white px-3.5 py-2.5 text-xs font-medium text-[#0a0a0a] placeholder-[#94a3b8] outline-none"
                   />
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full rounded-lg bg-[#3eb489] hover:bg-[#34a078] disabled:opacity-60 py-2.5 text-xs font-extrabold text-[#0a0f2e] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full rounded-lg bg-neutral-900 hover:bg-neutral-800 disabled:opacity-60 py-2.5 text-xs font-extrabold text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     {submitting ? (
                       <>
@@ -534,12 +534,12 @@ export default function PostClient({
 
             {/* Stat card */}
             {post.stat && (
-              <div className="rounded-2xl border border-[#e5e7eb] bg-gradient-to-br from-[#EEEDFE] to-white p-5">
+              <div className="rounded-2xl border border-[#e5e7eb] bg-gradient-to-br from-[#f1f5f9] to-white p-5">
                 <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-3">Verified Result</p>
-                <p className="text-3xl font-black text-[#534AB7]">{post.stat.value}</p>
+                <p className="text-3xl font-black text-[#171717]">{post.stat.value}</p>
                 <p className="text-sm text-[#64748b] mt-1">{post.stat.label}</p>
                 <Link href="/case-studies"
-                  className="mt-3 flex items-center gap-1 text-xs font-bold text-[#534AB7] hover:gap-2 transition-all">
+                  className="mt-3 flex items-center gap-1 text-xs font-bold text-[#171717] hover:gap-2 transition-all">
                   View case studies <ArrowRight className="h-3 w-3" />
                 </Link>
               </div>
@@ -551,7 +551,7 @@ export default function PostClient({
                 <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-3">Tags</p>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((t) => (
-                    <span key={t} className="text-xs bg-[#f8f9fc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-full">
+                    <span key={t} className="text-xs bg-[#f8fafc] border border-[#e5e7eb] text-[#64748b] px-2.5 py-1 rounded-full">
                       #{t}
                     </span>
                   ))}
@@ -564,23 +564,23 @@ export default function PostClient({
  
       {/* ══ RELATED ══ */}
       {related.length > 0 && (
-        <section className="border-t border-[#e5e7eb] bg-[#f8f9fc] py-16">
+        <section className="border-t border-[#e5e7eb] bg-[#f8fafc] py-16">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-black text-[#0a0f2e] mb-8">Related articles</h2>
+            <h2 className="text-2xl font-black text-[#0a0a0a] mb-8">Related articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((p) => (
                 <Link key={p.slug} href={(p as any).href || `${section.href}/${p.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white hover:border-[#534AB7] hover:shadow-lg transition-all">
-                  <div className="relative h-44 overflow-hidden bg-[#0a0f2e]">
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white hover:border-[#171717] hover:shadow-lg transition-all">
+                  <div className="relative h-44 overflow-hidden bg-[#0a0a0a]">
                     {(p as any).heroImage && (
                       <Image src={(p as any).heroImage} alt={p.title} fill
                         className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
                         sizes="350px" unoptimized />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f2e]/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 to-transparent" />
                     {(p as any).stat && (
-                      <div className="absolute bottom-3 left-3 rounded-lg bg-[#0a0f2e]/70 px-3 py-1.5">
-                        <span className="text-sm font-black text-[#3eb489]">{(p as any).stat.value}</span>
+                      <div className="absolute bottom-3 left-3 rounded-lg bg-[#0a0a0a]/70 px-3 py-1.5">
+                        <span className="text-sm font-black text-[#e2e8f0]">{(p as any).stat.value}</span>
                         <span className="ml-1.5 text-[10px] text-white/60">{(p as any).stat.label}</span>
                       </div>
                     )}
@@ -594,14 +594,14 @@ export default function PostClient({
                         </>
                       )}
                     </div>
-                    <h3 className="flex-1 text-sm font-black leading-snug text-[#0a0f2e] group-hover:text-[#534AB7] transition-colors line-clamp-2">
+                    <h3 className="flex-1 text-sm font-black leading-snug text-[#0a0a0a] group-hover:text-[#171717] transition-colors line-clamp-2">
                       {p.title}
                     </h3>
                     <div className="mt-4 flex items-center justify-between border-t border-[#e5e7eb] pt-3">
                       <span className="flex items-center gap-1 text-xs text-[#94a3b8]">
                         <Clock className="h-3 w-3" /> {p.readTime}
                       </span>
-                      <span className="flex items-center gap-1 text-xs font-bold text-[#534AB7] group-hover:gap-2 transition-all">
+                      <span className="flex items-center gap-1 text-xs font-bold text-[#171717] group-hover:gap-2 transition-all">
                         Read <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
