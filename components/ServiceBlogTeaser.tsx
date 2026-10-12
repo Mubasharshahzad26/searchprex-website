@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, ExternalLink } from "lucide-react";
 import { posts as allPublishedPosts, type Post } from "@/app/blog/data";
 
 export type ServiceBlogTopic = "ecommerce" | "local" | "law-firm" | "technical";
@@ -202,6 +202,68 @@ export default function ServiceBlogTeaser({
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* E-E-A-T Independent Entity & Trust Verification Bar */}
+        <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-900 block">
+              E-E-A-T Independent Entity Verification
+            </span>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Verify SearchPrex and Founder Mubashar Sharif across independent directories:
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <a
+              href="https://clutch.co/profile/searchprex"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-neutral-950 hover:border-neutral-900 transition-colors"
+            >
+              <span className="flex h-4 w-4 items-center justify-center rounded bg-neutral-900 text-[9px] font-black text-white">
+                C
+              </span>
+              <span>Clutch · Company Profile</span>
+              <ExternalLink className="h-3 w-3 text-slate-400" />
+            </a>
+            <a
+              href="https://www.trustpilot.com/review/searchprex.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-neutral-950 hover:border-neutral-900 transition-colors"
+            >
+              <span className="flex h-4 w-4 items-center justify-center rounded bg-neutral-900 text-[9px] font-black text-white">
+                T
+              </span>
+              <span>Trustpilot · 1 Verified Review</span>
+              <ExternalLink className="h-3 w-3 text-slate-400" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/searchprex/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-neutral-950 hover:border-neutral-900 transition-colors"
+            >
+              <span className="flex h-4 w-4 items-center justify-center rounded bg-neutral-900 text-[9px] font-black text-white">
+                in
+              </span>
+              <span>LinkedIn · Company Page</span>
+              <ExternalLink className="h-3 w-3 text-slate-400" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-neutral-950 hover:border-neutral-900 transition-colors"
+            >
+              <span className="flex h-4 w-4 items-center justify-center rounded bg-neutral-900 text-[9px] font-black text-white">
+                in
+              </span>
+              <span>Founder LinkedIn</span>
+              <ExternalLink className="h-3 w-3 text-slate-400" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
