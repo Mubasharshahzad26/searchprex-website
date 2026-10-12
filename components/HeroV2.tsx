@@ -48,8 +48,8 @@ import {
 
 const INK = "#0a0a0a";
 const BODY = "#525252";
-const GREEN = "#1a7d59";
-const GREEN_DARK = "#196b4d";
+const GREEN = "#171717";
+const GREEN_DARK = "#0a0a0a";
 const PURPLE = "#171717";
 const LINE = "#e2e8f0";
 

@@ -114,7 +114,7 @@ export default function ChatWidget() {
       {/* Ask Mubashar — floating pill button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-2.5 rounded-full bg-[#0a0f2e] py-2 pl-2 pr-4 text-white shadow-lg"
+        className="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-2.5 rounded-full bg-neutral-900 py-2 pl-2 pr-4 text-white shadow-lg"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
         aria-label={isOpen ? "Close chat" : "Ask Mubashar"}
@@ -125,7 +125,7 @@ export default function ChatWidget() {
           </span>
         ) : (
           <>
-            <span className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border-2 border-[#3eb489]">
+            <span className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border-2 border-white/30">
               <Image
                 src="/images/mubashar-sharif.jpg"
                 alt="Mubashar Sharif"
@@ -169,11 +169,11 @@ export default function ChatWidget() {
             }}
           >
             {/* Header */}
-            <div className="flex-shrink-0 bg-[#0a0f2e] px-4 py-4">
+            <div className="flex-shrink-0 bg-neutral-900 px-4 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <div className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-[#3eb489]">
+                    <div className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-white/30">
                       <Image
                         src="/images/mubashar-sharif.jpg"
                         alt="Mubashar Sharif"
@@ -182,7 +182,7 @@ export default function ChatWidget() {
                         className="object-cover"
                       />
                     </div>
-                    <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-[#0a0f2e] bg-green-500" />
+                    <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-neutral-900 bg-green-500" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">Mubashar Sharif</p>
@@ -200,7 +200,7 @@ export default function ChatWidget() {
             </div>
  
             {/* Messages — flex-1 so it fills available space */}
-            <div className="flex-1 overflow-y-auto bg-[#f7f8fc] p-4" style={{ minHeight: "180px" }}>
+            <div className="flex-1 overflow-y-auto bg-slate-50 p-4" style={{ minHeight: "180px" }}>
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
@@ -210,8 +210,8 @@ export default function ChatWidget() {
                     <div
                       className={`max-w-[82%] rounded-2xl px-4 py-2.5 ${
                         message.isBot
-                          ? "bg-white text-[#374151] shadow-sm"
-                          : "bg-[#534AB7] text-white"
+                          ? "bg-white text-[#374151] shadow-sm border border-slate-200"
+                          : "bg-neutral-900 text-white"
                       }`}
                     >
                       <p className="whitespace-pre-line text-sm leading-relaxed">{message.text}</p>
@@ -224,7 +224,7 @@ export default function ChatWidget() {
  
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="rounded-2xl bg-white px-4 py-3 shadow-sm">
+                    <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-slate-200">
                       <div className="flex gap-1">
                         <span className="h-2 w-2 animate-bounce rounded-full bg-[#94a3b8]" />
                         <span className="h-2 w-2 animate-bounce rounded-full bg-[#94a3b8] [animation-delay:0.2s]" />
@@ -238,13 +238,13 @@ export default function ChatWidget() {
             </div>
  
             {/* Quick Replies */}
-            <div className="flex-shrink-0 border-t border-[#e5e7eb] bg-white px-4 py-2">
+            <div className="flex-shrink-0 border-t border-slate-200 bg-white px-4 py-2">
               <div className="flex flex-wrap gap-2">
                 {quickReplies.map((reply) => (
                   <button
                     key={reply}
                     onClick={() => handleSend(reply)}
-                    className="rounded-full border border-[#e5e7eb] px-3 py-1 text-xs font-medium text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                    className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-[#374151] transition-colors hover:border-neutral-900 hover:text-neutral-950"
                   >
                     {reply}
                   </button>
@@ -253,10 +253,10 @@ export default function ChatWidget() {
             </div>
  
             {/* Privacy Note */}
-            <div className="flex-shrink-0 border-t border-[#e5e7eb] bg-white px-4 pt-3">
+            <div className="flex-shrink-0 border-t border-slate-200 bg-white px-4 pt-3">
               <p className="text-[11px] leading-snug text-[#94a3b8]">
                 This chat may be recorded for quality assurance.{" "}
-                <Link href="/privacy" className="underline hover:text-[#534AB7]">
+                <Link href="/privacy" className="underline hover:text-neutral-950">
                   View our privacy policy.
                 </Link>
               </p>
@@ -273,19 +273,19 @@ export default function ChatWidget() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 rounded-full border border-[#e5e7eb] px-4 py-2 text-sm text-[#374151] outline-none focus:border-[#534AB7]"
+                  className="flex-1 rounded-full border border-slate-200 px-4 py-2 text-sm text-[#374151] outline-none focus:border-neutral-900"
                 />
                 <button
                   type="submit"
                   disabled={!inputValue.trim()}
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#534AB7] text-white transition-colors hover:bg-[#3C3489] disabled:opacity-50"
+                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white transition-colors hover:bg-neutral-800 disabled:opacity-50"
                 >
                   <Send className="h-4 w-4" />
                 </button>
               </form>
               <a
                 href="tel:+923059158010"
-                className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-[#f7f8fc] py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-[#e5e7eb]"
+                className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-slate-50 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-slate-200"
               >
                 <Phone className="h-4 w-4" />
                 Or call us: +92 305 9158010

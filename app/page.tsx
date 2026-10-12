@@ -571,7 +571,7 @@ export default function Home() {
                 <a
                   href="#get-started"
                   className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
-                    p.featured ? "bg-[#1a7d59] text-white hover:bg-[#196b4d]" : "border border-slate-300 text-neutral-950 hover:border-neutral-900"
+                    p.featured ? "bg-neutral-900 text-white hover:bg-neutral-800" : "border border-slate-300 text-neutral-950 hover:border-neutral-900"
                   }`}
                 >
                   Start with the free tear-down

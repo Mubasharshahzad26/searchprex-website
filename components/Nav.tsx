@@ -168,19 +168,19 @@ export default function Nav() {
   // Dedicated conversion page: minimal header with no exit-leak dropdowns or duplicate CTA
   if (pathname === "/free-audit") {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#e5e7eb]/80 bg-white/95 backdrop-blur-md">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6">
           <Link href="/" className="inline-flex flex-shrink-0 items-center" aria-label="Searchprex Home">
             <Logo size="md" variant="dark" />
           </Link>
           <div className="flex items-center gap-4 sm:gap-6">
-            <span className="hidden items-center gap-2 rounded-full border border-[#1a7d59]/20 bg-[#1a7d59]/5 px-3.5 py-1.5 text-xs font-semibold text-[#196b4d] sm:inline-flex">
-              <span className="h-2 w-2 rounded-full bg-[#1a7d59]" aria-hidden="true" />
+            <span className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-xs font-semibold text-neutral-900 sm:inline-flex">
+              <span className="h-2 w-2 rounded-full bg-neutral-900" aria-hidden="true" />
               Founder-reviewed in 24 hours
             </span>
             <Link
               href="/"
-              className="text-xs font-semibold text-[#566070] transition-colors hover:text-[#0a0f2e] sm:text-sm"
+              className="text-xs font-semibold text-slate-600 transition-colors hover:text-neutral-950 sm:text-sm"
             >
               ← Back to site
             </Link>
@@ -246,27 +246,6 @@ export default function Nav() {
                     )}
  
                     {link.hasDropdown && (
-                      // Wrapper sits flush against the trigger (top-full, no margin) and uses
-                      // padding — not margin — for the visual gap, so the hoverable area is
-                      // continuous and the dropdown no longer closes before you reach it.
-                      //
-                      // Rendered unconditionally. This was `isOpen && (...)`, which mounted
-                      // the items only while hovered — so the served HTML contained not one
-                      // dropdown link, and every category, location and tool URL in these
-                      // menus was unlinked as far as a crawler was concerned. The footer
-                      // carries deliberate duplicates of the important ones for exactly
-                      // that reason.
-                      //
-                      // `invisible` (visibility:hidden) rather than `hidden`
-                      // (display:none): the anchors stay in the DOM for crawlers, while
-                      // visibility removes them from the tab order and the accessibility
-                      // tree while closed. It is inside the transition so it flips at the
-                      // END of the fade-out instead of snapping away mid-animation.
-                      //
-                      // framer-motion is dropped from this element deliberately: with no
-                      // AnimatePresence wrapper around it, its `exit` prop never fired, so
-                      // the old exit animation was already dead code. A CSS transition does
-                      // the same job and can animate visibility, which motion cannot.
                       <div
                         className={`absolute left-0 top-full z-50 ${link.dropdownItems?.some((i) => i.sub) ? "w-72" : "w-56"} pt-2 transition-all duration-150 ${
                           isOpen
@@ -282,7 +261,7 @@ export default function Nav() {
                               <>
                                 <span>{item.label}</span>
                                 {item.badge && (
-                                  <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                                  <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
                                     {item.badge}
                                   </span>
                                 )}
@@ -329,21 +308,11 @@ export default function Nav() {
             {/* Desktop right */}
             <div className="hidden items-center gap-2 lg:flex">
  
-              {/* Get My Growth Plan — primary CTA (CRO-optimized) */}
+              {/* Get My Free Audit — primary CTA */}
               <Link
                 href="/free-audit"
-                className="relative flex items-center gap-2 overflow-hidden rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-neutral-800 hover:-translate-y-px"
+                className="flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all hover:bg-neutral-800 hover:-translate-y-px"
               >
-                <span
-                  className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-emerald-400"
-                  style={{ animation: "sp-pulse 2s ease-in-out infinite" }}
-                />
-                <style>{`
-                  @keyframes sp-pulse {
-                    0%,100% { opacity:.7; transform:scale(1);   }
-                    50%     { opacity:1; transform:scale(1.35); }
-                  }
-                `}</style>
                 Get My Free Audit
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
                   <path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -398,7 +367,7 @@ export default function Nav() {
                             <>
                               {item.label}
                               {item.badge && (
-                                <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                                <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
                                   {item.badge}
                                 </span>
                               )}
@@ -442,7 +411,7 @@ export default function Nav() {
                   <Link
                     href="/free-audit"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="rounded-lg bg-neutral-900 px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-neutral-800"
+                    className="rounded-xl bg-neutral-900 px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-neutral-800"
                   >
                     Get My Free Audit →
                   </Link>

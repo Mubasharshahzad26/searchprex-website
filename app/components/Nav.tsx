@@ -106,7 +106,7 @@ export default function Nav() {
                 >
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-[#534AB7]"
+                    className="flex items-center gap-1 text-sm font-medium text-[#374151] transition-colors hover:text-neutral-950"
                   >
                     {link.label}
                     {link.hasDropdown && <ChevronDown className="h-3 w-3" />}
@@ -117,17 +117,17 @@ export default function Nav() {
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
-                      className="absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border border-[#e5e7eb] bg-white p-2 shadow-xl"
+                      className="absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-xl"
                     >
                       {link.dropdownItems?.map((item) => (
                         <Link
                           key={item.label}
                           href={item.href}
-                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
+                          className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
                         >
                           <span>{item.label}</span>
                           {item.badge && (
-                            <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                            <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
                               {item.badge}
                             </span>
                           )}
@@ -144,7 +144,7 @@ export default function Nav() {
  
               <Link
                 href="/login"
-                className="rounded-lg px-4 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
               >
                 Log in
               </Link>
@@ -154,7 +154,7 @@ export default function Nav() {
                 href="https://nicheseopro.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-lg border border-[#534AB7]/40 px-4 py-2 text-sm font-semibold text-[#534AB7] transition-all hover:border-[#534AB7] hover:bg-[#EEEDFE]"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-neutral-950 transition-all hover:border-neutral-900 hover:bg-slate-50"
               >
                 Try NicheSEO Pro
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
@@ -165,18 +165,8 @@ export default function Nav() {
               {/* Get Free Audit — primary */}
               <Link
                 href="/free-audit"
-                className="relative flex items-center gap-2 overflow-hidden rounded-lg bg-[#534AB7] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#3C3489] hover:shadow-[0_0_28px_rgba(83,74,183,0.5)] hover:-translate-y-px"
+                className="flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all hover:bg-neutral-800 hover:-translate-y-px"
               >
-                <span
-                  className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-[#22d3ee]"
-                  style={{ animation: "sp-pulse 2s ease-in-out infinite" }}
-                />
-                <style>{`
-                  @keyframes sp-pulse {
-                    0%,100% { opacity:.7; transform:scale(1);   }
-                    50%     { opacity:1; transform:scale(1.35); }
-                  }
-                `}</style>
                 Get Free Audit
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
                   <path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -187,7 +177,7 @@ export default function Nav() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="rounded-lg p-2 text-[#374151] transition-colors hover:bg-[#f7f8fc] lg:hidden"
+              className="rounded-lg p-2 text-[#374151] transition-colors hover:bg-slate-50 lg:hidden"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen
@@ -212,22 +202,22 @@ export default function Nav() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-[#f7f8fc] hover:text-[#534AB7]"
+                      className="block rounded-lg px-3 py-2.5 text-base font-medium text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
                     >
                       {link.label}
                     </Link>
                     {link.hasDropdown && (
-                      <div className="ml-4 mt-1 space-y-1 border-l border-[#e5e7eb] pl-3">
+                      <div className="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3">
                         {link.dropdownItems?.map((item) => (
                           <Link
                             key={item.label}
                             href={item.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="flex items-center gap-2 py-1.5 text-sm text-[#64748b] hover:text-[#534AB7]"
+                            className="flex items-center gap-2 py-1.5 text-sm text-slate-600 hover:text-neutral-950"
                           >
                             {item.label}
                             {item.badge && (
-                              <span className="rounded-full bg-[#3eb489]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2f9670]">
+                              <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
                                 {item.badge}
                               </span>
                             )}
@@ -239,12 +229,12 @@ export default function Nav() {
                 ))}
  
                 {/* Mobile: auth + CTA */}
-                <div className="mt-4 flex flex-col gap-3 border-t border-[#e5e7eb] pt-4">
+                <div className="mt-4 flex flex-col gap-3 border-t border-slate-200 pt-4">
  
                   <Link
                     href="/login"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="rounded-lg border border-[#534AB7]/40 py-2.5 text-center text-sm font-semibold text-[#534AB7] transition-colors hover:bg-[#EEEDFE]"
+                    className="rounded-lg border border-slate-300 py-2.5 text-center text-sm font-semibold text-neutral-950 transition-colors hover:bg-slate-50"
                   >
                     Log in
                   </Link>
@@ -255,7 +245,7 @@ export default function Nav() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg border border-[#534AB7] py-2.5 text-center text-sm font-semibold text-[#534AB7] transition-colors hover:bg-[#EEEDFE]"
+                    className="flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 py-2.5 text-center text-sm font-semibold text-neutral-950 transition-colors hover:bg-slate-50"
                   >
                     Try NicheSEO Pro
                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
@@ -266,7 +256,7 @@ export default function Nav() {
                   <Link
                     href="/free-audit"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="rounded-lg bg-[#534AB7] px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-[#3C3489]"
+                    className="rounded-xl bg-neutral-900 px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-neutral-800"
                   >
                     Get Free Audit →
                   </Link>

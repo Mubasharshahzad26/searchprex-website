@@ -246,8 +246,7 @@ export default function Footer() {
             </p>
             <Link
               href="/free-audit"
-              className="inline-block rounded-lg px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all"
-              style={{ background: GREEN }}
+              className="inline-block rounded-xl bg-white px-6 py-3 text-sm font-bold uppercase tracking-widest text-neutral-950 transition-all hover:bg-slate-100"
             >
               Free SEO Audit
             </Link>
