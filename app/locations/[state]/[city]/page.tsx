@@ -114,7 +114,7 @@ export async function generateMetadata({
   return {
     title: page.metaTitle,
     description: page.metaDescription,
-    ...(indexable ? {} : { robots: { index: false, follow: true } }),
+    robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
     alternates: { canonical: url },
     openGraph: {
       title: page.metaTitle,

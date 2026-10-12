@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   return {
     title: city.metaTitle,
     description: city.metaDescription,
-    ...(indexable ? {} : { robots: { index: false, follow: true } }),
+    robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
     alternates: { canonical: url },
     openGraph: { title: city.metaTitle, description: city.metaDescription, url, type: "website" },
   };
