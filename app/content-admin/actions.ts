@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { notifySubscribersOfNewPost } from "@/lib/newsletter";
+import { marketingPostUrl, submitToIndexNow } from "@/lib/indexnow";
 
 /**
  * Every action below is admin-only, and the middleware is NOT enough on its own.
@@ -62,6 +63,7 @@ export async function createMarketingBlog(data: any) {
       published: blog.published,
     });
   }
+  if (blog.published) await submitToIndexNow([marketingPostUrl(blog)]);
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
   return blog;
@@ -86,6 +88,12 @@ export async function updateMarketingBlog(id: string, data: any) {
       coverImage: blog.coverImage,
       published: blog.published,
     });
+  }
+  //  A changed slug leaves the old URL behind; Bing should recrawl both.
+  if (blog.published) {
+    const urls = [marketingPostUrl(blog)];
+    if (existing && existing.slug !== blog.slug) urls.push(marketingPostUrl(existing));
+    await submitToIndexNow(urls);
   }
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");

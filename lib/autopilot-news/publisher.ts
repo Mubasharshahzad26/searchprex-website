@@ -10,6 +10,7 @@ import { revalidatePath } from "next/cache";
 import type { GeneratedNewsArticle } from "./generator";
 import { checkArticleQuality, type QualityCheck } from "./quality";
 import { sanitizeSlug } from "./config";
+import { submitToIndexNow } from "@/lib/indexnow";
 
 const SITE = "https://www.searchprex.com";
 
@@ -174,6 +175,7 @@ export async function saveNewsArticle(
     revalidatePath("/content-admin/news");
     revalidatePath("/content-admin/blogs");
     revalidatePath("/news-sitemap.xml");
+    if (opts.publishLive) await submitToIndexNow([liveUrl]);
 
     return {
       success: true,

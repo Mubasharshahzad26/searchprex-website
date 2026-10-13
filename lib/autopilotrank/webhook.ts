@@ -3,6 +3,7 @@ import { db } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { notifySubscribersOfNewPost } from '@/lib/newsletter';
+import { marketingPostUrl, submitToIndexNow } from '@/lib/indexnow';
 
 export interface WebhookResult {
   ok: boolean;
@@ -334,6 +335,7 @@ export async function handleAutopilotRankWebhook(
       '/sitemap.xml',
       '/content-admin/blogs',
     ]);
+    if (blogPost.published) await submitToIndexNow([marketingPostUrl(blogPost)]);
 
     return {
       ok: true,
@@ -509,6 +511,12 @@ export async function handleAutopilotRankWebhook(
       '/sitemap.xml',
       '/content-admin/blogs',
     ]);
+    if (updatedBlog.published) {
+      await submitToIndexNow([
+        marketingPostUrl(updatedBlog),
+        ...(targetPost.slug !== updatedBlog.slug ? [marketingPostUrl(targetPost)] : []),
+      ]);
+    }
 
     return {
       ok: true,
