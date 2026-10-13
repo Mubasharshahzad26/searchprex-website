@@ -820,7 +820,10 @@ export default function NewsClient({
       };
     });
 
-    return [...spokeItems, ...feedItems];
+    //  A story with its own analysis article appeared twice — the analysis and
+    //  the source item. Keep the analysis; it links its sources.
+    const spokeTitles = new Set(spokeItems.map((i: any) => String(i.title).trim().toLowerCase()));
+    return [...spokeItems, ...feedItems.filter((i: any) => !spokeTitles.has(String(i.title).trim().toLowerCase()))];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSpokes, initialNews, likesMap, commentsCountMap]);
 
@@ -879,7 +882,23 @@ export default function NewsClient({
     () => allFeedItems.filter((i) => i.engagement > 0).sort((a, b) => b.engagement - a.engagement).slice(0, 5),
     [allFeedItems]
   );
-  const latestDateLabel = recentItems[0] ? formatDate(recentItems[0].rawDate) : "—";
+  //  Category pages (?category=Local, or a tab click) show that category in
+  //  every section, not only the feed. The algorithm tracker, the Search
+  //  Console tracker and all topic guides used to repeat on every category.
+  const categoryItems = useMemo(
+    () =>
+      allFeedItems
+        .filter((i) => matchesCategory(i.category, selectedCategory))
+        .sort((a, b) => timeOf(b.rawDate) - timeOf(a.rawDate)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [allFeedItems, selectedCategory]
+  );
+  const categoryLabel = CATEGORY_TABS.find((t) => t.id === selectedCategory)?.label ?? "All News";
+  const showAlgorithmContext = selectedCategory === "all" || selectedCategory === "core" || selectedCategory === "spam";
+  const showGscContext = selectedCategory === "all" || selectedCategory === "gsc";
+  const guidesForCategory =
+    selectedCategory === "all" ? TOPIC_GUIDES : TOPIC_GUIDES.filter((g) => matchesCategory(g.category, selectedCategory));
+  const latestDateLabel = categoryItems[0] ? formatDate(categoryItems[0].rawDate) : "—";
 
   const isFiltered = Boolean(
     searchQuery.trim() ||
@@ -913,7 +932,7 @@ export default function NewsClient({
 
   const twoDaysAgo = new Date();
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-  const hasRecent48Hours = initialNews.some((n: any) => new Date(n.newsDate) >= twoDaysAgo);
+  const hasRecent48Hours = categoryItems.some((i) => new Date(i.rawDate) >= twoDaysAgo);
 
   // ── Algorithm tracker (type filter + duration bars) ──
   const trackerRows = useMemo(() => {
@@ -1085,20 +1104,6 @@ export default function NewsClient({
       body: "14-day global rollout completed October 8. Search Console manual action alerts observed for “Scaled Content Abuse” and “Pure Spam”.",
       label: "Rollout status",
       value: "Concluded (14 days)",
-    },
-    {
-      icon: TrendingUp,
-      title: "Search Console split",
-      body: "Search Console has divided Web search types into text-based and multimodal filtering, providing granular queries across visual and AI interfaces.",
-      label: "Reporting mode",
-      value: "Multimodal active",
-    },
-    {
-      icon: Sparkles,
-      title: "AI Overviews & UCP",
-      body: "Expanded AI Overviews reporting in GSC tracks generative impressions, alongside Merchant Center Universal Commerce Protocol checkouts.",
-      label: "Commerce & AI",
-      value: "UCP integration",
     },
   ];
 
@@ -1445,9 +1450,14 @@ export default function NewsClient({
           {/* Real, derived stats (no invented numbers) */}
           <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 overflow-hidden rounded-xl border border-[#e2e5eb] sm:grid-cols-4">
             {[
-              { value: <CountUp value={allFeedItems.length} />, label: "Updates tracked" },
-              { value: <CountUp value={ALGORITHM_UPDATES_TRACKER.length} />, label: "Confirmed updates in 2026" },
-              { value: <CountUp value={TOPIC_GUIDES.length} />, label: "Topic guides" },
+              {
+                value: <CountUp value={categoryItems.length} />,
+                label: selectedCategory === "all" ? "Updates tracked" : `${categoryLabel} updates`,
+              },
+              showAlgorithmContext
+                ? { value: <CountUp value={ALGORITHM_UPDATES_TRACKER.length} />, label: "Confirmed updates in 2026" }
+                : { value: <CountUp value={categoryItems.filter((i) => i.isSpoke).length} />, label: "Analyses" },
+              { value: <CountUp value={guidesForCategory.length} />, label: "Topic guides" },
               { value: latestDateLabel, label: "Last update logged" },
             ].map((s, i) => (
               <div
@@ -1495,11 +1505,16 @@ export default function NewsClient({
               </div>
             </div>
 
-            <h2 className="mb-3 text-2xl font-bold tracking-tight text-[#171a22] sm:text-3xl">SEO News Past 2 Days</h2>
+            <h2 className="mb-3 text-2xl font-bold tracking-tight text-[#171a22] sm:text-3xl">
+              {selectedCategory === "all" ? "SEO News Past 2 Days" : `Latest ${categoryLabel} News`}
+            </h2>
             <p className="mb-7 max-w-3xl text-base leading-relaxed text-[#424754]">
-              Google officially concluded its September 2026 Spam Update on October 8 after a 14-day global rollout. Recent confirmed changes also include expanded Google Search Console reporting for AI Overviews and multimodal search types, alongside Search Central guidance enforcing element-level human verification for AI metadata.
+              {showAlgorithmContext
+                ? "Google concluded its September 2026 Spam Update on October 8 after a 14-day global rollout."
+                : `The latest ${categoryLabel} entries, newest first — each dated and linked to its source or analysis.`}
             </p>
 
+            {showAlgorithmContext && (
             <motion.div
               variants={stagger}
               initial="hidden"
@@ -1528,13 +1543,14 @@ export default function NewsClient({
                 </motion.div>
               ))}
             </motion.div>
+            )}
 
             {/* Latest dated entries (dynamic) */}
-            {recentItems.length > 0 && (
+            {categoryItems.length > 0 && (
               <div className="mb-7 rounded-xl border border-[#e2e5eb]">
                 <p className="border-b border-[#f0f2f5] px-4 py-2.5 text-xs font-semibold text-[#424754]">Most recent entries</p>
                 <ul className="divide-y divide-[#f0f2f5]">
-                  {recentItems.slice(0, 3).map((item) => (
+                  {categoryItems.slice(0, showAlgorithmContext ? 3 : 6).map((item) => (
                     <li key={item.id}>
                       {item.isSpoke ? (
                         <Link href={item.href} className="group flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[#f7f8fa]">
@@ -1555,6 +1571,7 @@ export default function NewsClient({
               </div>
             )}
 
+            {showAlgorithmContext && (
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#f0f2f5] pt-5">
               <Link
                 href="/resources/news/google-september-2026-spam-update"
@@ -1587,6 +1604,7 @@ export default function NewsClient({
                 )}
               </div>
             </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -1999,6 +2017,7 @@ export default function NewsClient({
       </section>
 
       {/* ── GOOGLE ALGORITHM UPDATE TRACKER ── */}
+      {showAlgorithmContext && (
       <section className="border-y border-[#e2e5eb] bg-[#f7f8fa] py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
@@ -2085,7 +2104,10 @@ export default function NewsClient({
         </div>
       </section>
 
+      )}
+
       {/* ── SEARCH CONSOLE NEWS & KNOWN ISSUES TRACKER ── */}
+      {showGscContext && (
       <section className="border-b border-[#e2e5eb] bg-white py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
@@ -2124,7 +2146,10 @@ export default function NewsClient({
         </div>
       </section>
 
+      )}
+
       {/* ── TOPIC GUIDES (PILLAR PAGES) ── */}
+      {guidesForCategory.length > 0 && (
       <section id="topic-guides" className="scroll-mt-24 border-b border-[#e2e5eb] bg-[#f7f8fa] py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
@@ -2141,7 +2166,7 @@ export default function NewsClient({
             viewport={{ once: true, margin: "-60px" }}
             className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
           >
-            {TOPIC_GUIDES.map((guide, idx) => (
+            {guidesForCategory.map((guide, idx) => (
               <motion.div
                 key={guide.slug}
                 variants={fadeUp}
@@ -2176,6 +2201,8 @@ export default function NewsClient({
           </motion.div>
         </div>
       </section>
+
+      )}
 
       {/* ── FAQ ── */}
       <section className="border-b border-[#e2e5eb] bg-white py-14">
