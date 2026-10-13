@@ -14,6 +14,7 @@ import {
   Lock,
 } from "lucide-react";
 import DentonPainBanner from "./DentonPainBanner";
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
 export default function DentonFaqAndCta() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -64,13 +65,20 @@ export default function DentonFaqAndCta() {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setIsSubmitted(true);
-    }, 600);
+    const ok = await submitLead({
+      email,
+      name,
+      website,
+      business: practiceArea,
+      message: startPreference ? `Start preference: ${startPreference}` : undefined,
+      source: 'denton:faq-cta-form',
+    });
+    setSubmitting(false);
+    if (ok) setIsSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
 
   const toggleFaq = (idx: number) => {

@@ -27,6 +27,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
 export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
   const [practice, setPractice] = useState("Personal injury");
@@ -46,10 +47,19 @@ export default function DetroitGrowthPlanForm({ page }: { page: CityPage }) {
     "Other",
   ];
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!formData.website || !formData.email) return;
-    setSubmitted(true);
+    const ok = await submitLead({
+      email: formData.email,
+      name: formData.name,
+      website: formData.website,
+      phone: formData.phone,
+      business: practice,
+      source: 'detroit:growth-plan-form',
+    });
+    if (ok) setSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   }
 
   return (

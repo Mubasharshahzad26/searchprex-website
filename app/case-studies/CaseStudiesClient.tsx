@@ -24,6 +24,7 @@ import { ArrowUpRight, ArrowRight, TrendingUp, Filter, Sparkles, CheckCircle2, S
 import type { CaseStudy, SeoType, Metric } from "./data";
 import { caseStudies, detailUrl } from "./data";
 import { posts as fallbackBlogPosts } from "@/app/blog/data";
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
 // ─────────────────────────────────────────────────────────────
 // SEMRUSH LG-STYLE SPIKE FIELD
@@ -190,11 +191,18 @@ export default function CaseStudiesClient({
     return [mso, dolls, remit || smk].filter(Boolean) as CaseStudy[];
   }, [allCaseStudies]);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.website && formData.email) {
-      setFormSubmitted(true);
-    }
+    if (!formData.website || !formData.email) return;
+    const ok = await submitLead({
+      email: formData.email,
+      name: formData.name,
+      website: formData.website,
+      business: formData.service,
+      source: 'case-studies:hub-form',
+    });
+    if (ok) setFormSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
 
   return (

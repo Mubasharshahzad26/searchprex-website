@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Sparkles, CheckCircle2, ArrowRight, ShieldCheck, AlertCircle, Building2, Search } from 'lucide-react';
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
 export default function PlanoDiagnosisTool() {
   const [website, setWebsite] = useState('');
@@ -10,13 +11,13 @@ export default function PlanoDiagnosisTool() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 900);
+    const ok = await submitLead({ email, website, business: practice, source: 'plano:diagnosis-tool' });
+    setIsSubmitting(false);
+    if (ok) setIsSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
 
   return (

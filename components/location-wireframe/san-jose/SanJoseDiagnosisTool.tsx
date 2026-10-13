@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Calculator, ArrowRight } from 'lucide-react';
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
 export default function SanJoseDiagnosisTool() {
   const [practice, setPractice] = useState('employment');
@@ -19,10 +20,18 @@ export default function SanJoseDiagnosisTool() {
 
   const currentMetric = metrics[practice] || metrics.employment;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!websiteUrl || !email) return;
-    setSubmitted(true);
+    const ok = await submitLead({
+      email,
+      website: websiteUrl,
+      business: practice,
+      message: `Target radius: ${targetRadius}`,
+      source: 'san-jose:diagnosis-tool',
+    });
+    if (ok) setSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
 
   return (

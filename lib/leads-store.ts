@@ -251,14 +251,38 @@ export async function storeLead(lead: Lead, supabaseTable = "audit_requests"): P
 /** Trim every string field and fall back to the request's referer for source. */
 export function normaliseLead(input: Record<string, unknown>, fallbackSource: string): Lead {
   const str = (v: unknown) => String(v ?? "").trim();
+  //  Forms name the same field differently — the Detroit hero sends `url`,
+  //  `practiceArea` and `notes` — and anything not named exactly used to be
+  //  dropped, so the sheet got an email with no website or practice. Accept the
+  //  common names, and keep every other short field in the message.
+  const pick = (...keys: string[]) => keys.map((k) => str(input[k])).find(Boolean) || "";
+  const known = new Set([
+    "email", "name", "fullName", "website", "url", "websiteUrl", "site", "domain",
+    "phone", "tel", "business", "industry", "practice", "practiceArea", "practiceAreas",
+    "message", "notes", "source", "utmSource", "utmCampaign", "referrer",
+    "turnstileToken", "captchaToken", "token",
+  ]);
+  const extras = Object.entries(input)
+    .filter(([k, v]) => !known.has(k) && v !== null && v !== undefined && v !== "")
+    .map(([k, v]) => {
+      if (Array.isArray(v)) {
+        const items = v.filter((x) => ["string", "number", "boolean"].includes(typeof x));
+        return items.length ? `${k}: ${items.join(", ")}` : "";
+      }
+      return ["string", "number", "boolean"].includes(typeof v) ? `${k}: ${String(v).trim().slice(0, 300)}` : "";
+    })
+    .filter(Boolean)
+    .slice(0, 20);
+  const practices = Array.isArray(input.practiceAreas) ? (input.practiceAreas as unknown[]).map(str).filter(Boolean).join(", ") : "";
   return {
     email: str(input.email),
-    name: str(input.name),
-    website: str(input.website),
-    phone: str(input.phone),
-    // /api/leads callers send `industry`; /api/send-audit sends `business`.
-    business: str(input.business) || str(input.industry),
-    message: str(input.message),
+    name: pick("name", "fullName"),
+    website: pick("website", "url", "websiteUrl", "site", "domain"),
+    phone: pick("phone", "tel"),
+    // /api/leads callers send `industry`; /api/send-audit sends `business`;
+    // law-firm forms send `practice` or `practiceArea`.
+    business: pick("business", "industry", "practice", "practiceArea") || practices,
+    message: [pick("message", "notes"), extras.join(" · ")].filter(Boolean).join("\n").slice(0, 3000),
     source: str(input.source) || fallbackSource,
     utmSource: str(input.utmSource),
     utmCampaign: str(input.utmCampaign),

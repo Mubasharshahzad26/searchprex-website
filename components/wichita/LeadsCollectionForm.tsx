@@ -1,6 +1,7 @@
 "use client";
  
 import { useState } from "react";
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
  
 // ── Brand ────────────────────────────────────────────────────────────────────
 const NAVY   = "#0a0f2e";
@@ -181,9 +182,24 @@ export default function LeadsCollectionForm() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
+    const ok = await submitLead({
+      email: contact.email,
+      name: contact.name,
+      phone: contact.phone,
+      business: practices.join(', '),
+      message: [
+        contact.firm && `Firm: ${contact.firm}`,
+        contact.city && `City: ${contact.city}`,
+        revenue && `Revenue: ${revenue}`,
+        services.length && `Services: ${services.join(', ')}`,
+      ]
+        .filter(Boolean)
+        .join(' · '),
+      source: 'wichita:leads-collection-form',
+    });
     setLoading(false);
-    setDone(true);
+    if (ok) setDone(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
  
   const canNext1 = practices.length > 0;

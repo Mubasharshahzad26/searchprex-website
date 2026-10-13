@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 import {
   Search,
   Loader2,
@@ -115,13 +116,20 @@ export default function WoodlandsDiagnosisTool() {
     }
   };
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingLead(true);
-    setTimeout(() => {
-      setIsSubmittingLead(false);
-      setLeadSubmitted(true);
-    }, 1000);
+    const ok = await submitLead({
+      email: leadEmail,
+      website: leadUrl,
+      phone: leadPhone,
+      business: leadPractice,
+      message: query ? `Diagnosis question: ${query}` : undefined,
+      source: 'the-woodlands:diagnosis-lead-form',
+    });
+    setIsSubmittingLead(false);
+    if (ok) setLeadSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
 
   return (

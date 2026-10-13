@@ -2,6 +2,7 @@
  
 import { trackLead } from "@/lib/track";
 import { useState, useEffect, useRef } from "react";
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 import {
   Scale, Search, Bot, MapPin, FileText, ArrowRight,
   CheckCircle2, AlertTriangle, XCircle, Sparkles, Gauge, RefreshCw, Mail,
@@ -314,7 +315,7 @@ function Results({ data, form, onReset }: { data: Scorecard; form: FormState; on
  
           {sent ? (
             <div style={{ marginTop: 16, display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 14px", borderRadius: 11, background: "rgba(62,180,137,0.18)", border: `1px solid ${GREEN}`, fontSize: "clamp(12px, 3vw, 14px)", fontWeight: 700, flexWrap: "wrap" }}>
-              <CheckCircle2 size={16} color={GREEN} /> Done — your report is on its way to {email}.
+              <CheckCircle2 size={16} color={GREEN} /> Thanks — your request is in. We&apos;ll be in touch at {email}.
             </div>
           ) : (
             <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: "clamp(10px, 3vw, 12px)", width: "100%" }}>
@@ -328,7 +329,18 @@ function Results({ data, form, onReset }: { data: Scorecard; form: FormState; on
                 </div>
                 <button
                   className="lfs-btn"
-                  onClick={() => { if (email.includes("@")) setSent(true); }}
+                  onClick={async () => {
+                    if (!email.includes("@")) return;
+                    const ok = await submitLead({
+                      email,
+                      website: form.website,
+                      business: form.practiceArea,
+                      message: `Scorecard ${overall}/100 · City: ${form.city}`,
+                      source: 'law-firm-scorecard:report-request',
+                    });
+                    if (ok) setSent(true);
+                    else window.alert(LEAD_FAILED_MESSAGE);
+                  }}
                   style={{ flexShrink: 0, padding: "11px 18px", borderRadius: 10, border: "none", cursor: "pointer", background: GREEN, color: "#fff", fontSize: "clamp(12px, 3vw, 14.5px)", fontWeight: 800, display: "inline-flex", alignItems: "center", gap: 6, whiteSpace: "nowrap" }}
                 >
                   Email report <ArrowRight size={14} />

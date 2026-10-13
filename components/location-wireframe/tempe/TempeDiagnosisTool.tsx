@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Calculator, ArrowRight, ShieldCheck, Check } from 'lucide-react';
+import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
 export default function TempeDiagnosisTool() {
   const [practice, setPractice] = useState('dui');
@@ -20,10 +21,18 @@ export default function TempeDiagnosisTool() {
 
   const currentMetric = metrics[practice] || metrics.dui;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!websiteUrl || !email) return;
-    setSubmitted(true);
+    const ok = await submitLead({
+      email,
+      website: websiteUrl,
+      business: practice,
+      message: `Target radius: ${targetRadius}`,
+      source: 'tempe:diagnosis-tool',
+    });
+    if (ok) setSubmitted(true);
+    else window.alert(LEAD_FAILED_MESSAGE);
   };
 
   return (
