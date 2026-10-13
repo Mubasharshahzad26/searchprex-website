@@ -100,7 +100,53 @@ const CITY_CUSTOM_CARDS: Record<
     statuteHook: "I-20 Cross-Border Freight Collisions, Haynesville Shale & Barksdale Military",
     corridorHook: "Texas Street Courthouse District, Line Avenue & Bossier City 3-Pack",
   },
+  wichita: {
+    courtFocus: "18th Judicial District (Sedgwick County) & Wichita Municipal Court",
+    statuteHook: "K.S.A. 60-258a 50% Comparative Fault, McConnell AFB & Kellogg/I-135 Crash SEO",
+    corridorHook: "Downtown Sedgwick Courthouse, Old Town, College Hill & Delano Map Pack",
+  },
+  "kansas-city": {
+    courtFocus: "Wyandotte County 29th Judicial District & Municipal Courts",
+    statuteHook: "K.S.A. 60-258a Fault Threshold vs MO & K.S.A. 23-2703 Cross-Border Residency",
+    corridorHook: "Strawberry Hill, Rosedale, Village West & State Line Road Corridor",
+  },
+  "overland-park": {
+    courtFocus: "Johnson County 10th Judicial District Court (Olathe Courthouse)",
+    statuteHook: "High-Asset Executive Divorce, Business Litigation & US-69/I-435 Crash Intent",
+    corridorHook: "Corporate Woods, Blue Valley, College Blvd & Leawood Border Map Pack",
+  },
+  topeka: {
+    courtFocus: "3rd Judicial District (Shawnee County) & Kansas Supreme Court / Appellate",
+    statuteHook: "State Agency Administrative Law, K.S.A. 23-2708 Divorce & I-70 Injury Claims",
+    corridorHook: "State Capitol Legal District, Potwin, College Hill & Wakarusa Corridor",
+  },
+  lawrence: {
+    courtFocus: "Douglas County 7th Judicial District & Lawrence Municipal Court",
+    statuteHook: "KU Campus Title IX/Defense, Landlord-Tenant & K.S.A. 60-513 2-Year Injury Rule",
+    corridorHook: "Massachusetts St, Old West Lawrence, Oread & Iowa Street 3-Pack",
+  },
+  shawnee: {
+    courtFocus: "Johnson County 10th District (Olathe) & Shawnee Municipal Court",
+    statuteHook: "Johnson vs Shawnee County Jurisdiction & Western JoCo Suburban Family Law",
+    corridorHook: "Downtown Shawnee, Mill Valley, Clear Creek & K-7 Corridor Map Pack",
+  },
+  lenexa: {
+    courtFocus: "Johnson County 10th District (Olathe) & Lenexa Municipal Court",
+    statuteHook: "Lenexa City Center Commercial, K.S.A. 23-2703 Family Law & I-435/K-10 Intent",
+    corridorHook: "Lenexa City Center, Falcon Ridge, Canyon Creek & 87th St Parkway",
+  },
+  manhattan: {
+    courtFocus: "21st Judicial District (Riley County Courthouse) & Municipal Court",
+    statuteHook: "Fort Riley K.S.A. 23-2703 Military Divorce, KSU Student Defense & Aggieville",
+    corridorHook: "Poyntz Avenue Legal District, Aggieville, KSU Campus & Junction City",
+  },
 };
+
+const KNOWN_LOCAL_WEBP_CITIES = new Set([
+  "albuquerque", "baton-rouge", "cleveland", "denton", "detroit",
+  "grand-rapids", "katy", "philadelphia", "plano", "san-jose",
+  "scottsdale", "shreveport", "sugar-land", "tempe", "texas", "the-woodlands",
+]);
 
 const AVATAR = "/images/mubashar-sharif.jpg";
 
@@ -111,8 +157,13 @@ export default function LocationBlogTeaser({ page }: { page: CityPage }) {
     corridorHook: `${page.city} Downtown & Suburban Map Pack Corridors`,
   };
 
-  const districtImg = `/images/locations/${page.citySlug}-legal-district.webp`;
-  const consultImg = `/images/locations/${page.citySlug}-law-consultation.webp`;
+  const hasLocalWebp = KNOWN_LOCAL_WEBP_CITIES.has(page.citySlug);
+  const districtImg = hasLocalWebp
+    ? `/images/locations/${page.citySlug}-legal-district.webp`
+    : "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=85&auto=format&fit=crop";
+  const consultImg = hasLocalWebp
+    ? `/images/locations/${page.citySlug}-law-consultation.webp`
+    : "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=85&auto=format&fit=crop";
 
   const cards: LocationBlogCard[] = [
     {

@@ -17,6 +17,7 @@ const STATE_PRIORITY_CLIENTS: Record<string, string[]> = {
   ohio: ["dolls-cleaning", "door-doctor", "mammoth-roofing"],
   pennsylvania: ["dolls-cleaning", "local-hvac-services", "door-doctor"],
   louisiana: ["mammoth-roofing", "door-doctor", "dolls-cleaning"],
+  kansas: ["dolls-cleaning", "mammoth-roofing", "local-hvac-services"],
 };
 
 const FALLBACK_IMAGE_BY_CLIENT: Record<string, string> = {

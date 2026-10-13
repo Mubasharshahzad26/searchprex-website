@@ -2,19 +2,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  MapPin, Scale, ArrowRight, CheckCircle, Calendar, ArrowUpRight,
-  Gavel, Users, Award, ShieldCheck, Building2, Search,
+  MapPin,
+  Scale,
+  ArrowRight,
+  CheckCircle2,
+  Calendar,
+  ArrowUpRight,
+  Gavel,
+  Users,
+  Award,
+  ShieldCheck,
+  Building2,
+  Sparkles,
+  ExternalLink,
+  BookOpen,
 } from "lucide-react";
-import { kansasCities } from "@/lib/kansas-cities";
+import { kansasCities, kansasCityToCityPage } from "@/lib/kansas-cities";
 import { KANSAS_SEO_CITIES } from "@/lib/kansas-seo-cities";
 import { organizationRef } from "@/lib/site-schema";
-import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
- 
 import { getPageSEO } from "@/lib/admin-seo";
-const GREEN = "#3eb489";
-const GREEN_DARK = "#2f9670";
-const NAVY = "#0a0f2e"; // aligned to site palette (was #0d1b4b)
- 
+import TaglinePainBand from "@/components/location-wireframe/TaglinePainBand";
+import LocationLocalCaseStudies from "@/components/location-wireframe/LocationLocalCaseStudies";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
+
 // ── Metadata ────────────────────────────────────────────────────────────────
 const baseMetadata: Metadata = {
   title: "Law Firm SEO Kansas | Family Law & Attorney SEO",
@@ -27,22 +37,24 @@ const baseMetadata: Metadata = {
       "Founder-led, senior-executed SEO for Kansas law firms. Real local strategy for every market we serve.",
     url: "https://www.searchprex.com/locations/kansas",
     type: "website",
+    siteName: "SearchPrex",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Law Firm SEO Across Kansas | SearchPrex",
+    description:
+      "Founder-led, senior-executed SEO for Kansas law firms. Real local strategy for every market we serve.",
   },
 };
 
-// Metadata comes from the CMS row for this route; the object above is the
-// fallback when that row is missing, unpublished, or the database is down.
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/locations/kansas", baseMetadata);
 }
- 
+
 // ── JSON-LD (entity + breadcrumb for E-E-A-T & rich results) ─────────────────
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
-    // Service, not ProfessionalService: the latter is a LocalBusiness subtype
-    // and describes a place to visit. There is no Kansas office; areaServed is
-    // the accurate claim. Provider is the one Organization in lib/site-schema.ts.
     {
       "@type": "Service",
       "@id": "https://www.searchprex.com/locations/kansas#service",
@@ -54,9 +66,6 @@ const schema = {
       areaServed: { "@type": "State", name: "Kansas" },
       provider: organizationRef,
     },
-    // #founder is defined once in lib/site-schema.ts and rendered by the root
-    // layout. The copy here had its own job title, and on the state page said
-    // the founder worked for this page's service rather than the organization.
     {
       "@type": "WebPage",
       "@id": "https://www.searchprex.com/locations/kansas#webpage",
@@ -75,204 +84,391 @@ const schema = {
     },
   ],
 };
- 
-// ── Local market context (accurate, people-first) ───────────────────────────
-const markets = [
-  { city: "Wichita", county: "Sedgwick County", note: "Kansas's largest city and most-searched legal market — high volume, real competition." },
-  { city: "Overland Park & Johnson County", county: "Johnson County", note: "The state's most affluent and competitive legal market (Lenexa, Shawnee, Olathe)." },
-  { city: "Kansas City", county: "Wyandotte County", note: "Dense metro searches, often overlapping with the Missouri side — local intent matters." },
-  { city: "Topeka", county: "Shawnee County", note: "State capital — government, administrative, and family law demand." },
-  { city: "Lawrence", county: "Douglas County", note: "University of Kansas town with younger, mobile-first searchers." },
-  { city: "Manhattan", county: "Riley County", note: "Kansas State University market — smaller, winnable, underserved online." },
+
+const STATS = [
+  { label: "Kansas Legal Hubs", value: "8", icon: MapPin },
+  { label: "Fault Threshold", value: "50%", icon: Scale },
+  { label: "Niche Exclusivity", value: "1 Firm", icon: ShieldCheck },
+  { label: "Founder-Executed", value: "100%", icon: Award },
 ];
- 
-const whyPoints = [
-  { title: "Attorney-Specific E-E-A-T", body: "Every page is built to Google's legal YMYL standards — credential signals, authoritative content, and practitioner-led copy. No thin, mass-produced pages." },
-  { title: "Map Pack Optimization", body: "We optimize and actively manage your Google Business Profile to compete for a top-3 local position in the cities you actually serve." },
-  { title: "Senior-Executed, No Outsourcing", body: "Strategy, content, and technical work are handled in-house by the founder — never handed off to juniors or overseas freelancers." },
-  { title: "Transparent Reporting", body: "A report every Monday on rankings, organic traffic, Business Profile performance and leads — money metrics, no vanity filler." },
+
+const STATUTES = [
+  {
+    citation: "K.S.A. 60-258a",
+    name: "50% Modified Comparative Fault",
+    desc: "Kansas bars recovery if an injured claimant is 50% or more at fault. Missouri uses pure comparative fault. Cross-border pages in KCK and Johnson County must clarify this boundary to convert high-intent personal injury leads.",
+  },
+  {
+    citation: "K.S.A. 60-513",
+    name: "Two-Year Statute of Limitations",
+    desc: "Personal injury, wrongful death, and tort claims must be filed within two years of injury. We structure landing pages with urgency architecture that prompts searchers to act before evidentiary deadlines lapse.",
+  },
+  {
+    citation: "K.S.A. 23-2703 / 23-2708",
+    name: "60-Day Divorce Residency & Waiting Period",
+    desc: "Kansas requires at least one spouse to have resided in the state for 60 days prior to filing, followed by a mandatory 60-day cooling-off period before a divorce decree can be finalized, with special military provisions for Fort Riley.",
+  },
+  {
+    citation: "Kansas Bar Rules",
+    name: "Attorney Ethics & YMYL Schema",
+    desc: "Strict compliance with Kansas Supreme Court attorney advertising rules (Rule 7.1) combined with robust LegalService and Attorney schema markup prevents regulatory risk while winning Google AI Overviews.",
+  },
 ];
- 
-const services = [
+
+const SERVICES = [
   {
     icon: Scale,
     title: "Law Firm SEO",
-    desc: "Full-service SEO for personal injury, criminal defense, and multi-practice firms across Kansas. Built to drive qualified consultations, not just rankings.",
+    desc: "Full-service SEO for personal injury, criminal defense, workers' compensation, and multi-practice firms across Kansas. Built to drive qualified signed retainers, not vanity clicks.",
     features: [
-      "Practice-area & geo-targeted landing pages",
-      "Google Business Profile & map pack optimization",
-      "Technical SEO, crawl health & Core Web Vitals",
+      "Practice-area & geo-targeted landing page silos",
+      "Google Business Profile & 3-pack local map optimization",
+      "Technical crawl health, mobile speed & Core Web Vitals",
+      "Authoritative local citation architecture & review funnels",
     ],
+    href: "/services/law-firm-seo",
   },
   {
     icon: Gavel,
     title: "Family Law SEO",
-    desc: "Specialized SEO for family law attorneys targeting divorce, child custody, alimony, and adoption searches across Kansas markets.",
+    desc: "Specialized SEO for Kansas family law attorneys targeting divorce, child custody, alimony, child support, and military dissolution searches in competitive county courts.",
     features: [
-      "Divorce & custody keyword content strategy",
-      "Attorney E-E-A-T & YMYL schema markup",
-      "County-specific landing pages & citation building",
+      "Divorce & custody keyword content strategy with K.S.A. citations",
+      "Attorney E-E-A-T & YMYL schema markup integration",
+      "County-specific residency rules (K.S.A. 23-2703 compliance)",
+      "High-asset marital property division & retirement asset targeting",
     ],
+    href: "/services/local-seo",
   },
 ];
- 
-// ── Page (Server Component — CSS-only hovers, no event handlers) ─────────────
+
+const WHY_POINTS = [
+  {
+    title: "Attorney-Specific YMYL E-E-A-T",
+    body: "Every page is built to Google's legal YMYL standards — credential signals, statutory citations, and practitioner-led copy. Zero generic, mass-produced filler.",
+  },
+  {
+    title: "Google Map Pack Dominance",
+    body: "We optimize and actively manage your Google Business Profile to compete for a top-3 local position in the specific Kansas cities and counties you actually serve.",
+  },
+  {
+    title: "100% Founder-Executed, No Outsourcing",
+    body: "Strategy, content architecture, schema, and technical fixes are handled directly by founder Mubashar Sharif — never handed off to juniors or offshore contractors.",
+  },
+  {
+    title: "Transparent Weekly Reporting",
+    body: "A plain-English report every Monday morning detailing rankings, organic search clicks, Business Profile calls, and form leads — real business metrics, no vanity fluff.",
+  },
+];
+
 export default function KansasHubPage() {
+  const representativeCity = kansasCities[0]; // Wichita as representative for case studies
+  const dummyPage = kansasCityToCityPage(representativeCity);
+
   return (
-    <main>
+    <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
- 
-      {/* ── HERO ── */}
-      <section className="px-4 py-28" style={{ background: `linear-gradient(135deg, ${NAVY} 0%, #16213f 100%)` }}>
-        <div className="mx-auto max-w-4xl text-center">
-          {/* Visible counterpart of the BreadcrumbList above, which already named
-              /locations as the parent — a page that now exists. */}
-          <nav aria-label="Breadcrumb" className="mb-8 flex items-center justify-center gap-2 text-xs font-semibold text-white/60">
-            <Link href="/" className="transition-colors hover:text-white">Home</Link>
-            <span aria-hidden="true">/</span>
-            <Link href="/locations" className="transition-colors hover:text-white">Locations</Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page" className="text-white">Kansas</span>
+
+      {/* ── 1. HERO SECTION ── */}
+      <section className="relative overflow-hidden bg-white text-slate-900 pt-10 pb-16 md:pt-14 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10 text-center">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
+            <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/locations" className="hover:text-slate-900 transition-colors">Locations</Link>
+            <span>/</span>
+            <span className="text-neutral-950 font-bold">Kansas</span>
           </nav>
-          <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-widest"
-            style={{ borderColor: "rgba(62,180,137,0.35)", color: GREEN, background: "rgba(62,180,137,0.08)" }}
-          >
-            <MapPin className="h-3 w-3" /> Kansas — Law Firm SEO
+
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-neutral-900 mb-6">
+            <MapPin className="h-3.5 w-3.5 text-neutral-800" />
+            Kansas Statewide Legal SEO Hub
           </div>
- 
-          <h1 className="mb-6 text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Law Firm &amp; Family Law SEO<br />Across Kansas
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-950 leading-[1.1] max-w-4xl mx-auto mb-6">
+            Law Firm &amp; Family Law SEO Across Kansas
           </h1>
- 
-          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-blue-200 sm:text-xl">
-            We help Kansas law firms rank for the high-intent searches that bring qualified consultations — not just traffic. Eight markets, two proven service lines, one senior-executed strategy.
+
+          <p className="text-base sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8">
+            We help Kansas law firms rank for high-intent searches that bring signed retainers — not just vanity traffic. Eight legal markets, two proven service lines, 100% founder-executed.
           </p>
- 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+
+          {/* Quick Metrics Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-10">
+            {STATS.map(({ label, value, icon: Icon }) => (
+              <div key={label} className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-center">
+                <Icon className="w-4 h-4 text-neutral-800 mx-auto mb-1.5" />
+                <div className="text-xl sm:text-2xl font-black text-neutral-950">{value}</div>
+                <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mt-0.5">{label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="https://calendly.com/contact-searchprex/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#3eb489] px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#2f9670]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-neutral-800 shadow-sm"
             >
-              <Calendar className="h-4 w-4" /> Book a free strategy call
+              <Calendar className="h-4 w-4" /> Book Free Strategy Call
             </a>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 px-8 py-3.5 text-sm font-bold text-white transition-colors hover:border-white"
+            <a
+              href="#cities"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-8 py-3.5 text-sm font-bold text-neutral-950 transition-colors hover:bg-slate-50 hover:border-slate-400"
             >
-              View results <ArrowRight className="h-4 w-4" />
-            </Link>
+              View Kansas Cities <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </section>
- 
-      {/* ── STATS BAR (honest, no fabricated client numbers) ── */}
-      <section className="border-b border-[#e2e8f0] bg-white px-4 py-10">
-        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 text-center sm:grid-cols-4">
-          {[
-            { icon: MapPin, label: "Kansas Cities Covered", value: "8" },
-            { icon: Scale, label: "Specialized Service Lines", value: "2" },
-            { icon: Award, label: "Years of SEO Experience", value: "5+" },
-            { icon: ShieldCheck, label: "Founder-Executed", value: "100%" },
-          ].map(({ icon: Icon, label, value }) => (
-            <div key={label} className="flex flex-col items-center gap-1.5">
-              <Icon className="mb-1 h-5 w-5" style={{ color: GREEN }} />
-              <p className="text-2xl font-black text-[#0a0f2e]">{value}</p>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#94a3b8]">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
- 
-      {/* ── LOCAL MAP + INTRO ── */}
-      <section className="bg-white px-4 py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-          <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Statewide Coverage</p>
-            <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-              We know the Kansas legal market
+
+      {/* ── 2. TAGLINE PAIN BAND ── */}
+      <TaglinePainBand />
+
+      {/* ── 3. KANSAS STATUTORY & LEGAL FRAMEWORK ── */}
+      <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-neutral-900 block mb-2">
+              JURISDICTIONAL EXPERTISE
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-neutral-950 tracking-tight">
+              Understanding the Kansas Legal Landscape
             </h2>
-            <p className="mb-4 text-[#475569] leading-relaxed">
-              Kansas isn&apos;t one search market — it&apos;s several. A divorce attorney in Overland Park is competing in one of the most saturated legal markets in the Midwest, while a firm in Manhattan or Lawrence is fighting for very different, often-winnable local searches.
-            </p>
-            <p className="text-[#475569] leading-relaxed">
-              We build a separate, locally researched strategy for every city we serve — around the counties, courts, and competitors that actually shape each market. No copy-paste templates.
+            <p className="mt-2.5 text-sm sm:text-base text-slate-600">
+              Generic SEO agencies fail in Kansas because they copy-paste California or Texas content templates. Winning top Google rankings and AI citations requires integrating Kansas statutory realities.
             </p>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-[#e2e8f0] shadow-[0_20px_50px_-20px_rgba(10,15,46,0.25)]">
-            <iframe
-              title="SearchPrex service area — Kansas"
-              src="https://maps.google.com/maps?q=Kansas%2C%20USA&t=&z=6&ie=UTF8&iwloc=&output=embed"
-              className="h-[360px] w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {STATUTES.map((item, idx) => (
+              <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 shadow-2xs">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-xs font-black uppercase tracking-wider text-neutral-900 bg-slate-100 px-2.5 py-1 rounded">
+                    {item.citation}
+                  </span>
+                  <BookOpen className="w-4 h-4 text-slate-400" />
+                </div>
+                <h3 className="text-lg font-bold text-neutral-950 mb-2">
+                  {item.name}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
- 
-      {/* ── CITIES GRID ── */}
-      <section className="bg-[#eaecf3] px-4 py-24" id="cities">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Coverage Area</p>
-            <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">Select Your City</h2>
-            <p className="mx-auto max-w-xl text-sm leading-relaxed text-[#475569]">
-              Each city page features a unique, locally researched SEO strategy built around the courts, search patterns, and competition of that market.
+
+      {/* ── 4. KANSAS CITIES DIRECTORY GRID ── */}
+      <section className="py-16 md:py-20 bg-white border-b border-slate-200 scroll-mt-12" id="cities">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-neutral-900 block mb-2">
+              LOCAL MARKET DIRECTORY
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-neutral-950 tracking-tight">
+              Select Your Kansas Legal Market
+            </h2>
+            <p className="mt-2.5 text-sm sm:text-base text-slate-600">
+              Each city features a dedicated, locally researched strategy built around the courts, judicial districts, and high-intent search patterns of that market.
             </p>
           </div>
- 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {kansasCities.map((city) => (
               <Link
                 key={city.slug}
                 href={`/locations/kansas/${city.slug}`}
-                className="group relative flex flex-col gap-3 rounded-2xl border-2 border-[#e2e8f0] bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0a0f2e] hover:shadow-[0_20px_50px_-12px_rgba(10,15,46,0.2)]"
+                className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-900 hover:bg-white hover:shadow-md"
               >
-                <span className="absolute inset-x-0 top-0 h-[3px] rounded-t-2xl bg-[#0a0f2e] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="flex items-start justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f4f6fb] transition-colors duration-300 group-hover:bg-[#0a0f2e]/10">
-                    <MapPin className="h-5 w-5 transition-colors duration-300 group-hover:text-[#0a0f2e]" style={{ color: GREEN }} />
-                  </div>
-                  <ArrowUpRight className="h-4 w-4 text-[#cbd5e1] transition-colors duration-300 group-hover:text-[#0a0f2e]" />
-                </div>
                 <div>
-                  <h3 className="text-base font-black tracking-tight text-[#0a0f2e]">{city.name}</h3>
-                  <p className="mt-0.5 text-xs font-semibold text-[#94a3b8]">{city.county}</p>
-                </div>
-                <p className="line-clamp-2 text-xs leading-relaxed text-[#475569]">{city.heroSub}</p>
-                <div className="mt-auto flex flex-wrap gap-1.5 border-t border-[#f1f5f9] pt-2">
-                  {["Law Firm SEO", "Family Law SEO"].map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-[#e5e7eb] bg-[#f4f6fb] px-2 py-0.5 text-[10px] font-semibold text-[#64748b] transition-all duration-300 group-hover:border-[#0a0f2e]/20 group-hover:bg-[#0a0f2e]/5 group-hover:text-[#0a0f2e]"
-                    >
-                      {tag}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-slate-200 text-neutral-900 group-hover:bg-neutral-900 group-hover:text-white transition-colors">
+                      <MapPin className="h-5 w-5" />
                     </span>
-                  ))}
+                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-neutral-900 group-hover:translate-x-0.5 transition-all" />
+                  </div>
+
+                  <h3 className="text-lg font-black text-neutral-950 group-hover:text-neutral-900 mb-1">
+                    {city.name}, KS
+                  </h3>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-3">
+                    <span>{city.county}</span>
+                    <span>·</span>
+                    <span>Pop: {city.population}</span>
+                  </div>
+
+                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                    {city.heroSub}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-200/80">
+                  <div className="flex items-center justify-between text-[11px] font-bold text-neutral-950">
+                    <span>{city.courts[0] || "District Court"}</span>
+                    <span className="text-neutral-600 group-hover:text-neutral-950">Explore →</span>
+                  </div>
                 </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
- 
-      {/* ── NOT A LAW FIRM — the general SEO pages (lib/kansas-seo-cities.ts) ── */}
-      <section className="bg-white px-4 pt-20">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-8 text-center">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Not a law firm?</p>
-          <h2 className="mb-3 text-2xl font-black tracking-tight text-[#0a0f2e]">SEO services for other Kansas businesses</h2>
-          <p className="mx-auto mb-5 max-w-2xl text-sm leading-relaxed text-[#475569]">
-            Local, ecommerce and technical SEO for trades, B2B firms and online stores.
+
+      {/* ── 5. STATE MAP & GEOGRAPHIC REALITY ── */}
+      <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-white text-neutral-900 border border-slate-300">
+                <Landmark className="w-3.5 h-3.5 text-neutral-800" />
+                Statewide Market Dynamics
+              </span>
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-neutral-950 tracking-tight leading-tight">
+                Kansas Is Not One Legal Market — It Is Several
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                A family law attorney in <strong>Overland Park</strong> is competing in one of the most affluent and saturated legal markets in the Midwest, where high-asset divorce and business valuation drive search intent. In contrast, a firm in <strong>Wichita</strong> battles along the I-135 and Kellogg aerospace corridors for workers&apos; compensation and McConnell AFB military divorce cases.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                Meanwhile, in <strong>Lawrence</strong> and <strong>Manhattan</strong>, seasonal academic cycles dictate university-student criminal defense and rental disputes, while <strong>Kansas City, KS</strong> firms must clearly delineate their practice from Missouri to avoid disqualified leads.
+              </p>
+
+              <div className="pt-2">
+                <Link
+                  href="#free-reality-check"
+                  className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-6 py-3 text-xs sm:text-sm font-bold text-white hover:bg-neutral-800 transition-colors shadow-sm"
+                >
+                  <span>Request Kansas Competitor Teardown</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="bg-white border border-slate-200 rounded-2xl p-3 shadow-xs">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200">
+                  <iframe
+                    title="SearchPrex Kansas Service Area Map"
+                    src="https://maps.google.com/maps?q=Kansas%2C%20USA&t=&z=6&ie=UTF8&iwloc=&output=embed"
+                    className="h-full w-full border-0"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3 text-center">
+                  <p className="text-xs font-bold text-neutral-900">Kansas Judicial Districts &amp; County Venues</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Primary coverage spanning Sedgwick, Johnson, Wyandotte, Shawnee, Douglas, and Riley</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. TWO SPECIALIZED SERVICE LINES ── */}
+      <section className="py-16 md:py-20 bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-neutral-900 block mb-2">
+              SPECIALIZED SERVICE LINES
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-neutral-950 tracking-tight">
+              Engineered for Law Firms That Need Signed Cases
+            </h2>
+            <p className="mt-2.5 text-sm sm:text-base text-slate-600">
+              Every campaign is built around your specific practice areas and target cities — no recycled templates, no generic directory backlinks.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {SERVICES.map((s, idx) => (
+              <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-neutral-900 text-white flex items-center justify-center mb-5">
+                    <s.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-neutral-950 mb-3">{s.title}</h3>
+                  <p className="text-sm text-slate-700 leading-relaxed mb-6">{s.desc}</p>
+                  <div className="space-y-2.5 mb-6">
+                    {s.features.map((feat, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-800">
+                        <CheckCircle2 className="w-4 h-4 text-neutral-900 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <Link
+                  href={s.href}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-3 text-xs sm:text-sm font-bold text-white hover:bg-neutral-800 transition-colors"
+                >
+                  Explore {s.title} <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 7. WHY KANSAS FIRMS CHOOSE SEARCHPREX ── */}
+      <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-neutral-900 block mb-2">
+              WHY SEARCHPREX
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-neutral-950 tracking-tight">
+              Why Kansas Managing Partners Partner With Us
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {WHY_POINTS.map((p, i) => (
+              <div key={i} className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-neutral-900 text-sm font-black text-white">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div>
+                  <h3 className="mb-1 text-base font-bold text-neutral-950">{p.title}</h3>
+                  <p className="text-xs sm:text-sm leading-relaxed text-slate-600">{p.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. LOCAL SEO CASE STUDIES (VERIFIED PROOF) ── */}
+      <LocationLocalCaseStudies page={dummyPage} />
+
+      {/* ── 9. NOT A LAW FIRM (MULTI-SERVICE STRIP) ── */}
+      <section className="bg-white py-16 border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 block mb-2">
+            MULTI-SERVICE SEO
+          </span>
+          <h2 className="text-2xl font-black text-neutral-950 mb-3">
+            Not a Law Firm? SEO Services for Other Kansas Businesses
+          </h2>
+          <p className="max-w-2xl mx-auto text-xs sm:text-sm text-slate-600 mb-6">
+            Local, ecommerce, and technical SEO for Kansas home service contractors, healthcare practices, and B2B companies.
           </p>
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2.5">
             {KANSAS_SEO_CITIES.map((c) => (
               <Link
                 key={c.slug}
                 href={`/locations/kansas/${c.slug}/seo-services`}
-                className="rounded-full border border-[#e2e8f0] bg-white px-4 py-2 text-sm font-semibold text-[#0a0f2e] hover:border-[#534AB7] hover:text-[#534AB7]"
+                className="rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-xs font-bold text-neutral-900 hover:border-neutral-900 hover:bg-white transition-all shadow-2xs"
               >
                 SEO in {c.name}, KS
               </Link>
@@ -281,139 +477,115 @@ export default function KansasHubPage() {
         </div>
       </section>
 
-      {/* ── LOCAL EXPERTISE (people-first, accurate) ── */}
-      <section className="bg-white px-4 py-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Local Knowledge</p>
-            <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">
-              Every Kansas market searches differently
-            </h2>
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-[#475569]">
-              We don&apos;t treat &quot;Kansas&quot; as one keyword. Here&apos;s how the markets we serve actually differ — and why a local-first strategy wins.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {markets.map((m) => (
-              <div key={m.city} className="rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
-                <div className="mb-3 flex items-center gap-2">
-                  <Building2 className="h-4 w-4" style={{ color: GREEN }} />
-                  <h3 className="text-sm font-black text-[#0a0f2e]">{m.city}</h3>
-                </div>
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#94a3b8]">{m.county}</p>
-                <p className="text-xs leading-relaxed text-[#475569]">{m.note}</p>
-              </div>
-            ))}
-          </div>
+      {/* ── 10. DEDICATED 24-HOUR REALITY CHECK FORM ── */}
+      <section id="free-reality-check" className="py-16 md:py-20 bg-slate-50 border-b border-slate-200 scroll-mt-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ArticleLeadMagnet
+            variant="bottom"
+            source="location:kansas"
+            copy={{
+              headline: "See where your law firm ranks across Kansas — free.",
+              sub: "Send your URL. I will personally audit your website, your Google Business Profile, and the competitors currently outranking you in your county — delivered within 24 hours.",
+            }}
+          />
         </div>
       </section>
- 
-      {/* ── SERVICES ── */}
-      <section className="bg-[#eaecf3] px-4 py-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Services</p>
-            <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">Two Specialized Service Lines</h2>
-            <p className="mx-auto max-w-xl text-sm leading-relaxed text-[#475569]">
-              Every campaign is built around your specific practice area and city — no templates, no recycled strategies.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {services.map((s) => (
-              <div key={s.title} className="rounded-2xl border-2 border-[#e2e8f0] bg-white p-7">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "rgba(10,15,46,0.06)" }}>
-                  <s.icon className="h-6 w-6" style={{ color: NAVY }} />
-                </div>
-                <h3 className="mb-2 text-xl font-black tracking-tight text-[#0a0f2e]">{s.title}</h3>
-                <p className="mb-5 text-sm leading-relaxed text-[#475569]">{s.desc}</p>
-                <ul className="space-y-2.5">
-                  {s.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-[#475569]">
-                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: GREEN }} />{f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
- 
-      {/* ── WHY SEARCHPREX ── */}
-      <section className="bg-white px-4 py-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Our Approach</p>
-            <h2 className="mb-4 text-3xl font-black tracking-tight text-[#0a0f2e] sm:text-4xl">Why Kansas Law Firms Choose SearchPrex</h2>
-          </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {whyPoints.map((p, i) => (
-              <div key={p.title} className="flex gap-4 rounded-2xl border border-[#e2e8f0] bg-[#f8f9fc] p-6">
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-sm font-black text-white" style={{ background: NAVY }}>
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <div>
-                  <h3 className="mb-1 text-sm font-bold text-[#0a0f2e]">{p.title}</h3>
-                  <p className="text-xs leading-relaxed text-[#475569]">{p.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
- 
-      {/* ── E-E-A-T AUTHOR / CREDENTIALS BOX ── */}
-      <section className="bg-[#eaecf3] px-4 pb-24">
-        <div className="mx-auto max-w-4xl rounded-2xl border border-[#e2e8f0] bg-white p-8 shadow-sm">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl text-lg font-black text-white" style={{ background: NAVY }}>
-              MS
+
+      {/* ── 11. FOUNDER E-E-A-T AUTHOR BOX ── */}
+      <section className="py-16 md:py-20 bg-white border-b border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-7 sm:p-10 flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border-2 border-slate-300 relative shadow-xs">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/mubashar-sharif.jpg"
+                alt="Mubashar Sharif, CEO and Founder of SearchPrex"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-black text-[#0a0f2e]">Strategy led by Mubashar Sharif</h3>
-              <p className="mb-3 text-sm font-semibold" style={{ color: GREEN_DARK }}>Founder &amp; Senior SEO Strategist, SearchPrex</p>
-              <p className="mb-4 text-sm leading-relaxed text-[#475569]">
-                Every Kansas engagement is personally executed by the founder — a Semrush- and HubSpot-certified SEO strategist with 5+ years specializing in law firm, ecommerce, and local SEO. No juniors, no outsourcing. The person who builds your strategy is the person who runs it.
+            <div className="space-y-3 text-center sm:text-left">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 bg-slate-200/80 px-2.5 py-0.5 rounded">
+                  Founder &amp; Senior SEO Strategist
+                </span>
+                <span className="text-xs text-slate-500">SearchPrex</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-neutral-950">
+                Strategy Led Personally by Mubashar Sharif
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                Every Kansas engagement is personally executed by the founder — a Semrush- and HubSpot-certified SEO strategist with 5+ years specializing in law firm, ecommerce, and local SEO. No junior account coordinators, no overseas outsourcing. The strategist who analyzes your Kansas market is the one who executes your work.
               </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
-                  target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-semibold text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
-                >
-                  <CheckCircle className="h-3 w-3 text-[#16a34a]" /> Semrush Certified
-                </a>
-                <a
-                  href="https://app.hubspot.com/academy/achievements/tc8vffrw/en/1/mubashar-shahzad/seo-ii"
-                  target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-semibold text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
-                >
-                  <CheckCircle className="h-3 w-3 text-[#16a34a]" /> HubSpot Certified
-                </a>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-xs">
                 <a
                   href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
-                  target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-3 py-1 text-xs font-semibold text-[#374151] transition-colors hover:border-[#534AB7] hover:text-[#534AB7]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-bold text-neutral-900 hover:underline"
                 >
-                  Verify on LinkedIn <ArrowUpRight className="h-3 w-3" />
+                  <ExternalLink className="w-3.5 h-3.5" /> LinkedIn Profile
+                </a>
+                <span className="text-slate-300">·</span>
+                <a
+                  href="https://static.semrush.com/academy/certificates/e45cf0b323/mubashar-shahzad_25.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-slate-700 hover:underline"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Semrush Technical SEO
+                </a>
+                <span className="text-slate-300">·</span>
+                <a
+                  href="https://app.hubspot.com/academy/achievements/tc8vffrw/en/1/mubashar-shahzad/seo-ii"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-slate-700 hover:underline"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> HubSpot Certified
                 </a>
               </div>
             </div>
           </div>
         </div>
       </section>
- 
-      {/* ── CTA STRIP ── */}
-      {/* Closing form in place of a Calendly-only strip. */}
-      <ArticleLeadMagnet
-        variant="bottom"
-        source="location:kansas"
-        copy={{
-          headline: "See where your firm ranks in Kansas \u2014 free.",
-          sub: "Two fields. Your site, your Business Profile and the firms above you in your county, reviewed by me within 24 hours.",
-        }}
-      />
-    </main>
+
+      {/* ── 12. CLOSING CTA BANNER ── */}
+      <section className="py-16 md:py-20 bg-neutral-950 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-widest text-slate-200">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            1-Firm Per Practice Niche Across Kansas
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+            Ready to Dominate Search in Your Kansas City?
+          </h2>
+
+          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
+            Lock in market exclusivity for your practice area before your direct competitor does.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <a
+              href="https://calendly.com/contact-searchprex/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-3.5 text-sm font-bold text-neutral-950 hover:bg-slate-100 transition-colors shadow-sm"
+            >
+              <Calendar className="w-4 h-4" /> Book Strategy Call
+            </a>
+            <a
+              href="#free-reality-check"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-transparent px-8 py-3.5 text-sm font-bold text-white hover:bg-white/10 transition-colors"
+            >
+              Get Free 24h Reality Check <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom Tagline Pain Band */}
+      <TaglinePainBand />
+    </div>
   );
 }
- 

@@ -1,4 +1,5 @@
 // lib/kansas-cities.ts
+import type { CityPage } from "@/lib/city-pages";
  
 export interface CityFaq {
   q: string;
@@ -590,6 +591,45 @@ export function getCityBySlug(slug: string): KansasCity | undefined {
  
 export function getAllCitySlugs() {
   return kansasCities.map((c) => ({ city: c.slug }));
+}
+
+export function kansasCityToCityPage(city: KansasCity): CityPage {
+  return {
+    stateSlug: "kansas",
+    citySlug: city.slug,
+    city: city.name,
+    state: "Kansas",
+    stateAbbr: "KS",
+    county: city.county,
+    metaTitle: city.metaTitle,
+    metaDescription: city.metaDescription,
+    h1: city.heroHeadline,
+    heroSub: city.heroSub,
+    problem: city.overview,
+    problemPoints: [
+      `Firms in ${city.county} compete aggressively for high-intent map pack calls.`,
+      `Local rules like K.S.A. 60-258a (50% comparative fault) require tailored content.`,
+      `Generic statewide landing pages fail to convert local searchers in ${city.name}.`,
+    ],
+    practiceDemand: (city.practiceAreas || []).map((p) => ({
+      area: p.name,
+      why: p.demand,
+    })),
+    localSignals: [
+      { label: "County Seat & Courts", detail: city.courts.join(", ") },
+      { label: "Bar Association", detail: city.barAssociation },
+      { label: "Nearby Submarkets", detail: city.nearbyAreas.join(", ") },
+    ],
+    courts: city.courts,
+    barAssociation: city.barAssociation,
+    neighborhoods: city.neighborhoods || [],
+    nearbyCities: city.nearbyAreas,
+    legalContext: {
+      heading: `Kansas Jurisdiction & Legal Framework in ${city.name}`,
+      body: city.localInsight || city.overview,
+    },
+    faqs: city.faqs,
+  };
 }
  
 
