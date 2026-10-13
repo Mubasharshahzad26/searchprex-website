@@ -16,6 +16,7 @@ import {
   Sparkles,
   ExternalLink,
   BookOpen,
+  Landmark,
 } from "lucide-react";
 import { kansasCities, kansasCityToCityPage } from "@/lib/kansas-cities";
 import { KANSAS_SEO_CITIES } from "@/lib/kansas-seo-cities";
