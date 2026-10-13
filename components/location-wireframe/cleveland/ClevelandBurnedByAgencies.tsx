@@ -23,7 +23,7 @@ const COMPARISON_TRAPS = [
     theyDo: "Locked your firm into an inflexible 12 to 24-month agreement, claiming legal SEO takes a year before any progress, while billing monthly for minimal technical output.",
     weDo: (
       <span>
-        Month-to-month partnership. We earn your retainer every 30 days. You see indexation, ranking movements, and early inquiries within the first 30 to 90 days of our{" "}
+        Month-to-month partnership. We earn your retainer every 30 days. You see indexation, ranking movements, and early inquiries within the first 60 to 90 days of our{" "}
         <Link href="/services/law-firm-seo" className="font-semibold text-neutral-900 underline hover:text-neutral-950">
           law firm SEO sprint
         </Link>

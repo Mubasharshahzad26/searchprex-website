@@ -291,7 +291,7 @@ export const kansasCities: KansasCity[] = [
       },
       {
         q: "How quickly does law firm SEO work in Topeka?",
-        a: "Topeka's mid-sized legal market typically responds faster than larger metros. Many clients see meaningful ranking improvements within 45 to 75 days of campaign launch.",
+        a: "Topeka's mid-sized legal market typically responds faster than larger metros. Many clients see meaningful ranking improvements within 60 to 90 days of campaign launch.",
       },
       {
         q: "Can you rank my Topeka family law firm for Spanish-language searches?",
