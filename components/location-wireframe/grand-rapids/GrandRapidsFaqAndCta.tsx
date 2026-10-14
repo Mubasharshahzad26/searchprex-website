@@ -16,7 +16,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "How long before I see leads from SEO in Grand Rapids?",
-    a: "Kent County is significantly less saturated than Detroit or Chicago. Most of our Grand Rapids clients see Google Business Profile rankings and initial local phone calls within 60 to 90 days. Suburb-specific practice pages (Wyoming, Kentwood, East Grand Rapids) typically begin ranking for high-intent queries between days 60 and 90, creating a sustainable foundation by month 4.",
+    a: "Kent County is significantly less saturated than Detroit or Chicago. In a market like this, Google Business Profile rankings and the first local phone calls typically start within 60 to 90 days. Suburb-specific practice pages (Wyoming, Kentwood, East Grand Rapids) typically begin ranking for high-intent queries between days 60 and 90, creating a sustainable foundation by month 4.",
   },
   {
     q: "I am a solo attorney with no time. Will this need me?",
