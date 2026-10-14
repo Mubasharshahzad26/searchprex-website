@@ -175,6 +175,29 @@ const CHOOSE_AGENCY_FAQS: PostFaq[] = [
   },
 ];
 
+const SPECIALIST_FAQS: PostFaq[] = [
+  {
+    q: "Can a lawyer call themselves a specialist?",
+    a: "In most states only if they hold a certification from an approved body — a state board, or an organisation the state or the ABA has accredited — and the certifying organisation is named. The rules differ by state, so check your own before using the word.",
+  },
+  {
+    q: "Can a lawyer say they are an expert?",
+    a: "Some states treat \"expert\" the same way as \"specialist\", and in any state an unsupported \"expert\" claim can be misleading. Describing what you do — \"practice limited to personal injury\" — avoids the problem.",
+  },
+  {
+    q: "Does Texas allow \"Board Certified\" in advertising?",
+    a: "Yes, for lawyers certified by the Texas Board of Legal Specialization, using the wording \"Board Certified, [area of specialization] — Texas Board of Legal Specialization\", or for certification by a TBLS-accredited organisation that is named.",
+  },
+  {
+    q: "Does Michigan have a lawyer certification program?",
+    a: "No. Michigan's Rule 7.4 lets a lawyer say they do or do not practice in particular fields, and does not mention specialization or board certification, according to the ABA's state summary.",
+  },
+  {
+    q: "Do advertising rules apply to title tags and Google Business Profiles?",
+    a: "They apply to communications about a lawyer's services, which includes website copy, title tags, meta descriptions and profile descriptions. Google's own guidelines also forbid adding keywords such as \"specialist\" to a Business Profile name.",
+  },
+];
+
 export const posts = [
   {
     slug:        "google-ai-overviews-seo",
@@ -2452,7 +2475,7 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
 
 <h2>Why legal search is held to a higher standard</h2>
 <p>Google's Search Quality Rater Guidelines treat legal matters as "Your Money or Your Life" topics: pages where poor information could hurt someone's finances, freedom or family. Raters are asked to look harder at the experience, expertise, authoritativeness and trustworthiness behind them. In practice that means named attorneys with verifiable credentials, accurate jurisdiction-specific information, and no inflated claims.</p>
-<p>Law firm pages also answer to bar advertising rules. ABA Model Rule 7.1 prohibits false or misleading communications about a lawyer's services, and Rule 7.2 covers advertising specifically. States adopt their own versions, so the exact rules for testimonials, past results and words like "specialist" vary. SEO copy is advertising: a page that promises outcomes or implies results it cannot back is an ethics problem as well as an SEO one.</p>
+<p>Law firm pages also answer to bar advertising rules. ABA Model Rule 7.1 prohibits false or misleading communications about a lawyer's services, and Rule 7.2 covers advertising specifically. States adopt their own versions, so the exact rules for testimonials, past results and words like "specialist" vary. SEO copy is advertising: a page that promises outcomes or implies results it cannot back is an ethics problem as well as an SEO one. For when "specialist" and "certified" are allowed, see <a href="/blog/lawyer-specialist-certification-rules-by-state">certification rules by state</a>.</p>
 
 <h2>Practice-area pages</h2>
 <p>A single "Practice Areas" page cannot win five different searches in five different markets. Someone searching "car accident lawyer in Tempe" wants a page about car accidents in Tempe: the courts, the deadlines, what happens next and who will handle the case.</p>
@@ -3001,7 +3024,7 @@ ${faqHtml(COST_FAQS)}
 <tr><td>6. How do you get links and mentions?</td><td>Directories, real local and legal publications, PR.</td><td>Buying links, or networks of sites.</td></tr>
 <tr><td>7. How do you handle several cities?</td><td>Separate pages with real local detail for cities you serve.</td><td>One page copied with the city name swapped.</td></tr>
 <tr><td>8. Who writes the content, and who checks the law?</td><td>A writer, with attorney review for legal accuracy.</td><td>AI-generated pages with no review.</td></tr>
-<tr><td>9. How do you keep copy within bar rules?</td><td>Knows ABA Model Rules 7.1 and 7.2 and checks your state's version.</td><td>Copy that promises outcomes or calls you a "specialist" without basis.</td></tr>
+<tr><td>9. How do you keep copy within bar rules?</td><td>Knows ABA Model Rules 7.1 and 7.2 and checks your state's version.</td><td>Copy that promises outcomes or calls you a "specialist" without basis (see <a href="/blog/lawyer-specialist-certification-rules-by-state">the rules by state</a>).</td></tr>
 <tr><td>10. What does the contract say?</td><td>Month to month, or a short term with a clear exit.</td><td>A long lock-in before any work is visible.</td></tr>
 <tr><td>11. What do you guarantee?</td><td>The process, and measurable progress by a set date.</td><td>A #1 ranking or a number of cases.</td></tr>
 <tr><td>12. When should I expect movement?</td><td>First measurable movement in about 60 to 90 days; longer for competitive terms.</td><td>"Page one in 30 days."</td></tr>
@@ -3044,6 +3067,92 @@ ${faqHtml(COST_FAQS)}
 
 <h2>Frequently asked questions</h2>
 ${faqHtml(CHOOSE_AGENCY_FAQS)}
+`,
+    author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
+  },
+  {
+    // Every row is sourced: certification facts from the ABA's state-by-state
+    // specialization pages (read 15 Oct 2026), Texas rules from the Texas
+    // Center for Legal Ethics' text of the current Part VII. Rule numbers are
+    // given only where the current text was read — several ABA pages still
+    // cite numbering that states have since replaced (Texas 7.04(b)(2),
+    // California 1-400), so they are not repeated here.
+    slug:        "lawyer-specialist-certification-rules-by-state",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    metaTitle:       "Can Lawyers Call Themselves Specialists? Rules by State (2026)",
+    metaDescription: "When a lawyer may say \"specialist\" or \"certified\" in Texas, Michigan, Ohio, Pennsylvania, Arizona, Louisiana, New Mexico, Kansas and California, with sources, and what it means for website and SEO copy.",
+    title:       "Can Lawyers Call Themselves Specialists? Certification Rules by State",
+    excerpt:     "When a lawyer may say \"specialist\" or \"certified\" in nine states, who does the certifying, and what that means for your website, title tags and Google Business Profile — every row sourced.",
+    readTime:    "7-minute read",
+    date:        "October 15, 2026",
+    updated:     "October 15, 2026",
+    tags:        ["lawyer specialist rules", "board certified attorney advertising", "attorney advertising rules by state", "can a lawyer call themselves an expert", "legal specialization"],
+    stat:        { value: "9 states", label: "Checked against their sources, 15 Oct 2026" },
+    heroImage:   "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "Why this matters for your website and SEO",
+      "State-by-state: when you may claim certification",
+      "Texas in more detail",
+      "What to change in your copy",
+      "How this page was checked",
+      "Frequently asked questions",
+    ],
+    faqs: SPECIALIST_FAQS,
+    content: `
+<h2>The short answer</h2>
+<div class="callout">In most states a lawyer may call themselves <strong>"certified" or a "specialist" only if they hold a certification from an approved body</strong> — a state board, or an organisation the state or the ABA has accredited — and the certifying organisation is named. Several states run their own certification programs; Michigan's rule does not address specialization at all; Kansas has no state program but recognises approved and ABA-accredited certifiers. The details differ, so check your own state before using either word.</div>
+
+<p>This page covers the nine states where SearchPrex has location pages. It is a summary for marketing purposes, not legal advice; the rules themselves, and your state bar's ethics guidance, are what count.</p>
+
+<h2>Why this matters for your website and SEO</h2>
+<p>"Specialist", "expert" and "certified" tend to creep into the places SEO touches most: title tags, meta descriptions, page headings, Google Business Profile descriptions and structured data. Those count as communications about your services, so the advertising rules apply to them just as they apply to a billboard. A title tag such as "Dallas Divorce Specialist" is a claim of specialization.</p>
+<p>The safe pattern is to describe what you do — "divorce and custody lawyer", "practice limited to personal injury" — and to use "certified" only with the exact wording and certifying body your state allows.</p>
+
+<h2>State-by-state: when you may claim certification</h2>
+<table>
+<thead><tr><th>State</th><th>State certification program</th><th>When "certified" or "specialist" may be used</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Texas</td><td>Yes — Texas Board of Legal Specialization (TBLS), plus private programs it accredits</td><td>Only with a TBLS certificate ("Board Certified, [area] — Texas Board of Legal Specialization") or certification from an organisation accredited by TBLS, with the organisation named.</td><td><a href="https://www.legalethicstexas.com/resources/rules/texas-disciplinary-rules-of-professional-conduct/advertisements/" target="_blank" rel="noopener noreferrer">Texas Rule 7.02</a></td></tr>
+<tr><td>Michigan</td><td>No</td><td>Rule 7.4 lets a lawyer say they do or do not practice in particular fields; it does not mention specialization or board certification. Any claim is judged under the general ban on misleading communications.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/michigan/" target="_blank" rel="noopener noreferrer">ABA: Michigan</a></td></tr>
+<tr><td>Ohio</td><td>Yes — the Supreme Court of Ohio's Commission on Certification of Attorneys as Specialists, plus approved private programs</td><td>Certification may be stated if the certifying organisation is approved by the Commission and is clearly named.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/ohio/" target="_blank" rel="noopener noreferrer">ABA: Ohio</a></td></tr>
+<tr><td>Pennsylvania</td><td>Yes — workers' compensation, plus private programs approved by the Supreme Court on the Pennsylvania Bar Association's recommendation</td><td>Certification from an organisation approved by the Supreme Court of Pennsylvania.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/pennsylvania/" target="_blank" rel="noopener noreferrer">ABA: Pennsylvania</a></td></tr>
+<tr><td>Arizona</td><td>Yes — Arizona Board of Legal Specialization, plus accredited private programs</td><td>A lawyer may state they are a specialist if certified by the Arizona Board or by a national body whose standards are substantially the same.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/arizona/" target="_blank" rel="noopener noreferrer">ABA: Arizona</a></td></tr>
+<tr><td>Louisiana</td><td>Yes — Louisiana Board of Legal Specialization; recognises ABA-accredited programs</td><td>With Louisiana Board certification under its Plan of Legal Specialization, or certification by an ABA-accredited organisation whose full name appears in every communication.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/louisiana/" target="_blank" rel="noopener noreferrer">ABA: Louisiana</a></td></tr>
+<tr><td>New Mexico</td><td>Approved private programs</td><td>Rule 16-702(C) NMRA: only if certified by the State Bar of New Mexico, a body approved by another state's authority, or an ABA-accredited organisation, and the certifier is clearly named.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/new-mexico/" target="_blank" rel="noopener noreferrer">ABA: New Mexico</a></td></tr>
+<tr><td>Kansas</td><td>No</td><td>A lawyer may claim certification if certified by an organisation approved by an appropriate state authority or accredited by the ABA.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/kansas/" target="_blank" rel="noopener noreferrer">ABA: Kansas</a></td></tr>
+<tr><td>California</td><td>Yes — State Bar of California Board of Legal Specialization, plus private entities it accredits</td><td>"Certified specialist" only with a current certificate from the Board of Legal Specialization or another entity accredited by the State Bar.</td><td><a href="https://www.americanbar.org/groups/specialization/state-sources-of-certification/california/" target="_blank" rel="noopener noreferrer">ABA: California</a></td></tr>
+</tbody>
+</table>
+
+<h2>Texas in more detail</h2>
+<p>Texas rewrote its advertising rules (Part VII of the Texas Disciplinary Rules of Professional Conduct) with effect from 1 July 2021. Points that affect website and SEO work:</p>
+<ul>
+<li><strong>Who is responsible.</strong> An advertisement must name a lawyer responsible for its content and identify the lawyer's primary practice location (Rule 7.02(a)).</li>
+<li><strong>Certification wording.</strong> "Board Certified, [area of specialization] — Texas Board of Legal Specialization", or certification by a TBLS-accredited organisation, which must be named (Rule 7.02).</li>
+<li><strong>Contingent fees.</strong> An advertisement that mentions contingent fees must say whether the client will have to pay other expenses (Rule 7.02).</li>
+<li><strong>Past results.</strong> A lawyer may claim credit for a prior judgment or settlement only if they played a substantial role in obtaining it (Comment 10 to Rule 7.01).</li>
+<li><strong>Filing.</strong> Advertisements must be filed with the State Bar's Advertising Review Committee no later than ten days after first dissemination, unless Rule 7.05 exempts them (Rule 7.04). Pre-approval can be sought at least 30 days in advance.</li>
+</ul>
+<p>Sources: <a href="https://www.legalethicstexas.com/resources/rules/texas-disciplinary-rules-of-professional-conduct/communications-concerning-a-lawyers-services/" target="_blank" rel="noopener noreferrer">Rule 7.01</a>, <a href="https://www.legalethicstexas.com/resources/rules/texas-disciplinary-rules-of-professional-conduct/advertisements/" target="_blank" rel="noopener noreferrer">Rule 7.02</a>, <a href="https://www.legalethicstexas.com/resources/rules/texas-disciplinary-rules-of-professional-conduct/filing-requirements-for-advertisements-and-solicitation-communications/" target="_blank" rel="noopener noreferrer">Rule 7.04</a> (Texas Center for Legal Ethics).</p>
+
+<h2>What to change in your copy</h2>
+<ol>
+<li><strong>Search your site</strong> for "specialist", "specializing", "expert" and "certified", including title tags and meta descriptions.</li>
+<li><strong>Replace uncertified claims</strong> with descriptions of what you do: "focused on", "practice limited to", "we handle".</li>
+<li><strong>Use certification wording exactly</strong> as your state allows, with the certifying body named.</li>
+<li><strong>Check your Google Business Profile.</strong> Its description is public marketing, and Google's own rules also forbid adding keywords such as "specialist" to the business name.</li>
+<li><strong>Check structured data.</strong> Schema text is published too; do not put claims there you could not make on the page.</li>
+<li><strong>In Texas,</strong> confirm whether your pages and ads need filing with the Advertising Review Committee.</li>
+</ol>
+<p>More on how bar rules shape law firm SEO: the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>, and question 9 in <a href="/blog/choose-law-firm-seo-agency">how to choose a law firm SEO agency</a>.</p>
+
+<h2>How this page was checked</h2>
+<p>Certification facts come from the American Bar Association's state-by-state specialization pages, read on 15 October 2026; the Texas details come from the current text of Part VII published by the Texas Center for Legal Ethics. Several ABA pages still cite rule numbers that their states have since replaced, so rule numbers appear here only where the current text was read. States change these rules; check the current rule and your state bar's ethics guidance before relying on any row. This page is not legal advice.</p>
+
+<h2>Frequently asked questions</h2>
+${faqHtml(SPECIALIST_FAQS)}
 `,
     author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
   },
