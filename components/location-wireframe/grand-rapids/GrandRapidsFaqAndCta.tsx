@@ -12,7 +12,7 @@ interface FaqItem {
 const FAQS: FaqItem[] = [
   {
     q: "Can SEO replace my Google Ads?",
-    a: "Often it can reduce your dependence on them over time, but we keep ads running until organic data proves it is safe to trim. We never ask you to cut paid spend before organic intake is proven in your CallRail dashboard. Over 6–9 months, as Map Pack and organic rankings compound, firms typically trim 50%–80% of low-converting PPC keywords while lowering their blended cost per signed case. Results are never guaranteed.",
+    a: "Often it can reduce your dependence on them over time, but we keep ads running until organic data proves it is safe to trim. We never ask you to cut paid spend before organic intake is proven in your CallRail dashboard. As Map Pack and organic rankings grow, firms can usually trim low-converting PPC keywords and lower their blended cost per signed case. Results are never guaranteed.",
   },
   {
     q: "How long before I see leads from SEO in Grand Rapids?",
