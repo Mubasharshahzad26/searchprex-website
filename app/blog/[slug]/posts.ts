@@ -79,6 +79,52 @@ const HOW_LONG_FAQS: PostFaq[] = [
   },
 ];
 
+const SEO_VS_PPC_FAQS: PostFaq[] = [
+  {
+    q: "Is SEO cheaper than Google Ads for law firms?",
+    a: "Often over time, not at first. Ads cost per click from day one; SEO costs a monthly fee and takes 60 to 90 days to start moving. Compare the two on cost per signed case with your own numbers rather than on price alone.",
+  },
+  {
+    q: "How do I calculate cost per signed case from Google Ads?",
+    a: "Divide your cost per click by the share of clicks that become leads, then by the share of leads you sign. For example, $50 per click, 8% of clicks becoming leads and 20% of leads signed gives $3,125 per signed case.",
+  },
+  {
+    q: "Should I stop Google Ads once SEO starts working?",
+    a: "Not all at once. Reduce spend on the terms organic search already covers, which you can see in Search Console and call tracking, and keep ads on the terms it does not.",
+  },
+  {
+    q: "Are Local Services Ads better than Google Ads for lawyers?",
+    a: "They charge per lead rather than per click and show a Google Screened badge, so for some practices they are cheaper. Test them alongside search ads and measure both on cost per signed case.",
+  },
+  {
+    q: "Why does my cost per case change when the ads have not?",
+    a: "Because intake is part of the cost. If the share of leads you sign falls, the cost per signed case rises even when clicks cost the same. Response time is usually the first thing to check.",
+  },
+];
+
+const SLOW_INTAKE_FAQS: PostFaq[] = [
+  {
+    q: "How fast should a law firm respond to a new lead?",
+    a: "Aim for under 5 minutes during business hours, and have live or automated cover after hours. The first firm to answer and book a consultation has the best chance of signing the case.",
+  },
+  {
+    q: "How do I work out what slow intake costs my firm?",
+    a: "Multiply your monthly leads by the share you sign, then by the share lost to slow responses and after-hours gaps. Our lost case calculator does this with starting assumptions you can replace with your own numbers.",
+  },
+  {
+    q: "Are the loss percentages in the calculator measured data?",
+    a: "No. They are starting assumptions in the calculator's model and are labelled that way. Replace them with figures from your own missed-call logs and intake records where you have them.",
+  },
+  {
+    q: "Is an AI intake assistant allowed for law firms?",
+    a: "It can answer, screen and summarise enquiries, but it must not give legal advice or form an attorney-client relationship, and it should follow your state bar's rules on solicitation and confidentiality. Review the script with that in mind.",
+  },
+  {
+    q: "Should I fix intake before investing in SEO?",
+    a: "Ideally alongside it, and before scaling it. More leads only become more cases if intake can handle them quickly.",
+  },
+];
+
 export const posts = [
   {
     slug:        "google-ai-overviews-seo",
@@ -2388,7 +2434,7 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
 <p>The full timeline, month by month, with what speeds it up and slows it down: <a href="/blog/how-long-does-law-firm-seo-take">How long does law firm SEO take to work?</a></p>
 
 <h2>What law firm SEO costs</h2>
-<p>Agency retainers vary widely with the number of practice areas, the number of cities and how competitive they are. SearchPrex's law firm plans run <strong>$1,200 to $2,500 a month</strong>, depending on how many practice areas and cities the plan covers, month to month with no long-term contract. Whatever you pay, ask what work happens each month and how results will be reported.</p>
+<p>Agency retainers vary widely with the number of practice areas, the number of cities and how competitive they are. SearchPrex's law firm plans run <strong>$1,200 to $2,500 a month</strong>, depending on how many practice areas and cities the plan covers, month to month with no long-term contract. Whatever you pay, ask what work happens each month and how results will be reported. To compare it with Google Ads on the number that matters, see <a href="/blog/law-firm-seo-vs-ppc">law firm SEO vs PPC: cost per signed case</a>.</p>
 <p>For personal injury firms, the <a href="/case-calculator">lost case calculator</a> estimates, from your own numbers, how many signed cases go to competitors because of search visibility gaps and slow intake — a useful figure to set against any retainer.</p>
 
 <h2>How to measure it: calls, forms and signed cases</h2>
@@ -2398,7 +2444,7 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
 <li><strong>Form fills and chats</strong>, recorded as events in Google Analytics 4.</li>
 <li><strong>Signed cases</strong>, matched back to the source in your intake system. This is the number that decides whether SEO pays.</li>
 </ol>
-<p>Speed matters as much as volume: a lead that waits hours for a reply often signs with the firm that answered first. An <a href="/intake-assistant">AI intake assistant</a> is one way to answer every enquiry immediately and hand your team a clean summary.</p>
+<p>Speed matters as much as volume: a lead that waits hours for a reply often signs with the firm that answered first. An <a href="/intake-assistant">AI intake assistant</a> is one way to answer every enquiry immediately and hand your team a clean summary. To put a number on it, see <a href="/blog/slow-intake-cost">how much a slow intake costs a law firm</a>.</p>
 
 <h2>How to choose a law firm SEO agency</h2>
 <p>A few questions separate careful agencies from risky ones:</p>
@@ -2516,6 +2562,227 @@ ${faqHtml(LAW_GUIDE_FAQS)}
 
 <h2>Frequently asked questions</h2>
 ${faqHtml(HOW_LONG_FAQS)}
+`,
+    author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
+  },
+  {
+    // Every figure in the worked examples is an input the reader replaces with
+    // their own; none is presented as an industry benchmark.
+    slug:        "law-firm-seo-vs-ppc",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    metaTitle:       "Law Firm SEO vs PPC: How to Compare Cost Per Signed Case",
+    metaDescription: "How to work out cost per signed case for Google Ads and for SEO with your own numbers, when each makes sense, and why most firms should run both at first.",
+    title:       "Law Firm SEO vs PPC: Cost Per Signed Case",
+    excerpt:     "How to work out cost per signed case for Google Ads and for SEO with your own numbers, when each one makes sense, and why most firms should run both at first.",
+    readTime:    "8-minute read",
+    date:        "October 14, 2026",
+    updated:     "October 14, 2026",
+    tags:        ["law firm seo vs ppc", "seo vs google ads for lawyers", "cost per signed case", "legal marketing roi", "law firm ppc"],
+    stat:        { value: "Cost ÷ signed cases", label: "The only comparison that matters" },
+    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "SEO and PPC side by side",
+      "How to work out PPC cost per signed case",
+      "How to work out SEO cost per signed case",
+      "Local Services Ads: the third option",
+      "When PPC makes more sense",
+      "When SEO makes more sense",
+      "Running both: the sensible order",
+      "Where to find your own numbers",
+      "Frequently asked questions",
+    ],
+    faqs: SEO_VS_PPC_FAQS,
+    content: `
+<h2>The short answer</h2>
+<div class="callout"><strong>Compare cost per signed case, not cost per click.</strong> For Google Ads it is your cost per click divided by the share of clicks that become leads, divided by the share of leads you sign. For SEO it is the monthly cost divided by the cases organic search signs that month. Ads pay off from the first week and stop when spending stops; SEO takes 60 to 90 days to start moving and keeps working. Most firms do best running both at first.</div>
+
+<p>The numbers in this article are examples to show the arithmetic. Replace every one with your own figures from Google Ads, your call tracking and your intake system; that is the only comparison that means anything for your firm.</p>
+
+<h2>SEO and PPC side by side</h2>
+<table>
+<thead><tr><th></th><th>PPC (Google Ads)</th><th>SEO</th></tr></thead>
+<tbody>
+<tr><td>How you pay</td><td>Per click</td><td>Monthly, for the work</td></tr>
+<tr><td>When it starts</td><td>As soon as the campaign goes live</td><td>First measurable movement usually within 60 to 90 days</td></tr>
+<tr><td>When you stop paying</td><td>Visibility stops the same day</td><td>Rankings and pages keep working for a time</td></tr>
+<tr><td>Where it shows</td><td>Ad slots, labelled "Sponsored"</td><td>Map Pack and organic results, and AI answers that cite pages</td></tr>
+<tr><td>Control</td><td>Exact keywords, budget and hours</td><td>Indirect: you influence, Google decides</td></tr>
+<tr><td>Best for</td><td>Leads now, testing which cases are worth it</td><td>Lowering cost per case over time, owning visibility</td></tr>
+</tbody>
+</table>
+
+<h2>How to work out PPC cost per signed case</h2>
+<p>Three numbers from your own account and intake:</p>
+<ol>
+<li><strong>Cost per click</strong> — from Google Ads.</li>
+<li><strong>Click-to-lead rate</strong> — the share of clicks that call or submit a form.</li>
+<li><strong>Lead-to-signed rate</strong> — the share of those leads that become signed cases.</li>
+</ol>
+<p><strong>Cost per signed case = cost per click ÷ click-to-lead rate ÷ lead-to-signed rate.</strong></p>
+<table>
+<thead><tr><th>Example input</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Cost per click</td><td>$50</td></tr>
+<tr><td>Click-to-lead rate</td><td>8%</td></tr>
+<tr><td>Cost per lead ($50 ÷ 0.08)</td><td>$625</td></tr>
+<tr><td>Lead-to-signed rate</td><td>20%</td></tr>
+<tr><td><strong>Cost per signed case ($625 ÷ 0.20)</strong></td><td><strong>$3,125</strong></td></tr>
+</tbody>
+</table>
+<p>Notice what the last line depends on. If the same firm signed 10% of leads instead of 20%, the cost per signed case doubles to $6,250 with no change to the ads at all. Intake is part of your advertising cost — see <a href="/blog/slow-intake-cost">how much a slow intake costs a law firm</a>.</p>
+
+<h2>How to work out SEO cost per signed case</h2>
+<p><strong>Cost per signed case = monthly SEO cost ÷ signed cases from organic search that month.</strong></p>
+<p>With an example retainer of $2,000 a month: if organic search signs three cases in a month, that month cost $667 per case; if it signs one, $2,000. In the first two or three months it may sign none while pages are built and indexed, so judge SEO over a longer window — a quarter or a year — not month by month.</p>
+<p>Two things make SEO harder to measure than ads: callers who found you on Google Maps often dial the number on your profile directly, and some people see you organically and call later. Call tracking on the profile and asking "how did you hear about us?" at intake close most of that gap.</p>
+
+<h2>Local Services Ads: the third option</h2>
+<p>Google's Local Services Ads appear above the regular ads with a "Google Screened" badge for law firms that pass Google's checks, and they charge per lead rather than per click. They are available for many legal categories in many US areas. For some practices they are the cheapest paid leads; they are worth testing alongside regular search ads and SEO, measured the same way: cost per signed case.</p>
+
+<h2>When PPC makes more sense</h2>
+<ul>
+<li>You need cases this month, not this quarter.</li>
+<li>You are entering a new city or practice and want to learn which searches turn into cases.</li>
+<li>Your case values are high enough that a costly click still pays.</li>
+<li>Your website is new and has no organic visibility yet.</li>
+</ul>
+
+<h2>When SEO makes more sense</h2>
+<ul>
+<li>You plan to serve the same cities and practices for years.</li>
+<li>Your ad costs are rising and you want a channel that does not charge per click.</li>
+<li>Your clients research before calling, which is common in family law, estate planning and immigration.</li>
+<li>You want to appear in the Map Pack and in AI answers, which ads do not buy.</li>
+</ul>
+
+<h2>Running both: the sensible order</h2>
+<p>Keep ads running while organic pages start ranking. As organic search covers particular terms — and you can see it in Search Console and in your call tracking — reduce ad spend on those terms first and move budget to the ones organic does not yet cover. The aim is a lower blended cost per signed case, not switching one channel off on day one.</p>
+<p>Both channels count as advertising under bar rules: ABA Model Rule 7.1 on misleading communications applies to ad copy and website copy alike.</p>
+
+<h2>Where to find your own numbers</h2>
+<ul>
+<li><strong>Cost per click and clicks</strong> — Google Ads, by campaign and keyword.</li>
+<li><strong>Calls and forms</strong> — call tracking, and form submissions recorded as events in GA4.</li>
+<li><strong>Signed cases by source</strong> — your intake or case management system; add a source field if it has none.</li>
+<li><strong>Organic visibility</strong> — Google Search Console for impressions and clicks, and your Business Profile's performance report.</li>
+</ul>
+<p>Personal injury firms can estimate what visibility gaps and slow intake cost them with the <a href="/case-calculator">lost case calculator</a>. For timelines, see <a href="/blog/how-long-does-law-firm-seo-take">how long law firm SEO takes</a>, and for the full picture, the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>.</p>
+
+<h2>Frequently asked questions</h2>
+${faqHtml(SEO_VS_PPC_FAQS)}
+`,
+    author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
+  },
+  {
+    // The loss percentages are the Lost Case Calculator's starting assumptions
+    // (app/components/case-calculator), labelled as such there and here. They
+    // are not measured data, and the article says so wherever they appear.
+    slug:        "slow-intake-cost",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    metaTitle:       "How Much Is a Slow Intake Costing Your Law Firm?",
+    metaDescription: "Work out what slow responses and after-hours gaps cost your firm in signed cases, with a simple formula, worked scenarios and the fixes that close the leak.",
+    title:       "How Much Is a Slow Intake Costing Your Law Firm?",
+    excerpt:     "Work out what slow responses and after-hours gaps cost your firm in signed cases — a simple formula, worked scenarios, and the fixes that close the leak.",
+    readTime:    "7-minute read",
+    date:        "October 14, 2026",
+    updated:     "October 14, 2026",
+    tags:        ["law firm intake", "slow intake cost", "lead response time law firm", "legal intake", "signed cases"],
+    stat:        { value: "Under 5 min", label: "The response time to aim for" },
+    heroImage:   "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "Why response time decides who signs the case",
+      "How to work out your own number",
+      "Five scenarios, worked through",
+      "Where intake usually leaks",
+      "How to fix it",
+      "How to measure your response time",
+      "Why this matters before SEO",
+      "Frequently asked questions",
+    ],
+    faqs: SLOW_INTAKE_FAQS,
+    content: `
+<h2>The short answer</h2>
+<div class="callout">It depends on four numbers: how many leads you get, how many you sign, what a case is worth, and how fast you answer. In our <a href="/case-calculator">lost case calculator</a>'s model, a firm with 40 leads a month that signs 20% of them, earns $12,000 a case, replies in one to four hours and does not answer after hours loses about <strong>3 signed cases — roughly $35,500 — a month</strong>. The loss percentages are the calculator's starting assumptions, not measured data; replace them with your own.</div>
+
+<p>Intake is the part of marketing most firms never measure. Every dollar spent on ads or SEO produces a lead; what happens in the next few minutes decides whether it becomes a case.</p>
+
+<h2>Why response time decides who signs the case</h2>
+<p>Someone who has just been injured, arrested or served often contacts more than one firm. The first firm that answers, listens and books a consultation has the best chance of signing them, and the others are calling back someone who has already chosen. A missed call after 6pm, a voicemail box, or a web form answered the next morning all hand the case to whoever picked up.</p>
+
+<h2>How to work out your own number</h2>
+<p>The calculator uses a simple model. You can run it by hand:</p>
+<p><strong>Signed cases lost to intake each month = leads per month × lead-to-signed rate × intake leak.</strong></p>
+<p>The intake leak is a share of convertible leads lost to slow responses and after-hours gaps. These are the calculator's starting assumptions:</p>
+<table>
+<thead><tr><th>Average response to a new lead</th><th>Assumed loss</th></tr></thead>
+<tbody>
+<tr><td>Under 5 minutes</td><td>0%</td></tr>
+<tr><td>5 to 30 minutes</td><td>8%</td></tr>
+<tr><td>30 to 60 minutes</td><td>15%</td></tr>
+<tr><td>1 to 4 hours</td><td>25%</td></tr>
+<tr><td>4+ hours or next day</td><td>35%</td></tr>
+</tbody>
+</table>
+<table>
+<thead><tr><th>After-hours coverage</th><th>Assumed extra loss</th></tr></thead>
+<tbody>
+<tr><td>24/7 live answer</td><td>0%</td></tr>
+<tr><td>Partial cover or voicemail</td><td>5%</td></tr>
+<tr><td>Business hours only</td><td>12%</td></tr>
+</tbody>
+</table>
+<p>The two are added together and capped at 50%. If you know your own figures — from call recordings, missed-call logs or intake notes — use those instead.</p>
+
+<h2>Five scenarios, worked through</h2>
+<p>The same example firm throughout: 40 leads a month, 20% signed (8 cases), $12,000 per case. Only the response time and after-hours cover change.</p>
+<table>
+<thead><tr><th>Response</th><th>After hours</th><th>Leak</th><th>Cases lost / month</th><th>Fees lost / month</th></tr></thead>
+<tbody>
+<tr><td>Under 5 minutes</td><td>24/7 live answer</td><td>0%</td><td>0</td><td>$0</td></tr>
+<tr><td>5 to 30 minutes</td><td>Voicemail</td><td>13%</td><td>1.0</td><td>$12,480</td></tr>
+<tr><td>30 to 60 minutes</td><td>Business hours only</td><td>27%</td><td>2.2</td><td>$25,920</td></tr>
+<tr><td>1 to 4 hours</td><td>Business hours only</td><td>37%</td><td>3.0</td><td>$35,520</td></tr>
+<tr><td>Next day</td><td>Business hours only</td><td>47%</td><td>3.8</td><td>$45,120</td></tr>
+</tbody>
+</table>
+<p>These figures come from the model's assumptions, not from a measured study. The point they make holds whatever the exact percentages: the cost of slow intake grows with every lead you already paid to get.</p>
+
+<h2>Where intake usually leaks</h2>
+<ul>
+<li><strong>Missed calls</strong> during busy hours, lunch, or when the receptionist is on another line.</li>
+<li><strong>After-hours calls</strong> that go to voicemail, when many injury and arrest calls happen.</li>
+<li><strong>Web forms</strong> answered hours later, or only by email.</li>
+<li><strong>No text option</strong> for people who would rather not call.</li>
+<li><strong>No owner</strong> for callbacks, so every lead is someone else's job.</li>
+<li><strong>No script</strong>, so the first call does not end with a booked consultation.</li>
+</ul>
+
+<h2>How to fix it</h2>
+<ol>
+<li><strong>Set a target</strong> of answering every new lead within 5 minutes during business hours.</li>
+<li><strong>Cover nights and weekends</strong> with a live answering service or an <a href="/intake-assistant">AI intake assistant</a> that screens the enquiry and hands your team a summary.</li>
+<li><strong>Text back missed calls</strong> automatically, with a promise of a call within minutes.</li>
+<li><strong>Reply to forms immediately</strong> with a confirmation, then call.</li>
+<li><strong>Give callbacks an owner</strong> and a deadline.</li>
+<li><strong>Script the first call</strong> to end with a booked consultation, within your bar's rules on solicitation.</li>
+</ol>
+
+<h2>How to measure your response time</h2>
+<ul>
+<li>Your call tracking or phone system's missed-call and answer-time reports.</li>
+<li>The timestamp a form arrives against the timestamp of the first call back, from your intake system or inbox.</li>
+<li>A weekly test: call your own number after hours and submit your own form, and time the reply.</li>
+</ul>
+
+<h2>Why this matters before SEO</h2>
+<p>SEO and ads both add leads. If intake loses a third of them, more leads mostly means more lost cases. Fixing intake first makes every marketing dollar go further — and it is usually cheaper than buying more leads. It is also part of how we judge a campaign: by signed cases, not by traffic. See <a href="/blog/law-firm-seo-vs-ppc">law firm SEO vs PPC: cost per signed case</a> and the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>.</p>
+
+<h2>Frequently asked questions</h2>
+${faqHtml(SLOW_INTAKE_FAQS)}
 `,
     author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
   },
