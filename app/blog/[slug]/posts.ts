@@ -198,6 +198,29 @@ const SPECIALIST_FAQS: PostFaq[] = [
   },
 ];
 
+const TRACKING_FAQS: PostFaq[] = [
+  {
+    q: "How do I know whether a signed case came from SEO?",
+    a: "Record the source when the lead first makes contact — from a tagged link, a call tracking number or an intake question — and keep it on the record until the case signs. Then count signed cases by source each month.",
+  },
+  {
+    q: "Can I put a call tracking number on my Google Business Profile?",
+    a: "Google requires a number that connects to your location and is under your direct control, and forbids numbers that redirect people to someone else. The cautious setup keeps your real local number as the primary number and uses tracking numbers on your website. The profile's performance report already counts calls made from the profile.",
+  },
+  {
+    q: "Should I add UTM parameters to my Google Business Profile website link?",
+    a: "Yes. It is a link you control, so tag it — for example utm_source=google, utm_medium=organic and a campaign name such as gbp-listing — in lowercase. Visits stay in organic search, and the campaign name separates them from other organic traffic.",
+  },
+  {
+    q: "Which GA4 event should a law firm use for form submissions?",
+    a: "Google's recommended event for a submitted form or information request is generate_lead. Mark it as a key event in GA4 so it shows in your key event reports.",
+  },
+  {
+    q: "How long do I have to upload a signed case to Google Ads?",
+    a: "Google's guide says the click-to-conversion cycle must fit within its limit: 90 days for most upload methods, and some connected sources look back only 14 days. Cases can take longer to sign, so also upload an earlier stage such as a qualified consultation.",
+  },
+];
+
 export const posts = [
   {
     slug:        "google-ai-overviews-seo",
@@ -2515,7 +2538,7 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
 <ol>
 <li><strong>Calls</strong> from the Business Profile and the website, with call tracking that keeps your main number on the profile.</li>
 <li><strong>Form fills and chats</strong>, recorded as events in Google Analytics 4.</li>
-<li><strong>Signed cases</strong>, matched back to the source in your intake system. This is the number that decides whether SEO pays.</li>
+<li><strong>Signed cases</strong>, matched back to the source in your intake system. This is the number that decides whether SEO pays. The setup, step by step: <a href="/blog/track-signed-cases-from-seo">how to track signed cases from SEO</a>.</li>
 </ol>
 <p>Speed matters as much as volume: a lead that waits hours for a reply often signs with the firm that answered first. An <a href="/intake-assistant">AI intake assistant</a> is one way to answer every enquiry immediately and hand your team a clean summary. To put a number on it, see <a href="/blog/slow-intake-cost">how much a slow intake costs a law firm</a>.</p>
 
@@ -2738,7 +2761,7 @@ ${faqHtml(HOW_LONG_FAQS)}
 <ul>
 <li><strong>Cost per click and clicks</strong> — Google Ads, by campaign and keyword.</li>
 <li><strong>Calls and forms</strong> — call tracking, and form submissions recorded as events in GA4.</li>
-<li><strong>Signed cases by source</strong> — your intake or case management system; add a source field if it has none.</li>
+<li><strong>Signed cases by source</strong> — your intake or case management system; add a source field if it has none. See <a href="/blog/track-signed-cases-from-seo">how to track signed cases from SEO</a>.</li>
 <li><strong>Organic visibility</strong> — Google Search Console for impressions and clicks, and your Business Profile's performance report.</li>
 </ul>
 <p>Personal injury firms can estimate what visibility gaps and slow intake cost them with the <a href="/case-calculator">lost case calculator</a>. For timelines, see <a href="/blog/how-long-does-law-firm-seo-take">how long law firm SEO takes</a>, and for the full picture, the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>.</p>
@@ -2951,7 +2974,7 @@ ${faqHtml(SLOW_INTAKE_FAQS)}
 <ul>
 <li>A written plan with dates, before or at the start of the work.</li>
 <li>Visible work every month: pages published, profile changes, fixes made.</li>
-<li>Reports that show calls, form fills and, with your help, signed cases — not only rankings.</li>
+<li>Reports that show calls, form fills and, with your help, signed cases — not only rankings (see <a href="/blog/track-signed-cases-from-seo">how to track signed cases from SEO</a>).</li>
 <li>Your Business Profile, website, domain and analytics staying in your name.</li>
 </ul>
 
@@ -3045,7 +3068,7 @@ ${faqHtml(COST_FAQS)}
 <ul>
 <li><strong>Can your intake handle more leads?</strong> If calls go to voicemail, more leads mostly means more lost cases. See <a href="/blog/slow-intake-cost">what a slow intake costs</a>.</li>
 <li><strong>Which practices and cities matter most?</strong> A focused plan beats a thin one spread over everything.</li>
-<li><strong>Can you judge it on signed cases?</strong> That needs a source field in your intake system.</li>
+<li><strong>Can you judge it on signed cases?</strong> That needs a source field in your intake system — see <a href="/blog/track-signed-cases-from-seo">how to track signed cases from SEO</a>.</li>
 <li><strong>What can you afford for long enough to judge?</strong> SEO starts moving in about 60 to 90 days and builds after that. See <a href="/blog/law-firm-seo-cost">what law firm SEO costs</a>.</li>
 </ul>
 
@@ -3153,6 +3176,150 @@ ${faqHtml(CHOOSE_AGENCY_FAQS)}
 
 <h2>Frequently asked questions</h2>
 ${faqHtml(SPECIALIST_FAQS)}
+`,
+    author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
+  },
+  {
+    // Every product claim is from the vendor's own documentation, read on
+    // 15 Oct 2026: Google Business Profile guidelines, GA4 (UTMs, recommended
+    // events, key events), Google Ads offline conversions (GCLID), Clio Grow
+    // reports, Lawmatics UTM source codes, MyCase leads overview. Nothing here
+    // claims results for any client.
+    slug:        "track-signed-cases-from-seo",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    metaTitle:       "How to Track Signed Cases from SEO: A Law Firm Setup Guide",
+    metaDescription: "Seven steps to see which signed cases came from SEO, your Google Business Profile and ads: UTM tags, call tracking, GA4 key events, intake source fields and offline conversion import.",
+    title:       "How to Track Signed Cases from SEO: A Setup Guide for Law Firms",
+    excerpt:     "Seven steps to see which signed cases came from SEO, your Business Profile and ads — UTM tags, call tracking that keeps your profile safe, GA4 key events, intake source fields and a monthly report.",
+    readTime:    "9-minute read",
+    date:        "October 15, 2026",
+    updated:     "October 15, 2026",
+    tags:        ["law firm marketing attribution", "track signed cases", "law firm call tracking", "utm google business profile", "ga4 generate_lead", "offline conversion import law firm"],
+    stat:        { value: "7 steps", label: "From first click to signed case" },
+    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "Why traffic and rankings are not enough",
+      "Step 1: Tag the links you control",
+      "Step 2: Track calls without risking your Business Profile",
+      "Step 3: Record form fills as a key event in GA4",
+      "Step 4: Carry the source into your intake system",
+      "Step 5: Ask every caller how they found you",
+      "Step 6: Send signed cases back to Google Ads",
+      "Step 7: The monthly signed-case report",
+      "Common mistakes",
+      "Sources",
+      "Frequently asked questions",
+    ],
+    faqs: TRACKING_FAQS,
+    content: `
+<h2>The short answer</h2>
+<div class="callout">To know which signed cases came from SEO, <strong>record the source at first contact and keep it on the record until the case signs</strong>. In practice: tag the links you control with UTM parameters, track website calls by source while keeping your real number on your Google Business Profile, record form fills as a key event in Google Analytics 4, pass the source into your intake or case management system, ask every new caller how they found you, and count signed cases by source once a month. If you run Google Ads, upload signed cases back to Google so the ads learn which clicks become clients.</div>
+
+<p>None of this needs expensive software. Most of it is settings you already have and a discipline of filling in one field. This guide covers the setup in the order we would do it.</p>
+
+<h2>Why traffic and rankings are not enough</h2>
+<p>Rankings and traffic tell you whether people can find you. They do not tell you whether those people became clients. A firm can climb the rankings for terms that bring calls it cannot take, and a month with fewer visits can produce more signed cases. The number that decides whether SEO pays is <strong>signed cases by source</strong>, and from it, cost per signed case. The formulas are in <a href="/blog/law-firm-seo-vs-ppc">law firm SEO vs PPC: cost per signed case</a> and <a href="/blog/law-firm-seo-cost">how much law firm SEO costs</a>.</p>
+<p>The problem is that the source is known only at the moment of first contact — the click, the call, the form — and is easily lost by the time a case signs weeks later. Every step below is about catching it then and keeping it.</p>
+
+<h2>Step 1: Tag the links you control</h2>
+<p>UTM parameters are labels added to the end of a link that tell Google Analytics where a visit came from. Google's guidance is to always use <strong>utm_source</strong>, <strong>utm_medium</strong> and <strong>utm_campaign</strong> together. Their values are case sensitive — "Google" and "google" count as two sources — so use lowercase and one spelling per source.</p>
+<p>Tag every link you place yourself:</p>
+<table>
+<thead><tr><th>Link</th><th>Example tags</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Google Business Profile website link</td><td>utm_source=google&amp;utm_medium=organic&amp;utm_campaign=gbp-listing</td><td>Profile visits stay in organic search, and the campaign name separates them from your other organic traffic.</td></tr>
+<tr><td>Legal directory profiles</td><td>utm_source=[directory name]&amp;utm_medium=referral&amp;utm_campaign=directory-profile</td><td>Shows which directories send enquiries rather than just visits.</td></tr>
+<tr><td>Email newsletters</td><td>utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=[month]</td><td>Separates repeat and referral enquiries from new search traffic.</td></tr>
+<tr><td>Paid social and other ads</td><td>utm_source=[platform]&amp;utm_medium=paid-social&amp;utm_campaign=[campaign]</td><td>Keeps paid visits out of your organic numbers.</td></tr>
+</tbody>
+</table>
+<p>Do not add UTM tags to links between pages of your own site. They overwrite the original source of the visit.</p>
+
+<h2>Step 2: Track calls without risking your Business Profile</h2>
+<p>For most law firms the phone is the main way new clients make contact, so calls need tracking as much as forms. Call tracking gives each source its own number that forwards to your office, so a call to that number tells you where the caller came from. On a website this is usually done with dynamic number insertion, which shows a different number depending on how the visitor arrived.</p>
+<p>The Business Profile needs more care. Google's guidelines ask for a phone number that connects to your individual location, preferably a local number rather than a central call centre, and under the direct control of the business. They forbid numbers that redirect people to anyone other than the actual business. The cautious setup is therefore:</p>
+<ul>
+<li><strong>Keep your real local number as the profile's primary number</strong>, the same number shown on your website's contact page and in your citations.</li>
+<li><strong>Measure profile calls in the profile itself.</strong> The Business Profile performance report counts calls made from the profile.</li>
+<li><strong>Use tracking numbers on your website and ads</strong>, where dynamic number insertion can show them without changing the number Google holds for your business.</li>
+</ul>
+<p>Whatever you use, record calls. A call log that shows the tracking source, the date and whether the caller was a potential client is the raw material for Step 7.</p>
+
+<h2>Step 3: Record form fills as a key event in GA4</h2>
+<p>Google's recommended event for a submitted form or information request is <strong>generate_lead</strong>. It can carry a <strong>value</strong> and <strong>currency</strong> if you want to give leads an estimated worth. Fire it when a form is actually submitted — on the thank-you page or after a successful submission — not when someone opens the form.</p>
+<p>Then mark it as a key event: in GA4, go to Admin, then Data display, then Events, and click the star beside generate_lead. If you send people to a thank-you page instead, you can create an event for that page with "Mark as key event" switched on. Reports can take up to a day to show new events.</p>
+<p>GA4 tells you which channels produce form fills. It cannot tell you which of those leads signed — for that you need Step 4.</p>
+
+<h2>Step 4: Carry the source into your intake system</h2>
+<p>This is the step most firms skip, and the one that makes the rest useful. The aim is that every lead record in your intake or case management system carries its source.</p>
+<ol>
+<li><strong>Add hidden fields to your website forms</strong> for utm_source, utm_medium, utm_campaign and gclid (the click ID Google Ads adds to ad clicks when auto-tagging is on). Read the values from the landing page link and keep them in the browser, so they are still there if the visitor reads three more pages before filling in the form.</li>
+<li><strong>Send those fields into your intake system</strong> with the rest of the form, through the system's web form, integration or API.</li>
+<li><strong>Keep a single source field on every lead</strong>, using the same list of sources each time: Google organic, Google Business Profile, Google Ads, Local Services Ads, directory, referral, returning client, other.</li>
+</ol>
+<p>What the main legal systems offer, according to their own documentation:</p>
+<table>
+<thead><tr><th>System</th><th>Source tracking</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Clio Grow</td><td>Lead sources and campaigns on each matter. The lead source revenue report shows, for each source, intake matters, hired matters, the hired conversion rate, estimated value and revenue; leads with no source show as Unassigned.</td><td><a href="https://help.clio.com/hc/en-us/articles/29739406189339" target="_blank" rel="noopener noreferrer">Clio Grow reports</a></td></tr>
+<tr><td>Lawmatics</td><td>With its tracking pixel on the page with your form, Lawmatics reads the utm_source and utm_campaign of incoming leads and assigns the matching marketing source and campaign automatically.</td><td><a href="https://help.lawmatics.com/en/articles/10699951-utm-source-codes" target="_blank" rel="noopener noreferrer">Lawmatics UTM source codes</a></td></tr>
+<tr><td>MyCase</td><td>A referral source is a default field on each lead, with the list of sources set in Lead Settings; the source can be corrected after a lead converts.</td><td><a href="https://supportcenter.mycase.com/en/articles/9370266-leads-overview" target="_blank" rel="noopener noreferrer">MyCase leads overview</a></td></tr>
+</tbody>
+</table>
+<p>If your system has no source field, a spreadsheet with one row per lead — date, name, source, practice area, outcome, fee — does the same job.</p>
+
+<h2>Step 5: Ask every caller how they found you</h2>
+<p>Tracking misses things. Someone sees your Business Profile, calls a week later from memory, or is told about you by a friend who found you on Google. Make "How did you hear about us?" a required question in your intake script and on your forms, with the same list of answers as your source field.</p>
+<p>When the answer and the tracked source disagree, keep both. "Tracked: Google organic, said: referral from a former client" tells you something true about how people choose a lawyer.</p>
+
+<h2>Step 6: Send signed cases back to Google Ads</h2>
+<p>If you run Google Ads, the platform only knows about the conversions you tell it about — usually calls and form fills, many of which never become clients. Offline conversion import lets you tell it which clicks became signed cases.</p>
+<ul>
+<li><strong>With the click ID (GCLID).</strong> Turn on auto-tagging, store each lead's GCLID with the lead (Step 4), and upload a conversion with the GCLID and the date and time when the case signs. GCLIDs are case sensitive, so store them exactly. Google's guide says your click-to-conversion cycle has to fit within its limit — 90 days for most upload methods, and some connected sources look back only 14 days.</li>
+<li><strong>With enhanced conversions for leads,</strong> Google matches the conversion using hashed first-party details, such as the email address the lead gave on your form, instead of the click ID.</li>
+</ul>
+<p>Because cases can take longer to sign than these windows allow, upload an earlier stage too, such as a qualified consultation, so the ads can learn from a signal that arrives in time. Wait a few hours after creating a new conversion action before the first upload; Google says conversions uploaded too soon can take up to two days to appear.</p>
+
+<h2>Step 7: The monthly signed-case report</h2>
+<p>Once a month, put the numbers in one table:</p>
+<table>
+<thead><tr><th>Source</th><th>Leads</th><th>Consultations</th><th>Signed cases</th><th>Fees from signed cases</th><th>Cost</th><th>Cost per signed case</th></tr></thead>
+<tbody>
+<tr><td>Google organic (website)</td><td></td><td></td><td></td><td></td><td>SEO fee share</td><td></td></tr>
+<tr><td>Google Business Profile</td><td></td><td></td><td></td><td></td><td>SEO fee share</td><td></td></tr>
+<tr><td>Google Ads</td><td></td><td></td><td></td><td></td><td>Ad spend + management</td><td></td></tr>
+<tr><td>Local Services Ads</td><td></td><td></td><td></td><td></td><td>Lead charges</td><td></td></tr>
+<tr><td>Directories</td><td></td><td></td><td></td><td></td><td>Listing fees</td><td></td></tr>
+<tr><td>Referrals and returning clients</td><td></td><td></td><td></td><td></td><td>—</td><td></td></tr>
+</tbody>
+</table>
+<p>Two habits make it trustworthy. Count a case in the month it signs, against the source recorded when the lead first made contact. And look at three months together, not one: a single personal injury case can swing a month on its own.</p>
+<p>Read it alongside your response times. If one source produces leads but few signed cases, check how quickly those leads were answered before blaming the source — see <a href="/blog/slow-intake-cost">how much a slow intake costs a law firm</a>.</p>
+
+<h2>Common mistakes</h2>
+<ul>
+<li><strong>Replacing the Business Profile's main number</strong> with a tracking number without checking Google's guidelines, leaving the profile showing a different number from your website and directory listings.</li>
+<li><strong>UTM tags on internal links,</strong> which overwrite the real source of the visit.</li>
+<li><strong>Mixed spellings</strong> — "Google", "google", "GBP", "gmb" — which split one source into four.</li>
+<li><strong>Counting form opens or page views</strong> as leads instead of completed submissions.</li>
+<li><strong>A source field nobody fills in.</strong> Make it required at intake, and check for "Unassigned" every month.</li>
+<li><strong>Judging SEO on its first 60 to 90 days of signed cases.</strong> Early months are for direction; see <a href="/blog/how-long-does-law-firm-seo-take">how long law firm SEO takes</a>.</li>
+</ul>
+<p>For the wider picture, see the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>, and question 3 in <a href="/blog/choose-law-firm-seo-agency">how to choose a law firm SEO agency</a> on what an agency's report should show.</p>
+
+<h2>Sources</h2>
+<ul>
+<li>Google Business Profile: <a href="https://support.google.com/business/answer/3038177" target="_blank" rel="noopener noreferrer">guidelines for representing your business</a>.</li>
+<li>Google Analytics: <a href="https://support.google.com/analytics/answer/10917952" target="_blank" rel="noopener noreferrer">URL builders and UTM parameters</a>, <a href="https://developers.google.com/analytics/devguides/collection/ga4/reference/events" target="_blank" rel="noopener noreferrer">recommended events (generate_lead)</a>, <a href="https://support.google.com/analytics/answer/13128484" target="_blank" rel="noopener noreferrer">mark events as key events</a>.</li>
+<li>Google Ads: <a href="https://support.google.com/google-ads/answer/7012522" target="_blank" rel="noopener noreferrer">set up offline conversions using Google Click ID (GCLID)</a>.</li>
+<li>Clio, Lawmatics and MyCase help centres, linked in Step 4.</li>
+</ul>
+<p>All read on 15 October 2026. Products and their settings change; check the current documentation before you build.</p>
+
+<h2>Frequently asked questions</h2>
+${faqHtml(TRACKING_FAQS)}
 `,
     author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
   },
