@@ -125,6 +125,52 @@ const SLOW_INTAKE_FAQS: PostFaq[] = [
   },
 ];
 
+const COST_FAQS: PostFaq[] = [
+  {
+    q: "How much does law firm SEO cost per month?",
+    a: "It depends on the number of practice areas and cities and how competitive they are. SearchPrex's law firm plans run $1,200 to $2,500 a month, month to month, after a free tear-down that shows the scope first.",
+  },
+  {
+    q: "Why do law firm SEO quotes vary so much?",
+    a: "Agencies price very different amounts of work under the same name. Compare quotes on the work done each month, how results are measured and whose name the accounts are in, not on the headline price.",
+  },
+  {
+    q: "Is there a long-term contract?",
+    a: "Not with SearchPrex: plans are month to month. Be wary of any agency that asks for a long lock-in before you can see work being done.",
+  },
+  {
+    q: "Should I pay an agency per lead or per signed case?",
+    a: "Be careful. Paying for referrals and sharing legal fees with non-lawyers is restricted under ABA Model Rules 7.2(b) and 5.4 and their state versions. Check your state bar's guidance before agreeing to performance pricing.",
+  },
+  {
+    q: "How do I know if law firm SEO is worth the cost?",
+    a: "Divide the monthly fee by your average fee per signed case to get the number of cases it must produce each month to break even, then track signed cases by source to see whether it does.",
+  },
+];
+
+const CHOOSE_AGENCY_FAQS: PostFaq[] = [
+  {
+    q: "What should I ask a law firm SEO agency before hiring?",
+    a: "Who will own your accounts, what happens each month, what the report shows, whether they work with your competitors, how they get links, who checks legal accuracy, how they follow bar rules, the contract terms and what they guarantee.",
+  },
+  {
+    q: "What are the biggest red flags in an SEO agency?",
+    a: "A guaranteed #1 ranking, a claimed special relationship with Google, your profile or website held in the agency's name, bought links, city-swapped pages at scale, and copy that promises legal outcomes.",
+  },
+  {
+    q: "Should a law firm SEO agency have law firm case studies?",
+    a: "They help, but only if they are dated and verifiable. An honest agency without legal results will say so and show the same kind of work in other industries, labelled as such.",
+  },
+  {
+    q: "Should my agency work only with my firm in my city?",
+    a: "Ideally, for your practice area. An agency serving two personal injury firms in the same city is working against one of them.",
+  },
+  {
+    q: "Can an agency guarantee results?",
+    a: "No one can guarantee a ranking; Google says so. An agency can commit to the work, to reporting, and to measurable progress by a set date, with a remedy if it does not happen.",
+  },
+];
+
 export const posts = [
   {
     slug:        "google-ai-overviews-seo",
@@ -2434,7 +2480,7 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
 <p>The full timeline, month by month, with what speeds it up and slows it down: <a href="/blog/how-long-does-law-firm-seo-take">How long does law firm SEO take to work?</a></p>
 
 <h2>What law firm SEO costs</h2>
-<p>Agency retainers vary widely with the number of practice areas, the number of cities and how competitive they are. SearchPrex's law firm plans run <strong>$1,200 to $2,500 a month</strong>, depending on how many practice areas and cities the plan covers, month to month with no long-term contract. Whatever you pay, ask what work happens each month and how results will be reported. To compare it with Google Ads on the number that matters, see <a href="/blog/law-firm-seo-vs-ppc">law firm SEO vs PPC: cost per signed case</a>.</p>
+<p>Agency retainers vary widely with the number of practice areas, the number of cities and how competitive they are. SearchPrex's law firm plans run <strong>$1,200 to $2,500 a month</strong>, depending on how many practice areas and cities the plan covers, month to month with no long-term contract. Whatever you pay, ask what work happens each month and how results will be reported. To compare it with Google Ads on the number that matters, see <a href="/blog/law-firm-seo-vs-ppc">law firm SEO vs PPC: cost per signed case</a>. The pricing models, what moves the price and how to work out break-even are in <a href="/blog/law-firm-seo-cost">how much law firm SEO costs</a>.</p>
 <p>For personal injury firms, the <a href="/case-calculator">lost case calculator</a> estimates, from your own numbers, how many signed cases go to competitors because of search visibility gaps and slow intake — a useful figure to set against any retainer.</p>
 
 <h2>How to measure it: calls, forms and signed cases</h2>
@@ -2454,7 +2500,7 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
 <li>Do you work with my competitors in the same city and practice area?</li>
 <li>How do you keep copy within my state's advertising rules?</li>
 </ul>
-<p>Treat these as red flags: a guaranteed #1 ranking, dozens of city pages that differ only by name, a long contract before any work is visible, and reports with no calls or cases in them.</p>
+<p>Treat these as red flags: a guaranteed #1 ranking, dozens of city pages that differ only by name, a long contract before any work is visible, and reports with no calls or cases in them. The full 12-question scorecard: <a href="/blog/choose-law-firm-seo-agency">how to choose a law firm SEO agency</a>.</p>
 
 <h2>Where SearchPrex stands</h2>
 <p>We have not yet completed a law firm engagement, so we publish no legal results and won't. Our <a href="/case-studies">case studies</a> are in local services and ecommerce, labelled by industry; the underlying work — profiles, indexing, pages built for real searches — is the same.</p>
@@ -2783,6 +2829,194 @@ ${faqHtml(SEO_VS_PPC_FAQS)}
 
 <h2>Frequently asked questions</h2>
 ${faqHtml(SLOW_INTAKE_FAQS)}
+`,
+    author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
+  },
+  {
+    // Prices come from lib/pricing (confirmed by the founder, 14 Oct 2026).
+    // No industry-average figures: none could be sourced, so none are given.
+    slug:        "law-firm-seo-cost",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    metaTitle:       "How Much Does Law Firm SEO Cost? Pricing Explained (2026)",
+    metaDescription: "How law firm SEO is priced, what moves the price, what a $1,200 to $2,500 monthly plan includes, and how to tell whether it pays for itself in signed cases.",
+    title:       "How Much Does Law Firm SEO Cost?",
+    excerpt:     "How law firm SEO is priced, what moves the price, what a $1,200 to $2,500 monthly plan includes, and how to tell whether it pays for itself in signed cases.",
+    readTime:    "8-minute read",
+    date:        "October 14, 2026",
+    updated:     "October 14, 2026",
+    tags:        ["law firm seo cost", "law firm seo pricing", "seo for lawyers cost", "legal seo pricing", "how much does seo cost for lawyers"],
+    stat:        { value: "$1,200–$2,500", label: "SearchPrex law firm SEO, per month" },
+    heroImage:   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "How agencies price law firm SEO",
+      "What moves the price",
+      "What SearchPrex's law firm plan includes",
+      "What you should get for the money",
+      "Is it worth it? Work it out in signed cases",
+      "Pricing red flags",
+      "Frequently asked questions",
+    ],
+    faqs: COST_FAQS,
+    content: `
+<h2>The short answer</h2>
+<div class="callout">Law firm SEO is usually sold as a <strong>monthly retainer</strong>, priced by the number of practice areas and cities it covers and how competitive they are. SearchPrex's law firm plans run <strong>$1,200 to $2,500 a month</strong>, month to month, and a free tear-down of your site comes first, so you see the scope before paying anything.</div>
+
+<p>Quotes for law firm SEO vary widely because agencies price different amounts of work under the same name. The useful questions are what work happens each month, what it will be measured on, and what it has to produce to pay for itself.</p>
+
+<h2>How agencies price law firm SEO</h2>
+<table>
+<thead><tr><th>Model</th><th>How it works</th><th>Watch for</th></tr></thead>
+<tbody>
+<tr><td>Monthly retainer</td><td>A fixed fee for ongoing work: pages, profile, technical fixes, reporting.</td><td>Vague deliverables. Ask what happens each month.</td></tr>
+<tr><td>One-off audit or project</td><td>A fixed price for an audit, a site rebuild or a set of pages.</td><td>Who implements the findings, and when.</td></tr>
+<tr><td>Hourly consulting</td><td>Advice billed by the hour; your team does the work.</td><td>Works only if someone in-house has the time.</td></tr>
+<tr><td>Pay per lead or per case</td><td>The agency is paid for each lead or signed case.</td><td>Bar rules on paying for referrals and sharing fees (ABA Model Rules 7.2(b) and 5.4). Check your state bar's guidance first.</td></tr>
+</tbody>
+</table>
+
+<h2>What moves the price</h2>
+<ul>
+<li><strong>Practice areas</strong> — each one needs its own pages and research.</li>
+<li><strong>Cities</strong> — each city you genuinely serve needs pages with real local detail, not a swapped city name.</li>
+<li><strong>Competition</strong> — personal injury in a large metro takes more work than estate planning in a smaller city.</li>
+<li><strong>Where your site starts</strong> — a site with indexing or speed problems needs fixing before new pages help.</li>
+<li><strong>Your Business Profile</strong> — a suspended or poorly set-up profile adds work at the start.</li>
+</ul>
+
+<h2>What SearchPrex's law firm plan includes</h2>
+<p>The plan runs $1,200 to $2,500 a month; where a firm sits in that range depends on how many practice areas and cities it covers.</p>
+<ul>
+<li><strong>Practice-area pages</strong> for each practice and city in the plan, written for the searches clients make.</li>
+<li><strong>E-E-A-T content</strong> — named attorneys, verifiable credentials and accurate, jurisdiction-specific information.</li>
+<li><strong>Local pack targeting</strong> — Google Business Profile category, services and reviews, and consistent directory listings.</li>
+<li><strong>A report every Monday</strong> on rankings, calls and form fills.</li>
+<li><strong>A free tear-down first</strong>, delivered within 24 hours, so the scope is clear before you pay.</li>
+<li><strong>Month-to-month terms</strong> and one firm per city and practice area.</li>
+<li><strong>A 90-day guarantee</strong>: if there is no measurable progress in rankings, traffic or leads within 90 days, we keep working at no extra cost or refund the fees for those 90 days. Rankings are never guaranteed.</li>
+</ul>
+
+<h2>What you should get for the money</h2>
+<ul>
+<li>A written plan with dates, before or at the start of the work.</li>
+<li>Visible work every month: pages published, profile changes, fixes made.</li>
+<li>Reports that show calls, form fills and, with your help, signed cases — not only rankings.</li>
+<li>Your Business Profile, website, domain and analytics staying in your name.</li>
+</ul>
+
+<h2>Is it worth it? Work it out in signed cases</h2>
+<p>The simplest test is break-even: <strong>how many signed cases does the monthly fee need to produce?</strong></p>
+<p><strong>Break-even cases per month = monthly SEO cost ÷ average fee per signed case.</strong></p>
+<p>As an example only: a $2,000 monthly plan and a $12,000 average fee give 0.17 cases a month — one signed case every six months covers the fee. Use your own figures; for most practices, what decides the answer is your average fee and how well your intake converts the leads SEO produces.</p>
+<p>To compare SEO with Google Ads on the same basis, see <a href="/blog/law-firm-seo-vs-ppc">law firm SEO vs PPC: cost per signed case</a>. To see how much slow responses cost before you buy more leads, see <a href="/blog/slow-intake-cost">how much a slow intake costs a law firm</a>.</p>
+
+<h2>Pricing red flags</h2>
+<ul>
+<li><strong>A price with no list of work.</strong> If the agency cannot say what happens each month, you cannot judge it.</li>
+<li><strong>A long contract before any work is visible.</strong> You should see fixes and pages within the first two months.</li>
+<li><strong>A guaranteed ranking or number of cases.</strong> Google says no one can guarantee a #1 ranking.</li>
+<li><strong>A package that is cheap because it is templated.</strong> Dozens of near-identical city pages are quick to make and risky to publish.</li>
+<li><strong>Accounts in the agency's name.</strong> If you leave, you should keep your profile, site and data.</li>
+</ul>
+<p>More on choosing well: <a href="/blog/choose-law-firm-seo-agency">how to choose a law firm SEO agency</a>, or the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>.</p>
+
+<h2>Frequently asked questions</h2>
+${faqHtml(COST_FAQS)}
+`,
+    author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
+  },
+  {
+    // The red flags are general ones, several from Google's own guidance on
+    // hiring an SEO; none is presented as something SearchPrex observed in law
+    // firm audits, because there have been no law firm engagements.
+    slug:        "choose-law-firm-seo-agency",
+    category:    "Content Strategy",
+    subcategory: "Law Firms",
+    metaTitle:       "How to Choose a Law Firm SEO Agency: 12 Questions to Ask",
+    metaDescription: "Twelve questions to ask a law firm SEO agency, what a good answer sounds like, the red flags that should end the conversation, and how we answer them ourselves.",
+    title:       "How to Choose a Law Firm SEO Agency: 12 Questions to Ask",
+    excerpt:     "Twelve questions to ask a law firm SEO agency, what a good answer sounds like, the red flags that should end the conversation, and how we answer them ourselves.",
+    readTime:    "8-minute read",
+    date:        "October 14, 2026",
+    updated:     "October 14, 2026",
+    tags:        ["how to choose a law firm seo agency", "law firm seo agency", "legal seo company", "seo agency red flags", "hire seo for lawyers"],
+    stat:        { value: "12 questions", label: "To ask before you sign" },
+    heroImage:   "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?w=1400&q=85&auto=format&fit=crop",
+    toc: [
+      "The short answer",
+      "What Google itself warns about",
+      "The 12-question scorecard",
+      "Red flags that should end the conversation",
+      "Questions to ask yourself first",
+      "How SearchPrex answers these questions",
+      "Frequently asked questions",
+    ],
+    faqs: CHOOSE_AGENCY_FAQS,
+    content: `
+<h2>The short answer</h2>
+<div class="callout">Choose an agency that leaves your Business Profile, website and data in your name, can say exactly what it will do each month, reports on calls and signed cases rather than rankings alone, will not work for a competitor in your city and practice area, and knows your bar's advertising rules. Walk away from anyone who guarantees a #1 ranking.</div>
+
+<p>Most firms compare agencies on price and sales calls. The questions below compare them on what decides the outcome: ownership, the actual work, how it is measured and how much risk it puts on your licence and your site.</p>
+
+<h2>What Google itself warns about</h2>
+<p>Google's own guide for site owners, <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo" target="_blank" rel="noopener noreferrer">"Do you need an SEO?"</a>, says no one can guarantee a #1 ranking on Google. It suggests asking an SEO for examples of previous work, whether they follow Google Search Essentials, and how they will communicate, and it warns against those who claim a special relationship with Google or promise guaranteed rankings. It is short and worth reading before any sales call.</p>
+
+<h2>The 12-question scorecard</h2>
+<table>
+<thead><tr><th>Ask</th><th>A good answer</th><th>A red flag</th></tr></thead>
+<tbody>
+<tr><td>1. Who will own my Business Profile, website, domain and analytics?</td><td>You do; the agency gets manager access.</td><td>The agency creates or holds them in its own account.</td></tr>
+<tr><td>2. What exactly happens each month?</td><td>Named deliverables: pages, profile changes, fixes.</td><td>"Ongoing optimisation" with no list.</td></tr>
+<tr><td>3. What will the report show?</td><td>Calls, form fills and signed cases, alongside rankings.</td><td>Rankings and traffic only.</td></tr>
+<tr><td>4. Do you work with my competitors in the same city and practice?</td><td>No, or a clear exclusivity policy.</td><td>Yes, or no straight answer.</td></tr>
+<tr><td>5. Can you show results, and are any of them law firms?</td><td>Dated, verifiable results, and honesty if none are legal.</td><td>Unverifiable screenshots or round-number claims.</td></tr>
+<tr><td>6. How do you get links and mentions?</td><td>Directories, real local and legal publications, PR.</td><td>Buying links, or networks of sites.</td></tr>
+<tr><td>7. How do you handle several cities?</td><td>Separate pages with real local detail for cities you serve.</td><td>One page copied with the city name swapped.</td></tr>
+<tr><td>8. Who writes the content, and who checks the law?</td><td>A writer, with attorney review for legal accuracy.</td><td>AI-generated pages with no review.</td></tr>
+<tr><td>9. How do you keep copy within bar rules?</td><td>Knows ABA Model Rules 7.1 and 7.2 and checks your state's version.</td><td>Copy that promises outcomes or calls you a "specialist" without basis.</td></tr>
+<tr><td>10. What does the contract say?</td><td>Month to month, or a short term with a clear exit.</td><td>A long lock-in before any work is visible.</td></tr>
+<tr><td>11. What do you guarantee?</td><td>The process, and measurable progress by a set date.</td><td>A #1 ranking or a number of cases.</td></tr>
+<tr><td>12. When should I expect movement?</td><td>First measurable movement in about 60 to 90 days; longer for competitive terms.</td><td>"Page one in 30 days."</td></tr>
+</tbody>
+</table>
+
+<h2>Red flags that should end the conversation</h2>
+<ul>
+<li><strong>A guaranteed #1 ranking</strong> — Google says no one can promise one.</li>
+<li><strong>A "special relationship" with Google</strong>, or paid "priority" indexing.</li>
+<li><strong>Your profile or website in the agency's name.</strong> Leaving should not cost you your listing or your reviews.</li>
+<li><strong>Bought links or private blog networks.</strong> They can lead to a manual action against your site.</li>
+<li><strong>City-swapped pages at scale.</strong> Google treats them as doorway pages.</li>
+<li><strong>Outcome promises in your copy.</strong> A bar complaint is a worse result than a ranking drop.</li>
+</ul>
+
+<h2>Questions to ask yourself first</h2>
+<ul>
+<li><strong>Can your intake handle more leads?</strong> If calls go to voicemail, more leads mostly means more lost cases. See <a href="/blog/slow-intake-cost">what a slow intake costs</a>.</li>
+<li><strong>Which practices and cities matter most?</strong> A focused plan beats a thin one spread over everything.</li>
+<li><strong>Can you judge it on signed cases?</strong> That needs a source field in your intake system.</li>
+<li><strong>What can you afford for long enough to judge?</strong> SEO starts moving in about 60 to 90 days and builds after that. See <a href="/blog/law-firm-seo-cost">what law firm SEO costs</a>.</li>
+</ul>
+
+<h2>How SearchPrex answers these questions</h2>
+<p>For transparency, here is how we answer the scorecard ourselves.</p>
+<table>
+<thead><tr><th>Question</th><th>Our answer</th></tr></thead>
+<tbody>
+<tr><td>Ownership</td><td>Your profile, website, domain and analytics stay in your name.</td></tr>
+<tr><td>Monthly work and reporting</td><td>A written plan, and a report every Monday on rankings, calls and form fills.</td></tr>
+<tr><td>Competitors</td><td>One firm per city and practice area.</td></tr>
+<tr><td>Law firm results</td><td>None yet. We have not completed a law firm engagement, so we publish no legal results. Our <a href="/case-studies">case studies</a> are in local services and ecommerce, labelled by industry.</td></tr>
+<tr><td>Contract</td><td>Month to month.</td></tr>
+<tr><td>Guarantee</td><td>Measurable progress in rankings, traffic or leads within 90 days, or we keep working at no extra cost or refund those 90 days' fees. No ranking guarantee.</td></tr>
+<tr><td>Timeline</td><td>First measurable movement usually within 60 to 90 days. See <a href="/blog/how-long-does-law-firm-seo-take">how long law firm SEO takes</a>.</td></tr>
+</tbody>
+</table>
+<p>The full picture is in the <a href="/blog/law-firm-seo-2026-guide">complete guide to law firm SEO</a>, or <a href="/free-audit">request a free audit</a>.</p>
+
+<h2>Frequently asked questions</h2>
+${faqHtml(CHOOSE_AGENCY_FAQS)}
 `,
     author: { name: "Mubashar Sharif", role: "Founder, SearchPrex", bio: "Mubashar Sharif is the founder of SearchPrex. Semrush and HubSpot certified, he works on technical SEO, Google Business Profile and local search for US businesses." },
   },
