@@ -104,6 +104,10 @@ const SEO_VS_PPC_FAQS: PostFaq[] = [
 
 const SLOW_INTAKE_FAQS: PostFaq[] = [
   {
+    q: "How responsive are law firms to new enquiries?",
+    a: "In Clio's 2019 Legal Trends Report, which tested 1,000 US law firms by email and 500 by phone, only 40% replied to the email and 56% of calls were answered by a person; more than half did not return a voicemail within 72 hours.",
+  },
+  {
     q: "How fast should a law firm respond to a new lead?",
     a: "Aim for under 5 minutes during business hours, and have live or automated cover after hours. The first firm to answer and book a consultation has the best chance of signing the case.",
   },
@@ -2741,6 +2745,7 @@ ${faqHtml(SEO_VS_PPC_FAQS)}
     toc: [
       "The short answer",
       "Why response time decides who signs the case",
+      "What testing of law firms found",
       "How to work out your own number",
       "Five scenarios, worked through",
       "Where intake usually leaks",
@@ -2758,6 +2763,15 @@ ${faqHtml(SEO_VS_PPC_FAQS)}
 
 <h2>Why response time decides who signs the case</h2>
 <p>Someone who has just been injured, arrested or served often contacts more than one firm. The first firm that answers, listens and books a consultation has the best chance of signing them, and the others are calling back someone who has already chosen. A missed call after 6pm, a voicemail box, or a web form answered the next morning all hand the case to whoever picked up.</p>
+
+<h2>What testing of law firms found</h2>
+<p>Clio's 2019 Legal Trends Report tested this directly. It emailed a random sample of 1,000 US law firms and phoned 500 of them with questions written to sound like a prospective client's. The results, as reported by the Illinois Supreme Court Commission on Professionalism:</p>
+<ul>
+<li>Only <strong>40%</strong> of firms replied to the email.</li>
+<li><strong>56%</strong> of calls were answered by a person; <strong>39%</strong> went to voicemail.</li>
+<li>More than half of firms did not return a voicemail within <strong>72 hours</strong>.</li>
+</ul>
+<p>Source: <a href="https://www.2civility.org/clio-legal-trends-report-finds-law-firms-arent-responsive-to-potential-clients/" target="_blank" rel="noopener noreferrer">2Civility, 23 October 2019, summarising Clio's 2019 Legal Trends Report</a>. The figures are from 2019 and describe the firms tested, not every firm, but they show how often a first enquiry goes unanswered.</p>
 
 <h2>How to work out your own number</h2>
 <p>The calculator uses a simple model. You can run it by hand:</p>
@@ -2852,6 +2866,7 @@ ${faqHtml(SLOW_INTAKE_FAQS)}
       "The short answer",
       "How agencies price law firm SEO",
       "What moves the price",
+      "What other agencies publish",
       "What SearchPrex's law firm plan includes",
       "What you should get for the money",
       "Is it worth it? Work it out in signed cases",
@@ -2884,6 +2899,18 @@ ${faqHtml(SLOW_INTAKE_FAQS)}
 <li><strong>Where your site starts</strong> — a site with indexing or speed problems needs fixing before new pages help.</li>
 <li><strong>Your Business Profile</strong> — a suspended or poorly set-up profile adds work at the start.</li>
 </ul>
+
+<h2>What other agencies publish</h2>
+<p>Published figures vary because each agency describes its own pricing. Three examples, checked on 14 October 2026:</p>
+<table>
+<thead><tr><th>Source</th><th>Published range</th><th>Basis</th></tr></thead>
+<tbody>
+<tr><td><a href="https://www.onthemap.com/?p=66041" target="_blank" rel="noopener noreferrer">On The Map</a>, "How Much Does Law Firm SEO Cost: Pricing 2026"</td><td>$3,000 to $15,000 a month; under $3,000 in a small market; around $5,000 for a competitive practice such as personal injury</td><td>The agency's own estimate; no date on the page</td></tr>
+<tr><td><a href="https://growlaw.co/seo-for-lawyers/law-firm-seo-cost" target="_blank" rel="noopener noreferrer">Grow Law</a>, updated 15 July 2026</td><td>$500 to $1,500 for firms of 1 to 3 attorneys; $2,000 to $5,000 for mid-sized firms; $5,000 to $15,000+ for large or specialty firms</td><td>"Industry data and internal benchmarks"; no sample size given</td></tr>
+<tr><td><a href="https://dagmarmarketing.com/seo-pricing/law-firm/" target="_blank" rel="noopener noreferrer">Dagmar Marketing</a></td><td>$1,500 to $2,300 a month for local SEO for one office; $750 to $1,500 for each additional location</td><td>What the agency says it charges</td></tr>
+</tbody>
+</table>
+<p>These are agencies describing their own market, not independent surveys, so read them as a rough guide. They agree on the shape: price rises with the number of practice areas and offices and with the competitiveness of the market.</p>
 
 <h2>What SearchPrex's law firm plan includes</h2>
 <p>The plan runs $1,200 to $2,500 a month; where a firm sits in that range depends on how many practice areas and cities it covers.</p>

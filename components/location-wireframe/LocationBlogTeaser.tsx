@@ -165,46 +165,51 @@ export default function LocationBlogTeaser({ page }: { page: CityPage }) {
     ? `/images/locations/${page.citySlug}-law-consultation.webp`
     : "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=85&auto=format&fit=crop";
 
+  //  These cards used to carry city-specific titles — "Detroit, MI Law Firm
+  //  SEO in 2026: Winning Wayne County 3rd Circuit Search Intent" — that
+  //  linked to general articles with different titles: a promise the click
+  //  did not keep, on 16 location pages. They now describe the articles they
+  //  link to, which are the law firm cluster: guide, timeline, cost, vs PPC.
   const cards: LocationBlogCard[] = [
     {
-      id: `${page.citySlug}-blueprint`,
+      id: `${page.citySlug}-guide`,
       href: "/blog/law-firm-seo-2026-guide",
-      plannedSlug: `${page.citySlug}-law-firm-seo-blueprint-2026`,
-      badge: `${page.city} Legal SEO`,
-      readTime: "16-minute read",
-      title: `${page.city}, ${page.stateAbbr} Law Firm SEO in 2026: Winning ${custom.courtFocus} Search Intent`,
-      excerpt: `How ${page.city} managing partners outrank national legal directories across ${custom.courtFocus} through statutory entity hubs, YMYL compliance, and AI Overview citations.`,
+      plannedSlug: "law-firm-seo-2026-guide",
+      badge: "Complete guide",
+      readTime: "11-minute read",
+      title: "Law Firm SEO: The Complete Guide for 2026",
+      excerpt: "What law firm SEO covers, why legal search is held to a higher standard, and how to measure it in calls and signed cases.",
       thumbnail: districtImg,
     },
     {
-      id: `${page.citySlug}-gbp-calls`,
-      href: "/blog/get-more-calls-from-google-business-profile",
-      plannedSlug: `${page.citySlug}-lawyer-google-business-profile-calls`,
-      badge: "Map Pack & GBP",
-      readTime: "10-minute read",
-      title: `How ${page.city} Attorneys Capture More 3-Pack Calls Across ${custom.corridorHook}`,
-      excerpt: `The exact Google Business Profile category engineering, practitioner pin rules, and proximity signals that turn ${page.city} Map Pack impressions into signed retainers.`,
+      id: `${page.citySlug}-timeline`,
+      href: "/blog/how-long-does-law-firm-seo-take",
+      plannedSlug: "how-long-does-law-firm-seo-take",
+      badge: "Timeline",
+      readTime: "8-minute read",
+      title: "How Long Does Law Firm SEO Take to Work?",
+      excerpt: "Most firms see the first measurable movement within 60 to 90 days. A month-by-month timeline and what speeds it up.",
       thumbnail: consultImg,
     },
     {
-      id: `${page.citySlug}-keywords`,
-      href: "/blog/keyword-research-for-law-firms",
-      plannedSlug: `${page.citySlug}-legal-keyword-research-guide`,
-      badge: "Practice-Area Keywords",
-      readTime: "10-minute read",
-      title: `Keyword Research for ${page.city} Lawyers: Mapping ${custom.statuteHook}`,
-      excerpt: `Why generic national legal keywords waste budget in ${page.city}, and how to structure practice-area clusters around ${custom.statuteHook} with bar-compliant copy.`,
+      id: `${page.citySlug}-cost`,
+      href: "/blog/law-firm-seo-cost",
+      plannedSlug: "law-firm-seo-cost",
+      badge: "Pricing",
+      readTime: "8-minute read",
+      title: "How Much Does Law Firm SEO Cost?",
+      excerpt: "How law firm SEO is priced, what moves the price, and how to tell whether it pays for itself in signed cases.",
       thumbnail:
         "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=85&auto=format&fit=crop",
     },
     {
-      id: `${page.citySlug}-maps-ai`,
-      href: "/blog/google-maps-ranking-drop",
-      plannedSlug: `${page.citySlug}-google-maps-ranking-recovery`,
-      badge: "Maps & AI Overviews",
-      readTime: "11-minute read",
-      title: `Why ${page.city} Law Firm Map Pack Rankings Drop (And How to Recover Top-3 Visibility)`,
-      excerpt: `Diagnosing sudden Google Maps ranking drops, competitor spam fighting, and generative AI citation recovery for ${page.city}, ${page.stateAbbr} law offices.`,
+      id: `${page.citySlug}-vs-ppc`,
+      href: "/blog/law-firm-seo-vs-ppc",
+      plannedSlug: "law-firm-seo-vs-ppc",
+      badge: "SEO vs PPC",
+      readTime: "8-minute read",
+      title: "Law Firm SEO vs PPC: Cost Per Signed Case",
+      excerpt: "How to compare Google Ads and SEO with your own numbers, and why most firms should run both at first.",
       thumbnail:
         "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=85&auto=format&fit=crop",
     },
@@ -226,7 +231,7 @@ export default function LocationBlogTeaser({ page }: { page: CityPage }) {
               {page.city}, {page.stateAbbr} Law Firm SEO &amp; Map Pack Insights
             </h2>
             <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Editorial playbooks tailored to {custom.courtFocus}, {page.city} Map Pack dynamics, and high-intent legal search in {page.state}.
+              For {page.city} firms competing around {custom.courtFocus}: what law firm SEO costs, how long it takes, and how to measure it in signed cases.
             </p>
           </div>
 
