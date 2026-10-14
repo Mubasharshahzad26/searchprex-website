@@ -15,6 +15,7 @@ import { notFound } from "next/navigation";
 import { posts as hardcodedPosts } from "./posts";
 import PostClient from "./PostClient";
 import { db } from "@/lib/db";
+import { FOUNDER_ID, ORGANIZATION_ID } from "@/lib/site-schema";
 
 // CMS posts render on demand and were then cached until the next deploy, so
 // unpublishing a row left it live (an autopilot test article stayed up this
@@ -176,23 +177,26 @@ export default async function BlogPostPage({
     description: post.excerpt,
     image: post.heroImage,
     datePublished: toIsoDate(post.date),
+    //  Only posts that record a real update carry one; it is never set to today.
+    ...((post as any).updated ? { dateModified: toIsoDate((post as any).updated) } : {}),
     keywords: post.tags.join(", "),
     articleSection: post.category,
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
-    author: {
-      "@type": "Person",
-      name: post.author.name,
-      jobTitle: post.author.role,
-      // Omitted rather than emitted empty for DB-sourced posts, which carry no bio.
-      description: post.author.bio || undefined,
-      url: `${SITE}/experts`,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "SearchPrex",
-      url: SITE,
-      logo: { "@type": "ImageObject", url: `${SITE}/logo.png` },
-    },
+    //  The founder and the organisation are defined once, site-wide
+    //  (lib/site-schema). Pointing at their @id ties every article to the same
+    //  entity instead of an anonymous Person and a second Organization.
+    author:
+      post.author.name === "Mubashar Sharif"
+        ? { "@id": FOUNDER_ID }
+        : {
+            "@type": "Person",
+            name: post.author.name,
+            jobTitle: post.author.role,
+            // Omitted rather than emitted empty for DB-sourced posts, which carry no bio.
+            description: post.author.bio || undefined,
+            url: `${SITE}/experts`,
+          },
+    publisher: { "@id": ORGANIZATION_ID },
   };
 
   const breadcrumbSchema = {
@@ -205,9 +209,24 @@ export default async function BlogPostPage({
     ],
   };
 
+  //  Posts with a faqs array render those questions in the article; the
+  //  schema is built from the same array so the two cannot disagree.
+  const postFaqs = ((post as any).faqs || []) as Array<{ q: string; a: string }>;
+  const faqSchema = postFaqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: postFaqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
+
   return (
     <>
-      {[articleSchema, breadcrumbSchema].map((schema, i) => (
+      {[articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])].map((schema, i) => (
         <script
           key={i}
           type="application/ld+json"

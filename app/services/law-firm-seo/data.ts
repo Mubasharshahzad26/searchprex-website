@@ -38,7 +38,7 @@ export const CAPSULES: QA[] = [
 export const FAQS: QA[] = [
   {
     q: "How long before I see results?",
-    a: "Practice-area and city pages usually start appearing for long-tail searches within four to eight weeks of going live; competitive terms and the map pack take longer and depend on the city and the practice area. The free tear-down gives you a realistic read for your market.",
+    a: "Most firms see the first measurable movement — new pages indexed, Map Pack positions, impressions and the first organic calls — within 60 to 90 days; competitive terms take longer and depend on the city and the practice area. The free tear-down gives you a realistic read for your market.",
   },
   {
     q: "Which practice areas do you work with?",
