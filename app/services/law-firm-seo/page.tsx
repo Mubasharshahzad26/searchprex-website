@@ -33,7 +33,17 @@ const baseMetadata: Metadata = {
     title: "Law Firm SEO Services | SearchPrex",
     description: "Map pack + AI Overview citations for law firms. Founder-led, YMYL-aligned.",
   },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 // Metadata comes from the CMS row for this route; the object above is the

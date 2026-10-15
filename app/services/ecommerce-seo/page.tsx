@@ -38,6 +38,17 @@ const baseMetadata: Metadata = {
     description:
       "Founder-led ecommerce SEO for Shopify and WooCommerce stores. Verified Google Search Console results — no vanity metrics.",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 // Metadata comes from the CMS row for this route; the object above is the

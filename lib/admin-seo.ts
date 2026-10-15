@@ -64,6 +64,13 @@ export async function getPageSEO(slug: string, base: Metadata): Promise<Metadata
       robots: {
         index: !directives.includes("noindex"),
         follow: !directives.includes("nofollow"),
+        googleBot: {
+          index: !directives.includes("noindex"),
+          follow: !directives.includes("nofollow"),
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
       },
     };
 

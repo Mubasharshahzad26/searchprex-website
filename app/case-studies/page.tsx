@@ -43,6 +43,17 @@ const baseMetadata: Metadata = {
     title: "SEO Case Studies — Verified GSC Results | SearchPrex",
     description: "Real SEO case studies with Google Search Console proof.",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 // Metadata comes from the CMS row for this route; the object above is the
