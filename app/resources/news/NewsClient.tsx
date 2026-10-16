@@ -1389,8 +1389,13 @@ export default function NewsClient({
         )}
       </AnimatePresence>
 
+      {/* ── 4-PILLAR PLATFORM ECOSYSTEM BAR ── */}
+      <div className="pt-20">
+        <PlatformHubNav active="news" />
+      </div>
+
       {/* ── HERO ── */}
-      <section className="relative overflow-visible border-b border-[#e2e5eb] bg-white pt-24 pb-12">
+      <section className="relative overflow-visible border-b border-[#e2e5eb] bg-white pt-10 pb-12">
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <Link
             href="/resources"
@@ -1589,9 +1594,6 @@ export default function NewsClient({
           </div>
         </div>
       </section>
-
-      {/* ── 4-PILLAR PLATFORM ECOSYSTEM BAR ── */}
-      <PlatformHubNav active="news" />
 
       {/* ── SEO NEWS PAST 2 DAYS ── */}
       <section className="border-b border-[#e2e5eb] bg-[#f7f8fa] py-12 md:py-14">

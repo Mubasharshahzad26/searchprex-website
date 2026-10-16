@@ -391,7 +391,7 @@ export default function DiscussionsClient() {
   }, [allThreads, selectedBoard, selectedUsaRegion, searchQuery])
 
   return (
-    <div style={{ background: '#f7f8fa', minHeight: '100vh', color: '#171a22' }}>
+    <div style={{ background: '#f7f8fa', minHeight: '100vh', color: '#171a22', paddingTop: '80px' }}>
       <PlatformHubNav active="discussions" />
 
       {/* Header */}
@@ -399,7 +399,7 @@ export default function DiscussionsClient() {
         style={{
           background: '#ffffff',
           borderBottom: '1px solid #e2e5eb',
-          padding: '44px 0 32px',
+          padding: '36px 0 28px',
         }}
       >
         <div className="container" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
@@ -558,18 +558,9 @@ export default function DiscussionsClient() {
       </section>
 
       {/* Main Content */}
-      <section style={{ padding: '36px 0 72px' }}>
+      <section className="py-8 pb-16 sm:py-10 sm:pb-20">
         <div
-          className="container"
-          style={{
-            maxWidth: '1240px',
-            margin: '0 auto',
-            padding: '0 24px',
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1fr) 330px',
-            gap: '28px',
-            alignItems: 'start',
-          }}
+          className="mx-auto grid max-w-[1240px] grid-cols-1 items-start gap-7 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_330px]"
         >
           {/* Left Column: Threads */}
           <div>
@@ -836,7 +827,7 @@ export default function DiscussionsClient() {
           </div>
 
           {/* Right Sidebar */}
-          <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'sticky', top: '88px' }}>
+          <aside className="flex flex-col gap-5 lg:sticky lg:top-24">
             <div
               style={{
                 background: '#ffffff',
@@ -920,7 +911,7 @@ export default function DiscussionsClient() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '20px',
+            padding: '16px',
           }}
         >
           <div
@@ -929,7 +920,9 @@ export default function DiscussionsClient() {
               borderRadius: '12px',
               maxWidth: '540px',
               width: '100%',
-              padding: '28px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '24px',
               border: '1px solid #e2e5eb',
             }}
           >
@@ -947,7 +940,7 @@ export default function DiscussionsClient() {
             </div>
 
             <form onSubmit={handleCreateThread} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 <input
                   type="text"
                   required
