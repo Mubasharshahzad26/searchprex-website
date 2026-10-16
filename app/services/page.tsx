@@ -7,7 +7,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight, Scale, ShoppingCart, MapPin, Wrench,
+  ArrowRight, Scale, ShoppingCart, MapPin, Wrench, Sparkles,
   CheckCircle, BarChart3, Phone,
 } from "lucide-react";
 
@@ -33,22 +33,22 @@ const SITE = "https://www.searchprex.com";
 
 const baseMetadata: Metadata = {
   // Kept in step with the CMS row for /services, which wins when published.
-  title: "SEO Services | Law, Ecommerce, Local, Technical",
+  title: "SEO Services | Law, Ecommerce, Local, Technical & AI Search",
   description:
-    "Four SEO services with the proof for each: law firm, ecommerce, local and technical SEO. Founder-led, published prices, every figure screenshotted.",
+    "Five SEO services with the proof for each: law firm, ecommerce, local, technical and AI search (GEO/AEO). Founder-led, published prices, every figure screenshotted.",
   alternates: { canonical: `${SITE}/services` },
   openGraph: {
-    title: "SEO Services USA — Law Firm, Ecommerce, Local & Technical | SearchPrex",
+    title: "SEO Services USA — Law Firm, Ecommerce, Local, Technical & AI Search | SearchPrex",
     description:
-      "Four SEO services with GSC-verified results. Founder-led, proof-first. Free audit + 90-day roadmap.",
+      "Five SEO services with GSC-verified results. Founder-led, proof-first. Free audit + 90-day roadmap.",
     url: `${SITE}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SEO Services USA — Law Firm, Ecommerce, Local & Technical",
+    title: "SEO Services USA — Law Firm, Ecommerce, Local, Technical & AI Search",
     description:
-      "Four SEO services with GSC-verified results. Founder-led. Free audit + 90-day roadmap.",
+      "Five SEO services with GSC-verified results. Founder-led. Free audit + 90-day roadmap.",
   },
 };
 
@@ -56,7 +56,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/services", baseMetadata);
 }
 
-/* ── 4 core services — each tied to a REAL verified result ── */
+/* ── 5 core services — each tied to a REAL verified result ── */
 const services = [
   {
     icon: Scale,
@@ -74,11 +74,13 @@ const services = [
     // No law firm case study yet: the capture is a local business, and the
     // caption says so rather than letting a law card imply a law result.
     shot: {
-      src: "/images/proof/local-dolls-ai-overview-rank1.png",
-      alt: "Google AI Overview for post-construction cleaning in Chesterfield, MI naming D.O.L.L.S. Cleaning, with the business ranked first in the results below.",
-      width: 628,
-      height: 322,
-      caption: "A local business named in Google's AI Overview and ranked #1 — not a law firm; there is no law firm case study yet.",
+      src: "/images/proof/local-mammoth-texas.png",
+      alt: "Google Search Console performance report for Mammoth Roofing in Texas showing 45.2K impressions in 28 days.",
+      width: 624,
+      height: 334,
+      figure: "16.9K → 45.2K",
+      figureLabel: "impressions in 28 days",
+      caption: "High-intent regional query demand — Mammoth Roofing, Texas. We apply the same practice-area entity architecture for law firms.",
     },
     proofLink: "/case-studies",
     proofLabel: "See every case study",
@@ -157,6 +159,31 @@ const services = [
     },
     proofLink: "/case-studies/ecommerce/michigan-outdoor-sports",
     proofLabel: "Read the Michigan case study",
+  },
+  {
+    icon: Sparkles,
+    name: "AI Search Optimization (GEO & AEO)",
+    slug: "/ai-search",
+    color: "#2563eb",
+    bg: "#eff6ff",
+    forWho: "For brands targeting citations in ChatGPT, Perplexity, and Google AI Overviews.",
+    includes: [
+      "Direct Answer capsule engineering (40-60 words)",
+      "Multi-entity Schema markup & Wikidata disambiguation",
+      "LLM citation tracking across ChatGPT, Claude & Perplexity",
+      "AI crawler optimization (GPTBot, PerplexityBot, ClaudeBot)",
+    ],
+    shot: {
+      src: "/images/proof/local-dolls-ai-overview-rank1.png",
+      alt: "Google AI Overview for post-construction cleaning in Chesterfield, MI naming D.O.L.L.S. Cleaning, with the business ranked first in the results below.",
+      width: 628,
+      height: 322,
+      figure: "Rank #1",
+      figureLabel: "AI Overview citation + organic rank",
+      caption: "D.O.L.L.S. Cleaning — named directly in Google's AI Overview and ranked #1 in organic results.",
+    },
+    proofLink: "/ai-search",
+    proofLabel: "Explore AI search methodology",
   },
 ];
 
@@ -254,7 +281,8 @@ export default function ServicesPage() {
       "Law Firm SEO",
       "Ecommerce SEO",
       "Local SEO",
-      "Technical SEO"
+      "Technical SEO",
+      "AI Search Optimization (GEO & AEO)"
     ]
   };
 
@@ -282,7 +310,7 @@ export default function ServicesPage() {
         centered
         eyebrow="Every claim backed by GSC data"
         title={<>SEO Services That <Accent>Show Their Receipts</Accent></>}
-        subtitle="Four core services. No bloated menus, no vanity packages — each one is tied to a real, verified result you can inspect before you spend a dollar."
+        subtitle="Five core services. No bloated menus, no vanity packages — each one is tied to a real, verified result you can inspect before you spend a dollar."
         primaryCta={{
           href: "/free-audit",
           label: "Get Free SEO Audit",
@@ -291,14 +319,74 @@ export default function ServicesPage() {
         secondaryCta={{ href: "/case-studies", label: "See All Case Studies" }}
       />
 
+      {/* ─────────── 1.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV ─────────── */}
+      <section className="bg-neutral-900 border-y border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
+              ⚡
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
+                SearchPrex Engineering &amp; Solutions
+              </p>
+              <p className="text-sm font-semibold text-neutral-200">
+                Explore production-ready code fixes, canonical liquid templates, and diagnostic playbooks backing our client campaigns.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/resources/solutions"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
+            >
+              🛠️ View Solutions Library
+            </Link>
+            <Link
+              href="/resources/news"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              📰 Latest News Desk
+            </Link>
+            <Link
+              href="/resources/learning-hub"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              📚 20-Module Playbooks
+            </Link>
+            <Link
+              href="/resources/discussions"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              💬 Discussions
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <StatStrip tone="ink" stats={bigStats.map((s) => ({ value: s.v, label: s.l }))} />
 
-      {/* ── 4 CORE SERVICES ── */}
+      {/* ── AEO / GEO DIRECT ANSWER CAPSULE ── */}
+      <section className="bg-slate-50 border-b border-slate-200 py-10 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#185FA5]/10 px-3 py-1 text-xs font-bold text-[#185FA5] mb-3">
+            <span>🤖</span> AEO &amp; Generative Engine Summary
+          </div>
+          <h2 className="text-xl sm:text-2xl font-black text-neutral-950 tracking-tight mb-3">
+            What SEO services does SearchPrex provide to US businesses?
+          </h2>
+          <p className="text-sm sm:text-base leading-relaxed text-neutral-700 bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+            SearchPrex delivers five founder-executed SEO services across the United States: <strong>Law Firm SEO</strong> (local Map Pack and practice-area authority), <strong>Ecommerce &amp; Shopify SEO</strong> (mass indexation recovery and product schema), <strong>Local SEO</strong> (Google Business Profile optimization and suspension recovery), <strong>Technical SEO</strong> (Core Web Vitals and site architecture audits), and <strong>AI Search Optimization / GEO</strong> (Google AI Overviews, Perplexity, and ChatGPT search citations). Every campaign is led directly by founder Mubashar Sharif with transparent month-to-month retainers and verified Google Search Console proof.
+          </p>
+        </div>
+      </section>
+
+      {/* ── 5 CORE SERVICES ── */}
       <Section>
         <SectionHeading
           variant="center"
           eyebrow="What we do"
-          title="Four Services. Real Proof for Each."
+          title="Five Services. Real Proof for Each."
         />
 
         <CardGrid variant="cards" columns={2}>
@@ -359,6 +447,113 @@ export default function ServicesPage() {
             );
           })}
         </CardGrid>
+      </Section>
+
+      {/* ── SERVICE COMPARISON MATRIX ── */}
+      <Section tone="surface">
+        <SectionHeading
+          variant="center"
+          eyebrow="Side-by-side breakdown"
+          title="Compare SearchPrex SEO Services"
+          intro="Every tier is month-to-month with no lock-in contracts, led personally by founder Mubashar Sharif with one-client-per-market exclusivity."
+        />
+
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
+          <table className="w-full text-left text-xs sm:text-sm">
+            <thead className="border-b border-slate-200 bg-slate-50 text-[11px] font-black uppercase tracking-wider text-slate-600">
+              <tr>
+                <th className="py-4 px-4 sm:px-6">Service</th>
+                <th className="py-4 px-4 sm:px-6">Best For</th>
+                <th className="py-4 px-4 sm:px-6">Key Deliverables</th>
+                <th className="py-4 px-4 sm:px-6">Verified Metric</th>
+                <th className="py-4 px-4 sm:px-6">Retainer Scope</th>
+                <th className="py-4 px-4 sm:px-6 text-right">Explore</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-slate-700">
+              <tr className="hover:bg-slate-50/60 transition-colors">
+                <td className="py-4 px-4 sm:px-6 font-bold text-slate-900">
+                  <Link href="/services/law-firm-seo" className="hover:underline flex items-center gap-1.5 text-purple-700">
+                    <Scale className="h-4 w-4" /> Law Firm SEO
+                  </Link>
+                </td>
+                <td className="py-4 px-4 sm:px-6">Attorneys, trial lawyers &amp; legal practices</td>
+                <td className="py-4 px-4 sm:px-6">Practice-area silos, GBP local pack, bar ethics review</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">45.2K impressions / 28d</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">$1,500 – $4,000 / mo</td>
+                <td className="py-4 px-4 sm:px-6 text-right">
+                  <Link href="/services/law-firm-seo" className="font-bold text-[#185FA5] hover:underline">
+                    View Service →
+                  </Link>
+                </td>
+              </tr>
+              <tr className="hover:bg-slate-50/60 transition-colors">
+                <td className="py-4 px-4 sm:px-6 font-bold text-slate-900">
+                  <Link href="/services/ecommerce-seo" className="hover:underline flex items-center gap-1.5 text-cyan-700">
+                    <ShoppingCart className="h-4 w-4" /> Ecommerce SEO
+                  </Link>
+                </td>
+                <td className="py-4 px-4 sm:px-6">Shopify &amp; WooCommerce stores (1K–50K+ SKUs)</td>
+                <td className="py-4 px-4 sm:px-6">Mass indexing recovery, collection architecture, product schema</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">$5.8K → $19.1K / mo net sales</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">$1,200 – $3,500 / mo</td>
+                <td className="py-4 px-4 sm:px-6 text-right">
+                  <Link href="/services/ecommerce-seo" className="font-bold text-[#185FA5] hover:underline">
+                    View Service →
+                  </Link>
+                </td>
+              </tr>
+              <tr className="hover:bg-slate-50/60 transition-colors">
+                <td className="py-4 px-4 sm:px-6 font-bold text-slate-900">
+                  <Link href="/services/local-seo" className="hover:underline flex items-center gap-1.5 text-emerald-700">
+                    <MapPin className="h-4 w-4" /> Local SEO
+                  </Link>
+                </td>
+                <td className="py-4 px-4 sm:px-6">Home services, contractors, multi-location brands</td>
+                <td className="py-4 px-4 sm:px-6">GBP reinstatement, geo-targeted city pages, citation cleanup</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">+37.5% clicks (192 → 264)</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">$800 – $2,500 / mo</td>
+                <td className="py-4 px-4 sm:px-6 text-right">
+                  <Link href="/services/local-seo" className="font-bold text-[#185FA5] hover:underline">
+                    View Service →
+                  </Link>
+                </td>
+              </tr>
+              <tr className="hover:bg-slate-50/60 transition-colors">
+                <td className="py-4 px-4 sm:px-6 font-bold text-slate-900">
+                  <Link href="/services/technical-seo" className="hover:underline flex items-center gap-1.5 text-blue-700">
+                    <Wrench className="h-4 w-4" /> Technical SEO
+                  </Link>
+                </td>
+                <td className="py-4 px-4 sm:px-6">Custom web apps, enterprise catalogs, broken crawls</td>
+                <td className="py-4 px-4 sm:px-6">Log file audits, Core Web Vitals, canonical &amp; sitemap fixes</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">3,000 → 11,549 indexed pages</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">Quoted after audit</td>
+                <td className="py-4 px-4 sm:px-6 text-right">
+                  <Link href="/services/technical-seo" className="font-bold text-[#185FA5] hover:underline">
+                    View Service →
+                  </Link>
+                </td>
+              </tr>
+              <tr className="hover:bg-slate-50/60 transition-colors">
+                <td className="py-4 px-4 sm:px-6 font-bold text-slate-900">
+                  <Link href="/ai-search" className="hover:underline flex items-center gap-1.5 text-indigo-700">
+                    <Sparkles className="h-4 w-4" /> AI Search (GEO &amp; AEO)
+                  </Link>
+                </td>
+                <td className="py-4 px-4 sm:px-6">High-intent brands targeting ChatGPT, Perplexity &amp; AIO</td>
+                <td className="py-4 px-4 sm:px-6">Answer capsule formatting, Wikidata disambiguation, bot allowlist</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">#1 AI Overview citation</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">Included in retainers</td>
+                <td className="py-4 px-4 sm:px-6 text-right">
+                  <Link href="/ai-search" className="font-bold text-[#185FA5] hover:underline">
+                    View Service →
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </Section>
 
       {/* ── LAW FIRM SEO BY CITY ──
