@@ -138,13 +138,20 @@ function matchesCategory(categoryStr: string, filterId: string): boolean {
     case "spam":
       return c.includes("spam") || c.includes("manual action");
     case "ai":
-      return c.includes("ai") || c.includes("llm") || c.includes("geo") || c.includes("sge") || c.includes("overviews");
+      return (
+        c.includes("ai") ||
+        c.includes("llm") ||
+        c.includes("geo") ||
+        c.includes("sge") ||
+        c.includes("overviews") ||
+        c.includes("discover")
+      );
     case "gsc":
       return c.includes("search console") || c.includes("gsc") || c.includes("tool") || c.includes("indexing");
     case "local":
       return c.includes("local") || c.includes("maps") || c.includes("business profile") || c.includes("gbp");
     case "technical":
-      return c.includes("technical") || c.includes("crawl") || c.includes("vitals") || c.includes("schema");
+      return c.includes("technical") || c.includes("crawl") || c.includes("vitals") || c.includes("schema") || c.includes("pdf");
     case "ecommerce":
       return c.includes("ecommerce") || c.includes("merchant") || c.includes("checkout") || c.includes("shopping");
     default:
@@ -776,12 +783,37 @@ export default function NewsClient({
 
     // ── Base feed (unfiltered): deep-dive spokes + dated news items ──
   // Like/comment numbers come only from real stored reactions (default 0, never seeded).
+  const SPOKE_SOURCES_MAP: Record<string, Array<{ label: string; href: string }>> = {
+    "google-gemini-4-argon-ai-mode-rollout": [
+      { label: "seroundtable", href: "https://www.seroundtable.com/" },
+    ],
+    "how-google-ranks-pdfs-search-ai-mode-checklist": [
+      { label: "searchenginejournal", href: "https://www.searchenginejournal.com/" },
+    ],
+    "google-discover-proactive-concierge-dive-deeper-ai-test": [
+      { label: "searchengineland", href: "https://searchengineland.com/" },
+      { label: "envisionitagency", href: "https://envisionitagency.com/" },
+    ],
+  };
+
   const allFeedItems = useMemo(() => {
+    const newsByTitle = new Map<string, any>();
+    for (const n of news) {
+      if (n.title) newsByTitle.set(String(n.title).trim().toLowerCase(), n);
+    }
+
     const spokeItems = nonPillarSpokes.map((s: any) => {
       const slug = s.slug;
       const rawDate = s.publishedAt || s.createdAt || "2026-10-01";
       const likes = likesMap[slug] ?? 0;
       const comments = commentsCountMap[slug] ?? 0;
+      const matchedNews = newsByTitle.get(String(s.title || "").trim().toLowerCase());
+      const externalSources =
+        SPOKE_SOURCES_MAP[slug] ||
+        (matchedNews?.sourceHref && matchedNews.sourceHref !== "#"
+          ? [{ label: matchedNews.sourceLabel || "Source", href: matchedNews.sourceHref }]
+          : []);
+
       return {
         id: `spoke-${slug}`,
         isSpoke: true,
@@ -793,6 +825,8 @@ export default function NewsClient({
         category: shortCategory(s.category),
         href: `/resources/news/${slug}`,
         sourceLabel: "Analysis",
+        coverImage: (s.coverImage || "") as string,
+        externalSources,
         likes,
         comments,
         engagement: likes + comments * 3,
@@ -814,6 +848,11 @@ export default function NewsClient({
         category: (n.tag || "SEO News") as string,
         href: n.sourceHref as string,
         sourceLabel: (n.sourceLabel || "Primary Source") as string,
+        coverImage: "" as string,
+        externalSources:
+          n.sourceHref && n.sourceHref !== "#"
+            ? [{ label: (n.sourceLabel || "Source") as string, href: n.sourceHref as string }]
+            : [],
         likes,
         comments,
         engagement: likes + comments * 3,
@@ -1077,7 +1116,7 @@ export default function NewsClient({
   const FAQS = [
     {
       q: "What is the latest SEO news in the past 2 days?",
-      a: "Over the past few days, Google completed its September 2026 Spam Update following a 14-day global rollout that concluded on October 8. Recent Search Console updates also expanded reporting for AI Overviews and multimodal search types, alongside new Search Central guidance highlighting element-level fact checking for AI-assisted metadata.",
+      a: "In the past 48 hours (October 15, 2026), Google rolled out Gemini 4 Argon globally in AI Mode for Google AI Pro and Ultra subscribers, clarified how PDFs are indexed and ranked across Web Search and AI Mode, and began testing a 'Dive deeper' AI feature in Google Discover as job postings point toward a 'proactive concierge' experience. Earlier on October 8, Google also completed its 14-day September 2026 Spam Update.",
     },
     {
       q: "What is the latest Google Search Console news and updates?",
@@ -1099,11 +1138,28 @@ export default function NewsClient({
 
   const PAST_2_DAYS_CARDS = [
     {
-      icon: AlertTriangle,
-      title: "Spam update concluded",
-      body: "14-day global rollout completed October 8. Search Console manual action alerts observed for “Scaled Content Abuse” and “Pure Spam”.",
-      label: "Rollout status",
-      value: "Concluded (14 days)",
+      icon: Sparkles,
+      title: "Gemini 4 Argon in AI Mode",
+      body: "Rolled out globally in AI Mode for Google AI Pro & Ultra subscribers. Deeper query fan-out reshapes AI visibility for Law Firms and eCommerce sites.",
+      label: "Source",
+      value: "seroundtable",
+      href: "/resources/news/google-gemini-4-argon-ai-mode-rollout",
+    },
+    {
+      icon: BookOpen,
+      title: "How Google Ranks PDFs",
+      body: "Google clarified how PDFs rank in Web Search & AI Mode and how to verify SEO-friendliness — critical for legal guides/forms and eCommerce catalogs.",
+      label: "Source",
+      value: "searchenginejournal",
+      href: "/resources/news/how-google-ranks-pdfs-search-ai-mode-checklist",
+    },
+    {
+      icon: TrendingUp,
+      title: "Discover “Proactive Concierge”",
+      body: "Job postings signal Google Discover evolving from a feed into a personal concierge alongside live tests of the “Dive deeper” AI feature.",
+      label: "Sources",
+      value: "SEL · Envisionit",
+      href: "/resources/news/google-discover-proactive-concierge-dive-deeper-ai-test",
     },
   ];
 
@@ -1510,7 +1566,7 @@ export default function NewsClient({
             </h2>
             <p className="mb-7 max-w-3xl text-base leading-relaxed text-[#424754]">
               {showAlgorithmContext
-                ? "Google concluded its September 2026 Spam Update on October 8 after a 14-day global rollout."
+                ? "Google rolled out Gemini 4 Argon globally in AI Mode for AI Pro & Ultra subscribers, clarified how PDFs rank in Search & AI Mode, and began testing 'Dive deeper' in Discover alongside its completed September 2026 Spam Update."
                 : `The latest ${categoryLabel} entries, newest first — each dated and linked to its source or analysis.`}
             </p>
 
@@ -1522,7 +1578,7 @@ export default function NewsClient({
               viewport={{ once: true, margin: "-40px" }}
               className="mb-7 grid grid-cols-1 gap-4 md:grid-cols-3"
             >
-              {PAST_2_DAYS_CARDS.map((c) => (
+              {PAST_2_DAYS_CARDS.map((c: any) => (
                 <motion.div
                   key={c.title}
                   variants={fadeUp}
@@ -1533,7 +1589,13 @@ export default function NewsClient({
                     <span className="grid h-8 w-8 place-items-center rounded-lg border border-[#e2e5eb] bg-[#f7f8fa] text-[#303440]">
                       <c.icon className="h-4 w-4" />
                     </span>
-                    <span className="text-sm font-semibold text-[#171a22]">{c.title}</span>
+                    {c.href ? (
+                      <Link href={c.href} className="text-sm font-semibold text-[#171a22] hover:text-[#534AB7] hover:underline">
+                        {c.title}
+                      </Link>
+                    ) : (
+                      <span className="text-sm font-semibold text-[#171a22]">{c.title}</span>
+                    )}
                   </div>
                   <p className="text-sm leading-relaxed text-[#565c69]">{c.body}</p>
                   <div className="mt-auto flex items-center justify-between border-t border-[#f0f2f5] pt-3 text-[11px]">
@@ -1811,64 +1873,138 @@ export default function NewsClient({
                 <div className="space-y-3">
                   <AnimatePresence initial={false} mode="popLayout">
                     {unifiedFeed.map((item, idx) => (
-                      <motion.article
-                        key={item.id}
-                        layout
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        transition={{ duration: 0.22 }}
-                        whileHover={{ y: -2 }}
-                        className={`rounded-xl border border-[#e2e5eb] bg-white p-5 transition-shadow hover:border-[#c5cad3] hover:shadow-[0_8px_24px_rgba(23,26,34,0.06)] sm:p-6 ${idx >= visibleCount ? "hidden" : ""}`}
-                      >
-                        <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="inline-flex items-center rounded-md border border-[#e2e5eb] bg-[#f4f5f8] px-2 py-0.5 text-[11px] font-medium text-[#303440]">
-                              {item.category}
-                            </span>
-                            {item.isSpoke && (
-                              <span className="inline-flex items-center rounded-md border border-[#e2e5eb] px-2 py-0.5 text-[11px] font-medium text-[#6c727f]">
-                                Analysis
+                      <div key={item.id} className={`space-y-3 ${idx >= visibleCount ? "hidden" : ""}`}>
+                        <motion.article
+                          layout
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.98 }}
+                          transition={{ duration: 0.22 }}
+                          whileHover={{ y: -2 }}
+                          className="rounded-xl border border-[#e2e5eb] bg-white p-5 transition-shadow hover:border-[#c5cad3] hover:shadow-[0_8px_24px_rgba(23,26,34,0.06)] sm:p-6"
+                        >
+                          <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="inline-flex items-center rounded-md border border-[#e2e5eb] bg-[#f4f5f8] px-2 py-0.5 text-[11px] font-medium text-[#303440]">
+                                {item.category}
                               </span>
+                              {item.isSpoke && (
+                                <span className="inline-flex items-center rounded-md border border-[#e2e5eb] px-2 py-0.5 text-[11px] font-medium text-[#6c727f]">
+                                  Analysis
+                                </span>
+                              )}
+                              <span className="flex items-center gap-1 text-xs text-[#6c727f]">
+                                <Calendar className="h-3 w-3" />
+                                <time dateTime={new Date(item.rawDate).toISOString?.() ?? undefined}>{item.date}</time>
+                              </span>
+                            </div>
+                            {item.externalSources && item.externalSources.length > 0 ? (
+                              <div className="flex flex-wrap items-center gap-1.5">
+                                {item.externalSources.map((src: { label: string; href: string }) => (
+                                  <a
+                                    key={src.label}
+                                    href={src.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 rounded-full border border-[#e2e5eb] bg-[#f7f8fa] px-2.5 py-0.5 text-[11px] font-medium text-[#424754] transition-colors hover:border-[#b7bcc6] hover:text-[#171a22]"
+                                  >
+                                    {src.label}
+                                    <ExternalLink className="h-2.5 w-2.5 text-[#9aa0a6]" />
+                                  </a>
+                                ))}
+                              </div>
+                            ) : (
+                              !item.isSpoke && <span className="text-[11px] text-[#6c727f]">{item.sourceLabel}</span>
                             )}
-                            <span className="flex items-center gap-1 text-xs text-[#6c727f]">
-                              <Calendar className="h-3 w-3" />
-                              <time dateTime={new Date(item.rawDate).toISOString?.() ?? undefined}>{item.date}</time>
-                            </span>
                           </div>
-                          {!item.isSpoke && <span className="text-[11px] text-[#6c727f]">{item.sourceLabel}</span>}
-                        </div>
 
-                        <h3 className="mb-2 text-lg font-semibold leading-snug text-[#171a22] sm:text-xl">
-                          {item.isSpoke ? (
-                            <Link href={item.href} className="transition-colors hover:text-[#534AB7]">
-                              {item.title}
-                            </Link>
-                          ) : (
-                            <a href={item.href} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[#534AB7]">
-                              {item.title}
-                            </a>
-                          )}
-                        </h3>
+                          <div className={item.coverImage ? "flex flex-col gap-4 sm:flex-row sm:items-start" : ""}>
+                            <div className="min-w-0 flex-1">
+                              <h3 className="mb-2 text-lg font-semibold leading-snug text-[#171a22] sm:text-xl">
+                                {item.isSpoke ? (
+                                  <Link href={item.href} className="transition-colors hover:text-[#534AB7]">
+                                    {item.title}
+                                  </Link>
+                                ) : (
+                                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[#534AB7]">
+                                    {item.title}
+                                  </a>
+                                )}
+                              </h3>
 
-                        <p className="mb-4 text-sm leading-relaxed text-[#565c69]">{item.summary}</p>
+                              <p className="mb-4 text-sm leading-relaxed text-[#565c69]">{item.summary}</p>
+                            </div>
 
-                        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#f0f2f5] pt-3">
-                          {item.isSpoke ? (
-                            <Link href={item.href} className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#171a22]">
-                              Read analysis <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                            </Link>
-                          ) : (
-                            <a href={item.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#171a22]">
-                              Source: {item.sourceLabel} <ExternalLink className="h-3.5 w-3.5 text-[#6c727f]" />
-                            </a>
-                          )}
-                          <div className="flex items-center gap-1.5">
-                            {renderReactions(item.slug, item.title, item.category)}
-                            {renderShareMenu(item.id, absoluteUrl(item.href), item.title)}
+                            {item.coverImage && (
+                              <Link
+                                href={item.href}
+                                className="group relative block w-full flex-shrink-0 overflow-hidden rounded-lg border border-[#e2e5eb] bg-[#f7f8fa] sm:w-44"
+                              >
+                                <img
+                                  src={item.coverImage}
+                                  alt={item.title}
+                                  loading="lazy"
+                                  className="h-36 w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-28"
+                                />
+                              </Link>
+                            )}
                           </div>
-                        </div>
-                      </motion.article>
+
+                          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#f0f2f5] pt-3">
+                            <div className="flex flex-wrap items-center gap-3">
+                              {item.isSpoke ? (
+                                <Link href={item.href} className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#171a22]">
+                                  Read analysis <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                                </Link>
+                              ) : (
+                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#171a22]">
+                                  Source: {item.sourceLabel} <ExternalLink className="h-3.5 w-3.5 text-[#6c727f]" />
+                                </a>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              {renderReactions(item.slug, item.title, item.category)}
+                              {renderShareMenu(item.id, absoluteUrl(item.href), item.title)}
+                            </div>
+                          </div>
+                        </motion.article>
+
+                        {/* ── INLINE FREE DA CHECKER CTA (IN BETWEEN NEWS) ── */}
+                        {(idx === 1 || (unifiedFeed.length === 1 && idx === 0) || idx === 5) && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.25 }}
+                            className="rounded-xl border border-[#d5d9e0] bg-[#f7f8fa] p-5 sm:p-6"
+                          >
+                            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                              <div className="max-w-xl">
+                                <div className="mb-1.5 inline-flex items-center gap-1.5 rounded-md border border-[#e2e5eb] bg-white px-2.5 py-0.5 text-[11px] font-semibold text-[#171a22]">
+                                  <ShieldCheck className="h-3.5 w-3.5 text-[#2f9670]" />
+                                  Free SEO Resource · Authority Benchmark
+                                </div>
+                                <p className="text-base font-bold text-[#171a22] sm:text-lg">
+                                  Free Domain Authority (DA) &amp; Website Authority Checker
+                                </p>
+                                <p className="mt-1 text-xs leading-relaxed text-[#565c69] sm:text-sm">
+                                  Check your website&rsquo;s Domain Authority, backlink profile strength, and trust signals before the next Google &amp; AI Mode update. Benchmark Law Firm, eCommerce, or local domains in seconds.
+                                </p>
+                              </div>
+                              <div className="flex-shrink-0">
+                                <a
+                                  href="https://nicheseopro.com/authority-checker"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#171a22] px-5 py-3 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#303440] sm:text-sm"
+                                >
+                                  Check Free Domain Authority
+                                  <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                                </a>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </div>
                     ))}
                   </AnimatePresence>
 
@@ -1957,6 +2093,31 @@ export default function NewsClient({
                     )}
                   </AnimatePresence>
                   <p className="mt-2 text-[11px] text-[#9aa0a6]">Free · No spam · Unsubscribe anytime</p>
+                </div>
+
+                {/* Free DA Checker Sidebar Resource */}
+                <div className="rounded-xl border border-[#e2e5eb] bg-white p-5">
+                  <div className="mb-2 flex items-center gap-2.5">
+                    <span className="grid h-8 w-8 place-items-center rounded-lg border border-[#e2e5eb] bg-[#f7f8fa]">
+                      <ShieldCheck className="h-4 w-4 text-[#2f9670]" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-[#171a22]">Free DA Checker</p>
+                      <p className="text-[11px] text-[#6c727f]">Free SEO Tool</p>
+                    </div>
+                  </div>
+                  <p className="mb-3.5 text-xs leading-relaxed text-[#565c69]">
+                    Check your website&rsquo;s Domain Authority, backlink profile, and authority score before the next algorithm update.
+                  </p>
+                  <a
+                    href="https://nicheseopro.com/authority-checker"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-[#171a22] bg-white px-4 text-xs font-semibold text-[#171a22] transition-colors hover:bg-[#171a22] hover:text-white"
+                  >
+                    Check Website Authority Free
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
 
                 {/* Popular / recent list */}

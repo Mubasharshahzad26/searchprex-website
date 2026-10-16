@@ -217,7 +217,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "What is the latest SEO news in the past 2 days?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Over the past few days, Google completed its September 2026 Spam Update following a 14-day global rollout that concluded on October 8. Recent Search Console updates also expanded reporting for AI Overviews and multimodal search types, alongside new Search Central guidance highlighting element-level fact checking for AI-assisted metadata.",
+          text: "In the past 48 hours (October 15, 2026), Google rolled out Gemini 4 Argon globally in AI Mode for Google AI Pro and Ultra subscribers, clarified how PDFs are indexed and ranked across Web Search and AI Mode, and began testing a 'Dive deeper' AI feature in Google Discover as job postings point toward a 'proactive concierge' experience. Earlier on October 8, Google also completed its 14-day September 2026 Spam Update.",
         },
       },
       {
