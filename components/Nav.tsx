@@ -74,7 +74,11 @@ const navLinks: NavLink[] = [
     hasDropdown: true,
     dropdownItems: [
       { href: "/resources",                                   label: "All Resources" },
-      { href: "/resources/gsc-regex-library",                 label: "GSC Regex Library", badge: "New" },
+      { href: "/resources/news",                              label: "01. Industry News Desk", badge: "Live" },
+      { href: "/resources/discussions",                       label: "02. SEO Discussion Forum", badge: "New" },
+      { href: "/resources/solutions",                         label: "03. Issues & Solutions Library", badge: "New" },
+      { href: "/resources/learning-hub",                      label: "04. SEO Learning Hub", badge: "New" },
+      { href: "/resources/gsc-regex-library",                 label: "GSC Regex Library" },
       { href: "/resources/law-firm-seo-audit-checklist",      label: "Law Firm SEO Checklist" },
       { href: "/resources/technical-seo-checklist",           label: "Technical SEO Checklist" },
       { href: "/resources/woocommerce-seo-checklist",         label: "WooCommerce SEO Checklist" },
@@ -95,13 +99,15 @@ const navLinks: NavLink[] = [
       // categories have no single ranking page, so a filter view is right for
       // them. This also gives the spoke the sitewide internal link it had none
       // of: nothing in the codebase linked to it before.
-      { href: "/resources/news/local-seo-updates",      label: "Local SEO News" },
-      { href: "/resources/news?category=AI+SEO",        label: "AI SEO News" },
-      { href: "/resources/news?category=LLMs",          label: "LLMs SEO News" },
-      { href: "/resources/news?category=Tools",         label: "SEO Tools News" },
-      { href: "/resources/news?category=Ecommerce",     label: "Ecommerce SEO News" },
-      { href: "/resources/news?category=Technical",     label: "Technical SEO News" },
-      { href: "/resources/news",                        label: "All Latest News" },
+      { href: "/resources/news?category=SEO+News",                  label: "SEO News" },
+      { href: "/resources/news?category=Law+Firm+SEO+News",         label: "Law Firm SEO News" },
+      { href: "/resources/news?category=Ecommerce+Store+SEO+News",  label: "Ecommerce Store SEO News" },
+      { href: "/resources/news?category=Shopify+Store+News",        label: "Shopify Store News" },
+      { href: "/resources/news?category=WordPress+News",            label: "WordPress News" },
+      { href: "/resources/news?category=AI+Visibility+News",        label: "AI Visibility News" },
+      { href: "/resources/news?category=USA+News",                  label: "USA Search News" },
+      { href: "/resources/news/local-seo-updates",                  label: "Local SEO News" },
+      { href: "/resources/news",                                    label: "All Latest News" },
     ],
   },
   {

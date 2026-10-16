@@ -39,6 +39,36 @@ const baseMetadata: Metadata = {
  * One entry per category filter the nav and sitemap link to.
  */
 const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; intro: string }> = {
+  "Law Firm": {
+    title: "Law Firm SEO News: Legal Search, LSA & Map Pack Updates (2026)",
+    desc: "Latest Law Firm SEO news covering Google Business Profile for lawyers, Local Service Ads (LSAs), state bar entity signals, and legal AI Mode rankings.",
+    h1: "Law Firm SEO News",
+    intro: "Confirmed Google updates, Local Service Ads changes, and Map Pack shifts analyzed specifically for personal injury, trial, and multi-office law firms.",
+  },
+  "Shopify": {
+    title: "Shopify Store SEO News: Liquid Themes, Merchant Center & AI Checkout",
+    desc: "Latest Shopify store SEO news, covering Google Merchant Center UCP checkout, /collections/ canonical updates, Liquid speed, and ecommerce search changes.",
+    h1: "Shopify Store SEO News",
+    intro: "Shopify platform releases, Merchant Center Next integrations, and technical SEO updates that affect indexed SKUs and storefront revenue.",
+  },
+  "WordPress": {
+    title: "WordPress & WooCommerce SEO News: Core Releases, Security & CWV",
+    desc: "Latest WordPress and WooCommerce SEO news, core security patches, Core Web Vitals updates, and structured data changes.",
+    h1: "WordPress SEO News",
+    intro: "WordPress core updates, WooCommerce performance changes, and plugin vulnerabilities that affect crawling, rendering, and rankings.",
+  },
+  "AI Visibility": {
+    title: "AI Visibility News: Google AI Mode, Gemini, ChatGPT & GEO Updates",
+    desc: "Track AI Visibility news across Google AI Mode, AI Overviews, Gemini 4 Argon, ChatGPT search, and Generative Engine Optimization (GEO).",
+    h1: "AI Visibility & GEO News",
+    intro: "How Google AI Mode, AI Overviews, and answer engines select, cite, and rank brands across commercial and informational prompts.",
+  },
+  "USA": {
+    title: "USA Search & Regional SEO News: TX, CA, NY, FL & Local Updates",
+    desc: "Regional USA SEO news and local Map Pack volatility across Texas, California, New York, Florida, Arizona, Michigan, and Ohio.",
+    h1: "USA Regional Search & Local SEO News",
+    intro: "US metro SERP telemetry, state-level Map Pack shifts, and Google Business Profile enforcement across major American markets.",
+  },
   "AI SEO": {
     title: "AI SEO News: ChatGPT, Generative Engine Optimization (GEO)",
     desc: "The latest AI SEO news, covering Generative Engine Optimization (GEO), ChatGPT search integration, and how LLMs are changing the SEO landscape in 2026.",
@@ -58,9 +88,9 @@ const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; i
     intro: "Search Console, Google Business Profile and third-party tool changes, explained by what they let you measure that you could not before.",
   },
   "Ecommerce": {
-    title: "Ecommerce SEO News: Retail Search Updates & Algorithm Changes",
+    title: "Ecommerce Store SEO News: Retail Search Updates & Algorithm Changes",
     desc: "Latest Ecommerce SEO news, merchant center updates, shopping graph changes, and retail algorithm shifts that impact online stores in 2026.",
-    h1: "Ecommerce SEO News",
+    h1: "Ecommerce Store SEO News",
     intro: "Merchant Center, Shopping Graph and product-search changes, read for what they do to indexed products and store revenue.",
   },
   "Technical": {
@@ -77,9 +107,24 @@ const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; i
   },
 };
 
+function resolveCategoryKey(raw?: string): string | undefined {
+  if (!raw) return undefined;
+  if (CATEGORY_META[raw]) return raw;
+  const c = raw.toLowerCase();
+  if (c.includes("law")) return "Law Firm";
+  if (c.includes("shopify")) return "Shopify";
+  if (c.includes("wordpress") || c.includes("woo")) return "WordPress";
+  if (c.includes("visibility")) return "AI Visibility";
+  if (c.includes("usa")) return "USA";
+  if (c.includes("ecommerce")) return "Ecommerce";
+  if (c.includes("technical") || c === "seo news" || c === "seo") return "Technical";
+  return undefined;
+}
+
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ category?: string }> }): Promise<Metadata> {
-  const { category } = await searchParams;
-  const isFiltered = Boolean(category);
+  const { category: rawCategory } = await searchParams;
+  const isFiltered = Boolean(rawCategory);
+  const category = resolveCategoryKey(rawCategory);
 
   // Filtered ?category= URLs point canonical to the main hub and use noindex, follow
   // to avoid competing with and cannibalizing the main hub page.
@@ -128,7 +173,7 @@ const PILLAR_SLUGS = [
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category: rawCategory } = await searchParams;
-  const category = rawCategory && CATEGORY_META[rawCategory] ? rawCategory : undefined;
+  const category = resolveCategoryKey(rawCategory);
   const meta = category ? CATEGORY_META[category] : undefined;
   const pageUrl = category ? `${PAGE_URL}?category=${encodeURIComponent(category)}` : PAGE_URL;
 

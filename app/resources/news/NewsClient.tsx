@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import NewsCommentModal from "@/components/news/NewsCommentModal";
+import PlatformHubNav from "@/components/platform/PlatformHubNav";
 import { CALL_HREF } from "@/lib/offer";
  
 /* ─── THEME ─── */
@@ -81,11 +82,11 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 
 const QUICK_NEWS_TOPICS = [
   "Spam Update",
+  "Law Firm SEO",
+  "Shopify",
+  "WordPress",
+  "AI Mode",
   "Search Console",
-  "Manual Actions",
-  "AI Overviews",
-  "Core Update",
-  "Algorithms",
 ];
 
 const PILLAR_SLUGS = [
@@ -99,16 +100,16 @@ const PILLAR_SLUGS = [
   "ecommerce-seo-news-2026",
 ];
 
-/* ─── SEMRUSH-INSPIRED FILTER & SORT DEFINITIONS ─── */
+/* ─── SEMRUSH-INSPIRED FILTER & SORT DEFINITIONS (7 INDUSTRY VERTICALS) ─── */
 const CATEGORY_TABS = [
   { id: "all", label: "All News" },
-  { id: "core", label: "Core Updates" },
-  { id: "spam", label: "Spam Updates" },
-  { id: "ai", label: "AI Search & GEO" },
-  { id: "gsc", label: "Search Console" },
-  { id: "local", label: "Local SEO" },
-  { id: "technical", label: "Technical SEO" },
-  { id: "ecommerce", label: "Ecommerce" },
+  { id: "seo", label: "SEO News" },
+  { id: "law-firm", label: "Law Firm SEO News" },
+  { id: "ecommerce", label: "Ecommerce Store SEO News" },
+  { id: "shopify", label: "Shopify Store News" },
+  { id: "wordpress", label: "WordPress News" },
+  { id: "ai", label: "AI Visibility News" },
+  { id: "usa", label: "USA News" },
 ];
 
 const DATE_OPTIONS = [
@@ -129,31 +130,84 @@ const SORT_OPTIONS = [
 const newsSlug = (title: string) =>
   (title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 50);
 
-function matchesCategory(categoryStr: string, filterId: string): boolean {
+function matchesCategory(categoryStr: string, filterId: string, fullText = ""): boolean {
   if (!filterId || filterId === "all") return true;
-  const c = (categoryStr || "").toLowerCase();
+  const c = `${categoryStr || ""} ${fullText || ""}`.toLowerCase();
   switch (filterId) {
-    case "core":
-      return c.includes("core") || c.includes("algorithm");
-    case "spam":
-      return c.includes("spam") || c.includes("manual action");
+    case "seo":
+      return (
+        c.includes("core") ||
+        c.includes("algorithm") ||
+        c.includes("spam") ||
+        c.includes("search console") ||
+        c.includes("gsc") ||
+        c.includes("technical") ||
+        c.includes("pdf") ||
+        c.includes("seo")
+      );
+    case "law-firm":
+      return (
+        c.includes("law firm") ||
+        c.includes("legal") ||
+        c.includes("lawyer") ||
+        c.includes("attorney") ||
+        c.includes("lsa") ||
+        c.includes("local") ||
+        c.includes("gbp") ||
+        c.includes("business profile")
+      );
+    case "ecommerce":
+      return (
+        c.includes("ecommerce") ||
+        c.includes("e-commerce") ||
+        c.includes("merchant") ||
+        c.includes("checkout") ||
+        c.includes("shopping") ||
+        c.includes("product") ||
+        c.includes("catalog") ||
+        c.includes("ucp")
+      );
+    case "shopify":
+      return (
+        c.includes("shopify") ||
+        c.includes("liquid") ||
+        c.includes("merchant center") ||
+        c.includes("ucp") ||
+        c.includes("agentic checkout") ||
+        c.includes("ecommerce")
+      );
+    case "wordpress":
+      return (
+        c.includes("wordpress") ||
+        c.includes("woocommerce") ||
+        c.includes("plugin") ||
+        c.includes("cms") ||
+        c.includes("7.1.3")
+      );
     case "ai":
       return (
         c.includes("ai") ||
+        c.includes("gemini") ||
         c.includes("llm") ||
         c.includes("geo") ||
+        c.includes("aeo") ||
         c.includes("sge") ||
         c.includes("overviews") ||
         c.includes("discover")
       );
-    case "gsc":
-      return c.includes("search console") || c.includes("gsc") || c.includes("tool") || c.includes("indexing");
-    case "local":
-      return c.includes("local") || c.includes("maps") || c.includes("business profile") || c.includes("gbp");
-    case "technical":
-      return c.includes("technical") || c.includes("crawl") || c.includes("vitals") || c.includes("schema") || c.includes("pdf");
-    case "ecommerce":
-      return c.includes("ecommerce") || c.includes("merchant") || c.includes("checkout") || c.includes("shopping");
+    case "usa":
+      return (
+        c.includes("usa") ||
+        c.includes("texas") ||
+        c.includes("california") ||
+        c.includes("new york") ||
+        c.includes("orlando") ||
+        c.includes("arizona") ||
+        c.includes("dallas") ||
+        c.includes("local") ||
+        c.includes("map pack") ||
+        c.includes("united states")
+      );
     default:
       return true;
   }
@@ -416,18 +470,24 @@ export default function NewsClient({
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   // Semrush-Inspired Interactive Filter & Sorting States
-  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
-    if (!category) return "all";
-    const c = category.toLowerCase();
-    if (c.includes("ai") || c.includes("llm")) return "ai";
-    if (c.includes("tool") || c.includes("console")) return "gsc";
+  const mapPropToTab = (cat?: string) => {
+    if (!cat) return "all";
+    const c = cat.toLowerCase();
+    if (c.includes("law") || c.includes("legal")) return "law-firm";
+    if (c.includes("shopify")) return "shopify";
+    if (c.includes("wordpress") || c.includes("woo")) return "wordpress";
+    if (c.includes("usa") || c.includes("local")) return "usa";
+    if (c.includes("ai") || c.includes("llm") || c.includes("visibility")) return "ai";
     if (c.includes("ecom")) return "ecommerce";
-    if (c.includes("tech")) return "technical";
-    if (c.includes("local")) return "local";
-    if (c.includes("spam")) return "spam";
-    if (c.includes("core") || c.includes("algo")) return "core";
+    if (c.includes("tool") || c.includes("console") || c.includes("tech") || c.includes("spam") || c.includes("core") || c.includes("seo")) return "seo";
     return "all";
-  });
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => mapPropToTab(category));
+
+  useEffect(() => {
+    setSelectedCategory(mapPropToTab(category));
+  }, [category]);
   const [selectedDateFilter, setSelectedDateFilter] = useState<string>("all");
   const [selectedSort, setSelectedSort] = useState<string>("latest");
   const [customFrom, setCustomFrom] = useState<string>("");
@@ -880,7 +940,7 @@ export default function NewsClient({
           item.title.toLowerCase().includes(q) ||
           item.summary.toLowerCase().includes(q) ||
           item.category.toLowerCase().includes(q)) &&
-        matchesCategory(item.category, selectedCategory) &&
+        matchesCategory(item.category, selectedCategory, `${item.title} ${item.summary}`) &&
         matchesDateFilter(item.rawDate, selectedDateFilter, customFrom, customTo)
     );
 
@@ -907,7 +967,7 @@ export default function NewsClient({
     const counts: Record<string, number> = { all: allFeedItems.length };
     for (const tab of CATEGORY_TABS) {
       if (tab.id === "all") continue;
-      counts[tab.id] = allFeedItems.filter((i) => matchesCategory(i.category, tab.id)).length;
+      counts[tab.id] = allFeedItems.filter((i) => matchesCategory(i.category, tab.id, `${i.title} ${i.summary}`)).length;
     }
     return counts;
   }, [allFeedItems]);
@@ -927,16 +987,18 @@ export default function NewsClient({
   const categoryItems = useMemo(
     () =>
       allFeedItems
-        .filter((i) => matchesCategory(i.category, selectedCategory))
+        .filter((i) => matchesCategory(i.category, selectedCategory, `${i.title} ${i.summary}`))
         .sort((a, b) => timeOf(b.rawDate) - timeOf(a.rawDate)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [allFeedItems, selectedCategory]
   );
   const categoryLabel = CATEGORY_TABS.find((t) => t.id === selectedCategory)?.label ?? "All News";
-  const showAlgorithmContext = selectedCategory === "all" || selectedCategory === "core" || selectedCategory === "spam";
-  const showGscContext = selectedCategory === "all" || selectedCategory === "gsc";
+  const showAlgorithmContext = selectedCategory === "all" || selectedCategory === "seo";
+  const showGscContext = selectedCategory === "all" || selectedCategory === "seo";
   const guidesForCategory =
-    selectedCategory === "all" ? TOPIC_GUIDES : TOPIC_GUIDES.filter((g) => matchesCategory(g.category, selectedCategory));
+    selectedCategory === "all"
+      ? TOPIC_GUIDES
+      : TOPIC_GUIDES.filter((g) => matchesCategory(g.category, selectedCategory, `${g.title} ${g.description}`));
   const latestDateLabel = categoryItems[0] ? formatDate(categoryItems[0].rawDate) : "—";
 
   const isFiltered = Boolean(
@@ -1527,6 +1589,9 @@ export default function NewsClient({
           </div>
         </div>
       </section>
+
+      {/* ── 4-PILLAR PLATFORM ECOSYSTEM BAR ── */}
+      <PlatformHubNav active="news" />
 
       {/* ── SEO NEWS PAST 2 DAYS ── */}
       <section className="border-b border-[#e2e5eb] bg-[#f7f8fa] py-12 md:py-14">
