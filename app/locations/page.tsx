@@ -67,6 +67,39 @@ export default function LocationsHubPage() {
           secondaryCta={{ href: "/services/law-firm-seo", label: "How law firm SEO works" }}
         />
 
+        {/* 2026 CONFIRMED US REGIONAL TELEMETRY & PROXIMITY BADGE */}
+        <section className="border-b bg-amber-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#fde68a" }}>
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 text-sm font-black text-white">
+                📍
+              </span>
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-amber-950">
+                  Confirmed 2026 US Regional Search Telemetry
+                </p>
+                <p className="text-sm font-semibold text-amber-900">
+                  US Metro Proximity Weighting, Geo-Coordinate Clustering &amp; Suburb Expansion Strategies
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/resources/news/us-regional-local-pack-proximity-volatility-spring-2026"
+                className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-white px-3.5 py-1.5 text-xs font-bold text-amber-950 shadow-sm transition-all hover:border-amber-500"
+              >
+                📰 Read Proximity Volatility Study →
+              </Link>
+              <Link
+                href="/resources/discussions"
+                className="inline-flex items-center gap-1 rounded-full bg-amber-950 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
+              >
+                💬 Open US Metro Discussions (Dallas, NY, CA, FL, AZ) →
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* ── VERIFIED PROOF STRIP ── */}
         <ServiceProofStrip
           id="proof"

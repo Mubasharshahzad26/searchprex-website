@@ -671,6 +671,53 @@ export default function BlogClient({
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
+          TECHNICAL INTELLIGENCE & PLATFORM HUBS QUICK-NAV
+         ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-neutral-900 border-b border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
+              ⚡
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
+                SearchPrex Technical Intelligence &amp; Community Hubs
+              </p>
+              <p className="text-sm font-semibold text-neutral-200">
+                Live search telemetry, open discussion threads, diagnostic playbooks &amp; 20-module curriculum.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/resources/news"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              📰 Latest News Desk
+            </Link>
+            <Link
+              href="/resources/discussions"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              💬 Technical Discussions
+            </Link>
+            <Link
+              href="/resources/solutions"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
+            >
+              🛠️ Solutions Library
+            </Link>
+            <Link
+              href="/resources/learning-hub"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              📚 20-Module Playbooks
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
           02. TOPTAL ARCHITECTURAL CATEGORY MATRIX
          ══════════════════════════════════════════════════════════════════ */}
       <section
