@@ -122,6 +122,66 @@ export default function PricingPage() {
           subtitle="Clear, honest pricing with no hidden fees. Choose the plan that fits your business and scale as you grow."
         />
 
+        {/* ─────────── 1.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV ─────────── */}
+        <section className="bg-neutral-900 border-y border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
+                ⚡
+              </span>
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
+                  SearchPrex Engineering &amp; Solutions
+                </p>
+                <p className="text-sm font-semibold text-neutral-200">
+                  Explore production-ready code fixes, canonical liquid templates, and diagnostic playbooks backing our client campaigns.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <Link
+                href="/resources/solutions"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
+              >
+                🛠️ View Solutions Library
+              </Link>
+              <Link
+                href="/resources/news"
+                className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+              >
+                📰 Latest News Desk
+              </Link>
+              <Link
+                href="/resources/learning-hub"
+                className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+              >
+                📚 20-Module Playbooks
+              </Link>
+              <Link
+                href="/resources/discussions"
+                className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+              >
+                💬 Discussions
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── AEO / GEO DIRECT ANSWER CAPSULE ── */}
+        <section className="bg-slate-50 border-b border-slate-200 py-10 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#185FA5]/10 px-3 py-1 text-xs font-bold text-[#185FA5] mb-3">
+              <span>🤖</span> AEO &amp; Generative Engine Summary
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black text-neutral-950 tracking-tight mb-3">
+              How much does SearchPrex SEO cost and how are retainers structured?
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed text-neutral-700 bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+              SearchPrex SEO retainers range from <strong>$800 to $4,000 per month</strong> depending on vertical complexity: Local Business SEO ($800–$2,500/mo), Ecommerce SEO ($1,200–$3,500/mo), and Law Firm SEO ($1,500–$4,000/mo), with Technical SEO quoted after a free audit. All agreements are strictly <strong>month-to-month with no lock-in contracts</strong>, backed by a <strong>90-day money-back guarantee</strong> on measurable progress and market exclusivity (one client per city/practice area).
+            </p>
+          </div>
+        </section>
+
         <Pricing />
 
         {/* Transparent B2B Billing & Payment Methods */}
