@@ -123,6 +123,65 @@ function formatPostDate(value: string): string {
   });
 }
 
+function getArticleTelemetry(category: string = "", slug: string = "") {
+  const c = category.toLowerCase();
+  const s = slug.toLowerCase();
+
+  if (c.includes("ecommerce") || c.includes("e-commerce") || s.includes("shopify") || s.includes("woo") || s.includes("faceted")) {
+    return {
+      eyebrow: "Confirmed 2026 Ecommerce Search Telemetry",
+      title: "Shopify OS 3.0 Canonical Liquid Directives & Duplicate Product URL Mitigation",
+      newsHref: "/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix",
+      newsLabel: "📰 Read Shopify Liquid Audit →",
+      solutionsLabel: "🛠️ View Indexing Playbook →",
+      themeBg: "bg-indigo-50/75 border-indigo-200 text-indigo-950",
+      pillBg: "bg-indigo-600 text-white",
+      btnBorder: "border-indigo-300 text-indigo-950 hover:border-indigo-500",
+      btnSolid: "bg-indigo-950 text-white hover:bg-neutral-900",
+    };
+  }
+
+  if (c.includes("law") || c.includes("legal") || s.includes("lawyer") || s.includes("cases")) {
+    return {
+      eyebrow: "Confirmed 2026 Legal Search Telemetry",
+      title: "Google Business Profile Virtual Office Suspension Enforcement & State Bar Entity Verification",
+      newsHref: "/resources/news/google-business-profile-law-firm-virtual-office-enforcement-2026",
+      newsLabel: "📰 Read Legal Enforcement News →",
+      solutionsLabel: "🛠️ View Reinstatement Playbook →",
+      themeBg: "bg-amber-50/75 border-amber-200 text-amber-950",
+      pillBg: "bg-amber-600 text-white",
+      btnBorder: "border-amber-300 text-amber-950 hover:border-amber-500",
+      btnSolid: "bg-amber-950 text-white hover:bg-neutral-900",
+    };
+  }
+
+  if (c.includes("local") || s.includes("google-business-profile") || s.includes("maps")) {
+    return {
+      eyebrow: "Confirmed 2026 Local Search Telemetry",
+      title: "US Regional Local Pack Proximity Volatility & Geo-Coordinate Clustering",
+      newsHref: "/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility",
+      newsLabel: "📰 Read Proximity Volatility Study →",
+      solutionsLabel: "🛠️ View Local Playbook →",
+      themeBg: "bg-emerald-50/75 border-emerald-200 text-emerald-950",
+      pillBg: "bg-emerald-600 text-white",
+      btnBorder: "border-emerald-300 text-emerald-950 hover:border-emerald-500",
+      btnSolid: "bg-emerald-950 text-white hover:bg-neutral-900",
+    };
+  }
+
+  return {
+    eyebrow: "Confirmed 2026 AI Search & Technical Telemetry",
+    title: "GEO Entity Density & AI Mode: How ChatGPT Search & Google AI Overviews Extract Citations",
+    newsHref: "/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors",
+    newsLabel: "📰 Read AI Citation Study →",
+    solutionsLabel: "🛠️ Browse Solutions Library →",
+    themeBg: "bg-cyan-50/75 border-cyan-200 text-cyan-950",
+    pillBg: "bg-cyan-600 text-white",
+    btnBorder: "border-cyan-300 text-cyan-950 hover:border-cyan-500",
+    btnSolid: "bg-cyan-950 text-white hover:bg-neutral-900",
+  };
+}
+
 export type ArticlePost = {
   slug: string;
   title: string;
@@ -664,6 +723,44 @@ export default function PostClient({
               {post.excerpt}
             </p>
 
+            {/* 2026 CONFIRMED TELEMETRY & PLAYBOOK ALERT */}
+            {(section.href === "/blog" || !post.category?.toLowerCase().includes("news")) && (() => {
+              const tel = getArticleTelemetry(post.category, post.slug);
+              return (
+                <div className={`mb-8 rounded-2xl border p-4 sm:p-5 shadow-xs ${tel.themeBg}`}>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm font-black ${tel.pillBg}`}>
+                        ⚡
+                      </span>
+                      <div>
+                        <p className="text-[11px] font-black uppercase tracking-wider opacity-85">
+                          {tel.eyebrow}
+                        </p>
+                        <p className="text-sm font-bold leading-snug">
+                          {tel.title}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Link
+                        href={tel.newsHref}
+                        className={`inline-flex items-center gap-1 rounded-full border bg-white px-3 py-1.5 text-xs font-bold shadow-xs transition-all ${tel.btnBorder}`}
+                      >
+                        {tel.newsLabel}
+                      </Link>
+                      <Link
+                        href="/resources/solutions"
+                        className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold shadow-xs transition-all ${tel.btnSolid}`}
+                      >
+                        {tel.solutionsLabel}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
             {/* Mobile Table of Contents (collapsible, shown on screens < lg where sidebar is hidden) */}
             {toc.length > 0 && (
               <details className="lg:hidden mb-8 rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-4 group">
@@ -1010,8 +1107,48 @@ export default function PostClient({
               </div>
             )}
 
-              {/* Automated Internal Linking (Related Services) */}
-              <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5 shadow-sm">
+            {/* Technical Intelligence & Solutions Library */}
+            <div className="rounded-2xl border border-slate-900 bg-neutral-900 p-5 text-white shadow-sm">
+              <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-neutral-400 mb-2">
+                <span>⚡</span> Technical Intelligence
+              </div>
+              <p className="text-sm font-bold text-white leading-snug mb-3">
+                Live Search Telemetry &amp; Solutions
+              </p>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/resources/solutions"
+                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <span>🛠️ Solutions Library</span>
+                  <span>→</span>
+                </Link>
+                <Link
+                  href="/resources/news"
+                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <span>📰 2026 SEO News Desk</span>
+                  <span>→</span>
+                </Link>
+                <Link
+                  href="/resources/discussions"
+                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <span>💬 Technical Discussions</span>
+                  <span>→</span>
+                </Link>
+                <Link
+                  href="/resources/learning-hub"
+                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <span>📚 20-Module Playbooks</span>
+                  <span>→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Automated Internal Linking (Related Services) */}
+            <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-4">
                   Explore Services
                 </p>
