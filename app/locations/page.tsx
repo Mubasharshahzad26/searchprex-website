@@ -85,7 +85,7 @@ export default function LocationsHubPage() {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link
-                href="/resources/news/us-regional-local-pack-proximity-volatility-spring-2026"
+                href="/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility"
                 className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-white px-3.5 py-1.5 text-xs font-bold text-amber-950 shadow-sm transition-all hover:border-amber-500"
               >
                 📰 Read Proximity Volatility Study →

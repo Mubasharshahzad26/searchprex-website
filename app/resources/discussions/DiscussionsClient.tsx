@@ -152,7 +152,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Build distinct, data-backed municipal landing pages featuring jurisdiction-specific case data, local courts/landmarks, driving directions, and hyper-local chamber/press backlinks — while reserving additional GBP listings strictly for staffed, lease-verified physical offices.',
     answeredBy: 'SearchPrex US Local SEO Team',
     serviceLink: { label: 'Explore US Location SEO Hubs', href: '/locations' },
-    newsLink: { label: 'US Proximity Volatility Study', href: '/resources/news/us-regional-local-pack-proximity-volatility-spring-2026' },
+    newsLink: { label: 'US Proximity Volatility Study', href: '/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility' },
     tags: ['Dallas SEO', 'Texas Local Pack', 'Multi-Location Strategy'],
   },
   {
@@ -170,7 +170,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'In dense markets like NYC and Southern California, hyper-local neighborhood entity co-occurrence and tier-1 regional press links dominate. In fast-expanding markets like Orlando and Arizona, rapid review velocity, service-area schema (`areaServed` mapped to specific counties/cities), and localized FAQ hubs drive the fastest 3-Pack and organic gains.',
     answeredBy: 'SearchPrex US Local SEO Team',
     serviceLink: { label: 'Local SEO Engineering', href: '/services/local-seo' },
-    newsLink: { label: 'US Metro SERP Volatility Report', href: '/resources/news/us-regional-local-pack-proximity-volatility-spring-2026' },
+    newsLink: { label: 'US Metro SERP Volatility Report', href: '/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility' },
     tags: ['New York SEO', 'California SEO', 'Orlando SEO', 'Arizona SEO'],
   },
   {

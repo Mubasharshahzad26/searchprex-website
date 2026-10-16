@@ -36,6 +36,33 @@ type ResourceCard = {
 
 const hardcodedCategories: ResourceCard[] = [
   {
+    id: "hc-solutions",
+    icon: Wrench,
+    title: "SEO Issues & Solutions Library",
+    desc: "Production-ready diagnostic playbooks and code fixes for Google Search Console indexing drops, Law Firm GBP suspensions, Shopify Liquid canonical loops, and WooCommerce Core Web Vitals.",
+    status: "live",
+    href: "/resources/solutions",
+    cta: "Explore solutions library",
+  },
+  {
+    id: "hc-learning-hub",
+    icon: GraduationCap,
+    title: "SEO Learning Hub & 20-Module Playbooks",
+    desc: "Structured engineering curriculum and interactive readiness checklists across Core SEO, Law Firm SEO, Ecommerce Store SEO, Shopify Store SEO, and WordPress SEO.",
+    status: "live",
+    href: "/resources/learning-hub",
+    cta: "Open learning hub",
+  },
+  {
+    id: "hc-discussions",
+    icon: BookOpen,
+    title: "SEO, Law Firm & US Regional Discussions",
+    desc: "Technical Q&A and community benchmark threads across Gemini 4 AI Mode, GBP Review Recency, Shopify OS 3.0 canonicals, and US Metro SERPs (Dallas, NY, CA, FL, AZ).",
+    status: "live",
+    href: "/resources/discussions",
+    cta: "Join discussions",
+  },
+  {
     id: "hc-regex",
     icon: Terminal,
     title: "GSC Regex Library & Filter Builder",
