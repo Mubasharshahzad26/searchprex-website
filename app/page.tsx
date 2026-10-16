@@ -51,10 +51,10 @@ import FaqAccordion from "@/components/home/FaqAccordion";
 import PillForm from "@/components/home/PillForm";
 
 // Title, H1 (in HeroV2) and description name the same three verticals with
-// "SEO agency". 51 and 134 characters, so Google shows both whole.
-const HOME_TITLE = "US SEO Agency — Law Firm, Ecommerce & Local SEO | SearchPrex";
+// "SEO agency", plus GEO and technical search hooks.
+const HOME_TITLE = "US SEO & AI Search Agency — Technical, Law Firm & Ecommerce SEO | SearchPrex";
 const HOME_DESCRIPTION =
-  "Revenue-driven SEO for US law firms, ecommerce stores and local businesses. Founder-led, one client per city. Get your free competitor tear-down.";
+  "Revenue-driven technical SEO, local Map Pack growth, and AI search optimization (GEO) for US law firms, ecommerce stores and multi-location brands. Founder-led, one client per city.";
 
 const baseMetadata: Metadata = {
   title: HOME_TITLE,
@@ -72,7 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** When a person last reviewed this page. Hardcoded on purpose. */
-const LAST_REVIEWED = "2026-09-27";
+const LAST_REVIEWED = "2026-10-17";
 // One typeface site-wide (Inter, from the root layout); headings only change weight.
 const H = "font-black";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
@@ -212,8 +212,12 @@ const FAQS = [
     a: "Mubashar Sharif, the founder — every audit, page and report. There are no account managers or juniors, which is also why SearchPrex takes one client per city.",
   },
   {
-    q: "Can you get my business into Google's AI Overviews?",
-    a: "Nobody controls what Google's AI cites, but clear answers, structured data and a strong local presence make it far more likely. D.O.L.L.S. Cleaning, HVAC Services Team and Remit Choice are each named in AI Overviews for searches in their markets.",
+    q: "Can you get my business into Google's AI Overviews & ChatGPT Search?",
+    a: "Yes. SearchPrex structures content into self-contained 45–60 word answer capsules directly beneath question-formatted H2s, builds verified JSON-LD schema graphs linked to authoritative Wikidata entities, and maintains clean /llms.txt manifests so retrieval-augmented generation (RAG) pipelines and LLMs cite your domain.",
+  },
+  {
+    q: "What free SEO intelligence and diagnostic tools does SearchPrex provide?",
+    a: "SearchPrex provides an open engineering ecosystem including a Free Domain Authority Checker, live Google SERP Simulator, Schema Markup Generator, an interactive 55-Point Technical SEO Audit Checklist, dated Industry News Desks, and a production Issues & Solutions Library at searchprex.com/resources.",
   },
   {
     q: "Do you guarantee rankings?",
@@ -273,6 +277,11 @@ export default function Home() {
         reviewedBy: founderRef,
         dateModified: LAST_REVIEWED,
         primaryImageOfPage: { "@type": "ImageObject", url: `${SITE}/opengraph-image` },
+        mentions: [
+          { "@type": "Thing", "name": "Search engine optimization", "sameAs": "https://en.wikipedia.org/wiki/Search_engine_optimization" },
+          { "@type": "Thing", "name": "Generative engine optimization", "sameAs": "https://www.wikidata.org/wiki/Q124338164" },
+          { "@type": "Thing", "name": "Core Web Vitals", "sameAs": "https://en.wikipedia.org/wiki/Google_PageSpeed_Tools" },
+        ],
       },
       proofImage("proof-smk-revenue-before", "/images/proof/smk-revenue-before-v2.png", "SMK Store WooCommerce net sales for April 2026: $5,832.02 for the month, top seller at 200 units.", "2026-04-30"),
       proofImage("proof-smk-revenue-after", "/images/proof/smk-revenue-after-v2.png", "SMK Store WooCommerce net sales for June 2026: $19,100.71 for the month, top seller at 300 units — a 227% increase over April.", "2026-06-30"),
@@ -443,15 +452,115 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5 · WHO IT'S FOR */}
+      {/* 5 · SEARCHPREX ENGINEERING ECOSYSTEM & PLATFORM HUBS (Anti-Orphan Authority Flow) */}
+      <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Open Engineering Ecosystem · 2026 Telemetry"
+            title="Production SEO Intelligence, Diagnosis Playbooks & Free Tools"
+            sub="SearchPrex publishes verified search telemetry, production code fixes for Google Search Console crawl bottlenecks, interactive 20-module learning playbooks, and developer utilities designed for enterprise US SEO governance."
+          />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <Link
+              href="/resources/news"
+              className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
+            >
+              <div>
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
+                  📰
+                </span>
+                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">News Desk</p>
+                <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
+                  SEO &amp; Industry News
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                  Dated, source-verified telemetry covering Law Firm GBP enforcement, Shopify Liquid canonical fixes, and AI Mode citation benchmarks.
+                </p>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-neutral-950 group-hover:underline">
+                Explore Industry News <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+              </span>
+            </Link>
+
+            <Link
+              href="/resources/solutions"
+              className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
+            >
+              <div>
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
+                  🛠️
+                </span>
+                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">Code Playbooks</p>
+                <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
+                  Issues &amp; Solutions Library
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                  Step-by-step root-cause diagnostics and production code fixes for GSC &ldquo;Crawled - Not Indexed&rdquo;, GBP suspensions, and Core Web Vitals.
+                </p>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-neutral-950 group-hover:underline">
+                Browse Solutions <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+              </span>
+            </Link>
+
+            <Link
+              href="/resources/learning-hub"
+              className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
+            >
+              <div>
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
+                  🎓
+                </span>
+                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">Curriculum</p>
+                <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
+                  Interactive Learning Hub
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                  20-module technical curriculum and interactive QA audit checklists across Core Technical SEO, Law Firms, Shopify, and WooCommerce.
+                </p>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-neutral-950 group-hover:underline">
+                Open Curriculum <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+              </span>
+            </Link>
+
+            <Link
+              href="/tools"
+              className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
+            >
+              <div>
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
+                  ⚙️
+                </span>
+                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">Utilities</p>
+                <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
+                  Free SEO Tools Suite
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                  Live SERP Simulator, Schema JSON-LD Generator, GSC Regex Library, and root /llms.txt manifest generator for AI search engines.
+                </p>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-neutral-950 group-hover:underline">
+                Access Free Tools <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 6 · WHO IT'S FOR — AEO Direct Answer */}
       <section className="border-t border-slate-200 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
-          <Heading eyebrow="Who it's for" title="Three kinds of business. One way of working." />
+          <Heading
+            eyebrow="Specialized Verticals · AEO Direct Answer"
+            title="Which US Businesses Benefit Most from SearchPrex SEO?"
+            sub="SearchPrex specializes in three high-value US verticals: Personal Injury & Trial Law Firms, Multi-Location Local Contractors, and Multi-SKU Shopify & WooCommerce stores. Every engagement is founder-executed with strict single-client city exclusivity to eliminate competitive conflicts."
+          />
           <AudienceTabs tabs={TABS} />
         </div>
       </section>
 
-      {/* 6 · RECORDED LIVE */}
+      {/* 7 · RECORDED LIVE */}
       <section className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -463,10 +572,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7 · HOW IT WORKS */}
+      {/* 8 · HOW IT WORKS — AEO Methodology */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
-          <Heading eyebrow="How it works" title="From your URL to a Monday report" />
+          <Heading
+            eyebrow="Methodology & Process"
+            title="How Does SearchPrex Execute Technical & Local SEO Engagements?"
+            sub="Our 3-phase execution model eliminates agency overhead: Phase 1 delivers a comprehensive technical crawl & competitor tear-down in 24 hours; Phase 2 executes direct code, schema, and local profile optimizations; Phase 3 provides closed-loop Monday revenue telemetry."
+          />
           <ol className="grid gap-5 md:grid-cols-3">
             {STEPS.map((s) => (
               <li key={s.n} className="rounded-3xl border border-slate-200 bg-white p-7">
@@ -547,10 +660,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 9 · PRICING */}
+      {/* 10 · PRICING — AEO & Semantic Comparison Table */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
-          <Heading eyebrow="Pricing" title="A number before any call" sub="Month to month. The figure within each range depends on how many pages, locations and practice areas the plan covers." />
+          <Heading
+            eyebrow="Transparent Retainer Pricing"
+            title="How Much Does Retainer-Based SEO Cost for US Law Firms & Ecommerce?"
+            sub="SearchPrex SEO retainers range from $1,500 to $3,200/mo for Local businesses, $2,800 to $6,500/mo for Law Firms, and $2,500 to $5,800/mo for Ecommerce stores. Retainers are month-to-month based on catalog volume and market competition, backed by our 90-day progress guarantee."
+          />
+
+          {/* Semantic Comparison Table for ChatGPT Search & Perplexity RAG Extraction */}
+          <div className="mb-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-neutral-600">Executive Pricing &amp; Deliverables Matrix</p>
+            <table className="w-full text-left text-sm text-slate-700">
+              <thead>
+                <tr className="border-b border-slate-200 text-xs font-black uppercase tracking-wider text-neutral-950">
+                  <th className="pb-3 pr-4">Vertical Track</th>
+                  <th className="pb-3 px-4">Investment Range</th>
+                  <th className="pb-3 px-4">Primary Deliverables</th>
+                  <th className="pb-3 px-4">Turnaround Time</th>
+                  <th className="pb-3 pl-4">Guarantee &amp; Terms</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                <tr>
+                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Local SEO &amp; Contractors</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">$1,500 – $3,200 / mo</td>
+                  <td className="py-3.5 px-4 text-xs">Google Business Profile, local 3-pack, review velocity, city landing pages</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">30–60 days to initial movement</td>
+                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, 1 client per city</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Law Firm SEO (Trial &amp; PI)</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">$2,800 – $6,500 / mo</td>
+                  <td className="py-3.5 px-4 text-xs">Practice-area hubs, State Bar entity schema, multi-office GBP compliance</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days for competitive case terms</td>
+                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, exclusive market lockout</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Ecommerce &amp; Shopify</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">$2,500 – $5,800 / mo</td>
+                  <td className="py-3.5 px-4 text-xs">Faceted navigation, Liquid canonicals, Merchant Center, CWV speed</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">3–6 months for high-volume catalogs</td>
+                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, weekly Monday telemetry</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <div className="grid gap-5 md:grid-cols-3">
             {RETAINER_PLANS.map((p) => (
               <div

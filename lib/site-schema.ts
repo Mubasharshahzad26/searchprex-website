@@ -68,6 +68,10 @@ const organization = {
     "AI Overviews (GEO/AEO)",
     "LLM Optimization",
     "Google Indexing Recovery",
+    "https://en.wikipedia.org/wiki/Search_engine_optimization",
+    "https://www.wikidata.org/wiki/Q124338164",
+    "https://en.wikipedia.org/wiki/Google_Search",
+    "https://en.wikipedia.org/wiki/Core_Web_Vitals",
   ],
   // Profiles that exist — the same list TrustStrap links to. G2, Crunchbase
   // and DesignRush were here before their profiles were created (DesignRush
