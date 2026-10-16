@@ -206,7 +206,40 @@ export default function AISearchPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      {/* 2026 CONFIRMED AI SEARCH & GEO TELEMETRY BADGE */}
+      <div className="mx-auto max-w-4xl px-4 pt-4 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-violet-200 bg-violet-50/80 p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-violet-600 text-sm font-black text-white shadow-sm">
+              🤖
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-violet-950">
+                Confirmed 2026 AI Search Telemetry
+              </p>
+              <p className="text-sm font-semibold text-violet-900">
+                GEO Entity Density &amp; AI Mode: How ChatGPT Search &amp; Google AI Overviews Extract Citations
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors"
+              className="inline-flex items-center gap-1 rounded-full border border-violet-300 bg-white px-3.5 py-1.5 text-xs font-bold text-violet-950 shadow-sm transition-all hover:border-violet-500"
+            >
+              📰 Read GEO Factor Study →
+            </Link>
+            <Link
+              href="/tools/llms-txt-generator"
+              className="inline-flex items-center gap-1 rounded-full bg-violet-950 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
+            >
+              ⚡ Generate llms.txt File →
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-4xl px-4 pt-6 sm:px-6 lg:px-8">
         <AiSearch />
       </div>
 

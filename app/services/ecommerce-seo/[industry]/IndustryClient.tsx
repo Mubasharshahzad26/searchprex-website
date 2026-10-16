@@ -128,6 +128,75 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
         }
       />
 
+      {/* PLATFORM-SPECIFIC 2026 TELEMETRY CALLOUT */}
+      {industry.slug === "shopify" && (
+        <section className="border-b bg-sky-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#bae6fd" }}>
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 text-sm font-black text-white">
+                ⚡
+              </span>
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-sky-950">
+                  Confirmed 2026 Shopify Telemetry
+                </p>
+                <p className="text-sm font-semibold text-sky-900">
+                  Shopify OS 3.0 Canonical Liquid Directives &amp; Elimination of /collections/*/products/* Crawl Bloat
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix"
+                className="inline-flex items-center gap-1 rounded-full border border-sky-300 bg-white px-3.5 py-1.5 text-xs font-bold text-sky-950 shadow-sm transition-all hover:border-sky-500"
+              >
+                📰 Read Shopify News →
+              </Link>
+              <Link
+                href="/resources/solutions"
+                className="inline-flex items-center gap-1 rounded-full bg-neutral-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-800"
+              >
+                🛠️ Copy Liquid Code Fix →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {industry.slug === "woocommerce" && (
+        <section className="border-b bg-indigo-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#c7d2fe" }}>
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-black text-white">
+                ⚡
+              </span>
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-indigo-950">
+                  Confirmed 2026 WordPress &amp; WooCommerce Telemetry
+                </p>
+                <p className="text-sm font-semibold text-indigo-900">
+                  WordPress Core Speculative Rules API &amp; wp_options Autoload INP Optimization (&lt;200ms)
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce"
+                className="inline-flex items-center gap-1 rounded-full border border-indigo-300 bg-white px-3.5 py-1.5 text-xs font-bold text-indigo-950 shadow-sm transition-all hover:border-indigo-500"
+              >
+                📰 Read WordPress News →
+              </Link>
+              <Link
+                href="/resources/solutions"
+                className="inline-flex items-center gap-1 rounded-full bg-neutral-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-800"
+              >
+                🛠️ View CWV &amp; SQL Fix →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* The straight answer, for a page without a case study of its own. */}
       {industry.honestNote ? (
         <Band muted id="honest">

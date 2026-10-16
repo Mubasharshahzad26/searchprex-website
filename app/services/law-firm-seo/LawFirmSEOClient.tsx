@@ -149,6 +149,39 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         }
       />
 
+      {/* 2026 CONFIRMED LEGAL TELEMETRY & PLAYBOOK BADGE */}
+      <section className="border-b bg-amber-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#fde68a" }}>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 text-sm font-black text-white">
+              ⚡
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-amber-950">
+                Confirmed 2026 Legal Search Telemetry
+              </p>
+              <p className="text-sm font-semibold text-amber-900">
+                Google Business Profile Virtual Office Suspension Enforcement &amp; State Bar Entity Verification
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/resources/news/google-business-profile-law-firm-virtual-office-enforcement-2026"
+              className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-white px-3.5 py-1.5 text-xs font-bold text-amber-950 shadow-sm transition-all hover:border-amber-500"
+            >
+              📰 Read News Breakdown →
+            </Link>
+            <Link
+              href="/resources/solutions"
+              className="inline-flex items-center gap-1 rounded-full bg-amber-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
+            >
+              🛠️ View Reinstatement Playbook →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* No law firm case study yet, so these are local service businesses and
           the footnote says so in plain words. */}
       <ServiceProofStrip

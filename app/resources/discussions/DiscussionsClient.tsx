@@ -25,6 +25,7 @@ export interface DiscussionThread {
   verifiedAnswer: string
   answeredBy: string
   serviceLink: { label: string; href: string }
+  newsLink?: { label: string; href: string }
   tags: string[]
 }
 
@@ -65,6 +66,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'In our agency tracking across 40+ US domains, pure informational definition queries saw a 14–22% CTR compression unless the page owns the primary HTML comparison table cited inside the AI Overview. However, high-intent commercial and local queries ("near me", pricing, technical audits) show higher conversion intent from clicks that do come through. Structuring 45–60 word direct answer capsules immediately under H2s and deploying /llms.txt remains the most reliable way to capture the AI citation slot.',
     answeredBy: 'SearchPrex Technical SEO Team',
     serviceLink: { label: 'AI Search & GEO Optimization', href: '/ai-search' },
+    newsLink: { label: '2026 AI Search Study', href: '/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors' },
     tags: ['Gemini 4', 'AI Overviews', 'GSC CTR', 'llms.txt'],
   },
   {
@@ -81,6 +83,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Google\'s local legal ranking model heavily weights 90-day review velocity and semantic alignment between review text, GBP secondary categories, and dedicated website sub-pages (e.g., Commercial Truck Wreck, Rideshare Injury, Wrongful Death). Pair compliant post-settlement SMS/email review requests with bar-verified Attorney JSON-LD schema on every practice page.',
     answeredBy: 'SearchPrex Legal SEO Strategists',
     serviceLink: { label: 'Law Firm SEO Services', href: '/services/law-firm-seo' },
+    newsLink: { label: '2026 GBP Enforcement Report', href: '/resources/news/google-business-profile-law-firm-virtual-office-enforcement-2026' },
     tags: ['Law Firm SEO', 'Google Business Profile', 'Local 3-Pack', 'LSA'],
   },
   {
@@ -97,6 +100,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Removing `| within: collection` in your theme\'s product card snippet immediately consolidates 100% of internal link equity onto the canonical `/products/handle` URL. Combine this with a custom `robots.txt.liquid` rule disallowing `/collections/*+*` and `?sort_by=` parameters to reclaim up to 65% of wasted Googlebot crawl budget.',
     answeredBy: 'SearchPrex Shopify SEO Engineers',
     serviceLink: { label: 'Shopify SEO Engineering', href: '/services/ecommerce-seo/shopify' },
+    newsLink: { label: 'Shopify Liquid Audit Breakdown', href: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix' },
     tags: ['Shopify Liquid', 'Canonical URLs', 'Crawl Budget', 'robots.txt.liquid'],
   },
   {
@@ -113,6 +117,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Allow single high-demand attributes (e.g., `/running-shoes/waterproof` or `?color=black` with dynamic H1s and self-referencing canonicals) to be indexed when search demand exists, while forcing `noindex, follow` or non-anchor UI buttons on 2+ filter combinations, price sliders, and sort parameters.',
     answeredBy: 'SearchPrex Ecommerce Team',
     serviceLink: { label: 'Ecommerce SEO Services', href: '/services/ecommerce-seo' },
+    newsLink: { label: 'Merchant Return Schema Mandate', href: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate' },
     tags: ['Faceted Navigation', 'PLP Architecture', 'ProductGroup Schema'],
   },
   {
@@ -129,6 +134,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Audit `SELECT SUM(LENGTH(option_value)) FROM wp_options WHERE autoload IN (\'yes\',\'on\',\'auto\')` — keep total autoloaded data below 800KB, enable Redis Object Cache, and delay non-essential third-party chat/tracking scripts until first user interaction (`pointerdown` or `scroll`).',
     answeredBy: 'SearchPrex WordPress Performance Team',
     serviceLink: { label: 'WordPress & WooCommerce SEO', href: '/services/ecommerce-seo/woocommerce' },
+    newsLink: { label: 'WordPress Core INP Analysis', href: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce' },
     tags: ['WordPress CWV', 'wp_options', 'Mobile INP', 'WooCommerce'],
   },
   {
@@ -146,6 +152,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Build distinct, data-backed municipal landing pages featuring jurisdiction-specific case data, local courts/landmarks, driving directions, and hyper-local chamber/press backlinks — while reserving additional GBP listings strictly for staffed, lease-verified physical offices.',
     answeredBy: 'SearchPrex US Local SEO Team',
     serviceLink: { label: 'Explore US Location SEO Hubs', href: '/locations' },
+    newsLink: { label: 'US Proximity Volatility Study', href: '/resources/news/us-regional-local-pack-proximity-volatility-spring-2026' },
     tags: ['Dallas SEO', 'Texas Local Pack', 'Multi-Location Strategy'],
   },
   {
@@ -163,6 +170,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'In dense markets like NYC and Southern California, hyper-local neighborhood entity co-occurrence and tier-1 regional press links dominate. In fast-expanding markets like Orlando and Arizona, rapid review velocity, service-area schema (`areaServed` mapped to specific counties/cities), and localized FAQ hubs drive the fastest 3-Pack and organic gains.',
     answeredBy: 'SearchPrex US Local SEO Team',
     serviceLink: { label: 'Local SEO Engineering', href: '/services/local-seo' },
+    newsLink: { label: 'US Metro SERP Volatility Report', href: '/resources/news/us-regional-local-pack-proximity-volatility-spring-2026' },
     tags: ['New York SEO', 'California SEO', 'Orlando SEO', 'Arizona SEO'],
   },
   {
@@ -749,17 +757,35 @@ export default function DiscussionsClient() {
                           </button>
                         </div>
 
-                        <Link
-                          href={thread.serviceLink.href}
-                          style={{
-                            fontSize: '0.82rem',
-                            fontWeight: 700,
-                            color: '#171a22',
-                            textDecoration: 'none',
-                          }}
-                        >
-                          {thread.serviceLink.label} →
-                        </Link>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px' }}>
+                          {thread.newsLink && (
+                            <Link
+                              href={thread.newsLink.href}
+                              style={{
+                                fontSize: '0.82rem',
+                                fontWeight: 600,
+                                color: '#4b5563',
+                                textDecoration: 'none',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                              }}
+                            >
+                              <span>📰</span> {thread.newsLink.label} →
+                            </Link>
+                          )}
+                          <Link
+                            href={thread.serviceLink.href}
+                            style={{
+                              fontSize: '0.82rem',
+                              fontWeight: 700,
+                              color: '#171a22',
+                              textDecoration: 'none',
+                            }}
+                          >
+                            {thread.serviceLink.label} →
+                          </Link>
+                        </div>
                       </div>
                     </article>
 
