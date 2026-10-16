@@ -186,7 +186,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
     where: {
       published: true,
       AND: [
-        { category: { contains: "SEO News", mode: "insensitive" } },
+        { category: { contains: "News", mode: "insensitive" } },
         ...(category ? [{ category: { contains: category, mode: "insensitive" as const } }] : []),
       ],
     },

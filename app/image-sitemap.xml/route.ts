@@ -99,9 +99,12 @@ export async function GET() {
       select: { slug: true, category: true, coverImage: true, content: true, canonicalUrl: true },
     });
     for (const a of articles) {
-      const isNews = a.category?.toLowerCase().includes("seo news");
+      const isNews = a.category?.toLowerCase().includes("news");
       const pageUrl = a.canonicalUrl || `${SITE}${isNews ? "/resources/news" : "/blog"}/${a.slug}`;
       addImages(pageUrl, [a.coverImage, ...imagesInBody(a.content)]);
+      if (isNews && a.coverImage) {
+        addImages(`${SITE}/resources/news`, [a.coverImage]);
+      }
     }
   } catch (err) {
     console.error("[image-sitemap] CMS articles unavailable:", err);

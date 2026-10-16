@@ -18,7 +18,7 @@ async function getPostData(rawSlug: string) {
     // `published` has to be checked here, not only in the hub and sitemap
     // queries. Without it an unpublished article vanished from the listings but
     // still rendered at its URL — crawlable, and shareable by anyone who had it.
-    if (dbPost && dbPost.published && dbPost.category && dbPost.category.toLowerCase().includes("seo news")) {
+    if (dbPost && dbPost.published && dbPost.category && dbPost.category.toLowerCase().includes("news")) {
       return {
         slug: dbPost.slug,
         // The stored category is "SEO News — Technical" so that the hub and the

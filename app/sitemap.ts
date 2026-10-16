@@ -277,7 +277,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // subcategory pages query.
   try {
     const newsSpokes = await db.marketingBlog.findMany({
-      where: { published: true, category: { contains: "SEO News", mode: "insensitive" } },
+      where: { published: true, category: { contains: "News", mode: "insensitive" } },
       select: { slug: true, canonicalUrl: true, updatedAt: true },
     });
 
