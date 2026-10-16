@@ -367,6 +367,39 @@ export default function CaseStudyDetail({ cs, related, guide }: { cs: CaseStudy;
                 )}
               </div>
 
+              {/* Telemetry & Playbooks Box */}
+              <div className="rounded-2xl border border-slate-900 bg-neutral-900 p-5 text-white shadow-xs">
+                <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-2">
+                  <span>⚡</span> Live SEO Intelligence
+                </div>
+                <h4 className="text-xs font-black text-white leading-snug mb-3">
+                  Production Solutions &amp; 2026 Telemetry
+                </h4>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href="/resources/solutions"
+                    className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  >
+                    <span>🛠️ View Solutions Library</span>
+                    <span>→</span>
+                  </Link>
+                  <Link
+                    href="/resources/news"
+                    className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  >
+                    <span>📰 Latest 2026 News Desk</span>
+                    <span>→</span>
+                  </Link>
+                  <Link
+                    href="/resources/learning-hub"
+                    className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  >
+                    <span>📚 20-Module Playbooks</span>
+                    <span>→</span>
+                  </Link>
+                </div>
+              </div>
+
               {/* Sticky Action Card */}
               <div className="rounded-2xl border border-[#bfe3d3] bg-[#eefaf4] p-6 text-center shadow-xs">
                 <span className="inline-block rounded-full bg-[#2f9670]/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#2f9670]">

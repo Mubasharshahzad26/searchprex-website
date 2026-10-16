@@ -386,6 +386,45 @@ export default function CaseStudiesClient({
         </div>
       </section>
 
+      {/* ─────────── 2.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV ─────────── */}
+      <section className="bg-neutral-900 border-y border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
+              ⚡
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
+                SearchPrex Engineering &amp; Solutions
+              </p>
+              <p className="text-sm font-semibold text-neutral-200">
+                Explore the actual code fixes, canonical liquid templates, and diagnostic playbooks behind these case studies.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/resources/solutions"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
+            >
+              🛠️ View Solutions Library
+            </Link>
+            <Link
+              href="/resources/news"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              📰 Latest News Desk
+            </Link>
+            <Link
+              href="/resources/learning-hub"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
+            >
+              📚 20-Module Playbooks
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ─────────── 3. LATEST RESOURCES (Semrush Image 4 Pattern) ─────────── */}
       <section className="bg-[#f8fafc] py-20 border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
