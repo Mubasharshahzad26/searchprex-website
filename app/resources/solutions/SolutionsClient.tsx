@@ -26,6 +26,7 @@ export interface SolutionPlaybook {
   verificationCheck: string
   serviceLink: { label: string; href: string }
   guideLink: { label: string; href: string }
+  newsLink?: { label: string; href: string }
 }
 
 const SOLUTION_CATEGORIES = [
@@ -70,6 +71,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
       'Inspect the updated URL in Google Search Console -> Live Test -> Request Indexing, then monitor the Page Indexing report over 7–14 days.',
     serviceLink: { label: 'Hire Technical SEO Engineers', href: '/services/technical-seo' },
     guideLink: { label: 'Technical SEO Audit Checklist', href: '/resources/technical-seo-checklist' },
+    newsLink: { label: 'US Regional Proximity Volatility News', href: '/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility' },
   },
   {
     id: 'sol-2',
@@ -109,6 +111,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
       'Submit all documents in a single GBP Appeal tool submission (never submit duplicate rapid appeals before a case ID responds).',
     serviceLink: { label: 'Law Firm SEO & GBP Reinstatement', href: '/services/law-firm-seo' },
     guideLink: { label: 'Law Firm SEO Audit Checklist', href: '/resources/law-firm-seo-audit-checklist' },
+    newsLink: { label: 'GBP Virtual Office Enforcement News', href: '/resources/news/google-business-profile-law-firm-virtual-office-enforcement-2026' },
   },
   {
     id: 'sol-3',
@@ -149,6 +152,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
       'Run a Screaming Frog crawl on `/collections/` — 100% of product links should now resolve directly to `/products/handle` with 0 non-canonical internal links.',
     serviceLink: { label: 'Shopify SEO Engineering Service', href: '/services/ecommerce-seo/shopify' },
     guideLink: { label: 'Shopify & WooCommerce Indexing Guide', href: '/blog/shopify-woocommerce-indexing-blueprint' },
+    newsLink: { label: 'Shopify OS 3.0 Canonical Liquid News', href: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix' },
   },
   {
     id: 'sol-4',
@@ -184,6 +188,7 @@ export const metadata = {
       'Verify in GSC Crawl Stats that parameter crawl requests drop by >75% within 14 days while curated facet URLs remain indexed.',
     serviceLink: { label: 'Ecommerce SEO Architecture Service', href: '/services/ecommerce-seo' },
     guideLink: { label: 'Faceted Navigation Engineering Guide', href: '/blog/fix-faceted-navigation-ecommerce-seo' },
+    newsLink: { label: 'Merchant Center Return Policy Mandate', href: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate' },
   },
   {
     id: 'sol-5',
@@ -216,6 +221,7 @@ ORDER BY bytes DESC LIMIT 10;`,
       'Test with PageSpeed Insights and Chrome UX Report (CrUX) — target TTFB < 200ms, LCP < 2.0s, and INP < 120ms.',
     serviceLink: { label: 'WordPress & WooCommerce SEO', href: '/services/ecommerce-seo/woocommerce' },
     guideLink: { label: 'WooCommerce & WordPress SEO Checklist', href: '/resources/woocommerce-seo-checklist' },
+    newsLink: { label: 'WordPress Speculation Rules & INP News', href: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce' },
   },
   {
     id: 'sol-6',
@@ -247,6 +253,7 @@ ORDER BY bytes DESC LIMIT 10;`,
       'Test target queries in Google AI Mode and Perplexity — extracted passages and HTML tables typically get picked up within 5–10 days of re-crawling.',
     serviceLink: { label: 'AI Search & GEO Optimization', href: '/ai-search' },
     guideLink: { label: 'Google AI Overviews GEO Guide', href: '/blog/google-ai-overviews-seo' },
+    newsLink: { label: 'GEO Entity Density & Citation News', href: '/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors' },
   },
 ]
 
@@ -938,6 +945,26 @@ export default function SolutionsClient() {
                             </div>
 
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                              {sol.newsLink && (
+                                <Link
+                                  href={sol.newsLink.href}
+                                  style={{
+                                    padding: '8px 14px',
+                                    borderRadius: '6px',
+                                    border: '1px solid #bae6fd',
+                                    background: '#f0f9ff',
+                                    color: '#0369a1',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 700,
+                                    textDecoration: 'none',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                  }}
+                                >
+                                  📰 {sol.newsLink.label} →
+                                </Link>
+                              )}
                               <Link
                                 href={sol.guideLink.href}
                                 style={{

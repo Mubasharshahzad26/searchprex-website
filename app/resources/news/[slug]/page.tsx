@@ -258,10 +258,10 @@ async function getRelatedSpokes(currentSlug: string) {
       where: {
         published: true,
         slug: { not: currentSlug },
-        category: { contains: "SEO News", mode: "insensitive" },
+        category: { contains: "News", mode: "insensitive" },
       },
       orderBy: { publishedAt: "desc" },
-      take: 3,
+      take: 4,
       select: { slug: true, title: true, category: true, coverImage: true, excerpt: true },
     });
 

@@ -30,6 +30,8 @@ export interface LearningTrack {
   serviceHref: string
   serviceLabel: string
   newsCategoryParam: string
+  flagshipNewsHref?: string
+  flagshipNewsLabel?: string
 }
 
 const TRACK_TABS = [
@@ -105,6 +107,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/technical-seo',
     serviceLabel: 'Technical SEO Engineering Service',
     newsCategoryParam: 'SEO News',
+    flagshipNewsHref: '/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors',
+    flagshipNewsLabel: 'GEO Entity Density & AI Mode News',
   },
   {
     id: 'Law Firm',
@@ -169,6 +173,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/law-firm-seo',
     serviceLabel: 'Law Firm SEO Agency Service',
     newsCategoryParam: 'Law Firm SEO News',
+    flagshipNewsHref: '/resources/news/google-business-profile-law-firm-virtual-office-enforcement-2026',
+    flagshipNewsLabel: 'GBP Virtual Office Enforcement News',
   },
   {
     id: 'Ecommerce',
@@ -233,6 +239,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/ecommerce-seo',
     serviceLabel: 'Ecommerce SEO Growth Service',
     newsCategoryParam: 'Ecommerce Store SEO News',
+    flagshipNewsHref: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate',
+    flagshipNewsLabel: 'Merchant Center Return Policy News',
   },
   {
     id: 'Shopify Store',
@@ -297,6 +305,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/ecommerce-seo/shopify',
     serviceLabel: 'Shopify SEO Specialist Service',
     newsCategoryParam: 'Shopify Store News',
+    flagshipNewsHref: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix',
+    flagshipNewsLabel: 'Shopify OS 3.0 Canonical Liquid News',
   },
   {
     id: 'WordPress',
@@ -361,6 +371,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/ecommerce-seo/woocommerce',
     serviceLabel: 'WordPress & WooCommerce SEO Service',
     newsCategoryParam: 'WordPress News',
+    flagshipNewsHref: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce',
+    flagshipNewsLabel: 'WordPress Speculation Rules News',
   },
 ]
 
@@ -796,6 +808,26 @@ export default function LearningHubClient() {
                         >
                           📘 {track.pillarGuideLabel}
                         </Link>
+                        {track.flagshipNewsHref && (
+                          <Link
+                            href={track.flagshipNewsHref}
+                            style={{
+                              padding: '8px 14px',
+                              borderRadius: '7px',
+                              border: '1px solid #bae6fd',
+                              background: '#f0f9ff',
+                              color: '#0369a1',
+                              fontSize: '0.8rem',
+                              fontWeight: 700,
+                              textDecoration: 'none',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                            }}
+                          >
+                            ⚡ {track.flagshipNewsLabel} →
+                          </Link>
+                        )}
                         <Link
                           href={`/resources/news?category=${encodeURIComponent(track.newsCategoryParam)}`}
                           style={{
@@ -809,7 +841,7 @@ export default function LearningHubClient() {
                             textDecoration: 'none',
                           }}
                         >
-                          📰 Latest {track.id} News
+                          📰 All {track.id} News
                         </Link>
                       </div>
 
