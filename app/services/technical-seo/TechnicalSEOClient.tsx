@@ -99,7 +99,7 @@ const related = [
   { href: "/services/ecommerce-seo", title: "Ecommerce SEO services", body: "Technical SEO applied to catalogues of thousands of products." },
   { href: "/services/ecommerce-seo/woocommerce", title: "WooCommerce SEO", body: "Filter URLs, plugin weight and indexing on WooCommerce stores." },
   { href: "/blog/google-indexing-api-python", title: "The Indexing API is not a shortcut", body: "What Google's Indexing API is really for, and what to do instead." },
-  { href: "/resources/news/technical-seo-news-2026", title: "Technical SEO news", body: "Crawling, indexing and AI bot changes, with sources." },
+  { href: "/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce", title: "WordPress Core INP & Indexing News", body: "Speculative Rules API and Core Web Vitals telemetry for high-SKU stores." },
 ];
 
 export default function TechnicalSEOClient() {
@@ -125,6 +125,39 @@ export default function TechnicalSEOClient() {
           />
         }
       />
+
+      {/* 2026 CONFIRMED TECHNICAL SEO & INDEXING TELEMETRY BADGE */}
+      <section className="border-b bg-cyan-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#a5f3fc" }}>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-sm font-black text-white">
+              ⚙️
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-cyan-950">
+                Confirmed 2026 Technical SEO &amp; Indexing Telemetry
+              </p>
+              <p className="text-sm font-semibold text-cyan-900">
+                Googlebot Rendering Budget Optimization, Speculative Rules API &amp; INP Deferral Architecture
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce"
+              className="inline-flex items-center gap-1 rounded-full border border-cyan-300 bg-white px-3.5 py-1.5 text-xs font-bold text-cyan-950 shadow-sm transition-all hover:border-cyan-500"
+            >
+              📰 Read INP &amp; Speculation Study →
+            </Link>
+            <Link
+              href="/resources/solutions"
+              className="inline-flex items-center gap-1 rounded-full bg-cyan-950 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
+            >
+              🛠️ View GSC Indexing Fixes →
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <ServiceProofStrip
         id="proof"

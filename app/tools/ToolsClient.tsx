@@ -170,6 +170,39 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         aside={<HeroStats />}
       />
 
+      {/* 2026 TECHNICAL PLAYBOOKS & TELEMETRY STRIP */}
+      <div className="border-b bg-neutral-900 px-4 py-4 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
+              ⚡
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
+                SearchPrex Engineering &amp; Solutions Library
+              </p>
+              <p className="text-sm font-semibold text-neutral-100">
+                Production-ready code fixes, canonical liquid directives, and GSC indexing recovery playbooks.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/resources/solutions"
+              className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
+            >
+              🛠️ Browse Solutions Library →
+            </Link>
+            <Link
+              href="/resources/learning-hub"
+              className="inline-flex items-center gap-1 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500"
+            >
+              📚 20-Module Playbooks →
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* ── TOOLS GRID (live → pro → soon) ── */}
       <Section tone="surface">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

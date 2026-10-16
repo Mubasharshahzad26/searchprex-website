@@ -131,6 +131,39 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         }
       />
 
+      {/* 2026 CONFIRMED LOCAL SEARCH & GBP TELEMETRY BADGE */}
+      <section className="border-b bg-emerald-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#a7f3d0" }}>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-black text-white">
+              📍
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-emerald-950">
+                Confirmed 2026 Local Search Telemetry
+              </p>
+              <p className="text-sm font-semibold text-emerald-900">
+                US Regional Local Pack Proximity Volatility &amp; Google Business Profile Video Verification Re-Audits
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/resources/news/us-regional-local-pack-proximity-volatility-spring-2026"
+              className="inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-white px-3.5 py-1.5 text-xs font-bold text-emerald-950 shadow-sm transition-all hover:border-emerald-500"
+            >
+              📰 Read Proximity Volatility Study →
+            </Link>
+            <Link
+              href="/services/local-seo/google-business-profile-suspended"
+              className="inline-flex items-center gap-1 rounded-full bg-emerald-950 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
+            >
+              🛡️ GBP Suspension Recovery Guide →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <ServiceProofStrip
         id="proof"
         title="Two local clients, straight from Google"
