@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ThumbsUp,
   Sparkles,
+  Mail,
 } from "lucide-react";
 import { CommentItem } from "@/lib/news-interactions";
 
@@ -16,6 +17,7 @@ interface NewsDiscussionSectionProps {
   slug: string;
   title: string;
   category?: string;
+  pagePath?: string;
   externalLikes?: number;
   externalUserLiked?: boolean;
   onExternalToggleLike?: () => void;
@@ -25,6 +27,7 @@ export default function NewsDiscussionSection({
   slug,
   title,
   category,
+  pagePath,
   externalLikes,
   externalUserLiked,
   onExternalToggleLike,
@@ -34,15 +37,19 @@ export default function NewsDiscussionSection({
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
+  // Unified mode: "comment" (public comment + optional editorial note) or "feedback" (direct topic request / feedback)
+  const [mode, setMode] = useState<"comment" | "feedback">("comment");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [content, setContent] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [successMsg, setSuccessMsg] = useState(false);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [clientId, setClientId] = useState("");
 
   useEffect(() => {
-    // Generate or fetch anonymous clientId for persistent like state
     let cid = "";
     try {
       cid = localStorage.getItem("sp_news_client_id") || "";
@@ -111,42 +118,94 @@ export default function NewsDiscussionSection({
       setError("Please enter your name.");
       return;
     }
+    if (mode === "feedback" && !email.trim()) {
+      setError("Please enter your email so we can follow up on your topic request.");
+      return;
+    }
     if (!content.trim() || content.trim().length < 5) {
-      setError("Please write a comment (at least 5 characters).");
+      setError("Please write at least 5 characters.");
       return;
     }
 
     setSubmitting(true);
     setError(null);
+    setSuccessMsg(null);
 
     try {
-      const res = await fetch("/api/news/interactions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "comment",
-          slug,
-          name: name.trim(),
-          role: role.trim() || undefined,
-          content: content.trim(),
-        }),
-      });
+      if (mode === "comment") {
+        const res = await fetch("/api/news/interactions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "comment",
+            slug,
+            name: name.trim(),
+            role: role.trim() || undefined,
+            content: content.trim(),
+          }),
+        });
 
-      const data = await res.json();
-      if (data.ok && data.comment) {
-        try {
-          localStorage.setItem("sp_comment_author_name", name.trim());
-          if (role.trim()) localStorage.setItem("sp_comment_author_role", role.trim());
-        } catch {}
+        const data = await res.json();
+        if (data.ok && data.comment) {
+          try {
+            localStorage.setItem("sp_comment_author_name", name.trim());
+            if (role.trim()) localStorage.setItem("sp_comment_author_role", role.trim());
+          } catch {}
 
-        setComments([data.comment, ...comments]);
-        setContent("");
-        setSuccessMsg(true);
-        setTimeout(() => setSuccessMsg(false), 3500);
+          // Also forward to editorial feedback if the user provided an email
+          if (email.trim()) {
+            fetch("/api/news/feedback", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: name.trim(),
+                email: email.trim(),
+                industry: role.trim() || "Reader",
+                lookingFor: content.trim(),
+                likes: "",
+                website: honeypot,
+                page: pagePath || `/resources/news/${slug}`,
+              }),
+            }).catch(() => {});
+          }
+
+          setComments([data.comment, ...comments]);
+          setContent("");
+          setSuccessMsg("Your comment was published to the discussion thread! Thank you for sharing your perspective.");
+          setTimeout(() => setSuccessMsg(null), 4500);
+        } else {
+          setError(data.error || "Failed to post comment. Please try again.");
+        }
       } else {
-        setError(data.error || "Failed to post comment. Please try again.");
+        const res = await fetch("/api/news/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            industry: role.trim() || "Reader",
+            lookingFor: content.trim(),
+            likes: "",
+            website: honeypot,
+            page: pagePath || `/resources/news/${slug}`,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          setError(data.error || "Something went wrong. Please try again.");
+        } else {
+          try {
+            localStorage.setItem("sp_comment_author_name", name.trim());
+            if (role.trim()) localStorage.setItem("sp_comment_author_role", role.trim());
+          } catch {}
+          setContent("");
+          setSuccessMsg(
+            `Thank you, ${name.trim().split(" ")[0] || "friend"}! Your feedback and topic request were sent directly to our editorial team.`
+          );
+          setTimeout(() => setSuccessMsg(null), 5000);
+        }
       }
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.");
     } finally {
       setSubmitting(false);
@@ -173,31 +232,40 @@ export default function NewsDiscussionSection({
   };
 
   return (
-    <section className="my-12 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-      {/* Header & Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
+    <section
+      aria-label="Community Discussion and Reader Feedback"
+      className="my-12 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+    >
+      {/* Unified Header & Reaction Actions */}
+      <div className="flex flex-wrap items-start justify-between gap-4 pb-6 border-b border-slate-100">
+        <div className="max-w-xl">
+          <div className="flex flex-wrap items-center gap-2 mb-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-900 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">
-              Community Discussion
+              Community Discussion &amp; Reader Feedback
             </span>
-            <span className="text-xs text-slate-400 font-medium">
-              Verified SEO Insights
-            </span>
+            {category && (
+              <span className="text-xs text-slate-400 font-medium">
+                {category}
+              </span>
+            )}
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-slate-900">
-            Reader Reactions & Discussion
+            Join the Discussion or Request Our Next Topic
           </h2>
+          <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Share your perspective in the public thread below, or tell us what SEO teardown, case study, or update regarding{" "}
+            <span className="font-semibold text-slate-800">{title}</span> you want us to cover next.
+          </p>
         </div>
 
         {/* Reaction Action Bar */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             type="button"
             onClick={handleToggleLike}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-sm cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-2xs cursor-pointer ${
               effectiveUserLiked
-                ? "bg-rose-50 text-rose-600 border border-rose-200 shadow-rose-100"
+                ? "bg-rose-50 text-rose-600 border border-rose-200"
                 : "bg-slate-50 text-slate-700 border border-slate-200 hover:border-rose-300 hover:text-rose-600"
             }`}
           >
@@ -206,26 +274,67 @@ export default function NewsDiscussionSection({
                 effectiveUserLiked ? "fill-rose-500 text-rose-500 scale-110" : ""
               } transition-transform`}
             />
-            <span>{effectiveLikes} {effectiveLikes === 1 ? "Like" : "Likes"}</span>
+            <span>
+              {effectiveLikes} {effectiveLikes === 1 ? "Like" : "Likes"}
+            </span>
           </button>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-600">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-bold text-slate-600">
             <MessageSquare className="h-4 w-4 text-neutral-900" />
-            <span>{comments.length} {comments.length === 1 ? "Comment" : "Comments"}</span>
+            <span>
+              {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Post a Comment Form */}
+      {/* Unified Form with Mode Switcher */}
       <div className="pt-6">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">
-          Leave a Perspective or Case Study
-        </h3>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div className="inline-flex rounded-xl border border-slate-200 bg-slate-100/80 p-1">
+            <button
+              type="button"
+              onClick={() => {
+                setMode("comment");
+                setError(null);
+              }}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                mode === "comment"
+                  ? "bg-neutral-900 text-white shadow-2xs"
+                  : "text-slate-600 hover:text-neutral-900"
+              }`}
+            >
+              <MessageSquare className="h-3.5 w-3.5" />
+              <span>Public Comment</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMode("feedback");
+                setError(null);
+              }}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                mode === "feedback"
+                  ? "bg-neutral-900 text-white shadow-2xs"
+                  : "text-slate-600 hover:text-neutral-900"
+              }`}
+            >
+              <Mail className="h-3.5 w-3.5" />
+              <span>What Do You Want to Hear Next? (Feedback)</span>
+            </button>
+          </div>
+
+          <span className="text-[11px] font-medium text-slate-400">
+            {mode === "comment"
+              ? "Posts immediately to the article discussion thread"
+              : "Sent directly to Mubashar Sharif's editorial inbox"}
+          </span>
+        </div>
 
         {successMsg && (
           <div className="mb-4 flex items-center gap-2 rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-xs font-bold text-emerald-800">
             <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-shrink-0" />
-            <span>Your comment was posted successfully! Thank you for sharing your experience.</span>
+            <span>{successMsg}</span>
           </div>
         )}
 
@@ -235,37 +344,98 @@ export default function NewsDiscussionSection({
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name (e.g. Alex Mercer) *"
+        <form onSubmit={handleSubmit} className="space-y-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label className="mb-1 block text-[11px] font-semibold text-slate-700">
+                Name *
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your Name (e.g. Alex Mercer)"
+                required
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-[11px] font-semibold text-slate-700">
+                Profession / Role
+              </label>
+              <input
+                type="text"
+                list="unified-profession-options"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                placeholder="e.g. SEO Director, Founder, Attorney"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
+              />
+              <datalist id="unified-profession-options">
+                <option value="SEO Specialist / Strategist" />
+                <option value="Agency Owner / Director" />
+                <option value="Founder / CEO" />
+                <option value="Marketing Manager / CMO" />
+                <option value="Ecommerce Manager" />
+                <option value="Attorney / Law Firm Partner" />
+                <option value="Local Business Owner" />
+                <option value="Software Engineer / Developer" />
+                <option value="Content Strategist" />
+              </datalist>
+            </div>
+
+            <div>
+              <label className="mb-1 block text-[11px] font-semibold text-slate-700">
+                Email {mode === "feedback" ? "*" : "(optional — for follow-up)"}
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required={mode === "feedback"}
+                placeholder="you@company.com"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-1 block text-[11px] font-semibold text-slate-700">
+              {mode === "comment"
+                ? "Your Comment, Perspective, or Topic Request *"
+                : "What SEO topics, technical teardowns, or case studies should we cover next? *"}
+            </label>
+            <textarea
+              rows={3}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder={
+                mode === "comment"
+                  ? "Share your thoughts on this article, observations from your own site, or what topic you want us to cover next..."
+                  : "Tell us what SEO topics, technical guides, or industry case studies you want to hear from us next..."
+              }
               required
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
-            />
-            <input
-              type="text"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              placeholder="Your Role or Company (e.g. SEO Director at Agency) (optional)"
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900 resize-y"
             />
           </div>
 
-          <textarea
-            rows={3}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Share your thoughts, observations, or what you experienced... *"
-            required
-            className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-neutral-900 focus:bg-white focus:ring-1 focus:ring-neutral-900 resize-none"
+          {/* Honeypot */}
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            className="hidden"
+            aria-hidden="true"
           />
 
-          <div className="flex items-center justify-between pt-1">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
             <p className="text-[11px] text-slate-400">
-              Directly published to the community thread.
+              {mode === "comment"
+                ? "Your email is never displayed publicly."
+                : "We never share your email. Used only to reply to your topic request."}
             </p>
 
             <button
@@ -276,12 +446,14 @@ export default function NewsDiscussionSection({
               {submitting ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Submitting...</span>
+                  <span>Sending...</span>
                 </>
               ) : (
                 <>
                   <Send className="h-4 w-4" />
-                  <span>Submit Comment</span>
+                  <span>
+                    {mode === "comment" ? "Post Comment" : "Send Editorial Feedback"}
+                  </span>
                 </>
               )}
             </button>
@@ -290,18 +462,24 @@ export default function NewsDiscussionSection({
       </div>
 
       {/* Comments List */}
-      <div className="mt-8 pt-8 border-t border-slate-100 space-y-4">
+      <div className="mt-8 pt-6 border-t border-slate-100 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            Community Perspectives ({comments.length})
+          </h3>
+        </div>
+
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-10 text-slate-400">
-            <Loader2 className="h-6 w-6 animate-spin mb-2 text-neutral-900" />
-            <p className="text-xs font-medium">Loading comments...</p>
+          <div className="flex flex-col items-center justify-center py-8 text-slate-400">
+            <Loader2 className="h-5 w-5 animate-spin mb-2 text-neutral-900" />
+            <p className="text-xs font-medium">Loading discussion...</p>
           </div>
         ) : comments.length === 0 ? (
-          <div className="text-center py-8 rounded-2xl bg-slate-50 border border-dashed border-slate-200">
-            <Sparkles className="h-6 w-6 text-neutral-900 mx-auto mb-2 opacity-50" />
+          <div className="text-center py-7 rounded-2xl bg-slate-50 border border-dashed border-slate-200">
+            <Sparkles className="h-5 w-5 text-neutral-900 mx-auto mb-1.5 opacity-50" />
             <p className="text-xs font-bold text-slate-700">No comments yet</p>
             <p className="text-[11px] text-slate-500 mt-0.5">
-              Be the first to share your observations on this article.
+              Be the first to share your observations or request a follow-up teardown above.
             </p>
           </div>
         ) : (
@@ -339,7 +517,7 @@ export default function NewsDiscussionSection({
                 <button
                   type="button"
                   onClick={() => handleLikeComment(comment.id)}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-slate-800 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-slate-800 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
                 >
                   <ThumbsUp className="h-3.5 w-3.5" />
                   <span>{comment.likes || 0}</span>

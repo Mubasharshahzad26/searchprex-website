@@ -53,7 +53,12 @@ export default function robots(): MetadataRoute.Robots {
     // Both sitemaps, not just the main one. /news-sitemap.xml is a valid Google
     // News sitemap that has always been served but never advertised, so its
     // only discovery path was a manual Search Console submission.
-    sitemap: [`${SITE}/sitemap.xml`, `${SITE}/news-sitemap.xml`, `${SITE}/image-sitemap.xml`],
+    sitemap: [
+      `${SITE}/sitemap.xml`,
+      `${SITE}/news-sitemap.xml`,
+      `${SITE}/image-sitemap.xml`,
+      `${SITE}/video-sitemap.xml`,
+    ],
   };
 }
  

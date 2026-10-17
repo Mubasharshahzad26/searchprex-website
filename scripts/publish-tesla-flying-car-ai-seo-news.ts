@@ -27,9 +27,9 @@ const GIZMODO_URL = "https://gizmodo.com/alef-trolls-tesla-with-video-of-its-car
 const TITLE =
   "Tesla Roadster 'Flying Car' Demo, Alef eVTOL & How AI Search Ranks Breakout USA Tech Trends";
 const META_TITLE =
-  "Tesla Flying Car Demo, Alef eVTOL & AI Search Trend SEO ({month})";
+  "Tesla Flying Car Demo: Roadster, Alef eVTOL & AI Trend SEO";
 const META_DESCRIPTION =
-  "How Tesla's October 2026 McGregor, Texas Roadster thruster demo and Alef Aeronautics' flying car video triggered a USA search wave—and how AI Overviews verify viral trends.";
+  "Watch the 2026 Tesla flying car Roadster demo and Alef eVTOL flyover. See how AI search trend SEO captures breakout USA traffic in Google AI Overviews.";
 const EXCERPT =
   "Tesla's live October 2026 Roadster cold-gas thruster demo in McGregor, Texas and Alef Aeronautics' same-day eVTOL flyover sparked two massive USA search waves: 'Is the Tesla flying car video real or AI?' and textbook entity newsjacking. Here is the full video evidence and the SEO/AEO playbook.";
 
@@ -48,7 +48,7 @@ const CONTENT = `## Key Takeaways
 
 According to [CNET's coverage of the SpaceX-powered Roadster reveal](${CNET_URL}), the demonstration turned Elon Musk’s long-teased "SpaceX package" into a live physical spectacle in Texas. Rather than wings or rotors, the track-focused "Rocket" Roadster uses compressed-air **cold-gas thrusters** and active ground-effect suction fans. While it is not a street-legal aircraft capable of cross-city flight, the short aerial hop immediately dominated US search trends under *"Tesla flying car"* and *"Tesla Roadster flying demo."*
 
-![Tesla Roadster McGregor Texas thruster hop and Alef Aeronautics eVTOL flying car search trend telemetry](${SITE}${COVER_IMAGE})
+![Tesla Roadster McGregor Texas thruster hop and Alef Aeronautics eVTOL flying car search trend telemetry](${COVER_IMAGE})
 
 ### Watch Reference Video 1: Tesla Roadster Live Aerial Hop & Upside-Down Demo
 
@@ -144,11 +144,7 @@ By publishing fast, source-verified analysis during a Query Deserves Freshness (
 - [Tesla's 'Flying Car' Revealed: McGregor, Texas Roadster Demonstration Footage](https://www.youtube.com/watch?v=wACc9vJflrc) — Times Now / YouTube Broadcast Reference.
 - [Elon Musk Just Changed Cars Forever — Tesla Roadster Flies Breakdown](https://www.youtube.com/watch?v=GwffNnmuqfk) — Valuetainment / YouTube Industry Reference.
 
-_Last verified: 17 October 2026._
-
----
-### About the Author
-**[Mubashar Sharif](https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/)** is the Founder & Senior SEO Strategist at SearchPrex, with 5+ years of technical, local (#1 ranked in Cleveland, OH), and ecommerce SEO mastery. He tracks USA search volatility, Answer Engine Optimization (AEO), and Generative Engine Optimization (GEO). Connect with Mubashar on [LinkedIn](https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/).`;
+_Last verified: 17 October 2026._`;
 
 async function main() {
   const liveUrl = `${SITE}/resources/news/${SLUG}`;
@@ -159,6 +155,10 @@ async function main() {
       title: TITLE,
       metaTitle: META_TITLE,
       metaDescription: META_DESCRIPTION,
+      ogTitle: META_TITLE,
+      ogDescription: META_DESCRIPTION,
+      twitterTitle: META_TITLE,
+      twitterDescription: META_DESCRIPTION,
       excerpt: EXCERPT,
       category: CATEGORY,
       author: "Mubashar Sharif",
@@ -175,6 +175,10 @@ async function main() {
       title: TITLE,
       metaTitle: META_TITLE,
       metaDescription: META_DESCRIPTION,
+      ogTitle: META_TITLE,
+      ogDescription: META_DESCRIPTION,
+      twitterTitle: META_TITLE,
+      twitterDescription: META_DESCRIPTION,
       excerpt: EXCERPT,
       category: CATEGORY,
       author: "Mubashar Sharif",

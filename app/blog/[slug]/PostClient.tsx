@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar, Clock, ChevronRight, ArrowRight,
   CheckCircle, CheckCircle2, Share2, Copy, Check, Linkedin, TrendingUp, Mail, Loader2,
-  Heart, MessageSquare, ArrowUp, Send, AlertCircle,
+  Heart, MessageSquare, ArrowUp, Send, AlertCircle, Globe,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import parse, { Element } from 'html-react-parser';
@@ -290,9 +290,123 @@ export default function PostClient({
 
   const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
   const leadSource = `article:${section.href}/${post.slug}`;
+
+  const dynamicCta = (() => {
+    const rawTitle = post.title || "this SEO update";
+    const shortTitle =
+      rawTitle.length > 68 ? `${rawTitle.slice(0, 65).trim()}...` : rawTitle;
+    const cat = (post.category || "SEO").trim();
+    const hay = `${rawTitle} ${cat} ${post.slug}`.toLowerCase();
+
+    if (
+      hay.includes("flying car") ||
+      hay.includes("tesla") ||
+      hay.includes("alef") ||
+      hay.includes("trend") ||
+      hay.includes("ai overview") ||
+      hay.includes("ai search") ||
+      hay.includes("chatgpt") ||
+      hay.includes("perplexity") ||
+      hay.includes("geo")
+    ) {
+      return {
+        bannerCopy: {
+          eyebrow: `LIVE AI SEARCH & TREND AUDIT · ${cat.toUpperCase()}`,
+          headline: `Want Your Brand Cited in AI Overviews for Trends Like "${shortTitle}"?`,
+          sub: `Enter your website URL below. I'll personally inspect your entity schema, Answer Capsules, and QDF indexing speed so Google AI Overviews, ChatGPT, and Perplexity cite your pages first — free within 24 hours.`,
+        },
+        bannerBtn: "Run My AI Search & Trend Audit →",
+        sidebarCopy: {
+          headline: `AI & Trend Teardown for Your Site`,
+          sub: `See how the strategies in "${shortTitle}" can win AI Overview citations and breakout search traffic for your domain.`,
+        },
+        sidebarBtn: "Get Free AI Teardown →",
+        bottomCopy: {
+          headline: `Turn "${shortTitle}" Into Measurable Organic Traffic & Leads`,
+          sub: `Don't let breakout search trends and AI Overview citations pass your business by. Share your website URL and email — Mubashar Sharif will personally send back a custom 24-hour action plan tailored to your domain.`,
+        },
+        bottomBtn: "Get My Custom AI & SEO Action Plan →",
+      };
+    }
+
+    if (
+      hay.includes("local") ||
+      hay.includes("maps") ||
+      hay.includes("business profile") ||
+      hay.includes("gbp") ||
+      hay.includes("review")
+    ) {
+      return {
+        bannerCopy: {
+          eyebrow: `LOCAL PACK & GBP IMPACT CHECK · ${cat.toUpperCase()}`,
+          headline: `Did "${shortTitle}" Impact Your Google Maps & Local Pack Rankings?`,
+          sub: `Send me your website URL and I'll audit your Google Business Profile, local citations, and service-area pages against this update — free, personally reviewed within 24 hours.`,
+        },
+        bannerBtn: "Check My Local Pack Impact →",
+        sidebarCopy: {
+          headline: `Free Local SEO & GBP Teardown`,
+          sub: `Find out how "${shortTitle}" affects your local map pack rankings and calls.`,
+        },
+        sidebarBtn: "Audit My Local Presence →",
+        bottomCopy: {
+          headline: `Protect & Grow Your Google Maps Rankings After "${shortTitle}"`,
+          sub: `Enter your website URL and email below. I'll inspect your Google Business Profile, local competitors, and city pages and send you a step-by-step fix list within 24 hours.`,
+        },
+        bottomBtn: "Get My Free Local SEO Audit →",
+      };
+    }
+
+    if (
+      hay.includes("spam") ||
+      hay.includes("core update") ||
+      hay.includes("algorithm") ||
+      hay.includes("volatility") ||
+      hay.includes("penalty") ||
+      hay.includes("drop")
+    ) {
+      return {
+        bannerCopy: {
+          eyebrow: `ALGORITHM VOLATILITY DIAGNOSTIC · ${cat.toUpperCase()}`,
+          headline: `Was Your Organic Traffic Affected by "${shortTitle}"?`,
+          sub: `Share your domain and I'll cross-check your Search Console query drops, indexing signals, and content quality against this rollout — free within 24 hours.`,
+        },
+        bannerBtn: "Run Algorithm Impact Check →",
+        sidebarCopy: {
+          headline: `Free Update Recovery Audit`,
+          sub: `Check whether "${shortTitle}" triggered ranking shifts on your key pages.`,
+        },
+        sidebarBtn: "Check My Rankings →",
+        bottomCopy: {
+          headline: `Recover & Future-Proof Your Rankings After "${shortTitle}"`,
+          sub: `Send your URL and email below. I'll personally analyze how this update affected your niche and send back a prioritized recovery roadmap within 24 hours.`,
+        },
+        bottomBtn: "Get My Recovery Roadmap →",
+      };
+    }
+
+    return {
+      bannerCopy: {
+        eyebrow: `CUSTOM SEO DIAGNOSTIC · ${cat.toUpperCase()}`,
+        headline: `How Does "${shortTitle}" Apply to Your Website?`,
+        sub: `Send me your URL and I'll check your site personally against what you just read — technical bottlenecks, competitor gaps, and whether Google's AI names you or them. Free reply within 24 hours.`,
+      },
+      bannerBtn: "Run This Check on My Site →",
+      sidebarCopy: {
+        headline: `Apply "${shortTitle}" to Your Site`,
+        sub: `I'll inspect your domain myself and send back what to fix first — within 24 hours.`,
+      },
+      sidebarBtn: "Send My Free Teardown →",
+      bottomCopy: {
+        headline: `Want the Playbook From "${shortTitle}" Applied to Your Domain?`,
+        sub: `Two fields, a personal teardown within 24 hours written by Mubashar Sharif — showing the exact fixes and growth opportunities on your site.`,
+      },
+      bottomBtn: "Get My Free Custom Teardown →",
+    };
+  })();
+
   const exitCopy = (post as { exitOffer?: { headline: string; sub: string } }).exitOffer ?? {
-    headline: "Want this run on your own site?",
-    sub: "Doing it by hand takes an afternoon, and the answer is usually not where people look first. Send me the URL and I’ll run it myself and send back what I’d fix first. Free, within 24 hours.",
+    headline: dynamicCta.bottomCopy.headline,
+    sub: dynamicCta.bottomCopy.sub,
   };
 
   const copyLink = () => {
@@ -459,6 +573,16 @@ export default function PostClient({
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const [daDomain, setDaDomain] = useState("");
+  const handleDaCheck = (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = daDomain.trim().replace(/^https?:\/\//i, "").replace(/\/.*$/, "");
+    const targetUrl = clean
+      ? `https://nicheseopro.com/authority-checker?domain=${encodeURIComponent(clean)}`
+      : "https://nicheseopro.com/authority-checker";
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
   };
 
   const inputCls =
@@ -668,8 +792,14 @@ export default function PostClient({
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
-              <div className="h-11 w-11 rounded-full bg-[#f1f5f9] flex items-center justify-center flex-shrink-0 ring-2 ring-[#171717]/20">
-                <span className="text-[#171717] font-black">M</span>
+              <div className="relative h-11 w-11 rounded-full bg-[#f1f5f9] overflow-hidden flex-shrink-0 ring-2 ring-[#171717]/20">
+                <Image
+                  src="/images/mubashar-sharif.jpg"
+                  alt={`${post.author.name} — ${post.author.role}`}
+                  fill
+                  sizes="44px"
+                  className="object-cover object-top"
+                />
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
@@ -723,43 +853,30 @@ export default function PostClient({
               {post.excerpt}
             </p>
 
-            {/* 2026 CONFIRMED TELEMETRY & PLAYBOOK ALERT */}
-            {(section.href === "/blog" || !post.category?.toLowerCase().includes("news")) && (() => {
-              const tel = getArticleTelemetry(post.category, post.slug);
-              return (
-                <div className={`mb-8 rounded-2xl border p-4 sm:p-5 shadow-xs ${tel.themeBg}`}>
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm font-black ${tel.pillBg}`}>
-                        ⚡
-                      </span>
-                      <div>
-                        <p className="text-[11px] font-black uppercase tracking-wider opacity-85">
-                          {tel.eyebrow}
-                        </p>
-                        <p className="text-sm font-bold leading-snug">
-                          {tel.title}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Link
-                        href={tel.newsHref}
-                        className={`inline-flex items-center gap-1 rounded-full border bg-white px-3 py-1.5 text-xs font-bold shadow-xs transition-all ${tel.btnBorder}`}
-                      >
-                        {tel.newsLabel}
-                      </Link>
-                      <Link
-                        href="/resources/solutions"
-                        className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold shadow-xs transition-all ${tel.btnSolid}`}
-                      >
-                        {tel.solutionsLabel}
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
+            {/* CHECK DOMAIN AUTHORITY SEARCH BAR CTA -> https://nicheseopro.com/authority-checker */}
+            <form
+              onSubmit={handleDaCheck}
+              className="mb-8 flex items-center justify-between gap-2 rounded-full border border-slate-200 bg-white p-1.5 pl-4 shadow-[0_4px_20px_rgba(108,60,255,0.08)] transition focus-within:border-[#6c3cff] focus-within:ring-4 focus-within:ring-[#6c3cff]/10"
+            >
+              <div className="flex flex-1 items-center gap-2.5 min-w-0">
+                <Globe className="h-5 w-5 text-slate-400 shrink-0" aria-hidden />
+                <input
+                  type="text"
+                  value={daDomain}
+                  onChange={(e) => setDaDomain(e.target.value)}
+                  placeholder="gymshark.com"
+                  aria-label="Enter domain to check authority"
+                  className="w-full bg-transparent text-sm sm:text-base font-medium text-slate-800 placeholder-slate-400 outline-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#6c3cff] hover:bg-[#5829e0] px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all cursor-pointer"
+              >
+                <span>Check Domain Authority</span>
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </button>
+            </form>
 
             {/* Mobile Table of Contents (collapsible, shown on screens < lg where sidebar is hidden) */}
             {toc.length > 0 && (
@@ -793,21 +910,28 @@ export default function PostClient({
               {parse(renderArticle(injectMidContentSlot(post.content)), {
                 replace: (domNode) => {
                   if (domNode instanceof Element && domNode.tagName === 'div' && domNode.attribs?.id === '__lead_magnet_slot__') {
-                    return <ArticleLeadMagnet variant="banner" source={leadSource} />;
+                    return (
+                      <ArticleLeadMagnet
+                        variant="banner"
+                        source={leadSource}
+                        copy={dynamicCta.bannerCopy}
+                        buttonText={dynamicCta.bannerBtn}
+                      />
+                    );
                   }
                   if (domNode instanceof Element && domNode.tagName === 'img') {
-                    const { src, alt, width, height } = domNode.attribs;
+                    const { src, alt } = domNode.attribs;
+                    const normalizedSrc = (src || "").replace(/^https?:\/\/(www\.)?searchprex\.com/i, "");
                     return (
-                      <div className="my-8 relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] flex justify-center bg-[#f8fafc]">
-                        <Image
-                          src={src || ''}
-                          alt={alt || "Blog image"}
-                          width={width ? parseInt(width, 10) : 800}
-                          height={height ? parseInt(height, 10) : 450}
-                          className="w-full h-auto object-cover"
-                          unoptimized={src?.startsWith('http')}
+                      <span className="my-8 block relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f8fafc]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={normalizedSrc}
+                          alt={alt || "Article visual"}
+                          loading="lazy"
+                          className="w-full h-auto object-cover block"
                         />
-                      </div>
+                      </span>
                     );
                   }
                 }
@@ -825,28 +949,53 @@ export default function PostClient({
               </div>
             )}
  
-            {/* Author bio */}
-            <div className="mt-10 flex gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-7">
-              <div className="h-14 w-14 rounded-full bg-[#f1f5f9] flex items-center justify-center flex-shrink-0 ring-2 ring-[#171717]/20 overflow-hidden relative">
-                <span className="text-[#171717] font-black text-xl">M</span>
+            {/* Author bio with Mubashar Sharif Photo */}
+            <div className="mt-10 flex flex-col sm:flex-row gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-6 sm:p-7">
+              <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-[#f1f5f9] flex-shrink-0 ring-2 ring-[#171717]/20 overflow-hidden shadow-sm">
+                <Image
+                  src="/images/mubashar-sharif.jpg"
+                  alt={`${post.author.name} — ${post.author.role} at SearchPrex`}
+                  fill
+                  sizes="80px"
+                  className="object-cover object-top"
+                />
               </div>
               <div className="flex-1">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-                  <p className="font-black text-[#0a0a0a] text-base">{post.author.name}</p>
-                  {(post.author.linkedIn || post.author.name.toLowerCase().includes("mubashar")) && (
-                    <a
-                      href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#0a66c2]/10 px-2.5 py-1 text-xs font-bold text-[#0a66c2] hover:bg-[#0a66c2]/20 transition-colors"
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">
+                      Written &amp; Verified By
+                    </span>
+                    <p className="font-black text-[#0a0a0a] text-base sm:text-lg">{post.author.name}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href="/experts"
+                      className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-800 hover:border-neutral-900 transition-colors"
                     >
-                      <Linkedin className="h-3.5 w-3.5" /> LinkedIn Profile
-                    </a>
-                  )}
+                      Founder Profile
+                    </Link>
+                    {(post.author.linkedIn || post.author.name.toLowerCase().includes("mubashar")) && (
+                      <a
+                        href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#0a66c2]/10 px-2.5 py-1 text-xs font-bold text-[#0a66c2] hover:bg-[#0a66c2]/20 transition-colors"
+                      >
+                        <Linkedin className="h-3.5 w-3.5" /> LinkedIn
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 mb-3">
-                  <CheckCircle className="h-3.5 w-3.5 text-[#171717]" />
-                  <span className="text-xs font-bold text-[#171717]">{post.author.role}</span>
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#171717]">
+                    <CheckCircle className="h-3.5 w-3.5 text-[#171717]" />
+                    {post.author.role}
+                  </span>
+                  <span className="text-xs text-slate-400">•</span>
+                  <span className="text-xs font-semibold text-slate-600">
+                    5+ Years SEO Experience · Semrush &amp; HubSpot Certified
+                  </span>
                 </div>
                 {post.author.bio && (
                   <p className="text-sm text-[#64748b] leading-relaxed">{post.author.bio}</p>
@@ -906,181 +1055,16 @@ export default function PostClient({
               </div>
             </div>
 
-            {/* Community Reactions & Discussion */}
+            {/* Unified Community Discussion & Reader Feedback */}
             <NewsDiscussionSection
               slug={post.slug}
               title={post.title}
               category={post.category}
+              pagePath={`${section.href}/${post.slug}`}
               externalLikes={likes}
               externalUserLiked={userLiked}
               onExternalToggleLike={handleToggleLike}
             />
-
-            {/* ══ READER FEEDBACK SECTION: "What do you want to hear from us?" ══ */}
-            <section className="my-12 rounded-3xl border border-slate-200 bg-slate-50/70 p-6 sm:p-8 shadow-2xs">
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-900 bg-white border border-slate-200 px-2.5 py-0.5 rounded-full">
-                    Reader Feedback
-                  </span>
-                  <span className="text-xs text-slate-500 font-medium">
-                    Shape Our Next Playbook
-                  </span>
-                </div>
-                <h2 className="text-xl sm:text-2xl font-black text-neutral-950">
-                  What do you want to hear from us?
-                </h2>
-                <p className="mt-1.5 text-sm text-slate-600 leading-relaxed">
-                  Tell us your profession and what SEO topics, technical teardowns, or case studies you want us to cover next — or share your feedback on this post.
-                </p>
-              </div>
-
-              <AnimatePresence mode="wait">
-                {feedbackStatus === "sent" ? (
-                  <motion.div
-                    key="fb-done"
-                    initial={{ opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center"
-                  >
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 15, delay: 0.1 }}
-                      className="mb-3 grid h-12 w-12 place-items-center rounded-full bg-neutral-900"
-                    >
-                      <Check className="h-6 w-6 text-white" />
-                    </motion.span>
-                    <p className="text-base font-bold text-neutral-950">
-                      Thank you, {feedback.name.split(" ")[0] || "friend"}!
-                    </p>
-                    <p className="mt-1 text-sm text-slate-600">
-                      Your feedback was received. It directly shapes the guides and case studies we publish next.
-                    </p>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="fb-form"
-                    onSubmit={handleFeedbackSubmit}
-                    className="space-y-4"
-                    noValidate={false}
-                  >
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-slate-700">Name *</span>
-                        <input
-                          type="text"
-                          required
-                          minLength={2}
-                          value={feedback.name}
-                          onChange={(e) => setFeedback((f) => ({ ...f, name: e.target.value }))}
-                          placeholder="Your name"
-                          autoComplete="name"
-                          className={inputCls}
-                        />
-                      </label>
-
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-slate-700">Email *</span>
-                        <input
-                          type="email"
-                          required
-                          value={feedback.email}
-                          onChange={(e) => setFeedback((f) => ({ ...f, email: e.target.value }))}
-                          placeholder="you@company.com"
-                          autoComplete="email"
-                          className={inputCls}
-                        />
-                      </label>
-
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-slate-700">Profession *</span>
-                        <input
-                          type="text"
-                          required
-                          list="profession-options"
-                          value={feedback.profession}
-                          onChange={(e) => setFeedback((f) => ({ ...f, profession: e.target.value }))}
-                          placeholder="e.g. SEO Specialist, Founder, Attorney"
-                          className={inputCls}
-                        />
-                        <datalist id="profession-options">
-                          <option value="SEO Specialist / Strategist" />
-                          <option value="Agency Owner / Director" />
-                          <option value="Founder / CEO" />
-                          <option value="Marketing Manager / CMO" />
-                          <option value="Ecommerce Manager" />
-                          <option value="Attorney / Law Firm Partner" />
-                          <option value="Local Business Owner" />
-                          <option value="Software Engineer / Developer" />
-                          <option value="Content Strategist" />
-                        </datalist>
-                      </label>
-                    </div>
-
-                    <label className="block">
-                      <span className="mb-1.5 block text-xs font-semibold text-slate-700">
-                        Feedback / What do you want to hear from us? *
-                      </span>
-                      <textarea
-                        rows={3}
-                        required
-                        value={feedback.feedbackText}
-                        onChange={(e) => setFeedback((f) => ({ ...f, feedbackText: e.target.value }))}
-                        placeholder="Tell us what SEO topics, technical guides, or case studies you want to hear from us next, or share your thoughts on this article..."
-                        className={`${inputCls} h-auto resize-y py-2.5`}
-                      />
-                    </label>
-
-                    {/* Honeypot */}
-                    <input
-                      type="text"
-                      tabIndex={-1}
-                      autoComplete="off"
-                      value={feedback.website}
-                      onChange={(e) => setFeedback((f) => ({ ...f, website: e.target.value }))}
-                      className="hidden"
-                      aria-hidden="true"
-                    />
-
-                    <AnimatePresence>
-                      {feedbackError && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0 }}
-                          className="flex items-center gap-1.5 text-xs font-medium text-rose-600"
-                        >
-                          <AlertCircle className="h-3.5 w-3.5" /> {feedbackError}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-
-                    <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                      <p className="text-[11px] text-slate-500">
-                        We never share your email. Used only to follow up on your feedback.
-                      </p>
-                      <motion.button
-                        type="submit"
-                        whileTap={{ scale: 0.97 }}
-                        disabled={feedbackStatus === "sending"}
-                        className="inline-flex h-10 items-center gap-2 rounded-xl bg-neutral-900 px-5 text-xs font-bold text-white transition-colors hover:bg-neutral-800 disabled:opacity-60 cursor-pointer"
-                      >
-                        {feedbackStatus === "sending" ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin" /> Sending...
-                          </>
-                        ) : (
-                          <>
-                            Send Feedback <Send className="h-4 w-4" />
-                          </>
-                        )}
-                      </motion.button>
-                    </div>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-            </section>
           </article>
  
           {/* Sidebar */}
@@ -1107,71 +1091,13 @@ export default function PostClient({
               </div>
             )}
 
-            {/* Technical Intelligence & Solutions Library */}
-            <div className="rounded-2xl border border-slate-900 bg-neutral-900 p-5 text-white shadow-sm">
-              <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-neutral-400 mb-2">
-                <span>⚡</span> Technical Intelligence
-              </div>
-              <p className="text-sm font-bold text-white leading-snug mb-3">
-                Live Search Telemetry &amp; Solutions
-              </p>
-              <div className="flex flex-col gap-2">
-                <Link
-                  href="/resources/solutions"
-                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  <span>🛠️ Solutions Library</span>
-                  <span>→</span>
-                </Link>
-                <Link
-                  href="/resources/news"
-                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  <span>📰 2026 SEO News Desk</span>
-                  <span>→</span>
-                </Link>
-                <Link
-                  href="/resources/discussions"
-                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  <span>💬 Technical Discussions</span>
-                  <span>→</span>
-                </Link>
-                <Link
-                  href="/resources/learning-hub"
-                  className="flex items-center justify-between text-xs font-semibold text-neutral-200 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  <span>📚 20-Module Playbooks</span>
-                  <span>→</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Automated Internal Linking (Related Services) */}
-            <div className="rounded-2xl border border-[#e5e7eb] bg-white p-5 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-4">
-                  Explore Services
-                </p>
-                <div className="flex flex-col gap-4">
-                  <Link href="/services/law-firm-seo" className="group block">
-                    <p className="text-sm font-bold text-[#0a0a0a] group-hover:text-[#171717] transition-colors mb-0.5">Law Firm SEO</p>
-                    <p className="text-xs text-[#64748b] leading-relaxed">Dominate the local pack and AI Overviews for your practice areas.</p>
-                  </Link>
-                  <Link href="/services/ecommerce-seo" className="group block border-t border-[#e5e7eb] pt-4">
-                    <p className="text-sm font-bold text-[#0a0a0a] group-hover:text-[#171717] transition-colors mb-0.5">Ecommerce SEO</p>
-                    <p className="text-xs text-[#64748b] leading-relaxed">Scale product-page content and indexing across thousands of SKUs.</p>
-                  </Link>
-                  <Link href="/services/local-seo" className="group block border-t border-[#e5e7eb] pt-4">
-                    <p className="text-sm font-bold text-[#0a0a0a] group-hover:text-[#171717] transition-colors mb-0.5">Local SEO Services</p>
-                    <p className="text-xs text-[#64748b] leading-relaxed">Rank in the Google Maps top 3 and capture 'near me' search intent.</p>
-                  </Link>
-                </div>
-              </div>
-   
-            {/* Lead magnet — was a link-only "Talk to Mubashar" card that sent
-                an already-engaged reader to a second page to retype their URL
-                and email. This submits in place. */}
-            <ArticleLeadMagnet variant="sidebar" source={leadSource} />
+            {/* Dynamic Topic-Aware Sidebar Lead Magnet */}
+            <ArticleLeadMagnet
+              variant="sidebar"
+              source={leadSource}
+              copy={dynamicCta.sidebarCopy}
+              buttonText={dynamicCta.sidebarBtn}
+            />
 
             {/* Blog Newsletter Alert Box */}
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-neutral-950 shadow-2xs">
@@ -1303,9 +1229,13 @@ export default function PostClient({
         </section>
       )}
  
-      {/* ══ BOTTOM CTA — was link-only ("Book Free Strategy Call" / "Get Free
-          SEO Audit"), both hand-offs to a second page. Now submits here. ══ */}
-      <ArticleLeadMagnet variant="bottom" source={leadSource} />
+      {/* ══ DYNAMIC TOPIC-AWARE BOTTOM CTA ══ */}
+      <ArticleLeadMagnet
+        variant="bottom"
+        source={leadSource}
+        copy={dynamicCta.bottomCopy}
+        buttonText={dynamicCta.bottomBtn}
+      />
 
       {/* ══ EXIT OFFER — the only interruption on the page, and the only one that can
           reach a reader who finished the article and is leaving without scrolling to

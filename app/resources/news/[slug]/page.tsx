@@ -295,77 +295,120 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
     ? `${SITE}${post.heroImage}`
     : post.heroImage;
 
-  const articleNode = {
-    "@type": post.schemaType || "NewsArticle",
-    "@id": `${canonical}#article`,
-    headline: post.title,
-    description: post.excerpt,
-    image: [
-      post.slug === "local-seo-updates"
-        ? `${SITE}/og/local-seo-updates-1200x630.png`
-        : fullHeroImage,
-    ],
-    datePublished: post.date,
-    dateModified: post.dateModified,
-    articleSection: post.category,
-    inLanguage: "en-US",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": canonical,
-    },
-    isPartOf: { "@id": `${SITE}/#website` },
-    author: { "@id": `${SITE}/#founder` },
-    publisher: { "@id": `${SITE}/#organization` },
-    ...(post.slug === "local-seo-updates"
-      ? {
-          citation: [
-            "https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu",
-            "https://support.google.com/business/answer/3480441",
-            "https://www.seroundtable.com/google-maps-account-reviews-42186.html",
-            "https://www.seroundtable.com/google-business-profiles-4-days-42139.html",
-            "https://www.seroundtable.com/google-local-knowledge-panel-ai-overview-42105.html",
-          ],
-        }
-      : post.slug === "tesla-flying-car-roadster-alef-ai-search-trend-seo-2026"
-      ? {
-          citation: [
-            "https://www.cnet.com/home/electric-vehicles/tesla-roadster-reveal-spacex-tech/",
-            "https://electrek.co/2026/10/15/alefs-electric-flying-car-flies-over-tesla-roadster-video/",
-            "https://gizmodo.com/alef-trolls-tesla-with-video-of-its-car-flying-over-a-roadster-2000826973",
-            "https://www.youtube.com/watch?v=wACc9vJflrc",
-            "https://www.youtube.com/watch?v=GwffNnmuqfk",
-          ],
-        }
-      : {}),
-  };
+      const videoNodes =
+        post.slug === "tesla-flying-car-roadster-alef-ai-search-trend-seo-2026"
+          ? [
+              {
+                "@type": "VideoObject",
+                "@id": `${canonical}#video-tesla-demo`,
+                name: "Tesla's 'FLYING CAR' Revealed! Musk's Roadster Flies, Drives Upside Down In Stunning Demo",
+                description:
+                  "Live demonstration footage from SpaceX's McGregor, Texas facility showing the next-generation Tesla Roadster utilizing cold-gas thrusters and suction ramp propulsion.",
+                thumbnailUrl: [
+                  "https://i.ytimg.com/vi/wACc9vJflrc/maxresdefault.jpg",
+                  "https://i.ytimg.com/vi/wACc9vJflrc/hqdefault.jpg",
+                ],
+                uploadDate: "2026-10-16T12:00:00+00:00",
+                duration: "PT4M15S",
+                embedUrl: "https://www.youtube.com/embed/wACc9vJflrc",
+                contentUrl: "https://www.youtube.com/watch?v=wACc9vJflrc",
+                inLanguage: "en-US",
+                isFamilyFriendly: true,
+                regionsAllowed: "US",
+                publisher: { "@id": `${SITE}/#organization` },
+              },
+              {
+                "@type": "VideoObject",
+                "@id": `${canonical}#video-tesla-breakdown`,
+                name: "Elon Musk Just Changed Cars Forever — Tesla Roadster FLIES!",
+                description:
+                  "Industry breakdown of the October 2026 Tesla Roadster SpaceX package demonstration, synthetic AI video skepticism, and Alef Aeronautics' eVTOL flying car response.",
+                thumbnailUrl: [
+                  "https://i.ytimg.com/vi/GwffNnmuqfk/maxresdefault.jpg",
+                  "https://i.ytimg.com/vi/GwffNnmuqfk/hqdefault.jpg",
+                ],
+                uploadDate: "2026-10-16T15:00:00+00:00",
+                duration: "PT9M30S",
+                embedUrl: "https://www.youtube.com/embed/GwffNnmuqfk",
+                contentUrl: "https://www.youtube.com/watch?v=GwffNnmuqfk",
+                inLanguage: "en-US",
+                isFamilyFriendly: true,
+                regionsAllowed: "US",
+                publisher: { "@id": `${SITE}/#organization` },
+              },
+            ]
+          : Array.from(
+              post.content.matchAll(
+                /<iframe[^>]*src=["']https:\/\/www\.youtube\.com\/embed\/([a-zA-Z0-9_-]{11})["'][^>]*>/gi
+              )
+            ).map((match, idx) => {
+              const videoId = match[1];
+              const titleMatch = match[0].match(/title=["']([^"']+)["']/i);
+              return {
+                "@type": "VideoObject",
+                "@id": `${canonical}#video-${idx + 1}`,
+                name: titleMatch?.[1] || `${post.title} — Reference Video ${idx + 1}`,
+                description: post.excerpt || post.metaDescription || post.title,
+                thumbnailUrl: [
+                  `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+                  `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+                ],
+                uploadDate: `${post.date}T12:00:00+00:00`,
+                duration: "PT5M00S",
+                embedUrl: `https://www.youtube.com/embed/${videoId}`,
+                contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
+                inLanguage: "en-US",
+                isFamilyFriendly: true,
+                publisher: { "@id": `${SITE}/#organization` },
+              };
+            });
 
-  const videoNodes =
-    post.slug === "tesla-flying-car-roadster-alef-ai-search-trend-seo-2026"
-      ? [
-          {
-            "@type": "VideoObject",
-            "@id": `${canonical}#video-tesla-demo`,
-            name: "Tesla's 'FLYING CAR' Revealed! Musk's Roadster Flies, Drives Upside Down In Stunning Demo",
-            description:
-              "Live demonstration footage from SpaceX's McGregor, Texas facility showing the next-generation Tesla Roadster utilizing cold-gas thrusters and suction ramp propulsion.",
-            thumbnailUrl: ["https://i.ytimg.com/vi/wACc9vJflrc/hqdefault.jpg"],
-            uploadDate: "2026-10-16T12:00:00+00:00",
-            embedUrl: "https://www.youtube.com/embed/wACc9vJflrc",
-            contentUrl: "https://www.youtube.com/watch?v=wACc9vJflrc",
-          },
-          {
-            "@type": "VideoObject",
-            "@id": `${canonical}#video-tesla-breakdown`,
-            name: "Elon Musk Just Changed Cars Forever — Tesla Roadster FLIES!",
-            description:
-              "Industry breakdown of the October 2026 Tesla Roadster SpaceX package demonstration, synthetic AI video skepticism, and Alef Aeronautics' eVTOL flying car response.",
-            thumbnailUrl: ["https://i.ytimg.com/vi/GwffNnmuqfk/hqdefault.jpg"],
-            uploadDate: "2026-10-16T15:00:00+00:00",
-            embedUrl: "https://www.youtube.com/embed/GwffNnmuqfk",
-            contentUrl: "https://www.youtube.com/watch?v=GwffNnmuqfk",
-          },
-        ]
-      : [];
+      const articleNode = {
+        "@type": post.schemaType || "NewsArticle",
+        "@id": `${canonical}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        image: [
+          post.slug === "local-seo-updates"
+            ? `${SITE}/og/local-seo-updates-1200x630.png`
+            : fullHeroImage,
+        ],
+        datePublished: post.date,
+        dateModified: post.dateModified,
+        articleSection: post.category,
+        inLanguage: "en-US",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonical,
+        },
+        isPartOf: { "@id": `${SITE}/#website` },
+        author: { "@id": `${SITE}/#founder` },
+        publisher: { "@id": `${SITE}/#organization` },
+        ...(videoNodes.length > 0
+          ? { video: videoNodes.map((v) => ({ "@id": v["@id"] })) }
+          : {}),
+        ...(post.slug === "local-seo-updates"
+          ? {
+              citation: [
+                "https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu",
+                "https://support.google.com/business/answer/3480441",
+                "https://www.seroundtable.com/google-maps-account-reviews-42186.html",
+                "https://www.seroundtable.com/google-business-profiles-4-days-42139.html",
+                "https://www.seroundtable.com/google-local-knowledge-panel-ai-overview-42105.html",
+              ],
+            }
+          : post.slug === "tesla-flying-car-roadster-alef-ai-search-trend-seo-2026"
+          ? {
+              citation: [
+                "https://www.cnet.com/home/electric-vehicles/tesla-roadster-reveal-spacex-tech/",
+                "https://electrek.co/2026/10/15/alefs-electric-flying-car-flies-over-tesla-roadster-video/",
+                "https://gizmodo.com/alef-trolls-tesla-with-video-of-its-car-flying-over-a-roadster-2000826973",
+                "https://www.youtube.com/watch?v=wACc9vJflrc",
+                "https://www.youtube.com/watch?v=GwffNnmuqfk",
+              ],
+            }
+          : {}),
+      };
 
   const breadcrumbNode = {
     "@type": "BreadcrumbList",
