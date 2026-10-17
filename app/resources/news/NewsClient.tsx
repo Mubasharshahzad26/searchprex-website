@@ -844,6 +844,11 @@ export default function NewsClient({
     // ── Base feed (unfiltered): deep-dive spokes + dated news items ──
   // Like/comment numbers come only from real stored reactions (default 0, never seeded).
   const SPOKE_SOURCES_MAP: Record<string, Array<{ label: string; href: string }>> = {
+    "tesla-flying-car-roadster-alef-ai-search-trend-seo-2026": [
+      { label: "cnet", href: "https://www.cnet.com/home/electric-vehicles/tesla-roadster-reveal-spacex-tech/" },
+      { label: "electrek", href: "https://electrek.co/2026/10/15/alefs-electric-flying-car-flies-over-tesla-roadster-video/" },
+      { label: "gizmodo", href: "https://gizmodo.com/alef-trolls-tesla-with-video-of-its-car-flying-over-a-roadster-2000826973" },
+    ],
     "google-gemini-4-argon-ai-mode-rollout": [
       { label: "seroundtable", href: "https://www.seroundtable.com/" },
     ],
