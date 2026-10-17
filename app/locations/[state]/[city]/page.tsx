@@ -786,7 +786,14 @@ export default async function CityPage({
 
               {/* Local news update link */}
               <p className="text-[0.9375rem] leading-relaxed text-slate-700">
-                Local rankings move when Google changes how local results work.{" "}
+                Local rankings move when Google changes how local results work. Track real-time Google core algorithm changes on our{" "}
+                <Link
+                  href="/resources/news"
+                  className="font-semibold text-[#534AB7] underline underline-offset-2"
+                >
+                  SEO News Desk
+                </Link>{" "}
+                or read our verified{" "}
                 <Link
                   href="/resources/news/local-seo-updates"
                   className="font-semibold text-[#534AB7] underline underline-offset-2"

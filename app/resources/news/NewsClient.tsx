@@ -1412,6 +1412,14 @@ export default function NewsClient({
               "Plain-English breakdowns of Google algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated, dated, and verified."}
           </p>
 
+          {/* ── INTENT ANCHOR SUMMARY BOX (AEO / HEAD-TERM DOM CLUSTER) ── */}
+          <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-[#e2e5eb] bg-[#f8fafc] p-4 text-left shadow-2xs sm:p-5">
+            <p className="text-xs sm:text-sm leading-relaxed text-[#334155]">
+              <strong className="font-bold text-[#0f172a]">Latest SEO News Today:</strong>{" "}
+              Stay updated with real-time tracking of Google core algorithms, search updates, and generative search engine optimization shifts across the United States.
+            </p>
+          </div>
+
           {/* ── INSTANT SEARCH ── */}
           <div ref={searchContainerRef} className="relative mx-auto mt-8 mb-4 max-w-2xl">
             <div
@@ -1631,11 +1639,31 @@ export default function NewsClient({
             <h2 className="mb-3 text-2xl font-bold tracking-tight text-[#171a22] sm:text-3xl">
               {selectedCategory === "all" ? "SEO News Past 2 Days" : `Latest ${categoryLabel} News`}
             </h2>
-            <p className="mb-7 max-w-3xl text-base leading-relaxed text-[#424754]">
-              {showAlgorithmContext
-                ? "Google rolled out Gemini 4 Argon globally in AI Mode for AI Pro & Ultra subscribers, clarified how PDFs rank in Search & AI Mode, and began testing 'Dive deeper' in Discover alongside its completed September 2026 Spam Update."
-                : `The latest ${categoryLabel} entries, newest first — each dated and linked to its source or analysis.`}
-            </p>
+            {showAlgorithmContext ? (
+              <div className="mb-7 rounded-xl border border-slate-200 bg-[#f8fafc] p-5">
+                <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-800">
+                  SEO news over the past 2 days is dominated by three confirmed Google search shifts: the global release of Gemini 4 Argon in AI Mode, new technical ranking documentation for indexable PDFs, and the full completion of the September 2026 Spam Update alongside Discover &ldquo;Dive deeper&rdquo; query tests.
+                </p>
+                <ul className="mt-3.5 space-y-1.5 border-t border-slate-200/80 pt-3 text-xs sm:text-sm text-slate-700">
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                    <span><strong>Gemini 4 Argon Rollout:</strong> Launched globally in AI Mode for AI Pro and Ultra subscribers.</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
+                    <span><strong>PDF Indexing &amp; AI Citation:</strong> Official Google clarification on document ranking behavior.</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-purple-500 shrink-0" />
+                    <span><strong>September 2026 Spam Update:</strong> Full rollout complete with Discover test features live.</span>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <p className="mb-7 max-w-3xl text-base leading-relaxed text-[#424754]">
+                The latest {categoryLabel} entries, newest first — each dated and linked to its source or analysis.
+              </p>
+            )}
 
             {showAlgorithmContext && (
             <motion.div
@@ -1988,6 +2016,12 @@ export default function NewsClient({
                           <div className={item.coverImage ? "flex flex-col gap-4 sm:flex-row sm:items-start" : ""}>
                             <div className="min-w-0 flex-1">
                               <h3 className="mb-2 text-lg font-semibold leading-snug text-[#171a22] sm:text-xl">
+                                <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-purple-700">
+                                  {item.category?.includes("Update") || item.tag?.includes("Update")
+                                    ? "Google Update"
+                                    : "Latest SEO News"}
+                                  :
+                                </span>
                                 {item.isSpoke ? (
                                   <Link href={item.href} className="transition-colors hover:text-[#534AB7]">
                                     {item.title}
@@ -2185,6 +2219,75 @@ export default function NewsClient({
                     Check Website Authority Free
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
+                </div>
+
+                {/* ── ESSENTIAL 2026 CORE RESOURCES (INTERNAL LINK LOOP) ── */}
+                <div className="rounded-xl border border-slate-200 bg-[#f8fafc] p-5 shadow-2xs">
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#171a22] text-[11px] font-bold text-white">
+                      ⚡
+                    </span>
+                    <h3 className="text-xs font-black uppercase tracking-wider text-slate-900">
+                      Essential 2026 Core Resources
+                    </h3>
+                  </div>
+                  <nav className="flex flex-col gap-2" aria-label="Essential core resources">
+                    <Link
+                      href="/tools/schema-generator"
+                      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
+                    >
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
+                        Schema Markup Generator →
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        Validate LocalBusiness, Legal &amp; Product JSON-LD
+                      </span>
+                    </Link>
+                    <Link
+                      href="/tools/llms-txt-generator"
+                      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
+                    >
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
+                        llms.txt &amp; AI Crawler Builder →
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        Build GPTBot &amp; ClaudeBot directives
+                      </span>
+                    </Link>
+                    <Link
+                      href="/resources/technical-seo-checklist"
+                      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
+                    >
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
+                        55-Point Technical SEO Audit →
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        Crawl budget, indexing &amp; CWV inspection
+                      </span>
+                    </Link>
+                    <Link
+                      href="/services/local-seo/google-business-profile-suspended"
+                      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
+                    >
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
+                        Suspended GBP Reinstatement →
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        Diagnosing &amp; appealing local profile suspensions
+                      </span>
+                    </Link>
+                    <Link
+                      href="/resources/solutions"
+                      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
+                    >
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
+                        Production Solutions Library →
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        Code fixes for GSC errors &amp; Shopify canonicals
+                      </span>
+                    </Link>
+                  </nav>
                 </div>
 
                 {/* Popular / recent list */}

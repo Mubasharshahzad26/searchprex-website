@@ -233,15 +233,30 @@ export default function LocationBlogTeaser({ page }: { page: CityPage }) {
             <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
               For {page.city} firms competing around {custom.courtFocus}: what law firm SEO costs, how long it takes, and how to measure it in signed cases.
             </p>
+            <p className="mt-2 text-xs sm:text-sm text-slate-500">
+              Tracking real-time Google algorithm volatility, core updates, and US local map-pack shifts on our{" "}
+              <Link href="/resources/news" className="font-semibold text-purple-700 underline underline-offset-2 hover:text-purple-900">
+                SEO News Desk &amp; Algorithm Updates
+              </Link>.
+            </p>
           </div>
 
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs sm:text-sm font-bold text-neutral-950 hover:bg-slate-100 transition-colors shrink-0"
-          >
-            <span>View All Legal SEO Guides</span>
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <Link
+              href="/resources/news"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-purple-200 bg-purple-50 px-3.5 py-2.5 text-xs sm:text-sm font-bold text-purple-900 hover:bg-purple-100 transition-colors"
+            >
+              <span>⚡ Latest SEO News Desk</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs sm:text-sm font-bold text-neutral-950 hover:bg-slate-100 transition-colors"
+            >
+              <span>View All Legal SEO Guides</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
 
         {/* 4-Card HD Thumbnail Grid */}
