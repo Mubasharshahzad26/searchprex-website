@@ -16,14 +16,20 @@ const baseMetadata: Metadata = {
   description:
     "Local SEO services for service businesses: Business Profile, citations, reviews and service-area pages for the map pack and AI Overviews. Founder-led.",
   keywords: [
-    "local SEO services", "Google Maps SEO", "GBP optimization",
-    "local pack ranking", "near me SEO", "AI Overview local SEO",
+    "local SEO services",
+    "local SEO agency USA",
+    "Google Maps SEO",
+    "Google Business Profile optimization",
+    "local pack ranking",
+    "near me SEO",
+    "AI Overview local SEO",
+    "Cleveland Ohio local SEO",
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Local SEO Services | SearchPrex",
     description:
-      "Rank in the Google Maps top 3 and get cited in AI Overviews for local queries. Founder-led local SEO for service businesses.",
+      "Rank in the Google Maps top 3 and get cited in AI Overviews for local US queries. Founder-led local SEO for service businesses.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
@@ -31,7 +37,7 @@ const baseMetadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Local SEO Services | SearchPrex",
-    description: "Top 3 map pack + AI Overview visibility. Founder-led local SEO.",
+    description: "Top 3 map pack + AI Overview visibility. Founder-led US local SEO.",
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };
@@ -46,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * When this page was last reviewed by a person. Hardcoded on purpose — a date
  * that moves on every request claims a review that did not happen.
  */
-const LAST_REVIEWED = "2026-09-26";
+const LAST_REVIEWED = "2026-10-17";
 const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
 
 export default function LocalSEOPage() {

@@ -16,14 +16,21 @@ const baseMetadata: Metadata = {
   description:
     "Founder-led law firm SEO agency: attorney E-E-A-T content, practice-area pages, local pack work and AI Overview readiness — organic cases, not ad spend.",
   keywords: [
-    "law firm SEO", "attorney SEO", "legal SEO services",
-    "law firm local SEO", "attorney AI Overview", "YMYL legal content",
+    "law firm SEO",
+    "attorney SEO USA",
+    "family law SEO",
+    "criminal defense SEO",
+    "personal injury lawyer SEO",
+    "legal SEO services",
+    "law firm local SEO",
+    "attorney AI Overview",
+    "YMYL legal content",
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Law Firm SEO Services | SearchPrex",
     description:
-      "Practice-area pages, local map pack work and AI Overview-ready answers for law firms. Founder-led SEO built for YMYL legal content — no ranking promises.",
+      "Practice-area pages, local map pack work and AI Overview-ready answers for US law firms. Founder-led SEO built for YMYL legal content — no ranking promises.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
@@ -31,7 +38,7 @@ const baseMetadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Law Firm SEO Services | SearchPrex",
-    description: "Map pack + AI Overview citations for law firms. Founder-led, YMYL-aligned.",
+    description: "Map pack + AI Overview citations for US law firms. Founder-led, YMYL-aligned.",
   },
   robots: {
     index: true,
@@ -56,7 +63,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * When this page was last reviewed by a person. Hardcoded on purpose — a date
  * that moves on every request claims a review that did not happen.
  */
-const LAST_REVIEWED = "2026-09-26";
+const LAST_REVIEWED = "2026-10-17";
 const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
 
 export default function LawFirmSEOPage() {

@@ -2,9 +2,8 @@
 
 // app/services/ecommerce-seo/EcommerceSEOClient.tsx
 //
-// Topical layout (Oct 2026), built from components/ServiceBands like the other
-// service pages: bands that alternate dark navy and white, each with one
-// heading, a short paragraph and a "what I check" list.
+// USA Market Focus + AEO / GEO / ChatGPT Shopping Architecture (Oct 2026).
+// Zero emojis — clean Lucide vector icons only.
 //
 // Figures, each readable in a screenshot on this page or its case study:
 //   - Michigan Sports & Outdoor: about 3,000 → 11,549 indexed pages, May–Jul
@@ -14,17 +13,24 @@
 //     client's WooCommerce dashboard — total revenue, never a US figure.
 //   - Michigan Sports & Outdoor: +83% US organic clicks by July 2026, as the
 //     case study reports it.
-//
-// Dropped in this layout: the stat strip, the case-study cards (they fell back
-// to Unsplash stock photos), the mid-page guide magnet and WhySearchPrex. Kept:
-// the AI image banner, the Shopify vs WooCommerce table, the floating "Reality
-// Check" button and its modal.
 
 import { trackLead } from "@/lib/track";
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, X, ShieldCheck, BarChart3, AlertTriangle, GitBranch, FileCode, Layers } from "lucide-react";
+import {
+  ArrowRight,
+  X,
+  ShieldCheck,
+  BarChart3,
+  AlertTriangle,
+  GitBranch,
+  FileCode,
+  Layers,
+  Zap,
+  FileText,
+  Wrench,
+} from "lucide-react";
 
 import { caseStudies } from "@/app/case-studies/data";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
@@ -59,6 +65,13 @@ import {
   TextLink,
 } from "@/components/ServiceBands";
 
+import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTaglineReliefBar";
+import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
+import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
+import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
+import ServiceUsaMapAndMarkets from "@/components/service-wireframe/ServiceUsaMapAndMarkets";
+import ServiceSemanticClusterAndLinks from "@/components/service-wireframe/ServiceSemanticClusterAndLinks";
+
 import { CAPSULES, FAQS } from "./data";
 
 const SOURCE = "service:ecommerce-seo";
@@ -67,17 +80,17 @@ const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 const PAIN_POINTS = [
   { icon: AlertTriangle, title: "Thousands of products, hundreds indexed", body: "Google crawls but refuses to index thin product pages. Your catalog exists in the sitemap and nowhere else — no impressions, no clicks, no revenue." },
   { icon: GitBranch, title: "Faceted navigation eating crawl budget", body: "Filter combinations spawn huge numbers of low-value URLs. Google spends its crawl on color × size × price permutations instead of your money pages." },
-  { icon: FileCode, title: "No structured data, no rich results", body: "Missing Product, Offer and Review schema means competitors get price and rating snippets while you get plain blue links." },
-  { icon: Layers, title: "Category pages that don't rank", body: "A product grid and a thin H1. Google sees a list of thumbnails — nothing to rank for competitive commercial searches." },
+  { icon: FileCode, title: "No structured data, no rich results or AI Shopping citations", body: "Missing Product, Offer, Review and MerchantReturnPolicy schema means competitors get price snippets and ChatGPT citations while you get plain links." },
+  { icon: Layers, title: "Category pages that don't rank for commercial intent", body: "A product grid and a thin H1. Google and AI Overviews see a list of thumbnails — nothing to rank for competitive US commercial searches." },
 ];
 
 const PILLARS = [
-  { title: "Technical foundation", body: "Crawl budget, faceted navigation rules, canonicals, sitemap architecture and Core Web Vitals on WooCommerce, Shopify and custom stacks.", href: "#indexing" },
+  { title: "Technical foundation", body: "Crawl budget, faceted navigation rules, canonicals, sitemap architecture and Core Web Vitals (INP/LCP) on WooCommerce, Shopify and custom stacks.", href: "#indexing" },
   { title: "Product pages at scale", body: "Unique descriptions, Product markup and internal links across thousands of SKUs — published in batches and measured.", href: "/services/ecommerce-seo/product-page-seo" },
-  { title: "Category page authority", body: "Thin collection pages turned into buying guides: intro copy, comparison tables and FAQs a shopper actually uses.", href: "#platforms" },
-  { title: "Structured data", body: "Product, Offer, Review, Breadcrumb and FAQ schema mapped to real on-page data. No fabricated ratings.", href: "#indexing" },
-  { title: "Indexing recovery", body: "Sitemap-to-Search-Console diffing that shows which URLs Google declined and why — then the fix for each reason.", href: "#indexing" },
-  { title: "AI Overview readiness", body: "Clear product and category answers that Google’s AI Overviews, ChatGPT and Perplexity can lift as a source.", href: "#process" },
+  { title: "Category page authority", body: "Thin collection pages turned into buying guides: 45–60 word Answer Capsules, comparison tables and FAQs a US shopper actually uses.", href: "#platforms" },
+  { title: "Merchant Center & AI Schema", body: "Product, Offer, Review, MerchantReturnPolicy and OfferShippingDetails JSON-LD mapped to real on-page data. No fabricated ratings.", href: "#indexing" },
+  { title: "Indexing recovery", body: "Sitemap-to-Search-Console diffing that shows which URLs Google declined and why — then the template fix for each reason.", href: "/services/technical-seo/indexing-recovery" },
+  { title: "AI Overview & ChatGPT Shopping", body: "Clear product and category answers plus llms.txt catalog files that Google AI Overviews, ChatGPT and Perplexity lift as a source.", href: "#process" },
 ];
 
 const indexingChecks = [
@@ -87,25 +100,88 @@ const indexingChecks = [
   "Near-duplicate manufacturer descriptions across products",
   "Products with no price, image or stock that Google skips",
   "Orphaned products no category or brand page links to",
-  "Core Web Vitals on product and category templates",
+  "Core Web Vitals (INP, LCP, CLS) on product and category templates",
 ];
 
 const PROCESS = [
-  { when: "Day 1", title: "Free tear-down", body: "Your store URL in, a written look back within 24 hours: which products Google is refusing to index, and why." },
-  { when: "Weeks 1–2", title: "Audit & roadmap", body: "Crawl, Search Console and GA4 data, two competitors benchmarked, and a 90-day plan ranked by impact." },
-  { when: "Weekly sprints", title: "Execution", body: "Technical fixes shipped, content published in measured batches, schema deployed and resubmitted — every change logged." },
-  { when: "Every Monday", title: "Report", body: "Indexed pages, impressions, clicks and revenue — what moved, what did not, and what happens next." },
+  { when: "Days 1–7", title: "7-Day Free Trial & Tear-Down", body: "Your store URL in, a written Sitemap-to-GSC indexing diagnosis within 24 hours, plus 7 days of initial quick-win fixes at zero cost." },
+  { when: "Weeks 1–2", title: "Audit & revenue roadmap", body: "Crawl, Search Console and GA4 data, two US competitors benchmarked, and a 90-day plan ranked by revenue impact." },
+  { when: "Weekly sprints", title: "Batch execution", body: "Technical fixes shipped, product/category content published in measured batches, schema deployed and resubmitted — every change logged." },
+  { when: "Every Monday", title: "Full Stat & Revenue Report", body: "No partial reporting: indexed pages, Search Console clicks, and WooCommerce/Shopify revenue reviewed every Monday." },
 ];
 
 const TOOLING = ["Google Search Console", "GA4", "Screaming Frog", "Ahrefs", "Semrush", "Looker Studio", "PageSpeed Insights"];
 
 const RELATED = [
   { href: "/case-studies/ecommerce/smk-store", title: "SMK Store case study", body: "35,000 products: thin copy, indexing and site quality rebuilt — $5,832 to $19,100 a month." },
-  { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages." },
+  { href: "/case-studies/ecommerce/michigan-outdoor-sports", title: "Michigan Sports & Outdoor case study", body: "A de-indexing setback, then about 3,000 to 11,549 indexed pages and +83% US clicks." },
   { href: "/resources/woocommerce-seo-checklist", title: "WooCommerce SEO checklist", body: "25 checks in the order the case-study work was done. Free, no email." },
   { href: "/services/technical-seo", title: "Technical SEO services", body: "Crawling, indexing and Core Web Vitals fixed at the template." },
   { href: "/blog/shopify-woocommerce-indexing-blueprint", title: "Shopify & WooCommerce indexing blueprint", body: "8 platform-specific fixes for Liquid canonicals, sitemaps and catalog scale." },
   { href: "/blog/ecommerce-product-page-seo", title: "Product page SEO at scale", body: "Product pages for 10,000+ SKUs without thin or duplicate copy." },
+];
+
+const ECOM_SEMANTIC_CLUSTERS = [
+  {
+    tabName: "Shopify & Liquid Catalog SEO",
+    coreEntities:
+      "Collection-Path Canonicalization · /collections/*/products/* Deduplication · Shopify robots.txt.liquid · App Script INP Optimization · Product & MerchantReturnPolicy JSON-LD",
+    lowHangingKeywords: [
+      "shopify collection page seo buying guide template usa",
+      "fix duplicate product urls in shopify collections",
+      "shopify merchant center return policy schema markup",
+      "shopify plus faceted navigation crawl budget optimization",
+    ],
+    psychologyAndIntent:
+      "US Shopify merchants lose organic margin when every product exists at multiple collection URLs and third-party apps drag mobile INP above 300ms. Fixing canonicals and collection buying guides unlocks high-intent commercial buyers.",
+    siloHref: "/services/ecommerce-seo/shopify",
+    siloLabel: "Explore Shopify SEO Architecture",
+  },
+  {
+    tabName: "WooCommerce High-SKU Scaling",
+    coreEntities:
+      "35,000+ SKU Sitemap Sharding · ?filter_ & ?orderby= Parameter Blocking · Action Scheduler & wp_options Database Tuning · Speculative Rules API · Batch Indexing Recovery",
+    lowHangingKeywords: [
+      "woocommerce crawled currently not indexed 10000 products",
+      "woocommerce faceted navigation crawl budget fix",
+      "scale woocommerce product pages without duplicate manufacturer copy",
+      "woocommerce core web vitals inp optimization for large catalogs",
+    ],
+    psychologyAndIntent:
+      "Backed by our verified SMK Store ($5,832 to $19,100/mo) and Michigan Sports & Outdoor (~3,000 to 11,549 indexed pages) case studies, we turn stuck WooCommerce catalogs into compounding organic revenue assets.",
+    siloHref: "/services/ecommerce-seo/woocommerce",
+    siloLabel: "Explore WooCommerce SEO Architecture",
+  },
+  {
+    tabName: "Product & Category Page AEO/GEO",
+    coreEntities:
+      "45–60 Word Category Buying Capsules · Comparison Matrices · Unique SKU Attribute HTML · OfferShippingDetails & AggregateRating Schema · llms.txt Catalog Feeds",
+    lowHangingKeywords: [
+      "ecommerce product page seo for 10000 skus",
+      "how to get ecommerce products cited in google ai overviews",
+      "chatgpt shopping product schema & llms.txt setup",
+      "commercial category page seo vs product grid pages",
+    ],
+    psychologyAndIntent:
+      "Shoppers comparing specs in Google AI Overviews and ChatGPT buy from the store whose category and product pages state dimensions, compatibility, shipping, and returns clearly without generic filler.",
+    siloHref: "/services/ecommerce-seo/product-page-seo",
+    siloLabel: "Explore Product Page SEO at Scale",
+  },
+  {
+    tabName: "Outdoor, Knife, Fashion & Specialty Stores",
+    coreEntities:
+      "Brand & Manufacturer Silos · Steel / Material Spec Tables · Seasonal Inventory Redirects · Out-of-Stock Schema Handling · US Regional Warehouse Shipping Signals",
+    lowHangingKeywords: [
+      "outdoor & sporting goods ecommerce seo usa",
+      "knife store woocommerce seo case study",
+      "fashion & apparel faceted filter canonical seo",
+      "automotive parts fitment & sku indexing seo",
+    ],
+    psychologyAndIntent:
+      "Specialty catalogs win when brand pages, material specifications, and part numbers are indexed cleanly and connected via contextual internal links.",
+    siloHref: "/case-studies/ecommerce/michigan-outdoor-sports",
+    siloLabel: "Read Michigan Sports & Outdoor Case Study",
+  },
 ];
 
 type FormState = "idle" | "sending" | "sent" | "error";
@@ -146,37 +222,43 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
 
   return (
     <main>
+      {/* EMPATHETIC RELIEF TAGLINE BAR */}
+      <ServiceTaglineReliefBar
+        message="We are here to provide you a source of relief — we know your pain, and we have the solution."
+        subText="SMK Store $5,832 → $19,100/mo · MSO 3,000 → 11,549 Indexed Pages · 7-Day Free Trial"
+      />
+
       <ServiceHero
         crumb="Ecommerce SEO"
-        eyebrow="Ecommerce SEO services"
-        title="Ecommerce SEO Services"
+        eyebrow="USA Ecommerce SEO · AEO & ChatGPT Shopping"
+        title="Ecommerce SEO Services in the USA"
         accent="that turn product pages into revenue"
-        subtitle="Technical SEO, product-page content and indexing recovery across thousands of SKUs — for WooCommerce, Shopify and custom stores."
-        primary={{ href: "#proof", label: "See store results" }}
-        secondary={{ href: "#process", label: "How it works" }}
-        trustPoints={["The founder does the work", "90-day money-back guarantee", "Month to month"]}
+        subtitle="We are here to provide you a source of relief — we know your pain, and we have the solution. Technical SEO, product-page content, MerchantReturnPolicy schema, and indexing recovery across thousands of SKUs for US Shopify, WooCommerce, and custom stores."
+        primary={{ href: "#7-day-trial", label: "Start 7-Day Free Trial" }}
+        secondary={{ href: "#diagnose", label: "Diagnose My Store SEO" }}
+        trustPoints={["5+ years founder mastery", "7-Day Free Trial + 90-day guarantee", "Month to month"]}
         aside={
           <ArticleLeadMagnet
             variant="sidebar"
             source={SOURCE}
             copy={{
-              headline: "Free store tear-down",
+              headline: "Free store tear-down + 7-Day Trial",
               sub: "Send your store URL. I’ll check which products Google is refusing to index and why — and send back what to fix first, within 24 hours.",
             }}
           />
         }
       />
 
-      {/* 2026 CONFIRMED ECOMMERCE TELEMETRY & PLAYBOOK BADGE */}
+      {/* 2026 CONFIRMED ECOMMERCE TELEMETRY & PLAYBOOK BADGE — ZERO EMOJIS */}
       <section className="border-b bg-emerald-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#a7f3d0" }}>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-black text-white">
-              ⚡
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">
+              <Zap className="h-4 w-4" aria-hidden />
             </span>
             <div>
               <p className="text-xs font-black uppercase tracking-wider text-emerald-950">
-                Confirmed 2026 Ecommerce Telemetry
+                Confirmed 2026 USA Ecommerce Telemetry
               </p>
               <p className="text-sm font-semibold text-emerald-900">
                 Google Merchant Center Return Policy Schema Mandate &amp; Multi-SKU Crawl Trap Elimination
@@ -186,19 +268,151 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/resources/news/google-merchant-center-automated-return-policy-schema-mandate"
-              className="inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-white px-3.5 py-1.5 text-xs font-bold text-emerald-950 shadow-sm transition-all hover:border-emerald-500"
+              className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-white px-3.5 py-1.5 text-xs font-bold text-emerald-950 shadow-sm transition-all hover:border-emerald-500"
             >
-              📰 Read News Breakdown →
+              <FileText className="h-3.5 w-3.5" aria-hidden />
+              <span>Read News Breakdown &rarr;</span>
             </Link>
             <Link
               href="/resources/solutions"
-              className="inline-flex items-center gap-1 rounded-full bg-emerald-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
+              className="inline-flex items-center gap-1.5 rounded-full bg-emerald-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
             >
-              🛠️ View Faceted Nav Playbook →
+              <Wrench className="h-3.5 w-3.5" aria-hidden />
+              <span>View Faceted Nav Playbook &rarr;</span>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX */}
+      <ServiceQuickAnswerBox
+        eyebrow="Answer Engine (AEO) & Generative Engine Optimization (GEO) Summary"
+        h2="How Does Ecommerce SEO Recover Unindexed SKUs and Grow US Store Revenue?"
+        answerCapsule="Ecommerce SEO for US Shopify and WooCommerce stores eliminates faceted crawl waste, rewrites thin manufacturer copy at template scale, and deploys Product, Offer, and MerchantReturnPolicy JSON-LD schema—turning 'Crawled – currently not indexed' product catalogs into ranked commercial pages cited across Google Search, AI Overviews, and ChatGPT Shopping."
+        contextParagraph={
+          <>
+            Verified in our published case studies: on{" "}
+            <Link href="/case-studies/ecommerce/michigan-outdoor-sports" className="font-bold text-neutral-950 underline">
+              Michigan Sports &amp; Outdoor
+            </Link>
+            , indexed pages rose from about <strong className="text-neutral-950">3,000 to 11,549 (+285%)</strong> between May and July 2026 with <strong className="text-neutral-950">+83% US organic clicks</strong>; on{" "}
+            <Link href="/case-studies/ecommerce/smk-store" className="font-bold text-neutral-950 underline">
+              SMK Store
+            </Link>{" "}
+            (35,000+ SKUs), total monthly net sales grew from <strong className="text-neutral-950">$5,832 to $19,100</strong> between April and June 2026. We deliver this same founder-led engineering to stores across{" "}
+            <Link href="/locations/ohio/cleveland" className="font-bold text-neutral-950 underline">
+              Cleveland, OH
+            </Link>
+            ,{" "}
+            <Link href="/locations/texas/sugar-land" className="font-bold text-neutral-950 underline">
+              Sugar Land &amp; The Woodlands, TX
+            </Link>
+            ,{" "}
+            <Link href="/locations/michigan/detroit" className="font-bold text-neutral-950 underline">
+              Detroit &amp; Grand Rapids, MI
+            </Link>
+            ,{" "}
+            <Link href="/locations/pennsylvania/philadelphia" className="font-bold text-neutral-950 underline">
+              Philadelphia, PA
+            </Link>
+            , and nationwide.
+          </>
+        }
+        bullets={[
+          {
+            label: "Verified Indexing Recovery",
+            detail: (
+              <>
+                About 3,000 &rarr; 11,549 indexed pages &amp; +83% US clicks on{" "}
+                <Link href="/case-studies/ecommerce/michigan-outdoor-sports" className="underline font-semibold">
+                  Michigan Sports &amp; Outdoor
+                </Link>
+                .
+              </>
+            ),
+          },
+          {
+            label: "Verified Store Revenue",
+            detail: (
+              <>
+                $5,832 &rarr; $19,100/mo WooCommerce net sales on{" "}
+                <Link href="/case-studies/ecommerce/smk-store" className="underline font-semibold">
+                  SMK Store (35,000+ SKUs)
+                </Link>
+                .
+              </>
+            ),
+          },
+          {
+            label: "2026 Merchant & AI Schema",
+            detail: "Product, Offer, Review, MerchantReturnPolicy & llms.txt catalog feeds.",
+          },
+          {
+            label: "Risk-Free Onboarding",
+            detail: "Limited-Time 7-Day Free Trial + 24-hour Sitemap-to-GSC indexing tear-down.",
+          },
+        ]}
+        complianceBadge="Shopify · WooCommerce · Custom Catalogs"
+      />
+
+      {/* INTERACTIVE GEMINI AI DIAGNOSTIC BAR + "TELL US WHAT YOU ARE LOOKING FOR" + 7-DAY FREE TRIAL FORM */}
+      <ServiceAiDiagnosisAndTrial
+        serviceType="ecommerce-seo"
+        heading="We Know You Are Frustrated by Unindexed Products & Rising Ad CAC — Diagnose Your Store Here"
+        answerCapsule="Enter your Shopify or WooCommerce challenge below to see why Google Search Console flags your products as 'Crawled – currently not indexed' and how our template-level engineering unlocks organic US revenue—backed by our 7-Day Free Trial."
+        placeholder="e.g. 8,000 WooCommerce or Shopify products stuck in 'Crawled - currently not indexed'..."
+        painChips={[
+          "Thousands of SKUs stuck in 'Crawled - currently not indexed'",
+          "Faceted filters (?color=, ?size=, ?sort=) wasting crawl budget",
+          "Duplicate Shopify /collections/*/products/* URLs splitting rank",
+          "Missing MerchantReturnPolicy & Product price/review snippets",
+          "Thin manufacturer product copy across 5,000+ SKUs",
+          "Burned by a previous agency selling useless DA/PA backlinks",
+        ]}
+        lookingForOptions={[
+          "WooCommerce High-SKU Indexing Recovery",
+          "Shopify Collection & Canonical SEO",
+          "Programmatic Product Page Content at Scale",
+          "Category Buying Guides & Commercial Rankings",
+          "MerchantReturnPolicy & Rich Product Schema",
+          "Core Web Vitals (INP / LCP) Speed Optimization",
+          "AI Overviews & ChatGPT Shopping Citations",
+          "7-Day Free Trial & Full Store Tear-Down",
+        ]}
+        initialItems={[
+          {
+            n: "1. Mass 'Crawled – Currently Not Indexed' Catalog Bloat",
+            why: "Googlebot crawls thousands of manufacturer-copy product pages and faceted filter combinations (?color=, ?size=, ?sort=), deems your templates low-value, and drops your high-margin SKUs from the index.",
+            fix: "We run daily Sitemap-to-GSC diffing, block low-value parameter permutations, and enrich product/category templates in measured batches (the exact method that took Michigan Sports & Outdoor from ~3,000 to 11,549 indexed pages).",
+            tool: "Sitemap-to-GSC Diffing + Canonical Rules",
+          },
+          {
+            n: "2. Missing MerchantReturnPolicy & AI Shopping Schema",
+            why: "Without nested Product, Offer, AggregateRating, and 2026 MerchantReturnPolicy JSON-LD, your products lose rich price/stock snippets in Google Search and get ignored by ChatGPT Shopping.",
+            fix: "We deploy automated, template-level JSON-LD mapped directly to live inventory, pricing, shipping, and return data.",
+            tool: "Schema Generator + Merchant Center Sync",
+          },
+          {
+            n: "3. Thin Collection Grids Failing Commercial Buyers",
+            why: "A collection page with only a product grid and an H1 gives Google and AI Overviews zero topical context to rank for high-volume commercial queries.",
+            fix: "We transform top-revenue category templates into structured buying guides with 45–60 word Answer Capsules, comparison tables, and buyer FAQs.",
+            tool: "Category Buying Guides + Internal Link Graph",
+          },
+        ]}
+        initialRecommendation="Do not keep paying for Google Shopping clicks on products your organic catalog should already rank for. Test our Sitemap-to-GSC indexing recovery with a 7-Day Free Trial."
+        trialDeliverablesLeft={[
+          "Complete Sitemap-to-Search-Console indexing diff across your product & category URLs",
+          "Root-cause breakdown of 'Crawled – currently not indexed' & faceted crawl waste",
+          "Shopify Liquid or WooCommerce template canonical & internal-link audit",
+          "Live Product, Offer & MerchantReturnPolicy JSON-LD prepared for your top template",
+        ]}
+        trialDeliverablesRight={[
+          "45–60 word AI Overview buying-guide capsule drafted for your #1 revenue collection",
+          "Core Web Vitals (INP & LCP) bottleneck diagnosis on mobile product templates",
+          "Direct 1-on-1 roadmap review with Founder Mubashar Sharif (5+ years mastery)",
+          "Full Monday Search Console & revenue baseline report — yours to keep",
+        ]}
+      />
 
       <ServiceProofStrip
         id="proof"
@@ -219,20 +433,26 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         ]}
       />
 
+      {/* EXHAUSTED BY PREVIOUS SEO AGENCIES? SEE HOW WE ARE DIFFERENT */}
+      <ServiceExhaustedByAgencies
+        serviceLabel="USA Ecommerce SEO"
+        answerCapsule="Store owners leave traditional ecommerce SEO agencies because of partial monthly PDFs, junior account managers who never touch Shopify Liquid or WooCommerce templates, and meaningless Domain Authority (DA/PA) link packages. SearchPrex delivers direct founder execution (5+ years mastery), weekly Monday GSC & net-sales reviews, and a 7-Day Free Trial."
+      />
+
       {/* THE PROBLEM */}
       <Band>
         <BandIntro
           center={false}
           eyebrow="The problem"
-          title="Why big catalogs stall"
-          lead="Four failure modes account for almost every stuck store I audit."
+          title="Why big US ecommerce catalogs stall in Google Search"
+          lead="Four failure modes account for almost every stuck Shopify and WooCommerce store I audit."
         />
         <RealityBanner
           src="/images/audiences/ecommerce-inventory-stress.webp"
           alt="Ecommerce store owner in warehouse worried about unindexed product catalog and rising ad CAC"
           tag="The Reality · Inventory Stagnation"
           quote="“Thousands of product SKUs in the warehouse, rising ad CAC, and Google indexing less than half.”"
-          body="Large catalogues stall in the same places: thin manufacturer descriptions, crawl budget waste, and products trapped in duplicate parameter URLs. I unblock indexing so your catalogue earns organic sales."
+          body="Large catalogues stall in the same places: thin manufacturer descriptions, crawl budget waste, and products trapped in duplicate parameter URLs. I unblock indexing so your catalogue earns organic sales across the United States."
         />
         <RuleGrid columns={2}>
           {PAIN_POINTS.map((p) => (
@@ -251,8 +471,8 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         <BandIntro
           dark
           eyebrow="What’s included"
-          title="Six parts of an ecommerce SEO program"
-          lead="Each one maps to a specific reason Google is under-serving your catalog. I start with the ones your store is missing."
+          title="Six parts of an ecommerce SEO, AEO & GEO program"
+          lead="Each one maps to a specific reason Google and AI shopping engines are under-serving your catalog. I start with the ones your store is missing."
         />
         <RuleGrid>
           {PILLARS.map((p) => (
@@ -267,10 +487,12 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
           <div>
             <Eyebrow>Indexing recovery</Eyebrow>
             <H2>A product Google won’t index can’t sell</H2>
+            <p className="mt-4 rounded-2xl border-l-4 border-l-neutral-900 bg-slate-50 p-4 text-sm font-semibold text-neutral-900 leading-relaxed">
+              Most stuck ecommerce stores do not have a backlink problem—they have an indexing and template quality problem. When Google Search Console flags thousands of SKUs as “Crawled – currently not indexed”, resubmitting sitemaps fails; fixing duplicate parameters, canonicals, and thin product attributes solves the root cause.
+            </p>
             <Lead>
-              Most stuck stores don’t have a ranking problem, they have an indexing one. Google found the pages and decided they were not worth keeping. Resubmitting rarely helps; fixing the reason does.
+              I sort every unindexed URL by the exact reason Search Console gives, fix the highest-revenue products first and re-measure before shipping the next batch.
             </Lead>
-            <Lead>I sort every unindexed URL by the reason Search Console gives, fix the highest-revenue products first and re-measure before the next batch.</Lead>
             <TextLink href="/services/technical-seo/indexing-recovery">Indexing recovery service</TextLink>
             <div><TextLink href="/services/ecommerce-seo/product-page-seo">Product page SEO at catalog scale</TextLink></div>
           </div>
@@ -285,7 +507,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
             <Eyebrow dark>Ecommerce SEO in action</Eyebrow>
             <H2 dark>Two WooCommerce stores, unedited screenshots</H2>
             <Lead dark>
-              SMK Store has more than 35,000 products; Michigan Sports & Outdoor came back from a de-indexing. The work was the same in both: thin copy rewritten, crawl waste removed, indexing fixed and resubmitted in batches.
+              SMK Store has more than 35,000 products; Michigan Sports &amp; Outdoor came back from a de-indexing. The work was the same in both: thin copy rewritten, crawl waste removed, indexing fixed and resubmitted in batches.
             </Lead>
             <div className="mt-8">
               <CheckList
@@ -299,7 +521,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
             </div>
             <div className="mt-6 flex flex-wrap gap-x-6">
               <TextLink dark href="/case-studies/ecommerce/smk-store">SMK Store case study</TextLink>
-              <TextLink dark href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Sports & Outdoor case study</TextLink>
+              <TextLink dark href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Sports &amp; Outdoor case study</TextLink>
             </div>
           </div>
           <ProofPanel>
@@ -341,7 +563,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         <BandIntro
           eyebrow="Platforms & niches"
           title="Ecommerce SEO for your kind of store"
-          lead="WooCommerce and knife & outdoor stores are where the case studies are. The Shopify page says plainly that there isn’t one yet."
+          lead="WooCommerce and knife & outdoor stores are where the published case studies are. The Shopify page says plainly that there isn’t one yet, and shows the exact Liquid fixes we deploy."
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ECOMMERCE_INDUSTRIES.map((i) => {
@@ -384,10 +606,24 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         </div>
       </Band>
 
+      {/* INTERACTIVE USA MAP EMBED + PINPOINTED STATES & CITIES */}
+      <ServiceUsaMapAndMarkets
+        serviceName="Ecommerce SEO Services"
+        answerCapsule="SearchPrex engineers high-SKU Ecommerce SEO for US direct-to-consumer brands, specialty retailers, and regional distributors—combining national product/category rankings with local warehouse and showroom visibility across Cleveland (OH), Sugar Land & The Woodlands (TX), Detroit & Grand Rapids (MI), Philadelphia (PA), Tempe & Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas."
+      />
+
+      {/* SEMANTIC LONG-TAIL KEYWORD CLUSTERS + CONTEXTUAL INTERNAL LINKING MATRIX */}
+      <ServiceSemanticClusterAndLinks
+        eyebrow="USA Commercial Search Psychology · Low-Hanging Long-Tail Keywords"
+        h2="High-Converting Ecommerce Keyword Clusters & Contextual Internal Linking"
+        answerCapsule="We target commercial and transactional long-tail queries—pairing specific product attributes, SKUs, brand names, and buying-guide comparisons with clean Product and MerchantReturnPolicy schema so your store captures ready-to-buy US shoppers."
+        clusters={ECOM_SEMANTIC_CLUSTERS}
+      />
+
       {/* PROCESS */}
       <Band dark id="process">
-        <BandIntro dark eyebrow="How it works" title="From free tear-down to indexed, selling products" />
-        <Steps steps={PROCESS} cta={{ href: "#get-started", label: "Get my free store tear-down" }} />
+        <BandIntro dark eyebrow="How it works" title="From 7-Day Free Trial to indexed, selling products" />
+        <Steps steps={PROCESS} cta={{ href: "#7-day-trial", label: "Start my 7-Day Free Trial & Store Tear-Down" }} />
       </Band>
 
       {/* PRICE, GUARANTEE & WHO DOES THE WORK */}
@@ -395,18 +631,18 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <Eyebrow>Why SearchPrex</Eyebrow>
-            <H2>One person, one roadmap, a clear price</H2>
+            <H2>One founder, one revenue roadmap, a clear price</H2>
             <Lead>
-              You work with the person who audits your store and ships the fixes. Priorities are ranked by what brings revenue, and every change is logged.
+              You work directly with the person who audits your store and ships the fixes. Priorities are ranked by what brings net sales and indexed SKU growth, and every change is logged.
             </Lead>
             <div className="mt-8">
               <CheckList
                 items={[
-                  "The founder does the work — no account managers in between",
-                  "A written roadmap before you pay anything",
-                  "Fixes shipped, not just a PDF of problems",
-                  "A plain-English report every Monday",
-                  "Month to month, no long contract",
+                  "The founder does the work — no junior account managers in between",
+                  "Limited-time 7-Day Free Trial + written roadmap before you pay anything",
+                  "Template-level fixes shipped, not just a PDF of problems",
+                  "A plain-English report on indexed SKUs, clicks & revenue every Monday",
+                  "Month to month, backed by our 90-day money-back guarantee",
                 ]}
               />
             </div>
@@ -431,7 +667,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         <div className="mx-auto mt-14 max-w-4xl">
           <AuthorCard
             name="Mubashar Sharif"
-            role="Founder · 5+ years · Semrush & HubSpot certified"
+            role="Founder · 5+ years · #1 Ranked Cleveland OH Local SEO Mastery · Semrush & HubSpot certified"
             quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. Both published case studies are WooCommerce stores, one with more than 35,000 products."
             imageSrc="/images/mubashar-sharif.jpg"
             imageAlt="Mubashar Sharif — Founder of SearchPrex"
@@ -455,7 +691,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
       <ServiceBlogTeaser topic="ecommerce" />
 
       {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
-      <FaqBand title="Ecommerce SEO questions, answered">
+      <FaqBand title="USA Ecommerce SEO, AEO & GEO questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="ecommerce-seo-faq" />
       </FaqBand>
 

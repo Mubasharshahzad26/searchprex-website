@@ -20,14 +20,24 @@ const PAGE_URL = `${SITE}/services/ecommerce-seo`;
 const baseMetadata: Metadata = {
   title: "Ecommerce SEO Services That Grow Revenue",
   description:
-    "Ecommerce SEO for Shopify and WooCommerce stores: indexing recovery, product content and Core Web Vitals. SMK Store went from $5,832 to $19,100 a month.",
+    "Ecommerce SEO for US Shopify and WooCommerce stores: indexing recovery, product content and Core Web Vitals. SMK Store went from $5,832 to $19,100 a month.",
+  keywords: [
+    "ecommerce SEO services",
+    "ecommerce SEO agency USA",
+    "Shopify SEO services",
+    "WooCommerce SEO services",
+    "product page SEO at scale",
+    "ecommerce indexing recovery",
+    "MerchantReturnPolicy schema SEO",
+    "ChatGPT shopping SEO",
+  ],
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
     title: "Ecommerce SEO Services — Fix Indexing & Grow Revenue | SearchPrex",
     description:
-      "Founder-led ecommerce SEO for Shopify and WooCommerce stores. Fix mass non-indexing, thin content, and Core Web Vitals — verified Google Search Console results.",
+      "Founder-led ecommerce SEO for US Shopify and WooCommerce stores. Fix mass non-indexing, thin content, and Core Web Vitals — verified Google Search Console results.",
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
@@ -36,7 +46,7 @@ const baseMetadata: Metadata = {
     card: "summary_large_image",
     title: "Ecommerce SEO Services — Fix Indexing & Grow Revenue | SearchPrex",
     description:
-      "Founder-led ecommerce SEO for Shopify and WooCommerce stores. Verified Google Search Console results — no vanity metrics.",
+      "Founder-led ecommerce SEO for US Shopify and WooCommerce stores. Verified Google Search Console results — no vanity metrics.",
   },
   robots: {
     index: true,
@@ -61,7 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * When this page was last reviewed by a person. Hardcoded on purpose — a date
  * that moves on every request claims a review that did not happen.
  */
-const LAST_REVIEWED = "2026-09-26";
+const LAST_REVIEWED = "2026-10-17";
 const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 
 export default function Page() {

@@ -14,8 +14,16 @@ const baseMetadata: Metadata = {
   description:
     "Technical SEO audit and fixes: indexing recovery, crawl budget, Core Web Vitals and schema. One store went from about 3,000 to 11,549 indexed pages.",
   keywords: [
-    "technical SEO services", "Core Web Vitals optimization", "indexation recovery",
-    "schema markup", "crawl budget", "site architecture SEO", "INP optimization",
+    "technical SEO services",
+    "technical SEO audit USA",
+    "Core Web Vitals optimization",
+    "indexation recovery",
+    "crawled currently not indexed fix",
+    "schema markup generator",
+    "crawl budget optimization",
+    "site architecture SEO",
+    "INP optimization",
+    "llms.txt AI crawler SEO",
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
@@ -45,7 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * "reviewed" date that moves on every request claims a check that did not
  * happen. Change it when the page is actually reviewed.
  */
-const LAST_REVIEWED = "2026-09-26";
+const LAST_REVIEWED = "2026-10-17";
 
 export default function TechnicalSEOPage() {
   // Every node is built from the data the page renders (./data) or refers to

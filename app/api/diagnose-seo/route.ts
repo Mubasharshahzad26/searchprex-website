@@ -12,6 +12,7 @@ interface DiagnoseRequest {
   state?: string;
   county?: string;
   practiceArea?: string;
+  serviceType?: "law-firm-seo" | "ecommerce-seo" | "local-seo" | "technical-seo";
 }
 
 export interface DiagnosticItem {
@@ -26,6 +27,132 @@ export interface DiagnoseResponse {
   recommendation: string;
   isAiGenerated: boolean;
 }
+
+const SERVICE_FALLBACK_RULES: Record<
+  "law-firm-seo" | "ecommerce-seo" | "local-seo" | "technical-seo",
+  Array<{ n: string; rx: RegExp; why: string; fix: string; tool: string }>
+> = {
+  "law-firm-seo": [
+    {
+      n: "High PPC Costs & Out-of-City Directory Dominance",
+      rx: /ppc|ad|expensive|directory|avvo|findlaw|justia|traffic|lead/i,
+      why: "US law firms in markets like Cleveland OH, Sugar Land TX, The Woodlands TX, and Detroit MI pay $180–$340 per click on Google Ads while national directories (Avvo, FindLaw, Justia) and out-of-county firms capture page-one organic searches because local sites lack court-specific practice silos.",
+      fix: "Deploy dedicated practice-area and suburb silos (Personal Injury, Family Law & High-Asset Divorce, Criminal Defense, Estate Planning & Probate) anchored to local county courts (Cuyahoga Common Pleas, Fort Bend District Court, Montgomery County Conroe courts) with ABA Rule 7.1 compliant Attorney E-E-A-T credentials.",
+      tool: "US Legal Silo & Court Entity Architecture",
+    },
+    {
+      n: "Not Ranking in the Google Map Pack Top 3",
+      rx: /map|pack|local|gbp|business profile|near me|suspension|call/i,
+      why: "Generic 'Law firm' primary categories, inconsistent bar directory NAP citations, or virtual-office compliance gaps prevent your firm from entering the local 3-pack where 70%+ of urgent legal calls start.",
+      fix: "Realign primary GBP categories to exact high-value practices ('Personal injury attorney', 'Family law attorney', 'Criminal justice attorney'), synchronize State Bar and legal directory citations, and implement a bar-compliant client review velocity routine.",
+      tool: "Geo-Grid Map Pack & Bar Citation Suite",
+    },
+    {
+      n: "Invisible in Google AI Overviews & ChatGPT Search",
+      rx: /ai|chatgpt|overview|perplexity|gemini|citation|answer|geo|aeo/i,
+      why: "Generative engines skip generic marketing copy. Without 45–60 word direct Answer Capsules under semantic H2 headings, statutory citations, and LegalService + FAQPage JSON-LD schema, AI models cite competitors instead.",
+      fix: "Restructure practice pages with answer-first statutory summaries, verified attorney bylines, LegalService JSON-LD graphs, and an llms.txt entity map so ChatGPT, Perplexity, and Google AI Overviews name your firm.",
+      tool: "Legal AEO / GEO & llms.txt Citation Engine",
+    },
+    {
+      n: "Unqualified Leads & After-Hours Intake Leaks",
+      rx: /intake|qualif|after hours|missed|phone|convert|case/i,
+      why: "High-intent family law, criminal defense, and injury prospects search at night on mobile phones; slow mobile templates or unanswered voicemails send retainers directly to competing firms.",
+      fix: "Deploy sub-second mobile practice templates, Whisper call attribution, and 24/7 AI intake qualification so every consultation request is captured and scored.",
+      tool: "24/7 Legal Intake & Call Attribution Stack",
+    },
+  ],
+  "ecommerce-seo": [
+    {
+      n: "Products Stuck in 'Crawled – Currently Not Indexed'",
+      rx: /index|crawl|not indexed|product|sku|catalog|gsc|search console/i,
+      why: "Googlebot crawls your Shopify or WooCommerce catalog but declines to keep thousands of product URLs due to manufacturer duplicate descriptions, thin templates, or missing price/availability signals.",
+      fix: "Run daily Sitemap-to-GSC diffing to group unindexed SKUs by exclusion cause, deploy programmatic unique product HTML and specifications in measured batches, and re-verify indexation velocity.",
+      tool: "Sitemap-to-GSC Diffing & Batch Indexer",
+    },
+    {
+      n: "Faceted Navigation & Parameter Crawl Budget Waste",
+      rx: /facet|filter|sort|parameter|crawl budget|duplicate|collection|shopify|woocommerce/i,
+      why: "Color, size, price, and sort filter combinations generate tens of thousands of low-value URLs (or duplicate /collections/*/products/* paths on Shopify) that exhaust Googlebot's rendering budget.",
+      fix: "Enforce strict canonical tag rules, block non-commercial filter parameters via robots.txt and meta robots, and consolidate link equity into revenue-generating category and product canonicals.",
+      tool: "Faceted Navigation & Crawl Budget Firewall",
+    },
+    {
+      n: "Thin Category Pages Losing to Big-Box Retailers",
+      rx: /category|collection|rank|traffic|competitor|amazon|revenue|cac/i,
+      why: "A bare product grid with a single H1 gives Google and AI shopping assistants zero semantic context to rank your store for commercial buying queries.",
+      fix: "Upgrade commercial collection templates with 50-word Answer Capsules, buyer comparison matrices, internal SKU clusters, and commercial FAQPage schema.",
+      tool: "Commercial Category Authority Builder",
+    },
+    {
+      n: "Missing Merchant Return Policy & Rich Product Schema",
+      rx: /schema|merchant|rich|snippet|review|star|price|ai|chatgpt/i,
+      why: "Incomplete Product, Offer, AggregateRating, and MerchantReturnPolicy JSON-LD prevents your store from earning price/stock rich results and AI Overview shopping citations.",
+      fix: "Bind dynamic JSON-LD Product, Offer, and MerchantReturnPolicy schema directly to live store inventory data so Google Merchant Center and AI engines display verified pricing and stock.",
+      tool: "Dynamic Ecommerce JSON-LD & GMC Validator",
+    },
+  ],
+  "local-seo": [
+    {
+      n: "Buried Below the Google Map Pack Top 3",
+      rx: /map|pack|top 3|near me|rank|local|call|competitor/i,
+      why: "When US homeowners search 'near me' in markets like Cleveland OH, Sugar Land TX, The Woodlands TX, Detroit MI, or Tempe AZ, over 70% call the top 3 Map Pack results. Wrong primary categories and stale reviews keep your vans idle.",
+      fix: "Align primary and secondary GBP categories against the top 3 map leaders, build hyper-local service-area pages for every city and suburb you serve, and launch a compliant customer review velocity system.",
+      tool: "US Metro & Suburb Map Pack Accelerator",
+    },
+    {
+      n: "Google Business Profile Suspension or Verification Lock",
+      rx: /suspend|suspension|verify|video|disabled|edit|nap|address/i,
+      why: "Service-area businesses and multi-location operators get flagged by Google's automated enforcement for address mismatches, virtual office violations, or unverified suggested edits.",
+      fix: "Audit GBP guidelines compliance, synchronize website NAP and operating hours with official utility/registration records, and prepare a complete reinstatement and video-verification evidence package.",
+      tool: "GBP Reinstatement & Entity Defense Protocol",
+    },
+    {
+      n: "Missing Suburb & Service-Area Landing Pages",
+      rx: /suburb|city|service area|page|location|radius|proximity/i,
+      why: "A single homepage cannot rank across 10 surrounding suburbs. Without dedicated, genuinely local service-area pages, proximity compression restricts your visibility to a 2-mile radius.",
+      fix: "Build distinct, non-templated city and suburb pages featuring local job proof, municipal code familiarity, and internal links back to your core trade services.",
+      tool: "Suburban Service-Area Silo Engine",
+    },
+    {
+      n: "Invisible in Local Google AI Overviews & Voice/AI Search",
+      rx: /ai|overview|chatgpt|perplexity|voice|cite|named/i,
+      why: "Google AI Overviews now sit above the Map Pack for local cost and contractor queries. Sites without clear pricing capsules, LocalBusiness schema, and third-party citation consensus get skipped.",
+      fix: "Inject 45–60 word local Answer Capsules under H2s, deploy LocalBusiness + Service JSON-LD, and align Yelp, BBB, Apple Maps, and trade directory signals.",
+      tool: "Local AI Overview Citation Suite",
+    },
+  ],
+  "technical-seo": [
+    {
+      n: "Mass Pages in 'Crawled' or 'Discovered – Currently Not Indexed'",
+      rx: /crawled|discovered|not indexed|index|drop|de-index|gsc/i,
+      why: "Google either fetched your pages and judged the template too thin/duplicate to store, or exhausted crawl budget on junk URLs before reaching your core revenue pages.",
+      fix: "Audit Google Search Console Pages exports by template, prune parameter bloat, repair internal orphan paths, upgrade template information gain, and execute batch recrawl verification.",
+      tool: "Template-Level Indexation Recovery Engine",
+    },
+    {
+      n: "Failing Core Web Vitals (INP, LCP, CLS) on Real Chrome Users",
+      rx: /cwv|core web vitals|inp|lcp|cls|speed|slow|render/i,
+      why: "Heavy third-party scripts, unoptimized hydration, and layout shifts fail Chrome User Experience Report (CrUX) thresholds—hurting both organic rankings and mobile conversion rates.",
+      fix: "Defer non-critical main-thread JavaScript for sub-200ms INP, implement Speculative Rules API prerendering,preload hero LCP assets, and lock layout containers at the template level.",
+      tool: "CrUX & INP Template Optimization Suite",
+    },
+    {
+      n: "Broken Canonicals, Redirect Chains & Post-Migration Traffic Drops",
+      rx: /canonical|redirect|migration|404|duplicate|traffic drop|architecture/i,
+      why: "Conflicting canonical tags, multi-hop redirect chains, or unmapped URL changes during a site redesign split link equity and force Google to drop historical rankings.",
+      fix: "Execute a full screaming-frog and server-log crawl, collapse redirect chains to single 301 hops, enforce strict self-referencing canonicals, and restore internal link depth.",
+      tool: "Crawl Architecture & Migration Recovery Suite",
+    },
+    {
+      n: "AI Crawlers (GPTBot, PerplexityBot) Blocked or Unable to Parse",
+      rx: /ai|bot|gptbot|perplexity|llms|schema|json-ld|render/i,
+      why: "AI answer engines have stricter timeout budgets than Googlebot and cannot parse client-side-only JavaScript or unstructured pages without clean JSON-LD graphs and an llms.txt index.",
+      fix: "Ensure server-side HTML rendering for all primary content, deploy validated @graph JSON-LD schema (Service, Product, FAQPage, Organization), and configure robots.txt + llms.txt for AI crawlers.",
+      tool: "AI Crawler Rendering & Schema Graph Suite",
+    },
+  ],
+};
 
 // Deterministic baseline library tailored to Ohio & Cuyahoga County legal markets
 const FALLBACK_RULES: Array<{
@@ -96,6 +223,86 @@ export async function POST(req: Request) {
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];
+
+  if (body.serviceType && SERVICE_FALLBACK_RULES[body.serviceType]) {
+    const st = body.serviceType;
+    const rules = SERVICE_FALLBACK_RULES[st];
+    const combinedInput = `${query} ${selectedChips.join(' ')}`.trim();
+    const matched = rules.filter((r) => r.rx.test(combinedInput));
+    const finalFallback = (matched.length >= 2 ? matched : [...matched, ...rules.filter((r) => !matched.includes(r))]).slice(0, 3);
+
+    try {
+      const serviceLabels: Record<typeof st, string> = {
+        "law-firm-seo": "US Law Firm SEO (Personal Injury, Family Law, Criminal Defense, Estate Planning, Workers' Comp across Cleveland OH, Sugar Land TX, The Woodlands TX, Detroit MI, Philadelphia PA, Tempe/Scottsdale AZ, San Jose CA, Baton Rouge/Shreveport LA, Albuquerque NM, and Kansas)",
+        "ecommerce-seo": "US Ecommerce SEO for Shopify, WooCommerce & Custom Catalogs (Indexing Recovery, Faceted Navigation Crawl Budget, Product & Category Authority, MerchantReturnPolicy Schema, AI Shopping Overviews)",
+        "local-seo": "US Local SEO & Google Business Profile Optimization (Map Pack Top 3, Multi-City Service-Area Suburb Pages, GBP Suspension Recovery, Local AI Overviews across TX, OH, MI, PA, AZ, CA, LA, NM, KS)",
+        "technical-seo": "Technical SEO Audit & Template-Level Engineering (GSC Crawled/Discovered Not Indexed Recovery, Core Web Vitals INP/LCP/CLS, Crawl Budget, JSON-LD Schema Graphs & llms.txt for AI Crawlers)",
+      };
+      const svcPrompt = `You are Mubashar Sharif, CEO & Founder of SearchPrex (5+ years hands-on SEO mastery, #1 ranked in Cleveland, Ohio USA Local SEO mastery).
+A US business owner or managing partner on our ${serviceLabels[st]} page submitted this diagnostic request:
+User Problem Description: "${query || 'Needs predictable leads, rankings, and AI search citations without vanity metrics'}"
+Selected Issue Chips: ${selectedChips.length > 0 ? selectedChips.join(', ') : 'None specified'}
+
+Return a valid JSON object matching this exact schema:
+{
+  "items": [
+    {
+      "n": "Short Issue Title",
+      "why": "Clear, specific root-cause diagnosis explaining why this bottleneck is costing them leads, cases, or revenue in the US market.",
+      "fix": "SearchPrex's concrete, revenue-first engineering solution (mentioning answer-first AEO/GEO content, schema, GBP/indexing fixes, and weekly reporting).",
+      "tool": "Specific SearchPrex software/methodology stack used"
+    }
+  ],
+  "recommendation": "A direct, 1-2 sentence executive takeaway from Founder Mubashar Sharif explaining the first high-leverage fix we will execute during their 7-Day Free Trial."
+}
+Provide 2 to 3 highly tailored items. Output strictly JSON without markdown wrappers.`;
+
+      const raw = await generateWithPool(svcPrompt, {
+        temperature: 0.35,
+        maxOutputTokens: 1600,
+        json: true,
+      });
+      if (raw) {
+        const cleaned = raw.trim().replace(/^```json\s*/i, '').replace(/```$/i, '').trim();
+        const parsed = JSON.parse(cleaned);
+        if (parsed.items && Array.isArray(parsed.items) && parsed.items.length > 0) {
+          return NextResponse.json({
+            items: parsed.items.slice(0, 3).map((item: any) => ({
+              n: String(item.n || 'Diagnostic Finding'),
+              why: String(item.why || ''),
+              fix: String(item.fix || ''),
+              tool: String(item.tool || 'SearchPrex Execution Stack'),
+            })),
+            recommendation: String(
+              parsed.recommendation ||
+                'Focus on fixing your highest-intent indexing and local entity gaps first—test our execution risk-free with our 7-Day Free Trial.'
+            ),
+            isAiGenerated: true,
+          });
+        }
+      }
+    } catch (err) {
+      console.warn('[diagnose-seo] Service Gemini call fell back to deterministic rules:', (err as Error).message);
+    }
+
+    const defaultRecs: Record<typeof st, string> = {
+      "law-firm-seo":
+        "Stop overpaying for $250+ PPC clicks and directory leads—build county-court and suburb practice silos that earn Map Pack calls and AI Overview citations.",
+      "ecommerce-seo":
+        "Unblock 'Crawled – currently not indexed' product URLs and eliminate faceted parameter waste before spending another dollar on paid shopping ads.",
+      "local-seo":
+        "Align your primary Google Business Profile categories, build dedicated US suburb service-area pages, and secure top-3 Map Pack + AI Overview visibility.",
+      "technical-seo":
+        "Fix root-cause crawl budget, canonical, and Core Web Vitals (INP) bottlenecks at the template level so one deployment repairs thousands of URLs.",
+    };
+
+    return NextResponse.json({
+      items: finalFallback,
+      recommendation: defaultRecs[st],
+      isAiGenerated: false,
+    });
+  }
+
   const city = body.city || 'The Woodlands';
   const state = body.state || (city.toLowerCase().includes('woodlands') || city.toLowerCase().includes('sugar') || city.toLowerCase().includes('katy') || city.toLowerCase().includes('denton') ? 'Texas' : city.toLowerCase().includes('albuquerque') ? 'New Mexico' : city.toLowerCase() === 'cleveland' ? 'Ohio' : 'Pennsylvania');
   const isWoodlands = city.toLowerCase().includes('woodlands');
