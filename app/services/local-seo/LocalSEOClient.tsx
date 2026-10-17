@@ -47,7 +47,6 @@ import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTagli
 import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
 import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
 import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
-import ServiceUsaMapAndMarkets from "@/components/service-wireframe/ServiceUsaMapAndMarkets";
 import ServiceSemanticClusterAndLinks from "@/components/service-wireframe/ServiceSemanticClusterAndLinks";
 
 import { CAPSULES, FAQS, PROBLEMS } from "./data";
@@ -162,7 +161,7 @@ const LOCAL_SEMANTIC_CLUSTERS = [
       "ai overview optimization for local service businesses",
     ],
     psychologyAndIntent:
-      "US businesses based in one metro (like Cleveland, Sugar Land, The Woodlands, Detroit, or Philadelphia) need calls from affluent neighboring suburbs without triggering doorway-page penalties.",
+      "US service-area businesses based in one metro need phone calls from affluent neighboring suburbs without triggering doorway-page penalties.",
     siloHref: "/resources/google-business-profile-checklist",
     siloLabel: "Run the 23-Point Free GBP Checklist",
   },
@@ -241,14 +240,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         answerCapsule="Local SEO in the United States aligns your Google Business Profile primary category, service-area suburb pages, NAP directory citations, genuine customer review velocity, and LocalBusiness JSON-LD schema—driving inbound phone calls and direction requests from both the Google Maps 3-Pack and AI Overviews."
         contextParagraph={
           <>
-            SearchPrex holds{" "}
-            <strong className="text-neutral-950">
-              #1 ranked local search mastery in{" "}
-              <Link href="/locations/ohio/cleveland" className="underline">
-                Cleveland, Ohio (USA)
-              </Link>
-            </strong>{" "}
-            and has taken US service businesses into both the #1 organic slot and Google&rsquo;s AI Overviews—including{" "}
+            SearchPrex holds <strong className="text-neutral-950">#1 ranked local search mastery in Cleveland, Ohio (USA)</strong> and has taken US service businesses into both the #1 organic slot and Google&rsquo;s AI Overviews—including{" "}
             <Link href="/case-studies/cleaning/dolls-cleaning" className="font-bold text-neutral-950 underline">
               D.O.L.L.S. Cleaning in Michigan
             </Link>{" "}
@@ -260,33 +252,13 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
             <Link href="/case-studies/roofing/mammoth-roofing" className="font-bold text-neutral-950 underline">
               Mammoth Roofing in Texas
             </Link>{" "}
-            (16.9K &rarr; 45.2K impressions). We deploy this same system across{" "}
-            <Link href="/locations/texas/sugar-land" className="font-bold text-neutral-950 underline">
-              Sugar Land &amp; The Woodlands (TX)
-            </Link>
-            ,{" "}
-            <Link href="/locations/michigan/detroit" className="font-bold text-neutral-950 underline">
-              Detroit &amp; Grand Rapids (MI)
-            </Link>
-            ,{" "}
-            <Link href="/locations/pennsylvania/philadelphia" className="font-bold text-neutral-950 underline">
-              Philadelphia (PA)
-            </Link>
-            , and nationwide.
+            (16.9K &rarr; 45.2K impressions). We deploy this same system for local service businesses across the United States.
           </>
         }
         bullets={[
           {
             label: "#1 USA Local Mastery",
-            detail: (
-              <>
-                #1 Ranked Local SEO Mastery in{" "}
-                <Link href="/locations/ohio/cleveland" className="underline font-semibold">
-                  Cleveland, Ohio (USA)
-                </Link>{" "}
-                + 5+ years founder execution.
-              </>
-            ),
+            detail: "#1 Ranked Local SEO Mastery in Cleveland, Ohio (USA) + 5+ years founder execution.",
           },
           {
             label: "Verified AI Overview Proof",
@@ -321,7 +293,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         serviceType="local-seo"
         heading="We Know You Are Tired of Quiet Phones & Idle Crews — Diagnose Your Local SEO Here"
         answerCapsule="Describe your Google Business Profile or local ranking problem below to discover why competitors are taking your 'near me' phone calls and how we move your business into the Map Pack Top 3 and AI Overviews—starting with a 7-Day Free Trial."
-        placeholder="e.g. Our business in Cleveland, Sugar Land, or Detroit is buried at #8 in Google Maps..."
+        placeholder="e.g. Our local service business is buried at #8 in Google Maps and not showing in AI Overviews..."
         painChips={[
           "Buried outside the Google Maps Top 3 for 'near me' searches",
           "Google Business Profile suspended or stuck in video verification",
@@ -510,12 +482,6 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
           />
         </div>
       </Band>
-
-      {/* INTERACTIVE USA MAP EMBED + PINPOINTED STATES & CITIES */}
-      <ServiceUsaMapAndMarkets
-        serviceName="Local SEO Services"
-        answerCapsule="SearchPrex delivers founder-led Local SEO across 9 core US states and 22+ pinpointed metropolitan and suburban hubs—led by our #1 ranked Local SEO mastery in Cleveland, Ohio, and expanding across Sugar Land and The Woodlands (TX), Katy/Plano/Denton (TX), Detroit and Grand Rapids (MI), Philadelphia (PA), Tempe and Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas."
-      />
 
       {/* SEMANTIC LONG-TAIL KEYWORD CLUSTERS + CONTEXTUAL INTERNAL LINKING MATRIX */}
       <ServiceSemanticClusterAndLinks

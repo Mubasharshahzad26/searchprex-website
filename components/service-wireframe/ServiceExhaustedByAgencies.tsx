@@ -17,6 +17,7 @@ import {
 interface ServiceExhaustedByAgenciesProps {
   serviceLabel: string;
   answerCapsule: string;
+  showLocationLink?: boolean;
 }
 
 const AGENCY_DIFFERENCES = [
@@ -57,6 +58,7 @@ const AGENCY_DIFFERENCES = [
 export default function ServiceExhaustedByAgencies({
   serviceLabel,
   answerCapsule,
+  showLocationLink = false,
 }: ServiceExhaustedByAgenciesProps) {
   return (
     <section
@@ -138,9 +140,13 @@ export default function ServiceExhaustedByAgencies({
                 We do not guess what works in competitive US markets. SearchPrex holds{" "}
                 <strong className="text-neutral-950">
                   #1 ranked local search authority in{" "}
-                  <Link href="/locations/ohio/cleveland" className="underline hover:text-neutral-700">
-                    Cleveland, Ohio (USA)
-                  </Link>
+                  {showLocationLink ? (
+                    <Link href="/locations/ohio/cleveland" className="underline hover:text-neutral-700">
+                      Cleveland, Ohio (USA)
+                    </Link>
+                  ) : (
+                    <span>Cleveland, Ohio (USA)</span>
+                  )}
                 </strong>{" "}
                 and brings over <strong className="text-neutral-950">5+ years of hands-on mastery</strong> across{" "}
                 <Link href="/services/law-firm-seo" className="font-bold text-neutral-950 underline">

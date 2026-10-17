@@ -35,7 +35,7 @@ interface ServiceAiDiagnosisAndTrialProps {
   trialDeliverablesRight: string[];
 }
 
-const US_MARKET_OPTIONS = [
+const LAW_FIRM_US_MARKET_OPTIONS = [
   "Cleveland, Ohio (OH)",
   "Sugar Land, Texas (TX)",
   "The Woodlands, Texas (TX)",
@@ -47,7 +47,14 @@ const US_MARKET_OPTIONS = [
   "Baton Rouge / Shreveport, Louisiana (LA)",
   "Albuquerque, New Mexico (NM)",
   "Wichita / Overland Park / Kansas City (KS)",
-  "National USA / Other US State",
+  "Other US State / City (Law Firm SEO)",
+];
+
+const GENERAL_USA_SCOPE_OPTIONS = [
+  "United States — Nationwide (All 50 States)",
+  "United States — Single-Metro Local Market",
+  "United States — Multi-Location / Regional Brand",
+  "United States — Direct-to-Consumer (DTC) / Online Catalog",
 ];
 
 export default function ServiceAiDiagnosisAndTrial({
@@ -62,6 +69,8 @@ export default function ServiceAiDiagnosisAndTrial({
   trialDeliverablesLeft,
   trialDeliverablesRight,
 }: ServiceAiDiagnosisAndTrialProps) {
+  const marketOptions =
+    serviceType === "law-firm-seo" ? LAW_FIRM_US_MARKET_OPTIONS : GENERAL_USA_SCOPE_OPTIONS;
   const [query, setQuery] = useState("");
   const [selectedChips, setSelectedChips] = useState<string[]>(painChips.slice(0, 2));
   const [items, setItems] = useState<DiagnosticItem[]>(initialItems);
@@ -71,7 +80,7 @@ export default function ServiceAiDiagnosisAndTrial({
 
   // "Tell Us What You Are Looking For" + 7-Day Free Trial Form State
   const [selectedGoals, setSelectedGoals] = useState<string[]>(lookingForOptions.slice(0, 2));
-  const [targetMarket, setTargetMarket] = useState(US_MARKET_OPTIONS[0]);
+  const [targetMarket, setTargetMarket] = useState(marketOptions[0]);
   const [trialName, setTrialName] = useState("");
   const [trialWebsite, setTrialWebsite] = useState("");
   const [trialEmail, setTrialEmail] = useState("");
@@ -443,7 +452,9 @@ export default function ServiceAiDiagnosisAndTrial({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor={`market-${serviceType}`} className="block text-xs font-bold text-slate-200 mb-1.5">
-                      2. Your Target USA State / City Market
+                      {serviceType === "law-firm-seo"
+                        ? "2. Your Target USA State / City Market"
+                        : "2. Your USA Market Scope"}
                     </label>
                     <select
                       id={`market-${serviceType}`}
@@ -451,7 +462,7 @@ export default function ServiceAiDiagnosisAndTrial({
                       onChange={(e) => setTargetMarket(e.target.value)}
                       className="w-full rounded-xl border border-white/20 bg-neutral-900 px-4 py-3 text-sm text-white focus:border-white focus:outline-none"
                     >
-                      {US_MARKET_OPTIONS.map((m) => (
+                      {marketOptions.map((m) => (
                         <option key={m} value={m} className="bg-neutral-900 text-white">
                           {m}
                         </option>
@@ -468,7 +479,11 @@ export default function ServiceAiDiagnosisAndTrial({
                       type="text"
                       value={customNeed}
                       onChange={(e) => setCustomNeed(e.target.value)}
-                      placeholder="e.g. Need more Family Law / PI calls in Sugar Land or Cleveland"
+                      placeholder={
+                        serviceType === "law-firm-seo"
+                          ? "e.g. Need more Family Law / Criminal Defense / PI calls in Cleveland or Sugar Land"
+                          : "e.g. Need more indexed pages, Map Pack calls, or organic revenue in the USA"
+                      }
                       className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-white focus:outline-none"
                     />
                   </div>

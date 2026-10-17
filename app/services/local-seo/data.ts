@@ -29,8 +29,8 @@ export const CAPSULES: QA[] = [
 
 export const FAQS: QA[] = [
   {
-    q: "How do you rank service-area businesses in US suburbs like Sugar Land (TX), The Woodlands (TX), and Cleveland (OH) suburbs?",
-    a: "When your physical office or shop is in one city (such as Cleveland, Sugar Land, or Detroit) and you dispatch crews to surrounding suburbs (such as Lakewood, Parma, Katy, The Woodlands, or Dearborn), a single homepage cannot rank everywhere. We pair your Google Business Profile service-area configuration with dedicated, non-duplicate city and neighborhood pages containing local project proof and LocalBusiness JSON-LD.",
+    q: "How do you rank service-area businesses in surrounding US suburbs when you only have one physical address?",
+    a: "When your physical office or shop is in one city and you dispatch crews to surrounding suburbs across your county or metro area, a single homepage cannot rank everywhere. We pair your Google Business Profile service-area configuration with dedicated, non-duplicate city and neighborhood pages containing local project proof and LocalBusiness JSON-LD.",
   },
   {
     q: "What is Answer Engine Optimization (AEO) and AI Overview SEO for a local business?",
@@ -77,7 +77,7 @@ export const PROBLEMS: Array<{ title: string; check: string; costs: string }> = 
   },
   {
     title: "No dedicated page for the service or the US suburb you serve",
-    check: "Search “[your service] [your city/suburb]” (e.g. Cleveland, Sugar Land, The Woodlands, Detroit) and check if your site has a dedicated page.",
+    check: "Search “[your service] [your city or suburb]” and check if your site has a dedicated page matching that local query.",
     costs: "Without a dedicated service-area page, Google and AI Overviews have nothing on your website to match the local searcher's intent.",
   },
 ];

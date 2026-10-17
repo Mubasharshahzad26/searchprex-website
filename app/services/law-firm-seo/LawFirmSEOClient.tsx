@@ -2,22 +2,19 @@
 
 // app/services/law-firm-seo/LawFirmSEOClient.tsx
 //
-// USA Market Focus + AEO / GEO / ChatGPT-Friendly Architecture (Oct 2026).
+// Streamlined, Semrush-Style USA Law Firm SEO Page (Oct 2026).
 // Zero emojis — clean Lucide vector icons only.
 //
-// The honesty rule that governs this page (see ./data.ts): SearchPrex has not
-// completed a law firm engagement, so no legal result is claimed anywhere.
-// Every screenshot here is from another industry and is labelled as such. Law
-// firm pages also answer to ABA Model Rule 7.1 on misleading communications —
-// no position, no timeline and no guaranteed outcome is promised.
+// Honesty & ABA Model Rule 7.1 Governance: SearchPrex has not completed a
+// published law firm engagement yet, so no fabricated legal result is claimed.
+// Every proof screenshot is from another local/ecommerce industry and labelled
+// clearly as such.
 
 import Link from "next/link";
-import { Scale, Zap, FileText, Wrench } from "lucide-react";
+import { Zap, FileText, Wrench } from "lucide-react";
 
-import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
-import ProofImage from "@/components/ProofImage";
 import LawFirmStack from "@/components/LawFirmStack";
 import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant";
 import type { Guide } from "@/lib/guides";
@@ -28,85 +25,27 @@ import {
   Band,
   BandIntro,
   CheckList,
-  CheckPanel,
   Eyebrow,
   FaqBand,
   GuaranteeCard,
   H2,
   Lead,
-  MarketsBand,
   PriceCard,
-  ProofPanel,
-  RealityBanner,
-  RuleGrid,
-  RuleItem,
-  ServiceHero,
-  Steps,
-  TextLink,
-  WhiteButton,
 } from "@/components/ServiceBands";
 
 import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTaglineReliefBar";
+import LawFirmSemrushHero from "@/components/service-wireframe/LawFirmSemrushHero";
 import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
+import LawFirmReliefVideoSection from "@/components/service-wireframe/LawFirmReliefVideoSection";
 import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
 import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
 import ServiceUsaMapAndMarkets from "@/components/service-wireframe/ServiceUsaMapAndMarkets";
 import ServiceSemanticClusterAndLinks from "@/components/service-wireframe/ServiceSemanticClusterAndLinks";
 
-import { CAPSULES, FAQS, PROBLEMS } from "./data";
+import { CAPSULES, FAQS } from "./data";
 
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
-const SOURCE = "service:law-firm-seo";
 const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
-
-const included = [
-  { title: "Practice-area & US city pages", body: "A dedicated page for each practice area (Family Law SEO, Criminal Defense SEO, Personal Injury SEO, Probate) and each US city or county venue you serve.", href: "#practice-areas" },
-  { title: "Attorney E-E-A-T & YMYL signals", body: "State bar admission numbers, court jurisdictions, real photos, and LegalService schema so Google and ChatGPT can verify who stands behind the advice.", href: "#ymyl" },
-  { title: "Google Business Profile & Map Pack", body: "Practice-specific primary categories, service-item mapping, virtual office risk remediation, and a bar-compliant review workflow.", href: "/services/law-firm-seo/google-business-profile-for-lawyers" },
-  { title: "Technical SEO & AI crawlers", body: "Core Web Vitals (INP), crawl budget, LegalService/Attorney/FAQPage JSON-LD, and llms.txt entity architecture.", href: "/services/technical-seo" },
-  { title: "Verified legal authority", body: "State bar directories, Avvo, Justia, FindLaw, and local chamber/civic alignment — never toxic DA/PA link packages.", href: "#profile" },
-  { title: "AEO, GEO & Monday reports", body: "45–60 word Answer Capsules that AI Overviews and ChatGPT cite, paired with a plain-English Monday report on clicks, calls, and forms.", href: "#ymyl" },
-];
-
-const practiceChecks = [
-  "One dedicated page per practice area (Family Law, Criminal Defense, Personal Injury, Estate Planning) per US city",
-  "45–60 word AI Overview Answer Capsule right below the H2 heading answering what happens next",
-  "Verified attorney byline with state bar admission year, bar number, and local court jurisdictions",
-  "Clear explanation of fees, free consultations, and state statutory deadlines without overpromising",
-  "Tappable click-to-call phone number and 24/7 intake form above the fold on mobile",
-  "Strict compliance with ABA Model Rule 7.1 and state bar rules — no 'best lawyer' or guaranteed outcomes",
-];
-
-const ymylItems = [
-  { title: "Attorney E-E-A-T", body: "Legal content is a Your-Money-Your-Life (YMYL) topic. State bar credentials, court jurisdictions, and real attorney attribution go on every page." },
-  { title: "AI Overview citations", body: "Google AI Overviews answer statutory and local legal questions above traditional links. Structured 45–60 word Answer Capsules make your firm the cited source." },
-  { title: "ChatGPT & Perplexity GEO", body: "Prospective US clients ask ChatGPT and Perplexity which attorney to call. Entity-linked LegalService schema and llms.txt files feed those models." },
-  { title: "People-first statutory copy", body: "Every page addresses real client anxiety, county courthouse procedures, and statutory timelines — never thin keyword-stuffed filler." },
-];
-
-const profileChecks = [
-  "Primary category matches your core practice (e.g. Family Law Attorney, Criminal Justice Attorney, Personal Injury Attorney)",
-  "Every sub-practice area mapped as a structured service inside Google Business Profile",
-  "Staffed physical office address, suite number, hours, and phone identical to your website and state bar record",
-  "Authentic client reviews requested through a bar-compliant post-matter workflow",
-  "Legal directory citations (State Bar, Avvo, Justia, Super Lawyers) reconciled to the exact character",
-  "Direct phone calls, direction requests, and consultation clicks tracked every Monday",
-];
-
-const process = [
-  { when: "Days 1–7", title: "7-Day Free Trial & Tear-Down", body: "Your firm URL in, a written tear-down within 24 hours, plus 7 days of initial technical, schema, and GBP quick-win execution at zero cost." },
-  { when: "Weeks 1–2", title: "US Venue & Competitor Audit", body: "Your website, Google Business Profile, and top 3 local Map Pack competitors mapped across your city and county courts." },
-  { when: "Weeks 3–8", title: "Practice & City Silos Live", body: "Technical fixes, LegalService & Attorney JSON-LD schema, GBP category alignment, and practice-area city pages published." },
-  { when: "Every Monday", title: "Full Stat & Lead Report", body: "No partial reporting: live Google Search Console clicks, Map Pack positions, phone calls, and consultation forms reviewed every Monday." },
-];
-
-const partnershipPoints = [
-  "One firm per US city and practice area — we never rank a local competitor against you",
-  "#1 Ranked in Cleveland, Ohio USA Local SEO Mastery applied directly to your legal market",
-  "Direct access to Founder Mubashar Sharif (5+ years SEO mastery) — zero junior hand-offs",
-  "Full weekly Monday Google Search Console and call-tracking discussions — no vanity DA/PA games",
-  "Built to Google YMYL and ABA Model Rule 7.1 standards at every step",
-];
 
 const LAW_SEMANTIC_CLUSTERS = [
   {
@@ -171,55 +110,47 @@ const LAW_SEMANTIC_CLUSTERS = [
   },
 ];
 
-// `guide` is still passed by page.tsx; the checklist is linked from the practice-area band.
 export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
   return (
     <main>
-      {/* EMPATHETIC RELIEF TAGLINE BAR */}
+      {/* 1. EMPATHETIC RELIEF TAGLINE BAR */}
       <ServiceTaglineReliefBar
         message="We are here to provide you a source of relief — we know your pain, and we have the solution."
         subText="#1 Ranked in Cleveland, OH USA Local SEO Mastery · 5+ Years Experience · 7-Day Free Trial"
       />
 
-      <ServiceHero
-        crumb="Law Firm SEO"
-        above={
-          <div className="mt-4 overflow-x-auto border-y bg-slate-50" style={{ borderColor: "#e5e7eb" }}>
-            <nav className="mx-auto flex max-w-6xl space-x-6 px-4 py-3 text-sm font-medium sm:px-6 lg:px-8" aria-label="Practice areas">
-              <span className="whitespace-nowrap font-bold text-[#171717]">Overview</span>
-              {INDUSTRY_PAGES.map((ind) => (
-                <Link
-                  key={ind.slug}
-                  href={`/services/law-firm-seo/${ind.slug}`}
-                  className="whitespace-nowrap text-slate-500 transition-colors hover:text-slate-900"
-                >
-                  {ind.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        }
-        eyebrow="USA Law Firm SEO · AEO & GEO Services"
-        title="Law Firm SEO Services in the USA"
-        accent="that bring in signed cases"
-        subtitle="We are here to provide you a source of relief — we know your pain, and we have the solution. Stop burning $150–$300+ per click on Google Ads. We engineer Family Law SEO, Criminal Defense SEO, Personal Injury SEO, and Estate Planning pages built to YMYL and ABA Model Rule 7.1 standards across major US states and cities."
-        primary={{ href: "#7-day-trial", label: "Start 7-Day Free Trial" }}
-        secondary={{ href: "#diagnose", label: "Diagnose My Law Firm SEO" }}
-        trustPoints={["One firm per US city", "5+ years founder mastery", "7-Day Free Trial + 90-day guarantee"]}
-        aside={
-          <ArticleLeadMagnet
-            variant="sidebar"
-            source={SOURCE}
-            copy={{
-              headline: "Free law firm tear-down + 7-Day Trial",
-              sub: "Send your URL. I’ll check your practice-area pages, Business Profile and the firms outranking you in your US city — within 24 hours.",
-            }}
-          />
-        }
-      />
+      {/* PRACTICE-AREA QUICK NAVIGATION BAR */}
+      <div className="overflow-x-auto border-b border-slate-800 bg-[#070b15]">
+        <nav
+          className="mx-auto flex max-w-6xl items-center space-x-6 px-4 py-2.5 text-xs font-semibold sm:px-6 lg:px-8"
+          aria-label="Practice areas"
+        >
+          <span className="whitespace-nowrap font-black text-emerald-400 uppercase tracking-wider">
+            Practice Silos:
+          </span>
+          {INDUSTRY_PAGES.map((ind) => (
+            <Link
+              key={ind.slug}
+              href={`/services/law-firm-seo/${ind.slug}`}
+              className="whitespace-nowrap text-slate-300 transition-colors hover:text-white"
+            >
+              {ind.name}
+            </Link>
+          ))}
+          <Link
+            href="/services/law-firm-seo/google-business-profile-for-lawyers"
+            className="whitespace-nowrap text-sky-300 transition-colors hover:text-white"
+          >
+            GBP for Lawyers
+          </Link>
+        </nav>
+      </div>
+
+      {/* 2. SEMRUSH-STYLE ANIMATED HERO + FLOATING UI ELEMENTS + COMPRESSED WEBP DASHBOARD */}
+      <LawFirmSemrushHero />
 
       {/* 2026 CONFIRMED LEGAL TELEMETRY & PLAYBOOK BADGE — ZERO EMOJIS */}
-      <section className="border-b bg-amber-50/70 px-4 py-4 sm:px-6 lg:px-8" style={{ borderColor: "#fde68a" }}>
+      <section className="border-b bg-amber-50/70 px-4 py-3.5 sm:px-6 lg:px-8" style={{ borderColor: "#fde68a" }}>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-600 text-white">
@@ -253,7 +184,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         </div>
       </section>
 
-      {/* AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX */}
+      {/* 3. AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX */}
       <ServiceQuickAnswerBox
         eyebrow="Answer Engine (AEO) & Generative Engine Optimization (GEO) Summary"
         h2="How Does Law Firm SEO Work for US Attorneys in 2026?"
@@ -329,9 +260,13 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
           },
         ]}
         complianceBadge="ABA Model Rule 7.1 & Google YMYL Aligned"
+        showLocationLink={true}
       />
 
-      {/* INTERACTIVE GEMINI AI DIAGNOSTIC BAR + "TELL US WHAT YOU ARE LOOKING FOR" + 7-DAY FREE TRIAL FORM */}
+      {/* 4. 9-SECOND INTERACTIVE RELIEF VIDEO + ATTORNEY BURNOUT VISUAL & CORE PAIN CHECKS */}
+      <LawFirmReliefVideoSection />
+
+      {/* 5. INTERACTIVE GEMINI AI DIAGNOSTIC BAR + "TELL US WHAT YOU ARE LOOKING FOR" + 7-DAY FREE TRIAL FORM */}
       <ServiceAiDiagnosisAndTrial
         serviceType="law-firm-seo"
         heading="We Know You Are Stressed by Rising Ad Costs & Quiet Phones — Diagnose Your Law Firm SEO Here"
@@ -390,126 +325,21 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         ]}
       />
 
-      {/* No law firm case study yet, so these are local service businesses and
-          the footnote says so in plain words. */}
-      <ServiceProofStrip
-        id="proof"
-        title="Local results from the same method I'd use for your firm"
-        moreHref="/case-studies"
-        moreLabel="See every case study"
-        shots={[
-          {
-            src: "/images/proof/local-dolls-gsc-comparison.jpg",
-            alt: "Google Search Console comparison for D.O.L.L.S. Cleaning: 264 clicks and 106K impressions in July 2025 against 192 clicks and 41K impressions in June 2025.",
-            width: 626,
-            height: 239,
-            figure: "192 → 264",
-            figureLabel: "monthly clicks, June → July 2025",
-            caption: "D.O.L.L.S. Cleaning, Michigan — Search Console. Impressions went from 41K to 106K.",
-          },
-          {
-            src: "/images/proof/local-hvac-ai-overview.png",
-            alt: "Google AI Overview for 'free cost estimation for ac installation in simi valley california' naming HVAC Services Team among businesses offering free estimates.",
-            width: 717,
-            height: 292,
-            caption: "HVAC Services Team named in Google's AI Overview for a Simi Valley AC installation search.",
-          },
-        ]}
-        footnote="These are local service businesses, not law firms — there is no published law firm case study on this site yet. The map pack and AI Overview work behind them is the same work I do for firms."
+      {/* 6. INTERACTIVE USA MAP EMBED + VISUAL WEBP CITY CARDS (CLEVELAND, SUGAR LAND, THE WOODLANDS) */}
+      <ServiceUsaMapAndMarkets
+        serviceName="Law Firm SEO Services"
+        answerCapsule="SearchPrex delivers one-firm-per-city Law Firm SEO across 9 core US states and 22+ pinpointed metropolitan and suburban venues—anchored by our #1 ranked Local SEO mastery in Cleveland, Ohio, and expanding across Sugar Land and The Woodlands (TX), Detroit and Grand Rapids (MI), Philadelphia (PA), Tempe and Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas."
       />
 
-      {/* EXHAUSTED BY PREVIOUS SEO AGENCIES? SEE HOW WE ARE DIFFERENT */}
+      {/* 7. EXHAUSTED BY PREVIOUS SEO AGENCIES? + ABA CHANNEL COMPARISON TABLE */}
       <ServiceExhaustedByAgencies
         serviceLabel="USA Law Firm SEO"
         answerCapsule="Managing partners leave traditional legal marketing agencies because of partial monthly PDFs, junior account hand-offs, and useless Domain Authority (DA/PA) backlink metrics. SearchPrex gives you direct access to Founder Mubashar Sharif (5+ years mastery), #1 ranked Cleveland OH local SEO authority, weekly Monday consultation reports, and a 7-Day Free Trial."
+        showLocationLink={true}
       />
 
-      {/* THE PROBLEM */}
       <Band>
-        <BandIntro
-          center={false}
-          eyebrow="The problem"
-          title="Why good US law firms lose signed cases to worse competitors"
-          lead="In competitive US legal markets, four specific failure modes drain your consultation pipeline. Each one is costing your firm retainers today if it fails."
-        />
-        <RealityBanner
-          src="/images/audiences/lawyer-ppc-fatigue.webp"
-          alt="Attorney at law firm reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night"
-          tag="The Reality · PPC Budget Burnout"
-          quote="“Another $150 click that turned into a price-shopper who hung up in 30 seconds.”"
-          body="Every click on Google Ads is paid for, every single month. When you pause the campaign, the inquiries stop immediately. Practice-area and US city pages keep bringing qualified Family Law, Criminal Defense, and Personal Injury consultations long after the work is done."
-        />
-        <RuleGrid columns={2}>
-          {PROBLEMS.map((p) => (
-            <RuleItem
-              key={p.title}
-              icon={<Scale className="h-5 w-5 flex-shrink-0 text-[#b8123a]" aria-hidden />}
-              title={p.title}
-              body={
-                <>
-                  <p className="text-[#374151]"><strong>Check:</strong> {p.check}</p>
-                  <p className="mt-1">{p.costs}</p>
-                </>
-              }
-            />
-          ))}
-        </RuleGrid>
-      </Band>
-
-      {/* WHAT'S INCLUDED */}
-      <Band dark>
-        <BandIntro
-          dark
-          eyebrow="What’s included"
-          title="What a complete USA law firm SEO, AEO & GEO plan covers"
-          lead="Legal search is judged under Google's strictest Your-Money-Your-Life (YMYL) standards. Every deliverable is built around verifiable attorney credentials, county venue accuracy, and ABA Model Rule 7.1 compliance."
-        />
-        <RuleGrid>
-          {included.map((i) => (
-            <RuleItem key={i.title} dark {...i} />
-          ))}
-        </RuleGrid>
-      </Band>
-
-      {/* PRACTICE AREAS + SEMANTIC H2 ANSWER CAPSULE + COMPARISON TABLE */}
-      <Band id="practice-areas">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-          <div>
-            <Eyebrow>Practice-area &amp; US city pages</Eyebrow>
-            <H2>One dedicated page for every caseload you want, in every US city you serve</H2>
-            <p className="mt-4 rounded-2xl border-l-4 border-l-neutral-900 bg-slate-50 p-4 text-sm font-semibold text-neutral-900 leading-relaxed">
-              A single umbrella “Practice Areas” page cannot rank for “Family Law Attorney Sugar Land TX”, “Criminal Defense Lawyer Cleveland OH”, and “Personal Injury Attorney Detroit MI” simultaneously. We build dedicated practice-by-city silos mapped to state statutes and local county courthouses.
-            </p>
-            <Lead>
-              Each page opens with a plain-English 45–60 word Answer Capsule for prospective clients and AI Overviews, cites verified state bar credentials, and links directly into your local courthouse venue.
-            </Lead>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {INDUSTRY_PAGES.map((ind) => (
-                <Link
-                  key={ind.slug}
-                  href={`/services/law-firm-seo/${ind.slug}`}
-                  className="rounded-full border border-[#d9d6f3] px-4 py-2 text-sm font-bold text-[#0a0a0a] transition hover:border-[#171717] hover:text-[#171717]"
-                >
-                  {ind.name} SEO
-                </Link>
-              ))}
-            </div>
-            <TextLink href="/resources/law-firm-seo-audit-checklist">Run the 40-check law firm SEO audit yourself — free, no email</TextLink>
-            <p className="mt-3 text-sm" style={{ color: "#5b6472" }}>
-              Planning new practice pages?{" "}
-              <Link href="/blog/keyword-research-for-law-firms" className="font-semibold underline" style={{ color: "#171717" }}>
-                Keyword research for law firms
-              </Link>{" "}
-              ·{" "}
-              <Link href="/law-firm-scorecard" className="font-semibold underline" style={{ color: "#171717" }}>
-                Free Law Firm SEO Scorecard
-              </Link>
-            </p>
-          </div>
-          <CheckPanel title="What every US practice-area page needs" items={practiceChecks} />
-        </div>
-
-        <div className="mx-auto mt-14 max-w-5xl">
+        <div className="mx-auto max-w-5xl">
           <ComparisonTable
             caption="How USA Law Firm Acquisition Channels Compare (ABA Model Rule 7.1 Compliant Overview)"
             columns={[
@@ -555,13 +385,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         </div>
       </Band>
 
-      {/* INTERACTIVE USA MAP EMBED + PINPOINTED STATES & CITIES */}
-      <ServiceUsaMapAndMarkets
-        serviceName="Law Firm SEO Services"
-        answerCapsule="SearchPrex delivers one-firm-per-city Law Firm SEO across 9 core US states and 22+ pinpointed metropolitan and suburban venues—anchored by our #1 ranked Local SEO mastery in Cleveland, Ohio, and expanding across Sugar Land and The Woodlands (TX), Detroit and Grand Rapids (MI), Philadelphia (PA), Tempe and Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas."
-      />
-
-      {/* SEMANTIC LONG-TAIL KEYWORD CLUSTERS + CONTEXTUAL INTERNAL LINKING MATRIX */}
+      {/* 8. SEMANTIC LONG-TAIL KEYWORD CLUSTERS + LIVE 24/7 AI LEGAL INTAKE DEMO */}
       <ServiceSemanticClusterAndLinks
         eyebrow="USA Legal Search Psychology · Low-Hanging Long-Tail Keywords"
         h2="High-Intent Legal Keyword Clusters & Contextual Internal Linking Architecture"
@@ -569,105 +393,51 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         clusters={LAW_SEMANTIC_CLUSTERS}
       />
 
-      {/* YMYL & AI ANSWERS */}
-      <Band dark id="ymyl">
-        <BandIntro
-          dark
-          eyebrow="Trust & AI answers (AEO / GEO)"
-          title="Legal SEO built for Google AI Overviews, ChatGPT & YMYL scrutiny"
-          lead="Google holds legal topics to its highest trust bar, and AI Overviews now answer legal questions directly above the search results. Here is how your firm stays visible wherever US clients look."
-        />
-        <RuleGrid columns={4}>
-          {ymylItems.map((c) => (
-            <RuleItem key={c.title} dark {...c} />
-          ))}
-        </RuleGrid>
-      </Band>
-
-      {/* GOOGLE BUSINESS PROFILE */}
-      <Band id="profile">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-          <div>
-            <Eyebrow>Google Business Profile &amp; local pack</Eyebrow>
-            <H2>Win the Google Map Pack for “lawyer near me” in your US city</H2>
-            <p className="mt-4 rounded-2xl border-l-4 border-l-neutral-900 bg-slate-50 p-4 text-sm font-semibold text-neutral-900 leading-relaxed">
-              For urgent local legal searches—such as “family law lawyer near me”, “criminal defense attorney Cleveland”, or “personal injury lawyer Sugar Land”—the Google Map Pack captures the call before organic links. We align your primary GBP category, state bar citations, and review velocity with the top 3 firms in your county.
-            </p>
-            <Lead>
-              I compare your Business Profile directly against the three firms ranking above you in your city, so every category, service item, and citation change has a clear engineering reason behind it.
-            </Lead>
-            <TextLink href="/services/law-firm-seo/google-business-profile-for-lawyers">Google Business Profile for lawyers guide</TextLink>
-          </div>
-          <CheckPanel items={profileChecks} />
-        </div>
-      </Band>
-
-      {/* PROCESS */}
-      <Band dark id="approach">
-        <BandIntro dark eyebrow="How it works" title="From 7-Day Free Trial to signed consultations" />
-        <Steps steps={process} cta={{ href: "#7-day-trial", label: "Start my 7-Day Free Trial & Tear-Down" }} />
-      </Band>
-
-      {/* LIVE INTAKE DEMO */}
       <Band muted id="intake-demo">
         <BandIntro
-          eyebrow="Live demo · AI intake assistant"
-          title="Getting found is half the battle. Capturing every legal lead is the other half."
-          lead="A 2 a.m. Criminal Defense, Family Law, or Personal Injury call that goes to voicemail is a signed retainer lost. Test our 24/7 intake assistant below and watch how it qualifies the case in seconds."
+          eyebrow="Live demo · 24/7 AI legal intake assistant"
+          title="Getting found is half the battle. Capturing every 2 a.m. legal caller is the other half."
+          lead="An urgent Criminal Defense, Family Law, or Personal Injury inquiry that hits voicemail is a signed retainer lost to the next firm on Google Maps. Test our 24/7 legal intake assistant below."
         />
-        <div className="mx-auto mt-10 max-w-4xl">
+        <div className="mx-auto mt-8 max-w-4xl">
           <IntakeAssistant embedded />
         </div>
       </Band>
 
-      {/* FIRST LAW FIRM CASE STUDY */}
-      <Band dark>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center [&>*]:min-w-0">
-          <div>
-            <Eyebrow dark>Selective USA law firm partnerships</Eyebrow>
-            <H2 dark>Be my first published law firm case study</H2>
-            <Lead dark>
-              I have verified results in US local, ecommerce and technical SEO — including #1 ranked local SEO mastery in Cleveland, Ohio and local service businesses named first in Google’s AI Overviews. I am bringing that exact engineering method to law firms, one firm per US city.
-            </Lead>
-            <div className="mt-8">
-              <CheckList dark items={partnershipPoints} />
-            </div>
-            <div className="mt-8">
-              <WhiteButton href="#7-day-trial">Claim your 7-Day Free Trial &amp; Tear-Down</WhiteButton>
-            </div>
-            <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>
-              No obligation · reply within 24 hours · written personally by Founder Mubashar Sharif
-            </p>
-          </div>
-          <ProofPanel>
-            <ProofImage
-              src="/images/proof/local-dolls-ai-overview-rank1.png"
-              alt="Google results for 'post construction cleaning in Chesterfield, MI' showing D.O.L.L.S. Cleaning cited first in the AI Overview and ranking first organically."
-              width={628}
-              height={322}
-              stage="Local service business · not a law firm"
-              caption="Named first in the AI Overview, #1 organic"
-            />
-            <ProofImage
-              src="/images/proof/mso-gsc-indexing-full.png"
-              alt="Google Search Console Pages report for Michigan Outdoor Sports: about 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026."
-              width={778}
-              height={520}
-              stage="Ecommerce · not a law firm"
-              caption="About 3,000 → 11,549 pages indexed, May–Jul 2026"
-            />
-          </ProofPanel>
-        </div>
-      </Band>
+      {/* 9. VERIFIED PROOF STRIP (WITH HONEST NON-LEGAL DISCLOSURE) + TRANSPARENT PRICING & FOUNDER E-E-A-T */}
+      <ServiceProofStrip
+        id="proof"
+        title="Local & AI Overview results from the exact method I apply to law firms"
+        moreHref="/case-studies"
+        moreLabel="See every verified case study"
+        shots={[
+          {
+            src: "/images/proof/local-dolls-gsc-comparison.jpg",
+            alt: "Google Search Console comparison for D.O.L.L.S. Cleaning: 264 clicks and 106K impressions in July 2025 against 192 clicks and 41K impressions in June 2025.",
+            width: 626,
+            height: 239,
+            figure: "192 → 264",
+            figureLabel: "monthly clicks, June → July 2025",
+            caption: "D.O.L.L.S. Cleaning, Michigan — Search Console. Impressions grew from 41K to 106K.",
+          },
+          {
+            src: "/images/proof/local-hvac-ai-overview.png",
+            alt: "Google AI Overview for 'free cost estimation for ac installation in simi valley california' naming HVAC Services Team among businesses offering free estimates.",
+            width: 717,
+            height: 292,
+            caption: "HVAC Services Team named in Google's AI Overview for a Simi Valley AC installation search.",
+          },
+        ]}
+        footnote="Honesty & ABA Rule 7.1 Disclosure: These screenshots are from US local service businesses, not law firms — there is no published law firm case study on this site yet. The Map Pack, technical, and AI Overview engineering behind them is the exact system we execute for law firms."
+      />
 
-      {/* PRICE, GUARANTEE & WHO DOES THE WORK */}
       <Band>
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <Eyebrow>Why SearchPrex</Eyebrow>
+            <Eyebrow>Transparent Pricing &amp; Exclusivity</Eyebrow>
             <H2>One law firm per US city, one founder doing the actual engineering</H2>
             <Lead>
-              You work directly with the strategist who builds your practice-area pages, writes your LegalService schema, and manages your Google Business Profile. Every recommendation is built for your US county venue, your caseload goals, and the firms you compete against.
+              You work directly with Founder Mubashar Sharif—who builds your practice-area pages, writes your LegalService schema, and manages your Google Business Profile. Every recommendation is engineered for your county court venue and caseload goals.
             </Lead>
             <div className="mt-8">
               <CheckList
@@ -705,33 +475,14 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         </div>
       </Band>
 
-      {/* MARKETS — the /locations pages name this page as their parent */}
-      <MarketsBand
-        title="USA Law Firm SEO in the states and cities I already cover"
-        lead="Each US city page covers that market’s county courts, state statutory search intent, and local Map Pack competition. Not on the list? The 7-Day Free Trial and tear-down work for any US city."
-      />
-
-      {/* LAW FIRM BLOG TEASER */}
+      {/* 10. LAW FIRM BLOG TEASER + FAQS + STACK */}
       <ServiceBlogTeaser topic="law-firm" />
 
-      {/* FAQ — page.tsx builds the FAQPage schema from the same arrays */}
       <FaqBand title="USA Law Firm SEO, AEO & GEO questions, answered">
         <FaqList faqs={[...CAPSULES, ...FAQS]} name="law-firm-seo-faq" />
       </FaqBand>
 
-      {/* SearchPrex × Codeloci — relevant only to law firms */}
       <LawFirmStack />
-
-      <div id="get-started">
-        <ArticleLeadMagnet
-          variant="bottom"
-          source={SOURCE}
-          copy={{
-            headline: "Send me your URL. I’ll show you who’s taking your cases.",
-            sub: "Two fields. A written look at your practice pages, Business Profile and the firms outranking you in your US city — from me, within 24 hours.",
-          }}
-        />
-      </div>
     </main>
   );
 }

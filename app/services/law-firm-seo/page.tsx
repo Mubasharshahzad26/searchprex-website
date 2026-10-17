@@ -119,6 +119,28 @@ export default function LawFirmSEOPage() {
         ],
       },
       {
+        "@type": "ImageObject",
+        "@id": `${PAGE_URL}#hero-image`,
+        url: "https://www.searchprex.com/images/services/law-firm/usa-law-firm-seo-hero-dashboard.webp",
+        caption:
+          "SearchPrex USA Law Firm SEO, Google Map Pack Top 3 & AI Overview Analytics Dashboard",
+      },
+      {
+        "@type": "VideoObject",
+        "@id": `${PAGE_URL}#relief-video`,
+        name: "Why We Understand Your Pain: SearchPrex 9-Second Law Firm SEO Relief Briefing",
+        description:
+          "9-second executive briefing on why US law firms suffer from $200+ PPC click burnout and bad agency retainers, and how SearchPrex delivers relief via #1 ranked Cleveland OH local SEO mastery, county court practice silos, and a 7-Day Free Trial.",
+        thumbnailUrl: [
+          "https://www.searchprex.com/images/services/law-firm/usa-law-firm-seo-hero-dashboard.webp",
+          "https://www.searchprex.com/images/services/law-firm/law-firm-relief-from-ppc-burnout.webp",
+        ],
+        uploadDate: "2026-10-17T08:00:00+00:00",
+        duration: "PT9S",
+        contentUrl: "https://www.searchprex.com/videos/law-firm-seo-relief-9s.webp",
+        embedUrl: `${PAGE_URL}#relief-video`,
+      },
+      {
         "@type": "FAQPage",
         "@id": `${PAGE_URL}#faq`,
         mainEntity: [...CAPSULES, ...FAQS].map((f) => ({

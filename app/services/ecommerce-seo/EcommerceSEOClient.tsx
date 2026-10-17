@@ -69,7 +69,6 @@ import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTagli
 import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
 import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
 import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
-import ServiceUsaMapAndMarkets from "@/components/service-wireframe/ServiceUsaMapAndMarkets";
 import ServiceSemanticClusterAndLinks from "@/components/service-wireframe/ServiceSemanticClusterAndLinks";
 
 import { CAPSULES, FAQS } from "./data";
@@ -299,23 +298,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
             <Link href="/case-studies/ecommerce/smk-store" className="font-bold text-neutral-950 underline">
               SMK Store
             </Link>{" "}
-            (35,000+ SKUs), total monthly net sales grew from <strong className="text-neutral-950">$5,832 to $19,100</strong> between April and June 2026. We deliver this same founder-led engineering to stores across{" "}
-            <Link href="/locations/ohio/cleveland" className="font-bold text-neutral-950 underline">
-              Cleveland, OH
-            </Link>
-            ,{" "}
-            <Link href="/locations/texas/sugar-land" className="font-bold text-neutral-950 underline">
-              Sugar Land &amp; The Woodlands, TX
-            </Link>
-            ,{" "}
-            <Link href="/locations/michigan/detroit" className="font-bold text-neutral-950 underline">
-              Detroit &amp; Grand Rapids, MI
-            </Link>
-            ,{" "}
-            <Link href="/locations/pennsylvania/philadelphia" className="font-bold text-neutral-950 underline">
-              Philadelphia, PA
-            </Link>
-            , and nationwide.
+            (35,000+ SKUs), total monthly net sales grew from <strong className="text-neutral-950">$5,832 to $19,100</strong> between April and June 2026. We deliver this same founder-led engineering to Shopify, WooCommerce, and custom stores across the United States.
           </>
         }
         bullets={[
@@ -605,12 +588,6 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
           />
         </div>
       </Band>
-
-      {/* INTERACTIVE USA MAP EMBED + PINPOINTED STATES & CITIES */}
-      <ServiceUsaMapAndMarkets
-        serviceName="Ecommerce SEO Services"
-        answerCapsule="SearchPrex engineers high-SKU Ecommerce SEO for US direct-to-consumer brands, specialty retailers, and regional distributors—combining national product/category rankings with local warehouse and showroom visibility across Cleveland (OH), Sugar Land & The Woodlands (TX), Detroit & Grand Rapids (MI), Philadelphia (PA), Tempe & Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas."
-      />
 
       {/* SEMANTIC LONG-TAIL KEYWORD CLUSTERS + CONTEXTUAL INTERNAL LINKING MATRIX */}
       <ServiceSemanticClusterAndLinks

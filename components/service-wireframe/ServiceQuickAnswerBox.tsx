@@ -17,6 +17,7 @@ interface ServiceQuickAnswerBoxProps {
   contextParagraph?: React.ReactNode;
   bullets: QuickAnswerBullet[];
   complianceBadge?: string;
+  showLocationLink?: boolean;
 }
 
 export default function ServiceQuickAnswerBox({
@@ -26,6 +27,7 @@ export default function ServiceQuickAnswerBox({
   contextParagraph,
   bullets,
   complianceBadge = "USA Market · AEO & GEO Citation Standard",
+  showLocationLink = false,
 }: ServiceQuickAnswerBoxProps) {
   return (
     <section className="bg-white py-10 sm:py-14 border-b border-slate-200 font-sans">
@@ -92,9 +94,13 @@ export default function ServiceQuickAnswerBox({
                 <ShieldCheck className="h-4 w-4 text-neutral-900" aria-hidden />
                 <span>
                   #1 Ranked in{" "}
-                  <Link href="/locations/ohio/cleveland" className="font-bold text-neutral-900 underline">
-                    Cleveland, Ohio USA
-                  </Link>{" "}
+                  {showLocationLink ? (
+                    <Link href="/locations/ohio/cleveland" className="font-bold text-neutral-900 underline">
+                      Cleveland, Ohio USA
+                    </Link>
+                  ) : (
+                    <strong className="font-bold text-neutral-900">Cleveland, Ohio USA</strong>
+                  )}{" "}
                   Local SEO Mastery
                 </span>
               </span>

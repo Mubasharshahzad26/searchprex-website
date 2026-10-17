@@ -45,7 +45,6 @@ import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTagli
 import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
 import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
 import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
-import ServiceUsaMapAndMarkets from "@/components/service-wireframe/ServiceUsaMapAndMarkets";
 import ServiceSemanticClusterAndLinks from "@/components/service-wireframe/ServiceSemanticClusterAndLinks";
 
 import { CAPSULES, FAQS, SYMPTOMS } from "./data";
@@ -246,23 +245,7 @@ export default function TechnicalSEOClient() {
             <Link href="/case-studies/fintech/remit-choice" className="font-bold text-neutral-950 underline">
               Remit Choice
             </Link>{" "}
-            to <strong className="text-neutral-950">113K organic clicks, 5.76M impressions, and a Google AI Overview citation</strong>. We deliver template-level technical SEO for engineering and marketing teams across{" "}
-            <Link href="/locations/ohio/cleveland" className="font-bold text-neutral-950 underline">
-              Cleveland, OH
-            </Link>
-            ,{" "}
-            <Link href="/locations/texas/sugar-land" className="font-bold text-neutral-950 underline">
-              Sugar Land &amp; The Woodlands, TX
-            </Link>
-            ,{" "}
-            <Link href="/locations/california/san-jose" className="font-bold text-neutral-950 underline">
-              San Jose, CA
-            </Link>
-            ,{" "}
-            <Link href="/locations/michigan/detroit" className="font-bold text-neutral-950 underline">
-              Detroit, MI
-            </Link>
-            , and nationwide.
+            to <strong className="text-neutral-950">113K organic clicks, 5.76M impressions, and a Google AI Overview citation</strong>. We deliver template-level technical SEO for SaaS platforms, ecommerce catalogs, and multi-page domains across the United States.
           </>
         }
         bullets={[
@@ -499,12 +482,6 @@ export default function TechnicalSEOClient() {
           />
         </div>
       </Band>
-
-      {/* INTERACTIVE USA MAP EMBED + PINPOINTED STATES & CITIES */}
-      <ServiceUsaMapAndMarkets
-        serviceName="Technical SEO Services"
-        answerCapsule="SearchPrex delivers founder-led Technical SEO, indexing recovery, and Core Web Vitals engineering for US SaaS platforms, law firms, ecommerce catalogs, and multi-location operators across Cleveland (OH), Sugar Land & The Woodlands (TX), San Jose (CA), Detroit & Grand Rapids (MI), Philadelphia (PA), Tempe & Scottsdale (AZ), Baton Rouge (LA), Albuquerque (NM), and Kansas."
-      />
 
       {/* SEMANTIC LONG-TAIL KEYWORD CLUSTERS + CONTEXTUAL INTERNAL LINKING MATRIX */}
       <ServiceSemanticClusterAndLinks

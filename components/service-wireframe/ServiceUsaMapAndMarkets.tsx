@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin,
@@ -274,10 +275,99 @@ export default function ServiceUsaMapAndMarkets({
           </p>
         </div>
 
+        {/* Visual Showcase Cards: Featured USA Law Firm SEO Markets (Compressed WebP) */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+          {[
+            {
+              pinId: "cleveland-oh",
+              city: "Cleveland, Ohio",
+              badge: "#1 Ranked USA Local SEO Hub",
+              courts: "Cuyahoga County Court of Common Pleas & Ohio BWC",
+              focus: "Personal Injury, Ohio BWC Workers' Comp, OVI & Family Law across Lakewood, Parma & Beachwood.",
+              imgSrc: "/images/services/law-firm/city-cleveland-ohio-law-firm-seo.webp",
+              imgAlt: "Cleveland Ohio downtown skyline and Cuyahoga County courthouse architecture for Law Firm SEO",
+              href: "/locations/ohio/cleveland",
+            },
+            {
+              pinId: "sugar-land-tx",
+              city: "Sugar Land, Texas",
+              badge: "Fort Bend High-Asset Hub",
+              courts: "Fort Bend County District Courts (Richmond) & US-59",
+              focus: "High-Asset Divorce, Probate & Estate Planning, and Personal Injury across First Colony, Telfair & Riverstone.",
+              imgSrc: "/images/services/law-firm/city-sugar-land-texas-law-firm-seo.webp",
+              imgAlt: "Sugar Land Texas Town Square and Fort Bend County civic architecture for Law Firm SEO",
+              href: "/locations/texas/sugar-land",
+            },
+            {
+              pinId: "the-woodlands-tx",
+              city: "The Woodlands, Texas",
+              badge: "Executive Township Hub",
+              courts: "Montgomery County (Conroe) & Harris County Courts",
+              focus: "Executive RSU/Energy Divorce, Trusts & Estates, and I-45 North Injury across Alden Bridge & Creekside Park.",
+              imgSrc: "/images/services/law-firm/city-the-woodlands-texas-law-firm-seo.webp",
+              imgAlt: "The Woodlands Texas executive glass towers and waterway architecture for Law Firm SEO",
+              href: "/locations/texas/the-woodlands",
+            },
+          ].map((card) => {
+            const isCardActive = activePin.id === card.pinId;
+            return (
+              <div
+                key={card.pinId}
+                className={`group overflow-hidden rounded-2xl border-2 bg-white shadow-sm transition-all ${
+                  isCardActive
+                    ? "border-neutral-900 ring-2 ring-neutral-900/10"
+                    : "border-slate-200 hover:border-slate-400"
+                }`}
+              >
+                <div className="relative h-44 w-full overflow-hidden bg-slate-900">
+                  <Image
+                    src={card.imgSrc}
+                    alt={card.imgAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-300">
+                    <MapPin className="h-3 w-3" aria-hidden />
+                    <span>{card.badge}</span>
+                  </span>
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <h3 className="text-lg font-black leading-tight">{card.city}</h3>
+                    <p className="text-[11px] text-slate-200 font-medium">{card.courts}</p>
+                  </div>
+                </div>
+                <div className="p-4 flex flex-col justify-between gap-3">
+                  <p className="text-xs text-slate-600 leading-relaxed">{card.focus}</p>
+                  <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const found = USA_SERVED_MARKETS.find((m) => m.id === card.pinId);
+                        if (found) setActivePin(found);
+                      }}
+                      className="text-xs font-bold text-slate-700 hover:text-neutral-950 cursor-pointer"
+                    >
+                      Pinpoint on Map
+                    </button>
+                    <Link
+                      href={card.href}
+                      className="inline-flex items-center gap-1 text-xs font-black text-neutral-950 underline hover:text-emerald-700"
+                    >
+                      <span>View {card.city.split(",")[0]} Hub</span>
+                      <ArrowRight className="h-3 w-3" aria-hidden />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
         {/* Interactive Pinpoint Selector Pills */}
         <div className="mt-8">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
-            Select a Pinpointed USA Market Below to Inspect Live Map Coordinates &amp; Local Strategy:
+            Select Any Pinpointed USA Law Firm SEO Market Below to Inspect Live Map Coordinates &amp; Local Strategy:
           </p>
           <div className="flex flex-wrap gap-2">
             {USA_SERVED_MARKETS.map((pin) => {
