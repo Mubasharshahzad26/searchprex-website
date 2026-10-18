@@ -74,6 +74,46 @@ const nextConfig = {
         destination: '/case-studies',
         permanent: true,
       },
+      // ── NEWS CATEGORY QUERY REDIRECTS (301) ──────────────────────
+      // Consolidates parameterized ?category= URLs to their dedicated ranking pillar pages.
+      // Eliminates keyword cannibalization, preserves "llm seo news" Pos 4,
+      // and consolidates signals on the main news hub ("seo news today").
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:llms?)' }],
+        destination: '/resources/news/llm-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:ai(?:[ +_%20]*seo)?)' }],
+        destination: '/resources/news/ai-sge-seo-news',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:technical(?:[ +_%20]*seo)?)' }],
+        destination: '/resources/news/technical-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:(?:seo[ +_%20]*)?tools?)' }],
+        destination: '/resources/news/seo-tools-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:ecommerce.*)' }],
+        destination: '/resources/news/ecommerce-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:local(?:[ +_%20]*seo)?)' }],
+        destination: '/resources/news/local-seo-updates',
+        permanent: true,
+      },
     ]
   },
 

@@ -30,6 +30,7 @@ export interface LearningTrack {
   serviceHref: string
   serviceLabel: string
   newsCategoryParam: string
+  newsHref?: string
   flagshipNewsHref?: string
   flagshipNewsLabel?: string
 }
@@ -107,6 +108,7 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/technical-seo',
     serviceLabel: 'Technical SEO Engineering Service',
     newsCategoryParam: 'SEO News',
+    newsHref: '/resources/news/technical-seo-news-2026',
     flagshipNewsHref: '/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors',
     flagshipNewsLabel: 'GEO Entity Density & AI Mode News',
   },
@@ -239,6 +241,7 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/ecommerce-seo',
     serviceLabel: 'Ecommerce SEO Growth Service',
     newsCategoryParam: 'Ecommerce Store SEO News',
+    newsHref: '/resources/news/ecommerce-seo-news-2026',
     flagshipNewsHref: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate',
     flagshipNewsLabel: 'Merchant Center Return Policy News',
   },
@@ -829,7 +832,7 @@ export default function LearningHubClient() {
                           </Link>
                         )}
                         <Link
-                          href={`/resources/news?category=${encodeURIComponent(track.newsCategoryParam)}`}
+                          href={track.newsHref || `/resources/news?category=${encodeURIComponent(track.newsCategoryParam)}`}
                           style={{
                             padding: '8px 14px',
                             borderRadius: '7px',

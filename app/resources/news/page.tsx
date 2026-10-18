@@ -4,6 +4,7 @@
 export const revalidate = 3600;
 
 import type { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
 import { getPageSEO } from "@/lib/admin-seo";
 import NewsClient from "./NewsClient";
 import { db } from "@/lib/db";
@@ -107,10 +108,20 @@ const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; i
   },
 };
 
+const CATEGORY_TO_PILLAR_REDIRECTS: Record<string, string> = {
+  "LLMs": "/resources/news/llm-seo-news-2026",
+  "AI SEO": "/resources/news/ai-sge-seo-news",
+  "Technical": "/resources/news/technical-seo-news-2026",
+  "Tools": "/resources/news/seo-tools-news-2026",
+  "Ecommerce": "/resources/news/ecommerce-seo-news-2026",
+  "Local": "/resources/news/local-seo-updates",
+};
+
 function resolveCategoryKey(raw?: string): string | undefined {
   if (!raw) return undefined;
   if (CATEGORY_META[raw]) return raw;
-  const c = raw.toLowerCase();
+  const c = raw.toLowerCase().trim();
+  if (c.includes("llm")) return "LLMs";
   if (c.includes("law")) return "Law Firm";
   if (c.includes("shopify")) return "Shopify";
   if (c.includes("wordpress") || c.includes("woo")) return "WordPress";
@@ -118,6 +129,9 @@ function resolveCategoryKey(raw?: string): string | undefined {
   if (c.includes("usa")) return "USA";
   if (c.includes("ecommerce")) return "Ecommerce";
   if (c.includes("technical") || c === "seo news" || c === "seo") return "Technical";
+  if (c.includes("tool")) return "Tools";
+  if (c === "ai" || c.includes("ai seo") || c.includes("sge")) return "AI SEO";
+  if (c.includes("local")) return "Local";
   return undefined;
 }
 
@@ -125,6 +139,11 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const { category: rawCategory } = await searchParams;
   const isFiltered = Boolean(rawCategory);
   const category = resolveCategoryKey(rawCategory);
+
+  // 301 Permanent Redirect to dedicated pillar page to prevent ranking dilution and cannibalization
+  if (category && CATEGORY_TO_PILLAR_REDIRECTS[category]) {
+    permanentRedirect(CATEGORY_TO_PILLAR_REDIRECTS[category]);
+  }
 
   // Filtered ?category= URLs point canonical to the main hub and use noindex, follow
   // to avoid competing with and cannibalizing the main hub page.
@@ -174,6 +193,12 @@ const PILLAR_SLUGS = [
 export default async function Page({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category: rawCategory } = await searchParams;
   const category = resolveCategoryKey(rawCategory);
+
+  // 301 Permanent Redirect to dedicated pillar page to prevent ranking dilution and cannibalization
+  if (category && CATEGORY_TO_PILLAR_REDIRECTS[category]) {
+    permanentRedirect(CATEGORY_TO_PILLAR_REDIRECTS[category]);
+  }
+
   const meta = category ? CATEGORY_META[category] : undefined;
   const pageUrl = category ? `${PAGE_URL}?category=${encodeURIComponent(category)}` : PAGE_URL;
 

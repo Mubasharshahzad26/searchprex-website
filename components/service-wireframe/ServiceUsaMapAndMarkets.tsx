@@ -3,15 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  MapPin,
-  Compass,
-  Navigation,
-  Building2,
-  CheckCircle2,
-  ArrowRight,
-  Globe,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export interface UsaMarketPin {
   id: string;
@@ -39,11 +31,14 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     badge: "USA National & Regional Coverage",
     href: "/locations",
     mapQuery: "United+States",
-    demographics: "Serving Law Firms, Ecommerce Catalogs, and Local Service Operators across OH, TX, MI, PA, AZ, CA, LA, NM & KS",
-    courtsAndCorridors: "Cuyahoga County (OH), Fort Bend & Montgomery/Harris (TX), Wayne & Kent (MI), Philadelphia (PA), Maricopa (AZ), Santa Clara (CA), East Baton Rouge & Caddo (LA), Bernalillo (NM), Sedgwick & Johnson (KS)",
-    searchIntentFocus: "High-intent commercial, local Map Pack Top 3, and AI Overview / ChatGPT citation dominance tailored to state statutes and suburban search behavior.",
+    demographics:
+      "Serving Law Firms, Ecommerce Catalogs, and Local Service Operators across OH, TX, MI, PA, AZ, CA, LA, NM & KS",
+    courtsAndCorridors:
+      "Cuyahoga County (OH), Fort Bend & Montgomery/Harris (TX), Wayne & Kent (MI), Philadelphia (PA), Maricopa (AZ), Santa Clara (CA), East Baton Rouge & Caddo (LA), Bernalillo (NM), Sedgwick & Johnson (KS)",
+    searchIntentFocus:
+      "High-intent commercial, local Map Pack Top 3, and AI Overview / ChatGPT citation dominance tailored to state statutes and suburban search behavior.",
     submarkets: [
-      { name: "Cleveland, OH (#1 Ranked Mastery)", href: "/locations/ohio/cleveland" },
+      { name: "Cleveland, OH (#1 Ranked in Ohio)", href: "/locations/ohio/cleveland" },
       { name: "Sugar Land, TX", href: "/locations/texas/sugar-land" },
       { name: "The Woodlands, TX", href: "/locations/texas/the-woodlands" },
       { name: "Katy, TX", href: "/locations/texas/katy" },
@@ -67,12 +62,14 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     state: "Ohio",
     stateAbbr: "OH",
     county: "Cuyahoga County",
-    badge: "#1 Ranked USA Local SEO Hub",
+    badge: "Ranked #1 on Google in Ohio",
     href: "/locations/ohio/cleveland",
     mapQuery: "Cuyahoga+County+Justice+Center+Cleveland+OH",
     demographics: "1.23M+ Cuyahoga County residents · High industrial, medical & suburban search density",
-    courtsAndCorridors: "Cuyahoga County Court of Common Pleas, Cleveland Municipal Court, Ohio BWC & Industrial Commission, I-90 / I-77 / I-480",
-    searchIntentFocus: "Ohio BWC state-fund workers' compensation, personal injury, OVI & criminal defense, and family law across Lakewood, Parma, Beachwood, and Westlake.",
+    courtsAndCorridors:
+      "Cuyahoga County Court of Common Pleas, Cleveland Municipal Court, Ohio BWC & Industrial Commission, I-90 / I-77 / I-480",
+    searchIntentFocus:
+      "Ohio BWC state-fund workers' compensation, personal injury, OVI & criminal defense, and family law across Lakewood, Parma, Beachwood, and Westlake.",
     submarkets: [
       { name: "Downtown Cleveland" },
       { name: "Lakewood, OH" },
@@ -93,8 +90,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     stateHubHref: "/locations/texas",
     mapQuery: "Sugar+Land+Town+Square+Sugar+Land+TX",
     demographics: "Affluent Fort Bend County households · Top US ethnic diversity & executive income profile",
-    courtsAndCorridors: "Fort Bend County District Courts (Richmond, TX), Sugar Land Municipal Court, US-59 / I-69 & SH 99 Grand Parkway",
-    searchIntentFocus: "Escaping Houston's expensive PPC auction with Fort Bend-specific High-Asset Family Law, Probate & Estate Planning, Business Law, and Personal Injury silos.",
+    courtsAndCorridors:
+      "Fort Bend County District Courts (Richmond, TX), Sugar Land Municipal Court, US-59 / I-69 & SH 99 Grand Parkway",
+    searchIntentFocus:
+      "Escaping Houston's expensive PPC auction with Fort Bend-specific High-Asset Family Law, Probate & Estate Planning, Business Law, and Personal Injury silos.",
     submarkets: [
       { name: "First Colony & Town Square" },
       { name: "Telfair & Riverstone" },
@@ -113,9 +112,12 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     href: "/locations/texas/the-woodlands",
     stateHubHref: "/locations/texas",
     mapQuery: "The+Woodlands+Town+Center+The+Woodlands+TX",
-    demographics: "$145,000+ median household income · Corporate energy executives, business owners & affluent families",
-    courtsAndCorridors: "Montgomery County District Courts (Conroe, TX) + Harris County Courts (for Creekside Park) · I-45 North & Grand Parkway",
-    searchIntentFocus: "Unincorporated Township venue clarity (Montgomery vs. Harris County), Estate Planning & Trusts, High-Asset Divorce (RSUs/Oil & Gas), and village-specific pages.",
+    demographics:
+      "$145,000+ median household income · Corporate energy executives, business owners & affluent families",
+    courtsAndCorridors:
+      "Montgomery County District Courts (Conroe, TX) + Harris County Courts (for Creekside Park) · I-45 North & Grand Parkway",
+    searchIntentFocus:
+      "Unincorporated Township venue clarity (Montgomery vs. Harris County), Estate Planning & Trusts, High-Asset Divorce (RSUs/Oil & Gas), and village-specific pages.",
     submarkets: [
       { name: "Alden Bridge & Sterling Ridge" },
       { name: "Creekside Park (Harris County)" },
@@ -135,8 +137,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     stateHubHref: "/locations/texas",
     mapQuery: "Plano+TX+Legacy+West",
     demographics: "Fastest-growing Texas suburban metros across West Houston and North Dallas-Fort Worth (DFW)",
-    courtsAndCorridors: "Collin County Courts (McKinney), Denton County Courts, Tri-County Katy venues (Houston, Richmond, Hempstead), I-10 & I-35E/W",
-    searchIntentFocus: "Executive RSU divorce & corporate immigration in Plano, tri-county family/injury silos in Katy (Cinco Ranch/Fulshear), and UNT/TWU student & DWI defense in Denton.",
+    courtsAndCorridors:
+      "Collin County Courts (McKinney), Denton County Courts, Tri-County Katy venues (Houston, Richmond, Hempstead), I-10 & I-35E/W",
+    searchIntentFocus:
+      "Executive RSU divorce & corporate immigration in Plano, tri-county family/injury silos in Katy (Cinco Ranch/Fulshear), and UNT/TWU student & DWI defense in Denton.",
     submarkets: [
       { name: "Katy, TX", href: "/locations/texas/katy" },
       { name: "Plano, TX", href: "/locations/texas/plano" },
@@ -156,8 +160,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     stateHubHref: "/locations/michigan",
     mapQuery: "Detroit+MI+Coleman+A+Young+Municipal+Center",
     demographics: "Metro Detroit tri-county industrial hub & West Michigan manufacturing/family-business corridor",
-    courtsAndCorridors: "Third Circuit Court (Wayne County), 36th District Court, Kent County 17th Circuit Court, I-75 / I-94 / I-96 / US-131",
-    searchIntentFocus: "Michigan No-Fault PIP reform (MCL § 500.3135) auto & truck accidents, criminal defense, high-asset family law, and local home/commercial services.",
+    courtsAndCorridors:
+      "Third Circuit Court (Wayne County), 36th District Court, Kent County 17th Circuit Court, I-75 / I-94 / I-96 / US-131",
+    searchIntentFocus:
+      "Michigan No-Fault PIP reform (MCL § 500.3135) auto & truck accidents, criminal defense, high-asset family law, and local home/commercial services.",
     submarkets: [
       { name: "Detroit, MI", href: "/locations/michigan/detroit" },
       { name: "Grand Rapids, MI", href: "/locations/michigan/grand-rapids" },
@@ -175,8 +181,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     href: "/locations/pennsylvania/philadelphia",
     mapQuery: "Philadelphia+City+Hall+Court+of+Common+Pleas",
     demographics: "1.55M+ city residents · Dense neighborhood search patterns & Complex Litigation Center venue",
-    courtsAndCorridors: "Philadelphia Court of Common Pleas, Complex Litigation Center, Municipal Court, Delaware/Montgomery/Bucks County borders",
-    searchIntentFocus: "Out-localizing national mass-tort bidders via Center City, Northeast Philly, South Philly & Fishtown neighborhood silos and PA Limited vs. Full Tort clarity.",
+    courtsAndCorridors:
+      "Philadelphia Court of Common Pleas, Complex Litigation Center, Municipal Court, Delaware/Montgomery/Bucks County borders",
+    searchIntentFocus:
+      "Out-localizing national mass-tort bidders via Center City, Northeast Philly, South Philly & Fishtown neighborhood silos and PA Limited vs. Full Tort clarity.",
     submarkets: [
       { name: "Center City & University City" },
       { name: "Northeast & South Philadelphia" },
@@ -194,8 +202,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     stateHubHref: "/locations/arizona",
     mapQuery: "Old+Town+Scottsdale+AZ",
     demographics: "Affluent North Scottsdale/Paradise Valley estates & 75,000+ ASU East Valley corridor in Tempe",
-    courtsAndCorridors: "Maricopa County Superior Court, Scottsdale City Court, Tempe Municipal Court, Loop 101 & Loop 202",
-    searchIntentFocus: "Arizona Extreme DUI defense (A.R.S. § 28-1382), Arizona community property high-asset divorce (A.R.S. § 25-211), estate protection, and personal injury.",
+    courtsAndCorridors:
+      "Maricopa County Superior Court, Scottsdale City Court, Tempe Municipal Court, Loop 101 & Loop 202",
+    searchIntentFocus:
+      "Arizona Extreme DUI defense (A.R.S. § 28-1382), Arizona community property high-asset divorce (A.R.S. § 25-211), estate protection, and personal injury.",
     submarkets: [
       { name: "Tempe, AZ", href: "/locations/arizona/tempe" },
       { name: "Scottsdale, AZ", href: "/locations/arizona/scottsdale" },
@@ -212,8 +222,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     href: "/locations/california/san-jose",
     mapQuery: "Santa+Clara+County+Superior+Court+San+Jose+CA",
     demographics: "Silicon Valley tech executives, founders & engineers across Santa Clara County",
-    courtsAndCorridors: "Santa Clara County Superior Court, US District Court Northern District of CA, US-101 / I-280 / I-880",
-    searchIntentFocus: "Unvested RSU/ISO divorce division (Huggins/Nelson formulas), California Bus. & Prof. Code § 16600 employment/non-compete disputes, IP & injury.",
+    courtsAndCorridors:
+      "Santa Clara County Superior Court, US District Court Northern District of CA, US-101 / I-280 / I-880",
+    searchIntentFocus:
+      "Unvested RSU/ISO divorce division (Huggins/Nelson formulas), California Bus. & Prof. Code § 16600 employment/non-compete disputes, IP & injury.",
     submarkets: [
       { name: "San Jose, CA", href: "/locations/california/san-jose" },
       { name: "Sunnyvale, Cupertino, Mountain View & Palo Alto" },
@@ -229,8 +241,10 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     href: "/locations",
     mapQuery: "19th+Judicial+District+Court+Baton+Rouge+LA",
     demographics: "Louisiana Civil Code parishes, bilingual New Mexico metros, and 8 Kansas commercial hubs",
-    courtsAndCorridors: "19th JDC (Baton Rouge), 1st JDC (Shreveport), 2nd Judicial District (Albuquerque), Wichita & Overland Park District Courts",
-    searchIntentFocus: "Louisiana 2-year prescription (art. 3493.1) & 51% fault bar (art. 2323), Ark-La-Tex cross-border injury, bilingual NM DWI/community property, and Kansas metro SEO.",
+    courtsAndCorridors:
+      "19th JDC (Baton Rouge), 1st JDC (Shreveport), 2nd Judicial District (Albuquerque), Wichita & Overland Park District Courts",
+    searchIntentFocus:
+      "Louisiana 2-year prescription (art. 3493.1) & 51% fault bar (art. 2323), Ark-La-Tex cross-border injury, bilingual NM DWI/community property, and Kansas metro SEO.",
     submarkets: [
       { name: "Baton Rouge, LA", href: "/locations/louisiana/baton-rouge" },
       { name: "Shreveport, LA", href: "/locations/louisiana/shreveport" },
@@ -256,54 +270,55 @@ export default function ServiceUsaMapAndMarkets({
   return (
     <section
       id="usa-service-map"
-      className="scroll-mt-20 border-b border-slate-200 bg-slate-50 py-16 sm:py-24 font-sans"
+      className="scroll-mt-20 border-b border-slate-200 bg-white py-16 sm:py-24 font-sans"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Semantic H2 + 45-60 Word AI Overview Answer Capsule */}
+        {/* Clean Black Bold H2 + 45-60 Word AI Overview Answer Capsule */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white border border-slate-300 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
-            <Compass className="h-4 w-4 text-neutral-900" aria-hidden />
-            <span>USA Market Focus · Interactive Pinpoint Coverage Map</span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-950 leading-tight">
             USA States and Cities Where We Deliver {serviceName}
           </h2>
 
-          <p className="mt-4 rounded-2xl border-l-4 border-l-neutral-900 bg-white p-4 text-sm sm:text-base font-semibold text-neutral-900 leading-relaxed shadow-2xs">
+          <p className="mt-4 rounded-xl border-l-4 border-l-neutral-950 border border-slate-200 bg-slate-50 p-4 text-sm sm:text-base font-semibold text-neutral-900 leading-relaxed">
             {answerCapsule}
           </p>
         </div>
 
-        {/* Visual Showcase Cards: Featured USA Law Firm SEO Markets (Compressed WebP) */}
+        {/* Visual Showcase Cards: 3 Featured USA Law Firm SEO Markets (Compressed WebP, Clean Monochrome Badges) */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
             {
+              num: "01",
               pinId: "cleveland-oh",
               city: "Cleveland, Ohio",
-              badge: "#1 Ranked USA Local SEO Hub",
+              badge: "Ranked #1 on Google in Ohio",
               courts: "Cuyahoga County Court of Common Pleas & Ohio BWC",
-              focus: "Personal Injury, Ohio BWC Workers' Comp, OVI & Family Law across Lakewood, Parma & Beachwood.",
+              focus:
+                "Personal Injury, Ohio BWC Workers' Comp, OVI & Family Law across Lakewood, Parma & Beachwood.",
               imgSrc: "/images/services/law-firm/city-cleveland-ohio-law-firm-seo.webp",
               imgAlt: "Cleveland Ohio downtown skyline and Cuyahoga County courthouse architecture for Law Firm SEO",
               href: "/locations/ohio/cleveland",
             },
             {
+              num: "02",
               pinId: "sugar-land-tx",
               city: "Sugar Land, Texas",
               badge: "Fort Bend High-Asset Hub",
               courts: "Fort Bend County District Courts (Richmond) & US-59",
-              focus: "High-Asset Divorce, Probate & Estate Planning, and Personal Injury across First Colony, Telfair & Riverstone.",
+              focus:
+                "High-Asset Divorce, Probate & Estate Planning, and Personal Injury across First Colony, Telfair & Riverstone.",
               imgSrc: "/images/services/law-firm/city-sugar-land-texas-law-firm-seo.webp",
               imgAlt: "Sugar Land Texas Town Square and Fort Bend County civic architecture for Law Firm SEO",
               href: "/locations/texas/sugar-land",
             },
             {
+              num: "03",
               pinId: "the-woodlands-tx",
               city: "The Woodlands, Texas",
               badge: "Executive Township Hub",
               courts: "Montgomery County (Conroe) & Harris County Courts",
-              focus: "Executive RSU/Energy Divorce, Trusts & Estates, and I-45 North Injury across Alden Bridge & Creekside Park.",
+              focus:
+                "Executive RSU/Energy Divorce, Trusts & Estates, and I-45 North Injury across Alden Bridge & Creekside Park.",
               imgSrc: "/images/services/law-firm/city-the-woodlands-texas-law-firm-seo.webp",
               imgAlt: "The Woodlands Texas executive glass towers and waterway architecture for Law Firm SEO",
               href: "/locations/texas/the-woodlands",
@@ -313,13 +328,13 @@ export default function ServiceUsaMapAndMarkets({
             return (
               <div
                 key={card.pinId}
-                className={`group overflow-hidden rounded-2xl border-2 bg-white shadow-sm transition-all ${
+                className={`group overflow-hidden rounded-2xl border bg-white shadow-2xs transition-all ${
                   isCardActive
-                    ? "border-neutral-900 ring-2 ring-neutral-900/10"
+                    ? "border-neutral-950 ring-1 ring-neutral-950"
                     : "border-slate-200 hover:border-slate-400"
                 }`}
               >
-                <div className="relative h-44 w-full overflow-hidden bg-slate-900">
+                <div className="relative h-44 w-full overflow-hidden bg-neutral-900">
                   <Image
                     src={card.imgSrc}
                     alt={card.imgAlt}
@@ -327,9 +342,10 @@ export default function ServiceUsaMapAndMarkets({
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
-                  <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-300">
-                    <MapPin className="h-3 w-3" aria-hidden />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/25 to-transparent" />
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-md bg-white/95 backdrop-blur-md border border-slate-200 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-neutral-950">
+                    <span>{card.num}</span>
+                    <span>&middot;</span>
                     <span>{card.badge}</span>
                   </span>
                   <div className="absolute bottom-3 left-3 right-3 text-white">
@@ -352,10 +368,10 @@ export default function ServiceUsaMapAndMarkets({
                     </button>
                     <Link
                       href={card.href}
-                      className="inline-flex items-center gap-1 text-xs font-black text-neutral-950 underline hover:text-emerald-700"
+                      className="inline-flex items-center gap-1 text-xs font-black text-neutral-950 underline hover:text-neutral-700"
                     >
                       <span>View {card.city.split(",")[0]} Hub</span>
-                      <ArrowRight className="h-3 w-3" aria-hidden />
+                      <ArrowRight className="h-3 w-3 text-neutral-950" aria-hidden />
                     </Link>
                   </div>
                 </div>
@@ -364,7 +380,7 @@ export default function ServiceUsaMapAndMarkets({
           })}
         </div>
 
-        {/* Interactive Pinpoint Selector Pills */}
+        {/* Interactive Pinpoint Selector Pills — Clean Black Bullet Dots */}
         <div className="mt-8">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
             Select Any Pinpointed USA Law Firm SEO Market Below to Inspect Live Map Coordinates &amp; Local Strategy:
@@ -377,13 +393,17 @@ export default function ServiceUsaMapAndMarkets({
                   type="button"
                   key={pin.id}
                   onClick={() => setActivePin(pin)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold transition cursor-pointer ${
+                  className={`inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-bold transition cursor-pointer ${
                     isSelected
-                      ? "bg-neutral-900 text-white shadow-sm"
-                      : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
+                      ? "bg-neutral-950 text-white shadow-2xs"
+                      : "border border-slate-300 bg-slate-50 text-slate-700 hover:bg-slate-100"
                   }`}
                 >
-                  <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full shrink-0 ${
+                      isSelected ? "bg-white" : "bg-neutral-950"
+                    }`}
+                  />
                   <span>
                     {pin.city} ({pin.stateAbbr})
                   </span>
@@ -393,27 +413,24 @@ export default function ServiceUsaMapAndMarkets({
           </div>
         </div>
 
-        {/* Interactive Map Embed + Market Intelligence Card */}
+        {/* Interactive Map Embed + Single Clean Market Intelligence Card (Duplicate Links Box Removed) */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left: Embedded Google Map + Active Pinpoint Bar */}
-          <div className="lg:col-span-7 rounded-3xl border-2 border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="lg:col-span-7 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-2xs">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
               <div>
-                <h3 className="text-lg sm:text-xl font-black text-neutral-950 flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-neutral-900" aria-hidden />
-                  <span>
-                    {activePin.city}, {activePin.stateAbbr} — Pinpointed Service Territory
-                  </span>
+                <h3 className="text-lg sm:text-xl font-black text-neutral-950">
+                  {activePin.city}, {activePin.stateAbbr} — Pinpointed Service Territory
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">{activePin.county}</p>
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-[11px] font-bold text-neutral-900">
-                <Globe className="h-3.5 w-3.5 text-neutral-900" aria-hidden />
+              <span className="inline-flex items-center gap-2 rounded-md bg-white border border-slate-200 px-3 py-1 text-[11px] font-bold text-neutral-950">
+                <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
                 <span>{activePin.badge}</span>
               </span>
             </div>
 
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
               <iframe
                 title={`SearchPrex USA Service Map - ${activePin.city}, ${activePin.state}`}
                 src={`https://maps.google.com/maps?q=${activePin.mapQuery}&t=&z=${
@@ -425,7 +442,7 @@ export default function ServiceUsaMapAndMarkets({
               />
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200 text-xs">
               <span className="font-semibold text-slate-600">
                 One-client-per-niche exclusivity in every pinpointed US city
               </span>
@@ -434,16 +451,16 @@ export default function ServiceUsaMapAndMarkets({
                 className="inline-flex items-center gap-1 font-black text-neutral-950 underline hover:text-neutral-700"
               >
                 <span>Explore {activePin.city} SEO Page</span>
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                <ArrowRight className="h-3.5 w-3.5 text-neutral-950" aria-hidden />
               </Link>
             </div>
           </div>
 
-          {/* Right: Active US Market Demographic, Psychology & Contextual Links */}
-          <div className="lg:col-span-5 space-y-5">
-            <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 space-y-4 shadow-sm">
-              <div className="inline-flex items-center gap-2 rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-neutral-900">
-                <Navigation className="h-3.5 w-3.5" aria-hidden />
+          {/* Right: Active US Market Demographic, Psychology & Single Clean Location Links List */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4 shadow-2xs">
+              <div className="inline-flex items-center gap-2 rounded-md bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-neutral-950">
+                <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
                 <span>Market Psychology &amp; Local Signals</span>
               </div>
 
@@ -452,31 +469,31 @@ export default function ServiceUsaMapAndMarkets({
               </h4>
 
               <div className="space-y-3 text-xs sm:text-sm text-slate-700">
-                <div className="rounded-xl bg-slate-50 border border-slate-200 p-3.5">
+                <div className="rounded-xl bg-white border border-slate-200 p-3.5">
                   <strong className="text-neutral-950 block mb-0.5">
-                    Target Audience &amp; Demographics:
+                    01. Target Audience &amp; Demographics:
                   </strong>
                   <span>{activePin.demographics}</span>
                 </div>
 
-                <div className="rounded-xl bg-slate-50 border border-slate-200 p-3.5">
+                <div className="rounded-xl bg-white border border-slate-200 p-3.5">
                   <strong className="text-neutral-950 block mb-0.5">
-                    Courts, Venues &amp; Commercial Corridors:
+                    02. Courts, Venues &amp; Commercial Corridors:
                   </strong>
                   <span>{activePin.courtsAndCorridors}</span>
                 </div>
 
-                <div className="rounded-xl bg-slate-50 border border-slate-200 p-3.5">
+                <div className="rounded-xl bg-white border border-slate-200 p-3.5">
                   <strong className="text-neutral-950 block mb-0.5">
-                    Search Intent &amp; Low-Hanging Opportunity:
+                    03. Search Intent &amp; Low-Hanging Opportunity:
                   </strong>
                   <span>{activePin.searchIntentFocus}</span>
                 </div>
               </div>
 
               <div className="pt-2">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                  Connected Cities &amp; Submarkets:
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                  Active Markets &amp; Submarkets in This Region:
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {activePin.submarkets.map((sub, i) =>
@@ -484,7 +501,7 @@ export default function ServiceUsaMapAndMarkets({
                       <Link
                         key={i}
                         href={sub.href}
-                        className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1 text-xs font-bold text-neutral-950 hover:bg-neutral-900 hover:text-white transition"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-xs font-bold text-neutral-950 hover:bg-neutral-950 hover:text-white transition"
                       >
                         <span>{sub.name}</span>
                         <ArrowRight className="h-3 w-3" aria-hidden />
@@ -492,90 +509,14 @@ export default function ServiceUsaMapAndMarkets({
                     ) : (
                       <span
                         key={i}
-                        className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-medium text-slate-700"
                       >
-                        {sub.name}
+                        <span className="h-1 w-1 rounded-full bg-neutral-950" />
+                        <span>{sub.name}</span>
                       </span>
                     )
                   )}
                 </div>
-              </div>
-            </div>
-
-            {/* Direct Contextual Links to Priority US State & City Hubs */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-neutral-950 mb-2.5">
-                <Building2 className="h-4 w-4 text-neutral-900" aria-hidden />
-                <span>Direct Links to Our Active USA State &amp; City Hubs</span>
-              </div>
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-xs font-semibold">
-                <Link href="/locations/ohio/cleveland" className="text-neutral-900 underline hover:text-neutral-600">
-                  Cleveland, OH
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/texas/sugar-land" className="text-neutral-900 underline hover:text-neutral-600">
-                  Sugar Land, TX
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/texas/the-woodlands" className="text-neutral-900 underline hover:text-neutral-600">
-                  The Woodlands, TX
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/texas/katy" className="text-neutral-900 underline hover:text-neutral-600">
-                  Katy, TX
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/texas/plano" className="text-neutral-900 underline hover:text-neutral-600">
-                  Plano, TX
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/texas/denton" className="text-neutral-900 underline hover:text-neutral-600">
-                  Denton, TX
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/michigan/detroit" className="text-neutral-900 underline hover:text-neutral-600">
-                  Detroit, MI
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/michigan/grand-rapids" className="text-neutral-900 underline hover:text-neutral-600">
-                  Grand Rapids, MI
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/pennsylvania/philadelphia" className="text-neutral-900 underline hover:text-neutral-600">
-                  Philadelphia, PA
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/arizona/tempe" className="text-neutral-900 underline hover:text-neutral-600">
-                  Tempe, AZ
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/arizona/scottsdale" className="text-neutral-900 underline hover:text-neutral-600">
-                  Scottsdale, AZ
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/california/san-jose" className="text-neutral-900 underline hover:text-neutral-600">
-                  San Jose, CA
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/louisiana/baton-rouge" className="text-neutral-900 underline hover:text-neutral-600">
-                  Baton Rouge, LA
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/louisiana/shreveport" className="text-neutral-900 underline hover:text-neutral-600">
-                  Shreveport, LA
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/new-mexico/albuquerque" className="text-neutral-900 underline hover:text-neutral-600">
-                  Albuquerque, NM
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations/kansas" className="text-neutral-900 underline hover:text-neutral-600">
-                  Kansas (8 Cities)
-                </Link>
-                <span className="text-slate-300">&bull;</span>
-                <Link href="/locations" className="font-black text-neutral-950 underline">
-                  All USA Locations &rarr;
-                </Link>
               </div>
             </div>
           </div>

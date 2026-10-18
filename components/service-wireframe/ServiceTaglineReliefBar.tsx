@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { HeartHandshake, ShieldCheck } from "lucide-react";
 
 interface ServiceTaglineReliefBarProps {
   message?: string;
@@ -16,15 +15,15 @@ export default function ServiceTaglineReliefBar({
 }: ServiceTaglineReliefBarProps) {
   return (
     <div
-      className={`w-full bg-neutral-950 text-white py-3.5 px-4 border-y border-neutral-800 ${className}`}
+      className={`w-full bg-neutral-950 text-white py-3 px-4 border-y border-neutral-800 font-sans ${className}`}
     >
       <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
         <div className="flex items-center gap-2.5 font-bold tracking-wide">
-          <HeartHandshake className="h-4 w-4 text-slate-300 shrink-0" aria-hidden />
+          <span className="h-1.5 w-1.5 rounded-full bg-white shrink-0" />
           <span>{message}</span>
         </div>
         <div className="hidden md:flex items-center gap-2 text-xs font-semibold text-slate-300">
-          <ShieldCheck className="h-4 w-4 text-slate-400 shrink-0" aria-hidden />
+          <span className="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0" />
           <span>{subText}</span>
         </div>
       </div>

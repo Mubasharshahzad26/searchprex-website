@@ -92,22 +92,18 @@ const navLinks: NavLink[] = [
     label: "SEO News",
     hasDropdown: true,
     dropdownItems: [
-      // Local points at the spoke itself, not at ?category=Local, and that is
-      // deliberate. The spoke already ranks for "local seo news" while the hub
-      // ranked 61 for the same query -- adding a third URL on the same head
-      // term would re-split the signal we just consolidated. The other
-      // categories have no single ranking page, so a filter view is right for
-      // them. This also gives the spoke the sitewide internal link it had none
-      // of: nothing in the codebase linked to it before.
-      { href: "/resources/news?category=SEO+News",                  label: "SEO News" },
+      // Dedicated pillar spokes receive sitewide internal links directly to their URLs
+      // rather than parameterized ?category= URLs, eliminating redirect hops and consolidating PageRank.
+      { href: "/resources/news",                                    label: "All Latest News" },
+      { href: "/resources/news/llm-seo-news-2026",                 label: "LLM SEO News" },
+      { href: "/resources/news/ai-sge-seo-news",                   label: "AI & GEO SEO News" },
+      { href: "/resources/news/local-seo-updates",                  label: "Local SEO News" },
+      { href: "/resources/news/technical-seo-news-2026",           label: "Technical SEO News" },
+      { href: "/resources/news/ecommerce-seo-news-2026",           label: "Ecommerce SEO News" },
+      { href: "/resources/news/seo-tools-news-2026",               label: "SEO Tools News" },
       { href: "/resources/news?category=Law+Firm+SEO+News",         label: "Law Firm SEO News" },
-      { href: "/resources/news?category=Ecommerce+Store+SEO+News",  label: "Ecommerce Store SEO News" },
       { href: "/resources/news?category=Shopify+Store+News",        label: "Shopify Store News" },
       { href: "/resources/news?category=WordPress+News",            label: "WordPress News" },
-      { href: "/resources/news?category=AI+Visibility+News",        label: "AI Visibility News" },
-      { href: "/resources/news?category=USA+News",                  label: "USA Search News" },
-      { href: "/resources/news/local-seo-updates",                  label: "Local SEO News" },
-      { href: "/resources/news",                                    label: "All Latest News" },
     ],
   },
   {
