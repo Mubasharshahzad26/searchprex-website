@@ -118,7 +118,7 @@ export default function LawFirmReliefVideoSection() {
         {/* Clean Black Bold Heading + Answer Capsule */}
         <div className="max-w-3xl">
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-950 leading-tight">
-            Why Managing Partners Are Exhausted — And How We Provide Immediate Relief
+            Why Managing Partners Are Exhausted by Legal Marketing — And How Our Attorney SEO Brings Relief
           </h2>
 
           <p className="mt-4 rounded-xl border-l-4 border-l-neutral-950 bg-slate-50 border border-slate-200 p-4 text-sm sm:text-base font-semibold text-neutral-900 leading-relaxed">

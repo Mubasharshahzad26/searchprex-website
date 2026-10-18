@@ -196,13 +196,17 @@ export default function ServiceAiDiagnosisAndTrial({
                   <span>SearchPrex Legal Client Care</span>
                 </div>
               </div>
-              <div className="p-4 sm:p-5 bg-white border-t border-slate-100">
+              <div className="p-4 sm:p-5 bg-white border-t border-slate-100 space-y-2">
                 <p className="text-sm sm:text-base font-black text-neutral-950 leading-snug">
                   Dedicated Care for Solo Attorneys &amp; Law Firm Partners
                 </p>
-                <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   We treat your practice budget like our own — direct 1-on-1 support, weekly Monday call &amp; consultation reporting, and a 7-Day Free Trial so you feel supported from day one.
                 </p>
+                <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] font-bold text-neutral-950">
+                  <span>US Hours: Mon–Fri, 8 AM – 6 PM EST/CST/PST</span>
+                  <span>$1,200 – $2,500 / mo</span>
+                </div>
               </div>
             </div>
           </div>
@@ -371,15 +375,67 @@ export default function ServiceAiDiagnosisAndTrial({
           </div>
 
           <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-950">
-            Tell Us What You Are Looking For &amp; Test Us With a 7-Day Free Trial
+            Tell Us What You Are Looking For &amp; Test Our Law Firm SEO With a 7-Day Free Trial
           </h3>
 
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
             Do not get locked into another blind retainer. Come forward and test our engineering, local market precision, and direct communication for 7 days free—you keep the complete audit, keyword roadmap, and initial quick-win fixes regardless.
           </p>
 
+          {/* 4-Step "How Our 7-Day Free Trial & First 90 Days Work" Process Strip */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {[
+              {
+                num: "01",
+                phase: "Days 1–2",
+                title: "Technical, YMYL & GBP Audit",
+                desc: "40-point crawl, ABA Rule 7.1 check, primary GBP category review & county competitor gap analysis.",
+              },
+              {
+                num: "02",
+                phase: "Days 3–5",
+                title: "Live Quick-Win Fixes & Schema",
+                desc: "We draft your 45–60 word AI Overview Answer Capsule and prepare LegalService & Attorney JSON-LD.",
+              },
+              {
+                num: "03",
+                phase: "Day 7",
+                title: "1-on-1 Review with Founder",
+                desc: "Walk through every finding and 90-day caseload roadmap live with Mubashar Sharif before paying $0.",
+              },
+              {
+                num: "04",
+                phase: "Days 8–90",
+                title: "Practice Silos & Map Pack Top 3",
+                desc: "Full county-court practice page deployment, State Bar citation sync, and weekly Monday call reports.",
+              },
+            ].map((step) => (
+              <div
+                key={step.num}
+                className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-md bg-neutral-950 text-[11px] font-black text-white">
+                      {step.num}
+                    </span>
+                    <span className="rounded bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-950">
+                      {step.phase}
+                    </span>
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-black text-neutral-950 leading-snug">
+                    {step.title}
+                  </h4>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* 2-Column 7-Day Trial Deliverables — Clean White Cards with Black Numbering & Bullets */}
-          <div className="mt-7 grid grid-cols-1 md:grid-cols-2 gap-6 rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 shadow-2xs">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 shadow-2xs">
             <div>
               <h4 className="text-xs sm:text-sm font-black uppercase tracking-wider text-neutral-950 mb-3 flex items-center gap-2">
                 <span className="flex h-5 w-5 items-center justify-center rounded bg-neutral-950 text-[10px] font-black text-white">

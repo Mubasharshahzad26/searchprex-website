@@ -20,7 +20,7 @@ import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant"
 import type { Guide } from "@/lib/guides";
 import { RETAINER_PLANS } from "@/lib/pricing";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
-import { AuthorCard, ComparisonTable, FaqList } from "@/components/layout";
+import { AuthorCard, FaqList } from "@/components/layout";
 import {
   Band,
   BandIntro,
@@ -36,6 +36,7 @@ import {
 import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTaglineReliefBar";
 import LawFirmSemrushHero from "@/components/service-wireframe/LawFirmSemrushHero";
 import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
+import LawFirmPracticeServicesSection from "@/components/service-wireframe/LawFirmPracticeServicesSection";
 import LawFirmReliefVideoSection from "@/components/service-wireframe/LawFirmReliefVideoSection";
 import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
 import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
@@ -87,8 +88,8 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
 
       {/* 3. AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX (TOP HEADING REMOVED, NUMBERED CARDS) */}
       <ServiceQuickAnswerBox
-        h2="How Does Law Firm SEO Work for US Attorneys in 2026?"
-        answerCapsule="Law firm SEO in the United States combines Google Business Profile Map Pack optimization, practice-area city silos (Family Law SEO, Criminal Defense SEO, Personal Injury SEO, and Probate), verifiable state bar E-E-A-T credentials, and LegalService JSON-LD schema so attorneys earn signed retainers from Google Search, AI Overviews, and ChatGPT."
+        h2="How Do Law Firm SEO Services Work for US Attorneys in 2026?"
+        answerCapsule="Law firm SEO services in the United States combine Google Business Profile Map Pack optimization, practice-area city silos (Family Law SEO, Criminal Defense SEO, Personal Injury SEO, and Probate), verifiable state bar E-E-A-T credentials, and LegalService JSON-LD schema so attorneys earn signed retainers from Google Search, AI Overviews, and ChatGPT."
         contextParagraph={
           <>
             Whether your practice serves{" "}
@@ -127,20 +128,28 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
             label: "Core USA Practice Areas",
             detail: (
               <>
-                <Link href="/services/law-firm-seo/family-law-seo" className="underline font-semibold text-neutral-950">
+                <Link href="/services/law-firm-seo/personal-injury" className="underline font-semibold text-neutral-950">
+                  Personal Injury SEO
+                </Link>
+                ,{" "}
+                <Link href="/services/law-firm-seo/family-law" className="underline font-semibold text-neutral-950">
                   Family Law &amp; Divorce SEO
                 </Link>
                 ,{" "}
-                <Link href="/services/law-firm-seo/criminal-defense-seo" className="underline font-semibold text-neutral-950">
-                  Criminal Defense &amp; DUI/OVI SEO
+                <Link href="/services/law-firm-seo/criminal-defense" className="underline font-semibold text-neutral-950">
+                  Criminal Defense SEO
                 </Link>
                 ,{" "}
-                <Link href="/services/law-firm-seo/personal-injury-seo" className="underline font-semibold text-neutral-950">
-                  Personal Injury SEO
+                <Link href="/services/law-firm-seo/estate-planning" className="underline font-semibold text-neutral-950">
+                  Estate Planning &amp; Probate
+                </Link>
+                ,{" "}
+                <Link href="/services/law-firm-seo/mass-torts" className="underline font-semibold text-neutral-950">
+                  Mass Torts
                 </Link>
                 , and{" "}
-                <Link href="/services/law-firm-seo/estate-planning-seo" className="underline font-semibold text-neutral-950">
-                  Estate Planning &amp; Probate SEO
+                <Link href="/services/law-firm-seo/google-business-profile-for-lawyers" className="underline font-semibold text-neutral-950">
+                  GBP for Lawyers
                 </Link>
                 .
               </>
@@ -162,6 +171,9 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         complianceBadge="ABA Model Rule 7.1 & Google YMYL Aligned"
         showLocationLink={true}
       />
+
+      {/* 3B. SPECIALIZED LAW FIRM SEO SERVICES & PRACTICE AREAS WE OFFER (6 SUB-SERVICES WITH CONTEXTUAL LINKS) */}
+      <LawFirmPracticeServicesSection />
 
       {/* 4. 9-SECOND INTERACTIVE RELIEF VIDEO + 2 CLEAN NUMBERED PAIN CARDS */}
       <LawFirmReliefVideoSection />
@@ -192,6 +204,59 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         ]}
         footnote="Honesty & ABA Rule 7.1 Disclosure: These screenshots are from US local service businesses, not law firms — there is no published law firm case study on this site yet. The Map Pack, technical, and AI Overview engineering behind them is the exact system we execute for law firms."
       />
+
+      {/* 5B. INDEPENDENT E-E-A-T ENTITY VERIFICATION BAR (MATCHING JSON-LD SAMEAS PROFILES) */}
+      <section className="border-b border-slate-200 bg-white px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <span className="h-2 w-2 rounded-full bg-neutral-950" />
+            <span className="text-xs font-black uppercase tracking-wider text-neutral-950">
+              Independent Entity &amp; Founder Verification:
+            </span>
+            <span className="text-xs text-slate-600 hidden sm:inline">
+              Verified agency profiles matching our structured knowledge graph
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5 text-xs font-bold">
+            <a
+              href="https://clutch.co/profile/searchprex"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-neutral-950 transition-colors hover:border-neutral-950 hover:bg-white"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
+              <span>Clutch Verified Profile &#8599;</span>
+            </a>
+            <a
+              href="https://www.trustpilot.com/review/searchprex.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-neutral-950 transition-colors hover:border-neutral-950 hover:bg-white"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
+              <span>Trustpilot Reviews &#8599;</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/company/searchprex"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-neutral-950 transition-colors hover:border-neutral-950 hover:bg-white"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
+              <span>SearchPrex LinkedIn &#8599;</span>
+            </a>
+            <a
+              href={LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-neutral-950 transition-colors hover:border-neutral-950 hover:bg-white"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
+              <span>Mubashar Sharif (Founder) &#8599;</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* 6. INTERACTIVE GEMINI AI DIAGNOSTIC BAR + CARE REPRESENTATIVE + LIGHT-BLUE/WHITE 7-DAY FREE TRIAL FORM */}
       <ServiceAiDiagnosisAndTrial
@@ -258,59 +323,12 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         answerCapsule='SearchPrex delivers one-firm-per-city Law Firm SEO across 9 core US states and 22+ pinpointed metropolitan and suburban venues—anchored by our #1 Google ranking in Ohio for "Law Firm SEO Cleveland Ohio", and expanding across Sugar Land and The Woodlands (TX), Detroit and Grand Rapids (MI), Philadelphia (PA), Tempe and Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas.'
       />
 
-      {/* 8. EXHAUSTED BY PREVIOUS SEO AGENCIES? + ABA CHANNEL COMPARISON TABLE */}
+      {/* 8. EXHAUSTED BY PREVIOUS SEO AGENCIES? + COMPARISON MATRIX */}
       <ServiceExhaustedByAgencies
         serviceLabel="USA Law Firm SEO"
         answerCapsule='Managing partners leave traditional legal marketing agencies because of partial monthly PDFs, junior account hand-offs, and useless Domain Authority (DA/PA) backlink metrics. SearchPrex gives you direct access to Founder Mubashar Sharif (5+ years mastery), #1 ranked Google authority in Ohio for "Law Firm SEO Cleveland Ohio", weekly Monday consultation reports, and a 7-Day Free Trial.'
         showLocationLink={true}
       />
-
-      <Band>
-        <div className="mx-auto max-w-5xl">
-          <ComparisonTable
-            caption="How USA Law Firm Acquisition Channels Compare (ABA Model Rule 7.1 Compliant Overview)"
-            columns={[
-              "Organic Law Firm SEO + AEO/GEO",
-              "Google Ads PPC & Local Services Ads",
-              "Legal Directories & Lead Aggregators",
-            ]}
-            rows={[
-              {
-                label: "Ownership of asset",
-                values: [
-                  "You own the practice-area pages, schema, and Map Pack authority long term",
-                  "Rented visibility — calls stop the hour your monthly ad budget pauses",
-                  "Profile sits on a third-party directory alongside competing attorneys",
-                ],
-              },
-              {
-                label: "Exclusivity of inquiry",
-                values: [
-                  "100% exclusive calls and intake forms directly to your firm",
-                  "Direct click, but competitors bid on your brand and adjacent slots",
-                  "Leads are frequently shared with 3–5 competing firms in the same county",
-                ],
-              },
-              {
-                label: "AI Overview & ChatGPT visibility",
-                values: [
-                  "Structured 45–60 word Answer Capsules & LegalService schema feed AI citations",
-                  "Paid ads do not build organic entity citations inside ChatGPT or Perplexity",
-                  "Aggregator directories are cited instead of your law firm's domain",
-                ],
-              },
-              {
-                label: "Compliance & control",
-                values: [
-                  "Every word reviewed for ABA Model Rule 7.1 and state bar rules",
-                  "Restricted ad character limits and automated headline rewrites",
-                  "Limited control over how third-party badges or ratings are framed",
-                ],
-              },
-            ]}
-          />
-        </div>
-      </Band>
 
       {/* 9. LIVE 24/7 AI LEGAL INTAKE DEMO */}
       <Band muted id="intake-demo">
@@ -329,7 +347,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <Eyebrow>Transparent Pricing &amp; Exclusivity</Eyebrow>
-            <H2>One law firm per US city, one founder doing the actual engineering</H2>
+            <H2>Law Firm SEO Pricing ($1,200–$2,500/Mo) &amp; One-Firm-Per-City Exclusivity</H2>
             <Lead>
               You work directly with Founder Mubashar Sharif—who builds your practice-area pages, writes your LegalService schema, and manages your Google Business Profile. Every recommendation is engineered for your county court venue and caseload goals.
             </Lead>

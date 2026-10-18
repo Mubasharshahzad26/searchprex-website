@@ -108,6 +108,80 @@ export default function ServiceExhaustedByAgencies({
           ))}
         </div>
 
+        {/* Clean, Properly Titled Comparison Matrix (AEO/GEO Structured Table) */}
+        <div className="mt-10 rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
+          <div className="border-b border-slate-200 bg-slate-50 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+            <h3 className="text-base sm:text-lg font-black text-neutral-950">
+              Comparison: SearchPrex vs. Typical SEO Agency vs. Paid Ads &amp; Directories
+            </h3>
+            <span className="text-xs font-semibold text-slate-500">
+              ABA Model Rule 7.1 Compliant Acquisition Overview
+            </span>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-white text-[11px] font-black uppercase tracking-wider text-neutral-950">
+                  <th className="py-3.5 px-5 w-1/4">Evaluation Criteria</th>
+                  <th className="py-3.5 px-5 w-1/4 bg-slate-50/80">SearchPrex (Founder-Led)</th>
+                  <th className="py-3.5 px-5 w-1/4 text-slate-600">Typical Legal SEO Agency</th>
+                  <th className="py-3.5 px-5 w-1/4 text-slate-600">Google Ads / Directories</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 text-slate-700">
+                <tr>
+                  <td className="py-3.5 px-5 font-bold text-neutral-950">Reporting &amp; KPIs</td>
+                  <td className="py-3.5 px-5 bg-slate-50/50 font-semibold text-neutral-950">
+                    Weekly Monday live GSC clicks, Map Pack calls &amp; signed consults
+                  </td>
+                  <td className="py-3.5 px-5">
+                    Partial monthly PDFs &amp; vanity DA/PA backlink numbers
+                  </td>
+                  <td className="py-3.5 px-5">
+                    High cost-per-click ($150–$300+) or shared directory leads
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-5 font-bold text-neutral-950">Who Does the Work</td>
+                  <td className="py-3.5 px-5 bg-slate-50/50 font-semibold text-neutral-950">
+                    Direct execution by Founder Mubashar Sharif (5+ years mastery)
+                  </td>
+                  <td className="py-3.5 px-5">
+                    Sales rep closes deal; handed off to junior account coordinator
+                  </td>
+                  <td className="py-3.5 px-5">
+                    Automated ad bidding or third-party directory listing
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-5 font-bold text-neutral-950">AI Overview &amp; ChatGPT</td>
+                  <td className="py-3.5 px-5 bg-slate-50/50 font-semibold text-neutral-950">
+                    45–60 word Answer Capsules, LegalService schema &amp; /llms.txt
+                  </td>
+                  <td className="py-3.5 px-5">
+                    Generic 500-word blog posts with zero entity or AEO structure
+                  </td>
+                  <td className="py-3.5 px-5">
+                    Zero organic AI citation equity once ad spend stops
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-5 font-bold text-neutral-950">Risk &amp; Exclusivity</td>
+                  <td className="py-3.5 px-5 bg-slate-50/50 font-semibold text-neutral-950">
+                    7-Day Free Trial &middot; Month-to-month &middot; 1 firm per US city
+                  </td>
+                  <td className="py-3.5 px-5">
+                    6–12 month lock-in contracts &middot; Serves local competitors
+                  </td>
+                  <td className="py-3.5 px-5">
+                    Leads sold to 3–5 competing attorneys in the same county
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         {/* "Why We Are Uniquely Suitable" — Corrected Ohio #1 Ranking Claim + 5+ Years Experience Strip */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-9">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

@@ -7,12 +7,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 
 const PRACTICE_PILLS = [
-  "Personal Injury & Auto",
-  "Family Law & High-Asset Divorce",
-  "Criminal Defense & DUI/OVI",
-  "Estate Planning & Probate",
-  "Workers’ Compensation",
-  "Immigration & Employment",
+  { label: "Personal Injury SEO", href: "/services/law-firm-seo/personal-injury" },
+  { label: "Family Law & Divorce SEO", href: "/services/law-firm-seo/family-law" },
+  { label: "Criminal Defense SEO", href: "/services/law-firm-seo/criminal-defense" },
+  { label: "Estate Planning & Probate", href: "/services/law-firm-seo/estate-planning" },
+  { label: "Mass Torts SEO", href: "/services/law-firm-seo/mass-torts" },
+  { label: "GBP for Lawyers", href: "/services/law-firm-seo/google-business-profile-for-lawyers" },
 ];
 
 export default function LawFirmSemrushHero() {
@@ -64,8 +64,10 @@ export default function LawFirmSemrushHero() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-              We are here to provide you a source of relief — we know your pain, and we have the solution. Stop burning{" "}
-              <strong className="text-neutral-950">$150–$300+ per Google Ads click</strong> or paying agencies for partial reports and meaningless DA numbers. We build practice-area silos, Google Map Pack Top 3 authority, and AI Overview citations for US attorneys.
+              We are here to provide you a source of relief — we know your pain, and our{" "}
+              <strong className="text-neutral-950">USA law firm SEO services</strong> are built to solve it. Stop burning{" "}
+              <strong className="text-neutral-950">$150–$300+ per Google Ads click</strong> or paying agencies for partial reports and meaningless DA numbers. Our founder-led{" "}
+              <strong className="text-neutral-950">attorney SEO</strong> builds practice-area silos, Google Map Pack Top 3 authority, and AI Overview citations for US law firms.
             </p>
 
             {/* 3 Clean Metric Cards — Matching Location Pages Layout */}
@@ -90,20 +92,21 @@ export default function LawFirmSemrushHero() {
               </div>
             </div>
 
-            {/* Practice Area Pills — Black Bullet Points Only */}
+            {/* Practice Area Pills — Clickable Contextual Links with Black Bullet Points */}
             <div className="pt-1">
               <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">
-                Engineered for High-Stakes US Legal Practice Areas:
+                Specialized US Legal SEO Services We Offer:
               </p>
               <div className="flex flex-wrap gap-2">
                 {PRACTICE_PILLS.map((pill) => (
-                  <span
-                    key={pill}
-                    className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-neutral-900"
+                  <Link
+                    key={pill.href}
+                    href={pill.href}
+                    className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 hover:border-neutral-950 hover:bg-white px-3 py-1.5 text-xs font-semibold text-neutral-900 transition"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-neutral-950 shrink-0" />
-                    <span>{pill}</span>
-                  </span>
+                    <span>{pill.label}</span>
+                  </Link>
                 ))}
               </div>
             </div>

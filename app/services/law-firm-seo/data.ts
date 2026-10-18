@@ -17,8 +17,8 @@ export interface QA {
 /** Direct Answer Capsules for Google AI Overviews, Featured Snippets & ChatGPT. */
 export const CAPSULES: QA[] = [
   {
-    q: "What does law firm SEO involve in the United States?",
-    a: "Law firm SEO is the work of getting a legal practice found for the high-intent searches US clients make before calling an attorney. For Family Law SEO, Criminal Defense SEO, Personal Injury SEO, and Estate Planning firms across Cleveland (OH), Sugar Land (TX), The Woodlands (TX), Detroit (MI), and Philadelphia (PA), that requires dedicated practice-area city pages, a primary-category Google Business Profile, verifiable state bar E-E-A-T credentials, and AI Overview schema.",
+    q: "What do law firm SEO services involve in the United States?",
+    a: "Law firm SEO services in the United States focus on getting a legal practice found for the high-intent searches US clients make before calling an attorney. For Personal Injury SEO, Family Law SEO, Criminal Defense SEO, Estate Planning, Mass Torts, and GBP for Lawyers across Cleveland (OH), Sugar Land (TX), The Woodlands (TX), Detroit (MI), and Philadelphia (PA), that requires dedicated practice-area city pages, a primary-category Google Business Profile, verifiable state bar E-E-A-T credentials, and AI Overview schema.",
   },
   {
     q: "Why is SEO for lawyers held to a higher YMYL and ABA standard?",
@@ -26,7 +26,7 @@ export const CAPSULES: QA[] = [
   },
   {
     q: "Do you have law firm case studies, and how does the 7-Day Free Trial work?",
-    a: "SearchPrex has not completed a law firm engagement yet, so we publish no legal-specific client results. Instead, we show our verified work from other industries—including #1 ranked local search mastery in Cleveland, Ohio (USA), D.O.L.L.S. Cleaning (#1 organic and #1 AI Overview citation in Michigan), and Michigan Sports & Outdoor (3,000 to 11,549 indexed pages)—and offer law firms a limited-time 7-Day Free Trial with direct founder execution.",
+    a: 'SearchPrex has not completed a law firm engagement yet, so we publish no legal-specific client results. Instead, we show our verified work from other industries—including being ranked #1 on Google in Ohio for "Law Firm SEO Cleveland Ohio", D.O.L.L.S. Cleaning (#1 organic and #1 AI Overview citation in Michigan), and Michigan Sports & Outdoor (3,000 to 11,549 indexed pages)—and offer law firms a limited-time 7-Day Free Trial with direct founder execution.',
   },
 ];
 
@@ -46,6 +46,10 @@ export const FAQS: QA[] = [
   {
     q: "Why are law firms exhausted by traditional legal marketing agencies?",
     a: "Most legal agencies lock firms into 12-month contracts, hand accounts to junior coordinators, hide declining metrics behind partial monthly PDFs, or sell meaningless Domain Authority (DA/PA) backlink packages. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years SEO mastery), receive full weekly Monday reports on Search Console clicks, Map Pack calls, and signed-case leads, and get one-firm-per-city exclusivity.",
+  },
+  {
+    q: "What are your USA working hours and how do weekly consultations work?",
+    a: "Our live client care and founder strategy hours are aligned with US court and law office schedules: Monday through Friday from 8:00 AM to 6:00 PM EST (7:00 AM – 5:00 PM CST / 5:00 AM – 3:00 PM PST), plus 24/7 monitoring for urgent Google Business Profile suspensions and AI legal intake. Every Monday, you receive a direct Search Console, Map Pack, and phone call consultation report.",
   },
   {
     q: "Should our firm stop running Google Ads or Local Services Ads (LSAs) right away?",
