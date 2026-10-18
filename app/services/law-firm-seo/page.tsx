@@ -8,10 +8,15 @@ import { LAW_CHECKLIST_GUIDE } from "@/lib/guides";
 import { getPageSEO } from "@/lib/admin-seo";
 const PAGE_URL = "https://www.searchprex.com/services/law-firm-seo";
 
+const SEO_TITLE = "Law Firm SEO Services USA | $1,200/Mo & 7-Day Free Trial";
+const SEO_DESCRIPTION =
+  "Law firm SEO services in the USA built for signed cases. Ranked #1 in Ohio for Law Firm SEO Cleveland Ohio. $1,200–$2,500/mo, 1 firm/city. 7-Day Free Trial.";
+
 const baseMetadata: Metadata = {
-  title: "Law Firm SEO Services USA | Map Pack & 7-Day Free Trial",
-  description:
-    "Law firm SEO services in the USA built for signed cases. Ranked #1 in Ohio for Law Firm SEO Cleveland Ohio. $1,200–$2,500/mo. Start a 7-Day Free Trial.",
+  title: {
+    absolute: SEO_TITLE,
+  },
+  description: SEO_DESCRIPTION,
   keywords: [
     "law firm SEO services",
     "law firm SEO",
@@ -27,18 +32,16 @@ const baseMetadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "Law Firm SEO Services USA | Map Pack & 7-Day Free Trial",
-    description:
-      "Law firm SEO services in the USA built for signed cases. Ranked #1 on Google in Ohio for Law Firm SEO Cleveland Ohio. $1,200–$2,500/mo. 7-Day Free Trial.",
+    title: SEO_TITLE,
+    description: SEO_DESCRIPTION,
     url: PAGE_URL,
     siteName: "SearchPrex",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Law Firm SEO Services USA | SearchPrex",
-    description:
-      "Map Pack Top 3 & AI Overview citations for US law firms. Ranked #1 in Ohio for Law Firm SEO Cleveland Ohio. 7-Day Free Trial.",
+    title: SEO_TITLE,
+    description: SEO_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -54,7 +57,22 @@ const baseMetadata: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageSEO("/services/law-firm-seo", baseMetadata);
+  const cmsMeta = await getPageSEO("/services/law-firm-seo", baseMetadata);
+  return {
+    ...cmsMeta,
+    title: { absolute: SEO_TITLE },
+    description: SEO_DESCRIPTION,
+    openGraph: {
+      ...cmsMeta.openGraph,
+      title: SEO_TITLE,
+      description: SEO_DESCRIPTION,
+    },
+    twitter: {
+      ...cmsMeta.twitter,
+      title: SEO_TITLE,
+      description: SEO_DESCRIPTION,
+    },
+  };
 }
 
 const LAST_REVIEWED = "2026-10-18";
@@ -85,11 +103,34 @@ export default function LawFirmSEOPage() {
         name: "Law Firm SEO Services",
         serviceType: "Law Firm SEO Services",
         provider: organizationRef,
-        areaServed: { "@type": "Country", name: "United States" },
+        areaServed: [
+          { "@type": "Country", name: "United States" },
+          { "@type": "State", name: "Ohio" },
+          { "@type": "City", name: "Cleveland" },
+          { "@type": "State", name: "Texas" },
+          { "@type": "City", name: "Sugar Land" },
+          { "@type": "City", name: "The Woodlands" },
+          { "@type": "State", name: "Michigan" },
+          { "@type": "City", name: "Detroit" },
+          { "@type": "State", name: "Pennsylvania" },
+          { "@type": "City", name: "Philadelphia" },
+          { "@type": "State", name: "Arizona" },
+          { "@type": "City", name: "Scottsdale" },
+          { "@type": "State", name: "California" },
+          { "@type": "City", name: "San Jose" },
+          { "@type": "State", name: "Louisiana" },
+          { "@type": "State", name: "New Mexico" },
+          { "@type": "State", name: "Kansas" },
+        ],
         audience: { "@type": "BusinessAudience", audienceType: "US Law Firms & Solo Attorneys" },
         description:
           "Law firm SEO services in the United States: practice-area and city pages, Google Business Profile optimization, attorney E-E-A-T, technical SEO, and AI Overview readiness built to ABA Model Rule 7.1 and Google YMYL standards.",
         url: PAGE_URL,
+        availableChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: PAGE_URL,
+          availableLanguage: ["English"],
+        },
         hoursAvailable: {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],

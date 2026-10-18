@@ -26,7 +26,6 @@ import {
   BandIntro,
   CheckList,
   Eyebrow,
-  FaqBand,
   GuaranteeCard,
   H2,
   Lead,
@@ -36,11 +35,15 @@ import {
 import ServiceTaglineReliefBar from "@/components/service-wireframe/ServiceTaglineReliefBar";
 import LawFirmSemrushHero from "@/components/service-wireframe/LawFirmSemrushHero";
 import ServiceQuickAnswerBox from "@/components/service-wireframe/ServiceQuickAnswerBox";
+import LawFirmUspAndAuditSection from "@/components/service-wireframe/LawFirmUspAndAuditSection";
 import LawFirmPracticeServicesSection from "@/components/service-wireframe/LawFirmPracticeServicesSection";
 import LawFirmReliefVideoSection from "@/components/service-wireframe/LawFirmReliefVideoSection";
 import ServiceAiDiagnosisAndTrial from "@/components/service-wireframe/ServiceAiDiagnosisAndTrial";
 import ServiceExhaustedByAgencies from "@/components/service-wireframe/ServiceExhaustedByAgencies";
 import ServiceUsaMapAndMarkets from "@/components/service-wireframe/ServiceUsaMapAndMarkets";
+import LawFirmRoiCalculator from "@/components/service-wireframe/LawFirmRoiCalculator";
+import LawFirmFounderSpotlight from "@/components/service-wireframe/LawFirmFounderSpotlight";
+import ChatWithFounderWidget from "@/components/service-wireframe/ChatWithFounderWidget";
 
 import { CAPSULES, FAQS } from "./data";
 
@@ -86,94 +89,45 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
       {/* 2. CLEAN LOCATION-PAGE STYLE LIGHT HERO + FLOATING UI ELEMENTS + COMPRESSED WEBP DASHBOARD */}
       <LawFirmSemrushHero />
 
-      {/* 3. AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX (TOP HEADING REMOVED, NUMBERED CARDS) */}
+      {/* 3. AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX (CONCISE, SEO OPTIMIZED & TO THE POINT) */}
       <ServiceQuickAnswerBox
         h2="How Do Law Firm SEO Services Work for US Attorneys in 2026?"
         answerCapsule="Law firm SEO services in the United States combine Google Business Profile Map Pack optimization, practice-area city silos (Family Law SEO, Criminal Defense SEO, Personal Injury SEO, and Probate), verifiable state bar E-E-A-T credentials, and LegalService JSON-LD schema so attorneys earn signed retainers from Google Search, AI Overviews, and ChatGPT."
         contextParagraph={
           <>
-            Whether your practice serves{" "}
-            <Link href="/locations/ohio/cleveland" className="font-bold text-neutral-950 underline">
-              Cleveland, Ohio
-            </Link>
-            ,{" "}
-            <Link href="/locations/texas/sugar-land" className="font-bold text-neutral-950 underline">
-              Sugar Land, Texas
-            </Link>
-            ,{" "}
-            <Link href="/locations/texas/the-woodlands" className="font-bold text-neutral-950 underline">
-              The Woodlands, Texas
-            </Link>
-            ,{" "}
-            <Link href="/locations/michigan/detroit" className="font-bold text-neutral-950 underline">
-              Detroit, Michigan
-            </Link>
-            ,{" "}
-            <Link href="/locations/pennsylvania/philadelphia" className="font-bold text-neutral-950 underline">
-              Philadelphia, Pennsylvania
-            </Link>
-            ,{" "}
-            <Link href="/locations/arizona/scottsdale" className="font-bold text-neutral-950 underline">
-              Scottsdale &amp; Tempe, Arizona
-            </Link>
-            , or{" "}
-            <Link href="/locations/california/san-jose" className="font-bold text-neutral-950 underline">
-              San Jose, California
-            </Link>
-            , managing partners face the same reality: Google Ads clicks cost $150 to $350+, and generic SEO agencies waste your retainer on vanity metrics like Domain Authority (DA/PA). We build county-specific practice pages that rank in the Map Pack Top 3 and get cited by AI answer engines.
+            Instead of burning $150 to $350+ per Google Ads click or paying agencies for meaningless Domain Authority (DA) vanity metrics, SearchPrex engineers county court silos that rank in the Map Pack Top 3 and earn authoritative citations across Google AI Overviews and ChatGPT search.
           </>
         }
         bullets={[
           {
-            label: "Core USA Practice Areas",
-            detail: (
-              <>
-                <Link href="/services/law-firm-seo/personal-injury" className="underline font-semibold text-neutral-950">
-                  Personal Injury SEO
-                </Link>
-                ,{" "}
-                <Link href="/services/law-firm-seo/family-law" className="underline font-semibold text-neutral-950">
-                  Family Law &amp; Divorce SEO
-                </Link>
-                ,{" "}
-                <Link href="/services/law-firm-seo/criminal-defense" className="underline font-semibold text-neutral-950">
-                  Criminal Defense SEO
-                </Link>
-                ,{" "}
-                <Link href="/services/law-firm-seo/estate-planning" className="underline font-semibold text-neutral-950">
-                  Estate Planning &amp; Probate
-                </Link>
-                ,{" "}
-                <Link href="/services/law-firm-seo/mass-torts" className="underline font-semibold text-neutral-950">
-                  Mass Torts
-                </Link>
-                , and{" "}
-                <Link href="/services/law-firm-seo/google-business-profile-for-lawyers" className="underline font-semibold text-neutral-950">
-                  GBP for Lawyers
-                </Link>
-                .
-              </>
-            ),
+            label: "County Practice Silos",
+            detail: "Dedicated pages for Personal Injury, Family Law, Criminal Defense, and Probate court venues.",
           },
           {
-            label: "AEO & ChatGPT Readiness",
-            detail: "45–60 word statutory Answer Capsules + LegalService, Attorney & Speakable JSON-LD.",
+            label: "Map Pack Top 3 Dominance",
+            detail: "Primary GBP category precision, state bar citation reconciliation & review velocity.",
           },
           {
-            label: "Accountability & Exclusivity",
-            detail: "One law firm per US city & practice area · Weekly Monday GSC & call reports.",
+            label: "AEO & ChatGPT Answer Capsules",
+            detail: "45–60 word statutory answer capsules + LegalService, Attorney & Speakable JSON-LD.",
           },
           {
-            label: "Risk-Free Onboarding",
-            detail: "Limited-Time 7-Day Free Trial + 24-hour founder tear-down + month-to-month terms.",
+            label: "Market Exclusivity & 7-Day Trial",
+            detail: "Strictly 1 law firm per city & practice area · Full Monday reports · 90-day guarantee.",
           },
         ]}
         complianceBadge="ABA Model Rule 7.1 & Google YMYL Aligned"
         showLocationLink={true}
       />
 
-      {/* 3B. SPECIALIZED LAW FIRM SEO SERVICES & PRACTICE AREAS WE OFFER (6 SUB-SERVICES WITH CONTEXTUAL LINKS) */}
+      {/* 3B. 6 CORE USPS (DEDICATED CLIENT CARE, WEEKLY REPORTS, 7-DAY TRIAL, TEAR-DOWN, AUDIT, GUARANTEE) + LEAD CAPTURE FORM */}
+      <LawFirmUspAndAuditSection />
+
+      {/* 3C. SPECIALIZED LAW FIRM SEO SERVICES & PRACTICE AREAS WE OFFER (6 SUB-SERVICES WITH CONTEXTUAL LINKS) */}
       <LawFirmPracticeServicesSection />
+
+      {/* 3D. DEDICATED FOUNDER SPOTLIGHT (WHO IS MANAGING YOUR LAW FIRM'S SEO) */}
+      <LawFirmFounderSpotlight />
 
       {/* 4. 9-SECOND INTERACTIVE RELIEF VIDEO + 2 CLEAN NUMBERED PAIN CARDS */}
       <LawFirmReliefVideoSection />
@@ -342,9 +296,12 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
         </div>
       </Band>
 
-      {/* 10. TRANSPARENT PRICING & FOUNDER E-E-A-T */}
+      {/* 10. TRANSPARENT PRICING & INTERACTIVE ROI CALCULATOR */}
       <Band>
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+        {/* Interactive "1 Signed Case = Full ROI" Calculator */}
+        <LawFirmRoiCalculator />
+
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start pt-6">
           <div>
             <Eyebrow>Transparent Pricing &amp; Exclusivity</Eyebrow>
             <H2>Law Firm SEO Pricing ($1,200–$2,500/Mo) &amp; One-Firm-Per-City Exclusivity</H2>
@@ -374,25 +331,21 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
             <GuaranteeCard />
           </div>
         </div>
-        <div className="mx-auto mt-14 max-w-4xl">
-          <AuthorCard
-            name="Mubashar Sharif"
-            role='Founder · 5+ years · Ranked #1 on Google in Ohio for "Law Firm SEO Cleveland Ohio" · Semrush & HubSpot certified'
-            quote="&ldquo;Law firm SEO is won on verifiable trust — state bar credentials, genuine client reviews, county-venue pages, and content built to Google&rsquo;s YMYL standards. I&rsquo;ve taken US local businesses to #1 in Google&rsquo;s local results and into its AI Overviews, and I bring that exact method to every firm I work with.&rdquo;"
-            imageSrc="/images/mubashar-sharif.jpg"
-            imageAlt="Mubashar Sharif — Founder of SearchPrex"
-            linkedinUrl={LINKEDIN}
-            badges={["Semrush certified", "HubSpot certified", "5+ Years Mastery"]}
-          />
-        </div>
       </Band>
 
       {/* 11. LAW FIRM BLOG TEASER + FAQS + TELEMETRY STRAP + FINAL CTA */}
       <ServiceBlogTeaser topic="law-firm" />
 
-      <FaqBand title="USA Law Firm SEO, AEO & GEO questions, answered">
-        <FaqList faqs={[...CAPSULES, ...FAQS]} name="law-firm-seo-faq" />
-      </FaqBand>
+      <section id="faqs" className="bg-white py-16 sm:py-24 font-sans">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center text-3xl font-black leading-tight tracking-tight text-neutral-950 sm:text-4xl">
+            FAQs
+          </h2>
+          <div className="mt-10">
+            <FaqList faqs={[...CAPSULES, ...FAQS]} name="law-firm-seo-faq" />
+          </div>
+        </div>
+      </section>
 
       {/* 2026 CONFIRMED LEGAL TELEMETRY & PLAYBOOK STRAP — POSITIONED ABOVE FINAL CTA (CLEAN LIGHT THEME) */}
       <section className="border-y border-slate-200 bg-slate-50 px-4 py-4 sm:px-6 lg:px-8">
@@ -428,6 +381,9 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
       </section>
 
       <LawFirmStack />
+
+      {/* FLOATING "CHAT WITH MUBASHAR" FOUNDER WIDGET (RIGHT BOTTOM CORNER) */}
+      <ChatWithFounderWidget />
     </main>
   );
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Globe } from "lucide-react";
 
 const PRACTICE_PILLS = [
   { label: "Personal Injury SEO", href: "/services/law-firm-seo/personal-injury" },
@@ -16,14 +16,25 @@ const PRACTICE_PILLS = [
 ];
 
 export default function LawFirmSemrushHero() {
+  const [daDomain, setDaDomain] = useState("");
+
+  const handleDaCheck = (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = daDomain.trim().replace(/^https?:\/\//i, "").replace(/\/.*$/, "");
+    const targetUrl = clean
+      ? `https://nicheseopro.com/authority-checker?domain=${encodeURIComponent(clean)}`
+      : "https://nicheseopro.com/authority-checker";
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <section className="relative overflow-hidden bg-white text-neutral-950 pt-10 pb-16 md:pt-14 md:pb-22 border-b border-slate-200 font-sans">
       {/* Subtle Light Grey Ambient Dot Grid — Matches Location Pages Design */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb + Top Verified Ohio Ranking Claim */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        {/* Breadcrumb Navigation */}
+        <div className="mb-6">
           <nav aria-label="Breadcrumb" className="text-xs font-semibold text-slate-500 flex items-center gap-2">
             <Link href="/" className="hover:text-neutral-950 transition">
               Home
@@ -35,31 +46,26 @@ export default function LawFirmSemrushHero() {
             <span>/</span>
             <span className="text-neutral-950 font-bold">USA Law Firm SEO</span>
           </nav>
-
-          <div className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-slate-100 px-3.5 py-1 text-xs font-bold text-neutral-900">
-            <span className="h-1.5 w-1.5 rounded-full bg-neutral-950 shrink-0" />
-            <span>Ranked #1 on Google in Ohio for &ldquo;Law Firm SEO Cleveland Ohio&rdquo;</span>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Clean Location-Style Light Hero Content */}
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-5 pt-1">
             {/* Eyebrow Badges — Clean Monochrome Like Location Pages */}
             <div className="flex flex-wrap items-center gap-2.5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-900 text-xs font-bold uppercase tracking-wider">
                 <span>Law Firm SEO &middot; United States</span>
               </div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-900 text-xs font-semibold">
-                <span>1-Firm Practice Exclusivity &middot; ABA Rule 7.1 Compliant</span>
+                <span>1-Firm Practice Exclusivity &middot; $1,200–$2,500/Mo</span>
               </div>
             </div>
 
             {/* H1 Headline: Solid Black Bold with Clean Underline Accent */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
-              Law Firm SEO Services in the USA:{" "}
+              USA Law Firm SEO Services Built to Win the{" "}
               <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
-                Built for Signed Cases
+                Google Map Pack, AI Overviews &amp; Signed Cases.
               </span>
             </h1>
 
@@ -92,6 +98,37 @@ export default function LawFirmSemrushHero() {
               </div>
             </div>
 
+            {/* CHECK DOMAIN AUTHORITY SEARCH BAR CTA -> https://nicheseopro.com/authority-checker */}
+            <div className="pt-1">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-950 mb-2 flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-neutral-950 shrink-0" />
+                <span>Free Instant Check: Test Your Law Firm&apos;s Domain Authority &amp; SEO Health</span>
+              </p>
+              <form
+                onSubmit={handleDaCheck}
+                className="flex items-center justify-between gap-2 rounded-full border border-slate-300 bg-white p-1.5 pl-4 shadow-sm transition focus-within:border-neutral-950 focus-within:ring-2 focus-within:ring-neutral-950/10"
+              >
+                <div className="flex flex-1 items-center gap-2.5 min-w-0">
+                  <Globe className="h-4 w-4 text-slate-500 shrink-0" aria-hidden />
+                  <input
+                    type="text"
+                    value={daDomain}
+                    onChange={(e) => setDaDomain(e.target.value)}
+                    placeholder="yourlawfirm.com"
+                    aria-label="Enter your law firm domain to check authority"
+                    className="w-full bg-transparent text-xs sm:text-sm font-medium text-neutral-950 placeholder-slate-400 outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="shrink-0 inline-flex items-center gap-2 rounded-full bg-neutral-950 hover:bg-neutral-800 px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-2xs transition-all cursor-pointer"
+                >
+                  <span>Check Domain Authority</span>
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                </button>
+              </form>
+            </div>
+
             {/* Practice Area Pills — Clickable Contextual Links with Black Bullet Points */}
             <div className="pt-1">
               <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">
@@ -112,7 +149,7 @@ export default function LawFirmSemrushHero() {
             </div>
 
             {/* Primary & Secondary CTAs */}
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            <div className="pt-1 flex flex-wrap items-center gap-3.5">
               <Link
                 href="#7-day-trial"
                 className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 px-6 py-3.5 text-sm font-bold text-white shadow-xs transition cursor-pointer"
@@ -128,22 +165,6 @@ export default function LawFirmSemrushHero() {
                 <Play className="h-3.5 w-3.5 text-neutral-900 fill-neutral-900" aria-hidden />
                 <span>Watch 9-Sec Relief Video</span>
               </Link>
-            </div>
-
-            {/* Bottom Trust Points — Black Bullet Points */}
-            <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600 border-t border-slate-200">
-              <div className="flex items-center gap-2 font-semibold text-neutral-900">
-                <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
-                <span>One firm per city &amp; practice area</span>
-              </div>
-              <div className="flex items-center gap-2 font-semibold text-neutral-900">
-                <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
-                <span>5+ years founder-led mastery</span>
-              </div>
-              <div className="flex items-center gap-2 font-semibold text-neutral-900">
-                <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
-                <span>Weekly Monday consultation reports</span>
-              </div>
             </div>
           </div>
 
@@ -216,3 +237,4 @@ export default function LawFirmSemrushHero() {
     </section>
   );
 }
+
