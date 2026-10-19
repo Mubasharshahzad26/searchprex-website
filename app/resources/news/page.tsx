@@ -8,6 +8,7 @@ import { permanentRedirect } from "next/navigation";
 import { getPageSEO } from "@/lib/admin-seo";
 import NewsClient from "./NewsClient";
 import { db } from "@/lib/db";
+import { staticNewsSpokes } from "@/lib/static-news-spokes";
 
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/resources/news`;
@@ -202,21 +203,64 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
   const meta = category ? CATEGORY_META[category] : undefined;
   const pageUrl = category ? `${PAGE_URL}?category=${encodeURIComponent(category)}` : PAGE_URL;
 
-  const dbNews = await db.marketingNews.findMany({
-    where: { published: true },
-    orderBy: { newsDate: "desc" },
-  });
+  let dbNews: any[] = [];
+  try {
+    dbNews = await db.marketingNews.findMany({
+      where: { published: true },
+      orderBy: { newsDate: "desc" },
+    });
+  } catch (error) {
+    console.error("[SEO News] Failed to fetch news from DB, falling back:", error);
+  }
 
-  const dbSpokes = await db.marketingBlog.findMany({
-    where: {
-      published: true,
-      AND: [
-        { category: { contains: "News", mode: "insensitive" } },
-        ...(category ? [{ category: { contains: category, mode: "insensitive" as const } }] : []),
-      ],
-    },
-    orderBy: { publishedAt: "desc" },
-  });
+  let dbSpokes: any[] = [];
+  try {
+    dbSpokes = await db.marketingBlog.findMany({
+      where: {
+        published: true,
+        AND: [
+          { category: { contains: "News", mode: "insensitive" } },
+          ...(category ? [{ category: { contains: category, mode: "insensitive" as const } }] : []),
+        ],
+      },
+      orderBy: { publishedAt: "desc" },
+    });
+  } catch (error) {
+    console.error("[SEO News] Failed to fetch news spokes from DB, falling back:", error);
+  }
+
+  // Resilient fallback to static news spokes (protects against database outages or quota limits)
+  if (dbSpokes.length === 0) {
+    dbSpokes = staticNewsSpokes
+      .filter((s) => {
+        if (!category) return true;
+        return s.category.toLowerCase().includes(category.toLowerCase());
+      })
+      .map((s) => ({
+        id: s.slug,
+        slug: s.slug,
+        title: s.title,
+        excerpt: s.excerpt,
+        category: s.category,
+        author: s.author.name,
+        coverImage: s.heroImage,
+        readTime: s.readTime,
+        publishedAt: new Date(s.date),
+        updatedAt: new Date(s.dateModified || s.date),
+      }));
+  }
+
+  if (dbNews.length === 0) {
+    dbNews = staticNewsSpokes.map((s) => ({
+      id: s.slug,
+      title: s.title,
+      summary: s.excerpt,
+      tag: s.tags[0] || "News",
+      sourceLabel: "SearchPrex Verified",
+      sourceHref: s.canonicalUrl,
+      newsDate: new Date(s.date),
+    }));
+  }
 
   // Pin local-seo-updates spoke to the top of the collection
   const localSpokeIdx = dbSpokes.findIndex((s) => s.slug === "local-seo-updates");

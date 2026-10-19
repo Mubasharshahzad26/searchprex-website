@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PostClient from "@/app/blog/[slug]/PostClient";
 import { db } from "@/lib/db";
+import { staticNewsSpokes } from "@/lib/static-news-spokes";
 
 // Spokes render on demand and were then cached until the next deploy, so CMS
 // edits and unpublishes did not reach the live page. An hour bounds that.
@@ -77,6 +78,19 @@ async function getPostData(rawSlug: string) {
   } catch (err) {
     console.error("Failed to fetch DB post for news spoke:", slug, err);
   }
+
+  // Resilient fallback to static news spokes (protects against database outages or quota limits)
+  const fallback = staticNewsSpokes.find((p) => p.slug === slug);
+  if (fallback) {
+    return {
+      ...fallback,
+      category: (fallback.category?.split("—").pop() ?? "SEO News").trim(),
+      metaTitle: expandMonthToken(fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
+      ogTitle: expandMonthToken(fallback.ogTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
+      twitterTitle: expandMonthToken(fallback.twitterTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
+    };
+  }
+
   return null;
 }
 
@@ -195,6 +209,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+/** Pre-renders all known news spokes at build time so they are instantly served from Edge CDN with zero 404s. */
+export function generateStaticParams() {
+  return staticNewsSpokes.map((p) => ({ slug: p.slug }));
+}
+
 /**
  * Sibling spokes for the "Related articles" strip. The shared PostClient
  * otherwise falls back to `getRelated`, which only searches the file-based blog
@@ -265,19 +284,32 @@ async function getRelatedSpokes(currentSlug: string) {
       select: { slug: true, title: true, category: true, coverImage: true, excerpt: true },
     });
 
-    return siblings.map((s) => ({
+    if (siblings && siblings.length > 0) {
+      return siblings.map((s) => ({
+        slug: s.slug,
+        title: s.title,
+        // "SEO News — AI SEO" is too long for the card's eyebrow; the hub badge
+        // shows the same shortened form.
+        category: (s.category?.split("—").pop() ?? "SEO News").trim(),
+        subcategory: "",
+        heroImage: s.coverImage || undefined,
+      }));
+    }
+  } catch (err) {
+    console.warn("Failed to load related news spokes from DB, falling back to static", err);
+  }
+
+  // Resilient fallback to static news spokes
+  return staticNewsSpokes
+    .filter((s) => s.slug !== currentSlug)
+    .slice(0, 4)
+    .map((s) => ({
       slug: s.slug,
       title: s.title,
-      // "SEO News — AI SEO" is too long for the card's eyebrow; the hub badge
-      // shows the same shortened form.
       category: (s.category?.split("—").pop() ?? "SEO News").trim(),
       subcategory: "",
-      heroImage: s.coverImage || undefined,
+      heroImage: s.heroImage,
     }));
-  } catch (err) {
-    console.error("Failed to load related news spokes for", currentSlug, err);
-    return [];
-  }
 }
 
 export default async function NewsSpokePage({ params }: { params: Promise<{ slug: string }> }) {
