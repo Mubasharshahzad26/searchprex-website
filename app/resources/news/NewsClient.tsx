@@ -844,6 +844,10 @@ export default function NewsClient({
     // ── Base feed (unfiltered): deep-dive spokes + dated news items ──
   // Like/comment numbers come only from real stored reactions (default 0, never seeded).
   const SPOKE_SOURCES_MAP: Record<string, Array<{ label: string; href: string }>> = {
+    "google-ai-overviews-links-october-2026-publisher-update": [
+      { label: "Google", href: "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/" },
+      { label: "Google Search Central", href: "https://developers.google.com/search/docs/appearance/ai-features" },
+    ],
     "google-ai-overviews-commercial-searches-ecommerce-85-percent": [
       { label: "searchengineland", href: "https://searchengineland.com/google-ai-overviews-nearly-double-commercial-keywords-498078" },
       { label: "google", href: "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/" },

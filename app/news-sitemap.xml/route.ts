@@ -13,6 +13,27 @@ function escapeXml(value: string): string {
     .replace(/'/g, "&apos;");
 }
 
+const DB_QUERY_TIMEOUT_MS = 1500;
+
+async function queryNewsSitemapWithFallback<T>(query: Promise<T>, label: string): Promise<T | null> {
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const result = await Promise.race([
+      query,
+      new Promise<null>((resolve) => {
+        timeout = setTimeout(() => resolve(null), DB_QUERY_TIMEOUT_MS);
+      }),
+    ]);
+    if (result === null) console.warn(`[news-sitemap] ${label} timed out; using static articles.`);
+    return result;
+  } catch (error) {
+    console.error(`[news-sitemap] ${label} unavailable; using static articles:`, error);
+    return null;
+  } finally {
+    if (timeout) clearTimeout(timeout);
+  }
+}
+
 export async function GET(request: Request) {
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
@@ -25,9 +46,8 @@ export async function GET(request: Request) {
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
 
   type NewsSitemapPost = { slug: string; title: string; publishedAt: Date | null; updatedAt: Date; coverImage: string | null };
-  let posts: NewsSitemapPost[] = [];
-  try {
-    posts = await db.marketingBlog.findMany({
+  const recentPosts = await queryNewsSitemapWithFallback(
+    db.marketingBlog.findMany({
     where: {
       published: true,
       category: { contains: filterCat, mode: "insensitive" },
@@ -44,16 +64,16 @@ export async function GET(request: Request) {
       updatedAt: true,
       coverImage: true,
     },
-    });
-  } catch (error) {
-    console.error("[news-sitemap] Recent news unavailable:", error);
-  }
+    }),
+    "Recent article query",
+  );
+  let posts: NewsSitemapPost[] = recentPosts || [];
 
   // Ensure the sitemap always lists the latest active news spokes (up to 10)
   // so Google Search Console never encounters an empty <urlset>.
-  if (posts.length < 5) {
-    try {
-      posts = await db.marketingBlog.findMany({
+  if (posts.length < 5 && recentPosts !== null) {
+    const publishedPosts = await queryNewsSitemapWithFallback(
+      db.marketingBlog.findMany({
       where: {
         published: true,
         category: { contains: filterCat, mode: "insensitive" },
@@ -67,10 +87,10 @@ export async function GET(request: Request) {
         updatedAt: true,
         coverImage: true,
       },
-      });
-    } catch (error) {
-      console.error("[news-sitemap] Published news unavailable:", error);
-    }
+      }),
+      "Published article query",
+    );
+    if (publishedPosts) posts = publishedPosts;
   }
 
   // Always merge recent static stories; this keeps the News sitemap current even

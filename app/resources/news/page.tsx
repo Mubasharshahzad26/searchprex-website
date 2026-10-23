@@ -191,6 +191,27 @@ const PILLAR_SLUGS = [
   "ecommerce-seo-news-2026",
 ];
 
+const NEWS_DB_TIMEOUT_MS = 1500;
+
+async function queryNewsWithFallback<T>(query: Promise<T>, label: string): Promise<T | null> {
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const result = await Promise.race([
+      query,
+      new Promise<null>((resolve) => {
+        timeout = setTimeout(() => resolve(null), NEWS_DB_TIMEOUT_MS);
+      }),
+    ]);
+    if (result === null) console.warn(`[SEO News] ${label} timed out; using static articles.`);
+    return result;
+  } catch (error) {
+    console.error(`[SEO News] ${label} unavailable; using static articles:`, error);
+    return null;
+  } finally {
+    if (timeout) clearTimeout(timeout);
+  }
+}
+
 export default async function Page({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category: rawCategory } = await searchParams;
   const category = resolveCategoryKey(rawCategory);
@@ -203,31 +224,30 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
   const meta = category ? CATEGORY_META[category] : undefined;
   const pageUrl = category ? `${PAGE_URL}?category=${encodeURIComponent(category)}` : PAGE_URL;
 
-  let dbNews: any[] = [];
-  try {
-    dbNews = await db.marketingNews.findMany({
-      where: { published: true },
-      orderBy: { newsDate: "desc" },
-    });
-  } catch (error) {
-    console.error("[SEO News] Failed to fetch news from DB, falling back:", error);
-  }
-
-  let dbSpokes: any[] = [];
-  try {
-    dbSpokes = await db.marketingBlog.findMany({
-      where: {
-        published: true,
-        AND: [
-          { category: { contains: "News", mode: "insensitive" } },
-          ...(category ? [{ category: { contains: category, mode: "insensitive" as const } }] : []),
-        ],
-      },
-      orderBy: { publishedAt: "desc" },
-    });
-  } catch (error) {
-    console.error("[SEO News] Failed to fetch news spokes from DB, falling back:", error);
-  }
+  const [newsResult, spokesResult] = await Promise.all([
+    queryNewsWithFallback(
+      db.marketingNews.findMany({
+        where: { published: true },
+        orderBy: { newsDate: "desc" },
+      }),
+      "News feed query",
+    ),
+    queryNewsWithFallback(
+      db.marketingBlog.findMany({
+        where: {
+          published: true,
+          AND: [
+            { category: { contains: "News", mode: "insensitive" } },
+            ...(category ? [{ category: { contains: category, mode: "insensitive" as const } }] : []),
+          ],
+        },
+        orderBy: { publishedAt: "desc" },
+      }),
+      "News article query",
+    ),
+  ]);
+  let dbNews: any[] = newsResult || [];
+  let dbSpokes: any[] = spokesResult || [];
 
   // Merge source-checked static stories with CMS results so new articles remain visible while the DB is online or offline.
   const staticSpokes = staticNewsSpokes
