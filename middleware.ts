@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
   // Both are treated identically from here down: same login requirement, same
   // admin-role requirement. `isCmsRoute` exists so the two checks below cannot
   // drift apart again — adding a surface to that one line gates it everywhere.
-  const isAdminRoute = pathname.startsWith("/admin");
+  const isAdminRoute = pathname === "/admin" || pathname.startsWith("/admin/");
   const isContentAdminRoute = pathname.startsWith("/content-admin");
   const isCmsRoute = isAdminRoute || isContentAdminRoute;
   const isGatedTool = isGatedRoute(pathname);
