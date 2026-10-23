@@ -1,6 +1,6 @@
 "use client";
  
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -38,6 +38,11 @@ export default function LoginPage() {
   const [email,         setEmail]         = useState("");
   const [password,      setPassword]      = useState("");
   const [error,         setError]         = useState("");
+
+  useEffect(() => {
+    const message = new URLSearchParams(window.location.search).get("error");
+    if (message) setError(message);
+  }, []);
   const [emailLoading,  setEmailLoading]  = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
  

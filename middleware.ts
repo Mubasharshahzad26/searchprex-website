@@ -76,7 +76,7 @@ export async function middleware(request: NextRequest) {
   // Not logged in → redirect to login, remembering where they were headed so
   // the login page can send them back rather than dumping them on /dashboard.
   if (!user && isProtectedRoute) {
-    const login = new URL("/login", request.url);
+    const login = new URL(isCmsRoute ? "/admin-login" : "/login", request.url);
     login.searchParams.set("next", pathname);
     return NextResponse.redirect(login);
   }
@@ -122,6 +122,7 @@ export const config = {
     "/admin/:path*",
     "/content-admin/:path*",
     "/login",
+    "/admin-login",
     "/register",
     // No public tool routes are listed. GATED_TOOLS in lib/gated-routes is
     // empty, and a route the middleware has no decision to make about should

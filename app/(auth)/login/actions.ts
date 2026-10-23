@@ -8,8 +8,11 @@ import { MASTER_ADMIN_COOKIE, isMasterAdminPassword, masterAdminToken } from "@/
 // and the cookie stores a digest of it, never the password itself.
 export async function masterAdminLoginAction(password: string): Promise<{ success: boolean; error?: string }> {
   const token = await masterAdminToken();
-  if (!token || !(await isMasterAdminPassword(password))) {
-    return { success: false, error: "Invalid password." };
+  if (!token) {
+    return { success: false, error: "Admin password sign-in is not configured on this deployment. Set ADMIN_MASTER_PASSWORD in Vercel first." };
+  }
+  if (!(await isMasterAdminPassword(password))) {
+    return { success: false, error: "Incorrect admin password." };
   }
 
   const cookieStore = await cookies();
