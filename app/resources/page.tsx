@@ -115,10 +115,15 @@ export default async function ResourcesPage() {
     ]
   };
 
-  const dbResources = await db.marketingResource.findMany({
-    where: { published: true },
-    orderBy: { createdAt: "desc" },
-  });
+  let dbResources: any[] = [];
+  try {
+    dbResources = await db.marketingResource.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (error) {
+    console.error("[resources] Failed to fetch resources from DB, falling back to static:", error);
+  }
 
   return (
     <>

@@ -13,39 +13,37 @@ const SITE = "https://www.searchprex.com";
 // Helper to get post from DB
 async function getPostData(rawSlug: string) {
   const slug = decodeURIComponent(rawSlug);
+
+  // 1. Resilient static check first: serve all 10 verified spokes in 0ms with zero DB lag
+  const fallback = staticNewsSpokes.find((p) => p.slug === slug);
+  if (fallback) {
+    return {
+      ...fallback,
+      category: (fallback.category?.split("—").pop() ?? "SEO News").trim(),
+      metaTitle: expandMonthToken(fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
+      ogTitle: expandMonthToken(fallback.ogTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
+      twitterTitle: expandMonthToken(fallback.twitterTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
+    };
+  }
+
+  // 2. Query DB with fast 1000ms timeout for any dynamically published articles
   try {
-    // Only fetch blogs that are under the SEO News category
-    const dbPost = await db.marketingBlog.findUnique({ where: { slug } });
-    // `published` has to be checked here, not only in the hub and sitemap
-    // queries. Without it an unpublished article vanished from the listings but
-    // still rendered at its URL — crawlable, and shareable by anyone who had it.
+    const dbPromise = db.marketingBlog.findUnique({ where: { slug } });
+    const dbPost = await Promise.race([
+      dbPromise,
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), 1000)),
+    ]);
     if (dbPost && dbPost.published && dbPost.category && dbPost.category.toLowerCase().includes("news")) {
       return {
         slug: dbPost.slug,
-        // The stored category is "SEO News — Technical" so that the hub and the
-        // subnav queries both match it. Only the tail belongs in the breadcrumb,
-        // which already shows "SEO News" as the section.
         category: (dbPost.category?.split("—").pop() ?? "SEO News").trim(),
         subcategory: "",
         title: dbPost.title,
-        // The DB carries a separate, SERP-tuned metaTitle/metaDescription pair
-        // that nothing here used to read. `title` went straight to the <title>
-        // tag from the H1 (too long, so it truncated in the SERP), and
-        // metaDescription was unreachable because `excerpt` is always set and
-        // won the `||` below. Keep `title` for the H1 and the schema headline;
-        // this pair is what Google actually renders.
-        // Expanded here rather than in generateMetadata so the token can never
-        // reach the client payload: this whole object is serialized as a prop
-        // for PostClient, and a raw "{month}" was showing up in the RSC flight
-        // data even though no meta tag carried it.
         metaTitle: expandMonthToken(dbPost.metaTitle || dbPost.title, dbPost.updatedAt.toISOString()),
         metaDescription: dbPost.metaDescription || dbPost.excerpt || "",
         excerpt: dbPost.excerpt || dbPost.metaDescription || "",
         readTime: dbPost.readTime || "7-minute read",
         date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split("T")[0] : dbPost.createdAt.toISOString().split("T")[0],
-        // Freshness signal for schema.org. These pages target dated queries
-        // ("... news today", "... updates september 2026"), and datePublished
-        // alone tells Google nothing about whether the page still maintained.
         dateModified: dbPost.updatedAt.toISOString(),
         author: {
           name: dbPost.author || "Mubashar Sharif",
@@ -59,9 +57,6 @@ async function getPostData(rawSlug: string) {
             ? `${SITE}/og/local-seo-updates-1200x630.png`
             : dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
-        // null, not an empty object: PostClient renders the headline stat badge
-        // on any truthy value, so `{ value: "", label: "" }` produced an empty
-        // badge on every news article.
         stat: null,
         toc: [],
         content: dbPost.content || "",
@@ -77,18 +72,6 @@ async function getPostData(rawSlug: string) {
     }
   } catch (err) {
     console.error("Failed to fetch DB post for news spoke:", slug, err);
-  }
-
-  // Resilient fallback to static news spokes (protects against database outages or quota limits)
-  const fallback = staticNewsSpokes.find((p) => p.slug === slug);
-  if (fallback) {
-    return {
-      ...fallback,
-      category: (fallback.category?.split("—").pop() ?? "SEO News").trim(),
-      metaTitle: expandMonthToken(fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
-      ogTitle: expandMonthToken(fallback.ogTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
-      twitterTitle: expandMonthToken(fallback.twitterTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
-    };
   }
 
   return null;
@@ -273,7 +256,7 @@ async function getRelatedSpokes(currentSlug: string) {
   }
 
   try {
-    const siblings = await db.marketingBlog.findMany({
+    const dbPromise = db.marketingBlog.findMany({
       where: {
         published: true,
         slug: { not: currentSlug },
@@ -284,12 +267,15 @@ async function getRelatedSpokes(currentSlug: string) {
       select: { slug: true, title: true, category: true, coverImage: true, excerpt: true },
     });
 
+    const siblings = await Promise.race([
+      dbPromise,
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), 800)),
+    ]);
+
     if (siblings && siblings.length > 0) {
       return siblings.map((s) => ({
         slug: s.slug,
         title: s.title,
-        // "SEO News — AI SEO" is too long for the card's eyebrow; the hub badge
-        // shows the same shortened form.
         category: (s.category?.split("—").pop() ?? "SEO News").trim(),
         subcategory: "",
         heroImage: s.coverImage || undefined,
