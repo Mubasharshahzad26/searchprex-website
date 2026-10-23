@@ -20,8 +20,17 @@ export default function AdminLoginPage() {
     event.preventDefault();
     setLoading(true);
     setError("");
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     try {
-      const result = await masterAdminLoginAction(password);
+      const result = await Promise.race([
+        masterAdminLoginAction(password),
+        new Promise<never>((_, reject) => {
+          timeoutId = setTimeout(
+            () => reject(new Error("Sign-in timed out. Check Vercel Runtime Logs and confirm this deployment has ADMIN_MASTER_PASSWORD set for Production.")),
+            15000,
+          );
+        }),
+      ]);
       if (!result.success) {
         setError(result.error || "Could not sign in. Try again.");
         setLoading(false);
@@ -29,9 +38,11 @@ export default function AdminLoginPage() {
       }
       router.replace(getNextPath());
       router.refresh();
-    } catch {
-      setError("Sign-in failed. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Sign-in failed. Please try again.");
       setLoading(false);
+    } finally {
+      if (timeoutId) clearTimeout(timeoutId);
     }
   }
 
