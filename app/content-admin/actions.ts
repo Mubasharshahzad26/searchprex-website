@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { notifySubscribersOfNewPost } from "@/lib/newsletter";
 import { marketingPostUrl, submitToIndexNow } from "@/lib/indexnow";
+import { staticNewsSpokes } from "@/lib/static-news-spokes";
 
 /**
  * Every action below is admin-only, and the middleware is NOT enough on its own.
@@ -138,6 +139,79 @@ export async function deleteMarketingCaseStudy(id: string) {
   revalidatePath("/content-admin/case-studies");
 }
 
+// --- FULL SEO NEWS ARTICLES (stored in MarketingBlog so existing public
+// NewsArticle routes and their canonical/OG/Twitter/schema rendering are used) ---
+export async function getMarketingNewsArticles() {
+  await requireAdmin();
+  return await db.marketingBlog.findMany({
+    where: { category: { contains: "SEO News", mode: "insensitive" } },
+    orderBy: { updatedAt: "desc" },
+  });
+}
+
+function normalizeNewsArticleData(data: any) {
+  const slug = String(data.slug || "").trim();
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    throw new Error("Enter a valid URL slug using lowercase letters, numbers, and hyphens.");
+  }
+  if (staticNewsSpokes.some((spoke) => spoke.slug === slug)) {
+    throw new Error("This URL slug is already used by a live SEO News page. Choose a different slug.");
+  }
+  const requestedCategory = String(data.category || "").trim();
+  const category = requestedCategory.toLowerCase().includes("seo news")
+    ? requestedCategory
+    : `SEO News${requestedCategory ? ` — ${requestedCategory}` : ""}`;
+  return { ...data, slug, category, schemaType: "NewsArticle" };
+}
+
+export async function createMarketingNewsArticle(data: any) {
+  await requireAdmin();
+  const normalized = normalizeNewsArticleData(data);
+  if (normalized.published && !normalized.publishedAt) normalized.publishedAt = new Date();
+  const article = await db.marketingBlog.create({ data: normalized });
+  if (article.published) {
+    await submitToIndexNow([`https://www.searchprex.com/resources/news/${article.slug}`]);
+  }
+  revalidatePath("/content-admin/news");
+  revalidatePath("/resources/news");
+  revalidatePath(`/resources/news/${article.slug}`);
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/news-sitemap.xml");
+  return article;
+}
+
+export async function updateMarketingNewsArticle(id: string, data: any) {
+  await requireAdmin();
+  const existing = await db.marketingBlog.findUnique({ where: { id } });
+  if (!existing) throw new Error("News article not found.");
+  const normalized = normalizeNewsArticleData(data);
+  if (normalized.published && !normalized.publishedAt && !existing.publishedAt) {
+    normalized.publishedAt = new Date();
+  }
+  const article = await db.marketingBlog.update({ where: { id }, data: normalized });
+  if (article.published) {
+    const urls = [`https://www.searchprex.com/resources/news/${article.slug}`];
+    if (existing.slug !== article.slug) urls.push(`https://www.searchprex.com/resources/news/${existing.slug}`);
+    await submitToIndexNow(urls);
+  }
+  revalidatePath("/content-admin/news");
+  revalidatePath("/resources/news");
+  revalidatePath(`/resources/news/${existing.slug}`);
+  revalidatePath(`/resources/news/${article.slug}`);
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/news-sitemap.xml");
+  return article;
+}
+
+export async function deleteMarketingNewsArticle(id: string) {
+  await requireAdmin();
+  const article = await db.marketingBlog.delete({ where: { id } });
+  revalidatePath("/content-admin/news");
+  revalidatePath("/resources/news");
+  revalidatePath(`/resources/news/${article.slug}`);
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/news-sitemap.xml");
+}
 // --- MARKETING NEWS ---
 export async function getMarketingNews() {
   await requireAdmin();

@@ -49,8 +49,8 @@ export function NewsManager({ initialNews }: { initialNews: any[] }) {
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
-        <CardTitle>SEO News</CardTitle>
-        <Button onClick={() => setIsCreating(true)}>Add News</Button>
+        <div><CardTitle>News Feed Cards</CardTitle><p className="mt-1 text-sm text-muted-foreground">Short source-linked updates used in the live news feed. Use SEO News Articles above for a full indexable article page.</p></div>
+        <Button onClick={() => setIsCreating(true)}>Add Feed Item</Button>
       </CardHeader>
       <CardContent>
         {news.length === 0 ? (
