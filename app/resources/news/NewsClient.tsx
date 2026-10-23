@@ -844,6 +844,10 @@ export default function NewsClient({
     // ── Base feed (unfiltered): deep-dive spokes + dated news items ──
   // Like/comment numbers come only from real stored reactions (default 0, never seeded).
   const SPOKE_SOURCES_MAP: Record<string, Array<{ label: string; href: string }>> = {
+    "google-ai-overviews-commercial-searches-ecommerce-85-percent": [
+      { label: "searchengineland", href: "https://searchengineland.com/google-ai-overviews-nearly-double-commercial-keywords-498078" },
+      { label: "google", href: "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/" },
+    ],
     "tesla-flying-car-roadster-alef-ai-search-trend-seo-2026": [
       { label: "cnet", href: "https://www.cnet.com/home/electric-vehicles/tesla-roadster-reveal-spacex-tech/" },
       { label: "electrek", href: "https://electrek.co/2026/10/15/alefs-electric-flying-car-flies-over-tesla-roadster-video/" },
@@ -1183,7 +1187,7 @@ export default function NewsClient({
   const FAQS = [
     {
       q: "What is the latest SEO news in the past 2 days?",
-      a: "In the past 48 hours (October 15, 2026), Google rolled out Gemini 4 Argon globally in AI Mode for Google AI Pro and Ultra subscribers, clarified how PDFs are indexed and ranked across Web Search and AI Mode, and began testing a 'Dive deeper' AI feature in Google Discover as job postings point toward a 'proactive concierge' experience. Earlier on October 8, Google also completed its 14-day September 2026 Spam Update.",
+      a: "In its October 22, 2026 report, Search Engine Land summarized a Semrush study that found AI Overviews on 88% of a 400-keyword U.S. commercial-search sample and 85% of the sampled ecommerce keywords. The study measured feature coverage, not clicks or conversions. Google separately announced on October 15 that it was making links in AI Mode and AI Overviews more prominent.",
     },
     {
       q: "What is the latest Google Search Console news and updates?",

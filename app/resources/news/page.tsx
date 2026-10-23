@@ -229,26 +229,22 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
     console.error("[SEO News] Failed to fetch news spokes from DB, falling back:", error);
   }
 
-  // Resilient fallback to static news spokes (protects against database outages or quota limits)
-  if (dbSpokes.length === 0) {
-    dbSpokes = staticNewsSpokes
-      .filter((s) => {
-        if (!category) return true;
-        return s.category.toLowerCase().includes(category.toLowerCase());
-      })
-      .map((s) => ({
-        id: s.slug,
-        slug: s.slug,
-        title: s.title,
-        excerpt: s.excerpt,
-        category: s.category,
-        author: s.author.name,
-        coverImage: s.heroImage,
-        readTime: s.readTime,
-        publishedAt: new Date(s.date),
-        updatedAt: new Date(s.dateModified || s.date),
-      }));
+  // Merge source-checked static stories with CMS results so new articles remain visible while the DB is online or offline.
+  const staticSpokes = staticNewsSpokes
+    .filter((s) => !category || s.category.toLowerCase().includes(category.toLowerCase()))
+    .map((s) => ({
+      id: s.slug, slug: s.slug, title: s.title, excerpt: s.excerpt,
+      category: s.category, author: s.author.name, coverImage: s.heroImage,
+      readTime: s.readTime, publishedAt: new Date(s.date),
+      updatedAt: new Date(s.dateModified || s.date),
+    }));
+  const spokeBySlug = new Map<string, any>();
+  for (const spoke of [...staticSpokes, ...dbSpokes]) {
+    if (!spokeBySlug.has(spoke.slug)) spokeBySlug.set(spoke.slug, spoke);
   }
+  dbSpokes = [...spokeBySlug.values()].sort(
+    (a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime(),
+  );
 
   if (dbNews.length === 0) {
     dbNews = staticNewsSpokes.map((s) => ({
@@ -331,7 +327,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "What is the latest SEO news in the past 2 days?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "In the past 48 hours (October 15, 2026), Google rolled out Gemini 4 Argon globally in AI Mode for Google AI Pro and Ultra subscribers, clarified how PDFs are indexed and ranked across Web Search and AI Mode, and began testing a 'Dive deeper' AI feature in Google Discover as job postings point toward a 'proactive concierge' experience. Earlier on October 8, Google also completed its 14-day September 2026 Spam Update.",
+          text: "In its October 22, 2026 report, Search Engine Land summarized a Semrush study that found AI Overviews on 88% of a 400-keyword U.S. commercial-search sample and 85% of the sampled ecommerce keywords. The study measured feature coverage, not clicks or conversions. Google separately announced on October 15 that it was making links in AI Mode and AI Overviews more prominent.",
         },
       },
       {

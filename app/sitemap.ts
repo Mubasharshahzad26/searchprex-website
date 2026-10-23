@@ -16,6 +16,7 @@ import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { isGatedRoute } from "@/lib/gated-routes";
+import { staticNewsSpokes } from "@/lib/static-news-spokes";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
@@ -291,6 +292,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } catch (error) {
     console.error("[sitemap] SEO News spokes unavailable:", error);
+  }
+
+  // Static fallback spokes remain valid, published URLs while the CMS database is unavailable.
+  for (const spoke of staticNewsSpokes) {
+    add({
+      url: spoke.canonicalUrl || absolute(`/resources/news/${spoke.slug}`),
+      lastModified: new Date(spoke.dateModified || `${spoke.date}T00:00:00.000Z`),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    });
   }
 
   for (const { city } of getAllCitySlugs()) {

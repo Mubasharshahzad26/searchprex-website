@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { staticNewsSpokes } from "@/lib/static-news-spokes";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +24,10 @@ export async function GET(request: Request) {
   const twoDaysAgo = new Date();
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
 
-  let posts = await db.marketingBlog.findMany({
+  type NewsSitemapPost = { slug: string; title: string; publishedAt: Date | null; updatedAt: Date; coverImage: string | null };
+  let posts: NewsSitemapPost[] = [];
+  try {
+    posts = await db.marketingBlog.findMany({
     where: {
       published: true,
       category: { contains: filterCat, mode: "insensitive" },
@@ -40,12 +44,16 @@ export async function GET(request: Request) {
       updatedAt: true,
       coverImage: true,
     },
-  });
+    });
+  } catch (error) {
+    console.error("[news-sitemap] Recent news unavailable:", error);
+  }
 
   // Ensure the sitemap always lists the latest active news spokes (up to 10)
   // so Google Search Console never encounters an empty <urlset>.
   if (posts.length < 5) {
-    posts = await db.marketingBlog.findMany({
+    try {
+      posts = await db.marketingBlog.findMany({
       where: {
         published: true,
         category: { contains: filterCat, mode: "insensitive" },
@@ -59,8 +67,34 @@ export async function GET(request: Request) {
         updatedAt: true,
         coverImage: true,
       },
-    });
+      });
+    } catch (error) {
+      console.error("[news-sitemap] Published news unavailable:", error);
+    }
   }
+
+  // Always merge recent static stories; this keeps the News sitemap current even
+  // when the CMS is healthy but does not yet contain a newly published article.
+  const staticPosts: NewsSitemapPost[] = staticNewsSpokes
+    .filter((spoke) => {
+      const isRecent = new Date(`${spoke.date}T00:00:00.000Z`) >= twoDaysAgo;
+      const matchesCategory = !categoryParam || spoke.category.toLowerCase().includes(categoryParam.toLowerCase());
+      return isRecent && matchesCategory;
+    })
+    .map((spoke) => ({
+      slug: spoke.slug,
+      title: spoke.title,
+      publishedAt: new Date(`${spoke.date}T00:00:00.000Z`),
+      updatedAt: new Date(spoke.dateModified || `${spoke.date}T00:00:00.000Z`),
+      coverImage: spoke.heroImage,
+    }));
+  const postBySlug = new Map<string, NewsSitemapPost>();
+  for (const post of [...staticPosts, ...posts]) {
+    if (!postBySlug.has(post.slug)) postBySlug.set(post.slug, post);
+  }
+  posts = [...postBySlug.values()]
+    .sort((a, b) => new Date(b.publishedAt || b.updatedAt).getTime() - new Date(a.publishedAt || a.updatedAt).getTime())
+    .slice(0, 10);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
