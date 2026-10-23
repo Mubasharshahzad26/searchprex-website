@@ -59,6 +59,11 @@ const failures = [];
 for (const file of pages) {
   const src = fs.readFileSync(file, "utf8");
   if (NOINDEX.test(src)) continue;
+  // Metadata is inherited from layouts in Next.js. A noindex layout makes its
+  // child pages intentionally non-public even when the page itself is a client
+  // component and cannot export metadata (for example /admin-login).
+  const layoutFile = path.join(path.dirname(file), "layout.tsx");
+  if (fs.existsSync(layoutFile) && NOINDEX.test(fs.readFileSync(layoutFile, "utf8"))) continue;
   if (HAS_CANONICAL.test(src) || USES_HELPER.test(src)) continue;
 
   const route =

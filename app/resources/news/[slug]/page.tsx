@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import PostClient from "@/app/blog/[slug]/PostClient";
 import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
+import { getStaticNewsPillar, NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
 
 // Spokes render on demand and were then cached until the next deploy, so CMS
 // edits and unpublishes did not reach the live page. An hour bounds that.
@@ -73,6 +74,11 @@ async function getPostData(rawSlug: string) {
   } catch (err) {
     console.error("Failed to fetch DB post for news spoke:", slug, err);
   }
+
+  // The News hub links to these eight topic guides. Preserve their routes when
+  // the CMS database is paused/unavailable, while preferring live CMS content.
+  const staticPillar = getStaticNewsPillar(slug);
+  if (staticPillar) return staticPillar;
 
   return null;
 }
@@ -194,7 +200,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 /** Pre-renders all known news spokes at build time so they are instantly served from Edge CDN with zero 404s. */
 export function generateStaticParams() {
-  return staticNewsSpokes.map((p) => ({ slug: p.slug }));
+  return [...new Set([
+    ...staticNewsSpokes.map((p) => p.slug),
+    ...NEWS_TOPIC_GUIDES.map((guide) => guide.slug),
+  ])].map((slug) => ({ slug }));
 }
 
 /**

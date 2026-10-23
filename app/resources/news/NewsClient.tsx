@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
 import {
   Newspaper,
   ExternalLink,
@@ -305,75 +306,6 @@ function MediumIcon({ className = "h-4 w-4" }: { className?: string }) {
     </svg>
   );
 }
-
-/* ─── 8 TOPIC GUIDES (PILLAR PAGES) ─── */
-const TOPIC_GUIDES = [
-  {
-    slug: "local-seo-updates",
-    title: "Local SEO News 2026: What Confirmed Updates Mean for the Map Pack",
-    category: "Local SEO",
-    tagColor: "#c2410c",
-    badge: "Pinned Pillar",
-    updatedDate: "Oct 2, 2026",
-    description: "A dated, sourced log of local search changes — GBP suggested edits, the September spam update, review sign-in, and what each means for map pack rankings.",
-  },
-  {
-    slug: "google-algorithm-updates",
-    title: "Google Algorithm Updates 2026: Every Confirmed Update, Dated",
-    category: "Algorithm Radar",
-    tagColor: "#7c3aed",
-    updatedDate: "Sep 28, 2026",
-    description: "Every Google algorithm update confirmed in 2026, with exact start and end dates — Discover, core, and spam updates — and what each one actually changed.",
-  },
-  {
-    slug: "state-of-seo-2026",
-    title: "The State of SEO in 2026: What Eight Months of Updates Actually Taught Us",
-    category: "SEO Review",
-    tagColor: "#534AB7",
-    updatedDate: "Sep 18, 2026",
-    description: "A grounded 2026 SEO review built on confirmed updates and Google's own announcements — what changed, what didn't, and where to put your organic effort.",
-  },
-  {
-    slug: "ai-sge-seo-news",
-    title: "AI SEO News 2026: AI Overviews at 2.5B Users and What Google Now Reports",
-    category: "AI Search",
-    tagColor: "#2f9670",
-    updatedDate: "Sep 18, 2026",
-    description: "The 2026 AI SEO record: AI Overviews at 2.5B monthly users, AI Mode at 1B, and Search Console's first generative AI reports. Dated, sourced, and actionable.",
-  },
-  {
-    slug: "llm-seo-news-2026",
-    title: "LLM SEO News 2026: Answer Engines, Citations and What Can Be Measured",
-    category: "AEO / LLMs",
-    tagColor: "#0284c7",
-    updatedDate: "Sep 18, 2026",
-    description: "How LLM answer engines changed in 2026 — Gemini 3.5 Flash in AI Mode, Search Console's AI reports, crawler control, and what AEO can honestly be measured on.",
-  },
-  {
-    slug: "technical-seo-news-2026",
-    title: "Technical SEO News 2026: FAQ Rich Results Gone, AI Crawlers, and Crawl Control",
-    category: "Technical SEO",
-    tagColor: "#0f766e",
-    updatedDate: "Sep 18, 2026",
-    description: "The 2026 technical SEO changes that matter: FAQ rich results removed, Search Console API changes, and how to control AI crawlers without losing citations.",
-  },
-  {
-    slug: "seo-tools-news-2026",
-    title: "SEO Tools News 2026: Every Search Console Change That Landed This Year",
-    category: "Tools & GSC",
-    tagColor: "#0369a1",
-    updatedDate: "Sep 18, 2026",
-    description: "The 2026 SEO tooling record: Search Console's generative AI reports, platform properties for social and video, and the FAQ report removal. Dated and sourced.",
-  },
-  {
-    slug: "ecommerce-seo-news-2026",
-    title: "Ecommerce SEO News 2026: UCP, Universal Cart and Agentic Checkout",
-    category: "Ecommerce SEO",
-    tagColor: "#be185d",
-    updatedDate: "Sep 18, 2026",
-    description: "Google's Universal Commerce Protocol, Universal Cart and agentic checkout in AI Mode — what launched in 2026, when, and what it changes for online stores.",
-  },
-];
 
 /* ─── ALGORITHM UPDATE TRACKER TABLE DATA ─── */
 const ALGORITHM_UPDATES_TRACKER = [
@@ -1010,8 +942,8 @@ export default function NewsClient({
   const showGscContext = selectedCategory === "all" || selectedCategory === "seo";
   const guidesForCategory =
     selectedCategory === "all"
-      ? TOPIC_GUIDES
-      : TOPIC_GUIDES.filter((g) => matchesCategory(g.category, selectedCategory, `${g.title} ${g.description}`));
+      ? NEWS_TOPIC_GUIDES
+      : NEWS_TOPIC_GUIDES.filter((g) => matchesCategory(g.category, selectedCategory, `${g.title} ${g.description}`));
   const latestDateLabel = categoryItems[0] ? formatDate(categoryItems[0].rawDate) : "—";
 
   const isFiltered = Boolean(

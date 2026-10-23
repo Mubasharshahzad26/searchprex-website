@@ -592,6 +592,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Client-care philosophy: set clear expectations and connect it to proof. */}
+      <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6 lg:py-20">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="The SearchPrex philosophy"
+            title="You should always know who is doing the work—and what it changed."
+            sub="SEO is a long-term investment. We keep the relationship direct, the reporting understandable, and the work tied to the searches and enquiries your business needs."
+          />
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                title: "One person accountable",
+                body: "You work directly with founder Mubashar Sharif on the audit, priorities, implementation and weekly review.",
+              },
+              {
+                title: "A clear view of progress",
+                body: "Monday reporting explains what changed in Search Console, local visibility and leads—and what is being worked on next.",
+              },
+              {
+                title: "A plan shaped around your market",
+                body: "The work starts with your site, competitors and service area. Law firms receive one-firm-per-city exclusivity to avoid local conflicts.",
+              },
+            ].map((item) => (
+              <article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+                <h3 className={`${H} text-lg text-neutral-950`}>{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-bold">
+            <Link href="/case-studies" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
+              See the evidence in our case studies <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/services/law-firm-seo" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
+              How we work with law firms <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/locations" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
+              Explore our service locations <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 8 · FOUNDER + REVIEW */}
       <section className="bg-neutral-900 px-4 py-20 text-white sm:px-6 lg:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
