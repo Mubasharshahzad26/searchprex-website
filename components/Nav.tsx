@@ -132,6 +132,7 @@ const navLinks: NavLink[] = [
  
 export default function Nav() {
   const pathname = usePathname();
+  const showClevelandOffer = pathname === "/locations/ohio/cleveland";
   const [isScrolled,       setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown,   setActiveDropdown]   = useState<string | null>(null);
@@ -201,6 +202,34 @@ export default function Nav() {
             : "border-slate-200/60"
         }`}
       >
+        {showClevelandOffer && !isScrolled && (
+          <div
+            role="region"
+            aria-label="Cleveland law firm offer"
+            className="h-9 bg-neutral-900 text-white"
+          >
+            <div className="mx-auto flex h-full max-w-7xl items-center justify-center gap-3 px-3 text-xs sm:gap-5 sm:px-6">
+              <span className="font-semibold">7-Day Free Trial</span>
+              <span className="hidden text-white/75 sm:inline">No credit card · No auto-charge</span>
+              <a
+                href="#cleveland-trial"
+                className="font-bold text-white underline underline-offset-2 hover:text-slate-200"
+              >
+                <span className="sm:hidden">View trial</span>
+                <span className="hidden sm:inline">See what&apos;s included</span>
+              </a>
+              <a
+                href="tel:+923059158010"
+                aria-label="Call SearchPrex at +92 305 915 8010"
+                className="rounded-md bg-white px-2.5 py-1 font-bold text-neutral-950 hover:bg-slate-100 sm:px-3"
+              >
+                <span className="sm:hidden">Call</span>
+                <span className="hidden sm:inline">Call +92 305 915 8010</span>
+              </a>
+            </div>
+          </div>
+        )}
+
         {/* Main nav */}
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
@@ -426,4 +455,3 @@ export default function Nav() {
     </>
   );
 }
- 

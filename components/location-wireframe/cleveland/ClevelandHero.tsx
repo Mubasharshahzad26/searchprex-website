@@ -115,7 +115,7 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-16 md:pb-24 border-b border-slate-200">
+    <section className="relative overflow-hidden bg-white pt-[5.25rem] pb-16 md:pt-[6.25rem] md:pb-24 border-b border-slate-200">
       {/* Subtle Light Grey Ambient Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
@@ -147,7 +147,7 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
 
             {/* Subheading (Focus Keyword in First 100 Words) */}
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-              Cleveland law firm SEO is engineered for Ohio attorneys who need signed retainers, not vanity clicks. We build permanent Cuyahoga County Map Pack, page-one organic, and AI-answer visibility across Cleveland, Lakewood, and Beachwood that delivers phone-ready cases with verified month-to-month attribution.
+              We help Cleveland law firms improve local search visibility and make it easier for potential clients to find the right practice area and contact the firm. The work can include useful Ohio-specific content and tracking calls and form enquiries; results vary by firm and market.
             </p>
 
             {/* Demand Ledger Practice Selector */}
@@ -157,7 +157,7 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                   Cuyahoga County Practice Demand
                 </span>
                 <span className="text-[11px] font-semibold text-slate-500">
-                  Tap to view live search drivers
+                  Select a practice area to see local considerations
                 </span>
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -204,7 +204,22 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
             </div>
 
             {/* Secondary Action Links */}
-            <div className="flex flex-wrap items-center gap-4 pt-1">
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <button
+                type="button"
+                onClick={() => scrollToSection("reality-check")}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm transition-all"
+              >
+                Get Your Free Cleveland Local Audit
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <a
+                href="tel:+923059158010"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-50 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
+                aria-label="Call SearchPrex at +92 305 915 8010"
+              >
+                Call +92 305 915 8010
+              </a>
               <button
                 type="button"
                 onClick={() => scrollToSection("cost-ledger")}
@@ -215,10 +230,10 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
               </button>
               <button
                 type="button"
-                onClick={() => scrollToSection("reality-check")}
+                onClick={() => scrollToSection("diagnose")}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-800 hover:text-neutral-950 underline underline-offset-4"
               >
-                Explore 24h Reality Check
+                See the 7-Day Free Trial
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -250,10 +265,10 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                 <div>
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
                     <Clock className="w-3 h-3 text-neutral-800" />
-                    Free 24-Hour Cuyahoga Audit
+                    Free Cleveland Local SEO Audit
                   </span>
                   <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
-                    Get Your Cleveland Reality Check
+                    See Your Local Visibility & Lead Gaps
                   </h2>
                 </div>
               </div>
@@ -265,7 +280,7 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                     Audit Request Received
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    Thank you. Mubashar will personally audit your Cleveland rankings, Cuyahoga County citation profile, and competitor gaps, and email your 24-hour video review directly.
+                    Thank you. Mubashar will review your website, local search visibility, and competitor opportunities, then email your audit within 24 hours.
                   </p>
                 </div>
               ) : (
@@ -376,7 +391,7 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                       disabled={status === "submitting"}
                       className="w-full py-3.5 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                     >
-                      <span>{status === "submitting" ? "Submitting Request..." : "Send My Free 24-Hour Reality Check"}</span>
+                      <span>{status === "submitting" ? "Submitting Request..." : "Get My Free Cleveland Local Audit"}</span>
                       <ArrowRight className="w-4 h-4 text-white" />
                     </button>
                   </div>

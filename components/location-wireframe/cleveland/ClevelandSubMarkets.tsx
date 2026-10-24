@@ -85,7 +85,7 @@ export default function ClevelandSubMarkets() {
             Cleveland Metro Submarkets & Courts
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            A single Downtown Cleveland landing page will not reliably trigger Google's 3-pack or AI search across the suburbs. We architect hyper-localized silos anchored by local courts and municipal jurisdictions.
+            Search visibility varies by query and searcher's location. We first confirm which communities the firm serves, then recommend distinct local content only where it adds accurate, useful information.
           </p>
         </div>
 

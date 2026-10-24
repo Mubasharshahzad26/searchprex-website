@@ -268,20 +268,20 @@ export const CITY_PAGES: CityPage[] = [
     state: "Ohio",
     stateAbbr: "OH",
     county: "Cuyahoga County",
-    metaTitle: "Law Firm SEO Cleveland, OH | Proven Numbers, More Cases",
+    metaTitle: "Cleveland Law Firm SEO | 7-Day Free Trial",
     metaDescription:
-      "Law firm SEO in Cleveland, Ohio: Map Pack, AI answers and Cuyahoga County pages, reported in calls and signed cases. Free reality check.",
+      "Free Cleveland local SEO audit and 7-day trial—no credit card or auto-charge. Law firm plans start at $1,500/mo; scope depends on practice areas and locations.",
     h1: "Law Firm SEO in Cleveland, Ohio: Predictable Leads, Proven Numbers",
     heroSub:
       "Cleveland attorneys do not buy hype. We build search and AI visibility that earns signed cases, then show every number behind it.",
     problem:
-      "Cleveland legal searches return national directories and firms from other cities. Local firms are absent not because they are outranked, but because they have nothing on the page that says they practise here.",
+      "Cleveland law firms compete for visibility across organic results, local listings, and legal directories. A clear local strategy starts by checking which firms appear for the practice areas and locations the firm actually serves.",
     problemPoints: [
-      "Cleveland attorney searches are far less contested than a metro this size suggests — page one is held largely by national directories, not local firms",
-      "The first page is directories: Avvo, FindLaw, Justia, Super Lawyers, and Yelp before any firm appears",
-      "Firms list a Downtown or Beachwood address but never build pages for Parma, Lakewood, Euclid or Westlake",
-      "Ohio workers' compensation is a state-run monopoly system with its own procedures, and almost no site explains it",
-      "Question-shaped searches — 'how long do I have to file', 'what is my case worth' — go entirely unanswered locally",
+      "Review the live search results for each priority practice area; the mix of firms, directories, and local listings varies by query",
+      "Compare the firm's Google Business Profile and website with the firms currently visible for relevant Cuyahoga County searches",
+      "Use neighborhood or suburb pages only when the firm serves that area and can provide distinct, useful information",
+      "Ohio workers' compensation has state-specific procedures through the Ohio Bureau of Workers' Compensation and Industrial Commission",
+      "Answer common client questions with accurate, current information reviewed by the firm",
     ],
     practiceDemand: [
       { area: "Workers' compensation", why: "Ohio runs a state-fund system rather than private insurance, so the process differs from most states and searchers research it heavily." },
@@ -290,10 +290,10 @@ export const CITY_PAGES: CityPage[] = [
       { area: "Medical malpractice", why: "A dense hospital and research corridor makes Cleveland a centre for malpractice claims." },
     ],
     localSignals: [
-      { label: "Suburb coverage", detail: "Parma, Lakewood, Euclid, Westlake and Beachwood searched independently" },
-      { label: "Justice Center", detail: "Naming the actual Cuyahoga County venue signals real local practice" },
-      { label: "Ohio BWC content", detail: "The state-fund workers' comp process, explained properly" },
-      { label: "Ohio State Bar", detail: "Citation consistency across the directories that carry weight in Ohio" },
+      { label: "Service areas", detail: "Describe only the Cleveland-area communities the firm genuinely serves" },
+      { label: "Court information", detail: "Use accurate Cuyahoga County court and venue details where relevant" },
+      { label: "Ohio BWC content", detail: "Explain Ohio-specific workers' compensation information with current sources" },
+      { label: "Business details", detail: "Keep firm name, address, phone, and profile information consistent" },
     ],
     courts: [
       "Cuyahoga County Court of Common Pleas",
@@ -306,9 +306,9 @@ export const CITY_PAGES: CityPage[] = [
     neighborhoods: ["Downtown", "Ohio City", "Tremont", "University Circle", "Lakewood", "Parma", "Euclid", "Beachwood", "Westlake"],
     nearbyCities: ["Lakewood", "Parma", "Beachwood", "Shaker Heights", "Westlake", "Akron"],
     legalContext: {
-      heading: "Why Ohio workers' compensation is the content gap nobody is filling",
+      heading: "Ohio workers' compensation requires state-specific information",
       body:
-        "Ohio is one of a small number of states that runs workers' compensation as a state fund through the Bureau of Workers' Compensation rather than through private insurers. That means the claim process, the appeal path through the Industrial Commission, and the role of an attorney all work differently from the general advice a national directory publishes. Someone injured at work in Cuyahoga County who searches for guidance gets results written for states with private carriers — advice that is confidently wrong for them. A Cleveland firm that explains the actual BWC process step by step is not competing with the directories on authority; it is answering a question they cannot answer at all.",
+        "Ohio workers' compensation is administered through the Ohio Bureau of Workers' Compensation, and appeals may involve the Industrial Commission. Because procedures and eligibility depend on the facts and current rules, law firm content should cite current Ohio sources and be reviewed by the firm's attorney before publication.",
     },
     faqs: [
       {

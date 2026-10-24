@@ -336,7 +336,7 @@ export default function ClevelandDiagnosisTool() {
             </div>
 
             {/* 7-DAY FREE TRIAL LEAD FORM CARD with glass & animated shine */}
-            <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-neutral-900/50 bg-neutral-900 p-6 sm:p-10 text-white shadow-2xl transition-all duration-300">
+            <div id="cleveland-trial" className="relative mt-10 scroll-mt-24 overflow-hidden rounded-3xl border-2 border-neutral-900/50 bg-neutral-900 p-6 sm:p-10 text-white shadow-2xl transition-all duration-300">
               
               {/* Subtle animated background radial glow */}
               <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-neutral-900/25 rounded-full blur-3xl pointer-events-none" />

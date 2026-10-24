@@ -7,19 +7,19 @@ import ClevelandPainBanner from "./ClevelandPainBanner";
 const FAQS = [
   {
     q: "How competitive is law firm SEO in Cleveland?",
-    a: "Less contested than a metro of this size suggests. Keyword difficulty for many Cleveland attorney searches sits at 2–5 out of 100 in SEMrush, because page one is held largely by national aggregators (Justia, Avvo, FindLaw) rather than local Cleveland law firms. National directories rank on raw domain authority rather than local relevance; an authoritative Cuyahoga County practice page that directly answers the searcher's question can displace them.",
+    a: "Competition depends on the practice area and search. We review the current results for your priority Cleveland and Cuyahoga County searches, then identify realistic opportunities based on your firm's website, profile, and competitors.",
   },
   {
     q: "Why is Ohio workers' compensation content such a massive opportunity?",
-    a: "Ohio runs workers' compensation through a state-fund monopoly administered by the Bureau of Workers' Compensation (BWC) rather than private insurance carriers. That means claim filings, Industrial Commission hearings, and allowed conditions operate completely differently from almost every other state. National legal websites publish generic advice that is confidently incorrect for Ohio workers. A Cleveland firm explaining the actual BWC process step-by-step faces almost zero direct local competition.",
+    a: "Ohio workers' compensation is administered through the Ohio Bureau of Workers' Compensation, with appeals involving the Industrial Commission. Content about this topic should reflect current Ohio sources and be reviewed for legal accuracy by the firm before publication.",
   },
   {
     q: "How long before SEO produces signed cases in Cleveland?",
-    a: "Initial Map Pack (3-pack) positioning and technical indexation traction typically begin within the first 60 to 90 days. Organic rankings and signed case volume compound steadily through months 6 to 12. Google Ads PPC is faster at first, which is why we recommend maintaining a blended approach until your monthly ledger proves organic inquiries are carrying the caseload.",
+    a: "Timing varies with your starting visibility, competition, website, and Google Business Profile. We set milestones after reviewing the firm's baseline and track qualified calls and form enquiries alongside visibility. SEO results and case volume are not guaranteed.",
   },
   {
     q: "Do I need separate pages for Lakewood, Parma, Beachwood, and Westlake?",
-    a: "Yes, absolutely. Lakewood, Parma, Beachwood, Euclid, and Westlake are searched as distinct geographical submarkets with their own municipal court venues. A single downtown Cleveland page will not reliably surface in their local map packs. Each suburb requires its own dedicated localized silo with genuine municipal citations, not find-and-replace duplicate text.",
+    a: "Only when the firm genuinely serves that area and can provide useful, distinct information for people there. A page that merely swaps in a suburb name is unlikely to help users; we assess each location before recommending a separate page.",
   },
   {
     q: "Do I have to stop my PPC campaigns when starting SEO?",
@@ -52,7 +52,7 @@ export default function ClevelandFaqAndCta() {
             Cleveland Law Firm SEO FAQs
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
-            Clear, honest answers about keyword difficulty, Ohio BWC content, and realistic ranking timelines.
+            Clear answers about local competition, Ohio-specific content, and measuring progress.
           </p>
         </div>
 
@@ -96,16 +96,16 @@ export default function ClevelandFaqAndCta() {
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-5">
           <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 border border-white/20 backdrop-blur-sm">
-            Transparent Ledger Guarantee
+            Free Cleveland Local SEO Audit
           </span>
 
           {/* Heading with explicit !text-white to avoid app/globals.css black text overwrite */}
           <h2 className="!text-white text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
-            Ready for Predictable Case Acquisition?
+            Find the Local Search Gaps Affecting Your Firm
           </h2>
 
           <p className="text-base sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-            Get your comprehensive Cleveland Market Reality Check within 24 hours. Reviewed personally by Mubashar Sharif, CEO.
+            Request a free review of your website, local visibility, and competitors. Mubashar Sharif reviews each request personally.
           </p>
 
           <div className="pt-2">
@@ -113,7 +113,7 @@ export default function ClevelandFaqAndCta() {
               onClick={scrollToRealityCheck}
               className="inline-flex items-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-black px-8 py-4 text-base shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <span>Request My Reality Check</span>
+              <span>Get My Free Local Audit</span>
               <ArrowRight className="h-4 w-4 text-neutral-950" />
             </button>
           </div>

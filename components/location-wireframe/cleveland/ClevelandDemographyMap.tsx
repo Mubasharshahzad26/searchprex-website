@@ -76,7 +76,7 @@ export default function ClevelandDemographyMap() {
             Cuyahoga County Search Demographics
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            With over 1.23 million residents, Cuyahoga County is Ohio's legal epicenter. A generic downtown Cleveland ranking won't capture an auto accident victim in Lakewood or an injured factory worker in Parma. Here is how SearchPrex maps and geofences your practice across every court district.
+            Cuyahoga County includes Cleveland and surrounding communities with different courts and service areas. Population is only context; a useful local plan starts with the firm's actual practice areas, service boundaries, and the searches potential clients use.
           </p>
         </div>
 
@@ -103,19 +103,19 @@ export default function ClevelandDemographyMap() {
           <div className="group relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sm hover:border-neutral-900/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-neutral-900">
             <div className="flex items-center gap-2 text-slate-400 group-hover:text-neutral-800 transition-colors mb-2">
               <Navigation className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">Geofence Radius</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Service Area Planning</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-neutral-950">7–15 Miles</div>
-            <p className="mt-1 text-xs text-slate-500">Targeted Map Pack proximity grid per practice</p>
+            <div className="text-2xl sm:text-3xl font-black text-neutral-950">Firm-defined</div>
+            <p className="mt-1 text-xs text-slate-500">Represent only areas the firm genuinely serves</p>
           </div>
 
           <div className="group relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sm hover:border-neutral-900/30 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-neutral-900">
             <div className="flex items-center gap-2 text-slate-400 group-hover:text-neutral-900 transition-colors mb-2">
               <TrendingUp className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">High-Intent Traffic</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Search Competition</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-neutral-950">2–5 / 100 KD</div>
-            <p className="mt-1 text-xs text-slate-500">SEMrush keyword difficulty for Ohio BWC & localized PI</p>
+            <div className="text-2xl sm:text-3xl font-black text-neutral-950">Varies by query</div>
+            <p className="mt-1 text-xs text-slate-500">Check current results for each practice area and location</p>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ export default function ClevelandDemographyMap() {
                 </div>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-2.5 py-1 text-[11px] font-bold text-neutral-800 border border-slate-200">
                   <span className="h-2 w-2 rounded-full bg-neutral-800 animate-pulse" />
-                  Live Geofenced Coordinates
+                  Illustrative Local Search Areas
                 </span>
               </div>
 
