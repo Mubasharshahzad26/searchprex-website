@@ -295,6 +295,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("[sitemap] SEO News spokes unavailable:", error);
   }
 
+  // ── CMS blog posts ──────────────────────────────────────────────────────
+  // The blog index merges these published MarketingBlog rows with the
+  // file-based posts below. Include the CMS rows here too so published posts
+  // become discoverable without waiting for a code deploy.
+  try {
+    const cmsBlogs = await db.marketingBlog.findMany({
+      where: {
+        published: true,
+        NOT: { category: { contains: "News", mode: "insensitive" } },
+      },
+      select: { slug: true, canonicalUrl: true, updatedAt: true },
+    });
+
+    for (const post of cmsBlogs) {
+      add({
+        url: post.canonicalUrl || absolute(`/blog/${post.slug}`),
+        lastModified: post.updatedAt,
+        changeFrequency: "monthly",
+        priority: 0.65,
+      });
+    }
+  } catch (error) {
+    console.error("[sitemap] CMS blog posts unavailable:", error);
+  }
+
   // Static fallback spokes remain valid, published URLs while the CMS database is unavailable.
   for (const guide of NEWS_TOPIC_GUIDES) {
     const updated = new Date(`${guide.updatedDate} 12:00:00 UTC`);

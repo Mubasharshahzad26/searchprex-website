@@ -22,6 +22,7 @@
 import { db } from "@/lib/db";
 import { caseStudies, detailUrl } from "../case-studies/data";
 import { posts as blogPosts } from "../blog/data";
+import { staticNewsSpokes } from "@/lib/static-news-spokes";
 
 export const dynamic = "force-dynamic";
 
@@ -89,6 +90,10 @@ export async function GET() {
 
   for (const cs of caseStudies) addImages(`${SITE}${detailUrl(cs)}`, [cs.image]);
   for (const post of blogPosts) addImages(`${SITE}/blog/${post.slug}`, [(post as any).heroImage]);
+  for (const post of staticNewsSpokes) {
+    const pageUrl = post.canonicalUrl || `${SITE}/resources/news/${post.slug}`;
+    addImages(pageUrl, [post.heroImage, ...imagesInBody(post.content)]);
+  }
 
   // Published CMS articles: news spokes under /resources/news, everything else
   // under /blog. Failing soft matters here — a database blip should serve a

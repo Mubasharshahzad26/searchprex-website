@@ -69,35 +69,15 @@ export async function GET(request: Request) {
   );
   let posts: NewsSitemapPost[] = recentPosts || [];
 
-  // Ensure the sitemap always lists the latest active news spokes (up to 10)
-  // so Google Search Console never encounters an empty <urlset>.
-  if (posts.length < 5 && recentPosts !== null) {
-    const publishedPosts = await queryNewsSitemapWithFallback(
-      db.marketingBlog.findMany({
-      where: {
-        published: true,
-        category: { contains: filterCat, mode: "insensitive" },
-      },
-      orderBy: { publishedAt: "desc" },
-      take: 10,
-      select: {
-        slug: true,
-        title: true,
-        publishedAt: true,
-        updatedAt: true,
-        coverImage: true,
-      },
-      }),
-      "Published article query",
-    );
-    if (publishedPosts) posts = publishedPosts;
-  }
-
   // Always merge recent static stories; this keeps the News sitemap current even
   // when the CMS is healthy but does not yet contain a newly published article.
   const staticPosts: NewsSitemapPost[] = staticNewsSpokes
     .filter((spoke) => {
-      const isRecent = new Date(`${spoke.date}T00:00:00.000Z`) >= twoDaysAgo;
+      // Match the CMS query above: a story is eligible when it was published
+      // or substantially updated within Google's freshness window.
+      const publishedAt = new Date(`${spoke.date}T00:00:00.000Z`);
+      const updatedAt = new Date(spoke.dateModified || `${spoke.date}T00:00:00.000Z`);
+      const isRecent = publishedAt >= twoDaysAgo || updatedAt >= twoDaysAgo;
       const matchesCategory = !categoryParam || spoke.category.toLowerCase().includes(categoryParam.toLowerCase());
       return isRecent && matchesCategory;
     })
@@ -109,12 +89,14 @@ export async function GET(request: Request) {
       coverImage: spoke.heroImage,
     }));
   const postBySlug = new Map<string, NewsSitemapPost>();
-  for (const post of [...staticPosts, ...posts]) {
+  // Put CMS rows first so their current title, publication date and image win
+  // when a static fallback has the same slug.
+  for (const post of [...posts, ...staticPosts]) {
     if (!postBySlug.has(post.slug)) postBySlug.set(post.slug, post);
   }
   posts = [...postBySlug.values()]
     .sort((a, b) => new Date(b.publishedAt || b.updatedAt).getTime() - new Date(a.publishedAt || a.updatedAt).getTime())
-    .slice(0, 10);
+    .slice(0, 1000);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
