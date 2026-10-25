@@ -12,7 +12,7 @@ export const revalidate = 3600;
 const SITE = "https://www.searchprex.com";
 const LOCAL_SEO_NEWS_UPDATED_AT = "2026-10-24T12:00:00.000Z";
 const LOCAL_SEO_NEWS_DESCRIPTION =
-  "Local search news and Local SEO updates: confirmed Google Business Profile and Maps changes, clearly sourced with practical guidance for local businesses.";
+  "Local SEO news and Google Business Profile updates, with verified sources and practical advice for local businesses.";
 
 // Helper to get post from DB
 async function getPostData(rawSlug: string) {
@@ -189,7 +189,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = post.canonicalUrl || url;
   // Already expanded in getPostData -- nothing here carries a token.
   const ogTitle = post.ogTitle || post.metaTitle;
-  const ogDesc = post.ogDescription || post.metaDescription;
+  const metaDescription = post.slug === "local-seo-updates" ? LOCAL_SEO_NEWS_DESCRIPTION : post.metaDescription;
+  const ogDesc = post.slug === "local-seo-updates" ? LOCAL_SEO_NEWS_DESCRIPTION : post.ogDescription || metaDescription;
   const twTitle = post.twitterTitle || ogTitle;
   const twDesc = post.twitterDescription || ogDesc;
   const fullHeroImage = post.heroImage.startsWith("/") ? `${SITE}${post.heroImage}` : post.heroImage;
@@ -199,7 +200,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: { absolute: post.metaTitle },
-    description: post.metaDescription,
+    description: metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
     alternates: { canonical },
