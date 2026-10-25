@@ -225,6 +225,7 @@ export default function PostClient({
   const [readingProgress, setReadingProgress] = useState(0);
   const [showStrap, setShowStrap] = useState(false);
   const [shareToast, setShareToast] = useState<string | null>(null);
+  const [localSeoHeaderHeight, setLocalSeoHeaderHeight] = useState(128);
 
   // Like state (synced with /api/news/interactions)
   const [clientId, setClientId] = useState("");
@@ -299,6 +300,18 @@ export default function PostClient({
   const leadSource = `article:${section.href}/${post.slug}`;
   const isLocalUpdates = post.slug === "local-seo-updates";
   const isLocalNewsSpoke = section.href === "/resources/news" && !isLocalUpdates && (post.category || "").toLowerCase().includes("local");
+
+  useEffect(() => {
+    if (!isLocalUpdates) return;
+    const header = document.querySelector<HTMLElement>('header[data-local-seo-news-header="true"]');
+    if (!header) return;
+
+    const updateHeaderHeight = () => setLocalSeoHeaderHeight(header.getBoundingClientRect().height);
+    updateHeaderHeight();
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, [isLocalUpdates]);
 
   const dynamicCta = (() => {
     const rawTitle = post.title || "this SEO update";
@@ -598,7 +611,10 @@ export default function PostClient({
     "w-full h-10 rounded-lg border border-[#d5d9e0] bg-white px-3 text-sm text-[#171a22] placeholder-[#9aa0a6] outline-none transition focus:border-[#171a22] focus:ring-2 focus:ring-[#171a22]/10";
 
   return (
-    <main className={`relative bg-white min-h-screen ${isLocalUpdates ? "pt-[76px] sm:pt-14" : ""}`}>
+    <main
+      className="relative min-h-screen bg-white"
+      style={isLocalUpdates ? { paddingTop: `${localSeoHeaderHeight}px` } : undefined}
+    >
       {/* Toptal-style Top Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-transparent pointer-events-none">
         <div
