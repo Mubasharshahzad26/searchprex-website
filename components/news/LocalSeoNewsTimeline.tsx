@@ -111,9 +111,10 @@ export default function LocalSeoNewsTimeline() {
         Latest Local SEO News and Google Business Profile Updates
       </h2>
       <p className="mb-6 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-        Recent local search changes, separated into documented guidance and
-        reported tests. A layout test is not proof of a ranking change; verify
-        changes in your own Business Profile and performance data.
+        Follow local search news and recent Local SEO changes, separated into
+        documented guidance and reported tests. A layout test is not proof of a
+        ranking change; verify changes in your own Business Profile and
+        performance data.
       </p>
 
       <section aria-labelledby="local-seo-last-two-days" className="mb-6 rounded-xl border border-emerald-100 bg-white p-4 sm:p-5">

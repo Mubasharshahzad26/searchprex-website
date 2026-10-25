@@ -12,7 +12,7 @@ export const revalidate = 3600;
 const SITE = "https://www.searchprex.com";
 const LOCAL_SEO_NEWS_UPDATED_AT = "2026-10-24T12:00:00.000Z";
 const LOCAL_SEO_NEWS_DESCRIPTION =
-  "Latest Local SEO news and Google Business Profile updates, with confirmed guidance separated from reported tests and practical checks for local businesses.";
+  "Local search news and Local SEO updates: confirmed Google Business Profile and Maps changes, clearly sourced with practical guidance for local businesses.";
 
 // Helper to get post from DB
 async function getPostData(rawSlug: string) {
