@@ -10,6 +10,9 @@ import { getStaticNewsPillar, NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides"
 export const revalidate = 3600;
 
 const SITE = "https://www.searchprex.com";
+const LOCAL_SEO_NEWS_UPDATED_AT = "2026-10-24T12:00:00.000Z";
+const LOCAL_SEO_NEWS_DESCRIPTION =
+  "Latest Local SEO news and Google Business Profile updates, with confirmed guidance separated from reported tests and practical checks for local businesses.";
 
 // Helper to get post from DB
 async function getPostData(rawSlug: string) {
@@ -20,6 +23,10 @@ async function getPostData(rawSlug: string) {
   if (fallback) {
     return {
       ...fallback,
+      heroImage:
+        slug === "local-seo-updates"
+          ? "/images/news/local-business-owner-storefront.webp"
+          : fallback.heroImage,
       category: (fallback.category?.split("—").pop() ?? "SEO News").trim(),
       metaTitle: expandMonthToken(fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
       ogTitle: expandMonthToken(fallback.ogTitle || fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
@@ -41,11 +48,20 @@ async function getPostData(rawSlug: string) {
         subcategory: "",
         title: dbPost.title,
         metaTitle: expandMonthToken(dbPost.metaTitle || dbPost.title, dbPost.updatedAt.toISOString()),
-        metaDescription: dbPost.metaDescription || dbPost.excerpt || "",
-        excerpt: dbPost.excerpt || dbPost.metaDescription || "",
+        metaDescription:
+          dbPost.slug === "local-seo-updates"
+            ? LOCAL_SEO_NEWS_DESCRIPTION
+            : dbPost.metaDescription || dbPost.excerpt || "",
+        excerpt:
+          dbPost.slug === "local-seo-updates"
+            ? LOCAL_SEO_NEWS_DESCRIPTION
+            : dbPost.excerpt || dbPost.metaDescription || "",
         readTime: dbPost.readTime || "7-minute read",
         date: dbPost.publishedAt ? dbPost.publishedAt.toISOString().split("T")[0] : dbPost.createdAt.toISOString().split("T")[0],
-        dateModified: dbPost.updatedAt.toISOString(),
+        dateModified:
+          dbPost.slug === "local-seo-updates"
+            ? LOCAL_SEO_NEWS_UPDATED_AT
+            : dbPost.updatedAt.toISOString(),
         author: {
           name: dbPost.author || "Mubashar Sharif",
           role: "Founder & SEO Strategist",
@@ -55,7 +71,7 @@ async function getPostData(rawSlug: string) {
         featured: false,
         heroImage:
           dbPost.slug === "local-seo-updates"
-            ? `${SITE}/og/local-seo-updates-1200x630.png`
+            ? "/images/news/local-business-owner-storefront.webp"
             : dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
         stat: null,
@@ -78,7 +94,11 @@ async function getPostData(rawSlug: string) {
   // The News hub links to these eight topic guides. Preserve their routes when
   // the CMS database is paused/unavailable, while preferring live CMS content.
   const staticPillar = getStaticNewsPillar(slug);
-  if (staticPillar) return staticPillar;
+  if (staticPillar) {
+    return slug === "local-seo-updates"
+      ? { ...staticPillar, heroImage: "/images/news/local-business-owner-storefront.webp" }
+      : staticPillar;
+  }
 
   return null;
 }
@@ -172,6 +192,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const ogDesc = post.ogDescription || post.metaDescription;
   const twTitle = post.twitterTitle || ogTitle;
   const twDesc = post.twitterDescription || ogDesc;
+  const fullHeroImage = post.heroImage.startsWith("/") ? `${SITE}${post.heroImage}` : post.heroImage;
+  const heroAlt = post.slug === "local-seo-updates"
+    ? "Coffee shop owner welcoming customers inside her storefront"
+    : post.title;
 
   return {
     title: { absolute: post.metaTitle },
@@ -187,13 +211,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "article",
       publishedTime: post.date,
       authors: [post.author.name],
-      images: [{ url: post.heroImage, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: fullHeroImage, width: post.slug === "local-seo-updates" ? 1600 : 1200, height: post.slug === "local-seo-updates" ? 900 : 630, alt: heroAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title: twTitle,
       description: twDesc,
-      images: [post.heroImage],
+      images: [fullHeroImage],
     },
   };
 }
@@ -396,9 +420,7 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
         headline: post.title,
         description: post.excerpt,
         image: [
-          post.slug === "local-seo-updates"
-            ? `${SITE}/og/local-seo-updates-1200x630.png`
-            : fullHeroImage,
+          fullHeroImage,
         ],
         datePublished: post.date,
         dateModified: post.dateModified,
@@ -417,6 +439,11 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
         ...(post.slug === "local-seo-updates"
           ? {
               citation: [
+                "https://www.seroundtable.com/google-business-profiles-new-performance-reports-42367.html",
+                "https://www.seroundtable.com/google-local-panel-layout-42356.html",
+                "https://www.seroundtable.com/google-posts-higher-42319.html",
+                "https://support.google.com/business/answer/3480441?hl=en",
+                "https://support.google.com/business/answer/3039617?hl=en-en",
                 "https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu",
                 "https://support.google.com/business/answer/3480441",
                 "https://www.seroundtable.com/google-maps-account-reviews-42186.html",
@@ -474,6 +501,34 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
     ],
   };
 
+  const localNewsImages: Record<string, { image: string; imageAlt: string }> = {
+    "google-business-profile-fake-review-warnings-review-pauses-local-seo": {
+      image: "/images/news/customer-using-phone-at-cafe.webp",
+      imageAlt: "Customer checking a smartphone while seated at an outdoor cafe",
+    },
+    "google-business-profile-four-days-suggested-edits": {
+      image: "/images/news/local-business-owner-storefront.webp",
+      imageAlt: "Coffee shop owner welcoming customers inside her storefront",
+    },
+    "google-maps-sign-in-to-read-reviews": {
+      image: "/images/news/google-maps-navigation-phone.webp",
+      imageAlt: "Google Maps navigation shown on a phone mounted inside a car",
+    },
+  };
+  const localNewsPosts = slug === "local-seo-updates"
+    ? staticNewsSpokes
+        .filter((item) => item.category.toLowerCase().includes("local") && item.slug !== slug && localNewsImages[item.slug])
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map((item) => ({
+          slug: item.slug,
+          title: item.title,
+          excerpt: item.excerpt,
+          date: item.date,
+          readTime: item.readTime,
+          ...localNewsImages[item.slug],
+        }))
+    : undefined;
+
   return (
     <>
       <script
@@ -484,6 +539,7 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
         post={post}
         section={{ label: "SEO News", href: "/resources/news" }}
         related={related}
+        localNewsPosts={localNewsPosts}
       />
     </>
   );

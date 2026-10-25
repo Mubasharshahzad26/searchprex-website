@@ -19,6 +19,10 @@ import { renderArticle, extractArticleToc } from "@/lib/render-article";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ArticleExitOffer from "@/components/ArticleExitOffer";
 import NewsDiscussionSection from "@/components/news/NewsDiscussionSection";
+import LocalSeoNewsTimeline from "@/components/news/LocalSeoNewsTimeline";
+import LocalSeoNewsActions from "@/components/news/LocalSeoNewsActions";
+import LocalSeoResearchNote from "@/components/news/LocalSeoResearchNote";
+import LocalSeoNewsPosts, { type LocalSeoNewsPost } from "@/components/news/LocalSeoNewsPosts";
 
 /* ─── BRAND ICONS FOR SOCIAL MEDIA SHARING STRAP ─── */
 function LinkedInIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -202,11 +206,13 @@ export default function PostClient({
   post,
   section = BLOG_SECTION,
   related: relatedOverride,
+  localNewsPosts,
 }: {
   post: ArticlePost;
   section?: PostSection;
   /** Server-supplied siblings. Falls back to the file-based blog posts. */
   related?: Array<Record<string, any>>;
+  localNewsPosts?: LocalSeoNewsPost[];
 }) {
   const tags = post.tags ?? [];
   const toc =
@@ -290,6 +296,8 @@ export default function PostClient({
 
   const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
   const leadSource = `article:${section.href}/${post.slug}`;
+  const isLocalUpdates = post.slug === "local-seo-updates";
+  const isLocalNewsSpoke = section.href === "/resources/news" && !isLocalUpdates && (post.category || "").toLowerCase().includes("local");
 
   const dynamicCta = (() => {
     const rawTitle = post.title || "this SEO update";
@@ -557,7 +565,7 @@ export default function PostClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: subEmail.trim(),
-          source: leadSource,
+          source: isLocalUpdates ? "local-seo-news-subscription" : leadSource,
           categories: post.category ? [post.category] : [],
         }),
       });
@@ -704,8 +712,70 @@ export default function PostClient({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {isLocalUpdates && (
+        <section aria-label="Subscribe to Local SEO updates" className="border-b border-emerald-100 bg-emerald-50/70">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-slate-950">Get the next Local SEO update</p>
+              <p className="text-xs leading-5 text-slate-600">Source-checked changes and practical local search guidance, by email.</p>
+            </div>
+            {subscribed ? (
+              <p role="status" className="text-sm font-semibold text-emerald-900">You’re subscribed. Thanks for joining.</p>
+            ) : (
+              <form onSubmit={handleArticleSubscribe} className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+                <label className="sr-only" htmlFor="local-news-email">Email address</label>
+                <input id="local-news-email" type="email" required value={subEmail} onChange={(e) => { setSubEmail(e.target.value); if (subError) setSubError(null); }} placeholder="you@lawfirm.com" className="min-w-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15 sm:w-64" />
+                <button type="submit" disabled={submitting} className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60">{submitting ? "Subscribing…" : "Subscribe"}<ArrowRight className="h-4 w-4" aria-hidden="true" /></button>
+                {subError && <p role="alert" className="text-xs text-red-700 sm:basis-full">{subError}</p>}
+              </form>
+            )}
+          </div>
+        </section>
+      )}
  
       {/* ══ HERO IMAGE SECTION ══ */}
+      {post.slug === "local-seo-updates" ? (
+        <section className="border-b border-slate-200 bg-slate-50">
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-9 sm:px-6 sm:py-12 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:px-8">
+            <div>
+              <div className="mb-5 flex items-center gap-2 text-slate-500">
+                <Link href={section.href} className="text-sm hover:text-slate-950">{section.label}</Link>
+                {post.category !== section.label && <><ChevronRight className="h-3.5 w-3.5" /><span className="text-sm font-semibold text-slate-800">{post.category}</span></>}
+              </div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Local search, clearly explained</p>
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+                className="text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-[2.7rem]"
+              >
+                {post.title}
+              </motion.h1>
+              <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{post.excerpt}</p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-600">
+                <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" />{post.readTime}</span>
+                <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4" />{displayDate}</span>
+                <button type="button" onClick={copyLink} className="inline-flex items-center gap-1.5 font-semibold text-slate-800 hover:text-emerald-800">
+                  {copied ? <CheckCircle className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}{copied ? "Copied" : "Share this update"}
+                </button>
+              </div>
+            </div>
+            <figure className="relative aspect-[1200/630] overflow-hidden rounded-2xl border border-slate-200 bg-[#0b102f] shadow-sm">
+              <Image
+                src={post.heroImage}
+                alt="Coffee shop owner welcoming customers inside her storefront"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                unoptimized
+              />
+              <figcaption className="sr-only">SearchPrex local SEO news and Google Business Profile update tracker.</figcaption>
+            </figure>
+          </div>
+        </section>
+      ) : (
       <section className="relative h-[460px] overflow-hidden">
         {/* Full-bleed Unsplash image */}
         <Image
@@ -786,6 +856,7 @@ export default function PostClient({
           </div>
         </div>
       </section>
+      )}
  
       {/* ══ AUTHOR BAR ══ */}
       <div className="border-b border-[#e5e7eb] bg-white shadow-sm">
@@ -849,11 +920,34 @@ export default function PostClient({
           {/* Article */}
           <article className="flex-1 min-w-0 max-w-full">
             {/* Excerpt pull-quote */}
-            <p className="mb-8 text-xl text-[#374151] leading-relaxed font-medium border-l-4 border-[#171717] pl-6 py-1">
-              {post.excerpt}
-            </p>
+            {post.slug !== "local-seo-updates" && (
+              <p className="mb-8 text-xl text-[#374151] leading-relaxed font-medium border-l-4 border-[#171717] pl-6 py-1">
+                {post.excerpt}
+              </p>
+            )}
 
-            {/* CHECK DOMAIN AUTHORITY SEARCH BAR CTA -> https://nicheseopro.com/authority-checker */}
+            {post.slug === "local-seo-updates" && <LocalSeoNewsTimeline />}
+            {post.slug === "local-seo-updates" && <LocalSeoResearchNote />}
+            {post.slug === "local-seo-updates" && <LocalSeoNewsActions />}
+            {post.slug === "local-seo-updates" && localNewsPosts && <LocalSeoNewsPosts posts={localNewsPosts} />}
+
+            {isLocalUpdates && (
+              <section aria-labelledby="local-domain-authority" className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
+                <div className="mb-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-800">Free NicheSEO Pro tool</p>
+                  <h2 id="local-domain-authority" className="mt-1 text-xl font-bold text-slate-950">Check your domain authority</h2>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">Enter a website to open the authority checker. Domain Authority is a comparative third-party metric, not a Google local ranking score.</p>
+                </div>
+                <form onSubmit={handleDaCheck} className="flex flex-col gap-2 sm:flex-row">
+                  <label className="sr-only" htmlFor="local-da-domain">Website domain</label>
+                  <input id="local-da-domain" type="text" value={daDomain} onChange={(e) => setDaDomain(e.target.value)} placeholder="yourlawfirm.com" className="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15" />
+                  <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Check authority <ArrowRight className="h-4 w-4" aria-hidden="true" /></button>
+                </form>
+              </section>
+            )}
+
+            {/* Keep the domain authority utility on general posts; local-search readers get local tools above. */}
+            {post.slug !== "local-seo-updates" && (
             <form
               onSubmit={handleDaCheck}
               className="mb-8 flex items-center justify-between gap-2 rounded-full border border-slate-200 bg-white p-1.5 pl-4 shadow-[0_4px_20px_rgba(108,60,255,0.08)] transition focus-within:border-[#6c3cff] focus-within:ring-4 focus-within:ring-[#6c3cff]/10"
@@ -877,6 +971,7 @@ export default function PostClient({
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </button>
             </form>
+            )}
 
             {/* Mobile Table of Contents (collapsible, shown on screens < lg where sidebar is hidden) */}
             {toc.length > 0 && (
@@ -907,9 +1002,9 @@ export default function PostClient({
 
             {/* Content with Image Optimization + the mid-article lead magnet slot */}
             <div className="max-w-full overflow-hidden" style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
-              {parse(renderArticle(injectMidContentSlot(post.content)), {
+              {parse(renderArticle(isLocalUpdates ? post.content : injectMidContentSlot(post.content)), {
                 replace: (domNode) => {
-                  if (domNode instanceof Element && domNode.tagName === 'div' && domNode.attribs?.id === '__lead_magnet_slot__') {
+                  if (!isLocalUpdates && domNode instanceof Element && domNode.tagName === 'div' && domNode.attribs?.id === '__lead_magnet_slot__') {
                     return (
                       <ArticleLeadMagnet
                         variant="banner"
@@ -937,6 +1032,12 @@ export default function PostClient({
                 }
               })}
             </div>
+
+            {isLocalNewsSpoke && (
+              <aside className="mt-8 rounded-xl border border-emerald-100 bg-emerald-50/60 p-5">
+                <p className="text-sm leading-6 text-slate-700">Following Google Business Profile, Maps, and local search changes? Browse the <Link href="/resources/news/local-seo-updates" className="font-semibold text-emerald-900 underline decoration-emerald-300 underline-offset-4">Local SEO news and updates hub</Link> for sourced updates and practical checks.</p>
+              </aside>
+            )}
  
             {/* Tags */}
             {tags.length > 0 && (
@@ -1092,15 +1193,15 @@ export default function PostClient({
             )}
 
             {/* Dynamic Topic-Aware Sidebar Lead Magnet */}
-            <ArticleLeadMagnet
+            {!isLocalUpdates && <ArticleLeadMagnet
               variant="sidebar"
               source={leadSource}
               copy={dynamicCta.sidebarCopy}
               buttonText={dynamicCta.sidebarBtn}
-            />
+            />}
 
             {/* Blog Newsletter Alert Box */}
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-neutral-950 shadow-2xs">
+            {!isLocalUpdates && <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-neutral-950 shadow-2xs">
               <div className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#e2e8f0] mb-2">
                 <Mail className="h-3.5 w-3.5" /> New Guide Alerts
               </div>
@@ -1146,7 +1247,7 @@ export default function PostClient({
                   {subError && <p className="text-[11px] text-red-300 font-medium">{subError}</p>}
                 </form>
               )}
-            </div>
+            </div>}
 
             {/* Stat card */}
             {post.stat && (
@@ -1242,13 +1343,12 @@ export default function PostClient({
           any of the three blocks above. Shows once per reader per 30 days, never to
           someone who has already submitted, never on arrival, and never as a
           full-screen cover on a phone. ══ */}
-      <ArticleExitOffer
+      {!isLocalUpdates && <ArticleExitOffer
         source={`${leadSource}:exit`}
         headline={exitCopy?.headline}
         sub={exitCopy?.sub}
-      />
+      />}
  
     </main>
   );
 }
- 
