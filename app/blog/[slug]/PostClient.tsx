@@ -19,10 +19,11 @@ import { renderArticle, extractArticleToc } from "@/lib/render-article";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ArticleExitOffer from "@/components/ArticleExitOffer";
 import NewsDiscussionSection from "@/components/news/NewsDiscussionSection";
-import LocalSeoNewsTimeline from "@/components/news/LocalSeoNewsTimeline";
+import { localSeoNewsUpdates } from "@/components/news/LocalSeoNewsTimeline";
 import LocalSeoNewsActions from "@/components/news/LocalSeoNewsActions";
 import LocalSeoResearchNote from "@/components/news/LocalSeoResearchNote";
-import LocalSeoNewsPosts, { type LocalSeoNewsPost } from "@/components/news/LocalSeoNewsPosts";
+import LocalSeoNewsExplorer from "@/components/news/LocalSeoNewsExplorer";
+import type { LocalSeoNewsPost } from "@/components/news/LocalSeoNewsPosts";
 
 /* ─── BRAND ICONS FOR SOCIAL MEDIA SHARING STRAP ─── */
 function LinkedInIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -713,27 +714,6 @@ export default function PostClient({
         )}
       </AnimatePresence>
 
-      {isLocalUpdates && (
-        <section aria-label="Subscribe to Local SEO updates" className="border-b border-emerald-100 bg-emerald-50/70">
-          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-950">Get the next Local SEO update</p>
-              <p className="text-xs leading-5 text-slate-600">Source-checked changes and practical local search guidance, by email.</p>
-            </div>
-            {subscribed ? (
-              <p role="status" className="text-sm font-semibold text-emerald-900">You’re subscribed. Thanks for joining.</p>
-            ) : (
-              <form onSubmit={handleArticleSubscribe} className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
-                <label className="sr-only" htmlFor="local-news-email">Email address</label>
-                <input id="local-news-email" type="email" required value={subEmail} onChange={(e) => { setSubEmail(e.target.value); if (subError) setSubError(null); }} placeholder="you@lawfirm.com" className="min-w-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15 sm:w-64" />
-                <button type="submit" disabled={submitting} className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60">{submitting ? "Subscribing…" : "Subscribe"}<ArrowRight className="h-4 w-4" aria-hidden="true" /></button>
-                {subError && <p role="alert" className="text-xs text-red-700 sm:basis-full">{subError}</p>}
-              </form>
-            )}
-          </div>
-        </section>
-      )}
- 
       {/* ══ HERO IMAGE SECTION ══ */}
       {post.slug === "local-seo-updates" ? (
         <section className="border-b border-slate-200 bg-slate-50">
@@ -743,7 +723,7 @@ export default function PostClient({
                 <Link href={section.href} className="text-sm hover:text-slate-950">{section.label}</Link>
                 {post.category !== section.label && <><ChevronRight className="h-3.5 w-3.5" /><span className="text-sm font-semibold text-slate-800">{post.category}</span></>}
               </div>
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Local search, clearly explained</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Local SEO news &amp; updates</p>
               <motion.h1
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -926,10 +906,9 @@ export default function PostClient({
               </p>
             )}
 
-            {post.slug === "local-seo-updates" && <LocalSeoNewsTimeline />}
+            {post.slug === "local-seo-updates" && <LocalSeoNewsExplorer posts={localNewsPosts || []} updates={localSeoNewsUpdates} />}
             {post.slug === "local-seo-updates" && <LocalSeoResearchNote />}
             {post.slug === "local-seo-updates" && <LocalSeoNewsActions />}
-            {post.slug === "local-seo-updates" && localNewsPosts && <LocalSeoNewsPosts posts={localNewsPosts} />}
 
             {isLocalUpdates && (
               <section aria-labelledby="local-domain-authority" className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">

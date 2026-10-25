@@ -25,7 +25,7 @@ async function getPostData(rawSlug: string) {
       ...fallback,
       heroImage:
         slug === "local-seo-updates"
-          ? "/images/news/local-business-owner-storefront.webp"
+          ? "/images/case-studies/michigan-outdoor-dispatch.webp"
           : fallback.heroImage,
       category: (fallback.category?.split("—").pop() ?? "SEO News").trim(),
       metaTitle: expandMonthToken(fallback.metaTitle || fallback.title, fallback.dateModified || new Date().toISOString()),
@@ -71,7 +71,7 @@ async function getPostData(rawSlug: string) {
         featured: false,
         heroImage:
           dbPost.slug === "local-seo-updates"
-            ? "/images/news/local-business-owner-storefront.webp"
+            ? "/images/case-studies/michigan-outdoor-dispatch.webp"
             : dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
         tags: [],
         stat: null,
@@ -96,7 +96,7 @@ async function getPostData(rawSlug: string) {
   const staticPillar = getStaticNewsPillar(slug);
   if (staticPillar) {
     return slug === "local-seo-updates"
-      ? { ...staticPillar, heroImage: "/images/news/local-business-owner-storefront.webp" }
+      ? { ...staticPillar, heroImage: "/images/case-studies/michigan-outdoor-dispatch.webp" }
       : staticPillar;
   }
 
@@ -194,7 +194,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const twDesc = post.twitterDescription || ogDesc;
   const fullHeroImage = post.heroImage.startsWith("/") ? `${SITE}${post.heroImage}` : post.heroImage;
   const heroAlt = post.slug === "local-seo-updates"
-    ? "Coffee shop owner welcoming customers inside her storefront"
+    ? "Local retail team preparing orders at a neighborhood business"
     : post.title;
 
   return {

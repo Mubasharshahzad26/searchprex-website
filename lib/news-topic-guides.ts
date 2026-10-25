@@ -6,8 +6,8 @@ export const NEWS_TOPIC_GUIDES = [
     category: "Local SEO",
     tagColor: "#c2410c",
     badge: "Pinned Pillar",
-    updatedDate: "Oct 2, 2026",
-    description: "A dated, sourced log of local search changes — GBP suggested edits, the September spam update, review sign-in, and what each means for map pack rankings.",
+    updatedDate: "Oct 24, 2026",
+    description: "The latest Local SEO news and Google Business Profile updates, with dates, sources, confirmed guidance separated from reported tests, and practical checks for local businesses.",
   },
   {
     slug: "google-algorithm-updates",

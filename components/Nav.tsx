@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
 import { CITY_PAGES } from "@/lib/city-pages";
+import LocalSeoNewsSubscriptionBar from "@/components/news/LocalSeoNewsSubscriptionBar";
  
 /** `sub` = a spoke page, shown indented under the pillar above it. */
 type DropItem = { href: string; label: string; badge?: string; sub?: boolean };
@@ -133,6 +134,7 @@ const navLinks: NavLink[] = [
 export default function Nav() {
   const pathname = usePathname();
   const showClevelandOffer = pathname === "/locations/ohio/cleveland";
+  const showLocalSeoNewsSubscription = pathname === "/resources/news/local-seo-updates";
   const [isScrolled,       setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown,   setActiveDropdown]   = useState<string | null>(null);
@@ -202,6 +204,7 @@ export default function Nav() {
             : "border-slate-200/60"
         }`}
       >
+        {showLocalSeoNewsSubscription && <LocalSeoNewsSubscriptionBar />}
         {showClevelandOffer && !isScrolled && (
           <div
             role="region"
