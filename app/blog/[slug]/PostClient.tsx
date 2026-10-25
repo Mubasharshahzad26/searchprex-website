@@ -298,6 +298,7 @@ export default function PostClient({
 
   const postUrl = `https://www.searchprex.com${section.href}/${post.slug}`;
   const leadSource = `article:${section.href}/${post.slug}`;
+  const isMubasharAuthor = post.author.name.toLowerCase().includes("mubashar");
   const isLocalUpdates = post.slug === "local-seo-updates";
   const isLocalNewsSpoke = section.href === "/resources/news" && !isLocalUpdates && (post.category || "").toLowerCase().includes("local");
 
@@ -1046,58 +1047,53 @@ export default function PostClient({
             )}
  
             {/* Author bio with Mubashar Sharif Photo */}
-            <div className="mt-10 flex flex-col sm:flex-row gap-5 items-start rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-6 sm:p-7">
-              <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-[#f1f5f9] flex-shrink-0 ring-2 ring-[#171717]/20 overflow-hidden shadow-sm">
-                <Image
-                  src="/images/mubashar-sharif.jpg"
-                  alt={`${post.author.name} — ${post.author.role} at SearchPrex`}
-                  fill
-                  sizes="80px"
-                  className="object-cover object-top"
-                />
+            <section aria-label={`About the author, ${post.author.name}`} className="mt-10 flex flex-col gap-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5 shadow-sm sm:flex-row sm:items-center sm:gap-6 sm:p-7">
+              <div className="relative h-24 w-24 shrink-0 rounded-full border border-emerald-800/20 bg-gradient-to-br from-emerald-50 to-white p-1 shadow-md sm:h-28 sm:w-28">
+                <div className="relative h-full w-full overflow-hidden rounded-full ring-1 ring-slate-200">
+                  <Image
+                    src="/images/mubashar-sharif.jpg"
+                    alt={`${post.author.name}, ${post.author.role} at SearchPrex`}
+                    fill
+                    sizes="(max-width: 639px) 96px, 112px"
+                    className="scale-[1.08] object-cover object-[center_18%]"
+                  />
+                </div>
+                <span title="Author profile" className="absolute bottom-1 right-1 grid h-6 w-6 place-items-center rounded-full bg-white text-emerald-800 shadow-sm ring-1 ring-emerald-800/15">
+                  <CheckCircle className="h-4 w-4" aria-hidden="true" />
+                </span>
               </div>
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
+              <div className="min-w-0 flex-1">
+                <div className="mb-2 flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">
-                      Written &amp; Verified By
-                    </span>
-                    <p className="font-black text-[#0a0a0a] text-base sm:text-lg">{post.author.name}</p>
+                    <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-800">Written &amp; reviewed by</span>
+                    <p className="text-lg font-black leading-tight text-slate-950 sm:text-xl">{post.author.name}</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-700">{post.author.role} at SearchPrex</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Link
-                      href="/experts"
-                      className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-800 hover:border-neutral-900 transition-colors"
-                    >
-                      Founder Profile
+                    <Link href="/experts" className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:border-slate-500">
+                      Founder profile
                     </Link>
-                    {(post.author.linkedIn || post.author.name.toLowerCase().includes("mubashar")) && (
-                      <a
-                        href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#0a66c2]/10 px-2.5 py-1 text-xs font-bold text-[#0a66c2] hover:bg-[#0a66c2]/20 transition-colors"
-                      >
-                        <Linkedin className="h-3.5 w-3.5" /> LinkedIn
+                    {(post.author.linkedIn || isMubasharAuthor) && (
+                      <a href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-[#0a66c2]/10 px-3 py-1.5 text-xs font-bold text-[#0a66c2] transition-colors hover:bg-[#0a66c2]/20">
+                        <Linkedin className="h-3.5 w-3.5" aria-hidden="true" /> LinkedIn
                       </a>
                     )}
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#171717]">
-                    <CheckCircle className="h-3.5 w-3.5 text-[#171717]" />
-                    {post.author.role}
-                  </span>
-                  <span className="text-xs text-slate-400">•</span>
-                  <span className="text-xs font-semibold text-slate-600">
-                    5+ Years SEO Experience · Semrush &amp; HubSpot Certified
-                  </span>
-                </div>
-                {post.author.bio && (
-                  <p className="text-sm text-[#64748b] leading-relaxed">{post.author.bio}</p>
-                )}
+                {isMubasharAuthor && <div className="mb-3 flex flex-wrap gap-1.5">
+                  {["5+ years hands-on SEO", "Semrush certified", "HubSpot certified", "20+ clients"].map((credential) => (
+                    <span key={credential} className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700">{credential}</span>
+                  ))}
+                </div>}
+                {isMubasharAuthor ? (
+                  <p className="max-w-3xl text-sm leading-6 text-slate-600">
+                    Mubashar leads SearchPrex’s founder-led SEO work for law firms, local businesses and ecommerce brands. He combines technical audits, Search Console data and local market research to build practical search strategies, with more than five years of hands-on experience across 20+ clients.
+                  </p>
+                ) : post.author.bio ? (
+                  <p className="max-w-3xl text-sm leading-6 text-slate-600">{post.author.bio}</p>
+                ) : null}
               </div>
-            </div>
+            </section>
  
             {/* Like & Share Bar */}
             <div className="mt-8 flex items-center justify-between gap-4 flex-wrap rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] px-5 py-4">
