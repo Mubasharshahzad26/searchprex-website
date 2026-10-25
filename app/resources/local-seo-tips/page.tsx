@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, MapPin, PhoneCall } from "lucide-react";
+import { ArrowRight, CalendarDays, ClipboardCheck, Newspaper, PhoneCall, SearchCheck } from "lucide-react";
 import { SITE, founderRef, ORGANIZATION_ID } from "@/lib/site-schema";
 
 const PAGE_URL = `${SITE}/resources/local-seo-tips`;
@@ -136,15 +136,29 @@ export default function LocalSeoTipsPage() {
             <p className="mt-4 text-sm leading-6 text-slate-600">A “double your leads” outcome is not promised here. Any such result should be shown only with a documented case, defined lead metric, comparable before-and-after periods and relevant context.</p>
           </section>
 
-          <section className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-7">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-800">Keep learning</p>
-            <h2 className="mt-2 text-xl font-bold text-slate-950">Follow the changes and see how local strategy fits your market</h2>
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold">
-              <Link href="/resources/news/local-seo-updates" className="inline-flex items-center gap-1.5 text-emerald-900 underline underline-offset-4">Latest Local SEO news <ArrowRight className="h-4 w-4" /></Link>
-              <Link href="/services/local-seo" className="inline-flex items-center gap-1.5 text-emerald-900 underline underline-offset-4">Local SEO service <ArrowRight className="h-4 w-4" /></Link>
-              <Link href="/locations/ohio/cleveland" className="inline-flex items-center gap-1.5 text-emerald-900 underline underline-offset-4"><MapPin className="h-4 w-4" />Cleveland page</Link>
-              <Link href="/locations/texas/katy" className="inline-flex items-center gap-1.5 text-emerald-900 underline underline-offset-4"><MapPin className="h-4 w-4" />Katy page</Link>
-              <Link href="/locations/texas/sugar-land" className="inline-flex items-center gap-1.5 text-emerald-900 underline underline-offset-4"><MapPin className="h-4 w-4" />Sugar Land page</Link>
+          <section aria-labelledby="local-seo-next-steps" className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-7">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-800">Put the tips into practice</p>
+            <h2 id="local-seo-next-steps" className="mt-2 text-xl font-bold text-slate-950 sm:text-2xl">Choose your next Local SEO step</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Start with the part of local visibility you need to improve: profile accuracy, a focused strategy, or staying current with verified changes.</p>
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              <Link href="/resources/google-business-profile-checklist" className="group rounded-xl border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-emerald-700/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><ClipboardCheck className="h-5 w-5" aria-hidden="true" /></span>
+                <h3 className="mt-3 font-semibold text-slate-950">Check your Business Profile</h3>
+                <p className="mt-1 text-sm leading-5 text-slate-600">Review categories, hours, contact details, photos and customer trust signals.</p>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-900">Open the free checklist <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
+              </Link>
+              <Link href="/services/local-seo" className="group rounded-xl border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-emerald-700/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><SearchCheck className="h-5 w-5" aria-hidden="true" /></span>
+                <h3 className="mt-3 font-semibold text-slate-950">Build a local visibility plan</h3>
+                <p className="mt-1 text-sm leading-5 text-slate-600">Connect your service pages, local relevance and customer enquiry path.</p>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-900">Explore Local SEO strategy <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
+              </Link>
+              <Link href="/resources/news/local-seo-updates" className="group rounded-xl border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-emerald-700/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><Newspaper className="h-5 w-5" aria-hidden="true" /></span>
+                <h3 className="mt-3 font-semibold text-slate-950">Keep up with local search changes</h3>
+                <p className="mt-1 text-sm leading-5 text-slate-600">See dated Google Business Profile and Maps updates before changing your routine.</p>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-900">Read Local SEO news <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
+              </Link>
             </div>
           </section>
 

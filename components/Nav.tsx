@@ -79,6 +79,7 @@ const navLinks: NavLink[] = [
       { href: "/resources/discussions",                       label: "02. SEO Discussion Forum", badge: "New" },
       { href: "/resources/solutions",                         label: "03. Issues & Solutions Library", badge: "New" },
       { href: "/resources/learning-hub",                      label: "04. SEO Learning Hub", badge: "New" },
+      { href: "/resources/local-seo-tips",                    label: "Local SEO Tips & Lead Playbook" },
       { href: "/resources/gsc-regex-library",                 label: "GSC Regex Library" },
       { href: "/resources/law-firm-seo-audit-checklist",      label: "Law Firm SEO Checklist" },
       { href: "/resources/technical-seo-checklist",           label: "Technical SEO Checklist" },
