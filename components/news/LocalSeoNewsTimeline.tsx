@@ -56,6 +56,11 @@ const updates = [
 ];
 
 export default function LocalSeoNewsTimeline() {
+  const twoDaysAgo = new Date();
+  twoDaysAgo.setHours(0, 0, 0, 0);
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  const recentUpdates = updates.filter((update) => new Date(update.date).getTime() >= twoDaysAgo.getTime());
+
   return (
     <section
       aria-labelledby="local-seo-news-timeline"
@@ -75,6 +80,26 @@ export default function LocalSeoNewsTimeline() {
         reported tests. A layout test is not proof of a ranking change; verify
         changes in your own Business Profile and performance data.
       </p>
+
+      <section aria-labelledby="local-seo-last-two-days" className="mb-6 rounded-xl border border-emerald-100 bg-white p-4 sm:p-5">
+        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+          <h3 id="local-seo-last-two-days" className="text-base font-bold text-slate-950">Local SEO updates from the past two days</h3>
+          <span className="text-xs font-medium text-slate-500">Dated, sourced updates</span>
+        </div>
+        {recentUpdates.length ? (
+          <ul className="space-y-3">
+            {recentUpdates.map((update) => (
+              <li key={`recent-${update.title}`} className="border-t border-slate-100 pt-3 first:border-0 first:pt-0">
+                <p className="text-xs font-medium text-slate-500">{update.date} · {update.status}</p>
+                <p className="mt-1 text-sm font-semibold leading-5 text-slate-900">{update.title}</p>
+                <a href={update.href} target={update.href.startsWith("http") ? "_blank" : undefined} rel={update.href.startsWith("http") ? "noopener noreferrer" : undefined} className="mt-1 inline-block text-xs font-semibold text-emerald-800 underline decoration-emerald-300 underline-offset-4">Read source: {update.source}</a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm leading-6 text-slate-600">No source-checked local search changes have been logged in the past two days. The full dated update log follows.</p>
+        )}
+      </section>
 
       <ol className="space-y-4">
         {updates.map((update) => (
