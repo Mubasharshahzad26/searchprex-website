@@ -206,7 +206,11 @@ export default function Nav() {
             : "border-slate-200/60"
         }`}
       >
-        {showLocalSeoNewsSubscription && !isScrolled && <LocalSeoNewsSubscriptionBar />}
+        {showLocalSeoNewsSubscription && !isScrolled && (
+          <div className="lg:hidden">
+            <LocalSeoNewsSubscriptionBar />
+          </div>
+        )}
         {showClevelandOffer && !isScrolled && (
           <div
             role="region"

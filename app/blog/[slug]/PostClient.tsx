@@ -1187,6 +1187,56 @@ export default function PostClient({
               </div>
             )}
 
+            {isLocalUpdates && (
+              <section aria-labelledby="local-sidebar-resources" className="rounded-2xl border border-slate-200 bg-white p-5">
+                <h2 id="local-sidebar-resources" className="text-xs font-bold uppercase tracking-widest text-slate-500">Local SEO resources</h2>
+                <nav aria-label="Related Local SEO services and guides" className="mt-3 flex flex-col gap-3">
+                  <Link href="/services/local-seo" className="text-sm font-semibold leading-5 text-slate-900 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-900">Local SEO services</Link>
+                  <Link href="/resources/local-seo-tips" className="text-sm font-semibold leading-5 text-slate-900 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-900">Local SEO tips and lead playbook</Link>
+                  <Link href="/resources/google-business-profile-checklist" className="text-sm font-semibold leading-5 text-slate-900 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-900">Google Business Profile checklist</Link>
+                </nav>
+              </section>
+            )}
+
+            {isLocalUpdates && localNewsPosts && localNewsPosts.length > 0 && (
+              <section aria-labelledby="local-sidebar-news" className="rounded-2xl border border-slate-200 bg-white p-5">
+                <h2 id="local-sidebar-news" className="text-xs font-bold uppercase tracking-widest text-slate-500">Related Local SEO news</h2>
+                <div className="mt-3 flex flex-col gap-4">
+                  {localNewsPosts.slice(0, 2).map((item) => (
+                    <Link key={item.slug} href={`/resources/news/${item.slug}`} className="group flex items-start gap-3">
+                      <Image src={item.image} alt={item.imageAlt} width={96} height={64} sizes="96px" className="h-16 w-24 shrink-0 rounded-lg object-cover" />
+                      <span className="min-w-0">
+                        <span className="block text-[11px] text-slate-500">{new Date(`${item.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" })} · {item.readTime}</span>
+                        <span className="mt-1 line-clamp-3 block text-sm font-semibold leading-5 text-slate-900 group-hover:text-emerald-900">{item.title}</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+                <Link href="/resources/news/local-seo-updates#local-seo-news-feed" className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-emerald-900 underline decoration-emerald-300 underline-offset-4">Browse all local updates <ArrowRight className="h-3 w-3" aria-hidden="true" /></Link>
+              </section>
+            )}
+
+            {isLocalUpdates && (
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-slate-950">
+                <div className="mb-2 inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-emerald-900">
+                  <Mail className="h-3.5 w-3.5" aria-hidden="true" /> Local SEO newsletter
+                </div>
+                <p className="mb-3 text-sm font-bold leading-snug">Get sourced Local SEO updates by email.</p>
+                {subscribed ? (
+                  <p role="status" className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs font-semibold text-emerald-900">You&apos;re subscribed to Local SEO updates.</p>
+                ) : (
+                  <form onSubmit={handleArticleSubscribe} className="flex flex-col gap-2">
+                    <label className="sr-only" htmlFor="local-sidebar-newsletter-email">Email address</label>
+                    <input id="local-sidebar-newsletter-email" type="email" required autoComplete="email" value={subEmail} onChange={(event) => { setSubEmail(event.target.value); if (subError) setSubError(null); }} placeholder="Email address" className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15" />
+                    <button type="submit" disabled={submitting} className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-950 px-3 py-2.5 text-xs font-bold text-white transition hover:bg-slate-800 disabled:opacity-60">
+                      {submitting ? <><Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" /> Subscribing…</> : <>Subscribe <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></>}
+                    </button>
+                    {subError && <p role="alert" className="text-[11px] font-medium text-red-700">{subError}</p>}
+                  </form>
+                )}
+              </div>
+            )}
+
             {/* Dynamic Topic-Aware Sidebar Lead Magnet */}
             {!isLocalUpdates && <ArticleLeadMagnet
               variant="sidebar"
