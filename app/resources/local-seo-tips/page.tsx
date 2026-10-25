@@ -5,8 +5,9 @@ import { ArrowRight, CalendarDays, ClipboardCheck, Newspaper, PhoneCall, SearchC
 import { SITE, founderRef, ORGANIZATION_ID } from "@/lib/site-schema";
 
 const PAGE_URL = `${SITE}/resources/local-seo-tips`;
-const TITLE = "Local SEO Tips: A Practical Playbook for More Qualified Local Leads";
-const DESCRIPTION = "A practical Local SEO guide for local businesses: improve Google Business Profile accuracy, useful location pages, customer trust, seasonal planning and lead tracking.";
+const TITLE = "Local SEO Playbook: Practical Steps to Win Nearby Customers | SearchPrex";
+const H1 = "Turn nearby searches into local leads with a practical SEO playbook";
+const DESCRIPTION = "Use this Local SEO checklist to improve your Google Business Profile, local pages, customer trust and lead tracking.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -34,7 +35,7 @@ export default function LocalSeoTipsPage() {
         "@type": "TechArticle",
         "@id": `${PAGE_URL}#article`,
         url: PAGE_URL,
-        headline: TITLE,
+        headline: H1,
         description: DESCRIPTION,
         inLanguage: "en-US",
         isAccessibleForFree: true,
@@ -62,7 +63,7 @@ export default function LocalSeoTipsPage() {
           <div>
             <nav aria-label="Breadcrumb" className="mb-5 text-sm text-slate-500"><Link href="/resources" className="hover:text-slate-900">Resources</Link><span className="mx-2">/</span><span className="font-medium text-slate-800">Local SEO Tips</span></nav>
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Local SEO field guide · Updated October 25, 2026</p>
-            <h1 className="text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">Local SEO Tips: a practical playbook for more qualified local leads</h1>
+            <h1 className="text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">{H1}</h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">Clear steps for making your local business easier to find, trust and contact—plus a dated U.S. seasonal calendar and a way to measure whether the work is producing real enquiries.</p>
             <a href="#local-seo-checklist" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Start with the checklist <ArrowRight className="h-4 w-4" /></a>
           </div>
