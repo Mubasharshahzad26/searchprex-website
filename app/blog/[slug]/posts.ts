@@ -223,6 +223,82 @@ const TRACKING_FAQS: PostFaq[] = [
 
 export const posts = [
   {
+    slug:        "mubashar-sharif-ecommerce-indexing-recovery",
+    category:    "E-commerce SEO",
+    subcategory: "Indexing Recovery",
+    metaTitle:   "Ecommerce Indexing Recovery: My 90-Day Field Note | SearchPrex",
+    metaDescription: "How I diagnosed an ecommerce indexing decline, prioritized category and brand pages, and measured recovery from about 4,000 to 12,200 indexed URLs.",
+    title:       "How I Rebuilt an Ecommerce Store’s Indexing: A 90-Day Field Note",
+    excerpt:     "A first-person account of diagnosing a large store’s indexation decline, prioritizing category and brand pages, and measuring the recovery in Search Console—without treating indexing as guaranteed or confusing it with revenue.",
+    readTime:    "9-minute read",
+    date:        "October 27, 2026",
+    tags:        ["ecommerce SEO", "Google indexing", "indexation recovery", "Google Search Console", "crawlability", "technical SEO"],
+    stat:        { value: "~4,000 → 12,200", label: "Indexed URLs in the documented period" },
+    heroImage:   "/images/case-studies/michigan-outdoor-dispatch.webp",
+    toc: [
+      "The short answer",
+      "What the Search Console evidence shows",
+      "How I approached the recovery",
+      "Where NicheSEO PRO fit into the workflow",
+      "What I would measure next time",
+      "Frequently asked questions",
+      "Sources",
+    ],
+    content: `
+      <h2>The short answer</h2>
+      <div class="callout"><strong>My takeaway:</strong> when a large ecommerce catalog loses indexed URLs, I first identify which valuable page groups are missing and why. I then improve access, internal discovery, and page usefulness in a controlled order—starting with category and brand hubs before working deeper into product URLs. Search Console is the outcome check; submitting a URL is not a promise that Google will index it.</div>
+      <p>I am Mubashar Sharif, founder of SearchPrex. This is a field note from work on Michigan Sports &amp; Outdoor, an ecommerce retailer with a large catalog. I am sharing the evidence and the sequence that shaped the work, including what the numbers do <em>not</em> prove. Index coverage, clicks, and revenue are different measures and should not be blended into one success claim.</p>
+
+      <h2>What the Search Console evidence shows</h2>
+      <p>The documented case study records approximately <strong>4,000 indexed pages at the end of May 2026</strong> and <strong>12,200 (12.2K) indexed URLs on August 21, 2026</strong>. That is a rise over roughly three months, not a one-month result. It is a before-and-after observation during a broader SEO program, so it should not be read as proof that one tactic alone caused the change.</p>
+      <p>The case study also compares two United States Search Console windows: 224 clicks from April 1–June 12 and 322 clicks from June 13–August 29; reported CTR moved from 3.7% to 5.1%. Those windows are not equal in length and the periods differ in more than one change. I treat them as directional evidence, not a controlled experiment or a guaranteed forecast.</p>
+      <p>One number I do <strong>not</strong> claim here is a 500% revenue increase for this store. The project evidence available for this case does not substantiate that figure. Revenue needs its own store analytics, attribution window, and comparison before it belongs in a case-study claim.</p>
+
+      <h2>How I approached the recovery</h2>
+      <p>I organize the work by the role a URL plays in the store, then validate the specific technical or content issue before applying a template-level fix. The sequence below is a practical way to reduce risk on a large catalog, not a rule that every store must follow unchanged.</p>
+      <ol>
+        <li><strong>Start with Search Console’s page groups.</strong> Separate indexed pages from “Discovered – currently not indexed,” “Crawled – currently not indexed,” duplicate/canonical, and server error groups. Sample actual URLs from each group. The status label is a clue to investigate, not a diagnosis by itself.</li>
+        <li><strong>Check access and URL quality.</strong> Confirm priority pages return a successful response, are not blocked or marked noindex by mistake, have a sensible canonical, and do not depend on a crawl path Google cannot follow. Check server logs and Search Console crawl stats for repeated errors or wasted requests.</li>
+        <li><strong>Make the catalog legible from the top down.</strong> Strengthen the path from navigation to useful categories, from categories to relevant brands, and from those hubs to in-stock products. Give important hubs unique copy and a clear purpose. Internal links help discovery and explain relationships; they cannot force indexing.</li>
+        <li><strong>Improve product value where it is thin.</strong> Prioritize products with demand, stock, or commercial importance. Add verified specifications, fit/use details, original imagery where available, and helpful comparisons rather than mass-producing near-identical text.</li>
+        <li><strong>Keep sitemaps clean and monitor batches.</strong> Include canonical, indexable URLs that return successfully. A sitemap can help Google discover URLs, but Google describes it as a hint—not a guarantee of crawling or indexing. Measure a representative batch after changes and give processing time before expanding a template fix.</li>
+      </ol>
+      <p>This connects to our <a href="/services/technical-seo/indexing-recovery">indexing recovery service</a>, <a href="/services/ecommerce-seo">ecommerce SEO work</a>, and <a href="/resources/woocommerce-seo-checklist">WooCommerce SEO checklist</a>. The checks should be adapted to Shopify, WooCommerce, or a custom platform rather than copied blindly.</p>
+
+      <h2>Where NicheSEO PRO fit into the workflow</h2>
+      <p>I used NicheSEO PRO as a way to organize investigation and identify opportunities—not as a substitute for Google’s own reports or a guarantee of rankings, citations, or sales. Its site audit and health views can help surface technical items; domain overview and AI visibility can add context; keyword opportunities can help prioritize topics. A revenue estimate is a hypothesis to validate against the store’s actual analytics and order data.</p>
+      <p>For each proposed change, I still want to know: which URLs are affected, what Search Console says about them, whether the page is useful to a shopper, and what outcome we will review later. That keeps a long list of audit flags from becoming a checklist of changes without a business reason. See <a href="https://nicheseopro.com/" target="_blank" rel="noopener noreferrer">NicheSEO PRO</a> for the tool details.</p>
+
+      <h2>What I would measure next time</h2>
+      <ul>
+        <li>Index coverage by meaningful page type, alongside the number of submitted canonical URLs.</li>
+        <li>Search Console impressions, clicks, CTR, and query mix for matched date windows and the same country/device filters.</li>
+        <li>Server response and crawl patterns for priority templates, not just total crawl volume.</li>
+        <li>Organic landing-page sessions, qualified product views, add-to-cart events, orders, and net revenue from the store platform—using a stated attribution model.</li>
+      </ul>
+      <p>Core Web Vitals and response reliability matter to the user experience and technical quality, but I do not present them as a direct indexing switch. Nor do I rely on bulk “Web 2.0” backlinks. If outreach makes sense, I focus on relevant editorial or industry sources and measure the referral and search impact honestly.</p>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Does a sitemap submission guarantee that Google indexes ecommerce pages?</h3>
+      <p>No. Google says sitemaps are a hint. The URL still needs to be accessible and indexable, and Google decides whether it belongs in the index.</p>
+      <h3>Should I start by requesting indexing for every product URL?</h3>
+      <p>No. First fix the reason a page group is excluded and make priority URLs discoverable through useful internal links. Use URL Inspection for a small number of important pages, not as a bulk-catalog submission system.</p>
+      <h3>Can this 90-day result predict what another store will achieve?</h3>
+      <p>No. Catalog quality, platform behavior, competition, technical state, and Google’s decisions vary. The case is evidence of what happened on this project, not a promised timeline or result for another business.</p>
+      <h3>Did this case produce a verified 500% revenue increase?</h3>
+      <p>No such figure is supported by the evidence cited in this article. We would need comparable store revenue records and a clear attribution method before making that claim.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure" target="_blank" rel="noopener noreferrer">Google Search Central: Help Google understand your ecommerce site structure</a></li>
+        <li><a href="https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors" target="_blank" rel="noopener noreferrer">Google Search Central: Troubleshoot crawling errors</a></li>
+        <li><a href="https://developers.google.com/search/docs/essentials/technical" target="_blank" rel="noopener noreferrer">Google Search Central: Technical requirements</a></li>
+        <li><a href="/case-studies/ecommerce/michigan-outdoor-sports">SearchPrex case study: Michigan Sports &amp; Outdoor</a></li>
+      </ul>
+    `,
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Analyst", bio: "Mubashar Sharif is the founder of SearchPrex and an SEO analyst focused on technical and ecommerce search. He documents field work with Search Console evidence and clear measurement limits." },
+  },
+  {
     slug:        "google-ai-overviews-seo",
     category:    "Content Strategy",
     subcategory: "Generative Engine Optimization",
