@@ -198,6 +198,7 @@ export type ArticlePost = {
   date: string;
   heroImage: string;
   author: { name: string; role: string; bio?: string; linkedIn?: string };
+  authorQuote?: string;
   tags?: string[];
   toc?: string[];
   stat?: { value: string; label: string } | null;
@@ -323,6 +324,27 @@ export default function PostClient({
       rawTitle.length > 68 ? `${rawTitle.slice(0, 65).trim()}...` : rawTitle;
     const cat = (post.category || "SEO").trim();
     const hay = `${rawTitle} ${cat} ${post.slug}`.toLowerCase();
+
+    if (post.slug === "mubashar-sharif-ecommerce-indexing-recovery") {
+      return {
+        bannerCopy: {
+          eyebrow: "FREE WOOCOMMERCE INDEXING TRIAGE",
+          headline: "Find the page group behind your store’s indexing problem",
+          sub: "Share your store URL and the Search Console status you’re seeing. Mubashar will review a representative sample of category, brand, and product URLs, then send practical first steps within 24 hours. No indexing guarantees.",
+        },
+        bannerBtn: "Get My Free Indexing Triage →",
+        sidebarCopy: {
+          headline: "Free Ecommerce Indexing Review",
+          sub: "Get a first look at excluded product URLs, page discovery, and the next checks for your WooCommerce store.",
+        },
+        sidebarBtn: "Review My Store →",
+        bottomCopy: {
+          headline: "Not sure why Google is skipping your product pages?",
+          sub: "Send your store URL and email. Mubashar Sharif will review the indexing pattern and return a prioritized first-step diagnosis within 24 hours. This is a manual review, not a promise that Google will index any URL.",
+        },
+        bottomBtn: "Request My Free Indexing Review →",
+      };
+    }
 
     if (
       hay.includes("flying car") ||
@@ -1052,8 +1074,8 @@ export default function PostClient({
             )}
  
             {/* Author bio with Mubashar Sharif Photo */}
-            <section aria-label={`About the author, ${post.author.name}`} className="mt-10 flex flex-col gap-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5 shadow-sm sm:flex-row sm:items-center sm:gap-6 sm:p-7">
-              <div className="relative h-24 w-24 shrink-0 rounded-full border border-emerald-800/20 bg-gradient-to-br from-emerald-50 to-white p-1 shadow-md sm:h-28 sm:w-28">
+            <section aria-label={`About the author, ${post.author.name}`} className={`mt-10 flex flex-col gap-5 rounded-2xl border bg-gradient-to-br p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-7 ${post.slug === "mubashar-sharif-ecommerce-indexing-recovery" ? "border-emerald-200 from-emerald-50/80 to-white shadow-md" : "border-slate-200 from-slate-50 to-white shadow-sm"}`}>
+              <div className={`relative h-24 w-24 shrink-0 rounded-full border bg-gradient-to-br from-emerald-50 to-white p-1 shadow-md sm:h-28 sm:w-28 ${post.slug === "mubashar-sharif-ecommerce-indexing-recovery" ? "border-emerald-700/30 ring-4 ring-emerald-700/10 sm:h-32 sm:w-32" : "border-emerald-800/20"}`}>
                 <div className="relative h-full w-full overflow-hidden rounded-full ring-1 ring-slate-200">
                   <Image
                     src="/images/mubashar-sharif.jpg"
@@ -1096,6 +1118,12 @@ export default function PostClient({
                   </p>
                 ) : post.author.bio ? (
                   <p className="max-w-3xl text-sm leading-6 text-slate-600">{post.author.bio}</p>
+                ) : null}
+                {post.authorQuote ? (
+                  <blockquote className="mt-5 rounded-xl border-l-4 border-emerald-700 bg-emerald-50/70 px-5 py-4 text-sm leading-6 text-slate-800 sm:text-base">
+                    <p className="font-semibold">“{post.authorQuote}”</p>
+                    <cite className="mt-2 block text-xs font-bold not-italic text-emerald-900">— {post.author.name}, SearchPrex</cite>
+                  </blockquote>
                 ) : null}
               </div>
             </section>

@@ -221,6 +221,13 @@ const TRACKING_FAQS: PostFaq[] = [
   },
 ];
 
+const ECOMMERCE_INDEXING_FAQS: PostFaq[] = [
+  { q: "Why are many WooCommerce product pages not indexed?", a: "There is no single cause. Check the exact Search Console exclusion reason, then sample URLs for crawl access, response codes, canonicals, internal links, product availability, and distinctive shopper value. Fix the pattern before requesting indexing for individual URLs." },
+  { q: "Should I request indexing for every product URL in Google Search Console?", a: "No. URL Inspection is not a bulk indexing mechanism. Improve the root cause for the affected page group, link important pages through useful category and brand navigation, and keep XML sitemaps focused on canonical, indexable URLs." },
+  { q: "Does this 90-day Michigan Sports & Outdoor result guarantee the same result for my store?", a: "No. It is a documented before-and-after case observation, not a controlled experiment or forecast. Store platform, catalog quality, technical state, competition, and Google's indexing decisions vary." },
+  { q: "Does structured data or AI-ready copy make Google index a product page?", a: "No. Structured data can help search engines interpret eligible content, and clear writing can help readers, but neither guarantees crawling, indexing, AI citations, or rankings." },
+];
+
 export const posts = [
   {
     slug:        "local-search-confidence-loop-psychology",
@@ -311,48 +318,83 @@ export const posts = [
     slug:        "mubashar-sharif-ecommerce-indexing-recovery",
     category:    "E-commerce SEO",
     subcategory: "Indexing Recovery",
-    metaTitle:   "Ecommerce Indexing Recovery: My 90-Day Field Note | SearchPrex",
-    metaDescription: "How I diagnosed an ecommerce indexing decline, prioritized category and brand pages, and measured recovery from about 4,000 to 12,200 indexed URLs.",
-    title:       "How I Rebuilt an Ecommerce Store’s Indexing: A 90-Day Field Note",
-    excerpt:     "A first-person account of diagnosing a large store’s indexation decline, prioritizing category and brand pages, and measuring the recovery in Search Console—without treating indexing as guaranteed or confusing it with revenue.",
-    readTime:    "9-minute read",
+    metaTitle:   "WooCommerce Indexing Recovery: A 90-Day Case Study | SearchPrex",
+    metaDescription: "Mass WooCommerce product pages not indexed? See a documented 90-day recovery workflow, Search Console proof, and a free URL triage for US store owners.",
+    title:       "How I Rebuilt Ecommerce Indexing: A 90-Day Guide for WooCommerce Stores",
+    excerpt:     "A practical guide for U.S. WooCommerce owners facing mass product-page indexation issues: the documented Search Console evidence, what I prioritized, and how to investigate a similar pattern without promising Google will index every URL.",
+    readTime:    "12-minute read",
     date:        "October 27, 2026",
     tags:        ["ecommerce SEO", "Google indexing", "indexation recovery", "Google Search Console", "crawlability", "technical SEO"],
     stat:        { value: "~4,000 → 12,200", label: "Indexed URLs in the documented period" },
     heroImage:   "/images/case-studies/michigan-outdoor-dispatch.webp",
     toc: [
-      "The short answer",
+      "The short answer for WooCommerce store owners",
       "What the Search Console evidence shows",
-      "How I approached the recovery",
+      "How I investigated mass product-page non-indexing",
+      "A practical WooCommerce recovery sequence",
+      "Make the findings useful to searchers and AI systems",
       "Where NicheSEO PRO fit into the workflow",
+      "A free indexing triage for your store",
       "What I would measure next time",
       "Frequently asked questions",
       "Sources",
     ],
+    authorQuote: "I treat index recovery as a discovery and page-value problem, not a submission-volume contest. Fix the cause, prioritize the URLs that matter, then measure what changes in Search Console.",
+    exitOffer: {
+      headline: "Which product-page group is Google skipping on your WooCommerce store?",
+      sub: "Share your store URL and I’ll review a representative sample of category, brand, and product URLs, then send a prioritized first-step diagnosis within 24 hours. It’s a manual review—not a guarantee that Google will index every URL.",
+    },
+    faqs: ECOMMERCE_INDEXING_FAQS,
     content: `
-      <h2>The short answer</h2>
-      <div class="callout"><strong>My takeaway:</strong> when a large ecommerce catalog loses indexed URLs, I first identify which valuable page groups are missing and why. I then improve access, internal discovery, and page usefulness in a controlled order—starting with category and brand hubs before working deeper into product URLs. Search Console is the outcome check; submitting a URL is not a promise that Google will index it.</div>
-      <p>I am Mubashar Sharif, founder of SearchPrex. This is a field note from work on Michigan Sports &amp; Outdoor, an ecommerce retailer with a large catalog. I am sharing the evidence and the sequence that shaped the work, including what the numbers do <em>not</em> prove. Index coverage, clicks, and revenue are different measures and should not be blended into one success claim.</p>
-
+      <h2>The short answer for WooCommerce store owners</h2>
+      <div class="callout"><strong>Quick answer:</strong> if many WooCommerce product pages are not indexed, group the URLs by Search Console exclusion reason, inspect representative examples, and fix the shared technical or content cause. Then improve internal discovery from useful categories and brand pages, keep sitemaps clean, and monitor a defined batch. Indexing requests, schema, and AI-friendly formatting cannot force Google to index a URL.</div>
+      <p>I’m Mubashar Sharif, founder of SearchPrex. This field guide is for U.S. ecommerce operators working through a large “Discovered – currently not indexed” or “Crawled – currently not indexed” report. It draws on the Michigan Sports &amp; Outdoor case evidence and the workflow I use to organize an investigation. It does not promise that another store will get the same result.</p>
       <h2>What the Search Console evidence shows</h2>
-      <p>The documented case study records approximately <strong>4,000 indexed pages at the end of May 2026</strong> and <strong>12,200 (12.2K) indexed URLs on August 21, 2026</strong>. That is a rise over roughly three months, not a one-month result. It is a before-and-after observation during a broader SEO program, so it should not be read as proof that one tactic alone caused the change.</p>
-      <p>The case study also compares two United States Search Console windows: 224 clicks from April 1–June 12 and 322 clicks from June 13–August 29; reported CTR moved from 3.7% to 5.1%. Those windows are not equal in length and the periods differ in more than one change. I treat them as directional evidence, not a controlled experiment or a guaranteed forecast.</p>
+      <p>The SearchPrex case study records approximately <strong>4,000 indexed pages at the end of May 2026</strong> and <strong>12,200 (12.2K) indexed URLs on August 21, 2026</strong>. That is a rise over roughly three months—not one month. It is a before-and-after observation during broader SEO work, so it does not isolate one change as the sole cause. Google’s indexing remains a decision made URL by URL.</p>
+      <figure><img src="/images/case-studies/mso-index-coverage-search-console.webp" alt="Google Search Console Page indexing report for Michigan Sports and Outdoor, updated August 21, 2026, showing 12.2 thousand indexed pages and a June 13 point of 5,247." loading="lazy" width="1362" height="495" /><figcaption>Search Console evidence: about 4,000 indexed pages at the end of May, 5,247 on June 13, and 12.2K by August 21, 2026. The chart is a project snapshot, not a promise of future results.</figcaption></figure>
+      <p>The case study separately compares two U.S. Search Console windows: <strong>224 clicks from April 1–June 12</strong> and <strong>322 clicks from June 13–August 29</strong>; reported CTR moved from 3.7% to 5.1%. The date windows are not equal in length and multiple changes were made, so I treat this as directional context, not a controlled test or causal revenue claim.</p>
+      <figure><img src="/images/case-studies/mso-us-search-performance.webp" alt="Google Search Console Performance comparison for the United States: 224 clicks from April 1 through June 12, 2026 versus 322 clicks from June 13 through August 29; CTR was 3.7 percent and 5.1 percent." loading="lazy" width="1366" height="520" /><figcaption>Separate U.S. performance comparison from the project: 224 vs. 322 clicks and CTR 3.7% vs. 5.1% across different date windows.</figcaption></figure>
       <p>One number I do <strong>not</strong> claim here is a 500% revenue increase for this store. The project evidence available for this case does not substantiate that figure. Revenue needs its own store analytics, attribution window, and comparison before it belongs in a case-study claim.</p>
+      <p>See the <a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Sports &amp; Outdoor case study</a> for the full project context and supporting proof. Its indexing and click data should be kept distinct from the WooCommerce revenue screenshots and from results achieved on other stores.</p>
 
-      <h2>How I approached the recovery</h2>
-      <p>I organize the work by the role a URL plays in the store, then validate the specific technical or content issue before applying a template-level fix. The sequence below is a practical way to reduce risk on a large catalog, not a rule that every store must follow unchanged.</p>
+      <h2>How I investigated mass product-page non-indexing</h2>
+      <p>First, I separate pages by their role and by the exact issue Google reports. “Discovered” and “Crawled” currently not indexed do not mean the same thing: the first points toward discovery/crawl prioritization to investigate; the second means Google fetched the page but did not include it. Neither label alone proves the root cause. Use the matching guides for <a href="/blog/fix-discovered-currently-not-indexed-ecommerce">Discovered – currently not indexed</a> and <a href="/blog/fix-crawled-currently-not-indexed-ecommerce">Crawled – currently not indexed</a>.</p>
       <ol>
-        <li><strong>Start with Search Console’s page groups.</strong> Separate indexed pages from “Discovered – currently not indexed,” “Crawled – currently not indexed,” duplicate/canonical, and server error groups. Sample actual URLs from each group. The status label is a clue to investigate, not a diagnosis by itself.</li>
-        <li><strong>Check access and URL quality.</strong> Confirm priority pages return a successful response, are not blocked or marked noindex by mistake, have a sensible canonical, and do not depend on a crawl path Google cannot follow. Check server logs and Search Console crawl stats for repeated errors or wasted requests.</li>
-        <li><strong>Make the catalog legible from the top down.</strong> Strengthen the path from navigation to useful categories, from categories to relevant brands, and from those hubs to in-stock products. Give important hubs unique copy and a clear purpose. Internal links help discovery and explain relationships; they cannot force indexing.</li>
-        <li><strong>Improve product value where it is thin.</strong> Prioritize products with demand, stock, or commercial importance. Add verified specifications, fit/use details, original imagery where available, and helpful comparisons rather than mass-producing near-identical text.</li>
-        <li><strong>Keep sitemaps clean and monitor batches.</strong> Include canonical, indexable URLs that return successfully. A sitemap can help Google discover URLs, but Google describes it as a hint—not a guarantee of crawling or indexing. Measure a representative batch after changes and give processing time before expanding a template fix.</li>
+        <li><strong>Build a URL inventory.</strong> Export affected URLs and group by product, category, brand, pagination, filter/query parameters, and status reason. Include stock state and product importance if available. Sample pages from each group instead of assuming every URL shares one fault.</li>
+        <li><strong>Check crawl and index directives.</strong> For a sample, confirm the response is successful, the page is not accidentally blocked or noindexed, the canonical points to the intended product URL, and the page is not a duplicate route. Review server logs and Search Console crawl stats for repeated failures or unnecessary URL patterns.</li>
+        <li><strong>Inspect WooCommerce-specific output.</strong> Check product visibility/catalog settings, variant URLs, category pagination, faceted-filter parameters, internal search pages, canonicals and sitemap inclusion. Plugin/theme settings vary; validate the rendered HTML and response headers rather than following a generic toggle list.</li>
+        <li><strong>Prioritize page groups from the top down.</strong> Strengthen useful category and brand hubs first, then connect those hubs to in-stock, commercially relevant products. Use crawlable links that describe the destination and make sense to shoppers. Internal linking improves discovery paths; it does not guarantee indexing.</li>
+        <li><strong>Improve what a shopper gets from each page.</strong> Add accurate specifications, compatibility or fit notes, availability, original product details and helpful comparisons where they distinguish the page. Avoid generating thousands of near-identical descriptions just to fill an indexation gap.</li>
+        <li><strong>Keep sitemaps clean and re-measure in batches.</strong> Include canonical, indexable URLs that return successfully. A sitemap is a discovery hint, not an indexing command. Apply a verified template fix to a bounded group, then compare the same statuses after Google has had time to recrawl.</li>
       </ol>
-      <p>This connects to our <a href="/services/technical-seo/indexing-recovery">indexing recovery service</a>, <a href="/services/ecommerce-seo">ecommerce SEO work</a>, and <a href="/resources/woocommerce-seo-checklist">WooCommerce SEO checklist</a>. The checks should be adapted to Shopify, WooCommerce, or a custom platform rather than copied blindly.</p>
+      <p>For a broader platform guide, continue with our <a href="/blog/shopify-woocommerce-indexing-blueprint">Shopify and WooCommerce indexing blueprint</a>, the <a href="/blog/ecommerce-product-page-seo">ecommerce product-page SEO guide</a>, and the <a href="/resources/woocommerce-seo-checklist">WooCommerce SEO checklist</a>. If the pattern spans multiple templates, see our <a href="/services/technical-seo/indexing-recovery">indexing recovery service</a> and <a href="/services/ecommerce-seo">ecommerce SEO service</a>.</p>
+
+      <h2>A practical WooCommerce recovery sequence</h2>
+      <ol>
+        <li><strong>Protect the strongest paths.</strong> Make important products reachable from relevant categories, brands and navigation—not only from XML sitemaps or internal search.</li>
+        <li><strong>Choose a small pilot.</strong> Pick representative URLs from one diagnosed issue group. Record baseline indexing status, clicks/impressions and the technical/content change before applying it widely.</li>
+        <li><strong>Fix the template or source cause.</strong> Correct only what the evidence points to: a wrong canonical, accidental noindex, non-200 response, disconnected product, parameter crawl trap, thin/duplicated content, or another verified issue.</li>
+        <li><strong>Update discovery signals.</strong> Link the affected pages from relevant hubs and keep the sitemap limited to canonical URLs you want considered for indexing. Do not flood URL Inspection with the entire catalog.</li>
+        <li><strong>Compare like with like.</strong> Re-check the same URL group and Search Console reason after recrawl. Track organic impressions/clicks and actual store outcomes separately; no change should be credited with revenue without comparable order data and attribution.</li>
+      </ol>
+      <p>Do not disallow URLs in <code>robots.txt</code> before checking how that would affect Google’s ability to recrawl and see a noindex or canonical. A blunt block can hide the very signal needed to process an already known URL. Confirm the intended removal method for the specific status before making a site-wide change.</p>
+
+      <h2>Make the findings useful to searchers and AI systems</h2>
+      <p>Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and LLM discoverability start with a clear, crawlable page that solves a real user problem. For an ecommerce owner diagnosing indexation, state the short answer first, name the exact Search Console status, separate observations from hypotheses, show the dated case evidence, and link to the relevant next guide. Keep source citations and author identity visible.</p>
+      <ul>
+        <li><strong>Use descriptive headings and concise answers.</strong> Explain one problem at a time; make a paragraph understandable without requiring a reader to infer missing context.</li>
+        <li><strong>Support claims with dated evidence.</strong> Show which store, country, date range and metric the screenshot represents. Explain limitations and avoid turning a correlation into a causal claim.</li>
+        <li><strong>Keep URLs and entities clear.</strong> Link related guides with meaningful anchor text; use canonical URLs and valid Article/Product structured data where appropriate. Schema can clarify information but does not guarantee indexing or AI citations.</li>
+        <li><strong>Write for owners and shoppers first.</strong> There is no special “LLM text” or magic word count that secures a citation. Google’s current guidance emphasizes unique, useful content and foundational SEO for its generative search features; it does not promise that a format or tactic will earn an AI Overview mention.</li>
+      </ul>
+      <p>For technical steps, read Google’s guidance on <a href="https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure" target="_blank" rel="noopener noreferrer">ecommerce site structure</a>, <a href="https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors" target="_blank" rel="noopener noreferrer">crawling errors</a>, and <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener noreferrer">generative AI search features</a>.</p>
 
       <h2>Where NicheSEO PRO fit into the workflow</h2>
       <p>I used NicheSEO PRO as a way to organize investigation and identify opportunities—not as a substitute for Google’s own reports or a guarantee of rankings, citations, or sales. Its site audit and health views can help surface technical items; domain overview and AI visibility can add context; keyword opportunities can help prioritize topics. A revenue estimate is a hypothesis to validate against the store’s actual analytics and order data.</p>
       <p>For each proposed change, I still want to know: which URLs are affected, what Search Console says about them, whether the page is useful to a shopper, and what outcome we will review later. That keeps a long list of audit flags from becoming a checklist of changes without a business reason. See <a href="https://nicheseopro.com/" target="_blank" rel="noopener noreferrer">NicheSEO PRO</a> for the tool details.</p>
+
+      <h2>A free indexing triage for your store</h2>
+      <p>If your U.S. WooCommerce store has a large batch of excluded product URLs, request a free initial review. Share your store URL and the Search Console status or sample URLs you are concerned about. Mubashar will return a practical first-step diagnosis within 24 hours. The review identifies what to investigate next; it does not guarantee Google will crawl, index, rank or cite any page.</p>
 
       <h2>What I would measure next time</h2>
       <ul>
@@ -364,12 +406,9 @@ export const posts = [
       <p>Core Web Vitals and response reliability matter to the user experience and technical quality, but I do not present them as a direct indexing switch. Nor do I rely on bulk “Web 2.0” backlinks. If outreach makes sense, I focus on relevant editorial or industry sources and measure the referral and search impact honestly.</p>
 
       <h2>Frequently asked questions</h2>
+      ${faqHtml(ECOMMERCE_INDEXING_FAQS)}
       <h3>Does a sitemap submission guarantee that Google indexes ecommerce pages?</h3>
       <p>No. Google says sitemaps are a hint. The URL still needs to be accessible and indexable, and Google decides whether it belongs in the index.</p>
-      <h3>Should I start by requesting indexing for every product URL?</h3>
-      <p>No. First fix the reason a page group is excluded and make priority URLs discoverable through useful internal links. Use URL Inspection for a small number of important pages, not as a bulk-catalog submission system.</p>
-      <h3>Can this 90-day result predict what another store will achieve?</h3>
-      <p>No. Catalog quality, platform behavior, competition, technical state, and Google’s decisions vary. The case is evidence of what happened on this project, not a promised timeline or result for another business.</p>
       <h3>Did this case produce a verified 500% revenue increase?</h3>
       <p>No such figure is supported by the evidence cited in this article. We would need comparable store revenue records and a clear attribution method before making that claim.</p>
 
