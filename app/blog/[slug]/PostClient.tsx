@@ -197,12 +197,26 @@ export type ArticlePost = {
   readTime: string;
   date: string;
   heroImage: string;
+  heroImageAlt?: string;
+  bodyVisual?: { src: string; alt: string; caption: string };
   author: { name: string; role: string; bio?: string; linkedIn?: string };
   authorQuote?: string;
   tags?: string[];
   toc?: string[];
   stat?: { value: string; label: string } | null;
 };
+
+function addIntroVisual(content: string, visual?: ArticlePost["bodyVisual"]): string {
+  if (!visual) return content;
+  const escapeAttribute = (value: string) => value.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  } as Record<string, string>)[char] || char);
+  const figure = `<figure class="my-8 overflow-hidden rounded-xl border border-slate-200 bg-slate-50" style="margin:2rem 0;border:1px solid #e2e8f0;border-radius:0.75rem;overflow:hidden;background:#f8fafc"><img src="${escapeAttribute(visual.src)}" alt="${escapeAttribute(visual.alt)}" width="1200" height="900" loading="lazy" decoding="async" class="block h-auto w-full" /><figcaption class="px-4 py-3 text-sm leading-6 text-slate-600" style="padding:0.75rem 1rem;font-size:0.875rem;line-height:1.5;color:#475569">${escapeAttribute(visual.caption)}</figcaption></figure>`;
+  const firstParagraphEnd = content.search(/<\/p\s*>/i);
+  if (firstParagraphEnd < 0) return `${figure}${content}`;
+  const insertionPoint = firstParagraphEnd + content.slice(firstParagraphEnd).match(/^<\/p\s*>/i)![0].length;
+  return `${content.slice(0, insertionPoint)}\n${figure}\n${content.slice(insertionPoint)}`;
+}
 
 export default function PostClient({
   post,
@@ -786,7 +800,7 @@ export default function PostClient({
             <figure className="relative aspect-[1200/630] overflow-hidden rounded-2xl border border-slate-200 bg-[#0b102f] shadow-sm">
               <Image
                 src={post.heroImage}
-                alt="Coffee shop owner welcoming customers inside her storefront"
+                alt={post.heroImageAlt || post.title}
                 fill
                 priority
                 className="object-cover"
@@ -802,7 +816,7 @@ export default function PostClient({
         {/* Full-bleed Unsplash image */}
         <Image
           src={post.heroImage}
-          alt={post.title}
+          alt={post.heroImageAlt || post.title}
           fill
           priority
           className="object-cover"
@@ -1025,7 +1039,7 @@ export default function PostClient({
 
             {/* Content with Image Optimization + the mid-article lead magnet slot */}
             <div className="max-w-full overflow-hidden" style={{ lineHeight: "1.85", color: "#1a1a2e" }}>
-              {parse(renderArticle(isLocalUpdates ? post.content : injectMidContentSlot(post.content)), {
+              {parse(renderArticle(isLocalUpdates ? post.content : injectMidContentSlot(addIntroVisual(post.content, post.bodyVisual))), {
                 replace: (domNode) => {
                   if (!isLocalUpdates && domNode instanceof Element && domNode.tagName === 'div' && domNode.attribs?.id === '__lead_magnet_slot__') {
                     return (
@@ -1038,15 +1052,18 @@ export default function PostClient({
                     );
                   }
                   if (domNode instanceof Element && domNode.tagName === 'img') {
-                    const { src, alt } = domNode.attribs;
+                    const { src, alt, width, height } = domNode.attribs;
                     const normalizedSrc = (src || "").replace(/^https?:\/\/(www\.)?searchprex\.com/i, "");
                     return (
-                      <span className="my-8 block relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f8fafc]">
+                      <span className="block relative w-full h-auto overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f8fafc]">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={normalizedSrc}
                           alt={alt || "Article visual"}
+                          width={width ? Number(width) : undefined}
+                          height={height ? Number(height) : undefined}
                           loading="lazy"
+                          decoding="async"
                           className="w-full h-auto object-cover block"
                         />
                       </span>

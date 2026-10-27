@@ -63,6 +63,7 @@ async function getPostData(rawSlug: string) {
         author: { name: dbPost.author || "SearchPrex Team", role: "Verified SEO Expert", bio: "" },
         featured: false,
         heroImage: dbPost.coverImage || "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+        heroImageAlt: `Cover image illustrating ${dbPost.title}`,
         tags: [],
         // null rather than an empty object, so the headline stat badge is
         // skipped instead of rendering blank.
@@ -141,7 +142,7 @@ export async function generateMetadata({
       type: "article",
       publishedTime: toIsoDate(post.date),
       authors: [post.author.name],
-      images: [{ url: post.heroImage, width: 1400, height: 787, alt: post.title }],
+      images: [{ url: post.heroImage, width: 1400, height: 787, alt: post.heroImageAlt || post.title }],
     },
     twitter: {
       card: "summary_large_image",

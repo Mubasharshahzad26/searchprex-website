@@ -241,7 +241,9 @@ export const posts = [
     date:        "October 27, 2026",
     tags:        ["local search psychology", "law firm SEO", "local search behavior", "consumer trust", "Google Business Profile", "conversion optimization"],
     stat:        { value: "4 stages", label: "Need → verify → compare → contact" },
-    heroImage:   "/images/locations/cleveland-law-consultation.webp",
+    heroImage:   "/images/blog/covers/local-search-confidence-loop-psychology.webp",
+    heroImageAlt: "Attorney listening to a client during a private law firm consultation, illustrating trust and decision-making in local search.",
+    bodyVisual: { src: "/images/blog/body/local-search-confidence-loop-psychology.webp", alt: "Attorney listening as a client explains a legal concern before deciding whether to contact a local firm.", caption: "Local search decisions happen in context: people look for clear service information, evidence of fit, and a credible next step." },
     toc: [
       "The short answer",
       "What the research can—and cannot—tell us",
@@ -326,7 +328,8 @@ export const posts = [
     date:        "October 27, 2026",
     tags:        ["ecommerce SEO", "Google indexing", "indexation recovery", "Google Search Console", "crawlability", "technical SEO"],
     stat:        { value: "~4,000 → 12,200", label: "Indexed URLs in the documented period" },
-    heroImage:   "/images/case-studies/michigan-outdoor-dispatch.webp",
+    heroImage:   "/images/blog/covers/mubashar-sharif-ecommerce-indexing-recovery.webp",
+    heroImageAlt: "Michigan outdoor retailer team preparing ecommerce orders in a warehouse, the store featured in this indexing recovery case study.",
     toc: [
       "The short answer for WooCommerce store owners",
       "What the Search Console evidence shows",
@@ -434,7 +437,9 @@ export const posts = [
     date:        "October 8, 2026",
     tags:        ["google ai overviews", "generative engine optimization", "geo strategy", "ai search seo", "answer engine optimization"],
     stat:        { value: "2.5B+", label: "Monthly AI Overview users" },
-    heroImage:   "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/google-ai-overviews-seo.webp",
+    heroImageAlt: "Editorial graphic about AI-powered search and answer engine visibility.",
+    bodyVisual: { src: "/images/blog/body/google-ai-overviews-seo.webp", alt: "Search result example showing an AI-generated answer citation for a client brand; a recorded example, not a promise of future citations.", caption: "An observed AI answer citation can be documented, but appearance varies by query, location, and time." },
     toc: [
       "The short answer",
       "How Google AI Overviews select and cite sources",
@@ -572,7 +577,9 @@ export const posts = [
     date:        "October 6, 2026",
     tags:        ["product schema", "json-ld ecommerce", "merchant listings", "rich snippets", "ecommerce seo"],
     stat:        { value: "100%", label: "Rich result compliance" },
-    heroImage:   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/schema-markup-ecommerce.webp",
+    heroImageAlt: "Google Merchant Center policy update graphic about ecommerce return information and structured data.",
+    bodyVisual: { src: "/images/blog/body/schema-markup-ecommerce.webp", alt: "Google search results example showing ecommerce product listings and visible result details.", caption: "Structured product data should match visible page content; valid markup does not guarantee a rich result." },
     toc: [
       "The short answer",
       "Product snippets vs merchant listings in 2026",
@@ -964,7 +971,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["ecommerce traffic drop", "organic traffic dropped", "google search console", "ecommerce seo"],
     stat:        { value: "7", label: "Checks, in order" },
     /* Unsplash — analytics chart on a laptop */
-    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/ecommerce-organic-traffic-drop.webp",
+    heroImageAlt: "SMK ecommerce performance report used to investigate changes in store traffic and revenue.",
+    bodyVisual: { src: "/images/blog/body/ecommerce-organic-traffic-drop.webp", alt: "SMK ecommerce store report used to review business performance; a separate client record, not evidence for every traffic decline.", caption: "When traffic changes, compare search performance and store outcomes separately before attributing a cause." },
     toc: [
       "The short answer",
       "First, is the drop real?",
@@ -1095,7 +1104,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["google business profile calls", "more phone calls", "google maps", "local seo"],
     stat:        { value: "6", label: "Levers for more calls" },
     /* Unsplash — person on a phone call */
-    heroImage:   "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/get-more-calls-from-google-business-profile.webp",
+    heroImageAlt: "Local business search results and Google Business Profile details on a map.",
+    bodyVisual: { src: "/images/blog/body/get-more-calls-from-google-business-profile.webp", alt: "Google Business Profile listing for Door Doctor, a local service business.", caption: "An accurate business profile gives searchers practical details they need before calling." },
     toc: [
       "The short answer",
       "First, measure calls the way Google counts them",
@@ -1213,7 +1224,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["google business profile suspended", "gbp reinstatement", "google maps", "local seo"],
     stat:        { value: "5", label: "Steps to reinstatement" },
     /* Unsplash — storefront */
-    heroImage:   "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/google-business-profile-suspended.webp",
+    heroImageAlt: "Local business owner standing at the entrance of a neighborhood storefront.",
+    bodyVisual: { src: "/images/blog/body/google-business-profile-suspended.webp", alt: "Google Business Profile policy update graphic about reviews and profile enforcement.", caption: "For a suspension, review the current policy notice and correct the underlying profile issue before submitting an appeal." },
     toc: [
       "The short answer",
       "Is it really a suspension?",
@@ -1330,7 +1343,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["shopify seo", "shopify products not indexed", "google search console", "google merchant center"],
     stat:        { value: "8", label: "Checks, in order" },
     /* Unsplash — laptop with ecommerce dashboard */
-    heroImage:   "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/shopify-products-not-showing-on-google.webp",
+    heroImageAlt: "Diagram comparing duplicate Shopify collection product URLs with a clean canonical product URL.",
+    bodyVisual: { src: "/images/blog/body/shopify-products-not-showing-on-google.webp", alt: "Ecommerce indexing architecture diagram showing product URLs, sitemaps, caching, and crawl discovery.", caption: "Separate feed eligibility, page accessibility, canonical signals, and index coverage; each needs its own check." },
     toc: [
       "The short answer",
       "Google Search or the Shopping tab?",
@@ -1464,7 +1479,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["google maps ranking", "map pack", "google business profile", "local seo"],
     stat:        { value: "7", label: "Checks, in order" },
     /* Unsplash — paper map with pins */
-    heroImage:   "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/google-maps-ranking-drop.webp",
+    heroImageAlt: "Smartphone showing map navigation for a local business visit.",
+    bodyVisual: { src: "/images/blog/body/google-maps-ranking-drop.webp", alt: "Local search result evidence for Mammoth Roofing in Texas, shown as a market-specific ranking example.", caption: "Map visibility changes by searcher location and query, so compare the same grid points and search terms over time." },
     toc: [
       "The short answer",
       "First, check the drop is real",
@@ -1596,7 +1613,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["keyword research", "law firm seo", "legal seo", "search console"],
     stat:        { value: "4", label: "Free data sources" },
     /* Unsplash — law books / legal research */
-    heroImage:   "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/keyword-research-for-law-firms.webp",
+    heroImageAlt: "Cleveland office district showing the local market context for law firm keyword research.",
+    bodyVisual: { src: "/images/blog/body/keyword-research-for-law-firms.webp", alt: "Map-style graphic showing U.S. cities served by SearchPrex law firm SEO campaigns.", caption: "Build keyword lists from practice areas and genuinely served locations, then validate demand and intent." },
     toc: [
       "Why keyword research is different for law firms",
       "Step 1 — Start with the matters you actually take",
@@ -1685,7 +1704,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     tags:        ["crawl budget", "indexing", "technical seo", "e-commerce"],
     stat:        { value: "+285%", label: "Pages indexed · MSO" },
     /* Unsplash — server room / tech */
-    heroImage:   "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/crawl-budget-optimization-guide.webp",
+    heroImageAlt: "Technical diagram showing how search crawlers discover, queue, fetch, and process ecommerce URLs.",
+    bodyVisual: { src: "/images/blog/body/crawl-budget-optimization-guide.webp", alt: "Ecommerce internal-link diagram connecting the homepage, category hubs, and product pages.", caption: "Internal paths help crawlers discover important URLs; prioritize crawl efficiency after confirming server health and URL quality." },
     toc: [
       "What is crawl budget?",
       "Why it matters for e-commerce",
@@ -1738,7 +1759,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     readTime:    "9-minute read",
     date:        "August 27, 2026",
     stat:        { value: "200/day", label: "Actual API quota" },
-    heroImage:   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/google-indexing-api-python.webp",
+    heroImageAlt: "SEO specialist reviewing a technical indexing problem on a computer screen.",
+    bodyVisual: { src: "/images/blog/body/google-indexing-api-python.webp", alt: "Google Search Console indexing report for Michigan Sports & Outdoor showing a dated indexed-page trend.", caption: "The Indexing API is limited to eligible content types; ecommerce owners should use Search Console and sound site architecture for product pages." },
     tags:        ["indexing api", "indexing", "google search console", "technical seo"],
     toc:         ["What the Indexing API actually does","Why the multi-account trick is a bad trade","Why the myth is so persistent","What actually gets pages indexed at scale","What that looked like on a 35,000-page store","Do this week"],
     content: `
@@ -1799,7 +1822,9 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     readTime:    "11-minute read",
     date:        "August 27, 2026",
     stat:        { value: "+227%", label: "Monthly net sales · SMK" },
-    heroImage:   "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/ecommerce-product-page-seo.webp",
+    heroImageAlt: "Ecommerce operator reviewing product inventory and catalog details in a warehouse.",
+    bodyVisual: { src: "/images/blog/body/ecommerce-product-page-seo.webp", alt: "Michigan Sports & Outdoor ecommerce performance report from July 2026, included as project context.", caption: "Useful product pages answer shopper questions with accurate specifications, availability, compatibility, and original detail." },
     tags:        ["product pages", "e-commerce", "content", "indexing"],
     toc:         ["The duplicate content problem","Brand-by-brand, not page-by-page","The content template","Where AI fits, and where it gets you hurt","What the results looked like","Do this week"],
     content: `
@@ -1861,7 +1886,8 @@ function searchprex_enrich_product_schema( $markup, $product ) {
     readTime:    "12-minute read",
     date:        "September 29, 2026",
     stat:        { value: "+285%", label: "Pages indexed · MSO" },
-    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/fix-crawled-currently-not-indexed-ecommerce.webp",
+    heroImageAlt: "Search Console index coverage dashboard used to investigate product pages that Google crawled but did not index.",
     tags:        ["crawled currently not indexed", "e-commerce seo", "product pages", "technical seo", "indexing recovery"],
     toc: [
       "What 'Crawled – Currently Not Indexed' actually means",
@@ -1915,8 +1941,8 @@ function searchprex_enrich_product_schema( $markup, $product ) {
 </div>
 
 <figure class="my-8">
-<img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&auto=format&fit=crop" alt="Large ecommerce warehouse catalog management" class="rounded-xl border border-[#e5e7eb] w-full" />
-<figcaption class="mt-2 text-center text-xs text-[#6b7280]">Large e-commerce catalogs with thousands of SKUs require tight crawl hygiene and unique content to maintain 90%+ indexation rates.</figcaption>
+<img src="/images/case-studies/michigan-outdoor-dispatch.webp" alt="Large ecommerce warehouse catalog management" class="rounded-xl border border-[#e5e7eb] w-full" />
+<figcaption class="mt-2 text-center text-xs text-[#6b7280]">A large catalog benefits from clear discovery paths, valuable product information, and a clean crawlable URL set.</figcaption>
 </figure>
 
 <h2>5 technical culprits behind mass product deindexing</h2>
@@ -1941,7 +1967,7 @@ function searchprex_enrich_product_schema( $markup, $product ) {
 <p>This is the exact step-by-step framework used by <a href="/experts">SearchPrex's SEO Specialists</a> to recover deindexed product catalogs across multi-thousand SKU brands:</p>
 
 <figure class="my-8">
-<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop" alt="Technical server and robots.txt architecture setup" class="rounded-xl border border-[#e5e7eb] w-full" />
+<img src="/images/blog/figures/googlebot-crawl-pipeline.webp" alt="Illustrative search crawler flow from URL discovery through queueing and page fetch." class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Restricting crawl access to low-value filter combinations frees up server and crawl capacity for primary product URLs.</figcaption>
 </figure>
 
@@ -1997,7 +2023,7 @@ Allow: /shop/</code></pre>
 <p><a href="/case-studies/ecommerce/michigan-outdoor-sports">Michigan Outdoor Sports</a>, a large outdoor store, peaked at +476% organic clicks in March 2026 and then lost ground to a gradual de-indexing: brand pages had never been properly submitted, thin content left large parts of the catalog out of the index, and crawl budget was going to low-value URLs.</p>
 
 <figure class="my-8">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop" alt="Search Console analytics and traffic growth dashboard" class="rounded-xl border border-[#e5e7eb] w-full" />
+<img src="/images/case-studies/mso-us-search-performance.webp" alt="Google Search Console performance comparison from the Michigan Outdoor Sports case study." class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Recovering indexation on high-margin product lines directly translates to sustained organic revenue growth.</figcaption>
 </figure>
 
@@ -2042,7 +2068,8 @@ Allow: /shop/</code></pre>
     readTime:    "12-minute read",
     date:        "September 30, 2026",
     stat:        { value: "14 Days", label: "Recovery window" },
-    heroImage:   "https://www.searchprex.com/images/blog/gsc-discovered-indexing-hero.jpg",
+    heroImage:   "/images/blog/covers/fix-discovered-currently-not-indexed-ecommerce.webp",
+    heroImageAlt: "WooCommerce indexing architecture diagram connecting catalog pages, caching, sitemaps, and crawler discovery.",
     tags:        ["discovered currently not indexed", "e-commerce seo", "crawl budget", "shopify indexing", "woocommerce indexing", "search console", "technical seo"],
     toc: [
       "1. 'Discovered' vs. 'Crawled' Not Indexed: Diagnostic Breakdown",
@@ -2098,7 +2125,7 @@ In Google Search Console, <strong>"Discovered – currently not indexed"</strong
 </div>
 
 <figure class="my-8">
-<img src="/images/blog/googlebot-crawl-pipeline.jpg" alt="Googlebot E-commerce Crawling and Indexing Pipeline flowchart detailing URL discovery, crawl queue assessment, server TTFB check, and search indexation" class="rounded-xl border border-[#e5e7eb] w-full" />
+<img src="/images/blog/figures/googlebot-crawl-pipeline.webp" alt="Googlebot E-commerce Crawling and Indexing Pipeline flowchart detailing URL discovery, crawl queue assessment, server TTFB check, and search indexation" class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">The 5-stage Googlebot indexing pipeline: Product URLs in the 'Discovered' queue await server capacity and crawl priority before being fetched by Web Rendering Services.</figcaption>
 </figure>
 
@@ -2123,7 +2150,7 @@ In Google Search Console, <strong>"Discovered – currently not indexed"</strong
 <p>To unblock stranded URLs and accelerate indexation across Shopify, WooCommerce, and custom headless setups, follow this verified 5-step engineering sequence:</p>
 
 <figure class="my-8">
-<img src="/images/blog/ecommerce-internal-linking-crawl-bridge.jpg" alt="Optimized E-commerce Internal Link Architecture and Crawl Depth diagram showing PageRank flow from homepage through category tiers to individual SKU pages" class="rounded-xl border border-[#e5e7eb] w-full" />
+<img src="/images/blog/figures/ecommerce-internal-linking-crawl-bridge.webp" alt="Optimized E-commerce Internal Link Architecture and Crawl Depth diagram showing PageRank flow from homepage through category tiers to individual SKU pages" class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Hierarchical internal link distribution: Passing PageRank from top category headers directly to new SKUs eliminates orphan pages and shortens crawl depth to under 3 clicks.</figcaption>
 </figure>
 
@@ -2215,7 +2242,8 @@ Allow: /categories/</code></pre>
     readTime:    "14-minute read",
     date:        "October 2, 2026",
     stat:        { value: "8 Fixes", label: "Shopify & WooCommerce" },
-    heroImage:   "https://www.searchprex.com/images/blog/shopify-woocommerce-indexing-hero.jpg",
+    heroImage:   "/images/blog/covers/shopify-woocommerce-indexing-blueprint.webp",
+    heroImageAlt: "Side-by-side ecommerce indexing dashboard graphic for Shopify and WooCommerce workflows.",
     tags:        ["shopify seo", "woocommerce seo", "indexing issues", "crawl budget", "e-commerce seo", "search console", "technical seo"],
     toc: [
       "1. Why CMS Architecture Traps Googlebot at Scale",
@@ -2269,7 +2297,7 @@ To fix Google indexing failures on <strong>Shopify and WooCommerce</strong>, sto
 </table>
 
 <figure class="my-8">
-<img src="/images/blog/shopify-liquid-url-structure-trap.jpg" alt="Shopify Liquid URL routing comparison diagram showing collection URL duplication trap on the left versus clean direct canonical product routing on the right" class="rounded-xl border border-[#e5e7eb] w-full" />
+<img src="/images/blog/figures/shopify-liquid-url-structure-trap.webp" alt="Shopify Liquid URL routing comparison diagram showing collection URL duplication trap on the left versus clean direct canonical product routing on the right" class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">Shopify Liquid link routing: Replacing within collection filters forces internal links to point directly to canonical product URLs, eliminating duplicate crawl loops.</figcaption>
 </figure>
 
@@ -2317,7 +2345,7 @@ Allow: /collections/*$</code></pre>
 <p>When Shopify apps are uninstalled, their script tags often remain trapped in <code>theme.liquid</code>, generating dozens of failed HTTP requests on every Googlebot hit. Conduct a code audit of <code>layout/theme.liquid</code> and remove legacy tracking pixels and uninstalled app containers to keep server TTFB under 250ms.</p>
 
 <figure class="my-8">
-<img src="/images/blog/woocommerce-indexing-caching-architecture.jpg" alt="WooCommerce large-scale catalog indexing architecture showing Redis database caching, XML sitemap splitting into 1000-URL chunks, and clean Googlebot indexing pipeline" class="rounded-xl border border-[#e5e7eb] w-full" />
+<img src="/images/blog/figures/woocommerce-indexing-caching-architecture.webp" alt="WooCommerce large-scale catalog indexing architecture showing Redis database caching, XML sitemap splitting into 1000-URL chunks, and clean Googlebot indexing pipeline" class="rounded-xl border border-[#e5e7eb] w-full" />
 <figcaption class="mt-2 text-center text-xs text-[#6b7280]">WooCommerce scalability blueprint: Layering Redis object caching with 1,000-URL XML sitemap segments prevents 504 gateway timeouts during Googlebot crawl cycles.</figcaption>
 </figure>
 
@@ -2426,7 +2454,9 @@ add_filter('rank_math/sitemap/max_entries', function() {
     readTime:    "18-minute read",
     date:        "October 8, 2026",
     stat:        { value: "<150ms", label: "Client mobile INP achieved" },
-    heroImage:   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/core-web-vitals-ecommerce.webp",
+    heroImageAlt: "Illustrative ecommerce performance panel identifying LCP, INP, and CLS page experience measures.",
+    bodyVisual: { src: "/images/blog/body/core-web-vitals-ecommerce.webp", alt: "SEO specialist reviewing a technical website issue on a computer screen.", caption: "Use field data and page-level diagnostics to decide which experience issues matter to shoppers; one score is not an indexing switch." },
     tags:        ["core web vitals", "inp optimization", "ecommerce seo", "shopify speed", "woocommerce speed", "lcp optimization", "technical seo"],
     toc: [
       "The direct answer",
@@ -2658,7 +2688,9 @@ ${proofBoxHtml("smk-store", "By replacing blocking third-party scripts, eliminat
     updated:     "October 14, 2026",
     tags:        ["law firm seo", "seo for lawyers", "legal seo", "attorney seo", "law firm local seo"],
     stat:        { value: "60–90 days", label: "When first measurable movement usually shows" },
-    heroImage:   "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/law-firm-seo-2026-guide.webp",
+    heroImageAlt: "Search visibility dashboard designed for a U.S. law firm SEO campaign.",
+    bodyVisual: { src: "/images/blog/body/law-firm-seo-2026-guide.webp", alt: "Attorney and client discussing legal services in a Denton office.", caption: "Connect practice-area information with locations and case types the firm actually serves." },
     toc: [
       "The short answer",
       "What law firm SEO includes",
@@ -2786,7 +2818,9 @@ ${faqHtml(LAW_GUIDE_FAQS)}
     updated:     "October 14, 2026",
     tags:        ["how long does law firm seo take", "law firm seo timeline", "seo for lawyers", "legal seo results"],
     stat:        { value: "60–90 days", label: "First measurable movement, typically" },
-    heroImage:   "https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/how-long-does-law-firm-seo-take.webp",
+    heroImageAlt: "Detroit legal district and downtown offices, illustrating the local market a law firm serves.",
+    bodyVisual: { src: "/images/blog/body/how-long-does-law-firm-seo-take.webp", alt: "Attorney meeting with a client in The Woodlands, Texas.", caption: "Set milestones around technical fixes, qualified visibility, inquiries, and signed matters; rankings have no guaranteed timetable." },
     toc: [
       "The short answer",
       "A month-by-month timeline",
@@ -2876,7 +2910,9 @@ ${faqHtml(HOW_LONG_FAQS)}
     updated:     "October 14, 2026",
     tags:        ["law firm seo vs ppc", "seo vs google ads for lawyers", "cost per signed case", "legal marketing roi", "law firm ppc"],
     stat:        { value: "Cost ÷ signed cases", label: "The only comparison that matters" },
-    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/law-firm-seo-vs-ppc.webp",
+    heroImageAlt: "Attorney working late in an office while reviewing paid advertising performance.",
+    bodyVisual: { src: "/images/blog/body/law-firm-seo-vs-ppc.webp", alt: "Sugar Land office district illustrating a local market context for law firm marketing.", caption: "Paid search can provide immediate coverage while organic visibility develops; compare channels using qualified matters and total cost." },
     toc: [
       "The short answer",
       "SEO and PPC side by side",
@@ -2987,7 +3023,9 @@ ${faqHtml(SEO_VS_PPC_FAQS)}
     updated:     "October 14, 2026",
     tags:        ["law firm intake", "slow intake cost", "lead response time law firm", "legal intake", "signed cases"],
     stat:        { value: "Under 5 min", label: "The response time to aim for" },
-    heroImage:   "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/slow-intake-cost.webp",
+    heroImageAlt: "Lawyer and client discussing case strategy in a Detroit office.",
+    bodyVisual: { src: "/images/blog/body/slow-intake-cost.webp", alt: "Attorney reviewing a client matter during a consultation in Katy, Texas.", caption: "Track the response path from inquiry to first contact and signed matter to find where intake delays lose opportunities." },
     toc: [
       "The short answer",
       "Why response time decides who signs the case",
@@ -3107,7 +3145,9 @@ ${faqHtml(SLOW_INTAKE_FAQS)}
     updated:     "October 14, 2026",
     tags:        ["law firm seo cost", "law firm seo pricing", "seo for lawyers cost", "legal seo pricing", "how much does seo cost for lawyers"],
     stat:        { value: "$1,200–$2,500", label: "SearchPrex law firm SEO, per month" },
-    heroImage:   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/law-firm-seo-cost.webp",
+    heroImageAlt: "Attorney meeting with a client in a Plano law office.",
+    bodyVisual: { src: "/images/blog/body/law-firm-seo-cost.webp", alt: "The Woodlands office district illustrating a local market context for law firm SEO planning.", caption: "Estimate scope from practice areas, service locations, competition, technical needs, and reporting—not traffic alone." },
     toc: [
       "The short answer",
       "How agencies price law firm SEO",
@@ -3215,7 +3255,9 @@ ${faqHtml(COST_FAQS)}
     updated:     "October 14, 2026",
     tags:        ["how to choose a law firm seo agency", "law firm seo agency", "legal seo company", "seo agency red flags", "hire seo for lawyers"],
     stat:        { value: "12 questions", label: "To ask before you sign" },
-    heroImage:   "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/choose-law-firm-seo-agency.webp",
+    heroImageAlt: "Law firm team reviewing a more sustainable marketing plan after paid advertising fatigue.",
+    bodyVisual: { src: "/images/blog/body/choose-law-firm-seo-agency.webp", alt: "Attorney and prospective client speaking in an Albuquerque office.", caption: "Ask an agency how it connects work to qualified calls and signed cases, and how it reports uncertainty." },
     toc: [
       "The short answer",
       "What Google itself warns about",
@@ -3312,7 +3354,9 @@ ${faqHtml(CHOOSE_AGENCY_FAQS)}
     updated:     "October 15, 2026",
     tags:        ["lawyer specialist rules", "board certified attorney advertising", "attorney advertising rules by state", "can a lawyer call themselves an expert", "legal specialization"],
     stat:        { value: "9 states", label: "Checked against their sources, 15 Oct 2026" },
-    heroImage:   "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/lawyer-specialist-certification-rules-by-state.webp",
+    heroImageAlt: "Attorney speaking with a client in a Philadelphia office.",
+    bodyVisual: { src: "/images/blog/body/lawyer-specialist-certification-rules-by-state.webp", alt: "Attorney and client meeting in a Grand Rapids office.", caption: "State bar rules govern how lawyers describe specialization; verify current rules with the relevant jurisdiction." },
     toc: [
       "The short answer",
       "Why this matters for your website and SEO",
@@ -3397,7 +3441,9 @@ ${faqHtml(SPECIALIST_FAQS)}
     updated:     "October 15, 2026",
     tags:        ["law firm marketing attribution", "track signed cases", "law firm call tracking", "utm google business profile", "ga4 generate_lead", "offline conversion import law firm"],
     stat:        { value: "7 steps", label: "From first click to signed case" },
-    heroImage:   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/track-signed-cases-from-seo.webp",
+    heroImageAlt: "Law firm team reviewing client inquiries and case follow-up in a San Jose office.",
+    bodyVisual: { src: "/images/blog/body/track-signed-cases-from-seo.webp", alt: "Lawyer reviewing a client inquiry and case details in a Tempe office.", caption: "Connect call tracking and intake records to matter outcomes with appropriate consent and privacy controls." },
     toc: [
       "The short answer",
       "Why traffic and rankings are not enough",
@@ -3535,7 +3581,8 @@ ${faqHtml(TRACKING_FAQS)}
     date:        "October 9, 2026",
     tags:        ["topical authority", "content clusters", "semantic seo", "hub and spoke model", "information gain", "internal linking silo", "google knowledge graph"],
     stat:        { value: "285%", label: "Indexed page growth achieved via topic clusters" },
-    heroImage:   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/topical-authority-content-clusters.webp",
+    heroImageAlt: "SEO analyst working through a research and content strategy plan at a desk.",
     toc: [
       "The short answer & executive summary",
       "Why single-keyword SEO died in Google's 2026 spam updates",
@@ -3603,7 +3650,7 @@ ${faqHtml(TRACKING_FAQS)}
 <h2>How Google evaluates topical authority: vectors, embeddings &amp; knowledge graphs</h2>
 
 <figure style="margin:2.5rem 0;text-align:center">
-  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop" alt="Semantic entity mapping and interconnected knowledge graphs" style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
+  <img src="/images/blog/figures/topical-entity-map.webp" alt="Illustrative topical entity map connecting a core subject to guides, service pages, case evidence, and FAQs." style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
   <figcaption style="font-size:0.875rem;color:#64748b;margin-top:0.75rem;font-style:italic">Semantic entity mapping: Connecting core nodes to sub-intent spokes establishes verified topical authority in Google's Knowledge Graph.</figcaption>
 </figure>
 
@@ -3676,7 +3723,7 @@ ${faqHtml(TRACKING_FAQS)}
 <h2>Stage 3: The strict internal linking blueprint (Silos vs. Sprawl)</h2>
 
 <figure style="margin:2.5rem 0;text-align:center">
-  <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&q=80&auto=format&fit=crop" alt="Hub and spoke content architecture with structured internal linking silos" style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
+  <img src="/images/blog/figures/hub-spoke-content-architecture.webp" alt="Illustrative hub-and-spoke content cluster with a pillar guide linked to supporting pages." style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
   <figcaption style="font-size:0.875rem;color:#64748b;margin-top:0.75rem;font-style:italic">Hub-and-spoke hierarchy: Strict vertical internal linking prevents PageRank leakage and keyword cannibalization across clusters.</figcaption>
 </figure>
 
@@ -3706,7 +3753,7 @@ ${faqHtml(TRACKING_FAQS)}
 <h2>Stage 5: SearchPrex real-world case study telemetry</h2>
 
 <figure style="margin:2.5rem 0;text-align:center">
-  <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop" alt="Google Search Console verification dashboard showing indexing recovery telemetry" style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
+  <img src="/images/case-studies/mso-index-coverage-search-console.webp" alt="Google Search Console indexed-page trend from the Michigan Sports and Outdoor case study." style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
   <figcaption style="font-size:0.875rem;color:#64748b;margin-top:0.75rem;font-style:italic">Information Gain verification: Google's algorithms reward sites that provide incremental, non-redundant data with higher crawl priority.</figcaption>
 </figure>
 
@@ -3759,7 +3806,8 @@ ${proofBoxHtml("michigan-outdoor-sports", "By implementing brand-specific topica
     date:        "October 13, 2026",
     tags:        ["faceted navigation seo", "shopify faceted search", "woocommerce filter crawl trap", "canonical tags vs robots txt", "crawl budget ecommerce"],
     stat:        { value: "10,000+", label: "Crawl trap URLs eliminated" },
-    heroImage:   "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=85&auto=format&fit=crop",
+    heroImage:   "/images/blog/covers/fix-faceted-navigation-ecommerce-seo.webp",
+    heroImageAlt: "Ecommerce site architecture diagram showing crawl paths from the homepage through category pages to product URLs.",
     toc: [
       "The short answer",
       "What is faceted navigation & why does it create crawl traps?",
@@ -3789,7 +3837,7 @@ ${proofBoxHtml("michigan-outdoor-sports", "By implementing brand-specific topica
       </ul>
 
       <figure style="margin:2.5rem 0;text-align:center">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop" alt="E-commerce technical crawl architecture and faceted filter URL sprawl" style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
+        <img src="/images/blog/figures/faceted-url-combinations.webp" alt="Illustrative diagram of a category page splitting into useful landing pages and low-value filter combinations." style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
         <figcaption style="font-size:0.875rem;color:#64748b;margin-top:0.75rem;font-style:italic">Crawl trap mechanics: Unchecked parameter combinations turn a clean category tree into an exponential crawl black hole.</figcaption>
       </figure>
 
@@ -3992,7 +4040,7 @@ Disallow: /product-tag/</code></pre>
       <p>Leading e-commerce engineering teams at enterprise brands (such as Target, Nordstrom, and ASOS) no longer rely purely on <code>robots.txt</code> band-aids. They eliminate crawl traps at the source code level by separating user interaction from search crawler discovery.</p>
 
       <figure style="margin:2.5rem 0;text-align:center">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop" alt="Client-side state management architecture vs crawlable anchor links" style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
+        <img src="/images/blog/figures/faceted-filter-linking.webp" alt="Illustrative comparison of shopper filter controls and intentional crawlable category links." style="width:100%;max-width:850px;height:auto;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:0 auto" />
         <figcaption style="font-size:0.875rem;color:#64748b;margin-top:0.75rem;font-style:italic">Decoupled filter architecture: Interactive buttons handle client-side rendering while search crawlers only see static category links.</figcaption>
       </figure>
 
