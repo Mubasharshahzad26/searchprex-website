@@ -19,6 +19,7 @@ import ServiceProofStrip from "@/components/ServiceProofStrip";
 import { RETAINER_PLANS } from "@/lib/pricing";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { caseStudies } from "@/app/case-studies/data";
+import HalloweenOfferCard from "@/components/offers/HalloweenOfferCard";
 import { AuthorCard, ComparisonTable, FaqList } from "@/components/layout";
 import {
   BODY,
@@ -232,6 +233,9 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
           </div>
         </div>
       </section>
+
+      {/* HALLOWEEN 2026 — hides itself after 31 October (lib/halloween-offer.ts) */}
+      <HalloweenOfferCard className="py-10" />
 
       {/* AI OVERVIEW / GEO / CHATGPT QUICK ANSWER BOX */}
       <ServiceQuickAnswerBox

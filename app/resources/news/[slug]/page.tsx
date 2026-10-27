@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PostClient from "@/app/blog/[slug]/PostClient";
+import HalloweenOfferCard from "@/components/offers/HalloweenOfferCard";
+import { isHalloweenOfferLive } from "@/lib/halloween-offer";
 import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
 import { getStaticNewsPillar, NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
@@ -541,6 +543,11 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
         section={{ label: "SEO News", href: "/resources/news" }}
         related={related}
         localNewsPosts={localNewsPosts}
+        promo={
+          isHalloweenOfferLive() && (slug === "local-seo-updates" || post.category.toLowerCase().includes("local"))
+            ? <HalloweenOfferCard inline />
+            : undefined
+        }
       />
     </>
   );

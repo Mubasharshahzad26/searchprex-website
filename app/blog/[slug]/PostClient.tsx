@@ -208,12 +208,15 @@ export default function PostClient({
   section = BLOG_SECTION,
   related: relatedOverride,
   localNewsPosts,
+  promo,
 }: {
   post: ArticlePost;
   section?: PostSection;
   /** Server-supplied siblings. Falls back to the file-based blog posts. */
   related?: Array<Record<string, any>>;
   localNewsPosts?: LocalSeoNewsPost[];
+  /** Optional time-limited offer shown at the top of the article (e.g. the Halloween card on local SEO news). */
+  promo?: React.ReactNode;
 }) {
   const tags = post.tags ?? [];
   const toc =
@@ -922,6 +925,8 @@ export default function PostClient({
                 {post.excerpt}
               </p>
             )}
+
+            {promo}
 
             {post.slug === "local-seo-updates" && <LocalSeoNewsExplorer posts={localNewsPosts || []} updates={localSeoNewsUpdates} />}
             {post.slug === "local-seo-updates" && <LocalSeoResearchNote />}

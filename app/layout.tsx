@@ -8,6 +8,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import ContactClickTracker from "@/components/ContactClickTracker";
+import HalloweenOfferToast from "@/components/offers/HalloweenOfferToast";
 import { siteGraph } from "@/lib/site-schema";
 
  
@@ -145,6 +146,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <CookieConsent />
+        <HalloweenOfferToast />
         <ContactClickTracker />
 
         {/* ✅ Vercel Analytics - Production Only */}
