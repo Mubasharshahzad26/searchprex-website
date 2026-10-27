@@ -1,6 +1,6 @@
 // lib/static-news-spokes.ts
 // Statically preserved news spokes. Serves as a resilient static fallback
-// when the Neon PostgreSQL database is temporarily offline or quota-exceeded.
+// when the CMS database is temporarily offline or quota-exceeded.
 // Pre-rendered at build time via generateStaticParams() for instant Edge CDN delivery.
 
 export interface StaticNewsSpoke {
@@ -476,5 +476,74 @@ export const staticNewsSpokes: StaticNewsSpoke[] = [
     "ogDescription": "Google Maps is testing requiring users to sign in to a Google account to read all reviews, sort reviews, or search reviews on Business Profiles.",
     "twitterTitle": "Google Maps Asking Users to Sign In to Read All Reviews (2026)",
     "twitterDescription": "Google Maps is testing requiring users to sign in to a Google account to read all reviews, sort reviews, or search reviews on Business Profiles."
+  },
+  {
+    slug: "google-ai-content-factcheck-guidance",
+    category: "SEO News — AI Visibility",
+    subcategory: "Google Search & AI Content",
+    title: "Google Says to Fact-Check AI Content Before Publishing",
+    metaTitle: "Google AI Content Guidance: Fact-Check Before Publishing",
+    metaDescription: "Google’s updated AI content guidance calls for manual fact-checking before publication, including titles, descriptions, structured data, and image alt text.",
+    excerpt: "Google updated its generative AI content guidance on October 1, 2026, making manual review for accuracy and trustworthiness explicit and extending that review to search-facing metadata.",
+    readTime: "4-minute read",
+    date: "2026-10-02",
+    dateModified: "2026-10-27T12:00:00.000Z",
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Strategist",
+      bio: "Founder & SEO Strategist at SearchPrex, covering Google search updates, technical SEO and AI search.",
+      linkedIn: "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
+    },
+    featured: false,
+    heroImage: "/images/news/openai-chatgpt-search-official-launch-geo-oai-searchbot-guide.webp",
+    tags: ["Google Search", "Generative AI", "Content Quality", "SEO Guidance"],
+    stat: null,
+    toc: ["What Google changed", "What the guidance means", "A practical review process", "What Google did not announce"],
+    content: `## Key takeaways
+
+- On October 1, 2026, Google updated its guidance for using generative AI content on websites.
+- Google says it is critical to manually fact-check and review AI-generated content for accuracy and trustworthiness before publishing.
+- The review also applies to titles, meta descriptions, structured data, and image alt text because those elements can appear in Search results.
+- Google did not ban AI-generated content or announce a new ranking update. Its existing concern is content produced at scale without added value for users.
+
+## What Google changed
+
+Google’s [guidance on using generative AI content](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content) now states that AI-generated material should be manually reviewed for accuracy and trustworthiness before publication. The same review should cover search-facing metadata and markup, including title elements, meta descriptions, structured data, and image alternative text.
+
+The page was updated on October 1, 2026, and connects its advice with Google’s Search Quality Rater Guidelines. Google explains that generative models can produce inaccuracies, so using an AI tool does not remove the publisher’s responsibility to check facts and context.
+
+## What the guidance means for publishers
+
+The update is a clearer editorial instruction, not a standalone technical ranking factor. Google’s page continues to say that using generative AI is not inherently against its policies. The policy risk it identifies is generating many pages without adding value for users, which may fall under [scaled content abuse](https://developers.google.com/search/docs/essentials/spam-policies).
+
+For publishers, the practical scope is broader than proofreading article paragraphs. A page can make incorrect claims in its title, description, schema, or image alt text even when the main copy is accurate. Those elements should be checked against the same sources and editorial standards as the article itself.
+
+## A practical review process
+
+1. **Check every factual claim against a source.** Verify dates, figures, product names, policy wording, and quotations at their primary source.
+2. **Review the page in context.** Make sure examples, caveats, and conclusions do not turn a limited source into a broader claim.
+3. **Audit search-facing fields.** Check the title, meta description, structured data, and image alt text for accuracy and consistency with the page.
+4. **Add human judgment and original value.** Explain what the source means for the reader, where uncertainty remains, and what the reader can verify.
+5. **Keep an editorial record.** Note the reviewer, sources checked, and date so time-sensitive claims can be reviewed again.
+
+## What Google did not announce
+
+The documentation change does not say that all AI-assisted content is prohibited, that AI use by itself triggers a penalty, or that fact-checking guarantees rankings. Google’s Search Quality Rater Guidelines help human raters assess search-result quality; Google says those ratings do not directly influence individual rankings.
+
+Treat this as an editorial quality requirement and keep measuring search performance separately. For the exact wording, read the [Google Search Central guidance](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content), last updated October 1, 2026.
+
+## Sources
+
+- [Google Search’s guidance on using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content) — Google Search Central, updated October 1, 2026.
+- [Google Search spam policies](https://developers.google.com/search/docs/essentials/spam-policies) — Google Search Central.
+- [Search Quality Rater Guidelines](https://static.googleusercontent.com/media/guidelines.raterhub.com/en//searchqualityevaluatorguidelines.pdf) — Google.
+
+_Last checked: October 27, 2026._`,
+    canonicalUrl: "https://www.searchprex.com/resources/news/google-ai-content-factcheck-guidance",
+    schemaType: "NewsArticle",
+    ogTitle: "Google Adds Manual Fact-Checking to Its AI Content Guidance",
+    ogDescription: "The October 1 Google Search Central update says to review AI content and metadata for accuracy and trustworthiness before publishing.",
+    twitterTitle: "Google: Fact-Check AI Content Before Publishing",
+    twitterDescription: "What Google’s updated AI content guidance says about fact-checking article copy, metadata, structured data, and alt text.",
   }
 ];

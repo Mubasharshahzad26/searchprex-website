@@ -6,7 +6,8 @@ import { isHalloweenOfferLive } from "@/lib/halloween-offer";
 import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
 import { getStaticNewsPillar, NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
-import { getNewsFallbackEntry, newsFallbackPost } from "@/lib/news-fallback";
+import { getNewsFallbackEntry, newsFallbackPost, NEWS_FALLBACK_ARTICLES } from "@/lib/news-fallback";
+import { getStaticLocalSeoNewsContent } from "@/lib/static-local-seo-news";
 
 // Spokes render on demand and were then cached until the next deploy, so CMS
 // edits and unpublishes did not reach the live page. An hour bounds that.
@@ -21,7 +22,7 @@ const LOCAL_SEO_NEWS_DESCRIPTION =
 async function getPostData(rawSlug: string) {
   const slug = decodeURIComponent(rawSlug);
 
-  // 1. Resilient static check first: serve all 10 verified spokes in 0ms with zero DB lag
+  // 1. Serve committed articles immediately, without a CMS database request.
   const fallback = staticNewsSpokes.find((p) => p.slug === slug);
   if (fallback) {
     return {
@@ -37,7 +38,28 @@ async function getPostData(rawSlug: string) {
     };
   }
 
-  // 2. Query DB with fast 1000ms timeout for any dynamically published articles
+  // Repository-backed articles are the source of truth for archived posts.
+  // Serve them before querying the CMS so valid static URLs remain available
+  // during database quota failures and avoid an unnecessary connection delay.
+  const archived = slug === "local-seo-updates" ? undefined : getNewsFallbackEntry(slug);
+  if (archived) {
+    const post = newsFallbackPost(archived);
+    return { ...post, metaTitle: expandMonthToken(post.metaTitle, post.dateModified) };
+  }
+
+  // All eight topic guides have repository-backed content too.
+  const staticPillar = getStaticNewsPillar(slug);
+  if (staticPillar) {
+    return slug === "local-seo-updates"
+      ? {
+          ...staticPillar,
+          heroImage: "/images/news/local-business-owner-storefront.webp",
+          content: getStaticLocalSeoNewsContent(),
+        }
+      : staticPillar;
+  }
+
+  // Query the CMS only for newer articles that do not yet have a committed copy.
   try {
     const dbPromise = db.marketingBlog.findUnique({ where: { slug } });
     const dbPost = await Promise.race([
@@ -92,24 +114,6 @@ async function getPostData(rawSlug: string) {
     }
   } catch (err) {
     console.error("Failed to fetch DB post for news spoke:", slug, err);
-  }
-
-  // Database unavailable: serve the sourced copy kept in the repo for the topic
-  // guides and for articles that otherwise exist only in the CMS, rather than a
-  // generic stub or a 404. local-seo-updates keeps its own fallback below.
-  const archived = slug === "local-seo-updates" ? undefined : getNewsFallbackEntry(slug);
-  if (archived) {
-    const post = newsFallbackPost(archived);
-    return { ...post, metaTitle: expandMonthToken(post.metaTitle, post.dateModified) };
-  }
-
-  // The News hub links to these eight topic guides. Preserve their routes when
-  // the CMS database is paused/unavailable, while preferring live CMS content.
-  const staticPillar = getStaticNewsPillar(slug);
-  if (staticPillar) {
-    return slug === "local-seo-updates"
-      ? { ...staticPillar, heroImage: "/images/news/local-business-owner-storefront.webp" }
-      : staticPillar;
   }
 
   return null;
@@ -239,6 +243,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export function generateStaticParams() {
   return [...new Set([
     ...staticNewsSpokes.map((p) => p.slug),
+    ...NEWS_FALLBACK_ARTICLES.map((post) => post.slug),
     ...NEWS_TOPIC_GUIDES.map((guide) => guide.slug),
   ])].map((slug) => ({ slug }));
 }

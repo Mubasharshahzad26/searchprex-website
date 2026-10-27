@@ -1424,7 +1424,7 @@ function searchprex_enrich_product_schema( $markup, $product ) {
 
       <h2>Check 8 — The Shopping tab: Merchant Center</h2>
       <p>If the product is in normal search results but not in the Shopping tab, look at the feed instead. The Google &amp; YouTube app syncs products from Shopify to Google Merchant Center, and Merchant Center decides whether each one is approved.</p>
-      <p><strong>Fix:</strong> in Merchant Center, open <em>Products → Needs attention</em> and read the reason for each product that isn't showing. Typical causes are missing identifiers such as GTINs, price or availability that doesn't match the product page, images Google rejects, and policy issues. Fix them in Shopify so the next sync carries the change. If the whole account is suspended rather than a few products, read our note on <a href="/resources/news/merchant-center-policy-pages-appeals">Merchant Center enforcement and appeals</a> before you appeal anything.</p>
+      <p><strong>Fix:</strong> in Merchant Center, open <em>Products → Needs attention</em> and read the reason for each product that isn't showing. Typical causes are missing identifiers such as GTINs, price or availability that doesn't match the product page, images Google rejects, and policy issues. Fix them in Shopify so the next sync carries the change. If the whole account is suspended rather than a few products, read <a href="https://support.google.com/merchants/answer/13693195?hl=en" target="_blank" rel="noopener noreferrer">Google’s steps for resolving Merchant Center policy warnings and suspensions</a> before requesting a review.</p>
 
       <h2>What not to do</h2>
       <ul>

@@ -1,11 +1,11 @@
 // lib/news-fallback.ts
 //
-// When the CMS database can't be read (on 27 October 2026 the Neon project hit
-// its quota and refused every connection), the news topic guides fell back to
+// When the CMS database cannot be read, the news topic guides fall back to
 // a four-heading stub and the database-only articles returned 404 — including
 // pages that ranked. This serves their real, sourced content from the repo
-// instead. It is only consulted after the database has been tried, so a live
-// CMS row always wins. local-seo-updates has its own handling and is not here.
+// instead. Archived entries are served before database access so published
+// routes stay resilient during outages. local-seo-updates has its own handling
+// and is not here.
 
 import { NEWS_FALLBACK_CONTENT } from "./news-fallback-content";
 

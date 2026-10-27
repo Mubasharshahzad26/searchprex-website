@@ -147,7 +147,7 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link
-                href="/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix"
+                href="/resources/news/ecommerce-seo-news-2026"
                 className="inline-flex items-center gap-1 rounded-full border border-sky-300 bg-white px-3.5 py-1.5 text-xs font-bold text-sky-950 shadow-sm transition-all hover:border-sky-500"
               >
                 📰 Read Shopify News →
@@ -181,7 +181,7 @@ export default function IndustryClient({ slug, guide: _guide }: { slug: string; 
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link
-                href="/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce"
+                href="/resources/news/technical-seo-news-2026"
                 className="inline-flex items-center gap-1 rounded-full border border-indigo-300 bg-white px-3.5 py-1.5 text-xs font-bold text-indigo-950 shadow-sm transition-all hover:border-indigo-500"
               >
                 📰 Read WordPress News →

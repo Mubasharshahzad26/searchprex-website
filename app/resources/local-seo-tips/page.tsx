@@ -5,16 +5,18 @@ import { ArrowRight, CalendarDays, ClipboardCheck, Newspaper, PhoneCall, SearchC
 import { SITE, founderRef, ORGANIZATION_ID } from "@/lib/site-schema";
 
 const PAGE_URL = `${SITE}/resources/local-seo-tips`;
-const TITLE = "Local SEO Playbook: Practical Steps to Win Nearby Customers | SearchPrex";
-const H1 = "Turn nearby searches into local leads with a practical SEO playbook";
-const DESCRIPTION = "Use this Local SEO checklist to improve your Google Business Profile, local pages, customer trust and lead tracking.";
+// The root layout appends " | SearchPrex" to page titles.
+const TITLE = "Local SEO Checklist for Small Businesses";
+const SOCIAL_TITLE = `${TITLE} | SearchPrex`;
+const H1 = "Local SEO Checklist for Small Businesses: 5 Practical Steps";
+const DESCRIPTION = "Follow this local SEO checklist to improve your Google Business Profile, build useful local pages, earn customer trust, and track calls and leads.";
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: PAGE_URL, siteName: "SearchPrex", type: "article", images: [{ url: `${SITE}/images/locations/cleveland-legal-district.webp`, width: 1600, height: 900, alt: "A walkable business district with local shops and services" }] },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [`${SITE}/images/locations/cleveland-legal-district.webp`] },
+  openGraph: { title: SOCIAL_TITLE, description: DESCRIPTION, url: PAGE_URL, siteName: "SearchPrex", type: "article", images: [{ url: `${SITE}/images/locations/cleveland-legal-district.webp`, width: 1600, height: 900, alt: "A walkable business district with local shops and services" }] },
+  twitter: { card: "summary_large_image", title: SOCIAL_TITLE, description: DESCRIPTION, images: [`${SITE}/images/locations/cleveland-legal-district.webp`] },
 };
 
 const eventDates = [
@@ -35,8 +37,10 @@ export default function LocalSeoTipsPage() {
         "@type": "TechArticle",
         "@id": `${PAGE_URL}#article`,
         url: PAGE_URL,
+        mainEntityOfPage: PAGE_URL,
         headline: H1,
         description: DESCRIPTION,
+        image: `${SITE}/images/locations/cleveland-legal-district.webp`,
         inLanguage: "en-US",
         isAccessibleForFree: true,
         author: founderRef,

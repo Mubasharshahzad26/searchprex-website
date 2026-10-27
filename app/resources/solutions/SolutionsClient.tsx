@@ -152,7 +152,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
       'Run a Screaming Frog crawl on `/collections/` — 100% of product links should now resolve directly to `/products/handle` with 0 non-canonical internal links.',
     serviceLink: { label: 'Shopify SEO Engineering Service', href: '/services/ecommerce-seo/shopify' },
     guideLink: { label: 'Shopify & WooCommerce Indexing Guide', href: '/blog/shopify-woocommerce-indexing-blueprint' },
-    newsLink: { label: 'Shopify OS 3.0 Canonical Liquid News', href: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix' },
+    newsLink: { label: 'Shopify and Ecommerce SEO News', href: '/resources/news/ecommerce-seo-news-2026' },
   },
   {
     id: 'sol-4',
@@ -188,7 +188,7 @@ export const metadata = {
       'Verify in GSC Crawl Stats that parameter crawl requests drop by >75% within 14 days while curated facet URLs remain indexed.',
     serviceLink: { label: 'Ecommerce SEO Architecture Service', href: '/services/ecommerce-seo' },
     guideLink: { label: 'Faceted Navigation Engineering Guide', href: '/blog/fix-faceted-navigation-ecommerce-seo' },
-    newsLink: { label: 'Merchant Center Return Policy Mandate', href: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate' },
+    newsLink: { label: 'Merchant Center Return Policy Update', href: '/resources/news/google-merchant-center-sitewide-return-policy-schema-mandate' },
   },
   {
     id: 'sol-5',
@@ -221,7 +221,7 @@ ORDER BY bytes DESC LIMIT 10;`,
       'Test with PageSpeed Insights and Chrome UX Report (CrUX) — target TTFB < 200ms, LCP < 2.0s, and INP < 120ms.',
     serviceLink: { label: 'WordPress & WooCommerce SEO', href: '/services/ecommerce-seo/woocommerce' },
     guideLink: { label: 'WooCommerce & WordPress SEO Checklist', href: '/resources/woocommerce-seo-checklist' },
-    newsLink: { label: 'WordPress Speculation Rules & INP News', href: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce' },
+    newsLink: { label: 'Technical SEO News', href: '/resources/news/technical-seo-news-2026' },
   },
   {
     id: 'sol-6',

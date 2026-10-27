@@ -99,7 +99,7 @@ const related = [
   { href: "/services/ecommerce-seo", title: "Ecommerce SEO services", body: "Technical SEO applied to catalogues of thousands of products." },
   { href: "/services/ecommerce-seo/woocommerce", title: "WooCommerce SEO", body: "Filter URLs, plugin weight and indexing on WooCommerce stores." },
   { href: "/blog/google-indexing-api-python", title: "The Indexing API is not a shortcut", body: "What Google's Indexing API is really for, and what to do instead." },
-  { href: "/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce", title: "WordPress Core INP & Indexing News", body: "Speculative Rules API and Core Web Vitals telemetry for high-SKU stores." },
+  { href: "/resources/news/technical-seo-news-2026", title: "Technical SEO News", body: "Google Search changes to crawling, indexing and site performance." },
 ];
 
 const TECHNICAL_SEMANTIC_CLUSTERS = [
@@ -130,7 +130,7 @@ const TECHNICAL_SEMANTIC_CLUSTERS = [
     ],
     psychologyAndIntent:
       "Laggy mobile pages (>200ms INP) kill both conversion rates and crawl efficiency. We fix script execution and layout shifts at the template level so every page passes real-user CrUX thresholds.",
-    siloHref: "/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce",
+    siloHref: "/resources/news/technical-seo-news-2026",
     siloLabel: "Read Our 2026 INP & Speculative Rules Study",
   },
   {
@@ -213,7 +213,7 @@ export default function TechnicalSEOClient() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce"
+              href="/resources/news/technical-seo-news-2026"
               className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300 bg-white px-3.5 py-1.5 text-xs font-bold text-cyan-950 shadow-sm transition-all hover:border-cyan-500"
             >
               <FileText className="h-3.5 w-3.5" aria-hidden />

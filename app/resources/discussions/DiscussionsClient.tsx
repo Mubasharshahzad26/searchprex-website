@@ -100,7 +100,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Removing `| within: collection` in your theme\'s product card snippet immediately consolidates 100% of internal link equity onto the canonical `/products/handle` URL. Combine this with a custom `robots.txt.liquid` rule disallowing `/collections/*+*` and `?sort_by=` parameters to reclaim up to 65% of wasted Googlebot crawl budget.',
     answeredBy: 'SearchPrex Shopify SEO Engineers',
     serviceLink: { label: 'Shopify SEO Engineering', href: '/services/ecommerce-seo/shopify' },
-    newsLink: { label: 'Shopify Liquid Audit Breakdown', href: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix' },
+    newsLink: { label: 'Shopify and Ecommerce SEO News', href: '/resources/news/ecommerce-seo-news-2026' },
     tags: ['Shopify Liquid', 'Canonical URLs', 'Crawl Budget', 'robots.txt.liquid'],
   },
   {
@@ -117,7 +117,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Allow single high-demand attributes (e.g., `/running-shoes/waterproof` or `?color=black` with dynamic H1s and self-referencing canonicals) to be indexed when search demand exists, while forcing `noindex, follow` or non-anchor UI buttons on 2+ filter combinations, price sliders, and sort parameters.',
     answeredBy: 'SearchPrex Ecommerce Team',
     serviceLink: { label: 'Ecommerce SEO Services', href: '/services/ecommerce-seo' },
-    newsLink: { label: 'Merchant Return Schema Mandate', href: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate' },
+    newsLink: { label: 'Merchant Return Policy Update', href: '/resources/news/google-merchant-center-sitewide-return-policy-schema-mandate' },
     tags: ['Faceted Navigation', 'PLP Architecture', 'ProductGroup Schema'],
   },
   {
@@ -134,7 +134,7 @@ const EDITORIAL_THREADS: DiscussionThread[] = [
       'Audit `SELECT SUM(LENGTH(option_value)) FROM wp_options WHERE autoload IN (\'yes\',\'on\',\'auto\')` — keep total autoloaded data below 800KB, enable Redis Object Cache, and delay non-essential third-party chat/tracking scripts until first user interaction (`pointerdown` or `scroll`).',
     answeredBy: 'SearchPrex WordPress Performance Team',
     serviceLink: { label: 'WordPress & WooCommerce SEO', href: '/services/ecommerce-seo/woocommerce' },
-    newsLink: { label: 'WordPress Core INP Analysis', href: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce' },
+    newsLink: { label: 'Technical SEO News', href: '/resources/news/technical-seo-news-2026' },
     tags: ['WordPress CWV', 'wp_options', 'Mobile INP', 'WooCommerce'],
   },
   {

@@ -208,13 +208,13 @@ export default function ServiceSemanticClusterAndLinks({
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources/news/ai-search-geo" className="text-neutral-900 hover:underline flex items-center gap-1.5">
+                  <Link href="/resources/news/llm-seo-news-2026" className="text-neutral-900 hover:underline flex items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-neutral-900 shrink-0" aria-hidden />
                     <span>AI Overviews, ChatGPT &amp; GEO Research</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources/news/google-search-updates" className="text-neutral-900 hover:underline flex items-center gap-1.5">
+                  <Link href="/resources/news/google-algorithm-updates" className="text-neutral-900 hover:underline flex items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-neutral-900 shrink-0" aria-hidden />
                     <span>Google Core &amp; Indexing Updates</span>
                   </Link>

@@ -136,7 +136,7 @@ function getArticleTelemetry(category: string = "", slug: string = "") {
     return {
       eyebrow: "Confirmed 2026 Ecommerce Search Telemetry",
       title: "Shopify OS 3.0 Canonical Liquid Directives & Duplicate Product URL Mitigation",
-      newsHref: "/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix",
+      newsHref: "/resources/news/ecommerce-seo-news-2026",
       newsLabel: "📰 Read Shopify Liquid Audit →",
       solutionsLabel: "🛠️ View Indexing Playbook →",
       themeBg: "bg-indigo-50/75 border-indigo-200 text-indigo-950",

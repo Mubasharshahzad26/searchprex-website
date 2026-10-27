@@ -9,6 +9,9 @@ const nextConfig = {
 
   compress: true,          // gzip/brotli responses
   poweredByHeader: false,  // remove the X-Powered-By: Next.js header (tiny security win)
+  outputFileTracingIncludes: {
+    '/resources/news/[slug]': ['./scripts/seo-news-content/local-seo-updates.md'],
+  },
 
   typescript: {
     // ⚠️ Hides TypeScript errors from the build. Fine while building, but
@@ -82,6 +85,39 @@ const nextConfig = {
       {
         source: '/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility',
         destination: '/resources/news/local-seo-updates',
+        permanent: true,
+      },
+      // Retired SEO News URLs found returning 404 in the direct URL and
+      // internal-link audit. Preserve visitors and consolidate signals on the
+      // nearest current, verified article or topic guide.
+      {
+        source: '/resources/news/ai-search-geo',
+        destination: '/resources/news/llm-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/google-search-updates',
+        destination: '/resources/news/google-algorithm-updates',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate',
+        destination: '/resources/news/google-merchant-center-sitewide-return-policy-schema-mandate',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/merchant-center-policy-pages-appeals',
+        destination: '/resources/news/ecommerce-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix',
+        destination: '/resources/news/ecommerce-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce',
+        destination: '/resources/news/technical-seo-news-2026',
         permanent: true,
       },
       {

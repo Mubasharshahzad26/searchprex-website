@@ -242,7 +242,7 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceLabel: 'Ecommerce SEO Growth Service',
     newsCategoryParam: 'Ecommerce Store SEO News',
     newsHref: '/resources/news/ecommerce-seo-news-2026',
-    flagshipNewsHref: '/resources/news/google-merchant-center-automated-return-policy-schema-mandate',
+    flagshipNewsHref: '/resources/news/google-merchant-center-sitewide-return-policy-schema-mandate',
     flagshipNewsLabel: 'Merchant Center Return Policy News',
   },
   {
@@ -308,8 +308,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/ecommerce-seo/shopify',
     serviceLabel: 'Shopify SEO Specialist Service',
     newsCategoryParam: 'Shopify Store News',
-    flagshipNewsHref: '/resources/news/shopify-os-3-canonical-liquid-directives-duplicate-url-fix',
-    flagshipNewsLabel: 'Shopify OS 3.0 Canonical Liquid News',
+    flagshipNewsHref: '/resources/news/ecommerce-seo-news-2026',
+    flagshipNewsLabel: 'Shopify and Ecommerce SEO News',
   },
   {
     id: 'WordPress',
@@ -374,8 +374,8 @@ const LEARNING_TRACKS: LearningTrack[] = [
     serviceHref: '/services/ecommerce-seo/woocommerce',
     serviceLabel: 'WordPress & WooCommerce SEO Service',
     newsCategoryParam: 'WordPress News',
-    flagshipNewsHref: '/resources/news/wordpress-core-speculative-rules-api-inp-optimization-woocommerce',
-    flagshipNewsLabel: 'WordPress Speculation Rules News',
+    flagshipNewsHref: '/resources/news/technical-seo-news-2026',
+    flagshipNewsLabel: 'Technical SEO News',
   },
 ]
 

@@ -1,4 +1,4 @@
-/** Single source of truth for the SEO News topic-guide cards and outage fallback pages. */
+/** Single source of truth for the SEO News topic-guide cards and static pages. */
 export const NEWS_TOPIC_GUIDES = [
   {
     slug: "local-seo-updates",
@@ -6,7 +6,7 @@ export const NEWS_TOPIC_GUIDES = [
     category: "Local SEO",
     tagColor: "#c2410c",
     badge: "Pinned Pillar",
-    updatedDate: "Oct 24, 2026",
+    updatedDate: "Oct 11, 2026",
     description: "The latest Local SEO news and Google Business Profile updates, with dates, sources, confirmed guidance separated from reported tests, and practical checks for local businesses.",
   },
   {
@@ -67,7 +67,7 @@ export const NEWS_TOPIC_GUIDES = [
   },
 ] as const;
 
-/** Build a useful standalone guide when the CMS row cannot be read. */
+/** Build a repository-backed topic guide without requiring a CMS database row. */
 export function getStaticNewsPillar(slug: string) {
   const guide = NEWS_TOPIC_GUIDES.find((item) => item.slug === slug);
   if (!guide) return null;

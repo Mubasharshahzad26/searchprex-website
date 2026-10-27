@@ -266,7 +266,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/resources/news/google-merchant-center-automated-return-policy-schema-mandate"
+              href="/resources/news/google-merchant-center-sitewide-return-policy-schema-mandate"
               className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-white px-3.5 py-1.5 text-xs font-bold text-emerald-950 shadow-sm transition-all hover:border-emerald-500"
             >
               <FileText className="h-3.5 w-3.5" aria-hidden />
