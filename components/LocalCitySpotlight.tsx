@@ -256,8 +256,8 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
                 <span className="text-[11px] text-[#566070] leading-tight block mt-0.5">Mega-firms burning $200–$350/click on broad terms in {page.county}.</span>
               </div>
               <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left">
-                <span className="block text-xs font-bold text-[#0a0f2e]">Directory Reselling</span>
-                <span className="text-[11px] text-[#566070] leading-tight block mt-0.5">Avvo &amp; FindLaw reselling shared leads to competing firms.</span>
+                <span className="block text-xs font-bold text-[#0a0f2e]">Shared Leads</span>
+                <span className="text-[11px] text-[#566070] leading-tight block mt-0.5">Paid lead services can send the same enquiry to several firms at once.</span>
               </div>
               <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left">
                 <span className="block text-xs font-bold text-[#0a0f2e]">Lost Local Leads</span>
