@@ -25,7 +25,7 @@ const quickReplies = [
  
 const botResponses: Record<string, string> = {
   "get free seo audit": "Great choice! Our free SEO audit includes a comprehensive analysis of your website's technical health, content quality, and backlink profile. Share your website URL or call us at +92 305 9158010 to get started.",
-  "pricing information": "Our pricing is tailored to your needs:\n\n• Beginning: Starting at $1,500/mo\n• Agency Level: Starting at $3,500/mo\n• Enterprise: Custom pricing\n\nWant to schedule a call to find the right plan?",
+  "pricing information": "Monthly retainers, month to month:\n\n• Local SEO: $800 – $1,500/mo\n• Law Firm SEO: $1,200 – $2,500/mo\n• Ecommerce SEO: $1,500 – $4,000/mo\n\nWhere you sit in the range depends on scope. The free audit comes first, so you see the scope before paying anything.",
   "talk to an expert": "I'd love to connect you with one of our SEO specialists!\n\n1. Call us: +92 305 9158010\n2. Schedule a free consultation\n3. Email: contact@searchprex.com\n\nAvailable Mon-Fri, 9 AM - 6 PM EST.",
   "book a call": "Let's get you scheduled! Our SEO consultants offer a free 30-minute strategy session. Call +92 305 9158010 or click the phone button below.",
   "default": "Thanks for reaching out! I can help with:\n\n• Free SEO Audit\n• Pricing & Plans\n• Our Process\n• Case Studies\n\nOr call +92 305 9158010 for immediate help.",

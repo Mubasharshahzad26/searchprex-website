@@ -51,7 +51,7 @@ export default function ClevelandDurationResults() {
             Cleveland SEO Performance Timeline
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Select a milestone below to inspect exact technical deliverables executed and the concrete metrics logged into your monthly client ledger.
+            Select a milestone below to see the deliverables at each stage. The figures in the table are an illustrative example of what your report tracks, not results from a Cleveland client.
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function ClevelandDurationResults() {
           </div>
 
           <div className="p-4 bg-slate-50 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span>* Benchmark averages derived from litigation campaigns. Performance tracked and audited monthly.</span>
+            <span>* Illustrative figures for a hypothetical firm, not client results. Your own numbers come from call tracking and your intake system.</span>
             <Link href="/case-studies" className="font-bold text-neutral-900 underline hover:text-neutral-950">
               Explore verified case study results →
             </Link>

@@ -6,7 +6,7 @@ import { Check, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
 const TIERS = [
   {
     name: "Solo",
-    price: "$1,500",
+    price: "$1,200",
     period: "/month",
     description: "Designed for solo practitioners dominating a single legal niche in Cleveland.",
     highlight: false,
@@ -23,11 +23,11 @@ const TIERS = [
   },
   {
     name: "Growth",
-    price: "$3,000",
+    price: "$1,800",
     period: "/month",
     description: "Ideal for boutique 2–5 attorney firms expanding into suburbs and capturing AI search.",
     highlight: true,
-    badge: "Most Selected in Ohio",
+    badge: "Recommended",
     features: [
       "2 core practice areas (e.g. Injury + Criminal Defense)",
       "Suburban expansion silos (Lakewood, Parma, Beachwood)",
@@ -40,7 +40,7 @@ const TIERS = [
   },
   {
     name: "Firm",
-    price: "$5,000",
+    price: "$2,500",
     period: "/month",
     description: "Full-scale market dominance for mid-size practices seeking to displace regional giants.",
     highlight: false,

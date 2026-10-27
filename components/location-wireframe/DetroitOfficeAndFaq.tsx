@@ -34,7 +34,7 @@ export default function DetroitOfficeAndFaq({ page }: { page: CityPage }) {
     },
     {
       q: "How much does law firm SEO cost in Detroit?",
-      a: "It depends on your practice area, the competition and the scope. Most active Detroit campaigns range between $1,500 and $4,500/month depending on practice density across Wayne, Oakland, and Macomb counties. Plans are month-to-month, and we quote after reviewing your site and the firms you compete with.",
+      a: "It depends on your practice area, the competition and the scope. Law firm plans run $1,200 to $2,500/month depending on how many practice areas and counties across Wayne, Oakland, and Macomb the plan covers. Plans are month-to-month, and we quote after reviewing your site and the firms you compete with.",
     },
     {
       q: "Do you work with firms outside Detroit?",

@@ -18,17 +18,17 @@ import {
 const AGENCY_TYPES = [
   {
     title: "National 'Big-Box' Legal Agencies",
-    sub: "e.g. Scorpion, FindLaw, Justia",
-    fee: "$4,000 – $9,000 / mo",
-    contract: "12 to 24-Month Rigid Lock-in",
+    sub: "Large agencies serving law firms nationwide",
+    fee: "Varies — ask for it in writing",
+    contract: "Check the minimum term before signing",
     pros: ["High name recognition", "Established directory platforms"],
     cons: [
-      "Handed to junior out-of-state account managers managing 40+ firms",
-      "Confidential Ohio BWC & Cuyahoga court rules replaced by generic national templates",
-      "Proprietary platforms: if you leave, they often keep your website & assets",
-      "High cost per signed case due to massive corporate overhead",
+      "Ask who runs your account day to day, and how many firms they handle",
+      "Check that pages cover Ohio BWC and Cuyahoga court specifics, not a national template",
+      "Confirm in the contract that the website, content and data stay yours if you leave",
+      "Compare on cost per signed case, not on the size of the agency",
     ],
-    bestFor: "Mega-firms with \$50k/mo budgets that just want brand placement.",
+    bestFor: "Large multi-state firms that want one vendor for many offices.",
     searchprexDiff: "SearchPrex gives you month-to-month freedom, 100% asset ownership, and direct CEO oversight.",
     recommended: false,
   },
@@ -51,7 +51,7 @@ const AGENCY_TYPES = [
   {
     title: "SearchPrex Legal SEO",
     sub: "Founder-Led Cuyahoga County Law Firm SEO",
-    fee: "$1,500 – $5,000 / mo",
+    fee: "$1,200 – $2,500 / mo",
     contract: "Month-to-Month · No Long-Term Lock-in",
     pros: [
       "Direct CEO engagement: Mubashar Sharif personally audits and directs your technical roadmap",
@@ -60,7 +60,7 @@ const AGENCY_TYPES = [
       "Pioneering AI Search (Google AI Overviews & ChatGPT) citation engineering",
       "You own 100% of your code, content, citations, and data forever",
     ],
-    cons: ["Selective client onboarding: we only partner with 1–2 firms per practice area per submarket"],
+    cons: ["Selective client onboarding: one firm per practice area per city"],
     bestFor: "Ambitious solo, boutique, and mid-sized Cleveland law firms that demand measurable signed cases.",
     searchprexDiff: "The ideal balance of enterprise-grade technical firepower and personal CEO accountability.",
     recommended: true,

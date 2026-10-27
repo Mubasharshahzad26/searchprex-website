@@ -10,7 +10,7 @@ export default function DentonPricingAndGuarantee() {
   const plans = [
     {
       name: "Starter",
-      price: 900,
+      price: 1200,
       tag: "For Solo Practitioners",
       isPopular: false,
       features: [
@@ -22,8 +22,8 @@ export default function DentonPricingAndGuarantee() {
     },
     {
       name: "Growth",
-      price: 1400,
-      tag: "Most Popular in Denton",
+      price: 1800,
+      tag: "Recommended",
       isPopular: true,
       features: [
         "2 Practice Areas + Lewisville & Flower Mound Silos",
@@ -34,7 +34,7 @@ export default function DentonPricingAndGuarantee() {
     },
     {
       name: "Premier",
-      price: 2000,
+      price: 2500,
       tag: "For Competitive Litigation Firms",
       isPopular: false,
       features: [
@@ -103,7 +103,7 @@ export default function DentonPricingAndGuarantee() {
 
                   <div className="flex items-baseline gap-1 mb-6">
                     <span className="text-4xl sm:text-5xl font-black text-neutral-950">
-                      ${p.price.toLocaleString()}
+                      ${p.price.toLocaleString("en-US")}
                     </span>
                     <span className="text-sm font-semibold text-slate-500">/ month</span>
                   </div>
@@ -173,7 +173,7 @@ export default function DentonPricingAndGuarantee() {
               One Signed Case Covers How Many Months?
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
-              Select your firm&apos;s typical legal fee per signed retainer to see your coverage against the selected {currentPlan.name} plan (${currentPlan.price}/mo).
+              Select your firm&apos;s typical legal fee per signed retainer to see your coverage against the selected {currentPlan.name} plan (${currentPlan.price.toLocaleString("en-US")}/mo).
             </p>
 
             <div className="flex flex-wrap gap-2.5 mb-6">

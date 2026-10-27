@@ -26,7 +26,7 @@ export default function SugarLandPricingAndPpcComparison() {
     },
     {
       name: "Growth",
-      tag: "Most Popular in Fort Bend",
+      tag: "Recommended",
       price: "$1,800",
       numericPrice: 1800,
       description: "Tailored for growing boutique firms targeting multiple practices and surrounding Fort Bend submarkets.",
@@ -99,7 +99,7 @@ export default function SugarLandPricingAndPpcComparison() {
               >
                 {p.popular && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-neutral-900 text-white text-xs font-extrabold uppercase tracking-wider shadow-md">
-                    Most Popular in Fort Bend
+                    Recommended
                   </div>
                 )}
 

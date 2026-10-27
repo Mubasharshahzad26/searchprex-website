@@ -465,7 +465,7 @@ export default function ServicesPage() {
                 <th className="py-4 px-4 sm:px-6">Service</th>
                 <th className="py-4 px-4 sm:px-6">Best For</th>
                 <th className="py-4 px-4 sm:px-6">Key Deliverables</th>
-                <th className="py-4 px-4 sm:px-6">Verified Metric</th>
+                <th className="py-4 px-4 sm:px-6">Proof or measure</th>
                 <th className="py-4 px-4 sm:px-6">Retainer Scope</th>
                 <th className="py-4 px-4 sm:px-6 text-right">Explore</th>
               </tr>
@@ -479,8 +479,8 @@ export default function ServicesPage() {
                 </td>
                 <td className="py-4 px-4 sm:px-6">Attorneys, trial lawyers &amp; legal practices</td>
                 <td className="py-4 px-4 sm:px-6">Practice-area silos, GBP local pack, bar ethics review</td>
-                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">45.2K impressions / 28d</td>
-                <td className="py-4 px-4 sm:px-6 font-semibold">$1,500 – $4,000 / mo</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">Weekly report: calls, forms, signed cases</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">{formatRange(RETAINER_PLANS[1])} / mo</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/law-firm-seo" className="font-bold text-[#185FA5] hover:underline">
                     View Service →
@@ -496,7 +496,7 @@ export default function ServicesPage() {
                 <td className="py-4 px-4 sm:px-6">Shopify &amp; WooCommerce stores (1K–50K+ SKUs)</td>
                 <td className="py-4 px-4 sm:px-6">Mass indexing recovery, collection architecture, product schema</td>
                 <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">$5.8K → $19.1K / mo net sales</td>
-                <td className="py-4 px-4 sm:px-6 font-semibold">$1,200 – $3,500 / mo</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">{formatRange(RETAINER_PLANS[2])} / mo</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/ecommerce-seo" className="font-bold text-[#185FA5] hover:underline">
                     View Service →
@@ -512,7 +512,7 @@ export default function ServicesPage() {
                 <td className="py-4 px-4 sm:px-6">Home services, contractors, multi-location brands</td>
                 <td className="py-4 px-4 sm:px-6">GBP reinstatement, geo-targeted city pages, citation cleanup</td>
                 <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">+37.5% clicks (192 → 264)</td>
-                <td className="py-4 px-4 sm:px-6 font-semibold">$800 – $2,500 / mo</td>
+                <td className="py-4 px-4 sm:px-6 font-semibold">{formatRange(RETAINER_PLANS[0])} / mo</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/local-seo" className="font-bold text-[#185FA5] hover:underline">
                     View Service →

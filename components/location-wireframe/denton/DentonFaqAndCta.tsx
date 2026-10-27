@@ -49,7 +49,7 @@ export default function DentonFaqAndCta() {
     },
     {
       q: "Is it really affordable for a solo or boutique Denton firm?",
-      a: "Plans start at $900 per month. In Denton County, a single retained criminal defense matter ($2,500–$5,000) or contested divorce case ($5,000–$15,000) easily covers many months of service. There are zero long-term contracts; everything operates on simple month-to-month terms.",
+      a: "Plans run $1,200 to $2,500 per month, with a 7-day free trial. In Denton County, a single retained criminal defense matter ($2,500–$5,000) or contested divorce case ($5,000–$15,000) easily covers many months of service. There are zero long-term contracts; everything operates on simple month-to-month terms.",
     },
     {
       q: "Do I have to stop running our Google Ads?",

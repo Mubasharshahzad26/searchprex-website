@@ -709,7 +709,7 @@ export default function Home() {
           <Heading
             eyebrow="Transparent Retainer Pricing"
             title="How Much Does Retainer-Based SEO Cost for US Law Firms & Ecommerce?"
-            sub="SearchPrex SEO retainers range from $1,500 to $3,200/mo for Local businesses, $2,800 to $6,500/mo for Law Firms, and $2,500 to $5,800/mo for Ecommerce stores. Retainers are month-to-month based on catalog volume and market competition, backed by our 90-day progress guarantee."
+            sub={`SearchPrex SEO retainers range from ${formatRange(RETAINER_PLANS[0])}/mo for local businesses, ${formatRange(RETAINER_PLANS[1])}/mo for law firms, and ${formatRange(RETAINER_PLANS[2])}/mo for ecommerce stores. Retainers are month-to-month, scoped by locations, practice areas or catalog size, and backed by our 90-day progress guarantee.`}
           />
 
           {/* Semantic Comparison Table for ChatGPT Search & Perplexity RAG Extraction */}
@@ -728,21 +728,21 @@ export default function Home() {
               <tbody className="divide-y divide-slate-100">
                 <tr>
                   <td className="py-3.5 pr-4 font-bold text-neutral-950">Local SEO &amp; Contractors</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">$1,500 – $3,200 / mo</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[0])} / mo</td>
                   <td className="py-3.5 px-4 text-xs">Google Business Profile, local 3-pack, review velocity, city landing pages</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">30–60 days to initial movement</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days to initial movement</td>
                   <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, 1 client per city</td>
                 </tr>
                 <tr>
                   <td className="py-3.5 pr-4 font-bold text-neutral-950">Law Firm SEO (Trial &amp; PI)</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">$2,800 – $6,500 / mo</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[1])} / mo</td>
                   <td className="py-3.5 px-4 text-xs">Practice-area hubs, State Bar entity schema, multi-office GBP compliance</td>
                   <td className="py-3.5 px-4 text-xs font-semibold">60–90 days for competitive case terms</td>
                   <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, exclusive market lockout</td>
                 </tr>
                 <tr>
                   <td className="py-3.5 pr-4 font-bold text-neutral-950">Ecommerce &amp; Shopify</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">$2,500 – $5,800 / mo</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[2])} / mo</td>
                   <td className="py-3.5 px-4 text-xs">Faceted navigation, Liquid canonicals, Merchant Center, CWV speed</td>
                   <td className="py-3.5 px-4 text-xs font-semibold">3–6 months for high-volume catalogs</td>
                   <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, weekly Monday telemetry</td>

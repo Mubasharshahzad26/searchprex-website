@@ -141,7 +141,7 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
               Cleveland Law Firm SEO:{" "}
               <span className="underline decoration-slate-300 decoration-2 underline-offset-8">
-                Predictable Leads, Proven Numbers
+                Predictable Leads, Measured in Signed Cases
               </span>
             </h1>
 

@@ -80,9 +80,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Michigan",
     stateAbbr: "MI",
     county: "Wayne County",
-    metaTitle: "Law Firm SEO Company in Detroit, MI",
+    metaTitle: "Law Firm SEO Detroit, MI | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Detroit built for signed cases: Map Pack rankings, AI Overviews and call tracking for injury, no-fault and criminal defense firms. Month-to-month.",
+      "Law firm SEO in Detroit for injury, no-fault and criminal defense firms: Map Pack, AI Overviews and call tracking. Month-to-month, 7-day free trial.",
     h1: "Law Firm SEO in Detroit, Michigan: A Revenue-First Approach",
     heroSub:
       "SearchPrex is a law firm SEO company for Detroit attorneys who want signed cases, not vanity traffic. We help personal injury, no-fault, criminal defense, family and employment firms rank in the Google Map Pack, appear in AI Overviews and turn searches into phone calls across Wayne, Oakland and Macomb counties.",
@@ -139,7 +139,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         q: "How much does law firm SEO cost in Detroit?",
-        a: "It depends on your practice area, the competition and the scope. Most active Detroit campaigns range between $1,500 and $4,500/month depending on practice density across Wayne, Oakland, and Macomb counties. Plans are month-to-month, and we quote after reviewing your site and the firms you compete with.",
+        a: "It depends on your practice area, the competition and the scope. Law firm plans run $1,200 to $2,500/month depending on how many practice areas and counties across Wayne, Oakland, and Macomb the plan covers. Plans are month-to-month, and we quote after reviewing your site and the firms you compete with.",
       },
       {
         q: "Do you work with firms outside Detroit?",
@@ -183,9 +183,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Michigan",
     stateAbbr: "MI",
     county: "Kent County",
-    metaTitle: "Law Firm SEO Grand Rapids, MI | More Qualified Cases",
+    metaTitle: "Law Firm SEO Grand Rapids, MI | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Grand Rapids for solo and mid-size firms: Map Pack, AI answers and Kent County pages that cut PPC spend. Free PPC waste audit.",
+      "Law firm SEO in Grand Rapids for solo and mid-size firms: Map Pack, AI answers and Kent County pages. Month-to-month, 7-day free trial.",
     h1: "Law Firm SEO in Grand Rapids, Michigan: Qualified Leads Without the PPC Bill",
     heroSub:
       "West Michigan clients check reviews, then call. We build the Map Pack, Kent County pages and AI-answer visibility that keep working after the ad budget stops.",
@@ -268,10 +268,10 @@ export const CITY_PAGES: CityPage[] = [
     state: "Ohio",
     stateAbbr: "OH",
     county: "Cuyahoga County",
-    metaTitle: "Cleveland Law Firm SEO | 7-Day Free Trial",
+    metaTitle: "Law Firm SEO Cleveland, OH | From $1,200/mo",
     metaDescription:
-      "Free Cleveland local SEO audit and 7-day trial—no credit card or auto-charge. Law firm plans start at $1,500/mo; scope depends on practice areas and locations.",
-    h1: "Law Firm SEO in Cleveland, Ohio: Predictable Leads, Proven Numbers",
+      "Law firm SEO in Cleveland: Map Pack, AI answers and Cuyahoga County pages. $1,200–$2,500/mo, month-to-month, 7-day free trial.",
+    h1: "Law Firm SEO in Cleveland, Ohio: Predictable Leads, Measured in Signed Cases",
     heroSub:
       "Cleveland attorneys do not buy hype. We build search and AI visibility that earns signed cases, then show every number behind it.",
     problem:
@@ -354,9 +354,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Pennsylvania",
     stateAbbr: "PA",
     county: "Philadelphia County",
-    metaTitle: "Law Firm SEO Philadelphia, PA | Out-Local National Firms",
+    metaTitle: "Law Firm SEO Philadelphia, PA | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Philadelphia built on neighborhoods: Map Pack, AI answers and Pennsylvania-specific pages that national firms cannot match.",
+      "Law firm SEO in Philadelphia built on neighborhoods: Map Pack, AI answers and Pennsylvania-specific pages. Month-to-month, 7-day free trial.",
     h1: "Law Firm SEO in Philadelphia: You Cannot Outspend Them. Out-Local Them.",
     heroSub:
       "National firms treat Philadelphia as a venue. You live here. We turn neighborhood knowledge into Map Pack, page-one and AI-answer visibility that budget alone cannot buy.",
@@ -440,9 +440,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "New Mexico",
     stateAbbr: "NM",
     county: "Bernalillo County",
-    metaTitle: "Law Firm SEO Albuquerque, NM / English and Spanish",
+    metaTitle: "Law Firm SEO Albuquerque, NM | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Albuquerque in English and Spanish: Map Pack, AI answers and Bernalillo County pages that build trust. Free reality check.",
+      "Law firm SEO in Albuquerque in English and Spanish: Map Pack, AI answers and Bernalillo County pages. Month-to-month, 7-day free trial.",
     h1: "Law Firm SEO in Albuquerque, New Mexico: Be the Lawyer Your Community Trusts",
     heroSub:
       "Your reputation was built face to face. We carry it to Google, the Map Pack and AI answers, in English and Spanish, so the right people find you when they need you most.",
@@ -526,9 +526,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Fort Bend County",
-    metaTitle: "Law Firm SEO Sugar Land, TX | Beat Houston Firms",
+    metaTitle: "Law Firm SEO Sugar Land, TX | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Sugar Land and Fort Bend County: Map Pack, AI answers and local pages that lift you out of Houston's shadow. Free rescue plan.",
+      "Law firm SEO in Sugar Land and Fort Bend County: Map Pack, AI answers and local pages that compete with Houston firms. 7-day free trial.",
     h1: "Law Firm SEO in Sugar Land, Texas: Rescue Your Practice From Houston's Ad Auction",
     heroSub:
       "Fort Bend families search for a lawyer they can trust close to home. We lift your firm out of Houston's shadow and out of the click-by-click spending race.",
@@ -611,9 +611,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Collin County",
-    metaTitle: "Law Firm SEO Plano, TX | Be Found in Week One",
+    metaTitle: "Law Firm SEO Plano, TX | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Plano, Texas for executive divorce, business immigration and estate firms: Collin County pages, Map Pack and AI answers.",
+      "Law firm SEO in Plano for divorce, business immigration and estate firms: Collin County pages, Map Pack and AI answers. 7-day free trial.",
     h1: "Law Firm SEO in Plano, Texas: Be the Firm Newcomers Find in Week One",
     heroSub:
       "Many professionals move to Plano with no local lawyer and no one to ask. Google and AI assistants are their referral network. We make sure your firm is the answer.",
@@ -696,9 +696,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Denton County",
-    metaTitle: "Law Firm SEO Denton, TX | Solo and Small Firms",
+    metaTitle: "Law Firm SEO Denton, TX | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Denton, Texas for solo and small firms: Map Pack, AI answers and Denton County pages, with a 7-day free trial.",
+      "Law firm SEO in Denton for solo and small firms: Map Pack, AI answers and Denton County pages. Month-to-month, 7-day free trial.",
     h1: "Law Firm SEO in Denton, Texas: You Do Not Have to Carry This Alone",
     heroSub:
       "I know the ad bills, the quiet Mondays and the Dallas-Fort Worth firms above you on Google. I am Mubashar, and I will take this off your shoulders with qualified leads that come to you organically.",
@@ -781,9 +781,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Harris, Fort Bend & Waller Counties",
-    metaTitle: "Law Firm SEO Katy, TX | Harris, Fort Bend, Waller",
+    metaTitle: "Law Firm SEO Katy, TX | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in Katy, Texas: county-correct pages for Harris, Fort Bend and Waller, plus Map Pack and AI answer visibility. Free tear-down.",
+      "Law firm SEO in Katy: county-correct pages for Harris, Fort Bend and Waller, plus Map Pack and AI answers. Month-to-month, 7-day free trial.",
     h1: "Law Firm SEO in Katy, Texas: Be the Firm at the Crossroads",
     heroSub:
       "Harris, Fort Bend and Waller counties meet in Katy. Clients search for a lawyer close to home and nobody tells them which courthouse is theirs. We make your firm the one that does.",
@@ -866,9 +866,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Texas",
     stateAbbr: "TX",
     county: "Montgomery County",
-    metaTitle: "Law Firm SEO The Woodlands, TX | Be the Name They Hear",
+    metaTitle: "Law Firm SEO The Woodlands, TX | From $1,200/mo",
     metaDescription:
-      "Law firm SEO in The Woodlands, Texas: Montgomery and Harris County pages, referral-ready reputation and AI answers. Complimentary review.",
+      "Law firm SEO in The Woodlands: Montgomery and Harris County pages, reviews and AI answers. Month-to-month, 7-day free trial, free audit in 24 hours.",
     h1: "Law Firm SEO in The Woodlands, Texas: Be the Name Your Clients Already Hear",
     heroSub:
       "Behind every estate plan, probate and divorce search is a family trying to protect what matters. We make sure that when they check you out on Google or ask an AI, your firm earns their trust and their call.",
@@ -952,9 +952,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Arizona",
     stateAbbr: "AZ",
     county: "Maricopa County",
-    metaTitle: "Tempe Law Firm SEO | East Valley Map Pack & Retainers",
+    metaTitle: "Law Firm SEO Tempe, AZ | From $1,200/mo",
     metaDescription:
-      "Tempe law firm SEO for DUI, criminal defense, and personal injury attorneys. Dominate Maricopa County Map Pack rankings and AI search visibility. Month-to-month.",
+      "Law firm SEO in Tempe for DUI, criminal defense and injury attorneys: Maricopa County Map Pack and AI answers. Month-to-month, 7-day free trial.",
     h1: "Tempe Law Firm SEO: Dominate East Valley Search",
     heroSub:
       "Capture high-intent Maricopa County legal retainers before Phoenix conglomerates overspend on broad keywords. We deploy technical Map Pack authority, statutory court silos, and AI answer engine optimization tailored specifically for Tempe attorneys.",
@@ -1036,9 +1036,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Arizona",
     stateAbbr: "AZ",
     county: "Maricopa County",
-    metaTitle: "Scottsdale Law Firm SEO | High-Asset Map Pack & Retainers",
+    metaTitle: "Law Firm SEO Scottsdale, AZ | From $1,200/mo",
     metaDescription:
-      "Scottsdale law firm SEO for high-asset divorce, DUI, and estate planning attorneys. Dominate Maricopa County Map Pack rankings and AI search visibility. Month-to-month.",
+      "Law firm SEO in Scottsdale for divorce, DUI and estate planning attorneys: Map Pack and AI answers. Month-to-month, 7-day free trial.",
     h1: "Scottsdale Law Firm SEO: High-Asset Client Acquisition",
     heroSub:
       "Capture high-net-worth Maricopa County legal retainers before Phoenix conglomerates overspend on broad keywords. We deploy technical Map Pack authority, statutory court silos, and AI answer engine optimization tailored specifically for Scottsdale attorneys.",
@@ -1121,9 +1121,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "California",
     stateAbbr: "CA",
     county: "Santa Clara County",
-    metaTitle: "San Jose Law Firm SEO | Silicon Valley Map Pack & Retainers",
+    metaTitle: "Law Firm SEO San Jose, CA | From $1,200/mo",
     metaDescription:
-      "San Jose law firm SEO for tech employment, high-asset divorce, and IP litigation attorneys. Dominate Santa Clara County Map Pack and AI search visibility. Month-to-month.",
+      "Law firm SEO in San Jose for employment, divorce and IP attorneys: Santa Clara County Map Pack and AI answers. Month-to-month, 7-day free trial.",
     h1: "San Jose Law Firm SEO: Silicon Valley Retainer Engine",
     heroSub:
       "Capture high-value Santa Clara County retainers before San Francisco mega-firms outspend you on generic keywords. We deploy technical Map Pack authority, Silicon Valley equity silos, and AI answer engine optimization tailored specifically for South Bay attorneys.",
@@ -1206,9 +1206,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Louisiana",
     stateAbbr: "LA",
     county: "East Baton Rouge Parish",
-    metaTitle: "Baton Rouge Law Firm SEO | 19th JDC Map Pack & Retainers",
+    metaTitle: "Law Firm SEO Baton Rouge, LA | From $1,200/mo",
     metaDescription:
-      "Baton Rouge law firm SEO for personal injury, maritime, and family law attorneys. Dominate East Baton Rouge Parish Map Pack and AI search visibility. Month-to-month.",
+      "Law firm SEO in Baton Rouge for injury, maritime and family law attorneys: Map Pack and AI answers. Month-to-month, 7-day free trial.",
     h1: "Baton Rouge Law Firm SEO: Dominate Parish Legal Search",
     heroSub:
       "Capture high-value East Baton Rouge Parish retainers before New Orleans firms overspend on broad keywords. We deploy technical Map Pack authority, Louisiana Civil Code silos, and AI answer engine optimization tailored specifically for Capital Area attorneys.",
@@ -1290,9 +1290,9 @@ export const CITY_PAGES: CityPage[] = [
     state: "Louisiana",
     stateAbbr: "LA",
     county: "Caddo Parish",
-    metaTitle: "Shreveport Law Firm SEO | Caddo Parish Map Pack & Retainers",
+    metaTitle: "Law Firm SEO Shreveport, LA | From $1,200/mo",
     metaDescription:
-      "Shreveport law firm SEO for personal injury, family law, and criminal defense attorneys. Dominate Caddo Parish Map Pack and Ark-La-Tex legal search. Month-to-month.",
+      "Law firm SEO in Shreveport for injury, family and criminal defense attorneys: Caddo Parish Map Pack and AI answers. Month-to-month, 7-day free trial.",
     h1: "Shreveport Law Firm SEO: Ark-La-Tex Retainer Engine",
     heroSub:
       "Capture high-value Caddo Parish retainers and Ark-La-Tex cross-border cases before New Orleans and Baton Rouge firms overspend on broad keywords. We deploy technical Map Pack authority, Louisiana Civil Code silos, and AI answer engine optimization tailored specifically for Northwest Louisiana attorneys.",
