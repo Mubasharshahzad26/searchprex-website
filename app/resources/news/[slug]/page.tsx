@@ -6,6 +6,7 @@ import { isHalloweenOfferLive } from "@/lib/halloween-offer";
 import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
 import { getStaticNewsPillar, NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
+import { getNewsFallbackEntry, newsFallbackPost } from "@/lib/news-fallback";
 
 // Spokes render on demand and were then cached until the next deploy, so CMS
 // edits and unpublishes did not reach the live page. An hour bounds that.
@@ -91,6 +92,15 @@ async function getPostData(rawSlug: string) {
     }
   } catch (err) {
     console.error("Failed to fetch DB post for news spoke:", slug, err);
+  }
+
+  // Database unavailable: serve the sourced copy kept in the repo for the topic
+  // guides and for articles that otherwise exist only in the CMS, rather than a
+  // generic stub or a 404. local-seo-updates keeps its own fallback below.
+  const archived = slug === "local-seo-updates" ? undefined : getNewsFallbackEntry(slug);
+  if (archived) {
+    const post = newsFallbackPost(archived);
+    return { ...post, metaTitle: expandMonthToken(post.metaTitle, post.dateModified) };
   }
 
   // The News hub links to these eight topic guides. Preserve their routes when

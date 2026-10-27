@@ -67,6 +67,24 @@ const nextConfig = {
         permanent: true,
       },
       {
+        // Three October 2026 autopilot articles cited no sources at all yet
+        // quoted figures (82%, 58%) and a "crackdown" Google never announced.
+        // Sourced pages cover the same ground; send their URLs there.
+        source: '/resources/news/google-business-profile-law-firm-virtual-office-enforcement-2026',
+        destination: '/resources/news/google-maps-law-firm-virtual-office-crackdown-video-verification',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors',
+        destination: '/resources/news/llm-seo-news-2026',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility',
+        destination: '/resources/news/local-seo-updates',
+        permanent: true,
+      },
+      {
         // The two case-study hubs were merged into /case-studies, the URL the
         // detail pages already sit under. The query string carries over, so
         // ?vertical=ecommerce deep links keep their filter.

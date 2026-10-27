@@ -18,6 +18,7 @@ import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { isGatedRoute } from "@/lib/gated-routes";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
 import { NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
+import { NEWS_FALLBACK_ARTICLES } from "@/lib/news-fallback";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 
@@ -328,6 +329,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: Number.isNaN(updated.getTime()) ? undefined : updated,
       changeFrequency: "weekly",
       priority: 0.75,
+    });
+  }
+
+  // Articles whose sourced copy is kept in the repo (lib/news-fallback.ts), so
+  // they stay listed while the CMS database is unavailable.
+  for (const article of NEWS_FALLBACK_ARTICLES) {
+    add({
+      url: absolute(`/resources/news/${article.slug}`),
+      lastModified: new Date(`${article.modified}T12:00:00.000Z`),
+      changeFrequency: "weekly",
+      priority: 0.7,
     });
   }
 
