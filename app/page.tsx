@@ -445,19 +445,297 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
-      <section id="free-da-checker" className="bg-white px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-5xl">
-          <FreeDomainAuthorityChecker variant="home" />
+      {/* Order, top to bottom: proof, who it is for, how it works, recorded
+          proof, price, the person doing the work, doubts — then the free
+          tools and guides for readers who came to learn, then the offer. */}
+      {/* 6 · WHO IT'S FOR — AEO Direct Answer */}
+      <section className="border-t border-slate-200 px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Specialized Verticals · AEO Direct Answer"
+            title="Which US Businesses Benefit Most from SearchPrex SEO?"
+            sub="SearchPrex specializes in three high-value US verticals: Personal Injury & Trial Law Firms, Multi-Location Local Contractors, and Multi-SKU Shopify & WooCommerce stores. Every engagement is founder-executed with strict single-client city exclusivity to eliminate competitive conflicts."
+          />
+          <AudienceTabs tabs={TABS} />
+        </div>
+      </section>
+
+      {/* 8 · HOW IT WORKS — AEO Methodology */}
+      <section className="px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Methodology & Process"
+            title="How Does SearchPrex Execute Technical & Local SEO Engagements?"
+            sub="Our 3-phase execution model eliminates agency overhead: Phase 1 delivers a comprehensive technical crawl & competitor tear-down in 24 hours; Phase 2 executes direct code, schema, and local profile optimizations; Phase 3 provides closed-loop Monday revenue telemetry."
+          />
+          <ol className="grid gap-5 md:grid-cols-3">
+            {STEPS.map((s) => (
+              <li key={s.n} className="rounded-3xl border border-slate-200 bg-white p-7">
+                <span className={`${H} flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-lg text-neutral-950`}>{s.n}</span>
+                <h3 className={`${H} mt-5 text-xl text-neutral-950`}>{s.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 7 · RECORDED LIVE */}
+      <section className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Recorded live"
+            title="Don't take the screenshots on trust — watch them"
+            sub="Screen recordings made inside each client's own accounts. A screenshot can be edited; a live session in the real account is far harder to fake."
+          />
+          <VideoGallery videos={RECORDED_VIDEOS} badge="Recorded live" columns={3} />
+        </div>
+      </section>
+
+      {/* Client-care philosophy: set clear expectations and connect it to proof. */}
+      <section className="bg-white px-4 py-16 sm:px-6 lg:py-20">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="The SearchPrex philosophy"
+            title="You should always know who is doing the work—and what it changed."
+            sub="SEO is a long-term investment. We keep the relationship direct, the reporting understandable, and the work tied to the searches and enquiries your business needs."
+          />
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                title: "One person accountable",
+                body: "You work directly with founder Mubashar Sharif on the audit, priorities, implementation and weekly review.",
+              },
+              {
+                title: "A clear view of progress",
+                body: "Monday reporting explains what changed in Search Console, local visibility and leads—and what is being worked on next.",
+              },
+              {
+                title: "A plan shaped around your market",
+                body: "The work starts with your site, competitors and service area. Law firms receive one-firm-per-city exclusivity to avoid local conflicts.",
+              },
+            ].map((item) => (
+              <article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+                <h3 className={`${H} text-lg text-neutral-950`}>{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-bold">
+            <Link href="/case-studies" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
+              See the evidence in our case studies <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/services/law-firm-seo" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
+              How we work with law firms <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/locations" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
+              Explore our service locations <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 10 · PRICING — AEO & Semantic Comparison Table */}
+      <section className="px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Transparent Retainer Pricing"
+            title="How Much Does Retainer-Based SEO Cost for US Law Firms & Ecommerce?"
+            sub={`SearchPrex SEO retainers range from ${formatRange(RETAINER_PLANS[0])}/mo for local businesses, ${formatRange(RETAINER_PLANS[1])}/mo for law firms, and ${formatRange(RETAINER_PLANS[2])}/mo for ecommerce stores. Retainers are month-to-month, scoped by locations, practice areas or catalog size, and backed by our 90-day progress guarantee.`}
+          />
+
+          {/* Semantic Comparison Table for ChatGPT Search & Perplexity RAG Extraction */}
+          <div className="mb-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-neutral-600">Executive Pricing &amp; Deliverables Matrix</p>
+            <table className="w-full text-left text-sm text-slate-700">
+              <thead>
+                <tr className="border-b border-slate-200 text-xs font-black uppercase tracking-wider text-neutral-950">
+                  <th className="pb-3 pr-4">Vertical Track</th>
+                  <th className="pb-3 px-4">Investment Range</th>
+                  <th className="pb-3 px-4">Primary Deliverables</th>
+                  <th className="pb-3 px-4">Turnaround Time</th>
+                  <th className="pb-3 pl-4">Guarantee &amp; Terms</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                <tr>
+                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Local SEO &amp; Contractors</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[0])} / mo</td>
+                  <td className="py-3.5 px-4 text-xs">Google Business Profile, local 3-pack, review velocity, city landing pages</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days to initial movement</td>
+                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, 1 client per city</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Law Firm SEO (Trial &amp; PI)</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[1])} / mo</td>
+                  <td className="py-3.5 px-4 text-xs">Practice-area hubs, State Bar entity schema, multi-office GBP compliance</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days for competitive case terms</td>
+                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, exclusive market lockout</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Ecommerce &amp; Shopify</td>
+                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[2])} / mo</td>
+                  <td className="py-3.5 px-4 text-xs">Faceted navigation, Liquid canonicals, Merchant Center, CWV speed</td>
+                  <td className="py-3.5 px-4 text-xs font-semibold">3–6 months for high-volume catalogs</td>
+                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, weekly Monday telemetry</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {RETAINER_PLANS.map((p) => (
+              <div
+                key={p.niche}
+                className={`flex flex-col rounded-3xl border p-7 ${p.featured ? "border-neutral-900 shadow-md" : "border-slate-200"}`}
+              >
+                <p className="text-sm font-bold text-neutral-950">{p.niche}</p>
+                <p className="mt-1 text-xs text-slate-600">{p.best}</p>
+                <p className={`${H} mt-5 text-3xl tracking-tight text-neutral-950`}>
+                  {formatRange(p)}
+                  <span className="text-sm font-semibold text-slate-600"> / mo</span>
+                </p>
+                <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
+                  {p.includes.map((i) => (
+                    <li key={i}>· {i}</li>
+                  ))}
+                </ul>
+                <a
+                  href="#get-started"
+                  className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
+                    p.featured ? "bg-neutral-900 text-white hover:bg-neutral-800" : "border border-slate-300 text-neutral-950 hover:border-neutral-900"
+                  }`}
+                >
+                  Start with the free tear-down
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8 · FOUNDER + REVIEW */}
+      <section className="bg-neutral-900 px-4 py-20 text-white sm:px-6 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+            <Image
+              src="/images/mubashar-sharif.jpg"
+              alt="Mubashar Sharif, founder of SearchPrex"
+              width={320}
+              height={320}
+              className="h-32 w-32 flex-shrink-0 rounded-3xl object-cover sm:h-40 sm:w-40"
+            />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Who does the work</p>
+              <h2 className={`${H} mt-2 text-3xl tracking-tight text-white`}>Mubashar Sharif</h2>
+              <p className="mt-1 text-sm text-white/65">
+                Founder · 5+ years in SEO · {certCount} Semrush certificates
+              </p>
+              <p className="mt-4 text-[15px] leading-relaxed text-white/80">
+                Every audit, page and Monday report is mine. No sales team, no account managers, no juniors — which is why SearchPrex takes one client per city. What I won&apos;t do: promise a ranking, or put a number on this site without a screenshot behind it.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {[
+                  { label: "LinkedIn", href: LINKEDIN },
+                  { label: "Trustpilot", href: "https://www.trustpilot.com/review/searchprex.com" },
+                  { label: "YouTube", href: "https://www.youtube.com/@SearchPrex" },
+                ].map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3.5 py-1.5 text-xs font-bold text-white/85 transition-colors hover:border-white/50"
+                  >
+                    {l.label} <ExternalLink className="h-3 w-3" aria-hidden />
+                  </a>
+                ))}
+                <Link href="/about" className="inline-flex items-center rounded-full border border-white/20 px-3.5 py-1.5 text-xs font-bold text-white/85 transition-colors hover:border-white/50">
+                  About SearchPrex
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <figure className="rounded-3xl bg-white p-7 text-neutral-950">
+            <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-4 w-4 fill-[#00b67a] text-[#00b67a]" aria-hidden />
+              ))}
+            </div>
+            <blockquote className="mt-4 text-base leading-relaxed">&ldquo;{review.body}&rdquo;</blockquote>
+            <figcaption className="mt-5 flex items-center justify-between gap-3 text-sm">
+              <span>
+                <strong className="block">{review.author}</strong>
+                <span className="text-slate-600">Ecommerce, USA · {review.date}</span>
+              </span>
+              <a
+                href="https://www.trustpilot.com/review/searchprex.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-[#1a7d59]"
+              >
+                On Trustpilot →
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* 11 · FAQ */}
+      <section className="px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-3xl">
+          <Heading eyebrow="FAQ" title="SEO questions, answered straight" />
+          <FaqAccordion faqs={FAQS} />
+          <p className="mt-6 text-center">
+            <Link href="/faq" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
+              More questions <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* 10 · COVERAGE — every state and city page, compact */}
+      <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <Heading eyebrow="Where" title={`Law firm and local SEO in ${LOCATION_STATES.length} states, ${LOCATION_CITY_COUNT} cities`} />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {LOCATION_STATES.map((s) => (
+              <div key={s.slug} className="rounded-2xl border border-slate-200 bg-white px-5 py-4">
+                {s.hubHref ? (
+                  <Link href={s.hubHref} className="text-sm font-bold text-neutral-950 hover:underline">
+                    {s.name}
+                  </Link>
+                ) : (
+                  <p className="text-sm font-bold text-neutral-950">{s.name}</p>
+                )}
+                <p className="mt-1.5 text-sm leading-relaxed">
+                  {s.cities.map((c, i) => (
+                    <span key={c.href}>
+                      <Link href={c.href} className="text-slate-600 hover:text-neutral-950 hover:underline">
+                        {c.name}
+                      </Link>
+                      {i < s.cities.length - 1 ? <span className="text-slate-300"> · </span> : null}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-center">
+            <Link href="/locations" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
+              All locations <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </p>
         </div>
       </section>
 
       {/* 5 · SEARCHPREX ENGINEERING ECOSYSTEM & PLATFORM HUBS (Anti-Orphan Authority Flow) */}
-      <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-white px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
-            eyebrow="Open Engineering Ecosystem · 2026 Telemetry"
-            title="Production SEO Intelligence, Diagnosis Playbooks & Free Tools"
+            eyebrow="Free to use"
+            title="Free SEO tools, playbooks and diagnostics"
             sub="SearchPrex publishes verified search telemetry, production code fixes for Google Search Console crawl bottlenecks, interactive 20-module learning playbooks, and developer utilities designed for enterprise US SEO governance."
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -548,285 +826,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6 · WHO IT'S FOR — AEO Direct Answer */}
-      <section className="border-t border-slate-200 px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <Heading
-            eyebrow="Specialized Verticals · AEO Direct Answer"
-            title="Which US Businesses Benefit Most from SearchPrex SEO?"
-            sub="SearchPrex specializes in three high-value US verticals: Personal Injury & Trial Law Firms, Multi-Location Local Contractors, and Multi-SKU Shopify & WooCommerce stores. Every engagement is founder-executed with strict single-client city exclusivity to eliminate competitive conflicts."
-          />
-          <AudienceTabs tabs={TABS} />
-        </div>
-      </section>
-
-      {/* 7 · RECORDED LIVE */}
-      <section className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <Heading
-            eyebrow="Recorded live"
-            title="Don't take the screenshots on trust — watch them"
-            sub="Screen recordings made inside each client's own accounts. A screenshot can be edited; a live session in the real account is far harder to fake."
-          />
-          <VideoGallery videos={RECORDED_VIDEOS} badge="Recorded live" columns={3} />
-        </div>
-      </section>
-
-      {/* 8 · HOW IT WORKS — AEO Methodology */}
-      <section className="px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <Heading
-            eyebrow="Methodology & Process"
-            title="How Does SearchPrex Execute Technical & Local SEO Engagements?"
-            sub="Our 3-phase execution model eliminates agency overhead: Phase 1 delivers a comprehensive technical crawl & competitor tear-down in 24 hours; Phase 2 executes direct code, schema, and local profile optimizations; Phase 3 provides closed-loop Monday revenue telemetry."
-          />
-          <ol className="grid gap-5 md:grid-cols-3">
-            {STEPS.map((s) => (
-              <li key={s.n} className="rounded-3xl border border-slate-200 bg-white p-7">
-                <span className={`${H} flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-lg text-neutral-950`}>{s.n}</span>
-                <h3 className={`${H} mt-5 text-xl text-neutral-950`}>{s.title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{s.body}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Client-care philosophy: set clear expectations and connect it to proof. */}
-      <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6 lg:py-20">
-        <div className="mx-auto max-w-6xl">
-          <Heading
-            eyebrow="The SearchPrex philosophy"
-            title="You should always know who is doing the work—and what it changed."
-            sub="SEO is a long-term investment. We keep the relationship direct, the reporting understandable, and the work tied to the searches and enquiries your business needs."
-          />
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              {
-                title: "One person accountable",
-                body: "You work directly with founder Mubashar Sharif on the audit, priorities, implementation and weekly review.",
-              },
-              {
-                title: "A clear view of progress",
-                body: "Monday reporting explains what changed in Search Console, local visibility and leads—and what is being worked on next.",
-              },
-              {
-                title: "A plan shaped around your market",
-                body: "The work starts with your site, competitors and service area. Law firms receive one-firm-per-city exclusivity to avoid local conflicts.",
-              },
-            ].map((item) => (
-              <article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
-                <h3 className={`${H} text-lg text-neutral-950`}>{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.body}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-bold">
-            <Link href="/case-studies" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
-              See the evidence in our case studies <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-            <Link href="/services/law-firm-seo" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
-              How we work with law firms <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-            <Link href="/locations" className="inline-flex items-center gap-1 text-neutral-950 hover:underline">
-              Explore our service locations <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 8 · FOUNDER + REVIEW */}
-      <section className="bg-neutral-900 px-4 py-20 text-white sm:px-6 lg:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-            <Image
-              src="/images/mubashar-sharif.jpg"
-              alt="Mubashar Sharif, founder of SearchPrex"
-              width={320}
-              height={320}
-              className="h-32 w-32 flex-shrink-0 rounded-3xl object-cover sm:h-40 sm:w-40"
-            />
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Who does the work</p>
-              <h2 className={`${H} mt-2 text-3xl tracking-tight text-white`}>Mubashar Sharif</h2>
-              <p className="mt-1 text-sm text-white/65">
-                Founder · 5+ years in SEO · {certCount} Semrush certificates
-              </p>
-              <p className="mt-4 text-[15px] leading-relaxed text-white/80">
-                Every audit, page and Monday report is mine. No sales team, no account managers, no juniors — which is why SearchPrex takes one client per city. What I won&apos;t do: promise a ranking, or put a number on this site without a screenshot behind it.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  { label: "LinkedIn", href: LINKEDIN },
-                  { label: "Trustpilot", href: "https://www.trustpilot.com/review/searchprex.com" },
-                  { label: "YouTube", href: "https://www.youtube.com/@SearchPrex" },
-                ].map((l) => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3.5 py-1.5 text-xs font-bold text-white/85 transition-colors hover:border-white/50"
-                  >
-                    {l.label} <ExternalLink className="h-3 w-3" aria-hidden />
-                  </a>
-                ))}
-                <Link href="/about" className="inline-flex items-center rounded-full border border-white/20 px-3.5 py-1.5 text-xs font-bold text-white/85 transition-colors hover:border-white/50">
-                  About SearchPrex
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <figure className="rounded-3xl bg-white p-7 text-neutral-950">
-            <div className="flex gap-0.5" aria-label="5 out of 5 stars">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className="h-4 w-4 fill-[#00b67a] text-[#00b67a]" aria-hidden />
-              ))}
-            </div>
-            <blockquote className="mt-4 text-base leading-relaxed">&ldquo;{review.body}&rdquo;</blockquote>
-            <figcaption className="mt-5 flex items-center justify-between gap-3 text-sm">
-              <span>
-                <strong className="block">{review.author}</strong>
-                <span className="text-slate-600">Ecommerce, USA · {review.date}</span>
-              </span>
-              <a
-                href="https://www.trustpilot.com/review/searchprex.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold text-[#1a7d59]"
-              >
-                On Trustpilot →
-              </a>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      {/* 10 · PRICING — AEO & Semantic Comparison Table */}
-      <section className="px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <Heading
-            eyebrow="Transparent Retainer Pricing"
-            title="How Much Does Retainer-Based SEO Cost for US Law Firms & Ecommerce?"
-            sub={`SearchPrex SEO retainers range from ${formatRange(RETAINER_PLANS[0])}/mo for local businesses, ${formatRange(RETAINER_PLANS[1])}/mo for law firms, and ${formatRange(RETAINER_PLANS[2])}/mo for ecommerce stores. Retainers are month-to-month, scoped by locations, practice areas or catalog size, and backed by our 90-day progress guarantee.`}
-          />
-
-          {/* Semantic Comparison Table for ChatGPT Search & Perplexity RAG Extraction */}
-          <div className="mb-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-neutral-600">Executive Pricing &amp; Deliverables Matrix</p>
-            <table className="w-full text-left text-sm text-slate-700">
-              <thead>
-                <tr className="border-b border-slate-200 text-xs font-black uppercase tracking-wider text-neutral-950">
-                  <th className="pb-3 pr-4">Vertical Track</th>
-                  <th className="pb-3 px-4">Investment Range</th>
-                  <th className="pb-3 px-4">Primary Deliverables</th>
-                  <th className="pb-3 px-4">Turnaround Time</th>
-                  <th className="pb-3 pl-4">Guarantee &amp; Terms</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                <tr>
-                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Local SEO &amp; Contractors</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[0])} / mo</td>
-                  <td className="py-3.5 px-4 text-xs">Google Business Profile, local 3-pack, review velocity, city landing pages</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days to initial movement</td>
-                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, 1 client per city</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Law Firm SEO (Trial &amp; PI)</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[1])} / mo</td>
-                  <td className="py-3.5 px-4 text-xs">Practice-area hubs, State Bar entity schema, multi-office GBP compliance</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days for competitive case terms</td>
-                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, exclusive market lockout</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Ecommerce &amp; Shopify</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[2])} / mo</td>
-                  <td className="py-3.5 px-4 text-xs">Faceted navigation, Liquid canonicals, Merchant Center, CWV speed</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">3–6 months for high-volume catalogs</td>
-                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, weekly Monday telemetry</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {RETAINER_PLANS.map((p) => (
-              <div
-                key={p.niche}
-                className={`flex flex-col rounded-3xl border p-7 ${p.featured ? "border-neutral-900 shadow-md" : "border-slate-200"}`}
-              >
-                <p className="text-sm font-bold text-neutral-950">{p.niche}</p>
-                <p className="mt-1 text-xs text-slate-600">{p.best}</p>
-                <p className={`${H} mt-5 text-3xl tracking-tight text-neutral-950`}>
-                  {formatRange(p)}
-                  <span className="text-sm font-semibold text-slate-600"> / mo</span>
-                </p>
-                <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
-                  {p.includes.map((i) => (
-                    <li key={i}>· {i}</li>
-                  ))}
-                </ul>
-                <a
-                  href="#get-started"
-                  className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
-                    p.featured ? "bg-neutral-900 text-white hover:bg-neutral-800" : "border border-slate-300 text-neutral-950 hover:border-neutral-900"
-                  }`}
-                >
-                  Start with the free tear-down
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 10 · COVERAGE — every state and city page, compact */}
-      <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-6xl">
-          <Heading eyebrow="Where" title={`Law firm and local SEO in ${LOCATION_STATES.length} states, ${LOCATION_CITY_COUNT} cities`} />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {LOCATION_STATES.map((s) => (
-              <div key={s.slug} className="rounded-2xl border border-slate-200 bg-white px-5 py-4">
-                {s.hubHref ? (
-                  <Link href={s.hubHref} className="text-sm font-bold text-neutral-950 hover:underline">
-                    {s.name}
-                  </Link>
-                ) : (
-                  <p className="text-sm font-bold text-neutral-950">{s.name}</p>
-                )}
-                <p className="mt-1.5 text-sm leading-relaxed">
-                  {s.cities.map((c, i) => (
-                    <span key={c.href}>
-                      <Link href={c.href} className="text-slate-600 hover:text-neutral-950 hover:underline">
-                        {c.name}
-                      </Link>
-                      {i < s.cities.length - 1 ? <span className="text-slate-300"> · </span> : null}
-                    </span>
-                  ))}
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-center">
-            <Link href="/locations" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
-              All locations <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </p>
-        </div>
-      </section>
-
-      {/* 11 · FAQ */}
-      <section className="px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-3xl">
-          <Heading eyebrow="FAQ" title="SEO questions, answered straight" />
-          <FaqAccordion faqs={FAQS} />
-          <p className="mt-6 text-center">
-            <Link href="/faq" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
-              More questions <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </p>
+      {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
+      <section id="free-da-checker" className="bg-white px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <FreeDomainAuthorityChecker variant="home" />
         </div>
       </section>
 
