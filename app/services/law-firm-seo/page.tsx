@@ -10,7 +10,7 @@ const PAGE_URL = "https://www.searchprex.com/services/law-firm-seo";
 
 const SEO_TITLE = "Law Firm SEO Services USA | $1,200/Mo & 7-Day Free Trial";
 const SEO_DESCRIPTION =
-  "Law firm SEO services in the USA built for signed cases. Ranked #1 in Ohio for Law Firm SEO Cleveland Ohio. $1,200–$2,500/mo, 1 firm/city. 7-Day Free Trial.";
+  "Law firm SEO services in the USA built for signed cases. Ranked #1 for “law firm SEO Cleveland Ohio”. $1,200–$2,500/mo, 1 firm/city. 7-Day Free Trial.";
 
 const baseMetadata: Metadata = {
   title: {
@@ -268,7 +268,7 @@ export default function LawFirmSEOPage() {
         "@id": `${PAGE_URL}#relief-video`,
         name: "Why We Understand Your Pain: SearchPrex 9-Second Law Firm SEO Relief Briefing",
         description:
-          '9-second executive briefing on why US law firms suffer from $200+ PPC click burnout and bad agency retainers, and how SearchPrex delivers relief via #1 ranked Google authority in Ohio for "Law Firm SEO Cleveland Ohio", county court practice silos, and a 7-Day Free Trial.',
+          '9-second executive briefing on why US law firms suffer from $200+ PPC click burnout and bad agency retainers, and how SearchPrex delivers relief via a #1 Google ranking for "law firm SEO Cleveland Ohio", county court practice silos, and a 7-Day Free Trial.',
         thumbnailUrl: [
           "https://www.searchprex.com/images/services/law-firm/usa-law-firm-seo-hero-dashboard.webp",
           "https://www.searchprex.com/images/services/law-firm/law-firm-relief-from-ppc-burnout.webp",

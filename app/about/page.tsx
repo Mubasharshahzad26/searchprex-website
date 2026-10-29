@@ -9,8 +9,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.searchprex.com'
 const aboutUrl = `${siteUrl}/about`
  
 const baseMetadata: Metadata = {
-  title: 'About Us — Founder-Led USA SEO Agency | Niche-Focused Strategies',
-  description: 'Meet Mubashar Sharif, founder of SearchPrex. 5+ years of senior-led SEO for law firms, ecommerce, and local businesses. Founder-executed, algorithm-proof strategies. No juniors, no fluff.',
+  title: 'About SearchPrex | Founder-Led SEO, One Client per City',
+  description: 'Meet Mubashar Sharif, founder of SearchPrex: 5+ years of hands-on SEO for law firms, online stores and local businesses. No juniors, no handoffs.',
   keywords: [
     'SearchPrex founder',
     'SEO agency founder',

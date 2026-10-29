@@ -133,7 +133,7 @@ export const staticNewsSpokes: StaticNewsSpoke[] = [
     "subcategory": "Google AI Search",
     "title": "Google Makes AI Overview Links More Prominent: October 2026 Publisher Update",
     "metaTitle": "Google AI Overviews: October 2026 Link & News Changes",
-    "metaDescription": "Google says AI Overviews and AI Mode will show inline links higher more often, test a prominent official-sites section, and expand timely-news carousels. What publishers can and cannot infer.",
+    "metaDescription": "Google says AI Overviews and AI Mode will show inline links more often, test an official-sites section and expand news carousels. What it means.",
     "excerpt": "Google's October 15 update changes how people can discover sources in AI Mode and AI Overviews. It makes some links more visible, but does not promise citations, rankings, or extra traffic for any publisher.",
     "readTime": "6-minute read",
     "date": "2026-10-23",
@@ -444,8 +444,8 @@ export const staticNewsSpokes: StaticNewsSpoke[] = [
     "category": "SEO News — AI Search",
     "subcategory": "",
     "title": "Google Discover May Evolve Into a \"Proactive Concierge\" as \"Dive Deeper\" AI Feature Tests",
-    "metaTitle": "Google Discover \"Proactive Concierge\" Shift & \"Dive Deeper\" AI Test",
-    "metaDescription": "A Google job posting hints that Discover could transform from a passive feed into a proactive personal concierge, alongside live tests of a \"Dive deeper\" AI feature.",
+    "metaTitle": "Google Discover \"Proactive Concierge\" and \"Dive Deeper\" Test",
+    "metaDescription": "A Google job posting suggests Discover could become a proactive concierge, alongside a reported \"Dive deeper\" AI test. What is known so far.",
     "excerpt": "A new Google job listing suggests Google Discover is evolving from a passive content feed into a \"proactive concierge\" experience, coinciding with live tests of an AI-powered \"Dive deeper\" feature inside the Discover feed.",
     "readTime": "5-minute read",
     "date": "2026-10-15",
@@ -467,9 +467,9 @@ export const staticNewsSpokes: StaticNewsSpoke[] = [
     "canonicalUrl": "https://www.searchprex.com/resources/news/google-discover-proactive-concierge-dive-deeper-ai-test",
     "schemaType": "NewsArticle",
     "ogTitle": "Google Discover \"Proactive Concierge\" Shift & \"Dive Deeper\" AI Test",
-    "ogDescription": "A Google job posting hints that Discover could transform from a passive feed into a proactive personal concierge, alongside live tests of a \"Dive deeper\" AI feature.",
+    "ogDescription": "A Google job posting suggests Discover could become a proactive concierge, alongside a reported \"Dive deeper\" AI test. What is known so far.",
     "twitterTitle": "Google Discover \"Proactive Concierge\" Shift & \"Dive Deeper\" AI Test",
-    "twitterDescription": "A Google job posting hints that Discover could transform from a passive feed into a proactive personal concierge, alongside live tests of a \"Dive deeper\" AI feature."
+    "twitterDescription": "A Google job posting suggests Discover could become a proactive concierge, alongside a reported \"Dive deeper\" AI test. What is known so far."
   },
   {
     "slug": "google-business-profile-four-days-suggested-edits",

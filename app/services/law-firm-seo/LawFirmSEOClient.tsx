@@ -56,7 +56,7 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
       {/* 1. EMPATHETIC RELIEF TAGLINE BAR */}
       <ServiceTaglineReliefBar
         message="We are here to provide you a source of relief — we know your pain, and we have the solution."
-        subText='Ranked #1 on Google in Ohio for "Law Firm SEO Cleveland Ohio" · 5+ Years Experience · 7-Day Free Trial'
+        subText='Ranked #1 on Google for "law firm SEO Cleveland Ohio" · 5+ Years Experience · 7-Day Free Trial'
       />
 
       {/* PRACTICE-AREA QUICK NAVIGATION BAR (CLEAN MONOCHROME LIGHT THEME) */}
@@ -274,13 +274,13 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
       {/* 7. INTERACTIVE USA MAP EMBED + VISUAL WEBP CITY CARDS (DUPLICATE LINKS REMOVED) */}
       <ServiceUsaMapAndMarkets
         serviceName="Law Firm SEO Services"
-        answerCapsule='SearchPrex delivers one-firm-per-city Law Firm SEO across 9 core US states and 22+ pinpointed metropolitan and suburban venues—anchored by our #1 Google ranking in Ohio for "Law Firm SEO Cleveland Ohio", and expanding across Sugar Land and The Woodlands (TX), Detroit and Grand Rapids (MI), Philadelphia (PA), Tempe and Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas.'
+        answerCapsule='SearchPrex delivers one-firm-per-city Law Firm SEO across 9 core US states and 22+ pinpointed metropolitan and suburban venues—anchored by our #1 Google ranking for "law firm SEO Cleveland Ohio", and expanding across Sugar Land and The Woodlands (TX), Detroit and Grand Rapids (MI), Philadelphia (PA), Tempe and Scottsdale (AZ), San Jose (CA), Baton Rouge (LA), Albuquerque (NM), and Kansas.'
       />
 
       {/* 8. EXHAUSTED BY PREVIOUS SEO AGENCIES? + COMPARISON MATRIX */}
       <ServiceExhaustedByAgencies
         serviceLabel="USA Law Firm SEO"
-        answerCapsule='Managing partners leave traditional legal marketing agencies because of partial monthly PDFs, junior account hand-offs, and useless Domain Authority (DA/PA) backlink metrics. SearchPrex gives you direct access to Founder Mubashar Sharif (5+ years mastery), #1 ranked Google authority in Ohio for "Law Firm SEO Cleveland Ohio", weekly Monday consultation reports, and a 7-Day Free Trial.'
+        answerCapsule='Managing partners leave traditional legal marketing agencies because of partial monthly PDFs, junior account hand-offs, and useless Domain Authority (DA/PA) backlink metrics. SearchPrex gives you direct access to Founder Mubashar Sharif (5+ years of hands-on SEO, ranked #1 on Google for "law firm SEO Cleveland Ohio"), weekly Monday consultation reports, and a 7-Day Free Trial.'
         showLocationLink={true}
       />
 

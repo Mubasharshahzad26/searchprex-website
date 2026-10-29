@@ -24,9 +24,9 @@ export interface QA {
 const LOCAL_PLAN = RETAINER_PLANS.find((p) => p.niche === "Local SEO");
 
 export const META = {
-  title: "Google Business Profile Optimization Services | SearchPrex",
+  title: "Google Business Profile Optimization | From $800/mo",
   description:
-    "Google Business Profile optimization for US local businesses: categories, services, reviews, photos and suggested-edit monitoring — founder-led, month to month, 90-day guarantee.",
+    "Google Business Profile optimization for US local businesses: categories, services, reviews, photos and edit monitoring. Month to month, 90-day guarantee.",
   h1: "Google Business Profile Optimization Services",
   accent: "that turn Maps views into calls",
 };

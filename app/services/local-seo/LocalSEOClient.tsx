@@ -99,7 +99,7 @@ const process = [
 
 const expectations = [
   "The founder does the work — no junior account managers in between",
-  "#1 Ranked in Cleveland, Ohio USA Local SEO Mastery applied to your market",
+  "Founder-led local SEO applied to your market",
   "Limited-time 7-Day Free Trial + written plan before you pay anything",
   "Priorities ranked by what brings phone calls and booked jobs, not DA/PA vanity metrics",
   "A plain-English report every Monday · Month to month with 90-day guarantee",
@@ -175,7 +175,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
       {/* EMPATHETIC RELIEF TAGLINE BAR */}
       <ServiceTaglineReliefBar
         message="We are here to provide you a source of relief — we know your pain, and we have the solution."
-        subText="#1 Ranked in Cleveland, OH USA Local SEO Mastery · Verified Map Pack & AI Overview Proof · 7-Day Free Trial"
+        subText="Verified Map Pack & AI Overview Proof · 7-Day Free Trial · 90-Day Guarantee"
       />
 
       <ServiceHero
@@ -183,10 +183,10 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         eyebrow="USA Local SEO · Google Map Pack & AI Overviews"
         title="Local SEO Services in the USA"
         accent="that make your phone ring"
-        subtitle="We are here to provide you a source of relief — we know your pain, and we have the solution. Your US customers search “near me” and call whoever is in the Top 3. Backed by #1 ranked Local SEO mastery in Cleveland, Ohio and verified Michigan, Texas, and California case studies, I get local businesses into the Google Maps pack and cited first in AI Overviews."
+        subtitle="We are here to provide you a source of relief — we know your pain, and we have the solution. Your US customers search “near me” and call whoever is in the Top 3. Backed by verified Michigan, Texas, and California case studies, I get local businesses into the Google Maps pack and cited first in AI Overviews."
         primary={{ href: "#7-day-trial", label: "Start 7-Day Free Trial" }}
         secondary={{ href: "#diagnose", label: "Diagnose My Local SEO" }}
-        trustPoints={["#1 Cleveland OH Mastery", "7-Day Free Trial + 90-day guarantee", "Month to month"]}
+        trustPoints={["Founder-led, no juniors", "7-Day Free Trial + 90-day guarantee", "Month to month"]}
         aside={
           <ArticleLeadMagnet
             variant="sidebar"
@@ -244,7 +244,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         answerCapsule="Local SEO in the United States aligns your Google Business Profile primary category, service-area suburb pages, NAP directory citations, genuine customer review velocity, and LocalBusiness JSON-LD schema—driving inbound phone calls and direction requests from both the Google Maps 3-Pack and AI Overviews."
         contextParagraph={
           <>
-            SearchPrex holds <strong className="text-neutral-950">#1 ranked local search mastery in Cleveland, Ohio (USA)</strong> and has taken US service businesses into both the #1 organic slot and Google&rsquo;s AI Overviews—including{" "}
+            SearchPrex has taken US service businesses into both the #1 organic slot and Google&rsquo;s AI Overviews—including{" "}
             <Link href="/case-studies/cleaning/dolls-cleaning" className="font-bold text-neutral-950 underline">
               D.O.L.L.S. Cleaning in Michigan
             </Link>{" "}
@@ -261,8 +261,8 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         }
         bullets={[
           {
-            label: "#1 USA Local Mastery",
-            detail: "#1 Ranked Local SEO Mastery in Cleveland, Ohio (USA) + 5+ years founder execution.",
+            label: "Founder-led execution",
+            detail: "5+ years of hands-on local SEO by the founder, Semrush & HubSpot certified.",
           },
           {
             label: "Verified AI Overview Proof",
@@ -346,7 +346,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         trialDeliverablesRight={[
           "45–60 word AI Overview Answer Capsule written for your primary service page",
           "Suburb & service-area keyword gap roadmap for your surrounding US cities",
-          "Direct 1-on-1 strategy session with Founder Mubashar Sharif (#1 Cleveland OH Mastery)",
+          "Direct 1-on-1 strategy session with Founder Mubashar Sharif",
           "Full Monday Search Console & local rank baseline report — yours to keep",
         ]}
       />
@@ -381,7 +381,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
       {/* EXHAUSTED BY PREVIOUS SEO AGENCIES? SEE HOW WE ARE DIFFERENT */}
       <ServiceExhaustedByAgencies
         serviceLabel="USA Local SEO"
-        answerCapsule="Local business owners leave traditional SEO agencies because of automated citation software, partial monthly PDFs that hide call counts, and useless Domain Authority (DA/PA) backlink metrics. SearchPrex gives you direct access to Founder Mubashar Sharif (#1 ranked in Cleveland, Ohio USA Local SEO Mastery), weekly Monday call and Map Pack reports, and a 7-Day Free Trial."
+        answerCapsule="Local business owners leave traditional SEO agencies because of automated citation software, partial monthly PDFs that hide call counts, and useless Domain Authority (DA/PA) backlink metrics. SearchPrex gives you direct access to Founder Mubashar Sharif (5+ years of hands-on SEO), weekly Monday call and Map Pack reports, and a 7-Day Free Trial."
       />
 
       {/* THE PROBLEM */}
@@ -477,7 +477,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
               {
                 label: "Verified SearchPrex proof",
                 values: [
-                  "#1 Ranked in Cleveland, OH Local SEO Mastery + D.O.L.L.S. Cleaning local pack growth",
+                  "D.O.L.L.S. Cleaning local pack growth (#1 and #2 in Clawson, MI)",
                   "D.O.L.L.S. Cleaning (MI) & HVAC Services Team (Simi Valley, CA) cited in AI Overviews",
                   "#1 & #2 organic positions in Clawson, MI + 16.9K → 45.2K impressions on Mammoth Roofing (TX)",
                 ],
@@ -653,7 +653,7 @@ export default function LocalSEOClient({ guide: _guide }: { guide: Guide }) {
         <div className="mx-auto mt-14 max-w-4xl">
           <AuthorCard
             name="Mubashar Sharif"
-            role="Founder · 5+ years · #1 Ranked Cleveland OH Local SEO Mastery · Semrush & HubSpot certified"
+            role="Founder · 5+ years · Semrush & HubSpot certified"
             quote="&ldquo;Local SEO is won on real signals — accurate business details, genuine reviews, pages that actually help your neighbours. I&rsquo;ve had US local businesses named in Google&rsquo;s AI Overviews and reach #1 in local results. When you work with SearchPrex, you work with me.&rdquo;"
             imageSrc="/images/mubashar-sharif.jpg"
             imageAlt="Mubashar Sharif — Founder of SearchPrex"

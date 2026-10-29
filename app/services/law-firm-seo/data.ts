@@ -26,7 +26,7 @@ export const CAPSULES: QA[] = [
   },
   {
     q: "Do you have law firm case studies, and how does the 7-Day Free Trial work?",
-    a: 'SearchPrex has not completed a law firm engagement yet, so we publish no legal-specific client results. Instead, we show our verified work from other industries—including being ranked #1 on Google in Ohio for "Law Firm SEO Cleveland Ohio", D.O.L.L.S. Cleaning (#1 organic and #1 AI Overview citation in Michigan), and Michigan Sports & Outdoor (3,000 to 11,549 indexed pages)—and offer law firms a limited-time 7-Day Free Trial with direct founder execution.',
+    a: 'SearchPrex has not completed a law firm engagement yet, so we publish no legal-specific client results. Instead, we show our verified work from other industries—including being ranked #1 on Google for "law firm SEO Cleveland Ohio", D.O.L.L.S. Cleaning (#1 organic and #1 AI Overview citation in Michigan), and Michigan Sports & Outdoor (3,000 to 11,549 indexed pages)—and offer law firms a limited-time 7-Day Free Trial with direct founder execution.',
   },
 ];
 
@@ -45,7 +45,7 @@ export const FAQS: QA[] = [
   },
   {
     q: "Why are law firms exhausted by traditional legal marketing agencies?",
-    a: "Most legal agencies lock firms into 12-month contracts, hand accounts to junior coordinators, hide declining metrics behind partial monthly PDFs, or sell meaningless Domain Authority (DA/PA) backlink packages. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years SEO mastery), receive full weekly Monday reports on Search Console clicks, Map Pack calls, and signed-case leads, and get one-firm-per-city exclusivity.",
+    a: "Most legal agencies lock firms into 12-month contracts, hand accounts to junior coordinators, hide declining metrics behind partial monthly PDFs, or sell meaningless Domain Authority (DA/PA) backlink packages. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years of hands-on SEO), receive full weekly Monday reports on Search Console clicks, Map Pack calls, and signed-case leads, and get one-firm-per-city exclusivity.",
   },
   {
     q: "What are your USA working hours and how do weekly consultations work?",

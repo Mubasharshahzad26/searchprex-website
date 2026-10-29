@@ -41,13 +41,13 @@ const VIDEO_SCENES: VideoScene[] = [
     startSec: 3,
     endSec: 6,
     badge: "Your Source of Relief",
-    headline: "Ranked #1 on Google in Ohio for \"Law Firm SEO Cleveland Ohio\"",
+    headline: "Ranked #1 on Google for \"law firm SEO Cleveland Ohio\"",
     subline:
       "We build ABA Rule 7.1-compliant practice & suburb silos across Cleveland (OH), Sugar Land & The Woodlands (TX), Detroit (MI), Philadelphia (PA), and major US metros.",
     imageSrc: "/images/services/law-firm/usa-served-cities-cleveland-sugarland-woodlands.webp",
     imageAlt: "Cleveland Ohio, Sugar Land Texas, and The Woodlands Texas legal markets",
     statLabel: "Verified Google Authority",
-    statValue: "Ranked #1 in Ohio",
+    statValue: "Ranked #1 on Google",
   },
   {
     id: 2,

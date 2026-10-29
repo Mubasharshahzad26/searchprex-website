@@ -595,7 +595,7 @@ export default function TechnicalSEOClient() {
         <div className="mx-auto mt-14 max-w-4xl">
           <AuthorCard
             name="Mubashar Sharif"
-            role="Founder · 5+ years · #1 Ranked Cleveland OH Local SEO Mastery · Semrush & HubSpot certified"
+            role="Founder · 5+ years · Semrush & HubSpot certified"
             quote="&ldquo;Technical SEO is where I&rsquo;ve done my deepest work. I took Michigan Sports &amp; Outdoor to a +476% clicks peak in March 2026, watched it de-index, and rebuilt it to 11,549 indexed pages and +83% US clicks — every step verified in Search Console.&rdquo;"
             imageSrc="/images/mubashar-sharif.jpg"
             imageAlt="Mubashar Sharif — Founder of SearchPrex"

@@ -54,7 +54,7 @@ export default function ChatWithFounderWidget() {
             </p>
             <div className="mt-2.5 rounded-lg bg-slate-50 border border-slate-200 p-2 text-[11px] font-bold text-neutral-900 flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-neutral-950 shrink-0" />
-              <span>Ranked #1 on Google in Ohio for &ldquo;Law Firm SEO Cleveland Ohio&rdquo;</span>
+              <span>Ranked #1 on Google for &ldquo;law firm SEO Cleveland Ohio&rdquo;</span>
             </div>
           </div>
 

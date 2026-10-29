@@ -21,9 +21,9 @@ export interface QA {
 }
 
 export const META = {
-  title: "Indexing Recovery: Fix Pages Not Indexed by Google | SearchPrex",
+  title: "Pages Not Indexed? Indexing Recovery | Free 24h Review",
   description:
-    "Pages stuck in “Crawled – currently not indexed” or “Discovered – currently not indexed”? I find why Google won’t index them and fix the cause — no indexer tricks. Free 24-hour tear-down.",
+    "Pages stuck in “Crawled” or “Discovered – currently not indexed”? I find why Google won’t index them and fix the cause. Free 24-hour tear-down.",
   h1: "Indexing Recovery Services",
   accent: "for pages Google won’t index",
 };

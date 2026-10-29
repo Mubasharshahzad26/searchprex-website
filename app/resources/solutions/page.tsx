@@ -7,9 +7,9 @@ const SITE = 'https://www.searchprex.com'
 const PAGE_URL = `${SITE}/resources/solutions`
 
 export const metadata: Metadata = {
-  title: 'SEO Issues & Solutions Library: Technical, Law Firm, Ecommerce, Shopify & WordPress Fixes',
+  title: 'SEO Issues & Solutions Library: Step-by-Step Fixes',
   description:
-    'SearchPrex SEO Troubleshooting & Solutions Database: Step-by-step root-cause analysis, code snippets, and verified fixes for Core SEO, Law Firm GBP suspensions, Ecommerce indexing, Shopify duplicate URLs, and WordPress Core Web Vitals.',
+    'Step-by-step fixes for common SEO problems: Business Profile suspensions, ecommerce indexing, Shopify duplicate URLs and WordPress Core Web Vitals.',
   alternates: {
     canonical: PAGE_URL,
   },

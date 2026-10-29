@@ -15,9 +15,9 @@ import { getPageSEO } from "@/lib/admin-seo";
 const SITE = "https://www.searchprex.com";
  
 const baseMetadata: Metadata = {
-  title: "SEO Blog — Technical, Ecommerce & Local SEO Guides",
+  title: "SEO Blog: Technical, Ecommerce & Local SEO Guides",
   description:
-    "Founder-written SEO guides on technical SEO, e-commerce SEO, local SEO and content strategy — crawl budget, indexing recovery, Core Web Vitals, AI Overviews and more. Built for practitioners.",
+    "Founder-written guides on technical, ecommerce and local SEO: indexing, crawl budget, Core Web Vitals, Business Profiles and AI Overviews.",
   alternates: { canonical: `${SITE}/blog` },
   openGraph: {
     title: "SEO Blog — Technical, Ecommerce & Local SEO Guides | SearchPrex",

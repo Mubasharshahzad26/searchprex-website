@@ -112,7 +112,7 @@ const SERVICES: PracticeCard[] = [
       "Primary GBP category alignment mapped to highest-value caseload",
       "State Bar, Avvo, Justia & courthouse citation reconciliation",
     ],
-    sampleCity: { label: "Cleveland, OH (#1 in Ohio)", href: "/locations/ohio/cleveland" },
+    sampleCity: { label: "Cleveland, OH", href: "/locations/ohio/cleveland" },
   },
 ];
 

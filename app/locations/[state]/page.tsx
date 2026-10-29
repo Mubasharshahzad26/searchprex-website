@@ -33,6 +33,7 @@ import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import WhySearchPrex from "@/components/WhySearchPrex";
 import { getStateHub, type StateHub } from "@/lib/state-hubs";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
+import { keepBrandedTitle } from "@/lib/seo-title";
 
 export function generateStaticParams() {
   return getDynamicStateHubSlugs().map((state) => ({ state }));
@@ -60,7 +61,7 @@ export async function generateMetadata({
     hub?.metaDescription ??
     `Law firm SEO for ${state.name} attorneys in ${joinNames(names)}: practice-area demand, local ranking signals and ${state.name} law, city by city.`;
   return {
-    title,
+    title: keepBrandedTitle(title),
     description,
     robots: { index: true, follow: true },
     alternates: { canonical: url },

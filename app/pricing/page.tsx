@@ -30,7 +30,7 @@ const DESCRIPTION = `SEO retainers: ${RETAINER_PLANS.map(
 ).join(", ")}. Month to month, no long-term contract, 90-day money-back guarantee.`;
 
 const baseMetadata: Metadata = {
-  title: "SEO Pricing Plans — USA SEO Agency",
+  title: "SEO Pricing: $800–$4,000/mo, Month to Month, No Lock-In",
   description: DESCRIPTION,
   alternates: {
     canonical: "https://www.searchprex.com/pricing",

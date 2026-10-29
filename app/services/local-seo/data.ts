@@ -19,7 +19,7 @@ export const CAPSULES: QA[] = [
   },
   {
     q: "What results have SearchPrex local SEO clients seen?",
-    a: "SearchPrex holds #1 ranked local SEO authority in Cleveland, Ohio (USA). On client accounts, D.O.L.L.S. Cleaning in Michigan rose from 192 to 264 monthly clicks and 41K to 106K impressions in Search Console, holds #1 and #2 for carpet cleaning in Clawson, and is cited first in Google's AI Overview in Chesterfield. HVAC Services Team in Simi Valley, CA is cited in Google's AI Overview, and Mammoth Roofing in Texas grew from 16.9K to 45.2K impressions.",
+    a: "On client accounts, D.O.L.L.S. Cleaning in Michigan rose from 192 to 264 monthly clicks and 41K to 106K impressions in Search Console, holds #1 and #2 for carpet cleaning in Clawson, and is cited first in Google's AI Overview in Chesterfield. HVAC Services Team in Simi Valley, CA is cited in Google's AI Overview, and Mammoth Roofing in Texas grew from 16.9K to 45.2K impressions.",
   },
   {
     q: "Why did my Google Maps ranking suddenly drop or get suspended?",
@@ -38,7 +38,7 @@ export const FAQS: QA[] = [
   },
   {
     q: "Why are local business owners exhausted by previous SEO agencies?",
-    a: "Most local agencies sell automated directory packages, send partial monthly PDFs hiding call volume, and hand your Business Profile to a junior coordinator who never checks competitor categories. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years mastery, #1 ranked Cleveland OH local SEO authority), get weekly Monday reports on Map Pack positions and phone calls, and can test our work with a 7-Day Free Trial.",
+    a: "Most local agencies sell automated directory packages, send partial monthly PDFs hiding call volume, and hand your Business Profile to a junior coordinator who never checks competitor categories. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years of hands-on SEO), get weekly Monday reports on Map Pack positions and phone calls, and can test our work with a 7-Day Free Trial.",
   },
   {
     q: "What happens if a competitor or customer suggests a wrong edit to my Google Business Profile?",

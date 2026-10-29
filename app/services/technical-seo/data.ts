@@ -36,7 +36,7 @@ export const FAQS: QA[] = [
   },
   {
     q: "Why are engineering and marketing teams exhausted by traditional SEO agencies?",
-    a: "Most agencies hand you a 100-page automated Screaming Frog PDF full of minor warnings, sell useless Domain Authority (DA/PA) backlink metrics, and never ship a single template fix. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years mastery, #1 ranked Cleveland OH local SEO authority), get template-level implementation or developer-ready tickets, and can test our work with a 7-Day Free Trial.",
+    a: "Most agencies hand you a 100-page automated Screaming Frog PDF full of minor warnings, sell useless Domain Authority (DA/PA) backlink metrics, and never ship a single template fix. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years of hands-on SEO), get template-level implementation or developer-ready tickets, and can test our work with a 7-Day Free Trial.",
   },
   {
     q: "My site has 10,000+ pages — can you handle large-scale indexing recovery?",

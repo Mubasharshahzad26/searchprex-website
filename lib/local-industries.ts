@@ -47,7 +47,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "HVAC",
     h1: "HVAC SEO Services",
     accent: "for the calls that come in a heatwave",
-    metaTitle: "HVAC SEO Services | Map Pack for HVAC Companies",
+    metaTitle: "HVAC SEO Services | From $800/mo, 7-Day Free Trial",
     metaDescription:
       "SEO for HVAC companies: Business Profile, service-area pages and AI Overviews. One HVAC client is named in Google's AI Overview for AC installation.",
     heroSub:
@@ -123,7 +123,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Roofing",
     h1: "Roofing SEO Services",
     accent: "for jobs worth thousands",
-    metaTitle: "Roofing SEO Company | Roof Repair & Replacement",
+    metaTitle: "Roofing SEO Company | From $800/mo, 7-Day Free Trial",
     metaDescription:
       "Roofing SEO for contractors: service pages, Business Profile and statewide reach. Mammoth Roofing ranks seventh for residential roof repair in Texas.",
     heroSub:
@@ -197,7 +197,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Cleaning",
     h1: "SEO for Cleaning Companies",
     accent: "named first in AI Overviews",
-    metaTitle: "SEO for Cleaning Companies & Cleaning Services",
+    metaTitle: "SEO for Cleaning Companies | From $800/mo, Free Trial",
     metaDescription:
       "SEO for residential, commercial and specialist cleaning companies. D.O.L.L.S. Cleaning is named first in Google's AI Overview and ranks #1 below it.",
     heroSub:
@@ -273,7 +273,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Home Services",
     h1: "SEO for Home Service Businesses",
     accent: "where the call comes from the profile",
-    metaTitle: "Home Services SEO | Garage Door & Door Repair",
+    metaTitle: "Home Services SEO | From $800/mo, 7-Day Free Trial",
     metaDescription:
       "Local SEO for garage door and home service businesses. Door Doctor's profiles logged 490 Business Profile interactions in two months.",
     heroSub:
@@ -347,7 +347,7 @@ export const LOCAL_INDUSTRIES: LocalIndustry[] = [
     name: "Remodeling",
     h1: "SEO for Remodeling Contractors",
     accent: "for kitchen and bath projects",
-    metaTitle: "SEO for Remodeling Contractors | Kitchen & Bath",
+    metaTitle: "SEO for Remodeling Contractors | From $800/mo, Free Trial",
     metaDescription:
       "SEO for remodeling contractors: kitchen and bath project pages, honest cost answers and local rankings. A cabinets client reached top-10 rankings.",
     heroSub:

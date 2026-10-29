@@ -238,7 +238,7 @@ export async function POST(req: Request) {
         "local-seo": "US Local SEO & Google Business Profile Optimization (Map Pack Top 3, Multi-City Service-Area Suburb Pages, GBP Suspension Recovery, Local AI Overviews across TX, OH, MI, PA, AZ, CA, LA, NM, KS)",
         "technical-seo": "Technical SEO Audit & Template-Level Engineering (GSC Crawled/Discovered Not Indexed Recovery, Core Web Vitals INP/LCP/CLS, Crawl Budget, JSON-LD Schema Graphs & llms.txt for AI Crawlers)",
       };
-      const svcPrompt = `You are Mubashar Sharif, CEO & Founder of SearchPrex (5+ years hands-on SEO mastery, #1 ranked in Cleveland, Ohio USA Local SEO mastery).
+      const svcPrompt = `You are Mubashar Sharif, CEO & Founder of SearchPrex (5+ years of hands-on SEO).
 A US business owner or managing partner on our ${serviceLabels[st]} page submitted this diagnostic request:
 User Problem Description: "${query || 'Needs predictable leads, rankings, and AI search citations without vanity metrics'}"
 Selected Issue Chips: ${selectedChips.length > 0 ? selectedChips.join(', ') : 'None specified'}

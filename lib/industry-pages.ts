@@ -64,7 +64,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Personal Injury",
     slug: "personal-injury",
-    metaTitle: "Personal Injury Law Firm SEO | Map Pack & Cases",
+    metaTitle: "Personal Injury Law Firm SEO | $1,200/mo, 7-Day Free Trial",
     metaDescription:
       "SEO for personal injury law firms: injury-type pages, Business Profile work, a mobile path built for 2am and results within bar rules. No ranking promises.",
     h1: "Personal Injury Law Firm SEO",
@@ -129,7 +129,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Family Law",
     slug: "family-law",
-    metaTitle: "Divorce & Family Law Attorney SEO Services",
+    metaTitle: "Family Law Attorney SEO | $1,200/mo, 7-Day Free Trial",
     metaDescription:
       "Divorce and family law attorney SEO: custody, divorce and support pages by county, answers for AI Overviews, privacy-aware marketing. No ranking promises.",
     h1: "Family Law & Divorce SEO",
@@ -206,7 +206,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Criminal Defense",
     slug: "criminal-defense",
-    metaTitle: "Criminal Defense Lawyer SEO | Charge Pages",
+    metaTitle: "Criminal Defense Lawyer SEO | $1,200/mo, 7-Day Free Trial",
     metaDescription:
       "Criminal defense lawyer SEO: charge-specific pages, content for the family member searching, expungement and fast mobile pages. No ranking promises.",
     h1: "Criminal Defense SEO",
@@ -271,7 +271,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Estate Planning",
     slug: "estate-planning",
-    metaTitle: "Estate Planning & Probate Attorney SEO",
+    metaTitle: "Estate Planning Attorney SEO | $1,200/mo, 7-Day Free Trial",
     metaDescription:
       "SEO for estate planning and probate attorneys: county probate pages, content for business owners and adult children, plain answers. No ranking promises.",
     h1: "Estate Planning & Probate SEO",
@@ -340,9 +340,9 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
   {
     name: "Mass Torts",
     slug: "mass-torts",
-    metaTitle: "SEO for Mass Tort Lawyers | Docket-Ready Acquisition",
+    metaTitle: "SEO for Mass Tort Lawyers | $1,200/mo & 7-Day Free Trial",
     metaDescription:
-      "SEO for mass tort lawyers and litigation firms: symptom-to-claim search paths, MDL docket content ready on day one, and AI Overview citations. No ranking promises.",
+      "SEO for mass tort lawyers: symptom-to-claim search paths, docket content ready on day one, and AI Overview visibility. No ranking promises.",
     h1: "SEO for Mass Tort Lawyers",
     accent: "for the first weeks of a docket",
     heroSub:

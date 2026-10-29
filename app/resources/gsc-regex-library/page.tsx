@@ -23,9 +23,9 @@ import { GSC_REGEX_PATTERNS } from "@/lib/gsc-regex-data";
 import GscRegexClient from "./GscRegexClient";
 
 const PAGE_URL = `${SITE}/resources/gsc-regex-library`;
-const TITLE = "Google Search Console Regex Library & Custom Filter Builder (2026)";
+const TITLE = "Search Console Regex Library & Filter Builder (2026)";
 const DESCRIPTION =
-  "25+ copy-paste RE2 regular expressions for Google Search Console: filter AI Overview conversational queries, non-branded traffic, law firm case intent, ecommerce SKUs, and indexing bloat.";
+  "25+ copy-paste regex filters for Search Console: AI-style queries, non-branded traffic, law firm intent, ecommerce SKUs and index bloat.";
 
 const FAQS = [
   {

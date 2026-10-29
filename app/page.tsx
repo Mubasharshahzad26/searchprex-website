@@ -52,9 +52,9 @@ import PillForm from "@/components/home/PillForm";
 
 // Title, H1 (in HeroV2) and description name the same three verticals with
 // "SEO agency", plus GEO and technical search hooks.
-const HOME_TITLE = "US SEO & AI Search Agency — Technical, Law Firm & Ecommerce SEO | SearchPrex";
+const HOME_TITLE = "US SEO Agency | Free Audit in 24h, 90-Day Money-Back";
 const HOME_DESCRIPTION =
-  "Revenue-driven technical SEO, local Map Pack growth, and AI search optimization (GEO) for US law firms, ecommerce stores and multi-location brands. Founder-led, one client per city.";
+  "Technical, local and AI search SEO for US law firms, local businesses and online stores. Free audit in 24 hours, month to month, one client per city.";
 
 const baseMetadata: Metadata = {
   title: HOME_TITLE,

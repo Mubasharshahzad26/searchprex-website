@@ -11,8 +11,8 @@ import { founderRef } from "@/lib/site-schema";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
 const pageUrl = `${siteUrl}/resources/law-firm-seo-audit-checklist`;
 
-const TITLE = `The ${TOTAL_CHECKS}-Point Law Firm SEO Audit Checklist (Free, No Email)`;
-const DESCRIPTION = `The ${TOTAL_CHECKS} checks I run on a law firm's site across Map Pack, organic, AI visibility, legal E-E-A-T and practice-area content. Free, ungated, and written so you can run it yourself.`;
+const TITLE = `${TOTAL_CHECKS}-Point Law Firm SEO Audit Checklist (Free)`;
+const DESCRIPTION = `The ${TOTAL_CHECKS} checks I run on a law firm site across Map Pack, organic, AI visibility, E-E-A-T and practice pages. Free, ungated, run it yourself.`;
 
 const baseMetadata: Metadata = {
   // No " | SearchPrex" suffix here — the root layout already applies the

@@ -644,7 +644,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
         <div className="mx-auto mt-14 max-w-4xl">
           <AuthorCard
             name="Mubashar Sharif"
-            role="Founder · 5+ years · #1 Ranked Cleveland OH Local SEO Mastery · Semrush & HubSpot certified"
+            role="Founder · 5+ years · Semrush & HubSpot certified"
             quote="Full-stack ecommerce SEO — technical SEO, on-page optimization, content strategy, structured data, and indexing recovery at scale. Both published case studies are WooCommerce stores, one with more than 35,000 products."
             imageSrc="/images/mubashar-sharif.jpg"
             imageAlt="Mubashar Sharif — Founder of SearchPrex"

@@ -39,7 +39,7 @@ export const FAQS: QA[] = [
   },
   {
     q: "Why are ecommerce brands exhausted by previous SEO agencies?",
-    a: "Most ecommerce agencies sell useless Domain Authority (DA/PA) backlink packages, send partial monthly PDFs that hide unindexed SKU counts, and hand your store to a junior account manager who never touches Liquid or PHP templates. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years SEO mastery, #1 ranked Cleveland OH local SEO authority), get weekly Monday Search Console and WooCommerce/Shopify revenue reviews, and can test us with a 7-Day Free Trial.",
+    a: "Most ecommerce agencies sell useless Domain Authority (DA/PA) backlink packages, send partial monthly PDFs that hide unindexed SKU counts, and hand your store to a junior account manager who never touches Liquid or PHP templates. At SearchPrex, you work directly with Founder Mubashar Sharif (5+ years of hands-on SEO), get weekly Monday Search Console and WooCommerce/Shopify revenue reviews, and can test us with a 7-Day Free Trial.",
   },
   {
     q: "How long before our US store sees indexing and organic revenue movement?",

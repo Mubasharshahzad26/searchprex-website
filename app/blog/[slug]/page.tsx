@@ -16,6 +16,7 @@ import { posts as hardcodedPosts } from "./posts";
 import PostClient from "./PostClient";
 import { db } from "@/lib/db";
 import { FOUNDER_ID, ORGANIZATION_ID } from "@/lib/site-schema";
+import { stripBrand } from "@/lib/seo-title";
 
 // CMS posts render on demand and were then cached until the next deploy, so
 // unpublishing a row left it live (an autopilot test article stayed up this
@@ -129,7 +130,7 @@ export async function generateMetadata({
   const twDesc = post.twitterDescription || ogDesc;
 
   return {
-    title: post.metaTitle,
+    title: stripBrand(post.metaTitle),
     description: post.metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],

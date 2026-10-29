@@ -6,7 +6,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.searchprex.com'
 const resourcesUrl = `${siteUrl}/resources`
  
 const baseMetadata: Metadata = {
-  title: 'SEO Resources & Guides — White Papers, Research, News | SearchPrex',
+  title: 'SEO Resources: Guides, Original Research & News',
   description: 'Free SEO resources from SearchPrex: white papers, original research, real-world learnings, and curated industry news. Founded on real client work, not generic theory.',
   keywords: [
     'SEO resources',
@@ -35,7 +35,7 @@ const baseMetadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'SEO Resources & Guides — White Papers, Research, News | SearchPrex',
+    title: 'SEO Resources: Guides, Original Research & News',
     description: 'Free SEO resources: white papers, original research, real-world learnings, and curated industry news from SearchPrex.',
     url: resourcesUrl,
     siteName: 'SearchPrex',

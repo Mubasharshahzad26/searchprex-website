@@ -43,7 +43,7 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     name: "WooCommerce",
     h1: "WooCommerce SEO Services",
     accent: "with two stores to show for it",
-    metaTitle: "WooCommerce SEO Expert | Indexing, Copy, Speed",
+    metaTitle: "WooCommerce SEO Expert | From $1,500/mo, Free Store Audit",
     metaDescription:
       "WooCommerce SEO for large catalogues: filter URLs, thin product copy, indexing and speed. SMK Store grew monthly sales from $5,832 to $19,100.",
     heroSub:
@@ -117,7 +117,7 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     name: "Shopify",
     h1: "Shopify SEO Services",
     accent: "with a straight answer up front",
-    metaTitle: "Shopify SEO Services USA | Collections & Speed",
+    metaTitle: "Shopify SEO Services | From $1,500/mo, Free Store Audit",
     metaDescription:
       "Shopify SEO services for US stores: duplicate collection URLs, app scripts, tag pages and thin product copy — with a plain answer on our Shopify record.",
     heroSub:
@@ -193,7 +193,7 @@ export const ECOMMERCE_INDUSTRIES: EcommerceIndustry[] = [
     name: "Knife & Outdoor Stores",
     h1: "SEO for Knife & Outdoor Stores",
     accent: "from someone who has done it twice",
-    metaTitle: "SEO for Knife & Outdoor Stores | Brand Pages",
+    metaTitle: "SEO for Knife & Outdoor Stores | From $1,500/mo",
     metaDescription:
       "SEO for knife, tactical and outdoor gear stores. Both SearchPrex ecommerce case studies are in this niche — one grew monthly sales from $5,832 to $19,100.",
     heroSub:

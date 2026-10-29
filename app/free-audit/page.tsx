@@ -13,9 +13,9 @@ const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/free-audit`;
 
 const baseMetadata: Metadata = {
-  title: "Free SEO Audit — Reviewed by the Founder in 24 Hours",
+  title: "Free SEO Audit by the Founder | Your Report in 24 Hours",
   description:
-    "Get a free SEO audit for your law firm, ecommerce store, or local business. The founder personally reviews your site and sends a 90-day roadmap within 24 hours. No contracts.",
+    "Free SEO audit for law firms, online stores and local businesses. The founder reviews your site personally and sends what to fix within 24 hours.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Free SEO Audit — Reviewed by the Founder in 24 Hours | SearchPrex",

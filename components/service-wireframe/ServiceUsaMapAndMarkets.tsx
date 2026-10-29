@@ -38,7 +38,7 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     searchIntentFocus:
       "High-intent commercial, local Map Pack Top 3, and AI Overview / ChatGPT citation dominance tailored to state statutes and suburban search behavior.",
     submarkets: [
-      { name: "Cleveland, OH (#1 Ranked in Ohio)", href: "/locations/ohio/cleveland" },
+      { name: "Cleveland, OH", href: "/locations/ohio/cleveland" },
       { name: "Sugar Land, TX", href: "/locations/texas/sugar-land" },
       { name: "The Woodlands, TX", href: "/locations/texas/the-woodlands" },
       { name: "Katy, TX", href: "/locations/texas/katy" },
@@ -62,7 +62,7 @@ export const USA_SERVED_MARKETS: UsaMarketPin[] = [
     state: "Ohio",
     stateAbbr: "OH",
     county: "Cuyahoga County",
-    badge: "Ranked #1 on Google in Ohio",
+    badge: "#1 for Cleveland law firm SEO",
     href: "/locations/ohio/cleveland",
     mapQuery: "Cuyahoga+County+Justice+Center+Cleveland+OH",
     demographics: "1.23M+ Cuyahoga County residents · High industrial, medical & suburban search density",
@@ -291,7 +291,7 @@ export default function ServiceUsaMapAndMarkets({
               num: "01",
               pinId: "cleveland-oh",
               city: "Cleveland, Ohio",
-              badge: "Ranked #1 on Google in Ohio",
+              badge: "#1 for Cleveland law firm SEO",
               courts: "Cuyahoga County Court of Common Pleas & Ohio BWC",
               focus:
                 "Personal Injury, Ohio BWC Workers' Comp, OVI & Family Law across Lakewood, Parma & Beachwood.",

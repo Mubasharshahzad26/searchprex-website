@@ -29,9 +29,9 @@ export interface QA {
 const LAW_PLAN = RETAINER_PLANS.find((p) => p.niche === "Law Firm SEO");
 
 export const META = {
-  title: "Google Business Profile Optimization for Law Firms | SearchPrex",
+  title: "Google Business Profile for Law Firms | From $1,200/mo",
   description:
-    "Google Business Profile optimization for US law firms: practice-area categories, attorney listings, reviews inside bar ethics rules, and protection from suspensions and spam competitors. Founder-led.",
+    "Google Business Profile optimization for US law firms: practice categories, attorney listings, reviews within bar rules and suspension protection.",
   h1: "Google Business Profile for Lawyers",
   accent: "built for the map pack and the bar rules",
 };

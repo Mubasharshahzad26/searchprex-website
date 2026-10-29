@@ -7,9 +7,9 @@ const SITE = 'https://www.searchprex.com'
 const PAGE_URL = `${SITE}/resources/discussions`
 
 export const metadata: Metadata = {
-  title: 'SEO, Law Firm, Ecommerce & US Local Discussion Forum',
+  title: 'SEO Discussion Forum: Law Firm, Ecommerce & Local',
   description:
-    'Join the SearchPrex SEO & Digital Growth Discussion Hub. Open engineering topics, algorithm volatility analysis, Law Firm SEO Q&A, Shopify & WordPress technical threads, and US market insights (New York, Texas, California, Dallas, Orlando, Arizona).',
+    'SearchPrex discussion forum: SEO, law firm, ecommerce, Shopify and WordPress questions, Google update threads and US local search.',
   alternates: {
     canonical: PAGE_URL,
   },

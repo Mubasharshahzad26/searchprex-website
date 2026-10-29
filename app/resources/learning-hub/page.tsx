@@ -7,9 +7,9 @@ const SITE = 'https://www.searchprex.com'
 const PAGE_URL = `${SITE}/resources/learning-hub`
 
 export const metadata: Metadata = {
-  title: 'SEO Learning Hub: Core SEO, Law Firm, Ecommerce, Shopify & WordPress Playbooks',
+  title: 'SEO Learning Hub: Free Playbooks & Checklists',
   description:
-    'Master modern search engineering with SearchPrex Academy & Learning Hub. Interactive SEO playbooks, checklists, and technical blueprints for Core SEO, Law Firms, Ecommerce Stores, Shopify, and WordPress.',
+    'Free SEO playbooks, checklists and technical guides for core SEO, law firms, ecommerce, Shopify and WordPress, written from real client work.',
   alternates: {
     canonical: PAGE_URL,
   },

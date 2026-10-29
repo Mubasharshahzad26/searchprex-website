@@ -14,7 +14,7 @@ const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/faq`;
 
 const baseMetadata: Metadata = {
-  title: "SEO Questions, Answered — Core Updates, E-E-A-T & AI",
+  title: "SEO FAQ: Core Updates, E-E-A-T & AI Search, Answered",
   description:
     "Answers on Google's March and May 2026 core updates, E-E-A-T, AI Overviews, and GEO — plus how SearchPrex works. Written by a founder who does the work.",
   alternates: { canonical: PAGE_URL },

@@ -33,7 +33,7 @@ export default function LawFirmFounderSpotlight() {
                   {/* Floating Frame Badge */}
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <p className="text-sm font-black tracking-tight">Mubashar Sharif</p>
-                    <p className="text-xs text-slate-300 font-medium">Founder &middot; 5+ Years Legal SEO Mastery</p>
+                    <p className="text-xs text-slate-300 font-medium">Founder &middot; 5+ Years of Hands-On SEO</p>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@ export default function LawFirmFounderSpotlight() {
                   <span className="flex h-5 w-5 items-center justify-center rounded bg-neutral-950 text-[10px] font-black text-white">
                     #1
                   </span>
-                  <span>Ranked #1 on Google in Ohio</span>
+                  <span>Ranked #1 for &ldquo;law firm SEO Cleveland Ohio&rdquo;</span>
                 </div>
                 <span className="text-[11px] text-slate-500 font-semibold">
                   &ldquo;Law Firm SEO Cleveland Ohio&rdquo;

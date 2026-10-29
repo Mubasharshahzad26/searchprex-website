@@ -21,9 +21,9 @@ export interface QA {
 }
 
 export const META = {
-  title: "Google Business Profile Suspended? Reinstatement Help | SearchPrex",
+  title: "Business Profile Suspended? Reinstatement Help, Free Review",
   description:
-    "Google Business Profile suspended? I find the real violation, fix the profile, check your evidence matches it, and handle the appeal — founder-led, no fake success rates. Free 24-hour review.",
+    "Business Profile suspended? I find the real violation, fix the profile, match your evidence to it and handle the appeal. Free 24-hour review.",
   h1: "Google Business Profile Suspension Help",
   accent: "that fixes the cause first",
 };

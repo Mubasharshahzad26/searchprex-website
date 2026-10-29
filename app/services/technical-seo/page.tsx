@@ -10,7 +10,7 @@ const PAGE_URL = "https://www.searchprex.com/services/technical-seo";
 // pointed into public/og/, a directory that has never existed in this repo.
 
 const baseMetadata: Metadata = {
-  title: "Technical SEO Audit & Fix Services",
+  title: "Technical SEO Audit & Fixes | Free 24-Hour Tear-Down",
   description:
     "Technical SEO audit and fixes: indexing recovery, crawl budget, Core Web Vitals and schema. One store went from about 3,000 to 11,549 indexed pages.",
   keywords: [

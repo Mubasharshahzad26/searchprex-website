@@ -129,7 +129,7 @@ export default function LawFirmUspAndAuditSection() {
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-neutral-950" />
                 <span>
-                  <strong className="text-neutral-950">Proven Authority:</strong> Ranked #1 on Google in Ohio for &ldquo;Law Firm SEO Cleveland Ohio&rdquo;.
+                  <strong className="text-neutral-950">Proven Authority:</strong> Ranked #1 on Google for &ldquo;law firm SEO Cleveland Ohio&rdquo;.
                 </span>
               </div>
               <span className="text-neutral-950 font-bold shrink-0 hidden sm:inline">

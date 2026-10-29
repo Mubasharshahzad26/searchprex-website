@@ -23,9 +23,9 @@ export interface QA {
 const ECOM_PLAN = RETAINER_PLANS.find((p) => p.niche === "Ecommerce SEO");
 
 export const META = {
-  title: "Product Page SEO Services for Ecommerce Stores | SearchPrex",
+  title: "Product Page SEO for Shopify & WooCommerce | Free Audit",
   description:
-    "Product page SEO for US Shopify and WooCommerce stores: unique product copy at catalog scale, titles, Product schema, images and internal links — measured in Search Console. Free store tear-down.",
+    "Product page SEO for Shopify and WooCommerce: unique copy at catalog scale, titles, Product schema, images and internal links. Free store tear-down.",
   h1: "Product Page SEO Services",
   accent: "for catalogs too big to write by hand",
 };

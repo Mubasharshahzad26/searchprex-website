@@ -33,9 +33,9 @@ const SITE = "https://www.searchprex.com";
 
 const baseMetadata: Metadata = {
   // Kept in step with the CMS row for /services, which wins when published.
-  title: "SEO Services | Law, Ecommerce, Local, Technical & AI Search",
+  title: "SEO Services From $800/mo | Free Audit, 90-Day Guarantee",
   description:
-    "Five SEO services with the proof for each: law firm, ecommerce, local, technical and AI search (GEO/AEO). Founder-led, published prices, every figure screenshotted.",
+    "Law firm, ecommerce, local, technical and AI search SEO, each with published prices and screenshot proof. Free audit in 24 hours, month to month.",
   alternates: { canonical: `${SITE}/services` },
   openGraph: {
     title: "SEO Services USA — Law Firm, Ecommerce, Local, Technical & AI Search | SearchPrex",

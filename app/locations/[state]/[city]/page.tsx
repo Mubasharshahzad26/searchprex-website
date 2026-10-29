@@ -71,6 +71,7 @@ import { findPracticePage, getLocationState } from "@/lib/locations";
 import type { IndustryPage } from "@/lib/industry-pages";
 import { SITE, organizationRef } from "@/lib/site-schema";
 import { isLocationIndexable } from "@/lib/location-indexing";
+import { keepBrandedTitle } from "@/lib/seo-title";
 
 /**
  * Anchor variants for the link to the local news spoke. One template renders
@@ -112,7 +113,7 @@ export async function generateMetadata({
   const indexable = isLocationIndexable(`/locations/${page.stateSlug}/${page.citySlug}`);
 
   return {
-    title: page.metaTitle,
+    title: keepBrandedTitle(page.metaTitle),
     description: page.metaDescription,
     robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
     alternates: { canonical: url },

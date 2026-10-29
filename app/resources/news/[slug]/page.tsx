@@ -9,6 +9,7 @@ import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
 import { getStaticNewsPillar, NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
 import { getNewsFallbackEntry, newsFallbackPost, NEWS_FALLBACK_ARTICLES } from "@/lib/news-fallback";
+import { stripBrand } from "@/lib/seo-title";
 import { getStaticLocalSeoNewsContent } from "@/lib/static-local-seo-news";
 
 // Spokes render on demand and were then cached until the next deploy, so CMS
@@ -247,7 +248,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : post.title;
 
   return {
-    title: { absolute: post.metaTitle },
+    // The Local SEO News hub ranks with its branded title; leave it as is.
+    title: { absolute: post.slug === "local-seo-updates" ? post.metaTitle : stripBrand(post.metaTitle) },
     description: metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],

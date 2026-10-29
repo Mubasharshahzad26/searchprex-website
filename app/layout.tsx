@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: 'SearchPrex — USA SEO Agency for Law Firms, Ecommerce & Local Business',
-    template: '%s | SearchPrex'
+    template: '%s'
   },
   description: 'SearchPrex is a Remote-First, US-Focused SEO agency specializing in law firm SEO, Shopify ecommerce SEO, and local SEO for small businesses. Get a free SEO audit in 48 hours. Serving CA, TX, FL, NY, IL.',
   // No `keywords`: Google has ignored the meta keywords tag since 2009, so the

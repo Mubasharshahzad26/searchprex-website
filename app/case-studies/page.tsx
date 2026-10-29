@@ -23,10 +23,10 @@ import { SITE, organizationRef, websiteRef } from "@/lib/site-schema";
 const PAGE_URL = `${SITE}/case-studies`;
 const LINKEDIN_URL = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 const DESCRIPTION =
-  "Real SEO case studies with Google Search Console proof — ecommerce indexing recovery, local map pack wins, and technical SEO turnarounds. Filter by niche. No vanity metrics.";
+  "Real SEO case studies with Search Console screenshots: ecommerce indexing recovery, local Map Pack wins and technical turnarounds. Filter by niche.";
 
 const baseMetadata: Metadata = {
-  title: "SEO Case Studies — Verified GSC Results",
+  title: "SEO Case Studies With Real Search Console Screenshots",
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
   openGraph: {

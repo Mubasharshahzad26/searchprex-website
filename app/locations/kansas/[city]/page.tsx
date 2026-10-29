@@ -5,6 +5,7 @@ import { getCityBySlug, getAllCitySlugs } from "@/lib/kansas-cities";
 import { organizationRef } from "@/lib/site-schema";
 import { isLocationIndexable } from "@/lib/location-indexing";
 import KansasCityModernView from "@/components/locations/KansasCityModernView";
+import { keepBrandedTitle } from "@/lib/seo-title";
 
 // ── Static params (pre-render every city) ───────────────────────────────────
 export function generateStaticParams() {
@@ -23,7 +24,7 @@ export async function generateMetadata({
   const url = `https://www.searchprex.com/locations/kansas/${city.slug}`;
   const indexable = isLocationIndexable(`/locations/kansas/${city.slug}`);
   return {
-    title: city.metaTitle,
+    title: keepBrandedTitle(city.metaTitle),
     description: city.metaDescription,
     robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
     alternates: { canonical: url },

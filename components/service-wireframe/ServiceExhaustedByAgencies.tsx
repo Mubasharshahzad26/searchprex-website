@@ -192,13 +192,13 @@ export default function ServiceExhaustedByAgencies({
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-black text-neutral-950 leading-tight">
-                Ranked #1 on Google in Ohio for &ldquo;Law Firm SEO Cleveland Ohio&rdquo; &amp; 5+ Years of Deep Technical Execution
+                Ranked #1 on Google for &ldquo;law firm SEO Cleveland Ohio&rdquo; &amp; 5+ Years of Deep Technical Execution
               </h3>
 
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                 We do not guess what works in competitive US markets. SearchPrex is{" "}
                 <strong className="text-neutral-950">
-                  ranked #1 on Google in Ohio for{" "}
+                  ranked #1 on Google for{" "}
                   {showLocationLink ? (
                     <Link href="/locations/ohio/cleveland" className="underline hover:text-neutral-700">
                       &ldquo;Law Firm SEO Cleveland Ohio&rdquo;
@@ -240,7 +240,7 @@ export default function ServiceExhaustedByAgencies({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                 <div className="rounded-xl border border-slate-200 bg-white p-3.5">
-                  <div className="text-lg font-black text-neutral-950">#1 in Ohio</div>
+                  <div className="text-lg font-black text-neutral-950">#1 on Google</div>
                   <p className="text-xs text-slate-600 mt-0.5">
                     Ranked #1 for &ldquo;Law Firm SEO Cleveland Ohio&rdquo;
                   </p>

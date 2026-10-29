@@ -28,9 +28,9 @@ const SOURCE = "industries";
 const LAST_REVIEWED = "2026-09-26";
 
 export const metadata: Metadata = {
-  title: "Industries We Serve | Local, Ecommerce & Law Firm SEO",
+  title: "SEO by Industry: Local, Ecommerce & Law Firms | Free Audit",
   description:
-    "SEO by industry: HVAC, roofing, cleaning, home services, remodeling, WooCommerce, knife & outdoor stores and law firms — each page backed by a real case study, or honest that it isn't yet.",
+    "SEO by industry: HVAC, roofing, cleaning, home services, remodeling, WooCommerce, outdoor stores and law firms, with case studies where we have them.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Industries We Serve | SearchPrex",

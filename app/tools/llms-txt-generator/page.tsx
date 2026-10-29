@@ -22,9 +22,9 @@ import { SITE, founderRef, organizationRef, websiteRef } from "@/lib/site-schema
 import LlmsTxtClient from "./LlmsTxtClient";
 
 const PAGE_URL = `${SITE}/tools/llms-txt-generator`;
-const TITLE = "Free llms.txt & AI Crawler robots.txt Generator (2026)";
+const TITLE = "Free llms.txt & AI Crawler robots.txt Generator";
 const DESCRIPTION =
-  "Generate a spec-compliant /llms.txt file and AI crawler robots.txt rules (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended) for Law Firms, Ecommerce & Local Businesses. Free, instant, runs in your browser.";
+  "Generate an /llms.txt file and robots.txt rules for AI crawlers (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended). Free, runs in your browser.";
 const LAST_REVIEWED = "2026-09-30";
 
 const FAQS = [

@@ -19,9 +19,9 @@ export interface QA {
 }
 
 export const META = {
-  title: "Technical SEO Audit Services | SearchPrex",
+  title: "Technical SEO Audit Services | Free 24-Hour Tear-Down",
   description:
-    "Technical SEO audit services for US websites and online stores: crawling, indexing, Core Web Vitals, schema and site structure — a ranked fix list, founder-led. Free 24-hour tear-down.",
+    "Technical SEO audits for US websites and stores: crawling, indexing, Core Web Vitals, schema and structure, as a ranked fix list. Free tear-down.",
   h1: "Technical SEO Audit Services",
   accent: "with a fix list, not a 200-page PDF",
 };

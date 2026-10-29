@@ -79,7 +79,7 @@ export default function LawFirmSemrushHero() {
             {/* 3 Clean Metric Cards — Matching Location Pages Layout */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
               <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-                <p className="text-lg sm:text-xl font-black text-neutral-950 tracking-tight">#1 in Ohio</p>
+                <p className="text-lg sm:text-xl font-black text-neutral-950 tracking-tight">#1 on Google</p>
                 <p className="text-xs text-slate-600 font-medium mt-0.5">
                   For &ldquo;Law Firm SEO Cleveland Ohio&rdquo;
                 </p>
@@ -207,7 +207,7 @@ export default function LawFirmSemrushHero() {
                     Verified Google Ranking Proof
                   </p>
                   <p className="text-xs font-black text-neutral-950">
-                    Ranked #1 on Google in Ohio for &ldquo;Law Firm SEO Cleveland Ohio&rdquo;
+                    Ranked #1 on Google for &ldquo;law firm SEO Cleveland Ohio&rdquo;
                   </p>
                 </div>
               </motion.div>
