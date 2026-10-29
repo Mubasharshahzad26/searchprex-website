@@ -28,6 +28,7 @@ import { CITY_PAGES } from "@/lib/city-pages";
 
 import { getPageSEO } from "@/lib/admin-seo";
 import ProofImage from "@/components/ProofImage";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
 const SITE = "https://www.searchprex.com";
 
@@ -554,6 +555,20 @@ export default function ServicesPage() {
             </tbody>
           </table>
         </div>
+      </Section>
+
+      {/* A form here: /services had calls to action but no way to send a URL. */}
+      <Section width="reading" tight>
+        <ArticleLeadMagnet
+          variant="banner"
+          source="services:free-audit"
+          buttonText="Get my free audit"
+          copy={{
+            eyebrow: "Not sure which plan fits?",
+            headline: "Get a free audit before you pick a plan",
+            sub: "Send me your URL and I'll review it myself: what is holding it back, what to fix first, and which plan (if any) makes sense. Free, reply within 24 hours.",
+          }}
+        />
       </Section>
 
       {/* ── LAW FIRM SEO BY CITY ──

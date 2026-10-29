@@ -15,6 +15,7 @@ import {
 } from "@/components/layout";
 
 import { getPageSEO } from "@/lib/admin-seo";
+import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import { LOWEST_RETAINER, RETAINER_PLANS, formatUsd } from "@/lib/pricing";
 
 // The 90-day money-back guarantee, as /terms section 4 states it and the
@@ -203,6 +204,20 @@ export default function PricingPage() {
               </p>
             </div>
           </div>
+        </Section>
+
+        {/* A form on the highest-intent page, which had none. */}
+        <Section width="reading" tight>
+          <ArticleLeadMagnet
+            variant="banner"
+            source="pricing:free-audit"
+            buttonText="Get my free audit"
+            copy={{
+              eyebrow: "Not sure which plan fits?",
+              headline: "Get a free audit before you pick a plan",
+              sub: "Send me your URL and I'll review it myself: what is holding it back, what to fix first, and which plan (if any) makes sense. Free, reply within 24 hours.",
+            }}
+          />
         </Section>
 
         <Section tone="surface" width="reading">

@@ -13,10 +13,11 @@
 // It collects name, email, website and phone. Storage is lib/leads-store.ts,
 // shared with /api/send-audit and /api/leads.
 
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import type { NextRequest } from "next/server";
 
 import { leadStoreHealth, looksLikeEmail, normaliseLead, storeLead } from "@/lib/leads-store";
+import { sendLeadConfirmation } from "@/lib/lead-confirmation";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +46,10 @@ export async function POST(req: NextRequest) {
   if (!result.stored) {
     return NextResponse.json({ error: "Could not save your request" }, { status: 500 });
   }
+
+  // Instant "your request is in" email, sent after the response so it never
+  // slows or fails the form.
+  after(() => sendLeadConfirmation(lead));
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }
