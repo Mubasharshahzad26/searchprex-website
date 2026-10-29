@@ -36,6 +36,37 @@ export interface StaticNewsSpoke {
 
 export const staticNewsSpokes: StaticNewsSpoke[] = [
   {
+    "slug": "google-business-profile-government-id-verification-test",
+    "category": "SEO News — Local",
+    "subcategory": "Google Business Profile",
+    "title": "Google Tests Government ID Uploads for Business Profile Verification",
+    "metaTitle": "Google Business Profile Verification With Government ID",
+    "metaDescription": "Google is testing a Business Profile verification option that asks for a photo of a government ID. What was reported, what Google says, and what to do.",
+    "excerpt": "Google appears to be testing a new way to verify Business Profiles: uploading a photo of a government ID. It was reported on October 20, 2026; Google has not announced it. Here is what is known and what to do.",
+    "readTime": "4-minute read",
+    "date": "2026-10-29",
+    "dateModified": "2026-10-29T12:00:00.000Z",
+    "author": {
+      "name": "Mubashar Sharif",
+      "role": "Founder & SEO Strategist",
+      "bio": "Founder & SEO Strategist at SearchPrex, covering Google Business Profile, local search and practical organic growth.",
+      "linkedIn": "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
+    },
+    "featured": true,
+    "heroImage": "/images/news/local-business-owner-storefront.webp",
+    "tags": [
+      "Google Business Profile",
+      "Local SEO",
+      "Verification",
+      "Google Maps"
+    ],
+    "stat": null,
+    "toc": [],
+    "content": "## Key takeaways\n\n- Google appears to be **testing a new Business Profile verification option** that asks for a **photo of a government ID**. [Search Engine Roundtable reported it](https://www.seroundtable.com/google-business-profiles-verification-government-id-42329.html) on October 20, 2026, after it was spotted by Digital Jedi on the Local Search Forum.\n- The prompt reads: *\"Upload a photo of your government ID,\"* and says: *\"Your ID is only used for verification and won't be shown publicly.\"*\n- **Google has not announced it.** Its [verification help page](https://support.google.com/business/answer/7107242) does not list a government ID option.\n- Google says verification methods are **chosen automatically and can't be changed**, so you will only see this option if Google offers it to your profile.\n\n## What Happened\n\nWhen a business verifies its Google Business Profile, Google offers one or more methods. Its help page currently lists phone or text, email, a live video call, a postcard by mail and, in some cases, a video recording. Some profiles verify instantly, for example through Search Console.\n\nThe reported test adds another option: uploading a photo of a government ID. The screenshot shared by Search Engine Roundtable shows the upload prompt and Google's assurance that the ID is used only for verification and won't be shown publicly.\n\nIt is not clear which businesses see it or which documents are accepted. Barry Schwartz suggested it might be connected to the identity checks Google already runs for some professions in Local Services Ads, but presented that as his own guess. Digital Jedi raised the obvious question: \"How does Google know the Government ID is associated with the business?\"\n\n## Why it matters\n\nVerification is the gate to a working profile. Until a profile is verified, its owner can't fully manage it, and an unverified listing is easier for someone else to claim or edit. Google already offers stronger methods than a postcard, such as live video calls and video recordings, which ask you to show the business itself.\n\nAn ID upload ties a real person to the profile. For legitimate businesses that can be quicker than waiting for a postcard; for people creating fake listings, it is a much higher bar. It also means handing a sensitive document to Google, which is worth thinking about before you do it.\n\n## What to do\n\n1. **Use the method Google offers.** Google says you can't choose or change your verification method.\n2. **If you're offered the ID option**, make sure the person uploading it is the owner or an authorised manager, and that the name matches the business records Google can see.\n3. **Only upload your ID inside Google's own verification flow** in your Business Profile, never in reply to an email, text or phone call claiming to be from Google.\n4. **Keep proof of the business ready** whatever method you get: Google's live video call already asks you to show your location, equipment and proof of management, such as keys or non-sensitive business documents.\n5. **Allow time.** Google says verification reviews can take up to five business days, sometimes longer.\n\nIf a profile you manage is stuck in verification or was suspended, see our [suspended Business Profile guide](/services/local-seo/google-business-profile-suspended), and follow every Business Profile and Maps change in our [local SEO news](/resources/news/local-seo-updates).\n\n## Quick answers\n\n### Is Google asking for a government ID to verify Business Profiles?\nIt appears to be testing it. Search Engine Roundtable reported an \"Upload a photo of your government ID\" option on October 20, 2026. Google has not announced it.\n\n### Can I choose to verify with my ID instead of a postcard or video?\nNo. Google says verification methods are determined automatically and can't be changed.\n\n### Will my ID be shown on my profile?\nAccording to the prompt, no: it says the ID is only used for verification and won't be shown publicly.\n\n## Sources\n\n- [Google Business Profiles Verification With Government ID](https://www.seroundtable.com/google-business-profiles-verification-government-id-42329.html) — Search Engine Roundtable, October 20, 2026.\n- [Verify your business on Google](https://support.google.com/business/answer/7107242) — Google Business Profile Help.\n- [Verify your business with a video recording](https://support.google.com/business/answer/14271705) — Google Business Profile Help.\n\n_Last verified: 29 October 2026._",
+    "canonicalUrl": "https://www.searchprex.com/resources/news/google-business-profile-government-id-verification-test",
+    "schemaType": "NewsArticle"
+  },
+  {
     "slug": "google-business-profile-ordering-controls-messenger-links-ein",
     "category": "SEO News — Local",
     "subcategory": "Google Business Profile",
