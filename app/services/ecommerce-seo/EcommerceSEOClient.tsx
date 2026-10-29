@@ -649,7 +649,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
             imageSrc="/images/mubashar-sharif.jpg"
             imageAlt="Mubashar Sharif — Founder of SearchPrex"
             linkedinUrl={linkedinUrl}
-            badges={["Semrush certified", "HubSpot certified", "+92 305 9158010"]}
+            badges={["Semrush certified", "HubSpot certified", "Month to month"]}
           />
         </div>
       </Band>
@@ -764,7 +764,7 @@ export default function EcommerceSEOClient({ linkedinUrl, guide: _guide }: { lin
 
                   {formState === "error" ? (
                     <p className={`${text.small} mt-3`} style={{ color: color.danger }}>
-                      Something went wrong. Please try again, or call {`+92 305 9158010`}.
+                      Something went wrong. Please try again, or email contact@searchprex.com.
                     </p>
                   ) : null}
 

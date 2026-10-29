@@ -214,11 +214,13 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
-                href="tel:+923059158010"
+                href="https://calendly.com/contact-searchprex/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-50 text-neutral-950 border border-slate-300 font-semibold text-sm transition-all"
-                aria-label="Call SearchPrex at +92 305 915 8010"
+                aria-label="Book a free 30-minute call with SearchPrex"
               >
-                Call +92 305 915 8010
+                Book a free 30-min call
               </a>
               <button
                 type="button"

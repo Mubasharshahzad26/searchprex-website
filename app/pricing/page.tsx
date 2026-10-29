@@ -219,8 +219,8 @@ export default function PricingPage() {
           actions={[
             { href: "/free-audit", label: "Get Free Consultation" },
             {
-              href: "tel:+923059158010",
-              label: "+92 305 9158010",
+              href: "https://calendly.com/contact-searchprex/30min",
+              label: "Book a 30-min call",
               variant: "onDark",
               icon: <Phone className="h-4 w-4" aria-hidden />,
             },

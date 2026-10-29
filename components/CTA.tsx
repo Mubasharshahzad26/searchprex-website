@@ -190,8 +190,8 @@ export default function CTA() {
             <div className="mt-6 flex items-center gap-3">
               <Phone className="h-5 w-5 text-white/60" />
               <span className="text-sm text-white/60">
-                Prefer to talk? Call us at{" "}
-                <a href="tel:+923059158010" className="font-medium text-white underline">+92 305 9158010</a>
+                Prefer to talk?{" "}
+                <a href="https://calendly.com/contact-searchprex/30min" target="_blank" rel="noopener noreferrer" className="font-medium text-white underline">Book a free 30-min call</a>
               </span>
             </div>
           </motion.div>

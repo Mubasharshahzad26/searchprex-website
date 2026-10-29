@@ -24,13 +24,26 @@ const quickReplies = [
 ];
  
 const botResponses: Record<string, string> = {
-  "get free seo audit": "Great choice! Our free SEO audit includes a comprehensive analysis of your website's technical health, content quality, and backlink profile. Share your website URL or call us at +92 305 9158010 to get started.",
+  "get free seo audit": "Great choice! Our free SEO audit includes a comprehensive analysis of your website's technical health, content quality, and backlink profile. Share your website URL here and I'll take a look, or book a free 30-minute call: https://calendly.com/contact-searchprex/30min",
   "pricing information": "Monthly retainers, month to month:\n\n• Local SEO: $800 – $1,500/mo\n• Law Firm SEO: $1,200 – $2,500/mo\n• Ecommerce SEO: $1,500 – $4,000/mo\n\nWhere you sit in the range depends on scope. The free audit comes first, so you see the scope before paying anything.",
-  "talk to an expert": "I'd love to connect you with one of our SEO specialists!\n\n1. Call us: +92 305 9158010\n2. Schedule a free consultation\n3. Email: contact@searchprex.com\n\nAvailable Mon-Fri, 9 AM - 6 PM EST.",
-  "book a call": "Let's get you scheduled! Our SEO consultants offer a free 30-minute strategy session. Call +92 305 9158010 or click the phone button below.",
-  "default": "Thanks for reaching out! I can help with:\n\n• Free SEO Audit\n• Pricing & Plans\n• Our Process\n• Case Studies\n\nOr call +92 305 9158010 for immediate help.",
+  "talk to an expert": "You'll speak with Mubashar, the founder, not a sales rep:\n\n1. Book a free 30-minute call: https://calendly.com/contact-searchprex/30min\n2. WhatsApp: https://wa.me/923059158010\n3. Email: contact@searchprex.com\n\nAvailable Mon-Fri, 9 AM - 6 PM EST.",
+  "book a call": "Let's get you scheduled! Pick a time for a free 30-minute call with the founder: https://calendly.com/contact-searchprex/30min",
+  "default": "Thanks for reaching out! I can help with:\n\n• Free SEO Audit\n• Pricing & Plans\n• Our Process\n• Case Studies\n\nOr book a free 30-minute call: https://calendly.com/contact-searchprex/30min",
 };
  
+/** Canned replies carry booking and WhatsApp links; make them clickable. */
+function linkify(text: string) {
+  return text.split(/(https?:\/\/\S+)/g).map((part, i) =>
+    /^https?:\/\//.test(part) ? (
+      <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="font-medium underline break-all">
+        {part.replace(/^https?:\/\//, "")}
+      </a>
+    ) : (
+      part
+    ),
+  );
+}
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -214,7 +227,7 @@ export default function ChatWidget() {
                           : "bg-neutral-900 text-white"
                       }`}
                     >
-                      <p className="whitespace-pre-line text-sm leading-relaxed">{message.text}</p>
+                      <p className="whitespace-pre-line text-sm leading-relaxed">{linkify(message.text)}</p>
                       <p className={`mt-1 text-[10px] ${message.isBot ? "text-[#94a3b8]" : "text-white/70"}`}>
                         {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       </p>
@@ -284,11 +297,13 @@ export default function ChatWidget() {
                 </button>
               </form>
               <a
-                href="tel:+923059158010"
+                href="https://calendly.com/contact-searchprex/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-slate-50 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-slate-200"
               >
                 <Phone className="h-4 w-4" />
-                Or call us: +92 305 9158010
+                Or book a free 30-min call
               </a>
             </div>
           </motion.div>

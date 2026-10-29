@@ -228,12 +228,14 @@ export default function Nav() {
                 <span className="hidden sm:inline">See what&apos;s included</span>
               </a>
               <a
-                href="tel:+923059158010"
-                aria-label="Call SearchPrex at +92 305 915 8010"
+                href="https://calendly.com/contact-searchprex/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Book a free 30-minute call with SearchPrex"
                 className="rounded-md bg-white px-2.5 py-1 font-bold text-neutral-950 hover:bg-slate-100 sm:px-3"
               >
-                <span className="sm:hidden">Call</span>
-                <span className="hidden sm:inline">Call +92 305 915 8010</span>
+                <span className="sm:hidden">Book a call</span>
+                <span className="hidden sm:inline">Book a free 30-min call</span>
               </a>
             </div>
           </div>

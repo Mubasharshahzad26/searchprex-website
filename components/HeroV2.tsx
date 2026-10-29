@@ -40,8 +40,6 @@ import { CALL_HREF, OFFER_HREF } from "@/lib/offer";
 import {
   HERO_PARAGRAPH,
   HERO_STATS,
-  PHONE_DISPLAY,
-  PHONE_HREF,
   TRUSTPILOT_REVIEW_COUNT,
   TRUSTPILOT_URL,
 } from "@/lib/hero-content";
@@ -305,12 +303,14 @@ export default function HeroV2() {
                   Prefer to talk? Book 30 min →
                 </a>
                 <a
-                  href={PHONE_HREF}
+                  href="https://wa.me/923059158010"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-70"
                   style={{ color: INK }}
                 >
                   <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-                  {PHONE_DISPLAY}
+                  WhatsApp the founder
                 </a>
                 <Link
                   href={OFFER_HREF}

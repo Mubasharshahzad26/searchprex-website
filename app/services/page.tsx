@@ -649,7 +649,7 @@ export default function ServicesPage() {
         body="The founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours — including exactly which service (if any) you actually need."
         actions={[
           { href: "/free-audit", label: "Get Free SEO Audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
-          { href: "tel:+923059158010", label: "+92 305 9158010", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
+          { href: "https://calendly.com/contact-searchprex/30min", label: "Book a 30-min call", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
         ]}
         trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
       />
