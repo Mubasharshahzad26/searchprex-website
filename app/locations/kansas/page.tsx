@@ -25,11 +25,10 @@ import { getPageSEO } from "@/lib/admin-seo";
 import TaglinePainBand from "@/components/location-wireframe/TaglinePainBand";
 import LocationLocalCaseStudies from "@/components/location-wireframe/LocationLocalCaseStudies";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
-import { keepBrandedTitle } from "@/lib/seo-title";
 
 // ── Metadata ────────────────────────────────────────────────────────────────
 const baseMetadata: Metadata = {
-  title: keepBrandedTitle("Law Firm SEO Kansas | Family Law & Attorney SEO"),
+  title: "Law Firm SEO Kansas | Family Law & Attorney SEO",
   description:
     "Founder-led law firm SEO for Kansas attorneys in family law, personal injury and criminal defense — Wichita, Overland Park, Kansas City, Topeka and more.",
   alternates: { canonical: "https://www.searchprex.com/locations/kansas" },

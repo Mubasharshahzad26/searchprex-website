@@ -32,7 +32,6 @@ import { GBP_CHECKLIST_GUIDE } from "@/lib/guides";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 import { caseStudies, detailUrl } from "@/app/case-studies/data";
 import { CASE_DETAILS } from "@/app/case-studies/details";
-import { keepBrandedTitle } from "@/lib/seo-title";
 
 const SITE = "https://www.searchprex.com";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
@@ -60,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   if (!city) return {};
   const url = pageUrl(city.slug);
   return {
-    title: keepBrandedTitle(city.metaTitle),
+    title: city.metaTitle,
     description: city.metaDescription,
     alternates: { canonical: url },
     openGraph: { title: `${city.metaTitle} | SearchPrex`, description: city.metaDescription, url, siteName: "SearchPrex", type: "website" },

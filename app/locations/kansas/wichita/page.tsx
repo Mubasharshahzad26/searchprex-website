@@ -6,7 +6,6 @@ import { getPageSEO } from "@/lib/admin-seo";
 import { organizationRef } from "@/lib/site-schema";
 import { isLocationIndexable } from "@/lib/location-indexing";
 import KansasCityModernView from "@/components/locations/KansasCityModernView";
-import { keepBrandedTitle } from "@/lib/seo-title";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +13,7 @@ const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/locations/kansas/wichita`;
 
 const baseMetadata: Metadata = {
-  title: keepBrandedTitle("Law Firm SEO Company in Wichita, KS"),
+  title: "Law Firm SEO Company in Wichita, KS",
   description:
     "Founder-led law firm SEO for Wichita attorneys: personal injury, family law and criminal defense firms across Sedgwick County. Free tear-down within 24 hours.",
   alternates: { canonical: PAGE_URL },

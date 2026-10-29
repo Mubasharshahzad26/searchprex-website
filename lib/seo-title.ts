@@ -10,11 +10,3 @@ export function stripBrand(title: string): string {
   return title.replace(/\s*[|—–-]\s*SearchPrex\s*$/i, "").trim();
 }
 
-/**
- * Pages that already rank with their current "<title> | SearchPrex" title —
- * the location pages and the Local SEO News hub — keep it exactly, so the
- * template change doesn't alter a title Google is ranking.
- */
-export function keepBrandedTitle(title: string): { absolute: string } {
-  return { absolute: `${stripBrand(title)} | SearchPrex` };
-}

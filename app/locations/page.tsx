@@ -24,14 +24,13 @@ import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { SITE, websiteRef } from "@/lib/site-schema";
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import ServiceProofStrip from "@/components/ServiceProofStrip";
-import { keepBrandedTitle } from "@/lib/seo-title";
 
 const URL = `${SITE}/locations`;
 const TITLE = "Law Firm SEO by City & State";
 const DESCRIPTION = `Law firm SEO pages for ${LOCATION_CITY_COUNT} US cities across ${LOCATION_STATES.length} states, each built around that city's courts, bar association and state law. Find your market.`;
 
 export const metadata: Metadata = {
-  title: keepBrandedTitle(TITLE),
+  title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: {
