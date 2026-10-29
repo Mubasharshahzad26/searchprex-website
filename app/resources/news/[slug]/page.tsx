@@ -83,7 +83,7 @@ async function getPostData(rawSlug: string) {
       return {
         ...staticPillar,
         // "news" and "updates" are both searched; the month is the last real update.
-        metaTitle: `Local SEO News & Updates: ${month} | SearchPrex`,
+        metaTitle: `Local SEO News & Updates: ${month}`,
         dateModified: updated,
         heroImage: "/images/news/local-business-owner-storefront.webp",
         content: getStaticLocalSeoNewsContent(),
@@ -248,8 +248,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : post.title;
 
   return {
-    // The Local SEO News hub ranks with its branded title; leave it as is.
-    title: { absolute: post.slug === "local-seo-updates" ? post.metaTitle : stripBrand(post.metaTitle) },
+    title: { absolute: stripBrand(post.metaTitle) },
     description: metaDescription,
     keywords: post.tags,
     authors: [{ name: post.author.name }],

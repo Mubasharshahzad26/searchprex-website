@@ -113,7 +113,9 @@ export async function generateMetadata({
   const indexable = isLocationIndexable(`/locations/${page.stateSlug}/${page.citySlug}`);
 
   return {
-    title: keepBrandedTitle(page.metaTitle),
+    // The owner dropped the brand suffix on The Woodlands (2026-10-29); the
+    // other ranking city pages keep their current branded titles.
+    title: page.citySlug === "the-woodlands" ? { absolute: page.metaTitle } : keepBrandedTitle(page.metaTitle),
     description: page.metaDescription,
     robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
     alternates: { canonical: url },
