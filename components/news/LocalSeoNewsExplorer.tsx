@@ -128,9 +128,9 @@ export default function LocalSeoNewsExplorer({ posts, updates }: { posts: LocalS
   return (
     <section aria-labelledby="local-seo-news-feed" className="mb-10 scroll-mt-24">
       <div className="mb-5">
-        <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Search the local update desk</p>
-        <h2 id="local-seo-news-feed" className="text-2xl font-bold leading-tight text-slate-950 sm:text-3xl">Find the local SEO news that matters to you</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">Search sourced updates and published explainers. Filter by date, browse editor-selected trending topics, or save interests in this browser for a personal feed.</p>
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Updated as Google changes local search</p>
+        <h2 id="local-seo-news-feed" className="text-2xl font-bold leading-tight text-slate-950 sm:text-3xl">Latest local SEO news and updates</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">Every Google Business Profile, Maps and local pack change we have checked, newest first, with its date and source. Search, filter by date, or save topics in this browser for a personal feed.</p>
       </div>
 
       <label htmlFor="local-seo-news-search" className="sr-only">Search local SEO news</label>

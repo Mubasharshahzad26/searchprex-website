@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PostClient from "@/app/blog/[slug]/PostClient";
 import HalloweenOfferCard from "@/components/offers/HalloweenOfferCard";
+import GbpCheckCard from "@/components/offers/GbpCheckCard";
+import { localSeoNewsUpdates } from "@/components/news/LocalSeoNewsTimeline";
 import { isHalloweenOfferLive } from "@/lib/halloween-offer";
 import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
@@ -15,6 +17,30 @@ export const revalidate = 3600;
 
 const SITE = "https://www.searchprex.com";
 const LOCAL_SEO_NEWS_UPDATED_AT = "2026-10-24T12:00:00.000Z";
+
+/** Local news articles the hub lists: committed spokes plus repo-kept CMS articles. */
+function localNewsArticles() {
+  const spokes = staticNewsSpokes
+    .filter((s) => s.category.toLowerCase().includes("local") && s.slug !== "local-seo-updates")
+    .map((s) => ({ slug: s.slug, title: s.title, excerpt: s.excerpt, date: s.date, readTime: s.readTime }));
+  const archived = NEWS_FALLBACK_ARTICLES
+    .filter((a) => a.category.toLowerCase().includes("local") && !spokes.some((s) => s.slug === a.slug))
+    .map((a) => ({ slug: a.slug, title: a.title, excerpt: a.excerpt, date: a.published, readTime: a.readTime }));
+  return [...spokes, ...archived].sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/**
+ * The local hub is only as fresh as its newest dated entry, so its
+ * dateModified (and the month in its title) come from the latest article or
+ * logged update rather than a hand-set date that drifts.
+ */
+function localNewsLastUpdated(): string {
+  const times = [
+    ...localNewsArticles().map((a) => Date.parse(`${a.date}T12:00:00Z`)),
+    ...localSeoNewsUpdates.map((u) => Date.parse(`${u.date} 12:00:00 UTC`)),
+  ].filter((t) => Number.isFinite(t));
+  return new Date(Math.max(...times)).toISOString();
+}
 const LOCAL_SEO_NEWS_DESCRIPTION =
   "Local SEO news and Google Business Profile updates, with verified sources and practical advice for local businesses.";
 
@@ -50,13 +76,19 @@ async function getPostData(rawSlug: string) {
   // All eight topic guides have repository-backed content too.
   const staticPillar = getStaticNewsPillar(slug);
   if (staticPillar) {
-    return slug === "local-seo-updates"
-      ? {
-          ...staticPillar,
-          heroImage: "/images/news/local-business-owner-storefront.webp",
-          content: getStaticLocalSeoNewsContent(),
-        }
-      : staticPillar;
+    if (slug === "local-seo-updates") {
+      const updated = localNewsLastUpdated();
+      const month = new Date(updated).toLocaleString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+      return {
+        ...staticPillar,
+        // "news" and "updates" are both searched; the month is the last real update.
+        metaTitle: `Local SEO News & Updates: ${month} | SearchPrex`,
+        dateModified: updated,
+        heroImage: "/images/news/local-business-owner-storefront.webp",
+        content: getStaticLocalSeoNewsContent(),
+      };
+    }
+    return staticPillar;
   }
 
   // Query the CMS only for newer articles that do not yet have a committed copy.
@@ -533,18 +565,16 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
       imageAlt: "Google Maps navigation shown on a phone mounted inside a car",
     },
   };
+  // Every local article belongs in the hub's feed, not only those with a
+  // dedicated photo; the rest share a generic local-search image.
   const localNewsPosts = slug === "local-seo-updates"
-    ? staticNewsSpokes
-        .filter((item) => item.category.toLowerCase().includes("local") && item.slug !== slug && localNewsImages[item.slug])
-        .sort((a, b) => b.date.localeCompare(a.date))
-        .map((item) => ({
-          slug: item.slug,
-          title: item.title,
-          excerpt: item.excerpt,
-          date: item.date,
-          readTime: item.readTime,
-          ...localNewsImages[item.slug],
-        }))
+    ? localNewsArticles().map((item) => ({
+        ...item,
+        ...(localNewsImages[item.slug] ?? {
+          image: "/images/local/google-business-profile-local-intent.webp",
+          imageAlt: "A customer checking a local business listing on a phone outside a neighborhood storefront",
+        }),
+      }))
     : undefined;
 
   return (
@@ -559,8 +589,10 @@ export default async function NewsSpokePage({ params }: { params: Promise<{ slug
         related={related}
         localNewsPosts={localNewsPosts}
         promo={
-          isHalloweenOfferLive() && (slug === "local-seo-updates" || post.category.toLowerCase().includes("local"))
-            ? <HalloweenOfferCard inline />
+          slug === "local-seo-updates" || post.category.toLowerCase().includes("local")
+            ? isHalloweenOfferLive()
+              ? <HalloweenOfferCard inline />
+              : <GbpCheckCard source={slug === "local-seo-updates" ? "local-news:gbp-check" : `local-news:${slug}`} />
             : undefined
         }
       />

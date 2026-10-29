@@ -1,8 +1,9 @@
 "use client";
 
-// The Fright Check request form. Posts through submitLead to the leads Google
-// Sheet with its own source tag, and fires generate_lead only after the server
-// accepts it.
+// The free Business Profile check request form, used by the Halloween offer
+// and by the evergreen check on local SEO pages. Posts through submitLead to
+// the leads Google Sheet with the caller's source tag, and fires generate_lead
+// only after the server accepts it.
 
 import { useState } from "react";
 import { AlertCircle, ArrowRight, CheckCircle } from "lucide-react";
@@ -15,7 +16,21 @@ type Status = "idle" | "loading" | "done" | "error";
 const field =
   "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-neutral-950 outline-none focus:border-neutral-900";
 
-export default function HalloweenGbpCheckForm({ compact = false }: { compact?: boolean }) {
+export default function HalloweenGbpCheckForm({
+  compact = false,
+  source = HALLOWEEN_LEAD_SOURCE,
+  label = "Halloween GBP Fright Check request",
+  buttonText = "Get my free Fright Check",
+  doneTitle = "Your Fright Check request is in.",
+}: {
+  compact?: boolean;
+  /** Sheet source tag, e.g. "local-news:gbp-check". */
+  source?: string;
+  /** Written into the lead's message so the request is clear in the sheet. */
+  label?: string;
+  buttonText?: string;
+  doneTitle?: string;
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [business, setBusiness] = useState("");
@@ -27,15 +42,15 @@ export default function HalloweenGbpCheckForm({ compact = false }: { compact?: b
     if (status === "loading") return;
     setStatus("loading");
     const ok = await submitLead({
-      source: HALLOWEEN_LEAD_SOURCE,
+      source,
       name: name.trim(),
       email: email.trim(),
       business: business.trim(),
       website: link.trim(),
-      message: "Halloween GBP Fright Check request",
+      message: label,
     });
     if (ok) {
-      trackLead("gbp_fright_check", HALLOWEEN_LEAD_SOURCE);
+      trackLead("gbp_check", source);
       setStatus("done");
     } else {
       setStatus("error");
@@ -46,7 +61,7 @@ export default function HalloweenGbpCheckForm({ compact = false }: { compact?: b
     return (
       <div className="rounded-xl border border-slate-300 bg-slate-50 p-5 text-center" role="status">
         <CheckCircle className="mx-auto h-6 w-6 text-neutral-900" aria-hidden="true" />
-        <p className="mt-2 text-sm font-bold text-neutral-950">Your Fright Check request is in.</p>
+        <p className="mt-2 text-sm font-bold text-neutral-950">{doneTitle}</p>
         <p className="mt-1 text-xs leading-relaxed text-slate-600">
           I&apos;ll go through {business.trim() || "your profile"} myself and email the report to{" "}
           <strong className="text-neutral-950">{email.trim()}</strong> within 24 hours.
@@ -72,7 +87,7 @@ export default function HalloweenGbpCheckForm({ compact = false }: { compact?: b
         disabled={status === "loading"}
         className="inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-neutral-800 disabled:opacity-60"
       >
-        {status === "loading" ? "Sending…" : "Get my free Fright Check"}
+        {status === "loading" ? "Sending…" : buttonText}
         <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </button>
       {status === "error" && (
