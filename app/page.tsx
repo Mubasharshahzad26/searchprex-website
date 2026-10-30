@@ -29,11 +29,9 @@ import {
 
 import ClientLogos from "@/components/ClientLogos";
 import HeroV2 from "@/components/HeroV2";
-import ProofImage from "@/components/ProofImage";
+import ResultsShowcase, { type ResultCard } from "@/components/home/ResultsShowcase";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import FreeDomainAuthorityChecker from "@/components/FreeDomainAuthorityChecker";
-import { SMK_REVENUE_METRICS } from "@/components/RevenueProof";
-import { MSO_RECOVERY_PHASES, MSO_REVENUE_STEPS } from "@/components/RecoveryStory";
 import { posts as blogPosts } from "@/app/blog/[slug]/posts";
 import TrustStrap from "@/components/TrustStrap";
 import ChatWidgetLazy from "@/components/ChatWidgetLazy";
@@ -86,18 +84,47 @@ const byClient = (client: string) => caseStudies.find((c) => c.slug.client === c
 const shot = (client: string, i: number): ProofShot | undefined =>
   (CASE_DETAILS[client]?.proof ?? EXTRA_PROOF[client] ?? [])[i];
 
-// SMK and MSO get their own full-width cards below (before/after, and the
-// setback-fix-recovery story); these two are the compact cards.
-const BENTO = [
-  { client: "dolls-cleaning", shot: 0, wide: false, tag: "Local · Cleaning", title: "Named first in Google's AI Overview", line: "And #1 organically below it, for post-construction cleaning in Chesterfield, MI." },
-  { client: "remit-choice", shot: 2, wide: true, tag: "International · Fintech", title: "#1 above Wise and Xoom", line: "For “free of cost money transfer to Pakistan from uk”, from international SEO introduced in 2023." },
-].map((b) => ({ ...b, cs: byClient(b.client), proof: shot(b.client, b.shot) }));
-
+// Results cards. Every figure is on the screenshot it sits beside; HVAC
+// carries only what its captures show (the AI Overview citation).
 const hvac = byClient("local-hvac-services");
 const smk = byClient("smk-store");
-const mso = byClient("michigan-outdoor-sports");
-const smkBefore = shot("smk-store", 0);
-const smkAfter = shot("smk-store", 1);
+const pick = (client: string, i: number, extra: Omit<ResultCard, "client" | "shot" | "href">): ResultCard | null => {
+  const cs = byClient(client);
+  const p = shot(client, i);
+  return cs && p ? { ...extra, client: cs.client, shot: p, href: detailUrl(cs) } : null;
+};
+const RESULT_CARDS: ResultCard[] = [
+  pick("smk-store", 1, {
+    tab: "store", tag: "Online store · WooCommerce · Apr – Jun 2026",
+    figure: "+227%", figureLabel: "$5,832 → $19,100 net sales a month",
+    problem: "35,000+ product pages barely indexed, thin duplicate descriptions.",
+    did: "Rewrote product content brand by brand, product schema, Core Web Vitals.",
+  }),
+  pick("michigan-outdoor-sports", 0, {
+    tab: "store", tag: "Online store · Michigan · Mar – Jul 2026",
+    figure: "≈3,000 → 11,549", figureLabel: "indexed pages, 25 Jul 2026 (Search Console)",
+    problem: "Thin brand pages and crawl waste left thousands of pages out of Google.",
+    did: "Fixed indexation blocks, rewrote brand pages, resubmitted in batches.",
+  }),
+  pick("local-hvac-services", 0, {
+    tab: "local", tag: "Local · HVAC · Simi Valley, CA",
+    figure: "Named", figureLabel: "in Google's AI Overview for an AC installation search",
+    problem: "No visibility for high-intent local AC searches.",
+    did: "Business Profile, service-area pages and answer-ready content.",
+  }),
+  pick("dolls-cleaning", 0, {
+    tab: "local", tag: "Local · Cleaning · Chesterfield, MI",
+    figure: "#1", figureLabel: "named first in the AI Overview, #1 organic below it",
+    problem: "Invisible for high-intent cleaning searches, no map presence.",
+    did: "Business Profile, service-area pages, citations and reviews.",
+  }),
+  pick("remit-choice", 2, {
+    tab: "international", tag: "International · Fintech · from 2023",
+    figure: "#1", figureLabel: "above Wise and Xoom for a UK → Pakistan transfer search",
+    problem: "Duplicate country pages, no keyword mapping across corridors.",
+    did: "A page per country and corridor, one primary search per page.",
+  }),
+].filter((c): c is ResultCard => c !== null);
 
 // The three newest articles, from the same file the blog renders.
 const GUIDES = blogPosts.slice(0, 3);
@@ -149,7 +176,7 @@ const TABS: AudienceTab[] = [
     ],
     proof: {
       text: hvac
-        ? `${hvac.client}: top 3 in the map pack and named in Google's AI Overview, within 60 days.`
+        ? `${hvac.client}: named in Google's AI Overview, with a page-one organic ranking.`
         : "Top 3 in the map pack within 60 days.",
       href: hvac ? detailUrl(hvac) : "/case-studies",
     },
@@ -492,134 +519,9 @@ export default function Home() {
           <Heading
             eyebrow="Results"
             title="SEO results from US clients' own dashboards"
-            sub="Every figure below is on a screenshot from the client's own account. Click one to read it full size, or open the case study for the whole story."
+            sub="Every figure is on a screenshot from the client's own account. Pick your kind of business, click any screenshot to see it full size."
           />
-          <div className="grid gap-5 lg:grid-cols-3">
-            {/* SMK — the before/after contrast is what makes it memorable. */}
-            {smk && smkBefore && smkAfter ? (
-              <article className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 lg:col-span-3">
-                <p className="text-xs font-bold uppercase tracking-widest text-neutral-600">Ecommerce · WooCommerce · {smk.period}</p>
-                <h3 className={`${H} mt-2 text-2xl tracking-tight text-neutral-950 sm:text-3xl`}>$5,832 → $19,100 a month</h3>
-                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-slate-600">
-                  One 35,000-product store, one reporting period, one source: the store&apos;s own WooCommerce dashboard.
-                </p>
-                <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-3">
-                  {SMK_REVENUE_METRICS.map((m) => (
-                    <div key={m.l} className="bg-white px-5 py-4">
-                      <dd className="text-3xl font-black tabular-nums tracking-tight text-[#196b4d]">{m.v}</dd>
-                      <dt className="mt-1 text-sm font-bold text-neutral-950">{m.l}</dt>
-                      <p className="text-xs tabular-nums text-slate-600">{m.d}</p>
-                    </div>
-                  ))}
-                </dl>
-                <div className="mt-6 grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
-                  <ProofImage {...smkBefore} stage="Before · April 2026" stageTone="#8a5b08" frameAspect="16 / 9" sizes="(max-width: 768px) 100vw, 480px" />
-                  <span className="mx-auto rounded-full bg-[#effaf5] px-3 py-1.5 text-sm font-black text-[#196b4d]">+227%</span>
-                  <ProofImage {...smkAfter} stage="After · June 2026" frameAspect="16 / 9" sizes="(max-width: 768px) 100vw, 480px" />
-                </div>
-                <Link href={detailUrl(smk)} className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
-                  {smk.client} case study <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </article>
-            ) : null}
-
-            {/* MSO — the one that went wrong first. Admitting the setback is
-                what makes the recovery believable. */}
-            {mso ? (
-              <article className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 lg:col-span-3 lg:grid-cols-[1fr_1.05fr]">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-neutral-600">Ecommerce · Recovery · {mso.period}</p>
-                  <h3 className={`${H} mt-2 text-2xl tracking-tight text-neutral-950 sm:text-3xl`}>The one that went wrong first</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
-                    Most agencies would publish the March peak and stop there. This is the whole curve.
-                  </p>
-                  <ol className="mt-6 space-y-4">
-                    {MSO_RECOVERY_PHASES.map((p, i) => (
-                      <li key={p.stage} className="flex gap-4">
-                        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm font-black text-white" style={{ background: p.tone }}>
-                          {i + 1}
-                        </span>
-                        <div>
-                          <p className="text-sm font-black text-neutral-950">
-                            {p.stage} <span className="font-semibold text-slate-500">· {p.when}</span>
-                          </p>
-                          <p className="mt-0.5 text-sm">
-                            <strong className="font-black tabular-nums" style={{ color: p.tone }}>{p.metric.value}</strong>{" "}
-                            <span className="text-slate-600">{p.metric.label.toLowerCase()}</span>
-                          </p>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                  <Link href={detailUrl(mso)} className="mt-6 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
-                    The full recovery story <ArrowRight className="h-4 w-4" aria-hidden />
-                  </Link>
-                </div>
-                <ProofImage
-                  src="/images/proof/mso-gsc-indexing-full.png"
-                  alt="Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026."
-                  width={778}
-                  height={520}
-                  figure="≈3,000 → 11,549"
-                  figureLabel="indexed pages"
-                  sizes="(max-width: 1024px) 100vw, 560px"
-                />
-
-                {/* What the recovery did to revenue — the reason the indexing
-                    mattered. Three dated captures from the store's own
-                    WooCommerce dashboard. */}
-                <div className="border-t border-slate-200 pt-7 lg:col-span-2">
-                  <p className="text-sm font-black text-neutral-950">What the recovery did to store revenue</p>
-                  <p className="mt-1 text-xs text-slate-600">Total store revenue from the WooCommerce dashboard, not split by country.</p>
-                  <ol className="mt-5 grid gap-6 md:grid-cols-3">
-                    {MSO_REVENUE_STEPS.map((r) => (
-                      <li key={r.src}>
-                        <p className="text-xs font-black uppercase tracking-widest" style={{ color: r.tone }}>
-                          {r.stage}
-                        </p>
-                        <p className="mt-1 text-3xl font-black tabular-nums tracking-tight text-neutral-950">{r.figure}</p>
-                        <p className="text-xs font-bold text-slate-600">{r.date}</p>
-                        <div className="mt-3">
-                          <ProofImage
-                            src={r.src}
-                            alt={`Michigan Outdoor Sports WooCommerce net sales panel on ${r.date}, showing ${r.figure} net sales.`}
-                            width={r.width}
-                            height={r.height}
-                            frameAspect="16 / 9"
-                            note={r.note}
-                            sizes="(max-width: 768px) 100vw, 340px"
-                          />
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </article>
-            ) : null}
-
-            {BENTO.map((b) =>
-              b.cs && b.proof ? (
-                <article key={b.client} className={`flex flex-col rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 ${b.wide ? "lg:col-span-2" : ""}`}>
-                  <p className="text-xs font-bold uppercase tracking-widest text-neutral-600">{b.tag}</p>
-                  <h3 className={`${H} mt-2 text-2xl tracking-tight text-neutral-950`}>{b.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{b.line}</p>
-                  <div className="mt-5 flex-1">
-                    <ProofImage
-                      src={b.proof.src}
-                      alt={b.proof.alt}
-                      width={b.proof.width}
-                      height={b.proof.height}
-                      frameAspect={b.wide ? "16 / 7" : "4 / 3"}
-                      sizes={b.wide ? "(max-width: 1024px) 100vw, 740px" : "(max-width: 1024px) 100vw, 360px"}
-                    />
-                  </div>
-                  <Link href={detailUrl(b.cs)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
-                    {b.cs.client} case study <ArrowRight className="h-4 w-4" aria-hidden />
-                  </Link>
-                </article>
-              ) : null,
-            )}
-          </div>
+          <ResultsShowcase cards={RESULT_CARDS} />
         </div>
       </section>
 
