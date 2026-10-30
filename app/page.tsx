@@ -462,6 +462,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
+      <section id="free-da-checker" className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <Heading
+            eyebrow="Free tool"
+            title="Free Domain Authority Checker: How Strong Is Your Site?"
+            sub="Check your website's domain authority and technical health in seconds. No sign-up, no email needed."
+          />
+          <FreeDomainAuthorityChecker variant="home" />
+        </div>
+      </section>
+
+      {/* MID-PAGE FORM — after the free check, the offer to read it for them. */}
+      <section className="bg-neutral-950 px-4 py-14 text-center text-white sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <h2 className={`${H} text-2xl tracking-tight text-white sm:text-3xl`}>Got your score? Let me tell you what it means.</h2>
+          <p className="mt-3 text-sm text-white/70">Send your URL and email. I&apos;ll look at your site and competitors myself and reply within 24 hours.</p>
+          <div className="mx-auto mt-6 max-w-xl">
+            <PillForm source="homepage-da-cta" tone="dark" />
+          </div>
+        </div>
+      </section>
+
       {/* 6 · WHO IT'S FOR — AEO Direct Answer */}
       <section className="border-t border-slate-200 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
@@ -968,18 +991,6 @@ export default function Home() {
             Tracking Google Maps and Business Profile changes? Read the dated{" "}
             <Link href="/resources/news/local-seo-updates" className="font-bold text-neutral-950 underline underline-offset-2">local SEO news and updates</Link>.
           </p>
-        </div>
-      </section>
-
-      {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
-      <section id="free-da-checker" className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white px-4 py-20 sm:px-6">
-        <div className="mx-auto max-w-5xl">
-          <Heading
-            eyebrow="Free tool"
-            title="Free domain authority checker: how strong is your site, really?"
-            sub="Check your domain authority and technical health in seconds. No sign-up."
-          />
-          <FreeDomainAuthorityChecker variant="home" />
         </div>
       </section>
 
