@@ -568,7 +568,7 @@ export default function Home() {
       <section className="bg-neutral-950 px-4 py-20 text-white sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <p className="text-center text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">Problems we solve</p>
-          <h2 className={`${H} mx-auto mt-3 max-w-3xl text-center text-3xl tracking-tight sm:text-4xl`}>
+          <h2 className={`${H} mx-auto mt-3 max-w-3xl text-center text-3xl tracking-tight text-white sm:text-4xl`}>
             Something broke in Google? Start here.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-relaxed text-white/70">
@@ -582,7 +582,7 @@ export default function Home() {
                 className="group rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-emerald-300/60 hover:bg-white/10"
               >
                 <p.icon className="h-6 w-6 text-emerald-300" aria-hidden />
-                <h3 className={`${H} mt-4 text-lg`}>{p.q}</h3>
+                <h3 className={`${H} mt-4 text-lg text-white`}>{p.q}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/70">{p.a}</p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-emerald-300">
                   Read the fix <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
