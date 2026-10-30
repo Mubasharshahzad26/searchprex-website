@@ -533,7 +533,7 @@ export default async function CityPage({
                   ))}
                 </CardGrid>
                 <p className={`${text.small} mt-4`} style={{ color: color.muted }}>
-                  How each of these is ranked, anywhere in the US:{" "}
+                  How we approach relevant practice-area searches in {page.city}:{" "}
                   {practicePages.map((ip, i) => (
                     <span key={ip.slug}>
                       <Link
@@ -541,7 +541,7 @@ export default async function CityPage({
                         className="font-semibold underline underline-offset-2"
                         style={{ color: color.primary }}
                       >
-                        {ip.name} SEO
+                        {ip.name} SEO for {page.city} law firms
                       </Link>
                       {i < practicePages.length - 1 ? " · " : ""}
                     </span>

@@ -23,6 +23,7 @@ export type ProofShot = Pick<
 export default function ServiceProofStrip({
   id,
   title,
+  intro,
   shots,
   footnote,
   moreHref,
@@ -31,6 +32,7 @@ export default function ServiceProofStrip({
   /** Anchor for an in-page link, e.g. the hero's "See the proof". */
   id?: string;
   title: string;
+  intro?: string;
   shots: ProofShot[];
   /** A plain line under the captures, e.g. who the clients are. */
   footnote?: string;
@@ -55,6 +57,7 @@ export default function ServiceProofStrip({
           </Link>
         ) : null}
       </div>
+      {intro ? <p className="mb-6 max-w-4xl text-sm leading-relaxed" style={{ color: color.muted }}>{intro}</p> : null}
       {/* min-w-0: a wide capture must shrink to the column, not push the page sideways on a phone. */}
       <div className={`grid grid-cols-1 gap-6 [&>*]:min-w-0 ${two ? "md:grid-cols-2" : "mx-auto max-w-3xl"}`}>
         {shots.map((s) => (

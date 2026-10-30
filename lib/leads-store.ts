@@ -40,6 +40,8 @@ export interface Lead {
   message?: string;
   /** Which form or tool this came from, e.g. "homepage-hero", "case-calculator". */
   source?: string;
+  /** Page that initiated the lead form. */
+  sourcePage?: string;
   utmSource?: string;
   utmCampaign?: string;
   referrer?: string;
@@ -259,7 +261,7 @@ export function normaliseLead(input: Record<string, unknown>, fallbackSource: st
   const known = new Set([
     "email", "name", "fullName", "website", "url", "websiteUrl", "site", "domain",
     "phone", "tel", "business", "industry", "practice", "practiceArea", "practiceAreas",
-    "message", "notes", "source", "utmSource", "utmCampaign", "referrer",
+    "message", "notes", "source", "sourcePage", "utmSource", "utmCampaign", "referrer",
     "turnstileToken", "captchaToken", "token",
   ]);
   const extras = Object.entries(input)
@@ -284,6 +286,7 @@ export function normaliseLead(input: Record<string, unknown>, fallbackSource: st
     business: pick("business", "industry", "practice", "practiceArea") || practices,
     message: [pick("message", "notes"), extras.join(" · ")].filter(Boolean).join("\n").slice(0, 3000),
     source: str(input.source) || fallbackSource,
+    sourcePage: str(input.sourcePage),
     utmSource: str(input.utmSource),
     utmCampaign: str(input.utmCampaign),
     referrer: str(input.referrer),

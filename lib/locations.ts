@@ -25,6 +25,14 @@ import { INDUSTRY_PAGES, type IndustryPage } from "./industry-pages";
  */
 export function findPracticePage(area: string): IndustryPage | undefined {
   const normalized = area.toLowerCase().replace(/defence/g, "defense");
+  // Philadelphia's combined demand label includes both personal injury and
+  // mass torts; the coordinated-docket intent belongs to the latter spoke.
+  if (normalized.includes("mass tort")) {
+    return INDUSTRY_PAGES.find((p) => p.slug === "mass-torts");
+  }
+  if (normalized.includes("family") || normalized.includes("divorce") || normalized.includes("custody")) {
+    return INDUSTRY_PAGES.find((p) => p.slug === "family-law");
+  }
   return INDUSTRY_PAGES.find((p) => normalized.includes(p.name.toLowerCase()));
 }
 

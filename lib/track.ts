@@ -21,15 +21,25 @@ function push(payload: Record<string, unknown>) {
 }
 
 /** Call once, after a lead form has been accepted by the server. */
-export function trackLead(formType: string, leadSource?: string) {
+export function trackLead(formType: string, leadSource?: string, properties: Record<string, unknown> = {}) {
   push({
     event: "generate_lead",
     form_type: formType,
     lead_source: leadSource ?? "",
+    ...properties,
     page_path: typeof window === "undefined" ? "" : window.location.pathname,
   });
   // The Meta Pixel in app/layout.tsx gets its standard Lead event too.
   if (typeof window !== "undefined") (window as DataLayerWindow).fbq?.("track", "Lead", { content_category: formType });
+}
+
+/** Low-cardinality page actions only; never include form values or contact data. */
+export function trackEvent(eventName: string, properties: Record<string, unknown> = {}) {
+  push({
+    event: eventName,
+    ...properties,
+    page_path: typeof window === "undefined" ? "" : window.location.pathname,
+  });
 }
 
 /** A click on a phone, WhatsApp, email or booking link. */

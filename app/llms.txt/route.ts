@@ -141,7 +141,11 @@ export async function GET() {
     ...SERVICES.map(([t, p, d]) => link(t, p, d)),
     "",
     "## Law Firm SEO by Practice Area",
-    ...INDUSTRY_PAGES.map((p) => link(p.name, `/services/law-firm-seo/${p.slug}`, p.metaDescription)),
+    ...INDUSTRY_PAGES.map((p) => link(
+      p.name,
+      `/services/law-firm-seo/${p.slug}`,
+      `${p.metaDescription} Named framework: ${p.framework.name}. ${p.framework.definition}`,
+    )),
     "",
     "## Local SEO by Industry",
     ...LOCAL_INDUSTRIES.map((p) => link(p.name, `/services/local-seo/${p.slug}`, p.metaDescription)),

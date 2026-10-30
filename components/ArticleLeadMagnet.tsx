@@ -1,6 +1,6 @@
 "use client";
 
-import { trackLead } from "@/lib/track";
+import { trackEvent, trackLead } from "@/lib/track";
 import { useEffect, useState } from "react";
 import { AlertCircle, ArrowRight, CheckCircle, Globe, Mail } from "lucide-react";
 
@@ -8,7 +8,7 @@ import { CALL_HREF } from "@/lib/offer";
 
 type Status = "idle" | "loading" | "done" | "error";
 type Variant = "sidebar" | "banner" | "bottom";
-export type Copy = { eyebrow?: string; headline?: string; sub?: string };
+export type Copy = { eyebrow?: string; headline?: string; sub?: string; success?: string };
 
 export const INK = "#0a0a0a";
 export const BODY = "#475569";
@@ -20,11 +20,18 @@ export const LINE = "#cbd5e1";
 /** Set once a reader has actually submitted, so no later surface asks the same person again. */
 export const LEAD_DONE_KEY = "spx_lead_done";
 
-export function useLeadForm(source: string) {
+export function useLeadForm(source: string, practiceArea?: string, sourcePage?: string) {
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [attribution, setAttribution] = useState({ utmSource: "", utmCampaign: "", referrer: "" });
+  const [started, setStarted] = useState(false);
+
+  function start() {
+    if (started) return;
+    setStarted(true);
+    trackEvent("form_start", { practice_area: practiceArea ?? "", source_page: sourcePage ?? "" });
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -43,10 +50,11 @@ export function useLeadForm(source: string) {
       const res = await fetch("/api/send-audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ website: website.trim(), email: email.trim(), source, ...attribution }),
+        body: JSON.stringify({ website: website.trim(), email: email.trim(), source, practiceArea, sourcePage, ...attribution }),
       });
       if (!res.ok) throw new Error(String(res.status));
-      trackLead("tear_down", source);
+      trackLead("tear_down", source, { practice_area: practiceArea ?? "", source_page: sourcePage ?? "" });
+      trackEvent("form_submit", { practice_area: practiceArea ?? "", source_page: sourcePage ?? "" });
       setStatus("done");
       try { window.localStorage.setItem(LEAD_DONE_KEY, String(Date.now())); } catch { /* not essential */ }
     } catch {
@@ -54,10 +62,10 @@ export function useLeadForm(source: string) {
     }
   }
 
-  return { website, setWebsite, email, setEmail, status, submit };
+  return { website, setWebsite, email, setEmail, status, submit, start };
 }
 
-export function SuccessState({ website, email }: { website: string; email: string }) {
+export function SuccessState({ website, email, hideBookingLink, nextStep }: { website: string; email: string; hideBookingLink?: boolean; nextStep?: string }) {
   return (
     <div className="rounded-xl border border-slate-300 bg-slate-50 p-4 text-center">
       <CheckCircle className="mx-auto h-6 w-6 text-neutral-900" aria-hidden="true" />
@@ -65,17 +73,16 @@ export function SuccessState({ website, email }: { website: string; email: strin
         Got it — on its way.
       </p>
       <p className="mt-1 text-xs leading-relaxed text-slate-600">
-        I&apos;ll read {website.trim() || "your site"} myself and reply to{" "}
-        <strong className="text-neutral-950">{email.trim()}</strong> within 24 hours.
+        {nextStep ?? <>I&apos;ll read {website.trim() || "your site"} myself and reply to{" "}<strong className="text-neutral-950">{email.trim()}</strong> within 24 hours.</>}
       </p>
-      <a
+      {!hideBookingLink && status !== "done" ? <a
         href={CALL_HREF}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center justify-center rounded-lg bg-neutral-900 px-3.5 py-2 text-xs font-bold text-white transition-opacity hover:bg-neutral-800"
       >
         Want to talk sooner? Book 30 min →
-      </a>
+      </a> : null}
     </div>
   );
 }
@@ -100,11 +107,12 @@ export function ErrorState() {
 }
 
 /** Compact vertical card. Replaces the sidebar's old link-only CTA. */
-function SidebarVariant({ source, copy, buttonText }: { source: string; copy?: Copy; buttonText?: string }) {
-  const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
+function SidebarVariant({ source, copy, buttonText, practiceArea, sourcePage, hideBookingLink }: { source: string; copy?: Copy; buttonText?: string; practiceArea?: string; sourcePage?: string; hideBookingLink?: boolean }) {
+  const { website, setWebsite, email, setEmail, status, submit, start } = useLeadForm(source, practiceArea, sourcePage);
 
   return (
     <div className="rounded-2xl border border-slate-300 bg-white p-5 shadow-2xs font-sans">
+      {copy?.eyebrow ? <p className="mb-2 text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">{copy.eyebrow}</p> : null}
       <p className="text-sm font-black text-neutral-950">
         {copy?.headline ?? "Free competitor tear-down"}
       </p>
@@ -114,10 +122,12 @@ function SidebarVariant({ source, copy, buttonText }: { source: string; copy?: C
 
       {status === "done" ? (
         <div className="mt-3">
-          <SuccessState website={website} email={email} />
+          <SuccessState website={website} email={email} hideBookingLink={hideBookingLink} nextStep={copy?.success} />
         </div>
       ) : (
-        <form onSubmit={submit} className="mt-3 flex flex-col gap-2">
+        <form onSubmit={submit} onFocusCapture={start} className="mt-3 flex flex-col gap-2">
+          <input type="hidden" name="practice_area" value={practiceArea ?? ""} />
+          <input type="hidden" name="source_page" value={sourcePage ?? ""} />
           <div className="relative">
             <Globe className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" aria-hidden="true" />
             <input
@@ -153,21 +163,21 @@ function SidebarVariant({ source, copy, buttonText }: { source: string; copy?: C
         </form>
       )}
 
-      <a
+      {!hideBookingLink ? <a
         href={CALL_HREF}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 block text-center text-xs font-bold text-neutral-950 hover:underline"
       >
         Prefer to talk? Book 30 min →
-      </a>
+      </a> : null}
     </div>
   );
 }
 
 /** Full-width banner, spliced into the article body at its midpoint. */
-function BannerVariant({ source, copy, buttonText }: { source: string; copy?: Copy; buttonText?: string }) {
-  const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
+function BannerVariant({ source, copy, buttonText, practiceArea, sourcePage, hideBookingLink }: { source: string; copy?: Copy; buttonText?: string; practiceArea?: string; sourcePage?: string; hideBookingLink?: boolean }) {
+  const { website, setWebsite, email, setEmail, status, submit, start } = useLeadForm(source, practiceArea, sourcePage);
 
   return (
     <div
@@ -189,9 +199,11 @@ function BannerVariant({ source, copy, buttonText }: { source: string; copy?: Co
 
         <div>
           {status === "done" ? (
-            <SuccessState website={website} email={email} />
+            <SuccessState website={website} email={email} hideBookingLink={hideBookingLink} nextStep={copy?.success} />
           ) : (
-            <form onSubmit={submit} className="flex flex-col gap-2.5">
+            <form onSubmit={submit} onFocusCapture={start} className="flex flex-col gap-2.5">
+              <input type="hidden" name="practice_area" value={practiceArea ?? ""} />
+              <input type="hidden" name="source_page" value={sourcePage ?? ""} />
               <div className="relative">
                 <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
                 <input
@@ -233,8 +245,8 @@ function BannerVariant({ source, copy, buttonText }: { source: string; copy?: Co
 }
 
 /** Full-width closing section. Light grey background, solid black heading, dark grey CTA button. */
-function BottomVariant({ source, copy, buttonText }: { source: string; copy?: Copy; buttonText?: string }) {
-  const { website, setWebsite, email, setEmail, status, submit } = useLeadForm(source);
+function BottomVariant({ source, copy, buttonText, practiceArea, sourcePage, hideBookingLink }: { source: string; copy?: Copy; buttonText?: string; practiceArea?: string; sourcePage?: string; hideBookingLink?: boolean }) {
+  const { website, setWebsite, email, setEmail, status, submit, start } = useLeadForm(source, practiceArea, sourcePage);
 
   return (
     <section className="py-20 bg-slate-50 border-t border-slate-200 font-sans">
@@ -249,10 +261,12 @@ function BottomVariant({ source, copy, buttonText }: { source: string; copy?: Co
         <div className="mx-auto mt-7 max-w-md">
           {status === "done" ? (
             <div className="rounded-xl border border-slate-300 bg-white p-5 text-left">
-              <SuccessState website={website} email={email} />
+              <SuccessState website={website} email={email} hideBookingLink={hideBookingLink} nextStep={copy?.success} />
             </div>
           ) : (
-            <form onSubmit={submit} className="flex flex-col gap-3">
+            <form onSubmit={submit} onFocusCapture={start} className="flex flex-col gap-3">
+              <input type="hidden" name="practice_area" value={practiceArea ?? ""} />
+              <input type="hidden" name="source_page" value={sourcePage ?? ""} />
               <div className="relative">
                 <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
                 <input
@@ -293,14 +307,14 @@ function BottomVariant({ source, copy, buttonText }: { source: string; copy?: Co
           )}
         </div>
 
-        <a
+        {!hideBookingLink && status !== "done" ? <a
           href={CALL_HREF}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:underline"
         >
           Or book a 30-min call <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </a>
+        </a> : null}
       </div>
     </section>
   );
@@ -311,13 +325,19 @@ export default function ArticleLeadMagnet({
   source,
   copy,
   buttonText,
+  practiceArea,
+  sourcePage,
+  hideBookingLink,
 }: {
   variant: Variant;
   source: string;
   copy?: Copy;
   buttonText?: string;
+  practiceArea?: string;
+  sourcePage?: string;
+  hideBookingLink?: boolean;
 }) {
-  if (variant === "sidebar") return <SidebarVariant source={source} copy={copy} buttonText={buttonText} />;
-  if (variant === "banner") return <BannerVariant source={source} copy={copy} buttonText={buttonText} />;
-  return <BottomVariant source={source} copy={copy} buttonText={buttonText} />;
+  if (variant === "sidebar") return <SidebarVariant source={source} copy={copy} buttonText={buttonText} practiceArea={practiceArea} sourcePage={sourcePage} hideBookingLink={hideBookingLink} />;
+  if (variant === "banner") return <BannerVariant source={source} copy={copy} buttonText={buttonText} practiceArea={practiceArea} sourcePage={sourcePage} hideBookingLink={hideBookingLink} />;
+  return <BottomVariant source={source} copy={copy} buttonText={buttonText} practiceArea={practiceArea} sourcePage={sourcePage} hideBookingLink={hideBookingLink} />;
 }

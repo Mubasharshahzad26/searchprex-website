@@ -249,8 +249,8 @@ export function ServiceHero({
   title: string;
   accent: string;
   subtitle: React.ReactNode;
-  primary: { href: string; label: string };
-  secondary?: { href: string; label: string };
+  primary: { href: string; label: string; event?: string };
+  secondary?: { href: string; label: string; event?: string };
   trustPoints: string[];
   aside: React.ReactNode;
 }) {
@@ -285,12 +285,13 @@ export function ServiceHero({
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
                   href={primary.href}
+                  data-track-event={primary.event}
                   className="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-neutral-800"
                 >
                   {primary.label} <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 {secondary ? (
-                  <Link href={secondary.href} className="text-sm font-bold text-neutral-900 hover:underline">
+                  <Link href={secondary.href} data-track-event={secondary.event} className="text-sm font-bold text-neutral-900 hover:underline">
                     {secondary.label}
                   </Link>
                 ) : null}
