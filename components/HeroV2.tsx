@@ -110,7 +110,7 @@ export default function HeroV2() {
             <p
               className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-600"
             >
-              Founder-led · One client per city · 9 US states
+              Hi, I&apos;m Mubashar · Founder-led · One client per city · 9 US states
             </p>
 
             {/* One primary keyword — "SEO agency", qualified by US and by the
@@ -120,19 +120,24 @@ export default function HeroV2() {
                 actually win. "Revenue-Focused" is the differentiator, not a
                 keyword. Not "First ... Agency" either: unprovable superlatives
                 sit badly on a page arguing that every figure has a screenshot. */}
-            <h1 className="mb-3 font-black tracking-tight text-neutral-950">
-              <span className="block text-[1.95rem] leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
-                Revenue-Focused SEO Agency
+            {/* V2: the buyer's feeling first, the keyword phrase second, both
+                inside the one H1 so the emotional hook doesn't cost the page
+                its topic. */}
+            <h1 className="mb-4 font-black tracking-tight text-neutral-950">
+              <span className="block text-[1.9rem] leading-[1.1] text-balance sm:text-5xl lg:text-[3.2rem]">
+                Worn out from PPC that never brings the leads?
               </span>
               <span
-                className="mt-2 block text-[1.2rem] font-extrabold leading-[1.25] text-balance text-neutral-700 sm:text-[1.6rem]"
+                className="mt-3 block text-[1.15rem] font-extrabold leading-[1.3] text-balance text-neutral-700 sm:text-[1.5rem]"
               >
-                for US Law Firms, Local Businesses &amp; Ecommerce Stores
+                SEO for US law firms, local businesses &amp; online stores, done by the founder
               </span>
             </h1>
 
-            <p className="mb-3 text-base font-bold leading-snug sm:text-lg" style={{ color: GREEN_DARK }}>
-              Burning budget on PPC clicks that don&apos;t convert? That&apos;s the problem I fix.
+            <p className="mb-3 text-[15px] leading-relaxed sm:text-base" style={{ color: BODY }}>
+              You&apos;ve spent the budget, waited for the calls, and still nothing. Take a breath. Send me your
+              site and I&apos;ll tell you, in plain words, what&apos;s holding it back.{" "}
+              <strong style={{ color: GREEN_DARK }}>Written by me, not a tool.</strong>
             </p>
 
             {/* "Led by", not "Head by". And "Semrush-certified", not "Verified
