@@ -83,7 +83,7 @@ async function getPostData(rawSlug: string) {
       return {
         ...staticPillar,
         // "news" and "updates" are both searched; the month is the last real update.
-        metaTitle: `Local SEO News & Updates: ${month}`,
+        metaTitle: `Local SEO News & Updates, ${month}: Google Maps & GBP`,
         dateModified: updated,
         heroImage: "/images/news/local-business-owner-storefront.webp",
         content: getStaticLocalSeoNewsContent(),
