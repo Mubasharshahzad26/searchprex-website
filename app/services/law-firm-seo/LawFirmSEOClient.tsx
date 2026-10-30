@@ -20,6 +20,7 @@ import IntakeAssistant from "@/app/components/intake-assistant/intake-assistant"
 import type { Guide } from "@/lib/guides";
 import { RETAINER_PLANS } from "@/lib/pricing";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
+import { LOCATION_STATES } from "@/lib/locations";
 import { AuthorCard, FaqList } from "@/components/layout";
 import {
   Band,
@@ -83,6 +84,28 @@ export default function LawFirmSEOClient({ guide: _guide }: { guide: Guide }) {
           >
             GBP for Lawyers
           </Link>
+        </nav>
+      </div>
+
+      {/* STATE QUICK NAVIGATION — the state hubs, so law firm SEO links to
+          each state it covers. */}
+      <div className="overflow-x-auto border-b border-slate-200 bg-slate-50">
+        <nav
+          className="mx-auto flex max-w-6xl items-center space-x-6 px-4 py-2.5 text-xs font-semibold sm:px-6 lg:px-8"
+          aria-label="Law firm SEO by state"
+        >
+          <span className="whitespace-nowrap font-black text-neutral-950 uppercase tracking-wider">
+            By state:
+          </span>
+          {LOCATION_STATES.filter((s) => s.hubHref).map((s) => (
+            <Link
+              key={s.slug}
+              href={s.hubHref!}
+              className="whitespace-nowrap text-slate-600 transition-colors hover:text-neutral-950"
+            >
+              {s.name} law firm SEO
+            </Link>
+          ))}
         </nav>
       </div>
 

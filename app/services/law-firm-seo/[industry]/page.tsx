@@ -36,6 +36,7 @@ import {
 } from "@/components/ServiceBands";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { CITY_PAGES } from "@/lib/city-pages";
+import { LOCATION_STATES } from "@/lib/locations";
 import { RETAINER_PLANS } from "@/lib/pricing";
 import { founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 
@@ -106,6 +107,9 @@ export default async function IndustryPage({
   const cities = page.locationsMentioned
     .map((slug) => CITY_PAGES.find((c) => c.citySlug === slug))
     .filter((c): c is NonNullable<typeof c> => c !== undefined);
+  // State hubs for the states those cities sit in, so "family law SEO for
+  // Texas firms" links the practice page to the hub that covers it.
+  const stateHubs = LOCATION_STATES.filter((s) => s.hubHref && cities.some((c) => c.stateSlug === s.slug));
 
   // Built from the same arrays the page renders, so the FAQPage always
   // matches what a visitor can read.
@@ -335,6 +339,20 @@ export default async function IndustryPage({
               </Link>
             ))}
           </div>
+        ) : null}
+        {stateHubs.length ? (
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-white/70">
+            State by state:{" "}
+            {stateHubs.map((s, i) => (
+              <span key={s.slug}>
+                <Link href={s.hubHref!} className="font-bold text-white underline underline-offset-2">
+                  {area} SEO for {s.name} firms
+                </Link>
+                {i < stateHubs.length - 2 ? ", " : i === stateHubs.length - 2 ? " and " : ""}
+              </span>
+            ))}
+            .
+          </p>
         ) : null}
         <RuleGrid columns={4}>
           <RuleItem dark href="/services/law-firm-seo/google-business-profile-for-lawyers" title="Google Business Profile for lawyers" body="Categories, attorney listings and reviews inside bar rules." />
