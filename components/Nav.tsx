@@ -70,6 +70,11 @@ const navLinks: NavLink[] = [
     label: "Case Studies",
   },
   {
+    // Published prices are a selling point; buyers look for them first.
+    href: "/pricing",
+    label: "Pricing",
+  },
+  {
     href: "/resources",
     label: "Resources",
     hasDropdown: true,
