@@ -178,7 +178,7 @@ export default function ClientLogos() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
           <h2 id="clients-heading" className="text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-600">
-            Businesses I&apos;ve grown
+            USA-Based Businesses I&apos;ve Grown
           </h2>
           <Link href="/case-studies" className="text-xs font-bold text-neutral-900 hover:underline">
             Every case study, with the screenshots →

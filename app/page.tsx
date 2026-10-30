@@ -106,7 +106,7 @@ const TABS: AudienceTab[] = [
   {
     id: "law",
     label: "Law firms",
-    title: "Found for the cases you want",
+    title: "Law firm SEO: found for the cases you want",
     problem:
       "People search by practice area and city, often at night, and call whoever answers first. Most firm sites have one practice page, a thin Business Profile and no answer to the questions clients actually type.",
     visual: {
@@ -132,7 +132,7 @@ const TABS: AudienceTab[] = [
   {
     id: "local",
     label: "Local businesses",
-    title: "The map pack, and the phone ringing",
+    title: "Local SEO: the Map Pack, and the phone ringing",
     problem:
       "When someone searches “near me”, they call one of the three businesses in the map pack. A profile set up as an afterthought and a single services page keep good businesses out of it.",
     visual: {
@@ -159,7 +159,7 @@ const TABS: AudienceTab[] = [
   {
     id: "ecommerce",
     label: "Ecommerce",
-    title: "Every product page earning its keep",
+    title: "Ecommerce SEO: every product page earning its keep",
     problem:
       "Large catalogues fail in the same places: thin manufacturer copy, thousands of pages Google never indexes, and templates that make every product slow at once.",
     visual: {
@@ -371,7 +371,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <p className="text-center text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">Problems we solve</p>
           <h2 className={`${H} mx-auto mt-3 max-w-3xl text-center text-3xl tracking-tight text-white sm:text-4xl`}>
-            Something broke in Google? Start here.
+            Worried about not getting leads in the USA?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-relaxed text-white/70">
             Don't panic. This happens to good businesses, and it's fixable. Which one sounds like you?
@@ -400,17 +400,17 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="The solution"
-            title="Here's the relief"
+            title="Here's the Relief SearchPrex Brings You"
             sub="The things that wore you out, and what changes when I take over."
           />
           <div className="grid gap-4 md:grid-cols-2">
             {SOLUTIONS.map((x) => (
               <div key={x.pain} className="rounded-3xl border border-slate-200 bg-white p-6">
                 <p className="text-sm text-slate-500 line-through decoration-slate-300">{x.pain}</p>
-                <p className={`${H} mt-3 flex items-start gap-2 text-lg text-neutral-950`}>
+                <h3 className={`${H} mt-3 flex items-start gap-2 text-lg text-neutral-950`}>
                   <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-emerald-600" aria-hidden />
                   {x.fix}
-                </p>
+                </h3>
                 <p className="mt-2 pl-6 text-sm leading-relaxed text-slate-600">{x.detail}</p>
               </div>
             ))}
@@ -423,10 +423,66 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Specialized Verticals · AEO Direct Answer"
-            title="Tell me where it hurts"
+            title="SearchPrex's Solution-Oriented Approach"
             sub="Three kinds of US business: law firms and attorneys, local contractors and small businesses, and Shopify and WooCommerce stores. The founder does the work, and we take one client per city and practice area, so we never work for your competitor."
           />
           <AudienceTabs tabs={TABS} />
+        </div>
+      </section>
+
+      {/* SERVICES — what we sell, with prices, linking each service page. */}
+      <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Services"
+            title="SEO Services for US Businesses"
+            sub="SEO for law firms, local businesses and online stores: five services, published prices, month-to-month terms, and a free audit within 24 hours before anything else."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800">
+                  <s.icon className="h-5 w-5" aria-hidden />
+                </span>
+                <h3 className={`${H} mt-4 text-lg text-neutral-950`}>{s.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
+                <span className="mt-4 flex items-center justify-between gap-2">
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-neutral-900">{s.price}</span>
+                  <ArrowRight className="h-4 w-4 text-neutral-900 transition group-hover:translate-x-1" aria-hidden />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* INDUSTRIES — the trades and practices with their own pages. */}
+          <div className="mt-12">
+            <h3 className={`${H} text-center text-xl text-neutral-950`}>Industries we work in</h3>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
+              {INDUSTRY_GROUPS.map((g) => (
+                <div key={g.label} className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">{g.label}</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {g.links.map((l) => (
+                      <li key={l.href}>
+                        <Link href={l.href} className="inline-block rounded-full border border-slate-200 px-3 py-1.5 text-sm text-slate-700 hover:border-neutral-900 hover:text-neutral-950">
+                          {l.name} SEO
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-center">
+              <Link href="/industries" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
+                All industries <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -435,7 +491,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Results"
-            title="Don't take my word for it. Look at their dashboards."
+            title="SEO results from US clients' own dashboards"
             sub="Every figure below is on a screenshot from the client's own account. Click one to read it full size, or open the case study for the whole story."
           />
           <div className="grid gap-5 lg:grid-cols-3">
@@ -579,68 +635,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES — what we sell, with prices, linking each service page. */}
-      <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <Heading
-            eyebrow="Services"
-            title="How I can help you"
-            sub="SEO for law firms, local businesses and online stores: five services, published prices, month-to-month terms, and a free audit within 24 hours before anything else."
-          />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((s) => (
-              <Link
-                key={s.href}
-                href={s.href}
-                className="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800">
-                  <s.icon className="h-5 w-5" aria-hidden />
-                </span>
-                <h3 className={`${H} mt-4 text-lg text-neutral-950`}>{s.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                <span className="mt-4 flex items-center justify-between gap-2">
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-neutral-900">{s.price}</span>
-                  <ArrowRight className="h-4 w-4 text-neutral-900 transition group-hover:translate-x-1" aria-hidden />
-                </span>
-              </Link>
-            ))}
-          </div>
-
-          {/* INDUSTRIES — the trades and practices with their own pages. */}
-          <div className="mt-12">
-            <h3 className={`${H} text-center text-xl text-neutral-950`}>Industries we work in</h3>
-            <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {INDUSTRY_GROUPS.map((g) => (
-                <div key={g.label} className="rounded-2xl border border-slate-200 bg-white p-5">
-                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">{g.label}</p>
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {g.links.map((l) => (
-                      <li key={l.href}>
-                        <Link href={l.href} className="inline-block rounded-full border border-slate-200 px-3 py-1.5 text-sm text-slate-700 hover:border-neutral-900 hover:text-neutral-950">
-                          {l.name} SEO
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <p className="mt-5 text-center">
-              <Link href="/industries" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
-                All industries <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* 8 · HOW IT WORKS — AEO Methodology */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Methodology & Process"
-            title="Here's exactly what happens when you reach out"
+            title="How it works: a free SEO audit in 24 hours, then a report every Monday"
             sub="You send your URL, which takes 30 seconds. I look at it myself and write back within 24 hours. If we work together, you hear from me every Monday."
           />
           <ol className="grid gap-5 md:grid-cols-3">
@@ -777,7 +777,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Transparent Retainer Pricing"
-            title="Straight pricing. No surprises."
+            title="SEO pricing: straight monthly plans, no surprises"
             sub={`SearchPrex SEO retainers range from ${formatRange(RETAINER_PLANS[0])}/mo for local businesses, ${formatRange(RETAINER_PLANS[1])}/mo for law firms, and ${formatRange(RETAINER_PLANS[2])}/mo for ecommerce stores. Retainers are month-to-month, scoped by locations, practice areas or catalog size, and backed by our 90-day progress guarantee.`}
           />
 
@@ -854,7 +854,7 @@ export default function Home() {
       {/* 11 · FAQ */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-3xl">
-          <Heading eyebrow="FAQ" title="Questions people ask me before they reach out" />
+          <Heading eyebrow="FAQ" title="SEO questions US business owners ask before hiring me" />
           <FaqAccordion faqs={FAQS} />
           <p className="mt-6 text-center">
             <Link href="/faq" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
@@ -895,13 +895,13 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {LOCATION_STATES.map((s) => (
               <div key={s.slug} className="rounded-2xl border border-slate-200 bg-white px-5 py-4">
-                {s.hubHref ? (
-                  <Link href={s.hubHref} className="text-sm font-bold text-neutral-950 hover:underline">
-                    {s.name}
-                  </Link>
-                ) : (
-                  <p className="text-sm font-bold text-neutral-950">{s.name}</p>
-                )}
+                <h3 className="text-sm font-bold text-neutral-950">
+                  {s.hubHref ? (
+                    <Link href={s.hubHref} className="hover:underline">{s.name}</Link>
+                  ) : (
+                    s.name
+                  )}
+                </h3>
                 <p className="mt-1.5 text-sm leading-relaxed">
                   {s.cities.map((c, i) => (
                     <span key={c.href}>
@@ -1024,7 +1024,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl">
           <Heading
             eyebrow="Free tool"
-            title="How strong is your site, really?"
+            title="Free domain authority checker: how strong is your site, really?"
             sub="Check your domain authority and technical health in seconds. No sign-up."
           />
           <FreeDomainAuthorityChecker variant="home" />
@@ -1068,6 +1068,17 @@ export default function Home() {
               Read more SEO guides <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </p>
+        </div>
+      </section>
+
+      {/* CLOSING CTA — short, for readers who scrolled through the resources. */}
+      <section className="bg-neutral-950 px-4 py-14 text-center text-white sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <h2 className={`${H} text-2xl tracking-tight text-white sm:text-3xl`}>Ready for leads that don&apos;t stop when the ads do?</h2>
+          <p className="mt-3 text-sm text-white/70">Free audit within 24 hours. 7-day free trial. 90-day money-back guarantee.</p>
+          <div className="mx-auto mt-6 max-w-xl">
+            <PillForm source="homepage-footer-cta" tone="dark" />
+          </div>
         </div>
       </section>
 

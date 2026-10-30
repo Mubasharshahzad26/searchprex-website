@@ -132,17 +132,18 @@ export default function HeroV2() {
                 its topic. */}
             <h1 className="mb-4 font-black tracking-tight text-neutral-950">
               <span className="block text-[1.9rem] leading-[1.1] text-balance sm:text-5xl lg:text-[3.2rem]">
-                Worn out from PPC that never brings the leads?
+                Tired of paying for leads that never come?
               </span>{" "}
               <span
                 className="mt-3 block text-[1.15rem] font-extrabold leading-[1.3] text-balance text-neutral-700 sm:text-[1.5rem]"
               >
-                SEO for US law firms, local businesses &amp; online stores, done by the founder
+                SEO for US businesses, done by the founder
               </span>
             </h1>
 
             <p className="mb-4 text-base leading-relaxed sm:text-lg" style={{ color: BODY }}>
-              We know you&apos;re in pain. We come with the solution, and a source of relief.
+              We know you&apos;re in pain. We come with the solution, and a source of relief.{" "}
+              <span className="text-[15px]">SearchPrex is a founder-led SEO agency for US law firms, local businesses and online stores.</span>
             </p>
 
             {/* The five promises, every one confirmed and published on /pricing. */}
