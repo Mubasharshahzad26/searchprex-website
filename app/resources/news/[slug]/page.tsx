@@ -16,32 +16,11 @@ import { getStaticLocalSeoNewsContent } from "@/lib/static-local-seo-news";
 // edits and unpublishes did not reach the live page. An hour bounds that.
 export const revalidate = 3600;
 
+import { localNewsArticles, localNewsLastUpdated } from "@/lib/local-news-freshness";
+
 const SITE = "https://www.searchprex.com";
 const LOCAL_SEO_NEWS_UPDATED_AT = "2026-10-24T12:00:00.000Z";
 
-/** Local news articles the hub lists: committed spokes plus repo-kept CMS articles. */
-function localNewsArticles() {
-  const spokes = staticNewsSpokes
-    .filter((s) => s.category.toLowerCase().includes("local") && s.slug !== "local-seo-updates")
-    .map((s) => ({ slug: s.slug, title: s.title, excerpt: s.excerpt, date: s.date, readTime: s.readTime }));
-  const archived = NEWS_FALLBACK_ARTICLES
-    .filter((a) => a.category.toLowerCase().includes("local") && !spokes.some((s) => s.slug === a.slug))
-    .map((a) => ({ slug: a.slug, title: a.title, excerpt: a.excerpt, date: a.published, readTime: a.readTime }));
-  return [...spokes, ...archived].sort((a, b) => b.date.localeCompare(a.date));
-}
-
-/**
- * The local hub is only as fresh as its newest dated entry, so its
- * dateModified (and the month in its title) come from the latest article or
- * logged update rather than a hand-set date that drifts.
- */
-function localNewsLastUpdated(): string {
-  const times = [
-    ...localNewsArticles().map((a) => Date.parse(`${a.date}T12:00:00Z`)),
-    ...localSeoNewsUpdates.map((u) => Date.parse(`${u.date} 12:00:00 UTC`)),
-  ].filter((t) => Number.isFinite(t));
-  return new Date(Math.max(...times)).toISOString();
-}
 const LOCAL_SEO_NEWS_DESCRIPTION =
   "Local SEO news and Google Business Profile updates, with verified sources and practical advice for local businesses.";
 

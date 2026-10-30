@@ -38,13 +38,13 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.searchprex.com";
  * image that appears on no page while omitting the one that does. An image
  * sitemap entry for an image no page contains is a dead end for a crawler.
  */
+// Now the results cards in app/page.tsx (RESULT_CARDS).
 const HOMEPAGE_PROOF = [
-  "/images/proof/mso-gsc-indexing-full.png",
-  "/images/proof/smk-revenue-before-v2.png",
   "/images/proof/smk-revenue-after-v2.png",
-  "/images/proof/mso-revenue-1-jul20-v2.png",
-  "/images/proof/mso-revenue-2-aug06-v2.png",
-  "/images/proof/mso-revenue-3-sep25-v2.png",
+  "/images/proof/mso-gsc-indexing-full.png",
+  "/images/proof/local-hvac-ai-overview.png",
+  "/images/proof/local-dolls-ai-overview-rank1.png",
+  "/images/proof/remit-rank-1-pakistan.png",
 ];
 
 function absolute(url: string): string | null {

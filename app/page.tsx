@@ -90,8 +90,17 @@ const hvac = byClient("local-hvac-services");
 const smk = byClient("smk-store");
 const pick = (client: string, i: number, extra: Omit<ResultCard, "client" | "shot" | "href">): ResultCard | null => {
   const cs = byClient(client);
-  const p = shot(client, i);
+  const p = i === -1 ? MSO_INDEXING_SHOT : shot(client, i);
   return cs && p ? { ...extra, client: cs.client, shot: p, href: detailUrl(cs) } : null;
+};
+const MSO_INDEXING_SHOT: ProofShot = {
+  src: "/images/proof/mso-gsc-indexing-full.png",
+  alt: "Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026.",
+  width: 778,
+  height: 520,
+  figure: "≈3,000 → 11,549",
+  figureLabel: "indexed pages",
+  caption: "25 Jul 2026 · 11,549 pages indexed",
 };
 const RESULT_CARDS: ResultCard[] = [
   pick("smk-store", 1, {
@@ -100,7 +109,7 @@ const RESULT_CARDS: ResultCard[] = [
     problem: "35,000+ product pages barely indexed, thin duplicate descriptions.",
     did: "Rewrote product content brand by brand, product schema, Core Web Vitals.",
   }),
-  pick("michigan-outdoor-sports", 0, {
+  pick("michigan-outdoor-sports", -1, {
     tab: "store", tag: "Online store · Michigan · Mar – Jul 2026",
     figure: "≈3,000 → 11,549", figureLabel: "indexed pages, 25 Jul 2026 (Search Console)",
     problem: "Thin brand pages and crawl waste left thousands of pages out of Google.",
