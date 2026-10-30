@@ -133,7 +133,7 @@ export default function HeroV2() {
             <h1 className="mb-4 font-black tracking-tight text-neutral-950">
               <span className="block text-[1.9rem] leading-[1.1] text-balance sm:text-5xl lg:text-[3.2rem]">
                 Worn out from PPC that never brings the leads?
-              </span>
+              </span>{" "}
               <span
                 className="mt-3 block text-[1.15rem] font-extrabold leading-[1.3] text-balance text-neutral-700 sm:text-[1.5rem]"
               >

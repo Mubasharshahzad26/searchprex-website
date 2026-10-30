@@ -104,7 +104,7 @@ export default function FreeDomainAuthorityChecker({
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
       {/* Enterprise Header — the homepage puts its own heading above. */}
-      <div className={variant === "home" ? "hidden" : undefined}>
+      {variant !== "home" && (<div>
       <div className="border-b border-slate-200 bg-slate-50 px-6 py-6 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -129,7 +129,7 @@ export default function FreeDomainAuthorityChecker({
           </div>
         </div>
       </div>
-      </div>
+      </div>)}
 
       {/* Main Container */}
       <div className="p-6 sm:p-8 lg:p-10">
