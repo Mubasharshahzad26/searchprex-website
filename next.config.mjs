@@ -40,6 +40,10 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Two old blog URLs GSC still lists (404 + noindex since July); each now
+      // points at the live post on the same topic.
+      { source: '/blog/law-firm-seo-guide', destination: '/blog/law-firm-seo-2026-guide', permanent: true },
+      { source: '/blog/technical-seo-core-web-vitals', destination: '/blog/core-web-vitals-ecommerce', permanent: true },
       {
         // The old NicheSEO Pro teaser page (thin, and it used Semrush's "Keyword
         // Magic Tool" name). The product lives at its own domain.
