@@ -23,7 +23,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, Bot, GraduationCap, Newspaper, Settings, Clock, ExternalLink, MapPin, PhoneOff, Scale, SearchX, ShieldAlert,
+  ArrowRight, Bot, Check, GraduationCap, Newspaper, Settings, Clock, ExternalLink, MapPin, PhoneOff, Scale, SearchX, ShieldAlert,
   ShoppingCart, Sparkles, Star, TrendingDown, Wrench,
 } from "lucide-react";
 
@@ -44,7 +44,7 @@ import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { LOCATION_CITY_COUNT, LOCATION_STATES } from "@/lib/locations";
-import { RETAINER_PLANS, formatRange } from "@/lib/pricing";
+import { RETAINER_PLANS, formatRange, formatUsd } from "@/lib/pricing";
 import { SITE, founderRef, organizationRef, websiteRef } from "@/lib/site-schema";
 
 import AudienceTabs, { type AudienceTab } from "@/components/home/AudienceTabs";
@@ -297,6 +297,14 @@ const SOLUTIONS = [
   { pain: "Monthly reports full of rankings, while the phone stays quiet.", fix: "Measured in calls, cases and revenue", detail: "Every Monday you get a plain-English report on what moved and what it brought in." },
   { pain: "Sold by a senior, handed to a junior.", fix: "Dedicated client care from the founder", detail: "I do the audit, the work and the reports myself, and I take one client per city." },
   { pain: "Locked into a long contract before you see anything.", fix: "7-day free trial and a 90-day money-back guarantee", detail: "Month-to-month after that. If I can't show progress in 90 days, you get those 90 days back." },
+];
+
+// Same order as RETAINER_PLANS: local, law firm, ecommerce.
+const PLAN_TIMING = ["60–90 days", "60–90 days", "3–6 months for large catalogs"];
+const PLAN_WORK = [
+  "Google Business Profile, Map Pack, reviews, city pages",
+  "Practice-area and city pages, Business Profile for each office",
+  "Indexing, category and product pages, Merchant Center, site speed",
 ];
 
 const INDUSTRY_GROUPS = [
@@ -678,78 +686,107 @@ export default function Home() {
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
-            eyebrow="Transparent Retainer Pricing"
+            eyebrow="Pricing"
             title="SEO pricing: straight monthly plans, no surprises"
             sub={`SearchPrex SEO retainers range from ${formatRange(RETAINER_PLANS[0])}/mo for local businesses, ${formatRange(RETAINER_PLANS[1])}/mo for law firms, and ${formatRange(RETAINER_PLANS[2])}/mo for ecommerce stores. Retainers are month-to-month, scoped by locations, practice areas or catalog size, and backed by our 90-day progress guarantee.`}
           />
 
-          {/* Semantic Comparison Table for ChatGPT Search & Perplexity RAG Extraction */}
-          <div className="mb-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-neutral-600">Executive Pricing &amp; Deliverables Matrix</p>
-            <table className="w-full text-left text-sm text-slate-700">
-              <thead>
-                <tr className="border-b border-slate-200 text-xs font-black uppercase tracking-wider text-neutral-950">
-                  <th className="pb-3 pr-4">Vertical Track</th>
-                  <th className="pb-3 px-4">Investment Range</th>
-                  <th className="pb-3 px-4">Primary Deliverables</th>
-                  <th className="pb-3 px-4">Turnaround Time</th>
-                  <th className="pb-3 pl-4">Guarantee &amp; Terms</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                <tr>
-                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Local SEO &amp; Contractors</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[0])} / mo</td>
-                  <td className="py-3.5 px-4 text-xs">Google Business Profile, local 3-pack, review velocity, city landing pages</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days to initial movement</td>
-                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, 1 client per city</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Law Firm SEO (Trial &amp; PI)</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[1])} / mo</td>
-                  <td className="py-3.5 px-4 text-xs">Practice-area hubs, State Bar entity schema, multi-office GBP compliance</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">60–90 days for competitive case terms</td>
-                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, exclusive market lockout</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 pr-4 font-bold text-neutral-950">Ecommerce &amp; Shopify</td>
-                  <td className="py-3.5 px-4 font-bold text-neutral-950">{formatRange(RETAINER_PLANS[2])} / mo</td>
-                  <td className="py-3.5 px-4 text-xs">Faceted navigation, Liquid canonicals, Merchant Center, CWV speed</td>
-                  <td className="py-3.5 px-4 text-xs font-semibold">3–6 months for high-volume catalogs</td>
-                  <td className="py-3.5 pl-4 text-xs font-bold text-[#196b4d]">90-day progress guarantee, weekly Monday telemetry</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {RETAINER_PLANS.map((p) => (
-              <div
-                key={p.niche}
-                className={`flex flex-col rounded-3xl border p-7 ${p.featured ? "border-neutral-900 shadow-md" : "border-slate-200"}`}
-              >
-                <p className="text-sm font-bold text-neutral-950">{p.niche}</p>
-                <p className="mt-1 text-xs text-slate-600">{p.best}</p>
-                <p className={`${H} mt-5 text-3xl tracking-tight text-neutral-950`}>
-                  {formatRange(p)}
-                  <span className="text-sm font-semibold text-slate-600"> / mo</span>
-                </p>
-                <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
-                  {p.includes.map((i) => (
-                    <li key={i}>· {i}</li>
-                  ))}
-                </ul>
-                <a
-                  href="#get-started"
-                  className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
-                    p.featured ? "bg-neutral-900 text-white hover:bg-neutral-800" : "border border-slate-300 text-neutral-950 hover:border-neutral-900"
+          {/* Plans first: the card is what a buyer compares. */}
+          <div className="grid items-stretch gap-5 md:grid-cols-3">
+            {RETAINER_PLANS.map((p, i) => {
+              const dark = p.featured;
+              return (
+                <div
+                  key={p.niche}
+                  className={`relative flex flex-col rounded-3xl p-7 transition hover:-translate-y-0.5 ${
+                    dark ? "bg-neutral-950 text-white shadow-xl md:-my-3 md:py-10" : "border border-slate-200 bg-white hover:shadow-md"
                   }`}
                 >
-                  Start with the free tear-down
-                </a>
-              </div>
-            ))}
+                  {dark ? (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-emerald-400 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-neutral-950">
+                      One firm per city
+                    </span>
+                  ) : null}
+                  <p className={`text-sm font-bold ${dark ? "text-emerald-300" : "text-emerald-800"}`}>{p.niche}</p>
+                  <p className={`mt-1 text-xs ${dark ? "text-white/60" : "text-slate-600"}`}>{p.best}</p>
+                  <p className={`${H} mt-6 text-4xl tracking-tight`}>
+                    {formatUsd(p.min)}
+                    <span className={`text-base font-semibold ${dark ? "text-white/60" : "text-slate-500"}`}> – {formatUsd(p.max)} / mo</span>
+                  </p>
+                  <p className={`mt-2 text-xs font-semibold ${dark ? "text-white/60" : "text-slate-500"}`}>
+                    First movement: {PLAN_TIMING[i]}
+                  </p>
+                  <ul className={`mt-6 flex-1 space-y-2.5 border-t pt-6 text-sm ${dark ? "border-white/10 text-white/85" : "border-slate-100 text-slate-700"}`}>
+                    {p.includes.map((item) => (
+                      <li key={item} className="flex gap-2.5">
+                        <Check className={`mt-0.5 h-4 w-4 shrink-0 ${dark ? "text-emerald-300" : "text-emerald-600"}`} aria-hidden />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#get-started"
+                    className={`mt-7 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-bold transition-colors ${
+                      dark ? "bg-white text-neutral-950 hover:bg-emerald-100" : "bg-neutral-950 text-white hover:bg-neutral-800"
+                    }`}
+                  >
+                    Start with the free audit <ArrowRight className="h-4 w-4" aria-hidden />
+                  </a>
+                </div>
+              );
+            })}
           </div>
+
+          {/* What every plan comes with. */}
+          <ul className="mt-10 grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-5 text-sm sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["7-day free trial", "See the work before you pay."],
+              ["90-day money-back guarantee", "No progress in 90 days, no charge for them."],
+              ["Month-to-month", "No long contract. Leave any time."],
+              ["One client per city", "I never work for your competitor."],
+            ].map(([t, d]) => (
+              <li key={t} className="flex gap-3">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-800">
+                  <Check className="h-3.5 w-3.5" aria-hidden />
+                </span>
+                <span>
+                  <span className="block font-bold text-neutral-950">{t}</span>
+                  <span className="text-slate-600">{d}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {/* The side-by-side table stays in the page for search engines and
+              AI answers, folded away for people. */}
+          <details className="group mt-6 rounded-2xl border border-slate-200 bg-white">
+            <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm font-bold text-neutral-950">
+              Compare plans side by side
+              <ArrowRight className="h-4 w-4 transition group-open:rotate-90" aria-hidden />
+            </summary>
+            <div className="overflow-x-auto px-5 pb-5">
+              <table className="w-full min-w-[640px] text-left text-sm text-slate-700">
+                <thead>
+                  <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
+                    <th className="pb-3 pr-4">Plan</th>
+                    <th className="px-4 pb-3">Price</th>
+                    <th className="px-4 pb-3">Main work</th>
+                    <th className="pl-4 pb-3">First movement</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {RETAINER_PLANS.map((p, i) => (
+                    <tr key={p.niche}>
+                      <td className="py-3 pr-4 font-bold text-neutral-950">{p.niche}</td>
+                      <td className="px-4 py-3 font-bold text-neutral-950">{formatRange(p)} / mo</td>
+                      <td className="px-4 py-3">{PLAN_WORK[i]}</td>
+                      <td className="py-3 pl-4">{PLAN_TIMING[i]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
         </div>
       </section>
 
