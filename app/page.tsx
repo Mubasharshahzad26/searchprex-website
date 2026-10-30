@@ -22,7 +22,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Clock, ExternalLink, Star } from "lucide-react";
+import {
+  ArrowRight, Bot, Clock, ExternalLink, MapPin, PhoneOff, Scale, SearchX, ShieldAlert,
+  ShoppingCart, Sparkles, Star, TrendingDown, Wrench,
+} from "lucide-react";
 
 import ClientLogos from "@/components/ClientLogos";
 import HeroV2 from "@/components/HeroV2";
@@ -239,6 +242,51 @@ function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?
   );
 }
 
+
+// ── Homepage hub sections ────────────────────────────────────────────────
+// The homepage ranks for the brand, not for "SEO agency"; its SEO job is to
+// send link equity, with descriptive anchors, to the service, problem and
+// industry pages that can win long-tail searches. Every href below is a live
+// page; prices come from lib/pricing.
+const SERVICES = [
+  { icon: Scale, title: "Law Firm & Attorney SEO", body: "Practice-area and city pages, Business Profile and reviews within bar rules, measured in calls and signed cases.", href: "/services/law-firm-seo", price: `${formatRange(RETAINER_PLANS[1])}/mo` },
+  { icon: MapPin, title: "Local SEO for Small Businesses", body: "Google Business Profile, Map Pack visibility, service-area pages and reviews for contractors and local services.", href: "/services/local-seo", price: `${formatRange(RETAINER_PLANS[0])}/mo` },
+  { icon: ShoppingCart, title: "Shopify & WooCommerce SEO", body: "Indexing recovery, product and collection pages, schema and site speed for stores with large catalogs.", href: "/services/ecommerce-seo", price: `${formatRange(RETAINER_PLANS[2])}/mo` },
+  { icon: Wrench, title: "Technical SEO & Indexing", body: "Crawling, indexing, Core Web Vitals, canonicals and structured data, as a ranked fix list or done for you.", href: "/services/technical-seo", price: "Free 24-hour tear-down" },
+  { icon: Sparkles, title: "AI Search (GEO & AEO)", body: "Answer-ready pages, entity signals and crawler access so Google AI Overviews and ChatGPT can cite you.", href: "/ai-search", price: "Included in every plan" },
+];
+
+const PROBLEMS = [
+  { icon: SearchX, q: "Pages not indexed by Google?", a: "Crawled or discovered but not indexed: find the cause and fix it.", href: "/services/technical-seo/indexing-recovery" },
+  { icon: ShieldAlert, q: "Business Profile suspended?", a: "Find the real violation, fix it and appeal with the right evidence.", href: "/services/local-seo/google-business-profile-suspended" },
+  { icon: MapPin, q: "Google Maps ranking dropped?", a: "Check whether the drop is real, then work through the likely causes.", href: "/blog/google-maps-ranking-drop" },
+  { icon: TrendingDown, q: "Store traffic from Google dropped?", a: "Rule out tracking and seasonality, then check indexing and updates.", href: "/blog/ecommerce-organic-traffic-drop" },
+  { icon: Bot, q: "Not showing in AI Overviews?", a: "What gets a page cited in Google AI Overviews and AI Mode.", href: "/blog/google-ai-overviews-seo" },
+  { icon: PhoneOff, q: "Leads not turning into cases?", a: "Work out what a slow intake costs, and the fixes that close the gap.", href: "/blog/slow-intake-cost" },
+];
+
+const INDUSTRY_GROUPS = [
+  { label: "Law firms", links: [
+    { name: "Personal injury", href: "/services/law-firm-seo/personal-injury" },
+    { name: "Family law", href: "/services/law-firm-seo/family-law" },
+    { name: "Criminal defense", href: "/services/law-firm-seo/criminal-defense" },
+    { name: "Estate planning", href: "/services/law-firm-seo/estate-planning" },
+    { name: "Mass torts", href: "/services/law-firm-seo/mass-torts" },
+  ] },
+  { label: "Home services", links: [
+    { name: "HVAC", href: "/services/local-seo/hvac" },
+    { name: "Roofing", href: "/services/local-seo/roofing" },
+    { name: "Cleaning", href: "/services/local-seo/cleaning" },
+    { name: "Remodeling", href: "/services/local-seo/remodeling" },
+    { name: "Garage door & home services", href: "/services/local-seo/home-services" },
+  ] },
+  { label: "Online stores", links: [
+    { name: "Shopify", href: "/services/ecommerce-seo/shopify" },
+    { name: "WooCommerce", href: "/services/ecommerce-seo/woocommerce" },
+    { name: "Knife & outdoor stores", href: "/services/ecommerce-seo/outdoor-knife-stores" },
+  ] },
+];
+
 export default function Home() {
   const certCount = credentials.filter((c) => !c.isArticle).length;
   const review = {
@@ -454,9 +502,94 @@ export default function Home() {
           <Heading
             eyebrow="Specialized Verticals · AEO Direct Answer"
             title="Which US Businesses Benefit Most from SearchPrex SEO?"
-            sub="SearchPrex specializes in three high-value US verticals: Personal Injury & Trial Law Firms, Multi-Location Local Contractors, and Multi-SKU Shopify & WooCommerce stores. Every engagement is founder-executed with strict single-client city exclusivity to eliminate competitive conflicts."
+            sub="Three kinds of US business: law firms and attorneys, local contractors and small businesses, and Shopify and WooCommerce stores. The founder does the work, and we take one client per city and practice area, so we never work for your competitor."
           />
           <AudienceTabs tabs={TABS} />
+        </div>
+      </section>
+
+      {/* SERVICES — what we sell, with prices, linking each service page. */}
+      <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="Services"
+            title="SEO services for law firms, local businesses and online stores"
+            sub="Five services, one founder doing the work, published prices and month-to-month terms. Every plan starts with a free audit delivered within 24 hours."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800">
+                  <s.icon className="h-5 w-5" aria-hidden />
+                </span>
+                <h3 className={`${H} mt-4 text-lg text-neutral-950`}>{s.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
+                <span className="mt-4 flex items-center justify-between gap-2">
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-neutral-900">{s.price}</span>
+                  <ArrowRight className="h-4 w-4 text-neutral-900 transition group-hover:translate-x-1" aria-hidden />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* INDUSTRIES — the trades and practices with their own pages. */}
+          <div className="mt-12">
+            <h3 className={`${H} text-center text-xl text-neutral-950`}>Industries we work in</h3>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
+              {INDUSTRY_GROUPS.map((g) => (
+                <div key={g.label} className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">{g.label}</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {g.links.map((l) => (
+                      <li key={l.href}>
+                        <Link href={l.href} className="inline-block rounded-full border border-slate-200 px-3 py-1.5 text-sm text-slate-700 hover:border-neutral-900 hover:text-neutral-950">
+                          {l.name} SEO
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-center">
+              <Link href="/industries" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
+                All industries <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* PROBLEMS WE SOLVE — the searches people make when something breaks. */}
+      <section className="bg-neutral-950 px-4 py-20 text-white sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">Problems we solve</p>
+          <h2 className={`${H} mx-auto mt-3 max-w-3xl text-center text-3xl tracking-tight sm:text-4xl`}>
+            Something broke in Google? Start here.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-relaxed text-white/70">
+            The problems US businesses bring us most often, each with a plain guide to what is going on and how to fix it.
+          </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {PROBLEMS.map((p) => (
+              <Link
+                key={p.href}
+                href={p.href}
+                className="group rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-emerald-300/60 hover:bg-white/10"
+              >
+                <p.icon className="h-6 w-6 text-emerald-300" aria-hidden />
+                <h3 className={`${H} mt-4 text-lg`}>{p.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/70">{p.a}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-emerald-300">
+                  Read the fix <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -465,8 +598,8 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Methodology & Process"
-            title="How Does SearchPrex Execute Technical & Local SEO Engagements?"
-            sub="Our 3-phase execution model eliminates agency overhead: Phase 1 delivers a comprehensive technical crawl & competitor tear-down in 24 hours; Phase 2 executes direct code, schema, and local profile optimizations; Phase 3 provides closed-loop Monday revenue telemetry."
+            title="How our SEO process works"
+            sub="Three steps: a free audit of your site and competitors within 24 hours, the fixes and pages done by the founder, and a report every Monday showing what moved."
           />
           <ol className="grid gap-5 md:grid-cols-3">
             {STEPS.map((s) => (
@@ -627,7 +760,7 @@ export default function Home() {
             />
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Who does the work</p>
-              <h2 className={`${H} mt-2 text-3xl tracking-tight text-white`}>Mubashar Sharif</h2>
+              <h2 className={`${H} mt-2 text-3xl tracking-tight text-white`}>Meet your SEO strategist: Mubashar Sharif</h2>
               <p className="mt-1 text-sm text-white/65">
                 Founder · 5+ years in SEO · {certCount} Semrush certificates
               </p>
@@ -698,7 +831,11 @@ export default function Home() {
       {/* 10 · COVERAGE — every state and city page, compact */}
       <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-6xl">
-          <Heading eyebrow="Where" title={`Law firm and local SEO in ${LOCATION_STATES.length} states, ${LOCATION_CITY_COUNT} cities`} />
+          <Heading
+            eyebrow="Where"
+            title={`Law firm and local SEO in ${LOCATION_STATES.length} states, ${LOCATION_CITY_COUNT} cities`}
+            sub={`City pages for law firms and local businesses in ${LOCATION_STATES.map((s) => s.name).join(", ").replace(/, ([^,]*)$/, " and $1")}, each covering local courts, practice-area demand and the Map Pack.`}
+          />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {LOCATION_STATES.map((s) => (
               <div key={s.slug} className="rounded-2xl border border-slate-200 bg-white px-5 py-4">

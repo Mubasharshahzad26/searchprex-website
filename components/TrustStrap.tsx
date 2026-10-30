@@ -96,12 +96,12 @@ export default function TrustStrap() {
   return (
     <section aria-labelledby="trust-strap-heading" className="border-t border-slate-200 bg-white py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2
+        <p
           id="trust-strap-heading"
           className="mb-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-600"
         >
           Find SearchPrex on
-        </h2>
+        </p>
         <ul className="flex flex-wrap justify-center gap-2">
           {PROFILES.map((p) => (
             <li key={p.name}>
