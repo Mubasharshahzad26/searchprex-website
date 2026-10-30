@@ -117,7 +117,7 @@ export default function HeroV2() {
             <p
               className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-600"
             >
-              Hi, I&apos;m Mubashar · Founder-led · One client per city · 9 US states
+              Hi, I&apos;m Mubashar · Founder-led · One client per city · 9 states
             </p>
 
             {/* One primary keyword — "SEO agency", qualified by US and by the

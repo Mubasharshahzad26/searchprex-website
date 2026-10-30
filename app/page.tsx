@@ -491,7 +491,7 @@ export default function Home() {
           <Heading
             eyebrow="Specialized Verticals · AEO Direct Answer"
             title="SearchPrex's Solution-Oriented Approach"
-            sub="Three kinds of US business: law firms and attorneys, local contractors and small businesses, and Shopify and WooCommerce stores. The founder does the work, and we take one client per city and practice area, so we never work for your competitor."
+            sub="Three kinds of business: law firms and attorneys, local contractors and small businesses, and Shopify and WooCommerce stores. The founder does the work, and we take one client per city and practice area, so we never work for your competitor."
           />
           <AudienceTabs tabs={TABS} />
         </div>
@@ -558,7 +558,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Results"
-            title="SEO results from US clients' own dashboards"
+            title="SEO results from clients' own dashboards"
             sub="Every figure is on a screenshot from the client's own account. Pick your kind of business, click any screenshot to see it full size."
           />
           <ResultsShowcase cards={RESULT_CARDS} />
@@ -663,7 +663,7 @@ export default function Home() {
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-300">Why I work with US businesses</p>
                 <p className="mt-2 text-[15px] leading-relaxed text-white/80">
-                  I work from Pakistan, on US business hours. I chose US law firms, local businesses and online stores because I kept seeing the same thing: good businesses paying every month for SEO reports while the phone stayed quiet. I&apos;d rather do the work myself for fewer clients, be judged on calls and signed cases instead of rankings. If I can&apos;t show progress in 90 days, you don&apos;t pay for those 90 days.
+                  I work from Pakistan, on US business hours. I chose law firms, local businesses and online stores because I kept seeing the same thing: good businesses paying every month for SEO reports while the phone stayed quiet. I&apos;d rather do the work myself for fewer clients, be judged on calls and signed cases instead of rankings. If I can&apos;t show progress in 90 days, you don&apos;t pay for those 90 days.
                 </p>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
@@ -822,10 +822,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PRICING FORM — for readers deciding between plans. */}
+      <section className="bg-neutral-950 px-4 py-14 text-center text-white sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <h2 className={`${H} text-2xl tracking-tight text-white sm:text-3xl`}>Not sure which plan fits? Start with a free audit.</h2>
+          <p className="mt-3 text-sm text-white/70">Send your URL. I&apos;ll tell you which plan your site actually needs, or if you need one at all.</p>
+          <div className="mx-auto mt-6 max-w-xl">
+            <PillForm source="homepage-pricing-cta" tone="dark" />
+          </div>
+        </div>
+      </section>
+
       {/* 11 · FAQ */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-3xl">
-          <Heading eyebrow="FAQ" title="SEO questions US business owners ask before hiring me" />
+          <Heading eyebrow="FAQ" title="SEO questions business owners ask before hiring me" />
           <FaqAccordion faqs={FAQS} />
           <p className="mt-6 text-center">
             <Link href="/faq" className="inline-flex items-center gap-1 text-sm font-bold text-neutral-900 hover:underline">
