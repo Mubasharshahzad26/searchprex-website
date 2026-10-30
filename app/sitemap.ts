@@ -56,6 +56,17 @@ export const dynamic = "force-dynamic";
 
 type Entry = MetadataRoute.Sitemap[number];
 
+// When a static route last really changed, by path prefix (longest wins).
+// Only real edits go here: a lastmod Google can't trust gets ignored.
+const ROUTE_UPDATED: Array<[string, string]> = [
+  ["/services/law-firm-seo", "2026-10-31T12:00:00.000Z"],
+];
+function routeUpdated(path: string): Date | undefined {
+  if (path === "/") return new Date("2026-10-31T12:00:00.000Z");
+  const hit = ROUTE_UPDATED.filter(([p]) => path === p || path.startsWith(p + "/")).sort((x, y) => y[0].length - x[0].length)[0];
+  return hit ? new Date(hit[1]) : undefined;
+}
+
 const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: Entry["changeFrequency"] }> = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" },
   { path: "/services", priority: 0.9, changeFrequency: "monthly" },
@@ -206,6 +217,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const route of STATIC_ROUTES) {
     add({
       url: absolute(route.path),
+      lastModified: routeUpdated(route.path),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     });
