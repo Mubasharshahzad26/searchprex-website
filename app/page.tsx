@@ -23,7 +23,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, Bot, Clock, ExternalLink, MapPin, PhoneOff, Scale, SearchX, ShieldAlert,
+  ArrowRight, Bot, GraduationCap, Newspaper, Settings, Clock, ExternalLink, MapPin, PhoneOff, Scale, SearchX, ShieldAlert,
   ShoppingCart, Sparkles, Star, TrendingDown, Wrench,
 } from "lucide-react";
 
@@ -265,6 +265,13 @@ const PROBLEMS = [
   { icon: PhoneOff, q: "Leads not turning into cases?", a: "Work out what a slow intake costs, and the fixes that close the gap.", href: "/blog/slow-intake-cost" },
 ];
 
+const SOLUTIONS = [
+  { pain: "Paying for every click, and the leads stop when the budget does.", fix: "Leads from Google you don't pay per click for", detail: "Pages, Business Profile and reviews that keep bringing calls after the ad money runs out." },
+  { pain: "Monthly reports full of rankings, while the phone stays quiet.", fix: "Measured in calls, cases and revenue", detail: "Every Monday you get a plain-English report on what moved and what it brought in." },
+  { pain: "Sold by a senior, handed to a junior.", fix: "Dedicated client care from the founder", detail: "I do the audit, the work and the reports myself, and I take one client per city." },
+  { pain: "Locked into a long contract before you see anything.", fix: "7-day free trial and a 90-day money-back guarantee", detail: "Month-to-month after that. If I can't show progress in 90 days, you get those 90 days back." },
+];
+
 const INDUSTRY_GROUPS = [
   { label: "Law firms", links: [
     { name: "Personal injury", href: "/services/law-firm-seo/personal-injury" },
@@ -383,6 +390,29 @@ export default function Home() {
                   Read the fix <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
                 </span>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SOLUTION — each pain from the section above, answered. */}
+      <section className="bg-white px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Heading
+            eyebrow="The solution"
+            title="Here's the relief"
+            sub="The things that wore you out, and what changes when I take over."
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            {SOLUTIONS.map((x) => (
+              <div key={x.pain} className="rounded-3xl border border-slate-200 bg-white p-6">
+                <p className="text-sm text-slate-500 line-through decoration-slate-300">{x.pain}</p>
+                <p className={`${H} mt-3 flex items-start gap-2 text-lg text-neutral-950`}>
+                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-emerald-600" aria-hidden />
+                  {x.fix}
+                </p>
+                <p className="mt-2 pl-6 text-sm leading-relaxed text-slate-600">{x.detail}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -907,8 +937,8 @@ export default function Home() {
               className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
             >
               <div>
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
-                  📰
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-neutral-900">
+                  <Newspaper className="h-5 w-5" aria-hidden />
                 </span>
                 <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">News Desk</p>
                 <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
@@ -928,8 +958,8 @@ export default function Home() {
               className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
             >
               <div>
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
-                  🛠️
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-neutral-900">
+                  <Wrench className="h-5 w-5" aria-hidden />
                 </span>
                 <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">Code Playbooks</p>
                 <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
@@ -949,8 +979,8 @@ export default function Home() {
               className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
             >
               <div>
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
-                  🎓
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-neutral-900">
+                  <GraduationCap className="h-5 w-5" aria-hidden />
                 </span>
                 <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">Curriculum</p>
                 <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
@@ -970,8 +1000,8 @@ export default function Home() {
               className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
             >
               <div>
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-lg">
-                  ⚙️
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-neutral-900">
+                  <Settings className="h-5 w-5" aria-hidden />
                 </span>
                 <p className="mt-4 text-xs font-bold uppercase tracking-widest text-neutral-600">Utilities</p>
                 <h3 className={`${H} mt-1 text-lg text-neutral-950 group-hover:text-neutral-700`}>
@@ -990,8 +1020,13 @@ export default function Home() {
       </section>
 
       {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
-      <section id="free-da-checker" className="bg-white px-4 py-16 sm:px-6">
+      <section id="free-da-checker" className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
+          <Heading
+            eyebrow="Free tool"
+            title="How strong is your site, really?"
+            sub="Check your domain authority and technical health in seconds. No sign-up."
+          />
           <FreeDomainAuthorityChecker variant="home" />
         </div>
       </section>

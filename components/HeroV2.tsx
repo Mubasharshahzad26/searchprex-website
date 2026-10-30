@@ -38,7 +38,6 @@ import { AlertCircle, CheckCircle, Globe, Mail, Phone, Star } from "lucide-react
 
 import { CALL_HREF, OFFER_HREF } from "@/lib/offer";
 import {
-  HERO_PARAGRAPH,
   HERO_STATS,
   TRUSTPILOT_REVIEW_COUNT,
   TRUSTPILOT_URL,
@@ -50,6 +49,14 @@ const GREEN = "#171717";
 const GREEN_DARK = "#0a0a0a";
 const PURPLE = "#171717";
 const LINE = "#e2e8f0";
+
+const HERO_PILLARS = [
+  "Dedicated client care",
+  "Weekly SEO report",
+  "Revenue-focused",
+  "90-day money-back guarantee",
+  "7-day free trial",
+];
 
 type Status = "idle" | "loading" | "done" | "error";
 
@@ -134,26 +141,30 @@ export default function HeroV2() {
               </span>
             </h1>
 
-            <p className="mb-3 text-[15px] leading-relaxed sm:text-base" style={{ color: BODY }}>
-              You&apos;ve spent the budget, waited for the calls, and still nothing. Take a breath. Send me your
-              site and I&apos;ll tell you, in plain words, what&apos;s holding it back.{" "}
-              <strong style={{ color: GREEN_DARK }}>Written by me, not a tool.</strong>
+            <p className="mb-4 text-base leading-relaxed sm:text-lg" style={{ color: BODY }}>
+              We know you&apos;re in pain. We come with the solution, and a source of relief.
             </p>
 
-            {/* "Led by", not "Head by". And "Semrush-certified", not "Verified
-                SEO Expert": the certificates are real, linked and checkable on
-                /about; "verified expert" is self-awarded. */}
+            {/* The five promises, every one confirmed and published on /pricing. */}
+            <ul className="mb-4 flex flex-wrap gap-2">
+              {HERO_PILLARS.map((p) => (
+                <li
+                  key={p}
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-semibold"
+                  style={{ borderColor: LINE, color: INK }}
+                >
+                  <CheckCircle className="h-3.5 w-3.5 text-emerald-600" aria-hidden />
+                  {p}
+                </li>
+              ))}
+            </ul>
+
             <p className="text-sm" style={{ color: BODY }}>
               Led by{" "}
-              <Link
-                href="/about"
-                className="font-bold underline decoration-2 underline-offset-2"
-                style={{ color: INK }}
-              >
+              <Link href="/about" className="font-bold underline decoration-2 underline-offset-2" style={{ color: INK }}>
                 Mubashar Sharif
-              </Link>{" "}
-              — Senior SEO Analyst, Semrush-certified. You deal with the person doing the work, not a
-              rep.
+              </Link>
+              , Semrush-certified. Written by me, not a tool.
             </p>
           </div>
 
@@ -331,23 +342,6 @@ export default function HeroV2() {
           {/* ── Detail + proof — under the claim on desktop, under the form on
                  mobile, so the offer clears the fold on a phone. ── */}
           <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
-            <p className="mb-5 max-w-xl text-sm leading-relaxed" style={{ color: BODY }}>
-              {HERO_PARAGRAPH.map((seg, i) =>
-                seg.href ? (
-                  <Link
-                    key={i}
-                    href={seg.href}
-                    className="font-semibold underline decoration-[1.5px] underline-offset-2"
-                    style={{ color: PURPLE }}
-                  >
-                    {seg.text}
-                  </Link>
-                ) : (
-                  <span key={i}>{seg.text}</span>
-                )
-              )}
-            </p>
-
             <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
               {HERO_STATS.map((s) => (
                 <Link

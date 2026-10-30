@@ -102,8 +102,9 @@ export default function FreeDomainAuthorityChecker({
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
-      {/* Enterprise Header */}
+    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
+      {/* Enterprise Header — the homepage puts its own heading above. */}
+      <div className={variant === "home" ? "hidden" : undefined}>
       <div className="border-b border-slate-200 bg-slate-50 px-6 py-6 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -128,6 +129,7 @@ export default function FreeDomainAuthorityChecker({
           </div>
         </div>
       </div>
+      </div>
 
       {/* Main Container */}
       <div className="p-6 sm:p-8 lg:p-10">
@@ -136,7 +138,7 @@ export default function FreeDomainAuthorityChecker({
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Enter Law Firm Website Domain
+                  {variant === "home" ? "Your website" : "Enter Law Firm Website Domain"}
                 </label>
                 {city && (
                   <span className="text-[11px] text-slate-500">
@@ -152,7 +154,7 @@ export default function FreeDomainAuthorityChecker({
                     placeholder="e.g. yourfirm.com or mystore.com"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3.5 text-sm font-medium text-neutral-950 placeholder:text-slate-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
+                    className="w-full rounded-xl border border-slate-300 px-4 py-4 text-base font-medium text-neutral-950 placeholder:text-slate-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
                   />
                 </div>
                 <button
