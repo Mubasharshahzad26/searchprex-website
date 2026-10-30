@@ -27,9 +27,9 @@ export default function HalloweenOfferCard({ className = "", inline = false }: {
           <p className="text-xs font-bold uppercase tracking-wider text-orange-700">
             Halloween · until October 31
           </p>
-          <h2 id="halloween-offer-title" className="mt-1.5 text-xl font-black tracking-tight text-neutral-950 sm:text-2xl">
+          <p id="halloween-offer-title" className="mt-1.5 text-xl font-black tracking-tight text-neutral-950 sm:text-2xl">
             Free Google Business Profile Fright Check
-          </h2>
+          </p>
           <p className="mt-2 text-sm leading-relaxed text-slate-600">
             Is something scaring customers away from your profile? Send me your business and I&apos;ll check the seven
             things that most often hold a local profile back — the category, mismatched details, reviews, edits you

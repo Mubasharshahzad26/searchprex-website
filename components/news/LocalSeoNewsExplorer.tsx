@@ -121,6 +121,18 @@ export default function LocalSeoNewsExplorer({ posts, updates }: { posts: LocalS
       .sort((a, b) => sort === "latest" ? toTimestamp(b.date) - toTimestamp(a.date) : toTimestamp(a.date) - toTimestamp(b.date));
   }, [dateRange, interests, items, mode, query, sort]);
 
+  const monthGroups = useMemo(() => {
+    const groups: { label: string; items: FeedItem[] }[] = [];
+    for (const item of filteredItems) {
+      const t = toTimestamp(item.date);
+      const label = Number.isFinite(t) ? new Date(t).toLocaleDateString("en-US", { month: "long", year: "numeric" }) : "Undated";
+      const last = groups[groups.length - 1];
+      if (last && last.label === label) last.items.push(item);
+      else groups.push({ label, items: [item] });
+    }
+    return groups;
+  }, [filteredItems]);
+
   const toggleInterest = (interest: Interest) => {
     setInterests((current) => current.includes(interest) ? current.filter((item) => item !== interest) : [...current, interest]);
   };
@@ -172,8 +184,12 @@ export default function LocalSeoNewsExplorer({ posts, updates }: { posts: LocalS
       </div>
 
       {filteredItems.length ? (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filteredItems.map((item) => {
+        <div className="space-y-8">
+          {monthGroups.map((group) => (
+          <div key={group.label}>
+          <h3 className="mb-3 text-lg font-bold text-slate-950">Local SEO updates: {group.label}</h3>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {group.items.map((item) => {
             const cardContent = (
               <>
                 <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
@@ -182,7 +198,7 @@ export default function LocalSeoNewsExplorer({ posts, updates }: { posts: LocalS
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-slate-500"><time dateTime={new Date(toTimestamp(item.date)).toISOString().slice(0, 10)}>{formatDate(item.date)}</time>{item.trending && <span className="rounded-full bg-amber-50 px-2 py-0.5 font-semibold text-amber-900">Trending pick</span>}</div>
-                  <h3 className="text-lg font-bold leading-snug text-slate-950">{item.title}</h3>
+                  <h4 className="text-lg font-bold leading-snug text-slate-950">{item.title}</h4>
                   <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">{item.summary}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">{item.topics.slice(0, 3).map((topic) => <span key={topic} className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-600">{topic}</span>)}</div>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-900">{item.external ? `Source: ${item.source}` : "Read the full update"}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
@@ -195,6 +211,9 @@ export default function LocalSeoNewsExplorer({ posts, updates }: { posts: LocalS
               <Link key={item.id} href={item.href} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-800/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700">{cardContent}</Link>
             );
           })}
+          </div>
+          </div>
+          ))}
         </div>
       ) : (
         <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-5 py-12 text-center">

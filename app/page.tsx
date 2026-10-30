@@ -955,6 +955,10 @@ export default function Home() {
               </span>
             </Link>
           </div>
+          <p className="mt-6 text-center text-sm text-slate-600">
+            Tracking Google Maps and Business Profile changes? Read the dated{" "}
+            <Link href="/resources/news/local-seo-updates" className="font-bold text-neutral-950 underline underline-offset-2">local SEO news and updates</Link>.
+          </p>
         </div>
       </section>
 

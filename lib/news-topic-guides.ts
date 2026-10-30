@@ -2,7 +2,7 @@
 export const NEWS_TOPIC_GUIDES = [
   {
     slug: "local-seo-updates",
-    title: "Local SEO News 2026: What Confirmed Updates Mean for the Map Pack",
+    title: "Local SEO News & Updates 2026: Google Maps and Business Profile Changes, Month by Month",
     category: "Local SEO",
     tagColor: "#c2410c",
     badge: "Pinned Pillar",

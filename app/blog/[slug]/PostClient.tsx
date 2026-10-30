@@ -962,9 +962,21 @@ export default function PostClient({
               </p>
             )}
 
-            {promo}
+            {/* Local hub: the direct answer first (every item dated and in the
+                feed below with its source), then the feed, then the promo. */}
+            {post.slug === "local-seo-updates" && (
+              <div className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5 sm:p-6">
+                <p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-800">In short · as of October 31, 2026</p>
+                <p className="mt-2 text-base leading-7 text-slate-800">
+                  <strong>The latest local search news:</strong> Google added a WhatsApp button to some local panels (Oct 7), and is testing Google Posts higher in panels (Oct 19), a new local panel layout (Oct 22) and expanded Business Profile performance reports (Oct 23). In September it set a four-day review window for certain suggested edits. None is a confirmed ranking change.
+                </p>
+              </div>
+            )}
+
+            {post.slug !== "local-seo-updates" && promo}
 
             {post.slug === "local-seo-updates" && <LocalSeoNewsExplorer posts={localNewsPosts || []} updates={localSeoNewsUpdates} />}
+            {post.slug === "local-seo-updates" && promo}
             {post.slug === "local-seo-updates" && <LocalSeoResearchNote />}
             {post.slug === "local-seo-updates" && <LocalSeoNewsActions />}
 
@@ -972,7 +984,7 @@ export default function PostClient({
               <section aria-labelledby="local-domain-authority" className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
                 <div className="mb-4">
                   <p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-800">Free NicheSEO Pro tool</p>
-                  <h2 id="local-domain-authority" className="mt-1 text-xl font-bold text-slate-950">Check your domain authority</h2>
+                  <p id="local-domain-authority" className="mt-1 text-xl font-bold text-slate-950">Check your domain authority</p>
                   <p className="mt-1 text-sm leading-6 text-slate-600">Enter a website to open the authority checker. Domain Authority is a comparative third-party metric, not a Google local ranking score.</p>
                 </div>
                 <form onSubmit={handleDaCheck} className="flex flex-col gap-2 sm:flex-row">
@@ -1235,7 +1247,7 @@ export default function PostClient({
 
             {isLocalUpdates && (
               <section aria-labelledby="local-sidebar-resources" className="rounded-2xl border border-slate-200 bg-white p-5">
-                <h2 id="local-sidebar-resources" className="text-xs font-bold uppercase tracking-widest text-slate-500">Local SEO resources</h2>
+                <p id="local-sidebar-resources" className="text-xs font-bold uppercase tracking-widest text-slate-500">Local SEO resources</p>
                 <nav aria-label="Related Local SEO services and guides" className="mt-3 flex flex-col gap-3">
                   <Link href="/services/local-seo" className="text-sm font-semibold leading-5 text-slate-900 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-900">Local SEO services</Link>
                   <Link href="/resources/local-seo-tips" className="text-sm font-semibold leading-5 text-slate-900 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-900">Local SEO tips and lead playbook</Link>
@@ -1246,7 +1258,7 @@ export default function PostClient({
 
             {isLocalUpdates && localNewsPosts && localNewsPosts.length > 0 && (
               <section aria-labelledby="local-sidebar-news" className="rounded-2xl border border-slate-200 bg-white p-5">
-                <h2 id="local-sidebar-news" className="text-xs font-bold uppercase tracking-widest text-slate-500">Related Local SEO news</h2>
+                <p id="local-sidebar-news" className="text-xs font-bold uppercase tracking-widest text-slate-500">Related Local SEO news</p>
                 <div className="mt-3 flex flex-col gap-4">
                   {localNewsPosts.slice(0, 2).map((item) => (
                     <Link key={item.slug} href={`/resources/news/${item.slug}`} className="group flex items-start gap-3">

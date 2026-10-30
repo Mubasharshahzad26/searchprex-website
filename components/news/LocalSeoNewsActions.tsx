@@ -6,7 +6,7 @@ export default function LocalSeoNewsActions() {
     <section aria-labelledby="local-seo-resources" className="mb-10">
       <div className="mb-4">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Practical next steps</p>
-        <h2 id="local-seo-resources" className="mt-1 text-xl font-bold text-slate-950">Local SEO resources</h2>
+        <p id="local-seo-resources" className="mt-1 text-xl font-bold text-slate-950">Local SEO resources</p>
       </div>
       <div className="grid gap-3 md:grid-cols-3">
         <Link href="/resources/local-seo-tips" className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-4 transition hover:border-emerald-800/40 hover:shadow-sm">

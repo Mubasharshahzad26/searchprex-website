@@ -298,7 +298,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
 
   // Pillar pages for hasPart (Topic Guides)
   const pillarHasPart = [
-    { "@type": "WebPage", name: "Local SEO News 2026: What Confirmed Updates Mean for the Map Pack", url: `${PAGE_URL}/local-seo-updates` },
+    { "@type": "WebPage", name: "Local SEO News & Updates 2026: Google Maps and Business Profile Changes, Month by Month", url: `${PAGE_URL}/local-seo-updates` },
     { "@type": "WebPage", name: "Google Algorithm Updates 2026: Every Confirmed Update, Dated", url: `${PAGE_URL}/google-algorithm-updates` },
     { "@type": "WebPage", name: "The State of SEO in 2026: What Eight Months of Updates Actually Taught Us", url: `${PAGE_URL}/state-of-seo-2026` },
     { "@type": "WebPage", name: "AI SEO News 2026: AI Overviews at 2.5B Users and What Google Now Reports", url: `${PAGE_URL}/ai-sge-seo-news` },

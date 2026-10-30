@@ -12,9 +12,9 @@ export default function GbpCheckCard({ source }: { source: string }) {
       <div className="grid gap-6 rounded-2xl border border-neutral-900 bg-white p-5 shadow-sm sm:p-7 xl:grid-cols-[1.1fr_1fr] md:items-start">
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">Free · report in 24 hours</p>
-          <h2 id="gbp-check-title" className="mt-1.5 text-xl font-black tracking-tight text-neutral-950 sm:text-2xl">
+          <p id="gbp-check-title" className="mt-1.5 text-xl font-black tracking-tight text-neutral-950 sm:text-2xl">
             Did this update affect your Business Profile?
-          </h2>
+          </p>
           <p className="mt-2 text-sm leading-relaxed text-slate-600">
             Send me your business and I&apos;ll check your Google Business Profile myself: the category, name, address
             and phone, reviews, edits you didn&apos;t make, and where the profile sends people. You get a short report of

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useMemo } from "react";
 import { Check, Copy, Search, Sparkles, Terminal, Filter, SlidersHorizontal } from "lucide-react";
 import { color, heading, radius, text } from "@/lib/design-tokens";
@@ -384,6 +385,10 @@ export default function GscRegexClient() {
           })}
         </div>
       )}
+      <p className="mt-10 text-sm" style={{ color: color.subtle }}>
+        Filtering &quot;near me&quot; queries after a Maps change? Check the date against our{" "}
+        <Link href="/resources/news/local-seo-updates" className="font-semibold underline underline-offset-2" style={{ color: color.ink }}>local search updates log</Link>.
+      </p>
     </div>
   );
 }
