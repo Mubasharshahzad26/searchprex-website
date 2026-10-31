@@ -123,9 +123,9 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
   {
     name: "Personal Injury",
     slug: "personal-injury",
-    metaTitle: "Personal Injury Lawyer SEO Services (USA & State-Wise) | 7-Day Free Trial",
+    metaTitle: "Personal Injury Lawyer SEO Agency (USA 9 States) | 7-Day Free Trial",
     metaDescription:
-      "State-specific SEO for personal injury lawyers across TX, MI, PA, CA, AZ, LA, OH. Freight corridor silos, Level-1 trauma centers & 24/7 intake. $1,500–$2,500/mo.",
+      "Revenue-obsessed SEO agency for personal injury lawyers across TX, MI, PA, CA, AZ, LA, OH, NM, KS. Commercial freight corridors, Level-1 trauma centers & 24/7 intake.",
     h1: "Personal Injury Lawyer SEO Across Major U.S. Jurisdictions",
     accent: "",
     heroSub:
@@ -207,6 +207,11 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
       "shreveport",
       "cleveland",
       "albuquerque",
+      "kansas-city",
+      "wichita",
+      "overland-park",
+      "olathe",
+      "topeka",
     ],
   },
   {
@@ -496,16 +501,19 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
 
 const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   "personal-injury": {
-    primaryKeyword: "personal injury lawyer SEO",
+    primaryKeyword: "personal injury lawyer SEO agency",
     keywordMap: {
       commercial: [
-        "personal injury lawyer SEO",
+        "personal injury lawyer SEO agency",
+        "personal injury law firm SEO",
+        "seo for personal injury lawyers",
         "car accident lawyer SEO",
         "truck accident lawyer SEO",
         "katy 18 wheeler accident lawyer",
         "detroit no fault auto injury lawyer",
         "philadelphia catastrophic injury lawyer",
         "san jose commercial truck crash attorney",
+        "kansas city commercial truck accident lawyer",
       ],
       problem: [
         "what to do after a car accident",

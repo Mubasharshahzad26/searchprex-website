@@ -101,6 +101,7 @@ export default async function IndustryPage({
                 { "@type": "AdministrativeArea", name: "Louisiana" },
                 { "@type": "AdministrativeArea", name: "Ohio" },
                 { "@type": "AdministrativeArea", name: "New Mexico" },
+                { "@type": "AdministrativeArea", name: "Kansas" },
               ]
             : { "@type": "Country", name: "United States" },
         audience: { "@type": "BusinessAudience", audienceType: `${page.name} law firms` },

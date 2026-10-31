@@ -2,27 +2,25 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Scale,
-  ShieldCheck,
   MapPin,
-  Hospital,
-  Truck,
   ArrowRight,
   Gavel,
-  CheckCircle2,
   Lock,
   PhoneCall,
   Clock,
-  Sparkles,
   ExternalLink,
   ChevronRight,
-  Award,
-  Zap,
-  Check,
-  TrendingUp,
   FileText,
-  UserCheck,
+  Search,
+  Sparkles,
+  Bot,
+  BrainCircuit,
+  MessageSquare,
+  Shield,
+  HelpCircle,
 } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
@@ -427,6 +425,56 @@ const JURISDICTIONS: JurisdictionData[] = [
       { name: "Albuquerque", county: "Bernalillo County", href: "/locations/new-mexico/albuquerque" },
     ],
   },
+  {
+    id: "kansas",
+    state: "Kansas",
+    stateAbbr: "KS",
+    badge: "Kansas City, Wichita & I-70 Spine",
+    headline: "Kansas Personal Injury SEO: Agricultural Logistics & 49% Fault Rule",
+    summary:
+      "Kansas tort law strictly bars claimants if they are 50% or more at fault under K.S.A. § 60-258a. We structure search funnels targeting cross-country grain and cattle freight on I-70 and I-35, and Level-1 trauma catchment at KU Medical Center.",
+    stateHubHref: "/locations/kansas",
+    statute: {
+      rule: "49% Modified Comparative Fault Standard",
+      code: "K.S.A. § 60-258a",
+      explanation:
+        "Under Kansas law, an injured party can only recover if their causal negligence was less than the defendant's (49% or lower). If equal (50/50), recovery is barred. Content must clarify this distinction so clients understand liability.",
+      barEthicsNote:
+        "Kansas Rules of Professional Conduct Rule 7.1: Strict prohibition on creating unjustified expectations or deceptive comparisons.",
+    },
+    corridors: [
+      {
+        name: "I-70 Transcontinental Freight Highway",
+        detail: "Major east-west logistics artery carrying heavy cross-country commercial semi-trucks through Wyandotte and Shawnee counties.",
+      },
+      {
+        name: "I-35 Logistics Spine (Wichita to Kansas City)",
+        detail: "High-density commercial corridor connecting agricultural, manufacturing, and aviation supply chains.",
+      },
+      {
+        name: "US-69 & I-435 Interchange (Overland Park)",
+        detail: "Rapidly expanding suburban commuter and delivery corridor in Johnson County with severe rush-hour collisions.",
+      },
+    ],
+    hospitals: [
+      { name: "University of Kansas Hospital (KU Med)", type: "Level-1 Adult Comprehensive Trauma", city: "Kansas City" },
+      { name: "Wesley Medical Center", type: "Level-1 Pediatric & Adult Trauma", city: "Wichita" },
+      { name: "Stormont Vail Health", type: "Level-2 Regional Trauma Center", city: "Topeka" },
+    ],
+    keywordSilos: [
+      "kansas city ks commercial truck accident lawyer",
+      "wichita catastrophic personal injury attorney",
+      "overland park highway collision lawyer",
+      "kansas 49 percent comparative negligence attorney",
+    ],
+    cities: [
+      { name: "Kansas City", county: "Wyandotte County", href: "/locations/kansas/kansas-city" },
+      { name: "Wichita", county: "Sedgwick County", href: "/locations/kansas/wichita" },
+      { name: "Overland Park", county: "Johnson County", href: "/locations/kansas/overland-park" },
+      { name: "Olathe", county: "Johnson County", href: "/locations/kansas/olathe" },
+      { name: "Topeka", county: "Shawnee County", href: "/locations/kansas/topeka" },
+    ],
+  },
 ];
 
 export default function PersonalInjuryExecutiveView({
@@ -443,60 +491,57 @@ export default function PersonalInjuryExecutiveView({
   const sourcePage = `/services/law-firm-seo/${page.slug}`;
 
   return (
-    <div className="bg-white font-sans text-slate-900 selection:bg-emerald-100 selection:text-emerald-900">
-      {/* ── 1. HERO SECTION: Clean Light Enterprise Theme with Hennessey Hook ── */}
-      <section className="relative border-b border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50/50 pt-12 pb-16 sm:pt-16 sm:pb-24">
+    <div className="bg-white font-sans text-slate-900 selection:bg-slate-200 selection:text-slate-950">
+      {/* ── 1. HERO SECTION: Clean Monochromatic B2B Authority ── */}
+      <section className="relative border-b border-slate-200 bg-white pt-12 pb-16 sm:pt-16 sm:pb-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb & Institutional Pill */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-emerald-800">
-              <Scale className="h-3.5 w-3.5 text-emerald-600" />
-              <span>Personal Injury Law Firm SEO · USA & Multi-State Jurisdictions</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-slate-900">
+              <Scale className="h-3.5 w-3.5 text-slate-900" />
+              <span>Personal Injury Law Firm SEO · USA Hub (9 Major States)</span>
             </div>
             <div className="hidden items-center gap-1.5 text-xs text-slate-500 sm:flex">
-              <Link href="/services/law-firm-seo" className="hover:text-slate-900 transition">
+              <Link href="/services/law-firm-seo" className="hover:text-slate-950 underline underline-offset-2">
                 Law Firm SEO
               </Link>
               <span>/</span>
-              <span className="font-semibold text-slate-800">Personal Injury</span>
+              <span className="font-semibold text-slate-950">Personal Injury Hub</span>
             </div>
           </div>
 
           <div className="mt-8 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             {/* Left Column: Direct Managing Partner Pitch */}
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-                The SEO Partner You Wish You’d Hired First
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-600">
+                The Dedicated SEO Partner You Wish You’d Hired First
               </p>
               <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl sm:leading-[1.12]">
-                Your Law Firm SEO Partner for Higher-Value Leads & More Signed Catastrophic Cases.
+                Personal Injury Lawyer SEO Agency for High-Value Leads & Signed Catastrophic Cases.
               </h1>
 
-              <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">
+              <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
                 Most legal marketing agencies deliver low-value fender benders that exhaust your intake team.
                 SearchPrex builds authoritative search architecture targeting commercial freight liability,
-                interstate trucking corridors, and Level-1 trauma radius catchment across 8 major U.S. states.
+                interstate trucking corridors, and Level-1 trauma radius catchment across all 9 major U.S. states where we serve.
               </p>
 
-              {/* 3 Trust Metric Cards */}
+              {/* 3 Trust Metrics - Pure Monochromatic Numbers */}
               <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs">
-                  <div className="flex items-center gap-1.5 text-xs font-black text-slate-950">
-                    <Lock className="h-3.5 w-3.5 text-emerald-600" /> 1 Firm Per City
-                  </div>
-                  <p className="mt-1 text-xs text-slate-500">Strict territorial exclusivity enforced</p>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Exclusivity</p>
+                  <p className="mt-1 text-lg font-black text-slate-950">1 Firm Per City</p>
+                  <p className="mt-1 text-xs text-slate-600">Zero internal conflict of interest</p>
                 </div>
-                <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs">
-                  <div className="flex items-center gap-1.5 text-xs font-black text-slate-950">
-                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> State Bar Ethics
-                  </div>
-                  <p className="mt-1 text-xs text-slate-500">ABA Rule 7.1 & TX/MI/PA compliant</p>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Ethics</p>
+                  <p className="mt-1 text-lg font-black text-slate-950">State Bar Immune</p>
+                  <p className="mt-1 text-xs text-slate-600">ABA Model Rule 7.1 compliant</p>
                 </div>
-                <div className="col-span-2 rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs sm:col-span-1">
-                  <div className="flex items-center gap-1.5 text-xs font-black text-slate-950">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 7-Day Free Trial
-                  </div>
-                  <p className="mt-1 text-xs text-slate-500">Founder-led reviewable diagnostic sprint</p>
+                <div className="col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:col-span-1">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">First Step</p>
+                  <p className="mt-1 text-lg font-black text-slate-950">7-Day Free Trial</p>
+                  <p className="mt-1 text-xs text-slate-600">Reviewable diagnostic sprint</p>
                 </div>
               </div>
 
@@ -510,7 +555,7 @@ export default function PersonalInjuryExecutiveView({
                 </a>
                 <a
                   href="#hero-form"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 shadow-xs transition hover:border-slate-500 hover:bg-slate-50"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-xs transition hover:border-slate-500 hover:bg-slate-50"
                 >
                   Request Market Audit
                 </a>
@@ -518,8 +563,8 @@ export default function PersonalInjuryExecutiveView({
             </div>
 
             {/* Right Column: Founder-Reviewed Intake Sidebar Form */}
-            <div id="hero-form" className="relative scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-lg">
-              <div className="absolute -top-3.5 right-6 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-0.5 text-[11px] font-black uppercase tracking-wider text-emerald-800">
+            <div id="hero-form" className="relative scroll-mt-24 rounded-2xl border border-slate-300 bg-white p-6 sm:p-8 shadow-sm">
+              <div className="absolute -top-3.5 right-6 rounded-full border border-slate-300 bg-slate-100 px-3 py-0.5 text-[11px] font-black uppercase tracking-wider text-slate-900">
                 Direct Founder Review
               </div>
               <h2 className="text-xl font-black text-slate-950">
@@ -547,8 +592,8 @@ export default function PersonalInjuryExecutiveView({
               </div>
 
               <div className="mt-4 border-t border-slate-200 pt-4 flex items-center justify-between text-[11px] text-slate-500">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> Confidential & Private
+                <span className="flex items-center gap-1.5 font-medium text-slate-800">
+                  <Lock className="h-3.5 w-3.5 text-slate-800" /> Confidential & Private
                 </span>
                 <span>Founder replies in &lt; 24h</span>
               </div>
@@ -557,121 +602,155 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* ── 2. HENNESSEY APPROACH: "YOU'RE IN THE RIGHT PLACE IF" ── */}
-      <section className="border-b border-slate-200 bg-slate-50 py-14">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-              Clear Alignment for Serious Trial Lawyers
+      {/* ── 2. EMOTIONAL CLIENT DEDICATION: "WE KNOW THE PAIN YOU CARRY" ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-slate-300 bg-white p-8 sm:p-12 shadow-sm">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              Dedicated Client Care & Real Partnership
             </p>
-            <h2 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
-              You’re in the Right Place if:
+            <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
+              We Know Exactly the Burden and Frustration You Carry Every Day.
             </h2>
-          </div>
 
-          <div className="mt-8 grid gap-5 sm:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-              <div className="inline-flex rounded-lg bg-emerald-100 p-2 text-emerald-800">
-                <Check className="h-5 w-5" />
-              </div>
-              <h3 className="mt-4 text-base font-black text-slate-950">You’re tired of empty vanity metrics.</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Rankings for generic terms that only attract minor property damage or disputed low-limit claims
-                waste your intake team’s valuable time. You want signed catastrophic cases.
+            <div className="mt-6 space-y-4 text-sm leading-relaxed text-slate-700 sm:text-base">
+              <p>
+                You became a personal injury attorney to fight for injured human beings whose lives were derailed by catastrophic semi-truck collisions, chemical plant explosions, and corporate recklessness. You carry the financial weight of running a high-stakes contingency practice where every case requires substantial upfront capital.
+              </p>
+              <p>
+                Yet every month, you watch high-spend billboard firms dominate vanity search results, while generic SEO agencies charge you \$5,000 to \$10,000 every single month only to hand you over to junior interns who have never read a state tort statute in their lives. Worse, your intake coordinators spend exhausting hours filtering calls from unviable property damage claims and minor scratches that cost more to answer than they will ever yield.
+              </p>
+              <p className="font-semibold text-slate-900">
+                SearchPrex is not another transactional SEO vendor. We are revenue-obsessed, dedicated legal search architects who treat your firm’s reputation, time, and courtroom advocacy with the deepest respect.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-              <div className="inline-flex rounded-lg bg-emerald-100 p-2 text-emerald-800">
-                <Check className="h-5 w-5" />
+            <div className="mt-8 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-slate-500">01. Protecting Your Time</p>
+                <p className="mt-1 text-xs text-slate-700">Pre-qualifying claimants on statutory fault thresholds before they ever call your receptionist.</p>
               </div>
-              <h3 className="mt-4 text-base font-black text-slate-950">You crave direct, intelligent communication.</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                You don’t want to talk to an entry-level account manager who doesn’t know the difference between
-                Texas Proportionate Responsibility and Michigan No-Fault PIP reform.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-              <div className="inline-flex rounded-lg bg-emerald-100 p-2 text-emerald-800">
-                <Check className="h-5 w-5" />
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-slate-500">02. Defending Your Reputation</p>
+                <p className="mt-1 text-xs text-slate-700">100% adherence to ABA Model Rule 7.1 and state bar advertising guidelines with zero deceptive outcome claims.</p>
               </div>
-              <h3 className="mt-4 text-base font-black text-slate-950">You insist on true market exclusivity.</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Traditional agencies pitch 5 competitors in the same city. We strictly enforce ONE law firm per
-                metropolitan market, guaranteeing zero internal conflicts of interest.
-              </p>
+              <div>
+                <p className="text-xs font-black uppercase tracking-wider text-slate-500">03. Driving Signed Retainers</p>
+                <p className="mt-1 text-xs text-slate-700">Positioning your trial partners directly along high-limit commercial freight corridors and Level-1 trauma centers.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 3. HENNESSEY THESIS: "SEO FOR LAW FIRMS IS A DIFFERENT BEAST" ── */}
-      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
+      {/* ── 3. WHY WE CHOSE THE USA MARKET & LAW FIRM SEO (SEMANTIC TOPICAL AUTHORITY) ── */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-                Courtroom Excellence vs. Search Dominance
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+                Strategic Market Focus
               </p>
               <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-                SEO for Personal Injury Law Firms is a Different Beast.
+                Why We Specialize Exclusively in U.S. Personal Injury Law Firm SEO
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate-700">
-                We won’t sugar-coat it: ranking on page one of Google for high-value personal injury cases
-                is the most cutthroat, dog-eat-dog competitive space in search marketing.
+                The United States personal injury tort system is the most complex, jurisdictionally fragmented, and high-stakes legal market in the world. In the U.S., personal injury claims operate under distinct state statutes — from Texas proportionate responsibility to Michigan no-fault PIP tiers and Pennsylvania limited tort elections.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                Top-tier attorneys understand courtroom persuasion and trial strategy, but translating that
-                into high-converting organic dominance requires reverse-engineering local search intent,
-                state-specific tort thresholds, and commercial freight liability.
+                In consumer e-commerce, an agency chases sheer search volume. But in U.S. personal injury litigation, a single commercial 18-wheeler wreck or catastrophic spinal injury case carries a settlement value of \$500,000 to over \$5,000,000. Winning in this space requires engineering semantic keyword clusters, entities, and topical maps that match the exact statutory language victims and referring attorneys research during life-altering crises.
               </p>
-              <div className="mt-6 rounded-xl border-l-4 border-emerald-600 bg-slate-50 p-4">
-                <p className="text-xs font-bold text-slate-900">
-                  {page.answerCapsule}
-                </p>
+
+              <div className="mt-6 space-y-2 text-xs font-medium text-slate-800">
+                <p>• Commercial Motor Carrier Safety Administration (FMCSA) statutory violations</p>
+                <p>• Level-1 adult and pediatric trauma center bedside mobile search catchment</p>
+                <p>• State-specific comparative fault thresholds and wrongful death beneficiaries</p>
+                <p>• Clean contextual link architecture between <Link href="/services/law-firm-seo" className="font-bold underline">Law Firm SEO</Link>, practice hubs, and municipal courts</p>
               </div>
             </div>
 
-            {/* Comparison Highlights */}
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
-              <h3 className="text-lg font-black text-slate-950">Why Standard Agency SEO Fails</h3>
-              <ul className="mt-4 space-y-3 text-xs leading-relaxed text-slate-700">
-                <li className="flex items-start gap-2.5">
-                  <span className="rounded bg-rose-100 p-1 text-rose-700 font-bold">✕</span>
-                  <span><strong>Generic AI Blog Posts:</strong> Low-effort articles like &quot;What to Do After a Car Accident&quot; that attract zero qualified callers.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="rounded bg-rose-100 p-1 text-rose-700 font-bold">✕</span>
-                  <span><strong>Ignorance of Tort Statutes:</strong> Treating Michigan the same as Texas, ignoring PIP medical caps and proportionate fault bars.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="rounded bg-rose-100 p-1 text-rose-700 font-bold">✕</span>
-                  <span><strong>No Freight Corridor Targeting:</strong> Overlooking high-limit interstate freight routes (I-10, I-94, I-95) where commercial coverage exists.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="rounded bg-emerald-100 p-1 text-emerald-700 font-bold">✓</span>
-                  <span><strong>The SearchPrex Difference:</strong> Exact statutory liability silos, Level-1 trauma catchment mapping, and 1-firm-per-city exclusivity.</span>
-                </li>
-              </ul>
+              <h3 className="text-base font-black uppercase tracking-wider text-slate-950">
+                Core Semantic Keyword Clusters We Dominate:
+              </h3>
+              <div className="mt-4 space-y-3 text-xs leading-relaxed text-slate-700">
+                <div className="border-l-2 border-slate-900 pl-3">
+                  <p className="font-bold text-slate-950">High-Stakes Commercial Trucking Silos</p>
+                  <p className="text-slate-600">“18 wheeler jackknife attorney”, “commercial freight carrier liability lawyer”, “interstate tanker crash law firm”.</p>
+                </div>
+                <div className="border-l-2 border-slate-900 pl-3">
+                  <p className="font-bold text-slate-950">Statutory Liability & Fault Threshold Queries</p>
+                  <p className="text-slate-600">“51 percent modified comparative fault recovery”, “Michigan pip medical choice caps”, “limited tort exception lawyer”.</p>
+                </div>
+                <div className="border-l-2 border-slate-900 pl-3">
+                  <p className="font-bold text-slate-950">Catastrophic & Wrongful Death Life-Event Search</p>
+                  <p className="text-slate-600">“Traumatic brain injury lawyer Level 1 trauma”, “paraplegia spinal cord collision attorney”, “wrongful death highway suit”.</p>
+                </div>
+                <div className="border-l-2 border-slate-900 pl-3">
+                  <p className="font-bold text-slate-950">Attorney Co-Counsel & High-Value Referrals</p>
+                  <p className="text-slate-600">“Referring 18 wheeler case Texas co counsel”, “complex litigation referral personal injury PA”.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 4. JURISDICTIONAL COMMAND CENTER: State-by-State Superpower (Light Theme) ── */}
-      <section id="jurisdictions" className="scroll-mt-16 border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
+      {/* ── 4. BEYOND TRADITIONAL SEO: AEO, GEO & LLMS OPTIMIZATION ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-              Interactive State-by-State Jurisdictional Intelligence
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              The 2026+ Legal Search Reality
             </p>
             <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-              Personal Injury Search Architecture Across 8 U.S. States
+              We Don’t Just Do Traditional SEO. We Engineer AEO | GEO | LLMs Optimization.
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-600">
-              Personal injury law is strictly jurisdictional. Every state operates under distinct comparative fault thresholds,
-              unique freight transit bottlenecks, and local State Bar advertising rules. Select your state below to inspect the localized SEO model:
+              Google algorithms, AI Overviews, and conversational engines (ChatGPT, Google Gemini, Perplexity) have transformed how injured clients find legal representation. Your firm must be the authoritative answer across all AI surfaces:
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Pillar 01</p>
+              <h3 className="mt-2 text-lg font-black text-slate-950">Local Map Pack & GMB Dominance</h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                We optimize Google Business Profiles with accurate proximity signals, verified primary legal categories, geotagged jurisdictional photos, and structured review management that locks your firm into the top 3-Pack.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Pillar 02</p>
+              <h3 className="mt-2 text-lg font-black text-slate-950">Answer Engine Optimization (AEO)</h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                Google AI Overviews lift concise, statutory-backed answers directly from authoritative pages. We structure your content with Schema.org JSON-LD and direct answer capsules so Google features your attorneys as the cited expert.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Pillar 03</p>
+              <h3 className="mt-2 text-lg font-black text-slate-950">LLMs & GEO Optimization (ChatGPT / Gemini)</h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                When prospective clients ask ChatGPT or Gemini &quot;Who is the top truck accident attorney in Houston?&quot;, LLMs rely on entity authority, unstructured citations, and state bar listings. We build your firm&apos;s digital entity profile across legal databases.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. JURISDICTIONAL COMMAND CENTER: 9 U.S. STATES IN CLEAN MONOCHROME ── */}
+      <section id="jurisdictions" className="scroll-mt-16 border-b border-slate-200 bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              State-by-State Jurisprudential Intelligence
+            </p>
+            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
+              Personal Injury Search Architecture Across 9 U.S. States
+            </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-600">
+              Every state operates under distinct comparative fault thresholds, freight corridors, and local State Bar advertising rules. Select any of our 9 active states below to inspect the localized SEO model:
             </p>
           </div>
 
@@ -685,11 +764,11 @@ export default function PersonalInjuryExecutiveView({
                   onClick={() => setActiveStateId(item.id)}
                   className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all sm:text-sm ${
                     active
-                      ? "border border-emerald-600 bg-emerald-600 text-white shadow-sm"
-                      : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                      ? "border border-slate-950 bg-slate-950 text-white shadow-xs"
+                      : "border border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-400 hover:bg-white"
                   }`}
                 >
-                  <span className={`rounded px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${active ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
+                  <span className={`rounded px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${active ? "bg-white/20 text-white" : "bg-slate-200 text-slate-800"}`}>
                     {item.stateAbbr}
                   </span>
                   <span>{item.state}</span>
@@ -698,13 +777,12 @@ export default function PersonalInjuryExecutiveView({
             })}
           </div>
 
-          {/* Active Jurisdiction Detail Card (Light Theme) */}
-          <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
+          {/* Active Jurisdiction Detail Card */}
+          <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-10 shadow-xs">
             {/* Header of Active Tab */}
             <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
-                  <Award className="h-3.5 w-3.5 text-emerald-600" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-bold text-slate-900">
                   {activeJurisdiction.badge}
                 </span>
                 <h3 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
@@ -718,10 +796,10 @@ export default function PersonalInjuryExecutiveView({
               {activeJurisdiction.stateHubHref && (
                 <Link
                   href={activeJurisdiction.stateHubHref}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-800 transition hover:border-slate-400 hover:bg-slate-100"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-900 transition hover:border-slate-500"
                 >
                   <span>View {activeJurisdiction.state} Master Hub</span>
-                  <ExternalLink className="h-3.5 w-3.5 text-slate-500" />
+                  <ExternalLink className="h-3.5 w-3.5 text-slate-600" />
                 </Link>
               )}
             </div>
@@ -729,23 +807,23 @@ export default function PersonalInjuryExecutiveView({
             {/* 3-Column Jurisdictional Breakdown */}
             <div className="mt-8 grid gap-8 lg:grid-cols-3">
               {/* Column 1: Tort Statute & Ethics */}
-              <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-6">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-800">
-                  <Gavel className="h-4 w-4 text-amber-700" />
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-500">
+                  <Gavel className="h-4 w-4 text-slate-900" />
                   <span>Statutory Tort Authority</span>
                 </div>
                 <h4 className="mt-3 text-base font-black text-slate-950">
                   {activeJurisdiction.statute.rule}
                 </h4>
-                <div className="mt-2 inline-block rounded-md bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-900 border border-amber-200">
+                <div className="mt-2 inline-block rounded-md bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-900 border border-slate-200">
                   {activeJurisdiction.statute.code}
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-slate-700">
                   {activeJurisdiction.statute.explanation}
                 </p>
 
-                <div className="mt-6 border-t border-amber-200/80 pt-4">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-amber-900">
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-900">
                     State Bar Advertising Ethics:
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-slate-600">
@@ -755,9 +833,9 @@ export default function PersonalInjuryExecutiveView({
               </div>
 
               {/* Column 2: Freight Crash Corridors */}
-              <div className="rounded-2xl border border-blue-200 bg-blue-50/40 p-6">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-blue-800">
-                  <Truck className="h-4 w-4 text-blue-700" />
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-500">
+                  <Truck className="h-4 w-4 text-slate-900" />
                   <span>High-Risk Freight Corridors</span>
                 </div>
                 <p className="mt-1 text-xs text-slate-600">
@@ -765,8 +843,8 @@ export default function PersonalInjuryExecutiveView({
                 </p>
                 <div className="mt-4 space-y-4">
                   {activeJurisdiction.corridors.map((corridor) => (
-                    <div key={corridor.name} className="border-l-2 border-blue-500 pl-3">
-                      <p className="text-xs font-bold text-slate-900">{corridor.name}</p>
+                    <div key={corridor.name} className="border-l-2 border-slate-900 pl-3">
+                      <p className="text-xs font-bold text-slate-950">{corridor.name}</p>
                       <p className="mt-0.5 text-[11px] leading-relaxed text-slate-600">
                         {corridor.detail}
                       </p>
@@ -776,9 +854,9 @@ export default function PersonalInjuryExecutiveView({
               </div>
 
               {/* Column 3: Level-1 Trauma Hospital Radius */}
-              <div className="rounded-2xl border border-rose-200 bg-rose-50/40 p-6">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-rose-800">
-                  <Hospital className="h-4 w-4 text-rose-700" />
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-500">
+                  <Hospital className="h-4 w-4 text-slate-900" />
                   <span>Level-1 Trauma & Emergency Radius</span>
                 </div>
                 <p className="mt-1 text-xs text-slate-600">
@@ -786,10 +864,10 @@ export default function PersonalInjuryExecutiveView({
                 </p>
                 <div className="mt-4 space-y-3">
                   {activeJurisdiction.hospitals.map((hosp) => (
-                    <div key={hosp.name} className="rounded-lg border border-slate-200 bg-white p-3 shadow-2xs">
+                    <div key={hosp.name} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
                       <p className="text-xs font-bold text-slate-950">{hosp.name}</p>
-                      <div className="mt-1 flex items-center justify-between text-[11px] text-slate-500">
-                        <span className="text-rose-700 font-semibold">{hosp.type}</span>
+                      <div className="mt-1 flex items-center justify-between text-[11px] text-slate-600">
+                        <span className="font-semibold text-slate-900">{hosp.type}</span>
                         <span>{hosp.city}</span>
                       </div>
                     </div>
@@ -807,7 +885,7 @@ export default function PersonalInjuryExecutiveView({
                 {activeJurisdiction.keywordSilos.map((kw) => (
                   <span
                     key={kw}
-                    className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-800"
+                    className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-900"
                   >
                     “{kw}”
                   </span>
@@ -839,9 +917,9 @@ export default function PersonalInjuryExecutiveView({
                   <Link
                     key={city.href}
                     href={city.href}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-50 px-3.5 py-1.5 text-xs font-bold text-slate-800 transition hover:border-slate-500 hover:bg-white"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-xs font-bold text-slate-900 transition hover:border-slate-500"
                   >
-                    <MapPin className="h-3.5 w-3.5 text-emerald-600" />
+                    <MapPin className="h-3.5 w-3.5 text-slate-700" />
                     <span>{city.name}</span>
                     <span className="text-slate-500 font-normal">({city.county})</span>
                   </Link>
@@ -852,251 +930,193 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* ── 5. THE 4 PILLARS OF HIGH-INTENT PERSONAL INJURY ACQUISITION ── */}
-      <section className="border-b border-slate-200 bg-white py-16 sm:py-24">
+      {/* ── 6. INTERACTIVE GOOGLE MAP EMBED (POINTING STATES AND CITIES) ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-              The Architecture of a Retained $100k+ Claim
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              National Footprint
             </p>
             <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-              How We Turn Urgent Mobile Searches into Signed Retainer Agreements
+              Geographic Coverage Across 9 Active States & Metropolitan Markets
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-600">
-              A serious injury search is completely unlike an e-commerce transaction. It happens in distress, on a smartphone,
-              often inside an emergency waiting room. Here is how our architecture wins high-stakes cases:
+              Explore our active personal injury search territories. We serve one premier firm per city across Texas, Michigan, Pennsylvania, California, Arizona, Louisiana, Ohio, New Mexico, and Kansas:
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
-              <span className="rounded-lg bg-emerald-100 px-2.5 py-1 text-xs font-black text-emerald-800">01</span>
-              <h3 className="mt-4 text-base font-black text-slate-950">Statutory Pre-Qualification</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                We write comprehensive explainers for 51% modified comparative fault, PIP limits, and non-economic caps.
-                Claimants self-screen their liability before dialing, saving your intake team countless hours.
-              </p>
-            </article>
+          {/* Map Container */}
+          <div className="mt-10 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-slate-200">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13000000!2d-98.5795!3d39.8283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sus!4v1714000000000!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="SearchPrex USA Personal Injury Law Firm SEO Coverage Map"
+                className="h-full w-full"
+              />
+            </div>
 
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
-              <span className="rounded-lg bg-blue-100 px-2.5 py-1 text-xs font-black text-blue-800">02</span>
-              <h3 className="mt-4 text-lg font-black text-slate-950">Freight Corridor Silos</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Instead of competing for generic &quot;car accident lawyer&quot;, we map regional trucking arteries (I-10, I-94, I-95).
-                Commercial trucking carriers carry \$750K to \$5M policy limits that represent your firm&apos;s largest verdicts.
+            {/* Quick State Navigation Pills */}
+            <div className="mt-6 border-t border-slate-200 pt-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                Direct State & City Landing Pages:
               </p>
-            </article>
-
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
-              <span className="rounded-lg bg-rose-100 px-2.5 py-1 text-xs font-black text-rose-800">03</span>
-              <h3 className="mt-4 text-lg font-black text-slate-950">Bedside Mobile Intake</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Over 84% of emergency accident searches occur on smartphones. We deploy sub-second loading speeds,
-                sticky click-to-call bars, and HIPAA-conscious intake mechanisms for immediate retainer signing.
-              </p>
-            </article>
-
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
-              <span className="rounded-lg bg-amber-100 px-2.5 py-1 text-xs font-black text-amber-800">04</span>
-              <h3 className="mt-4 text-lg font-black text-slate-950">State Bar Ethics Immunity</h3>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                We strictly obey ABA Model Rule 7.1 and state advertising rules. No false outcome guarantees, no misleading
-                settlement figures without contextual facts. Your practice remains protected against bar grievances.
-              </p>
-            </article>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Link href="/locations/texas" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Texas Hub</Link>
+                <Link href="/locations/texas/houston" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Sugar Land & Katy (Houston)</Link>
+                <Link href="/locations/michigan" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Michigan Hub</Link>
+                <Link href="/locations/michigan/detroit" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Detroit, MI</Link>
+                <Link href="/locations/pennsylvania/philadelphia" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Philadelphia, PA</Link>
+                <Link href="/locations/california/san-jose" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">San Jose (Silicon Valley)</Link>
+                <Link href="/locations/arizona" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Arizona Hub</Link>
+                <Link href="/locations/arizona/scottsdale" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Scottsdale & Tempe</Link>
+                <Link href="/locations/louisiana" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Louisiana Hub</Link>
+                <Link href="/locations/louisiana/baton-rouge" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Baton Rouge & Shreveport</Link>
+                <Link href="/locations/ohio/cleveland" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Cleveland, OH</Link>
+                <Link href="/locations/new-mexico/albuquerque" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Albuquerque, NM</Link>
+                <Link href="/locations/kansas" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Kansas Hub</Link>
+                <Link href="/locations/kansas/kansas-city" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Kansas City & Wichita</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── 6. HENNESSEY COMPARISON: COMPETE, WIN & DOMINATE IN CUTTHROAT SPACES ── */}
-      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
+      {/* ── 7. THE PSYCHOLOGICAL FRAMEWORK OF MUBASHAR SHARIF ── */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-              The Trade-Off Made Transparent
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              The Cognitive Architecture
             </p>
             <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-              SearchPrex vs. Traditional High-Volume Legal Marketing Agencies
+              The Brain & Psychological Concept Behind SearchPrex Personal Law SEO
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600">
-              We operate as a specialized boutique partner with strict territorial exclusivity, not an agency running identical cookie-cutter playbooks for 10 competing firms in the same city.
+              Architected by Mubashar Sharif: How we decode the psychological state of accident victims and distressed families to engineer high-converting search journeys.
             </p>
           </div>
 
-          <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="grid grid-cols-[1fr_1fr_1.2fr] border-b border-slate-200 bg-slate-100 px-5 py-4 text-xs font-black uppercase tracking-wider text-slate-700">
-              <span>Decision Factor</span>
-              <span>Traditional Legal Agencies</span>
-              <span className="text-emerald-800">SearchPrex Law Firm SEO</span>
+          <div className="mt-12 space-y-6">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-500">01. Stage One: Acute Crisis & Mobile Trauma Searches (Hospital Bedside)</p>
+              <h3 className="mt-2 text-lg font-black text-slate-950">Panic, Confusion, and Immediate Needs</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-700 sm:text-sm">
+                In the first 48 hours after a severe crash, queries occur almost exclusively on mobile devices from emergency waiting rooms (Memorial Hermann, Detroit Receiving, Penn Presbyterian). The victim or spouse is terrified about medical bills and insurance intimidation. SearchPrex builds frictionless, calming pages with immediate click-to-call bars, HIPAA-conscious intake, and answers to &quot;Who pays for surgery after an 18-wheeler wreck?&quot;
+              </p>
             </div>
 
-            <div className="divide-y divide-slate-200 text-xs sm:text-sm">
-              <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-slate-950">Market Exclusivity</span>
-                <span className="text-slate-500">Signs multiple competing firms in the same metro</span>
-                <span className="font-semibold text-emerald-700">Strict One Firm Per City Policy</span>
-              </div>
-              <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-slate-950">Content Strategy</span>
-                <span className="text-slate-500">Generic AI spin (&apos;Top Car Accident Lawyer&apos;)</span>
-                <span className="font-semibold text-emerald-700">Jurisdictional statutes, freight corridors & trauma hubs</span>
-              </div>
-              <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-slate-950">Intake Lead Quality</span>
-                <span className="text-slate-500">Low-value property-damage & minor fender calls</span>
-                <span className="font-semibold text-emerald-700">Statutory pre-qualified commercial & catastrophic claims</span>
-              </div>
-              <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-slate-950">Account Management</span>
-                <span className="text-slate-500">Junior account manager with high client churn</span>
-                <span className="font-semibold text-emerald-700">Direct founder strategy with Mubashar Sharif</span>
-              </div>
-              <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-slate-950">Pricing Model</span>
-                <span className="text-slate-500">$5,000–$10,000/mo + 12-month lock-in contract</span>
-                <span className="font-semibold text-emerald-700">$1,500–$2,500/mo flat retainer · Month-to-month</span>
-              </div>
-              <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-slate-950">Client Protection</span>
-                <span className="text-slate-500">No guarantee, no refund terms</span>
-                <span className="font-semibold text-emerald-700">7-Day Free Trial + 90-Day Money-Back Guarantee</span>
-              </div>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-500">02. Stage Two: Statutory Reality & Fault Assessment</p>
+              <h3 className="mt-2 text-lg font-black text-slate-950">Self-Screening Liability and Protecting Legal Rights</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-700 sm:text-sm">
+                Demographics across regional corridors think differently: a petrochemical truck driver in Houston evaluates Texas proportionate responsibility; an auto worker in Detroit researches Michigan no-fault PIP choice caps; a commuter on Philadelphia’s Roosevelt Boulevard checks limited tort exceptions. SearchPrex provides precise, plain-language statutory explainers that reassure clients while establishing your firm as the unquestioned courtroom authority.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-500">03. Stage Three: The Decision to Retain Counsel</p>
+              <h3 className="mt-2 text-lg font-black text-slate-950">Verification, Trial Reputation, and Trust Confirmation</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-700 sm:text-sm">
+                Before dialing, the client checks verified reviews, trial experience, and local office legitimacy. Because SearchPrex optimizes local citations, state bar credentials, and Generative Engine references (ChatGPT and Gemini recommendations), the prospective client feels total confidence and signs the retainer on the initial intake call.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 7. TRANSPARENT PRICING & 90-DAY PROTECTION ── */}
-      <section id="pricing" className="border-b border-slate-200 bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-                Predictable Economics
-              </p>
-              <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-                Personal Injury SEO Retainer: ${page.priceRange.min.toLocaleString()}–${page.priceRange.max.toLocaleString()} / month
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-600">
-                A single retained commercial truck or traumatic brain injury claim can settle for hundreds of thousands of dollars.
-                We charge a predictable, flat monthly retainer with zero percentage fees or case brokering commissions.
-              </p>
-
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">First Step</p>
-                  <p className="mt-1 text-xl font-black text-slate-950">7 Days Free</p>
-                  <p className="mt-1 text-xs text-slate-600">Reviewable search diagnostic sprint</p>
-                </div>
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Contract</p>
-                  <p className="mt-1 text-xl font-black text-slate-950">Month-to-Month</p>
-                  <p className="mt-1 text-xs text-slate-600">No 12-month lock-in obligations</p>
-                </div>
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Protection</p>
-                  <p className="mt-1 text-xl font-black text-emerald-700">90-Day Terms</p>
-                  <p className="mt-1 text-xs text-slate-600">Full money-back safety guarantee</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border-2 border-emerald-500/50 bg-emerald-50/60 p-6 sm:p-8">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="h-8 w-8 text-emerald-600 shrink-0" />
-                <div>
-                  <h3 className="text-lg font-black text-slate-950">Written 90-Day Money-Back Guarantee</h3>
-                  <p className="text-xs text-slate-600">In Plain English in our engagement agreement</p>
-                </div>
-              </div>
-              <p className="mt-4 text-xs leading-relaxed text-slate-700">
-                If SearchPrex fails to execute agreed jurisdictional blueprints, technical fixes, and content deliverables within 90 days,
-                we refund your retainer fees in full. We shoulder the initial risk so you can evaluate performance with total peace of mind.
-              </p>
-              <div className="mt-6">
-                <a
-                  href="#hero-form"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-slate-800"
-                >
-                  Start Your 7-Day Free Trial Sprint <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 8. ALL 15 ACTIVE CITIES IN JURISDICTIONS (Light Theme) ── */}
+      {/* ── 8. COMPLETE SOLUTION PACK: 7-DAY TRIAL, 1-HR CONSULTATION, INTAKE TOOL ── */}
       <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-              Active Metro Footprint
-            </p>
-            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-              15 Metropolitan Hubs Where SearchPrex Operates
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600">
-              We enforce strict exclusivity: once a personal injury law firm partners with SearchPrex in any city listed below,
-              that metro territory is locked and closed to all competing firms.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {cities.map((city) => (
-              <Link
-                key={city.citySlug}
-                href={`/locations/${city.stateSlug}/${city.citySlug}`}
-                className="group rounded-xl border border-slate-200 bg-white p-4 transition hover:border-slate-400 hover:shadow-xs"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-800 group-hover:bg-emerald-50">
-                    {city.stateAbbr}
-                  </span>
-                  <span className="text-[11px] font-medium text-emerald-700">1 Firm Exclusivity</span>
-                </div>
-                <h3 className="mt-3 text-base font-bold text-slate-950 group-hover:text-emerald-700">
-                  {city.city}
-                </h3>
-                <p className="text-xs text-slate-500">{city.county}</p>
-                <div className="mt-3 flex items-center gap-1 text-[11px] font-semibold text-slate-700 group-hover:text-slate-950">
-                  <span>View City Strategy</span>
-                  <ChevronRight className="h-3 w-3" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 9. FOUNDER-LED STRATEGIC COUNSEL: Mubashar Sharif (Hennessey-Style Pledge) ── */}
-      <section className="border-b border-slate-200 bg-white py-16">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-700">
-            Founder Accountability & Commitment
-          </div>
-          <h2 className="mt-3 text-3xl font-black text-slate-950">
-            &quot;We Don&apos;t Kid When We Say We Are ROI-Obsessed.&quot;
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+            First Experience the Difference, Then Assign the Project to Us
+          </p>
+          <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
+            We Come With a Complete, Risk-Free Client Onboarding Solution
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
-            “The legal industry is the most dog-eat-dog place on Google. We take our clients’ success personally.
-            Personal injury firms cannot afford rookie errors: a vague settlement headline can trigger a State Bar
-            grievance, and an unoptimized corridor page loses you million-dollar cases. I personally research your
-            freight corridors, map your trauma center radius, and direct your jurisdictional blueprints.
-            If you are not getting results, I personally make it my mission to see you win.”
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600">
+            We never ask a personal injury law firm to take a leap of faith. We prove our technical competence and jurisdictional grasp before you ever commit a dollar:
           </p>
 
-          <div className="mt-6">
-            <p className="text-base font-black text-slate-950">Mubashar Sharif</p>
-            <p className="text-xs text-slate-500">Founder & Senior SEO Analyst · SearchPrex</p>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-left">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Step 01</p>
+              <h3 className="mt-2 text-base font-black text-slate-950">1-Hour Free Strategic Consultation</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Direct one-on-one session with Founder Mubashar Sharif to audit your firm&apos;s current search visibility, freight corridors, and competitor gaps.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Step 02</p>
+              <h3 className="mt-2 text-base font-black text-slate-950">7-Day Free Working Trial Sprint</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                A reviewable diagnostic and search mapping blueprint delivered within seven days. Inspect our exact tactical plan before committing.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Step 03</p>
+              <h3 className="mt-2 text-base font-black text-slate-950">14-Day Free Intake Efficiency Tool</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Test our 24/7 AI intake assistant that captures and pre-qualifies after-hours crash facts and commercial accident inquiries seamlessly.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">Step 04</p>
+              <h3 className="mt-2 text-base font-black text-slate-950">Written 90-Day Money-Back Guarantee</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Month-to-month agreement with plain English terms: if deliverables are not executed as promised, you receive a 100% refund.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 9. FOUNDER PICTURE & DIRECT COMMITMENT: MUBASHAR SHARIF ── */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-900">
+            Founder Accountability & Commitment
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <h2 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">
+            &quot;We Don&apos;t Kid When We Say We Are ROI-Obsessed.&quot;
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-700">
+            “The legal industry is the most dog-eat-dog place on Google. We take our clients’ success personally. Personal injury firms cannot afford rookie errors: a vague settlement headline can trigger a State Bar grievance, and an unoptimized corridor page loses you million-dollar cases. I personally research your freight corridors, map your trauma center radius, and direct your jurisdictional blueprints. If you are not getting results, I personally make it my mission to see you win.”
+          </p>
+
+          {/* Founder Picture Added Here */}
+          <div className="mt-8 flex flex-col items-center justify-center">
+            <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-slate-300 shadow-sm">
+              <Image
+                src="/images/mubashar-sharif.jpg"
+                alt="Mubashar Sharif - Founder and Senior SEO Analyst at SearchPrex"
+                fill
+                sizes="112px"
+                className="object-cover"
+                priority
+              />
+            </div>
+            <p className="mt-4 text-lg font-black text-slate-950">Mubashar Sharif</p>
+            <p className="text-xs font-medium text-slate-600">Founder & Senior SEO Analyst · SearchPrex</p>
+          </div>
+
+          {/* External Verification Links */}
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a
               href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 transition hover:bg-slate-50"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-50"
             >
               Mubashar on LinkedIn <ExternalLink className="h-3 w-3" />
             </a>
@@ -1104,7 +1124,7 @@ export default function PersonalInjuryExecutiveView({
               href="https://clutch.co/profile/searchprex"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 transition hover:bg-slate-50"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-50"
             >
               Clutch Company Profile <ExternalLink className="h-3 w-3" />
             </a>
@@ -1112,7 +1132,7 @@ export default function PersonalInjuryExecutiveView({
               href="https://www.trustpilot.com/review/searchprex.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 transition hover:bg-slate-50"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-50"
             >
               Trustpilot Reviews <ExternalLink className="h-3 w-3" />
             </a>
@@ -1120,60 +1140,132 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* ── 10. EXECUTIVE PARTNER FAQ ── */}
-      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
+      {/* ── 10. RELEVANT LEGAL ARTICLES & SEARCH RESOURCES (CONTEXTUAL INTERNAL LINKS) ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              Authority & Knowledge Graph Architecture
+            </p>
+            <h2 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
+              Related Legal SEO Practices, Checklists & Case Resources
+            </h2>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Link href="/services/law-firm-seo" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Core Service</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Law Firm SEO Master Hub</p>
+              <p className="mt-2 text-xs text-slate-600">Overview of our entire multi-practice legal search architecture across U.S. markets.</p>
+            </Link>
+
+            <Link href="/services/law-firm-seo/mass-torts" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Related Practice</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Mass Torts SEO</p>
+              <p className="mt-2 text-xs text-slate-600">MDL docket readiness, bellwether trial research, and nationwide intake funnels.</p>
+            </Link>
+
+            <Link href="/services/law-firm-seo/criminal-defense" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Related Practice</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Criminal Defense SEO</p>
+              <p className="mt-2 text-xs text-slate-600">24/7 emergency arrest search architecture for DWI and felony trial attorneys.</p>
+            </Link>
+
+            <Link href="/tools/keyword-research" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Free Law Tool</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Law Firm Keyword Research Tool</p>
+              <p className="mt-2 text-xs text-slate-600">Inspect commercial intent and volume benchmarks for personal injury queries.</p>
+            </Link>
+
+            <Link href="/services/law-firm-seo/family-law" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Related Practice</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Family Law SEO</p>
+              <p className="mt-2 text-xs text-slate-600">High-net-worth divorce, custody jurisdiction, and private written audit paths.</p>
+            </Link>
+
+            <Link href="/services/law-firm-seo/estate-planning" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Related Practice</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Estate Planning SEO</p>
+              <p className="mt-2 text-xs text-slate-600">Probate court search paths, trust administration, and wealth preservation.</p>
+            </Link>
+
+            <Link href="/blog" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Legal Blog</span>
+              <p className="mt-1 text-sm font-black text-slate-950">Law Firm SEO Insights & Guides</p>
+              <p className="mt-2 text-xs text-slate-600">Deep dives into Google Core Updates, legal schema, and conversion optimization.</p>
+            </Link>
+
+            <Link href="/news" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Legal News</span>
+              <p className="mt-1 text-sm font-black text-slate-950">SearchPrex Legal Industry News</p>
+              <p className="mt-2 text-xs text-slate-600">Latest analysis on AI Overviews, Local Service Ads (LSAs), and Map Pack algorithms.</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 11. MANAGING PARTNER FAQ: NATURAL, INTERACTIVE & COMPREHENSIVE ── */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
-              Managing Partner Questions
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+              Direct & Plain Language Answers
             </p>
             <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
-              Frequently Asked Questions by Personal Injury Attorneys
+              Frequently Asked Questions by Personal Injury Managing Partners
             </h2>
           </div>
 
           <div className="mt-10 space-y-4">
             {[
               {
-                q: "How does SearchPrex enforce the One Firm Per City exclusivity guarantee?",
-                a: "We accept exactly one personal injury firm per metropolitan market. If we represent a personal injury firm in Houston or Detroit, we strictly decline representation of any competing injury firm in that exact territory. Your strategic playbook is never shared with or used against you by a competitor.",
+                q: "How does SearchPrex enforce the One Law Firm Per City exclusivity guarantee?",
+                a: "We accept strictly one personal injury law firm per metropolitan area. If we manage personal injury SEO for a firm in Houston, Detroit, or Philadelphia, we decline representation for any other injury firm in that municipality. Your keyword strategy, link targets, and corridor data are completely proprietary.",
               },
               {
-                q: "How do you ensure compliance with State Bar advertising ethics rules?",
-                a: "All content engineered by SearchPrex adheres to ABA Model Rule 7.1 and state-specific advertising codes (such as Texas Disciplinary Rules 7.01–7.07 and Michigan Rule 7.1). We never make unverifiable outcome claims, never guarantee settlement amounts, and ensure every case result is accompanied by factual context and required disclaimers.",
+                q: "How do you protect our firm against State Bar advertising grievances?",
+                a: "Every piece of copy adheres strictly to ABA Model Rule 7.1 and individual state bar disciplinary codes (e.g. Texas Rule 7.01–7.07, Michigan Rule 7.1). We never make guarantees, never use misleading superlatives ('best lawyer in Texas'), and frame past settlement results with factual context and required jurisdictional disclaimers.",
               },
               {
-                q: "How do you compete against directory behemoths like Justia, Avvo, and FindLaw?",
-                a: "Directories rank for broad, non-converting vanity terms like 'car accident lawyer'. However, when a victim searches specific statutory questions ('Michigan no fault mini tort threshold', 'Texas 51 percent proportionate fault bar', 'I-10 18 wheeler accident lawyer'), Google prioritizes deeply authoritative, locally focused law firm pages that answer the exact legal issue.",
+                q: "Can our law firm rank in nearby suburbs and freight corridors without opening physical offices there?",
+                a: "Yes for organic landing pages, corridor hubs, and Level-1 trauma center silos. However, Google Business Profile (GMB) Map Pack rankings require a legitimate physical address in that city. We build localized geographic silos that dominate organic rankings across entire counties while tying map proximity signals to your primary licensed office.",
               },
               {
-                q: "What does the 7-Day Free Trial involve?",
-                a: "The 7-day trial is a zero-obligation diagnostic sprint. Within 7 days, we inspect your firm's current search path, map your freight highway and trauma center coverage, identify competitor keyword gaps, and deliver a clear written execution plan before any billing commences.",
+                q: "How does SearchPrex compete with massive directories like Avvo, FindLaw, and Justia?",
+                a: "Directories rank for generic, non-converting keywords like 'car accident lawyer'. But when an injured victim searches specific statutory questions ('Michigan mini tort property damage cap 2026', 'Texas 51 percent proportionate fault bar', 'I-10 commercial 18 wheeler accident lawyer'), Google prioritizes authoritative, localized law firm content over generic directory lists.",
+              },
+              {
+                q: "What makes personal injury SEO different from other legal practice areas?",
+                a: "Personal injury is contingency-based with high case values ($100k to $5M+), governed by strict comparative fault thresholds, and driven by urgent mobile searches from crash scenes and hospital emergency rooms. Our architecture accounts for emergency medical catchment, insurance carrier limits, and rapid mobile intake.",
+              },
+              {
+                q: "What is included in the 7-Day Free Trial Sprint?",
+                a: "The 7-day trial is a zero-obligation diagnostic sprint. Within 7 days, Founder Mubashar Sharif audits your site, maps your freight highway and trauma center coverage, identifies competitor keyword vulnerabilities, and presents a written execution blueprint before you commit to any retainer.",
               },
             ].map((faq) => (
-              <div key={faq.q} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <div key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
                 <h3 className="text-base font-black text-slate-950">{faq.q}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">{faq.a}</p>
+                <p className="mt-2 text-xs leading-relaxed text-slate-700 sm:text-sm">{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 11. FINAL HENNESSEY-STYLE CONVERSION CTA ── */}
-      <section id="get-started" className="bg-white py-16 sm:py-24">
+      {/* ── 12. FINAL CONVERSION FORM: LIMITED CAPACITY & TERRITORIAL LOCK ── */}
+      <section id="get-started" className="bg-slate-50 py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
             Limited Monthly Capacity
           </p>
           <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
             In order to deliver consistent results, we only partner with ONE firm per city.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
-            Once a metro market is claimed, it is closed to all competing firms. Submit your website and work email below for a confidential 24-hour jurisdictional search audit.
+            Once a metro market is claimed, it is closed to all competing firms. Submit your website and work email below for a confidential 24-hour jurisdictional search audit with Founder Mubashar Sharif.
           </p>
 
-          <div className="mt-8 mx-auto max-w-xl text-left rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+          <div className="mt-8 mx-auto max-w-xl text-left rounded-2xl border border-slate-300 bg-white p-6 shadow-sm">
             <ArticleLeadMagnet
               variant="bottom"
               source={source}
@@ -1183,7 +1275,7 @@ export default function PersonalInjuryExecutiveView({
               copy={{
                 eyebrow: "Confidential Market Review",
                 headline: "Reserve Your City Before a Competitor Locks It",
-                sub: "Replies directly from the founder within 24 hours.",
+                sub: "Replies directly from founder Mubashar Sharif within 24 hours.",
                 success: "I’ll analyze your local freight corridors and email your practice area search map within 24 hours.",
               }}
             />
@@ -1197,7 +1289,7 @@ export default function PersonalInjuryExecutiveView({
           href={CALL_HREF}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 text-xs font-bold text-slate-800"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 text-xs font-bold text-slate-900"
         >
           Book Partner Call
         </a>
