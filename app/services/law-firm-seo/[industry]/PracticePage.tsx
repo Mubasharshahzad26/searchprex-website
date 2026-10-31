@@ -4,7 +4,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import DocketHubPreview from "@/components/DocketHubPreview";
-import PersonalInjuryJurisdictions from "@/components/PersonalInjuryJurisdictions";
+import PersonalInjuryExecutiveView from "@/components/PersonalInjuryExecutiveView";
 import PracticeLocationsMap from "@/components/PracticeLocationsMap";
 import PracticePageTracker from "@/components/PracticePageTracker";
 import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
@@ -57,6 +57,15 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
   const privateAudit = page.slug === "family-law";
   const primaryTarget = page.primaryCta.target === "#get-started" ? "#hero-form" : page.primaryCta.target;
   const localizedTerms = cities.flatMap((city) => page.keywordMap.local.slice(0, 2).map((term) => localizeTerm(term, city)));
+
+  if (page.slug === "personal-injury") {
+    return (
+      <main className="pb-20 md:pb-0">
+        <PracticePageTracker practiceArea={page.slug} />
+        <PersonalInjuryExecutiveView page={page} cities={cities} />
+      </main>
+    );
+  }
 
   return (
     <main className="pb-20 md:pb-0">
@@ -166,8 +175,6 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
           Search examples are illustrative, not search-volume claims. Validate them in Search Console or the <Link className="font-bold underline" href="/tools/keyword-research">law firm keyword research tool</Link>. Any sample legal copy requires attorney review before publishing.
         </p>
       </Band>
-
-      {page.slug === "personal-injury" ? <PersonalInjuryJurisdictions /> : null}
 
       <Band>
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
