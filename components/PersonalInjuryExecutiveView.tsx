@@ -2,13 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Scale,
   ShieldCheck,
-  AlertTriangle,
   MapPin,
-  Building2,
   Hospital,
   Truck,
   ArrowRight,
@@ -22,6 +19,10 @@ import {
   ChevronRight,
   Award,
   Zap,
+  Check,
+  TrendingUp,
+  FileText,
+  UserCheck,
 } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
@@ -46,7 +47,7 @@ interface JurisdictionData {
   corridors: Array<{ name: string; detail: string }>;
   hospitals: Array<{ name: string; type: string; city: string }>;
   keywordSilos: string[];
-  cities: Array<{ name: string; county: string; href: string; status: "Available" | "Reserved" | "Active" }>;
+  cities: Array<{ name: string; county: string; href: string }>;
 }
 
 const JURISDICTIONS: JurisdictionData[] = [
@@ -95,11 +96,11 @@ const JURISDICTIONS: JurisdictionData[] = [
       "denton highway accident law firm",
     ],
     cities: [
-      { name: "Sugar Land", county: "Fort Bend County", href: "/locations/texas/sugar-land", status: "Available" },
-      { name: "Katy", county: "Harris / Fort Bend County", href: "/locations/texas/katy", status: "Available" },
-      { name: "Plano", county: "Collin County", href: "/locations/texas/plano", status: "Available" },
-      { name: "The Woodlands", county: "Montgomery County", href: "/locations/texas/the-woodlands", status: "Available" },
-      { name: "Denton", county: "Denton County", href: "/locations/texas/denton", status: "Available" },
+      { name: "Sugar Land", county: "Fort Bend County", href: "/locations/texas/sugar-land" },
+      { name: "Katy", county: "Harris / Fort Bend County", href: "/locations/texas/katy" },
+      { name: "Plano", county: "Collin County", href: "/locations/texas/plano" },
+      { name: "The Woodlands", county: "Montgomery County", href: "/locations/texas/the-woodlands" },
+      { name: "Denton", county: "Denton County", href: "/locations/texas/denton" },
     ],
   },
   {
@@ -145,8 +146,8 @@ const JURISDICTIONS: JurisdictionData[] = [
       "wayne county serious impairment injury attorney",
     ],
     cities: [
-      { name: "Detroit", county: "Wayne County", href: "/locations/michigan/detroit", status: "Available" },
-      { name: "Grand Rapids", county: "Kent County", href: "/locations/michigan/grand-rapids", status: "Available" },
+      { name: "Detroit", county: "Wayne County", href: "/locations/michigan/detroit" },
+      { name: "Grand Rapids", county: "Kent County", href: "/locations/michigan/grand-rapids" },
     ],
   },
   {
@@ -192,7 +193,7 @@ const JURISDICTIONS: JurisdictionData[] = [
       "center city commercial vehicle collision attorney",
     ],
     cities: [
-      { name: "Philadelphia", county: "Philadelphia County", href: "/locations/pennsylvania/philadelphia", status: "Available" },
+      { name: "Philadelphia", county: "Philadelphia County", href: "/locations/pennsylvania/philadelphia" },
     ],
   },
   {
@@ -238,7 +239,7 @@ const JURISDICTIONS: JurisdictionData[] = [
       "bayshore freeway accident attorney",
     ],
     cities: [
-      { name: "San Jose", county: "Santa Clara County", href: "/locations/california/san-jose", status: "Available" },
+      { name: "San Jose", county: "Santa Clara County", href: "/locations/california/san-jose" },
     ],
   },
   {
@@ -284,8 +285,8 @@ const JURISDICTIONS: JurisdictionData[] = [
       "maricopa county wrongful death attorney",
     ],
     cities: [
-      { name: "Scottsdale", county: "Maricopa County", href: "/locations/arizona/scottsdale", status: "Available" },
-      { name: "Tempe", county: "Maricopa County", href: "/locations/arizona/tempe", status: "Available" },
+      { name: "Scottsdale", county: "Maricopa County", href: "/locations/arizona/scottsdale" },
+      { name: "Tempe", county: "Maricopa County", href: "/locations/arizona/tempe" },
     ],
   },
   {
@@ -331,8 +332,8 @@ const JURISDICTIONS: JurisdictionData[] = [
       "chemical plant burn injury lawyer baton rouge",
     ],
     cities: [
-      { name: "Baton Rouge", county: "East Baton Rouge Parish", href: "/locations/louisiana/baton-rouge", status: "Available" },
-      { name: "Shreveport", county: "Caddo Parish", href: "/locations/louisiana/shreveport", status: "Available" },
+      { name: "Baton Rouge", county: "East Baton Rouge Parish", href: "/locations/louisiana/baton-rouge" },
+      { name: "Shreveport", county: "Caddo Parish", href: "/locations/louisiana/shreveport" },
     ],
   },
   {
@@ -378,7 +379,7 @@ const JURISDICTIONS: JurisdictionData[] = [
       "ohio 51 percent comparative fault attorney",
     ],
     cities: [
-      { name: "Cleveland", county: "Cuyahoga County", href: "/locations/ohio/cleveland", status: "Available" },
+      { name: "Cleveland", county: "Cuyahoga County", href: "/locations/ohio/cleveland" },
     ],
   },
   {
@@ -423,7 +424,7 @@ const JURISDICTIONS: JurisdictionData[] = [
       "new mexico wrongful death highway attorney",
     ],
     cities: [
-      { name: "Albuquerque", county: "Bernalillo County", href: "/locations/new-mexico/albuquerque", status: "Available" },
+      { name: "Albuquerque", county: "Bernalillo County", href: "/locations/new-mexico/albuquerque" },
     ],
   },
 ];
@@ -442,79 +443,74 @@ export default function PersonalInjuryExecutiveView({
   const sourcePage = `/services/law-firm-seo/${page.slug}`;
 
   return (
-    <div className="bg-[#070b19] text-slate-100 selection:bg-emerald-500 selection:text-white">
-      {/* 1. HERO SECTION: Enterprise Dark Command Theme */}
-      <section className="relative overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-[#060a17] via-[#091127] to-[#070b19] pt-12 pb-20 sm:pt-20 sm:pb-28">
-        {/* Subtle grid background glow */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 60%), linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)",
-            backgroundSize: "100% 100%, 64px 64px, 64px 64px",
-          }}
-        />
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="bg-white font-sans text-slate-900 selection:bg-emerald-100 selection:text-emerald-900">
+      {/* ── 1. HERO SECTION: Clean Light Enterprise Theme with Hennessey Hook ── */}
+      <section className="relative border-b border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50/50 pt-12 pb-16 sm:pt-16 sm:pb-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb & Institutional Pill */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-emerald-400 backdrop-blur-sm">
-              <Scale className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Personal Injury Law Firm SEO · USA Multi-Jurisdiction</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-emerald-800">
+              <Scale className="h-3.5 w-3.5 text-emerald-600" />
+              <span>Personal Injury Law Firm SEO · USA & Multi-State Jurisdictions</span>
             </div>
-            <div className="hidden items-center gap-1.5 text-xs text-slate-400 sm:flex">
-              <Link href="/services/law-firm-seo" className="hover:text-white transition">
+            <div className="hidden items-center gap-1.5 text-xs text-slate-500 sm:flex">
+              <Link href="/services/law-firm-seo" className="hover:text-slate-900 transition">
                 Law Firm SEO
               </Link>
               <span>/</span>
-              <span className="text-slate-200 font-semibold">Personal Injury</span>
+              <span className="font-semibold text-slate-800">Personal Injury</span>
             </div>
           </div>
 
-          <div className="mt-8 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div className="mt-8 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             {/* Left Column: Direct Managing Partner Pitch */}
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-5xl lg:leading-[1.12]">
-                Enterprise Personal Injury Law Firm SEO for High-Stakes Jurisdictions & Freight Corridors
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
+                The SEO Partner You Wish You’d Hired First
+              </p>
+              <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl sm:leading-[1.12]">
+                Your Law Firm SEO Partner for Higher-Value Leads & More Signed Catastrophic Cases.
               </h1>
 
-              <p className="mt-6 text-lg leading-relaxed text-slate-300">
-                Most legal SEO agencies deliver low-value fender benders that exhaust your intake team.
-                SearchPrex engineers high-intent search paths targeting commercial truck liability,
-                interstate freight crashes, and Level-1 trauma admissions across 8 active U.S. states.
+              <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">
+                Most legal marketing agencies deliver low-value fender benders that exhaust your intake team.
+                SearchPrex builds authoritative search architecture targeting commercial freight liability,
+                interstate trucking corridors, and Level-1 trauma radius catchment across 8 major U.S. states.
               </p>
 
+              {/* 3 Trust Metric Cards */}
               <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-3.5 backdrop-blur-sm">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-                    <Lock className="h-3.5 w-3.5" /> 1 Firm Per City
+                <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs">
+                  <div className="flex items-center gap-1.5 text-xs font-black text-slate-950">
+                    <Lock className="h-3.5 w-3.5 text-emerald-600" /> 1 Firm Per City
                   </div>
-                  <p className="mt-1 text-xs text-slate-400">Strict territorial exclusivity enforced</p>
+                  <p className="mt-1 text-xs text-slate-500">Strict territorial exclusivity enforced</p>
                 </div>
-                <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-3.5 backdrop-blur-sm">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-                    <ShieldCheck className="h-3.5 w-3.5" /> State Bar Ethics
+                <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs">
+                  <div className="flex items-center gap-1.5 text-xs font-black text-slate-950">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> State Bar Ethics
                   </div>
-                  <p className="mt-1 text-xs text-slate-400">ABA Rule 7.1 & TX/MI/PA compliant</p>
+                  <p className="mt-1 text-xs text-slate-500">ABA Rule 7.1 & TX/MI/PA compliant</p>
                 </div>
-                <div className="col-span-2 rounded-xl border border-slate-800 bg-slate-900/70 p-3.5 backdrop-blur-sm sm:col-span-1">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-                    <CheckCircle2 className="h-3.5 w-3.5" /> 7-Day Free Trial
+                <div className="col-span-2 rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs sm:col-span-1">
+                  <div className="flex items-center gap-1.5 text-xs font-black text-slate-950">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 7-Day Free Trial
                   </div>
-                  <p className="mt-1 text-xs text-slate-400">Founder-led reviewable diagnostic sprint</p>
+                  <p className="mt-1 text-xs text-slate-500">Founder-led reviewable diagnostic sprint</p>
                 </div>
               </div>
 
+              {/* Action Buttons */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <a
                   href="#jurisdictions"
-                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/50 transition hover:bg-emerald-500"
+                  className="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800"
                 >
                   Explore State Corridors & Statutes <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="#hero-form"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-bold text-slate-200 transition hover:border-slate-500 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 shadow-xs transition hover:border-slate-500 hover:bg-slate-50"
                 >
                   Request Market Audit
                 </a>
@@ -522,14 +518,14 @@ export default function PersonalInjuryExecutiveView({
             </div>
 
             {/* Right Column: Founder-Reviewed Intake Sidebar Form */}
-            <div id="hero-form" className="relative scroll-mt-24 rounded-2xl border border-slate-700/80 bg-slate-900/90 p-6 sm:p-8 shadow-2xl backdrop-blur-md">
-              <div className="absolute -top-3.5 right-6 rounded-full border border-emerald-500/50 bg-emerald-950 px-3 py-0.5 text-[11px] font-black uppercase tracking-wider text-emerald-300">
+            <div id="hero-form" className="relative scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-lg">
+              <div className="absolute -top-3.5 right-6 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-0.5 text-[11px] font-black uppercase tracking-wider text-emerald-800">
                 Direct Founder Review
               </div>
-              <h2 className="text-xl font-bold text-white">
+              <h2 className="text-xl font-black text-slate-950">
                 Request a Personal Injury Practice-Area Search Map
               </h2>
-              <p className="mt-2 text-xs leading-relaxed text-slate-400">
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 Send your law firm website and email. Founder Mubashar Sharif will inspect your freight corridors,
                 Level-1 trauma radius, and competitor link gaps, replying with your 7-day trial sprint within 24 hours.
               </p>
@@ -550,57 +546,137 @@ export default function PersonalInjuryExecutiveView({
                 />
               </div>
 
-              <div className="mt-4 border-t border-slate-800 pt-4 flex items-center justify-between text-[11px] text-slate-400">
+              <div className="mt-4 border-t border-slate-200 pt-4 flex items-center justify-between text-[11px] text-slate-500">
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Confidential & Private
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> Confidential & Private
                 </span>
-                <span>Replies in &lt; 24h</span>
+                <span>Founder replies in &lt; 24h</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. DIRECT EXECUTIVE ANSWER: Crisp White Daylight Contrast */}
-      <section className="border-b border-slate-200 bg-white py-12 text-slate-900">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-emerald-700">
-              <Scale className="h-4 w-4" />
-              <span>Direct Executive Answer for Personal Injury Managing Partners</span>
-            </div>
-            <h2 className="mt-3 text-xl font-black text-slate-950 sm:text-2xl">
-              Why Generic Legal SEO Fails Personal Injury Firms
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-700">
-              {page.answerCapsule}
+      {/* ── 2. HENNESSEY APPROACH: "YOU'RE IN THE RIGHT PLACE IF" ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-14">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
+              Clear Alignment for Serious Trial Lawyers
             </p>
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-slate-200 pt-4 text-xs text-slate-500">
-              <span>Author: Mubashar Sharif · Senior SEO Analyst & Strategist</span>
-              <span>Updated & Jurisprudentially Reviewed: October 31, 2026</span>
+            <h2 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
+              You’re in the Right Place if:
+            </h2>
+          </div>
+
+          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <div className="inline-flex rounded-lg bg-emerald-100 p-2 text-emerald-800">
+                <Check className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-base font-black text-slate-950">You’re tired of empty vanity metrics.</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Rankings for generic terms that only attract minor property damage or disputed low-limit claims
+                waste your intake team’s valuable time. You want signed catastrophic cases.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <div className="inline-flex rounded-lg bg-emerald-100 p-2 text-emerald-800">
+                <Check className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-base font-black text-slate-950">You crave direct, intelligent communication.</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                You don’t want to talk to an entry-level account manager who doesn’t know the difference between
+                Texas Proportionate Responsibility and Michigan No-Fault PIP reform.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+              <div className="inline-flex rounded-lg bg-emerald-100 p-2 text-emerald-800">
+                <Check className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-base font-black text-slate-950">You insist on true market exclusivity.</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Traditional agencies pitch 5 competitors in the same city. We strictly enforce ONE law firm per
+                metropolitan market, guaranteeing zero internal conflicts of interest.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. JURISDICTIONAL COMMAND CENTER: The Crown Jewel */}
-      <section id="jurisdictions" className="scroll-mt-16 bg-[#080d1e] py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ── 3. HENNESSEY THESIS: "SEO FOR LAW FIRMS IS A DIFFERENT BEAST" ── */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
+                Courtroom Excellence vs. Search Dominance
+              </p>
+              <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
+                SEO for Personal Injury Law Firms is a Different Beast.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-700">
+                We won’t sugar-coat it: ranking on page one of Google for high-value personal injury cases
+                is the most cutthroat, dog-eat-dog competitive space in search marketing.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                Top-tier attorneys understand courtroom persuasion and trial strategy, but translating that
+                into high-converting organic dominance requires reverse-engineering local search intent,
+                state-specific tort thresholds, and commercial freight liability.
+              </p>
+              <div className="mt-6 rounded-xl border-l-4 border-emerald-600 bg-slate-50 p-4">
+                <p className="text-xs font-bold text-slate-900">
+                  {page.answerCapsule}
+                </p>
+              </div>
+            </div>
+
+            {/* Comparison Highlights */}
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+              <h3 className="text-lg font-black text-slate-950">Why Standard Agency SEO Fails</h3>
+              <ul className="mt-4 space-y-3 text-xs leading-relaxed text-slate-700">
+                <li className="flex items-start gap-2.5">
+                  <span className="rounded bg-rose-100 p-1 text-rose-700 font-bold">✕</span>
+                  <span><strong>Generic AI Blog Posts:</strong> Low-effort articles like &quot;What to Do After a Car Accident&quot; that attract zero qualified callers.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="rounded bg-rose-100 p-1 text-rose-700 font-bold">✕</span>
+                  <span><strong>Ignorance of Tort Statutes:</strong> Treating Michigan the same as Texas, ignoring PIP medical caps and proportionate fault bars.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="rounded bg-rose-100 p-1 text-rose-700 font-bold">✕</span>
+                  <span><strong>No Freight Corridor Targeting:</strong> Overlooking high-limit interstate freight routes (I-10, I-94, I-95) where commercial coverage exists.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="rounded bg-emerald-100 p-1 text-emerald-700 font-bold">✓</span>
+                  <span><strong>The SearchPrex Difference:</strong> Exact statutory liability silos, Level-1 trauma catchment mapping, and 1-firm-per-city exclusivity.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. JURISDICTIONAL COMMAND CENTER: State-by-State Superpower (Light Theme) ── */}
+      <section id="jurisdictions" className="scroll-mt-16 border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
               Interactive State-by-State Jurisdictional Intelligence
             </p>
-            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
               Personal Injury Search Architecture Across 8 U.S. States
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-300">
-              Personal injury law is strictly state-specific. Every jurisdiction operates under distinct comparative fault thresholds,
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-600">
+              Personal injury law is strictly jurisdictional. Every state operates under distinct comparative fault thresholds,
               unique freight transit bottlenecks, and local State Bar advertising rules. Select your state below to inspect the localized SEO model:
             </p>
           </div>
 
           {/* State Selector Tabs */}
-          <div className="mt-10 flex flex-wrap justify-center gap-2.5">
+          <div className="mt-10 flex flex-wrap justify-center gap-2">
             {JURISDICTIONS.map((item) => {
               const active = item.id === activeStateId;
               return (
@@ -609,11 +685,11 @@ export default function PersonalInjuryExecutiveView({
                   onClick={() => setActiveStateId(item.id)}
                   className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all sm:text-sm ${
                     active
-                      ? "border border-emerald-500 bg-emerald-600 text-white shadow-lg shadow-emerald-950/60"
-                      : "border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-700 hover:bg-slate-800"
+                      ? "border border-emerald-600 bg-emerald-600 text-white shadow-sm"
+                      : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                   }`}
                 >
-                  <span className="rounded bg-black/30 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-300">
+                  <span className={`rounded px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${active ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
                     {item.stateAbbr}
                   </span>
                   <span>{item.state}</span>
@@ -622,19 +698,19 @@ export default function PersonalInjuryExecutiveView({
             })}
           </div>
 
-          {/* Active Jurisdiction Detail Card */}
-          <div className="mt-8 rounded-3xl border border-slate-800 bg-slate-900/90 p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+          {/* Active Jurisdiction Detail Card (Light Theme) */}
+          <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
             {/* Header of Active Tab */}
-            <div className="flex flex-col gap-4 border-b border-slate-800 pb-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 text-xs font-bold text-emerald-400">
-                  <Award className="h-3.5 w-3.5" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
+                  <Award className="h-3.5 w-3.5 text-emerald-600" />
                   {activeJurisdiction.badge}
                 </span>
-                <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+                <h3 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
                   {activeJurisdiction.headline}
                 </h3>
-                <p className="mt-2 max-w-4xl text-sm leading-relaxed text-slate-300">
+                <p className="mt-2 max-w-4xl text-sm leading-relaxed text-slate-600">
                   {activeJurisdiction.summary}
                 </p>
               </div>
@@ -642,10 +718,10 @@ export default function PersonalInjuryExecutiveView({
               {activeJurisdiction.stateHubHref && (
                 <Link
                   href={activeJurisdiction.stateHubHref}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-700 bg-slate-800 px-4 py-2 text-xs font-bold text-slate-200 transition hover:border-slate-500 hover:text-white"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-800 transition hover:border-slate-400 hover:bg-slate-100"
                 >
                   <span>View {activeJurisdiction.state} Master Hub</span>
-                  <ExternalLink className="h-3.5 w-3.5" />
+                  <ExternalLink className="h-3.5 w-3.5 text-slate-500" />
                 </Link>
               )}
             </div>
@@ -653,45 +729,45 @@ export default function PersonalInjuryExecutiveView({
             {/* 3-Column Jurisdictional Breakdown */}
             <div className="mt-8 grid gap-8 lg:grid-cols-3">
               {/* Column 1: Tort Statute & Ethics */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-400">
-                  <Gavel className="h-4 w-4" />
+              <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-6">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-800">
+                  <Gavel className="h-4 w-4 text-amber-700" />
                   <span>Statutory Tort Authority</span>
                 </div>
-                <h4 className="mt-3 text-base font-bold text-white">
+                <h4 className="mt-3 text-base font-black text-slate-950">
                   {activeJurisdiction.statute.rule}
                 </h4>
-                <div className="mt-2 inline-block rounded-md bg-amber-950/40 px-2 py-0.5 text-xs font-semibold text-amber-300 border border-amber-800/50">
+                <div className="mt-2 inline-block rounded-md bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-900 border border-amber-200">
                   {activeJurisdiction.statute.code}
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                <p className="mt-3 text-xs leading-relaxed text-slate-700">
                   {activeJurisdiction.statute.explanation}
                 </p>
 
-                <div className="mt-6 border-t border-slate-800 pt-4">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="mt-6 border-t border-amber-200/80 pt-4">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-amber-900">
                     State Bar Advertising Ethics:
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600">
                     {activeJurisdiction.statute.barEthicsNote}
                   </p>
                 </div>
               </div>
 
               {/* Column 2: Freight Crash Corridors */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-blue-400">
-                  <Truck className="h-4 w-4" />
+              <div className="rounded-2xl border border-blue-200 bg-blue-50/40 p-6">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-blue-800">
+                  <Truck className="h-4 w-4 text-blue-700" />
                   <span>High-Risk Freight Corridors</span>
                 </div>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs text-slate-600">
                   Geotargeted content clusters capturing high-value commercial collisions:
                 </p>
                 <div className="mt-4 space-y-4">
                   {activeJurisdiction.corridors.map((corridor) => (
-                    <div key={corridor.name} className="border-l-2 border-blue-500/50 pl-3">
-                      <p className="text-xs font-bold text-slate-200">{corridor.name}</p>
-                      <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+                    <div key={corridor.name} className="border-l-2 border-blue-500 pl-3">
+                      <p className="text-xs font-bold text-slate-900">{corridor.name}</p>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-slate-600">
                         {corridor.detail}
                       </p>
                     </div>
@@ -700,20 +776,20 @@ export default function PersonalInjuryExecutiveView({
               </div>
 
               {/* Column 3: Level-1 Trauma Hospital Radius */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-rose-400">
-                  <Hospital className="h-4 w-4" />
+              <div className="rounded-2xl border border-rose-200 bg-rose-50/40 p-6">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-rose-800">
+                  <Hospital className="h-4 w-4 text-rose-700" />
                   <span>Level-1 Trauma & Emergency Radius</span>
                 </div>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs text-slate-600">
                   Mobile search visibility within immediate hospital catchment zones:
                 </p>
                 <div className="mt-4 space-y-3">
                   {activeJurisdiction.hospitals.map((hosp) => (
-                    <div key={hosp.name} className="rounded-lg border border-slate-800/80 bg-slate-900/60 p-3">
-                      <p className="text-xs font-bold text-white">{hosp.name}</p>
-                      <div className="mt-1 flex items-center justify-between text-[11px] text-slate-400">
-                        <span className="text-rose-300 font-medium">{hosp.type}</span>
+                    <div key={hosp.name} className="rounded-lg border border-slate-200 bg-white p-3 shadow-2xs">
+                      <p className="text-xs font-bold text-slate-950">{hosp.name}</p>
+                      <div className="mt-1 flex items-center justify-between text-[11px] text-slate-500">
+                        <span className="text-rose-700 font-semibold">{hosp.type}</span>
                         <span>{hosp.city}</span>
                       </div>
                     </div>
@@ -723,15 +799,15 @@ export default function PersonalInjuryExecutiveView({
             </div>
 
             {/* Keyword Silos Sample */}
-            <div className="mt-8 border-t border-slate-800 pt-6">
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <div className="mt-8 border-t border-slate-200 pt-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                 Sample High-Value Intent Keywords in {activeJurisdiction.state}:
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {activeJurisdiction.keywordSilos.map((kw) => (
                   <span
                     key={kw}
-                    className="inline-flex items-center rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-1.5 text-xs font-medium text-slate-200"
+                    className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-800"
                   >
                     “{kw}”
                   </span>
@@ -740,19 +816,19 @@ export default function PersonalInjuryExecutiveView({
             </div>
 
             {/* Active City Landing Pages Bar */}
-            <div className="mt-8 border-t border-slate-800 pt-6">
+            <div className="mt-8 border-t border-slate-200 pt-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h4 className="text-sm font-black uppercase tracking-wider text-white">
+                  <h4 className="text-sm font-black uppercase tracking-wider text-slate-950">
                     SearchPrex Active Metro Landing Pages in {activeJurisdiction.state}
                   </h4>
-                  <p className="mt-0.5 text-xs text-slate-400">
+                  <p className="mt-0.5 text-xs text-slate-500">
                     One Law Firm Per City exclusivity enforced in each metropolitan market:
                   </p>
                 </div>
                 <a
                   href="#hero-form"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-500"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-slate-950 px-4 py-2 text-xs font-bold text-white transition hover:bg-slate-800"
                 >
                   Reserve Your {activeJurisdiction.state} Metro Exclusivity <ArrowRight className="h-3 w-3" />
                 </a>
@@ -763,11 +839,11 @@ export default function PersonalInjuryExecutiveView({
                   <Link
                     key={city.href}
                     href={city.href}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-700 bg-slate-800 px-3.5 py-1.5 text-xs font-bold text-slate-200 transition hover:border-emerald-500 hover:text-white"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-50 px-3.5 py-1.5 text-xs font-bold text-slate-800 transition hover:border-slate-500 hover:bg-white"
                   >
-                    <MapPin className="h-3.5 w-3.5 text-emerald-400" />
+                    <MapPin className="h-3.5 w-3.5 text-emerald-600" />
                     <span>{city.name}</span>
-                    <span className="text-slate-400 font-normal">({city.county})</span>
+                    <span className="text-slate-500 font-normal">({city.county})</span>
                   </Link>
                 ))}
               </div>
@@ -776,9 +852,9 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* 4. THE 4 PILLARS OF HIGH-INTENT PERSONAL INJURY ACQUISITION: Clean Architecture */}
-      <section className="border-y border-slate-200 bg-white py-16 sm:py-24 text-slate-900">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ── 5. THE 4 PILLARS OF HIGH-INTENT PERSONAL INJURY ACQUISITION ── */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
               The Architecture of a Retained $100k+ Claim
@@ -792,27 +868,27 @@ export default function PersonalInjuryExecutiveView({
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-emerald-500 hover:shadow-md">
-              <span className="rounded-lg bg-emerald-100 p-2 text-xs font-black text-emerald-800">01</span>
-              <h3 className="mt-4 text-lg font-black text-slate-950">Statutory Pre-Qualification</h3>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
+              <span className="rounded-lg bg-emerald-100 px-2.5 py-1 text-xs font-black text-emerald-800">01</span>
+              <h3 className="mt-4 text-base font-black text-slate-950">Statutory Pre-Qualification</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 We write comprehensive explainers for 51% modified comparative fault, PIP limits, and non-economic caps.
                 Claimants self-screen their liability before dialing, saving your intake team countless hours.
               </p>
             </article>
 
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-emerald-500 hover:shadow-md">
-              <span className="rounded-lg bg-blue-100 p-2 text-xs font-black text-blue-800">02</span>
+            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
+              <span className="rounded-lg bg-blue-100 px-2.5 py-1 text-xs font-black text-blue-800">02</span>
               <h3 className="mt-4 text-lg font-black text-slate-950">Freight Corridor Silos</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Instead of competing for generic 'car accident lawyer', we map regional trucking arteries (I-10, I-94, I-95).
-                Commercial trucking carriers carry \$750K to \$5M policy limits that represent your firm's largest verdicts.
+                Instead of competing for generic &quot;car accident lawyer&quot;, we map regional trucking arteries (I-10, I-94, I-95).
+                Commercial trucking carriers carry \$750K to \$5M policy limits that represent your firm&apos;s largest verdicts.
               </p>
             </article>
 
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-emerald-500 hover:shadow-md">
-              <span className="rounded-lg bg-rose-100 p-2 text-xs font-black text-rose-800">03</span>
+            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
+              <span className="rounded-lg bg-rose-100 px-2.5 py-1 text-xs font-black text-rose-800">03</span>
               <h3 className="mt-4 text-lg font-black text-slate-950">Bedside Mobile Intake</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 Over 84% of emergency accident searches occur on smartphones. We deploy sub-second loading speeds,
@@ -820,8 +896,8 @@ export default function PersonalInjuryExecutiveView({
               </p>
             </article>
 
-            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-emerald-500 hover:shadow-md">
-              <span className="rounded-lg bg-amber-100 p-2 text-xs font-black text-amber-800">04</span>
+            <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs transition hover:border-slate-400 hover:bg-white">
+              <span className="rounded-lg bg-amber-100 px-2.5 py-1 text-xs font-black text-amber-800">04</span>
               <h3 className="mt-4 text-lg font-black text-slate-950">State Bar Ethics Immunity</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 We strictly obey ABA Model Rule 7.1 and state advertising rules. No false outcome guarantees, no misleading
@@ -832,66 +908,66 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* 5. THE AGENCY COMPARISON MATRIX: Why Enterprise Firms Choose SearchPrex */}
-      <section className="bg-[#070b19] py-16 sm:py-24">
+      {/* ── 6. HENNESSEY COMPARISON: COMPETE, WIN & DOMINATE IN CUTTHROAT SPACES ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
               The Trade-Off Made Transparent
             </p>
-            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
               SearchPrex vs. Traditional High-Volume Legal Marketing Agencies
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600">
               We operate as a specialized boutique partner with strict territorial exclusivity, not an agency running identical cookie-cutter playbooks for 10 competing firms in the same city.
             </p>
           </div>
 
-          <div className="mt-10 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/90 shadow-xl">
-            <div className="grid grid-cols-[1fr_1fr_1.2fr] border-b border-slate-800 bg-slate-950 px-5 py-4 text-xs font-black uppercase tracking-wider text-slate-400">
+          <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="grid grid-cols-[1fr_1fr_1.2fr] border-b border-slate-200 bg-slate-100 px-5 py-4 text-xs font-black uppercase tracking-wider text-slate-700">
               <span>Decision Factor</span>
               <span>Traditional Legal Agencies</span>
-              <span className="text-emerald-400">SearchPrex Law Firm SEO</span>
+              <span className="text-emerald-800">SearchPrex Law Firm SEO</span>
             </div>
 
-            <div className="divide-y divide-slate-800 text-xs sm:text-sm">
+            <div className="divide-y divide-slate-200 text-xs sm:text-sm">
               <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-white">Market Exclusivity</span>
-                <span className="text-slate-400">Signs multiple competing firms in the same metro</span>
-                <span className="font-semibold text-emerald-400">Strict One Firm Per City Policy</span>
+                <span className="font-bold text-slate-950">Market Exclusivity</span>
+                <span className="text-slate-500">Signs multiple competing firms in the same metro</span>
+                <span className="font-semibold text-emerald-700">Strict One Firm Per City Policy</span>
               </div>
               <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-white">Content Strategy</span>
-                <span className="text-slate-400">Generic AI spin ('Top Car Accident Lawyer')</span>
-                <span className="font-semibold text-emerald-400">Jurisdictional statutes, freight corridors & trauma hubs</span>
+                <span className="font-bold text-slate-950">Content Strategy</span>
+                <span className="text-slate-500">Generic AI spin (&apos;Top Car Accident Lawyer&apos;)</span>
+                <span className="font-semibold text-emerald-700">Jurisdictional statutes, freight corridors & trauma hubs</span>
               </div>
               <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-white">Intake Lead Quality</span>
-                <span className="text-slate-400">Low-value property-damage & minor fender calls</span>
-                <span className="font-semibold text-emerald-400">Statutort pre-qualified commercial & catastrophic claims</span>
+                <span className="font-bold text-slate-950">Intake Lead Quality</span>
+                <span className="text-slate-500">Low-value property-damage & minor fender calls</span>
+                <span className="font-semibold text-emerald-700">Statutory pre-qualified commercial & catastrophic claims</span>
               </div>
               <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-white">Account Management</span>
-                <span className="text-slate-400">Junior account manager with high client churn</span>
-                <span className="font-semibold text-emerald-400">Direct founder strategy with Mubashar Sharif</span>
+                <span className="font-bold text-slate-950">Account Management</span>
+                <span className="text-slate-500">Junior account manager with high client churn</span>
+                <span className="font-semibold text-emerald-700">Direct founder strategy with Mubashar Sharif</span>
               </div>
               <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-white">Pricing Model</span>
-                <span className="text-slate-400">$5,000–$10,000/mo + 12-month lock-in contract</span>
-                <span className="font-semibold text-emerald-400">$1,500–$2,500/mo flat retainer · Month-to-month</span>
+                <span className="font-bold text-slate-950">Pricing Model</span>
+                <span className="text-slate-500">$5,000–$10,000/mo + 12-month lock-in contract</span>
+                <span className="font-semibold text-emerald-700">$1,500–$2,500/mo flat retainer · Month-to-month</span>
               </div>
               <div className="grid grid-cols-[1fr_1fr_1.2fr] items-center px-5 py-4">
-                <span className="font-bold text-white">Client Protection</span>
-                <span className="text-slate-400">No guarantee, no refund terms</span>
-                <span className="font-semibold text-emerald-400">7-Day Free Trial + 90-Day Money-Back Guarantee</span>
+                <span className="font-bold text-slate-950">Client Protection</span>
+                <span className="text-slate-500">No guarantee, no refund terms</span>
+                <span className="font-semibold text-emerald-700">7-Day Free Trial + 90-Day Money-Back Guarantee</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. TRANSPARENT PRICING & PROTECTION: Institutionally Defined */}
-      <section id="pricing" className="border-t border-slate-200 bg-white py-16 sm:py-24 text-slate-900">
+      {/* ── 7. TRANSPARENT PRICING & 90-DAY PROTECTION ── */}
+      <section id="pricing" className="border-b border-slate-200 bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
@@ -925,7 +1001,7 @@ export default function PersonalInjuryExecutiveView({
               </div>
             </div>
 
-            <div className="rounded-2xl border-2 border-emerald-600/30 bg-emerald-50/70 p-6 sm:p-8">
+            <div className="rounded-2xl border-2 border-emerald-500/50 bg-emerald-50/60 p-6 sm:p-8">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-8 w-8 text-emerald-600 shrink-0" />
                 <div>
@@ -950,18 +1026,18 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* 7. ALL 15 ACTIVE CITIES IN JURISDICTIONS: Complete Geographic Footprint */}
-      <section className="bg-[#060a17] py-16 sm:py-24 border-t border-slate-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ── 8. ALL 15 ACTIVE CITIES IN JURISDICTIONS (Light Theme) ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
               Active Metro Footprint
             </p>
-            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
               15 Metropolitan Hubs Where SearchPrex Operates
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300">
-              We enforce strict exclusivity: once a law firm partners with SearchPrex in any city listed below,
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600">
+              We enforce strict exclusivity: once a personal injury law firm partners with SearchPrex in any city listed below,
               that metro territory is locked and closed to all competing firms.
             </p>
           </div>
@@ -971,19 +1047,19 @@ export default function PersonalInjuryExecutiveView({
               <Link
                 key={city.citySlug}
                 href={`/locations/${city.stateSlug}/${city.citySlug}`}
-                className="group rounded-xl border border-slate-800 bg-slate-900/70 p-4 transition hover:border-emerald-500 hover:bg-slate-850"
+                className="group rounded-xl border border-slate-200 bg-white p-4 transition hover:border-slate-400 hover:shadow-xs"
               >
                 <div className="flex items-center justify-between">
-                  <span className="rounded bg-slate-800 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-400 group-hover:bg-emerald-950">
+                  <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-800 group-hover:bg-emerald-50">
                     {city.stateAbbr}
                   </span>
-                  <span className="text-[11px] font-medium text-emerald-400">1 Firm Exclusivity</span>
+                  <span className="text-[11px] font-medium text-emerald-700">1 Firm Exclusivity</span>
                 </div>
-                <h3 className="mt-3 text-base font-bold text-white group-hover:text-emerald-300">
+                <h3 className="mt-3 text-base font-bold text-slate-950 group-hover:text-emerald-700">
                   {city.city}
                 </h3>
-                <p className="text-xs text-slate-400">{city.county}</p>
-                <div className="mt-3 flex items-center gap-1 text-[11px] font-semibold text-slate-300 group-hover:text-white">
+                <p className="text-xs text-slate-500">{city.county}</p>
+                <div className="mt-3 flex items-center gap-1 text-[11px] font-semibold text-slate-700 group-hover:text-slate-950">
                   <span>View City Strategy</span>
                   <ChevronRight className="h-3 w-3" />
                 </div>
@@ -993,26 +1069,26 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* 8. FOUNDER-LED STRATEGIC COUNSEL: Mubashar Sharif */}
-      <section className="border-t border-slate-200 bg-white py-16 text-slate-900">
+      {/* ── 9. FOUNDER-LED STRATEGIC COUNSEL: Mubashar Sharif (Hennessey-Style Pledge) ── */}
+      <section className="border-b border-slate-200 bg-white py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-700">
-            Founder Accountability
+            Founder Accountability & Commitment
           </div>
           <h2 className="mt-3 text-3xl font-black text-slate-950">
-            Work Directly with a Senior SEO Strategist
+            &quot;We Don&apos;t Kid When We Say We Are ROI-Obsessed.&quot;
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
-            “Personal injury firms cannot afford rookie mistakes. An unauthorized claim on your site can trigger
-            a State Bar ethics investigation, and a poorly structured page will lose you multi-million dollar cases.
-            I personally map your search path, write your jurisdictional blueprints, and review your competitive gaps.”
+            “The legal industry is the most dog-eat-dog place on Google. We take our clients’ success personally.
+            Personal injury firms cannot afford rookie errors: a vague settlement headline can trigger a State Bar
+            grievance, and an unoptimized corridor page loses you million-dollar cases. I personally research your
+            freight corridors, map your trauma center radius, and direct your jurisdictional blueprints.
+            If you are not getting results, I personally make it my mission to see you win.”
           </p>
 
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <div className="text-left">
-              <p className="text-base font-black text-slate-950">Mubashar Sharif</p>
-              <p className="text-xs text-slate-500">Founder & Senior SEO Analyst · SearchPrex</p>
-            </div>
+          <div className="mt-6">
+            <p className="text-base font-black text-slate-950">Mubashar Sharif</p>
+            <p className="text-xs text-slate-500">Founder & Senior SEO Analyst · SearchPrex</p>
           </div>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -1044,14 +1120,14 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* 9. EXECUTIVE PARTNER FAQ: High-Level Concerns Addressed */}
-      <section className="bg-[#080d1e] py-16 sm:py-24 border-t border-slate-800">
+      {/* ── 10. EXECUTIVE PARTNER FAQ ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
               Managing Partner Questions
             </p>
-            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
               Frequently Asked Questions by Personal Injury Attorneys
             </h2>
           </div>
@@ -1075,29 +1151,29 @@ export default function PersonalInjuryExecutiveView({
                 a: "The 7-day trial is a zero-obligation diagnostic sprint. Within 7 days, we inspect your firm's current search path, map your freight highway and trauma center coverage, identify competitor keyword gaps, and deliver a clear written execution plan before any billing commences.",
               },
             ].map((faq) => (
-              <div key={faq.q} className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-                <h3 className="text-base font-bold text-white">{faq.q}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300 sm:text-sm">{faq.a}</p>
+              <div key={faq.q} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+                <h3 className="text-base font-black text-slate-950">{faq.q}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 10. FINAL EXECUTIVE CALL TO ACTION & FORM */}
-      <section id="get-started" className="relative overflow-hidden bg-gradient-to-b from-[#091127] to-[#050813] py-20 border-t border-slate-800">
+      {/* ── 11. FINAL HENNESSEY-STYLE CONVERSION CTA ── */}
+      <section id="get-started" className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
-            Secure Your Market Territory
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
+            Limited Monthly Capacity
           </p>
-          <h2 className="mt-3 text-3xl font-black text-white sm:text-5xl">
-            Check Your City's Personal Injury Exclusivity
+          <h2 className="mt-3 text-3xl font-black text-slate-950 sm:text-4xl">
+            In order to deliver consistent results, we only partner with ONE firm per city.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            Once a city territory is reserved, it is closed to all competing firms. Submit your website and work email below for a confidential 24-hour jurisdictional search audit.
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+            Once a metro market is claimed, it is closed to all competing firms. Submit your website and work email below for a confidential 24-hour jurisdictional search audit.
           </p>
 
-          <div className="mt-8 mx-auto max-w-xl text-left rounded-2xl border border-slate-700 bg-slate-900/90 p-6 shadow-2xl">
+          <div className="mt-8 mx-auto max-w-xl text-left rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
             <ArticleLeadMagnet
               variant="bottom"
               source={source}
@@ -1116,18 +1192,18 @@ export default function PersonalInjuryExecutiveView({
       </section>
 
       {/* Mobile Sticky Bar */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-slate-800 bg-[#070b19]/95 p-3 shadow-2xl backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-slate-200 bg-white/95 p-3 shadow-lg backdrop-blur md:hidden">
         <a
           href={CALL_HREF}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 px-3 text-xs font-bold text-slate-200"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 text-xs font-bold text-slate-800"
         >
           Book Partner Call
         </a>
         <a
           href="#hero-form"
-          className="inline-flex min-h-11 items-center justify-center rounded-lg bg-emerald-600 px-3 text-center text-xs font-bold text-white"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg bg-slate-950 px-3 text-center text-xs font-bold text-white"
         >
           Request Audit
         </a>
