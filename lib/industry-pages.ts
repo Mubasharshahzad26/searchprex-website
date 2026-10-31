@@ -37,6 +37,30 @@ export interface IndustryPage {
   accent: string;
   heroSub: string;
   answerCapsule: string;
+  keywordMap: {
+    commercial: string[];
+    problem: string[];
+    local: string[];
+    note: string;
+  };
+  visual: {
+    src: string;
+    alt: string;
+    eyebrow: string;
+    title: string;
+    caption: string;
+  };
+  usp: {
+    title: string;
+    body: string;
+    points: string[];
+  };
+  comparison: {
+    title: string;
+    intro: string;
+    rows: Array<{ option: string; strength: string; tradeoff: string }>;
+  };
+  founderAngle: string;
   story: {
     title: string;
     leftLabel: string;
@@ -75,7 +99,7 @@ export interface IndustryPage {
 type PracticeWireframe = Pick<
   IndustryPage,
   | "primaryKeyword" | "answerCapsule" | "story" | "journeyTitle" | "journey"
-  | "framework" | "module" | "trialSteps" | "priceRange" | "primaryCta"
+  | "keywordMap" | "visual" | "usp" | "comparison" | "founderAngle" | "framework" | "module" | "trialSteps" | "priceRange" | "primaryCta"
   | "secondaryCta" | "lateralLink" | "resourceLinks" | "showAllLocations"
 >;
 type BaseIndustryPage = Omit<IndustryPage, keyof PracticeWireframe>;
@@ -102,7 +126,7 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     metaTitle: "Personal Injury Lawyer SEO Services | 7-Day Free Trial",
     metaDescription:
       "SEO for personal injury lawyers: injury-type pages, Map Pack and AI visibility, and after-hours intake. $1,500–$2,500/mo. 7-day free trial.",
-    h1: "Personal Injury Lawyer SEO: Be the Firm That Answers When an Injured Caller Searches at 2 a.m.",
+    h1: "Personal Injury Lawyer SEO for the Next Call",
     accent: "",
     heroSub:
       "Injured people search for what just happened to them. We build the injury pages, local profile and mobile intake path that help your firm appear at that moment—and make the next step clear when they reach you.",
@@ -167,7 +191,7 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     metaTitle: "Family Law Attorney SEO Services | Private Written Audit",
     metaDescription:
       "Private family law SEO audit for divorce and custody firms: county-level answers, discreet conversion paths and privacy-aware marketing. No ranking promises.",
-    h1: "Divorce & Family Law Attorney SEO: Be the Trusted Answer They Find in Private, Before They Ever Call",
+    h1: "Family Law Attorney SEO for Private Local Searches",
     accent: "",
     heroSub:
       "People often research divorce and custody questions quietly before they contact a lawyer. We build calm, useful county-level answers and a privacy-aware path to your firm, so trust can start before a consultation.",
@@ -244,7 +268,7 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     metaTitle: "Criminal Defense Lawyer SEO Services | 7-Day Free Trial",
     metaDescription:
       "Criminal defense SEO for charge-specific searches, family callers and a clear intake path. $1,200–$2,200/mo. 7-day free trial.",
-    h1: "Criminal Defense Lawyer SEO: Be Found in the First 72 Hours, When Families Search in Panic",
+    h1: "Criminal Defense Lawyer SEO for Urgent Searches",
     accent: "",
     heroSub:
       "When an arrest or charge disrupts a family's night, relatives may search before the accused can speak with counsel. We build charge-specific explanations, a fast mobile path and a clear intake handoff for your firm's approved process.",
@@ -309,7 +333,7 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     metaTitle: "Estate Planning Attorney SEO Services | Free Search Map",
     metaDescription:
       "Estate planning attorney SEO: life-event content, county probate roadmaps and a free Search Map. $1,200–$2,000/mo. No ranking promises.",
-    h1: "Estate Planning Attorney SEO: Be the Firm Families Trust With What They Love Most",
+    h1: "Estate Planning Attorney SEO for Families",
     accent: "",
     heroSub:
       "Families often postpone planning until a life event makes the questions feel immediate. We build clear guides, county-aware probate information and useful next steps that help a family decide when to speak with your firm.",
@@ -378,7 +402,7 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     metaTitle: "Mass Tort Lawyer SEO | MDL Docket Pages | 7-Day Trial",
     metaDescription:
       "Mass tort & MDL lawyer SEO: sourced docket hubs, attorney review and clear intake. $1,800–$2,500/mo. 7-day trial; no ranking promises.",
-    h1: "Mass Tort & MDL Lawyer SEO: Be Live When the Recall Breaks, Not Three Weeks Later",
+    h1: "Mass Tort Lawyer SEO for MDL Search",
     accent: "",
     heroSub:
       "When a recall or court order changes the search landscape, your firm needs a reviewed process ready to move. We prepare sourced docket pages, clear eligibility language and intake pathways so your team can publish promptly after attorney approval.",
@@ -449,6 +473,16 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
 const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   "personal-injury": {
     primaryKeyword: "personal injury lawyer SEO",
+    keywordMap: {
+      commercial: ["personal injury lawyer SEO", "car accident lawyer SEO", "truck accident lawyer SEO"],
+      problem: ["what to do after a car accident", "do I need a lawyer after a truck accident", "how long do I have to file a personal injury claim"],
+      local: ["personal injury lawyer near me", "car accident attorney [city]", "slip and fall lawyer [city]"],
+      note: "Prioritize case-type and question-led pages before competing for the broad head term; validate demand by city in Search Console.",
+    },
+    visual: { src: "/images/services/law-firm/law-firm-relief-from-ppc-burnout.webp", alt: "Personal injury law firm SEO planning scene with an attorney reviewing a local search growth dashboard", eyebrow: "When the phone should feel easier to answer", title: "Turn a high-stress search into a clear next step", caption: "Illustrative visual: the page experience should help an injured person understand what the firm handles and how to make contact, without promising a legal result." },
+    usp: { title: "One injury cluster, one accountable search path", body: "SearchPrex connects the injury page, local profile and mobile intake path instead of treating rankings and enquiries as separate projects.", points: ["Case-type pages before vanity head terms", "Local profile and city-page alignment", "Founder-reviewed intake and weekly reporting"] },
+    comparison: { title: "Personal injury SEO vs. the usual alternatives", intro: "The right channel depends on urgency, budget and how much of the search journey your firm can own.", rows: [{ option: "PPC only", strength: "Fast visibility", tradeoff: "Stops when the budget stops; the firm owns little organic demand." }, { option: "Lead vendor", strength: "Can send enquiries", tradeoff: "Often shares the same lead and gives less control over the page or brand." }, { option: "Generic SEO", strength: "Builds a foundation", tradeoff: "Can miss injury type, local and after-hours intent." }, { option: "SearchPrex injury SEO", strength: "Maps case type → city → intake", tradeoff: "Compounds more slowly and needs attorney review before publishing." }] },
+    founderAngle: "For an injury firm, I would rather show the exact page and call path we will review than sell a vague promise about rankings or signed cases.",
     answerCapsule: "Personal injury lawyer SEO helps a firm appear when people search after a crash, fall or workplace injury. It combines injury-type pages, a correctly categorized Google Business Profile, fast mobile pages and an intake path that works at night, so injured callers can understand the next step and reach the firm.",
     story: { title: "Tuesday, 2:07 a.m.", leftLabel: "Her screen", leftBody: "An emergency-room waiting room. Her phone is nearly out of battery. She searches what to do after a car accident, then whether she needs a lawyer after a truck crash. One result goes to voicemail. Another demands an eleven-field form. A third makes the call path obvious.", rightLabel: "Your firm", rightBody: "The trial lawyer is asleep, as any person would be. The website says only “Practice Areas,” and the contact form asks for details she does not have yet. The opportunity is not to promise an outcome; it is to make the next useful step easy and ensure the firm can respond.", close: "A useful injury SEO page answers the question a caller is searching, explains what the firm handles and makes the next contact step easy on a phone. This scenario is illustrative; it shows how clear content and intake can meet a moment without implying guaranteed leads or results." },
     journeyTitle: "Caller Search Timeline",
@@ -467,6 +501,16 @@ const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   },
   "family-law": {
     primaryKeyword: "family law attorney SEO",
+    keywordMap: {
+      commercial: ["family law attorney SEO", "divorce lawyer SEO", "child custody lawyer SEO"],
+      problem: ["how is parenting time decided in [county]", "what happens to the house if I separate", "how much does a divorce lawyer cost"],
+      local: ["family law attorney near me", "divorce attorney [city]", "custody lawyer [county]"],
+      note: "Build discreet, county-aware answers around the questions people ask before they are ready to call; never imply search interest reveals a person's situation.",
+    },
+    visual: { src: "/images/services/law-firm/searchprex-law-firm-care-representative.webp", alt: "Calm law office consultation scene representing a privacy-aware family law client journey", eyebrow: "Trust before contact", title: "Make the first search feel safe, calm and useful", caption: "Illustrative visual: family-law searchers often need control over timing and contact method before they are ready to speak with an attorney." },
+    usp: { title: "Privacy-aware family law content", body: "The strategy respects that a divorce or custody search may happen privately, so useful answers and contact choices come before aggressive follow-up.", points: ["County-aware divorce and custody answers", "Private written audit option", "No pressure to call and no sensitive remarketing claims"] },
+    comparison: { title: "Family law SEO vs. ads and directory dependence", intro: "A private search journey needs more than a phone number at the top of a page.", rows: [{ option: "PPC only", strength: "Immediate exposure", tradeoff: "Paid clicks do not answer the quiet questions that build trust." }, { option: "Directory profile", strength: "Comparison presence", tradeoff: "The firm is one listing among many with limited owned context." }, { option: "Generic family page", strength: "Simple to launch", tradeoff: "It rarely matches divorce, custody and county-specific intent." }, { option: "SearchPrex family SEO", strength: "Answers sensitive questions calmly", tradeoff: "Trust compounds through reviewed content and a discreet conversion path." }] },
+    founderAngle: "For family law, the first conversion is often trust. I keep the audit written and private so the firm can decide what to share and when.",
     answerCapsule: "Family law attorney SEO helps a firm appear while people privately research divorce, custody, support and related questions. It combines matter-specific pages, county-aware explanations, a trusted Google Business Profile and privacy-conscious conversion paths, so people can understand the firm's services before deciding whether to make contact.",
     story: { title: "The quiet search", leftLabel: "Their screen", leftBody: "After the house is quiet, someone searches whether they can stay in the home, how parenting time is decided and what to prepare before speaking with counsel. They are not ready to call. They need a composed answer and control over when they take the next step.", rightLabel: "Your firm", rightBody: "A capable attorney may be the right fit, but a generic page or intrusive follow-up gives the searcher little reason to trust that. Clear county-level information, discreet contact choices and no pressure help your firm's experience become visible before the first conversation.", close: "Family law pages can earn trust before a call by answering sensitive questions calmly, explaining verified county processes and giving the reader control over contact. This illustrative scenario shows why privacy and clarity belong in the page experience from the first search." },
     journeyTitle: "The Four-Stage Private Journey",
@@ -480,6 +524,16 @@ const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   },
   "criminal-defense": {
     primaryKeyword: "criminal defense lawyer SEO",
+    keywordMap: {
+      commercial: ["criminal defense lawyer SEO", "DUI lawyer SEO", "criminal defense attorney near me"],
+      problem: ["what happens after an arrest for [charge]", "where is someone booked in [county]", "what should I ask a criminal defense lawyer"],
+      local: ["DUI attorney [city]", "bond hearing lawyer [county]", "felony defense lawyer near me"],
+      note: "Charge-specific and family-facing search paths are the practical starting point; local court information must be verified before publishing.",
+    },
+    visual: { src: "/images/services/law-firm/usa-law-firm-seo-hero-dashboard.webp", alt: "Nighttime law office dashboard representing an urgent criminal defense search path across the United States", eyebrow: "The first 72 hours", title: "Be clear when a family is searching under pressure", caption: "Illustrative visual: a charge page should orient the searcher and make the firm's approved intake path visible without predicting the case outcome." },
+    usp: { title: "Charge-specific clarity when the clock feels loud", body: "Criminal defense search works best when the page speaks to the charge, the county and the next approved contact step—not a generic practice-area slogan.", points: ["Charge and court intent mapped separately", "Family-facing and accused-facing paths", "After-hours call-path review"] },
+    comparison: { title: "Criminal defense SEO vs. a generic practice page", intro: "People searching after an arrest do not have time to decode a broad list of services.", rows: [{ option: "PPC only", strength: "Can reach urgent searches", tradeoff: "Every click has a cost and the page still needs to earn trust." }, { option: "Generic criminal page", strength: "Covers the practice", tradeoff: "May not match DUI, felony, warrant or court-specific intent." }, { option: "Directory listing", strength: "Adds citation presence", tradeoff: "Little room to explain process, coverage or intake." }, { option: "SearchPrex criminal SEO", strength: "Charge → county → call path", tradeoff: "Requires accurate court information and attorney review." }] },
+    founderAngle: "My job is to make the first search less confusing: the charge, the location and the real way to reach the office should agree.",
     answerCapsule: "Criminal defense lawyer SEO helps a firm appear when someone or their family searches for a specific charge, court process or next step. It combines charge-specific pages, accurate local information, a complete Google Business Profile and a mobile intake path that makes it easier to reach the firm without promising a legal outcome.",
     story: { title: "The first 72 hours", leftLabel: "The family's search", leftBody: "A parent gets a call after midnight. They do not know which court handles the case or what questions to ask. One search is about the charge; another is about where their child is being held. They need orientation and a way to reach qualified counsel.", rightLabel: "Your firm's response", rightBody: "If the site has only a broad criminal-defense page and an office-hours form, it leaves immediate questions unanswered. A useful page explains the firm's process, the limits of online information and the fastest approved way to contact the office.", close: "Criminal defense pages should orient people searching a specific charge and help a family reach the firm's approved intake path. This illustrative scenario focuses on clarity and access during uncertainty; it is not a client matter or a promise of legal outcome." },
     journeyTitle: "The First-72-Hours Map",
@@ -493,6 +547,16 @@ const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   },
   "estate-planning": {
     primaryKeyword: "estate planning attorney SEO",
+    keywordMap: {
+      commercial: ["estate planning attorney SEO", "living trust lawyer SEO", "probate attorney SEO"],
+      problem: ["living trust vs will", "how to avoid probate in [county]", "who will care for my children if I die"],
+      local: ["estate planning attorney near me", "living trust attorney [city]", "probate lawyer [county]"],
+      note: "Separate planning, document and probate intent so each family question lands on a focused, attorney-reviewed page rather than one generic services list.",
+    },
+    visual: { src: "/images/services/law-firm/city-the-woodlands-texas-law-firm-seo.webp", alt: "The Woodlands Texas skyline and waterway representing local estate planning and probate search visibility", eyebrow: "Local trust for life-event decisions", title: "Connect family questions to the right local next step", caption: "Illustrative visual: estate-planning and probate pages should explain local context without pretending every family follows the same timeline or document plan." },
+    usp: { title: "Separate planning from probate intent", body: "A family looking for a living trust is not asking the same question as an executor searching for a probate filing. The page architecture respects that difference.", points: ["Life-event and document clusters", "County probate sources and review dates", "Plain-language answers without fear-based claims"] },
+    comparison: { title: "Estate planning SEO vs. DIY and broad legal pages", intro: "The strongest page is not the one with the most documents listed; it is the one that answers the family’s actual moment.", rows: [{ option: "DIY document search", strength: "Low-friction starting point", tradeoff: "May not reflect family structure, assets or local requirements." }, { option: "Broad estate page", strength: "Easy to publish", tradeoff: "Blends wills, trusts and probate into one unclear journey." }, { option: "PPC only", strength: "Fast local visibility", tradeoff: "Pays for every visit and leaves fewer lasting answers." }, { option: "SearchPrex estate SEO", strength: "Life event → service → local next step", tradeoff: "Needs current sources and attorney review for accuracy." }] },
+    founderAngle: "Estate planning marketing should reduce confusion, not manufacture urgency. I build the map so the attorney can review each life-event path before it goes live.",
     answerCapsule: "Estate planning attorney SEO helps a firm appear when families research wills, trusts, probate and life changes. It combines life-event content, county-specific probate information, attorney-reviewed answers and a trusted local profile, so people can understand the firm's services while deciding whether to plan or seek help administering an estate.",
     story: { title: "The letter they keep meaning to write", leftLabel: "The family's moment", leftBody: "A folder marked “wills” sits on a desk. A new child, a home purchase or a parent's passing brings the questions back. A late-night search for the difference between a will and a trust is not just a keyword; it is a first step toward a difficult conversation.", rightLabel: "Your firm's opportunity", rightBody: "The family may find a template seller before a local attorney. Helpful explanations can show when a simple document may be enough and when circumstances call for individualized advice—without fear-based claims or disparaging alternatives.", close: "Estate-planning pages can make a hard conversation easier to begin by answering life-event questions plainly, explaining when individual advice matters and offering a useful next step. This illustrative scenario shows how a family might move from postponement to a search without fear-based claims." },
     journeyTitle: "The Life-Event Trigger Map",
@@ -506,6 +570,16 @@ const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   },
   "mass-torts": {
     primaryKeyword: "mass tort lawyer SEO",
+    keywordMap: {
+      commercial: ["mass tort lawyer SEO", "MDL attorney SEO", "mass tort lead generation"],
+      problem: ["do I qualify for [product] lawsuit", "[product] recall and lawsuit", "what is the status of [MDL]"],
+      local: ["mass tort attorney near me", "[state] [product] lawsuit lawyer", "mass tort case evaluation"],
+      note: "Map awareness, eligibility and contact-ready terms to a sourced docket hub; national product and MDL intent matters more than a single city page.",
+    },
+    visual: { src: "/images/services/law-firm/usa-served-cities-cleveland-sugarland-woodlands.webp", alt: "Three United States city scenes representing national mass tort and MDL search coverage", eyebrow: "National reach, source-first publishing", title: "Be ready when a new docket changes the search", caption: "Illustrative visual: mass-tort search is national and matter-led, so the page needs a source, reviewer and update date before it needs more words." },
+    usp: { title: "Source-first docket readiness", body: "Mass tort search changes with recalls, filings and court orders. SearchPrex builds a repeatable workflow so a firm can move quickly without letting speed outrun sourcing or attorney review.", points: ["Awareness → eligibility → intake mapping", "Primary-source and update-date discipline", "Matter-specific disclosures and attorney approval"] },
+    comparison: { title: "Mass tort SEO vs. lead buying and generic content", intro: "A mass tort search is national and matter-led; it needs a docket workflow, not a recycled local law firm page.", rows: [{ option: "Lead buying", strength: "Can add volume quickly", tradeoff: "Less control over source, exclusivity and the claimant experience." }, { option: "News-only content", strength: "Can capture awareness", tradeoff: "May not explain eligibility or provide a compliant intake path." }, { option: "Generic PI SEO", strength: "Shares some foundations", tradeoff: "Misses MDL, product and procedural intent." }, { option: "SearchPrex docket SEO", strength: "Source → status → eligibility → intake", tradeoff: "Requires a current matter, primary sources and attorney review." }] },
+    founderAngle: "A new docket creates pressure to publish. My differentiator is a reviewable workflow that lets the firm move with the facts, not ahead of them.",
     answerCapsule: "Mass tort SEO helps a firm appear early in searches about a drug, device or product-liability docket. It combines sourced docket hubs, plain-language eligibility criteria, court and regulator timelines, an attorney-reviewed intake path and clear advertising disclosures. Publication speed depends on source availability and how quickly the firm's attorney reviews the draft.",
     story: { title: "Friday, 5:40 p.m.", leftLabel: "The search begins", leftBody: "A device maker posts a recall notice. By Saturday, people are searching the product name and what the notice means. Information is developing, and readers need a sourced explanation that distinguishes known facts from questions still under review.", rightLabel: "Your firm's readiness", rightBody: "A team with a prepared sourcing, review and publishing workflow can start a careful draft sooner. The page goes live only when relevant facts and attorney approval are in place; speed cannot replace accuracy or clear disclosure.", close: "A docket-ready SEO workflow pairs each new search need with a primary source, reviewer and update date. This illustrative scenario shows how a firm can prepare to move promptly when facts are verified, while keeping eligibility language and advertising disclosures under attorney review." },
     journeyTitle: "Recall-to-Retainer Timeline: The Docket Clock",

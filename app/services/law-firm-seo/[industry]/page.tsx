@@ -29,7 +29,13 @@ export async function generateMetadata({
   return {
     title: page.metaTitle,
     description: page.metaDescription,
-    keywords: [page.primaryKeyword, ...page.capsules.map((item) => item.q)],
+    keywords: [
+      page.primaryKeyword,
+      ...page.keywordMap.commercial,
+      ...page.keywordMap.problem,
+      ...page.keywordMap.local,
+      ...page.capsules.map((item) => item.q),
+    ],
     alternates: { canonical: url },
     openGraph: {
       title: page.metaTitle,
@@ -63,6 +69,7 @@ export default async function IndustryPage({
         "@id": `${url}#webpage`,
         url,
         name: page.h1,
+        image: `${SITE}${page.visual.src}`,
         isPartOf: websiteRef,
         about: { "@id": `${url}#service` },
         author: founderRef,
@@ -85,6 +92,7 @@ export default async function IndustryPage({
         areaServed: { "@type": "Country", name: "United States" },
         audience: { "@type": "BusinessAudience", audienceType: `${page.name} law firms` },
         description: page.metaDescription,
+        image: `${SITE}${page.visual.src}`,
         url,
         offers: {
           "@type": "Offer",
