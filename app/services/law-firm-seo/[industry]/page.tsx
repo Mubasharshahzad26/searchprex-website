@@ -89,7 +89,20 @@ export default async function IndustryPage({
         name: page.primaryKeyword,
         serviceType: `Law firm SEO for ${page.name}`,
         provider: organizationRef,
-        areaServed: { "@type": "Country", name: "United States" },
+        areaServed:
+          page.slug === "personal-injury"
+            ? [
+                { "@type": "Country", name: "United States" },
+                { "@type": "AdministrativeArea", name: "Texas" },
+                { "@type": "AdministrativeArea", name: "Michigan" },
+                { "@type": "AdministrativeArea", name: "Pennsylvania" },
+                { "@type": "AdministrativeArea", name: "California" },
+                { "@type": "AdministrativeArea", name: "Arizona" },
+                { "@type": "AdministrativeArea", name: "Louisiana" },
+                { "@type": "AdministrativeArea", name: "Ohio" },
+                { "@type": "AdministrativeArea", name: "New Mexico" },
+              ]
+            : { "@type": "Country", name: "United States" },
         audience: { "@type": "BusinessAudience", audienceType: `${page.name} law firms` },
         description: page.metaDescription,
         image: `${SITE}${page.visual.src}`,

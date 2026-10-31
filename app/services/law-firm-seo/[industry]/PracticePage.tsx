@@ -4,6 +4,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
 import DocketHubPreview from "@/components/DocketHubPreview";
+import PersonalInjuryJurisdictions from "@/components/PersonalInjuryJurisdictions";
 import PracticeLocationsMap from "@/components/PracticeLocationsMap";
 import PracticePageTracker from "@/components/PracticePageTracker";
 import ServiceBlogTeaser from "@/components/ServiceBlogTeaser";
@@ -165,6 +166,8 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
           Search examples are illustrative, not search-volume claims. Validate them in Search Console or the <Link className="font-bold underline" href="/tools/keyword-research">law firm keyword research tool</Link>. Any sample legal copy requires attorney review before publishing.
         </p>
       </Band>
+
+      {page.slug === "personal-injury" ? <PersonalInjuryJurisdictions /> : null}
 
       <Band>
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
