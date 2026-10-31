@@ -21,6 +21,8 @@ import {
   MessageSquare,
   Shield,
   HelpCircle,
+  Truck,
+  Hospital,
 } from "lucide-react";
 
 import ArticleLeadMagnet from "@/components/ArticleLeadMagnet";
