@@ -899,7 +899,7 @@ export default function PostClient({
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
-              <div className="relative h-11 w-11 rounded-full bg-[#f1f5f9] overflow-hidden flex-shrink-0 ring-2 ring-[#171717]/20">
+              <Link href={isMubasharAuthor ? "/author/mubashar-sharif" : "/experts"} aria-label={`Read ${post.author.name}'s author profile`} className="relative h-11 w-11 rounded-full bg-[#f1f5f9] overflow-hidden flex-shrink-0 ring-2 ring-[#171717]/20">
                 <Image
                   src="/images/mubashar-sharif.jpg"
                   alt={`${post.author.name} — ${post.author.role}`}
@@ -907,10 +907,10 @@ export default function PostClient({
                   sizes="44px"
                   className="object-cover object-top"
                 />
-              </div>
+              </Link>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="font-bold text-[#0a0a0a] text-sm">{post.author.name}</span>
+                  <Link href={isMubasharAuthor ? "/author/mubashar-sharif" : "/experts"} className="font-bold text-[#0a0a0a] text-sm hover:text-emerald-800">{post.author.name}</Link>
                   <span className="inline-flex items-center gap-1 bg-[#f1f5f9] px-2 py-0.5 rounded-full">
                     <CheckCircle className="h-3 w-3 text-[#171717]" />
                     <span className="text-[9px] font-bold text-[#171717]">Semrush &amp; HubSpot Certified SEO Analyst</span>
@@ -1104,7 +1104,7 @@ export default function PostClient({
  
             {/* Author bio with Mubashar Sharif Photo */}
             <section aria-label={`About the author, ${post.author.name}`} className={`mt-10 flex flex-col gap-5 rounded-2xl border bg-gradient-to-br p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-7 ${post.slug === "mubashar-sharif-ecommerce-indexing-recovery" ? "border-emerald-200 from-emerald-50/80 to-white shadow-md" : "border-slate-200 from-slate-50 to-white shadow-sm"}`}>
-              <div className={`relative h-24 w-24 shrink-0 rounded-full border bg-gradient-to-br from-emerald-50 to-white p-1 shadow-md sm:h-28 sm:w-28 ${post.slug === "mubashar-sharif-ecommerce-indexing-recovery" ? "border-emerald-700/30 ring-4 ring-emerald-700/10 sm:h-32 sm:w-32" : "border-emerald-800/20"}`}>
+              <Link href={isMubasharAuthor ? "/author/mubashar-sharif" : "/experts"} aria-label={`Read ${post.author.name}'s author profile`} className={`relative h-24 w-24 shrink-0 rounded-full border bg-gradient-to-br from-emerald-50 to-white p-1 shadow-md sm:h-28 sm:w-28 ${post.slug === "mubashar-sharif-ecommerce-indexing-recovery" ? "border-emerald-700/30 ring-4 ring-emerald-700/10 sm:h-32 sm:w-32" : "border-emerald-800/20"}`}>
                 <div className="relative h-full w-full overflow-hidden rounded-full ring-1 ring-slate-200">
                   <Image
                     src="/images/mubashar-sharif.jpg"
@@ -1117,17 +1117,17 @@ export default function PostClient({
                 <span title="Author profile" className="absolute bottom-1 right-1 grid h-6 w-6 place-items-center rounded-full bg-white text-emerald-800 shadow-sm ring-1 ring-emerald-800/15">
                   <CheckCircle className="h-4 w-4" aria-hidden="true" />
                 </span>
-              </div>
+              </Link>
               <div className="min-w-0 flex-1">
                 <div className="mb-2 flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-800">Written &amp; reviewed by</span>
-                    <p className="text-lg font-black leading-tight text-slate-950 sm:text-xl">{post.author.name}</p>
+                    <Link href={isMubasharAuthor ? "/author/mubashar-sharif" : "/experts"} className="text-lg font-black leading-tight text-slate-950 hover:text-emerald-800 sm:text-xl">{post.author.name}</Link>
                     <p className="mt-1 text-sm font-semibold text-slate-700">{post.author.role} at SearchPrex</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Link href="/experts" className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:border-slate-500">
-                      Founder profile
+                    <Link href={isMubasharAuthor ? "/author/mubashar-sharif" : "/experts"} className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 transition-colors hover:border-slate-500">
+                      Author profile
                     </Link>
                     {(post.author.linkedIn || isMubasharAuthor) && (
                       <a href={post.author.linkedIn || "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-[#0a66c2]/10 px-3 py-1.5 text-xs font-bold text-[#0a66c2] transition-colors hover:bg-[#0a66c2]/20">
