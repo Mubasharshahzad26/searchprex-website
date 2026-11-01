@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="788" viewBox="0 0 1400 788" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="72" y1="54" x2="1262" y2="788" gradientUnits="userSpaceOnUse"><stop stop-color="#0B1728"/><stop offset="1" stop-color="#142B48"/></linearGradient>
+    <linearGradient id="gold" x1="919" y1="185" x2="1172" y2="531" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD889"/><stop offset="1" stop-color="#F1A92B"/></linearGradient>
+    <filter id="shadow" x="710" y="118" width="545" height="572" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#030A13" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1400" height="788" rx="34" fill="url(#bg)"/>
+  <circle cx="1214" cy="96" r="235" fill="#274A71" fill-opacity=".24"/>
+  <circle cx="89" cy="718" r="235" fill="#F1A92B" fill-opacity=".07"/>
+  <path d="M0 594C270 498 405 700 682 598c240-88 458-33 718-153v343H0V594Z" fill="#101F32" fill-opacity=".64"/>
+  <text x="94" y="160" fill="#F1B847" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="4">LOCAL SEO FOR LAW FIRMS</text>
+  <text x="94" y="275" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="66" font-weight="700">Earn visibility</text>
+  <text x="94" y="355" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="66" font-weight="700">in the Maps pack</text>
+  <text x="96" y="418" fill="#C6D3E1" font-family="Arial,sans-serif" font-size="25">A practical guide to relevance, distance,</text>
+  <text x="96" y="454" fill="#C6D3E1" font-family="Arial,sans-serif" font-size="25">prominence, and real-world trust.</text>
+  <g filter="url(#shadow)">
+    <rect x="750" y="142" width="432" height="492" rx="26" fill="#FCFBF8"/>
+    <rect x="780" y="172" width="372" height="61" rx="14" fill="#EEF2F5"/>
+    <circle cx="809" cy="202" r="8" fill="#98A9B8"/><path d="M828 202h206" stroke="#B6C3CD" stroke-width="8" stroke-linecap="round"/><circle cx="1123" cy="202" r="12" stroke="#8395A5" stroke-width="4"/>
+    <path d="M780 278h372M780 408h372M780 538h372" stroke="#E5E9EC" stroke-width="2"/>
+    <g><circle cx="812" cy="317" r="21" fill="#DCEBDF"/><path d="m803 317 6 6 13-14" stroke="#478461" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="851" y="312" fill="#243446" font-family="Arial,sans-serif" font-size="20" font-weight="700">Northside Law</text><text x="851" y="342" fill="#728091" font-family="Arial,sans-serif" font-size="16">Personal injury attorney</text><text x="1092" y="325" fill="#D89B29" font-family="Arial,sans-serif" font-size="18" font-weight="700">4.9 ★</text></g>
+    <g><circle cx="812" cy="447" r="21" fill="#E7EDF4"/><path d="m803 447 6 6 13-14" stroke="#65819D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="851" y="442" fill="#243446" font-family="Arial,sans-serif" font-size="20" font-weight="700">Riverside Legal</text><text x="851" y="472" fill="#728091" font-family="Arial,sans-serif" font-size="16">Family law attorney</text><text x="1092" y="455" fill="#D89B29" font-family="Arial,sans-serif" font-size="18" font-weight="700">4.8 ★</text></g>
+    <g><circle cx="812" cy="577" r="21" fill="#E7EDF4"/><path d="m803 577 6 6 13-14" stroke="#65819D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="851" y="572" fill="#243446" font-family="Arial,sans-serif" font-size="20" font-weight="700">Harrison &amp; Cole</text><text x="851" y="602" fill="#728091" font-family="Arial,sans-serif" font-size="16">Criminal justice attorney</text><text x="1092" y="585" fill="#D89B29" font-family="Arial,sans-serif" font-size="18" font-weight="700">4.7 ★</text></g>
+  </g>
+  <g transform="translate(602 461)"><path d="M98 0C44 0 0 42 0 95c0 71 98 164 98 164s98-93 98-164C196 42 152 0 98 0Z" fill="url(#gold)"/><circle cx="98" cy="95" r="34" fill="#FFF8E8"/><path d="M73 101c9-19 18-27 28-27 12 0 14 14 25 14 6 0 11-3 17-9" stroke="#DF9B22" stroke-width="7" stroke-linecap="round"/><circle cx="98" cy="95" r="44" stroke="#DA9825" stroke-opacity=".45" stroke-width="3"/></g>
+  <path d="M657 690h114" stroke="#F2B94F" stroke-width="4" stroke-linecap="round"/>
+  <text x="95" y="724" fill="#DDE7F0" font-family="Arial,sans-serif" font-size="18" letter-spacing="1.6">A SEARCHPREX FIELD GUIDE · 2026</text>
+</svg>

@@ -5,6 +5,7 @@
 // homepage title and description) to Google.
 
 import { proofBoxHtml } from "@/lib/proof-box";
+import { lawFirmGoogleMapsRankingContent } from "../law-firm-google-maps-ranking-content";
 
 /* ── posts data ── */
 /* ── FAQs for posts that carry FAQPage schema ──
@@ -229,6 +230,49 @@ const ECOMMERCE_INDEXING_FAQS: PostFaq[] = [
 ];
 
 export const posts = [
+  {
+    slug: "law-firm-google-maps-ranking",
+    category: "Local SEO",
+    subcategory: "Law Firms",
+    metaTitle: "Law Firm Google Maps Ranking: Maps Pack Guide (2026)",
+    metaDescription: "Learn how law firms can improve Google Maps visibility with an eligible Business Profile, accurate categories, genuine reviews, useful location pages, and a practical 90-day plan.",
+    title: "Law Firm Google Maps Ranking: How to Rank in the Maps Pack (2026)",
+    excerpt: "A practical guide to law firm Google Maps ranking: Business Profile eligibility, categories, genuine reviews, local pages, prominence, and measurement.",
+    readTime: "12-minute read",
+    date: "November 1, 2026",
+    tags: ["law firm Google Maps ranking", "Google Maps ranking for lawyers", "law firm local SEO", "Google Business Profile for lawyers", "law firm map pack"],
+    heroImage: "/images/blog/covers/law-firm-google-maps-ranking.svg",
+    heroImageAlt: "Illustrated Google-style local results and a map pin, representing law firm visibility in the Maps pack",
+    toc: [
+      "What is the Google Maps pack?",
+      "How Google decides which law firms appear in local results",
+      "Start with an eligible, accurate Business Profile",
+      "Choose the most accurate primary category",
+      "Complete the profile to help clients decide",
+      "Build a steady, ethical review process",
+      "Make the website support the profile",
+      "Keep citations consistent and earn local recognition",
+      "Measure local visibility across the service area",
+      "A practical 90-day work plan",
+      "Common mistakes that hold law firms back",
+      "How Maps visibility relates to AI search",
+      "Frequently asked questions",
+      "Next step: assess your local visibility",
+      "Sources and further reading",
+    ],
+    faqs: [
+      { q: "How long does law firm Google Maps ranking take?", a: "There is no reliable timeline that applies to every firm. The starting profile, proximity to searchers, category competition, local reputation, and website quality all matter. Establish a baseline and look for meaningful movement over time; do not treat a promised number of weeks as a guarantee." },
+      { q: "Does a law firm need a physical office to appear in Google Maps?", a: "A firm must meet Google's Business Profile eligibility rules. Client-facing offices should be accurately represented. A service-area business may be eligible without showing an address, but it must follow Google's rules; a virtual office used only for mail is not a substitute for a real business location." },
+      { q: "Can my firm rank in a city where we do not have an office?", a: "Distance is one of Google's named local factors, so map visibility can be difficult farther from an eligible location. A useful, accurate website page may still compete in organic search for a market, but it should not imply that the firm has an office there if it does not." },
+      { q: "Do more Google reviews improve Maps ranking?", a: "Google says reviews and positive ratings can help local ranking. There is no fixed review threshold that guarantees a position. Ask for genuine, unbiased reviews without incentives or selective review gating, and protect client confidentiality in replies." },
+      { q: "Should each attorney have a separate Business Profile?", a: "Only when the individual practitioner meets Google's guidelines for a separate profile and the listing reflects how the person operates in the real world. Review the practitioner rules before creating profiles, and avoid duplicates for the same office or service." },
+      { q: "How is the Maps pack different from Local Services Ads?", a: "The Maps pack consists of local organic results, while Local Services Ads are paid placements available to eligible categories and markets. Eligibility, verification, and billing differ. A paid placement does not purchase an organic Maps ranking." },
+      { q: "What should we do if our firm's Maps ranking drops?", a: "First check whether the change appears across multiple points on a geo-grid, then review profile edits, eligibility or verification notices, category changes, review activity, and competitor updates. Compare profile interactions and qualified inquiries as well as ranking data." },
+    ],
+    content: lawFirmGoogleMapsRankingContent,
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Analyst", bio: "Mubashar Sharif is the founder of SearchPrex and an SEO analyst focused on local and technical SEO for U.S. businesses." },
+    featured: true,
+  },
   {
     slug:        "local-search-confidence-loop-psychology",
     category:    "Local SEO",
