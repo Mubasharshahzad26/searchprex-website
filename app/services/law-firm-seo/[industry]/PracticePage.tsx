@@ -26,6 +26,36 @@ const SUCCESS_COPY: Record<string, string> = {
   "mass-torts": "I’ll review docket readiness and email the audit next step within 24 hours.",
 };
 
+const PRACTICE_PATHS: Record<string, { eyebrow: string; title: string; steps: { label: string; detail: string; href: string }[] }> = {
+  "criminal-defense": {
+    eyebrow: "A clear route through an urgent search",
+    title: "Help the next step feel easier to find",
+    steps: [
+      { label: "Understand the charge", detail: "Answer the first question in plain language.", href: "#keyword-map" },
+      { label: "Check local details", detail: "Show verified county and court information.", href: "#practice-framework" },
+      { label: "Reach the firm", detail: "Make the approved call or intake path clear.", href: "#get-started" },
+    ],
+  },
+  "estate-planning": {
+    eyebrow: "A considered path for family decisions",
+    title: "Move from a life change to a useful conversation",
+    steps: [
+      { label: "Start with the life event", detail: "Meet questions about children, a home or retirement.", href: "#keyword-map" },
+      { label: "Understand local probate", detail: "Separate planning from estate administration.", href: "#practice-framework" },
+      { label: "Choose a next step", detail: "Offer a calm, attorney-reviewed way to connect.", href: "#get-started" },
+    ],
+  },
+  "mass-torts": {
+    eyebrow: "A source-first path as a docket develops",
+    title: "Give each update a clear place and review owner",
+    steps: [
+      { label: "Verify the public signal", detail: "Start with a regulator, court or product source.", href: "#keyword-map" },
+      { label: "Explain docket status", detail: "Keep dates, eligibility and uncertainty distinct.", href: "#practice-framework" },
+      { label: "Route reviewed enquiries", detail: "Use matter-specific disclosures and intake.", href: "#get-started" },
+    ],
+  },
+};
+
 function localizeTerm(term: string, city: { city: string; state: string; county: string }) {
   return term
     .replaceAll("[city]", city.city)
@@ -57,6 +87,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
   const privateAudit = page.slug === "family-law";
   const primaryTarget = page.primaryCta.target === "#get-started" ? "#hero-form" : page.primaryCta.target;
   const localizedTerms = cities.flatMap((city) => page.keywordMap.local.slice(0, 2).map((term) => localizeTerm(term, city)));
+  const practicePath = PRACTICE_PATHS[page.slug];
 
   if (page.slug === "personal-injury") {
     return (
@@ -114,7 +145,30 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
         </div>
       </section>
 
-      <Band>
+      {practicePath ? (
+        <section aria-label={practicePath.eyebrow} className="border-b border-slate-200 bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">{practicePath.eyebrow}</p>
+                <h2 className="mt-2 max-w-2xl text-2xl font-black leading-tight tracking-tight text-slate-950 sm:text-3xl">{practicePath.title}</h2>
+              </div>
+              <Link href="#story" className="inline-flex items-center gap-2 text-sm font-bold text-slate-800 underline underline-offset-4">See the search moment <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+            </div>
+            <div className="mt-6 grid gap-3 md:grid-cols-3">
+              {practicePath.steps.map((step, index) => (
+                <Link key={step.label} href={step.href} className="group rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-slate-400 hover:shadow-sm">
+                  <span className="text-xs font-black tracking-[0.14em] text-slate-400">0{index + 1}</span>
+                  <span className="mt-2 flex items-center justify-between gap-3 text-base font-black text-slate-950">{step.label}<ArrowRight className="h-4 w-4 shrink-0 text-slate-500 transition group-hover:translate-x-0.5" aria-hidden /></span>
+                  <span className="mt-2 block text-sm leading-relaxed text-slate-600">{step.detail}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <Band id="story">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Illustrative scenario, not a client case</p>
