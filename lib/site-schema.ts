@@ -139,7 +139,7 @@ export const founder = {
   "@type": "Person",
   "@id": FOUNDER_ID,
   name: "Mubashar Sharif",
-  jobTitle: "Founder & SEO Strategist",
+  jobTitle: "Founder & U.S. Market SEO Specialist",
   url: `${SITE}/author/mubashar-sharif`,
   // The square portrait, not the hero's background-less cutout: this is the
   // image Google may show beside the person, and a cutout on a transparent
