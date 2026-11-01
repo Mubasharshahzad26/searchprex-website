@@ -5,6 +5,7 @@
 // homepage title and description) to Google.
 
 import { proofBoxHtml } from "@/lib/proof-box";
+import { lawFirmAiOverviewFaqs, lawFirmAiOverviewsContent } from "../law-firm-ai-overviews-content";
 import { lawFirmGoogleMapsRankingContent } from "../law-firm-google-maps-ranking-content";
 
 /* ── posts data ── */
@@ -230,6 +231,39 @@ const ECOMMERCE_INDEXING_FAQS: PostFaq[] = [
 ];
 
 export const posts = [
+  {
+    slug: "law-firm-ai-overview-citations",
+    category: "Content Strategy",
+    subcategory: "Law Firms & AI Search",
+    metaTitle: "How to Get a Law Firm Cited in Google AI Overviews (2026)",
+    metaDescription: "A practical guide for law firms: Google AI Overview eligibility, attorney-reviewed content, legal sources, technical checks, and a measurable plan.",
+    title: "How to Get a Law Firm Cited in Google AI Overviews (2026)",
+    excerpt: "A practical, source-led guide to AI Overview eligibility, attorney-reviewed legal content, jurisdiction-specific sources, Search Console measurement, and what firms cannot control.",
+    readTime: "12-minute read",
+    date: "November 2, 2026",
+    tags: ["how to get a law firm cited in AI Overviews", "law firm AI Overviews", "AI search for lawyers", "legal SEO", "Google AI citations"],
+    heroImage: "/images/blog/covers/law-firm-ai-overview-citations.svg",
+    heroImageAlt: "Illustration of a law firm article appearing as a cited source in an AI-generated search answer",
+    toc: [
+      "What is a Google AI Overview citation?",
+      "What Google confirms about appearing in AI Overviews",
+      "First, check whether the page is eligible",
+      "Write legal pages that answer one real client problem",
+      "Show legal expertise without implying a guaranteed outcome",
+      "Do schema, FAQs, or llms.txt create a shortcut?",
+      "Keep local SEO and AI Overview work distinct",
+      "Measure AI Overview visibility and business impact",
+      "A practical 90-day implementation plan",
+      "Mistakes that weaken a law firm's AI visibility work",
+      "Frequently asked questions",
+      "Where to start",
+      "Sources and further reading",
+    ],
+    faqs: lawFirmAiOverviewFaqs,
+    content: lawFirmAiOverviewsContent,
+    author: { name: "Mubashar Sharif", role: "Founder & SEO Analyst", bio: "Mubashar Sharif is the founder of SearchPrex and an SEO analyst focused on technical and local search for U.S. businesses." },
+    featured: true,
+  },
   {
     slug: "law-firm-google-maps-ranking",
     category: "Local SEO",
