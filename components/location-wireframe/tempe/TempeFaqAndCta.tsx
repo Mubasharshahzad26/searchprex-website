@@ -129,7 +129,7 @@ export default function TempeFaqAndCta({ faqs }: TempeFaqAndCtaProps) {
               <ArrowRight className="w-4 h-4" />
             </a>
             <Link
-              href="/contact"
+              href="https://calendly.com/contact-searchprex/30min"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-sm font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 transition-all shadow-sm"
             >
               <PhoneCall className="w-4 h-4 text-slate-600" />

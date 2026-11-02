@@ -970,7 +970,8 @@ export default function PersonalInjuryExecutiveView({
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link href="/locations/texas" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Texas Hub</Link>
-                <Link href="/locations/texas/houston" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Sugar Land & Katy (Houston)</Link>
+                <Link href="/locations/texas/sugar-land" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Sugar Land, TX</Link>
+                <Link href="/locations/texas/katy" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Katy, TX</Link>
                 <Link href="/locations/michigan" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Michigan Hub</Link>
                 <Link href="/locations/michigan/detroit" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Detroit, MI</Link>
                 <Link href="/locations/pennsylvania/philadelphia" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-800 hover:border-slate-500">Philadelphia, PA</Link>
@@ -1197,7 +1198,7 @@ export default function PersonalInjuryExecutiveView({
               <p className="mt-2 text-xs text-slate-600">Deep dives into Google Core Updates, legal schema, and conversion optimization.</p>
             </Link>
 
-            <Link href="/news" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
+            <Link href="/resources/news" className="rounded-xl border border-slate-200 bg-white p-5 transition hover:border-slate-400">
               <span className="text-xs font-black uppercase tracking-wider text-slate-400">Legal News</span>
               <p className="mt-1 text-sm font-black text-slate-950">SearchPrex Legal Industry News</p>
               <p className="mt-2 text-xs text-slate-600">Latest analysis on AI Overviews, Local Service Ads (LSAs), and Map Pack algorithms.</p>

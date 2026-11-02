@@ -54,7 +54,7 @@ export default function BatonRougeFounderBio() {
                 </div>
 
                 <Link
-                  href="/contact"
+                  href="https://calendly.com/contact-searchprex/30min"
                   className="font-bold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
                 >
                   Schedule Founder Consultation

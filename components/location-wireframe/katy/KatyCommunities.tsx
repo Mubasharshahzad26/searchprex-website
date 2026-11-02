@@ -49,8 +49,8 @@ export default function KatyCommunities() {
       county: "Fort Bend County",
       intent: "Suburban golf-course community positioned near the Grand Parkway. Strong commercial intent for highway collision representation and marital property agreements.",
       query: '"car accident lawyer Seven Meadows Katy", "divorce lawyer Seven Meadows"',
-      practiceHref: "/services/law-firm-seo/car-accident",
-      practiceLabel: "Car Accident Law Firm SEO",
+      practiceHref: "/services/law-firm-seo/personal-injury",
+      practiceLabel: "Personal Injury SEO",
       highlight: "Direct proximity to SH 99 Grand Parkway",
     },
     {

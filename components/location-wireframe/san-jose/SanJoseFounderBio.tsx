@@ -72,7 +72,7 @@ export default function SanJoseFounderBio() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="https://calendly.com/contact-searchprex/30min"
                   className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-xs font-bold text-slate-800 bg-white border border-slate-300 hover:bg-slate-100 transition-colors"
                 >
                   Direct Confidential Inquiry

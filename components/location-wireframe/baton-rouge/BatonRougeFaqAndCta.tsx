@@ -131,7 +131,7 @@ export default function BatonRougeFaqAndCta({ faqs }: BatonRougeFaqAndCtaProps) 
               Claim Free Parish Audit
             </a>
             <Link
-              href="/contact"
+              href="https://calendly.com/contact-searchprex/30min"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-sm font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
             >
               <PhoneCall className="w-4 h-4 text-slate-400" />

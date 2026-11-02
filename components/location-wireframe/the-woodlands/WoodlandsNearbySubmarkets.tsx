@@ -77,8 +77,8 @@ export default function WoodlandsNearbySubmarkets() {
       venue: 'Montgomery County Courts (Conroe)',
       intent: 'Northern Montgomery County market near Lake Conroe. Frequent commuter injury inquiries along the I-45 freight corridor.',
       sampleSearches: '"car accident lawyer Willis TX", "Willis probate attorney", "truck crash lawyer I-45 Willis"',
-      linkHref: '/services/law-firm-seo/car-accident',
-      linkText: 'Car Accident Law Firm SEO',
+      linkHref: '/services/law-firm-seo/personal-injury',
+      linkText: 'Personal Injury SEO',
     },
   ];
 

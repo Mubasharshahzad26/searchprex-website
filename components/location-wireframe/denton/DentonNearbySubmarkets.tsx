@@ -45,8 +45,8 @@ export default function DentonNearbySubmarkets() {
       county: "Denton County · Direct Commuter Suburb",
       intent: "Adjacent suburban community south of Denton along I-35E with distinct local resident searches for personal injury and estate guidance.",
       searches: '"car accident lawyer Corinth TX" · "probate attorney Corinth"',
-      linkHref: "/services/law-firm-seo/car-accident",
-      linkLabel: "Motor Vehicle Accident Silo",
+      linkHref: "/services/law-firm-seo/personal-injury",
+      linkLabel: "Personal Injury Practice Silo",
     },
     {
       name: "The Colony",

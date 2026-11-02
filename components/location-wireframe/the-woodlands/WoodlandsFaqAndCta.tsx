@@ -70,25 +70,14 @@ export default function WoodlandsFaqAndCta() {
     },
   ];
 
+  // Only list Texas city URLs that currently have published location pages.
+  // Keep this small list aligned with the Texas entries in lib/city-pages.ts.
   const texasCities = [
-    { name: 'Houston', slug: 'houston' },
-    { name: 'Dallas', slug: 'dallas' },
-    { name: 'Austin', slug: 'austin' },
-    { name: 'San Antonio', slug: 'san-antonio' },
-    { name: 'Fort Worth', slug: 'fort-worth' },
-    { name: 'El Paso', slug: 'el-paso' },
-    { name: 'Arlington', slug: 'arlington' },
-    { name: 'Plano', slug: 'plano' },
-    { name: 'Frisco', slug: 'frisco' },
-    { name: 'McKinney', slug: 'mckinney' },
-    { name: 'Denton', slug: 'denton' },
     { name: 'Sugar Land', slug: 'sugar-land' },
+    { name: 'Plano', slug: 'plano' },
+    { name: 'Denton', slug: 'denton' },
     { name: 'Katy', slug: 'katy' },
     { name: 'The Woodlands', slug: 'the-woodlands' },
-    { name: 'Pearland', slug: 'pearland' },
-    { name: 'League City', slug: 'league-city' },
-    { name: 'Round Rock', slug: 'round-rock' },
-    { name: 'College Station', slug: 'college-station' },
   ];
 
   return (

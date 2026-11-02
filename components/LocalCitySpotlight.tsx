@@ -280,7 +280,7 @@ export function LocalProblemSpotlight({ page }: { page: CityPage }) {
                   <Check className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>Untapped high-intent practice demand:</strong> Dedicated localized landing pages targeting{" "}
-                    <Link href="/services/law-firm-seo/car-accident" className="font-semibold text-[#534AB7] underline hover:text-[#3d368e]">
+                    <Link href="/services/law-firm-seo/personal-injury" className="font-semibold text-[#534AB7] underline hover:text-[#3d368e]">
                       {page.city} car accident lawyer SEO
                     </Link>{" "}
                     and{" "}

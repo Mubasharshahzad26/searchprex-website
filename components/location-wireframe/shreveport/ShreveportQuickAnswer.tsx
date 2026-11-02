@@ -72,7 +72,7 @@ export default function ShreveportQuickAnswer() {
 
             <div className="flex items-center gap-3">
               <Link
-                href="/tools/ai-search"
+                href="/ai-search"
                 className="font-semibold text-neutral-950 hover:text-neutral-950 inline-flex items-center gap-1"
               >
                 Explore AI Search Tracking

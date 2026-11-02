@@ -57,6 +57,16 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      // Current service and utility routes replaced these legacy paths. Keep
+      // visitors and historical signals flowing to the closest live page.
+      { source: '/services/family-law', destination: '/services/law-firm-seo/family-law', permanent: true },
+      { source: '/services/personal-injury', destination: '/services/law-firm-seo/personal-injury', permanent: true },
+      { source: '/services/criminal-defense', destination: '/services/law-firm-seo/criminal-defense', permanent: true },
+      { source: '/services/estate-planning', destination: '/services/law-firm-seo/estate-planning', permanent: true },
+      { source: '/services/law-firm-seo/car-accident', destination: '/services/law-firm-seo/personal-injury', permanent: true },
+      { source: '/tools/ai-search', destination: '/ai-search', permanent: true },
+      { source: '/contact', destination: 'https://calendly.com/contact-searchprex/30min', permanent: true },
+      { source: '/news', destination: '/resources/news', permanent: true },
       {
         // /nicheseopro is renamed to /tools/keyword-research. Permanent (301)
         // so Search Console transfers the old URL's history rather than
