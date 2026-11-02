@@ -106,7 +106,6 @@ export const metadata: Metadata = {
     ],
   },
 }
- 
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
@@ -126,6 +125,11 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr" className={`${inter.variable} bg-background`}>
       <head>
+        <script
+          async
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="AECz2gkgbO7fXFUvOyn7oQ"
+        />
         {/* YouTube thumbnails are cross-origin and appear above the fold on
             several pages. Preconnecting saves the DNS + TLS round trip before
             the first thumbnail request rather than after it. */}
