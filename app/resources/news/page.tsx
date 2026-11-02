@@ -9,6 +9,7 @@ import { getPageSEO } from "@/lib/admin-seo";
 import NewsClient from "./NewsClient";
 import { db } from "@/lib/db";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
+import { NEWS_FALLBACK_ARTICLES } from "@/lib/news-fallback";
 
 const SITE = "https://www.searchprex.com";
 const PAGE_URL = `${SITE}/resources/news`;
@@ -249,7 +250,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
   let dbNews: any[] = newsResult || [];
   let dbSpokes: any[] = spokesResult || [];
 
-  // Merge source-checked static stories with CMS results so new articles remain visible while the DB is online or offline.
+  // Merge source-checked static stories and fallback articles with CMS results so articles remain visible while the DB is online or offline.
   const staticSpokes = staticNewsSpokes
     .filter((s) => !category || s.category.toLowerCase().includes(category.toLowerCase()))
     .map((s) => ({
@@ -258,8 +259,24 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
       readTime: s.readTime, publishedAt: new Date(s.date),
       updatedAt: new Date(s.dateModified || s.date),
     }));
+
+  const fallbackSpokes = NEWS_FALLBACK_ARTICLES
+    .filter((s) => !category || s.category.toLowerCase().includes(category.toLowerCase()))
+    .map((s) => ({
+      id: s.slug,
+      slug: s.slug,
+      title: s.title,
+      excerpt: s.excerpt,
+      category: s.category,
+      author: "Mubashar Sharif",
+      coverImage: s.coverImage,
+      readTime: s.readTime,
+      publishedAt: new Date(`${s.published}T12:00:00.000Z`),
+      updatedAt: new Date(`${s.modified}T12:00:00.000Z`),
+    }));
+
   const spokeBySlug = new Map<string, any>();
-  for (const spoke of [...staticSpokes, ...dbSpokes]) {
+  for (const spoke of [...staticSpokes, ...fallbackSpokes, ...dbSpokes]) {
     if (!spokeBySlug.has(spoke.slug)) spokeBySlug.set(spoke.slug, spoke);
   }
   dbSpokes = [...spokeBySlug.values()].sort(
@@ -267,15 +284,26 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
   );
 
   if (dbNews.length === 0) {
-    dbNews = staticNewsSpokes.map((s) => ({
-      id: s.slug,
-      title: s.title,
-      summary: s.excerpt,
-      tag: s.tags[0] || "News",
-      sourceLabel: "SearchPrex Verified",
-      sourceHref: s.canonicalUrl,
-      newsDate: new Date(s.date),
-    }));
+    dbNews = [
+      ...staticNewsSpokes.map((s) => ({
+        id: s.slug,
+        title: s.title,
+        summary: s.excerpt,
+        tag: s.tags[0] || "News",
+        sourceLabel: "SearchPrex Verified",
+        sourceHref: s.canonicalUrl,
+        newsDate: new Date(s.date),
+      })),
+      ...NEWS_FALLBACK_ARTICLES.map((s) => ({
+        id: s.slug,
+        title: s.title,
+        summary: s.excerpt,
+        tag: (s.category.split("—").pop() ?? "News").trim(),
+        sourceLabel: "SearchPrex Verified",
+        sourceHref: `/resources/news/${s.slug}`,
+        newsDate: new Date(`${s.published}T12:00:00.000Z`),
+      })),
+    ];
   }
 
   // Pin local-seo-updates spoke to the top of the collection

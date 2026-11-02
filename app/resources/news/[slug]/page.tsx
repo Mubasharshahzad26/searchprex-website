@@ -348,17 +348,35 @@ async function getRelatedSpokes(currentSlug: string) {
     console.warn("Failed to load related news spokes from DB, falling back to static", err);
   }
 
-  // Resilient fallback to static news spokes
-  return staticNewsSpokes
-    .filter((s) => s.slug !== currentSlug)
-    .slice(0, 4)
-    .map((s) => ({
+  // Resilient fallback to static news spokes and fallback articles, prioritizing matching category
+  const currentPost = staticNewsSpokes.find((s) => s.slug === currentSlug) || NEWS_FALLBACK_ARTICLES.find((s) => s.slug === currentSlug);
+  const currentCat = currentPost ? (currentPost.category.split("—").pop() ?? "").trim().toLowerCase() : "";
+
+  const allFallbackCandidates = [
+    ...staticNewsSpokes.map((s) => ({
       slug: s.slug,
       title: s.title,
       category: (s.category?.split("—").pop() ?? "SEO News").trim(),
-      subcategory: "",
       heroImage: s.heroImage,
-    }));
+    })),
+    ...NEWS_FALLBACK_ARTICLES.map((s) => ({
+      slug: s.slug,
+      title: s.title,
+      category: (s.category?.split("—").pop() ?? "SEO News").trim(),
+      heroImage: s.coverImage,
+    })),
+  ].filter((s) => s.slug !== currentSlug);
+
+  const matched = allFallbackCandidates.filter((s) => currentCat && s.category.toLowerCase().includes(currentCat));
+  const others = allFallbackCandidates.filter((s) => !currentCat || !s.category.toLowerCase().includes(currentCat));
+
+  return [...matched, ...others].slice(0, 4).map(({ slug, title, category, heroImage }) => ({
+    slug,
+    title,
+    category,
+    subcategory: "",
+    heroImage,
+  }));
 }
 
 export default async function NewsSpokePage({ params }: { params: Promise<{ slug: string }> }) {
