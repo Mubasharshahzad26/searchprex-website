@@ -53,7 +53,7 @@ const LINE = "#e2e8f0";
 const HERO_PILLARS = [
   "Dedicated client care",
   "Weekly SEO report",
-  "Revenue-focused",
+  "Month-to-month SEO",
   "90-day money-back guarantee",
   "7-day free trial",
 ];
@@ -132,6 +132,7 @@ export default function HeroV2() {
             {/* V2: the buyer's feeling first, the keyword phrase second, both
                 inside the one H1 so the emotional hook doesn't cost the page
                 its topic. */}
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">Founder-Led SEO Agency</p>
             <h1 className="mb-4 font-black tracking-tight text-neutral-950">
               <span className="block text-[1.9rem] leading-[1.1] text-balance sm:text-5xl lg:text-[3.2rem]">
                 Tired of paying for leads that never come?
@@ -139,12 +140,12 @@ export default function HeroV2() {
               <span
                 className="mt-3 block text-[1.15rem] font-extrabold leading-[1.3] text-balance text-neutral-700 sm:text-[1.5rem]"
               >
-                Founder-led SEO agency for US small businesses
+                SEO Agency USA for Law Firms, Local & Ecommerce
               </span>
             </h1>
 
             <p className="mb-4 text-base leading-relaxed sm:text-lg" style={{ color: BODY }}>
-              SearchPrex is a founder-led SEO agency for US small businesses. Get a practical plan for local visibility, law firm search or ecommerce growth, measured in leads and sales.
+              SearchPrex is an SEO agency USA businesses trust for organic growth. Serving US small businesses, law firms and online stores with month-to-month SEO services measured in qualified calls and sales.
             </p>
 
             {/* The five promises, every one confirmed and published on /pricing. */}
@@ -188,7 +189,7 @@ export default function HeroV2() {
                 />
                 <div>
                   <p className="text-sm font-bold" style={{ color: INK }}>
-                    Free competitor tear-down
+                    Free SEO Audit &amp; Tear-Down
                   </p>
                   <p className="text-xs" style={{ color: BODY }}>
                     I analyse it myself. Reply within 24 hours.
@@ -266,7 +267,7 @@ export default function HeroV2() {
                     className="w-full rounded-lg px-6 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-70"
                     style={{ background: GREEN }}
                   >
-                    {status === "loading" ? "Sending…" : "Send my tear-down →"}
+                    {status === "loading" ? "Sending…" : "Get My Free SEO Audit →"}
                   </button>
 
                   {status === "error" ? (

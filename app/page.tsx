@@ -53,9 +53,9 @@ import PillForm from "@/components/home/PillForm";
 
 // Title, H1 and description use the same broad small-business SEO agency
 // positioning. Specialist phrases belong on the linked service pages.
-const HOME_TITLE = "SEO Agency for Small Businesses in the US | SearchPrex";
+const HOME_TITLE = "SEO Agency USA: Month-to-Month SEO Services | SearchPrex";
 const HOME_DESCRIPTION =
-  "SEO services for US small businesses: founder-led local, law firm and ecommerce SEO. Get a free competitor audit in 24 hours, clear pricing and month-to-month plans.";
+  "SearchPrex is an SEO agency USA businesses trust for month-to-month local, law firm and ecommerce SEO. Get a free competitor audit in 24 hours.";
 
 const baseMetadata: Metadata = {
   title: HOME_TITLE,
@@ -73,7 +73,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** When a person last reviewed this page. Hardcoded on purpose. */
-const LAST_REVIEWED = "2026-11-02";
+const LAST_REVIEWED = "2026-11-03";
 // One typeface site-wide (Inter, from the root layout); headings only change weight.
 const H = "font-black";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
@@ -267,8 +267,12 @@ const FAQS = [
     a: "No, and nobody honestly can — Google decides rankings. What is guaranteed is progress: if you don't see measurable progress within 90 days, I either keep working at no extra cost until you do, or refund what you paid for those 90 days. And the process: the tear-down within 24 hours, the work done by me, and a plain report every Monday.",
   },
   {
+    q: "Do I have to sign a contract?",
+    a: "No. SearchPrex runs month to month — no annual contract, no lock-in. You start with a free 7-day trial, then pay monthly only while the work is producing results. If you don't see measurable progress in 90 days, those 90 days are refunded.",
+  },
+  {
     q: "Where is SearchPrex based?",
-    a: "Remote-first, run from Daska, Pakistan, and working US business hours across Eastern, Central and Pacific time. Most client work is for US businesses.",
+    a: "Remote-first SEO agency USA businesses hire, run from Daska, Pakistan, and working US business hours across Eastern, Central and Pacific time. Most client work is for US businesses.",
   },
 ];
 
@@ -288,10 +292,10 @@ function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?
 // industry pages own the more specific law-firm, local, ecommerce and problem
 // queries. Every href below is a live page; prices come from lib/pricing.
 const SERVICES = [
-  { icon: Scale, title: "Law Firm & Attorney SEO", body: "Practice-area and city pages, Business Profile and reviews within bar rules, measured in calls and signed cases.", href: "/services/law-firm-seo", price: `${formatRange(RETAINER_PLANS[1])}/mo` },
-  { icon: MapPin, title: "Local SEO for Small Businesses", body: "Google Business Profile, Map Pack visibility, service-area pages and reviews for contractors and local services.", href: "/services/local-seo", price: `${formatRange(RETAINER_PLANS[0])}/mo` },
-  { icon: ShoppingCart, title: "Shopify & WooCommerce SEO", body: "Indexing recovery, product and collection pages, schema and site speed for stores with large catalogs.", href: "/services/ecommerce-seo", price: `${formatRange(RETAINER_PLANS[2])}/mo` },
-  { icon: Wrench, title: "Technical SEO & Indexing", body: "Crawling, indexing, Core Web Vitals, canonicals and structured data, as a ranked fix list or done for you.", href: "/services/technical-seo", price: "Free 24-hour tear-down" },
+  { icon: Scale, title: "Law Firm SEO: Found for the Cases You Want", body: "Practice-area and city pages, Business Profile and reviews within bar rules, measured in calls and signed cases.", href: "/services/law-firm-seo", price: `${formatRange(RETAINER_PLANS[1])}/mo` },
+  { icon: MapPin, title: "Local SEO Services: The Map Pack and the Phone Ringing", body: "Google Business Profile, Map Pack visibility, service-area pages and reviews for contractors and local businesses.", href: "/services/local-seo", price: `${formatRange(RETAINER_PLANS[0])}/mo` },
+  { icon: ShoppingCart, title: "Ecommerce SEO Services: Every Product Page Earning Its Keep", body: "Indexing recovery, product and collection pages, schema and site speed for stores with large catalogs.", href: "/services/ecommerce-seo", price: `${formatRange(RETAINER_PLANS[2])}/mo` },
+  { icon: Wrench, title: "SEO Services for Small Business, Local or Online", body: "Technical fixes, keyword research, content and reporting for small businesses — month to month, no long contract.", href: "/services/technical-seo", price: "Free 24-hour tear-down" },
   { icon: Sparkles, title: "AI Search (GEO & AEO)", body: "Answer-ready pages, entity signals and crawler access so Google AI Overviews and ChatGPT can cite you.", href: "/ai-search", price: "Included in every plan" },
 ];
 
@@ -493,8 +497,8 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Specialized Verticals · AEO Direct Answer"
-            title="SearchPrex's Solution-Oriented Approach"
-            sub="Three kinds of business: law firms and attorneys, local contractors and small businesses, and Shopify and WooCommerce stores. The founder does the work, and we take one client per city and practice area, so we never work for your competitor."
+            title="Which US businesses does SearchPrex work with?"
+            sub="Three kinds of business: law firms and attorneys, local contractors and small businesses, and Shopify and WooCommerce stores. As a founder-led SEO company USA clients trust, we take one client per city so we never work for your competitor."
           />
           <AudienceTabs tabs={TABS} />
         </div>
@@ -505,8 +509,8 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Services"
-            title="SEO Services for Small Businesses Across the US"
-            sub="Founder-led SEO for law firms, local businesses and online stores, with published monthly pricing, a free competitor audit within 24 hours and no long-term contract."
+            title="SEO Services USA: Published Prices, Month to Month"
+            sub="Founder-led SEO services USA for law firms, local businesses and online stores — published monthly pricing, a free competitor audit within 24 hours and no long-term contract."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((s) => (
@@ -722,7 +726,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Pricing"
-            title="SEO pricing: straight monthly plans, no surprises"
+            title="SEO services USA: straight monthly plans, no surprises"
             sub={`SearchPrex SEO retainers range from ${formatRange(RETAINER_PLANS[0])}/mo for local businesses, ${formatRange(RETAINER_PLANS[1])}/mo for law firms, and ${formatRange(RETAINER_PLANS[2])}/mo for ecommerce stores. Retainers are month-to-month, scoped by locations, practice areas or catalog size, and backed by our 90-day progress guarantee.`}
           />
 
