@@ -120,8 +120,10 @@ export default function HeroV2() {
               Hi, I&apos;m Mubashar · Founder-led · One client per city · 9 states
             </p>
 
-            {/* One primary keyword — "SEO agency", qualified by US and by the
-                three audiences. Deliberately not carrying "family law SEO":
+            {/* Primary category target: "SEO agency for small businesses", with
+                US-market intent. Keep law firm, local SEO and ecommerce specifics
+                on their dedicated service pages to avoid cannibalization.
+                Deliberately not carrying "family law SEO":
                 that belongs to /services/law-firm-seo/family-law, and a
                 homepage competing with its own spoke beats the page that could
                 actually win. "Revenue-Focused" is the differentiator, not a
@@ -137,13 +139,12 @@ export default function HeroV2() {
               <span
                 className="mt-3 block text-[1.15rem] font-extrabold leading-[1.3] text-balance text-neutral-700 sm:text-[1.5rem]"
               >
-                SEO for US businesses, done by the founder
+                Founder-led SEO agency for US small businesses
               </span>
             </h1>
 
             <p className="mb-4 text-base leading-relaxed sm:text-lg" style={{ color: BODY }}>
-              We know you&apos;re in pain. We come with the solution, and a source of relief.{" "}
-              <span className="text-[15px]">SearchPrex is a founder-led SEO agency for US law firms, local businesses and online stores.</span>
+              SearchPrex is a founder-led SEO agency for US small businesses. Get a practical plan for local visibility, law firm search or ecommerce growth, measured in leads and sales.
             </p>
 
             {/* The five promises, every one confirmed and published on /pricing. */}

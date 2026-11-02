@@ -42,6 +42,7 @@
 //    - Practice Coverage Corridor & Simple "Frequently Asked Questions"
 
 import React from "react";
+import Link from "next/link";
 import type { CityPage } from "@/lib/city-pages";
 import DetroitTopPromoBar from "./DetroitTopPromoBar";
 import DetroitHero from "./DetroitHero";
@@ -113,6 +114,18 @@ export default function DetroitWireframeView({ page }: DetroitWireframeViewProps
 
       {/* 13. FAQS & PRACTICE COVERAGE */}
       <DetroitOfficeAndFaq page={page} />
+
+      <section className="border-t border-slate-200 bg-slate-50 px-4 py-10 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-2xl font-black tracking-tight text-slate-950">Criminal defense SEO for Detroit firms</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">
+            Detroit-area criminal defense searches can involve a person facing a charge or a family member looking for reliable next steps. Our practice-area guide covers the service-level content and intake path; this Detroit page covers local courts and market context.
+          </p>
+          <Link href="/services/law-firm-seo/criminal-defense" className="mt-4 inline-flex font-bold text-slate-900 underline underline-offset-4">
+            See the criminal defense attorney SEO approach for Detroit firms
+          </Link>
+        </div>
+      </section>
 
       {/* Tagline band above footer */}
       <TaglinePainBand />

@@ -51,11 +51,11 @@ import AudienceTabs, { type AudienceTab } from "@/components/home/AudienceTabs";
 import FaqAccordion from "@/components/home/FaqAccordion";
 import PillForm from "@/components/home/PillForm";
 
-// Title, H1 (in HeroV2) and description name the same three verticals with
-// "SEO agency", plus GEO and technical search hooks.
-const HOME_TITLE = "US SEO Agency | Free Audit in 24h, 90-Day Money-Back";
+// Title, H1 and description use the same broad small-business SEO agency
+// positioning. Specialist phrases belong on the linked service pages.
+const HOME_TITLE = "SEO Agency for Small Businesses in the US | SearchPrex";
 const HOME_DESCRIPTION =
-  "Technical, local and AI search SEO for US law firms, local businesses and online stores. Free audit in 24 hours, month to month, one client per city.";
+  "SEO services for US small businesses: founder-led local, law firm and ecommerce SEO. Get a free competitor audit in 24 hours, clear pricing and month-to-month plans.";
 
 const baseMetadata: Metadata = {
   title: HOME_TITLE,
@@ -73,7 +73,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** When a person last reviewed this page. Hardcoded on purpose. */
-const LAST_REVIEWED = "2026-10-17";
+const LAST_REVIEWED = "2026-11-02";
 // One typeface site-wide (Inter, from the root layout); headings only change weight.
 const H = "font-black";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
@@ -239,7 +239,11 @@ const ecom = plan("Ecommerce SEO");
 
 const FAQS = [
   {
-    q: "How much does SEO cost with SearchPrex?",
+    q: "What is included in small business SEO services?",
+    a: "The scope depends on your business and market. SearchPrex may handle technical fixes, keyword and competitor research, service or product pages, Google Business Profile work, and clear reporting. Your written plan shows which work is included before a monthly engagement begins.",
+  },
+  {
+    q: "How much do small business SEO services cost?",
     a: `${local ? `Local SEO runs ${formatRange(local)} a month` : ""}${law ? `, law firm SEO ${formatRange(law)}` : ""}${ecom ? ` and ecommerce SEO ${formatRange(ecom)}` : ""}, depending on how many pages, locations and practice areas the plan covers. It is month to month, and the free tear-down comes first.`,
   },
   {
@@ -280,10 +284,9 @@ function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?
 
 
 // ── Homepage hub sections ────────────────────────────────────────────────
-// The homepage ranks for the brand, not for "SEO agency"; its SEO job is to
-// send link equity, with descriptive anchors, to the service, problem and
-// industry pages that can win long-tail searches. Every href below is a live
-// page; prices come from lib/pricing.
+// The homepage targets broad small-business SEO agency intent. Service and
+// industry pages own the more specific law-firm, local, ecommerce and problem
+// queries. Every href below is a live page; prices come from lib/pricing.
 const SERVICES = [
   { icon: Scale, title: "Law Firm & Attorney SEO", body: "Practice-area and city pages, Business Profile and reviews within bar rules, measured in calls and signed cases.", href: "/services/law-firm-seo", price: `${formatRange(RETAINER_PLANS[1])}/mo` },
   { icon: MapPin, title: "Local SEO for Small Businesses", body: "Google Business Profile, Map Pack visibility, service-area pages and reviews for contractors and local services.", href: "/services/local-seo", price: `${formatRange(RETAINER_PLANS[0])}/mo` },
@@ -502,8 +505,8 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Services"
-            title="SEO Services for US Businesses"
-            sub="SEO for law firms, local businesses and online stores: five services, published prices, month-to-month terms, and a free audit within 24 hours before anything else."
+            title="SEO Services for Small Businesses Across the US"
+            sub="Founder-led SEO for law firms, local businesses and online stores, with published monthly pricing, a free competitor audit within 24 hours and no long-term contract."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((s) => (

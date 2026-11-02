@@ -7,7 +7,7 @@ const resourcesUrl = `${siteUrl}/resources`
  
 const baseMetadata: Metadata = {
   title: 'SEO Resources: Guides, Original Research & News',
-  description: 'Free SEO resources from SearchPrex: white papers, original research, real-world learnings, and curated industry news. Founded on real client work, not generic theory.',
+  description: 'Free SearchPrex SEO resources: white papers, original research, real-world learnings, and curated news, built on real client work.',
   keywords: [
     'SEO resources',
     'SEO guides',

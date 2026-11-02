@@ -8,29 +8,40 @@ import { BarChart3 } from "lucide-react";
 import type { MsoPageData } from "@/components/dashboard/ActionModal";
 import { simulateGscConnection } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function MsoDashboardPage() {
   let client = null;
   
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    
-    if (!user) {
-      redirect("/login");
-    }
+  try {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      const supabase = await createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        redirect("/login");
+      }
 
-    client = await db.client.findUnique({
-      where: { email: user.email! }
-    });
-  } else {
-    // Development fallback without auth
-    client = await db.client.findFirst();
+      client = await db.client.findUnique({
+        where: { email: user.email! }
+      });
+    } else {
+      // Development fallback without auth
+      client = await db.client.findFirst();
+    }
+  } catch (err) {
+    console.error("[mso dashboard] Client lookup error:", err);
   }
 
   // Check GSC Connection
-  const gscConnections = client ? await db.gSCConnection.findMany({
-    where: { clientId: client.id }
-  }) : [];
+  let gscConnections: any[] = [];
+  try {
+    gscConnections = client ? await db.gSCConnection.findMany({
+      where: { clientId: client.id }
+    }) : [];
+  } catch (err) {
+    console.error("[mso dashboard] GSC connection lookup error:", err);
+  }
 
   const hasGscConnection = gscConnections.length > 0;
 

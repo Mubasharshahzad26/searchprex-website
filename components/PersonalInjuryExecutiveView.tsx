@@ -512,24 +512,35 @@ export default function PersonalInjuryExecutiveView({
             </div>
           </div>
 
-          <div className="mt-8 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+          <div className="mt-8 grid gap-8 sm:gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:items-start">
             {/* Left Column: Direct Managing Partner Pitch */}
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-600">
                 The Dedicated SEO Partner You Wish You’d Hired First
               </p>
-              <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl sm:leading-[1.12]">
-                Personal Injury Lawyer SEO Agency for High-Value Leads & Signed Catastrophic Cases.
+              <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl md:text-5xl lg:text-[2.75rem] sm:leading-[1.12]">
+                SEO Agency for Personal Injury Across the United States
               </h1>
 
-              <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Most legal marketing agencies deliver low-value fender benders that exhaust your intake team.
-                SearchPrex builds authoritative search architecture targeting commercial freight liability,
-                interstate trucking corridors, and Level-1 trauma radius catchment across all 9 major U.S. states where we serve.
+              {/* Natural multi-state geo-targeting bridge */}
+              <p className="mt-4 text-base font-bold text-slate-900 sm:text-lg">
+                The Dedicated Personal Injury Law Firm SEO Partner Driving Signed Retainers & High-Verdict Catastrophic Cases in All 9 Active States.
+              </p>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-base">
+                Whether you are searching for an <strong className="text-slate-950 font-bold">SEO agency near me for personal injury cases in Texas</strong>,{" "}
+                <strong className="text-slate-950 font-bold">Michigan</strong>,{" "}
+                <strong className="text-slate-950 font-bold">Pennsylvania</strong>,{" "}
+                <strong className="text-slate-950 font-bold">California</strong>,{" "}
+                <strong className="text-slate-950 font-bold">Arizona</strong>,{" "}
+                <strong className="text-slate-950 font-bold">Louisiana</strong>,{" "}
+                <strong className="text-slate-950 font-bold">Ohio</strong>,{" "}
+                <strong className="text-slate-950 font-bold">New Mexico</strong>, or{" "}
+                <strong className="text-slate-950 font-bold">Kansas</strong> — SearchPrex builds authoritative search architecture targeting commercial freight liability, interstate trucking corridors, and Level-1 trauma radius catchment across every metropolitan market we serve.
               </p>
 
               {/* 3 Trust Metrics - Pure Monochromatic Numbers */}
-              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Exclusivity</p>
                   <p className="mt-1 text-lg font-black text-slate-950">1 Firm Per City</p>
@@ -540,7 +551,7 @@ export default function PersonalInjuryExecutiveView({
                   <p className="mt-1 text-lg font-black text-slate-950">State Bar Immune</p>
                   <p className="mt-1 text-xs text-slate-600">ABA Model Rule 7.1 compliant</p>
                 </div>
-                <div className="col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:col-span-1">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-500">First Step</p>
                   <p className="mt-1 text-lg font-black text-slate-950">7-Day Free Trial</p>
                   <p className="mt-1 text-xs text-slate-600">Reviewable diagnostic sprint</p>
@@ -548,16 +559,16 @@ export default function PersonalInjuryExecutiveView({
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <a
                   href="#jurisdictions"
-                  className="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800"
                 >
                   Explore State Corridors & Statutes <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="#hero-form"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-xs transition hover:border-slate-500 hover:bg-slate-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-xs transition hover:border-slate-500 hover:bg-slate-50"
                 >
                   Request Market Audit
                 </a>
@@ -565,11 +576,11 @@ export default function PersonalInjuryExecutiveView({
             </div>
 
             {/* Right Column: Founder-Reviewed Intake Sidebar Form */}
-            <div id="hero-form" className="relative scroll-mt-24 rounded-2xl border border-slate-300 bg-white p-6 sm:p-8 shadow-sm">
+            <div id="hero-form" className="relative scroll-mt-24 rounded-2xl border border-slate-300 bg-white p-5 sm:p-7 md:p-8 shadow-sm">
               <div className="absolute -top-3.5 right-6 rounded-full border border-slate-300 bg-slate-100 px-3 py-0.5 text-[11px] font-black uppercase tracking-wider text-slate-900">
                 Direct Founder Review
               </div>
-              <h2 className="text-xl font-black text-slate-950">
+              <h2 className="text-lg sm:text-xl font-black text-slate-950">
                 Request a Personal Injury Practice-Area Search Map
               </h2>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
@@ -604,41 +615,70 @@ export default function PersonalInjuryExecutiveView({
         </div>
       </section>
 
-      {/* ── 2. EMOTIONAL CLIENT DEDICATION: "WE KNOW THE PAIN YOU CARRY" ── */}
-      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-slate-300 bg-white p-8 sm:p-12 shadow-sm">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
-              Dedicated Client Care & Real Partnership
-            </p>
-            <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-              We Know Exactly the Burden and Frustration You Carry Every Day.
-            </h2>
+      {/* ── 2. EMOTIONAL CLIENT DEDICATION: "LIKE A MOTHER CARES FOR HER CHILD" ── */}
+      <section className="border-b border-slate-200 bg-slate-50 py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-slate-300 bg-white p-8 sm:p-12 shadow-sm">
+            <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+                  Unconditional Client Care & Dedicated Partnership
+                </p>
+                <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl lg:text-4xl">
+                  Like a Mother Protects Her Child — We Care For &amp; Guard Your Law Firm.
+                </h2>
 
-            <div className="mt-6 space-y-4 text-sm leading-relaxed text-slate-700 sm:text-base">
-              <p>
-                You became a personal injury attorney to fight for injured human beings whose lives were derailed by catastrophic semi-truck collisions, chemical plant explosions, and corporate recklessness. You carry the financial weight of running a high-stakes contingency practice where every case requires substantial upfront capital.
-              </p>
-              <p>
-                Yet every month, you watch high-spend billboard firms dominate vanity search results, while generic SEO agencies charge you \$5,000 to \$10,000 every single month only to hand you over to junior interns who have never read a state tort statute in their lives. Worse, your intake coordinators spend exhausting hours filtering calls from unviable property damage claims and minor scratches that cost more to answer than they will ever yield.
-              </p>
-              <p className="font-semibold text-slate-900">
-                SearchPrex is not another transactional SEO vendor. We are revenue-obsessed, dedicated legal search architects who treat your firm’s reputation, time, and courtroom advocacy with the deepest respect.
-              </p>
-            </div>
+                <div className="mt-6 space-y-4 text-sm leading-relaxed text-slate-700 sm:text-base">
+                  <p>
+                    When a mother cares for her child, her vigilance is absolute. Every danger is anticipated, every vulnerability is guarded, and nothing is ever left to chance. That is the exact depth of emotional dedication, protective care, and fierce accountability SearchPrex brings to your personal injury practice.
+                  </p>
+                  <p>
+                    We know the heavy burden you carry every day. You represent families whose lives were shattered in a split second by reckless 18-wheelers, industrial catastrophes, and corporate negligence. You risk substantial firm capital to fight deep-pocketed insurance defense teams on pure contingency.
+                  </p>
+                  <p>
+                    Yet generic SEO agencies treat your practice like an anonymous monthly invoice. They hand your account off to junior interns, flood your receptionist with unviable fender-bender calls, and deploy sloppy tactics that risk State Bar disciplinary grievances.
+                  </p>
+                  <p className="font-bold text-slate-950">
+                    We refuse to let that happen. We watch over your search presence 24/7 with maternal protectiveness: shielding your license under strict ABA Rule 7.1 ethics, pre-qualifying claimants so your intake staff never burns out, and securing your firm&apos;s rightful place as the leading authority across your state&apos;s busiest freight corridors and trauma centers.
+                  </p>
+                </div>
 
-            <div className="mt-8 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
-              <div>
-                <p className="text-xs font-black uppercase tracking-wider text-slate-500">01. Protecting Your Time</p>
-                <p className="mt-1 text-xs text-slate-700">Pre-qualifying claimants on statutory fault thresholds before they ever call your receptionist.</p>
+                <div className="mt-8 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-900">01. Protecting Your Time</p>
+                    <p className="mt-1 text-xs text-slate-600">Pre-qualifying claimants on statutory fault thresholds before they ever call your receptionist.</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-900">02. Defending Your License</p>
+                    <p className="mt-1 text-xs text-slate-600">100% adherence to ABA Model Rule 7.1 and state bar advertising guidelines with zero deceptive claims.</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-900">03. Securing Serious Retainers</p>
+                    <p className="mt-1 text-xs text-slate-600">Positioning your trial attorneys along high-limit commercial freight corridors and Level-1 trauma centers.</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-black uppercase tracking-wider text-slate-500">02. Defending Your Reputation</p>
-                <p className="mt-1 text-xs text-slate-700">100% adherence to ABA Model Rule 7.1 and state bar advertising guidelines with zero deceptive outcome claims.</p>
-              </div>
-              <div>
-                <p className="text-xs font-black uppercase tracking-wider text-slate-500">03. Driving Signed Retainers</p>
-                <p className="mt-1 text-xs text-slate-700">Positioning your trial partners directly along high-limit commercial freight corridors and Level-1 trauma centers.</p>
+
+              {/* Visual: High Emotional Appeal Law Care Scene */}
+              <div className="flex flex-col items-center">
+                <div className="relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+                  <Image
+                    src="/images/services/law-firm/searchprex-law-firm-care-representative.webp"
+                    alt="SearchPrex dedicated law firm client care and strategic guidance"
+                    width={600}
+                    height={440}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                  <div className="border-t border-slate-200 bg-slate-50 p-4">
+                    <p className="text-xs font-bold text-slate-950">
+                      Direct Founder Stewardship · 1 Firm Per City
+                    </p>
+                    <p className="mt-1 text-[11px] leading-relaxed text-slate-600">
+                      We treat your firm with the protective dedication of family. You will never be handed off to an account manager who doesn&apos;t know your courts, your statutes, or your name.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -784,13 +824,16 @@ export default function PersonalInjuryExecutiveView({
             {/* Header of Active Tab */}
             <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-bold text-slate-900">
-                  {activeJurisdiction.badge}
-                </span>
-                <h3 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
-                  {activeJurisdiction.headline}
-                </h3>
-                <p className="mt-2 max-w-4xl text-sm leading-relaxed text-slate-600">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-bold text-slate-900">
+                    <Scale className="h-3.5 w-3.5 text-slate-900" />
+                    <span>{activeJurisdiction.state} Personal Injury Jurisdiction</span>
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-slate-200/70 px-2.5 py-0.5 text-xs font-semibold text-slate-800">
+                    {activeJurisdiction.badge}
+                  </span>
+                </div>
+                <p className="mt-3 max-w-4xl text-sm leading-relaxed text-slate-700 sm:text-base">
                   {activeJurisdiction.summary}
                 </p>
               </div>
@@ -1083,62 +1126,79 @@ export default function PersonalInjuryExecutiveView({
       </section>
 
       {/* ── 9. FOUNDER PICTURE & DIRECT COMMITMENT: MUBASHAR SHARIF ── */}
-      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-900">
-            Founder Accountability & Commitment
-          </div>
-
-          <h2 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">
-            &quot;We Don&apos;t Kid When We Say We Are ROI-Obsessed.&quot;
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-700">
-            “The legal industry is the most dog-eat-dog place on Google. We take our clients’ success personally. Personal injury firms cannot afford rookie errors: a vague settlement headline can trigger a State Bar grievance, and an unoptimized corridor page loses you million-dollar cases. I personally research your freight corridors, map your trauma center radius, and direct your jurisdictional blueprints. If you are not getting results, I personally make it my mission to see you win.”
-          </p>
-
-          {/* Founder Picture Added Here */}
-          <div className="mt-8 flex flex-col items-center justify-center">
-            <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-slate-300 shadow-sm">
-              <Image
-                src="/images/mubashar-sharif.jpg"
-                alt="Mubashar Sharif - Founder and Senior SEO Analyst at SearchPrex"
-                fill
-                sizes="112px"
-                className="object-cover"
-                priority
-              />
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-900">
+              Founder Accountability &amp; Commitment
             </div>
-            <p className="mt-4 text-lg font-black text-slate-950">Mubashar Sharif</p>
-            <p className="text-xs font-medium text-slate-600">Founder & Senior SEO Analyst · SearchPrex</p>
+            <h2 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">
+              &quot;We Don&apos;t Kid When We Say We Are ROI-Obsessed.&quot;
+            </h2>
           </div>
 
-          {/* External Verification Links */}
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-50"
-            >
-              Mubashar on LinkedIn <ExternalLink className="h-3 w-3" />
-            </a>
-            <a
-              href="https://clutch.co/profile/searchprex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-50"
-            >
-              Clutch Company Profile <ExternalLink className="h-3 w-3" />
-            </a>
-            <a
-              href="https://www.trustpilot.com/review/searchprex.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-50"
-            >
-              Trustpilot Reviews <ExternalLink className="h-3 w-3" />
-            </a>
+          <div className="mt-10 grid gap-8 rounded-3xl border border-slate-300 bg-slate-50 p-6 sm:p-10 shadow-sm md:grid-cols-[280px_1fr] md:items-center lg:grid-cols-[320px_1fr] lg:p-12">
+            {/* Founder Large Portrait */}
+            <div className="flex flex-col items-center">
+              <div className="relative aspect-square w-60 sm:w-68 md:w-72 lg:w-80 overflow-hidden rounded-2xl border-4 border-white shadow-xl bg-slate-200">
+                <Image
+                  src="/images/mubashar-sharif.jpg"
+                  alt="Mubashar Sharif - Founder and Senior SEO Analyst at SearchPrex"
+                  fill
+                  sizes="(max-width: 768px) 240px, 320px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <p className="mt-4 text-xl font-black text-slate-950">Mubashar Sharif</p>
+              <p className="text-xs font-bold text-slate-600">Founder &amp; Senior SEO Analyst · SearchPrex</p>
+            </div>
+
+            {/* Founder Commitment Copy */}
+            <div className="space-y-5">
+              <blockquote className="border-l-4 border-slate-900 pl-4 text-base italic leading-relaxed text-slate-800 sm:text-lg">
+                &ldquo;The legal industry is the most dog-eat-dog place on Google. We take our clients&rsquo; success personally. Personal injury firms cannot afford rookie errors: a vague settlement headline can trigger a State Bar grievance, and an unoptimized corridor page loses you million-dollar cases. I personally research your freight corridors, map your trauma center radius, and direct your jurisdictional blueprints. If you are not getting results, I personally make it my mission to see you win.&rdquo;
+              </blockquote>
+
+              <div className="grid gap-3 pt-2 sm:grid-cols-2 text-xs text-slate-700">
+                <div className="rounded-xl border border-slate-200 bg-white p-3.5">
+                  <p className="font-bold text-slate-950">Direct Founder Ownership</p>
+                  <p className="mt-0.5 text-slate-600">No account managers or outsourced junior teams. You speak directly with the strategist.</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-white p-3.5">
+                  <p className="font-bold text-slate-950">Strict 1 Firm Per City</p>
+                  <p className="mt-0.5 text-slate-600">Guaranteed exclusivity with zero internal competition in your municipal market.</p>
+                </div>
+              </div>
+
+              {/* External Verification Links */}
+              <div className="flex flex-wrap gap-3 pt-2">
+                <a
+                  href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-100 shadow-2xs"
+                >
+                  Mubashar on LinkedIn <ExternalLink className="h-3 w-3" />
+                </a>
+                <a
+                  href="https://clutch.co/profile/searchprex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-100 shadow-2xs"
+                >
+                  Clutch Company Profile <ExternalLink className="h-3 w-3" />
+                </a>
+                <a
+                  href="https://www.trustpilot.com/review/searchprex.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-slate-100 shadow-2xs"
+                >
+                  Trustpilot Reviews <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

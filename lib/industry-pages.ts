@@ -125,7 +125,7 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     slug: "personal-injury",
     metaTitle: "Personal Injury Lawyer SEO Agency (USA 9 States) | 7-Day Free Trial",
     metaDescription:
-      "Revenue-obsessed SEO agency for personal injury lawyers across TX, MI, PA, CA, AZ, LA, OH, NM, KS. Commercial freight corridors, Level-1 trauma centers & 24/7 intake.",
+      "Revenue-focused SEO agency for personal injury lawyers in TX, MI, PA, CA, AZ, LA, OH, NM, KS, targeting freight corridors & Level-1 trauma centers.",
     h1: "Personal Injury Lawyer SEO Across Major U.S. Jurisdictions",
     accent: "",
     heroSub:

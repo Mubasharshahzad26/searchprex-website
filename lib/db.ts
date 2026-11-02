@@ -17,6 +17,8 @@ const globalForPrisma = global as unknown as { prisma?: PrismaClient }
  * one. Pooled is correct for app queries — the direct URL is for migrations,
  * which the Prisma CLI reads from prisma.config.ts, not from here.
  */
+import { Pool } from 'pg'
+
 function createClient(): PrismaClient {
   const connectionString = process.env.DATABASE_URL
   if (!connectionString) {
@@ -28,7 +30,14 @@ function createClient(): PrismaClient {
     )
   }
 
-  return new PrismaClient({ adapter: new PrismaPg({ connectionString }) })
+  const pool = new Pool({
+    connectionString,
+    connectionTimeoutMillis: 2500, // Fast fail on quota limits or network outages
+    idleTimeoutMillis: 5000,
+    max: 10,
+  })
+
+  return new PrismaClient({ adapter: new PrismaPg(pool) })
 }
 
 // Lazy Proxy: nothing connects until the first property access, so importing

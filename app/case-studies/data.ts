@@ -250,10 +250,23 @@ export const caseStudies: CaseStudy[] = [
     id: 8,
     client: "Kitchen Cabinets",
     seoTitle: "Kitchen Cabinet SEO Case Study, Glendora, CA",
+    // Was "Top 10 / +5 Keywords / Local Focus". Only one of those can be shown.
+    // /images/glendora-kitchens-top-raking.JPG is a single SERP, personalisation
+    // off, for "kitchen cabinet replacement in Glendora": glendorakitchens.com
+    // sits at position 5, under the Angie's List and Yelp roundups. That
+    // evidences one query, not five, so "+5 keywords" is gone.
+    //
+    // The Search Console screenshot for the same client is deliberately NOT
+    // quoted here. Over Jun–Jul 2025 it shows impressions rising 142 → 473 but
+    // clicks falling 8 → 4 and average position going 31.4 → 47. Quoting the
+    // impressions on their own would be exactly the cherry-pick this entry is
+    // being corrected for.
+    verifiedVia: "a Google search with personalisation off",
     seoType: "Local SEO",
     industry: "Remodeling",
     location: "Glendora, CA",
-    headline: "Top-10 rankings for high-intent kitchen remodel keywords.",
+    headline:
+      'Position 5 on Google for "kitchen cabinet replacement in Glendora".',
     badgeColor: "#7c3aed",
     badgeBg: "#f3e8ff",
     video: "zRcTc2HqDwU",
