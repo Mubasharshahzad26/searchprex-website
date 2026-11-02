@@ -123,11 +123,20 @@ export async function generateMetadata({
       siteName: "SearchPrex",
       type: "website",
       locale: "en_US",
+      images: [
+        {
+          url: `${SITE}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${page.city}, ${page.stateAbbr} Law Firm SEO — SearchPrex`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: page.metaTitle,
       description: page.metaDescription,
+      images: [`${SITE}/og-image.jpg`],
     },
   };
 }

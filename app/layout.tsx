@@ -72,18 +72,20 @@ export const metadata: Metadata = {
     siteName: 'SearchPrex',
     locale: 'en_US',
     type: 'website',
-    // No `images` here: app/opengraph-image.tsx generates the default card and
-    // Next applies it to every route that does not ship its own. The
-    // `${siteUrl}/og-image.jpg` this replaced was never a real file — public/
-    // has no og-image.jpg — so the site's default social card 404d on every
-    // page, and an explicit `images` entry would override the generated one.
+    images: [
+      {
+        url: `${siteUrl}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'SearchPrex — USA SEO Agency',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'SearchPrex — USA SEO Agency for Law Firms & Ecommerce',
     description: 'Senior-led SEO for law firms, ecommerce & local businesses. Free audit in 48 hours.',
-    // Likewise supplied by app/twitter-image.tsx.
-    // No site/creator handle: SearchPrex has no X account yet. Add one only with a real handle.
+    images: [`${siteUrl}/og-image.jpg`],
   },
   // Only emitted when the env var is set — a placeholder value would publish a
   // meta tag that fails verification in Search Console.

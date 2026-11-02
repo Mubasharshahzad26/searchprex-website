@@ -64,7 +64,27 @@ export async function generateMetadata({
     description,
     robots: { index: true, follow: true },
     alternates: { canonical: url },
-    openGraph: { title: `${title} | SearchPrex`, description, url, siteName: "SearchPrex", type: "website" },
+    openGraph: {
+      title: `${title} | SearchPrex`,
+      description,
+      url,
+      siteName: "SearchPrex",
+      type: "website",
+      images: [
+        {
+          url: `${SITE}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${title} | SearchPrex`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | SearchPrex`,
+      description,
+      images: [`${SITE}/og-image.jpg`],
+    },
   };
 }
 

@@ -11,9 +11,14 @@ export async function generateMetadata(
   const { industry } = await params;
   const decodedSlug = decodeURIComponent(industry);
 
-  const dbCs = await db.marketingCaseStudy.findUnique({
-    where: { slug: decodedSlug }
-  });
+  let dbCs = null;
+  try {
+    dbCs = await db.marketingCaseStudy.findUnique({
+      where: { slug: decodedSlug }
+    });
+  } catch (error) {
+    console.error("[case-studies] Failed to fetch case study from DB:", error);
+  }
 
   if (!dbCs || !dbCs.published) return {};
 
@@ -41,9 +46,20 @@ export async function generateMetadata(
       description,
       url: `${SITE}/case-studies/${dbCs.slug}`,
       type: "article",
-      ...(dbCs.coverImage && {
-        images: [{ url: dbCs.coverImage }],
-      }),
+      images: [
+        {
+          url: dbCs.coverImage || `${SITE}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [dbCs.coverImage || `${SITE}/og-image.jpg`],
     },
   };
 }
@@ -54,9 +70,14 @@ export default async function Page(
   const { industry } = await params;
   const decodedSlug = decodeURIComponent(industry);
 
-  const dbCs = await db.marketingCaseStudy.findUnique({
-    where: { slug: decodedSlug }
-  });
+  let dbCs = null;
+  try {
+    dbCs = await db.marketingCaseStudy.findUnique({
+      where: { slug: decodedSlug }
+    });
+  } catch (error) {
+    console.error("[case-studies] Failed to fetch case study from DB:", error);
+  }
 
   if (!dbCs || !dbCs.published) notFound();
 

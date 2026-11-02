@@ -62,8 +62,27 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
     title: city.metaTitle,
     description: city.metaDescription,
     alternates: { canonical: url },
-    openGraph: { title: `${city.metaTitle} | SearchPrex`, description: city.metaDescription, url, siteName: "SearchPrex", type: "website" },
-    twitter: { card: "summary_large_image", title: city.metaTitle, description: city.metaDescription },
+    openGraph: {
+      title: `${city.metaTitle} | SearchPrex`,
+      description: city.metaDescription,
+      url,
+      siteName: "SearchPrex",
+      type: "website",
+      images: [
+        {
+          url: `${SITE}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${city.metaTitle} | SearchPrex`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: city.metaTitle,
+      description: city.metaDescription,
+      images: [`${SITE}/og-image.jpg`],
+    },
   };
 }
 

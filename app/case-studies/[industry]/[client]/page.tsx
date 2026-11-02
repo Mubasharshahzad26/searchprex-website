@@ -61,9 +61,26 @@ export async function generateMetadata(
       description,
       url: `${SITE}${detailUrl(cs)}`,
       type: "article",
-      ...(cs.video && {
-        images: [{ url: `https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg` }],
-      }),
+      images: [
+        {
+          url: cs.video
+            ? `https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg`
+            : `${SITE}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [
+        cs.video
+          ? `https://img.youtube.com/vi/${cs.video}/maxresdefault.jpg`
+          : `${SITE}/og-image.jpg`,
+      ],
     },
   };
 }
