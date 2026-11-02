@@ -217,13 +217,13 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
   {
     name: "Family Law",
     slug: "family-law",
-    metaTitle: "Family Law Attorney SEO Services | Private Written Audit",
+    metaTitle: "Family Law SEO for Attorneys | Private Written Audit",
     metaDescription:
-      "Private family law SEO audit for divorce and custody firms: county-level answers, discreet conversion paths and privacy-aware marketing. No ranking promises.",
-    h1: "Family Law Attorney SEO for Private Local Searches",
+      "Family law SEO for divorce and custody firms: county-aware pages, privacy-safe tracking and monthly reporting. Private written audit; $1,200–$2,200/mo.",
+    h1: "Family Law SEO That Earns Trust Before the First Call",
     accent: "",
     heroSub:
-      "People often research divorce and custody questions quietly before they contact a lawyer. We build calm, useful county-level answers and a privacy-aware path to your firm, so trust can start before a consultation.",
+      "Our family law attorney SEO program helps divorce and custody firms reach people who research privately before choosing counsel. We build county-aware matter pages, strengthen your Google Business Profile and report calls and consultation requests, with a discreet contact path and no sensitive retargeting.",
     approach: {
       title: "Where family law rankings actually come from",
       body: "No published family law case study yet, so here is the approach. Answers to the custody and asset-division questions people actually type, county-level content rather than state-level, and a review process that respects how sensitive this work is. Ads win the top of the page; the questions underneath them are still open.",
@@ -264,20 +264,12 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
     ],
     capsules: [
       {
-        q: "How do family law firms rank on Google?",
-        a: "By answering the questions people search in the weeks before they call — custody, the house, asset division — at county level, where the real answers differ. Add a Business Profile with genuine reviews and pages for the courts the firm appears in, and the firm is visible through the whole research phase, not only at the final search.",
-      },
-      {
         q: "How can a family law firm appear in AI Overviews?",
         a: "Nobody controls what Google's AI cites, but clear, direct answers to specific questions — written by or reviewed by the attorney, on a page about that one question — are what these answers tend to draw from.",
       },
       {
         q: "What keywords should a divorce lawyer target?",
         a: "The matters the firm takes, in the words clients use, with the place: divorce lawyer, child custody attorney, child support lawyer, each with the city or county. Then the questions people ask before hiring — how custody is decided, what happens to the house — answered in guides that link to those pages. Which of these carries the most demand in a market is something to check in keyword tools and Search Console, not to guess.",
-      },
-      {
-        q: "Does SearchPrex have a family law case study?",
-        a: "Not yet. No law firm client has been published; SearchPrex's verified results are in ecommerce and local services.",
       },
     ],
     faqs: [
@@ -287,7 +279,22 @@ const BASE_INDUSTRY_PAGES: BaseIndustryPage[] = [
         a: "Not on sensitive practice areas. Following someone around the web with divorce ads can expose them to others in their home, and it costs more trust than it earns.",
       },
       ONE_FIRM,
-      NO_CONTRACT,
+      {
+        q: "How long does family law SEO take?",
+        a: "Technical fixes, indexing and local visibility signals may begin to move in the first 60–90 days, while stronger organic visibility in a competitive county often takes several months. Timing depends on your starting point, competition, review capacity and the work approved; rankings and consultation volume are not guaranteed.",
+      },
+      {
+        q: "What will the monthly family law SEO report include?",
+        a: "The report summarizes agreed deliverables shipped, Search Console queries, impressions and clicks, plus tracked call or consultation events when measurement is available. It compares the figures with the agreed baseline and does not include personal details in analytics event data.",
+      },
+      {
+        q: "How can you track consultations without exposing client information?",
+        a: "Use generic event names for actions such as a call-button tap or form submission, and keep names, case details and other personally identifiable information out of analytics. The firm chooses which contact paths to measure, and sensitive-practice retargeting stays off.",
+      },
+      {
+        q: "What do you need from our attorneys?",
+        a: "A designated reviewer should confirm the firm's services, review legal explanations and sources, and approve copy before publication. The audit and written plan identify the pages that need review and propose a turnaround; time depends on the matter and jurisdiction.",
+      },
     ],
     locationsMentioned: ["sugar-land", "plano"],
   },
@@ -556,25 +563,25 @@ const PRACTICE_WIREFRAMES: Record<string, PracticeWireframe> = {
   "family-law": {
     primaryKeyword: "family law attorney SEO",
     keywordMap: {
-      commercial: ["family law attorney SEO", "divorce lawyer SEO", "child custody lawyer SEO"],
-      problem: ["how is parenting time decided in [county]", "what happens to the house if I separate", "how much does a divorce lawyer cost"],
-      local: ["family law attorney near me", "divorce attorney [city]", "custody lawyer [county]"],
-      note: "Build discreet, county-aware answers around the questions people ask before they are ready to call; never imply search interest reveals a person's situation.",
+      commercial: ["family law SEO", "SEO for family law attorneys", "divorce lawyer SEO", "child custody lawyer SEO", "family law marketing agency", "high-asset divorce lawyer marketing"],
+      problem: ["what happens to the house if we separate", "how is parenting time decided in my county", "how is child support calculated", "how do I modify a parenting plan"],
+      local: ["family law SEO", "divorce lawyer SEO", "child custody lawyer SEO"],
+      note: "These are example topics for a firm's content plan, not volume claims or signals about an individual visitor. Validate priorities using the firm's Search Console and keyword data.",
     },
-    visual: { src: "/images/services/law-firm/searchprex-law-firm-care-representative.webp", alt: "Calm law office consultation scene representing a privacy-aware family law client journey", eyebrow: "Trust before contact", title: "Make the first search feel safe, calm and useful", caption: "Illustrative visual: family-law searchers often need control over timing and contact method before they are ready to speak with an attorney." },
-    usp: { title: "Privacy-aware family law content", body: "The strategy respects that a divorce or custody search may happen privately, so useful answers and contact choices come before aggressive follow-up.", points: ["County-aware divorce and custody answers", "Private written audit option", "No pressure to call and no sensitive remarketing claims"] },
-    comparison: { title: "Family law SEO vs. ads and directory dependence", intro: "A private search journey needs more than a phone number at the top of a page.", rows: [{ option: "PPC only", strength: "Immediate exposure", tradeoff: "Paid clicks do not answer the quiet questions that build trust." }, { option: "Directory profile", strength: "Comparison presence", tradeoff: "The firm is one listing among many with limited owned context." }, { option: "Generic family page", strength: "Simple to launch", tradeoff: "It rarely matches divorce, custody and county-specific intent." }, { option: "SearchPrex family SEO", strength: "Answers sensitive questions calmly", tradeoff: "Trust compounds through reviewed content and a discreet conversion path." }] },
+    visual: { src: "/images/services/law-firm/searchprex-law-firm-care-representative.webp", alt: "Sample family-law county guide layout with source, review date and clear next steps", eyebrow: "Sample deliverable format", title: "See what a county guide can make clearer", caption: "A planning mockup, not legal advice or a live client deliverable. Each county page should cite current court sources and receive the firm's attorney review." },
+    usp: { title: "A practical family law SEO scope", body: "The written scope prioritizes the matters your firm accepts, the counties it serves and the privacy choices clients need. Reporting then shows shipped work and agreed search and enquiry indicators.", points: ["Matter pages scoped to divorce, custody, support and modifications", "Business Profile and review workflow checked against firm policy", "Privacy-safe conversion tracking and monthly reporting"] },
+    comparison: { title: "Family law marketing: SEO vs. ads and directories", intro: "Organic search can build a useful library of answers over time; paid ads can bring visibility sooner. Each has a different cost, pace and content requirement.", rows: [{ option: "PPC only", strength: "Immediate exposure while budget is active", tradeoff: "Paid clicks stop when spend stops, and landing pages still need to earn trust." }, { option: "Directory profile", strength: "A place in comparison searches", tradeoff: "The firm has less control over the surrounding context and experience." }, { option: "Generic family page", strength: "Simple to launch", tradeoff: "It rarely matches divorce, custody and county-specific intent." }, { option: "Family law SEO", strength: "A growing set of reviewed pages and local profile improvements", tradeoff: "Organic visibility typically takes months and depends on competition and execution." }] },
     founderAngle: "For family law, the first conversion is often trust. I keep the audit written and private so the firm can decide what to share and when.",
-    answerCapsule: "Family law attorney SEO helps a firm appear while people privately research divorce, custody, support and related questions. It combines matter-specific pages, county-aware explanations, a trusted Google Business Profile and privacy-conscious conversion paths, so people can understand the firm's services before deciding whether to make contact.",
-    story: { title: "The quiet search", leftLabel: "Their screen", leftBody: "After the house is quiet, someone searches whether they can stay in the home, how parenting time is decided and what to prepare before speaking with counsel. They are not ready to call. They need a composed answer and control over when they take the next step.", rightLabel: "Your firm", rightBody: "A capable attorney may be the right fit, but a generic page or intrusive follow-up gives the searcher little reason to trust that. Clear county-level information, discreet contact choices and no pressure help your firm's experience become visible before the first conversation.", close: "Family law pages can earn trust before a call by answering sensitive questions calmly, explaining verified county processes and giving the reader control over contact. This illustrative scenario shows why privacy and clarity belong in the page experience from the first search." },
-    journeyTitle: "The Four-Stage Private Journey",
-    journey: [{ stage: "Recognize", query: "what happens to the house if I separate", response: "A discreet guide answers one concern in plain language and identifies when local advice matters.", next: "Offer an optional private email resource." }, { stage: "Understand", query: "how is parenting time decided in [County]", response: "A county-aware page names the local process and is reviewed by the firm's attorney.", next: "Link to the attorney and matter page that can help." }, { stage: "Compare", query: "how much does a divorce lawyer cost", response: "Explain the firm's consultation and fee approach without implying a guaranteed result.", next: "Let the reader choose email, form or call." }, { stage: "Reach out", query: "family law attorney near me", response: "A complete Business Profile, useful service pages and a calm mobile experience support the final search.", next: "Make contact optional, clear and private." }],
+    answerCapsule: "Family law SEO helps divorce and custody firms attract relevant search visibility through matter-specific pages, county-aware information, a well-maintained Google Business Profile and privacy-conscious conversion paths. A useful program also tracks agreed work, Search Console visibility and consultation enquiries without placing sensitive personal details in analytics.",
+    story: { title: "A clearer path to the right consultation", leftLabel: "What a prospective client needs", leftBody: "A person researching divorce, parenting time or support may not be ready to call. The page needs to answer the immediate question, show where the firm's experience applies and let the visitor choose a discreet next step.", rightLabel: "What the firm needs from SEO", rightBody: "Attorneys need a scoped content plan, accurate local information, a tested contact route and reporting that shows what shipped and what people did next. The strategy should respect privacy while making the firm's services easier to evaluate.", close: "Family law marketing should give both the prospective client and the firm a clearer next step: useful information, a private contact choice and visible work the attorney can review." },
+    journeyTitle: "How family law SEO works in the first 90 days",
+    journey: [{ stage: "Month 1 · Baseline", query: "Which matters and markets fit the firm?", response: "Review technical health, current search visibility, the Business Profile, intake route and attorney review capacity.", next: "Agree the baseline, priorities and measurable deliverables in writing." }, { stage: "Month 2 · Build", query: "What should each priority page answer?", response: "Prepare and refine the scoped divorce, custody, support or modification pages using verified sources and attorney review.", next: "Publish approved work and check that contact choices function as intended." }, { stage: "Month 3 · Review", query: "What changed and what should happen next?", response: "Compare shipped work, Search Console queries/clicks and agreed enquiry events with the starting baseline.", next: "Use the monthly report to adjust the next-quarter plan." }],
     framework: { name: "The Quiet Search Journey", definition: "The Quiet Search Journey maps the private research that can happen before someone contacts a family lawyer. It connects early questions, county-specific information and a low-pressure conversion choice while avoiding sensitive retargeting that could expose a person's search to others.", source: "SearchPrex privacy-aware family law content method; legal statements require attorney review in the relevant jurisdiction.", date: "2026-10-31" },
-    module: { eyebrow: "The Quiet Search Journey", title: "Four stages that let the reader set the pace", answer: "A family law search can move from private question to local research, comparison and contact over days or weeks. The content should answer the immediate concern, explain what changes by county, and offer a discreet next step without pressuring the reader or exposing a sensitive search through unnecessary ad retargeting.", items: [{ label: "01", title: "Private question", body: "Answer carefully and plainly, without pressure to call." }, { label: "02", title: "Local understanding", body: "Explain the county process only where the firm can verify it." }, { label: "03", title: "Evaluate the firm", body: "Introduce the lawyer, relevant experience and consultation process." }, { label: "04", title: "Choose contact", body: "Offer a private written audit or consultation request; keep sensitive remarketing off." }], note: "Search examples are illustrative. Validate demand with Search Console and keyword research." },
+    module: { eyebrow: "The Quiet Search Journey", title: "One privacy-aware path from research to contact", answer: "The process connects matter pages, verified local sources, a discreet contact choice and monthly reporting without repeating the same journey elsewhere on the page.", items: [{ label: "01", title: "Prioritize matters", body: "Scope content around the firm's actual practice and service area." }, { label: "02", title: "Review sources", body: "Use current county sources and attorney approval for legal explanations." }, { label: "03", title: "Protect privacy", body: "Avoid sensitive retargeting and keep PII out of analytics events." }, { label: "04", title: "Report clearly", body: "Track shipped work, queries, clicks and agreed enquiry events." }], note: "Search examples are illustrative; validate demand with Search Console and keyword research." },
     trialSteps: [{ when: "Days 1–2", title: "Private search review", body: "Review one matter cluster, county relevance and contact and privacy choices." }, { when: "Days 3–5", title: "Written opportunity map", body: "Send a private email audit with one answer capsule and page outline." }, { when: "Day 7", title: "Founder follow-up", body: "Email findings and optional next steps; no call unless you request one." }],
     priceRange: { min: 1200, max: 2200 }, primaryCta: { label: "Request a private written audit", target: "#get-started" }, secondaryCta: { label: "Review law firm SEO pricing", target: "/pricing" },
     lateralLink: { slug: "estate-planning", anchor: "estate planning SEO for blended families and post-divorce planning", reason: "Divorce, remarriage and blended-family planning can lead to new estate-planning needs." },
-    resourceLinks: [{ href: "/services/law-firm-seo/google-business-profile-for-lawyers", label: "Google Business Profile for lawyers", context: "Build accurate local service and attorney information." }, { href: "/free-audit", label: "Free SEO audit", context: "Learn what a founder-reviewed audit includes." }, { href: "/pricing", label: "Law firm SEO pricing", context: "Review engagement terms and scope." }],
+    resourceLinks: [{ href: "/services/law-firm-seo/google-business-profile-for-lawyers", label: "Google Business Profile for lawyers", context: "Review profile categories, attorney details and policy-aware review practices." }, { href: "/tools/keyword-research", label: "Law firm keyword research", context: "Validate matter and market demand using your own Search Console and research data." }, { href: "/resources/law-firm-seo-audit-checklist", label: "Law firm SEO audit checklist", context: "See the technical and content checks behind a practical audit." }, { href: "/pricing", label: "Law firm SEO pricing", context: "Review monthly scope and written engagement terms." }],
   },
   "criminal-defense": {
     primaryKeyword: "criminal defense lawyer SEO",

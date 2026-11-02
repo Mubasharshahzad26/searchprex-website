@@ -65,7 +65,7 @@ function localizeTerm(term: string, city: { city: string; state: string; county:
 
 function SectionCards({ items }: { items: IndustryPage["journey"] }) {
   return (
-    <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className={`mt-10 grid gap-4 ${items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2 xl:grid-cols-4"}`}>
       {items.map((item, i) => (
         <article key={`${item.stage}-${i}`} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">{item.stage}</p>
@@ -75,6 +75,50 @@ function SectionCards({ items }: { items: IndustryPage["journey"] }) {
         </article>
       ))}
     </div>
+  );
+}
+
+function FamilyLawWorkSamples() {
+  return (
+    <div className="grid gap-4 lg:grid-cols-2">
+      <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div><p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">Sample format</p><h3 className="mt-1 text-lg font-black text-slate-950">County guide outline</h3></div>
+          <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-bold text-slate-600">Attorney review</span>
+        </div>
+        <div className="mt-4 space-y-3 text-sm">
+          {["Question the page answers", "Official court source and checked date", "County-specific process, verified by counsel", "Firm service scope and private contact choice"].map((item, i) => <div key={item} className="flex gap-3 rounded-lg bg-slate-50 p-3"><span className="font-black text-slate-400">0{i + 1}</span><span className="font-semibold text-slate-700">{item}</span></div>)}
+        </div>
+        <p className="mt-4 text-xs leading-relaxed text-slate-500">Illustrative outline only. It contains no legal advice or county-specific claims.</p>
+      </article>
+      <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div><p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">Sample format</p><h3 className="mt-1 text-lg font-black text-slate-950">Monthly visibility report</h3></div>
+          <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-bold text-slate-600">Aggregate data</span>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {["Pages shipped", "Search queries", "Organic clicks", "Enquiry events"].map((item) => <div key={item} className="rounded-lg border border-slate-200 p-4"><p className="text-xs font-semibold text-slate-500">{item}</p><p className="mt-2 text-lg font-black text-slate-800">Reviewed monthly</p></div>)}
+        </div>
+        <p className="mt-4 text-xs leading-relaxed text-slate-500">Example report structure, not client results. Personal details are not placed in analytics events.</p>
+      </article>
+    </div>
+  );
+}
+
+function FamilyLawIncluded() {
+  const items = [
+    { title: "Matter pages", body: "Prioritized pages for the matters your firm accepts, such as divorce, custody, support and modifications. The written scope sets page volume." },
+    { title: "Local profile work", body: "Google Business Profile categories, attorney details and a review-request workflow aligned with firm policy." },
+    { title: "Privacy-safe conversion", body: "A discreet email option, tested contact paths and generic events that avoid personal details in analytics." },
+    { title: "Monthly reporting", body: "Pages shipped, Search Console queries and clicks, plus agreed call or consultation enquiry events." },
+  ];
+  return (
+    <Band id="included">
+      <BandIntro eyebrow="Family law SEO services" title="What does family law SEO include?" lead="A practical scope for divorce and custody firms combines useful matter pages, local profile work, privacy-conscious measurement and a clear monthly review. SEO for family law attorneys is planned around your firm's practice, counties and review capacity." />
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((item, i) => <article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-xs font-black tracking-[0.14em] text-slate-400">0{i + 1}</p><h3 className="mt-3 text-lg font-black text-slate-950">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-slate-600">{item.body}</p></article>)}
+      </div>
+    </Band>
   );
 }
 
@@ -138,12 +182,14 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
       <section id="quick-answer" className="border-b border-slate-200 bg-white px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">A direct answer</p>
-            <p className="mt-3 text-base leading-relaxed text-slate-800">{page.answerCapsule}</p>
-            <p className="mt-5 text-xs font-medium text-slate-500">By Mubashar Sharif · Last reviewed October 31, 2026</p>
+            {page.slug !== "family-law" ? <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">A direct answer</p> : null}
+            <p className={page.slug === "family-law" ? "text-base leading-relaxed text-slate-800" : "mt-3 text-base leading-relaxed text-slate-800"}>{page.answerCapsule}</p>
+            <p className="mt-5 text-xs font-medium text-slate-500">By Mubashar Sharif · Last reviewed {page.slug === "family-law" ? "November 2, 2026" : "October 31, 2026"}</p>
           </div>
         </div>
       </section>
+
+      {page.slug === "family-law" ? <FamilyLawIncluded /> : null}
 
       {practicePath ? (
         <section aria-label={practicePath.eyebrow} className="border-b border-slate-200 bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
@@ -171,7 +217,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
       <Band id="story">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Illustrative scenario, not a client case</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{page.slug === "family-law" ? "What the firm needs from SEO" : "Illustrative scenario, not a client case"}</p>
             <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl">{page.story.title}</h2>
             <p className="mt-5 max-w-xl text-lg font-semibold leading-relaxed text-slate-800">{page.story.close}</p>
           </div>
@@ -185,8 +231,8 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
           </div>
         </div>
         <div className="mt-7 text-center">
-          <Link href="#practice-framework" className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-4">
-            See how the page turns this moment into a useful search path <ArrowRight className="h-4 w-4" aria-hidden />
+          <Link href={page.slug === "family-law" ? "#keyword-map" : "#practice-framework"} className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-4">
+            {page.slug === "family-law" ? "See the 90-day work plan" : "See how the page turns this moment into a useful search path"} <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
       </Band>
@@ -194,31 +240,36 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
       <Band>
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{page.visual.eyebrow}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{page.slug === "family-law" ? "Sample deliverables" : page.visual.eyebrow}</p>
             <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl">{page.visual.title}</h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-700">{page.visual.caption}</p>
             <Link href="#keyword-map" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-4">
-              See the U.S. search intent map <ArrowRight className="h-4 w-4" aria-hidden />
+              {page.slug === "family-law" ? "See the first 90-day plan" : "See the U.S. search intent map"} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
-          <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-            <Image src={page.visual.src} alt={page.visual.alt} width={1365} height={768} sizes="(max-width: 1024px) 100vw, 48vw" className="h-auto w-full object-cover" />
-          </figure>
+          {page.slug === "family-law" ? <FamilyLawWorkSamples /> : (
+            <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
+              <Image src={page.visual.src} alt={page.visual.alt} width={1365} height={768} sizes="(max-width: 1024px) 100vw, 48vw" className="h-auto w-full object-cover" />
+            </figure>
+          )}
         </div>
       </Band>
 
       <Band id="keyword-map" dark>
-        <BandIntro eyebrow={page.name} title={page.journeyTitle} lead="This map turns a prospective client's questions into focused pages, accurate answers and contact options. It helps the firm plan useful content across the decision journey without assuming search volume, legal outcomes or guaranteed conversions." />
+        <BandIntro eyebrow={page.name} title={page.journeyTitle} lead={page.slug === "family-law" ? "A 90-day family law marketing plan sets a baseline, builds the agreed pages and reviews visibility and enquiries before the next quarter is scoped." : "This map turns a prospective client's questions into focused pages, accurate answers and contact options. It helps the firm plan useful content across the decision journey without assuming search volume, legal outcomes or guaranteed conversions."} />
         <SectionCards items={page.journey} />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {[
-            { label: "Ready to compare", terms: page.keywordMap.commercial },
-            { label: "Problem-aware questions", terms: page.keywordMap.problem },
-            { label: "Local U.S. intent", terms: localizedTerms.length ? localizedTerms : page.keywordMap.local },
-          ].map((group) => (
-            <div key={group.label} className="rounded-2xl border border-slate-700 bg-slate-900/70 p-5">
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">{group.label}</p>
-              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-100">
+            {(page.slug === "family-law"
+              ? [{ label: "Example family-law searches to map", terms: page.keywordMap.problem }]
+              : [
+                  { label: "Ready to compare", terms: page.keywordMap.commercial },
+                  { label: "Problem-aware questions", terms: page.keywordMap.problem },
+                  { label: "Local U.S. intent", terms: localizedTerms.length ? localizedTerms : page.keywordMap.local },
+                ]
+            ).map((group) => (
+            <div key={group.label} className={`rounded-2xl border p-5 ${page.slug === "family-law" ? "border-slate-200 bg-white shadow-sm" : "border-slate-700 bg-slate-900/70"}`}>
+              <p className={`text-xs font-black uppercase tracking-[0.14em] ${page.slug === "family-law" ? "text-slate-500" : "text-slate-400"}`}>{group.label}</p>
+              <ul className={`mt-3 space-y-2 text-sm leading-relaxed ${page.slug === "family-law" ? "text-slate-700" : "text-slate-100"}`}>
                 {group.terms.map((term) => <li key={term}>“{term}”</li>)}
               </ul>
             </div>
@@ -230,7 +281,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
         </p>
       </Band>
 
-      <Band>
+      {page.slug !== "family-law" ? <Band>
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">A clear reason to choose the approach</p>
@@ -247,7 +298,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
             ))}
           </div>
         </div>
-      </Band>
+      </Band> : null}
 
       <Band dark>
         <BandIntro eyebrow="Make the trade-off visible" title={page.comparison.title} lead={page.comparison.intro} />
@@ -265,7 +316,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
         </div>
       </Band>
 
-      <Band id="practice-framework">
+      {page.slug !== "family-law" ? <Band id="practice-framework">
         <div className="mx-auto max-w-5xl">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{page.module.eyebrow}</p>
           <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl">{page.module.title}</h2>
@@ -291,29 +342,29 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
               <div data-track-event="intake_demo_start" data-track-once="true"><IntakeAssistant embedded /></div>
             </div>
           ) : null}
-          <div className="mt-8 rounded-2xl border-l-4 border-slate-900 bg-slate-50 p-6">
+          {page.slug !== "family-law" ? <div className="mt-8 rounded-2xl border-l-4 border-slate-900 bg-slate-50 p-6">
             <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">Named framework · {page.framework.name}</p>
             <p className="mt-2 text-sm leading-relaxed text-slate-800">{page.framework.definition}</p>
             <p className="mt-3 text-xs leading-relaxed text-slate-500">Source: {page.framework.source} · Framework dated {page.framework.date}. Listed in <Link href="/llms.txt" className="font-bold underline">SearchPrex llms.txt</Link>.</p>
-          </div>
+          </div> : null}
         </div>
-      </Band>
+      </Band> : null}
 
       <ServiceProofStrip
         id="proof"
-        title="Relevant SEO work, shown with its actual industry and period"
-        intro="The examples below show SearchPrex work in local services, with the client type and reporting period named. They can demonstrate SEO execution and AI visibility in those industries, but they do not establish legal rankings, consultations or case volume."
+        title={page.slug === "family-law" ? "What we can show today" : "Relevant SEO work, shown with its actual industry and period"}
+        intro={page.slug === "family-law" ? "The sample county-guide and monthly-report formats above show the planned work. The examples below show local-service SEO execution only; they are not evidence of law-firm rankings, consultations or case volume." : "The examples below show SearchPrex work in local services, with the client type and reporting period named. They can demonstrate SEO execution and AI visibility in those industries, but they do not establish legal rankings, consultations or case volume."}
         moreHref="/case-studies"
-        moreLabel="See the verified case studies"
+        moreLabel={page.slug === "family-law" ? "See the source-labeled work" : "See the verified case studies"}
         shots={[
           { src: "/images/proof/local-dolls-gsc-comparison.jpg", alt: "Google Search Console comparison for D.O.L.L.S. Cleaning in Michigan: 192 clicks and 41K impressions in June 2025, then 264 clicks and 106K impressions in July 2025.", width: 626, height: 239, figure: "192 → 264", figureLabel: "monthly organic clicks · June to July 2025", caption: "Source: Google Search Console for D.O.L.L.S. Cleaning, a Michigan local-service business. June–July 2025." },
           { src: "/images/proof/local-hvac-ai-overview.png", alt: "Google AI Overview naming HVAC Services Team for a Simi Valley air-conditioning installation query.", width: 717, height: 292, caption: "Google AI Overview example for HVAC Services Team, a local-service business; not a law-firm result." },
         ]}
-        footnote="SearchPrex has no published law-firm case study yet. These examples are from local-service businesses and do not establish a legal ranking or case-volume outcome."
+        footnote={page.slug === "family-law" ? "SearchPrex has not published a law-firm case study. No legal ranking, consultation or case-volume result is implied." : "SearchPrex has no published law-firm case study yet. These examples are from local-service businesses and do not establish a legal ranking or case-volume outcome."}
       />
 
       <Band id="trial" dark>
-        <BandIntro eyebrow="A seven-day working trial" title="A small, reviewable first step before an ongoing engagement" lead="The trial is a short diagnostic and planning sprint with a defined review at the end of seven days. It does not promise rankings, cases or outcomes; sample legal copy remains subject to the firm's attorney approval before publication." />
+        <BandIntro eyebrow={page.slug === "family-law" ? "Your first step: a private written audit" : "A seven-day working trial"} title={page.slug === "family-law" ? "A clear audit first, with a seven-day plan if the scope fits" : "A small, reviewable first step before an ongoing engagement"} lead={page.slug === "family-law" ? "The audit is delivered by email within 24 hours, with no call unless you ask. If both sides agree to continue, the seven-day planning sprint reviews one priority matter cluster, drafts an outline and closes with a founder review. No ranking or lead-volume promise." : "The trial is a short diagnostic and planning sprint with a defined review at the end of seven days. It does not promise rankings, cases or outcomes; sample legal copy remains subject to the firm's attorney approval before publication."} />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {page.trialSteps.map((step) => (
             <article key={step.when} className="rounded-2xl border border-slate-200 bg-white p-6">
@@ -327,7 +378,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
       </Band>
 
       <Band>
-        <BandIntro eyebrow="Why SearchPrex" title="One person accountable for the work" lead="SearchPrex is remote-first, founder-led and works US business hours. There is no published law-firm case study yet; the proof above is labeled by industry, and the attorney reviews legal copy before it goes live." />
+        <BandIntro eyebrow="Why SearchPrex" title="One person accountable for the work" lead={page.slug === "family-law" ? "SearchPrex is remote-first, founder-led and works US business hours. You work directly with Mubashar on the audit and plan; the firm's attorney reviews legal copy before publication." : "SearchPrex is remote-first, founder-led and works US business hours. There is no published law-firm case study yet; the proof above is labeled by industry, and the attorney reviews legal copy before it goes live."} />
         <p className="mx-auto mt-6 max-w-3xl text-center text-lg font-semibold leading-relaxed text-slate-800">{page.founderAngle}</p>
         <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
           <a className="rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-slate-800 hover:bg-slate-50" href="https://clutch.co/profile/searchprex" target="_blank" rel="noopener noreferrer">Clutch company profile</a>
@@ -343,7 +394,8 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Transparent pricing</p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-slate-950">{page.name} SEO: ${page.priceRange.min.toLocaleString()}–${page.priceRange.max.toLocaleString()} per month</h2>
+            <h2 className="mt-3 text-3xl font-black leading-tight text-slate-950">{page.slug === "family-law" ? "How much does family law SEO cost?" : `${page.name} SEO: $${page.priceRange.min.toLocaleString()}–$${page.priceRange.max.toLocaleString()} per month`}</h2>
+            {page.slug === "family-law" ? <p className="mt-2 text-lg font-black text-slate-900">${page.priceRange.min.toLocaleString()}–${page.priceRange.max.toLocaleString()} per month</p> : null}
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">The final scope depends on practice areas, locations and content volume. Work is month to month. The 7-day trial is a bounded planning sprint; the 90-day money-back guarantee applies to ongoing work as described in the written engagement terms.</p>
             <Link href="/pricing" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-4">Review full pricing and terms <ArrowRight className="h-4 w-4" aria-hidden /></Link>
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -356,28 +408,43 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
               ))}
             </div>
           </div>
-          <GuaranteeCard />
+          {page.slug === "family-law" ? (
+            <div className="rounded-2xl border border-slate-300 bg-white p-7 shadow-sm sm:p-8">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">90-day terms, defined in writing</p>
+              <h3 className="mt-3 text-2xl font-black tracking-tight text-slate-950">Measure agreed work and the baseline together</h3>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">If you don&apos;t see measurable progress within 90 days, I either keep working at no extra cost until you do, or refund what you paid for those 90 days. For this work, we review the agreed deliverables alongside the starting baseline for Search Console visibility and privacy-safe enquiry events. Rankings and case volume are not guaranteed.</p>
+            </div>
+          ) : <GuaranteeCard />}
         </div>
       </Band>
 
-      <Band>
-        <BandIntro eyebrow="Local relevance" title={`${page.name} SEO where the site has local pages`} lead="Each linked location page covers a local market and venue separately. The practice page explains the service and content method, while a location page covers local searches, courts and context; both pages link to the other where the connection is useful." />
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {cities.map((city) => (
-            <Link key={city.citySlug} href={`/locations/${city.stateSlug}/${city.citySlug}`} className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-800 hover:border-slate-500">
-              <MapPin className="h-4 w-4" aria-hidden />
-              {page.name} SEO in {city.city}, {city.stateAbbr}
-            </Link>
-          ))}
-          {page.showAllLocations ? <Link href="/locations" className="rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-800 hover:border-slate-500">Browse all locations</Link> : null}
-        </div>
-        <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-relaxed text-slate-600">Where the local page has matching practice demand, it links back here with a descriptive practice-area anchor.</p>
-      </Band>
+      {page.slug === "family-law" ? (
+        <Band>
+          <div className="mx-auto flex max-w-5xl flex-col gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div><p className="text-xs font-black uppercase tracking-[0.15em] text-slate-500">Texas local-market examples</p><h2 className="mt-2 text-2xl font-black text-slate-950">Explore the market pages for Sugar Land and Plano</h2><p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">These pages cover their own local search context. This family-law service page stays focused on attorney SEO scope and privacy-aware marketing.</p></div>
+            <div className="flex shrink-0 flex-wrap gap-2"><Link href="/locations/texas/sugar-land" className="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-bold text-slate-800 hover:border-slate-500">Sugar Land, Texas</Link><Link href="/locations/texas/plano" className="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-bold text-slate-800 hover:border-slate-500">Plano, Texas</Link></div>
+          </div>
+        </Band>
+      ) : (
+        <Band>
+          <BandIntro eyebrow="Local relevance" title={`${page.name} SEO where the site has local pages`} lead="Each linked location page covers a local market and venue separately. The practice page explains the service and content method, while a location page covers local searches, courts and context; both pages link to the other where the connection is useful." />
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            {cities.map((city) => (
+              <Link key={city.citySlug} href={`/locations/${city.stateSlug}/${city.citySlug}`} className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-800 hover:border-slate-500">
+                <MapPin className="h-4 w-4" aria-hidden />
+                {page.name} SEO in {city.city}, {city.stateAbbr}
+              </Link>
+            ))}
+            {page.showAllLocations ? <Link href="/locations" className="rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-800 hover:border-slate-500">Browse all locations</Link> : null}
+          </div>
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-relaxed text-slate-600">Where the local page has matching practice demand, it links back here with a descriptive practice-area anchor.</p>
+        </Band>
+      )}
 
-      <Band dark>
+      {page.slug !== "family-law" ? <Band dark>
         <BandIntro eyebrow="Local service area" title={`${page.name} SEO in the markets we serve`} lead="Each map below is a real served-market reference point, not a claim that SearchPrex has an office there. Use the linked city page for local context, then ask for a practice-area audit built around your firm’s actual service area." />
         <div className="mt-10"><PracticeLocationsMap practiceName={page.name} cities={cities} /></div>
-      </Band>
+      </Band> : null}
 
       <Band dark>
         <div className="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
@@ -397,7 +464,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
         <p className="mt-8 text-center"><Link href="/services/law-firm-seo" className="text-sm font-bold text-slate-900 underline underline-offset-4">Back to the law firm SEO hub</Link></p>
       </Band>
 
-      <ServiceBlogTeaser topic="law-firm" />
+      {page.slug !== "family-law" ? <ServiceBlogTeaser topic="law-firm" /> : null}
       <FaqBand title={`${page.name} SEO questions, answered`}>
         <FaqList faqs={[...page.capsules, ...page.faqs]} name={`law-firm-seo-${page.slug}-faq`} />
       </FaqBand>
@@ -424,7 +491,7 @@ export default function PracticePage({ page }: { page: IndustryPage }) {
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-slate-200 bg-white/95 p-3 shadow-[0_-8px_24px_rgba(15,23,42,0.08)] backdrop-blur md:hidden">
-        <a href={CALL_HREF} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-3 text-sm font-bold text-slate-800">Book a call</a>
+        {page.slug === "family-law" ? <Link href="#pricing" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-3 text-sm font-bold text-slate-800">See pricing</Link> : <a href={CALL_HREF} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-3 text-sm font-bold text-slate-800">Book a call</a>}
         <Link href={primaryTarget} data-track-event={PRIMARY_CTA_EVENT(page)} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-slate-950 px-3 text-center text-xs font-bold leading-tight text-white">{page.primaryCta.label}</Link>
       </div>
     </main>

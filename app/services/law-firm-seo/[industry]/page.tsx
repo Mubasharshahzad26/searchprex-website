@@ -29,13 +29,15 @@ export async function generateMetadata({
   return {
     title: page.metaTitle,
     description: page.metaDescription,
-    keywords: [
-      page.primaryKeyword,
-      ...page.keywordMap.commercial,
-      ...page.keywordMap.problem,
-      ...page.keywordMap.local,
-      ...page.capsules.map((item) => item.q),
-    ],
+    ...(page.slug !== "family-law" ? {
+      keywords: [
+        page.primaryKeyword,
+        ...page.keywordMap.commercial,
+        ...page.keywordMap.problem,
+        ...page.keywordMap.local,
+        ...page.capsules.map((item) => item.q),
+      ],
+    } : {}),
     alternates: { canonical: url },
     openGraph: {
       title: page.metaTitle,
@@ -60,6 +62,7 @@ export default async function IndustryPage({
   if (!page) notFound();
 
   const url = `${SITE}/services/law-firm-seo/${page.slug}`;
+  const pageReviewDate = page.slug === "family-law" ? "2026-11-02" : LAST_REVIEWED;
   const questions = [...page.capsules, ...page.faqs];
   const jsonLd = {
     "@context": "https://schema.org",
@@ -74,14 +77,14 @@ export default async function IndustryPage({
         about: { "@id": `${url}#service` },
         author: founderRef,
         reviewedBy: founderRef,
-        dateModified: LAST_REVIEWED,
+        dateModified: pageReviewDate,
         mainEntity: { "@id": `${url}#service` },
-        mentions: {
+        ...(page.slug !== "family-law" ? { mentions: {
           "@type": "DefinedTerm",
           name: page.framework.name,
           description: page.framework.definition,
           inDefinedTermSet: { "@type": "CreativeWork", name: "SearchPrex Law Firm SEO Frameworks", url: `${SITE}/llms.txt` },
-        },
+        } } : {}),
       },
       {
         "@type": "Service",
