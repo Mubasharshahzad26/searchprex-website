@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
+import { Target, Bot, Code2, Search, Sparkles, TrendingUp, CheckCircle2, ArrowRight } from 'lucide-react'
 import PlatformHubNav from '../../../components/platform/PlatformHubNav'
 import NewsCommentModal from '../../../components/news/NewsCommentModal'
 
@@ -257,8 +258,114 @@ ORDER BY bytes DESC LIMIT 10;`,
   },
 ]
 
-export default function SolutionsClient() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL')
+export interface SolutionsClientProps {
+  mode?: 'international' | 'usa'
+}
+
+export const INTERNATIONAL_TOOLS = [
+  {
+    id: 'serp-checker',
+    name: 'Live Google SERP Checker',
+    href: '/resources/solution/serp-checker',
+    badge: 'Rank Tracking',
+    status: 'Free Tool',
+    icon: Target,
+    description:
+      'Check live desktop & mobile Google rankings for any keyword across 40+ countries. Inspect Top 10 organic results, People Also Ask boxes, and SERP features.',
+    features: ['Desktop & Mobile Rankings', '40+ Country Locales', 'SERP Features & PAA'],
+    cta: 'Launch SERP Checker',
+  },
+  {
+    id: 'llms-txt-generator',
+    name: 'llms.txt & AI Crawler Generator',
+    href: '/resources/solution/llms-txt-generator',
+    badge: 'GEO / AI Search',
+    status: 'Spec Compliant',
+    icon: Bot,
+    description:
+      'Generate a spec-compliant /llms.txt Markdown manifest and robots.txt directives for ChatGPT (OAI-SearchBot), PerplexityBot, ClaudeBot, and Google-Extended.',
+    features: ['Official Markdown Spec', 'AI Bot robots.txt Rules', 'Instant File Download'],
+    cta: 'Generate llms.txt',
+  },
+  {
+    id: 'schema-generator',
+    name: 'Schema Markup Generator',
+    href: '/resources/solution/schema-generator',
+    badge: 'Structured Data',
+    status: 'Rich Results',
+    icon: Code2,
+    description:
+      'Build and validate Google-compliant JSON-LD for LocalBusiness, LawFirm, Product, FAQPage, Article, and Organization with live copy-paste code snippets.',
+    features: ['6 Core Schema Types', 'Google Rich Result Ready', 'One-Click JSON-LD Copy'],
+    cta: 'Generate Schema',
+  },
+  {
+    id: 'serp-simulator',
+    name: 'Google SERP Snippet Simulator',
+    href: '/resources/solution/serp-simulator',
+    badge: 'Snippet Optimizer',
+    status: 'Pixel Width',
+    icon: Search,
+    description:
+      "Preview title tags and meta descriptions measured against Google's exact 600px desktop and 960px mobile limits with real-time truncation warnings.",
+    features: ['Exact Pixel Meter (600px/960px)', 'Desktop & Mobile Preview', 'Truncation Warning'],
+    cta: 'Simulate SERP Snippet',
+  },
+  {
+    id: 'ai-search',
+    name: 'AI Search Engine Visibility Audit',
+    href: '/resources/solution/ai-search',
+    badge: 'AI Visibility',
+    status: 'GEO Audit',
+    icon: Sparkles,
+    description:
+      'Benchmark brand citations and answer-chunk extraction in ChatGPT Search, Google AI Overviews, and Perplexity across high-value commercial queries.',
+    features: ['AI Overview Citations', 'Answer-Chunk Extraction', 'Information Gain Audit'],
+    cta: 'Audit AI Search Visibility',
+  },
+]
+
+export const USA_TOOLS = [
+  {
+    id: 'intake-assistant',
+    name: 'AI Legal Intake Assistant for Law Firms',
+    href: '/resources/solution/intake-assistant',
+    badge: 'USA Law Firms',
+    status: '24/7 Live Intake',
+    icon: Bot,
+    description:
+      'Capture, qualify, and triage personal injury, family law, criminal defense, and estate planning leads 24/7 with zero lag time and automated case summaries.',
+    features: ['24/7 Lead Qualification', 'Instant Case Summaries', 'Conflict-Free Triage'],
+    cta: 'Open AI Intake Assistant',
+  },
+  {
+    id: 'case-calculator',
+    name: 'Lost Case Revenue Calculator',
+    href: '/resources/solution/case-calculator',
+    badge: 'Revenue Recovery',
+    status: 'Firm ROI Modeler',
+    icon: TrendingUp,
+    description:
+      'Quantify the real dollar revenue lost each month due to slow lead response, missed phone calls, and dropping out of Google Map Pack Top 3.',
+    features: ['Average Case Fee Modeler', 'Speed-to-Lead Loss Analysis', 'Map Pack Deficit Calculation'],
+    cta: 'Calculate Lost Revenue',
+  },
+  {
+    id: 'keyword-research',
+    name: 'State-Level Law Firm Keyword Research',
+    href: '/resources/solution/keyword-research',
+    badge: '50 US States',
+    status: 'Legal Intelligence',
+    icon: Target,
+    description:
+      'Explore high-CPC, high-intent legal search terms across all 50 US states categorized by practice area (PI, Criminal, Divorce, Immigration, Employment).',
+    features: ['All 50 US States Covered', 'Practice Area Search Volumes', 'High-Intent Commercial Filter'],
+    cta: 'Explore State Keywords',
+  },
+]
+
+export default function SolutionsClient({ mode = 'international' }: SolutionsClientProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string>(mode === 'usa' ? 'Law Firm Issues & Solution' : 'ALL')
   const [selectedSeverity, setSelectedSeverity] = useState<string>('ALL')
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
@@ -461,8 +568,23 @@ export default function SolutionsClient() {
                   Resources
                 </Link>
                 <span>/</span>
-                <span style={{ color: '#171a22', fontWeight: 600 }}>Issues &amp; Solutions</span>
+                {mode === 'usa' ? (
+                  <>
+                    <Link href="/resources/solution" style={{ color: '#6c6e79', textDecoration: 'none' }}>
+                      Solutions
+                    </Link>
+                    <span>/</span>
+                    <span style={{ color: '#171a22', fontWeight: 600 }}>USA Dashboard</span>
+                  </>
+                ) : (
+                  <span style={{ color: '#171a22', fontWeight: 600 }}>Issues &amp; Solutions</span>
+                )}
               </nav>
+
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#f1f5f9', padding: '4px 10px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 700, color: '#0f172a', marginBottom: '10px' }}>
+                <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: '#10b981' }} />
+                {mode === 'usa' ? 'USA-Centric Recovery & Solutions' : 'International SEO Solutions & Free Tools'}
+              </div>
 
               <h1
                 style={{
@@ -474,7 +596,9 @@ export default function SolutionsClient() {
                   marginBottom: '12px',
                 }}
               >
-                SEO Issues &amp; Verified Solutions Library
+                {mode === 'usa'
+                  ? 'USA SEO Solutions & Law Firm Engineering Dashboard'
+                  : 'SEO Issues & Verified Solutions Library'}
               </h1>
               <p
                 style={{
@@ -484,9 +608,9 @@ export default function SolutionsClient() {
                   margin: 0,
                 }}
               >
-                Diagnostic engineering playbooks built from real client recoveries. Filter by platform to inspect the{' '}
-                <strong>Exact Symptom</strong>, <strong>Algorithmic Root Cause</strong>,{' '}
-                <strong>Step-by-Step Fix</strong>, and production-ready code snippets.
+                {mode === 'usa'
+                  ? 'Specialized lead capture utilities, case revenue recovery calculators, and state-level keyword intelligence tailored for American trial attorneys, medical practices, and multi-location firms.'
+                  : 'Diagnostic engineering playbooks and free tools built from real client recoveries worldwide. Inspect exact symptoms, algorithmic root causes, and production-ready code fixes.'}
               </p>
             </div>
 
@@ -505,7 +629,7 @@ export default function SolutionsClient() {
                   cursor: 'pointer',
                 }}
               >
-                + Submit an SEO Issue
+                {mode === 'usa' ? '+ Submit a US SEO Issue' : '+ Submit an SEO Issue'}
               </button>
               <Link
                 href="/free-audit"
@@ -520,9 +644,201 @@ export default function SolutionsClient() {
                   textDecoration: 'none',
                 }}
               >
-                Request Custom Engineering Fix â†’
+                Request Custom Engineering Fix →
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Tools Section */}
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #e2e5eb', padding: '36px 0 44px' }}>
+        <div className="container" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '16px', marginBottom: '24px' }}>
+            <div>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748b' }}>
+                {mode === 'usa' ? '🇺🇸 Specialized US Software Utilities' : '🌐 Free Engineering Utilities (Zero Signup)'}
+              </span>
+              <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', margin: '4px 0 0', letterSpacing: '-0.02em' }}>
+                {mode === 'usa' ? 'USA High-Ticket Growth & Legal Tools' : 'Production-Ready SEO & AI Search Tools'}
+              </h2>
+              <p style={{ fontSize: '0.92rem', color: '#475569', margin: '6px 0 0' }}>
+                {mode === 'usa'
+                  ? 'Purpose-built for American legal firms, private practices, and high-ticket service operations.'
+                  : 'Instant web tools to benchmark SERPs, validate schema, simulate pixel snippets, and configure AI bots.'}
+              </p>
+            </div>
+
+            <div>
+              {mode === 'usa' ? (
+                <Link
+                  href="/resources/solution"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: '#0f172a',
+                    background: '#f8fafc',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '8px',
+                    padding: '8px 14px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span>🌐</span> Switch to International Tools Library →
+                </Link>
+              ) : (
+                <Link
+                  href="/resources/solution/usa"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: '#0f172a',
+                    background: '#f8fafc',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '8px',
+                    padding: '8px 14px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span>🇺🇸</span> Switch to USA Law Firm Dashboard →
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: mode === 'usa' ? 'repeat(auto-fit, minmax(320px, 1fr))' : 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '20px',
+            }}
+          >
+            {(mode === 'usa' ? USA_TOOLS : INTERNATIONAL_TOOLS).map((tool) => {
+              const Icon = tool.icon
+              return (
+                <div
+                  key={tool.id}
+                  style={{
+                    background: '#fafbfc',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '14px',
+                    padding: '24px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '42px',
+                          height: '42px',
+                          borderRadius: '10px',
+                          background: '#0f172a',
+                          color: '#ffffff',
+                        }}
+                      >
+                        <Icon size={20} />
+                      </span>
+                      <div style={{ display: 'flex', gap: '6px' }}>
+                        <span
+                          style={{
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            padding: '3px 8px',
+                            borderRadius: '6px',
+                            background: '#f1f5f9',
+                            color: '#334155',
+                          }}
+                        >
+                          {tool.badge}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            padding: '3px 8px',
+                            borderRadius: '6px',
+                            background: '#ecfdf5',
+                            color: '#059669',
+                          }}
+                        >
+                          {tool.status}
+                        </span>
+                      </div>
+                    </div>
+
+                    <h3 style={{ fontSize: '1.12rem', fontWeight: 800, color: '#0f172a', margin: '0 0 8px', lineHeight: 1.3 }}>
+                      {tool.name}
+                    </h3>
+
+                    <p style={{ fontSize: '0.86rem', color: '#475569', lineHeight: 1.55, margin: '0 0 16px' }}>
+                      {tool.description}
+                    </p>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '20px' }}>
+                      {tool.features.map((feat, idx) => (
+                        <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#334155' }}>
+                          <CheckCircle2 size={14} color="#10b981" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Link
+                    href={tool.href}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      background: '#0f172a',
+                      color: '#ffffff',
+                      fontWeight: 700,
+                      fontSize: '0.86rem',
+                      padding: '11px 16px',
+                      borderRadius: '10px',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <span>{tool.cta}</span>
+                    <ArrowRight size={15} />
+                  </Link>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Playbooks & Issues Header Strip */}
+      <section style={{ paddingTop: '28px', paddingBottom: '8px' }}>
+        <div className="container" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '12px' }}>
+            <div>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748b' }}>
+                Engineering Knowledgebase
+              </span>
+              <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#0f172a', margin: '2px 0 0', letterSpacing: '-0.02em' }}>
+                {mode === 'usa' ? 'USA Legal & Local Issue Diagnostic Playbooks' : 'Verified SEO Issue Playbooks & Root-Cause Fixes'}
+              </h2>
+            </div>
+            <span style={{ fontSize: '0.82rem', color: '#64748b', fontWeight: 600 }}>
+              Showing {filteredSolutions.length} Playbooks
+            </span>
           </div>
 
           {/* 5 Category Tabs from Structure Spec */}
@@ -531,8 +847,8 @@ export default function SolutionsClient() {
               display: 'flex',
               flexWrap: 'wrap',
               gap: '8px',
-              marginTop: '28px',
-              paddingTop: '20px',
+              marginTop: '16px',
+              paddingTop: '16px',
               borderTop: '1px solid #edf0f5',
             }}
           >

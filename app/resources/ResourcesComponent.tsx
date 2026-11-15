@@ -45,6 +45,15 @@ const hardcodedCategories: ResourceCard[] = [
     cta: "Explore solutions library",
   },
   {
+    id: "hc-solutions-usa",
+    icon: Wrench,
+    title: "USA Solutions & Law Firm Dashboard",
+    desc: "USA-focused growth utilities: AI Legal Intake Assistant for law firms, Lost Case Value Calculator, and state-level keyword intelligence across all 50 states.",
+    status: "live",
+    href: "/resources/solution/usa",
+    cta: "Open USA dashboard",
+  },
+  {
     id: "hc-learning-hub",
     icon: GraduationCap,
     title: "SEO Learning Hub & 20-Module Playbooks",

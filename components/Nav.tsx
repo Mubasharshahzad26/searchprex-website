@@ -75,6 +75,11 @@ const navLinks: NavLink[] = [
     label: "Pricing",
   },
   {
+    // A direct link: the blog used to sit at the bottom of the Resources menu.
+    href: "/blog",
+    label: "Blog",
+  },
+  {
     href: "/resources",
     label: "Resources",
     hasDropdown: true,
@@ -83,16 +88,30 @@ const navLinks: NavLink[] = [
 
 const INTERNATIONAL_RESOURCES = [
   { href: "/resources/news", label: "Industry News Desk", badge: "Live", desc: "Dated & verified Google core & spam updates" },
-  { href: "/resources/solution", label: "Issues & Solutions Library", badge: "New", desc: "Diagnostic fixes & free SEO tool suites" },
+  { href: "/resources/solution", label: "Issues & Solutions Library", badge: "5 Tools", desc: "SERP Checker, Schema, llms.txt & issue fixes" },
   { href: "/resources/forum", label: "SEO Discussion Forum", badge: "New", desc: "Practitioner Q&A and technical benchmarks" },
   { href: "/resources/learning-hub", label: "SEO Learning Hub", badge: "New", desc: "Masterclasses for Core SEO, Shopify & WP" },
 ];
 
 const USA_RESOURCES = [
   { href: "/resources/news/usa", label: "USA News Engine", desc: "State-level Map Pack shifts & US local radar" },
-  { href: "/resources/solution/usa", label: "USA Solutions Dashboard", desc: "Law firm intake, lost cases & local recovery" },
+  { href: "/resources/solution/usa", label: "USA Solutions Dashboard", badge: "3 Tools", desc: "Law firm intake, lost cases & state keywords" },
   { href: "/resources/forum/usa", label: "USA Discussion Boards", desc: "US metro & state practitioner threads" },
   { href: "/resources/learning-hub/usa", label: "USA Learning Hub Playbooks", desc: "Local 3-Pack domination & legal playbooks" },
+];
+
+const INTERNATIONAL_TOOLS = [
+  { href: "/resources/solution/serp-checker", label: "SERP Checker" },
+  { href: "/resources/solution/schema-generator", label: "Schema Generator" },
+  { href: "/resources/solution/llms-txt-generator", label: "llms.txt Generator" },
+  { href: "/resources/solution/serp-simulator", label: "SERP Simulator" },
+  { href: "/resources/solution/ai-search", label: "AI Search Diagnostic" },
+];
+
+const USA_TOOLS = [
+  { href: "/resources/solution/intake-assistant", label: "AI Intake Assistant" },
+  { href: "/resources/solution/case-calculator", label: "Lost Case Calculator" },
+  { href: "/resources/solution/keyword-research", label: "Law Firm Keywords" },
 ];
 
 const PRACTITIONER_VAULTS = [
@@ -314,6 +333,25 @@ export default function Nav() {
                                     </Link>
                                   ))}
                                 </div>
+
+                                {/* Quick International Tools */}
+                                <div className="mt-3 pt-2.5 border-t border-slate-100">
+                                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                                    Free International Tools:
+                                  </span>
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {INTERNATIONAL_TOOLS.map((tool) => (
+                                      <Link
+                                        key={tool.href}
+                                        href={tool.href}
+                                        onClick={() => setActiveDropdown(null)}
+                                        className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700 transition-colors hover:bg-neutral-900 hover:text-white"
+                                      >
+                                        {tool.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
                               </div>
 
                               {/* Column 2: USA-Centric */}
@@ -329,12 +367,36 @@ export default function Nav() {
                                       onClick={() => setActiveDropdown(null)}
                                       className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
                                     >
-                                      <div className="text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
-                                        {item.label}
+                                      <div className="flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
+                                        <span>{item.label}</span>
+                                        {item.badge && (
+                                          <span className="rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 text-[9px] font-bold uppercase">
+                                            {item.badge}
+                                          </span>
+                                        )}
                                       </div>
                                       <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
                                     </Link>
                                   ))}
+                                </div>
+
+                                {/* Quick USA Tools */}
+                                <div className="mt-3 pt-2.5 border-t border-slate-100">
+                                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                                    USA Law Firm Tools:
+                                  </span>
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {USA_TOOLS.map((tool) => (
+                                      <Link
+                                        key={tool.href}
+                                        href={tool.href}
+                                        onClick={() => setActiveDropdown(null)}
+                                        className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700 transition-colors hover:bg-neutral-900 hover:text-white"
+                                      >
+                                        {tool.label}
+                                      </Link>
+                                    ))}
+                                  </div>
                                 </div>
                               </div>
 
@@ -509,6 +571,18 @@ export default function Nav() {
                                 </Link>
                               ))}
                             </div>
+                            <div className="mt-2 flex flex-wrap gap-1">
+                              {INTERNATIONAL_TOOLS.map((tool) => (
+                                <Link
+                                  key={tool.href}
+                                  href={tool.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-700 hover:bg-neutral-900 hover:text-white"
+                                >
+                                  {tool.label}
+                                </Link>
+                              ))}
+                            </div>
                           </div>
 
                           <div>
@@ -521,9 +595,26 @@ export default function Nav() {
                                   key={item.href}
                                   href={item.href}
                                   onClick={() => setIsMobileMenuOpen(false)}
-                                  className="block py-1 text-sm text-slate-700 hover:text-neutral-950"
+                                  className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
                                 >
-                                  {item.label}
+                                  <span>{item.label}</span>
+                                  {item.badge && (
+                                    <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.2 text-[9px] font-bold text-neutral-900">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                            <div className="mt-2 flex flex-wrap gap-1">
+                              {USA_TOOLS.map((tool) => (
+                                <Link
+                                  key={tool.href}
+                                  href={tool.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-700 hover:bg-neutral-900 hover:text-white"
+                                >
+                                  {tool.label}
                                 </Link>
                               ))}
                             </div>

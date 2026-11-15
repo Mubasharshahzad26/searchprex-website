@@ -80,7 +80,7 @@ export default function SolutionPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <SolutionsClient />
+      <SolutionsClient mode="international" />
       <Footer />
     </>
   )

@@ -78,7 +78,7 @@ export default function SolutionUsaPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <SolutionsClient />
+      <SolutionsClient mode="usa" />
       <Footer />
     </>
   )
