@@ -177,7 +177,12 @@ export default function IntakeAssistantSolutionPage() {
           <SectionHeading eyebrow="How it works" title="Built for law firm intake, not generic chat" />
           <CardGrid columns={2}>
             {DOES.map((item) => (
-              <FeatureCard key={item.title} icon={item.icon} title={item.title} body={item.body} />
+              <FeatureCard
+                key={item.title}
+                icon={<item.icon className="h-5 w-5 text-neutral-900" aria-hidden />}
+                title={item.title}
+                body={item.body}
+              />
             ))}
           </CardGrid>
         </Section>

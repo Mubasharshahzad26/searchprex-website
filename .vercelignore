@@ -1,0 +1,13 @@
+.git
+.claude
+.tmp-linkfix
+.pnpm-store
+previews
+scratch
+node_modules
+.next
+*.log
+*.csv
+*.pdf
+public/video
+*.tsbuildinfo
