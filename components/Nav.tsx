@@ -92,11 +92,11 @@ const navLinks: NavLink[] = [
 ];
 
 const INTERNATIONAL_SOLUTIONS = [
-  { href: "/resources/solution#playbooks", label: "Diagnostic Recovery Playbooks", badge: "Core", desc: "Root-cause fixes for GSC indexing, canonical loops & LCP" },
-  { href: "/resources/solution/serp-checker", label: "Live Google SERP Checker", badge: "Live", desc: "40+ countries ranking & SERP feature telemetry" },
+  { href: "/resources/solution#playbooks", label: "Engineering Issue Playbooks", badge: "Playbooks", desc: "Root-cause fixes for GSC indexing, canonical loops & LCP" },
+  { href: "/resources/solution/serp-checker", label: "Live SERP Ranking Checker", badge: "Live", desc: "40+ countries ranking & SERP feature telemetry" },
   { href: "/resources/solution/schema-generator", label: "Schema Markup Generator", desc: "Google-validated JSON-LD for Local, Law & Ecommerce" },
   { href: "/resources/solution/llms-txt-generator", label: "llms.txt & AI Crawler Generator", desc: "AI bot directives for ChatGPT, Perplexity & Claude" },
-  { href: "/resources/solution/serp-simulator", label: "Google SERP Snippet Simulator", desc: "600px desktop & 960px mobile pixel ruler" },
+  { href: "/resources/solution/serp-simulator", label: "SERP Snippet Simulator", desc: "600px desktop & 960px mobile pixel ruler" },
   { href: "/resources/solution/ai-search", label: "AI Search Visibility Audit", desc: "Benchmark citations in Perplexity & AI Overviews" },
 ];
 
@@ -104,20 +104,20 @@ const USA_SOLUTIONS = [
   { href: "/resources/solution/intake-assistant", label: "AI Legal Intake Assistant", badge: "Law Firm", desc: "24/7 lead qualification & instant case summaries" },
   { href: "/resources/solution/case-calculator", label: "Lost Case Revenue Calculator", badge: "ROI", desc: "Quantify monthly lost revenue from missed calls" },
   { href: "/resources/solution/keyword-research", label: "State Legal Keyword Intelligence", desc: "Practice area search volume across 50 US states" },
-  { href: "/resources/solution/usa#playbooks", label: "Law Firm GBP Reinstatement Playbook", desc: "Single-appeal packet & virtual office audit" },
-  { href: "/services/local-seo/google-business-profile-suspended", label: "GBP Suspension Assistance", desc: "Fast-track reinstatement for suspended listings" },
+  { href: "/resources/solution/usa#playbooks", label: "Law Firm GBP Reinstatement", desc: "Single-appeal packet & virtual office audit" },
+  { href: "/services/local-seo/google-business-profile-suspended", label: "Google Business Profile Recovery", desc: "Direct assistance for suspended business listings" },
 ];
 
 const INTERNATIONAL_RESOURCES = [
   { href: "/resources/news", label: "Industry News Desk", badge: "Live", desc: "Dated & verified Google core & spam updates" },
-  { href: "/resources/forum", label: "SEO Discussion Forum", badge: "New", desc: "Practitioner Q&A and technical benchmarks" },
-  { href: "/resources/learning-hub", label: "SEO Learning Hub", badge: "New", desc: "Masterclasses for Core SEO, Shopify & WP" },
+  { href: "/resources/forum", label: "SEO Discussion Forum", badge: "Community", desc: "Practitioner Q&A and technical benchmarks" },
+  { href: "/resources/learning-hub", label: "SEO Learning Hub", desc: "Masterclasses for Core SEO, Shopify & WP" },
 ];
 
 const USA_RESOURCES = [
-  { href: "/resources/news/usa", label: "USA News Engine", desc: "State-level Map Pack shifts & US local radar" },
-  { href: "/resources/forum/usa", label: "USA Discussion Boards", desc: "US metro & state practitioner threads" },
-  { href: "/resources/learning-hub/usa", label: "USA Learning Hub Playbooks", desc: "Local 3-Pack domination & legal playbooks" },
+  { href: "/resources/news/usa", label: "USA News Engine", badge: "US Radar", desc: "State-level Map Pack shifts & localized volatility" },
+  { href: "/resources/forum/usa", label: "USA Discussion Boards", desc: "State & metro practitioner discussions" },
+  { href: "/resources/learning-hub/usa", label: "USA Learning Hub Playbooks", desc: "Local 3-Pack domination & legal strategies" },
 ];
 
 const PRACTITIONER_VAULTS = [
@@ -317,15 +317,15 @@ export default function Nav() {
                               {/* Column 1: International Solutions */}
                               <div>
                                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-                                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900">
-                                    <span>🌐</span> International Solutions
+                                  <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                                    GLOBAL CAPABILITIES
                                   </div>
                                   <Link
                                     href="/resources/solution"
                                     onClick={() => setActiveDropdown(null)}
                                     className="text-[11px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
                                   >
-                                    View Hub →
+                                    Explore All Solutions →
                                   </Link>
                                 </div>
                                 <div className="space-y-1.5">
@@ -353,15 +353,15 @@ export default function Nav() {
                               {/* Column 2: USA Solutions */}
                               <div className="pl-6">
                                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-                                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900">
-                                    <span>🇺🇸</span> USA High-Ticket Solutions
+                                  <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                                    UNITED STATES MARKET
                                   </div>
                                   <Link
                                     href="/resources/solution/usa"
                                     onClick={() => setActiveDropdown(null)}
                                     className="text-[11px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
                                   >
-                                    View Dashboard →
+                                    View USA Dashboard →
                                   </Link>
                                 </div>
                                 <div className="space-y-1.5">
@@ -389,7 +389,7 @@ export default function Nav() {
 
                             {/* Footer link */}
                             <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                              <span className="text-[#6c727f]">Verified recovery playbooks &amp; diagnostic engineering suites</span>
+                              <span className="text-[#6c727f]">Diagnostic engineering suites &amp; practice-area recovery frameworks</span>
                               <div className="flex items-center gap-3">
                                 <Link
                                   href="/resources/solution"
@@ -422,8 +422,8 @@ export default function Nav() {
                             <div className="grid grid-cols-3 gap-6 divide-x divide-slate-100">
                               {/* Column 1: International */}
                               <div>
-                                <div className="flex items-center gap-1.5 pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
-                                  <span>🌐</span> International Resources
+                                <div className="pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
+                                  GLOBAL RESEARCH &amp; LEARNING
                                 </div>
                                 <div className="space-y-2">
                                   {INTERNATIONAL_RESOURCES.map((item) => (
@@ -449,8 +449,8 @@ export default function Nav() {
 
                               {/* Column 2: USA-Centric */}
                               <div className="pl-6">
-                                <div className="flex items-center gap-1.5 pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
-                                  <span>🇺🇸</span> USA-Centric Recovery
+                                <div className="pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
+                                  UNITED STATES REGIONAL
                                 </div>
                                 <div className="space-y-2">
                                   {USA_RESOURCES.map((item) => (
@@ -476,8 +476,8 @@ export default function Nav() {
 
                               {/* Column 3: Practitioner Vaults & Checklists */}
                               <div className="pl-6">
-                                <div className="flex items-center gap-1.5 pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
-                                  <span>📋</span> Practitioner Vaults
+                                <div className="pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
+                                  ENGINEERING CHECKLISTS &amp; REPO
                                 </div>
                                 <div className="space-y-1">
                                   {PRACTITIONER_VAULTS.map((item) => (
@@ -496,13 +496,13 @@ export default function Nav() {
 
                             {/* Footer Hub Link inside Mega Menu */}
                             <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                              <span className="text-[#6c727f]">Central intelligence &amp; practitioner playbooks</span>
+                              <span className="text-[#6c727f]">Practitioner checklists, regex libraries, and editorial insights</span>
                               <Link
                                 href="/resources"
                                 onClick={() => setActiveDropdown(null)}
                                 className="font-bold text-neutral-950 hover:underline flex items-center gap-1"
                               >
-                                View All Resources Hub →
+                                View All Resources →
                               </Link>
                             </div>
                           </div>
@@ -627,7 +627,7 @@ export default function Nav() {
                           <div>
                             <div className="flex items-center justify-between py-1">
                               <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                                🌐 International Solutions
+                                GLOBAL CAPABILITIES
                               </span>
                               <Link
                                 href="/resources/solution"
@@ -659,7 +659,7 @@ export default function Nav() {
                           <div>
                             <div className="flex items-center justify-between py-1">
                               <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                                🇺🇸 USA High-Ticket Solutions
+                                UNITED STATES MARKET
                               </span>
                               <Link
                                 href="/resources/solution/usa"
@@ -692,7 +692,7 @@ export default function Nav() {
                         <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">
                           <div>
                             <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                              🌐 International Resources
+                              GLOBAL RESEARCH &amp; LEARNING
                             </span>
                             <div className="mt-1 space-y-1">
                               {INTERNATIONAL_RESOURCES.map((item) => (
@@ -715,7 +715,7 @@ export default function Nav() {
 
                           <div>
                             <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                              🇺🇸 USA-Centric
+                              UNITED STATES REGIONAL
                             </span>
                             <div className="mt-1 space-y-1">
                               {USA_RESOURCES.map((item) => (
@@ -738,7 +738,7 @@ export default function Nav() {
 
                           <div>
                             <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                              📋 Practitioner Vaults
+                              ENGINEERING CHECKLISTS &amp; REPO
                             </span>
                             <div className="mt-1 space-y-1">
                               {PRACTITIONER_VAULTS.map((item) => (
