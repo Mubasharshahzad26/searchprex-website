@@ -1,5 +1,5 @@
-// app/services/page.tsx
-// Proof-first services page — 4 core services, each backed by a real metric
+﻿// app/services/page.tsx
+// Proof-first services page â€” 4 core services, each backed by a real metric
 // and a link to its verified case study. Server Component (no client JS):
 // fast, fully crawlable, native <details> FAQ. CRO: proof band up top,
 // founder E-E-A-T strip, repeated single CTA, floating Reality Check.
@@ -42,7 +42,7 @@ const baseMetadata: Metadata = {
     "SEO services in the USA for law firms, local and small businesses and online stores, each with published prices and screenshot proof. Month to month.",
   alternates: { canonical: `${SITE}/services` },
   openGraph: {
-    title: "SEO Services USA — Law Firm, Ecommerce, Local, Technical & AI Search | SearchPrex",
+    title: "SEO Services USA â€” Law Firm, Ecommerce, Local, Technical & AI Search | SearchPrex",
     description:
       "Five SEO services with GSC-verified results. Founder-led, proof-first. Free audit + 90-day roadmap.",
     url: `${SITE}/services`,
@@ -50,7 +50,7 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SEO Services USA — Law Firm, Ecommerce, Local, Technical & AI Search",
+    title: "SEO Services USA â€” Law Firm, Ecommerce, Local, Technical & AI Search",
     description:
       "Five SEO services with GSC-verified results. Founder-led. Free audit + 90-day roadmap.",
   },
@@ -60,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageSEO("/services", baseMetadata);
 }
 
-/* ── 5 core services — each tied to a REAL verified result ── */
+/* â”€â”€ 5 core services â€” each tied to a REAL verified result â”€â”€ */
 const services = [
   {
     icon: Scale,
@@ -82,9 +82,9 @@ const services = [
       alt: "Google Search Console performance report for Mammoth Roofing in Texas showing 45.2K impressions in 28 days.",
       width: 624,
       height: 334,
-      figure: "16.9K → 45.2K",
+      figure: "16.9K â†’ 45.2K",
       figureLabel: "impressions in 28 days",
-      caption: "High-intent regional query demand — Mammoth Roofing, Texas. We apply the same practice-area entity architecture for law firms.",
+      caption: "High-intent regional query demand â€” Mammoth Roofing, Texas. We apply the same practice-area entity architecture for law firms.",
     },
     proofLink: "/case-studies",
     proofLabel: "See every case study",
@@ -98,7 +98,7 @@ const services = [
     forWho: "For stores with thousands of products Google ignores.",
     includes: [
       "Mass non-indexing recovery (GSC-verified)",
-      "Product & category content at scale — no thin pages",
+      "Product & category content at scale â€” no thin pages",
       "Product schema, crawl budget & Core Web Vitals",
       "Brand-by-brand content strategy",
     ],
@@ -107,9 +107,9 @@ const services = [
       alt: "SMK Store WooCommerce dashboard for June 2026 showing $19,100.71 net sales this month.",
       width: 863,
       height: 350,
-      figure: "$5.8K → $19.1K",
-      figureLabel: "monthly net sales, Apr → Jun 2026",
-      caption: "SMK Store — WooCommerce dashboard, June 2026.",
+      figure: "$5.8K â†’ $19.1K",
+      figureLabel: "monthly net sales, Apr â†’ Jun 2026",
+      caption: "SMK Store â€” WooCommerce dashboard, June 2026.",
     },
     proofLink: "/case-studies/ecommerce/smk-store",
     proofLabel: "Read the SMK Store case study",
@@ -132,9 +132,9 @@ const services = [
       alt: "Google Search Console comparison for D.O.L.L.S. Cleaning: 264 clicks and 106K impressions in July 2025 against 192 clicks and 41K impressions in June 2025.",
       width: 626,
       height: 239,
-      figure: "192 → 264",
-      figureLabel: "monthly clicks, Jun → Jul 2025",
-      caption: "D.O.L.L.S. Cleaning, Michigan — Search Console.",
+      figure: "192 â†’ 264",
+      figureLabel: "monthly clicks, Jun â†’ Jul 2025",
+      caption: "D.O.L.L.S. Cleaning, Michigan â€” Search Console.",
     },
     proofLink: "/case-studies/cleaning/dolls-cleaning",
     proofLabel: "Read the D.O.L.L.S. Cleaning case study",
@@ -145,7 +145,7 @@ const services = [
     slug: "/services/technical-seo",
     color: "#185FA5",
     bg: "#E6F1FB",
-    forWho: "For sites where something is broken — and nobody can find it.",
+    forWho: "For sites where something is broken â€” and nobody can find it.",
     includes: [
       "Full technical audit (crawl, indexation, logs)",
       "Indexing recovery & sitemap architecture",
@@ -157,9 +157,9 @@ const services = [
       alt: "Google Search Console Pages report for Michigan Sports & Outdoor showing 11,549 indexed pages on 25 July 2026.",
       width: 778,
       height: 520,
-      figure: "3,000 → 11,549",
-      figureLabel: "pages indexed, May → Jul 2026",
-      caption: "Michigan Sports & Outdoor — Search Console Pages report.",
+      figure: "3,000 â†’ 11,549",
+      figureLabel: "pages indexed, May â†’ Jul 2026",
+      caption: "Michigan Sports & Outdoor â€” Search Console Pages report.",
     },
     proofLink: "/case-studies/ecommerce/michigan-outdoor-sports",
     proofLabel: "Read the Michigan case study",
@@ -184,7 +184,7 @@ const services = [
       height: 292,
       figure: "Named",
       figureLabel: "in Google's AI Overview",
-      caption: "HVAC Services Team, Simi Valley — Google Search.",
+      caption: "HVAC Services Team, Simi Valley â€” Google Search.",
     },
     proofLink: "/case-studies/hvac/local-hvac-services",
     proofLabel: "Read the HVAC case study",
@@ -209,7 +209,7 @@ const services = [
       height: 322,
       figure: "Rank #1",
       figureLabel: "AI Overview citation + organic rank",
-      caption: "D.O.L.L.S. Cleaning — named directly in Google's AI Overview and ranked #1 in organic results.",
+      caption: "D.O.L.L.S. Cleaning â€” named directly in Google's AI Overview and ranked #1 in organic results.",
     },
     proofLink: "/ai-search",
     proofLabel: "Explore AI search methodology",
@@ -220,24 +220,24 @@ const services = [
 // to read "20+ clients worldwide" (nothing backs it), "+285% pages indexed" and
 // "+285% indexing rate" (one fact twice) and "12K+ pages indexed".
 const bigStats = [
-  { v: "3,000 → 11,549", l: "Pages indexed · Michigan Sports & Outdoor" },
-  { v: "$5.8k → $19.1k", l: "Monthly revenue · SMK Store" },
-  { v: "#1", l: "AI Overview · D.O.L.L.S. Cleaning" },
-  { v: "16.9K → 45.2K", l: "Impressions in 28 days · Mammoth Roofing" },
+  { v: "3,000 â†’ 11,549", l: "Pages indexed Â· Michigan Sports & Outdoor" },
+  { v: "$5.8k â†’ $19.1k", l: "Monthly revenue Â· SMK Store" },
+  { v: "#1", l: "AI Overview Â· D.O.L.L.S. Cleaning" },
+  { v: "16.9K â†’ 45.2K", l: "Impressions in 28 days Â· Mammoth Roofing" },
 ];
 
 const faqs = [
   {
     q: "Which SEO service do I actually need?",
-    a: "Start with the free audit — the founder reviews your site and tells you exactly which of the four services (or which combination) will move the needle, with a 90-day roadmap. No guessing, no upselling.",
+    a: "Start with the free audit â€” the founder reviews your site and tells you exactly which of the four services (or which combination) will move the needle, with a 90-day roadmap. No guessing, no upselling.",
   },
   {
     q: "How are your SEO results verified?",
-    a: "Every figure we publish comes from the client's own dashboard — Google Search Console for clicks, impressions and indexing, the store's WooCommerce dashboard for sales, and Google's own results pages for rankings — and the screenshot is on the case study. Several case studies also have screen recordings.",
+    a: "Every figure we publish comes from the client's own dashboard â€” Google Search Console for clicks, impressions and indexing, the store's WooCommerce dashboard for sales, and Google's own results pages for rankings â€” and the screenshot is on the case study. Several case studies also have screen recordings.",
   },
   {
     q: "Who does the work on my SEO account?",
-    a: "The founder, Mubashar Sharif, leads every account personally — no juniors, no outsourcing. You work directly with the person behind the case studies on this site.",
+    a: "The founder, Mubashar Sharif, leads every account personally â€” no juniors, no outsourcing. You work directly with the person behind the case studies on this site.",
   },
   {
     q: "How much do your SEO services cost?",
@@ -340,7 +340,7 @@ export default function ServicesPage() {
         centered
         eyebrow="Every claim backed by GSC data"
         title={<>SEO Services USA That <Accent>Show Their Receipts</Accent></>}
-        subtitle="Six core services. No bloated menus, no vanity packages — each one is tied to a real, verified result you can inspect before you spend a dollar."
+        subtitle="Six core services. No bloated menus, no vanity packages â€” each one is tied to a real, verified result you can inspect before you spend a dollar."
         primaryCta={{
           href: "/free-audit",
           label: "Get Free SEO Audit",
@@ -349,12 +349,12 @@ export default function ServicesPage() {
         secondaryCta={{ href: "/case-studies", label: "See All Case Studies" }}
       />
 
-      {/* ─────────── 1.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV ─────────── */}
+      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 1.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="bg-neutral-900 border-y border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
-              ⚡
+              âš¡
             </span>
             <div>
               <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
@@ -367,28 +367,28 @@ export default function ServicesPage() {
           </div>
           <div className="flex flex-wrap items-center gap-2.5">
             <Link
-              href="/resources/solutions"
+              href="/resources/solution"
               className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
             >
-              🛠️ View Solutions Library
+              ðŸ› ï¸ View Solutions Library
             </Link>
             <Link
               href="/resources/news"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              📰 Latest News Desk
+              ðŸ“° Latest News Desk
             </Link>
             <Link
               href="/resources/learning-hub"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              📚 20-Module Playbooks
+              ðŸ“š 20-Module Playbooks
             </Link>
             <Link
-              href="/resources/discussions"
+              href="/resources/forum"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              💬 Discussions
+              ðŸ’¬ Discussions
             </Link>
           </div>
         </div>
@@ -396,7 +396,7 @@ export default function ServicesPage() {
 
       <StatStrip tone="ink" stats={bigStats.map((s) => ({ value: s.v, label: s.l }))} />
 
-      {/* ── 5 CORE SERVICES ── */}
+      {/* â”€â”€ 5 CORE SERVICES â”€â”€ */}
       <SpokeEssentials
         keyword="SEO services in the USA"
         answer="from SearchPrex cover law firm, local, small business, ecommerce, technical and AI search SEO, each with a published price, from $800 a month, and proof from clients' own dashboards. Tired of paying for clicks? Start with a free audit."
@@ -419,7 +419,7 @@ export default function ServicesPage() {
                 style={{ borderColor: color.border }}
               >
                 <div className="mb-5 flex items-center gap-4">
-                  {/* Per-service tints are categorical, like a chart palette —
+                  {/* Per-service tints are categorical, like a chart palette â€”
                       they identify which service a card is, and never appear on
                       headings, links or buttons. */}
                   <span
@@ -469,7 +469,7 @@ export default function ServicesPage() {
         </CardGrid>
       </Section>
 
-      {/* ── SERVICE COMPARISON MATRIX ── */}
+      {/* â”€â”€ SERVICE COMPARISON MATRIX â”€â”€ */}
       <Section tone="surface">
         <SectionHeading
           variant="center"
@@ -503,7 +503,7 @@ export default function ServicesPage() {
                 <td className="py-4 px-4 sm:px-6 font-semibold">{formatRange(RETAINER_PLANS[1])} / mo</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/law-firm-seo" className="font-bold text-[#185FA5] hover:underline">
-                    View Service →
+                    View Service â†’
                   </Link>
                 </td>
               </tr>
@@ -513,13 +513,13 @@ export default function ServicesPage() {
                     <ShoppingCart className="h-4 w-4" /> Ecommerce SEO
                   </Link>
                 </td>
-                <td className="py-4 px-4 sm:px-6">Shopify &amp; WooCommerce stores (1K–50K+ SKUs)</td>
+                <td className="py-4 px-4 sm:px-6">Shopify &amp; WooCommerce stores (1Kâ€“50K+ SKUs)</td>
                 <td className="py-4 px-4 sm:px-6">Mass indexing recovery, collection architecture, product schema</td>
-                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">$5.8K → $19.1K / mo net sales</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">$5.8K â†’ $19.1K / mo net sales</td>
                 <td className="py-4 px-4 sm:px-6 font-semibold">{formatRange(RETAINER_PLANS[2])} / mo</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/ecommerce-seo" className="font-bold text-[#185FA5] hover:underline">
-                    View Service →
+                    View Service â†’
                   </Link>
                 </td>
               </tr>
@@ -531,11 +531,11 @@ export default function ServicesPage() {
                 </td>
                 <td className="py-4 px-4 sm:px-6">Home services, contractors, multi-location brands</td>
                 <td className="py-4 px-4 sm:px-6">GBP reinstatement, geo-targeted city pages, citation cleanup</td>
-                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">+37.5% clicks (192 → 264)</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">+37.5% clicks (192 â†’ 264)</td>
                 <td className="py-4 px-4 sm:px-6 font-semibold">{formatRange(RETAINER_PLANS[0])} / mo</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/local-seo" className="font-bold text-[#185FA5] hover:underline">
-                    View Service →
+                    View Service â†’
                   </Link>
                 </td>
               </tr>
@@ -547,11 +547,11 @@ export default function ServicesPage() {
                 </td>
                 <td className="py-4 px-4 sm:px-6">Custom web apps, enterprise catalogs, broken crawls</td>
                 <td className="py-4 px-4 sm:px-6">Log file audits, Core Web Vitals, canonical &amp; sitemap fixes</td>
-                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">3,000 → 11,549 indexed pages</td>
+                <td className="py-4 px-4 sm:px-6 font-medium text-emerald-700">3,000 â†’ 11,549 indexed pages</td>
                 <td className="py-4 px-4 sm:px-6 font-semibold">Quoted after audit</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/services/technical-seo" className="font-bold text-[#185FA5] hover:underline">
-                    View Service →
+                    View Service â†’
                   </Link>
                 </td>
               </tr>
@@ -567,7 +567,7 @@ export default function ServicesPage() {
                 <td className="py-4 px-4 sm:px-6 font-semibold">Included in retainers</td>
                 <td className="py-4 px-4 sm:px-6 text-right">
                   <Link href="/ai-search" className="font-bold text-[#185FA5] hover:underline">
-                    View Service →
+                    View Service â†’
                   </Link>
                 </td>
               </tr>
@@ -576,7 +576,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* ── WHY: SearchPrex vs the alternatives ── */}
+      {/* â”€â”€ WHY: SearchPrex vs the alternatives â”€â”€ */}
       <SpokeWhyAndAi
         service="SEO services"
         title="SEO services USA: SearchPrex vs the alternatives"
@@ -584,14 +584,14 @@ export default function ServicesPage() {
         aiLine="Every plan includes the work that gets you named in ChatGPT, Gemini and Google AI Overviews: direct answers, schema and consistent business details."
       />
 
-      {/* ── FOUNDER E-E-A-T ── */}
+      {/* â”€â”€ FOUNDER E-E-A-T â”€â”€ */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead SEO Strategist · 5+ years"
-          quote="Every service on this page is led by me personally. 5+ years across local, international, technical, ecommerce and law firm SEO — no juniors, no outsourcing. The person behind these case studies works on your site."
+          role="Founder & Lead SEO Strategist Â· 5+ years"
+          quote="Every service on this page is led by me personally. 5+ years across local, international, technical, ecommerce and law firm SEO â€” no juniors, no outsourcing. The person behind these case studies works on your site."
           imageSrc="/images/mubashar-sharif.jpg"
-          imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
+          imageAlt="Mubashar Sharif â€” Founder & Lead SEO Strategist"
           linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           badges={["Semrush certified", "HubSpot certified"]}
         />
@@ -611,9 +611,9 @@ export default function ServicesPage() {
         />
       </Section>
 
-      {/* ── LAW FIRM SEO BY CITY ──
+      {/* â”€â”€ LAW FIRM SEO BY CITY â”€â”€
           This page carries 374 impressions at position 63.84 because Google
-          serves it for "[city] law firm seo" queries it cannot possibly win —
+          serves it for "[city] law firm seo" queries it cannot possibly win â€”
           one page cannot rank for Philadelphia, Cleveland, Sugar Land and
           Albuquerque at once. The fix is not to optimise this page harder; it
           is to send those searches to the page that answers them. Hub, not
@@ -627,7 +627,7 @@ export default function ServicesPage() {
       <SectionHeading
           eyebrow="Law Firm SEO by city"
           title="Which city do you practice in?"
-          intro="Local search is decided city by city, so each of these is a page in its own right — the courts you appear in, the practice areas with demand there, and what your state's law changes about the content you need."
+          intro="Local search is decided city by city, so each of these is a page in its own right â€” the courts you appear in, the practice areas with demand there, and what your state's law changes about the content you need."
         />
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -680,11 +680,11 @@ export default function ServicesPage() {
           <Link href="/free-audit" className="font-semibold underline" style={{ color: color.primary }}>
             Ask for the free audit
           </Link>{" "}
-          — we build the page for your city as part of the engagement.
+          â€” we build the page for your city as part of the engagement.
         </p>
       </Section>
 
-      {/* ── FAQ ── */}
+      {/* â”€â”€ FAQ â”€â”€ */}
       <Section width="reading">
         <SectionHeading variant="center" eyebrow="FAQ" title="Frequently Asked Questions" />
         <FaqList faqs={faqs} name="services-faq" />
@@ -693,7 +693,7 @@ export default function ServicesPage() {
       <CtaBand
         eyebrow="Not sure which service fits?"
         title={<>Start With the Free Audit.<br />The Roadmap Tells You.</>}
-        body="The founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours — including exactly which service (if any) you actually need."
+        body="The founder personally reviews your site and delivers a 90-day growth roadmap within 24 hours â€” including exactly which service (if any) you actually need."
         actions={[
           { href: "/free-audit", label: "Get Free SEO Audit", icon: <ArrowRight className="h-4 w-4" aria-hidden /> },
           { href: "https://calendly.com/contact-searchprex/30min", label: "Book a 30-min call", variant: "onDark", icon: <Phone className="h-4 w-4" aria-hidden /> },
@@ -701,7 +701,7 @@ export default function ServicesPage() {
         trustPoints={["24hr turnaround", "No contracts", "Founder does the audit"]}
       />
 
-      {/* ── FLOATING CTA ── */}
+      {/* â”€â”€ FLOATING CTA â”€â”€ */}
       <Link
         href="/free-audit"
         className={`fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 ${text.small} font-semibold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5`}

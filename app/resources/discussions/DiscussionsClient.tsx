@@ -400,7 +400,7 @@ export default function DiscussionsClient() {
 
   return (
     <div style={{ background: '#f7f8fa', minHeight: '100vh', color: '#171a22', paddingTop: '80px' }}>
-      <PlatformHubNav active="discussions" />
+      <PlatformHubNav active="forum" />
 
       {/* Header */}
       <section

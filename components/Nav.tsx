@@ -75,70 +75,34 @@ const navLinks: NavLink[] = [
     label: "Pricing",
   },
   {
-    // A direct link: the blog used to sit at the bottom of the Resources menu.
-    href: "/blog",
-    label: "Blog",
-  },
-  {
     href: "/resources",
     label: "Resources",
     hasDropdown: true,
-    dropdownItems: [
-      { href: "/resources",                                   label: "All Resources" },
-      { href: "/resources/news",                              label: "01. Industry News Desk", badge: "Live" },
-      { href: "/resources/discussions",                       label: "02. SEO Discussion Forum", badge: "New" },
-      { href: "/resources/solutions",                         label: "03. Issues & Solutions Library", badge: "New" },
-      { href: "/resources/learning-hub",                      label: "04. SEO Learning Hub", badge: "New" },
-      { href: "/resources/local-seo-tips",                    label: "Local SEO Tips & Lead Playbook" },
-      { href: "/resources/gsc-regex-library",                 label: "GSC Regex Library" },
-      { href: "/resources/law-firm-seo-audit-checklist",      label: "Law Firm SEO Checklist" },
-      { href: "/resources/technical-seo-checklist",           label: "Technical SEO Checklist" },
-      { href: "/resources/woocommerce-seo-checklist",         label: "WooCommerce SEO Checklist" },
-      { href: "/resources/google-business-profile-checklist", label: "GBP Local Checklist" },
-      { href: "/guides/ecommerce-indexing-playbook.pdf",      label: "35K-Product Indexing Playbook" },
-    ],
   },
-  {
-    href: "/resources/news",
-    label: "SEO News",
-    hasDropdown: true,
-    dropdownItems: [
-      // Dedicated pillar spokes receive sitewide internal links directly to their URLs
-      // rather than parameterized ?category= URLs, eliminating redirect hops and consolidating PageRank.
-      { href: "/resources/news",                                    label: "All Latest News" },
-      { href: "/resources/news/llm-seo-news-2026",                 label: "LLM SEO News" },
-      { href: "/resources/news/ai-sge-seo-news",                   label: "AI & GEO SEO News" },
-      { href: "/resources/news/local-seo-updates",                  label: "Local SEO News" },
-      { href: "/resources/news/technical-seo-news-2026",           label: "Technical SEO News" },
-      { href: "/resources/news/ecommerce-seo-news-2026",           label: "Ecommerce SEO News" },
-      { href: "/resources/news/seo-tools-news-2026",               label: "SEO Tools News" },
-      { href: "/resources/news?category=Law+Firm+SEO+News",         label: "Law Firm SEO News" },
-      { href: "/resources/news?category=Shopify+Store+News",        label: "Shopify Store News" },
-      { href: "/resources/news?category=WordPress+News",            label: "WordPress News" },
-    ],
-  },
-  {
-    href: "/tools",
-    label: "Solutions",
-    hasDropdown: true,
-    dropdownItems: [
-      // Was http://localhost:3005 — a developer machine address shipped to
-      // production, so the entry was dead for every real visitor. /intake-assistant
-      // is the deployed page for the same product.
-      { href: "/tools/llms-txt-generator", label: "llms.txt & AI Bot Generator", badge: "New" },
-      { href: "/intake-assistant",         label: "AI Intake Assistant", badge: "Free" },
-      { href: "/case-calculator",          label: "Lost Case Calculator" },
-      // Law Firm Scorecard is out of the menu until Google Search grounding is
-      // available on the Gemini keys: without it the "audit" of a named firm
-      // would be written from nothing. See GroundingUnavailableError.
-      { href: "/tools/keyword-research",   label: "Law Firm Keyword Research" },
-      { href: "/tools/schema-generator",   label: "Schema Markup Generator" },
-      { href: "/tools/serp-simulator",     label: "SERP Simulator" },
-      { href: "/ai-search",                label: "AI Search" },
-      { href: "/tools/serp-checker",       label: "SERP Checker", badge: "Live" },
-      { href: "/tools",                    label: "All Tools" },
-    ],
-  },
+];
+
+const INTERNATIONAL_RESOURCES = [
+  { href: "/resources/news", label: "Industry News Desk", badge: "Live", desc: "Dated & verified Google core & spam updates" },
+  { href: "/resources/solution", label: "Issues & Solutions Library", badge: "New", desc: "Diagnostic fixes & free SEO tool suites" },
+  { href: "/resources/forum", label: "SEO Discussion Forum", badge: "New", desc: "Practitioner Q&A and technical benchmarks" },
+  { href: "/resources/learning-hub", label: "SEO Learning Hub", badge: "New", desc: "Masterclasses for Core SEO, Shopify & WP" },
+];
+
+const USA_RESOURCES = [
+  { href: "/resources/news/usa", label: "USA News Engine", desc: "State-level Map Pack shifts & US local radar" },
+  { href: "/resources/solution/usa", label: "USA Solutions Dashboard", desc: "Law firm intake, lost cases & local recovery" },
+  { href: "/resources/forum/usa", label: "USA Discussion Boards", desc: "US metro & state practitioner threads" },
+  { href: "/resources/learning-hub/usa", label: "USA Learning Hub Playbooks", desc: "Local 3-Pack domination & legal playbooks" },
+];
+
+const PRACTITIONER_VAULTS = [
+  { href: "/resources/gsc-regex-library", label: "GSC Regex Library" },
+  { href: "/resources/technical-seo-checklist", label: "Technical SEO Checklist" },
+  { href: "/resources/woocommerce-seo-checklist", label: "WooCommerce SEO Checklist" },
+  { href: "/resources/law-firm-seo-audit-checklist", label: "Law Firm SEO Checklist" },
+  { href: "/resources/google-business-profile-checklist", label: "Google Business Profile Checklist" },
+  { href: "/resources/local-seo-tips", label: "Local SEO Field Guide" },
+  { href: "/guides/ecommerce-indexing-playbook.pdf", label: "35K Product Indexing Playbook" },
 ];
  
 export default function Nav() {
@@ -315,59 +279,153 @@ export default function Nav() {
                     )}
  
                     {link.hasDropdown && (
-                      <div
-                        className={`absolute left-0 top-full z-50 ${link.dropdownItems?.some((i) => i.sub) ? "w-72" : "w-56"} pt-2 transition-all duration-150 ${
-                          isOpen
-                            ? "visible translate-y-0 opacity-100"
-                            : "invisible pointer-events-none translate-y-2 opacity-0"
-                        }`}
-                      >
-                        <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
-                          {link.dropdownItems?.map((item) => {
-                            const isExternal = item.href.startsWith("http");
-                            
-                            const content = (
-                              <>
-                                <span>{item.label}</span>
-                                {item.badge && (
-                                  <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
-                                    {item.badge}
-                                  </span>
-                                )}
-                              </>
-                            );
+                      link.label === "Resources" ? (
+                        <div
+                          className={`absolute right-0 top-full z-50 w-[840px] pt-2 transition-all duration-150 ${
+                            isOpen
+                              ? "visible translate-y-0 opacity-100"
+                              : "invisible pointer-events-none translate-y-2 opacity-0"
+                          }`}
+                        >
+                          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+                            <div className="grid grid-cols-3 gap-6 divide-x divide-slate-100">
+                              {/* Column 1: International */}
+                              <div>
+                                <div className="flex items-center gap-1.5 pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
+                                  <span>🌐</span> International Resources
+                                </div>
+                                <div className="space-y-2">
+                                  {INTERNATIONAL_RESOURCES.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
+                                    >
+                                      <div className="flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
+                                        <span>{item.label}</span>
+                                        {item.badge && (
+                                          <span className="rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 text-[9px] font-bold uppercase">
+                                            {item.badge}
+                                          </span>
+                                        )}
+                                      </div>
+                                      <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
 
-                            if (isExternal) {
+                              {/* Column 2: USA-Centric */}
+                              <div className="pl-6">
+                                <div className="flex items-center gap-1.5 pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
+                                  <span>🇺🇸</span> USA-Centric Recovery
+                                </div>
+                                <div className="space-y-2">
+                                  {USA_RESOURCES.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
+                                    >
+                                      <div className="text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
+                                        {item.label}
+                                      </div>
+                                      <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Column 3: Practitioner Vaults & Checklists */}
+                              <div className="pl-6">
+                                <div className="flex items-center gap-1.5 pb-3 text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-slate-100 mb-3">
+                                  <span>📋</span> Practitioner Vaults
+                                </div>
+                                <div className="space-y-1">
+                                  {PRACTITIONER_VAULTS.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="flex items-center text-xs font-medium text-[#4b5563] py-1.5 px-2 rounded-md hover:bg-slate-50 hover:text-neutral-950 transition-colors"
+                                    >
+                                      • {item.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Footer Hub Link inside Mega Menu */}
+                            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                              <span className="text-[#6c727f]">Central intelligence &amp; practitioner playbooks</span>
+                              <Link
+                                href="/resources"
+                                onClick={() => setActiveDropdown(null)}
+                                className="font-bold text-neutral-950 hover:underline flex items-center gap-1"
+                              >
+                                View All Resources Hub →
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          className={`absolute left-0 top-full z-50 ${link.dropdownItems?.some((i) => i.sub) ? "w-72" : "w-56"} pt-2 transition-all duration-150 ${
+                            isOpen
+                              ? "visible translate-y-0 opacity-100"
+                              : "invisible pointer-events-none translate-y-2 opacity-0"
+                          }`}
+                        >
+                          <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+                            {link.dropdownItems?.map((item) => {
+                              const isExternal = item.href.startsWith("http");
+                              
+                              const content = (
+                                <>
+                                  <span>{item.label}</span>
+                                  {item.badge && (
+                                    <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </>
+                              );
+
+                              if (isExternal) {
+                                return (
+                                  <a
+                                    key={item.label}
+                                    href={item.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
+                                  >
+                                    {content}
+                                  </a>
+                                );
+                              }
+
                               return (
-                                <a
+                                <Link
                                   key={item.label}
                                   href={item.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-[#374151] transition-colors hover:bg-slate-50 hover:text-neutral-950"
+                                  onClick={() => setActiveDropdown(null)}
+                                  className={`flex items-center justify-between gap-2 rounded-lg transition-colors hover:bg-slate-50 hover:text-neutral-950 ${
+                                    item.sub
+                                      ? "py-1.5 pl-7 pr-3 text-[13px] text-slate-600"
+                                      : `px-3 py-2 text-sm ${link.dropdownItems?.some((i) => i.sub) ? "font-semibold text-neutral-950" : "text-[#374151]"}`
+                                  }`}
                                 >
                                   {content}
-                                </a>
+                                </Link>
                               );
-                            }
-
-                            return (
-                              <Link
-                                key={item.label}
-                                href={item.href}
-                                onClick={() => setActiveDropdown(null)}
-                                className={`flex items-center justify-between gap-2 rounded-lg transition-colors hover:bg-slate-50 hover:text-neutral-950 ${
-                                  item.sub
-                                    ? "py-1.5 pl-7 pr-3 text-[13px] text-slate-600"
-                                    : `px-3 py-2 text-sm ${link.dropdownItems?.some((i) => i.sub) ? "font-semibold text-neutral-950" : "text-[#374151]"}`
-                                }`}
-                              >
-                                {content}
-                              </Link>
-                            );
-                          })}
+                            })}
+                          </div>
                         </div>
-                      </div>
+                      )
                     )}
                   </div>
                 );
@@ -428,49 +486,112 @@ export default function Nav() {
                       </Link>
                     )}
                     {link.hasDropdown && (
-                      <div className="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3">
-                        {link.dropdownItems?.map((item) => {
-                          const isExternal = item.href.startsWith("http");
-                          
-                          const content = (
-                            <>
-                              {item.label}
-                              {item.badge && (
-                                <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
-                                  {item.badge}
-                                </span>
-                              )}
-                            </>
-                          );
+                      link.label === "Resources" ? (
+                        <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">
+                          <div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                              🌐 International Resources
+                            </span>
+                            <div className="mt-1 space-y-1">
+                              {INTERNATIONAL_RESOURCES.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
+                                >
+                                  <span>{item.label}</span>
+                                  {item.badge && (
+                                    <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.2 text-[9px] font-bold text-neutral-900">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
 
-                          if (isExternal) {
+                          <div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                              🇺🇸 USA-Centric
+                            </span>
+                            <div className="mt-1 space-y-1">
+                              {USA_RESOURCES.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="block py-1 text-sm text-slate-700 hover:text-neutral-950"
+                                >
+                                  {item.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                              📋 Practitioner Vaults
+                            </span>
+                            <div className="mt-1 space-y-1">
+                              {PRACTITIONER_VAULTS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="block py-1 text-xs text-slate-600 hover:text-neutral-950"
+                                >
+                                  • {item.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3">
+                          {link.dropdownItems?.map((item) => {
+                            const isExternal = item.href.startsWith("http");
+                            
+                            const content = (
+                              <>
+                                {item.label}
+                                {item.badge && (
+                                  <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-neutral-900">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </>
+                            );
+
+                            if (isExternal) {
+                              return (
+                                <a
+                                  key={item.label}
+                                  href={item.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center gap-2 py-1.5 text-sm text-slate-600 hover:text-neutral-950"
+                                >
+                                  {content}
+                                </a>
+                              );
+                            }
+
                             return (
-                              <a
+                              <Link
                                 key={item.label}
                                 href={item.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 py-1.5 text-sm text-slate-600 hover:text-neutral-950"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={`flex items-center gap-2 hover:text-neutral-950 ${
+                                  item.sub ? "py-1 pl-4 text-[13px] text-slate-500" : "py-1.5 text-sm text-slate-600"
+                                }`}
                               >
                                 {content}
-                              </a>
+                              </Link>
                             );
-                          }
-
-                          return (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className={`flex items-center gap-2 hover:text-neutral-950 ${
-                                item.sub ? "py-1 pl-4 text-[13px] text-slate-500" : "py-1.5 text-sm text-slate-600"
-                              }`}
-                            >
-                              {content}
-                            </Link>
-                          );
-                        })}
-                      </div>
+                          })}
+                        </div>
+                      )
                     )}
                   </div>
                 ))}

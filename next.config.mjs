@@ -143,9 +143,9 @@ const nextConfig = {
         permanent: true,
       },
       // ── NEWS CATEGORY QUERY REDIRECTS (301) ──────────────────────
-      // Consolidates parameterized ?category= URLs to their dedicated ranking pillar pages.
-      // Eliminates keyword cannibalization, preserves "llm seo news" Pos 4,
-      // and consolidates signals on the main news hub ("seo news today").
+      // Consolidates parameterized ?category= URLs to their dedicated clean
+      // category hub pages. Eliminates keyword cannibalization and consolidates
+      // signals on the main news hub ("seo news today").
       {
         source: '/resources/news',
         has: [{ type: 'query', key: 'category', value: '(?i:llms?)' }],
@@ -155,31 +155,122 @@ const nextConfig = {
       {
         source: '/resources/news',
         has: [{ type: 'query', key: 'category', value: '(?i:ai(?:[ +_%20]*seo)?)' }],
-        destination: '/resources/news/ai-sge-seo-news',
+        destination: '/resources/news/ai-geo',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:ai[ +_%20]*visibility.*)' }],
+        destination: '/resources/news/ai-geo',
         permanent: true,
       },
       {
         source: '/resources/news',
         has: [{ type: 'query', key: 'category', value: '(?i:technical(?:[ +_%20]*seo)?)' }],
-        destination: '/resources/news/technical-seo-news-2026',
+        destination: '/resources/news/technical',
         permanent: true,
       },
       {
         source: '/resources/news',
         has: [{ type: 'query', key: 'category', value: '(?i:(?:seo[ +_%20]*)?tools?)' }],
-        destination: '/resources/news/seo-tools-news-2026',
+        destination: '/resources/news/tools',
         permanent: true,
       },
       {
         source: '/resources/news',
         has: [{ type: 'query', key: 'category', value: '(?i:ecommerce.*)' }],
-        destination: '/resources/news/ecommerce-seo-news-2026',
+        destination: '/resources/news/ecommerce',
         permanent: true,
       },
       {
         source: '/resources/news',
         has: [{ type: 'query', key: 'category', value: '(?i:local(?:[ +_%20]*seo)?)' }],
         destination: '/resources/news/local-seo-updates',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:law[ +_%20]*firm.*)' }],
+        destination: '/resources/news/law-firm',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:shopify.*)' }],
+        destination: '/resources/news/shopify-store',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:wordpress.*)' }],
+        destination: '/resources/news/wordpress',
+        permanent: true,
+      },
+      {
+        source: '/resources/news',
+        has: [{ type: 'query', key: 'category', value: '(?i:usa.*)' }],
+        destination: '/resources/news/usa',
+        permanent: true,
+      },
+
+      // ── FORUM RENAME (discussions → forum) ────────────────────────
+      {
+        source: '/resources/discussions',
+        destination: '/resources/forum',
+        permanent: true,
+      },
+
+      // ── SOLUTIONS CONSOLIDATION ───────────────────────────────────
+      // Old /resources/solutions (plural) → /resources/solution (singular)
+      {
+        source: '/resources/solutions',
+        destination: '/resources/solution',
+        permanent: true,
+      },
+      // Individual tools consolidated under /resources/solution/
+      {
+        source: '/tools/serp-checker',
+        destination: '/resources/solution/serp-checker',
+        permanent: true,
+      },
+      {
+        source: '/tools/llms-txt-generator',
+        destination: '/resources/solution/llms-txt-generator',
+        permanent: true,
+      },
+      {
+        source: '/tools/schema-generator',
+        destination: '/resources/solution/schema-generator',
+        permanent: true,
+      },
+      {
+        source: '/tools/serp-simulator',
+        destination: '/resources/solution/serp-simulator',
+        permanent: true,
+      },
+      {
+        source: '/tools/keyword-research',
+        destination: '/resources/solution/keyword-research',
+        permanent: true,
+      },
+      {
+        source: '/intake-assistant',
+        destination: '/resources/solution/intake-assistant',
+        permanent: true,
+      },
+      {
+        source: '/case-calculator',
+        destination: '/resources/solution/case-calculator',
+        permanent: true,
+      },
+      {
+        source: '/ai-search',
+        destination: '/resources/solution/ai-search',
+        permanent: true,
+      },
+      {
+        source: '/tools',
+        destination: '/resources/solution',
         permanent: true,
       },
     ]

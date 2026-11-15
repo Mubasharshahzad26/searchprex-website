@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
 // app/tools/ToolsClient.tsx
 // Tools page UI, assembled from components/layout primitives.
 //
-// Card order is live → pro → soon so dead cards don't sit mid-grid, the stats
+// Card order is live â†’ pro â†’ soon so dead cards don't sit mid-grid, the stats
 // read as strengths rather than "1 live now", and the mid-page audit CTA
 // converts tool users (hot leads) into audits.
 //
-// The per-tool accent colours below are categorical — they identify a tool at a
+// The per-tool accent colours below are categorical â€” they identify a tool at a
 // glance, the way a chart palette identifies a series. They never appear on
 // headings, links or buttons, which all come from the design tokens.
 
@@ -67,7 +67,7 @@ const tools = [
     iconColor: "#0a0a0a",
     accentColor: "#171717",
     label: "Schema Markup Generator",
-    desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review — instantly.",
+    desc: "Generate JSON-LD schema for Local Business, Law Firm, Product, FAQ, Article & Review â€” instantly.",
     tags: ["JSON-LD", "Rich Results", "Structured Data"],
     status: "live",
     href: "/tools/schema-generator",
@@ -166,7 +166,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         compactTop
         eyebrow="Free SEO Toolkit"
         title={<>Free SEO Tools <br /><Accent>Built for Practitioners</Accent></>}
-        subtitle="No signup. No paywalls. Just fast, accurate SEO tools built by an analyst who uses them daily. Schema generators, SERP simulators, meta analyzers — all free."
+        subtitle="No signup. No paywalls. Just fast, accurate SEO tools built by an analyst who uses them daily. Schema generators, SERP simulators, meta analyzers â€” all free."
         aside={<HeroStats />}
       />
 
@@ -175,7 +175,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
-              ⚡
+              âš¡
             </span>
             <div>
               <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
@@ -188,22 +188,22 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/resources/solutions"
+              href="/resources/solution"
               className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
             >
-              🛠️ Browse Solutions Library →
+              ðŸ› ï¸ Browse Solutions Library â†’
             </Link>
             <Link
               href="/resources/learning-hub"
               className="inline-flex items-center gap-1 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500"
             >
-              📚 20-Module Playbooks →
+              ðŸ“š 20-Module Playbooks â†’
             </Link>
           </div>
         </div>
       </div>
 
-      {/* ── TOOLS GRID (live → pro → soon) ── */}
+      {/* â”€â”€ TOOLS GRID (live â†’ pro â†’ soon) â”€â”€ */}
       <Section tone="surface">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool, i) => (
@@ -272,7 +272,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
           ))}
         </div>
 
-        {/* Mid-page CTA — tool users are hot leads. */}
+        {/* Mid-page CTA â€” tool users are hot leads. */}
         <div
           className={`mt-12 flex flex-col items-center gap-3 ${radius.card} border bg-white p-8 text-center`}
           style={{ borderColor: color.border }}
@@ -282,7 +282,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
           </p>
           <p className={`${text.small} max-w-xl`} style={{ color: color.muted }}>
             If a tool just surfaced an issue on your site, get the founder to review the whole
-            picture — free, with a 90-day roadmap, within 24 hours.
+            picture â€” free, with a 90-day roadmap, within 24 hours.
           </p>
           <CtaButton
             href="/free-audit"
@@ -294,7 +294,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         </div>
       </Section>
 
-      {/* ── FREE CHECKLISTS — the ungated resources, next to the tools ── */}
+      {/* â”€â”€ FREE CHECKLISTS â€” the ungated resources, next to the tools â”€â”€ */}
       <Section>
         <SectionHeading
           eyebrow="Free checklists"
@@ -324,20 +324,20 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         </div>
       </Section>
 
-      {/* ── FOUNDER E-E-A-T ── */}
+      {/* â”€â”€ FOUNDER E-E-A-T â”€â”€ */}
       <Section tone="surface" width="narrow" tight>
         <AuthorCard
           name="Mubashar Sharif"
-          role="Founder & Lead SEO Strategist · 5+ years"
-          quote="These are the same utilities I use on real client projects — the ones behind the verified case studies on this site. Nothing here is a lead-capture gimmick."
+          role="Founder & Lead SEO Strategist Â· 5+ years"
+          quote="These are the same utilities I use on real client projects â€” the ones behind the verified case studies on this site. Nothing here is a lead-capture gimmick."
           imageSrc="/images/mubashar-sharif.jpg"
-          imageAlt="Mubashar Sharif — Founder & Lead SEO Strategist"
+          imageAlt="Mubashar Sharif â€” Founder & Lead SEO Strategist"
           linkedinUrl="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
           badges={["Semrush certified", "HubSpot certified"]}
         />
       </Section>
 
-      {/* ── SOLUTIONS ──
+      {/* â”€â”€ SOLUTIONS â”€â”€
           Moved here from the homepage. These six are products in their own
           right (AI visibility, AI search, case calculator, intake assistant,
           content suite, keyword data) and they complement the seven utilities
@@ -346,13 +346,13 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
           narrative; here they are what the visitor came for. */}
       <SolutionsCarousel />
 
-      {/* ── FAQ ── */}
+      {/* â”€â”€ FAQ â”€â”€ */}
       <Section tone="surface" width="reading">
         <SectionHeading variant="center" eyebrow="FAQ" title="Quick Answers" />
         <FaqList faqs={faqs} name="tools-faq" />
       </Section>
 
-      {/* ── NICHESEO PRO ── */}
+      {/* â”€â”€ NICHESEO PRO â”€â”€ */}
       <Section bordered={false}>
         <div
           className={`${radius.card} px-8 py-10 lg:flex lg:items-center lg:justify-between lg:gap-8`}
@@ -395,11 +395,11 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
         source="tools"
         copy={{
           headline: "A tool found a problem? Send me your URL and I'll look at the whole site.",
-          sub: "A written look at your site, your Business Profile and the competitors above you — from me, within 24 hours.",
+          sub: "A written look at your site, your Business Profile and the competitors above you â€” from me, within 24 hours.",
         }}
       />
 
-      {/* ── FLOATING CTA ── */}
+      {/* â”€â”€ FLOATING CTA â”€â”€ */}
       <Link
         href="/free-audit"
         className={`fixed bottom-4 right-4 z-30 inline-flex items-center gap-2 rounded-full px-4 py-3 ${text.small} font-semibold text-white shadow-2xl transition-all hover:scale-105 sm:bottom-5 sm:right-5 sm:px-5 sm:py-3.5`}
@@ -411,7 +411,7 @@ export default function ToolsClient({ faqs }: { faqs: Faq[] }) {
   );
 }
 
-/* ─── Pieces ─── */
+/* â”€â”€â”€ Pieces â”€â”€â”€ */
 
 function HeroStats() {
   return (
@@ -502,7 +502,7 @@ function ToolAction({ status, href }: { status: string; href: string }) {
     );
   }
 
-  // A real, crawlable link — the whole point of the "preview" status. The wording
+  // A real, crawlable link â€” the whole point of the "preview" status. The wording
   // sets the expectation the page then meets.
   if (status === "preview") {
     return (

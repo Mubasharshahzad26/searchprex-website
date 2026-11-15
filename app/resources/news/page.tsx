@@ -122,10 +122,15 @@ const CATEGORY_META: Record<string, { title: string; desc: string; h1: string; i
 const CATEGORY_TO_PILLAR_REDIRECTS: Record<string, string> = {
   "LLMs": "/resources/news/llm-seo-news-2026",
   "AI SEO": "/resources/news/ai-sge-seo-news",
-  "Technical": "/resources/news/technical-seo-news-2026",
-  "Tools": "/resources/news/seo-tools-news-2026",
-  "Ecommerce": "/resources/news/ecommerce-seo-news-2026",
+  "Technical": "/resources/news/technical",
+  "Tools": "/resources/news/tools",
+  "Ecommerce": "/resources/news/ecommerce",
   "Local": "/resources/news/local-seo-updates",
+  "Law Firm": "/resources/news/law-firm",
+  "Shopify": "/resources/news/shopify-store",
+  "WordPress": "/resources/news/wordpress",
+  "AI Visibility": "/resources/news/ai-geo",
+  "USA": "/resources/news/usa",
 };
 
 function resolveCategoryKey(raw?: string): string | undefined {

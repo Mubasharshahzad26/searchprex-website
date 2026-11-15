@@ -94,27 +94,34 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: En
   { path: "/resources", priority: 0.7, changeFrequency: "weekly" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
   { path: "/resources/news", priority: 0.8, changeFrequency: "daily" },
-  { path: "/resources/discussions", priority: 0.8, changeFrequency: "daily" },
-  { path: "/resources/solutions", priority: 0.8, changeFrequency: "weekly" },
+  // ── News Category Hubs (clean URL structure) ──
+  { path: "/resources/news/technical", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/ai-geo", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/ecommerce", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/tools", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/law-firm", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/shopify-store", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/wordpress", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/news/usa", priority: 0.8, changeFrequency: "daily" },
+  // ── Forum (renamed from /discussions) ──
+  { path: "/resources/forum", priority: 0.8, changeFrequency: "daily" },
+  { path: "/resources/forum/usa", priority: 0.8, changeFrequency: "daily" },
+  // ── Solutions & Tools (consolidated under /resources/solution) ──
+  { path: "/resources/solution", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/resources/solution/usa", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/resources/solution/serp-checker", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/resources/solution/llms-txt-generator", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/resources/solution/schema-generator", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/resources/solution/serp-simulator", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/resources/solution/ai-search", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/resources/solution/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/resources/solution/case-calculator", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/resources/solution/keyword-research", priority: 0.8, changeFrequency: "monthly" },
+  // ── Learning Hub ──
   { path: "/resources/learning-hub", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/resources/learning-hub/usa", priority: 0.8, changeFrequency: "weekly" },
   { path: "/resources/law-firm-seo-audit-checklist", priority: 0.8, changeFrequency: "monthly" },
   { path: "/resources/gsc-regex-library", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/tools", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/tools/llms-txt-generator", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/tools/schema-generator", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/tools/serp-simulator", priority: 0.7, changeFrequency: "monthly" },
-  // The page shipped — it is committed and returns 200. The note that used to
-  // sit here ("the directory was never committed, so it 404s") outlived the
-  // problem it described, and kept a live, indexable page out of the sitemap.
-  { path: "/tools/serp-checker", priority: 0.8, changeFrequency: "weekly" },
-  { path: "/intake-assistant", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/case-calculator", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/ai-search", priority: 0.9, changeFrequency: "weekly" },
-  { path: "/tools/keyword-research", priority: 0.8, changeFrequency: "monthly" },
-  // /autopilot is deliberately absent: it is an internal dashboard rendering
-  // client names and run history, and now carries robots noindex. Listing a
-  // noindex page here is the contradictory signal this file's own header warns
-  // about, and it shows up as an error in Search Console.
   { path: "/free-audit", priority: 0.9, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/pricing", priority: 0.8, changeFrequency: "monthly" },

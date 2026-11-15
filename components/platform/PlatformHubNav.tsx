@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Newspaper, MessageSquare, Wrench, GraduationCap, ShieldCheck, ExternalLink } from "lucide-react";
 
-export type PlatformPillarId = "news" | "discussions" | "solutions" | "learning";
+export type PlatformPillarId = "news" | "forum" | "solutions" | "learning";
 
 const PILLARS: Array<{
   id: PlatformPillarId;
@@ -22,19 +22,19 @@ const PILLARS: Array<{
     Icon: Newspaper,
   },
   {
-    id: "discussions",
+    id: "forum",
     number: "02",
     label: "Discussion Forum",
     sublabel: "Practitioner Q&A + US City & State Boards",
-    href: "/resources/discussions",
+    href: "/resources/forum",
     Icon: MessageSquare,
   },
   {
     id: "solutions",
     number: "03",
-    label: "Issues & Solutions",
-    sublabel: "Diagnostics, Error Fixes & Recovery Playbooks",
-    href: "/resources/solutions",
+    label: "Solutions & Tools",
+    sublabel: "Diagnostics, Free SEO Tools & Recovery Playbooks",
+    href: "/resources/solution",
     Icon: Wrench,
   },
   {

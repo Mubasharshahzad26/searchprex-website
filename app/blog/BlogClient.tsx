@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 // app/blog/BlogClient.tsx
 // Toptal Insights / Engineering style blog index with:
@@ -121,7 +121,7 @@ function BlogImage({
         } flex items-center justify-center`}
       >
         <div className="text-center opacity-30">
-          <div className="text-4xl mb-2">📊</div>
+          <div className="text-4xl mb-2">ðŸ“Š</div>
           <div className="text-white text-xs font-mono uppercase tracking-wider">{category}</div>
         </div>
       </div>
@@ -130,7 +130,7 @@ function BlogImage({
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={cover}
-          alt={`${category} — SearchPrex blog`}
+          alt={`${category} â€” SearchPrex blog`}
           loading={featured ? "eager" : "lazy"}
           onError={() => setImgError(true)}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -451,9 +451,9 @@ export default function BlogClient({
 
   return (
     <main className="bg-[#f8fafc] min-h-screen">
-      {/* ══════════════════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           01. TOPTAL-STYLE EDITORIAL HERO + VOICE/COMMAND SEARCH
-         ══════════════════════════════════════════════════════════════════ */}
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="relative bg-slate-50 text-neutral-950 pt-28 pb-12 border-b border-slate-200 overflow-hidden font-sans">
         {/* Subtle architectural grid background */}
         <div
@@ -504,7 +504,7 @@ export default function BlogClient({
               </h1>
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
                 Founder-written technical breakdowns on Crawl Budget, E-commerce Indexation, Core
-                Web Vitals, Local Map Pack engineering, and AI Search — built for practitioners,
+                Web Vitals, Local Map Pack engineering, and AI Search â€” built for practitioners,
                 not beginners.
               </p>
             </div>
@@ -557,7 +557,7 @@ export default function BlogClient({
 
               <div className="w-px h-7 bg-[#e5e7eb] mx-1" />
 
-              {/* Voice Search Button — Always visible with clear feedback */}
+              {/* Voice Search Button â€” Always visible with clear feedback */}
               <button
                 type="button"
                 onClick={handleVoiceSearch}
@@ -670,14 +670,14 @@ export default function BlogClient({
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           TECHNICAL INTELLIGENCE & PLATFORM HUBS QUICK-NAV
-         ══════════════════════════════════════════════════════════════════ */}
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="bg-neutral-900 border-b border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
-              ⚡
+              âš¡
             </span>
             <div>
               <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
@@ -693,33 +693,33 @@ export default function BlogClient({
               href="/resources/news"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              📰 Latest News Desk
+              ðŸ“° Latest News Desk
             </Link>
             <Link
-              href="/resources/discussions"
+              href="/resources/forum"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              💬 Technical Discussions
+              ðŸ’¬ Technical Discussions
             </Link>
             <Link
-              href="/resources/solutions"
+              href="/resources/solution"
               className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
             >
-              🛠️ Solutions Library
+              ðŸ› ï¸ Solutions Library
             </Link>
             <Link
               href="/resources/learning-hub"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              📚 20-Module Playbooks
+              ðŸ“š 20-Module Playbooks
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           02. TOPTAL ARCHITECTURAL CATEGORY MATRIX
-         ══════════════════════════════════════════════════════════════════ */}
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section
         className="bg-white border-b border-[#e5e7eb]"
         aria-labelledby="blog-categories"
@@ -832,9 +832,9 @@ export default function BlogClient({
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           03. TOPTAL EDITORIAL NEWSLETTER BAND (REAL SUBSCRIPTION + ALERTS)
-         ══════════════════════════════════════════════════════════════════ */}
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="bg-slate-100 text-neutral-950 py-12 border-b border-slate-200 font-sans">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
@@ -931,9 +931,9 @@ export default function BlogClient({
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           04. TOPTAL EDITORIAL POSTS GRID (FEATURED LEAD + COMPACT CARDS)
-         ══════════════════════════════════════════════════════════════════ */}
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section ref={postsRef} id="posts-grid" className="py-16 sm:py-20 bg-[#f8fafc] scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Active Filter Bar */}
@@ -1055,7 +1055,7 @@ export default function BlogClient({
                       </span>
                     </div>
 
-                    {/* Toptal Full Verified Author Card — Featured Article */}
+                    {/* Toptal Full Verified Author Card â€” Featured Article */}
                     <div className="mt-auto rounded-xl bg-[#f8fafc] border border-[#e5e7eb] p-4">
                       <div className="flex items-start gap-3.5">
                         <div className="h-11 w-11 rounded-full bg-gradient-to-br from-[#171717] to-[#171717] flex items-center justify-center flex-shrink-0 ring-2 ring-[#f1f5f9]">
@@ -1162,7 +1162,7 @@ export default function BlogClient({
             </div>
           )}
 
-          {/* ── Audit CTA (CRO) ── */}
+          {/* â”€â”€ Audit CTA (CRO) â”€â”€ */}
           <div className="mt-16 flex flex-col md:flex-row items-center justify-between gap-6 rounded-2xl border border-[#dce1eb] bg-white p-8 sm:p-10 shadow-sm">
             <div className="max-w-xl text-center md:text-left">
               <span className="inline-block text-[11px] font-extrabold uppercase tracking-widest text-[#171717] mb-2">
@@ -1172,7 +1172,7 @@ export default function BlogClient({
                 Reading about the problem? We fix it for a living.
               </p>
               <p className="text-sm text-[#64748b] leading-relaxed">
-                Get a free, founder-reviewed SEO audit of your site — complete with crawl
+                Get a free, founder-reviewed SEO audit of your site â€” complete with crawl
                 diagnostics and a prioritized 90-day engineering roadmap within 24 hours.
               </p>
             </div>
@@ -1188,9 +1188,9 @@ export default function BlogClient({
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           05. MOST-READ ARTICLES (TOPTAL RANKED ROW)
-         ══════════════════════════════════════════════════════════════════ */}
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       {activeMostRead.length > 0 && (
         <section className="py-20 bg-white border-t border-[#e5e7eb]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

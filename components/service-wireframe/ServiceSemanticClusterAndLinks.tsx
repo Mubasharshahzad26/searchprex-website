@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -220,7 +220,7 @@ export default function ServiceSemanticClusterAndLinks({
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources/solutions" className="text-neutral-900 hover:underline flex items-center gap-1.5">
+                  <Link href="/resources/solution" className="text-neutral-900 hover:underline flex items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-neutral-900 shrink-0" aria-hidden />
                     <span>2026 Technical &amp; GBP Playbooks</span>
                   </Link>

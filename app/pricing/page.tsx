@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Pricing from "@/components/Pricing";
 import ChatWidget from "@/components/ChatWidget";
@@ -20,7 +20,7 @@ import { LOWEST_RETAINER, RETAINER_PLANS, formatUsd } from "@/lib/pricing";
 import SeoFixSchema from "@/components/SeoFixSchema";
 
 // The 90-day money-back guarantee, as /terms section 4 states it and the
-// founder confirmed in Sept 2026: no measurable progress in 90 days → the
+// founder confirmed in Sept 2026: no measurable progress in 90 days â†’ the
 // work continues at no extra cost, or the fees for those 90 days are
 // refunded. Same wording as /why-us, /refund and components/WhySearchPrex.
 // There is no ranking guarantee. The "from $1,500" starting price was also
@@ -32,7 +32,7 @@ const DESCRIPTION = `SEO retainers: ${RETAINER_PLANS.map(
 ).join(", ")}. Month to month, no long-term contract, 90-day money-back guarantee.`;
 
 const baseMetadata: Metadata = {
-  title: "SEO Pricing: $800–$4,000/mo, Month to Month, No Lock-In",
+  title: "SEO Pricing: $800â€“$4,000/mo, Month to Month, No Lock-In",
   description: DESCRIPTION,
   alternates: {
     canonical: "https://www.searchprex.com/pricing",
@@ -60,7 +60,7 @@ const faqs: Faq[] = [
     // Same answer as the homepage FAQ, word for word, so the two pages cannot
     // make different promises again.
     q: "Do you offer guarantees?",
-    a: `Not on rankings — nobody can honestly guarantee a position, and any agency that does is telling you what you want to hear. What I do guarantee is progress: ${GUARANTEE} Your reality check report lands within 24 hours, or I tell you why not before the deadline rather than after it. You also get one client per city per practice area, so I am never optimising your competitor at the same time.`,
+    a: `Not on rankings â€” nobody can honestly guarantee a position, and any agency that does is telling you what you want to hear. What I do guarantee is progress: ${GUARANTEE} Your reality check report lands within 24 hours, or I tell you why not before the deadline rather than after it. You also get one client per city per practice area, so I am never optimising your competitor at the same time.`,
   },
   {
     q: "Can I upgrade or downgrade my plan?",
@@ -125,12 +125,12 @@ export default function PricingPage() {
           subtitle="Clear, honest pricing with no hidden fees. Choose the plan that fits your business and scale as you grow."
         />
 
-        {/* ─────────── 1.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV ─────────── */}
+        {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 1.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="bg-neutral-900 border-y border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
-                ⚡
+                âš¡
               </span>
               <div>
                 <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
@@ -143,44 +143,44 @@ export default function PricingPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2.5">
               <Link
-                href="/resources/solutions"
+                href="/resources/solution"
                 className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
               >
-                🛠️ View Solutions Library
+                ðŸ› ï¸ View Solutions Library
               </Link>
               <Link
                 href="/resources/news"
                 className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
               >
-                📰 Latest News Desk
+                ðŸ“° Latest News Desk
               </Link>
               <Link
                 href="/resources/learning-hub"
                 className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
               >
-                📚 20-Module Playbooks
+                ðŸ“š 20-Module Playbooks
               </Link>
               <Link
-                href="/resources/discussions"
+                href="/resources/forum"
                 className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
               >
-                💬 Discussions
+                ðŸ’¬ Discussions
               </Link>
             </div>
           </div>
         </section>
 
-        {/* ── AEO / GEO DIRECT ANSWER CAPSULE ── */}
+        {/* â”€â”€ AEO / GEO DIRECT ANSWER CAPSULE â”€â”€ */}
         <section className="bg-slate-50 border-b border-slate-200 py-10 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-[#185FA5]/10 px-3 py-1 text-xs font-bold text-[#185FA5] mb-3">
-              <span>🤖</span> AEO &amp; Generative Engine Summary
+              <span>ðŸ¤–</span> AEO &amp; Generative Engine Summary
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-neutral-950 tracking-tight mb-3">
               How much does SearchPrex SEO cost and how are retainers structured?
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-neutral-700 bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
-              SearchPrex SEO retainers range from <strong>$800 to $4,000 per month</strong> depending on vertical complexity: Local Business SEO ($800–$2,500/mo), Ecommerce SEO ($1,200–$3,500/mo), and Law Firm SEO ($1,500–$4,000/mo), with Technical SEO quoted after a free audit. All agreements are strictly <strong>month-to-month with no lock-in contracts</strong>, backed by a <strong>90-day money-back guarantee</strong> on measurable progress and market exclusivity (one client per city/practice area).
+              SearchPrex SEO retainers range from <strong>$800 to $4,000 per month</strong> depending on vertical complexity: Local Business SEO ($800â€“$2,500/mo), Ecommerce SEO ($1,200â€“$3,500/mo), and Law Firm SEO ($1,500â€“$4,000/mo), with Technical SEO quoted after a free audit. All agreements are strictly <strong>month-to-month with no lock-in contracts</strong>, backed by a <strong>90-day money-back guarantee</strong> on measurable progress and market exclusivity (one client per city/practice area).
             </p>
           </div>
         </section>
@@ -197,7 +197,7 @@ export default function PricingPage() {
             <div>
               <h2 className="text-lg font-black text-neutral-950">90-day money-back guarantee</h2>
               <p className="mt-1 text-sm leading-relaxed text-slate-600">
-                {GUARANTEE} It is a guarantee on measurable progress in rankings, traffic or leads — not on a particular
+                {GUARANTEE} It is a guarantee on measurable progress in rankings, traffic or leads â€” not on a particular
                 ranking, because nobody can honestly promise a Google position.{" "}
                 <Link href="/terms" className="font-semibold text-neutral-900 underline">
                   Full terms
@@ -227,7 +227,7 @@ export default function PricingPage() {
           <FaqList faqs={faqs} name="pricing-faq" />
         </Section>
 
-        {/* This band used to set white text on a #eeeef5 background — the copy
+        {/* This band used to set white text on a #eeeef5 background â€” the copy
             was invisible. It now runs on the brand ink like every other closer. */}
         <CtaBand
           eyebrow="Not sure which plan?"

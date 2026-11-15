@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
@@ -42,7 +42,7 @@ import NewsCommentModal from "@/components/news/NewsCommentModal";
 import PlatformHubNav from "@/components/platform/PlatformHubNav";
 import { CALL_HREF } from "@/lib/offer";
  
-/* ─── THEME ─── */
+/* â”€â”€â”€ THEME â”€â”€â”€ */
 const GREEN_DARK = "#2f9670";
 const PURPLE = "#534AB7";
  
@@ -62,7 +62,7 @@ const tagColor = (tag: string) => TAG_COLORS[tag] || PURPLE;
 
 const shortCategory = (category?: string) => {
   if (!category) return "SEO News";
-  const parts = category.split("—");
+  const parts = category.split("â€”");
   return (parts.length > 1 ? parts[parts.length - 1] : parts[0]).trim();
 };
 
@@ -74,7 +74,7 @@ const formatDate = (value: string | Date) =>
     timeZone: "UTC",
   });
 
-/* 🔮 MOTION 🔮 */
+/* ðŸ”® MOTION ðŸ”® */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
@@ -101,7 +101,7 @@ const PILLAR_SLUGS = [
   "ecommerce-seo-news-2026",
 ];
 
-/* ─── SEMRUSH-INSPIRED FILTER & SORT DEFINITIONS (7 INDUSTRY VERTICALS) ─── */
+/* â”€â”€â”€ SEMRUSH-INSPIRED FILTER & SORT DEFINITIONS (7 INDUSTRY VERTICALS) â”€â”€â”€ */
 const CATEGORY_TABS = [
   { id: "all", label: "All News" },
   { id: "seo", label: "SEO News" },
@@ -250,7 +250,7 @@ function matchesDateFilter(
   }
 }
 
-/* ─── BRAND ICONS FOR SOCIAL MEDIA SHARING ─── */
+/* â”€â”€â”€ BRAND ICONS FOR SOCIAL MEDIA SHARING â”€â”€â”€ */
 function LinkedInIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -307,7 +307,7 @@ function MediumIcon({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
-/* ─── ALGORITHM UPDATE TRACKER TABLE DATA ─── */
+/* â”€â”€â”€ ALGORITHM UPDATE TRACKER TABLE DATA â”€â”€â”€ */
 const ALGORITHM_UPDATES_TRACKER = [
   {
     name: "September 2026 spam update",
@@ -317,7 +317,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Oct 8, 2026",
     duration: "14 days",
     postHref: "/resources/news/google-september-2026-spam-update",
-    postLabel: "Concluded breakdown →",
+    postLabel: "Concluded breakdown â†’",
   },
   {
     name: "August 2026 spam update",
@@ -327,7 +327,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Aug 21, 2026",
     duration: "~2 days, 16 hours",
     postHref: "/resources/news/google-algorithm-updates",
-    postLabel: "Rollout log →",
+    postLabel: "Rollout log â†’",
   },
   {
     name: "June 2026 spam update",
@@ -337,7 +337,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Jun 28, 2026",
     duration: "Under 4 days",
     postHref: "/resources/news/google-algorithm-updates",
-    postLabel: "Spam log →",
+    postLabel: "Spam log â†’",
   },
   {
     name: "May 2026 core update",
@@ -347,7 +347,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Jun 2, 2026",
     duration: "12 days",
     postHref: "/resources/news/google-algorithm-updates",
-    postLabel: "Impact details →",
+    postLabel: "Impact details â†’",
   },
   {
     name: "March 2026 core update",
@@ -357,7 +357,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Apr 8, 2026",
     duration: "12 days, 4 hours",
     postHref: "/resources/news/google-algorithm-updates",
-    postLabel: "Core review →",
+    postLabel: "Core review â†’",
   },
   {
     name: "March 2026 spam update",
@@ -367,7 +367,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Mar 25, 2026",
     duration: "~19.5 hours (fastest on record)",
     postHref: "/resources/news/google-algorithm-updates",
-    postLabel: "Rollout log →",
+    postLabel: "Rollout log â†’",
   },
   {
     name: "Discover core update (first Discover-only)",
@@ -377,7 +377,7 @@ const ALGORITHM_UPDATES_TRACKER = [
     completed: "Feb 27, 2026",
     duration: "~22 days",
     postHref: "/resources/news/google-algorithm-updates",
-    postLabel: "Verified log →",
+    postLabel: "Verified log â†’",
   },
 ];
 
@@ -528,7 +528,7 @@ export default function NewsClient({
         break;
       case "x":
         window.open(
-          `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title + " — " + text)}`,
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title + " â€” " + text)}`,
           "_blank",
           "noopener,noreferrer,width=600,height=400"
         );
@@ -571,7 +571,7 @@ export default function NewsClient({
     }
   };
 
-  // ── News Interactions State (Likes & Comments) ──
+  // â”€â”€ News Interactions State (Likes & Comments) â”€â”€
   // Starts empty: every number rendered comes from real stored reactions (no seeded/demo counts).
   const [clientId, setClientId] = useState("");
   const [likesMap, setLikesMap] = useState<Record<string, number>>({});
@@ -647,7 +647,7 @@ export default function NewsClient({
     if (nextLiked) {
       setLikePulse(slug);
       setTimeout(() => setLikePulse((p) => (p === slug ? null : p)), 600);
-      showToast("Thanks — your like was recorded.");
+      showToast("Thanks â€” your like was recorded.");
     }
 
     try {
@@ -773,7 +773,7 @@ export default function NewsClient({
     );
   });
 
-    // ── Base feed (unfiltered): deep-dive spokes + dated news items ──
+    // â”€â”€ Base feed (unfiltered): deep-dive spokes + dated news items â”€â”€
   // Like/comment numbers come only from real stored reactions (default 0, never seeded).
   const SPOKE_SOURCES_MAP: Record<string, Array<{ label: string; href: string }>> = {
     "google-ai-overviews-links-october-2026-publisher-update": [
@@ -864,7 +864,7 @@ export default function NewsClient({
       };
     });
 
-    //  A story with its own analysis article appeared twice — the analysis and
+    //  A story with its own analysis article appeared twice â€” the analysis and
     //  the source item. Keep the analysis; it links its sources.
     const spokeTitles = new Set(spokeItems.map((i: any) => String(i.title).trim().toLowerCase()));
     return [...spokeItems, ...feedItems.filter((i: any) => !spokeTitles.has(String(i.title).trim().toLowerCase()))];
@@ -890,7 +890,7 @@ export default function NewsClient({
     );
 
     const now = Date.now();
-    // Trending = real engagement (likes + 3×comments) decayed by age; ties fall back to recency.
+    // Trending = real engagement (likes + 3Ã—comments) decayed by age; ties fall back to recency.
     const trend = (i: (typeof result)[number]) =>
       i.engagement / Math.pow(Math.max(0, now - timeOf(i.rawDate)) / 86400000 + 2, 0.8);
 
@@ -944,7 +944,7 @@ export default function NewsClient({
     selectedCategory === "all"
       ? NEWS_TOPIC_GUIDES
       : NEWS_TOPIC_GUIDES.filter((g) => matchesCategory(g.category, selectedCategory, `${g.title} ${g.description}`));
-  const latestDateLabel = categoryItems[0] ? formatDate(categoryItems[0].rawDate) : "—";
+  const latestDateLabel = categoryItems[0] ? formatDate(categoryItems[0].rawDate) : "â€”";
 
   const isFiltered = Boolean(
     searchQuery.trim() ||
@@ -980,7 +980,7 @@ export default function NewsClient({
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
   const hasRecent48Hours = categoryItems.some((i) => new Date(i.rawDate) >= twoDaysAgo);
 
-  // ── Algorithm tracker (type filter + duration bars) ──
+  // â”€â”€ Algorithm tracker (type filter + duration bars) â”€â”€
   const trackerRows = useMemo(() => {
     const rows = ALGORITHM_UPDATES_TRACKER.map((r) => {
       const s = new Date(`${r.started} UTC`).getTime();
@@ -996,7 +996,7 @@ export default function NewsClient({
     return Number.isNaN(s) || Number.isNaN(c) ? 1 : Math.max(1, Math.round((c - s) / 86400000));
   }));
 
-  // ── Per-card share menu ──
+  // â”€â”€ Per-card share menu â”€â”€
   const [openShareId, setOpenShareId] = useState<string | null>(null);
   useEffect(() => {
     if (!openShareId) return;
@@ -1021,7 +1021,7 @@ export default function NewsClient({
   const absoluteUrl = (href: string) =>
     href.startsWith("http") ? href : `https://www.searchprex.com${href}`;
 
-  /* Reusable reactions (like + comment) — render helper, not a component, to avoid remounts */
+  /* Reusable reactions (like + comment) â€” render helper, not a component, to avoid remounts */
   const renderReactions = (slug: string, title: string, cat?: string) => {
     const liked = Boolean(userLikesMap[slug]);
     const likes = likesMap[slug] ?? 0;
@@ -1135,7 +1135,7 @@ export default function NewsClient({
     },
     {
       q: "How do I check if my website received a Google Search Console manual action?",
-      a: "Log into Google Search Console, navigate to the “Security & Manual Actions” section in the left sidebar, and click “Manual Actions”. If your property is impacted, Google will display the specific policy violation (such as Scaled Content Abuse or Pure Spam) and the affected URL paths.",
+      a: "Log into Google Search Console, navigate to the â€œSecurity & Manual Actionsâ€ section in the left sidebar, and click â€œManual Actionsâ€. If your property is impacted, Google will display the specific policy violation (such as Scaled Content Abuse or Pure Spam) and the affected URL paths.",
     },
     {
       q: "Is there a Google algorithm update rolling out right now?",
@@ -1155,17 +1155,17 @@ export default function NewsClient({
     {
       icon: BookOpen,
       title: "How Google Ranks PDFs",
-      body: "Google clarified how PDFs rank in Web Search & AI Mode and how to verify SEO-friendliness — critical for legal guides/forms and eCommerce catalogs.",
+      body: "Google clarified how PDFs rank in Web Search & AI Mode and how to verify SEO-friendliness â€” critical for legal guides/forms and eCommerce catalogs.",
       label: "Source",
       value: "searchenginejournal",
       href: "/resources/news/how-google-ranks-pdfs-search-ai-mode-checklist",
     },
     {
       icon: TrendingUp,
-      title: "Discover “Proactive Concierge”",
-      body: "Job postings signal Google Discover evolving from a feed into a personal concierge alongside live tests of the “Dive deeper” AI feature.",
+      title: "Discover â€œProactive Conciergeâ€",
+      body: "Job postings signal Google Discover evolving from a feed into a personal concierge alongside live tests of the â€œDive deeperâ€ AI feature.",
       label: "Sources",
-      value: "SEL · Envisionit",
+      value: "SEL Â· Envisionit",
       href: "/resources/news/google-discover-proactive-concierge-dive-deeper-ai-test",
     },
   ];
@@ -1197,7 +1197,7 @@ export default function NewsClient({
       title: "Crawled - Currently Not Indexed Status",
       body: (
         <>
-          Google&rsquo;s automated classifiers are aggressively routing thin AI pages to &ldquo;Crawled – currently not indexed&rdquo;. This is an algorithmic quality filter rather than a technical crawling error. Pages lacking original data or unique analysis are deprioritized during render passes.
+          Google&rsquo;s automated classifiers are aggressively routing thin AI pages to &ldquo;Crawled â€“ currently not indexed&rdquo;. This is an algorithmic quality filter rather than a technical crawling error. Pages lacking original data or unique analysis are deprioritized during render passes.
         </>
       ),
       noteLabel: "Action",
@@ -1208,7 +1208,7 @@ export default function NewsClient({
       title: "Search Console Data Freshness & Latency",
       body: (
         <>
-          Google Search Console reporting latency currently operates within normal parameters (data delay of approximately 12–24 hours). The URL Inspection API remains stable for real-time live tests and index status verification across production URLs.
+          Google Search Console reporting latency currently operates within normal parameters (data delay of approximately 12â€“24 hours). The URL Inspection API remains stable for real-time live tests and index status verification across production URLs.
         </>
       ),
       noteLabel: "Status",
@@ -1219,7 +1219,7 @@ export default function NewsClient({
 
   return (
     <main className="relative bg-white text-[#171a22]">
-      {/* ── READING PROGRESS BAR ── */}
+      {/* â”€â”€ READING PROGRESS BAR â”€â”€ */}
       <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-[3px]" aria-hidden="true">
         <div
           className="h-full w-full origin-left bg-[#534AB7] transition-transform duration-150 ease-out"
@@ -1227,7 +1227,7 @@ export default function NewsClient({
         />
       </div>
 
-      {/* ── TOAST ── */}
+      {/* â”€â”€ TOAST â”€â”€ */}
       <AnimatePresence>
         {shareToast && (
           <motion.div
@@ -1243,7 +1243,7 @@ export default function NewsClient({
         )}
       </AnimatePresence>
 
-      {/* ── VERTICAL SHARE STRAP (DESKTOP) ── */}
+      {/* â”€â”€ VERTICAL SHARE STRAP (DESKTOP) â”€â”€ */}
       <div className="fixed left-0 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
         <aside
           aria-label="Share this page"
@@ -1298,7 +1298,7 @@ export default function NewsClient({
         </aside>
       </div>
 
-      {/* ── SHARE STRAP (MOBILE, BOTTOM) ── */}
+      {/* â”€â”€ SHARE STRAP (MOBILE, BOTTOM) â”€â”€ */}
       <AnimatePresence>
         {showStrap && (
           <motion.div
@@ -1334,19 +1334,19 @@ export default function NewsClient({
         )}
       </AnimatePresence>
 
-      {/* ── 4-PILLAR PLATFORM ECOSYSTEM BAR ── */}
+      {/* â”€â”€ 4-PILLAR PLATFORM ECOSYSTEM BAR â”€â”€ */}
       <div className="pt-20">
         <PlatformHubNav active="news" />
       </div>
 
-      {/* ── HERO ── */}
+      {/* â”€â”€ HERO â”€â”€ */}
       <section className="relative overflow-visible border-b border-[#e2e5eb] bg-white pt-10 pb-12">
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <Link
             href="/resources"
             className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-[#6c727f] transition-colors hover:text-[#171a22]"
           >
-            ← Back to Resources
+            â† Back to Resources
           </Link>
 
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-[#171a22] sm:text-5xl">
@@ -1354,10 +1354,10 @@ export default function NewsClient({
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#6c727f] sm:text-lg">
             {intro ??
-              "Plain-English breakdowns of Google algorithm changes, core updates, and AI-search shifts that actually affect your rankings — curated, dated, and verified."}
+              "Plain-English breakdowns of Google algorithm changes, core updates, and AI-search shifts that actually affect your rankings â€” curated, dated, and verified."}
           </p>
 
-          {/* ── INTENT ANCHOR SUMMARY BOX (AEO / HEAD-TERM DOM CLUSTER) ── */}
+          {/* â”€â”€ INTENT ANCHOR SUMMARY BOX (AEO / HEAD-TERM DOM CLUSTER) â”€â”€ */}
           <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-[#e2e5eb] bg-[#f8fafc] p-4 text-left shadow-2xs sm:p-5">
             <p className="text-xs sm:text-sm leading-relaxed text-[#334155]">
               <strong className="font-bold text-[#0f172a]">Latest SEO News Today:</strong>{" "}
@@ -1365,7 +1365,7 @@ export default function NewsClient({
             </p>
           </div>
 
-          {/* ── INSTANT SEARCH ── */}
+          {/* â”€â”€ INSTANT SEARCH â”€â”€ */}
           <div ref={searchContainerRef} className="relative mx-auto mt-8 mb-4 max-w-2xl">
             <div
               className={`relative flex items-center rounded-xl border bg-white transition-all duration-200 ${
@@ -1548,7 +1548,7 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── SEO NEWS PAST 2 DAYS ── */}
+      {/* â”€â”€ SEO NEWS PAST 2 DAYS â”€â”€ */}
       <section className="border-b border-[#e2e5eb] bg-[#f7f8fa] py-12 md:py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -1564,12 +1564,12 @@ export default function NewsClient({
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                {hasRecent48Hours ? "Activity in the past 48 hours" : "No new rollout in 48 hours · latest from the past 7 days"}
+                {hasRecent48Hours ? "Activity in the past 48 hours" : "No new rollout in 48 hours Â· latest from the past 7 days"}
               </span>
               <div className="flex items-center gap-2 text-xs text-[#6c727f]">
                 <ShieldCheck className="h-4 w-4 text-[#6c727f]" />
                 <span>Updated {latestDateLabel}</span>
-                <span className="text-[#d5d9e0]">•</span>
+                <span className="text-[#d5d9e0]">â€¢</span>
                 <a
                   href="https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/"
                   target="_blank"
@@ -1606,7 +1606,7 @@ export default function NewsClient({
               </div>
             ) : (
               <p className="mb-7 max-w-3xl text-base leading-relaxed text-[#424754]">
-                The latest {categoryLabel} entries, newest first — each dated and linked to its source or analysis.
+                The latest {categoryLabel} entries, newest first â€” each dated and linked to its source or analysis.
               </p>
             )}
 
@@ -1711,7 +1711,7 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── LATEST SEO NEWS (FEED + NEWSLETTER SIDEBAR) ── */}
+      {/* â”€â”€ LATEST SEO NEWS (FEED + NEWSLETTER SIDEBAR) â”€â”€ */}
       <section id="latest-seo-news" className="scroll-mt-24 border-b border-[#e2e5eb] bg-white py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
@@ -1882,7 +1882,7 @@ export default function NewsClient({
                       </span>
                     )}
                     {selectedDateFilter === "custom" && (customFrom || customTo) && (
-                      <span> ({customFrom || "start"} → {customTo || "today"})</span>
+                      <span> ({customFrom || "start"} â†’ {customTo || "today"})</span>
                     )}
                     {selectedDateFilter !== "all" && selectedDateFilter !== "custom" && (
                       <span> ({DATE_OPTIONS.find((d) => d.id === selectedDateFilter)?.label})</span>
@@ -2015,7 +2015,7 @@ export default function NewsClient({
                           </div>
                         </motion.article>
 
-                        {/* ── INLINE FREE DA CHECKER CTA (IN BETWEEN NEWS) ── */}
+                        {/* â”€â”€ INLINE FREE DA CHECKER CTA (IN BETWEEN NEWS) â”€â”€ */}
                         {(idx === 1 || (unifiedFeed.length === 1 && idx === 0) || idx === 5) && (
                           <motion.div
                             initial={{ opacity: 0, y: 10 }}
@@ -2027,7 +2027,7 @@ export default function NewsClient({
                               <div className="max-w-xl">
                                 <div className="mb-1.5 inline-flex items-center gap-1.5 rounded-md border border-[#e2e5eb] bg-white px-2.5 py-0.5 text-[11px] font-semibold text-[#171a22]">
                                   <ShieldCheck className="h-3.5 w-3.5 text-[#2f9670]" />
-                                  Free SEO Resource · Authority Benchmark
+                                  Free SEO Resource Â· Authority Benchmark
                                 </div>
                                 <p className="text-base font-bold text-[#171a22] sm:text-lg">
                                   Free Domain Authority (DA) &amp; Website Authority Checker
@@ -2088,7 +2088,7 @@ export default function NewsClient({
                     <p className="text-sm font-semibold text-[#171a22]">Subscribe to our newsletter</p>
                   </div>
                   <p className="mb-3 text-xs leading-relaxed text-[#6c727f]">
-                    Confirmed Google updates and what they mean for your rankings — sent only when something actually changes.
+                    Confirmed Google updates and what they mean for your rankings â€” sent only when something actually changes.
                   </p>
                   <AnimatePresence mode="wait">
                     {newsletterSubscribed ? (
@@ -2138,7 +2138,7 @@ export default function NewsClient({
                       </motion.form>
                     )}
                   </AnimatePresence>
-                  <p className="mt-2 text-[11px] text-[#9aa0a6]">Free · No spam · Unsubscribe anytime</p>
+                  <p className="mt-2 text-[11px] text-[#9aa0a6]">Free Â· No spam Â· Unsubscribe anytime</p>
                 </div>
 
                 {/* Free DA Checker Sidebar Resource */}
@@ -2166,11 +2166,11 @@ export default function NewsClient({
                   </a>
                 </div>
 
-                {/* ── ESSENTIAL 2026 CORE RESOURCES (INTERNAL LINK LOOP) ── */}
+                {/* â”€â”€ ESSENTIAL 2026 CORE RESOURCES (INTERNAL LINK LOOP) â”€â”€ */}
                 <div className="rounded-xl border border-slate-200 bg-[#f8fafc] p-5 shadow-2xs">
                   <div className="mb-3 flex items-center gap-2">
                     <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#171a22] text-[11px] font-bold text-white">
-                      ⚡
+                      âš¡
                     </span>
                     <h3 className="text-xs font-black uppercase tracking-wider text-slate-900">
                       Essential 2026 Core Resources
@@ -2182,7 +2182,7 @@ export default function NewsClient({
                       className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
                     >
                       <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
-                        Schema Markup Generator →
+                        Schema Markup Generator â†’
                       </span>
                       <span className="text-[11px] text-slate-500">
                         Validate LocalBusiness, Legal &amp; Product JSON-LD
@@ -2193,7 +2193,7 @@ export default function NewsClient({
                       className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
                     >
                       <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
-                        llms.txt &amp; AI Crawler Builder →
+                        llms.txt &amp; AI Crawler Builder â†’
                       </span>
                       <span className="text-[11px] text-slate-500">
                         Build GPTBot &amp; ClaudeBot directives
@@ -2204,7 +2204,7 @@ export default function NewsClient({
                       className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
                     >
                       <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
-                        55-Point Technical SEO Audit →
+                        55-Point Technical SEO Audit â†’
                       </span>
                       <span className="text-[11px] text-slate-500">
                         Crawl budget, indexing &amp; CWV inspection
@@ -2215,18 +2215,18 @@ export default function NewsClient({
                       className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
                     >
                       <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
-                        Suspended GBP Reinstatement →
+                        Suspended GBP Reinstatement â†’
                       </span>
                       <span className="text-[11px] text-slate-500">
                         Diagnosing &amp; appealing local profile suspensions
                       </span>
                     </Link>
                     <Link
-                      href="/resources/solutions"
+                      href="/resources/solution"
                       className="group flex flex-col rounded-lg border border-slate-200 bg-white p-2.5 transition-all hover:border-slate-400 hover:shadow-2xs"
                     >
                       <span className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
-                        Production Solutions Library →
+                        Production Solutions Library â†’
                       </span>
                       <span className="text-[11px] text-slate-500">
                         Code fixes for GSC errors &amp; Shopify canonicals
@@ -2250,7 +2250,7 @@ export default function NewsClient({
                               <span className="line-clamp-2 text-[13px] font-medium leading-snug text-[#171a22] group-hover:underline">{item.title}</span>
                               <span className="mt-1 block text-[11px] text-[#6c727f]">
                                 {item.date}
-                                {item.engagement > 0 && ` · ${item.likes} likes · ${item.comments} comments`}
+                                {item.engagement > 0 && ` Â· ${item.likes} likes Â· ${item.comments} comments`}
                               </span>
                             </span>
                           </Link>
@@ -2261,7 +2261,7 @@ export default function NewsClient({
                               <span className="line-clamp-2 text-[13px] font-medium leading-snug text-[#171a22] group-hover:underline">{item.title}</span>
                               <span className="mt-1 block text-[11px] text-[#6c727f]">
                                 {item.date}
-                                {item.engagement > 0 && ` · ${item.likes} likes · ${item.comments} comments`}
+                                {item.engagement > 0 && ` Â· ${item.likes} likes Â· ${item.comments} comments`}
                               </span>
                             </span>
                           </a>
@@ -2276,7 +2276,7 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── LEAD MAGNET ── */}
+      {/* â”€â”€ LEAD MAGNET â”€â”€ */}
       <section className="bg-white pb-4">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <ArticleLeadMagnet
@@ -2285,14 +2285,14 @@ export default function NewsClient({
             copy={{
               eyebrow: "Reading about an update?",
               headline: "Find out whether it touched your site.",
-              sub: "Send me your URL. I’ll check it myself against the changes on this page — what moved, what didn’t, and whether Google’s AI names you or a competitor. Free, reply within 24 hours.",
+              sub: "Send me your URL. Iâ€™ll check it myself against the changes on this page â€” what moved, what didnâ€™t, and whether Googleâ€™s AI names you or a competitor. Free, reply within 24 hours.",
             }}
-            buttonText="Inspect My Site For Algorithm Impact →"
+            buttonText="Inspect My Site For Algorithm Impact â†’"
           />
         </div>
       </section>
 
-      {/* ── GOOGLE ALGORITHM UPDATE TRACKER ── */}
+      {/* â”€â”€ GOOGLE ALGORITHM UPDATE TRACKER â”€â”€ */}
       {showAlgorithmContext && (
       <section className="border-y border-[#e2e5eb] bg-[#f7f8fa] py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -2382,7 +2382,7 @@ export default function NewsClient({
 
       )}
 
-      {/* ── SEARCH CONSOLE NEWS & KNOWN ISSUES TRACKER ── */}
+      {/* â”€â”€ SEARCH CONSOLE NEWS & KNOWN ISSUES TRACKER â”€â”€ */}
       {showGscContext && (
       <section className="border-b border-[#e2e5eb] bg-white py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -2424,14 +2424,14 @@ export default function NewsClient({
 
       )}
 
-      {/* ── TOPIC GUIDES (PILLAR PAGES) ── */}
+      {/* â”€â”€ TOPIC GUIDES (PILLAR PAGES) â”€â”€ */}
       {guidesForCategory.length > 0 && (
       <section id="topic-guides" className="scroll-mt-24 border-b border-[#e2e5eb] bg-[#f7f8fa] py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold tracking-tight text-[#171a22] sm:text-3xl">Topic Guides</h2>
             <p className="mt-1.5 max-w-3xl text-sm text-[#6c727f]">
-              In-depth guides on confirmed algorithm movements, AI answer engines, and search architecture — continuously updated and verified.
+              In-depth guides on confirmed algorithm movements, AI answer engines, and search architecture â€” continuously updated and verified.
             </p>
           </div>
 
@@ -2480,7 +2480,7 @@ export default function NewsClient({
 
       )}
 
-      {/* ── FAQ ── */}
+      {/* â”€â”€ FAQ â”€â”€ */}
       <section className="border-b border-[#e2e5eb] bg-white py-14">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-2xl font-bold tracking-tight text-[#171a22] sm:text-3xl">Frequently Asked Questions</h2>
@@ -2498,7 +2498,7 @@ export default function NewsClient({
         </div>
       </section>
 
-      {/* ── READER FEEDBACK (non-heading, like a CTA) ── */}
+      {/* â”€â”€ READER FEEDBACK (non-heading, like a CTA) â”€â”€ */}
       <section className="bg-[#f7f8fa] py-14 pb-24 lg:pb-14">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -2592,7 +2592,7 @@ export default function NewsClient({
                       rows={3}
                       value={feedback.lookingFor}
                       onChange={(e) => setFeedback((f) => ({ ...f, lookingFor: e.target.value }))}
-                      placeholder="e.g. faster alerts on core updates, more local SEO coverage, GSC how-tos…"
+                      placeholder="e.g. faster alerts on core updates, more local SEO coverage, GSC how-tosâ€¦"
                       className={`${inputCls} h-auto resize-y py-2.5`}
                     />
                   </label>
@@ -2603,7 +2603,7 @@ export default function NewsClient({
                       rows={3}
                       value={feedback.likes}
                       onChange={(e) => setFeedback((f) => ({ ...f, likes: e.target.value }))}
-                      placeholder="e.g. the algorithm tracker table, dated sources, the filters…"
+                      placeholder="e.g. the algorithm tracker table, dated sources, the filtersâ€¦"
                       className={`${inputCls} h-auto resize-y py-2.5`}
                     />
                   </label>
@@ -2674,7 +2674,7 @@ export default function NewsClient({
   );
 }
 
-/* ─── Animated count-up for real, derived numbers (SSR renders the final value) ─── */
+/* â”€â”€â”€ Animated count-up for real, derived numbers (SSR renders the final value) â”€â”€â”€ */
 function CountUp({ value, duration = 700 }: { value: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(value);

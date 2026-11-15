@@ -41,7 +41,7 @@ const hardcodedCategories: ResourceCard[] = [
     title: "SEO Issues & Solutions Library",
     desc: "Production-ready diagnostic playbooks and code fixes for Google Search Console indexing drops, Law Firm GBP suspensions, Shopify Liquid canonical loops, and WooCommerce Core Web Vitals.",
     status: "live",
-    href: "/resources/solutions",
+    href: "/resources/solution",
     cta: "Explore solutions library",
   },
   {
@@ -59,7 +59,7 @@ const hardcodedCategories: ResourceCard[] = [
     title: "SEO, Law Firm & US Regional Discussions",
     desc: "Technical Q&A and community benchmark threads across Gemini 4 AI Mode, GBP Review Recency, Shopify OS 3.0 canonicals, and US Metro SERPs (Dallas, NY, CA, FL, AZ).",
     status: "live",
-    href: "/resources/discussions",
+    href: "/resources/forum",
     cta: "Join discussions",
   },
   {
