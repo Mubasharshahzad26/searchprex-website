@@ -61,7 +61,7 @@ export default function SerpCheckerSolutionPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <SerpCheckerClient />
+      <SerpCheckerClient faqs={SERP_FAQS} />
     </>
   );
 }
