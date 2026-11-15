@@ -96,18 +96,16 @@ const navLinks: NavLink[] = [
   },
 ];
 
-const NEWS_TECH_CHANNELS = [
-  { href: "/resources/news/technical", label: "Technical SEO News", badge: "Core", desc: "Crawling, indexing, CWV & rendering updates" },
-  { href: "/resources/news/ai-geo", label: "AI Visibility & GEO", badge: "AI Mode", desc: "Google AI Mode, Gemini & answer engine telemetry" },
-  { href: "/resources/news/ecommerce", label: "Ecommerce Store SEO", badge: "Retail", desc: "Merchant Center, Shopping Graph & retail search" },
-  { href: "/resources/news/tools", label: "SEO Tools & GSC", badge: "Telemetry", desc: "Google Search Console & technical marketing software" },
-];
-
-const NEWS_MARKET_CHANNELS = [
-  { href: "/resources/news/law-firm", label: "Law Firm SEO News", badge: "Legal", desc: "Legal search, LSA shifts & Map Pack updates" },
-  { href: "/resources/news/shopify-store", label: "Shopify Store SEO", badge: "Shopify", desc: "Liquid speed, Merchant Center & AI checkout" },
-  { href: "/resources/news/wordpress", label: "WordPress & WooCommerce", badge: "CMS", desc: "Core releases, security patches & WooCommerce speed" },
-  { href: "/resources/news/usa", label: "USA Regional Radar", badge: "US Metro", desc: "State-level Map Pack volatility & regional search" },
+const NEWS_DROPDOWN_ITEMS = [
+  { href: "/resources/news/technical", label: "Technical SEO", badge: "Technical" },
+  { href: "/resources/news/local-seo-updates", label: "Local SEO & GBP Updates", badge: "Local" },
+  { href: "/resources/news/ai-geo", label: "AI Visibility & GEO", badge: "AI & GEO" },
+  { href: "/resources/news/ecommerce", label: "Ecommerce Store SEO", badge: "Ecommerce" },
+  { href: "/resources/news/shopify-store", label: "Shopify Store SEO", badge: "Shopify" },
+  { href: "/resources/news/wordpress", label: "WordPress & WooCommerce", badge: "WordPress" },
+  { href: "/resources/news/law-firm", label: "Law Firm SEO", badge: "Law Firm" },
+  { href: "/resources/news/tools", label: "SEO Tools & GSC", badge: "Tools" },
+  { href: "/resources/news/usa", label: "USA Regional Radar", badge: "USA" },
 ];
 
 const INTERNATIONAL_SOLUTIONS = [
@@ -431,107 +429,46 @@ export default function Nav() {
                         </div>
                       ) : link.label === "News" ? (
                         <div
-                          className={`absolute left-1/2 -translate-x-1/2 top-full z-50 w-[720px] pt-2 transition-all duration-150 ${
+                          className={`absolute left-0 top-full z-50 w-72 pt-2 transition-all duration-150 ${
                             isOpen
                               ? "visible translate-y-0 opacity-100"
                               : "invisible pointer-events-none translate-y-2 opacity-0"
                           }`}
                         >
-                          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
-                            <div className="grid grid-cols-2 gap-6 divide-x divide-slate-100">
-                              {/* Column 1: Platforms & Telemetry */}
-                              <div>
-                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-                                  <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
-                                    PLATFORMS &amp; TELEMETRY
-                                  </div>
-                                  <Link
-                                    href="/resources/news"
-                                    onClick={() => setActiveDropdown(null)}
-                                    className="text-[11px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
-                                  >
-                                    All News Desk →
-                                  </Link>
-                                </div>
-                                <div className="space-y-1.5">
-                                  {NEWS_TECH_CHANNELS.map((item) => (
-                                    <Link
-                                      key={item.href}
-                                      href={item.href}
-                                      onClick={() => setActiveDropdown(null)}
-                                      className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
-                                    >
-                                      <div className="flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
-                                        <span>{item.label}</span>
-                                        {item.badge && (
-                                          <span className="rounded-full bg-slate-100 text-neutral-800 border border-slate-200 px-1.5 py-0.5 text-[9px] font-bold uppercase">
-                                            {item.badge}
-                                          </span>
-                                        )}
-                                      </div>
-                                      <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
-                                    </Link>
-                                  ))}
-                                </div>
-                              </div>
+                          <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+                            {/* All Newsroom updates header link */}
+                            <Link
+                              href="/resources/news"
+                              onClick={() => setActiveDropdown(null)}
+                              className="group flex items-center justify-between rounded-lg px-3 py-2 text-sm font-bold text-neutral-900 transition-colors hover:bg-slate-50 hover:text-emerald-700"
+                            >
+                              <span>All Newsroom Updates</span>
+                              <span className="text-xs font-semibold text-emerald-700 group-hover:underline">
+                                View Hub →
+                              </span>
+                            </Link>
 
-                              {/* Column 2: Markets & Specialties */}
-                              <div className="pl-6">
-                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-                                  <div className="text-xs font-bold uppercase tracking-wider text-neutral-900">
-                                    MARKETS &amp; SPECIALTIES
-                                  </div>
-                                  <Link
-                                    href="/resources/news/usa"
-                                    onClick={() => setActiveDropdown(null)}
-                                    className="text-[11px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
-                                  >
-                                    USA Radar →
-                                  </Link>
-                                </div>
-                                <div className="space-y-1.5">
-                                  {NEWS_MARKET_CHANNELS.map((item) => (
-                                    <Link
-                                      key={item.href}
-                                      href={item.href}
-                                      onClick={() => setActiveDropdown(null)}
-                                      className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
-                                    >
-                                      <div className="flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
-                                        <span>{item.label}</span>
-                                        {item.badge && (
-                                          <span className="rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 text-[9px] font-bold uppercase">
-                                            {item.badge}
-                                          </span>
-                                        )}
-                                      </div>
-                                      <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
-                                    </Link>
-                                  ))}
-                                </div>
-                              </div>
+                            <div className="my-1.5 border-t border-slate-100" />
+
+                            <div className="px-3 pb-1 pt-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                              Categories
                             </div>
 
-                            {/* Footer link */}
-                            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                              <span className="text-[#6c727f]">Dated, verified search engine telemetry &amp; algorithm monitoring</span>
-                              <div className="flex items-center gap-3">
+                            {/* Vertical Category List */}
+                            <div className="space-y-0.5">
+                              {NEWS_DROPDOWN_ITEMS.map((item) => (
                                 <Link
-                                  href="/resources/news"
+                                  key={item.href}
+                                  href={item.href}
                                   onClick={() => setActiveDropdown(null)}
-                                  className="font-bold text-neutral-950 hover:underline"
+                                  className="group flex items-center justify-between rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-neutral-950"
                                 >
-                                  All News Hub →
+                                  <span>{item.label}</span>
+                                  <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-neutral-700 group-hover:border-slate-300">
+                                    {item.badge}
+                                  </span>
                                 </Link>
-                                <span className="text-slate-300">·</span>
-                                <Link
-                                  href="/resources/news/usa"
-                                  onClick={() => setActiveDropdown(null)}
-                                  className="font-bold text-neutral-950 hover:underline"
-                                >
-                                  USA News Desk →
-                                </Link>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         </div>
@@ -814,70 +751,30 @@ export default function Nav() {
                           </div>
                         </div>
                       ) : link.label === "News" ? (
-                        <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">
-                          <div>
-                            <div className="flex items-center justify-between py-1">
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                                PLATFORMS &amp; TELEMETRY
+                        <div className="ml-4 mt-2 space-y-1 border-l border-slate-200 pl-3">
+                          <Link
+                            href="/resources/news"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="flex items-center justify-between py-1 text-sm font-bold text-neutral-900 hover:text-emerald-700"
+                          >
+                            <span>All Newsroom Updates</span>
+                            <span className="text-xs font-semibold text-emerald-700 underline">
+                              View Hub →
+                            </span>
+                          </Link>
+                          {NEWS_DROPDOWN_ITEMS.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
+                            >
+                              <span>{item.label}</span>
+                              <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.2 text-[9px] font-bold text-neutral-700">
+                                {item.badge}
                               </span>
-                              <Link
-                                href="/resources/news"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-[11px] font-bold text-neutral-900 underline"
-                              >
-                                All News Desk →
-                              </Link>
-                            </div>
-                            <div className="mt-1 space-y-1">
-                              {NEWS_TECH_CHANNELS.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
-                                >
-                                  <span>{item.label}</span>
-                                  {item.badge && (
-                                    <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.2 text-[9px] font-bold text-neutral-900">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div>
-                            <div className="flex items-center justify-between py-1">
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                                MARKETS &amp; SPECIALTIES
-                              </span>
-                              <Link
-                                href="/resources/news/usa"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-[11px] font-bold text-neutral-900 underline"
-                              >
-                                USA Radar →
-                              </Link>
-                            </div>
-                            <div className="mt-1 space-y-1">
-                              {NEWS_MARKET_CHANNELS.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
-                                >
-                                  <span>{item.label}</span>
-                                  {item.badge && (
-                                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.2 text-[9px] font-bold text-emerald-800">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+                            </Link>
+                          ))}
                         </div>
                       ) : link.label === "Resources" ? (
                         <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">

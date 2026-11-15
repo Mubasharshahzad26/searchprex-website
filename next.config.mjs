@@ -101,6 +101,16 @@ const nextConfig = {
         destination: '/resources/news/local-seo-updates',
         permanent: true,
       },
+      {
+        source: '/resources/news/local-seo',
+        destination: '/resources/news/local-seo-updates',
+        permanent: true,
+      },
+      {
+        source: '/resources/news/local',
+        destination: '/resources/news/local-seo-updates',
+        permanent: true,
+      },
       // Retired SEO News URLs found returning 404 in the direct URL and
       // internal-link audit. Preserve visitors and consolidate signals on the
       // nearest current, verified article or topic guide.
