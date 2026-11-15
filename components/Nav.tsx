@@ -41,6 +41,11 @@ const navLinks: NavLink[] = [
     ],
   },
   {
+    href: "/resources/solution",
+    label: "Solutions",
+    hasDropdown: true,
+  },
+  {
     href: "/locations",
     label: "Locations",
     hasDropdown: true,
@@ -86,32 +91,33 @@ const navLinks: NavLink[] = [
   },
 ];
 
+const INTERNATIONAL_SOLUTIONS = [
+  { href: "/resources/solution#playbooks", label: "Diagnostic Recovery Playbooks", badge: "Core", desc: "Root-cause fixes for GSC indexing, canonical loops & LCP" },
+  { href: "/resources/solution/serp-checker", label: "Live Google SERP Checker", badge: "Live", desc: "40+ countries ranking & SERP feature telemetry" },
+  { href: "/resources/solution/schema-generator", label: "Schema Markup Generator", desc: "Google-validated JSON-LD for Local, Law & Ecommerce" },
+  { href: "/resources/solution/llms-txt-generator", label: "llms.txt & AI Crawler Generator", desc: "AI bot directives for ChatGPT, Perplexity & Claude" },
+  { href: "/resources/solution/serp-simulator", label: "Google SERP Snippet Simulator", desc: "600px desktop & 960px mobile pixel ruler" },
+  { href: "/resources/solution/ai-search", label: "AI Search Visibility Audit", desc: "Benchmark citations in Perplexity & AI Overviews" },
+];
+
+const USA_SOLUTIONS = [
+  { href: "/resources/solution/intake-assistant", label: "AI Legal Intake Assistant", badge: "Law Firm", desc: "24/7 lead qualification & instant case summaries" },
+  { href: "/resources/solution/case-calculator", label: "Lost Case Revenue Calculator", badge: "ROI", desc: "Quantify monthly lost revenue from missed calls" },
+  { href: "/resources/solution/keyword-research", label: "State Legal Keyword Intelligence", desc: "Practice area search volume across 50 US states" },
+  { href: "/resources/solution/usa#playbooks", label: "Law Firm GBP Reinstatement Playbook", desc: "Single-appeal packet & virtual office audit" },
+  { href: "/services/local-seo/google-business-profile-suspended", label: "GBP Suspension Assistance", desc: "Fast-track reinstatement for suspended listings" },
+];
+
 const INTERNATIONAL_RESOURCES = [
   { href: "/resources/news", label: "Industry News Desk", badge: "Live", desc: "Dated & verified Google core & spam updates" },
-  { href: "/resources/solution", label: "Issues & Solutions Library", badge: "5 Tools", desc: "SERP Checker, Schema, llms.txt & issue fixes" },
   { href: "/resources/forum", label: "SEO Discussion Forum", badge: "New", desc: "Practitioner Q&A and technical benchmarks" },
   { href: "/resources/learning-hub", label: "SEO Learning Hub", badge: "New", desc: "Masterclasses for Core SEO, Shopify & WP" },
 ];
 
 const USA_RESOURCES = [
   { href: "/resources/news/usa", label: "USA News Engine", desc: "State-level Map Pack shifts & US local radar" },
-  { href: "/resources/solution/usa", label: "USA Solutions Dashboard", badge: "3 Tools", desc: "Law firm intake, lost cases & state keywords" },
   { href: "/resources/forum/usa", label: "USA Discussion Boards", desc: "US metro & state practitioner threads" },
   { href: "/resources/learning-hub/usa", label: "USA Learning Hub Playbooks", desc: "Local 3-Pack domination & legal playbooks" },
-];
-
-const INTERNATIONAL_TOOLS = [
-  { href: "/resources/solution/serp-checker", label: "SERP Checker" },
-  { href: "/resources/solution/schema-generator", label: "Schema Generator" },
-  { href: "/resources/solution/llms-txt-generator", label: "llms.txt Generator" },
-  { href: "/resources/solution/serp-simulator", label: "SERP Simulator" },
-  { href: "/resources/solution/ai-search", label: "AI Search Diagnostic" },
-];
-
-const USA_TOOLS = [
-  { href: "/resources/solution/intake-assistant", label: "AI Intake Assistant" },
-  { href: "/resources/solution/case-calculator", label: "Lost Case Calculator" },
-  { href: "/resources/solution/keyword-research", label: "Law Firm Keywords" },
 ];
 
 const PRACTITIONER_VAULTS = [
@@ -298,7 +304,113 @@ export default function Nav() {
                     )}
  
                     {link.hasDropdown && (
-                      link.label === "Resources" ? (
+                      link.label === "Solutions" ? (
+                        <div
+                          className={`absolute left-0 top-full z-50 w-[740px] pt-2 transition-all duration-150 ${
+                            isOpen
+                              ? "visible translate-y-0 opacity-100"
+                              : "invisible pointer-events-none translate-y-2 opacity-0"
+                          }`}
+                        >
+                          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+                            <div className="grid grid-cols-2 gap-6 divide-x divide-slate-100">
+                              {/* Column 1: International Solutions */}
+                              <div>
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900">
+                                    <span>🌐</span> International Solutions
+                                  </div>
+                                  <Link
+                                    href="/resources/solution"
+                                    onClick={() => setActiveDropdown(null)}
+                                    className="text-[11px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
+                                  >
+                                    View Hub →
+                                  </Link>
+                                </div>
+                                <div className="space-y-1.5">
+                                  {INTERNATIONAL_SOLUTIONS.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
+                                    >
+                                      <div className="flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
+                                        <span>{item.label}</span>
+                                        {item.badge && (
+                                          <span className="rounded-full bg-slate-100 text-neutral-800 border border-slate-200 px-1.5 py-0.5 text-[9px] font-bold uppercase">
+                                            {item.badge}
+                                          </span>
+                                        )}
+                                      </div>
+                                      <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Column 2: USA Solutions */}
+                              <div className="pl-6">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900">
+                                    <span>🇺🇸</span> USA High-Ticket Solutions
+                                  </div>
+                                  <Link
+                                    href="/resources/solution/usa"
+                                    onClick={() => setActiveDropdown(null)}
+                                    className="text-[11px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
+                                  >
+                                    View Dashboard →
+                                  </Link>
+                                </div>
+                                <div className="space-y-1.5">
+                                  {USA_SOLUTIONS.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="group block rounded-lg p-2 transition-colors hover:bg-slate-50"
+                                    >
+                                      <div className="flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-emerald-700">
+                                        <span>{item.label}</span>
+                                        {item.badge && (
+                                          <span className="rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 text-[9px] font-bold uppercase">
+                                            {item.badge}
+                                          </span>
+                                        )}
+                                      </div>
+                                      <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Footer link */}
+                            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                              <span className="text-[#6c727f]">Verified recovery playbooks &amp; diagnostic engineering suites</span>
+                              <div className="flex items-center gap-3">
+                                <Link
+                                  href="/resources/solution"
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="font-bold text-neutral-950 hover:underline"
+                                >
+                                  International Library →
+                                </Link>
+                                <span className="text-slate-300">·</span>
+                                <Link
+                                  href="/resources/solution/usa"
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="font-bold text-neutral-950 hover:underline"
+                                >
+                                  USA Dashboard →
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : link.label === "Resources" ? (
                         <div
                           className={`absolute right-0 top-full z-50 w-[840px] pt-2 transition-all duration-150 ${
                             isOpen
@@ -333,25 +445,6 @@ export default function Nav() {
                                     </Link>
                                   ))}
                                 </div>
-
-                                {/* Quick International Tools */}
-                                <div className="mt-3 pt-2.5 border-t border-slate-100">
-                                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block mb-1.5">
-                                    Free International Tools:
-                                  </span>
-                                  <div className="flex flex-wrap gap-1.5">
-                                    {INTERNATIONAL_TOOLS.map((tool) => (
-                                      <Link
-                                        key={tool.href}
-                                        href={tool.href}
-                                        onClick={() => setActiveDropdown(null)}
-                                        className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700 transition-colors hover:bg-neutral-900 hover:text-white"
-                                      >
-                                        {tool.label}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                </div>
                               </div>
 
                               {/* Column 2: USA-Centric */}
@@ -378,25 +471,6 @@ export default function Nav() {
                                       <p className="text-[11px] text-[#6c727f] mt-0.5 line-clamp-1">{item.desc}</p>
                                     </Link>
                                   ))}
-                                </div>
-
-                                {/* Quick USA Tools */}
-                                <div className="mt-3 pt-2.5 border-t border-slate-100">
-                                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block mb-1.5">
-                                    USA Law Firm Tools:
-                                  </span>
-                                  <div className="flex flex-wrap gap-1.5">
-                                    {USA_TOOLS.map((tool) => (
-                                      <Link
-                                        key={tool.href}
-                                        href={tool.href}
-                                        onClick={() => setActiveDropdown(null)}
-                                        className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700 transition-colors hover:bg-neutral-900 hover:text-white"
-                                      >
-                                        {tool.label}
-                                      </Link>
-                                    ))}
-                                  </div>
                                 </div>
                               </div>
 
@@ -548,7 +622,73 @@ export default function Nav() {
                       </Link>
                     )}
                     {link.hasDropdown && (
-                      link.label === "Resources" ? (
+                      link.label === "Solutions" ? (
+                        <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">
+                          <div>
+                            <div className="flex items-center justify-between py-1">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                                🌐 International Solutions
+                              </span>
+                              <Link
+                                href="/resources/solution"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-[11px] font-bold text-neutral-900 underline"
+                              >
+                                View Hub →
+                              </Link>
+                            </div>
+                            <div className="mt-1 space-y-1">
+                              {INTERNATIONAL_SOLUTIONS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
+                                >
+                                  <span>{item.label}</span>
+                                  {item.badge && (
+                                    <span className="rounded-full border border-slate-200 bg-slate-100 px-1.5 py-0.2 text-[9px] font-bold text-neutral-900">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex items-center justify-between py-1">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                                🇺🇸 USA High-Ticket Solutions
+                              </span>
+                              <Link
+                                href="/resources/solution/usa"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-[11px] font-bold text-neutral-900 underline"
+                              >
+                                View Hub →
+                              </Link>
+                            </div>
+                            <div className="mt-1 space-y-1">
+                              {USA_SOLUTIONS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="flex items-center justify-between py-1 text-sm text-slate-700 hover:text-neutral-950"
+                                >
+                                  <span>{item.label}</span>
+                                  {item.badge && (
+                                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.2 text-[9px] font-bold text-emerald-800">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : link.label === "Resources" ? (
                         <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">
                           <div>
                             <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
@@ -568,18 +708,6 @@ export default function Nav() {
                                       {item.badge}
                                     </span>
                                   )}
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="mt-2 flex flex-wrap gap-1">
-                              {INTERNATIONAL_TOOLS.map((tool) => (
-                                <Link
-                                  key={tool.href}
-                                  href={tool.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-700 hover:bg-neutral-900 hover:text-white"
-                                >
-                                  {tool.label}
                                 </Link>
                               ))}
                             </div>
@@ -603,18 +731,6 @@ export default function Nav() {
                                       {item.badge}
                                     </span>
                                   )}
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="mt-2 flex flex-wrap gap-1">
-                              {USA_TOOLS.map((tool) => (
-                                <Link
-                                  key={tool.href}
-                                  href={tool.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-700 hover:bg-neutral-900 hover:text-white"
-                                >
-                                  {tool.label}
                                 </Link>
                               ))}
                             </div>
