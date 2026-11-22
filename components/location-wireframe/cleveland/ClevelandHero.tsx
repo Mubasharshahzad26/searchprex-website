@@ -12,11 +12,14 @@ import {
   MapPin,
   BarChart3,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import type { CityPage } from "@/lib/city-pages";
+import { isBlackFridayOfferLive } from "@/lib/black-friday-offer";
 
 interface ClevelandHeroProps {
   page: CityPage;
+  onOpenBfModal?: () => void;
 }
 
 const DEMAND_AREAS = [
@@ -58,7 +61,7 @@ const DEMAND_AREAS = [
   },
 ];
 
-export default function ClevelandHero({ page }: ClevelandHeroProps) {
+export default function ClevelandHero({ page, onOpenBfModal }: ClevelandHeroProps) {
   const [selectedDemand, setSelectedDemand] = useState(0);
   const current = DEMAND_AREAS[selectedDemand];
 
@@ -90,8 +93,10 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
           email,
           firmSize,
           practiceArea,
-          source: "cleveland:hero-lead-form",
-          notes: `Requested Cleveland Hero Reality Check. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
+          source: isBlackFridayOfferLive() ? "cleveland:hero-lead-form:black-friday" : "cleveland:hero-lead-form",
+          notes: isBlackFridayOfferLive()
+            ? `Black Friday 2026 Claim (25% Off + Cuyahoga Exclusivity). Firm Size: ${firmSize}, Practice: ${practiceArea}`
+            : `Requested Cleveland Hero Reality Check. Firm Size: ${firmSize}, Practice: ${practiceArea}`,
         }),
       });
 
@@ -135,6 +140,16 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                 <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
                 1-Firm Practice Exclusivity
               </div>
+              {isBlackFridayOfferLive() && (
+                <button
+                  type="button"
+                  onClick={onOpenBfModal}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-neutral-950 text-amber-300 border border-amber-500/40 text-xs font-black uppercase tracking-wider hover:bg-neutral-900 transition-all cursor-pointer shadow-xs animate-pulse"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                  Black Friday: 25% Off
+                </button>
+              )}
             </div>
 
             {/* H1 Headline: Solid Black on Light White Background */}
@@ -267,10 +282,10 @@ export default function ClevelandHero({ page }: ClevelandHeroProps) {
                 <div>
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 mb-1.5">
                     <Clock className="w-3 h-3 text-neutral-800" />
-                    Free Cleveland Local SEO Audit
+                    {isBlackFridayOfferLive() ? "Black Friday: 25% Off + Free Audit" : "Free Cleveland Local SEO Audit"}
                   </span>
                   <h2 className="text-lg sm:text-xl font-bold text-neutral-950">
-                    See Your Local Visibility & Lead Gaps
+                    {isBlackFridayOfferLive() ? "Claim 25% Discount & Cuyahoga Exclusivity" : "See Your Local Visibility & Lead Gaps"}
                   </h2>
                 </div>
               </div>

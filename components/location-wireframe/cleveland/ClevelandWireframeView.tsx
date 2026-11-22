@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import type { CityPage } from "@/lib/city-pages";
 import ClevelandHero from "./ClevelandHero";
 import ClevelandPainBanner from "./ClevelandPainBanner";
@@ -25,16 +25,46 @@ import ClevelandFaqAndCta from "./ClevelandFaqAndCta";
 import TaglinePainBand from "../TaglinePainBand";
 import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
 import LocationBlogTeaser from "../LocationBlogTeaser";
+import ClevelandBlackFridayStickyBar from "./ClevelandBlackFridayStickyBar";
+import ClevelandBlackFridayModal from "./ClevelandBlackFridayModal";
+import { isBlackFridayOfferLive } from "@/lib/black-friday-offer";
 
 interface ClevelandWireframeViewProps {
   page: CityPage;
 }
 
 export default function ClevelandWireframeView({ page }: ClevelandWireframeViewProps) {
+  const [isBfModalOpen, setIsBfModalOpen] = useState(false);
+
+  // Automatically show Black Friday modal on page open after 2 seconds
+  useEffect(() => {
+    if (!isBlackFridayOfferLive()) return;
+    try {
+      const shown = window.sessionStorage.getItem("spx_cleveland_bf_modal_shown_2026");
+      if (!shown) {
+        const timer = setTimeout(() => {
+          setIsBfModalOpen(true);
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
   return (
     <div className="w-full bg-white text-slate-900 selection:bg-neutral-900 selection:text-white font-sans">
+      {/* Black Friday Sticky Bar */}
+      <ClevelandBlackFridayStickyBar onOpenModal={() => setIsBfModalOpen(true)} />
+
+      {/* Black Friday Entrance / Action Modal */}
+      <ClevelandBlackFridayModal
+        isOpen={isBfModalOpen}
+        onClose={() => setIsBfModalOpen(false)}
+      />
+
       {/* 1. Hero with Demand Ledger */}
-      <ClevelandHero page={page} />
+      <ClevelandHero page={page} onOpenBfModal={() => setIsBfModalOpen(true)} />
 
       {/* Tagline band under hero */}
       <TaglinePainBand />
@@ -73,7 +103,7 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
       <ClevelandDurationResults />
 
       {/* 13. 07 · What you pay (Solo, Growth, Firm Pricing Tiers) */}
-      <ClevelandPricingTiers />
+      <ClevelandPricingTiers onOpenModal={() => setIsBfModalOpen(true)} />
 
       {/* 14. Confused Between Choosing an SEO Agency in Cleveland? Decision Matrix */}
       <ClevelandAgencyComparison />

@@ -1,12 +1,19 @@
 "use client";
 
 import React from "react";
-import { Check, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { Check, ArrowRight, ShieldCheck, Sparkles, Gift } from "lucide-react";
+import { isBlackFridayOfferLive } from "@/lib/black-friday-offer";
+
+interface ClevelandPricingTiersProps {
+  onOpenModal?: () => void;
+}
 
 const TIERS = [
   {
     name: "Solo",
     price: "$1,200",
+    bfPrice: "$900",
+    bfSavings: "Save $300/mo (25% Off)",
     period: "/month",
     description: "Designed for solo practitioners dominating a single legal niche in Cleveland.",
     highlight: false,
@@ -24,6 +31,8 @@ const TIERS = [
   {
     name: "Growth",
     price: "$1,800",
+    bfPrice: "$1,350",
+    bfSavings: "Save $450/mo (25% Off)",
     period: "/month",
     description: "Ideal for boutique 2–5 attorney firms expanding into suburbs and capturing AI search.",
     highlight: true,
@@ -41,6 +50,8 @@ const TIERS = [
   {
     name: "Firm",
     price: "$2,500",
+    bfPrice: "$1,875",
+    bfSavings: "Save $625/mo (25% Off)",
     period: "/month",
     description: "Full-scale market dominance for mid-size practices seeking to displace regional giants.",
     highlight: false,
@@ -57,10 +68,16 @@ const TIERS = [
   },
 ];
 
-export default function ClevelandPricingTiers() {
-  const scrollToContact = () => {
-    const el = document.getElementById("reality-check");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+export default function ClevelandPricingTiers({ onOpenModal }: ClevelandPricingTiersProps = {}) {
+  const isBlackFriday = isBlackFridayOfferLive();
+
+  const handleCta = () => {
+    if (isBlackFriday && onOpenModal) {
+      onOpenModal();
+    } else {
+      const el = document.getElementById("reality-check");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -109,13 +126,40 @@ export default function ClevelandPricingTiers() {
                   {tier.description}
                 </p>
 
-                <div className="mt-5 pb-5 border-b border-slate-100 flex items-baseline">
-                  <span className="font-mono text-4xl sm:text-5xl font-black text-neutral-950">
-                    {tier.price}
-                  </span>
-                  <span className="text-sm font-semibold text-slate-500 ml-1">
-                    {tier.period}
-                  </span>
+                <div className="mt-5 pb-5 border-b border-slate-100">
+                  {isBlackFriday ? (
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xl font-bold text-slate-400 line-through">
+                          {tier.price}
+                        </span>
+                        <span className="inline-flex items-center gap-1 rounded-md bg-amber-400/20 border border-amber-500/40 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800">
+                          <Gift className="w-3 h-3 text-amber-600" />
+                          25% OFF
+                        </span>
+                      </div>
+                      <div className="flex items-baseline mt-1">
+                        <span className="font-mono text-4xl sm:text-5xl font-black text-neutral-950">
+                          {tier.bfPrice}
+                        </span>
+                        <span className="text-sm font-semibold text-slate-500 ml-1">
+                          {tier.period}
+                        </span>
+                      </div>
+                      <p className="text-xs font-bold text-amber-700 mt-1">
+                        {tier.bfSavings} for first 3 months
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-baseline">
+                      <span className="font-mono text-4xl sm:text-5xl font-black text-neutral-950">
+                        {tier.price}
+                      </span>
+                      <span className="text-sm font-semibold text-slate-500 ml-1">
+                        {tier.period}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-6 space-y-3">
@@ -135,14 +179,14 @@ export default function ClevelandPricingTiers() {
 
               <div className="mt-8 pt-6 border-t border-slate-100">
                 <button
-                  onClick={scrollToContact}
+                  onClick={handleCta}
                   className={`w-full inline-flex items-center justify-center gap-2 rounded-xl py-3.5 px-6 text-sm sm:text-base font-bold transition-all duration-200 cursor-pointer ${
                     tier.highlight
                       ? "bg-neutral-900 hover:bg-neutral-800 text-white shadow-md shadow-sm hover:shadow-lg hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]"
                       : "border-2 border-slate-200 bg-slate-50 text-neutral-950 hover:border-neutral-900 hover:bg-white hover:scale-[1.01] active:scale-[0.99]"
                   }`}
                 >
-                  <span>{tier.ctaLabel}</span>
+                  <span>{isBlackFriday ? `Claim Black Friday ${tier.name}` : tier.ctaLabel}</span>
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <p className="mt-2 text-[11px] text-center text-slate-400">
