@@ -72,6 +72,9 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
       {/* Verified Local Case Studies (Brought Higher Up For Immediate Proof) */}
       <LocationLocalCaseStudies page={page} />
 
+      {/* Founder Bio (Mubashar Sharif, CEO) + Verified Semrush Certifications (Proof of Expertise Before Pricing) */}
+      <ClevelandFounderBio />
+
       {/* Black Friday Pricing Tiers (Brought Higher Up For Maximum Conversion) */}
       <ClevelandPricingTiers onOpenModal={() => setIsBfModalOpen(true)} />
 
@@ -110,9 +113,6 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
 
       {/* 14. Confused Between Choosing an SEO Agency in Cleveland? Decision Matrix */}
       <ClevelandAgencyComparison />
-
-      {/* 15. The Brain Behind It (Founder Bio: Mubashar Sharif, CEO) + Semrush Certifications */}
-      <ClevelandFounderBio />
 
       {/* 16. Cleveland Demography & Local Interactive Map */}
       <ClevelandDemographyMap />
