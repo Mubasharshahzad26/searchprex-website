@@ -14,7 +14,7 @@ const STATE_PRIORITY_CLIENTS: Record<string, string[]> = {
   california: ["local-hvac-services", "kitchen-cabinets", "hvac-team"],
   arizona: ["local-hvac-services", "mammoth-roofing", "door-doctor"],
   "new-mexico": ["mammoth-roofing", "local-hvac-services", "door-doctor"],
-  ohio: ["dolls-cleaning", "door-doctor", "mammoth-roofing"],
+  ohio: ["dolls-cleaning", "local-hvac-services", "mammoth-roofing"],
   pennsylvania: ["dolls-cleaning", "local-hvac-services", "door-doctor"],
   louisiana: ["mammoth-roofing", "door-doctor", "dolls-cleaning"],
   kansas: ["dolls-cleaning", "mammoth-roofing", "local-hvac-services"],
