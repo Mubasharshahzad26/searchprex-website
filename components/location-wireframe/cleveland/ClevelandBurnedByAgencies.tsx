@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -98,6 +99,29 @@ export default function ClevelandBurnedByAgencies() {
             </Link>{" "}
             to see how we replace empty promises with transparent monthly case attribution.
           </p>
+        </div>
+
+        {/* Visual Callout: Relief from PPC & Agency Burnout */}
+        <div className="mt-8 relative w-full h-48 sm:h-64 rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
+          <Image
+            src="/images/services/law-firm/law-firm-relief-from-ppc-burnout.webp"
+            alt="Law firm relief from agency burnout and spiraling PPC costs"
+            fill
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/85 via-neutral-950/40 to-transparent" />
+          <div className="absolute inset-y-0 left-6 sm:left-10 flex flex-col justify-center max-w-lg text-white">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-1">
+              Transparent Legal Marketing
+            </span>
+            <p className="text-lg sm:text-2xl font-black text-white leading-snug">
+              Stop Burning Retainers on Vanity Traffic &amp; Unaudited Click Traps
+            </p>
+            <p className="mt-1 text-xs sm:text-sm text-slate-300 hidden sm:block">
+              We replace opaque agency monthly reports with real signed cases, call whisper tracking, and month-to-month accountability.
+            </p>
+          </div>
         </div>
 
         {/* 4 Traps vs SearchPrex Results Grid */}

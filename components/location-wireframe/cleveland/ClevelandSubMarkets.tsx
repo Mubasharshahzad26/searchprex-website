@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Landmark, ArrowRight, Compass, Shield } from "lucide-react";
 
@@ -110,6 +111,32 @@ export default function ClevelandSubMarkets() {
           <p className="leading-relaxed">
             Cuyahoga County Court of Common Pleas · Cleveland Municipal Court · U.S. District Court, Northern District of Ohio · Cleveland Metropolitan Bar Association · Ohio State Bar Association.
           </p>
+        </div>
+
+        {/* Cleveland Downtown Skyline & Cuyahoga County Courthouse Architecture Image */}
+        <div className="mt-8 relative w-full h-64 sm:h-80 md:h-96 rounded-3xl overflow-hidden border-2 border-slate-200 shadow-md">
+          <Image
+            src="/images/services/law-firm/city-cleveland-ohio-law-firm-seo.webp"
+            alt="Cleveland Ohio downtown skyline and Cuyahoga County courthouse architecture for Law Firm SEO"
+            fill
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/20 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-xs text-xs font-bold text-white mb-2 border border-white/20">
+                <Landmark className="w-3.5 h-3.5 text-amber-300" />
+                Cuyahoga County Justice Center &amp; Downtown Skyline
+              </span>
+              <p className="text-xl sm:text-2xl font-black text-white leading-tight">
+                Hyper-Local Search Signals for Cleveland &amp; Surrounding Municipal Courts
+              </p>
+            </div>
+            <span className="text-xs text-slate-300 font-mono hidden md:inline-block">
+              Downtown · Lakewood · Parma · Beachwood · Westlake
+            </span>
+          </div>
         </div>
 
         {/* Detailed Interactive Suburb Hub */}
