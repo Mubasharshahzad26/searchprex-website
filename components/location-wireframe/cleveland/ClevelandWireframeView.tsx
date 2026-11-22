@@ -69,6 +69,12 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
       {/* Tagline band under hero */}
       <TaglinePainBand />
 
+      {/* Verified Local Case Studies (Brought Higher Up For Immediate Proof) */}
+      <LocationLocalCaseStudies page={page} />
+
+      {/* Black Friday Pricing Tiers (Brought Higher Up For Maximum Conversion) */}
+      <ClevelandPricingTiers onOpenModal={() => setIsBfModalOpen(true)} />
+
       {/* 2. Top Pain Band */}
       <ClevelandPainBanner id="painband-top" variant="top" />
 
@@ -102,13 +108,10 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
       {/* 12. 06 · Results by duration (Milestones & Benchmark Progression Table) */}
       <ClevelandDurationResults />
 
-      {/* 13. 07 · What you pay (Solo, Growth, Firm Pricing Tiers) */}
-      <ClevelandPricingTiers onOpenModal={() => setIsBfModalOpen(true)} />
-
       {/* 14. Confused Between Choosing an SEO Agency in Cleveland? Decision Matrix */}
       <ClevelandAgencyComparison />
 
-      {/* 15. The Brain Behind It (Founder Bio: Mubashar Sharif, CEO) */}
+      {/* 15. The Brain Behind It (Founder Bio: Mubashar Sharif, CEO) + Semrush Certifications */}
       <ClevelandFounderBio />
 
       {/* 16. Cleveland Demography & Local Interactive Map */}
@@ -124,7 +127,6 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
       <ClevelandKeywordCluster />
 
       {/* 20. FAQ Accordion + Closing High-Contrast CTA Banner + Bottom Pain Band */}
-      <LocationLocalCaseStudies page={page} />
       <LocationBlogTeaser page={page} />
       <ClevelandFaqAndCta />
 

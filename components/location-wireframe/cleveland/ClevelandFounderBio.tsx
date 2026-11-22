@@ -148,10 +148,10 @@ export default function ClevelandFounderBio() {
             <div>
               <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-2">
                 <FileCheck2 className="w-3.5 h-3.5 text-neutral-800" />
-                Verified Credentials · Semrush Academy
+                Semrush Certified · Google E-E-A-T Aligned
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                Google E-E-A-T Backed: Verified SEO &amp; AI Search Certifications
+                Verified Credentials: Certified SEO &amp; AI Search Specialist
               </h3>
               <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
                 Google&apos;s Search Quality Rater Guidelines prioritize demonstrable Experience, Expertise, Authoritativeness, and Trustworthiness (E-E-A-T). Every strategy we execute for Cleveland practices is anchored in verified, industry-standard accreditations:
@@ -159,7 +159,7 @@ export default function ClevelandFounderBio() {
             </div>
             <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 flex-shrink-0">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>Semrush Certified · Valid Thru 2027</span>
+              <span>Semrush Academy · Valid Thru 2027</span>
             </div>
           </div>
 
