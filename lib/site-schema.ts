@@ -156,6 +156,32 @@ export const founder = {
     "LLM Optimization",
     "Google Indexing Recovery",
   ],
+  hasCredential: [
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "On-Page SEO and AI Search Essentials with Semrush",
+      credentialCategory: "Certificate of Completion",
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Semrush Academy",
+        url: "https://www.semrush.com/academy/",
+      },
+      identifier: "6ccc15ccf5",
+      validUntil: "2027-11-16",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "How to Optimize for Mobile: The CRAFT of Mobile SEO",
+      credentialCategory: "Certificate of Completion",
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Semrush Academy",
+        url: "https://www.semrush.com/academy/",
+      },
+      identifier: "0bdda3567e",
+      validUntil: "2027-11-16",
+    },
+  ],
   sameAs: [
     "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/",
     "https://www.upwork.com/freelancers/~01400266ea842005be",
