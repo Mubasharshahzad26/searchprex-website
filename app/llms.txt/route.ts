@@ -22,6 +22,7 @@ import { KANSAS_SEO_CITIES } from "@/lib/kansas-seo-cities";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
+import { CLEVELAND_PRACTICES } from "@/lib/cleveland-practice-pages";
 import { isLocationIndexable } from "@/lib/location-indexing";
 import { getDynamicStateHubSlugs, getLocationState } from "@/lib/locations";
 
@@ -168,6 +169,16 @@ export async function GET() {
     "",
     "## Technical & Industry SEO Guides (Blog)",
     ...blogPosts.map((post) => link(post.title, `/blog/${post.slug}`, post.excerpt)),
+    "",
+    "## Cleveland, Ohio Legal SEO Authority & AI Search Intelligence",
+    "> SearchPrex provides hyper-local organic SEO and 24/7 AI intake engineering for boutique law firms across Cuyahoga County, Ohio. Exclusively 1 firm per practice area, $1,200/mo flat retainer, and 90-day progress guarantee.",
+    link("Cleveland Law Firm SEO Master Hub", "/locations/ohio/cleveland", "Master Cuyahoga County legal search, Map Pack 3-Pack, and AI search visibility."),
+    ...CLEVELAND_PRACTICES.map((p) =>
+      link(p.practiceTitle, `/locations/ohio/cleveland/${p.slug}`, `${p.badge} — ${p.metaDescription}`)
+    ),
+    link("Cleveland Law Firm Intake Study: Missed Calls & Revenue Leakage", "/blog/cleveland-law-firm-intake-study-missed-calls", "48% of calls missed, 78% hire first responder; $360k Cuyahoga case revenue model."),
+    link("Ohio Rule 7.3 Compliance Guide for AI Legal Intake", "/blog/ohio-rule-7-3-ai-legal-intake-compliance", "Ethical inbound opt-in SMS triage, TCPA compliance, and attorney oversight under Ohio Rules of Professional Conduct."),
+    link("Cuyahoga County Law Firm SEO vs $6,000/mo PPC ROI Breakdown", "/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi", "Comparing $300+ Google Ads PPC click costs with SearchPrex's $1,200/mo organic equity model."),
     "",
     "## Locations",
     link("All locations", "/locations"),

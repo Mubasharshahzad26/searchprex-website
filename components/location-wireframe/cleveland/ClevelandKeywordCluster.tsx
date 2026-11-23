@@ -16,7 +16,7 @@ const KEYWORD_CLUSTERS = [
       '"24 hour personal injury lawyer near me"'
     ],
     intent: "Urgent, mobile-first inquiries following vehicular collisions requiring immediate under-60-second intake before prospects call competing billboard firms.",
-    href: "/services/law-firm-seo/personal-injury",
+    href: "/locations/ohio/cleveland/personal-injury",
     linkLabel: "Personal Injury SEO Architecture",
   },
   {
@@ -30,7 +30,7 @@ const KEYWORD_CLUSTERS = [
       '"Cleveland Clinic malpractice attorney"'
     ],
     intent: "High-net-worth liability investigations requiring authoritative medical-legal E-E-A-T and deep institutional hospital jurisdiction silos.",
-    href: "/services/law-firm-seo/personal-injury",
+    href: "/locations/ohio/cleveland/medical-malpractice",
     linkLabel: "Catastrophic & Malpractice SEO Architecture",
   },
   {
@@ -44,7 +44,7 @@ const KEYWORD_CLUSTERS = [
       '"OVI lawyer Lakewood Ohio"'
     ],
     intent: "Emergency after-hours queries occurring between 8 PM and 3 AM immediately following arrests, requiring 24/7 automated SMS triage.",
-    href: "/services/law-firm-seo/criminal-defense",
+    href: "/locations/ohio/cleveland/criminal-defense",
     linkLabel: "Criminal Defense SEO Architecture",
   },
   {
@@ -58,7 +58,7 @@ const KEYWORD_CLUSTERS = [
       '"Industrial Commission hearing lawyer Cleveland"'
     ],
     intent: "Procedure-heavy statutory searches where injured industrial workers seek concrete step-by-step administrative guidance rather than generic marketing promises.",
-    href: "/services/law-firm-seo/personal-injury",
+    href: "/locations/ohio/cleveland/workers-compensation",
     linkLabel: "Workers' Comp & BWC SEO Architecture",
   },
   {
@@ -72,7 +72,7 @@ const KEYWORD_CLUSTERS = [
       '"high net worth divorce lawyer Beachwood OH"'
     ],
     intent: "Emotional, discrete inquiries researching local judicial procedures, asset valuation, and affluent suburban legal representation.",
-    href: "/services/law-firm-seo/family-law",
+    href: "/locations/ohio/cleveland/family-law",
     linkLabel: "Family Law & Divorce SEO Architecture",
   },
 ];

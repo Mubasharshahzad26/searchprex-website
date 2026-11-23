@@ -15,6 +15,7 @@ import { getDynamicStateHubSlugs } from "@/lib/locations";
 import { INDUSTRY_PAGES } from "@/lib/industry-pages";
 import { LOCAL_INDUSTRIES } from "@/lib/local-industries";
 import { ECOMMERCE_INDUSTRIES } from "@/lib/ecommerce-industries";
+import { CLEVELAND_PRACTICES } from "@/lib/cleveland-practice-pages";
 import { isGatedRoute } from "@/lib/gated-routes";
 import { staticNewsSpokes } from "@/lib/static-news-spokes";
 import { NEWS_TOPIC_GUIDES } from "@/lib/news-topic-guides";
@@ -432,6 +433,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: absolute(`/locations/${state}/${city}`),
       changeFrequency: "monthly",
       priority: 0.75,
+    });
+  }
+
+  // Cleveland, OH practice-area sub-hubs (Personal Injury, Criminal Defense, Family Law, Malpractice, Workers' Comp)
+  for (const practice of CLEVELAND_PRACTICES) {
+    add({
+      url: absolute(`/locations/ohio/cleveland/${practice.slug}`),
+      changeFrequency: "weekly",
+      priority: 0.85,
     });
   }
 

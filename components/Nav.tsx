@@ -25,20 +25,6 @@ const navLinks: NavLink[] = [
     href: "/services",
     label: "Services",
     hasDropdown: true,
-    dropdownItems: [
-      // Pillars, each followed by its spoke pages (hub and spoke).
-      { href: "/services/law-firm-seo",  label: "Law Firm SEO" },
-      { href: "/services/law-firm-seo/google-business-profile-for-lawyers", label: "Google Business Profile for Lawyers", sub: true },
-      { href: "/services/ecommerce-seo", label: "Ecommerce SEO" },
-      { href: "/services/ecommerce-seo/product-page-seo", label: "Product Page SEO", sub: true },
-      { href: "/services/local-seo",     label: "Local SEO" },
-      { href: "/services/local-seo/google-business-profile-optimization", label: "Google Business Profile Optimization", sub: true },
-      { href: "/services/local-seo/google-business-profile-suspended", label: "GBP Suspension Help", sub: true },
-      { href: "/services/technical-seo", label: "Technical SEO" },
-      { href: "/services/technical-seo/technical-seo-audit", label: "Technical SEO Audit", sub: true },
-      { href: "/services/technical-seo/indexing-recovery", label: "Indexing Recovery", sub: true },
-      { href: "/industries",             label: "Industries We Serve" },
-    ],
   },
   {
     href: "/resources/solution",
@@ -106,6 +92,33 @@ const NEWS_DROPDOWN_ITEMS = [
   { href: "/resources/news/law-firm", label: "Law Firm SEO", badge: "Law Firm" },
   { href: "/resources/news/tools", label: "SEO Tools & GSC", badge: "Tools" },
   { href: "/resources/news/usa", label: "USA Regional Radar", badge: "USA" },
+];
+
+// ─── Services Mega-Menu Data ─────────────────────────────────────────────────
+const LAW_FIRM_ITEMS = [
+  { href: "/services/law-firm-seo",                                    label: "Law Firm SEO Master Hub",          isHub: true },
+  { href: "/services/law-firm-seo/personal-injury",                    label: "Personal Injury Lawyers SEO" },
+  { href: "/services/law-firm-seo/family-law",                         label: "Family Law & Divorce SEO" },
+  { href: "/services/law-firm-seo/criminal-defense",                   label: "Criminal Defense & DUI SEO" },
+  { href: "/services/law-firm-seo/estate-planning",                    label: "Estate Planning & Probate SEO" },
+  { href: "/services/law-firm-seo/mass-torts",                         label: "Mass Torts & MDL Docket SEO" },
+  { href: "/services/law-firm-seo/google-business-profile-for-lawyers", label: "GBP for Lawyers" },
+];
+
+const ECOMMERCE_ITEMS = [
+  { href: "/services/ecommerce-seo",                     label: "eCommerce SEO Master Hub",   isHub: true },
+  { href: "/services/ecommerce-seo/shopify",             label: "Shopify Theme SEO" },
+  { href: "/services/ecommerce-seo/woocommerce",         label: "WooCommerce Tech Core" },
+  { href: "/services/ecommerce-seo/product-page-seo",   label: "Product Page (PDP) SEO" },
+];
+
+const LOCAL_TARGETING_ITEMS = [
+  { href: "/services/local-seo",                                        label: "Local SEO Master Hub",           isHub: true },
+  { href: "/services/local-seo/google-business-profile-optimization",   label: "GBP Optimization" },
+  { href: "/services/local-seo/google-business-profile-suspended",      label: "GBP Suspension & Appeals" },
+  { href: "/services/local-seo/hvac",                                   label: "HVAC Contractor SEO" },
+  { href: "/services/local-seo/roofing",                                label: "Roofing Specialist SEO" },
+  { href: "/services/local-seo/cleaning",                               label: "Cleaning & Remodeling SEO" },
 ];
 
 const INTERNATIONAL_SOLUTIONS = [
@@ -321,7 +334,92 @@ export default function Nav() {
                     )}
  
                     {link.hasDropdown && (
-                      link.label === "Solutions" ? (
+                      link.label === "Services" ? (
+                        <div className="ml-4 mt-2 space-y-4 border-l border-slate-200 pl-3">
+                          {/* Legal Marketing */}
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                              LEGAL MARKETING (LAW FIRMS)
+                            </span>
+                            <div className="mt-1.5 space-y-1">
+                              {LAW_FIRM_ITEMS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block py-1 hover:text-neutral-950 ${
+                                    item.isHub
+                                      ? "text-sm font-bold text-neutral-900"
+                                      : "text-xs text-slate-600"
+                                  }`}
+                                >
+                                  {item.isHub ? item.label : `• ${item.label}`}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Revenue Scaling */}
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                              REVENUE SCALING (eCOMMERCE)
+                            </span>
+                            <div className="mt-1.5 space-y-1">
+                              {ECOMMERCE_ITEMS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block py-1 hover:text-neutral-950 ${
+                                    item.isHub
+                                      ? "text-sm font-bold text-neutral-900"
+                                      : "text-xs text-slate-600"
+                                  }`}
+                                >
+                                  {item.isHub ? item.label : `• ${item.label}`}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Local Targeting */}
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                              LOCAL TARGETING (CONTRACTORS &amp; BIZ)
+                            </span>
+                            <div className="mt-1.5 space-y-1">
+                              {LOCAL_TARGETING_ITEMS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block py-1 hover:text-neutral-950 ${
+                                    item.isHub
+                                      ? "text-sm font-bold text-neutral-900"
+                                      : "text-xs text-slate-600"
+                                  }`}
+                                >
+                                  {item.isHub ? item.label : `• ${item.label}`}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Radar Tech Core */}
+                          <div className="rounded-lg bg-neutral-950 px-3 py-2">
+                            <span className="block text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-1">
+                              RADAR TECH CORE
+                            </span>
+                            <Link
+                              href="/resources/solution/ai-search"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="text-xs font-bold text-white hover:text-emerald-300"
+                            >
+                              AI Search (GEO &amp; AEO) Included In Every Plan →
+                            </Link>
+                          </div>
+                        </div>
+                      ) : link.label === "Solutions" ? (
                         <div
                           className={`absolute left-0 top-full z-50 w-[740px] pt-2 transition-all duration-150 ${
                             isOpen
@@ -684,7 +782,92 @@ export default function Nav() {
                       </Link>
                     )}
                     {link.hasDropdown && (
-                      link.label === "Solutions" ? (
+                      link.label === "Services" ? (
+                        <div className="ml-4 mt-2 space-y-4 border-l border-slate-200 pl-3">
+                          {/* Legal Marketing */}
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                              LEGAL MARKETING (LAW FIRMS)
+                            </span>
+                            <div className="mt-1.5 space-y-1">
+                              {LAW_FIRM_ITEMS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block py-1 hover:text-neutral-950 ${
+                                    item.isHub
+                                      ? "text-sm font-bold text-neutral-900"
+                                      : "text-xs text-slate-600"
+                                  }`}
+                                >
+                                  {item.isHub ? item.label : `• ${item.label}`}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Revenue Scaling */}
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                              REVENUE SCALING (eCOMMERCE)
+                            </span>
+                            <div className="mt-1.5 space-y-1">
+                              {ECOMMERCE_ITEMS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block py-1 hover:text-neutral-950 ${
+                                    item.isHub
+                                      ? "text-sm font-bold text-neutral-900"
+                                      : "text-xs text-slate-600"
+                                  }`}
+                                >
+                                  {item.isHub ? item.label : `• ${item.label}`}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Local Targeting */}
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                              LOCAL TARGETING (CONTRACTORS &amp; BIZ)
+                            </span>
+                            <div className="mt-1.5 space-y-1">
+                              {LOCAL_TARGETING_ITEMS.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block py-1 hover:text-neutral-950 ${
+                                    item.isHub
+                                      ? "text-sm font-bold text-neutral-900"
+                                      : "text-xs text-slate-600"
+                                  }`}
+                                >
+                                  {item.isHub ? item.label : `• ${item.label}`}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Radar Tech Core */}
+                          <div className="rounded-lg bg-neutral-950 px-3 py-2">
+                            <span className="block text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-1">
+                              RADAR TECH CORE
+                            </span>
+                            <Link
+                              href="/resources/solution/ai-search"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="text-xs font-bold text-white hover:text-emerald-300"
+                            >
+                              AI Search (GEO &amp; AEO) Included In Every Plan →
+                            </Link>
+                          </div>
+                        </div>
+                      ) : link.label === "Solutions" ? (
                         <div className="ml-4 mt-2 space-y-3 border-l border-slate-200 pl-3">
                           <div>
                             <div className="flex items-center justify-between py-1">

@@ -7,24 +7,36 @@ import ClevelandPainBanner from "./ClevelandPainBanner";
 
 const FAQS = [
   {
-    q: "How competitive is law firm SEO in Cleveland?",
-    a: "Competition depends on the practice area and search. We review the current results for your priority Cleveland and Cuyahoga County searches, then identify realistic opportunities based on your firm's website, profile, and competitors.",
+    q: "How does SearchPrex compare to national legal marketing agencies (FindLaw, Scorpion, Justia) in Cleveland?",
+    a: "National legal directories lock Ohio law firms into $3,500–$8,000/month contracts while selling identical directory profiles to dozens of competing Cleveland attorneys. SearchPrex operates on strict 1-firm per practice area exclusivity across Cuyahoga County. We build custom Next.js architectures on your own domain, optimize for both Google Maps 3-Pack and generative AI engines (ChatGPT, Perplexity), and provide a complimentary 24/7 AI Intake Engine at an engineering-direct $1,200/mo flat retainer.",
+  },
+  {
+    q: "Why do Cleveland personal injury firms lose cases to billboard advertisers (KNR, Elk & Elk)?",
+    a: "While billboard mega-firms dominate highway awareness on I-90 and I-480, over 64% of injured motorists still research Google or ask ChatGPT before retaining counsel. The real vulnerability is speed-to-lead: Clio benchmark data proves that 78% of claimants retain the first practice that responds. If your firm takes hours to call back or misses after-hours calls, claimants immediately hire competitors. SearchPrex pairs #1 local rankings with under-60-second AI intake triage to lock in retainers before billboard firms can answer.",
+  },
+  {
+    q: "Is 24/7 AI legal intake compliant with Ohio Board of Professional Conduct Rule 7.3?",
+    a: "Yes. Ohio Rule 7.3 restricts uninvited, direct solicitation. SearchPrex's AI intake system exclusively processes inbound, opt-in inquiries submitted through your website, SMS, or click-to-call. It transparently identifies itself as an automated intake assistant, gathers preliminary incident facts, schedules consultations, and explicitly disclaims legal advice—leaving all supervisory authority with the attorney under Ohio Rule 5.3.",
+  },
+  {
+    q: "How much does law firm SEO cost in Cleveland, Ohio?",
+    a: "Traditional agencies charge $2,500 to $7,000+ per month with 12-month lock-in contracts. SearchPrex provides complete Cleveland legal SEO for a flat $1,200/month with zero onboarding fees and month-to-month flexibility. Every plan includes Google Business Profile Map Pack optimization, custom practice area silos, Ohio statutory schema, and our 24/7 AI intake engine.",
+  },
+  {
+    q: "What is SearchPrex's 90-day performance guarantee for Cuyahoga County firms?",
+    a: "We provide a 90-day progress guarantee: if your firm does not see measurable gains in target Cuyahoga County keyword rankings, organic traffic, or qualified intake inquiries within 90 days, we either work for free until those milestones are hit or refund your last 90 days of retainer fees. We do not make false guarantees of #1 rankings—Google explicitly forbids this—but we fully back our engineering execution.",
   },
   {
     q: "Why is Ohio workers' compensation content such a massive opportunity?",
-    a: "Ohio workers' compensation is administered through the Ohio Bureau of Workers' Compensation, with appeals involving the Industrial Commission. Content about this topic should reflect current Ohio sources and be reviewed for legal accuracy by the firm before publication.",
-  },
-  {
-    q: "How long before SEO produces signed cases in Cleveland?",
-    a: "Timing varies with your starting visibility, competition, website, and Google Business Profile. We set milestones after reviewing the firm's baseline and track qualified calls and form enquiries alongside visibility. SEO results and case volume are not guaranteed.",
-  },
-  {
-    q: "Do I need separate pages for Lakewood, Parma, Beachwood, and Westlake?",
-    a: "Only when the firm genuinely serves that area and can provide useful, distinct information for people there. A page that merely swaps in a suburb name is unlikely to help users; we assess each location before recommending a separate page.",
+    a: "Ohio operates a state-exclusive fund through the Ohio Bureau of Workers' Compensation (BWC), with appeals adjudicated by the Industrial Commission of Ohio. Because injured workers face complex procedural hurdles (filing C-92 forms, administrative hearings, VSSR claims), they search heavily for statutory guidance. Building authoritative, statute-backed content captures high-volume claims that competitors ignore.",
   },
   {
     q: "Do I have to stop my PPC campaigns when starting SEO?",
-    a: "No. We never recommend turning off profitable paid ads prematurely. We run organic SEO alongside your current PPC campaigns, document signed case acquisition in your monthly performance ledger, and recommend trimming paid ad spend only where organic rankings have permanently secured top visibility.",
+    a: "No. We never recommend turning off profitable paid ads prematurely. In Cleveland, personal injury keywords command $180 to $350+ per click. We run organic SEO alongside your current PPC campaigns, document signed case acquisition in your monthly performance ledger, and recommend trimming paid ad spend only where organic rankings have permanently secured top visibility.",
+  },
+  {
+    q: "Do I need separate pages for Lakewood, Parma, Beachwood, and Westlake?",
+    a: "Only when the firm genuinely serves that area and can provide useful, distinct information for people there. Google treats Cuyahoga County suburbs as distinct local markets. We construct verified suburb corridors addressing specific local courts and municipal ordinances rather than thin doorway pages.",
   },
 ];
 
