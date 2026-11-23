@@ -39,10 +39,19 @@ const navLinks: NavLink[] = [
     // because the hub used to 404.
     dropdownItems: [
       { href: "/locations", label: "All locations" },
-      ...CITY_PAGES.map((c) => ({
-        href: `/locations/${c.stateSlug}/${c.citySlug}`,
-        label: `${c.city}, ${c.stateAbbr}`,
-      })),
+      ...CITY_PAGES.flatMap((c) => {
+        if (c.citySlug === "cleveland" && c.stateSlug === "ohio") {
+          return [
+            { href: `/locations/${c.stateSlug}/${c.citySlug}`, label: `${c.city}, ${c.stateAbbr} (Master Hub)` },
+            { href: "/locations/ohio/cleveland/personal-injury", label: "• Personal Injury SEO", sub: true },
+            { href: "/locations/ohio/cleveland/criminal-defense", label: "• Criminal Defense & OVI", sub: true },
+            { href: "/locations/ohio/cleveland/family-law", label: "• Family Law & Divorce", sub: true },
+            { href: "/locations/ohio/cleveland/medical-malpractice", label: "• Medical Malpractice", sub: true },
+            { href: "/locations/ohio/cleveland/workers-compensation", label: "• Workers' Comp & BWC", sub: true },
+          ];
+        }
+        return [{ href: `/locations/${c.stateSlug}/${c.citySlug}`, label: `${c.city}, ${c.stateAbbr}` }];
+      }),
       { href: "/locations/kansas", label: "Kansas — all cities" },
     ],
   },
@@ -103,6 +112,7 @@ const LAW_FIRM_ITEMS = [
   { href: "/services/law-firm-seo/estate-planning",                    label: "Estate Planning & Probate SEO" },
   { href: "/services/law-firm-seo/mass-torts",                         label: "Mass Torts & MDL Docket SEO" },
   { href: "/services/law-firm-seo/google-business-profile-for-lawyers", label: "GBP for Lawyers" },
+  { href: "/locations/ohio/cleveland",                                 label: "Cleveland Hub & Practice Desks" },
 ];
 
 const ECOMMERCE_ITEMS = [
@@ -711,13 +721,13 @@ export default function Nav() {
                         </div>
                       ) : (
                         <div
-                          className={`absolute left-0 top-full z-50 ${link.dropdownItems?.some((i) => i.sub) ? "w-72" : "w-56"} pt-2 transition-all duration-150 ${
+                          className={`absolute left-0 top-full z-50 ${link.dropdownItems?.some((i) => i.sub) ? "w-80" : "w-56"} pt-2 transition-all duration-150 ${
                             isOpen
                               ? "visible translate-y-0 opacity-100"
                               : "invisible pointer-events-none translate-y-2 opacity-0"
                           }`}
                         >
-                          <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+                          <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl max-h-[80vh] overflow-y-auto">
                             {link.dropdownItems?.map((item) => {
                               const isExternal = item.href.startsWith("http");
                               

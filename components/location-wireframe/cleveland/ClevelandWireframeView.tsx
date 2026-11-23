@@ -27,6 +27,7 @@ import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
 import LocationBlogTeaser from "../LocationBlogTeaser";
 import ClevelandBlackFridayStickyBar from "./ClevelandBlackFridayStickyBar";
 import ClevelandBlackFridayModal from "./ClevelandBlackFridayModal";
+import ClevelandPracticeDesksGrid from "./ClevelandPracticeDesksGrid";
 import AiIntakeEfficiency from "@/components/AiIntakeEfficiency";
 import { isBlackFridayOfferLive } from "@/lib/black-friday-offer";
 
@@ -84,6 +85,9 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
 
       {/* 3. Quick Answer Card */}
       <ClevelandQuickAnswer />
+
+      {/* 3b. Practice-Area Specialized Desks Grid (Direct Sub-Hub Routing) */}
+      <ClevelandPracticeDesksGrid />
 
       {/* 4. AI Problem Diagnosis Tool (Powered by Gemini Pool) + 7-Day Trial Lead Form */}
       <ClevelandDiagnosisTool />
