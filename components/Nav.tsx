@@ -335,88 +335,130 @@ export default function Nav() {
  
                     {link.hasDropdown && (
                       link.label === "Services" ? (
-                        <div className="ml-4 mt-2 space-y-4 border-l border-slate-200 pl-3">
-                          {/* Legal Marketing */}
-                          <div>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              LEGAL MARKETING (LAW FIRMS)
-                            </span>
-                            <div className="mt-1.5 space-y-1">
-                              {LAW_FIRM_ITEMS.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className={`block py-1 hover:text-neutral-950 ${
-                                    item.isHub
-                                      ? "text-sm font-bold text-neutral-900"
-                                      : "text-xs text-slate-600"
-                                  }`}
-                                >
-                                  {item.isHub ? item.label : `• ${item.label}`}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+                        <div
+                          className={`absolute left-0 top-full z-50 w-[780px] pt-2 transition-all duration-150 ${
+                            isOpen
+                              ? "visible translate-y-0 opacity-100"
+                              : "invisible pointer-events-none translate-y-2 opacity-0"
+                          }`}
+                        >
+                          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+                            <div className="grid grid-cols-3 gap-6 divide-x divide-slate-100">
+                              {/* Column 1: Legal Marketing */}
+                              <div>
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                                  <div className="text-[11px] font-black uppercase tracking-wider text-neutral-900">
+                                    LEGAL MARKETING
+                                  </div>
+                                  <Link
+                                    href="/services/law-firm-seo"
+                                    onClick={() => setActiveDropdown(null)}
+                                    className="text-[10px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
+                                  >
+                                    All Practices →
+                                  </Link>
+                                </div>
+                                <div className="space-y-1">
+                                  {LAW_FIRM_ITEMS.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className={`block rounded-lg px-2.5 py-1.5 transition-colors hover:bg-slate-50 ${
+                                        item.isHub
+                                          ? "font-bold text-neutral-950 text-xs bg-slate-50/70"
+                                          : "text-xs text-slate-600 hover:text-neutral-950"
+                                      }`}
+                                    >
+                                      {item.isHub ? item.label : `• ${item.label}`}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
 
-                          {/* Revenue Scaling */}
-                          <div>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              REVENUE SCALING (eCOMMERCE)
-                            </span>
-                            <div className="mt-1.5 space-y-1">
-                              {ECOMMERCE_ITEMS.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className={`block py-1 hover:text-neutral-950 ${
-                                    item.isHub
-                                      ? "text-sm font-bold text-neutral-900"
-                                      : "text-xs text-slate-600"
-                                  }`}
-                                >
-                                  {item.isHub ? item.label : `• ${item.label}`}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+                              {/* Column 2: eCommerce Scaling */}
+                              <div className="pl-6">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                                  <div className="text-[11px] font-black uppercase tracking-wider text-neutral-900">
+                                    ECOMMERCE SCALING
+                                  </div>
+                                  <Link
+                                    href="/services/ecommerce-seo"
+                                    onClick={() => setActiveDropdown(null)}
+                                    className="text-[10px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
+                                  >
+                                    All Stores →
+                                  </Link>
+                                </div>
+                                <div className="space-y-1">
+                                  {ECOMMERCE_ITEMS.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className={`block rounded-lg px-2.5 py-1.5 transition-colors hover:bg-slate-50 ${
+                                        item.isHub
+                                          ? "font-bold text-neutral-950 text-xs bg-slate-50/70"
+                                          : "text-xs text-slate-600 hover:text-neutral-950"
+                                      }`}
+                                    >
+                                      {item.isHub ? item.label : `• ${item.label}`}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
 
-                          {/* Local Targeting */}
-                          <div>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              LOCAL TARGETING (CONTRACTORS &amp; BIZ)
-                            </span>
-                            <div className="mt-1.5 space-y-1">
-                              {LOCAL_TARGETING_ITEMS.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className={`block py-1 hover:text-neutral-950 ${
-                                    item.isHub
-                                      ? "text-sm font-bold text-neutral-900"
-                                      : "text-xs text-slate-600"
-                                  }`}
-                                >
-                                  {item.isHub ? item.label : `• ${item.label}`}
-                                </Link>
-                              ))}
+                              {/* Column 3: Local Targeting */}
+                              <div className="pl-6">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                                  <div className="text-[11px] font-black uppercase tracking-wider text-neutral-900">
+                                    LOCAL BUSINESS &amp; GBP
+                                  </div>
+                                  <Link
+                                    href="/services/local-seo"
+                                    onClick={() => setActiveDropdown(null)}
+                                    className="text-[10px] font-bold text-neutral-900 hover:text-emerald-700 hover:underline"
+                                  >
+                                    All Local →
+                                  </Link>
+                                </div>
+                                <div className="space-y-1">
+                                  {LOCAL_TARGETING_ITEMS.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className={`block rounded-lg px-2.5 py-1.5 transition-colors hover:bg-slate-50 ${
+                                        item.isHub
+                                          ? "font-bold text-neutral-950 text-xs bg-slate-50/70"
+                                          : "text-xs text-slate-600 hover:text-neutral-950"
+                                      }`}
+                                    >
+                                      {item.isHub ? item.label : `• ${item.label}`}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
-                          </div>
 
-                          {/* Radar Tech Core */}
-                          <div className="rounded-lg bg-neutral-950 px-3 py-2">
-                            <span className="block text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-1">
-                              RADAR TECH CORE
-                            </span>
-                            <Link
-                              href="/resources/solution/ai-search"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className="text-xs font-bold text-white hover:text-emerald-300"
-                            >
-                              AI Search (GEO &amp; AEO) Included In Every Plan →
-                            </Link>
+                            {/* Bottom Tech Core Ribbon */}
+                            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <span className="rounded-md bg-neutral-950 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                                  INCLUDED IN ALL PLANS
+                                </span>
+                                <span className="text-xs text-slate-600">
+                                  Next.js Performance Core &amp; AI Search (GEO / AEO)
+                                </span>
+                              </div>
+                              <Link
+                                href="/resources/solution/ai-search"
+                                onClick={() => setActiveDropdown(null)}
+                                className="text-xs font-bold text-neutral-950 hover:text-emerald-700 hover:underline"
+                              >
+                                Explore AI Mode &amp; Answer Engines →
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       ) : link.label === "Solutions" ? (
