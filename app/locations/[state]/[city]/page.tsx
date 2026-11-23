@@ -759,9 +759,10 @@ export default async function CityPage({
                     <div className="mt-8 flex flex-wrap items-center gap-4">
                       <CtaButton
                         href="/free-audit"
-                        label={`Request Free 24h ${page.city} Teardown`}
                         icon={<ArrowRight className="h-4 w-4" aria-hidden />}
-                      />
+                      >
+                        Request Free 24h {page.city} Teardown
+                      </CtaButton>
                       <Link
                         href="/why-us"
                         className="text-xs font-bold text-[#534AB7] hover:underline"
@@ -1028,6 +1029,19 @@ function Schema({ page, url, stateHubHref }: { page: CityPage; url: string; stat
       "@type": "Audience",
       audienceType: `Law firms and attorneys in ${page.city}, ${page.state}`,
     },
+    ...(page.citySlug === "cleveland"
+      ? {
+          knowsAbout: [
+            "Ohio Revised Code",
+            "Cuyahoga County Court of Common Pleas",
+            "Ohio Bureau of Workers' Compensation",
+            "Cleveland Municipal Court",
+            "Ohio Rule of Professional Conduct 7.3",
+            "Ohio Medical Malpractice Law",
+            "Cuyahoga County Domestic Relations Court",
+          ],
+        }
+      : {}),
   };
 
   const faq = {

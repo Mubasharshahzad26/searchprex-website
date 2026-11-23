@@ -6,28 +6,74 @@ import { Key, ArrowRight, ShieldCheck, Scale, Compass } from "lucide-react";
 
 const KEYWORD_CLUSTERS = [
   {
-    name: "Workers' compensation",
-    coreTopics: "Ohio BWC · FROI-1 First Report of Injury · Industrial Commission district hearings · allowed medical conditions · Temporary Total Disability (TTD) · Permanent Partial Disability (PPD) · VSSR violations · claim appeal to Cuyahoga Common Pleas",
-    longTail: ['"workers comp lawyer Cleveland"', '"BWC claim denied attorney Cuyahoga County"', '"Industrial Commission hearing lawyer Cleveland"'],
-    intent: "Procedure-heavy, high-intent searches where injured workers seek step-by-step statutory clarity rather than generic legal marketing fluff.",
+    name: "Personal injury & Accidents",
+    badge: "$180 – $350+ PPC CPC · $15k–$100k+ Case Value",
+    coreTopics: "Ohio R.C. 2305.10 statute of limitations · modified comparative fault (51% bar) · non-economic damages caps (R.C. 2315.18) · third-party commercial liability · Cuyahoga County Court of Common Pleas · I-90, I-480 & I-77 crash corridors",
+    longTail: [
+      '"car accident lawyer Cleveland OH"',
+      '"truck accident attorney Cuyahoga County"',
+      '"car accident lawyer Parma OH"',
+      '"24 hour personal injury lawyer near me"'
+    ],
+    intent: "Urgent, mobile-first inquiries following vehicular collisions requiring immediate under-60-second intake before prospects call competing billboard firms.",
     href: "/services/law-firm-seo/personal-injury",
-    linkLabel: "Personal Injury & Workers' Comp SEO",
+    linkLabel: "Personal Injury SEO Architecture",
   },
   {
-    name: "Personal injury",
-    coreTopics: "Ohio R.C. 2305.10 statute of limitations · modified comparative negligence (51% bar) · non-economic damages caps (R.C. 2315.18) · third-party liability · Cuyahoga County Court of Common Pleas · wrongful death claims",
-    longTail: ['"car accident lawyer Cleveland"', '"truck accident attorney Cuyahoga County"', '"slip and fall lawyer Parma OH"'],
-    intent: "Urgent, mobile-first inquiries following vehicular collisions on I-90, I-77, and I-480 requiring rapid intake and immediate attorney engagement.",
+    name: "Medical malpractice",
+    badge: "$180 – $300+ PPC CPC · $50k–$250k+ Case Value",
+    coreTopics: "Ohio 180-day letter · Affidavit of Merit (Ohio Civ. R. 10(D)(2)) · 1-year statute of limitations (R.C. 2305.113) · Cleveland Clinic & University Hospitals (UH) jurisdiction · birth injury & surgical error expert testimony",
+    longTail: [
+      '"medical malpractice lawyer Cleveland"',
+      '"birth injury attorney Cleveland Ohio"',
+      '"hospital negligence lawyer Beachwood OH"',
+      '"Cleveland Clinic malpractice attorney"'
+    ],
+    intent: "High-net-worth liability investigations requiring authoritative medical-legal E-E-A-T and deep institutional hospital jurisdiction silos.",
     href: "/services/law-firm-seo/personal-injury",
-    linkLabel: "Personal injury SEO architecture",
+    linkLabel: "Catastrophic & Malpractice SEO Architecture",
   },
   {
-    name: "OVI & criminal defense",
-    coreTopics: "Ohio R.C. 4511.19 OVI · Administrative License Suspension (ALS) · 30-day appeal windows · breathalyzer & chemical test suppression · record expungement under SB 288 · Cleveland Municipal Court arraignments",
-    longTail: ['"OVI lawyer Cleveland"', '"record sealing attorney Cuyahoga County"', '"Cleveland Justice Center criminal lawyer"'],
-    intent: "High-urgency, fear-driven searches occurring within 24 to 48 hours of an arrest, demanding immediate telephone consultation routing.",
+    name: "OVI & Criminal defense",
+    badge: "$80 – $160 PPC CPC · $3,500–$15,000 Retainer",
+    coreTopics: "Ohio R.C. 4511.19 OVI · Administrative License Suspension (ALS) · 30-day appeal window · breathalyzer & chemical test suppression · SB 288 record sealing · Cleveland Municipal Court & Cuyahoga Justice Center arraignments",
+    longTail: [
+      '"OVI lawyer Cleveland"',
+      '"24 hour criminal defense lawyer Cleveland"',
+      '"arrested for OVI in Cuyahoga County what to do"',
+      '"OVI lawyer Lakewood Ohio"'
+    ],
+    intent: "Emergency after-hours queries occurring between 8 PM and 3 AM immediately following arrests, requiring 24/7 automated SMS triage.",
     href: "/services/law-firm-seo/criminal-defense",
-    linkLabel: "Criminal defense SEO architecture",
+    linkLabel: "Criminal Defense SEO Architecture",
+  },
+  {
+    name: "Workers' compensation (BWC)",
+    badge: "$70 – $140 PPC CPC · $5,000–$25,000 Value",
+    coreTopics: "Ohio BWC · FROI-1 First Report of Injury · Industrial Commission district hearings (615 W. Superior Ave) · allowed medical conditions · Temporary Total Disability (TTD) · Permanent Partial (PPD) · VSSR claims · Cuyahoga Common Pleas appeals",
+    longTail: [
+      '"workers comp lawyer Cleveland"',
+      '"Ohio BWC attorney Cleveland"',
+      '"denied workers comp claim appeal lawyer Ohio"',
+      '"Industrial Commission hearing lawyer Cleveland"'
+    ],
+    intent: "Procedure-heavy statutory searches where injured industrial workers seek concrete step-by-step administrative guidance rather than generic marketing promises.",
+    href: "/services/law-firm-seo/personal-injury",
+    linkLabel: "Workers' Comp & BWC SEO Architecture",
+  },
+  {
+    name: "Family law & High-asset divorce",
+    badge: "$45 – $95 PPC CPC · $4,000–$20,000 Retainer",
+    coreTopics: "Cuyahoga County Domestic Relations Court · high-net-worth asset division · Ohio R.C. 3119 child support calculations · shared parenting plans · separate vs marital property tracing · spousal support guidelines",
+    longTail: [
+      '"divorce lawyer Cleveland OH"',
+      '"child custody attorney Cuyahoga County"',
+      '"divorce attorney Westlake OH"',
+      '"high net worth divorce lawyer Beachwood OH"'
+    ],
+    intent: "Emotional, discrete inquiries researching local judicial procedures, asset valuation, and affluent suburban legal representation.",
+    href: "/services/law-firm-seo/family-law",
+    linkLabel: "Family Law & Divorce SEO Architecture",
   },
 ];
 
@@ -69,6 +115,14 @@ export default function ClevelandKeywordCluster() {
               </button>
             );
           })}
+        </div>
+
+        {/* Active Practice Economics Badge */}
+        <div className="mt-5 flex items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 text-xs font-bold text-emerald-800">
+            <Scale className="h-3.5 w-3.5 text-emerald-700" />
+            <span>Cleveland Legal Economics: {current.badge}</span>
+          </span>
         </div>
 
         {/* 3-Column Semantic Grid with animated card hover */}

@@ -27,6 +27,7 @@ import LocationLocalCaseStudies from "../LocationLocalCaseStudies";
 import LocationBlogTeaser from "../LocationBlogTeaser";
 import ClevelandBlackFridayStickyBar from "./ClevelandBlackFridayStickyBar";
 import ClevelandBlackFridayModal from "./ClevelandBlackFridayModal";
+import AiIntakeEfficiency from "@/components/AiIntakeEfficiency";
 import { isBlackFridayOfferLive } from "@/lib/black-friday-offer";
 
 interface ClevelandWireframeViewProps {
@@ -86,6 +87,11 @@ export default function ClevelandWireframeView({ page }: ClevelandWireframeViewP
 
       {/* 4. AI Problem Diagnosis Tool (Powered by Gemini Pool) + 7-Day Trial Lead Form */}
       <ClevelandDiagnosisTool />
+
+      {/* 4b. 24/7 AI Legal Intake Speed-to-Lead Architecture */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <AiIntakeEfficiency page={page} />
+      </section>
 
       {/* 5. Burned by Previous SEO Agencies? Real Results & Attribution */}
       <ClevelandBurnedByAgencies />
