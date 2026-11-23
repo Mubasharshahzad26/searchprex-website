@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, ArrowRight, HelpCircle, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown, ArrowRight, HelpCircle, Sparkles, BookOpen } from "lucide-react";
 import ClevelandPainBanner from "./ClevelandPainBanner";
 
 const FAQS = [
@@ -86,6 +87,78 @@ export default function ClevelandFaqAndCta() {
               </div>
             );
           })}
+        </div>
+
+        {/* Curated Legal SEO & Ethics Research Guides (Spoke Silo) */}
+        <div className="mt-14 pt-10 border-t border-slate-200">
+          <div className="flex items-center gap-2 mb-6">
+            <BookOpen className="h-5 w-5 text-neutral-900" />
+            <h3 className="text-xl font-bold text-neutral-950">
+              Cleveland Legal Marketing &amp; Intake Research
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <Link
+              href="/blog/cleveland-law-firm-intake-study-missed-calls"
+              className="group rounded-2xl border border-slate-200 bg-slate-50/70 p-5 transition-all hover:bg-white hover:border-neutral-900/40 hover:shadow-md flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-600 block mb-2">
+                  Speed-to-Lead Benchmark
+                </span>
+                <h4 className="text-sm font-bold text-neutral-950 group-hover:text-neutral-900 leading-snug">
+                  How Many Signed Cases Do Cleveland Solo Attorneys Lose to Missed Calls?
+                </h4>
+                <p className="mt-2 text-xs text-slate-600 line-clamp-3">
+                  Empirical Cuyahoga County study on why 48% of after-hours inquiries are lost and how under-60s automated intake signs cases.
+                </p>
+              </div>
+              <span className="mt-4 text-xs font-bold text-neutral-900 flex items-center gap-1 group-hover:underline">
+                Read Study →
+              </span>
+            </Link>
+
+            <Link
+              href="/blog/ohio-rule-7-3-ai-legal-intake-compliance"
+              className="group rounded-2xl border border-slate-200 bg-slate-50/70 p-5 transition-all hover:bg-white hover:border-neutral-900/40 hover:shadow-md flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block mb-2">
+                  Ohio Ethics &amp; AI Law
+                </span>
+                <h4 className="text-sm font-bold text-neutral-950 group-hover:text-neutral-900 leading-snug">
+                  Ohio Rule of Professional Conduct 7.3 &amp; AI Legal Intake Compliance
+                </h4>
+                <p className="mt-2 text-xs text-slate-600 line-clamp-3">
+                  How Cleveland and Ohio law firms can safely automate inbound SMS triage and consultation booking without bar discipline.
+                </p>
+              </div>
+              <span className="mt-4 text-xs font-bold text-neutral-900 flex items-center gap-1 group-hover:underline">
+                Read Ethics Guide →
+              </span>
+            </Link>
+
+            <Link
+              href="/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi"
+              className="group rounded-2xl border border-slate-200 bg-slate-50/70 p-5 transition-all hover:bg-white hover:border-neutral-900/40 hover:shadow-md flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block mb-2">
+                  Legal Economics &amp; ROI
+                </span>
+                <h4 className="text-sm font-bold text-neutral-950 group-hover:text-neutral-900 leading-snug">
+                  Cuyahoga County Law Firm SEO vs. $300 PPC Clicks (2026 ROI)
+                </h4>
+                <p className="mt-2 text-xs text-slate-600 line-clamp-3">
+                  Full math model comparing $6,000/mo Google Ads burn against $1,200/mo organic authority across PI and OVI practice areas.
+                </p>
+              </div>
+              <span className="mt-4 text-xs font-bold text-neutral-900 flex items-center gap-1 group-hover:underline">
+                Read ROI Breakdown →
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 

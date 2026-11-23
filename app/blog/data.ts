@@ -23,12 +23,60 @@ export interface Post {
   readTime: string;
   date: string; // ISO (YYYY-MM-DD) — used for display + Article schema datePublished
   author: { name: string; role: string };
-  authorBio: string;
+  authorBio?: string;
   featured: boolean;
   heroImage?: string;
 }
  
 const ALL_POSTS: Post[] = [
+  {
+    slug: "cleveland-law-firm-intake-study-missed-calls",
+    category: "Local SEO",
+    subcategory: "Intake Speed & Legal CRO",
+    title: "How Many Signed Cases Do Cleveland Solo Attorneys Lose to Missed Calls? (2026 Intake Benchmark)",
+    excerpt: "An empirical study of Cleveland law firm intake: how after-hours response delays waste $150-$350 PPC clicks, the true cost in lost personal injury and OVI retainers, and the under-60-second intake protocol.",
+    readTime: "9-minute read",
+    date: "2026-11-23",
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Analyst",
+    },
+    authorBio: "Mubashar Sharif is the founder of SearchPrex, specializing in high-converting legal SEO architecture, map pack rankings, and client acquisition for U.S. law practices.",
+    featured: true,
+    heroImage: "/images/blog/covers/slow-intake-cost.webp",
+  },
+  {
+    slug: "ohio-rule-7-3-ai-legal-intake-compliance",
+    category: "Content Strategy",
+    subcategory: "Ohio Legal Ethics & AI Compliance",
+    title: "Ohio Rule of Professional Conduct 7.3 & AI Legal Intake: The Ethics-Compliant Guide for Law Firms",
+    excerpt: "Ohio Supreme Court Rule 7.3 strictly governs legal solicitation. Here is how Cleveland and Ohio law firms can safely automate inbound lead triage, SMS confirmations, and 24/7 intake without crossing disciplinary lines.",
+    readTime: "10-minute read",
+    date: "2026-11-23",
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Analyst",
+    },
+    authorBio: "Mubashar Sharif is the founder of SearchPrex, specializing in high-converting legal SEO architecture, map pack rankings, and client acquisition for U.S. law practices.",
+    featured: true,
+    heroImage: "/images/blog/covers/lawyer-specialist-certification-rules-by-state.webp",
+  },
+  {
+    slug: "cuyahoga-county-law-firm-seo-vs-ppc-roi",
+    category: "Local SEO",
+    subcategory: "Legal Economics & PPC Comparison",
+    title: "Cuyahoga County Law Firm SEO vs. $300 PPC Clicks: 2026 ROI Breakdown for Cleveland Attorneys",
+    excerpt: "Google Ads auctions in Cleveland for Personal Injury and OVI have surpassed $150 to $350 per click. Here is the financial model comparing paid ads burnout to long-term organic authority in Cuyahoga County.",
+    readTime: "11-minute read",
+    date: "2026-11-23",
+    author: {
+      name: "Mubashar Sharif",
+      role: "Founder & SEO Analyst",
+    },
+    authorBio: "Mubashar Sharif is the founder of SearchPrex, specializing in high-converting legal SEO architecture, map pack rankings, and client acquisition for U.S. law practices.",
+    featured: true,
+    heroImage: "/images/blog/covers/law-firm-seo-vs-ppc.webp",
+  },
   {
     slug: "seo-for-personal-injury-lawyers",
     category: "Legal SEO",
