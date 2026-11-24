@@ -33,6 +33,20 @@ export interface ClevelandPracticePage {
     q: string;
     a: string;
   }>;
+  // Enhanced deep entity & local authority fields
+  eyebrowBadge?: string;
+  marketRealityHeading?: string;
+  statutesHeading?: string;
+  venuesList?: Array<{
+    name: string;
+    category: string;
+    detail: string;
+  }>;
+  statutesList?: Array<{
+    code: string;
+    title: string;
+    significance: string;
+  }>;
 }
 
 export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
@@ -40,20 +54,72 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
     slug: "personal-injury",
     name: "Personal Injury",
     practiceTitle: "Personal Injury Lawyer SEO Cleveland, OH",
-    metaTitle: "Personal Injury Lawyer SEO Cleveland, OH | $180-$350 PPC Bypass",
-    metaDescription: "How Cleveland injury firms bypass $350+ PPC clicks, rank in the Cuyahoga County Map Pack, and capture high-retainer accident cases with under-60s AI intake.",
-    badge: "$180 – $350+ PPC CPC · $15k–$100k+ Case Retainers",
+    metaTitle: "Personal Injury Lawyer SEO Cleveland, OH | Cuyahoga 3-Pack",
+    metaDescription: "Exclusive personal injury SEO in Cleveland, OH. Outrank legal directories in the Cuyahoga Map Pack and capture I-90 & suburban crash cases. Free 24h audit.",
+    eyebrowBadge: "Personal Injury SEO · Cleveland & Cuyahoga County · 1-Firm Exclusivity",
+    badge: "$180 – $350+ PPC CPC · $25k–$100k+ Case Values",
     cpc: "$180 – $350+ per click",
-    caseValue: "$15,000 – $100,000+ per signed case",
+    caseValue: "$25,000 – $100,000+ per signed case",
     ppcMonthlyBurn: "$6,000 – $15,000 / mo in Google Ads",
     breakEvenRule: "A single signed commercial collision case ($25k–$75k contingency fee) funds 2 to 5 years of SearchPrex SEO.",
-    cuyahogaReality: "In Cuyahoga County, mega-billboard firms spend $150,000+ per month blanketing I-90, I-480, and Shoreway with yellow-and-black signage. Yet research confirms over 64% of crash victims still open Google on their phones from MetroHealth or Fairview Hospital waiting rooms. When boutique firms try competing with Google Ads, they get burned paying $250+ per click—where just three accidental clicks cost $750 without a single signed retainer. Sustainable growth for Cleveland trial lawyers comes from dominating hyper-local Map Pack results for specific accident hotspots (Dead Man's Curve, Valley View Bridge, Hopkins Airport freight corridors) and locking in the client with under-60-second speed-to-lead.",
-    intakeWorkflow: "Crash victims call after hours or text from the scene. If they hit voicemail, Clio benchmark data confirms 78% hire the next firm. Our AI intake screens for injury date, liability, and insurance carrier, connecting to your on-call attorney in under 30 seconds.",
-    h1: "Personal Injury Lawyer SEO in Cleveland, Ohio",
-    lead: "Personal injury search in Cuyahoga County is dominated by billboard conglomerates bidding up Google Ads auctions to over $350 per click. For boutique and mid-sized practices, sustainable growth comes from out-ranking aggregators in the Google Maps Local 3-Pack and capturing high-intent vehicular collisions across I-90, I-480, and I-77 corridors.",
+    marketRealityHeading: "How Boutique Injury Firms Beat Cleveland’s Billboard Giants on Google",
+    cuyahogaReality: "In Greater Cleveland, massive advertising firms dominate local highways and TV, pushing cost-per-click auctions to $180–$350+. With 64% of injured motorists searching local emergency rooms or mobile phones for attorneys, boutique firms can quickly burn through ad budgets on low-intent clicks. Organic search and a properly optimized Google Business Profile bypass national directories locked out of the Google Maps Local 3-Pack, turning a flat $1,200/month retainer into compounding long-term equity from a single signed case.",
+    intakeWorkflow: "Crash victims search immediately from emergency rooms or accident scenes. If they reach voicemail, 78% call the next firm. Our AI intake screens for injury date, liability, and insurance carrier within 30 seconds, routing qualified retained cases directly to your on-call trial attorney while strictly adhering to Ohio Rule of Professional Conduct 7.3.",
+    h1: "Personal Injury Lawyer SEO in Cleveland, Ohio: Win High-Value Crash Cases Without $300 PPC Clicks",
+    lead: "Boutique Cleveland personal injury firms face steep competition from billboard conglomerates and $350+ Google Ads clicks. We help you rank in the Google Maps 3-Pack, capture commercial vehicle and auto injury searches, and convert after-hours callers with fast intake.",
     heroTakeaway: "One severe commercial truck or multi-vehicle collision case can generate $30,000 to over $150,000 in contingency legal fees. Our Cleveland SEO architecture captures these cases organically without paying Google an ad tax for every phone call.",
+    statutesHeading: "Built Around Northeast Ohio Crash Corridors & Ohio Tort Law",
     statutes: "Ohio R.C. 2305.10 (2-year statute of limitations) · modified comparative fault (51% bar - R.C. 2315.33) · non-economic damages caps (R.C. 2315.18) · third-party commercial vehicle liability",
-    courtsAndCorridors: "Cuyahoga County Court of Common Pleas · I-90 / Dead Man's Curve · I-480 Valley View Bridge · I-77 south corridor · Cleveland Municipal Court",
+    courtsAndCorridors: "Cuyahoga County Court of Common Pleas (1200 Ontario St) · I-90 / Dead Man's Curve · I-480 Valley View Bridge · MetroHealth Medical Center · Fairview Hospital",
+    venuesList: [
+      {
+        name: "I-90 & Dead Man’s Curve",
+        category: "High-Frequency Collision Corridor",
+        detail: "The notorious 90-degree Innerbelt bend near downtown Cleveland, consistently ranking among Ohio's highest collision hotspots for high-speed multi-car pileups, jackknifed tractor-trailers, and severe winter weather crashes."
+      },
+      {
+        name: "I-480 Valley View Bridge & Freight Arterials",
+        category: "Commercial Trucking Corridor",
+        detail: "Massive twin bridges spanning the Cuyahoga River Valley connecting Independence and Garfield Heights. High-volume commercial freight traffic from Cleveland Hopkins logistics centers yields catastrophic collision inquiries."
+      },
+      {
+        name: "I-71 & I-77 Commuter Expressways",
+        category: "High-Density Suburban Influx",
+        detail: "Major multi-lane commuter arteries linking Downtown Cleveland with Parma, Strongsville, Medina, and Akron, producing high-volume rear-end, rollover, and distracted driving personal injury claims."
+      },
+      {
+        name: "MetroHealth, UH & Cleveland Clinic Trauma Desks",
+        category: "Level 1 Adult Trauma Facilities",
+        detail: "MetroHealth Medical Center (Main Campus Level 1 Adult Trauma Center), University Hospitals Cleveland Medical Center, and Fairview Hospital—where over 64% of crash victims search for legal counsel while admitted."
+      },
+      {
+        name: "Cuyahoga County Court of Common Pleas",
+        category: "Civil Litigation Jurisdiction",
+        detail: "Located at 1200 Ontario St, Cleveland, OH 44113. The General Division handles major civil tort, wrongful death, and commercial vehicle personal injury jury litigation where claim damages exceed $25,000."
+      }
+    ],
+    statutesList: [
+      {
+        code: "Ohio R.C. § 2305.10",
+        title: "Two-Year Bodily Injury Statute of Limitations",
+        significance: "Strict 24-month statutory deadline for filing bodily injury and wrongful death lawsuits in Ohio courts. Crucial for capturing high-urgency searchers worried about lapsed claim rights."
+      },
+      {
+        code: "Ohio R.C. § 2315.33",
+        title: "51% Modified Comparative Fault Bar",
+        significance: "Ohio's statutory contributory fault rule: a claimant's recovery is completely barred if they are found 51% or more responsible. Essential for AI intake triage and liability evaluation content."
+      },
+      {
+        code: "Ohio R.C. § 2315.18",
+        title: "Non-Economic Damages Caps & Catastrophic Exceptions",
+        significance: "Caps non-economic pain and suffering damages at $250,000 or three times economic damages up to $350,000, with uncapped statutory exemptions for permanent loss of limb or severe physical deformity."
+      },
+      {
+        code: "FMCSA & UM/UIM Stacking",
+        title: "Commercial Fleet Liability & Insurance Stacking",
+        significance: "Federal Motor Carrier Safety Administration hours-of-service regulations, vicarious corporate liability, and Ohio underinsured/uninsured motorist (UM/UIM) policy recovery architectures."
+      }
+    ],
     targetKeywords: {
       commercial: [
         "personal injury lawyer cleveland",
@@ -64,45 +130,54 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       urgent: [
         "24 hour personal injury lawyer near me",
         "emergency accident attorney cleveland",
-        "contingency fee injury lawyer cleveland"
+        "contingency fee injury lawyer cleveland",
+        "metrohealth accident lawyer cleveland"
       ],
       suburb: [
-        "car accident lawyer parma oh",
+        "car accident lawyer westlake oh",
+        "injury attorney beachwood ohio",
         "slip and fall lawyer lakewood ohio",
-        "injury attorney westlake oh",
-        "accident lawyer euclid oh"
+        "accident lawyer parma oh"
       ]
     },
     strategySteps: [
       {
-        title: "I-90 & I-480 Crash Corridor Silos",
-        desc: "We construct deep practice hubs addressing specific high-frequency collision hotspots across Northeast Ohio highways, giving Google hyper-relevant geographical entity signals."
+        title: "Google Business Profile Local 3-Pack Dominance",
+        desc: "We optimize Cuyahoga County GBP primary categories ('Personal Injury Attorney'), build authentic client review velocity with geocoded attributes, and eliminate citation discrepancies to outrank directory aggregators (Justia, FindLaw, Avvo) that cannot appear in the Map Pack."
       },
       {
-        title: "Google Maps 3-Pack Prominence",
-        desc: "We optimize Cuyahoga County Business Profile categories, real client review velocity, and geocoded photographic assets so injured searchers see your practice first on mobile."
+        title: "Crash Corridor Practice Silos",
+        desc: "We construct deep topical hubs addressing high-frequency collision hotspots across Northeast Ohio highways (I-90 Dead Man's Curve, I-480 Valley View Bridge, Shoreway), capturing victims searching for specific collision scenarios and highway liability."
       },
       {
-        title: "Under-60-Second Speed-to-Lead AI Intake",
-        desc: "Because 78% of accident victims hire the first firm that answers, our 24/7 AI Intake Engine follows up with web inquiries in under 30 seconds, preventing leads from calling competitors."
+        title: "Generative Engine Optimization (GEO & AEO)",
+        desc: "We format legal FAQs, Ohio statutory citations, and court procedures so AI search algorithms (Google AI Overviews, Perplexity, ChatGPT) cite your firm as the authoritative Cuyahoga personal injury counsel."
+      },
+      {
+        title: "Whisper Call Tracking & Under-30s AI Intake",
+        desc: "Because 78% of accident victims hire the first firm that responds, our 24/7 AI Intake Engine follows up with inquiries in under 30 seconds, qualifying leads by injury date and insurance limits while complying with Ohio Rule 7.3."
       }
     ],
     faqs: [
       {
         q: "Why are personal injury Google Ads clicks so expensive in Cleveland?",
-        a: "Personal injury clicks in Cleveland trade between $180 and $350+ because major advertising firms bid aggressively on contingency cases that yield $25,000 to $100,000+ in fees. Organic SEO bypasses this auction by securing top Map Pack and organic rankings at a fixed monthly retainer."
+        a: "Personal injury clicks in Cleveland trade between $180 and $350+ because billboard conglomerates aggressively bid up contingency cases that yield $25,000 to $100,000+ in fees. Organic SEO bypasses this paid auction by securing top Map Pack and organic rankings at a fixed monthly retainer of $1,200/mo."
       },
       {
-        q: "How does SearchPrex help Cleveland injury firms beat billboard giants like KNR or Elk & Elk?",
-        a: "Billboard giants win top-of-mind highway awareness, but when an injured motorist searches Google from the hospital or home, they look for authentic Google reviews and local credibility. When paired with our under-60-second AI intake, your firm signs the retainer while competing billboard firms leave callers on hold with a call center."
+        q: "How does SearchPrex help boutique Cleveland injury firms beat billboard giants like KNR or Elk & Elk?",
+        a: "Billboard giants capture highway awareness, but when an injured motorist searches Google from MetroHealth or their home, they look for authentic Google reviews and local credibility. When paired with our under-30-second AI intake, your firm signs the retainer while competing billboard firms leave callers on hold with a call center."
       },
       {
         q: "How long does it take for a Cleveland injury firm to reach Page 1?",
-        a: "Most established boutique firms see initial Map Pack and suburban ranking improvements within 60 to 90 days. Highly competitive Downtown Cleveland keywords generally require 4 to 6 months of systematic technical optimization and local authority building."
+        a: "Most established boutique firms see initial Map Pack and suburban ranking improvements (Westlake, Parma, Lakewood) within 60 to 90 days. Highly competitive Downtown Cleveland keywords generally require 4 to 6 months of systematic technical optimization and local authority building."
       },
       {
-        q: "Do you guarantee #1 rankings for personal injury in Cleveland?",
-        a: "No. Google explicitly warns that no agency can guarantee a #1 ranking. We guarantee measurable progress in rankings, traffic, and qualified inquiries within 90 days, backed by strict 1-firm per practice area exclusivity in Cuyahoga County."
+        q: "How does SearchPrex ensure Ohio Rule 7.3 compliance with AI intake?",
+        a: "Our AI intake engine operates strictly on an inbound, responsive basis. It engages searchers who voluntarily submit web forms, initiate chat, or call your office. It captures case details and schedules calls without outbound cold solicitation, fully complying with Ohio Rule of Professional Conduct 7.3."
+      },
+      {
+        q: "Do you guarantee #1 rankings or work with multiple Cleveland PI firms?",
+        a: "No agency can guarantee #1 rankings according to Google's guidelines. We guarantee measurable progress in rankings, traffic, and qualified inquiries within 90 days, backed by strict 1-firm per practice area exclusivity in Cuyahoga County. We will never represent a competing personal injury firm in your territory."
       }
     ]
   },

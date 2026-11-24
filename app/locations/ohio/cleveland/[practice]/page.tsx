@@ -106,6 +106,8 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           "Cleveland Municipal Court",
           "Ohio Rule of Professional Conduct 7.3",
           practice.statutes,
+          ...(practice.statutesList ? practice.statutesList.map((s) => `${s.code}: ${s.title}`) : []),
+          ...(practice.venuesList ? practice.venuesList.map((v) => v.name) : []),
         ],
       },
       {
@@ -164,7 +166,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
             <div className="flex flex-wrap items-center gap-2.5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
                 <MapPin className="w-3.5 h-3.5 text-neutral-700" />
-                <span>{practice.name} SEO · Cleveland, OH</span>
+                <span>{practice.eyebrowBadge || `${practice.name} SEO · Cleveland, OH`}</span>
               </div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
@@ -211,14 +213,14 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 href="/locations/ohio/cleveland#reality-check"
                 className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-7 py-3.5 text-sm sm:text-base shadow-sm transition-all"
               >
-                <span>Request Free 24h {practice.name} Audit</span>
+                <span>{practice.slug === "personal-injury" ? "Get My Free 24-Hour Cleveland PI Audit" : `Request Free 24h ${practice.name} Audit`}</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/locations/ohio/cleveland"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-neutral-900 font-semibold px-6 py-3.5 text-sm transition-all"
               >
-                <span>← Cleveland Master Hub</span>
+                <span>← Back to Cleveland Law Firm SEO Hub</span>
               </Link>
             </div>
           </div>
@@ -233,7 +235,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 <span>The Cuyahoga County Market Reality</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                Why Traditional Legal Marketing Fails for {practice.name} in Cleveland
+                {practice.marketRealityHeading || `Why Traditional Legal Marketing Fails for ${practice.name} in Cleveland`}
               </h2>
               
               <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-700">
@@ -274,10 +276,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 Entity Mapping &amp; Court Alignment
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                How We Align Your Site with Ohio Law &amp; Cuyahoga Courts
+                {practice.statutesHeading || "How We Align Your Site with Ohio Law & Cuyahoga Courts"}
               </h2>
               <p className="mt-2 text-sm sm:text-base text-slate-600">
-                Google and AI engines (ChatGPT, Perplexity, Gemini) do not rank generic legal copy. They evaluate whether your site demonstrates authoritative knowledge of local courthouses and Ohio Revised Code statutes.
+                Google and AI engines (ChatGPT, Perplexity, Gemini) do not rank generic legal copy. They evaluate whether your site demonstrates authoritative knowledge of local courthouses, high-frequency collision corridors, trauma centers, and Ohio Revised Code statutes.
               </p>
             </div>
 
@@ -289,12 +291,33 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     <MapPin className="h-4 w-4" />
                     <span>Cuyahoga Jurisdiction &amp; Corridors</span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-neutral-950">
+                  <h3 className="text-lg sm:text-xl font-bold text-neutral-950 mb-4">
                     High-Frequency Local Venues We Target
                   </h3>
-                  <div className="mt-4 text-xs font-mono text-slate-800 bg-white p-4 rounded-xl border border-slate-200 leading-relaxed shadow-2xs">
-                    {practice.courtsAndCorridors}
-                  </div>
+                  {practice.venuesList && practice.venuesList.length > 0 ? (
+                    <div className="space-y-3">
+                      {practice.venuesList.map((venue, idx) => (
+                        <div key={idx} className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-2xs">
+                          <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+                            <span className="text-xs font-bold text-neutral-950 flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                              {venue.name}
+                            </span>
+                            <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                              {venue.category}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-600 leading-relaxed pl-5">
+                            {venue.detail}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mt-4 text-xs font-mono text-slate-800 bg-white p-4 rounded-xl border border-slate-200 leading-relaxed shadow-2xs">
+                      {practice.courtsAndCorridors}
+                    </div>
+                  )}
                 </div>
                 <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-500">
                   Targeted geographically in Google Map Pack &amp; Local Citations
@@ -307,12 +330,33 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     <Scale className="h-4 w-4" />
                     <span>Ohio Statutory Semantic Entity Graph</span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-neutral-950">
+                  <h3 className="text-lg sm:text-xl font-bold text-neutral-950 mb-4">
                     Ohio Revised Code Concepts Google Expects
                   </h3>
-                  <div className="mt-4 text-xs font-mono text-slate-800 bg-white p-4 rounded-xl border border-slate-200 leading-relaxed shadow-2xs">
-                    {practice.statutes}
-                  </div>
+                  {practice.statutesList && practice.statutesList.length > 0 ? (
+                    <div className="space-y-3">
+                      {practice.statutesList.map((statute, idx) => (
+                        <div key={idx} className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-2xs">
+                          <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+                            <span className="text-xs font-bold text-neutral-950 flex items-center gap-1.5">
+                              <Scale className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                              {statute.title}
+                            </span>
+                            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200">
+                              {statute.code}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-600 leading-relaxed pl-5">
+                            {statute.significance}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mt-4 text-xs font-mono text-slate-800 bg-white p-4 rounded-xl border border-slate-200 leading-relaxed shadow-2xs">
+                      {practice.statutes}
+                    </div>
+                  )}
                 </div>
                 <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-500">
                   Essential for Google AI Overviews &amp; Knowledge Graph citation
@@ -338,6 +382,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               </p>
             </div>
 
+            {/* Keyword Silo Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               {/* Silo 1: Commercial Keywords */}
@@ -422,7 +467,8 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Execution Strategy Grid */}
+            <div className={`grid grid-cols-1 ${practice.strategySteps.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3"} gap-6`}>
               {practice.strategySteps.map((step, idx) => (
                 <div key={idx} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 flex flex-col justify-between">
                   <div>
