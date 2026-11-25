@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { createClient } from "@/supabase/client";
 
 function MarkdownToolbar({ onInsert }: { onInsert: (prefix: string, suffix?: string) => void }) {
   return (
@@ -38,7 +37,7 @@ function MarkdownToolbar({ onInsert }: { onInsert: (prefix: string, suffix?: str
  * "SEO News" shows on the hub only -- which is how the subnav pages ended up
  * with no articles on them.
  */
-const CATEGORY_SUGGESTIONS = [
+const NEWS_CATEGORY_SUGGESTIONS = [
   "SEO News",
   "SEO News — AI SEO",
   "SEO News — LLMs",
@@ -47,18 +46,58 @@ const CATEGORY_SUGGESTIONS = [
   "SEO News — Technical",
 ];
 
-export function ContentForm({ initialData, onSubmit, type }: { initialData?: any, onSubmit: (data: any) => void, type: "page" | "blog" | "case-study" | "news" | "news-article" | "resource" }) {
-  const [formData, setFormData] = useState(() => type === "news-article" ? { category: "SEO News — AI SEO", author: "Mubashar Sharif", schemaType: "NewsArticle", ...(initialData || {}) } : (initialData || {}));
+const BLOG_CATEGORY_SUGGESTIONS = [
+  "Technical SEO",
+  "Local SEO",
+  "Ecommerce SEO",
+  "Law Firm SEO",
+  "AI & GEO",
+  "Link Building",
+  "Core Web Vitals",
+  "Case Study Analysis",
+];
+
+type GalleryItem = {
+  url: string;
+  name: string;
+  source?: "uploaded" | "site";
+};
+
+function toDateInputValue(val: unknown): string {
+  if (!val) return new Date().toISOString().slice(0, 10);
+  const d = new Date(val as string | number | Date);
+  return Number.isNaN(d.getTime()) ? new Date().toISOString().slice(0, 10) : d.toISOString().slice(0, 10);
+}
+
+export function ContentForm({ initialData, onSubmit, type }: { initialData?: any, onSubmit: (data: any) => void | Promise<void>, type: "page" | "blog" | "case-study" | "news" | "news-article" | "resource" }) {
+  const [formData, setFormData] = useState(() => {
+    if (type === "news-article") {
+      return { category: "SEO News — AI SEO", author: "Mubashar Sharif", schemaType: "NewsArticle", ...(initialData || {}) };
+    }
+    if (type === "blog") {
+      return { category: "Technical SEO", author: "Mubashar Sharif", schemaType: "BlogPosting", ...(initialData || {}) };
+    }
+    if (type === "news") {
+      return {
+        newsDate: toDateInputValue(initialData?.newsDate),
+        ...(initialData || {}),
+        ...(initialData?.newsDate ? { newsDate: toDateInputValue(initialData.newsDate) } : {}),
+      };
+    }
+    return initialData || {};
+  });
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [showAdvancedSEO, setShowAdvancedSEO] = useState(type === "blog" || type === "news-article");
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryLoading, setGalleryLoading] = useState(false);
   const [galleryError, setGalleryError] = useState("");
-  const [galleryItems, setGalleryItems] = useState<string[]>([]);
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [linkText, setLinkText] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const contentRef = useRef<HTMLTextAreaElement>(null);
-  const supabase = createClient();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((current: any) => ({ ...current, [e.target.name]: e.target.value }));
@@ -67,23 +106,24 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
+    e.target.value = "";
 
     setUploading(true);
+    setUploadError("");
     try {
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${fileName}`;
-
-      const { error: uploadError } = await supabase.storage.from("marketing").upload(filePath, file);
-
-      if (uploadError) {
-        throw uploadError;
+      const body = new FormData();
+      body.append("file", file);
+      const res = await fetch("/api/admin/media", {
+        method: "POST",
+        body,
+      });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok || !json?.url) {
+        throw new Error(json?.error || `Upload failed (${res.status}).`);
       }
-
-      const { data } = supabase.storage.from("marketing").getPublicUrl(filePath);
-      setFormData((current: any) => ({ ...current, [fieldName]: data.publicUrl }));
+      setFormData((current: any) => ({ ...current, [fieldName]: json.url }));
     } catch (error: any) {
-      alert("Error uploading image: " + error.message);
+      setUploadError(error?.message || "Could not upload image. Please check the file size and format.");
     } finally {
       setUploading(false);
     }
@@ -94,18 +134,18 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
     setGalleryError("");
     setGalleryLoading(true);
     try {
-      const { data, error } = await supabase.storage.from("marketing").list("", {
-        limit: 100,
-        sortBy: { column: "updated_at", order: "desc" },
-      });
-      if (error) throw error;
-      const urls = (data || [])
-        .filter((item: any) => item.id && /\.(avif|gif|jpe?g|png|webp|svg)$/i.test(item.name))
-        .map((item: any) => supabase.storage.from("marketing").getPublicUrl(item.name).data.publicUrl);
-      setGalleryItems(urls);
-      if (urls.length === 0) setGalleryError("No images were found in the marketing gallery. You can use an image URL or upload from your computer.");
+      const res = await fetch("/api/admin/media", { cache: "no-store" });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok) {
+        throw new Error(json?.error || `Could not load gallery (${res.status}).`);
+      }
+      const items: GalleryItem[] = Array.isArray(json.items) ? json.items : [];
+      setGalleryItems(items);
+      if (items.length === 0) {
+        setGalleryError("No images found in the media library yet. Upload an image from your computer or paste an image URL.");
+      }
     } catch (error: any) {
-      setGalleryError(error?.message || "Could not load the marketing gallery. Check Supabase Storage access.");
+      setGalleryError(error?.message || "Could not load the media gallery.");
     } finally {
       setGalleryLoading(false);
     }
@@ -153,8 +193,28 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
     }, 0);
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError("");
+    setSaving(true);
+    try {
+      await onSubmit(formData);
+    } catch (err: any) {
+      setSubmitError(err?.message || "Could not save changes. Please review the fields and try again.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const categorySuggestions = type === "news-article" ? NEWS_CATEGORY_SUGGESTIONS : BLOG_CATEGORY_SUGGESTIONS;
+
   return (
-    <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); onSubmit(formData); }}>
+    <form className="space-y-6" onSubmit={handleSubmit}>
+      {submitError && (
+        <p role="alert" className="rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-700">
+          {submitError}
+        </p>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
@@ -192,7 +252,11 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
           </div>
           <div className="space-y-2 md:col-span-2">
             <Label>Source URL</Label>
-            <Input name="sourceHref" value={formData.sourceHref || ""} onChange={handleChange} />
+            <Input name="sourceHref" value={formData.sourceHref || ""} onChange={handleChange} placeholder="https://..." />
+          </div>
+          <div className="space-y-2">
+            <Label>News Date</Label>
+            <Input type="date" name="newsDate" value={formData.newsDate || ""} onChange={handleChange} />
           </div>
         </div>
       )}
@@ -200,12 +264,18 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
       {(type === "blog" || type === "news-article") && (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <Label>{type === "news-article" ? "News category" : "Category"}</Label>
+            <Label>{type === "news-article" ? "News category" : "Blog category"}</Label>
             <Input name="category" value={formData.category || ""} onChange={handleChange} list="category-suggestions" placeholder={type === "news-article" ? "SEO News — AI SEO" : "e.g. Technical SEO"} />
             <datalist id="category-suggestions">
-              {CATEGORY_SUGGESTIONS.map((c) => <option key={c} value={c} />)}
+              {categorySuggestions.map((c) => <option key={c} value={c} />)}
             </datalist>
-            <p className="text-xs text-muted-foreground">For news subcategories, use <code className="font-mono">SEO News — Subcategory</code>. The news editor always assigns NewsArticle schema.</p>
+            <p className="text-xs text-muted-foreground">
+              {type === "news-article" ? (
+                <>For news subcategories, use <code className="font-mono">SEO News — Subcategory</code>. The news editor always assigns NewsArticle schema.</>
+              ) : (
+                <>Appears on <code className="font-mono">/blog</code> only. For SEO News stories, use the SEO News tab instead.</>
+              )}
+            </p>
           </div>
           <div className="space-y-2">
             <Label>Author</Label>
@@ -232,11 +302,29 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
             <Button type="button" variant="outline" onClick={() => galleryOpen ? setGalleryOpen(false) : void openGallery()}>{galleryOpen ? "Close gallery" : "Choose from gallery"}</Button>
           </div>
           {uploading && <p className="text-xs font-medium text-blue-600">Uploading to the marketing image library…</p>}
+          {uploadError && <p role="alert" className="rounded border border-red-300 bg-red-50 p-2.5 text-xs text-red-700">{uploadError}</p>}
           {galleryOpen && (
             <div className="rounded-md border bg-white p-3">
               {galleryLoading && <p className="text-sm text-muted-foreground">Loading gallery…</p>}
               {galleryError && <p className="text-sm text-amber-700">{galleryError}</p>}
-              {galleryItems.length > 0 && <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">{galleryItems.map((url) => <button key={url} type="button" onClick={() => { setFormData((current: any) => ({ ...current, coverImage: url })); setGalleryOpen(false); }} className={"overflow-hidden rounded border p-1 text-left " + (formData.coverImage === url ? "border-emerald-600 ring-2 ring-emerald-200" : "border-gray-200")}><img src={url} alt="Select featured image" className="h-24 w-full object-cover" /><span className="block truncate px-1 py-1 text-xs">{url.split("/").pop()}</span></button>)}</div>}
+              {galleryItems.length > 0 && (
+                <div className="grid max-h-72 grid-cols-2 gap-3 overflow-y-auto sm:grid-cols-4">
+                  {galleryItems.map((item) => (
+                    <button
+                      key={item.url}
+                      type="button"
+                      onClick={() => { setFormData((current: any) => ({ ...current, coverImage: item.url })); setGalleryOpen(false); }}
+                      className={"overflow-hidden rounded border p-1 text-left transition hover:border-gray-400 " + (formData.coverImage === item.url ? "border-emerald-600 ring-2 ring-emerald-200" : "border-gray-200")}
+                    >
+                      <img src={item.url} alt={item.name} className="h-24 w-full bg-gray-100 object-cover" />
+                      <span className="block truncate px-1 pt-1 text-xs font-medium">{item.name}</span>
+                      <span className="block px-1 pb-0.5 text-[10px] uppercase tracking-wide text-muted-foreground">
+                        {item.source === "uploaded" ? "Uploaded" : "Site library"}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           )}
           {formData.coverImage && <img src={formData.coverImage} alt={formData.title || "Featured image preview"} className="mt-3 h-36 max-w-full rounded-md border object-contain shadow-sm" />}
@@ -349,7 +437,9 @@ export function ContentForm({ initialData, onSubmit, type }: { initialData?: any
       </div>
 
       <div className="pt-2">
-        <Button type="submit" size="lg" className="w-full sm:w-auto px-8">Save Content</Button>
+        <Button type="submit" size="lg" disabled={saving || uploading} className="w-full sm:w-auto px-8">
+          {saving ? "Saving..." : "Save Content"}
+        </Button>
       </div>
     </form>
   );

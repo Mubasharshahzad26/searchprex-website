@@ -166,7 +166,7 @@ export default async function BlogPostPage({
 
   if (!post) notFound();
 
-  if (post.category && post.category.toLowerCase().includes("seo news")) {
+  if (post.schemaType === "NewsArticle" || (post.category && post.category.toLowerCase().includes("seo news"))) {
     const { redirect } = await import("next/navigation");
     redirect(`/resources/news/${post.slug}`);
   }

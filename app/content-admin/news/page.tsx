@@ -9,14 +9,16 @@ export const metadata = {
 };
 
 export default async function NewsPage() {
-  let news = [];
-  let newsArticles = [];
+  let news: any[] = [];
+  let newsError = "";
+  let newsArticles: any[] = [];
   try {
     news = await getMarketingNews();
   } catch (err) {
-    // Graceful fallback if session / auth not ready at build or init
+    console.error("Failed to load News Feed cards", err);
+    newsError = err instanceof Error ? err.message : "Could not load news feed items.";
   }
-  
+
   try {
     newsArticles = await getMarketingNewsArticles();
   } catch (err) {
@@ -26,7 +28,7 @@ export default async function NewsPage() {
   return (
     <div className="space-y-6">
       <NewsArticlesManager initialArticles={newsArticles} />
-      <NewsManager initialNews={news} />
+      <NewsManager initialNews={news} initialError={newsError} />
     </div>
   );
 }

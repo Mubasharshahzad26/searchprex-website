@@ -82,7 +82,11 @@ async function getPostData(rawSlug: string) {
       dbPromise,
       new Promise<null>((resolve) => setTimeout(() => resolve(null), 1000)),
     ]);
-    if (dbPost && dbPost.published && dbPost.category && dbPost.category.toLowerCase().includes("news")) {
+    if (
+      dbPost &&
+      dbPost.published &&
+      (dbPost.schemaType === "NewsArticle" || (dbPost.category && dbPost.category.toLowerCase().includes("seo news")))
+    ) {
       return {
         slug: dbPost.slug,
         category: (dbPost.category?.split("—").pop() ?? "SEO News").trim(),
@@ -332,7 +336,10 @@ async function getRelatedSpokes(currentSlug: string) {
       where: {
         published: true,
         slug: { not: currentSlug },
-        category: { contains: "News", mode: "insensitive" },
+        OR: [
+          { category: { contains: "SEO News", mode: "insensitive" } },
+          { schemaType: "NewsArticle" },
+        ],
       },
       orderBy: { publishedAt: "desc" },
       take: 4,

@@ -252,7 +252,12 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         where: {
           published: true,
           AND: [
-            { category: { contains: "News", mode: "insensitive" } },
+            {
+              OR: [
+                { category: { contains: "SEO News", mode: "insensitive" } },
+                { schemaType: "NewsArticle" },
+              ],
+            },
             ...(category ? [{ category: { contains: category, mode: "insensitive" as const } }] : []),
           ],
         },

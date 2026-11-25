@@ -52,7 +52,12 @@ export default async function Page() {
     const dbBlogs = await db.marketingBlog.findMany({
       where: {
         published: true,
-        NOT: { category: { contains: "SEO News", mode: "insensitive" } },
+        NOT: {
+          OR: [
+            { category: { contains: "SEO News", mode: "insensitive" } },
+            { schemaType: "NewsArticle" },
+          ],
+        },
       },
       orderBy: { publishedAt: "desc" },
     });

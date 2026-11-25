@@ -39,7 +39,6 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const categoryParam = searchParams.get("category");
-  const filterCat = categoryParam ? categoryParam : "News";
 
   // Google News Sitemaps prioritize articles published or updated in the last 48 hours.
   const twoDaysAgo = new Date();
@@ -50,10 +49,20 @@ export async function GET(request: Request) {
     db.marketingBlog.findMany({
     where: {
       published: true,
-      category: { contains: filterCat, mode: "insensitive" },
-      OR: [
-        { publishedAt: { gte: twoDaysAgo } },
-        { updatedAt: { gte: twoDaysAgo } },
+      AND: [
+        {
+          OR: [
+            { category: { contains: "SEO News", mode: "insensitive" } },
+            { schemaType: "NewsArticle" },
+          ],
+        },
+        ...(categoryParam ? [{ category: { contains: categoryParam, mode: "insensitive" as const } }] : []),
+        {
+          OR: [
+            { publishedAt: { gte: twoDaysAgo } },
+            { updatedAt: { gte: twoDaysAgo } },
+          ],
+        },
       ],
     },
     orderBy: { publishedAt: "desc" },

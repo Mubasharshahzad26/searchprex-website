@@ -43,15 +43,71 @@ export async function deleteMarketingPage(id: string) {
 }
 
 // --- MARKETING BLOGS ---
+const SEO_NEWS_WHERE = {
+  OR: [
+    { category: { contains: "SEO News", mode: "insensitive" as const } },
+    { schemaType: "NewsArticle" },
+  ],
+};
+
+function cleanOptionalText(val: unknown): string | null {
+  if (val === undefined || val === null) return null;
+  const trimmed = String(val).trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+function pickMarketingBlogFields(data: any) {
+  return {
+    slug: String(data.slug || "").trim(),
+    title: String(data.title || "").trim(),
+    metaTitle: cleanOptionalText(data.metaTitle),
+    metaDescription: cleanOptionalText(data.metaDescription),
+    canonicalUrl: cleanOptionalText(data.canonicalUrl),
+    ogTitle: cleanOptionalText(data.ogTitle),
+    ogDescription: cleanOptionalText(data.ogDescription),
+    twitterTitle: cleanOptionalText(data.twitterTitle),
+    twitterDescription: cleanOptionalText(data.twitterDescription),
+    schemaType: cleanOptionalText(data.schemaType),
+    coverImage: cleanOptionalText(data.coverImage),
+    content: String(data.content || ""),
+    author: cleanOptionalText(data.author) ?? "Mubashar Sharif",
+    excerpt: cleanOptionalText(data.excerpt),
+    category: cleanOptionalText(data.category),
+    readTime: cleanOptionalText(data.readTime),
+    published: Boolean(data.published),
+    ...(data.publishedAt ? { publishedAt: new Date(data.publishedAt) } : {}),
+  };
+}
+
+function normalizeBlogData(data: any) {
+  const fields = pickMarketingBlogFields(data);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(fields.slug)) {
+    throw new Error("Enter a valid URL slug using lowercase letters, numbers, and hyphens.");
+  }
+  if (!fields.title) {
+    throw new Error("Title is required.");
+  }
+  const category = fields.category || "Technical SEO";
+  if (category.toLowerCase().includes("seo news") || fields.schemaType === "NewsArticle") {
+    throw new Error("SEO News articles belong in the SEO News tab, not Blog Posts. Choose a blog category such as Technical SEO, Local SEO, or AI & GEO.");
+  }
+  const schemaType = fields.schemaType === "Article" ? "Article" : "BlogPosting";
+  return { ...fields, category, schemaType };
+}
+
 export async function getMarketingBlogs() {
   await requireAdmin();
-  return await db.marketingBlog.findMany({ orderBy: { createdAt: "desc" } });
+  return await db.marketingBlog.findMany({
+    where: { NOT: SEO_NEWS_WHERE },
+    orderBy: { createdAt: "desc" },
+  });
 }
 
 export async function createMarketingBlog(data: any) {
   await requireAdmin();
-  if (data.published && !data.publishedAt) data.publishedAt = new Date();
-  const blog = await db.marketingBlog.create({ data });
+  const normalized = normalizeBlogData(data);
+  if (normalized.published && !normalized.publishedAt) normalized.publishedAt = new Date();
+  const blog = await db.marketingBlog.create({ data: normalized });
   if (blog.published) {
     await notifySubscribersOfNewPost({
       slug: blog.slug,
@@ -67,17 +123,21 @@ export async function createMarketingBlog(data: any) {
   if (blog.published) await submitToIndexNow([marketingPostUrl(blog)]);
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
+  revalidatePath(`/blog/${blog.slug}`);
+  revalidatePath("/sitemap.xml");
   return blog;
 }
 
 export async function updateMarketingBlog(id: string, data: any) {
   await requireAdmin();
   const existing = await db.marketingBlog.findUnique({ where: { id } });
-  const newlyPublished = Boolean(data.published && !existing?.published);
-  if (data.published && !data.publishedAt && !existing?.publishedAt) {
-    data.publishedAt = new Date();
+  if (!existing) throw new Error("Blog post not found.");
+  const normalized = normalizeBlogData(data);
+  const newlyPublished = Boolean(normalized.published && !existing.published);
+  if (normalized.published && !normalized.publishedAt && !existing.publishedAt) {
+    normalized.publishedAt = new Date();
   }
-  const blog = await db.marketingBlog.update({ where: { id }, data });
+  const blog = await db.marketingBlog.update({ where: { id }, data: normalized });
   if (newlyPublished && blog.published) {
     await notifySubscribersOfNewPost({
       slug: blog.slug,
@@ -93,20 +153,24 @@ export async function updateMarketingBlog(id: string, data: any) {
   //  A changed slug leaves the old URL behind; Bing should recrawl both.
   if (blog.published) {
     const urls = [marketingPostUrl(blog)];
-    if (existing && existing.slug !== blog.slug) urls.push(marketingPostUrl(existing));
+    if (existing.slug !== blog.slug) urls.push(marketingPostUrl(existing));
     await submitToIndexNow(urls);
   }
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
+  if (existing.slug !== blog.slug) revalidatePath(`/blog/${existing.slug}`);
   revalidatePath(`/blog/${blog.slug}`);
+  revalidatePath("/sitemap.xml");
   return blog;
 }
 
 export async function deleteMarketingBlog(id: string) {
   await requireAdmin();
-  await db.marketingBlog.delete({ where: { id } });
+  const blog = await db.marketingBlog.delete({ where: { id } });
   revalidatePath("/content-admin/blogs");
   revalidatePath("/blog");
+  revalidatePath(`/blog/${blog.slug}`);
+  revalidatePath("/sitemap.xml");
 }
 
 // --- MARKETING CASE STUDIES ---
@@ -144,24 +208,27 @@ export async function deleteMarketingCaseStudy(id: string) {
 export async function getMarketingNewsArticles() {
   await requireAdmin();
   return await db.marketingBlog.findMany({
-    where: { category: { contains: "SEO News", mode: "insensitive" } },
+    where: SEO_NEWS_WHERE,
     orderBy: { updatedAt: "desc" },
   });
 }
 
 function normalizeNewsArticleData(data: any) {
-  const slug = String(data.slug || "").trim();
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+  const fields = pickMarketingBlogFields(data);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(fields.slug)) {
     throw new Error("Enter a valid URL slug using lowercase letters, numbers, and hyphens.");
   }
-  if (staticNewsSpokes.some((spoke) => spoke.slug === slug)) {
+  if (!fields.title) {
+    throw new Error("Title is required.");
+  }
+  if (staticNewsSpokes.some((spoke) => spoke.slug === fields.slug)) {
     throw new Error("This URL slug is already used by a live SEO News page. Choose a different slug.");
   }
-  const requestedCategory = String(data.category || "").trim();
+  const requestedCategory = fields.category || "";
   const category = requestedCategory.toLowerCase().includes("seo news")
     ? requestedCategory
     : `SEO News${requestedCategory ? ` — ${requestedCategory}` : ""}`;
-  return { ...data, slug, category, schemaType: "NewsArticle" };
+  return { ...fields, category, schemaType: "NewsArticle" };
 }
 
 export async function createMarketingNewsArticle(data: any) {
@@ -213,14 +280,64 @@ export async function deleteMarketingNewsArticle(id: string) {
   revalidatePath("/news-sitemap.xml");
 }
 // --- MARKETING NEWS ---
+let marketingNewsTableReady = false;
+
+async function ensureMarketingNewsTable() {
+  if (marketingNewsTableReady) return;
+  await db.$executeRawUnsafe(`
+    CREATE TABLE IF NOT EXISTS "MarketingNews" (
+      "id" TEXT NOT NULL,
+      "title" TEXT NOT NULL,
+      "summary" TEXT NOT NULL,
+      "tag" TEXT,
+      "sourceLabel" TEXT,
+      "sourceHref" TEXT,
+      "newsDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "published" BOOLEAN NOT NULL DEFAULT false,
+      "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      CONSTRAINT "MarketingNews_pkey" PRIMARY KEY ("id")
+    )
+  `);
+  marketingNewsTableReady = true;
+}
+
+function normalizeNewsFeedData(data: any) {
+  const title = String(data.title || "").trim();
+  const summary = String(data.summary || "").trim();
+  if (!title) throw new Error("Feed card title is required.");
+  if (!summary) throw new Error("Feed card summary is required.");
+
+  let newsDate: Date | undefined;
+  if (data.newsDate) {
+    const parsed = new Date(data.newsDate);
+    if (!Number.isNaN(parsed.getTime())) {
+      newsDate = parsed;
+    }
+  }
+
+  return {
+    title,
+    summary,
+    tag: cleanOptionalText(data.tag),
+    sourceLabel: cleanOptionalText(data.sourceLabel),
+    sourceHref: cleanOptionalText(data.sourceHref),
+    ...(newsDate ? { newsDate } : {}),
+    published: Boolean(data.published),
+  };
+}
+
 export async function getMarketingNews() {
   await requireAdmin();
+  await ensureMarketingNewsTable();
   return await db.marketingNews.findMany({ orderBy: { newsDate: "desc" } });
 }
 
 export async function createMarketingNews(data: any) {
   await requireAdmin();
-  const news = await db.marketingNews.create({ data });
+  await ensureMarketingNewsTable();
+  const normalized = normalizeNewsFeedData(data);
+  const news = await db.marketingNews.create({ data: normalized });
   revalidatePath("/content-admin/news");
   revalidatePath("/resources/news");
   return news;
@@ -228,7 +345,9 @@ export async function createMarketingNews(data: any) {
 
 export async function updateMarketingNews(id: string, data: any) {
   await requireAdmin();
-  const news = await db.marketingNews.update({ where: { id }, data });
+  await ensureMarketingNewsTable();
+  const normalized = normalizeNewsFeedData(data);
+  const news = await db.marketingNews.update({ where: { id }, data: normalized });
   revalidatePath("/content-admin/news");
   revalidatePath("/resources/news");
   return news;
@@ -236,6 +355,7 @@ export async function updateMarketingNews(id: string, data: any) {
 
 export async function deleteMarketingNews(id: string) {
   await requireAdmin();
+  await ensureMarketingNewsTable();
   await db.marketingNews.delete({ where: { id } });
   revalidatePath("/content-admin/news");
   revalidatePath("/resources/news");

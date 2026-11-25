@@ -304,7 +304,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // subcategory pages query.
   try {
     const newsSpokes = await db.marketingBlog.findMany({
-      where: { published: true, category: { contains: "News", mode: "insensitive" } },
+      where: {
+        published: true,
+        OR: [
+          { category: { contains: "SEO News", mode: "insensitive" } },
+          { schemaType: "NewsArticle" },
+        ],
+      },
       select: { slug: true, canonicalUrl: true, updatedAt: true },
     });
 
@@ -328,7 +334,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const cmsBlogs = await db.marketingBlog.findMany({
       where: {
         published: true,
-        NOT: { category: { contains: "News", mode: "insensitive" } },
+        NOT: {
+          OR: [
+            { category: { contains: "SEO News", mode: "insensitive" } },
+            { schemaType: "NewsArticle" },
+          ],
+        },
       },
       select: { slug: true, canonicalUrl: true, updatedAt: true },
     });
