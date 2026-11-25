@@ -307,8 +307,40 @@ function MediumIcon({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
-/* â”€â”€â”€ ALGORITHM UPDATE TRACKER TABLE DATA â”€â”€â”€ */
-const ALGORITHM_UPDATES_TRACKER = [
+/* ─── ALGORITHM UPDATE TRACKER TABLE DATA ─── */
+const ALGORITHM_UPDATES_TRACKER: Array<{
+  name: string;
+  type: string;
+  typeBadge: string;
+  started: string;
+  completed: string;
+  duration: string;
+  postHref: string;
+  postLabel: string;
+  confirmed?: boolean;
+}> = [
+  {
+    name: "November 2026 core update",
+    type: "Core",
+    typeBadge: "bg-purple-100 text-purple-800 border-purple-200",
+    started: "Nov 10, 2026",
+    completed: "Nov 24, 2026",
+    duration: "14 days",
+    postHref: "/resources/news/google-november-2026-core-update",
+    postLabel: "Live tracker →",
+    confirmed: true,
+  },
+  {
+    name: "December 2026 core update",
+    type: "Core",
+    typeBadge: "bg-purple-100 text-purple-800 border-purple-200",
+    started: "Not started (pre-announced for December, no date)",
+    completed: "-",
+    duration: "-",
+    postHref: "/resources/news/google-december-2026-core-update",
+    postLabel: "Pre-announcement →",
+    confirmed: false,
+  },
   {
     name: "September 2026 spam update",
     type: "Spam",
@@ -604,7 +636,7 @@ export default function NewsClient({
 
     const batchSlugs = Array.from(
       new Set([
-        "google-september-2026-spam-update",
+        "google-november-2026-core-update",
         ...PILLAR_SLUGS,
         ...initialSpokes.map((s: any) => s.slug).filter(Boolean),
         ...initialNews.map((n: any) => newsSlug(n.title)).filter(Boolean),
@@ -983,6 +1015,9 @@ export default function NewsClient({
   // â”€â”€ Algorithm tracker (type filter + duration bars) â”€â”€
   const trackerRows = useMemo(() => {
     const rows = ALGORITHM_UPDATES_TRACKER.map((r) => {
+      if (r.confirmed === false) {
+        return { ...r, days: 0 };
+      }
       const s = new Date(`${r.started} UTC`).getTime();
       const c = new Date(`${r.completed} UTC`).getTime();
       const days = Number.isNaN(s) || Number.isNaN(c) ? 1 : Math.max(1, Math.round((c - s) / 86400000));
@@ -1123,15 +1158,15 @@ export default function NewsClient({
   const FAQS = [
     {
       q: "What is the latest SEO news in the past 2 days?",
-      a: "In its October 22, 2026 report, Search Engine Land summarized a Semrush study that found AI Overviews on 88% of a 400-keyword U.S. commercial-search sample and 85% of the sampled ecommerce keywords. The study measured feature coverage, not clicks or conversions. Google separately announced on October 15 that it was making links in AI Mode and AI Overviews more prominent.",
+      a: "On November 24, 2026, Google completed the November core update, pre-announced a December 2026 core update, and published a new document explaining how links are selected and checked in AI Overviews and AI Mode. Details are in the three analyses linked at the top of this page.",
     },
     {
       q: "What is the latest Google Search Console news and updates?",
-      a: "Recent Search Console changes covered on this page: Web search type is now split into text-based and multimodal, AI Overviews reporting has been expanded, generative AI reports show impressions only (no clicks), and Platform properties are now open to everyone. Each change links to its original source in the news list below.",
+      a: "Recent Search Console changes covered on this page: Web search type is now split into text-based and multimodal, AI Overviews reporting has been expanded, generative AI reports show impressions only (no clicks), and Platform properties are now open to everyone. Google also confirmed a data logging bug in the Generative AI performance report for November 9-11, 2026 that lowered impressions. Each change links to its original source in the news list below.",
     },
     {
       q: "Did Google roll out an algorithm update recently?",
-      a: "Yes. Google launched the September 2026 Spam Update on September 24, which concluded on October 8, 2026. This follows the August 2026 Spam Update, marking two major global spam overhauls in under six weeks.",
+      a: "Yes. The November 2026 core update started November 10 and completed November 24, 2026, after 14 days. Google has also pre-announced a December 2026 core update scheduled for December, with no confirmed start date yet.",
     },
     {
       q: "How do I check if my website received a Google Search Console manual action?",
@@ -1139,38 +1174,49 @@ export default function NewsClient({
     },
     {
       q: "Is there a Google algorithm update rolling out right now?",
-      a: "No. Google is not actively rolling out a confirmed algorithm update right now. The most recent confirmed rollout was the September 2026 Spam Update, which officially concluded on October 8, 2026, after a 14-day global deployment. All updates are verified against the Google Search Status Dashboard.",
+      a: "No. As of November 25, 2026, no confirmed update is rolling out. The November 2026 core update started on November 10 and completed on November 24 at about 9:03 am ET, after 14 days. Google has pre-announced a December 2026 core update, scheduled for December with no start date. Google says it will announce the start on the day it begins. All dates are checked against the Google Search Status Dashboard.",
     },
   ];
 
   const PAST_2_DAYS_CARDS = [
     {
       icon: Sparkles,
-      title: "Gemini 4 Argon in AI Mode",
-      body: "Rolled out globally in AI Mode for Google AI Pro & Ultra subscribers. Deeper query fan-out reshapes AI visibility for Law Firms and eCommerce sites.",
+      title: "November Core Update Complete",
+      body: "The November 2026 core update started November 10 and completed November 24 after 14 days. Impact was first felt around November 14 with no clear second phase.",
       label: "Source",
-      value: "seroundtable",
-      href: "/resources/news/google-gemini-4-argon-ai-mode-rollout",
-    },
-    {
-      icon: BookOpen,
-      title: "How Google Ranks PDFs",
-      body: "Google clarified how PDFs rank in Web Search & AI Mode and how to verify SEO-friendliness â€” critical for legal guides/forms and eCommerce catalogs.",
-      label: "Source",
-      value: "searchenginejournal",
-      href: "/resources/news/how-google-ranks-pdfs-search-ai-mode-checklist",
+      value: "Google Search Status",
+      href: "/resources/news/google-november-2026-core-update",
     },
     {
       icon: TrendingUp,
-      title: "Discover â€œProactive Conciergeâ€",
-      body: "Job postings signal Google Discover evolving from a feed into a personal concierge alongside live tests of the â€œDive deeperâ€ AI feature.",
-      label: "Sources",
-      value: "SEL Â· Envisionit",
-      href: "/resources/news/google-discover-proactive-concierge-dive-deeper-ai-test",
+      title: "December Core Update Pre-Announced",
+      body: "Google has pre-announced a December 2026 core update scheduled for December with no confirmed start date. Google says it will announce the start on the day it begins.",
+      label: "Source",
+      value: "Google",
+      href: "/resources/news/google-december-2026-core-update",
+    },
+    {
+      icon: BookOpen,
+      title: "AI Overview & AI Mode Link Selection",
+      body: "Google published a new document explaining how links are selected, checked, and attributed in AI Overviews and AI Mode — critical for citation and visibility strategies.",
+      label: "Source",
+      value: "Google",
+      href: "/resources/news/google-ai-overviews-ai-mode-link-selection-guide",
     },
   ];
 
   const GSC_ISSUES = [
+    {
+      title: "Generative AI report data bug (Nov 9-11)",
+      body: (
+        <>
+          Google confirmed a data logging bug in the Search Console Generative AI performance report for November 9 to 11, 2026 that lowered impressions (Search Engine Roundtable, Nov 13). Treat that dip as a data issue, not a ranking change.
+        </>
+      ),
+      noteLabel: "Action",
+      note: "Annotate those dates in your reports.",
+      status: "Observed",
+    },
     {
       title: "GSC Manual Action Wave: October 2026",
       body: (
@@ -1212,7 +1258,7 @@ export default function NewsClient({
         </>
       ),
       noteLabel: "Status",
-      note: "Normal operations. Last verified across SearchPrex client telemetry October 11, 2026.",
+      note: "Normal operations. Last verified across SearchPrex client telemetry November 25, 2026.",
       status: "Normal",
     },
   ];
@@ -1531,7 +1577,7 @@ export default function NewsClient({
                 label: selectedCategory === "all" ? "Updates tracked" : `${categoryLabel} updates`,
               },
               showAlgorithmContext
-                ? { value: <CountUp value={ALGORITHM_UPDATES_TRACKER.length} />, label: "Confirmed updates in 2026" }
+                ? { value: <CountUp value={ALGORITHM_UPDATES_TRACKER.filter(u => u.confirmed !== false).length} />, label: "Confirmed updates in 2026" }
                 : { value: <CountUp value={categoryItems.filter((i) => i.isSpoke).length} />, label: "Analyses" },
               { value: <CountUp value={guidesForCategory.length} />, label: "Topic guides" },
               { value: latestDateLabel, label: "Last update logged" },
@@ -1587,20 +1633,20 @@ export default function NewsClient({
             {showAlgorithmContext ? (
               <div className="mb-7 rounded-xl border border-slate-200 bg-[#f8fafc] p-5">
                 <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-800">
-                  SEO news over the past 2 days is dominated by three confirmed Google search shifts: the global release of Gemini 4 Argon in AI Mode, new technical ranking documentation for indexable PDFs, and the full completion of the September 2026 Spam Update alongside Discover &ldquo;Dive deeper&rdquo; query tests.
+                  SEO news over the past 2 days is dominated by three Google announcements: the November 2026 core update finished, a December 2026 core update was pre-announced, and Google explained how AI Overviews and AI Mode choose links.
                 </p>
                 <ul className="mt-3.5 space-y-1.5 border-t border-slate-200/80 pt-3 text-xs sm:text-sm text-slate-700">
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
-                    <span><strong>Gemini 4 Argon Rollout:</strong> Launched globally in AI Mode for AI Pro and Ultra subscribers.</span>
+                    <span><strong>November core update:</strong> completed Nov 24 after 14 days.</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
-                    <span><strong>PDF Indexing &amp; AI Citation:</strong> Official Google clarification on document ranking behavior.</span>
+                    <span><strong>December core update:</strong> pre-announced, no start date yet.</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-purple-500 shrink-0" />
-                    <span><strong>September 2026 Spam Update:</strong> Full rollout complete with Discover test features live.</span>
+                    <span><strong>AI link selection:</strong> new Google document on attribution and factuality.</span>
                   </li>
                 </ul>
               </div>
@@ -1676,33 +1722,33 @@ export default function NewsClient({
             {showAlgorithmContext && (
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#f0f2f5] pt-5">
               <Link
-                href="/resources/news/google-september-2026-spam-update"
+                href="/resources/news/google-november-2026-core-update"
                 className="group inline-flex items-center gap-2 rounded-lg bg-[#171a22] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#303440]"
               >
-                Read the September 2026 spam update analysis
+                Read the November 2026 core update analysis
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
 
               <div className="flex flex-wrap items-center gap-2">
                 <span className="mr-1 text-xs text-[#6c727f]">
                   Sources:{" "}
-                  <a href="https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu" target="_blank" rel="noopener noreferrer" className="font-medium text-[#303440] underline decoration-[#d5d9e0] underline-offset-2 hover:decoration-[#171a22]">
+                  <a href="https://status.search.google.com/" target="_blank" rel="noopener noreferrer" className="font-medium text-[#303440] underline decoration-[#d5d9e0] underline-offset-2 hover:decoration-[#171a22]">
                     Google Search Status
                   </a>{" "}
                   &amp;{" "}
-                  <a href="https://searchengineland.com/google-september-2026-spam-update-completed" target="_blank" rel="noopener noreferrer" className="font-medium text-[#303440] underline decoration-[#d5d9e0] underline-offset-2 hover:decoration-[#171a22]">
-                    Search Engine Land
+                  <a href="https://www.seroundtable.com/" target="_blank" rel="noopener noreferrer" className="font-medium text-[#303440] underline decoration-[#d5d9e0] underline-offset-2 hover:decoration-[#171a22]">
+                    Search Engine Roundtable
                   </a>
                 </span>
                 {renderReactions(
-                  "google-september-2026-spam-update",
-                  "Google September 2026 Spam Update Concludes: 14-Day Rollout Triggers Manual Actions",
-                  "Spam Update"
+                  "google-november-2026-core-update",
+                  "Google November 2026 Core Update Complete: 14-Day Rollout & December Pre-Announcement",
+                  "Core Update"
                 )}
                 {renderShareMenu(
                   "past-2-days",
-                  "https://www.searchprex.com/resources/news/google-september-2026-spam-update",
-                  "Google September 2026 Spam Update Concludes"
+                  "https://www.searchprex.com/resources/news/google-november-2026-core-update",
+                  "Google November 2026 Core Update Complete"
                 )}
               </div>
             </div>
@@ -2358,7 +2404,7 @@ export default function NewsClient({
                             <motion.div
                               className="h-full rounded-full bg-[#303440]"
                               initial={{ width: 0 }}
-                              whileInView={{ width: `${Math.max(6, (item.days / maxTrackerDays) * 100)}%` }}
+                              whileInView={{ width: item.days === 0 ? "0%" : `${Math.max(6, (item.days / maxTrackerDays) * 100)}%` }}
                               viewport={{ once: true }}
                               transition={{ duration: 0.8, ease: "easeOut" }}
                             />

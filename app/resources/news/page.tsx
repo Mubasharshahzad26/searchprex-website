@@ -389,7 +389,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "What is the latest SEO news in the past 2 days?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "In its October 22, 2026 report, Search Engine Land summarized a Semrush study that found AI Overviews on 88% of a 400-keyword U.S. commercial-search sample and 85% of the sampled ecommerce keywords. The study measured feature coverage, not clicks or conversions. Google separately announced on October 15 that it was making links in AI Mode and AI Overviews more prominent.",
+          text: "On November 24, 2026, Google completed the November core update, pre-announced a December 2026 core update, and published a new document explaining how links are selected and checked in AI Overviews and AI Mode. Details are in the three analyses linked at the top of this page.",
         },
       },
       {
@@ -397,7 +397,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "What is the latest Google Search Console news and updates?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Recent Search Console changes covered on this page: Web search type is now split into text-based and multimodal, AI Overviews reporting has been expanded, generative AI reports show impressions only (no clicks), and Platform properties are now open to everyone. Each change links to its original source in the news list below.",
+          text: "Recent Search Console changes covered on this page: Web search type is now split into text-based and multimodal, AI Overviews reporting has been expanded, generative AI reports show impressions only (no clicks), and Platform properties are now open to everyone. Google also confirmed a data logging bug in the Generative AI performance report for November 9-11, 2026 that lowered impressions. Each change links to its original source in the news list below.",
         },
       },
       {
@@ -405,7 +405,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "Did Google roll out an algorithm update recently?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Google launched the September 2026 Spam Update on September 24, which concluded on October 8, 2026. This follows the August 2026 Spam Update, marking two major global spam overhauls in under six weeks.",
+          text: "Yes. The November 2026 core update started November 10 and completed November 24, 2026, after 14 days. Google has also pre-announced a December 2026 core update scheduled for December, with no confirmed start date yet.",
         },
       },
       {
@@ -421,7 +421,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
         name: "Is there a Google algorithm update rolling out right now?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Google is not actively rolling out a confirmed algorithm update right now. The most recent confirmed rollout was the September 2026 Spam Update, which officially concluded on October 8, 2026, after a 14-day global deployment. All updates are verified against the Google Search Status Dashboard.",
+          text: "No. As of November 25, 2026, no confirmed update is rolling out. The November 2026 core update started on November 10 and completed on November 24 at about 9:03 am ET, after 14 days. Google has pre-announced a December 2026 core update, scheduled for December with no start date. Google says it will announce the start on the day it begins. All dates are checked against the Google Search Status Dashboard.",
         },
       },
     ],
