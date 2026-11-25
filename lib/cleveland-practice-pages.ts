@@ -68,7 +68,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
     h1: "Personal Injury Lawyer SEO in Cleveland, Ohio: Win High-Value Crash Cases Without $300 PPC Clicks",
     lead: "Boutique Cleveland personal injury firms face steep competition from billboard conglomerates and $350+ Google Ads clicks. We help you rank in the Google Maps 3-Pack, capture commercial vehicle and auto injury searches, and convert after-hours callers with fast intake.",
     heroTakeaway: "One severe commercial truck or multi-vehicle collision case can generate $30,000 to over $150,000 in contingency legal fees. Our Cleveland SEO architecture captures these cases organically without paying Google an ad tax for every phone call.",
-    statutesHeading: "Built Around Northeast Ohio Crash Corridors & Ohio Tort Law",
+    statutesHeading: "Why Local Crash Corridors & Ohio Tort Law Decide Who Ranks in Cleveland",
     statutes: "Ohio R.C. 2305.10 (2-year statute of limitations) · modified comparative fault (51% bar - R.C. 2315.33) · non-economic damages caps (R.C. 2315.18) · third-party commercial vehicle liability",
     courtsAndCorridors: "Cuyahoga County Court of Common Pleas (1200 Ontario St) · I-90 / Dead Man's Curve · I-480 Valley View Bridge · MetroHealth Medical Center · Fairview Hospital",
     venuesList: [
@@ -178,6 +178,14 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       {
         q: "Do you guarantee #1 rankings or work with multiple Cleveland PI firms?",
         a: "No agency can guarantee #1 rankings according to Google's guidelines. We guarantee measurable progress in rankings, traffic, and qualified inquiries within 90 days, backed by strict 1-firm per practice area exclusivity in Cuyahoga County. We will never represent a competing personal injury firm in your territory."
+      },
+      {
+        q: "How do I get my Cleveland personal injury firm cited by ChatGPT, Perplexity, and Google AI Overviews?",
+        a: "AI answer engines prioritize law firms whose sites contain structured Ohio Revised Code citations (such as R.C. 2305.10 and R.C. 2315.33), verifiable Cuyahoga County court jurisdiction anchors, and clear FAQ Schema markup. SearchPrex builds this exact machine-readable authority so LLMs cite your practice as top counsel when victims ask conversational legal questions."
+      },
+      {
+        q: "Should a boutique Cleveland personal injury firm stop Google Ads (PPC) immediately when starting SEO?",
+        a: "Not overnight. If you currently rely on PPC or Local Services Ads for short-term case flow, we keep your highest-converting campaigns running while we build your Map Pack and suburban organic equity. Within 4 to 6 months, as your cost-per-case drops under our flat $1,200/month retainer, most firms scale back $250+ PPC clicks and reinvest into high-margin organic capture."
       }
     ]
   },

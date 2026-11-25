@@ -30,7 +30,7 @@ const VENUES: VenuePin[] = [
     address: "2500 MetroHealth Dr, Cleveland, OH 44109",
     query: "2500+MetroHealth+Dr,+Cleveland,+OH+44109",
     jurisdictionDetail: "Main campus Level 1 Adult Trauma Center where over 64% of catastrophic injury patients search legal counsel.",
-    colorClass: "border-rose-600 bg-rose-600 text-white",
+    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-3",
@@ -39,7 +39,7 @@ const VENUES: VenuePin[] = [
     address: "11100 Euclid Ave, Cleveland, OH 44106",
     query: "11100+Euclid+Ave,+Cleveland,+OH+44106",
     jurisdictionDetail: "University Circle flagship tertiary trauma center and neurological rehabilitation referral hub.",
-    colorClass: "border-rose-600 bg-rose-600 text-white",
+    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-4",
@@ -48,7 +48,7 @@ const VENUES: VenuePin[] = [
     address: "I-90 Innerbelt at Superior Ave, Cleveland, OH",
     query: "Dead+Man's+Curve,+Cleveland,+OH",
     jurisdictionDetail: "Ohio's notorious 90-degree freeway turn with frequent multi-vehicle pileups and jackknifed commercial trucks.",
-    colorClass: "border-amber-600 bg-amber-600 text-white",
+    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-5",
@@ -57,7 +57,7 @@ const VENUES: VenuePin[] = [
     address: "I-480 over Cuyahoga River Valley, Independence, OH",
     query: "Valley+View+Bridge,+Independence,+OH",
     jurisdictionDetail: "Busiest commercial freight crossing in Ohio linking Hopkins logistics centers with high-speed interstate traffic.",
-    colorClass: "border-emerald-700 bg-emerald-700 text-white",
+    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
 ];
 
@@ -72,13 +72,13 @@ export default function ClevelandInteractiveMap() {
         <div className="lg:col-span-5 p-5 sm:p-7 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between bg-slate-50/60">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              <span className="flex h-2 w-2 rounded-full bg-neutral-900" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
                 Interactive Jurisdiction Legend
               </span>
             </div>
             <h3 className="text-xl font-extrabold text-neutral-950 tracking-tight mb-2">
-              Cuyahoga Court &amp; Corridor Pins
+              Explore Cuyahoga Courts, Hospitals &amp; Crash Hotspots
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-5">
               Click any jurisdiction anchor below to focus the interactive map on that specific court, trauma center, or high-collision corridor:
@@ -129,9 +129,9 @@ export default function ClevelandInteractiveMap() {
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500">
+          <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
             <span className="flex items-center gap-1 font-semibold text-neutral-900">
-              <Navigation className="w-3.5 h-3.5 text-rose-600" />
+              <Navigation className="w-3.5 h-3.5 text-neutral-900" />
               Active: {activePin.name}
             </span>
             <a
@@ -149,7 +149,7 @@ export default function ClevelandInteractiveMap() {
         {/* Right 65%: Embedded Google Map */}
         <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[420px] bg-slate-100 flex flex-col">
           <div className="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-slate-200 shadow-2xs text-[11px] font-semibold text-neutral-900 flex items-center gap-2">
-            <MapPin className="w-3.5 h-3.5 text-rose-600" />
+            <MapPin className="w-3.5 h-3.5 text-neutral-900" />
             <span>Targeting: {activePin.name}</span>
           </div>
 

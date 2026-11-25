@@ -134,7 +134,7 @@ export default function ClevelandSubmarketSwitcher() {
         <div className="lg:col-span-7 space-y-5">
           
           {/* Localized Photo Card */}
-          <div className="relative aspect-16/9 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-2xs group">
+          <div className="relative aspect-16/9 rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-2xs group">
             <Image
               src={activeSubmarket.photoUrl}
               alt={activeSubmarket.photoAlt}
@@ -142,16 +142,16 @@ export default function ClevelandSubmarketSwitcher() {
               sizes="(max-width: 1024px) 100vw, 55vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
             <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-md text-[11px] font-bold text-neutral-950 border border-slate-200 shadow-2xs flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-rose-600" />
+              <MapPin className="w-3.5 h-3.5 text-neutral-900" />
               <span>{activeSubmarket.regionBadge}</span>
             </div>
-            <div className="absolute bottom-3 left-3 right-3 text-white">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block mb-0.5">
+            <div className="absolute bottom-3.5 left-4 right-4 text-white">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-white/90 block mb-0.5 drop-shadow-xs">
                 Active Localized Search Basin
               </span>
-              <h4 className="text-base sm:text-lg font-bold leading-tight">
+              <h4 className="text-base sm:text-lg font-bold text-white leading-tight drop-shadow-xs">
                 {activeSubmarket.name} Personal Injury Market
               </h4>
             </div>
@@ -219,7 +219,7 @@ export default function ClevelandSubmarketSwitcher() {
           <div className="rounded-2xl border border-slate-200 overflow-hidden bg-slate-100 min-h-[360px] sm:min-h-[440px] flex flex-col shadow-2xs">
             <div className="p-3 bg-white border-b border-slate-200 flex items-center justify-between text-xs font-bold text-neutral-950">
               <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-rose-600" />
+                <MapPin className="w-3.5 h-3.5 text-neutral-900" />
                 <span>{activeSubmarket.name} Court &amp; Arterials</span>
               </span>
               <span className="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">

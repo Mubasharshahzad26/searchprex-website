@@ -20,7 +20,7 @@ const CORRIDOR_CARDS: CorridorCard[] = [
     altText: "Commercial truck and commuter traffic on I-480 Valley View Bridge in Cleveland Ohio",
     caption: "High-volume commercial & auto corridors: I-90 Dead Man's Curve, I-480 Valley View Bridge, I-71 & I-77.",
     stats: "180,000+ daily vehicles · #1 Ohio truck freight volume",
-    icon: <Car className="w-4 h-4 text-neutral-800" />,
+    icon: <Car className="w-4 h-4 text-neutral-900" />,
   },
   {
     title: "Civil Court Anchor",
@@ -29,7 +29,7 @@ const CORRIDOR_CARDS: CorridorCard[] = [
     altText: "Cuyahoga County Court of Common Pleas Justice Center at 1200 Ontario St Cleveland OH",
     caption: "Cuyahoga County Court of Common Pleas (1200 Ontario St) civil tort jurisdiction.",
     stats: "Jury trials >$25k · Cuyahoga General Division venue",
-    icon: <Building2 className="w-4 h-4 text-neutral-800" />,
+    icon: <Building2 className="w-4 h-4 text-neutral-900" />,
   },
   {
     title: "Level 1 Trauma & Hospital Hubs",
@@ -38,7 +38,7 @@ const CORRIDOR_CARDS: CorridorCard[] = [
     altText: "Cleveland Ohio trauma center and medical district near MetroHealth and University Hospitals",
     caption: "Local trauma centers: MetroHealth Main Campus, UH Cleveland Medical Center & Fairview Hospital.",
     stats: "64% of injury victims search on mobile from care facilities",
-    icon: <Activity className="w-4 h-4 text-rose-600" />,
+    icon: <Activity className="w-4 h-4 text-neutral-900" />,
   },
 ];
 
@@ -51,7 +51,7 @@ export default function ClevelandCorridorCards() {
           className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between group"
         >
           <div>
-            <div className="relative aspect-16/10 overflow-hidden bg-slate-100">
+            <div className="relative aspect-16/10 overflow-hidden bg-slate-900">
               <Image
                 src={card.photoUrl}
                 alt={card.altText}
@@ -60,35 +60,35 @@ export default function ClevelandCorridorCards() {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-              <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-md text-[10px] font-bold text-neutral-900 border border-slate-200 shadow-2xs flex items-center gap-1.5">
-                <MapPin className="w-3 h-3 text-rose-600" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
+              <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-md text-[10px] font-bold text-neutral-950 border border-slate-200 shadow-2xs flex items-center gap-1.5">
+                <MapPin className="w-3 h-3 text-neutral-900" />
                 <span>{card.badge}</span>
               </div>
-              <div className="absolute bottom-2.5 left-3 right-3 text-white">
-                <span className="text-[10px] font-mono text-emerald-400 block mb-0.5">
+              <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                <span className="text-[11px] font-medium text-white/90 block mb-0.5 drop-shadow-xs">
                   {card.stats}
                 </span>
-                <h4 className="text-sm font-bold leading-tight">
+                <h4 className="text-sm sm:text-base font-bold text-white leading-tight drop-shadow-xs">
                   {card.title}
                 </h4>
               </div>
             </div>
 
-            <div className="p-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
+            <div className="p-4 bg-white">
+              <p className="text-xs text-slate-700 leading-relaxed">
                 {card.caption}
               </p>
             </div>
           </div>
 
-          <div className="px-4 pb-4 pt-1 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
+          <div className="px-4 pb-4 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-600 bg-white">
             <span className="flex items-center gap-1.5">
               {card.icon}
-              <span>Cuyahoga Entity Target</span>
+              <span>Cuyahoga Location Signal</span>
             </span>
-            <span className="text-[10px] font-mono text-neutral-800 bg-slate-100 px-2 py-0.5 rounded">
-              Verified Node
+            <span className="text-[10px] font-mono text-neutral-900 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">
+              Verified Hub
             </span>
           </div>
         </div>
