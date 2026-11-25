@@ -23,6 +23,11 @@ import {
   FileText
 } from "lucide-react";
 import { Breadcrumb } from "@/components/layout";
+import Image from "next/image";
+import ClevelandInteractiveMap from "@/components/locations/ClevelandInteractiveMap";
+import ClevelandSubmarketSwitcher from "@/components/locations/ClevelandSubmarketSwitcher";
+import ClevelandFounderProof from "@/components/locations/ClevelandFounderProof";
+import ClevelandCorridorCards from "@/components/locations/ClevelandCorridorCards";
 import {
   CLEVELAND_PRACTICES,
   getClevelandPractice,
@@ -92,6 +97,8 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
         description: practice.metaDescription,
         url,
         provider: organizationRef,
+        hasMap: "https://maps.google.com/maps?q=1200+Ontario+St,+Cleveland,+OH+44113",
+        image: `${SITE}/images/services/law-firm/cleveland-ohio-personal-injury-law-firm-seo-district.webp`,
         areaServed: [
           { "@type": "City", name: "Cleveland", containedInPlace: { "@type": "State", name: "Ohio" } },
           { "@type": "AdministrativeArea", name: "Cuyahoga County" },
@@ -160,68 +167,140 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           {/* Subtle Ambient Pattern */}
           <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
-            
-            {/* Eyebrow Badges */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
-                <MapPin className="w-3.5 h-3.5 text-neutral-700" />
-                <span>{practice.eyebrowBadge || `${practice.name} SEO · Cleveland, OH`}</span>
-              </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
-                <span>1-Firm Cuyahoga Exclusivity</span>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-300 px-3 py-1 text-xs font-bold">
-                <Sparkles className="w-3 h-3 text-emerald-700" />
-                <span>{practice.badge}</span>
-              </span>
-            </div>
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className={`grid grid-cols-1 ${practice.slug === "personal-injury" ? "lg:grid-cols-12 gap-8 lg:gap-12" : "gap-6"} items-center`}>
+              
+              {/* Main Column: Copy, Metrics & CTAs */}
+              <div className={`${practice.slug === "personal-injury" ? "lg:col-span-7" : "max-w-4xl"} space-y-6`}>
+                {/* Eyebrow Badges */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold uppercase tracking-wider">
+                    <MapPin className="w-3.5 h-3.5 text-neutral-700" />
+                    <span>{practice.eyebrowBadge || `${practice.name} SEO · Cleveland, OH`}</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-800 text-xs font-semibold">
+                    <ShieldCheck className="w-3.5 h-3.5 text-neutral-700" />
+                    <span>1-Firm Cuyahoga Exclusivity</span>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-300 px-3 py-1 text-xs font-bold">
+                    <Sparkles className="w-3 h-3 text-emerald-700" />
+                    <span>{practice.badge}</span>
+                  </span>
+                </div>
 
-            {/* H1 Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight max-w-4xl">
-              {practice.h1}
-            </h1>
+                {/* H1 Headline */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-950 leading-[1.14] tracking-tight">
+                  {practice.h1}
+                </h1>
 
-            {/* Subheading */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
-              {practice.lead}
-            </p>
+                {/* Subheading */}
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+                  {practice.lead}
+                </p>
 
-            {/* Quick Metrics Bar (Light Cards) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl pt-2">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-2xs">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Typical Google Ads CPC</span>
-                <span className="text-xl sm:text-2xl font-black text-rose-600 mt-1 block">{practice.cpc}</span>
-                <span className="text-[11px] text-slate-500 mt-0.5 block">{practice.ppcMonthlyBurn}</span>
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-2xs">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Avg. Signed Case Value</span>
-                <span className="text-xl sm:text-2xl font-black text-emerald-700 mt-1 block">{practice.caseValue}</span>
-                <span className="text-[11px] text-slate-500 mt-0.5 block">Estimated fee per client</span>
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-2xs">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">SearchPrex Flat Retainer</span>
-                <span className="text-xl sm:text-2xl font-black text-neutral-950 mt-1 block">$1,200 / mo</span>
-                <span className="text-[11px] text-emerald-700 font-semibold mt-0.5 block">Free 24/7 AI Intake Engine</span>
-              </div>
-            </div>
+                {/* Quick Metrics Bar (Light Cards) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-2xs">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Typical Google Ads CPC</span>
+                    <span className="text-xl sm:text-2xl font-black text-rose-600 mt-1 block">{practice.cpc}</span>
+                    <span className="text-[11px] text-slate-500 mt-0.5 block">{practice.ppcMonthlyBurn}</span>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-2xs">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Avg. Signed Case Value</span>
+                    <span className="text-xl sm:text-2xl font-black text-emerald-700 mt-1 block">{practice.caseValue}</span>
+                    <span className="text-[11px] text-slate-500 mt-0.5 block">Estimated fee per client</span>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-2xs">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">SearchPrex Flat Retainer</span>
+                    <span className="text-xl sm:text-2xl font-black text-neutral-950 mt-1 block">$1,200 / mo</span>
+                    <span className="text-[11px] text-emerald-700 font-semibold mt-0.5 block">Free 24/7 AI Intake Engine</span>
+                  </div>
+                </div>
 
-            {/* Call To Action Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <Link
-                href="/locations/ohio/cleveland#reality-check"
-                className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-7 py-3.5 text-sm sm:text-base shadow-sm transition-all"
-              >
-                <span>{practice.slug === "personal-injury" ? "Get My Free 24-Hour Cleveland PI Audit" : `Request Free 24h ${practice.name} Audit`}</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/locations/ohio/cleveland"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-neutral-900 font-semibold px-6 py-3.5 text-sm transition-all"
-              >
-                <span>← Back to Cleveland Law Firm SEO Hub</span>
-              </Link>
+                {/* Call To Action Buttons */}
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/locations/ohio/cleveland#reality-check"
+                    className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-7 py-3.5 text-sm sm:text-base shadow-sm transition-all"
+                  >
+                    <span>{practice.slug === "personal-injury" ? "Get My Free 24-Hour Cleveland PI Audit" : `Request Free 24h ${practice.name} Audit`}</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/locations/ohio/cleveland"
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-neutral-900 font-semibold px-6 py-3.5 text-sm transition-all"
+                  >
+                    <span>← Back to Cleveland Law Firm SEO Hub</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column: Hero Visual + Map Pack Preview (For Personal Injury) */}
+              {practice.slug === "personal-injury" && (
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="relative aspect-16/10 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm group">
+                    <Image
+                      src="/images/services/law-firm/cleveland-ohio-personal-injury-law-firm-seo-district.webp"
+                      alt="Downtown Cleveland legal district near Cuyahoga County Justice Center for personal injury law firm SEO"
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    
+                    {/* Subtle Overlay Badge */}
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-md text-[11px] font-bold text-neutral-950 border border-slate-200 shadow-2xs flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-rose-600" />
+                      <span>Downtown Cleveland · Cuyahoga County Jurisdiction</span>
+                    </div>
+
+                    <div className="absolute bottom-3 left-3 right-3 text-white">
+                      <span className="text-[10px] font-mono text-emerald-400 block mb-0.5">
+                        Ontario St Legal District · 1200 Ontario St
+                      </span>
+                      <h3 className="text-sm sm:text-base font-bold leading-tight">
+                        Cuyahoga County Justice Center District
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Google Maps 3-Pack Target Simulation */}
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4 shadow-2xs space-y-2.5">
+                    <div className="flex items-center justify-between text-xs font-bold text-neutral-950">
+                      <span className="flex items-center gap-1.5">
+                        <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span>Google Maps Local 3-Pack Target</span>
+                      </span>
+                      <span className="text-[10px] font-mono text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded font-bold">
+                        #1 Rank Goal
+                      </span>
+                    </div>
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start justify-between gap-3 shadow-2xs">
+                      <div>
+                        <span className="text-xs font-bold text-neutral-950 block">
+                          Your Firm · Cleveland Personal Injury Attorney
+                        </span>
+                        <div className="flex items-center gap-1 text-[11px] text-amber-500 mt-0.5">
+                          <span>5.0</span>
+                          <span>★★★★★</span>
+                          <span className="text-slate-500 font-normal">(48 reviews)</span>
+                          <span className="text-slate-400">·</span>
+                          <span className="text-slate-600">Cleveland, OH</span>
+                        </div>
+                        <span className="text-[11px] text-emerald-700 font-semibold mt-1 block">
+                          ✓ Open 24 hours · Confirmed by Google Business Profile
+                        </span>
+                      </div>
+                      <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded shrink-0">
+                        Cuyahoga
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              )}
+
             </div>
           </div>
         </section>
@@ -282,6 +361,18 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 Google and AI engines (ChatGPT, Perplexity, Gemini) do not rank generic legal copy. They evaluate whether your site demonstrates authoritative knowledge of local courthouses, high-frequency collision corridors, trauma centers, and Ohio Revised Code statutes.
               </p>
             </div>
+
+            {/* 3 Lively Localized Image Cards (For Personal Injury Wireframe) */}
+            {practice.slug === "personal-injury" && (
+              <ClevelandCorridorCards />
+            )}
+
+            {/* 2-Column Interactive Map Embed Container (For Personal Injury Wireframe) */}
+            {practice.slug === "personal-injury" && (
+              <div className="mb-10">
+                <ClevelandInteractiveMap />
+              </div>
+            )}
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
               
@@ -452,6 +543,24 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               </div>
 
             </div>
+
+            {/* Interactive Submarket Switcher (For Personal Injury Wireframe) */}
+            {practice.slug === "personal-injury" && (
+              <div className="mt-12 pt-8 border-t border-slate-200">
+                <div className="max-w-3xl mb-6">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
+                    Cuyahoga County Regional Markets
+                  </span>
+                  <h3 className="mt-1 text-xl sm:text-2xl font-extrabold text-neutral-950 tracking-tight">
+                    Interactive Submarket Switcher: West Side, South County &amp; East Side Corridors
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-600">
+                    Explore neighborhood search dynamics, municipal court jurisdictions, and high-frequency collision routes across Greater Cleveland:
+                  </p>
+                </div>
+                <ClevelandSubmarketSwitcher />
+              </div>
+            )}
           </div>
         </section>
 
@@ -511,6 +620,11 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
 
           </div>
         </section>
+
+        {/* 8. Founder E-E-A-T Proof & 1-Firm Exclusivity (For Personal Injury Wireframe) */}
+        {practice.slug === "personal-injury" && (
+          <ClevelandFounderProof />
+        )}
 
         {/* 6. FAQs with Schema Markup */}
         <section className="py-14 lg:py-20 bg-slate-50/60 border-b border-slate-200">
