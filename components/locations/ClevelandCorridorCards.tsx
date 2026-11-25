@@ -1,18 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { Car, Building2, Activity, MapPin } from "lucide-react";
+import type { CorridorCardItem } from "@/lib/cleveland-practice-pages";
 
-interface CorridorCard {
-  title: string;
-  badge: string;
-  photoUrl: string;
-  altText: string;
-  caption: string;
-  stats: string;
-  icon: React.ReactNode;
-}
-
-const CORRIDOR_CARDS: CorridorCard[] = [
+const DEFAULT_PI_CARDS: CorridorCardItem[] = [
   {
     title: "Highway & Freight Corridors",
     badge: "I-90 & I-480 Corridors",
@@ -20,7 +11,7 @@ const CORRIDOR_CARDS: CorridorCard[] = [
     altText: "Commercial truck and commuter traffic on I-480 Valley View Bridge in Cleveland Ohio",
     caption: "High-volume commercial & auto corridors: I-90 Dead Man's Curve, I-480 Valley View Bridge, I-71 & I-77.",
     stats: "180,000+ daily vehicles · #1 Ohio truck freight volume",
-    icon: <Car className="w-4 h-4 text-neutral-900" />,
+    entityLabel: "Cuyahoga Location Signal",
   },
   {
     title: "Civil Court Anchor",
@@ -29,7 +20,7 @@ const CORRIDOR_CARDS: CorridorCard[] = [
     altText: "Cuyahoga County Court of Common Pleas Justice Center at 1200 Ontario St Cleveland OH",
     caption: "Cuyahoga County Court of Common Pleas (1200 Ontario St) civil tort jurisdiction.",
     stats: "Jury trials >$25k · Cuyahoga General Division venue",
-    icon: <Building2 className="w-4 h-4 text-neutral-900" />,
+    entityLabel: "Cuyahoga Location Signal",
   },
   {
     title: "Level 1 Trauma & Hospital Hubs",
@@ -38,14 +29,26 @@ const CORRIDOR_CARDS: CorridorCard[] = [
     altText: "Cleveland Ohio trauma center and medical district near MetroHealth and University Hospitals",
     caption: "Local trauma centers: MetroHealth Main Campus, UH Cleveland Medical Center & Fairview Hospital.",
     stats: "64% of injury victims search on mobile from care facilities",
-    icon: <Activity className="w-4 h-4 text-neutral-900" />,
+    entityLabel: "Cuyahoga Location Signal",
   },
 ];
 
-export default function ClevelandCorridorCards() {
+const CARD_ICONS = [
+  <Car key="0" className="w-4 h-4 text-neutral-900" />,
+  <Building2 key="1" className="w-4 h-4 text-neutral-900" />,
+  <Activity key="2" className="w-4 h-4 text-neutral-900" />,
+];
+
+export default function ClevelandCorridorCards({
+  cards,
+}: {
+  cards?: CorridorCardItem[];
+}) {
+  const items = cards && cards.length > 0 ? cards : DEFAULT_PI_CARDS;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-      {CORRIDOR_CARDS.map((card, idx) => (
+      {items.map((card, idx) => (
         <div
           key={idx}
           className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between group"
@@ -84,8 +87,8 @@ export default function ClevelandCorridorCards() {
 
           <div className="px-4 pb-4 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-600 bg-white">
             <span className="flex items-center gap-1.5">
-              {card.icon}
-              <span>Cuyahoga Location Signal</span>
+              {CARD_ICONS[idx % CARD_ICONS.length]}
+              <span>{card.entityLabel || "Cuyahoga Location Signal"}</span>
             </span>
             <span className="text-[10px] font-mono text-neutral-900 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">
               Verified Hub

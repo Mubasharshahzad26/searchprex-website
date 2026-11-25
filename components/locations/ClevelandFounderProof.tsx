@@ -49,7 +49,19 @@ const CERTIFICATES: CertificateItem[] = [
   },
 ];
 
-export default function ClevelandFounderProof() {
+export default function ClevelandFounderProof({
+  practiceName = "Personal Injury",
+  eyebrow = "Step 5 · Proven, Founder-Led Execution",
+  heading = "Work Directly With Mubashar Sharif—Semrush Certified SEO & AI Search Strategist",
+  body = "Large legal marketing agencies pitch you with a senior partner and then hand your Cuyahoga County campaign to junior coordinators who do not understand Ohio tort caps or I-90 crash corridors. At SearchPrex, founder Mubashar Sharif personally audits your Google Business Profile, maps your competitors, and oversees every technical deployment.",
+  ctaText = "Request My Personal 24h PI Audit",
+}: {
+  practiceName?: string;
+  eyebrow?: string;
+  heading?: string;
+  body?: string;
+  ctaText?: string;
+}) {
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
 
   return (
@@ -64,7 +76,7 @@ export default function ClevelandFounderProof() {
             <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto min-h-[380px] bg-slate-900 overflow-hidden group">
               <Image
                 src="/images/mubashar-sharif.jpg"
-                alt="Mubashar Sharif, Founder and Lead Legal SEO Strategist at SearchPrex"
+                alt={`Mubashar Sharif, Founder and Lead Legal SEO Strategist at SearchPrex for ${practiceName}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
@@ -83,7 +95,7 @@ export default function ClevelandFounderProof() {
                   Direct Founder Accountability
                 </span>
                 <p className="text-sm font-bold text-white leading-snug drop-shadow-xs">
-                  &ldquo;Every Cleveland Personal Injury audit and strategy is built and reviewed by me personally—never handed off to junior reps.&rdquo;
+                  &ldquo;Every Cleveland {practiceName} audit and strategy is built and reviewed by me personally—never handed off to junior reps.&rdquo;
                 </p>
               </div>
             </div>
@@ -92,15 +104,15 @@ export default function ClevelandFounderProof() {
             <div className="lg:col-span-7 p-6 sm:p-10 space-y-5 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-900 text-xs font-semibold uppercase tracking-wider w-fit">
                 <Award className="w-3.5 h-3.5 text-neutral-800" />
-                <span>Step 5 · Proven, Founder-Led Execution</span>
+                <span>{eyebrow}</span>
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight leading-tight">
-                Work Directly With Mubashar Sharif—Semrush Certified SEO &amp; AI Search Strategist
+                {heading}
               </h2>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Large legal marketing agencies pitch you with a senior partner and then hand your Cuyahoga County campaign to junior coordinators who do not understand Ohio tort caps or I-90 crash corridors. At SearchPrex, founder Mubashar Sharif personally audits your Google Business Profile, maps your competitors, and oversees every technical deployment.
+                {body}
               </p>
 
               <div className="space-y-3 pt-1">
@@ -111,7 +123,7 @@ export default function ClevelandFounderProof() {
                       Strict 1-Firm Cuyahoga Exclusivity
                     </strong>
                     <span className="text-xs text-slate-600">
-                      We never represent competing personal injury firms in Cleveland. Once you claim your territory, your local competitors are locked out.
+                      We never represent competing {practiceName.toLowerCase()} firms in Cleveland. Once you claim your territory, your local competitors are locked out.
                     </span>
                   </div>
                 </div>
@@ -135,7 +147,7 @@ export default function ClevelandFounderProof() {
                       Flat $1,200/mo Retainer · Month-to-Month Flexibility
                     </strong>
                     <span className="text-xs text-slate-600">
-                      No 12-month lock-in contracts. One signed commercial crash case funds years of compounding organic visibility.
+                      No 12-month lock-in contracts. You stay because compounding organic visibility and signed Cleveland retainers pay for themselves.
                     </span>
                   </div>
                 </div>
@@ -146,7 +158,7 @@ export default function ClevelandFounderProof() {
                   href="/locations/ohio/cleveland#reality-check"
                   className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-6 py-3.5 text-xs sm:text-sm shadow-sm transition-all"
                 >
-                  <span>Request My Personal 24h PI Audit</span>
+                  <span>{ctaText}</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <span className="text-xs text-slate-500 font-medium">

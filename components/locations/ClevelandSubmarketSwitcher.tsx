@@ -2,23 +2,10 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { MapPin, Scale, Car, Building, ArrowUpRight } from "lucide-react";
+import { MapPin, Scale, Car } from "lucide-react";
+import type { SubmarketItem } from "@/lib/cleveland-practice-pages";
 
-interface Submarket {
-  id: string;
-  name: string;
-  regionBadge: string;
-  photoUrl: string;
-  photoAlt: string;
-  courtName: string;
-  courtAddress: string;
-  corridors: string;
-  marketReality: string;
-  targetKeywords: string[];
-  mapQuery: string;
-}
-
-const SUBMARKETS: Submarket[] = [
+const DEFAULT_PI_SUBMARKETS: SubmarketItem[] = [
   {
     id: "downtown",
     name: "Downtown Cleveland",
@@ -28,6 +15,7 @@ const SUBMARKETS: Submarket[] = [
     courtName: "Cuyahoga County Court of Common Pleas & Cleveland Municipal Court",
     courtAddress: "1200 Ontario St, Cleveland, OH 44113",
     corridors: "I-90 Innerbelt, Shoreway (Route 2), Superior Ave, Ontario St",
+    corridorsLabel: "Primary Collision Corridors",
     marketReality: "Dense concentration of high-stakes commercial vehicle collisions, pedestrian accidents near Public Square, and major jury litigation in Cuyahoga County Court of Common Pleas.",
     targetKeywords: [
       "personal injury lawyer cleveland",
@@ -45,6 +33,7 @@ const SUBMARKETS: Submarket[] = [
     courtName: "Lakewood Municipal Court & Rocky River Municipal Court",
     courtAddress: "12650 Detroit Ave, Lakewood, OH & 21012 Hilliard Blvd, Rocky River, OH",
     corridors: "Detroit Ave, Clifton Blvd, I-90 West, Columbia Rd (Westlake)",
+    corridorsLabel: "Primary Collision Corridors",
     marketReality: "High-earning West Side suburbs generate high-value motor vehicle accident claims and slip-and-fall torts along dense commercial strips on Detroit Avenue and Clifton Boulevard.",
     targetKeywords: [
       "car accident lawyer westlake oh",
@@ -62,6 +51,7 @@ const SUBMARKETS: Submarket[] = [
     courtName: "Parma Municipal Court",
     courtAddress: "5555 Powers Blvd, Parma, OH 44129",
     corridors: "Ridge Rd, Pearl Rd (Route 42), I-71 South, I-480 West Interchange",
+    corridorsLabel: "Primary Collision Corridors",
     marketReality: "Cuyahoga County's most populous suburban submarket, experiencing heavy multi-car collisions on Ridge Road and high-speed commuter rear-end crashes feeding into the I-71 corridor.",
     targetKeywords: [
       "car accident lawyer parma oh",
@@ -79,6 +69,7 @@ const SUBMARKETS: Submarket[] = [
     courtName: "Shaker Heights Municipal Court",
     courtAddress: "3355 Lee Rd, Shaker Heights, OH 44120",
     corridors: "Chagrin Blvd, I-271 Express/Local Lanes, Harvard Rd, Richmond Rd",
+    corridorsLabel: "Primary Collision Corridors",
     marketReality: "Affluent corporate and medical offices generate high-policy-limit injury litigation, commercial rideshare collisions, and severe crashes along the high-traffic I-271 interchange.",
     targetKeywords: [
       "injury attorney beachwood ohio",
@@ -89,9 +80,16 @@ const SUBMARKETS: Submarket[] = [
   },
 ];
 
-export default function ClevelandSubmarketSwitcher() {
-  const [activeTab, setActiveTab] = useState<string>("downtown");
-  const activeSubmarket = SUBMARKETS.find((s) => s.id === activeTab) || SUBMARKETS[0];
+export default function ClevelandSubmarketSwitcher({
+  submarkets,
+  practiceLabel = "Personal Injury",
+}: {
+  submarkets?: SubmarketItem[];
+  practiceLabel?: string;
+}) {
+  const items = submarkets && submarkets.length > 0 ? submarkets : DEFAULT_PI_SUBMARKETS;
+  const [activeTab, setActiveTab] = useState<string>(items[0].id);
+  const activeSubmarket = items.find((s) => s.id === activeTab) || items[0];
 
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-8 shadow-xs">
@@ -101,7 +99,7 @@ export default function ClevelandSubmarketSwitcher() {
         <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-2 shrink-0">
           Target Submarket:
         </span>
-        {SUBMARKETS.map((submarket) => {
+        {items.map((submarket) => {
           const isActive = activeTab === submarket.id;
           return (
             <button
@@ -152,7 +150,7 @@ export default function ClevelandSubmarketSwitcher() {
                 Active Localized Search Basin
               </span>
               <h4 className="text-base sm:text-lg font-bold text-white leading-tight drop-shadow-xs">
-                {activeSubmarket.name} Personal Injury Market
+                {activeSubmarket.name} {practiceLabel} Market
               </h4>
             </div>
           </div>
@@ -172,7 +170,7 @@ export default function ClevelandSubmarketSwitcher() {
               <div className="rounded-xl border border-slate-200 bg-white p-3.5">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-950 mb-1">
                   <Scale className="w-3.5 h-3.5 text-neutral-800" />
-                  <span>Municipal Court Anchor</span>
+                  <span>Jurisdiction Anchor</span>
                 </div>
                 <p className="text-[11px] text-slate-600 leading-tight">
                   {activeSubmarket.courtName}
@@ -185,7 +183,7 @@ export default function ClevelandSubmarketSwitcher() {
               <div className="rounded-xl border border-slate-200 bg-white p-3.5">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-950 mb-1">
                   <Car className="w-3.5 h-3.5 text-neutral-800" />
-                  <span>Primary Collision Corridors</span>
+                  <span>{activeSubmarket.corridorsLabel || "Primary Local Arterials"}</span>
                 </div>
                 <p className="text-[11px] text-slate-600 leading-tight">
                   {activeSubmarket.corridors}
@@ -220,7 +218,7 @@ export default function ClevelandSubmarketSwitcher() {
             <div className="p-3 bg-white border-b border-slate-200 flex items-center justify-between text-xs font-bold text-neutral-950">
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-neutral-900" />
-                <span>{activeSubmarket.name} Court &amp; Arterials</span>
+                <span>{activeSubmarket.name} Jurisdiction Map</span>
               </span>
               <span className="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
                 Live Google Map Pin
@@ -230,7 +228,7 @@ export default function ClevelandSubmarketSwitcher() {
             <iframe
               key={activeSubmarket.id}
               src={`https://maps.google.com/maps?q=${activeSubmarket.mapQuery}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
-              title={`${activeSubmarket.name} Personal Injury Courthouse and Crash Corridor Map`}
+              title={`${activeSubmarket.name} ${practiceLabel} Jurisdiction Map`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full flex-1 min-h-[350px] border-0"
@@ -248,9 +246,9 @@ export default function ClevelandSubmarketSwitcher() {
 
       {/* Hidden/Prerendered SEO Content for Googlebot (All Submarkets Crawlable) */}
       <div className="sr-only" aria-hidden="true">
-        {SUBMARKETS.map((submarket) => (
+        {items.map((submarket) => (
           <div key={`seo-${submarket.id}`}>
-            <h3>{submarket.name} Personal Injury SEO &amp; Accident Lawyers</h3>
+            <h3>{submarket.name} {practiceLabel} SEO Cleveland</h3>
             <p>{submarket.marketReality}</p>
             <p>Court: {submarket.courtName} - {submarket.courtAddress}</p>
             <p>Corridors: {submarket.corridors}</p>

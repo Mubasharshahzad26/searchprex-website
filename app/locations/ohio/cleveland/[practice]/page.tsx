@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       images: [
         {
-          url: `${SITE}/images/services/law-firm/city-cleveland-ohio-law-firm-seo.webp`,
+          url: practice.heroVisual?.imageUrl ? `${SITE}${practice.heroVisual.imageUrl}` : `${SITE}/images/services/law-firm/city-cleveland-ohio-law-firm-seo.webp`,
           width: 1200,
           height: 630,
           alt: `${practice.practiceTitle} - SearchPrex Legal SEO`,
@@ -84,6 +84,8 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
 
   const url = `${SITE}/locations/ohio/cleveland/${practice.slug}`;
   const otherPractices = CLEVELAND_PRACTICES.filter((p) => p.slug !== practice.slug);
+  const primaryPinQuery = practice.mapSection?.pins?.[0]?.query || "1200+Ontario+St,+Cleveland,+OH+44113";
+  const heroImageUrl = practice.heroVisual?.imageUrl || "/images/services/law-firm/cleveland-ohio-personal-injury-law-firm-seo-district.webp";
 
   // Schema.org Structured Data
   const jsonLd = {
@@ -97,8 +99,8 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
         description: practice.metaDescription,
         url,
         provider: organizationRef,
-        hasMap: "https://maps.google.com/maps?q=1200+Ontario+St,+Cleveland,+OH+44113",
-        image: `${SITE}/images/services/law-firm/cleveland-ohio-personal-injury-law-firm-seo-district.webp`,
+        hasMap: `https://maps.google.com/maps?q=${primaryPinQuery}`,
+        image: `${SITE}${heroImageUrl}`,
         areaServed: [
           { "@type": "City", name: "Cleveland", containedInPlace: { "@type": "State", name: "Ohio" } },
           { "@type": "AdministrativeArea", name: "Cuyahoga County" },
@@ -168,10 +170,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className={`grid grid-cols-1 ${practice.slug === "personal-injury" ? "lg:grid-cols-12 gap-8 lg:gap-12" : "gap-6"} items-center`}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               {/* Main Column: Copy, Metrics & CTAs */}
-              <div className={`${practice.slug === "personal-injury" ? "lg:col-span-7" : "max-w-4xl"} space-y-6`}>
+              <div className="lg:col-span-7 space-y-6">
                 {/* Eyebrow Badges */}
                 <div className="flex flex-wrap items-center gap-2.5">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-300 text-neutral-900 text-xs font-semibold uppercase tracking-wider">
@@ -223,7 +225,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     href="/locations/ohio/cleveland#reality-check"
                     className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-7 py-3.5 text-sm sm:text-base shadow-sm transition-all"
                   >
-                    <span>{practice.slug === "personal-injury" ? "Get My Free 24-Hour Cleveland PI Audit" : `Request Free 24h ${practice.name} Audit`}</span>
+                    <span>{practice.ctaLabel || (practice.slug === "personal-injury" ? "Get My Free 24-Hour Cleveland PI Audit" : `Request Free 24h ${practice.name} Audit`)}</span>
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
@@ -235,71 +237,69 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Right Column: Hero Visual + Map Pack Preview (For Personal Injury) */}
-              {practice.slug === "personal-injury" && (
-                <div className="lg:col-span-5 space-y-4">
-                  <div className="relative aspect-16/10 rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-sm group">
-                    <Image
-                      src="/images/services/law-firm/cleveland-ohio-personal-injury-law-firm-seo-district.webp"
-                      alt="Downtown Cleveland legal district near Cuyahoga County Justice Center for personal injury law firm SEO"
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
-                    
-                    {/* Subtle Overlay Badge */}
-                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-md text-[11px] font-bold text-neutral-950 border border-slate-200 shadow-2xs flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-neutral-900" />
-                      <span>Downtown Cleveland · Cuyahoga County Jurisdiction</span>
-                    </div>
-
-                    <div className="absolute bottom-3.5 left-4 right-4 text-white">
-                      <span className="text-[11px] font-medium text-white/90 block mb-0.5 drop-shadow-xs">
-                        Ontario St Legal District · 1200 Ontario St
-                      </span>
-                      <h3 className="text-sm sm:text-base font-bold text-white leading-tight drop-shadow-xs">
-                        Cuyahoga County Justice Center District
-                      </h3>
-                    </div>
+              {/* Right Column: Dynamic Practice Hero Visual + Map Pack Preview */}
+              <div className="lg:col-span-5 space-y-4">
+                <div className="relative aspect-16/10 rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-sm group">
+                  <Image
+                    src={heroImageUrl}
+                    alt={practice.heroVisual?.altText || "Downtown Cleveland legal district near Cuyahoga County Justice Center for personal injury law firm SEO"}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
+                  
+                  {/* Subtle Overlay Badge */}
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-md text-[11px] font-bold text-neutral-950 border border-slate-200 shadow-2xs flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-neutral-900" />
+                    <span>{practice.heroVisual?.badgeLabel || "Downtown Cleveland · Cuyahoga County Jurisdiction"}</span>
                   </div>
 
-                  {/* Google Maps 3-Pack Target Simulation */}
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4 shadow-2xs space-y-2.5">
-                    <div className="flex items-center justify-between text-xs font-bold text-neutral-950">
-                      <span className="flex items-center gap-1.5">
-                        <span className="flex h-2 w-2 rounded-full bg-neutral-900" />
-                        <span>Google Maps Local 3-Pack Target</span>
-                      </span>
-                      <span className="text-[10px] font-mono text-white bg-neutral-900 px-2 py-0.5 rounded font-bold">
-                        #1 Rank Goal
-                      </span>
-                    </div>
-                    <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start justify-between gap-3 shadow-2xs">
-                      <div>
-                        <span className="text-xs font-bold text-neutral-950 block">
-                          Your Firm · Cleveland Personal Injury Attorney
-                        </span>
-                        <div className="flex items-center gap-1 text-[11px] text-neutral-800 font-semibold mt-0.5">
-                          <span>5.0</span>
-                          <span>★★★★★</span>
-                          <span className="text-slate-500 font-normal">(48 reviews)</span>
-                          <span className="text-slate-400">·</span>
-                          <span className="text-slate-600 font-normal">Cleveland, OH</span>
-                        </div>
-                        <span className="text-[11px] text-slate-700 font-semibold mt-1 block">
-                          ✓ Open 24 hours · Confirmed by Google Business Profile
-                        </span>
-                      </div>
-                      <span className="text-[10px] uppercase font-bold text-neutral-800 bg-slate-100 border border-slate-200 px-2 py-1 rounded shrink-0">
-                        Cuyahoga
-                      </span>
-                    </div>
+                  <div className="absolute bottom-3.5 left-4 right-4 text-white">
+                    <span className="text-[11px] font-medium text-white/90 block mb-0.5 drop-shadow-xs">
+                      {practice.heroVisual?.districtSubtitle || "Ontario St Legal District · 1200 Ontario St"}
+                    </span>
+                    <h3 className="text-sm sm:text-base font-bold text-white leading-tight drop-shadow-xs">
+                      {practice.heroVisual?.districtTitle || "Cuyahoga County Justice Center District"}
+                    </h3>
                   </div>
-
                 </div>
-              )}
+
+                {/* Google Maps 3-Pack Target Simulation */}
+                <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4 shadow-2xs space-y-2.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-neutral-950">
+                    <span className="flex items-center gap-1.5">
+                      <span className="flex h-2 w-2 rounded-full bg-neutral-900" />
+                      <span>{practice.heroVisual?.mapPackHeader || "Google Maps Local 3-Pack Target"}</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-white bg-neutral-900 px-2 py-0.5 rounded font-bold">
+                      {practice.heroVisual?.mapPackRankGoal || "#1 Rank Goal"}
+                    </span>
+                  </div>
+                  <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start justify-between gap-3 shadow-2xs">
+                    <div>
+                      <span className="text-xs font-bold text-neutral-950 block">
+                        {practice.heroVisual?.mapPackFirmTitle || `Your Firm · Cleveland ${practice.name} Counsel`}
+                      </span>
+                      <div className="flex items-center gap-1 text-[11px] text-neutral-800 font-semibold mt-0.5">
+                        <span>5.0</span>
+                        <span>★★★★★</span>
+                        <span className="text-slate-500 font-normal">({practice.heroVisual?.mapPackReviewsCount || "48 reviews"})</span>
+                        <span className="text-slate-400">·</span>
+                        <span className="text-slate-600 font-normal">Cleveland, OH</span>
+                      </div>
+                      <span className="text-[11px] text-slate-700 font-semibold mt-1 block">
+                        {practice.heroVisual?.mapPackAvailability || "✓ Open 24 hours · Confirmed by Google Business Profile"}
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase font-bold text-neutral-800 bg-slate-100 border border-slate-200 px-2 py-1 rounded shrink-0">
+                      Cuyahoga
+                    </span>
+                  </div>
+                </div>
+
+              </div>
 
             </div>
           </div>
@@ -311,7 +311,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
             <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xs">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
                 <Building2 className="h-4 w-4 text-neutral-800" />
-                <span>Step 1 · Why Paid Ads &amp; Billboards Drain Boutique Firms</span>
+                <span>{practice.step1Eyebrow || "Step 1 · Why Paid Ads & Billboards Drain Boutique Firms"}</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
                 {practice.marketRealityHeading || `Why Traditional Legal Marketing Fails for ${practice.name} in Cleveland`}
@@ -326,7 +326,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 shadow-2xs">
                   <div className="flex items-center gap-2 text-neutral-950 font-bold text-sm mb-2">
                     <AlertTriangle className="h-4 w-4 text-neutral-900" />
-                    <span>The Google Ads PPC Burn Rate</span>
+                    <span>{practice.ppcCardTitle || "The Google Ads PPC Burn Rate"}</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     Bidding on &quot;{practice.name.toLowerCase()} lawyer Cleveland&quot; costs <strong className="text-neutral-950 font-bold">{practice.cpc}</strong>. A typical monthly budget of {practice.ppcMonthlyBurn} vanishes quickly on unqualified clicks, tire-kickers, and competitor clicks. When you stop paying Google, your lead flow drops to zero overnight.
@@ -336,7 +336,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 <div className="rounded-2xl border-2 border-neutral-900 bg-white p-6 shadow-2xs">
                   <div className="flex items-center gap-2 text-neutral-950 font-bold text-sm mb-2">
                     <TrendingUp className="h-4 w-4 text-neutral-900" />
-                    <span>SearchPrex Organic Equity Model</span>
+                    <span>{practice.organicCardTitle || "SearchPrex Organic Equity Model"}</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     At a flat <strong className="text-neutral-950 font-bold">$1,200/month</strong>, we build permanent digital equity on your domain. <strong className="text-neutral-950 font-bold">{practice.breakEvenRule}</strong> Month-to-month partnership, 1-firm exclusivity in Cuyahoga County, and full attribution in your monthly signed case ledger.
@@ -352,27 +352,29 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-8">
               <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
-                Step 2 · Local Authority That Google &amp; AI Search Cite
+                {practice.step2Eyebrow || "Step 2 · Local Authority That Google & AI Search Cite"}
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
                 {practice.statutesHeading || "How We Align Your Site with Ohio Law & Cuyahoga Courts"}
               </h2>
               <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
-                To capture those hospital and roadside searches—and get recommended by ChatGPT, Perplexity, and Google AI Overviews—your firm&apos;s website must demonstrate firsthand authority over Northeast Ohio&apos;s real crash corridors, trauma centers, and Ohio Revised Code rules.
+                {practice.statutesIntro || "To capture those urgent local searches—and get recommended by ChatGPT, Perplexity, and Google AI Overviews—your firm's website must demonstrate firsthand authority over Northeast Ohio's real courthouses, local landmarks, and Ohio Revised Code statutes."}
               </p>
             </div>
 
-            {/* 3 Lively Localized Image Cards (For Personal Injury Wireframe) */}
-            {practice.slug === "personal-injury" && (
-              <ClevelandCorridorCards />
-            )}
+            {/* 3 Lively Localized Image Cards (All Practices Dynamic) */}
+            <ClevelandCorridorCards cards={practice.corridorCards} />
 
-            {/* 2-Column Interactive Map Embed Container (For Personal Injury Wireframe) */}
-            {practice.slug === "personal-injury" && (
-              <div className="mb-10">
-                <ClevelandInteractiveMap />
-              </div>
-            )}
+            {/* 2-Column Interactive Map Embed Container (All Practices Dynamic) */}
+            <div className="mb-10">
+              <ClevelandInteractiveMap
+                key={`map-${practice.slug}`}
+                pins={practice.mapSection?.pins}
+                title={practice.mapSection?.title}
+                subtitle={practice.mapSection?.subtitle}
+                caption={practice.mapSection?.caption}
+              />
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
               
@@ -380,10 +382,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 <div>
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-2">
                     <MapPin className="h-4 w-4" />
-                    <span>Cuyahoga Jurisdiction &amp; Corridors</span>
+                    <span>{practice.venuesCardEyebrow || "Cuyahoga Jurisdiction & Corridors"}</span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-neutral-950 mb-4">
-                    Where Injured Clevelanders Search From
+                    {practice.venuesCardHeading || "Where Injured Clevelanders Search From"}
                   </h3>
                   {practice.venuesList && practice.venuesList.length > 0 ? (
                     <div className="space-y-3">
@@ -419,10 +421,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 <div>
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-2">
                     <Scale className="h-4 w-4" />
-                    <span>Ohio Tort Law Authority</span>
+                    <span>{practice.statutesCardEyebrow || "Ohio Statutory Authority"}</span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-neutral-950 mb-4">
-                    Ohio Personal Injury Laws Every Client Asks About
+                    {practice.statutesCardHeading || "Ohio Personal Injury Laws Every Client Asks About"}
                   </h3>
                   {practice.statutesList && practice.statutesList.length > 0 ? (
                     <div className="space-y-3">
@@ -463,13 +465,13 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-10">
               <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
-                Step 3 · Capturing High-Intent Retainers Across Cuyahoga County
+                {practice.step3Eyebrow || "Step 3 · Capturing High-Intent Retainers Across Cuyahoga County"}
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                What Injured Motorists Actually Search Before Hiring a Cleveland Lawyer
+                {practice.keywordMatrixHeading || "What Injured Motorists Actually Search Before Hiring a Cleveland Lawyer"}
               </h2>
               <p className="mt-2 text-sm sm:text-base text-slate-600">
-                Once your website speaks the real language of Ohio tort law and local crash corridors, we organize your {practice.name.toLowerCase()} practice around the exact commercial, urgent, and suburban searches that turn into signed retainers:
+                {practice.keywordMatrixIntro || `Once your website speaks the real language of Ohio law and local Cuyahoga venues, we organize your ${practice.name.toLowerCase()} practice around the exact commercial, urgent, and suburban searches that turn into signed retainers:`}
               </p>
             </div>
 
@@ -480,10 +482,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs flex flex-col justify-between">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
-                    Direct Commercial Intent
+                    {practice.siloTitles?.commercialEyebrow || "Direct Commercial Intent"}
                   </span>
                   <h4 className="text-base font-bold text-neutral-950 mb-4">
-                    Core Map Pack Searches
+                    {practice.siloTitles?.commercialTitle || "Core Map Pack Searches"}
                   </h4>
                   <div className="space-y-2">
                     {practice.targetKeywords.commercial.map((kw, idx) => (
@@ -494,7 +496,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   </div>
                 </div>
                 <span className="mt-6 text-[11px] font-semibold text-slate-600 block border-t border-slate-100 pt-3">
-                  Map Pack 3-Pack Core Targets
+                  {practice.siloTitles?.commercialFooter || "Map Pack 3-Pack Core Targets"}
                 </span>
               </div>
 
@@ -502,10 +504,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs flex flex-col justify-between">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
-                    Urgent &amp; Hospital Searches
+                    {practice.siloTitles?.urgentEyebrow || "Urgent & High-Intent Searches"}
                   </span>
                   <h4 className="text-base font-bold text-neutral-950 mb-4">
-                    Immediate Action Queries
+                    {practice.siloTitles?.urgentTitle || "Immediate Action Queries"}
                   </h4>
                   <div className="space-y-2">
                     {practice.targetKeywords.urgent.map((kw, idx) => (
@@ -516,7 +518,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   </div>
                 </div>
                 <span className="mt-6 text-[11px] font-semibold text-slate-600 block border-t border-slate-100 pt-3">
-                  Captured by 24/7 AI Intake Engine
+                  {practice.siloTitles?.urgentFooter || "Captured by 24/7 AI Intake Engine"}
                 </span>
               </div>
 
@@ -524,10 +526,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs flex flex-col justify-between">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block mb-1">
-                    Suburban Crash Markets
+                    {practice.siloTitles?.suburbEyebrow || "Suburban Market Modifiers"}
                   </span>
                   <h4 className="text-base font-bold text-neutral-950 mb-4">
-                    High-Margin Suburb Queries
+                    {practice.siloTitles?.suburbTitle || "High-Margin Suburb Queries"}
                   </h4>
                   <div className="space-y-2">
                     {practice.targetKeywords.suburb.map((kw, idx) => (
@@ -538,29 +540,31 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   </div>
                 </div>
                 <span className="mt-6 text-[11px] font-semibold text-slate-600 block border-t border-slate-100 pt-3">
-                  Lower Competition · Higher Retainers
+                  {practice.siloTitles?.suburbFooter || "Lower Competition · Higher Retainers"}
                 </span>
               </div>
 
             </div>
 
-            {/* Interactive Submarket Switcher (For Personal Injury Wireframe) */}
-            {practice.slug === "personal-injury" && (
-              <div className="mt-12 pt-8 border-t border-slate-200">
-                <div className="max-w-3xl mb-6">
-                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
-                    Cuyahoga County Regional Markets
-                  </span>
-                  <h3 className="mt-1 text-xl sm:text-2xl font-extrabold text-neutral-950 tracking-tight">
-                    Where Your Next Cases Come From: West Side, South County &amp; East Side
-                  </h3>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-600">
-                    Switch tabs below to inspect neighborhood search dynamics, municipal court venues, and collision corridors across Greater Cleveland:
-                  </p>
-                </div>
-                <ClevelandSubmarketSwitcher />
+            {/* Interactive Submarket Switcher (All Practices Dynamic) */}
+            <div className="mt-12 pt-8 border-t border-slate-200">
+              <div className="max-w-3xl mb-6">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
+                  {practice.submarketEyebrow || "Cuyahoga County Regional Markets"}
+                </span>
+                <h3 className="mt-1 text-xl sm:text-2xl font-extrabold text-neutral-950 tracking-tight">
+                  {practice.submarketHeading || "Where Your Next Cases Come From: West Side, South County & East Side"}
+                </h3>
+                <p className="mt-1 text-xs sm:text-sm text-slate-600">
+                  {practice.submarketIntro || "Switch tabs below to inspect neighborhood search dynamics, municipal court venues, and client intent across Greater Cleveland:"}
+                </p>
               </div>
-            )}
+              <ClevelandSubmarketSwitcher
+                key={`sub-${practice.slug}`}
+                submarkets={practice.submarkets}
+                practiceLabel={practice.name}
+              />
+            </div>
           </div>
         </section>
 
@@ -569,10 +573,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-10">
               <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
-                Step 4 · From First Search to Signed Retainer
+                {practice.step4Eyebrow || "Step 4 · From First Search to Signed Retainer"}
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                How We Turn Cleveland Crash Searches Into Signed {practice.name} Cases
+                {practice.executionHeading || `How We Turn Cleveland Searches Into Signed ${practice.name} Cases`}
               </h2>
             </div>
 
@@ -597,10 +601,10 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                 <div className="space-y-2 max-w-2xl">
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-300">
                     <Clock className="w-3.5 h-3.5 text-neutral-900" />
-                    <span>Speed-to-Lead Triage System</span>
+                    <span>{practice.speedToLeadBadge || "Speed-to-Lead Triage System"}</span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-neutral-950">
-                    Answering Every After-Hours Injury Call in Under 30 Seconds
+                    {practice.speedToLeadHeading || "Answering Every After-Hours Injury Call in Under 30 Seconds"}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {practice.intakeWorkflow}
@@ -621,20 +625,24 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 8. Founder E-E-A-T Proof & 1-Firm Exclusivity (For Personal Injury Wireframe) */}
-        {practice.slug === "personal-injury" && (
-          <ClevelandFounderProof />
-        )}
+        {/* 8. Founder E-E-A-T Proof & Semrush Credentials (All Practices Dynamic) */}
+        <ClevelandFounderProof
+          practiceName={practice.name}
+          eyebrow={practice.founderCopy?.eyebrow}
+          heading={practice.founderCopy?.heading}
+          body={practice.founderCopy?.body}
+          ctaText={practice.founderCopy?.ctaText}
+        />
 
         {/* 6. FAQs with Schema Markup */}
         <section className="py-14 lg:py-20 bg-slate-50/60 border-b border-slate-200">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
-                Direct Answers for Managing Partners
+                {practice.faqEyebrow || "Direct Answers for Managing Partners"}
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                Common Questions Cleveland {practice.name} Firms Ask About SEO vs. PPC
+                {practice.faqHeading || `Common Questions Cleveland ${practice.name} Firms Ask About SEO vs. PPC`}
               </h2>
             </div>
 

@@ -1,19 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { MapPin, Navigation, Building2, Activity, ShieldAlert, ExternalLink } from "lucide-react";
+import { MapPin, Navigation, ExternalLink } from "lucide-react";
+import type { VenuePinItem } from "@/lib/cleveland-practice-pages";
 
-interface VenuePin {
-  id: string;
-  name: string;
-  category: "Court Anchor" | "Level 1 Trauma" | "Crash Hotspot" | "Freight Corridor";
-  address: string;
-  query: string;
-  jurisdictionDetail: string;
-  colorClass: string;
-}
-
-const VENUES: VenuePin[] = [
+const DEFAULT_PI_VENUES: VenuePinItem[] = [
   {
     id: "pin-1",
     name: "Cuyahoga County Court of Common Pleas",
@@ -21,7 +12,6 @@ const VENUES: VenuePin[] = [
     address: "1200 Ontario St, Cleveland, OH 44113",
     query: "1200+Ontario+St,+Cleveland,+OH+44113",
     jurisdictionDetail: "General Division civil trial jurisdiction for major auto collisions, wrongful death, and jury verdicts >$25,000.",
-    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-2",
@@ -30,7 +20,6 @@ const VENUES: VenuePin[] = [
     address: "2500 MetroHealth Dr, Cleveland, OH 44109",
     query: "2500+MetroHealth+Dr,+Cleveland,+OH+44109",
     jurisdictionDetail: "Main campus Level 1 Adult Trauma Center where over 64% of catastrophic injury patients search legal counsel.",
-    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-3",
@@ -39,7 +28,6 @@ const VENUES: VenuePin[] = [
     address: "11100 Euclid Ave, Cleveland, OH 44106",
     query: "11100+Euclid+Ave,+Cleveland,+OH+44106",
     jurisdictionDetail: "University Circle flagship tertiary trauma center and neurological rehabilitation referral hub.",
-    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-4",
@@ -48,7 +36,6 @@ const VENUES: VenuePin[] = [
     address: "I-90 Innerbelt at Superior Ave, Cleveland, OH",
     query: "Dead+Man's+Curve,+Cleveland,+OH",
     jurisdictionDetail: "Ohio's notorious 90-degree freeway turn with frequent multi-vehicle pileups and jackknifed commercial trucks.",
-    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
   {
     id: "pin-5",
@@ -57,12 +44,22 @@ const VENUES: VenuePin[] = [
     address: "I-480 over Cuyahoga River Valley, Independence, OH",
     query: "Valley+View+Bridge,+Independence,+OH",
     jurisdictionDetail: "Busiest commercial freight crossing in Ohio linking Hopkins logistics centers with high-speed interstate traffic.",
-    colorClass: "border-neutral-900 bg-neutral-900 text-white",
   },
 ];
 
-export default function ClevelandInteractiveMap() {
-  const [activePin, setActivePin] = useState<VenuePin>(VENUES[0]);
+export default function ClevelandInteractiveMap({
+  pins,
+  title = "Explore Cuyahoga Courts, Hospitals & Crash Hotspots",
+  subtitle = "Click any jurisdiction anchor below to focus the interactive map on that specific court, trauma center, or high-collision corridor:",
+  caption = "Interactive service-area map showing key Cuyahoga County civil courts, Level 1 trauma centers, and high-frequency crash corridors.",
+}: {
+  pins?: VenuePinItem[];
+  title?: string;
+  subtitle?: string;
+  caption?: string;
+}) {
+  const venueList = pins && pins.length > 0 ? pins : DEFAULT_PI_VENUES;
+  const [activePin, setActivePin] = useState<VenuePinItem>(venueList[0]);
 
   return (
     <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-xs">
@@ -78,14 +75,14 @@ export default function ClevelandInteractiveMap() {
               </span>
             </div>
             <h3 className="text-xl font-extrabold text-neutral-950 tracking-tight mb-2">
-              Explore Cuyahoga Courts, Hospitals &amp; Crash Hotspots
+              {title}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-5">
-              Click any jurisdiction anchor below to focus the interactive map on that specific court, trauma center, or high-collision corridor:
+              {subtitle}
             </p>
 
             <div className="space-y-2.5">
-              {VENUES.map((venue, idx) => {
+              {venueList.map((venue, idx) => {
                 const isSelected = activePin.id === venue.id;
                 return (
                   <button
@@ -100,7 +97,7 @@ export default function ClevelandInteractiveMap() {
                   >
                     <span
                       className={`shrink-0 flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
-                        isSelected ? venue.colorClass : "bg-slate-100 text-slate-700"
+                        isSelected ? "border-neutral-900 bg-neutral-900 text-white" : "bg-slate-100 text-slate-700"
                       }`}
                     >
                       {idx + 1}
@@ -156,7 +153,7 @@ export default function ClevelandInteractiveMap() {
           <iframe
             key={activePin.id}
             src={`https://maps.google.com/maps?q=${activePin.query}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
-            title="Cuyahoga County Personal Injury Courts, Trauma Centers, and Highway Corridors Map"
+            title={title}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="w-full h-full min-h-[380px] sm:min-h-[440px] border-0"
@@ -164,7 +161,7 @@ export default function ClevelandInteractiveMap() {
 
           <div className="p-3 bg-white border-t border-slate-200 text-center">
             <p className="text-[11px] text-slate-500">
-              Interactive service-area map showing key Cuyahoga County civil courts, Level 1 trauma centers, and high-frequency crash corridors.
+              {caption}
             </p>
           </div>
         </div>
