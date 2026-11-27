@@ -31,6 +31,7 @@ import {
   usageToday,
   visitorHashFor,
 } from '@/lib/serp-cache'
+import { guardPublicPost } from '@/lib/security/public-route-guard'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -90,12 +91,20 @@ export async function POST(req: NextRequest) {
   const visitor = visitorHashFor(ip)
 
   // 2. Parse + validate
-  let body: { domain?: unknown; keywords?: unknown; country?: unknown }
+  let body: { domain?: unknown; keywords?: unknown; country?: unknown; turnstileToken?: unknown }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 })
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: 'serp-checker',
+    limit: 12,
+    windowMs: 10 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  })
+  if (blocked) return blocked
 
   const domain = normalizeDomain(typeof body.domain === 'string' ? body.domain : '')
   if (!domain) {

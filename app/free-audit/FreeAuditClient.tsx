@@ -40,6 +40,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { OFFER_PROMISE } from "@/lib/offer";
+import TurnstileWidget from "@/components/security/TurnstileWidget";
 
 // What the visitor actually receives, restated on the page they convert on.
 const deliverables = [
@@ -68,6 +69,8 @@ const deliverables = [
 export default function FreeAuditClient() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [form, setForm] = useState({ name: "", email: "", website: "", business: "" });
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const [fromTool, setFromTool] = useState<string | null>(null);
   /** Where this lead came from, so the Sheet can answer "which page earns leads". */
   const [attribution, setAttribution] = useState({
@@ -117,12 +120,13 @@ export default function FreeAuditClient() {
       const res = await fetch("/api/send-audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...attribution }),
+        body: JSON.stringify({ ...form, ...attribution, turnstileToken }),
       });
       if (!res.ok) throw new Error("Request failed");
       trackLead("free_audit", "free-audit");
       setStatus("done");
     } catch {
+      setTurnstileResetKey((k) => k + 1);
       setStatus("error");
     }
   }
@@ -314,6 +318,8 @@ export default function FreeAuditClient() {
                       </p>
                     </div>
                   )}
+
+                  <TurnstileWidget onToken={setTurnstileToken} resetKey={turnstileResetKey} />
 
                   <button
                     type="submit"

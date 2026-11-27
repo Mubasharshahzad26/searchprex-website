@@ -1,58 +1,83 @@
 // app/robots.ts
 // Next.js App Router auto-detects this file and serves it at /robots.txt
 // Docs: https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots
- 
+
 import type { MetadataRoute } from "next";
- 
+
 const SITE = "https://www.searchprex.com";
 
 /**
- * Paths no crawler should ever index.
+ * Private, authenticated, and internal automation surfaces that legitimate
+ * search engines and AI citation crawlers must never crawl or index.
  *
- * Shared across every rule on purpose: a crawler obeys only the single most
- * specific user-agent group that matches it, so a bare `{ userAgent: "GPTBot",
- * allow: "/" }` would make GPTBot ignore the "*" disallow list entirely and
- * crawl /admin. Every named group must repeat these.
+ * Security note: All sensitive admin/internal surfaces below are ALSO gated at
+ * the server/middleware layer (middleware.ts + requireAdmin/CRON_SECRET) so bots
+ * that ignore robots.txt still receive 307/401/403 responses.
  */
 const PRIVATE_PATHS = [
-  "/api/",          // never let crawlers hit your API routes
-  "/admin",         // CMS control surface, must never be indexed
+  "/api/",
+  "/admin",
   "/admin/*",
-  // The second CMS surface. Easy to miss because it is not under /admin: it
-  // holds the page, blog, case-study, news and resource editors, and it was
-  // crawlable until now. It is admin-gated in middleware.ts as well, and the
-  // pages carry robots noindex (app/content-admin/layout.tsx) — Disallow alone
-  // stops crawling but not indexing of a URL Google found via a link.
+  "/admin-login",
+  "/admin-login/*",
   "/content-admin",
   "/content-admin/*",
-  "/studio",        // Sanity Studio route
+  "/autopilot",
+  "/autopilot/*",
+  "/bulk-generation",
+  "/bulk-generation/*",
+  "/content-generator",
+  "/content-generator/*",
+  "/studio",
   "/studio/*",
-  "/dashboard",     // logged-in area, no SEO value, keep private
+  "/dashboard",
   "/dashboard/*",
+  "/lb-preview",
+  "/lb-preview/*",
+  "/preview-links",
+  "/preview-links/*",
   "/login",
   "/register",
   "/onboarding",
-  "/action-plan",   // internal client-only report pages, if not meant public
+  "/action-plan",
 ];
 
-// Explicitly welcome the AI answer-engine crawlers (AEO). Same directives as
-// "*", but naming them signals intent and future-proofs the file if general
-// bots are ever restricted while AI crawlers stay allowed.
-const AI_CRAWLERS = ["GPTBot", "PerplexityBot", "ClaudeBot", "Google-Extended"];
+// Keep Search & AEO/GEO answer-engine crawlers explicitly welcomed on public pages.
+const AI_SEARCH_CRAWLERS = [
+  "GPTBot",
+  "OAI-SearchBot",
+  "PerplexityBot",
+  "ClaudeBot",
+  "Google-Extended",
+];
+
+// Aggressive pure-scraping & junk crawlers that add load without SEO/AEO value.
+// (Note: SemrushBot is intentionally NOT blocked so Semrush Site Audits work.)
+const BLOCKED_SCRAPER_BOTS = [
+  "Bytespider",
+  "CCBot",
+  "MJ12bot",
+  "DotBot",
+  "BLEXBot",
+  "PetalBot",
+  "Sogou",
+  "MegaIndex.ru",
+];
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: PRIVATE_PATHS },
-      ...AI_CRAWLERS.map((userAgent) => ({
+      ...AI_SEARCH_CRAWLERS.map((userAgent) => ({
         userAgent,
         allow: "/",
         disallow: PRIVATE_PATHS,
       })),
+      ...BLOCKED_SCRAPER_BOTS.map((userAgent) => ({
+        userAgent,
+        disallow: "/",
+      })),
     ],
-    // Both sitemaps, not just the main one. /news-sitemap.xml is a valid Google
-    // News sitemap that has always been served but never advertised, so its
-    // only discovery path was a manual Search Console submission.
     sitemap: [
       `${SITE}/sitemap.xml`,
       `${SITE}/news-sitemap.xml`,
@@ -61,4 +86,3 @@ export default function robots(): MetadataRoute.Robots {
     ],
   };
 }
- 

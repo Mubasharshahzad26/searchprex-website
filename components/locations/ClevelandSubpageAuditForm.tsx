@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Lock, ShieldCheck } from "lucide-react";
+import TurnstileWidget from "@/components/security/TurnstileWidget";
 
 interface ClevelandSubpageAuditFormProps {
   practiceSlug: string;
@@ -19,6 +20,8 @@ export default function ClevelandSubpageAuditForm({
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
   const [firmSize, setFirmSize] = useState<"Solo" | "2-10 attorneys" | "11+ attorneys">("2-10 attorneys");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -44,6 +47,7 @@ export default function ClevelandSubpageAuditForm({
           practiceArea: practiceName,
           source: `cleveland:${practiceSlug}:subpage-audit`,
           notes: `Requested 24h Cleveland ${practiceName} SEO & Map Pack Audit. Firm Size: ${firmSize}.`,
+          turnstileToken,
         }),
       });
 
@@ -54,6 +58,7 @@ export default function ClevelandSubpageAuditForm({
       setStatus("success");
     } catch (err: unknown) {
       setErrorMessage(err instanceof Error ? err.message : "Submission failed. Please try again.");
+      setTurnstileResetKey((k) => k + 1);
       setStatus("error");
     }
   };
@@ -190,6 +195,8 @@ export default function ClevelandSubpageAuditForm({
                   className="w-full h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-neutral-950 placeholder:text-slate-400 focus:border-neutral-900 focus:outline-none"
                 />
               </div>
+
+              <TurnstileWidget onToken={setTurnstileToken} resetKey={turnstileResetKey} />
 
               <button
                 type="submit"

@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import ContactClickTracker from "@/components/ContactClickTracker";
 import HalloweenOfferToast from "@/components/offers/HalloweenOfferToast";
+import HumanVerificationBridge from "@/components/security/HumanVerificationBridge";
 import { siteGraph } from "@/lib/site-schema";
 
  
@@ -152,6 +153,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <CookieConsent />
+        <HumanVerificationBridge />
         <HalloweenOfferToast />
         <ContactClickTracker />
 

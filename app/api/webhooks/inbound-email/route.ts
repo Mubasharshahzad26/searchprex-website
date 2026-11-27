@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parseInboundReply } from '@/lib/linkbuilding/reply-parser';
+import { verifyResendWebhook } from '@/lib/security/verify-resend-webhook';
+import { isCronAuthorized } from '@/lib/auth/require-admin-or-cron';
 
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const payload = await req.json();
+    const rawBody = await req.text();
+    if (!verifyResendWebhook(req, rawBody) && !isCronAuthorized(req)) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+    }
+    const parsed = JSON.parse(rawBody);
+    // Resend email.received webhooks wrap payload inside `data`
+    const payload = parsed?.data && typeof parsed.data === 'object' ? parsed.data : parsed;
 
     // Support standard Resend inbound webhook format and generic email formats
     const fromEmail =

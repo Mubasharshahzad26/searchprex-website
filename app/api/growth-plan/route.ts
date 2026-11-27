@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 import { normaliseLead, storeLead } from "@/lib/leads-store";
+import { guardPublicPost } from "@/lib/security/public-route-guard";
  
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -264,7 +265,16 @@ SearchPrex · <a href="https://www.searchprex.com" style="color:#65676e;text-dec
 /* ── Main handler ── */
 export async function POST(req: NextRequest) {
   try {
-    const lead = (await req.json()) as LeadPayload;
+    const raw = (await req.json()) as LeadPayload & { turnstileToken?: unknown };
+    const blocked = await guardPublicPost(req, {
+      bucket: "growth-plan",
+      limit: 10,
+      windowMs: 10 * 60 * 1000,
+      turnstileToken: raw.turnstileToken,
+    });
+    if (blocked) return blocked;
+
+    const lead = raw as LeadPayload;
  
     // ── Validation ──
     if (!lead.websiteUrl || !isValidUrl(lead.websiteUrl)) {

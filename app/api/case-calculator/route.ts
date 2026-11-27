@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { guardPublicPost } from '@/lib/security/public-route-guard'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -17,12 +18,20 @@ export const maxDuration = 30
   has no data — the client then uses a labelled estimate.
 */
 export async function POST(req: Request) {
-  let body: { keyword?: string; city?: string }
+  let body: { keyword?: string; city?: string; turnstileToken?: string }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 })
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: 'case-calculator',
+    limit: 20,
+    windowMs: 10 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  })
+  if (blocked) return blocked
  
   const base = (body.keyword || '').trim()
   const city = (body.city || '').trim()

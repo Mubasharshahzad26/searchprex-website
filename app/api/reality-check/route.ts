@@ -18,6 +18,7 @@ import type { NextRequest } from "next/server";
 
 import { leadStoreHealth, looksLikeEmail, normaliseLead, storeLead } from "@/lib/leads-store";
 import { sendLeadConfirmation } from "@/lib/lead-confirmation";
+import { guardPublicPost } from "@/lib/security/public-route-guard";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +35,14 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: "reality-check",
+    limit: 10,
+    windowMs: 10 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  });
+  if (blocked) return blocked;
 
   const lead = normaliseLead(body, "reality-check");
 

@@ -16,6 +16,7 @@
  
 import { NextRequest, NextResponse } from "next/server";
 import { generateContentWithPool } from "@/lib/gemini-pool";
+import { guardPublicPost } from "@/lib/security/public-route-guard";
  
 export const runtime = "nodejs";
  
@@ -68,6 +69,14 @@ export async function POST(req: NextRequest) {
     }
  
     const body = await req.json().catch(() => ({}));
+    const blocked = await guardPublicPost(req, {
+      bucket: "seo-finder",
+      limit: 10,
+      windowMs: 10 * 60 * 1000,
+      turnstileToken: body?.turnstileToken,
+    });
+    if (blocked) return blocked;
+
     const problem: unknown = body?.problem;
  
     if (typeof problem !== "string" || problem.trim().length < 3) {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { guardPublicPost } from '@/lib/security/public-route-guard'
 
 export const dynamic = 'force-dynamic'
 
@@ -63,6 +64,14 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const payload = await req.json()
+    const blocked = await guardPublicPost(req, {
+      bucket: 'platform-submissions',
+      limit: 10,
+      windowMs: 15 * 60 * 1000,
+      turnstileToken: payload?.turnstileToken,
+    })
+    if (blocked) return blocked
+
     const {
       type = 'discussion',
       category = 'SEO Discussion',

@@ -15,9 +15,9 @@ export interface PublicGuardOptions {
 }
 
 /**
- * Applies per-IP rate limiting and optional Cloudflare Turnstile verification
- * (automatically enforced once `TURNSTILE_SECRET_KEY` is configured).
- * Returns `null` when the request is allowed, or a 429/403 NextResponse.
+ * Applies per-IP rate limiting and Cloudflare Turnstile verification
+ * (accepting a solved token or verified human cookie once keys are set).
+ * Returns `null` when allowed, or a 429/403 NextResponse.
  */
 export async function guardPublicPost(
   req: Request,
@@ -29,7 +29,7 @@ export async function guardPublicPost(
     return rateLimitExceededResponse(rl.retryAfterSeconds);
   }
 
-  const turnstile = await verifyTurnstileIfConfigured(opts.turnstileToken, ip);
+  const turnstile = await verifyTurnstileIfConfigured(opts.turnstileToken, ip, req);
   if (!turnstile.ok) {
     return NextResponse.json(
       { ok: false, error: turnstile.error || "Human verification failed." },

@@ -24,6 +24,7 @@ import {
 } from "@/lib/law-firm-keywords";
 import { DAILY_KEYWORD_QUOTA, recordUsage, usageToday, visitorHashFor } from "@/lib/serp-cache";
 import { generateJson } from "@/lib/llm";
+import { guardPublicPost } from "@/lib/security/public-route-guard";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -160,12 +161,20 @@ export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   const visitor = `law:${visitorHashFor(ip)}`;
 
-  let body: { practiceArea?: unknown; state?: unknown };
+  let body: { practiceArea?: unknown; state?: unknown; turnstileToken?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: "law-firm-keywords",
+    limit: 15,
+    windowMs: 10 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  });
+  if (blocked) return blocked;
 
   const area = findPracticeArea(typeof body.practiceArea === "string" ? body.practiceArea : "");
   if (!area) {
