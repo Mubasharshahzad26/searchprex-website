@@ -56,6 +56,7 @@ export default function ClevelandFounderProof({
   body = "Large legal marketing agencies pitch you with a senior partner and then hand your Cuyahoga County campaign to junior coordinators who do not understand Ohio tort caps or I-90 crash corridors. At SearchPrex, founder Mubashar Sharif personally audits your Google Business Profile, maps your competitors, and oversees every technical deployment.",
   ctaText = "Request My Personal 24h PI Audit",
   ctaHref = "#subpage-audit",
+  bgClass = "bg-slate-50/70",
 }: {
   practiceName?: string;
   eyebrow?: string;
@@ -63,11 +64,12 @@ export default function ClevelandFounderProof({
   body?: string;
   ctaText?: string;
   ctaHref?: string;
+  bgClass?: string;
 }) {
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
 
   return (
-    <section className="py-14 lg:py-20 bg-slate-50/70 border-b border-slate-200">
+    <section className={`py-14 lg:py-20 ${bgClass} border-b border-slate-200`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
 
         {/* 1. Founder Real Photo & Direct Commitment */}

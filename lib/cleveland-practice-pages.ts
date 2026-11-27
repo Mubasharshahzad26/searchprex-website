@@ -679,7 +679,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       ctaText: "Request My 24h Defense SEO Audit",
     },
     faqEyebrow: "Direct Answers for Defense Partners",
-    faqHeading: "Common Questions Cleveland Criminal & OVI Firms Ask About SEO",
+    faqHeading: "Frequently Asked Questions",
     faqs: [
       {
         q: "How does SearchPrex capture after-hours criminal defense and OVI calls at 2:00 AM?",
@@ -1033,7 +1033,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       ctaText: "Request My 24h Family Law Audit",
     },
     faqEyebrow: "Direct Answers for Matrimonial Partners",
-    faqHeading: "Common Questions Cleveland Family Law Firms Ask About SEO",
+    faqHeading: "Frequently Asked Questions",
     faqs: [
       {
         q: "Why does suburb targeting outperform generic Downtown keywords for family lawyers?",
@@ -1387,7 +1387,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       ctaText: "Request My 24h Med Mal SEO Audit",
     },
     faqEyebrow: "Direct Answers for Trial Partners",
-    faqHeading: "Common Questions Cleveland Medical Malpractice Firms Ask About SEO",
+    faqHeading: "Frequently Asked Questions",
     faqs: [
       {
         q: "How do we filter out non-meritorious calls so partners don't waste hours on dead charts?",
@@ -1741,7 +1741,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       ctaText: "Request My 24h Workers' Comp Audit",
     },
     faqEyebrow: "Direct Answers for BWC Partners",
-    faqHeading: "Common Questions Cleveland Workers’ Comp Firms Ask About SEO",
+    faqHeading: "Frequently Asked Questions",
     faqs: [
       {
         q: "Why does Ohio BWC-specific content rank faster than generic workers' compensation SEO?",

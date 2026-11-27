@@ -20,7 +20,11 @@ import {
   TrendingUp,
   AlertTriangle,
   Building2,
-  FileText
+  FileText,
+  HeartHandshake,
+  UserCheck,
+  FlaskConical,
+  PhoneCall
 } from "lucide-react";
 import { Breadcrumb } from "@/components/layout";
 import Image from "next/image";
@@ -361,21 +365,76 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* 1.8. Empathy-to-Solution Tagline Band */}
+        <section className="bg-slate-900 text-white border-b border-slate-800 py-8 sm:py-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="flex items-start sm:items-center gap-4 max-w-4xl">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 border border-white/20 text-white">
+                  <HeartHandshake className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300 block mb-1">
+                    Founder-Led Cleveland Legal SEO · Built for Managing Partners
+                  </span>
+                  <p className="text-base sm:text-xl font-bold text-white leading-snug tracking-tight">
+                    We know the pain of $300 PPC clicks and missed after-hours calls—and we are here with a measurable solution.
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0">
+                <a
+                  href="#subpage-audit"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white hover:bg-slate-100 text-neutral-950 font-bold px-5 py-3 text-xs sm:text-sm shadow-xs transition-all"
+                >
+                  <span>Claim 7-Day SEO Trial</span>
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 2. Cuyahoga County Market Reality (Humanized Deep-Dive) */}
         <section className="py-12 lg:py-16 bg-slate-50/70 border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xs">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
-                <Building2 className="h-4 w-4 text-neutral-800" />
-                <span>{practice.step1Eyebrow || "Step 1 · Why Paid Ads & Billboards Drain Boutique Firms"}</span>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
+                    <Building2 className="h-4 w-4 text-neutral-800" />
+                    <span>{practice.step1Eyebrow || "Step 1 · Why Paid Ads & Billboards Drain Boutique Firms"}</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
+                    {practice.marketRealityHeading || `Why Traditional Legal Marketing Fails for ${practice.name} in Cleveland`}
+                  </h2>
+                  <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-700">
+                    {practice.cuyahogaReality}
+                  </p>
+                </div>
+
+                <div className="lg:col-span-5">
+                  <div className="relative aspect-16/10 rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-2xs">
+                    <Image
+                      src="/images/services/law-firm/law-firm-relief-from-ppc-burnout.webp"
+                      alt={`Cleveland ${practice.name} managing partner replacing high-CPC PPC burnout with compounding organic SEO`}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                    <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-white/85 block">
+                        Stop Renting Clicks · Own Cuyahoga Rankings
+                      </span>
+                      <p className="text-xs font-semibold text-white leading-snug">
+                        Replace recurring {practice.ppcMonthlyBurn} ad burn with permanent organic &amp; 3-Pack equity.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                {practice.marketRealityHeading || `Why Traditional Legal Marketing Fails for ${practice.name} in Cleveland`}
-              </h2>
-              
-              <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-700">
-                {practice.cuyahogaReality}
-              </p>
 
               {/* Economic Comparison Bar (Clean White Executive Cards) */}
               <div className="mt-8 pt-6 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -750,13 +809,39 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
 
             {/* 90-Day to 6-Month Execution Deliverables Roadmap */}
             <div className="mt-10 pt-8 border-t border-slate-200">
-              <div className="max-w-3xl mb-6">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
-                  Deliverables Schedule · Month-to-Month Accountability
-                </span>
-                <h3 className="mt-1 text-xl sm:text-2xl font-extrabold text-neutral-950 tracking-tight">
-                  What Ships in Months 1–6 for Your Cleveland {practice.name} Practice
-                </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-8">
+                <div className="lg:col-span-7">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                    Deliverables Schedule · Month-to-Month Accountability
+                  </span>
+                  <h3 className="mt-1 text-xl sm:text-2xl font-extrabold text-neutral-950 tracking-tight">
+                    What Ships in Months 1–6 for Your Cleveland {practice.name} Practice
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Every month includes transparent reporting tied to Cuyahoga Map Pack movements, organic inquiry volume, and verified signed-case attribution—with zero opaque agency vanity metrics.
+                  </p>
+                </div>
+                <div className="lg:col-span-5">
+                  <div className="relative aspect-16/10 rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-2xs">
+                    <Image
+                      src="/images/services/law-firm/usa-law-firm-seo-hero-dashboard.webp"
+                      alt={`SearchPrex signed-case attribution and Map Pack reporting dashboard for Cleveland ${practice.name} law firms`}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-white/85 block">
+                        Transparent Ledger Attribution
+                      </span>
+                      <p className="text-xs font-semibold text-white leading-snug">
+                        Live Map Pack rankings, call recordings, and qualified intake tracking.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {(practice.roadmap || [
@@ -817,7 +902,162 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 8. Founder E-E-A-T Proof & Semrush Credentials (All Practices Dynamic) */}
+        {/* 6. Special Client Care, Founder-Led Execution & Risk-Free Trial Showcase */}
+        <section className="py-14 lg:py-20 bg-slate-50/70 border-b border-slate-200">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white border border-slate-300 text-neutral-900 text-xs font-semibold uppercase tracking-wider mb-3">
+                <UserCheck className="w-3.5 h-3.5 text-neutral-800" />
+                <span>Founder-Led Legal SEO · Zero-Risk Evaluation</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
+                Founder-Led Cleveland Legal SEO — Direct Strategy &amp; Execution by Mubashar Sharif
+              </h2>
+              <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
+                Evaluate both our Cuyahoga SEO execution and our 24/7 after-hours intake response before committing to an ongoing partnership.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+              {/* Card 1: Special Client Care */}
+              <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs flex flex-col justify-between">
+                <div>
+                  <div className="relative aspect-16/10 bg-slate-900 border-b border-slate-200">
+                    <Image
+                      src="/images/services/law-firm/searchprex-law-firm-care-representative.webp"
+                      alt={`Dedicated founder-led client care for Cleveland ${practice.name} law firms`}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider text-neutral-950 border border-slate-200">
+                      Special Client Care
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 text-neutral-950 font-bold text-sm mb-2">
+                      <ShieldCheck className="h-4 w-4 text-neutral-900 shrink-0" />
+                      <h3 className="text-base font-bold text-neutral-950">
+                        Direct Founder Access &amp; Under-24h Response SLA
+                      </h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                      Zero junior account coordinators and zero support ticket queues. Mubashar Sharif personally manages your Cuyahoga campaign with strict 1-firm territory exclusivity.
+                    </p>
+                    <ul className="space-y-2 text-xs text-slate-700">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                        <span>Direct Slack, WhatsApp, and phone line to founder</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                        <span>Strict 1-firm {practice.name} exclusivity in Cuyahoga County</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="px-6 pb-6 pt-3 border-t border-slate-100">
+                  <a
+                    href="#subpage-audit"
+                    className="text-xs font-bold text-neutral-950 inline-flex items-center gap-1.5 hover:underline underline-offset-4"
+                  >
+                    <span>Confirm Cuyahoga exclusivity</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 2: 7-Day Free SEO Trial */}
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-5">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 text-neutral-950">
+                      <FlaskConical className="h-5 w-5" />
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-100 text-neutral-900 border border-slate-200">
+                      No Upfront Contract
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-extrabold text-neutral-950 mb-2">
+                    7-Day Free SEO Trial
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+                    Inspect real technical proof before paying a retainer. During your 7-day trial, we execute a complete diagnostic teardown of your Cleveland {practice.name.toLowerCase()} footprint.
+                  </p>
+                  <ul className="space-y-2.5 text-xs text-slate-700">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                      <span>Cuyahoga Google Business Profile category &amp; citation audit</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                      <span>Technical crawl, Core Web Vitals, and schema gap report</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                      <span>Custom 90-day corridor &amp; suburb ranking roadmap</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-5 mt-6 border-t border-slate-100">
+                  <a
+                    href="#subpage-audit"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-900 bg-white hover:bg-slate-50 text-neutral-950 font-bold px-4 py-2.5 text-xs transition-all"
+                  >
+                    <span>Start 7-Day Free SEO Trial</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 3: 14-Day Free Intake Efficiency Trial */}
+              <div className="rounded-2xl border-2 border-neutral-900 bg-white p-6 shadow-2xs flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-5">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900 text-white">
+                      <PhoneCall className="h-5 w-5" />
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-neutral-900 text-white">
+                      Risk-Free 14-Day Window
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-extrabold text-neutral-950 mb-2">
+                    14-Day Free Intake Efficiency Trial
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+                    Test our speed-to-lead capture on live after-hours inquiries for 14 full days. Measure response times and lead qualification quality with zero financial commitment.
+                  </p>
+                  <ul className="space-y-2.5 text-xs text-slate-700">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                      <span>Under-30-second missed-call &amp; web inquiry SMS triage</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                      <span>Strictly inbound, Ohio Rule 7.3-compliant qualification flow</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-900 shrink-0 mt-0.5" />
+                      <span>Instant routing of qualified {practice.name.toLowerCase()} consults</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-5 mt-6 border-t border-slate-100">
+                  <a
+                    href="#subpage-audit"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-4 py-2.5 text-xs shadow-2xs transition-all"
+                  >
+                    <span>Start 14-Day Intake Trial</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. Founder E-E-A-T Proof & Semrush Credentials (All Practices Dynamic) */}
         <ClevelandFounderProof
           practiceName={practice.name}
           eyebrow={practice.founderCopy?.eyebrow}
@@ -825,10 +1065,11 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           body={practice.founderCopy?.body}
           ctaText={practice.founderCopy?.ctaText}
           ctaHref="#subpage-audit"
+          bgClass="bg-white"
         />
 
-        {/* 8.5. Inline Subpage Audit & Cuyahoga Exclusivity Check */}
-        <section id="subpage-audit" className="scroll-mt-24 py-14 lg:py-20 bg-white border-b border-slate-200">
+        {/* 8. Inline Subpage Audit & Cuyahoga Exclusivity Check */}
+        <section id="subpage-audit" className="scroll-mt-24 py-14 lg:py-20 bg-slate-50/70 border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <ClevelandSubpageAuditForm
               practiceSlug={practice.slug}
@@ -838,37 +1079,52 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 6. FAQs with Schema Markup */}
-        <section className="py-14 lg:py-20 bg-slate-50/60 border-b border-slate-200">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
-                {practice.faqEyebrow || "Direct Answers for Managing Partners"}
-              </span>
-              <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                {practice.faqHeading || `Common Questions Cleveland ${practice.name} Firms Ask About SEO vs. PPC`}
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {practice.faqs.map((faq, idx) => (
-                <div key={idx} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-950 mb-2">
-                    {faq.q}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {faq.a}
-                  </p>
+        {/* 9. Other Practice Areas & Related Guides in Cleveland */}
+        <section className="py-14 lg:py-16 bg-white border-b border-slate-200">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+            <div>
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
+                <h2 className="text-lg sm:text-xl font-extrabold text-neutral-950 tracking-tight">
+                  Explore Other Cleveland Legal SEO Practice Silos
+                </h2>
+                <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
+                  <Link href="/locations/ohio/cleveland" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                    Cleveland Law Firm SEO Hub →
+                  </Link>
+                  <Link href="/law-firm-scorecard" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                    Law Firm SEO Scorecard →
+                  </Link>
                 </div>
-              ))}
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {otherPractices.map((op) => (
+                  <Link
+                    key={op.slug}
+                    href={`/locations/ohio/cleveland/${op.slug}`}
+                    className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5 hover:border-neutral-900 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-600 block mb-1">
+                        {op.badge.split(" · ")[0]}
+                      </span>
+                      <h3 className="text-sm font-bold text-neutral-950 mt-1">
+                        {op.name} SEO Cleveland
+                      </h3>
+                    </div>
+                    <span className="mt-3 text-xs font-bold text-neutral-900 flex items-center gap-1">
+                      {op.name} SEO in Cleveland →
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Related Practice-Specific Guides & Service Architecture (Contextual Cross-Links) */}
-            <div className="mt-12 pt-8 border-t border-slate-200">
+            <div className="pt-8 border-t border-slate-200">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-4">
                 Recommended {practice.name} SEO Guides &amp; Cleveland Studies
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {(practice.contextualLinks || [
                   {
                     href: "/services/law-firm-seo",
@@ -898,7 +1154,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="rounded-xl border border-slate-200 bg-white p-4 hover:border-neutral-900 hover:shadow-xs transition-all text-xs font-bold text-neutral-950 flex flex-col justify-between"
+                    className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 hover:border-neutral-900 hover:bg-white hover:shadow-xs transition-all text-xs font-bold text-neutral-950 flex flex-col justify-between"
                   >
                     <div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
@@ -918,41 +1174,28 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 7. Other Practice Areas in Cleveland */}
-        <section className="py-14 bg-white border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
-              <h2 className="text-lg sm:text-xl font-extrabold text-neutral-950 tracking-tight">
-                Explore Other Cleveland Legal SEO Practice Silos
+        {/* 10. Frequently Asked Questions (Final Content Section) */}
+        <section className="py-14 lg:py-20 bg-slate-50/60 border-b border-slate-200">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800">
+                {practice.faqEyebrow || "Direct Answers for Managing Partners"}
+              </span>
+              <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
+                {practice.faqHeading || "Frequently Asked Questions"}
               </h2>
-              <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
-                <Link href="/locations/ohio/cleveland" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
-                  Cleveland Law Firm SEO Hub →
-                </Link>
-                <Link href="/law-firm-scorecard" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
-                  Law Firm SEO Scorecard →
-                </Link>
-              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {otherPractices.map((op) => (
-                <Link
-                  key={op.slug}
-                  href={`/locations/ohio/cleveland/${op.slug}`}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5 hover:border-neutral-900 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-600 block mb-1">
-                      {op.badge.split(" · ")[0]}
-                    </span>
-                    <h3 className="text-sm font-bold text-neutral-950 mt-1">
-                      {op.name} SEO Cleveland
-                    </h3>
-                  </div>
-                  <span className="mt-3 text-xs font-bold text-neutral-900 flex items-center gap-1">
-                    {op.name} SEO in Cleveland →
-                  </span>
-                </Link>
+
+            <div className="space-y-4">
+              {practice.faqs.map((faq, idx) => (
+                <div key={idx} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
+                  <h3 className="text-base sm:text-lg font-bold text-neutral-950 mb-2">
+                    {faq.q}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
               ))}
             </div>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2, Lock, ShieldCheck } from "lucide-react";
 
 interface ClevelandSubpageAuditFormProps {
@@ -85,6 +86,27 @@ export default function ClevelandSubpageAuditForm({
               <span>Confirmation of 1-firm {practiceName.toLowerCase()} exclusivity availability in Cuyahoga County</span>
             </li>
           </ul>
+          <div className="pt-2">
+            <div className="relative aspect-16/10 rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-2xs">
+              <Image
+                src="/images/services/law-firm/mubashar-sharif-cleveland-seo-audit.webp"
+                alt={`Founder Mubashar Sharif reviewing a Cleveland ${practiceName} law firm SEO and Google Maps 3-Pack teardown`}
+                fill
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+              <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/85 block">
+                  7-Day Free SEO Trial + 14-Day Intake Trial Included
+                </span>
+                <p className="text-xs font-semibold text-white leading-snug">
+                  Personal Cuyahoga Map Pack teardown &amp; Rule 7.3 speed-to-lead diagnostic within 24 hours.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="lg:col-span-6">
