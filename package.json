@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && node scripts/check-canonicals.mjs && next build",
+    "build": "prisma generate && node scripts/check-canonicals.mjs && node scripts/check-encoding.mjs && next build",
     "check:canonicals": "node scripts/check-canonicals.mjs",
+    "check:encoding": "node scripts/check-encoding.mjs",
     "start": "next start",
     "lint": "eslint .",
     "seed:pages": "tsx prisma/seed-pages.ts"

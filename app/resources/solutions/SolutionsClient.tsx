@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
@@ -47,13 +47,13 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
     severity: 'Critical',
     errorBadge: 'GSC Indexing: Crawled - Currently Not Indexed',
     title: 'How to Fix "Crawled - Currently Not Indexed" for Commercial & Location Pages in Google Search Console',
-    estimatedFixTime: '45â€“90 mins',
+    estimatedFixTime: '45–90 mins',
     symptom:
       'Googlebot crawls your URLs (HTTP 200 OK, valid self-referencing canonical, no noindex tag), yet pages sit indefinitely inside Google Search Console under "Crawled - currently not indexed" and receive zero impressions.',
     rootCause:
       'Google\'s Helpful Content & Quality Evaluator systems compute an Information Gain score during rendering. If a page shares >65% boilerplate text with sibling pages, lacks first-party empirical tables/data, or sits 4+ clicks deep with fewer than 3 contextual internal inlinks, Google defers index storage to conserve index tier capacity.',
     steps: [
-      'Audit internal link depth: Ensure every unindexed money page receives at least 3â€“5 contextual inlinks from already-indexed high-traffic hub pages within 2 clicks of the homepage.',
+      'Audit internal link depth: Ensure every unindexed money page receives at least 3–5 contextual inlinks from already-indexed high-traffic hub pages within 2 clicks of the homepage.',
       'Eliminate boilerplate duplication: Replace Mad-Libs city/service template swaps with unique local statistics, pricing tables, case benchmarks, and specific FAQs.',
       'Add structured entity markup: Inject specific JSON-LD (`Service`, `LocalBusiness`, or `FAQPage`) with explicit `areaServed` and `sameAs` entity identifiers.',
       'Consolidate thin variants: If two pages target overlapping search intent with <300 unique words, 301 redirect the weaker URL into the primary canonical hub.',
@@ -69,7 +69,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
 }
 </script>`,
     verificationCheck:
-      'Inspect the updated URL in Google Search Console -> Live Test -> Request Indexing, then monitor the Page Indexing report over 7â€“14 days.',
+      'Inspect the updated URL in Google Search Console -> Live Test -> Request Indexing, then monitor the Page Indexing report over 7–14 days.',
     serviceLink: { label: 'Hire Technical SEO Engineers', href: '/services/technical-seo' },
     guideLink: { label: 'Technical SEO Audit Checklist', href: '/resources/technical-seo-checklist' },
     newsLink: { label: 'US Regional Proximity Volatility News', href: '/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility' },
@@ -81,9 +81,9 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
     severity: 'Critical',
     errorBadge: 'GBP Suspension: Deceptive Content / Virtual Office',
     title: 'Law Firm Google Business Profile (GBP) Suspension Recovery & Local 3-Pack Reinstatement Playbook',
-    estimatedFixTime: '2â€“5 business days',
+    estimatedFixTime: '2–5 business days',
     symptom:
-      'Your law firm\'s Google Business Profile is suddenly suspended for "Deceptive Content" or drops from #1â€“#3 in the Local Pack to #15+ overnight, halting local intake calls and affecting Local Services Ads (LSA) verification.',
+      'Your law firm\'s Google Business Profile is suddenly suspended for "Deceptive Content" or drops from #1–#3 in the Local Pack to #15+ overnight, halting local intake calls and affecting Local Services Ads (LSA) verification.',
     rootCause:
       'Google\'s automated legal vertical enforcement cross-references your GBP business name and address against State Bar registration records, Secretary of State filings, and commercial lease databases. Keyword-stuffed titles (e.g., "Smith Law - Best Car Accident Lawyer") or unstaffed Regus/virtual suites trigger immediate suspension.',
     steps: [
@@ -123,7 +123,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
     title: 'Eliminate Shopify Duplicate Collection-Aware Product URLs & Tag Filter Crawl Bloat',
     estimatedFixTime: '30 mins',
     symptom:
-      'Shopify generates 4â€“10 different collection-path URLs for every single product (`/collections/all/products/item`, `/collections/sale/products/item`), splitting internal link equity and wasting up to 70% of Googlebot crawl budget on non-canonical URLs.',
+      'Shopify generates 4–10 different collection-path URLs for every single product (`/collections/all/products/item`, `/collections/sale/products/item`), splitting internal link equity and wasting up to 70% of Googlebot crawl budget on non-canonical URLs.',
     rootCause:
       'Most Shopify themes use the `| within: collection` Liquid filter inside product card loops (`card-product.liquid` or `product-grid-item.liquid`), which forces internal links to point to collection-scoped URLs that rely on canonical tags instead of direct linking.',
     steps: [
@@ -150,7 +150,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
   {%- endif -%}
 {% endfor %}`,
     verificationCheck:
-      'Run a Screaming Frog crawl on `/collections/` â€” 100% of product links should now resolve directly to `/products/handle` with 0 non-canonical internal links.',
+      'Run a Screaming Frog crawl on `/collections/` — 100% of product links should now resolve directly to `/products/handle` with 0 non-canonical internal links.',
     serviceLink: { label: 'Shopify SEO Engineering Service', href: '/services/ecommerce-seo/shopify' },
     guideLink: { label: 'Shopify & WooCommerce Indexing Guide', href: '/blog/shopify-woocommerce-indexing-blueprint' },
     newsLink: { label: 'Shopify and Ecommerce SEO News', href: '/resources/news/ecommerce-seo-news-2026' },
@@ -162,7 +162,7 @@ const INITIAL_SOLUTIONS: SolutionPlaybook[] = [
     severity: 'High',
     errorBadge: 'Ecommerce Crawl Trap: Faceted Filter Index Bloat',
     title: 'Solving Ecommerce Faceted Navigation Crawl Traps While Indexing High-Volume Filter Combinations',
-    estimatedFixTime: '1â€“2 hours',
+    estimatedFixTime: '1–2 hours',
     symptom:
       'Google Search Console shows hundreds of thousands of discovered filter URLs (`?color=black&size=10&price=50-100`) crowding out new product arrivals, while high-demand search queries like "men\'s waterproof black trail running shoes" have no dedicated indexable landing page.',
     rootCause:
@@ -219,7 +219,7 @@ SELECT option_name, LENGTH(option_value) AS bytes
 FROM wp_options WHERE autoload IN ('yes', 'on', 'auto')
 ORDER BY bytes DESC LIMIT 10;`,
     verificationCheck:
-      'Test with PageSpeed Insights and Chrome UX Report (CrUX) â€” target TTFB < 200ms, LCP < 2.0s, and INP < 120ms.',
+      'Test with PageSpeed Insights and Chrome UX Report (CrUX) — target TTFB < 200ms, LCP < 2.0s, and INP < 120ms.',
     serviceLink: { label: 'WordPress & WooCommerce SEO', href: '/services/ecommerce-seo/woocommerce' },
     guideLink: { label: 'WooCommerce & WordPress SEO Checklist', href: '/resources/woocommerce-seo-checklist' },
     newsLink: { label: 'Technical SEO News', href: '/resources/news/technical-seo-news-2026' },
@@ -233,11 +233,11 @@ ORDER BY bytes DESC LIMIT 10;`,
     title: 'How to Fix Zero Citation Share in Google AI Overviews (Gemini 4) & ChatGPT Search Despite Top-5 Rankings',
     estimatedFixTime: '45 mins per page',
     symptom:
-      'Your page ranks #2â€“#5 in classic blue-link Google results for high-intent commercial keywords, but Google AI Overviews and Gemini AI Mode cite lower-ranking competitors instead of your domain.',
+      'Your page ranks #2–#5 in classic blue-link Google results for high-intent commercial keywords, but Google AI Overviews and Gemini AI Mode cite lower-ranking competitors instead of your domain.',
     rootCause:
-      'LLMs and retrieval-augmented generation (RAG) pipelines extract structured, self-contained "answer chunks" (45â€“60 word direct definitions immediately following an H2) and HTML `<table>` comparisons. Pages written with long narrative intros or buried answers fail passage-level cosine similarity thresholds.',
+      'LLMs and retrieval-augmented generation (RAG) pipelines extract structured, self-contained "answer chunks" (45–60 word direct definitions immediately following an H2) and HTML `<table>` comparisons. Pages written with long narrative intros or buried answers fail passage-level cosine similarity thresholds.',
     steps: [
-      'Place a 45â€“60 word "Direct Answer Capsule" in bold/clean prose immediately beneath every question-formatted H2 heading.',
+      'Place a 45–60 word "Direct Answer Capsule" in bold/clean prose immediately beneath every question-formatted H2 heading.',
       'Convert unstructured bullet lists of specs, pricing, or timelines into semantic HTML `<table>` elements with clear `<thead>` headers.',
       'Publish an `/llms.txt` file at your root domain mapping your primary commercial guides, checklists, and canonical documentation.',
       'Ensure `GPTBot`, `OAI-SearchBot`, `Google-Extended`, and `PerplexityBot` are explicitly allowed in `robots.txt`.',
@@ -251,7 +251,7 @@ ORDER BY bytes DESC LIMIT 10;`,
 - [Law Firm SEO Services](https://www.searchprex.com/services/law-firm-seo)
 - [Shopify SEO Services](https://www.searchprex.com/services/ecommerce-seo/shopify)`,
     verificationCheck:
-      'Test target queries in Google AI Mode and Perplexity â€” extracted passages and HTML tables typically get picked up within 5â€“10 days of re-crawling.',
+      'Test target queries in Google AI Mode and Perplexity — extracted passages and HTML tables typically get picked up within 5–10 days of re-crawling.',
     serviceLink: { label: 'AI Search & GEO Optimization', href: '/ai-search' },
     guideLink: { label: 'Google AI Overviews GEO Guide', href: '/blog/google-ai-overviews-seo' },
     newsLink: { label: 'GEO Entity Density & Citation News', href: '/resources/news/geo-entity-density-ai-mode-chatgpt-search-citation-factors' },
@@ -1084,7 +1084,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                                 cursor: 'pointer',
                               }}
                             >
-                              <span>â–² Fix Worked</span>
+                              <span>▲ Fix Worked</span>
                               <span>({stats.likes})</span>
                             </button>
 
@@ -1105,7 +1105,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                                 cursor: 'pointer',
                               }}
                             >
-                              <span>ðŸ’¬ Engineering Notes ({stats.commentsCount})</span>
+                              <span>💬 Engineering Notes ({stats.commentsCount})</span>
                             </button>
                           </div>
 
@@ -1123,7 +1123,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                               cursor: 'pointer',
                             }}
                           >
-                            {isExpanded ? 'Hide Step-by-Step Solution â–²' : 'View Root Cause & Code Fix â–¼'}
+                            {isExpanded ? 'Hide Step-by-Step Solution ▲' : 'View Root Cause & Code Fix ▼'}
                           </button>
                         </div>
                       </div>
@@ -1220,7 +1220,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                                     cursor: 'pointer',
                                   }}
                                 >
-                                  {copiedId === sol.id ? 'âœ“ Copied' : 'Copy Code'}
+                                  {copiedId === sol.id ? '✓ Copied' : 'Copy Code'}
                                 </button>
                               </div>
                               <pre
@@ -1278,7 +1278,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                                     gap: '6px',
                                   }}
                                 >
-                                  ðŸ“° {sol.newsLink.label} â†’
+                                  📰 {sol.newsLink.label} →
                                 </Link>
                               )}
                               <Link
@@ -1294,7 +1294,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                                   textDecoration: 'none',
                                 }}
                               >
-                                {sol.guideLink.label} â†’
+                                {sol.guideLink.label} →
                               </Link>
                               <Link
                                 href={sol.serviceLink.href}
@@ -1308,7 +1308,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                                   textDecoration: 'none',
                                 }}
                               >
-                                {sol.serviceLink.label} â†’
+                                {sol.serviceLink.label} →
                               </Link>
                             </div>
                           </div>
@@ -1371,7 +1371,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                             whiteSpace: 'nowrap',
                           }}
                         >
-                          Check Free DA Score â†—
+                          Check Free DA Score ↗
                         </a>
                       </div>
                     )}
@@ -1426,32 +1426,32 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                   marginBottom: '10px',
                 }}
               >
-                Get Free Technical Diagnostic â†’
+                Get Free Technical Diagnostic →
               </Link>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '14px' }}>
                 <Link
                   href="/services/technical-seo"
                   style={{ fontSize: '0.82rem', color: '#171a22', fontWeight: 600, textDecoration: 'none' }}
                 >
-                  â†’ Technical SEO Engineering
+                  → Technical SEO Engineering
                 </Link>
                 <Link
                   href="/services/law-firm-seo"
                   style={{ fontSize: '0.82rem', color: '#171a22', fontWeight: 600, textDecoration: 'none' }}
                 >
-                  â†’ Law Firm SEO &amp; GBP Recovery
+                  → Law Firm SEO &amp; GBP Recovery
                 </Link>
                 <Link
                   href="/services/ecommerce-seo/shopify"
                   style={{ fontSize: '0.82rem', color: '#171a22', fontWeight: 600, textDecoration: 'none' }}
                 >
-                  â†’ Shopify Liquid SEO Optimization
+                  → Shopify Liquid SEO Optimization
                 </Link>
                 <Link
                   href="/services/ecommerce-seo/woocommerce"
                   style={{ fontSize: '0.82rem', color: '#171a22', fontWeight: 600, textDecoration: 'none' }}
                 >
-                  â†’ WordPress Core Web Vitals Fix
+                  → WordPress Core Web Vitals Fix
                 </Link>
               </div>
             </div>
@@ -1500,7 +1500,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                   textDecoration: 'none',
                 }}
               >
-                Launch Free DA Checker â†—
+                Launch Free DA Checker ↗
               </a>
             </div>
 
@@ -1530,7 +1530,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                     textDecoration: 'none',
                   }}
                 >
-                  01. Industry SEO News Desk â†’
+                  01. Industry SEO News Desk →
                 </Link>
                 <Link
                   href="/resources/forum"
@@ -1545,7 +1545,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                     textDecoration: 'none',
                   }}
                 >
-                  02. SEO &amp; Regional Discussion Forum â†’
+                  02. SEO &amp; Regional Discussion Forum →
                 </Link>
                 <Link
                   href="/resources/learning-hub"
@@ -1560,7 +1560,7 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                     textDecoration: 'none',
                   }}
                 >
-                  04. Industry SEO Learning Hub â†’
+                  04. Industry SEO Learning Hub →
                 </Link>
               </div>
             </div>
@@ -1609,14 +1609,14 @@ export default function SolutionsClient({ mode = 'international' }: SolutionsCli
                   color: '#6c6e79',
                 }}
               >
-                âœ•
+                ✕
               </button>
             </div>
 
             {issueSubmitted ? (
               <div style={{ padding: '24px 0', textAlign: 'center' }}>
                 <p style={{ fontSize: '1rem', fontWeight: 700, color: '#171a22', marginBottom: '8px' }}>
-                  âœ“ Issue Logged in SearchPrex Database
+                  ✓ Issue Logged in SearchPrex Database
                 </p>
                 <p style={{ fontSize: '0.88rem', color: '#4b4f58', margin: 0 }}>
                   Our engineering team will review your symptom and follow up with a diagnostic fix.

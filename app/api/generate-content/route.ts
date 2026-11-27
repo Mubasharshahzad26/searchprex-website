@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
- 
+import { requireAdminOrCron } from '@/lib/auth/require-admin-or-cron';
+
 export async function POST(req: NextRequest) {
+  const denied = await requireAdminOrCron(req);
+  if (denied) return denied;
+
   try {
     // Parse request body
     const { prompt, numberOfPieces, contentType } = await req.json();

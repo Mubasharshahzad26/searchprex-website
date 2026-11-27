@@ -340,6 +340,25 @@ const nextConfig = {
             key: 'X-Permitted-Cross-Domain-Policies',
             value: 'none',
           },
+          {
+            // Defense-in-depth CSP restricting object embeds, clickjacking
+            // ancestors, base URI hijacking, and enforcing HTTPS upgrades.
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://va.vercel-scripts.com https://assets.calendly.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com",
+              "img-src 'self' data: blob: https:",
+              "font-src 'self' data: https://fonts.gstatic.com",
+              "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://challenges.cloudflare.com https://vitals.vercel-insights.com",
+              "frame-src 'self' https://maps.google.com https://www.google.com https://challenges.cloudflare.com https://calendly.com https://www.youtube.com https://www.youtube-nocookie.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self' https://calendly.com",
+              "frame-ancestors 'self'",
+              "upgrade-insecure-requests",
+            ].join('; '),
+          },
         ],
       },
     ]

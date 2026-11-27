@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /**
  * CaseStudiesClient (Semrush Enterprise Customer Stories Style)
@@ -26,9 +26,9 @@ import { caseStudies, detailUrl } from "./data";
 import { posts as fallbackBlogPosts } from "@/app/blog/data";
 import { submitLead, LEAD_FAILED_MESSAGE } from "@/lib/submit-lead";
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 // SEMRUSH LG-STYLE SPIKE FIELD
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 const SPIKE_COUNT = 110;
 const SPIKE_VB_W = 1100;
 const SPIKE_VB_H = 200;
@@ -70,9 +70,9 @@ function SpikeField() {
   );
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 // SEMRUSH-INSPIRED CARD PALETTE (olive, charcoal, sage, sand)
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 const CARD_BACKGROUNDS = [
   { bg: "#dce2d5", ink: "#14181f" },  // Semrush olive
   { bg: "#1a1d24", ink: "#ffffff" },  // Dark charcoal
@@ -82,9 +82,9 @@ const CARD_BACKGROUNDS = [
   { bg: "#1f232b", ink: "#ffffff" },  // Dark charcoal 2
 ];
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 // Filter categories (map to vertical string enum)
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 type FilterKey = "all" | "law-firm" | "local" | "technical" | "ecommerce";
 
 const VERTICAL_FILTERS: { key: FilterKey; label: string; seoType?: SeoType }[] = [
@@ -102,9 +102,9 @@ const SEO_TYPE_BY_FILTER = new Map<FilterKey, SeoType>(
 const isFilterKey = (v: string | null): v is FilterKey =>
   !!v && VERTICAL_FILTERS.some((f) => f.key === v);
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 // Component
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
 export default function CaseStudiesClient({
   linkedinUrl,
   initialCaseStudies = [],
@@ -138,7 +138,7 @@ export default function CaseStudiesClient({
       client: cs.clientName,
       seoType: "Technical SEO" as SeoType,
       industry,
-      location: cs.location ?? "â€”",
+      location: cs.location ?? "—",
       headline: cs.title,
       metrics: [] as Metric[],
       image: cs.coverImage || "/images/case-studies/default.jpg",
@@ -208,7 +208,7 @@ export default function CaseStudiesClient({
   return (
     <main className="bg-white text-[#0a0f2e]">
 
-      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 1. SEMRUSH DARK SPIKE HERO WITH 3 FEATURED CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─────────── 1. SEMRUSH DARK SPIKE HERO WITH 3 FEATURED CARDS ─────────── */}
       <section className="relative overflow-hidden bg-[#16181d] text-white pt-32 pb-36 lg:pt-36 lg:pb-44">
         {/* Background glow and spike field */}
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -298,7 +298,7 @@ export default function CaseStudiesClient({
                       {cs.headline}
                     </h3>
                     <p className="mt-1.5 text-xs text-white/60 line-clamp-1">
-                      {cs.location} Â· {cs.verifiedVia ?? "GSC Verified"}
+                      {cs.location} · {cs.verifiedVia ?? "GSC Verified"}
                     </p>
                   </div>
                 </Link>
@@ -308,7 +308,7 @@ export default function CaseStudiesClient({
         </div>
       </section>
 
-      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 2. ENTERPRISE WINS WORTH EXPLORING (WHITE CANVAS) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─────────── 2. ENTERPRISE WINS WORTH EXPLORING (WHITE CANVAS) ─────────── */}
       <section className="bg-white pt-16 pb-24 border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
@@ -386,12 +386,12 @@ export default function CaseStudiesClient({
         </div>
       </section>
 
-      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 2.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─────────── 2.5 TECHNICAL PLATFORM & SOLUTIONS QUICK-NAV ─────────── */}
       <section className="bg-neutral-900 border-y border-neutral-800 text-white py-4 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
-              âš¡
+              ⚡
             </span>
             <div>
               <p className="text-xs font-black uppercase tracking-wider text-neutral-400">
@@ -407,25 +407,25 @@ export default function CaseStudiesClient({
               href="/resources/solution"
               className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-neutral-950 shadow-sm transition-all hover:bg-neutral-200"
             >
-              ðŸ› ï¸ View Solutions Library
+              🛠️ View Solutions Library
             </Link>
             <Link
               href="/resources/news"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              ðŸ“° Latest News Desk
+              📰 Latest News Desk
             </Link>
             <Link
               href="/resources/learning-hub"
               className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-3.5 py-1.5 text-xs font-bold text-neutral-200 shadow-sm transition-all hover:border-neutral-500 hover:text-white"
             >
-              ðŸ“š 20-Module Playbooks
+              📚 20-Module Playbooks
             </Link>
           </div>
         </div>
       </section>
 
-      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 3. LATEST RESOURCES (Semrush Image 4 Pattern) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─────────── 3. LATEST RESOURCES (Semrush Image 4 Pattern) ─────────── */}
       <section className="bg-[#f8fafc] py-20 border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
@@ -508,7 +508,7 @@ export default function CaseStudiesClient({
         </div>
       </section>
 
-      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ 4. BOTTOM ENTERPRISE CTA SECTION (Semrush Image 5 Pattern) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─────────── 4. BOTTOM ENTERPRISE CTA SECTION (Semrush Image 5 Pattern) ─────────── */}
       <section className="relative overflow-hidden bg-[#16181d] text-white py-20 lg:py-28">
         {/* Ambient wave luminous gradients */}
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -533,7 +533,7 @@ export default function CaseStudiesClient({
 
               <div className="mt-8 space-y-3.5">
                 {[
-                  "100% GSC-verified deliverables â€” zero vanity metrics",
+                  "100% GSC-verified deliverables — zero vanity metrics",
                   "Founder-led technical strategy & custom programmatic pipelines",
                   "No long-term contracts; month-to-month performance milestones",
                 ].map((item, idx) => (
@@ -643,9 +643,9 @@ export default function CaseStudiesClient({
   );
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// CASE STUDY CARD (Semrush style â€” text OUTSIDE image)
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
+// CASE STUDY CARD (Semrush style — text OUTSIDE image)
+// ─────────────────────────────────────────────────────────────
 function CaseStudyCard({
   cs,
   index,
@@ -683,7 +683,7 @@ function CaseStudyCard({
           {imageSrc ? (
             <img
               src={imageSrc}
-              alt={`${cs.client} â€” ${cs.headline}`}
+              alt={`${cs.client} — ${cs.headline}`}
               className="absolute inset-0 h-full w-full object-cover opacity-95 transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
@@ -720,7 +720,7 @@ function CaseStudyCard({
           </div>
         </div>
 
-        {/* TEXT â€” OUTSIDE THE CARD (Semrush signature layout) */}
+        {/* TEXT — OUTSIDE THE CARD (Semrush signature layout) */}
         <div>
           <div className="mb-1.5 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
             <span className="text-[#0a0f2e] font-black">{cs.client}</span>
@@ -753,9 +753,9 @@ function CaseStudyCard({
   );
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// FALLBACK BRAND DISPLAY (when no cover image â€” big metric focus)
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
+// FALLBACK BRAND DISPLAY (when no cover image — big metric focus)
+// ─────────────────────────────────────────────────────────────
 function BrandFallback({
   client,
   isDark,

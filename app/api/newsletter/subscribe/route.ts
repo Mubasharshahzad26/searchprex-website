@@ -1,6 +1,7 @@
 // app/api/newsletter/subscribe/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { subscribeToNewsletter } from "@/lib/newsletter";
+import { guardPublicPost } from "@/lib/security/public-route-guard";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -12,6 +13,14 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request payload" }, { status: 400 });
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: "newsletter-sub",
+    limit: 8,
+    windowMs: 10 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  });
+  if (blocked) return blocked;
 
   const email = typeof body.email === "string" ? body.email.trim() : "";
   const source =

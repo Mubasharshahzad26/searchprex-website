@@ -61,7 +61,7 @@ export function CaseStudyManager({ initialCaseStudies }: { initialCaseStudies: a
               <div key={caseStudy.id} className="flex items-center justify-between p-4 border rounded-md">
                 <div>
                   <h3 className="font-semibold">{caseStudy.title}</h3>
-                  <p className="text-sm text-muted-foreground">{caseStudy.clientName} � {caseStudy.slug} � {caseStudy.published ? "Published" : "Draft"}</p>
+                  <p className="text-sm text-muted-foreground">{caseStudy.clientName} · {caseStudy.slug} · {caseStudy.published ? "Published" : "Draft"}</p>
                 </div>
                 <div className="space-x-2">
                   <Button variant="secondary" size="sm" onClick={() => setEditingId(caseStudy.id)}>Edit</Button>

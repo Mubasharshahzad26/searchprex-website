@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { verifyResendWebhook } from "@/lib/security/verify-resend-webhook";
 
 export async function POST(req: Request) {
   try {
-    const event = await req.json();
+    const rawBody = await req.text();
+    if (!verifyResendWebhook(req, rawBody)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const event = JSON.parse(rawBody);
     
     // Resend webhook events: 'email.opened', 'email.clicked', 'email.bounced'
     if (event.type === 'email.opened' || event.type === 'email.clicked') {

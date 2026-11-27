@@ -1,19 +1,28 @@
-﻿import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { generateContentWithPool } from '@/lib/gemini-pool'
- 
+import { guardPublicPost } from '@/lib/security/public-route-guard'
+
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
- 
+
 const MODEL = 'gemini-3.6-flash'
- 
+
 export async function POST(req: Request) {
-  let body: { website?: string; city?: string; practiceArea?: string }
+  let body: { website?: string; city?: string; practiceArea?: string; turnstileToken?: string }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 })
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: 'scorecard',
+    limit: 12,
+    windowMs: 15 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  })
+  if (blocked) return blocked
  
   const website = (body.website || '').trim()
   const city = (body.city || '').trim()
@@ -23,7 +32,7 @@ export async function POST(req: Request) {
   }
  
   try {
-    // â”€â”€ Call 1: grounded research across the 5 pillars (googleSearch) â”€â”€
+    // ── Call 1: grounded research across the 5 pillars (googleSearch) ──
     const researchPrompt = `You are a senior law-firm SEO auditor. Research the law firm at "${website}" - they practice ${practiceArea} law in ${city}. Use Google Search to investigate their real online presence, and assess each of these five areas with specific findings:
  
 1) Map Pack / Google Business Profile presence and review signals for "${practiceArea} lawyer ${city}".
@@ -41,7 +50,7 @@ Also identify the firm's real name. Write a concise, specific assessment of each
     })
     const research = (g.text || '').trim()
  
-    // â”€â”€ Call 2: structured scorecard JSON (no grounding â€” JSON mode) â”€â”€
+    // ── Call 2: structured scorecard JSON (no grounding — JSON mode) ──
     const jsonPrompt = `Based on this research assessment of a ${practiceArea} law firm in ${city} (website ${website}):
  
 ${research}

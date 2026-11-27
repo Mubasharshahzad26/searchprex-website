@@ -1,23 +1,24 @@
-﻿import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import {
   ProductDescriptionSchema,
   type ProductInput,
 } from '@/lib/content'
+import { requireAdminOrCron } from '@/lib/auth/require-admin-or-cron'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
-// âœ… Direct Gemini API - No v0 credits needed!
+// ✅ Direct Gemini API - No v0 credits needed!
 const MODEL = 'gemini-2.0-flash'
 
 const SYSTEM_PROMPT = `You are a senior eCommerce SEO copywriter and conversion strategist with 12+ years of hands-on retail merchandising experience. You write product descriptions that are demonstrably helpful, original, and people-first, in full alignment with Google's MARCH 2026 CORE UPDATE and the Helpful Content system.
 
-NON-NEGOTIABLE QUALITY MANDATE â€” every description MUST:
+NON-NEGOTIABLE QUALITY MANDATE — every description MUST:
 
 1. E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)
    - EXPERIENCE: Write as someone who has actually handled and used the product. Reference tangible, real-world usage scenarios, fit/feel, materials, and practical trade-offs.
-   - EXPERTISE: Demonstrate category mastery â€” explain WHY a feature matters, not just that it exists. Use correct technical terminology for the product category.
+   - EXPERTISE: Demonstrate category mastery — explain WHY a feature matters, not just that it exists. Use correct technical terminology for the product category.
    - AUTHORITATIVENESS: Be specific and confident. Use concrete specs, measurements, and use cases drawn ONLY from the provided product data. NEVER invent certifications, awards, lab results, or statistics.
    - TRUSTWORTHINESS: Be transparent and balanced. Note who the product is best suited for. Avoid hype that cannot be substantiated by the supplied attributes.
 
@@ -32,7 +33,7 @@ NON-NEGOTIABLE QUALITY MANDATE â€” every description MUST:
    - Naturally incorporate the target keywords. NEVER keyword-stuff. Keyword density must read naturally to a human.
 
 4. GEO (Generative Engine Optimization) FAQs
-   - Produce 3â€“5 genuinely useful, UNIQUE FAQs that answer real purchase-intent questions (sizing, care, compatibility, use cases, comparisons).
+   - Produce 3–5 genuinely useful, UNIQUE FAQs that answer real purchase-intent questions (sizing, care, compatibility, use cases, comparisons).
    - Answers must be self-contained, factual, and quotable by AI answer engines.
 
 STRICTLY FORBIDDEN:
@@ -53,13 +54,13 @@ OUTPUT FORMAT: Return ONLY a valid JSON object with these exact fields:
 Do NOT include markdown backticks or any text outside the JSON object.`
 
 function buildUserPrompt(p: ProductInput): string {
-  return `Write an original, March-2026-compliant product description for this eCommerce product. Use ONLY the data below â€” do not invent specs, certifications, or claims.
+  return `Write an original, March-2026-compliant product description for this eCommerce product. Use ONLY the data below — do not invent specs, certifications, or claims.
 
 Product name: ${p.name}
-Brand: ${p.brand || '(unspecified â€” infer a neutral, professional brand voice)'}
+Brand: ${p.brand || '(unspecified — infer a neutral, professional brand voice)'}
 Category: ${p.category || '(unspecified)'}
-Key features: ${p.features || '(none provided â€” describe only what the name and category clearly imply)'}
-Target keywords: ${p.keywords || '(none provided â€” choose natural, relevant terms)'}
+Key features: ${p.features || '(none provided — describe only what the name and category clearly imply)'}
+Target keywords: ${p.keywords || '(none provided — choose natural, relevant terms)'}
 Target audience: ${p.audience || '(general shoppers in this category)'}`
 }
 
@@ -95,7 +96,7 @@ async function generateOne(product: ProductInput) {
 
   if (!response.ok) {
     const errorText = await response.text()
-    throw new Error(`Gemini API error: ${response.status} â€” ${errorText}`)
+    throw new Error(`Gemini API error: ${response.status} — ${errorText}`)
   }
 
   const data = await response.json()
@@ -112,6 +113,9 @@ async function generateOne(product: ProductInput) {
 }
 
 export async function POST(req: Request) {
+  const denied = await requireAdminOrCron(req)
+  if (denied) return denied
+
   let body: { product?: ProductInput }
   try {
     body = await req.json()

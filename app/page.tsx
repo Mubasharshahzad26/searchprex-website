@@ -1,4 +1,4 @@
-﻿// app/page.tsx â€” the home page.
+// app/page.tsx — the home page.
 //
 // Redesigned September 2026, built and reviewed on /home-page-test first.
 //
@@ -17,7 +17,7 @@
 //   - The chat widget and the sticky mobile CTA are kept, as on the old page.
 //
 // Every figure is read from app/case-studies (data.ts and details.ts), the
-// proof components or lib/pricing â€” never typed here.
+// proof components or lib/pricing — never typed here.
 
 import type { Metadata } from "next";
 import IndustryMarquee from "@/components/home/IndustryMarquee";
@@ -86,7 +86,7 @@ const LAST_REVIEWED = "2026-11-03";
 const H = "font-black";
 const LINKEDIN = "https://www.linkedin.com/in/mubashar-sharif-senior-seo-analyst/";
 
-// â”€â”€ Data, read from the case studies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Data, read from the case studies ──────────────────────────────────────
 
 const byClient = (client: string) => caseStudies.find((c) => c.slug.client === client);
 const shot = (client: string, i: number): ProofShot | undefined =>
@@ -106,38 +106,38 @@ const MSO_INDEXING_SHOT: ProofShot = {
   alt: "Google Search Console page-indexing chart for Michigan Outdoor Sports, showing indexed pages rising from roughly 3,000 in mid-May 2026 to 11,549 on 25 July 2026.",
   width: 778,
   height: 520,
-  figure: "â‰ˆ3,000 â†’ 11,549",
+  figure: "≈3,000 → 11,549",
   figureLabel: "indexed pages",
-  caption: "25 Jul 2026 Â· 11,549 pages indexed",
+  caption: "25 Jul 2026 · 11,549 pages indexed",
 };
 const RESULT_CARDS: ResultCard[] = [
   pick("smk-store", 1, {
-    tab: "store", tag: "Online store Â· WooCommerce Â· Apr â€“ Jun 2026",
-    figure: "+227%", figureLabel: "$5,832 â†’ $19,100 net sales a month",
+    tab: "store", tag: "Online store · WooCommerce · Apr – Jun 2026",
+    figure: "+227%", figureLabel: "$5,832 → $19,100 net sales a month",
     problem: "35,000+ product pages barely indexed, thin duplicate descriptions.",
     did: "Rewrote product content brand by brand, product schema, Core Web Vitals.",
   }),
   pick("michigan-outdoor-sports", -1, {
-    tab: "store", tag: "Online store Â· Michigan Â· Mar â€“ Jul 2026",
-    figure: "â‰ˆ3,000 â†’ 11,549", figureLabel: "indexed pages, 25 Jul 2026 (Search Console)",
+    tab: "store", tag: "Online store · Michigan · Mar – Jul 2026",
+    figure: "≈3,000 → 11,549", figureLabel: "indexed pages, 25 Jul 2026 (Search Console)",
     problem: "Thin brand pages and crawl waste left thousands of pages out of Google.",
     did: "Fixed indexation blocks, rewrote brand pages, resubmitted in batches.",
   }),
   pick("local-hvac-services", 0, {
-    tab: "local", tag: "Local Â· HVAC Â· Simi Valley, CA",
+    tab: "local", tag: "Local · HVAC · Simi Valley, CA",
     figure: "Named", figureLabel: "in Google's AI Overview for an AC installation search",
     problem: "No visibility for high-intent local AC searches.",
     did: "Business Profile, service-area pages and answer-ready content.",
   }),
   pick("dolls-cleaning", 0, {
-    tab: "local", tag: "Local Â· Cleaning Â· Chesterfield, MI",
+    tab: "local", tag: "Local · Cleaning · Chesterfield, MI",
     figure: "#1", figureLabel: "named first in the AI Overview, #1 organic below it",
     problem: "Invisible for high-intent cleaning searches, no map presence.",
     did: "Business Profile, service-area pages, citations and reviews.",
   }),
   pick("remit-choice", 2, {
-    tab: "international", tag: "International Â· Fintech Â· from 2023",
-    figure: "#1", figureLabel: "above Wise and Xoom for a UK â†’ Pakistan transfer search",
+    tab: "international", tag: "International · Fintech · from 2023",
+    figure: "#1", figureLabel: "above Wise and Xoom for a UK → Pakistan transfer search",
     problem: "Duplicate country pages, no keyword mapping across corridors.",
     did: "A page per country and corridor, one primary search per page.",
   }),
@@ -156,7 +156,7 @@ const TABS: AudienceTab[] = [
     visual: {
       src: "/images/audiences/lawyer-ppc-fatigue.webp",
       alt: "Attorney at law firm reviewing expensive Google Ads PPC campaign spend and zero retained cases late at night",
-      badge: "The Problem Â· PPC Ad Burnout",
+      badge: "The Problem · PPC Ad Burnout",
       caption: "9:45 PM: Another $150 click that turned into a price-shopper who hung up in 30 seconds, while Google Ads eats your retainer.",
     },
     work: [
@@ -178,11 +178,11 @@ const TABS: AudienceTab[] = [
     label: "Local businesses",
     title: "The Map Pack, and the phone ringing",
     problem:
-      "When someone searches â€œnear meâ€, they call one of the three businesses in the map pack. A profile set up as an afterthought and a single services page keep good businesses out of it.",
+      "When someone searches “near me”, they call one of the three businesses in the map pack. A profile set up as an afterthought and a single services page keep good businesses out of it.",
     visual: {
       src: "/images/audiences/local-contractor-garage.webp",
       alt: "Local contractor and garage repair business owner waiting for incoming phone calls with idle service vans",
-      badge: "The Problem Â· Silent Dispatch",
+      badge: "The Problem · Silent Dispatch",
       caption: "Three service vans parked inside and payroll running, while the local 3-pack sends all the emergency repair calls to competitors.",
     },
     work: [
@@ -209,7 +209,7 @@ const TABS: AudienceTab[] = [
     visual: {
       src: "/images/audiences/ecommerce-inventory-stress.webp",
       alt: "Ecommerce store owner in warehouse worried about unindexed product catalog and rising ad CAC",
-      badge: "The Problem Â· Inventory Stagnation",
+      badge: "The Problem · Inventory Stagnation",
       caption: "Thousands of product SKUs sitting in the warehouse, rising ad CAC, and Google Search Console still leaving half your catalogue unindexed.",
     },
     work: [
@@ -260,7 +260,7 @@ const FAQS = [
   },
   {
     q: "Who actually does the work?",
-    a: "Mubashar Sharif, the founder â€” every audit, page and report. There are no account managers or juniors, which is also why SearchPrex takes one client per city.",
+    a: "Mubashar Sharif, the founder — every audit, page and report. There are no account managers or juniors, which is also why SearchPrex takes one client per city.",
   },
   {
     q: "Can you get my business into Google's AI Overviews & ChatGPT Search?",
@@ -272,11 +272,11 @@ const FAQS = [
   },
   {
     q: "Do you guarantee rankings?",
-    a: "No, and nobody honestly can â€” Google decides rankings. What I do guarantee is progress. If you see no measurable progress in 90 days, I keep working for free, or refund those 90 days. You also get the tear-down in 24 hours, the work done by me, and a plain report every Monday.",
+    a: "No, and nobody honestly can — Google decides rankings. What I do guarantee is progress. If you see no measurable progress in 90 days, I keep working for free, or refund those 90 days. You also get the tear-down in 24 hours, the work done by me, and a plain report every Monday.",
   },
   {
     q: "Do I have to sign a contract?",
-    a: "No. SearchPrex runs month to month â€” no annual contract, no lock-in. You start with a free 7-day trial, then pay monthly only while the work is producing results. If you don't see measurable progress in 90 days, those 90 days are refunded.",
+    a: "No. SearchPrex runs month to month — no annual contract, no lock-in. You start with a free 7-day trial, then pay monthly only while the work is producing results. If you don't see measurable progress in 90 days, those 90 days are refunded.",
   },
   {
     q: "Where is SearchPrex based?",
@@ -295,7 +295,7 @@ function Heading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?
 }
 
 
-// â”€â”€ Homepage hub sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Homepage hub sections ────────────────────────────────────────────────
 // The homepage targets broad small-business SEO agency intent. Service and
 // industry pages own the more specific law-firm, local, ecommerce and problem
 // queries. Every href below is a live page; prices come from lib/pricing.
@@ -325,7 +325,7 @@ const SOLUTIONS = [
 ];
 
 // Same order as RETAINER_PLANS: local, law firm, ecommerce.
-const PLAN_TIMING = ["60â€“90 days", "60â€“90 days", "3â€“6 months for large catalogs"];
+const PLAN_TIMING = ["60–90 days", "60–90 days", "3–6 months for large catalogs"];
 const PLAN_WORK = [
   "Google Business Profile, Map Pack, reviews, city pages",
   "Practice-area and city pages, Business Profile for each office",
@@ -344,9 +344,9 @@ const WHY_ROWS: [string, string, string, string][] = [
 
 // AI Overview citations that have screenshots in the case studies.
 const AI_PROOF = [
-  { client: "Doll's Cleaning", tag: "Local Â· Chesterfield, MI", line: "Named first in Google's AI Overview, #1 organic below it.", href: "/case-studies/cleaning/dolls-cleaning" },
-  { client: "HVAC Services Team", tag: "Local Â· Simi Valley, CA", line: "Named in the AI Overview for an AC installation search.", href: "/case-studies/hvac/local-hvac-services" },
-  { client: "Remit Choice", tag: "International Â· Fintech", line: "Named in the AI Overview for a money transfer search.", href: "/case-studies/fintech/remit-choice" },
+  { client: "Doll's Cleaning", tag: "Local · Chesterfield, MI", line: "Named first in Google's AI Overview, #1 organic below it.", href: "/case-studies/cleaning/dolls-cleaning" },
+  { client: "HVAC Services Team", tag: "Local · Simi Valley, CA", line: "Named in the AI Overview for an AC installation search.", href: "/case-studies/hvac/local-hvac-services" },
+  { client: "Remit Choice", tag: "International · Fintech", line: "Named in the AI Overview for a money transfer search.", href: "/case-studies/fintech/remit-choice" },
 ];
 
 const STATE_IMAGES: Record<string, { src: string; alt: string }> = {
@@ -505,7 +505,7 @@ export default function Home() {
     contentUrl: `${SITE}${src}`,
     caption,
     creator: founderRef,
-    creditText: "SearchPrex â€” Mubashar Sharif",
+    creditText: "SearchPrex — Mubashar Sharif",
     datePublished,
   });
 
@@ -531,7 +531,7 @@ export default function Home() {
         ],
       },
       proofImage("proof-smk-revenue-before", "/images/proof/smk-revenue-before-v2.png", "SMK Store WooCommerce net sales for April 2026: $5,832.02 for the month, top seller at 200 units.", "2026-04-30"),
-      proofImage("proof-smk-revenue-after", "/images/proof/smk-revenue-after-v2.png", "SMK Store WooCommerce net sales for June 2026: $19,100.71 for the month, top seller at 300 units â€” a 227% increase over April.", "2026-06-30"),
+      proofImage("proof-smk-revenue-after", "/images/proof/smk-revenue-after-v2.png", "SMK Store WooCommerce net sales for June 2026: $19,100.71 for the month, top seller at 300 units — a 227% increase over April.", "2026-06-30"),
       proofImage("proof-indexing", "/images/proof/mso-gsc-indexing-full.png", "Google Search Console page indexing for Michigan Outdoor Sports: approximately 3,000 indexed pages in mid-May 2026 rising to 11,549 on 25 July 2026.", "2026-08-07"),
       proofImage("proof-revenue-before", "/images/proof/mso-revenue-1-jul20-v2.png", "Michigan Outdoor Sports WooCommerce net sales, 20 July 2026: $0.00 for the month.", "2026-07-20"),
       proofImage("proof-revenue-mid", "/images/proof/mso-revenue-2-aug06-v2.png", "Michigan Outdoor Sports WooCommerce net sales, 6 August 2026: $206.63 for the month.", "2026-08-06"),
@@ -562,16 +562,16 @@ export default function Home() {
     <main id="main-content" className="bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* 1 Â· HERO â€” kept from the previous home page on purpose: the form card carries the founder's face and name (people hire a person, not a tool), both fields are visible so the 24-hour human reply is clear up front, and proof and a phone number sit on the first screen. */}
+      {/* 1 · HERO — kept from the previous home page on purpose: the form card carries the founder's face and name (people hire a person, not a tool), both fields are visible so the 24-hour human reply is clear up front, and proof and a phone number sit on the first screen. */}
       <HeroV2 />
 
-      {/* 2 Â· PROOF STRIP â€” client logos, then the directory profiles (E-E-A-T strap) */}
+      {/* 2 · PROOF STRIP — client logos, then the directory profiles (E-E-A-T strap) */}
       <ClientLogos />
       <TrustStrap />
       {/* V2 order, written as the founder talking to the owner: reassurance
           and the problem list, which track they are on, proof, help and price,
-          who does the work, doubts, the form â€” then the resources. */}
-      {/* USA â€” who we serve, coast to coast. Not a claim of a US office. */}
+          who does the work, doubts, the form — then the resources. */}
+      {/* USA — who we serve, coast to coast. Not a claim of a US office. */}
       <section className="px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <p className="text-center text-xs font-bold uppercase tracking-[0.16em] text-[#b22234]">Serving businesses across the USA</p>
@@ -588,7 +588,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROBLEMS WE SOLVE â€” the searches people make when something breaks. */}
+      {/* PROBLEMS WE SOLVE — the searches people make when something breaks. */}
       <section className="bg-neutral-950 px-4 py-20 text-white sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <p className="text-center text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">Problems we solve</p>
@@ -616,7 +616,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SOLUTION â€” each pain from the section above, answered. */}
+      {/* SOLUTION — each pain from the section above, answered. */}
       <section className="bg-white px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -639,7 +639,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CARE â€” the promise behind the work, said plainly. */}
+      {/* CARE — the promise behind the work, said plainly. */}
       <section data-lead-hotspot className="bg-[#fdf8f3] px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
           <div className="grid grid-cols-2 gap-4">
@@ -677,7 +677,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CARE CARDS â€” what looking after a client means, in pictures. */}
+      {/* CARE CARDS — what looking after a client means, in pictures. */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -702,7 +702,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CUSTOM PACKAGE â€” the offer path, step by step, and the tools behind it. */}
+      {/* CUSTOM PACKAGE — the offer path, step by step, and the tools behind it. */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -713,7 +713,7 @@ export default function Home() {
           <ol className="grid gap-4 md:grid-cols-4">
             {PACKAGE_STEPS.map((p, i) => (
               <li key={p.t} className="rounded-3xl border border-slate-200 bg-white p-6">
-                <p className="text-sm font-black text-emerald-700">Step {i + 1} Â· {p.when}</p>
+                <p className="text-sm font-black text-emerald-700">Step {i + 1} · {p.when}</p>
                 <h3 className={`${H} mt-2 text-lg text-neutral-950`}>{p.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.d}</p>
               </li>
@@ -727,7 +727,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6 Â· WHO IT'S FOR â€” AEO Direct Answer */}
+      {/* 6 · WHO IT'S FOR — AEO Direct Answer */}
       <section className="border-t border-slate-200 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -739,13 +739,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES â€” what we sell, with prices, linking each service page. */}
+      {/* SERVICES — what we sell, with prices, linking each service page. */}
       <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
             eyebrow="Services"
             title="Affordable SEO Services USA 2026"
-            sub="Founder-led SEO services USA for law firms, local businesses and online stores â€” published monthly pricing, a free competitor audit within 24 hours and no long-term contract."
+            sub="Founder-led SEO services USA for law firms, local businesses and online stores — published monthly pricing, a free competitor audit within 24 hours and no long-term contract."
           />
           <style>{`
             @keyframes svc-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -773,7 +773,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* INDUSTRIES â€” the trades and practices with their own pages. */}
+          {/* INDUSTRIES — the trades and practices with their own pages. */}
           <div className="mt-12">
             <h3 className={`${H} text-center text-xl text-neutral-950`}>Industries we work in</h3>
             <div className="mt-6">
@@ -788,7 +788,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3 Â· RESULTS BENTO */}
+      {/* 3 · RESULTS BENTO */}
       <section data-lead-hotspot className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -800,7 +800,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7 Â· RECORDED LIVE */}
+      {/* 7 · RECORDED LIVE */}
       <section className="border-y border-slate-200 bg-slate-50 px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -812,7 +812,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY CHOOSE â€” the comparison a buyer is making anyway. Fair to the
+      {/* WHY CHOOSE — the comparison a buyer is making anyway. Fair to the
           alternatives: "typical" describes the common model, not a named firm. */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-5xl">
@@ -846,11 +846,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI SEARCH â€” AEO/GEO, with the AI Overview citations already on file. */}
+      {/* AI SEARCH — AEO/GEO, with the AI Overview citations already on file. */}
       <section className="bg-neutral-950 px-4 py-20 text-white sm:px-6 lg:py-24">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">AI search Â· AEO &amp; GEO</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">AI search · AEO &amp; GEO</p>
             <h2 className={`${H} mt-3 text-3xl tracking-tight text-white sm:text-4xl`}>Get named in ChatGPT, Gemini and Google AI Overviews</h2>
             <p className="mt-4 text-[15px] leading-relaxed text-white/75">
               More buyers now ask an AI before they search. If it doesn&apos;t name you, you don&apos;t get the call. Every plan includes the work that gets you cited:
@@ -884,7 +884,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8 Â· HOW IT WORKS â€” AEO Methodology */}
+      {/* 8 · HOW IT WORKS — AEO Methodology */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -904,7 +904,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8 Â· FOUNDER + REVIEW */}
+      {/* 8 · FOUNDER + REVIEW */}
       <section className="bg-neutral-900 px-4 py-20 text-white sm:px-6 lg:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
@@ -916,13 +916,13 @@ export default function Home() {
               className="h-32 w-32 flex-shrink-0 rounded-3xl object-cover sm:h-40 sm:w-40"
             />
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Meet your SEO strategist Â· Mubashar Sharif</p>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Meet your SEO strategist · Mubashar Sharif</p>
               <h2 className={`${H} mt-2 text-3xl tracking-tight text-white`}>You&apos;ll talk to me, not a sales team</h2>
               <p className="mt-1 text-sm text-white/65">
-                Founder Â· 5+ years in SEO Â· {certCount} Semrush certificates Â· HubSpot certified
+                Founder · 5+ years in SEO · {certCount} Semrush certificates · HubSpot certified
               </p>
               <p className="mt-4 text-[15px] leading-relaxed text-white/80">
-                SearchPrex is a founder-led SEO agency for US businesses: every audit, page and Monday report is mine. No sales team, no account managers, no juniors â€” which is why SearchPrex takes one client per city. What I won&apos;t do: promise a ranking, or put a number on this site without a screenshot behind it.
+                SearchPrex is a founder-led SEO agency for US businesses: every audit, page and Monday report is mine. No sales team, no account managers, no juniors — which is why SearchPrex takes one client per city. What I won&apos;t do: promise a ranking, or put a number on this site without a screenshot behind it.
               </p>
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-300">Why I work with US businesses</p>
@@ -963,7 +963,7 @@ export default function Home() {
             <figcaption className="mt-5 flex items-center justify-between gap-3 text-sm">
               <span>
                 <strong className="block">{review.author}</strong>
-                <span className="text-slate-600">Ecommerce, USA Â· {review.date}</span>
+                <span className="text-slate-600">Ecommerce, USA · {review.date}</span>
               </span>
               <a
                 href="https://www.trustpilot.com/review/searchprex.com"
@@ -971,14 +971,14 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-xs font-bold text-[#1a7d59]"
               >
-                On Trustpilot â†’
+                On Trustpilot →
               </a>
             </figcaption>
           </figure>
         </div>
       </section>
 
-      {/* ONE CLIENT PER CITY â€” true scarcity, stated without naming cities we have not checked. */}
+      {/* ONE CLIENT PER CITY — true scarcity, stated without naming cities we have not checked. */}
       <section className="bg-[#b22234] px-4 py-8 text-white sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
           <div>
@@ -991,7 +991,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10 Â· PRICING â€” AEO & Semantic Comparison Table */}
+      {/* 10 · PRICING — AEO & Semantic Comparison Table */}
       <section data-lead-hotspot className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -1020,7 +1020,7 @@ export default function Home() {
                   <p className={`mt-1 text-xs ${dark ? "text-white/60" : "text-slate-600"}`}>{p.best}</p>
                   <p className={`${H} mt-6 text-4xl tracking-tight`}>
                     {formatUsd(p.min)}
-                    <span className={`text-base font-semibold ${dark ? "text-white/60" : "text-slate-500"}`}> â€“ {formatUsd(p.max)} / mo</span>
+                    <span className={`text-base font-semibold ${dark ? "text-white/60" : "text-slate-500"}`}> – {formatUsd(p.max)} / mo</span>
                   </p>
                   <p className={`mt-2 text-xs font-semibold ${dark ? "text-white/60" : "text-slate-500"}`}>
                     First movement: {PLAN_TIMING[i]}
@@ -1099,7 +1099,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRICING FORM â€” for readers deciding between plans. */}
+      {/* PRICING FORM — for readers deciding between plans. */}
       <section className="bg-neutral-950 px-4 py-14 text-center text-white sm:px-6">
         <div className="mx-auto max-w-2xl">
           <h2 className={`${H} text-2xl tracking-tight text-white sm:text-3xl`}>Not sure which plan fits? Start with a free audit.</h2>
@@ -1110,7 +1110,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10 Â· COVERAGE â€” every state and city page, compact */}
+      {/* 10 · COVERAGE — every state and city page, compact */}
       <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -1138,7 +1138,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5 Â· SEARCHPREX ENGINEERING ECOSYSTEM & PLATFORM HUBS (Anti-Orphan Authority Flow) */}
+      {/* 5 · SEARCHPREX ENGINEERING ECOSYSTEM & PLATFORM HUBS (Anti-Orphan Authority Flow) */}
       <section className="bg-white px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <Heading
@@ -1226,7 +1226,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 Â· FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
+      {/* 4 · FREE DOMAIN AUTHORITY & TECHNICAL SEO HEALTH CHECKER (NicheSEO Pro Replicated) */}
       <section id="free-da-checker" className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
           <Heading
@@ -1238,7 +1238,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11 Â· FAQ */}
+      {/* 11 · FAQ */}
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-3xl">
           <Heading eyebrow="Questions" title="FAQs" />
@@ -1251,7 +1251,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12 Â· SEO GUIDES â€” the three newest articles. Links from the home page
+      {/* 12 · SEO GUIDES — the three newest articles. Links from the home page
           help new posts get found, and show the site is still being written. */}
       <section className="border-t border-slate-200 bg-slate-50 px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">

@@ -1,5 +1,6 @@
-﻿import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { generateContentWithPool, GroundingUnavailableError } from '@/lib/gemini-pool'
+import { guardPublicPost } from '@/lib/security/public-route-guard'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -9,10 +10,10 @@ const MODEL = 'gemini-3.6-flash'
  
 type Vertical = 'lawfirm' | 'ecommerce' | 'local' | 'general'
  
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   SearchPrex knowledge index â€” real pages the answer can link to.
+/* ────────────────────────────────────────────────────────────────
+   SearchPrex knowledge index — real pages the answer can link to.
    Update URLs/snippets if your routes change.
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+──────────────────────────────────────────────────────────────── */
 type IndexItem = { title: string; url: string; vertical: Vertical; keywords: string; snippet: string }
  
 const SEARCHPREX_INDEX: IndexItem[] = [
@@ -23,7 +24,7 @@ const SEARCHPREX_INDEX: IndexItem[] = [
     keywords:
       'law firm lawyer attorney legal practice area intake personal injury divorce criminal litigation cases clients jurisdiction counsel',
     snippet:
-      'SEO built for law firms â€” practice-area pages, local + jurisdiction targeting, and a higher-converting intake funnel.',
+      'SEO built for law firms — practice-area pages, local + jurisdiction targeting, and a higher-converting intake funnel.',
   },
   {
     title: 'Ecommerce SEO Services',
@@ -32,7 +33,7 @@ const SEARCHPREX_INDEX: IndexItem[] = [
     keywords:
       'ecommerce store shop shopify woocommerce magento product category catalog indexation organic sales revenue traffic conversion',
     snippet:
-      'Ecommerce SEO â€” indexation at scale, product/category optimization, and scalable organic growth.',
+      'Ecommerce SEO — indexation at scale, product/category optimization, and scalable organic growth.',
   },
   {
     title: 'Local SEO Services',
@@ -41,7 +42,7 @@ const SEARCHPREX_INDEX: IndexItem[] = [
     keywords:
       'local seo google business profile gmb citations near me map pack service area reviews location pages nap',
     snippet:
-      'Local SEO â€” Google Business Profile, citations, and "near me" visibility for nearby customers.',
+      'Local SEO — Google Business Profile, citations, and "near me" visibility for nearby customers.',
   },
   {
     title: 'Technical SEO Services',
@@ -50,14 +51,14 @@ const SEARCHPREX_INDEX: IndexItem[] = [
     keywords:
       'technical seo crawl index indexation site speed core web vitals schema sitemap robots canonical audit',
     snippet:
-      'Technical SEO â€” crawlability, indexation, Core Web Vitals, and schema done right.',
+      'Technical SEO — crawlability, indexation, Core Web Vitals, and schema done right.',
   },
   {
     title: 'Case Studies',
     url: '/case-studies',
     vertical: 'general',
     keywords: 'case studies results proof clients growth traffic rankings success examples roi',
-    snippet: 'Real client results â€” traffic, rankings, and revenue growth across niches.',
+    snippet: 'Real client results — traffic, rankings, and revenue growth across niches.',
   },
   {
     title: 'Free 30-Day SEO Roadmap',
@@ -103,26 +104,26 @@ function relevantPages(query: string, vertical: Vertical): IndexItem[] {
  
 const VERTICAL_HINTS: Record<Vertical, string> = {
   lawfirm:
-    'Law firm / legal. Focus on practice-area pages, local + jurisdiction targeting, client intake & conversion, E-E-A-T/authority, reviews, and Google Business Profile. This is YMYL â€” be accurate; NEVER guarantee rankings or case outcomes.',
+    'Law firm / legal. Focus on practice-area pages, local + jurisdiction targeting, client intake & conversion, E-E-A-T/authority, reviews, and Google Business Profile. This is YMYL — be accurate; NEVER guarantee rankings or case outcomes.',
   ecommerce:
     'Ecommerce store. Focus on product/category page optimization, technical SEO & indexation at scale, content, internal linking, schema, and organic growth levers. Never promise specific sales multiples.',
   local:
     'Local business. Focus on Google Business Profile, local citations/NAP consistency, "near me" intent, location/service-area pages, reviews, and local link building.',
   general:
-    'General SEO â€” tailor to whatever the query implies; if it relates to law firms, ecommerce, or local businesses, lean into that angle.',
+    'General SEO — tailor to whatever the query implies; if it relates to law firms, ecommerce, or local businesses, lean into that angle.',
 }
  
 function systemPrompt(vertical: Vertical, related: IndexItem[], grounded = true): string {
   const pagesBlock = related.length
     ? `
  
-RELEVANT SEARCHPREX PAGES â€” where it genuinely helps the reader, you MAY link to these using HTML <a> tags (e.g. <a href="/services/law-firm-seo">law firm SEO</a>). Do not force links; only add them when natural.
-${related.map((p) => `- ${p.title} (${p.url}) â€” ${p.snippet}`).join('\n')}`
+RELEVANT SEARCHPREX PAGES — where it genuinely helps the reader, you MAY link to these using HTML <a> tags (e.g. <a href="/services/law-firm-seo">law firm SEO</a>). Do not force links; only add them when natural.
+${related.map((p) => `- ${p.title} (${p.url}) — ${p.snippet}`).join('\n')}`
     : ''
  
-  return `You are SearchPrex AI â€” an expert SEO answer engine built by SearchPrex, a US-focused SEO agency specializing in law firm SEO, ecommerce SEO, and local SEO.
+  return `You are SearchPrex AI — an expert SEO answer engine built by SearchPrex, a US-focused SEO agency specializing in law firm SEO, ecommerce SEO, and local SEO.
  
-Your job: give the user a genuinely useful, accurate, well-structured answer to their SEO question. Help FIRST â€” be the single most useful answer they could find.
+Your job: give the user a genuinely useful, accurate, well-structured answer to their SEO question. Help FIRST — be the single most useful answer they could find.
  
 USER VERTICAL: ${VERTICAL_HINTS[vertical]}
  
@@ -134,7 +135,7 @@ ${
  
 FORMAT:
 - Output clean HTML only (use <h3>, <p>, <ul>/<li>, <strong>, <a>). No <html>/<head>/<body> wrappers and no markdown code fences.
-- Lead with a direct, useful answer (1-2 sentences). Then give 3-6 concrete, actionable points. Keep it scannable and specific â€” no generic fluff.
+- Lead with a direct, useful answer (1-2 sentences). Then give 3-6 concrete, actionable points. Keep it scannable and specific — no generic fluff.
  
 SEARCHPREX (soft, honest funnel):
 - SearchPrex offers a FREE 30-day SEO roadmap for businesses serious about organic growth.
@@ -143,12 +144,20 @@ SEARCHPREX (soft, honest funnel):
 }
  
 export async function POST(req: Request) {
-  let body: { query?: string }
+  let body: { query?: string; turnstileToken?: string }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 })
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: 'seo-search',
+    limit: 20,
+    windowMs: 10 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  })
+  if (blocked) return blocked
  
   const query = (body.query || '').trim()
   if (!query) return NextResponse.json({ error: 'A search query is required.' }, { status: 400 })

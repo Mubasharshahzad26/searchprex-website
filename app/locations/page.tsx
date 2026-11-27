@@ -1,8 +1,8 @@
-﻿// app/locations/page.tsx
+// app/locations/page.tsx
 //
 // The locations hub. Every city page, every state hub, the Kansas and Wichita
 // breadcrumbs and the nav's Locations item already pointed at /locations, and
-// it returned a 404 â€” so the location pages had no parent, and each one was
+// it returned a 404 — so the location pages had no parent, and each one was
 // reachable only from the nav dropdown, the footer and its siblings.
 //
 // Built entirely from lib/locations.ts, so a new city appears here the moment
@@ -66,7 +66,7 @@ export default function LocationsHubPage() {
       <main>
         <PageHero
           compactTop
-          eyebrow="Law firm SEO Â· Locations"
+          eyebrow="Law firm SEO · Locations"
           title={
             <>
               Law Firm SEO <Accent>by City</Accent>
@@ -86,7 +86,7 @@ export default function LocationsHubPage() {
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 text-sm font-black text-white">
-                ðŸ“
+                📍
               </span>
               <div>
                 <p className="text-xs font-black uppercase tracking-wider text-amber-950">
@@ -102,19 +102,19 @@ export default function LocationsHubPage() {
                 href="/resources/news/us-regional-seo-map-pack-proximity-compression-metro-volatility"
                 className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-white px-3.5 py-1.5 text-xs font-bold text-amber-950 shadow-sm transition-all hover:border-amber-500"
               >
-                ðŸ“° Read Proximity Volatility Study â†’
+                📰 Read Proximity Volatility Study →
               </Link>
               <Link
                 href="/resources/forum"
                 className="inline-flex items-center gap-1 rounded-full bg-amber-950 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-900"
               >
-                ðŸ’¬ Open US Metro Discussions (Dallas, NY, CA, FL, AZ) â†’
+                💬 Open US Metro Discussions (Dallas, NY, CA, FL, AZ) →
               </Link>
             </div>
           </div>
         </section>
 
-        {/* â”€â”€ VERIFIED PROOF STRIP â”€â”€ */}
+        {/* ── VERIFIED PROOF STRIP ── */}
         <ServiceProofStrip
           id="proof"
           title="Verified local search results from our campaigns"
@@ -126,7 +126,7 @@ export default function LocationsHubPage() {
               alt: "Google Search Console local ranking performance: 192 to 264 monthly clicks and 106K impressions in local market",
               width: 626,
               height: 239,
-              figure: "192 â†’ 264",
+              figure: "192 → 264",
               figureLabel: "Monthly organic clicks (+37.5%)",
               caption: "Real Google Search Console data: local impressions jumped from 41K to 106K (+158%) without paid ads.",
             },
@@ -143,7 +143,7 @@ export default function LocationsHubPage() {
           footnote="Every screenshot is live Google Search Console & search engine data. We deploy this exact local map pack and practice-area architecture across all covered cities."
         />
 
-        {/* â”€â”€ STATES & CITIES â”€â”€ */}
+        {/* ── STATES & CITIES ── */}
         <Section tone="surface">
           <SectionHeading
             eyebrow={`${LOCATION_STATES.length} states`}
@@ -205,7 +205,7 @@ export default function LocationsHubPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ PRACTICE AREAS â”€â”€ */}
+        {/* ── PRACTICE AREAS ── */}
         <Section>
           <SectionHeading
             eyebrow="By practice area"

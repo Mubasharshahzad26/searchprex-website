@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { publishPage } from '@/lib/publisher';
+import { isCronAuthorized } from '@/lib/auth/require-admin-or-cron';
  
 // Inline publish path calls WordPress REST API — needs generous timeout.
 // Vercel Pro allows up to 300s; adjust down if plan changes.
 export const maxDuration = 300;
  
 function isAuthorized(req: NextRequest): boolean {
-  const auth = req.headers.get('authorization');
-  return auth === `Bearer ${process.env.CRON_SECRET}`;
+  return isCronAuthorized(req);
 }
  
 // ─────────────────────────────────────────────────────────────

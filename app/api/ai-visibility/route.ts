@@ -1,5 +1,6 @@
-﻿import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { generateContentWithPool } from '@/lib/gemini-pool'
+import { guardPublicPost } from '@/lib/security/public-route-guard'
  
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -20,12 +21,20 @@ function domainOf(url: string): string {
 }
  
 export async function POST(req: Request) {
-  let body: { firmName?: string; city?: string; practiceArea?: string; website?: string }
+  let body: { firmName?: string; city?: string; practiceArea?: string; website?: string; turnstileToken?: string }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 })
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: 'ai-visibility',
+    limit: 12,
+    windowMs: 15 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  })
+  if (blocked) return blocked
  
   const firmName = (body.firmName || '').trim()
   const city = (body.city || '').trim()
@@ -38,7 +47,7 @@ export async function POST(req: Request) {
   const query = `Who are the best ${practiceArea} lawyers or law firms in ${city}? Name the specific firms a potential client should consider.`
  
   try {
-    // â”€â”€ Call 1: grounded answer (what an AI actually recommends for this query) â”€â”€
+    // ── Call 1: grounded answer (what an AI actually recommends for this query) ──
     const g = await generateContentWithPool({
       model: MODEL,
       contents: [{ parts: [{ text: query }] }],
@@ -60,7 +69,7 @@ export async function POST(req: Request) {
       }
     }
  
-    // â”€â”€ Firm detection â”€â”€
+    // ── Firm detection ──
     const nFirm = norm(firmName)
     const firmMentioned = nFirm.length > 2 && norm(answer).includes(nFirm)
     const dom = website ? domainOf(website) : ''
@@ -72,7 +81,7 @@ export async function POST(req: Request) {
       ? 'in-sources'
       : 'not-visible'
  
-    // â”€â”€ Call 2: structured analysis (JSON, no grounding) â”€â”€
+    // ── Call 2: structured analysis (JSON, no grounding) ──
     let firmsCited: string[] = []
     let whyVisible = ''
     let recommendations: string[] = []

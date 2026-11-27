@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { generateWithPool } from '@/lib/gemini-pool';
+import { guardPublicPost } from '@/lib/security/public-route-guard';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -13,6 +14,7 @@ interface DiagnoseRequest {
   county?: string;
   practiceArea?: string;
   serviceType?: "law-firm-seo" | "ecommerce-seo" | "local-seo" | "technical-seo";
+  turnstileToken?: string;
 }
 
 export interface DiagnosticItem {
@@ -220,6 +222,14 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: 'Invalid JSON request' }, { status: 400 });
   }
+
+  const blocked = await guardPublicPost(req, {
+    bucket: 'diagnose-seo',
+    limit: 15,
+    windowMs: 15 * 60 * 1000,
+    turnstileToken: body.turnstileToken,
+  });
+  if (blocked) return blocked;
 
   const query = (body.query || '').trim();
   const selectedChips = body.selectedChips || [];

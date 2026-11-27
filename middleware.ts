@@ -6,30 +6,22 @@ import { MASTER_ADMIN_COOKIE, isMasterAdminCookie } from "@/lib/admin-master";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // The previous carve-out here waved through "/dashboard/autopilot", a route
-  // that does not exist — the dashboard lives at /autopilot, which the matcher
-  // never covered. So the rule protected nothing and the real page was open.
-
-  // Admin routes protection.
+  // Admin & internal-tool routes protection.
   //
-  // There are TWO CMS surfaces, not one. /content-admin is a separate editor
-  // for marketing pages, blogs, case studies, news and resources, and it does
-  // not live under /admin — so `startsWith("/admin")` never matched it and it
-  // was reachable, and writable, by anyone with the URL. It writes straight to
-  // the production database, so an anonymous visitor could edit the live site.
-  //
-  // Both are treated identically from here down: same login requirement, same
-  // admin-role requirement. `isCmsRoute` exists so the two checks below cannot
-  // drift apart again — adding a surface to that one line gates it everywhere.
+  // Both /admin, /content-admin, and internal automation/generation consoles
+  // (/autopilot, /bulk-generation, /content-generator) require authentication
+  // and admin privileges. `isCmsRoute` ensures all checks below stay aligned.
   const isAdminRoute = pathname === "/admin" || pathname.startsWith("/admin/");
   const isContentAdminRoute = pathname.startsWith("/content-admin");
-  const isCmsRoute = isAdminRoute || isContentAdminRoute;
+  const isInternalToolRoute =
+    pathname === "/autopilot" ||
+    pathname.startsWith("/autopilot/") ||
+    pathname === "/bulk-generation" ||
+    pathname.startsWith("/bulk-generation/") ||
+    pathname === "/content-generator" ||
+    pathname.startsWith("/content-generator/");
+  const isCmsRoute = isAdminRoute || isContentAdminRoute || isInternalToolRoute;
   const isGatedTool = isGatedRoute(pathname);
-
-  // Allow /dashboard/links (noindex linkbuilding monitor) to open directly like /autopilot and /preview-links
-  if (pathname.startsWith("/dashboard/links")) {
-    return NextResponse.next({ request });
-  }
 
   const isProtectedRoute =
     isCmsRoute || pathname.startsWith("/dashboard") || isGatedTool;
@@ -73,7 +65,7 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Not logged in → redirect to login, remembering where they were headed so
+  // Not logged in -> redirect to login, remembering where they were headed so
   // the login page can send them back rather than dumping them on /dashboard.
   if (!user && isProtectedRoute) {
     const login = new URL(isCmsRoute ? "/admin-login" : "/login", request.url);
@@ -81,7 +73,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(login);
   }
 
-  // Logged in → fetch role and redirect correctly
+  // Logged in -> fetch role and redirect correctly
   if (user && (pathname === "/dashboard" || isCmsRoute)) {
     const { data: profile } = await supabase
       .from("profiles")
@@ -105,7 +97,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Already logged in → don't show login/register
+  // Already logged in -> don't show login/register
   if (user && (pathname === "/login" || pathname === "/register")) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
@@ -114,20 +106,17 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // A route not listed here never reaches the middleware at all, whatever the
-  // logic above says. That is why /autopilot was open: it was protected in
-  // spirit and absent from this list.
+  // Every protected surface must appear in BOTH the logic above and this
+  // matcher list, or middleware never runs for that path.
   matcher: [
     "/dashboard/:path*",
     "/admin/:path*",
     "/content-admin/:path*",
+    "/autopilot/:path*",
+    "/bulk-generation/:path*",
+    "/content-generator/:path*",
     "/login",
     "/admin-login",
     "/register",
-    // No public tool routes are listed. GATED_TOOLS in lib/gated-routes is
-    // empty, and a route the middleware has no decision to make about should
-    // not cost a Supabase round trip on every request. When the SaaS work
-    // reintroduces gating, a path has to be added in BOTH places — this list
-    // and GATED_TOOLS — or the check silently never runs.
   ],
 };

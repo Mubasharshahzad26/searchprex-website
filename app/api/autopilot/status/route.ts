@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { withRetry } from '@/lib/db-retry'
+import { requireAdminOrCron } from '@/lib/auth/require-admin-or-cron'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: Request) {
+  const denied = await requireAdminOrCron(req)
+  if (denied) return denied
+
   try {
     // Optional client filter (?clientId=xxx)
     const { searchParams } = new URL(req.url)

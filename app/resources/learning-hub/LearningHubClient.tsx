@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
@@ -48,9 +48,9 @@ const LEARNING_TRACKS: LearningTrack[] = [
   {
     id: 'SEO',
     title: 'Core Technical SEO, Entity Architecture & AI Search Visibility',
-    subtitle: 'Track 01 â€¢ Core Search Engineering & Gemini 4 / GEO Mastery',
+    subtitle: 'Track 01 • Core Search Engineering & Gemini 4 / GEO Mastery',
     level: 'Intermediate to Advanced',
-    totalReadTime: '4 Modules â€¢ 55 mins',
+    totalReadTime: '4 Modules • 55 mins',
     overview:
       'Build an unshakeable technical and semantic foundation. Learn how Googlebot allocates crawl budget, how Information Gain determines indexing priority, and how to structure Answer-First HTML passages and tables that win citations in Google AI Overviews and ChatGPT Search.',
     modules: [
@@ -79,7 +79,7 @@ const LEARNING_TRACKS: LearningTrack[] = [
         title: 'AI Overviews (Gemini 4), /llms.txt & Answer-Chunk Optimization',
         duration: '15 mins',
         summary:
-          'Format 45â€“60 word direct answer capsules beneath question H2s, deploy semantic HTML comparison tables, and configure root /llms.txt.',
+          'Format 45–60 word direct answer capsules beneath question H2s, deploy semantic HTML comparison tables, and configure root /llms.txt.',
         keyDeliverable: 'GEO & AI Overview Citation Template',
         resourceHref: '/blog/google-ai-overviews-seo',
         resourceLabel: 'Read AI Overviews Guide',
@@ -98,7 +98,7 @@ const LEARNING_TRACKS: LearningTrack[] = [
     checklist: [
       { id: 'seo-1', text: 'All core commercial URLs sit within 2 clicks of the homepage with >= 4 contextual internal links.' },
       { id: 'seo-2', text: 'Zero orphan pages or redirect chains (302 -> 301) inside XML sitemaps.' },
-      { id: 'seo-3', text: 'Every H2 question heading is followed immediately by a concise 45â€“60 word direct answer paragraph.' },
+      { id: 'seo-3', text: 'Every H2 question heading is followed immediately by a concise 45–60 word direct answer paragraph.' },
       { id: 'seo-4', text: 'Organization, WebSite, Service, and FAQPage JSON-LD validate with zero warnings.' },
     ],
     primaryChecklistHref: '/resources/technical-seo-checklist',
@@ -115,9 +115,9 @@ const LEARNING_TRACKS: LearningTrack[] = [
   {
     id: 'Law Firm',
     title: 'Law Firm SEO, State Bar E-E-A-T & Local 3-Pack Domination',
-    subtitle: 'Track 02 â€¢ Personal Injury, Criminal Defense, Family & Corporate Law',
+    subtitle: 'Track 02 • Personal Injury, Criminal Defense, Family & Corporate Law',
     level: 'Practice Growth & Legal Marketing',
-    totalReadTime: '4 Modules â€¢ 50 mins',
+    totalReadTime: '4 Modules • 50 mins',
     overview:
       'Legal search is one of the highest-CPC, strictest YMYL verticals on Google. Master practice-area hub architecture, multi-office Google Business Profile compliance, State Bar entity verification, and high-converting legal intake funnels.',
     modules: [
@@ -181,9 +181,9 @@ const LEARNING_TRACKS: LearningTrack[] = [
   {
     id: 'Ecommerce',
     title: 'Ecommerce Store SEO: Category Architecture, Facets & Shopping Graph',
-    subtitle: 'Track 03 â€¢ Multi-SKU Catalogs, PLPs, PDPs & Merchant Center Revenue',
+    subtitle: 'Track 03 • Multi-SKU Catalogs, PLPs, PDPs & Merchant Center Revenue',
     level: 'Ecommerce Growth & Merchandising',
-    totalReadTime: '4 Modules â€¢ 50 mins',
+    totalReadTime: '4 Modules • 50 mins',
     overview:
       'Turn your product catalog into a compounding organic revenue engine. Learn how to turn high-demand filter combinations into indexable landing pages, prevent faceted crawl traps, and synchronize structured data with Google Shopping Graph.',
     modules: [
@@ -248,9 +248,9 @@ const LEARNING_TRACKS: LearningTrack[] = [
   {
     id: 'Shopify Store',
     title: 'Shopify Store Liquid SEO, URL Canonicalization & Agentic Checkout',
-    subtitle: 'Track 04 â€¢ Shopify & Shopify Plus Theme Engineering',
+    subtitle: 'Track 04 • Shopify & Shopify Plus Theme Engineering',
     level: 'Shopify Merchants & Developers',
-    totalReadTime: '4 Modules â€¢ 45 mins',
+    totalReadTime: '4 Modules • 45 mins',
     overview:
       'Out-of-the-box Shopify themes create severe duplicate product URLs and tag filter bloat. Learn exact Liquid template edits to fix `/collections/*/products/*` duplication, customize `robots.txt.liquid`, and prepare your store for AI agentic checkout.',
     modules: [
@@ -314,9 +314,9 @@ const LEARNING_TRACKS: LearningTrack[] = [
   {
     id: 'WordPress',
     title: 'WordPress & WooCommerce Technical SEO, Speed & Schema Mastery',
-    subtitle: 'Track 05 â€¢ WordPress Publishers, B2B Sites & WooCommerce Stores',
+    subtitle: 'Track 05 • WordPress Publishers, B2B Sites & WooCommerce Stores',
     level: 'WordPress Admins & Developers',
-    totalReadTime: '4 Modules â€¢ 45 mins',
+    totalReadTime: '4 Modules • 45 mins',
     overview:
       'Eliminate WordPress taxonomy bloat, database bottlenecks, and page-builder slowdowns. Learn how to configure RankMath/Yoast properly, clean `wp_options` autoload bloat, and pass Core Web Vitals on mobile.',
     modules: [
@@ -603,7 +603,7 @@ export default function LearningHubClient() {
                         {track.subtitle}
                       </span>
                       <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#6c6e79' }}>
-                        {track.level} â€¢ {track.totalReadTime}
+                        {track.level} • {track.totalReadTime}
                       </span>
                     </div>
 
@@ -713,7 +713,7 @@ export default function LearningHubClient() {
                                 textDecoration: 'none',
                               }}
                             >
-                              {mod.resourceLabel} â†’
+                              {mod.resourceLabel} →
                             </Link>
                           </div>
                         </div>
@@ -794,7 +794,7 @@ export default function LearningHubClient() {
                             textDecoration: 'none',
                           }}
                         >
-                          âœ“ {track.primaryChecklistLabel}
+                          ✓ {track.primaryChecklistLabel}
                         </Link>
                         <Link
                           href={track.pillarGuideHref}
@@ -809,7 +809,7 @@ export default function LearningHubClient() {
                             textDecoration: 'none',
                           }}
                         >
-                          ðŸ“˜ {track.pillarGuideLabel}
+                          📘 {track.pillarGuideLabel}
                         </Link>
                         {track.flagshipNewsHref && (
                           <Link
@@ -828,7 +828,7 @@ export default function LearningHubClient() {
                               gap: '6px',
                             }}
                           >
-                            âš¡ {track.flagshipNewsLabel} â†’
+                            ⚡ {track.flagshipNewsLabel} →
                           </Link>
                         )}
                         <Link
@@ -844,7 +844,7 @@ export default function LearningHubClient() {
                             textDecoration: 'none',
                           }}
                         >
-                          ðŸ“° All {track.id} News
+                          📰 All {track.id} News
                         </Link>
                       </div>
 
@@ -860,7 +860,7 @@ export default function LearningHubClient() {
                           textDecoration: 'none',
                         }}
                       >
-                        {track.serviceLabel} â†’
+                        {track.serviceLabel} →
                       </Link>
                     </div>
                   </div>
@@ -920,7 +920,7 @@ export default function LearningHubClient() {
                         whiteSpace: 'nowrap',
                       }}
                     >
-                      Check Free DA Score â†—
+                      Check Free DA Score ↗
                     </a>
                   </div>
                 )}
@@ -968,7 +968,7 @@ export default function LearningHubClient() {
                     textDecoration: 'none',
                   }}
                 >
-                  âœ“ 55-Point Technical SEO Checklist â†’
+                  ✓ 55-Point Technical SEO Checklist →
                 </Link>
                 <Link
                   href="/resources/law-firm-seo-audit-checklist"
@@ -983,7 +983,7 @@ export default function LearningHubClient() {
                     textDecoration: 'none',
                   }}
                 >
-                  âœ“ Law Firm SEO Audit Checklist â†’
+                  ✓ Law Firm SEO Audit Checklist →
                 </Link>
                 <Link
                   href="/resources/woocommerce-seo-checklist"
@@ -998,7 +998,7 @@ export default function LearningHubClient() {
                     textDecoration: 'none',
                   }}
                 >
-                  âœ“ WooCommerce &amp; Ecommerce Checklist â†’
+                  ✓ WooCommerce &amp; Ecommerce Checklist →
                 </Link>
                 <Link
                   href="/resources/google-business-profile-checklist"
@@ -1013,7 +1013,7 @@ export default function LearningHubClient() {
                     textDecoration: 'none',
                   }}
                 >
-                  âœ“ Google Business Profile Checklist â†’
+                  ✓ Google Business Profile Checklist →
                 </Link>
               </div>
             </div>
@@ -1047,7 +1047,7 @@ export default function LearningHubClient() {
                   textDecoration: 'none',
                 }}
               >
-                Request Free SEO Roadmap â†’
+                Request Free SEO Roadmap →
               </Link>
             </div>
 
@@ -1083,7 +1083,7 @@ export default function LearningHubClient() {
                   textDecoration: 'none',
                 }}
               >
-                Check Free DA Score â†—
+                Check Free DA Score ↗
               </a>
             </div>
           </aside>

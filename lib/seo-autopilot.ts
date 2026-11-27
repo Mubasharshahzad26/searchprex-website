@@ -53,7 +53,12 @@ export class SEOAutopilot {
     for (let attempt = 0; attempt <= retries; attempt++) {
       const genRes = await fetch(this.generationEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(process.env.CRON_SECRET
+            ? { Authorization: `Bearer ${process.env.CRON_SECRET}` }
+            : {}),
+        },
         body,
       })
       if (genRes.ok) return genRes.json()

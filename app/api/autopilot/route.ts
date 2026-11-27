@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { SEOAutopilot } from '@/lib/seo-autopilot'
+import { requireAdminOrCron } from '@/lib/auth/require-admin-or-cron'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 300
 
 export async function POST(req: Request) {
+  const denied = await requireAdminOrCron(req)
+  if (denied) return denied
+
   try {
     const { clientId, dryRun } = await req.json()
 

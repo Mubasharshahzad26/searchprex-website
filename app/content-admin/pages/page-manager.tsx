@@ -61,7 +61,7 @@ export function PageManager({ initialPages }: { initialPages: any[] }) {
               <div key={page.id} className="flex items-center justify-between p-4 border rounded-md">
                 <div>
                   <h3 className="font-semibold">{page.title}</h3>
-                  <p className="text-sm text-muted-foreground">{page.slug} � {page.published ? "Published" : "Draft"}</p>
+                  <p className="text-sm text-muted-foreground">{page.slug} · {page.published ? "Published" : "Draft"}</p>
                 </div>
                 <div className="space-x-2">
                   <Button variant="secondary" size="sm" onClick={() => setEditingId(page.id)}>Edit</Button>

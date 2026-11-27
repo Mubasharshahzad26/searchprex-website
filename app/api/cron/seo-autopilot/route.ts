@@ -21,7 +21,12 @@ export async function GET(req: Request) {
     for (const config of configs) {
       const res = await fetch(`${base}/api/autopilot`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(process.env.CRON_SECRET
+            ? { Authorization: `Bearer ${process.env.CRON_SECRET}` }
+            : {}),
+        },
         body: JSON.stringify({ clientId: config.clientId }),
       })
       results.push({ clientId: config.clientId, status: res.status })
