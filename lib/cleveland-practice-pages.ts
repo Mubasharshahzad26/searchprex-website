@@ -119,6 +119,13 @@ export interface ClevelandPracticePage {
     ctaLabel: string;
     tag: string;
   }>;
+  quickAnswer?: string;
+  roadmap?: Array<{
+    phase: string;
+    window: string;
+    title: string;
+    deliverables: string[];
+  }>;
   corridorCards?: CorridorCardItem[];
   mapSection?: {
     title: string;
@@ -186,9 +193,42 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
     caseValue: "$25,000 – $100,000+ per signed case",
     ppcMonthlyBurn: "$6,000 – $15,000 / mo in Google Ads",
     breakEvenRule: "A single signed commercial collision case ($25k–$75k contingency fee) funds 2 to 5 years of SearchPrex SEO.",
+    quickAnswer: "Cleveland Personal Injury SEO replaces $180–$350+ PPC click auctions with owned Google Maps 3-Pack and organic rankings at a flat $1,200/month retainer. By pairing Cuyahoga County crash-corridor silos (I-90, I-480, MetroHealth) and Ohio tort citations (R.C. § 2305.10, § 2315.33) with under-30s Rule 7.3-compliant AI intake, one signed collision case funds years of growth.",
+    roadmap: [
+      {
+        phase: "Phase 01",
+        window: "Month 1",
+        title: "GBP Audit, Intake Speed & Technical Foundation",
+        deliverables: [
+          "Google Business Profile category audit & Cuyahoga NAP citation cleanup",
+          "Attorney & LegalService JSON-LD schema + Core Web Vitals speed fixes",
+          "24/7 Ohio Rule 7.3-compliant SMS/call intake triage activation",
+        ],
+      },
+      {
+        phase: "Phase 02",
+        window: "Months 2–3",
+        title: "Crash Corridor & Affluent Suburb Authority Silos",
+        deliverables: [
+          "I-90 Dead Man's Curve, I-480 freight, & MetroHealth trauma corridor pages",
+          "Dedicated Westlake, Beachwood, Lakewood, & Parma suburb hubs",
+          "Ohio R.C. § 2305.10 / § 2315.33 FAQ blocks for AI Overview citations",
+        ],
+      },
+      {
+        phase: "Phase 03",
+        window: "Months 4–6",
+        title: "Downtown 3-Pack Push & PPC Dependency Reduction",
+        deliverables: [
+          "Local PR & legal directory authority signals around 1200 Ontario St",
+          "Commercial truck & catastrophic injury conversion tuning",
+          "Signed-case ledger attribution to phase down $250+ Google Ads clicks",
+        ],
+      },
+    ],
     marketRealityHeading: "How Boutique Injury Firms Beat Cleveland’s Billboard Giants on Google",
-    cuyahogaReality: "In Greater Cleveland, massive advertising firms dominate local highways and TV, pushing cost-per-click auctions to $180–$350+. With 64% of injured motorists searching local emergency rooms or mobile phones for attorneys, boutique firms can quickly burn through ad budgets on low-intent clicks. Organic search and a properly optimized Google Business Profile bypass national directories locked out of the Google Maps Local 3-Pack, turning a flat $1,200/month retainer into compounding long-term equity from a single signed case.",
-    intakeWorkflow: "Crash victims search immediately from emergency rooms or accident scenes. If they reach voicemail, 78% call the next firm. Our AI intake screens for injury date, liability, and insurance carrier within 30 seconds, routing qualified retained cases directly to your on-call trial attorney while strictly adhering to Ohio Rule of Professional Conduct 7.3.",
+    cuyahogaReality: "In Greater Cleveland, massive advertising firms dominate local highways and TV, pushing cost-per-click auctions to $180–$350+. Because injured motorists and family members frequently search from MetroHealth or University Hospitals emergency rooms on mobile phones, boutique firms burn through ad budgets fast on low-intent clicks. Organic search and a properly optimized Google Business Profile bypass national directories locked out of the Google Maps Local 3-Pack, turning a flat $1,200/month retainer into compounding equity from a single signed case.",
+    intakeWorkflow: "Crash victims search immediately from emergency rooms or accident scenes. If they reach voicemail, most callers move straight to the next listed firm rather than waiting on a callback. Our AI intake screens for injury date, liability, and insurance carrier within 30 seconds, routing qualified retained cases directly to your on-call trial attorney while strictly adhering to Ohio Rule of Professional Conduct 7.3.",
     h1: "Personal Injury Lawyer SEO in Cleveland, Ohio: Win High-Value Crash Cases Without $300 PPC Clicks",
     lead: "Boutique Cleveland personal injury firms face steep competition from billboard conglomerates and $350+ Google Ads clicks. We help you rank in the Google Maps 3-Pack, capture commercial vehicle and auto injury searches, and convert after-hours callers with fast intake.",
     heroTakeaway: "One severe commercial truck or multi-vehicle collision case can generate $30,000 to over $150,000 in contingency legal fees. Our Cleveland SEO architecture captures these cases organically without paying Google an ad tax for every phone call.",
@@ -214,7 +254,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       {
         name: "MetroHealth, UH & Cleveland Clinic Trauma Desks",
         category: "Level 1 Adult Trauma Facilities",
-        detail: "MetroHealth Medical Center (Main Campus Level 1 Adult Trauma Center), University Hospitals Cleveland Medical Center, and Fairview Hospital—where over 64% of crash victims search for legal counsel while admitted."
+        detail: "MetroHealth Medical Center (Main Campus Level 1 Adult Trauma Center), University Hospitals Cleveland Medical Center, and Fairview Hospital—where injured crash victims and families frequently search on mobile while admitted."
       },
       {
         name: "Cuyahoga County Court of Common Pleas",
@@ -279,7 +319,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       },
       {
         title: "Whisper Call Tracking & Under-30s AI Intake",
-        desc: "Because 78% of accident victims hire the first firm that responds, our 24/7 AI Intake Engine follows up with inquiries in under 30 seconds, qualifying leads by injury date and insurance limits while complying with Ohio Rule 7.3."
+        desc: "Because injured prospects overwhelmingly retain the first qualified firm that responds, our 24/7 AI Intake Engine follows up with inquiries in under 30 seconds, qualifying leads by injury date and insurance limits while complying with Ohio Rule 7.3."
       }
     ],
     faqs: [
@@ -328,7 +368,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
     breakEvenRule: "Just 1 signed felony or high-tier OVI retainer per quarter completely funds your entire year of SearchPrex SEO.",
     h1: "Criminal Defense & OVI Lawyer SEO in Cleveland, Ohio: Win Urgent 2 AM Arrest Calls Without $150 PPC Clicks",
     lead: "Criminal defense is a midnight-to-4-AM emergency market. When an arrest happens on West 25th, I-90, or a suburban traffic stop in Lakewood or Parma, frantic family members call the first reputable attorney near 1200 Ontario St in the Google Maps 3-Pack. If your phone goes to voicemail, that cash retainer is lost forever.",
-    heroTakeaway: "Over 65% of Cuyahoga County criminal and OVI searches happen between 8:00 PM and 4:00 AM. We put you at the top of the Map Pack for urgent bail and arraignment queries and capture callers via under-30-second Rule 7.3-compliant SMS triage.",
+    heroTakeaway: "Cuyahoga County criminal and OVI emergencies spike heavily between 8:00 PM and 4:00 AM. We put you at the top of the Map Pack for urgent bail and arraignment queries and capture callers via under-30-second Rule 7.3-compliant SMS triage.",
     heroVisual: {
       imageUrl: "/images/services/law-firm/cleveland-cuyahoga-common-pleas-court.webp",
       altText: "Cuyahoga County Justice Center at 1200 Ontario St Cleveland OH for criminal defense and OVI SEO",
@@ -403,7 +443,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
         photoUrl: "/images/services/law-firm/cleveland-i90-i480-freight-corridor.webp",
         altText: "Cleveland West 25th Ohio City and I-90 patrol corridor for OVI defense SEO",
         caption: "Peak weekend enforcement zones around West 25th St, East 4th, The Flats, and Interstate OVI checkpoints.",
-        stats: "65% of calls occur 8 PM – 4 AM · Urgent mobile intent",
+        stats: "Peak call window: 8 PM – 4 AM · Urgent mobile intent",
         entityLabel: "Peak Patrol Zones",
       },
     ],
@@ -1074,7 +1114,7 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
     ],
     step1Eyebrow: "Step 1 · Solving the Partner Chart-Review Bottleneck",
     marketRealityHeading: "Why Generic Lead Volume Floods Cleveland Med Mal Partners With Unviable Calls",
-    cuyahogaReality: "Running broad Google Ads on 'medical malpractice lawyer Cleveland' at $250+ per click is brutal—not just because of cost, but because roughly 85% of incoming callers suffered an unfortunate medical outcome without actionable negligence, or missed Ohio's razor-thin 1-year statute of limitations under R.C. 2305.113. When trial partners spend hours vetting dead claims, billable litigation focus suffers. Our YMYL SEO model targets severe permanent harm (surgical errors, delayed stroke diagnosis, hypoxic birth injury) while educating and pre-screening visitors on Affidavit of Merit standards before they reach your calendar.",
+    cuyahogaReality: "Running broad Google Ads on 'medical malpractice lawyer Cleveland' at $250+ per click is brutal—not just because of cost, but because a large majority of incoming callers suffered an unfortunate medical outcome without actionable negligence, or missed Ohio's razor-thin 1-year statute of limitations under R.C. 2305.113. When trial partners spend hours vetting dead claims, billable litigation focus suffers. Our YMYL SEO model targets severe permanent harm (surgical errors, delayed stroke diagnosis, hypoxic birth injury) while educating and pre-screening visitors on Affidavit of Merit standards before they reach your calendar.",
     ppcCardTitle: "The $250/Click Non-Meritorious Trap",
     organicCardTitle: "YMYL Clinical Authority & Qualified Charts",
     step2Eyebrow: "Step 2 · Hospital System Mapping & Ohio Civ. R. 10(D)(2)",

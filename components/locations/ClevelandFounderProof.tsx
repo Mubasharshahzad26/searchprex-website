@@ -55,12 +55,14 @@ export default function ClevelandFounderProof({
   heading = "Work Directly With Mubashar Sharif—Semrush Certified SEO & AI Search Strategist",
   body = "Large legal marketing agencies pitch you with a senior partner and then hand your Cuyahoga County campaign to junior coordinators who do not understand Ohio tort caps or I-90 crash corridors. At SearchPrex, founder Mubashar Sharif personally audits your Google Business Profile, maps your competitors, and oversees every technical deployment.",
   ctaText = "Request My Personal 24h PI Audit",
+  ctaHref = "#subpage-audit",
 }: {
   practiceName?: string;
   eyebrow?: string;
   heading?: string;
   body?: string;
   ctaText?: string;
+  ctaHref?: string;
 }) {
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
 
@@ -155,7 +157,7 @@ export default function ClevelandFounderProof({
 
               <div className="pt-3 flex flex-wrap items-center gap-4">
                 <Link
-                  href="/locations/ohio/cleveland#reality-check"
+                  href={ctaHref}
                   className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold px-6 py-3.5 text-xs sm:text-sm shadow-sm transition-all"
                 >
                   <span>{ctaText}</span>

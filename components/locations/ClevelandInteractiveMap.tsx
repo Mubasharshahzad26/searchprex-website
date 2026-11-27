@@ -19,7 +19,7 @@ const DEFAULT_PI_VENUES: VenuePinItem[] = [
     category: "Level 1 Trauma",
     address: "2500 MetroHealth Dr, Cleveland, OH 44109",
     query: "2500+MetroHealth+Dr,+Cleveland,+OH+44109",
-    jurisdictionDetail: "Main campus Level 1 Adult Trauma Center where over 64% of catastrophic injury patients search legal counsel.",
+    jurisdictionDetail: "Main campus Level 1 Adult Trauma Center where injured patients and families frequently search for local representation on mobile.",
   },
   {
     id: "pin-3",

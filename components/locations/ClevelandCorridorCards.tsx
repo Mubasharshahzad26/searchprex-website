@@ -28,7 +28,7 @@ const DEFAULT_PI_CARDS: CorridorCardItem[] = [
     photoUrl: "/images/services/law-firm/cleveland-metrohealth-trauma-center.webp",
     altText: "Cleveland Ohio trauma center and medical district near MetroHealth and University Hospitals",
     caption: "Local trauma centers: MetroHealth Main Campus, UH Cleveland Medical Center & Fairview Hospital.",
-    stats: "64% of injury victims search on mobile from care facilities",
+    stats: "Urgent mobile trauma & ER searches",
     entityLabel: "Cuyahoga Location Signal",
   },
 ];
@@ -72,9 +72,9 @@ export default function ClevelandCorridorCards({
                 <span className="text-[11px] font-medium text-white/90 block mb-0.5 drop-shadow-xs">
                   {card.stats}
                 </span>
-                <h4 className="text-sm sm:text-base font-bold text-white leading-tight drop-shadow-xs">
+                <h3 className="text-sm sm:text-base font-bold text-white leading-tight drop-shadow-xs">
                   {card.title}
-                </h4>
+                </h3>
               </div>
             </div>
 

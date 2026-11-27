@@ -244,21 +244,35 @@ export default function ClevelandSubmarketSwitcher({
 
       </div>
 
-      {/* Hidden/Prerendered SEO Content for Googlebot (All Submarkets Crawlable) */}
-      <div className="sr-only" aria-hidden="true">
-        {items.map((submarket) => (
-          <div key={`seo-${submarket.id}`}>
-            <h3>{submarket.name} {practiceLabel} SEO Cleveland</h3>
-            <p>{submarket.marketReality}</p>
-            <p>Court: {submarket.courtName} - {submarket.courtAddress}</p>
-            <p>Corridors: {submarket.corridors}</p>
-            <ul>
-              {submarket.targetKeywords.map((kw, i) => (
-                <li key={i}>{kw}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      {/* Visible Cuyahoga County Submarket Reference Grid (Replaces hidden sr-only block) */}
+      <div className="mt-8 pt-6 border-t border-slate-200">
+        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-3">
+          All Covered Cuyahoga Submarkets ({practiceLabel})
+        </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {items.map((submarket) => (
+            <button
+              key={`summary-${submarket.id}`}
+              type="button"
+              onClick={() => setActiveTab(submarket.id)}
+              className={`text-left rounded-xl border p-3.5 transition-all cursor-pointer ${
+                activeTab === submarket.id
+                  ? "border-neutral-900 bg-slate-50 shadow-2xs"
+                  : "border-slate-200 bg-white hover:border-slate-300"
+              }`}
+            >
+              <span className="text-xs font-bold text-neutral-950 block">
+                {submarket.name}
+              </span>
+              <span className="text-[11px] text-slate-600 block mt-1 leading-snug">
+                {submarket.courtName}
+              </span>
+              <span className="text-[10px] font-mono text-slate-500 block mt-1.5">
+                {submarket.corridors}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
 
     </div>
