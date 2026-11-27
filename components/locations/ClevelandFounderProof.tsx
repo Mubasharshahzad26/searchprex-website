@@ -161,6 +161,18 @@ export default function ClevelandFounderProof({
                   <span>{ctaText}</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
+                <Link
+                  href="/about"
+                  className="text-xs font-semibold text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900"
+                >
+                  About Founder Mubashar Sharif →
+                </Link>
+                <Link
+                  href="/experts"
+                  className="text-xs font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900"
+                >
+                  Meet our SEO strategists →
+                </Link>
                 <span className="text-xs text-slate-500 font-medium">
                   Delivered in &lt;24 hours · Video teardown included
                 </span>

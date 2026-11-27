@@ -266,36 +266,23 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                {/* Google Maps 3-Pack Target Simulation */}
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4 shadow-2xs space-y-2.5">
-                  <div className="flex items-center justify-between text-xs font-bold text-neutral-950">
-                    <span className="flex items-center gap-1.5">
-                      <span className="flex h-2 w-2 rounded-full bg-neutral-900" />
-                      <span>{practice.heroVisual?.mapPackHeader || "Google Maps Local 3-Pack Target"}</span>
+                {/* Clean Factual Jurisdiction & National Service Bar (No fake reviews) */}
+                <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+                      Territory &amp; Architecture
                     </span>
-                    <span className="text-[10px] font-mono text-white bg-neutral-900 px-2 py-0.5 rounded font-bold">
-                      {practice.heroVisual?.mapPackRankGoal || "#1 Rank Goal"}
+                    <span className="font-semibold text-neutral-950">
+                      Cuyahoga County · 1-Firm Exclusivity
                     </span>
                   </div>
-                  <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start justify-between gap-3 shadow-2xs">
-                    <div>
-                      <span className="text-xs font-bold text-neutral-950 block">
-                        {practice.heroVisual?.mapPackFirmTitle || `Your Firm · Cleveland ${practice.name} Counsel`}
-                      </span>
-                      <div className="flex items-center gap-1 text-[11px] text-neutral-800 font-semibold mt-0.5">
-                        <span>5.0</span>
-                        <span>★★★★★</span>
-                        <span className="text-slate-500 font-normal">({practice.heroVisual?.mapPackReviewsCount || "48 reviews"})</span>
-                        <span className="text-slate-400">·</span>
-                        <span className="text-slate-600 font-normal">Cleveland, OH</span>
-                      </div>
-                      <span className="text-[11px] text-slate-700 font-semibold mt-1 block">
-                        {practice.heroVisual?.mapPackAvailability || "✓ Open 24 hours · Confirmed by Google Business Profile"}
-                      </span>
-                    </div>
-                    <span className="text-[10px] uppercase font-bold text-neutral-800 bg-slate-100 border border-slate-200 px-2 py-1 rounded shrink-0">
-                      Cuyahoga
-                    </span>
+                  <div className="flex flex-wrap items-center gap-3 font-semibold">
+                    <Link
+                      href={practice.servicePillarHref || "/services/law-firm-seo"}
+                      className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900"
+                    >
+                      {practice.servicePillarLabel || "Law Firm SEO Framework"} →
+                    </Link>
                   </div>
                 </div>
 
@@ -331,6 +318,14 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     Bidding on &quot;{practice.name.toLowerCase()} lawyer Cleveland&quot; costs <strong className="text-neutral-950 font-bold">{practice.cpc}</strong>. A typical monthly budget of {practice.ppcMonthlyBurn} vanishes quickly on unqualified clicks, tire-kickers, and competitor clicks. When you stop paying Google, your lead flow drops to zero overnight.
                   </p>
+                  <div className="mt-4 pt-3 border-t border-slate-200 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-semibold">
+                    <Link href="/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                      Cuyahoga SEO vs. PPC ROI study →
+                    </Link>
+                    <Link href="/resources/solution/case-calculator" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                      Calculate case acquisition ROI →
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="rounded-2xl border-2 border-neutral-900 bg-white p-6 shadow-2xs">
@@ -341,6 +336,17 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     At a flat <strong className="text-neutral-950 font-bold">$1,200/month</strong>, we build permanent digital equity on your domain. <strong className="text-neutral-950 font-bold">{practice.breakEvenRule}</strong> Month-to-month partnership, 1-firm exclusivity in Cuyahoga County, and full attribution in your monthly signed case ledger.
                   </p>
+                  <div className="mt-4 pt-3 border-t border-slate-200 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-semibold">
+                    <Link href="/services/law-firm-seo" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                      Law firm SEO methodology →
+                    </Link>
+                    <Link href="/case-studies" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                      Verified client case studies →
+                    </Link>
+                    <Link href="/pricing" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                      Transparent pricing →
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -412,8 +418,16 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     </div>
                   )}
                 </div>
-                <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-500">
-                  Targeted geographically in Google Map Pack &amp; Local Citations
+                <div className="mt-6 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <span className="font-semibold text-slate-600">
+                    Targeted via{" "}
+                    <Link href="/services/law-firm-seo/google-business-profile-for-lawyers" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                      Google Business Profile for Lawyers
+                    </Link>
+                  </span>
+                  <Link href="/resources/news/local-seo-updates" className="font-semibold text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                    Google Maps updates →
+                  </Link>
                 </div>
               </div>
 
@@ -451,8 +465,16 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     </div>
                   )}
                 </div>
-                <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-500">
-                  Essential for Google AI Overviews &amp; Knowledge Graph citation
+                <div className="mt-6 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <span className="font-semibold text-slate-600">
+                    Structured with{" "}
+                    <Link href="/blog/law-firm-schema-markup" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                      LegalService &amp; Attorney JSON-LD schema
+                    </Link>
+                  </span>
+                  <Link href="/resources/solution/ai-search" className="font-semibold text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                    AI Overviews citation tracking →
+                  </Link>
                 </div>
               </div>
 
@@ -495,9 +517,14 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <span className="mt-6 text-[11px] font-semibold text-slate-600 block border-t border-slate-100 pt-3">
-                  {practice.siloTitles?.commercialFooter || "Map Pack 3-Pack Core Targets"}
-                </span>
+                <div className="mt-6 border-t border-slate-100 pt-3 flex items-center justify-between gap-2 text-[11px]">
+                  <span className="font-semibold text-slate-600">
+                    {practice.siloTitles?.commercialFooter || "Map Pack 3-Pack Core Targets"}
+                  </span>
+                  <Link href="/resources/solution/keyword-research" className="font-semibold text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900 shrink-0">
+                    Keyword tool →
+                  </Link>
+                </div>
               </div>
 
               {/* Silo 2: Urgent / Emergency Queries */}
@@ -517,9 +544,14 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <span className="mt-6 text-[11px] font-semibold text-slate-600 block border-t border-slate-100 pt-3">
-                  {practice.siloTitles?.urgentFooter || "Captured by 24/7 AI Intake Engine"}
-                </span>
+                <div className="mt-6 border-t border-slate-100 pt-3 flex items-center justify-between gap-2 text-[11px]">
+                  <span className="font-semibold text-slate-600">
+                    {practice.siloTitles?.urgentFooter || "Captured by 24/7 AI Intake Engine"}
+                  </span>
+                  <Link href="/resources/solution/intake-assistant" className="font-semibold text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900 shrink-0">
+                    Intake triage →
+                  </Link>
+                </div>
               </div>
 
               {/* Silo 3: Affluent Suburbs */}
@@ -539,9 +571,14 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <span className="mt-6 text-[11px] font-semibold text-slate-600 block border-t border-slate-100 pt-3">
-                  {practice.siloTitles?.suburbFooter || "Lower Competition · Higher Retainers"}
-                </span>
+                <div className="mt-6 border-t border-slate-100 pt-3 flex items-center justify-between gap-2 text-[11px]">
+                  <span className="font-semibold text-slate-600">
+                    {practice.siloTitles?.suburbFooter || "Lower Competition · Higher Retainers"}
+                  </span>
+                  <Link href="/locations/ohio/cleveland" className="font-semibold text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900 shrink-0">
+                    Cleveland hub →
+                  </Link>
+                </div>
               </div>
 
             </div>
@@ -609,6 +646,17 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {practice.intakeWorkflow}
                   </p>
+                  <div className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-semibold">
+                    <Link href="/resources/solution/intake-assistant" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                      See 24/7 AI Legal Intake Assistant →
+                    </Link>
+                    <Link href="/blog/ohio-rule-7-3-ai-legal-intake-compliance" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                      Ohio Rule 7.3 compliance guide →
+                    </Link>
+                    <Link href="/blog/cleveland-law-firm-intake-study-missed-calls" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                      Cleveland missed-call benchmark →
+                    </Link>
+                  </div>
                 </div>
                 <div className="shrink-0">
                   <Link
@@ -659,33 +707,56 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
               ))}
             </div>
 
-            {/* Related Research Guides (Cross-Links) */}
+            {/* Related Practice-Specific Guides & Service Architecture (Contextual Cross-Links) */}
             <div className="mt-12 pt-8 border-t border-slate-200">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-4">
-                Recommended Cleveland Legal Marketing Studies
+                Recommended {practice.name} SEO Guides &amp; Cleveland Studies
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <Link
-                  href="/blog/cleveland-law-firm-intake-study-missed-calls"
-                  className="rounded-xl border border-slate-200 bg-white p-4 hover:border-neutral-900 hover:shadow-xs transition-all text-xs font-bold text-neutral-950 flex flex-col justify-between"
-                >
-                  <span>How Cleveland Solo Attorneys Lose Signed Cases to Slow Intake</span>
-                  <span className="text-slate-500 font-normal mt-2 flex items-center gap-1">Read Study →</span>
-                </Link>
-                <Link
-                  href="/blog/ohio-rule-7-3-ai-legal-intake-compliance"
-                  className="rounded-xl border border-slate-200 bg-white p-4 hover:border-neutral-900 hover:shadow-xs transition-all text-xs font-bold text-neutral-950 flex flex-col justify-between"
-                >
-                  <span>Ohio Rule 7.3 &amp; Automated AI Intake Compliance Guide</span>
-                  <span className="text-slate-500 font-normal mt-2 flex items-center gap-1">Read Guide →</span>
-                </Link>
-                <Link
-                  href="/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi"
-                  className="rounded-xl border border-slate-200 bg-white p-4 hover:border-neutral-900 hover:shadow-xs transition-all text-xs font-bold text-neutral-950 flex flex-col justify-between"
-                >
-                  <span>Cuyahoga County SEO vs. $300 PPC Clicks: 2026 ROI Breakdown</span>
-                  <span className="text-slate-500 font-normal mt-2 flex items-center gap-1">View Breakdown →</span>
-                </Link>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {(practice.contextualLinks || [
+                  {
+                    href: "/services/law-firm-seo",
+                    tag: "Service Architecture",
+                    title: "Law Firm SEO Service Framework for Competitive Metros",
+                    ctaLabel: "Explore Law Firm SEO",
+                  },
+                  {
+                    href: "/blog/cleveland-law-firm-intake-study-missed-calls",
+                    tag: "Cleveland Benchmark",
+                    title: "How Cleveland Solo Attorneys Lose Signed Cases to Slow Intake",
+                    ctaLabel: "Read Intake Study",
+                  },
+                  {
+                    href: "/blog/ohio-rule-7-3-ai-legal-intake-compliance",
+                    tag: "Ohio Ethics Guide",
+                    title: "Ohio Rule 7.3 & Automated AI Intake Compliance Guide",
+                    ctaLabel: "Read Compliance Guide",
+                  },
+                  {
+                    href: "/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi",
+                    tag: "ROI Breakdown",
+                    title: "Cuyahoga County SEO vs. $300 PPC Clicks: 2026 ROI Breakdown",
+                    ctaLabel: "View ROI Breakdown",
+                  },
+                ]).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-xl border border-slate-200 bg-white p-4 hover:border-neutral-900 hover:shadow-xs transition-all text-xs font-bold text-neutral-950 flex flex-col justify-between"
+                  >
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
+                        {item.tag}
+                      </span>
+                      <span className="text-sm font-bold text-neutral-950 leading-snug block">
+                        {item.title}
+                      </span>
+                    </div>
+                    <span className="text-neutral-900 font-semibold mt-3 flex items-center gap-1">
+                      {item.ctaLabel} →
+                    </span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -694,9 +765,19 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
         {/* 7. Other Practice Areas in Cleveland */}
         <section className="py-14 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-4">
-              Explore Other Cleveland Practice Area Silos
-            </span>
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                Explore Other Cleveland Practice Area Silos
+              </span>
+              <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
+                <Link href="/locations/ohio/cleveland" className="text-neutral-900 underline decoration-slate-300 underline-offset-4 hover:decoration-neutral-900">
+                  Cleveland Law Firm SEO Hub →
+                </Link>
+                <Link href="/law-firm-scorecard" className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-900">
+                  Law Firm SEO Scorecard →
+                </Link>
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {otherPractices.map((op) => (
                 <Link
@@ -713,7 +794,7 @@ export default async function ClevelandPracticeAreaPage({ params }: PageProps) {
                     </h4>
                   </div>
                   <span className="mt-3 text-xs font-bold text-neutral-900 flex items-center gap-1">
-                    Explore Silo →
+                    {op.name} SEO in Cleveland →
                   </span>
                 </Link>
               ))}

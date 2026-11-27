@@ -110,12 +110,15 @@ export interface ClevelandPracticePage {
     badgeLabel: string;
     districtSubtitle: string;
     districtTitle: string;
-    mapPackHeader: string;
-    mapPackRankGoal: string;
-    mapPackFirmTitle: string;
-    mapPackReviewsCount: string;
-    mapPackAvailability: string;
   };
+  servicePillarHref?: string;
+  servicePillarLabel?: string;
+  contextualLinks?: Array<{
+    href: string;
+    title: string;
+    ctaLabel: string;
+    tag: string;
+  }>;
   corridorCards?: CorridorCardItem[];
   mapSection?: {
     title: string;
@@ -151,6 +154,34 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
     metaDescription: "Exclusive personal injury SEO in Cleveland, OH. Outrank legal directories in the Cuyahoga Map Pack and capture I-90 & suburban crash cases. Free 24h audit.",
     eyebrowBadge: "Personal Injury SEO · Cleveland & Cuyahoga County · 1-Firm Exclusivity",
     badge: "$180 – $350+ PPC CPC · $25k–$100k+ Case Values",
+    servicePillarHref: "/services/law-firm-seo/personal-injury",
+    servicePillarLabel: "National Personal Injury SEO Framework",
+    contextualLinks: [
+      {
+        href: "/services/law-firm-seo/personal-injury",
+        tag: "Service Architecture",
+        title: "Personal Injury Law Firm SEO Playbook (Car, Truck & Wrongful Death)",
+        ctaLabel: "View PI SEO Framework",
+      },
+      {
+        href: "/blog/seo-for-personal-injury-lawyers",
+        tag: "Keyword Strategy",
+        title: "SEO for Personal Injury Lawyers: Keywords That Actually Sign Cases",
+        ctaLabel: "Read Keyword Guide",
+      },
+      {
+        href: "/blog/cleveland-law-firm-intake-study-missed-calls",
+        tag: "Cleveland Benchmark",
+        title: "How Cleveland Attorneys Lose Signed Cases to Slow After-Hours Intake",
+        ctaLabel: "Read Intake Study",
+      },
+      {
+        href: "/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi",
+        tag: "ROI Breakdown",
+        title: "Cuyahoga County SEO vs. $300 PPC Clicks: 2026 ROI Comparison",
+        ctaLabel: "Compare SEO vs. PPC",
+      },
+    ],
     cpc: "$180 – $350+ per click",
     caseValue: "$25,000 – $100,000+ per signed case",
     ppcMonthlyBurn: "$6,000 – $15,000 / mo in Google Ads",
@@ -304,12 +335,35 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       badgeLabel: "1200 Ontario St · Cuyahoga County Justice Center",
       districtSubtitle: "Arraignment & Bail Jurisdiction · Downtown Cleveland",
       districtTitle: "Justice Center & Municipal Court Corridor",
-      mapPackHeader: "Google Maps 24/7 Emergency Pack Target",
-      mapPackRankGoal: "#1 Arrest Call Rank",
-      mapPackFirmTitle: "Your Firm · Cleveland Criminal & OVI Defense",
-      mapPackReviewsCount: "62 reviews",
-      mapPackAvailability: "✓ Open 24 Hours · Immediate Jail & Bail Response",
     },
+    servicePillarHref: "/services/law-firm-seo/criminal-defense",
+    servicePillarLabel: "National Criminal Defense SEO Framework",
+    contextualLinks: [
+      {
+        href: "/services/law-firm-seo/criminal-defense",
+        tag: "Service Architecture",
+        title: "Criminal Defense Lawyer SEO: OVI, Felony & Urgent Mobile Capture",
+        ctaLabel: "View Defense Framework",
+      },
+      {
+        href: "/blog/law-firm-google-maps-ranking",
+        tag: "Map Pack Strategy",
+        title: "Law Firm Google Maps & Local 3-Pack Ranking Factors Near Courthouses",
+        ctaLabel: "Read Maps Guide",
+      },
+      {
+        href: "/blog/cleveland-law-firm-intake-study-missed-calls",
+        tag: "Cleveland Benchmark",
+        title: "Why Missing Late-Night OVI Calls Costs Cleveland Firms Cash Retainers",
+        ctaLabel: "Read Intake Study",
+      },
+      {
+        href: "/blog/ohio-rule-7-3-ai-legal-intake-compliance",
+        tag: "Ohio Ethics Guide",
+        title: "Ohio Rule 7.3 & Ethics-Compliant Automated SMS Legal Triage",
+        ctaLabel: "Review Compliance Guide",
+      },
+    ],
     step1Eyebrow: "Step 1 · Why After-Hours Voicemail Burns Defense Retainers",
     marketRealityHeading: "Why Missing One 2:00 AM Call Costs Cleveland Defense Firms $5,000+ Retainers",
     cuyahogaReality: "Unlike personal injury or divorce, criminal defense prospects do not spend three weeks reading whitepapers. When a driver is pulled over for an OVI in Rocky River or booked into the Cuyahoga County Corrections Center after a Friday night incident in Ohio City, their spouse or parents search on mobile phones in a state of panic. Bidding $120+ per click on Google Ads burns through budgets on out-of-county calls and prison-pen-pal inquiries. Sustainable growth comes from ranking #1 in the Google Maps 3-Pack around key Municipal Courts and dispatching immediate, calm SMS triage before a competitor picks up.",
@@ -635,12 +689,35 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       badgeLabel: "1 W Lakeside Ave · Cuyahoga Domestic Relations",
       districtSubtitle: "Executive & Affluent Submarkets · Westlake to Beachwood",
       districtTitle: "Cuyahoga Matrimonial & Asset District",
-      mapPackHeader: "Affluent Suburb Map Pack Target",
-      mapPackRankGoal: "#1 Suburban Rank",
-      mapPackFirmTitle: "Your Firm · Cleveland High-Asset Divorce Counsel",
-      mapPackReviewsCount: "54 reviews",
-      mapPackAvailability: "✓ Private Consultations · Executive & Custody Focus",
     },
+    servicePillarHref: "/services/law-firm-seo/family-law",
+    servicePillarLabel: "National Family Law SEO Framework",
+    contextualLinks: [
+      {
+        href: "/services/law-firm-seo/family-law",
+        tag: "Service Architecture",
+        title: "Family Law & High-Asset Divorce Attorney SEO Strategy",
+        ctaLabel: "View Family Law SEO",
+      },
+      {
+        href: "/services/law-firm-seo/estate-planning",
+        tag: "Related Practice",
+        title: "Estate Planning & Post-Divorce Asset Preservation SEO Overlap",
+        ctaLabel: "Explore Estate SEO",
+      },
+      {
+        href: "/blog/local-seo-law-firms",
+        tag: "Suburban Strategy",
+        title: "Local SEO Playbook for Affluent Ohio Suburban Markets",
+        ctaLabel: "Read Local Guide",
+      },
+      {
+        href: "/blog/law-firm-ai-overview-citations",
+        tag: "AI Visibility",
+        title: "How Divorce Firms Get Cited in Google AI Overviews & ChatGPT",
+        ctaLabel: "Read AI Citation Guide",
+      },
+    ],
     step1Eyebrow: "Step 1 · Why Billboard Hype Fails Executive Clients",
     marketRealityHeading: "Why Loud Billboard Tactics Repel High-Net-Worth Cuyahoga Divorce Clients",
     cuyahogaReality: "Family law search behavior in Greater Cleveland is polar opposite to personal injury. An injured driver calls frantically from an ER; a physician at Cleveland Clinic or a business founder in Westlake spends weeks researching marital asset protection, R.C. 3105.171 separate property tracing, and child custody standards before making a single confidential inquiry. Generic PPC ads attract low-asset, uncontested price-shoppers who bounce at a $5,000 retainer. True organic ROI comes from hyper-targeted suburban hubs and authoritative statutory content that wins quiet executive trust.",
@@ -966,12 +1043,35 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       badgeLabel: "Euclid Ave Medical Corridor · YMYL Authority",
       districtSubtitle: "Hospital Liability & Birth Trauma Jurisdiction",
       districtTitle: "Cleveland Clinic & UH Medical District",
-      mapPackHeader: "Catastrophic Claim Authority Target",
-      mapPackRankGoal: "#1 Med Mal Goal",
-      mapPackFirmTitle: "Your Firm · Cleveland Medical Malpractice Trial Law",
-      mapPackReviewsCount: "39 reviews",
-      mapPackAvailability: "✓ Nurse & Trial Team Review · Contingency Fee",
     },
+    servicePillarHref: "/services/law-firm-seo/personal-injury",
+    servicePillarLabel: "Catastrophic Injury & YMYL Authority SEO",
+    contextualLinks: [
+      {
+        href: "/services/law-firm-seo/personal-injury",
+        tag: "Service Architecture",
+        title: "High-Value Catastrophic Injury & Medical Negligence SEO Framework",
+        ctaLabel: "View Injury SEO Framework",
+      },
+      {
+        href: "/blog/law-firm-schema-markup",
+        tag: "Technical E-E-A-T",
+        title: "Attorney, Medical Review & LegalService JSON-LD Schema Guide",
+        ctaLabel: "Read Schema Guide",
+      },
+      {
+        href: "/blog/track-signed-cases-from-seo",
+        tag: "Case Attribution",
+        title: "How Trial Firms Track Qualified Chart Reviews & Signed Verdicts",
+        ctaLabel: "Read Attribution Guide",
+      },
+      {
+        href: "/blog/cuyahoga-county-law-firm-seo-vs-ppc-roi",
+        tag: "ROI Breakdown",
+        title: "Cuyahoga County SEO vs. $300 PPC Clicks: 2026 ROI Comparison",
+        ctaLabel: "Compare SEO vs. PPC",
+      },
+    ],
     step1Eyebrow: "Step 1 · Solving the Partner Chart-Review Bottleneck",
     marketRealityHeading: "Why Generic Lead Volume Floods Cleveland Med Mal Partners With Unviable Calls",
     cuyahogaReality: "Running broad Google Ads on 'medical malpractice lawyer Cleveland' at $250+ per click is brutal—not just because of cost, but because roughly 85% of incoming callers suffered an unfortunate medical outcome without actionable negligence, or missed Ohio's razor-thin 1-year statute of limitations under R.C. 2305.113. When trial partners spend hours vetting dead claims, billable litigation focus suffers. Our YMYL SEO model targets severe permanent harm (surgical errors, delayed stroke diagnosis, hypoxic birth injury) while educating and pre-screening visitors on Affidavit of Merit standards before they reach your calendar.",
@@ -1297,12 +1397,35 @@ export const CLEVELAND_PRACTICES: ClevelandPracticePage[] = [
       badgeLabel: "615 W Superior Ave · Industrial Commission & BWC",
       districtSubtitle: "District & Staff Hearing Jurisdiction · Cleveland",
       districtTitle: "Ohio BWC & Industrial Commission Hub",
-      mapPackHeader: "Cuyahoga BWC & Work Injury Target",
-      mapPackRankGoal: "#1 BWC Rank Goal",
-      mapPackFirmTitle: "Your Firm · Cleveland Workers' Comp & BWC Counsel",
-      mapPackReviewsCount: "71 reviews",
-      mapPackAvailability: "✓ Ohio BWC Claims & 615 W Superior Hearings",
     },
+    servicePillarHref: "/services/law-firm-seo/personal-injury",
+    servicePillarLabel: "Work Injury & Third-Party Liability SEO",
+    contextualLinks: [
+      {
+        href: "/services/law-firm-seo/personal-injury",
+        tag: "Crossover Funnel",
+        title: "Personal Injury & Third-Party Workplace Liability SEO Strategy",
+        ctaLabel: "View Crossover Strategy",
+      },
+      {
+        href: "/services/law-firm-seo/google-business-profile-for-lawyers",
+        tag: "Local Map Pack",
+        title: "Google Business Profile Optimization for Ohio Attorneys",
+        ctaLabel: "Read GBP Guide",
+      },
+      {
+        href: "/blog/law-firm-seo-vs-ppc",
+        tag: "Acquisition Model",
+        title: "Law Firm SEO vs. PPC: Building Compounding BWC & Injury Intake",
+        ctaLabel: "Compare Channels",
+      },
+      {
+        href: "/blog/ohio-rule-7-3-ai-legal-intake-compliance",
+        tag: "Ohio Ethics Guide",
+        title: "Ohio Rule 7.3 & Compliant Automated Claimant Intake Workflows",
+        ctaLabel: "Read Ethics Guide",
+      },
+    ],
     step1Eyebrow: "Step 1 · Why Ohio’s Monopolistic State Fund Changes SEO",
     marketRealityHeading: "Why National Agencies Fail at Ohio BWC SEO (And How Local Firms Win Steadily)",
     cuyahogaReality: "Across 46 states, workers' compensation revolves around private insurance adjusters. In Cleveland, however, every injured steelworker in Cuyahoga Valley, Amazon warehouse associate in Euclid, or nurse at MetroHealth navigates the Ohio Bureau of Workers' Compensation (BWC) and Industrial Commission District Hearings at 615 West Superior Avenue. Out-of-state SEO vendors publish generic insurance boilerplate that never ranks for 'C-92 permanent partial percentage' or 'VSSR safety violation'. When we publish exact Ohio BWC procedural guides, your firm captures injured workers the day their claim is denied—plus uncovers high-fee third-party liability suits.",
